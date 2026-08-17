@@ -15,6 +15,7 @@ from typing import Literal
 import numpy as np
 import torch
 import yaml
+from scipy.optimize import linear_sum_assignment
 
 from row.config import ExperimentConfig, load_config
 from row.experiments.oracle_lifetime import _add_lifetime_transfer_summary, _functional_recovery
@@ -322,16 +323,23 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
         replay.add_task(task, replay_per_task)
         tasks_completed = lifetime_index + 1
         if tasks_completed in config.evaluation.lifetime_checkpoints:
-            checkpoint_results.append(
-                _novel_checkpoint(
-                    model,
-                    world,
-                    config,
-                    task_lr,
-                    tasks_completed,
-                    config.evaluation.checkpoint_novel_tasks,
-                )
+            checkpoint = _novel_checkpoint(
+                model,
+                world,
+                config,
+                task_lr,
+                tasks_completed,
+                config.evaluation.checkpoint_novel_tasks,
             )
+            if config.world.reuse_rho == 1.0 and isinstance(
+                model, (ContinuousBasisLearner, DiscreteLibraryLearner)
+            ):
+                checkpoint["true_route_operator_quality"] = (
+                    _true_route_operator_quality(
+                        model, world, config, tasks_completed
+                    )
+                )
+            checkpoint_results.append(checkpoint)
 
     summary = summarize(rows, config.world.examples_per_task)
     _add_lifetime_transfer_summary(summary, rows)
@@ -582,6 +590,80 @@ def _novel_checkpoint(
         "novel_tasks": novel_tasks,
         "mean_nmse_by_support": mean_curve,
         "individuals": individuals,
+    }
+
+
+@torch.no_grad()
+def _true_route_operator_quality(
+    model: ContinuousBasisLearner | DiscreteLibraryLearner,
+    world: World,
+    config: ExperimentConfig,
+    tasks_completed: int,
+) -> dict[str, object]:
+    if config.world.reuse_rho != 1.0:
+        raise ValueError("true-route operator checkpoints currently require exact reuse")
+    operators = model.basis if isinstance(model, ContinuousBasisLearner) else model.library
+    generator = np.random.default_rng(
+        np.random.SeedSequence([config.world.seed, 95, tasks_completed])
+    )
+    probe_x = generator.normal(size=(2048, config.world.state_dim))
+    learned_outputs = [operator(_tensor(probe_x)).cpu().numpy() for operator in operators]
+    teacher_outputs = [primitive(probe_x) for primitive in world.library]
+    distances = np.empty(
+        (len(teacher_outputs), len(learned_outputs)), dtype=np.float64
+    )
+    for teacher_index, teacher_output in enumerate(teacher_outputs):
+        denominator = float(np.var(teacher_output))
+        for learned_index, learned_output in enumerate(learned_outputs):
+            distances[teacher_index, learned_index] = float(
+                np.mean(np.square(teacher_output - learned_output)) / denominator
+            )
+    teacher_indices, learned_indices = linear_sum_assignment(distances)
+    teacher_to_learned = {
+        int(teacher): int(learned)
+        for teacher, learned in zip(teacher_indices, learned_indices, strict=True)
+    }
+
+    def true_route_prediction(task: Task) -> np.ndarray:
+        state = _tensor(task.eval_x)
+        for teacher_operator in task.program.primitive_ids:
+            state = operators[teacher_to_learned[int(teacher_operator)]](state)
+        return state.cpu().numpy()
+
+    was_training = model.training
+    model.eval()
+    try:
+        true_route_scores = [
+            nmse(true_route_prediction(task), task.eval_y) for task in world.tasks
+        ]
+        learned_route_scores = [
+            nmse(model(_tensor(task.eval_x), task.task_id).cpu().numpy(), task.eval_y)
+            for task in world.tasks[:tasks_completed]
+        ]
+    finally:
+        model.train(was_training)
+    future_scores = true_route_scores[tasks_completed:]
+    return {
+        "tasks_completed": tasks_completed,
+        "probe_examples": len(probe_x),
+        "teacher_to_learned_operator": teacher_to_learned,
+        "one_to_one_mean_primitive_distance": float(
+            np.mean(distances[teacher_indices, learned_indices])
+        ),
+        "true_route_all_programs_nmse_mean": float(np.mean(true_route_scores)),
+        "true_route_completed_programs_nmse_mean": float(
+            np.mean(true_route_scores[:tasks_completed])
+        ),
+        "true_route_future_programs_nmse_mean": (
+            float(np.mean(future_scores)) if future_scores else None
+        ),
+        "learned_route_completed_programs_nmse_mean": float(
+            np.mean(learned_route_scores)
+        ),
+        "learned_minus_true_route_completed_nmse": float(
+            np.mean(learned_route_scores)
+            - np.mean(true_route_scores[:tasks_completed])
+        ),
     }
 
 

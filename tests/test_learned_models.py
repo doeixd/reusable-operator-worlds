@@ -1,13 +1,17 @@
+from dataclasses import replace
 import unittest
 
 import torch
 
+from row.config import load_config
+from row.experiments.learned_lifetime import _true_route_operator_quality
 from row.models import (
     ContinuousBasisLearner,
     DenseLearner,
     DiscreteLibraryLearner,
     HypernetworkLearner,
 )
+from row.world import World
 
 
 class LearnedModelTests(unittest.TestCase):
@@ -78,6 +82,20 @@ class LearnedModelTests(unittest.TestCase):
         hard = model._coefficients("task_a")
         self.assertTrue(torch.all((hard == 0.0) | (hard == 1.0)))
         self.assertEqual(model.hard_routes()["task_a"], [1, 2])
+
+    def test_true_route_operator_diagnostic_does_not_require_future_task_codes(self) -> None:
+        config = load_config("configs/v1.yaml")
+        config = replace(
+            config,
+            world=replace(config.world, tasks=3, evaluation_examples=8),
+        )
+        world = World.generate(config.world)
+        model = ContinuousBasisLearner(16, 8, 8, 3, 0.2, seed=1)
+        model.begin_task(world.tasks[0].task_id)
+        result = _true_route_operator_quality(model, world, config, 1)
+        self.assertIn("true_route_future_programs_nmse_mean", result)
+        self.assertGreaterEqual(result["one_to_one_mean_primitive_distance"], 0.0)
+        self.assertTrue(model.training)
 
 
 if __name__ == "__main__":
