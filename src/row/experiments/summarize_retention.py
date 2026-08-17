@@ -38,7 +38,19 @@ def _aggregate(model: str, rows: list[dict[str, Any]]) -> dict[str, Any]:
         "maximum_task_nmse_increase": max(
             float(row["maximum_task_nmse_increase"]) for row in rows
         ),
-        "per_world": rows,
+        "per_world": [
+            {
+                key: row[key]
+                for key in (
+                    "world_seed",
+                    "float_final_nmse_mean",
+                    "quantized_final_nmse_mean",
+                    "quantized_minus_float_nmse_mean",
+                    "maximum_task_nmse_increase",
+                )
+            }
+            for row in rows
+        ],
     }
 
 
