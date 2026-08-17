@@ -44,10 +44,6 @@ claim.
 
 # Open protocol obligations
 
-- Run learned-model reverse task order on paired development worlds. Only the
-  scratch interpretation and oracle reverse-order control are currently complete.
-- Run replay ratios 0, 1, and 4 for the selected Continuous and Dense-C models.
-  This is required to separate forward transfer from reduced forgetting.
 - Run a second model initialization for the ten-world pilot. Current development
   replication uses one model seed per architecture.
 - Implement explicit scrambled-ID invariance rather than relying only on opaque,
@@ -87,19 +83,18 @@ claim.
 # Confirmation gate status
 
 The gate remains closed. Oracle transfer, high-reuse advantage, reuse dependence,
-novel-composition improvement, and broad capacity controls pass. Learned-model
-task-order robustness, replay/forgetting separation, and the second model
-initialization remain unresolved. A clean checkout artifact-to-report rehearsal
+novel-composition improvement, broad capacity controls, learned-model task-order
+robustness, and replay/forgetting separation pass. The second model
+initialization remains unresolved. A clean checkout artifact-to-report rehearsal
 is also required by `EXPERIMENT_PLAN.md` before opening worlds 100–129.
 
 # Execution order
 
-1. Add resumable reverse-order and replay-ablation sweeps.
-2. Run the second model initialization on the ten development worlds.
-3. Implement fresh-task forward-transfer and checkpoint true-route diagnostics.
-4. Implement the shared-parent plus residual control at intermediate reuse.
-5. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
-6. Re-audit the gate before touching confirmatory worlds.
+1. Run the second model initialization on the ten development worlds.
+2. Implement fresh-task forward-transfer and checkpoint true-route diagnostics.
+3. Implement the shared-parent plus residual control at intermediate reuse.
+4. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
+5. Re-audit the gate before touching confirmatory worlds.
 
 # Closed during this audit
 
@@ -107,3 +102,7 @@ is also required by `EXPERIMENT_PLAN.md` before opening worlds 100–129.
   Hypernetwork, Dense-24, and Dense-C were behaviorally evaluated on all ten
   development worlds, and current per-task Discrete was checked on world 0. The
   tracked result is `reports/retention/current-retention.json`.
+- Reverse-order and replay-ratio robustness are complete on worlds 0–9.
+  Continuous wins lifetime loss in all paired worlds at replay ratios 0, 1, and
+  4 and under reverse order. The tracked result is
+  `reports/robustness/robustness.json`.

@@ -1,0 +1,496 @@
+{
+  "scope": "development worlds 0-9; selected exact-reuse models",
+  "primary_sign_convention": "positive Dense-minus-Continuous favors Continuous",
+  "condition_summaries": [
+    {
+      "condition": "replay0",
+      "order": "forward",
+      "replay_ratio": 0.0,
+      "lifetime_loss_effect": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 3128.8876496789453,
+        "median": 2912.803746225618,
+        "minimum": 1672.1837789487035,
+        "maximum": 4885.873028493632,
+        "bootstrap_95_percent_ci_of_mean": [
+          2511.054210713581,
+          3743.15267303189
+        ]
+      },
+      "novel_32_shot_effect": {
+        "wins": 6,
+        "worlds": 10,
+        "mean": 0.0003620459081244873,
+        "median": 0.0020661409871347964,
+        "minimum": -0.007666469310850577,
+        "maximum": 0.00656486560175513,
+        "bootstrap_95_percent_ci_of_mean": [
+          -0.002201904687208276,
+          0.0027077523891473896
+        ]
+      }
+    },
+    {
+      "condition": "replay1",
+      "order": "forward",
+      "replay_ratio": 1.0,
+      "lifetime_loss_effect": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 3698.4417761411723,
+        "median": 3555.0759382828255,
+        "minimum": 2553.7105699202802,
+        "maximum": 5054.086623262061,
+        "bootstrap_95_percent_ci_of_mean": [
+          3232.834964852105,
+          4176.622725970182
+        ]
+      },
+      "novel_32_shot_effect": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 0.003283747769710759,
+        "median": 0.002757288807480917,
+        "minimum": 0.0010319236635773664,
+        "maximum": 0.00888613089292405,
+        "bootstrap_95_percent_ci_of_mean": [
+          0.0022435246923471867,
+          0.004703889794945479
+        ]
+      }
+    },
+    {
+      "condition": "replay4",
+      "order": "forward",
+      "replay_ratio": 4.0,
+      "lifetime_loss_effect": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 3349.8938493984665,
+        "median": 3330.871136786969,
+        "minimum": 2442.509794081765,
+        "maximum": 4511.181393822044,
+        "bootstrap_95_percent_ci_of_mean": [
+          2959.0304596339474,
+          3765.8716770507694
+        ]
+      },
+      "novel_32_shot_effect": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 0.0024485587747623367,
+        "median": 0.0023528640043465852,
+        "minimum": 0.0004909888529973042,
+        "maximum": 0.004304972957370527,
+        "bootstrap_95_percent_ci_of_mean": [
+          0.0018578432661843377,
+          0.003026199130274971
+        ]
+      }
+    },
+    {
+      "condition": "reverse",
+      "order": "reverse",
+      "replay_ratio": 1.0,
+      "lifetime_loss_effect": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 3456.0948895528154,
+        "median": 3366.398433437862,
+        "minimum": 2829.2815640566987,
+        "maximum": 4409.3128704751725,
+        "bootstrap_95_percent_ci_of_mean": [
+          3145.2360397948773,
+          3791.4728019250665
+        ]
+      },
+      "novel_32_shot_effect": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 0.003121258029656289,
+        "median": 0.0025969001578688864,
+        "minimum": 0.001242755345971622,
+        "maximum": 0.006060594573969699,
+        "bootstrap_95_percent_ci_of_mean": [
+          0.0021880776654301234,
+          0.0041552073561531965
+        ]
+      }
+    }
+  ],
+  "order_sensitivity": {
+    "continuous": {
+      "sign_convention": "positive means reverse order has higher/worse loss",
+      "wins": 4,
+      "worlds": 10,
+      "mean": -57.020809397747506,
+      "median": -135.45958859156235,
+      "minimum": -1649.7065746700391,
+      "maximum": 1270.2508281936753,
+      "bootstrap_95_percent_ci_of_mean": [
+        -563.2330631292018,
+        428.48510832145973
+      ],
+      "paired_reverse_minus_forward": [
+        1270.2508281936753,
+        -264.3909552562982,
+        -368.13366743264487,
+        -1649.7065746700391,
+        -852.1781824683421,
+        411.11457868813886,
+        385.1263410153042,
+        -303.838205948472,
+        -6.528221926826518,
+        808.0759658280294
+      ]
+    },
+    "dense": {
+      "sign_convention": "positive means reverse order has higher/worse loss",
+      "wins": 3,
+      "worlds": 10,
+      "mean": -299.3676959861041,
+      "median": -42.00632424390642,
+      "minimum": -1391.8917844798998,
+      "maximum": 463.55665987354587,
+      "bootstrap_95_percent_ci_of_mean": [
+        -652.3593433295955,
+        34.10926405798802
+      ],
+      "paired_reverse_minus_forward": [
+        463.55665987354587,
+        -9.174112407374196,
+        -768.8429004598293,
+        -613.7733829680365,
+        32.42938652046723,
+        -31.17889113770798,
+        -52.83375735010486,
+        -1391.8917844798998,
+        -904.3427107039897,
+        282.37453325188835
+      ]
+    }
+  },
+  "paired_world_effects": [
+    {
+      "condition": "replay0",
+      "world_seed": 0,
+      "dense_minus_continuous_gaussian_log_loss": 4133.969912728004,
+      "dense_minus_continuous_novel_32_shot_nmse": -0.0018232608238226266,
+      "continuous_gaussian_log_loss": -168926.38597895965,
+      "dense_gaussian_log_loss": -164792.41606623164
+    },
+    {
+      "condition": "replay0",
+      "world_seed": 1,
+      "dense_minus_continuous_gaussian_log_loss": 2906.131185139937,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002367754513810381,
+      "continuous_gaussian_log_loss": -172204.22634973412,
+      "dense_gaussian_log_loss": -169298.09516459418
+    },
+    {
+      "condition": "replay0",
+      "world_seed": 2,
+      "dense_minus_continuous_gaussian_log_loss": 2456.25576891948,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0017645274604592117,
+      "continuous_gaussian_log_loss": -170064.54352887193,
+      "dense_gaussian_log_loss": -167608.28775995245
+    },
+    {
+      "condition": "replay0",
+      "world_seed": 3,
+      "dense_minus_continuous_gaussian_log_loss": 1778.0802382394904,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.00656486560175513,
+      "continuous_gaussian_log_loss": -168919.34909944353,
+      "dense_gaussian_log_loss": -167141.26886120404
+    },
+    {
+      "condition": "replay0",
+      "world_seed": 4,
+      "dense_minus_continuous_gaussian_log_loss": 2622.4980137095263,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.003547003055558419,
+      "continuous_gaussian_log_loss": -168922.1002665761,
+      "dense_gaussian_log_loss": -166299.60225286658
+    },
+    {
+      "condition": "replay0",
+      "world_seed": 5,
+      "dense_minus_continuous_gaussian_log_loss": 2919.476307311299,
+      "dense_minus_continuous_novel_32_shot_nmse": -0.007666469310850577,
+      "continuous_gaussian_log_loss": -169792.7374789389,
+      "dense_gaussian_log_loss": -166873.26117162762
+    },
+    {
+      "condition": "replay0",
+      "world_seed": 6,
+      "dense_minus_continuous_gaussian_log_loss": 1672.1837789487035,
+      "dense_minus_continuous_novel_32_shot_nmse": -0.004001317804013162,
+      "continuous_gaussian_log_loss": -169621.99621542764,
+      "dense_gaussian_log_loss": -167949.81243647894
+    },
+    {
+      "condition": "replay0",
+      "world_seed": 7,
+      "dense_minus_continuous_gaussian_log_loss": 3991.0639350349666,
+      "dense_minus_continuous_novel_32_shot_nmse": -0.00231086029260911,
+      "continuous_gaussian_log_loss": -170839.16305479206,
+      "dense_gaussian_log_loss": -166848.0991197571
+    },
+    {
+      "condition": "replay0",
+      "world_seed": 8,
+      "dense_minus_continuous_gaussian_log_loss": 4885.873028493632,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0024941647865293105,
+      "continuous_gaussian_log_loss": -170660.4626670608,
+      "dense_gaussian_log_loss": -165774.58963856718
+    },
+    {
+      "condition": "replay0",
+      "world_seed": 9,
+      "dense_minus_continuous_gaussian_log_loss": 3923.344328264415,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002684051894427897,
+      "continuous_gaussian_log_loss": -169701.36071829614,
+      "dense_gaussian_log_loss": -165778.01639003173
+    },
+    {
+      "condition": "replay1",
+      "world_seed": 0,
+      "dense_minus_continuous_gaussian_log_loss": 4446.183547534631,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0028168497596407537,
+      "continuous_gaussian_log_loss": -170967.3389814046,
+      "dense_gaussian_log_loss": -166521.15543386998
+    },
+    {
+      "condition": "replay1",
+      "world_seed": 1,
+      "dense_minus_continuous_gaussian_log_loss": 2642.9577619424963,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0024617991379078373,
+      "continuous_gaussian_log_loss": -173246.47300673052,
+      "dense_gaussian_log_loss": -170603.51524478802
+    },
+    {
+      "condition": "replay1",
+      "world_seed": 2,
+      "dense_minus_continuous_gaussian_log_loss": 3387.66783337557,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002140654254288528,
+      "continuous_gaussian_log_loss": -172566.40306753948,
+      "dense_gaussian_log_loss": -169178.7352341639
+    },
+    {
+      "condition": "replay1",
+      "world_seed": 3,
+      "dense_minus_continuous_gaussian_log_loss": 2553.7105699202802,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002987810383056748,
+      "continuous_gaussian_log_loss": -171045.0725353339,
+      "dense_gaussian_log_loss": -168491.3619654136
+    },
+    {
+      "condition": "replay1",
+      "world_seed": 4,
+      "dense_minus_continuous_gaussian_log_loss": 3524.705301486363,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0043870340733273075,
+      "continuous_gaussian_log_loss": -171441.52777421297,
+      "dense_gaussian_log_loss": -167916.8224727266
+    },
+    {
+      "condition": "replay1",
+      "world_seed": 5,
+      "dense_minus_continuous_gaussian_log_loss": 3585.446575079288,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.00888613089292405,
+      "continuous_gaussian_log_loss": -171985.8653047288,
+      "dense_gaussian_log_loss": -168400.4187296495
+    },
+    {
+      "condition": "replay1",
+      "world_seed": 6,
+      "dense_minus_continuous_gaussian_log_loss": 3267.2416624221078,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0010319236635773664,
+      "continuous_gaussian_log_loss": -172288.43100615512,
+      "dense_gaussian_log_loss": -169021.189343733
+    },
+    {
+      "condition": "replay1",
+      "world_seed": 7,
+      "dense_minus_continuous_gaussian_log_loss": 4145.214891038428,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.003552456533161117,
+      "continuous_gaussian_log_loss": -172175.52032978353,
+      "dense_gaussian_log_loss": -168030.3054387451
+    },
+    {
+      "condition": "replay1",
+      "world_seed": 8,
+      "dense_minus_continuous_gaussian_log_loss": 5054.086623262061,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.00269772785532108,
+      "continuous_gaussian_log_loss": -172530.75741167853,
+      "dense_gaussian_log_loss": -167476.67078841646
+    },
+    {
+      "condition": "replay1",
+      "world_seed": 9,
+      "dense_minus_continuous_gaussian_log_loss": 4377.202995350497,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.001875091143902806,
+      "continuous_gaussian_log_loss": -171824.33641366364,
+      "dense_gaussian_log_loss": -167447.13341831314
+    },
+    {
+      "condition": "replay4",
+      "world_seed": 0,
+      "dense_minus_continuous_gaussian_log_loss": 4036.2378408630902,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0024608275355696,
+      "continuous_gaussian_log_loss": -169945.21096287,
+      "dense_gaussian_log_loss": -165908.97312200692
+    },
+    {
+      "condition": "replay4",
+      "world_seed": 1,
+      "dense_minus_continuous_gaussian_log_loss": 2442.509794081765,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002070172617720315,
+      "continuous_gaussian_log_loss": -172642.98487925532,
+      "dense_gaussian_log_loss": -170200.47508517356
+    },
+    {
+      "condition": "replay4",
+      "world_seed": 2,
+      "dense_minus_continuous_gaussian_log_loss": 2766.096906849474,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002216811419906,
+      "continuous_gaussian_log_loss": -171701.66040344944,
+      "dense_gaussian_log_loss": -168935.56349659996
+    },
+    {
+      "condition": "replay4",
+      "world_seed": 3,
+      "dense_minus_continuous_gaussian_log_loss": 2714.426295270532,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002338412727011433,
+      "continuous_gaussian_log_loss": -170878.20493148017,
+      "dense_gaussian_log_loss": -168163.77863620964
+    },
+    {
+      "condition": "replay4",
+      "world_seed": 4,
+      "dense_minus_continuous_gaussian_log_loss": 3953.083788590855,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.004304972957370527,
+      "continuous_gaussian_log_loss": -171561.28353327786,
+      "dense_gaussian_log_loss": -167608.199744687
+    },
+    {
+      "condition": "replay4",
+      "world_seed": 5,
+      "dense_minus_continuous_gaussian_log_loss": 3099.81917632377,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002367315281681737,
+      "continuous_gaussian_log_loss": -171232.94672733994,
+      "dense_gaussian_log_loss": -168133.12755101616
+    },
+    {
+      "condition": "replay4",
+      "world_seed": 6,
+      "dense_minus_continuous_gaussian_log_loss": 2800.0414031181426,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0004909888529973042,
+      "continuous_gaussian_log_loss": -171328.63958839403,
+      "dense_gaussian_log_loss": -168528.59818527589
+    },
+    {
+      "condition": "replay4",
+      "world_seed": 7,
+      "dense_minus_continuous_gaussian_log_loss": 3613.6187978148228,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.003670554016912362,
+      "continuous_gaussian_log_loss": -170926.14535075898,
+      "dense_gaussian_log_loss": -167312.52655294415
+    },
+    {
+      "condition": "replay4",
+      "world_seed": 8,
+      "dense_minus_continuous_gaussian_log_loss": 4511.181393822044,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002685637877306582,
+      "continuous_gaussian_log_loss": -171646.88127214322,
+      "dense_gaussian_log_loss": -167135.69987832117
+    },
+    {
+      "condition": "replay4",
+      "world_seed": 9,
+      "dense_minus_continuous_gaussian_log_loss": 3561.923097250168,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.001879894461147507,
+      "continuous_gaussian_log_loss": -170767.7009548035,
+      "dense_gaussian_log_loss": -167205.77785755333
+    },
+    {
+      "condition": "reverse",
+      "world_seed": 0,
+      "dense_minus_continuous_gaussian_log_loss": 3639.4893792145012,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.001242755345971622,
+      "continuous_gaussian_log_loss": -169697.08815321093,
+      "dense_gaussian_log_loss": -166057.59877399643
+    },
+    {
+      "condition": "reverse",
+      "world_seed": 1,
+      "dense_minus_continuous_gaussian_log_loss": 2898.1746047914203,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0019436837136558205,
+      "continuous_gaussian_log_loss": -173510.86396198682,
+      "dense_gaussian_log_loss": -170612.6893571954
+    },
+    {
+      "condition": "reverse",
+      "world_seed": 2,
+      "dense_minus_continuous_gaussian_log_loss": 2986.9586003483855,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0015259929736112614,
+      "continuous_gaussian_log_loss": -172934.53673497212,
+      "dense_gaussian_log_loss": -169947.57813462373
+    },
+    {
+      "condition": "reverse",
+      "world_seed": 3,
+      "dense_minus_continuous_gaussian_log_loss": 3589.643761622283,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0026473404285612036,
+      "continuous_gaussian_log_loss": -172694.77911000393,
+      "dense_gaussian_log_loss": -169105.13534838165
+    },
+    {
+      "condition": "reverse",
+      "world_seed": 4,
+      "dense_minus_continuous_gaussian_log_loss": 4409.3128704751725,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.004431632878199708,
+      "continuous_gaussian_log_loss": -172293.7059566813,
+      "dense_gaussian_log_loss": -167884.39308620614
+    },
+    {
+      "condition": "reverse",
+      "world_seed": 5,
+      "dense_minus_continuous_gaussian_log_loss": 3143.153105253441,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.005708098995922471,
+      "continuous_gaussian_log_loss": -171574.75072604066,
+      "dense_gaussian_log_loss": -168431.59762078722
+    },
+    {
+      "condition": "reverse",
+      "world_seed": 6,
+      "dense_minus_continuous_gaussian_log_loss": 2829.2815640566987,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0025464598871765692,
+      "continuous_gaussian_log_loss": -171903.30466513982,
+      "dense_gaussian_log_loss": -169074.02310108312
+    },
+    {
+      "condition": "reverse",
+      "world_seed": 7,
+      "dense_minus_continuous_gaussian_log_loss": 3057.161312507,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.006060594573969699,
+      "continuous_gaussian_log_loss": -172479.358535732,
+      "dense_gaussian_log_loss": -169422.197223225
+    },
+    {
+      "condition": "reverse",
+      "world_seed": 8,
+      "dense_minus_continuous_gaussian_log_loss": 4156.272134484898,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0021296086985990183,
+      "continuous_gaussian_log_loss": -172537.28563360535,
+      "dense_gaussian_log_loss": -168381.01349912045
+    },
+    {
+      "condition": "reverse",
+      "world_seed": 9,
+      "dense_minus_continuous_gaussian_log_loss": 3851.501562774356,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002976412800895519,
+      "continuous_gaussian_log_loss": -171016.2604478356,
+      "dense_gaussian_log_loss": -167164.75888506125
+    }
+  ]
+}

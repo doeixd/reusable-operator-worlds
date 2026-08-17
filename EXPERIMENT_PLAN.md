@@ -154,3 +154,12 @@ Run seeds 100–129 only after:
 - checkpoint evaluation is stable;
 - artifact and plotting commands pass from a clean checkout;
 - no confirmatory-world outputs have been inspected.
+
+# Robustness gate result
+
+Selected Continuous and Dense-C have now been evaluated on all development
+worlds under reverse task order and replay ratios 0, 1, and 4. Continuous wins
+cumulative lifetime loss in all ten paired worlds under every condition; strong
+replay does not remove the advantage. Novel 32-shot transfer is replay-sensitive
+and is not reliable in the no-replay condition. The confirmation gate still
+requires a second model initialization and clean workflow rehearsal.

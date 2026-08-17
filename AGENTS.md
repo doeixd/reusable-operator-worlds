@@ -303,6 +303,18 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   Continuous effects are 3,175 reverse, 3,165 with no replay, 3,492 at canonical
   1:1 replay, and 3,082 at 1:4 replay. Strong replay does not erase the effect;
   replicate through world 9 before closing the gate item.
+- Ten-world robustness is complete. Continuous wins lifetime loss 10/10 with no
+  replay, canonical replay, 1:4 replay, and reverse order. Mean advantages and
+  bootstrap intervals are 3,129 [2,511, 3,743], 3,698 [3,233, 4,177], 3,350
+  [2,959, 3,766], and 3,456 [3,145, 3,791] respectively.
+- Reverse order has no consistent absolute penalty for either architecture:
+  mean reverse-minus-forward loss is -57 for Continuous and -299 for Dense-C,
+  with both bootstrap intervals spanning zero. The paired model advantage is
+  therefore robust without implying one task order is intrinsically harder.
+- Novel 32-shot transfer is not robust without replay: Continuous wins 6/10 and
+  the mean advantage interval spans zero. It wins 10/10 under canonical replay,
+  strong replay, and reverse order. Distinguish the replay-sensitive retained
+  transfer endpoint from the replay-robust cumulative lifetime-cost result.
 
 # Standing scientific doubts
 

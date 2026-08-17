@@ -169,6 +169,20 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   and 4; mean lifetime-loss advantages remain 3,082–3,492 units. Expansion to
   worlds 3–9 is in progress.
 
+# Order and replay robustness complete
+
+- Completed reverse order and replay ratios 0, 1, and 4 on all ten development
+  worlds for selected Continuous and Dense-C.
+- Continuous wins lifetime loss 10/10 in every condition. Mean paired advantages
+  are 3,129 no replay, 3,698 canonical replay, 3,350 strong replay, and 3,456
+  reverse order; every ten-world bootstrap interval excludes zero.
+- Absolute reverse-minus-forward effects are inconsistent for both models, so
+  the result is not tied to one favorable curriculum.
+- Novel 32-shot transfer weakens without replay (6/10 wins and interval spanning
+  zero) but is 10/10 under canonical replay, strong replay, and reverse order.
+- The validated report and visually inspected figure are under
+  `reports/robustness`.
+
 # Current retention complete
 
 - Re-evaluated symmetric per-tensor int8 artifacts across development worlds
