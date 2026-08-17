@@ -51,6 +51,17 @@ The stage-one grid predates the learnable-alpha architecture correction and is
 therefore provisional. Revalidate finalists under the corrected model before
 freezing confirmation.
 
+# Frozen development configuration
+
+Corrected-architecture stage two on development worlds 3–9 selected and freezes:
+
+- Continuous: global learning rate `0.003`, task-state learning rate `0.05`;
+- Dense-C: global learning rate `0.001`, task-state learning rate `0.05`.
+
+The primary selection metric chose the same winners as provisional stage one.
+The machine-readable validation and paired world effects are stored in
+`reports/stage2_current/selection.json`. Confirmatory worlds remain sealed.
+
 # Coding metric
 
 The continuous-density score is called cumulative prequential Gaussian log loss.

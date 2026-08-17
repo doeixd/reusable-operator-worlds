@@ -1,0 +1,160 @@
+{
+  "scope": "development worlds 3-9; corrected learnable-alpha architecture",
+  "selection_criterion": "lowest mean cumulative prequential Gaussian log loss",
+  "candidates": [
+    {
+      "model": "continuous",
+      "global_learning_rate": 0.001,
+      "task_learning_rate": 0.05,
+      "worlds": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "mean_gaussian_log_loss": -166937.47323276335,
+      "mean_novel_32_shot_nmse": 0.005783482957859397
+    },
+    {
+      "model": "continuous",
+      "global_learning_rate": 0.003,
+      "task_learning_rate": 0.05,
+      "worlds": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "mean_gaussian_log_loss": -171898.78725365092,
+      "mean_novel_32_shot_nmse": 0.003682616530461481
+    },
+    {
+      "model": "dense",
+      "global_learning_rate": 0.001,
+      "task_learning_rate": 0.05,
+      "worlds": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "mean_gaussian_log_loss": -168111.9860224282,
+      "mean_novel_32_shot_nmse": 0.007313784322642978
+    },
+    {
+      "model": "dense",
+      "global_learning_rate": 0.003,
+      "task_learning_rate": 0.05,
+      "worlds": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "mean_gaussian_log_loss": -165729.18493553725,
+      "mean_novel_32_shot_nmse": 0.010354460310290355
+    }
+  ],
+  "selected": {
+    "continuous": {
+      "model": "continuous",
+      "global_learning_rate": 0.003,
+      "task_learning_rate": 0.05,
+      "worlds": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "mean_gaussian_log_loss": -171898.78725365092,
+      "mean_novel_32_shot_nmse": 0.003682616530461481
+    },
+    "dense": {
+      "model": "dense",
+      "global_learning_rate": 0.001,
+      "task_learning_rate": 0.05,
+      "worlds": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "mean_gaussian_log_loss": -168111.9860224282,
+      "mean_novel_32_shot_nmse": 0.007313784322642978
+    }
+  },
+  "frozen_config": {
+    "continuous": {
+      "global_learning_rate": 0.003,
+      "task_learning_rate": 0.05
+    },
+    "dense": {
+      "global_learning_rate": 0.001,
+      "task_learning_rate": 0.05
+    }
+  },
+  "selected_model_comparison": {
+    "sign_convention": "positive Dense-minus-Continuous favors Continuous",
+    "continuous_wins": 7,
+    "worlds": 7,
+    "mean_gaussian_log_loss_advantage": 3786.801231222718,
+    "minimum_gaussian_log_loss_advantage": 2553.7105699202802,
+    "maximum_gaussian_log_loss_advantage": 5054.086623262061,
+    "mean_novel_32_shot_nmse_advantage": 0.0036311677921814964,
+    "paired_world_effects": [
+      {
+        "world_seed": 3,
+        "dense_minus_continuous_gaussian_log_loss": 2553.7105699202802,
+        "dense_minus_continuous_novel_32_shot_nmse": 0.002987810383056748
+      },
+      {
+        "world_seed": 4,
+        "dense_minus_continuous_gaussian_log_loss": 3524.705301486363,
+        "dense_minus_continuous_novel_32_shot_nmse": 0.0043870340733273075
+      },
+      {
+        "world_seed": 5,
+        "dense_minus_continuous_gaussian_log_loss": 3585.446575079288,
+        "dense_minus_continuous_novel_32_shot_nmse": 0.00888613089292405
+      },
+      {
+        "world_seed": 6,
+        "dense_minus_continuous_gaussian_log_loss": 3267.2416624221078,
+        "dense_minus_continuous_novel_32_shot_nmse": 0.0010319236635773664
+      },
+      {
+        "world_seed": 7,
+        "dense_minus_continuous_gaussian_log_loss": 4145.214891038428,
+        "dense_minus_continuous_novel_32_shot_nmse": 0.003552456533161117
+      },
+      {
+        "world_seed": 8,
+        "dense_minus_continuous_gaussian_log_loss": 5054.086623262061,
+        "dense_minus_continuous_novel_32_shot_nmse": 0.00269772785532108
+      },
+      {
+        "world_seed": 9,
+        "dense_minus_continuous_gaussian_log_loss": 4377.202995350497,
+        "dense_minus_continuous_novel_32_shot_nmse": 0.001875091143902806
+      }
+    ]
+  }
+}

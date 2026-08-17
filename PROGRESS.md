@@ -111,18 +111,22 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   residual-function correlation 0.454.
 - Added a validated machine-readable recurrence comparison and a visually checked
   two-panel crossover plot under `reports/rho_seed0`.
+- Revalidated both optimizer finalists per architecture under learnable alpha on
+  development worlds 3–9. Continuous 0.003/0.05 and Dense-C 0.001/0.05 remain
+  the winners and are frozen in `configs/v1.yaml`.
+- Selected Continuous beats selected Dense-C on all seven stage-two exact-reuse
+  worlds by a mean 3,787 cumulative log-loss units; mean novel 32-shot NMSE is
+  0.00368 versus 0.00731. The validated selection report is in
+  `reports/stage2_current/selection.json`.
 
 # In progress
 
-- Revalidate the two stage-one optimizer finalists per model under the current
-  learnable-alpha architecture on development worlds 3–9.
-- Resume stage-two tuning sequentially. A four-process attempt exhausted the
-  Windows paging file; two completed dense world-3 artifacts remain reusable.
+- Replicate the six-point rho curve with frozen configurations across development
+  worlds, beginning with worlds 1–2 before expanding to worlds 3–9.
 
 # Next
 
-- Freeze the revalidated development configuration and replicate the six-point
-  `rho` sweep across development worlds with paired world deltas.
+- Complete and plot the development-world `rho` sweep with paired world deltas.
 - Replicate checkpoint learning-to-learn curves across development worlds.
 - Implement the generic low-rank hypernetwork and dense 24-dimensional task-code
   controls after the causal sweep.

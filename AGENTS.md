@@ -145,6 +145,14 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   observation that tuned Dense-C beat the old Continuous configuration.
 - Stage-two finalists are Continuous 0.003/0.05 and 0.001/0.05, and Dense-C
   0.001/0.05 and 0.003/0.05, evaluated on development worlds 3–9.
+- Corrected-architecture stage-two revalidation freezes Continuous global/task
+  LR at 0.003/0.05 and Dense-C at 0.001/0.05. On worlds 3–9, Continuous's two
+  candidates average -171,899 and -166,937 Gaussian log loss; Dense-C's average
+  -168,112 and -165,729, respectively. The winners match the stage-one choices.
+- With those frozen settings at exact reuse, Continuous beats Dense-C on all
+  seven stage-two worlds by 2,554–5,054 cumulative Gaussian-log-loss units
+  (mean 3,787) and improves mean 32-shot novel NMSE from 0.00731 to 0.00368.
+  These remain development results, not confirmation.
 - Learner operators no longer read teacher `alpha`. They initialize an independent
   learnable scale at 0.2. On world 0, decoupled Continuous scores -170,967 versus
   tuned Dense-C -166,521, so the earlier win is not caused by leaking alpha 0.35.
@@ -192,9 +200,6 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 - Reusable learners retain a favorable three-stage residual structural prior even
   after alpha/rank/activation mismatch controls. A generic low-rank hypernetwork
   remains necessary.
-- The stage-one optimizer grid predates the learnable-alpha architecture change;
-  its winners are useful development settings but must be revalidated before
-  freezing confirmation.
 - The effective online update batch is one current plus one replay example, not
   the suggested batch size eight. This is symmetric but must be disclosed and
   later ablated.
