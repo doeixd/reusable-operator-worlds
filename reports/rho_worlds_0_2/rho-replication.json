@@ -1,0 +1,223 @@
+{
+  "scope": "development worlds [0, 1, 2]; descriptive, not confirmatory",
+  "sign_convention": "positive Dense-minus-Continuous favors Continuous",
+  "worlds": [
+    0,
+    1,
+    2
+  ],
+  "rho_summaries": [
+    {
+      "configured_rho": 0.0,
+      "mean_measured_residual_correlation": -1.5295200657727073e-05,
+      "mean_dense_minus_continuous_gaussian_log_loss": -2222.4975523551307,
+      "continuous_loss_wins": 0,
+      "mean_dense_minus_continuous_novel_32_shot_nmse": -0.0026463132437864988,
+      "continuous_novel_wins": 0,
+      "world_effects": [
+        {
+          "world_seed": 0,
+          "configured_rho": 0.0,
+          "measured_residual_correlation": -0.0006476644309042104,
+          "dense_minus_continuous_gaussian_log_loss": -2390.4516793121584,
+          "dense_minus_continuous_novel_32_shot_nmse": -0.003508336838542899
+        },
+        {
+          "world_seed": 1,
+          "configured_rho": 0.0,
+          "measured_residual_correlation": -0.0014709967883820524,
+          "dense_minus_continuous_gaussian_log_loss": -1745.3235340741812,
+          "dense_minus_continuous_novel_32_shot_nmse": -0.001211184080518797
+        },
+        {
+          "world_seed": 2,
+          "configured_rho": 0.0,
+          "measured_residual_correlation": 0.0020727756173130815,
+          "dense_minus_continuous_gaussian_log_loss": -2531.717443679052,
+          "dense_minus_continuous_novel_32_shot_nmse": -0.0032194188122978
+        }
+      ]
+    },
+    {
+      "configured_rho": 0.25,
+      "mean_measured_residual_correlation": 0.004084950541543155,
+      "mean_dense_minus_continuous_gaussian_log_loss": -2581.571015431536,
+      "continuous_loss_wins": 0,
+      "mean_dense_minus_continuous_novel_32_shot_nmse": -0.001311164846142811,
+      "continuous_novel_wins": 1,
+      "world_effects": [
+        {
+          "world_seed": 0,
+          "configured_rho": 0.25,
+          "measured_residual_correlation": 0.0033108035071959777,
+          "dense_minus_continuous_gaussian_log_loss": -2280.289773278695,
+          "dense_minus_continuous_novel_32_shot_nmse": 0.0030164702109116807
+        },
+        {
+          "world_seed": 1,
+          "configured_rho": 0.25,
+          "measured_residual_correlation": 0.0024931656318482654,
+          "dense_minus_continuous_gaussian_log_loss": -2297.1750804790063,
+          "dense_minus_continuous_novel_32_shot_nmse": -0.004732714443704371
+        },
+        {
+          "world_seed": 2,
+          "configured_rho": 0.25,
+          "measured_residual_correlation": 0.006450882485585225,
+          "dense_minus_continuous_gaussian_log_loss": -3167.2481925369066,
+          "dense_minus_continuous_novel_32_shot_nmse": -0.002217250305635743
+        }
+      ]
+    },
+    {
+      "configured_rho": 0.5,
+      "mean_measured_residual_correlation": 0.058689324114564574,
+      "mean_dense_minus_continuous_gaussian_log_loss": -2474.54726635037,
+      "continuous_loss_wins": 0,
+      "mean_dense_minus_continuous_novel_32_shot_nmse": -0.0001701721373895381,
+      "continuous_novel_wins": 1,
+      "world_effects": [
+        {
+          "world_seed": 0,
+          "configured_rho": 0.5,
+          "measured_residual_correlation": 0.06379609482714448,
+          "dense_minus_continuous_gaussian_log_loss": -2159.364775985945,
+          "dense_minus_continuous_novel_32_shot_nmse": 0.0018493954453218109
+        },
+        {
+          "world_seed": 1,
+          "configured_rho": 0.5,
+          "measured_residual_correlation": 0.05201161837744597,
+          "dense_minus_continuous_gaussian_log_loss": -1897.5177561611636,
+          "dense_minus_continuous_novel_32_shot_nmse": -0.0018100724289208114
+        },
+        {
+          "world_seed": 2,
+          "configured_rho": 0.5,
+          "measured_residual_correlation": 0.060260259139103274,
+          "dense_minus_continuous_gaussian_log_loss": -3366.7592669040023,
+          "dense_minus_continuous_novel_32_shot_nmse": -0.0005498394285696137
+        }
+      ]
+    },
+    {
+      "configured_rho": 0.75,
+      "mean_measured_residual_correlation": 0.3006895504086087,
+      "mean_dense_minus_continuous_gaussian_log_loss": -1597.4781265869194,
+      "continuous_loss_wins": 0,
+      "mean_dense_minus_continuous_novel_32_shot_nmse": -0.0018409298107676258,
+      "continuous_novel_wins": 1,
+      "world_effects": [
+        {
+          "world_seed": 0,
+          "configured_rho": 0.75,
+          "measured_residual_correlation": 0.3169923870730336,
+          "dense_minus_continuous_gaussian_log_loss": -1615.3018842196034,
+          "dense_minus_continuous_novel_32_shot_nmse": 0.0008078796276038067
+        },
+        {
+          "world_seed": 1,
+          "configured_rho": 0.75,
+          "measured_residual_correlation": 0.2855706334500049,
+          "dense_minus_continuous_gaussian_log_loss": -1053.2594347019913,
+          "dense_minus_continuous_novel_32_shot_nmse": -0.005891742489759558
+        },
+        {
+          "world_seed": 2,
+          "configured_rho": 0.75,
+          "measured_residual_correlation": 0.29950563070278746,
+          "dense_minus_continuous_gaussian_log_loss": -2123.8730608391634,
+          "dense_minus_continuous_novel_32_shot_nmse": -0.00043892657014712663
+        }
+      ]
+    },
+    {
+      "configured_rho": 0.9,
+      "mean_measured_residual_correlation": 0.6400445171654257,
+      "mean_dense_minus_continuous_gaussian_log_loss": 1297.968253054889,
+      "continuous_loss_wins": 3,
+      "mean_dense_minus_continuous_novel_32_shot_nmse": -0.0005338663068248881,
+      "continuous_novel_wins": 2,
+      "world_effects": [
+        {
+          "world_seed": 0,
+          "configured_rho": 0.9,
+          "measured_residual_correlation": 0.6539145667002604,
+          "dense_minus_continuous_gaussian_log_loss": 2370.5936138304533,
+          "dense_minus_continuous_novel_32_shot_nmse": 0.001581059433726259
+        },
+        {
+          "world_seed": 1,
+          "configured_rho": 0.9,
+          "measured_residual_correlation": 0.6276603897834403,
+          "dense_minus_continuous_gaussian_log_loss": 501.1207698153157,
+          "dense_minus_continuous_novel_32_shot_nmse": -0.0032453912722431137
+        },
+        {
+          "world_seed": 2,
+          "configured_rho": 0.9,
+          "measured_residual_correlation": 0.6385585950125762,
+          "dense_minus_continuous_gaussian_log_loss": 1022.1903755188978,
+          "dense_minus_continuous_novel_32_shot_nmse": 6.273291804219025e-05
+        }
+      ]
+    },
+    {
+      "configured_rho": 1.0,
+      "mean_measured_residual_correlation": 1.0,
+      "mean_dense_minus_continuous_gaussian_log_loss": 3492.240433204754,
+      "continuous_loss_wins": 3,
+      "mean_dense_minus_continuous_novel_32_shot_nmse": 0.0024730792163497038,
+      "continuous_novel_wins": 3,
+      "world_effects": [
+        {
+          "world_seed": 0,
+          "configured_rho": 1.0,
+          "measured_residual_correlation": 1.0,
+          "dense_minus_continuous_gaussian_log_loss": 4446.095704296196,
+          "dense_minus_continuous_novel_32_shot_nmse": 0.002816784256852747
+        },
+        {
+          "world_seed": 1,
+          "configured_rho": 1.0,
+          "measured_residual_correlation": 1.0,
+          "dense_minus_continuous_gaussian_log_loss": 2642.9577619424963,
+          "dense_minus_continuous_novel_32_shot_nmse": 0.0024617991379078373
+        },
+        {
+          "world_seed": 2,
+          "configured_rho": 1.0,
+          "measured_residual_correlation": 1.0,
+          "dense_minus_continuous_gaussian_log_loss": 3387.66783337557,
+          "dense_minus_continuous_novel_32_shot_nmse": 0.002140654254288528
+        }
+      ]
+    }
+  ],
+  "linear_interpolated_zero_crossing": {
+    "configured_rho": 0.8327581269240016,
+    "measured_residual_correlation": 0.4879187598162822,
+    "per_world": [
+      {
+        "world_seed": 0,
+        "configured_rho": 0.8107881673645168,
+        "measured_residual_correlation": 0.4535315993663511
+      },
+      {
+        "world_seed": 1,
+        "configured_rho": 0.8516411009006385,
+        "measured_residual_correlation": 0.5173731630537485
+      },
+      {
+        "world_seed": 2,
+        "configured_rho": 0.8512633615216194,
+        "measured_residual_correlation": 0.5283965833686464
+      }
+    ],
+    "note": "descriptive linear interpolation between adjacent development points"
+  },
+  "secondary_hypothesis": {
+    "claim": "Continuous improves 32-shot transfer before it wins cumulative loss at intermediate recurrence",
+    "status": "not replicated across worlds 0-2"
+  }
+}

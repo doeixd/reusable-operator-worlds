@@ -118,11 +118,20 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   worlds by a mean 3,787 cumulative log-loss units; mean novel 32-shot NMSE is
   0.00368 versus 0.00731. The validated selection report is in
   `reports/stage2_current/selection.json`.
+- Replicated all six rho points on development worlds 1–2 and combined them with
+  seed 0. Each world selects Dense-C through rho 0.75 and Continuous from rho
+  0.9; interpolated crossings are 0.811, 0.852, and 0.851.
+- The three-world mean crossing is rho 0.833, or measured residual correlation
+  0.488. The machine report and visually checked paired-world plot are under
+  `reports/rho_worlds_0_2`.
+- Falsified the provisional intermediate-transfer story: Continuous's better
+  32-shot novel adaptation at rho 0.5/0.75 was seed-0-specific and does not hold
+  in the three-world mean.
 
 # In progress
 
-- Replicate the six-point rho curve with frozen configurations across development
-  worlds, beginning with worlds 1–2 before expanding to worlds 3–9.
+- Expand the frozen six-point rho curve from worlds 0–2 to development worlds
+  3–9, reusing their completed exact-reuse stage-two artifacts where possible.
 
 # Next
 
