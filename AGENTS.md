@@ -159,6 +159,19 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   to -146,146 and novel zero-shot NMSE from 0.150 to 0.0436 under the leak-free
   setup. Global annealing exaggerated route-inference difficulty, but per-task
   discrete still substantially trails Continuous.
+- The leak-free oracle re-gate passes: early/late zero-shot NMSE is 0.0288/0.00159,
+  early/late examples to NMSE 0.02 is 72.8/0, unseen-composition zero-shot NMSE
+  is 0.00175, and primitive matching distance is 0.000484.
+- Sparse world-0 `rho` controls show the crossover is above 0.75. At rho 0.5
+  (measured residual correlation 0.064), Dense-C beats Continuous by 2,159 total
+  Gaussian-log-loss units; at rho 0.75 (correlation 0.317), it wins by 1,615.
+  Continuous already has slightly better 32-shot novel adaptation at both points.
+- Report total, per-online-example, and per-target-scalar Gaussian log loss.
+  Compute accounting distinguishes training-forward all-slot evaluation from
+  hardened inference; it excludes backward and optimizer operations.
+- Learned alpha scalars use a no-weight-decay optimizer group. `forward_tasks`
+  groups samples by task ID before forwarding, preserving gradients and enabling
+  useful batching when replay contains repeated tasks.
 
 # Standing scientific doubts
 
@@ -173,6 +186,8 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   later ablated.
 - Dense-C matches inference multiply-adds only. Continuous training backpropagates
   through every basis operator and uses materially more training compute.
+- The initial n=3 bootstrap intervals are not inferentially meaningful. Public
+  reporting should show paired world deltas directly until world count is larger.
 - Identity-slot results are one world only; the negative ablation is not a
   population claim.
 - Confirmatory worlds 100–129 remain sealed. Do not inspect them until these

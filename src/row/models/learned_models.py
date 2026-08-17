@@ -61,10 +61,14 @@ class DenseLearner(nn.Module):
     def forward_tasks(self, x: Tensor, task_ids: Sequence[str]) -> Tensor:
         if len(x) != len(task_ids):
             raise ValueError("each input must have one task ID")
-        return torch.cat(
-            [self.forward(sample.unsqueeze(0), task_id) for sample, task_id in zip(x, task_ids, strict=True)],
-            dim=0,
-        )
+        output = torch.zeros_like(x)
+        for task_id in dict.fromkeys(task_ids):
+            indices = torch.tensor(
+                [index for index, value in enumerate(task_ids) if value == task_id],
+                device=x.device,
+            )
+            output = output.index_copy(0, indices, self.forward(x.index_select(0, indices), task_id))
+        return output
 
     def shared_parameters(self) -> list[nn.Parameter]:
         return list(self.blocks.parameters())
@@ -134,10 +138,14 @@ class ContinuousBasisLearner(nn.Module):
     def forward_tasks(self, x: Tensor, task_ids: Sequence[str]) -> Tensor:
         if len(x) != len(task_ids):
             raise ValueError("each input must have one task ID")
-        return torch.cat(
-            [self.forward(sample.unsqueeze(0), task_id) for sample, task_id in zip(x, task_ids, strict=True)],
-            dim=0,
-        )
+        output = torch.zeros_like(x)
+        for task_id in dict.fromkeys(task_ids):
+            indices = torch.tensor(
+                [index for index, value in enumerate(task_ids) if value == task_id],
+                device=x.device,
+            )
+            output = output.index_copy(0, indices, self.forward(x.index_select(0, indices), task_id))
+        return output
 
     def shared_parameters(self) -> list[nn.Parameter]:
         return list(self.basis.parameters())
@@ -230,10 +238,14 @@ class DiscreteLibraryLearner(nn.Module):
     def forward_tasks(self, x: Tensor, task_ids: Sequence[str]) -> Tensor:
         if len(x) != len(task_ids):
             raise ValueError("each input must have one task ID")
-        return torch.cat(
-            [self.forward(sample.unsqueeze(0), task_id) for sample, task_id in zip(x, task_ids, strict=True)],
-            dim=0,
-        )
+        output = torch.zeros_like(x)
+        for task_id in dict.fromkeys(task_ids):
+            indices = torch.tensor(
+                [index for index, value in enumerate(task_ids) if value == task_id],
+                device=x.device,
+            )
+            output = output.index_copy(0, indices, self.forward(x.index_select(0, indices), task_id))
+        return output
 
     def shared_parameters(self) -> list[nn.Parameter]:
         return list(self.library.parameters())

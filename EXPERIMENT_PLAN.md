@@ -47,6 +47,10 @@ cumulative prequential Gaussian log loss, breaking near ties with mean 32-shot
 checkpoint novel-composition NMSE. Freeze the resulting configuration before
 confirmation.
 
+The stage-one grid predates the learnable-alpha architecture correction and is
+therefore provisional. Revalidate finalists under the corrected model before
+freezing confirmation.
+
 # Coding metric
 
 The continuous-density score is called cumulative prequential Gaussian log loss.
@@ -61,6 +65,20 @@ Report evaluated symmetric 8-bit operator/global weights plus task-specific
 state. Continuous and dense task coefficients are counted as 8-bit scalars.
 Hardened discrete routes are counted as categorical indices. Quantization scale
 overhead is reported as excluded from the V1 proxy.
+
+# Compute scope
+
+Dense-C is matched to Continuous on approximate inference-forward multiply-adds,
+not total training FLOPs. Continuous training evaluates and backpropagates through
+every basis slot. Report training-forward multiply-adds separately and state that
+backward/optimizer costs are excluded.
+
+# Online update batch
+
+The current protocol performs each update on one current example plus one replay
+example, an effective batch of two at replay ratio 1. This differs from the
+suggested batch size eight but is symmetric across models. It must be disclosed
+and later ablated.
 
 # Robustness queue
 

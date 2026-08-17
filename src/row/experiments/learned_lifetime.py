@@ -51,6 +51,65 @@ def _tensor(array: np.ndarray) -> torch.Tensor:
     return torch.as_tensor(array, dtype=torch.float32)
 
 
+def _shared_optimizer(
+    model: Learner, learning_rate: float, weight_decay: float
+) -> torch.optim.AdamW:
+    alpha_parameters = [
+        parameter
+        for name, parameter in model.named_parameters()
+        if name.endswith(".alpha")
+    ]
+    alpha_ids = {id(parameter) for parameter in alpha_parameters}
+    decay_parameters = [
+        parameter
+        for parameter in model.shared_parameters()
+        if id(parameter) not in alpha_ids
+    ]
+    groups: list[dict[str, object]] = [
+        {"params": decay_parameters, "weight_decay": weight_decay}
+    ]
+    if alpha_parameters:
+        groups.append({"params": alpha_parameters, "weight_decay": 0.0})
+    return torch.optim.AdamW(groups, lr=learning_rate)
+
+
+def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, int | str]:
+    d = config.world.state_dim
+    if kind == "dense":
+        selected = config.dense_model
+        madds = selected.residual_blocks * (
+            (d + selected.task_embedding_dim) * selected.hidden_width
+            + selected.hidden_width * d
+        )
+        return {
+            "training_forward_multiply_adds_per_sample": madds,
+            "inference_multiply_adds_per_sample": madds,
+            "note": "backward and optimizer operations excluded",
+        }
+    if kind == "continuous":
+        selected = config.continuous_model
+        learned = selected.task_steps * selected.operator_slots * (
+            d * selected.operator_rank + selected.operator_rank * d
+        )
+        mixture_slots = selected.operator_slots + int(selected.include_identity)
+        mixture = selected.task_steps * mixture_slots * d
+        return {
+            "training_forward_multiply_adds_per_sample": learned + mixture,
+            "inference_multiply_adds_per_sample": learned + mixture,
+            "note": "backward and optimizer operations excluded",
+        }
+    selected = config.discrete_model
+    all_slots = selected.task_steps * selected.operator_slots * (
+        d * selected.operator_rank + selected.operator_rank * d
+    ) + selected.task_steps * selected.operator_slots * d
+    hard = selected.task_steps * (d * selected.operator_rank + selected.operator_rank * d)
+    return {
+        "training_forward_multiply_adds_per_sample": all_slots,
+        "inference_multiply_adds_per_sample": hard,
+        "note": "training evaluates all relaxed slots; backward and optimizer operations excluded",
+    }
+
+
 def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
     if kind == "dense":
         model_config = config.dense_model
@@ -124,9 +183,7 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
     global_lr, task_lr, weight_decay, update_count, replay_per_task, replay_ratio, seed = (
         _training_values(config, kind)
     )
-    optimizer = torch.optim.AdamW(
-        model.shared_parameters(), lr=global_lr, weight_decay=weight_decay
-    )
+    optimizer = _shared_optimizer(model, global_lr, weight_decay)
     replay = TaskReplayBuffer(seed + 1)
     task_indices = list(range(len(world.tasks)))
     if order == "reverse":
@@ -247,6 +304,24 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
             "cumulative_prequential_gaussian_log_loss": cumulative_nll,
             "cumulative_prequential_quantized_target_log_loss": cumulative_mass_log_loss,
             "target_precision": config.evaluation.target_precision,
+            "prequential_gaussian_log_loss_per_online_example": (
+                cumulative_nll
+                / (len(world.tasks) * config.world.examples_per_task)
+            ),
+            "prequential_gaussian_log_loss_per_target_scalar": (
+                cumulative_nll
+                / (
+                    len(world.tasks)
+                    * config.world.examples_per_task
+                    * config.world.state_dim
+                )
+            ),
+            "prequential_quantized_target_bits_per_online_example": (
+                cumulative_mass_log_loss
+                / (len(world.tasks) * config.world.examples_per_task)
+                / np.log(2.0)
+            ),
+            "compute_accounting": _compute_accounting(config, kind),
             "shared_parameter_count": model.shared_parameter_count,
             "task_state_scalar_count": model.task_state_scalar_count,
             "world_functional_reuse": world.functional_reuse_diagnostics(),

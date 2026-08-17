@@ -98,11 +98,19 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   fixed-depth convex constraint as the explanation for the primary result.
 - Per-task discrete annealing improves log loss by 8,825 and greatly improves
   default-route zero-shot behavior, but remains far behind Continuous.
+- Re-ran the oracle under independent learnable alpha and no alpha weight decay;
+  the positive-control gate still passes with primitive distance 0.000484.
+- Added grouped task batching, normalized prequential reporting, and explicit
+  training-forward versus hardened-inference multiply-add accounting.
+- Sparse seed-0 `rho` points show Dense-C wins total online loss by 2,159 at
+  `rho=0.5` and 1,615 at `rho=0.75`; measured residual correlations are 0.064
+  and 0.317. Continuous has slightly better novel 32-shot adaptation at both.
 
 # In progress
 
 - Run sparse `rho=0.5` and `rho=0.75` seed-0 controls using the leak-free learner
-  setup before spending more tuning compute.
+- Complete the leak-free seed-0 curve at `rho=0`, `0.25`, and `0.9`, then plot
+  effect against measured functional recurrence.
 
 # Next
 

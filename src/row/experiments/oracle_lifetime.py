@@ -71,10 +71,25 @@ def run(config: ExperimentConfig, order: str = "forward") -> dict[str, object]:
         learnable_alpha=config.oracle_model.learnable_alpha,
         activation=config.oracle_model.operator_activation,
     )
+    alpha_parameters = [
+        parameter
+        for name, parameter in model.named_parameters()
+        if name.endswith(".alpha")
+    ]
+    alpha_ids = {id(parameter) for parameter in alpha_parameters}
     optimizer = torch.optim.AdamW(
-        model.parameters(),
+        [
+            {
+                "params": [
+                    parameter
+                    for parameter in model.parameters()
+                    if id(parameter) not in alpha_ids
+                ],
+                "weight_decay": config.oracle_model.weight_decay,
+            },
+            {"params": alpha_parameters, "weight_decay": 0.0},
+        ],
         lr=config.oracle_model.learning_rate,
-        weight_decay=config.oracle_model.weight_decay,
     )
     replay = ReplayBuffer(seed=config.oracle_model.seed + 1)
     task_indices = list(range(len(world.tasks)))

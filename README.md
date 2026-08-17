@@ -5,9 +5,17 @@ This repository implements the experiments described in
 
 # Current scope
 
-The first milestone provides deterministic hidden primitives, unique programs,
-opaque task IDs, fixed train/evaluation data, benchmark diagnostics, and a
-scratch-task difficulty experiment.
+ROW asks whether a learner can turn recurring hidden computations into an
+internal vocabulary that makes later tasks cheaper to learn. The headline metric
+is predict-before-update cumulative prequential Gaussian log loss, paired across
+identical generated worlds.
+
+Current development evidence includes a passing scratch control, a leak-free
+oracle positive control, dense/continuous/discrete learners, a causal `rho`
+continuum, lifetime novel-composition checkpoints, and symmetric optimizer
+tuning. Results remain development-stage; confirmatory seeds 100–129 are sealed.
+See `PROGRESS.md` for the running lab record and `EXPERIMENT_PLAN.md` for the
+development/confirmation protocol.
 
 # Quick start
 
