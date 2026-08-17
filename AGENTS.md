@@ -323,6 +323,18 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   two-initialization world-level mean advantage is 3,390 with interval
   [2,962, 3,803]; the novel advantage is 0.00299 [0.00200, 0.00426]. Do not
   count 20 world-initialization pairs as 20 independent worlds.
+- Same-architecture fresh-task baselines establish explicit forward transfer.
+  Mean per-task fresh-minus-lifetime Gaussian log loss is +366.8 for Continuous
+  and +211.6 for Dense-C; both are positive in all ten world means, with 97.5%
+  and 93.75% positive individual tasks.
+- Forward transfer increases with task index in every world for both models.
+  Mean per-task slopes are +4.35 Continuous and +3.77 Dense-C log-loss units per
+  task index. Continuous's extra mean transfer is positive 10/10 worlds at
+  +155.2 [145.5, 165.3].
+- Route similarity is a strong post-hoc explanatory variable: Continuous mean
+  transfer rises from 26 for no matching route positions to 268 at one of three
+  and 402 at two of three; Dense-C rises from -34 to 115 and 242. Teacher routes
+  are used only for analysis, never learner training or prediction.
 
 # Standing scientific doubts
 

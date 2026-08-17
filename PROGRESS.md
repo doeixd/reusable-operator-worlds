@@ -170,6 +170,20 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - The validated report is
   `reports/model_initializations/model-initializations.json`.
 
+# Explicit forward transfer complete
+
+- Trained selected Continuous and Dense-C freshly and independently on every
+  task in all ten development worlds, using the same score-before-update
+  protocol and architecture but no prior tasks or replay.
+- Mean per-task fresh-minus-lifetime log loss is +366.8 Continuous and +211.6
+  Dense-C; world means are positive 10/10 for both.
+- Continuous has 155.2 more forward-transfer units per task than Dense-C on
+  average, with all ten paired worlds positive and interval [145.5, 165.3].
+- Forward transfer rises with task index in every world and is larger for tasks
+  whose hidden routes share more positions with prior tasks.
+- The validated report and visually inspected figure are under
+  `reports/forward_transfer`.
+
 # Order and replay robustness complete
 
 - Completed reverse order and replay ratios 0, 1, and 4 on all ten development

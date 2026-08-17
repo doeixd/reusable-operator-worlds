@@ -1,0 +1,463 @@
+{
+  "scope": "development worlds 0-9; same-architecture fresh-task baselines",
+  "forward_transfer_definition": "fresh task prequential loss minus lifetime task prequential loss; positive is beneficial transfer",
+  "replication_unit": "world",
+  "model_summaries": [
+    {
+      "model": "continuous",
+      "mean_task_forward_transfer_by_world": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 366.84201368834454,
+        "median": 373.3285334769256,
+        "minimum": 321.69752738092785,
+        "maximum": 405.1135191980273,
+        "bootstrap_95_percent_ci_of_mean": [
+          351.37406623384123,
+          381.0339039017286
+        ]
+      },
+      "forward_transfer_positive_task_fraction": 0.975,
+      "task_index_slope_by_world": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 4.349898856049528,
+        "median": 4.272576692685494,
+        "minimum": 2.9674081940310297,
+        "maximum": 6.269001318468915,
+        "bootstrap_95_percent_ci_of_mean": [
+          3.737792771397536,
+          4.989710904818788
+        ]
+      },
+      "by_prior_primitive_exposure": [
+        {
+          "teacher_primitives_encountered_before_task": "0",
+          "tasks": 10,
+          "mean_forward_transfer": 0.0
+        },
+        {
+          "teacher_primitives_encountered_before_task": "2",
+          "tasks": 3,
+          "mean_forward_transfer": 11.30793808870961
+        },
+        {
+          "teacher_primitives_encountered_before_task": "3",
+          "tasks": 9,
+          "mean_forward_transfer": 85.12508786056573
+        },
+        {
+          "teacher_primitives_encountered_before_task": "4",
+          "tasks": 6,
+          "mean_forward_transfer": 100.42709806991373
+        },
+        {
+          "teacher_primitives_encountered_before_task": "5",
+          "tasks": 21,
+          "mean_forward_transfer": 202.73664890533144
+        },
+        {
+          "teacher_primitives_encountered_before_task": "6",
+          "tasks": 591,
+          "mean_forward_transfer": 387.6798763791842
+        }
+      ],
+      "by_prior_route_similarity": [
+        {
+          "maximum_prior_route_position_similarity": "0.0",
+          "tasks": 22,
+          "mean_forward_transfer": 26.14580036135172
+        },
+        {
+          "maximum_prior_route_position_similarity": "0.3333333333333333",
+          "tasks": 107,
+          "mean_forward_transfer": 268.206583763549
+        },
+        {
+          "maximum_prior_route_position_similarity": "0.6666666666666666",
+          "tasks": 511,
+          "mean_forward_transfer": 402.16355516612725
+        }
+      ]
+    },
+    {
+      "model": "dense",
+      "mean_task_forward_transfer_by_world": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 211.6023356126494,
+        "median": 216.36319092187557,
+        "minimum": 177.66566956213876,
+        "maximum": 234.96272164390436,
+        "bootstrap_95_percent_ci_of_mean": [
+          200.1425256025344,
+          222.4572698361176
+        ]
+      },
+      "forward_transfer_positive_task_fraction": 0.9375,
+      "task_index_slope_by_world": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 3.768300297665969,
+        "median": 3.5841318474967885,
+        "minimum": 2.4903943487767517,
+        "maximum": 5.31910357526814,
+        "bootstrap_95_percent_ci_of_mean": [
+          3.3225277080910027,
+          4.236260858673118
+        ]
+      },
+      "by_prior_primitive_exposure": [
+        {
+          "teacher_primitives_encountered_before_task": "0",
+          "tasks": 10,
+          "mean_forward_transfer": 0.0
+        },
+        {
+          "teacher_primitives_encountered_before_task": "2",
+          "tasks": 3,
+          "mean_forward_transfer": -70.56301237232294
+        },
+        {
+          "teacher_primitives_encountered_before_task": "3",
+          "tasks": 9,
+          "mean_forward_transfer": 4.058611986210609
+        },
+        {
+          "teacher_primitives_encountered_before_task": "4",
+          "tasks": 6,
+          "mean_forward_transfer": -25.072785580272313
+        },
+        {
+          "teacher_primitives_encountered_before_task": "5",
+          "tasks": 21,
+          "mean_forward_transfer": 53.05844247389692
+        },
+        {
+          "teacher_primitives_encountered_before_task": "6",
+          "tasks": 591,
+          "mean_forward_transfer": 227.81195557168613
+        }
+      ],
+      "by_prior_route_similarity": [
+        {
+          "maximum_prior_route_position_similarity": "0.0",
+          "tasks": 22,
+          "mean_forward_transfer": -34.094798863406574
+        },
+        {
+          "maximum_prior_route_position_similarity": "0.3333333333333333",
+          "tasks": 107,
+          "mean_forward_transfer": 115.05272130568665
+        },
+        {
+          "maximum_prior_route_position_similarity": "0.6666666666666666",
+          "tasks": 511,
+          "mean_forward_transfer": 242.39714126689256
+        }
+      ]
+    }
+  ],
+  "continuous_minus_dense_mean_forward_transfer": {
+    "wins": 10,
+    "worlds": 10,
+    "mean": 155.23967807569514,
+    "median": 154.94154987259975,
+    "minimum": 131.484359187881,
+    "maximum": 181.35374880286514,
+    "bootstrap_95_percent_ci_of_mean": [
+      145.47515273644873,
+      165.25265550139076
+    ]
+  },
+  "task_index_bins": [
+    {
+      "model": "continuous",
+      "task_index_start": 0,
+      "task_index_end": 7,
+      "mean_forward_transfer": 158.27699433181093,
+      "world_means": [
+        133.11795530913787,
+        153.26498811828816,
+        130.29671141936615,
+        164.58044779912726,
+        156.825881050486,
+        131.09919394248436,
+        161.48192241051754,
+        154.54787836481103,
+        225.51575335199507,
+        172.03921155189568
+      ]
+    },
+    {
+      "model": "continuous",
+      "task_index_start": 8,
+      "task_index_end": 15,
+      "mean_forward_transfer": 290.6669479174323,
+      "world_means": [
+        303.380121119799,
+        314.2730163090129,
+        290.07759068396285,
+        298.18977908596423,
+        255.63567636891977,
+        345.78744543899245,
+        272.7541062406473,
+        179.79778320542835,
+        325.2552102686674,
+        321.5187504529286
+      ]
+    },
+    {
+      "model": "continuous",
+      "task_index_start": 16,
+      "task_index_end": 23,
+      "mean_forward_transfer": 363.17806342696883,
+      "world_means": [
+        305.66376472152325,
+        372.14998953372645,
+        296.82308457480633,
+        392.17642627922424,
+        366.74616392048074,
+        357.83371774486363,
+        346.6010090838131,
+        358.880412077276,
+        413.16725641839304,
+        421.73880991558167
+      ]
+    },
+    {
+      "model": "continuous",
+      "task_index_start": 24,
+      "task_index_end": 31,
+      "mean_forward_transfer": 409.2852197528931,
+      "world_means": [
+        393.6944159732716,
+        416.1141080548921,
+        414.5938076515745,
+        437.8495417891167,
+        427.6504517875481,
+        391.00121580740097,
+        377.94170940998885,
+        360.86091535796777,
+        404.15569214138276,
+        468.9903395557878
+      ]
+    },
+    {
+      "model": "continuous",
+      "task_index_start": 32,
+      "task_index_end": 39,
+      "mean_forward_transfer": 397.7570990937188,
+      "world_means": [
+        386.0463007694555,
+        399.1008661970351,
+        381.28707007083136,
+        384.9738124585661,
+        371.69388640239777,
+        391.02495029141187,
+        453.6806518170355,
+        363.0705594776049,
+        427.9434301560881,
+        418.749463296762
+      ]
+    },
+    {
+      "model": "continuous",
+      "task_index_start": 40,
+      "task_index_end": 47,
+      "mean_forward_transfer": 441.81817294833365,
+      "world_means": [
+        552.3647445060558,
+        349.86133079397143,
+        402.10105425450547,
+        491.26356628610426,
+        444.38496072078163,
+        454.8044612605021,
+        376.9911593445244,
+        404.78290024914446,
+        457.3289474769504,
+        484.2986045907964
+      ]
+    },
+    {
+      "model": "continuous",
+      "task_index_start": 48,
+      "task_index_end": 55,
+      "mean_forward_transfer": 436.0968125782477,
+      "world_means": [
+        435.3620149644811,
+        385.63602052194796,
+        360.079239141792,
+        433.71608852010706,
+        460.5405394343148,
+        470.07222230691303,
+        517.8689155729307,
+        388.30262540126586,
+        446.0988645645815,
+        463.29159535414243
+      ]
+    },
+    {
+      "model": "continuous",
+      "task_index_start": 56,
+      "task_index_end": 63,
+      "mean_forward_transfer": 437.6567994573512,
+      "world_means": [
+        516.9160064776413,
+        394.93226188238623,
+        410.8438925446968,
+        387.01604222701627,
+        485.2527821142396,
+        441.94623382153827,
+        482.36762113724524,
+        363.33714491392453,
+        403.6746305884999,
+        490.2813788663237
+      ]
+    },
+    {
+      "model": "dense",
+      "task_index_start": 0,
+      "task_index_end": 7,
+      "mean_forward_transfer": 44.95238481512487,
+      "world_means": [
+        31.761122531925878,
+        68.60511354926024,
+        31.57909311852103,
+        19.36132470925486,
+        72.02632942455523,
+        42.13184971142175,
+        38.50949203122593,
+        3.988015277624271,
+        88.91598160484867,
+        52.64552619261087
+      ]
+    },
+    {
+      "model": "dense",
+      "task_index_start": 8,
+      "task_index_end": 15,
+      "mean_forward_transfer": 143.41858471968078,
+      "world_means": [
+        155.71243447832654,
+        142.19364322812783,
+        144.03189792426554,
+        131.85956609617932,
+        158.5460032766013,
+        198.4152648814739,
+        97.1712285135481,
+        71.9650105788495,
+        173.2025585712981,
+        161.08823964813774
+      ]
+    },
+    {
+      "model": "dense",
+      "task_index_start": 16,
+      "task_index_end": 23,
+      "mean_forward_transfer": 206.75645733915903,
+      "world_means": [
+        165.2265367767074,
+        265.3387493279785,
+        138.11729393556965,
+        227.62850767584996,
+        232.28923748926252,
+        217.72037367526588,
+        162.18658496372467,
+        212.85095238236306,
+        193.09378207467904,
+        253.11255509018957
+      ]
+    },
+    {
+      "model": "dense",
+      "task_index_start": 24,
+      "task_index_end": 31,
+      "mean_forward_transfer": 232.3556323661707,
+      "world_means": [
+        220.3763633424423,
+        242.71574563246304,
+        206.76775391735325,
+        269.29234085986707,
+        255.9432141091122,
+        209.09159133078447,
+        175.71434500273824,
+        258.06409608177347,
+        215.32946588678755,
+        270.26140749838544
+      ]
+    },
+    {
+      "model": "dense",
+      "task_index_start": 32,
+      "task_index_end": 39,
+      "mean_forward_transfer": 232.10931419025684,
+      "world_means": [
+        238.7419726243192,
+        264.8431895693804,
+        202.7216124218465,
+        209.67690255613797,
+        216.5689473696239,
+        234.0505653635641,
+        258.41283777456124,
+        214.1675423870596,
+        263.1188833610553,
+        218.79068847502032
+      ]
+    },
+    {
+      "model": "dense",
+      "task_index_start": 40,
+      "task_index_end": 47,
+      "mean_forward_transfer": 271.6632973782954,
+      "world_means": [
+        359.44536621306156,
+        199.65150036763515,
+        234.33735330486883,
+        296.6622556783431,
+        275.5211197314142,
+        292.528512373856,
+        197.36120981799303,
+        265.21301245251965,
+        312.9130336910083,
+        282.9996101522537
+      ]
+    },
+    {
+      "model": "dense",
+      "task_index_start": 48,
+      "task_index_end": 55,
+      "mean_forward_transfer": 278.50681855806147,
+      "world_means": [
+        290.54999290655286,
+        245.00064145358073,
+        206.24579486274263,
+        283.3410550927468,
+        319.94474430947844,
+        305.7546203140748,
+        310.9048184115549,
+        246.76789240326144,
+        305.4221370750303,
+        271.1364887515918
+      ]
+    },
+    {
+      "model": "dense",
+      "task_index_start": 56,
+      "task_index_end": 63,
+      "mean_forward_transfer": 283.0561955344462,
+      "world_means": [
+        350.44383085085923,
+        252.07458710547007,
+        257.52455701194253,
+        234.86715901332332,
+        348.862177441187,
+        281.6951068656726,
+        298.5965880784353,
+        248.68882398092381,
+        252.17293365773173,
+        305.6361913389167
+      ]
+    }
+  ]
+}

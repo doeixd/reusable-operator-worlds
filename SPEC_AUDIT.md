@@ -51,9 +51,6 @@ claim.
 
 # Open diagnostic obligations
 
-- Implement same-architecture fresh-task baselines and report explicit forward
-  transfer `scratch_task_loss - lifetime_task_loss` against task index, reuse,
-  prior primitive exposure, and task similarity.
 - At multiple lifetime checkpoints, evaluate current learned operators under a
   teacher-route diagnostic. Existing final functional matching identifies good
   operators, but does not yet isolate route inference throughout learning.
@@ -89,10 +86,12 @@ obligations below should be resolved or explicitly deferred.
 
 # Execution order
 
-1. Implement fresh-task forward-transfer and checkpoint true-route diagnostics.
-2. Implement the shared-parent plus residual control at intermediate reuse.
-3. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
-4. Re-audit the gate before touching confirmatory worlds.
+1. Implement checkpoint true-route diagnostics.
+2. Resolve scrambled-ID and batch-size protocol checks.
+3. Run the free measured-recurrence and truncated-lifetime bridge analyses.
+4. Implement the shared-parent plus residual control at intermediate reuse.
+5. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
+6. Re-audit the gate before touching confirmatory worlds.
 
 # Closed during this audit
 
@@ -108,3 +107,7 @@ obligations below should be resolved or explicitly deferred.
   lifetime loss and novel-transfer wins in all ten development worlds. The
   tracked result is
   `reports/model_initializations/model-initializations.json`.
+- Same-architecture fresh-task forward transfer is complete on worlds 0–9.
+  Both models benefit from lifetime experience, but Continuous acquires more
+  transfer in every world and the gain rises with task index. The tracked result
+  is `reports/forward_transfer/forward-transfer.json`.
