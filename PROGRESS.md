@@ -1,7 +1,6 @@
 # Current milestone
 
-Milestones 004–005 replication: paired dense and continuous reusable-basis
-comparisons across exploratory worlds.
+Milestone 005 compute control and Milestone 006 hard discrete reusable library.
 
 # Completed
 
@@ -44,18 +43,29 @@ comparisons across exploratory worlds.
 - Seed-0 tuned continuous beat Dense-P, Dense-C, and width-128 dense on
   prequential NLL. Its frozen-library novel task improved from NMSE 0.0453 to
   0.00803 after 32 code-only examples.
+- Replicated tuned continuous versus Dense-P on world seeds 0–2. Continuous won
+  prequential NLL by 9,126, 4,940, and 5,746 nats; mean paired advantage was
+  6,604 with a three-world bootstrap interval of 4,940–9,126.
+- Continuous improved 32-shot frozen-library novel-composition NMSE over Dense-P
+  by 0.0302, 0.0151, and 0.0114 on the same worlds.
+- Added 8-bit retained-description evaluation. Continuous retained 29,184 proxy
+  bits versus Dense-P's 33,928, and measured quantization degradation was
+  negligible on these artifacts.
+- Added analytic inference accounting: continuous uses about 6,528 multiply-adds
+  per prediction versus Dense-P's 2,112.
 
 # In progress
 
-- Replicate tuned continuous versus Dense-P on world seeds 1 and 2.
+- Replicate Dense-C on world seeds 1 and 2 to complete the compute-controlled
+  exploratory comparison.
 
 # Next
 
-- Aggregate paired world-level effects with uncertainty clearly marked as
-  exploratory at three worlds.
-- Add quantized retained-description and inference-FLOP evaluation.
-- Implement the fixed hard discrete library only after the continuous result
-  survives replication.
+- Implement the fixed hard discrete library with hard evaluation routes.
+- Add model-comparison plots for learning curves, cumulative prequential loss,
+  novel adaptation, and functional operator distance.
+- Begin the exact-reuse multi-initialization pilot after all principal V1 models
+  are stable.
 
 # Decisions
 
@@ -68,5 +78,8 @@ comparisons across exploratory worlds.
   remains a sensitivity target rather than hidden or discarded evidence.
 - The oracle gate passed. NMSE 0.1 is too loose for oracle initialization, so
   oracle transfer claims use the stricter thresholds and zero-shot behavior.
-- The tuned continuous seed-0 win is a pilot result. Do not treat it as confirmed
-  until paired-world replication is complete.
+- The tuned continuous seed-0 win has now replicated on world seeds 1 and 2, but
+  the three-world estimate remains exploratory rather than confirmatory.
+- The continuous advantage over Dense-P replicated across three exploratory
+  worlds, but Dense-P is not compute matched. The claim remains exploratory and
+  compute-uncontrolled until Dense-C replication finishes.

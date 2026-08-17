@@ -81,3 +81,16 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   -155,993 for Dense-P, -161,984 for Dense-C, and -163,775 for width-128 dense.
   Tuned continuous novel-composition NMSE improved from 0.0453 to 0.00803 using
   32 code-only examples. Treat this as exploratory until paired-world replication.
+- Tuned continuous beat Dense-P on all three exploratory worlds. Paired
+  dense-minus-continuous prequential NLL differences were 9,126, 4,940, and
+  5,746 nats (mean 6,604; three-world bootstrap interval 4,940–9,126). This is a
+  replicated pilot, not a confirmatory estimate.
+- Continuous also improved 32-shot frozen-library novel NMSE over Dense-P by
+  0.0302, 0.0151, and 0.0114 across the three worlds.
+- The simple 8-bit retained-code proxy is 29,184 bits for continuous versus
+  33,928 for Dense-P. Actual symmetric per-tensor quantized evaluation changed
+  mean final NMSE by at most about 2.2e-5 in the pilot artifacts.
+- Parameter matching does not imply compute matching: the continuous basis uses
+  an estimated 6,528 matrix/mixture multiply-adds per prediction versus 2,112 for
+  Dense-P. Dense-C replication is required before making a compute-controlled
+  claim.
