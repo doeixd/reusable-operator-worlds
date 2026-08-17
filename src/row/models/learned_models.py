@@ -171,6 +171,113 @@ class ContinuousBasisLearner(nn.Module):
         }
 
 
+class HypernetworkLearner(nn.Module):
+    """Generate per-step low-rank operators from opaque task codes without slots."""
+
+    def __init__(
+        self,
+        d: int,
+        step_code_dim: int,
+        hypernetwork_hidden_dim: int,
+        operator_rank: int,
+        task_steps: int,
+        alpha: float,
+        seed: int,
+        learnable_alpha: bool = True,
+        activation: str = "tanh",
+    ) -> None:
+        super().__init__()
+        if activation not in {"tanh", "gelu"}:
+            raise ValueError("activation must be 'tanh' or 'gelu'")
+        self.d = d
+        self.step_code_dim = step_code_dim
+        self.operator_rank = operator_rank
+        self.task_steps = task_steps
+        self.activation = activation
+        parameter_dim = 2 * d * operator_rank + operator_rank
+        with torch.random.fork_rng():
+            torch.manual_seed(seed)
+            V = torch.randn(operator_rank, d)
+            U = torch.randn(d, operator_rank)
+            self.V = nn.Parameter(V / torch.linalg.matrix_norm(V, ord=2))
+            self.U = nn.Parameter(U / torch.linalg.matrix_norm(U, ord=2))
+            self.b = nn.Parameter(torch.zeros(operator_rank))
+            self.code_to_hidden = nn.Linear(
+                step_code_dim, hypernetwork_hidden_dim, bias=False
+            )
+            self.hidden_to_parameters = nn.Linear(
+                hypernetwork_hidden_dim, parameter_dim, bias=True
+            )
+            nn.init.normal_(self.hidden_to_parameters.weight, std=1e-3)
+            nn.init.zeros_(self.hidden_to_parameters.bias)
+        if learnable_alpha:
+            self.alpha = nn.Parameter(torch.tensor(float(alpha)))
+        else:
+            self.alpha = float(alpha)
+        self.task_codes = nn.ParameterDict()
+
+    def begin_task(self, task_id: str) -> nn.Parameter:
+        if task_id in self.task_codes:
+            raise ValueError(f"task already exists: {task_id}")
+        self.task_codes[task_id] = nn.Parameter(
+            torch.zeros(self.task_steps, self.step_code_dim)
+        )
+        return self.task_codes[task_id]
+
+    def _generated_parameters(self, code: Tensor) -> tuple[Tensor, Tensor, Tensor]:
+        hidden = torch.tanh(self.code_to_hidden(code))
+        generated = self.hidden_to_parameters(hidden)
+        u_size = self.d * self.operator_rank
+        v_size = self.operator_rank * self.d
+        delta_u, delta_v, delta_b = torch.split(
+            generated, (u_size, v_size, self.operator_rank), dim=-1
+        )
+        return (
+            self.U + delta_u.reshape(self.d, self.operator_rank),
+            self.V + delta_v.reshape(self.operator_rank, self.d),
+            self.b + delta_b,
+        )
+
+    def forward(self, x: Tensor, task_id: str) -> Tensor:
+        z = x
+        for code in self.task_codes[task_id]:
+            U, V, b = self._generated_parameters(code)
+            hidden = torch.nn.functional.linear(z, V, b)
+            hidden = (
+                torch.tanh(hidden)
+                if self.activation == "tanh"
+                else torch.nn.functional.gelu(hidden)
+            )
+            z = torch.tanh(z + self.alpha * torch.nn.functional.linear(hidden, U))
+        return z
+
+    def forward_tasks(self, x: Tensor, task_ids: Sequence[str]) -> Tensor:
+        if len(x) != len(task_ids):
+            raise ValueError("each input must have one task ID")
+        output = torch.zeros_like(x)
+        for task_id in dict.fromkeys(task_ids):
+            indices = torch.tensor(
+                [index for index, value in enumerate(task_ids) if value == task_id],
+                device=x.device,
+            )
+            output = output.index_copy(
+                0, indices, self.forward(x.index_select(0, indices), task_id)
+            )
+        return output
+
+    def shared_parameters(self) -> list[nn.Parameter]:
+        task_ids = {id(parameter) for parameter in self.task_codes.values()}
+        return [parameter for parameter in self.parameters() if id(parameter) not in task_ids]
+
+    @property
+    def shared_parameter_count(self) -> int:
+        return sum(parameter.numel() for parameter in self.shared_parameters())
+
+    @property
+    def task_state_scalar_count(self) -> int:
+        return sum(parameter.numel() for parameter in self.task_codes.values())
+
+
 class DiscreteLibraryLearner(nn.Module):
     """Overcomplete operator library with relaxed training and hard evaluation routes."""
 

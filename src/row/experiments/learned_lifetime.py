@@ -1,4 +1,4 @@
-"""Shared online protocol for dense and continuous-basis non-oracle learners."""
+"""Shared online protocol for non-oracle ROW learners."""
 
 from __future__ import annotations
 
@@ -20,12 +20,22 @@ from row.config import ExperimentConfig, load_config
 from row.experiments.oracle_lifetime import _add_lifetime_transfer_summary, _functional_recovery
 from row.experiments.scratch_difficulty import summarize
 from row.metrics import examples_to_criterion, gaussian_nll, nmse
-from row.models import ContinuousBasisLearner, DenseLearner, DiscreteLibraryLearner
+from row.models import (
+    ContinuousBasisLearner,
+    DenseLearner,
+    DiscreteLibraryLearner,
+    HypernetworkLearner,
+)
 from row.provenance import current_git_commit, write_fingerprint
 from row.world import Program, Task, World
 
-ModelKind = Literal["dense", "continuous", "discrete"]
-Learner = DenseLearner | ContinuousBasisLearner | DiscreteLibraryLearner
+ModelKind = Literal["dense", "continuous", "hypernetwork", "discrete"]
+Learner = (
+    DenseLearner
+    | ContinuousBasisLearner
+    | HypernetworkLearner
+    | DiscreteLibraryLearner
+)
 
 
 class TaskReplayBuffer:
@@ -57,7 +67,7 @@ def _shared_optimizer(
     alpha_parameters = [
         parameter
         for name, parameter in model.named_parameters()
-        if name.endswith(".alpha")
+        if name == "alpha" or name.endswith(".alpha")
     ]
     alpha_ids = {id(parameter) for parameter in alpha_parameters}
     decay_parameters = [
@@ -98,6 +108,21 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "inference_multiply_adds_per_sample": learned + mixture,
             "note": "backward and optimizer operations excluded",
         }
+    if kind == "hypernetwork":
+        selected = config.hypernetwork_model
+        parameter_dim = 2 * d * selected.operator_rank + selected.operator_rank
+        generation = selected.task_steps * (
+            selected.step_code_dim * selected.hypernetwork_hidden_dim
+            + selected.hypernetwork_hidden_dim * parameter_dim
+        )
+        operators = selected.task_steps * (
+            d * selected.operator_rank + selected.operator_rank * d
+        )
+        return {
+            "training_forward_multiply_adds_per_sample": generation + operators,
+            "inference_multiply_adds_per_sample": generation + operators,
+            "note": "counts per-prediction operator generation; backward and optimizer operations excluded",
+        }
     selected = config.discrete_model
     all_slots = selected.task_steps * selected.operator_slots * (
         d * selected.operator_rank + selected.operator_rank * d
@@ -133,6 +158,19 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             activation=model_config.operator_activation,
             include_identity=model_config.include_identity,
         )
+    if kind == "hypernetwork":
+        model_config = config.hypernetwork_model
+        return HypernetworkLearner(
+            d=config.world.state_dim,
+            step_code_dim=model_config.step_code_dim,
+            hypernetwork_hidden_dim=model_config.hypernetwork_hidden_dim,
+            operator_rank=model_config.operator_rank,
+            task_steps=model_config.task_steps,
+            alpha=model_config.operator_alpha_init,
+            seed=model_config.seed,
+            learnable_alpha=model_config.learnable_alpha,
+            activation=model_config.operator_activation,
+        )
     model_config = config.discrete_model
     return DiscreteLibraryLearner(
         d=config.world.state_dim,
@@ -154,6 +192,7 @@ def _training_values(
     selected = {
         "dense": config.dense_model,
         "continuous": config.continuous_model,
+        "hypernetwork": config.hypernetwork_model,
         "discrete": config.discrete_model,
     }[kind]
     return (
@@ -552,6 +591,7 @@ def resolved_learned_config(
     model_config = {
         "dense": config.dense_model,
         "continuous": config.continuous_model,
+        "hypernetwork": config.hypernetwork_model,
         "discrete": config.discrete_model,
     }[kind]
     return {
@@ -577,6 +617,7 @@ def _write_artifacts(
     model_config = {
         "dense": config.dense_model,
         "continuous": config.continuous_model,
+        "hypernetwork": config.hypernetwork_model,
         "discrete": config.discrete_model,
     }[kind]
     resolved = resolved_learned_config(config, kind, order)
@@ -616,7 +657,9 @@ def _write_artifacts(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("configs/v1.yaml"))
-    parser.add_argument("--model", choices=("dense", "continuous", "discrete"), required=True)
+    parser.add_argument(
+        "--model", choices=("dense", "continuous", "hypernetwork", "discrete"), required=True
+    )
     parser.add_argument("--world-seed", type=int)
     parser.add_argument("--reuse-rho", type=float)
     parser.add_argument("--teacher-rank", type=int)
@@ -625,6 +668,9 @@ def main() -> None:
     parser.add_argument("--task-learning-rate", type=float)
     parser.add_argument("--updates-per-example", type=int)
     parser.add_argument("--hidden-width", type=int)
+    parser.add_argument("--task-embedding-dim", type=int)
+    parser.add_argument("--step-code-dim", type=int)
+    parser.add_argument("--hypernetwork-hidden-dim", type=int)
     parser.add_argument("--operator-activation", choices=("tanh", "gelu"))
     parser.add_argument("--operator-alpha-init", type=float)
     parser.add_argument("--include-identity", action="store_true")
@@ -659,6 +705,7 @@ def main() -> None:
     selected = {
         "dense": config.dense_model,
         "continuous": config.continuous_model,
+        "hypernetwork": config.hypernetwork_model,
         "discrete": config.discrete_model,
     }[args.model]
     selected = replace(
@@ -685,14 +732,29 @@ def main() -> None:
             else {}
         ),
         **(
+            {"task_embedding_dim": args.task_embedding_dim}
+            if args.model == "dense" and args.task_embedding_dim is not None
+            else {}
+        ),
+        **(
+            {"step_code_dim": args.step_code_dim}
+            if args.model == "hypernetwork" and args.step_code_dim is not None
+            else {}
+        ),
+        **(
+            {"hypernetwork_hidden_dim": args.hypernetwork_hidden_dim}
+            if args.model == "hypernetwork" and args.hypernetwork_hidden_dim is not None
+            else {}
+        ),
+        **(
             {"operator_activation": args.operator_activation}
-            if args.model in {"continuous", "discrete"}
+            if args.model in {"continuous", "hypernetwork", "discrete"}
             and args.operator_activation is not None
             else {}
         ),
         **(
             {"operator_alpha_init": args.operator_alpha_init}
-            if args.model in {"continuous", "discrete"}
+            if args.model in {"continuous", "hypernetwork", "discrete"}
             and args.operator_alpha_init is not None
             else {}
         ),
@@ -712,6 +774,9 @@ def main() -> None:
         dense_model=selected if args.model == "dense" else config.dense_model,
         continuous_model=(
             selected if args.model == "continuous" else config.continuous_model
+        ),
+        hypernetwork_model=(
+            selected if args.model == "hypernetwork" else config.hypernetwork_model
         ),
         discrete_model=selected if args.model == "discrete" else config.discrete_model,
     )

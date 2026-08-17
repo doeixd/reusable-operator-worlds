@@ -244,6 +244,20 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   activation, program depth, and git commit. Resume paths must validate the full
   resolved config, not merely summary model/rho fields; legacy artifacts may be
   backfilled only after that validation passes.
+- The generic hypernetwork control uses a 24-scalar task code arranged as three
+  eight-dimensional step codes. A shared two-layer generator produces low-rank
+  operator deltas around one learned base operator, preserving the three-stage
+  residual prior without an explicit reusable slot library. It has 2,705 shared
+  scalars and 7,296 counted forward multiply-adds at `d=16`, close to
+  Continuous's 2,120 scalars and 6,528 multiply-adds.
+- Zero-initialized hypernetwork task codes must generate the shared base exactly
+  while still receiving nonzero gradients. Use a bias-free code projection and
+  small nonzero output weights with a zero output bias; zeroing the output
+  weights would strand every new task code at initialization.
+- The first untuned world-0 hypernetwork smoke run at global/task LR
+  `0.001/0.05` scored -165,031 cumulative Gaussian log loss, median final NMSE
+  0.00472, and novel 32-shot NMSE 0.0051. Treat this only as an implementation
+  check until the control receives symmetric development tuning.
 
 # Standing scientific doubts
 

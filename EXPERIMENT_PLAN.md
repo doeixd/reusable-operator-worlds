@@ -122,6 +122,21 @@ After the causal reuse sweep:
 - teacher activation/family mismatch;
 - reverse task order for key learned-model conditions.
 
+# Structural control definitions
+
+The generic low-rank hypernetwork uses one opaque eight-dimensional code for
+each of three task steps. A shared two-layer generator maps each code to `U`,
+`V`, and bias deltas around one learned rank-eight base operator. This preserves
+the low-rank three-stage residual family but contains no explicit operator slots.
+Its 24 task-specific scalars exactly match Continuous. Tune its shared learning
+rate symmetrically on development worlds before comparing cumulative
+prequential Gaussian log loss and frozen-library novel adaptation.
+
+The Dense-C task-code sensitivity changes only `task_embedding_dim` from 32 to
+24 while retaining width 32, three residual blocks, and the selected optimizer.
+This is a task-state-size control, not a compute-matched replacement for the
+primary Dense-C baseline.
+
 # Confirmation gate
 
 Run seeds 100–129 only after:

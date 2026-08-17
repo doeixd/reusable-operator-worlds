@@ -2,7 +2,12 @@ import unittest
 
 import torch
 
-from row.models import ContinuousBasisLearner, DenseLearner, DiscreteLibraryLearner
+from row.models import (
+    ContinuousBasisLearner,
+    DenseLearner,
+    DiscreteLibraryLearner,
+    HypernetworkLearner,
+)
 
 
 class LearnedModelTests(unittest.TestCase):
@@ -40,6 +45,25 @@ class LearnedModelTests(unittest.TestCase):
         model.begin_task("task_b")
         output = model.forward_tasks(torch.randn(2, 4), ("task_a", "task_b"))
         self.assertEqual(output.shape, (2, 4))
+
+    def test_hypernetwork_matches_task_state_budget_and_receives_code_gradients(self) -> None:
+        model = HypernetworkLearner(4, 3, 5, 2, 2, 0.2, seed=1)
+        code = model.begin_task("task_a")
+        prediction = model(torch.randn(5, 4), "task_a")
+        prediction.square().mean().backward()
+        self.assertEqual(code.shape, (2, 3))
+        self.assertEqual(model.task_state_scalar_count, 6)
+        self.assertIsNotNone(code.grad)
+        self.assertGreater(float(torch.linalg.vector_norm(code.grad)), 0.0)
+
+    def test_hypernetwork_zero_code_generates_shared_base_operator(self) -> None:
+        model = HypernetworkLearner(4, 3, 5, 2, 2, 0.2, seed=1)
+        code = model.begin_task("task_a")
+        with torch.no_grad():
+            U, V, b = model._generated_parameters(code[0])
+        self.assertTrue(torch.equal(U, model.U))
+        self.assertTrue(torch.equal(V, model.V))
+        self.assertTrue(torch.equal(b, model.b))
 
     def test_discrete_library_trains_soft_and_evaluates_hard(self) -> None:
         model = DiscreteLibraryLearner(4, 3, 2, 2, 0.35, 1.0, 0.1, seed=2)

@@ -153,14 +153,22 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 # In progress
 
-- Implement and evaluate the generic low-rank hypernetwork and dense
-  24-dimensional task-code controls now that the causal and checkpoint sweeps
-  are frozen.
+- Implemented and smoke-tested the generic low-rank hypernetwork control. It
+  matches Continuous's 24 task-state scalars, retains the same three low-rank
+  residual stages, and removes the explicit slot library. Unit tests verify
+  exact zero-code base generation and nonzero task-code gradients.
+- The untuned world-0 smoke lifetime completed at -165,031 cumulative Gaussian
+  log loss, median final NMSE 0.00472, and novel 32-shot NMSE 0.0051. Its 2,705
+  shared scalars and 7,296 counted forward multiply-adds are near the Continuous
+  control. Symmetric development tuning and paired evaluation remain in
+  progress.
+- Evaluate the Dense-C 24-dimensional task-code control, then tune and replicate
+  both structural controls without opening confirmatory worlds.
 
 # Next
 
-- Implement the generic low-rank hypernetwork and dense 24-dimensional task-code
-  controls after the causal sweep.
+- Run symmetric development tuning for the hypernetwork and evaluate the dense
+  24-dimensional task-code sensitivity.
 - Rehearse artifact generation and plotting from a clean checkout before opening
   the confirmatory seed gate.
 

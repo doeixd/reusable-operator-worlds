@@ -119,6 +119,40 @@ class ContinuousModelConfig:
 
 
 @dataclass(frozen=True)
+class HypernetworkModelConfig:
+    step_code_dim: int = 8
+    hypernetwork_hidden_dim: int = 8
+    operator_rank: int = 8
+    task_steps: int = 3
+    operator_alpha_init: float = 0.2
+    learnable_alpha: bool = True
+    operator_activation: str = "tanh"
+    global_learning_rate: float = 1e-3
+    task_learning_rate: float = 5e-2
+    weight_decay: float = 1e-4
+    updates_per_example: int = 1
+    replay_examples_per_task: int = 4
+    replay_ratio: float = 1.0
+    seed: int = 6000
+
+    def __post_init__(self) -> None:
+        dimensions = (
+            self.step_code_dim,
+            self.hypernetwork_hidden_dim,
+            self.operator_rank,
+            self.task_steps,
+        )
+        if min(dimensions) <= 0:
+            raise ValueError("hypernetwork dimensions and step count must be positive")
+        if min(self.global_learning_rate, self.task_learning_rate) <= 0.0:
+            raise ValueError("hypernetwork learning rates must be positive")
+        if self.updates_per_example <= 0 or self.replay_examples_per_task < 0:
+            raise ValueError("hypernetwork update count must be positive and replay size nonnegative")
+        if self.operator_alpha_init <= 0.0 or self.operator_activation not in {"tanh", "gelu"}:
+            raise ValueError("hypernetwork operator initialization or activation is invalid")
+
+
+@dataclass(frozen=True)
 class DiscreteModelConfig:
     operator_slots: int = 12
     operator_rank: int = 8
@@ -159,6 +193,7 @@ class ExperimentConfig:
     oracle_model: OracleModelConfig
     dense_model: DenseModelConfig
     continuous_model: ContinuousModelConfig
+    hypernetwork_model: HypernetworkModelConfig
     discrete_model: DiscreteModelConfig
     evaluation: EvaluationConfig
     output_directory: Path
@@ -178,6 +213,7 @@ def load_config(path: str | Path) -> ExperimentConfig:
     oracle_raw = _require_mapping(raw.get("oracle_model", {}), "oracle_model")
     dense_raw = _require_mapping(raw.get("dense_model", {}), "dense_model")
     continuous_raw = _require_mapping(raw.get("continuous_model", {}), "continuous_model")
+    hypernetwork_raw = _require_mapping(raw.get("hypernetwork_model", {}), "hypernetwork_model")
     discrete_raw = _require_mapping(raw.get("discrete_model", {}), "discrete_model")
     eval_raw = _require_mapping(raw.get("evaluation", {}), "evaluation")
     output_raw = _require_mapping(raw.get("output", {}), "output")
@@ -242,6 +278,22 @@ def load_config(path: str | Path) -> ExperimentConfig:
         replay_ratio=float(continuous_raw.get("replay_ratio", 1.0)),
         seed=int(continuous_raw.get("seed", 4000)),
     )
+    hypernetwork_model = HypernetworkModelConfig(
+        step_code_dim=int(hypernetwork_raw.get("step_code_dim", 8)),
+        hypernetwork_hidden_dim=int(hypernetwork_raw.get("hypernetwork_hidden_dim", 8)),
+        operator_rank=int(hypernetwork_raw.get("operator_rank", 8)),
+        task_steps=int(hypernetwork_raw.get("task_steps", 3)),
+        operator_alpha_init=float(hypernetwork_raw.get("operator_alpha_init", 0.2)),
+        learnable_alpha=bool(hypernetwork_raw.get("learnable_alpha", True)),
+        operator_activation=str(hypernetwork_raw.get("operator_activation", "tanh")),
+        global_learning_rate=float(hypernetwork_raw.get("global_learning_rate", 1e-3)),
+        task_learning_rate=float(hypernetwork_raw.get("task_learning_rate", 5e-2)),
+        weight_decay=float(hypernetwork_raw.get("weight_decay", 1e-4)),
+        updates_per_example=int(hypernetwork_raw.get("updates_per_example", 1)),
+        replay_examples_per_task=int(hypernetwork_raw.get("replay_examples_per_task", 4)),
+        replay_ratio=float(hypernetwork_raw.get("replay_ratio", 1.0)),
+        seed=int(hypernetwork_raw.get("seed", 6000)),
+    )
     discrete_model = DiscreteModelConfig(
         operator_slots=int(discrete_raw.get("operator_slots", 12)),
         operator_rank=int(discrete_raw.get("operator_rank", 8)),
@@ -278,6 +330,7 @@ def load_config(path: str | Path) -> ExperimentConfig:
         oracle_model=oracle_model,
         dense_model=dense_model,
         continuous_model=continuous_model,
+        hypernetwork_model=hypernetwork_model,
         discrete_model=discrete_model,
         evaluation=evaluation,
         output_directory=output_directory,
