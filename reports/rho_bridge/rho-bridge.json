@@ -1,0 +1,3274 @@
+{
+  "scope": "development worlds [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; existing logs only",
+  "sign_convention": "positive Dense-minus-Continuous favors Continuous",
+  "rows": [
+    {
+      "world_seed": 0,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0006476644309042104,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -164.71934709845664
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0006476644309042104,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -817.4290235528606
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0006476644309042104,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2390.4516793121584
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.0033108035071959777,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -307.37219269175694
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.0033108035071959777,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -788.004219215014
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.0033108035071959777,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2280.289773278695
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06379609482714448,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -538.092913388311
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06379609482714448,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -994.6137846563506
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06379609482714448,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2159.364775985945
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3169923870730336,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -381.76505682436255
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3169923870730336,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -723.1897147732525
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3169923870730336,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1615.3018842196034
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6539145667002604,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 418.6297119060473
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6539145667002604,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 974.7601975621219
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6539145667002604,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 2370.5936138304533
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 674.1012289422797
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 2037.3698313894565
+    },
+    {
+      "world_seed": 0,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 4446.095704296196
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0014709967883820524,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -456.46281450892275
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0014709967883820524,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -628.2400115707132
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0014709967883820524,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1745.3235340741812
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.0024931656318482654,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -652.0338715792022
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.0024931656318482654,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -944.8788409109693
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.0024931656318482654,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2297.1750804790063
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.05201161837744597,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -678.3382018108314
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.05201161837744597,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -785.0598697589448
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.05201161837744597,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1897.5177561611636
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.2855706334500049,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -198.94019737277995
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.2855706334500049,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -145.4143922067742
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.2855706334500049,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1053.2594347019913
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6276603897834403,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 107.8417372722106
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6276603897834403,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 216.18581833974167
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6276603897834403,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 501.1207698153157
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 420.22012524137244
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 1106.3967723997775
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 2642.9577619424963
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": 0.0020727756173130815,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -760.3059052236422
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": 0.0020727756173130815,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1117.0666914873873
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": 0.0020727756173130815,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2531.717443679052
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.006450882485585225,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -616.101360001594
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.006450882485585225,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1227.5560115028493
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.006450882485585225,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -3167.2481925369066
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.060260259139103274,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -928.1785542524667
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.060260259139103274,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1848.731405959741
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.060260259139103274,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -3366.7592669040023
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.29950563070278746,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -418.20881830548024
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.29950563070278746,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -893.3065581349219
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.29950563070278746,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2123.8730608391634
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6385585950125762,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -51.95796603502822
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6385585950125762,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 396.05316452380794
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6385585950125762,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 1022.1903755188978
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 240.34002685946325
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 1544.1313061600958
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 3387.66783337557
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0003210351965736375,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -292.89642234805797
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0003210351965736375,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1059.5044300630834
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0003210351965736375,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2121.211229249864
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.004131259356628055,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -420.31240030047775
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.004131259356628055,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -911.5279477384174
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.004131259356628055,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1607.7971057224204
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.05783496957291779,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -601.8702347142898
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.05783496957291779,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1301.0034617793572
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.05783496957291779,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2209.4603844986414
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.30123738441052783,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -669.4511989383973
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.30123738441052783,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -962.7129360599793
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.30123738441052783,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1450.3234785147943
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6405740422556974,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 58.99534370582842
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6405740422556974,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 690.905857594742
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6405740422556974,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 1446.5318178965244
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 311.7406328755678
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 1045.3597125702217
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 2553.7105699202802
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.002829949234873994,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -471.3875767367281
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.002829949234873994,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -996.0372909061989
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.002829949234873994,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2267.7843129011744
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.0024523023749471093,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -676.6899478190753
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.0024523023749471093,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1292.9425637209933
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.0024523023749471093,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2186.110506094992
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06586937009999629,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -792.2008695905388
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06586937009999629,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1284.5215655745124
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06586937009999629,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2248.5898855114647
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.31939490391325853,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -613.5148730355286
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.31939490391325853,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -598.4704754985432
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.31939490391325853,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1001.28781270748
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6525337462929541,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -98.29500260960049
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6525337462929541,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 516.1937557153869
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6525337462929541,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 1117.5703724264167
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 224.46325425391115
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 1396.2513995903719
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 3524.705301486363
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0012313816414207127,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -596.0520972560989
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0012313816414207127,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1263.8587518089626
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0012313816414207127,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2123.9493735239084
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.00620900212620551,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -652.4776118378795
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.00620900212620551,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1180.614994052783
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.00620900212620551,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2307.759020793281
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.07082902410098178,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -701.8897611290813
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.07082902410098178,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1092.5690527141414
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.07082902410098178,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2109.1922369909007
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3242316296286504,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -201.58040094960597
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3242316296286504,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -467.91256226015685
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3242316296286504,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1320.6008227161656
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6576515184420967,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 281.58504803276446
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6576515184420967,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 884.1974701906875
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6576515184420967,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 1878.7467694140796
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 601.367359558215
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 1631.443676795534
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 3585.446575079288
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": 0.001288032010131612,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -298.41062007243454
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": 0.001288032010131612,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -743.8364372537908
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": 0.001288032010131612,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1891.0610059413302
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.007723548103963701,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -264.9519281576722
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.007723548103963701,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -647.555042013686
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.007723548103963701,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1718.9690710463037
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.07136057422892682,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -249.98523784904683
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.07136057422892682,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -477.8107370542857
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.07136057422892682,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1845.2777118153463
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.328498023572276,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -343.60475452827814
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.328498023572276,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -424.2749351646198
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.328498023572276,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1251.2297122668824
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.662421136659499,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -123.24398324495996
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.662421136659499,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 186.89258602292102
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.662421136659499,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 470.64209174271673
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 314.0278868888927
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 1425.0685918130766
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 3267.2416624221078
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": 0.00457852257190844,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -1113.4514442808722
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": 0.00457852257190844,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1567.4616568447673
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": 0.00457852257190844,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2742.332849876373
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.00918629659666153,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -1044.5558920207768
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.00918629659666153,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1462.2654478288023
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.00918629659666153,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2651.467478261882
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06204883481789116,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -889.0597667515249
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06204883481789116,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1283.321425183487
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06204883481789116,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2691.609121127869
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.2989422229489588,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -430.4561393598415
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.2989422229489588,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -355.8868665481714
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.2989422229489588,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1252.8163882716908
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.635800880855003,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 202.77262853270076
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.635800880855003,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 718.3797131921165
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.635800880855003,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 1731.0122840858821
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 979.2471189490607
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 2004.15897069755
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 4145.214891038428
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.00015335075133977567,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -724.8820009353221
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.00015335075133977567,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -931.32464435765
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.00015335075133977567,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1832.7015085297462
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.004159393495064111,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -622.2360554259867
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.004159393495064111,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -846.5952515535173
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.004159393495064111,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1708.3866811465705
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06468064441853702,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -271.8692269608946
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06468064441853702,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -471.8935275598924
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06468064441853702,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -977.7474606471951
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3178213916186329,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -245.50332632772916
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3178213916186329,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -353.0530968385283
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3178213916186329,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -900.4255292294256
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6559444303509834,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -251.13422643523518
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6559444303509834,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 244.67519140901277
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6559444303509834,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 1092.433480914915
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 1157.655563073342
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 2894.9626678691275
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 5054.086623262061
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.002059329429924023,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -294.391196909055
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.002059329429924023,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -592.9872686220915
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.002059329429924023,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1702.2149895581242
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.002386361908823742,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -423.47485213873006
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.002386361908823742,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -747.1906979114574
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.002386361908823742,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1728.5251270890876
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06675114093733231,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -490.6449599463522
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06675114093733231,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -1281.201126940039
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06675114093733231,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -2760.877981025609
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3274103609779436,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": -107.88770872640453
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3274103609779436,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": -390.2767967410473
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3274103609779436,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": -1399.7582207676605
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6647556871322681,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 398.28549524767004
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6647556871322681,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 881.8231798133638
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6647556871322681,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 1245.8540352850687
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "dense_minus_continuous_gaussian_log_loss": 572.1113733854218
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "dense_minus_continuous_gaussian_log_loss": 1727.630869933957
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "dense_minus_continuous_gaussian_log_loss": 4377.202995350497
+    }
+  ],
+  "truncated_mean_curves": [
+    {
+      "online_examples": 2048,
+      "mean_curve": [
+        {
+          "configured_rho": 0.0,
+          "measured_residual_correlation": -7.743772740652724e-05,
+          "mean_dense_minus_continuous_gaussian_log_loss": -517.295942536959,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0006476644309042104,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -164.71934709845664
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0014709967883820524,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -456.46281450892275
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": 0.0020727756173130815,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -760.3059052236422
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0003210351965736375,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -292.89642234805797
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.002829949234873994,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -471.3875767367281
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0012313816414207127,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -596.0520972560989
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": 0.001288032010131612,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -298.41062007243454
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": 0.00457852257190844,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -1113.4514442808722
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.00015335075133977567,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -724.8820009353221
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.002059329429924023,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -294.391196909055
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.25,
+          "measured_residual_correlation": 0.004850301558692323,
+          "mean_dense_minus_continuous_gaussian_log_loss": -568.0206111973151,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.0033108035071959777,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -307.37219269175694
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.0024931656318482654,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -652.0338715792022
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.006450882485585225,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -616.101360001594
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.004131259356628055,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -420.31240030047775
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.0024523023749471093,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -676.6899478190753
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.00620900212620551,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -652.4776118378795
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.007723548103963701,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -264.9519281576722
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.00918629659666153,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -1044.5558920207768
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.004159393495064111,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -622.2360554259867
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.002386361908823742,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -423.47485213873006
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.5,
+          "measured_residual_correlation": 0.06354425305202768,
+          "mean_dense_minus_continuous_gaussian_log_loss": -614.2129726393338,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06379609482714448,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -538.092913388311
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.05201161837744597,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -678.3382018108314
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.060260259139103274,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -928.1785542524667
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.05783496957291779,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -601.8702347142898
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06586937009999629,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -792.2008695905388
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.07082902410098178,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -701.8897611290813
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.07136057422892682,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -249.98523784904683
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06204883481789116,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -889.0597667515249
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06468064441853702,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -271.8692269608946
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06675114093733231,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -490.6449599463522
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.75,
+          "measured_residual_correlation": 0.3119604568296074,
+          "mean_dense_minus_continuous_gaussian_log_loss": -361.0912474368408,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3169923870730336,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -381.76505682436255
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.2855706334500049,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -198.94019737277995
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.29950563070278746,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -418.20881830548024
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.30123738441052783,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -669.4511989383973
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.31939490391325853,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -613.5148730355286
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3242316296286504,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -201.58040094960597
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.328498023572276,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -343.60475452827814
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.2989422229489588,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -430.4561393598415
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3178213916186329,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -245.50332632772916
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3274103609779436,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -107.88770872640453
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.9,
+          "measured_residual_correlation": 0.6489814993484778,
+          "mean_dense_minus_continuous_gaussian_log_loss": 94.34787863723977,
+          "continuous_wins": 6,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6539145667002604,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 418.6297119060473
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6276603897834403,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 107.8417372722106
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6385585950125762,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -51.95796603502822
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6405740422556974,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 58.99534370582842
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6525337462929541,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -98.29500260960049
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6576515184420967,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 281.58504803276446
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.662421136659499,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -123.24398324495996
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.635800880855003,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 202.77262853270076
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6559444303509834,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": -251.13422643523518
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6647556871322681,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 398.28549524767004
+            }
+          ]
+        },
+        {
+          "configured_rho": 1.0,
+          "measured_residual_correlation": 1.0,
+          "mean_dense_minus_continuous_gaussian_log_loss": 549.5274570027526,
+          "continuous_wins": 10,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 674.1012289422797
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 420.22012524137244
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 240.34002685946325
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 311.7406328755678
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 224.46325425391115
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 601.367359558215
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 314.0278868888927
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 979.2471189490607
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 1157.655563073342
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 2048,
+              "tasks_completed": 16,
+              "dense_minus_continuous_gaussian_log_loss": 572.1113733854218
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "online_examples": 4096,
+      "mean_curve": [
+        {
+          "configured_rho": 0.0,
+          "measured_residual_correlation": -7.743772740652724e-05,
+          "mean_dense_minus_continuous_gaussian_log_loss": -971.7746206467506,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0006476644309042104,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -817.4290235528606
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0014709967883820524,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -628.2400115707132
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": 0.0020727756173130815,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1117.0666914873873
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0003210351965736375,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1059.5044300630834
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.002829949234873994,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -996.0372909061989
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0012313816414207127,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1263.8587518089626
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": 0.001288032010131612,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -743.8364372537908
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": 0.00457852257190844,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1567.4616568447673
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.00015335075133977567,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -931.32464435765
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.002059329429924023,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -592.9872686220915
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.25,
+          "measured_residual_correlation": 0.004850301558692323,
+          "mean_dense_minus_continuous_gaussian_log_loss": -1004.9131016448489,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.0033108035071959777,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -788.004219215014
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.0024931656318482654,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -944.8788409109693
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.006450882485585225,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1227.5560115028493
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.004131259356628055,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -911.5279477384174
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.0024523023749471093,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1292.9425637209933
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.00620900212620551,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1180.614994052783
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.007723548103963701,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -647.555042013686
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.00918629659666153,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1462.2654478288023
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.004159393495064111,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -846.5952515535173
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.002386361908823742,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -747.1906979114574
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.5,
+          "measured_residual_correlation": 0.06354425305202768,
+          "mean_dense_minus_continuous_gaussian_log_loss": -1082.0725957180753,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06379609482714448,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -994.6137846563506
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.05201161837744597,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -785.0598697589448
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.060260259139103274,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1848.731405959741
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.05783496957291779,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1301.0034617793572
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06586937009999629,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1284.5215655745124
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.07082902410098178,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1092.5690527141414
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.07136057422892682,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -477.8107370542857
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06204883481789116,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1283.321425183487
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06468064441853702,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -471.8935275598924
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06675114093733231,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -1281.201126940039
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.75,
+          "measured_residual_correlation": 0.3119604568296074,
+          "mean_dense_minus_continuous_gaussian_log_loss": -531.4498334225995,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3169923870730336,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -723.1897147732525
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.2855706334500049,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -145.4143922067742
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.29950563070278746,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -893.3065581349219
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.30123738441052783,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -962.7129360599793
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.31939490391325853,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -598.4704754985432
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3242316296286504,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -467.91256226015685
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.328498023572276,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -424.2749351646198
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.2989422229489588,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -355.8868665481714
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3178213916186329,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -353.0530968385283
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3274103609779436,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": -390.2767967410473
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.9,
+          "measured_residual_correlation": 0.6489814993484778,
+          "mean_dense_minus_continuous_gaussian_log_loss": 571.0066934363902,
+          "continuous_wins": 10,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6539145667002604,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 974.7601975621219
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6276603897834403,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 216.18581833974167
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6385585950125762,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 396.05316452380794
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6405740422556974,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 690.905857594742
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6525337462929541,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 516.1937557153869
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6576515184420967,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 884.1974701906875
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.662421136659499,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 186.89258602292102
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.635800880855003,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 718.3797131921165
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6559444303509834,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 244.67519140901277
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6647556871322681,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 881.8231798133638
+            }
+          ]
+        },
+        {
+          "configured_rho": 1.0,
+          "measured_residual_correlation": 1.0,
+          "mean_dense_minus_continuous_gaussian_log_loss": 1681.277379921917,
+          "continuous_wins": 10,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 2037.3698313894565
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 1106.3967723997775
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 1544.1313061600958
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 1045.3597125702217
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 1396.2513995903719
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 1631.443676795534
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 1425.0685918130766
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 2004.15897069755
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 2894.9626678691275
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 4096,
+              "tasks_completed": 32,
+              "dense_minus_continuous_gaussian_log_loss": 1727.630869933957
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "online_examples": 8192,
+      "mean_curve": [
+        {
+          "configured_rho": 0.0,
+          "measured_residual_correlation": -7.743772740652724e-05,
+          "mean_dense_minus_continuous_gaussian_log_loss": -2134.874792664591,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0006476644309042104,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2390.4516793121584
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0014709967883820524,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1745.3235340741812
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": 0.0020727756173130815,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2531.717443679052
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0003210351965736375,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2121.211229249864
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.002829949234873994,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2267.7843129011744
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.0012313816414207127,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2123.9493735239084
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": 0.001288032010131612,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1891.0610059413302
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": 0.00457852257190844,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2742.332849876373
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.00015335075133977567,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1832.7015085297462
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.0,
+              "measured_residual_correlation": -0.002059329429924023,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1702.2149895581242
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.25,
+          "measured_residual_correlation": 0.004850301558692323,
+          "mean_dense_minus_continuous_gaussian_log_loss": -2165.3728036449147,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.0033108035071959777,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2280.289773278695
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.0024931656318482654,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2297.1750804790063
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.006450882485585225,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -3167.2481925369066
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.004131259356628055,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1607.7971057224204
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.0024523023749471093,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2186.110506094992
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.00620900212620551,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2307.759020793281
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.007723548103963701,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1718.9690710463037
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.00918629659666153,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2651.467478261882
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.004159393495064111,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1708.3866811465705
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.25,
+              "measured_residual_correlation": 0.002386361908823742,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1728.5251270890876
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.5,
+          "measured_residual_correlation": 0.06354425305202768,
+          "mean_dense_minus_continuous_gaussian_log_loss": -2226.639658066814,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06379609482714448,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2159.364775985945
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.05201161837744597,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1897.5177561611636
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.060260259139103274,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -3366.7592669040023
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.05783496957291779,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2209.4603844986414
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06586937009999629,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2248.5898855114647
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.07082902410098178,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2109.1922369909007
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.07136057422892682,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1845.2777118153463
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06204883481789116,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2691.609121127869
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06468064441853702,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -977.7474606471951
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.5,
+              "measured_residual_correlation": 0.06675114093733231,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2760.877981025609
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.75,
+          "measured_residual_correlation": 0.3119604568296074,
+          "mean_dense_minus_continuous_gaussian_log_loss": -1336.8876344234857,
+          "continuous_wins": 0,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3169923870730336,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1615.3018842196034
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.2855706334500049,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1053.2594347019913
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.29950563070278746,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -2123.8730608391634
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.30123738441052783,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1450.3234785147943
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.31939490391325853,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1001.28781270748
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3242316296286504,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1320.6008227161656
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.328498023572276,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1251.2297122668824
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.2989422229489588,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1252.8163882716908
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3178213916186329,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -900.4255292294256
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.75,
+              "measured_residual_correlation": 0.3274103609779436,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": -1399.7582207676605
+            }
+          ]
+        },
+        {
+          "configured_rho": 0.9,
+          "measured_residual_correlation": 0.6489814993484778,
+          "mean_dense_minus_continuous_gaussian_log_loss": 1287.669561093027,
+          "continuous_wins": 10,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6539145667002604,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 2370.5936138304533
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6276603897834403,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 501.1207698153157
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6385585950125762,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 1022.1903755188978
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6405740422556974,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 1446.5318178965244
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6525337462929541,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 1117.5703724264167
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6576515184420967,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 1878.7467694140796
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.662421136659499,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 470.64209174271673
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.635800880855003,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 1731.0122840858821
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6559444303509834,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 1092.433480914915
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 0.9,
+              "measured_residual_correlation": 0.6647556871322681,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 1245.8540352850687
+            }
+          ]
+        },
+        {
+          "configured_rho": 1.0,
+          "measured_residual_correlation": 1.0,
+          "mean_dense_minus_continuous_gaussian_log_loss": 3698.432991817329,
+          "continuous_wins": 10,
+          "world_effects": [
+            {
+              "world_seed": 0,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 4446.095704296196
+            },
+            {
+              "world_seed": 1,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 2642.9577619424963
+            },
+            {
+              "world_seed": 2,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 3387.66783337557
+            },
+            {
+              "world_seed": 3,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 2553.7105699202802
+            },
+            {
+              "world_seed": 4,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 3524.705301486363
+            },
+            {
+              "world_seed": 5,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 3585.446575079288
+            },
+            {
+              "world_seed": 6,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 3267.2416624221078
+            },
+            {
+              "world_seed": 7,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 4145.214891038428
+            },
+            {
+              "world_seed": 8,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 5054.086623262061
+            },
+            {
+              "world_seed": 9,
+              "configured_rho": 1.0,
+              "measured_residual_correlation": 1.0,
+              "online_examples": 8192,
+              "tasks_completed": 64,
+              "dense_minus_continuous_gaussian_log_loss": 4377.202995350497
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "crossings_by_lifetime": [
+    {
+      "online_examples": 2048,
+      "tasks_completed": 16,
+      "mean_curve_crossing": {
+        "configured_rho": 0.8689262933609178,
+        "measured_residual_correlation": 0.5791648793056176
+      },
+      "cross_world_dispersion": {
+        "configured_rho_population_std": 0.05115043105158788,
+        "measured_recurrence_population_std": 0.1270864469332656,
+        "configured_rho_range": 0.14848310410672072,
+        "measured_recurrence_range": 0.35904004616200946
+      },
+      "per_world": [
+        {
+          "world_seed": 0,
+          "configured_rho": 0.8215456431761642,
+          "measured_residual_correlation": 0.47769448068466747
+        },
+        {
+          "world_seed": 1,
+          "configured_rho": 0.8472711435582059,
+          "measured_residual_correlation": 0.5074070454373465
+        },
+        {
+          "world_seed": 2,
+          "configured_rho": 0.917775683479901,
+          "measured_residual_correlation": 0.7028072751284477
+        },
+        {
+          "world_seed": 3,
+          "configured_rho": 0.8878518174803168,
+          "measured_residual_correlation": 0.6130918845548812
+        },
+        {
+          "world_seed": 4,
+          "configured_rho": 0.9304546825741371,
+          "measured_residual_correlation": 0.7583534909116808
+        },
+        {
+          "world_seed": 5,
+          "configured_rho": 0.8125811721556774,
+          "measured_residual_correlation": 0.4633370127083911
+        },
+        {
+          "world_seed": 6,
+          "configured_rho": 0.92818474996053,
+          "measured_residual_correlation": 0.7575668952116186
+        },
+        {
+          "world_seed": 7,
+          "configured_rho": 0.851966973356039,
+          "measured_residual_correlation": 0.5279319415853364
+        },
+        {
+          "world_seed": 8,
+          "configured_rho": 0.917826238400183,
+          "measured_residual_correlation": 0.7172765964257247
+        },
+        {
+          "world_seed": 9,
+          "configured_rho": 0.7819715784674164,
+          "measured_residual_correlation": 0.39931344474967134
+        }
+      ]
+    },
+    {
+      "online_examples": 4096,
+      "tasks_completed": 32,
+      "mean_curve_crossing": {
+        "configured_rho": 0.8223089510300358,
+        "measured_residual_correlation": 0.47442471056019797
+      },
+      "cross_world_dispersion": {
+        "configured_rho_population_std": 0.020944187445755935,
+        "measured_recurrence_population_std": 0.048905858584572956,
+        "configured_rho_range": 0.05811100921514267,
+        "measured_recurrence_range": 0.14977082151279142
+      },
+      "per_world": [
+        {
+          "world_seed": 0,
+          "configured_rho": 0.8138879017737253,
+          "measured_residual_correlation": 0.46049406118912495
+        },
+        {
+          "world_seed": 1,
+          "configured_rho": 0.8103212005824046,
+          "measured_residual_correlation": 0.4231390655098388
+        },
+        {
+          "world_seed": 2,
+          "configured_rho": 0.8539244373509135,
+          "measured_residual_correlation": 0.5344115543564816
+        },
+        {
+          "world_seed": 3,
+          "configured_rho": 0.8373278297048367,
+          "measured_residual_correlation": 0.49879427686993705
+        },
+        {
+          "world_seed": 4,
+          "configured_rho": 0.8305359755977963,
+          "measured_residual_correlation": 0.49825931511705374
+        },
+        {
+          "world_seed": 5,
+          "configured_rho": 0.8019091513667732,
+          "measured_residual_correlation": 0.4396152528093829
+        },
+        {
+          "world_seed": 6,
+          "configured_rho": 0.8541305993339332,
+          "measured_residual_correlation": 0.5603087828871113
+        },
+        {
+          "world_seed": 7,
+          "configured_rho": 0.7996925353436308,
+          "measured_residual_correlation": 0.41053796137431986
+        },
+        {
+          "world_seed": 8,
+          "configured_rho": 0.8385987254861985,
+          "measured_residual_correlation": 0.5175365268800115
+        },
+        {
+          "world_seed": 9,
+          "configured_rho": 0.7960195901187905,
+          "measured_residual_correlation": 0.43090698523202187
+        }
+      ]
+    },
+    {
+      "online_examples": 8192,
+      "tasks_completed": 64,
+      "mean_curve_crossing": {
+        "configured_rho": 0.8264064679200325,
+        "measured_residual_correlation": 0.4836310399869006
+      },
+      "cross_world_dispersion": {
+        "configured_rho_population_std": 0.01730798602444888,
+        "measured_recurrence_population_std": 0.03814605940362324,
+        "configured_rho_range": 0.04821208248160136,
+        "measured_recurrence_range": 0.13077073171122733
+      },
+      "per_world": [
+        {
+          "world_seed": 0,
+          "configured_rho": 0.8107881673645168,
+          "measured_residual_correlation": 0.4535315993663511
+        },
+        {
+          "world_seed": 1,
+          "configured_rho": 0.8516411009006385,
+          "measured_residual_correlation": 0.5173731630537485
+        },
+        {
+          "world_seed": 2,
+          "configured_rho": 0.8512633615216194,
+          "measured_residual_correlation": 0.5283965833686464
+        },
+        {
+          "world_seed": 3,
+          "configured_rho": 0.8250981666383966,
+          "measured_residual_correlation": 0.47112779025968204
+        },
+        {
+          "world_seed": 4,
+          "configured_rho": 0.8208840133614845,
+          "measured_residual_correlation": 0.4768230249430707
+        },
+        {
+          "world_seed": 5,
+          "configured_rho": 0.8119157867981232,
+          "measured_residual_correlation": 0.4618579946288321
+        },
+        {
+          "world_seed": 6,
+          "configured_rho": 0.8590002498461181,
+          "measured_residual_correlation": 0.5711493752782817
+        },
+        {
+          "world_seed": 7,
+          "configured_rho": 0.8129803111625283,
+          "measured_residual_correlation": 0.44037864356705436
+        },
+        {
+          "world_seed": 8,
+          "configured_rho": 0.8177739010621887,
+          "measured_residual_correlation": 0.4705941741112524
+        },
+        {
+          "world_seed": 9,
+          "configured_rho": 0.8293630028870581,
+          "measured_residual_correlation": 0.5058952816014184
+        }
+      ]
+    }
+  ],
+  "h5a_amortization_prediction": {
+    "prediction": "crossover decreases as lifetime length grows",
+    "status": "partially supported",
+    "mean_crossover_monotonically_declines": false,
+    "mean_16_to_64_task_change": -0.042519825440885284,
+    "worlds_with_16_to_64_task_decline": 8,
+    "worlds": 10,
+    "note": "The mean drops from 16 to 32 tasks, then changes little and is slightly higher at 64; this supports early amortization movement but not the strict monotonic prediction."
+  },
+  "h5b_coordinate_test": {
+    "configured_rho_linear_fit": {
+      "slope": 5051.4564809355925,
+      "intercept": -3342.1040618450756,
+      "r_squared": 0.64613720226251,
+      "root_mean_square_residual": 1329.0035583658773
+    },
+    "measured_recurrence_linear_fit": {
+      "slope": 5905.561217924692,
+      "intercept": -2476.9310031471077,
+      "r_squared": 0.973836083431495,
+      "root_mean_square_residual": 361.3766337817298
+    },
+    "measured_coordinate_is_more_linear": true,
+    "measured_coordinate_aligns_world_crossings_more_tightly_at_64_tasks": false,
+    "status": "mixed",
+    "note": "Measured recurrence smooths the six-point mean elbow, but does not reduce 64-task cross-world crossing dispersion. Both coordinates and raw world curves remain reported."
+  }
+}

@@ -121,6 +121,16 @@ increases sample reuse and training compute rather than only vectorizing the
 same gradients, the confirmation batch and any symmetric retuning must be
 explicitly frozen before worlds 100–129 are opened.
 
+# Bridge-analysis interpretation
+
+The zero-training rho bridge analyses are complete. Mean configured-rho
+crossovers are 0.869, 0.822, and 0.826 after 16, 32, and 64 tasks. This is an
+early amortization shift followed by a plateau, not the preregistered monotone
+`rho*(N)` law. Measured recurrence makes the mean six-point effect curve much
+more linear (`R²=0.974` versus `0.646`) but increases rather than decreases raw
+cross-world crossover dispersion. Reporting must label H5a partially supported
+and H5b mixed; neither is eligible for an upgraded confirmation headline.
+
 # Robustness queue
 
 After the causal reuse sweep:

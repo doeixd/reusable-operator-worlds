@@ -164,11 +164,37 @@ def _summarize(rows: list[dict[str, float | int]]) -> dict[str, Any]:
                 "mean_dense_minus_continuous_gaussian_log_loss",
             ),
         }
+        configured_world_crossings = [
+            float(row["configured_rho"])
+            for row in per_world
+            if row["configured_rho"] is not None
+        ]
+        measured_world_crossings = [
+            float(row["measured_residual_correlation"])
+            for row in per_world
+            if row["measured_residual_correlation"] is not None
+        ]
         crossings.append(
             {
                 "online_examples": truncation,
                 "tasks_completed": truncation // 128,
                 "mean_curve_crossing": mean_crossing,
+                "cross_world_dispersion": {
+                    "configured_rho_population_std": float(
+                        np.std(configured_world_crossings)
+                    ),
+                    "measured_recurrence_population_std": float(
+                        np.std(measured_world_crossings)
+                    ),
+                    "configured_rho_range": (
+                        max(configured_world_crossings)
+                        - min(configured_world_crossings)
+                    ),
+                    "measured_recurrence_range": (
+                        max(measured_world_crossings)
+                        - min(measured_world_crossings)
+                    ),
+                },
                 "per_world": per_world,
             }
         )
@@ -189,14 +215,37 @@ def _summarize(rows: list[dict[str, float | int]]) -> dict[str, Any]:
         for row in crossings
         if row["mean_curve_crossing"]["configured_rho"] is not None
     ]
-    h5a_status = (
-        "supported"
-        if len(configured_values) == len(crossings)
-        and all(
+    monotonic_decline = len(configured_values) == len(crossings) and all(
             later < earlier
             for earlier, later in zip(configured_values, configured_values[1:])
-        )
-        else "not supported"
+    )
+    overall_decline = (
+        len(configured_values) == len(crossings)
+        and configured_values[-1] < configured_values[0]
+    )
+    h5a_status = (
+        "supported"
+        if monotonic_decline
+        else ("partially supported" if overall_decline else "not supported")
+    )
+    first_per_world = {
+        int(row["world_seed"]): float(row["configured_rho"])
+        for row in crossings[0]["per_world"]
+        if row["configured_rho"] is not None
+    }
+    final_per_world = {
+        int(row["world_seed"]): float(row["configured_rho"])
+        for row in crossings[-1]["per_world"]
+        if row["configured_rho"] is not None
+    }
+    worlds_with_overall_decline = sum(
+        final_per_world[world] < first_per_world[world]
+        for world in set(first_per_world) & set(final_per_world)
+    )
+    final_dispersion = crossings[-1]["cross_world_dispersion"]
+    measured_aligns_more_tightly = (
+        final_dispersion["measured_recurrence_population_std"]
+        < final_dispersion["configured_rho_population_std"]
     )
     return {
         "scope": f"development worlds {worlds}; existing logs only",
@@ -207,6 +256,15 @@ def _summarize(rows: list[dict[str, float | int]]) -> dict[str, Any]:
         "h5a_amortization_prediction": {
             "prediction": "crossover decreases as lifetime length grows",
             "status": h5a_status,
+            "mean_crossover_monotonically_declines": monotonic_decline,
+            "mean_16_to_64_task_change": configured_values[-1] - configured_values[0],
+            "worlds_with_16_to_64_task_decline": worlds_with_overall_decline,
+            "worlds": len(worlds),
+            "note": (
+                "The mean drops from 16 to 32 tasks, then changes little and is "
+                "slightly higher at 64; this supports early amortization movement "
+                "but not the strict monotonic prediction."
+            ),
         },
         "h5b_coordinate_test": {
             "configured_rho_linear_fit": configured_fit,
@@ -214,9 +272,19 @@ def _summarize(rows: list[dict[str, float | int]]) -> dict[str, Any]:
             "measured_coordinate_is_more_linear": (
                 measured_fit["r_squared"] > configured_fit["r_squared"]
             ),
+            "measured_coordinate_aligns_world_crossings_more_tightly_at_64_tasks": (
+                measured_aligns_more_tightly
+            ),
+            "status": (
+                "supported"
+                if measured_fit["r_squared"] > configured_fit["r_squared"]
+                and measured_aligns_more_tightly
+                else "mixed"
+            ),
             "note": (
-                "Linearity is a compact elbow diagnostic on the six-point mean "
-                "curve; both coordinates and raw world curves remain reported."
+                "Measured recurrence smooths the six-point mean elbow, but does "
+                "not reduce 64-task cross-world crossing dispersion. Both "
+                "coordinates and raw world curves remain reported."
             ),
         },
     }
@@ -294,7 +362,7 @@ def plot_report(report: dict[str, Any], destination: Path) -> None:
     measured = [row["mean_curve_crossing"]["measured_residual_correlation"] for row in crossings]
     axes[1].plot(tasks, configured, marker="o", linewidth=2.3, label="Configured rho")
     axes[1].plot(tasks, measured, marker="s", linewidth=2.3, label="Measured recurrence")
-    axes[1].set_title("More tasks lower the reuse threshold")
+    axes[1].set_title("The threshold drops early, then plateaus")
     axes[1].set_xlabel("Lifetime tasks completed")
     axes[1].set_ylabel("Interpolated mean crossover")
     axes[1].set_xticks(tasks)
@@ -302,7 +370,7 @@ def plot_report(report: dict[str, Any], destination: Path) -> None:
     for axis in axes:
         axis.grid(axis="y", color="#dddddd", linewidth=0.7)
         axis.spines[["top", "right"]].set_visible(False)
-    figure.suptitle("Existing logs support an amortization-dependent crossover")
+    figure.suptitle("Existing logs reveal early amortization and a smoother recurrence coordinate")
     destination.parent.mkdir(parents=True, exist_ok=True)
     figure.savefig(destination, dpi=180)
     plt.close(figure)

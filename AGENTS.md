@@ -374,6 +374,19 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   improves Continuous novel NMSE 3/3 and Dense-C 2/3. Treat this as a
   development sensitivity: batch 8 materially increases sample reuse and
   training compute, so it is not merely a vectorization change.
+- Truncating the existing rho lifetimes gives mean configured-rho crossovers of
+  0.869 after 16 tasks, 0.822 after 32, and 0.826 after 64. The 16-to-64
+  crossover declines in 8/10 worlds, but the mean is not monotone because it
+  edges upward from 32 to 64 tasks. H5a is partially, not fully, supported.
+- Re-coordinating the 64-task mean effect curve by measured residual-function
+  correlation makes it much more nearly linear: linear-fit R-squared rises from
+  0.646 in configured rho to 0.974 in measured recurrence, and residual RMSE
+  falls from 1,329 to 361 log-loss units. Much of the apparent elbow is a
+  coordinate artifact.
+- H5b's tighter-alignment prediction fails even though the mean curve smooths.
+  At 64 tasks, per-world crossover population SD is 0.0173 in configured rho
+  versus 0.0381 in measured recurrence (ranges 0.0482 versus 0.1308). Report
+  the coordinate result as mixed, not as a general collapse onto one frontier.
 
 # Standing scientific doubts
 
@@ -386,6 +399,9 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   batch of one current plus one replay example. The batch-8 sensitivity preserves
   the main result but benefits Dense-C more; the confirmation protocol and any
   symmetric retuning must be frozen explicitly before unsealing worlds 100–129.
+- The free rho*(N) result does not establish a monotone economic law: the large
+  16-to-32 shift plateaus by 64 tasks. The measured-recurrence coordinate
+  smooths the mean curve but worsens raw cross-world crossing dispersion.
 - Dense-C matches inference multiply-adds only. Continuous training backpropagates
   through every basis operator and uses materially more training compute.
 - The initial n=3 bootstrap intervals are not inferentially meaningful. Public

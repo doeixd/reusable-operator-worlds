@@ -226,6 +226,20 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   training compute.
 - The machine report is `reports/batch_sizes/batch-sizes.json`.
 
+# Rho bridge analyses complete
+
+- Reconstructed cumulative Dense-C-minus-Continuous effects at 2,048, 4,096,
+  and 8,192 online examples from all 120 existing development rho logs, with
+  every final sum validated against the tracked ten-world rho report.
+- Mean configured-rho crossovers are 0.869, 0.822, and 0.826 after 16, 32, and
+  64 tasks. Eight of ten worlds decline from 16 to 64, but the mean is not
+  monotone, so H5a is only partially supported.
+- Measured recurrence makes the six-point mean effect curve much smoother
+  (`R²=0.974` versus `0.646`), but it does not align per-world crossings more
+  tightly. H5b is mixed rather than confirmed.
+- The validated report and visually inspected figure are under
+  `reports/rho_bridge`.
+
 # Order and replay robustness complete
 
 - Completed reverse order and replay ratios 0, 1, and 4 on all ten development
@@ -272,7 +286,6 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 - Freeze batch 2 versus batch 8 and any required symmetric retuning for
   confirmation.
-- Run the free measured-recurrence and truncated-lifetime bridge analyses.
 - Implement the shared-parent plus task-residual intermediate-reuse control.
 - Rehearse artifact generation and plotting from a clean checkout before opening
   the confirmatory seed gate.

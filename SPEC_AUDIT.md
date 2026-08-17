@@ -85,11 +85,10 @@ obligations below should be resolved or explicitly deferred.
 
 # Execution order
 
-1. Run the free measured-recurrence and truncated-lifetime bridge analyses.
-2. Implement the shared-parent plus residual control at intermediate reuse.
-3. Freeze batch protocol, tuning, and statistical summaries.
-4. Run a clean artifact/plotting rehearsal.
-5. Re-audit the gate before touching confirmatory worlds.
+1. Implement the shared-parent plus residual control at intermediate reuse.
+2. Freeze batch protocol, tuning, and statistical summaries.
+3. Run a clean artifact/plotting rehearsal.
+4. Re-audit the gate before touching confirmatory worlds.
 
 # Closed during this audit
 
@@ -124,3 +123,8 @@ obligations below should be resolved or explicitly deferred.
   novel-composition wins 3/3, although Dense-C's larger improvement narrows the
   architecture effect. The tracked result is
   `reports/batch_sizes/batch-sizes.json`.
+- The free measured-recurrence and truncated-lifetime bridge analyses are
+  complete across all ten development worlds. The reuse threshold drops from
+  16 to 32 tasks and then plateaus; measured recurrence smooths the mean effect
+  curve but does not tighten per-world crossover alignment. The tracked result
+  is `reports/rho_bridge/rho-bridge.json`.
