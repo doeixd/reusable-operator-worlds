@@ -74,6 +74,23 @@ hypernetwork_model:
   replay_ratio: 1.0
   seed: 6000
 
+shared_residual_model:
+  operator_slots: 8
+  operator_rank: 8
+  residual_rank: 2
+  task_steps: 3
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  residual_penalty: 0.0001
+  global_learning_rate: 0.003
+  task_learning_rate: 0.05
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 7000
+
 discrete_model:
   operator_slots: 12
   operator_rank: 8

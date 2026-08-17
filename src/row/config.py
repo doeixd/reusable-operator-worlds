@@ -153,6 +153,43 @@ class HypernetworkModelConfig:
 
 
 @dataclass(frozen=True)
+class SharedResidualModelConfig:
+    operator_slots: int = 8
+    operator_rank: int = 8
+    residual_rank: int = 2
+    task_steps: int = 3
+    operator_alpha_init: float = 0.2
+    learnable_alpha: bool = True
+    operator_activation: str = "tanh"
+    residual_penalty: float = 1e-4
+    global_learning_rate: float = 3e-3
+    task_learning_rate: float = 5e-2
+    weight_decay: float = 1e-4
+    updates_per_example: int = 1
+    replay_examples_per_task: int = 4
+    replay_ratio: float = 1.0
+    seed: int = 7000
+
+    def __post_init__(self) -> None:
+        dimensions = (
+            self.operator_slots,
+            self.operator_rank,
+            self.residual_rank,
+            self.task_steps,
+        )
+        if min(dimensions) <= 0 or self.residual_rank > 2:
+            raise ValueError("shared-residual dimensions are invalid")
+        if min(self.global_learning_rate, self.task_learning_rate) <= 0.0:
+            raise ValueError("shared-residual learning rates must be positive")
+        if self.residual_penalty < 0.0 or self.weight_decay < 0.0:
+            raise ValueError("shared-residual penalties must be nonnegative")
+        if self.updates_per_example <= 0 or self.replay_examples_per_task < 0:
+            raise ValueError("shared-residual update count or replay size is invalid")
+        if self.operator_alpha_init <= 0.0 or self.operator_activation not in {"tanh", "gelu"}:
+            raise ValueError("shared-residual operator initialization is invalid")
+
+
+@dataclass(frozen=True)
 class DiscreteModelConfig:
     operator_slots: int = 12
     operator_rank: int = 8
@@ -194,6 +231,7 @@ class ExperimentConfig:
     dense_model: DenseModelConfig
     continuous_model: ContinuousModelConfig
     hypernetwork_model: HypernetworkModelConfig
+    shared_residual_model: SharedResidualModelConfig
     discrete_model: DiscreteModelConfig
     evaluation: EvaluationConfig
     output_directory: Path
@@ -214,6 +252,9 @@ def load_config(path: str | Path) -> ExperimentConfig:
     dense_raw = _require_mapping(raw.get("dense_model", {}), "dense_model")
     continuous_raw = _require_mapping(raw.get("continuous_model", {}), "continuous_model")
     hypernetwork_raw = _require_mapping(raw.get("hypernetwork_model", {}), "hypernetwork_model")
+    shared_residual_raw = _require_mapping(
+        raw.get("shared_residual_model", {}), "shared_residual_model"
+    )
     discrete_raw = _require_mapping(raw.get("discrete_model", {}), "discrete_model")
     eval_raw = _require_mapping(raw.get("evaluation", {}), "evaluation")
     output_raw = _require_mapping(raw.get("output", {}), "output")
@@ -294,6 +335,23 @@ def load_config(path: str | Path) -> ExperimentConfig:
         replay_ratio=float(hypernetwork_raw.get("replay_ratio", 1.0)),
         seed=int(hypernetwork_raw.get("seed", 6000)),
     )
+    shared_residual_model = SharedResidualModelConfig(
+        operator_slots=int(shared_residual_raw.get("operator_slots", 8)),
+        operator_rank=int(shared_residual_raw.get("operator_rank", 8)),
+        residual_rank=int(shared_residual_raw.get("residual_rank", 2)),
+        task_steps=int(shared_residual_raw.get("task_steps", 3)),
+        operator_alpha_init=float(shared_residual_raw.get("operator_alpha_init", 0.2)),
+        learnable_alpha=bool(shared_residual_raw.get("learnable_alpha", True)),
+        operator_activation=str(shared_residual_raw.get("operator_activation", "tanh")),
+        residual_penalty=float(shared_residual_raw.get("residual_penalty", 1e-4)),
+        global_learning_rate=float(shared_residual_raw.get("global_learning_rate", 3e-3)),
+        task_learning_rate=float(shared_residual_raw.get("task_learning_rate", 5e-2)),
+        weight_decay=float(shared_residual_raw.get("weight_decay", 1e-4)),
+        updates_per_example=int(shared_residual_raw.get("updates_per_example", 1)),
+        replay_examples_per_task=int(shared_residual_raw.get("replay_examples_per_task", 4)),
+        replay_ratio=float(shared_residual_raw.get("replay_ratio", 1.0)),
+        seed=int(shared_residual_raw.get("seed", 7000)),
+    )
     discrete_model = DiscreteModelConfig(
         operator_slots=int(discrete_raw.get("operator_slots", 12)),
         operator_rank=int(discrete_raw.get("operator_rank", 8)),
@@ -331,6 +389,7 @@ def load_config(path: str | Path) -> ExperimentConfig:
         dense_model=dense_model,
         continuous_model=continuous_model,
         hypernetwork_model=hypernetwork_model,
+        shared_residual_model=shared_residual_model,
         discrete_model=discrete_model,
         evaluation=evaluation,
         output_directory=output_directory,

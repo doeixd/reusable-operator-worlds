@@ -5,6 +5,7 @@ from row.models.learned_models import (
     DenseLearner,
     DiscreteLibraryLearner,
     HypernetworkLearner,
+    SharedParentResidualLearner,
 )
 from row.models.numpy_mlp import ScratchResidualMLP
 from row.models.torch_oracle import LearnedOperator, OracleCompositor
@@ -14,6 +15,7 @@ __all__ = [
     "DenseLearner",
     "DiscreteLibraryLearner",
     "HypernetworkLearner",
+    "SharedParentResidualLearner",
     "LearnedOperator",
     "OracleCompositor",
     "ScratchResidualMLP",

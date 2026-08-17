@@ -26,15 +26,19 @@ from row.models import (
     DenseLearner,
     DiscreteLibraryLearner,
     HypernetworkLearner,
+    SharedParentResidualLearner,
 )
 from row.provenance import current_git_commit, write_fingerprint
 from row.world import Program, Task, World
 
-ModelKind = Literal["dense", "continuous", "hypernetwork", "discrete"]
+ModelKind = Literal[
+    "dense", "continuous", "hypernetwork", "shared_residual", "discrete"
+]
 Learner = (
     DenseLearner
     | ContinuousBasisLearner
     | HypernetworkLearner
+    | SharedParentResidualLearner
     | DiscreteLibraryLearner
 )
 
@@ -142,6 +146,19 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "inference_multiply_adds_per_sample": generation + operators,
             "note": "counts per-prediction operator generation; backward and optimizer operations excluded",
         }
+    if kind == "shared_residual":
+        selected = config.shared_residual_model
+        parent = selected.task_steps * selected.operator_slots * (
+            d * selected.operator_rank + selected.operator_rank * d
+        ) + selected.task_steps * selected.operator_slots * d
+        residual = selected.task_steps * (
+            d * selected.residual_rank + selected.residual_rank * d
+        )
+        return {
+            "training_forward_multiply_adds_per_sample": parent + residual,
+            "inference_multiply_adds_per_sample": parent + residual,
+            "note": "rank-limited task residual included; backward and optimizer operations excluded",
+        }
     selected = config.discrete_model
     all_slots = selected.task_steps * selected.operator_slots * (
         d * selected.operator_rank + selected.operator_rank * d
@@ -190,6 +207,19 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             learnable_alpha=model_config.learnable_alpha,
             activation=model_config.operator_activation,
         )
+    if kind == "shared_residual":
+        model_config = config.shared_residual_model
+        return SharedParentResidualLearner(
+            d=config.world.state_dim,
+            operator_slots=model_config.operator_slots,
+            operator_rank=model_config.operator_rank,
+            residual_rank=model_config.residual_rank,
+            task_steps=model_config.task_steps,
+            alpha=model_config.operator_alpha_init,
+            seed=model_config.seed,
+            learnable_alpha=model_config.learnable_alpha,
+            activation=model_config.operator_activation,
+        )
     model_config = config.discrete_model
     return DiscreteLibraryLearner(
         d=config.world.state_dim,
@@ -212,6 +242,7 @@ def _training_values(
         "dense": config.dense_model,
         "continuous": config.continuous_model,
         "hypernetwork": config.hypernetwork_model,
+        "shared_residual": config.shared_residual_model,
         "discrete": config.discrete_model,
     }[kind]
     return (
@@ -367,6 +398,11 @@ def run(
                 optimizer.zero_grad(set_to_none=True)
                 prediction = model.forward_tasks(_tensor(np.stack(batch_x)), task_ids)
                 loss = torch.nn.functional.mse_loss(prediction, _tensor(np.stack(batch_y)))
+                if isinstance(model, SharedParentResidualLearner):
+                    loss = loss + (
+                        config.shared_residual_model.residual_penalty
+                        * model.storage_penalty(task_ids)
+                    )
                 loss.backward()
                 optimizer.step()
 
@@ -441,6 +477,22 @@ def run(
         summary["routing"] = model.routing_diagnostics()
         if config.evaluation.extended_diagnostics:
             summary["functional_recovery"] = _functional_recovery(model.basis, world, config)
+    elif isinstance(model, SharedParentResidualLearner):
+        summary["routing"] = model.routing_diagnostics()
+        if config.evaluation.extended_diagnostics:
+            summary["functional_recovery"] = _functional_recovery(
+                model.basis, world, config
+            )
+        diagnostic_generator = np.random.default_rng(
+            np.random.SeedSequence([config.world.seed, 98])
+        )
+        summary["residual_diagnostics"] = model.residual_diagnostics(
+            _tensor(
+                diagnostic_generator.normal(
+                    size=(2048, config.world.state_dim)
+                )
+            )
+        )
     elif isinstance(model, DiscreteLibraryLearner):
         summary["routing"] = model.routing_diagnostics()
         if config.evaluation.extended_diagnostics:
@@ -636,6 +688,11 @@ def _adapt_novel_composition(
         optimizer.zero_grad(set_to_none=True)
         prediction = model(_tensor(train_x[n_seen : n_seen + 1]), novel_id)
         loss = torch.nn.functional.mse_loss(prediction, _tensor(train_y[n_seen : n_seen + 1]))
+        if isinstance(model, SharedParentResidualLearner):
+            loss = loss + (
+                config.shared_residual_model.residual_penalty
+                * model.storage_penalty([novel_id])
+            )
         loss.backward()
         optimizer.step()
     return {"teacher_route": list(route), "nmse_by_support": curve}
@@ -762,6 +819,7 @@ def resolved_learned_config(
         "dense": config.dense_model,
         "continuous": config.continuous_model,
         "hypernetwork": config.hypernetwork_model,
+        "shared_residual": config.shared_residual_model,
         "discrete": config.discrete_model,
     }[kind]
     resolved: dict[str, object] = {
@@ -795,6 +853,7 @@ def _write_artifacts(
         "dense": config.dense_model,
         "continuous": config.continuous_model,
         "hypernetwork": config.hypernetwork_model,
+        "shared_residual": config.shared_residual_model,
         "discrete": config.discrete_model,
     }[kind]
     resolved = resolved_learned_config(
@@ -839,7 +898,9 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("configs/v1.yaml"))
     parser.add_argument(
-        "--model", choices=("dense", "continuous", "hypernetwork", "discrete"), required=True
+        "--model",
+        choices=("dense", "continuous", "hypernetwork", "shared_residual", "discrete"),
+        required=True,
     )
     parser.add_argument("--world-seed", type=int)
     parser.add_argument("--reuse-rho", type=float)
@@ -856,6 +917,7 @@ def main() -> None:
     parser.add_argument("--hypernetwork-hidden-dim", type=int)
     parser.add_argument("--operator-activation", choices=("tanh", "gelu"))
     parser.add_argument("--operator-alpha-init", type=float)
+    parser.add_argument("--residual-penalty", type=float)
     parser.add_argument("--include-identity", action="store_true")
     parser.add_argument("--temperature-schedule", choices=("global", "per_task"))
     parser.add_argument("--order", choices=("forward", "reverse"), default="forward")
@@ -889,6 +951,7 @@ def main() -> None:
         "dense": config.dense_model,
         "continuous": config.continuous_model,
         "hypernetwork": config.hypernetwork_model,
+        "shared_residual": config.shared_residual_model,
         "discrete": config.discrete_model,
     }[args.model]
     selected = replace(
@@ -931,14 +994,19 @@ def main() -> None:
         ),
         **(
             {"operator_activation": args.operator_activation}
-            if args.model in {"continuous", "hypernetwork", "discrete"}
+            if args.model in {"continuous", "hypernetwork", "shared_residual", "discrete"}
             and args.operator_activation is not None
             else {}
         ),
         **(
             {"operator_alpha_init": args.operator_alpha_init}
-            if args.model in {"continuous", "hypernetwork", "discrete"}
+            if args.model in {"continuous", "hypernetwork", "shared_residual", "discrete"}
             and args.operator_alpha_init is not None
+            else {}
+        ),
+        **(
+            {"residual_penalty": args.residual_penalty}
+            if args.model == "shared_residual" and args.residual_penalty is not None
             else {}
         ),
         **(
@@ -960,6 +1028,11 @@ def main() -> None:
         ),
         hypernetwork_model=(
             selected if args.model == "hypernetwork" else config.hypernetwork_model
+        ),
+        shared_residual_model=(
+            selected
+            if args.model == "shared_residual"
+            else config.shared_residual_model
         ),
         discrete_model=selected if args.model == "discrete" else config.discrete_model,
     )
