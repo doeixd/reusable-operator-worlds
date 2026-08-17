@@ -31,6 +31,12 @@ At 8, 16, 32, and 64 completed tasks, freeze shared parameters and adapt fresh
 task state on four fixed unseen compositions. Report NMSE after 0, 1, 2, 4, 8,
 16, and 32 examples. The primary checkpoint statistic is mean 32-shot NMSE.
 
+The frozen checkpoint sweep is complete on development worlds 0–9. Continuous
+improves from mean 32-shot NMSE 0.02282 after 8 tasks to 0.00343 after 64 and
+wins all paired worlds from checkpoint 32 onward. Dense-C improves from 0.02300
+to 0.00645. The tracked report is
+`reports/checkpoints_worlds_0_9/checkpoint-replication.json`.
+
 # Development rho gate result
 
 The frozen six-point causal sweep is complete on development worlds 0–9. All ten

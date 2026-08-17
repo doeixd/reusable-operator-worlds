@@ -1,0 +1,524 @@
+{
+  "scope": "exact-reuse development worlds [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; descriptive",
+  "primary_metric": "mean novel-composition NMSE after 32 code-only examples",
+  "records": [
+    {
+      "world_seed": 0,
+      "model": "continuous",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.03063598639808321,
+        "16": 0.013169159567343982,
+        "32": 0.005904526926755517,
+        "64": 0.003907750875727672
+      },
+      "cumulative_prequential_gaussian_log_loss": -170967.3389814046
+    },
+    {
+      "world_seed": 0,
+      "model": "dense",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.027609457951598217,
+        "16": 0.017866723101880234,
+        "32": 0.009996999315032125,
+        "64": 0.00714108600847407
+      },
+      "cumulative_prequential_gaussian_log_loss": -166521.15543386998
+    },
+    {
+      "world_seed": 1,
+      "model": "continuous",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.015763409290437954,
+        "16": 0.02212852889706364,
+        "32": 0.007160833794056487,
+        "64": 0.0027866116098005664
+      },
+      "cumulative_prequential_gaussian_log_loss": -173246.47300673052
+    },
+    {
+      "world_seed": 1,
+      "model": "dense",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.015477758176546303,
+        "16": 0.0196056195428835,
+        "32": 0.009065406130985793,
+        "64": 0.004946101014739828
+      },
+      "cumulative_prequential_gaussian_log_loss": -170603.51524478802
+    },
+    {
+      "world_seed": 2,
+      "model": "continuous",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.027709258512811134,
+        "16": 0.014108032192249126,
+        "32": 0.005708484281751042,
+        "64": 0.0029849371763124087
+      },
+      "cumulative_prequential_gaussian_log_loss": -172566.40306753948
+    },
+    {
+      "world_seed": 2,
+      "model": "dense",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.02470161280985697,
+        "16": 0.01714107061950582,
+        "32": 0.011123170239824835,
+        "64": 0.005040949498107702
+      },
+      "cumulative_prequential_gaussian_log_loss": -169178.7352341639
+    },
+    {
+      "world_seed": 3,
+      "model": "continuous",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.018853771636290595,
+        "16": 0.013406739266378562,
+        "32": 0.009699011837738917,
+        "64": 0.0036610718068283716
+      },
+      "cumulative_prequential_gaussian_log_loss": -171045.0725353339
+    },
+    {
+      "world_seed": 3,
+      "model": "dense",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.020560873681483967,
+        "16": 0.01273847173516119,
+        "32": 0.012501911460273022,
+        "64": 0.00567431165198088
+      },
+      "cumulative_prequential_gaussian_log_loss": -168491.3619654136
+    },
+    {
+      "world_seed": 4,
+      "model": "continuous",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.03493412466718015,
+        "16": 0.029512714241838385,
+        "32": 0.013351870472035688,
+        "64": 0.00541758926561554
+      },
+      "cumulative_prequential_gaussian_log_loss": -171441.52777421297
+    },
+    {
+      "world_seed": 4,
+      "model": "dense",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.035723518528053715,
+        "16": 0.031291508216870885,
+        "32": 0.020015849427294626,
+        "64": 0.012014191740507486
+      },
+      "cumulative_prequential_gaussian_log_loss": -167916.8224727266
+    },
+    {
+      "world_seed": 5,
+      "model": "continuous",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.02821784090120945,
+        "16": 0.012670436710786262,
+        "32": 0.00840578792540049,
+        "64": 0.003813832757742503
+      },
+      "cumulative_prequential_gaussian_log_loss": -171985.8653047288
+    },
+    {
+      "world_seed": 5,
+      "model": "dense",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.028064244805432105,
+        "16": 0.01859185607230479,
+        "32": 0.012091354854707482,
+        "64": 0.007541583159706898
+      },
+      "cumulative_prequential_gaussian_log_loss": -168400.4187296495
+    },
+    {
+      "world_seed": 6,
+      "model": "continuous",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.022524576562731765,
+        "16": 0.011097906625348292,
+        "32": 0.005896736399680445,
+        "64": 0.004369094318324031
+      },
+      "cumulative_prequential_gaussian_log_loss": -172288.43100615512
+    },
+    {
+      "world_seed": 6,
+      "model": "dense",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.021917087887300162,
+        "16": 0.014370458285023893,
+        "32": 0.009260295796476444,
+        "64": 0.006968069176606759
+      },
+      "cumulative_prequential_gaussian_log_loss": -169021.189343733
+    },
+    {
+      "world_seed": 7,
+      "model": "continuous",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.013711284857177179,
+        "16": 0.007173627835774385,
+        "32": 0.0054082515303656535,
+        "64": 0.0023301192563093876
+      },
+      "cumulative_prequential_gaussian_log_loss": -172175.52032978353
+    },
+    {
+      "world_seed": 7,
+      "model": "dense",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.017266852121324085,
+        "16": 0.010678956181394,
+        "32": 0.010720543660425035,
+        "64": 0.0049448052409459065
+      },
+      "cumulative_prequential_gaussian_log_loss": -168030.3054387451
+    },
+    {
+      "world_seed": 8,
+      "model": "continuous",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.0160810624351774,
+        "16": 0.006299473285927474,
+        "32": 0.00321210428017353,
+        "64": 0.0023307785925042184
+      },
+      "cumulative_prequential_gaussian_log_loss": -172530.75741167853
+    },
+    {
+      "world_seed": 8,
+      "model": "dense",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.019180256892984887,
+        "16": 0.011083536719137204,
+        "32": 0.007359033724548785,
+        "64": 0.004793106753166133
+      },
+      "cumulative_prequential_gaussian_log_loss": -167476.67078841646
+    },
+    {
+      "world_seed": 9,
+      "model": "continuous",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.019754643715776173,
+        "16": 0.010537402161369981,
+        "32": 0.003915928975325087,
+        "64": 0.0026980188482444043
+      },
+      "cumulative_prequential_gaussian_log_loss": -171824.33641366364
+    },
+    {
+      "world_seed": 9,
+      "model": "dense",
+      "checkpoint_32_shot_nmse": {
+        "8": 0.01947828374939326,
+        "16": 0.011782009042057163,
+        "32": 0.00770238142241685,
+        "64": 0.005461326190755364
+      },
+      "cumulative_prequential_gaussian_log_loss": -167447.13341831314
+    }
+  ],
+  "checkpoint_summaries": [
+    {
+      "tasks_completed": 8,
+      "mean_continuous_32_shot_nmse": 0.0228185958976875,
+      "mean_dense_c_32_shot_nmse": 0.022997994660397366,
+      "mean_dense_minus_continuous_32_shot_nmse": 0.00017939876270986634,
+      "continuous_wins": 4,
+      "worlds": 10,
+      "paired_world_effects": [
+        {
+          "world_seed": 0,
+          "dense_minus_continuous_32_shot_nmse": -0.003026528446484992
+        },
+        {
+          "world_seed": 1,
+          "dense_minus_continuous_32_shot_nmse": -0.00028565111389165093
+        },
+        {
+          "world_seed": 2,
+          "dense_minus_continuous_32_shot_nmse": -0.0030076457029541634
+        },
+        {
+          "world_seed": 3,
+          "dense_minus_continuous_32_shot_nmse": 0.0017071020451933719
+        },
+        {
+          "world_seed": 4,
+          "dense_minus_continuous_32_shot_nmse": 0.0007893938608735662
+        },
+        {
+          "world_seed": 5,
+          "dense_minus_continuous_32_shot_nmse": -0.0001535960957773433
+        },
+        {
+          "world_seed": 6,
+          "dense_minus_continuous_32_shot_nmse": -0.0006074886754316028
+        },
+        {
+          "world_seed": 7,
+          "dense_minus_continuous_32_shot_nmse": 0.0035555672641469065
+        },
+        {
+          "world_seed": 8,
+          "dense_minus_continuous_32_shot_nmse": 0.003099194457807486
+        },
+        {
+          "world_seed": 9,
+          "dense_minus_continuous_32_shot_nmse": -0.000276359966382915
+        }
+      ]
+    },
+    {
+      "tasks_completed": 16,
+      "mean_continuous_32_shot_nmse": 0.014010402078408011,
+      "mean_dense_c_32_shot_nmse": 0.016515020951621866,
+      "mean_dense_minus_continuous_32_shot_nmse": 0.002504618873213859,
+      "continuous_wins": 8,
+      "worlds": 10,
+      "paired_world_effects": [
+        {
+          "world_seed": 0,
+          "dense_minus_continuous_32_shot_nmse": 0.004697563534536252
+        },
+        {
+          "world_seed": 1,
+          "dense_minus_continuous_32_shot_nmse": -0.0025229093541801403
+        },
+        {
+          "world_seed": 2,
+          "dense_minus_continuous_32_shot_nmse": 0.0030330384272566936
+        },
+        {
+          "world_seed": 3,
+          "dense_minus_continuous_32_shot_nmse": -0.0006682675312173723
+        },
+        {
+          "world_seed": 4,
+          "dense_minus_continuous_32_shot_nmse": 0.0017787939750325
+        },
+        {
+          "world_seed": 5,
+          "dense_minus_continuous_32_shot_nmse": 0.005921419361518529
+        },
+        {
+          "world_seed": 6,
+          "dense_minus_continuous_32_shot_nmse": 0.003272551659675601
+        },
+        {
+          "world_seed": 7,
+          "dense_minus_continuous_32_shot_nmse": 0.0035053283456196157
+        },
+        {
+          "world_seed": 8,
+          "dense_minus_continuous_32_shot_nmse": 0.00478406343320973
+        },
+        {
+          "world_seed": 9,
+          "dense_minus_continuous_32_shot_nmse": 0.0012446068806871817
+        }
+      ]
+    },
+    {
+      "tasks_completed": 32,
+      "mean_continuous_32_shot_nmse": 0.006866353642328286,
+      "mean_dense_c_32_shot_nmse": 0.0109836946031985,
+      "mean_dense_minus_continuous_32_shot_nmse": 0.004117340960870214,
+      "continuous_wins": 10,
+      "worlds": 10,
+      "paired_world_effects": [
+        {
+          "world_seed": 0,
+          "dense_minus_continuous_32_shot_nmse": 0.004092472388276608
+        },
+        {
+          "world_seed": 1,
+          "dense_minus_continuous_32_shot_nmse": 0.0019045723369293058
+        },
+        {
+          "world_seed": 2,
+          "dense_minus_continuous_32_shot_nmse": 0.005414685958073793
+        },
+        {
+          "world_seed": 3,
+          "dense_minus_continuous_32_shot_nmse": 0.002802899622534105
+        },
+        {
+          "world_seed": 4,
+          "dense_minus_continuous_32_shot_nmse": 0.006663978955258937
+        },
+        {
+          "world_seed": 5,
+          "dense_minus_continuous_32_shot_nmse": 0.003685566929306992
+        },
+        {
+          "world_seed": 6,
+          "dense_minus_continuous_32_shot_nmse": 0.003363559396795999
+        },
+        {
+          "world_seed": 7,
+          "dense_minus_continuous_32_shot_nmse": 0.005312292130059381
+        },
+        {
+          "world_seed": 8,
+          "dense_minus_continuous_32_shot_nmse": 0.004146929444375254
+        },
+        {
+          "world_seed": 9,
+          "dense_minus_continuous_32_shot_nmse": 0.003786452447091763
+        }
+      ]
+    },
+    {
+      "tasks_completed": 64,
+      "mean_continuous_32_shot_nmse": 0.0034299804507409103,
+      "mean_dense_c_32_shot_nmse": 0.0064525530434991025,
+      "mean_dense_minus_continuous_32_shot_nmse": 0.003022572592758192,
+      "continuous_wins": 10,
+      "worlds": 10,
+      "paired_world_effects": [
+        {
+          "world_seed": 0,
+          "dense_minus_continuous_32_shot_nmse": 0.0032333351327463985
+        },
+        {
+          "world_seed": 1,
+          "dense_minus_continuous_32_shot_nmse": 0.0021594894049392615
+        },
+        {
+          "world_seed": 2,
+          "dense_minus_continuous_32_shot_nmse": 0.0020560123217952934
+        },
+        {
+          "world_seed": 3,
+          "dense_minus_continuous_32_shot_nmse": 0.0020132398451525087
+        },
+        {
+          "world_seed": 4,
+          "dense_minus_continuous_32_shot_nmse": 0.006596602474891945
+        },
+        {
+          "world_seed": 5,
+          "dense_minus_continuous_32_shot_nmse": 0.003727750401964395
+        },
+        {
+          "world_seed": 6,
+          "dense_minus_continuous_32_shot_nmse": 0.0025989748582827283
+        },
+        {
+          "world_seed": 7,
+          "dense_minus_continuous_32_shot_nmse": 0.002614685984636519
+        },
+        {
+          "world_seed": 8,
+          "dense_minus_continuous_32_shot_nmse": 0.0024623281606619145
+        },
+        {
+          "world_seed": 9,
+          "dense_minus_continuous_32_shot_nmse": 0.0027633073425109593
+        }
+      ]
+    }
+  ],
+  "learning_gain": {
+    "continuous": {
+      "mean_8_to_64_ratio": 6.7037705042653455,
+      "mean_absolute_reduction": 0.019388615446946592,
+      "improves_in_all_worlds": true,
+      "per_world_ratio": [
+        {
+          "world_seed": 0,
+          "ratio": 7.839800277027233
+        },
+        {
+          "world_seed": 1,
+          "ratio": 5.656837585473965
+        },
+        {
+          "world_seed": 2,
+          "ratio": 9.283029047547041
+        },
+        {
+          "world_seed": 3,
+          "ratio": 5.1497956421193045
+        },
+        {
+          "world_seed": 4,
+          "ratio": 6.448278552399814
+        },
+        {
+          "world_seed": 5,
+          "ratio": 7.398814445631919
+        },
+        {
+          "world_seed": 6,
+          "ratio": 5.155433808847622
+        },
+        {
+          "world_seed": 7,
+          "ratio": 5.884370432994108
+        },
+        {
+          "world_seed": 8,
+          "ratio": 6.899438019078295
+        },
+        {
+          "world_seed": 9,
+          "ratio": 7.321907231534161
+        }
+      ]
+    },
+    "dense": {
+      "mean_8_to_64_ratio": 3.641946562007662,
+      "mean_absolute_reduction": 0.016545441616898266,
+      "improves_in_all_worlds": true,
+      "per_world_ratio": [
+        {
+          "world_seed": 0,
+          "ratio": 3.8662827921180427
+        },
+        {
+          "world_seed": 1,
+          "ratio": 3.129284689176623
+        },
+        {
+          "world_seed": 2,
+          "ratio": 4.900190493701552
+        },
+        {
+          "world_seed": 3,
+          "ratio": 3.6235009535132328
+        },
+        {
+          "world_seed": 4,
+          "ratio": 2.973443349302226
+        },
+        {
+          "world_seed": 5,
+          "ratio": 3.7212670351993857
+        },
+        {
+          "world_seed": 6,
+          "ratio": 3.1453602614739147
+        },
+        {
+          "world_seed": 7,
+          "ratio": 3.491917533646089
+        },
+        {
+          "world_seed": 8,
+          "ratio": 4.001633571026805
+        },
+        {
+          "world_seed": 9,
+          "ratio": 3.5665849409187533
+        }
+      ]
+    }
+  }
+}

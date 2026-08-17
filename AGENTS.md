@@ -129,6 +129,15 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 - On exact-reuse world 0, Continuous mean 32-shot novel NMSE improved from 0.0298
   after 8 tasks to 0.00467 after 64; Dense-C improved from 0.0367 to 0.0159.
   This directly supports progressive learning-to-learn, beyond total loss alone.
+- The current learnable-alpha checkpoint protocol replicates on all development
+  worlds 0–9 using four fixed novel compositions per checkpoint. Mean Continuous
+  versus Dense-C 32-shot NMSE is 0.02282/0.02300 after 8 tasks,
+  0.01401/0.01652 after 16, 0.00687/0.01098 after 32, and 0.00343/0.00645 after
+  64. Continuous wins 4/10, 8/10, 10/10, and 10/10 paired worlds, respectively.
+- Both models improve from task 8 to 64 in every development world, but
+  Continuous's mean per-world gain is 6.70x (range 5.15–9.28) versus Dense-C's
+  3.64x (range 2.97–4.90). The increasing paired advantage supports a stronger
+  learning-to-learn interpretation rather than a static model-quality offset.
 - Call the density-based metric cumulative prequential Gaussian log loss. A
   fixed target precision of 1/256 adds the common density-to-mass term for a
   defensible quantized-target coding interpretation without changing model

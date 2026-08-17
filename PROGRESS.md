@@ -144,17 +144,25 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - The full report and visually checked plot are under `reports/rho_worlds_0_9`.
   Continuous's novel-transfer advantage is reliable only at exact reuse, so the
   transfer-first secondary hypothesis is closed as unsupported.
+- Replicated current learnable-alpha checkpoint curves on all ten development
+  worlds. Continuous moves from 4/10 paired wins after 8 lifetime tasks to 8/10
+  after 16 and 10/10 after 32 and 64.
+- Continuous's per-world 8-to-64 fresh-composition gain averages 6.70x versus
+  Dense-C's 3.64x; both improve in every world. The machine report and checked
+  figure are under `reports/checkpoints_worlds_0_9`.
 
 # In progress
 
-- Replicate checkpoint learning-to-learn curves across development worlds with
-  the frozen exact-reuse configurations.
+- Implement and evaluate the generic low-rank hypernetwork and dense
+  24-dimensional task-code controls now that the causal and checkpoint sweeps
+  are frozen.
 
 # Next
 
-- Freeze checkpoint analysis after replicated exact-reuse development curves.
 - Implement the generic low-rank hypernetwork and dense 24-dimensional task-code
   controls after the causal sweep.
+- Rehearse artifact generation and plotting from a clean checkout before opening
+  the confirmatory seed gate.
 
 # Decisions
 
