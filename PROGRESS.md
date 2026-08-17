@@ -162,8 +162,17 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   shared scalars and 7,296 counted forward multiply-adds are near the Continuous
   control. Symmetric development tuning and paired evaluation remain in
   progress.
-- Evaluate the Dense-C 24-dimensional task-code control, then tune and replicate
-  both structural controls without opening confirmatory worlds.
+- Completed the six-setting hypernetwork stage-one grid on development worlds
+  0–2. Global/task LR `0.003/0.05` wins with mean log loss -170,246, ahead of
+  `0.001/0.05` at -167,821. The winner beats Dense-C 3/3 by a mean 1,478 units
+  but trails Continuous 3/3 by a mean 2,014; its mean novel 32-shot NMSE 0.00589
+  also trails both baselines.
+- Dense-24 is nearly identical to Dense-32 on world 0: -166,567 versus -166,521
+  log loss, with 32-shot NMSE 0.00576 versus 0.00583. Replication remains in
+  progress.
+- Revalidate the top two hypernetwork settings on development worlds 3–9 and
+  replicate Dense-24 across the development set without opening confirmatory
+  worlds.
 
 # Next
 

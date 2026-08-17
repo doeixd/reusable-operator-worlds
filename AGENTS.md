@@ -258,6 +258,16 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   `0.001/0.05` scored -165,031 cumulative Gaussian log loss, median final NMSE
   0.00472, and novel 32-shot NMSE 0.0051. Treat this only as an implementation
   check until the control receives symmetric development tuning.
+- Hypernetwork stage-one tuning on development worlds 0–2 selected global/task
+  LR `0.003/0.05` with mean Gaussian log loss -170,246; `0.001/0.05` was second
+  at -167,821. The selected hypernetwork beat Dense-C in all three paired worlds
+  by a mean 1,478 log-loss units but lost to Continuous in all three by a mean
+  2,014. Its mean novel 32-shot NMSE was 0.00589, worse than current Continuous
+  (0.00238) and Dense-C (0.00486) on the same worlds.
+- Dense-C with its task embedding reduced from 32 to 24 dimensions has 5,520
+  shared scalars and the same 1,536 retained task scalars as Continuous and the
+  hypernetwork. On world 0 it scored -166,567 versus -166,521 for Dense-32, a
+  negligible 46-unit difference; replicate before closing this sensitivity.
 
 # Standing scientific doubts
 
