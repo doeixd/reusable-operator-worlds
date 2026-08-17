@@ -166,6 +166,16 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   (measured residual correlation 0.064), Dense-C beats Continuous by 2,159 total
   Gaussian-log-loss units; at rho 0.75 (correlation 0.317), it wins by 1,615.
   Continuous already has slightly better 32-shot novel adaptation at both points.
+- The complete leak-free seed-0 curve reverses between `rho=0.75` and `rho=0.9`.
+  Dense-C-minus-Continuous cumulative-loss differences are -2,390, -2,280,
+  -2,159, -1,615, +2,371, and +4,446 at configured rho 0, 0.25, 0.5,
+  0.75, 0.9, and 1.0. Linear interpolation gives a descriptive crossing near
+  configured rho 0.811, corresponding to measured residual correlation 0.454.
+  This is a one-world development diagnostic, not a population estimate.
+- Measured functional recurrence is strongly nonlinear in configured `rho` after
+  spectral renormalization: the six seed-0 correlations are approximately
+  -0.001, 0.003, 0.064, 0.317, 0.654, and 1.0. Plot and model effects against
+  both the intervention and this measured explanatory variable.
 - Report total, per-online-example, and per-target-scalar Gaussian log loss.
   Compute accounting distinguishes training-forward all-slot evaluation from
   hardened inference; it excludes backward and optimizer operations.
@@ -192,3 +202,6 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   population claim.
 - Confirmatory worlds 100–129 remain sealed. Do not inspect them until these
   doubts and the development `rho` curve are resolved.
+- The apparent seed-0 crossover must be replicated across development worlds
+  before choosing a frozen confirmatory grid or interpreting 0.811 as a phase
+  boundary.

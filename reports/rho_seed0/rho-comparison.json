@@ -1,0 +1,83 @@
+{
+  "scope": "development world 0; descriptive, not confirmatory",
+  "sign_convention": "positive Dense-minus-Continuous advantage means Continuous has lower cumulative Gaussian log loss",
+  "points": [
+    {
+      "configured_rho": 0.0,
+      "measured_residual_correlation": -0.0006476644309042104,
+      "continuous_prequential_gaussian_log_loss": -141523.1194436077,
+      "dense_c_prequential_gaussian_log_loss": -143913.57112291985,
+      "dense_minus_continuous_prequential_advantage": -2390.4516793121584,
+      "continuous_novel_32_shot_nmse": 0.03296464490975356,
+      "dense_c_novel_32_shot_nmse": 0.02945630807121066,
+      "dense_minus_continuous_novel_32_shot_advantage": -0.003508336838542899,
+      "continuous_final_median_nmse": 0.017693862033468948,
+      "dense_c_final_median_nmse": 0.017401406145310536
+    },
+    {
+      "configured_rho": 0.25,
+      "measured_residual_correlation": 0.0033108035071959777,
+      "continuous_prequential_gaussian_log_loss": -141663.96988066778,
+      "dense_c_prequential_gaussian_log_loss": -143944.25965394647,
+      "dense_minus_continuous_prequential_advantage": -2280.289773278695,
+      "continuous_novel_32_shot_nmse": 0.029783223385068832,
+      "dense_c_novel_32_shot_nmse": 0.03279969359598051,
+      "dense_minus_continuous_novel_32_shot_advantage": 0.0030164702109116807,
+      "continuous_final_median_nmse": 0.018100353903733952,
+      "dense_c_final_median_nmse": 0.017569734031279247
+    },
+    {
+      "configured_rho": 0.5,
+      "measured_residual_correlation": 0.06379609482714448,
+      "continuous_prequential_gaussian_log_loss": -142160.47347281952,
+      "dense_c_prequential_gaussian_log_loss": -144319.83824880546,
+      "dense_minus_continuous_prequential_advantage": -2159.364775985945,
+      "continuous_novel_32_shot_nmse": 0.02852835290539784,
+      "dense_c_novel_32_shot_nmse": 0.03037774835071965,
+      "dense_minus_continuous_novel_32_shot_advantage": 0.0018493954453218109,
+      "continuous_final_median_nmse": 0.018644302780262408,
+      "dense_c_final_median_nmse": 0.01649281139022738
+    },
+    {
+      "configured_rho": 0.75,
+      "measured_residual_correlation": 0.3169923870730336,
+      "continuous_prequential_gaussian_log_loss": -147307.7700264807,
+      "dense_c_prequential_gaussian_log_loss": -148923.0719107003,
+      "dense_minus_continuous_prequential_advantage": -1615.3018842196034,
+      "continuous_novel_32_shot_nmse": 0.022831984733546692,
+      "dense_c_novel_32_shot_nmse": 0.0236398643611505,
+      "dense_minus_continuous_novel_32_shot_advantage": 0.0008078796276038067,
+      "continuous_final_median_nmse": 0.014636261780741282,
+      "dense_c_final_median_nmse": 0.014194709485141371
+    },
+    {
+      "configured_rho": 0.9,
+      "measured_residual_correlation": 0.6539145667002604,
+      "continuous_prequential_gaussian_log_loss": -159628.2563285807,
+      "dense_c_prequential_gaussian_log_loss": -157257.66271475024,
+      "dense_minus_continuous_prequential_advantage": 2370.5936138304533,
+      "continuous_novel_32_shot_nmse": 0.013946223631365415,
+      "dense_c_novel_32_shot_nmse": 0.015527283065091674,
+      "dense_minus_continuous_novel_32_shot_advantage": 0.001581059433726259,
+      "continuous_final_median_nmse": 0.007379569560584673,
+      "dense_c_final_median_nmse": 0.009571787775402619
+    },
+    {
+      "configured_rho": 1.0,
+      "measured_residual_correlation": 1.0,
+      "continuous_prequential_gaussian_log_loss": -170967.25113816618,
+      "dense_c_prequential_gaussian_log_loss": -166521.15543386998,
+      "dense_minus_continuous_prequential_advantage": 4446.095704296196,
+      "continuous_novel_32_shot_nmse": 0.003011121917098666,
+      "dense_c_novel_32_shot_nmse": 0.005827906173951413,
+      "dense_minus_continuous_novel_32_shot_advantage": 0.002816784256852747,
+      "continuous_final_median_nmse": 0.002006661819900544,
+      "dense_c_final_median_nmse": 0.005427226921734771
+    }
+  ],
+  "linear_interpolated_zero_crossing": {
+    "configured_rho": 0.8107881673645168,
+    "measured_residual_correlation": 0.4535315993663511,
+    "note": "descriptive interpolation between adjacent seed-0 points"
+  }
+}

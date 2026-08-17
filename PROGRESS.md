@@ -105,18 +105,23 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Sparse seed-0 `rho` points show Dense-C wins total online loss by 2,159 at
   `rho=0.5` and 1,615 at `rho=0.75`; measured residual correlations are 0.064
   and 0.317. Continuous has slightly better novel 32-shot adaptation at both.
+- Completed the six-point leak-free seed-0 recurrence curve. Dense-C wins at rho
+  0, 0.25, 0.5, and 0.75; Continuous wins at 0.9 and 1.0. The paired cumulative
+  loss effect crosses zero at a descriptively interpolated rho 0.811, or measured
+  residual-function correlation 0.454.
+- Added a validated machine-readable recurrence comparison and a visually checked
+  two-panel crossover plot under `reports/rho_seed0`.
 
 # In progress
 
-- Run sparse `rho=0.5` and `rho=0.75` seed-0 controls using the leak-free learner
-- Complete the leak-free seed-0 curve at `rho=0`, `0.25`, and `0.9`, then plot
-  effect against measured functional recurrence.
+- Revalidate the two stage-one optimizer finalists per model under the current
+  learnable-alpha architecture on development worlds 3–9.
 
 # Next
 
-- Add model-comparison plots for learning curves, cumulative prequential loss,
-  novel adaptation, and functional operator distance across replicated worlds.
-- Run the six-point `rho` sweep with frozen development configurations.
+- Freeze the revalidated development configuration and replicate the six-point
+  `rho` sweep across development worlds with paired world deltas.
+- Replicate checkpoint learning-to-learn curves across development worlds.
 - Implement the generic low-rank hypernetwork and dense 24-dimensional task-code
   controls after the causal sweep.
 
