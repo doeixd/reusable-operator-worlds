@@ -353,6 +353,14 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   tasks their mean NMSEs are 0.00456 and 0.00484, with the learned route better
   in only 6/10 worlds. Teacher primitive identities and programs are used only
   in this post-hoc diagnostic and never enter training.
+- Opaque-ID reassignment is an exact invariant for selected Continuous and
+  Dense-C world-0 runs. With disjoint token sets and all task contents fixed,
+  every metric row and summary value is identical after removing the token, and
+  every final tensor is bitwise equal after mapping task-code keys to task index.
+- Scrambled-ID provenance must remain outside `WorldConfig`: adding a default
+  field there would invalidate all existing resolved-config fingerprints. The
+  optional scramble seed is recorded only in explicitly scrambled learned-run
+  configurations.
 
 # Standing scientific doubts
 

@@ -1,0 +1,36 @@
+{
+  "scope": "selected exact-reuse development runs; task token is the only intervention",
+  "scramble_seed": 1701,
+  "models": [
+    "continuous",
+    "dense"
+  ],
+  "worlds": [
+    0
+  ],
+  "records": [
+    {
+      "world_seed": 0,
+      "model": "continuous",
+      "opaque_id_sets_disjoint": true,
+      "hidden_programs_and_order_exact": true,
+      "metrics_rows_exact_after_removing_task_id": true,
+      "summary_exact_after_removing_scramble_seed": true,
+      "model_state_keys_exact_after_task_index_relabel": true,
+      "unequal_model_state_tensors": [],
+      "exact_invariance": true
+    },
+    {
+      "world_seed": 0,
+      "model": "dense",
+      "opaque_id_sets_disjoint": true,
+      "hidden_programs_and_order_exact": true,
+      "metrics_rows_exact_after_removing_task_id": true,
+      "summary_exact_after_removing_scramble_seed": true,
+      "model_state_keys_exact_after_task_index_relabel": true,
+      "unequal_model_state_tensors": [],
+      "exact_invariance": true
+    }
+  ],
+  "all_exact": true
+}

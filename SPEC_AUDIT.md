@@ -44,8 +44,6 @@ claim.
 
 # Open protocol obligations
 
-- Implement explicit scrambled-ID invariance rather than relying only on opaque,
-  independently generated IDs.
 - Resolve or ablate the effective update batch of one current plus one replay
   example, which differs from the suggested batch size eight.
 
@@ -83,7 +81,7 @@ obligations below should be resolved or explicitly deferred.
 
 # Execution order
 
-1. Resolve scrambled-ID and batch-size protocol checks.
+1. Resolve the effective batch-size protocol check.
 2. Run the free measured-recurrence and truncated-lifetime bridge analyses.
 3. Implement the shared-parent plus residual control at intermediate reuse.
 4. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
@@ -113,3 +111,7 @@ obligations below should be resolved or explicitly deferred.
   Continuous's learned mixtures also reveal that a forced one-slot teacher route
   is not an oracle upper bound. The tracked result is
   `reports/operator_checkpoints/operator-checkpoints.json`.
+- Explicit scrambled-ID invariance passes exactly for selected Continuous and
+  Dense-C world-0 runs. Reassigned IDs are disjoint, while normalized metric
+  rows, summaries, and final tensors are identical. The tracked result is
+  `reports/scrambled_ids/scrambled-ids.json`.

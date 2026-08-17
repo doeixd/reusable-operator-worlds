@@ -154,9 +154,8 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 # In progress
 
 - Completed a line-by-line V1 obligation audit in `SPEC_AUDIT.md`. The
-  confirmatory gate remains closed while scrambled-ID and batch-size checks,
-  shared-parent residuals, statistical freezing, and clean workflow rehearsal
-  remain open.
+  confirmatory gate remains closed while the batch-size check, shared-parent
+  residuals, statistical freezing, and clean workflow rehearsal remain open.
 
 # Two-initialization pilot complete
 
@@ -203,6 +202,16 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - The validated report and visually inspected figure are under
   `reports/operator_checkpoints`.
 
+# Scrambled-ID validity check complete
+
+- Added deterministic reassignment to an independent, disjoint opaque task-token
+  namespace without changing programs, task order, examples, evaluation arrays,
+  replay, model seeds, or optimizer settings.
+- Continuous and Dense-C world-0 canonical/scrambled pairs have exactly equal
+  metric rows and summaries after removing token labels. Their final shared and
+  task-specific tensors are bitwise equal after task-index key normalization.
+- The machine-checked result is `reports/scrambled_ids/scrambled-ids.json`.
+
 # Order and replay robustness complete
 
 - Completed reverse order and replay ratios 0, 1, and 4 on all ten development
@@ -247,7 +256,7 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 # Next
 
-- Resolve scrambled-ID invariance and the effective batch-size-two protocol.
+- Resolve the effective batch-size-two protocol.
 - Run the free measured-recurrence and truncated-lifetime bridge analyses.
 - Implement the shared-parent plus task-residual intermediate-reuse control.
 - Rehearse artifact generation and plotting from a clean checkout before opening
