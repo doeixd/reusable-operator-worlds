@@ -42,6 +42,28 @@ class WorldTests(unittest.TestCase):
         self.assertIsInstance(task_id, str)
         self.assertEqual(train_x.shape, train_y.shape)
 
+    def test_scrambled_ids_preserve_all_task_contents_and_order(self) -> None:
+        world = World.generate(self.config)
+        scrambled = world.with_scrambled_task_ids(7)
+        self.assertTrue(
+            {task.task_id for task in world.tasks}.isdisjoint(
+                task.task_id for task in scrambled.tasks
+            )
+        )
+        self.assertEqual(
+            [task.program for task in world.tasks],
+            [task.program for task in scrambled.tasks],
+        )
+        for original, relabeled in zip(world.tasks, scrambled.tasks, strict=True):
+            self.assertIs(original.train_x, relabeled.train_x)
+            self.assertIs(original.train_y, relabeled.train_y)
+            self.assertIs(original.eval_x, relabeled.eval_x)
+            self.assertIs(original.eval_y, relabeled.eval_y)
+        self.assertEqual(
+            [task.task_id for task in scrambled.tasks],
+            [task.task_id for task in world.with_scrambled_task_ids(7).tasks],
+        )
+
     def test_too_many_tasks_is_rejected(self) -> None:
         with self.assertRaises(ValueError):
             WorldConfig(teacher_primitives=2, program_length=2, tasks=5)

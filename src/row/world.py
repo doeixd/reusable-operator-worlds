@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, replace
 from itertools import product
 import numpy as np
 from numpy.typing import NDArray
@@ -137,6 +137,22 @@ class World:
         task = self.tasks[index]
         return task.task_id, task.train_x, task.train_y
 
+    def with_scrambled_task_ids(self, scramble_seed: int) -> "World":
+        """Reassign independent opaque IDs without changing task contents or order."""
+        original_ids = {task.task_id for task in self.tasks}
+        task_ids = _draw_opaque_task_ids(
+            _rng(self.config.seed, 22, scramble_seed),
+            len(self.tasks),
+            forbidden=original_ids,
+        )
+        return replace(
+            self,
+            tasks=tuple(
+                replace(task, task_id=task_id)
+                for task, task_id in zip(self.tasks, task_ids, strict=True)
+            ),
+        )
+
     def library_for_task(self, task_index: int) -> tuple[Primitive, ...]:
         if 0 <= task_index < len(self.tasks):
             return self.tasks[task_index].teacher_library
@@ -208,14 +224,22 @@ def _sample_programs(config: WorldConfig) -> tuple[Program, ...]:
 
 
 def _opaque_task_ids(config: WorldConfig) -> tuple[str, ...]:
-    generator = _rng(config.seed, 21)
+    return _draw_opaque_task_ids(_rng(config.seed, 21), config.tasks)
+
+
+def _draw_opaque_task_ids(
+    generator: np.random.Generator,
+    count: int,
+    forbidden: set[str] | None = None,
+) -> tuple[str, ...]:
     values: list[str] = []
-    seen: set[str] = set()
-    while len(values) < config.tasks:
+    seen = set() if forbidden is None else set(forbidden)
+    while len(values) < count:
         value = generator.bytes(8).hex()
-        if value not in seen:
-            seen.add(value)
-            values.append(f"task_{value}")
+        task_id = f"task_{value}"
+        if task_id not in seen:
+            seen.add(task_id)
+            values.append(task_id)
     return tuple(values)
 
 

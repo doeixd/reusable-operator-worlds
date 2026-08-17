@@ -214,11 +214,18 @@ def _evaluate(model: Learner, task: Task) -> tuple[float, np.ndarray]:
     return nmse(prediction, task.eval_y), prediction
 
 
-def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> dict[str, object]:
+def run(
+    config: ExperimentConfig,
+    kind: ModelKind,
+    order: str = "forward",
+    task_id_scramble_seed: int | None = None,
+) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
     torch.set_num_threads(1)
     world = World.generate(config.world)
+    if task_id_scramble_seed is not None:
+        world = world.with_scrambled_task_ids(task_id_scramble_seed)
     model = _build_model(config, kind)
     global_lr, task_lr, weight_decay, update_count, replay_per_task, replay_ratio, seed = (
         _training_values(config, kind)
@@ -390,7 +397,18 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
         model, world, config, task_lr
     )
     summary["novel_composition_checkpoints"] = checkpoint_results
-    _write_artifacts(config, world, model, rows, summary, kind, order)
+    if task_id_scramble_seed is not None:
+        summary["task_id_scramble_seed"] = task_id_scramble_seed
+    _write_artifacts(
+        config,
+        world,
+        model,
+        rows,
+        summary,
+        kind,
+        order,
+        task_id_scramble_seed,
+    )
     return summary
 
 
@@ -668,7 +686,10 @@ def _true_route_operator_quality(
 
 
 def resolved_learned_config(
-    config: ExperimentConfig, kind: ModelKind, order: str
+    config: ExperimentConfig,
+    kind: ModelKind,
+    order: str,
+    task_id_scramble_seed: int | None = None,
 ) -> dict[str, object]:
     model_config = {
         "dense": config.dense_model,
@@ -676,13 +697,16 @@ def resolved_learned_config(
         "hypernetwork": config.hypernetwork_model,
         "discrete": config.discrete_model,
     }[kind]
-    return {
+    resolved: dict[str, object] = {
         "world": asdict(config.world),
         f"{kind}_model": asdict(model_config),
         "evaluation": asdict(config.evaluation),
         "order": order,
         "output": {"directory": str(config.output_directory)},
     }
+    if task_id_scramble_seed is not None:
+        resolved["task_id_scramble_seed"] = task_id_scramble_seed
+    return resolved
 
 
 def _write_artifacts(
@@ -693,6 +717,7 @@ def _write_artifacts(
     summary: dict[str, object],
     kind: ModelKind,
     order: str,
+    task_id_scramble_seed: int | None,
 ) -> None:
     output = config.output_directory
     output.mkdir(parents=True, exist_ok=True)
@@ -702,7 +727,9 @@ def _write_artifacts(
         "hypernetwork": config.hypernetwork_model,
         "discrete": config.discrete_model,
     }[kind]
-    resolved = resolved_learned_config(config, kind, order)
+    resolved = resolved_learned_config(
+        config, kind, order, task_id_scramble_seed
+    )
     (output / "config.yaml").write_text(yaml.safe_dump(resolved, sort_keys=False), encoding="utf-8")
     with (output / "metrics.jsonl").open("w", encoding="utf-8") as handle:
         for row in rows:
@@ -748,6 +775,7 @@ def main() -> None:
     parser.add_argument("--reuse-rho", type=float)
     parser.add_argument("--teacher-rank", type=int)
     parser.add_argument("--model-seed", type=int)
+    parser.add_argument("--task-id-scramble-seed", type=int)
     parser.add_argument("--global-learning-rate", type=float)
     parser.add_argument("--task-learning-rate", type=float)
     parser.add_argument("--updates-per-example", type=int)
@@ -864,7 +892,12 @@ def main() -> None:
         ),
         discrete_model=selected if args.model == "discrete" else config.discrete_model,
     )
-    summary = run(config, kind=args.model, order=args.order)
+    summary = run(
+        config,
+        kind=args.model,
+        order=args.order,
+        task_id_scramble_seed=args.task_id_scramble_seed,
+    )
     final = summary["final_nmse"]
     assert isinstance(final, dict)
     novel = summary["novel_composition"]
