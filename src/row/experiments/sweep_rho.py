@@ -112,7 +112,10 @@ def main() -> None:
     )
     parser.add_argument("--worlds", type=int, nargs="+", default=list(range(10)))
     parser.add_argument(
-        "--rhos", type=float, nargs="+", default=[0, 0.25, 0.5, 0.75, 0.9, 1]
+        "--rhos",
+        type=float,
+        nargs="+",
+        default=[0.0, 0.25, 0.5, 0.75, 0.9, 1.0],
     )
     parser.add_argument(
         "--models",

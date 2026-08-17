@@ -46,6 +46,17 @@ class ProvenanceTests(unittest.TestCase):
             self.assertTrue(fingerprint["backfilled_from_resolved_config"])
             self.assertTrue((output / "fingerprint.json").exists())
 
+    def test_validation_accepts_numerically_equal_int_and_float(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory)
+            actual = _resolved()
+            actual["world"]["reuse_rho"] = 1
+            (output / "config.yaml").write_text(
+                yaml.safe_dump(actual), encoding="utf-8"
+            )
+            (output / "git_commit.txt").write_text("abc123\n", encoding="utf-8")
+            validate_artifact(output, _resolved(), "dense")
+
     def test_validation_rejects_architecture_mismatch(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             output = Path(directory)

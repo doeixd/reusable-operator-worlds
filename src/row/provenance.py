@@ -84,6 +84,21 @@ def _without_output(resolved: dict[str, Any]) -> dict[str, Any]:
     return {key: value for key, value in resolved.items() if key != "output"}
 
 
+def _difference_paths(actual: Any, expected: Any, prefix: str = "") -> list[str]:
+    actual = json.loads(json.dumps(actual))
+    expected = json.loads(json.dumps(expected))
+    if isinstance(actual, dict) and isinstance(expected, dict):
+        differences = []
+        for key in sorted(set(actual) | set(expected)):
+            path = f"{prefix}.{key}" if prefix else key
+            if key not in actual or key not in expected:
+                differences.append(path)
+            else:
+                differences.extend(_difference_paths(actual[key], expected[key], path))
+        return differences
+    return [] if actual == expected else [prefix]
+
+
 def validate_artifact(
     output: Path,
     expected_resolved: dict[str, Any],
@@ -104,10 +119,12 @@ def validate_artifact(
         if ignore_output_directory
         else expected_resolved
     )
-    if resolved_config_sha256(actual_comparable) != resolved_config_sha256(
-        expected_comparable
-    ):
-        raise ValueError(f"{output} resolved configuration does not match expectation")
+    differences = _difference_paths(actual_comparable, expected_comparable)
+    if differences:
+        raise ValueError(
+            f"{output} resolved configuration does not match expectation "
+            f"(fields={differences})"
+        )
 
     commit_path = output / "git_commit.txt"
     git_commit = (
