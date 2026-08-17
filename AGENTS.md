@@ -94,3 +94,9 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   an estimated 6,528 matrix/mixture multiply-adds per prediction versus 2,112 for
   Dense-P. Dense-C replication is required before making a compute-controlled
   claim.
+- Dense-C replication is complete. Tuned continuous beat Dense-C on all three
+  worlds by 3,135, 675, and 1,176 prequential nats (mean 1,662) at approximately
+  matched multiply-add counts (6,528 continuous versus 6,144 Dense-C).
+- Dense-C retains 66,688 8-bit proxy bits versus continuous's 29,184 because
+  compute matching requires width 32 and 6,288 shared dense scalars. Continuous
+  also improved 32-shot novel NMSE over Dense-C by 0.0210, 0.00944, and 0.00558.

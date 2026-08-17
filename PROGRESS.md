@@ -53,11 +53,16 @@ Milestone 005 compute control and Milestone 006 hard discrete reusable library.
   negligible on these artifacts.
 - Added analytic inference accounting: continuous uses about 6,528 multiply-adds
   per prediction versus Dense-P's 2,112.
+- Replicated the compute-matched Dense-C control on all three worlds. Continuous
+  won paired prequential NLL by 3,135, 675, and 1,176 nats and improved 32-shot
+  novel NMSE on every world.
+- Dense-C uses about 6,144 multiply-adds but retains 66,688 proxy bits, compared
+  with continuous's 6,528 multiply-adds and 29,184 bits.
 
 # In progress
 
-- Replicate Dense-C on world seeds 1 and 2 to complete the compute-controlled
-  exploratory comparison.
+- Implement the fixed hard discrete library with relaxed categorical training
+  and hard-route evaluation.
 
 # Next
 
@@ -81,5 +86,5 @@ Milestone 005 compute control and Milestone 006 hard discrete reusable library.
 - The tuned continuous seed-0 win has now replicated on world seeds 1 and 2, but
   the three-world estimate remains exploratory rather than confirmatory.
 - The continuous advantage over Dense-P replicated across three exploratory
-  worlds, but Dense-P is not compute matched. The claim remains exploratory and
-  compute-uncontrolled until Dense-C replication finishes.
+  worlds, and it also survived the three-world Dense-C compute control. The
+  sample remains exploratory (`n=3` worlds), not confirmatory.
