@@ -208,6 +208,12 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   this Windows host. Four parallel stage-two tuning processes exhausted the
   paging file and crashed the harness; run one lifetime process at a time and
   use artifact-level resume to recover completed worlds.
+- Every new experiment artifact writes both the complete resolved `config.yaml`
+  and `fingerprint.json`. The fingerprint hashes the resolved config and exposes
+  seeds, rho, model family/architecture, learning rates, replay, alpha,
+  activation, program depth, and git commit. Resume paths must validate the full
+  resolved config, not merely summary model/rho fields; legacy artifacts may be
+  backfilled only after that validation passes.
 
 # Standing scientific doubts
 

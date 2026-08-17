@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import json
 import platform
-import subprocess
 import sys
 from dataclasses import asdict, replace
 from pathlib import Path
@@ -16,6 +15,7 @@ import yaml
 from row.config import ExperimentConfig, load_config
 from row.metrics import examples_to_criterion, gaussian_nll, nmse
 from row.models import ScratchResidualMLP
+from row.provenance import current_git_commit, write_fingerprint
 from row.world import World
 
 
@@ -150,13 +150,9 @@ def _write_artifacts(
         json.dumps(world.diagnostics(), indent=2), encoding="utf-8"
     )
     (output / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
-    try:
-        commit = subprocess.run(
-            ["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True
-        ).stdout.strip()
-    except subprocess.CalledProcessError:
-        commit = "uncommitted"
+    commit = current_git_commit()
     (output / "git_commit.txt").write_text(commit + "\n", encoding="utf-8")
+    write_fingerprint(output, resolved, "scratch", commit)
     environment = {
         "python": sys.version,
         "platform": platform.platform(),

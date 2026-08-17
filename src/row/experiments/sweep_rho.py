@@ -11,14 +11,22 @@ from statistics import fmean
 from typing import Any
 
 from row.config import load_config
-from row.experiments.learned_lifetime import run
+from row.experiments.learned_lifetime import resolved_learned_config, run
+from row.provenance import validate_artifact
 
 
 def _rho_label(value: float) -> str:
     return f"{value:g}".replace(".", "p")
 
 
-def _validated_summary(path: Path, model: str, rho: float) -> dict[str, Any]:
+def _validated_summary(
+    path: Path,
+    output: Path,
+    expected_resolved: dict[str, object],
+    model: str,
+    rho: float,
+) -> dict[str, Any]:
+    validate_artifact(output, expected_resolved, model)
     summary = json.loads(path.read_text(encoding="utf-8"))
     if summary["model"] != model:
         raise ValueError(f"{path} reports model={summary['model']}, expected {model}")
@@ -130,14 +138,20 @@ def main() -> None:
                     f"[{completed}/{total}] world={world_seed} rho={rho:g} model={model}",
                     flush=True,
                 )
+                config = replace(
+                    base,
+                    world=replace(base.world, seed=world_seed, reuse_rho=rho),
+                    output_directory=output,
+                )
                 if summary_path.exists():
-                    summary = _validated_summary(summary_path, model, rho)
-                else:
-                    config = replace(
-                        base,
-                        world=replace(base.world, seed=world_seed, reuse_rho=rho),
-                        output_directory=output,
+                    summary = _validated_summary(
+                        summary_path,
+                        output,
+                        resolved_learned_config(config, model, "forward"),
+                        model,
+                        rho,
                     )
+                else:
                     summary = run(config, kind=model)
                     gc.collect()
                 records.append(

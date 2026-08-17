@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import json
 import platform
-import subprocess
 import sys
 from dataclasses import asdict, replace
 from itertools import product
@@ -20,6 +19,7 @@ from row.config import ExperimentConfig, load_config
 from row.experiments.scratch_difficulty import summarize
 from row.metrics import examples_to_criterion, gaussian_nll, nmse
 from row.models import OracleCompositor
+from row.provenance import current_git_commit, write_fingerprint
 from row.world import Program, Task, World
 
 
@@ -330,13 +330,9 @@ def _write_artifacts(
     (output / "world_seed.txt").write_text(f"{config.world.seed}\n", encoding="utf-8")
     (output / "model_seed.txt").write_text(f"{config.oracle_model.seed}\n", encoding="utf-8")
     torch.save({"model_state_dict": model.state_dict(), "summary": summary}, output / "model.pt")
-    try:
-        commit = subprocess.run(
-            ["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True
-        ).stdout.strip()
-    except subprocess.CalledProcessError:
-        commit = "uncommitted"
+    commit = current_git_commit()
     (output / "git_commit.txt").write_text(commit + "\n", encoding="utf-8")
+    write_fingerprint(output, resolved, "oracle", commit)
     environment = {
         "python": sys.version,
         "platform": platform.platform(),

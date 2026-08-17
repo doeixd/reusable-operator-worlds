@@ -6,7 +6,6 @@ import argparse
 import copy
 import json
 import platform
-import subprocess
 import sys
 from dataclasses import asdict, replace
 from itertools import product
@@ -22,6 +21,7 @@ from row.experiments.oracle_lifetime import _add_lifetime_transfer_summary, _fun
 from row.experiments.scratch_difficulty import summarize
 from row.metrics import examples_to_criterion, gaussian_nll, nmse
 from row.models import ContinuousBasisLearner, DenseLearner, DiscreteLibraryLearner
+from row.provenance import current_git_commit, write_fingerprint
 from row.world import Program, Task, World
 
 ModelKind = Literal["dense", "continuous", "discrete"]
@@ -546,6 +546,23 @@ def _novel_checkpoint(
     }
 
 
+def resolved_learned_config(
+    config: ExperimentConfig, kind: ModelKind, order: str
+) -> dict[str, object]:
+    model_config = {
+        "dense": config.dense_model,
+        "continuous": config.continuous_model,
+        "discrete": config.discrete_model,
+    }[kind]
+    return {
+        "world": asdict(config.world),
+        f"{kind}_model": asdict(model_config),
+        "evaluation": asdict(config.evaluation),
+        "order": order,
+        "output": {"directory": str(config.output_directory)},
+    }
+
+
 def _write_artifacts(
     config: ExperimentConfig,
     world: World,
@@ -562,13 +579,7 @@ def _write_artifacts(
         "continuous": config.continuous_model,
         "discrete": config.discrete_model,
     }[kind]
-    resolved = {
-        "world": world.config_dict(),
-        f"{kind}_model": asdict(model_config),
-        "evaluation": asdict(config.evaluation),
-        "order": order,
-        "output": {"directory": str(output)},
-    }
+    resolved = resolved_learned_config(config, kind, order)
     (output / "config.yaml").write_text(yaml.safe_dump(resolved, sort_keys=False), encoding="utf-8")
     with (output / "metrics.jsonl").open("w", encoding="utf-8") as handle:
         for row in rows:
@@ -587,13 +598,9 @@ def _write_artifacts(
         (output / "hard_routes.json").write_text(
             json.dumps(model.hard_routes(), indent=2), encoding="utf-8"
         )
-    try:
-        commit = subprocess.run(
-            ["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True
-        ).stdout.strip()
-    except subprocess.CalledProcessError:
-        commit = "uncommitted"
+    commit = current_git_commit()
     (output / "git_commit.txt").write_text(commit + "\n", encoding="utf-8")
+    write_fingerprint(output, resolved, kind, commit)
     environment = {
         "python": sys.version,
         "platform": platform.platform(),

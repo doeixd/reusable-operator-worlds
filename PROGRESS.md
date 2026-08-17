@@ -127,6 +127,9 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Falsified the provisional intermediate-transfer story: Continuous's better
   32-shot novel adaptation at rho 0.5/0.75 was seed-0-specific and does not hold
   in the three-world mean.
+- Added resolved-config SHA-256 fingerprints to learned, oracle, and scratch
+  artifacts. Sweep resume now rejects any architecture/protocol mismatch and
+  validated/backfilled all 24 worlds 1–2 rho artifacts.
 
 # In progress
 
