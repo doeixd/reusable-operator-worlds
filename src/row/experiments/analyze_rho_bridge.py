@@ -26,6 +26,18 @@ RHO_LABELS = {
 
 
 def _artifact_path(root: Path, world: int, rho: float, model: str) -> Path:
+    if world >= 3 and rho == 1.0:
+        selected = "continuous_3em03" if model == "continuous" else "dense_1em03"
+        global_lr = "global_3em03" if model == "continuous" else "global_1em03"
+        return (
+            root
+            / "tuning"
+            / "stage2_current"
+            / selected
+            / model
+            / f"{global_lr}_task_5em02"
+            / f"world_{world}"
+        )
     if world > 0:
         return root / "rho_development" / RHO_LABELS[rho] / f"world_{world}" / model
     if rho < 1.0:

@@ -2,10 +2,20 @@ from __future__ import annotations
 
 import unittest
 
-from row.experiments.analyze_rho_bridge import _linear_fit_quality, _summarize
+from pathlib import Path
+
+from row.experiments.analyze_rho_bridge import (
+    _artifact_path,
+    _linear_fit_quality,
+    _summarize,
+)
 
 
 class AnalyzeRhoBridgeTests(unittest.TestCase):
+    def test_exact_reuse_stage_two_uses_imported_selected_artifacts(self) -> None:
+        path = _artifact_path(Path("artifacts"), 3, 1.0, "continuous")
+        self.assertIn("continuous_3em03", str(path))
+
     def test_linear_fit_identifies_exact_line(self) -> None:
         result = _linear_fit_quality([0.0, 0.5, 1.0], [-1.0, 0.0, 1.0])
         self.assertAlmostEqual(result["r_squared"], 1.0)
