@@ -18,6 +18,16 @@ scratch_model:
   updates_per_example: 4
   seed: 1000
 
+oracle_model:
+  operator_rank: 8
+  alpha: 0.35
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 2000
+
 evaluation:
   support_points: [0, 1, 2, 4, 8, 16, 32, 64, 128]
   nmse_thresholds: [0.1, 0.05, 0.02]

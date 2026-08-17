@@ -1,6 +1,7 @@
 # Current milestone
 
-Milestone 003: oracle compositor and lifetime transfer positive control.
+Milestones 004–005: matched dense baseline and continuous reusable operation
+basis.
 
 # Completed
 
@@ -21,16 +22,29 @@ Milestone 003: oracle compositor and lifetime transfer positive control.
 - Completed scratch controls on world seeds 0–2. Final-NMSE/task-index
   correlations were -0.060, 0.002, and -0.039; all tasks reached NMSE 0.1 at
   support 64, confirming no task-order difficulty trend at that resolution.
+- Implemented the true-route oracle with six shared learned operator slots,
+  predict-before-update scoring, completed-task replay, fixed support evaluation,
+  model serialization, and unseen-composition testing.
+- Confirmed oracle transfer on world seeds 0–2 and reversed seed 0. Across these
+  runs, first-quarter mean examples to NMSE 0.05 ranged from 8.75 to 28.06 and
+  fell to zero in the last quarter; examples to NMSE 0.02 ranged from 62.25 to
+  96.38 and also fell to zero.
+- On seed 0, zero-shot NMSE fell from 0.0345 in the first quarter to 0.00192 in
+  the last quarter; unseen-composition zero-shot NMSE was 0.00215.
+- Added functional primitive recovery. Seed-0 learned slots matched all six
+  teacher primitives with mean normalized distance 0.000539.
 
 # In progress
 
-- Implement the oracle compositor using true hidden routes and shared learned
-  operator slots.
+- Design matched dense and continuous-basis learners on the same lifetime
+  protocol without exposing hidden routes.
 
 # Next
 
-- Verify declining oracle late-life learning cost and novel-composition transfer.
-- Implement matched dense and continuous reusable-basis learners.
+- Implement and tune the dense baseline with opaque task embeddings.
+- Implement the continuous reusable basis as the first non-oracle reuse model.
+- Compare paired cumulative prequential cost, examples-to-criterion, retained
+  state, parameter counts, and frozen-library novel-composition adaptation.
 
 # Decisions
 
@@ -41,3 +55,5 @@ Milestone 003: oracle compositor and lifetime transfer positive control.
 - The scratch validity gate uses NMSE 0.1 and continuous final error for now;
   NMSE 0.05 is fully censored by the current shallow scratch architecture and
   remains a sensitivity target rather than hidden or discarded evidence.
+- The oracle gate passed. NMSE 0.1 is too loose for oracle initialization, so
+  oracle transfer claims use the stricter thresholds and zero-shot behavior.

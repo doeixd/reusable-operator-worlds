@@ -52,3 +52,16 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   support 64. NMSE 0.05 remained fully censored, so scratch validity currently
   rests on the flat 0.1 curve and flat continuous final error, not that stricter
   threshold.
+- The oracle's random initialization is already below NMSE 0.1, so that threshold
+  cannot demonstrate oracle transfer. Use NMSE 0.05, NMSE 0.02, zero-shot NMSE,
+  and prequential cost for the positive-control claim.
+- Oracle seed 0 reduced first-quarter to last-quarter zero-shot NMSE from 0.0345
+  to 0.00192. Mean examples to NMSE 0.05 fell from 18 to 0, and examples to 0.02
+  fell from 74.5 to 0. The unseen-composition zero-shot NMSE was 0.00215.
+- The oracle's learned slots recovered the teacher primitives with a one-to-one
+  mean normalized functional distance of 0.000539. Because the true route fixes
+  slot identity, exact index alignment is expected; functional distance is the
+  substantive operator-quality check.
+- Reverse task order and two additional world seeds reproduced zero-example late
+  performance at NMSE 0.05 and 0.02, so the oracle effect is not specific to the
+  seed-0 curriculum.

@@ -15,6 +15,7 @@ scratch-task difficulty experiment.
 python -m pip install -e .
 python -m unittest discover -s tests -v
 python -m row.experiments.scratch_difficulty --config configs/v1.yaml
+python -m row.experiments.oracle_lifetime --config configs/v1.yaml --output artifacts/oracle
 ```
 
 Scratch controls accept `--world-seed`, `--learning-rate`,
