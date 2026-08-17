@@ -198,6 +198,12 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   and 0.75, then 6/6 at rho 0.9 and 1.0. The six-world mean effects are -2,197,
   -2,308, -2,332, -1,427, +1,389, and +3,357; the mean crossing is rho 0.826
   (measured correlation 0.479), with per-world crossings spanning 0.811–0.852.
+- The completed development sweep on worlds 0–9 is unanimous at every tested
+  rho. Continuous lifetime-loss wins are 0/10 at rho 0, 0.25, 0.5, and 0.75,
+  then 10/10 at rho 0.9 and 1.0. Mean Dense-minus-Continuous effects are -2,135,
+  -2,165, -2,227, -1,337, +1,288, and +3,698. The descriptive mean crossing is
+  rho 0.8264 at measured recurrence 0.4836; per-world rho crossings span
+  0.8108–0.8590.
 - The seed-0 suggestion that Continuous improves 32-shot novel transfer before
   it wins lifetime loss does not replicate. At rho 0.25, 0.5, and 0.75,
   Continuous wins novel transfer on only one of three worlds and has worse mean
@@ -208,6 +214,11 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   6/6 lifetime-loss wins there. It wins novel transfer 6/6 only at exact reuse.
   The current evidence supports distinct lifetime-cost and transfer behavior,
   but not the proposed ordering in which transfer improves first.
+- On the full development set, Continuous novel-transfer wins are 2/10, 4/10,
+  5/10, 2/10, 4/10, and 10/10 across the six rho values. Mean transfer is
+  essentially tied at rho 0.5, worse for Continuous at rho 0.75 and 0.9, and
+  reliably better only at rho 1.0. Do not claim a separate earlier transfer
+  boundary from V1 evidence.
 - Report total, per-online-example, and per-target-scalar Gaussian log loss.
   Compute accounting distinguishes training-forward all-slot evaluation from
   hardened inference; it excludes backward and optimizer operations.
@@ -241,6 +252,6 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   population claim.
 - Confirmatory worlds 100–129 remain sealed. Do not inspect them until these
   doubts and the development `rho` curve are resolved.
-- The crossover now replicates on worlds 0–5, but the full development set is
-  still required before choosing a frozen confirmatory grid or interpreting the
-  mean 0.833 interpolation as a stable phase boundary.
+- The development crossover is complete and highly consistent, but the 0.8264
+  interpolation lies between coarse grid points and remains descriptive. Do not
+  treat it as a precisely located universal phase boundary.

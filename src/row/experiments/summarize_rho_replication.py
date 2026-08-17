@@ -180,7 +180,8 @@ def plot_report(report: dict[str, Any], destination: Path) -> None:
     )
     for axis, x_key, xlabel in panels:
         axis.axhline(0, color="0.3", linewidth=1)
-        for world in worlds:
+        compact_worlds = len(worlds) > 6
+        for world_index, world in enumerate(worlds):
             points = [
                 effect
                 for summary in summaries
@@ -197,8 +198,13 @@ def plot_report(report: dict[str, Any], destination: Path) -> None:
                 y,
                 marker="o",
                 linewidth=1,
-                alpha=0.38,
-                label=f"World {world}",
+                alpha=0.32 if compact_worlds else 0.38,
+                color="0.55" if compact_worlds else None,
+                label=(
+                    "World-level curves"
+                    if compact_worlds and world_index == 0
+                    else (None if compact_worlds else f"World {world}")
+                ),
             )
         mean_x_key = (
             "configured_rho"
@@ -215,6 +221,7 @@ def plot_report(report: dict[str, Any], destination: Path) -> None:
             mean_y,
             marker="D",
             linewidth=2.5,
+            color="tab:blue" if compact_worlds else None,
             label=f"{len(worlds)}-world mean",
         )
         if x_key == "configured_rho":
@@ -247,7 +254,11 @@ def plot_report(report: dict[str, Any], destination: Path) -> None:
         axis.margins(x=0.06, y=0.14)
     axes[0].set_ylabel("Dense-C minus Continuous cumulative log loss")
     axes[1].legend(frameon=False, loc="upper left")
-    figure.suptitle("Replicated specialization-to-reuse crossover")
+    figure.suptitle(
+        "Complete development specialization-to-reuse crossover"
+        if len(worlds) == 10
+        else "Replicated specialization-to-reuse crossover"
+    )
     figure.tight_layout()
     figure.savefig(destination, dpi=180, bbox_inches="tight")
     plt.close(figure)

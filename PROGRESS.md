@@ -137,16 +137,22 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Across those six worlds, Continuous wins novel 32-shot adaptation 6/6 only at
   exact reuse; it has worse mean transfer at rho 0.9 despite winning lifetime
   loss 6/6. This further rejects the provisional transfer-first interpretation.
+- Completed the frozen six-point rho sweep on all development worlds 0–9. Every
+  world favors Dense-C through rho 0.75 and Continuous at rho 0.9/1.0. The mean
+  crossing is rho 0.8264 or measured recurrence 0.4836; individual crossings
+  span 0.8108–0.8590.
+- The full report and visually checked plot are under `reports/rho_worlds_0_9`.
+  Continuous's novel-transfer advantage is reliable only at exact reuse, so the
+  transfer-first secondary hypothesis is closed as unsupported.
 
 # In progress
 
-- Complete the frozen six-point rho curve on development worlds 6–9, reusing
-  their completed exact-reuse stage-two artifacts after fingerprint validation.
+- Replicate checkpoint learning-to-learn curves across development worlds with
+  the frozen exact-reuse configurations.
 
 # Next
 
-- Complete and plot the development-world `rho` sweep with paired world deltas.
-- Replicate checkpoint learning-to-learn curves across development worlds.
+- Freeze checkpoint analysis after replicated exact-reuse development curves.
 - Implement the generic low-rank hypernetwork and dense 24-dimensional task-code
   controls after the causal sweep.
 

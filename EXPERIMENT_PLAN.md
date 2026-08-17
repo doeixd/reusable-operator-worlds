@@ -31,6 +31,19 @@ At 8, 16, 32, and 64 completed tasks, freeze shared parameters and adapt fresh
 task state on four fixed unseen compositions. Report NMSE after 0, 1, 2, 4, 8,
 16, and 32 examples. The primary checkpoint statistic is mean 32-shot NMSE.
 
+# Development rho gate result
+
+The frozen six-point causal sweep is complete on development worlds 0–9. All ten
+worlds favor Dense-C through rho 0.75 and Continuous at rho 0.9 and 1.0. The
+descriptive mean zero crossing is configured rho 0.8264, corresponding to mean
+measured residual-function correlation 0.4836. The tracked machine report is
+`reports/rho_worlds_0_9/rho-replication.json`.
+
+The novel 32-shot transfer outcome does not show an earlier reusable-representation
+boundary; Continuous is reliably better on that metric only at exact reuse.
+Confirmatory worlds remain sealed pending replicated checkpoint stability and a
+clean artifact/plotting rehearsal.
+
 # Symmetric tuning
 
 Tune Continuous and Dense-C under the same staged rule on development worlds:
