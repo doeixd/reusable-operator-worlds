@@ -66,7 +66,7 @@ hypernetwork_model:
   operator_alpha_init: 0.2
   learnable_alpha: true
   operator_activation: tanh
-  global_learning_rate: 0.001
+  global_learning_rate: 0.003
   task_learning_rate: 0.05
   weight_decay: 0.0001
   updates_per_example: 1

@@ -268,12 +268,27 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   shared scalars and the same 1,536 retained task scalars as Continuous and the
   hypernetwork. On world 0 it scored -166,567 versus -166,521 for Dense-32, a
   negligible 46-unit difference; replicate before closing this sensitivity.
+- Hypernetwork stage two on worlds 3–9 confirms global/task LR `0.003/0.05`;
+  its mean log loss is -170,038 versus -168,088 for `0.001/0.05`. The selected
+  LR is frozen in `configs/v1.yaml`.
+- Across all ten development worlds, Continuous beats the tuned hypernetwork on
+  both lifetime loss and novel 32-shot NMSE 10/10, by mean advantages 1,907
+  log-loss units and 0.00272 NMSE. The hypernetwork beats Dense-C on lifetime
+  loss 10/10 by mean 1,791, but on novel adaptation only 6/10 by mean 0.000568.
+  A generic continuous operator manifold is useful, but does not explain away
+  the explicit slot basis's exact-reuse advantage.
+- Dense-24 versus Dense-32 is a null sensitivity across worlds 0–9: Dense-24
+  wins lifetime loss 5/10 and is worse by 73 units on average, while winning
+  novel 32-shot NMSE 7/10 by only 0.000119 on average. The primary comparison is
+  not driven by Continuous having fewer retained task scalars.
 
 # Standing scientific doubts
 
-- Reusable learners retain a favorable three-stage residual structural prior even
-  after alpha/rank/activation mismatch controls. A generic low-rank hypernetwork
-  remains necessary.
+- The generic low-rank hypernetwork closes the largest structural-prior gap and
+  produces an intermediate lifetime-loss result, but it still shares the
+  teacher's three-stage low-rank residual family. Claims should distinguish
+  evidence for explicit reusable slots from the broader benefit of aligned
+  operator-manifold structure.
 - The effective online update batch is one current plus one replay example, not
   the suggested batch size eight. This is symmetric but must be disclosed and
   later ablated.

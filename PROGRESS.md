@@ -153,33 +153,33 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 # In progress
 
-- Implemented and smoke-tested the generic low-rank hypernetwork control. It
-  matches Continuous's 24 task-state scalars, retains the same three low-rank
-  residual stages, and removes the explicit slot library. Unit tests verify
-  exact zero-code base generation and nonzero task-code gradients.
-- The untuned world-0 smoke lifetime completed at -165,031 cumulative Gaussian
-  log loss, median final NMSE 0.00472, and novel 32-shot NMSE 0.0051. Its 2,705
-  shared scalars and 7,296 counted forward multiply-adds are near the Continuous
-  control. Symmetric development tuning and paired evaluation remain in
-  progress.
-- Completed the six-setting hypernetwork stage-one grid on development worlds
-  0–2. Global/task LR `0.003/0.05` wins with mean log loss -170,246, ahead of
-  `0.001/0.05` at -167,821. The winner beats Dense-C 3/3 by a mean 1,478 units
-  but trails Continuous 3/3 by a mean 2,014; its mean novel 32-shot NMSE 0.00589
-  also trails both baselines.
-- Dense-24 is nearly identical to Dense-32 on world 0: -166,567 versus -166,521
-  log loss, with 32-shot NMSE 0.00576 versus 0.00583. Replication remains in
-  progress.
-- Revalidate the top two hypernetwork settings on development worlds 3–9 and
-  replicate Dense-24 across the development set without opening confirmatory
-  worlds.
+- Audit the remaining V1 specification obligations and complete the clean
+  artifact/plotting rehearsal before deciding whether the confirmatory-world
+  gate is open.
+
+# Structural controls complete
+
+- Implemented a generic low-rank hypernetwork with the same 24 task-state
+  scalars and three residual stages as Continuous but no explicit slots.
+- Symmetric tuning selected global/task LR `0.003/0.05` in both stage one
+  (worlds 0–2) and stage two (worlds 3–9); the setting is frozen in
+  `configs/v1.yaml`.
+- Across all ten development worlds, Continuous beats Hypernetwork on lifetime
+  loss and novel 32-shot NMSE 10/10, while Hypernetwork beats Dense-C on
+  lifetime loss 10/10. Mean log-loss advantages are 1,907 and 1,791,
+  respectively.
+- Dense-24 versus Dense-32 is effectively tied: 5/10 lifetime-loss wins and a
+  mean -73-unit advantage for Dense-24. Matching retained task-state size does
+  not remove the primary hierarchy.
+- The validated report and visually inspected paired-world figure are under
+  `reports/structural_controls`.
 
 # Next
 
-- Run symmetric development tuning for the hypernetwork and evaluate the dense
-  24-dimensional task-code sensitivity.
 - Rehearse artifact generation and plotting from a clean checkout before opening
   the confirmatory seed gate.
+- Audit replay-ratio, reverse-order, retention, and reporting obligations against
+  the research spec; keep confirmatory worlds sealed until the audit is clean.
 
 # Decisions
 

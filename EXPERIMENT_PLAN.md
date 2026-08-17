@@ -137,6 +137,14 @@ The Dense-C task-code sensitivity changes only `task_embedding_dim` from 32 to
 This is a task-state-size control, not a compute-matched replacement for the
 primary Dense-C baseline.
 
+The hypernetwork's symmetric development tuning selected global/task LR
+`0.003/0.05` in both stages. Across worlds 0–9, Continuous beats it on lifetime
+loss and novel 32-shot NMSE in all ten paired worlds; the hypernetwork beats
+Dense-C on lifetime loss in all ten. Freeze this optimizer for any follow-up.
+
+Dense-24 and Dense-32 are effectively tied across worlds 0–9, so the sensitivity
+is closed: retained task-state dimension does not explain the primary result.
+
 # Confirmation gate
 
 Run seeds 100–129 only after:

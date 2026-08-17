@@ -1,0 +1,294 @@
+{
+  "scope": "development worlds 0-9; exact reuse; descriptive, not confirmatory",
+  "sign_convention": "positive named-model advantage favors the first named model",
+  "hypernetwork_selection": {
+    "stage_one": [
+      {
+        "model": "hypernetwork",
+        "global_learning_rate": 0.0003,
+        "task_learning_rate": 0.005,
+        "worlds": [
+          0,
+          1,
+          2
+        ],
+        "mean_gaussian_log_loss": -148889.264987227,
+        "mean_novel_32_shot_nmse": 0.013453109185712978
+      },
+      {
+        "model": "hypernetwork",
+        "global_learning_rate": 0.0003,
+        "task_learning_rate": 0.05,
+        "worlds": [
+          0,
+          1,
+          2
+        ],
+        "mean_gaussian_log_loss": -157390.80168783825,
+        "mean_novel_32_shot_nmse": 0.01032737775579968
+      },
+      {
+        "model": "hypernetwork",
+        "global_learning_rate": 0.001,
+        "task_learning_rate": 0.005,
+        "worlds": [
+          0,
+          1,
+          2
+        ],
+        "mean_gaussian_log_loss": -158519.49932622432,
+        "mean_novel_32_shot_nmse": 0.008506681161577836
+      },
+      {
+        "model": "hypernetwork",
+        "global_learning_rate": 0.001,
+        "task_learning_rate": 0.05,
+        "worlds": [
+          0,
+          1,
+          2
+        ],
+        "mean_gaussian_log_loss": -167820.61619824587,
+        "mean_novel_32_shot_nmse": 0.004479534997058763
+      },
+      {
+        "model": "hypernetwork",
+        "global_learning_rate": 0.003,
+        "task_learning_rate": 0.005,
+        "worlds": [
+          0,
+          1,
+          2
+        ],
+        "mean_gaussian_log_loss": -164540.61871253766,
+        "mean_novel_32_shot_nmse": 0.007250367851048857
+      },
+      {
+        "model": "hypernetwork",
+        "global_learning_rate": 0.003,
+        "task_learning_rate": 0.05,
+        "worlds": [
+          0,
+          1,
+          2
+        ],
+        "mean_gaussian_log_loss": -170245.96815875507,
+        "mean_novel_32_shot_nmse": 0.005894855209419412
+      }
+    ],
+    "stage_two": [
+      {
+        "model": "hypernetwork",
+        "global_learning_rate": 0.001,
+        "task_learning_rate": 0.05,
+        "worlds": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "mean_gaussian_log_loss": -168088.4149954503,
+        "mean_novel_32_shot_nmse": 0.005636876762198546
+      },
+      {
+        "model": "hypernetwork",
+        "global_learning_rate": 0.003,
+        "task_learning_rate": 0.05,
+        "worlds": [
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "mean_gaussian_log_loss": -170037.57059806553,
+        "mean_novel_32_shot_nmse": 0.0060569567105404985
+      }
+    ],
+    "selected_global_learning_rate": 0.003,
+    "selected_task_learning_rate": 0.05
+  },
+  "architecture_accounting": {
+    "continuous": {
+      "shared_parameter_count": 2120,
+      "task_state_scalar_count": 1536,
+      "compute_accounting": {
+        "training_forward_multiply_adds_per_sample": 6528,
+        "inference_multiply_adds_per_sample": 6528,
+        "note": "backward and optimizer operations excluded"
+      }
+    },
+    "hypernetwork": {
+      "shared_parameter_count": 2705,
+      "task_state_scalar_count": 1536,
+      "compute_accounting": {
+        "training_forward_multiply_adds_per_sample": 7296,
+        "inference_multiply_adds_per_sample": 7296,
+        "note": "counts per-prediction operator generation; backward and optimizer operations excluded"
+      }
+    },
+    "dense24": {
+      "shared_parameter_count": 5520,
+      "task_state_scalar_count": 1536,
+      "compute_accounting": {
+        "training_forward_multiply_adds_per_sample": 5376,
+        "inference_multiply_adds_per_sample": 5376,
+        "note": "backward and optimizer operations excluded"
+      }
+    },
+    "dense32": {
+      "shared_parameter_count": 6288,
+      "task_state_scalar_count": 2048,
+      "compute_accounting": {
+        "training_forward_multiply_adds_per_sample": 6144,
+        "inference_multiply_adds_per_sample": 6144,
+        "note": "backward and optimizer operations excluded"
+      }
+    }
+  },
+  "comparisons": {
+    "continuous_over_hypernetwork": {
+      "worlds": 10,
+      "loss_wins": 10,
+      "mean_gaussian_log_loss_advantage": 1907.0827168507124,
+      "minimum_gaussian_log_loss_advantage": 424.6403624013474,
+      "maximum_gaussian_log_loss_advantage": 2820.047280622908,
+      "novel_32_shot_wins": 10,
+      "mean_novel_32_shot_nmse_advantage": 0.002715491949825272
+    },
+    "hypernetwork_over_dense32": {
+      "worlds": 10,
+      "loss_wins": 10,
+      "mean_gaussian_log_loss_advantage": 1791.3590592904598,
+      "minimum_gaussian_log_loss_advantage": 1285.425480972306,
+      "maximum_gaussian_log_loss_advantage": 2664.1605025948083,
+      "novel_32_shot_wins": 6,
+      "mean_novel_32_shot_nmse_advantage": 0.000568255819885488
+    },
+    "dense24_over_dense32": {
+      "worlds": 10,
+      "loss_wins": 5,
+      "mean_gaussian_log_loss_advantage": -73.41563620704692,
+      "minimum_gaussian_log_loss_advantage": -401.1568165506469,
+      "maximum_gaussian_log_loss_advantage": 276.8743480841804,
+      "novel_32_shot_wins": 7,
+      "mean_novel_32_shot_nmse_advantage": 0.00011911799021553844
+    }
+  },
+  "dense24_configuration": {
+    "model": "dense",
+    "global_learning_rate": 0.001,
+    "task_learning_rate": 0.05,
+    "worlds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "mean_gaussian_log_loss": -168235.31517077488,
+    "mean_novel_32_shot_nmse": 0.0064574640898741225
+  },
+  "paired_world_effects": [
+    {
+      "world_seed": 0,
+      "continuous_advantage_over_hyper_loss": 2820.047280622908,
+      "continuous_advantage_over_hyper_novel_32": 0.001878009825349157,
+      "hyper_advantage_over_dense32_loss": 1626.1362669117225,
+      "hyper_advantage_over_dense32_novel_32": 0.0009388399342915967,
+      "dense24_advantage_over_dense32_loss": 46.13084878170048,
+      "dense24_advantage_over_dense32_novel_32": 6.374464216716419e-05
+    },
+    {
+      "world_seed": 1,
+      "continuous_advantage_over_hyper_loss": 1120.0209463832434,
+      "continuous_advantage_over_hyper_novel_32": 0.0033649898585293545,
+      "hyper_advantage_over_dense32_loss": 1522.9368155592529,
+      "hyper_advantage_over_dense32_novel_32": -0.0009031907206215172,
+      "dense24_advantage_over_dense32_loss": -268.5529512805224,
+      "dense24_advantage_over_dense32_novel_32": 0.0004514880964917268
+    },
+    {
+      "world_seed": 2,
+      "continuous_advantage_over_hyper_loss": 2102.242352403264,
+      "continuous_advantage_over_hyper_novel_32": 0.005291538553821078,
+      "hyper_advantage_over_dense32_loss": 1285.425480972306,
+      "hyper_advantage_over_dense32_novel_32": -0.0031508842995325494,
+      "dense24_advantage_over_dense32_loss": 88.84751432031044,
+      "dense24_advantage_over_dense32_novel_32": 0.0006421401669332492
+    },
+    {
+      "world_seed": 3,
+      "continuous_advantage_over_hyper_loss": 424.6403624013474,
+      "continuous_advantage_over_hyper_novel_32": 0.0043577108955695065,
+      "hyper_advantage_over_dense32_loss": 2129.070207518933,
+      "hyper_advantage_over_dense32_novel_32": -0.0013699005125127582,
+      "dense24_advantage_over_dense32_loss": 52.264324861898785,
+      "dense24_advantage_over_dense32_novel_32": 0.0006133463110976995
+    },
+    {
+      "world_seed": 4,
+      "continuous_advantage_over_hyper_loss": 2198.0008766615065,
+      "continuous_advantage_over_hyper_novel_32": 0.004171192514276464,
+      "hyper_advantage_over_dense32_loss": 1326.7044248248567,
+      "hyper_advantage_over_dense32_novel_32": 0.00021584155905084342,
+      "dense24_advantage_over_dense32_loss": 70.07937145823962,
+      "dense24_advantage_over_dense32_novel_32": -0.0011432280238921708
+    },
+    {
+      "world_seed": 5,
+      "continuous_advantage_over_hyper_loss": 2105.7182958215417,
+      "continuous_advantage_over_hyper_novel_32": 0.0010328039380788565,
+      "hyper_advantage_over_dense32_loss": 1479.7282792577462,
+      "hyper_advantage_over_dense32_novel_32": 0.007853326954845193,
+      "dense24_advantage_over_dense32_loss": 276.8743480841804,
+      "dense24_advantage_over_dense32_novel_32": 0.0019084013924362334
+    },
+    {
+      "world_seed": 6,
+      "continuous_advantage_over_hyper_loss": 1804.6105265570222,
+      "continuous_advantage_over_hyper_novel_32": 0.0024283445906159344,
+      "hyper_advantage_over_dense32_loss": 1462.6311358650855,
+      "hyper_advantage_over_dense32_novel_32": -0.001396420927038568,
+      "dense24_advantage_over_dense32_loss": -76.68560463059111,
+      "dense24_advantage_over_dense32_novel_32": -0.00018794162521177694
+    },
+    {
+      "world_seed": 7,
+      "continuous_advantage_over_hyper_loss": 1789.466116681986,
+      "continuous_advantage_over_hyper_novel_32": 0.00236189977452502,
+      "hyper_advantage_over_dense32_loss": 2355.7487743564416,
+      "hyper_advantage_over_dense32_novel_32": 0.0011905567586360973,
+      "dense24_advantage_over_dense32_loss": -401.1568165506469,
+      "dense24_advantage_over_dense32_novel_32": -0.0017404501218983614
+    },
+    {
+      "world_seed": 8,
+      "continuous_advantage_over_hyper_loss": 2389.9261206672527,
+      "continuous_advantage_over_hyper_novel_32": 0.0018949107452079375,
+      "hyper_advantage_over_dense32_loss": 2664.1605025948083,
+      "hyper_advantage_over_dense32_novel_32": 0.0008028171101131425,
+      "dense24_advantage_over_dense32_loss": -148.96797263098415,
+      "dense24_advantage_over_dense32_novel_32": 8.763447322578631e-05
+    },
+    {
+      "world_seed": 9,
+      "continuous_advantage_over_hyper_loss": 2316.1542903070513,
+      "continuous_advantage_over_hyper_novel_32": 0.00037351880227940674,
+      "hyper_advantage_over_dense32_loss": 2061.048705043446,
+      "hyper_advantage_over_dense32_novel_32": 0.0015015723416233993,
+      "dense24_advantage_over_dense32_loss": -372.9894244840543,
+      "dense24_advantage_over_dense32_novel_32": 0.0004960445908058341
+    }
+  ]
+}
