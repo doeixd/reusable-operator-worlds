@@ -10,12 +10,78 @@ from pathlib import Path
 
 import numpy as np
 
-from row.config import load_config
-from row.experiments.learned_lifetime import run
+from row.config import ExperimentConfig, load_config
+from row.experiments.learned_lifetime import (
+    ModelKind,
+    resolved_learned_config,
+    run,
+)
+from row.provenance import validate_artifact
 
 
 def _label(value: float) -> str:
     return f"{value:.0e}".replace("-", "m").replace("+", "p")
+
+
+def _configured_run(
+    base: ExperimentConfig,
+    kind: ModelKind,
+    world_seed: int,
+    global_lr: float,
+    task_lr: float,
+    output: Path,
+    *,
+    dense_hidden_width: int | None = None,
+    dense_task_embedding_dim: int | None = None,
+) -> ExperimentConfig:
+    config = replace(
+        base,
+        world=replace(base.world, seed=world_seed),
+        output_directory=output,
+    )
+    if kind == "dense":
+        selected = replace(
+            config.dense_model,
+            hidden_width=(
+                config.dense_model.hidden_width
+                if dense_hidden_width is None
+                else dense_hidden_width
+            ),
+            task_embedding_dim=(
+                config.dense_model.task_embedding_dim
+                if dense_task_embedding_dim is None
+                else dense_task_embedding_dim
+            ),
+            global_learning_rate=global_lr,
+            task_learning_rate=task_lr,
+        )
+        return replace(config, dense_model=selected)
+    if kind == "continuous":
+        return replace(
+            config,
+            continuous_model=replace(
+                config.continuous_model,
+                global_learning_rate=global_lr,
+                task_learning_rate=task_lr,
+            ),
+        )
+    if kind == "hypernetwork":
+        return replace(
+            config,
+            hypernetwork_model=replace(
+                config.hypernetwork_model,
+                global_learning_rate=global_lr,
+                task_learning_rate=task_lr,
+            ),
+        )
+    return replace(
+        config,
+        discrete_model=replace(
+            config.discrete_model,
+            global_learning_rate=global_lr,
+            task_learning_rate=task_lr,
+        ),
+    )
 
 
 def main() -> None:
@@ -25,7 +91,14 @@ def main() -> None:
     parser.add_argument("--worlds", type=int, nargs="+", default=[0, 1, 2])
     parser.add_argument("--global-lrs", type=float, nargs="+", default=[3e-4, 1e-3, 3e-3])
     parser.add_argument("--task-lrs", type=float, nargs="+", default=[5e-3, 5e-2])
-    parser.add_argument("--models", choices=("continuous", "dense"), nargs="+", default=["continuous", "dense"])
+    parser.add_argument(
+        "--models",
+        choices=("continuous", "dense", "hypernetwork", "discrete"),
+        nargs="+",
+        default=["continuous", "dense"],
+    )
+    parser.add_argument("--dense-hidden-width", type=int)
+    parser.add_argument("--dense-task-embedding-dim", type=int)
     args = parser.parse_args()
     base = load_config(args.config)
     base = replace(
@@ -52,29 +125,24 @@ def main() -> None:
                     output = args.output / name
                     summary_path = output / "summary.json"
                     print(f"[{completed}/{total}] {name}", flush=True)
+                    config = _configured_run(
+                        base,
+                        kind,
+                        world_seed,
+                        global_lr,
+                        task_lr,
+                        output,
+                        dense_hidden_width=args.dense_hidden_width,
+                        dense_task_embedding_dim=args.dense_task_embedding_dim,
+                    )
                     if summary_path.exists():
+                        validate_artifact(
+                            output,
+                            resolved_learned_config(config, kind, "forward"),
+                            kind,
+                        )
                         summary = json.loads(summary_path.read_text(encoding="utf-8"))
                     else:
-                        config = replace(base, world=replace(base.world, seed=world_seed), output_directory=output)
-                        if kind == "continuous":
-                            config = replace(
-                                config,
-                                continuous_model=replace(
-                                    config.continuous_model,
-                                    global_learning_rate=global_lr,
-                                    task_learning_rate=task_lr,
-                                ),
-                            )
-                        else:
-                            config = replace(
-                                config,
-                                dense_model=replace(
-                                    config.dense_model,
-                                    hidden_width=32,
-                                    global_learning_rate=global_lr,
-                                    task_learning_rate=task_lr,
-                                ),
-                            )
                         summary = run(config, kind=kind)
                         gc.collect()
                     records.append(
@@ -83,6 +151,9 @@ def main() -> None:
                             "global_learning_rate": global_lr,
                             "task_learning_rate": task_lr,
                             "world_seed": world_seed,
+                            "shared_parameter_count": summary["shared_parameter_count"],
+                            "task_state_scalar_count": summary["task_state_scalar_count"],
+                            "compute_accounting": summary["compute_accounting"],
                             "gaussian_log_loss": summary[
                                 "cumulative_prequential_gaussian_log_loss"
                             ],
