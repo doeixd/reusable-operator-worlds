@@ -32,6 +32,15 @@ class EvaluationConfig:
     support_points: tuple[int, ...] = (0, 1, 2, 4, 8, 16, 32, 64, 128)
     nmse_thresholds: tuple[float, ...] = (0.1, 0.05, 0.02)
     gaussian_sigma: float = 0.1
+    target_precision: float = 1.0 / 256.0
+    lifetime_checkpoints: tuple[int, ...] = (8, 16, 32, 64)
+    checkpoint_novel_tasks: int = 4
+
+    def __post_init__(self) -> None:
+        if self.gaussian_sigma <= 0.0 or self.target_precision <= 0.0:
+            raise ValueError("Gaussian sigma and target precision must be positive")
+        if self.checkpoint_novel_tasks <= 0 or any(x <= 0 for x in self.lifetime_checkpoints):
+            raise ValueError("checkpoint counts must be positive")
 
 
 @dataclass(frozen=True)
@@ -226,6 +235,11 @@ def load_config(path: str | Path) -> ExperimentConfig:
         support_points=tuple(int(n) for n in eval_raw.get("support_points", EvaluationConfig.support_points)),
         nmse_thresholds=tuple(float(x) for x in eval_raw.get("nmse_thresholds", EvaluationConfig.nmse_thresholds)),
         gaussian_sigma=float(eval_raw.get("gaussian_sigma", 0.1)),
+        target_precision=float(eval_raw.get("target_precision", 1.0 / 256.0)),
+        lifetime_checkpoints=tuple(
+            int(x) for x in eval_raw.get("lifetime_checkpoints", (8, 16, 32, 64))
+        ),
+        checkpoint_novel_tasks=int(eval_raw.get("checkpoint_novel_tasks", 4)),
     )
     output_directory = Path(output_raw.get("directory", "artifacts/scratch_difficulty"))
     return ExperimentConfig(

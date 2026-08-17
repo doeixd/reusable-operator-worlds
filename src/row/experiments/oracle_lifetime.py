@@ -160,6 +160,7 @@ def run(config: ExperimentConfig, order: str = "forward") -> dict[str, object]:
     summary["order"] = order
     summary["cumulative_prequential_nll"] = cumulative_nll
     summary["parameter_count"] = model.parameter_count
+    summary["world_functional_reuse"] = world.functional_reuse_diagnostics()
     summary["novel_composition"] = novel
     summary["functional_recovery"] = _functional_recovery(model.operators, world, config)
     _write_artifacts(config, world, model, rows, summary, order)
@@ -211,7 +212,7 @@ def _evaluate_novel_composition(
     # all models share the identical evaluation set.
     generator.normal(size=(32, config.world.state_dim))
     x = generator.normal(size=(config.world.evaluation_examples, config.world.state_dim))
-    y = Program(route).execute(world.library, x)
+    y = Program(route).execute(world.library_for_task(config.world.tasks), x)
     prediction = model(_tensor(x), route).cpu().numpy()
     return {"route": list(route), "zero_shot_nmse": nmse(prediction, y)}
 
@@ -305,6 +306,9 @@ def _write_artifacts(
     )
     (output / "world_programs.json").write_text(
         json.dumps(world.programs_json(), indent=2), encoding="utf-8"
+    )
+    (output / "world_functional_reuse.json").write_text(
+        json.dumps(summary["world_functional_reuse"], indent=2), encoding="utf-8"
     )
     (output / "world_seed.txt").write_text(f"{config.world.seed}\n", encoding="utf-8")
     (output / "model_seed.txt").write_text(f"{config.oracle_model.seed}\n", encoding="utf-8")

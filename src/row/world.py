@@ -45,8 +45,8 @@ class WorldConfig:
             raise ValueError(f"tasks must be in [1, {possible}]")
         if self.examples_per_task <= 0 or self.evaluation_examples <= 0:
             raise ValueError("dataset sizes must be positive")
-        if self.reuse_rho != 1.0:
-            raise NotImplementedError("the foundation milestone supports exact reuse (rho=1) only")
+        if not 0.0 <= self.reuse_rho <= 1.0:
+            raise ValueError("reuse_rho must be in [0, 1]")
 
 
 @dataclass(frozen=True)
@@ -85,6 +85,7 @@ class Program:
 class Task:
     task_id: str
     program: Program
+    teacher_library: tuple[Primitive, ...]
     train_x: Array
     train_y: Array
     eval_x: Array
@@ -113,6 +114,7 @@ class World:
         task_ids = _opaque_task_ids(config)
         tasks: list[Task] = []
         for task_index, (program, task_id) in enumerate(zip(programs, task_ids, strict=True)):
+            task_library = _task_library(config, library, task_index)
             train_rng = _rng(config.seed, 30, task_index)
             eval_rng = _rng(config.seed, 31, task_index)
             train_x = train_rng.normal(size=(config.examples_per_task, config.state_dim))
@@ -121,10 +123,11 @@ class World:
                 Task(
                     task_id=task_id,
                     program=program,
+                    teacher_library=task_library,
                     train_x=train_x,
-                    train_y=program.execute(library, train_x),
+                    train_y=program.execute(task_library, train_x),
                     eval_x=eval_x,
-                    eval_y=program.execute(library, eval_x),
+                    eval_y=program.execute(task_library, eval_x),
                 )
             )
         return cls(config=config, library=library, tasks=tuple(tasks))
@@ -133,6 +136,11 @@ class World:
         """Return only information available to a non-oracle learner."""
         task = self.tasks[index]
         return task.task_id, task.train_x, task.train_y
+
+    def library_for_task(self, task_index: int) -> tuple[Primitive, ...]:
+        if 0 <= task_index < len(self.tasks):
+            return self.tasks[task_index].teacher_library
+        return _task_library(self.config, self.library, task_index)
 
     def programs_json(self) -> list[dict[str, object]]:
         return [
@@ -155,6 +163,40 @@ class World:
             )
         return rows
 
+    def functional_reuse_diagnostics(
+        self, probe_examples: int = 512, max_tasks: int = 16
+    ) -> dict[str, float | int]:
+        """Measure recurrence of task-specific residual effects on fixed probes."""
+        generator = _rng(self.config.seed, 41)
+        probe = generator.normal(size=(probe_examples, self.config.state_dim))
+        identity_path = np.tanh(probe)
+        task_count = min(max_tasks, len(self.tasks))
+        correlations: list[float] = []
+        normalized_distances: list[float] = []
+        for primitive_index in range(self.config.teacher_primitives):
+            effects = [
+                self.tasks[task_index].teacher_library[primitive_index](probe) - identity_path
+                for task_index in range(task_count)
+            ]
+            for first in range(task_count):
+                for second in range(first + 1, task_count):
+                    left = effects[first].ravel()
+                    right = effects[second].ravel()
+                    correlations.append(float(np.corrcoef(left, right)[0, 1]))
+                    denominator = 0.5 * (float(np.var(left)) + float(np.var(right)))
+                    normalized_distances.append(
+                        float(np.mean(np.square(left - right)) / denominator)
+                    )
+        return {
+            "configured_rho": self.config.reuse_rho,
+            "probe_examples": probe_examples,
+            "tasks_compared": task_count,
+            "mean_pairwise_residual_correlation": float(np.mean(correlations)),
+            "mean_pairwise_residual_normalized_distance": float(
+                np.mean(normalized_distances)
+            ),
+        }
+
     def config_dict(self) -> dict[str, object]:
         return asdict(self.config)
 
@@ -175,3 +217,36 @@ def _opaque_task_ids(config: WorldConfig) -> tuple[str, ...]:
             seen.add(value)
             values.append(f"task_{value}")
     return tuple(values)
+
+
+def _task_library(
+    config: WorldConfig,
+    base_library: tuple[Primitive, ...],
+    task_index: int,
+) -> tuple[Primitive, ...]:
+    if config.reuse_rho == 1.0:
+        return base_library
+    independent_scale = np.sqrt(1.0 - config.reuse_rho**2)
+    result: list[Primitive] = []
+    for primitive_index, base in enumerate(base_library):
+        generator = _rng(config.seed, 11, task_index, primitive_index)
+        epsilon_V = _spectral_normalize(
+            generator.normal(size=(config.teacher_rank, config.state_dim))
+        )
+        epsilon_U = _spectral_normalize(
+            generator.normal(size=(config.state_dim, config.teacher_rank))
+        )
+        epsilon_b = generator.normal(scale=0.2, size=config.teacher_rank)
+        result.append(
+            Primitive(
+                U=_spectral_normalize(
+                    config.reuse_rho * base.U + independent_scale * epsilon_U
+                ),
+                V=_spectral_normalize(
+                    config.reuse_rho * base.V + independent_scale * epsilon_V
+                ),
+                b=config.reuse_rho * base.b + independent_scale * epsilon_b,
+                alpha=config.alpha,
+            )
+        )
+    return tuple(result)

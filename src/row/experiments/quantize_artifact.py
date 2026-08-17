@@ -118,8 +118,15 @@ def run(artifact: Path) -> dict[str, object]:
     model = _build_from_artifact(raw, kind)
     for task in world.tasks:
         model.begin_task(task.task_id)
-    model.begin_task("task_novel_composition")
     checkpoint = torch.load(artifact / "model.pt", map_location="cpu", weights_only=True)
+    checkpoint_keys = checkpoint["model_state_dict"].keys()
+    novel_keys = [
+        key.removeprefix("task_codes.")
+        for key in checkpoint_keys
+        if key.startswith("task_codes.task_novel_composition")
+    ]
+    for novel_key in novel_keys:
+        model.begin_task(novel_key)
     model.load_state_dict(checkpoint["model_state_dict"])
     float_scores = _task_scores(model, world)
 

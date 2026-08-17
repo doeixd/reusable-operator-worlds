@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 import platform
 import subprocess
@@ -128,6 +129,8 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
     support = set(config.evaluation.support_points)
     rows: list[dict[str, object]] = []
     cumulative_nll = 0.0
+    cumulative_mass_log_loss = 0.0
+    checkpoint_results: list[dict[str, object]] = []
 
     for lifetime_index, world_task_index in enumerate(task_indices):
         task = world.tasks[world_task_index]
@@ -164,6 +167,10 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
                 online_prediction, task.train_y[n_seen : n_seen + 1], config.evaluation.gaussian_sigma
             )
             cumulative_nll += online_nll
+            online_mass_log_loss = online_nll - config.world.state_dim * np.log(
+                config.evaluation.target_precision
+            )
+            cumulative_mass_log_loss += online_mass_log_loss
             rows.append(
                 {
                     "record_type": "prequential",
@@ -173,6 +180,8 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
                     "n_seen": n_seen,
                     "nll": online_nll,
                     "cumulative_nll": cumulative_nll,
+                    "quantized_target_log_loss": online_mass_log_loss,
+                    "cumulative_quantized_target_log_loss": cumulative_mass_log_loss,
                 }
             )
 
@@ -206,6 +215,18 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
             )
         rows.append(summary_row)
         replay.add_task(task, replay_per_task)
+        tasks_completed = lifetime_index + 1
+        if tasks_completed in config.evaluation.lifetime_checkpoints:
+            checkpoint_results.append(
+                _novel_checkpoint(
+                    model,
+                    world,
+                    config,
+                    task_lr,
+                    tasks_completed,
+                    config.evaluation.checkpoint_novel_tasks,
+                )
+            )
 
     summary = summarize(rows, config.world.examples_per_task)
     _add_lifetime_transfer_summary(summary, rows)
@@ -214,8 +235,12 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
             "model": kind,
             "order": order,
             "cumulative_prequential_nll": cumulative_nll,
+            "cumulative_prequential_gaussian_log_loss": cumulative_nll,
+            "cumulative_prequential_quantized_target_log_loss": cumulative_mass_log_loss,
+            "target_precision": config.evaluation.target_precision,
             "shared_parameter_count": model.shared_parameter_count,
             "task_state_scalar_count": model.task_state_scalar_count,
+            "world_functional_reuse": world.functional_reuse_diagnostics(),
         }
     )
     if isinstance(model, ContinuousBasisLearner):
@@ -231,6 +256,7 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
     summary["novel_composition"] = _adapt_novel_composition(
         model, world, config, task_lr
     )
+    summary["novel_composition_checkpoints"] = checkpoint_results
     _write_artifacts(config, world, model, rows, summary, kind, order)
     return summary
 
@@ -336,7 +362,9 @@ def _operator_specialization(
     }
 
 
-def _novel_data(world: World, config: ExperimentConfig) -> tuple[tuple[int, ...], np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+def _novel_data(
+    world: World, config: ExperimentConfig, novel_index: int = 0
+) -> tuple[tuple[int, ...], np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     used = {task.program.primitive_ids for task in world.tasks}
     candidates = [
         tuple(route)
@@ -345,27 +373,36 @@ def _novel_data(world: World, config: ExperimentConfig) -> tuple[tuple[int, ...]
         )
         if tuple(route) not in used
     ]
-    generator = np.random.default_rng(np.random.SeedSequence([config.world.seed, 91]))
-    route = candidates[int(generator.integers(len(candidates)))]
+    route_generator = np.random.default_rng(np.random.SeedSequence([config.world.seed, 91]))
+    route_order = route_generator.permutation(len(candidates))
+    route = candidates[int(route_order[novel_index % len(candidates)])]
+    generator = np.random.default_rng(
+        np.random.SeedSequence([config.world.seed, 93, novel_index])
+    )
     train_x = generator.normal(size=(32, config.world.state_dim))
     eval_x = generator.normal(size=(config.world.evaluation_examples, config.world.state_dim))
     program = Program(route)
+    novel_library = world.library_for_task(config.world.tasks + novel_index)
     return (
         route,
         train_x,
-        program.execute(world.library, train_x),
+        program.execute(novel_library, train_x),
         eval_x,
-        program.execute(world.library, eval_x),
+        program.execute(novel_library, eval_x),
     )
 
 
 def _adapt_novel_composition(
-    model: Learner, world: World, config: ExperimentConfig, task_lr: float
+    model: Learner,
+    world: World,
+    config: ExperimentConfig,
+    task_lr: float,
+    novel_index: int = 0,
 ) -> dict[str, object]:
-    route, train_x, train_y, eval_x, eval_y = _novel_data(world, config)
+    route, train_x, train_y, eval_x, eval_y = _novel_data(world, config, novel_index)
     for parameter in model.shared_parameters():
         parameter.requires_grad_(False)
-    novel_id = "task_novel_composition"
+    novel_id = f"task_novel_composition_{novel_index}"
     novel_code = model.begin_task(novel_id)
     optimizer = torch.optim.Adam([novel_code], lr=task_lr)
     curve: dict[str, float] = {}
@@ -385,6 +422,42 @@ def _adapt_novel_composition(
         loss.backward()
         optimizer.step()
     return {"teacher_route": list(route), "nmse_by_support": curve}
+
+
+def _novel_checkpoint(
+    model: Learner,
+    world: World,
+    config: ExperimentConfig,
+    task_lr: float,
+    tasks_completed: int,
+    novel_tasks: int,
+) -> dict[str, object]:
+    checkpoint_model = copy.deepcopy(model)
+    individuals = [
+        _adapt_novel_composition(
+            checkpoint_model,
+            world,
+            config,
+            task_lr,
+            novel_index=index,
+        )
+        for index in range(novel_tasks)
+    ]
+    support_points = individuals[0]["nmse_by_support"].keys()
+    mean_curve = {
+        support: float(
+            np.mean(
+                [float(result["nmse_by_support"][support]) for result in individuals]
+            )
+        )
+        for support in support_points
+    }
+    return {
+        "tasks_completed": tasks_completed,
+        "novel_tasks": novel_tasks,
+        "mean_nmse_by_support": mean_curve,
+        "individuals": individuals,
+    }
 
 
 def _write_artifacts(
@@ -418,6 +491,9 @@ def _write_artifacts(
     (output / "world_programs.json").write_text(
         json.dumps(world.programs_json(), indent=2), encoding="utf-8"
     )
+    (output / "world_functional_reuse.json").write_text(
+        json.dumps(summary["world_functional_reuse"], indent=2), encoding="utf-8"
+    )
     (output / "world_seed.txt").write_text(f"{config.world.seed}\n", encoding="utf-8")
     (output / "model_seed.txt").write_text(f"{model_config.seed}\n", encoding="utf-8")
     torch.save({"model_state_dict": model.state_dict(), "summary": summary}, output / "model.pt")
@@ -449,6 +525,7 @@ def main() -> None:
     parser.add_argument("--config", type=Path, default=Path("configs/v1.yaml"))
     parser.add_argument("--model", choices=("dense", "continuous", "discrete"), required=True)
     parser.add_argument("--world-seed", type=int)
+    parser.add_argument("--reuse-rho", type=float)
     parser.add_argument("--model-seed", type=int)
     parser.add_argument("--global-learning-rate", type=float)
     parser.add_argument("--task-learning-rate", type=float)
@@ -460,7 +537,11 @@ def main() -> None:
     config = load_config(args.config)
     config = replace(
         config,
-        world=config.world if args.world_seed is None else replace(config.world, seed=args.world_seed),
+        world=replace(
+            config.world,
+            seed=config.world.seed if args.world_seed is None else args.world_seed,
+            reuse_rho=config.world.reuse_rho if args.reuse_rho is None else args.reuse_rho,
+        ),
         output_directory=config.output_directory if args.output is None else args.output,
     )
     selected = {
@@ -509,7 +590,7 @@ def main() -> None:
     assert isinstance(novel_curve, dict)
     print(
         f"{args.model} {args.order}: final median NMSE={final['median']:.4f}; "
-        f"prequential NLL={summary['cumulative_prequential_nll']:.1f}; "
+        f"prequential Gaussian log loss={summary['cumulative_prequential_gaussian_log_loss']:.1f}; "
         f"novel NMSE 0/32={novel_curve['0']:.4f}/{novel_curve['32']:.4f}"
     )
 

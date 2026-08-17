@@ -46,7 +46,30 @@ class WorldTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             WorldConfig(teacher_primitives=2, program_length=2, tasks=5)
 
+    def test_rho_endpoints_control_task_specific_operator_recurrence(self) -> None:
+        exact = World.generate(
+            WorldConfig(reuse_rho=1.0, tasks=4, examples_per_task=4, evaluation_examples=4)
+        )
+        independent = World.generate(
+            WorldConfig(reuse_rho=0.0, tasks=4, examples_per_task=4, evaluation_examples=4)
+        )
+        self.assertIs(exact.tasks[0].teacher_library, exact.library)
+        self.assertFalse(
+            np.array_equal(
+                independent.tasks[0].teacher_library[0].U,
+                independent.tasks[1].teacher_library[0].U,
+            )
+        )
+        exact_diagnostic = exact.functional_reuse_diagnostics(probe_examples=32, max_tasks=4)
+        independent_diagnostic = independent.functional_reuse_diagnostics(
+            probe_examples=32, max_tasks=4
+        )
+        self.assertAlmostEqual(exact_diagnostic["mean_pairwise_residual_correlation"], 1.0)
+        self.assertLess(
+            independent_diagnostic["mean_pairwise_residual_correlation"],
+            exact_diagnostic["mean_pairwise_residual_correlation"],
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -115,3 +115,23 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 - Hardened discrete inference is only about 768 multiply-adds, versus 6,528 for
   the continuous mixture, exposing a strong storage/inference versus online
   learning-cost tradeoff.
+- `rho` is implemented through task-specific correlated teacher parameters,
+  followed by spectral renormalization of `U` and `V`. At `rho=0`, measured
+  pairwise residual-function correlation is approximately zero; at `rho=1`, it
+  is exactly one. Novel tasks receive independently derived correlated libraries.
+- On development world 0, the causal endpoint reverses: Continuous beats Dense-C
+  by 3,135 Gaussian-log-loss units at `rho=1`, while Dense-C beats Continuous by
+  6,714 at `rho=0`. This is the first direct evidence that the advantage depends
+  on latent computational recurrence.
+- Checkpoint probes must operate on deep-copied models so code-only novel-task
+  adaptation cannot alter lifetime training. Use four fixed novel programs at
+  8, 16, 32, and 64 tasks.
+- On exact-reuse world 0, Continuous mean 32-shot novel NMSE improved from 0.0298
+  after 8 tasks to 0.00467 after 64; Dense-C improved from 0.0367 to 0.0159.
+  This directly supports progressive learning-to-learn, beyond total loss alone.
+- Call the density-based metric cumulative prequential Gaussian log loss. A
+  fixed target precision of 1/256 adds the common density-to-mass term for a
+  defensible quantized-target coding interpretation without changing model
+  differences.
+- Development worlds are 0–9. Confirmatory worlds 100–129 must remain untouched
+  until symmetric tuning and all analysis rules are frozen in `EXPERIMENT_PLAN.md`.

@@ -70,6 +70,9 @@ evaluation:
   support_points: [0, 1, 2, 4, 8, 16, 32, 64, 128]
   nmse_thresholds: [0.1, 0.05, 0.02]
   gaussian_sigma: 0.1
+  target_precision: 0.00390625
+  lifetime_checkpoints: [8, 16, 32, 64]
+  checkpoint_novel_tasks: 4
 
 output:
   directory: artifacts/scratch_difficulty

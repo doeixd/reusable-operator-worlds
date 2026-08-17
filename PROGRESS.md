@@ -69,19 +69,32 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Hardened discrete retains 26,112 proxy bits and uses about 768 inference
   multiply-adds. Correct route-lossless 8-bit evaluation changes mean NMSE by
   only 1.10e-5.
+- Implemented the full `rho` teacher continuum with task-specific correlated
+  primitive parameters and measured functional-reuse diagnostics.
+- Validated the causal endpoints: residual-function correlation is approximately
+  zero at `rho=0` and one at `rho=1`.
+- On development world 0, Continuous beats Dense-C by 3,135 prequential Gaussian
+  log-loss units at `rho=1`, but loses by 6,714 at `rho=0`.
+- Added four-program frozen-library checkpoints at 8, 16, 32, and 64 lifetime
+  tasks. Continuous 32-shot novel NMSE improves from 0.0298 to 0.00467; Dense-C
+  improves from 0.0367 to 0.0159.
+- Added fixed target precision `1/256` and a quantized-target prequential log-loss
+  total for a defensible coding interpretation.
+- Generated and visually inspected six required exact-reuse pilot figures.
+- Added `EXPERIMENT_PLAN.md` defining development seeds 0–9, sealed confirmatory
+  seeds 100–129, symmetric tuning, causal metrics, and robustness work.
 
 # In progress
 
-- Generate required exact-reuse figures and machine-readable comparison tables.
+- Run the staged symmetric hyperparameter grid on development worlds.
 
 # Next
 
 - Add model-comparison plots for learning curves, cumulative prequential loss,
-  novel adaptation, and functional operator distance.
-- Implement the `rho` reuse continuum in the teacher generator and validate its
-  endpoint behavior before running the sweep.
-- Begin the exact-reuse multi-initialization pilot after all principal V1 models
-  are stable.
+  novel adaptation, and functional operator distance across replicated worlds.
+- Run the six-point `rho` sweep with frozen development configurations.
+- Implement the generic low-rank hypernetwork and dense 24-dimensional task-code
+  controls after the causal sweep.
 
 # Decisions
 
