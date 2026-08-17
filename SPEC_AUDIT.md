@@ -63,9 +63,6 @@ claim.
 - At multiple lifetime checkpoints, evaluate current learned operators under a
   teacher-route diagnostic. Existing final functional matching identifies good
   operators, but does not yet isolate route inference throughout learning.
-- Re-run symmetric int8 retained-description evaluation on the current
-  learnable-alpha artifacts. Existing quantization evidence predates the frozen
-  architecture, and the quantizer does not yet support the hypernetwork.
 - Add world-level median and bootstrap intervals for the ten-world reports and a
   task-level model-by-lifetime analysis for examples-to-criterion. Existing
   three-world intervals are only exploratory.
@@ -97,10 +94,16 @@ is also required by `EXPERIMENT_PLAN.md` before opening worlds 100–129.
 
 # Execution order
 
-1. Refresh retained-description evaluation and hypernetwork quantization support.
-2. Add resumable reverse-order and replay-ablation sweeps.
-3. Run the second model initialization on the ten development worlds.
-4. Implement fresh-task forward-transfer and checkpoint true-route diagnostics.
-5. Implement the shared-parent plus residual control at intermediate reuse.
-6. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
-7. Re-audit the gate before touching confirmatory worlds.
+1. Add resumable reverse-order and replay-ablation sweeps.
+2. Run the second model initialization on the ten development worlds.
+3. Implement fresh-task forward-transfer and checkpoint true-route diagnostics.
+4. Implement the shared-parent plus residual control at intermediate reuse.
+5. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
+6. Re-audit the gate before touching confirmatory worlds.
+
+# Closed during this audit
+
+- Current learnable-alpha int8 evaluation is complete. Continuous,
+  Hypernetwork, Dense-24, and Dense-C were behaviorally evaluated on all ten
+  development worlds, and current per-task Discrete was checked on world 0. The
+  tracked result is `reports/retention/current-retention.json`.

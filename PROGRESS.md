@@ -165,6 +165,17 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - New learned-model checkpoints are tensor-only so PyTorch's restricted loader
   works; a provenance-validated legacy fallback preserves existing artifacts.
 
+# Current retention complete
+
+- Re-evaluated symmetric per-tensor int8 artifacts across development worlds
+  0–9. Retained proxies are 29,248 bits Continuous, 33,928 Hypernetwork, 56,448
+  Dense-24, and 66,688 Dense-C.
+- Mean quantization degradation is at most 3.23e-6 NMSE for these models; the
+  largest individual task increase across the sweep is 1.38e-4.
+- The current per-task Discrete artifact retains 26,208 bits, uses 768 hardened
+  inference multiply-adds, and changes mean NMSE by 4.77e-6.
+- The validated report is `reports/retention/current-retention.json`.
+
 # Structural controls complete
 
 - Implemented a generic low-rank hypernetwork with the same 24 task-state

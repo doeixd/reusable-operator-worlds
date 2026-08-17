@@ -289,6 +289,15 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   task-state bits) at 7,296 inference multiply-adds. The world-0 int8 smoke
   changed mean final NMSE by only 2.19e-6; replicate across development worlds
   before treating this as the refreshed retention result.
+- Refreshed int8 retention on all ten development worlds gives 29,248 bits for
+  Continuous, 33,928 for Hypernetwork, 56,448 for Dense-24, and 66,688 for
+  Dense-C. Mean quantized-minus-float final NMSE is 1.15e-6, 3.23e-6, 0.64e-6,
+  and 2.32e-6 respectively; no model's maximum observed task increase exceeds
+  1.38e-4.
+- The current per-task-annealed Discrete world-0 artifact retains 26,208 bits
+  after adding its twelve learnable alpha scalars to the older proxy. It still
+  uses only 768 hardened inference multiply-adds, with mean int8 degradation
+  4.77e-6.
 
 # Standing scientific doubts
 
