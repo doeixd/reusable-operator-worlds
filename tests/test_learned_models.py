@@ -4,7 +4,11 @@ import unittest
 import torch
 
 from row.config import load_config
-from row.experiments.learned_lifetime import _true_route_operator_quality
+from row.experiments.learned_lifetime import (
+    TaskReplayBuffer,
+    _true_route_operator_quality,
+    _update_batch_counts,
+)
 from row.models import (
     ContinuousBasisLearner,
     DenseLearner,
@@ -96,6 +100,30 @@ class LearnedModelTests(unittest.TestCase):
         self.assertIn("true_route_future_programs_nmse_mean", result)
         self.assertGreaterEqual(result["one_to_one_mean_primitive_distance"], 0.0)
         self.assertTrue(model.training)
+
+    def test_batch_eight_splits_evenly_at_one_to_one_replay(self) -> None:
+        self.assertEqual(_update_batch_counts(8, 1.0), (4, 4))
+        self.assertEqual(_update_batch_counts(2, 1.0), (1, 1))
+
+    def test_split_replay_rng_keeps_buffer_construction_independent_of_sampling(self) -> None:
+        config = replace(
+            load_config("configs/v1.yaml").world,
+            tasks=2,
+            examples_per_task=8,
+            evaluation_examples=4,
+        )
+        world = World.generate(config)
+        small = TaskReplayBuffer(11, sampling_seed=12)
+        large = TaskReplayBuffer(11, sampling_seed=12)
+        small.add_task(world.tasks[0], 4)
+        large.add_task(world.tasks[0], 4)
+        small.sample(1)
+        large.sample(4)
+        small.add_task(world.tasks[1], 4)
+        large.add_task(world.tasks[1], 4)
+        for left, right in zip(small.items, large.items, strict=True):
+            self.assertEqual(left[2], right[2])
+            self.assertTrue(torch.equal(torch.from_numpy(left[0]), torch.from_numpy(right[0])))
 
 
 if __name__ == "__main__":

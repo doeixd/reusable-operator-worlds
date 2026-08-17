@@ -40,22 +40,40 @@ Learner = (
 
 
 class TaskReplayBuffer:
-    def __init__(self, seed: int) -> None:
-        self.generator = np.random.default_rng(seed)
+    def __init__(self, seed: int, sampling_seed: int | None = None) -> None:
+        self.add_generator = np.random.default_rng(seed)
+        self.sample_generator = (
+            self.add_generator
+            if sampling_seed is None
+            else np.random.default_rng(sampling_seed)
+        )
         self.items: list[tuple[np.ndarray, np.ndarray, str]] = []
 
     def add_task(self, task: Task, count: int) -> None:
         if count == 0:
             return
-        indices = self.generator.choice(len(task.train_x), size=min(count, len(task.train_x)), replace=False)
+        indices = self.add_generator.choice(
+            len(task.train_x), size=min(count, len(task.train_x)), replace=False
+        )
         for index in indices:
             self.items.append((task.train_x[index].copy(), task.train_y[index].copy(), task.task_id))
 
     def sample(self, count: int) -> list[tuple[np.ndarray, np.ndarray, str]]:
         if count == 0 or not self.items:
             return []
-        indices = self.generator.choice(len(self.items), size=min(count, len(self.items)), replace=False)
+        indices = self.sample_generator.choice(
+            len(self.items), size=min(count, len(self.items)), replace=False
+        )
         return [self.items[int(index)] for index in np.atleast_1d(indices)]
+
+
+def _update_batch_counts(batch_size: int, replay_ratio: float) -> tuple[int, int]:
+    if batch_size <= 0:
+        raise ValueError("update batch size must be positive")
+    if replay_ratio < 0:
+        raise ValueError("replay ratio must be nonnegative")
+    current = max(1, int(round(batch_size / (1.0 + replay_ratio))))
+    return current, batch_size - current
 
 
 def _tensor(array: np.ndarray) -> torch.Tensor:
@@ -219,6 +237,7 @@ def run(
     kind: ModelKind,
     order: str = "forward",
     task_id_scramble_seed: int | None = None,
+    update_batch_size: int | None = None,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -231,7 +250,13 @@ def run(
         _training_values(config, kind)
     )
     optimizer = _shared_optimizer(model, global_lr, weight_decay)
-    replay = TaskReplayBuffer(seed + 1)
+    if update_batch_size is None:
+        replay = TaskReplayBuffer(seed + 1)
+    else:
+        replay_seed = int(
+            np.random.SeedSequence([config.world.seed, 96]).generate_state(1)[0]
+        )
+        replay = TaskReplayBuffer(replay_seed, sampling_seed=replay_seed + 1)
     task_indices = list(range(len(world.tasks)))
     if order == "reverse":
         task_indices.reverse()
@@ -240,6 +265,7 @@ def run(
     cumulative_nll = 0.0
     cumulative_mass_log_loss = 0.0
     checkpoint_results: list[dict[str, object]] = []
+    observed_update_batch_sizes: list[int] = []
 
     for lifetime_index, world_task_index in enumerate(task_indices):
         task = world.tasks[world_task_index]
@@ -294,10 +320,40 @@ def run(
                 }
             )
 
-            replay_items = replay.sample(int(round(replay_ratio)))
-            batch_x = [task.train_x[n_seen], *(item[0] for item in replay_items)]
-            batch_y = [task.train_y[n_seen], *(item[1] for item in replay_items)]
-            task_ids = [task.task_id, *(item[2] for item in replay_items)]
+            if update_batch_size is None:
+                current_indices = [n_seen]
+                replay_count = int(round(replay_ratio))
+            else:
+                current_count, replay_count = _update_batch_counts(
+                    update_batch_size, replay_ratio
+                )
+                prior_count = min(current_count - 1, n_seen)
+                prior_generator = np.random.default_rng(
+                    np.random.SeedSequence(
+                        [config.world.seed, 97, world_task_index, n_seen]
+                    )
+                )
+                prior_indices = prior_generator.choice(
+                    n_seen, size=prior_count, replace=False
+                )
+                current_indices = [
+                    n_seen,
+                    *(int(index) for index in np.atleast_1d(prior_indices)),
+                ]
+            replay_items = replay.sample(replay_count)
+            batch_x = [
+                *(task.train_x[index] for index in current_indices),
+                *(item[0] for item in replay_items),
+            ]
+            batch_y = [
+                *(task.train_y[index] for index in current_indices),
+                *(item[1] for item in replay_items),
+            ]
+            task_ids = [
+                *(task.task_id for _ in current_indices),
+                *(item[2] for item in replay_items),
+            ]
+            observed_update_batch_sizes.append(len(batch_x))
             for _ in range(update_count):
                 if isinstance(model, DiscreteLibraryLearner):
                     global_example = lifetime_index * config.world.examples_per_task + n_seen
@@ -399,6 +455,15 @@ def run(
     summary["novel_composition_checkpoints"] = checkpoint_results
     if task_id_scramble_seed is not None:
         summary["task_id_scramble_seed"] = task_id_scramble_seed
+    if update_batch_size is not None:
+        summary["update_batch"] = {
+            "target_size": update_batch_size,
+            "mean_observed_size": float(np.mean(observed_update_batch_sizes)),
+            "minimum_observed_size": min(observed_update_batch_sizes),
+            "maximum_observed_size": max(observed_update_batch_sizes),
+            "current_to_replay_ratio": f"1:{replay_ratio:g}",
+            "sampling_seed_policy": "world-paired",
+        }
     _write_artifacts(
         config,
         world,
@@ -408,6 +473,7 @@ def run(
         kind,
         order,
         task_id_scramble_seed,
+        update_batch_size,
     )
     return summary
 
@@ -690,6 +756,7 @@ def resolved_learned_config(
     kind: ModelKind,
     order: str,
     task_id_scramble_seed: int | None = None,
+    update_batch_size: int | None = None,
 ) -> dict[str, object]:
     model_config = {
         "dense": config.dense_model,
@@ -706,6 +773,8 @@ def resolved_learned_config(
     }
     if task_id_scramble_seed is not None:
         resolved["task_id_scramble_seed"] = task_id_scramble_seed
+    if update_batch_size is not None:
+        resolved["update_batch_size"] = update_batch_size
     return resolved
 
 
@@ -718,6 +787,7 @@ def _write_artifacts(
     kind: ModelKind,
     order: str,
     task_id_scramble_seed: int | None,
+    update_batch_size: int | None,
 ) -> None:
     output = config.output_directory
     output.mkdir(parents=True, exist_ok=True)
@@ -728,7 +798,7 @@ def _write_artifacts(
         "discrete": config.discrete_model,
     }[kind]
     resolved = resolved_learned_config(
-        config, kind, order, task_id_scramble_seed
+        config, kind, order, task_id_scramble_seed, update_batch_size
     )
     (output / "config.yaml").write_text(yaml.safe_dump(resolved, sort_keys=False), encoding="utf-8")
     with (output / "metrics.jsonl").open("w", encoding="utf-8") as handle:
@@ -776,6 +846,7 @@ def main() -> None:
     parser.add_argument("--teacher-rank", type=int)
     parser.add_argument("--model-seed", type=int)
     parser.add_argument("--task-id-scramble-seed", type=int)
+    parser.add_argument("--update-batch-size", type=int)
     parser.add_argument("--global-learning-rate", type=float)
     parser.add_argument("--task-learning-rate", type=float)
     parser.add_argument("--updates-per-example", type=int)
@@ -897,6 +968,7 @@ def main() -> None:
         kind=args.model,
         order=args.order,
         task_id_scramble_seed=args.task_id_scramble_seed,
+        update_batch_size=args.update_batch_size,
     )
     final = summary["final_nmse"]
     assert isinstance(final, dict)
