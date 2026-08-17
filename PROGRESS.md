@@ -159,6 +159,11 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   forward transfer, and true-route diagnostics remain open.
 - Refresh current retained-description evaluation first, including generic
   hypernetwork quantization support, then proceed through the robustness queue.
+- Added hypernetwork construction and compute accounting to the int8 artifact
+  evaluator. A world-0 smoke gives 33,928 retained proxy bits and only 2.19e-6
+  mean NMSE degradation. Development-world aggregation remains in progress.
+- New learned-model checkpoints are tensor-only so PyTorch's restricted loader
+  works; a provenance-validated legacy fallback preserves existing artifacts.
 
 # Structural controls complete
 

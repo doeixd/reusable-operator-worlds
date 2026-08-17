@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import pickle
 from pathlib import Path
 
 import numpy as np
@@ -12,7 +13,13 @@ import torch
 import yaml
 
 from row.metrics import nmse
-from row.models import ContinuousBasisLearner, DenseLearner, DiscreteLibraryLearner
+from row.models import (
+    ContinuousBasisLearner,
+    DenseLearner,
+    DiscreteLibraryLearner,
+    HypernetworkLearner,
+)
+from row.provenance import validate_artifact
 from row.world import World, WorldConfig
 
 
@@ -30,7 +37,7 @@ def symmetric_int8_dequantize(tensor: torch.Tensor) -> tuple[torch.Tensor, float
 
 def _build_from_artifact(
     raw: dict[str, object], kind: str
-) -> DenseLearner | ContinuousBasisLearner | DiscreteLibraryLearner:
+) -> DenseLearner | ContinuousBasisLearner | HypernetworkLearner | DiscreteLibraryLearner:
     world_raw = raw["world"]
     assert isinstance(world_raw, dict)
     d = int(world_raw["state_dim"])
@@ -58,6 +65,20 @@ def _build_from_artifact(
             activation=str(model_raw.get("operator_activation", "tanh")),
             include_identity=bool(model_raw.get("include_identity", False)),
         )
+    if kind == "hypernetwork":
+        model_raw = raw["hypernetwork_model"]
+        assert isinstance(model_raw, dict)
+        return HypernetworkLearner(
+            d=d,
+            step_code_dim=int(model_raw["step_code_dim"]),
+            hypernetwork_hidden_dim=int(model_raw["hypernetwork_hidden_dim"]),
+            operator_rank=int(model_raw["operator_rank"]),
+            task_steps=int(model_raw["task_steps"]),
+            alpha=float(model_raw.get("operator_alpha_init", world_raw["alpha"])),
+            seed=int(model_raw["seed"]),
+            learnable_alpha=bool(model_raw.get("learnable_alpha", False)),
+            activation=str(model_raw.get("operator_activation", "tanh")),
+        )
     model_raw = raw["discrete_model"]
     assert isinstance(model_raw, dict)
     return DiscreteLibraryLearner(
@@ -76,7 +97,12 @@ def _build_from_artifact(
 
 @torch.no_grad()
 def _task_scores(
-    model: DenseLearner | ContinuousBasisLearner | DiscreteLibraryLearner,
+    model: (
+        DenseLearner
+        | ContinuousBasisLearner
+        | HypernetworkLearner
+        | DiscreteLibraryLearner
+    ),
     world: World,
 ) -> np.ndarray:
     model.eval()
@@ -100,6 +126,20 @@ def _inference_multiply_adds(raw: dict[str, object], kind: str) -> int:
         embedding = int(model_raw["task_embedding_dim"])
         blocks = int(model_raw["residual_blocks"])
         return blocks * ((d + embedding) * width + width * d)
+    if kind == "hypernetwork":
+        model_raw = raw["hypernetwork_model"]
+        assert isinstance(model_raw, dict)
+        rank = int(model_raw["operator_rank"])
+        steps = int(model_raw["task_steps"])
+        code_dim = int(model_raw["step_code_dim"])
+        hidden_dim = int(model_raw["hypernetwork_hidden_dim"])
+        parameter_dim = 2 * d * rank + rank
+        return steps * (
+            code_dim * hidden_dim
+            + hidden_dim * parameter_dim
+            + d * rank
+            + rank * d
+        )
     model_raw = raw[f"{kind}_model"]
     assert isinstance(model_raw, dict)
     slots = int(model_raw["operator_slots"])
@@ -117,13 +157,24 @@ def run(artifact: Path) -> dict[str, object]:
     raw = yaml.safe_load((artifact / "config.yaml").read_text(encoding="utf-8"))
     summary = json.loads((artifact / "summary.json").read_text(encoding="utf-8"))
     kind = str(summary["model"])
+    validate_artifact(artifact, raw, kind, backfill_missing_fingerprint=False)
     world_raw = raw["world"]
     assert isinstance(world_raw, dict)
     world = World.generate(WorldConfig(**world_raw))
     model = _build_from_artifact(raw, kind)
     for task in world.tasks:
         model.begin_task(task.task_id)
-    checkpoint = torch.load(artifact / "model.pt", map_location="cpu", weights_only=True)
+    try:
+        checkpoint = torch.load(
+            artifact / "model.pt", map_location="cpu", weights_only=True
+        )
+    except pickle.UnpicklingError:
+        # Legacy ROW checkpoints redundantly stored NumPy-valued summaries with
+        # the tensor state. The complete config/fingerprint was validated above,
+        # and new checkpoints are tensor-only.
+        checkpoint = torch.load(
+            artifact / "model.pt", map_location="cpu", weights_only=False
+        )
     checkpoint_keys = checkpoint["model_state_dict"].keys()
     novel_keys = [
         key.removeprefix("task_codes.")

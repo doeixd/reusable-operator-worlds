@@ -634,7 +634,9 @@ def _write_artifacts(
     )
     (output / "world_seed.txt").write_text(f"{config.world.seed}\n", encoding="utf-8")
     (output / "model_seed.txt").write_text(f"{model_config.seed}\n", encoding="utf-8")
-    torch.save({"model_state_dict": model.state_dict(), "summary": summary}, output / "model.pt")
+    # Summary data is already stored as JSON. Keeping model.pt tensor-only lets
+    # downstream tools use PyTorch's restricted weights-only loader.
+    torch.save({"model_state_dict": model.state_dict()}, output / "model.pt")
     if isinstance(model, DiscreteLibraryLearner):
         (output / "hard_routes.json").write_text(
             json.dumps(model.hard_routes(), indent=2), encoding="utf-8"

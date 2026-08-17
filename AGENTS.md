@@ -281,6 +281,14 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   wins lifetime loss 5/10 and is worse by 73 units on average, while winning
   novel 32-shot NMSE 7/10 by only 0.000119 on average. The primary comparison is
   not driven by Continuous having fewer retained task scalars.
+- Keep `model.pt` tensor-only. Summaries already live in `summary.json`, and
+  embedding NumPy-valued summaries in a torch checkpoint breaks PyTorch's
+  restricted `weights_only=True` loader. The quantizer has a provenance-checked
+  fallback solely for legacy local artifacts.
+- Current hypernetwork retention is 33,928 proxy bits (21,640 shared plus 12,288
+  task-state bits) at 7,296 inference multiply-adds. The world-0 int8 smoke
+  changed mean final NMSE by only 2.19e-6; replicate across development worlds
+  before treating this as the refreshed retention result.
 
 # Standing scientific doubts
 
