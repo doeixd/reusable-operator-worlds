@@ -130,11 +130,18 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Added resolved-config SHA-256 fingerprints to learned, oracle, and scratch
   artifacts. Sweep resume now rejects any architecture/protocol mismatch and
   validated/backfilled all 24 worlds 1–2 rho artifacts.
+- Expanded the rho sweep through world 5. All six worlds favor Dense-C through
+  rho 0.75 and Continuous from rho 0.9; the mean crossing is rho 0.826 or
+  measured recurrence 0.479. A checked report and plot are under
+  `reports/rho_worlds_0_5`.
+- Across those six worlds, Continuous wins novel 32-shot adaptation 6/6 only at
+  exact reuse; it has worse mean transfer at rho 0.9 despite winning lifetime
+  loss 6/6. This further rejects the provisional transfer-first interpretation.
 
 # In progress
 
-- Expand the frozen six-point rho curve from worlds 0–2 to development worlds
-  3–9, reusing their completed exact-reuse stage-two artifacts where possible.
+- Complete the frozen six-point rho curve on development worlds 6–9, reusing
+  their completed exact-reuse stage-two artifacts after fingerprint validation.
 
 # Next
 

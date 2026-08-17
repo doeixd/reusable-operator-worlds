@@ -210,7 +210,13 @@ def plot_report(report: dict[str, Any], destination: Path) -> None:
             float(summary["mean_dense_minus_continuous_gaussian_log_loss"])
             for summary in summaries
         ]
-        axis.plot(mean_x, mean_y, marker="D", linewidth=2.5, label="Three-world mean")
+        axis.plot(
+            mean_x,
+            mean_y,
+            marker="D",
+            linewidth=2.5,
+            label=f"{len(worlds)}-world mean",
+        )
         if x_key == "configured_rho":
             for x_value, effect in zip(mean_x, mean_y, strict=True):
                 axis.annotate(

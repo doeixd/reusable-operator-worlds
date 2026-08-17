@@ -193,11 +193,21 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   `rho=1`. Interpolated per-world crossings are 0.811, 0.852, and 0.851; the
   three-world mean curve crosses near configured rho 0.833, corresponding to
   mean measured residual correlation 0.488. Treat interpolation as descriptive.
+- Expansion through development world 5 preserves the reversal without an
+  exception: Continuous lifetime-loss wins are 0/6 worlds at rho 0, 0.25, 0.5,
+  and 0.75, then 6/6 at rho 0.9 and 1.0. The six-world mean effects are -2,197,
+  -2,308, -2,332, -1,427, +1,389, and +3,357; the mean crossing is rho 0.826
+  (measured correlation 0.479), with per-world crossings spanning 0.811–0.852.
 - The seed-0 suggestion that Continuous improves 32-shot novel transfer before
   it wins lifetime loss does not replicate. At rho 0.25, 0.5, and 0.75,
   Continuous wins novel transfer on only one of three worlds and has worse mean
   novel NMSE differences at all three points. Preserve this as a failed secondary
   hypothesis rather than a three-regime conclusion.
+- Across worlds 0–5, Continuous wins 32-shot novel transfer on only 1–2 of six
+  worlds at rho 0–0.9 and has worse mean transfer even at rho 0.9, despite its
+  6/6 lifetime-loss wins there. It wins novel transfer 6/6 only at exact reuse.
+  The current evidence supports distinct lifetime-cost and transfer behavior,
+  but not the proposed ordering in which transfer improves first.
 - Report total, per-online-example, and per-target-scalar Gaussian log loss.
   Compute accounting distinguishes training-forward all-slot evaluation from
   hardened inference; it excludes backward and optimizer operations.
@@ -231,6 +241,6 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   population claim.
 - Confirmatory worlds 100–129 remain sealed. Do not inspect them until these
   doubts and the development `rho` curve are resolved.
-- The crossover now replicates on worlds 0–2, but the full development set is
+- The crossover now replicates on worlds 0–5, but the full development set is
   still required before choosing a frozen confirmatory grid or interpreting the
   mean 0.833 interpolation as a stable phase boundary.
