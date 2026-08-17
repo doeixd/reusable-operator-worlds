@@ -65,3 +65,19 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 - Reverse task order and two additional world seeds reproduced zero-example late
   performance at NMSE 0.05 and 0.02, so the oracle effect is not specific to the
   seed-0 curriculum.
+- Dense baselines must mirror the teacher's three state-update/tanh stages. A
+  conventional hidden MLP with only one output tanh begins at a severe geometric
+  disadvantage. The fair dense architecture uses three task-conditioned
+  state-space residual blocks with zero-initialized deltas.
+- For `d=16`, a three-block Dense-P with hidden width 11 has 2,193 shared scalars,
+  closely matching the eight-slot continuous basis's 2,112. Dense-C width 32
+  approximately matches its matrix-multiply count and has 6,288 shared scalars.
+- Continuous task-code LR 0.005 left routes diffuse (mean maximum coefficient
+  0.216) and underperformed Dense-P. Raising only task-code LR to 0.05 increased
+  the mean maximum coefficient to 0.466, improved one-to-one primitive distance
+  from 0.0151 to 0.00349, and reversed the seed-0 comparison. Route inference is
+  therefore an optimization bottleneck, not a cosmetic hyperparameter.
+- In the seed-0 pilot, tuned continuous prequential NLL was -165,119 versus
+  -155,993 for Dense-P, -161,984 for Dense-C, and -163,775 for width-128 dense.
+  Tuned continuous novel-composition NMSE improved from 0.0453 to 0.00803 using
+  32 code-only examples. Treat this as exploratory until paired-world replication.

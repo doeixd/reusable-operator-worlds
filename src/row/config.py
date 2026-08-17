@@ -55,10 +55,56 @@ class OracleModelConfig:
 
 
 @dataclass(frozen=True)
+class DenseModelConfig:
+    task_embedding_dim: int = 32
+    hidden_width: int = 128
+    residual_blocks: int = 3
+    global_learning_rate: float = 1e-3
+    task_learning_rate: float = 5e-3
+    weight_decay: float = 1e-4
+    updates_per_example: int = 1
+    replay_examples_per_task: int = 4
+    replay_ratio: float = 1.0
+    seed: int = 3000
+
+    def __post_init__(self) -> None:
+        if min(self.task_embedding_dim, self.hidden_width, self.residual_blocks) <= 0:
+            raise ValueError("dense model dimensions and block count must be positive")
+        if min(self.global_learning_rate, self.task_learning_rate) <= 0.0:
+            raise ValueError("dense learning rates must be positive")
+        if self.updates_per_example <= 0 or self.replay_examples_per_task < 0:
+            raise ValueError("dense update count must be positive and replay size nonnegative")
+
+
+@dataclass(frozen=True)
+class ContinuousModelConfig:
+    operator_slots: int = 8
+    operator_rank: int = 8
+    task_steps: int = 3
+    global_learning_rate: float = 1e-3
+    task_learning_rate: float = 5e-3
+    weight_decay: float = 1e-4
+    updates_per_example: int = 1
+    replay_examples_per_task: int = 4
+    replay_ratio: float = 1.0
+    seed: int = 4000
+
+    def __post_init__(self) -> None:
+        if min(self.operator_slots, self.operator_rank, self.task_steps) <= 0:
+            raise ValueError("continuous model dimensions and step count must be positive")
+        if min(self.global_learning_rate, self.task_learning_rate) <= 0.0:
+            raise ValueError("continuous learning rates must be positive")
+        if self.updates_per_example <= 0 or self.replay_examples_per_task < 0:
+            raise ValueError("continuous update count must be positive and replay size nonnegative")
+
+
+@dataclass(frozen=True)
 class ExperimentConfig:
     world: WorldConfig
     scratch_model: ScratchModelConfig
     oracle_model: OracleModelConfig
+    dense_model: DenseModelConfig
+    continuous_model: ContinuousModelConfig
     evaluation: EvaluationConfig
     output_directory: Path
 
@@ -75,6 +121,8 @@ def load_config(path: str | Path) -> ExperimentConfig:
     world_raw = _require_mapping(raw.get("world", {}), "world")
     model_raw = _require_mapping(raw.get("scratch_model", {}), "scratch_model")
     oracle_raw = _require_mapping(raw.get("oracle_model", {}), "oracle_model")
+    dense_raw = _require_mapping(raw.get("dense_model", {}), "dense_model")
+    continuous_raw = _require_mapping(raw.get("continuous_model", {}), "continuous_model")
     eval_raw = _require_mapping(raw.get("evaluation", {}), "evaluation")
     output_raw = _require_mapping(raw.get("output", {}), "output")
 
@@ -108,10 +156,42 @@ def load_config(path: str | Path) -> ExperimentConfig:
         replay_ratio=float(oracle_raw.get("replay_ratio", 1.0)),
         seed=int(oracle_raw.get("seed", 2000)),
     )
+    dense_model = DenseModelConfig(
+        task_embedding_dim=int(dense_raw.get("task_embedding_dim", 32)),
+        hidden_width=int(dense_raw.get("hidden_width", 128)),
+        residual_blocks=int(dense_raw.get("residual_blocks", 3)),
+        global_learning_rate=float(dense_raw.get("global_learning_rate", 1e-3)),
+        task_learning_rate=float(dense_raw.get("task_learning_rate", 5e-3)),
+        weight_decay=float(dense_raw.get("weight_decay", 1e-4)),
+        updates_per_example=int(dense_raw.get("updates_per_example", 1)),
+        replay_examples_per_task=int(dense_raw.get("replay_examples_per_task", 4)),
+        replay_ratio=float(dense_raw.get("replay_ratio", 1.0)),
+        seed=int(dense_raw.get("seed", 3000)),
+    )
+    continuous_model = ContinuousModelConfig(
+        operator_slots=int(continuous_raw.get("operator_slots", 8)),
+        operator_rank=int(continuous_raw.get("operator_rank", 8)),
+        task_steps=int(continuous_raw.get("task_steps", 3)),
+        global_learning_rate=float(continuous_raw.get("global_learning_rate", 1e-3)),
+        task_learning_rate=float(continuous_raw.get("task_learning_rate", 5e-3)),
+        weight_decay=float(continuous_raw.get("weight_decay", 1e-4)),
+        updates_per_example=int(continuous_raw.get("updates_per_example", 1)),
+        replay_examples_per_task=int(continuous_raw.get("replay_examples_per_task", 4)),
+        replay_ratio=float(continuous_raw.get("replay_ratio", 1.0)),
+        seed=int(continuous_raw.get("seed", 4000)),
+    )
     evaluation = EvaluationConfig(
         support_points=tuple(int(n) for n in eval_raw.get("support_points", EvaluationConfig.support_points)),
         nmse_thresholds=tuple(float(x) for x in eval_raw.get("nmse_thresholds", EvaluationConfig.nmse_thresholds)),
         gaussian_sigma=float(eval_raw.get("gaussian_sigma", 0.1)),
     )
     output_directory = Path(output_raw.get("directory", "artifacts/scratch_difficulty"))
-    return ExperimentConfig(world, scratch_model, oracle_model, evaluation, output_directory)
+    return ExperimentConfig(
+        world=world,
+        scratch_model=scratch_model,
+        oracle_model=oracle_model,
+        dense_model=dense_model,
+        continuous_model=continuous_model,
+        evaluation=evaluation,
+        output_directory=output_directory,
+    )

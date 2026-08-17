@@ -160,7 +160,7 @@ def run(config: ExperimentConfig, order: str = "forward") -> dict[str, object]:
     summary["cumulative_prequential_nll"] = cumulative_nll
     summary["parameter_count"] = model.parameter_count
     summary["novel_composition"] = novel
-    summary["functional_recovery"] = _functional_recovery(model, world, config)
+    summary["functional_recovery"] = _functional_recovery(model.operators, world, config)
     _write_artifacts(config, world, model, rows, summary, order)
     return summary
 
@@ -206,6 +206,9 @@ def _evaluate_novel_composition(
     ]
     generator = np.random.default_rng(np.random.SeedSequence([config.world.seed, 91]))
     route = candidates[int(generator.integers(len(candidates)))]
+    # Consume the same 32 adaptation inputs used by non-oracle novel-task runs so
+    # all models share the identical evaluation set.
+    generator.normal(size=(32, config.world.state_dim))
     x = generator.normal(size=(config.world.evaluation_examples, config.world.state_dim))
     y = Program(route).execute(world.library, x)
     prediction = model(_tensor(x), route).cpu().numpy()
@@ -214,13 +217,13 @@ def _evaluate_novel_composition(
 
 @torch.no_grad()
 def _functional_recovery(
-    model: OracleCompositor, world: World, config: ExperimentConfig
+    operators: torch.nn.ModuleList, world: World, config: ExperimentConfig
 ) -> dict[str, object]:
     generator = np.random.default_rng(np.random.SeedSequence([config.world.seed, 92]))
     probe_x = generator.normal(size=(4096, config.world.state_dim))
     learned = [
         operator(_tensor(probe_x)).cpu().numpy()
-        for operator in model.operators
+        for operator in operators
     ]
     teacher = [primitive(probe_x) for primitive in world.library]
     distances = np.empty((len(teacher), len(learned)), dtype=np.float64)

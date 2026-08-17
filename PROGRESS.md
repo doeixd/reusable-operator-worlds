@@ -1,7 +1,7 @@
 # Current milestone
 
-Milestones 004–005: matched dense baseline and continuous reusable operation
-basis.
+Milestones 004–005 replication: paired dense and continuous reusable-basis
+comparisons across exploratory worlds.
 
 # Completed
 
@@ -33,18 +33,29 @@ basis.
   the last quarter; unseen-composition zero-shot NMSE was 0.00215.
 - Added functional primitive recovery. Seed-0 learned slots matched all six
   teacher primitives with mean normalized distance 0.000539.
+- Implemented a shared non-oracle lifetime protocol, task-state-only novel
+  composition adaptation, Dense-P, Dense-C, width-128 dense, and an eight-slot
+  continuous reusable operation basis.
+- Corrected a dense initialization confound by using three task-conditioned
+  state-space residual/tanh blocks, matching the teacher's compositional cadence.
+- Identified task-code inference as the continuous model's initial bottleneck.
+  Raising task-code LR from 0.005 to 0.05 reduced seed-0 prequential NLL from
+  -152,304 to -165,119 and primitive matching distance from 0.0151 to 0.00349.
+- Seed-0 tuned continuous beat Dense-P, Dense-C, and width-128 dense on
+  prequential NLL. Its frozen-library novel task improved from NMSE 0.0453 to
+  0.00803 after 32 code-only examples.
 
 # In progress
 
-- Design matched dense and continuous-basis learners on the same lifetime
-  protocol without exposing hidden routes.
+- Replicate tuned continuous versus Dense-P on world seeds 1 and 2.
 
 # Next
 
-- Implement and tune the dense baseline with opaque task embeddings.
-- Implement the continuous reusable basis as the first non-oracle reuse model.
-- Compare paired cumulative prequential cost, examples-to-criterion, retained
-  state, parameter counts, and frozen-library novel-composition adaptation.
+- Aggregate paired world-level effects with uncertainty clearly marked as
+  exploratory at three worlds.
+- Add quantized retained-description and inference-FLOP evaluation.
+- Implement the fixed hard discrete library only after the continuous result
+  survives replication.
 
 # Decisions
 
@@ -57,3 +68,5 @@ basis.
   remains a sensitivity target rather than hidden or discarded evidence.
 - The oracle gate passed. NMSE 0.1 is too loose for oracle initialization, so
   oracle transfer claims use the stricter thresholds and zero-shot behavior.
+- The tuned continuous seed-0 win is a pilot result. Do not treat it as confirmed
+  until paired-world replication is complete.
