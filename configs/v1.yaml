@@ -12,9 +12,10 @@ world:
 
 scratch_model:
   hidden_dim: 64
-  learning_rate: 0.003
+  learning_rate: 0.001
   weight_decay: 0.0001
   batch_size: 8
+  updates_per_example: 4
   seed: 1000
 
 evaluation:
@@ -24,4 +25,3 @@ evaluation:
 
 output:
   directory: artifacts/scratch_difficulty
-

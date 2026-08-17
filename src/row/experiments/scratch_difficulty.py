@@ -7,7 +7,7 @@ import json
 import platform
 import subprocess
 import sys
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from pathlib import Path
 
 import numpy as np
@@ -56,8 +56,9 @@ def run(config: ExperimentConfig) -> list[dict[str, object]]:
                 break
             pool_size = n_seen + 1
             batch_size = min(config.scratch_model.batch_size, pool_size)
-            indices = batch_rng.choice(pool_size, size=batch_size, replace=False)
-            model.update(task.train_x[indices], task.train_y[indices])
+            for _ in range(config.scratch_model.updates_per_example):
+                indices = batch_rng.choice(pool_size, size=batch_size, replace=False)
+                model.update(task.train_x[indices], task.train_y[indices])
 
         summary: dict[str, object] = {
             "record_type": "task_summary",
@@ -170,8 +171,33 @@ def _write_artifacts(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("configs/v1.yaml"))
+    parser.add_argument("--world-seed", type=int)
+    parser.add_argument("--learning-rate", type=float)
+    parser.add_argument("--updates-per-example", type=int)
+    parser.add_argument("--output", type=Path)
     args = parser.parse_args()
-    rows = run(load_config(args.config))
+    config = load_config(args.config)
+    world = config.world if args.world_seed is None else replace(config.world, seed=args.world_seed)
+    model = replace(
+        config.scratch_model,
+        learning_rate=(
+            config.scratch_model.learning_rate
+            if args.learning_rate is None
+            else args.learning_rate
+        ),
+        updates_per_example=(
+            config.scratch_model.updates_per_example
+            if args.updates_per_example is None
+            else args.updates_per_example
+        ),
+    )
+    config = replace(
+        config,
+        world=world,
+        scratch_model=model,
+        output_directory=config.output_directory if args.output is None else args.output,
+    )
+    rows = run(config)
     summaries = [row for row in rows if row["record_type"] == "task_summary"]
     median_final = float(np.median([float(row["final_nmse"]) for row in summaries]))
     result = summarize(

@@ -17,7 +17,14 @@ class ScratchModelConfig:
     learning_rate: float = 3e-3
     weight_decay: float = 1e-4
     batch_size: int = 8
+    updates_per_example: int = 1
     seed: int = 1000
+
+    def __post_init__(self) -> None:
+        if self.hidden_dim <= 0 or self.batch_size <= 0 or self.updates_per_example <= 0:
+            raise ValueError("scratch dimensions, batch size, and update count must be positive")
+        if self.learning_rate <= 0.0 or self.weight_decay < 0.0:
+            raise ValueError("learning_rate must be positive and weight_decay nonnegative")
 
 
 @dataclass(frozen=True)
@@ -66,6 +73,7 @@ def load_config(path: str | Path) -> ExperimentConfig:
         learning_rate=float(model_raw.get("learning_rate", 3e-3)),
         weight_decay=float(model_raw.get("weight_decay", 1e-4)),
         batch_size=int(model_raw.get("batch_size", 8)),
+        updates_per_example=int(model_raw.get("updates_per_example", 1)),
         seed=int(model_raw.get("seed", 1000)),
     )
     evaluation = EvaluationConfig(
@@ -75,4 +83,3 @@ def load_config(path: str | Path) -> ExperimentConfig:
     )
     output_directory = Path(output_raw.get("directory", "artifacts/scratch_difficulty"))
     return ExperimentConfig(world, scratch_model, evaluation, output_directory)
-

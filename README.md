@@ -17,3 +17,6 @@ python -m unittest discover -s tests -v
 python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 ```
 
+Scratch controls accept `--world-seed`, `--learning-rate`,
+`--updates-per-example`, and `--output` overrides for small optimization and
+replication sweeps without editing the canonical configuration.

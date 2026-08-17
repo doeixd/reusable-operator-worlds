@@ -39,10 +39,16 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 - Generate opaque IDs from fixed-length random bytes with an explicit uniqueness
   check. NumPy's `choice(..., replace=False)` cannot index the full `uint64`
   range on platforms whose sampling path uses signed indices.
-- The current environment has NumPy and PyYAML but no PyTorch. The benchmark
-  foundation and scratch control therefore use NumPy; later neural baselines may
-  add an accelerator dependency after environment compatibility is confirmed.
+- PyTorch 2.13 provides a native Python 3.14 wheel in this environment and is the
+  autograd/runtime dependency for oracle and learned reusable models. The NumPy
+  teacher remains the deterministic data-generation source of truth.
 - World seed 0 produced tightly matched task output variance (approximately
   0.213–0.228) and no output saturation. The initial scratch optimizer produced
   a flat final-error trend but did not reach NMSE 0.05 in 128 examples; tune the
   scratch optimization control before using that threshold as a validity gate.
+- The tuned NumPy scratch control uses learning rate 0.001 and four minibatch
+  updates per arriving example. Across world seeds 0–2, final-NMSE/task-index
+  correlations were -0.060, 0.002, and -0.039; every task reached NMSE 0.1 at
+  support 64. NMSE 0.05 remained fully censored, so scratch validity currently
+  rests on the flat 0.1 curve and flat continuous final error, not that stricter
+  threshold.

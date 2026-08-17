@@ -1,7 +1,6 @@
 # Current milestone
 
-Milestone 001–002: deterministic teacher world and scratch-task difficulty
-control.
+Milestone 003: oracle compositor and lifetime transfer positive control.
 
 # Completed
 
@@ -17,17 +16,20 @@ control.
   task-index correlation -0.0963, output variance range 0.2129–0.2284, and zero
   saturation.
 - Prepared the verified foundation as the initial Git checkpoint.
+- Installed PyTorch 2.13 for the oracle and subsequent learned models.
+- Tuned the scratch control to learning rate 0.001 with four updates per example.
+- Completed scratch controls on world seeds 0–2. Final-NMSE/task-index
+  correlations were -0.060, 0.002, and -0.039; all tasks reached NMSE 0.1 at
+  support 64, confirming no task-order difficulty trend at that resolution.
 
 # In progress
 
-- Tune or strengthen the scratch learner so examples-to-criterion at NMSE 0.05
-  is not fully censored.
+- Implement the oracle compositor using true hidden routes and shared learned
+  operator slots.
 
 # Next
 
-- Repeat the scratch control across three exploratory worlds and inspect both
-  forward and reverse task orders.
-- Implement the oracle compositor and verify declining late-life learning cost.
+- Verify declining oracle late-life learning cost and novel-composition transfer.
 - Implement matched dense and continuous reusable-basis learners.
 
 # Decisions
@@ -36,3 +38,6 @@ control.
   after the oracle and at least one learned reusable substrate work.
 - Fixed arrays are part of a generated `World`, preventing accidental data-stream
   differences between paired models.
+- The scratch validity gate uses NMSE 0.1 and continuous final error for now;
+  NMSE 0.05 is fully censored by the current shallow scratch architecture and
+  remains a sensitivity target rather than hidden or discarded evidence.
