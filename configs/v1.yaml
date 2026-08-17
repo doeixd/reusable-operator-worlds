@@ -1,0 +1,27 @@
+world:
+  seed: 0
+  state_dim: 16
+  teacher_rank: 8
+  teacher_primitives: 6
+  program_length: 3
+  tasks: 64
+  examples_per_task: 128
+  evaluation_examples: 256
+  reuse_rho: 1.0
+  alpha: 0.35
+
+scratch_model:
+  hidden_dim: 64
+  learning_rate: 0.003
+  weight_decay: 0.0001
+  batch_size: 8
+  seed: 1000
+
+evaluation:
+  support_points: [0, 1, 2, 4, 8, 16, 32, 64, 128]
+  nmse_thresholds: [0.1, 0.05, 0.02]
+  gaussian_sigma: 0.1
+
+output:
+  directory: artifacts/scratch_difficulty
+
