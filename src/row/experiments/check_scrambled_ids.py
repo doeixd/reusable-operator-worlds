@@ -48,7 +48,8 @@ def _normalized_state(
     for key, value in state.items():
         if key.startswith("task_codes."):
             task_id = key.removeprefix("task_codes.")
-            key = f"task_codes.task_index_{task_index[task_id]}"
+            if task_id in task_index:
+                key = f"task_codes.task_index_{task_index[task_id]}"
         normalized[key] = value
     return normalized
 

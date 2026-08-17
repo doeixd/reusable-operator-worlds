@@ -42,6 +42,7 @@ class CheckScrambledIdsTests(unittest.TestCase):
                     {
                         "model_state_dict": {
                             f"task_codes.{task_id}": torch.tensor([0.5]),
+                            "task_codes.task_novel_composition_0": torch.tensor([0.25]),
                             "shared": torch.tensor([1.0]),
                         }
                     },
