@@ -15,6 +15,18 @@ from row.experiments.learned_lifetime import resolved_learned_config, run
 from row.provenance import validate_artifact
 
 
+STAGE2_EXACT_REUSE_ROOTS = {
+    "continuous": Path(
+        "artifacts/tuning/stage2_current/continuous_3em03/continuous/"
+        "global_3em03_task_5em02"
+    ),
+    "dense": Path(
+        "artifacts/tuning/stage2_current/dense_1em03/dense/"
+        "global_1em03_task_5em02"
+    ),
+}
+
+
 def _rho_label(value: float) -> str:
     return f"{value:g}".replace(".", "p")
 
@@ -108,6 +120,11 @@ def main() -> None:
         nargs="+",
         default=["continuous", "dense"],
     )
+    parser.add_argument(
+        "--reuse-stage2-exact",
+        action="store_true",
+        help="reuse validated selected stage-two artifacts for rho=1 worlds 3-9",
+    )
     args = parser.parse_args()
 
     base = load_config(args.config)
@@ -151,6 +168,18 @@ def main() -> None:
                         model,
                         rho,
                     )
+                elif args.reuse_stage2_exact and rho == 1.0 and world_seed in range(3, 10):
+                    imported_output = STAGE2_EXACT_REUSE_ROOTS[model] / f"world_{world_seed}"
+                    imported_summary = imported_output / "summary.json"
+                    imported_config = replace(config, output_directory=imported_output)
+                    summary = _validated_summary(
+                        imported_summary,
+                        imported_output,
+                        resolved_learned_config(imported_config, model, "forward"),
+                        model,
+                        rho,
+                    )
+                    print(f"  reused {imported_output}", flush=True)
                 else:
                     summary = run(config, kind=model)
                     gc.collect()
