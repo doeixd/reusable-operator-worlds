@@ -182,6 +182,10 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 - Learned alpha scalars use a no-weight-decay optimizer group. `forward_tasks`
   groups samples by task ID before forwarding, preserving gradients and enabling
   useful batching when replay contains repeated tasks.
+- Do not run multiple full-lifetime PyTorch/SciPy experiments concurrently on
+  this Windows host. Four parallel stage-two tuning processes exhausted the
+  paging file and crashed the harness; run one lifetime process at a time and
+  use artifact-level resume to recover completed worlds.
 
 # Standing scientific doubts
 

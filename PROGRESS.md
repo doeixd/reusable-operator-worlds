@@ -116,6 +116,8 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 - Revalidate the two stage-one optimizer finalists per model under the current
   learnable-alpha architecture on development worlds 3–9.
+- Resume stage-two tuning sequentially. A four-process attempt exhausted the
+  Windows paging file; two completed dense world-3 artifacts remain reusable.
 
 # Next
 
