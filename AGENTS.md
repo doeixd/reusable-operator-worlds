@@ -298,6 +298,11 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   after adding its twelve learnable alpha scalars to the older proxy. It still
   uses only 768 hardened inference multiply-adds, with mean int8 degradation
   4.77e-6.
+- Exploratory reverse-order and replay robustness on worlds 0–2 preserves the
+  Continuous lifetime-loss advantage 3/3 in every condition. Mean Dense-minus-
+  Continuous effects are 3,175 reverse, 3,165 with no replay, 3,492 at canonical
+  1:1 replay, and 3,082 at 1:4 replay. Strong replay does not erase the effect;
+  replicate through world 9 before closing the gate item.
 
 # Standing scientific doubts
 

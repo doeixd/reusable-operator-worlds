@@ -164,6 +164,10 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   mean NMSE degradation. Development-world aggregation remains in progress.
 - New learned-model checkpoints are tensor-only so PyTorch's restricted loader
   works; a provenance-validated legacy fallback preserves existing artifacts.
+- Completed exploratory reverse-order and replay-ratio sweeps on worlds 0–2.
+  Continuous beats Dense-C 3/3 under reverse order and at replay ratios 0, 1,
+  and 4; mean lifetime-loss advantages remain 3,082–3,492 units. Expansion to
+  worlds 3–9 is in progress.
 
 # Current retention complete
 
