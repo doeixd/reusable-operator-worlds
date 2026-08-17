@@ -335,6 +335,24 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   transfer rises from 26 for no matching route positions to 268 at one of three
   and 402 at two of three; Dense-C rises from -34 to 115 and 242. Teacher routes
   are used only for analysis, never learner training or prediction.
+- Exact-reuse checkpoint matching shows progressive operator recovery in every
+  development world. From 8 to 64 tasks, mean one-to-one primitive functional
+  distance falls from 0.00786 to 0.00211 for Continuous and from 0.00745 to
+  0.00131 for per-task-annealed Discrete; both improve 10/10 worlds.
+- Matched slots also generalize to programs whose task codes have not yet been
+  trained. Mean future-program teacher-route NMSE falls from 0.0300 to 0.0126
+  for Continuous and from 0.0280 to 0.0106 for Discrete between checkpoints 8
+  and 32.
+- A teacher route through Hungarian-matched individual slots is not an oracle
+  upper bound. Continuous's learned mixture route is better on completed tasks
+  in all ten worlds at every checkpoint; at 64 tasks its mean NMSE is 0.00191
+  versus 0.00937 for the matched-slot teacher route. This indicates distributed
+  or compensatory mixture representations even while individual-slot matching
+  improves.
+- Discrete's learned hard route and matched-slot teacher route converge: at 64
+  tasks their mean NMSEs are 0.00456 and 0.00484, with the learned route better
+  in only 6/10 worlds. Teacher primitive identities and programs are used only
+  in this post-hoc diagnostic and never enter training.
 
 # Standing scientific doubts
 
@@ -357,3 +375,7 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 - The development crossover is complete and highly consistent, but the 0.8264
   interpolation lies between coarse grid points and remains descriptive. Do not
   treat it as a precisely located universal phase boundary.
+- Continuous's slot-to-primitive diagnostic is basis-dependent: its own mixtures
+  systematically outperform forced one-slot teacher routes. Report progressive
+  functional matching as evidence of operator-quality improvement, not as proof
+  that Continuous has uniquely recovered the teacher's discrete representation.

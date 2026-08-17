@@ -1,0 +1,3668 @@
+{
+  "scope": "exact-reuse development worlds [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]; post-hoc analysis only",
+  "method": "Hungarian-match learned slots to hidden teacher primitives on held-out probes, then execute programs through the matched slots using hidden routes. Hidden identities and routes never enter training.",
+  "records": [
+    {
+      "world_seed": 0,
+      "model": "continuous",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 3,
+            "2": 4,
+            "3": 7,
+            "4": 5,
+            "5": 0
+          },
+          "one_to_one_mean_primitive_distance": 0.010349087860254323,
+          "true_route_all_programs_nmse_mean": 0.040235690881657835,
+          "true_route_completed_programs_nmse_mean": 0.030455206320684085,
+          "true_route_future_programs_nmse_mean": 0.04163290296179694,
+          "learned_route_completed_programs_nmse_mean": 0.016608005531736435,
+          "learned_minus_true_route_completed_nmse": -0.01384720078894765
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 2,
+            "1": 4,
+            "2": 3,
+            "3": 7,
+            "4": 5,
+            "5": 0
+          },
+          "one_to_one_mean_primitive_distance": 0.005171961146292851,
+          "true_route_all_programs_nmse_mean": 0.02104036592188297,
+          "true_route_completed_programs_nmse_mean": 0.02062678332780991,
+          "true_route_future_programs_nmse_mean": 0.021178226786573995,
+          "learned_route_completed_programs_nmse_mean": 0.008926059982123164,
+          "learned_minus_true_route_completed_nmse": -0.011700723345686746
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 2,
+            "1": 6,
+            "2": 3,
+            "3": 7,
+            "4": 5,
+            "5": 0
+          },
+          "one_to_one_mean_primitive_distance": 0.0027735414402339075,
+          "true_route_all_programs_nmse_mean": 0.01304923087297439,
+          "true_route_completed_programs_nmse_mean": 0.011856268358876989,
+          "true_route_future_programs_nmse_mean": 0.014242193387071788,
+          "learned_route_completed_programs_nmse_mean": 0.003791349620015294,
+          "learned_minus_true_route_completed_nmse": -0.008064918738861695
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 2,
+            "1": 6,
+            "2": 3,
+            "3": 7,
+            "4": 1,
+            "5": 0
+          },
+          "one_to_one_mean_primitive_distance": 0.002219910072006112,
+          "true_route_all_programs_nmse_mean": 0.012245969814405556,
+          "true_route_completed_programs_nmse_mean": 0.012245969814405556,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.0020133917599356637,
+          "learned_minus_true_route_completed_nmse": -0.010232578054469893
+        }
+      ]
+    },
+    {
+      "world_seed": 0,
+      "model": "discrete",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 9,
+            "2": 2,
+            "3": 7,
+            "4": 3,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.008888386299693038,
+          "true_route_all_programs_nmse_mean": 0.03257751200987899,
+          "true_route_completed_programs_nmse_mean": 0.028676342056327575,
+          "true_route_future_programs_nmse_mean": 0.033134822003243476,
+          "learned_route_completed_programs_nmse_mean": 0.023134414849352365,
+          "learned_minus_true_route_completed_nmse": -0.00554192720697521
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 2,
+            "2": 0,
+            "3": 7,
+            "4": 3,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.006528443668111066,
+          "true_route_all_programs_nmse_mean": 0.02379074484133,
+          "true_route_completed_programs_nmse_mean": 0.0216996429000019,
+          "true_route_future_programs_nmse_mean": 0.024487778821772704,
+          "learned_route_completed_programs_nmse_mean": 0.017009360420168106,
+          "learned_minus_true_route_completed_nmse": -0.004690282479833795
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 9,
+            "2": 0,
+            "3": 7,
+            "4": 1,
+            "5": 11
+          },
+          "one_to_one_mean_primitive_distance": 0.0034926834315626744,
+          "true_route_all_programs_nmse_mean": 0.014222374077625877,
+          "true_route_completed_programs_nmse_mean": 0.012892899473623088,
+          "true_route_future_programs_nmse_mean": 0.015551848681628667,
+          "learned_route_completed_programs_nmse_mean": 0.011210431687384951,
+          "learned_minus_true_route_completed_nmse": -0.001682467786238137
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 9,
+            "2": 0,
+            "3": 7,
+            "4": 1,
+            "5": 11
+          },
+          "one_to_one_mean_primitive_distance": 0.0018758130273247556,
+          "true_route_all_programs_nmse_mean": 0.007952419656579607,
+          "true_route_completed_programs_nmse_mean": 0.007952419656579607,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.0067306875804669436,
+          "learned_minus_true_route_completed_nmse": -0.0012217320761126636
+        }
+      ]
+    },
+    {
+      "world_seed": 1,
+      "model": "continuous",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 7,
+            "2": 1,
+            "3": 0,
+            "4": 6,
+            "5": 2
+          },
+          "one_to_one_mean_primitive_distance": 0.006840626221150233,
+          "true_route_all_programs_nmse_mean": 0.02392620988044815,
+          "true_route_completed_programs_nmse_mean": 0.019544900185814444,
+          "true_route_future_programs_nmse_mean": 0.02455211126539582,
+          "learned_route_completed_programs_nmse_mean": 0.010595357361866273,
+          "learned_minus_true_route_completed_nmse": -0.008949542823948171
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 7,
+            "2": 3,
+            "3": 0,
+            "4": 6,
+            "5": 1
+          },
+          "one_to_one_mean_primitive_distance": 0.00549938029277165,
+          "true_route_all_programs_nmse_mean": 0.020546037054065512,
+          "true_route_completed_programs_nmse_mean": 0.017843173027856964,
+          "true_route_future_programs_nmse_mean": 0.021446991729468363,
+          "learned_route_completed_programs_nmse_mean": 0.0089698188372676,
+          "learned_minus_true_route_completed_nmse": -0.008873354190589364
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 7,
+            "2": 3,
+            "3": 0,
+            "4": 6,
+            "5": 1
+          },
+          "one_to_one_mean_primitive_distance": 0.0030005052782789833,
+          "true_route_all_programs_nmse_mean": 0.013378607656167704,
+          "true_route_completed_programs_nmse_mean": 0.013294888129834447,
+          "true_route_future_programs_nmse_mean": 0.01346232718250096,
+          "learned_route_completed_programs_nmse_mean": 0.004823253488814256,
+          "learned_minus_true_route_completed_nmse": -0.00847163464102019
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 2,
+            "2": 3,
+            "3": 0,
+            "4": 6,
+            "5": 1
+          },
+          "one_to_one_mean_primitive_distance": 0.001722373014770442,
+          "true_route_all_programs_nmse_mean": 0.007445401136385055,
+          "true_route_completed_programs_nmse_mean": 0.007445401136385055,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.001644748912819192,
+          "learned_minus_true_route_completed_nmse": -0.005800652223565864
+        }
+      ]
+    },
+    {
+      "world_seed": 1,
+      "model": "discrete",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 10,
+            "2": 2,
+            "3": 11,
+            "4": 8,
+            "5": 9
+          },
+          "one_to_one_mean_primitive_distance": 0.00676551290866824,
+          "true_route_all_programs_nmse_mean": 0.026087987828310677,
+          "true_route_completed_programs_nmse_mean": 0.019747491541443563,
+          "true_route_future_programs_nmse_mean": 0.026993773012148836,
+          "learned_route_completed_programs_nmse_mean": 0.017849117205308504,
+          "learned_minus_true_route_completed_nmse": -0.0018983743361350586
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 4,
+            "2": 2,
+            "3": 11,
+            "4": 8,
+            "5": 9
+          },
+          "one_to_one_mean_primitive_distance": 0.004648657364665402,
+          "true_route_all_programs_nmse_mean": 0.01692845774362844,
+          "true_route_completed_programs_nmse_mean": 0.014653251013235377,
+          "true_route_future_programs_nmse_mean": 0.0176868599870928,
+          "learned_route_completed_programs_nmse_mean": 0.014826802446840356,
+          "learned_minus_true_route_completed_nmse": 0.00017355143360497927
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 4,
+            "2": 2,
+            "3": 11,
+            "4": 8,
+            "5": 0
+          },
+          "one_to_one_mean_primitive_distance": 0.002466612673711226,
+          "true_route_all_programs_nmse_mean": 0.00996589932453933,
+          "true_route_completed_programs_nmse_mean": 0.009680107331891938,
+          "true_route_future_programs_nmse_mean": 0.010251691317186722,
+          "learned_route_completed_programs_nmse_mean": 0.00950034317164053,
+          "learned_minus_true_route_completed_nmse": -0.0001797641602514083
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 4,
+            "2": 2,
+            "3": 11,
+            "4": 8,
+            "5": 0
+          },
+          "one_to_one_mean_primitive_distance": 0.0010425947552293972,
+          "true_route_all_programs_nmse_mean": 0.003917294166943504,
+          "true_route_completed_programs_nmse_mean": 0.003917294166943504,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.00460159357582185,
+          "learned_minus_true_route_completed_nmse": 0.0006842994088783454
+        }
+      ]
+    },
+    {
+      "world_seed": 2,
+      "model": "continuous",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 5,
+            "2": 1,
+            "3": 3,
+            "4": 2,
+            "5": 7
+          },
+          "one_to_one_mean_primitive_distance": 0.007475440980935285,
+          "true_route_all_programs_nmse_mean": 0.028076023895700665,
+          "true_route_completed_programs_nmse_mean": 0.02412416898719118,
+          "true_route_future_programs_nmse_mean": 0.028640574596916303,
+          "learned_route_completed_programs_nmse_mean": 0.013301878792299094,
+          "learned_minus_true_route_completed_nmse": -0.010822290194892087
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 0,
+            "1": 5,
+            "2": 1,
+            "3": 3,
+            "4": 4,
+            "5": 7
+          },
+          "one_to_one_mean_primitive_distance": 0.004415409630032257,
+          "true_route_all_programs_nmse_mean": 0.01623180206477432,
+          "true_route_completed_programs_nmse_mean": 0.017042722514016923,
+          "true_route_future_programs_nmse_mean": 0.01596149524836012,
+          "learned_route_completed_programs_nmse_mean": 0.008178882036036197,
+          "learned_minus_true_route_completed_nmse": -0.008863840477980726
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 0,
+            "1": 5,
+            "2": 1,
+            "3": 3,
+            "4": 4,
+            "5": 7
+          },
+          "one_to_one_mean_primitive_distance": 0.002333046912536911,
+          "true_route_all_programs_nmse_mean": 0.009319811340721797,
+          "true_route_completed_programs_nmse_mean": 0.010424865084523508,
+          "true_route_future_programs_nmse_mean": 0.008214757596920088,
+          "learned_route_completed_programs_nmse_mean": 0.0027893264606759643,
+          "learned_minus_true_route_completed_nmse": -0.007635538623847544
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 0,
+            "1": 5,
+            "2": 1,
+            "3": 3,
+            "4": 4,
+            "5": 7
+          },
+          "one_to_one_mean_primitive_distance": 0.001767476103585548,
+          "true_route_all_programs_nmse_mean": 0.007440985896480734,
+          "true_route_completed_programs_nmse_mean": 0.007440985896480734,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.001830863992913722,
+          "learned_minus_true_route_completed_nmse": -0.005610121903567012
+        }
+      ]
+    },
+    {
+      "world_seed": 2,
+      "model": "discrete",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 4,
+            "2": 8,
+            "3": 3,
+            "4": 0,
+            "5": 2
+          },
+          "one_to_one_mean_primitive_distance": 0.006888329162214025,
+          "true_route_all_programs_nmse_mean": 0.025623738192252256,
+          "true_route_completed_programs_nmse_mean": 0.0213907717169581,
+          "true_route_future_programs_nmse_mean": 0.02622844768872285,
+          "learned_route_completed_programs_nmse_mean": 0.017903394560109708,
+          "learned_minus_true_route_completed_nmse": -0.0034873771568483918
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 10,
+            "2": 8,
+            "3": 0,
+            "4": 7,
+            "5": 2
+          },
+          "one_to_one_mean_primitive_distance": 0.005113559451483802,
+          "true_route_all_programs_nmse_mean": 0.019884752133086585,
+          "true_route_completed_programs_nmse_mean": 0.01834626252333974,
+          "true_route_future_programs_nmse_mean": 0.020397582003002204,
+          "learned_route_completed_programs_nmse_mean": 0.013400321645828231,
+          "learned_minus_true_route_completed_nmse": -0.004945940877511511
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 10,
+            "2": 8,
+            "3": 3,
+            "4": 7,
+            "5": 2
+          },
+          "one_to_one_mean_primitive_distance": 0.0023928992856659345,
+          "true_route_all_programs_nmse_mean": 0.009142221623144802,
+          "true_route_completed_programs_nmse_mean": 0.008958586369921674,
+          "true_route_future_programs_nmse_mean": 0.00932585687636793,
+          "learned_route_completed_programs_nmse_mean": 0.009504439496826944,
+          "learned_minus_true_route_completed_nmse": 0.0005458531269052699
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 10,
+            "2": 8,
+            "3": 0,
+            "4": 7,
+            "5": 2
+          },
+          "one_to_one_mean_primitive_distance": 0.0012154412013294048,
+          "true_route_all_programs_nmse_mean": 0.00454923538724886,
+          "true_route_completed_programs_nmse_mean": 0.00454923538724886,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.00495260732784151,
+          "learned_minus_true_route_completed_nmse": 0.00040337194059265023
+        }
+      ]
+    },
+    {
+      "world_seed": 3,
+      "model": "continuous",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 7,
+            "1": 2,
+            "2": 0,
+            "3": 5,
+            "4": 3,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.007473660323551807,
+          "true_route_all_programs_nmse_mean": 0.03026786913937813,
+          "true_route_completed_programs_nmse_mean": 0.02466207232763003,
+          "true_route_future_programs_nmse_mean": 0.031068697255342143,
+          "learned_route_completed_programs_nmse_mean": 0.012467149880796804,
+          "learned_minus_true_route_completed_nmse": -0.012194922446833227
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 6,
+            "2": 0,
+            "3": 5,
+            "4": 7,
+            "5": 4
+          },
+          "one_to_one_mean_primitive_distance": 0.006713523187279083,
+          "true_route_all_programs_nmse_mean": 0.0260409435633498,
+          "true_route_completed_programs_nmse_mean": 0.024756510242289215,
+          "true_route_future_programs_nmse_mean": 0.026469088003703335,
+          "learned_route_completed_programs_nmse_mean": 0.010202858701825836,
+          "learned_minus_true_route_completed_nmse": -0.01455365154046338
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 1,
+            "1": 2,
+            "2": 0,
+            "3": 4,
+            "4": 7,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.004672393248514023,
+          "true_route_all_programs_nmse_mean": 0.02087924478883076,
+          "true_route_completed_programs_nmse_mean": 0.021561321518422952,
+          "true_route_future_programs_nmse_mean": 0.020197168059238567,
+          "learned_route_completed_programs_nmse_mean": 0.005672029299580472,
+          "learned_minus_true_route_completed_nmse": -0.015889292218842478
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 1,
+            "1": 2,
+            "2": 0,
+            "3": 4,
+            "4": 3,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.0028306389542071334,
+          "true_route_all_programs_nmse_mean": 0.013679178169378182,
+          "true_route_completed_programs_nmse_mean": 0.013679178169378182,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.0022972387742630704,
+          "learned_minus_true_route_completed_nmse": -0.011381939395115111
+        }
+      ]
+    },
+    {
+      "world_seed": 3,
+      "model": "discrete",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 9,
+            "2": 2,
+            "3": 10,
+            "4": 7,
+            "5": 5
+          },
+          "one_to_one_mean_primitive_distance": 0.00634795568513178,
+          "true_route_all_programs_nmse_mean": 0.025130088332179834,
+          "true_route_completed_programs_nmse_mean": 0.01935539834963753,
+          "true_route_future_programs_nmse_mean": 0.02595504404397159,
+          "learned_route_completed_programs_nmse_mean": 0.018230938548551553,
+          "learned_minus_true_route_completed_nmse": -0.0011244598010859766
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 9,
+            "2": 2,
+            "3": 10,
+            "4": 5,
+            "5": 0
+          },
+          "one_to_one_mean_primitive_distance": 0.004890804200706345,
+          "true_route_all_programs_nmse_mean": 0.018168330017468235,
+          "true_route_completed_programs_nmse_mean": 0.015807990509063147,
+          "true_route_future_programs_nmse_mean": 0.018955109853603266,
+          "learned_route_completed_programs_nmse_mean": 0.012897916289493806,
+          "learned_minus_true_route_completed_nmse": -0.0029100742195693405
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 9,
+            "2": 2,
+            "3": 10,
+            "4": 5,
+            "5": 0
+          },
+          "one_to_one_mean_primitive_distance": 0.0021870647222588667,
+          "true_route_all_programs_nmse_mean": 0.008419288873639266,
+          "true_route_completed_programs_nmse_mean": 0.008112940450461216,
+          "true_route_future_programs_nmse_mean": 0.008725637296817315,
+          "learned_route_completed_programs_nmse_mean": 0.009092692515925852,
+          "learned_minus_true_route_completed_nmse": 0.0009797520654646358
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 9,
+            "2": 2,
+            "3": 10,
+            "4": 5,
+            "5": 0
+          },
+          "one_to_one_mean_primitive_distance": 0.0009030041557621165,
+          "true_route_all_programs_nmse_mean": 0.003176897905200052,
+          "true_route_completed_programs_nmse_mean": 0.003176897905200052,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.003730311538119437,
+          "learned_minus_true_route_completed_nmse": 0.0005534136329193849
+        }
+      ]
+    },
+    {
+      "world_seed": 4,
+      "model": "continuous",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 5,
+            "1": 3,
+            "2": 2,
+            "3": 7,
+            "4": 1,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.009116163566846991,
+          "true_route_all_programs_nmse_mean": 0.0314243982731245,
+          "true_route_completed_programs_nmse_mean": 0.02768358544462475,
+          "true_route_future_programs_nmse_mean": 0.03195880010576733,
+          "learned_route_completed_programs_nmse_mean": 0.018731371798123432,
+          "learned_minus_true_route_completed_nmse": -0.008952213646501318
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 5,
+            "1": 3,
+            "2": 2,
+            "3": 7,
+            "4": 1,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.006202956384985816,
+          "true_route_all_programs_nmse_mean": 0.021511880223155592,
+          "true_route_completed_programs_nmse_mean": 0.01968580351089349,
+          "true_route_future_programs_nmse_mean": 0.02212057246057629,
+          "learned_route_completed_programs_nmse_mean": 0.011355848491088893,
+          "learned_minus_true_route_completed_nmse": -0.008329955019804595
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 5,
+            "1": 3,
+            "2": 2,
+            "3": 7,
+            "4": 1,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.002971710880359966,
+          "true_route_all_programs_nmse_mean": 0.012499313106396381,
+          "true_route_completed_programs_nmse_mean": 0.013465990984608316,
+          "true_route_future_programs_nmse_mean": 0.011532635228184445,
+          "learned_route_completed_programs_nmse_mean": 0.005241040061358964,
+          "learned_minus_true_route_completed_nmse": -0.008224950923249352
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 5,
+            "1": 3,
+            "2": 2,
+            "3": 7,
+            "4": 1,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.0017260595272136786,
+          "true_route_all_programs_nmse_mean": 0.0071239936407773655,
+          "true_route_completed_programs_nmse_mean": 0.0071239936407773655,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.00188480737124774,
+          "learned_minus_true_route_completed_nmse": -0.005239186269529626
+        }
+      ]
+    },
+    {
+      "world_seed": 4,
+      "model": "discrete",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 11,
+            "2": 1,
+            "3": 6,
+            "4": 9,
+            "5": 7
+          },
+          "one_to_one_mean_primitive_distance": 0.007308010100590938,
+          "true_route_all_programs_nmse_mean": 0.025460650729877767,
+          "true_route_completed_programs_nmse_mean": 0.021442808238364613,
+          "true_route_future_programs_nmse_mean": 0.026034628228665365,
+          "learned_route_completed_programs_nmse_mean": 0.018751029422570526,
+          "learned_minus_true_route_completed_nmse": -0.0026917788157940874
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 11,
+            "2": 1,
+            "3": 6,
+            "4": 9,
+            "5": 2
+          },
+          "one_to_one_mean_primitive_distance": 0.0050440731273421685,
+          "true_route_all_programs_nmse_mean": 0.017559912932044147,
+          "true_route_completed_programs_nmse_mean": 0.015438768020969872,
+          "true_route_future_programs_nmse_mean": 0.01826696123573557,
+          "learned_route_completed_programs_nmse_mean": 0.014529514026879319,
+          "learned_minus_true_route_completed_nmse": -0.0009092539940905534
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 11,
+            "2": 1,
+            "3": 6,
+            "4": 9,
+            "5": 2
+          },
+          "one_to_one_mean_primitive_distance": 0.002420634894636528,
+          "true_route_all_programs_nmse_mean": 0.008827614248604225,
+          "true_route_completed_programs_nmse_mean": 0.009379263499287844,
+          "true_route_future_programs_nmse_mean": 0.008275964997920606,
+          "learned_route_completed_programs_nmse_mean": 0.00806092195435545,
+          "learned_minus_true_route_completed_nmse": -0.001318341544932395
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 11,
+            "2": 1,
+            "3": 6,
+            "4": 9,
+            "5": 2
+          },
+          "one_to_one_mean_primitive_distance": 0.0015428926966242023,
+          "true_route_all_programs_nmse_mean": 0.005537928603554248,
+          "true_route_completed_programs_nmse_mean": 0.005537928603554248,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.004539673585071513,
+          "learned_minus_true_route_completed_nmse": -0.0009982550184827353
+        }
+      ]
+    },
+    {
+      "world_seed": 5,
+      "model": "continuous",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 2,
+            "1": 0,
+            "2": 5,
+            "3": 6,
+            "4": 7,
+            "5": 1
+          },
+          "one_to_one_mean_primitive_distance": 0.007042596381002411,
+          "true_route_all_programs_nmse_mean": 0.02607280628301329,
+          "true_route_completed_programs_nmse_mean": 0.023288682645605335,
+          "true_route_future_programs_nmse_mean": 0.026470538231214428,
+          "learned_route_completed_programs_nmse_mean": 0.012939198118871897,
+          "learned_minus_true_route_completed_nmse": -0.010349484526733437
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 2,
+            "1": 0,
+            "2": 5,
+            "3": 6,
+            "4": 7,
+            "5": 1
+          },
+          "one_to_one_mean_primitive_distance": 0.005038225721432731,
+          "true_route_all_programs_nmse_mean": 0.018439793358059006,
+          "true_route_completed_programs_nmse_mean": 0.015667465334074558,
+          "true_route_future_programs_nmse_mean": 0.019363902699387155,
+          "learned_route_completed_programs_nmse_mean": 0.007580098328783437,
+          "learned_minus_true_route_completed_nmse": -0.008087367005291122
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 2,
+            "1": 0,
+            "2": 5,
+            "3": 6,
+            "4": 7,
+            "5": 1
+          },
+          "one_to_one_mean_primitive_distance": 0.0032851616958121475,
+          "true_route_all_programs_nmse_mean": 0.013504177940148972,
+          "true_route_completed_programs_nmse_mean": 0.012691055755842782,
+          "true_route_future_programs_nmse_mean": 0.014317300124455158,
+          "learned_route_completed_programs_nmse_mean": 0.004579316745468699,
+          "learned_minus_true_route_completed_nmse": -0.008111739010374083
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 2,
+            "1": 0,
+            "2": 5,
+            "3": 6,
+            "4": 7,
+            "5": 1
+          },
+          "one_to_one_mean_primitive_distance": 0.002435023543532875,
+          "true_route_all_programs_nmse_mean": 0.010754135062993598,
+          "true_route_completed_programs_nmse_mean": 0.010754135062993598,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.00193613213732531,
+          "learned_minus_true_route_completed_nmse": -0.008818002925668287
+        }
+      ]
+    },
+    {
+      "world_seed": 5,
+      "model": "discrete",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 2,
+            "2": 4,
+            "3": 3,
+            "4": 1,
+            "5": 8
+          },
+          "one_to_one_mean_primitive_distance": 0.0069932405386533844,
+          "true_route_all_programs_nmse_mean": 0.024396814071923817,
+          "true_route_completed_programs_nmse_mean": 0.017589393388824842,
+          "true_route_future_programs_nmse_mean": 0.025369302740937957,
+          "learned_route_completed_programs_nmse_mean": 0.018372460406566593,
+          "learned_minus_true_route_completed_nmse": 0.0007830670177417509
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 2,
+            "2": 4,
+            "3": 3,
+            "4": 1,
+            "5": 8
+          },
+          "one_to_one_mean_primitive_distance": 0.00523972807108443,
+          "true_route_all_programs_nmse_mean": 0.018255505297668777,
+          "true_route_completed_programs_nmse_mean": 0.01409362532884666,
+          "true_route_future_programs_nmse_mean": 0.019642798620609487,
+          "learned_route_completed_programs_nmse_mean": 0.01392439211838378,
+          "learned_minus_true_route_completed_nmse": -0.00016923321046288103
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 2,
+            "2": 4,
+            "3": 9,
+            "4": 1,
+            "5": 8
+          },
+          "one_to_one_mean_primitive_distance": 0.0023386727660361373,
+          "true_route_all_programs_nmse_mean": 0.008544022187026962,
+          "true_route_completed_programs_nmse_mean": 0.00821270657783186,
+          "true_route_future_programs_nmse_mean": 0.008875337796222063,
+          "learned_route_completed_programs_nmse_mean": 0.009246369004856106,
+          "learned_minus_true_route_completed_nmse": 0.0010336624270242453
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 2,
+            "2": 4,
+            "3": 9,
+            "4": 1,
+            "5": 8
+          },
+          "one_to_one_mean_primitive_distance": 0.0013042889320341344,
+          "true_route_all_programs_nmse_mean": 0.004853642472856075,
+          "true_route_completed_programs_nmse_mean": 0.004853642472856075,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.004054485123782984,
+          "learned_minus_true_route_completed_nmse": -0.0007991573490730907
+        }
+      ]
+    },
+    {
+      "world_seed": 6,
+      "model": "continuous",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 7,
+            "2": 1,
+            "3": 0,
+            "4": 2,
+            "5": 5
+          },
+          "one_to_one_mean_primitive_distance": 0.008482426938625401,
+          "true_route_all_programs_nmse_mean": 0.030909533197557862,
+          "true_route_completed_programs_nmse_mean": 0.02920864281399448,
+          "true_route_future_programs_nmse_mean": 0.031152517538066915,
+          "learned_route_completed_programs_nmse_mean": 0.012645578576410469,
+          "learned_minus_true_route_completed_nmse": -0.01656306423758401
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 7,
+            "2": 1,
+            "3": 0,
+            "4": 2,
+            "5": 5
+          },
+          "one_to_one_mean_primitive_distance": 0.005664753163228806,
+          "true_route_all_programs_nmse_mean": 0.019331773466883716,
+          "true_route_completed_programs_nmse_mean": 0.020696942829508694,
+          "true_route_future_programs_nmse_mean": 0.01887671701267539,
+          "learned_route_completed_programs_nmse_mean": 0.010204394805065926,
+          "learned_minus_true_route_completed_nmse": -0.010492548024442768
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 7,
+            "2": 1,
+            "3": 0,
+            "4": 2,
+            "5": 5
+          },
+          "one_to_one_mean_primitive_distance": 0.002560927548836221,
+          "true_route_all_programs_nmse_mean": 0.010140753091979668,
+          "true_route_completed_programs_nmse_mean": 0.01048640779277497,
+          "true_route_future_programs_nmse_mean": 0.009795098391184365,
+          "learned_route_completed_programs_nmse_mean": 0.00391880548825797,
+          "learned_minus_true_route_completed_nmse": -0.006567602304517001
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 7,
+            "2": 1,
+            "3": 0,
+            "4": 2,
+            "5": 5
+          },
+          "one_to_one_mean_primitive_distance": 0.0021188782473612598,
+          "true_route_all_programs_nmse_mean": 0.009568047538005983,
+          "true_route_completed_programs_nmse_mean": 0.009568047538005983,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.002024012055976241,
+          "learned_minus_true_route_completed_nmse": -0.007544035482029742
+        }
+      ]
+    },
+    {
+      "world_seed": 6,
+      "model": "discrete",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 7,
+            "2": 2,
+            "3": 3,
+            "4": 6,
+            "5": 9
+          },
+          "one_to_one_mean_primitive_distance": 0.008203216074027046,
+          "true_route_all_programs_nmse_mean": 0.028523921839485156,
+          "true_route_completed_programs_nmse_mean": 0.024747723031046324,
+          "true_route_future_programs_nmse_mean": 0.029063378812119272,
+          "learned_route_completed_programs_nmse_mean": 0.01783279570602163,
+          "learned_minus_true_route_completed_nmse": -0.006914927325024696
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 7,
+            "2": 2,
+            "3": 3,
+            "4": 0,
+            "5": 9
+          },
+          "one_to_one_mean_primitive_distance": 0.005966895873099449,
+          "true_route_all_programs_nmse_mean": 0.02140862036172539,
+          "true_route_completed_programs_nmse_mean": 0.020005057230439466,
+          "true_route_future_programs_nmse_mean": 0.021876474738820696,
+          "learned_route_completed_programs_nmse_mean": 0.016171143692534994,
+          "learned_minus_true_route_completed_nmse": -0.0038339135379044723
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 7,
+            "2": 1,
+            "3": 3,
+            "4": 6,
+            "5": 9
+          },
+          "one_to_one_mean_primitive_distance": 0.0034134166425864028,
+          "true_route_all_programs_nmse_mean": 0.012248588557868357,
+          "true_route_completed_programs_nmse_mean": 0.011298030703098157,
+          "true_route_future_programs_nmse_mean": 0.013199146412638557,
+          "learned_route_completed_programs_nmse_mean": 0.011609877931808971,
+          "learned_minus_true_route_completed_nmse": 0.0003118472287108147
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 4,
+            "1": 11,
+            "2": 1,
+            "3": 3,
+            "4": 6,
+            "5": 9
+          },
+          "one_to_one_mean_primitive_distance": 0.001335778852760318,
+          "true_route_all_programs_nmse_mean": 0.004610908977970606,
+          "true_route_completed_programs_nmse_mean": 0.004610908977970606,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.004531442732963117,
+          "learned_minus_true_route_completed_nmse": -7.946624500748851e-05
+        }
+      ]
+    },
+    {
+      "world_seed": 7,
+      "model": "continuous",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 2,
+            "2": 4,
+            "3": 7,
+            "4": 5,
+            "5": 3
+          },
+          "one_to_one_mean_primitive_distance": 0.007353796814037846,
+          "true_route_all_programs_nmse_mean": 0.024942892917847695,
+          "true_route_completed_programs_nmse_mean": 0.023855657305721124,
+          "true_route_future_programs_nmse_mean": 0.025098212291008636,
+          "learned_route_completed_programs_nmse_mean": 0.009133152643937796,
+          "learned_minus_true_route_completed_nmse": -0.014722504661783329
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 2,
+            "1": 1,
+            "2": 0,
+            "3": 7,
+            "4": 5,
+            "5": 3
+          },
+          "one_to_one_mean_primitive_distance": 0.004918028663418463,
+          "true_route_all_programs_nmse_mean": 0.016588778322970933,
+          "true_route_completed_programs_nmse_mean": 0.01734529159036695,
+          "true_route_future_programs_nmse_mean": 0.016336607233838927,
+          "learned_route_completed_programs_nmse_mean": 0.008319215611149396,
+          "learned_minus_true_route_completed_nmse": -0.009026075979217552
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 1,
+            "2": 0,
+            "3": 7,
+            "4": 5,
+            "5": 3
+          },
+          "one_to_one_mean_primitive_distance": 0.0026363786616646658,
+          "true_route_all_programs_nmse_mean": 0.010103980061149449,
+          "true_route_completed_programs_nmse_mean": 0.010442851035947918,
+          "true_route_future_programs_nmse_mean": 0.00976510908635098,
+          "learned_route_completed_programs_nmse_mean": 0.003838157295079246,
+          "learned_minus_true_route_completed_nmse": -0.006604693740868672
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 6,
+            "1": 1,
+            "2": 0,
+            "3": 7,
+            "4": 5,
+            "5": 3
+          },
+          "one_to_one_mean_primitive_distance": 0.001918335981585212,
+          "true_route_all_programs_nmse_mean": 0.007278521751146025,
+          "true_route_completed_programs_nmse_mean": 0.007278521751146025,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.0016888466716080647,
+          "learned_minus_true_route_completed_nmse": -0.00558967507953796
+        }
+      ]
+    },
+    {
+      "world_seed": 7,
+      "model": "discrete",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 5,
+            "1": 10,
+            "2": 7,
+            "3": 6,
+            "4": 3,
+            "5": 11
+          },
+          "one_to_one_mean_primitive_distance": 0.007258574396820142,
+          "true_route_all_programs_nmse_mean": 0.025765260652518055,
+          "true_route_completed_programs_nmse_mean": 0.024874128481906652,
+          "true_route_future_programs_nmse_mean": 0.025892565248319684,
+          "learned_route_completed_programs_nmse_mean": 0.019463406359429586,
+          "learned_minus_true_route_completed_nmse": -0.0054107221224770664
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 1,
+            "1": 10,
+            "2": 7,
+            "3": 4,
+            "4": 3,
+            "5": 11
+          },
+          "one_to_one_mean_primitive_distance": 0.004939340503005071,
+          "true_route_all_programs_nmse_mean": 0.01711022008344281,
+          "true_route_completed_programs_nmse_mean": 0.017091167562824052,
+          "true_route_future_programs_nmse_mean": 0.01711657092364906,
+          "learned_route_completed_programs_nmse_mean": 0.016827098437088777,
+          "learned_minus_true_route_completed_nmse": -0.0002640691257352751
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 1,
+            "1": 10,
+            "2": 7,
+            "3": 4,
+            "4": 3,
+            "5": 11
+          },
+          "one_to_one_mean_primitive_distance": 0.0029059666849779336,
+          "true_route_all_programs_nmse_mean": 0.010127086242156698,
+          "true_route_completed_programs_nmse_mean": 0.00949339577784748,
+          "true_route_future_programs_nmse_mean": 0.010760776706465917,
+          "learned_route_completed_programs_nmse_mean": 0.00926130206970677,
+          "learned_minus_true_route_completed_nmse": -0.0002320937081407102
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 1,
+            "1": 10,
+            "2": 7,
+            "3": 6,
+            "4": 3,
+            "5": 11
+          },
+          "one_to_one_mean_primitive_distance": 0.0011615602469628955,
+          "true_route_all_programs_nmse_mean": 0.003575710009209629,
+          "true_route_completed_programs_nmse_mean": 0.003575710009209629,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.004084857439331898,
+          "learned_minus_true_route_completed_nmse": 0.0005091474301222691
+        }
+      ]
+    },
+    {
+      "world_seed": 8,
+      "model": "continuous",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 7,
+            "2": 0,
+            "3": 5,
+            "4": 6,
+            "5": 1
+          },
+          "one_to_one_mean_primitive_distance": 0.007109860490668043,
+          "true_route_all_programs_nmse_mean": 0.029380494458187533,
+          "true_route_completed_programs_nmse_mean": 0.022802116157048753,
+          "true_route_future_programs_nmse_mean": 0.030320262786921647,
+          "learned_route_completed_programs_nmse_mean": 0.012547461230863107,
+          "learned_minus_true_route_completed_nmse": -0.010254654926185646
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 4,
+            "2": 0,
+            "3": 5,
+            "4": 6,
+            "5": 2
+          },
+          "one_to_one_mean_primitive_distance": 0.004326646084127966,
+          "true_route_all_programs_nmse_mean": 0.015954823057022546,
+          "true_route_completed_programs_nmse_mean": 0.014858633352419201,
+          "true_route_future_programs_nmse_mean": 0.016320219625223665,
+          "learned_route_completed_programs_nmse_mean": 0.008086772845453666,
+          "learned_minus_true_route_completed_nmse": -0.006771860506965535
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 4,
+            "2": 0,
+            "3": 5,
+            "4": 6,
+            "5": 1
+          },
+          "one_to_one_mean_primitive_distance": 0.0025386983384907574,
+          "true_route_all_programs_nmse_mean": 0.010534987055903926,
+          "true_route_completed_programs_nmse_mean": 0.011228653564596028,
+          "true_route_future_programs_nmse_mean": 0.009841320547211823,
+          "learned_route_completed_programs_nmse_mean": 0.0030936565776437173,
+          "learned_minus_true_route_completed_nmse": -0.00813499698695231
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 3,
+            "1": 4,
+            "2": 0,
+            "3": 5,
+            "4": 6,
+            "5": 2
+          },
+          "one_to_one_mean_primitive_distance": 0.0021098018691418884,
+          "true_route_all_programs_nmse_mean": 0.008354628146187405,
+          "true_route_completed_programs_nmse_mean": 0.008354628146187405,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.00178599877451851,
+          "learned_minus_true_route_completed_nmse": -0.006568629371668895
+        }
+      ]
+    },
+    {
+      "world_seed": 8,
+      "model": "discrete",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 7,
+            "1": 5,
+            "2": 8,
+            "3": 2,
+            "4": 9,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.008060204635696185,
+          "true_route_all_programs_nmse_mean": 0.029391600521238535,
+          "true_route_completed_programs_nmse_mean": 0.023787121520617537,
+          "true_route_future_programs_nmse_mean": 0.030192240378470108,
+          "learned_route_completed_programs_nmse_mean": 0.019302913320304576,
+          "learned_minus_true_route_completed_nmse": -0.004484208200312961
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 7,
+            "1": 3,
+            "2": 8,
+            "3": 2,
+            "4": 10,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.0051042295905556895,
+          "true_route_all_programs_nmse_mean": 0.01860091930807413,
+          "true_route_completed_programs_nmse_mean": 0.014848367662033454,
+          "true_route_future_programs_nmse_mean": 0.01985176985675435,
+          "learned_route_completed_programs_nmse_mean": 0.01521699655120125,
+          "learned_minus_true_route_completed_nmse": 0.000368628889167796
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 7,
+            "1": 5,
+            "2": 8,
+            "3": 2,
+            "4": 10,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.0025253494547390004,
+          "true_route_all_programs_nmse_mean": 0.009701843896968937,
+          "true_route_completed_programs_nmse_mean": 0.009362160929559871,
+          "true_route_future_programs_nmse_mean": 0.010041526864378002,
+          "learned_route_completed_programs_nmse_mean": 0.008852016636105563,
+          "learned_minus_true_route_completed_nmse": -0.0005101442934543083
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 7,
+            "1": 5,
+            "2": 8,
+            "3": 2,
+            "4": 10,
+            "5": 6
+          },
+          "one_to_one_mean_primitive_distance": 0.0013775631225447056,
+          "true_route_all_programs_nmse_mean": 0.005340482268532321,
+          "true_route_completed_programs_nmse_mean": 0.005340482268532321,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.004200960383559684,
+          "learned_minus_true_route_completed_nmse": -0.001139521884972637
+        }
+      ]
+    },
+    {
+      "world_seed": 9,
+      "model": "continuous",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 5,
+            "1": 1,
+            "2": 0,
+            "3": 2,
+            "4": 6,
+            "5": 7
+          },
+          "one_to_one_mean_primitive_distance": 0.0073292399320227025,
+          "true_route_all_programs_nmse_mean": 0.0285209296996204,
+          "true_route_completed_programs_nmse_mean": 0.021457422654981382,
+          "true_route_future_programs_nmse_mean": 0.02953000213456883,
+          "learned_route_completed_programs_nmse_mean": 0.013540154311053751,
+          "learned_minus_true_route_completed_nmse": -0.007917268343927631
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 5,
+            "1": 1,
+            "2": 0,
+            "3": 2,
+            "4": 6,
+            "5": 7
+          },
+          "one_to_one_mean_primitive_distance": 0.005329438758744079,
+          "true_route_all_programs_nmse_mean": 0.020360921985032032,
+          "true_route_completed_programs_nmse_mean": 0.016981445548704177,
+          "true_route_future_programs_nmse_mean": 0.021487414130474652,
+          "learned_route_completed_programs_nmse_mean": 0.00850013992543353,
+          "learned_minus_true_route_completed_nmse": -0.008481305623270647
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 5,
+            "1": 1,
+            "2": 0,
+            "3": 2,
+            "4": 4,
+            "5": 3
+          },
+          "one_to_one_mean_primitive_distance": 0.003619745583938357,
+          "true_route_all_programs_nmse_mean": 0.015930660163604674,
+          "true_route_completed_programs_nmse_mean": 0.017477145271133435,
+          "true_route_future_programs_nmse_mean": 0.01438417505607591,
+          "learned_route_completed_programs_nmse_mean": 0.004165748174670251,
+          "learned_minus_true_route_completed_nmse": -0.013311397096463184
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 5,
+            "1": 1,
+            "2": 0,
+            "3": 2,
+            "4": 6,
+            "5": 3
+          },
+          "one_to_one_mean_primitive_distance": 0.0022731994681018624,
+          "true_route_all_programs_nmse_mean": 0.009816240206613189,
+          "true_route_completed_programs_nmse_mean": 0.009816240206613189,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.0019455924581053734,
+          "learned_minus_true_route_completed_nmse": -0.007870647748507816
+        }
+      ]
+    },
+    {
+      "world_seed": 9,
+      "model": "discrete",
+      "operator_checkpoints": [
+        {
+          "tasks_completed": 8,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 7,
+            "1": 1,
+            "2": 5,
+            "3": 2,
+            "4": 3,
+            "5": 10
+          },
+          "one_to_one_mean_primitive_distance": 0.007755774981828768,
+          "true_route_all_programs_nmse_mean": 0.030409691888486898,
+          "true_route_completed_programs_nmse_mean": 0.02250343078850231,
+          "true_route_future_programs_nmse_mean": 0.03153915775991327,
+          "learned_route_completed_programs_nmse_mean": 0.019463740584884474,
+          "learned_minus_true_route_completed_nmse": -0.0030396902036178355
+        },
+        {
+          "tasks_completed": 16,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 7,
+            "1": 5,
+            "2": 11,
+            "3": 2,
+            "4": 3,
+            "5": 10
+          },
+          "one_to_one_mean_primitive_distance": 0.005303512822563886,
+          "true_route_all_programs_nmse_mean": 0.019105930715069948,
+          "true_route_completed_programs_nmse_mean": 0.015513093338568925,
+          "true_route_future_programs_nmse_mean": 0.02030354317390362,
+          "learned_route_completed_programs_nmse_mean": 0.01472111628897313,
+          "learned_minus_true_route_completed_nmse": -0.0007919770495957955
+        },
+        {
+          "tasks_completed": 32,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 7,
+            "1": 1,
+            "2": 11,
+            "3": 4,
+            "4": 3,
+            "5": 10
+          },
+          "one_to_one_mean_primitive_distance": 0.00288075530932482,
+          "true_route_all_programs_nmse_mean": 0.011520286954832312,
+          "true_route_completed_programs_nmse_mean": 0.01163572285719151,
+          "true_route_future_programs_nmse_mean": 0.011404851052473113,
+          "learned_route_completed_programs_nmse_mean": 0.010514002160895774,
+          "learned_minus_true_route_completed_nmse": -0.001121720696295736
+        },
+        {
+          "tasks_completed": 64,
+          "probe_examples": 2048,
+          "teacher_to_learned_operator": {
+            "0": 7,
+            "1": 1,
+            "2": 11,
+            "3": 4,
+            "4": 3,
+            "5": 10
+          },
+          "one_to_one_mean_primitive_distance": 0.0013350541777435588,
+          "true_route_all_programs_nmse_mean": 0.004837435471479186,
+          "true_route_completed_programs_nmse_mean": 0.004837435471479186,
+          "true_route_future_programs_nmse_mean": null,
+          "learned_route_completed_programs_nmse_mean": 0.004196031689702147,
+          "learned_minus_true_route_completed_nmse": -0.0006414037817770385
+        }
+      ]
+    }
+  ],
+  "checkpoint_summaries": [
+    {
+      "tasks_completed": 8,
+      "models": {
+        "continuous": {
+          "mean_one_to_one_mean_primitive_distance": 0.007857289950909504,
+          "per_world_one_to_one_mean_primitive_distance": [
+            {
+              "world_seed": 0,
+              "value": 0.010349087860254323
+            },
+            {
+              "world_seed": 1,
+              "value": 0.006840626221150233
+            },
+            {
+              "world_seed": 2,
+              "value": 0.007475440980935285
+            },
+            {
+              "world_seed": 3,
+              "value": 0.007473660323551807
+            },
+            {
+              "world_seed": 4,
+              "value": 0.009116163566846991
+            },
+            {
+              "world_seed": 5,
+              "value": 0.007042596381002411
+            },
+            {
+              "world_seed": 6,
+              "value": 0.008482426938625401
+            },
+            {
+              "world_seed": 7,
+              "value": 0.007353796814037846
+            },
+            {
+              "world_seed": 8,
+              "value": 0.007109860490668043
+            },
+            {
+              "world_seed": 9,
+              "value": 0.0073292399320227025
+            }
+          ],
+          "mean_true_route_all_programs_nmse_mean": 0.029375684862653607,
+          "per_world_true_route_all_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.040235690881657835
+            },
+            {
+              "world_seed": 1,
+              "value": 0.02392620988044815
+            },
+            {
+              "world_seed": 2,
+              "value": 0.028076023895700665
+            },
+            {
+              "world_seed": 3,
+              "value": 0.03026786913937813
+            },
+            {
+              "world_seed": 4,
+              "value": 0.0314243982731245
+            },
+            {
+              "world_seed": 5,
+              "value": 0.02607280628301329
+            },
+            {
+              "world_seed": 6,
+              "value": 0.030909533197557862
+            },
+            {
+              "world_seed": 7,
+              "value": 0.024942892917847695
+            },
+            {
+              "world_seed": 8,
+              "value": 0.029380494458187533
+            },
+            {
+              "world_seed": 9,
+              "value": 0.0285209296996204
+            }
+          ],
+          "mean_true_route_completed_programs_nmse_mean": 0.024708245484329556,
+          "per_world_true_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.030455206320684085
+            },
+            {
+              "world_seed": 1,
+              "value": 0.019544900185814444
+            },
+            {
+              "world_seed": 2,
+              "value": 0.02412416898719118
+            },
+            {
+              "world_seed": 3,
+              "value": 0.02466207232763003
+            },
+            {
+              "world_seed": 4,
+              "value": 0.02768358544462475
+            },
+            {
+              "world_seed": 5,
+              "value": 0.023288682645605335
+            },
+            {
+              "world_seed": 6,
+              "value": 0.02920864281399448
+            },
+            {
+              "world_seed": 7,
+              "value": 0.023855657305721124
+            },
+            {
+              "world_seed": 8,
+              "value": 0.022802116157048753
+            },
+            {
+              "world_seed": 9,
+              "value": 0.021457422654981382
+            }
+          ],
+          "mean_true_route_future_programs_nmse_mean": 0.030042461916699896,
+          "per_world_true_route_future_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.04163290296179694
+            },
+            {
+              "world_seed": 1,
+              "value": 0.02455211126539582
+            },
+            {
+              "world_seed": 2,
+              "value": 0.028640574596916303
+            },
+            {
+              "world_seed": 3,
+              "value": 0.031068697255342143
+            },
+            {
+              "world_seed": 4,
+              "value": 0.03195880010576733
+            },
+            {
+              "world_seed": 5,
+              "value": 0.026470538231214428
+            },
+            {
+              "world_seed": 6,
+              "value": 0.031152517538066915
+            },
+            {
+              "world_seed": 7,
+              "value": 0.025098212291008636
+            },
+            {
+              "world_seed": 8,
+              "value": 0.030320262786921647
+            },
+            {
+              "world_seed": 9,
+              "value": 0.02953000213456883
+            }
+          ],
+          "mean_learned_route_completed_programs_nmse_mean": 0.013250930824595905,
+          "per_world_learned_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.016608005531736435
+            },
+            {
+              "world_seed": 1,
+              "value": 0.010595357361866273
+            },
+            {
+              "world_seed": 2,
+              "value": 0.013301878792299094
+            },
+            {
+              "world_seed": 3,
+              "value": 0.012467149880796804
+            },
+            {
+              "world_seed": 4,
+              "value": 0.018731371798123432
+            },
+            {
+              "world_seed": 5,
+              "value": 0.012939198118871897
+            },
+            {
+              "world_seed": 6,
+              "value": 0.012645578576410469
+            },
+            {
+              "world_seed": 7,
+              "value": 0.009133152643937796
+            },
+            {
+              "world_seed": 8,
+              "value": 0.012547461230863107
+            },
+            {
+              "world_seed": 9,
+              "value": 0.013540154311053751
+            }
+          ],
+          "mean_learned_minus_true_route_completed_nmse": -0.01145731465973365,
+          "per_world_learned_minus_true_route_completed_nmse": [
+            {
+              "world_seed": 0,
+              "value": -0.01384720078894765
+            },
+            {
+              "world_seed": 1,
+              "value": -0.008949542823948171
+            },
+            {
+              "world_seed": 2,
+              "value": -0.010822290194892087
+            },
+            {
+              "world_seed": 3,
+              "value": -0.012194922446833227
+            },
+            {
+              "world_seed": 4,
+              "value": -0.008952213646501318
+            },
+            {
+              "world_seed": 5,
+              "value": -0.010349484526733437
+            },
+            {
+              "world_seed": 6,
+              "value": -0.01656306423758401
+            },
+            {
+              "world_seed": 7,
+              "value": -0.014722504661783329
+            },
+            {
+              "world_seed": 8,
+              "value": -0.010254654926185646
+            },
+            {
+              "world_seed": 9,
+              "value": -0.007917268343927631
+            }
+          ]
+        },
+        "discrete": {
+          "mean_one_to_one_mean_primitive_distance": 0.007446920478332354,
+          "per_world_one_to_one_mean_primitive_distance": [
+            {
+              "world_seed": 0,
+              "value": 0.008888386299693038
+            },
+            {
+              "world_seed": 1,
+              "value": 0.00676551290866824
+            },
+            {
+              "world_seed": 2,
+              "value": 0.006888329162214025
+            },
+            {
+              "world_seed": 3,
+              "value": 0.00634795568513178
+            },
+            {
+              "world_seed": 4,
+              "value": 0.007308010100590938
+            },
+            {
+              "world_seed": 5,
+              "value": 0.0069932405386533844
+            },
+            {
+              "world_seed": 6,
+              "value": 0.008203216074027046
+            },
+            {
+              "world_seed": 7,
+              "value": 0.007258574396820142
+            },
+            {
+              "world_seed": 8,
+              "value": 0.008060204635696185
+            },
+            {
+              "world_seed": 9,
+              "value": 0.007755774981828768
+            }
+          ],
+          "mean_true_route_all_programs_nmse_mean": 0.027336726606615198,
+          "per_world_true_route_all_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.03257751200987899
+            },
+            {
+              "world_seed": 1,
+              "value": 0.026087987828310677
+            },
+            {
+              "world_seed": 2,
+              "value": 0.025623738192252256
+            },
+            {
+              "world_seed": 3,
+              "value": 0.025130088332179834
+            },
+            {
+              "world_seed": 4,
+              "value": 0.025460650729877767
+            },
+            {
+              "world_seed": 5,
+              "value": 0.024396814071923817
+            },
+            {
+              "world_seed": 6,
+              "value": 0.028523921839485156
+            },
+            {
+              "world_seed": 7,
+              "value": 0.025765260652518055
+            },
+            {
+              "world_seed": 8,
+              "value": 0.029391600521238535
+            },
+            {
+              "world_seed": 9,
+              "value": 0.030409691888486898
+            }
+          ],
+          "mean_true_route_completed_programs_nmse_mean": 0.022411460911362903,
+          "per_world_true_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.028676342056327575
+            },
+            {
+              "world_seed": 1,
+              "value": 0.019747491541443563
+            },
+            {
+              "world_seed": 2,
+              "value": 0.0213907717169581
+            },
+            {
+              "world_seed": 3,
+              "value": 0.01935539834963753
+            },
+            {
+              "world_seed": 4,
+              "value": 0.021442808238364613
+            },
+            {
+              "world_seed": 5,
+              "value": 0.017589393388824842
+            },
+            {
+              "world_seed": 6,
+              "value": 0.024747723031046324
+            },
+            {
+              "world_seed": 7,
+              "value": 0.024874128481906652
+            },
+            {
+              "world_seed": 8,
+              "value": 0.023787121520617537
+            },
+            {
+              "world_seed": 9,
+              "value": 0.02250343078850231
+            }
+          ],
+          "mean_true_route_future_programs_nmse_mean": 0.02804033599165124,
+          "per_world_true_route_future_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.033134822003243476
+            },
+            {
+              "world_seed": 1,
+              "value": 0.026993773012148836
+            },
+            {
+              "world_seed": 2,
+              "value": 0.02622844768872285
+            },
+            {
+              "world_seed": 3,
+              "value": 0.02595504404397159
+            },
+            {
+              "world_seed": 4,
+              "value": 0.026034628228665365
+            },
+            {
+              "world_seed": 5,
+              "value": 0.025369302740937957
+            },
+            {
+              "world_seed": 6,
+              "value": 0.029063378812119272
+            },
+            {
+              "world_seed": 7,
+              "value": 0.025892565248319684
+            },
+            {
+              "world_seed": 8,
+              "value": 0.030192240378470108
+            },
+            {
+              "world_seed": 9,
+              "value": 0.03153915775991327
+            }
+          ],
+          "mean_learned_route_completed_programs_nmse_mean": 0.019030421096309952,
+          "per_world_learned_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.023134414849352365
+            },
+            {
+              "world_seed": 1,
+              "value": 0.017849117205308504
+            },
+            {
+              "world_seed": 2,
+              "value": 0.017903394560109708
+            },
+            {
+              "world_seed": 3,
+              "value": 0.018230938548551553
+            },
+            {
+              "world_seed": 4,
+              "value": 0.018751029422570526
+            },
+            {
+              "world_seed": 5,
+              "value": 0.018372460406566593
+            },
+            {
+              "world_seed": 6,
+              "value": 0.01783279570602163
+            },
+            {
+              "world_seed": 7,
+              "value": 0.019463406359429586
+            },
+            {
+              "world_seed": 8,
+              "value": 0.019302913320304576
+            },
+            {
+              "world_seed": 9,
+              "value": 0.019463740584884474
+            }
+          ],
+          "mean_learned_minus_true_route_completed_nmse": -0.0033810398150529533,
+          "per_world_learned_minus_true_route_completed_nmse": [
+            {
+              "world_seed": 0,
+              "value": -0.00554192720697521
+            },
+            {
+              "world_seed": 1,
+              "value": -0.0018983743361350586
+            },
+            {
+              "world_seed": 2,
+              "value": -0.0034873771568483918
+            },
+            {
+              "world_seed": 3,
+              "value": -0.0011244598010859766
+            },
+            {
+              "world_seed": 4,
+              "value": -0.0026917788157940874
+            },
+            {
+              "world_seed": 5,
+              "value": 0.0007830670177417509
+            },
+            {
+              "world_seed": 6,
+              "value": -0.006914927325024696
+            },
+            {
+              "world_seed": 7,
+              "value": -0.0054107221224770664
+            },
+            {
+              "world_seed": 8,
+              "value": -0.004484208200312961
+            },
+            {
+              "world_seed": 9,
+              "value": -0.0030396902036178355
+            }
+          ]
+        }
+      }
+    },
+    {
+      "tasks_completed": 16,
+      "models": {
+        "continuous": {
+          "mean_one_to_one_mean_primitive_distance": 0.00532803230323137,
+          "per_world_one_to_one_mean_primitive_distance": [
+            {
+              "world_seed": 0,
+              "value": 0.005171961146292851
+            },
+            {
+              "world_seed": 1,
+              "value": 0.00549938029277165
+            },
+            {
+              "world_seed": 2,
+              "value": 0.004415409630032257
+            },
+            {
+              "world_seed": 3,
+              "value": 0.006713523187279083
+            },
+            {
+              "world_seed": 4,
+              "value": 0.006202956384985816
+            },
+            {
+              "world_seed": 5,
+              "value": 0.005038225721432731
+            },
+            {
+              "world_seed": 6,
+              "value": 0.005664753163228806
+            },
+            {
+              "world_seed": 7,
+              "value": 0.004918028663418463
+            },
+            {
+              "world_seed": 8,
+              "value": 0.004326646084127966
+            },
+            {
+              "world_seed": 9,
+              "value": 0.005329438758744079
+            }
+          ],
+          "mean_true_route_all_programs_nmse_mean": 0.019604711901719644,
+          "per_world_true_route_all_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.02104036592188297
+            },
+            {
+              "world_seed": 1,
+              "value": 0.020546037054065512
+            },
+            {
+              "world_seed": 2,
+              "value": 0.01623180206477432
+            },
+            {
+              "world_seed": 3,
+              "value": 0.0260409435633498
+            },
+            {
+              "world_seed": 4,
+              "value": 0.021511880223155592
+            },
+            {
+              "world_seed": 5,
+              "value": 0.018439793358059006
+            },
+            {
+              "world_seed": 6,
+              "value": 0.019331773466883716
+            },
+            {
+              "world_seed": 7,
+              "value": 0.016588778322970933
+            },
+            {
+              "world_seed": 8,
+              "value": 0.015954823057022546
+            },
+            {
+              "world_seed": 9,
+              "value": 0.020360921985032032
+            }
+          ],
+          "mean_true_route_completed_programs_nmse_mean": 0.018550477127794007,
+          "per_world_true_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.02062678332780991
+            },
+            {
+              "world_seed": 1,
+              "value": 0.017843173027856964
+            },
+            {
+              "world_seed": 2,
+              "value": 0.017042722514016923
+            },
+            {
+              "world_seed": 3,
+              "value": 0.024756510242289215
+            },
+            {
+              "world_seed": 4,
+              "value": 0.01968580351089349
+            },
+            {
+              "world_seed": 5,
+              "value": 0.015667465334074558
+            },
+            {
+              "world_seed": 6,
+              "value": 0.020696942829508694
+            },
+            {
+              "world_seed": 7,
+              "value": 0.01734529159036695
+            },
+            {
+              "world_seed": 8,
+              "value": 0.014858633352419201
+            },
+            {
+              "world_seed": 9,
+              "value": 0.016981445548704177
+            }
+          ],
+          "mean_true_route_future_programs_nmse_mean": 0.019956123493028187,
+          "per_world_true_route_future_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.021178226786573995
+            },
+            {
+              "world_seed": 1,
+              "value": 0.021446991729468363
+            },
+            {
+              "world_seed": 2,
+              "value": 0.01596149524836012
+            },
+            {
+              "world_seed": 3,
+              "value": 0.026469088003703335
+            },
+            {
+              "world_seed": 4,
+              "value": 0.02212057246057629
+            },
+            {
+              "world_seed": 5,
+              "value": 0.019363902699387155
+            },
+            {
+              "world_seed": 6,
+              "value": 0.01887671701267539
+            },
+            {
+              "world_seed": 7,
+              "value": 0.016336607233838927
+            },
+            {
+              "world_seed": 8,
+              "value": 0.016320219625223665
+            },
+            {
+              "world_seed": 9,
+              "value": 0.021487414130474652
+            }
+          ],
+          "mean_learned_route_completed_programs_nmse_mean": 0.009032408956422764,
+          "per_world_learned_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.008926059982123164
+            },
+            {
+              "world_seed": 1,
+              "value": 0.0089698188372676
+            },
+            {
+              "world_seed": 2,
+              "value": 0.008178882036036197
+            },
+            {
+              "world_seed": 3,
+              "value": 0.010202858701825836
+            },
+            {
+              "world_seed": 4,
+              "value": 0.011355848491088893
+            },
+            {
+              "world_seed": 5,
+              "value": 0.007580098328783437
+            },
+            {
+              "world_seed": 6,
+              "value": 0.010204394805065926
+            },
+            {
+              "world_seed": 7,
+              "value": 0.008319215611149396
+            },
+            {
+              "world_seed": 8,
+              "value": 0.008086772845453666
+            },
+            {
+              "world_seed": 9,
+              "value": 0.00850013992543353
+            }
+          ],
+          "mean_learned_minus_true_route_completed_nmse": -0.009518068171371245,
+          "per_world_learned_minus_true_route_completed_nmse": [
+            {
+              "world_seed": 0,
+              "value": -0.011700723345686746
+            },
+            {
+              "world_seed": 1,
+              "value": -0.008873354190589364
+            },
+            {
+              "world_seed": 2,
+              "value": -0.008863840477980726
+            },
+            {
+              "world_seed": 3,
+              "value": -0.01455365154046338
+            },
+            {
+              "world_seed": 4,
+              "value": -0.008329955019804595
+            },
+            {
+              "world_seed": 5,
+              "value": -0.008087367005291122
+            },
+            {
+              "world_seed": 6,
+              "value": -0.010492548024442768
+            },
+            {
+              "world_seed": 7,
+              "value": -0.009026075979217552
+            },
+            {
+              "world_seed": 8,
+              "value": -0.006771860506965535
+            },
+            {
+              "world_seed": 9,
+              "value": -0.008481305623270647
+            }
+          ]
+        },
+        "discrete": {
+          "mean_one_to_one_mean_primitive_distance": 0.005277924467261731,
+          "per_world_one_to_one_mean_primitive_distance": [
+            {
+              "world_seed": 0,
+              "value": 0.006528443668111066
+            },
+            {
+              "world_seed": 1,
+              "value": 0.004648657364665402
+            },
+            {
+              "world_seed": 2,
+              "value": 0.005113559451483802
+            },
+            {
+              "world_seed": 3,
+              "value": 0.004890804200706345
+            },
+            {
+              "world_seed": 4,
+              "value": 0.0050440731273421685
+            },
+            {
+              "world_seed": 5,
+              "value": 0.00523972807108443
+            },
+            {
+              "world_seed": 6,
+              "value": 0.005966895873099449
+            },
+            {
+              "world_seed": 7,
+              "value": 0.004939340503005071
+            },
+            {
+              "world_seed": 8,
+              "value": 0.0051042295905556895
+            },
+            {
+              "world_seed": 9,
+              "value": 0.005303512822563886
+            }
+          ],
+          "mean_true_route_all_programs_nmse_mean": 0.019081339343353845,
+          "per_world_true_route_all_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.02379074484133
+            },
+            {
+              "world_seed": 1,
+              "value": 0.01692845774362844
+            },
+            {
+              "world_seed": 2,
+              "value": 0.019884752133086585
+            },
+            {
+              "world_seed": 3,
+              "value": 0.018168330017468235
+            },
+            {
+              "world_seed": 4,
+              "value": 0.017559912932044147
+            },
+            {
+              "world_seed": 5,
+              "value": 0.018255505297668777
+            },
+            {
+              "world_seed": 6,
+              "value": 0.02140862036172539
+            },
+            {
+              "world_seed": 7,
+              "value": 0.01711022008344281
+            },
+            {
+              "world_seed": 8,
+              "value": 0.01860091930807413
+            },
+            {
+              "world_seed": 9,
+              "value": 0.019105930715069948
+            }
+          ],
+          "mean_true_route_completed_programs_nmse_mean": 0.01674972260893226,
+          "per_world_true_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.0216996429000019
+            },
+            {
+              "world_seed": 1,
+              "value": 0.014653251013235377
+            },
+            {
+              "world_seed": 2,
+              "value": 0.01834626252333974
+            },
+            {
+              "world_seed": 3,
+              "value": 0.015807990509063147
+            },
+            {
+              "world_seed": 4,
+              "value": 0.015438768020969872
+            },
+            {
+              "world_seed": 5,
+              "value": 0.01409362532884666
+            },
+            {
+              "world_seed": 6,
+              "value": 0.020005057230439466
+            },
+            {
+              "world_seed": 7,
+              "value": 0.017091167562824052
+            },
+            {
+              "world_seed": 8,
+              "value": 0.014848367662033454
+            },
+            {
+              "world_seed": 9,
+              "value": 0.015513093338568925
+            }
+          ],
+          "mean_true_route_future_programs_nmse_mean": 0.019858544921494376,
+          "per_world_true_route_future_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.024487778821772704
+            },
+            {
+              "world_seed": 1,
+              "value": 0.0176868599870928
+            },
+            {
+              "world_seed": 2,
+              "value": 0.020397582003002204
+            },
+            {
+              "world_seed": 3,
+              "value": 0.018955109853603266
+            },
+            {
+              "world_seed": 4,
+              "value": 0.01826696123573557
+            },
+            {
+              "world_seed": 5,
+              "value": 0.019642798620609487
+            },
+            {
+              "world_seed": 6,
+              "value": 0.021876474738820696
+            },
+            {
+              "world_seed": 7,
+              "value": 0.01711657092364906
+            },
+            {
+              "world_seed": 8,
+              "value": 0.01985176985675435
+            },
+            {
+              "world_seed": 9,
+              "value": 0.02030354317390362
+            }
+          ],
+          "mean_learned_route_completed_programs_nmse_mean": 0.014952466191739174,
+          "per_world_learned_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.017009360420168106
+            },
+            {
+              "world_seed": 1,
+              "value": 0.014826802446840356
+            },
+            {
+              "world_seed": 2,
+              "value": 0.013400321645828231
+            },
+            {
+              "world_seed": 3,
+              "value": 0.012897916289493806
+            },
+            {
+              "world_seed": 4,
+              "value": 0.014529514026879319
+            },
+            {
+              "world_seed": 5,
+              "value": 0.01392439211838378
+            },
+            {
+              "world_seed": 6,
+              "value": 0.016171143692534994
+            },
+            {
+              "world_seed": 7,
+              "value": 0.016827098437088777
+            },
+            {
+              "world_seed": 8,
+              "value": 0.01521699655120125
+            },
+            {
+              "world_seed": 9,
+              "value": 0.01472111628897313
+            }
+          ],
+          "mean_learned_minus_true_route_completed_nmse": -0.0017972564171930849,
+          "per_world_learned_minus_true_route_completed_nmse": [
+            {
+              "world_seed": 0,
+              "value": -0.004690282479833795
+            },
+            {
+              "world_seed": 1,
+              "value": 0.00017355143360497927
+            },
+            {
+              "world_seed": 2,
+              "value": -0.004945940877511511
+            },
+            {
+              "world_seed": 3,
+              "value": -0.0029100742195693405
+            },
+            {
+              "world_seed": 4,
+              "value": -0.0009092539940905534
+            },
+            {
+              "world_seed": 5,
+              "value": -0.00016923321046288103
+            },
+            {
+              "world_seed": 6,
+              "value": -0.0038339135379044723
+            },
+            {
+              "world_seed": 7,
+              "value": -0.0002640691257352751
+            },
+            {
+              "world_seed": 8,
+              "value": 0.000368628889167796
+            },
+            {
+              "world_seed": 9,
+              "value": -0.0007919770495957955
+            }
+          ]
+        }
+      }
+    },
+    {
+      "tasks_completed": 32,
+      "models": {
+        "continuous": {
+          "mean_one_to_one_mean_primitive_distance": 0.003039210958866594,
+          "per_world_one_to_one_mean_primitive_distance": [
+            {
+              "world_seed": 0,
+              "value": 0.0027735414402339075
+            },
+            {
+              "world_seed": 1,
+              "value": 0.0030005052782789833
+            },
+            {
+              "world_seed": 2,
+              "value": 0.002333046912536911
+            },
+            {
+              "world_seed": 3,
+              "value": 0.004672393248514023
+            },
+            {
+              "world_seed": 4,
+              "value": 0.002971710880359966
+            },
+            {
+              "world_seed": 5,
+              "value": 0.0032851616958121475
+            },
+            {
+              "world_seed": 6,
+              "value": 0.002560927548836221
+            },
+            {
+              "world_seed": 7,
+              "value": 0.0026363786616646658
+            },
+            {
+              "world_seed": 8,
+              "value": 0.0025386983384907574
+            },
+            {
+              "world_seed": 9,
+              "value": 0.003619745583938357
+            }
+          ],
+          "mean_true_route_all_programs_nmse_mean": 0.012934076607787772,
+          "per_world_true_route_all_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.01304923087297439
+            },
+            {
+              "world_seed": 1,
+              "value": 0.013378607656167704
+            },
+            {
+              "world_seed": 2,
+              "value": 0.009319811340721797
+            },
+            {
+              "world_seed": 3,
+              "value": 0.02087924478883076
+            },
+            {
+              "world_seed": 4,
+              "value": 0.012499313106396381
+            },
+            {
+              "world_seed": 5,
+              "value": 0.013504177940148972
+            },
+            {
+              "world_seed": 6,
+              "value": 0.010140753091979668
+            },
+            {
+              "world_seed": 7,
+              "value": 0.010103980061149449
+            },
+            {
+              "world_seed": 8,
+              "value": 0.010534987055903926
+            },
+            {
+              "world_seed": 9,
+              "value": 0.015930660163604674
+            }
+          ],
+          "mean_true_route_completed_programs_nmse_mean": 0.013292944749656135,
+          "per_world_true_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.011856268358876989
+            },
+            {
+              "world_seed": 1,
+              "value": 0.013294888129834447
+            },
+            {
+              "world_seed": 2,
+              "value": 0.010424865084523508
+            },
+            {
+              "world_seed": 3,
+              "value": 0.021561321518422952
+            },
+            {
+              "world_seed": 4,
+              "value": 0.013465990984608316
+            },
+            {
+              "world_seed": 5,
+              "value": 0.012691055755842782
+            },
+            {
+              "world_seed": 6,
+              "value": 0.01048640779277497
+            },
+            {
+              "world_seed": 7,
+              "value": 0.010442851035947918
+            },
+            {
+              "world_seed": 8,
+              "value": 0.011228653564596028
+            },
+            {
+              "world_seed": 9,
+              "value": 0.017477145271133435
+            }
+          ],
+          "mean_true_route_future_programs_nmse_mean": 0.012575208465919408,
+          "per_world_true_route_future_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.014242193387071788
+            },
+            {
+              "world_seed": 1,
+              "value": 0.01346232718250096
+            },
+            {
+              "world_seed": 2,
+              "value": 0.008214757596920088
+            },
+            {
+              "world_seed": 3,
+              "value": 0.020197168059238567
+            },
+            {
+              "world_seed": 4,
+              "value": 0.011532635228184445
+            },
+            {
+              "world_seed": 5,
+              "value": 0.014317300124455158
+            },
+            {
+              "world_seed": 6,
+              "value": 0.009795098391184365
+            },
+            {
+              "world_seed": 7,
+              "value": 0.00976510908635098
+            },
+            {
+              "world_seed": 8,
+              "value": 0.009841320547211823
+            },
+            {
+              "world_seed": 9,
+              "value": 0.01438417505607591
+            }
+          ],
+          "mean_learned_route_completed_programs_nmse_mean": 0.004191268321156483,
+          "per_world_learned_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.003791349620015294
+            },
+            {
+              "world_seed": 1,
+              "value": 0.004823253488814256
+            },
+            {
+              "world_seed": 2,
+              "value": 0.0027893264606759643
+            },
+            {
+              "world_seed": 3,
+              "value": 0.005672029299580472
+            },
+            {
+              "world_seed": 4,
+              "value": 0.005241040061358964
+            },
+            {
+              "world_seed": 5,
+              "value": 0.004579316745468699
+            },
+            {
+              "world_seed": 6,
+              "value": 0.00391880548825797
+            },
+            {
+              "world_seed": 7,
+              "value": 0.003838157295079246
+            },
+            {
+              "world_seed": 8,
+              "value": 0.0030936565776437173
+            },
+            {
+              "world_seed": 9,
+              "value": 0.004165748174670251
+            }
+          ],
+          "mean_learned_minus_true_route_completed_nmse": -0.009101676428499652,
+          "per_world_learned_minus_true_route_completed_nmse": [
+            {
+              "world_seed": 0,
+              "value": -0.008064918738861695
+            },
+            {
+              "world_seed": 1,
+              "value": -0.00847163464102019
+            },
+            {
+              "world_seed": 2,
+              "value": -0.007635538623847544
+            },
+            {
+              "world_seed": 3,
+              "value": -0.015889292218842478
+            },
+            {
+              "world_seed": 4,
+              "value": -0.008224950923249352
+            },
+            {
+              "world_seed": 5,
+              "value": -0.008111739010374083
+            },
+            {
+              "world_seed": 6,
+              "value": -0.006567602304517001
+            },
+            {
+              "world_seed": 7,
+              "value": -0.006604693740868672
+            },
+            {
+              "world_seed": 8,
+              "value": -0.00813499698695231
+            },
+            {
+              "world_seed": 9,
+              "value": -0.013311397096463184
+            }
+          ]
+        },
+        "discrete": {
+          "mean_one_to_one_mean_primitive_distance": 0.0027024055865499524,
+          "per_world_one_to_one_mean_primitive_distance": [
+            {
+              "world_seed": 0,
+              "value": 0.0034926834315626744
+            },
+            {
+              "world_seed": 1,
+              "value": 0.002466612673711226
+            },
+            {
+              "world_seed": 2,
+              "value": 0.0023928992856659345
+            },
+            {
+              "world_seed": 3,
+              "value": 0.0021870647222588667
+            },
+            {
+              "world_seed": 4,
+              "value": 0.002420634894636528
+            },
+            {
+              "world_seed": 5,
+              "value": 0.0023386727660361373
+            },
+            {
+              "world_seed": 6,
+              "value": 0.0034134166425864028
+            },
+            {
+              "world_seed": 7,
+              "value": 0.0029059666849779336
+            },
+            {
+              "world_seed": 8,
+              "value": 0.0025253494547390004
+            },
+            {
+              "world_seed": 9,
+              "value": 0.00288075530932482
+            }
+          ],
+          "mean_true_route_all_programs_nmse_mean": 0.010271922598640676,
+          "per_world_true_route_all_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.014222374077625877
+            },
+            {
+              "world_seed": 1,
+              "value": 0.00996589932453933
+            },
+            {
+              "world_seed": 2,
+              "value": 0.009142221623144802
+            },
+            {
+              "world_seed": 3,
+              "value": 0.008419288873639266
+            },
+            {
+              "world_seed": 4,
+              "value": 0.008827614248604225
+            },
+            {
+              "world_seed": 5,
+              "value": 0.008544022187026962
+            },
+            {
+              "world_seed": 6,
+              "value": 0.012248588557868357
+            },
+            {
+              "world_seed": 7,
+              "value": 0.010127086242156698
+            },
+            {
+              "world_seed": 8,
+              "value": 0.009701843896968937
+            },
+            {
+              "world_seed": 9,
+              "value": 0.011520286954832312
+            }
+          ],
+          "mean_true_route_completed_programs_nmse_mean": 0.009902581397071463,
+          "per_world_true_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.012892899473623088
+            },
+            {
+              "world_seed": 1,
+              "value": 0.009680107331891938
+            },
+            {
+              "world_seed": 2,
+              "value": 0.008958586369921674
+            },
+            {
+              "world_seed": 3,
+              "value": 0.008112940450461216
+            },
+            {
+              "world_seed": 4,
+              "value": 0.009379263499287844
+            },
+            {
+              "world_seed": 5,
+              "value": 0.00821270657783186
+            },
+            {
+              "world_seed": 6,
+              "value": 0.011298030703098157
+            },
+            {
+              "world_seed": 7,
+              "value": 0.00949339577784748
+            },
+            {
+              "world_seed": 8,
+              "value": 0.009362160929559871
+            },
+            {
+              "world_seed": 9,
+              "value": 0.01163572285719151
+            }
+          ],
+          "mean_true_route_future_programs_nmse_mean": 0.01064126380020989,
+          "per_world_true_route_future_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.015551848681628667
+            },
+            {
+              "world_seed": 1,
+              "value": 0.010251691317186722
+            },
+            {
+              "world_seed": 2,
+              "value": 0.00932585687636793
+            },
+            {
+              "world_seed": 3,
+              "value": 0.008725637296817315
+            },
+            {
+              "world_seed": 4,
+              "value": 0.008275964997920606
+            },
+            {
+              "world_seed": 5,
+              "value": 0.008875337796222063
+            },
+            {
+              "world_seed": 6,
+              "value": 0.013199146412638557
+            },
+            {
+              "world_seed": 7,
+              "value": 0.010760776706465917
+            },
+            {
+              "world_seed": 8,
+              "value": 0.010041526864378002
+            },
+            {
+              "world_seed": 9,
+              "value": 0.011404851052473113
+            }
+          ],
+          "mean_learned_route_completed_programs_nmse_mean": 0.009685239662950691,
+          "per_world_learned_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.011210431687384951
+            },
+            {
+              "world_seed": 1,
+              "value": 0.00950034317164053
+            },
+            {
+              "world_seed": 2,
+              "value": 0.009504439496826944
+            },
+            {
+              "world_seed": 3,
+              "value": 0.009092692515925852
+            },
+            {
+              "world_seed": 4,
+              "value": 0.00806092195435545
+            },
+            {
+              "world_seed": 5,
+              "value": 0.009246369004856106
+            },
+            {
+              "world_seed": 6,
+              "value": 0.011609877931808971
+            },
+            {
+              "world_seed": 7,
+              "value": 0.00926130206970677
+            },
+            {
+              "world_seed": 8,
+              "value": 0.008852016636105563
+            },
+            {
+              "world_seed": 9,
+              "value": 0.010514002160895774
+            }
+          ],
+          "mean_learned_minus_true_route_completed_nmse": -0.00021734173412077293,
+          "per_world_learned_minus_true_route_completed_nmse": [
+            {
+              "world_seed": 0,
+              "value": -0.001682467786238137
+            },
+            {
+              "world_seed": 1,
+              "value": -0.0001797641602514083
+            },
+            {
+              "world_seed": 2,
+              "value": 0.0005458531269052699
+            },
+            {
+              "world_seed": 3,
+              "value": 0.0009797520654646358
+            },
+            {
+              "world_seed": 4,
+              "value": -0.001318341544932395
+            },
+            {
+              "world_seed": 5,
+              "value": 0.0010336624270242453
+            },
+            {
+              "world_seed": 6,
+              "value": 0.0003118472287108147
+            },
+            {
+              "world_seed": 7,
+              "value": -0.0002320937081407102
+            },
+            {
+              "world_seed": 8,
+              "value": -0.0005101442934543083
+            },
+            {
+              "world_seed": 9,
+              "value": -0.001121720696295736
+            }
+          ]
+        }
+      }
+    },
+    {
+      "tasks_completed": 64,
+      "models": {
+        "continuous": {
+          "mean_one_to_one_mean_primitive_distance": 0.0021121696781506013,
+          "per_world_one_to_one_mean_primitive_distance": [
+            {
+              "world_seed": 0,
+              "value": 0.002219910072006112
+            },
+            {
+              "world_seed": 1,
+              "value": 0.001722373014770442
+            },
+            {
+              "world_seed": 2,
+              "value": 0.001767476103585548
+            },
+            {
+              "world_seed": 3,
+              "value": 0.0028306389542071334
+            },
+            {
+              "world_seed": 4,
+              "value": 0.0017260595272136786
+            },
+            {
+              "world_seed": 5,
+              "value": 0.002435023543532875
+            },
+            {
+              "world_seed": 6,
+              "value": 0.0021188782473612598
+            },
+            {
+              "world_seed": 7,
+              "value": 0.001918335981585212
+            },
+            {
+              "world_seed": 8,
+              "value": 0.0021098018691418884
+            },
+            {
+              "world_seed": 9,
+              "value": 0.0022731994681018624
+            }
+          ],
+          "mean_true_route_all_programs_nmse_mean": 0.009370710136237309,
+          "per_world_true_route_all_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.012245969814405556
+            },
+            {
+              "world_seed": 1,
+              "value": 0.007445401136385055
+            },
+            {
+              "world_seed": 2,
+              "value": 0.007440985896480734
+            },
+            {
+              "world_seed": 3,
+              "value": 0.013679178169378182
+            },
+            {
+              "world_seed": 4,
+              "value": 0.0071239936407773655
+            },
+            {
+              "world_seed": 5,
+              "value": 0.010754135062993598
+            },
+            {
+              "world_seed": 6,
+              "value": 0.009568047538005983
+            },
+            {
+              "world_seed": 7,
+              "value": 0.007278521751146025
+            },
+            {
+              "world_seed": 8,
+              "value": 0.008354628146187405
+            },
+            {
+              "world_seed": 9,
+              "value": 0.009816240206613189
+            }
+          ],
+          "mean_true_route_completed_programs_nmse_mean": 0.009370710136237309,
+          "per_world_true_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.012245969814405556
+            },
+            {
+              "world_seed": 1,
+              "value": 0.007445401136385055
+            },
+            {
+              "world_seed": 2,
+              "value": 0.007440985896480734
+            },
+            {
+              "world_seed": 3,
+              "value": 0.013679178169378182
+            },
+            {
+              "world_seed": 4,
+              "value": 0.0071239936407773655
+            },
+            {
+              "world_seed": 5,
+              "value": 0.010754135062993598
+            },
+            {
+              "world_seed": 6,
+              "value": 0.009568047538005983
+            },
+            {
+              "world_seed": 7,
+              "value": 0.007278521751146025
+            },
+            {
+              "world_seed": 8,
+              "value": 0.008354628146187405
+            },
+            {
+              "world_seed": 9,
+              "value": 0.009816240206613189
+            }
+          ],
+          "mean_true_route_future_programs_nmse_mean": null,
+          "per_world_true_route_future_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": null
+            },
+            {
+              "world_seed": 1,
+              "value": null
+            },
+            {
+              "world_seed": 2,
+              "value": null
+            },
+            {
+              "world_seed": 3,
+              "value": null
+            },
+            {
+              "world_seed": 4,
+              "value": null
+            },
+            {
+              "world_seed": 5,
+              "value": null
+            },
+            {
+              "world_seed": 6,
+              "value": null
+            },
+            {
+              "world_seed": 7,
+              "value": null
+            },
+            {
+              "world_seed": 8,
+              "value": null
+            },
+            {
+              "world_seed": 9,
+              "value": null
+            }
+          ],
+          "mean_learned_route_completed_programs_nmse_mean": 0.001905163290871289,
+          "per_world_learned_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.0020133917599356637
+            },
+            {
+              "world_seed": 1,
+              "value": 0.001644748912819192
+            },
+            {
+              "world_seed": 2,
+              "value": 0.001830863992913722
+            },
+            {
+              "world_seed": 3,
+              "value": 0.0022972387742630704
+            },
+            {
+              "world_seed": 4,
+              "value": 0.00188480737124774
+            },
+            {
+              "world_seed": 5,
+              "value": 0.00193613213732531
+            },
+            {
+              "world_seed": 6,
+              "value": 0.002024012055976241
+            },
+            {
+              "world_seed": 7,
+              "value": 0.0016888466716080647
+            },
+            {
+              "world_seed": 8,
+              "value": 0.00178599877451851
+            },
+            {
+              "world_seed": 9,
+              "value": 0.0019455924581053734
+            }
+          ],
+          "mean_learned_minus_true_route_completed_nmse": -0.007465546845366021,
+          "per_world_learned_minus_true_route_completed_nmse": [
+            {
+              "world_seed": 0,
+              "value": -0.010232578054469893
+            },
+            {
+              "world_seed": 1,
+              "value": -0.005800652223565864
+            },
+            {
+              "world_seed": 2,
+              "value": -0.005610121903567012
+            },
+            {
+              "world_seed": 3,
+              "value": -0.011381939395115111
+            },
+            {
+              "world_seed": 4,
+              "value": -0.005239186269529626
+            },
+            {
+              "world_seed": 5,
+              "value": -0.008818002925668287
+            },
+            {
+              "world_seed": 6,
+              "value": -0.007544035482029742
+            },
+            {
+              "world_seed": 7,
+              "value": -0.00558967507953796
+            },
+            {
+              "world_seed": 8,
+              "value": -0.006568629371668895
+            },
+            {
+              "world_seed": 9,
+              "value": -0.007870647748507816
+            }
+          ]
+        },
+        "discrete": {
+          "mean_one_to_one_mean_primitive_distance": 0.001309399116831549,
+          "per_world_one_to_one_mean_primitive_distance": [
+            {
+              "world_seed": 0,
+              "value": 0.0018758130273247556
+            },
+            {
+              "world_seed": 1,
+              "value": 0.0010425947552293972
+            },
+            {
+              "world_seed": 2,
+              "value": 0.0012154412013294048
+            },
+            {
+              "world_seed": 3,
+              "value": 0.0009030041557621165
+            },
+            {
+              "world_seed": 4,
+              "value": 0.0015428926966242023
+            },
+            {
+              "world_seed": 5,
+              "value": 0.0013042889320341344
+            },
+            {
+              "world_seed": 6,
+              "value": 0.001335778852760318
+            },
+            {
+              "world_seed": 7,
+              "value": 0.0011615602469628955
+            },
+            {
+              "world_seed": 8,
+              "value": 0.0013775631225447056
+            },
+            {
+              "world_seed": 9,
+              "value": 0.0013350541777435588
+            }
+          ],
+          "mean_true_route_all_programs_nmse_mean": 0.0048351954919574084,
+          "per_world_true_route_all_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.007952419656579607
+            },
+            {
+              "world_seed": 1,
+              "value": 0.003917294166943504
+            },
+            {
+              "world_seed": 2,
+              "value": 0.00454923538724886
+            },
+            {
+              "world_seed": 3,
+              "value": 0.003176897905200052
+            },
+            {
+              "world_seed": 4,
+              "value": 0.005537928603554248
+            },
+            {
+              "world_seed": 5,
+              "value": 0.004853642472856075
+            },
+            {
+              "world_seed": 6,
+              "value": 0.004610908977970606
+            },
+            {
+              "world_seed": 7,
+              "value": 0.003575710009209629
+            },
+            {
+              "world_seed": 8,
+              "value": 0.005340482268532321
+            },
+            {
+              "world_seed": 9,
+              "value": 0.004837435471479186
+            }
+          ],
+          "mean_true_route_completed_programs_nmse_mean": 0.0048351954919574084,
+          "per_world_true_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.007952419656579607
+            },
+            {
+              "world_seed": 1,
+              "value": 0.003917294166943504
+            },
+            {
+              "world_seed": 2,
+              "value": 0.00454923538724886
+            },
+            {
+              "world_seed": 3,
+              "value": 0.003176897905200052
+            },
+            {
+              "world_seed": 4,
+              "value": 0.005537928603554248
+            },
+            {
+              "world_seed": 5,
+              "value": 0.004853642472856075
+            },
+            {
+              "world_seed": 6,
+              "value": 0.004610908977970606
+            },
+            {
+              "world_seed": 7,
+              "value": 0.003575710009209629
+            },
+            {
+              "world_seed": 8,
+              "value": 0.005340482268532321
+            },
+            {
+              "world_seed": 9,
+              "value": 0.004837435471479186
+            }
+          ],
+          "mean_true_route_future_programs_nmse_mean": null,
+          "per_world_true_route_future_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": null
+            },
+            {
+              "world_seed": 1,
+              "value": null
+            },
+            {
+              "world_seed": 2,
+              "value": null
+            },
+            {
+              "world_seed": 3,
+              "value": null
+            },
+            {
+              "world_seed": 4,
+              "value": null
+            },
+            {
+              "world_seed": 5,
+              "value": null
+            },
+            {
+              "world_seed": 6,
+              "value": null
+            },
+            {
+              "world_seed": 7,
+              "value": null
+            },
+            {
+              "world_seed": 8,
+              "value": null
+            },
+            {
+              "world_seed": 9,
+              "value": null
+            }
+          ],
+          "mean_learned_route_completed_programs_nmse_mean": 0.004562265097666109,
+          "per_world_learned_route_completed_programs_nmse_mean": [
+            {
+              "world_seed": 0,
+              "value": 0.0067306875804669436
+            },
+            {
+              "world_seed": 1,
+              "value": 0.00460159357582185
+            },
+            {
+              "world_seed": 2,
+              "value": 0.00495260732784151
+            },
+            {
+              "world_seed": 3,
+              "value": 0.003730311538119437
+            },
+            {
+              "world_seed": 4,
+              "value": 0.004539673585071513
+            },
+            {
+              "world_seed": 5,
+              "value": 0.004054485123782984
+            },
+            {
+              "world_seed": 6,
+              "value": 0.004531442732963117
+            },
+            {
+              "world_seed": 7,
+              "value": 0.004084857439331898
+            },
+            {
+              "world_seed": 8,
+              "value": 0.004200960383559684
+            },
+            {
+              "world_seed": 9,
+              "value": 0.004196031689702147
+            }
+          ],
+          "mean_learned_minus_true_route_completed_nmse": -0.0002729303942913004,
+          "per_world_learned_minus_true_route_completed_nmse": [
+            {
+              "world_seed": 0,
+              "value": -0.0012217320761126636
+            },
+            {
+              "world_seed": 1,
+              "value": 0.0006842994088783454
+            },
+            {
+              "world_seed": 2,
+              "value": 0.00040337194059265023
+            },
+            {
+              "world_seed": 3,
+              "value": 0.0005534136329193849
+            },
+            {
+              "world_seed": 4,
+              "value": -0.0009982550184827353
+            },
+            {
+              "world_seed": 5,
+              "value": -0.0007991573490730907
+            },
+            {
+              "world_seed": 6,
+              "value": -7.946624500748851e-05
+            },
+            {
+              "world_seed": 7,
+              "value": 0.0005091474301222691
+            },
+            {
+              "world_seed": 8,
+              "value": -0.001139521884972637
+            },
+            {
+              "world_seed": 9,
+              "value": -0.0006414037817770385
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

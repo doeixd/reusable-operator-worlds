@@ -51,9 +51,6 @@ claim.
 
 # Open diagnostic obligations
 
-- At multiple lifetime checkpoints, evaluate current learned operators under a
-  teacher-route diagnostic. Existing final functional matching identifies good
-  operators, but does not yet isolate route inference throughout learning.
 - Add world-level median and bootstrap intervals for the ten-world reports and a
   task-level model-by-lifetime analysis for examples-to-criterion. Existing
   three-world intervals are only exploratory.
@@ -86,12 +83,11 @@ obligations below should be resolved or explicitly deferred.
 
 # Execution order
 
-1. Implement checkpoint true-route diagnostics.
-2. Resolve scrambled-ID and batch-size protocol checks.
-3. Run the free measured-recurrence and truncated-lifetime bridge analyses.
-4. Implement the shared-parent plus residual control at intermediate reuse.
-5. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
-6. Re-audit the gate before touching confirmatory worlds.
+1. Resolve scrambled-ID and batch-size protocol checks.
+2. Run the free measured-recurrence and truncated-lifetime bridge analyses.
+3. Implement the shared-parent plus residual control at intermediate reuse.
+4. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
+5. Re-audit the gate before touching confirmatory worlds.
 
 # Closed during this audit
 
@@ -111,3 +107,9 @@ obligations below should be resolved or explicitly deferred.
   Both models benefit from lifetime experience, but Continuous acquires more
   transfer in every world and the gain rises with task index. The tracked result
   is `reports/forward_transfer/forward-transfer.json`.
+- Checkpoint true-route operator analysis is complete on worlds 0–9 for
+  Continuous and per-task-annealed Discrete. Primitive matching and program
+  performance through matched slots improve from 8 to 64 tasks in every world;
+  Continuous's learned mixtures also reveal that a forced one-slot teacher route
+  is not an oracle upper bound. The tracked result is
+  `reports/operator_checkpoints/operator-checkpoints.json`.

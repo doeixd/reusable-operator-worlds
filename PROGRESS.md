@@ -154,9 +154,9 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 # In progress
 
 - Completed a line-by-line V1 obligation audit in `SPEC_AUDIT.md`. The
-  confirmatory gate remains closed while forward transfer, true-route
-  diagnostics, shared-parent residuals, and clean workflow rehearsal remain
-  open.
+  confirmatory gate remains closed while scrambled-ID and batch-size checks,
+  shared-parent residuals, statistical freezing, and clean workflow rehearsal
+  remain open.
 
 # Two-initialization pilot complete
 
@@ -183,6 +183,25 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   whose hidden routes share more positions with prior tasks.
 - The validated report and visually inspected figure are under
   `reports/forward_transfer`.
+
+# Checkpoint operator diagnostic complete
+
+- Added analysis-only Hungarian matching from learned slots to hidden teacher
+  primitives at 8, 16, 32, and 64 tasks, then evaluated programs through those
+  matched slots under hidden teacher routes. No hidden identity or program enters
+  learner training.
+- Across worlds 0–9, one-to-one primitive distance improves from 0.00786 to
+  0.00211 for Continuous and from 0.00745 to 0.00131 for per-task-annealed
+  Discrete; every world improves for both learners.
+- Matched-slot evaluation on future programs improves through task 32, directly
+  showing operator-library improvement independently of future task-code
+  inference.
+- Continuous's own mixture routes outperform forced matched-slot routes in all
+  ten worlds at every checkpoint. Discrete's hard learned routes converge with
+  matched-slot routes by the end. The diagnostic therefore supports progressive
+  operator quality but also exposes Continuous's distributed representation.
+- The validated report and visually inspected figure are under
+  `reports/operator_checkpoints`.
 
 # Order and replay robustness complete
 
@@ -228,7 +247,9 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 # Next
 
-- Implement fresh-task forward-transfer and true-route operator diagnostics.
+- Resolve scrambled-ID invariance and the effective batch-size-two protocol.
+- Run the free measured-recurrence and truncated-lifetime bridge analyses.
+- Implement the shared-parent plus task-residual intermediate-reuse control.
 - Rehearse artifact generation and plotting from a clean checkout before opening
   the confirmatory seed gate.
 
