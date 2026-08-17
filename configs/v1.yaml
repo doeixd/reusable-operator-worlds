@@ -73,6 +73,7 @@ evaluation:
   target_precision: 0.00390625
   lifetime_checkpoints: [8, 16, 32, 64]
   checkpoint_novel_tasks: 4
+  extended_diagnostics: true
 
 output:
   directory: artifacts/scratch_difficulty

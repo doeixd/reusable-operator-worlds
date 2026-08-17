@@ -1,0 +1,1558 @@
+Yes — and I think **loops are actually an important missing piece** of the current formulation.
+
+Right now ROW V1 is artificially limited to programs of fixed length 3:
+
+[
+P_4 \rightarrow P_1 \rightarrow P_6.
+]
+
+So the model can reuse an operator across tasks, but it does **not yet have a general mechanism for repeatedly calling an operator an arbitrary number of times**.
+
+A more complete computational language should absolutely allow:
+
+[
+P_i,\quad P_i\circ P_i,\quad P_i^3,\quad \ldots
+]
+
+and, eventually, loops whose number of iterations depends on the input.
+
+## The simplest version
+
+Replace the fixed three-step executor with a recurrent shared workspace:
+
+[
+z_0=E(x)
+]
+
+and then repeatedly:
+
+[
+i_t = R(z_t, c_\tau)
+]
+
+[
+z_{t+1}=P_{i_t}(z_t)
+]
+
+until:
+
+[
+R(z_t,c_\tau)=\text{HALT}.
+]
+
+Now the controller can produce:
+
+```text
+P7
+P7
+P7
+P4
+HALT
+```
+
+which literally means:
+
+[
+P_4(P_7(P_7(P_7(x)))).
+]
+
+The same primitive (P_7) is **called repeatedly**. No extra copy of its weights is needed.
+
+That is already much closer to an actual program interpreter.
+
+---
+
+# And then loops fall out naturally
+
+Suppose many tasks require:
+
+[
+P_7^n.
+]
+
+The naive route representation is:
+
+```text
+P7 P7 P7 P7 P7 P7 P7
+```
+
+But under an MDL objective, there is a shorter description:
+
+```text
+REPEAT 7 P7
+```
+
+So the abstraction system could discover a control primitive:
+
+[
+\operatorname{Repeat}(P,n).
+]
+
+Now program length changes from approximately:
+
+[
+n\log K
+]
+
+to:
+
+[
+\log K+\log n+\text{cost(REPEAT)}.
+]
+
+Once (n) gets large, the loop is overwhelmingly cheaper.
+
+This is exactly the same compression logic we've been discussing.
+
+**Loops are a compression primitive.**
+
+---
+
+# And this gives us a really clean experiment
+
+We can extend ROW with tasks like:
+
+[
+T_1=P_2^2\circ P_5
+]
+
+[
+T_2=P_2^4\circ P_1
+]
+
+[
+T_3=P_2^7\circ P_6
+]
+
+without telling the learner that repeated (P_2) is special.
+
+A sufficiently expressive learner could first represent them as:
+
+```text
+P2 P2 P5
+P2 P2 P2 P2 P1
+P2 P2 P2 P2 P2 P2 P2 P6
+```
+
+Then a compression/refactoring phase notices:
+
+[
+P_2,P_2,P_2,\ldots
+]
+
+and invents:
+
+[
+\boxed{\operatorname{Repeat}(P_2,n)}.
+]
+
+That's precisely the kind of **self-invented computational abstraction** that is more interesting than the current “reuse helps” result.
+
+Because we didn't tell it:
+
+> loops exist.
+
+We gave it a computational substrate from which a loop representation could become economical.
+
+---
+
+# There are actually three levels of looping
+
+### 1. Fixed repetition
+
+```text
+repeat 5:
+    P7
+```
+
+or:
+
+[
+P_7^5.
+]
+
+This is easy and should be our first test.
+
+The task-specific program has to infer (n).
+
+---
+
+### 2. Input-dependent repetition
+
+Something like:
+
+```text
+while condition(z):
+    z = P7(z)
+```
+
+Now the number of applications isn't stored in the task program.
+
+It is determined by the evolving state:
+
+[
+z_t.
+]
+
+Controller:
+
+[
+h_t=R(z_t,c_\tau)
+]
+
+chooses either:
+
+[
+P_i
+]
+
+or:
+
+[
+\mathrm{HALT}.
+]
+
+For example:
+
+[
+P(\mathrm{HALT}\mid z_t)
+]
+
+can increase as some target condition is approached.
+
+This lets the same learned program execute:
+
+* 3 iterations for one input,
+* 17 for another,
+* 100 for another.
+
+Now we've learned an **algorithm**, rather than a fixed unrolled computation.
+
+---
+
+### 3. Nested loops / recursion
+
+Eventually:
+
+```text
+while A:
+    P3
+    while B:
+        P8
+```
+
+or a learned macro calling itself.
+
+That gets much harder, but conceptually the machinery is the same:
+
+[
+\boxed{
+\text{workspace}
++
+\text{callable primitives}
++
+\text{controller}
++
+\text{HALT}
+}
+]
+
+gives you variable-depth computation.
+
+---
+
+# This matters enormously for our original LLM idea
+
+Because this is exactly one place where a normal Transformer may be inefficient.
+
+Imagine the useful computation is conceptually:
+
+```text
+while unresolved:
+    refine_representation()
+```
+
+A fixed-depth Transformer instead has:
+
+```text
+layer_1_refinement
+layer_2_refinement
+layer_3_refinement
+...
+layer_48_refinement
+```
+
+with separately parameterized layers.
+
+Even if those layers aren't literally identical, the model may be repeatedly approximating variants of the same transformation.
+
+A recurrent callable primitive can instead store:
+
+[
+P_{\text{refine}}
+]
+
+once and execute:
+
+[
+P_{\text{refine}}^n.
+]
+
+So the comparison becomes:
+
+[
+\boxed{
+\text{unrolled computation}
+\quad\text{vs.}\quad
+\text{stored algorithm + execution count}.
+}
+]
+
+That's exactly the program-compression intuition we started with.
+
+---
+
+# It also makes description length more interesting
+
+Suppose a dense network effectively implements:
+
+[
+A,A,A,A,A,A,B.
+]
+
+An MDL compiler might initially discover:
+
+[
+M_1=[A,A].
+]
+
+Then:
+
+[
+[M_1,M_1,M_1,B].
+]
+
+But an even shorter abstraction is:
+
+[
+[\operatorname{Repeat}(A,6),B].
+]
+
+So structural compression should potentially discover not just **functions**, but **control-flow operators**:
+
+[
+\boxed{
+\text{CALL},\quad
+\text{REPEAT},\quad
+\text{IF},\quad
+\text{HALT}
+}
+]
+
+and eventually perhaps:
+
+[
+\text{WHILE}.
+]
+
+That's where the "neural library" starts becoming an actual **neural programming language**.
+
+---
+
+# There is an important difference between “same primitive repeatedly called” and a learned loop
+
+A recurrent architecture can trivially execute:
+
+[
+P_7,P_7,P_7,P_7.
+]
+
+But that doesn't mean it has learned the abstraction:
+
+[
+\operatorname{Repeat}(P_7,4).
+]
+
+Those are different levels.
+
+The first is **weight reuse**.
+
+The second is **program compression**.
+
+And I think we should test both.
+
+For example compare descriptions:
+
+### Flat route
+
+[
+[P_7,P_7,P_7,P_7,P_7,P_7,P_3].
+]
+
+### Loop representation
+
+[
+[\operatorname{Repeat}(P_7,6),P_3].
+]
+
+If the second yields the same behavior but much shorter task programs, MDL should prefer it.
+
+---
+
+# The really exciting test would be generalizing loop counts
+
+Train on:
+
+[
+P^2,\quad P^3,\quad P^4,\quad P^6.
+]
+
+Then ask for:
+
+[
+P^{10}
+]
+
+or:
+
+[
+P^{20}.
+]
+
+An unrolled pattern learner may struggle badly.
+
+A learner that has actually discovered:
+
+[
+\operatorname{Repeat}(P,n)
+]
+
+should generalize almost trivially.
+
+That's a much stronger demonstration of **algorithmic abstraction** than anything in current ROW.
+
+We could even measure:
+
+[
+\text{training loop counts}
+\rightarrow
+\text{OOD loop counts}.
+]
+
+If it extrapolates from (n\le6) to (n=20), that's evidence it didn't merely memorize common routes.
+
+---
+
+## And input-dependent loops would be even stronger
+
+Imagine a teacher task:
+
+[
+z_{t+1}=P(z_t)
+]
+
+until:
+
+[
+|z_{t+1}-z_t|<\epsilon.
+]
+
+Then the correct program is essentially:
+
+```text
+while not converged:
+    P
+```
+
+Different inputs require different numbers of steps.
+
+A model with fixed-depth routing cannot express the algorithm exactly.
+
+A recurrent model with HALT can.
+
+That gives us a very clean test of whether the architecture can learn **variable-time algorithms**.
+
+---
+
+# There are obvious failure modes
+
+We'd have to prevent:
+
+### Infinite loops
+
+Put a maximum execution budget:
+
+[
+T_{\max}
+]
+
+and charge compute:
+
+[
+\mu T.
+]
+
+### Always running maximum depth
+
+Again:
+
+[
+L=L_{\text{task}}+\mu T
+]
+
+makes unnecessary steps costly.
+
+### Halting immediately
+
+Prediction loss prevents that when further computation is needed.
+
+### Encoding the whole solution in the controller
+
+Keep the controller deliberately small and include it in description-length accounting.
+
+### Hiding unique functions in each loop argument
+
+Keep arguments low-dimensional and charge their code length.
+
+So the same “nothing gets to hide complexity” rule still applies.
+
+---
+
+# I think this changes the roadmap slightly
+
+Current ROW asks:
+
+> Can reusable operators be learned?
+
+We're already getting a **yes**.
+
+The next conceptual progression could be:
+
+[
+\boxed{
+\begin{array}{c}
+\text{reusable operators}\
+\downarrow\
+\text{variable-length composition}\
+\downarrow\
+\text{repeated calls}\
+\downarrow\
+\text{discover REPEAT}\
+\downarrow\
+\text{input-dependent HALT}\
+\downarrow\
+\text{learn WHILE-like computation}
+\end{array}
+}
+]
+
+And **that** starts getting much less obvious than our current result.
+
+The particularly compelling experiment to me is:
+
+> Give the learner only primitive calls plus recurrent execution, expose it to many programs containing repeated subsequences, and see whether an MDL-driven structural learner spontaneously invents loop/macro abstractions that let it generalize to far longer iteration counts than it saw during training.
+
+That would be a real step from **“neural module reuse”** toward **“neural program induction.”**
+
+And it maps directly back onto the original scaling hypothesis: perhaps some computation that currently requires many separately parameterized Transformer layers could instead be expressed as **a small learned operation called repeatedly under learned control.**
+
+Yes — and the loop question exposes what I think is the **next genuinely nontrivial layer** of the project.
+
+The biggest thing I’d think through next is this:
+
+> **How do we construct a world where learning a reusable loop is actually the shortest solution, rather than merely another way to fit the data?**
+
+That turns out to be trickier than it sounds.
+
+If the teacher contains
+
+[
+P^5(x)
+]
+
+the learner could represent that as:
+
+[
+P,P,P,P,P
+]
+
+or learn a special primitive:
+
+[
+Q_5(x)\approx P^5(x).
+]
+
+If every task always requires exactly five iterations, then (Q_5) might actually be the better abstraction. There is no reason to invent a loop.
+
+The loop only becomes economically compelling when the learner sees something like:
+
+[
+P^2,\quad P^3,\quad P^5,\quad P^8,\ldots
+]
+
+because then storing:
+
+[
+Q_2,Q_3,Q_5,Q_8,\ldots
+]
+
+grows continually, whereas
+
+[
+\boxed{P+\operatorname{REPEAT}(n)}
+]
+
+has essentially constant structural cost plus a small code for (n).
+
+That gives us an information-theoretic reason for the loop to emerge.
+
+## This suggests a new benchmark axis
+
+ROW currently varies **reuse across tasks**.
+
+We could add **reuse across computational depth**.
+
+Call it something like recurrence structure (r).
+
+At one extreme:
+
+```text
+A B C
+D E F
+G H I
+```
+
+No repeated operators.
+
+At the other:
+
+```text
+A A A
+B B B B B
+C C C C C C C
+```
+
+Then ask:
+
+> At what point is it cheaper for a learner to encode repeated execution explicitly?
+
+That becomes analogous to the (\rho) experiment.
+
+There may be a crossover:
+
+[
+n^*
+]
+
+such that
+
+[
+n<n^*:
+\text{unrolling/fusion wins}
+]
+
+but
+
+[
+n>n^*:
+\text{looping wins}.
+]
+
+And that threshold should depend on:
+
+* cost of storing an additional specialized operator;
+* cost of a primitive call;
+* cost of encoding (n);
+* execution latency;
+* expected future reuse.
+
+That's already a pretty rich theory.
+
+---
+
+## We should distinguish three kinds of compression
+
+This is becoming important.
+
+### Spatial reuse
+
+Store the same computation once across different tasks:
+
+[
+T_1=A\circ B
+]
+
+[
+T_2=A\circ C.
+]
+
+Shared (A).
+
+### Temporal reuse
+
+Call the same computation repeatedly:
+
+[
+A^n.
+]
+
+That's loops/recurrent computation.
+
+### Structural reuse
+
+Reuse a whole composition:
+
+[
+M=A\circ B\circ C
+]
+
+inside many larger programs.
+
+Those are macros/subroutines.
+
+A genuinely self-organizing computational language should eventually discover all three.
+
+So perhaps the deeper architecture isn't merely a “primitive library.”
+
+It's:
+
+[
+\boxed{
+\text{operators}
++
+\text{composition}
++
+\text{iteration}
++
+\text{branching}
++
+\text{abstraction}
+}
+]
+
+That's much closer to a programming language.
+
+---
+
+## But loops create an important experimental trap
+
+Our current ROW teacher uses repeated bounded `tanh` residual transformations.
+
+If we repeatedly execute the same operation:
+
+[
+P(P(P(\cdots P(x))))
+]
+
+it may converge toward a fixed point.
+
+Then:
+
+[
+P^{10}(x)\approx P^{20}(x).
+]
+
+Now loop count becomes almost impossible to identify.
+
+That's bad.
+
+A learner might appear to generalize from 10 iterations to 50 simply because nothing meaningful happens after iteration 8.
+
+So loop benchmarks need teacher operations whose repeated application remains behaviorally distinguishable.
+
+We might want things such as:
+
+### Controlled rotations
+
+[
+z_{t+1}=R_\theta z_t
+]
+
+so:
+
+[
+R_\theta^n
+]
+
+actually depends meaningfully on (n).
+
+### Permutation-like transformations
+
+Repeated application cycles through states.
+
+### Residual transformations close to identity
+
+[
+z_{t+1}=z_t+\epsilon f(z_t)
+]
+
+with carefully controlled stability.
+
+### Discrete state transformations
+
+Potentially easiest for loop experiments.
+
+The crucial test is:
+
+[
+d(P^n,P^{n+k})
+]
+
+should remain substantial over the range we're testing.
+
+Otherwise the benchmark is fake.
+
+---
+
+## There is another major ambiguity: loop vs exponentiated operator
+
+Imagine the model learns a parameterized operation:
+
+[
+Q(x,n)
+]
+
+that directly computes approximately:
+
+[
+P^n(x).
+]
+
+That's not literally executing a loop.
+
+But information-theoretically it might be **better**.
+
+For a rotation, for example:
+
+[
+R_\theta^n=R_{n\theta}.
+]
+
+Executing (R_\theta) 1,000 times would be stupid if you can just compute:
+
+[
+R_{1000\theta}.
+]
+
+So we shouldn't assume:
+
+> discovering a loop is always the best abstraction.
+
+This is actually great for the research.
+
+A smart system should be able to discover:
+
+[
+\boxed{
+\text{interpret}
+\quad\text{vs.}\quad
+\text{compile}
+}
+]
+
+depending on the operation.
+
+For some (P):
+
+[
+P^n
+]
+
+can be efficiently compiled into a direct operation.
+
+For others, there may be no cheap shortcut.
+
+This starts brushing against **computational irreducibility**.
+
+---
+
+# That could become a really interesting distinction
+
+Suppose we generate two families of repeated transformations.
+
+### Reducible family
+
+There exists a compact shortcut:
+
+[
+P^n(x)=Q(x,n).
+]
+
+### Irreducible-ish family
+
+The best known way to compute:
+
+[
+P^n(x)
+]
+
+is approximately to execute (P) repeatedly.
+
+Then a computationally intelligent learner should discover different representations.
+
+For the reducible family:
+
+```text
+COMPILE(P, n)
+```
+
+For the irreducible family:
+
+```text
+REPEAT(P, n)
+```
+
+That's a much deeper question than “can an RNN loop?”
+
+It's:
+
+> **Can the learner discover the cheapest computational strategy for repeated structure?**
+
+---
+
+## And then branching becomes the natural next thing
+
+After:
+
+[
+\operatorname{REPEAT}(P,n)
+]
+
+comes:
+
+[
+\operatorname{IF}(c,A,B).
+]
+
+Then:
+
+[
+\operatorname{WHILE}(c,P).
+]
+
+An input-dependent algorithm becomes:
+
+[
+z_{t+1}
+=======
+
+\begin{cases}
+P(z_t) & c(z_t)=1\
+\mathrm{HALT} & c(z_t)=0.
+\end{cases}
+]
+
+But again, I wouldn't give it an explicit `WHILE` instruction immediately.
+
+We could simply give the controller:
+
+[
+{P_1,\ldots,P_K,\mathrm{HALT}}
+]
+
+and let it generate:
+
+```text
+P3
+P3
+P3
+HALT
+```
+
+across examples.
+
+Then structural compression notices that execution trace repeatedly has the form:
+
+[
+P_3^n\mathrm{HALT}
+]
+
+and invents a representation analogous to:
+
+```text
+WHILE condition:
+    P3
+```
+
+That's much more interesting.
+
+The abstraction is **discovered from execution traces**.
+
+---
+
+# There is a new MDL hierarchy hiding here
+
+Suppose the learner encounters:
+
+```text
+A A A A A
+A A A
+A A A A A A A
+```
+
+Initially it represents literal traces.
+
+Then compression discovers:
+
+[
+\operatorname{Repeat}(A,n).
+]
+
+Later it notices:
+
+```text
+Repeat(A,n)
+B
+Repeat(A,m)
+```
+
+repeated across tasks.
+
+That whole thing becomes:
+
+[
+M(n,m).
+]
+
+Now the learner has invented a **parameterized program**.
+
+And later:
+
+[
+M
+]
+
+may itself be called in loops.
+
+So abstraction recursively creates a more powerful language:
+
+[
+\text{weights}
+\rightarrow
+\text{operators}
+\rightarrow
+\text{calls}
+\rightarrow
+\text{loops}
+\rightarrow
+\text{parameterized programs}
+\rightarrow
+\text{programs over programs}.
+]
+
+This is exactly what symbolic library-learning systems like DreamCoder exploit, except we'd be trying to do it over **learned neural transformations**.
+
+---
+
+# I think there are actually two systems now
+
+This helps clarify the architecture.
+
+### Execution system
+
+A small neural VM:
+
+[
+z_t,\quad P_i,\quad R,\quad HALT.
+]
+
+Its job is simply to execute computations.
+
+### Compression/compiler system
+
+Looks at:
+
+* execution traces;
+* functional equivalences;
+* gradients;
+* parameter similarity;
+* repeated subsequences;
+* task-learning history.
+
+And asks:
+
+> Can the same observed behavior be encoded more cheaply?
+
+It can propose:
+
+[
+[P,P,P,P]
+\rightarrow
+\operatorname{Repeat}(P,4)
+]
+
+or:
+
+[
+[A,B,C,A,B,C]
+\rightarrow
+\operatorname{Repeat}([A,B,C],2)
+]
+
+or:
+
+[
+A_1,A_2,A_3
+\rightarrow
+A(\alpha).
+]
+
+That's a much cleaner division of labor than expecting SGD itself to magically alter program syntax.
+
+---
+
+## And it suggests what “sleep” should really do
+
+During wake:
+
+> Just solve things.
+
+Produce possibly ugly traces:
+
+```text
+P7 P7 P7 P4 P2 P7 P7 P7 P4 P2
+```
+
+During sleep:
+
+> Find a shorter grammar.
+
+Maybe discover:
+
+[
+M=[P_7^3,P_4,P_2]
+]
+
+and rewrite:
+
+```text
+M M
+```
+
+or:
+
+```text
+Repeat(M, 2)
+```
+
+Then future learning operates using:
+
+[
+M
+]
+
+as part of its vocabulary.
+
+That's **actual neural program compression**.
+
+---
+
+# This also reconnects to the LLM scaling hypothesis more strongly
+
+A conventional Transformer gives you:
+
+[
+L
+]
+
+fixed sequential layers.
+
+Even if the same conceptual transformation is useful repeatedly, execution is largely represented by different layer parameters:
+
+[
+F_1,F_2,\ldots,F_L.
+]
+
+Our proposed system instead might learn:
+
+[
+\mathcal P={A,B,C,D,\ldots}
+]
+
+and run:
+
+[
+A\to B\to B\to B\to C\to HALT.
+]
+
+Then for another token/problem:
+
+[
+D\to A\to C\to HALT.
+]
+
+So **computation depth becomes independent of parameter depth**.
+
+That is potentially a major architectural difference.
+
+A 100-step reasoning process doesn't require 100 independently parameterized layers.
+
+It can call a 20-operator library repeatedly.
+
+---
+
+## This creates a very sharp eventual scaling prediction
+
+Imagine comparing models with equal stored parameters.
+
+A fixed-depth Transformer has:
+
+[
+D_{\max}=L
+]
+
+sequential transformations before requiring another forward pass/system-level loop.
+
+A recurrent operator machine has:
+
+[
+D_{\max}
+]
+
+determined mainly by compute budget.
+
+So as problem complexity increases, perhaps the reusable machine can trade:
+
+[
+\text{more FLOPs}
+]
+
+for:
+
+[
+\text{less stored knowledge}.
+]
+
+That means scaling might have **two currencies**:
+
+[
+\boxed{
+\text{parameters}
+\quad\text{and}\quad
+\text{runtime computation}.
+}
+]
+
+Transformers lean heavily on the former.
+
+Our hypothesis is that explicit reusable computation lets you substitute the latter for the former much more effectively.
+
+That's quite interesting.
+
+---
+
+# But there is a fundamental tradeoff
+
+Calling (P) 100 times saves storage:
+
+[
+D(P)
+]
+
+but costs:
+
+[
+100C(P).
+]
+
+A fused operation (Q\approx P^{100}) costs more storage:
+
+[
+D(Q)
+]
+
+but perhaps only:
+
+[
+C(Q)
+]
+
+once.
+
+So the optimal representation depends on:
+
+[
+\boxed{
+\lambda D+\mu C.
+}
+]
+
+Cheap memory / expensive compute:
+
+> compile aggressively.
+
+Expensive memory / cheap compute:
+
+> interpret/reuse aggressively.
+
+This is literally the classic **time–space tradeoff**, appearing inside neural architecture learning.
+
+That gives the MDL/compute objective a much deeper justification.
+
+---
+
+## The experiment I'd eventually love to see
+
+Give the learner a world containing:
+
+* reusable atomic transformations;
+* repeated transformations;
+* recurring subsequences;
+* some reducible repeated computations;
+* some computationally irreducible-ish ones;
+* variable loop counts;
+* input-dependent stopping.
+
+Give it an initially crude language:
+
+[
+{P_i,\mathrm{CALL},\mathrm{HALT}}.
+]
+
+Then allow structural compression.
+
+And ask:
+
+> **What computational language does it invent?**
+
+Does it discover:
+
+* shared primitives?
+* parameterized primitives?
+* macros?
+* loops?
+* compiled shortcuts?
+* conditional execution?
+* hierarchical subroutines?
+
+And most importantly:
+
+> **Does the language it invent make later programs dramatically shorter and faster to learn?**
+
+That is much less obvious than the current ROW result.
+
+I think **that** is where the project becomes truly interesting: not demonstrating that shared structure can be reused, but demonstrating that a neural learner can **invent progressively richer control abstractions because they compress its own history of computation**.
+
+Yes. A few things become clearer once loops are allowed, and some of them change what I think the architecture ultimately needs.
+
+The biggest technical issue is **closure under repeated execution**. If a primitive (P) is learned only on states drawn from some distribution (z\sim D), then after one call you get (P(z)), after five calls (P^5(z)), and those later states may be far outside the distribution on which (P) was learned. So “reuse the same primitive repeatedly” only works if the shared workspace has a reasonably stable interface under composition. Recent depth-recurrent Transformer work explicitly needs stabilization mechanisms such as identity-biased recurrence and LayerScale to make deep reuse of one block work reliably. ([arXiv][1])
+
+That makes our old **neural ABI** idea much more important. Every operator should satisfy something like
+
+[
+P_i:\mathcal Z\rightarrow\mathcal Z
+]
+
+where (\mathcal Z) has a persistent semantic/statistical contract. Otherwise the model learns `P7-after-P3-at-depth-4`, not a genuinely callable `P7`.
+
+I think there are about six additional consequences:
+
+1. **We must distinguish a loop from repeated unrolling.**
+   `P P P P P` uses shared weights, but it hasn't discovered `REPEAT(P, 5)`. The latter is a higher-level abstraction because the execution trace itself is compressed.
+
+2. **We need to distinguish interpretation from compilation.**
+   Sometimes (P^{100}) genuinely requires ~100 sequential applications. Sometimes there's a shortcut (Q(x,100)). A good learner should be free to discover either:
+   [
+   \operatorname{REPEAT}(P,n)
+   ]
+   or
+   [
+   Q_n\approx P^n.
+   ]
+   That turns the objective into a genuine time-space tradeoff:
+   [
+   L=L_{\rm task}+\lambda D+\mu C.
+   ]
+
+3. **Variable computation isn't novel by itself.**
+   Adaptive Computation Time already lets recurrent networks learn how many steps to execute, PonderNet learns probabilistic halting, and Universal Transformers reuse weights across depth with dynamic computation. ([arXiv][2]) Recent looped/depth-recurrent Transformer work pushes the same general idea further. ([arXiv][3])
+   So our contribution cannot be “call a neural block repeatedly until HALT.”
+
+4. **The interesting thing would be learning the *control abstractions themselves*.**
+   Start with something primitive like:
+   [
+   {P_1,\ldots,P_K,\mathrm{HALT}}.
+   ]
+   Let wake-time learning produce traces:
+
+   ```text
+   P7 P7 P7 P4
+   P7 P7 P7 P7 P4
+   P7 P7 P4
+   ```
+
+   Then the sleep compiler might infer:
+   [
+   M(n)=[\operatorname{Repeat}(P_7,n),P_4].
+   ]
+   That is substantially different from merely putting a recurrent block in the architecture.
+
+5. **Eventually you need state beyond one vector.**
+   Real programs need temporary variables, branches, stacks, and memory. With only
+   [
+   z_{t+1}=P_i(z_t)
+   ]
+   you can do tail-recursive-style computation, but arbitrary nested calls eventually want something like:
+   [
+   (\text{workspace},\text{stack},\text{memory},\text{program counter}).
+   ]
+   I wouldn't implement that soon, but conceptually the endpoint is much closer to a learned VM than an MoE.
+
+6. **Credit assignment becomes a serious optimization problem.**
+   If an answer depends on 50 repeated neural calls, gradients must traverse all 50. The fact that recent depth-recurrent systems devote substantial architecture work to stabilizing 20+ recurrent steps is evidence that this is not trivial engineering. ([arXiv][1])
+
+The fourth point is the one I find most interesting.
+
+## A very simple “sleep compiler” may actually be enough to start
+
+We don't need an intelligent GA initially.
+
+Suppose wake produces discrete-ish traces over learned primitives. During sleep, run classical compression-style passes over those traces:
+
+```text
+run-length:
+A A A A      -> Repeat(A, 4)
+
+subsequence:
+A B C A B C  -> M = [A B C]; Repeat(M, 2)
+
+anti-unification:
+A B C
+A D C
+A E C
+             -> M(x) = [A x C]
+```
+
+Then measure whether the rewrite actually reduces:
+
+[
+D(\text{library})
++
+D(\text{programs})
+]
+
+while preserving behavior.
+
+That's almost embarrassingly simple, but scientifically it would let us test:
+
+> **Does giving a neural learner access to progressively compressed execution syntax improve subsequent sample efficiency?**
+
+before attempting a learned compiler.
+
+And there is another deeper implication.
+
+## Loops give us a much better test of whether an abstraction is real
+
+Current ROW can find a reusable primitive, but the result still lives within the same compositional depth as training.
+
+With iteration we can train on:
+
+[
+P^2,\quad P^3,\quad P^4,\quad P^5
+]
+
+and test:
+
+[
+P^{10},\quad P^{20},\quad P^{50}.
+]
+
+If the system has merely memorized finite routes, this should break.
+
+If it has represented:
+
+[
+\operatorname{Repeat}(P,n),
+]
+
+then program description length grows only like the encoding of (n), not linearly with (n).
+
+That is a much harder-to-fake demonstration of **algorithmic abstraction**.
+
+We could even plot:
+
+[
+\text{maximum training iteration count}
+]
+
+versus
+
+[
+\text{maximum successful test iteration count}.
+]
+
+PonderNet already shows that adaptive computation can help extrapolation on synthetic tasks, so merely extrapolating via more recurrent steps isn't sufficient novelty either. ([arXiv][4]) The novel question would be whether **compression over learned neural execution traces causes the system to invent a reusable iteration abstraction and then exploit it in future learning.**
+
+And there's one more idea I particularly like:
+
+### Let the system choose whether to loop or compile
+
+Give it both possibilities.
+
+For each recurring repeated computation, compare:
+
+[
+\text{Program A: Repeat}(P,n)
+]
+
+against:
+
+[
+\text{Program B: learned fused operator }Q_n.
+]
+
+Under:
+
+[
+J=L+\lambda D+\mu C,
+]
+
+the learner should choose different solutions depending on memory/compute prices.
+
+If (\lambda) is high and (\mu) low:
+
+> reuse/loop.
+
+If compute is expensive:
+
+> compile/fuse.
+
+You could literally sweep:
+
+[
+\frac{\lambda}{\mu}
+]
+
+and see whether learned neural organization crosses between **interpreter-like** and **compiled** representations.
+
+That is a really interesting experiment because it stops asking “what architecture is best?” and instead asks:
+
+[
+\boxed{
+\text{Does neural computational organization adapt rationally to the resource economics it is trained under?}
+}
+]
+
+That connects MDL, loops, modularity, scaling, and self-refactoring in one place.
+
+So I think the bigger picture is becoming:
+
+[
+\text{discover reusable transformations}
+\rightarrow
+\text{discover repeated execution}
+\rightarrow
+\text{compress traces into control abstractions}
+\rightarrow
+\text{choose interpretation vs compilation}
+\rightarrow
+\text{use the resulting language to make future learning cheaper}.
+]
+
+The first arrow is what ROW is testing now. The later arrows are where I think the genuinely non-obvious research starts.
+
+[1]: https://arxiv.org/abs/2603.21676?utm_source=chatgpt.com "Thinking Deeper, Not Longer: Depth-Recurrent Transformers for Compositional Generalization"
+[2]: https://arxiv.org/abs/1603.08983?utm_source=chatgpt.com "Adaptive Computation Time for Recurrent Neural Networks"
+[3]: https://arxiv.org/html/2603.21676v1?utm_source=chatgpt.com "Depth-Recurrent Transformers for Compositional ..."
+[4]: https://arxiv.org/abs/2107.05407?utm_source=chatgpt.com "PonderNet: Learning to Ponder"
+

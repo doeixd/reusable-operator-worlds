@@ -1,0 +1,186 @@
+# Reviewer feedback 01 — Reusable Operator Worlds
+
+Scope: full review of the repository as of commit e6f25e3 plus the uncommitted
+tuning work (`extended_diagnostics`, `--fast-tuning`, `tune_development.py`).
+Context assumed: discovery is the primary goal, compute is extremely limited,
+results may go to arXiv if significant, and the repository will be public.
+Priorities below are ordered by information gained per unit of compute.
+
+---
+
+## 1. Overall assessment
+
+The methodological hygiene is well above the norm for this literature:
+predict-before-update prequential scoring, a passing positive control (oracle)
+and a passing negative control (rho=0 endpoint flip), scratch-difficulty
+validation before interpreting model differences, paired worlds, a
+development/confirmatory seed firewall, symmetric tuning frozen before
+confirmation, and full per-run provenance artifacts. The discrete result kept
+as an informative decomposition (good library, expensive online route
+inference) rather than buried is the right instinct.
+
+The replicated effects (3/3 worlds, consistent signs, both the prequential and
+novel-composition metrics) mean the main residual risk is no longer sampling
+noise. It is confounds. Under limited compute, the plan should be rebalanced:
+fewer replications, more controls. The items in Section 2 are the ones that
+could overturn the headline conclusion, and they are all cheap.
+
+---
+
+## 2. Highest-priority scientific concerns
+
+### 2.1 Teacher/learner functional-family inheritance (most important)
+
+`ContinuousBasisLearner` and `DiscreteLibraryLearner` build their operators
+from the same parametric family as the teacher primitive: rank-8 residual
+tanh blocks — and they literally inherit the teacher's residual scale, since
+`learned_lifetime._build_model` passes `alpha=config.world.alpha` into the
+learner. The dense baseline gets a generic GELU MLP block. A skeptical reader's
+first objection will be: "the reusable model wins because it is the teacher's
+architecture, not because it reuses computation."
+
+The rho=0 result is a genuine partial defense (same family, no recurrence,
+advantage reverses), and it should be presented that way. But before any
+public claim:
+
+- Stop plumbing `world.alpha` into learners. Make alpha a learner
+  hyperparameter (ideally learnable). Any shared constant between teacher
+  config and learner config is a leak in a benchmark whose whole premise is
+  that the learner knows nothing about the teacher.
+- Run the family-mismatch controls already listed in the robustness queue,
+  but promote them to FIRST, ahead of the tuning grid and the full rho sweep:
+  (a) teacher rank 16 vs learner rank 8; (b) learner with a different
+  activation or block form vs the same teacher. Seed 0 only is enough for a
+  first read. If the continuous advantage survives mismatch, the reuse claim
+  is strong; if it collapses, that is essential knowledge obtained for two
+  runs.
+
+### 2.2 Discrete temperature annealing is global, not per-task
+
+`DiscreteLibraryLearner.set_training_progress` anneals temperature by global
+example count. A task beginning at lifetime index 60 starts with a nearly hard
+softmax: gradients to non-argmax slots are almost zero, so late tasks must
+infer routes through a frozen relaxation. The reported "route inference is the
+bottleneck" conclusion may therefore be an optimization-schedule artifact
+rather than an inherent cost of discreteness. This matters because that
+conclusion is carrying a lot of narrative weight (it is the stated reason not
+to interpret discrete prequential loss as evidence against reusable
+computation).
+
+Cheap test (one run, seed 0): re-anneal temperature per task, over each task's
+128 examples, against the mature shared library. Either outcome is
+informative. If per-task annealing rescues discrete prequential loss, the
+storage/inference/learning-cost triangle changes shape substantially.
+
+### 2.3 Softmax mixing cannot express identity or attenuation
+
+Continuous coefficients are a convex combination over 8 operators at every one
+of the 3 steps: the model cannot skip a step, scale a step down, or realize an
+effective depth other than 3. Adding an explicit identity operator to the
+basis (or allowing unnormalized coefficients) is a one-line change and one run.
+It also provides the cheapest possible first datapoint on the variable-depth /
+loops question raised in `on-loops.txt`, without building any HALT machinery.
+Recommendation on loops generally: hold the line the spec draws. The
+recurrent-router-with-HALT executor bundles three new hard problems (variable
+depth, learned halting, per-step route inference) before the V1 go/no-go gate
+has been passed.
+
+---
+
+## 3. Compute-allocation advice
+
+Given the discovery goal and the compute budget, ordered by information per
+FLOP:
+
+1. Family-mismatch controls (2.1) — two runs, seed 0.
+2. Per-task discrete annealing (2.2) — one run, seed 0.
+3. Identity-operator ablation (2.3) — one run, seed 0.
+4. Sparse rho sweep: both endpoints already exist on world 0; add rho=0.5 and
+   0.75 there (four runs total for both models) to get the shape of the
+   headline curve before committing to the six-point multi-world version.
+5. Shrink the tuning grid. The staged 36-run symmetric grid mostly purchases
+   tuning-fairness optics. A defensible alternative: tune only task-code LR
+   (the one hyperparameter demonstrated to matter) for both models on worlds
+   0-1, freeze everything else at current values, and document the reduction
+   in EXPERIMENT_PLAN.md. If the full grid is kept for publication optics,
+   run it after items 1-4, since items 1-2 could invalidate the
+   configurations being tuned.
+6. The 30-world confirmatory ladder is publication armor, not discovery. Keep
+   the seed firewall (it costs nothing), but do not spend confirmatory compute
+   until the Section 2 controls have settled the interpretation.
+
+Engineering item with better ROI than any experiment:
+`forward_tasks` runs one forward pass per sample in a Python loop, and the
+continuous/discrete forward evaluates all operator slots for every sample at
+every step. Grouping the minibatch by task ID (current example plus same-task
+replay hits) is roughly an hour of work and plausibly doubles or triples
+effective compute. Under this budget that is worth more than any single run.
+
+---
+
+## 4. Presentation and reporting (for arXiv / public release)
+
+- Normalize effect sizes. "Wins by 3,135 nats" is unreadable without the
+  denominator (8,192 online examples x 16 dimensions). Report per-example nats
+  (or bits via the quantized-target form, which already exists) alongside
+  totals, and give deltas as a fraction of total prequential loss.
+- Do not report bootstrap intervals over n=3 worlds; the interval is just the
+  range of three numbers and will draw criticism. Show the three paired
+  deltas directly and label the stage exploratory (PROGRESS.md already does
+  this correctly — carry the same discipline into any write-up).
+- Compute matching: the 6,528 vs 6,144 multiply-add match is inference-side
+  only. Backprop through the continuous model touches all 8 operators at
+  every step, so training compute is not matched at the same ratio. Either
+  report training FLOPs separately or state explicitly that "compute-matched"
+  means inference multiply-adds. Also state whether Dense-C width 32 was
+  re-derived after the mixture-evaluation accounting or inherited from
+  earlier parameter accounting.
+- Replay deviation: the effective minibatch is 2 (1 current + 1 replay), not
+  the spec's suggested 8. It is symmetric across models so the comparison
+  stands, but document it in EXPERIMENT_PLAN.md before a reviewer finds it.
+- The discrete zero-shot degradation over lifetime (0.103 -> 0.160, because
+  tie-broken default routes become less generic as operators specialize) is a
+  nice honest detail — keep it in the write-up; it preempts an obvious "why
+  is zero-shot worse" question.
+- For public release: `README.md` references the spec file but the repo will
+  be read cold. Add a short top-level statement of the question, the headline
+  metric, and the current status; link PROGRESS.md as the running lab record.
+  Consider committing `on-loops.txt` and the reviewer-feedback files under a
+  `notes/` or `reviews/` directory with one line of framing each, or exclude
+  them — as loose root-level .txt files they will confuse readers.
+- The provenance discipline (config/metrics/model/world-programs/git-commit
+  per run) is a genuine strength; say so explicitly in the paper's
+  reproducibility statement and publish the artifact directory layout.
+
+---
+
+## 5. Process observations
+
+- The 54-minute commit history (11:15-12:09 on 2026-08-17) will be visible in
+  a public repo. That is fine — arguably a feature — but the write-up should
+  be transparent that this is agent-executed research with a human PI, since
+  readers will notice.
+- AGENTS.md as an accumulating "Implementation learnings" log is working
+  extremely well and is the reason the repo reads as mature. It lacks one
+  section: standing scientific doubts. Agents optimizing against PROGRESS.md
+  milestones will sprint past unresolved concerns unless they are written
+  where the loop reads them. Seed that section with: the family-inheritance
+  confound (2.1), the global-anneal question (2.2), the convex-mixing
+  constraint (2.3), the batch-size-2 deviation, and the training-vs-inference
+  compute-matching caveat.
+- Keep the rule that confirmatory seeds 100-129 remain uninspected. If the
+  Section 2 controls change the model configurations, that firewall is what
+  preserves the right to call the final numbers confirmatory.
+
+---
+
+## 6. Bottom line
+
+The benchmark works, both controls behave, and the exploratory effects are
+replicated and internally consistent. The result is not yet safe from the
+"matched inductive bias, not reuse" objection, and the discrete story rests on
+a possibly artifactual annealing schedule. Both can be resolved for about four
+runs on seed 0. Do those before the tuning grid, the full rho sweep, or any
+confirmatory spending. If the continuous advantage survives family mismatch
+and the rho curve keeps its shape, this is a publishable, well-defended
+result even at modest world counts.

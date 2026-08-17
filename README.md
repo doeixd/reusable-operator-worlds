@@ -21,6 +21,7 @@ python -m row.experiments.learned_lifetime --config configs/v1.yaml --model cont
 python -m row.experiments.learned_lifetime --config configs/v1.yaml --model discrete --output artifacts/discrete
 python -m row.experiments.quantize_artifact artifacts/continuous
 python -m row.experiments.plot_exact_reuse --help
+python -m row.experiments.tune_development --help
 ```
 
 Scratch controls accept `--world-seed`, `--learning-rate`,

@@ -35,6 +35,7 @@ class EvaluationConfig:
     target_precision: float = 1.0 / 256.0
     lifetime_checkpoints: tuple[int, ...] = (8, 16, 32, 64)
     checkpoint_novel_tasks: int = 4
+    extended_diagnostics: bool = True
 
     def __post_init__(self) -> None:
         if self.gaussian_sigma <= 0.0 or self.target_precision <= 0.0:
@@ -240,6 +241,7 @@ def load_config(path: str | Path) -> ExperimentConfig:
             int(x) for x in eval_raw.get("lifetime_checkpoints", (8, 16, 32, 64))
         ),
         checkpoint_novel_tasks=int(eval_raw.get("checkpoint_novel_tasks", 4)),
+        extended_diagnostics=bool(eval_raw.get("extended_diagnostics", True)),
     )
     output_directory = Path(output_raw.get("directory", "artifacts/scratch_difficulty"))
     return ExperimentConfig(

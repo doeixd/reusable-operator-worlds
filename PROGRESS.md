@@ -83,10 +83,17 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Generated and visually inspected six required exact-reuse pilot figures.
 - Added `EXPERIMENT_PLAN.md` defining development seeds 0–9, sealed confirmatory
   seeds 100–129, symmetric tuning, causal metrics, and robustness work.
+- Completed the symmetric six-setting LR grid for both Continuous and Dense-C on
+  development worlds 0–2 (36 full lifetimes).
+- Dense-C improved substantially when its task LR increased to 0.05, correcting
+  an unfair pilot comparison. Its best stage-one mean log loss is -168,768.
+- Continuous's best stage-one setting is global/task LR 0.003/0.05 at -171,866,
+  with mean novel 32-shot NMSE 0.00237 versus Dense-C's 0.00486.
 
 # In progress
 
-- Run the staged symmetric hyperparameter grid on development worlds.
+- Evaluate the top two configurations per architecture on development worlds
+  3–9, then freeze one configuration per architecture.
 
 # Next
 

@@ -135,3 +135,13 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   differences.
 - Development worlds are 0–9. Confirmatory worlds 100–129 must remain untouched
   until symmetric tuning and all analysis rules are frozen in `EXPERIMENT_PLAN.md`.
+- Symmetric stage-one tuning materially improved both models. Dense-C's best
+  development-0–2 setting is global/task LR 0.001/0.05 with mean Gaussian log
+  loss -168,768; its prior 0.001/0.005 setting scored -164,842. Continuous's
+  best is 0.003/0.05 at -171,866; its prior 0.001/0.05 setting scored -166,505.
+- After equal tuning, Continuous leads Dense-C by 3,098 mean Gaussian-log-loss
+  units on worlds 0–2 and has better mean novel 32-shot NMSE (0.00237 versus
+  0.00486). This supersedes both the untuned Dense-C comparison and the temporary
+  observation that tuned Dense-C beat the old Continuous configuration.
+- Stage-two finalists are Continuous 0.003/0.05 and 0.001/0.05, and Dense-C
+  0.001/0.05 and 0.003/0.05, evaluated on development worlds 3–9.

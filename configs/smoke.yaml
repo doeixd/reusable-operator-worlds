@@ -73,6 +73,7 @@ evaluation:
   target_precision: 0.00390625
   lifetime_checkpoints: [2, 4]
   checkpoint_novel_tasks: 2
+  extended_diagnostics: true
 
 output:
   directory: artifacts/smoke

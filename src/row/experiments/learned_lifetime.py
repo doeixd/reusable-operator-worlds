@@ -245,14 +245,16 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
     )
     if isinstance(model, ContinuousBasisLearner):
         summary["routing"] = model.routing_diagnostics()
-        summary["functional_recovery"] = _functional_recovery(model.basis, world, config)
+        if config.evaluation.extended_diagnostics:
+            summary["functional_recovery"] = _functional_recovery(model.basis, world, config)
     elif isinstance(model, DiscreteLibraryLearner):
         summary["routing"] = model.routing_diagnostics()
-        summary["functional_recovery"] = _functional_recovery(model.library, world, config)
-        summary["route_recovery"] = _route_recovery(
-            model, world, summary["functional_recovery"]
-        )
-        summary["operator_specialization"] = _operator_specialization(model, config)
+        if config.evaluation.extended_diagnostics:
+            summary["functional_recovery"] = _functional_recovery(model.library, world, config)
+            summary["route_recovery"] = _route_recovery(
+                model, world, summary["functional_recovery"]
+            )
+            summary["operator_specialization"] = _operator_specialization(model, config)
     summary["novel_composition"] = _adapt_novel_composition(
         model, world, config, task_lr
     )
@@ -533,6 +535,7 @@ def main() -> None:
     parser.add_argument("--hidden-width", type=int)
     parser.add_argument("--order", choices=("forward", "reverse"), default="forward")
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--fast-tuning", action="store_true")
     args = parser.parse_args()
     config = load_config(args.config)
     config = replace(
@@ -544,6 +547,16 @@ def main() -> None:
         ),
         output_directory=config.output_directory if args.output is None else args.output,
     )
+    if args.fast_tuning:
+        config = replace(
+            config,
+            evaluation=replace(
+                config.evaluation,
+                lifetime_checkpoints=(),
+                checkpoint_novel_tasks=1,
+                extended_diagnostics=False,
+            ),
+        )
     selected = {
         "dense": config.dense_model,
         "continuous": config.continuous_model,

@@ -1,0 +1,1126 @@
+This update makes the project materially stronger.
+
+The two most important things I wanted to see after the last update have now happened:
+
+1. **The causal reuse endpoint flips in the right direction.** On development world 0, Continuous beats Dense-C by 3,135 prequential log-loss units at (\rho=1), but **loses by 6,714 at (\rho=0)**. That is the first direct evidence that the reusable architecture's advantage is actually tied to latent computational recurrence rather than just being a generically better architecture. 
+
+2. **The system really does appear to become a better learner over its lifetime.** On exact-reuse world 0, Continuous's 32-shot NMSE on fresh unseen compositions drops from 0.0298 after 8 lifetime tasks to 0.00467 after 64; Dense-C improves too, but only from 0.0367 to 0.0159. 
+
+That second result is particularly important. It gets much closer to the claim we actually care about:
+
+[
+\boxed{
+\text{past learning}
+\rightarrow
+\text{better computational vocabulary}
+\rightarrow
+\text{cheaper future learning}
+}
+]
+
+rather than merely:
+
+[
+\text{reusable architecture has lower average loss}.
+]
+
+## The hard-discrete result is also scientifically useful
+
+I actually like that it **doesn't simply win everything**.
+
+The discrete library recovered 92.2% of explained routes exactly, 96.4% of individual route positions, found the teacher primitives with normalized distance 0.00229, and learned with 11/12 slots. Yet its prequential loss is much worse because **online route inference is expensive**. 
+
+That's an extremely informative decomposition:
+
+[
+\boxed{
+\text{representation problem}
+\neq
+\text{program-inference problem}
+}
+]
+
+It successfully learns something very close to the underlying computational language, but figuring out the new task's program from limited data is costly.
+
+Meanwhile, once that program has been inferred, it's extraordinarily efficient:
+
+* ~768 inference multiply-adds;
+* 26,112 retained proxy bits;
+* 32-shot novel NMSE 0.00413. 
+
+So we now have a really interesting triangle:
+
+[
+\begin{array}{c|c|c|c}
+& \text{online learning} & \text{storage} & \text{inference}\
+\hline
+\text{Dense} & \text{okay} & \text{large} & \text{moderate}\
+\text{Continuous} & \text{best so far} & \text{small} & \text{expensive}\
+\text{Discrete} & \text{poor early} & \text{smallest} & \text{very cheap}
+\end{array}
+]
+
+That is not an inconvenience. It's telling us **where the actual tradeoffs live**.
+
+---
+
+# I think the experiment plan is now quite good
+
+The split into development seeds 0–9 and sealed confirmatory seeds 100–129 is exactly the right move. Symmetric hyperparameter tuning, frozen architecture sizes, predefined (\rho) sweep, explicit primary statistic, checkpointed novel-composition evaluation, and delayed confirmatory access are all good research hygiene. 
+
+The proposed causal comparison is especially clean:
+
+[
+\rho=[0,.25,.5,.75,.9,1]
+]
+
+and:
+
+[
+\Delta_W =
+L_{\mathrm{Dense-C}}
+--------------------
+
+L_{\mathrm{Continuous}}.
+]
+
+Then test whether:
+
+[
+\boxed{\Delta_W \uparrow \text{ as functional recurrence } \uparrow.}
+]
+
+
+
+If that curve comes out monotonically—or even approximately monotonically—in development and then reproduces on the sealed 30 worlds, **that is a real result**.
+
+Not “promising preliminary observation.” A real empirical claim.
+
+---
+
+# There are still a few things I would tighten
+
+## 1. Make measured functional recurrence the primary x-axis
+
+You've already noticed the important subtlety:
+
+[
+\rho
+]
+
+is a parameter-space construction, not literally functional similarity. 
+
+You validated the endpoints, which is good.
+
+For the actual paper I would plot both, but I'd make the more scientifically meaningful plot:
+
+[
+x =
+\text{measured residual-function recurrence}
+]
+
+[
+y =
+L_{\mathrm{Dense-C}}
+--------------------
+
+L_{\mathrm{Continuous}}.
+]
+
+Then (\rho) is the experimental intervention and measured functional recurrence is the realized mechanism.
+
+Conceptually:
+
+[
+\rho
+\rightarrow
+\text{functional recurrence}
+\rightarrow
+\text{reuse advantage}.
+]
+
+That opens the door later to an actual mediation-style analysis.
+
+---
+
+## 2. The checkpoint experiment should probably become co-primary
+
+The current plan says primary checkpoint statistic is mean 32-shot novel-composition NMSE. 
+
+Good.
+
+But I'd analyze the **slope over lifetime**, not just values at 64 tasks.
+
+Something like:
+
+[
+\log \operatorname{NMSE}_{32}
+=============================
+
+\beta_0+
+\beta_1\log(\text{tasks seen})
++
+\beta_2\text{Model}
++
+\beta_3[
+\log(\text{tasks seen})\times\text{Model}
+].
+]
+
+The interesting coefficient is:
+
+[
+\beta_3.
+]
+
+Because that asks:
+
+> Does the reusable learner's *ability to learn novel compositions* improve faster with accumulated experience?
+
+That's the learning-to-learn claim directly.
+
+The seed-0 trajectory already looks encouraging:
+
+[
+0.0298 \rightarrow 0.00467
+]
+
+for Continuous versus:
+
+[
+0.0367 \rightarrow 0.0159
+]
+
+for Dense-C. 
+
+But we need the replicated slopes.
+
+---
+
+## 3. Use more than four novel programs at each checkpoint
+
+Four is fine during development because it's cheap.
+
+For confirmation, four novel compositions may leave too much variance from which routes happen to be sampled.
+
+I'd probably use:
+
+[
+16\text{ or }32
+]
+
+fixed novel programs per checkpoint if compute permits.
+
+Since shared parameters are frozen and only task state is being adapted, I suspect this isn't terribly expensive.
+
+And stratify them by things like:
+
+* all primitives seen before;
+* rare primitive combinations;
+* adjacency novelty;
+* route distance from previously observed programs.
+
+That would make the claim much richer without changing the basic experiment.
+
+---
+
+## 4. Be careful with `rho=0` interpretation
+
+The (\rho=0) result is very encouraging:
+
+[
+\text{Dense-C beats Continuous by }6714.
+]
+
+
+
+That's exactly the sign we hoped for.
+
+But there's an interesting issue: at (\rho=0), the continuous model is being forced to represent many unrelated task-specific computations through a fixed shared basis. It may be disadvantaged **architecturally**, not merely deprived of beneficial reuse.
+
+That's okay—indeed, that's partly the point.
+
+But the strongest result won't be:
+
+> continuous wins at 1 and loses at 0.
+
+It will be a smooth relationship:
+
+[
+\Delta(\rho)
+]
+
+that tracks realized functional recurrence.
+
+If there's an approximately monotonic crossover:
+
+```text
+rho 0      dense wins strongly
+rho .25    dense wins
+rho .5     near tie
+rho .75    continuous wins
+rho .9     continuous wins more
+rho 1      continuous wins most
+```
+
+that is much harder to explain as an arbitrary architecture mismatch.
+
+So the six-point sweep is absolutely the right next decisive result.
+
+---
+
+# A particularly interesting theoretical result may be hiding here
+
+We previously speculated about a threshold:
+
+[
+\rho^*
+]
+
+where sharing becomes economical.
+
+You might actually observe one.
+
+For low recurrence:
+
+[
+\text{cost of forcing shared representation}
+
+>
+
+\text{benefit from reuse}.
+]
+
+Above some recurrence level:
+
+[
+\text{reuse benefit}
+
+>
+
+\text{cost of sharing}.
+]
+
+Then:
+
+[
+\boxed{
+\rho>\rho^*
+\Rightarrow
+\text{reusable representation becomes favorable}
+}
+]
+
+That would connect beautifully to the MDL interpretation.
+
+You could later model the threshold approximately from:
+
+[
+\text{expected future reuse}
+\times
+\text{learning savings per reuse}
+
+>
+
+\text{cost of maintaining abstraction}.
+]
+
+Even if you don't have a formal theorem in paper one, it gives the results a strong conceptual interpretation.
+
+---
+
+# The discrete result suggests another direction I wouldn't pursue *yet*
+
+It basically says:
+
+> Once the correct reusable discrete program is known, computation can be extremely cheap. The expensive part is inferring the program.
+
+That invites an amortized program-inference model.
+
+Instead of optimizing route logits from scratch for every new task using 32 examples, have an inference network consume demonstrations:
+
+[
+{(x_i,y_i)}_{i=1}^n
+]
+
+and directly predict:
+
+[
+q_1,q_2,q_3.
+]
+
+Something like:
+
+[
+R_\phi(D_\tau)\rightarrow(q_1,q_2,q_3).
+]
+
+Then meta-train (R_\phi) across previous tasks.
+
+That could potentially give:
+
+[
+\text{discrete library's cheap execution}
++
+\text{continuous model's fast task inference}.
+]
+
+And philosophically that would be extremely interesting because the model would have:
+
+1. a reusable **language** of operations;
+2. an amortized **compiler** from examples into programs.
+
+But I agree with your agent's current sequencing: **don't build this now**. First establish the causal reuse curve. 
+
+---
+
+# Hyperparameter plan: mostly good, one suggestion
+
+The symmetric grid:
+
+[
+\eta_{\text{global}}
+\in{.0003,.001,.003}
+]
+
+and:
+
+[
+\eta_{\text{task}}
+\in{.005,.05}
+]
+
+for both models is clean. 
+
+I'd consider including:
+
+[
+\eta_{\text{task}}=.01
+]
+
+or `.02`.
+
+The reason is the continuous model's behavior changed enormously between .005 and .05. 
+
+That's an order-of-magnitude gap. It's plausible the optimal values lie between.
+
+The compute increase from:
+
+[
+3\times2=6
+]
+
+to:
+
+[
+3\times4=12
+]
+
+configs per architecture on three small development worlds is probably modest.
+
+I wouldn't go crazy, but:
+
+[
+.005,.01,.02,.05
+]
+
+would give a much more convincing task-code LR sweep.
+
+---
+
+# The coding correction was exactly right
+
+Changing the terminology to **cumulative prequential Gaussian log loss**, then separately adding a fixed target precision (1/256) for a proper quantized-target code interpretation, is clean. 
+
+This preserves all pairwise differences while avoiding the conceptual weirdness of saying:
+
+[
+-165,000\text{ nats}
+]
+
+is literally a negative code length.
+
+Good fix.
+
+---
+
+# I also like that the agent found a real failure in discrete zero-shot
+
+Hard discrete zero-shot NMSE actually gets worse over the lifetime:
+
+[
+0.103 \rightarrow 0.160.
+]
+
+
+
+And the explanation makes sense: an unseen task gets a tie-broken default route, while operators become increasingly specialized, so an arbitrary initial route becomes less generic.
+
+This is a very useful warning about one metric:
+
+> **Zero-shot performance on a new task isn't necessarily the right measure of whether the library improved.**
+
+If task identity contains no information about its hidden program, **zero-shot route selection is fundamentally impossible** beyond exploiting route priors.
+
+So for non-oracle models the really meaningful novel-task measure is:
+
+[
+\text{few-shot identification cost}.
+]
+
+That's an important conceptual distinction.
+
+The continuous model may have somewhat better zero-shot behavior because a neutral/soft task code computes something like an average operation, whereas hard discrete has to pick something.
+
+So don't oversell zero-shot comparison between these architectures.
+
+Use:
+
+[
+1,2,4,8,16,32\text{-shot}
+]
+
+as the central adaptation curve.
+
+---
+
+# My updated confidence levels
+
+I would now say:
+
+### Benchmark validity
+
+**Very high.**
+
+### Reusable computation can produce accumulating learning-to-learn in ROW
+
+**Established by the oracle.**
+
+### A learned reusable substrate can discover and exploit that structure
+
+**Strong preliminary evidence.**
+
+### Continuous's advantage over dense is specifically related to computational recurrence
+
+**Meaningful first evidence**, because the sign flips at (\rho=0). Needs the full replicated dose-response curve.
+
+### Continuous reusable representations improve progressively over the lifetime
+
+**Good preliminary evidence** from checkpoint novel-composition probes.
+
+### Discrete reusable programs can be recovered
+
+**Strong evidence.** 92.2% exact route recovery is excellent.
+
+### Discrete programs are superior for lifetime learning
+
+**No.** Currently false, largely due to task/program inference cost.
+
+### Dynamic self-refactoring is needed
+
+**Still unknown.**
+
+And that's exactly where we should be.
+
+---
+
+## What I would tell the agent now
+
+The experiment plan is basically right. I would send something very close to:
+
+> Finish symmetric development tuning, freeze Continuous and Dense-C, and make the six-point (\rho) sweep the highest-priority result. For each (\rho), report the paired prequential effect and measured functional recurrence. Also replicate the 8/16/32/64-task frozen-library adaptation checkpoints so we can estimate whether Continuous's few-shot learning curve improves faster with lifetime experience. Do not add structural mechanisms before these results are stable.
+
+Then:
+
+[
+\boxed{
+\text{if the }\rho\text{ dose-response replicates}
+}
+]
+
+I think we should seriously start thinking in terms of **a paper**, rather than merely an exploratory implementation.
+
+Because at that point you'd have shown something quite crisp:
+
+> **An architecture capable of reusing a learned continuous computational basis becomes increasingly sample-efficient in environments whose tasks share latent transformations, and the magnitude of that advantage tracks the amount of reusable computation in the environment.**
+
+That's a much tighter and more defensible claim than the giant original “LLMs waste trillions of parameters” hypothesis—but it would be a real empirical foothold toward that larger program.
+Yes. **I think you’re right.** The result we’re currently excited about is, at a high level, almost what information theory says *should* happen.
+
+The key insight is that **reuse is compression**.
+
+Suppose we have tasks (T_1,\ldots,T_N). If you learn each independently, the description cost is roughly
+
+[
+L_{\text{independent}}
+\approx
+\sum_{i=1}^{N} K(T_i).
+]
+
+But suppose they are generated from a common computational library (P), plus a short task-specific program (r_i):
+
+[
+T_i=P(r_i).
+]
+
+Then you can encode the whole family as
+
+[
+L_{\text{shared}}
+\approx
+K(P)+\sum_{i=1}^{N}K(r_i\mid P).
+]
+
+The library is paid for **once**.
+
+Everything afterward only has to specify what's different.
+
+That's exactly the mechanism we've been observing experimentally.
+
+## The Shannon version makes it even clearer
+
+Imagine all tasks share some latent variable (Z)—in ROW, roughly the reusable operator library.
+
+Without exploiting (Z):
+
+[
+L_{\text{independent}}\approx\sum_i H(T_i).
+]
+
+If we first encode (Z):
+
+[
+L_{\text{shared}}
+\approx
+H(Z)+\sum_iH(T_i\mid Z).
+]
+
+Since
+
+[
+H(T_i)-H(T_i\mid Z)=I(T_i;Z),
+]
+
+the savings are approximately
+
+[
+\boxed{
+\sum_iI(T_i;Z)-H(Z).
+}
+]
+
+That's basically the entire story.
+
+There's an **up-front cost** to learning/storing the reusable representation:
+
+[
+H(Z).
+]
+
+But every new related task gives you a benefit:
+
+[
+I(T_i;Z).
+]
+
+Once:
+
+[
+\sum_iI(T_i;Z)>H(Z),
+]
+
+the abstraction has paid for itself.
+
+And after that, each additional related task is cheaper.
+
+### Which predicts exactly our (\rho) result
+
+At:
+
+[
+\rho=0,
+]
+
+there's essentially no common computational information:
+
+[
+I(T_i;Z)\approx0.
+]
+
+So maintaining a shared basis is pointless—or actively harmful because you're imposing the wrong bottleneck.
+
+At:
+
+[
+\rho=1,
+]
+
+there is lots of common information.
+
+So paying once for:
+
+[
+P_1,\ldots,P_6
+]
+
+and then merely learning:
+
+[
+[P_2,P_5,P_1]
+]
+
+for each task should beat relearning its transformation from scratch.
+
+So yes:
+
+[
+\boxed{
+\rho\uparrow
+\Rightarrow
+\text{shared information}\uparrow
+\Rightarrow
+\text{value of reuse}\uparrow
+}
+]
+
+is almost an information-theoretic prediction.
+
+And there is already formal transfer-learning theory in essentially this spirit: if tasks share a latent representation, learning that representation across source tasks can reduce the number of samples needed on new tasks. ([arXiv][1]) MDL-control goes even closer: it explicitly learns common structure across tasks, compresses it into a simpler shared representation, and uses that representation to obtain faster learning/generalization on subsequent tasks. ([arXiv][2])
+
+So **that cannot be the ultimate novelty of our project.**
+
+---
+
+## But this realization is useful, because it tells us what the interesting question actually is
+
+Information theory says:
+
+> If I give you the correct shared latent code (Z), exploiting it should save information.
+
+It does **not** tell us:
+
+> How does a general neural learner discover what (Z) should be?
+
+That's considerably harder.
+
+Consider a large set of tasks whose shortest joint description is:
+
+```text
+A
+B
+C
+D
+
+program 1: A B D
+program 2: A C D
+program 3: B C A
+...
+```
+
+We know *after the fact* that this is compressed.
+
+But SGD doesn't receive:
+
+```text
+Here are A, B, C, and D.
+```
+
+It receives millions of:
+
+[
+(x,y)
+]
+
+pairs.
+
+So the interesting problem is:
+
+[
+\boxed{
+\text{Can learning dynamics discover the factorization that approaches the joint compression bound?}
+}
+]
+
+That's not trivial.
+
+---
+
+# There are actually three increasingly interesting questions
+
+### Level 1 — Known reusable architecture
+
+> If tasks share structure and we give the learner an architecture capable of representing that structure, does it learn more efficiently?
+
+Basically:
+
+**yes, of course.**
+
+That's where ROW currently is.
+
+It's an important sanity check, but not the paper I ultimately care about.
+
+---
+
+### Level 2 — Unknown reusable vocabulary
+
+> Given an overcomplete/unstructured computational substrate, can the learner discover the shared basis itself?
+
+Now we don't tell it:
+
+[
+K=6
+]
+
+or that the correct structure is exactly six discrete operators.
+
+Maybe it discovers:
+
+[
+7
+]
+
+or:
+
+[
+4
+]
+
+or a continuous basis:
+
+[
+P_\alpha=\sum_i\alpha_iB_i.
+]
+
+And we evaluate it purely by:
+
+[
+\boxed{
+\text{joint description length}
++
+\text{future predictive cost}.
+}
+]
+
+That starts becoming interesting.
+
+---
+
+### Level 3 — Self-changing computational language
+
+And here's the version that I think remains genuinely exciting:
+
+> **Can the learner modify the language in which it learns so that it approaches the compression structure of its environment over time?**
+
+Meaning it can decide:
+
+[
+\text{reuse}
+]
+
+vs.
+
+[
+\text{specialize}
+]
+
+vs.
+
+[
+\text{fork}
+]
+
+vs.
+
+[
+\text{merge}
+]
+
+vs.
+
+[
+\text{parameterize}
+]
+
+vs.
+
+[
+\text{extract a recurring composition}.
+]
+
+Now we're asking the learner to find something analogous to the **latent source code** of its environment.
+
+---
+
+# This connects beautifully to the scaling question
+
+Our original intuition about LLMs can be restated in information-theoretic terms.
+
+Suppose the behavior of a trillion-parameter model contains many tasks/functions:
+
+[
+T_1,\ldots,T_N.
+]
+
+The naive architectural representation might effectively cost something approaching:
+
+[
+\sum_iK(T_i).
+]
+
+But perhaps their true joint complexity is closer to:
+
+[
+\boxed{
+K(P)+\sum_iK(r_i\mid P)
+}
+]
+
+where (P) is a relatively small reusable computational language.
+
+Then the billion/trillion parameters aren't necessarily reflecting the **intrinsic information content** of the model's competencies.
+
+They may partly reflect an architecture that has found a relatively inefficient representation of their **joint structure**.
+
+That's exactly analogous to compression.
+
+---
+
+## A simple example
+
+Imagine 1,000 functions all independently contain an FFT implementation.
+
+Naively:
+
+[
+1000\times K(\mathrm{FFT}).
+]
+
+With functions:
+
+```text
+FFT = ...
+
+function_1:
+    FFT(...)
+    ...
+
+function_2:
+    FFT(...)
+    ...
+```
+
+you pay:
+
+[
+K(\mathrm{FFT})
+]
+
+once.
+
+That's obvious.
+
+What's not obvious is whether a neural network trained only from behavioral examples will spontaneously discover:
+
+> **“Hey, these apparently different computations contain the same algorithm. I should represent that algorithm once.”**
+
+That's much closer to our actual question.
+
+---
+
+# And this gives us a theoretical prediction for the (\rho) experiment
+
+The crossover isn't just something we hope to observe.
+
+There should be an economic threshold.
+
+Suppose a reusable primitive costs:
+
+[
+C_P
+]
+
+bits to learn/store.
+
+And each related task saves approximately:
+
+[
+s(\rho)
+]
+
+bits by using it.
+
+After (N) tasks, sharing wins when:
+
+[
+N s(\rho)>C_P.
+]
+
+Therefore:
+
+[
+N^*(\rho)
+\approx
+\frac{C_P}{s(\rho)}.
+]
+
+That's neat.
+
+At high reuse:
+
+[
+s(\rho)\gg0
+]
+
+so:
+
+[
+N^*
+]
+
+is small.
+
+The abstraction pays for itself quickly.
+
+At low reuse:
+
+[
+s(\rho)\rightarrow0
+]
+
+so:
+
+[
+N^*\rightarrow\infty.
+]
+
+**Never bother abstracting.**
+
+That predicts not just a (\rho) threshold, but a relationship between:
+
+[
+\boxed{
+\text{reuse strength}
+\times
+\text{number of experiences}
+\times
+\text{primitive complexity}.
+}
+]
+
+This actually gives us a much richer synthetic experiment later.
+
+---
+
+# We could vary three dimensions
+
+Not just:
+
+[
+\rho.
+]
+
+Also:
+
+### Recurrence
+
+How often will a primitive be useful?
+
+[
+N.
+]
+
+### Primitive complexity
+
+How expensive is it to learn/store?
+
+[
+K(P).
+]
+
+### Sharedness
+
+How much of it is actually invariant between tasks?
+
+[
+\rho.
+]
+
+Then look for the boundary where the optimal strategy switches from:
+
+[
+\text{learn separately}
+]
+
+to:
+
+[
+\text{abstract and reuse}.
+]
+
+Information theory gives us the qualitative prediction.
+
+Our neural learner's job is to **discover that tradeoff automatically**.
+
+That starts being much more compelling.
+
+---
+
+# And this tells us something important about ROW
+
+ROW isn't currently demonstrating a surprising theorem about learning.
+
+It's validating our **experimental apparatus**.
+
+That's okay.
+
+It's like building a physics apparatus and first verifying:
+
+[
+F=ma
+]
+
+before looking for the new phenomenon.
+
+The interesting things we've learned so far are more specific:
+
+* The continuous basis can actually discover reusable transformations without being given their identities.
+* The discrete system can recover the latent library surprisingly accurately.
+* Continuous and discrete representations exhibit a genuine learning-vs-runtime tradeoff.
+* Program inference, rather than primitive learning, is the bottleneck for the discrete system. 
+* The continuous learner's novel-composition learning improves substantially over its lifetime. 
+
+Those are more interesting than “reuse helps when things are reusable.”
+
+---
+
+## So I would slightly change what we're aiming for
+
+The theoretical north star becomes:
+
+[
+\boxed{
+\textbf{Can a neural learner approach the joint description length of its lifetime experience by inventing its own reusable computational representation?}
+}
+]
+
+Or even:
+
+> **Can neural learning discover algorithmic mutual information between tasks and turn it into reusable computation?**
+
+That's a much sharper statement.
+
+There is existing work explicitly framing task relatedness and transfer in terms of information complexity, ([arXiv][3]) and theory shows shared representations can reduce target-task sample complexity. ([arXiv][1]) So the novelty isn't the basic compression principle.
+
+The interesting territory is the **algorithm for discovering the code**.
+
+And then our original LLM hypothesis becomes:
+
+> Large dense Transformers may be solving a joint-compression problem badly: SGD discovers enormous amounts of shared algorithmic structure, but the architecture may lack mechanisms to factor that structure into a compact callable computational library.
+
+**That** I still think is a really interesting thing to investigate.
+
+So your instinct here is right: **the current headline statement is almost too obvious. We should treat it as the foundation/theoretical expectation, not as the eventual contribution.**
+
+[1]: https://arxiv.org/abs/2006.11650?utm_source=chatgpt.com "[2006.11650] On the Theory of Transfer Learning"
+[2]: https://arxiv.org/abs/2207.08258?utm_source=chatgpt.com "Minimum Description Length Control"
+[3]: https://arxiv.org/pdf/1904.03292?utm_source=chatgpt.com "The Information Complexity of Learning Tasks, their Structure ..."
