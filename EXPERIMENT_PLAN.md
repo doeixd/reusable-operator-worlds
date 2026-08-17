@@ -162,4 +162,12 @@ worlds under reverse task order and replay ratios 0, 1, and 4. Continuous wins
 cumulative lifetime loss in all ten paired worlds under every condition; strong
 replay does not remove the advantage. Novel 32-shot transfer is replay-sensitive
 and is not reliable in the no-replay condition. The confirmation gate still
-requires a second model initialization and clean workflow rehearsal.
+requires the clean workflow rehearsal and final diagnostic audit.
+
+# Initialization gate result
+
+The selected Continuous and Dense-C comparison has two model initializations per
+architecture on all ten development worlds. Both initialization pairs favor
+Continuous on lifetime loss and novel 32-shot adaptation in every world. World
+remains the replication unit; initialization effects are averaged within world
+for intervals.

@@ -44,8 +44,6 @@ claim.
 
 # Open protocol obligations
 
-- Run a second model initialization for the ten-world pilot. Current development
-  replication uses one model seed per architecture.
 - Implement explicit scrambled-ID invariance rather than relying only on opaque,
   independently generated IDs.
 - Resolve or ablate the effective update batch of one current plus one replay
@@ -84,17 +82,17 @@ claim.
 
 The gate remains closed. Oracle transfer, high-reuse advantage, reuse dependence,
 novel-composition improvement, broad capacity controls, learned-model task-order
-robustness, and replay/forgetting separation pass. The second model
-initialization remains unresolved. A clean checkout artifact-to-report rehearsal
-is also required by `EXPERIMENT_PLAN.md` before opening worlds 100–129.
+robustness, replay/forgetting separation, and the two-initialization pilot pass.
+A clean checkout artifact-to-report rehearsal is still required by
+`EXPERIMENT_PLAN.md` before opening worlds 100–129, and the remaining diagnostic
+obligations below should be resolved or explicitly deferred.
 
 # Execution order
 
-1. Run the second model initialization on the ten development worlds.
-2. Implement fresh-task forward-transfer and checkpoint true-route diagnostics.
-3. Implement the shared-parent plus residual control at intermediate reuse.
-4. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
-5. Re-audit the gate before touching confirmatory worlds.
+1. Implement fresh-task forward-transfer and checkpoint true-route diagnostics.
+2. Implement the shared-parent plus residual control at intermediate reuse.
+3. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
+4. Re-audit the gate before touching confirmatory worlds.
 
 # Closed during this audit
 
@@ -106,3 +104,7 @@ is also required by `EXPERIMENT_PLAN.md` before opening worlds 100–129.
   Continuous wins lifetime loss in all paired worlds at replay ratios 0, 1, and
   4 and under reverse order. The tracked result is
   `reports/robustness/robustness.json`.
+- The two-initialization pilot is complete. Both model-seed pairs reproduce
+  lifetime loss and novel-transfer wins in all ten development worlds. The
+  tracked result is
+  `reports/model_initializations/model-initializations.json`.

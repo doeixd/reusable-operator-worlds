@@ -1,0 +1,268 @@
+{
+  "scope": "development worlds 0-9; two model initializations per architecture",
+  "replication_unit": "world; initialization effects are averaged within world",
+  "sign_convention": "positive Dense-minus-Continuous favors Continuous",
+  "initialization_summaries": [
+    {
+      "initialization": 0,
+      "continuous_model_seed": 4000,
+      "dense_model_seed": 3000,
+      "lifetime_loss_effect": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 3698.4417761411723,
+        "median": 3555.0759382828255,
+        "minimum": 2553.7105699202802,
+        "maximum": 5054.086623262061,
+        "bootstrap_95_percent_ci_of_mean": [
+          3235.4679459206923,
+          4176.070224161073
+        ]
+      },
+      "novel_32_shot_effect": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 0.003283747769710759,
+        "median": 0.002757288807480917,
+        "minimum": 0.0010319236635773664,
+        "maximum": 0.00888613089292405,
+        "bootstrap_95_percent_ci_of_mean": [
+          0.0022352205634016734,
+          0.004726427382308187
+        ]
+      }
+    },
+    {
+      "initialization": 1,
+      "continuous_model_seed": 4001,
+      "dense_model_seed": 3001,
+      "lifetime_loss_effect": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 3081.3934061236273,
+        "median": 3029.3408716257545,
+        "minimum": 1954.287636182271,
+        "maximum": 4306.327324030921,
+        "bootstrap_95_percent_ci_of_mean": [
+          2624.987275242128,
+          3542.4443836493624
+        ]
+      },
+      "novel_32_shot_effect": {
+        "wins": 10,
+        "worlds": 10,
+        "mean": 0.002690119697646817,
+        "median": 0.0020455756107699346,
+        "minimum": 0.000799523801829816,
+        "maximum": 0.006554283934666938,
+        "bootstrap_95_percent_ci_of_mean": [
+          0.0017603677659792827,
+          0.003842904222063279
+        ]
+      }
+    }
+  ],
+  "world_averaged_across_initializations": {
+    "lifetime_loss_effect": {
+      "wins": 10,
+      "worlds": 10,
+      "mean": 3389.9175911323996,
+      "median": 3454.9022569997323,
+      "minimum": 2253.9991030512756,
+      "maximum": 4376.255435782776,
+      "bootstrap_95_percent_ci_of_mean": [
+        2962.2471948470643,
+        3802.7204107408747
+      ]
+    },
+    "novel_32_shot_effect": {
+      "wins": 10,
+      "worlds": 10,
+      "mean": 0.002986933733678788,
+      "median": 0.0022817257571448304,
+      "minimum": 0.0009157237327035912,
+      "maximum": 0.007720207413795494,
+      "bootstrap_95_percent_ci_of_mean": [
+        0.001998684895019967,
+        0.004263109698069205
+      ]
+    }
+  },
+  "second_minus_first_initialization_loss_effect": {
+    "mean": -617.0483700175449,
+    "paired_by_world": [
+      -139.85622350370977,
+      -252.9320587356924,
+      -444.22291674037115,
+      -599.4229337380093,
+      381.37625000992557,
+      -782.0709751422983,
+      -1106.7248728342238,
+      -739.6213713835168,
+      -1938.8497966457508,
+      -548.1588014618028
+    ]
+  },
+  "paired_world_effects": [
+    {
+      "initialization": 0,
+      "world_seed": 0,
+      "continuous_model_seed": 4000,
+      "dense_model_seed": 3000,
+      "dense_minus_continuous_gaussian_log_loss": 4446.183547534631,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0028168497596407537
+    },
+    {
+      "initialization": 0,
+      "world_seed": 1,
+      "continuous_model_seed": 4000,
+      "dense_model_seed": 3000,
+      "dense_minus_continuous_gaussian_log_loss": 2642.9577619424963,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0024617991379078373
+    },
+    {
+      "initialization": 0,
+      "world_seed": 2,
+      "continuous_model_seed": 4000,
+      "dense_model_seed": 3000,
+      "dense_minus_continuous_gaussian_log_loss": 3387.66783337557,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002140654254288528
+    },
+    {
+      "initialization": 0,
+      "world_seed": 3,
+      "continuous_model_seed": 4000,
+      "dense_model_seed": 3000,
+      "dense_minus_continuous_gaussian_log_loss": 2553.7105699202802,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002987810383056748
+    },
+    {
+      "initialization": 0,
+      "world_seed": 4,
+      "continuous_model_seed": 4000,
+      "dense_model_seed": 3000,
+      "dense_minus_continuous_gaussian_log_loss": 3524.705301486363,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0043870340733273075
+    },
+    {
+      "initialization": 0,
+      "world_seed": 5,
+      "continuous_model_seed": 4000,
+      "dense_model_seed": 3000,
+      "dense_minus_continuous_gaussian_log_loss": 3585.446575079288,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.00888613089292405
+    },
+    {
+      "initialization": 0,
+      "world_seed": 6,
+      "continuous_model_seed": 4000,
+      "dense_model_seed": 3000,
+      "dense_minus_continuous_gaussian_log_loss": 3267.2416624221078,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0010319236635773664
+    },
+    {
+      "initialization": 0,
+      "world_seed": 7,
+      "continuous_model_seed": 4000,
+      "dense_model_seed": 3000,
+      "dense_minus_continuous_gaussian_log_loss": 4145.214891038428,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.003552456533161117
+    },
+    {
+      "initialization": 0,
+      "world_seed": 8,
+      "continuous_model_seed": 4000,
+      "dense_model_seed": 3000,
+      "dense_minus_continuous_gaussian_log_loss": 5054.086623262061,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.00269772785532108
+    },
+    {
+      "initialization": 0,
+      "world_seed": 9,
+      "continuous_model_seed": 4000,
+      "dense_model_seed": 3000,
+      "dense_minus_continuous_gaussian_log_loss": 4377.202995350497,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.001875091143902806
+    },
+    {
+      "initialization": 1,
+      "world_seed": 0,
+      "continuous_model_seed": 4001,
+      "dense_model_seed": 3001,
+      "dense_minus_continuous_gaussian_log_loss": 4306.327324030921,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0019110299382740625
+    },
+    {
+      "initialization": 1,
+      "world_seed": 1,
+      "continuous_model_seed": 4001,
+      "dense_model_seed": 3001,
+      "dense_minus_continuous_gaussian_log_loss": 2390.025703206804,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.002394044064401321
+    },
+    {
+      "initialization": 1,
+      "world_seed": 2,
+      "continuous_model_seed": 4001,
+      "dense_model_seed": 3001,
+      "dense_minus_continuous_gaussian_log_loss": 2943.4449166351988,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0014471702029221164
+    },
+    {
+      "initialization": 1,
+      "world_seed": 3,
+      "continuous_model_seed": 4001,
+      "dense_model_seed": 3001,
+      "dense_minus_continuous_gaussian_log_loss": 1954.287636182271,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0014112129476077577
+    },
+    {
+      "initialization": 1,
+      "world_seed": 4,
+      "continuous_model_seed": 4001,
+      "dense_model_seed": 3001,
+      "dense_minus_continuous_gaussian_log_loss": 3906.0815514962887,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.004256740392810036
+    },
+    {
+      "initialization": 1,
+      "world_seed": 5,
+      "continuous_model_seed": 4001,
+      "dense_model_seed": 3001,
+      "dense_minus_continuous_gaussian_log_loss": 2803.3755999369896,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.006554283934666938
+    },
+    {
+      "initialization": 1,
+      "world_seed": 6,
+      "continuous_model_seed": 4001,
+      "dense_model_seed": 3001,
+      "dense_minus_continuous_gaussian_log_loss": 2160.516789587884,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.000799523801829816
+    },
+    {
+      "initialization": 1,
+      "world_seed": 7,
+      "continuous_model_seed": 4001,
+      "dense_model_seed": 3001,
+      "dense_minus_continuous_gaussian_log_loss": 3405.593519654911,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.004400312059607515
+    },
+    {
+      "initialization": 1,
+      "world_seed": 8,
+      "continuous_model_seed": 4001,
+      "dense_model_seed": 3001,
+      "dense_minus_continuous_gaussian_log_loss": 3115.2368266163103,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0015467583510828005
+    },
+    {
+      "initialization": 1,
+      "world_seed": 9,
+      "continuous_model_seed": 4001,
+      "dense_model_seed": 3001,
+      "dense_minus_continuous_gaussian_log_loss": 3829.0441938886943,
+      "dense_minus_continuous_novel_32_shot_nmse": 0.0021801212832658064
+    }
+  ]
+}

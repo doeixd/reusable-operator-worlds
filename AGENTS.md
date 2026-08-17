@@ -315,6 +315,14 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   the mean advantage interval spans zero. It wins 10/10 under canonical replay,
   strong replay, and reverse order. Distinguish the replay-sensitive retained
   transfer endpoint from the replay-robust cumulative lifetime-cost result.
+- The second initialization (Continuous seed 4001, Dense-C seed 3001) reproduces
+  exact-reuse lifetime loss and novel transfer 10/10. Its mean advantages are
+  3,081 log-loss units and 0.00269 NMSE, versus 3,698 and 0.00328 for the
+  canonical seeds.
+- Average initialization effects within each world before bootstrapping. The
+  two-initialization world-level mean advantage is 3,390 with interval
+  [2,962, 3,803]; the novel advantage is 0.00299 [0.00200, 0.00426]. Do not
+  count 20 world-initialization pairs as 20 independent worlds.
 
 # Standing scientific doubts
 

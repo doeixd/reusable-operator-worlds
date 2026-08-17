@@ -154,20 +154,21 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 # In progress
 
 - Completed a line-by-line V1 obligation audit in `SPEC_AUDIT.md`. The
-  confirmatory gate remains closed while learned-model reverse order,
-  replay/forgetting ablation, a second model initialization, current retention,
-  forward transfer, and true-route diagnostics remain open.
-- Refresh current retained-description evaluation first, including generic
-  hypernetwork quantization support, then proceed through the robustness queue.
-- Added hypernetwork construction and compute accounting to the int8 artifact
-  evaluator. A world-0 smoke gives 33,928 retained proxy bits and only 2.19e-6
-  mean NMSE degradation. Development-world aggregation remains in progress.
-- New learned-model checkpoints are tensor-only so PyTorch's restricted loader
-  works; a provenance-validated legacy fallback preserves existing artifacts.
-- Completed exploratory reverse-order and replay-ratio sweeps on worlds 0–2.
-  Continuous beats Dense-C 3/3 under reverse order and at replay ratios 0, 1,
-  and 4; mean lifetime-loss advantages remain 3,082–3,492 units. Expansion to
-  worlds 3–9 is in progress.
+  confirmatory gate remains closed while forward transfer, true-route
+  diagnostics, shared-parent residuals, and clean workflow rehearsal remain
+  open.
+
+# Two-initialization pilot complete
+
+- Added Continuous seed 4001 and Dense-C seed 3001 on all ten development
+  worlds, holding selected architectures and protocols fixed.
+- The second initialization reproduces lifetime loss and novel 32-shot wins
+  10/10, with mean advantages 3,081 and 0.00269 respectively.
+- Averaging initialization effects within world gives a 3,390 lifetime-loss
+  advantage with bootstrap interval [2,962, 3,803], and a 0.00299 novel NMSE
+  advantage with interval [0.00200, 0.00426].
+- The validated report is
+  `reports/model_initializations/model-initializations.json`.
 
 # Order and replay robustness complete
 
@@ -213,10 +214,9 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 # Next
 
+- Implement fresh-task forward-transfer and true-route operator diagnostics.
 - Rehearse artifact generation and plotting from a clean checkout before opening
   the confirmatory seed gate.
-- Audit replay-ratio, reverse-order, retention, and reporting obligations against
-  the research spec; keep confirmatory worlds sealed until the audit is clean.
 
 # Decisions
 
