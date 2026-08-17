@@ -104,11 +104,14 @@
   "frozen_config": {
     "continuous": {
       "global_learning_rate": 0.003,
-      "task_learning_rate": 0.05
+      "task_learning_rate": 0.05,
+      "operator_slots": 8,
+      "operator_rank": 8
     },
     "dense": {
       "global_learning_rate": 0.001,
-      "task_learning_rate": 0.05
+      "task_learning_rate": 0.05,
+      "hidden_width": 32
     }
   },
   "selected_model_comparison": {

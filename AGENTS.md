@@ -149,6 +149,10 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   LR at 0.003/0.05 and Dense-C at 0.001/0.05. On worlds 3–9, Continuous's two
   candidates average -171,899 and -166,937 Gaussian log loss; Dense-C's average
   -168,112 and -165,729, respectively. The winners match the stage-one choices.
+- The canonical `configs/v1.yaml` must freeze Dense-C at width 32. Stage-two and
+  earlier compute controls explicitly overrode the former width-128 YAML value,
+  so their artifacts are correct, but leaving 128 in the config would make a
+  nominally frozen clean rerun reproduce the wrong baseline.
 - With those frozen settings at exact reuse, Continuous beats Dense-C on all
   seven stage-two worlds by 2,554–5,054 cumulative Gaussian-log-loss units
   (mean 3,787) and improves mean 32-shot novel NMSE from 0.00731 to 0.00368.

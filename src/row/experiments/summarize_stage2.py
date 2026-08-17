@@ -79,10 +79,13 @@ def summarize(
         "continuous": {
             "global_learning_rate": config.continuous_model.global_learning_rate,
             "task_learning_rate": config.continuous_model.task_learning_rate,
+            "operator_slots": config.continuous_model.operator_slots,
+            "operator_rank": config.continuous_model.operator_rank,
         },
         "dense": {
             "global_learning_rate": config.dense_model.global_learning_rate,
             "task_learning_rate": config.dense_model.task_learning_rate,
+            "hidden_width": config.dense_model.hidden_width,
         },
     }
     for model, winner in selected.items():
@@ -91,6 +94,12 @@ def summarize(
                 raise ValueError(
                     f"{config_path} does not freeze selected {model} {key}"
                 )
+    if frozen["continuous"]["operator_slots"] != 8:
+        raise ValueError(f"{config_path} must freeze Continuous at eight slots")
+    if frozen["continuous"]["operator_rank"] != 8:
+        raise ValueError(f"{config_path} must freeze Continuous at rank eight")
+    if frozen["dense"]["hidden_width"] != 32:
+        raise ValueError(f"{config_path} must freeze Dense-C at width 32")
 
     continuous_by_world = {
         run["world_seed"]: run for run in selected["continuous"]["runs"]
