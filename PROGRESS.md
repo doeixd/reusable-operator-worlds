@@ -1,6 +1,6 @@
 # Current milestone
 
-Milestone 005 compute control and Milestone 006 hard discrete reusable library.
+Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 # Completed
 
@@ -58,17 +58,28 @@ Milestone 005 compute control and Milestone 006 hard discrete reusable library.
   novel NMSE on every world.
 - Dense-C uses about 6,144 multiply-adds but retains 66,688 proxy bits, compared
   with continuous's 6,528 multiply-adds and 29,184 bits.
+- Implemented the 12-slot hard discrete library with annealed relaxed training,
+  hard argmax evaluation, route recovery, usage, collapse, fragmentation,
+  duplication, and operator matching diagnostics.
+- Seed-0 discrete recovered 92.2% of explained routes exactly and 96.4% of route
+  positions, used 11/12 slots, and reached primitive matching distance 0.00229.
+- Discrete prequential NLL was only -134,784 despite good final operators/routes;
+  this isolates task-route inference as the main failure mode. Late-task examples
+  to NMSE 0.02 still fell from 128.9 to 25.3.
+- Hardened discrete retains 26,112 proxy bits and uses about 768 inference
+  multiply-adds. Correct route-lossless 8-bit evaluation changes mean NMSE by
+  only 1.10e-5.
 
 # In progress
 
-- Implement the fixed hard discrete library with relaxed categorical training
-  and hard-route evaluation.
+- Generate required exact-reuse figures and machine-readable comparison tables.
 
 # Next
 
-- Implement the fixed hard discrete library with hard evaluation routes.
 - Add model-comparison plots for learning curves, cumulative prequential loss,
   novel adaptation, and functional operator distance.
+- Implement the `rho` reuse continuum in the teacher generator and validate its
+  endpoint behavior before running the sweep.
 - Begin the exact-reuse multi-initialization pilot after all principal V1 models
   are stable.
 
@@ -88,3 +99,6 @@ Milestone 005 compute control and Milestone 006 hard discrete reusable library.
 - The continuous advantage over Dense-P replicated across three exploratory
   worlds, and it also survived the three-world Dense-C compute control. The
   sample remains exploratory (`n=3` worlds), not confirmatory.
+- Hard discrete learned a compact and correct library but paid substantially
+  higher online route-inference cost. Do not interpret its prequential loss as
+  evidence against reusable computation; the continuous alternative succeeds.

@@ -2,7 +2,7 @@ import unittest
 
 import torch
 
-from row.models import ContinuousBasisLearner, DenseLearner
+from row.models import ContinuousBasisLearner, DenseLearner, DiscreteLibraryLearner
 
 
 class LearnedModelTests(unittest.TestCase):
@@ -30,6 +30,20 @@ class LearnedModelTests(unittest.TestCase):
         model.begin_task("task_b")
         output = model.forward_tasks(torch.randn(2, 4), ("task_a", "task_b"))
         self.assertEqual(output.shape, (2, 4))
+
+    def test_discrete_library_trains_soft_and_evaluates_hard(self) -> None:
+        model = DiscreteLibraryLearner(4, 3, 2, 2, 0.35, 1.0, 0.1, seed=2)
+        code = model.begin_task("task_a")
+        with torch.no_grad():
+            code[0, 1] = 2.0
+            code[1, 2] = 2.0
+        model.train()
+        soft = model._coefficients("task_a")
+        self.assertTrue(torch.all((soft > 0.0) & (soft < 1.0)))
+        model.eval()
+        hard = model._coefficients("task_a")
+        self.assertTrue(torch.all((hard == 0.0) | (hard == 1.0)))
+        self.assertEqual(model.hard_routes()["task_a"], [1, 2])
 
 
 if __name__ == "__main__":

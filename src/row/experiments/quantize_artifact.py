@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 from pathlib import Path
 
 import numpy as np
@@ -11,7 +12,7 @@ import torch
 import yaml
 
 from row.metrics import nmse
-from row.models import ContinuousBasisLearner, DenseLearner
+from row.models import ContinuousBasisLearner, DenseLearner, DiscreteLibraryLearner
 from row.world import World, WorldConfig
 
 
@@ -27,7 +28,9 @@ def symmetric_int8_dequantize(tensor: torch.Tensor) -> tuple[torch.Tensor, float
     return quantized * scale, scale
 
 
-def _build_from_artifact(raw: dict[str, object], kind: str) -> DenseLearner | ContinuousBasisLearner:
+def _build_from_artifact(
+    raw: dict[str, object], kind: str
+) -> DenseLearner | ContinuousBasisLearner | DiscreteLibraryLearner:
     world_raw = raw["world"]
     assert isinstance(world_raw, dict)
     d = int(world_raw["state_dim"])
@@ -42,21 +45,35 @@ def _build_from_artifact(raw: dict[str, object], kind: str) -> DenseLearner | Co
             residual_blocks=int(model_raw["residual_blocks"]),
             seed=int(model_raw["seed"]),
         )
-    model_raw = raw["continuous_model"]
+    if kind == "continuous":
+        model_raw = raw["continuous_model"]
+        assert isinstance(model_raw, dict)
+        return ContinuousBasisLearner(
+            d=d,
+            operator_slots=int(model_raw["operator_slots"]),
+            operator_rank=int(model_raw["operator_rank"]),
+            task_steps=int(model_raw["task_steps"]),
+            alpha=alpha,
+            seed=int(model_raw["seed"]),
+        )
+    model_raw = raw["discrete_model"]
     assert isinstance(model_raw, dict)
-    return ContinuousBasisLearner(
+    return DiscreteLibraryLearner(
         d=d,
         operator_slots=int(model_raw["operator_slots"]),
         operator_rank=int(model_raw["operator_rank"]),
         task_steps=int(model_raw["task_steps"]),
         alpha=alpha,
+        initial_temperature=float(model_raw["initial_temperature"]),
+        final_temperature=float(model_raw["final_temperature"]),
         seed=int(model_raw["seed"]),
     )
 
 
 @torch.no_grad()
 def _task_scores(
-    model: DenseLearner | ContinuousBasisLearner, world: World
+    model: DenseLearner | ContinuousBasisLearner | DiscreteLibraryLearner,
+    world: World,
 ) -> np.ndarray:
     model.eval()
     scores = []
@@ -79,11 +96,13 @@ def _inference_multiply_adds(raw: dict[str, object], kind: str) -> int:
         embedding = int(model_raw["task_embedding_dim"])
         blocks = int(model_raw["residual_blocks"])
         return blocks * ((d + embedding) * width + width * d)
-    model_raw = raw["continuous_model"]
+    model_raw = raw[f"{kind}_model"]
     assert isinstance(model_raw, dict)
     slots = int(model_raw["operator_slots"])
     rank = int(model_raw["operator_rank"])
     steps = int(model_raw["task_steps"])
+    if kind == "discrete":
+        return steps * (d * rank + rank * d)
     operator_madds = steps * slots * (d * rank + rank * d)
     mixture_madds = steps * slots * d
     return operator_madds + mixture_madds
@@ -107,18 +126,32 @@ def run(artifact: Path) -> dict[str, object]:
     quantized_state: dict[str, torch.Tensor] = {}
     scales: dict[str, float] = {}
     for name, value in model.state_dict().items():
-        quantized_state[name], scales[name] = symmetric_int8_dequantize(value)
+        if kind == "discrete" and name.startswith("task_codes."):
+            # Hardened routes are retained as exact categorical indices, not as
+            # quantized training logits. One-hot logits reconstruct those routes
+            # losslessly for behavioral evaluation.
+            indices = torch.argmax(value, dim=-1, keepdim=True)
+            quantized_state[name] = torch.zeros_like(value).scatter_(-1, indices, 1.0)
+            scales[name] = 1.0
+        else:
+            quantized_state[name], scales[name] = symmetric_int8_dequantize(value)
     model.load_state_dict(quantized_state)
     quantized_scores = _task_scores(model, world)
 
     shared_count = int(summary["shared_parameter_count"])
     task_count = int(summary["task_state_scalar_count"])
+    if kind == "discrete":
+        active = int(summary["routing"]["active_operators"])
+        route_bits_per_step = math.ceil(math.log2(active)) if active > 1 else 0
+        task_state_bits = len(world.tasks) * int(world.config.program_length) * route_bits_per_step
+    else:
+        task_state_bits = 8 * task_count
     result: dict[str, object] = {
         "quantization": "symmetric signed int8, per tensor, dequantized evaluation",
         "bits_per_scalar": 8,
         "shared_weight_bits": 8 * shared_count,
-        "task_state_bits": 8 * task_count,
-        "total_retained_bits": 8 * (shared_count + task_count),
+        "task_state_bits": task_state_bits,
+        "total_retained_bits": 8 * shared_count + task_state_bits,
         "scale_overhead_bits_excluded": True,
         "inference_multiply_adds": _inference_multiply_adds(raw, kind),
         "float_final_nmse_mean": float(np.mean(float_scores)),

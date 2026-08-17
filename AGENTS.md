@@ -100,3 +100,18 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 - Dense-C retains 66,688 8-bit proxy bits versus continuous's 29,184 because
   compute matching requires width 32 and 6,288 shared dense scalars. Continuous
   also improved 32-shot novel NMSE over Dense-C by 0.0210, 0.00944, and 0.00558.
+- The seed-0 hard discrete library used 11/12 slots without collapse, recovered
+  92.2% of teacher routes exactly (96.4% per position), and matched primitives
+  at mean normalized distance 0.00229. Its weak prequential NLL (-134,784) is
+  therefore a route-inference cost, not a failure to learn the operator library.
+- Hard discrete zero-shot NMSE worsened from 0.103 in the first quarter to 0.160
+  in the last because an unseen task's tie-broken default route becomes less
+  generic as operators specialize. Nevertheless, examples to NMSE 0.02 fell
+  from 128.9 to 25.3 and 32-shot novel hard-route adaptation reached 0.00413.
+- Hardened discrete retention stores exact categorical route indices, not
+  quantized training logits. Quantize only operator weights and reconstruct
+  routes losslessly when validating the 26,112-bit proxy. This yields mean NMSE
+  degradation 1.10e-5; quantizing logits directly is the wrong artifact model.
+- Hardened discrete inference is only about 768 multiply-adds, versus 6,528 for
+  the continuous mixture, exposing a strong storage/inference versus online
+  learning-cost tradeoff.

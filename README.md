@@ -18,6 +18,7 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 python -m row.experiments.oracle_lifetime --config configs/v1.yaml --output artifacts/oracle
 python -m row.experiments.learned_lifetime --config configs/v1.yaml --model dense --output artifacts/dense
 python -m row.experiments.learned_lifetime --config configs/v1.yaml --model continuous --output artifacts/continuous
+python -m row.experiments.learned_lifetime --config configs/v1.yaml --model discrete --output artifacts/discrete
 python -m row.experiments.quantize_artifact artifacts/continuous
 ```
 

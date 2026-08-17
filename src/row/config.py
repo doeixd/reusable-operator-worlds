@@ -99,12 +99,39 @@ class ContinuousModelConfig:
 
 
 @dataclass(frozen=True)
+class DiscreteModelConfig:
+    operator_slots: int = 12
+    operator_rank: int = 8
+    task_steps: int = 3
+    initial_temperature: float = 1.0
+    final_temperature: float = 0.1
+    global_learning_rate: float = 1e-3
+    task_learning_rate: float = 5e-2
+    weight_decay: float = 1e-4
+    updates_per_example: int = 1
+    replay_examples_per_task: int = 4
+    replay_ratio: float = 1.0
+    seed: int = 5000
+
+    def __post_init__(self) -> None:
+        if min(self.operator_slots, self.operator_rank, self.task_steps) <= 0:
+            raise ValueError("discrete model dimensions and step count must be positive")
+        if self.initial_temperature <= 0.0 or self.final_temperature <= 0.0:
+            raise ValueError("routing temperatures must be positive")
+        if min(self.global_learning_rate, self.task_learning_rate) <= 0.0:
+            raise ValueError("discrete learning rates must be positive")
+        if self.updates_per_example <= 0 or self.replay_examples_per_task < 0:
+            raise ValueError("discrete update count must be positive and replay size nonnegative")
+
+
+@dataclass(frozen=True)
 class ExperimentConfig:
     world: WorldConfig
     scratch_model: ScratchModelConfig
     oracle_model: OracleModelConfig
     dense_model: DenseModelConfig
     continuous_model: ContinuousModelConfig
+    discrete_model: DiscreteModelConfig
     evaluation: EvaluationConfig
     output_directory: Path
 
@@ -123,6 +150,7 @@ def load_config(path: str | Path) -> ExperimentConfig:
     oracle_raw = _require_mapping(raw.get("oracle_model", {}), "oracle_model")
     dense_raw = _require_mapping(raw.get("dense_model", {}), "dense_model")
     continuous_raw = _require_mapping(raw.get("continuous_model", {}), "continuous_model")
+    discrete_raw = _require_mapping(raw.get("discrete_model", {}), "discrete_model")
     eval_raw = _require_mapping(raw.get("evaluation", {}), "evaluation")
     output_raw = _require_mapping(raw.get("output", {}), "output")
 
@@ -180,6 +208,20 @@ def load_config(path: str | Path) -> ExperimentConfig:
         replay_ratio=float(continuous_raw.get("replay_ratio", 1.0)),
         seed=int(continuous_raw.get("seed", 4000)),
     )
+    discrete_model = DiscreteModelConfig(
+        operator_slots=int(discrete_raw.get("operator_slots", 12)),
+        operator_rank=int(discrete_raw.get("operator_rank", 8)),
+        task_steps=int(discrete_raw.get("task_steps", 3)),
+        initial_temperature=float(discrete_raw.get("initial_temperature", 1.0)),
+        final_temperature=float(discrete_raw.get("final_temperature", 0.1)),
+        global_learning_rate=float(discrete_raw.get("global_learning_rate", 1e-3)),
+        task_learning_rate=float(discrete_raw.get("task_learning_rate", 5e-2)),
+        weight_decay=float(discrete_raw.get("weight_decay", 1e-4)),
+        updates_per_example=int(discrete_raw.get("updates_per_example", 1)),
+        replay_examples_per_task=int(discrete_raw.get("replay_examples_per_task", 4)),
+        replay_ratio=float(discrete_raw.get("replay_ratio", 1.0)),
+        seed=int(discrete_raw.get("seed", 5000)),
+    )
     evaluation = EvaluationConfig(
         support_points=tuple(int(n) for n in eval_raw.get("support_points", EvaluationConfig.support_points)),
         nmse_thresholds=tuple(float(x) for x in eval_raw.get("nmse_thresholds", EvaluationConfig.nmse_thresholds)),
@@ -192,6 +234,7 @@ def load_config(path: str | Path) -> ExperimentConfig:
         oracle_model=oracle_model,
         dense_model=dense_model,
         continuous_model=continuous_model,
+        discrete_model=discrete_model,
         evaluation=evaluation,
         output_directory=output_directory,
     )

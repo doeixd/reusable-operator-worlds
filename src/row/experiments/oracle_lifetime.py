@@ -8,12 +8,13 @@ import platform
 import subprocess
 import sys
 from dataclasses import asdict, replace
-from itertools import permutations, product
+from itertools import product
 from pathlib import Path
 
 import numpy as np
 import torch
 import yaml
+from scipy.optimize import linear_sum_assignment
 
 from row.config import ExperimentConfig, load_config
 from row.experiments.scratch_difficulty import summarize
@@ -234,14 +235,9 @@ def _functional_recovery(
                 np.mean(np.square(teacher_output - learned_output)) / denominator
             )
 
-    best_assignment: tuple[int, ...] | None = None
-    best_cost = float("inf")
-    for assignment in permutations(range(len(learned)), len(teacher)):
-        cost = sum(distances[i, learned_index] for i, learned_index in enumerate(assignment))
-        if cost < best_cost:
-            best_cost = float(cost)
-            best_assignment = tuple(assignment)
-    assert best_assignment is not None
+    teacher_indices, learned_indices = linear_sum_assignment(distances)
+    best_assignment = tuple(int(index) for index in learned_indices)
+    best_cost = float(distances[teacher_indices, learned_indices].sum())
 
     candidate_explanations: list[tuple[tuple[int, ...], np.ndarray, float]] = []
     for depth in range(1, config.world.program_length + 1):

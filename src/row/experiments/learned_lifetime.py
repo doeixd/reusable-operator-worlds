@@ -20,11 +20,11 @@ from row.config import ExperimentConfig, load_config
 from row.experiments.oracle_lifetime import _add_lifetime_transfer_summary, _functional_recovery
 from row.experiments.scratch_difficulty import summarize
 from row.metrics import examples_to_criterion, gaussian_nll, nmse
-from row.models import ContinuousBasisLearner, DenseLearner
+from row.models import ContinuousBasisLearner, DenseLearner, DiscreteLibraryLearner
 from row.world import Program, Task, World
 
-ModelKind = Literal["dense", "continuous"]
-Learner = DenseLearner | ContinuousBasisLearner
+ModelKind = Literal["dense", "continuous", "discrete"]
+Learner = DenseLearner | ContinuousBasisLearner | DiscreteLibraryLearner
 
 
 class TaskReplayBuffer:
@@ -60,13 +60,25 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             residual_blocks=model_config.residual_blocks,
             seed=model_config.seed,
         )
-    model_config = config.continuous_model
-    return ContinuousBasisLearner(
+    if kind == "continuous":
+        model_config = config.continuous_model
+        return ContinuousBasisLearner(
+            d=config.world.state_dim,
+            operator_slots=model_config.operator_slots,
+            operator_rank=model_config.operator_rank,
+            task_steps=model_config.task_steps,
+            alpha=config.world.alpha,
+            seed=model_config.seed,
+        )
+    model_config = config.discrete_model
+    return DiscreteLibraryLearner(
         d=config.world.state_dim,
         operator_slots=model_config.operator_slots,
         operator_rank=model_config.operator_rank,
         task_steps=model_config.task_steps,
         alpha=config.world.alpha,
+        initial_temperature=model_config.initial_temperature,
+        final_temperature=model_config.final_temperature,
         seed=model_config.seed,
     )
 
@@ -74,7 +86,11 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
 def _training_values(
     config: ExperimentConfig, kind: ModelKind
 ) -> tuple[float, float, float, int, int, float, int]:
-    selected = config.dense_model if kind == "dense" else config.continuous_model
+    selected = {
+        "dense": config.dense_model,
+        "continuous": config.continuous_model,
+        "discrete": config.discrete_model,
+    }[kind]
     return (
         selected.global_learning_rate,
         selected.task_learning_rate,
@@ -165,6 +181,10 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
             batch_y = [task.train_y[n_seen], *(item[1] for item in replay_items)]
             task_ids = [task.task_id, *(item[2] for item in replay_items)]
             for _ in range(update_count):
+                if isinstance(model, DiscreteLibraryLearner):
+                    global_example = lifetime_index * config.world.examples_per_task + n_seen
+                    total_examples = len(world.tasks) * config.world.examples_per_task
+                    model.set_training_progress(global_example / max(1, total_examples - 1))
                 model.train()
                 optimizer.zero_grad(set_to_none=True)
                 prediction = model.forward_tasks(_tensor(np.stack(batch_x)), task_ids)
@@ -201,11 +221,119 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
     if isinstance(model, ContinuousBasisLearner):
         summary["routing"] = model.routing_diagnostics()
         summary["functional_recovery"] = _functional_recovery(model.basis, world, config)
+    elif isinstance(model, DiscreteLibraryLearner):
+        summary["routing"] = model.routing_diagnostics()
+        summary["functional_recovery"] = _functional_recovery(model.library, world, config)
+        summary["route_recovery"] = _route_recovery(
+            model, world, summary["functional_recovery"]
+        )
+        summary["operator_specialization"] = _operator_specialization(model, config)
     summary["novel_composition"] = _adapt_novel_composition(
         model, world, config, task_lr
     )
     _write_artifacts(config, world, model, rows, summary, kind, order)
     return summary
+
+
+def _edit_distance(left: tuple[int, ...], right: tuple[int, ...]) -> int:
+    previous = list(range(len(right) + 1))
+    for left_index, left_value in enumerate(left, start=1):
+        current = [left_index]
+        for right_index, right_value in enumerate(right, start=1):
+            current.append(
+                min(
+                    current[-1] + 1,
+                    previous[right_index] + 1,
+                    previous[right_index - 1] + (left_value != right_value),
+                )
+            )
+        previous = current
+    return previous[-1]
+
+
+@torch.no_grad()
+def _route_recovery(
+    model: DiscreteLibraryLearner,
+    world: World,
+    functional_recovery: object,
+) -> dict[str, float]:
+    assert isinstance(functional_recovery, dict)
+    explanations = functional_recovery["best_depth_1_to_3_explanations"]
+    assert isinstance(explanations, list)
+    slot_to_teacher = {
+        int(item["learned_operator"]): tuple(int(x) for x in item["teacher_route"])
+        for item in explanations
+    }
+    routes = model.hard_routes()
+    exact = 0
+    position_matches = 0
+    position_total = 0
+    edit_distances = []
+    behavioral_scores = []
+    model.eval()
+    for task in world.tasks:
+        learned_slots = routes[task.task_id]
+        expanded = tuple(
+            primitive
+            for slot in learned_slots
+            for primitive in slot_to_teacher[int(slot)]
+        )
+        teacher = task.program.primitive_ids
+        exact += expanded == teacher
+        edit_distances.append(_edit_distance(expanded, teacher))
+        for position, slot in enumerate(learned_slots):
+            explanation = slot_to_teacher[int(slot)]
+            if len(explanation) == 1:
+                position_total += 1
+                position_matches += explanation[0] == teacher[position]
+        prediction = model(
+            torch.as_tensor(task.eval_x, dtype=torch.float32), task.task_id
+        ).cpu().numpy()
+        behavioral_scores.append(nmse(prediction, task.eval_y))
+    return {
+        "exact_explained_route_fraction": exact / len(world.tasks),
+        "per_position_match_fraction": (
+            position_matches / position_total if position_total else 0.0
+        ),
+        "mean_explained_route_edit_distance": float(np.mean(edit_distances)),
+        "final_lifetime_behavioral_nmse_mean": float(np.mean(behavioral_scores)),
+    }
+
+
+@torch.no_grad()
+def _operator_specialization(
+    model: DiscreteLibraryLearner, config: ExperimentConfig
+) -> dict[str, object]:
+    generator = np.random.default_rng(np.random.SeedSequence([config.world.seed, 94]))
+    probe = torch.as_tensor(
+        generator.normal(size=(2048, config.world.state_dim)), dtype=torch.float32
+    )
+    outputs = [operator(probe).cpu().numpy() for operator in model.library]
+    distances = np.zeros((len(outputs), len(outputs)), dtype=np.float64)
+    close_001: list[list[int]] = []
+    close_01: list[list[int]] = []
+    nonzero = []
+    for first in range(len(outputs)):
+        for second in range(first + 1, len(outputs)):
+            denominator = 0.5 * (float(np.var(outputs[first])) + float(np.var(outputs[second])))
+            distance = float(np.mean(np.square(outputs[first] - outputs[second])) / denominator)
+            distances[first, second] = distances[second, first] = distance
+            nonzero.append(distance)
+            if distance < 0.001:
+                close_001.append([first, second])
+            if distance < 0.01:
+                close_01.append([first, second])
+    routing = model.routing_diagnostics()
+    usage = np.asarray(routing["usage_counts"], dtype=np.float64)
+    return {
+        "pairwise_functional_distance": distances.tolist(),
+        "minimum_pairwise_distance": float(np.min(nonzero)),
+        "mean_pairwise_distance": float(np.mean(nonzero)),
+        "duplicate_pairs_below_0.001": close_001,
+        "near_duplicate_pairs_below_0.01": close_01,
+        "top_operator_usage_fraction": float(np.max(usage) / np.sum(usage)),
+        "active_operator_fraction": float(np.count_nonzero(usage) / len(usage)),
+    }
 
 
 def _novel_data(world: World, config: ExperimentConfig) -> tuple[tuple[int, ...], np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
@@ -270,7 +398,11 @@ def _write_artifacts(
 ) -> None:
     output = config.output_directory
     output.mkdir(parents=True, exist_ok=True)
-    model_config = config.dense_model if kind == "dense" else config.continuous_model
+    model_config = {
+        "dense": config.dense_model,
+        "continuous": config.continuous_model,
+        "discrete": config.discrete_model,
+    }[kind]
     resolved = {
         "world": world.config_dict(),
         f"{kind}_model": asdict(model_config),
@@ -289,6 +421,10 @@ def _write_artifacts(
     (output / "world_seed.txt").write_text(f"{config.world.seed}\n", encoding="utf-8")
     (output / "model_seed.txt").write_text(f"{model_config.seed}\n", encoding="utf-8")
     torch.save({"model_state_dict": model.state_dict(), "summary": summary}, output / "model.pt")
+    if isinstance(model, DiscreteLibraryLearner):
+        (output / "hard_routes.json").write_text(
+            json.dumps(model.hard_routes(), indent=2), encoding="utf-8"
+        )
     try:
         commit = subprocess.run(
             ["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True
@@ -311,7 +447,7 @@ def _write_artifacts(
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("configs/v1.yaml"))
-    parser.add_argument("--model", choices=("dense", "continuous"), required=True)
+    parser.add_argument("--model", choices=("dense", "continuous", "discrete"), required=True)
     parser.add_argument("--world-seed", type=int)
     parser.add_argument("--model-seed", type=int)
     parser.add_argument("--global-learning-rate", type=float)
@@ -327,7 +463,11 @@ def main() -> None:
         world=config.world if args.world_seed is None else replace(config.world, seed=args.world_seed),
         output_directory=config.output_directory if args.output is None else args.output,
     )
-    selected = config.dense_model if args.model == "dense" else config.continuous_model
+    selected = {
+        "dense": config.dense_model,
+        "continuous": config.continuous_model,
+        "discrete": config.discrete_model,
+    }[args.model]
     selected = replace(
         selected,
         seed=selected.seed if args.model_seed is None else args.model_seed,
@@ -358,6 +498,7 @@ def main() -> None:
         continuous_model=(
             selected if args.model == "continuous" else config.continuous_model
         ),
+        discrete_model=selected if args.model == "discrete" else config.discrete_model,
     )
     summary = run(config, kind=args.model, order=args.order)
     final = summary["final_nmse"]
