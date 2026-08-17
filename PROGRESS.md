@@ -153,9 +153,12 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 # In progress
 
-- Audit the remaining V1 specification obligations and complete the clean
-  artifact/plotting rehearsal before deciding whether the confirmatory-world
-  gate is open.
+- Completed a line-by-line V1 obligation audit in `SPEC_AUDIT.md`. The
+  confirmatory gate remains closed while learned-model reverse order,
+  replay/forgetting ablation, a second model initialization, current retention,
+  forward transfer, and true-route diagnostics remain open.
+- Refresh current retained-description evaluation first, including generic
+  hypernetwork quantization support, then proceed through the robustness queue.
 
 # Structural controls complete
 
