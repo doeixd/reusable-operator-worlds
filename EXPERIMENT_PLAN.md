@@ -111,6 +111,16 @@ example, an effective batch of two at replay ratio 1. This differs from the
 suggested batch size eight but is symmetric across models. It must be disclosed
 and later ablated.
 
+The development ablation is now complete on worlds 0–2. Target batch 8 uses
+four current-task examples and four replay examples under model-paired sampling.
+It improves both architectures, but improves Dense-C more: the mean
+Dense-minus-Continuous lifetime advantage narrows from 3,463 at batch 2 to
+2,061 at batch 8 while remaining positive in all three worlds. Batch 8 also
+preserves Continuous's novel 32-shot advantage 3/3. Because this intervention
+increases sample reuse and training compute rather than only vectorizing the
+same gradients, the confirmation batch and any symmetric retuning must be
+explicitly frozen before worlds 100–129 are opened.
+
 # Robustness queue
 
 After the causal reuse sweep:

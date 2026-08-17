@@ -42,10 +42,14 @@ claim.
 - Alpha leakage, teacher-rank mismatch, activation mismatch, fixed identity, and
   dense task-code dimension have been investigated.
 
-# Open protocol obligations
+# Protocol validity checks complete
 
-- Resolve or ablate the effective update batch of one current plus one replay
-  example, which differs from the suggested batch size eight.
+- Opaque task-ID reassignment is exactly invariant for selected Continuous and
+  Dense-C runs.
+- The effective batch-size discrepancy is explicitly ablated on worlds 0–2.
+  Batch 8 improves both models and preserves Continuous's advantage, while
+  narrowing it because Dense-C benefits more. The confirmation batch and any
+  retuning remain a freeze decision rather than an untested obligation.
 
 # Open diagnostic obligations
 
@@ -81,10 +85,10 @@ obligations below should be resolved or explicitly deferred.
 
 # Execution order
 
-1. Resolve the effective batch-size protocol check.
-2. Run the free measured-recurrence and truncated-lifetime bridge analyses.
-3. Implement the shared-parent plus residual control at intermediate reuse.
-4. Freeze statistical summaries and run a clean artifact/plotting rehearsal.
+1. Run the free measured-recurrence and truncated-lifetime bridge analyses.
+2. Implement the shared-parent plus residual control at intermediate reuse.
+3. Freeze batch protocol, tuning, and statistical summaries.
+4. Run a clean artifact/plotting rehearsal.
 5. Re-audit the gate before touching confirmatory worlds.
 
 # Closed during this audit
@@ -115,3 +119,8 @@ obligations below should be resolved or explicitly deferred.
   Dense-C world-0 runs. Reassigned IDs are disjoint, while normalized metric
   rows, summaries, and final tensors are identical. The tracked result is
   `reports/scrambled_ids/scrambled-ids.json`.
+- The batch-size sensitivity is complete on development worlds 0–2. A paired
+  target batch 8 improves both models and preserves Continuous lifetime and
+  novel-composition wins 3/3, although Dense-C's larger improvement narrows the
+  architecture effect. The tracked result is
+  `reports/batch_sizes/batch-sizes.json`.

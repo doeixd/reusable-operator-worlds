@@ -361,6 +361,19 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   field there would invalidate all existing resolved-config fingerprints. The
   optional scramble seed is recorded only in explicitly scrambled learned-run
   configurations.
+- The explicit 1:1 batch ablation uses four current-task examples and four
+  replay examples at target batch 8. Because early current/replay pools are
+  smaller, observed mean sizes are 1.98 for target 2 and 7.89 for target 8.
+  Buffer-construction and replay-sampling RNGs are separated, and the sampling
+  policy is paired across models.
+- On development worlds 0–2, target batch 8 improves lifetime log loss for both
+  Continuous and Dense-C 3/3, by means 1,554 and 2,956 respectively. It helps
+  Dense-C more, narrowing the mean Dense-minus-Continuous advantage from 3,463
+  at batch 2 to 2,061 at batch 8, but Continuous still wins 3/3.
+- Continuous retains better 32-shot novel NMSE 3/3 at both batch sizes. Batch 8
+  improves Continuous novel NMSE 3/3 and Dense-C 2/3. Treat this as a
+  development sensitivity: batch 8 materially increases sample reuse and
+  training compute, so it is not merely a vectorization change.
 
 # Standing scientific doubts
 
@@ -369,9 +382,10 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   teacher's three-stage low-rank residual family. Claims should distinguish
   evidence for explicit reusable slots from the broader benefit of aligned
   operator-manifold structure.
-- The effective online update batch is one current plus one replay example, not
-  the suggested batch size eight. This is symmetric but must be disclosed and
-  later ablated.
+- Most development evidence and optimizer selection use the legacy effective
+  batch of one current plus one replay example. The batch-8 sensitivity preserves
+  the main result but benefits Dense-C more; the confirmation protocol and any
+  symmetric retuning must be frozen explicitly before unsealing worlds 100–129.
 - Dense-C matches inference multiply-adds only. Continuous training backpropagates
   through every basis operator and uses materially more training compute.
 - The initial n=3 bootstrap intervals are not inferentially meaningful. Public

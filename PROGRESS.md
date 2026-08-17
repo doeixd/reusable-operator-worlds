@@ -154,7 +154,7 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 # In progress
 
 - Completed a line-by-line V1 obligation audit in `SPEC_AUDIT.md`. The
-  confirmatory gate remains closed while the batch-size check, shared-parent
+  confirmatory gate remains closed while batch-protocol freezing, shared-parent
   residuals, statistical freezing, and clean workflow rehearsal remain open.
 
 # Two-initialization pilot complete
@@ -212,6 +212,20 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   task-specific tensors are bitwise equal after task-index key normalization.
 - The machine-checked result is `reports/scrambled_ids/scrambled-ids.json`.
 
+# Batch-size sensitivity complete
+
+- Implemented the V1 suggested target batch 8 as a paired 1:1 minibatch: the new
+  current example plus up to three prior current-task examples, and four replay
+  examples. Target batch 2 uses one current plus one replay example.
+- Across development worlds 0–2, batch 8 improves lifetime log loss 3/3 for
+  both models. Dense-C improves more, reducing Continuous's mean lifetime
+  advantage from 3,463 to 2,061, but Continuous remains better 3/3.
+- Continuous retains lower 32-shot novel NMSE 3/3 at both sizes. The result
+  closes the missing sensitivity but requires an explicit protocol/retuning
+  decision before confirmation because batch 8 increases sample reuse and
+  training compute.
+- The machine report is `reports/batch_sizes/batch-sizes.json`.
+
 # Order and replay robustness complete
 
 - Completed reverse order and replay ratios 0, 1, and 4 on all ten development
@@ -256,7 +270,8 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 # Next
 
-- Resolve the effective batch-size-two protocol.
+- Freeze batch 2 versus batch 8 and any required symmetric retuning for
+  confirmation.
 - Run the free measured-recurrence and truncated-lifetime bridge analyses.
 - Implement the shared-parent plus task-residual intermediate-reuse control.
 - Rehearse artifact generation and plotting from a clean checkout before opening
