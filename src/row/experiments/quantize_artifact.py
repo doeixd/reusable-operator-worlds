@@ -34,7 +34,6 @@ def _build_from_artifact(
     world_raw = raw["world"]
     assert isinstance(world_raw, dict)
     d = int(world_raw["state_dim"])
-    alpha = float(world_raw["alpha"])
     if kind == "dense":
         model_raw = raw["dense_model"]
         assert isinstance(model_raw, dict)
@@ -53,8 +52,11 @@ def _build_from_artifact(
             operator_slots=int(model_raw["operator_slots"]),
             operator_rank=int(model_raw["operator_rank"]),
             task_steps=int(model_raw["task_steps"]),
-            alpha=alpha,
+            alpha=float(model_raw.get("operator_alpha_init", world_raw["alpha"])),
             seed=int(model_raw["seed"]),
+            learnable_alpha=bool(model_raw.get("learnable_alpha", False)),
+            activation=str(model_raw.get("operator_activation", "tanh")),
+            include_identity=bool(model_raw.get("include_identity", False)),
         )
     model_raw = raw["discrete_model"]
     assert isinstance(model_raw, dict)
@@ -63,10 +65,12 @@ def _build_from_artifact(
         operator_slots=int(model_raw["operator_slots"]),
         operator_rank=int(model_raw["operator_rank"]),
         task_steps=int(model_raw["task_steps"]),
-        alpha=alpha,
+        alpha=float(model_raw.get("operator_alpha_init", world_raw["alpha"])),
         initial_temperature=float(model_raw["initial_temperature"]),
         final_temperature=float(model_raw["final_temperature"]),
         seed=int(model_raw["seed"]),
+        learnable_alpha=bool(model_raw.get("learnable_alpha", False)),
+        activation=str(model_raw.get("operator_activation", "tanh")),
     )
 
 
@@ -103,8 +107,9 @@ def _inference_multiply_adds(raw: dict[str, object], kind: str) -> int:
     steps = int(model_raw["task_steps"])
     if kind == "discrete":
         return steps * (d * rank + rank * d)
+    mixture_slots = slots + int(bool(model_raw.get("include_identity", False)))
     operator_madds = steps * slots * (d * rank + rank * d)
-    mixture_madds = steps * slots * d
+    mixture_madds = steps * mixture_slots * d
     return operator_madds + mixture_madds
 
 

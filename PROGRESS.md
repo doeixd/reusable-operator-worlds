@@ -89,11 +89,20 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   an unfair pilot comparison. Its best stage-one mean log loss is -168,768.
 - Continuous's best stage-one setting is global/task LR 0.003/0.05 at -171,866,
   with mean novel 32-shot NMSE 0.00237 versus Dense-C's 0.00486.
+- Removed the teacher-alpha leak: learner operator scales now initialize at 0.2
+  and are learned independently.
+- Seed-0 family controls passed provisionally. Continuous beats Dense-C by 3,296
+  with teacher rank 16 / learner rank 8; GELU learner mismatch retains a smaller
+  441 advantage.
+- A fixed identity basis slot did not improve Continuous, arguing against the
+  fixed-depth convex constraint as the explanation for the primary result.
+- Per-task discrete annealing improves log loss by 8,825 and greatly improves
+  default-route zero-shot behavior, but remains far behind Continuous.
 
 # In progress
 
-- Evaluate the top two configurations per architecture on development worlds
-  3–9, then freeze one configuration per architecture.
+- Run sparse `rho=0.5` and `rho=0.75` seed-0 controls using the leak-free learner
+  setup before spending more tuning compute.
 
 # Next
 

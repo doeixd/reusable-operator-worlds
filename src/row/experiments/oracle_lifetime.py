@@ -66,8 +66,10 @@ def run(config: ExperimentConfig, order: str = "forward") -> dict[str, object]:
         d=config.world.state_dim,
         rank=config.oracle_model.operator_rank,
         operators=config.world.teacher_primitives,
-        alpha=config.oracle_model.alpha,
+        alpha=config.oracle_model.operator_alpha_init,
         seed=config.oracle_model.seed,
+        learnable_alpha=config.oracle_model.learnable_alpha,
+        activation=config.oracle_model.operator_activation,
     )
     optimizer = torch.optim.AdamW(
         model.parameters(),

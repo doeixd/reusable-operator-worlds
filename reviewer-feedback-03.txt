@@ -1,0 +1,108 @@
+# Reviewer feedback 03 — Reusable Operator Worlds
+
+Scope: review of the alpha-decoupling update (uncommitted work on top of
+48edafc) and the stage-1 symmetric tuning results, following up on
+reviewer-feedback-01. Verified locally: all 19 unit tests pass; one
+family-control artifact exists (`artifacts/family_controls/decoupled_tanh`).
+
+---
+
+## 1. Verdict on the update
+
+This was the right response to feedback-01 section 2.1, executed cleanly.
+
+- The alpha leak is fixed end to end. Learners take `operator_alpha_init`
+  (0.2, deliberately different from the teacher's 0.35), optionally
+  learnable, with a configurable tanh/gelu activation. Config dataclasses,
+  validation, YAML, CLI flags (`--operator-activation`,
+  `--operator-alpha-init`, `--teacher-rank`), and `quantize_artifact`
+  reconstruction with backward-compatible defaults are all in place.
+- The headline result survived both fairness corrections. Symmetric tuning
+  gave Dense-C the same task-LR attention (its best setting is also 0.05),
+  and Continuous still leads by ~3,100 nats on worlds 0-2 with ~2x better
+  novel-composition NMSE.
+- The first family control confirms the advantage is not the alpha coupling:
+  `decoupled_tanh` prequential -170,967 vs the tuned coupled -171,866 —
+  essentially unchanged. The confound feedback-01 rated most dangerous is
+  largely defused.
+
+Reviewer-feedback-02's additions are endorsed: the learning-to-learn gain
+ratio as a descriptive (not inferential) figure, analyzing effect vs
+MEASURED functional recurrence rather than nominal rho, the wake/sleep
+"continuous inference -> discrete consolidation" framing as a V2 direction,
+and continuing to defer loops.
+
+---
+
+## 2. Remaining items, in priority order
+
+### 2.1 Finish the family-mismatch sweep (two runs)
+
+`decoupled_tanh` still keeps the teacher's activation and rank, so the
+family-inheritance objection is only one-third answered. The two runs that
+actually break the family, and that a skeptical reader will ask for first:
+
+- gelu operators: `--model continuous --operator-activation gelu` (seed 0);
+- rank mismatch: `--teacher-rank 16` with learner rank 8 (seed 0).
+
+The CLI flags exist; this is two commands. Run these BEFORE stage-2 tuning:
+a surprise here changes what is being tuned. Amend reviewer-02's 8-step
+sequence accordingly.
+
+### 2.2 Re-run the oracle gate once
+
+The oracle config also changed (alpha now 0.2 and learnable). The positive
+control was passed under fixed alpha 0.35. Before citing oracle numbers in
+any write-up, re-run the oracle once so the reported gate matches the
+current code. One run.
+
+### 2.3 Exclude learnable alpha from weight decay
+
+The learnable alpha scalar lands in `shared_parameters()` and therefore in
+the AdamW group with weight_decay 1e-4, which pulls alpha toward zero.
+Almost certainly negligible, but for a public artifact it is cleaner to put
+alpha scalars in a no-decay parameter group. One line per model.
+
+### 2.4 Still open from feedback-01 (unchanged priorities)
+
+- Per-task discrete temperature annealing (feedback-01 section 2.2). The
+  global anneal remains a plausible artifactual explanation for the
+  "route inference is the bottleneck" narrative. One run, seed 0.
+- Identity-operator ablation for the continuous basis (section 2.3). One
+  line, one run; also the cheapest datapoint on variable effective depth.
+- `forward_tasks` batching by task ID. Still the best compute ROI in the
+  repo; matters more as the rho sweep and stage-2 tuning approach.
+- Reporting normalization: per-example nats/bits alongside totals; paired
+  per-world deltas instead of n=3 bootstrap intervals; scope the
+  "compute-matched" claim to inference multiply-adds or report training
+  FLOPs separately.
+
+### 2.5 Repo hygiene
+
+- This update is finished, verified work sitting uncommitted — violating
+  AGENTS.md's own "commit completed, verified milestones" convention.
+  Commit it (alpha decoupling + configs + family control artifact
+  provenance) as its own milestone.
+- PROGRESS.md and AGENTS.md have not recorded the alpha decoupling, the
+  stage-1 tuning outcome, or the decoupled_tanh result. Update both; add
+  the "standing scientific doubts" section proposed in feedback-01 so the
+  remaining items in 2.4 are visible to the loop rather than carried only
+  in reviewer files.
+
+---
+
+## 3. Sequence to confirmation (amended from reviewer-02)
+
+1. Family-mismatch runs: gelu and teacher-rank-16 (seed 0).
+2. Oracle gate re-run under the new operator config.
+3. Stage-2 tuning on worlds 3-9; freeze Continuous and Dense-C.
+4. Per-task discrete anneal + identity-operator ablation (seed 0), so the
+   discrete narrative and depth constraint are settled before the sweep.
+5. Six-point rho sweep on development worlds; analyze against measured
+   functional recurrence.
+6. Replicate checkpoint learning-to-learn curves across worlds.
+7. Hypernetwork and 24-dim dense task-code controls.
+8. Freeze everything; only then open worlds 100-129.
+
+If the continuous advantage survives step 1 and the rho dose-response holds
+in step 5, the result is defensible for arXiv even at modest world counts.

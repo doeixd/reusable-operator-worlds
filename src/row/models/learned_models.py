@@ -89,12 +89,24 @@ class ContinuousBasisLearner(nn.Module):
         task_steps: int,
         alpha: float,
         seed: int,
+        learnable_alpha: bool = True,
+        activation: str = "tanh",
+        include_identity: bool = False,
     ) -> None:
         super().__init__()
-        self.operator_slots = operator_slots
+        self.learned_operator_slots = operator_slots
+        self.include_identity = include_identity
+        self.operator_slots = operator_slots + int(include_identity)
         self.task_steps = task_steps
         self.basis = nn.ModuleList(
-            LearnedOperator(d, operator_rank, alpha, seed + 997 * index)
+            LearnedOperator(
+                d,
+                operator_rank,
+                alpha,
+                seed + 997 * index,
+                learnable_alpha=learnable_alpha,
+                activation=activation,
+            )
             for index in range(operator_slots)
         )
         self.task_codes = nn.ParameterDict()
@@ -113,6 +125,8 @@ class ContinuousBasisLearner(nn.Module):
         coefficients = torch.softmax(self.task_codes[task_id], dim=-1)
         for step in range(self.task_steps):
             candidates = torch.stack([operator(z) for operator in self.basis], dim=0)
+            if self.include_identity:
+                candidates = torch.cat((candidates, z.unsqueeze(0)), dim=0)
             weights = coefficients[step].view(self.operator_slots, 1, 1)
             z = torch.sum(weights * candidates, dim=0)
         return z
@@ -162,6 +176,8 @@ class DiscreteLibraryLearner(nn.Module):
         initial_temperature: float,
         final_temperature: float,
         seed: int,
+        learnable_alpha: bool = True,
+        activation: str = "tanh",
     ) -> None:
         super().__init__()
         self.operator_slots = operator_slots
@@ -170,7 +186,14 @@ class DiscreteLibraryLearner(nn.Module):
         self.final_temperature = final_temperature
         self.temperature = initial_temperature
         self.library = nn.ModuleList(
-            LearnedOperator(d, operator_rank, alpha, seed + 997 * index)
+            LearnedOperator(
+                d,
+                operator_rank,
+                alpha,
+                seed + 997 * index,
+                learnable_alpha=learnable_alpha,
+                activation=activation,
+            )
             for index in range(operator_slots)
         )
         self.task_codes = nn.ParameterDict()

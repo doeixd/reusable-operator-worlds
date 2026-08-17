@@ -68,8 +68,11 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             operator_slots=model_config.operator_slots,
             operator_rank=model_config.operator_rank,
             task_steps=model_config.task_steps,
-            alpha=config.world.alpha,
+            alpha=model_config.operator_alpha_init,
             seed=model_config.seed,
+            learnable_alpha=model_config.learnable_alpha,
+            activation=model_config.operator_activation,
+            include_identity=model_config.include_identity,
         )
     model_config = config.discrete_model
     return DiscreteLibraryLearner(
@@ -77,10 +80,12 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
         operator_slots=model_config.operator_slots,
         operator_rank=model_config.operator_rank,
         task_steps=model_config.task_steps,
-        alpha=config.world.alpha,
+        alpha=model_config.operator_alpha_init,
         initial_temperature=model_config.initial_temperature,
         final_temperature=model_config.final_temperature,
         seed=model_config.seed,
+        learnable_alpha=model_config.learnable_alpha,
+        activation=model_config.operator_activation,
     )
 
 
@@ -193,7 +198,11 @@ def run(config: ExperimentConfig, kind: ModelKind, order: str = "forward") -> di
                 if isinstance(model, DiscreteLibraryLearner):
                     global_example = lifetime_index * config.world.examples_per_task + n_seen
                     total_examples = len(world.tasks) * config.world.examples_per_task
-                    model.set_training_progress(global_example / max(1, total_examples - 1))
+                    if config.discrete_model.temperature_schedule == "per_task":
+                        progress = n_seen / max(1, config.world.examples_per_task - 1)
+                    else:
+                        progress = global_example / max(1, total_examples - 1)
+                    model.set_training_progress(progress)
                 model.train()
                 optimizer.zero_grad(set_to_none=True)
                 prediction = model.forward_tasks(_tensor(np.stack(batch_x)), task_ids)
@@ -528,11 +537,16 @@ def main() -> None:
     parser.add_argument("--model", choices=("dense", "continuous", "discrete"), required=True)
     parser.add_argument("--world-seed", type=int)
     parser.add_argument("--reuse-rho", type=float)
+    parser.add_argument("--teacher-rank", type=int)
     parser.add_argument("--model-seed", type=int)
     parser.add_argument("--global-learning-rate", type=float)
     parser.add_argument("--task-learning-rate", type=float)
     parser.add_argument("--updates-per-example", type=int)
     parser.add_argument("--hidden-width", type=int)
+    parser.add_argument("--operator-activation", choices=("tanh", "gelu"))
+    parser.add_argument("--operator-alpha-init", type=float)
+    parser.add_argument("--include-identity", action="store_true")
+    parser.add_argument("--temperature-schedule", choices=("global", "per_task"))
     parser.add_argument("--order", choices=("forward", "reverse"), default="forward")
     parser.add_argument("--output", type=Path)
     parser.add_argument("--fast-tuning", action="store_true")
@@ -544,6 +558,9 @@ def main() -> None:
             config.world,
             seed=config.world.seed if args.world_seed is None else args.world_seed,
             reuse_rho=config.world.reuse_rho if args.reuse_rho is None else args.reuse_rho,
+            teacher_rank=(
+                config.world.teacher_rank if args.teacher_rank is None else args.teacher_rank
+            ),
         ),
         output_directory=config.output_directory if args.output is None else args.output,
     )
@@ -583,6 +600,28 @@ def main() -> None:
         **(
             {"hidden_width": args.hidden_width}
             if args.model == "dense" and args.hidden_width is not None
+            else {}
+        ),
+        **(
+            {"operator_activation": args.operator_activation}
+            if args.model in {"continuous", "discrete"}
+            and args.operator_activation is not None
+            else {}
+        ),
+        **(
+            {"operator_alpha_init": args.operator_alpha_init}
+            if args.model in {"continuous", "discrete"}
+            and args.operator_alpha_init is not None
+            else {}
+        ),
+        **(
+            {"include_identity": True}
+            if args.model == "continuous" and args.include_identity
+            else {}
+        ),
+        **(
+            {"temperature_schedule": args.temperature_schedule}
+            if args.model == "discrete" and args.temperature_schedule is not None
             else {}
         ),
     )

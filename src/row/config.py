@@ -47,7 +47,9 @@ class EvaluationConfig:
 @dataclass(frozen=True)
 class OracleModelConfig:
     operator_rank: int = 8
-    alpha: float = 0.35
+    operator_alpha_init: float = 0.2
+    learnable_alpha: bool = True
+    operator_activation: str = "tanh"
     learning_rate: float = 1e-3
     weight_decay: float = 1e-4
     updates_per_example: int = 1
@@ -62,6 +64,8 @@ class OracleModelConfig:
             raise ValueError("learning_rate must be positive and weight_decay nonnegative")
         if self.replay_examples_per_task < 0 or self.replay_ratio < 0.0:
             raise ValueError("replay settings must be nonnegative")
+        if self.operator_alpha_init <= 0.0 or self.operator_activation not in {"tanh", "gelu"}:
+            raise ValueError("oracle operator initialization or activation is invalid")
 
 
 @dataclass(frozen=True)
@@ -91,6 +95,10 @@ class ContinuousModelConfig:
     operator_slots: int = 8
     operator_rank: int = 8
     task_steps: int = 3
+    operator_alpha_init: float = 0.2
+    learnable_alpha: bool = True
+    operator_activation: str = "tanh"
+    include_identity: bool = False
     global_learning_rate: float = 1e-3
     task_learning_rate: float = 5e-3
     weight_decay: float = 1e-4
@@ -106,6 +114,8 @@ class ContinuousModelConfig:
             raise ValueError("continuous learning rates must be positive")
         if self.updates_per_example <= 0 or self.replay_examples_per_task < 0:
             raise ValueError("continuous update count must be positive and replay size nonnegative")
+        if self.operator_alpha_init <= 0.0 or self.operator_activation not in {"tanh", "gelu"}:
+            raise ValueError("continuous operator initialization or activation is invalid")
 
 
 @dataclass(frozen=True)
@@ -113,8 +123,12 @@ class DiscreteModelConfig:
     operator_slots: int = 12
     operator_rank: int = 8
     task_steps: int = 3
+    operator_alpha_init: float = 0.2
+    learnable_alpha: bool = True
+    operator_activation: str = "tanh"
     initial_temperature: float = 1.0
     final_temperature: float = 0.1
+    temperature_schedule: str = "global"
     global_learning_rate: float = 1e-3
     task_learning_rate: float = 5e-2
     weight_decay: float = 1e-4
@@ -132,6 +146,10 @@ class DiscreteModelConfig:
             raise ValueError("discrete learning rates must be positive")
         if self.updates_per_example <= 0 or self.replay_examples_per_task < 0:
             raise ValueError("discrete update count must be positive and replay size nonnegative")
+        if self.operator_alpha_init <= 0.0 or self.operator_activation not in {"tanh", "gelu"}:
+            raise ValueError("discrete operator initialization or activation is invalid")
+        if self.temperature_schedule not in {"global", "per_task"}:
+            raise ValueError("temperature_schedule must be 'global' or 'per_task'")
 
 
 @dataclass(frozen=True)
@@ -186,7 +204,9 @@ def load_config(path: str | Path) -> ExperimentConfig:
     )
     oracle_model = OracleModelConfig(
         operator_rank=int(oracle_raw.get("operator_rank", 8)),
-        alpha=float(oracle_raw.get("alpha", 0.35)),
+        operator_alpha_init=float(oracle_raw.get("operator_alpha_init", 0.2)),
+        learnable_alpha=bool(oracle_raw.get("learnable_alpha", True)),
+        operator_activation=str(oracle_raw.get("operator_activation", "tanh")),
         learning_rate=float(oracle_raw.get("learning_rate", 1e-3)),
         weight_decay=float(oracle_raw.get("weight_decay", 1e-4)),
         updates_per_example=int(oracle_raw.get("updates_per_example", 1)),
@@ -210,6 +230,10 @@ def load_config(path: str | Path) -> ExperimentConfig:
         operator_slots=int(continuous_raw.get("operator_slots", 8)),
         operator_rank=int(continuous_raw.get("operator_rank", 8)),
         task_steps=int(continuous_raw.get("task_steps", 3)),
+        operator_alpha_init=float(continuous_raw.get("operator_alpha_init", 0.2)),
+        learnable_alpha=bool(continuous_raw.get("learnable_alpha", True)),
+        operator_activation=str(continuous_raw.get("operator_activation", "tanh")),
+        include_identity=bool(continuous_raw.get("include_identity", False)),
         global_learning_rate=float(continuous_raw.get("global_learning_rate", 1e-3)),
         task_learning_rate=float(continuous_raw.get("task_learning_rate", 5e-3)),
         weight_decay=float(continuous_raw.get("weight_decay", 1e-4)),
@@ -222,8 +246,12 @@ def load_config(path: str | Path) -> ExperimentConfig:
         operator_slots=int(discrete_raw.get("operator_slots", 12)),
         operator_rank=int(discrete_raw.get("operator_rank", 8)),
         task_steps=int(discrete_raw.get("task_steps", 3)),
+        operator_alpha_init=float(discrete_raw.get("operator_alpha_init", 0.2)),
+        learnable_alpha=bool(discrete_raw.get("learnable_alpha", True)),
+        operator_activation=str(discrete_raw.get("operator_activation", "tanh")),
         initial_temperature=float(discrete_raw.get("initial_temperature", 1.0)),
         final_temperature=float(discrete_raw.get("final_temperature", 0.1)),
+        temperature_schedule=str(discrete_raw.get("temperature_schedule", "global")),
         global_learning_rate=float(discrete_raw.get("global_learning_rate", 1e-3)),
         task_learning_rate=float(discrete_raw.get("task_learning_rate", 5e-2)),
         weight_decay=float(discrete_raw.get("weight_decay", 1e-4)),

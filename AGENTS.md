@@ -145,3 +145,35 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   observation that tuned Dense-C beat the old Continuous configuration.
 - Stage-two finalists are Continuous 0.003/0.05 and 0.001/0.05, and Dense-C
   0.001/0.05 and 0.003/0.05, evaluated on development worlds 3–9.
+- Learner operators no longer read teacher `alpha`. They initialize an independent
+  learnable scale at 0.2. On world 0, decoupled Continuous scores -170,967 versus
+  tuned Dense-C -166,521, so the earlier win is not caused by leaking alpha 0.35.
+- Teacher-rank mismatch (teacher 16, learner 8) preserves a 3,296 log-loss
+  advantage and better novel adaptation for Continuous. GELU learner mismatch
+  preserves only a 441 advantage, showing that family alignment materially helps
+  but does not wholly explain the seed-0 result.
+- Adding a fixed identity candidate does not help Continuous on seed 0
+  (-170,404 versus -170,967 without identity). The inability to skip a step is
+  therefore not the source of the primary gain in this control.
+- Per-task temperature re-annealing improves hard discrete log loss from -137,321
+  to -146,146 and novel zero-shot NMSE from 0.150 to 0.0436 under the leak-free
+  setup. Global annealing exaggerated route-inference difficulty, but per-task
+  discrete still substantially trails Continuous.
+
+# Standing scientific doubts
+
+- Reusable learners retain a favorable three-stage residual structural prior even
+  after alpha/rank/activation mismatch controls. A generic low-rank hypernetwork
+  remains necessary.
+- The stage-one optimizer grid predates the learnable-alpha architecture change;
+  its winners are useful development settings but must be revalidated before
+  freezing confirmation.
+- The effective online update batch is one current plus one replay example, not
+  the suggested batch size eight. This is symmetric but must be disclosed and
+  later ablated.
+- Dense-C matches inference multiply-adds only. Continuous training backpropagates
+  through every basis operator and uses materially more training compute.
+- Identity-slot results are one world only; the negative ablation is not a
+  population claim.
+- Confirmatory worlds 100–129 remain sealed. Do not inspect them until these
+  doubts and the development `rho` curve are resolved.

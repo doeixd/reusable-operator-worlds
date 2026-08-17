@@ -24,6 +24,16 @@ class LearnedModelTests(unittest.TestCase):
         diagnostics = model.routing_diagnostics()
         self.assertAlmostEqual(diagnostics["mean_max_coefficient"], 1.0 / 3.0, places=6)
 
+    def test_continuous_identity_slot_adds_code_capacity_not_shared_weights(self) -> None:
+        plain = ContinuousBasisLearner(4, 3, 2, 2, 0.2, seed=1)
+        identity = ContinuousBasisLearner(
+            4, 3, 2, 2, 0.2, seed=1, include_identity=True
+        )
+        plain.begin_task("task_a")
+        code = identity.begin_task("task_a")
+        self.assertEqual(plain.shared_parameter_count, identity.shared_parameter_count)
+        self.assertEqual(code.shape, (2, 4))
+
     def test_variable_task_batches_preserve_shape(self) -> None:
         model = DenseLearner(4, 3, 8, 2, seed=1)
         model.begin_task("task_a")

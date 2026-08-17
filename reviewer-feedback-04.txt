@@ -1,0 +1,158 @@
+# Reviewer feedback 04 — the ambitious direction: self-modifying computational language
+
+Scope: strategic guidance beyond V1, responding to the PI's judgment that the
+current results — however clean — remain inside the crowded "architectures
+designed for reuse" literature. The target claim for the ambitious paper is:
+
+> A neural system can discover, and progressively improve, the reusable
+> language in which its own computation is represented.
+
+This file ranks the four candidate mechanisms, selects one, and specifies a
+minimal decisive experiment (V1.5) that fits the compute budget.
+
+---
+
+## 1. Ranking the four candidate mechanisms
+
+### 1.1 MDL-pruned overcomplete library (discover operator count/rank)
+
+Weakest novelty bet. L0/hard-concrete gating and library pruning are
+well-trodden; the only new element would be the selection criterion, and a
+reviewer will read it as structured pruning with a prequential flavor. Keep
+it as Model 4 / a control, not a headline.
+
+### 1.2 Fork/merge under changing world statistics
+
+Most novel, most expensive — but the PI notes free Kaggle GPU quota
+(~30 h/week of T4/P100 sessions) is available, which changes the compute
+verdict from "not feasible" to "feasible as the sequel." Two honest
+caveats on what that compute actually buys:
+
+- These models are tiny (d=16, rank-8 operators); a GPU barely accelerates
+  a single lifetime. The real win is THROUGHPUT: several Kaggle sessions
+  running paired worlds / rho points / regime conditions in parallel,
+  which is exactly what Benchmark C consumes. Batching `forward_tasks`
+  (reviewer-03 section 2.4) matters even more on GPU, since per-sample
+  Python-loop forwards will leave the device idle.
+- Compute was only half the objection. Benchmark C still needs new
+  machinery with its own validity gates before fork/merge results are
+  interpretable: the regime-switching generator, a demonstration that
+  regime structure is invisible in task IDs, and a scratch-difficulty
+  control under nonstationarity. Budget those before the fun part.
+
+Revised verdict: still sequenced AFTER 1.4 — consolidation builds the
+compile/merge operator that fork/merge reuses, and 1.4's result determines
+whether the language-change criterion works at all — but fork/merge is now
+a planned Phase II with identified compute, not a deferred wish. Kaggle
+engineering prerequisites: device-agnostic tensors (the code currently
+pins CPU via `torch.set_num_threads(1)` and CPU generators), a
+requirements pin, and artifact download/resume so a 9-hour session limit
+cannot corrupt a lifetime run.
+
+### 1.3 Macros/loops
+
+Deferred again, same reason as feedback-01/02: it entangles "can the
+language improve itself" with "can neural systems induce control flow,"
+which is a separate hard problem. The identity-operator ablation remains
+the cheap first datapoint on variable effective depth.
+
+### 1.4 Continuous -> discrete consolidation  <== RECOMMENDED
+
+The bet to place, for three reasons specific to this project:
+
+1. The V1 results already set up the problem perfectly. Continuous wins
+   online learning; discrete wins storage (26,112 vs 29,184 proxy bits) and
+   inference (768 vs 6,528 multiply-adds); and discrete's failure is route
+   INFERENCE, not route REPRESENTATION (92.2% exact route recovery).
+   Consolidation is exactly the mechanism that measured trade-off triangle
+   demands, and no one else has this triangle measured on a benchmark with
+   known ground truth.
+2. It is nearly free. Both endpoints exist in the codebase, and the
+   checkpoint infrastructure (8/16/32/64 tasks, deep-copied probes) already
+   provides the harness.
+3. It is the smallest system that satisfies the novelty criterion
+   literally: the learner starts in one representational form and changes
+   the form itself — continuous mixtures become discrete programs — with
+   the decision governed by the lifetime code-length objective rather than
+   a hand-tuned schedule.
+
+Framing for the paper: **consolidation as amortized program inference.**
+The continuous phase is cheap approximate inference over programs; sleep
+compiles high-confidence posteriors into discrete calls; the criterion for
+when to compile is reduction in J = L_preq + lambda * D. This also gives
+wake/sleep a principled justification (reviewer-02's framing), replacing
+the vaguer "compress periodically" story.
+
+---
+
+## 2. Minimal decisive experiment (V1.5)
+
+Design, using only existing components:
+
+1. Train the continuous learner normally ("wake").
+2. At the existing checkpoints (8/16/32/64 tasks), run a "sleep" step:
+   - snap each task's softmax mixture to hard routes over a discrete
+     library distilled from the continuous basis (start with per-step
+     argmax; distillation of merged/duplicated slots can come later);
+   - optionally fine-tune operators briefly under the hard routes on
+     replay only.
+3. Continue lifetime training from the consolidated state.
+
+Measure, against the never-consolidated continuous run on paired worlds:
+
+- (a) prequential cost of tasks AFTER each consolidation point — does the
+  compiled language make subsequent learning cheaper, or at least not
+  more expensive?
+- (b) retained description length and inference multiply-adds before vs
+  after consolidation — the expected large win;
+- (c) novel-composition adaptation from the consolidated state (existing
+  frozen-library checkpoint protocol);
+- (d) the falsifier: repeat at rho = 0. Consolidation should REFUSE to pay
+  (or actively hurt) when the world has no true discrete reusable
+  language. A consolidation criterion that fires at rho = 0 is broken.
+
+Decision rule to write down BEFORE the first run, while neutrality is
+still possible:
+
+- If consolidated-then-continue beats pure continuous on prequential loss
+  at high rho and correctly declines at rho = 0: the headline result.
+  Fork/merge under nonstationarity becomes the sequel (Phase II on Kaggle
+  GPU quota, per section 1.2), with the consolidation operator already
+  built.
+- If it matches but never beats pure continuous online, while winning
+  storage/inference: the honest conclusion is "consolidation buys
+  compression, not learning speed" — the spec's own decision branch
+  (section 41). Still publishable inside the larger paper, but claimed as
+  compression, not learning-to-learn.
+- If consolidation damages subsequent learning even at rho = 1: report it;
+  it bounds when compilation is safe and is itself informative.
+
+Later refinement, not required for the first result: make the sleep step
+conditional — compile a task's program only when doing so reduces the
+estimated J — so the objective, not a schedule, decides when the language
+changes form.
+
+---
+
+## 3. Sequencing and paper structure
+
+Do not let V1.5 leapfrog the V1 gate. The family-mismatch runs, oracle
+re-gate, and rho sweep (reviewer-03 sections 2.1-2.2 and step 5) are what
+make any consolidation result interpretable. The consolidation experiment
+slots in after the rho sweep and before the confirmatory worlds.
+
+Recommended arXiv structure, robust to how V1.5 turns out:
+
+1. ROW benchmark + validity controls (already strong);
+2. V1 result: reusable substrate advantage, causal in rho, surviving
+   family-mismatch and compute controls;
+3. the measured learning/storage/inference triangle across continuous and
+   discrete substrates;
+4. consolidation: the language changing its own form under the lifetime
+   code-length objective — at whatever strength the evidence supports.
+
+That is a strong paper even if section 4 lands on the compression branch.
+The novelty claim to defend throughout is not the mechanism (mixtures,
+argmax, distillation are all standard parts) but the criterion: abstraction
+evaluated, and the representational form selected, by prospective reduction
+in lifetime learning cost plus retained description length.

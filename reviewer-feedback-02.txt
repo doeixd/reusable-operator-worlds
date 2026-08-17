@@ -1,0 +1,342 @@
+This is a good update. The most important thing is that **the earlier continuous-vs-dense result survived the fairness correction**.
+
+Dense-C improved substantially once its task-state learning rate got the same tuning attention: its mean development log loss went from about (-164{,}842) to (-168{,}768). But Continuous also improved, to (-171{,}866), so after the symmetric grid it still leads by about **3,098 log-loss units on worlds 0–2**, and its mean novel 32-shot NMSE is about **0.00237 vs. 0.00486** for Dense-C. 
+
+That is much more convincing than the original pilot because we now know the result wasn't just “we tuned Continuous's task inference and forgot to tune Dense.”
+
+### What I think now
+
+The agent is at exactly the right point to **stop changing the conceptual machinery** and finish the causal experiment.
+
+The current stage-two procedure—taking the top two settings for each architecture onto development worlds 3–9 and then freezing one—is sensible.  Assuming Continuous remains ahead there, the six-point (\rho) sweep becomes by far the most informative experiment.
+
+The key result I want is no longer just:
+
+[
+L_C < L_D.
+]
+
+It is something like:
+
+[
+\Delta(\rho)
+============
+
+L_D(\rho)-L_C(\rho)
+]
+
+with:
+
+[
+\Delta(0)<0,
+]
+
+a crossover somewhere in the middle, and:
+
+[
+\Delta(1)>0.
+]
+
+You already have the endpoints on world 0:
+
+[
+\Delta(0)\approx-6714
+]
+
+and:
+
+[
+\Delta(1)\approx+3135.
+]
+
+
+
+If that turns into a smooth dose-response across worlds, I think the experiment has done its job.
+
+---
+
+There is another encouraging thing buried in here: **Continuous survived symmetric tuning while still beating Dense-C on new-composition adaptation by roughly a factor of two in NMSE**:
+
+[
+0.00237
+\quad\text{vs.}\quad
+0.00486.
+]
+
+
+
+That's more important to me than a small difference in final training error, because it says that the thing being accumulated seems genuinely useful for expressing **new combinations**, not merely fitting the historical stream.
+
+The checkpoint result strengthens that interpretation even further: on world 0 the Continuous learner's 32-shot novel-task NMSE improved from
+
+[
+0.0298\rightarrow0.00467
+]
+
+between 8 and 64 lifetime tasks, whereas Dense-C went
+
+[
+0.0367\rightarrow0.0159.
+]
+
+
+
+So there are now two distinct observations:
+
+[
+\text{Continuous learns the lifetime more cheaply},
+]
+
+and
+
+[
+\text{its accumulated representation makes fresh compositions progressively easier}.
+]
+
+The second is the more interesting one.
+
+---
+
+## One thing I would ask the agent to add before confirmation
+
+For the checkpoint experiment, calculate a simple **learning-to-learn gain** relative to the early checkpoint.
+
+For example:
+
+[
+G_{64}
+======
+
+\frac{
+\operatorname{NMSE}*{32,;8}
+}{
+\operatorname{NMSE}*{32,;64}
+}.
+]
+
+Seed 0 gives approximately:
+
+[
+G_C
+===
+
+\frac{0.0298}{0.00467}
+\approx6.4\times
+]
+
+for Continuous, while:
+
+[
+G_D
+===
+
+\frac{0.0367}{0.0159}
+\approx2.3\times.
+]
+
+That's a very intuitive way of saying:
+
+> Over its lifetime, the reusable learner became about 6× better at learning these unseen compositions from 32 examples, versus about 2× for Dense-C.
+
+I wouldn't use ratios as the main statistical estimator—they can be unstable—but they're excellent descriptive figures.
+
+The actual statistical analysis should still use the checkpoint values/slopes.
+
+---
+
+## I also think the discrete result is more interesting now
+
+The hard discrete model learned a remarkably accurate symbolic-ish representation:
+
+* 92.2% exact explained routes;
+* 96.4% route-position accuracy;
+* primitive distance (0.00229);
+* only ~768 inference multiply-adds;
+* only 26,112 retained proxy bits.
+
+Yet it pays a huge **online inference tax**. 
+
+This actually maps nicely onto our discussion of loops/programs.
+
+It tells us that separating the system into:
+
+[
+\boxed{\text{program representation}}
+]
+
+and
+
+[
+\boxed{\text{program inference}}
+]
+
+may eventually be critical.
+
+The discrete library seems to be learning a real reusable “language.” It just doesn't yet have a good **compiler from demonstrations into that language**.
+
+Continuous routing acts almost like a relaxed compiler: it can quickly move around a smooth operation space rather than having to determine an exact symbolic route.
+
+That's possibly why it's winning online.
+
+Long-term, I could imagine something like:
+
+[
+\text{continuous fast inference}
+\rightarrow
+\text{discrete consolidation}
+]
+
+during sleep.
+
+That is:
+
+**wake:** maintain uncertain/continuous mixtures because they're easy to optimize;
+
+**sleep:** once enough evidence accumulates, compile them into cheap discrete calls/macros/loops.
+
+That might be a better reason for wake/sleep than our earlier vague “compress periodically” argument.
+
+---
+
+## A new thought from the tuning results
+
+The task-code LR being high for **both** winning models is telling us something.
+
+Dense-C's best stage-one setting also uses:
+
+[
+\eta_{\text{task}}=0.05,
+]
+
+not just Continuous. 
+
+So the core lifetime problem has a natural **two-timescale structure**:
+
+[
+\text{fast task inference}
+]
+
+and
+
+[
+\text{slow shared representation learning}.
+]
+
+That's exactly what we'd expect theoretically.
+
+For each new task:
+
+[
+c_\tau
+]
+
+should move quickly as we infer “what task is this?”
+
+Whereas:
+
+[
+\theta_{\text{shared}}
+]
+
+should accumulate more slowly across the lifetime.
+
+That might eventually become architectural rather than just different optimizer LRs.
+
+You could have:
+
+[
+c_{t+1}
+=======
+
+F(c_t,x_t,y_t)
+]
+
+as a fast learned inference process, while:
+
+[
+\theta_{t+1}
+============
+
+\theta_t-\eta_\theta\nabla L
+]
+
+changes slowly.
+
+And then sleep/consolidation alters (\theta) or the library.
+
+That's starting to look much more like a real continual-learning architecture.
+
+---
+
+## I wouldn't touch loops yet
+
+Our loop discussion is interesting, but the agent should **not implement it now**.
+
+The current experiment has a very specific job:
+
+> Establish the economics of reusable neural computation.
+
+Then the natural sequence becomes:
+
+[
+\text{fixed reuse}
+\rightarrow
+\text{graded reuse}
+\rightarrow
+\text{learned vocabulary size/structure}
+\rightarrow
+\text{variable-length calls}
+\rightarrow
+\text{loops/macros}.
+]
+
+Otherwise we'd mix the question:
+
+> “Does reuse help?”
+
+with the much harder question:
+
+> “Can neural systems induce control flow?”
+
+---
+
+## The next decision point is very crisp
+
+I would let the agent do exactly what it's doing:
+
+1. Finish stage-two tuning on worlds 3–9.
+2. Freeze Continuous and Dense-C.
+3. Run the six-point (\rho) sweep on development worlds.
+4. Examine **effect vs. measured functional recurrence**, not just effect vs. nominal (\rho).
+5. Replicate checkpoint learning-to-learn curves.
+6. Then run the generic hypernetwork control and 24-dimensional Dense task-code control.
+7. Freeze everything.
+8. Only then open worlds 100–129.
+
+If the (\rho) curve behaves the way the endpoint already suggests **and** the checkpoint learning-to-learn effect replicates across worlds, then I think we should change modes again.
+
+At that point the question is no longer:
+
+> “Does the V1 hypothesis work?”
+
+It becomes:
+
+> **“What is the next non-obvious experiment?”**
+
+And my current answer to that would probably be **not** merge/split immediately. It would be to ask whether the system can discover **the form of its reusable representation itself**—discrete vs. continuous, number of basis elements, parameterized families, and eventually repeated/looped execution—under an explicit lifetime compression objective.
+
+That's where the original research idea starts re-entering.
+
+For the more ambitious paper, though, I still think we're not there.
+
+The thing that would make me substantially more excited from a novelty standpoint would be demonstrating something existing systems generally do not give us:
+
+the learner discovers or changes the computational language itself.
+	​
+
+
+For example, start overcomplete and let it discover the right number/rank/granularity of reusable operations under a lifetime code-length objective; or let continuous fast representations consolidate into discrete reusable programs; or let repeated calls get compressed into macros/loops; or let the library fork/merge as the statistics of the world change.
+
+That would move us beyond the very crowded literature on architectures designed to reuse computation toward your original question:
+
+Can a neural system discover, and progressively improve, the reusable language in which its own computation is represented?

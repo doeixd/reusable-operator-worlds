@@ -20,7 +20,9 @@ scratch_model:
 
 oracle_model:
   operator_rank: 8
-  alpha: 0.35
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
   learning_rate: 0.001
   weight_decay: 0.0001
   updates_per_example: 1
@@ -33,7 +35,7 @@ dense_model:
   hidden_width: 64
   residual_blocks: 3
   global_learning_rate: 0.001
-  task_learning_rate: 0.005
+  task_learning_rate: 0.05
   weight_decay: 0.0001
   updates_per_example: 1
   replay_examples_per_task: 4
@@ -44,7 +46,11 @@ continuous_model:
   operator_slots: 8
   operator_rank: 8
   task_steps: 3
-  global_learning_rate: 0.001
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  include_identity: false
+  global_learning_rate: 0.003
   task_learning_rate: 0.05
   weight_decay: 0.0001
   updates_per_example: 1
@@ -56,8 +62,12 @@ discrete_model:
   operator_slots: 12
   operator_rank: 8
   task_steps: 3
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
   initial_temperature: 1.0
   final_temperature: 0.1
+  temperature_schedule: global
   global_learning_rate: 0.001
   task_learning_rate: 0.05
   weight_decay: 0.0001
