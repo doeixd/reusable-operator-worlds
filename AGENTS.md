@@ -537,3 +537,10 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   same earlier). Use at most 4-6 concurrent PyTorch processes, prefer 4
   for consolidating runs (the 512-route enumeration holds larger
   tensors), and never co-schedule installs with a running batch.
+- During a heavy batch, a hung shell command is evidence of LOAD, not of
+  batch failure: lifetimes only write summary.json at completion, so an
+  apparently empty output directory plus an unresponsive filesystem most
+  likely means the batch is mid-wave and the disk is churning. Check
+  artifact counts from a prior known state before killing anything, avoid
+  repo-wide find during batches (use targeted ls), and remember TaskStop
+  ends the parent shell while detached children survive as orphans.
