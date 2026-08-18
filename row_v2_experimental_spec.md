@@ -952,6 +952,46 @@ be treated as a new hypothesis, not an engineering detail.
 
 ---
 
+# 9.5 Development synthesis (running; full text in notes/v2-synthesis.txt)
+
+Five observations, each grounded in at least two independent V2 results,
+recorded before the sealed block so they cannot be reshaped by it:
+
+1. **Inference is cheap to do well and expensive to do cheaply.** Exact
+   posterior > everything (H7); learned one-shot compiler < plain SGD
+   (H10); hard commitment < soft mixing (V1, H8). Working hypothesis:
+   the continuous mixture wins because soft weights implement cheap
+   approximate Bayesian program inference. Zero-cost test added as step
+   006b below.
+2. **Allocation is easy; compression is hard — a currency mismatch.**
+   Near-perfect allocation from a penalty alone (H9a) versus universal
+   failure of bit-savings mechanisms (MDL gates, both consolidation
+   gates, two-part reversals): gradient descent natively optimizes nats
+   and never sees bits, so compression must be post-hoc and has so far
+   always used the wrong instrument.
+3. **Non-identifiability dictates: functional instruments only.**
+   Identity-based instruments failed every encounter with the
+   overcomplete regime (entropy gates, route agreement, slot indices);
+   behavioral instruments worked every time. Binding V3 design
+   principle; the predictive-equivalence gate is its application.
+4. **Amortization is sample-starved, not wrong.** The passing dream
+   falsifier (3x benefit ratio between rho endpoints) shows the compiler
+   learns the program distribution; 64 tasks cannot beat direct
+   optimization. Predicts cross-world scale. Kept idea: dream-benefit as
+   a ground-truth-free library-quality probe.
+5. **The open problem handed to V3: nothing wins both currencies.**
+   Per-task compilation cannot (183 bits/task against a 130k-bit store);
+   cross-task PROMOTION of shared residual structure is the only move
+   that attacks bits at scale.
+
+**006b (added analysis, zero compute): mixture-vs-posterior
+correlation.** Correlate each task's trained soft mixture weights
+(existing continuous artifacts) with its exact route posterior
+marginals (step 001 machinery) at exact reuse. Alignment upgrades the
+V1 headline with a mechanism: the reusable basis wins by approximating
+Bayesian program inference. Non-alignment falsifies observation 1's
+working hypothesis and is reported as such.
+
 # 10. Anticipated objections and positioning
 
 Written now, while neutral, so the eventual paper answers its reviewers

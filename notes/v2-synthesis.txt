@@ -1,0 +1,93 @@
+# V2 synthesis — what the results collectively suggest
+
+Written 2026-08-18, after steps 001-006 closed (H7, H6, 002b, H8, H9a,
+H10) with steps 007/008 in flight and the sealed block pending. Five
+observations, each grounded in at least two independent results, plus
+the follow-ups they generate. Incorporated into the V2 spec (section 9.5)
+in the same commit.
+
+## 1. Inference is cheap to do well and expensive to do cheaply
+
+The exact posterior beats everything, including Continuous (H7). The
+learned one-shot compiler loses to plain gradient descent (H10). Hard
+commitment loses to soft mixing everywhere (V1 discrete, H8). Meanwhile
+128 steps of SGD on a 24-dimensional code — the dumbest inference
+procedure available — beats every sophisticated alternative at this
+scale.
+
+Hypothesis this suggests: THE CONTINUOUS MIXTURE WINS BECAUSE IT IS
+SECRETLY AN APPROXIMATE POSTERIOR. Soft mixture weights can represent
+"probably slot 3, maybe slot 7" where hard routes and one-shot codes
+cannot, and gradient descent on them is a passable variational update.
+Testable at zero cost: correlate trained per-task mixture weights against
+the exact route posterior from step 001 — both already in artifacts. If
+they align, the V1 headline gains a mechanism sentence: the reusable
+basis wins because soft mixing implements cheap approximate Bayesian
+program inference. Best available follow-up analysis; added to the spec
+as step 006b.
+
+## 2. Allocation is easy; compression is hard — and the reason is the
+##    currency of the training signal
+
+H9a: near-perfect allocation (Spearman to -1.00) from nothing but a
+penalty and gradient descent. But every attempt to convert structure
+into shorter descriptions failed: MDL gates (collapse or nothing),
+consolidation gate v1 (fires backwards), gate v2 (barely fires), and
+both envelope wins reverse under the two-part code. Pattern: gradient
+descent natively optimizes nats, so anything expressible as
+"prediction loss under a penalty" works; nothing in the training signal
+sees bits, so all bit-savings mechanisms are post-hoc bolt-ons — and
+every bolt-on so far used the wrong instrument.
+
+## 3. Non-identifiability is the recurring villain; the design principle
+##    it dictates is: functional instruments only
+
+Identity-based instruments have failed every time they met the
+overcomplete regime: posterior entropy (gate v2, never fires because
+ties keep entropy high), route agreement (H7's MAP disagrees with online
+routes on 39/64 tasks while outperforming), raw slot-index metrics (V1,
+silently zero). Behavioral instruments have worked every time:
+functional distance vs untrained baseline, BMA prediction, frozen-
+library transfer. V3 design principle: nothing downstream of the library
+may reference identities — descriptors, gates, and merges must be
+functional. The pre-registered predictive-equivalence gate (compile when
+BMA and MAP behave identically, regardless of how many routes tie) is
+the direct application.
+
+## 4. The dream falsifier passing while H10 fails means amortization is
+##    sample-starved, not wrong
+
+The compiler learned the world's program distribution (3x dream-benefit
+ratio between rho 1 and rho 0 proves it) but cannot out-amortize direct
+optimization on 64 tasks of experience. "Mechanism sound, data starved"
+is exactly the profile that predicts cross-world scale works — the
+expert-iteration loop needs thousands of tasks; a lifetime has 64.
+
+Side idea worth keeping: DREAM-BENEFIT IS A LIBRARY-QUALITY PROBE.
+Fantasy data helps only insofar as the library matches the world, so the
+measured dream benefit is a self-administered, ground-truth-free measure
+of vocabulary quality — potentially valuable at scale, where ground
+truth is precisely what is lost.
+
+## 5. The open problem V2 hands V3: nothing yet wins both currencies
+
+Continuous wins nats at high recurrence; shared-residual wins nats
+everywhere in mixed worlds; nothing beats the fixed architectures in
+bits. Per-task compilation never could — 183 bits saved per task is
+noise against a 130k-bit residual store. The arithmetic singles out
+PROMOTION (merging shared residual structure across tasks into new
+library operators) as the only move on the board that attacks bits at
+scale, because de-duplication across tasks is where real description-
+length savings live. The two-currency tension is the project's thesis
+resurfacing: V1's lesson was that sharing is an investment measured in
+nats; V2's lesson is that the bits ledger needs a fundamentally
+different mechanism, because gradient descent speaks only one of the
+two languages.
+
+## One-sentence diagnosis
+
+V2 has established that a learner can read the economics of its world
+nearly perfectly (H9a) and exploit them online (V1; H7's mechanism), but
+cannot yet write them down compactly (H8, MDL, two-part reversals) — and
+the failures share one root: identity-based instruments applied to a
+non-identifiable representation.

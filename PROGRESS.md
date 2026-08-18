@@ -636,3 +636,14 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   distribution but within-lifetime data is insufficient for one-shot
   amortization to beat direct optimization. Pre-registered fallback
   applied: deferred to cross-world scale.
+- Recorded the V2 development synthesis (notes/v2-synthesis.txt; V2 spec
+  section 9.5) before the sealed block, so the observations cannot be
+  reshaped by it: inference is cheap to do well and expensive to do
+  cheaply; allocation is easy while compression is hard because gradient
+  descent optimizes nats and never sees bits; non-identifiability
+  mandates functional instruments only; amortization is sample-starved
+  rather than wrong (dream-benefit doubles as a ground-truth-free
+  library-quality probe); and nothing yet wins both currencies, singling
+  out cross-task promotion as V3's central mechanism. Added step 006b, a
+  zero-compute mixture-versus-posterior correlation test of the
+  approximate-Bayesian-inference mechanism hypothesis.
