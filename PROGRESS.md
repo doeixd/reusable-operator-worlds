@@ -419,3 +419,12 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - V1's central claim is now confirmatory: a reusable continuous substrate
   reduces lifetime prequential cost when and only when latent functional
   recurrence is sufficiently strong, with a reproducible crossover.
+- Completed release-gate editorial items: public-facing README (question,
+  metric, confirmed status, repository map, reproducibility statement), MIT
+  LICENSE, and resolution of the robustness-means citation (the ten-world
+  `reports/robustness/robustness.json` supersedes the unverifiable
+  worlds 0-2 figures).
+- Drafted the paper (`paper/draft.md`) under the RELEASE_PLAN write-up
+  requirements: dedicated circularity section, toy-as-instrument framing,
+  verbatim claims-not-made list, DreamCoder positioning, provenance
+  paragraph, and the linearity result leading per the amended headline rule.
