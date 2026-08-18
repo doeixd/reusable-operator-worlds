@@ -166,6 +166,27 @@ reach it; the online (EM-like) variant is then required before any claim
 stronger than "the ceiling is high enough." Never present 7a-post-hoc
 numbers in the same table as online lifetime numbers without this caveat.
 
+**STATUS (run 2026-08-18, reports/v2_route_posterior/): H7 STRONGLY
+SUPPORTED at the advantaged bound, world 0.** The exact posterior over
+the frozen per-task-annealed library scores -174,844 prequential
+(BMA-point convention; -173,423 MAP-point; -173,913 proper mixture) —
+better than online Continuous (-170,967) by ~3,900 nats and better than
+the online discrete learner (-146,146) by ~28,700. The discrete deficit
+is therefore inference cost in its entirety at this bound; the
+representation supports better-than-continuous prediction when inference
+is exact. Supporting diagnostics: median 28.5 examples to posterior
+entropy < 0.1 nat; entropy drops from the 7.45-nat uniform prior to 5.61
+after one example. The premature-commitment reading is reinforced by a
+non-identifiability observation: the posterior's MAP route matches the
+online learner's hard route on only 25/64 tasks (67% per position) while
+massively outperforming — several routes are behaviorally
+near-equivalent, and averaging over that ambiguity is precisely what
+hard routing cannot do. Caveats stand: advantaged bound (final library),
+one world; extend to worlds 1-2 libraries when per-task-anneal artifacts
+exist for them. Consequence for H8: consolidation's compilation gate has
+its instrument (the posterior) validated, and 28.5 examples is a first
+empirical anchor for how much evidence "sleep" should demand.
+
 ## H8 — Consolidation hypothesis **[contingent on H7 direction]**
 
 A learner that infers softly and consolidates ("wake/sleep": maintain a

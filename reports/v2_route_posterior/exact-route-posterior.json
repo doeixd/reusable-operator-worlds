@@ -1,0 +1,1190 @@
+{
+  "scope": "post-hoc exact route posterior over the frozen per-task-annealed discrete library; world seed 0, exact reuse; deliberately advantaged bound (final library, not concurrent training)",
+  "routes_enumerated": 1728,
+  "cumulative_prequential_gaussian_log_loss_bma_point": -174843.96300041853,
+  "cumulative_prequential_gaussian_log_loss_map_point": -173423.33393632263,
+  "cumulative_prequential_mixture_log_loss": -173913.17494021598,
+  "map_equals_true_route_fraction": 0.0,
+  "median_examples_to_entropy_below_0.1_nat": 28.5,
+  "mean_entropy_curve_first_16": [
+    5.6100947327220725,
+    3.9256769835115235,
+    2.886310713837024,
+    2.3353489077433216,
+    1.9781763722447165,
+    1.6963307065632653,
+    1.4952898609652057,
+    1.3223581598676515,
+    1.158163472000644,
+    1.0846583751428396,
+    0.9950761055979693,
+    0.9287650769672123,
+    0.8705885350384377,
+    0.814943236730664,
+    0.7931621292336751,
+    0.7248782090588993
+  ],
+  "reference_losses_world_0": {
+    "continuous_decoupled_tanh": -170967.3,
+    "discrete_per_task_anneal_online": -146146.1,
+    "discrete_global_anneal_online": -137321.0,
+    "dense_c": -166521.2
+  },
+  "tasks": [
+    {
+      "task_index": 0,
+      "true_route": [
+        1,
+        0,
+        3
+      ],
+      "map_route": [
+        9,
+        4,
+        7
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 21,
+      "entropy_after_1": 5.4215160555232345,
+      "entropy_after_4": 2.7970779378156267,
+      "entropy_after_16": 0.6213208817891592
+    },
+    {
+      "task_index": 1,
+      "true_route": [
+        1,
+        4,
+        2
+      ],
+      "map_route": [
+        9,
+        1,
+        0
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 34,
+      "entropy_after_1": 5.845286738690908,
+      "entropy_after_4": 2.8342183741755065,
+      "entropy_after_16": 0.7363678824996325
+    },
+    {
+      "task_index": 2,
+      "true_route": [
+        4,
+        4,
+        3
+      ],
+      "map_route": [
+        1,
+        6,
+        7
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.35631486848441,
+      "entropy_after_4": 2.5579069999818618,
+      "entropy_after_16": 0.7483134351057533
+    },
+    {
+      "task_index": 3,
+      "true_route": [
+        5,
+        4,
+        5
+      ],
+      "map_route": [
+        11,
+        1,
+        11
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 22,
+      "entropy_after_1": 5.875890974281356,
+      "entropy_after_4": 2.072526257019418,
+      "entropy_after_16": 0.29098386151688244
+    },
+    {
+      "task_index": 4,
+      "true_route": [
+        0,
+        0,
+        1
+      ],
+      "map_route": [
+        4,
+        10,
+        2
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 99,
+      "entropy_after_1": 5.723659980427317,
+      "entropy_after_4": 2.284663064189935,
+      "entropy_after_16": 1.4076668476575271
+    },
+    {
+      "task_index": 5,
+      "true_route": [
+        4,
+        3,
+        3
+      ],
+      "map_route": [
+        1,
+        8,
+        7
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 4.732142023156205,
+      "entropy_after_4": 2.088042647268304,
+      "entropy_after_16": 0.8806560764358963
+    },
+    {
+      "task_index": 6,
+      "true_route": [
+        0,
+        2,
+        4
+      ],
+      "map_route": [
+        4,
+        1,
+        0
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.162419767326462,
+      "entropy_after_4": 2.8920430339455874,
+      "entropy_after_16": 1.0595867434966677
+    },
+    {
+      "task_index": 7,
+      "true_route": [
+        4,
+        4,
+        0
+      ],
+      "map_route": [
+        1,
+        6,
+        4
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 28,
+      "entropy_after_1": 5.783682294554364,
+      "entropy_after_4": 1.8393092871872387,
+      "entropy_after_16": 0.38244681934612784
+    },
+    {
+      "task_index": 8,
+      "true_route": [
+        4,
+        5,
+        2
+      ],
+      "map_route": [
+        1,
+        11,
+        0
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 27,
+      "entropy_after_1": 6.653496237169678,
+      "entropy_after_4": 2.4193545296544756,
+      "entropy_after_16": 0.7937452781745227
+    },
+    {
+      "task_index": 9,
+      "true_route": [
+        5,
+        1,
+        1
+      ],
+      "map_route": [
+        11,
+        2,
+        9
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 4.944720250086751,
+      "entropy_after_4": 1.1065550365629961,
+      "entropy_after_16": 0.6928587371492966
+    },
+    {
+      "task_index": 10,
+      "true_route": [
+        4,
+        5,
+        0
+      ],
+      "map_route": [
+        1,
+        11,
+        4
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 21,
+      "entropy_after_1": 6.261784168582986,
+      "entropy_after_4": 2.340683286928859,
+      "entropy_after_16": 0.37801977334721026
+    },
+    {
+      "task_index": 11,
+      "true_route": [
+        1,
+        1,
+        0
+      ],
+      "map_route": [
+        9,
+        2,
+        4
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.069723720168993,
+      "entropy_after_4": 1.309401760457258,
+      "entropy_after_16": 0.5643960752114464
+    },
+    {
+      "task_index": 12,
+      "true_route": [
+        3,
+        4,
+        5
+      ],
+      "map_route": [
+        8,
+        1,
+        11
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 44,
+      "entropy_after_1": 5.9013359662110485,
+      "entropy_after_4": 2.775899233145858,
+      "entropy_after_16": 0.9431146455053424
+    },
+    {
+      "task_index": 13,
+      "true_route": [
+        4,
+        1,
+        2
+      ],
+      "map_route": [
+        1,
+        2,
+        0
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 29,
+      "entropy_after_1": 6.515777315024504,
+      "entropy_after_4": 3.3566102228533397,
+      "entropy_after_16": 0.5286899590807174
+    },
+    {
+      "task_index": 14,
+      "true_route": [
+        0,
+        1,
+        1
+      ],
+      "map_route": [
+        4,
+        2,
+        9
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.6959586579953,
+      "entropy_after_4": 1.8681857010760747,
+      "entropy_after_16": 0.693939480910311
+    },
+    {
+      "task_index": 15,
+      "true_route": [
+        2,
+        0,
+        1
+      ],
+      "map_route": [
+        0,
+        4,
+        2
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 18,
+      "entropy_after_1": 5.167790958033006,
+      "entropy_after_4": 1.632545485471978,
+      "entropy_after_16": 0.17787268284711769
+    },
+    {
+      "task_index": 16,
+      "true_route": [
+        3,
+        2,
+        4
+      ],
+      "map_route": [
+        8,
+        0,
+        1
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 6.266828560075384,
+      "entropy_after_4": 2.8683818035885884,
+      "entropy_after_16": 1.67390030281934
+    },
+    {
+      "task_index": 17,
+      "true_route": [
+        0,
+        4,
+        0
+      ],
+      "map_route": [
+        10,
+        5,
+        4
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 4.514217544490845,
+      "entropy_after_4": 2.876283644342449,
+      "entropy_after_16": 1.320952545722511
+    },
+    {
+      "task_index": 18,
+      "true_route": [
+        3,
+        4,
+        4
+      ],
+      "map_route": [
+        7,
+        6,
+        1
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 42,
+      "entropy_after_1": 5.330248364351207,
+      "entropy_after_4": 2.163907292241186,
+      "entropy_after_16": 1.091192195164579
+    },
+    {
+      "task_index": 19,
+      "true_route": [
+        2,
+        2,
+        3
+      ],
+      "map_route": [
+        0,
+        0,
+        7
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 24,
+      "entropy_after_1": 4.706111028627679,
+      "entropy_after_4": 1.211844433546565,
+      "entropy_after_16": 0.3323188497686505
+    },
+    {
+      "task_index": 20,
+      "true_route": [
+        0,
+        2,
+        3
+      ],
+      "map_route": [
+        4,
+        0,
+        7
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 31,
+      "entropy_after_1": 5.425338653769199,
+      "entropy_after_4": 1.9729846742879942,
+      "entropy_after_16": 0.5642876869739198
+    },
+    {
+      "task_index": 21,
+      "true_route": [
+        3,
+        5,
+        1
+      ],
+      "map_route": [
+        7,
+        11,
+        9
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 66,
+      "entropy_after_1": 5.749900655995804,
+      "entropy_after_4": 2.847285834169746,
+      "entropy_after_16": 0.6927792743614292
+    },
+    {
+      "task_index": 22,
+      "true_route": [
+        0,
+        2,
+        5
+      ],
+      "map_route": [
+        4,
+        0,
+        11
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 19,
+      "entropy_after_1": 6.370512702709783,
+      "entropy_after_4": 1.7362000634602615,
+      "entropy_after_16": 0.14897887142201743
+    },
+    {
+      "task_index": 23,
+      "true_route": [
+        2,
+        1,
+        0
+      ],
+      "map_route": [
+        0,
+        2,
+        4
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 40,
+      "entropy_after_1": 5.771897992736507,
+      "entropy_after_4": 2.3146452942511795,
+      "entropy_after_16": 0.275785681399168
+    },
+    {
+      "task_index": 24,
+      "true_route": [
+        1,
+        4,
+        0
+      ],
+      "map_route": [
+        2,
+        1,
+        4
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 28,
+      "entropy_after_1": 6.380191004573242,
+      "entropy_after_4": 2.6972699492533825,
+      "entropy_after_16": 0.56716635311257
+    },
+    {
+      "task_index": 25,
+      "true_route": [
+        4,
+        2,
+        3
+      ],
+      "map_route": [
+        1,
+        0,
+        8
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 49,
+      "entropy_after_1": 6.128996489610317,
+      "entropy_after_4": 3.3013505246565495,
+      "entropy_after_16": 0.6865694697422491
+    },
+    {
+      "task_index": 26,
+      "true_route": [
+        3,
+        2,
+        1
+      ],
+      "map_route": [
+        7,
+        0,
+        9
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 116,
+      "entropy_after_1": 5.209072451388783,
+      "entropy_after_4": 2.6165984415055945,
+      "entropy_after_16": 1.748309600952889
+    },
+    {
+      "task_index": 27,
+      "true_route": [
+        4,
+        4,
+        1
+      ],
+      "map_route": [
+        1,
+        6,
+        2
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 6.315053526438138,
+      "entropy_after_4": 3.4229849799645695,
+      "entropy_after_16": 0.8127619883228441
+    },
+    {
+      "task_index": 28,
+      "true_route": [
+        3,
+        1,
+        4
+      ],
+      "map_route": [
+        8,
+        9,
+        1
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 33,
+      "entropy_after_1": 5.978403396359993,
+      "entropy_after_4": 3.0817204524550044,
+      "entropy_after_16": 0.7225251606903627
+    },
+    {
+      "task_index": 29,
+      "true_route": [
+        4,
+        3,
+        4
+      ],
+      "map_route": [
+        6,
+        7,
+        1
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.719040326084016,
+      "entropy_after_4": 3.5665336451019867,
+      "entropy_after_16": 1.1688042951423627
+    },
+    {
+      "task_index": 30,
+      "true_route": [
+        3,
+        5,
+        5
+      ],
+      "map_route": [
+        7,
+        11,
+        11
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 19,
+      "entropy_after_1": 4.94238637476912,
+      "entropy_after_4": 1.3452274046024775,
+      "entropy_after_16": 0.14431278637120587
+    },
+    {
+      "task_index": 31,
+      "true_route": [
+        1,
+        5,
+        2
+      ],
+      "map_route": [
+        9,
+        11,
+        0
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 82,
+      "entropy_after_1": 5.383482455132719,
+      "entropy_after_4": 1.39960109538066,
+      "entropy_after_16": 0.40052051824934254
+    },
+    {
+      "task_index": 32,
+      "true_route": [
+        0,
+        1,
+        3
+      ],
+      "map_route": [
+        4,
+        9,
+        7
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 30,
+      "entropy_after_1": 5.93772241158482,
+      "entropy_after_4": 2.8737685357706595,
+      "entropy_after_16": 0.9162047942117106
+    },
+    {
+      "task_index": 33,
+      "true_route": [
+        0,
+        2,
+        2
+      ],
+      "map_route": [
+        4,
+        0,
+        0
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 12,
+      "entropy_after_1": 5.726940549255946,
+      "entropy_after_4": 0.6507927630869205,
+      "entropy_after_16": 0.03702453422524688
+    },
+    {
+      "task_index": 34,
+      "true_route": [
+        2,
+        5,
+        3
+      ],
+      "map_route": [
+        0,
+        11,
+        7
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 19,
+      "entropy_after_1": 5.994118310805465,
+      "entropy_after_4": 2.525909142219953,
+      "entropy_after_16": 0.17908962844568377
+    },
+    {
+      "task_index": 35,
+      "true_route": [
+        3,
+        4,
+        1
+      ],
+      "map_route": [
+        8,
+        1,
+        9
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 19,
+      "entropy_after_1": 6.231867935907399,
+      "entropy_after_4": 3.583715886175177,
+      "entropy_after_16": 0.1925753214773632
+    },
+    {
+      "task_index": 36,
+      "true_route": [
+        0,
+        0,
+        4
+      ],
+      "map_route": [
+        4,
+        10,
+        5
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 36,
+      "entropy_after_1": 4.893131917673879,
+      "entropy_after_4": 2.941847762234578,
+      "entropy_after_16": 0.6112716426371224
+    },
+    {
+      "task_index": 37,
+      "true_route": [
+        5,
+        3,
+        1
+      ],
+      "map_route": [
+        11,
+        7,
+        9
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 39,
+      "entropy_after_1": 5.484302637759249,
+      "entropy_after_4": 3.1367854322544697,
+      "entropy_after_16": 0.6618910311577527
+    },
+    {
+      "task_index": 38,
+      "true_route": [
+        4,
+        3,
+        0
+      ],
+      "map_route": [
+        1,
+        8,
+        4
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 21,
+      "entropy_after_1": 6.111839603568184,
+      "entropy_after_4": 3.0716902860734643,
+      "entropy_after_16": 0.8293460565425205
+    },
+    {
+      "task_index": 39,
+      "true_route": [
+        4,
+        4,
+        2
+      ],
+      "map_route": [
+        1,
+        6,
+        0
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 77,
+      "entropy_after_1": 6.300799887690111,
+      "entropy_after_4": 2.968880425442501,
+      "entropy_after_16": 0.9004111948494933
+    },
+    {
+      "task_index": 40,
+      "true_route": [
+        2,
+        4,
+        1
+      ],
+      "map_route": [
+        0,
+        6,
+        2
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 81,
+      "entropy_after_1": 6.207018320818573,
+      "entropy_after_4": 3.4539837698810505,
+      "entropy_after_16": 0.9462592451938885
+    },
+    {
+      "task_index": 41,
+      "true_route": [
+        1,
+        1,
+        4
+      ],
+      "map_route": [
+        9,
+        2,
+        1
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.8714042545294856,
+      "entropy_after_4": 2.7014655207122447,
+      "entropy_after_16": 1.3750547829181856
+    },
+    {
+      "task_index": 42,
+      "true_route": [
+        5,
+        4,
+        4
+      ],
+      "map_route": [
+        11,
+        6,
+        1
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 88,
+      "entropy_after_1": 5.577925825415601,
+      "entropy_after_4": 1.8188024266777616,
+      "entropy_after_16": 0.7396238791661421
+    },
+    {
+      "task_index": 43,
+      "true_route": [
+        4,
+        4,
+        4
+      ],
+      "map_route": [
+        1,
+        5,
+        6
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 98,
+      "entropy_after_1": 4.149144691237083,
+      "entropy_after_4": 1.8809471454764157,
+      "entropy_after_16": 1.2371521409434956
+    },
+    {
+      "task_index": 44,
+      "true_route": [
+        4,
+        5,
+        3
+      ],
+      "map_route": [
+        6,
+        11,
+        7
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 61,
+      "entropy_after_1": 5.943676475001215,
+      "entropy_after_4": 2.6990557228754426,
+      "entropy_after_16": 1.2224458857275284
+    },
+    {
+      "task_index": 45,
+      "true_route": [
+        1,
+        1,
+        1
+      ],
+      "map_route": [
+        9,
+        2,
+        9
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 87,
+      "entropy_after_1": 2.566901064695928,
+      "entropy_after_4": 1.7051994927337226,
+      "entropy_after_16": 1.371452298759929
+    },
+    {
+      "task_index": 46,
+      "true_route": [
+        5,
+        1,
+        4
+      ],
+      "map_route": [
+        11,
+        9,
+        1
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 31,
+      "entropy_after_1": 6.2967617037623445,
+      "entropy_after_4": 2.7282253007815274,
+      "entropy_after_16": 1.2666283813513737
+    },
+    {
+      "task_index": 47,
+      "true_route": [
+        2,
+        4,
+        0
+      ],
+      "map_route": [
+        0,
+        1,
+        4
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 24,
+      "entropy_after_1": 6.343589422565191,
+      "entropy_after_4": 2.6510209949389805,
+      "entropy_after_16": 1.0333873849346096
+    },
+    {
+      "task_index": 48,
+      "true_route": [
+        0,
+        5,
+        5
+      ],
+      "map_route": [
+        4,
+        11,
+        11
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 8,
+      "entropy_after_1": 4.775226110936945,
+      "entropy_after_4": 0.6827899831822762,
+      "entropy_after_16": 0.0028248989103792374
+    },
+    {
+      "task_index": 49,
+      "true_route": [
+        0,
+        3,
+        2
+      ],
+      "map_route": [
+        4,
+        7,
+        0
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 27,
+      "entropy_after_1": 6.369125600455518,
+      "entropy_after_4": 2.405649425696701,
+      "entropy_after_16": 0.5726922199263054
+    },
+    {
+      "task_index": 50,
+      "true_route": [
+        3,
+        1,
+        5
+      ],
+      "map_route": [
+        7,
+        9,
+        11
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 28,
+      "entropy_after_1": 5.873134267438006,
+      "entropy_after_4": 2.1328706395710393,
+      "entropy_after_16": 0.3472690371111899
+    },
+    {
+      "task_index": 51,
+      "true_route": [
+        0,
+        3,
+        4
+      ],
+      "map_route": [
+        4,
+        7,
+        1
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 26,
+      "entropy_after_1": 6.159737957592428,
+      "entropy_after_4": 3.025264309513465,
+      "entropy_after_16": 0.3551509250695601
+    },
+    {
+      "task_index": 52,
+      "true_route": [
+        1,
+        2,
+        2
+      ],
+      "map_route": [
+        2,
+        0,
+        0
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 27,
+      "entropy_after_1": 4.480475309296134,
+      "entropy_after_4": 1.3885940840611497,
+      "entropy_after_16": 0.4569392778612602
+    },
+    {
+      "task_index": 53,
+      "true_route": [
+        4,
+        4,
+        5
+      ],
+      "map_route": [
+        6,
+        1,
+        11
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.805907899965235,
+      "entropy_after_4": 2.7283392767320747,
+      "entropy_after_16": 1.252697783579297
+    },
+    {
+      "task_index": 54,
+      "true_route": [
+        1,
+        0,
+        5
+      ],
+      "map_route": [
+        9,
+        4,
+        11
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.467834114172167,
+      "entropy_after_4": 2.020821950192708,
+      "entropy_after_16": 0.5615365901705954
+    },
+    {
+      "task_index": 55,
+      "true_route": [
+        1,
+        1,
+        2
+      ],
+      "map_route": [
+        9,
+        2,
+        0
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.374305907249877,
+      "entropy_after_4": 1.27101284129995,
+      "entropy_after_16": 0.7949999771948414
+    },
+    {
+      "task_index": 56,
+      "true_route": [
+        4,
+        2,
+        4
+      ],
+      "map_route": [
+        6,
+        0,
+        1
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 4.757153766113744,
+      "entropy_after_4": 2.7904280845295704,
+      "entropy_after_16": 1.308359040624098
+    },
+    {
+      "task_index": 57,
+      "true_route": [
+        5,
+        3,
+        0
+      ],
+      "map_route": [
+        11,
+        7,
+        4
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 33,
+      "entropy_after_1": 5.877541304586634,
+      "entropy_after_4": 1.6365572133117392,
+      "entropy_after_16": 0.9784737262007066
+    },
+    {
+      "task_index": 58,
+      "true_route": [
+        4,
+        1,
+        0
+      ],
+      "map_route": [
+        1,
+        9,
+        4
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 21,
+      "entropy_after_1": 5.7804337360341025,
+      "entropy_after_4": 3.2136395625430842,
+      "entropy_after_16": 0.14074197915666875
+    },
+    {
+      "task_index": 59,
+      "true_route": [
+        2,
+        1,
+        1
+      ],
+      "map_route": [
+        0,
+        2,
+        9
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.372553182067032,
+      "entropy_after_4": 1.1621095462084365,
+      "entropy_after_16": 0.6973344938402739
+    },
+    {
+      "task_index": 60,
+      "true_route": [
+        1,
+        1,
+        5
+      ],
+      "map_route": [
+        9,
+        2,
+        11
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.340914588565073,
+      "entropy_after_4": 1.4623772159423711,
+      "entropy_after_16": 0.7380845315920997
+    },
+    {
+      "task_index": 61,
+      "true_route": [
+        4,
+        0,
+        0
+      ],
+      "map_route": [
+        5,
+        10,
+        4
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 25,
+      "entropy_after_1": 5.83162071302231,
+      "entropy_after_4": 2.9983083197104237,
+      "entropy_after_16": 0.44943360330840076
+    },
+    {
+      "task_index": 62,
+      "true_route": [
+        2,
+        4,
+        4
+      ],
+      "map_route": [
+        0,
+        1,
+        6
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": null,
+      "entropy_after_1": 5.832719908784554,
+      "entropy_after_4": 2.181605467872147,
+      "entropy_after_16": 0.6797689760540462
+    },
+    {
+      "task_index": 63,
+      "true_route": [
+        2,
+        1,
+        2
+      ],
+      "map_route": [
+        0,
+        2,
+        0
+      ],
+      "map_equals_true": false,
+      "examples_to_entropy_below_0.1_nat": 22,
+      "entropy_after_1": 6.007052012833235,
+      "entropy_after_4": 1.3720291773280984,
+      "entropy_after_16": 0.2849353563387503
+    }
+  ],
+  "map_equals_online_hard_route_fraction": 0.390625,
+  "map_online_per_position_agreement": 0.6666666666666666,
+  "map_equals_true_route_fraction_NOTE": "the original field compared learner slot indices to teacher primitive indices, which live in different spaces; it is meaningless without functional matching and is superseded by the slot-space agreement fields above"
+}

@@ -494,3 +494,17 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   not just signs; the hypernetwork-gap corollary promoted to step 002b;
   the 7b-dream falsifier protected from descoping; and the batch-size
   item updated to reflect the completed V1 ablation.
+- Ran V2 step 001, the exact route posterior over the frozen world-0
+  per-task-annealed discrete library (reports/v2_route_posterior/). H7 is
+  strongly supported at the advantaged bound: the posterior scores
+  -174,844 prequential (BMA-point), beating online Continuous by ~3,900
+  nats and the online discrete learner by ~28,700, so the discrete
+  deficit is entirely inference cost at this bound. Median 28.5 examples
+  to posterior concentration below 0.1 nat. The posterior's MAP route
+  matches the online hard route on only 25/64 tasks while outperforming,
+  indicating behavioral near-equivalence among routes; averaging over
+  that ambiguity is what hard commitment discards. One script defect was
+  found and corrected during analysis: the original true-route agreement
+  field compared learner slot indices with teacher primitive indices
+  (different spaces) and is superseded by slot-space agreement fields;
+  the report documents this.
