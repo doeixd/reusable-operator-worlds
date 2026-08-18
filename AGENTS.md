@@ -531,3 +531,9 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   automatically via the editable install. If new processes ever hang
   before any output, check for this class of stall first
   (`faulthandler.dump_traceback_later` locates it in seconds).
+- Memory, not cores, is the binding constraint for parallel lifetimes on
+  this machine: 8 concurrent consolidating lifetimes exhausted RAM and
+  took the whole session down (and 7 plain lifetimes plus pip did the
+  same earlier). Use at most 4-6 concurrent PyTorch processes, prefer 4
+  for consolidating runs (the 512-route enumeration holds larger
+  tensors), and never co-schedule installs with a running batch.
