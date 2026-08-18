@@ -626,3 +626,13 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   +7,153 nats) and loses 0/10 under the two-part code, reproducing the
   homogeneous prediction. H9a is supported; Component B of the sealed V2
   confirmation triggers per the pre-registered decision rule.
+- Completed V2 step 006 (H10, within-lifetime amortized inference). NOT
+  supported at 64-task scale: the warm-started compiler loses to plain
+  gradient descent 0/3 worlds at both rho endpoints (means -2,981 at
+  exact reuse, -1,052 at rho 0), and dream augmentation halves but never
+  erases the deficit. The protected dream falsifier passes: dream
+  benefit +1,554 at rho 1 versus +512 at rho 0, three times larger where
+  the library matches the world, so the compiler learns the program
+  distribution but within-lifetime data is insufficient for one-shot
+  amortization to beat direct optimization. Pre-registered fallback
+  applied: deferred to cross-world scale.

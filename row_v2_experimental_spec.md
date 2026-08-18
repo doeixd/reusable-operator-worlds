@@ -333,6 +333,20 @@ descent from scratch.
 gradient-descent baseline. 64 tasks may simply be too few; report the
 negative result and defer amortization to cross-world scale (Phase III).
 
+**STATUS (runs 2026-08-18, artifacts/v2_compiler/): NOT SUPPORTED at
+64-task scale; the pre-registered fallback applies.** The warm-started
+compiler LOSES to plain gradient descent 0/3 worlds at both endpoints
+(mean -2,981 nats at rho = 1; -1,052 at rho = 0). Dream augmentation
+halves the damage but never reaches positive (mean -1,426 at rho = 1).
+Decisively, the protected dream falsifier PASSES: the dream benefit is
++1,554 at rho = 1 versus +512 at rho = 0 — three times larger where the
+library matches the world — so the compiler demonstrably learns the
+world's program distribution; within-lifetime data is simply
+insufficient for one-shot amortization to beat 128 steps of direct
+optimization. Verdict wording: within-lifetime amortized inference is
+mechanism-sound but underpowered at this lifetime length; deferred to
+cross-world scale (Phase III) as pre-registered.
+
 Explicitly **not** V2 hypotheses: dynamic fork/merge under nonstationarity,
 macros/loops, programmable perception, learned optimizers, cross-world
 meta-training. See §7.
