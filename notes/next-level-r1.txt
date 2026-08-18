@@ -1,0 +1,1282 @@
+[Restored from Claude's context after Revision 2 overwrote the untracked
+original. Faithful reconstruction; if the source conversation is available,
+prefer that copy. — restoration note]
+
+Yes. I think this is probably the **highest-leverage direction now**. The current models are doing something slightly unnatural: every new task arrives, and we essentially say, "here are some free parameters; run gradient descent until you figure out what program this is."
+
+But if the system has learned a computational language, it should eventually learn **how to read examples and infer programs in that language**.
+
+And your current discrete result makes this concrete: the discrete system learns the library/routes quite well, but online route inference is expensive. So we should distinguish:
+
+[
+\boxed{
+\text{slow learning of the language}
+}
+]
+
+from
+
+[
+\boxed{
+\text{fast inference in the language}.
+}
+]
+
+I think there are several increasingly powerful ways to do that.
+
+# 1. First: replace task-code gradient descent with actual inference
+
+Right now, schematically:
+
+[
+c_0=0
+]
+
+then after each demonstration:
+
+[
+c_{t+1}=c_t-\eta\nabla_c L(x_t,y_t;c_t).
+]
+
+The task code is effectively being **relearned by optimization** every time.
+
+Instead we'd like:
+
+[
+c_t =
+C_\phi
+\left(
+{(x_1,y_1),\ldots,(x_t,y_t)},
+\mathcal P
+\right),
+]
+
+where (C_\phi) is a learned **compiler/inference network**.
+
+Give it demonstrations and the current library, and it answers:
+
+> "This looks like program (P_7\rightarrow P_2\rightarrow P_4)."
+
+or, in the continuous case:
+
+[
+c_t =
+(\alpha_1,\alpha_2,\alpha_3).
+]
+
+No gradient updates required.
+
+This is basically amortized inference: spend compute during lifetime/meta-training to learn an inference algorithm that makes future task inference cheap. Conditional Neural Processes are an old clean example of learning to infer a new function from a small context set, and Set Transformers give a natural way to encode unordered demonstrations. ([arXiv][1])
+
+For ROW, I'd probably use a Set Transformer initially because:
+
+[
+D_t={(x_i,y_i)}_{i=1}^t
+]
+
+is fundamentally a set.
+
+---
+
+# 2. Before even learning that compiler, we can calculate an almost exact one
+
+This is a beautiful thing about the current discrete setup.
+
+You have:
+
+[
+K=12
+]
+
+slots and:
+
+[
+L=3.
+]
+
+There are only:
+
+[
+12^3=1728
+]
+
+possible programs.
+
+So after demonstrations
+
+[
+D_t={(x_j,y_j)}_{j=1}^t,
+]
+
+literally evaluate all programs.
+
+For route (r):
+
+[
+E(r;D_t)
+=
+\sum_j
+\left|
+y_j-f_r(x_j)
+\right|^2.
+]
+
+Then:
+
+[
+p(r\mid D_t)
+\propto
+p(r)
+\exp
+\left[
+-\frac{E(r;D_t)}{2\sigma^2}
+\right].
+]
+
+After every new example, update the posterior.
+
+That's it.
+
+Now you have a proper **online program posterior**.
+
+For prediction you can either take:
+
+[
+r^*=\arg\max_r p(r\mid D_t)
+]
+
+or Bayesian-model-average:
+
+[
+\hat y
+=
+\sum_r
+p(r\mid D_t)f_r(x).
+]
+
+This could be *extremely informative*.
+
+Because now we can ask:
+
+> If the library is already learned, how many examples does an idealized inference procedure need to identify the correct program?
+
+If this suddenly gives phenomenal online performance, then we've proven that the discrete representation's problem really is **inference**, not representation.
+
+And we get another beautiful measurement:
+
+[
+H(R\mid D_t).
+]
+
+Program entropy.
+
+We can literally watch uncertainty collapse:
+
+[
+H(R\mid D_0)
+\rightarrow
+H(R\mid D_1)
+\rightarrow
+H(R\mid D_2)
+\rightarrow\cdots
+]
+
+That's a very clean measure of how much information each demonstration provides about the program.
+
+---
+
+# 3. Then amortize the exact compiler
+
+Once we've got the expensive 1,728-program inference procedure, train a neural network to imitate it.
+
+Teacher:
+
+[
+p_{\text{search}}(r\mid D).
+]
+
+Student:
+
+[
+q_\phi(r\mid D).
+]
+
+Train:
+
+[
+\mathrm{KL}
+\left(
+p_{\text{search}}
+;|;
+q_\phi
+\right).
+]
+
+Or don't even supervise its route identity. Just train it behaviorally:
+
+[
+L_{\text{query}}
+=
+\mathbb E_{(x_q,y_q)}
+\left[
+\ell(
+f_{q_\phi(D)}(x_q),
+y_q
+)
+\right].
+]
+
+Then we get:
+
+[
+\boxed{
+\text{slow exhaustive compiler}
+\rightarrow
+\text{fast learned compiler}.
+}
+]
+
+That seems like an extremely natural next experiment.
+
+And critically, the compiler would be trained **across tasks**.
+
+So after thousands of tasks it gets better at asking:
+
+> What evidence distinguishes these programs?
+
+rather than restarting gradient descent every time.
+
+---
+
+# 4. This is much closer to true in-context learning
+
+Imagine formatting every task internally as:
+
+[
+[(x_1,y_1),(x_2,y_2),\ldots,(x_n,y_n),x_q]
+]
+
+and asking:
+
+[
+C_\phi(D_n,x_q)\rightarrow y_q.
+]
+
+No weight updates.
+
+The task information exists entirely in activations/state.
+
+That's basically the structure of in-context learning.
+
+There is substantial theoretical work showing that Transformers and related sequence models can implement gradient-like learning dynamics in context, although the exact correspondence depends on the setting. ([arXiv][2])
+
+But for us, we can make the latent computation **explicit**:
+
+[
+D
+\xrightarrow{\text{compiler}}
+\text{program}
+\xrightarrow{\text{library}}
+y.
+]
+
+That gives us mechanistic access to the learned in-context learning algorithm.
+
+---
+
+# 5. But "train on the inputs" needs an important distinction
+
+You asked whether we could train on the inputs themselves.
+
+In current ROW:
+
+[
+x\sim\mathcal N(0,I)
+]
+
+for every task.
+
+So:
+
+[
+p(x\mid T_1)=p(x\mid T_2).
+]
+
+Therefore:
+
+[
+I(X;T)=0
+]
+
+by construction.
+
+The unlabeled input tells you **nothing about which task you're doing**.
+
+You need:
+
+[
+(x,y)
+]
+
+or equivalent feedback.
+
+That's actually scientifically useful. It means ROW cleanly separates:
+
+### Domain adaptation
+
+"What kind of inputs am I seeing?"
+
+from:
+
+### Task/program inference
+
+"What transformation maps these inputs to their outputs?"
+
+Test-time-training approaches can update an internal model using self-supervised objectives on the test stream, and recent TTT-style architectures explicitly use test-time learning as part of recurrent state. ([arXiv][3]) But on current ROW, unlabeled-input adaptation alone cannot solve program identification.
+
+For real language, both would matter because the input itself contains information about domain/task/context.
+
+---
+
+# 6. Feed the **error** into the learner
+
+I think this is even better than simply ingesting ((x,y)).
+
+At time (t), the learner predicted:
+
+[
+\hat y_t.
+]
+
+Then observes:
+
+[
+y_t.
+]
+
+Give the compiler:
+
+[
+e_t=y_t-\hat y_t.
+]
+
+And perhaps also:
+
+[
+x_t,\quad
+y_t,\quad
+\hat y_t,\quad
+c_t.
+]
+
+Then:
+
+[
+c_{t+1}
+=
+U_\phi(c_t,x_t,y_t,\hat y_t,e_t).
+]
+
+This is a **learned online update rule**.
+
+Instead of:
+
+[
+-\eta\nabla L
+]
+
+being hard-coded as the task learner, (U_\phi) learns:
+
+> Given what I predicted and how I was wrong, how should my current hypothesis about the program change?
+
+That's much more powerful.
+
+HyperMAML is one precedent for using a learned hypernetwork rather than ordinary gradient descent to generate fast task updates, and newer iterative-amortized-inference work explicitly frames in-context learning and learned optimization as variations on the same general problem. ([arXiv][4])
+
+This seems extremely aligned with what we want.
+
+---
+
+# 7. We can even feed it gradients without requiring it to *be* gradient descent
+
+Let:
+
+[
+g_t=\nabla_{c_t}L_t.
+]
+
+Then:
+
+[
+c_{t+1}
+=
+U_\phi(
+c_t,
+g_t,
+L_t,
+x_t,
+y_t,
+\hat y_t
+).
+]
+
+Now gradient is just **evidence**.
+
+The learned optimizer can decide:
+
+* take the gradient;
+* precondition it;
+* ignore part of it;
+* jump somewhere completely different;
+* infer that another primitive is likely;
+* reset;
+* fork hypotheses.
+
+This connects very naturally to learned optimizers.
+
+And since we can train (U_\phi) across thousands of procedurally generated ROW worlds, it can't memorize one program library.
+
+It would have to learn **how evidence should update program hypotheses in general**.
+
+---
+
+# 8. I think we should maintain a posterior, not just one task code
+
+This is especially important early in a task.
+
+After one example, perhaps programs:
+
+[
+A,\ B,\ C
+]
+
+are all plausible.
+
+Forcing:
+
+[
+c=\arg\max
+]
+
+immediately is brittle.
+
+Instead maintain:
+
+[
+q_t(z).
+]
+
+Then new evidence updates:
+
+[
+q_{t+1}(z)
+\propto
+q_t(z)
+p(y_t\mid x_t,z).
+]
+
+Continuous version:
+
+[
+q_t(c)=\mathcal N(\mu_t,\Sigma_t)
+]
+
+or a particle set.
+
+Discrete version:
+
+[
+q_t(r)
+]
+
+over programs.
+
+Prediction then marginalizes uncertainty.
+
+This could explain part of why Continuous currently adapts better: a continuous mixture implicitly allows **uncertain hypotheses**, while hard discrete routing commits too early.
+
+So one very useful control would be:
+
+[
+\boxed{
+\text{hard discrete MAP}
+\quad\text{vs.}\quad
+\text{posterior mixture over discrete programs}.
+}
+]
+
+If posterior mixing closes much of the gap, we've learned something very general:
+
+> The problem wasn't discreteness itself; it was premature commitment.
+
+---
+
+# 9. Now to your "serialize the primitives" idea
+
+I think **yes—but don't serialize their raw weights**.
+
+Instead, give every primitive a **functional descriptor**.
+
+Suppose:
+
+[
+P_i:z\rightarrow z'.
+]
+
+Compute:
+
+[
+d_i=F(P_i)
+]
+
+where (d_i) is a compact embedding representing what (P_i) does.
+
+There are several ways.
+
+Maybe a learned key:
+
+[
+d_i\in\mathbb R^{32}.
+]
+
+Better, perhaps generate it from functional behavior.
+
+Take fixed probe states:
+
+[
+Z_{\text{probe}}
+=
+{z_1,\ldots,z_m}.
+]
+
+Evaluate:
+
+[
+[
+P_i(z_1),
+\ldots,
+P_i(z_m)
+].
+]
+
+Compress those outputs:
+
+[
+d_i
+=
+E_{\text{func}}
+(
+P_i(Z_{\text{probe}})
+).
+]
+
+Now the compiler gets:
+
+[
+[d_1,d_2,\ldots,d_K]
+]
+
+alongside the demonstration set.
+
+It can attend to the library:
+
+[
+q=C(D)
+]
+
+[
+a_i
+=
+\operatorname{softmax}
+(q^\top d_i).
+]
+
+This is **content-addressed neural functions**.
+
+---
+
+# 10. Functional descriptors solve a future dynamic-library problem
+
+This matters enormously later.
+
+If compiler output is:
+
+```text
+slot 7
+```
+
+then the compiler is coupled to the exact current library.
+
+If we:
+
+* add primitive 13,
+* merge 4 and 8,
+* delete 5,
+* reorganize things,
+
+the compiler becomes invalid.
+
+Instead let it say:
+
+> "Find the operation whose functional descriptor best matches this request."
+
+Then:
+
+[
+\text{compiler}
+]
+
+and:
+
+[
+\text{library}
+]
+
+can evolve somewhat independently.
+
+This is probably necessary for true self-refactoring.
+
+You could add 100 new primitives and the compiler can inspect their descriptors without retraining a fixed 100-way classifier from scratch.
+
+---
+
+# 11. So yes: let the model **ingest its own library**
+
+Conceptually the in-context input could become:
+
+```text
+LIBRARY:
+  primitive d1
+  primitive d2
+  primitive d3
+  ...
+
+EXAMPLES:
+  x1 -> y1
+  x2 -> y2
+  x3 -> y3
+
+PROGRAM?
+```
+
+Except all of these would initially be vectors rather than text.
+
+The compiler attends jointly over:
+
+[
+\boxed{
+\text{library descriptions}
++
+\text{demonstrations}
+}
+]
+
+and emits:
+
+[
+\text{program}.
+]
+
+That's almost exactly what a human programmer does:
+
+> Here's the API I have available.
+> Here are examples of desired behavior.
+> Which functions should I call?
+
+That metaphor is actually quite close.
+
+---
+
+# 12. Programs themselves should definitely be serializable
+
+This is perhaps even more useful than serializing primitives.
+
+Instead of task state being an opaque 24-dimensional vector:
+
+[
+c_\tau,
+]
+
+we eventually want something like:
+
+```text
+CALL P7
+CALL P2
+CALL P4
+HALT
+```
+
+or later:
+
+```text
+CALL P7
+REPEAT 4 P2
+CALL MACRO_13
+HALT
+```
+
+Then completed tasks leave behind actual **program memories**.
+
+For task (T_i), store:
+
+[
+(\text{task signature}_i,\pi_i).
+]
+
+When a new task arrives:
+
+[
+D_{\text{new}}
+]
+
+retrieve similar old tasks:
+
+[
+\pi_{17},\pi_{38},\pi_{91}.
+]
+
+Then the compiler can start by **editing existing programs** rather than synthesizing from scratch.
+
+That's potentially much more sample-efficient.
+
+---
+
+# 13. Retrieval could give us another level of continual learning
+
+Imagine:
+
+```text
+NEW TASK DEMOS
+       |
+       v
+task signature
+       |
+       v
+retrieve similar old programs
+       |
+       v
+compiler
+       |
+       v
+new program
+```
+
+The persistent knowledge then has two components:
+
+[
+\boxed{\mathcal P=\text{primitive library}}
+]
+
+and
+
+[
+\boxed{\mathcal M=\text{program memory}}.
+]
+
+One is semantic/procedural atoms.
+
+The other is previously solved compositions.
+
+Then the model can learn at several levels:
+
+[
+\text{reuse primitive}
+]
+
+[
+\text{reuse subprogram}
+]
+
+[
+\text{modify old program}
+]
+
+[
+\text{invent new program}.
+]
+
+That's exactly what we'd eventually want.
+
+---
+
+# 14. There's a particularly nice wake/sleep loop here
+
+This is much more concrete than our earlier abstract sleep discussion.
+
+### Wake
+
+For each task, use whatever expensive inference is necessary:
+
+[
+\text{gradient optimization}
+]
+
+or:
+
+[
+\text{exhaustive program search}
+]
+
+or:
+
+[
+\text{beam search}.
+]
+
+Eventually get a good task program:
+
+[
+\pi_\tau^*.
+]
+
+### Sleep
+
+Take all completed:
+
+[
+(D_\tau,\pi_\tau^*)
+]
+
+pairs and train the compiler:
+
+[
+C_\phi(D_\tau,\mathcal P)
+\approx
+\pi_\tau^*.
+]
+
+Now inference that previously took:
+
+[
+50\text{ optimization steps}
+]
+
+may take:
+
+[
+1\text{ forward pass}.
+]
+
+That is **amortization of learning itself**.
+
+And then on future tasks, the compiler produces better initial guesses.
+
+---
+
+# 15. Don't necessarily imitate the final code exactly
+
+There is a subtle problem.
+
+Continuous codes may have symmetry:
+
+[
+c
+]
+
+and:
+
+[
+c'
+]
+
+could implement nearly identical functions.
+
+So training:
+
+[
+|C(D)-c^*|^2
+]
+
+might be unnecessarily restrictive.
+
+Better:
+
+[
+c=C(D)
+]
+
+then test behavior directly:
+
+[
+L=
+\mathbb E_{(x_q,y_q)}
+[
+\ell(f_c(x_q),y_q)
+].
+]
+
+The compiler only has to produce **a code that works**.
+
+This respects non-identifiability.
+
+---
+
+# 16. We could also use hybrid amortized + iterative inference
+
+Pure one-shot inference:
+
+[
+c=C_\phi(D)
+]
+
+may make mistakes.
+
+Pure optimization:
+
+[
+c_{t+1}=c_t-\eta g_t
+]
+
+is slow.
+
+Combine them.
+
+Start with:
+
+[
+c_0=C_\phi(D).
+]
+
+Then refine:
+
+[
+c_{k+1}
+=
+U_\phi(c_k,D,\nabla L).
+]
+
+Maybe only:
+
+[
+1-3
+]
+
+updates.
+
+This gives:
+
+[
+\boxed{
+\text{fast learned guess}
++
+\text{small iterative correction}.
+}
+]
+
+Recent work explicitly calls this kind of combination **iterative amortized inference**, positioning it between forward-pass in-context adaptation and optimization-based adaptation. ([arXiv][5])
+
+I suspect this will beat either extreme.
+
+---
+
+# 17. And I would train the compiler for the thing we actually care about
+
+Don't train:
+
+> recover the hidden teacher route.
+
+Train:
+
+> after (k) demonstrations, predict future examples.
+
+For:
+
+[
+k\in{1,2,4,8,16,32},
+]
+
+sample support/query splits.
+
+Then:
+
+[
+c_k=C_\phi(D_k,\mathcal P)
+]
+
+and optimize:
+
+[
+L_{\mathrm{meta}}
+=
+\sum_k
+w_k
+\mathbb E
+[
+\ell(
+f_{c_k}(x_q),
+y_q
+)
+].
+]
+
+Put larger weights on:
+
+[
+k=1,2,4,8
+]
+
+if we care about extremely fast adaptation.
+
+Now the training objective literally says:
+
+> **learn to infer useful programs from as little evidence as possible.**
+
+That's exactly online learning.
+
+---
+
+# 18. Add an information bottleneck to task state
+
+Otherwise the compiler may just encode the whole training set in:
+
+[
+c.
+]
+
+So constrain it.
+
+Discrete:
+
+[
+D(c)=L\log K.
+]
+
+Continuous:
+
+[
+D(c)\approx
+\text{quantized code bits}.
+]
+
+Then optimize:
+
+[
+L=
+L_{\text{query}}
++
+\beta D(c).
+]
+
+This means:
+
+> Explain these demonstrations using the shortest program you can express with the existing library.
+
+That's right back to our compression story.
+
+---
+
+# 19. Eventually allow a **temporary residual program**
+
+Suppose the existing library can't explain a new task.
+
+The compiler tries:
+
+[
+\pi_{\text{existing}}
+]
+
+but residual error remains high.
+
+Instead of immediately changing the slow library, create:
+
+[
+\Delta_\tau.
+]
+
+So:
+
+[
+f_\tau
+=
+f_{\pi_\tau}
++
+\Delta_\tau.
+]
+
+The temporary residual is fast/plastic.
+
+Then later, across many tasks, sleep asks:
+
+> Do several residuals share structure?
+
+If:
+
+[
+\Delta_1,\Delta_2,\Delta_3
+]
+
+contain the same transformation (Q), promote:
+
+[
+Q
+]
+
+into the permanent library.
+
+That gives us:
+
+[
+\boxed{
+\text{in-context inference}
+\rightarrow
+\text{temporary task learning}
+\rightarrow
+\text{long-term abstraction}.
+}
+]
+
+This seems like the right hierarchy.
+
+---
+
+# 20. I think the eventual architecture has **three timescales**
+
+This is where everything we've been discussing starts to cohere.
+
+### Immediate state
+
+Updated every demonstration:
+
+[
+h_{t+1}
+=
+U_\phi(h_t,x_t,y_t,e_t).
+]
+
+Represents current uncertainty/program hypothesis.
+
+No persistent weight update.
+
+### Task memory
+
+After enough evidence:
+
+[
+\pi_\tau,\Delta_\tau.
+]
+
+Persists for this task and maybe gets stored episodically.
+
+### Slow computational library
+
+[
+\mathcal P=
+{P_1,\ldots,P_K}.
+]
+
+Changes slowly through consolidation.
+
+So:
+
+[
+\boxed{
+\begin{array}{ccc}
+\text{context state}
+&
+\rightarrow
+&
+\text{task program}
+\
+\text{milliseconds/examples}
+&&
+\text{task lifetime}
+[4pt]
+&&\downarrow\
+&&
+\text{shared library}\
+&&
+\text{long lifetime}
+\end{array}
+}
+]
+
+This looks much more plausible to me than trying to make SGD update one giant homogeneous parameter tensor at every timescale.
+
+---
+
+# What I would actually ask the agent to build next
+
+Not all of this.
+
+I would do this sequence:
+
+1. **Exact discrete program posterior.** Score all 1,728 routes from demonstrations. Measure examples required for posterior concentration and resulting prequential loss.
+2. **Posterior-mixture discrete prediction.** Test whether maintaining uncertainty removes much of Continuous's advantage over hard discrete routing.
+3. **Amortized context encoder.** Set Transformer (D_t\rightarrow) route distribution / continuous task code. Train across completed tasks and evaluate pure forward-pass few-shot adaptation.
+4. **Amortized + refinement.** Initialize code from the encoder and allow 1–3 gradient or learned updates.
+5. **Execution-aware compiler.** Let the task encoder attend not just to demonstrations but to learned functional descriptors of current primitives.
+6. **Hindsight/wake-sleep compiler training.** Use expensive successful task inference as training data for making future inference cheap.
+7. **Only after that:** retrieval of old programs, temporary residuals, dynamic library consolidation.
+
+That's the one list I'd prioritize.
+
+---
+
+## The idea I find most exciting
+
+Ultimately, the system wouldn't ingest arbitrary serialized **weights**.
+
+It would ingest something much closer to its own API:
+
+[
+\boxed{
+\text{"Here are the computational operations I currently know."}
+}
+]
+
+alongside:
+
+[
+\boxed{
+\text{"Here are examples of the new thing I need to do."}
+}
+]
+
+and infer:
+
+[
+\boxed{
+\text{"Here is the program I should run."}
+}
+]
+
+So the internal analogue of an LLM prompt could literally be:
+
+[
+[
+\text{library descriptors};
+\text{retrieved programs};
+\text{demonstrations};
+\text{current error history}
+]
+]
+
+and its in-context output is not primarily prose.
+
+It is a **latent executable program**.
+
+Then learning proceeds on two distinct levels:
+
+[
+\boxed{
+\text{in context: learn how to use what you already know}
+}
+]
+
+and:
+
+[
+\boxed{
+\text{over the lifetime: learn new things worth knowing}
+}
+]
+
+I think that's the cleanest version of where this project could go.
+
+And it directly connects the current ROW finding—**program inference is becoming the bottleneck once the library exists**—to a much more ambitious goal: training the system so that the *ability to infer and compose its own learned primitives* becomes an accumulated skill in its own right.
+
+[1]: https://arxiv.org/abs/1807.01613?utm_source=chatgpt.com "Conditional Neural Processes"
+[2]: https://arxiv.org/abs/2212.10559?utm_source=chatgpt.com "Why Can GPT Learn In-Context? Language Models Implicitly Perform Gradient Descent as Meta-Optimizers"
+[3]: https://arxiv.org/abs/2407.04620?utm_source=chatgpt.com "Learning to (Learn at Test Time): RNNs with Expressive ..."
+[4]: https://arxiv.org/abs/2205.15745?utm_source=chatgpt.com "HyperMAML: Few-Shot Adaptation of Deep Models with Hypernetworks"
+[5]: https://arxiv.org/abs/2510.11471?utm_source=chatgpt.com "Iterative Amortized Inference: Unifying In-Context Learning and Learned Optimizers"

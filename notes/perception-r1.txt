@@ -1,0 +1,1657 @@
+[Restored from Claude's context after Revision 2 overwrote the untracked
+original. Faithful reconstruction; if the source conversation is available,
+prefer that copy. — restoration note]
+
+Yes. I think we should go **all the way with that idea**.
+
+Perception, attention, memory access, reasoning—these do not necessarily have to be monolithic architectural mechanisms. They could themselves be **programs assembled from reusable learned operations**.
+
+A useful way to think about it is:
+
+[
+\boxed{
+\text{input}
+\rightarrow
+\text{shared workspace}
+\rightarrow
+\text{learned perceptual program}
+\rightarrow
+\text{representation}
+}
+]
+
+rather than:
+
+[
+\text{input}\rightarrow\text{fixed perception network}\rightarrow\text{reasoning}.
+]
+
+There is already meaningful precedent for pieces of this. Slot Attention treats object perception as iterative competition and recurrent refinement of slots; Perceiver repeatedly attends from a latent workspace into a large input; RIMs divide recurrent computation into independently parameterized mechanisms selected through attention; and Neural Interpreters go particularly close to your intuition—they dynamically compose learned computational "functions," can reuse the same function multiple times, and were explicitly evaluated on visual inputs.
+
+But I think your version can go further.
+
+## Attention itself can be decomposed
+
+We currently talk about "attention" as though it were one operation:
+
+[
+\operatorname{Attention}(Q,K,V).
+]
+
+But functionally there are several things happening:
+
+[
+\text{form query}
+\rightarrow
+\text{match}
+\rightarrow
+\text{compete/select}
+\rightarrow
+\text{read}
+\rightarrow
+\text{integrate/update}.
+]
+
+Those could themselves become reusable primitives.
+
+For example, not necessarily human-readable ones, but schematically:
+
+```text
+LOCATE
+SELECT
+COMPARE
+BIND
+READ
+SUPPRESS
+GROUP
+SHIFT
+UPDATE
+```
+
+Then perception of one scene might execute:
+
+```text
+SELECT(...)
+BIND(...)
+SELECT(...)
+COMPARE(...)
+UPDATE(...)
+HALT
+```
+
+while another task on **the exact same sensory input** might execute:
+
+```text
+SELECT(...)
+GROUP(...)
+COUNT(...)
+HALT
+```
+
+So perception becomes **task-conditioned computation** rather than a fixed feature extractor.
+
+That seems much closer to how we actually want intelligence to behave.
+
+---
+
+## Consider one image
+
+Suppose there are six objects on a table.
+
+Question:
+
+> Which object is immediately left of the red triangle?
+
+The useful computation might look like:
+
+[
+\operatorname{Find}(\text{red})
+]
+
+[
+\rightarrow\operatorname{BindObject}
+]
+
+[
+\rightarrow\operatorname{ShiftSpatial}(\text{left})
+]
+
+[
+\rightarrow\operatorname{SelectObject}
+]
+
+[
+\rightarrow\operatorname{Report}.
+]
+
+Now ask:
+
+> How many blue objects are there?
+
+Completely different perceptual program:
+
+[
+\operatorname{SelectByProperty}(\text{blue})
+]
+
+[
+\rightarrow\operatorname{Group}
+]
+
+[
+\rightarrow\operatorname{Count}.
+]
+
+The sensory input didn't change.
+
+What changed is **how the system chose to perceive it**.
+
+That is important because it suggests:
+
+[
+\boxed{
+\text{perception is partly computation under a goal}
+}
+]
+
+rather than simply a static encoding stage.
+
+---
+
+# It could be recurrent too
+
+Imagine a shared perceptual workspace:
+
+[
+z_t.
+]
+
+At each step, a controller chooses a learned operation:
+
+[
+i_t=R(z_t,q)
+]
+
+where (q) represents task/current goal.
+
+Then:
+
+[
+z_{t+1}
+=
+P_{i_t}(z_t,X)
+]
+
+where (X) is persistent sensory input.
+
+So:
+
+```text
+LOOK_AT region
+BIND object
+LOOK_AT another region
+COMPARE
+LOOK_AGAIN
+HALT
+```
+
+could literally be a variable-length perceptual computation.
+
+Slot Attention already demonstrates the usefulness of repeatedly refining a representation of a static visual input rather than extracting it once: slots repeatedly compete for parts of the image and update themselves recurrently. Perceiver similarly uses iterative attention into the input to refine a compact latent representation. ([arXiv][1])
+
+Our twist would be:
+
+> **Don't require every iteration to perform the same attention algorithm. Let the system select and compose different learned perceptual operations.**
+
+---
+
+# And "attention" might actually be more like an instruction than a module
+
+This is a useful conceptual switch.
+
+Rather than:
+
+[
+\text{ATTENTION}=\text{one giant layer}
+]
+
+we might have primitives governing **information movement**:
+
+[
+\operatorname{READ}(X,\text{address})
+]
+
+[
+\operatorname{WRITE}(z,\text{slot})
+]
+
+[
+\operatorname{MATCH}(a,b)
+]
+
+[
+\operatorname{ROUTE}(a\rightarrow b)
+]
+
+[
+\operatorname{COMPETE}(S)
+]
+
+[
+\operatorname{BIND}(a,b).
+]
+
+These are like the instructions of a neural data-processing machine.
+
+Then conventional self-attention might eventually emerge as a useful **macro**:
+
+[
+\operatorname{SELFATTEND}
+=
+[
+\operatorname{MATCH},
+\operatorname{COMPETE},
+\operatorname{READ},
+\operatorname{UPDATE}
+].
+]
+
+That's a really interesting inversion.
+
+Instead of us declaring:
+
+> Transformers shall use attention.
+
+the learner might discover:
+
+> **this particular routing/comparison/update pattern occurs constantly; I'll package it as a reusable perceptual macro.**
+
+---
+
+# Neural Interpreters are close enough that we need to study them carefully
+
+Their framing is strikingly similar: they factor self-attention into learned computational units called functions; inputs are dynamically routed through sequences of these functions; the same function can be reused multiple times; and their functions have learned "signatures" and "codes" determining what inputs they apply to and how they compute.
+
+That's important prior art.
+
+But the difference from the research direction we're developing would be that we'd eventually want the system to discover not merely:
+
+[
+\text{which existing functions to execute}
+]
+
+but:
+
+[
+\boxed{
+\text{what functions should exist, how they should compose, and what control abstractions should be invented.}
+}
+]
+
+That's substantially more ambitious.
+
+---
+
+# This extends beyond perception
+
+You can imagine an entire architecture whose reusable library contains different *kinds* of computational operations.
+
+### Perceptual
+
+```text
+SELECT
+GROUP
+SEGMENT
+TRACK
+BIND
+```
+
+### Memory
+
+```text
+RETRIEVE
+STORE
+ASSOCIATE
+UPDATE
+```
+
+### Relational/reasoning
+
+```text
+COMPARE
+COMPOSE
+TRANSFORM
+TEST
+```
+
+### Control
+
+```text
+CALL
+REPEAT
+BRANCH
+HALT
+```
+
+But I would **not actually label these in the model**.
+
+Those are human interpretations.
+
+The model should learn transformations:
+
+[
+P_1,\ldots,P_K
+]
+
+and we can subsequently investigate whether their functions correspond to things like selection, binding, comparison, etc.
+
+---
+
+# This gives us a much more interesting notion of compositionality
+
+There are at least four levels now:
+
+[
+\textbf{representation composition}
+]
+
+features combine to represent things;
+
+[
+\textbf{computational composition}
+]
+
+operators combine to perform tasks;
+
+[
+\textbf{temporal composition}
+]
+
+operators are repeatedly called/looped;
+
+and:
+
+[
+\textbf{perceptual composition}
+]
+
+the very process by which the system constructs its representation is dynamically assembled.
+
+Current Transformers mostly give us strong versions of the first and some implicit version of the second.
+
+We're asking whether all four could be made explicit and learnable.
+
+---
+
+# This could solve a problem with "primitive interfaces"
+
+We've wondered:
+
+> How do we make arbitrary learned primitives composable?
+
+Perception gives us a natural answer:
+
+**a common workspace.**
+
+Instead of primitives owning incompatible representations:
+
+[
+P_A:\mathbb R^{512}\rightarrow\mathbb R^{1024}
+]
+
+[
+P_B:\mathbb R^{768}\rightarrow\mathbb R^{384},
+]
+
+require operations to interact through a stable workspace:
+
+[
+P_i:(Z,X,M)\rightarrow(Z',M').
+]
+
+Where:
+
+* (X) = sensory/input memory,
+* (Z) = active workspace,
+* (M) = persistent/working memory.
+
+Then different operations manipulate a shared representational substrate.
+
+That's much closer to an **instruction set architecture**.
+
+---
+
+# Even object representations could be dynamically created
+
+Slot Attention already shows that iterative attention can bind input features into object-like slots without explicit segmentation labels.
+
+Imagine combining that with our program idea.
+
+Instead of always running:
+
+```text
+SLOT_ATTENTION x 3
+```
+
+the system could do something like:
+
+```text
+CREATE_SLOT
+ATTEND
+BIND
+
+CREATE_SLOT
+ATTEND
+BIND
+
+COMPARE_SLOT
+MERGE_SLOT
+HALT
+```
+
+depending on what the scene and task require.
+
+A cluttered scene might allocate more iterations.
+
+A simple scene might halt quickly.
+
+A counting task might build many object slots.
+
+A color-classification task might never bother constructing full object structure.
+
+That is **adaptive perception**.
+
+---
+
+# This also changes what "in-context learning" could mean
+
+Suppose demonstrations show:
+
+```text
+image -> answer
+image -> answer
+image -> answer
+```
+
+The model doesn't merely infer:
+
+[
+\text{output function}.
+]
+
+It could infer:
+
+[
+\boxed{
+\text{how it should perceive inputs for this task}.
+}
+]
+
+That means the in-context compiler we were just discussing could output both:
+
+[
+\pi_{\mathrm{perception}}
+]
+
+and:
+
+[
+\pi_{\mathrm{reasoning}}.
+]
+
+Maybe there isn't even a sharp boundary.
+
+It's just:
+
+[
+\pi=
+[P_7,P_2,P_{19},P_4,\ldots].
+]
+
+Some early calls query sensory memory.
+
+Some manipulate workspace.
+
+Some retrieve long-term memory.
+
+Some produce an answer.
+
+The distinction between perception and reasoning becomes a matter of **which information the program operates on**, not two fundamentally separate architectures.
+
+---
+
+# And I think this suggests a much better long-term synthetic benchmark
+
+ROW currently gives the learner already-clean vectors:
+
+[
+x\in\mathbb R^{16}.
+]
+
+Eventually we should hide the useful structure behind a perceptual problem.
+
+For example, create scenes containing objects with:
+
+* positions,
+* shapes,
+* colors,
+* sizes,
+* relations.
+
+Start with structured sets rather than pixels so we don't spend compute learning vision.
+
+Tasks could require latent computations like:
+
+```text
+find objects with latent property A
+-> bind selected set
+-> apply relation B
+-> compare property C
+```
+
+But the model receives only:
+
+[
+\text{scene},\quad\text{task demonstrations},\quad y.
+]
+
+It has a shared learned operation library and recurrent workspace.
+
+Then ask:
+
+> Does it discover reusable perceptual/reasoning routines?
+
+Later replace the structured scene with pixels.
+
+That gives us a progression:
+
+[
+\boxed{
+\text{ROW vectors}
+\rightarrow
+\text{set-valued scenes}
+\rightarrow
+\text{images}
+\rightarrow
+\text{language/multimodal input}.
+}
+]
+
+---
+
+## The deepest version of the idea
+
+I think we should stop imagining:
+
+```text
+perception network
+↓
+LLM
+↓
+reasoning module
+↓
+memory
+```
+
+as necessarily the final architecture.
+
+It could instead look like:
+
+[
+\boxed{
+\text{input memories}
++
+\text{workspace}
++
+\text{learned primitive library}
++
+\text{controller}
+}
+]
+
+and then essentially everything is a learned program:
+
+[
+\text{perceiving}
+]
+
+[
+\text{remembering}
+]
+
+[
+\text{attending}
+]
+
+[
+\text{reasoning}
+]
+
+[
+\text{acting}.
+]
+
+The primitives need not correspond to our psychological categories at all.
+
+And that gives the learner a much more profound optimization problem:
+
+> **Find the reusable computational vocabulary that best compresses not merely the answers I produce, but the entire process by which I turn information into useful internal states and actions.**
+
+That's much closer to a general theory of learned computation than merely turning Transformer MLPs into MoE experts.
+
+[1]: https://arxiv.org/abs/2103.03206 "[2103.03206] Perceiver: General Perception with Iterative Attention"
+
+Yes. I think the idea becomes much cleaner if we stop treating **perception, attention, memory, and reasoning as separate architectural modules** and instead treat them as *different regimes of one programmable machine*.
+
+The important shift is:
+
+[
+\boxed{
+\text{Intelligence is not a pipeline of modules; it is a program operating over different stores of information.}
+}
+]
+
+The architecture then starts to look less like a Transformer and more like a tiny learned computer.
+
+## A possible core machine
+
+Give the system four persistent things:
+
+[
+X = \text{sensory/input memory}
+]
+
+[
+W = \text{small active workspace}
+]
+
+[
+M = \text{long-term / episodic memory}
+]
+
+[
+\mathcal P={P_1,\ldots,P_K} = \text{learned operation library}.
+]
+
+Then computation proceeds in microsteps.
+
+At step (t), a small controller sees the current workspace and goal:
+
+[
+c_t=C(W_t,g,s_t)
+]
+
+and chooses:
+
+[
+(i_t,a_t,q_t)=c_t,
+]
+
+meaning roughly:
+
+* which primitive (P_i);
+* what small arguments (a_t);
+* what information to access (q_t).
+
+The primitive executes:
+
+[
+W_{t+1}
+=
+P_{i_t}
+\left(
+W_t,
+R_X(X,q_t^X),
+R_M(M,q_t^M),
+a_t
+\right).
+]
+
+Eventually:
+
+[
+i_t=\mathrm{HALT}.
+]
+
+Now the distinctions we call perception, attention, memory, and reasoning are mostly about **what the program is doing with the stores**.
+
+A sequence dominated by reads from (X) and updates to (W) looks like perception.
+
+A sequence deciding *where* to read looks like attention.
+
+A sequence reading/writing (M) looks like memory.
+
+A sequence repeatedly transforming (W) looks like reasoning.
+
+But the machine itself doesn't need those psychological labels.
+
+---
+
+# Sensory access should not be free
+
+This is the architectural point I think matters most.
+
+If every primitive gets:
+
+[
+X
+]
+
+in full on every step, there is no real reason to learn perception or attention. An operator can just become a giant encoder of the entire input.
+
+So instead:
+
+[
+R_X(X,q)
+]
+
+must be a **bandwidth-limited read**.
+
+For an image maybe it returns:
+
+* a patch,
+* several selected tokens,
+* one region,
+* a pooled result.
+
+For text maybe:
+
+* selected token states,
+* a range,
+* top-(k) retrieved chunks.
+
+For an object set maybe:
+
+* several selected objects.
+
+And accessing information should cost something.
+
+Then the objective becomes something like:
+
+[
+L =
+L_{\text{task}}
++
+\lambda D
++
+\mu C
++
+\beta B_X
++
+\gamma B_M
+]
+
+where:
+
+* (D): stored computational description;
+* (C): operator execution cost;
+* (B_X): sensory bandwidth consumed;
+* (B_M): memory bandwidth consumed.
+
+Now attention becomes economically meaningful:
+
+> Don't process everything. Figure out what information is worth looking at.
+
+That is substantially different from simply inserting an attention layer.
+
+---
+
+# The workspace becomes the neural ABI
+
+We've repeatedly run into the question:
+
+> How can arbitrary learned primitives compose?
+
+A common workspace may be the answer.
+
+Require:
+
+[
+P_i:\mathcal W\rightarrow\mathcal W
+]
+
+or more generally:
+
+[
+P_i:
+(W,\text{read results},a)
+\rightarrow
+(W',\text{effects}).
+]
+
+Every operation speaks the same "machine language."
+
+That gives us closure:
+
+[
+P_3(P_7(P_{19}(W)))
+]
+
+is always syntactically valid.
+
+The system can repeatedly apply the same operator, switch operators, branch, and eventually create macros.
+
+Universal/recurrent Transformer work already demonstrates why shared-depth recurrence plus halting can decouple parameter count from computation depth, while Neural Interpreters show that learned functions can be dynamically routed and composed across depth and width. ([arXiv][1])
+
+Our additional question would be:
+
+> **Can the vocabulary of operations and higher-level programs itself become learned and compressible?**
+
+---
+
+# But the workspace probably shouldn't be one vector
+
+I increasingly think:
+
+[
+W\in\mathbb R^d
+]
+
+will be too restrictive.
+
+Something more like:
+
+[
+W={w_1,\ldots,w_S}
+]
+
+—a small collection of exchangeable slots—makes more sense.
+
+Each slot can hold a current entity, relation, hypothesis, intermediate value, etc.
+
+Slot Attention is relevant here because it shows that iterative competitive attention can learn to bind perceptual input into object-like slots rather than forcing everything into one distributed vector. ([arXiv][2])
+
+Then primitives can operate on selected slots:
+
+[
+P_i(w_a,w_b;a_t)\rightarrow w_c.
+]
+
+Now something analogous to:
+
+```text
+find object
+bind object to slot 2
+read neighboring object
+compare slots 2 and 4
+write result to slot 1
+```
+
+is possible without us hard-coding what an "object" is.
+
+---
+
+# This suggests a learned type system
+
+There is a nasty problem otherwise.
+
+Suppose (P_7) is only meaningful on a slot containing something like an object representation, while (P_{12}) expects a scalar-ish relation.
+
+If all vectors have shape 128, the program is **dimensionally valid but semantically nonsense**.
+
+So primitives may need learned signatures.
+
+Something like:
+
+[
+s_i^{\text{in}}
+]
+
+and:
+
+[
+s_i^{\text{out}}.
+]
+
+A workspace state also carries a soft semantic type:
+
+[
+\tau(w).
+]
+
+The routing score could contain:
+
+[
+\operatorname{compat}
+(
+\tau(w),
+s_i^{\text{in}}
+).
+]
+
+Execution produces a new type:
+
+[
+\tau(w')
+\approx s_i^{\text{out}}.
+]
+
+Not human-written types like:
+
+```text
+Object
+Number
+Color
+```
+
+but learned compatibility structure.
+
+This is similar in spirit to Neural Interpreters' learned routing among reusable functions, though we're pushing toward a richer execution-language interpretation. Neural Interpreters already demonstrate end-to-end learned routing through sequences of reusable computational functions. ([arXiv][3])
+
+This also helps solve search:
+
+instead of choosing among every operation,
+
+[
+P_1,\ldots,P_{1000},
+]
+
+only operations whose learned input signature is compatible become plausible.
+
+---
+
+# Attention may not even be a primitive
+
+This is another thing I'm reconsidering.
+
+Maybe we shouldn't have:
+
+```text
+ATTENTION(...)
+```
+
+as one operation.
+
+Attention might emerge from several more primitive operations:
+
+[
+\mathrm{QUERY}
+]
+
+[
+\mathrm{MATCH}
+]
+
+[
+\mathrm{COMPETE}
+]
+
+[
+\mathrm{READ}
+]
+
+[
+\mathrm{BIND}.
+]
+
+Conventional attention would then be a frequently useful macro:
+
+[
+\mathrm{ATTEND}
+=
+[
+\mathrm{QUERY},
+\mathrm{MATCH},
+\mathrm{COMPETE},
+\mathrm{READ}
+].
+]
+
+And eventually the system might compile that macro into a fused implementation because it occurs constantly.
+
+This gets at the **granularity problem**.
+
+We shouldn't decide in advance whether attention is:
+
+* an atomic primitive;
+* five primitives;
+* a macro;
+* a parameterized family.
+
+The MDL/compute objective should decide.
+
+That may be one of the deepest aspects of the whole project:
+
+[
+\boxed{
+\text{learn not only what computations exist, but at what level they deserve to be atomic.}
+}
+]
+
+---
+
+# Primitive granularity should depend on reuse
+
+Imagine the repeated sequence:
+
+[
+A\rightarrow B\rightarrow C.
+]
+
+Initially the machine represents three calls.
+
+If this happens constantly:
+
+[
+[A,B,C],
+[A,B,C],
+[A,B,C],
+\ldots
+]
+
+then storing a macro:
+
+[
+M=[A,B,C]
+]
+
+reduces program description length.
+
+If it happens *extremely* often and compute matters, perhaps compile:
+
+[
+Q_M\approx C(B(A(\cdot))).
+]
+
+So you naturally get three levels:
+
+[
+\boxed{
+\text{interpreted composition}
+\rightarrow
+\text{macro}
+\rightarrow
+\text{fused neural primitive}.
+}
+]
+
+And it should be reversible.
+
+If (M) stops being useful, inline/delete it.
+
+This is much more like a compiler/runtime system than conventional neural architecture search.
+
+---
+
+# Perception then becomes active hypothesis testing
+
+Here's where it gets really interesting.
+
+Suppose the workspace currently contains two hypotheses:
+
+[
+H_1,\ H_2.
+]
+
+The system asks:
+
+> What sensory observation would most distinguish these?
+
+Controller chooses a read:
+
+[
+q^*=
+\arg\max_q
+\mathbb E[
+\text{information gain from }R_X(X,q)
+].
+]
+
+We don't necessarily need to explicitly compute that information-theoretic quantity. The controller can learn the behavior.
+
+But functionally, perception becomes:
+
+[
+\boxed{
+\text{state hypothesis}
+\rightarrow
+\text{choose informative observation}
+\rightarrow
+\text{update hypothesis}
+\rightarrow\cdots
+}
+]
+
+rather than:
+
+[
+\text{encode entire image once}.
+]
+
+Recurrent object-centric and modular models already provide partial precedents for repeated, selective processing: Slot Attention iteratively refines object slots, while RIMs selectively activate independent recurrent mechanisms and let them communicate through attention bottlenecks. ([arXiv][2])
+
+The distinctive step here would be making **which perceptual transformation is performed next** part of the learned program.
+
+---
+
+# In-context learning becomes program induction over this machine
+
+This connects directly to what we were discussing immediately before this.
+
+Suppose the model is given demonstrations:
+
+[
+D=
+{
+(X_1,y_1),
+(X_2,y_2),
+(X_3,y_3)
+}.
+]
+
+It could infer not merely an output mapping.
+
+It infers a **processing policy**:
+
+[
+\pi_D.
+]
+
+For example one task might imply:
+
+```text
+READ by color
+BIND selected item
+READ spatial neighbor
+COMPARE
+HALT
+```
+
+while another implies:
+
+```text
+READ all likely objects
+GROUP by shape
+ACCUMULATE
+HALT
+```
+
+So demonstrations specify:
+
+[
+\boxed{
+\text{how to look}
++
+\text{what to compute}.
+}
+]
+
+That gives a substantially stronger notion of in-context learning.
+
+The context changes the **computation graph itself**.
+
+---
+
+# And programs should probably be distributions initially
+
+We learned something from the current discrete/continuous ROW experiments conceptually: exact program commitment is expensive.
+
+So during early perception/inference the system shouldn't necessarily have:
+
+[
+\pi=P_7,P_3,P_8.
+]
+
+It may have uncertainty:
+
+[
+q(\pi\mid D).
+]
+
+Or even uncertainty at each next instruction:
+
+[
+q(i_t\mid W_t,D).
+]
+
+Continuous execution is useful because it can maintain ambiguous hypotheses.
+
+Then later:
+
+[
+q(i_t)
+]
+
+sharpens.
+
+This suggests a natural wake/sleep behavior:
+
+### Wake
+
+Soft, uncertain, flexible computation.
+
+### Sleep
+
+Compress stable recurring behavior into deterministic/discrete programs.
+
+That's becoming a stronger explanation for why both continuous and discrete representations may be useful rather than competitors.
+
+---
+
+# The controller must be deliberately weak
+
+Otherwise everything collapses.
+
+If:
+
+[
+C
+]
+
+is a 100-billion-parameter Transformer, then:
+
+```text
+P1
+P2
+P3
+```
+
+can be meaningless decorations while the controller solves everything itself.
+
+So the controller should mostly do:
+
+[
+\text{routing + small arguments + addressing}.
+]
+
+Heavy transformations should happen in:
+
+[
+\mathcal P.
+]
+
+And its complexity belongs in:
+
+[
+D.
+]
+
+Likewise, the arguments:
+
+[
+a_t
+]
+
+must be narrow enough that they can't secretly encode new operators.
+
+This is exactly the same accounting rule we've discovered repeatedly:
+
+> **No component gets to hide complexity for free.**
+
+---
+
+# Memory should work the same way as perception
+
+Sensory memory:
+
+[
+R_X(X,q).
+]
+
+Long-term memory:
+
+[
+R_M(M,q).
+]
+
+So retrieval is literally another program operation.
+
+A task could execute:
+
+```text
+READ sensory input
+FORM query
+READ long-term memory
+COMPARE
+WRITE workspace
+READ another memory
+HALT
+```
+
+Now retrieval isn't bolted onto the LLM as "RAG."
+
+It's part of the computational language.
+
+And different tasks can learn different memory-access programs.
+
+---
+
+# Learning itself may become a program
+
+This is where the recursion gets interesting.
+
+What happens after observing:
+
+[
+(x,y,\hat y)?
+]
+
+Right now SGD is external machinery.
+
+But eventually the machine could have learned update operations:
+
+[
+P_{\text{credit}}
+]
+
+[
+P_{\text{bind-new-memory}}
+]
+
+[
+P_{\text{revise-hypothesis}}
+]
+
+[
+P_{\text{fork-program}}
+]
+
+etc.
+
+Then:
+
+[
+\boxed{
+\text{the process of learning from an example is itself a learned program}.
+}
+]
+
+That reconnects directly to the learned-optimizer project.
+
+We could have:
+
+[
+\pi_{\text{infer}}
+]
+
+for solving a problem,
+
+and:
+
+[
+\pi_{\text{learn}}
+]
+
+for modifying state/library after feedback.
+
+Eventually those might share primitives.
+
+Then the distinction between:
+
+> architecture,
+
+> inference algorithm,
+
+> learning algorithm,
+
+starts to blur.
+
+---
+
+# I think there are three things the system should learn
+
+This helps organize the whole research program.
+
+### What
+
+The representations:
+
+[
+W,M.
+]
+
+What state should be retained?
+
+### How
+
+The operations:
+
+[
+\mathcal P.
+]
+
+What reusable transformations should exist?
+
+### When
+
+The program/controller:
+
+[
+\pi.
+]
+
+When should each operation be called?
+
+And then one level above all of those:
+
+### How to change the language
+
+[
+\mathcal C.
+]
+
+When should operations be created, merged, parameterized, macro-ized, looped, compiled?
+
+That fourth level is the self-refactoring compiler.
+
+---
+
+# This suggests a much better experimental ladder
+
+I wouldn't jump to pixels.
+
+I would move from current ROW to **structured perceptual worlds**.
+
+Imagine each input is a set:
+
+[
+X={o_1,\ldots,o_N}
+]
+
+where each object has latent:
+
+[
+(\text{position},\text{features},\text{relations}).
+]
+
+But scramble/project these into learned embeddings so the answer isn't handed to the learner.
+
+Give the machine:
+
+* read-only input memory (X);
+* 4–8 workspace slots;
+* 8–16 learned operators;
+* small controller;
+* bandwidth-limited READ;
+* HALT.
+
+Tasks are generated from hidden programs like:
+
+```text
+select by latent feature
+follow relation
+compare property
+```
+
+but the learner only sees examples.
+
+Now compare:
+
+[
+\text{fixed encoder}
+]
+
+versus:
+
+[
+\text{programmable perception}.
+]
+
+The crucial generalization tests would be:
+
+* new combinations of known perceptual operations;
+* more objects than training;
+* more distractors;
+* longer reasoning chains;
+* new tasks requiring different ways of inspecting the same scene;
+* limited sensory-read budgets.
+
+If programmable perception only wins when we restrict input bandwidth, that is itself informative.
+
+---
+
+# Then add an especially clean test
+
+Present **the same underlying scene** under multiple tasks.
+
+That matters.
+
+If task A asks about color relations and task B asks about spatial structure, then a conventional encoder produces essentially the same early representation.
+
+Our program machine can execute different perceptual trajectories:
+
+[
+\pi_A(X)\neq\pi_B(X).
+]
+
+We can measure:
+
+* which objects were read;
+* how many reads occurred;
+* which operations executed;
+* workspace trajectories;
+* final accuracy.
+
+That would demonstrate:
+
+[
+\boxed{
+\text{the task changes how the model perceives, not merely how it reads out a fixed representation.}
+}
+]
+
+That would be a pretty compelling demonstration.
+
+---
+
+# And there is a surprising scaling implication
+
+A conventional large model spends roughly the same layer machinery processing every token/input.
+
+A programmable machine can make **parameters and computation increasingly independent**.
+
+Store:
+
+[
+K
+]
+
+reusable operations.
+
+Easy input:
+
+[
+3\text{ calls}.
+]
+
+Hard input:
+
+[
+30\text{ calls}.
+]
+
+Different task:
+
+[
+\text{different sequence of the same calls}.
+]
+
+Recurrent Transformer work already motivates recurrence partly because it allows computation depth to adapt to input complexity without proportionally increasing parameter count. ([arXiv][1])
+
+Our stronger hypothesis would be that variable-depth execution should use **different reusable operations**, not merely the same whole Transformer block repeatedly.
+
+So instead of:
+
+[
+F^n(x),
+]
+
+we have:
+
+[
+P_{i_n}\circ\cdots\circ P_{i_1}(x).
+]
+
+That is far more expressive per stored parameter.
+
+---
+
+## The version of the architecture I currently find most compelling
+
+Conceptually:
+
+[
+\boxed{
+\begin{array}{c}
+\text{large read-only sensory memory }X\
+\
+\updownarrow;\text{bandwidth-limited READ}\
+\
+\text{small slot-based workspace }W\
+\
+\updownarrow\
+\
+\text{globally reusable operator library }\mathcal P\
+\
+\updownarrow\
+\
+\text{small program controller + call stack}\
+\
+\updownarrow\
+\
+\text{persistent episodic/semantic memory }M
+\end{array}
+}
+]
+
+Then the outer learning system gradually compresses useful execution patterns into:
+
+[
+\text{better operators},
+]
+
+[
+\text{parameterized operators},
+]
+
+[
+\text{macros},
+]
+
+[
+\text{loops},
+]
+
+and potentially:
+
+[
+\text{better learning/update programs}.
+]
+
+I think that is a much more coherent destination than the original "turn a dense Transformer into an MoE" idea.
+
+The core hypothesis has become:
+
+[
+\boxed{
+\textbf{A general learner should not merely learn representations inside a fixed computation graph. It should learn the reusable operations, information-access strategies, and control programs that construct those representations in the first place.}
+}
+]
+
+And the compression principle provides the mechanism for deciding what deserves to become reusable.
+
+That, to me, is now the deepest version of the project.
+
+[1]: https://arxiv.org/html/2402.00976v1 "Investigating Recurrent Transformers with Dynamic Halt"
+[2]: https://arxiv.org/abs/2006.15055 "Object-Centric Learning with Slot Attention"
+[3]: https://arxiv.org/abs/2110.06399 "Dynamic Inference with Neural Interpreters"

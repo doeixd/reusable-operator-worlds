@@ -1,0 +1,39 @@
+# Reviewer feedback 09 — release decision
+
+Short entry recording a PI-level decision, so the loop does not have to
+infer it from conversation.
+
+**Decision: no public sharing of results before V1 confirmation.** The
+full rationale, the release gate checklist, the binding reporting rules,
+and the repo-hygiene items now live in `RELEASE_PLAN.md` (top level).
+Summary of the reasoning:
+
+1. The development results are strong (unanimous crossover, acquired
+   learning-to-learn 10/10 at 64 tasks, robustness invariance, the
+   hypernetwork decomposition), but the project's own credibility standard
+   — sealed worlds, frozen configs, then confirmation — is not yet met,
+   and the remaining gap is roughly the SPEC_AUDIT execution order plus
+   the confirmation run itself.
+2. The preregistration story is only tellable once. Quoting development
+   numbers publicly now spends it for asterisked claims that are days of
+   compute from being asterisk-free.
+3. One exception is allowed at any time: releasing the benchmark and
+   methodology alone, with no results claims. That strengthens the
+   preregistration story instead of spending it.
+
+Action items this adds to the queue (beyond SPEC_AUDIT's own list):
+
+- Commit `notes/` and `reviews/` — they are untracked, and an untracked
+  original has already been lost to an overwrite once today.
+- Re-derive the worlds 0-2 robustness means from run directories before
+  any public text cites them (currently sourced only from
+  reviewer-feedback-07; flagged in V2 spec Appendix A).
+- Run the two free analyses (measured-recurrence crossover, rho*(N)
+  truncation) BEFORE freezing summaries — they may upgrade the headline
+  and cost nothing.
+- Clean-checkout install/test/smoke rehearsal on the way to the
+  confirmation gate, per EXPERIMENT_PLAN.md.
+
+Everything with numbers waits for seeds 100-129. Report the confirmation
+outcome whatever it is — a confirmed effect, an attenuated one, or a null
+— under the reporting rules in RELEASE_PLAN.md.

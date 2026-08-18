@@ -1,0 +1,164 @@
+# Reviewer feedback 05 — crossover replication, falsified transfer hypothesis,
+# and the lifetime dimension
+
+Scope: response to the rho-sweep results on development worlds 0-2 and the
+analysis in notes/crossover.txt. Also records a retraction, updates the
+Phase II plan (mixed-rho world promoted above Benchmark C), and specifies the
+highest-information-per-FLOP analysis currently available (crossover vs
+lifetime length, largely free from existing logs).
+
+---
+
+## 1. A retraction, on the record
+
+Reviewer-feedback-05's author (this reviewer) previously flagged the transfer
+dissociation — "abstraction quality improves before it pays for itself"
+(learnings.txt s4) — as the most novel empirical nugget and a headline-figure
+candidate. It failed replication: at rho = 0.25/0.5/0.75, Continuous wins
+novel transfer on only one of three worlds and its mean novel NMSE is worse
+at all three points. The retraction is recorded here so the write-up cannot
+inherit the earlier enthusiasm by accident.
+
+Two consequences:
+- Adopt the simpler picture: weak recurrence -> sharing is harmful bias;
+  strong recurrence -> sharing is useful inductive bias. One crossover
+  affecting both lifetime cost and transfer, not a three-regime story.
+- The rho=1 checkpoint learning-to-learn result (32-shot novel NMSE gain
+  ~6.4x vs ~2.3x for Dense-C) is ALSO still primarily a world-0 result and
+  now deserves proportionate suspicion until replicated. Both this reviewer
+  and reviewer-02 were seduced once by a world-0-only effect; do not let it
+  happen twice. Prioritize checkpoint replication across worlds 1-2 before
+  citing that ratio anywhere public.
+
+The falsification itself is an asset: state it explicitly in the report
+("the proposed early-transfer intermediate regime was not supported"), as
+notes/crossover.txt recommends. It will buy reviewer trust.
+
+---
+
+## 2. The crossover result is strong; two analyses will make it stronger
+
+Crossings at configured rho of 0.811 / 0.852 / 0.851 across three
+independently generated worlds, with unanimous sign patterns on both sides,
+is not architecture noise. Endorsed as-is: "crossover," not "phase
+transition"; interpolation stays descriptive; expand to worlds 3-9 with
+frozen configurations before anything new.
+
+### 2.1 Re-coordinate the crossover in measured recurrence space (free)
+
+Per notes/crossover.txt: interpolate each world's crossing in measured
+functional recurrence r rather than configured rho. The diagnostics already
+exist per run; this is pure analysis. If r*_W aligns more tightly than
+rho*_W across worlds despite world-to-world variation in the rho -> r
+mapping, the claim upgrades from "our knob has a crossover" toward "an
+invariant of the learning problem." Report both coordinates regardless.
+
+### 2.2 Crossover vs lifetime length (the decisive mechanism test, ~free)
+
+The amortization account N * s(r) > C makes a falsifiable prediction the
+static bias-variance account does not: the crossover must MOVE with lifetime
+length. More tasks to amortize against -> rho* declines with N.
+
+Half of this test costs nothing: prequential loss is logged per example, so
+the Dense-minus-Continuous cumulative difference can be computed at
+truncated lifetimes (t = 2048, 4096, 8192) from EXISTING runs, yielding
+rho*(N) at three N values per world with zero new compute. If rho*(N)
+declines monotonically, "amortization threshold" graduates from
+interpretation to demonstrated mechanism — the strongest figure the paper
+could have. If it does not move, that is equally important: the crossover is
+then about representational bias, not amortization, and the theory section
+changes.
+
+Caveat to note in the analysis: truncated-lifetime curves reuse the same
+online trajectory (shared parameters at t=2048 have seen only 16 tasks), so
+this is a valid reading of "a lifetime that ended at N" — it is not an
+approximation. Confirmatory-grade versions can later run genuinely shorter
+and longer lifetimes (e.g. 32 and 128 tasks) at two bracketing rho values.
+
+### 2.3 Optional grid refinement
+
+All three crossings land between rho = 0.75 and 0.9 — the widest gap in the
+grid. If worlds 3-9 reproduce the pattern, two added points (0.80, 0.85) at
+those seeds only would localize rho* properly. Do not spend this before the
+3-9 expansion confirms the sign pattern.
+
+---
+
+## 3. Unify the GELU result with the crossover (one cheap prediction)
+
+The two main findings — family-mismatch shrinks the advantage (~3,100 ->
+~441 nats), and a recurrence crossover exists — may be one finding. If
+family mismatch raises the effective cost C of acquiring/using the shared
+representation, the amortization model predicts the GELU learner's crossover
+shifts RIGHT (more recurrence needed to pay off) rather than the advantage
+simply vanishing. Test: run the GELU-operator continuous learner at the two
+bracketing rho points (0.75, 0.9), worlds 0-2 — six runs. If the crossover
+exists but displaced, prior quality becomes just another term in the same
+economics, and the paper's two headline results fold into one framework.
+That unification is worth six runs.
+
+---
+
+## 4. Phase II update: promote the mixed-rho world above Benchmark C
+
+The heterogeneous-reuse world proposed in notes/crossover.txt — per-primitive
+reuse levels within ONE world (e.g. rho_i = 1.0, .95, .8, .5, .2, 0) — is a
+better bridge to dynamic restructuring than fork/merge under nonstationarity,
+and it should replace Benchmark C as the first Phase II target
+(amending reviewer-feedback-04 s1.2):
+
+- It creates the situation where neither fixed architecture is correct and
+  the learner must discover the FACTORIZATION STRUCTURE — the actual
+  research question — in a static world.
+- It needs almost no new machinery: a per-primitive rho vector in the
+  existing generator, existing validity gates. No regime switching, no
+  nonstationarity controls, no new statistical unit.
+- It gives copy-on-write / residual specialization (spec Model 5) a concrete
+  measurable job: residuals should concentrate on the low-rho primitives.
+  That is a sharp, falsifiable signature of selective sharing.
+- The motivation statement is now empirical, not aesthetic: the experiments
+  exhibit regimes where opposite structural biases are optimal; a learner
+  that chooses sharing granularity per-computation has a demonstrated
+  opportunity that neither fixed architecture can take.
+
+Hierarchical recurrence (global + family + task deltas) is the natural
+second step; fork/merge under nonstationarity moves to third, inheriting
+whatever consolidation and descriptor machinery exists by then.
+
+---
+
+## 5. Standing queue, updated
+
+1. Worlds 3-9 rho sweep with frozen configurations (in the plan; unchanged).
+2. Free analyses on existing logs: crossover in measured-recurrence space
+   (2.1) and rho*(N) via truncated lifetimes (2.2).
+3. Checkpoint learning-to-learn replication on worlds 1-2 (s1) — before the
+   6.4x ratio appears in any public text.
+4. GELU crossover-shift test, six runs (s3).
+5. Hypernetwork control (unchanged priority; now doubly motivated — it also
+   answers whether the crossover is architecture-specific or an economics of
+   sharing).
+6. Tier-0 posterior experiments and consolidation V1.5 (next-level.txt,
+   feedback-04) — unchanged.
+7. Mixed-rho world as first Phase II benchmark (s4).
+
+The report checklist in notes/crossover.txt (paired effects at every rho,
+both coordinate systems, per-world crossings, mean curves, novel-adaptation
+effects, explicit falsification statement) is endorsed as publication-grade
+practice, with one addition from s2.2: the rho*(N) figure, if the truncated
+analysis supports it.
+
+---
+
+## 6. Bottom line
+
+The project now has a replicated, quantitative crossover in preferred
+representation as a function of latent recurrence, a falsified secondary
+hypothesis honestly recorded, and a theory (amortization) that makes two
+cheap, decisive predictions: the crossover tightens in measured-recurrence
+coordinates, and it moves with lifetime length. Run the free analyses before
+any new training. If both predictions hold, the paper's center of gravity is
+no longer "a reusable architecture wins" but "the economics of when
+abstraction pays" — with the crossover surface (recurrence x lifetime x
+prior quality) as its object of study. That is a contribution no amount of
+architecture benchmarking can reproduce.

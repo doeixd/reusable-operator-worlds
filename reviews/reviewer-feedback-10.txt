@@ -1,0 +1,80 @@
+# Reviewer feedback 10 — anticipated reception, folded into the plans
+
+Prompted by the PI's question: assuming V1 confirms and V2's hypotheses
+hold, is this interesting, and what will others say? The full analysis is
+now encoded in two places — V2 spec section 10 ("Anticipated objections
+and positioning") and RELEASE_PLAN.md ("Write-up requirements") — so the
+paper answers its reviewers before they ask. This entry records the
+substance and the resulting changes.
+
+## The forecast, in brief
+
+- **Best audiences:** continual/meta-learning (a located, nuisance-
+  invariant, mechanism-tested crossover where they currently have
+  anecdotes) and MDL/compression (prequential code-length as a selection
+  criterion; a compressor that refuses to compress noise).
+- **Predictable objections:** "it's a toy" (answer: the toyness is the
+  instrument; no scale claims); "it's circular" (answer: H6 — if the
+  crossover shifts predictably under family mismatch, prior alignment
+  becomes a parameter of the theory rather than a caveat); "neural
+  DreamCoder" (answer: criterion, H8b refusal, measured frontier — cite
+  generously); "we already knew this" (answer: located and predicted
+  beats intuited and untested).
+- **Meta-reception:** the agent-executed provenance will attract both
+  interest and extra scrutiny; the audit trail exists precisely so the
+  work can be verified without trusting its authors. One plain paragraph,
+  no defensiveness.
+- **Realistic ceiling, stated internally:** strong niche paper plus
+  adoptable benchmark plus possibly the founding measurement of an
+  "economics of abstraction" program. Not a capability demo. The most
+  valuable single result if it holds is rho*(N) moving as predicted — a
+  confirmed, falsifiable economic law of representation learning.
+
+## Changes made
+
+1. **V2 spec, H6:** given explicit "strategic weight" — co-primary with
+   H5, because its outcome dictates how the central claim can be worded.
+   The circularity objection is the paper's biggest exposure and H6 is
+   the experiment that converts it into a coordinate of the theory.
+2. **V2 spec, new section 10:** the seven-part objections-and-positioning
+   section, including the claims-not-made list (10.5) to be printed
+   verbatim in the paper, and the internal ceiling statement (10.7):
+   optimize for unimpeachable, not impressive. Research statement moved
+   to section 11.
+3. **RELEASE_PLAN.md:** seven binding write-up requirements added,
+   including the dedicated circularity section (written as if it were
+   the abstract — skeptics read it first), the headline-selection rule
+   (rho*(N) leads if confirmed), and the venue expectation.
+
+## One standing instruction for the loop
+
+When results arrive that bear on these objections — H6 especially — update
+V2 spec section 10 in the same commit as the result. The objections
+section must always reflect the current best answer, because it is the
+part of the eventual paper that determines whether the rest is believed.
+
+## Addendum (same day, later): late crossover.txt material incorporated
+
+notes/crossover.txt was extended (15:09) after this reviewer first read it;
+the additions are now incorporated into the V2 spec:
+
+- §0 item 8: the statistical-vs-structural reuse dissociation (rho=0.9
+  wins lifetime cost in every paired world without winning frozen-library
+  transfer; portability appears only at rho=1). Explicitly distinguished
+  from the falsified early-transfer claim — the ordering is reversed.
+- H9 split into H9a (residual allocation in mixed worlds) and H9b (the
+  lower-envelope criterion on the homogeneous rho grid — the crisper
+  statement of "the learner discovers how much to share").
+- Bridge analysis 1 gained the elbow test (smooth-in-measured-coordinates
+  vs genuine threshold).
+- New bridge analysis 5: operator recovery across rho, computable post-hoc
+  from saved model.pt files (sweep summaries omit it under fast-tuning),
+  with the manifold-vs-identifiable-primitives prediction and the
+  hypernetwork-gap corollary check.
+- Claims-not-made list (10.5) gained the no-conflation rule: "learned
+  reusable primitives" is claimed only where transfer AND recovery support
+  it; elsewhere the claim is statistical sharing.
+
+Process note for the loop: notes files are living documents; before any
+spec revision, diff them against the version last reviewed rather than
+assuming staleness equals completeness.

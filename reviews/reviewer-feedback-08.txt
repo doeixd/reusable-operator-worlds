@@ -1,0 +1,127 @@
+# Reviewer feedback 08 — pre-confirmation assessment
+
+Scope: review of progress through commit 79087f0 ("record exploratory
+robustness results"): ten-world rho sweep, ten-world checkpoint replication,
+hypernetwork control (stage-1 tuned), dense-24 control, retention refresh,
+fingerprint validation, and the first robustness block (reverse order,
+replay 0/1/4 on worlds 0-2). Verdict up front: V1 is close to done as a
+trustworthy result. What remains is a short, closed list — and the
+discipline to stop adding to it.
+
+---
+
+## 1. The robustness result is the strongest kind: boring
+
+Dense-minus-Continuous advantage: reverse order +3,175; no replay +3,165;
+canonical +3,492; heavy replay +3,082. Flat to within ~10% across every
+condition, 3/3 worlds each. Two nuisance explanations die here pending the
+worlds 3-9 extension:
+
+- Not curriculum: reversing the order moves the effect by ~300 nats on a
+  ~3,400 baseline.
+- Not replay: the reusable substrate wins WITHOUT episodic rehearsal. This
+  is the most important cell in the table — shared parameters alone carry
+  prior-task information forward, which is the cleanest available version
+  of "experience consolidated into a reusable computational substrate."
+  Reviewer-07's reading is endorsed, including the refusal to build a
+  replay-interaction story out of a flat 3,165/3,492/3,082 pattern.
+
+Recommendation: when worlds 3-9 confirm, close both axes permanently. No
+replay=2, no extra orderings, no fifth permutation. Marginal value ~zero.
+
+## 2. The checkpoint replication contains a better result than the one
+##    being quoted
+
+Inspecting artifacts/checkpoints_development/sweep.json: at 8 tasks
+completed, Dense is EQUAL OR SLIGHTLY BETTER at 32-shot novel adaptation
+(world 0: 0.0276 vs 0.0306; world 1: 0.0155 vs 0.0158). The gap then opens
+progressively; by 64 tasks Continuous is ~2x better on the worlds checked.
+
+This is a cleaner learning-to-learn story than any gain ratio: the two
+architectures START FROM THE SAME PLACE and DIVERGE WITH EXPERIENCE. The
+figure to make: per-checkpoint paired difference (Dense minus Continuous
+32-shot novel NMSE) vs tasks completed, mean and per-world traces across
+all ten development worlds, showing a crossing near zero at checkpoint 8.
+
+Consequences:
+- Stop quoting "6.4x vs 2.3x" — it both overstates (ratio instability,
+  feedback-05 s1) and understates (misses the equal-start divergence
+  shape) the replicated result.
+- The equal start at checkpoint 8 is itself a finding: the reusable
+  advantage in novel adaptation is ACQUIRED, not architectural at
+  initialization. That sentence belongs in the abstract.
+
+## 3. The remaining list before the sealed worlds (finite; keep it so)
+
+In priority order:
+
+1. Hypernetwork control, final verdict. This is the last experiment that
+   can change the INTERPRETATION rather than the confidence. If tuned
+   Hypernetwork matches Continuous, the claim becomes "low-dimensional
+   reusable operator structure" rather than "explicit basis slots" — a
+   different and arguably more general paper. Stage-1 tuning is recorded;
+   finish stage 2 under the same symmetric rule and report it either way.
+   Note the retention angle from reviewer-07: if lifetime losses match,
+   the 29,248-vs-33,928-bit gap becomes the interesting number (explicit
+   basis = shorter description of the same function family).
+2. Second model initialization across worlds 0-9 (one initialization is
+   the only untested randomness axis).
+3. The two free analyses from feedback-05, still outstanding and still
+   free: (a) per-world crossover re-interpolated in measured functional
+   recurrence coordinates; (b) rho*(N) from truncated-lifetime readings of
+   existing prequential logs. (b) remains the highest-information-per-FLOP
+   item in the project: it separates "amortization threshold" from "static
+   representational bias" with zero new training, and its figure — the
+   crossover moving with lifetime length — would be the strongest in the
+   paper if it holds.
+4. GELU crossover-shift test (feedback-05 s3, six runs) — folds the
+   family-prior result and the crossover into one economic framework if
+   the crossover shifts right rather than vanishing.
+5. Robustness worlds 3-9 completion (already planned; nothing new).
+
+Then freeze everything and open seeds 100-129. Nothing else joins this
+list. Reviewer-07's closing warning is endorsed and extended: the notes
+directory is generating ideas faster than any lifetime of compute can test
+them, and that discipline applies to reviewers too.
+
+## 4. Endorsements, briefly
+
+- Fingerprint validation (reviewer-06's suggestion, implemented same day)
+  closes the width-128 class of reproducibility bug properly.
+- Retention is closed: int8 degradation at 1e-6 mean / 1.4e-4 worst is a
+  solved question; stop spending on it. The retained-bits ordering
+  (Discrete 26,208 < Continuous 29,248 < Hypernetwork 33,928 < Dense-24
+  56,448 < Dense-C 66,688) diverging from the lifetime-loss ordering is
+  the resource-frontier result, and it justifies the weighted objective
+  J = L_preq + lambda*D + mu*C as measurement, not decoration.
+- Shared-parent + residual with the Delta-vs-rho prediction
+  (rho up => ||Delta|| down) is the right FIRST experiment of the next
+  phase — the first model where the amount of sharing is learned — and it
+  belongs after confirmation, not before. Guard against the residual
+  escape hatch exactly as reviewer-07 specifies (tight rank/penalty, or
+  it silently rebuilds Dense-C).
+- The reverse-order analysis suggestion in reviewer-07 (compare the SLOPE
+  of per-task cost vs lifetime position under both orderings, not just
+  totals) should be folded into the worlds 3-9 robustness report while
+  those runs are being done anyway.
+
+## 5. What the paper now is
+
+The supportable claim set, if the remaining list closes cleanly:
+
+1. A benchmark (ROW) with validated ground truth, a passing oracle, and a
+   sealed confirmation protocol.
+2. A replicated crossover in preferred representation as latent functional
+   recurrence increases — invariant to task order, replay budget,
+   alpha-leakage, teacher rank, task-code size, and quantization — with
+   honest boundaries where the family prior matters (GELU).
+3. Progressive divergence in novel-composition learning: equal at 8 tasks,
+   ~2x apart at 64 — learning-to-learn acquired over the lifetime.
+4. A measured resource frontier (online learning vs storage vs inference)
+   across dense, continuous, discrete, and hypernetwork representations,
+   with real quantized retention numbers.
+5. One falsified secondary hypothesis, reported as such.
+
+That is a complete, honest, small-compute empirical paper about the
+economics of abstraction. The confirmation run decides the error bars, not
+the story. Finish the list, freeze, open the sealed worlds.

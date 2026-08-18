@@ -1,0 +1,341 @@
+# Next level: from a reusable library to a system that infers, compiles, and
+# improves its own computational language
+
+Revision 2. Supersedes the original draft of this note. Incorporates the V1
+results to date (continuous > dense, causal in rho; discrete = good library,
+expensive online route inference), the consolidation plan (reviewer-feedback-04),
+and the meta-learning caveats raised in review. The original draft's ideas are
+kept; what changed is sequencing, controls, and an explicit line between
+lifetime learning and meta-learning.
+
+---
+
+## 0. The organizing observation
+
+The current models do something unnatural: every new task arrives and we say
+"here are free parameters; run gradient descent until you figure out what
+program this is." The task code is relearned by optimization every time.
+
+A system that has learned a computational language should eventually learn to
+READ evidence and INFER programs in that language. The V1 discrete result makes
+the target concrete — it cleanly separates:
+
+    slow learning of the language        (works: 92.2% route recovery,
+                                          primitive distance 0.00229)
+    fast inference in the language       (fails: prequential loss tax)
+
+Everything below is about closing that gap, in order of cost and decisiveness.
+
+---
+
+## 1. Tier 0 — free experiments on existing artifacts (do these first)
+
+These require no new training and should run immediately after the V1 gate
+items (family-mismatch runs, oracle re-gate), before stage-2 tuning.
+
+### 1.1 Exact discrete program posterior
+
+With K=12 slots and L=3 steps there are only 12^3 = 1728 possible programs.
+After demonstrations D_t = {(x_j, y_j)}, score every route r:
+
+    E(r; D_t) = sum_j || y_j - f_r(x_j) ||^2
+    p(r | D_t) ∝ p(r) * exp( -E(r; D_t) / (2 sigma^2) )
+
+1728 forward passes of rank-8 operators on 16-dim states is microseconds.
+This is an ONLINE PROGRAM POSTERIOR obtained by exhaustive enumeration — an
+idealized inference procedure with zero training cost.
+
+Important subtlety the original draft skipped: during the lifetime the library
+is itself still being learned, so the clean first version is POST-HOC — freeze
+the final trained library, replay the task stream, run the posterior. The
+online version (library updating under posterior-weighted gradients, an
+EM-like scheme) is a larger change; do not start there.
+
+What it decides:
+- If exact posterior inference over the learned library gives near-oracle
+  online performance, the discrete failure is PROVEN to be inference cost, not
+  representation. This subsumes the per-task-temperature-anneal experiment
+  (reviewer-feedback-03 s2.4) — run this instead/first.
+- Deliverable figure: posterior entropy H(R | D_t) vs t — watching program
+  uncertainty collapse example by example. A per-example information audit of
+  program identification, and a likely keeper figure for the paper.
+
+### 1.2 Posterior mixture vs hard MAP
+
+Predict with the Bayesian model average
+    y_hat = sum_r p(r | D_t) f_r(x)
+versus argmax-route prediction, on the same frozen library.
+
+Hypothesis worth testing explicitly: the continuous model's online advantage
+is partly that soft mixing implicitly represents UNCERTAIN program hypotheses,
+while hard routing commits prematurely. If posterior mixing closes most of the
+discrete/continuous gap, the finding is general and quotable:
+
+    the problem was not discreteness; it was premature commitment.
+
+This would also supply the missing MECHANISM story for why continuous wins.
+
+### 1.3 Interaction with consolidation (reviewer-feedback-04)
+
+Run Tier 0 before the V1.5 consolidation experiment. The posterior tells you
+how much evidence "sleep" should demand before compiling a task's mixture into
+a hard route (e.g. compile when H(R | D_t) < threshold). Consolidation and
+inference are the same coin: wake = maintain the posterior cheaply;
+sleep = commit its mode to the program memory when it has collapsed.
+
+---
+
+## 2. Tier 1 — within-lifetime amortization (the honest version)
+
+### 2.1 The line that must not be blurred
+
+The original draft proposed training the compiler "across thousands of
+procedurally generated worlds." That quietly changes the claim from
+
+    lifetime learning:  one learner, one stream, accumulating a language
+to
+    meta-learning:      an outer loop over worlds producing a fast learner
+
+The second is a crowded field (CNPs, MAML descendants, in-context learning)
+and voids the current controls. Two hard requirements if/when we cross it:
+
+- FAIRNESS: if the compiler gets cross-world meta-training, dense baselines
+  must receive an equivalent meta-training budget, or the comparison is void.
+- LEAKAGE: a compiler meta-trained on the same generator family can smuggle
+  in family knowledge — exactly the confound the alpha-decoupling work just
+  eliminated. Requires held-out worlds and the family-mismatch machinery.
+
+Therefore Tier 1 is the WITHIN-LIFETIME version: the compiler is trained only
+on this lifetime's own solved tasks. 64 tasks is a small training set — but
+that scarcity is the honest experiment: can a lifetime's own experience
+amortize its own inference? Cross-world meta-training is Tier 3, on Kaggle
+GPU throughput, with the controls above.
+
+### 2.2 Wake/sleep compiler (hindsight amortization)
+
+Wake: solve each task with whatever expensive inference is available —
+gradient descent on codes (current), or the exact posterior (Tier 0).
+Keep the solved pairs (D_tau, pi_tau*).
+
+Sleep: train an inference network on completed tasks only:
+
+    C_phi(D_tau, P) ≈ pi_tau*        (or the continuous code c_tau*)
+
+Encoder: a Set Transformer over the demonstration set (D is a set; order must
+not matter). Output: route distribution or continuous code.
+
+Evaluate the ONLY metric that matters: does the compiler make LATER tasks in
+the same lifetime cheaper? Prequential cost of tasks 33-64 with compiler
+initialization vs without, paired worlds. That keeps the result inside the
+lifetime-learning claim.
+
+### 2.3 Train behaviorally, respect non-identifiability
+
+Do not train || C(D) - c* ||^2 — codes have symmetries; many codes implement
+the same function. Train the compiler so its OUTPUT WORKS:
+
+    L_meta = sum_k w_k * E[ loss( f_{C(D_k)}(x_q), y_q ) ]      k in {1,2,4,8,16,32}
+
+with weights favoring small k. The objective literally reads: learn to infer
+useful programs from as little evidence as possible. That IS the project's
+headline metric, pushed into the architecture.
+
+### 2.4 Hybrid amortized + iterative inference
+
+Pure one-shot inference errs; pure optimization is slow. Combine:
+
+    c_0 = C_phi(D),   then 1-3 refinement steps (gradient or learned update).
+
+Recent work frames this as iterative amortized inference, positioned between
+in-context adaptation and optimization-based adaptation (arXiv:2510.11471).
+Likely beats either extreme; cheap to test once 2.2 exists.
+
+### 2.5 Learned update rule (upgrade path, not first step)
+
+Replace hard-coded  c <- c - eta * grad  with a learned online update
+
+    c_{t+1} = U_phi(c_t, x_t, y_t, y_hat_t, e_t [, grad_t])
+
+where the error e_t = y_t - y_hat_t is first-class evidence and the gradient,
+if provided, is just another input the rule may use, precondition, or ignore
+(cf. HyperMAML, learned optimizers). Powerful, but strictly harder to train
+than 2.2 within one lifetime; attempt only after 2.2 shows signal.
+
+### 2.6 Information bottleneck on task state
+
+Whatever produces c, charge for it, or the compiler will smuggle the training
+set into the code:
+
+    L = L_query + beta * D(c)
+    D(c) = L * log K   (discrete)   |   quantized code bits (continuous)
+
+"Explain these demonstrations with the shortest program expressible in the
+existing library" — the compression story, applied at inference time.
+
+---
+
+## 3. Tier 2 — content-addressed operations and program memory
+
+Design assets for the dynamic-library endgame. Park in the design doc; build
+when the library actually starts changing shape (post-consolidation).
+
+### 3.1 Functional descriptors (the key architectural idea)
+
+Do not serialize primitive WEIGHTS into the compiler. Give each primitive a
+compact descriptor of what it DOES: evaluate it on fixed probe states and
+compress the input-output behavior:
+
+    d_i = E_func( P_i(Z_probe) )
+
+The compiler attends over [d_1 ... d_K] alongside demonstrations —
+content-addressed neural functions ("here is my API; here are examples;
+which calls?"). Why it matters: a compiler that outputs "slot 7" is welded to
+the current library — add/merge/delete a primitive and it is invalid. A
+compiler that outputs "the operation whose descriptor matches this need"
+survives library refactoring. Probably NECESSARY for genuine self-refactoring,
+and it lets a Tier-3 cross-world compiler transfer across libraries.
+Bonus: descriptor-space distance is a free duplicate-detection metric for
+merge decisions (feeds the fork/merge phase).
+
+### 3.2 Program memory and retrieval
+
+Store solved tasks as (task signature, program) pairs. On a new task, retrieve
+similar signatures and let the compiler EDIT retrieved programs instead of
+synthesizing from scratch. Persistent knowledge then has two stores:
+
+    P = primitive library   (procedural atoms, slow)
+    M = program memory      (solved compositions, episodic)
+
+giving four escalating reuse levels: reuse primitive -> reuse subprogram ->
+edit old program -> synthesize new program.
+
+### 3.3 Temporary residual programs -> promotion
+
+When the library cannot explain a task, attach a fast task-local residual
+Delta_tau rather than perturbing the slow library. During sleep, ask whether
+several residuals share structure; if Delta_1, Delta_2, Delta_3 contain the
+same transformation Q, promote Q into the library. Hierarchy:
+
+    in-context inference -> temporary task learning -> long-term abstraction
+
+This is the copy-on-write economics of spec Model 5, now with a mechanism for
+when promotion happens (shared residual structure) and a criterion (does
+promotion reduce lifetime J = L_preq + lambda * D?).
+
+---
+
+## 4. Tier 3 — cross-world meta-training (Kaggle phase)
+
+Only after Tier 1 shows within-lifetime amortization works, and only with the
+s2.1 controls. Train C_phi across many generated worlds so it learns "how
+evidence should update program hypotheses in general" rather than one world's
+programs. Requires: held-out evaluation worlds; matched meta-training for
+dense baselines; family-mismatch worlds in the eval set to bound leakage.
+Kaggle notes: models are tiny — the GPU win is parallel session THROUGHPUT
+across worlds, not per-run speed; forward_tasks batching is a prerequisite or
+the device sits idle; checkpoint/resume required for the session time limit.
+
+---
+
+## 5. Structural clarifications kept from the original draft
+
+### 5.1 Unlabeled inputs cannot identify tasks in ROW — by design
+
+x ~ N(0, I) for every task, so p(x | T_i) = p(x | T_j) and I(X; T) = 0.
+Program identity is carried ONLY by (x, y) pairs. ROW therefore cleanly
+separates domain adaptation ("what inputs am I seeing?") from program
+inference ("what transformation maps x to y?"). Test-time-training on
+unlabeled inputs cannot solve ROW — a feature, not a bug: any adaptation
+effect measured here is program inference, uncontaminated.
+
+### 5.2 The three-timescale architecture
+
+    context state    h_t        updated every example; carries the current
+                                program posterior; no weight changes
+    task program     pi_tau     committed once evidence suffices; stored in M
+    shared library   P          changes slowly, through consolidation only
+
+More plausible than SGD updating one homogeneous tensor at every timescale.
+Tier 0 gives h_t exactly (the posterior), Tier 1 learns to compute it cheaply,
+consolidation (feedback-04) implements the P update, and 3.2-3.3 fill in M.
+
+### 5.3 The reuse continuum as a theory of representational form
+
+The rho knob suggests a testable meta-claim worth keeping in view: domains
+differ in reuse statistics, and the right representational form follows.
+Reasoning-like domains sit near rho = 1 (exact recurrence -> compile to
+discrete programs pays). Perception/control-like domains sit at intermediate
+rho (shared structure, per-instance perturbation -> continuous blending wins;
+V1 data already shows this pattern). A learner with the consolidation
+criterion should DISCOVER different forms for different rho regimes. If the
+rho sweep plus consolidation shows compile-at-high-rho / stay-continuous-at-
+low-rho emerging from one mechanism, that is the deepest available version of
+the project's claim.
+
+### 5.4 In-context learning, made mechanistic
+
+The Tier 1-2 system's internal "prompt" is
+    [ library descriptors ; retrieved programs ; demonstrations ; error history ]
+and its in-context output is a latent executable program. Unlike Transformer
+ICL (where gradient-like dynamics are implicit and debated, cf.
+arXiv:2212.10559), the latent computation here is explicit and inspectable:
+    D --compiler--> program --library--> y.
+Learning then proceeds at two levels: in context, learn to USE what you know;
+over the lifetime, learn NEW THINGS WORTH KNOWING.
+
+---
+
+## 6. What to actually build, in order
+
+Gate: none of this preempts the V1 commitments — family-mismatch runs, oracle
+re-gate, stage-2 tuning, rho sweep, consolidation V1.5 (feedback-03/04).
+
+1. Exact posterior + entropy curves, post-hoc on frozen artifacts (1.1).
+2. Posterior-mixture vs MAP control (1.2). {1,2} slot in immediately after
+   the family-mismatch runs; they are analysis, not training.
+3. Consolidation V1.5 (feedback-04), now with posterior-gated compilation.
+4. Within-lifetime wake/sleep compiler, behavioral objective (2.2-2.3).
+5. Hybrid amortized + refinement (2.4).
+6. Functional descriptors for the compiler (3.1).
+7. Learned update rule / posterior-state U_phi (2.5), program memory (3.2),
+   residual promotion (3.3) — as results justify.
+8. Cross-world meta-training on Kaggle with fairness/leakage controls (Tier 3).
+9. Fork/merge under nonstationary worlds (feedback-04 s1.2), reusing the
+   consolidation operator, descriptors, and promotion machinery built above.
+
+Steps 1-2 could be run this week at near-zero cost, and either outcome
+changes what gets built next. That is the definition of the right next
+experiment.
+
+---
+
+## 7. North star (kept explicitly modest)
+
+Long-range target: benchmarks of skill-acquisition efficiency in novel
+interactive environments (ARC-AGI-3 is the archetype — scored on how cheaply
+an agent figures out a new environment, which is prequential cost by another
+name). The rungs between here and there, each keeping the known-ground-truth
+property that makes results interpretable:
+
+    ROW (regression)  ->  ROW with discrete/structured outputs
+                      ->  variable-length programs (identity op first, loops later)
+                      ->  amortized inference (this note)
+                      ->  interactive/nonstationary worlds (Benchmark C)
+
+We do not claim this architecture cracks ARC. We claim ROW isolates and tests,
+one variable at a time, the assumptions any such system would rest on — and
+that the differentiated idea is the CRITERION (representational form selected
+by prospective lifetime learning cost plus retained description length), not
+the mechanism inventory, which is individually standard.
+
+---
+
+## References carried from the original draft
+
+- Conditional Neural Processes — arXiv:1807.01613
+- GPT ICL as implicit meta-optimization — arXiv:2212.10559
+- Learning to (Learn at Test Time) — arXiv:2407.04620
+- HyperMAML — arXiv:2205.15745
+- Iterative Amortized Inference — arXiv:2510.11471
+- SMEAR (soft routing trainability) — arXiv:2306.03745
+- Prequential MDL — arXiv:2210.07931

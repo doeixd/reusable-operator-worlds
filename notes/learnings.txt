@@ -1,70 +1,527 @@
-So far, I think we’ve learned **six fairly solid things**, plus a few important open questions.
 
-1. **ROW is a valid testbed for the phenomenon we care about.** The scratch controls show no meaningful task-order difficulty trend, output variance is tightly matched, and the oracle demonstrates that the hidden reusable structure is genuinely exploitable. In the oracle, later tasks go from requiring many examples to essentially zero-shot, and the learned slots recover the six teacher primitives extremely closely. 
+# What We’ve Learned So Far
 
-2. **Reusable computation can reduce lifetime learning cost.** A learned continuous reusable basis beats the compute-matched Dense-C baseline on the exploratory exact-reuse worlds after symmetric tuning. On development worlds 0–2, the best Continuous configuration has mean prequential Gaussian log loss around (-171{,}866), versus (-168{,}768) for Dense-C, while also doing better on new-composition adaptation. 
+So far, I think we’ve learned **eight fairly solid things**, along with several important limitations and a much clearer picture of what the deeper research question actually is.
 
-3. **The gain appears to actually depend on reusable structure, not just architecture.** On development world 0, Continuous beats Dense-C by about 3,135 log-loss units at (\rho=1), but **loses by about 6,714 at (\rho=0)**. That is the first direct evidence that the reusable architecture is advantageous specifically when the environment contains reusable latent transformations. 
+## 1. ROW is a valid testbed for reusable computation
 
-4. **The learner seems to become better at learning new compositions over its lifetime.** On one exact-reuse world, Continuous’s 32-shot NMSE on fresh unseen compositions falls from 0.0298 after 8 lifetime tasks to 0.00467 after 64 tasks. Dense-C improves too, but only from 0.0367 to 0.0159. So the interesting effect is not merely “Continuous has lower average loss”; its accumulated representation increasingly helps with new tasks. 
+The basic benchmark appears to work as intended.
 
-5. **Discrete reusable programs are recoverable, but program inference is expensive.** The hard discrete system recovers 92.2% of explained routes exactly, 96.4% of route positions, and learns operators very close to the teacher primitives. It is also extremely cheap at inference—about 768 multiply-adds—and compact in storage. But its online prequential performance is much worse because inferring the correct route for a new task takes time. 
+Scratch controls show no meaningful trend in intrinsic task difficulty over the lifetime. Output scales are tightly controlled and teacher operations do not saturate. Most importantly, the oracle demonstrates that the hidden reusable structure is genuinely exploitable.
 
-   That gives us a useful decomposition:
+After removing the accidental teacher-(\alpha) coupling and re-running the oracle with independently learned operator scales, the positive control still passes:
 
-   [
-   \boxed{
-   \text{learning a reusable computational language}
-   \neq
-   \text{inferring the program for a new task}
-   }
-   ]
+* early → late zero-shot NMSE: **0.0288 → 0.00159**
+* early → late examples to NMSE 0.02: **72.8 → 0**
+* unseen-composition zero-shot NMSE: **0.00175**
+* teacher/learner primitive distance: **0.000484**
 
-   The discrete model solves the first problem surprisingly well and struggles with the second.
+So a learner that knows the correct factorization can progressively learn the hidden operator library and eventually solve unseen compositions essentially from the library alone.
 
-6. **Continuous and discrete reuse seem to occupy different points on a real tradeoff curve.**
-
-   Roughly:
-
-   [
-   \begin{array}{c|c|c|c}
-   & \text{online adaptation} & \text{storage} & \text{inference compute}\
-   \hline
-   \text{Dense-C} & \text{good} & \text{large} & \text{moderate}\
-   \text{Continuous} & \text{best so far} & \text{small} & \text{high}\
-   \text{Discrete} & \text{slow route inference} & \text{very small} & \text{very low}
-   \end{array}
-   ]
-
-   That suggests the “best” representation may depend on whether we care more about learning speed, memory, or runtime. 
-
-The broader conceptual lesson is also becoming clearer: **“reuse helps when the world is reusable” is not the interesting claim.** That is basically what compression and shared-information arguments already predict. The interesting problem is whether a learner can **discover the right computational factorization itself**, and eventually whether it can change that factorization over time.
-
-So I’d say the project has moved from asking:
-
-> Does compositional reuse help?
-
-to asking:
-
-> **What form should reusable neural computation take, and can the learner discover that form automatically?**
-
-We also have some strong hints about the answer. The continuous basis appears easier to infer quickly from a few examples, while the discrete representation is much cheaper once the right program is known. That makes a future **fast continuous inference → slower discrete consolidation** scheme look quite plausible.
-
-What we have **not** established yet is equally important:
-
-* whether the (\rho) effect is smooth and monotonic across many worlds;
-* whether the learning-to-learn improvement replicates beyond the current exploratory worlds;
-* whether a generic hypernetwork can match the continuous basis;
-* whether the teacher/student architectural match is doing much of the work;
-* whether dynamic merge/split/self-refactoring is necessary at all;
-* whether the system can invent higher-order abstractions like macros, repeated calls, or loops.
-
-So the cleanest summary is:
+This establishes the phenomenon we want to study:
 
 [
 \boxed{
-\text{We have evidence that explicit reusable neural computation can be learned, can reduce lifetime learning cost, and can make future compositions easier—but we have not yet shown that a learner can autonomously discover and restructure its own optimal computational language.}
+\text{past experience with reusable computation can make future tasks dramatically cheaper to learn}
 }
 ]
 
-That last part is still the real research target.
+---
+
+## 2. A learned reusable continuous basis can discover and exploit that structure
+
+The non-oracle Continuous learner is able to discover useful reusable transformations without being told the teacher's primitive identities or programs.
+
+After symmetric optimizer tuning, Continuous outperformed the approximately inference-compute-matched Dense-C baseline on the initial exact-reuse development worlds and adapted more accurately to unseen compositions.
+
+However, an important caveat is now explicit: the original tuning grid was performed before the learner-(\alpha) correction, so those exact frozen configurations still need to be revalidated before confirmatory evaluation.
+
+The qualitative result nevertheless survives the leak correction on development world 0: the independently scaled Continuous model still substantially outperforms Dense-C.
+
+So the original result does **not** appear to have been caused by leaking the teacher's residual scale.
+
+---
+
+## 3. The benefit of reuse depends on how much reusable computation actually exists
+
+This is now the most important causal result.
+
+At exact reuse:
+
+[
+\rho=1,
+]
+
+Continuous beats Dense-C.
+
+At no functional reuse:
+
+[
+\rho=0,
+]
+
+Dense-C wins strongly.
+
+And the new intermediate controls show that the crossover does **not** occur as soon as any correlation exists.
+
+On development world 0:
+
+[
+\rho=0.5
+]
+
+produces measured residual-function correlation of only:
+
+[
+0.064,
+]
+
+and Dense-C still beats Continuous by about **2,159** total Gaussian-log-loss units.
+
+At:
+
+[
+\rho=0.75,
+]
+
+measured residual-function correlation rises to:
+
+[
+0.317,
+]
+
+but Dense-C still wins by about **1,615**.
+
+So the current evidence looks qualitatively like:
+
+[
+\begin{array}{c|c|c}
+\rho & \text{measured recurrence} & \text{preferred learner}\
+\hline
+0 & \approx 0 & \text{Dense}\
+0.5 & 0.064 & \text{Dense}\
+0.75 & 0.317 & \text{Dense}\
+1 & 1.0 & \text{Continuous}
+\end{array}
+]
+
+This suggests something stronger than:
+
+> reuse helps when things are reusable.
+
+Instead:
+
+[
+\boxed{
+\text{reuse has to be sufficiently valuable to amortize the cost of imposing a shared representation}
+}
+]
+
+There may be a genuine **specialization-to-reuse crossover**.
+
+---
+
+## 4. Better abstraction can appear before it becomes economically worthwhile
+
+There is an interesting wrinkle in the intermediate-(\rho) results.
+
+At both:
+
+[
+\rho=0.5
+]
+
+and:
+
+[
+\rho=0.75,
+]
+
+Continuous still loses on total online prequential loss, but already has slightly better **32-shot adaptation to fresh compositions**.
+
+That suggests two quantities can come apart:
+
+[
+\boxed{\text{quality of the accumulated abstraction}}
+]
+
+and
+
+[
+\boxed{\text{whether that abstraction has paid for itself yet}}.
+]
+
+Continuous may already be building a representation that transfers better to future tasks while paying an up-front cost to acquire and use that representation.
+
+That gives us a plausible three-regime picture:
+
+### Low recurrence
+
+Task-specific specialization is better.
+
+### Intermediate recurrence
+
+Reusable abstractions begin to improve transfer, but their acquisition/inference cost has not yet been amortized.
+
+### High recurrence
+
+Reuse becomes sufficiently valuable that it wins both future adaptation and cumulative lifetime learning cost.
+
+This is much closer to an **economics of abstraction** than a simple architecture comparison.
+
+---
+
+## 5. Reusable representations can make a learner progressively better at learning
+
+The checkpoint experiment gives preliminary evidence for the stronger learning-to-learn claim.
+
+On exact-reuse development world 0, Continuous's 32-shot NMSE on fresh unseen compositions improves from:
+
+[
+0.0298
+]
+
+after 8 lifetime tasks to:
+
+[
+0.00467
+]
+
+after 64.
+
+Dense-C also improves:
+
+[
+0.0367\rightarrow0.0159,
+]
+
+but substantially less.
+
+So the important phenomenon is not merely:
+
+> Continuous has lower average loss.
+
+It is:
+
+[
+\boxed{
+\text{the computational representation accumulated over the lifetime increasingly reduces the cost of learning new compositions}
+}
+]
+
+This needs replication across development worlds before becoming a strong claim, but it is exactly the effect the larger research program cares about.
+
+---
+
+## 6. Discrete reusable programs are recoverable—but inferring them online is hard
+
+The hard discrete learner recovers an unexpectedly clean computational decomposition.
+
+In the initial experiment it achieved roughly:
+
+* **92.2%** exact explained-route recovery
+* **96.4%** route-position recovery
+* primitive matching distance around **0.00229**
+* very compact retained representation
+* only about **768 multiply-adds** at hardened inference
+
+So the model can genuinely learn something close to the latent computational library.
+
+Its weakness is **program inference**.
+
+The original global temperature annealing schedule made this problem look worse than it actually was. Re-annealing separately for every new task improves the discrete learner's lifetime log loss substantially and greatly improves fresh-task initialization.
+
+But even under the improved schedule, it still substantially trails Continuous online.
+
+This gives us an important decomposition:
+
+[
+\boxed{
+\text{learning a reusable computational language}
+\neq
+\text{inferring the correct program in that language}
+}
+]
+
+The discrete system is surprisingly good at the first problem and comparatively poor at the second.
+
+---
+
+## 7. Continuous and discrete representations expose a real time–space–learning tradeoff
+
+The systems now appear to occupy different points on a resource frontier.
+
+Roughly:
+
+[
+\begin{array}{c|c|c|c}
+& \text{online adaptation} & \text{storage} & \text{inference compute}\
+\hline
+\text{Dense-C} & \text{good} & \text{large} & \text{moderate}\
+\text{Continuous} & \text{best so far} & \text{small} & \text{high}\
+\text{Discrete} & \text{slower program inference} & \text{very small} & \text{very low}
+\end{array}
+]
+
+Continuous representations appear easier to search/infer because the learner can move smoothly through an operation space.
+
+Discrete representations are much cheaper once the correct program is known.
+
+This suggests a potentially useful longer-term architecture:
+
+[
+\boxed{
+\text{fast continuous inference}
+\rightarrow
+\text{slow discrete consolidation}
+}
+]
+
+During learning, maintain a flexible continuous representation.
+
+Once enough evidence accumulates, compress/consolidate it into cheap discrete calls, macros, or eventually loops.
+
+That possibility is currently speculative, but it follows naturally from the empirical tradeoff.
+
+---
+
+## 8. The current result is partly about having the right structural prior
+
+Several controls make the interpretation more precise.
+
+Removing teacher-(\alpha) information does not remove the Continuous advantage.
+
+Increasing teacher rank from 8 to 16 while keeping learner rank 8 also preserves a substantial advantage.
+
+But changing the learner's functional family from the teacher's tanh-based operators to GELU shrinks the world-0 advantage dramatically, to only about **441 log-loss units**.
+
+Adding an identity basis element does not materially help.
+
+So:
+
+[
+\boxed{
+\text{the result is not simply parameter leakage or inability to skip a step}
+}
+]
+
+but the match between the learner's representational family and the world's hidden computational structure **does matter**.
+
+This is scientifically important.
+
+The current experiment demonstrates that a learner with a good structural prior can discover reusable computation.
+
+It does **not yet** demonstrate that a sufficiently general learner can discover an arbitrary reusable factorization irrespective of how that computation is implemented.
+
+That latter problem is much closer to the original research goal.
+
+---
+
+# The compression interpretation is becoming clearer
+
+The basic reason reuse should eventually pay is almost information-theoretic.
+
+Suppose a reusable abstraction (P) costs:
+
+[
+C_P
+]
+
+to learn and retain.
+
+If every later task saves:
+
+[
+s(r)
+]
+
+units of learning cost because it can reuse (P), then after (N) relevant tasks, reuse is worthwhile when roughly:
+
+[
+N,s(r)>C_P.
+]
+
+This predicts two different ways for abstraction to become economical:
+
+[
+r\uparrow
+]
+
+—the structure is more reusable—
+
+or:
+
+[
+N\uparrow
+]
+
+—the learner gets more opportunities to amortize it.
+
+So the real experimental object may eventually be a phase boundary:
+
+[
+\boxed{
+N^*(r)
+}
+]
+
+such that:
+
+[
+N<N^*(r)
+\Rightarrow
+\text{specialization is cheaper},
+]
+
+while:
+
+[
+N>N^*(r)
+\Rightarrow
+\text{reuse is cheaper}.
+]
+
+And presumably:
+
+[
+\frac{dN^*}{dr}<0.
+]
+
+Highly reusable structure should pay for itself quickly.
+
+Weakly reusable structure may only become worthwhile over a very long lifetime.
+
+This suggests that the most interesting eventual experiment is not merely a one-dimensional (\rho) sweep but a **phase diagram over recurrence and lifetime length**.
+
+---
+
+# What we have *not* established
+
+Several important questions remain open.
+
+### The full recurrence curve
+
+We currently have only sparse development evidence. We need to locate and replicate the specialization-to-reuse crossover.
+
+Configured (\rho) should be treated as the experimental intervention; **measured functional recurrence** is probably the more meaningful explanatory variable.
+
+### Replicated learning-to-learn
+
+The lifetime checkpoint result is still primarily a world-0 result.
+
+We need replicated checkpoint curves.
+
+### A generic hypernetwork baseline
+
+The Continuous learner still has a favorable reusable three-stage residual prior.
+
+A generic low-rank hypernetwork remains an essential control.
+
+If it matches Continuous, the important object may be a **continuous operation manifold**, rather than an explicit basis library.
+
+### Training compute
+
+Dense-C is matched approximately on **inference-forward multiply-adds**, not total training FLOPs.
+
+Continuous evaluates and backpropagates through every basis operator while training.
+
+Any resource-efficiency claim must keep this distinction explicit.
+
+### Batch regime
+
+Current online updates effectively use:
+
+[
+1\text{ current example}+1\text{ replay example}.
+]
+
+That is symmetric across models but is a highly online regime and should later be ablated.
+
+### Teacher/student family mismatch
+
+The GELU result suggests the current architecture still benefits substantially from knowing the broad shape of the teacher's computational language.
+
+A more general abstraction mechanism should discover functional equivalences rather than requiring architectural alignment.
+
+### Dynamic restructuring
+
+We have no evidence yet that merge/split, copy-on-write, or self-refactoring are necessary.
+
+The fixed continuous basis may already capture much of the useful structure.
+
+### Higher-order computation
+
+We have not tested whether the learner can invent:
+
+* repeated calls,
+* macros,
+* variable-depth execution,
+* loops,
+* branching,
+* parameterized subroutines.
+
+These are where reusable neural computation starts becoming a genuine computational language rather than simply a factorized function approximator.
+
+---
+
+# The broader conceptual lesson
+
+The original question was:
+
+> Does compositional reuse help?
+
+That is increasingly looking like the wrong question.
+
+Information theory already gives us strong reason to expect that sufficiently repeated shared structure should be cheaper to encode once and reuse.
+
+The more interesting questions are now:
+
+> **When does abstraction become economically worthwhile?**
+
+> **What representation of reusable computation minimizes lifetime learning cost?**
+
+> **Can the learner discover that representation without being given the correct factorization?**
+
+> **Can it subsequently change and enrich its own computational language?**
+
+So the project has evolved from:
+
+[
+\text{Does reuse work?}
+]
+
+toward:
+
+[
+\boxed{
+\text{Can neural learning discover the representation that best exploits the algorithmic mutual information in its experience?}
+}
+]
+
+And ultimately:
+
+[
+\boxed{
+\text{Can a neural learner progressively reorganize its own computation so that future experience becomes cheaper to learn?}
+}
+]
+
+That remains the larger research target.
+
+---
+
+# Current bottom line
+
+The cleanest statement I think the evidence currently supports is:
+
+[
+\boxed{
+\begin{minipage}{0.85\linewidth}
+ROW provides preliminary evidence that learned reusable neural representations can reduce future learning cost when latent functional recurrence is sufficiently strong. The advantage is not universal: task-specific dense learning remains preferable when recurrence is weak, suggesting a specialization-to-reuse crossover governed by the cost of acquiring an abstraction and the opportunities available to amortize it. Continuous and discrete reusable representations further expose a tradeoff between fast program inference and compact execution.
+\end{minipage}
+}
+]
+
+The next important step is **not more architectural complexity**.
+
+It is to establish the shape and location of that crossover, replicate the lifetime learning-to-learn effect, and determine whether a generic architecture can discover the same reusable structure without being given such a favorable functional prior.

@@ -1,0 +1,602 @@
+This is a strong cleanup milestone. The project is getting less interesting architecturally and more credible scientifically—which is exactly what should happen before confirmation.
+
+The retention question is basically closed now. Across all ten development worlds, int8 degradation is negligible for Continuous, Hypernetwork, Dense-24, and Dense-C, while the retained-code ordering is clean Continuous at 29,248 bits, Hypernetwork 33,928, Dense-24 56,448, Dense-C 66,688; the current Discrete artifact is smallest at 26,208 bits and only ~768 hardened inference MACs. 
+
+That means we can now say something fairly confidently
+
+[
+boxed{text{the reusable representations really are more compact, and that compactness survives actual quantization}}
+]
+
+rather than relying on a theoretical parameter-count proxy.
+
+The quantization degradation numbers are tiny enough that I would stop spending time on this dimension. Mean degradation is on the order of (10^{-6}) NMSE and even the worst individual task increase is only (1.38times10^{-4}).  This is no longer an unresolved concern.
+
+## The retention result also sharpens the model comparison
+
+We now have a pretty interesting ordering
+
+[
+text{Discrete}
+
+text{Continuous}
+
+text{Hypernetwork}
+
+text{Dense-24}
+
+text{Dense-C}
+]
+
+in retained bits.
+
+But that is not the same ordering as lifetime performance.
+
+That reinforces the resource-frontier interpretation
+
+[
+boxed{
+text{storage efficiency, online learning efficiency, and inference compute are distinct objectives}
+}
+]
+
+There isn't one universally “best” representation.
+
+Discrete is extraordinarily compact and cheap once the program is known.
+
+Continuous pays much more inference compute but gets much better online adaptation.
+
+Dense-C pays a large description cost for flexibility.
+
+Hypernetwork sits intriguingly between them.
+
+That makes the later MDL formulation feel less cosmetic you genuinely need a weighted objective such as
+
+[
+J =
+L_{text{preq}}
++lambda D
++mu C
+]
+
+because the architecture preference depends on the relative price of prediction mistakes, retained representation, and execution.
+
+---
+
+# The robustness experiments are now the right thing to be doing
+
+The reverse-order test is particularly important because the whole project is about lifetime learning.
+
+If Continuous's advantage only occurs under one lucky curriculum ordering, then what we've measured is a curriculum effect rather than reusable computation.
+
+A successful reverse-order result would establish
+
+[
+text{same reusable advantage despite a different sequence of task exposure}.
+]
+
+The replay tests answer a different alternative explanation.
+
+Because Continuous has a strongly shared substrate, one worry is that its advantage arises from how replay stabilizes shared parameters.
+
+So the important question isn't merely
+
+ Does Continuous still win with replay
+
+It's
+
+ Does the relative advantage survive substantially different memoryreplay budgets
+
+The three conditions are well chosen
+
+[
+r_{rm replay}=0,quad1,quad4.
+]
+
+If the effect survives all three, then it's unlikely to be just a particular continual-learningrehearsal interaction.
+
+---
+
+## But replay could teach us something deeper
+
+Suppose the result instead looks like
+
+[
+text{no replay Dense wins}
+]
+
+[
+text{replay 1 Continuous wins}
+]
+
+[
+text{replay 4 Continuous wins more strongly}.
+]
+
+That would not simply “fail robustness.”
+
+It could indicate that reusable abstractions require enough revisitation to stabilize.
+
+Conversely, if Continuous wins more strongly with no replay, that would be interesting evidence that sharing itself acts as a form of memory.
+
+So for the robustness report I would retain more than just passfail.
+
+Plot
+
+[
+Delta L
+========
+
+L_D-L_C
+]
+
+against replay ratio.
+
+You may get a meaningful interaction between
+
+[
+text{external replay memory}
+]
+
+and
+
+[
+text{internal parameter sharing}.
+]
+
+That could connect nicely to the larger continual-learning question.
+
+---
+
+# One thing I'd check in the reverse-order analysis
+
+Don't just compare total lifetime loss.
+
+Also compare the shape of learning across task position.
+
+If reusable computation is genuinely accumulating, reversing the order should still produce something like
+
+[
+text{later tasks become cheaper}
+]
+
+although the precise task identities change.
+
+So report something like
+
+[
+operatorname{slope}
+left(
+text{per-task prequential cost}
+sim
+text{lifetime position}
+right)
+]
+
+for both forward and reverse curricula.
+
+If Continuous exhibits a comparable downward slope under both, that's stronger evidence for learning-to-learn than simply beating Dense in both orderings.
+
+---
+
+# I like the discipline of starting robustness on worlds 0–2
+
+That's exactly the right staging.
+
+Run
+
+[
+3text{ worlds}
+times
+3text{ conditions}
+times
+2text{ models}
+=18
+]
+
+first.
+
+If one condition exposes something dramatic, you can understand it before burning the remaining compute.
+
+And importantly, you're still not touching worlds 100–129.
+
+Good.
+
+---
+
+# The next two obligations are probably the scientifically most important
+
+The audit lists
+
+1. second model initialization;
+2. fresh-task forward-transfer  checkpoint true-route diagnostics;
+3. shared-parent + residual at intermediate recurrence.
+
+
+
+Of those, I would rank them
+
+### 1. Second model initialization
+
+This is essential.
+
+Right now worlds vary, but if model initialization is fixed, some of the consistency could theoretically be initialization-specific.
+
+A second independent initialization across development worlds would tell us whether the architecture effect is stable over both
+
+[
+text{world randomness}
+]
+
+and
+
+[
+text{optimization randomness}.
+]
+
+You don't need dozens. One additional independent initialization over all ten development worlds is a very good first robustness test.
+
+### 2. Shared-parent + residual
+
+This is the most conceptually interesting experiment.
+
+The current (rho) curve tells us the optimal inductive bias changes
+
+[
+text{low recurrence}rightarrowtext{specialize}
+]
+
+[
+text{high recurrence}rightarrowtext{share}.
+]
+
+So test
+
+[
+P_{tau,k}
+==========
+
+P_k+Delta_{tau,k}.
+]
+
+Then penalize or bottleneck
+
+[
+Delta_{tau,k}.
+]
+
+At intermediate recurrence, the learner should theoretically get the best of both
+
+ shared (P_k) captures common structure;
+ (Delta_{tau,k}) captures task-specific variation.
+
+This may be the first model in the project where the amount of reuse itself becomes learned.
+
+That is a much bigger conceptual step than another baseline.
+
+---
+
+# There is one subtle danger with the shared-parent model
+
+Don't let the residual become an unconstrained escape hatch.
+
+If
+
+[
+Delta_{tau,k}
+]
+
+is large enough to implement the full task independently, you've basically rebuilt Dense-C with an unused shared parent.
+
+So impose a meaningful cost
+
+[
+L =
+L_{rm prediction}
++
+lambda Delta
+]
+
+or use a low-ranksmall residual
+
+[
+Delta_{tau,k}
+===============
+
+A_{tau,k}B_{tau,k}
+]
+
+with very small rank.
+
+Then measure
+
+[
+frac{Delta_{tau,k}}
+{P_k}
+]
+
+across recurrence.
+
+The ideal result would be
+
+[
+rhouparrow
+Rightarrow
+Deltadownarrow.
+]
+
+That would mean the learner is actually discovering
+
+ “this environment warrants more sharing.”
+
+That would be one of the first results in this project I'd regard as directly approaching the original self-organizing-computation thesis.
+
+---
+
+# One other observation from the retention numbers
+
+Hypernetwork retaining 33,928 bits versus Continuous's 29,248 is closer than Dense-C, but still meaningfully larger. 
+
+If the tuned hypernetwork eventually matches Continuous's lifetime loss, you'll have an interesting tradeoff
+
+[
+text{Continuous}
+
+text{more explicitly factored, shorter representation}
+]
+
+versus
+
+[
+text{Hypernetwork}
+
+text{more flexible generated operator family}.
+]
+
+That raises a very clean MDL question
+
+ Is the explicit reusable basis achieving comparable prediction with a shorter description of the underlying function family
+
+That's potentially stronger than “one gets slightly better NMSE.”
+
+---
+
+## My current assessment
+
+V1 is now approaching the point where adding more metrics is less valuable than closing robustness gates.
+
+We have
+
+ validated world construction;
+ leak-free oracle;
+ symmetric tuning;
+ ten-world exact-reuse development replication;
+ replicated recurrence crossover;
+ structural controls underwaycompleted in part;
+ genuine retained-description measurements;
+ explicit compute accounting;
+ artifact provenance;
+ sealed confirmation set.
+
+And the experiment has already falsified at least one attractive secondary story rather than silently discarding it.
+
+That's a healthy research project.
+
+The remaining work before confirmation should mostly answer
+
+[
+boxed{
+text{Can any ordinary experimental nuisance explain the effect}
+}
+]
+
+Initialization
+
+Task order
+
+Replay
+
+Task-state size
+
+Generic low-dimensional conditional computation
+
+Teacher-family alignment
+
+Once those are reasonably closed, I would stop touching V1 and open the sealed worlds.
+
+The temptation at this point will be to keep inventing clever new experiments. I wouldn't. The most valuable thing V1 can now become is a finished, trustworthy empirical result.
+This is another strong result, because it knocks out **two fairly plausible nuisance explanations at once**.
+
+Across worlds 0–2, Continuous beats Dense-C **3/3 under every condition**:
+
+| Condition            | Mean Dense − Continuous lifetime-loss advantage |
+| -------------------- | ----------------------------------------------: |
+| Reverse task order   |                                          +3,175 |
+| No replay            |                                          +3,165 |
+| Canonical 1:1 replay |                                          +3,492 |
+| Strong 1:4 replay    |                                          +3,082 |
+
+What's striking isn't just that all the signs agree. The **effect size is remarkably stable**. Going from no replay to four replay examples changes the advantage by only a few hundred units around a roughly 3k baseline.
+
+That substantially weakens two explanations.
+
+### It probably isn't a curriculum artifact
+
+Reversing the task order barely changes the effect:
+
+[
+3492 \rightarrow 3175.
+]
+
+So Continuous doesn't seem to be winning because the particular forward ordering happens to expose primitives in an especially convenient sequence.
+
+If this survives worlds 3–9, I'd consider the task-order concern basically closed for V1.
+
+### It probably isn't a replay artifact
+
+This is perhaps more important.
+
+At:
+
+[
+\text{replay}=0,
+]
+
+Continuous still wins by:
+
+[
+3165.
+]
+
+So the reusable substrate apparently does **not need rehearsal of previous tasks to obtain its advantage**.
+
+That's useful for the continual-learning interpretation. Shared parameters themselves are carrying information forward across tasks.
+
+At the other extreme:
+
+[
+\text{replay}=4,
+]
+
+Continuous still wins by:
+
+[
+3082.
+]
+
+So Dense-C also doesn't catch up simply by being given considerably more access to old examples during updates.
+
+The simple story is increasingly:
+
+[
+\boxed{
+\text{the benefit comes from the representation of shared computation itself, rather than a particular replay schedule.}
+}
+]
+
+I'd still phrase that as an inference pending the full ten worlds, but it's what these data point toward.
+
+---
+
+There is also a nice secondary observation: **replay doesn't monotonically amplify Continuous's advantage.**
+
+You have approximately:
+
+[
+3165 \quad (0)
+]
+
+[
+3492 \quad (1)
+]
+
+[
+3082 \quad (4).
+]
+
+That's basically flat compared with the primary effect.
+
+So I wouldn't build a story about replay interacting strongly with reuse unless worlds 3–9 reveal one. Right now the much cleaner conclusion is **replay invariance**.
+
+That is better scientifically.
+
+---
+
+## This makes the no-replay condition conceptually interesting
+
+Remember what the learner is doing.
+
+At task (t), it has accumulated shared parameters:
+
+[
+\theta_t.
+]
+
+Without replay, old raw examples are gone.
+
+Yet if new tasks contain recurring computation, those shared parameters encode something useful about earlier tasks:
+
+[
+D_1,D_2,\ldots,D_{t-1}
+\longrightarrow
+\theta_t
+\longrightarrow
+\text{cheaper learning of }D_t.
+]
+
+That's very close to the basic phenomenon we wanted to isolate:
+
+> **experience has been consolidated into a reusable computational substrate.**
+
+Of course, both Dense and Continuous also carry parameters forward, so this doesn't by itself prove anything exotic. But the fact that the explicitly reusable representation wins without an episodic replay buffer makes the interpretation cleaner.
+
+---
+
+# Where the evidential bottleneck has moved
+
+At this point I'd rank the remaining explanations roughly like this:
+
+**Much less concerning now:**
+
+* lucky task ordering;
+* dependence on canonical replay;
+* insufficient replay for Dense;
+* task-code dimensionality;
+* quantization/description proxy;
+* single-world effects;
+* teacher-(\alpha) leak.
+
+**Still genuinely important:**
+
+* generic hypernetwork / continuous-manifold explanation;
+* model initialization dependence;
+* teacher/student functional-family alignment;
+* total training-compute mismatch.
+
+The **hypernetwork control is now by far the most interesting one**.
+
+Because if it matches Continuous after fair tuning, the right conclusion isn't necessarily:
+
+> explicit reusable primitive slots win.
+
+It may instead be:
+
+> low-dimensional reusable **operator structure** wins.
+
+And that would change the theoretical interpretation substantially.
+
+---
+
+## I would now resist adding more robustness axes
+
+If reverse and replay replicate through world 9, close them.
+
+Don't do replay 2, replay 8, five random orderings, etc. The marginal scientific value will be tiny.
+
+Likewise, if the second initialization behaves normally, close initialization.
+
+The project is reaching the point where the important question is no longer:
+
+> Can we find some mundane way to make the result disappear?
+
+but:
+
+> **What property of the reusable representation is actually responsible for the result?**
+
+That's where Hypernetwork and then shared-parent/residual become much more informative than another robustness sweep.
+
+And there's a nice progression emerging:
+
+[
+\text{Dense}
+\rightarrow
+\text{generated task-specific operators}
+\rightarrow
+\text{explicit reusable basis}
+\rightarrow
+\text{learned share/specialize structure}.
+]
+
+Each model removes one assumption about **how reusable computation should be represented**.
+
+If the worlds 3–9 robustness results look anything like these first three, I would treat task order and replay as settled and move on.

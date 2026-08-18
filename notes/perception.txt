@@ -1,0 +1,292 @@
+# Perception, attention, memory, and reasoning as programs on one machine
+
+Revision 2. Supersedes the original draft. The vision is unchanged; what
+changed is that the trainability risk is now the first design constraint
+rather than a late aside, the lost-control problem (I(X;T)=0) is stated, the
+buildable slice is separated from the destination architecture, and the
+sequencing gate is explicit. Structure: the thesis, the two load-bearing
+ideas, the destination machine, the risks the V1 data already warns about,
+and the one thing to actually build (ROW-P).
+
+---
+
+## 0. Thesis
+
+Stop treating perception, attention, memory access, and reasoning as separate
+architectural modules. Treat them as different REGIMES of one programmable
+machine:
+
+    intelligence is not a pipeline of modules; it is a program operating
+    over different stores of information.
+
+Concretely: a sequence dominated by reads from sensory memory X and updates
+to workspace W looks like perception; a sequence deciding WHERE to read looks
+like attention; a sequence reading/writing long-term memory M looks like
+memory; a sequence repeatedly transforming W looks like reasoning. The
+machine needs none of those psychological labels. The primitives should not
+be named SELECT/BIND/COMPARE in the model — those are human interpretations
+we test for afterward, exactly as ROW tests functional recovery without
+assuming the learner adopts the teacher's basis.
+
+The same input under two tasks should be PERCEIVED differently: "which object
+is left of the red triangle?" and "how many blue objects?" on one scene are
+different computations, not different readouts of one fixed encoding.
+Perception is computation under a goal.
+
+---
+
+## 1. The two load-bearing ideas
+
+Everything else in this note is elaboration; these two carry the weight.
+
+### 1.1 Bandwidth-limited, costed sensory access
+
+If every primitive receives all of X for free, there is no reason for
+perception or attention to exist as learned structure — one operator becomes
+a giant encoder and the program story is decoration. So R_X(X, q) must be a
+narrow read (a patch, a few objects, a pooled region), and reads must cost:
+
+    L = L_task + lambda*D + mu*C + beta*B_X + gamma*B_M
+
+with D = retained description, C = execution compute, B_X/B_M = sensory and
+memory bandwidth consumed. Attention then becomes economically meaningful —
+"figure out what is worth looking at" — rather than an inserted layer.
+
+This is the same move that made ROW V1 work (the task-ID bottleneck that
+prevents operators from conditioning on task identity), applied to
+information access. It is the project's recurring accounting rule:
+
+    no component gets to hide complexity for free.
+
+The same rule dictates a deliberately WEAK controller (routing + small
+arguments + addressing only; heavy transformation lives in the library, and
+controller complexity is charged to D) and narrow arguments a_t that cannot
+smuggle in new operators.
+
+Honest caveat on the objective: four multipliers (lambda, mu, beta, gamma)
+are four tuning axes. The symmetric-tuning discipline that made V1 credible
+gets combinatorially expensive here. The minimal build (s5) fixes all but one.
+
+### 1.2 The workspace as a neural ABI
+
+Composability of arbitrary learned primitives has been an open question all
+along. Answer: a common workspace. Require every operation to have the same
+signature over shared stores,
+
+    P_i : (W, read results, a) -> (W', effects)
+
+so P_3(P_7(P_19(W))) is always syntactically valid — closure. The workspace
+should be a small set of exchangeable SLOTS {w_1..w_S}, not one vector: slots
+hold entities, relations, hypotheses, intermediates (Slot Attention shows
+iterative competitive binding into slots works without segmentation labels).
+
+Deferred elaborations that hang off this (design-doc layer, not buildable
+yet): learned soft type signatures s_i^in / s_i^out with compatibility-based
+routing (prunes the search space; prevents dimensionally-valid nonsense), and
+the granularity ladder
+
+    interpreted composition -> macro -> fused neural primitive  (reversible)
+
+where the MDL/compute objective — not us — decides at what level a
+computation deserves to be atomic. Conventional attention is then a
+hypothesis, not an axiom: perhaps ATTEND = [QUERY, MATCH, COMPETE, READ] is a
+macro the system discovers and eventually fuses because it recurs constantly.
+"Learn not only what computations exist but at what level they deserve to be
+atomic" may be the deepest single sentence in this project.
+
+---
+
+## 2. The destination machine
+
+    large read-only sensory memory X
+        |  bandwidth-limited READ
+    small slot workspace W  (4-8 slots)
+        |
+    reusable operator library P  (shared, slow)
+        |
+    weak program controller + call stack   i_t, a_t, q_t = C(W_t, goal, s_t)
+        |
+    persistent episodic/semantic memory M
+
+Microstep execution: W_{t+1} = P_{i_t}(W_t, R_X(X,q_t), R_M(M,q_t), a_t),
+until HALT. Programs are DISTRIBUTIONS initially — q(i_t | W_t, D) — because
+the V1 lesson is that exact program commitment is expensive; continuous/soft
+execution carries hypothesis uncertainty, and sleep consolidates stable
+recurring behavior into discrete programs and macros (same wake/sleep
+economics as reviewer-feedback-04, one level up).
+
+Perception on this machine becomes active hypothesis testing: hold competing
+hypotheses in slots, choose the read that best distinguishes them, update,
+repeat. The controller can LEARN this behavior; we do not need to hand it an
+information-gain objective.
+
+In-context learning becomes program induction over the machine: demonstrations
+imply not just an output mapping but a PROCESSING POLICY — how to look and
+what to compute. The context changes the computation graph itself. (This is
+the next-level.txt compiler, with perception folded into its output.)
+
+Memory access is not RAG bolted on: RETRIEVE/STORE are library operations
+inside programs, so different tasks learn different memory-access programs.
+
+Farthest out, and stated as speculation: learning itself as a program —
+learned update operations (credit assignment, hypothesis revision, forking)
+replacing external SGD for fast state, so pi_infer and pi_learn share
+primitives and the architecture/inference/learning distinction blurs.
+
+Scaling implication worth keeping: this machine decouples parameters from
+computation. K stored operations; easy input = 3 calls, hard input = 30
+calls, new task = new sequence of the same calls. Variable depth through
+DIFFERENT reusable operations, P_{i_n} o ... o P_{i_1}, not one block
+iterated, F^n. Far more expressive per stored parameter.
+
+The four things the system ultimately learns:
+    WHAT   — representations worth retaining (W, M)
+    HOW    — the operation library P
+    WHEN   — the program/controller pi
+    +1     — how to change the language itself (create/merge/macro/compile)
+The fourth level is the self-refactoring compiler; the compression principle
+decides what deserves to become reusable.
+
+---
+
+## 3. Prior art, positioned honestly
+
+- Neural Interpreters (arXiv:2110.06399) — closest. Learned "functions" with
+  signatures and codes, dynamically routed and reused, evaluated on vision.
+  Our delta: they route through an existing function inventory; we want the
+  inventory, its granularity, and the control abstractions to be DISCOVERED
+  and REVISED under a lifetime code-length objective. Study carefully before
+  building anything; do not rediscover it.
+- Slot Attention (arXiv:2006.15055) — iterative competitive binding into
+  object slots; evidence for the slot workspace and for refining rather than
+  encoding once.
+- Perceiver (arXiv:2103.03206) — iterative attention from a latent workspace
+  into a large input; ALSO the right compute-matched fixed-encoder BASELINE
+  for ROW-P.
+- RIMs (arXiv:1909.10893) — independent mechanisms selected via attention;
+  precedent for selective modular activation.
+- Recurrent/Universal Transformers with dynamic halting — computation depth
+  decoupled from parameters; our stronger claim is different-ops-per-step.
+
+The differentiated claim is therefore NOT "modular perception" (taken) but:
+the operation vocabulary, access strategies, and control programs are
+selected by prospective lifetime learning cost plus retained description
+length — the same criterion as the rest of the project.
+
+---
+
+## 4. The risks the V1 data already warns about
+
+### 4.1 Trainability is the first constraint, not an afterthought
+
+V1's loudest finding: program inference was the bottleneck in the FRIENDLIEST
+possible setting — 12 operators, exactly 3 steps, no halting, no arguments,
+no addressing, ground-truth data. This machine asks a controller to choose
+operator x arguments x read-address x halt at every microstep. That inference
+problem is orders of magnitude harder, and this architecture class has a
+graveyard (NTM/DNC, modular controllers) filled by exactly this failure:
+credit assignment through long discrete program traces. Design consequences,
+non-negotiable for the first build:
+- soft/uncertain execution first, hardening later (the Tier-0 posterior
+  lesson from next-level.txt, applied at birth);
+- fixed program length before HALT is earned;
+- the smallest operator inventory that can express the ground truth;
+- an oracle-controller control (true programs given) to separate library
+  learning from program inference, exactly as V1 did.
+
+### 4.2 We give up a control V1 had — say so
+
+Current ROW has I(X;T) = 0: unlabeled inputs carry zero task information, so
+any adaptation effect is provably program inference. A perceptual world
+breaks this by construction (the scene IS task-relevant). That is necessary,
+but it must be replaced, not ignored: report per-task input-distribution
+diagnostics, and keep a matched control where scene statistics are shared
+across tasks so task identity remains carried by (X, y) demonstrations alone.
+
+### 4.3 The GELU shadow
+
+V1's advantage shrank from ~3,100 to ~441 nats under activation-family
+mismatch (learnings.txt s8). Every structural commitment in this machine —
+slots, read primitives, workspace geometry — is a prior of the same kind,
+multiplied. Two consequences: the hypernetwork control must settle whether
+generic learners can discover factorizations BEFORE this architecture is
+built; and ROW-P results must ship with the same family-mismatch controls V1
+now has, from day one.
+
+---
+
+## 5. ROW-P: the one buildable slice
+
+Do not jump to pixels; do not build the destination machine. Extract the
+minimal falsifiable version, specified with V1's discipline (spec with
+falsifiers, oracle, scratch control, validity gates) BEFORE code.
+
+World: each input is a set X = {o_1..o_N} of objects with latent positions,
+features, relations — scrambled/projected into learned embeddings so the
+structure is not handed over. Tasks generated by hidden programs (select by
+latent feature -> follow relation -> compare property); the learner sees only
+demonstrations and answers. Ground truth known; oracle possible; scratch
+difficulty measurable — all the V1 machinery carries over.
+
+Machine, radically minimal:
+- read-only X; 4 workspace slots; ~8 operators; weak controller;
+- bandwidth-limited READ as the ONLY novel mechanism;
+- fixed program length (no HALT), no type system, no memory M, no macros;
+- soft routing at first, hardened evaluation later (V1 playbook);
+- one bandwidth budget as the single new tuned hyperparameter.
+
+Baselines: compute-matched fixed encoder (small Perceiver-style) + task
+code; oracle controller (true programs); scratch model per task. Symmetric
+tuning rule as in EXPERIMENT_PLAN.md.
+
+The two questions ROW-P answers:
+1. Does costed programmable reading beat a matched fixed encoder — and does
+   the advantage require the bandwidth constraint? (If it only wins when
+   bandwidth is restricted, that is itself the finding: attention-as-
+   economics, not attention-as-architecture.)
+2. THE headline test: same scene, different tasks. Measure which objects
+   were read, how many reads, which operations executed, workspace
+   trajectories. A fixed encoder cannot produce pi_A(X) != pi_B(X) with
+   task-consequent read patterns; this machine must, or the thesis fails.
+   One figure, falsifiable, decisive.
+
+Generalization probes, in order of expense: novel combinations of known
+operations; more objects/distractors than training; longer chains; new tasks
+requiring different inspection of familiar scenes; tightened read budgets.
+
+Progression after ROW-P earns it:
+    ROW vectors -> object sets (ROW-P) -> pixels -> language/multimodal.
+
+---
+
+## 6. Sequencing gate
+
+This note is two rungs up the ladder. Nothing here starts until:
+1. V1 gate closes: hypernetwork control, rho crossover localization
+   (rho in [0.75, 1.0]), replicated checkpoint learning-to-learn;
+2. Tier-0 posterior experiments + consolidation V1.5 (next-level.txt,
+   reviewer-feedback-04) have delivered their verdicts — ROW-P's soft-then-
+   consolidate execution model is built on those results;
+3. the ROW-P spec exists as a document with falsifiers, reviewed with the
+   same seriousness as the V1 spec, including the s4.2 replacement controls.
+
+The notes are now several papers ahead of the experiments. That is fine —
+this file is the destination map — as long as the queue discipline holds:
+vision documents do not jump the experiment queue.
+
+---
+
+## 7. The hypothesis, stated once
+
+    A general learner should not merely learn representations inside a fixed
+    computation graph. It should learn the reusable operations, information-
+    access strategies, and control programs that construct those
+    representations — with the compression principle (prospective lifetime
+    learning cost + retained description length) deciding what deserves to
+    become reusable, at what granularity, and in what representational form.
+
+Perception, attention, memory, and reasoning are then predictions of the
+theory, not components of the design: they are what programs on one machine
+look like when information access is scarce and structure recurs at
+different rates. ROW-P is the smallest world in which that prediction can
+fail.

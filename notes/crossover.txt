@@ -1,0 +1,777 @@
+This is a **very useful result**, and it actually sharpens the story.
+
+The biggest thing we’ve learned is that the crossover is no longer a seed-0 curiosity. Across development worlds 0–2, **all three worlds prefer Dense-C for every (\rho\le 0.75), and all three prefer Continuous at (\rho=0.9) and (1.0)**. The estimated crossings at (0.811, 0.852, 0.851) are strikingly consistent. A mean crossover around configured (\rho\approx0.833), corresponding to measured functional recurrence around (0.488), is now a real empirical pattern—though I agree interpolation should remain descriptive rather than being sold as a precise phase boundary.
+
+More importantly, the failed transfer hypothesis is good news scientifically. The earlier seed-0 story—
+
+[
+\text{“Continuous starts transferring better before it wins lifetime cost”}
+]
+
+—does **not** replicate. At (\rho=.25,.5,.75), Continuous wins novel transfer on only one of three worlds, and its mean novel NMSE is worse at all three points. Preserving that as a falsified secondary hypothesis is exactly right.
+
+That leaves us with a **simpler and cleaner phenomenon**:
+
+[
+\boxed{
+\text{below sufficient recurrence: Dense is better}
+}
+]
+
+[
+\boxed{
+\text{above sufficient recurrence: reusable Continuous is better}
+}
+]
+
+And the transition appears to affect **both** lifetime learning efficiency and transfer, rather than transfer mysteriously improving much earlier.
+
+## The theoretical interpretation gets nicer
+
+The current result looks increasingly like an amortization threshold.
+
+Suppose a shared representation incurs cost (C), and reuse at recurrence (r) saves (s(r)) per task. Reuse becomes preferable when roughly
+
+[
+N s(r)>C.
+]
+
+For the fixed 64-task lifetime, there is therefore some empirical recurrence threshold
+
+[
+r^*
+]
+
+above which the abstraction pays for itself.
+
+Your current data suggest that threshold might correspond to roughly
+
+[
+r^*\sim0.5
+]
+
+under the particular measured residual-correlation statistic.
+
+I would **not yet call 0.488 the threshold**. But I would absolutely now describe the hypothesis as:
+
+> There appears to be a reproducible crossover in the preferred neural representation as latent functional recurrence increases.
+
+That's already substantially better than:
+
+> reusable models work better on reusable data.
+
+---
+
+## Something particularly interesting is the consistency of the per-world crossover
+
+The interpolated configured-(\rho) crossings are:
+
+[
+0.811,\quad0.852,\quad0.851.
+]
+
+The latter two are almost identical.
+
+With (n=3), we shouldn't infer much statistically, but qualitatively this is exactly what we would hope for if there is an underlying tradeoff rather than random architecture variance.
+
+What I now want to know is whether the crossover aligns **even more tightly in measured functional recurrence space** than in configured-(\rho) space.
+
+For each world, estimate:
+
+[
+r_W(\rho)
+=========
+
+\text{measured functional recurrence}.
+]
+
+Then interpolate the loss crossover in terms of (r), not (\rho).
+
+You might discover something like:
+
+[
+r_W^*
+=====
+
+0.47,\quad0.50,\quad0.49.
+]
+
+If so, that would be much stronger.
+
+Because different randomly generated worlds could map the same parameter correlation (\rho) into somewhat different actual functional similarity.
+
+If their architecture crossover nevertheless occurs at similar **functional similarity**, then you're finding something closer to an invariant property of the learning problem.
+
+That would be exciting.
+
+---
+
+## I'd also measure the crossover in information terms
+
+Raw residual correlation is a useful proxy, but it doesn't necessarily tell us how much one task's operator teaches us about another.
+
+Eventually, an even more principled recurrence measure might be:
+
+[
+\text{how much knowing the shared component reduces prediction/sample complexity for another task}.
+]
+
+For example, fit/probe one operator from task A and measure how much that initialization reduces the loss or samples required to fit the corresponding task-B operator.
+
+Call that something like **functional transfer information**.
+
+Then you could ask whether the crossover is better predicted by:
+
+* parameter (\rho),
+* function-output correlation,
+* functional transfer benefit.
+
+My guess is the third will eventually be the most explanatory.
+
+But don't derail the present experiment to build this yet.
+
+---
+
+# The failed secondary result also tells us something conceptual
+
+Previously we entertained:
+
+1. abstraction begins improving future transfer;
+2. only later does it amortize its current cost.
+
+Apparently that simple three-regime account isn't supported.
+
+A more parsimonious picture is:
+
+[
+\text{weak recurrence}
+\Rightarrow
+\text{sharing creates harmful bias}
+]
+
+and:
+
+[
+\text{strong recurrence}
+\Rightarrow
+\text{sharing creates useful inductive bias}.
+]
+
+That means the crossover could be understood as a **bias–variance / sharing–specialization transition**.
+
+Dense-C has enough flexibility to model each task's idiosyncrasies.
+
+Continuous constrains tasks to live in a common operation basis.
+
+When shared structure is weak, that constraint is wrong:
+
+[
+\text{negative transfer}.
+]
+
+When shared structure becomes sufficiently strong, the constraint becomes useful:
+
+[
+\text{positive transfer}.
+]
+
+That's probably the simplest explanation right now.
+
+---
+
+# Which makes dynamic restructuring more interesting
+
+This result gives our original self-refactoring idea a much clearer job.
+
+A fixed Continuous learner has only one policy:
+
+> **share.**
+
+A Dense learner has more of:
+
+> **specialize.**
+
+But the optimal behavior depends on recurrence.
+
+So the next-generation learner should not have to choose one architecture globally.
+
+It should be able to discover:
+
+[
+\boxed{
+\text{this computation is reusable}
+}
+]
+
+while deciding:
+
+[
+\boxed{
+\text{this other computation should remain task-specific}.
+}
+]
+
+And if recurrence changes:
+
+[
+\text{shared}
+\leftrightarrow
+\text{specialized}
+]
+
+should itself be learnable.
+
+This is now a much more concrete motivation for copy-on-write, residual specialization, merge/split, etc.
+
+Instead of merely saying:
+
+> “dynamic modularity sounds cool,”
+
+we can say:
+
+> **The current experiments empirically exhibit regimes in which opposite structural biases are optimal. Therefore a learner that can dynamically choose the granularity and extent of sharing has a concrete opportunity to outperform both fixed architectures.**
+
+That's a strong bridge to V2.
+
+---
+
+# There's an obvious V2 benchmark now
+
+Make different primitives within the **same world** have different reuse levels.
+
+For example:
+
+[
+\rho_1=1.0
+]
+
+[
+\rho_2=.95
+]
+
+[
+\rho_3=.8
+]
+
+[
+\rho_4=.5
+]
+
+[
+\rho_5=.2
+]
+
+[
+\rho_6=0.
+]
+
+Now neither current architecture is ideally matched.
+
+A fully shared basis incorrectly shares (P_5,P_6).
+
+A fully dense learner fails to capitalize maximally on (P_1,P_2).
+
+The ideal representation looks like:
+
+[
+\boxed{
+\text{shared cores for some computations}
++
+\text{residual/task-specific implementations for others}.
+}
+]
+
+This is exactly where a learned hierarchical representation should win.
+
+And unlike homogeneous-(\rho) ROW, the correct answer isn't globally “Dense” or “Continuous.”
+
+The learner has to discover the **factorization structure**.
+
+That's much closer to our actual research question.
+
+---
+
+## Even better: hierarchical recurrence
+
+Generate operations as:
+
+[
+P_{\tau,i}
+==========
+
+P_{\text{global}}
++
+P_{\text{family}(i)}
++
+\Delta_{\tau,i}.
+]
+
+For example:
+
+```text
+                 common transform
+                  /            \
+             family A        family B
+             /     \         /     \
+           task   task     task    task
+```
+
+The optimal code is hierarchical:
+
+[
+D(P_{\rm global})
++
+D(P_A)
++
+D(P_B)
++
+\sum_\tau D(\Delta_\tau).
+]
+
+Now a fixed flat continuous basis isn't obviously the correct representation.
+
+The learner needs to discover **how many levels of shared structure exist**.
+
+That is beginning to look like actual neural library learning.
+
+---
+
+# But don't do that yet
+
+For the current experiment, I think the agent should continue exactly as planned.
+
+The result on worlds 0–2 now justifies expanding the frozen (\rho) sweep across development worlds 3–9.
+
+What I would add to the report is:
+
+* paired effect at every (\rho);
+* configured (\rho);
+* measured functional recurrence;
+* per-world interpolated crossover in both coordinates;
+* mean curve;
+* novel-adaptation effect;
+* explicit statement that the proposed “early-transfer” intermediate regime was falsified.
+
+And I would avoid words like **phase transition** for now. “Crossover” is safer and accurate.
+
+If worlds 3–9 reproduce the same sign pattern:
+
+[
+\rho\le.75:\ Dense
+]
+
+[
+\rho\ge.9:\ Continuous,
+]
+
+then I think you have a **very robust development result**.
+
+At that point the next controls matter more than adding worlds:
+
+* generic low-rank hypernetwork;
+* teacher-family mismatch;
+* perhaps longer lifetime around the crossover.
+
+Because the deeper question becomes:
+
+[
+\boxed{
+\text{Is this crossover specific to our Continuous architecture, or is it a general consequence of the economics of representational sharing?}
+}
+]
+
+And if the latter survives, that's where I think this starts turning into a genuinely interesting paper rather than merely an architecture benchmark.
+This is now looking **remarkably clean**, and I think it changes the scientific story in one important way.
+
+The main result is no longer merely “there seems to be a crossover.” Across six independent development worlds you now have:
+
+[
+\begin{array}{c|c|c}
+\rho & \text{mean }(L_D-L_C) & \text{Continuous wins}\
+\hline
+0 & -2197 & 0/6\
+0.25 & -2308 & 0/6\
+0.5 & -2332 & 0/6\
+0.75 & -1427 & 0/6\
+0.9 & +1389 & 6/6\
+1.0 & +3357 & 6/6
+\end{array}
+]
+
+That is an unusually crisp qualitative reversal:
+
+[
+\boxed{
+\rho\le .75 \Rightarrow \text{Dense wins 36/36 paired cases}
+}
+]
+
+and
+
+[
+\boxed{
+\rho\ge .9 \Rightarrow \text{Continuous wins 12/12 paired cases}.
+}
+]
+
+The per-world crossing is also extremely stable:
+
+[
+\rho^*\in[0.811,0.852]
+]
+
+with mean:
+
+[
+\rho^*\approx0.826,
+]
+
+corresponding to measured functional recurrence around:
+
+[
+r^*\approx0.479.
+]
+
+With six development worlds, I would still call it a **crossover** rather than a “phase transition,” but this is becoming a genuine empirical phenomenon rather than a suggestive trend.
+
+## The transfer result is now especially interesting
+
+This is actually the part I'd pay close attention to.
+
+At (\rho=.9):
+
+[
+\text{Continuous wins lifetime cost }6/6,
+]
+
+yet:
+
+[
+\text{Continuous still has worse mean 32-shot novel transfer}.
+]
+
+It only wins novel adaptation reliably at:
+
+[
+\rho=1.
+]
+
+So we've learned that these are **not the same phenomenon**:
+
+[
+\boxed{
+\text{lower lifetime learning cost}
+\neq
+\text{better frozen-library compositional transfer}.
+}
+]
+
+That's scientifically useful.
+
+The Continuous representation at (\rho=.9) is apparently useful enough to improve prediction throughout the actual training lifetime, but not clean/general enough to serve as a superior frozen substrate for learning completely new compositions.
+
+That suggests the model can exploit **partial recurrence opportunistically** without necessarily extracting a perfectly reusable computational vocabulary.
+
+There may therefore be two notions of reuse:
+
+### Statistical reuse
+
+Sharing helps predict the next task/example because related transformations overlap.
+
+This is enough to lower prequential cost.
+
+### Structural reuse
+
+The learner has recovered operations sufficiently cleanly that they can be frozen and recomposed to solve unseen tasks.
+
+That apparently requires much stronger recurrence.
+
+This distinction might become quite important for the paper.
+
+---
+
+## In fact, this weakens one interpretation and strengthens another
+
+Initially we were tempted to say:
+
+> Continuous learns better reusable primitives, therefore future tasks become cheaper.
+
+But the (\rho=.9) result shows that cannot be the whole explanation.
+
+Continuous can have substantially lower lifetime cost **without** superior frozen-library transfer.
+
+So something else may be happening:
+
+[
+\text{shared representation}
++
+\text{task-specific state}
+]
+
+jointly exploit statistical overlap during online training.
+
+The representation need not factor the world into perfectly portable primitives.
+
+That's actually a more nuanced result.
+
+It means:
+
+[
+\boxed{
+\text{useful parameter sharing can emerge before clean computational factorization does.}
+}
+]
+
+Notice that's different from the earlier failed claim that **novel transfer** improves first. It doesn't.
+
+Instead the ordering may be:
+
+[
+\text{statistical sharing becomes worthwhile}
+]
+
+before:
+
+[
+\text{the learned library becomes cleanly reusable out of distribution}.
+]
+
+That's worth investigating.
+
+---
+
+# We should inspect operator recovery across (\rho)
+
+You already have functional primitive matching machinery.
+
+I would now plot, across the six (\rho) values:
+
+[
+\text{primitive recovery quality}
+]
+
+against:
+
+[
+\Delta L_{\rm lifetime}
+]
+
+and:
+
+[
+\Delta L_{\rm novel}.
+]
+
+My prediction would be something like:
+
+```text
+rho       lifetime sharing       clean primitive recovery
+0               bad                    bad
+.25             bad                    bad
+.5              bad                    bad
+.75             bad/modest             bad
+.9              good                   mediocre
+1               very good              very good
+```
+
+If that's what happens, we get an explanatory story for the divergence.
+
+At (\rho=.9), Continuous might learn a basis that is useful as a **shared low-dimensional manifold**, without recovering a canonical set of reusable operators.
+
+At (\rho=1), actual shared primitives exist, so the library crystallizes around them.
+
+That gets directly at one of our longstanding questions:
+
+> Is the right representation a discrete library of functions or a continuous computational basis?
+
+Potentially:
+
+[
+\boxed{
+\text{partial recurrence favors a continuous manifold; exact recurrence favors identifiable primitives.}
+}
+]
+
+That would be a really interesting result if supported.
+
+---
+
+# There is another subtle pattern in the loss curve
+
+Look at:
+
+[
+-2197,\ -2308,\ -2332,\ -1427,\ +1389,\ +3357.
+]
+
+From:
+
+[
+\rho=0\rightarrow .5,
+]
+
+Continuous doesn't gradually improve much relative to Dense.
+
+It is basically flat or slightly worse.
+
+Only somewhere after .5 does the sharing advantage really start moving.
+
+That suggests the relationship is strongly nonlinear.
+
+But remember the actual functional correlations may also be highly nonlinear in configured (\rho).
+
+So the critical plot remains:
+
+[
+x=\text{measured residual functional recurrence}
+]
+
+[
+y=L_D-L_C.
+]
+
+If that plot becomes approximately smooth/linear, then (\rho)'s apparent thresholdiness was mostly an artifact of how correlated parameters translate into correlated functions.
+
+If **that plot also has a sharp elbow**, then we have a much deeper phenomenon.
+
+That's one of the analyses I'd most want after worlds 6–9.
+
+---
+
+# This also gives V2 an even clearer motivation
+
+A fixed Continuous basis is forced to share.
+
+Dense-C is comparatively free to specialize.
+
+The experiment now gives overwhelming development evidence that:
+
+[
+\text{sharing is wrong in one regime}
+]
+
+and:
+
+[
+\text{sharing is right in another}.
+]
+
+Therefore the obvious next learner should be able to **choose the amount of sharing itself**.
+
+For example:
+
+[
+P_{\tau,i}(x)
+=============
+
+P_i(x)
++
+\Delta_{\tau,i}(x).
+]
+
+Then regularize:
+
+[
+L =
+L_{\rm prediction}
++
+\lambda D(P)
++
+\gamma D(\Delta).
+]
+
+If recurrence is high:
+
+[
+\Delta_{\tau,i}\rightarrow0
+]
+
+and the model shares (P_i).
+
+If recurrence is low:
+
+[
+\Delta_{\tau,i}
+]
+
+grows and the model specializes.
+
+That is the simplest possible version of our copy-on-write idea.
+
+No genetic algorithms.
+
+No merge/split compiler yet.
+
+Just:
+
+[
+\boxed{\text{shared parent + task residual}}
+]
+
+with a cost on specialization.
+
+And now we have a precise benchmark on which it should do something nontrivial:
+
+> **Can one learner track the lower envelope of Dense-C and Continuous across the entire recurrence curve?**
+
+Graphically:
+
+```text
+loss
+ ^
+ | Dense \
+ |        \
+ |         \_______
+ |                 \ Continuous
+ |
+ +--------------------------> recurrence
+```
+
+The dynamic/hybrid learner should ideally sit below both:
+
+```text
+loss
+ ^
+ | Dense \          Continuous
+ |        \        /
+ |         \______/
+ |        Hybrid
+ +--------------------------> recurrence
+```
+
+That would be the first concrete demonstration of:
+
+[
+\boxed{
+\text{a learner discovering how much computational structure deserves to be shared}.
+}
+]
+
+And that is substantially closer to our original idea than either current baseline.
+
+---
+
+# I would not build it yet
+
+Finish worlds 6–9.
+
+You've got a beautifully disciplined experiment underway; don't contaminate it.
+
+Then do the hypernetwork/task-code controls.
+
+Then sealed confirmation.
+
+But **V2 is now almost designing itself from the V1 result**.
+
+The current empirical story is becoming:
+
+1. Shared computational structure is not universally beneficial.
+2. There is a reproducible crossover where sharing becomes economically preferable.
+3. The crossover is strikingly stable across generated worlds.
+4. Lower lifetime cost and clean compositional transfer are distinct.
+5. Exact recurrence seems necessary for the strongest frozen-library transfer.
+6. Therefore an optimal learner should probably **infer the degree and granularity of sharing rather than have it architecturally fixed**.
+
+That last inference is where I think the research program starts getting genuinely exciting.
+
+If worlds 6–9 preserve the current 0/6 → 6/6 reversal, I would consider **the basic V1 phenomenon essentially established on the development distribution**. After that, the question is no longer whether there is something here. It's whether the controls and sealed confirmation let us make the claim rigorously enough to publish—and then whether V2 can learn the crossover instead of us choosing which side of it the architecture lives on.

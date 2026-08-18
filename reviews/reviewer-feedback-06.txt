@@ -1,0 +1,89 @@
+This is a very good milestone. The important part is not just that Continuous won all seven stage-two development worlds; it’s that the **configuration-selection process is now essentially closed**.
+
+On worlds 3–9, with the corrected learnable-(\alpha) architecture, Continuous wins every paired exact-reuse comparison by **2,554–5,054 cumulative Gaussian-log-loss units**, mean about **3,787**, and improves mean 32-shot novel NMSE from **0.00731 to 0.00368**. The winning hyperparameters also independently agree with the earlier stage-one selection. That substantially reduces the chance that the earlier result was a lucky configuration choice.
+
+The width-128 YAML issue is also exactly the kind of bug you *want* to discover now. The existing stage-two result is not invalid if the artifacts demonstrably used width 32, but the canonical experimental specification was not reproducible from a clean checkout. Fixing that **before the (\rho) sweep or confirmation** is essential.
+
+I would strengthen this one step further: make every experiment artifact contain and validate a complete **resolved experiment fingerprint**, not just the hand-written YAML. Something like:
+
+```text
+world_seed
+model_seed
+rho
+model_family
+hidden_width / rank / slots
+global_lr
+task_lr
+replay_ratio
+learnable_alpha
+activation
+program_depth
+git_commit
+resolved_config_hash
+```
+
+Then when summarizing a run, refuse to aggregate it unless the artifact fingerprint matches the expected frozen condition exactly. That turns this particular failure mode into something the infrastructure can no longer silently permit.
+
+I would also snapshot the **resolved config itself** into every run directory rather than relying on whatever `configs/v1.yaml` says later. Conceptually:
+
+[
+\text{artifact}
+===============
+
+\text{results}
++
+\text{exact configuration that produced them}.
+]
+
+That matters because the project is now mature enough that provenance is becoming part of the science.
+
+The experimental evidence itself is getting impressively consistent:
+
+[
+\text{worlds }0!-!2:
+\quad C>D
+]
+
+after symmetric tuning,
+
+and now:
+
+[
+\text{worlds }3!-!9:
+\quad C>D
+]
+
+on **7/7 paired worlds** after corrected-architecture revalidation.
+
+So across the exact-reuse development set, this is no longer a fragile seed-0 phenomenon. The real uncertainty has moved elsewhere:
+
+[
+\boxed{
+\text{How does the advantage change as genuine functional recurrence decreases?}
+}
+]
+
+That makes the replicated (\rho) sweep exactly the right next experiment.
+
+One subtle recommendation: since you now have a frozen development configuration, **do not retune separately at each (\rho)**. Use the exact frozen (\rho=1)-selected configurations across the whole sweep. Otherwise you start measuring “best architecture after environment-specific tuning” rather than how one learned substrate responds to changing recurrence. Your current plan sounds like it is already doing this, which is right.
+
+And I would preserve both outcomes at intermediate (\rho):
+
+[
+\Delta L_{\text{preq}}
+]
+
+and
+
+[
+\Delta \operatorname{NMSE}_{\text{novel}}.
+]
+
+The seed-0 result already suggests something potentially important: **Continuous can have better future adaptation while still losing total online cost**. If that replicates, the sweep is not merely locating a single crossover; it may reveal separate boundaries for:
+
+1. when abstraction starts improving transfer;
+2. when the accumulated transfer benefit becomes large enough to amortize abstraction cost.
+
+That would be a much richer result.
+
+So my reaction is: **fix and lock the YAML/validator issue, commit that as part of the freeze, then proceed.** I would avoid introducing any new architecture or conceptual feature right now. You finally have a clean, frozen pair of competitors and a causal intervention waiting to be replicated. This is where disciplined execution matters more than more ideas.
