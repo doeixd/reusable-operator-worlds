@@ -335,6 +335,10 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   annealing, and hardened routing that cannot select inactive slots.
 - A smoke lifetime and gate-gradient/masking tests pass. Symmetric penalty
   tuning and a full exact-reuse evaluation remain open.
+- The initial presence LR 0.01 pilot over-pruned to the one-slot fallback and
+  failed sufficiency. Added a resumable six-point lower-rate grid. Selection is
+  frozen to the fewest sub-12 active slots with final median and novel 32-shot
+  NMSE both at most 0.02, with log loss breaking active-count ties.
 
 # Decisions
 

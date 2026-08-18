@@ -446,3 +446,7 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   global sigmoid gates with an expected-active-slot penalty; hardened evaluation
   masks sub-threshold slots before route argmax so an inactive operator can never
   be selected.
+- Presence LR 0.01 with library penalty 1e-4 collapses all twelve relaxed gates
+  below threshold on world 0, forcing the one-slot safety fallback and degrading
+  log loss to -86,937. Tune presence LR at 1e-4 and 1e-3 before interpreting
+  pruning; the default gate optimizer was two orders of magnitude too fast.
