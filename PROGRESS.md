@@ -401,3 +401,21 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   quantifies the statistical-versus-structural dissociation: lifetime wins
   appear before identifiable primitives do, and frozen-library transfer
   requires the crystallized regime.
+- Opened sealed worlds 100-129 and ran the frozen confirmatory protocol
+  (360 paired lifetimes; zero failures; no exclusions). All three
+  pre-registered primary outcomes pass unanimously
+  (`reports/confirmatory/confirmatory.json`): exact-reuse advantage 30/30
+  worlds (mean +3,204 nats, median +3,177; sign test p = 1.9e-9);
+  positive per-world recurrence slope 30/30 (mean +5,715 nats per unit
+  measured recurrence; p = 1.9e-9); within-world sign reversal 30/30
+  (p = 1.9e-9). All survive Holm correction (adjusted p <= 5.6e-9).
+- Confirmatory secondaries: unanimous per-rho sign pattern (0/30 wins at
+  rho <= 0.75, 30/30 at rho >= 0.9); the effect is linear in measured
+  functional recurrence (R^2 = 0.935 vs 0.642 in configured rho; slope
+  +5,716 nats per unit recurrence, zero crossing at r* ~ 0.46); crossover
+  location rho* = 0.835 +/- 0.023 configured, r* = 0.499 +/- 0.050
+  measured, across all 30 worlds. Per-example effect sizes range from
+  -0.29 nats/example at rho = 0 to +0.39 at rho = 1.
+- V1's central claim is now confirmatory: a reusable continuous substrate
+  reduces lifetime prequential cost when and only when latent functional
+  recurrence is sufficiently strong, with a reproducible crossover.
