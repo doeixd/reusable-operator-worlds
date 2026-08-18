@@ -551,3 +551,14 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   6.4 adds the exact-posterior result (the advantaged bound beats
   Continuous; MAP-route disagreement while outperforming; premature
   commitment, not discreteness, is the cost).
+- Froze Model 8 gate thresholds before any consolidation run, per the
+  spec's amendable-only-before-inspection rule: H_threshold = 0.1 nat
+  (the posterior-concentration criterion whose empirical anchor is the
+  28.5-example median from step 001) and kappa = 1.5 (MAP-route
+  evaluation NMSE may exceed the soft mixture's by at most 50% for a
+  task to compile). Plan: run Model 8 at all six rho values on worlds
+  0-2 (18 lifetimes, parallel) so the endpoints decide H8a/H8b and the
+  full grid evaluates the pre-registered monotone firing-rate shape,
+  plus one forced-compile run at rho 0 world 0 for the
+  compilation-should-hurt check. Baselines are the existing
+  fingerprinted continuous artifacts at identical configurations.
