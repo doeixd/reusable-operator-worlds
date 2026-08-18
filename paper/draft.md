@@ -1,7 +1,9 @@
 # When Does Abstraction Pay? Measuring the Value of Reusable Computation in Neural Learners
 
-*Draft v0.3 — incorporates the second paper review (precision fixes,
-two-response-curves figure, envelope and two-part-code formalization).
+*Draft v0.4 — rebalances the alignment dependence into the abstract and
+contributions, adds the r* caution and the recovery-coincidence hedge,
+and connects the scale-free criterion to scaled analogues in the
+discussion.
 Development and confirmatory results labeled throughout; all numbers
 trace to fingerprint-validated artifacts in the public repository.*
 
@@ -19,17 +21,25 @@ basis consistently beats a compute-matched dense learner under high
 recurrence and consistently loses under low recurrence (30/30 worlds on
 all three pre-specified outcomes; Holm-adjusted p <= 5.6e-9). The paired
 advantage is approximately linear in measured functional recurrence
-(R^2 = 0.935), crossing zero near recurrence r = 0.50. Development-stage
-mechanistic analyses show that lower lifetime learning cost appears before
-identifiable, recomposable primitives do: **statistical reuse and
-structural abstraction are distinct phenomena**. The transfer advantage is
-acquired over the lifetime rather than present at initialization, and the
-effect survives changes in task order, replay budget, initialization,
-task-code capacity, batch size, and quantization. These results provide a
-controlled measurement of the economics of neural abstraction: when shared
-computation pays, and what kind of reuse a learner actually acquires. ROW
-is deliberately small — the generative programs are known exactly — and no
-claim in this paper concerns scale.
+(R^2 = 0.935), crossing zero near recurrence r = 0.50. The result is
+conditional on representational alignment, and substantially so: when the
+learner's operator family matches the environment's (residual tanh), the
+exact-reuse advantage is large; changing only the learner's activation
+family collapses it roughly tenfold. The supportable claim is therefore:
+**when a learner's representational vocabulary can efficiently express
+the environment's recurring computation, the value of using that
+vocabulary is linear in measured recurrence.** Development-stage
+mechanistic analyses further show that lower lifetime learning cost
+appears before identifiable, recomposable primitives do: **statistical
+reuse and structural abstraction are distinct phenomena**. The transfer
+advantage is acquired over the lifetime rather than present at
+initialization, and the effect survives changes in task order, replay
+budget, initialization, task-code capacity, batch size, and quantization.
+These results provide a controlled measurement of the economics of neural
+abstraction: when shared computation pays, on what its value depends, and
+what kind of reuse a learner actually acquires. ROW is deliberately small
+— the generative programs are known exactly — and no claim in this paper
+concerns scale.
 
 ## 1. Introduction
 
@@ -90,7 +100,10 @@ none of our claims concern scale, and the criterion we test is scale-free.
    recurrence is weak; an explicit reusable basis wins when it is strong;
    and the paired effect is linear in measured recurrence (R^2 = 0.935),
    the apparent threshold in configured coordinates being largely
-   coordinate distortion.
+   coordinate distortion. The magnitude of this economics is strongly
+   conditioned on representational alignment (a family-mismatch control
+   collapses it roughly tenfold), and we state every claim under that
+   condition.
 3. The statistical-reuse / structural-abstraction dissociation: lifetime
    economic benefit precedes — and does not imply — identifiable,
    recomposable primitives, which emerge only near exact recurrence.
@@ -192,7 +205,13 @@ nonlinear rho-to-r map: the underlying phenomenon is a smooth linear
 return on recurrence with a fixed offset — sharing has a price, and
 recurrence pays it down at a measurable rate. The zero crossing falls
 near r = 0.50 (per-world interpolated crossings: r* = 0.499 +/- 0.050;
-configured rho* = 0.835 +/- 0.023), and the sign pattern is unanimous:
+configured rho* = 0.835 +/- 0.023). We caution against reading anything
+into the round value: r* = -b/a where b aggregates unidentified costs of
+this substrate, protocol, likelihood, and lifetime length, so the
+crossing location is a property of this experimental economy, not a
+universal constant — the truncated-lifetime analysis (appendix) already
+shows it drifting with lifetime length before saturating. The sign
+pattern is unanimous:
 Continuous wins 0/30 worlds at every configured rho <= 0.75 and 30/30 at
 rho >= 0.9 — 180/180 cells matching the development-stage prediction. We
 use "crossover," never "phase transition"; on the evidence, the crossing
@@ -246,7 +265,11 @@ one-line takeaway:
    (0.0115-0.0121) — below the crossover, training moves the basis away
    from shared structure; rho = 0.75 matches baseline (0.0083); recovery
    first appears at rho = 0.9 (0.0048) and crystallizes at rho = 1.0
-   (0.0017). Recovery onset coincides with the performance crossover.
+   (0.0017). The location of recovery onset and the location of the
+   performance crossover coincide on the recurrence axis. We flag this
+   explicitly as a coincidence of locations observed at six recurrence
+   values on ten development worlds — suggestive, pre-specified for
+   targeted testing in V2, and not a demonstrated causal link.
 
 So a representation can pay economically before it crystallizes into
 identifiable, recomposable computational objects. Statistical reuse
@@ -456,6 +479,19 @@ when the investment pays predictively, the learner may not yet have
 discovered a clean abstraction: economic benefit precedes recomposable
 structure, and only near exact recurrence do lifetime efficiency,
 recomposition, and identifiable primitive recovery align.
+
+Why should anyone working at scale care about a 16-dimensional world?
+Because the criterion is scale-free and the phenomena it isolates have
+scaled analogues that are currently argued by anecdote: mixture-of-
+experts routing is a bet that language has high-recurrence structure
+worth sharing; adapter libraries are per-task residuals on a shared
+parent; model merging is consolidation; and "does fine-tuning transfer?"
+is the statistical-vs-structural question. ROW's contribution is not
+that its numbers transfer — they will not — but that it shows these
+economics are measurable at all, and supplies the falsifiable shapes
+(linear return on recurrence, an alignment-dependent magnitude, sharing
+without abstraction) that scaled versions of the question can be tested
+against.
 
 Reusable computation is an investment whose return is set by the
 recurrence structure of experience. ROW makes that return measurable. The

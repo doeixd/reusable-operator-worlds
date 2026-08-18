@@ -453,3 +453,14 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   provenance sentence retoned. Replaced figure 4 with the two-response-
   curves figure (lifetime advantage, recomposition advantage, operator
   recovery on one measured-recurrence axis).
+- Revised the paper to draft v0.4 per the third review: the alignment
+  dependence promoted into the abstract and contributions ("when the
+  vocabulary fits, the value of using it is linear in recurrence"; the
+  tenfold family-mismatch collapse stated up front); a caution added
+  against reading meaning into the round r* = 0.50 crossing (a property
+  of this experimental economy, already drifting with lifetime length);
+  the recovery-onset/crossover coincidence explicitly hedged as a
+  coincidence of locations pre-specified for V2 testing, not a causal
+  claim; and a discussion paragraph connecting the scale-free criterion
+  to scaled analogues (MoE routing, adapter libraries, model merging,
+  fine-tuning transfer).
