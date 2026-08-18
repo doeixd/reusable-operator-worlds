@@ -508,3 +508,8 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   field compared learner slot indices with teacher primitive indices
   (different spaces) and is superseded by slot-space agreement fields;
   the report documents this.
+- Published the repository publicly at
+  https://github.com/doeixd/reusable-operator-worlds (all 47 commits of
+  history, code, specs, plans, notes, reviews, reports, and paper draft;
+  artifacts/ remains untracked by design — runs are deterministically
+  regenerable from committed seeds and configs).
