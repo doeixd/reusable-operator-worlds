@@ -892,15 +892,12 @@ notes. Anyone editing §0 must re-verify against these sources.
   inference multiply-adds, mean int8-minus-float NMSE 1.1e-6, worst
   single-task increase 3.9e-5 (Continuous; 1.38e-4 worst across families
   per reviewer-07).
-- Robustness, worlds 0-2 (as reported in reviews/reviewer-feedback-07;
-  the per-run artifacts were restructured and these four means could not
-  be re-verified from a single current file — re-derive from run
-  directories before publishing them): mean Dense-minus-Continuous
-  advantage — reverse order +3,175; replay 0 +3,165; replay 1 +3,492;
-  replay 4 +3,082. Independently verified from the current
-  [artifacts/robustness/robustness.json]: the worlds 3-9 extension's
-  completed replay-0 condition shows Continuous winning 7/7 worlds,
-  mean +3,113 — consistent with the 0-2 report.
+- Robustness, ALL TEN development worlds — RESOLVED; supersedes the
+  earlier unverifiable worlds 0-2 means from reviewer-feedback-07. Cite
+  ONLY [reports/robustness/robustness.json]: Continuous wins 10/10 worlds
+  under every condition — replay 0: +3,129 [CI 2,511-3,743]; replay 1:
+  +3,698 [3,233-4,177]; replay 4: +3,350 [2,959-3,766]; reverse order:
+  +3,456 [3,145-3,791].
 - Structural controls
   [reports/structural_controls/structural-controls.json,
   paired_world_effects, 10 worlds]: verified per-world — e.g. world 0:
