@@ -16,7 +16,13 @@ from pathlib import Path
 
 from row.config import load_config
 from row.experiments import learned_lifetime
-from row.mixed_world import CANONICAL_PROFILE, MixedWorldFactory, per_primitive_recurrence
+from row.mixed_world import (
+    CANONICAL_PROFILE,
+    HIERARCHICAL_WEIGHTS,
+    HierarchicalWorldFactory,
+    MixedWorldFactory,
+    per_primitive_recurrence,
+)
 
 
 def main() -> None:
@@ -36,6 +42,11 @@ def main() -> None:
     )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--fast-tuning", action="store_true", default=True)
+    parser.add_argument(
+        "--hierarchical",
+        action="store_true",
+        help="Benchmark E: global+family+task hierarchy instead of a rho profile",
+    )
     args = parser.parse_args()
 
     if (args.output / "summary.json").exists():
@@ -55,7 +66,11 @@ def main() -> None:
         output_directory=args.output,
     )
 
-    factory = MixedWorldFactory(args.profile)
+    factory = (
+        HierarchicalWorldFactory(HIERARCHICAL_WEIGHTS)
+        if args.hierarchical
+        else MixedWorldFactory(args.profile)
+    )
     original_world = learned_lifetime.World
     learned_lifetime.World = factory  # type: ignore[assignment]
     try:
@@ -64,19 +79,24 @@ def main() -> None:
         learned_lifetime.World = original_world  # type: ignore[assignment]
 
     world = factory.generate(config.world)
-    provenance = {
-        "rho_profile": list(factory.profile),
+    provenance: dict[str, object] = {
         "note": (
-            "mixed-recurrence world; the config.yaml reuse_rho field is a "
-            "placeholder and this file is authoritative for the profile"
+            "structured-recurrence world; the config.yaml reuse_rho field is "
+            "a placeholder and this file is authoritative for the structure"
         ),
         "per_primitive_recurrence": per_primitive_recurrence(world),
     }
+    if args.hierarchical:
+        provenance["hierarchy_weights"] = list(factory.weights)
+        label = f"hierarchy={list(factory.weights)}"
+    else:
+        provenance["rho_profile"] = list(factory.profile)
+        label = f"profile={list(factory.profile)}"
     (args.output / "rho_profile.json").write_text(
         json.dumps(provenance, indent=2) + "\n", encoding="utf-8"
     )
     print(
-        f"{args.model} world={args.world_seed} profile={list(factory.profile)}: "
+        f"{args.model} world={args.world_seed} {label}: "
         f"loss={summary['cumulative_prequential_gaussian_log_loss']:.1f}"
     )
 
