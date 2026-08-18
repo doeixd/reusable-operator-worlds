@@ -477,3 +477,20 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   generalization) with a defended novelty statement; 27-entry reference
   list added. Prose pass removed meta-commentary and reduced em-dash and
   changelog constructions.
+- Revised the V2 spec per external review before resuming V2 runs: the
+  research statement and internal-ceiling section rewritten around the
+  linear return-on-recurrence law (amortization demoted to an early-
+  lifetime mechanism finding, with the superseded expectation kept on the
+  record); H9a given a frozen measurement procedure (primary attribution
+  of task-step residuals by true-route position, avoiding the slot-
+  identifiability failure V1's recovery result predicts; Hungarian slot
+  matching demoted to descriptive with an ambiguity-counts-against rule;
+  inference by sign test over per-world Spearman correlations); the Model
+  8 compilation gate given a pre-registered monotone firing-rate shape
+  prediction across the full rho grid; sealed-block point predictions
+  added (slope in [4,000, 7,500] nats/unit, pooled root in [0.40, 0.60],
+  per-world crossing mean in [0.42, 0.58], R^2 >= 0.85 and >= +0.15 over
+  configured coordinates) so seeds 200-229 test parameter replication,
+  not just signs; the hypernetwork-gap corollary promoted to step 002b;
+  the 7b-dream falsifier protected from descoping; and the batch-size
+  item updated to reflect the completed V1 ablation.

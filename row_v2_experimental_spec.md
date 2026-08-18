@@ -238,6 +238,32 @@ their information content and could rescue the high-rho cells). Any public
 figure reports J at multiple lambda. H9a (per-primitive allocation in
 mixed worlds, Benchmark D) remains untested.
 
+**H9a measurement procedure, frozen before any mixed-world run** (added
+after external review; the identifiability problem is real and V1's own
+recovery result predicts it — below the crossover, slot-to-primitive
+correspondence is exactly what fails):
+
+- **Primary attribution is by true-route position, not slot matching.**
+  Each task-step residual R_{tau,l} is attributed to the teacher
+  primitive occupying position l of that task's hidden program. This is
+  well-defined regardless of whether the learner's slots recover the
+  primitives, uses ground truth only as a post-hoc diagnostic (exactly
+  like operator recovery), and is therefore the H9a statistic.
+- **Secondary (descriptive only): Hungarian slot matching** on functional
+  distance over fixed probes, reported per world with an ambiguity flag:
+  a slot's assignment is AMBIGUOUS when its best-match distance exceeds
+  half its second-best (margin < 2x). Ambiguous assignments are reported
+  and count AGAINST the secondary signature (never excluded); they do not
+  affect the primary statistic.
+- **Aggregation, pre-specified:** per world, the Spearman rank
+  correlation between per-primitive recurrence and per-primitive mean
+  residual fraction is computed over the 6 primitives (descriptive; six
+  points is underpowered alone). The INFERENTIAL unit is the sign of the
+  per-world correlation across the 10 development worlds, tested with the
+  exact binomial sign test — the same discipline as every other claim in
+  this program. Pooled correlations are reported but carry no inferential
+  weight.
+
 ## H10 — Within-lifetime amortized inference **[contingent on H7]**
 
 A compiler network trained only on this lifetime's own solved tasks
@@ -530,6 +556,18 @@ Measured against the never-consolidated continuous run on paired worlds at
 fire rarely or not at all, and forcing compilation there should hurt;
 report the gate's firing rate at both endpoints).
 
+**Gate shape prediction, pre-registered** (added after external review:
+`H_threshold` and `kappa` frozen from only three worlds could pass H8b by
+accident of those worlds). A gate that is correct for the right reason
+must satisfy more than the endpoints: its firing rate, evaluated
+post-hoc across the FULL rho grid on worlds 0-2, is predicted to be
+NON-DECREASING in rho — near zero at `rho <= 0.25`, intermediate in the
+crossover region, near complete at `rho = 1`. A gate that passes the
+endpoints but fires non-monotonically in between is treated as
+mis-calibrated, not as H8b-passing, and the thresholds are re-derived
+(once, with the re-derivation documented) before any sweep result is
+interpreted.
+
 ## Model 5 — shared parent + residual (tests H9; from V1 spec §17)
 
 `Q_{tau,l}(z) = Q_{q_tau,l}(z) + R_{tau,l}(z)` with low-rank residuals and an
@@ -604,6 +642,29 @@ paired on identical worlds.
   hypothesis and Holm-correct across that fixed family. Development-stage
   results are never corrected and never called confirmatory.
 
+## Sealed-block point predictions (parameter replication, not just sign)
+
+V1's confirmatory outcomes were sign tests; V2's sealed block (seeds
+200-229) can do better, because V1 supplies parameter estimates. Frozen
+now, before any seed in 200-229 exists:
+
+- **Slope:** the pooled Dense-minus-Continuous effect against measured
+  recurrence on seeds 200-229 will have slope in **[4,000, 7,500] nats
+  per unit recurrence** (V1 sealed estimate: 5,716; development: 5,906).
+- **Zero crossing:** the pooled-fit root will fall in **[0.40, 0.60]**
+  measured recurrence, and the mean of per-world interpolated crossings
+  in **[0.42, 0.58]** (V1 sealed: pooled root ~0.46, per-world mean
+  0.499; development bridge: ~0.42-0.46 — the dev-vs-sealed drift is
+  itself why these are intervals, not points).
+- **Linearity:** pooled R^2 in measured-recurrence coordinates >= 0.85
+  and exceeding the configured-rho R^2 by >= 0.15 (V1 sealed: 0.935 vs
+  0.642).
+
+Falling outside any interval is reported as a parameter-replication
+failure even if all sign tests pass. Passing upgrades the claim from
+"the phenomenon reproduces" to "the parameters replicate" — the
+difference between reproducing an effect and having a measured law.
+
 ---
 
 # 6. Constraints carried forward as law
@@ -644,8 +705,11 @@ Batch `forward_tasks` by task ID before any Benchmark D sweep (it is the
 standing compute bottleneck and a precondition for useful GPU throughput).
 Kaggle sessions require device-agnostic tensors, pinned dependencies, and
 checkpoint/resume within the session limit. The V1 batch-size deviation
-(effective batch 2 vs suggested 8) must be resolved or ablated before any
-V2 sweep inherits the protocol.
+(effective batch 2 vs suggested 8) was ablated in V1: the advantage
+survives at batch 8 but shrinks ~40% (worlds 0-2: +3,463 -> +2,061). V2
+keeps batch 2 for continuity with every V1 number; if any V2 experiment
+adopts batch 8, every V1-vs-V2 magnitude comparison carries the ~40%
+caveat explicitly.
 
 ---
 
@@ -676,8 +740,13 @@ then seeds 100–129). No V2 training before that, with one exception — the
 2. **001** Model 7a exact posterior, post-hoc on frozen artifacts. H7
    verdict. (Also supplies Model 8's compilation gate.)
 3. **002** GELU crossover-shift: bracketing `rho` points, worlds 0–2 (H6).
-4. **003** Model 8 consolidation at `rho in {0, 1}`, worlds 0–2 (H8a/H8b),
-   with the §1 decision branches pre-registered in this file.
+4. **002b** Hypernetwork-gap corollary (promoted per external review — the
+   only independent mechanism check on the manifold-vs-primitives story):
+   train the hypernetwork at `rho = 0.9`, worlds 0-2, and test whether its
+   gap to Continuous is smaller at 0.9 than at 1.0. Three runs.
+5. **003** Model 8 consolidation at `rho in {0, 1}`, worlds 0–2 (H8a/H8b),
+   with the §1 decision branches pre-registered in this file and the gate
+   shape prediction in §4 evaluated across the full grid.
 5. **004** Benchmark D generator + validity gates (per-primitive measured
    recurrence, scratch control, output scale) on three development worlds.
 6. **005** Model 5 shared-parent+residual on Benchmark D (H9), with the
@@ -686,7 +755,10 @@ then seeds 100–129). No V2 training before that, with one exception — the
 7. **006** Model 7b/7c within-lifetime compiler (H10) on exact-reuse
    worlds; then 7b-dream vs 7b at matched compiler-training compute, with
    the dream-benefit-vs-rho check at both endpoints before trusting the
-   augmentation.
+   augmentation. The dream-vs-rho falsifier is PROTECTED from descoping:
+   if time pressure cuts anything from 006, cut 7c, not the dream
+   control — it is the self-test of whether the compiler learned the
+   world's program distribution.
 8. **007** Lifetime-length runs (32 and 128 tasks) at bracketing `rho` if
    and only if B2 showed crossover movement.
 9. **008** Benchmark E hierarchical recurrence, only after 005's verdict.
@@ -840,24 +912,35 @@ This is a strong niche paper for the continual/modular learning and
 MDL communities, a benchmark others can adopt, and — if the framing
 catches — the founding measurement of an "economics of abstraction"
 research program. It is not a capability demo and will not move the LLM
-mainstream. The single most valuable result in the package, if it holds,
-is rho*(N) moving as predicted: a falsifiable economic law of
-representation learning, confirmed. Optimize the paper to be
-unimpeachable, not impressive.
+mainstream. (Superseded expectation, kept for the record: this section
+originally named rho*(N) movement as the most valuable prospective
+result; the bridge analysis returned it PARTIAL — early movement, then
+saturation — so that headline is off the table.) The most valuable
+results now on offer are the linear return-on-recurrence law (R^2 = 0.97
+in development, 0.935 sealed) with its sealed-block parameter-replication
+test, and a learner that positions itself on that line (H9). Optimize the
+paper to be unimpeachable, not impressive.
 
 ---
 
 # 11. Research statement
 
-> **V1 established that reusable neural representations win exactly when
-> latent recurrence is strong enough to amortize their cost. V2 tests
-> whether the learner itself can operate that economics: measuring where the
-> crossover lies, choosing how much to share per computation, deciding when
-> soft inference should be compiled into discrete programs, and learning to
-> infer programs in its own language from within a single lifetime. The
-> criterion throughout is unchanged — prospective reduction in lifetime
-> learning cost plus retained description length — applied now to the
-> representation's own form.**
+> **V1 established a law-like regularity: the value of representational
+> sharing is approximately linear in measured functional recurrence, with
+> a sign change where the return equals the sharing penalty — and it
+> established that the sharing which pays is not yet abstraction, which
+> crystallizes only near exact recurrence. Amortization over lifetime
+> length is a demonstrated early-lifetime component of this picture, not
+> its mechanism. V2 asks whether a learner can position itself on that
+> line: choosing how much to share per computation (H9), maintaining
+> uncertainty over programs instead of committing prematurely (H7),
+> compiling soft inference into discrete programs only where discrete
+> structure exists (H8), and learning to infer programs in its own
+> language within a single lifetime (H10). The criterion throughout is
+> unchanged — prospective reduction in lifetime learning cost plus
+> retained description length — applied now to the representation's own
+> form, with the sealed block asked to replicate parameters, not just
+> signs.**
 
 # Appendix A. Verified numbers behind §0 (checked against artifacts,
 # 2026-08-17)
