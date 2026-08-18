@@ -165,6 +165,21 @@ Dense-C on lifetime loss in all ten. Freeze this optimizer for any follow-up.
 Dense-24 and Dense-32 are effectively tied across worlds 0–9, so the sensitivity
 is closed: retained task-state dimension does not explain the primary result.
 
+# Shared-parent residual control
+
+The fixed-topology copy-on-write control uses the selected Continuous eight-slot
+parent and adds rank-two task-specific residual factors at each of three stages.
+Routes use task LR `0.05`; residual factors use a distinct optimizer group. The
+development-world-0 grid at configured `rho=0.75` selected residual LR `0.01`
+and L1 penalty `0.01` by lowest cumulative Gaussian log loss among runs whose
+maximum task functional residual-to-parent ratio is below `1.0`.
+
+Freeze that setting for the recurrence sweep on worlds 0–2 at configured rho
+`0.5`, `0.75`, `0.9`, and `1.0`. World 0 at rho `0.75` is the tuning point and
+must be labeled as such; worlds 1–2 provide the paired replication. Report loss
+relative to the better fixed Continuous/Dense-C model, functional residual
+ratios, novel adaptation, retained task state, and forward multiply-adds.
+
 # Confirmation gate
 
 Run seeds 100–129 only after:

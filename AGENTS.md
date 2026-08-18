@@ -417,3 +417,11 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   systematically outperform forced one-slot teacher routes. Report progressive
   functional matching as evidence of operator-quality improvement, not as proof
   that Continuous has uniquely recovered the teacher's discrete representation.
+- The shared-parent residual control must optimize task routes and rank-two task
+  residuals in separate parameter groups. Coupling both at task LR 0.05 produces
+  large residuals and poor lifetime loss; residual LR is a substantive control.
+- Guarded world-0 tuning at configured `rho=0.75` selected residual LR 0.01 and
+  L1 penalty 0.01. Its cumulative log loss is -157,103, novel 32-shot NMSE is
+  0.01748, and mean/maximum functional residual-to-parent ratios are 0.246/0.419.
+  This is a tuning result only; the selected setting must be evaluated across
+  recurrence and additional development worlds before interpretation.

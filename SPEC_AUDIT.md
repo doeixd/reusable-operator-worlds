@@ -59,9 +59,10 @@ claim.
 
 # Open model investigation
 
-- Implement the shared-parent plus task residual control for intermediate reuse.
-  This is the remaining fixed-topology copy-on-write test in the V1
-  implementation order and directly probes share-versus-specialize economics.
+- The shared-parent plus rank-two task residual control is implemented and its
+  optimizer/penalty is selected on development world 0 at configured
+  `rho=0.75`. Its recurrence sweep on worlds 0–2 remains to be completed before
+  the copy-on-write prediction can be judged.
 - MDL presence-gate pruning is conditional on deciding that the hard discrete
   route learner “works” well enough to justify pruning. The current evidence
   shows strong final operator/route recovery but poor online route inference;
@@ -85,7 +86,7 @@ obligations below should be resolved or explicitly deferred.
 
 # Execution order
 
-1. Implement the shared-parent plus residual control at intermediate reuse.
+1. Complete the shared-parent residual recurrence sweep and analysis.
 2. Freeze batch protocol, tuning, and statistical summaries.
 3. Run a clean artifact/plotting rehearsal.
 4. Re-audit the gate before touching confirmatory worlds.

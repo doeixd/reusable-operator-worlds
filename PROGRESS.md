@@ -286,9 +286,26 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 - Freeze batch 2 versus batch 8 and any required symmetric retuning for
   confirmation.
-- Implement the shared-parent plus task-residual intermediate-reuse control.
+- Run the frozen shared-parent residual setting across recurrence on development
+  worlds 0–2 and compare it with the better fixed Continuous/Dense-C envelope.
 - Rehearse artifact generation and plotting from a clean checkout before opening
   the confirmatory seed gate.
+
+# Shared-parent residual tuning complete
+
+- Implemented a fixed shared eight-slot parent plus rank-two task-specific
+  residual factors at each of three stages. Routes and residual factors have
+  separate optimizer groups, and every run is rejected if any task residual's
+  functional magnitude reaches the parent update magnitude.
+- A nine-point nonzero-penalty grid on development world 0 at configured
+  `rho=0.75` selected residual LR 0.01 and L1 penalty 0.01 by guarded cumulative
+  Gaussian log loss.
+- The selected tuning run scores -157,103 cumulative log loss, 0.01748 novel
+  32-shot NMSE, and mean/maximum functional residual ratios 0.246/0.419. The
+  result is a development tuning choice, not replication evidence.
+- Added a serialized, resumable recurrence sweep and a fixed-envelope analyzer.
+  The sweep reuses only the validated selected tuning artifact and otherwise
+  runs one full lifetime at a time to avoid the prior paging-file failure.
 
 # Decisions
 
