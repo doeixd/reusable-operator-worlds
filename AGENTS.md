@@ -479,3 +479,26 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 - Sealed-block discipline extended in V2: seeds 200-229 test parameter
   intervals (slope, crossing, R^2), not just signs; interval misses are
   reported as failures even when signs pass.
+- This machine has 16 cores but every lifetime pins itself to one thread
+  (`torch.set_num_threads(1)`) and the sweep drivers run runs
+  sequentially, so unmodified sweeps use ~1/16th of the machine. Launch
+  independent runs as parallel processes (guarded by existing
+  `summary.json`, since drivers are resumable); a 360-run sweep drops
+  from ~6 hours to ~30-40 minutes. Add a `--jobs N` process pool to any
+  new sweep driver; cap around 12 concurrent runs to leave headroom.
+- Kaggle is available for throughput beyond local cores (token provided
+  by the PI as an environment variable). Its value is parallel sessions,
+  not per-run speed — the models are too small to benefit from a GPU.
+  Pattern: each kernel clones the public GitHub repo, installs, runs a
+  world-slice, and saves `artifacts/` as kernel output. Reserve it for
+  work exceeding an overnight 16-core budget (V2 sealed block plus
+  Benchmark D together, or Phase III cross-world training).
+- NEVER write the Kaggle token (or any credential) into a tracked file,
+  script, notebook metadata, or kernel source — the repository is
+  public. Pass credentials only as inline environment variables at
+  invocation time.
+- The repository is now public at
+  https://github.com/doeixd/reusable-operator-worlds. Push after each
+  commit; the public history is part of the project's verifiability
+  claim, so never rewrite published history (no force pushes, no
+  amends of pushed commits).
