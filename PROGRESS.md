@@ -513,3 +513,8 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   history, code, specs, plans, notes, reviews, reports, and paper draft;
   artifacts/ remains untracked by design — runs are deterministically
   regenerable from committed seeds and configs).
+- Parked the V3 program sketch in notes/v3-sketch.txt (four workstreams:
+  integrated wake/sleep learner, vocabulary-revision worlds, cross-world
+  scale, and the LLM adapter-library external-validity bridge), with the
+  explicit gate that the real V3 spec waits for V2's H8/H9 verdicts and
+  the one-surrendered-control-per-rung rule.

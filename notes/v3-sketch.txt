@@ -1,0 +1,111 @@
+# V3 sketch — the project after V2
+
+Status: parked sketch, not a spec. Written 2026-08-18, while V2 steps
+001-002b were in flight (H7 confirmed at the advantaged bound; H6/002b
+pending; H8/H9 verdicts not yet in). The actual V3 spec is gated on V2's
+gate closing, because the H8/H9 outcomes change its shape materially: if
+both fail, V3's Workstream 1 pivots from restructuring to amortized
+inference, per the pre-committed branch in row_v2_experimental_spec.md
+section 9. Do not begin V3 work from this file; begin from a V3 spec
+written with the same discipline as V1's and V2's (hypotheses,
+falsifiers, pre-registered branches, sealed seeds 300+).
+
+## The V3 question
+
+V1 measured when reuse pays. V2 tests whether a learner can position
+itself on that curve: share vs specialize (H9), stay uncertain vs commit
+(H7), compile vs stay soft (H8). V3 asks whether a learner can revise
+the vocabulary itself — invent, merge, promote, and retire computational
+objects — with every revision certified by the same criterion:
+prospective lifetime learning cost plus retained description length.
+
+One-sentence arc: V1 was a measurement, V2 is a decision-maker, V3 is a
+language-reviser — and the first rung to touch the real world.
+
+## Workstream 1 — the integrated learner
+
+Assemble V2's validated pieces into one wake/sleep machine:
+
+- Fast state: an explicit program posterior q(pi | D_t) maintained by the
+  amortized compiler (7b-dream) with 1-3 refinement steps (7c);
+  prediction marginalizes. Gradient descent on task codes survives only
+  as the refinement corrector. Design driver: H7 — the exact posterior
+  beat everything, and premature commitment was the identified sin (MAP
+  routes disagreed with online routes on 39/64 tasks while the average
+  outperformed both).
+- Medium state: penalized residuals as working hypotheses, TEMPORARY by
+  design. Three sleep-time fates per residual: delete (noise), compile
+  into the task's program (expressible after all), or PROMOTE — shared
+  structure across several tasks' residuals becomes a new library
+  operator. This is copy-on-write with the MDL bill paid: Model 5 proved
+  allocation works (+9.2k nats over the envelope) and that permanent
+  residuals lose in bits (~130k retained; loses all cells under the
+  two-part code).
+- Slow state: a self-editing library. Sleep runs the consolidation
+  suite — entropy-gated compilation (Model 8; first calibration anchor:
+  ~28.5 examples to posterior concentration), residual promotion,
+  descriptor-based merge of converged operators, deletion of unused
+  ones. Every edit accepted iff it reduces J = L_preq + lambda*D + mu*C.
+  Hard rule from the MDL-gating negative: NO structural pressure during
+  wake — learn greedily awake, compress on evidence asleep.
+- Glue: content-addressed functional descriptors (next-level.txt s3.1),
+  mandatory once the library changes membership, so the compiler
+  survives library edits.
+
+Falsifiers, inherited and sharpened: must beat the V2 components run
+separately (integration must pay); must refuse all refactoring at
+rho = 0; must win in BOTH currencies in mixed worlds (prequential
+envelope AND two-part code) — which no V2 model achieves.
+
+## Workstream 2 — worlds that demand vocabulary revision
+
+Static Benchmark D only rewards allocating a fixed vocabulary. V3 worlds
+make the right vocabulary discoverable or moving:
+
+- Benchmark E: hierarchical recurrence (how many levels of sharing
+  exist?).
+- Benchmark C, finally unparked: nonstationary regimes — fork/merge
+  earns its keep only when world statistics drift.
+- Benchmark L: loops, under the frozen constraints in the V2 spec
+  (fixed-point-trap validity gate, varied iteration counts, count
+  extrapolation, interpret-vs-compile lambda/mu sweep).
+
+Each answers one form of: did the learner change its language for the
+right reason?
+
+## Workstream 3 — cross-world scale (the Kaggle phase)
+
+Deliberately cross the lifetime/meta-learning line: compilers and
+consolidation policies trained across thousands of generated worlds. The
+expert-iteration loop (search -> distill -> dream -> verify) becomes
+load-bearing exactly here, where program spaces outgrow enumeration.
+Pre-committed controls travel with it: matched meta-training budgets for
+dense baselines, held-out evaluation worlds, family-mismatch worlds in
+the evaluation set. The question: can inference in one's own language
+become an accumulated skill?
+
+## Workstream 4 — the external-validity bridge
+
+First contact with reality, independent of Workstreams 1-3 and can start
+early: a frozen small LLM plus a LIBRARY of adapters over a stream of
+fine-tuning tasks, grown and consolidated under the prequential-plus-
+description-length criterion; LoRAHub-style baselines to beat. This is
+not "scale ROW up" — it is "test whether the criterion survives leaving
+the lab." H6 predicts what to expect: prior fit will dominate
+magnitudes; the test is whether the SHAPES reappear — linear return on
+(estimated) recurrence, the allocation signature, refusal to consolidate
+unrelated tasks. Requires an estimator of functional recurrence from
+data (the "functional transfer information" idea in notes/crossover.txt)
+since ground truth is gone.
+
+## Gates and risk discipline
+
+- Workstream 1 gated on V2's H8/H9 verdicts (pivot branch pre-committed).
+- Workstream 3 gated on Workstream 1 showing integration pays.
+- Workstream 4 ungated (independent; start when convenient).
+- Standing rule: each rung of the ladder surrenders exactly ONE control
+  (V2 surrendered none; Benchmark C gives up stationarity; ROW-P would
+  give up I(X;T) = 0; Workstream 4 gives up ground truth entirely).
+  Never surrender two controls in one step.
+- Sealed seeds 300-329 reserved for V3 confirmation; parameter-interval
+  discipline (not just signs) inherited from the V2 plan.
