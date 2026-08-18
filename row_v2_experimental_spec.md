@@ -354,8 +354,19 @@ none of them touches sealed worlds.
    statistical-vs-structural dissociation (§0 item 8). The untrained
    baseline is mandatory context for any recovery number quoted anywhere —
    absolute distances without it are uninterpretable (the family is
-   already ~0.0087-close by construction). Hypernetwork corollary remains
-   unrun (hypernetwork was only trained at rho = 1).
+   already ~0.0087-close by construction).
+   **Hypernetwork corollary (002b) STATUS (run 2026-08-18,
+   artifacts/v2_hyper_rho09/): CONFIRMED, stronger than predicted.** The
+   Continuous-over-Hypernetwork gap is smaller at rho = 0.9 than at 1.0
+   in 3/3 worlds — and in 2/3 worlds the hypernetwork BEATS Continuous at
+   0.9 (-1,496 and -943 world 0/2; +917 world 1) while losing in all
+   worlds at 1.0 (+2,820 / +1,120 / +2,102). There is a second,
+   representation-level crossover: the slotless operator manifold is the
+   better substrate at partial recurrence, and explicit slots pay only
+   where identifiable primitives exist. This is an independent-instrument
+   confirmation of the manifold-vs-crystallized-primitives account and
+   should appear alongside the recovery-onset result wherever the
+   dissociation is presented.
 
 ---
 

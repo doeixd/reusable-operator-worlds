@@ -518,3 +518,15 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   scale, and the LLM adapter-library external-validity bridge), with the
   explicit gate that the real V3 spec waits for V2's H8/H9 verdicts and
   the one-surrendered-control-per-rung rule.
+- Ran V2 step 002b (hypernetwork at rho 0.9, worlds 0-2): the corollary is
+  confirmed and stronger than predicted. The Continuous-over-Hypernetwork
+  gap shrinks at rho 0.9 versus 1.0 in 3/3 worlds, and the hypernetwork
+  outright beats Continuous at 0.9 in 2/3 worlds (-1,496 and -943; +917)
+  while losing in all three at 1.0 (+2,820/+1,120/+2,102). A second
+  representation-level crossover: the slotless manifold wins at partial
+  recurrence; explicit slots pay only where identifiable primitives
+  exist. Independent confirmation of the manifold-versus-crystallization
+  account. H6 GELU runs: rho 0.75 complete (0/3, mean -3,632 versus tanh's
+  -1,597); rho 0.9 worlds 0 and 2 negative (-1,142, -1,662) with world 1
+  rerunning after a memory-pressure failure; rho 1.0 worlds 1-2 in
+  flight to complete the shifted-not-vanished test.
