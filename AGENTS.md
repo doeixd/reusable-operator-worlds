@@ -514,3 +514,13 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   range, moving the zero crossing right without bending the line. Fit
   the GELU points to their own line and report both coefficients rather
   than only the crossing.
+- pip hangs on this machine for new package installs (stalls in network/
+  index resolution even for `pip download --no-deps`; cause not
+  diagnosed). Do not block work on pip. For Kaggle specifically, the
+  `kaggle` package is unnecessary: the REST API accepts the access token
+  as `Authorization: Bearer <token>` (verified 200 against
+  /api/v1/kernels/list). Kernel workflow via curl: push a kernel with
+  POST /api/v1/kernels/push (JSON metadata plus source), poll
+  /api/v1/kernels/status/{user}/{slug}, fetch results from
+  /api/v1/kernels/output/{user}/{slug}. Token comes from the environment
+  at invocation time only — never from a file.
