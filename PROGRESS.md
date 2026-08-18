@@ -391,3 +391,13 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Froze the confirmatory protocol and pre-registered outcomes in
   `CONFIRMATION_PLAN.md` (three Holm-corrected primary outcomes, world-level
   exclusion rule, reporting rules) before opening any sealed world.
+- Completed post-hoc operator recovery across the development recurrence sweep
+  (`reports/rho_operator_recovery/operator-recovery.json`). Against an
+  untrained-basis baseline of 0.0087, trained continuous operators sit
+  farther from the shared primitives than untrained ones at `rho <= 0.5`
+  (0.0115-0.0121), match baseline at 0.75 (0.0083), first drop below it at
+  0.9 (0.0048), and crystallize at 1.0 (0.0017). Primitive recovery onset
+  coincides with the performance crossover, and partial recovery at 0.9
+  quantifies the statistical-versus-structural dissociation: lifetime wins
+  appear before identifiable primitives do, and frozen-library transfer
+  requires the crystallized regime.

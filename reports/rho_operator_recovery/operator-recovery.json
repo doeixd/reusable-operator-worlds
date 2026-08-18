@@ -1,0 +1,395 @@
+{
+  "scope": "development recurrence sweep continuous artifacts; post-hoc; recovery measured against each world's base (shared) library",
+  "prediction_under_test": "partial recurrence yields useful sharing without identifiable primitives (mediocre recovery at rho=0.9); exact recurrence crystallizes identifiable primitives (sharp recovery at rho=1.0)",
+  "rho_summaries": [
+    {
+      "configured_rho": 0.0,
+      "worlds": 9,
+      "mean_one_to_one_distance": 0.012191897130363453,
+      "median_one_to_one_distance": 0.012142894025410265,
+      "mean_short_explanation_distance": 0.012481180854262912,
+      "mean_depth_one_explanations": 8.0
+    },
+    {
+      "configured_rho": 0.25,
+      "worlds": 9,
+      "mean_one_to_one_distance": 0.012031309499830452,
+      "median_one_to_one_distance": 0.011847895193602844,
+      "mean_short_explanation_distance": 0.012311623441620918,
+      "mean_depth_one_explanations": 8.0
+    },
+    {
+      "configured_rho": 0.5,
+      "worlds": 9,
+      "mean_one_to_one_distance": 0.011458731466464894,
+      "median_one_to_one_distance": 0.011299466797121646,
+      "mean_short_explanation_distance": 0.011631765027597447,
+      "mean_depth_one_explanations": 8.0
+    },
+    {
+      "configured_rho": 0.75,
+      "worlds": 9,
+      "mean_one_to_one_distance": 0.00826704908169076,
+      "median_one_to_one_distance": 0.00820764092147794,
+      "mean_short_explanation_distance": 0.008877440091255505,
+      "mean_depth_one_explanations": 8.0
+    },
+    {
+      "configured_rho": 0.9,
+      "worlds": 9,
+      "mean_one_to_one_distance": 0.004782878825502165,
+      "median_one_to_one_distance": 0.004687403226601934,
+      "mean_short_explanation_distance": 0.005512670414897855,
+      "mean_depth_one_explanations": 8.0
+    },
+    {
+      "configured_rho": 1.0,
+      "worlds": 2,
+      "mean_one_to_one_distance": 0.0017397344604268487,
+      "median_one_to_one_distance": 0.0017397344604268487,
+      "mean_short_explanation_distance": 0.0024578767475933495,
+      "mean_depth_one_explanations": 8.0
+    }
+  ],
+  "records": [
+    {
+      "world_seed": 1,
+      "configured_rho": 0.0,
+      "one_to_one_mean_primitive_distance": 0.010843488678185997,
+      "mean_short_explanation_distance": 0.011484607418514956,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.0,
+      "one_to_one_mean_primitive_distance": 0.012916319428238945,
+      "mean_short_explanation_distance": 0.013535230163066223,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.0,
+      "one_to_one_mean_primitive_distance": 0.011946138262110965,
+      "mean_short_explanation_distance": 0.012161104211730325,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.0,
+      "one_to_one_mean_primitive_distance": 0.012131107208408987,
+      "mean_short_explanation_distance": 0.011563525129682967,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.0,
+      "one_to_one_mean_primitive_distance": 0.011808984111811445,
+      "mean_short_explanation_distance": 0.011977308775860283,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.0,
+      "one_to_one_mean_primitive_distance": 0.012233835189286765,
+      "mean_short_explanation_distance": 0.012149900006823335,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.0,
+      "one_to_one_mean_primitive_distance": 0.012142894025410265,
+      "mean_short_explanation_distance": 0.012250721995143023,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.0,
+      "one_to_one_mean_primitive_distance": 0.013251721782745064,
+      "mean_short_explanation_distance": 0.014407136637960722,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.0,
+      "one_to_one_mean_primitive_distance": 0.012452585487072634,
+      "mean_short_explanation_distance": 0.01280109334958438,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.25,
+      "one_to_one_mean_primitive_distance": 0.011555657481076275,
+      "mean_short_explanation_distance": 0.011895672457857871,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.25,
+      "one_to_one_mean_primitive_distance": 0.011847895193602844,
+      "mean_short_explanation_distance": 0.01309706886726012,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.25,
+      "one_to_one_mean_primitive_distance": 0.012376416746980562,
+      "mean_short_explanation_distance": 0.012381774362126573,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.25,
+      "one_to_one_mean_primitive_distance": 0.011669010658073839,
+      "mean_short_explanation_distance": 0.011414941477826387,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.25,
+      "one_to_one_mean_primitive_distance": 0.01132040473727504,
+      "mean_short_explanation_distance": 0.011776689168955974,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.25,
+      "one_to_one_mean_primitive_distance": 0.011776071450447153,
+      "mean_short_explanation_distance": 0.011359187873365872,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.25,
+      "one_to_one_mean_primitive_distance": 0.01186173475288558,
+      "mean_short_explanation_distance": 0.012276251815417298,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.25,
+      "one_to_one_mean_primitive_distance": 0.013225301321648418,
+      "mean_short_explanation_distance": 0.013774978934306688,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.25,
+      "one_to_one_mean_primitive_distance": 0.012649293156484361,
+      "mean_short_explanation_distance": 0.01282804601747147,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.5,
+      "one_to_one_mean_primitive_distance": 0.010768518188270987,
+      "mean_short_explanation_distance": 0.011075813082412863,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.5,
+      "one_to_one_mean_primitive_distance": 0.011484809247793028,
+      "mean_short_explanation_distance": 0.012047191425121404,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.5,
+      "one_to_one_mean_primitive_distance": 0.011299466797121646,
+      "mean_short_explanation_distance": 0.011466778506070776,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.5,
+      "one_to_one_mean_primitive_distance": 0.01104799366608863,
+      "mean_short_explanation_distance": 0.010710556079445927,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.5,
+      "one_to_one_mean_primitive_distance": 0.010651651429099377,
+      "mean_short_explanation_distance": 0.011198613331805028,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.5,
+      "one_to_one_mean_primitive_distance": 0.011249164641516674,
+      "mean_short_explanation_distance": 0.01113224572427002,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.5,
+      "one_to_one_mean_primitive_distance": 0.01145600505188806,
+      "mean_short_explanation_distance": 0.01123447139955865,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.5,
+      "one_to_one_mean_primitive_distance": 0.012824449452314165,
+      "mean_short_explanation_distance": 0.013682434089616707,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.5,
+      "one_to_one_mean_primitive_distance": 0.012346524724091486,
+      "mean_short_explanation_distance": 0.01213778161007565,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.75,
+      "one_to_one_mean_primitive_distance": 0.008443139595024862,
+      "mean_short_explanation_distance": 0.00935477613283551,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.75,
+      "one_to_one_mean_primitive_distance": 0.007196569769529329,
+      "mean_short_explanation_distance": 0.007465835028404398,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.75,
+      "one_to_one_mean_primitive_distance": 0.007317970342553323,
+      "mean_short_explanation_distance": 0.00795251543488569,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.75,
+      "one_to_one_mean_primitive_distance": 0.007569471241485936,
+      "mean_short_explanation_distance": 0.008591184469492565,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.75,
+      "one_to_one_mean_primitive_distance": 0.007866536648768114,
+      "mean_short_explanation_distance": 0.009324557310839728,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.75,
+      "one_to_one_mean_primitive_distance": 0.00820764092147794,
+      "mean_short_explanation_distance": 0.008931860876317348,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.75,
+      "one_to_one_mean_primitive_distance": 0.00911432430823776,
+      "mean_short_explanation_distance": 0.009322264827330524,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.75,
+      "one_to_one_mean_primitive_distance": 0.00950914182951485,
+      "mean_short_explanation_distance": 0.009820829032525489,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.75,
+      "one_to_one_mean_primitive_distance": 0.009178647078624728,
+      "mean_short_explanation_distance": 0.00913313770866829,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 0.9,
+      "one_to_one_mean_primitive_distance": 0.004670315439312451,
+      "mean_short_explanation_distance": 0.005544850077228067,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 0.9,
+      "one_to_one_mean_primitive_distance": 0.004179553796390608,
+      "mean_short_explanation_distance": 0.005344131075784459,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 3,
+      "configured_rho": 0.9,
+      "one_to_one_mean_primitive_distance": 0.004687403226601934,
+      "mean_short_explanation_distance": 0.004963678121258574,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 4,
+      "configured_rho": 0.9,
+      "one_to_one_mean_primitive_distance": 0.005282254834919005,
+      "mean_short_explanation_distance": 0.005966231406669947,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 5,
+      "configured_rho": 0.9,
+      "one_to_one_mean_primitive_distance": 0.004345441560653263,
+      "mean_short_explanation_distance": 0.005173844293827187,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 6,
+      "configured_rho": 0.9,
+      "one_to_one_mean_primitive_distance": 0.005302562792013095,
+      "mean_short_explanation_distance": 0.006275020943406935,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 7,
+      "configured_rho": 0.9,
+      "one_to_one_mean_primitive_distance": 0.0037493732266703646,
+      "mean_short_explanation_distance": 0.004353161834698838,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 8,
+      "configured_rho": 0.9,
+      "one_to_one_mean_primitive_distance": 0.005255167436871308,
+      "mean_short_explanation_distance": 0.005772420271200267,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 9,
+      "configured_rho": 0.9,
+      "one_to_one_mean_primitive_distance": 0.005573837116087454,
+      "mean_short_explanation_distance": 0.006220695710006414,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 1,
+      "configured_rho": 1.0,
+      "one_to_one_mean_primitive_distance": 0.001723917260005304,
+      "mean_short_explanation_distance": 0.00211540341676873,
+      "depth_one_explanations": 8
+    },
+    {
+      "world_seed": 2,
+      "configured_rho": 1.0,
+      "one_to_one_mean_primitive_distance": 0.0017555516608483933,
+      "mean_short_explanation_distance": 0.0028003500784179697,
+      "depth_one_explanations": 8
+    }
+  ],
+  "untrained_baseline": {
+    "one_to_one_mean_distance_by_seed": {
+      "1": 0.0085,
+      "2": 0.0087,
+      "3": 0.0088
+    },
+    "mean": 0.0087,
+    "method": "fresh ContinuousBasisLearner (seeds 1235-1237) matched against exact-reuse teacher libraries for world seeds 1-3"
+  },
+  "interpretation": "Against the untrained baseline (0.0087), recovery is ABSENT below the performance crossover: trained operators at rho <= 0.5 sit FARTHER from the shared primitives than untrained ones (0.0115-0.0121), and rho = 0.75 matches baseline (0.0083). Genuine recovery begins only at rho = 0.9 (0.0048, ~1.8x below baseline) and crystallizes at rho = 1.0 (0.0017, ~5x below). The onset of primitive recovery therefore coincides with the Dense-to-Continuous performance crossover, and rho = 0.9 shows partial crystallization - consistent with the statistical-vs-structural dissociation: enough shared structure to win lifetime cost, not enough identifiable primitive recovery to support frozen-library transfer, which appears only at rho = 1.0."
+}
