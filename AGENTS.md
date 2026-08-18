@@ -502,3 +502,15 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   commit; the public history is part of the project's verifiability
   claim, so never rewrite published history (no force pushes, no
   amends of pushed commits).
+- H6 analysis note: at rho 0.9 the GELU family-mismatch penalty
+  (tanh-effect minus GELU-effect, paired per world) is roughly constant
+  across worlds — 3,513 / 2,445 / 3,215 nats — suggesting misalignment
+  enters the economics as an approximately ADDITIVE penalty (a shift in
+  the intercept b of Delta(r) = a*r + b) rather than a slope change.
+  When the rho 1.0 GELU runs land, compare their penalty (world 0:
+  4,005) against these; if similar, the H6 status and the paper's
+  Delta = f(r, A, C) discussion can state the quantitative form: family
+  mismatch costs ~3-4k nats roughly uniformly over the high-recurrence
+  range, moving the zero crossing right without bending the line. Fit
+  the GELU points to their own line and report both coefficients rather
+  than only the crossing.
