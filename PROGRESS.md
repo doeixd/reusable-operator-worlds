@@ -438,3 +438,18 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   provenance section toned to a disclosure; related work expanded around
   the intervention-on-recurrence novelty axis; restructured to
   phenomenon -> mechanism -> controls -> implications.
+- Revised the paper to draft v0.3 per the second review: intercept
+  reworded as an empirical sharing penalty; "ground-truth functional
+  recurrence" phrasing; the pooled 180-cell regression explicitly labeled
+  descriptive with per-world tests primary and a mixed-effects sensitivity
+  noted for the appendix; forward transfer given an explicit FT_tau
+  definition; the equal-start claim bounded to the 8-task checkpoint;
+  the structural-abstraction claim scoped to the present learner and
+  benchmark; Delta = f(r, A, C) added to the family-alignment section;
+  the hypernetwork ordering interpretation spelled out; the envelope
+  defined as L_env = min(L_Dense, L_Continuous) with fairness notes; the
+  two-part code explained as literal description-length accounting; the
+  truncated-lifetime result given its numbers and an appendix home; the
+  provenance sentence retoned. Replaced figure 4 with the two-response-
+  curves figure (lifetime advantage, recomposition advantage, operator
+  recovery on one measured-recurrence axis).

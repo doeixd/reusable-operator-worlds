@@ -144,24 +144,55 @@ def fig3_checkpoint_divergence() -> None:
     plt.close(fig)
 
 
-def fig4_recovery_onset() -> None:
-    s = json.load(open("reports/rho_operator_recovery/operator-recovery.json"))
-    rows = s["rho_summaries"]
-    baseline = s["untrained_baseline"]["mean"]
-    rhos = [r["configured_rho"] for r in rows]
-    dist = [r["mean_one_to_one_distance"] for r in rows]
-    fig, ax = plt.subplots(figsize=(4.6, 3.2))
-    ax.plot(rhos, dist, "o-", color=CONT, lw=2, ms=5, label="trained continuous basis")
-    ax.axhline(baseline, color=NEUTRAL, ls="--", lw=1.2,
-               label=f"untrained baseline ({baseline:.4f})")
-    ax.axvspan(0.8, 0.87, color=DENSE, alpha=0.10)
-    ax.text(0.835, ax.get_ylim()[1] * 0.97, "performance\ncrossover", ha="center",
-            va="top", color=DENSE, fontsize=8)
-    ax.set_xlabel("configured reuse $\\rho$")
-    ax.set_ylabel("one-to-one distance to hidden primitives")
-    ax.set_title("Primitive recovery begins only at the performance crossover\n(development)")
-    ax.legend(frameon=False, loc="center left")
-    fig.savefig(OUT / "fig4_recovery_onset.png")
+def fig4_two_response_curves() -> None:
+    """Statistical reuse and structural abstraction on one recurrence axis."""
+    sweep = json.load(open("artifacts/rho_development/sweep.json"))
+    pair: dict = collections.defaultdict(dict)
+    for r in sweep["records"]:
+        pair[(r["configured_rho"], r["world_seed"])][r["model"]] = r
+    agg = collections.defaultdict(lambda: {"eff": [], "nov": [], "rec": []})
+    for (rho, _w), m in pair.items():
+        if len(m) == 2:
+            agg[rho]["eff"].append(
+                m["dense"]["gaussian_log_loss"] - m["continuous"]["gaussian_log_loss"]
+            )
+            agg[rho]["nov"].append(
+                m["dense"]["novel_32_shot_nmse"] - m["continuous"]["novel_32_shot_nmse"]
+            )
+            agg[rho]["rec"].append(m["dense"]["measured_residual_correlation"])
+    rhos = sorted(agg)
+    rec = [st.mean(agg[r]["rec"]) for r in rhos]
+    eff = [st.mean(agg[r]["eff"]) for r in rhos]
+    nov = [st.mean(agg[r]["nov"]) for r in rhos]
+    rcv = json.load(open("reports/rho_operator_recovery/operator-recovery.json"))
+    baseline = rcv["untrained_baseline"]["mean"]
+    rho_to_rec = dict(zip(rhos, rec))
+    rcv_x = [rho_to_rec[r["configured_rho"]] for r in rcv["rho_summaries"]]
+    rcv_y = [baseline - r["mean_one_to_one_distance"] for r in rcv["rho_summaries"]]
+
+    fig, axes = plt.subplots(3, 1, figsize=(4.8, 5.6), sharex=True)
+    panels = [
+        (eff, "lifetime advantage\n(nats)",
+         "statistical reuse: pays from mid recurrence"),
+        (nov, "recomposition advantage\n(32-shot NMSE)",
+         "structural transfer: reliable only near exact recurrence"),
+        (rcv_y, "recovery vs untrained\nbaseline",
+         "primitive recovery: gradual; crystallizes only at exact recurrence"),
+    ]
+    xs = [rec, rec, rcv_x]
+    for ax, x, (y, ylabel, note) in zip(axes, xs, panels):
+        ax.plot(x, y, "o-", color=CONT, lw=2, ms=4)
+        ax.axhline(0, color="black", lw=0.8)
+        ax.fill_between([0, 1], 0, max(max(y), 1e-9) * 1.15, color=CONT, alpha=0.06)
+        ax.set_ylabel(ylabel, fontsize=7.5)
+        ax.text(0.02, 0.92, note, transform=ax.transAxes, fontsize=8, va="top",
+                color=NEUTRAL)
+    axes[-1].set_xlabel("measured functional recurrence $r$")
+    axes[0].set_title(
+        "Two response curves: sharing pays before abstraction forms\n(development)"
+    )
+    fig.tight_layout()
+    fig.savefig(OUT / "fig4_two_response_curves.png")
     plt.close(fig)
 
 
@@ -259,7 +290,7 @@ def main() -> None:
     fig1_regime_map(effects)
     fig2_dose_response(effects)
     fig3_checkpoint_divergence()
-    fig4_recovery_onset()
+    fig4_two_response_curves()
     fig5_resource_frontier()
     fig6_robustness_forest()
     fig7_shared_residual()

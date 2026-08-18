@@ -1,8 +1,9 @@
 # When Does Abstraction Pay? Measuring the Value of Reusable Computation in Neural Learners
 
-*Draft v0.2 — restructured per reviews/paper feedback. Development and
-confirmatory results labeled throughout; all numbers trace to
-fingerprint-validated artifacts in the public repository.*
+*Draft v0.3 — incorporates the second paper review (precision fixes,
+two-response-curves figure, envelope and two-part-code formalization).
+Development and confirmatory results labeled throughout; all numbers
+trace to fingerprint-validated artifacts in the public repository.*
 
 ## Abstract
 
@@ -49,12 +50,16 @@ when S(r) > C_R. Empirically we measure the paired lifetime difference
     Delta(r) = L_Dense(r) - L_Reuse(r)
 
 on identical worlds and find, to good approximation, Delta(r) = a·r + b
-with a > 0 and b < 0: a linear return on recurrence, offset by a fixed
-cost of sharing. The zero crossing r* = -b/a is simply where the expected
-savings equal the price. The experiment, in this framing, asks how Delta
-changes as the actual reusable information in the environment changes —
-an intervention on r, not a comparison at whatever task relatedness a
-dataset happens to contain.
+with a > 0 and b < 0: a linear return on recurrence offset by an
+empirical sharing penalty. The intercept b is an empirical quantity, not
+a separately identified representational cost — it aggregates whatever
+imposing the reusable substrate costs under the present protocol,
+including any inductive-bias mismatch, task-code inference difficulty,
+and optimization overhead. The zero crossing r* = -b/a is simply where
+the expected savings equal that aggregate price. The experiment, in this
+framing, asks how Delta changes as ground-truth functional recurrence
+changes — an intervention on r, not a comparison at whatever task
+relatedness a dataset happens to contain.
 
 **Two kinds of reuse.** We will need a distinction that the results force
 on us. Call it *statistical reuse* when shared parameters exploit
@@ -171,12 +176,17 @@ per unit recurrence; p = 1.9e-9.
 and Continuous wins at rho = 1; p = 1.9e-9. All three survive Holm
 correction (adjusted p <= 5.6e-9).
 
-**The dose-response is the result (Figure 2).** Against measured
-recurrence, the paired effect across all 180 world-condition cells fits
+**The dose-response is the result (Figure 2).** We fit the pooled
+regression over all 180 world-condition cells,
+Delta_{w,rho} = b0 + b1·r_{w,rho} + e_{w,rho}, obtaining
 
-    Delta(r) ~= 5,716·r - 2,625        (R^2 = 0.935)
+    Delta(r) ~= 5,716·r - 2,625        (R^2 = 0.935, pooled)
 
-versus R^2 = 0.642 against configured rho. The apparent "threshold" in
+versus R^2 = 0.642 against configured rho. The regression is descriptive;
+the pre-specified per-world sign and slope tests above remain the
+inferential results (each world contributes one slope, so world-level
+clustering is respected where it matters), and a mixed-effects
+sensitivity analysis appears in the appendix. The apparent "threshold" in
 configured coordinates is largely coordinate distortion from the
 nonlinear rho-to-r map: the underlying phenomenon is a smooth linear
 return on recurrence with a fixed offset — sharing has a price, and
@@ -193,17 +203,23 @@ more falsifiable claim.
 
 (Development worlds 0-9; labeled development-stage throughout.)
 
-### 5.1 The advantage is acquired from an equal start
+### 5.1 The advantage is absent early and acquired over the lifetime
 
 At lifetime checkpoints we freeze shared parameters and adapt fresh task
 codes on held-out unseen compositions. After 8 tasks the architectures
 are statistically indistinguishable at 32-shot novel adaptation
 (Continuous 0.0228 vs Dense-C 0.0230 mean NMSE; Continuous better in only
 4/10 worlds). After 64 tasks Continuous leads in 10/10 worlds (0.00343 vs
-0.00645). Explicit forward transfer (fresh-task minus lifetime
-prequential cost) is positive for Continuous on 97.5% of tasks, with a
-positive slope against task index in 10/10 worlds. The transfer advantage
-is acquired over the lifetime rather than present at initialization; the
+0.00645). We also compute forward transfer with an explicit baseline:
+
+    FT_tau = L(fresh learner, same architecture, task tau alone)
+             - L(lifetime learner, task tau)
+
+so that FT_tau > 0 means accumulated experience made task tau cheaper
+than learning it in isolation. FT is positive for Continuous on 97.5% of
+tasks, with a positive slope against task index in 10/10 worlds. The
+measurable transfer advantage is absent early and acquired over the
+lifetime (our earliest checkpoint is 8 tasks, not initialization); the
 architecture supplies the capacity for it, and experience supplies the
 advantage.
 
@@ -215,8 +231,10 @@ Define operationally:
     R_struct = (frozen-library recomposition gain, operator recovery
                 vs an untrained baseline)       (is there an abstraction?)
 
-The central mechanistic finding is that R_stat > 0 does not imply
-R_struct > 0:
+The central mechanistic finding, displayed because it is the paper's
+one-line takeaway:
+
+    R_stat > 0   does NOT imply   R_struct > 0
 
 1. At rho = 0.9, Continuous wins lifetime cost in every paired world but
    does not reliably win frozen-library novel transfer; the transfer
@@ -232,8 +250,12 @@ R_struct > 0:
 
 So a representation can pay economically before it crystallizes into
 identifiable, recomposable computational objects. Statistical reuse
-begins near r ~ 0.5; structural abstraction requires near-exact
-recurrence. We note that an earlier, more attractive hypothesis — that
+begins near r ~ 0.5; under the present learner and benchmark, evidence
+for structural abstraction appears only near exact recurrence (whether
+approximate reusable abstractions can form under other learners or
+richer worlds is exactly the open question this distinction makes
+askable). Figure 4 puts both response curves — and operator recovery —
+on one recurrence axis. We note that an earlier, more attractive hypothesis — that
 recompositional transfer improves before it amortizes — was proposed on
 one development world and falsified on replication; the dissociation
 above, with the opposite ordering, is what survived.
@@ -255,18 +277,28 @@ neural learners spontaneously discover arbitrary reusable computations.
 It shows that when a learner's representational vocabulary can
 efficiently express the recurrent structure of its environment, the
 economic value of using that vocabulary is predictable from functional
-recurrence.** Whether family mismatch shifts the crossover location
-rather than only the magnitude is a pre-specified follow-up (V2, H6);
-whether the learner can acquire the vocabulary itself is the V2 program.
+recurrence.** Put economically: the observed advantage is a function not
+of recurrence alone but of something like Delta = f(r, A, C) — where A is
+the alignment between the learner's representational vocabulary and the
+environment's recurring transforms, and C the substrate's cost — and the
+GELU result shows the A-dependence is large. Whether family mismatch
+shifts the crossover location rather than only the magnitude is a
+pre-specified follow-up (V2, H6); whether the learner can acquire the
+vocabulary itself is the V2 program.
 
 ### 6.2 Capacity, codes, and the manifold alternative
 
 The generic hypernetwork — a continuous operator manifold with no
 explicit slots — beats Dense-C but loses to Continuous in 10/10
-development worlds (mean margins ~1,791 and ~1,907 nats respectively):
-low-dimensional reusable operator structure helps, and explicit reusable
-slots help more. Task-code dimension is immaterial (Dense-24 vs Dense-32:
-46 nats). A width-128 dense variant does not close the gap.
+development worlds (mean margins ~1,791 and ~1,907 nats respectively).
+This is a mechanistic narrowing, not just a capacity control: the
+advantage is not explained solely by constraining tasks to a
+low-dimensional operator manifold — explicit shared operator atoms
+provide additional benefit in this setting, yielding the ordering
+Dense < continuous task-conditioned operator manifold < explicit
+reusable operator basis for lifetime learning under exact reuse.
+Task-code dimension is immaterial (Dense-24 vs Dense-32: 46 nats). A
+width-128 dense variant does not close the gap.
 
 ### 6.3 Nuisance battery
 
@@ -304,23 +336,34 @@ objectives, and "compute-matched" in this paper means inference-forward
 multiply-adds (training compute is not matched at the same ratio; no
 claim depends on the distinction).
 
-**A proof-of-concept adaptive substrate.** A shared-parent + rank-2-
-residual learner — task operators P_k + Delta_task,k under an explicit
-penalty — beats the ENVELOPE of both fixed architectures at every
-intermediate recurrence on worlds 0-2 (+9,168 / +7,458 / +3,745 mean nats
-at rho 0.5 / 0.75 / 0.9; 3/3 worlds on both metrics), degrades gracefully
-to parity (-246) at rho = 1.0, and shows the predicted allocation
-signature: residual magnitude falls monotonically with recurrence
-(functional ratio 0.284 -> 0.026; Figure 7). The learner measurably
-chooses its degree of sharing. The accounting, however, reverses under a
-two-part code: its per-task residuals retain ~130,624 bits (9x the
-Continuous task state), and at lambda = ln 2 nats/bit it loses to both
-fixed architectures in all twelve world-rho cells (break-even prices
-0.04-0.14 nats/bit). Its purpose here is not to establish another winner
-but to demonstrate a precise point: **adaptively choosing sharing
-improves predictive economics, but naive flexibility buys this with
-excessive description length** — giving the V2 consolidation program an
-exact target (adaptive sharing plus compression).
+**A proof-of-concept adaptive substrate.** Define the fixed-architecture
+envelope as the better of the two fixed learners at each condition,
+L_env(rho) = min{ L_Dense(rho), L_Continuous(rho) } (lower prequential
+loss is better throughout). A shared-parent + rank-2-residual learner —
+task operators P_k + Delta_task,k under an explicit penalty — beats that
+envelope at every intermediate recurrence on worlds 0-2 (L_env minus
+L_shared: +9,168 / +7,458 / +3,745 mean nats at rho 0.5 / 0.75 / 0.9;
+3/3 worlds on both metrics), degrades gracefully to parity (-246) at
+rho = 1.0, and shows the predicted allocation signature: residual
+magnitude falls monotonically with recurrence (functional ratio
+0.284 -> 0.026; Figure 7). The learner measurably chooses its degree of
+sharing. Three fairness notes accompany the large margins: the residual
+learner follows the identical online protocol and update budget; its
+extra capacity is entirely per-task (rank-2 residuals per step), which is
+exactly what the description-length accounting below prices; and its
+shared-parameter count matches the continuous basis. That accounting
+reverses the result: the per-task residuals retain ~130,624 bits (9x the
+Continuous task state), and under a literal two-part description-length
+code — model bits added to the data code at their information value,
+1 bit = ln 2 nats, not a tuned regularization weight — it loses to both
+fixed architectures in all twelve world-rho cells. The break-even prices
+(0.04-0.14 nats per bit) quantify how cheaply persistent storage would
+have to be valued for the adaptive model to win. Its purpose here is not
+to establish another winner but to demonstrate a precise point:
+**adaptively choosing sharing improves predictive economics, but naive
+flexibility buys this with excessive description length** — giving the V2
+consolidation program an exact target (adaptive sharing plus
+compression).
 
 **A characterized negative, briefly.** L0-style presence gating on the
 12-slot library, tuned over a two-stage grid with a selection rule frozen
@@ -393,10 +436,15 @@ controlled dose-response version.
   program length) so learnability and encoding cost can be measured
   without expressivity confounds.
 - Additional limitations: one functional family of teachers; length-3
-  programs; 64-task lifetimes (truncation analysis suggests the crossover
-  moves early and then saturates — amortization is a demonstrated
-  early-lifetime component, not the whole mechanism); Gaussian
-  likelihood with fixed sigma; single-machine scale throughout.
+  programs; 64-task lifetimes; Gaussian likelihood with fixed sigma;
+  single-machine scale throughout.
+- Lifetime-length dependence: a truncated-lifetime analysis (appendix)
+  reads the crossover at 16, 32, and 64 tasks from the per-example logs;
+  the mean crossing moves from configured rho 0.869 to 0.822 between 16
+  and 32 tasks and then saturates (0.826 at 64; 8/10 development worlds
+  decline overall). Amortization is therefore a demonstrated
+  early-lifetime component of the crossover, not its whole mechanism,
+  and we do not claim a confirmed lifetime-length law.
 
 ## 10. Discussion: toward learned abstraction economics
 
@@ -429,14 +477,18 @@ fingerprint-validated artifact directory (config, metrics, model weights,
 world programs, seeds, git commit, environment); worlds derive from
 explicit seed sequences; and the development/confirmation firewall, the
 frozen confirmatory plan, and a falsified hypothesis are all in the
-public record. The work is designed to be checkable without trusting its
-authors. (Execution-cost details appear in the repository README.)
+public record. The resulting record is intended to make all primary
+claims independently auditable from artifacts rather than author
+recollection. (Execution-cost details appear in the repository README.)
 
 ---
 *Figures: (1) regime map, per-world sealed traces, both coordinates;
-(2) linear dose-response with fit (confirmatory); (3) checkpoint
-divergence — equal at 8, ~2x at 64; (4) recovery onset vs crossover with
-untrained baseline; (5) resource frontier; (6) robustness forest;
-(7) adaptive substrate: envelope win in nats, loss in bits, allocation
-signature. Appendices: MDL gating grids; batch and initialization
-tables; confirmatory analysis exactly as pre-specified.*
+(2) linear dose-response with pooled fit (confirmatory); (3) checkpoint
+divergence — indistinguishable at 8 tasks, ~2x at 64; (4) two response
+curves — lifetime advantage, frozen recomposition advantage, and
+operator recovery vs untrained baseline on one measured-recurrence axis;
+(5) resource frontier; (6) robustness forest; (7) adaptive substrate:
+envelope win in nats, loss in bits, allocation signature. Appendices:
+MDL gating grids; batch, initialization, and truncated-lifetime tables;
+mixed-effects sensitivity for the pooled regression; confirmatory
+analysis exactly as pre-specified.*
