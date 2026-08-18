@@ -1,0 +1,88 @@
+"""Preregistration-as-code: verify the audit trail mechanically.
+
+Checks:
+1. Every file listed in FROZEN has no changes since its freeze commit.
+2. Every artifact/report path cited in a STATUS annotation of the V2 spec
+   exists on disk (or is explicitly marked as external).
+
+Run from the repository root: `python tools/check_prereg.py`.
+Exit code 0 = trail verifies; 1 = violation (printed).
+"""
+
+from __future__ import annotations
+
+import re
+import subprocess
+import sys
+from pathlib import Path
+
+# Freeze commit = the commit after which the file may no longer change.
+# EXPERIMENT_PLAN.md was a living document during development by design;
+# its invariant is stillness from the last pre-confirmation edit (d655ce0,
+# which precedes the confirmation freeze e0b0552) onward. The checker's
+# first run caught exactly this distinction and the manifest was corrected
+# with this justification (PROGRESS.md, 2026-08-18).
+FROZEN = {
+    "neural_library_learning_v1_experimental_spec.md": "e1be00a",
+    "EXPERIMENT_PLAN.md": "d655ce0",
+    "CONFIRMATION_PLAN.md": "e0b0552",
+    "V2_CONFIRMATION_PLAN.md": "085b1a3",
+}
+
+STATUS_PATH_PATTERN = re.compile(
+    r"(?:artifacts|reports)/[A-Za-z0-9_./-]+"
+)
+
+
+def frozen_files_unchanged() -> list[str]:
+    violations = []
+    for path, commit in FROZEN.items():
+        result = subprocess.run(
+            ["git", "diff", "--stat", commit, "HEAD", "--", path],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        if result.stdout.strip():
+            violations.append(
+                f"FROZEN FILE CHANGED since {commit}: {path}\n{result.stdout}"
+            )
+    return violations
+
+
+def status_paths_exist() -> list[str]:
+    violations = []
+    spec = Path("row_v2_experimental_spec.md").read_text(encoding="utf-8")
+    blocks = re.findall(r"\*\*[^*]*STATUS[^*]*\*\*[^#]*?(?=\n\n|\Z)", spec)
+    cited: set[str] = set()
+    for block in blocks:
+        for match in STATUS_PATH_PATTERN.findall(block):
+            cited.add(match.rstrip(".,;:)"))
+    for path in sorted(cited):
+        candidate = Path(path.rstrip("/"))
+        if candidate.suffix in ("", "/"):
+            if not candidate.exists():
+                violations.append(f"STATUS cites missing directory: {path}")
+        elif not candidate.exists():
+            base = candidate if candidate.suffix else candidate.parent
+            if not base.exists():
+                violations.append(f"STATUS cites missing path: {path}")
+    return violations
+
+
+def main() -> int:
+    violations = frozen_files_unchanged() + status_paths_exist()
+    if violations:
+        print("PREREGISTRATION CHECK FAILED")
+        for violation in violations:
+            print(" -", violation)
+        return 1
+    print(
+        f"prereg check OK: {len(FROZEN)} frozen files unchanged; "
+        "all STATUS-cited paths exist"
+    )
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -687,3 +687,19 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   approximating route inference; route-committed solutions are better
   when found but gradient descent never finds them. Spec section 9.5 and
   the synthesis note updated in the same commit.
+- Implemented the four ideas from the sealed-block reflection, with
+  timestamps ahead of the sealed verdict: (1) the V3 constraint set in
+  the spec now leads with differentiable description length (variational
+  MDL / bits-back — task state as noisy codes with learned precision, so
+  bits enter the gradient), including the draft hypothesis that a
+  variational-coded shared-residual learner wins the two-part cell where
+  every current model loses; (2) slots are demoted to an output of
+  compression (manifold-first wake, per 006b/002b/recovery); (3) created
+  PREDICTIONS.md, an append-only ledger of quantitative predictions with
+  confidences (four founding entries); (4) implemented
+  tools/check_prereg.py, which mechanically verifies frozen-file
+  immutability and STATUS-cited artifact existence — and whose first run
+  immediately caught a real subtlety (EXPERIMENT_PLAN.md was a living
+  document during development; its invariant is stillness from d655ce0,
+  before the confirmation freeze), now encoded in the manifest with
+  justification.

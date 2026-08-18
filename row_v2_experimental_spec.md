@@ -1050,13 +1050,38 @@ nothing to compile because there are no latent route beliefs to
 harden; and the V3 wake-phase theory must be manifold-first, with route
 structure IMPOSED by consolidation rather than read out of the mixture.
 
-**Pre-draft V3 constraint set.** These five observations supersede
+**Pre-draft V3 constraint set.** These observations supersede
 notes/v3-sketch.txt as the design constraints for the eventual V3 spec
-(the sketch predates all six verdicts). One V3 hypothesis is recorded
-in draft form now: **promotion wins both currencies in hierarchical
-worlds** — the falsifiable form of observation 5 — with the Benchmark E
-residual-clustering analysis (section 3) scoping its plausibility
-before any V3 freeze.
+(the sketch predates all verdicts). Recorded in draft form, timestamped
+before the sealed-block verdict:
+
+1. **Make bits differentiable (the root fix for observation 5).** Every
+   compression failure shares the diagnosis that gradient descent never
+   sees bits. The variational MDL / bits-back answer (Hinton & van Camp,
+   1993): task state as noisy codes with learned per-parameter precision
+   and a KL term to a shared prior — description length IN the gradient,
+   during learning, so precision the task does not need collapses
+   continuously instead of awaiting a discrete gate. This retroactively
+   explains the MDL-gate and consolidation-gate failures in one stroke:
+   they imposed discrete bit-decisions on a learner never charged for
+   precision. Draft V3 hypothesis: **a variational-coded shared-residual
+   learner beats both fixed architectures in mixed worlds UNDER THE
+   TWO-PART CODE** — the exact cell where every current model loses.
+2. **Slots as an output of compression, not an architectural input.**
+   Chaining 006b (mixtures are manifold solutions, not route beliefs),
+   002b (the pure manifold beats explicit slots at partial recurrence),
+   and recovery onset (primitives crystallize only at exact reuse): the
+   V3 wake learner should be manifold-first (hypernetwork-style), with
+   discrete structure existing only as an artifact of sleep — route
+   hypotheses constructed by posterior machinery over consolidated
+   operators, independently of the wake representation. The earlier
+   draft hypothesis ("promotion wins both currencies in hierarchical
+   worlds") stands, amended by the Benchmark E lesson: the promotion
+   testbed requires family structure that varies across task groups,
+   which E as built does not provide (section 3).
+3. Functional instruments only; amortization at cross-world scale only;
+   dream-benefit as the library-quality probe — carried over from the
+   synthesis unchanged.
 
 # 10. Anticipated objections and positioning
 
