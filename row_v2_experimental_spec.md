@@ -609,6 +609,27 @@ Measured against the never-consolidated continuous run on paired worlds at
 fire rarely or not at all, and forcing compilation there should hurt;
 report the gate's firing rate at both endpoints).
 
+**GATE V1 STATUS (grid run 2026-08-18, artifacts/v2_consolidation/):
+MIS-CALIBRATED WITH INVERTED SHAPE; one documented re-derivation
+invoked.** Firing rates by rho: 43% / 48% / 48% / 30% / 7% / 0% at
+0.0-1.0 — monotonically DECREASING, the opposite of the pre-registered
+prediction. H8b fails as frozen (fires where no discrete structure
+exists), H8a untestable (never fires at exact reuse; the consolidated
+run is identical to continuous there). Mechanism: kappa is a RELATIVE
+criterion, cleared most easily where the soft baseline is worst; and at
+exact reuse a single hard route through the learner's own basis cannot
+match its compensatory mixtures (consistent with V1's
+mixture-beats-forced-route finding). The forced-compile control confirms
+the harm the gate should prevent is real (+1,208 nats at rho = 0). The
+lifetime damage of wrong compilation under the gate was nonetheless
+small (mean deltas within ~650 nats; the rho = 0 world-0 cell is
+excluded as stale-baseline-suspect: its legacy reference of -137,503 is
+off-scale versus siblings at -142k). RE-DERIVATION (once, documented):
+the relative kappa test is replaced by the ABSOLUTE sufficiency
+criterion already frozen in the MDL-gating study — compile only if the
+MAP route's held-out evaluation NMSE <= 0.02 — with H_threshold = 0.1
+nat unchanged. Grid v2 runs under artifacts/v2_consolidation_gate2/.
+
 **Gate shape prediction, pre-registered** (added after external review:
 `H_threshold` and `kappa` frozen from only three worlds could pass H8b by
 accident of those worlds). A gate that is correct for the right reason

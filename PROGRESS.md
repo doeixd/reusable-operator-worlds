@@ -562,3 +562,19 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   plus one forced-compile run at rho 0 world 0 for the
   compilation-should-hurt check. Baselines are the existing
   fingerprinted continuous artifacts at identical configurations.
+- Ran the Model 8 gate-v1 grid (18 lifetimes plus a forced-compile
+  control, artifacts/v2_consolidation/). The pre-registered firing-rate
+  shape FAILED with inversion: rates 43/48/48/30/7/0 percent across rho
+  0-1 — decreasing where non-decreasing was predicted. H8b fails as
+  frozen; H8a is untestable (zero firing at exact reuse). Mechanism: the
+  relative kappa test passes most easily where the soft baseline is
+  worst, and at exact reuse single hard routes cannot match compensatory
+  mixtures (consistent with V1's mixture-beats-forced-route finding).
+  The forced-compile control confirms wrong compilation hurts (+1,208
+  nats at rho 0); gated damage was small everywhere (mean deltas within
+  ~650 nats, excluding one stale-baseline cell). Invoked the
+  pre-registered single re-derivation: gate v2 replaces the relative
+  test with the absolute sufficiency criterion (MAP-route evaluation
+  NMSE <= 0.02, the constant frozen in the MDL-gating study); entropy
+  threshold unchanged. Gate v1 artifacts retained; v2 grid runs under
+  artifacts/v2_consolidation_gate2/.

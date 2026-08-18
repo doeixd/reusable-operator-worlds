@@ -5,14 +5,18 @@ checkpoint task counts: enumerate all hard routes over the learner's own
 basis for each completed uncompiled task, form the exact route posterior
 from that task's training data, and compile the task to its MAP route iff
 the posterior has concentrated (entropy below H_THRESHOLD) and the hard
-route's evaluation NMSE is within KAPPA of the soft mixture's. Compiled
-tasks thereafter execute hard routes (9 bits retained state instead of
-192); shared operators keep training throughout, including through
-compiled tasks appearing in replay.
+route's held-out evaluation NMSE clears the ABSOLUTE sufficiency bar
+(<= ABSOLUTE_NMSE_LIMIT). Compiled tasks thereafter execute hard routes
+(9 bits retained state instead of 192); shared operators keep training
+throughout, including through compiled tasks appearing in replay.
 
-Gate thresholds are FROZEN (PROGRESS.md, 2026-08-18): H_THRESHOLD = 0.1
-nat, KAPPA = 1.5. The pre-registered shape prediction: gate firing rate
-non-decreasing in rho across the full grid.
+Gate history: v1 used a RELATIVE test (hard within KAPPA of soft) and
+inverted the pre-registered firing-rate shape — relative bars are easiest
+to clear where the soft baseline is worst, and at exact reuse single hard
+routes cannot match compensatory mixtures. Per the pre-registered rule it
+was re-derived ONCE to the absolute criterion; see the V2 spec Model 8
+STATUS. The shape prediction (firing rate non-decreasing in rho) carries
+over to gate v2 unchanged.
 """
 
 from __future__ import annotations
@@ -38,7 +42,9 @@ from row.models import ContinuousBasisLearner
 from row.world import Task, World
 
 H_THRESHOLD = 0.1
-KAPPA = 1.5
+KAPPA = 1.5  # gate v1 (mis-calibrated; kept for the record)
+ABSOLUTE_NMSE_LIMIT = 0.02  # gate v2: absolute sufficiency, re-derived once per the
+# pre-registered rule after the v1 relative test inverted the firing-rate shape
 SLEEP_CHECKPOINTS = (8, 16, 32, 64)
 
 
@@ -132,8 +138,7 @@ def _sleep(
         for slot in route:
             z = basis[slot](z)
         hard_nmse = nmse(z.numpy(), task.eval_y)
-        soft_nmse = nmse(model.base(eval_x, task.task_id).numpy(), task.eval_y)
-        if hard_nmse <= KAPPA * soft_nmse:
+        if hard_nmse <= ABSOLUTE_NMSE_LIMIT:
             model.compiled[task.task_id] = route
             compiled_now += 1
     record = {
