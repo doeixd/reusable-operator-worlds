@@ -608,3 +608,13 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   time; output scale, usage-versus-index, and scratch flatness all
   within limits). Runner mixed_lifetime.py reuses the full
   learned_lifetime protocol via world-factory injection.
+- Froze the V2 confirmation plan (V2_CONFIRMATION_PLAN.md) before any
+  seed in 200-229 exists, with decision rules pre-registered where
+  development verdicts are pending: Component A (the six-point sweep,
+  360 lifetimes) always runs and carries the four parameter-replication
+  outcomes; Component B (canonical mixed-profile Benchmark D, 90
+  lifetimes) runs iff development H9a rejects at p < 0.05 with majority
+  negative correlations, and its envelope outcome is always reported
+  with the two-part-code accounting, whose reversal would confirm the
+  development finding. H7, H8, H6, 002b, and H10 are explicitly left as
+  development-stage results.
