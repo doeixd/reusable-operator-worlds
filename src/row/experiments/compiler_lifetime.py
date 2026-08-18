@@ -95,14 +95,19 @@ def _train_compiler(
                 for slot in route:
                     z = base.basis[int(slot)](z)
                 y = z
+            demo = DEMONSTRATIONS
         else:
             task = real_tasks[int(rng.integers(0, len(real_tasks)))]
-            start = int(rng.integers(0, len(task.train_x) - DEMONSTRATIONS - QUERIES))
-            x = _tensor(task.train_x[start : start + DEMONSTRATIONS + QUERIES])
-            y = _tensor(task.train_y[start : start + DEMONSTRATIONS + QUERIES])
-        logits = compiler(x[:DEMONSTRATIONS], y[:DEMONSTRATIONS])
-        prediction = _mixture_forward(base, logits, x[DEMONSTRATIONS:])
-        loss = torch.nn.functional.mse_loss(prediction, y[DEMONSTRATIONS:])
+            n = len(task.train_x)
+            demo = min(DEMONSTRATIONS, max(1, n // 2))
+            queries = min(QUERIES, n - demo)
+            span = n - demo - queries
+            start = 0 if span <= 0 else int(rng.integers(0, span + 1))
+            x = _tensor(task.train_x[start : start + demo + queries])
+            y = _tensor(task.train_y[start : start + demo + queries])
+        logits = compiler(x[:demo], y[:demo])
+        prediction = _mixture_forward(base, logits, x[demo:])
+        loss = torch.nn.functional.mse_loss(prediction, y[demo:])
         optimizer.zero_grad(set_to_none=True)
         loss.backward()
         optimizer.step()
