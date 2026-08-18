@@ -401,8 +401,8 @@ relatives study transfer with parametric control over how related tasks
 are. Gerace et al. (2022) analyze a solvable model of synthetic
 correlated datasets, characterizing when transferring a learned feature
 map from source to target helps as a function of dataset correlation;
-Sarao Mannelli and colleagues extend this line empirically (Lee et al.,
-2025). Multi-task theory predicts benefits that scale with shared
+Mohamud and Brink (2025) extend the correlation-controlled empirical
+line to pre-trained model reuse. Multi-task theory predicts benefits that scale with shared
 structure (Baxter, 2000; Maurer et al., 2016; Tripuraneni et al., 2020),
 and task-grouping and negative-transfer studies document that sharing
 can hurt when relatedness is low (Zamir et al., 2018; Standley et al.,
@@ -583,8 +583,9 @@ recollection. (Execution-cost details appear in the repository README.)
 - Lake, B. M., & Baroni, M. (2018). Generalization without systematicity:
   On the compositional skills of sequence-to-sequence recurrent networks.
   *ICML*. arXiv:1711.00350.
-- Lee, J., et al. (2025). An empirical study of task and feature
-  correlations in the reuse of pre-trained models. arXiv:2506.01975.
+- Mohamud, J. H., & Brink, W. (2025). An empirical study of task and
+  feature correlations in the reuse of pre-trained models.
+  arXiv:2506.01975.
 - Maurer, A., Pontil, M., & Romera-Paredes, B. (2016). The benefit of
   multitask representation learning. *JMLR*, 17(81), 1-32.
 - Mendez, J. A., & Eaton, E. (2021). Lifelong learning of compositional
@@ -598,7 +599,7 @@ recollection. (Execution-cost details appear in the repository README.)
   adaptive routing (SMEAR). arXiv:2306.03745.
 - Ostapenko, O., Rodriguez, P., Caccia, M., & Charlin, L. (2021).
   Continual learning via local module composition. *NeurIPS*.
-  arXiv:2111.11570.
+  arXiv:2111.07736.
 - Schug, S., Kobayashi, S., Simsek, Y., et al. (2024). Attention as a
   hypernetwork. arXiv:2406.05816.
 - Shan, H., Minni, S., & Duncker, L. (2025). Separating the what and how
