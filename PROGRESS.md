@@ -464,3 +464,16 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   claim; and a discussion paragraph connecting the scale-free criterion
   to scaled analogues (MoE routing, adapter libraries, model merging,
   fine-tuning transfer).
+- Completed the related-work literature pass for the paper (draft v0.5).
+  Two close methodological relatives found and positioned: Gerace et al.
+  2022 (synthetic correlated datasets with parametric control of task
+  correlation; single-transfer generalization rather than lifetime
+  prequential economics) and Mittal et al. 2022 ("Is a Modular
+  Architecture Enough?"; fixed modular world asking whether modules
+  specialize, versus ROW varying how modular the world is). Related work
+  rewritten in five threads (controlled relatedness models, controlled
+  modularity studies, compositional continual learning including Mendez &
+  Eaton, library learning, prequential evaluation, compositional
+  generalization) with a defended novelty statement; 27-entry reference
+  list added. Prose pass removed meta-commentary and reduced em-dash and
+  changelog constructions.

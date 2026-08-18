@@ -1,11 +1,8 @@
 # When Does Abstraction Pay? Measuring the Value of Reusable Computation in Neural Learners
 
-*Draft v0.4 — rebalances the alignment dependence into the abstract and
-contributions, adds the r* caution and the recovery-coincidence hedge,
-and connects the scale-free criterion to scaled analogues in the
-discussion.
-Development and confirmatory results labeled throughout; all numbers
-trace to fingerprint-validated artifacts in the public repository.*
+*Draft v0.5. Development and confirmatory results labeled throughout;
+all numbers trace to fingerprint-validated artifacts in the public
+repository. Revision history in PROGRESS.md.*
 
 ## Abstract
 
@@ -15,8 +12,8 @@ Operator Worlds (ROW), a benchmark in which the amount of latent
 computational recurrence across tasks is continuously controllable and
 directly measurable, and the learner is scored by cumulative prequential
 (predict-before-update) cost over a 64-task lifetime. In 30 sealed
-confirmatory worlds — run under a protocol pre-specified in the public
-repository before any sealed world was generated — a reusable operator
+confirmatory worlds, run under a protocol pre-specified in the public
+repository before any sealed world was generated, a reusable operator
 basis consistently beats a compute-matched dense learner under high
 recurrence and consistently loses under low recurrence (30/30 worlds on
 all three pre-specified outcomes; Holm-adjusted p <= 5.6e-9). The paired
@@ -38,7 +35,7 @@ budget, initialization, task-code capacity, batch size, and quantization.
 These results provide a controlled measurement of the economics of neural
 abstraction: when shared computation pays, on what its value depends, and
 what kind of reuse a learner actually acquires. ROW is deliberately small
-— the generative programs are known exactly — and no claim in this paper
+(the generative programs are known exactly), and no claim in this paper
 concerns scale.
 
 ## 1. Introduction
@@ -105,7 +102,7 @@ none of our claims concern scale, and the criterion we test is scale-free.
    collapses it roughly tenfold), and we state every claim under that
    condition.
 3. The statistical-reuse / structural-abstraction dissociation: lifetime
-   economic benefit precedes — and does not imply — identifiable,
+   economic benefit precedes, and does not imply, identifiable
    recomposable primitives, which emerge only near exact recurrence.
 4. A measured resource frontier (online learning vs retained description
    vs inference compute) across five substrate families under actual int8
@@ -250,10 +247,9 @@ Define operationally:
     R_struct = (frozen-library recomposition gain, operator recovery
                 vs an untrained baseline)       (is there an abstraction?)
 
-The central mechanistic finding, displayed because it is the paper's
-one-line takeaway:
+The central mechanistic finding:
 
-    R_stat > 0   does NOT imply   R_struct > 0
+    R_stat > 0   does not imply   R_struct > 0
 
 1. At rho = 0.9, Continuous wins lifetime cost in every paired world but
    does not reliably win frozen-library novel transfer; the transfer
@@ -300,11 +296,11 @@ neural learners spontaneously discover arbitrary reusable computations.
 It shows that when a learner's representational vocabulary can
 efficiently express the recurrent structure of its environment, the
 economic value of using that vocabulary is predictable from functional
-recurrence.** Put economically: the observed advantage is a function not
-of recurrence alone but of something like Delta = f(r, A, C) — where A is
-the alignment between the learner's representational vocabulary and the
-environment's recurring transforms, and C the substrate's cost — and the
-GELU result shows the A-dependence is large. Whether family mismatch
+recurrence.** In the economic notation, the observed advantage depends
+not on recurrence alone but on something like Delta = f(r, A, C), where
+A is the alignment between the learner's representational vocabulary and
+the environment's recurring transforms and C is the substrate's cost;
+the GELU result shows the A-dependence is large. Whether family mismatch
 shifts the crossover location rather than only the magnitude is a
 pre-specified follow-up (V2, H6); whether the learner can acquire the
 vocabulary itself is the V2 program.
@@ -370,7 +366,7 @@ L_shared: +9,168 / +7,458 / +3,745 mean nats at rho 0.5 / 0.75 / 0.9;
 rho = 1.0, and shows the predicted allocation signature: residual
 magnitude falls monotonically with recurrence (functional ratio
 0.284 -> 0.026; Figure 7). The learner measurably chooses its degree of
-sharing. Three fairness notes accompany the large margins: the residual
+sharing. Three points bear on the size of these margins: the residual
 learner follows the identical online protocol and update budget; its
 extra capacity is entirely per-task (rank-2 residuals per step), which is
 exactly what the description-length accounting below prices; and its
@@ -400,47 +396,83 @@ Full grids in the appendix.
 
 ## 8. Related work
 
-**Prequential evaluation.** Our headline metric operationalizes
-prequential MDL (Dawid, 1984; Bornschein, Li & Hutter, 2022) as a
-lifetime learning-cost measure with fixed likelihood, extending its use
-from model comparison to a controlled intervention study of
-representation choice.
+**Controlled models of task relatedness.** The closest methodological
+relatives study transfer with parametric control over how related tasks
+are. Gerace et al. (2022) analyze a solvable model of synthetic
+correlated datasets, characterizing when transferring a learned feature
+map from source to target helps as a function of dataset correlation;
+Sarao Mannelli and colleagues extend this line empirically (Lee et al.,
+2025). Multi-task theory predicts benefits that scale with shared
+structure (Baxter, 2000; Maurer et al., 2016; Tripuraneni et al., 2020),
+and task-grouping and negative-transfer studies document that sharing
+can hurt when relatedness is low (Zamir et al., 2018; Standley et al.,
+2020; Wu et al., 2020; Zhang et al., 2023). ROW differs from all of
+these on three axes at once: the controlled quantity is functional
+recurrence among latent computational operators rather than input or
+feature correlation; the outcome is lifetime prequential learning cost
+in a sequential, online setting rather than terminal generalization from
+one transfer; and the study measures not only whether sharing pays but
+whether the shared computations themselves are recovered.
 
-**Modular and reusable architectures.** Modular meta-learning (Alet et
-al., 2018), neural module networks (Andreas et al., 2016), RIMs (Goyal et
-al., 2021), and modular continual learning (e.g., Veniat et al., 2021;
-Ostapenko et al., 2021) build substrates for reuse; mixture-of-experts
-and soft merging (Shazeer et al., 2017; SMEAR, Muqeeth et al., 2023)
-study routing trainability — SMEAR in particular anticipates our finding
-that hard-routing failure is not evidence against reusable computation.
-Hypernetworks and attention-as-hypernetwork (Ha et al., 2017; Schug et
-al., 2024) motivate our continuous-manifold control. **The missing axis
-in this literature, which ROW supplies, is intervention: prior work
-compares methods at fixed or naturally occurring task relatedness,
-whereas ROW directly manipulates ground-truth functional recurrence and
-measures the resulting sign and magnitude of the representation
-preference.**
+**Controlled studies of modularity.** Mittal et al. (2022) ask, on
+synthetic rule-based data with a ground-truth-modular oracle, whether
+end-to-end training achieves the specialization that modular
+architectures permit, and find that it generally does not. Our
+route-inference result is consistent (the discrete learner recovers the
+library yet pays an online inference tax), and ROW adds the recurrence
+intervention: rather than fixing a modular world and asking whether
+modules specialize, we vary how modular the world is and measure when
+modular representation becomes economical.
+
+**Modular, reusable, and compositional continual learning.** Modular
+meta-learning (Alet et al., 2018), neural module networks (Andreas et
+al., 2016), RIMs (Goyal et al., 2021), and modular continual learning
+with explicit reuse decisions (Veniat et al., 2021; Ostapenko et al.,
+2021) build substrates for reuse; Mendez and Eaton (2021; 2023) develop
+and survey lifelong learning of compositional structures, which shares
+our premise that accumulated components should make later tasks cheaper.
+Mixture-of-experts and soft merging (Shazeer et al., 2017; Muqeeth et
+al., 2023) study routing trainability; SMEAR in particular anticipates
+our finding that hard-routing failure is not evidence against reusable
+computation. Hypernetworks (Ha et al., 2017) and attention as a
+hypernetwork (Schug et al., 2024) motivate our continuous-manifold
+control. Kirsch et al. (2018) learn to decompose computation into
+modules end to end. What this literature generally lacks, and ROW
+supplies, is intervention on the environment: prior work compares
+methods at fixed or naturally occurring task relatedness, whereas ROW
+manipulates ground-truth functional recurrence and measures the
+resulting sign and magnitude of the representation preference.
 
 **Library learning and program induction.** The wake/sleep library-
-learning lineage (DreamCoder, Ellis et al., 2021; and successors) is the
-closest program-level relative. We differ in criterion (lifetime
-prequential cost rather than task solve-rate), in operating over learned
-neural operators whose correspondence to ground truth is measurable, and
-in the negative-control discipline our V2 consolidation program inherits
-(a compressor must decline to compress structureless worlds).
+learning lineage (DreamCoder; Ellis et al., 2021) is the closest
+program-level relative, and recent work extends compositional vocabulary
+learning to neural components (Shan et al., 2025). We differ in
+criterion (lifetime prequential cost rather than task solve-rate), in
+operating over learned neural operators whose correspondence to ground
+truth is measurable, and in the negative-control discipline our V2
+consolidation program inherits: a compressor must decline to compress
+structureless worlds.
 
-**Transfer and task relatedness.** Negative transfer and task-similarity
-analyses (e.g., Standley et al., 2020; Zamir et al., 2018) document that
-sharing can hurt; multi-task representation-learning theory predicts
-benefits scaling with shared structure. ROW contributes a setting where
-relatedness is a knob rather than an estimate, and a second novelty:
-**distinguishing performance-level sharing from recovery of the actual
-reusable computational factors** — compositional-generalization studies
-reporting modular successes that fail recomposition are consistent with
-our statistical/structural dissociation, of which ROW provides a
-controlled dose-response version.
+**Prequential evaluation.** Our headline metric operationalizes the
+prequential principle (Dawid, 1984) and prequential MDL for neural
+networks (Bornschein et al., 2022) as a lifetime learning-cost measure
+with fixed likelihood, extending its use from model comparison to a
+controlled intervention study of representation choice.
 
-*(Citations to be completed; the list above fixes the positioning.)*
+**Compositional generalization.** Studies reporting models that succeed
+in distribution while failing recomposition (Lake & Baroni, 2018; Hupkes
+et al., 2020) are consistent with our statistical/structural
+dissociation; ROW provides a controlled dose-response version of that
+observation, with the abstraction's presence checked against known
+generative operators rather than inferred from behavior alone.
+
+The novelty claim we defend is therefore: we have not found prior work
+that experimentally intervenes on ground-truth functional recurrence
+among latent computational operators, measures the sign and magnitude of
+the optimal sharing preference by lifetime prequential cost, and
+simultaneously tests whether the shared latent computations themselves
+are recovered.
+
 
 ## 9. Limitations and what this paper does not claim
 
@@ -516,6 +548,78 @@ frozen confirmatory plan, and a falsified hypothesis are all in the
 public record. The resulting record is intended to make all primary
 claims independently auditable from artifacts rather than author
 recollection. (Execution-cost details appear in the repository README.)
+
+
+## References
+
+- Alet, F., Lozano-Perez, T., & Kaelbling, L. P. (2018). Modular
+  meta-learning. *CoRL*. arXiv:1806.10166.
+- Andreas, J., Rohrbach, M., Darrell, T., & Klein, D. (2016). Neural
+  module networks. *CVPR*. arXiv:1511.02799.
+- Baxter, J. (2000). A model of inductive bias learning. *JAIR*, 12,
+  149-198.
+- Bornschein, J., Li, Y., & Hutter, M. (2022). Sequential learning of
+  neural networks for prequential MDL. arXiv:2210.07931.
+- Dawid, A. P. (1984). Present position and potential developments: Some
+  personal views: Statistical theory: The prequential approach. *JRSS A*,
+  147(2), 278-292.
+- Ellis, K., Wong, C., Nye, M., Sable-Meyer, M., Morales, L., Hewitt, L.,
+  Cary, L., Solar-Lezama, A., & Tenenbaum, J. B. (2021). DreamCoder:
+  Bootstrapping inductive program synthesis with wake-sleep library
+  learning. *PLDI*. arXiv:2006.08381.
+- Gerace, F., Saglietti, L., Sarao Mannelli, S., Saxe, A., & Zdeborova,
+  L. (2022). Probing transfer learning with a model of synthetic
+  correlated datasets. *Machine Learning: Science and Technology*, 3(1),
+  015030. arXiv:2106.05418.
+- Goyal, A., Lamb, A., Hoffmann, J., Sodhani, S., Levine, S., Bengio,
+  Y., & Scholkopf, B. (2021). Recurrent independent mechanisms. *ICLR*.
+  arXiv:1909.10893.
+- Ha, D., Dai, A., & Le, Q. V. (2017). HyperNetworks. *ICLR*.
+  arXiv:1609.09106.
+- Hupkes, D., Dankers, V., Mul, M., & Bruni, E. (2020). Compositionality
+  decomposed: How do neural networks generalise? *JAIR*, 67, 757-795.
+- Kirsch, L., Kunze, J., & Barber, D. (2018). Modular networks: Learning
+  to decompose neural computation. *NeurIPS*. arXiv:1811.05249.
+- Lake, B. M., & Baroni, M. (2018). Generalization without systematicity:
+  On the compositional skills of sequence-to-sequence recurrent networks.
+  *ICML*. arXiv:1711.00350.
+- Lee, J., et al. (2025). An empirical study of task and feature
+  correlations in the reuse of pre-trained models. arXiv:2506.01975.
+- Maurer, A., Pontil, M., & Romera-Paredes, B. (2016). The benefit of
+  multitask representation learning. *JMLR*, 17(81), 1-32.
+- Mendez, J. A., & Eaton, E. (2021). Lifelong learning of compositional
+  structures. *ICLR*. arXiv:2007.07732.
+- Mendez, J. A., & Eaton, E. (2023). How to reuse and compose knowledge
+  for a lifetime of tasks: A survey on continual learning and functional
+  composition. *TMLR*. arXiv:2207.07730.
+- Mittal, S., Bengio, Y., & Lajoie, G. (2022). Is a modular architecture
+  enough? *NeurIPS*. arXiv:2206.02713.
+- Muqeeth, M., Liu, H., & Raffel, C. (2023). Soft merging of experts with
+  adaptive routing (SMEAR). arXiv:2306.03745.
+- Ostapenko, O., Rodriguez, P., Caccia, M., & Charlin, L. (2021).
+  Continual learning via local module composition. *NeurIPS*.
+  arXiv:2111.11570.
+- Schug, S., Kobayashi, S., Simsek, Y., et al. (2024). Attention as a
+  hypernetwork. arXiv:2406.05816.
+- Shan, H., Minni, S., & Duncker, L. (2025). Separating the what and how
+  of compositional computation to enable reuse and continual learning.
+  arXiv:2510.20709.
+- Shazeer, N., Mirhoseini, A., Maziarz, K., Davis, A., Le, Q., Hinton,
+  G., & Dean, J. (2017). Outrageously large neural networks: The
+  sparsely-gated mixture-of-experts layer. *ICLR*. arXiv:1701.06538.
+- Standley, T., Zamir, A., Chen, D., Guibas, L., Malik, J., & Savarese,
+  S. (2020). Which tasks should be learned together in multi-task
+  learning? *ICML*. arXiv:1905.07553.
+- Tripuraneni, N., Jordan, M. I., & Jin, C. (2020). On the theory of
+  transfer learning: The importance of task diversity. *NeurIPS*.
+  arXiv:2006.11650.
+- Wu, S., Zhang, H., & Re, C. (2020). Understanding and improving
+  information transfer in multi-task learning. *ICLR*. arXiv:2005.00944.
+- Zamir, A., Sax, A., Shen, W., Guibas, L., Malik, J., & Savarese, S.
+  (2018). Taskonomy: Disentangling task transfer learning. *CVPR*.
+- Zhang, W., Deng, L., Zhang, L., & Wu, D. (2023). A survey on negative
+  transfer. *IEEE/CAA Journal of Automatica Sinica*, 10(2), 305-329.
+  arXiv:2009.00909.
 
 ---
 *Figures: (1) regime map, per-world sealed traces, both coordinates;
