@@ -384,3 +384,10 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   scale. Configurations achieve either a full library with good novel
   transfer or a smaller library with degraded novel transfer, never both.
   The result stands as a characterized negative; no further gate tuning.
+- Passed the clean-checkout rehearsal at ed90ee2: fresh clone, 73/73 tests,
+  full smoke lifetime with fingerprint-validated artifacts, and the plotting
+  entry point loads. Caveat recorded: the rehearsal reused the installed
+  Python environment; fresh-venv dependency installation remains untested.
+- Froze the confirmatory protocol and pre-registered outcomes in
+  `CONFIRMATION_PLAN.md` (three Holm-corrected primary outcomes, world-level
+  exclusion rule, reporting rules) before opening any sealed world.
