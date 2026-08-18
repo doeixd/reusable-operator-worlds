@@ -658,3 +658,22 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   rule (summaries committed per component; off-machine artifact archive
   before closure); and the synthesis is recorded as superseding
   notes/v3-sketch.txt as the V3 design constraints.
+- Completed V2 step 007 with genuine 32- and 128-task lifetimes at the
+  bracketing rho values (reports/v2_lifetime_length.json). The crossover
+  is stationary across a 4x range of lifetime lengths: signs unanimous
+  at every N (dense 3/3 at rho 0.75, continuous 3/3 at rho 0.9, for N in
+  32/64/128) with magnitudes scaling roughly linearly in N. H5a's
+  lifetime-length question is closed with real runs: the boundary is
+  N-invariant beyond very early lifetime.
+- Completed V2 step 008 (Benchmark E). Shared-residual beats the
+  fixed-architecture envelope by +4,932/+5,074/+5,261 nats in 3/3
+  hierarchical worlds (the fixed architectures approximately tie there).
+  The pre-registered promotion post-hoc returns its early-warning
+  branch: residuals do NOT cluster by family (within-family similarity
+  ~0, cross-family ~0, same-primitive 0.008-0.015;
+  reports/v2_hierarchical/residual-clustering.json). Diagnosis recorded:
+  E's family components are primitive-indexed and task-invariant, so the
+  shared basis absorbs them and residuals retain only task-idiosyncratic
+  corrections — both a vessel warning (rank-2 residuals carry no shared
+  structure here) and a design lesson (a true promotion testbed needs
+  family structure that varies across task groups). Feeds the V3 spec.

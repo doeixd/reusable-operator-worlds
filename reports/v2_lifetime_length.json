@@ -1,0 +1,40 @@
+{
+  "scope": "V2 step 007: genuine 32/64/128-task lifetimes, worlds 0-2, bracketing rho",
+  "paired_dense_minus_continuous": {
+    "rho_0.75": {
+      "N32": [
+        -723,
+        -145,
+        -893
+      ],
+      "N64": [
+        -1615,
+        -1053,
+        -2124
+      ],
+      "N128": [
+        -4967,
+        -3310,
+        -3869
+      ]
+    },
+    "rho_0.9": {
+      "N32": [
+        975,
+        216,
+        396
+      ],
+      "N64": [
+        2371,
+        501,
+        1022
+      ],
+      "N128": [
+        4595,
+        1576,
+        2141
+      ]
+    }
+  },
+  "verdict": "the crossover between rho 0.75 and 0.9 is stationary across a 4x range of genuine lifetime lengths: signs are unanimous at every N and magnitudes scale roughly linearly in N, i.e., per-task effects are approximately stationary. H5a's lifetime-length dependence is closed with real runs: amortization movement is confined to very early lifetime (16-32 tasks, from the truncation bridge) and the boundary is N-invariant from 32 to 128 tasks."
+}

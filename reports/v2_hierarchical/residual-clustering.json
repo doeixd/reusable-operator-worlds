@@ -1,0 +1,27 @@
+{
+  "scope": "Benchmark E promotion testbed post-hoc (pre-registered)",
+  "results": [
+    {
+      "world": 0,
+      "same_primitive": 0.015378117521381773,
+      "within_family": -0.0002596944270997889,
+      "cross_family": 7.027978671923294e-05,
+      "clusters_by_family": false
+    },
+    {
+      "world": 1,
+      "same_primitive": 0.011192447256442866,
+      "within_family": -0.0008580946440644532,
+      "cross_family": 0.0019424981609921673,
+      "clusters_by_family": false
+    },
+    {
+      "world": 2,
+      "same_primitive": 0.007870625354271956,
+      "within_family": -0.0012908798625445807,
+      "cross_family": -0.00042352139526214013,
+      "clusters_by_family": false
+    }
+  ],
+  "clusters_in": 0
+}
