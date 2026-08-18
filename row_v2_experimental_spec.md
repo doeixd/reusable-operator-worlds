@@ -1029,6 +1029,27 @@ tasks — because "approximately Bayesian" (calibrated) and
 "directionally Bayesian" (rank-aligned only) are different claims and
 the weaker one may hold alone.
 
+**006b STATUS (run 2026-08-18, BEFORE the sealed block;
+reports/v2_mechanism/): FALSIFIED, decisively and informatively.**
+Trained mixture weights are uncorrelated with exact route-posterior
+marginals over the same basis (mean Spearman -0.03 across worlds 0-2;
+fraction of tasks positive ~0.42, chance level), and calibration fails
+by three orders of magnitude (mixture entropy ~1.4 nats vs posterior
+marginal entropy ~0.001). The mixture is NOT an approximate posterior.
+Corrected mechanism statement: soft mixing wins by exploiting the basis
+as a CONTINUOUS FUNCTION SPACE — distributed, compensatory solutions —
+not by approximating Bayesian route inference. This coheres with 002b
+(manifold beats slots at partial recurrence), the recovery-onset result,
+and V1's mixture-beats-forced-route finding, and it sharpens H7's
+lesson: route-committed representations are better when found (the
+posterior beats mixtures by ~3.9k nats), but gradient descent on mixture
+codes never finds them — the learner is not doing route inference at
+all. Consequences: "premature commitment" was the wrong frame for the
+continuous learner (nothing is being committed); the H8 gates found
+nothing to compile because there are no latent route beliefs to
+harden; and the V3 wake-phase theory must be manifold-first, with route
+structure IMPOSED by consolidation rather than read out of the mixture.
+
 **Pre-draft V3 constraint set.** These five observations supersede
 notes/v3-sketch.txt as the design constraints for the eventual V3 spec
 (the sketch predates all six verdicts). One V3 hypothesis is recorded

@@ -1,0 +1,29 @@
+{
+  "scope": "006b: trained mixture weights vs exact route-posterior marginals over the same basis; exact reuse, worlds 0-2; run BEFORE the sealed block",
+  "worlds": [
+    {
+      "world_seed": 0,
+      "mean_spearman_mixture_vs_posterior_marginals": -0.050543478260869565,
+      "fraction_tasks_positive": 0.375,
+      "mean_mixture_entropy": 1.4027375904479722,
+      "mean_posterior_marginal_entropy": 0.0010965724900552287,
+      "per_task_entropy_correlation": 0.04162986764053232
+    },
+    {
+      "world_seed": 1,
+      "mean_spearman_mixture_vs_posterior_marginals": -0.023532608695652175,
+      "fraction_tasks_positive": 0.46875,
+      "mean_mixture_entropy": 1.4170747831674095,
+      "mean_posterior_marginal_entropy": 0.0009855382947632756,
+      "per_task_entropy_correlation": 0.02017381772699371
+    },
+    {
+      "world_seed": 2,
+      "mean_spearman_mixture_vs_posterior_marginals": -0.025760869565217392,
+      "fraction_tasks_positive": 0.421875,
+      "mean_mixture_entropy": 1.446767687275587,
+      "mean_posterior_marginal_entropy": 0.002912813684669778,
+      "per_task_entropy_correlation": -0.03842114282971745
+    }
+  ]
+}

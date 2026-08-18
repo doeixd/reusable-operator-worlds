@@ -91,3 +91,20 @@ nearly perfectly (H9a) and exploit them online (V1; H7's mechanism), but
 cannot yet write them down compactly (H8, MDL, two-part reversals) — and
 the failures share one root: identity-based instruments applied to a
 non-identifiable representation.
+
+## Post-script (same day): observation 1's mechanism hypothesis is dead
+
+006b falsified it before the sealed block, as pre-registered: mixture
+weights are uncorrelated with route-posterior marginals (Spearman ~ -0.03,
+chance-level sign rate) and miscalibrated by three orders of magnitude.
+The corrected picture: the continuous learner never does route inference —
+it solves the problem in the basis's continuous function space with
+distributed, compensatory mixtures, while the exact posterior solves it
+with committed routes, and the committed solution is better when found.
+The inference gap is therefore not "the learner commits too early" but
+"the learner's optimizer cannot reach the route-structured region of the
+solution space at all." V3's wake phase should be designed manifold-first,
+with route structure imposed at consolidation rather than read out of
+mixtures — and any future compilation gate must construct route
+hypotheses independently (posterior machinery), never by interpreting
+mixture weights.

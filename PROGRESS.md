@@ -677,3 +677,13 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   corrections — both a vessel warning (rank-2 residuals carry no shared
   structure here) and a design lesson (a true promotion testbed needs
   family structure that varies across task groups). Feeds the V3 spec.
+- Ran V2 step 006b before the sealed block, as required. The
+  mixture-as-approximate-posterior hypothesis is falsified: trained
+  mixture weights are uncorrelated with exact route-posterior marginals
+  (mean Spearman -0.03, chance-level sign rate, worlds 0-2) and
+  miscalibrated by three orders of magnitude (1.4 versus 0.001 nats).
+  Corrected mechanism, timestamped pre-sealed: soft mixing wins by
+  exploiting the basis as a continuous function space, not by
+  approximating route inference; route-committed solutions are better
+  when found but gradient descent never finds them. Spec section 9.5 and
+  the synthesis note updated in the same commit.
