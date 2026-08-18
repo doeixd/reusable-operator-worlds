@@ -428,3 +428,13 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   requirements: dedicated circularity section, toy-as-instrument framing,
   verbatim claims-not-made list, DreamCoder positioning, provenance
   paragraph, and the linearity result leading per the amended headline rule.
+- Revised the paper to draft v0.2 per the paper review: new title and
+  abstract centered on the statistical-reuse versus structural-abstraction
+  distinction; economic formalization (Delta(r) = a r + b) moved into the
+  introduction; "pre-specified sealed confirmation" wording with the git
+  history as the verifiable timestamp; the adaptive-substrate section
+  reframed as proof of concept with both currencies; the MDL negative
+  condensed to a paragraph with grids deferred to the appendix; the
+  provenance section toned to a disclosure; related work expanded around
+  the intervention-on-recurrence novelty axis; restructured to
+  phenomenon -> mechanism -> controls -> implications.
