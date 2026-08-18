@@ -578,3 +578,21 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   NMSE <= 0.02, the constant frozen in the MDL-gating study); entropy
   threshold unchanged. Gate v1 artifacts retained; v2 grid runs under
   artifacts/v2_consolidation_gate2/.
+- Ran the Model 8 gate-v2 grid (artifacts/v2_consolidation_gate2/). The
+  pre-registered monotone shape now PASSES: firing rates 0/0/0/0/1/7
+  percent across rho 0-1. H8b passes (the gate refuses all compilation
+  below rho 0.9). H8a is weak-to-negative: only 2-8 of 64 tasks compile
+  at exact reuse, mostly at the final sleep; storage gains are trivial
+  and firing cells cost 0-404 nats. Mechanism, connecting to H7's
+  non-identifiability finding: behavioral near-equivalence among routes
+  in the overcomplete basis keeps posterior entropy above threshold even
+  where compilable structure exists — the entropy criterion measures
+  route identifiability, not compilability. With the single pre-
+  registered re-derivation spent, Model 8 is recorded as a characterized
+  negative for this gate family: relative criteria fire for the wrong
+  reason (v1), entropy criteria barely fire at all (v2), and the two
+  failures bracket the design space. A predictive-equivalence gate
+  (BMA-versus-MAP behavioral gap) is the pre-registered candidate for
+  any future iteration. Logging gap noted: per-task gate diagnostics
+  (which criterion failed) were not recorded; a one-cell diagnostic
+  rerun can decompose this if needed for the write-up.
