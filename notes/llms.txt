@@ -1,0 +1,652 @@
+The most important application is **not “replace every LLM layer with reusable modules.”** Your result says almost the opposite:
+
+[
+\boxed{\text{share computation only when the environment contains enough recurring computation to justify it.}}
+]
+
+ROW finds that dense specialization wins at low functional recurrence, while explicit sharing wins once recurrence is sufficiently high; and importantly, statistical sharing can become useful before clean, recomposable primitives actually emerge. 
+
+That suggests a fairly concrete agenda for LLMs.
+
+### 1. Let LLMs learn what computation deserves to be shared
+
+Today, a Transformer essentially gives every layer its own MLP/attention parameters:
+
+[
+F_1,F_2,\ldots,F_L.
+]
+
+Even when layers perform related computations, they are separately parameterized.
+
+Instead imagine:
+
+[
+h_{l+1}
+=======
+
+h_l
++
+P_{i_l}(h_l;a_l)
++
+\Delta_l(h_l),
+]
+
+where:
+
+* (P_i) comes from a **global reusable operator library**;
+* (a_l) is a small contextual argument;
+* (\Delta_l) is an optional specialization residual.
+
+Then the model itself can decide:
+
+> “This computation is common enough to call the shared operator.”
+
+versus:
+
+> “This situation is sufficiently different that I should specialize.”
+
+Your shared-parent + residual experiment is already a toy version of exactly this idea: adaptive sharing improved predictive performance, and the residual magnitude decreased as recurrence increased. 
+
+For an LLM, I would not make every Transformer block a rigid shared library. I'd give it **copy-on-write computation**:
+
+[
+P_{\text{context}}
+==================
+
+P_{\text{shared}}+\Delta_{\text{context}}.
+]
+
+Shared roots for commonly recurring computation; residuals/forks for special cases.
+
+---
+
+### 2. The model could discover a “computational vocabulary”
+
+An LLM currently learns:
+
+* representations,
+* weights,
+* routing patterns,
+
+but the architecture does not strongly encourage it to say:
+
+> “I have learned this transformation before; call it again.”
+
+Suppose we instead had a library:
+
+[
+\mathcal P={P_1,P_2,\ldots,P_K}
+]
+
+and a controller generating programs such as:
+
+[
+P_{14}\rightarrow P_3\rightarrow P_{14}\rightarrow P_22.
+]
+
+The same primitive could be used:
+
+* at multiple depths;
+* on different tokens;
+* on different tasks;
+* during perception;
+* during reasoning;
+* during memory retrieval.
+
+That would make parameter count more independent of computational depth.
+
+A conventional Transformer largely gets additional computation by storing more blocks:
+
+[
+F_1,F_2,\ldots,F_{96}.
+]
+
+A programmable model could instead have:
+
+[
+20\text{ reusable operators}
+]
+
+and execute:
+
+[
+5,\ 20,\ \text{or }100
+]
+
+calls depending on the problem.
+
+The big LLM hypothesis would be:
+
+> Large dense Transformers contain significant **functional recurrence** across layers, contexts, and tasks, but represent it inefficiently as separately parameterized computations.
+
+ROW doesn't establish that this is true of LLMs. It gives us a framework for **testing it**.
+
+---
+
+### 3. First measure functional recurrence in existing LLMs
+
+Before designing a new architecture, apply the ROW lesson literally.
+
+Take a pretrained small Transformer and ask:
+
+> How much functionally reusable computation is actually present?
+
+Don't compare weights directly.
+
+For two MLPs/layers/heads (F_i,F_j), test something like:
+
+[
+F_i(h)\approx B,F_j(Ah)
+]
+
+for cheap (A,B), or transplant one computation into another location and measure behavioral degradation.
+
+You could build an empirical recurrence matrix:
+
+[
+R_{ij}
+======
+
+\operatorname{FSE}(F_i,F_j)
+]
+
+where FSE is some functional-substitution/reusability score.
+
+Then ask:
+
+* Does functional recurrence rise with model scale?
+* Does recurrence cluster by layer depth?
+* Do apparently different layers implement related transformations in different coordinate systems?
+* Is there enough recurrence that the ROW economics predict sharing should pay?
+
+This could already make an interesting mechanistic-interpretability paper.
+
+---
+
+### 4. Refactor a pretrained LLM after training
+
+This is probably the lowest-risk direct LLM experiment.
+
+Don't initially train a weird new architecture.
+
+Train/use an ordinary small Transformer.
+
+Then attempt to **compress its computation into a reusable library**.
+
+For example:
+
+[
+F_1,\ldots,F_L
+]
+
+become:
+
+[
+{P_1,\ldots,P_K}
++
+{\text{small adapters/routes}}.
+]
+
+Optimization objective:
+
+[
+J=
+L_{\text{distill}}
++\lambda D(\mathcal P,\text{routes},\text{adapters})
++\mu C.
+]
+
+You'd explicitly test the finding from ROW:
+
+> Does refactoring only pay where there is enough functional recurrence?
+
+The compressor should be allowed to say:
+
+> “No, these two computations aren't reusable enough.”
+
+That is important. Your L0 pruning negative result suggests that forcing compression **during acquisition** can damage generality before useful structure emerges. 
+
+So for LLMs, I'd strongly prefer:
+
+[
+\boxed{
+\text{learn first}
+\rightarrow
+\text{measure recurrence}
+\rightarrow
+\text{consolidate/refactor}
+}
+]
+
+over imposing hard modularity from initialization.
+
+---
+
+### 5. Wake/sleep training becomes very plausible
+
+This is one of the strongest extrapolations.
+
+#### Wake
+
+Let the LLM train with lots of flexible capacity:
+
+[
+\theta.
+]
+
+SGD is allowed to discover whatever representations/functions are useful.
+
+#### Sleep / consolidation
+
+Search for recurring computation:
+
+[
+F_a\approx F_b\approx F_c.
+]
+
+Replace it with:
+
+[
+P
+]
+
+plus inexpensive context-specific arguments/adapters:
+
+[
+F_a\approx B_aP(A_a h).
+]
+
+Repeated compositions:
+
+[
+P_7,P_{12},P_3
+]
+
+could eventually become macros.
+
+Then continue training.
+
+So instead of continuously adding capacity, the model periodically asks:
+
+> What have I learned often enough that it deserves to become a first-class reusable abstraction?
+
+That is exactly the economics in your paper turned into a training algorithm.
+
+---
+
+### 6. This could improve continual learning
+
+Suppose an LLM learns tasks sequentially.
+
+Traditional fine-tuning tends to modify the same weights:
+
+[
+\theta\rightarrow\theta'.
+]
+
+Instead, a new task first attempts to explain itself through the existing computational library:
+
+[
+\pi_\tau
+========
+
+[P_4,P_{11},P_7].
+]
+
+If it cannot:
+
+[
+P_{\tau}
+========
+
+P_{\text{shared}}+\Delta_\tau.
+]
+
+The hierarchy could be:
+
+[
+\boxed{
+\text{reuse existing program}
+\rightarrow
+\text{new arguments}
+\rightarrow
+\text{small residual}
+\rightarrow
+\text{fork primitive}
+\rightarrow
+\text{invent new primitive}.
+}
+]
+
+Each step costs progressively more description length.
+
+That gives you a principled answer to the stability/plasticity problem:
+
+> Don't modify a widely shared primitive unless the evidence warrants it.
+
+If specialization is required, fork it:
+
+[
+P'\leftarrow P+\Delta.
+]
+
+This is basically neural copy-on-write.
+
+---
+
+### 7. It changes how we might think about in-context learning
+
+Your discrete result also matters here.
+
+You found that learning a good reusable library and **inferring the program that uses it** are separate problems. The discrete learner can recover the library quite well but pays heavily for route inference. 
+
+For an LLM, that suggests:
+
+[
+\boxed{
+\text{pretraining learns the library;}
+\quad
+\text{in-context learning infers the program.}
+}
+]
+
+The prompt demonstrations shouldn't require changing core knowledge.
+
+They should tell the model:
+
+> Given the operations you already know, what computation should you execute here?
+
+So instead of representing a task as an opaque latent embedding, train an **amortized program compiler**:
+
+[
+D=
+{(x_1,y_1),\ldots,(x_n,y_n)}
+]
+
+[
+D
+\xrightarrow{C_\phi}
+\pi_D
+]
+
+[
+\pi_D
+\xrightarrow{\mathcal P}
+y.
+]
+
+That would make ICL explicit and inspectable.
+
+---
+
+### 8. Continuous inference, discrete consolidation
+
+The continuous-vs-discrete result suggests a particularly attractive LLM architecture.
+
+During a novel problem, maintain a soft distribution over computation:
+
+[
+\alpha_i
+]
+
+and execute:
+
+[
+P_\alpha(h)
+===========
+
+\sum_i\alpha_iP_i(h).
+]
+
+This makes inference differentiable and lets the model represent uncertainty.
+
+After repeatedly seeing the same pattern, consolidate it:
+
+[
+\alpha
+\rightarrow
+\text{discrete program}.
+]
+
+So:
+
+[
+\boxed{
+\text{soft computation while uncertain}
+\rightarrow
+\text{hard reusable program when established}.
+}
+]
+
+For LLMs this could mean:
+
+* flexible mixtures during pretraining/new domains;
+* compiled sparse routes during inference;
+* repeated routes becoming macros;
+* eventually common macros becoming fused operators.
+
+That gives a continuum:
+
+[
+\text{continuous search}
+\rightarrow
+\text{program}
+\rightarrow
+\text{macro}
+\rightarrow
+\text{compiled primitive}.
+]
+
+---
+
+### 9. Attention/perception could be part of the program too
+
+This connects to what we were discussing before.
+
+Instead of every Transformer block performing essentially the same broad attention/MLP template, perhaps the library contains operations for:
+
+[
+\text{selecting information}
+]
+
+[
+\text{binding}
+]
+
+[
+\text{comparing}
+]
+
+[
+\text{retrieving memory}
+]
+
+[
+\text{transforming workspace state}.
+]
+
+The model's computation on a token/input becomes a program over these operators.
+
+For one query:
+
+[
+\text{retrieve}
+\rightarrow
+\text{compare}
+\rightarrow
+\text{transform}
+\rightarrow
+\text{answer}.
+]
+
+For another:
+
+[
+\text{attend}
+\rightarrow
+\text{bind}
+\rightarrow
+\text{repeat}
+\rightarrow
+\text{answer}.
+]
+
+This could eventually eliminate the artificial distinction between:
+
+* perception,
+* attention,
+* reasoning,
+* memory.
+
+They become different programs over the same computational substrate.
+
+---
+
+### 10. There is also a direct scaling-law hypothesis here
+
+Current scaling roughly says:
+
+[
+\text{more parameters}\Rightarrow\text{better model}.
+]
+
+But imagine that a meaningful fraction of those additional parameters are storing repeated variants of related computations.
+
+Then an alternative scaling axis is:
+
+[
+\boxed{
+\text{size of computational vocabulary}
+\times
+\text{number/complexity of compositions}.
+}
+]
+
+A model could increase **effective computational complexity** dramatically without increasing stored parameters proportionately.
+
+If:
+
+[
+K
+]
+
+operators support programs of length (L), the number of possible sequences is approximately:
+
+[
+K^L.
+]
+
+Obviously not all sequences are useful, but the basic leverage is real:
+
+[
+\text{stored computation}
+\ll
+\text{possible composed computation}.
+]
+
+That is the deeper promise.
+
+---
+
+## The experiment I would run first on an actual language model
+
+I'd stay tiny.
+
+Train two maybe ~20–100M parameter language models on a synthetic/semi-natural language corpus containing **controlled recurring transformations**.
+
+For example, create families of algorithmic/text tasks whose hidden transformations have tunable recurrence exactly like ROW.
+
+Compare:
+
+1. ordinary Transformer;
+2. recurrent/shared Transformer;
+3. continuous operator-bank Transformer;
+4. shared-parent + residual;
+5. eventually dynamic/consolidating model.
+
+Then measure:
+
+[
+\text{prequential language/task loss}
+]
+
+against:
+
+[
+\text{measured functional recurrence}.
+]
+
+If the ROW dose-response appears inside a Transformer, that is a major bridge.
+
+Then move to natural corpora and stop controlling recurrence; instead **measure it**.
+
+---
+
+## And then the really ambitious LLM experiment
+
+Start with an ordinary pretrained model.
+
+During continued pretraining:
+
+1. measure frequently recurring functional transformations;
+2. extract candidate shared operators;
+3. substitute them causally into multiple locations;
+4. keep substitutions only when held-out loss remains low;
+5. charge adapters/routes against description length;
+6. continue training;
+7. periodically repeat.
+
+Then ask whether the model progressively becomes:
+
+* smaller,
+* more reusable,
+* faster to learn new tasks,
+* more compositional.
+
+That would directly test:
+
+[
+\boxed{
+\text{Can an LLM refactor itself into a better computational language as it learns?}
+}
+]
+
+And I think **that** is the strongest application of what you've discovered.
+
+ROW's lesson is not merely that modular networks can work.
+
+It's:
+
+> **There is an economic decision behind abstraction. Sharing is valuable only when computation recurs enough to amortize its constraints and costs—and a good learner should eventually learn to make that decision itself.**
+
+For LLMs, the long-term architecture I'd bet on is therefore not “all dense” or “all modular.” It is a model that can continuously decide:
+
+[
+\boxed{
+\text{reuse}
+\quad|\quad
+\text{specialize}
+\quad|\quad
+\text{fork}
+\quad|\quad
+\text{compose}
+\quad|\quad
+\text{consolidate}.
+}
+]
+
+That is where your ROW result connects most directly to a serious alternative to today's fixed Transformer architecture.
+
+1. Train soft, serve hard: routing as annealed inference, not a fixed design choice. The discrete-library result says the cost of hard routing isn't discreteness — it's committing while uncertain (92% correct routes, huge online tax, half recovered just by fixing commitment dynamics; H7 tests whether posterior inference closes the rest). Current MoE picks one point on the soft↔hard spectrum and lives with it: soft merging trains stably but loses sparse inference; top-k routing gets sparse inference but needs load-balancing hacks because early wrong commitments are expensive. The ROW-informed architecture treats hardness as a schedule: routers output full mixtures early in training, carry that uncertainty explicitly, and anneal toward sparse commitment per-expert or per-domain as the posterior concentrates — not on a global schedule, since the per-task-vs-global annealing gap was worth ~8,800 nats in miniature. You'd get soft-mixture training stability with sparse-MoE serving cost, and the load-balancing loss becomes less load-bearing because you're no longer forcing confident discrete choices out of an ignorant router.
+
+2. Consolidation as a first-class training phase, with a refusal gate. Extending that: don't just anneal — add explicit checkpointed compilation. Periodically, take routing distributions that have become confident and whose hardened version matches held-out performance, freeze them into sparse routes, and keep training everything else soft. This is dense-to-sparse upcycling, but incremental and gated instead of one-shot. The architecturally novel part is H8b's gate: a compilation criterion that can decline. Applied to MoE, that predicts something diagnostic — for genuinely low-recurrence slices of the data distribution, the correct architecture never sparsifies, and forcing uniform sparsity there is where your quality loss is coming from. End state: a model that's heterogeneously sparse, hard-routed exactly where the data had discoverable program structure, soft where it didn't. Nobody builds this today; everyone picks one k for the whole model.
+
+3. Structure the FFN as shared basis + penalized low-rank residuals, and let the penalty discover the sharing. Model 5 is nearly a blueprint. Instead of monolithic FFN blocks or disjoint experts, build each block as a small set of shared operator atoms plus domain/context-conditioned low-rank deltas under an explicit norm penalty, during pretraining — not as a post-hoc LoRA. The envelope result says this beats both fixed choices at intermediate recurrence, which is presumably where real text distributions live; the allocation signature says the residual norms then become a free measurement instrument, telling you empirically which computations your corpus reuses and which are domain-idiosyncratic. Two ROW caveats transfer directly as design constraints: keep residual rank brutally small or the deltas quietly rebuild the monolith (the escape-hatch guard), and the bits aren't free — the J-weighted reversal says naive per-domain residuals lose on total description length, so this only wins paired with mechanism 2, which compiles near-zero residuals away.
+
+4. Prefer explicit shared atoms over hypernetwork-style conditioning for the reusable substrate. A clean, cheap lesson: the hypernetwork (continuous operator manifold, no slots) consistently lost to the explicit basis at matched compute. Where an architecture generates weights from context — HyperLoRA-style adapters, some conditional-computation schemes — the finding says discrete named atoms mixed by the context beat a manifold that morphs continuously, at least for lifetime learning efficiency. Slots aren't just interpretability sugar; they're the better prior.
+
+5. Make sharing depth- and component-heterogeneous by measurement, not convention. The regime map says sharing helps exactly where functional recurrence is high and hurts where it's low — and the repulsion result says forced sharing below the crossover actively destroys latent structure. LLMs currently share uniformly (every token, every layer, same weights) and specialize uniformly (experts all shaped alike). The ROW-informed move is to let the architecture express different sharing regimes for different computational roles — e.g., aggressive weight tying / iterated blocks where recurrence is plausibly near-exact (low-level token operations, syntax-ish transforms), residual-specialized capacity where it's low (long-tail domain knowledge) — with mechanism 3's residual norms as the empirical guide to which is which, rather than guessing.
+
+6. If you want editable modules, you must build the crystallizer — sharing won't produce them. The dissociation is a negative architecture theorem: all the transfer benefit in the world doesn't imply recomposable parts exist. So any agenda that needs actual modules — surgical knowledge editing, unlearning, capability removal, composable skills — cannot expect them to emerge from a well-trained shared substrate, because economically-optimal sharing stops at "entangled but efficient." Modularity has to be paid for by an explicit mechanism (consolidation pressure, exactness constraints), and the ρ = 0.9 result warns the price is real: partial recurrence, which is what natural data has, is precisely the regime where clean modules don't form on their own.
+
+7. One heterodox long-shot from the alignment result. The 10x GELU collapse says the functional family of your primitives dominates the value of reuse. Uniform architectures bet one family fits all of language's recurring transforms. A ROW-flavored alternative: heterogeneous expert families — experts differing in functional form, not just initialization — so routing can select the aligned vocabulary per input, not merely the specialized parameters. Weakest evidence of the seven, but it's the one that would most directly test whether the alignment term matters at scale.
