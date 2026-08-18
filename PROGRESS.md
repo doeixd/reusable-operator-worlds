@@ -647,3 +647,14 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   out cross-task promotion as V3's central mechanism. Added step 006b, a
   zero-compute mixture-versus-posterior correlation test of the
   approximate-Bayesian-inference mechanism hypothesis.
+- Updated the V2 spec per the synthesis suggestions: 006b runs before the
+  sealed block with a calibration check added (mixture entropy versus
+  posterior entropy, distinguishing calibrated from rank-aligned
+  Bayesian behavior); Benchmark E gains its pre-registered second job as
+  the promotion testbed (residual clustering by family, both outcomes
+  reported, scoping the draft V3 hypothesis "promotion wins both
+  currencies in hierarchical worlds"); the sealed block gains a
+  sequencing rule (Component A analyzed before B runs) and a durability
+  rule (summaries committed per component; off-machine artifact archive
+  before closure); and the synthesis is recorded as superseding
+  notes/v3-sketch.txt as the V3 design constraints.

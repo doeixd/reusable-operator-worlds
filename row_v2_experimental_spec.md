@@ -465,6 +465,21 @@ with a two-family structure. The optimal code is hierarchical; the learner
 must discover how many levels of shared structure exist. Only after
 Benchmark D produces its H9 verdict.
 
+**E's second job (pre-registered post-hoc, zero extra compute): the
+promotion testbed.** In mixed worlds the low-recurrence primitives carry
+nothing shared, so correct behavior is allocation (H9a). In hierarchical
+worlds the FAMILY components are structure that is neither global nor
+task-specific — exactly the stratum V3's residual-promotion mechanism
+exists to capture. On the E artifacts: compute functional similarity of
+task-step residuals ACROSS tasks and test whether residuals cluster by
+family (within-family residual similarity > cross-family, per world).
+If they cluster, promotable structure is measurably present in the
+residuals and the draft V3 hypothesis ("promotion wins both currencies
+in hierarchical worlds") is scoped before it is built. If they do not,
+that is an early warning that rank-2 residuals are too idiosyncratic a
+vessel for shared structure, and the V3 spec must address the vessel
+before the mechanism. Both outcomes are reported.
+
 ## Parked benchmarks
 
 - **Benchmark C** (macro regimes / nonstationarity): third in line, after D
@@ -885,9 +900,24 @@ then seeds 100–129). No V2 training before that, with one exception — the
    world's program distribution.
 8. **007** Lifetime-length runs (32 and 128 tasks) at bracketing `rho` if
    and only if B2 showed crossover movement.
-9. **008** Benchmark E hierarchical recurrence, only after 005's verdict.
-10. **009** Freeze V2 configurations, metrics, exclusions; open seeds
-    200–229.
+9. **008** Benchmark E hierarchical recurrence, only after 005's verdict;
+   includes the pre-registered residual-clustering promotion analysis
+   (§3).
+10. **006b** Mixture-vs-posterior mechanism test (§9.5) — zero compute,
+    and it MUST run before 009 so the mechanism framing is timestamped
+    ahead of any sealed data.
+11. **009** Freeze V2 configurations, metrics, exclusions; open seeds
+    200–229. Sequencing within the sealed block: Component A completes
+    and is analyzed before Component B runs — if Family A's parameter
+    intervals miss, that is known before deciding how to PRESENT Family
+    B (analysis content for both remains fixed by
+    V2_CONFIRMATION_PLAN.md; only reporting order is at stake).
+    Durability rule: sealed-block summary JSONs are committed to
+    reports/ as each component completes, and a zipped archive of the
+    sealed artifacts is stored off-machine (a private Kaggle dataset
+    suffices) before the block is declared closed — the repository
+    carries reports and code, and confirmatory evidence must not exist
+    only on one disk.
 
 Each step has a written outcome before the next begins; negative results
 advance the order rather than restarting it.
@@ -990,7 +1020,22 @@ correlation.** Correlate each task's trained soft mixture weights
 marginals (step 001 machinery) at exact reuse. Alignment upgrades the
 V1 headline with a mechanism: the reusable basis wins by approximating
 Bayesian program inference. Non-alignment falsifies observation 1's
-working hypothesis and is reported as such.
+working hypothesis and is reported as such. Two refinements, decided
+before running: (a) 006b runs BEFORE the sealed block, so the mechanism
+framing is timestamped ahead of confirmatory data and cannot be
+suspected of being fitted to it; (b) report calibration as well as
+ranking — whether mixture entropy tracks posterior entropy across
+tasks — because "approximately Bayesian" (calibrated) and
+"directionally Bayesian" (rank-aligned only) are different claims and
+the weaker one may hold alone.
+
+**Pre-draft V3 constraint set.** These five observations supersede
+notes/v3-sketch.txt as the design constraints for the eventual V3 spec
+(the sketch predates all six verdicts). One V3 hypothesis is recorded
+in draft form now: **promotion wins both currencies in hierarchical
+worlds** — the falsifiable form of observation 5 — with the Benchmark E
+residual-clustering analysis (section 3) scoping its plausibility
+before any V3 freeze.
 
 # 10. Anticipated objections and positioning
 
