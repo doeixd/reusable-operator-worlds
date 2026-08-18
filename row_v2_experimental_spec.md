@@ -297,6 +297,18 @@ none of them touches sealed worlds.
    the hypernetwork (pure manifold, no slots) should close more of its gap
    to Continuous at `rho = 0.9` than at `rho = 1.0`, a cheap corollary
    check worth running with it.
+   **STATUS (run 2026-08-17, reports/rho_operator_recovery/): CONFIRMED,
+   with a sharper shape than predicted.** Against an untrained-basis
+   baseline of 0.0087, trained operators sit FARTHER from the shared
+   primitives than untrained ones at `rho <= 0.5` (0.0115-0.0121), match
+   baseline at 0.75 (0.0083), first drop below it at 0.9 (0.0048), and
+   crystallize at 1.0 (0.0017). Primitive-recovery ONSET coincides with
+   the performance crossover; partial recovery at 0.9 quantifies the
+   statistical-vs-structural dissociation (§0 item 8). The untrained
+   baseline is mandatory context for any recovery number quoted anywhere —
+   absolute distances without it are uninterpretable (the family is
+   already ~0.0087-close by construction). Hypernetwork corollary remains
+   unrun (hypernetwork was only trained at rho = 1).
 
 ---
 
