@@ -630,6 +630,27 @@ criterion already frozen in the MDL-gating study — compile only if the
 MAP route's held-out evaluation NMSE <= 0.02 — with H_threshold = 0.1
 nat unchanged. Grid v2 runs under artifacts/v2_consolidation_gate2/.
 
+**GATE V2 / FINAL MODEL 8 STATUS (grid run 2026-08-18,
+artifacts/v2_consolidation_gate2/): H8b PASSES, H8a WEAK-TO-NEGATIVE;
+Model 8 recorded as a characterized negative for this gate family.**
+Firing rates 0/0/0/0/1/7 percent across rho 0-1 — the pre-registered
+monotone shape holds and the gate refuses all compilation below
+rho = 0.9 (H8b). But at exact reuse only 2-8 of 64 tasks compile (mostly
+at the final sleep), storage gains are trivial, and firing cells cost
+0-404 nats (H8a not achieved). Mechanism, closing a loop with H7: the
+overcomplete basis contains behaviorally near-equivalent routes, so
+posterior entropy stays above threshold even where compilable structure
+exists — entropy measures route IDENTIFIABILITY, not COMPILABILITY. The
+two gate derivations bracket the design space (relative bars fire
+wherever the soft baseline is weak; entropy bars barely fire at all),
+and with the single re-derivation spent, the verdict stands. The
+pre-registered candidate for any future gate is predictive equivalence
+of the posterior's top routes (BMA-vs-MAP behavioral gap) rather than
+entropy. Decision-branch outcome per §1 H8: the honest claim is the
+third branch — a bound on when compilation is safe — plus the design
+lesson; consolidation as specified does not yet deliver the
+storage/learning trade.
+
 **Gate shape prediction, pre-registered** (added after external review:
 `H_threshold` and `kappa` frozen from only three worlds could pass H8b by
 accident of those worlds). A gate that is correct for the right reason
