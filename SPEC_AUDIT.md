@@ -59,10 +59,6 @@ claim.
 
 # Open model investigation
 
-- The shared-parent plus rank-two task residual control is implemented and its
-  optimizer/penalty is selected on development world 0 at configured
-  `rho=0.75`. Its recurrence sweep on worlds 0–2 remains to be completed before
-  the copy-on-write prediction can be judged.
 - MDL presence-gate pruning is conditional on deciding that the hard discrete
   route learner “works” well enough to justify pruning. The current evidence
   shows strong final operator/route recovery but poor online route inference;
@@ -86,8 +82,8 @@ obligations below should be resolved or explicitly deferred.
 
 # Execution order
 
-1. Complete the shared-parent residual recurrence sweep and analysis.
-2. Freeze batch protocol, tuning, and statistical summaries.
+1. Freeze batch protocol, tuning, and statistical summaries.
+2. Resolve the conditional MDL presence-gate decision.
 3. Run a clean artifact/plotting rehearsal.
 4. Re-audit the gate before touching confirmatory worlds.
 
@@ -129,3 +125,8 @@ obligations below should be resolved or explicitly deferred.
   16 to 32 tasks and then plateaus; measured recurrence smooths the mean effect
   curve but does not tighten per-world crossover alignment. The tracked result
   is `reports/rho_bridge/rho-bridge.json`.
+- The shared-parent plus rank-two task residual control is complete on worlds
+  0–2 across rho 0.5, 0.75, 0.9, and 1.0. It beats the fixed-model envelope at
+  every intermediate-reuse point, then yields slightly to Continuous at exact
+  reuse as its functional residual ratio approaches zero. The tracked result is
+  `reports/shared_residual/shared-residual.json`.

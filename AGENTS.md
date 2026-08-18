@@ -425,3 +425,15 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   0.01748, and mean/maximum functional residual-to-parent ratios are 0.246/0.419.
   This is a tuning result only; the selected setting must be evaluated across
   recurrence and additional development worlds before interpretation.
+- The frozen shared-residual control beats the better fixed Continuous/Dense-C
+  model on lifetime loss and novel 32-shot NMSE in all nine world/rho pairs at
+  configured rho 0.5, 0.75, and 0.9. Mean lifetime gains over the fixed envelope
+  are 9,168, 7,458, and 3,745 log-loss units, respectively.
+- At exact reuse, Continuous beats shared residual by 238, 163, and 336 log-loss
+  units. Mean functional residual-to-parent ratio falls monotonically from 0.284
+  at rho 0.5 to 0.026 at rho 1.0, with the endpoint decline present in all three
+  worlds. This supports adaptive share-versus-specialize behavior.
+- Shared residual stores 14,208 task-specific scalars over 64 tasks versus 1,536
+  route scalars for Continuous, and uses 6,720 forward multiply-adds versus
+  6,528. Its lower intermediate-reuse loss is a copy-on-write capacity result,
+  not a storage-matched architecture win.

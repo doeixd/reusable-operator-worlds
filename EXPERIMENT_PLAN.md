@@ -180,6 +180,14 @@ must be labeled as such; worlds 1–2 provide the paired replication. Report los
 relative to the better fixed Continuous/Dense-C model, functional residual
 ratios, novel adaptation, retained task state, and forward multiply-adds.
 
+The frozen sweep is complete. Shared residual beats the better fixed model in
+all nine intermediate-reuse world/rho pairs, with mean gains of 9,168, 7,458,
+and 3,745 log-loss units at rho 0.5, 0.75, and 0.9. At exact reuse, Continuous
+wins all three worlds by a mean 246 units while the mean functional residual
+ratio falls to 0.026. Interpret this as evidence for adaptive copy-on-write
+specialization, not a storage-matched architecture win: the control retains
+14,208 task-specific scalars over 64 tasks.
+
 # Confirmation gate
 
 Run seeds 100–129 only after:

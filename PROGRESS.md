@@ -286,8 +286,8 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 
 - Freeze batch 2 versus batch 8 and any required symmetric retuning for
   confirmation.
-- Run the frozen shared-parent residual setting across recurrence on development
-  worlds 0–2 and compare it with the better fixed Continuous/Dense-C envelope.
+- Resolve the conditional MDL presence-gate decision and add the frozen
+  world-level/task-level statistical summaries.
 - Rehearse artifact generation and plotting from a clean checkout before opening
   the confirmatory seed gate.
 
@@ -306,6 +306,24 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Added a serialized, resumable recurrence sweep and a fixed-envelope analyzer.
   The sweep reuses only the validated selected tuning artifact and otherwise
   runs one full lifetime at a time to avoid the prior paging-file failure.
+
+# Shared-parent residual recurrence complete
+
+- Evaluated the frozen control on development worlds 0–2 at configured rho
+  0.5, 0.75, 0.9, and 1.0. The world-0 rho-0.75 point is explicitly retained as
+  tuning; the corresponding worlds 1–2 results are untuned replication.
+- The hybrid beats the better fixed Continuous/Dense-C model on lifetime loss
+  in all 9 intermediate-reuse comparisons. Mean gains are 9,168 at rho 0.5,
+  7,458 at rho 0.75, and 3,745 at rho 0.9. It also wins novel 32-shot NMSE in
+  all nine.
+- At rho 1.0 the specialized residual becomes nearly dormant: mean functional
+  residual-to-parent ratio is 0.026 versus 0.284 at rho 0.5, declining in all
+  three worlds. Continuous is then slightly better by a mean 246 log-loss units,
+  as predicted for exact reuse.
+- This closes the fixed-topology copy-on-write question, but the hybrid is not a
+  storage-matched winner: it retains 14,208 task scalars over 64 tasks versus
+  Continuous's 1,536 route scalars. The validated report and visually inspected
+  figure are under `reports/shared_residual`.
 
 # Decisions
 

@@ -267,7 +267,7 @@ def plot_report(report: dict[str, Any], destination: Path) -> None:
     )
     axes[1].set_xlabel("Configured recurrence (rho)")
     axes[1].set_ylabel("Functional residual ratio")
-    axes[1].legend(frameon=False)
+    axes[1].legend(frameon=False, loc="center right")
     axes[1].grid(axis="y", alpha=0.2)
 
     figure.suptitle("Shared-parent residual control across recurrence")
