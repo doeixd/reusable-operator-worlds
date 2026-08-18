@@ -1,6 +1,6 @@
 # When Does Abstraction Pay? Measuring the Value of Reusable Computation in Neural Learners
 
-*Draft v0.5. Development and confirmatory results labeled throughout;
+*Draft v0.6. Development and confirmatory results labeled throughout;
 all numbers trace to fingerprint-validated artifacts in the public
 repository. Revision history in PROGRESS.md.*
 
@@ -22,7 +22,9 @@ advantage is approximately linear in measured functional recurrence
 conditional on representational alignment, and substantially so: when the
 learner's operator family matches the environment's (residual tanh), the
 exact-reuse advantage is large; changing only the learner's activation
-family collapses it roughly tenfold. The supportable claim is therefore:
+family imposes an approximately additive penalty that consumes the
+attainable return, leaving parity at exact reuse. The supportable claim
+is therefore:
 **when a learner's representational vocabulary can efficiently express
 the environment's recurring computation, the value of using that
 vocabulary is linear in measured recurrence.** Development-stage
@@ -99,7 +101,8 @@ none of our claims concern scale, and the criterion we test is scale-free.
    the apparent threshold in configured coordinates being largely
    coordinate distortion. The magnitude of this economics is strongly
    conditioned on representational alignment (a family-mismatch control
-   collapses it roughly tenfold), and we state every claim under that
+   reduces the exact-reuse advantage to approximate parity, via an
+   approximately additive penalty), and we state every claim under that
    condition.
 3. The statistical-reuse / structural-abstraction dissociation: lifetime
    economic benefit precedes, and does not imply, identifiable
@@ -289,21 +292,32 @@ that it measures inductive-bias match rather than reuse. In stages:
 removing all parameter coupling (independently initialized, learnable
 residual scale) leaves the world-0 advantage essentially unchanged
 (+4,446 nats); doubling teacher rank against fixed learner rank preserves
-most of it (+3,296); changing the learner's activation family (GELU vs
-tanh) collapses it roughly tenfold, to +441 — still positive, but small.
-The precise conclusion: **this experiment does not show that generic
-neural learners spontaneously discover arbitrary reusable computations.
-It shows that when a learner's representational vocabulary can
-efficiently express the recurrent structure of its environment, the
+most of it (+3,296); and changing the learner's activation family (GELU
+vs tanh) is the control that bites. Running the mismatched learner
+across the recurrence range (worlds 0-2) gives paired
+Dense-minus-Continuous effects of:
+
+    rho    tanh (mean)      GELU (mean)     mismatch penalty
+    0.75   -1,597 (0/3)     -3,632 (0/3)    +2,035
+    0.90   +1,298 (3/3)     -1,583 (0/3)    +2,881
+    1.00   +3,492 (3/3)     +134   (1/3)    +3,359
+
+The mismatch acts as an approximately additive penalty that grows mildly
+with recurrence: the return-on-recurrence slope survives at roughly 74%
+of the aligned slope, but the line is shifted down far enough that the
+zero crossing moves to the edge of attainable recurrence — at exact
+reuse the mismatched learner reaches parity with Dense-C, not advantage.
+Two conclusions follow. First, alignment is a cost term, not a gate: the
+effect neither vanishes nor stops rising with recurrence under
+mismatch. Second, and precisely: **this experiment does not show that
+generic neural learners spontaneously discover arbitrary reusable
+computations. It shows that when a learner's representational vocabulary
+can efficiently express the recurrent structure of its environment, the
 economic value of using that vocabulary is predictable from functional
-recurrence.** In the economic notation, the observed advantage depends
-not on recurrence alone but on something like Delta = f(r, A, C), where
-A is the alignment between the learner's representational vocabulary and
-the environment's recurring transforms and C is the substrate's cost;
-the GELU result shows the A-dependence is large. Whether family mismatch
-shifts the crossover location rather than only the magnitude is a
-pre-specified follow-up (V2, H6); whether the learner can acquire the
-vocabulary itself is the V2 program.
+recurrence — and when it cannot, the sharing penalty grows to consume
+the attainable return.** In the economic notation Delta = f(r, A, C),
+alignment A enters approximately additively at this scale. Whether the
+learner can acquire the vocabulary itself is the V2 program.
 
 ### 6.2 Capacity, codes, and the manifold alternative
 
@@ -316,6 +330,15 @@ low-dimensional operator manifold — explicit shared operator atoms
 provide additional benefit in this setting, yielding the ordering
 Dense < continuous task-conditioned operator manifold < explicit
 reusable operator basis for lifetime learning under exact reuse.
+That ordering is recurrence-dependent, and its inversion is itself
+evidence: at rho = 0.9 the hypernetwork's gap to Continuous shrinks in
+3/3 worlds and the manifold outright beats the explicit basis in 2/3
+(-1,496 and -943 nats; +917 in the third), while losing in all worlds at
+rho = 1.0 (+2,820/+1,120/+2,102). The slotless manifold is the better
+substrate at partial recurrence; explicit slots pay only where
+identifiable primitives exist — an independent-instrument confirmation
+of the statistical/structural account in Section 5.2, whose recovery
+analysis found crystallized primitives only at exact recurrence.
 Task-code dimension is immaterial (Dense-24 vs Dense-32: 46 nats). A
 width-128 dense variant does not close the gap.
 
@@ -340,9 +363,20 @@ annealing (vs global) recovers ~8,800 nats; a ~25k-nat gap to Continuous
 remains. Representation learning and program inference are separable
 problems, and inference is the discrete learner's bottleneck; soft
 mixtures implicitly carry hypothesis uncertainty that hard routing
-discards. The premature-commitment hypothesis this suggests is
-pre-specified for V2 (H7), where the route space is small enough to
-compute the exact posterior.
+discards. The route space here is small enough to test this directly:
+an exact Bayesian posterior over all 1,728 routes of the frozen final
+library — a deliberately advantaged bound, since online learners
+trained their libraries concurrently — scores -174,844 prequential on
+world 0, beating not only the online discrete learner (by ~28,700 nats)
+but Continuous itself (by ~3,900). At this bound the discrete deficit
+is inference cost in its entirety, and the mechanism is visible in the
+posterior's behavior: its maximum-a-posteriori route agrees with the
+online learner's hard routes on only 25/64 tasks while outperforming
+both, because several routes are behaviorally near-equivalent and the
+posterior averages over exactly the ambiguity that hard commitment
+discards. Premature commitment, not discreteness, is the cost. (The
+posterior concentrates below 0.1 nat of entropy after a median of 28.5
+examples — a number the V2 consolidation program uses directly.)
 
 ## 7. Resource economics and adaptive sharing
 

@@ -540,3 +540,14 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   gate-not-cost alternative is rejected. Spec section 10.2 updated in
   the same commit per the standing instruction: the circularity
   objection now has a quantitative answer.
+- Updated the paper to draft v0.6 with the V2-era development results
+  that bear on V1 claims: section 6.1 now carries the full three-rho GELU
+  table and the quantitative circularity answer (approximately additive
+  penalty, ~74% slope survival, parity at exact reuse), with the abstract
+  and contributions reworded from "tenfold collapse" to the parity
+  statement; section 6.2 adds the ordering inversion at rho 0.9 (the
+  manifold beats explicit slots at partial recurrence, 2/3 worlds) as an
+  independent confirmation of the statistical/structural account; section
+  6.4 adds the exact-posterior result (the advantaged bound beats
+  Continuous; MAP-route disagreement while outperforming; premature
+  commitment, not discreteness, is the cost).
