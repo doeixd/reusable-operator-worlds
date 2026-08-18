@@ -450,3 +450,32 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   below threshold on world 0, forcing the one-slot safety fallback and degrading
   log loss to -86,937. Tune presence LR at 1e-4 and 1e-3 before interpreting
   pruning; the default gate optimizer was two orders of magnitude too fast.
+- `CLAUDE.md` is a pointer to this file; keep conventions and learnings
+  here only.
+- Background shell jobs die silently with the session that launched them.
+  After any interruption, verify expected artifacts exist before assuming
+  a launched run completed; relaunch idempotently (all sweep drivers are
+  resumable by design — keep new ones that way).
+- Notes and review files are living documents. Before any spec revision,
+  diff them against the version last incorporated; staleness is not
+  completeness.
+- The MDL presence gate is bimodal at this scale: penalties either prune
+  nothing or collapse the library, and gate pressure degrades novel-
+  composition transfer even before pruning bites (11 active slots already
+  fail sufficiency). Compress after evidence accumulates instead of
+  penalizing during acquisition.
+- Raw prequential wins can be reversed by description-length accounting:
+  the shared-residual envelope win (+3.7k-9.2k nats) loses in all cells
+  under a literal two-part code because rank-2 per-task residuals retain
+  ~130k bits. Always report both currencies before "chooses its own
+  sharing" style claims.
+- Learner slot indices and teacher primitive indices live in different
+  spaces. Any route-agreement metric must map through functional matching
+  or stay in slot space (compare against the artifact's own hard routes);
+  comparing raw indices silently returns zero.
+- The exact route posterior (1,728 routes, 8,192 examples) takes over ten
+  minutes unbatched on this machine while lifetimes run concurrently;
+  batch the enumeration over examples if it becomes a repeated tool.
+- Sealed-block discipline extended in V2: seeds 200-229 test parameter
+  intervals (slope, crossing, R^2), not just signs; interval misses are
+  reported as failures even when signs pass.

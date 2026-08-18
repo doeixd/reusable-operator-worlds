@@ -129,3 +129,52 @@ obligations below should be resolved or explicitly deferred.
   every intermediate-reuse point, then yields slightly to Continuous at exact
   reuse as its functional residual ratio approaches zero. The tracked result is
   `reports/shared_residual/shared-residual.json`.
+
+# Re-audit at cf804aa (2026-08-18)
+
+Everything listed as open in the original audit (at `7e66639`) is now
+closed; this section supersedes the gate status above.
+
+## Closed since the original audit
+
+- Reverse order and replay 0/1/4: complete on all ten development worlds,
+  Continuous 10/10 under every condition (`reports/robustness/`).
+- Second model initialization: complete, 10/10 on both metrics
+  (`reports/model_initializations/`).
+- Explicit forward transfer and checkpoint true-route diagnostics:
+  complete (`reports/forward_transfer/`, `reports/operator_checkpoints/`).
+- Scrambled-ID invariance: complete, bit-exact (`reports/scrambled_ids/`).
+- Batch-size deviation: ablated; advantage survives at batch 8 with ~40%
+  shrinkage (`reports/batch_sizes/`).
+- Shared-parent + residual: complete, with two-part-code accounting
+  (`reports/shared_residual/`, including `j-weighted.json`).
+- MDL presence gating (Model 4): explicit decision recorded — does not
+  work as a compact-sufficient-library discoverer at this scale;
+  characterized negative (`reports/mdl_gating/`).
+- Clean-checkout rehearsal: passed at `ed90ee2` (fresh-venv dependency
+  install still unexercised; noted in `CONFIRMATION_PLAN.md`).
+- Statistical freeze and confirmation: `CONFIRMATION_PLAN.md` frozen at
+  `e0b0552`; seeds 100-129 run (360 lifetimes, zero failures, zero
+  exclusions); all three pre-specified primaries passed 30/30
+  (`reports/confirmatory/`). **The V1 gate is closed and confirmed.**
+
+## Governing documents now
+
+- V1 spec, `EXPERIMENT_PLAN.md`, `CONFIRMATION_PLAN.md`: frozen history.
+- `row_v2_experimental_spec.md`: the active spec (provisional header
+  retired in effect by V1 confirmation; STATUS annotations are the live
+  state). `RELEASE_PLAN.md` governs publication.
+
+## V2 position at this re-audit
+
+- Bridge analyses B1/B2/B4 done (`reports/rho_bridge/`,
+  checkpoint sweep); B3 done via step 001.
+- Step 001 (Model 7a exact posterior): done; H7 strongly supported at the
+  advantaged bound on world 0 (`reports/v2_route_posterior/`).
+- Step 002 (GELU crossover shift, H6) and 002b (hypernetwork at rho 0.9):
+  runs in flight (`artifacts/v2_gelu_crossover/`,
+  `artifacts/v2_hyper_rho09/`).
+- Next after those: 003 Model 8 consolidation with the pre-registered
+  gate shape prediction; then Benchmark D.
+- Paper: draft v0.5 with verified references (`paper/draft.md`), seven
+  figures regenerable from `paper/make_figures.py`.
