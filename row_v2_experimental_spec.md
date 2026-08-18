@@ -297,6 +297,21 @@ correspondence is exactly what fails):
   half its second-best (margin < 2x). Ambiguous assignments are reported
   and count AGAINST the secondary signature (never excluded); they do not
   affect the primary statistic.
+**H9a STATUS (canonical mixed-profile grid run 2026-08-18,
+reports/v2_mixed/): SUPPORTED, 10/10 on both measures.** Allocation: the
+per-world Spearman between per-primitive measured recurrence and
+per-primitive mean residual fraction (frozen true-route-position
+attribution) is negative in 10/10 development worlds (range -0.43 to
+-1.00; sign test p = 1.95e-3). Envelope: shared-residual beats
+min(L_Dense, L_Continuous) in 10/10 mixed worlds, mean +7,153 nats; the
+two-part code reverses it 0/10, exactly as the homogeneous development
+result predicted — the prediction-cost-not-code-length pattern
+reproduces in the heterogeneous setting. Per the pre-registered decision
+rule in V2_CONFIRMATION_PLAN.md, Component B of the sealed confirmation
+TRIGGERS. The learner allocates specialization inversely to ground-truth
+recurrence, primitive by primitive, in worlds where no fixed
+architecture is correct.
+
 - **Aggregation, pre-specified:** per world, the Spearman rank
   correlation between per-primitive recurrence and per-primitive mean
   residual fraction is computed over the 6 primitives (descriptive; six

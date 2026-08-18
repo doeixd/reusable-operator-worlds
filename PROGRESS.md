@@ -618,3 +618,11 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   with the two-part-code accounting, whose reversal would confirm the
   development finding. H7, H8, H6, 002b, and H10 are explicitly left as
   development-stage results.
+- Completed V2 step 005 (Benchmark D, H9a). Allocation signature holds in
+  10/10 development worlds (Spearman between per-primitive recurrence and
+  residual allocation negative everywhere, -0.43 to -1.00, sign test
+  p = 1.95e-3, frozen true-route-position attribution). Shared-residual
+  beats the fixed-architecture envelope in 10/10 mixed worlds (mean
+  +7,153 nats) and loses 0/10 under the two-part code, reproducing the
+  homogeneous prediction. H9a is supported; Component B of the sealed V2
+  confirmation triggers per the pre-registered decision rule.
