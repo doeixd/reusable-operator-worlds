@@ -524,3 +524,10 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   /api/v1/kernels/status/{user}/{slug}, fetch results from
   /api/v1/kernels/output/{user}/{slug}. Token comes from the environment
   at invocation time only — never from a file.
+- Windows WMI on this machine intermittently stalls, hanging
+  `platform.machine()` and therefore `import torch` (minutes per
+  process) and pip. `src/sitecustomize.py` forces the WMI query to fail
+  fast so `platform` falls back to environment variables; it loads
+  automatically via the editable install. If new processes ever hang
+  before any output, check for this class of stall first
+  (`faulthandler.dump_traceback_later` locates it in seconds).
