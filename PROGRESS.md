@@ -325,6 +325,17 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   Continuous's 1,536 route scalars. The validated report and visually inspected
   figure are under `reports/shared_residual`.
 
+# MDL presence-gate control started
+
+- Resolved the conditional Model 4 gate in favor of implementation. Hard
+  Discrete's final operator/route recovery satisfies the structural prerequisite;
+  poor online route inference remains a separate optimization limitation.
+- Added a distinct 12-slot presence-gated Discrete learner with relaxed global
+  gates, expected-active-slot and route-entropy penalties, per-task temperature
+  annealing, and hardened routing that cannot select inactive slots.
+- A smoke lifetime and gate-gradient/masking tests pass. Symmetric penalty
+  tuning and a full exact-reuse evaluation remain open.
+
 # Decisions
 
 - V1 starts with exact reuse (`rho = 1.0`). The reuse continuum follows only

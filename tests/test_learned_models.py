@@ -14,6 +14,7 @@ from row.models import (
     DenseLearner,
     DiscreteLibraryLearner,
     HypernetworkLearner,
+    PresenceGatedDiscreteLibraryLearner,
     SharedParentResidualLearner,
 )
 from row.world import World
@@ -112,6 +113,31 @@ class LearnedModelTests(unittest.TestCase):
         hard = model._coefficients("task_a")
         self.assertTrue(torch.all((hard == 0.0) | (hard == 1.0)))
         self.assertEqual(model.hard_routes()["task_a"], [1, 2])
+
+    def test_presence_gated_library_penalizes_and_excludes_inactive_slots(self) -> None:
+        model = PresenceGatedDiscreteLibraryLearner(
+            4, 3, 2, 2, 0.35, 1.0, 0.1, 0.0, 0.5, seed=2
+        )
+        code = model.begin_task("task_a")
+        with torch.no_grad():
+            model.presence_logits[:] = torch.tensor([-10.0, 10.0, -10.0])
+            code[:, 0] = 20.0
+        model.eval()
+        self.assertEqual(model.hard_routes()["task_a"], [1, 1])
+        diagnostics = model.presence_diagnostics()
+        self.assertEqual(diagnostics["active_operators_at_threshold"], 1)
+        self.assertEqual(diagnostics["inactive_but_routed_operators"], 0)
+
+        model.train()
+        loss = model(torch.randn(5, 4), "task_a").square().mean()
+        loss = loss + model.presence_penalty() + model.route_entropy_penalty(
+            ["task_a"]
+        )
+        loss.backward()
+        self.assertIsNotNone(model.presence_logits.grad)
+        self.assertGreater(
+            float(torch.linalg.vector_norm(model.presence_logits.grad)), 0.0
+        )
 
     def test_true_route_operator_diagnostic_does_not_require_future_task_codes(self) -> None:
         config = load_config("configs/v1.yaml")

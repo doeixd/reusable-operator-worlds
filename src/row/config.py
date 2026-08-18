@@ -229,6 +229,25 @@ class DiscreteModelConfig:
 
 
 @dataclass(frozen=True)
+class MDLDiscreteModelConfig(DiscreteModelConfig):
+    presence_logit_init: float = 2.0
+    presence_threshold: float = 0.5
+    presence_learning_rate: float = 1e-2
+    library_presence_penalty: float = 1e-4
+    route_entropy_penalty: float = 1e-4
+    seed: int = 8000
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        if not 0.0 < self.presence_threshold < 1.0:
+            raise ValueError("MDL presence threshold must lie between zero and one")
+        if self.presence_learning_rate <= 0.0:
+            raise ValueError("MDL presence learning rate must be positive")
+        if min(self.library_presence_penalty, self.route_entropy_penalty) < 0.0:
+            raise ValueError("MDL surrogate penalties must be nonnegative")
+
+
+@dataclass(frozen=True)
 class ExperimentConfig:
     world: WorldConfig
     scratch_model: ScratchModelConfig
@@ -238,6 +257,7 @@ class ExperimentConfig:
     hypernetwork_model: HypernetworkModelConfig
     shared_residual_model: SharedResidualModelConfig
     discrete_model: DiscreteModelConfig
+    mdl_model: MDLDiscreteModelConfig
     evaluation: EvaluationConfig
     output_directory: Path
 
@@ -261,6 +281,7 @@ def load_config(path: str | Path) -> ExperimentConfig:
         raw.get("shared_residual_model", {}), "shared_residual_model"
     )
     discrete_raw = _require_mapping(raw.get("discrete_model", {}), "discrete_model")
+    mdl_raw = _require_mapping(raw.get("mdl_model", {}), "mdl_model")
     eval_raw = _require_mapping(raw.get("evaluation", {}), "evaluation")
     output_raw = _require_mapping(raw.get("output", {}), "output")
 
@@ -378,6 +399,31 @@ def load_config(path: str | Path) -> ExperimentConfig:
         replay_ratio=float(discrete_raw.get("replay_ratio", 1.0)),
         seed=int(discrete_raw.get("seed", 5000)),
     )
+    mdl_model = MDLDiscreteModelConfig(
+        operator_slots=int(mdl_raw.get("operator_slots", 12)),
+        operator_rank=int(mdl_raw.get("operator_rank", 8)),
+        task_steps=int(mdl_raw.get("task_steps", 3)),
+        operator_alpha_init=float(mdl_raw.get("operator_alpha_init", 0.2)),
+        learnable_alpha=bool(mdl_raw.get("learnable_alpha", True)),
+        operator_activation=str(mdl_raw.get("operator_activation", "tanh")),
+        initial_temperature=float(mdl_raw.get("initial_temperature", 1.0)),
+        final_temperature=float(mdl_raw.get("final_temperature", 0.1)),
+        temperature_schedule=str(mdl_raw.get("temperature_schedule", "per_task")),
+        global_learning_rate=float(mdl_raw.get("global_learning_rate", 1e-3)),
+        task_learning_rate=float(mdl_raw.get("task_learning_rate", 5e-2)),
+        weight_decay=float(mdl_raw.get("weight_decay", 1e-4)),
+        updates_per_example=int(mdl_raw.get("updates_per_example", 1)),
+        replay_examples_per_task=int(mdl_raw.get("replay_examples_per_task", 4)),
+        replay_ratio=float(mdl_raw.get("replay_ratio", 1.0)),
+        presence_logit_init=float(mdl_raw.get("presence_logit_init", 2.0)),
+        presence_threshold=float(mdl_raw.get("presence_threshold", 0.5)),
+        presence_learning_rate=float(mdl_raw.get("presence_learning_rate", 1e-2)),
+        library_presence_penalty=float(
+            mdl_raw.get("library_presence_penalty", 1e-4)
+        ),
+        route_entropy_penalty=float(mdl_raw.get("route_entropy_penalty", 1e-4)),
+        seed=int(mdl_raw.get("seed", 8000)),
+    )
     evaluation = EvaluationConfig(
         support_points=tuple(int(n) for n in eval_raw.get("support_points", EvaluationConfig.support_points)),
         nmse_thresholds=tuple(float(x) for x in eval_raw.get("nmse_thresholds", EvaluationConfig.nmse_thresholds)),
@@ -399,6 +445,7 @@ def load_config(path: str | Path) -> ExperimentConfig:
         hypernetwork_model=hypernetwork_model,
         shared_residual_model=shared_residual_model,
         discrete_model=discrete_model,
+        mdl_model=mdl_model,
         evaluation=evaluation,
         output_directory=output_directory,
     )

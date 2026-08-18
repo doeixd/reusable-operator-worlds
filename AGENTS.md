@@ -437,3 +437,12 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   route scalars for Continuous, and uses 6,720 forward multiply-adds versus
   6,528. Its lower intermediate-reuse loss is a copy-on-write capacity result,
   not a storage-matched architecture win.
+- Model 4's “only after Model 2 works” prerequisite is satisfied structurally:
+  hard Discrete recovers operators and routes despite weak online route
+  inference. Presence-gate pruning tests basis compression, so the route-learning
+  cost is a limitation to report rather than a reason to skip the conditional
+  model.
+- Keep MDL presence gates distinct from task route logits. Training uses smooth
+  global sigmoid gates with an expected-active-slot penalty; hardened evaluation
+  masks sub-threshold slots before route argmax so an inactive operator can never
+  be selected.

@@ -59,10 +59,9 @@ claim.
 
 # Open model investigation
 
-- MDL presence-gate pruning is conditional on deciding that the hard discrete
-  route learner “works” well enough to justify pruning. The current evidence
-  shows strong final operator/route recovery but poor online route inference;
-  this decision must be made explicitly before adding Model 4.
+- The conditional MDL decision is resolved: hard Discrete works well enough in
+  final operator/route recovery to justify the basis-pruning question. Model 4
+  is implemented; its penalty tuning and exact-reuse evaluation remain open.
 
 # Explicitly outside V1
 
@@ -83,7 +82,7 @@ obligations below should be resolved or explicitly deferred.
 # Execution order
 
 1. Freeze batch protocol, tuning, and statistical summaries.
-2. Resolve the conditional MDL presence-gate decision.
+2. Tune and evaluate the MDL presence-gated library.
 3. Run a clean artifact/plotting rehearsal.
 4. Re-audit the gate before touching confirmatory worlds.
 

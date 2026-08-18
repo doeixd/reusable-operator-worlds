@@ -603,3 +603,140 @@ class DiscreteLibraryLearner(nn.Module):
             "position_usage": position_usage.cpu().tolist(),
             "final_temperature": self.temperature,
         }
+
+
+class PresenceGatedDiscreteLibraryLearner(DiscreteLibraryLearner):
+    """Discrete library with explicit learnable global slot-presence gates."""
+
+    def __init__(
+        self,
+        d: int,
+        operator_slots: int,
+        operator_rank: int,
+        task_steps: int,
+        alpha: float,
+        initial_temperature: float,
+        final_temperature: float,
+        presence_logit_init: float,
+        presence_threshold: float,
+        seed: int,
+        learnable_alpha: bool = True,
+        activation: str = "tanh",
+    ) -> None:
+        super().__init__(
+            d=d,
+            operator_slots=operator_slots,
+            operator_rank=operator_rank,
+            task_steps=task_steps,
+            alpha=alpha,
+            initial_temperature=initial_temperature,
+            final_temperature=final_temperature,
+            seed=seed,
+            learnable_alpha=learnable_alpha,
+            activation=activation,
+        )
+        if not 0.0 < presence_threshold < 1.0:
+            raise ValueError("presence threshold must lie strictly between zero and one")
+        self.presence_threshold = presence_threshold
+        self.presence_logits = nn.Parameter(
+            torch.full((operator_slots,), float(presence_logit_init))
+        )
+
+    def presence_probabilities(self) -> Tensor:
+        return torch.sigmoid(self.presence_logits)
+
+    def _active_mask(self) -> Tensor:
+        probabilities = self.presence_probabilities()
+        active = probabilities >= self.presence_threshold
+        if not torch.any(active):
+            active = torch.nn.functional.one_hot(
+                torch.argmax(probabilities), self.operator_slots
+            ).to(torch.bool)
+        return active
+
+    def _coefficients(self, task_id: str) -> Tensor:
+        logits = self.task_codes[task_id]
+        probabilities = self.presence_probabilities()
+        if self.training:
+            route = torch.softmax(logits / self.temperature, dim=-1)
+            weighted = route * probabilities
+            return weighted / weighted.sum(dim=-1, keepdim=True).clamp_min(1e-12)
+        scores = logits + torch.log(probabilities.clamp_min(1e-12))
+        scores = scores.masked_fill(~self._active_mask().unsqueeze(0), -torch.inf)
+        indices = torch.argmax(scores, dim=-1)
+        return torch.nn.functional.one_hot(indices, self.operator_slots).to(logits.dtype)
+
+    def shared_parameters(self) -> list[nn.Parameter]:
+        return [*self.library.parameters(), self.presence_logits]
+
+    def presence_penalty(self) -> Tensor:
+        """Expected active-slot count under independent relaxed Bernoulli gates."""
+        return self.presence_probabilities().sum()
+
+    def route_entropy_penalty(self, task_ids: Sequence[str]) -> Tensor:
+        unique = list(dict.fromkeys(task_ids))
+        if not unique:
+            return self.presence_logits.new_zeros(())
+        entropies = []
+        for task_id in unique:
+            coefficients = self._coefficients(task_id)
+            entropies.append(
+                -torch.sum(
+                    coefficients * torch.log(coefficients.clamp_min(1e-12)), dim=-1
+                ).mean()
+            )
+        return torch.stack(entropies).mean()
+
+    def hard_routes(self) -> dict[str, list[int]]:
+        was_training = self.training
+        self.eval()
+        try:
+            return {
+                task_id: torch.argmax(self._coefficients(task_id), dim=-1)
+                .detach()
+                .cpu()
+                .tolist()
+                for task_id in self.task_codes
+            }
+        finally:
+            self.train(was_training)
+
+    def presence_diagnostics(self) -> dict[str, object]:
+        probabilities = self.presence_probabilities().detach()
+        active = self._active_mask().detach()
+        routes = self.hard_routes()
+        usage = torch.zeros(self.operator_slots, dtype=torch.int64)
+        for route in routes.values():
+            usage += torch.bincount(torch.as_tensor(route), minlength=self.operator_slots)
+        return {
+            "presence_probabilities": probabilities.cpu().tolist(),
+            "expected_active_operators": float(probabilities.sum()),
+            "active_operators_at_threshold": int(active.sum()),
+            "presence_threshold": self.presence_threshold,
+            "active_mask": active.cpu().tolist(),
+            "active_but_unused_operators": int(torch.count_nonzero(active & (usage == 0))),
+            "inactive_but_routed_operators": int(torch.count_nonzero((~active) & (usage > 0))),
+        }
+
+    def routing_diagnostics(self) -> dict[str, object]:
+        base = super().routing_diagnostics()
+        routes = self.hard_routes()
+        usage = torch.zeros(self.operator_slots, dtype=torch.int64)
+        position_usage = torch.zeros(self.task_steps, self.operator_slots, dtype=torch.int64)
+        tasks_per_operator = torch.zeros(self.operator_slots, dtype=torch.int64)
+        for route_values in routes.values():
+            route = torch.as_tensor(route_values)
+            usage += torch.bincount(route, minlength=self.operator_slots)
+            for position, operator in enumerate(route):
+                position_usage[position, operator] += 1
+            for operator in torch.unique(route):
+                tasks_per_operator[operator] += 1
+        base.update(
+            {
+                "active_operators": int(torch.count_nonzero(usage)),
+                "usage_counts": usage.tolist(),
+                "tasks_per_operator": tasks_per_operator.tolist(),
+                "position_usage": position_usage.tolist(),
+            }
+        )
+        return base

@@ -26,13 +26,14 @@ from row.models import (
     DenseLearner,
     DiscreteLibraryLearner,
     HypernetworkLearner,
+    PresenceGatedDiscreteLibraryLearner,
     SharedParentResidualLearner,
 )
 from row.provenance import current_git_commit, write_fingerprint
 from row.world import Program, Task, World
 
 ModelKind = Literal[
-    "dense", "continuous", "hypernetwork", "shared_residual", "discrete"
+    "dense", "continuous", "hypernetwork", "shared_residual", "discrete", "mdl"
 ]
 Learner = (
     DenseLearner
@@ -40,6 +41,7 @@ Learner = (
     | HypernetworkLearner
     | SharedParentResidualLearner
     | DiscreteLibraryLearner
+    | PresenceGatedDiscreteLibraryLearner
 )
 
 
@@ -85,7 +87,10 @@ def _tensor(array: np.ndarray) -> torch.Tensor:
 
 
 def _shared_optimizer(
-    model: Learner, learning_rate: float, weight_decay: float
+    model: Learner,
+    learning_rate: float,
+    weight_decay: float,
+    presence_learning_rate: float | None = None,
 ) -> torch.optim.AdamW:
     alpha_parameters = [
         parameter
@@ -93,16 +98,34 @@ def _shared_optimizer(
         if name == "alpha" or name.endswith(".alpha")
     ]
     alpha_ids = {id(parameter) for parameter in alpha_parameters}
+    presence_parameters = [
+        parameter
+        for name, parameter in model.named_parameters()
+        if name == "presence_logits"
+    ]
+    presence_ids = {id(parameter) for parameter in presence_parameters}
     decay_parameters = [
         parameter
         for parameter in model.shared_parameters()
-        if id(parameter) not in alpha_ids
+        if id(parameter) not in alpha_ids and id(parameter) not in presence_ids
     ]
     groups: list[dict[str, object]] = [
         {"params": decay_parameters, "weight_decay": weight_decay}
     ]
     if alpha_parameters:
         groups.append({"params": alpha_parameters, "weight_decay": 0.0})
+    if presence_parameters:
+        groups.append(
+            {
+                "params": presence_parameters,
+                "lr": (
+                    learning_rate
+                    if presence_learning_rate is None
+                    else presence_learning_rate
+                ),
+                "weight_decay": 0.0,
+            }
+        )
     return torch.optim.AdamW(groups, lr=learning_rate)
 
 
@@ -159,7 +182,7 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "inference_multiply_adds_per_sample": parent + residual,
             "note": "rank-limited task residual included; backward and optimizer operations excluded",
         }
-    selected = config.discrete_model
+    selected = config.mdl_model if kind == "mdl" else config.discrete_model
     all_slots = selected.task_steps * selected.operator_slots * (
         d * selected.operator_rank + selected.operator_rank * d
     ) + selected.task_steps * selected.operator_slots * d
@@ -220,8 +243,21 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             learnable_alpha=model_config.learnable_alpha,
             activation=model_config.operator_activation,
         )
-    model_config = config.discrete_model
-    return DiscreteLibraryLearner(
+    model_config = config.mdl_model if kind == "mdl" else config.discrete_model
+    model_class = (
+        PresenceGatedDiscreteLibraryLearner
+        if kind == "mdl"
+        else DiscreteLibraryLearner
+    )
+    extra = (
+        {
+            "presence_logit_init": model_config.presence_logit_init,
+            "presence_threshold": model_config.presence_threshold,
+        }
+        if kind == "mdl"
+        else {}
+    )
+    return model_class(
         d=config.world.state_dim,
         operator_slots=model_config.operator_slots,
         operator_rank=model_config.operator_rank,
@@ -232,6 +268,7 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
         seed=model_config.seed,
         learnable_alpha=model_config.learnable_alpha,
         activation=model_config.operator_activation,
+        **extra,
     )
 
 
@@ -244,6 +281,7 @@ def _training_values(
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
         "discrete": config.discrete_model,
+        "mdl": config.mdl_model,
     }[kind]
     return (
         selected.global_learning_rate,
@@ -280,7 +318,14 @@ def run(
     global_lr, task_lr, weight_decay, update_count, replay_per_task, replay_ratio, seed = (
         _training_values(config, kind)
     )
-    optimizer = _shared_optimizer(model, global_lr, weight_decay)
+    optimizer = _shared_optimizer(
+        model,
+        global_lr,
+        weight_decay,
+        presence_learning_rate=(
+            config.mdl_model.presence_learning_rate if kind == "mdl" else None
+        ),
+    )
     if update_batch_size is None:
         replay = TaskReplayBuffer(seed + 1)
     else:
@@ -402,7 +447,10 @@ def run(
                 if isinstance(model, DiscreteLibraryLearner):
                     global_example = lifetime_index * config.world.examples_per_task + n_seen
                     total_examples = len(world.tasks) * config.world.examples_per_task
-                    if config.discrete_model.temperature_schedule == "per_task":
+                    discrete_config = (
+                        config.mdl_model if kind == "mdl" else config.discrete_model
+                    )
+                    if discrete_config.temperature_schedule == "per_task":
                         progress = n_seen / max(1, config.world.examples_per_task - 1)
                     else:
                         progress = global_example / max(1, total_examples - 1)
@@ -415,6 +463,13 @@ def run(
                     loss = loss + (
                         config.shared_residual_model.residual_penalty
                         * model.storage_penalty(task_ids)
+                    )
+                if isinstance(model, PresenceGatedDiscreteLibraryLearner):
+                    loss = loss + (
+                        config.mdl_model.library_presence_penalty
+                        * model.presence_penalty()
+                        + config.mdl_model.route_entropy_penalty
+                        * model.route_entropy_penalty(task_ids)
                     )
                 loss.backward()
                 optimizer.step()
@@ -508,6 +563,8 @@ def run(
         )
     elif isinstance(model, DiscreteLibraryLearner):
         summary["routing"] = model.routing_diagnostics()
+        if isinstance(model, PresenceGatedDiscreteLibraryLearner):
+            summary["presence"] = model.presence_diagnostics()
         if config.evaluation.extended_diagnostics:
             summary["functional_recovery"] = _functional_recovery(model.library, world, config)
             summary["route_recovery"] = _route_recovery(
@@ -846,6 +903,7 @@ def resolved_learned_config(
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
         "discrete": config.discrete_model,
+        "mdl": config.mdl_model,
     }[kind]
     resolved: dict[str, object] = {
         "world": asdict(config.world),
@@ -880,6 +938,7 @@ def _write_artifacts(
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
         "discrete": config.discrete_model,
+        "mdl": config.mdl_model,
     }[kind]
     resolved = resolved_learned_config(
         config, kind, order, task_id_scramble_seed, update_batch_size
@@ -924,7 +983,14 @@ def main() -> None:
     parser.add_argument("--config", type=Path, default=Path("configs/v1.yaml"))
     parser.add_argument(
         "--model",
-        choices=("dense", "continuous", "hypernetwork", "shared_residual", "discrete"),
+        choices=(
+            "dense",
+            "continuous",
+            "hypernetwork",
+            "shared_residual",
+            "discrete",
+            "mdl",
+        ),
         required=True,
     )
     parser.add_argument("--world-seed", type=int)
@@ -979,6 +1045,7 @@ def main() -> None:
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
         "discrete": config.discrete_model,
+        "mdl": config.mdl_model,
     }[args.model]
     selected = replace(
         selected,
@@ -1020,13 +1087,25 @@ def main() -> None:
         ),
         **(
             {"operator_activation": args.operator_activation}
-            if args.model in {"continuous", "hypernetwork", "shared_residual", "discrete"}
+            if args.model in {
+                "continuous",
+                "hypernetwork",
+                "shared_residual",
+                "discrete",
+                "mdl",
+            }
             and args.operator_activation is not None
             else {}
         ),
         **(
             {"operator_alpha_init": args.operator_alpha_init}
-            if args.model in {"continuous", "hypernetwork", "shared_residual", "discrete"}
+            if args.model in {
+                "continuous",
+                "hypernetwork",
+                "shared_residual",
+                "discrete",
+                "mdl",
+            }
             and args.operator_alpha_init is not None
             else {}
         ),
@@ -1048,7 +1127,8 @@ def main() -> None:
         ),
         **(
             {"temperature_schedule": args.temperature_schedule}
-            if args.model == "discrete" and args.temperature_schedule is not None
+            if args.model in {"discrete", "mdl"}
+            and args.temperature_schedule is not None
             else {}
         ),
     )
@@ -1067,6 +1147,7 @@ def main() -> None:
             else config.shared_residual_model
         ),
         discrete_model=selected if args.model == "discrete" else config.discrete_model,
+        mdl_model=selected if args.model == "mdl" else config.mdl_model,
     )
     summary = run(
         config,

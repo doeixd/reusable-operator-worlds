@@ -5,6 +5,7 @@ from row.models.learned_models import (
     DenseLearner,
     DiscreteLibraryLearner,
     HypernetworkLearner,
+    PresenceGatedDiscreteLibraryLearner,
     SharedParentResidualLearner,
 )
 from row.models.numpy_mlp import ScratchResidualMLP
@@ -15,6 +16,7 @@ __all__ = [
     "DenseLearner",
     "DiscreteLibraryLearner",
     "HypernetworkLearner",
+    "PresenceGatedDiscreteLibraryLearner",
     "SharedParentResidualLearner",
     "LearnedOperator",
     "OracleCompositor",
