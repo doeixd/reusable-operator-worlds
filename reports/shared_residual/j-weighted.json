@@ -1,0 +1,179 @@
+{
+ "scope": "development worlds [0, 1, 2], configured rho [0.5, 0.75, 0.9, 1.0]; post-hoc accounting of reports/shared_residual/shared-residual.json",
+ "question": "does the shared-residual envelope win survive retained-description accounting J = L_preq + lambda * D_bits?",
+ "retained_bits_proxy": {
+  "shared_residual": 130624,
+  "continuous": 29248,
+  "dense_c": 66688,
+  "note": "8-bit scalar proxy; shared-residual task state is 14,208 scalars (rank-2 residuals per task per step)"
+ },
+ "verdict": {
+  "raw_prequential": "shared residual beats the fixed-architecture envelope 3/3 worlds at rho 0.5-0.9 (up to +9,168 mean nats)",
+  "two_part_mdl_lambda_ln2": "shared residual LOSES to both fixed architectures in 12/12 world-rho cells; the ~101k extra retained bits (~70k nats at ln2) swamp the 3.7k-9.2k nat prequential gains",
+  "break_even": "lambda* ranges 0.037-0.143 nats/bit (mean by rho); the win survives only if stored bits are priced below ~21% of their two-part-code value",
+  "honest_claim": "the learner allocates specialization inversely to recurrence (allocation signature intact) and lowers lifetime prediction loss, but at current residual budget this is partly purchased per-task capacity: it is a prediction-cost win, not a description-length win"
+ },
+ "constructive_next_steps": [
+  "rank-1 residuals or stronger residual penalty to shrink the task-state footprint",
+  "sparsity-aware retention coding: near-zero residuals at high rho (functional ratio 0.026-0.16) charge full 8-bit width under the current proxy; an entropy/zero-run code would price them closer to their information content and could rescue the high-rho cells",
+  "report J at multiple lambda in any public figure, per V2 spec section 5"
+ ],
+ "rows": [
+  {
+   "world": 0,
+   "rho": 0.5,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": 11646.3,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": 0.1149,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 9487.0,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.1484,
+   "wins_under_two_part_code_vs_dense": false
+  },
+  {
+   "world": 1,
+   "rho": 0.5,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": 10983.7,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": 0.1083,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 9086.2,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.1421,
+   "wins_under_two_part_code_vs_dense": false
+  },
+  {
+   "world": 2,
+   "rho": 0.5,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": 12298.1,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": 0.1213,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 8931.4,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.1397,
+   "wins_under_two_part_code_vs_dense": false
+  },
+  {
+   "world": 0,
+   "rho": 0.75,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": 9795.4,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": 0.0966,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 8180.1,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.1279,
+   "wins_under_two_part_code_vs_dense": false
+  },
+  {
+   "world": 1,
+   "rho": 0.75,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": 8031.5,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": 0.0792,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 6978.3,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.1091,
+   "wins_under_two_part_code_vs_dense": false
+  },
+  {
+   "world": 2,
+   "rho": 0.75,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": 9339.6,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": 0.0921,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 7215.7,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.1129,
+   "wins_under_two_part_code_vs_dense": false
+  },
+  {
+   "world": 0,
+   "rho": 0.9,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": 3322.9,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": 0.0328,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 5693.5,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.089,
+   "wins_under_two_part_code_vs_dense": false
+  },
+  {
+   "world": 1,
+   "rho": 0.9,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": 3844.1,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": 0.0379,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 4345.3,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.068,
+   "wins_under_two_part_code_vs_dense": false
+  },
+  {
+   "world": 2,
+   "rho": 0.9,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": 4069.4,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": 0.0401,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 5091.6,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.0796,
+   "wins_under_two_part_code_vs_dense": false
+  },
+  {
+   "world": 0,
+   "rho": 1.0,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": -238.4,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": -0.0024,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 4207.7,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.0658,
+   "wins_under_two_part_code_vs_dense": false
+  },
+  {
+   "world": 1,
+   "rho": 1.0,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": -162.7,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": -0.0016,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 2480.2,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.0388,
+   "wins_under_two_part_code_vs_dense": false
+  },
+  {
+   "world": 2,
+   "rho": 1.0,
+   "D_shared_bits": 130624.0,
+   "gain_vs_continuous": -336.4,
+   "extra_bits_vs_continuous": 101376.0,
+   "lambda_star_nats_per_bit_vs_continuous": -0.0033,
+   "wins_under_two_part_code_vs_continuous": false,
+   "gain_vs_dense": 3051.3,
+   "extra_bits_vs_dense": 63936.0,
+   "lambda_star_nats_per_bit_vs_dense": 0.0477,
+   "wins_under_two_part_code_vs_dense": false
+  }
+ ]
+}

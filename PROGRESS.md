@@ -359,3 +359,14 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Hard discrete learned a compact and correct library but paid substantially
   higher online route-inference cost. Do not interpret its prequential loss as
   evidence against reusable computation; the continuous alternative succeeds.
+- Completed the shared-residual retained-description accounting
+  (`reports/shared_residual/j-weighted.json`). Under the two-part MDL code
+  (`lambda = ln 2` nats/bit) the shared-residual model loses to both fixed
+  architectures in all twelve world/`rho` cells: its 130,624-bit retained
+  footprint (~101k bits above Continuous) outweighs the 3.7k-9.2k-nat
+  prequential gains; break-even `lambda*` is 0.037-0.143 nats/bit. The
+  envelope win is therefore a prediction-cost result with the predicted
+  allocation signature, not a code-length result at the current rank-2
+  residual budget. Follow-ups recorded: rank-1/stronger-penalty residuals
+  and sparsity-aware retention coding for the near-zero high-`rho`
+  residuals.
