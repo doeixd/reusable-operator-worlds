@@ -164,6 +164,7 @@ class SharedResidualModelConfig:
     residual_penalty: float = 1e-4
     global_learning_rate: float = 3e-3
     task_learning_rate: float = 5e-2
+    residual_learning_rate: float = 5e-3
     weight_decay: float = 1e-4
     updates_per_example: int = 1
     replay_examples_per_task: int = 4
@@ -179,7 +180,11 @@ class SharedResidualModelConfig:
         )
         if min(dimensions) <= 0 or self.residual_rank > 2:
             raise ValueError("shared-residual dimensions are invalid")
-        if min(self.global_learning_rate, self.task_learning_rate) <= 0.0:
+        if min(
+            self.global_learning_rate,
+            self.task_learning_rate,
+            self.residual_learning_rate,
+        ) <= 0.0:
             raise ValueError("shared-residual learning rates must be positive")
         if self.residual_penalty < 0.0 or self.weight_decay < 0.0:
             raise ValueError("shared-residual penalties must be nonnegative")
@@ -346,6 +351,9 @@ def load_config(path: str | Path) -> ExperimentConfig:
         residual_penalty=float(shared_residual_raw.get("residual_penalty", 1e-4)),
         global_learning_rate=float(shared_residual_raw.get("global_learning_rate", 3e-3)),
         task_learning_rate=float(shared_residual_raw.get("task_learning_rate", 5e-2)),
+        residual_learning_rate=float(
+            shared_residual_raw.get("residual_learning_rate", 5e-3)
+        ),
         weight_decay=float(shared_residual_raw.get("weight_decay", 1e-4)),
         updates_per_example=int(shared_residual_raw.get("updates_per_example", 1)),
         replay_examples_per_task=int(shared_residual_raw.get("replay_examples_per_task", 4)),

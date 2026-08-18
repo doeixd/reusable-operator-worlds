@@ -301,9 +301,22 @@ def run(
     for lifetime_index, world_task_index in enumerate(task_indices):
         task = world.tasks[world_task_index]
         task_parameter = model.begin_task(task.task_id)
-        optimizer.add_param_group(
-            {"params": [task_parameter], "lr": task_lr, "weight_decay": 0.0}
-        )
+        if isinstance(model, SharedParentResidualLearner):
+            route_parameter, residual_parameter = task_parameter
+            optimizer.add_param_group(
+                {"params": [route_parameter], "lr": task_lr, "weight_decay": 0.0}
+            )
+            optimizer.add_param_group(
+                {
+                    "params": [residual_parameter],
+                    "lr": config.shared_residual_model.residual_learning_rate,
+                    "weight_decay": 0.0,
+                }
+            )
+        else:
+            optimizer.add_param_group(
+                {"params": [task_parameter], "lr": task_lr, "weight_decay": 0.0}
+            )
         curve: dict[int, float] = {}
         for n_seen in range(config.world.examples_per_task + 1):
             if n_seen in support:
@@ -673,7 +686,19 @@ def _adapt_novel_composition(
         parameter.requires_grad_(False)
     novel_id = f"task_novel_composition_{novel_index}"
     novel_code = model.begin_task(novel_id)
-    optimizer = torch.optim.Adam([novel_code], lr=task_lr)
+    if isinstance(model, SharedParentResidualLearner):
+        route_parameter, residual_parameter = novel_code
+        optimizer = torch.optim.Adam(
+            [
+                {"params": [route_parameter], "lr": task_lr},
+                {
+                    "params": [residual_parameter],
+                    "lr": config.shared_residual_model.residual_learning_rate,
+                },
+            ]
+        )
+    else:
+        optimizer = torch.optim.Adam([novel_code], lr=task_lr)
     curve: dict[str, float] = {}
     supports = {0, 1, 2, 4, 8, 16, 32}
     for n_seen in range(33):
@@ -918,6 +943,7 @@ def main() -> None:
     parser.add_argument("--operator-activation", choices=("tanh", "gelu"))
     parser.add_argument("--operator-alpha-init", type=float)
     parser.add_argument("--residual-penalty", type=float)
+    parser.add_argument("--residual-learning-rate", type=float)
     parser.add_argument("--include-identity", action="store_true")
     parser.add_argument("--temperature-schedule", choices=("global", "per_task"))
     parser.add_argument("--order", choices=("forward", "reverse"), default="forward")
@@ -1007,6 +1033,12 @@ def main() -> None:
         **(
             {"residual_penalty": args.residual_penalty}
             if args.model == "shared_residual" and args.residual_penalty is not None
+            else {}
+        ),
+        **(
+            {"residual_learning_rate": args.residual_learning_rate}
+            if args.model == "shared_residual"
+            and args.residual_learning_rate is not None
             else {}
         ),
         **(

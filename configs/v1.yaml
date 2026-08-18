@@ -85,6 +85,7 @@ shared_residual_model:
   residual_penalty: 0.0001
   global_learning_rate: 0.003
   task_learning_rate: 0.05
+  residual_learning_rate: 0.005
   weight_decay: 0.0001
   updates_per_example: 1
   replay_examples_per_task: 4

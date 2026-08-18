@@ -78,20 +78,26 @@ class LearnedModelTests(unittest.TestCase):
         model = SharedParentResidualLearner(4, 3, 2, 2, 2, 0.2, seed=1)
         first = model.begin_task("task_a")
         second = model.begin_task("task_b")
-        self.assertTrue(torch.equal(first, second))
-        self.assertEqual(first.numel(), 2 * 3 + 2 * (4 * 2 + 2 * 4 + 2))
+        self.assertTrue(torch.equal(first[0], second[0]))
+        self.assertTrue(torch.equal(first[1], second[1]))
+        self.assertEqual(
+            first[0].numel() + first[1].numel(),
+            2 * 3 + 2 * (4 * 2 + 2 * 4 + 2),
+        )
         prediction = model(torch.randn(5, 4), "task_a")
         self.assertEqual(prediction.shape, (5, 4))
         self.assertLess(float(model.storage_penalty(["task_a"]).detach()), 0.001)
 
     def test_shared_parent_residual_penalty_and_predictions_backpropagate(self) -> None:
         model = SharedParentResidualLearner(4, 3, 2, 2, 2, 0.2, seed=1)
-        state = model.begin_task("task_a")
+        route, residual = model.begin_task("task_a")
         loss = model(torch.randn(5, 4), "task_a").square().mean()
         loss = loss + model.storage_penalty(["task_a"])
         loss.backward()
-        self.assertIsNotNone(state.grad)
-        self.assertGreater(float(torch.linalg.vector_norm(state.grad)), 0.0)
+        self.assertIsNotNone(route.grad)
+        self.assertIsNotNone(residual.grad)
+        self.assertGreater(float(torch.linalg.vector_norm(route.grad)), 0.0)
+        self.assertGreater(float(torch.linalg.vector_norm(residual.grad)), 0.0)
 
     def test_discrete_library_trains_soft_and_evaluates_hard(self) -> None:
         model = DiscreteLibraryLearner(4, 3, 2, 2, 0.35, 1.0, 0.1, seed=2)

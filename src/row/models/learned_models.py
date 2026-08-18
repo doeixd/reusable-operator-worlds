@@ -211,30 +211,32 @@ class SharedParentResidualLearner(nn.Module):
             initial_u = 1e-3 * torch.randn(task_steps, d, residual_rank)
             initial_v = 1e-3 * torch.randn(task_steps, residual_rank, d)
         self.register_buffer(
-            "initial_task_state",
+            "initial_residual_state",
             torch.cat(
                 (
-                    torch.zeros(self.route_size),
                     initial_u.reshape(-1),
                     initial_v.reshape(-1),
                     torch.zeros(self.residual_b_size),
                 )
             ),
         )
-        self.task_states = nn.ParameterDict()
+        self.task_codes = nn.ParameterDict()
+        self.task_residuals = nn.ParameterDict()
 
-    def begin_task(self, task_id: str) -> nn.Parameter:
-        if task_id in self.task_states:
+    def begin_task(self, task_id: str) -> tuple[nn.Parameter, nn.Parameter]:
+        if task_id in self.task_codes:
             raise ValueError(f"task already exists: {task_id}")
-        self.task_states[task_id] = nn.Parameter(self.initial_task_state.clone())
-        return self.task_states[task_id]
+        self.task_codes[task_id] = nn.Parameter(torch.zeros(self.route_size))
+        self.task_residuals[task_id] = nn.Parameter(
+            self.initial_residual_state.clone()
+        )
+        return self.task_codes[task_id], self.task_residuals[task_id]
 
     def _unpack(self, task_id: str) -> tuple[Tensor, Tensor, Tensor, Tensor]:
-        state = self.task_states[task_id]
-        route, residual_u, residual_v, residual_b = torch.split(
-            state,
+        route = self.task_codes[task_id]
+        residual_u, residual_v, residual_b = torch.split(
+            self.task_residuals[task_id],
             (
-                self.route_size,
                 self.residual_u_size,
                 self.residual_v_size,
                 self.residual_b_size,
@@ -280,16 +282,16 @@ class SharedParentResidualLearner(nn.Module):
 
     def storage_penalty(self, task_ids: Sequence[str]) -> Tensor:
         residuals = [
-            self.task_states[task_id][self.route_size :]
+            self.task_residuals[task_id]
             for task_id in dict.fromkeys(task_ids)
         ]
         return torch.mean(torch.abs(torch.cat(residuals)))
 
     def routing_diagnostics(self) -> dict[str, float]:
-        if not self.task_states:
+        if not self.task_codes:
             return {"mean_entropy_nats": 0.0, "mean_max_coefficient": 0.0}
         coefficients = []
-        for task_id in self.task_states:
+        for task_id in self.task_codes:
             route, _, _, _ = self._unpack(task_id)
             coefficients.append(torch.softmax(route.detach(), dim=-1))
         combined = torch.cat(coefficients, dim=0)
@@ -312,13 +314,15 @@ class SharedParentResidualLearner(nn.Module):
 
     @property
     def task_state_scalar_count(self) -> int:
-        return sum(parameter.numel() for parameter in self.task_states.values())
+        return sum(parameter.numel() for parameter in self.task_codes.values()) + sum(
+            parameter.numel() for parameter in self.task_residuals.values()
+        )
 
     @torch.no_grad()
     def residual_diagnostics(self, probe: Tensor) -> dict[str, object]:
         fractions = []
         residual_rms_values = []
-        for task_id in self.task_states:
+        for task_id in self.task_codes:
             route, residual_u, residual_v, residual_b = self._unpack(task_id)
             coefficients = torch.softmax(route, dim=-1)
             z = probe
