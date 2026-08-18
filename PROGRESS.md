@@ -530,3 +530,13 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   -1,597); rho 0.9 worlds 0 and 2 negative (-1,142, -1,662) with world 1
   rerunning after a memory-pressure failure; rho 1.0 worlds 1-2 in
   flight to complete the shifted-not-vanished test.
+- Completed V2 step 002, the GELU crossover-shift test (H6), on worlds
+  0-2 at rho 0.75/0.9/1.0. Supported in direction with the crossing
+  pushed to the boundary: the mismatched learner loses 0/3 at 0.75 and
+  0.9 (where tanh wins 3/3 at 0.9) and reaches parity at exact reuse
+  (mean +134, 1/3 wins). The return-on-recurrence slope survives at
+  roughly 74% of the aligned slope while an approximately additive
+  penalty of 2,035/2,881/3,359 mean nats shifts the line down; the
+  gate-not-cost alternative is rejected. Spec section 10.2 updated in
+  the same commit per the standing instruction: the circularity
+  objection now has a quantitative answer.
