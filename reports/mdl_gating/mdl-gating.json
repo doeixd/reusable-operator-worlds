@@ -1,0 +1,86 @@
+{
+ "scope": "development world 0, exact reuse; two-stage presence-gate tuning (8 cells); selection rule frozen before stage 1",
+ "selection_rule": "fewest sub-12 threshold-active slots with final median and novel 32-shot NMSE both <= 0.02; log loss breaks ties",
+ "outcome": "NO SUFFICIENT COMPACT LIBRARY in either stage; the frozen rule rejected all eight cells",
+ "characterization": [
+  "Stage 1 is bimodal: five cells prune nothing (12/12 active, novel-32 NMSE ~0.005); the strongest penalty collapses to one slot with broken accuracy (novel-32 0.078).",
+  "Stage 2 bisection finds an intermediate regime: penalty 5e-5 yields a 7-active-slot library (teacher has 6) with negligible lifetime-accuracy cost (median NMSE 0.0104 vs ~0.009 unpruned).",
+  "But both bisection cells fail novel-composition sufficiency (novel-32 ~0.033 vs limit 0.02) - including the 11-slot cell, so the degradation tracks the PENALTY, not the slot count: gate pressure itself damages compositional generality before pruning bites."
+ ],
+ "decision": "Model 4 (MDL presence gating) is recorded as NOT WORKING as a compact-sufficient-library discoverer at this scale under the hard-concrete-style surrogate: configurations achieve either full slots with good novel transfer, or fewer slots with degraded novel transfer, never both. This satisfies the SPEC_AUDIT requirement for an explicit Model 4 decision. No further gate tuning; the result stands as a characterized negative.",
+ "relation_to_v2": "Consistent with the premature-commitment picture (H7) and with consolidation-style approaches (V2 Model 8) that compress AFTER evidence accumulates rather than penalizing during learning.",
+ "cells": [
+  {
+   "cell": "presence_lr_1em03/library_penalty_1em04",
+   "gaussian_log_loss": -107335.98836410398,
+   "final_median_nmse": 0.01946749433504149,
+   "novel_32_shot_nmse": 0.07839240534030875,
+   "active_operators_at_threshold": 1,
+   "expected_active_operators": 4.074622631072998,
+   "routed_operators": 1
+  },
+  {
+   "cell": "presence_lr_1em03/library_penalty_1em05",
+   "gaussian_log_loss": -144617.79286210143,
+   "final_median_nmse": 0.010102220421889362,
+   "novel_32_shot_nmse": 0.005482672875474855,
+   "active_operators_at_threshold": 12,
+   "expected_active_operators": 9.731425285339355,
+   "routed_operators": 12
+  },
+  {
+   "cell": "presence_lr_1em03/library_penalty_1em06",
+   "gaussian_log_loss": -144774.37670041373,
+   "final_median_nmse": 0.00990848672938349,
+   "novel_32_shot_nmse": 0.005378804768139022,
+   "active_operators_at_threshold": 12,
+   "expected_active_operators": 10.297464370727539,
+   "routed_operators": 12
+  },
+  {
+   "cell": "presence_lr_1em03/library_penalty_3em05",
+   "gaussian_log_loss": -143573.66073196675,
+   "final_median_nmse": 0.010190985543385465,
+   "novel_32_shot_nmse": 0.03312273597166395,
+   "active_operators_at_threshold": 11,
+   "expected_active_operators": 8.223050117492676,
+   "routed_operators": 11
+  },
+  {
+   "cell": "presence_lr_1em03/library_penalty_5em05",
+   "gaussian_log_loss": -143152.48166257783,
+   "final_median_nmse": 0.010439016044327794,
+   "novel_32_shot_nmse": 0.03234708634715626,
+   "active_operators_at_threshold": 7,
+   "expected_active_operators": 6.770645618438721,
+   "routed_operators": 7
+  },
+  {
+   "cell": "presence_lr_1em04/library_penalty_1em04",
+   "gaussian_log_loss": -144847.7906678785,
+   "final_median_nmse": 0.008719819673486793,
+   "novel_32_shot_nmse": 0.00521627441519117,
+   "active_operators_at_threshold": 12,
+   "expected_active_operators": 10.088705062866211,
+   "routed_operators": 12
+  },
+  {
+   "cell": "presence_lr_1em04/library_penalty_1em05",
+   "gaussian_log_loss": -144755.19893444257,
+   "final_median_nmse": 0.009186614939824377,
+   "novel_32_shot_nmse": 0.005647956416220891,
+   "active_operators_at_threshold": 12,
+   "expected_active_operators": 10.509593963623047,
+   "routed_operators": 12
+  },
+  {
+   "cell": "presence_lr_1em04/library_penalty_1em06",
+   "gaussian_log_loss": -144807.8255491988,
+   "final_median_nmse": 0.009035152490179724,
+   "novel_32_shot_nmse": 0.0055706430815634315,
+   "active_operators_at_threshold": 12,
+   "expected_active_operators": 10.552019119262695,
+   "routed_operators": 12
+  }
+ ]
+}

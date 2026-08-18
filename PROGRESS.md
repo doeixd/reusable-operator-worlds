@@ -370,3 +370,17 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   residual budget. Follow-ups recorded: rank-1/stronger-penalty residuals
   and sparsity-aware retention coding for the near-zero high-`rho`
   residuals.
+- Completed the two-stage MDL presence-gate study on world 0
+  (`reports/mdl_gating/mdl-gating.json`). Stage one was bimodal: five cells
+  pruned nothing (12/12 active, novel 32-shot NMSE ~0.005) and the strongest
+  penalty collapsed to one slot with broken accuracy. The stage-two bisection
+  found a 7-active-slot library (teacher has 6) at penalty 5e-5 with
+  negligible lifetime-accuracy cost, but both bisection cells failed the
+  frozen novel-composition sufficiency limit (~0.033 versus 0.02), including
+  the 11-slot cell, so the degradation tracks gate pressure rather than slot
+  count.
+- Explicit Model 4 decision (required by the spec audit): presence gating is
+  recorded as not working as a compact-sufficient-library discoverer at this
+  scale. Configurations achieve either a full library with good novel
+  transfer or a smaller library with degraded novel transfer, never both.
+  The result stands as a characterized negative; no further gate tuning.
