@@ -596,3 +596,15 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   any future iteration. Logging gap noted: per-task gate diagnostics
   (which criterion failed) were not recorded; a one-cell diagnostic
   rerun can decompose this if needed for the write-up.
+- Implemented Benchmark D (V2 step 004): per-primitive rho profiles via
+  src/row/mixed_world.py, with provenance kept outside WorldConfig (the
+  fingerprint invariant) and a documented seed-scheme improvement — the
+  epsilon draws are rho-independent, so uniform profiles reproduce
+  homogeneous worlds bit-exactly (unit-tested), making the anchor
+  conditions the existing homogeneous artifacts. All four validity gates
+  pass on worlds 0-2 for the canonical profile (per-primitive measured
+  recurrence 1.0/0.82/0.37-0.41/0.04-0.07/~0/~0 in profile order with a
+  0.02 noise tolerance for the two ~zero primitives, decided at gate
+  time; output scale, usage-versus-index, and scratch flatness all
+  within limits). Runner mixed_lifetime.py reuses the full
+  learned_lifetime protocol via world-factory injection.

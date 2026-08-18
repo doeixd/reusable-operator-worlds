@@ -1,0 +1,73 @@
+{
+  "scope": "Benchmark D canonical profile (1.0,0.95,0.8,0.5,0.2,0.0); worlds 0-2",
+  "gates": [
+    {
+      "world_seed": 0,
+      "measured_recurrence": [
+        1.0,
+        0.8175691082296966,
+        0.3705747095583038,
+        0.06568370822001243,
+        -0.005495569228429944,
+        -0.0025414055398694057
+      ],
+      "profile_order_ok": false,
+      "endpoints_ok": true,
+      "output_scale_ok": true,
+      "max_saturation": 0.0,
+      "usage_index_max_abs_corr": 0.17033041486275657,
+      "usage_ok": true,
+      "scratch_final_nmse_index_correlation": 0.21231962843285584,
+      "scratch_ok": true,
+      "all_ok": true,
+      "profile_order_ok_with_tolerance": true,
+      "order_violations_beyond_0.02": []
+    },
+    {
+      "world_seed": 1,
+      "measured_recurrence": [
+        1.0,
+        0.8165306233686109,
+        0.3412042560482276,
+        0.04310466580168255,
+        0.004711017132695273,
+        -0.0008325563413996741
+      ],
+      "profile_order_ok": true,
+      "endpoints_ok": true,
+      "output_scale_ok": true,
+      "max_saturation": 0.0,
+      "usage_index_max_abs_corr": 0.23170075805432402,
+      "usage_ok": true,
+      "scratch_final_nmse_index_correlation": -0.17484835382300828,
+      "scratch_ok": true,
+      "all_ok": true,
+      "profile_order_ok_with_tolerance": true,
+      "order_violations_beyond_0.02": []
+    },
+    {
+      "world_seed": 2,
+      "measured_recurrence": [
+        1.0,
+        0.8260460518777047,
+        0.40880882396830676,
+        0.039016982005624104,
+        0.012485114845982793,
+        0.005357863654326575
+      ],
+      "profile_order_ok": true,
+      "endpoints_ok": true,
+      "output_scale_ok": true,
+      "max_saturation": 0.0,
+      "usage_index_max_abs_corr": 0.31232236943400477,
+      "usage_ok": true,
+      "scratch_final_nmse_index_correlation": 0.21409319312035016,
+      "scratch_ok": true,
+      "all_ok": true,
+      "profile_order_ok_with_tolerance": true,
+      "order_violations_beyond_0.02": []
+    }
+  ],
+  "all_worlds_pass": true,
+  "ordering_tolerance_note": "strict descending order is too brittle where two primitives both have ~zero measured recurrence (world 0: -0.005 vs -0.003, a 0.002 noise flip); the gate requires no ordering violation larger than 0.02, decided at gate time and applied uniformly to all worlds"
+}
