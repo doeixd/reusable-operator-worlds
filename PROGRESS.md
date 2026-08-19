@@ -848,3 +848,27 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Pre-run order fixed in the spec's checklist: variational wake learner
   and P-2026-08-18-A first, testbed validity gate second, control
   validation third, estimator freezes fourth, PROMOTE last.
+
+# 2026-08-19 — V3 spec executability audit
+
+- Audited the V3 spec for autonomous executability and closed the gaps
+  that would have stalled an agent: concrete world defaults (2 hidden
+  task groups of 32, rank-2 family perturbation with a single strength
+  eta tunable only until the clustering gate passes, structureless =
+  eta 0, accidental control = future-block directions resampled,
+  8-task future block, checkpoints 8/16/32/64); variational learner
+  defaults (shared-residual base, mu + log-sigma with learned
+  per-tensor prior scale in a no-weight-decay group, KL-zero
+  initialization, one reparameterized sample for updates and posterior
+  mean for all scoring, beta grid {0.1, 0.3, 1.0} under the V2
+  two-stage protocol with inherited LRs and a bounded budget); sleep
+  defaults (SLEEPS 8/16/32/64, agglomerative functional clustering,
+  cluster size >= 3, rank-2 candidate fit on deep copies, epsilon 0.02
+  NMSE, lambda ln 2, mu 0 for V3.1, behavior-preserving re-anchoring
+  with rollback-as-refusal); per-currency operational definitions of
+  D_task/D_shared/D_total with references charged to D_task and the
+  sign pattern required in both bit currencies; the V_future estimator
+  selection rule (rank correlation against realized future-block
+  savings on dev 0-2); and a new section 11 of execution notes
+  (machine constraints, provenance extensions, promotion_ledger.json
+  schema, tuning ledger, sealed-seed incident rule).

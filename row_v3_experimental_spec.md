@@ -185,6 +185,33 @@ machinery (canonical profile plus endpoints) to span measured
 recurrence 0–1; `V_hat(A)` is logged for every candidate at every
 sleep, fired or refused.
 
+## 2.6 Concrete world defaults (binding unless the §2.1 gate forces a
+## registered redesign)
+
+- **Task groups:** 2 hidden groups of 32 tasks each, assigned by the
+  world's own deterministic RNG stream (never exposed; assignment
+  recorded only in the world's ground-truth file for post-hoc scoring).
+- **Family component:** one shared low-rank (rank 2) perturbation
+  direction per group, applied to each member task's teacher parameters
+  before spectral renormalization — implemented as a task-group mode in
+  `src/row/mixed_world.py` alongside the existing per-primitive
+  machinery. A single strength parameter `eta` controls how much of the
+  task-specific deviation is family-shared. `eta` may be tuned ONLY
+  until the §2.1 clustering gate passes on development worlds 0–2, with
+  every value tried logged; it is then frozen for all V3 work.
+- **Structureless control:** the identical generator with `eta = 0`.
+- **Accidental-similarity control:** identical to the testbed for the
+  64 lifetime tasks; the future block's family directions are resampled
+  independently (same distribution, fresh RNG stream), so within-
+  history similarity is real but non-predictive.
+- **Future block:** 8 held-out tasks per world (4 per family for the
+  testbed; matched count for controls), never trained during the
+  lifetime; probed at checkpoints 8, 16, 32, 64 (the V1/V2 checkpoint
+  convention, deep-copied models, code/residual-only adaptation).
+- **H12 hierarchical worlds:** one global component plus 2 hidden
+  families, family components task-group-assigned, same `eta`
+  discipline.
+
 ---
 
 # 3. The learner
@@ -216,6 +243,28 @@ sleep, fired or refused.
 - Only irreversible discrete restructuring is sleep-only; continuous
   information cost is wake-legal (review 12 refinement, retained).
 
+**Defaults and tuning protocol (binding):**
+- Base architecture: the frozen shared-residual learner (routes plus
+  rank-2 task-step residuals); the variational coding applies to ALL
+  task-specific scalars (residuals and route parameters alike).
+- Parameterization: posterior mean `mu` plus per-parameter
+  `log sigma`; prior is factorized N(0, s_p^2) with one learned `s_p`
+  per task-state tensor, in a no-weight-decay optimizer group (the
+  learned-alpha convention). Initialize `mu` at the frozen
+  shared-residual initialization and `sigma = s_p` so the initial KL
+  is zero.
+- Training: one reparameterized sample per forward during updates;
+  prequential scoring and all evaluation use the posterior MEAN
+  (deterministic — the paired-comparison and score-before-update rules
+  are unchanged). Variational bits are `KL / ln 2`.
+- Tuning: the V2 two-stage protocol exactly. Stage one on development
+  worlds 0–2 tunes ONLY `beta` over the grid {0.1, 0.3, 1.0} with all
+  learning rates inherited from the frozen shared-residual setting;
+  stage two confirms the winner on worlds 3–9. Total tuning budget must
+  not exceed the per-model budget any V2 baseline received; if the
+  inherited LRs visibly fail (loss divergence, not mere sub-optimality),
+  one registered LR re-derivation is permitted under the §6 rule.
+
 ## 3.2 Sleep phase: one operation, PROMOTE
 
 - **Detection is functional.** Recurring residual structure is detected
@@ -242,10 +291,40 @@ sleep, fired or refused.
   with `V_retro` = stored bits removed now and `V_future` = estimated
   reduction in future prequential cost (operational estimator frozen at
   development close; candidates include dream-benefit probes and
-  streamed-prefix transfer, both validated in V2). The refusal ledger
+  streamed-prefix transfer, both validated in V2). Estimator
+  selection: on development worlds 0–2, correlate each candidate
+  estimator's `V_future` scores against REALIZED future-block savings
+  (§2.4); freeze the estimator with the best rank correlation and
+  commit the comparison table. The refusal ledger
   is a first-class artifact: refusals in §2.3 controls are the
   evidence for the refusal requirement, and the (V_retro, V_future)
   split is the evidence for P-2026-08-19-E.
+
+**Defaults (binding):**
+- Sleep schedule: after tasks 8, 16, 32, and 64 (the V2 SLEEPS
+  convention), plus a final sleep at lifetime end if distinct.
+- Candidate proposal: compute pairwise behavioral distances between
+  task-step residual functions on a fixed per-world probe batch (the
+  existing functional-matching machinery); agglomerative clustering at
+  a distance threshold tied to `epsilon`; each cluster of size >= 3
+  yields one candidate `A` = the best rank-2 functional fit to the
+  cluster (fit by short gradient descent on the probe batch,
+  deep-copied model, never touching lifetime training — the checkpoint-
+  probe isolation rule).
+- Substitutability tolerance: `epsilon = 0.02` NMSE on the probe batch
+  (continuity with the V1/V2 threshold family and gate v2's absolute
+  bar). Tunable on development worlds 0–2 only, logged, then frozen.
+- `lambda = ln 2`; `mu = 0` for V3.1 (compute is reported and the
+  search-tax terms are logged per §5, but not charged — charging
+  compute enters with MACRO/LOOP economics, not before).
+- On promotion, member tasks' posteriors are re-anchored to the new
+  prior `p(epsilon | A)` (means re-expressed as offsets from A's
+  contribution); the change must be behavior-preserving on the probe
+  batch to within `epsilon` or the promotion is rolled back and logged
+  as refused-at-commit.
+- `V_hat(A)` for H13 is, by definition, the logged `V(A)` of this
+  section — H13's adoption condition therefore reduces to freezing the
+  `V_future` estimator (checklist item 4).
 
 ## 3.3 Baselines (all frozen V2 configurations, unchanged)
 
@@ -262,10 +341,30 @@ contribution from variational coding's.
 ## 4.1 Primary endpoint: the migration curves
 
 `D_task(t)`, `D_shared(t)`, `D_total(t)` sampled at every sleep and at
-fixed task-count checkpoints, plus held-out predictive loss on a fixed
-probe set. Registered outcome: the three-sign pattern with flat-or-
-better held-out loss, plus a minimum total-bits saving frozen at
-development close.
+fixed task-count checkpoints (8, 16, 32, 64), plus held-out predictive
+loss on a fixed probe set (the existing per-task held-out evaluation
+examples of tasks completed by time t). Registered outcome: the
+three-sign pattern with flat-or-better held-out loss, plus a minimum
+total-bits saving frozen at development close.
+
+**Operational definitions, per currency:**
+- Two-part currency: `D_shared` = 8 bits per shared scalar (substrate
+  plus every promoted `A`), int8 symmetric per-tensor quantization
+  validated as in V2; `D_task` = 8 bits per retained task scalar plus
+  exact (lossless) reference/route indices — references to promoted
+  abstractions count in `D_task`, so promotion is never free by
+  bookkeeping.
+- Variational currency: `D_task` = sum over tasks of
+  `KL(q || prior) / ln 2` under whichever prior currently governs the
+  task (`p_0` or `p(epsilon | A)`); `D_shared` as in the two-part
+  currency (shared scalars are point weights in V3.1).
+- Prequential currency: cumulative Gaussian log loss with the 1/256
+  density-to-mass term, as in V2.
+- `D_total = D_task + D_shared` in each currency separately; the
+  H11.1 sign pattern must hold in BOTH bit currencies to count as a
+  pass (the prequential currency covers the flat-loss condition).
+- M3 measurements: 32-shot future-task NMSE and examples-to-NMSE 0.05
+  and 0.02 (the V1/V2 threshold family), plus adaptation nats.
 
 ## 4.2 Multi-code robustness (success criterion, not sensitivity)
 
@@ -373,3 +472,28 @@ entering this spec's successor documents or any paper.
 5. Implement PROMOTE; develop on worlds 0–9 only.
 6. Write and freeze `V3_CONFIRMATION_PLAN.md`; add its hash to
    `tools/check_prereg.py`; then, and only then, unseal 300–329.
+
+# 11. Execution notes (for the running agent)
+
+- Machine constraints per AGENTS.md are binding: at most 4–6 concurrent
+  lifetime processes (4 for anything holding large probe tensors);
+  never co-schedule installs with a batch; hung shells during a batch
+  mean load, not failure — check artifact counts before killing
+  anything; launch batches as detached, resumable drivers guarded by
+  existing `summary.json` (the `tools/run_component_*.py` pattern).
+- Every experiment writes resolved `config.yaml`, `fingerprint.json`,
+  and `git_commit.txt`; `rho_profile.json`-style provenance extends to
+  the task-group mode (record group assignments and `eta` in a
+  ground-truth file the learner never reads).
+- The refusal ledger is one JSON per artifact
+  (`promotion_ledger.json`): every candidate with its cluster members,
+  (V_retro, V_future, D(A), C(A)), the decision, and — for fired
+  candidates — the pre/post probe-batch NMSE.
+- `python tools/check_prereg.py` must pass before every commit;
+  PROGRESS.md gains an entry per completed verified step; commit and
+  push as work lands. Development worlds 0–9 only until §6 freezes;
+  any accidental generation of a 300-block world is reported, the
+  artifact deleted, and the incident logged in SPEC_AUDIT.md.
+- Tuning ledger: every `eta`, `beta`, and `epsilon` value ever tried is
+  logged in the artifact tree (no untracked tuning), because the §6
+  freeze must cite the full search history.
