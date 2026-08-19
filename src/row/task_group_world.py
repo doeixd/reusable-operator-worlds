@@ -239,10 +239,15 @@ def generate_task_group_world(
         ):
             group = assignment[task_index]
             task_library = (*task_library, family_primitives[group])
-            # One step of the program calls the family's new primitive; the
-            # position varies deterministically so the effect is not a
-            # positional artifact.
-            position = task_index % config.program_length
+            # One step calls the family's new primitive, at a FIXED
+            # position. Varying the position per task was tried first and
+            # measured: families were still perfectly recoverable from
+            # residuals (recovery 1.000), but a family's mean residual
+            # captured only ~9% of what its members' residuals do, because
+            # averaging over members mixes different step placements. The
+            # position carries no family information, so fixing it costs
+            # nothing and lets a shared abstraction actually fit.
+            position = config.program_length - 1
             steps = list(program.primitive_ids)
             steps[position] = len(task_library) - 1
             program = replace(program, primitive_ids=tuple(steps))

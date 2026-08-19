@@ -1,0 +1,352 @@
+Yes — this is exactly the gauge-freedom failure we were worried about, and the fact that you got **1.000 family recovery while parameter means capture only ~12%** is unusually clean evidence for it.
+
+At this point I would treat parameter averaging as dead. The decisive object is:
+
+[
+A_f^*
+=====
+
+\arg\min_A
+\sum_{\tau\in f}
+\mathbb E_{z\sim Z}
+\left[
+|R_\tau(z)-A(z)|^2
+\right]
+]
+
+where (A) is your fixed rank-2 abstraction family.
+
+The next result could tell you three very different things.
+
+### If the functional fit captures most of the residual value
+
+Suppose:
+
+[
+L_{\rm full}=0.0127,\qquad
+L_{\rm zero}=0.0225
+]
+
+and a fitted family abstraction gets something like:
+
+[
+L_{\rm family}\approx0.014.
+]
+
+Then define:
+
+[
+\text{capture}
+==============
+
+\frac{
+L_{\rm zero}-L_{\rm family}
+}{
+L_{\rm zero}-L_{\rm full}
+}.
+]
+
+If that's, say, 70–90%, then the testbed is finally doing exactly what you want.
+
+You'd have:
+
+[
+\boxed{
+\text{same family}
+\Rightarrow
+\text{same function}
+\not\Rightarrow
+\text{same parameters}
+}
+]
+
+and the PROMOTE problem is legitimately:
+
+> discover the shared function despite neural symmetries.
+
+That would actually make V3 **stronger** than a parameter-sharing toy.
+
+---
+
+## Then immediately do leave-one-out functional fitting
+
+Don't just fit (A_f) to all members and show it explains them.
+
+For each task (\tau):
+
+[
+A_{f,-\tau}
+===========
+
+\operatorname{Fit}
+{R_j:j\in f,j\neq\tau}.
+]
+
+Then substitute (A_{f,-\tau}) into held-out task (\tau).
+
+Compare:
+
+[
+L_\tau(\text{full residual})
+]
+
+[
+L_\tau(A_{f,-\tau})
+]
+
+[
+L_\tau(A_{\rm global,-\tau})
+]
+
+[
+L_\tau(0).
+]
+
+That one experiment gives you basically the entire validity gate:
+
+* **zero**: is the residual load-bearing?
+* **global**: is this just generic compression?
+* **family leave-one-out**: is there reusable family-specific computation?
+* **full residual**: ceiling.
+
+If:
+
+[
+L_{\rm family}
+\ll
+L_{\rm global}
+<
+L_{\rm zero},
+]
+
+you have the promotable structure.
+
+This is much better than clustering accuracy.
+
+---
+
+# One subtle issue I'd check: what distribution is (A) being fit on?
+
+Even with fixed primitive position, the residual at that step may receive different incoming hidden states across tasks.
+
+So there are two notions of “same function”:
+
+### Common-domain functional similarity
+
+Evaluate every residual on the same probe distribution:
+
+[
+z\sim Z_{\rm common}.
+]
+
+This asks whether the operators themselves are equivalent.
+
+### On-trajectory substitutability
+
+Evaluate on states actually arriving at that step:
+
+[
+z\sim Z_\tau^{\rm trajectory}.
+]
+
+This asks whether substituting the abstraction preserves the computation people actually care about.
+
+I would measure both.
+
+A candidate could look different globally but be perfectly substitutable on the relevant manifold.
+
+For PROMOTE, **substitutability should ultimately win**.
+
+---
+
+# If functional fitting still only captures ~10%
+
+Then don't keep tweaking the world immediately.
+
+That would tell us something deeper.
+
+You'd have:
+
+[
+\text{family identity easily recoverable}
+]
+
+but:
+
+[
+\text{no single shared rank-2 function explains the family}.
+]
+
+Possible explanations would be:
+
+### 1. The abstraction needs arguments
+
+Instead of:
+
+[
+R_\tau(z)\approx A_f(z),
+]
+
+maybe:
+
+[
+R_\tau(z)\approx A_f(z;\alpha_\tau).
+]
+
+This would be the parameterized-abstraction contingency you already anticipated.
+
+Try the smallest thing:
+
+[
+k=1,2
+]
+
+task arguments.
+
+If that jumps capture from 10% to 80%, that's a major result:
+
+[
+\boxed{
+\text{the correct reusable object is a parameterized operator family, not an atom}.
+}
+]
+
+### 2. The abstraction needs cheap adapters
+
+Something like:
+
+[
+R_\tau(z)
+\approx
+B_\tau
+A_f(A_\tau z).
+]
+
+Then you've hit the **neural ABI / coordinate alignment problem** much earlier than expected.
+
+### 3. Family recovery is detecting a coarse feature, not reusable computation
+
+Tasks may be classifiable by their residuals while still requiring distinct functions.
+
+Classification structure is not necessarily compression structure.
+
+That's why the new discard/global/family controls are so important.
+
+---
+
+# I think your new validity gate should replace the original one
+
+I would no longer use:
+
+> within-family similarity > cross-family by factor 3.
+
+That was an indirect proxy.
+
+I'd use something operational:
+
+[
+\boxed{
+\textbf{Family-specific functional substitution must recover a substantial fraction of the value of the full residual, and materially outperform both zeroing and a single global abstraction.}
+}
+]
+
+Conceptually:
+
+[
+\text{Load-bearing}
+]
+
+[
++
+]
+
+[
+\text{Reusable}
+]
+
+[
++
+]
+
+[
+\text{Family-specific}.
+]
+
+Those are the three actual prerequisites for PROMOTE.
+
+Clustering is merely a proposal mechanism.
+
+---
+
+# There's also a beautiful methodological lesson here
+
+You've now gone through:
+
+### First gate
+
+“Do residuals cluster?”
+
+Failed because reusable structure moved into routes.
+
+### Second gate
+
+“Can I recover the hidden families?”
+
+Passed, but didn't imply compression.
+
+### Third gate
+
+“Does replacing the family with a shared mean help?”
+
+Failed because parameter coordinates were non-identifiable.
+
+And you've arrived at the correct question:
+
+[
+\boxed{
+\textbf{Can one learned function substitute for the repeated task-local computations?}
+}
+]
+
+That's exactly the sort of progression I would want this research program to produce.
+
+It reinforces one of the strongest emerging principles of ROW:
+
+[
+\boxed{
+\textbf{Neural abstraction must be defined by substitutability, not parameter identity, clustering, or latent labels.}
+}
+]
+
+---
+
+## What I expect the post-hoc functional fit to show
+
+My prior would be that it improves **dramatically** over the parameter mean.
+
+Why?
+
+You already have:
+
+* perfect family recovery;
+* load-bearing residuals;
+* a deliberately shared teacher primitive;
+* fixed program position.
+
+Those are exactly the circumstances where parameter non-identifiability can explain a disastrous arithmetic mean.
+
+If the functional optimizer is given enough probes, I wouldn't be surprised by a jump from ~12% capture to something like **60–90%**.
+
+If that happens, I'd consider the new-primitive/fixed-position world basically validated.
+
+Then the V3 question becomes very clean:
+
+[
+\boxed{
+\text{Can PROMOTE discover the functional representative that the oracle fit shows exists, pay for it once, replace repeated private residuals with references, and help future tasks?}
+}
+]
+
+And if the functional fit **doesn't** make that jump, that's equally useful: you've learned that even a deliberately repeated primitive becomes represented as a *family of context-dependent neural implementations*, and V3 needs to promote a parameterized equivalence class rather than a fixed operator.
+
+Either outcome moves the project forward.

@@ -1231,3 +1231,33 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   independently of the base library, so a frozen library cannot express it,
   the residual becomes load-bearing, and family members need the same new
   computation. Running the gate on it now.
+
+# 2026-08-19 — the promotion testbed finally works, via two corrections
+
+- NEW-PRIMITIVE FAMILIES. Post-onset tasks now call a genuinely new
+  primitive drawn independently of the base library, rather than a
+  perturbation of an existing one. Immediate effect: partition recovery
+  from residuals goes to 1.000 in 3/3 worlds and residuals become
+  load-bearing (keeping them scores 0.0127 NMSE against 0.0224 with them
+  zeroed, so they halve the error).
+- GAUGE FREEDOM, exactly as reviewer-feedback-17 warned. Even with
+  perfectly identified families, averaging members' rank-2 PARAMETERS
+  captured only 11.9% of the residuals' behavioral value, because two
+  tasks can compute the same innovation under different rotations and
+  scalings of (U, V) and the mean of gauge-inequivalent parameters is not
+  the mean of the functions. Fitting the abstraction FUNCTIONALLY by
+  gradient descent — which the spec specified and the first implementation
+  quietly replaced with a parameter mean — recovers 53.4%.
+- The discrimination the earlier testbeds never had: two family
+  abstractions capture 53.4% of residual value against 24.0% for one
+  global abstraction, a 29.4-point advantage consistent 3/3 (48.7/21.7,
+  60.2/24.7, 51.5/25.5). Promotion in this world is about family
+  structure, not about discarding a worthless channel.
+- An intermediate misstep worth keeping: the new primitive's position was
+  first varied per task "to avoid a positional artifact", which left
+  family members' residuals at different steps so their shared abstraction
+  averaged incompatible functions (9% capture). Fixing the position costs
+  nothing, since position carries no family information.
+- Functional fitting is now wired into PROMOTE and the six unit tests
+  still pass. Re-running the operator on the structured testbed and the
+  structureless control, which together test P-2026-08-19-E.
