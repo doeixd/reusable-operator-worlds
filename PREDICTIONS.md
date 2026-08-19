@@ -486,3 +486,54 @@ distributions as cleanly as the post-hoc one is untested and is the next
 thing to measure. Note also that control world 2 contains one
 2,302-nat abstraction, so the threshold is not a perfect classifier and
 should be reported with its error rates, never as a clean gate.
+
+# Value filter at promotion time — FAILS (2026-08-19)
+
+The post-hoc diagnostic above separated real abstractions from PROMOTE's
+false positives cleanly at an untuned threshold (one residual's carry
+cost: 90% of control abstractions below it, 33% of structured). I
+implemented that rule as an online promotion filter and it does not
+work.
+
+`prune_by_value` refuses a promotion made at the current sleep whose
+value to its dependents is below its carry price. Reversal is free only
+for a fresh promotion, because the dependents' private residuals are
+still current -- reversing an OLD promotion pays n private residuals to
+reclaim one shared one and can never pay, which is the trap V4.1's
+compaction gate fell into. So the operator is a filter, not a collector.
+
+Result on worlds 0-2, live library after filtering versus baseline:
+
+| condition | filtered | baseline |
+| --- | --- | --- |
+| structured | 0, 2, 0 | 4, 6, 5 |
+| control | 0, 0, 0 | 4, 3, 3 |
+
+It refuses almost everything in BOTH conditions. The library collapses
+where it should be preserved.
+
+Why, and it is not a coding error. At the moment of promotion an
+abstraction has its MINIMUM dependent set -- a cluster of about three
+tasks -- so its measured value is at its lowest, while its price is the
+full carry cost to the end of the lifetime. Value accrues later as
+further tasks join. The post-hoc measurement that separated the
+distributions used FULL dependent sets, which is information the learner
+does not have at birth. The threshold is right; the estimate available
+at decision time is not.
+
+A units bug was found and fixed on the way, and is recorded because the
+first version looked like the same result. Value was computed as a mean
+squared deviation on a probe and compared directly against a price in
+nats, so a quantity of order 1e-2 was tested against one of order 1e3
+and everything failed trivially. Converting through the Gaussian
+likelihood, `d * deviation * examples / (2 sigma^2)`, changed one cell
+(structured world 1 keeps 2 abstractions) and left the conclusion
+intact. Same class of error as the V3 KL-scaling bug: comparing two
+quantities in different currencies.
+
+Reading. Refusing bad promotions requires PROSPECTIVE value -- expected
+future dependents -- not realized value at birth. That is exactly V3's
+H11.3 territory and is not free. Until it exists, the promotion
+false-positive rate cannot be reduced by a retrospective MDL test, and
+the online retention experiment stays blocked. The frozen-library
+oracle remains the only clean route to the RETAIN question.

@@ -531,3 +531,108 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
                 loss.backward()
                 optimizer.step()
         return alpha.detach()
+
+    @torch.no_grad()
+    def prune_by_value(
+        self,
+        probe: torch.Tensor,
+        task_index: int,
+        tasks_total: int = 64,
+        kappa: float = 0.0,
+        grace: int = 0,
+        sigma: float = 0.1,
+        examples_per_task: int = 128,
+    ) -> dict[str, object]:
+        """Refuse promotions not worth their own storage price.
+
+        Measured 2026-08-19, per-abstraction VALUE — the loss its
+        dependents would pay without it — separates real abstractions
+        from PROMOTE's false positives: in structureless controls where
+        every promotion is spurious, 90% fall below one residual's carry
+        cost, against 33% in structured worlds.
+
+        The threshold is NOT tuned. It is the abstraction's own price,
+        `8 bits x residual width` held to the end of the lifetime, so the
+        rule is "an abstraction must be worth at least what it costs to
+        keep" — the MDL criterion used everywhere else in this project.
+        PROMOTE cannot apply it: its acceptance test is behavioral
+        deviation plus a generalization check, and an abstraction can
+        pass both while still not earning its bits.
+
+        ONLINE-ADMISSIBLE. Value is measured against the dependents that
+        exist NOW, on the learner's own probe, with no teacher quantity
+        and no future information. It is therefore noisier than the
+        post-hoc diagnostic, which is exactly what this operator is meant
+        to test.
+
+        AGE-NEUTRAL apart from the grace period, applied identically to
+        every abstraction (V4 spec H17).
+        """
+
+        self.sync_lineage(task_index)
+        width = self.residual_u_size + self.residual_v_size + self.residual_b_size
+        carry = BITS_PER_SCALAR * width
+        retired, kept = [], []
+        for index in sorted(self.lineage, reverse=True):
+            record = self.lineage[index]
+            if record.retired_at_task is not None:
+                continue
+            if task_index - record.born_at_task < grace:
+                continue
+            dependents = [t for t, r in self.task_reference.items() if r == index]
+            value = 0.0
+            for task_id in dependents:
+                with_ref = self.forward(probe, task_id)
+                self.task_reference.pop(task_id)
+                without = self.forward(probe, task_id)
+                self.task_reference[task_id] = index
+                # CONVERT TO NATS. A mean squared deviation on the probe is
+                # not comparable to a description length; comparing them
+                # directly makes every abstraction fail, because an MSE of
+                # order 1e-2 is always below a price of order 1e3. Under
+                # the project's Gaussian likelihood the per-example cost of
+                # a squared deviation is `d * dev / (2 sigma^2)`, and the
+                # abstraction buys that on every example of every
+                # dependent task.
+                deviation = float(torch.mean(torch.square(with_ref - without)))
+                value += (
+                    deviation * with_ref.shape[-1] * examples_per_task
+                    / (2.0 * sigma * sigma)
+                )
+            # Price the deviation in the same currency as the bits: the
+            # occupancy term makes an abstraction dearer the longer it
+            # must be carried.
+            price = carry * LN2 + kappa * carry * max(0, tasks_total - task_index)
+            self.record_decision(
+                "prune_by_value", task_index, (value - price) / LN2,
+                applied=value < price,
+                detail={"abstraction": index, "dependents": len(dependents),
+                        "value": value, "price": price},
+            )
+            if value < price and record.born_at_task == task_index:
+                # Reversal is free ONLY for a promotion made at THIS sleep:
+                # the dependents' private residuals are still current, so
+                # un-retiring them restores the pre-promotion state at no
+                # cost. Reversing an OLD promotion instead pays n private
+                # residuals to reclaim one shared one and can never pay --
+                # the trap V4.1's compaction gate fell into. So this is a
+                # promotion FILTER, not a garbage collector.
+                for task_id in dependents:
+                    self.task_reference.pop(task_id, None)
+                    self.retired.discard(task_id)
+                record.dependents = []
+                record.retired_at_task = task_index
+                record.retirement_reason = "value below carry cost at birth"
+                retired.append(index)
+                self.record_migration(
+                    "prune_by_value", task_index, {"abstraction": index}
+                )
+            else:
+                kept.append(index)
+        return {
+            "task_index": task_index,
+            "pruned": len(retired),
+            "pruned_ids": retired,
+            "kept": len(kept),
+            "live_library": len(self.abstractions) - len(self.retired_abstractions()),
+        }

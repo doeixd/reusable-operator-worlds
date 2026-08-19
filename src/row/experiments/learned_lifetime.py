@@ -396,6 +396,7 @@ def run(
     promotion_epsilon: float = 0.02,
     reuse_decision_at: int = 8,
     lifecycle_enabled: bool = False,
+    lifecycle_filter: bool = False,
     lifecycle_kappa: float = 0.0,
     lifecycle_grace: int = 8,
 ) -> dict[str, object]:
@@ -690,6 +691,18 @@ def run(
             sleep_records.append(record)
             if isinstance(model, LifecycleLibraryLearner):
                 model.sync_lineage(lifetime_index + 1)
+                if lifecycle_filter:
+                    filter_rng = np.random.default_rng(
+                        np.random.SeedSequence([config.world.seed, 91])
+                    )
+                    record["value_filter"] = model.prune_by_value(
+                        _tensor(
+                            filter_rng.normal(size=(256, config.world.state_dim))
+                        ),
+                        task_index=lifetime_index + 1,
+                        tasks_total=len(world.tasks),
+                        kappa=lifecycle_kappa,
+                    )
                 if lifecycle_enabled:
                     consolidation_rng = np.random.default_rng(
                         np.random.SeedSequence([config.world.seed, 73])

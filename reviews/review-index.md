@@ -864,3 +864,74 @@ the first curve point (small library ⇒ COMPRESS) and the high-F failure teache
 that scale cannot be increased by sacrificing support per concept; scale
 lifetimes as N ∝ F to hold m constant, and if that produces a COMPRESS→FACTORIZE
 crossing, it's a much stronger V4 than the lifecycle spec envisioned.
+
+### [reviewer-feedback-33.txt](reviewer-feedback-33.txt)
+Identifies the first genuinely compelling V4 lifecycle mechanism — the economic
+survival filter — with one conceptual correction: the filter distinguishes
+**economically worthwhile abstractions from uneconomical ones**, not "real" from
+"false." The η=0 control already contains the counterexample (one abstraction
+worth 2,302 nats against a ~1,098-nat storage cost); if it genuinely saves more
+predictive loss than it costs to encode, it deserves to survive regardless of
+teacher ontology. The rule is RETAIN(A) ⟺ V(A) > λD(A), where V(A) is the
+marginal behavioral value of having A. New constitutional rule: **structural
+value is always marginal value against the cheapest legitimate alternative** —
+V(A) must be measured against the best admissible without-A counterfactual
+(substitutable abstraction, remaining private innovation, normal task
+adaptation, architecture fallback), not raw ablation. Do NOT modify PROMOTE:
+birth (does it capture recurring behavior and generalize?) and persistence (is
+the reuse worth its storage?) are separate tests. The pipeline is PROMOTE →
+probationary abstraction → observe actual reuse → economic survival test
+(RETAIN if value > code cost, RETIRE otherwise), preserving V3 unchanged and
+giving V4 the causal comparison PROMOTE-only vs PROMOTE + economic survival.
+The online problem is the whole experiment: the post-hoc oracle knows V_T(A)
+with complete dependent-set knowledge, but the learner at sleep t has only
+V̂_t(A); the V4R question is whether realized early usefulness can forecast
+ultimate repayment. Recommends a historical forecasting audit before any online
+deletion: reconstruct V̂_t(A) at each sleep t∈{24,32,48,64} from existing
+trajectories, compare to V_T(A)−λD(A), and measure sign accuracy, ranking
+correlation, false-retirement rate, false-retention rate, and economic regret
+R_t = J(decisions from V̂_t) − J(clairvoyant decisions from V_T) — runnable
+from saved ledgers/checkpoints before another expensive lifetime sweep.
+Scrutinize realized_savings_bits: the per-reuse savings ŝ_{τ,A} = cost
+without A − cost with A must use the matched alternative, not "error after
+zeroing A"; the online estimate V̂_t(A) = Σ ŝ_{τ,A} + V̂_future(A). The
+threshold must remain parameter-free: T_A = λD(A) per abstraction (≈1,098 nats
+today), not a tuned constant, so the criterion scales automatically with
+abstraction size. The early-evidence problem needs PROBATION, not a fitted
+threshold: at birth V̂(A) ≈ 0 so immediate filtering kills everything;
+distinguish "not yet validated" from "validated and uneconomic" using the
+simplest rule (enter PROBATION at birth, become eligible after the existing
+grace/evidence condition, then survive iff V̂_t(A) ≥ λD(A)); avoid
+confidence-bound machinery until a simple fixed grace rule fails. The
+falsifier: the online rule could make the post-hoc library look cleaner while
+hurting lifetime performance, so the main criterion is J_survival <
+J_PROMOTE-only, not "library size decreases"; score ΔD, ΔL_lifetime, ΔJ,
+future adaptation, and old-task behavior; distinguish false retirement
+(eventually V_T > λD but deleted) from false retention (eventually V_T < λD but
+survived) — false retirement is probably more costly because it can cause
+reacquisition, and that asymmetry may produce the real-options/hysteresis story
+organically. This finally gives RETAIN a non-tautological meaning: an
+abstraction survives because its demonstrated marginal contribution exceeds its
+description cost; dormancy becomes V̂_t(A) ↓ and returning regimes cause V̂_t(A)
+↑ or reacquisition cost if deleted, so real-options retention extends an
+already-working economic survival rule rather than being invented for the
+dormancy world. Repairs the original V4 narrative: the empirical version is
+"birth requires evidence of reusable structure; persistence requires evidence
+that the reuse is worth its storage" — a function can be recurrent,
+substitutable, prospectively generalizable, and still have economic value <
+code cost (exactly what was measured). Broader hierarchy emerging: V3
+discovered the epistemic criteria (functional recurrence → substitutability →
+prospective transfer); V4 adds the economic criterion (useful abstraction
+⇒ worth storing); the complete acceptance ladder is structure exists →
+structure transfers → structure has marginal value → marginal value exceeds
+representation cost. Next steps: do NOT touch factorization or scale
+experiments yet — (1) freeze V(A) > λD(A), (2) verify V(A) uses the strongest
+without-A counterfactual, (3) retrospectively measure V̂_t(A) at each sleep
+using only history, (4) measure online-estimator regret against the final-value
+oracle, (5) if early estimate carries signal, implement PROBATION →
+RETAIN/RETIRE with threshold unchanged, (6) compare against frozen PROMOTE-only
+on development worlds, (7) only then revisit the dormancy crossover. Do NOT
+require the control survivor rate to go to zero (the 2,302-nat control
+abstraction is why): the desired result is that abstractions survive iff their
+measured usefulness repays their own description cost, regardless of where they
+came from.

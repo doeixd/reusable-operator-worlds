@@ -91,6 +91,11 @@ def main() -> None:
     parser.add_argument("--lifecycle-grace", type=int, default=8)
     parser.add_argument("--new-primitive-families", action="store_true")
     parser.add_argument(
+        "--lifecycle-filter",
+        action="store_true",
+        help="refuse promotions worth less than their own carry cost",
+    )
+    parser.add_argument(
         "--dormancy",
         type=int,
         nargs=2,
@@ -220,6 +225,7 @@ def main() -> None:
             sleeps=tuple(args.sleeps),
             promotion_epsilon=args.promotion_epsilon,
             lifecycle_enabled=args.lifecycle,
+            lifecycle_filter=args.lifecycle_filter,
             lifecycle_kappa=args.lifecycle_kappa,
             lifecycle_grace=args.lifecycle_grace,
         )

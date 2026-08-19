@@ -1,0 +1,533 @@
+I think this is the first genuinely compelling **V4 lifecycle mechanism** you've found, with one important conceptual correction:
+
+> The filter should not be thought of as distinguishing "real abstractions" from "false abstractions." It distinguishes **economically worthwhile abstractions from uneconomical ones**.
+
+That distinction matters because your η=0 control already contains the counterexample: one abstraction is worth 2,302 nats, well above its ~1,098-nat storage cost. There may be no planted family structure, but if the abstraction genuinely saves more predictive loss than it costs to encode, then by the project's own criterion **it deserves to survive**. The teacher ontology is irrelevant.
+
+So the rule is beautifully simple:
+
+[
+\boxed{
+\operatorname{RETAIN}(A)
+\iff
+V(A)>\lambda D(A)
+}
+]
+
+where (V(A)) is the **marginal behavioral value of having (A)**.
+
+That's much more principled than "structured good, control bad."
+
+## One thing I would audit before wiring it online
+
+Make absolutely sure (V(A)) is measured against the **best admissible counterfactual without (A)**, not simply by zeroing/removing it.
+
+This project has now been burned several times by the wrong counterfactual. The correct value is something like:
+
+[
+V(A)
+====
+
+## J(\text{best available representation without }A)
+
+J(\text{current representation with }A),
+]
+
+excluding (A)'s own storage charge from the first behavioral term as appropriate.
+
+Without (A), dependents should be allowed whatever the learner would really have available:
+
+* another abstraction, if substitutable;
+* their remaining private innovation;
+* normal task adaptation;
+* whatever fallback the frozen architecture permits.
+
+If your current "held-out loss if removed" already does this, excellent. If it's raw ablation, I'd fix that before treating 1,245 versus 651 as the economic value.
+
+That's now a constitutional rule:
+
+[
+\boxed{
+\textbf{structural value is always marginal value against the cheapest legitimate alternative.}
+}
+]
+
+---
+
+# I would not modify PROMOTE
+
+This is important.
+
+You now know why PROMOTE creates too much library:
+
+PROMOTE asks approximately:
+
+> Does this candidate capture recurring behavior and generalize?
+
+V4 asks the different question:
+
+> Having created it, did the recurring behavior turn out to be valuable enough to justify permanent storage?
+
+Those should remain separate.
+
+So:
+
+```text
+PROMOTE
+   ↓
+probationary abstraction
+   ↓
+observe actual reuse
+   ↓
+economic survival test
+   ├── value > code cost → RETAIN
+   └── value < code cost → RETIRE
+```
+
+That preserves V3 unchanged and gives V4 a real causal comparison:
+
+[
+\boxed{
+\text{V3 PROMOTE-only}
+\quad\text{vs}\quad
+\text{V3 PROMOTE + economic survival}.
+}
+]
+
+Much cleaner than adding another clause to PROMOTE.
+
+---
+
+# The online problem is now the whole experiment
+
+The post-hoc oracle result is:
+
+[
+V_T(A)
+]
+
+with complete knowledge of its eventual dependent set.
+
+But the learner at sleep (t) has only:
+
+[
+\hat V_t(A).
+]
+
+So the V4R question becomes:
+
+[
+\boxed{
+\textbf{Can realized early usefulness forecast whether an abstraction will ultimately repay its code cost?}
+}
+]
+
+That's a very good question.
+
+Before actually letting the filter delete things, I would do a **historical forecasting audit**.
+
+For every abstraction from existing V3/V4R trajectories, reconstruct at each sleep:
+
+[
+t\in{24,32,48,64}
+]
+
+the value estimate available using history only:
+
+[
+\hat V_t(A).
+]
+
+Then compare it to eventual:
+
+[
+V_T(A)-\lambda D(A).
+]
+
+You want to know:
+
+* sign accuracy;
+* ranking correlation;
+* false-retirement rate;
+* false-retention rate;
+* economic regret.
+
+Most importantly:
+
+[
+R_t
+===
+
+## J(\text{decisions from }\hat V_t)
+
+J(\text{clairvoyant decisions from }V_T).
+]
+
+That tells you whether the obstacle is **estimating value early**, rather than the retention principle itself.
+
+And it may be runnable mostly from saved ledgers/checkpoints before another expensive lifetime sweep.
+
+---
+
+# `realized_savings_bits` sounds like the right signal, but scrutinize its denominator
+
+I'd want the online estimate to look approximately like:
+
+[
+\hat V_t(A)
+===========
+
+\sum_{\tau\in\text{observed reuses of }A}
+\widehat{s}*{\tau,A}
++
+\widehat{V}*{\rm future}(A),
+]
+
+where:
+
+[
+\widehat{s}_{\tau,A}
+====================
+
+## \text{cost without }A
+
+\text{cost with }A.
+]
+
+Again, "without" needs the matched alternative.
+
+Don't let `realized_savings_bits` be:
+
+> error after zeroing A.
+
+It should be:
+
+> **incremental savings produced by A relative to what this task would otherwise have done.**
+
+That's the quantity you're claiming to economically accumulate.
+
+---
+
+# The threshold itself should remain parameter-free
+
+This part is especially nice.
+
+Don't tune:
+
+[
+T=900,\ 1100,\ 1300,\ldots
+]
+
+The threshold is:
+
+[
+\boxed{T_A=\lambda D(A).}
+]
+
+Today that's approximately:
+
+[
+1,098\text{ nats}.
+]
+
+But write the implementation in terms of each abstraction's actual serialized cost:
+
+[
+T_A=\lambda D(A),
+]
+
+not `1098`.
+
+Then when abstraction size changes later, the criterion automatically changes with it.
+
+That's a real economic rule rather than a hyperparameter.
+
+---
+
+# The early-evidence problem probably needs probation, not a fitted threshold
+
+At birth, naturally:
+
+[
+\hat V(A)\approx0
+]
+
+because almost nobody has reused the thing yet.
+
+If you immediately apply:
+
+[
+\hat V(A)>\lambda D(A),
+]
+
+you'll kill every abstraction.
+
+So you need to distinguish:
+
+[
+\text{not yet validated}
+]
+
+from:
+
+[
+\text{validated and uneconomic}.
+]
+
+I'd use the simplest possible rule:
+
+### Birth
+
+Abstraction enters **PROBATION**.
+
+### Eligibility
+
+After the already-registered grace/evidence condition—perhaps the existing grace period or a fixed number of subsequent tasks—it becomes eligible for economic judgment.
+
+### Survival
+
+Then:
+
+[
+\hat V_t(A)\ge\lambda D(A)
+]
+
+retains it.
+
+Otherwise retire.
+
+I would avoid adding confidence-bound machinery until a simple fixed grace/evidence rule fails. Otherwise you'll immediately acquire another tunable statistical system.
+
+---
+
+# There's a very nice falsifier
+
+The online rule could easily make the post-hoc library look cleaner while hurting lifetime performance.
+
+So score all of:
+
+[
+\Delta D,
+]
+
+[
+\Delta L_{\rm lifetime},
+]
+
+[
+\Delta J,
+]
+
+future adaptation,
+
+and old-task behavior.
+
+The main criterion should be:
+
+[
+\boxed{
+J_{\rm survival}<J_{\rm PROMOTE-only}
+}
+]
+
+not:
+
+[
+\text{library size decreases}.
+]
+
+And specifically distinguish:
+
+### False retirement
+
+Eventually:
+
+[
+V_T(A)>\lambda D(A)
+]
+
+but online policy deleted it.
+
+### False retention
+
+Eventually:
+
+[
+V_T(A)<\lambda D(A)
+]
+
+but it survived.
+
+False retirement is probably much more costly because it can cause reacquisition later.
+
+That asymmetry may eventually produce your real-options/hysteresis story organically.
+
+---
+
+# This finally gives RETAIN a non-tautological meaning
+
+Earlier, RETAIN was hard to instantiate because you were trying to infer usefulness from dormancy schedules.
+
+Now you don't need to begin with dormancy.
+
+The simpler question is:
+
+> **Does the abstraction earn its rent?**
+
+An abstraction survives because its demonstrated marginal contribution exceeds its description cost:
+
+[
+V(A)>D(A).
+]
+
+Then later, dormancy becomes:
+
+[
+\hat V_t(A)\downarrow
+]
+
+as useful reuse disappears.
+
+And returning regimes cause:
+
+[
+\hat V_t(A)\uparrow
+]
+
+or impose reacquisition cost if you've deleted it.
+
+So real-options retention becomes an extension of an already-working economic survival rule rather than something invented specifically for the dormancy world.
+
+That's much better.
+
+---
+
+# It also repairs the original V4 narrative
+
+The original slogan:
+
+> Invent hypotheses cheaply, then make persistence expensive.
+
+wasn't quite true because PROMOTE itself is already conservative.
+
+The empirical version now looks more like:
+
+[
+\boxed{
+\textbf{Birth requires evidence of reusable structure.
+Persistence requires evidence that the reuse is worth its storage.}
+}
+]
+
+Those are not the same test.
+
+A function can be:
+
+* recurrent;
+* substitutable;
+* prospectively generalizable;
+
+and still:
+
+[
+\text{economic value}<\text{code cost}.
+]
+
+That's exactly what you've measured.
+
+I think that distinction is a real contribution.
+
+---
+
+# There is a broader hierarchy emerging
+
+V3 discovered the **epistemic criteria** for abstraction:
+
+[
+\text{functional recurrence}
+\rightarrow
+\text{substitutability}
+\rightarrow
+\text{prospective transfer}.
+]
+
+V4 is adding an **economic criterion**:
+
+[
+\boxed{
+\text{useful abstraction}
+\not\Rightarrow
+\text{worth storing}.
+}
+]
+
+So perhaps the complete acceptance ladder is becoming:
+
+[
+\text{structure exists}
+]
+
+[
+\Downarrow
+]
+
+[
+\text{structure transfers}
+]
+
+[
+\Downarrow
+]
+
+[
+\text{structure has marginal value}
+]
+
+[
+\Downarrow
+]
+
+[
+\boxed{
+\text{marginal value exceeds representation cost}.
+}
+]
+
+Only then does it deserve long-term citizenship in the computational language.
+
+---
+
+## What I'd do next
+
+I would **not touch the factorization or scale experiments yet**.
+
+Do exactly one thing:
+
+1. Freeze the post-hoc economic rule:
+   [
+   V(A)>\lambda D(A).
+   ]
+2. Verify (V(A)) uses the strongest legitimate without-(A) counterfactual.
+3. Retrospectively measure (\hat V_t(A)) at each sleep using only information available then.
+4. Measure online-estimator regret against the final-value oracle.
+5. If the early estimate carries useful signal, implement **PROBATION → RETAIN/RETIRE** with the threshold unchanged.
+6. Compare against frozen PROMOTE-only on development worlds.
+7. Only after that revisit the dormancy crossover.
+
+And I would **not require the control survivor rate to go to zero**. The 2,302-nat control abstraction is exactly why.
+
+The desired result is not:
+
+[
+\text{structured survives, control dies}.
+]
+
+It is:
+
+[
+\boxed{
+\textbf{abstractions survive iff their measured usefulness repays their own description cost, regardless of where they came from.}
+}
+]
+
+That is much closer to the general mechanism you ultimately want.
