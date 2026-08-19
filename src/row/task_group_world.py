@@ -95,6 +95,7 @@ def _task_group_library(
     spec: TaskGroupSpec,
     group: int,
     block: int,
+    resampled: bool = False,
 ):
     result = []
     for primitive_index, base in enumerate(base_library):
@@ -113,7 +114,13 @@ def _task_group_library(
         )
         private_b = private.normal(scale=0.2, size=config.teacher_rank)
         if spec.eta > 0.0:
-            family = _rng(config.seed, 12, group, block, primitive_index)
+            # A distinct stream component, not a sentinel block index:
+            # SeedSequence rejects negative components.
+            family = (
+                _rng(config.seed, 14, group, primitive_index)
+                if resampled
+                else _rng(config.seed, 12, group, block, primitive_index)
+            )
             family_v = _spectral_normalize(
                 family.normal(size=(config.teacher_rank, config.state_dim))
             )
@@ -182,13 +189,18 @@ def generate_task_group_world(
         return task_index // spec.block_size
 
     def _build(task_index: int, program, task_id: str, future: bool) -> Task:
-        block = _block_of(task_index)
-        if future and spec.resample_future:
-            # Fresh directions for the held-out block only; the lifetime
-            # history is identical to the testbed's.
-            block = -1
+        # Fresh directions for the held-out block only; the lifetime history
+        # stays identical to the testbed's.
+        resampled = bool(future and spec.resample_future)
         task_library = _task_group_library(
-            config, library, task_index, profile, spec, assignment[task_index], block
+            config,
+            library,
+            task_index,
+            profile,
+            spec,
+            assignment[task_index],
+            _block_of(task_index),
+            resampled=resampled,
         )
         train_rng = _rng(config.seed, 30, task_index)
         eval_rng = _rng(config.seed, 31, task_index)
