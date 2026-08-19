@@ -1,0 +1,491 @@
+I think you are **at the point where you should freeze**, assuming the remaining control/H11.3 ten-world results don't expose a real bug. I would resist another round of mechanism improvement. A unanimous 10/10 development result after the testbed finally passed the right operational gates is exactly when further tweaking starts becoming more dangerous than useful.
+
+Before hashing the confirmation plan, though, I would make six checks.
+
+### 1. Keep the original refusal failure permanently separate from the new graded claim
+
+You're handling this correctly. Preserve language like:
+
+> **Original H11 absolute-refusal requirement: falsified on development.**
+
+Then separately:
+
+> **Secondary graded discrimination prediction:** structured worlds should produce more/reused abstractions than controls.
+
+Do not let a sealed pass of the graded criterion retroactively turn “H11 including refusal passed.” The clean final ledger could be:
+
+[
+\begin{aligned}
+\text{H11.1 migration} &: ?\
+\text{H11.2 both currencies} &: ?\
+\text{H11.3 future learning} &: ?\
+\text{absolute refusal} &: \mathbf{FALSIFIED\ development}\
+\text{graded discrimination} &: ?
+\end{aligned}
+]
+
+That actually increases credibility.
+
+I also prefer **reuse-rate discrimination** to library-size discrimination. Library size can be contaminated by fragmentation: you have 5.3 abstractions for two latent families. Usage is much closer to economic relevance.
+
+---
+
+### 2. Audit the +1,350-nat prediction gain against extra optimization
+
+This is the one audit I consider load-bearing before sealed.
+
+Promotion creates a new hypothesis class, which is legitimately allowed to improve prediction. But make sure the promoted learner doesn't simply receive more gradient steps on its observed examples.
+
+Run a matched-compute/sham-reuse control:
+
+[
+\text{same adaptation checkpoints}
++
+\text{same optimization-step budget}
+------------------------------------
+
+\text{access to promoted abstractions}.
+]
+
+If the +1,350 nats survives, great.
+
+You do **not** need to make search FLOPs equal for V3's primary (J), since (\mu=0). But you want to know:
+
+[
+\boxed{
+\text{representation advantage}
+\neq
+\text{accidental extra-training advantage}.
+}
+]
+
+The model-selection benefit from having a library is itself legitimate; extra SGD for free is the thing to exclude.
+
+---
+
+### 3. Register M2 and M3 as genuinely separable sealed outcomes
+
+I'd make the plan explicitly score:
+
+**M2a — information migration**
+
+[
+D_{\rm task}\downarrow,\qquad
+D_{\rm shared}\uparrow,\qquad
+D_{\rm total}\downarrow.
+]
+
+**M2b — economic dominance**
+
+[
+\Delta L>0
+]
+
+and
+
+[
+\Delta J_{\rm two-part}>0.
+]
+
+**M3 — prospective learning**
+
+[
+\Delta L_{\rm future}>0
+]
+
+/ lower 32-shot NMSE / lower adaptation nats.
+
+That preserves scientifically meaningful mixed outcomes.
+
+Your current development result is unusually strong because all three happen simultaneously:
+
+[
+\boxed{
+\text{compresses the past}
++
+\text{improves the ongoing lifetime}
++
+\text{accelerates genuinely new tasks}.
+}
+]
+
+Don't collapse those into one score.
+
+---
+
+### 4. The intervals should be ambitious, but not fit to 0–2
+
+Your proposed two-part interval:
+
+[
+[+35k,+75k]
+]
+
+around a development mean of (+55.7k) seems like the right *kind* of interval.
+
+I would inspect worlds **3–9 separately** before finalizing every interval.
+
+Worlds 0–2 have been used extremely heavily for:
+
+* multiple testbed redesigns;
+* functional-fit debugging;
+* prospective-gate design;
+* reuse implementation.
+
+Worlds 3–9 are therefore a much cleaner internal generalization check.
+
+Report:
+
+[
+\text{dev}*{0:2},
+\qquad
+\text{dev}*{3:9},
+\qquad
+\text{dev}_{0:9}.
+]
+
+If 3–9 look similar, then choose broad parameter intervals using the ten-world result. If there's material drift, make the sealed interval wide enough to encompass that rather than centering aggressively on the all-ten mean.
+
+I would not pretend 3–9 are sealed; they're development. They're just diagnostically cleaner.
+
+---
+
+### 5. Freeze a few diagnostics that are **not** pass/fail criteria
+
+You have 5.3 abstractions for two families. I would record, before sealing:
+
+* pairwise functional distances among promoted abstractions;
+* reuse count per abstraction;
+* functional equivalence clustering / effective library size;
+* abstraction birth time;
+* post-birth cumulative predictive advantage;
+* (C_{\rm search});
+* family/global/zero LOO audit.
+
+Don't make these additional gates.
+
+They're for explaining what happens.
+
+In particular, I suspect sealed runs will show that several of your 5-ish abstractions are functionally redundant or successive refinements. If so, that's the empirical justification for **MERGE**:
+
+[
+\boxed{
+\operatorname{PROMOTE}\text{ works, but births create fragmentation}
+\rightarrow
+\operatorname{MERGE}.
+}
+]
+
+That would be a perfect next-rung result.
+
+---
+
+### 6. Clarify the surrendered-control bookkeeping
+
+You wrote that the “single surrendered control” is the drifting-family and regime-change worlds remaining development-only.
+
+Strictly, that sounds like **two** control constructions.
+
+If your rung discipline really allows one surrendered control, define them explicitly as one predeclared **nonstationarity control family**, or pick one to surrender and keep the other sealed.
+
+It's procedural rather than scientific, but worth fixing before the immutable plan is hashed.
+
+---
+
+# I really like the shape of the development result
+
+The key numbers are now not marginal:
+
+[
+\Delta L=+1350\text{ nats}
+]
+
+[
+\Delta J_{\rm two-part}=+55,697\text{ nats}
+]
+
+[
+D_{\rm total}\downarrow63.6%
+]
+
+with:
+
+[
+10/10
+]
+
+on every sign.
+
+And importantly, these aren't all reflections of the same metric.
+
+One says:
+
+> **The representation is smaller.**
+
+Another says:
+
+> **The learner predicts better.**
+
+And H11.3 says:
+
+> **The learned abstraction changes the economics of subsequent learning.**
+
+That's the combination I've been waiting for.
+
+---
+
+# The simultaneous “smaller + better” result deserves a frozen diagnostic
+
+I suspect promotion is denoising.
+
+Twenty-four private residuals are independent noisy estimates of some underlying family computation. Functional fitting pools them:
+
+[
+R_1,\ldots,R_n
+\rightarrow
+A.
+]
+
+So (A) may be a better estimate of the actual recurring computation than any individual (R_i).
+
+Test post-hoc:
+
+[
+d(A,F_{\rm teacher})
+]
+
+versus:
+
+[
+\operatorname{median}*i d(R_i,F*{\rm teacher}).
+]
+
+Teacher access is fine for this analysis instrument.
+
+If:
+
+[
+d(A,F^*)<d(R_i,F^*),
+]
+
+you have a beautiful explanation:
+
+[
+\boxed{
+\textbf{Abstraction pays twice: amortization compresses repeated information,
+and pooling repeated evidence improves estimation.}
+}
+]
+
+That could explain the (+1,350)-nat predictive gain rather than leaving it as a pleasant surprise.
+
+Again: diagnostic, not sealed criterion.
+
+---
+
+# The M3 curve could tell you the next bottleneck
+
+For future tasks, plot cumulative prequential advantage against number of examples:
+
+[
+\Delta L_{\rm future}(n),\qquad n=1,\ldots,32.
+]
+
+If the promoted model wins almost immediately:
+
+[
+n=1,2,4,
+]
+
+then the library behaves as a powerful prior and **retrieval is already cheap**.
+
+If the curves only diverge after 8–16 examples, then the abstraction is useful but the learner needs substantial evidence to identify the right one.
+
+That would tell you exactly what Phase III needs to improve:
+
+[
+\boxed{\text{abstraction access / recognition}}.
+]
+
+This is more informative than the 32-shot endpoint alone.
+
+---
+
+# What I would not do now
+
+I would **not**:
+
+* fix the false promotions;
+* add MERGE;
+* switch to gated wake;
+* improve the fixed rank-2 abstraction family;
+* introduce parameterized abstractions;
+* alter the prospective estimator;
+* improve the testbed again.
+
+Those are all interesting **after the sealed result**.
+
+Right now you have a model that does the thing.
+
+Freeze it.
+
+---
+
+## And I'd be precise about what V3 would establish if sealed replicates
+
+Not:
+
+> neural networks spontaneously invent abstractions in general.
+
+And not:
+
+> MDL automatically produces programs.
+
+Rather:
+
+> **In a controlled continual-learning environment where recurring private computation is behaviorally reusable but cannot be absorbed by existing shared capacity, an explicit promotion mechanism can identify that recurrence functionally, create new addressable shared computation, replace repeated task-local information with references, reduce total retained description length, and lower the learning cost of subsequent related tasks.**
+
+That is already a substantial result.
+
+And I think the most important conceptual upgrade from the four failed testbeds is:
+
+[
+\boxed{
+\text{PROMOTE should not mean “find something similar.”}
+}
+]
+
+It means:
+
+[
+\boxed{
+\textbf{find private computation that is load-bearing,
+cross-task substitutable,
+more specific than a generic shared approximation,
+and valuable on data it was not fitted to;
+then allocate shared capacity to it.}
+}
+]
+
+That's a far more defensible definition of abstraction than where V3 began.
+
+If the 30 sealed worlds replicate roughly what you're seeing now, I would regard **the base case of Neural Library Learning as experimentally demonstrated**. The next question then really is whether the mechanism recurses: can these newly born abstractions themselves become components of higher-level abstractions?
+
+That’s clean enough that I would freeze exactly now.
+
+The control separation is much stronger than the early 3-world picture:
+
+[
+\text{reuse ratio}=2.48\times
+]
+
+[
+\text{library ratio}=1.83\times
+]
+
+and, more importantly, the **decision balance flips**:
+
+[
+\text{structured: promote}>\text{refuse}
+]
+
+[
+\text{control: refuse}>\text{promote}.
+]
+
+That’s a much better behavioral signature than demanding zero false promotions. A rational promoter does not need perfect specificity on every local decision; it needs to allocate substantially more persistent capacity when recurrence is real.
+
+I would preserve the stronger original statement as falsified, though:
+
+> Absolute refusal in structureless worlds: **falsified on development.**
+
+Then register the graded result separately:
+
+> Prospective promotion discriminates structured from structureless experience through both creation rate and subsequent reuse.
+
+That makes the eventual paper harder to criticize.
+
+The other thing I like is that **reuse separates more strongly than birth**:
+
+[
+2.48\times\text{ reuse}
+
+>
+
+1.83\times\text{ library size}.
+]
+
+I suspect that will become conceptually important. Creation is noisy; usefulness is revealed over time. That naturally suggests:
+
+[
+\text{speculative birth}
+\rightarrow
+\text{usage evidence}
+\rightarrow
+\text{retain / merge / delete}.
+]
+
+In other words, V4 may not need to make PROMOTE perfectly conservative. It may need to make the *library lifecycle* rational.
+
+At this point I would touch nothing before sealed results. In particular, no:
+
+* threshold refinement;
+* gated wake switch;
+* MERGE;
+* false-positive cleanup;
+* abstraction-family changes;
+* new prospective estimator.
+
+The dev result is already strong enough that further improvement would mostly make the sealed test less informative.
+
+What I’d watch in the sealed block is not only pass/fail but **which quantities replicate tightly**. My rough expectation is:
+
+* (D_{\text{total}}) reduction should replicate very strongly;
+* two-part gain should replicate strongly;
+* lifetime prediction gain should be somewhat noisier;
+* H11.3 future-task gain probably has the largest variance;
+* refusal/reuse discrimination should remain positive but may drift more than the main compression result;
+* library size may wander quite a bit because fragmentation is not yet controlled.
+
+If sealed gives something close to the development picture, especially:
+
+[
+D_{\rm task}\downarrow,\quad
+D_{\rm shared}\uparrow,\quad
+D_{\rm total}\downarrow
+]
+
+plus
+
+[
+\Delta L_{\rm lifetime}>0
+]
+
+plus
+
+[
+\Delta L_{\rm future}>0,
+]
+
+then I think you can make a fairly strong statement:
+
+> **V3 demonstrates abstraction birth in the operational sense relevant to the project: repeated private computation becomes newly created, addressable shared computation, reducing retained description length and improving subsequent learning.**
+
+And I’d say the biggest thing the research program will have learned is that the abstraction mechanism is not simply “compress similar things.” The failed worlds forced a much richer criterion:
+
+[
+\boxed{
+\text{load-bearing}
++
+\text{cross-task substitutable}
++
+\text{better than global compression}
++
+\text{prospectively useful}
+}
+]
+
+That’s a much more serious definition of a reusable abstraction.
+
+So yes: freeze, hash, launch sealed. This is exactly the moment where the experiment needs to be allowed to surprise you again.
+
