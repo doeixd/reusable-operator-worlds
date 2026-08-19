@@ -361,3 +361,42 @@ Durable rule. A structural sharing claim needs a MATCHED-BUDGET private
 baseline, not only a no-sharing baseline. "Shared beats unshared at full
 precision" and "shared beats unshared at equal bits" are different
 claims, and only the second supports reuse.
+
+# V4R census, RETAIN cell — BLOCKED by V3's promotion false-positive rate (2026-08-19)
+
+Three dormancy designs have now failed to instantiate retention value,
+and the third identifies the structural cause rather than adding another
+null.
+
+  1. Gap (32, 64): the returning arm resumes at the final task, so both
+     arms are byte-identical for the whole lifetime and score alike.
+  2. Gap (32, 62), two returners, below `minimum_cluster = 3`: the OTHER
+     task group keeps promoting through the return window, so post-gap
+     births occur in both arms and the dormant family's option is not
+     isolated.
+  3. Single family (`--task-groups 1`), gap (32, 48), registered in
+     V4R §2.1 as the fix for (2): STILL fails. Abstractions are born at
+     or after sleep 48 in the PERMANENT arm — worlds 0 and 2 — where the
+     family never returns and every post-gap task is background noise.
+
+Diagnosis. The confound is not the world. It is a known property of the
+V3 learner, already recorded: PROMOTE fires in structureless controls,
+creating 2.9-3.0 abstractions where there is no family at all. A
+retention experiment asks whether the learner needed to KEEP an
+abstraction; that question is unanswerable while the learner
+manufactures replacement abstractions from noise at a comparable rate,
+because deletion is never actually costly.
+
+Consequence for V4R. The census's RETAIN cell cannot be measured on this
+learner in the online setting. Two admissible routes, neither yet taken:
+freeze the library after the gap so the retain-versus-delete comparison
+is not contaminated by fresh promotion, which keeps the census offline
+and oracle-only as V4R §1 requires; or reduce PROMOTE's false-positive
+rate first, which is a change to the frozen V3 substrate and therefore a
+separate rung with its own gate.
+
+Durable rule. A refusal control is only as clean as the baseline rate of
+the behavior it asks the learner to refuse. Before building a world in
+which an operator must NOT fire, measure how often the mechanism fires
+with no cause present; if that rate is comparable to the effect, no
+world design can rescue the control.
