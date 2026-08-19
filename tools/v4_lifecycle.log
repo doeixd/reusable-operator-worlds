@@ -15,3 +15,18 @@
 14:53:46 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\control\world_2\lifecycle_on
 14:53:46 V4_LIFECYCLE_COMPLETE
 15:04:40 V4.1 starting: 6 cells, jobs=4
+15:06:40 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_returns\world_0\lifecycle_on
+15:06:44 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_returns\world_1\lifecycle_on
+15:06:44 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_returns\world_2\lifecycle_on
+15:06:44 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_permanent\world_0\lifecycle_on
+15:08:25 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_permanent\world_1\lifecycle_on
+15:08:25 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_permanent\world_2\lifecycle_on
+15:08:25 V4_LIFECYCLE_COMPLETE
+15:10:25 V4.1 starting: 6 cells, jobs=4
+15:11:52 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_returns\world_0\lifecycle_on
+15:11:57 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_returns\world_1\lifecycle_on
+15:11:57 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_returns\world_2\lifecycle_on
+15:11:57 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_permanent\world_0\lifecycle_on
+15:13:40 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_permanent\world_1\lifecycle_on
+15:13:41 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_permanent\world_2\lifecycle_on
+15:13:41 V4_LIFECYCLE_COMPLETE

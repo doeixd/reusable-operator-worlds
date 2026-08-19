@@ -1558,3 +1558,46 @@ tolerance, which is the discrimination we want.
 
 Next: V4.2 synthetic merge (refit one abstraction covering several
 distinct contributions), which the gate does not block.
+
+# V4.1 blocked on BOTH routes; V4.2 factorization gate passes (2026-08-19)
+
+Route 1, REDUNDANCY, already failed (retraction above). Route 2 is
+OBSOLESCENCE, which the §2.2 dormancy pair exists to test, and which the
+plain structured world cannot contain because its families stay live to
+the end. Built `audit_obsolescence.py` and ran the pair.
+
+First configuration was wrong and the control caught it. With
+`dormancy = (32, 64)` the returning regime resumes exactly at the last
+task, so the RETURNS arm never returns and both arms were byte-identical
+for the whole lifetime; they scored identically to the last nat. Fixed
+to `(32, 48)`, leaving 16 resumed tasks.
+
+With the corrected gap the arms differ but the REFUSAL CONTROL FAILS.
+The permanent arm retires at t_d in {24: 4, 32: 1, 48: 3, 64: 2} and the
+returning arm at {24: 4, 32: 1, 48: 3, 64: 1} — indistinguishable. The
+returning arm is supposed to retain through the gap and does not want
+to. Diagnosis: after the gap the learner PROMOTES FRESH abstractions
+rather than reusing the dormant one, so there is no retention obligation
+for the control to refuse. The world does not yet test real options.
+
+Consequence: V4.1 is blocked on redundancy AND on obsolescence, and no
+RETIRE operator may be tuned against either. The obsolescence auditor now
+refuses to report a single-arm verdict at all, because deleting at the
+final consolidation point removes bits and charges nothing for
+already-scored tasks, so end-of-life cleanup always "pays".
+
+V4.2 FACTORIZATION GATE — PASSES. Ran the behavioral function-space
+diagnostic (never parameter space, per V3's gauge-freedom result): is
+A_i(z) ~ C(z) + sum_k a_ik B_k(z)? A shared mean plus a rank-2 functional
+family captures 83.4 / 67.7 / 78.7 percent of the abstraction-to-
+abstraction spread in worlds 0-2. With m points the spread has at most
+m-1 dimensions, so these are scored against an isotropic null of
+67.7 / 41.5 / 51.4 percent: excesses of +15.7, +26.2, and +27.3 points,
+positive 3/3. Proxy bits fall from 6,336 / 9,504 / 7,920 to about 4,830
+under a shared C plus rank-2 basis plus 8-bit coefficients.
+
+This is a DIAGNOSTIC, not yet a result: 17-32% of the spread is
+unexplained at rank 2 and that residual distortion has not been priced
+in nats. Pricing it is exactly the mistake that produced the retracted
+H14 number, so the V4.2 build must compare refitted C + Delta_i against
+the original A_i in held-out Gaussian loss before any claim is made.

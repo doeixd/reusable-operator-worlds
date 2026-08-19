@@ -591,3 +591,101 @@ on a known weakness. Gives the precise defensible sealed claim and concludes
 the project has done something rare: a genuine experimental apparatus with
 real rigor around a question that matters, honest about negative results,
 reaching a legitimate miniature of what it set out to study.
+
+### [reviewer-feedback-28.txt](reviewer-feedback-28.txt)
+Responds to the V4.1 gate result. The gate uncovered the actual V4.1 problem:
+V3 does not mainly have a bad-abstraction problem; it has a
+**representation-fragmentation** problem. The 4–6 births are largely multiple
+usable representatives of 1–2 recurring computations, and oracle gains of
+~3.3–4.4k nats show cleanup is economically meaningful. Key recommendations:
+(1) Rename the primitive conceptually to **REHOME + RETIRE** (or library
+compaction) — dependents(A)→B, A→∅; the computation isn't forgotten, an
+unnecessary implementation is eliminated. (2) DELETE and MERGE aren't
+inseparable: representative merge (A→B, redirect references, no fitting) is
+distinct from synthetic merge (A+B→C*, refit). This gives a cleaner V4
+decomposition: V4.1 select among existing representatives, V4.2 synthesize a
+better shared representative when none exists; don't cancel V4.2, redefine
+MERGE as refit-required consolidation. (3) Build an **exact V4.1 compaction
+oracle** — at K≤7, search all 2^7=128 subsets for the cheapest surviving set
+that behaviorally covers all dependents; gives R_compaction = J_online −
+J*_subset. (4) Don't call these equivalence classes — approximate
+substitutability need not be transitive and may be asymmetric; use a
+**substitution graph** (A→B if all dependents of A can be re-homed onto B),
+making V4.1 a covering problem (connects to set cover/facility location).
+(5) **H14b may be the wrong endpoint** — survival fraction can be identical
+(2/6 vs 1/3) while behavior is perfect; prefer reuse density
+(tasks served / surviving abstractions) and value density
+(savings / D(surviving library)). (6) Weakens the "speculative birth"
+framing — V3's PROMOTE isn't especially liberal; the precise phenomenon is
+"birth is locally rational but globally redundant" (independent promotion
+events produce redundant estimates; subsequent functional substitution reveals
+which implementations are unnecessary). (7) Gives sleep a clearer purpose:
+wake discovers useful computations locally, sleep globally refactors their
+representation. (8) Charge reference migration now — it's the central V4.1
+operation; report ΔD_library, ΔD_references, C_rehome, C_validation separately.
+(9) Causal control: random retirement vs usage-based vs functional-substitution;
+if functional wins, the gain is semantic redundancy detection, not "library
+too big." (10) Measure whether consolidation improves estimation (best existing
+representative vs refitted centroid A* — this is the V4.1/V4.2 boundary).
+(11) Semantic-regression suite is now load-bearing (chained A→B→C can violate
+tolerance even if each step passes). (12) Names the conceptual object a
+**behavioral cover** — the smallest/cheapest subset C⊆L such that every
+dependent τ has some A∈C that substitutes within tolerance. Revised V4 roadmap:
+V4.1 COMPACTION (select minimal useful subset), V4.2 CONSOLIDATION
+(synthesize/refit new representatives), V4.3 EVOLUTION (copy-on-write + FORK),
+V4.4 RETENTION ECONOMICS (dormancy, real options, true obsolescence, hysteresis).
+Predicts for worlds 0–2: D improves ~3–4.5k nats, prediction non-inferior,
+library should collapse (4→1, 6→2, 5→1), reuse density rises dramatically.
+
+### [reviewer-feedback-29.txt](reviewer-feedback-29.txt)
+Responds to the V4.1 gate **failure** (the retraction). Calls it a good
+failure — the retraction is exactly the right move, and it changes the
+interpretation usefully: V3's extra abstractions are **not duplicates**. They
+are distinct learned implementations that each carry real behavioral
+contribution, even though the teacher world has only two hidden families. The
+normalized substitution result is decisive: costs 0.86–1.60× the abstraction's
+own contribution, 99–100% of pairs fail a 10% tolerance, and exact
+behavioral-cover compaction has **negative** net value in all three worlds.
+RETIRE cannot improve this library by redirecting references. Distinguishes
+three operations that were conflated: (1) RETIRE/DELETE (genuine obsolescence,
+A→∅), (2) REDUNDANCY ELIMINATION (A→B, redirect and discard — V3's library
+has almost none of this), (3) SYNTHETIC MERGE (A+B→C+ε_A+ε_B, neither can
+replace the other but a fitted C captures their shared component — this is now
+the interesting problem). Recommends moving directly to V4.2 but reframing it:
+not "fit one abstraction to replace two" (too close to generic compression) but
+"can multiple behaviorally distinct abstractions contain a **reusable common
+factor** that is cheaper to represent explicitly?" — this is **anti-unification**,
+closer to the program-synthesis vision. Notes this may be the first real test
+of abstraction over abstractions (information moves up: task→abstraction→shared
+structure among abstractions = hierarchical abstraction within one operator
+level). The V4.2 oracle gate: fit C* and per-abstraction Δ_i, compare D_before
+= Σ D(A_i) vs D_after = D(C*) + Σ [D(ref C*) + D(Δ_i)], require L_after ≤
+L_before+ε, gate on J*_factored < J_existing — if not, don't tune MERGE (same
+discipline that saved V4.1). The audit table: original (behavioral ceiling),
+shared C+Δ_i (real factorization), one C no deltas (generic collapse), delete
+one (redundancy elimination), zero baseline (deletion). Suggests **parameterized
+abstraction** may finally become necessary: if the 4–6 abstractions are different
+instantiations of a common family A_i(z) ≈ A(z; α_i), the right merge is
+{A_i} → A(·; α_i) — multiple discrete abstractions → parameterized abstraction,
+a representation transition the project wanted to test. Cheap diagnostic
+before implementing: functional PCA on pairwise differences A_i(z)−A_j(z); if
+low-rank (K=1 or 2 captures most variation), the "five concepts" are points on
+a small operator manifold, connecting back to V2's continuous-manifold result.
+Sees a possible **synthesis of V2 and V3**: partial recurrence favored
+continuous manifolds, exact recurrence favored discrete atoms; V3 creates
+several distinct atoms for two families; V4 may discover several atoms → shared
+parameterized manifold, making representation learning capable of changing
+granularity and type (private residual → atom → parameterized family). H14
+stands as written and awaits a nonstationary testbed — stationary V3 contains
+no genuine obsolescence by construction. Revised V4 ordering: V4.1 attempted
+RETIRE (gate failure, recorded), V4.2 SYNTHETIC FACTORIZATION, V4.3
+COPY-ON-WRITE/FORK, V4.4 true RETIRE + hysteresis with nonstationarity.
+Caution on normalized tolerance: report both Δ_absolute and
+Δ_substitution/Δ_zero-ablation — the latter drives the structural claim but
+tiny components can make ratios look huge. Methodological rule: judge
+substitutability relative to the behavioral contribution being replaced, not
+total task variance. Concludes the retraction strengthens the project — the
+scientific discipline makes eventual positive results believable, and the
+surviving conclusion is richer: V3 births are distinct computations, and the
+next question (irreducibly distinct vs different instantiations of a smaller
+basis?) is a very good V4 question.

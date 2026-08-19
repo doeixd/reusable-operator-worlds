@@ -17,10 +17,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 LOG = ROOT / "tools" / "v4_lifecycle.log"
 SLEEPS = ("24", "32", "48", "64")
-# §2.2: family goes quiet at 32. Late enough for the abstraction to be
-# established and reused, early enough that the remaining 32 tasks make
-# obsolescence measurable in the final description.
-DORMANCY = (32, 64)
+# §2.2: family goes quiet at 32 and, in the RETURNS arm, resumes at 48.
+# The gap must CLOSE strictly before the lifetime ends: with (32, 64) the
+# regime resumes exactly at the last task, so the returning arm never
+# actually returns and the two arms stay byte-identical for the whole run
+# -- the refusal control then scores identically to the permanent arm and
+# tests nothing. 16 resumed tasks make the return observable.
+DORMANCY = (32, 48)
 
 
 def log(message: str) -> None:
