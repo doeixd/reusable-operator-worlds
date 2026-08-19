@@ -689,3 +689,65 @@ scientific discipline makes eventual positive results believable, and the
 surviving conclusion is richer: V3 births are distinct computations, and the
 next question (irreducibly distinct vs different instantiations of a smaller
 basis?) is a very good V4 question.
+
+### [reviewer-feedback-30.txt](reviewer-feedback-30.txt)
+Endorses the V4.2 activation and the functional-PCA diagnostic result. The
+gate has prevented testing an operation where it has no economic reason to
+exist, twice in a row. V4 state is now clean: redundancy elimination (no
+opportunity), true retirement (no opportunity yet), higher-order factorization
+(opportunity exists). Recommends renaming the operation from MERGE to
+**FACTORIZE / PARAMETERIZE / EXTRACT FAMILY** — the diagnostic suggests
+A_i(z) ≈ C(z) + Σ α_ij B_j(z) + E_i(z) (shared center, small reusable
+functional basis, cheap per-abstraction arguments, small remaining innovation),
+which is much richer than A_1,A_2→C and makes the V2 connection explicit
+(several atoms → one parameterized abstraction). The 67–83% R² result is
+encouraging but the isotropic null was essential (with only m abstractions,
+rank 4 explains everything arithmetically); the meaningful result is the
++15.7/+26.2/+27.3 point excess over the matched null at rank 2. Agrees proxy
+bits are only a proposal-stage diagnostic — does not yet say
+D_factorized < D_atoms at matched behavior. Proposes three gates for V4.2:
+Gate 1 existence (R²_observed − R²_null > 0, basically passed), Gate 2 economic
+factorization (J_factorized < J_original with real held-out loss and retained
+bits), Gate 3 prospective parameterization (can the learned family make a new
+abstraction cheaper to acquire — the analogue of V3's H11.3). The economic
+gate must be ruthless: compare D_before = Σ D(A_i) against D_after =
+D(C) + Σ D(B_j) + Σ [D(α_i) + D(E_i) + D(references)] + D_select, scored as
+J = L + λD; if the 17–32% unexplained variation requires expensive E_i, the
+compression may vanish (real falsification). Nasty loophole: don't let E_i
+restore full capacity — explicitly measure D(E_i)/D(A_i) and require
+D(E_i) ≪ D(A_i) with substantial shared behavioral capture (the V4.2 analogue
+of V3's global/family/zero control). Needs a stronger null than isotropic: add
+an **independent compression baseline** (give each abstraction its own rank-2
+approximation and charge independently; if the shared C+Bα model wins, the
+gain is cross-abstraction reuse, not individual overparameterization —
+load-bearing). The most important V4.2 instrument: **leave-one-abstraction-
+out** — fit C,B_{1:k} on A_1..A_{m-1}, then take held-out A_m and infer only
+its small argument α_m from proposal probes; compare learn-full /
+independent-compressed / family / family+E / global-only. If a new
+abstraction → learn a few arguments instead of a whole operator works, that's
+an enormous result: V4 has learned not merely reusable computations but a
+reusable **space of computations**, unifying V2 (partial recurrence →
+continuous manifolds) and V3 (strong recurrence → discrete atoms) — V4 shows
+several atoms can refactor into a shared operator family + arguments, making
+representation type fluid (private → atom → parameterized family). Gauge
+freedom will bite again at the serialization boundary: functional factorization
+must become compact realizable neural factorization; separate behavioral
+oracle factorization, realizable neural factorization, and discoverable
+factorization (existence ≠ representation ≠ discovery). Endorses the RETIRE
+dormancy failure as a world failure, not a retention-policy failure: when the
+regime returns the learner simply PROMOTE(A') so the dormant abstraction has
+little option value; final-step deletion is inherently a null edit; the
+"no single-arm verdict" guard is excellent. When revisiting true RETIRE, the
+world needs **retrieval continuity** — the returning regime must make reusing
+dormant A materially cheaper than relearning/promoting A' (reacquisition cost
+C_reacquire = L_extra + λD_temporary + C_search). Revised V4 ladder: V4.1
+RETIRE/REDUNDANCY (gate failure, important negative result), V4.2
+FACTORIZE/PARAMETERIZE (primary active rung), V4.3 COPY-ON-WRITE/FORK, V4.4
+RETENTION ECONOMICS (build a world where dormancy creates measurable
+reacquisition cost). The broader insight: V4's abstractions aren't garbage,
+they're **useful but over-specific** — the failure mode is not "bad concept →
+DELETE" but "several useful specifics → discover the general thing they
+instantiate," which is the textbook notion of abstraction. V3 showed repeated
+task-local computations can become a reusable object; V4 may show repeated
+reusable objects can themselves become instances of a more general reusable
+schema — more interesting than the original garbage-collection story.

@@ -1260,3 +1260,64 @@ H14 stands as written and awaits a nonstationary testbed. The retraction
 strengthens the project: the scientific discipline (correct normalization killed
 a +2,928-nat artifact) makes eventual positive results believable, and the
 surviving conclusion is richer than the one it replaced.
+
+
+================================================================================
+V4.2 DIAGNOSTIC: LOW-RANK STRUCTURE EXISTS — BUT THE GATES ARE NOT YET PASSED
+================================================================================
+
+The functional-PCA diagnostic on pairwise differences A_i(z)−A_j(z) ran and
+found encouraging low-rank structure: R² at rank 2 reaches 67–83% of total
+abstraction variation across the three development worlds. The operation is
+renamed from MERGE to **FACTORIZE / PARAMETERIZE** — the model is
+A_i(z) ≈ C(z) + Σ α_ij B_j(z) + E_i(z) (shared center, small reusable
+functional basis, cheap per-abstraction arguments, small remaining innovation),
+which is richer than A_1,A_2→C and makes the V2 connection explicit.
+
+But three caveats apply. First, the isotropic null was essential: with only m
+abstractions, the empirical variation has rank at most m−1, so "rank 4 explains
+everything" is arithmetic. The meaningful result is the excess over a matched
+null: +15.7, +26.2, +27.3 points at rank 2. This says the abstraction variation
+is substantially more low-dimensional than generic variation with the same
+finite-sample geometry, but it does not yet say D_factorized < D_atoms at
+matched behavior. Proxy bits are only a proposal-stage diagnostic.
+
+Second, the economic gate (Gate 2) has not been passed. It requires:
+D_after = D(C) + Σ D(B_j) + Σ [D(α_i) + D(E_i) + D(references)] + D_select,
+scored as J = L + λD against D_before = Σ D(A_i), with real held-out Gaussian
+loss. A nasty loophole: if E_i has the same expressive capacity as the
+original A_i, the factorization is structurally meaningless (C+Bα_i becomes
+decorative while E_i ≈ A_i). Measure D(E_i)/D(A_i) and require D(E_i) ≪ D(A_i)
+with substantial shared behavioral capture — this is the V4.2 analogue of V3's
+global/family/zero control. Also add an **independent compression baseline**
+(each abstraction gets its own rank-2 approximation and is charged
+independently); if the shared C+Bα model wins, the gain is cross-abstraction
+reuse, not individual overparameterization. Existence ≠ representation ≠
+discovery: behavioral oracle factorization must become compact realizable
+neural factorization, which must be discoverable by the learner.
+
+Third, the decisive test is **leave-one-abstraction-out**: fit C,B_{1:k} on
+A_1..A_{m-1}, take held-out A_m, infer only its small argument α_m from
+proposal probes, and compare learn-full / independent-compressed / family /
+family+E / global-only. If a new abstraction → learn a few arguments instead
+of a whole operator works, V4 has learned a reusable **space of computations**
+— Gate 3, the prospective parameterization analogue of V3's H11.3.
+
+The broader insight: V4's abstractions aren't garbage, they're **useful but
+over-specific**. The failure mode is not "bad concept → DELETE" but "several
+useful specifics → discover the general thing they instantiate." V3 showed
+repeated task-local computations can become a reusable object; V4 may show
+repeated reusable objects can themselves become instances of a more general
+reusable schema. If the fully priced factorization and leave-one-abstraction-out
+test pass, that is more interesting than the original garbage-collection story,
+and it unifies V2 (partial recurrence → continuous manifolds) and V3 (strong
+recurrence → discrete atoms) by showing representation type is fluid: private →
+atom → parameterized family.
+
+The V4.1 RETIRE dormancy control also failed, correctly: when the regime returns
+the learner simply PROMOTE(A'), so the dormant abstraction has little option
+value. This is a world failure, not a retention-policy failure. Final-step
+deletion is inherently a null edit under the objective. True RETIRE requires a
+world with **retrieval continuity** — the returning regime must make reusing
+dormant A materially cheaper than relearning/promoting A' (reacquisition cost
+C_reacquire = L_extra + λD_temporary + C_search). V4.4 must build that world.

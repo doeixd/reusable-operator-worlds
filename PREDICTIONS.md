@@ -325,3 +325,39 @@ against the quantity whose loss it is licensing, not against total
 output scale. Any epsilon under which the null edit (delete everything)
 passes is measuring nothing, and a degenerate causal control is the
 symptom to look for.
+
+# V4.2 economic factorization — FAILS its independent-compression null (2026-08-19)
+
+The V4.2 gate as first scored PASSED 3/3: a shared centre plus a rank-1
+or rank-2 functional family beat both the behavioral ceiling cost and
+the rank-0 collapse null by 1,192-1,637 net nats on worlds 0-2, with
+both currencies priced (bits saved minus held-out Gaussian nats paid).
+
+It does not survive the matched-bit independent-compression control.
+Give each abstraction the SAME total bit budget the factorization costs,
+spent privately as coarser symmetric per-tensor quantization, and
+private storage wins in 9/10 development worlds. Net nats, shared versus
+matched-bit: 459/1,055, 1,192/3,153, 1,637/2,043, 1,450/2,028,
+1,584/2,129, -34/-34 (tie), 2,643/3,861, 1,610/2,974, 676/3,090,
+1,709/3,040. The single non-loss is a tie at a negative value.
+
+Reading. The apparent factorization gain was NOT cross-abstraction
+reuse. V3's abstractions are individually overparameterized -- each one
+survives coarse quantization nearly intact -- and a shared family
+captures less than private precision reduction does for the same bits.
+The rank-2 excess over the isotropic null (+15.7, +26.2, +27.3 points)
+is real geometry, but real low-dimensional geometry is not the same
+thing as an economically preferable representation.
+
+The prospective test is correspondingly weak. Leave-one-abstraction-out
+(fit centre and rank-2 basis on m-1 abstractions, infer ONLY the held-out
+one's two arguments, evaluate on disjoint audit probes) beats the
+centre-only baseline in 9/10 worlds, but recovers a mean of only about
+7.5% of the centre-only deficit (range -2.9% to +16.4%). A real operator
+family should let a new member be acquired from a couple of scalars;
+this one does not.
+
+Durable rule. A structural sharing claim needs a MATCHED-BUDGET private
+baseline, not only a no-sharing baseline. "Shared beats unshared at full
+precision" and "shared beats unshared at equal bits" are different
+claims, and only the second supports reuse.

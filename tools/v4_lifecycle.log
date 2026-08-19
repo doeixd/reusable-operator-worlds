@@ -30,3 +30,12 @@
 15:13:40 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_permanent\world_1\lifecycle_on
 15:13:41 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\dormancy_permanent\world_2\lifecycle_on
 15:13:41 V4_LIFECYCLE_COMPLETE
+15:18:28 V4.1 starting: 7 cells, jobs=4
+15:20:01 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\structured\world_3\lifecycle
+15:20:06 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\structured\world_4\lifecycle
+15:20:10 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\structured\world_5\lifecycle
+15:20:10 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\structured\world_6\lifecycle
+15:21:52 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\structured\world_7\lifecycle
+15:22:01 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\structured\world_8\lifecycle
+15:22:01 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\structured\world_9\lifecycle
+15:22:01 V4_LIFECYCLE_COMPLETE

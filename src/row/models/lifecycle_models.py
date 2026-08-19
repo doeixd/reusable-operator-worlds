@@ -469,3 +469,65 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
             "bits_saved": before - after,
             "rebuilt": rebuilt,
         }
+
+    @torch.no_grad()
+    def quantize_to_budget(self, bits_total: float) -> list[torch.Tensor]:
+        """Each abstraction stored privately at a MATCHED total bit budget.
+
+        The independent-compression null for V4.2. If the atoms can simply
+        be stored at coarser precision for the same bits the factorization
+        costs, then any apparent gain is "each abstraction was
+        individually overparameterized", not cross-abstraction reuse.
+        Symmetric per-tensor quantization, the scheme already used for
+        this project's retention proxies.
+        """
+
+        count = len(self.abstractions)
+        width = self.residual_u_size + self.residual_v_size + self.residual_b_size
+        per_scalar = max(1.0, bits_total / max(1, count * width))
+        levels = max(2, int(2 ** min(16.0, per_scalar)))
+        out = []
+        for parameter in self.abstractions:
+            vector = parameter.detach()
+            scale = float(vector.abs().max().clamp_min(1e-12))
+            step = 2 * scale / (levels - 1)
+            out.append(torch.round(vector / step) * step)
+        return out
+
+    def fit_argument(
+        self,
+        target: torch.Tensor,
+        centre: torch.Tensor,
+        basis: torch.Tensor,
+        probe: torch.Tensor,
+        steps: int = 300,
+        lr: float = 0.02,
+    ) -> torch.Tensor:
+        """Infer ONLY a held-out abstraction's arguments in a known family.
+
+        The prospective test (V4.2 Gate 3, the analogue of V3's H11.3): if
+        the family is real, a new abstraction costs `rank` scalars rather
+        than a whole operator. Fitted in behavior space on `probe`; the
+        caller must evaluate on DISJOINT probes, or this measures
+        memorization of the proposal set.
+        """
+
+        with torch.enable_grad():
+            alpha = torch.nn.Parameter(torch.zeros(basis.shape[0]))
+            with torch.no_grad():
+                wanted = torch.stack([
+                    self._innovation(probe, *self._split_residual(target), step)
+                    for step in range(self.task_steps)
+                ])
+            optimizer = torch.optim.Adam([alpha], lr=lr)
+            for _ in range(steps):
+                optimizer.zero_grad()
+                vector = centre + alpha @ basis
+                got = torch.stack([
+                    self._innovation(probe, *self._split_residual(vector), step)
+                    for step in range(self.task_steps)
+                ])
+                loss = torch.mean(torch.square(got - wanted))
+                loss.backward()
+                optimizer.step()
+        return alpha.detach()
