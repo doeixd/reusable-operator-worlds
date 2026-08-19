@@ -780,3 +780,15 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   their design lesson; the discussion closes on the four-line research
   map; figure list extended with the interval-overlay, sealed
   allocation, and gate-shape figures.
+- Ran the two non-gating pre-registered analyses. 006c FAILED its
+  prediction informatively: route posteriors are deterministic at both
+  rho endpoints given the full record and 510/512 routes are
+  functionally distinct, so gate v2's under-firing is re-attributed to
+  the absolute-NMSE bar (hard routes cannot behaviorally substitute for
+  mixtures in a mixture-trained basis); the spec's H8 mechanism
+  sentence, the paper, and the synthesis note were corrected in the
+  same commit, and the correct V3 gate question becomes behavioral
+  substitutability rather than posterior identification. 006d is weakly
+  supported: participation ratio declines monotonically (6.5 to 5.1)
+  but without regime structure — the three regimes do not manifest as a
+  linear-dimensionality transition.

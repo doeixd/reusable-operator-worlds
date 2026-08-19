@@ -946,6 +946,16 @@ then seeds 100–129). No V2 training before that, with one exception — the
       collapsing toward identifiable atoms at rho = 1 — turning the
       three-regime claim from inference-across-instruments into one
       measured transition.
+      **STATUS (run 2026-08-19, reports/v2_dimensionality/): WEAKLY
+      SUPPORTED.** Participation ratio of 64 task-function signatures
+      declines monotonically in the predicted direction (6.5 at rho = 0
+      to 5.1 at rho = 1, worlds 1-2) but only by ~20%, with no sharp
+      regime structure: the continuous learner represents the task
+      family in ~5-6 effective linear dimensions at EVERY recurrence
+      level. The three regimes are real in recovery and transfer but do
+      not manifest as a linear-dimensionality transition; any V3 use of
+      dimensionality as an instrument should expect a weak signal or use
+      nonlinear measures.
     Also recorded for V3 from the same review: observable recurrence
     estimators from learning dynamics (gradient alignment, one-step
     transfer benefit) validated against ground truth — the piece a

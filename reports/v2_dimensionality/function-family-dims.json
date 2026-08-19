@@ -1,0 +1,60 @@
+{
+  "scope": "006d pre-registered analysis: intrinsic dimensionality of the task-conditioned function family (64 task signatures on common probes), worlds 1-2 across all rho",
+  "prediction": "high-dimensional at rho~0; low-dimensional manifold at partial recurrence; collapse toward atoms at rho=1",
+  "rows": [
+    {
+      "configured_rho": 0.0,
+      "mean_participation_ratio": 6.5133442878723145,
+      "mean_components_for_90pct": 6.5,
+      "per_world_pr": [
+        6.32484769821167,
+        6.701840877532959
+      ]
+    },
+    {
+      "configured_rho": 0.25,
+      "mean_participation_ratio": 6.048589706420898,
+      "mean_components_for_90pct": 6.0,
+      "per_world_pr": [
+        6.333008289337158,
+        5.764171123504639
+      ]
+    },
+    {
+      "configured_rho": 0.5,
+      "mean_participation_ratio": 6.206334114074707,
+      "mean_components_for_90pct": 6.0,
+      "per_world_pr": [
+        6.213168144226074,
+        6.19950008392334
+      ]
+    },
+    {
+      "configured_rho": 0.75,
+      "mean_participation_ratio": 6.263373851776123,
+      "mean_components_for_90pct": 6.0,
+      "per_world_pr": [
+        6.220808982849121,
+        6.305938720703125
+      ]
+    },
+    {
+      "configured_rho": 0.9,
+      "mean_participation_ratio": 5.424525499343872,
+      "mean_components_for_90pct": 5.5,
+      "per_world_pr": [
+        5.459822654724121,
+        5.389228343963623
+      ]
+    },
+    {
+      "configured_rho": 1.0,
+      "mean_participation_ratio": 5.114835739135742,
+      "mean_components_for_90pct": 5.0,
+      "per_world_pr": [
+        5.007755756378174,
+        5.2219157218933105
+      ]
+    }
+  ]
+}
