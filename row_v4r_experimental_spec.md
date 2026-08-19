@@ -106,6 +106,50 @@ behavioral contribution carried by the shared family and the ratio
 `D(E_i) / D(A_i)`; a pass needs `D(E_i) << D(A_i)` **and** substantial
 shared capture.
 
+## 1.0 STATUS — census results, 2026-08-19
+
+Executed with the V3 learner frozen. Recorded here in the same commit as
+the measurements, per project convention.
+
+| cell | verdict | evidence |
+| --- | --- | --- |
+| COMPRESS | **dominates** | wins 12/12 regime-worlds over FACTORIZE across F in {2,4,8}, N in {64,128} |
+| FACTORIZE | **negative** | existence gate passes (rank-2 excess over isotropic null +15.7/+26.2/+27.3 points) but the matched-budget economic gate fails 9/10 worlds; leave-one-abstraction-out recovers a mean 7.5% |
+| RETIRE | **negative** | obsolescence oracle's refusal control does not refuse |
+| RETAIN | **positive (oracle)** | frozen-library oracle: crossover between gap 8 (+1,594, 7/10) and gap 16 (-240); refusal control passes 0/9 in the permanent arm |
+| FORK | **unresolved** | the private-residual upper bound is too loose to discriminate; needs an actual A' refit |
+
+**Registered prediction 1.1 outcome: FALSIFIED.** "Many related atoms
+favors FACTORIZE" is not supported anywhere sampled. Library size is not
+monotone in family count — F=8 yields SMALLER libraries (3-4) than F=4
+(6-9), because 64 tasks split eight ways leaves too few per family to
+reach `minimum_cluster = 3`, so the scale axis must be driven by N. At
+N=128 libraries reach 9-12 and COMPRESS's margin WIDENS rather than
+closing. No `M*_factorize` exists below about twelve abstractions.
+
+**The economic survival rule does not discriminate.** With the correct
+counterfactual — the task's own private residual, in a two-part
+comparison — every abstraction repays its description cost: 15/15
+structured and 10/10 control, by 3x to 20x. An earlier claim that the
+carry cost separates PROMOTE's false positives is RETRACTED in
+`PREDICTIONS.md`; it used raw ablation, an alternative the learner never
+faces. PROMOTE is not creating uneconomic abstractions, and an
+abstraction over noise still beats storing that noise n times.
+
+**What does discriminate is the RATE.** Prediction nats given up per
+description nat saved is 0.194/0.190/0.164 in structured worlds against
+0.321/0.300/0.275 in controls, lower 3/3, mean paired difference +0.116.
+Both trades are profitable — 0% reach the break-even rate of 1.0 — so
+this is a quality diagnostic, not grounds for refusing promotions. Note
+the standing tension: the principled threshold `T_A = lambda * D(A)` is
+untuned but does not sort, while the rate sorts but any cutoff on it
+would be a tuned hyperparameter.
+
+**Blocked.** The online route to RETAIN requires PROSPECTIVE value.
+An at-birth filter fails because an abstraction has its minimum
+dependent set exactly when the decision is made; implemented and
+measured, it collapses libraries in both conditions.
+
 ## 1.1 The sweep
 
 Worlds 0-2 are sufficient for an opportunity map; ten worlds are for
