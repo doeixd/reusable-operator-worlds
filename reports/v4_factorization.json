@@ -1,0 +1,149 @@
+[
+  {
+    "world_seed": 0,
+    "abstractions": 4,
+    "ceiling_loss": -267353.1591479353,
+    "floor_loss": -263501.2021843483,
+    "contribution_nats": 3851.9569635869702,
+    "ranks": [
+      {
+        "rank": 0,
+        "loss": -264652.97085755656,
+        "loss_cost_vs_ceiling": 2700.188290378719,
+        "relative_distortion": null,
+        "bits_before": 6336,
+        "bits_after": 1584,
+        "bits_saved_nats": 3293.83540202086,
+        "net_nats": 593.6471116421408
+      },
+      {
+        "rank": 1,
+        "loss": -266575.5703679097,
+        "loss_cost_vs_ceiling": 777.5887800256023,
+        "relative_distortion": 0.31076815560395005,
+        "bits_before": 6336,
+        "bits_after": 3200,
+        "bits_saved_nats": 2173.7095582359884,
+        "net_nats": 1396.120778210386
+      },
+      {
+        "rank": 2,
+        "loss": -266758.4248529864,
+        "loss_cost_vs_ceiling": 594.7342949488666,
+        "relative_distortion": 0.13285949027700236,
+        "bits_before": 6336,
+        "bits_after": 4816,
+        "bits_saved_nats": 1053.5837144511167,
+        "net_nats": 458.84941950225016
+      },
+      {
+        "rank": 4,
+        "loss": -267365.3331569921,
+        "loss_cost_vs_ceiling": -12.174009056820069,
+        "relative_distortion": 0.001017847550510928,
+        "bits_before": 6336,
+        "bits_after": 8048,
+        "bits_saved_nats": -1186.6679731186264,
+        "net_nats": -1174.4939640618063
+      }
+    ]
+  },
+  {
+    "world_seed": 1,
+    "abstractions": 6,
+    "ceiling_loss": -307112.37445204996,
+    "floor_loss": -296956.65558188554,
+    "contribution_nats": 10155.718870164419,
+    "ranks": [
+      {
+        "rank": 0,
+        "loss": -298273.1576731719,
+        "loss_cost_vs_ceiling": 8839.216778878064,
+        "relative_distortion": null,
+        "bits_before": 9504,
+        "bits_after": 1584,
+        "bits_saved_nats": 5489.725670034767,
+        "net_nats": -3349.4911088432973
+      },
+      {
+        "rank": 1,
+        "loss": -301556.595352448,
+        "loss_cost_vs_ceiling": 5555.779099601961,
+        "relative_distortion": 0.5482073748544023,
+        "bits_before": 9504,
+        "bits_after": 3216,
+        "bits_saved_nats": 4358.509471360936,
+        "net_nats": -1197.2696282410252
+      },
+      {
+        "rank": 2,
+        "loss": -305076.66231351113,
+        "loss_cost_vs_ceiling": 2035.712138538831,
+        "relative_distortion": 0.2909857663991562,
+        "bits_before": 9504,
+        "bits_after": 4848,
+        "bits_saved_nats": 3227.2932726871054,
+        "net_nats": 1191.5811341482745
+      },
+      {
+        "rank": 4,
+        "loss": -306693.4399436977,
+        "loss_cost_vs_ceiling": 418.9345083522494,
+        "relative_distortion": 0.05589426010237303,
+        "bits_before": 9504,
+        "bits_after": 8112,
+        "bits_saved_nats": 964.8608753394439,
+        "net_nats": 545.9263669871945
+      }
+    ]
+  },
+  {
+    "world_seed": 2,
+    "abstractions": 5,
+    "ceiling_loss": -230141.28684142872,
+    "floor_loss": -225475.99765465237,
+    "contribution_nats": 4665.289186776354,
+    "ranks": [
+      {
+        "rank": 0,
+        "loss": -226488.3002505359,
+        "loss_cost_vs_ceiling": 3652.986590892833,
+        "relative_distortion": null,
+        "bits_before": 7920,
+        "bits_after": 1584,
+        "bits_saved_nats": 4391.7805360278135,
+        "net_nats": 738.7939451349803
+      },
+      {
+        "rank": 1,
+        "loss": -228450.68813476662,
+        "loss_cost_vs_ceiling": 1690.598706662102,
+        "relative_distortion": 0.27293469489150585,
+        "bits_before": 7920,
+        "bits_after": 3208,
+        "bits_saved_nats": 3266.109514798462,
+        "net_nats": 1575.51080813636
+      },
+      {
+        "rank": 2,
+        "loss": -229637.81854846922,
+        "loss_cost_vs_ceiling": 503.4682929595001,
+        "relative_distortion": 0.1182807748594225,
+        "bits_before": 7920,
+        "bits_after": 4832,
+        "bits_saved_nats": 2140.438493569111,
+        "net_nats": 1636.9702006096109
+      },
+      {
+        "rank": 4,
+        "loss": -230143.89345456156,
+        "loss_cost_vs_ceiling": -2.606613132840721,
+        "relative_distortion": 1.6939390799570603e-05,
+        "bits_before": 7920,
+        "bits_after": 8080,
+        "bits_saved_nats": -110.90354888959125,
+        "net_nats": -108.29693575675053
+      }
+    ]
+  }
+]

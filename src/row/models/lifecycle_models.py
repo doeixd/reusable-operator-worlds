@@ -363,3 +363,109 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
                 1 for record in self.lineage.values() if record.reuse_count > 0
             ),
         }
+
+    # ---- the V4.2 operator: synthetic factorization ---------------------
+
+    def factorize(
+        self,
+        probe: torch.Tensor,
+        rank: int = 2,
+        steps: int = 600,
+        lr: float = 0.02,
+    ) -> dict[str, object]:
+        """Replace K distinct abstractions with ONE parameterized family.
+
+        V4.1's gates established that this library holds no redundancy to
+        eliminate: no abstraction substitutes for another, and compacting
+        by re-homing is net negative. The abstractions are behaviorally
+        DISTINCT. The V4.2 question is different and does not require
+        redundancy:
+
+            A_i(z)  ~=  A(z ; alpha_i)
+
+        Is there a shared parent plus a small per-abstraction coordinate
+        that reproduces each abstraction's function more cheaply than
+        storing every abstraction outright? That is anti-unification, not
+        deletion -- nothing is forgotten, the vocabulary changes from a
+        set of atoms to one operator with arguments.
+
+        FITTED IN BEHAVIOR SPACE, never parameter space. The innovation is
+        nonlinear in (U, V), and V3 measured that a parameter mean recovers
+        11.9% of behavioral value where a functional fit recovers 53.4%:
+        gauge-inequivalent parameters do not average. So `C + alpha_i @ B`
+        is a parameterization whose BEHAVIOR is matched by gradient
+        descent, not an assertion that abstractions are linear in
+        parameters.
+
+        Returns the fit and its price. It does NOT mutate the library --
+        pricing must precede adoption, which is the discipline the
+        retracted V4.1 H14 result violated.
+        """
+
+        count = len(self.abstractions)
+        if count < 2:
+            return {"applied": False, "reason": "fewer than two abstractions"}
+
+        with torch.enable_grad():
+            stacked = torch.stack([p.detach() for p in self.abstractions])
+            centre = torch.nn.Parameter(stacked.mean(dim=0).clone())
+            spread = stacked - stacked.mean(dim=0)
+            # Initialize the family directions from the observed spread so
+            # the optimizer starts on the manifold rather than at zero.
+            _, _, right = torch.linalg.svd(spread, full_matrices=False)
+            basis = torch.nn.Parameter(right[:rank].clone())
+            alpha = torch.nn.Parameter(spread @ right[:rank].T)
+
+            with torch.no_grad():
+                targets = torch.stack(
+                    [
+                        torch.stack(
+                            [
+                                self._innovation(
+                                    probe, *self._split_residual(vector), step
+                                )
+                                for step in range(self.task_steps)
+                            ]
+                        )
+                        for vector in stacked
+                    ]
+                )
+
+            optimizer = torch.optim.Adam([centre, basis, alpha], lr=lr)
+            for _ in range(steps):
+                optimizer.zero_grad()
+                rebuilt = centre.unsqueeze(0) + alpha @ basis
+                predicted = torch.stack(
+                    [
+                        torch.stack(
+                            [
+                                self._innovation(
+                                    probe, *self._split_residual(rebuilt[index]), step
+                                )
+                                for step in range(self.task_steps)
+                            ]
+                        )
+                        for index in range(count)
+                    ]
+                )
+                loss = torch.mean(torch.square(predicted - targets))
+                loss.backward()
+                optimizer.step()
+
+        with torch.no_grad():
+            rebuilt = (centre + alpha @ basis).detach()
+            scale = float(torch.mean(torch.square(targets)).clamp_min(1e-12))
+            distortion = float(loss.detach()) / scale
+            width = self.residual_u_size + self.residual_v_size + self.residual_b_size
+            before = BITS_PER_SCALAR * width * count
+            after = BITS_PER_SCALAR * (width * (1 + rank) + rank * count)
+        return {
+            "applied": False,
+            "rank": rank,
+            "abstractions": count,
+            "relative_distortion": distortion,
+            "bits_before": before,
+            "bits_after": after,
+            "bits_saved": before - after,
+            "rebuilt": rebuilt,
+        }
