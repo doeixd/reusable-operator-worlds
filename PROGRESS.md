@@ -748,3 +748,13 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   D(F | L_t) as the progress quantity), deferred workstreams with
   stricter gates, and the pre-V3 checklist keyed to the sealed block and
   the 006c/006d analyses.
+- V2 sealed Component A complete (360 lifetimes on seeds 200-229, zero
+  exclusions after a provenance path-normalization fix validated all
+  cells). ALL FOUR pre-registered Family A outcomes pass: slope 6,194
+  nats per unit recurrence (interval 4,000-7,500); pooled root 0.450
+  (0.40-0.60) and per-world crossing mean 0.483 (0.42-0.58) with 30/30
+  worlds crossing; R-squared 0.926 in measured coordinates with a +0.262
+  margin over configured (thresholds 0.85 and +0.15); sign reversal
+  30/30, p = 1.9e-9. Parameter replication achieved: the dose-response
+  law's coefficients replicate across two independent sealed blocks.
+  Reports committed per the durability rule.

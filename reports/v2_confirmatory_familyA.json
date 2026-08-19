@@ -1,0 +1,16 @@
+{
+ "n_worlds": 30,
+ "A1_slope": 6194.355713542201,
+ "A1_pass": true,
+ "A2_pooled_root": 0.4499751515171652,
+ "A2_pooled_pass": true,
+ "A2_crossing_mean": 0.4829320970986986,
+ "A2_crossing_pass": true,
+ "A3_r2_measured": 0.9258506456442697,
+ "A3_r2_configured": 0.6633722929248311,
+ "A3_pass": true,
+ "A4_reversals": 30,
+ "A4_p": 1.862645149230957e-09,
+ "A4_pass": true,
+ "intercept": -2787.30615075237
+}
