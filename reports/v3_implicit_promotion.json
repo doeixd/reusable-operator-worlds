@@ -1,0 +1,182 @@
+[
+  {
+    "world_seed": 0,
+    "eta": 0.9,
+    "groups": 2,
+    "baseline_mean_nmse": 0.011891363917820644,
+    "equalize_mean_nmse_increase": 0.00977929774845179,
+    "own_group_mean_nmse_increase": 0.008830565571883643,
+    "other_group_mean_nmse_increase": 0.011639428326296317,
+    "swap_penalty_over_own_group": 0.0028088627544126735,
+    "slot_ablation": [
+      {
+        "slot": 0,
+        "mean_damage_group0": 0.0012643934190200454,
+        "mean_damage_group1": 0.0016179933762551983,
+        "differential": -0.0003535999572351529
+      },
+      {
+        "slot": 1,
+        "mean_damage_group0": 0.0006642726700369902,
+        "mean_damage_group1": 0.0020642645126148643,
+        "differential": -0.001399991842577874
+      },
+      {
+        "slot": 2,
+        "mean_damage_group0": -0.0001446946336344568,
+        "mean_damage_group1": 0.0033089631068737163,
+        "differential": -0.003453657740508173
+      },
+      {
+        "slot": 3,
+        "mean_damage_group0": 0.004190554068585846,
+        "mean_damage_group1": 2.9912207914678473e-05,
+        "differential": 0.004160641860671168
+      },
+      {
+        "slot": 4,
+        "mean_damage_group0": 0.0007902929800854965,
+        "mean_damage_group1": 7.918879947198166e-05,
+        "differential": 0.0007111041806135149
+      },
+      {
+        "slot": 5,
+        "mean_damage_group0": 0.006323441181616997,
+        "mean_damage_group1": 0.006597038577069246,
+        "differential": -0.0002735973954522495
+      },
+      {
+        "slot": 6,
+        "mean_damage_group0": 0.001866900097682578,
+        "mean_damage_group1": 0.0018818818658041382,
+        "differential": -1.498176812156013e-05
+      },
+      {
+        "slot": 7,
+        "mean_damage_group0": 0.00028628332620217364,
+        "mean_damage_group1": 0.00041964560499727484,
+        "differential": -0.0001333622787951012
+      }
+    ]
+  },
+  {
+    "world_seed": 1,
+    "eta": 0.9,
+    "groups": 2,
+    "baseline_mean_nmse": 0.012459203352008603,
+    "equalize_mean_nmse_increase": 0.008348211157718798,
+    "own_group_mean_nmse_increase": 0.006871312981807141,
+    "other_group_mean_nmse_increase": 0.011796026118086098,
+    "swap_penalty_over_own_group": 0.004924713136278957,
+    "slot_ablation": [
+      {
+        "slot": 0,
+        "mean_damage_group0": 0.0024345278515171074,
+        "mean_damage_group1": -6.739315998271753e-05,
+        "differential": 0.002501921011499825
+      },
+      {
+        "slot": 1,
+        "mean_damage_group0": 0.0037193610004712736,
+        "mean_damage_group1": 0.000272788585645811,
+        "differential": 0.003446572414825463
+      },
+      {
+        "slot": 2,
+        "mean_damage_group0": 0.0021161811198291396,
+        "mean_damage_group1": 0.005397533917503439,
+        "differential": -0.0032813527976742994
+      },
+      {
+        "slot": 3,
+        "mean_damage_group0": 0.002066680599659187,
+        "mean_damage_group1": 0.000217383821154932,
+        "differential": 0.0018492967785042548
+      },
+      {
+        "slot": 4,
+        "mean_damage_group0": 0.0012623281217269918,
+        "mean_damage_group1": 0.00023440241032023865,
+        "differential": 0.0010279257114067532
+      },
+      {
+        "slot": 5,
+        "mean_damage_group0": 0.0003278280270568058,
+        "mean_damage_group1": 0.004669088090465582,
+        "differential": -0.004341260063408776
+      },
+      {
+        "slot": 6,
+        "mean_damage_group0": 0.002564633045587347,
+        "mean_damage_group1": 0.003932059462663357,
+        "differential": -0.0013674264170760102
+      },
+      {
+        "slot": 7,
+        "mean_damage_group0": 0.00021445417496264947,
+        "mean_damage_group1": 0.004301159827587396,
+        "differential": -0.004086705652624746
+      }
+    ]
+  },
+  {
+    "world_seed": 2,
+    "eta": 0.9,
+    "groups": 2,
+    "baseline_mean_nmse": 0.010733070097727919,
+    "equalize_mean_nmse_increase": 0.008683524236323957,
+    "own_group_mean_nmse_increase": 0.007803805318617196,
+    "other_group_mean_nmse_increase": 0.010375831672490636,
+    "swap_penalty_over_own_group": 0.002572026353873441,
+    "slot_ablation": [
+      {
+        "slot": 0,
+        "mean_damage_group0": -6.782980118679947e-05,
+        "mean_damage_group1": 0.0026482910365619953,
+        "differential": -0.0027161208377487946
+      },
+      {
+        "slot": 1,
+        "mean_damage_group0": 0.005573398204435793,
+        "mean_damage_group1": 0.004416951063341174,
+        "differential": 0.0011564471410946192
+      },
+      {
+        "slot": 2,
+        "mean_damage_group0": 0.0070044757073199765,
+        "mean_damage_group1": 0.0033997733384507067,
+        "differential": 0.0036047023688692698
+      },
+      {
+        "slot": 3,
+        "mean_damage_group0": 0.0041749314820892156,
+        "mean_damage_group1": 0.0004797896096675343,
+        "differential": 0.003695141872421681
+      },
+      {
+        "slot": 4,
+        "mean_damage_group0": 0.002246123206029656,
+        "mean_damage_group1": -6.103530430280736e-05,
+        "differential": 0.0023071585103324635
+      },
+      {
+        "slot": 5,
+        "mean_damage_group0": -4.836637060887822e-05,
+        "mean_damage_group1": 0.0019637759153538865,
+        "differential": -0.002012142285962765
+      },
+      {
+        "slot": 6,
+        "mean_damage_group0": 0.000453117409170344,
+        "mean_damage_group1": 0.00010219198717046496,
+        "differential": 0.00035092542199987903
+      },
+      {
+        "slot": 7,
+        "mean_damage_group0": -7.644897931901885e-05,
+        "mean_damage_group1": 0.0020725215483151957,
+        "differential": -0.0021489705276342146
+      }
+    ]
+  }
+]

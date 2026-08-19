@@ -180,7 +180,20 @@ Outcome log (append-only):
     reference costs 192 bits per task against 17,712 for a residual —
     and it needed no sleep phase to do it. The prediction assumed the
     innovation channel; the learner chose the reference channel, which
-    is the cheaper one. Consequence: H11's premise ("task-specific
+    is the cheaper one.
+    [CORRECTION, appended same day, before any successor run: the
+    description-length clause above overstates what was shown. The eight
+    slots were PREALLOCATED and already paid for, so the optimizer was
+    never charged 192 bits against 17,712; it simply found the shared
+    basis plus task-conditioned routes an easier fit. The supported
+    claim is that unused shared capacity gets used for recurrent
+    structure, not that MDL drove the choice. Whether a learner CREATES
+    shared capacity when creation carries a cost is untouched by this
+    result and is exactly what V3 still has to test. The finding is
+    nonetheless causal, not merely correlational: substituting the wrong
+    family's mean route costs +0.00344 more NMSE than the right
+    family's (3/3 worlds), and single-slot ablation damages the families
+    differentially in the direction their route mass predicts.] Consequence: H11's premise ("task-specific
     adaptations CONTAIN recurrent functional structure") does not hold
     in this testbed, so the testbed cannot support the V3.1 core
     experiment as specified. The V3 question sharpens to: when is

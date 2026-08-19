@@ -183,9 +183,27 @@ that a task-invariant shared basis cannot absorb" — is therefore FALSE
 as stated. A task-invariant basis cannot absorb family structure into a
 single slot shared by all tasks, but an OVERCOMPLETE basis absorbs each
 family into its own slot and lets the reference code select it. That is
-the promotion operation, performed during wake by gradient descent, for
-the description-length reason V3 predicts: a route reference costs 192
-bits per task against 17,712 for a residual.
+the promotion operation performed during wake by gradient descent — but
+NOT, on this evidence, for a description-length reason. The eight slots
+were preallocated and already paid for; nothing charged the optimizer
+192 bits for a reference against 17,712 for a residual, and it was
+simply easier to fit the family variation with shared operators and
+task-conditioned routes. The supported claim is narrower and still
+substantial: **when unused shared capacity is available, gradient
+descent spontaneously encodes recurrent cross-task structure in that
+capacity and addresses it through the reference channel.** Whether a
+learner CREATES shared capacity when doing so carries a cost is the
+question V3 still has to answer, and this result leaves it untouched.
+
+Causally confirmed rather than merely correlational (three
+interventions on trained artifacts,
+`row.experiments.audit_implicit_promotion`): substituting a task's
+route with the WRONG family's mean costs +0.00344 more NMSE than
+substituting its own family's mean, positive 3/3 worlds; and
+single-slot ablation is sharply family-differential (world 0 slot 3
+damages group 0 by +0.00419 against group 1's +0.00003; world 1 slot 5
+reverses the asymmetry). Shared functional objects addressed by
+family-specific references, built during wake.
 
 **The corrected requirement on the testbed:** an explicit promotion
 operator can only earn its place where recurring structure is NOT

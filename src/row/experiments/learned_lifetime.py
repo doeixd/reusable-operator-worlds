@@ -364,6 +364,7 @@ def run(
     order: str = "forward",
     task_id_scramble_seed: int | None = None,
     update_batch_size: int | None = None,
+    freeze_shared_at: int | None = None,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -408,6 +409,13 @@ def run(
 
     for lifetime_index, world_task_index in enumerate(task_indices):
         task = world.tasks[world_task_index]
+        if freeze_shared_at is not None and lifetime_index == freeze_shared_at:
+            # Saturated-library condition: the shared operators stop learning,
+            # so new recurring structure has nowhere to go but task-local
+            # innovations. This is what makes an explicit promotion operator
+            # necessary rather than optional.
+            for parameter in model.shared_parameters():
+                parameter.requires_grad_(False)
         task_parameter = model.begin_task(task.task_id)
         if isinstance(model, GatedInnovationLearner):
             route_parameter, residual_parameter, gate_parameter = task_parameter

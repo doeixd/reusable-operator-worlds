@@ -43,6 +43,7 @@ class TaskGroupSpec:
         block_size: int | None = None,
         future_tasks: int = 8,
         resample_future: bool = False,
+        family_onset: int = 0,
     ) -> None:
         if groups < 1:
             raise ValueError("groups must be positive")
@@ -66,6 +67,12 @@ class TaskGroupSpec:
         # testbed, so it carries a same-decision prediction, never a
         # refusal requirement.
         self.resample_future = bool(resample_future)
+        # Delayed-family testbed (V3 spec 2.1, redesign): family components
+        # appear only from this task index onward. Before it the world is
+        # exactly the canonical mixed world, so the learner's shared library
+        # saturates on the base primitives with no spare capacity waiting to
+        # absorb a family it has not met yet.
+        self.family_onset = int(family_onset)
 
     def as_dict(self) -> dict[str, object]:
         return {
@@ -74,6 +81,7 @@ class TaskGroupSpec:
             "block_size": self.block_size,
             "future_tasks": self.future_tasks,
             "resample_future": self.resample_future,
+            "family_onset": self.family_onset,
         }
 
 
@@ -113,7 +121,7 @@ def _task_group_library(
             private.normal(size=(config.state_dim, config.teacher_rank))
         )
         private_b = private.normal(scale=0.2, size=config.teacher_rank)
-        if spec.eta > 0.0:
+        if spec.eta > 0.0 and (resampled or task_index >= spec.family_onset):
             # A distinct stream component, not a sentinel block index:
             # SeedSequence rejects negative components.
             family = (

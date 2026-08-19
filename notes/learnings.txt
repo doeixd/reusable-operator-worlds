@@ -135,6 +135,19 @@ There may be a genuine **specialization-to-reuse crossover**.
 
 There is an interesting wrinkle in the intermediate-(\rho) results.
 
+> **RETRACTED on replication (reviewer-feedback-05).** The three-regime
+> picture developed in this section — abstraction quality improving at
+> intermediate ρ before it wins lifetime loss — was a world-0 development
+> result. It **failed replication**: at ρ = 0.25/0.5/0.75 Continuous wins
+> novel transfer on only one of three worlds and has worse mean novel NMSE at
+> all three points. Adopt the simpler single-crossover picture instead (weak
+> recurrence → sharing is harmful bias; strong recurrence → sharing is useful
+> bias). The ρ=1 learning-to-learn ratio (~6.4× vs ~2.3×) is *also* still
+> primarily a world-0 result and deserves proportionate suspicion until
+> replicated — both this reviewer and reviewer-02 were seduced once by a
+> world-0-only effect. The falsification itself is an asset: state it
+> explicitly in the report.
+
 At both:
 
 [
@@ -220,6 +233,18 @@ It is:
 ]
 
 This needs replication across development worlds before becoming a strong claim, but it is exactly the effect the larger research program cares about.
+
+> **Updated.** This has now replicated across all ten development worlds using
+> the learnable-alpha checkpoint protocol (four fixed novel compositions per
+> checkpoint). Mean Continuous vs Dense-C 32-shot NMSE is 0.02282/0.02300
+> after 8 tasks, 0.01401/0.01652 after 16, 0.00687/0.01098 after 32, and
+> 0.00343/0.00645 after 64. Continuous wins 4/10, 8/10, 10/10, and 10/10
+> paired worlds respectively. A subtler and stronger framing later emerged:
+> at checkpoint 8 Dense is equal or slightly better, and the two then
+> **diverge with experience** — so the reusable advantage in novel adaptation
+> is *acquired*, not architectural at initialization. Stop quoting the 6.4×
+> vs 2.3× ratio as the headline; the equal-start divergence is the cleaner
+> story (reviewer-feedback-08).
 
 ---
 
@@ -324,6 +349,17 @@ The current experiment demonstrates that a learner with a good structural prior 
 It does **not yet** demonstrate that a sufficiently general learner can discover an arbitrary reusable factorization irrespective of how that computation is implemented.
 
 That latter problem is much closer to the original research goal.
+
+> **Updated by the V2 sealed block and the GELU economics.** Family alignment
+> is now part of the economics, not just a caveat. With aligned tanh operators
+> the advantage at high recurrence is several thousand nats; with GELU it is
+> shifted downward so far that even exact reuse (ρ=1) only reaches ≈ +134
+> nats. The best model is no longer ΔL = f(r) but ΔL = f(r, A, C), where A is
+> alignment and C the cost of using the representation; H6 suggests alignment
+> enters mostly as an additive intercept/penalty shift with some slope
+> attenuation, rather than turning recurrence sensitivity off. This is the
+> right answer to the "your benchmark favors the learner" objection: yes, prior
+> alignment has a quantitatively large measurable price.
 
 ---
 

@@ -67,6 +67,24 @@ def main() -> None:
     )
     parser.add_argument("--future-tasks", type=int, default=8)
     parser.add_argument(
+        "--family-onset",
+        type=int,
+        default=0,
+        help="delayed-family testbed: families appear only from this task index",
+    )
+    parser.add_argument(
+        "--freeze-basis-at",
+        type=int,
+        default=None,
+        help="freeze the shared basis from this task index (clean promotion test)",
+    )
+    parser.add_argument(
+        "--operator-slots",
+        type=int,
+        default=None,
+        help="override shared basis capacity K (the V3 capacity sweep)",
+    )
+    parser.add_argument(
         "--resample-future",
         action="store_true",
         help="regime-change world: identical lifetime, fresh future directions",
@@ -89,6 +107,17 @@ def main() -> None:
         ),
         output_directory=args.output,
     )
+    if args.operator_slots is not None:
+        selected = {
+            "dense": config.dense_model,
+            "continuous": config.continuous_model,
+            "hypernetwork": config.hypernetwork_model,
+            "shared_residual": config.shared_residual_model,
+            "variational": config.variational_model,
+            "gated": config.gated_model,
+        }[args.model]
+        selected = replace(selected, operator_slots=args.operator_slots)
+        config = replace(config, **{f"{args.model}_model": selected})
 
     task_group_spec = (
         TaskGroupSpec(
@@ -97,6 +126,7 @@ def main() -> None:
             block_size=args.task_group_block_size,
             future_tasks=args.future_tasks,
             resample_future=args.resample_future,
+            family_onset=args.family_onset,
         )
         if args.task_group_eta is not None
         else None
@@ -110,7 +140,9 @@ def main() -> None:
     original_world = learned_lifetime.World
     learned_lifetime.World = factory  # type: ignore[assignment]
     try:
-        summary = learned_lifetime.run(config, kind=args.model)
+        summary = learned_lifetime.run(
+            config, kind=args.model, freeze_shared_at=args.freeze_basis_at
+        )
     finally:
         learned_lifetime.World = original_world  # type: ignore[assignment]
 

@@ -18,3 +18,26 @@
 11:53:17 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_g8\world_2\shared_residual
 11:53:17 V3_TASKGROUP_COMPLETE
 11:54:15 starting: 3 cells, jobs=3, etas=[0.9]
+11:56:01 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_g8_rho0.5\world_0\shared_residual
+11:56:01 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_g8_rho0.5\world_1\shared_residual
+11:56:01 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_g8_rho0.5\world_2\shared_residual
+11:56:02 V3_TASKGROUP_COMPLETE
+11:59:18 starting: 1 cells, jobs=1, etas=[0.9]
+11:59:19 starting: 1 cells, jobs=1, etas=[0.9]
+11:59:21 starting: 1 cells, jobs=1, etas=[0.9]
+11:59:23 starting: 1 cells, jobs=1, etas=[0.9]
+12:00:07 starting: 3 cells, jobs=3, etas=[0.9]
+12:01:01 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6\world_0\shared_residual
+12:01:02 V3_TASKGROUP_COMPLETE
+12:01:06 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_g8_k6\world_0\shared_residual
+12:01:06 V3_TASKGROUP_COMPLETE
+12:01:25 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_g8_k8\world_0\shared_residual
+12:01:25 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k8\world_0\shared_residual
+12:01:25 V3_TASKGROUP_COMPLETE
+12:01:25 V3_TASKGROUP_COMPLETE
+12:01:35 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset32_frozen32\world_0\shared_residual
+12:01:35 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset32_frozen32\world_1\shared_residual
+12:01:35 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset32_frozen32\world_2\shared_residual
+12:01:35 V3_TASKGROUP_COMPLETE
+12:02:44 starting: 3 cells, jobs=3, etas=[0.0]
+12:02:48 starting: 3 cells, jobs=3, etas=[0.9]

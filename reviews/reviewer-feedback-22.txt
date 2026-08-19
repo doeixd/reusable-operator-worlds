@@ -1,0 +1,664 @@
+I think this is **a very good failure**, and I would stop trying to rescue the original promotion testbed. The validity gate did exactly what it was supposed to do.
+
+The central discovery is:
+
+[
+\boxed{
+\text{recurring family structure appeared, but ordinary wake learning put it directly into shared capacity}
+}
+]
+
+rather than:
+
+[
+\text{task-local residual}
+\rightarrow
+\operatorname{PROMOTE}
+\rightarrow
+\text{shared object}.
+]
+
+That changes what V3 needs to test.
+
+### One interpretive correction
+
+I would weaken this sentence:
+
+> “It did so for precisely the description-length reason V3 predicts…”
+
+You haven't shown that yet.
+
+The optimizer wasn't charged 192 bits versus 17,712 bits. The eight shared slots were **preallocated and already paid for**, and gradient descent simply found it easier to represent the family variation using the shared basis and task-conditioned routes.
+
+So what you've established is something like:
+
+> **When unused shared capacity is available, gradient descent can spontaneously encode recurrent cross-task structure in that capacity and address it through the reference channel.**
+
+That's arguably more interesting than residual clustering, but it isn't yet MDL-driven promotion.
+
+The missing thing remains:
+
+[
+\boxed{
+\text{Does the learner CREATE shared representational capacity when doing so has a cost?}
+}
+]
+
+---
+
+# I don't think “8 families > 2 spare slots” alone will necessarily fix it
+
+Definitely finish that run. It's the correct immediate diagnostic.
+
+But don't be surprised if it still doesn't push the structure into residuals.
+
+Eight basis slots do not imply:
+
+[
+6\text{ base primitives}+2\text{ family primitives}.
+]
+
+A continuous network can use:
+
+* mixtures of slots;
+* rotations of the basis;
+* slots that simultaneously encode base and family structure;
+* distributed representations of several families.
+
+You may get:
+
+[
+\text{family 1} = .2P_1+.6P_3+\ldots
+]
+
+rather than one family per spare slot.
+
+In fact, given V2's manifold result, I think that's fairly likely.
+
+So the useful experiment is broader:
+
+[
+(K,F)
+]
+
+where (K) is available shared capacity and (F) is the number/complexity of hidden family components.
+
+Then measure where family information goes:
+
+[
+I_{\rm route},
+\qquad
+I_{\rm residual}.
+]
+
+You may find a genuine representational transition:
+
+[
+\boxed{
+\text{ample shared capacity}
+\rightarrow
+\text{route/shared encoding}
+}
+]
+
+[
+\boxed{
+\text{capacity pressure}
+\rightarrow
+\text{private residual encoding}.
+}
+]
+
+That would itself be a nice result.
+
+---
+
+# But I think there's an even cleaner V3 testbed
+
+The crucial phrase is:
+
+> **birth of an abstraction.**
+
+Then the world should put the learner into a state where the abstraction **does not already have somewhere free to live**.
+
+I would design:
+
+## Phase A: saturate the existing library
+
+Give the learner the ordinary six primitives with:
+
+[
+K=6.
+]
+
+No spare slots.
+
+Train long enough that all six slots are functionally useful.
+
+Verify this causally:
+
+[
+\text{ablate any slot}
+\Rightarrow
+\text{meaningful loss}.
+]
+
+You want an actually occupied library, not merely six nominal slots.
+
+## Phase B: new recurrent structure appears
+
+Now tasks begin containing a hidden family component:
+
+[
+F_\tau
+======
+
+P_{\text{existing}}
++
+A_{\text{family}(\tau)}
++
+\epsilon_\tau.
+]
+
+Initially the learner has no shared slot for (A).
+
+So it has to represent the difference somehow:
+
+[
+R_\tau.
+]
+
+After enough related tasks:
+
+[
+R_1\approx A+\epsilon_1,
+]
+
+[
+R_2\approx A+\epsilon_2,
+]
+
+[
+R_3\approx A+\epsilon_3.
+]
+
+Now PROMOTE can literally do:
+
+[
+\boxed{
+K=6\rightarrow K=7
+}
+]
+
+by creating:
+
+[
+P_7=A.
+]
+
+That's **abstraction birth** in the most literal sense.
+
+---
+
+# And the accounting becomes gorgeous
+
+Before:
+
+[
+D_{\rm before}
+==============
+
+D(\mathcal L_6)
++
+\sum_iD(R_i).
+]
+
+After:
+
+[
+D_{\rm after}
+=============
+
+D(\mathcal L_6)
++
+D(P_7)
++
+\sum_i
+\left[
+D(\operatorname{ref}_7)
++
+D(\epsilon_i)
+\right].
+]
+
+Promote iff:
+
+[
+D_{\rm after}
+<
+D_{\rm before}
+]
+
+at matched prediction.
+
+Then your migration plot literally becomes:
+
+```text id="mv41"
+Shared bits
+        │                   ┌────────
+        │                   │ new P7
+        │                   │
+        └───────────────────┘
+                            ↑ PROMOTE
+
+Task bits
+        │██████████████████
+        │               \
+        │                 \______
+        └────────────────────────
+
+Total bits
+        │██████████████████
+        │                \
+        │                  \____
+        └────────────────────────
+```
+
+That's much stronger than discovering that one of eight existing slots happened to specialize.
+
+---
+
+# Should the basis be frozen during Phase B?
+
+There are two versions.
+
+### Clean mechanism demonstration
+
+Freeze the six existing shared operators while new family structure accumulates.
+
+Tasks can adapt only through residuals.
+
+Then at sleep:
+
+[
+\operatorname{PROMOTE}
+]
+
+is allowed to create slot 7.
+
+This is somewhat artificial, but **extremely interpretable**.
+
+It directly tests:
+
+[
+\text{repeated local computation}
+\rightarrow
+\text{new shared object}.
+]
+
+For V3's first demonstration, I think this is defensible.
+
+### Harder natural version
+
+Let the six existing shared operators continue learning.
+
+But preserve old-task behavior.
+
+Now repurposing an existing operator causes interference:
+
+[
+P_j\rightarrow P'_j
+]
+
+may improve new families while damaging old programs.
+
+PROMOTE offers another option:
+
+[
+P_7=\text{new abstraction}
+]
+
+without overwriting old shared structure.
+
+This version is much closer to continual learning and naturally leads into V4's copy-on-write/FORK story.
+
+I'd probably do the clean version first and the natural version as the robustness test.
+
+---
+
+# There is one important oracle gate I'd add
+
+Before developing PROMOTE, establish:
+
+[
+\boxed{
+J^*_{K+1}<J^*_K
+}
+]
+
+for the redesigned world.
+
+In plain language:
+
+> Is adding one shared abstraction actually better than the best solution available with the fixed existing library?
+
+You don't want another world where the network can represent everything perfectly through clever mixtures.
+
+So compute an oracle-ish envelope:
+
+### Fixed library capacity
+
+Best achievable:
+
+[
+J_K.
+]
+
+### One additional shared operator
+
+Best achievable:
+
+[
+J_{K+1}.
+]
+
+Require a decent gap:
+
+[
+J_K-J_{K+1}>0.
+]
+
+And show that the improvement specifically comes from:
+
+[
+D_{\rm task}\downarrow
+]
+
+enough to pay for:
+
+[
+D(P_{K+1})+D(\text{references}).
+]
+
+Then you know there's actually something for PROMOTE to discover.
+
+This is the V3 analogue of validating that V1's teacher structure exists before testing learners.
+
+---
+
+# I'd also causally verify today's “implicit promotion” result
+
+The route separation is convincing, but you can make the claim much stronger cheaply.
+
+You currently have:
+
+[
+\text{group 0}\rightarrow
+(P_2=.032,P_3=.154)
+]
+
+versus:
+
+[
+\text{group 1}\rightarrow
+(P_2=.190,P_3=.048).
+]
+
+Do three interventions.
+
+### 1. Route equalization
+
+Replace each group's routes with the pooled mean.
+
+If family-conditioned performance degrades:
+
+[
+\Delta L>0,
+]
+
+family information is causally in routes.
+
+### 2. Route swap
+
+Give family A family B's route pattern and vice versa.
+
+You should see a specific family-conditioned degradation.
+
+### 3. Slot ablation
+
+Ablate slots 2 and 3 separately.
+
+If the two groups show differential sensitivity matching their routing pattern, you have:
+
+[
+\boxed{
+\text{shared functional objects}
++
+\text{group-specific references}.
+}
+]
+
+That would make this a really nice V3 precursor result rather than merely an inconvenient gate failure.
+
+---
+
+# This also changes how I think about PROMOTE
+
+Originally PROMOTE was:
+
+[
+\text{factor repeated residuals}.
+]
+
+Now I think the deeper operation is:
+
+[
+\boxed{
+\operatorname{PROMOTE}
+======================
+
+\text{allocate shared representational capacity to recurring innovation}.
+}
+]
+
+Residual factorization is merely one way to propose the candidate.
+
+The actual structural event is:
+
+[
+\text{private computational capacity}
+\rightarrow
+\text{shared computational capacity}.
+]
+
+That generalizes much better.
+
+At scale, promotion might mean:
+
+* create a new operator;
+* allocate a new low-rank shared direction;
+* create a parameterized family;
+* create a macro;
+* create an index/memory entry.
+
+The invariant is **migration of repeated private information into a shared addressable representation**.
+
+---
+
+# And this tells us something important about the grand architecture
+
+Your current learner had:
+
+[
+\text{free shared capacity}.
+]
+
+It used it.
+
+That's exactly what a rational architecture should do.
+
+So perhaps structural learning eventually consists of two levels:
+
+### Cheap inner adaptation
+
+If existing capacity can express the recurrence:
+
+[
+\boxed{\text{reorganize what already exists}.}
+]
+
+No library growth required.
+
+### Expensive outer restructuring
+
+Only when existing capacity cannot encode the recurring structure economically:
+
+[
+\boxed{\text{grow/restructure the language}.}
+]
+
+That gives PROMOTE a much more principled role.
+
+It shouldn't fire whenever recurrence exists.
+
+It should fire when:
+
+[
+\boxed{
+\text{recurrence exists}
++
+\text{existing representational capacity cannot absorb it economically}.
+}
+]
+
+That's a better theory.
+
+---
+
+# This could produce another fascinating phase diagram
+
+You already have recurrence:
+
+[
+r.
+]
+
+And lifetime:
+
+[
+N.
+]
+
+Now you've uncovered shared capacity:
+
+[
+K.
+]
+
+The representation decision may really be:
+
+[
+\boxed{
+\mathcal R^*
+============
+
+f(r,N,K,C_{\rm create})
+}
+]
+
+For example:
+
+| Regime                                                   | Optimal behavior                      |
+| -------------------------------------------------------- | ------------------------------------- |
+| low recurrence                                           | private specialization                |
+| high recurrence + spare shared capacity                  | absorb into existing shared substrate |
+| high recurrence + saturated substrate + few future uses  | keep private                          |
+| high recurrence + saturated substrate + many future uses | **PROMOTE / grow library**            |
+
+That is substantially more sophisticated than the original binary sharing question.
+
+And very plausible.
+
+---
+
+# I'd keep P-I paused
+
+I agree with the agent here.
+
+Don't spend time selecting between Gaussian/H9/gated against a broken testbed.
+
+First establish a world in which:
+
+1. recurrent innovation exists;
+2. ordinary wake cannot simply absorb all of it into free shared capacity;
+3. a compact expanded-library solution exists;
+4. expanding actually wins under (J).
+
+**Then** ask which wake substrate best exposes the promotable innovation.
+
+My prior remains:
+
+[
+\text{gated}>\text{H9}>\text{Gaussian}
+]
+
+for interpretability of innovation, but the testbed needs to make that question real first.
+
+---
+
+## What I would do now, in order
+
+1. **Finish the 8-family diagnostic**, but call it exploratory.
+2. Run the three causal route/slot interventions above on the 2-family result.
+3. Run a small shared-capacity sweep:
+   [
+   K\in{6,7,8},
+   \qquad
+   F\in{2,4,8}.
+   ]
+   Measure family information in routes versus residuals.
+4. Design the **saturated-library / delayed-family** testbed.
+5. Establish the oracle:
+   [
+   J^*_{K+1}<J^*_K.
+   ]
+6. Freeze that testbed **before any promoter tuning**.
+7. Then run P-I/H9/Gaussian on it and pick the wake substrate.
+8. Implement PROMOTE as actual **shared-capacity birth**:
+   [
+   K\rightarrow K+1.
+   ]
+9. Demand:
+   [
+   D_{\rm task}\downarrow,
+   \quad
+   D_{\rm shared}\uparrow,
+   \quad
+   D_{\rm total}\downarrow,
+   ]
+   and eventually:
+   [
+   L_{\rm future}\downarrow.
+   ]
+
+I think today's result actually makes V3 better.
+
+The original experiment implicitly assumed:
+
+> recurrent structure will sit around patiently inside residuals until sleep discovers it.
+
+Gradient descent just told you:
+
+> **Why would I do that? You gave me unused shared capacity. I put the reusable thing there immediately.**
+
+That's a very sensible answer.
+
+So the sharper V3 question is now:
+
+[
+\boxed{
+\textbf{When the existing computational language is saturated, can recurring private computation justify—and cause—the birth of new shared language?}
+}
+]
+
+That is much closer to the full vision than the original residual-clustering test was.

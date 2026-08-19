@@ -25,11 +25,17 @@ def log(message: str) -> None:
         handle.write(f"{time.strftime('%H:%M:%S')} {message}\n")
 
 
-def run_cell(args: tuple[int, float, str, int, float | None]) -> str:
-    world, eta, model, groups, uniform_rho = args
+def run_cell(args) -> str:
+    world, eta, model, groups, uniform_rho, slots, onset, freeze = args
     label = f"eta{eta:g}" if groups == 2 else f"eta{eta:g}_g{groups}"
     if uniform_rho is not None:
         label = f"{label}_rho{uniform_rho:g}"
+    if slots is not None:
+        label = f"{label}_k{slots}"
+    if onset:
+        label = f"{label}_onset{onset}"
+    if freeze is not None:
+        label = f"{label}_frozen{freeze}"
     out = ROOT / "artifacts" / "v3_taskgroup" / label / f"world_{world}" / model
     if (out / "summary.json").exists():
         return f"skip {out}"
@@ -38,7 +44,10 @@ def run_cell(args: tuple[int, float, str, int, float | None]) -> str:
          "--config", "configs/v1.yaml", "--model", model,
          "--world-seed", str(world), "--task-group-eta", str(eta),
          "--task-groups", str(groups), "--output", str(out)]
-        + (["--profile"] + [str(uniform_rho)] * 6 if uniform_rho is not None else []),
+        + (["--profile"] + [str(uniform_rho)] * 6 if uniform_rho is not None else [])
+        + (["--operator-slots", str(slots)] if slots is not None else [])
+        + (["--family-onset", str(onset)] if onset else [])
+        + (["--freeze-basis-at", str(freeze)] if freeze is not None else []),
         cwd=ROOT, capture_output=True, text=True,
     )
     if result.returncode != 0:
@@ -54,11 +63,23 @@ def main() -> None:
     parser.add_argument("--model", default="shared_residual")
     parser.add_argument("--groups", type=int, default=2)
     parser.add_argument("--uniform-rho", type=float, default=None)
+    parser.add_argument("--slots", type=int, default=None)
+    parser.add_argument("--family-onset", type=int, default=0)
+    parser.add_argument("--freeze-basis-at", type=int, default=None)
     parser.add_argument("--jobs", type=int, default=4)
     args = parser.parse_args()
 
     cells = [
-        (world, eta, args.model, args.groups, args.uniform_rho)
+        (
+            world,
+            eta,
+            args.model,
+            args.groups,
+            args.uniform_rho,
+            args.slots,
+            args.family_onset,
+            args.freeze_basis_at,
+        )
         for eta in args.etas
         for world in args.worlds
     ]
