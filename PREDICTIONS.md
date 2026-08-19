@@ -439,3 +439,50 @@ becomes a rung it needs an earlier family onset so pre-gap abstractions
 form reliably, the full ten development worlds, and a gap sweep
 establishing the crossover `g*` that V4R §2.1 registers as the
 prerequisite for implementing any online retention policy.
+
+# PROMOTE false positives are separable by the carry cost (2026-08-19)
+
+The confound blocking every online lifecycle experiment is that PROMOTE
+fires on noise. Measured directly: per-abstraction VALUE, defined as the
+held-out Gaussian loss its dependents would pay if it were removed,
+in structured worlds versus structureless controls where every promotion
+is by construction a false positive.
+
+| condition | n | mean | median | fraction below one residual (1,098 nats) |
+| --- | --- | --- | --- | --- |
+| structured (eta=0.9) | 15 | 1,245 | 1,281 | 33% |
+| control (eta=0) | 10 | 651 | 432 | 90% |
+
+Per-world values, sorted:
+
+    structured 0:  1437 1281 1194  -60
+    structured 1:  2757 2241 2156 1572 1266  163
+    structured 2:  1566 1335  987  859  -82
+    control    0:   923  653  326  123
+    control    1:   385  354  325
+    control    2:  2302  643  479
+
+Reading. A threshold at ONE RESIDUAL'S CARRY COST -- 8 bits x the
+residual width, about 1,098 nats, the price of keeping the abstraction
+to the end of the lifetime -- retains 67% of structured abstractions and
+rejects 90% of control abstractions. That threshold is not tuned: it is
+the abstraction's own storage cost, so the rule is simply "an
+abstraction must be worth at least what it costs to keep", which is the
+MDL criterion the project already uses everywhere else.
+
+Why PROMOTE misses this. Its acceptance criterion is behavioral
+deviation within epsilon plus a V_future generalization check. Neither
+compares the abstraction's value against its storage price. An
+abstraction can fit its members well, generalize to held-out members,
+and still not be worth its bits.
+
+CAVEAT, and it is the difference between a diagnostic and an operator.
+This is measured post hoc on final models with full dependent sets. An
+online rule must estimate value at promotion time, when few dependents
+exist and the estimate is noisiest. `LifecycleLibraryLearner` already
+accrues `realized_savings_bits` for exactly this purpose, so the
+instrument exists; whether an online estimate separates the
+distributions as cleanly as the post-hoc one is untested and is the next
+thing to measure. Note also that control world 2 contains one
+2,302-nat abstraction, so the threshold is not a perfect classifier and
+should be reported with its error rates, never as a clean gate.
