@@ -196,3 +196,72 @@ closed; this section supersedes the gate status above.
 - Governing documents now: V2 spec closed (section 12); V3 proceeds
   from section 9.5 plus notes/v3-sketch.txt revision 2, with its own
   spec to be written before any V3 run; sealed seeds 300-329 reserved.
+
+# V2 completion audit (item-by-item, 2026-08-19)
+
+Every closed item's artifact verified present on disk; prereg checker
+green (4 frozen files unchanged, all STATUS paths exist).
+
+## Hypotheses — all ten have written verdicts with artifacts
+
+| Item | Verdict | Evidence |
+|---|---|---|
+| H5a | Partial: early movement then stationary; settled with genuine 32/64/128-task lifetimes | reports/rho_bridge, reports/v2_lifetime_length.json |
+| H5b | Half: linearizes (R^2 0.97 dev, 0.93/0.926 sealed x2), dispersion not tightened | reports/rho_bridge |
+| H6 | Supported-at-boundary; ~additive penalty 2.0-3.4k nats; parity at rho=1 | artifacts/v2_gelu_crossover |
+| H7 | Strongly supported at the advantaged bound (world 0 only — extension to worlds 1-2 optional, noted in STATUS) | reports/v2_route_posterior |
+| H8 | Characterized negative for the gate family; H8b passes under gate v2; re-derivation budget spent and respected | artifacts/v2_consolidation, _gate2 |
+| H9a | Supported 10/10 development AND 30/30 sealed | reports/v2_mixed, reports/v2_confirmatory_mixed |
+| H9b | Supported prequentially both settings; reversed under two-part code both settings (as pre-registered for sealed) | reports/shared_residual (incl. j-weighted), sealed Family B |
+| H10 | Not supported at 64 tasks; dream falsifier passes (3x ratio) | artifacts/v2_compiler |
+| 002b | Confirmed, stronger than predicted | artifacts/v2_hyper_rho09 |
+| 006b | Falsified, pre-sealed timestamp | reports/v2_mechanism |
+
+## Implementation order — all eleven steps executed
+
+B1-B4 bridges done (B3 entropy curves live inside the route-posterior
+report; B4 is figure 3). Steps 001-009 all closed as recorded in section
+12; step 009's sequencing rule (Component A analyzed before B ran) and
+durability rule (summaries committed; 343 MB archive at release
+v2.0-confirmation) both complied with.
+
+## Deviations and open items, honestly enumerated
+
+1. **7b/7c naming:** the implemented compiler variant warm-starts the
+   code and continues online gradient descent — i.e., the 7c HYBRID. A
+   pure one-shot 7b (no refinement) was never run separately; since the
+   hybrid already loses to plain gradient descent and the pure variant
+   has strictly less optimization, it is dominated a fortiori and the
+   H10 verdict is unaffected. Recorded for precision.
+2. **Constraint 6.3 (family-mismatch variants for every V2 model
+   family) was not applied to Models 5, 7, or 8.** Moot for 7/8 (both
+   negative), but Model 5's H9 results carry no mismatch control. OPEN
+   ITEM: run a GELU shared-residual variant before the V2 paper claims
+   H9 unconditionally, or state H9 under the same alignment condition
+   as V1's claims (recommended default).
+3. **Constraint 6.5 (batch forward_tasks before any Benchmark D sweep)
+   was never implemented**; all sweeps ran the per-sample loop. Impact
+   is wall-clock only — no correctness effect — but the constraint as
+   written was violated. Recorded as a deviation.
+4. **H10 accounting gap:** the compiler network's own capacity was
+   never charged into D. Moot given the negative verdict; must be fixed
+   in any V3 reuse of the machinery.
+5. **006c/006d remain outstanding by design** (pre-registered,
+   non-gating; inputs to the V3 spec).
+6. **H9a's spec STATUS block predates the sealed replication**; the
+   sealed result lives in section 12. Cross-reference noted here rather
+   than editing a dated status block.
+7. **PREDICTIONS.md outcome log is still empty** — correct, since none
+   of its four entries' experiments (variational two-part, finer GELU
+   grid, 256-task lifetimes, task-grouped families) have run; they are
+   V3-era.
+
+## Verdict
+
+V2 is complete as specified: every hypothesis has a written,
+artifact-backed outcome; every implementation-order step executed; both
+sealed components passed all six pre-registered outcomes; the frozen
+documents are untouched; and the deviations above are enumerated rather
+than silent. The two items that should not slip: the Model 5 mismatch
+control (open item 2) before any unconditional H9 claim, and the
+006c/006d analyses before the V3 spec freezes its gate design.
