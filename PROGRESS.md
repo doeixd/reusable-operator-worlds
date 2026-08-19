@@ -824,3 +824,27 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   verified arXiv IDs with unresolvable/garbled ones; every citation is
   verified independently before entering any spec or paper.
 - Prereg check green (4 frozen files unchanged; all STATUS paths exist).
+
+# 2026-08-19 — V3 spec written; sketch retired
+
+- Converted notes/v3-sketch.txt Revision 3 into
+  row_v3_experimental_spec.md (provisional draft), with V1/V2
+  discipline: H11 with three mandatory predictions (migration curves as
+  primary M2 endpoint, both-currencies win, prospective M3) plus the
+  dual refusal requirement; H12 hierarchical vocabulary; H13
+  internal-economics conditional on freezing V_hat(A) pre-run; explicit
+  falsifiers for each; the task-group promotion testbed gated on
+  P-2026-08-18-D clustering before any promoter runs; the
+  accidental-similarity control as a build-and-validate deliverable;
+  the unpromoted variational wake learner as the critical paired
+  control; multi-code robustness as a success criterion; a sealed
+  protocol for seeds 300-329 requiring a frozen V3_CONFIRMATION_PLAN
+  (hash added to check_prereg) with parameter intervals and a one
+  re-derivation rule; staged operations V3.1-V3.6 with the
+  compositional-closure gate on LOOP.
+- Retired the sketch with a pointer notice (Revisions 1-3 preserved in
+  git history); updated CLAUDE.md quick pointers (V2 closed, V3
+  active).
+- Pre-run order fixed in the spec's checklist: variational wake learner
+  and P-2026-08-18-A first, testbed validity gate second, control
+  validation third, estimator freezes fourth, PROMOTE last.
