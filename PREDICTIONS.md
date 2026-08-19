@@ -571,3 +571,56 @@ Method note. An upper bound is only a gate in the direction it bounds. A
 FAILING loose bound is decisive; a PASSING loose bound says nothing.
 This one was built to fail-closed and then read as though it could pass,
 which is the same error as scoring a single dormancy arm.
+
+# RETRACTION: "PROMOTE false positives are separable by the carry cost"
+
+The entry above is WRONG and is retracted here rather than edited out.
+It used raw ablation as the counterfactual — remove the abstraction and
+give the dependent NOTHING — which is not an alternative the learner
+would ever face. The correct comparison is against the best admissible
+alternative, which in this substrate is the task's own private residual,
+and it must be a two-part comparison because the whole point of the
+abstraction is that it replaces n private residuals with one shared one:
+
+    V(A) = lambda * n * D_residual - (loss_with_A - loss_private)
+    RETAIN iff V(A) > T_A, where T_A = lambda * D(A), untuned
+
+Recomputed on development worlds 0-2:
+
+| condition | abstractions repaying their own cost | V(A) range |
+| --- | --- | --- |
+| structured | 15/15 | 3,241 - 15,085 |
+| control    | 10/10 | 4,777 - 21,692 |
+
+EVERY abstraction repays, in both conditions, by margins of 3x to 20x
+the threshold. The economic survival rule does not discriminate at all
+here, and the earlier "90% of control abstractions fall below carry
+cost, versus 33% structured" was an artifact of the wrong counterfactual.
+
+Why the reversal is so large. Raw ablation measures only the prediction
+A buys against nothing, of order 400-2,300 nats. The correct measure is
+dominated by the DESCRIPTION term: not storing n private residuals saves
+`n * 1,098` nats, which for a typical dependent set of 6-16 tasks is
+6,600-17,600 nats. Against that, the prediction A gives up relative to
+private residuals (656-10,148 nats) is real but smaller. Any abstraction
+with more than about two dependents repays trivially.
+
+Reading, and it is consistent with every other V4 gate. PROMOTE is NOT
+creating uneconomic abstractions. Its libraries are not inflated in
+description-length terms; they are economically justified even in
+structureless controls, where an abstraction over noise still beats
+storing that noise n times. So there is no lifecycle slack here either
+— which is now the fourth independent measurement saying the same thing
+about this regime.
+
+This retraction is itself the strongest evidence for the rule that
+produced it, adopted as constitutional alongside the other two:
+
+    STRUCTURAL VALUE IS ALWAYS MARGINAL VALUE AGAINST THE CHEAPEST
+    LEGITIMATE ALTERNATIVE.
+
+Three counterfactual errors have now produced three false positives in
+this project: a tolerance normalized against total output variance, a
+sharing claim scored against full-precision atoms instead of matched
+bits, and this one. In all three the favorable number came from
+comparing against something the learner would never actually do.
