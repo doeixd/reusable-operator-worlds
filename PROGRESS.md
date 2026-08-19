@@ -1319,3 +1319,25 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   task's own examples it may select any existing abstraction or none, from
   its own observed data only, with "none" always available so reuse is
   never forced. Rerunning both conditions with reuse enabled.
+
+# 2026-08-19 — H11.1 AND H11.2: the first model to win both currencies
+
+- With library reuse enabled, promotion improves BOTH the prediction and
+  the code, 3/3 worlds:
+    world 0: L -158,347 -> -159,240 (+893 nats), J gain +57,869, 30/40 tasks reuse
+    world 1: L -159,830 -> -161,122 (+1,292),    J gain +64,840, 33/40
+    world 2: L -158,648 -> -159,409 (+761),      J gain +48,969, 31/40
+  Mean loss gain +982 nats and mean two-part gain +57,226, both positive
+  3/3. Every V2 model lost the two-part cell; this is the first learner in
+  the program to win prediction and description length at the same time,
+  and it does so by creating shared capacity that was not preallocated.
+- The forward half is what turned a storage result into an abstraction
+  result. Before reuse, promoted and unpromoted had IDENTICAL prequential
+  loss: bits fell, nothing learned faster. Allowing a new task to select an
+  existing abstraction from its own early examples (or decline) is what
+  makes the library pay in prediction.
+- Refusal now discriminates on three measures at once: structured promotes
+  5.0 and refuses 4.3 with 31.3 of 40 tasks reusing the library, while the
+  structureless control promotes 3.3, refuses 6.3, and has only 15.0 tasks
+  reuse. The control still promotes rather than refusing outright, which is
+  reported as a limitation rather than tuned away.
