@@ -16,6 +16,7 @@ from pathlib import Path
 
 from row.config import load_config
 from row.experiments import learned_lifetime
+from row.task_group_world import TaskGroupSpec, TaskGroupWorldFactory, teacher_group_clustering
 from row.mixed_world import (
     CANONICAL_PROFILE,
     HIERARCHICAL_WEIGHTS,
@@ -53,6 +54,22 @@ def main() -> None:
         action="store_true",
         help="Benchmark E: global+family+task hierarchy instead of a rho profile",
     )
+    # V3 promotion testbed (spec 2.1/2.3). eta = 0 reproduces the canonical
+    # mixed world bit-exactly and is the structureless control.
+    parser.add_argument("--task-group-eta", type=float, default=None)
+    parser.add_argument("--task-groups", type=int, default=2)
+    parser.add_argument(
+        "--task-group-block-size",
+        type=int,
+        default=None,
+        help="drifting-family control: redraw the family direction every N tasks",
+    )
+    parser.add_argument("--future-tasks", type=int, default=8)
+    parser.add_argument(
+        "--resample-future",
+        action="store_true",
+        help="regime-change world: identical lifetime, fresh future directions",
+    )
     args = parser.parse_args()
 
     if (args.output / "summary.json").exists():
@@ -72,11 +89,23 @@ def main() -> None:
         output_directory=args.output,
     )
 
-    factory = (
-        HierarchicalWorldFactory(HIERARCHICAL_WEIGHTS)
-        if args.hierarchical
-        else MixedWorldFactory(args.profile)
+    task_group_spec = (
+        TaskGroupSpec(
+            groups=args.task_groups,
+            eta=args.task_group_eta,
+            block_size=args.task_group_block_size,
+            future_tasks=args.future_tasks,
+            resample_future=args.resample_future,
+        )
+        if args.task_group_eta is not None
+        else None
     )
+    if task_group_spec is not None:
+        factory = TaskGroupWorldFactory(args.profile, task_group_spec)
+    elif args.hierarchical:
+        factory = HierarchicalWorldFactory(HIERARCHICAL_WEIGHTS)
+    else:
+        factory = MixedWorldFactory(args.profile)
     original_world = learned_lifetime.World
     learned_lifetime.World = factory  # type: ignore[assignment]
     try:
@@ -92,7 +121,14 @@ def main() -> None:
         ),
         "per_primitive_recurrence": per_primitive_recurrence(world),
     }
-    if args.hierarchical:
+    if task_group_spec is not None:
+        provenance["rho_profile"] = list(factory.profile)
+        provenance["task_group_spec"] = task_group_spec.as_dict()
+        # Ground truth for post-hoc scoring only; no learner reads this.
+        provenance["group_assignment"] = list(world.group_assignment)
+        provenance["teacher_group_clustering"] = teacher_group_clustering(world)
+        label = f"task_group eta={task_group_spec.eta:g}"
+    elif args.hierarchical:
         provenance["hierarchy_weights"] = list(factory.weights)
         label = f"hierarchy={list(factory.weights)}"
     else:
