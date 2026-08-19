@@ -285,6 +285,76 @@ def fig7_shared_residual() -> None:
     plt.close(fig)
 
 
+
+
+def load_block(root: str):
+    pair = collections.defaultdict(dict)
+    for f in glob(root + "/*/world_*/*/summary.json"):
+        parts = os.path.normpath(f).split(os.sep)
+        rho = parts[2].replace("rho_", "").replace("p", ".")
+        rho = {"0": "0.0", "1": "1.0"}.get(rho, rho)
+        world = int(parts[3].split("_")[1]); model = parts[4]
+        s = json.load(open(f))
+        pair[(float(rho), world)][model] = s
+    out = []
+    for (_rho, _w), models in pair.items():
+        if len(models) == 2:
+            d, c = models["dense"], models["continuous"]
+            out.append((
+                d["world_functional_reuse"]["mean_pairwise_residual_correlation"],
+                d["cumulative_prequential_gaussian_log_loss"]
+                - c["cumulative_prequential_gaussian_log_loss"],
+            ))
+    return out
+
+
+def fig2b_two_blocks() -> None:
+    b1 = load_block("artifacts/rho_confirmatory")
+    b2 = load_block("artifacts/rho_confirmatory_v2")
+    fig, ax = plt.subplots(figsize=(4.8, 3.3))
+    for pts, color, label in ((b1, CONT, "sealed block 1 (seeds 100-129)"),
+                              (b2, "#4EB265", "sealed block 2 (seeds 200-229)")):
+        xs = np.array([p[0] for p in pts]); ys = np.array([p[1] for p in pts])
+        coef = np.polyfit(xs, ys, 1)
+        grid = np.linspace(0, 1, 50)
+        ax.scatter(xs, ys, s=8, alpha=0.3, color=color, edgecolors="none")
+        ax.plot(grid, np.polyval(coef, grid), color=color, lw=1.8,
+                label=f"{label}: {coef[0]:,.0f}r-{abs(coef[1]):,.0f}")
+    ax.axhline(0, color="black", lw=0.8)
+    ax.axvspan(0.40, 0.60, color=NEUTRAL, alpha=0.10)
+    ax.text(0.5, ax.get_ylim()[0]*0.9, "frozen crossing interval", ha="center",
+            fontsize=7.5, color=NEUTRAL)
+    ax.set_xlabel("measured functional recurrence $r$")
+    ax.set_ylabel("Dense$-$Continuous lifetime loss (nats)")
+    ax.set_title("The law's parameters replicate across two sealed blocks")
+    ax.legend(frameon=False, fontsize=7.5, loc="upper left")
+    fig.savefig(OUT / "fig2b_parameter_replication.png")
+    plt.close(fig)
+
+
+def fig8_sealed_allocation() -> None:
+    s = json.load(open("reports/v2_confirmatory_mixed/h9a-allocation.json"))
+    fig, axes = plt.subplots(1, 2, figsize=(7.6, 3.0))
+    ax = axes[0]
+    for w in s["worlds"]:
+        ax.plot(w["per_primitive_measured_recurrence"],
+                w["per_primitive_mean_residual_ratio"], "o-",
+                color=CONT, alpha=0.25, lw=0.8, ms=3)
+    ax.set_xlabel("per-primitive measured recurrence")
+    ax.set_ylabel("mean residual allocation")
+    ax.set_title("Allocation vs ground truth (30 sealed mixed worlds)")
+    ax = axes[1]
+    corrs = [w["spearman_recurrence_vs_ratio"] for w in s["worlds"]]
+    ax.hist(corrs, bins=12, color=CONT, alpha=0.8)
+    ax.axvline(0, color="black", lw=0.8)
+    ax.set_xlabel("per-world Spearman (recurrence vs allocation)")
+    ax.set_ylabel("worlds")
+    ax.set_title(f"Negative in {sum(1 for c in corrs if c < 0)}/{len(corrs)} sealed worlds (p = 1.9e-9)")
+    fig.tight_layout()
+    fig.savefig(OUT / "fig8_sealed_allocation.png")
+    plt.close(fig)
+
+
 def main() -> None:
     effects = load_confirmatory()
     fig1_regime_map(effects)
@@ -294,6 +364,8 @@ def main() -> None:
     fig5_resource_frontier()
     fig6_robustness_forest()
     fig7_shared_residual()
+    fig2b_two_blocks()
+    fig8_sealed_allocation()
     print("wrote", sorted(p.name for p in OUT.glob("*.png")))
 
 
