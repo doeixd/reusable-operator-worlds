@@ -117,7 +117,7 @@ the measurements, per project convention.
 | FACTORIZE | **negative** | existence gate passes (rank-2 excess over isotropic null +15.7/+26.2/+27.3 points) but the matched-budget economic gate fails 9/10 worlds; leave-one-abstraction-out recovers a mean 7.5% |
 | RETIRE | **negative** | obsolescence oracle's refusal control does not refuse |
 | RETAIN | **positive (oracle)** | frozen-library oracle: crossover between gap 8 (+1,594, 7/10) and gap 16 (-240); refusal control passes 0/9 in the permanent arm |
-| FORK | **unresolved** | the private-residual upper bound is too loose to discriminate; needs an actual A' refit |
+| FORK | **negative** | 0/30 abstraction-cells with an actual A' refit; best gain 670 nats against a 1,098 cost, five splits negative. The earlier 24/33 "pass" was a too-loose bound measuring un-promotion |
 
 **Registered prediction 1.1 outcome: FALSIFIED.** "Many related atoms
 favors FACTORIZE" is not supported anywhere sampled. Library size is not
@@ -144,6 +144,13 @@ this is a quality diagnostic, not grounds for refusing promotions. Note
 the standing tension: the principled threshold `T_A = lambda * D(A)` is
 untuned but does not sort, while the rate sorts but any cutoff on it
 would be a tuned hyperparameter.
+
+**CENSUS COMPLETE.** Four of five cells negative; RETAIN positive only
+as an oracle. At this scale, under stationary recurrence with cheap
+reacquisition, the optimal representation IS a static library of
+independently compressed abstractions. §1.2's possibility is the
+realized outcome: lifecycle machinery costs more than the slack it
+recovers, and no `M*` was located below twelve abstractions.
 
 **Blocked.** The online route to RETAIN requires PROSPECTIVE value.
 An at-birth filter fails because an abstraction has its minimum

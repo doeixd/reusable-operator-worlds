@@ -663,3 +663,29 @@ It is a diagnostic, not an operator: a rate threshold would be a tuned
 hyperparameter, unlike `T_A = lambda * D(A)`, which is untuned but
 non-discriminating. Whether the rate has any decision-theoretic use is
 untested.
+
+# V4R FORK cell — RESOLVED NEGATIVE, 0/30 (2026-08-19)
+
+Replaced the too-loose upper bound with an actual refit: split each
+abstraction's dependents by their behavioral residual functions using the
+learner's own clustering, fit A' functionally to one part with
+`_fit_abstraction` (the same machinery PROMOTE uses), reassign that
+subgroup, and price one extra abstraction.
+
+FORK pays in 0/30 abstraction-cells across F=2 and F=4. The best gain is
+670 nats against a cost of 1,098, and five splits are NEGATIVE: a
+refitted A' is worse for its own subgroup than the parent it was carved
+from, because the parent was fitted to more data.
+
+This overturns the bound's apparent 24/33 "pass". The bound measured
+"private residuals beat the shared abstraction", priced against one
+abstraction rather than n, so it was answering a question about
+un-promotion, not forking. Confirms the method note recorded with it: a
+failing loose bound is decisive, a passing one says nothing.
+
+The census is now complete: COMPRESS dominates 12/12, FACTORIZE
+negative, RETIRE negative, FORK negative 0/30, RETAIN positive only as a
+frozen-library oracle. At this scale, under stationary recurrence with
+cheap reacquisition, the optimal representation IS a static library of
+independently compressed abstractions, and lifecycle machinery costs
+more than the slack it recovers.
