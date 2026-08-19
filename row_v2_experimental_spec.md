@@ -1379,3 +1379,53 @@ Benchmark C's priority in V1 spec §9 and the V1 spec's implementation-order
 items 009–010 are inherited by §8 above. Where this document and a note
 disagree, this document reflects the later consensus; where this document
 and the frozen V1 spec disagree about V1 scope, the V1 spec wins.
+
+---
+
+# 12. V2 CLOSURE (2026-08-19)
+
+The sealed block is complete and V2 is closed. Final status:
+
+**Sealed confirmation (seeds 200-229, protocol frozen in
+V2_CONFIRMATION_PLAN.md before any sealed world existed):**
+- Component A: 360 lifetimes, zero exclusions. ALL FOUR Family A
+  outcomes pass — slope 6,194 nats/unit (interval 4,000-7,500); pooled
+  root 0.450 (0.40-0.60); per-world crossing mean 0.483 (0.42-0.58,
+  30/30 worlds crossing); R^2 0.926 measured with +0.262 margin over
+  configured (0.85 / +0.15); sign reversal 30/30, p = 1.9e-9.
+  PARAMETER REPLICATION ACHIEVED across two independent sealed blocks.
+  [reports/v2_confirmatory_familyA.json]
+- Component B (triggered by the pre-registered rule): 90 mixed-profile
+  lifetimes, zero failures. Both Family B outcomes pass — allocation
+  negative 30/30 (p = 1.9e-9); envelope 30/30 (mean +7,192 nats) with
+  the two-part-code reversal 0/30, confirming the development finding
+  as specified. [reports/v2_confirmatory_mixed/]
+- Sealed artifacts archived off-machine:
+  github.com/doeixd/reusable-operator-worlds/releases/tag/v2.0-confirmation
+
+**Hypothesis ledger:** H5a partial (early movement, then stationary;
+settled with genuine 32/64/128-task lifetimes); H5b half (linearizes,
+does not tighten dispersion); H6 supported-at-boundary (additive
+penalty, parity at exact reuse); H7 strongly supported at the advantaged
+bound; H8 characterized negative for the entropy+quality gate family
+(H8b passes, H8a not achieved); H9a supported 10/10 development and
+30/30 sealed; H9b supported prequentially, reversed under the two-part
+code, in both settings; H10 not supported at 64 tasks with the dream
+falsifier passing; 002b confirmed. One mechanism hypothesis (mixture-as-
+posterior) falsified pre-sealed (006b). Three-regime claim stands on
+four instruments; 006c/006d remain pre-registered non-gating analyses.
+
+**Phase III gate (section 9): OPEN.** Conditions: H7 settled (yes —
+inference, not representation); H8b holds (yes, under gate v2); H9
+holds with signature intact (yes, both settings); the crossover surface
+mapped (yes — r, A axes measured; N stationary); nuisance battery
+survived (yes, V1 battery plus sealed replication). The pre-committed
+pivot is NOT taken: H8 failed but H9 passed, so V3 proceeds as
+restructuring (promotion-first, per section 9.5 and the V3 sketch
+revision 2) rather than pivoting to amortized inference alone.
+
+V2's one-sentence verdict: the economics of reuse is lawful and its
+parameters replicate; the learner can read those economics and allocate
+to them almost perfectly; converting that allocation into compact
+reusable structure is the open problem, now precisely characterized,
+that V3 exists to solve.

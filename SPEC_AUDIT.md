@@ -178,3 +178,21 @@ closed; this section supersedes the gate status above.
   gate shape prediction; then Benchmark D.
 - Paper: draft v0.5 with verified references (`paper/draft.md`), seven
   figures regenerable from `paper/make_figures.py`.
+
+# Re-audit at V2 closure (2026-08-19)
+
+- V2 implementation order: steps 001-009 all executed with written
+  outcomes (001 H7; 002 H6; 002b manifold corollary; 003 Model 8 gates
+  v1/v2; 004 Benchmark D with passing gates; 005 H9a; 006 H10 with
+  dream falsifier; 006b mechanism falsification; 007 lifetime-length
+  stationarity; 008 Benchmark E with the promotion post-hoc negative;
+  009 sealed block, both components, all six outcomes).
+- Frozen documents unchanged (tools/check_prereg.py green throughout).
+- Sealed artifacts archived off-machine (GitHub release
+  v2.0-confirmation); summary reports committed per the durability rule.
+- Non-gating pre-registered analyses outstanding by design: 006c
+  (functional-equivalence entropy) and 006d (function-family
+  dimensionality) — inputs to the V3 spec, not V2 obligations.
+- Governing documents now: V2 spec closed (section 12); V3 proceeds
+  from section 9.5 plus notes/v3-sketch.txt revision 2, with its own
+  spec to be written before any V3 run; sealed seeds 300-329 reserved.

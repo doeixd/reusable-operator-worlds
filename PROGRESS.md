@@ -758,3 +758,13 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   30/30, p = 1.9e-9. Parameter replication achieved: the dose-response
   law's coefficients replicate across two independent sealed blocks.
   Reports committed per the durability rule.
+- V2 CLOSED. Sealed Component B complete (90/90, zero failures): Family
+  B passes both outcomes — allocation negative 30/30 (p = 1.9e-9) and
+  envelope 30/30 (mean +7,192 nats) with the pre-registered
+  two-part-code reversal 0/30 confirming the development finding. With
+  Family A's four parameter-replication passes, all six pre-registered
+  V2 confirmatory outcomes hold. Sealed artifacts (V1 and V2, 343 MB)
+  published off-machine as GitHub release v2.0-confirmation. Spec
+  section 12 records the closure, the full hypothesis ledger, and the
+  Phase III gate opening with the pivot NOT taken (H9 passed, so V3
+  proceeds promotion-first). SPEC_AUDIT re-audited at closure.
