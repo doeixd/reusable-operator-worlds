@@ -108,3 +108,18 @@ with route structure imposed at consolidation rather than read out of
 mixtures — and any future compilation gate must construct route
 hypotheses independently (posterior machinery), never by interpreting
 mixture weights.
+
+## Second post-script (2026-08-19): observation 3's entropy example was
+## misattributed
+
+The 006c analysis shows the gate-v2 under-firing was NOT an entropy
+failure: route posteriors are deterministic at both rho endpoints given
+the full record, and 510/512 routes are functionally distinct in the
+trained basis. The binding criterion was the absolute NMSE bar — hard
+routes cannot behaviorally substitute for mixtures in a mixture-trained
+basis. The design principle survives in sharpened form: the correct
+compression instrument is behavioral substitutability (rate-distortion),
+not identity — but the specific "entropy stays high from ties" story is
+retired. Everything now points at one coherent picture: the continuous
+learner's solutions are genuinely manifold-valued, and no route-shaped
+readout of them exists to find.

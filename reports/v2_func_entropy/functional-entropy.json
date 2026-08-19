@@ -1,0 +1,24 @@
+{
+  "scope": "006c pre-registered analysis: functional-equivalence entropy vs route entropy over the continuous basis's 512 routes; world 0 at both rho endpoints",
+  "prediction": "at rho=1 route entropy stays high while functional entropy collapses; at rho=0 neither collapses",
+  "results": [
+    {
+      "label": "rho=1.0 world 0",
+      "equivalence_classes_of_512": 510,
+      "eps_normalized_mse": 0.01,
+      "median_route_entropy": 7.07985658210369e-110,
+      "median_functional_entropy": 7.07985658210369e-110,
+      "tasks_with_func_entropy_below_0.1": 64,
+      "tasks_with_route_entropy_below_0.1": 64
+    },
+    {
+      "label": "rho=0.0 world 0",
+      "equivalence_classes_of_512": 494,
+      "eps_normalized_mse": 0.01,
+      "median_route_entropy": 2.0363279756292914e-89,
+      "median_functional_entropy": 4.772860016525319e-93,
+      "tasks_with_func_entropy_below_0.1": 63,
+      "tasks_with_route_entropy_below_0.1": 63
+    }
+  ]
+}

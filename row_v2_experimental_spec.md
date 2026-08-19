@@ -690,7 +690,16 @@ wherever the soft baseline is weak; entropy bars barely fire at all),
 and with the single re-derivation spent, the verdict stands. The
 pre-registered candidate for any future gate is predictive equivalence
 of the posterior's top routes (BMA-vs-MAP behavioral gap) rather than
-entropy. Decision-branch outcome per §1 H8: the honest claim is the
+entropy. **CORRECTION (2026-08-19, from the 006c analysis):** the
+mechanism sentence above misattributed gate v2's under-firing to
+entropy. With the full task record the route posterior is essentially
+deterministic at BOTH rho endpoints (median entropy ~0;
+reports/v2_func_entropy/), so the BINDING criterion was the absolute
+NMSE bar: hard single routes through the learner's own mixture-trained
+basis rarely reach 0.02 evaluation NMSE even at exact reuse — coherent
+with 006b's finding that the basis holds compensatory manifold
+solutions rather than route-composable parts. The H8 verdict is
+unchanged; its mechanism is now correctly attributed. Decision-branch outcome per §1 H8: the honest claim is the
 third branch — a bound on when compilation is safe — plus the design
 lesson; consolidation as specified does not yet deliver the
 storage/learning trade.
@@ -919,6 +928,17 @@ then seeds 100–129). No V2 training before that, with one exception — the
       when the FUNCTION is identified, not its arbitrary
       implementation") and rehabilitates the gate family for V3 — as an
       analysis result, not a third gate derivation.
+      **STATUS (run 2026-08-19, reports/v2_func_entropy/): PREDICTION
+      FAILED, INFORMATIVELY.** Route entropy does NOT stay high at
+      rho = 1 — with 128 examples the posterior is deterministic at both
+      endpoints, and 510/512 routes are functionally distinct at
+      eps = 0.01 in the trained continuous basis. Functional-equivalence
+      quotienting therefore has nothing to rescue; the gate-v2 failure
+      is re-attributed to the absolute-NMSE criterion (see the H8
+      correction above), and the correct V3 gate question becomes
+      "can any short route BEHAVIORALLY SUBSTITUTE for the mixture"
+      (rate-distortion form), not "has the posterior identified one."
+      
     - **006d, function-family intrinsic dimensionality across rho.**
       SVD/PCA of task-conditioned functional signatures on common
       probes. Pre-registered prediction: high-dimensional at rho ~ 0, a

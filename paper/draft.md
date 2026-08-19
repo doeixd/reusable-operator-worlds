@@ -545,9 +545,13 @@ fired INVERSELY to structure (43% at zero recurrence, 0% at exact reuse
 — relative bars are easiest to clear where the baseline is worst, and
 single hard routes cannot match compensatory mixtures), and the
 re-derived absolute gate satisfied the shape but barely fired (0-8 of 64
-tasks), because behavioral near-equivalence among routes keeps posterior
-entropy high — entropy measures route identifiability, not
-compilability. A within-lifetime amortized compiler (a set encoder
+tasks). A follow-up analysis corrected our first mechanism reading: the
+route posterior is in fact deterministic given the full task record, and
+the binding criterion was the absolute quality bar — hard single routes
+through a mixture-trained basis rarely substitute for the mixture even
+at exact reuse, consistent with Section 5.4's finding that the basis
+holds compensatory manifold solutions rather than route-composable
+parts. A within-lifetime amortized compiler (a set encoder
 warm-starting task codes, trained on the lifetime's own solved tasks)
 lost to plain gradient descent in every world at both recurrence
 extremes; its pre-registered self-test nonetheless passed — augmenting
