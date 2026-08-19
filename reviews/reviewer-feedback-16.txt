@@ -1,0 +1,659 @@
+Yes. I think the spec is **strong enough to execute after a short revision pass**, but I would fix a handful of things first. A few are not cosmetic—they could make H11 either impossible to satisfy or scientifically ambiguous.
+
+The overall design is excellent: V3 is narrowly focused on the actual V2 failure, PROMOTE is the only structural operation, the unpromoted variational learner isolates the effect of promotion, future-task savings distinguish compression from abstraction, and the refusal controls are treated as part of the hypothesis rather than optional robustness. 
+
+## 1. The accidental-similarity control is currently impossible
+
+This is the most important issue.
+
+You specify that the accidental-similarity world is **identical to the real promotion world for the 64 lifetime tasks**, and differs only because the future block independently resamples its family directions. Yet you require the promoter to refuse promotion in this control. 
+
+The learner cannot do that.
+
+If its entire observed history (H) has the same distribution in both worlds,
+
+[
+P(H\mid\text{stable})=
+P(H\mid\text{accidental}),
+]
+
+then no algorithm using only (H) can determine whether:
+
+[
+P(F_{\rm future}\mid H)
+]
+
+will preserve the family component or resample it.
+
+That's not a learning failure. It's an information-theoretic impossibility.
+
+This control should instead be one of two things.
+
+Either keep it exactly as designed, but change the prediction to:
+
+> The learner should make the **same promotion decision** in stable and accidental histories, because they are observationally indistinguishable; the accidental world demonstrates the unavoidable cost of unanticipated regime change.
+
+That is actually an interesting result.
+
+Or—probably better for H11—construct a **retrospectively compressible but prospectively dubious** history. For example:
+
+```text
+tasks 1–16    family A direction
+tasks 17–32   family A'
+tasks 33–48   family A''
+tasks 49–64   family A'''
+```
+
+with enough within-block recurrence that retrospective factoring helps, but sequential evidence shows that the reusable direction is unstable.
+
+Then:
+
+[
+V_{\rm retro}>0,
+\qquad
+\hat V_{\rm future}\le0
+]
+
+can be inferred from experience.
+
+That actually tests a prospective abstraction criterion.
+
+I would fix this before a single promotion run.
+
+---
+
+## 2. Resolve a real architecture contradiction
+
+Section 3.1 says:
+
+> **Shared substrate: hypernetwork-style generated operators.**
+
+But the binding defaults say:
+
+> **Base architecture: the frozen shared-residual learner (routes plus rank-2 task-step residuals).**
+
+Those are not the same wake substrate. 
+
+I would choose the **frozen H9 shared-residual architecture for V3.1**.
+
+Reason: V2 has already established that this learner solves the allocation problem. Its failure is precisely:
+
+[
+\text{great allocation}+\text{bad bits}.
+]
+
+So the cleanest causal progression is:
+
+[
+\text{H9 shared-residual}
+]
+
+[
+\downarrow\quad +\text{variational coding}
+]
+
+[
+\text{compressed H9}
+]
+
+[
+\downarrow\quad+\operatorname{PROMOTE}
+]
+
+[
+\text{V3 learner}.
+]
+
+If you simultaneously switch the wake substrate to a hypernetwork, a V3 success or failure becomes harder to attribute.
+
+“Manifold-first” can remain the conceptual interpretation, but I'd save a hypernetwork wake implementation for V3.1b.
+
+---
+
+## 3. Fixed-width two-part bits may make H11.1 impossible
+
+This is the other major issue.
+
+You correctly introduce a variational code:
+
+[
+D_{\rm var}
+===========
+
+\frac{KL(q|p)}{\ln2}.
+]
+
+Great.
+
+Suppose after learning, most residual coordinates carry almost no information:
+
+[
+KL_i\approx0.
+]
+
+Under the variational currency, they are effectively free.
+
+But your literal two-part currency still charges:
+
+[
+8\times#\text{task scalars}.
+]
+
+So unless PROMOTE actually **removes task parameters**, fixed-width (D_{\rm task}) does not fall at all.
+
+A residual can go from:
+
+[
+(8\text{ meaningful bits/weight})
+]
+
+to:
+
+[
+(0.001\text{ meaningful bits/weight})
+]
+
+and your two-part code still says:
+
+[
+8\text{ bits/weight}.
+]
+
+Yet H11.1 requires the migration pattern to hold in **both** bit currencies. 
+
+You therefore need an explicit post-promotion representation such as:
+
+[
+\Delta_\tau
+===========
+
+A_{g(\tau)}
++
+R_\tau
+]
+
+where (R_\tau) has genuinely fewer retained degrees of freedom, or variable precision/sparsity is actually encoded.
+
+For example, after promotion:
+
+[
+R_\tau=U_\tau V_\tau
+]
+
+could drop rank from 2 to 1 or 0 where the promoted abstraction explains that component.
+
+Or introduce a real entropy-coded representation with:
+
+* parameter presence bitmap;
+* quantized nonzero values;
+* precision code.
+
+Then zero-information coordinates genuinely cost nearly zero bits.
+
+Otherwise you're setting the variational learner up to succeed under KL and fail by construction under the fixed-width code.
+
+---
+
+## 4. The promoted abstraction class is currently too unconstrained
+
+This sentence worries me:
+
+> “The abstraction's form — continuous subspace, parameterized function, discrete operator — is decided by the criterion, never imposed.”
+
+That's the long-term goal.
+
+But the actual proposal mechanism says every cluster produces:
+
+> “the best rank-2 functional fit.”
+
+
+
+So V3.1 **is** imposing an abstraction family.
+
+That's fine!
+
+I would embrace it.
+
+Define V3.1's promoted abstraction as exactly one thing, perhaps:
+
+[
+A_g(z)=
+U_g,\phi(V_gz+b_g)
+]
+
+with rank 2.
+
+Then the claim is:
+
+> recurrent task-local functional information can be promoted into a shared rank-2 abstraction.
+
+Later versions can compare:
+
+[
+\text{atom}
+\quad|\quad
+\text{subspace}
+\quad|\quad
+\text{parameterized abstraction}.
+]
+
+If you attempt form discovery now, PROMOTE becomes architecture search and you lose the beautiful simplicity of V3.
+
+---
+
+## 5. H11.2 is missing the most important baseline
+
+H11.2 currently requires the promoted learner to beat:
+
+* shared-residual;
+* Continuous;
+* Dense-C.
+
+But the most important baseline is:
+
+[
+\boxed{\text{the exact same variational wake learner with PROMOTE disabled}.}
+]
+
+You do include that model in §3.3, but it should appear explicitly in H11.2.
+
+The key comparison is:
+
+[
+J_{\rm promoted}
+<
+J_{\rm same\ learner,\ no\ promotion}.
+]
+
+Otherwise you could discover that variational coding itself solves V2's compression failure and PROMOTE adds nothing, while still satisfying some legacy comparisons.
+
+I'd make the hierarchy:
+
+[
+\textbf{Primary causal comparison:}
+\quad
+\text{Promoted vs Unpromoted-Variational}.
+]
+
+Then:
+
+[
+\textbf{frontier comparison:}
+\quad
+\text{Promoted vs all V2 baselines}.
+]
+
+---
+
+## 6. Separate proposal probes from acceptance probes
+
+Right now you:
+
+1. cluster residual functions on a probe batch;
+2. fit candidate (A) on that probe batch;
+3. test substitutability on the probe batch.
+
+That creates an easy finite-probe overfitting channel.
+
+I'd use deterministic disjoint sets:
+
+[
+Z_{\rm proposal}
+]
+
+for clustering and fitting,
+
+and:
+
+[
+Z_{\rm validation}
+]
+
+for the actual PROMOTE gate.
+
+Then perhaps:
+
+[
+Z_{\rm audit}
+]
+
+for post-hoc reporting.
+
+Promotion is accepted only if:
+
+[
+d_{Z_{\rm validation}}
+(F_{\rm old},F_{\rm promoted})
+\le\epsilon.
+]
+
+This is cheap in ROW and makes the functional-substitution claim substantially stronger.
+
+I would consider this mandatory.
+
+---
+
+## 7. Be careful with the variational coding claim
+
+There are really two quantities:
+
+### Predictive performance
+
+You evaluate using the posterior mean:
+
+[
+L(\mu).
+]
+
+Fine.
+
+### Variational description bound
+
+A valid variational code looks more like:
+
+[
+\mathbb E_{\theta\sim q}
+[-\log p(D\mid\theta)]
++
+KL(q|p).
+]
+
+Those are not the same thing.
+
+So don't call:
+
+[
+L(\mu)+KL(q|p)
+]
+
+a literal variational codelength unless you establish the relevant coding interpretation.
+
+I would report separately:
+
+[
+L_{\rm mean}
+]
+
+for behavior,
+
+and:
+
+[
+L_{\rm variational}
+===================
+
+E_q[L]+KL
+]
+
+for the variational code, estimated with fixed MC sampling.
+
+Your literal int8 two-part code remains an independent hard accounting instrument.
+
+That gives you three genuinely distinct currencies instead of accidentally mixing them.
+
+---
+
+## 8. Clarify the learned prior—there is a possible loophole
+
+You write:
+
+> “one learned (s_p) per task-state tensor.”
+
+
+
+If that means **one shared prior scale per tensor type across all tasks**, that's reasonable.
+
+If it means each task gets its own learned prior scale, that's hidden task information that can reduce KL essentially for free.
+
+It should be:
+
+[
+s_p^{(\text{route})},
+\quad
+s_p^{(\text{residual-U})},
+\quad\ldots
+]
+
+shared across tasks and counted in:
+
+[
+D_{\rm shared}.
+]
+
+Any task-specific prior parameter must itself be charged to (D_{\rm task}).
+
+I'd write this explicitly.
+
+---
+
+## 9. Define “matched predictive loss” before development finishes
+
+H11.1 says:
+
+[
+D_{\rm promoted}<D_{\rm unpromoted}
+]
+
+“at matched predictive loss.”
+
+Good criterion, but “matched” needs an operational margin.
+
+For example:
+
+[
+L_{\rm promoted}
+----------------
+
+L_{\rm unpromoted}
+\le\delta_L.
+]
+
+Or:
+
+[
+NMSE_{\rm promoted}
+\le
+NMSE_{\rm unpromoted}+10^{-4}.
+]
+
+Freeze (\delta_L) before sealed confirmation.
+
+Otherwise a 30% bit saving accompanied by a small loss increase becomes a judgment call.
+
+Better still, make this explicitly rate–distortion:
+
+[
+D^*(\epsilon)
+=============
+
+\min D
+\quad
+\text{s.t.}
+\quad
+\Delta L\le\epsilon.
+]
+
+That would make H11.1 extremely crisp.
+
+---
+
+## 10. I would demote H13 now
+
+H13 is intellectually interesting:
+
+[
+\hat V(A)
+]
+
+should reproduce the external recurrence crossover.
+
+But I don't think V3 needs it to succeed.
+
+And you're about to select a (V_{\rm future}) estimator using development future-block performance. That creates enough researcher degrees of freedom that H13 could become a distraction.
+
+I'd make it explicitly exploratory now.
+
+V3's core story should remain:
+
+[
+\boxed{
+\text{bits migrate}
+\rightarrow
+\text{total description shrinks}
+\rightarrow
+\text{future learning becomes cheaper}.
+}
+]
+
+If (\hat V) happens to recover the V1 crossover beautifully, fantastic supplementary result.
+
+Don't let it delay H11.
+
+---
+
+# One thing I particularly like
+
+The accidental-similarity issue aside, introducing **prospective value** is a major conceptual improvement.
+
+You are distinguishing:
+
+[
+V_{\rm retro}
+=============
+
+\text{how much this explains the past}
+]
+
+from:
+
+[
+V_{\rm future}
+==============
+
+\text{how much this should help later}.
+]
+
+That is exactly the distinction the grand vision needs.
+
+Eventually an abstraction should exist because:
+
+[
+\boxed{
+\mathbb E[\text{future savings}]
+
+>
+
+\text{cost of creating and retaining it}.
+}
+]
+
+Not because it happened to make yesterday's dataset shorter.
+
+I would push this harder.
+
+---
+
+# One additional experiment I'd pre-register but not necessarily run immediately
+
+Once H11 works, create two worlds with identical current recurrence but different **expected remaining lifetime**.
+
+If abstraction (A) costs (C) and saves (s) per future task:
+
+[
+N_{\rm future}s>C
+]
+
+should determine whether promotion pays.
+
+So after the same first 32 tasks tell the learner the same structure, one environment ends after 8 more tasks and another has 128 remaining.
+
+A truly prospective abstraction policy should be more willing to promote in the long-horizon condition.
+
+That's almost the purest possible test of the “abstraction as investment” theory.
+
+It also avoids the observational-impossibility problem because the remaining horizon can be explicitly known to the learner.
+
+I wouldn't add it to V3.1 before H11, but I'd put it in the predictions ledger now.
+
+---
+
+# Another later experiment: hysteresis
+
+Once CREATE/PROMOTE has a real cost, the threshold for:
+
+[
+\text{create abstraction}
+]
+
+should differ from:
+
+[
+\text{retain existing abstraction}.
+]
+
+So you'd predict:
+
+[
+r_{\rm create}
+
+>
+
+r_{\rm delete}.
+]
+
+That gives a hysteresis loop.
+
+It's a beautiful reason for FORK/DELETE/nonstationarity later, but again: after PROMOTE works.
+
+---
+
+# My proposed pre-execution edits
+
+If I were freezing the spec today, I would make exactly these changes:
+
+1. **Fix the accidental-control impossibility.**
+2. **Choose one wake substrate**—preferably the frozen H9 architecture for causal continuity.
+3. **Make literal bits capable of actually shrinking** when task information disappears.
+4. **Fix the V3.1 abstraction family** instead of pretending its form is already discovered.
+5. Add **Unpromoted-Variational explicitly to H11.2**.
+6. Split functional probes into proposal and acceptance sets.
+7. Separate mean-network performance from the actual variational code.
+8. Make the prior unquestionably shared/charged.
+9. Freeze the predictive non-inferiority margin for H11.1.
+10. Demote H13 unless its estimator is truly obvious before promoter development.
+
+None of these changes alters the research thesis. They make the central result much harder to dispute.
+
+## Then I would execute
+
+I would **not** add more architecture after that.
+
+The spec already contains the right crucial experiment:
+
+[
+\boxed{
+D_{\rm task}\downarrow,\qquad
+D_{\rm shared}\uparrow,\qquad
+D_{\rm total}\downarrow
+}
+]
+
+with:
+
+[
+L_{\rm heldout}\not\uparrow
+]
+
+and then:
+
+[
+L_{\rm future,promoted}
+<
+L_{\rm future,unpromoted}.
+]
+
+If that happens robustly, with refusal where justified by observable evidence, you have shown exactly what V3 is supposed to show:
+
+> **experience caused information to migrate from repeated task-local representations into a cheaper persistent computational abstraction, and that abstraction subsequently reduced the cost of learning new related tasks.**
+
+I would be very comfortable starting V3 after the issues above are patched. The overall experimental logic is the strongest version of this project so far. 

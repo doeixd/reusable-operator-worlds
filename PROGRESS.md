@@ -872,3 +872,39 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   savings on dev 0-2); and a new section 11 of execution notes
   (machine constraints, provenance extensions, promotion_ledger.json
   schema, tuning ledger, sealed-seed incident rule).
+
+# 2026-08-19 — reviewer-feedback-16 pre-execution fixes applied to V3 spec
+
+- Applied all ten of review 16's pre-execution edits. The two
+  substantive repairs: (1) the accidental-similarity refusal control
+  was information-theoretically impossible as designed (identical
+  history distributions cannot support differential refusal); replaced
+  with a drifting-family control (blocks of 16 with a fresh family
+  direction each, instability observable from sequential evidence),
+  while the original construction is kept as a secondary regime-change
+  world whose registered prediction is SAME decision plus measured
+  cost of unanticipated change; (2) fixed-width two-part bits could
+  never fall without parameter removal, making H11.1 unwinnable by
+  construction — promotion now includes a rank-reduction step (refit
+  affected residuals at rank 1/0 within epsilon on a disjoint
+  validation set) so migration is visible in literal bits.
+- Also: wake substrate fixed to the frozen H9 shared-residual
+  architecture (hypernetwork wake deferred to V3.1b) resolving the 3.1
+  contradiction; the V3.1 abstraction family fixed explicitly at
+  rank-2 U tanh(Vz+b) rather than claiming form discovery; the
+  unpromoted-variational learner elevated into H11.2 as the PRIMARY
+  causal comparison (frontier comparison secondary, with the
+  "variational suffices, promotion inert" outcome named); disjoint
+  Z_proposal/Z_validation/Z_audit probe sets made mandatory; L_mean
+  and L_var = E_q[L]+KL separated (the L_mean+KL hybrid banned as a
+  codelength); prior scales made per-tensor-TYPE, shared across tasks,
+  charged to D_shared; the H11.1 matched-loss margin operationalized
+  (delta_L default 1e-4, frozen in the confirmation plan, with
+  rate-distortion reporting); H13 demoted to exploratory now, before
+  promoter development, because the V_future estimator selection
+  creates researcher degrees of freedom.
+- Added P-2026-08-19-G (horizon experiment: promotion rate at least
+  doubles in the long-horizon condition; conditional on H11) to the
+  predictions ledger and staged it after H11 in the spec.
+- P-2026-08-19-E is scored on the drifting-family control; the ledger
+  entry itself is append-only and unedited.

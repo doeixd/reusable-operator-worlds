@@ -64,14 +64,27 @@ shared abstractions. Three required predictions, all mandatory:
   `D_task(t)` fall, shared retained bits `D_shared(t)` rise, total
   retained bits `D_total(t)` fall, while held-out predictive loss stays
   flat or improves. Endpoint comparison: `D_promoted < D_unpromoted` at
-  matched predictive loss. The curve signs and a minimum total-bits
-  saving (frozen at development close; see §6) are the registered
-  outcome, not only the final state.
+  matched predictive loss, where "matched" is operational
+  (non-inferiority margin): held-out NMSE_promoted <=
+  NMSE_unpromoted + delta_L, with delta_L = 1e-4 as the development
+  default and the final value frozen in `V3_CONFIRMATION_PLAN.md`.
+  Where practical, report the rate-distortion form
+  D*(delta) = min D s.t. dL <= delta at several delta, not only the
+  registered point. The curve signs and a minimum total-bits saving
+  (frozen at development close; see §6) are the registered outcome,
+  not only the final state.
 - **H11.2 (both currencies).** `J = L + lambda*D` at `lambda = ln 2`
-  (the literal two-part cell where every V2 model loses): the promoted
-  learner beats shared-residual, Continuous, AND Dense-C in the
-  promotion testbed worlds — the first model to win prediction and
-  description length simultaneously.
+  (the literal two-part cell where every V2 model loses). PRIMARY
+  CAUSAL COMPARISON: the promoted learner beats the identical
+  variational wake learner with PROMOTE disabled —
+  J_promoted < J_unpromoted-variational — because if variational
+  coding alone repairs the compression failure, PROMOTE has
+  demonstrated nothing. FRONTIER COMPARISON: the promoted learner also
+  beats shared-residual, Continuous, AND Dense-C in the promotion
+  testbed worlds — the first model to win prediction and description
+  length simultaneously. Both are required for a full pass; a
+  frontier-only pass with a null causal comparison is reported as
+  "variational coding suffices, promotion inert."
 - **H11.3 (M3, prospective value).** After promotion, related future
   tasks (drawn from the same hidden family, never seen before) cost
   measurably fewer samples/nats to learn than for the matched
@@ -79,10 +92,14 @@ shared abstractions. Three required predictions, all mandatory:
   optimization, not abstraction.
 
 **Refusal requirement (part of H11, not an add-on):** NO promotion in
-structureless controls AND no promotion in accidental-similarity
-controls (§2.3). A promoter that cannot refuse is not a criterion; one
-that cannot distinguish retrospective coincidence from prospective
-structure is a historian, not a learner.
+structureless controls AND no lifetime-persistent promotion in
+drifting-family controls (§2.3), where the instability is observable
+from the sequential evidence. A promoter that cannot refuse is not a
+criterion; one that cannot distinguish observable retrospective
+coincidence from prospective structure is a historian, not a learner.
+Refusal is never demanded where the histories are observationally
+indistinguishable (the regime-change world registers the same-decision
+prediction instead).
 
 **Falsifiers.** If migration curves do not exhibit the three-sign
 pattern at flat held-out loss in a majority of development worlds, H11
@@ -106,17 +123,19 @@ functional matching only. **Falsifier:** promoted abstractions do not
 separate strata better than a one-level promoter given the same bit
 budget.
 
-## H13 — Internal economics (conditional; adopt only if freezable)
+## H13 — Internal economics (EXPLORATORY, demoted per review 16)
 
-The learner's internal promotion value `V_hat(A)` crosses zero near the
-externally measured sharing crossover: across worlds spanning measured
-recurrence 0–1, mean `V_hat(A)` is monotone increasing in measured
-recurrence and its zero crossing lands in [0.35, 0.60]
-(P-2026-08-19-F). **Adoption condition:** the operational definition of
-`V_hat(A)` must be frozen in this spec BEFORE any promotion run. If it
-cannot be frozen cleanly, H13 is demoted to an exploratory analysis and
-the prediction ledger entry is scored as written. **Falsifier:**
-non-monotone `V_hat`, or crossing outside the interval.
+The learner's internal promotion value `V_hat(A)` (the logged §3.2
+`V(A)`) crossing zero near the externally measured sharing crossover
+would connect the external law to the internal decision. Demoted from
+conditional-hypothesis to exploratory analysis NOW, before promoter
+development: the `V_future` estimator is itself selected on
+development future-block performance, which creates enough researcher
+degrees of freedom that a registered H13 would be compromised, and V3
+does not need it to succeed. P-2026-08-19-F remains in the ledger and
+is scored as written (monotone `V_hat` in measured recurrence, crossing
+in [0.35, 0.60]); a clean pass is a supplementary result, never a gate,
+and no V3.1 decision may wait on it.
 
 ---
 
@@ -158,16 +177,35 @@ task-specific) enables exact scoring of the recovered hierarchy.
 
 - **Structureless:** the rho = 0 analogue of the testbed — no recurring
   residual structure exists. Promotion must not fire.
-- **Accidental similarity (review 15):** same marginal statistics, task
-  count, and rank distribution as §2.1, but the apparent residual
-  similarity is constructed to be non-predictive of the future block —
-  the "shared" direction is resampled independently for held-out future
-  tasks. By construction `V_retro > 0` and `V_future = 0`. A promoter
-  must refuse; a retrospective-only criterion is predicted to be fooled
-  (P-2026-08-19-E). Construction details (matched moments, matched
-  within-history similarity spectrum) are a development deliverable and
-  must be validated with the same instrument used in §2.1's gate before
-  any promoter sees the control.
+- **Drifting-family control (the refusal test; corrected per review
+  16):** the original accidental-similarity design (identical lifetime
+  history, future block resampled) is information-theoretically
+  impossible as a refusal test — no learner using only the observed
+  history can distinguish worlds whose histories are identically
+  distributed. The refusal control instead makes the instability
+  OBSERVABLE: the family direction drifts across lifetime blocks
+  (tasks 1–16 use direction A, 17–32 A', 33–48 A'', 49–64 A''', each a
+  fresh draw at the same `eta`), so within-block retrospective
+  factoring helps (`V_retro > 0`) while the sequential evidence shows
+  the reusable direction is unstable (`V_future <= 0` is inferable
+  from experience). A prospective promoter must refuse a lifetime-
+  persistent promotion here; a retrospective-only criterion is
+  predicted to be fooled. P-2026-08-19-E is scored on this control
+  (its ledger text — similarity constructed to be non-predictive of
+  the future block, prospective term required to refuse — is satisfied
+  by this construction; the ledger is append-only and is not edited).
+  Refusal, throughout this spec, means refusal WHERE JUSTIFIED BY
+  OBSERVABLE EVIDENCE — never clairvoyance.
+- **Regime-change world (secondary, kept from the original design):**
+  identical lifetime history to §2.1 with only the future block's
+  family directions resampled. Because it is observationally
+  indistinguishable from the testbed, the REGISTERED prediction is the
+  opposite of refusal: the promoter makes the SAME decision as in the
+  matched testbed world, and the world measures the unavoidable cost
+  of unanticipated regime change (promoted-learner future-block
+  penalty). No refusal claim attaches to this world.
+  Both controls' construction is validated with the §2.1 clustering
+  instrument before any promoter sees them.
 
 ## 2.4 Future block (M3 instrument)
 
@@ -200,10 +238,12 @@ sleep, fired or refused.
   until the §2.1 clustering gate passes on development worlds 0–2, with
   every value tried logged; it is then frozen for all V3 work.
 - **Structureless control:** the identical generator with `eta = 0`.
-- **Accidental-similarity control:** identical to the testbed for the
-  64 lifetime tasks; the future block's family directions are resampled
-  independently (same distribution, fresh RNG stream), so within-
-  history similarity is real but non-predictive.
+- **Drifting-family control:** four blocks of 16 tasks, each block's
+  family direction a fresh draw at the same `eta`; future block drawn
+  with yet another fresh direction. **Regime-change world:** identical
+  to the testbed for the 64 lifetime tasks; only the future block's
+  family directions are resampled (same distribution, fresh RNG
+  stream).
 - **Future block:** 8 held-out tasks per world (4 per family for the
   testbed; matched count for controls), never trained during the
   lifetime; probed at checkpoints 8, 16, 32, 64 (the V1/V2 checkpoint
@@ -218,10 +258,15 @@ sleep, fired or refused.
 
 ## 3.1 Wake phase: manifold-first, bits-priced
 
-- **Shared substrate:** hypernetwork-style generated operators. Slots
-  are an output of compression, not an architectural input (006b:
-  mixtures are manifold solutions, not route beliefs; 002b: the pure
-  manifold beats explicit slots at partial recurrence).
+- **Shared substrate (one substrate, chosen for causal continuity —
+  review 16):** the frozen H9 shared-residual architecture. V2
+  established that this exact learner solves allocation and fails only
+  at bits; the cleanest causal chain is H9 shared-residual ->
+  + variational coding -> + PROMOTE, so a V3 verdict attributes to one
+  change at a time. "Manifold-first" remains the conceptual
+  interpretation (006b: mixtures are manifold solutions; 002b: the
+  manifold beats slots at partial recurrence); a hypernetwork wake
+  substrate is deferred to V3.1b, gated on the V3.1 verdict.
 - **Task state:** variational-coded residuals — q(Delta_tau) =
   N(mu_tau, sigma_tau^2) with learned per-parameter precision and KL to
   a shared prior in the wake loss:
@@ -249,14 +294,22 @@ sleep, fired or refused.
   task-specific scalars (residuals and route parameters alike).
 - Parameterization: posterior mean `mu` plus per-parameter
   `log sigma`; prior is factorized N(0, s_p^2) with one learned `s_p`
-  per task-state tensor, in a no-weight-decay optimizer group (the
-  learned-alpha convention). Initialize `mu` at the frozen
-  shared-residual initialization and `sigma = s_p` so the initial KL
-  is zero.
+  per task-state TENSOR TYPE (route, residual-U, residual-V, ...),
+  SHARED ACROSS ALL TASKS and counted in `D_shared` — a per-task prior
+  scale would be hidden task information reducing KL for free (review
+  16); any task-specific prior parameter, if ever introduced, is
+  charged to `D_task`. Prior scales live in a no-weight-decay
+  optimizer group (the learned-alpha convention). Initialize `mu` at
+  the frozen shared-residual initialization and `sigma = s_p` so the
+  initial KL is zero.
 - Training: one reparameterized sample per forward during updates;
   prequential scoring and all evaluation use the posterior MEAN
   (deterministic — the paired-comparison and score-before-update rules
-  are unchanged). Variational bits are `KL / ln 2`.
+  are unchanged). Two quantities are reported and never conflated
+  (review 16): `L_mean` = loss of the posterior mean (behavior), and
+  `L_var = E_q[L] + KL` estimated with a fixed 16-sample fixed-seed MC
+  scheme (the variational code). `L_mean + KL` is NOT called a
+  codelength anywhere. Variational bits are `KL / ln 2`.
 - Tuning: the V2 two-stage protocol exactly. Stage one on development
   worlds 0–2 tunes ONLY `beta` over the grid {0.1, 0.3, 1.0} with all
   learning rates inherited from the frozen shared-residual setting;
@@ -303,28 +356,52 @@ sleep, fired or refused.
 **Defaults (binding):**
 - Sleep schedule: after tasks 8, 16, 32, and 64 (the V2 SLEEPS
   convention), plus a final sleep at lifetime end if distinct.
+- Probe sets (review 16, mandatory): three deterministic DISJOINT
+  per-world input sets — `Z_proposal` (clustering and candidate
+  fitting), `Z_validation` (the PROMOTE accept/reject gate and the
+  re-anchoring behavior check), `Z_audit` (post-hoc reporting only).
+  Fitting and accepting on the same batch is an overfitting channel
+  and is prohibited.
 - Candidate proposal: compute pairwise behavioral distances between
-  task-step residual functions on a fixed per-world probe batch (the
-  existing functional-matching machinery); agglomerative clustering at
-  a distance threshold tied to `epsilon`; each cluster of size >= 3
-  yields one candidate `A` = the best rank-2 functional fit to the
-  cluster (fit by short gradient descent on the probe batch,
-  deep-copied model, never touching lifetime training — the checkpoint-
-  probe isolation rule).
-- Substitutability tolerance: `epsilon = 0.02` NMSE on the probe batch
-  (continuity with the V1/V2 threshold family and gate v2's absolute
-  bar). Tunable on development worlds 0–2 only, logged, then frozen.
+  task-step residual functions on `Z_proposal` (the existing
+  functional-matching machinery); agglomerative clustering at a
+  distance threshold tied to `epsilon`; each cluster of size >= 3
+  yields one candidate.
+- **The V3.1 abstraction family is FIXED (review 16):**
+  `A_g(z) = U_g tanh(V_g z + b_g)`, rank 2 — the substrate's own
+  operator family. The V3.1 claim is exactly "recurrent task-local
+  functional information can be promoted into a shared rank-2
+  abstraction"; form DISCOVERY (atom vs subspace vs parameterized
+  family, the review-12 abstraction ladder) is deferred to later
+  rungs, where fixed-form V3.1 is the baseline. Candidates are fit to
+  their cluster by short gradient descent on `Z_proposal`
+  (deep-copied model, never touching lifetime training — the
+  checkpoint-probe isolation rule).
+- Substitutability tolerance: `epsilon = 0.02` NMSE, evaluated on
+  `Z_validation` for the accept/reject decision (continuity with the
+  V1/V2 threshold family and gate v2's absolute bar). Tunable on
+  development worlds 0–2 only, logged, then frozen.
+- **Post-promotion representation must actually shed parameters
+  (review 16 — otherwise fixed-width bits cannot fall and H11.1 is
+  unwinnable by construction):** after re-anchoring to
+  `Delta_tau = A_g(tau) + R_tau`, each affected task-step residual
+  `R_tau` is refit at rank 1 and rank 0 (drop) on `Z_proposal`; the
+  lowest rank that stays within `epsilon` on `Z_validation` is
+  retained. The two-part code charges only retained scalars plus a
+  2-bit per-task-step rank code and the reference index, so migration
+  is visible in fixed-width bits exactly when promotion genuinely
+  removes task degrees of freedom.
 - `lambda = ln 2`; `mu = 0` for V3.1 (compute is reported and the
   search-tax terms are logged per §5, but not charged — charging
   compute enters with MACRO/LOOP economics, not before).
 - On promotion, member tasks' posteriors are re-anchored to the new
   prior `p(epsilon | A)` (means re-expressed as offsets from A's
-  contribution); the change must be behavior-preserving on the probe
-  batch to within `epsilon` or the promotion is rolled back and logged
-  as refused-at-commit.
-- `V_hat(A)` for H13 is, by definition, the logged `V(A)` of this
-  section — H13's adoption condition therefore reduces to freezing the
-  `V_future` estimator (checklist item 4).
+  contribution); the change must be behavior-preserving on
+  `Z_validation` to within `epsilon` or the promotion is rolled back
+  and logged as refused-at-commit.
+- `V_hat(A)` for the exploratory H13 analysis is, by definition, the
+  logged `V(A)` of this section; no additional machinery is built for
+  it and no V3.1 decision waits on it.
 
 ## 3.3 Baselines (all frozen V2 configurations, unchanged)
 
@@ -348,12 +425,14 @@ three-sign pattern with flat-or-better held-out loss, plus a minimum
 total-bits saving frozen at development close.
 
 **Operational definitions, per currency:**
-- Two-part currency: `D_shared` = 8 bits per shared scalar (substrate
-  plus every promoted `A`), int8 symmetric per-tensor quantization
-  validated as in V2; `D_task` = 8 bits per retained task scalar plus
-  exact (lossless) reference/route indices — references to promoted
-  abstractions count in `D_task`, so promotion is never free by
-  bookkeeping.
+- Two-part currency: `D_shared` = 8 bits per shared scalar (substrate,
+  every promoted `A`, and the shared prior scales), int8 symmetric
+  per-tensor quantization validated as in V2; `D_task` = 8 bits per
+  RETAINED task scalar (after the §3.2 post-promotion rank
+  reduction — this is what makes fixed-width bits able to fall) plus
+  the 2-bit per-task-step rank code and exact (lossless)
+  reference/route indices — references to promoted abstractions count
+  in `D_task`, so promotion is never free by bookkeeping.
 - Variational currency: `D_task` = sum over tasks of
   `KL(q || prior) / ln 2` under whichever prior currently governs the
   task (`p_0` or `p(epsilon | A)`); `D_shared` as in the two-part
@@ -370,8 +449,10 @@ total-bits saving frozen at development close.
 
 Every headline claim is reported under three currencies:
 1. literal quantized two-part bits (V2's instrument, continuity);
-2. the variational/entropy code (KL under the learned prior);
-3. the behavioral/prequential code.
+2. the variational code `L_var = E_q[L] + KL` (fixed 16-sample
+   fixed-seed MC; never the `L_mean + KL` hybrid);
+3. the behavioral/prequential code (cumulative Gaussian log loss of
+   the posterior mean, `L_mean`).
 Agreement confirms; divergence is itself a reported result, never
 adjudicated away. Rationale: parameter codes can be uninformative about
 a function's true information content (Blier & Ollivier, 1802.07044);
@@ -443,6 +524,13 @@ and evaluation sets. Every artifact writes resolved `config.yaml` and
 Nothing moves up the ladder on a partial M2/M3 verdict. Branching,
 eventually, is tested as compression (IF(c, A, B)).
 
+Pre-registered for AFTER H11 (review 16; ledger P-2026-08-19-G): the
+horizon experiment — two worlds identical through task 32, one ending
+8 tasks later and one with 128 remaining, remaining horizon known to
+the learner. A truly prospective promotion policy promotes more
+readily in the long-horizon condition (N_future * s > C). The purest
+"abstraction as investment" test; not V3.1 scope.
+
 # 8. Deferred workstreams
 
 Recorded with staging in section 9.5 item 7 of the V2 spec and in the
@@ -465,10 +553,11 @@ entering this spec's successor documents or any paper.
    canonical mixed worlds (development 0–2 first). Append its outcome.
 2. Build the task-group promotion testbed; run the §2.1 clustering
    validity gate (P-2026-08-18-D). Append its outcome.
-3. Build and validate the accidental-similarity control (§2.3) with the
-   same clustering instrument.
-4. Freeze the `V_future` estimator and (if freezable) `V_hat(A)` for
-   H13; otherwise demote H13 before any promotion run.
+3. Build and validate the drifting-family control and the regime-change
+   world (§2.3) with the same clustering instrument.
+4. Freeze the `V_future` estimator via the §3.2 selection rule and
+   commit the comparison table (H13 is already demoted to exploratory;
+   nothing waits on it).
 5. Implement PROMOTE; develop on worlds 0–9 only.
 6. Write and freeze `V3_CONFIRMATION_PLAN.md`; add its hash to
    `tools/check_prereg.py`; then, and only then, unseal 300–329.

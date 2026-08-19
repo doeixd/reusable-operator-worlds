@@ -77,6 +77,19 @@ noise at 64-task lifetimes may be large, and the promotion value and
 the paired-architecture crossover are related, not identical,
 quantities.
 
+## P-2026-08-19-G: promotion tracks the remaining horizon
+
+In paired worlds identical through task 32 — one ending after 8 more
+tasks, one with 128 remaining, the remaining horizon exposed to the
+learner — a promotion criterion whose V_future term uses the horizon
+will promote in the long-horizon condition at a rate at least twice
+its rate in the short-horizon condition, holding all observed history
+fixed. Confidence: 0.65 conditional on H11 passing (this experiment
+runs only after V3.1's verdict). Rationale: N_future * s > C is the
+investment logic promotion is built on; exposing the horizon removes
+the estimation confound, so failure would indicate the criterion does
+not actually use prospective value.
+
 ---
 Outcome log (append-only):
 - (none yet)
