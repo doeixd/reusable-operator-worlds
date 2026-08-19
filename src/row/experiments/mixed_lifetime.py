@@ -73,6 +73,12 @@ def main() -> None:
         help="delayed-family testbed: families appear only from this task index",
     )
     parser.add_argument(
+        "--freeze-slots",
+        type=int,
+        default=None,
+        help="oracle: freeze only the first N slots, letting the library grow",
+    )
+    parser.add_argument(
         "--freeze-basis-at",
         type=int,
         default=None,
@@ -141,7 +147,10 @@ def main() -> None:
     learned_lifetime.World = factory  # type: ignore[assignment]
     try:
         summary = learned_lifetime.run(
-            config, kind=args.model, freeze_shared_at=args.freeze_basis_at
+            config,
+            kind=args.model,
+            freeze_shared_at=args.freeze_basis_at,
+            freeze_slots=args.freeze_slots,
         )
     finally:
         learned_lifetime.World = original_world  # type: ignore[assignment]

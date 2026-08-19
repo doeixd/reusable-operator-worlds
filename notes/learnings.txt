@@ -556,9 +556,189 @@ That remains the larger research target.
 
 ---
 
+# V2: what the sealed blocks confirmed and falsified
+
+V2 ran the development program through two independent sealed confirmatory
+blocks (V1 seeds 100–129 and V2 seeds 200–229) with frozen configs. The
+results both **confirmed** the core phenomena and **falsified** several
+attractive secondary stories — and the falsifications made the project more,
+not less, coherent.
+
+## 9. The economics of abstraction is a confirmed, quantitatively stable law
+
+The dose-response ΔL = L_Dense − L_Reusable is approximately linear in
+**measured** functional recurrence r, and the coefficients replicated across two
+independent sealed blocks:
+
+* development: ΔL ≈ 5906 r − 2477, R² ≈ 0.97
+* sealed V2 Family A: slope 6,194 nats/unit recurrence on seeds 200–229
+  (interval 4,000–7,500), pooled crossing 0.450 (0.40–0.60), per-world crossing
+  mean 0.483 (0.42–0.58) with 30/30 worlds crossing, R² = 0.926 in measured
+  coordinates.
+
+This is no longer "a reusable architecture wins." It is a replicated,
+quantitatively stable relationship: the value of sharing rises smoothly with
+actual reusable functional structure, and the crossover is where that return
+amortizes the cost/bias of sharing. Measured recurrence beats configured ρ as
+the explanatory coordinate (R² rises from 0.646 to 0.974 on the 64-task
+development curve), so report effects against measured recurrence.
+
+## 10. The amortization story is "early amortization + stationary bias," not "wait long enough"
+
+The crossover ρ*(N) moves from N=16 to N=32 but then **largely stops moving**
+to N=64. So this is not simply "sharing always wins given enough lifetime." It
+is early amortization of the shared-representation cost plus a largely
+stationary representational bias. H5a (the crossover declines with N) is only
+partially supported: 8/10 worlds decline from 16→64 tasks, but the mean is not
+monotone (it edges up from 32→64). Report this as mixed, not as a general law.
+
+## 11. Several attractive secondary hypotheses were falsified — and that is an asset
+
+* **Mixtures as Bayesian route beliefs: falsified.** The continuous mixture
+  weights are essentially uncorrelated with the exact route posterior (mean
+  Spearman ≈ −0.03) and their entropy is wildly different (H_mix ∼ 1.4 vs
+  H_posterior ∼ 0.001). Continuous exploits a continuous function space that
+  contains solutions *not interpretable* as uncertainty over discrete programs.
+  This explains why consolidation can't simply harden mixtures, why operator
+  identity becomes ambiguous, and why hypernetworks become competitive at
+  partial recurrence.
+* **Transfer-before-amortization: falsified** (see the retraction on §4).
+* **Strict amortization: weakened** (§10).
+* **Within-lifetime amortized compiler (H10): failed.** Direct optimization
+  beats the learned compiler within a 64-task lifetime; the compiler is
+  sample-starved, not wrong in principle (dreaming helps more at ρ=1 than
+  ρ=0). This is where cross-world meta-training becomes justified.
+
+## 12. Three representational regimes, supported independently
+
+The V1/V2 results together suggest a continuum rather than a single "reusable
+basis":
+
+* **Weak recurrence** → task-specific/specialized; Dense wins.
+* **Partial recurrence** → a continuous function manifold is best; the generic
+  hypernetwork becomes competitive and can even beat explicit slots at ρ=0.9.
+* **Exact/near-exact recurrence** → discrete-like reusable primitives
+  crystallize; explicit slots beat the hypernetwork; operator recovery improves
+  sharply; frozen recomposition works.
+
+The hypernetwork gives an independent instrument: at ρ=0.9 it beats Continuous
+in 2/3 worlds; at ρ=1 Continuous wins all three. Across all ten development
+worlds Continuous beats the tuned hypernetwork 10/10 on both lifetime loss and
+novel 32-shot NMSE, while the hypernetwork beats Dense-C 10/10 on lifetime
+loss — so a generic continuous operator manifold is useful, but the explicit
+slot basis retains an exact-reuse advantage the hypernetwork does not explain
+away.
+
+## 13. Discreteness itself is not expensive; program inference is
+
+The exact posterior over the discrete library's final learned operators scores
+L ≈ −174,844 — *better* than Continuous (−170,967) — while the online discrete
+learner's prequential loss is far worse. So the representation was good and the
+inference algorithm was bad. This sharpens the §6 decomposition into a clean
+separation: **representation learning** vs **program inference**, and it says
+there is potentially a better-than-continuous discrete solution if we can infer
+it efficiently.
+
+---
+
+# Selective sharing works — but cannot yet be encoded compactly
+
+## 14. The learner can discover where sharing belongs, primitive by primitive
+
+The shared-parent + residual model (H9) allocates specialization correctly:
+on homogeneous worlds the residual magnitude decreases monotonically with
+recurrence, and on mixed worlds per-primitive residual mass is inversely
+related to actual primitive recurrence in 10/10 worlds. The hybrid beats both
+fixed architectures on prediction cost in 10/10 mixed worlds (~+7,153 nats).
+This is arguably the first result directly approaching the original
+self-organizing-computation thesis: the model discovers how much sharing each
+computation deserves. It **replicated 30/30 on the sealed V2 block**.
+
+## 15. Allocation is solved; compression is not
+
+But the shared-residual learner carries ~130,624 retained task bits, so under
+actual two-part description length it **loses in every tested cell** (0/30 on
+the sealed block, as pre-registered). This is the clearest handoff from V2 to
+V3: the learner knows where to specialize but has no incentive/mechanism to
+encode that specialization compactly. The optimizer sees prediction loss; it
+does not see retained bits. Raw prequential wins can be reversed by
+description-length accounting — always report both currencies before
+"chooses its own sharing" style claims.
+
+---
+
+# V3: the current substrate question
+
+## 16. The central V3 problem is now crisp
+
+> Can a neural learner preserve the predictive benefit of flexible continuous
+> specialization while progressively converting repeated structure into a
+> shorter shared code?
+
+Success is defined around **information migration**: D_task ↓, D_shared ↑,
+D_total ↓ with held-out behavior constant, and then L_future,promoted <
+L_future,unpromoted. If V3 gets both predictive and description-length wins,
+that is qualitatively different from H9.
+
+## 17. Zero information must equal the computational identity
+
+The variational toy result was decisive: a Gaussian code spends ~79% of the
+used-task cost just to say "do nothing," while a gated code spends ~0. This is
+a constitutional requirement for the eventual architecture — **zero information
+must correspond to the computational identity operation** (Δ=0; halt; no
+write; no fork). Complexity should be explicit departures from a default, not
+precision around a random variable. The Gaussian parameterization is
+consequently the wrong primary PROMOTE substrate.
+
+## 18. Task state contains three distinct currencies
+
+REFERENCE, ARGUMENT, and INNOVATION should not share one generic regularizer:
+D(reference) ∼ log₂ K, D(argument) modest, D(Δ) potentially huge. The
+Gaussian prior treated all of these as floating-point coordinates deviating
+from zero, which is conceptually wrong. This points toward a **typed
+description language** (CALL / CALL(α) / INNOVATE(R) / PROMOTE→j_new, then
+later MACRO/REPEAT/IF) before sophisticated program syntax — the
+self-programming architecture may require typed semantics before it requires
+control flow.
+
+## 19. P-A (Gaussian variational wake) is falsified; gate before PROMOTE
+
+The Gaussian variational wake was falsified 0/3 on the two-part objective, with
+three independent strikes: wrong null-state semantics (q=p ⇏ Δ=0), the shared
+prior kills routes (the cheap reuse channel) via symmetry-breaking, and the
+rate–distortion curve has no hidden sweet spot. Decision: run the
+preregistered gated experiment (P-I) **before any PROMOTE development**; if it
+passes and preserves family residual structure, use gated innovation; if it
+fails, fall back to the original H9 shared-residual learner (not Gaussian);
+keep Gaussian only as a control. The H9 post-hoc result (≈89% of dense bits
+under the strict matched-behavior margin) eliminates the "just a dumb int8
+code" alternative — better coding alone recovers only ~11%, so the learner
+actually needs to change the representation, which makes PROMOTE better
+motivated and gives it a stronger causal test.
+
+---
+
 # Current bottom line
 
-The cleanest statement I think the evidence currently supports is:
+The cleanest statement the evidence currently supports is:
+
+> ROW provides **sealed-confirmatory** evidence (two independent blocks,
+> parameter replication inside every frozen interval) that learned reusable
+> neural representations reduce future learning cost when latent functional
+> recurrence is sufficiently strong, with a quantitatively stable
+> specialization-to-reuse crossover governed by measured recurrence, prior
+> alignment, and cost of use. The learner can discover where sharing belongs
+> (primitive by primitive, 30/30) but cannot yet encode that allocation
+> compactly under a two-part code (0/30) — allocation is solved, compression
+> is not. Discreteness itself is not expensive; program inference is. The
+> current open question is whether repeated continuous specialization can be
+> promoted into a cheaper shared representation while preserving its
+> predictive advantage — and that requires a representation whose zero state
+> is the computational identity.
+
+The next step is **not more architectural complexity**. It is the V3 promotion
+experiment on a correctly-coded (gated or H9-fallback) wake substrate, with
+refusal controls, under both predictive and description-length accounting.
 
 [
 \boxed{

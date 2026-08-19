@@ -365,6 +365,7 @@ def run(
     task_id_scramble_seed: int | None = None,
     update_batch_size: int | None = None,
     freeze_shared_at: int | None = None,
+    freeze_slots: int | None = None,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -414,8 +415,19 @@ def run(
             # so new recurring structure has nowhere to go but task-local
             # innovations. This is what makes an explicit promotion operator
             # necessary rather than optional.
-            for parameter in model.shared_parameters():
-                parameter.requires_grad_(False)
+            #
+            # `freeze_slots` freezes only the FIRST N basis slots, leaving the
+            # rest trainable. That is the oracle for promotion: a library
+            # that grew by (slots - N) operators at exactly the right moment,
+            # against which a real promoter can be judged.
+            if freeze_slots is None:
+                for parameter in model.shared_parameters():
+                    parameter.requires_grad_(False)
+            else:
+                for slot_index, operator in enumerate(model.basis):
+                    if slot_index < freeze_slots:
+                        for parameter in operator.parameters():
+                            parameter.requires_grad_(False)
         task_parameter = model.begin_task(task.task_id)
         if isinstance(model, GatedInnovationLearner):
             route_parameter, residual_parameter, gate_parameter = task_parameter

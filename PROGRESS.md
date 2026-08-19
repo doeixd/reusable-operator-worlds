@@ -1146,3 +1146,43 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   configuration adds deviation room (uniform rho 0.5, where the canonical
   profile's high-recurrence primitives leave the family component almost
   no room to act).
+
+# 2026-08-19 — saturated-library testbed: the gate clears
+
+- Interpretive correction applied first, per PI review: the earlier claim
+  that the learner absorbed families into spare slots "for the
+  description-length reason V3 predicts" overstates the evidence. Those
+  slots were PREALLOCATED and already paid for; nothing charged the
+  optimizer 192 bits against 17,712. The supported claim is that unused
+  shared capacity gets used for recurrent structure. Whether a learner
+  CREATES capacity when creation costs something is untouched and is
+  exactly what V3 must still test. Corrected in the spec and appended as
+  a dated correction to the ledger outcome (never a rewrite).
+- The implicit-promotion finding is nonetheless CAUSAL, not merely
+  correlational (row.experiments.audit_implicit_promotion, three
+  interventions): substituting a task's route with the wrong family's
+  mean costs +0.00344 more NMSE than its own family's mean, positive
+  3/3 worlds; single-slot ablation is sharply family-differential
+  (world 0 slot 3 damages group 0 by +0.00419 against group 1's
+  +0.00003; world 1 slot 5 reverses the asymmetry). Shared functional
+  objects addressed by family-specific references, built during wake.
+- Capacity sweep (world 0, eta 0.9) confirms the PI's prediction that
+  capacity pressure alone does not relocate the structure. Routes and
+  residuals at (K, F): (6,2) +0.2285/+0.0196, (8,2) +0.1407/+0.0196,
+  (6,8) +0.0381/+0.0338, (8,8) +0.0638/+0.0340. Even with no nominal
+  spare slot the basis reorganizes and serves families through routes.
+  Raising the family signal made it worse: uniform rho 0.5 drove routes
+  to +0.4333 while residuals reached only +0.0459.
+- SATURATE-THEN-INTRODUCE is what works. With K = 6 saturated on the base
+  primitives for the first block, families appearing only afterward, and
+  the basis frozen at onset, the channel inverts: residual separation
+  +0.0523 against routes +0.0121, and the matched structureless control
+  sits at -0.0025. Partition recovery is 0.823 against the control's
+  0.677, a 0.146 gap where the failed original testbed managed 0.031. An
+  earlier onset with more deviation room does marginally better (+0.0544,
+  recovery 0.854). Every configuration tried is logged here and in the
+  artifact tree per the spec's tuning rule.
+- Implemented partial basis freezing so the library can GROW at onset,
+  which is the oracle for promotion: freeze the saturated slots and let
+  (K+2) - K new ones learn. Running now to establish the PI's gate,
+  J*_{K+1} < J*_K, before any promoter is built.
