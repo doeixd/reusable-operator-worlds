@@ -1378,3 +1378,36 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   The promoted learner is the first in the program to win prediction and
   description length at the same time, and it does so with shared capacity
   it created rather than capacity handed to it.
+
+# 2026-08-19 — V3 CLOSED: sealed block passes 5/5
+
+- Sealed block on seeds 300-329 executed the configuration frozen at
+  bcc8319 before those seeds existed. 90 lifetimes, zero failures.
+    O1 two-part gain   PASS  +55,292 nats, positive 30/30 (dev +55,697)
+    O2 loss gain       PASS  +1,174 nats,  positive 30/30 (dev +1,350)
+    O3 migration       PASS  three-sign 30/30, -63.3%     (dev -63.6%)
+    O4 prospective     PASS  32-shot +0.00311, 30/30      (dev +0.00310)
+    O5 refusal         PASS  reuse ratio 1.80x, floor 1.4 (dev 2.48x)
+  The parameters replicate, not merely the signs: two-part gain within
+  0.7% of development and total-bits reduction within 0.3 points, on
+  thirty unseen worlds against intervals registered in advance.
+- H11 is confirmed in all three mandatory parts. An abstraction is born
+  (M2) and it makes related future tasks cheaper to learn (M3), which is
+  what V3 was defined to be. It is also the first learner in the program
+  to win prediction and description length at the same time, in the
+  literal two-part cell where every V2 model lost, using capacity it
+  created rather than capacity it was given.
+- Limits recorded in spec section 12 rather than left implicit: the world
+  is deliberately constructed and four earlier testbeds failed; refusal
+  is graded and its absolute form is falsified; the learned abstraction
+  is not the teacher's primitive but the learner's own compensation; and
+  promotion's compute is logged, not charged, leaving the search-cost
+  economics to V4.
+- The methodological result is the substitutability ladder: parameter
+  similarity < clustering < latent identity < functional similarity <
+  cross-task substitutability < prospective value, with every rung below
+  the top certifying a world where promotion was really routing,
+  quantization, or deletion. The four-way leave-one-out gate (private /
+  family / global / zero) is the instrument that separated them.
+- V4 sketch's branch table resolves to its first case, so V4 proceeds as
+  written; sealed seeds 400-429 remain untouched.
