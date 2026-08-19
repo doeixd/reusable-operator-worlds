@@ -1411,3 +1411,21 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   family / global / zero) is the instrument that separated them.
 - V4 sketch's branch table resolves to its first case, so V4 proceeds as
   written; sealed seeds 400-429 remain untouched.
+
+# 2026-08-19 — learnings, paper, and lab log updated for the V3 closure
+
+- notes/learnings.txt gains the sealed V3 section: the five outcomes with
+  their development counterparts, the four failed testbeds and what each
+  one eliminated, the substitutability ladder, the two-halves point (bits
+  migrated but nothing learned faster until library reuse existed), the
+  graded-refusal falsification, and the scope limits.
+- paper/draft.md to v0.8: new section 7.5 "Promotion: creating shared
+  computation (third sealed block)" placed after the resource-economics
+  section and before related work, covering the constructed world and why
+  three earlier designs failed, the four-way leave-one-out validity gate,
+  the operator, the 30/30 results, and an explicit "what promotion does
+  not do" paragraph carrying the falsified absolute-refusal criterion.
+  Abstract extended with the third block. Section 9 gains a promotion
+  limitation covering world construction and uncharged search cost.
+- The header now distinguishes three sealed blocks by seed range so a
+  reader cannot conflate them.

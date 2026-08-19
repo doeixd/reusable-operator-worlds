@@ -1,11 +1,14 @@
 # When Does Abstraction Pay? Measuring the Value of Reusable Computation in Neural Learners
 
-*Draft v0.7 — extended with the second sealed block (seeds 200-229):
-parameter replication, the selective-sharing confirmation, and the
-three-regime account. Development and sealed results labeled throughout
-(two sealed blocks are distinguished by seed range); all numbers trace
-to fingerprint-validated artifacts in the public repository, with sealed
-artifacts archived as release v2.0-confirmation. Revision history in
+*Draft v0.8 — extended with the THIRD sealed block (seeds 300-329):
+promotion, in which a saturated learner creates new shared computation
+and wins prediction and description length simultaneously (section 7.5).
+Earlier blocks contribute the recurrence law and its parameter
+replication (seeds 100-129, 200-229) and the read/write dissociation.
+Development and sealed results are labeled throughout and the three
+sealed blocks are distinguished by seed range; all numbers trace to
+fingerprint-validated artifacts in the public repository, with the first
+two blocks archived as release v2.0-confirmation. Revision history in
 PROGRESS.md.*
 
 ## Abstract
@@ -35,7 +38,17 @@ p = 1.9e-9) and beats the better fixed architecture everywhere on
 prediction cost — while losing everywhere under literal two-part
 description-length accounting, a replicated dissociation showing that a
 learner can READ the economics of sharing almost perfectly before it can
-WRITE them compactly. The result is
+WRITE them compactly. A THIRD sealed block of 30 worlds closes that gap in
+a constructed setting: when a learner's operator library is saturated and
+the environment then introduces recurring computation the library cannot
+express, an explicit promotion operator creates a new shared object,
+migrates the repeated task-local computation into it, and reduces total
+retained description length by 63.3% while IMPROVING prediction (+1,174
+nats) and making held-out related tasks cheaper to acquire (+0.0031
+32-shot NMSE) — 30/30 on all four, with parameters matching development to
+within 0.7%. This is the first learner in the program to win prediction and
+description length simultaneously, and it does so with capacity it created
+rather than capacity it was given. The result is
 conditional on representational alignment, and substantially so: when the
 learner's operator family matches the environment's (residual tanh), the
 exact-reuse advantage is large; changing only the learner's activation
@@ -580,6 +593,76 @@ count. Penalizing structure during acquisition damages generality before
 it induces useful compression, motivating learn-first, consolidate-later.
 Full grids in the appendix.
 
+## 7.5 Promotion: creating shared computation (third sealed block)
+
+The dissociation above — allocation solved, compression unsolved — is the
+gap this section closes, in a setting deliberately built to contain the
+phenomenon. The construction matters as much as the result, because three
+earlier designs failed and each failure eliminated a plausible criterion.
+
+**The world.** A six-slot operator library is saturated on the
+environment's six base primitives for 16 tasks. The library is then frozen
+and the environment begins issuing tasks that call a SEVENTH primitive,
+drawn independently, which no mixture of the frozen six can express. Two
+hidden task groups use two different such primitives. Group membership is
+never exposed. The learner can only respond through its task-local
+low-rank innovations, so recurring computation accumulates there.
+
+**Why the earlier designs failed.** When the library had spare capacity,
+the learner absorbed the recurring structure into unused slots and
+addressed it through its routing code — causally confirmed (substituting
+the wrong group's mean route costs more than the right one's; single-slot
+ablation damages the groups differentially). Nothing reached the residual
+channel. When families were perturbations of existing primitives rather
+than new ones, the residuals became recoverable but not load-bearing:
+replacing them with group means barely beat deleting them outright, so
+"promotion" was compression of a channel that did not matter. And
+averaging members' PARAMETERS destroyed the shared function entirely,
+because rank-2 innovations are gauge-equivalent under rotations of their
+factors; a parameter mean captured 11.9% of behavioral value where a
+functional fit captured 53.4%.
+
+**The validity gate that survived.** We therefore define promotable
+structure operationally, by a four-way leave-one-out comparison in which
+the candidate abstraction is fitted WITHOUT the task it is substituted
+into: private residual, family abstraction, single global abstraction, and
+zero. Three properties must hold together — the private computation must
+be load-bearing (zeroing it costs), compressible into one shared function,
+and family-specific (beating a global abstraction). On the frozen world:
+private 0.0127, family 0.0179, global 0.0205, zero 0.0224, giving 51.3%
+family capture against 22.0% global, a 29.3-point advantage, with an
+on-trajectory probe agreeing with a common-domain probe.
+
+**The operator.** At fixed consolidation points the learner clusters its
+task innovations functionally, fits one rank-2 abstraction per cluster by
+gradient descent on behavioral distance, and accepts only if the
+substitution preserves its own predictions on a probe set disjoint from
+the one used to propose and fit, shortens the two-part code, and beats a
+single global abstraction on members it was not fitted on. Accepted
+members retire their private copies and keep a reference. New tasks may
+select any library entry or none from their own early examples.
+
+**Result.** Against the identical learner with promotion disabled, on 30
+sealed worlds under intervals registered in advance: total retained
+description length falls 63.3% (task bits down, shared bits up, total
+down, 30/30); lifetime prediction improves by 1,174 nats (30/30); held-out
+future tasks from the same hidden families are cheaper to acquire, 32-shot
+NMSE improving by 0.0031 (30/30). Development and sealed parameters agree
+to within 0.7%.
+
+**What promotion does not do.** It does not refuse. In structureless
+control worlds it builds a smaller library (3.0 abstractions against 6.2,
+with 1.80x fewer tasks reusing) rather than declining to build one, and
+the pre-registered absolute refusal criterion is therefore falsified; only
+the graded contrast holds. At the two-part exchange rate a private rank-2
+innovation costs far more than the prediction it buys, so any
+behavior-preserving grouping pays and retrospective compression alone
+cannot discriminate. Only the prospective test — must this abstraction
+beat a global one on tasks it never saw — produces separation. Finally,
+the promoted abstraction is not the environment's seventh primitive; it is
+the best shared explanation of how this learner compensated for a
+computation it could not express.
+
 ## 8. Related work
 
 **Controlled models of task relatedness.** The closest methodological
@@ -686,6 +769,19 @@ are recovered.
   decline overall). Amortization is therefore a demonstrated
   early-lifetime component of the crossover, not its whole mechanism,
   and we do not claim a confirmed lifetime-length law.
+
+
+On promotion specifically (section 7.5): the world is constructed to
+contain the phenomenon. A saturated library, a genuinely inexpressible new
+primitive, a fixed program position, and two hidden groups are all design
+choices, and three earlier designs produced worlds in which promotion
+degenerated into routing, quantization, or deletion. The claim is that
+promotion works when recurring structure is load-bearing, compressible,
+and family-specific; whether those conditions arise unaided in natural
+learners is untested here. Promotion is also compute-expensive — the
+search cost is logged but not charged in the objective — so a learner that
+saves storage while spending far more search would be scored as a success
+by our accounting and should not be.
 
 ## 10. Discussion: toward learned abstraction economics
 
