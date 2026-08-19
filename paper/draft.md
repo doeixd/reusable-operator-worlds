@@ -535,7 +535,14 @@ confirmation completes the dissociation: **a learner can read the
 economics of sharing almost perfectly, allocating specialization
 primitive-by-primitive against ground-truth recurrence it was never
 shown, while still lacking any mechanism to encode that allocation
-compactly.** Reading is solved; writing is the open problem.
+compactly.** Reading is solved; writing is the open problem. Unlike
+the headline law's magnitude, this result is not strongly conditioned
+on representational alignment: repeating the mixed-world experiment
+with a family-mismatched (GELU) shared-residual learner preserves the
+allocation signature in 3/3 worlds and the envelope win in 3/3 (margins
+within ~15% of aligned), with the mismatch penalty roughly a third of
+what mismatch costs the continuous basis — task residuals absorb family
+misfit that a pure shared substrate cannot.
 
 **Two more instructive failures.** A wake/sleep consolidation learner
 that compiles soft tasks to hard routes was tested under two gate

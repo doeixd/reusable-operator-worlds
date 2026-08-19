@@ -278,7 +278,16 @@ retention coding (near-zero residuals at high rho are charged full 8-bit
 width under the current proxy — an entropy code would price them near
 their information content and could rescue the high-rho cells). Any public
 figure reports J at multiple lambda. H9a (per-primitive allocation in
-mixed worlds, Benchmark D) remains untested.
+mixed worlds, Benchmark D) remains untested. **MISMATCH CONTROL (2026-08-19,
+reports/v2_mixed/sr-gelu-control.json, closing completion-audit open
+item 2): H9 SURVIVES family mismatch.** A GELU shared-residual learner
+on the canonical mixed worlds keeps the allocation signature 3/3
+(Spearman -1.00/-0.60/-0.66) and still beats the fixed-architecture
+envelope 3/3 (+5,766 to +6,470 nats, ~15% below aligned margins); the
+mismatch penalty on the shared-residual learner is only 1.3-1.7k nats
+versus the 3-4k it costs the continuous basis at exact reuse. Selective
+sharing is therefore NOT strongly alignment-conditioned — H9 may be
+stated less conditionally than the V1 recurrence-law magnitude.
 
 **H9a measurement procedure, frozen before any mixed-world run** (added
 after external review; the identifiability problem is real and V1's own

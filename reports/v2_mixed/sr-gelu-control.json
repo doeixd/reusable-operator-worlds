@@ -1,0 +1,31 @@
+{
+  "scope": "open item 2: GELU shared-residual mismatch control, canonical mixed worlds 0-2",
+  "rows": [
+    {
+      "world": 0,
+      "spearman": -1.0,
+      "holds": true,
+      "gelu_sr_loss": -157941.94774072408,
+      "envelope_minus_gelu_sr": 6035.6587630382855,
+      "tanh_sr_minus_gelu_sr": -1704.8206783796777
+    },
+    {
+      "world": 1,
+      "spearman": -0.6,
+      "holds": true,
+      "gelu_sr_loss": -159828.56532733593,
+      "envelope_minus_gelu_sr": 5765.51182371765,
+      "tanh_sr_minus_gelu_sr": -1413.0868364883645
+    },
+    {
+      "world": 2,
+      "spearman": -0.6571428571428573,
+      "holds": true,
+      "gelu_sr_loss": -160252.20257292505,
+      "envelope_minus_gelu_sr": 6470.2682812846615,
+      "tanh_sr_minus_gelu_sr": -1336.6086944631243
+    }
+  ],
+  "allocation_holds": 3,
+  "envelope_wins": 3
+}

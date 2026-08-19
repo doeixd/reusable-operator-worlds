@@ -792,3 +792,9 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   supported: participation ratio declines monotonically (6.5 to 5.1)
   but without regime structure — the three regimes do not manifest as a
   linear-dimensionality transition.
+- Closed completion-audit open item 2: the GELU shared-residual mismatch
+  control preserves the H9 allocation signature 3/3 and the envelope win
+  3/3 on canonical mixed worlds (margins within ~15% of aligned; the
+  mismatch penalty on shared-residual is roughly a third of what
+  mismatch costs the continuous basis). Selective sharing is not
+  strongly alignment-conditioned; spec, paper (v0.7), and audit updated.

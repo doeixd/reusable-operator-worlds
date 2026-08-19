@@ -265,3 +265,19 @@ documents are untouched; and the deviations above are enumerated rather
 than silent. The two items that should not slip: the Model 5 mismatch
 control (open item 2) before any unconditional H9 claim, and the
 006c/006d analyses before the V3 spec freezes its gate design.
+
+## Completion-audit follow-ups (2026-08-19, later)
+
+- Open item 2 CLOSED: the GELU shared-residual mismatch control ran on
+  canonical mixed worlds 0-2; allocation and envelope both survive 3/3
+  (reports/v2_mixed/sr-gelu-control.json). H9 is not strongly
+  alignment-conditioned; spec and paper updated.
+- 006c ran: prediction failed informatively; gate v2's mechanism
+  re-attributed from entropy to the absolute-NMSE bar, with corrections
+  applied to the spec, paper, and synthesis in the same commit
+  (reports/v2_func_entropy/).
+- 006d ran: weakly supported — monotone ~20% dimensionality decline, no
+  regime structure (reports/v2_dimensionality/).
+- Remaining watch-list is now only V3-era items (H10 compiler-capacity
+  accounting on reuse; forward_tasks batching before any large V3
+  sweep; PREDICTIONS.md outcomes as their experiments run).
