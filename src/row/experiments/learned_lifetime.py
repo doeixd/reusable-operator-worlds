@@ -28,18 +28,26 @@ from row.models import (
     HypernetworkLearner,
     PresenceGatedDiscreteLibraryLearner,
     SharedParentResidualLearner,
+    VariationalSharedResidualLearner,
 )
 from row.provenance import current_git_commit, write_fingerprint
 from row.world import Program, Task, World
 
 ModelKind = Literal[
-    "dense", "continuous", "hypernetwork", "shared_residual", "discrete", "mdl"
+    "dense",
+    "continuous",
+    "hypernetwork",
+    "shared_residual",
+    "variational",
+    "discrete",
+    "mdl",
 ]
 Learner = (
     DenseLearner
     | ContinuousBasisLearner
     | HypernetworkLearner
     | SharedParentResidualLearner
+    | VariationalSharedResidualLearner
     | DiscreteLibraryLearner
     | PresenceGatedDiscreteLibraryLearner
 )
@@ -91,6 +99,7 @@ def _shared_optimizer(
     learning_rate: float,
     weight_decay: float,
     presence_learning_rate: float | None = None,
+    scale_learning_rate: float | None = None,
 ) -> torch.optim.AdamW:
     alpha_parameters = [
         parameter
@@ -104,10 +113,18 @@ def _shared_optimizer(
         if name == "presence_logits"
     ]
     presence_ids = {id(parameter) for parameter in presence_parameters}
+    prior_scale_parameters = [
+        parameter
+        for name, parameter in model.named_parameters()
+        if name == "prior_log_scales"
+    ]
+    prior_scale_ids = {id(parameter) for parameter in prior_scale_parameters}
     decay_parameters = [
         parameter
         for parameter in model.shared_parameters()
-        if id(parameter) not in alpha_ids and id(parameter) not in presence_ids
+        if id(parameter) not in alpha_ids
+        and id(parameter) not in presence_ids
+        and id(parameter) not in prior_scale_ids
     ]
     groups: list[dict[str, object]] = [
         {"params": decay_parameters, "weight_decay": weight_decay}
@@ -169,8 +186,12 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "inference_multiply_adds_per_sample": generation + operators,
             "note": "counts per-prediction operator generation; backward and optimizer operations excluded",
         }
-    if kind == "shared_residual":
-        selected = config.shared_residual_model
+    if kind in {"shared_residual", "variational"}:
+        selected = (
+            config.variational_model
+            if kind == "variational"
+            else config.shared_residual_model
+        )
         parent = selected.task_steps * selected.operator_slots * (
             d * selected.operator_rank + selected.operator_rank * d
         ) + selected.task_steps * selected.operator_slots * d
@@ -230,6 +251,22 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             learnable_alpha=model_config.learnable_alpha,
             activation=model_config.operator_activation,
         )
+    if kind == "variational":
+        model_config = config.variational_model
+        return VariationalSharedResidualLearner(
+            d=config.world.state_dim,
+            operator_slots=model_config.operator_slots,
+            operator_rank=model_config.operator_rank,
+            residual_rank=model_config.residual_rank,
+            task_steps=model_config.task_steps,
+            alpha=model_config.operator_alpha_init,
+            seed=model_config.seed,
+            learnable_alpha=model_config.learnable_alpha,
+            activation=model_config.operator_activation,
+            prior_scale_init=model_config.prior_scale_init,
+            posterior_scale_init=model_config.posterior_scale_init,
+            prior_warmup_tasks=model_config.prior_warmup_tasks,
+        )
     if kind == "shared_residual":
         model_config = config.shared_residual_model
         return SharedParentResidualLearner(
@@ -280,6 +317,7 @@ def _training_values(
         "continuous": config.continuous_model,
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
+        "variational": config.variational_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -325,6 +363,11 @@ def run(
         presence_learning_rate=(
             config.mdl_model.presence_learning_rate if kind == "mdl" else None
         ),
+        scale_learning_rate=(
+            config.variational_model.scale_learning_rate
+            if kind == "variational"
+            else None
+        ),
     )
     if update_batch_size is None:
         replay = TaskReplayBuffer(seed + 1)
@@ -342,11 +385,29 @@ def run(
     cumulative_mass_log_loss = 0.0
     checkpoint_results: list[dict[str, object]] = []
     observed_update_batch_sizes: list[int] = []
+    completed_task_ids: list[str] = []
 
     for lifetime_index, world_task_index in enumerate(task_indices):
         task = world.tasks[world_task_index]
         task_parameter = model.begin_task(task.task_id)
-        if isinstance(model, SharedParentResidualLearner):
+        if isinstance(model, VariationalSharedResidualLearner):
+            (
+                route_parameter,
+                route_scale_parameter,
+                residual_parameter,
+                residual_scale_parameter,
+            ) = task_parameter
+            variational_config = config.variational_model
+            for parameter, parameter_lr in (
+                (route_parameter, task_lr),
+                (route_scale_parameter, variational_config.scale_learning_rate),
+                (residual_parameter, variational_config.residual_learning_rate),
+                (residual_scale_parameter, variational_config.scale_learning_rate),
+            ):
+                optimizer.add_param_group(
+                    {"params": [parameter], "lr": parameter_lr, "weight_decay": 0.0}
+                )
+        elif isinstance(model, SharedParentResidualLearner):
             route_parameter, residual_parameter = task_parameter
             optimizer.add_param_group(
                 {"params": [route_parameter], "lr": task_lr, "weight_decay": 0.0}
@@ -459,7 +520,15 @@ def run(
                 optimizer.zero_grad(set_to_none=True)
                 prediction = model.forward_tasks(_tensor(np.stack(batch_x)), task_ids)
                 loss = torch.nn.functional.mse_loss(prediction, _tensor(np.stack(batch_y)))
-                if isinstance(model, SharedParentResidualLearner):
+                if isinstance(model, VariationalSharedResidualLearner):
+                    # Description length in the wake gradient (V3 spec 3.1):
+                    # KL(q || p) per task, scaled by beta. The L1 surrogate is
+                    # not applied — storage_penalty is identically zero here.
+                    loss = loss + (
+                        _variational_kl_scale(config, config.world.examples_per_task)
+                        * model.description_penalty(task_ids)
+                    )
+                elif isinstance(model, SharedParentResidualLearner):
                     loss = loss + (
                         config.shared_residual_model.residual_penalty
                         * model.storage_penalty(task_ids)
@@ -487,6 +556,9 @@ def run(
                 curve, threshold, config.world.examples_per_task
             )
         rows.append(summary_row)
+        if isinstance(model, VariationalSharedResidualLearner):
+            completed_task_ids.append(task.task_id)
+            model.update_prior_scales(completed_task_ids)
         replay.add_task(task, replay_per_task)
         tasks_completed = lifetime_index + 1
         if tasks_completed in config.evaluation.lifetime_checkpoints:
@@ -546,6 +618,8 @@ def run(
         if config.evaluation.extended_diagnostics:
             summary["functional_recovery"] = _functional_recovery(model.basis, world, config)
     elif isinstance(model, SharedParentResidualLearner):
+        if isinstance(model, VariationalSharedResidualLearner):
+            summary["variational"] = _variational_summary(model, world, config)
         summary["routing"] = model.routing_diagnostics()
         if config.evaluation.extended_diagnostics:
             summary["functional_recovery"] = _functional_recovery(
@@ -598,6 +672,152 @@ def run(
         update_batch_size,
     )
     return summary
+
+
+def _variational_kl_scale(config: ExperimentConfig, examples: int) -> float:
+    """KL coefficient that makes `description_beta` a dimensionless MDL dial.
+
+    The wake objective is the description length L_preq + beta * KL, but the
+    optimizer minimizes MSE (a mean over batch and dimensions) while KL is a
+    sum of nats over a task's whole code. Converting between them:
+
+        NLL_total(task) = N * d / (2 * sigma^2) * MSE
+
+    so dividing the per-task objective by that factor puts the KL charge in
+    MSE units as beta * 2 * sigma^2 / (N * d). beta = 1 is then the literal
+    MDL point rather than an arbitrary scale, and the tuning grid is a
+    genuine rate-distortion dial around it. Charging raw KL against MSE
+    instead (the first implementation) is ~4 orders of magnitude too strong
+    and collapses every posterior onto the prior.
+    """
+
+    sigma = config.evaluation.gaussian_sigma
+    return (
+        config.variational_model.description_beta
+        * 2.0
+        * sigma
+        * sigma
+        / (examples * config.world.state_dim)
+    )
+
+
+def _variational_summary(
+    model: VariationalSharedResidualLearner,
+    world: World,
+    config: ExperimentConfig,
+) -> dict[str, object]:
+    """Variational-currency report plus the sparse two-part pruning probe.
+
+    Three quantities the V3 spec keeps strictly separate (section 4.2):
+    L_mean (behavior, from the posterior mean), the variational code
+    E_q[L] + KL estimated with a fixed-seed MC scheme, and the literal
+    two-part code. The pruning probe is what lets literal bits fall at all:
+    a coordinate whose posterior has collapsed onto the prior carries no
+    task information, so a sparse code drops it for one bitmap bit.
+    """
+
+    selected = config.variational_model
+    diagnostics = dict(model.variational_diagnostics(selected.prune_threshold_bits))
+    tasks = [task for task in world.tasks if task.task_id in model.task_codes]
+    log2 = float(np.log(2.0))
+
+    model.eval()
+    mean_nll = 0.0
+    with torch.no_grad():
+        for task in tasks:
+            prediction = model(_tensor(task.eval_x), task.task_id).cpu().numpy()
+            mean_nll += gaussian_nll(
+                prediction, task.eval_y, config.evaluation.gaussian_sigma
+            )
+
+    # E_q[L]: fixed-seed Monte Carlo over the posterior, deliberately NOT
+    # the L_mean + KL hybrid (which is not a codelength).
+    sample_generator = torch.Generator()
+    sample_generator.manual_seed(selected.seed + 7)
+    expected_nll = 0.0
+    with torch.no_grad():
+        for _ in range(selected.variational_samples):
+            for task in tasks:
+                route_mu = model.task_codes[task.task_id]
+                residual_mu = model.task_residuals[task.task_id]
+                route_sigma = torch.exp(model.task_code_log_sigma[task.task_id])
+                residual_sigma = torch.exp(
+                    model.task_residual_log_sigma[task.task_id]
+                )
+                route_backup = route_mu.detach().clone()
+                residual_backup = residual_mu.detach().clone()
+                route_mu.add_(
+                    route_sigma
+                    * torch.randn(
+                        route_mu.shape, generator=sample_generator
+                    )
+                )
+                residual_mu.add_(
+                    residual_sigma
+                    * torch.randn(
+                        residual_mu.shape, generator=sample_generator
+                    )
+                )
+                prediction = model(_tensor(task.eval_x), task.task_id).cpu().numpy()
+                expected_nll += gaussian_nll(
+                    prediction, task.eval_y, config.evaluation.gaussian_sigma
+                )
+                route_mu.copy_(route_backup)
+                residual_mu.copy_(residual_backup)
+    expected_nll /= selected.variational_samples
+
+    kl_bits = float(diagnostics.get("total_task_kl_bits", 0.0))
+    diagnostics.update(
+        {
+            "evaluation_loss_posterior_mean": mean_nll,
+            "evaluation_expected_loss_under_q": expected_nll,
+            "variational_code_nats": expected_nll + kl_bits * log2,
+            "variational_task_bits": kl_bits,
+            "note": (
+                "variational code is E_q[L] + KL on held-out evaluation sets; "
+                "L_mean + KL is never reported as a codelength"
+            ),
+        }
+    )
+
+    # Sparse two-part probe: prune uninformative coordinates on a deep copy
+    # and measure the behavioral cost of doing so.
+    pruned = copy.deepcopy(model)
+    prune = pruned.apply_information_prune(selected.prune_threshold_bits)
+    pruned.eval()
+    pruned_nmse: list[float] = []
+    base_nmse: list[float] = []
+    with torch.no_grad():
+        for task in tasks:
+            base_nmse.append(
+                nmse(model(_tensor(task.eval_x), task.task_id).cpu().numpy(), task.eval_y)
+            )
+            pruned_nmse.append(
+                nmse(
+                    pruned(_tensor(task.eval_x), task.task_id).cpu().numpy(),
+                    task.eval_y,
+                )
+            )
+    retained = int(prune["retained_task_scalars"])
+    total = int(prune["total_task_scalars"])
+    diagnostics["sparse_two_part"] = {
+        **prune,
+        # 8 bits per retained scalar plus a one-bit-per-coordinate presence
+        # bitmap; the dense code charges 8 bits for every coordinate.
+        "sparse_task_bits": 8 * retained + total,
+        "dense_task_bits": 8 * total,
+        "mean_final_nmse": float(np.mean(base_nmse)) if base_nmse else 0.0,
+        "mean_pruned_final_nmse": float(np.mean(pruned_nmse)) if pruned_nmse else 0.0,
+        "mean_nmse_increase": (
+            float(np.mean(pruned_nmse) - np.mean(base_nmse)) if base_nmse else 0.0
+        ),
+        "maximum_task_nmse_increase": (
+            float(np.max(np.array(pruned_nmse) - np.array(base_nmse)))
+            if base_nmse
+            else 0.0
+        ),
+    }
+    return diagnostics
 
 
 def _edit_distance(left: tuple[int, ...], right: tuple[int, ...]) -> int:
@@ -743,7 +963,32 @@ def _adapt_novel_composition(
         parameter.requires_grad_(False)
     novel_id = f"task_novel_composition_{novel_index}"
     novel_code = model.begin_task(novel_id)
-    if isinstance(model, SharedParentResidualLearner):
+    if isinstance(model, VariationalSharedResidualLearner):
+        (
+            route_parameter,
+            route_scale_parameter,
+            residual_parameter,
+            residual_scale_parameter,
+        ) = novel_code
+        variational_config = config.variational_model
+        optimizer = torch.optim.Adam(
+            [
+                {"params": [route_parameter], "lr": task_lr},
+                {
+                    "params": [route_scale_parameter],
+                    "lr": variational_config.scale_learning_rate,
+                },
+                {
+                    "params": [residual_parameter],
+                    "lr": variational_config.residual_learning_rate,
+                },
+                {
+                    "params": [residual_scale_parameter],
+                    "lr": variational_config.scale_learning_rate,
+                },
+            ]
+        )
+    elif isinstance(model, SharedParentResidualLearner):
         route_parameter, residual_parameter = novel_code
         optimizer = torch.optim.Adam(
             [
@@ -770,7 +1015,13 @@ def _adapt_novel_composition(
         optimizer.zero_grad(set_to_none=True)
         prediction = model(_tensor(train_x[n_seen : n_seen + 1]), novel_id)
         loss = torch.nn.functional.mse_loss(prediction, _tensor(train_y[n_seen : n_seen + 1]))
-        if isinstance(model, SharedParentResidualLearner):
+        if isinstance(model, VariationalSharedResidualLearner):
+            loss = loss + (
+                # 32 is the novel-adaptation example budget below.
+                _variational_kl_scale(config, 32)
+                * model.description_penalty([novel_id])
+            )
+        elif isinstance(model, SharedParentResidualLearner):
             loss = loss + (
                 config.shared_residual_model.residual_penalty
                 * model.storage_penalty([novel_id])
@@ -902,6 +1153,7 @@ def resolved_learned_config(
         "continuous": config.continuous_model,
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
+        "variational": config.variational_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -937,6 +1189,7 @@ def _write_artifacts(
         "continuous": config.continuous_model,
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
+        "variational": config.variational_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -988,6 +1241,7 @@ def main() -> None:
             "continuous",
             "hypernetwork",
             "shared_residual",
+            "variational",
             "discrete",
             "mdl",
         ),
@@ -1044,6 +1298,7 @@ def main() -> None:
         "continuous": config.continuous_model,
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
+        "variational": config.variational_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[args.model]
@@ -1091,6 +1346,7 @@ def main() -> None:
                 "continuous",
                 "hypernetwork",
                 "shared_residual",
+                "variational",
                 "discrete",
                 "mdl",
             }
@@ -1103,6 +1359,7 @@ def main() -> None:
                 "continuous",
                 "hypernetwork",
                 "shared_residual",
+                "variational",
                 "discrete",
                 "mdl",
             }
@@ -1145,6 +1402,9 @@ def main() -> None:
             selected
             if args.model == "shared_residual"
             else config.shared_residual_model
+        ),
+        variational_model=(
+            selected if args.model == "variational" else config.variational_model
         ),
         discrete_model=selected if args.model == "discrete" else config.discrete_model,
         mdl_model=selected if args.model == "mdl" else config.mdl_model,

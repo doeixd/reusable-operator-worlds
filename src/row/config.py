@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
@@ -248,6 +248,68 @@ class MDLDiscreteModelConfig(DiscreteModelConfig):
 
 
 @dataclass(frozen=True)
+class VariationalModelConfig:
+    """V3 wake learner: shared-residual base with variationally coded task state.
+
+    Learning rates are INHERITED from the frozen shared-residual setting
+    (V3 spec 3.1); stage-one tuning varies only `description_beta`.
+    """
+
+    operator_slots: int = 8
+    operator_rank: int = 8
+    residual_rank: int = 2
+    task_steps: int = 3
+    operator_alpha_init: float = 0.2
+    learnable_alpha: bool = True
+    operator_activation: str = "tanh"
+    description_beta: float = 1.0
+    prior_scale_init: float = 1.0
+    posterior_scale_init: float = 1e-3
+    prior_warmup_tasks: int = 8
+    prune_threshold_bits: float = 0.5
+    variational_samples: int = 16
+    global_learning_rate: float = 3e-3
+    task_learning_rate: float = 5e-2
+    residual_learning_rate: float = 1e-2
+    scale_learning_rate: float = 1e-2
+    weight_decay: float = 1e-4
+    updates_per_example: int = 1
+    replay_examples_per_task: int = 4
+    replay_ratio: float = 1.0
+    seed: int = 9000
+
+    def validate(self) -> None:
+        dimensions = (
+            self.operator_slots,
+            self.operator_rank,
+            self.residual_rank,
+            self.task_steps,
+            self.variational_samples,
+        )
+        if min(dimensions) <= 0 or self.residual_rank > 2:
+            raise ValueError("variational dimensions are invalid")
+        if min(
+            self.global_learning_rate,
+            self.task_learning_rate,
+            self.residual_learning_rate,
+            self.scale_learning_rate,
+            self.prior_scale_init,
+            self.posterior_scale_init,
+        ) <= 0.0:
+            raise ValueError("variational learning rates and scales must be positive")
+        if self.description_beta < 0.0 or self.weight_decay < 0.0:
+            raise ValueError("variational penalties must be nonnegative")
+        if self.prior_warmup_tasks < 0:
+            raise ValueError("variational prior warmup must be nonnegative")
+        if self.prune_threshold_bits < 0.0:
+            raise ValueError("variational prune threshold must be nonnegative")
+        if self.updates_per_example <= 0 or self.replay_examples_per_task < 0:
+            raise ValueError("variational update count or replay size is invalid")
+        if self.operator_alpha_init <= 0.0 or self.operator_activation not in {"tanh", "gelu"}:
+            raise ValueError("variational operator initialization is invalid")
+
+
+@dataclass(frozen=True)
 class ExperimentConfig:
     world: WorldConfig
     scratch_model: ScratchModelConfig
@@ -260,6 +322,12 @@ class ExperimentConfig:
     mdl_model: MDLDiscreteModelConfig
     evaluation: EvaluationConfig
     output_directory: Path
+    # Defaulted and placed last so existing constructors keep working and no
+    # already-written resolved-config fingerprint changes (only the selected
+    # model's own block is hashed).
+    variational_model: VariationalModelConfig = field(
+        default_factory=VariationalModelConfig
+    )
 
 
 def _require_mapping(data: Any, name: str) -> dict[str, Any]:
@@ -279,6 +347,9 @@ def load_config(path: str | Path) -> ExperimentConfig:
     hypernetwork_raw = _require_mapping(raw.get("hypernetwork_model", {}), "hypernetwork_model")
     shared_residual_raw = _require_mapping(
         raw.get("shared_residual_model", {}), "shared_residual_model"
+    )
+    variational_raw = _require_mapping(
+        raw.get("variational_model", {}), "variational_model"
     )
     discrete_raw = _require_mapping(raw.get("discrete_model", {}), "discrete_model")
     mdl_raw = _require_mapping(raw.get("mdl_model", {}), "mdl_model")
@@ -381,6 +452,36 @@ def load_config(path: str | Path) -> ExperimentConfig:
         replay_ratio=float(shared_residual_raw.get("replay_ratio", 1.0)),
         seed=int(shared_residual_raw.get("seed", 7000)),
     )
+    variational_model = VariationalModelConfig(
+        operator_slots=int(variational_raw.get("operator_slots", 8)),
+        operator_rank=int(variational_raw.get("operator_rank", 8)),
+        residual_rank=int(variational_raw.get("residual_rank", 2)),
+        task_steps=int(variational_raw.get("task_steps", 3)),
+        operator_alpha_init=float(variational_raw.get("operator_alpha_init", 0.2)),
+        learnable_alpha=bool(variational_raw.get("learnable_alpha", True)),
+        operator_activation=str(variational_raw.get("operator_activation", "tanh")),
+        description_beta=float(variational_raw.get("description_beta", 1.0)),
+        prior_scale_init=float(variational_raw.get("prior_scale_init", 1.0)),
+        posterior_scale_init=float(
+            variational_raw.get("posterior_scale_init", 1e-3)
+        ),
+        prior_warmup_tasks=int(variational_raw.get("prior_warmup_tasks", 8)),
+        prune_threshold_bits=float(variational_raw.get("prune_threshold_bits", 0.5)),
+        variational_samples=int(variational_raw.get("variational_samples", 16)),
+        global_learning_rate=float(variational_raw.get("global_learning_rate", 3e-3)),
+        task_learning_rate=float(variational_raw.get("task_learning_rate", 5e-2)),
+        residual_learning_rate=float(
+            variational_raw.get("residual_learning_rate", 1e-2)
+        ),
+        scale_learning_rate=float(variational_raw.get("scale_learning_rate", 1e-2)),
+        weight_decay=float(variational_raw.get("weight_decay", 1e-4)),
+        updates_per_example=int(variational_raw.get("updates_per_example", 1)),
+        replay_examples_per_task=int(
+            variational_raw.get("replay_examples_per_task", 4)
+        ),
+        replay_ratio=float(variational_raw.get("replay_ratio", 1.0)),
+        seed=int(variational_raw.get("seed", 9000)),
+    )
     discrete_model = DiscreteModelConfig(
         operator_slots=int(discrete_raw.get("operator_slots", 12)),
         operator_rank=int(discrete_raw.get("operator_rank", 8)),
@@ -448,4 +549,5 @@ def load_config(path: str | Path) -> ExperimentConfig:
         mdl_model=mdl_model,
         evaluation=evaluation,
         output_directory=output_directory,
+        variational_model=variational_model,
     )

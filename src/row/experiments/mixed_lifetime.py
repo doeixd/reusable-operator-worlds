@@ -30,7 +30,13 @@ def main() -> None:
     parser.add_argument("--config", type=Path, default=Path("configs/v1.yaml"))
     parser.add_argument(
         "--model",
-        choices=("dense", "continuous", "shared_residual", "hypernetwork"),
+        choices=(
+            "dense",
+            "continuous",
+            "shared_residual",
+            "hypernetwork",
+            "variational",
+        ),
         required=True,
     )
     parser.add_argument("--world-seed", type=int, required=True)

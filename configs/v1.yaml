@@ -92,6 +92,33 @@ shared_residual_model:
   replay_ratio: 1.0
   seed: 7000
 
+# V3 wake learner. Learning rates are inherited verbatim from the frozen
+# shared-residual setting above; stage-one tuning varies only
+# description_beta (V3 spec 3.1).
+variational_model:
+  operator_slots: 8
+  operator_rank: 8
+  residual_rank: 2
+  task_steps: 3
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  description_beta: 1.0
+  prior_scale_init: 1.0
+  posterior_scale_init: 0.001
+  prior_warmup_tasks: 8
+  prune_threshold_bits: 0.5
+  variational_samples: 16
+  global_learning_rate: 0.003
+  task_learning_rate: 0.05
+  residual_learning_rate: 0.01
+  scale_learning_rate: 0.01
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 9000
+
 discrete_model:
   operator_slots: 12
   operator_rank: 8

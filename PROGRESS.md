@@ -958,3 +958,53 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   failure blocks V4 in favor of coordinate discovery; refusal failure
   blocks V4 outright). Sealed seeds 400-429 reserved; sketch retired
   when the V4 spec is written after the V3 sealed block.
+
+# 2026-08-19 — V3 checklist item 1: variational wake learner implemented
+
+- Implemented `VariationalSharedResidualLearner` (V3 spec 3.1): the frozen
+  H9 shared-residual architecture with every task-specific scalar (routes
+  and rank-2 residuals alike) coded as a Gaussian posterior against a
+  factorized prior whose scale is shared per task-state tensor TYPE.
+  Sampling uses a dedicated generator (reproducible, never touches global
+  RNG) and fires only inside gradient-enabled training forwards, so every
+  scoring path keeps the posterior mean and score-before-update is intact.
+  Retained task state is the mean alone (scales are training state), so the
+  two-part comparison against shared-residual stays scalar-for-scalar
+  matched. Wired as model kind "variational" through config, harness,
+  mixed_lifetime, and configs/v1.yaml; 13 unit tests; full suite 91 green.
+- Three implementation findings, each a real design correction:
+  1. KL SCALE. Adding a KL summed in nats over a task's ~222 coordinates to
+     an MSE averaged over batch and dimensions is dimensionally wrong (the
+     first version was ~4 orders of magnitude too strong and collapsed every
+     posterior). The wake loss now charges beta * 2*sigma^2/(N*d) * KL,
+     which is exactly L_preq + beta*KL expressed in the optimizer's units
+     and makes beta = 1 the literal MDL point.
+  2. PRIOR LEARNING. A gradient-learned shared prior runs away: whenever
+     posteriors are concentrated the gradient always says "shrink", Adam's
+     normalized step makes the move size independent of the tiny gradient,
+     and the collapsing prior then annihilates the task state it describes
+     (measured 1.0 -> 0.0034 in one lifetime). Replaced with the closed-form
+     empirical-Bayes M step, s^2 = mean(mu^2 + sigma^2) per tensor type.
+  3. PRIOR WARMUP. The closed form has a stable degenerate fixed point: at
+     initialization mu ~ 0 and sigma = 1e-3 make s ~ 1e-3 on the first
+     update, whose mu/s^2 gradient pins every code at zero for the whole
+     lifetime. The prior is therefore estimated from COMPLETED tasks only
+     and not at all before a population exists (warmup 8 tasks); the
+     posterior starts precise and the prior wide, so the code starts at high
+     precision and relaxes where precision proves unnecessary.
+  Also separated `coordinate_mean_information` (mu^2/2s^2 — what a sparse
+  code recovers by dropping a coordinate, hence the pruning criterion) from
+  `coordinate_kl` (the full code length including the precision term).
+- Reduced-world smoke (16 examples/task) shows the learner declining to
+  encode task state at all. This is CORRECT MDL behavior, not a bug: at that
+  budget task state buys ~5 nats/task of fit against ~500 nats of code. With
+  beta = 0 the learner reproduces the frozen baseline (max route coefficient
+  0.213 vs 0.215, residual/parent 0.144 vs 0.116), confirming the plumbing.
+  The consequence is methodological and is recorded as such: the variational
+  learner can only be evaluated at the full 128-example budget, because a
+  data-poor world cannot distinguish correct refusal-to-encode from
+  collapse. It also puts the program's amortization economics INSIDE the
+  learner, one level below where V3 expected to find them.
+- Launched P-2026-08-18-A at full scale: variational on canonical mixed
+  development worlds 0-2 against the existing frozen baselines
+  (tools/run_v3_variational.py, detached, resumable, 3 jobs).

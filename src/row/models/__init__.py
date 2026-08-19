@@ -7,6 +7,7 @@ from row.models.learned_models import (
     HypernetworkLearner,
     PresenceGatedDiscreteLibraryLearner,
     SharedParentResidualLearner,
+    VariationalSharedResidualLearner,
 )
 from row.models.numpy_mlp import ScratchResidualMLP
 from row.models.torch_oracle import LearnedOperator, OracleCompositor
@@ -18,6 +19,7 @@ __all__ = [
     "HypernetworkLearner",
     "PresenceGatedDiscreteLibraryLearner",
     "SharedParentResidualLearner",
+    "VariationalSharedResidualLearner",
     "LearnedOperator",
     "OracleCompositor",
     "ScratchResidualMLP",
