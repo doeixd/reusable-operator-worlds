@@ -22,5 +22,53 @@
       "global_capture_fraction": 0.19798682491490005,
       "family_advantage": 0.27089169085144194
     }
+  },
+  {
+    "world_seed": 1,
+    "leave_one_out": true,
+    "common": {
+      "private_residual_nmse": 0.012567406836640102,
+      "family_abstraction_nmse": 0.017139246371585756,
+      "global_abstraction_nmse": 0.020989762000940198,
+      "zero_residual_nmse": 0.02345123907079949,
+      "load_bearing_span": 0.010883832234159388,
+      "family_capture_fraction": 0.5799421162890831,
+      "global_capture_fraction": 0.2261590418615456,
+      "family_advantage": 0.35378307442753754
+    },
+    "trajectory": {
+      "private_residual_nmse": 0.012567406836640102,
+      "family_abstraction_nmse": 0.017141169779096257,
+      "global_abstraction_nmse": 0.021005911356494596,
+      "zero_residual_nmse": 0.02345123907079949,
+      "load_bearing_span": 0.010883832234159388,
+      "family_capture_fraction": 0.579765394756711,
+      "global_capture_fraction": 0.2246752487262827,
+      "family_advantage": 0.35509014603042827
+    }
+  },
+  {
+    "world_seed": 2,
+    "leave_one_out": true,
+    "common": {
+      "private_residual_nmse": 0.013248420027487355,
+      "family_abstraction_nmse": 0.018256567939726697,
+      "global_abstraction_nmse": 0.020784897118270553,
+      "zero_residual_nmse": 0.023130395124222065,
+      "load_bearing_span": 0.00988197509673471,
+      "family_capture_fraction": 0.4932037509491216,
+      "global_capture_fraction": 0.23735113507081512,
+      "family_advantage": 0.2558526158783065
+    },
+    "trajectory": {
+      "private_residual_nmse": 0.013248420027487355,
+      "family_abstraction_nmse": 0.018202482010636286,
+      "global_abstraction_nmse": 0.020766054009463252,
+      "zero_residual_nmse": 0.023130395124222065,
+      "load_bearing_span": 0.00988197509673471,
+      "family_capture_fraction": 0.49867694113235556,
+      "global_capture_fraction": 0.2392579511296339,
+      "family_advantage": 0.2594189900027216
+    }
   }
 ]

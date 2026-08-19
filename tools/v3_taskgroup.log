@@ -186,3 +186,13 @@ KeyError: 'promoting'
 12:40:11 V3_TASKGROUP_COMPLETE
 12:42:39 starting: 3 cells, jobs=3, etas=[0.9]
 12:42:44 starting: 3 cells, jobs=3, etas=[0.0]
+12:45:02 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16_newprim\world_0\promoting
+12:45:04 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16_newprim\world_1\promoting
+12:45:05 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16_newprim\world_2\promoting
+12:45:07 V3_TASKGROUP_COMPLETE
+12:45:23 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_0\promoting
+12:45:27 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_1\promoting
+12:45:27 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_2\promoting
+12:45:28 V3_TASKGROUP_COMPLETE
+12:47:43 starting: 3 cells, jobs=3, etas=[0.9]
+12:47:47 starting: 3 cells, jobs=3, etas=[0.0]

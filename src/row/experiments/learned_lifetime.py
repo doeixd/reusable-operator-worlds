@@ -386,6 +386,7 @@ def run(
     freeze_slots: int | None = None,
     sleeps: tuple[int, ...] = (),
     promotion_epsilon: float = 0.02,
+    reuse_decision_at: int = 8,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -561,6 +562,15 @@ def run(
                     n_seen,
                     *(int(index) for index in np.atleast_1d(prior_indices)),
                 ]
+            if (
+                isinstance(model, PromotingSharedResidualLearner)
+                and n_seen == reuse_decision_at
+            ):
+                model.select_reference(
+                    task.task_id,
+                    _tensor(task.train_x[:n_seen]),
+                    _tensor(task.train_y[:n_seen]),
+                )
             replay_items = replay.sample(replay_count)
             batch_x = [
                 *(task.train_x[index] for index in current_indices),

@@ -71,6 +71,7 @@ class PromotingSharedResidualLearner(SharedParentResidualLearner):
         # reference; they contribute no residual scalars to the code.
         self.retired: set[str] = set()
         self.promotion_ledger: list[dict[str, object]] = []
+        self.reuse_log: list[dict[str, object]] = []
         self.residual_scalars_per_task = (
             self.residual_u_size + self.residual_v_size + self.residual_b_size
         )
@@ -396,6 +397,45 @@ class PromotingSharedResidualLearner(SharedParentResidualLearner):
             "library_size": len(self.abstractions),
         }
 
+    @torch.no_grad()
+    def select_reference(self, task_id: str, x: Tensor, y: Tensor) -> int | None:
+        """Let a NEW task reuse the library, or decline to.
+
+        Promotion that only shortens the record of past tasks is storage
+        optimization. The forward half — a new task starting from an
+        abstraction earlier tasks paid for — is what makes it abstraction,
+        and it is the only route by which promotion can show up in the
+        prequential loss at all. The choice is made from the task's own
+        observed examples, never from held-out or teacher information, and
+        "none" is always among the options so reuse is never forced.
+        """
+
+        if not self.abstractions:
+            return None
+        previous = self.task_reference.get(task_id)
+        was_retired = task_id in self.retired
+        best_index, best_loss = None, None
+        for index in [None, *range(len(self.abstractions))]:
+            if index is None:
+                self.task_reference.pop(task_id, None)
+            else:
+                self.task_reference[task_id] = index
+            loss = float(torch.mean(torch.square(self.forward(x, task_id) - y)))
+            if best_loss is None or loss < best_loss:
+                best_loss, best_index = loss, index
+        if best_index is None:
+            self.task_reference.pop(task_id, None)
+        else:
+            self.task_reference[task_id] = best_index
+        if previous is not None and best_index is None:
+            self.task_reference[task_id] = previous
+        if was_retired:
+            self.retired.add(task_id)
+        self.reuse_log.append(
+            {"task_id": task_id, "selected": best_index, "library_size": len(self.abstractions)}
+        )
+        return best_index
+
     # ---- accounting --------------------------------------------------
 
     @property
@@ -426,6 +466,11 @@ class PromotingSharedResidualLearner(SharedParentResidualLearner):
             "reference_bits_per_task": reference_bits,
             "reference_bits_total": reference_bits * len(self.retired),
             "candidates_considered": len(self.promotion_ledger),
+            "reuse_selections": self.reuse_log,
+            "tasks_reusing_library": sum(
+                1 for entry in self.reuse_log if entry["selected"] is not None
+            ),
+            "tasks_offered_library": len(self.reuse_log),
             "candidates_promoted": sum(
                 1 for record in self.promotion_ledger if record["decision"] == "promote"
             ),

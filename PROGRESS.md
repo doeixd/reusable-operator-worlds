@@ -1290,3 +1290,32 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   abstraction on members it was not fitted on. A candidate that only
   compresses its own members is a quantization artifact; one that predicts
   a task it never saw is reusable structure.
+
+# 2026-08-19 — H11.1 observed: bits migrate, 3/3 worlds
+
+- Leave-one-out replicates 3/3: family capture 46.5 / 58.0 / 49.3 per cent
+  against a single global abstraction's 19.8 / 22.6 / 23.7, mean advantage
+  +29.3 points, with the on-trajectory probe agreeing with the
+  common-domain probe throughout. The abstraction transfers to members it
+  was never fitted on, so this is cross-task reuse rather than joint
+  compression, and the testbed is validated.
+- The V_transfer gate (a candidate must beat the single global abstraction
+  on members it was not fitted on) inverts the promote/refuse balance:
+  structured promotes 6.7 and refuses 3.0, the control promotes 3.3 and
+  refuses 6.0. A 2:1 discrimination where the retrospective-only criterion
+  had none, though the control still promotes rather than refusing
+  outright.
+- H11.1 MIGRATION OBSERVED, 3/3 worlds, with shared capacity that was NOT
+  preallocated: D_task 110,592 -> 15,732 / 9,472 / 14,151 (falls ~87%),
+  D_shared 12,720 -> 20,640 / 26,976 / 22,224 (rises), D_total 123,312 ->
+  36,372 / 36,448 / 36,375 (falls 70%). Mean two-part gain +60,244 nats,
+  positive 3/3.
+- One gap the run exposed immediately: prequential loss was IDENTICAL
+  between promoted and unpromoted (-158,347 both), because a new task
+  began with a fresh private residual and never consulted the library.
+  Promotion was buying description length with no forward benefit, which
+  is storage optimization rather than abstraction and would have failed
+  H11.3 by construction. Implemented library reuse: at a fixed point in a
+  task's own examples it may select any existing abstraction or none, from
+  its own observed data only, with "none" always available so reuse is
+  never forced. Rerunning both conditions with reuse enabled.
