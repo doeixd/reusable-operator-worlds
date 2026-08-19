@@ -1,0 +1,396 @@
+{
+  "prediction": "P-2026-08-18-A",
+  "claim": "variational wake learner beats BOTH fixed architectures under the literal two-part code at lambda = ln 2, retaining at least half of the raw prequential envelope gain",
+  "worlds_beating_both_fixed": 0,
+  "worlds_total": 3,
+  "mean_retained_envelope_share": 0.44478897489686453,
+  "per_world": [
+    {
+      "world_seed": 0,
+      "losses": {
+        "variational": -154395.4394672146,
+        "shared_residual": -159646.76841910376,
+        "continuous": -151597.42286009315,
+        "dense": -151906.2889776858
+      },
+      "retained_bits": {
+        "variational_dense_code": 132432,
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688,
+        "variational_sparse_code": 111158
+      },
+      "two_part_objective": {
+        "variational_dense_code": -62600.572051299925,
+        "shared_residual": -69105.11110564147,
+        "continuous": -131324.25412307587,
+        "dense": -105681.68980050416,
+        "variational_sparse_code": -77346.5851705322
+      },
+      "beats_both_fixed_under_two_part": false,
+      "beats_shared_residual_under_two_part": true,
+      "envelope_gain_nats": 7740.479441417963,
+      "retained_envelope_share": 0.3215757510070754,
+      "variational_diagnostics": {
+        "threshold_bits": 0.5,
+        "total_task_kl_bits": 37099.1614074707,
+        "mean_task_kl_bits": 579.6743969917297,
+        "mean_route_kl_bits": 7.434600064530969,
+        "mean_residual_kl_bits": 572.2397906780243,
+        "mean_informative_coordinate_fraction": 0.32580236486486486,
+        "prior_scales": [
+          0.008310269564390182,
+          0.08588367700576782,
+          0.05195872113108635,
+          0.13938434422016144
+        ],
+        "prior_scale_names": [
+          "route",
+          "residual_u",
+          "residual_v",
+          "residual_b"
+        ],
+        "evaluation_loss_posterior_mean": -292539.15324298287,
+        "evaluation_expected_loss_under_q": -291474.6754036421,
+        "variational_code_nats": -265759.49627291545,
+        "variational_task_bits": 37099.1614074707,
+        "note": "variational code is E_q[L] + KL on held-out evaluation sets; L_mean + KL is never reported as a codelength"
+      },
+      "rate_distortion": {
+        "dense_two_part_total_bits": 132432,
+        "mean_float_nmse": 0.024688746900061672,
+        "non_inferiority_margin": 0.0001,
+        "points": [
+          {
+            "threshold_bits": 0.0625,
+            "retained_task_scalars": 9967,
+            "task_bits": 94166,
+            "total_bits": 111158,
+            "mean_nmse": 0.024722196065639763,
+            "mean_nmse_increase": 3.344916557809214e-05,
+            "maximum_task_nmse_increase": 0.0004161128454499355,
+            "within_margin": true
+          },
+          {
+            "threshold_bits": 0.125,
+            "retained_task_scalars": 8528,
+            "task_bits": 82654,
+            "total_bits": 99646,
+            "mean_nmse": 0.024824331168311467,
+            "mean_nmse_increase": 0.0001355842682497946,
+            "maximum_task_nmse_increase": 0.000907916223257161,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 0.25,
+            "retained_task_scalars": 6689,
+            "task_bits": 67942,
+            "total_bits": 84934,
+            "mean_nmse": 0.02516365051214048,
+            "mean_nmse_increase": 0.0004749036120788074,
+            "maximum_task_nmse_increase": 0.002004420998209685,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 0.5,
+            "retained_task_scalars": 4663,
+            "task_bits": 51734,
+            "total_bits": 68726,
+            "mean_nmse": 0.026083037186834676,
+            "mean_nmse_increase": 0.0013942902867730021,
+            "maximum_task_nmse_increase": 0.004348887183620975,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 1.0,
+            "retained_task_scalars": 2667,
+            "task_bits": 35766,
+            "total_bits": 52758,
+            "mean_nmse": 0.0278017605733852,
+            "mean_nmse_increase": 0.003113013673323529,
+            "maximum_task_nmse_increase": 0.00884513753794422,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 2.0,
+            "retained_task_scalars": 1114,
+            "task_bits": 23342,
+            "total_bits": 40334,
+            "mean_nmse": 0.03060222578421278,
+            "mean_nmse_increase": 0.005913478884151106,
+            "maximum_task_nmse_increase": 0.018749740846146862,
+            "within_margin": false
+          }
+        ],
+        "best_within_margin": {
+          "threshold_bits": 0.0625,
+          "retained_task_scalars": 9967,
+          "task_bits": 94166,
+          "total_bits": 111158,
+          "mean_nmse": 0.024722196065639763,
+          "mean_nmse_increase": 3.344916557809214e-05,
+          "maximum_task_nmse_increase": 0.0004161128454499355,
+          "within_margin": true
+        }
+      }
+    },
+    {
+      "world_seed": 1,
+      "losses": {
+        "variational": -157240.67199614836,
+        "shared_residual": -161241.6521638243,
+        "continuous": -153686.83446154423,
+        "dense": -154063.05350361828
+      },
+      "retained_bits": {
+        "variational_dense_code": 132432,
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688,
+        "variational_sparse_code": 108854
+      },
+      "two_part_objective": {
+        "variational_dense_code": -65445.804580233686,
+        "shared_residual": -70699.99485036201,
+        "continuous": -133413.66572452695,
+        "dense": -107838.45432643665,
+        "variational_sparse_code": -81788.82880347608
+      },
+      "beats_both_fixed_under_two_part": false,
+      "beats_shared_residual_under_two_part": true,
+      "envelope_gain_nats": 7178.598660206015,
+      "retained_envelope_share": 0.4426516431605168,
+      "variational_diagnostics": {
+        "threshold_bits": 0.5,
+        "total_task_kl_bits": 35352.163162231445,
+        "mean_task_kl_bits": 552.3775494098663,
+        "mean_route_kl_bits": 4.562679348629899,
+        "mean_residual_kl_bits": 547.8148744106293,
+        "mean_informative_coordinate_fraction": 0.31228885135135137,
+        "prior_scales": [
+          0.006476783659309149,
+          0.08213885128498077,
+          0.0469948910176754,
+          0.1343938708305359
+        ],
+        "prior_scale_names": [
+          "route",
+          "residual_u",
+          "residual_v",
+          "residual_b"
+        ],
+        "evaluation_loss_posterior_mean": -299793.66051926,
+        "evaluation_expected_loss_under_q": -298685.039900635,
+        "variational_code_nats": -274180.7876780391,
+        "variational_task_bits": 35352.163162231445,
+        "note": "variational code is E_q[L] + KL on held-out evaluation sets; L_mean + KL is never reported as a codelength"
+      },
+      "rate_distortion": {
+        "dense_two_part_total_bits": 132432,
+        "mean_float_nmse": 0.02215704066864113,
+        "non_inferiority_margin": 0.0001,
+        "points": [
+          {
+            "threshold_bits": 0.0625,
+            "retained_task_scalars": 9679,
+            "task_bits": 91862,
+            "total_bits": 108854,
+            "mean_nmse": 0.022194163480590473,
+            "mean_nmse_increase": 3.712281194934282e-05,
+            "maximum_task_nmse_increase": 0.0005082441221999599,
+            "within_margin": true
+          },
+          {
+            "threshold_bits": 0.125,
+            "retained_task_scalars": 8216,
+            "task_bits": 80158,
+            "total_bits": 97150,
+            "mean_nmse": 0.022266458277474033,
+            "mean_nmse_increase": 0.00010941760883290122,
+            "maximum_task_nmse_increase": 0.000759895595566374,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 0.25,
+            "retained_task_scalars": 6475,
+            "task_bits": 66230,
+            "total_bits": 83222,
+            "mean_nmse": 0.02240900365158458,
+            "mean_nmse_increase": 0.00025196298294345,
+            "maximum_task_nmse_increase": 0.0011515631809584197,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 0.5,
+            "retained_task_scalars": 4508,
+            "task_bits": 50494,
+            "total_bits": 67486,
+            "mean_nmse": 0.02283210990955273,
+            "mean_nmse_increase": 0.0006750692409116001,
+            "maximum_task_nmse_increase": 0.002761199032858312,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 1.0,
+            "retained_task_scalars": 2644,
+            "task_bits": 35582,
+            "total_bits": 52574,
+            "mean_nmse": 0.023958080283273488,
+            "mean_nmse_increase": 0.0018010396146323558,
+            "maximum_task_nmse_increase": 0.005593977610166698,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 2.0,
+            "retained_task_scalars": 1119,
+            "task_bits": 23382,
+            "total_bits": 40374,
+            "mean_nmse": 0.026147146270326813,
+            "mean_nmse_increase": 0.003990105601685683,
+            "maximum_task_nmse_increase": 0.010780841561999523,
+            "within_margin": false
+          }
+        ],
+        "best_within_margin": {
+          "threshold_bits": 0.0625,
+          "retained_task_scalars": 9679,
+          "task_bits": 91862,
+          "total_bits": 108854,
+          "mean_nmse": 0.022194163480590473,
+          "mean_nmse_increase": 3.712281194934282e-05,
+          "maximum_task_nmse_increase": 0.0005082441221999599,
+          "within_margin": true
+        }
+      }
+    },
+    {
+      "world_seed": 2,
+      "losses": {
+        "variational": -158232.94346544406,
+        "shared_residual": -161588.81126738817,
+        "continuous": -153267.4550383855,
+        "dense": -153781.93429164038
+      },
+      "retained_bits": {
+        "variational_dense_code": 132432,
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688,
+        "variational_sparse_code": 109798
+      },
+      "two_part_objective": {
+        "variational_dense_code": -66438.07604952938,
+        "shared_residual": -71047.15395392588,
+        "continuous": -132994.2863013682,
+        "dense": -107557.33511445875,
+        "variational_sparse_code": -82126.76933432318
+      },
+      "beats_both_fixed_under_two_part": false,
+      "beats_shared_residual_under_two_part": true,
+      "envelope_gain_nats": 7806.876975747786,
+      "retained_envelope_share": 0.5701395305230014,
+      "variational_diagnostics": {
+        "threshold_bits": 0.5,
+        "total_task_kl_bits": 38348.71955871582,
+        "mean_task_kl_bits": 599.1987431049347,
+        "mean_route_kl_bits": 112.28962981700897,
+        "mean_residual_kl_bits": 486.90911877155304,
+        "mean_informative_coordinate_fraction": 0.30363175675675674,
+        "prior_scales": [
+          0.30597352981567383,
+          0.07017172873020172,
+          0.03523029014468193,
+          0.14605402946472168
+        ],
+        "prior_scale_names": [
+          "route",
+          "residual_u",
+          "residual_v",
+          "residual_b"
+        ],
+        "evaluation_loss_posterior_mean": -303837.5379154015,
+        "evaluation_expected_loss_under_q": -302994.08329899615,
+        "variational_code_nats": -276412.77645878826,
+        "variational_task_bits": 38348.71955871582,
+        "note": "variational code is E_q[L] + KL on held-out evaluation sets; L_mean + KL is never reported as a codelength"
+      },
+      "rate_distortion": {
+        "dense_two_part_total_bits": 132432,
+        "mean_float_nmse": 0.020822710124592504,
+        "non_inferiority_margin": 0.0001,
+        "points": [
+          {
+            "threshold_bits": 0.0625,
+            "retained_task_scalars": 9797,
+            "task_bits": 92806,
+            "total_bits": 109798,
+            "mean_nmse": 0.020886094044250472,
+            "mean_nmse_increase": 6.338391965796491e-05,
+            "maximum_task_nmse_increase": 0.0011406711520210444,
+            "within_margin": true
+          },
+          {
+            "threshold_bits": 0.125,
+            "retained_task_scalars": 8162,
+            "task_bits": 79726,
+            "total_bits": 96718,
+            "mean_nmse": 0.02097789010052191,
+            "mean_nmse_increase": 0.00015517997592940608,
+            "maximum_task_nmse_increase": 0.001149830737477632,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 0.25,
+            "retained_task_scalars": 6275,
+            "task_bits": 64630,
+            "total_bits": 81622,
+            "mean_nmse": 0.021122359966235064,
+            "mean_nmse_increase": 0.0002996498416425573,
+            "maximum_task_nmse_increase": 0.0012338509465953523,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 0.5,
+            "retained_task_scalars": 4341,
+            "task_bits": 49158,
+            "total_bits": 66150,
+            "mean_nmse": 0.02163964337352193,
+            "mean_nmse_increase": 0.0008169332489294213,
+            "maximum_task_nmse_increase": 0.003122919611094104,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 1.0,
+            "retained_task_scalars": 2591,
+            "task_bits": 35158,
+            "total_bits": 52150,
+            "mean_nmse": 0.0227046694211894,
+            "mean_nmse_increase": 0.0018819592965968915,
+            "maximum_task_nmse_increase": 0.007970063472376568,
+            "within_margin": false
+          },
+          {
+            "threshold_bits": 2.0,
+            "retained_task_scalars": 1198,
+            "task_bits": 24014,
+            "total_bits": 41006,
+            "mean_nmse": 0.02460976258813316,
+            "mean_nmse_increase": 0.0037870524635406555,
+            "maximum_task_nmse_increase": 0.014179135037793666,
+            "within_margin": false
+          }
+        ],
+        "best_within_margin": {
+          "threshold_bits": 0.0625,
+          "retained_task_scalars": 9797,
+          "task_bits": 92806,
+          "total_bits": 109798,
+          "mean_nmse": 0.020886094044250472,
+          "mean_nmse_increase": 6.338391965796491e-05,
+          "maximum_task_nmse_increase": 0.0011406711520210444,
+          "within_margin": true
+        }
+      }
+    }
+  ]
+}

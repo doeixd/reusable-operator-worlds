@@ -273,6 +273,15 @@ sleep, fired or refused.
 
       J_wake = L_preq + beta * KL(q(Delta_tau) || p(Delta))
 
+  IMPLEMENTATION NOTE (measured 2026-08-19, binding): the optimizer
+  minimizes MSE, a mean over batch and dimensions, while KL is a sum of
+  nats over a task's whole code. The objective above is therefore
+  charged as beta * 2*sigma^2/(N*d) * KL in MSE units, which is the
+  same quantity in the optimizer's coordinates and makes beta = 1 the
+  literal MDL point. Charging raw KL against MSE is ~4 orders of
+  magnitude too strong and collapses every posterior; this is a units
+  error, not a tuning choice.
+
   Bits are in the gradient DURING learning — the root fix for every V2
   compression failure. The learner is not encouraged to make residuals
   small; it is encouraged to make task-specific information
@@ -298,10 +307,37 @@ sleep, fired or refused.
   SHARED ACROSS ALL TASKS and counted in `D_shared` — a per-task prior
   scale would be hidden task information reducing KL for free (review
   16); any task-specific prior parameter, if ever introduced, is
-  charged to `D_task`. Prior scales live in a no-weight-decay
-  optimizer group (the learned-alpha convention). Initialize `mu` at
-  the frozen shared-residual initialization and `sigma = s_p` so the
-  initial KL is zero.
+  charged to `D_task`.
+- **Prior estimation (revised 2026-08-19 on measured evidence; the
+  original "gradient-learned s_p, sigma initialized at s_p so the
+  initial KL is zero" is superseded).** Two failure modes were measured
+  and both are fatal to the wake learner:
+  (a) a GRADIENT-learned shared prior runs away. Whenever posteriors
+  are concentrated the KL gradient on the prior always says "shrink",
+  Adam's normalized step makes the move size independent of the tiny
+  gradient, and the collapsing prior then annihilates the task state it
+  is supposed to describe (measured: 1.0 -> 0.0034 over one lifetime,
+  after which a residual of 0.2 costs ~1,700 nats).
+  (b) the closed-form empirical-Bayes estimate has a STABLE DEGENERATE
+  FIXED POINT if applied from initialization: mu ~ 0 and sigma = 1e-3
+  give s ~ 1e-3 immediately, whose mu/s^2 gradient pins every task code
+  at zero for the entire lifetime (measured: uniform routes, 0.125
+  mixture weights, for all 64 tasks).
+  The adopted rule: s_p is set by the CLOSED-FORM M step
+  s^2 = mean(mu^2 + sigma^2) per tensor type, estimated over COMPLETED
+  tasks only, and not applied at all until a population exists
+  (warmup 8 tasks; the prior holds at `prior_scale_init` before that).
+  The posterior starts precise (`posterior_scale_init` = 1e-3) and the
+  prior starts wide (1.0), so the code starts at high precision and
+  RELAXES where precision proves unnecessary — which is the migration
+  direction H11.1 looks for. Mean KL then reduces to mean log(s/sigma):
+  bits relative to what is typical across tasks, which is the semantics
+  the promotion criterion needs.
+- Two distinct per-coordinate quantities, never conflated:
+  `coordinate_kl` = the full code length (includes the precision term
+  log(s/sigma)), used for the variational currency; and
+  `coordinate_mean_information` = mu^2/(2 s^2), the part a sparse code
+  recovers by dropping the coordinate, used as the pruning criterion.
 - Training: one reparameterized sample per forward during updates;
   prequential scoring and all evaluation use the posterior MEAN
   (deterministic — the paired-comparison and score-before-update rules
@@ -310,6 +346,19 @@ sleep, fired or refused.
   `L_var = E_q[L] + KL` estimated with a fixed 16-sample fixed-seed MC
   scheme (the variational code). `L_mean + KL` is NOT called a
   codelength anywhere. Variational bits are `KL / ln 2`.
+- **Data-budget validity condition (measured 2026-08-19, binding on
+  every variational cell).** The variational learner cannot be
+  evaluated on reduced-example worlds. At 16 examples/task, task state
+  buys ~5 nats/task of fit against ~500 nats of code, so an empty code
+  is the MDL-CORRECT answer and "correct refusal to encode" is
+  indistinguishable from "collapse bug". Every variational run uses the
+  full 128-example budget; a beta = 0 control (which must reproduce the
+  frozen shared-residual baseline) is the smoke test instead. This also
+  relocates the program's amortization economics INSIDE the learner:
+  a task code is retained only when the data gain over the task's own
+  examples exceeds its code cost, which is the V1 law one level down
+  and is why P-2026-08-19-H (the lifetime-length sweep) is expected to
+  bite here too.
 - Tuning: the V2 two-stage protocol exactly. Stage one on development
   worlds 0–2 tunes ONLY `beta` over the grid {0.1, 0.3, 1.0} with all
   learning rates inherited from the frozen shared-residual setting;

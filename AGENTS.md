@@ -544,3 +544,23 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   artifact counts from a prior known state before killing anything, avoid
   repo-wide find during batches (use targeted ls), and remember TaskStop
   ends the parent shell while detached children survive as orphans.
+- Variational task codes have three implementation traps, all measured
+  on the V3 wake learner and all fatal if missed. (1) UNITS: KL is a
+  sum of nats over a task's whole code, MSE is a mean over batch and
+  dimensions; charge `beta * 2*sigma^2/(N*d) * KL` so beta = 1 is the
+  literal MDL point (raw KL against MSE is ~1e4 too strong). (2) A
+  GRADIENT-learned shared prior runs away — the KL gradient always says
+  "shrink" when posteriors are concentrated and Adam's normalized step
+  ignores the tiny magnitude, so the prior collapses (1.0 -> 0.0034 in
+  one lifetime) and then annihilates the task state. Use the
+  closed-form empirical-Bayes M step instead. (3) That closed form has
+  a STABLE DEGENERATE FIXED POINT at initialization (mu ~ 0 gives
+  s ~ sigma_init, whose mu/s^2 gradient pins every code at zero
+  forever): estimate the prior from COMPLETED tasks only, after a
+  warmup, with the posterior starting precise and the prior wide.
+- A variational learner cannot be smoke-tested on a reduced-example
+  world. At 16 examples/task the MDL-correct answer is an empty task
+  code (task state buys ~5 nats of fit against ~500 nats of code), so
+  correct refusal-to-encode is indistinguishable from a collapse bug.
+  Smoke-test with `description_beta: 0.0` instead, which must reproduce
+  the frozen non-variational baseline exactly.
