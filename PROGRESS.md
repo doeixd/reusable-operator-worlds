@@ -1096,3 +1096,15 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   full 128-example worlds (not just the smoke), which must reproduce the
   frozen shared-residual baseline up to the two documented differences
   (no L1 surrogate, and 1e-3 sampling noise).
+
+# 2026-08-19 — beta = 0 equivalence audit passes at full scale
+
+- The PI-requested audit that the variational learner reduces to the
+  frozen H9 baseline when its information charge is switched off, run on
+  full 128-example canonical mixed worlds rather than the reduced smoke.
+  PASS 3/3: lifetime loss within +0.75% to +1.09% (1,204-1,734 nats of
+  ~160,000), route specialization matching (0.369/0.374, 0.349/0.367,
+  0.387/0.385), and comparable 32-shot novel transfer. The residual/parent
+  ratio runs higher (0.283 against 0.217) exactly as the two documented
+  differences predict: the variational learner disables the L1 residual
+  surrogate and injects 1e-3 sampling noise. reports/v3_beta0_equivalence.json

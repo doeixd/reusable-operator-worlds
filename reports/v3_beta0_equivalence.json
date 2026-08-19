@@ -1,0 +1,41 @@
+{
+  "audit": "beta = 0 equivalence to the frozen H9 shared-residual learner",
+  "scope": "full 128-example canonical mixed worlds (not the reduced smoke)",
+  "expected_differences": [
+    "the variational learner disables the L1 residual surrogate (storage_penalty is identically zero), so its residuals run larger",
+    "training forwards inject 1e-3 posterior sampling noise"
+  ],
+  "verdict": "PASS: within ~1% of baseline lifetime loss in 3/3 worlds with matching route specialization",
+  "per_world": [
+    {
+      "world_seed": 0,
+      "variational_beta0_loss": -157913.26137206613,
+      "shared_residual_loss": -159646.76841910376,
+      "delta_nats": 1733.5070470376231,
+      "variational_max_route_coefficient": 0.3689453899860382,
+      "shared_residual_max_route_coefficient": 0.37396541237831116,
+      "variational_residual_to_parent": 0.2824868857860565,
+      "shared_residual_residual_to_parent": 0.21892140805721283
+    },
+    {
+      "world_seed": 1,
+      "variational_beta0_loss": -160037.7411642135,
+      "shared_residual_loss": -161241.6521638243,
+      "delta_nats": 1203.9109996107873,
+      "variational_max_route_coefficient": 0.3489283621311188,
+      "shared_residual_max_route_coefficient": 0.3668254315853119,
+      "variational_residual_to_parent": 0.28385764360427856,
+      "shared_residual_residual_to_parent": 0.2245340198278427
+    },
+    {
+      "world_seed": 2,
+      "variational_beta0_loss": -159983.5143412621,
+      "shared_residual_loss": -161588.81126738817,
+      "delta_nats": 1605.2969261260587,
+      "variational_max_route_coefficient": 0.38684067130088806,
+      "shared_residual_max_route_coefficient": 0.385002464056015,
+      "variational_residual_to_parent": 0.2819388806819916,
+      "shared_residual_residual_to_parent": 0.2071678787469864
+    }
+  ]
+}
