@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import copy
 import json
 import subprocess
 from pathlib import Path
@@ -112,15 +113,32 @@ def validate_artifact(
 ) -> dict[str, Any]:
     resolved_path = output / "config.yaml"
     actual_resolved = yaml.safe_load(resolved_path.read_text(encoding="utf-8"))
+    # Normalize output.directory before comparison: absolute and relative
+    # spellings of the same directory are the same provenance (a detached
+    # driver and an in-repo shell may launch identical runs with different
+    # path representations). Normalization applies to comparison COPIES
+    # only — the stored fingerprint hashes the original resolved config,
+    # which must remain untouched.
+    def _normalized_copy(resolved: dict[str, Any]) -> dict[str, Any]:
+        copied = copy.deepcopy(resolved)
+        output_section = copied.get("output")
+        if isinstance(output_section, dict) and "directory" in output_section:
+            output_section["directory"] = str(
+                Path(str(output_section["directory"])).resolve()
+            )
+        return copied
+
+    actual_resolved_cmp = _normalized_copy(actual_resolved)
+    expected_resolved_cmp = _normalized_copy(expected_resolved)
     actual_comparable = (
-        _without_output(actual_resolved)
+        _without_output(actual_resolved_cmp)
         if ignore_output_directory
-        else actual_resolved
+        else actual_resolved_cmp
     )
     expected_comparable = (
-        _without_output(expected_resolved)
+        _without_output(expected_resolved_cmp)
         if ignore_output_directory
-        else expected_resolved
+        else expected_resolved_cmp
     )
     differences = _difference_paths(actual_comparable, expected_comparable)
     if differences:
