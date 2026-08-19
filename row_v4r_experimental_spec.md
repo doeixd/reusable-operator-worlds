@@ -113,7 +113,7 @@ the measurements, per project convention.
 
 | cell | verdict | evidence |
 | --- | --- | --- |
-| COMPRESS | **dominates** | wins 12/12 regime-worlds over FACTORIZE across F in {2,4,8}, N in {64,128} |
+| COMPRESS | **dominates** | wins 15/15 regime-worlds over FACTORIZE across F in {2,4,8}, N in {64,128,200}; margin does not close with scale |
 | FACTORIZE | **negative** | existence gate passes (rank-2 excess over isotropic null +15.7/+26.2/+27.3 points) but the matched-budget economic gate fails 9/10 worlds; leave-one-abstraction-out recovers a mean 7.5% |
 | RETIRE | **negative** | obsolescence oracle's refusal control does not refuse |
 | RETAIN | **positive (oracle)** | frozen-library oracle: crossover between gap 8 (+1,594, 7/10) and gap 16 (-240); refusal control passes 0/9 in the permanent arm |
@@ -125,7 +125,10 @@ monotone in family count — F=8 yields SMALLER libraries (3-4) than F=4
 (6-9), because 64 tasks split eight ways leaves too few per family to
 reach `minimum_cluster = 3`, so the scale axis must be driven by N. At
 N=128 libraries reach 9-12 and COMPRESS's margin WIDENS rather than
-closing. No `M*_factorize` exists below about twelve abstractions.
+closing. No `M*_factorize` exists below SIXTEEN abstractions: at N=200 libraries
+reach 11-16 and COMPRESS still wins 3/3. Locating a sharing threshold
+would need a library an order of magnitude larger than a 216-program
+world can generate -- a ceiling of the testbed, not only of the learner.
 
 **The economic survival rule does not discriminate.** With the correct
 counterfactual — the task's own private residual, in a two-part
@@ -162,7 +165,8 @@ measured, it collapses libraries in both conditions.
 Worlds 0-2 are sufficient for an opportunity map; ten worlds are for
 confirmation, not for locating a boundary.
 
-    lifetime length      N in {64, 128, 256}
+    lifetime length      N in {64, 128, 200}   # 256 unreachable:
+                                              # tasks cap at 6**3 = 216
     recurring families   F in {2, 4, 8}
     turnover             q in {0, low, high}
     return gap           g in {8, 16, 32, 64}

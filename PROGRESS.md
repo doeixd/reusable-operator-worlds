@@ -1675,3 +1675,31 @@ retention policy — an oracle crossover in gap length — is now satisfied.
 This is still an oracle over frozen libraries, not a learner result: no
 retention policy has been implemented, and the confound that blocks the
 online version (PROMOTE firing on noise) is unchanged.
+
+# V4R scale axis complete: COMPRESS wins 15/15 (2026-08-19)
+
+Finished V4R §1.1's registered lifetime-length sweep. N=256 proved
+unreachable: the world caps `tasks` at the number of distinct programs,
+`primitives ** depth` = 6**3 = 216, and raising it means adding
+primitives, which would break comparability with every existing
+artifact. The sweep therefore runs at N in {64, 128, 200}, with 200 the
+largest admissible point, and that substitution is recorded in AGENTS.md
+rather than left implicit.
+
+| N | library size | COMPRESS net | FACTORIZE net | winner |
+| --- | --- | --- | --- | --- |
+| 64  | 6-9   | 3,084 / 5,420 / 3,779 | 1,948 / 3,094 / 2,541 | COMPRESS 3/3 |
+| 128 | 9-12  | 4,872 / 5,269 / 7,385 | 4,312 / 3,725 / 3,313 | COMPRESS 3/3 |
+| 200 | 11-16 | 8,346 / 6,897 / 6,000 | 5,553 / 4,540 / 2,700 | COMPRESS 3/3 |
+
+Tripling the lifetime roughly doubles the library, from 6-9 to 11-16
+abstractions, and COMPRESS still wins every cell. Across the whole
+census — F in {2,4,8} and N in {64,128,200} — COMPRESS beats FACTORIZE
+in 15/15 regime-worlds, and the margin does not close with scale.
+
+So no `M*_factorize` exists below sixteen abstractions, and §1.2's
+registered possibility is the realized outcome at every scale this
+testbed can reach: lifecycle machinery costs more than the slack it
+recovers. Locating a sharing threshold would require a library an order
+of magnitude larger than the 216-program world can generate, which is a
+statement about the testbed's ceiling, not only about the learner.

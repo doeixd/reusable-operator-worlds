@@ -1,0 +1,176 @@
+[
+  {
+    "world_seed": 0,
+    "library_size": 16,
+    "dependents": 199,
+    "compress": [
+      {
+        "per_scalar_bits": 1,
+        "bits_after": 3168,
+        "net_nats": -4981.604628760175
+      },
+      {
+        "per_scalar_bits": 2,
+        "bits_after": 6336,
+        "net_nats": 207.66320206095043
+      },
+      {
+        "per_scalar_bits": 3,
+        "bits_after": 9504,
+        "net_nats": 8272.485864326945
+      },
+      {
+        "per_scalar_bits": 4,
+        "bits_after": 12672,
+        "net_nats": 8346.363540035816
+      },
+      {
+        "per_scalar_bits": 6,
+        "bits_after": 19008,
+        "net_nats": 4313.747703217857
+      }
+    ],
+    "factorize": [
+      {
+        "rank": 1,
+        "bits_after": 3296,
+        "net_nats": 1708.7581398386792,
+        "matched_compress_net_nats": -5070.327467871848
+      },
+      {
+        "rank": 2,
+        "bits_after": 5008,
+        "net_nats": 3644.8034677641263,
+        "matched_compress_net_nats": -6256.995440990475
+      },
+      {
+        "rank": 4,
+        "bits_after": 8432,
+        "net_nats": 5552.51026794829,
+        "matched_compress_net_nats": 7216.033496869635
+      }
+    ],
+    "best_compress_nats": 8346.363540035816,
+    "best_compress_bits": 4,
+    "best_factorize_nats": 5552.51026794829,
+    "factorize_beats_matched_budget": false,
+    "winner": "COMPRESS",
+    "families": 4
+  },
+  {
+    "world_seed": 1,
+    "library_size": 13,
+    "dependents": 192,
+    "compress": [
+      {
+        "per_scalar_bits": 1,
+        "bits_after": 2574,
+        "net_nats": -5420.990080851236
+      },
+      {
+        "per_scalar_bits": 2,
+        "bits_after": 5148,
+        "net_nats": 698.3095257992318
+      },
+      {
+        "per_scalar_bits": 3,
+        "bits_after": 7722,
+        "net_nats": 6896.815266892638
+      },
+      {
+        "per_scalar_bits": 4,
+        "bits_after": 10296,
+        "net_nats": 6719.647397908688
+      },
+      {
+        "per_scalar_bits": 6,
+        "bits_after": 15444,
+        "net_nats": 3539.3697568746647
+      }
+    ],
+    "factorize": [
+      {
+        "rank": 1,
+        "bits_after": 3272,
+        "net_nats": 3103.556351920819,
+        "matched_compress_net_nats": -5904.806812882078
+      },
+      {
+        "rank": 2,
+        "bits_after": 4960,
+        "net_nats": 4539.6992917331045,
+        "matched_compress_net_nats": -5834.4309504376615
+      },
+      {
+        "rank": 4,
+        "bits_after": 8336,
+        "net_nats": 4047.564278421032,
+        "matched_compress_net_nats": 7262.784069977624
+      }
+    ],
+    "best_compress_nats": 6896.815266892638,
+    "best_compress_bits": 3,
+    "best_factorize_nats": 4539.6992917331045,
+    "factorize_beats_matched_budget": true,
+    "winner": "COMPRESS",
+    "families": 4
+  },
+  {
+    "world_seed": 2,
+    "library_size": 11,
+    "dependents": 193,
+    "compress": [
+      {
+        "per_scalar_bits": 1,
+        "bits_after": 2178,
+        "net_nats": -5065.763734591614
+      },
+      {
+        "per_scalar_bits": 2,
+        "bits_after": 4356,
+        "net_nats": 585.6366864648098
+      },
+      {
+        "per_scalar_bits": 3,
+        "bits_after": 6534,
+        "net_nats": 5999.855995674767
+      },
+      {
+        "per_scalar_bits": 4,
+        "bits_after": 8712,
+        "net_nats": 5634.924857164642
+      },
+      {
+        "per_scalar_bits": 6,
+        "bits_after": 13068,
+        "net_nats": 3019.5218982572096
+      }
+    ],
+    "factorize": [
+      {
+        "rank": 1,
+        "bits_after": 3256,
+        "net_nats": -1195.0136844767967,
+        "matched_compress_net_nats": -5812.976395235235
+      },
+      {
+        "rank": 2,
+        "bits_after": 4928,
+        "net_nats": 1245.6342947301164,
+        "matched_compress_net_nats": 189.15649918452254
+      },
+      {
+        "rank": 4,
+        "bits_after": 8272,
+        "net_nats": 2699.6216451918526,
+        "matched_compress_net_nats": 5546.3485186072585
+      }
+    ],
+    "best_compress_nats": 5999.855995674767,
+    "best_compress_bits": 3,
+    "best_factorize_nats": 2699.6216451918526,
+    "factorize_beats_matched_budget": false,
+    "winner": "COMPRESS",
+    "families": 4
+  }
+]
