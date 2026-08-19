@@ -786,3 +786,48 @@ Reporting note: the first printout of this table carried an inverted
 legend, reading a positive difference as "no cost". The sign convention
 here is that more negative loss is better, so deleted-minus-retained
 POSITIVE means deletion hurt. The numbers were right; the label was not.
+
+# Single-abstraction retention probe: V_retain not reliably positive (2026-08-19)
+
+The decisive RETAIN test, with every confound removed: one abstraction,
+no redundancy, no re-homing, no alternative representative. Only the
+most-depended-upon abstraction is deleted at the gap, and only its own
+forward-looking carry is charged — historical creation cost is sunk and
+correctly excluded, so the comparison is future carry versus
+P(return) * C_reacquire.
+
+    V_retain = (loss penalty of deleting) - (description ACTUALLY saved)
+
+| gap | loss penalty | V_retain per world | mean |
+| --- | --- | --- | --- |
+| 8  | +1,841 / +1,636 / +1,210 | +1,841 / +538 / -2,084 | +99 |
+| 16 | +1,283 / +1,198 / +841 | -913 / +2,296 / -2,453 | -357 |
+| 32 | +280 / +11 / +105 | +280 / +11 / -993 | -234 |
+
+Outcome 3, with a caveat that matters. V_retain is NOT reliably positive
+at any gap. But the two terms behave very differently and should not be
+reported as one number:
+
+  * The LOSS term is clean — positive 9/9, decaying monotonically with
+    gap (1,563 -> 1,107 -> 132 in the whole-library probe). Reacquisition
+    genuinely costs something and the option genuinely decays.
+  * The DESCRIPTION term is noisy, and structurally so. Deleting one
+    abstraction at task 32 perturbs the whole downstream promotion
+    trajectory: arms end with 5/5, 6/5, 5/2, and in one cell 6/7, where
+    the DELETED arm finishes with MORE abstractions than the retained
+    one. Final description is therefore not a controlled quantity in
+    this design, and it swings V_retain by +/-2,000.
+
+Methodological consequence. A deletion intervention mid-lifetime is not
+a paired comparison in the sense the rest of this project uses: the two
+arms stop being matched the moment the intervention changes what gets
+promoted next. Only the pre-divergence window is genuinely paired. The
+right instrument is the RETURN CURVE — cumulative loss over the first
+returning tasks, where the arms are still comparable — rather than an
+end-of-lifetime J difference. That is the measurement to build next,
+and it is what "area between the curves" was asking for.
+
+Standing reading. Reacquisition is not free, but in this learner it is
+cheap enough, and library evolution divergent enough, that persistent
+retention has no demonstrated net value at any tested gap. n=3 worlds
+per gap; the deltas are reported, no interval is claimed.

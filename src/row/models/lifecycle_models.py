@@ -679,7 +679,9 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
         return best_index
 
     @torch.no_grad()
-    def force_retire_all(self, task_index: int) -> dict[str, object]:
+    def force_retire_all(
+        self, task_index: int, only_largest: bool = False
+    ) -> dict[str, object]:
         """Delete the whole live library, to price REACQUISITION.
 
         Not a policy — an intervention. Pairing a run against an identical
@@ -690,7 +692,18 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
 
         self.sync_lineage(task_index)
         killed = []
-        for index, record in self.lineage.items():
+        candidates = list(self.lineage)
+        if only_largest:
+            # Delete just the most-depended-upon abstraction: the dormant
+            # family's own object. Deleting the WHOLE library conflates the
+            # carry cost of ~5 abstractions with the reacquisition cost of
+            # one, which makes V_retain negative by construction.
+            live = [i for i in candidates if self.lineage[i].retired_at_task is None]
+            if not live:
+                return {"task_index": task_index, "retired": []}
+            candidates = [max(live, key=lambda i: (len(self.lineage[i].dependents), -i))]
+        for index in candidates:
+            record = self.lineage[index]
             if record.retired_at_task is None:
                 record.retired_at_task = task_index
                 record.retirement_reason = "forced (reacquisition probe)"

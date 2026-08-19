@@ -97,6 +97,11 @@ def main() -> None:
         help="delete the whole live library at this task (reacquisition probe)",
     )
     parser.add_argument(
+        "--force-retire-one",
+        action="store_true",
+        help="delete only the most-depended-upon abstraction",
+    )
+    parser.add_argument(
         "--lifecycle-filter",
         action="store_true",
         help="refuse promotions worth less than their own carry cost",
@@ -233,6 +238,7 @@ def main() -> None:
             lifecycle_enabled=args.lifecycle,
             lifecycle_filter=args.lifecycle_filter,
             force_retire_at=args.force_retire_at,
+            force_retire_one=args.force_retire_one,
             lifecycle_kappa=args.lifecycle_kappa,
             lifecycle_grace=args.lifecycle_grace,
         )

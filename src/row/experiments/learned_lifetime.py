@@ -398,6 +398,7 @@ def run(
     lifecycle_enabled: bool = False,
     lifecycle_filter: bool = False,
     force_retire_at: int | None = None,
+    force_retire_one: bool = False,
     lifecycle_kappa: float = 0.0,
     lifecycle_grace: int = 8,
 ) -> dict[str, object]:
@@ -698,7 +699,7 @@ def run(
                     and not model.retired_abstractions()
                 ):
                     record["forced_retirement"] = model.force_retire_all(
-                        lifetime_index + 1
+                        lifetime_index + 1, only_largest=force_retire_one
                     )
                 if lifecycle_filter:
                     filter_rng = np.random.default_rng(
