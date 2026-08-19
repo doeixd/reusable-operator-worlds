@@ -307,10 +307,16 @@ task against mean lifetime losses -159,436 / -159,559 / -156,623 /
 -148,138 and mean maximum route coefficients 0.348 / 0.300 / 0.152 /
 0.125, so every bit saved costs route structure and predictive loss
 together. **Consequence for V3, and it strengthens H11 rather than
-weakening it: continuous information penalties alone cannot produce
-structural compression, because shrinking a KL never yields a shared
-object plus a reference to it.** Only PROMOTE changes the
-representation class. The wake phase's job is therefore to ALLOCATE
+weakening it (stated at the width the evidence supports): a continuous
+information penalty over a FIXED representational topology does not by
+itself create the shared-object-plus-reference structure V3 needs, and
+the tested Gaussian implementation does not induce useful structural
+sparsity indirectly either.** The general claim that no continuous
+penalty could ever drive some architecture into structurally
+compressible states is NOT established and is not asserted. What is
+established is the distinction that matters here: changing the COST OF
+VALUES is not the same operation as changing the VOCABULARY OF
+REPRESENTATIONS, and only PROMOTE does the latter. The wake phase's job is therefore to ALLOCATE
 information well and to expose a null state that promotion can act on,
 not to win the two-part cell by itself; H11.2's primary causal
 comparison (promoted against unpromoted-variational) is unaffected,

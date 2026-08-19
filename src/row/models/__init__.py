@@ -9,11 +9,13 @@ from row.models.learned_models import (
     SharedParentResidualLearner,
     VariationalSharedResidualLearner,
 )
+from row.models.gated_models import GatedInnovationLearner
 from row.models.numpy_mlp import ScratchResidualMLP
 from row.models.torch_oracle import LearnedOperator, OracleCompositor
 
 __all__ = [
     "ContinuousBasisLearner",
+    "GatedInnovationLearner",
     "DenseLearner",
     "DiscreteLibraryLearner",
     "HypernetworkLearner",

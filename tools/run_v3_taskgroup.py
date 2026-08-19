@@ -25,16 +25,17 @@ def log(message: str) -> None:
         handle.write(f"{time.strftime('%H:%M:%S')} {message}\n")
 
 
-def run_cell(args: tuple[int, float, str]) -> str:
-    world, eta, model = args
-    out = ROOT / "artifacts" / "v3_taskgroup" / f"eta{eta:g}" / f"world_{world}" / model
+def run_cell(args: tuple[int, float, str, int]) -> str:
+    world, eta, model, groups = args
+    label = f"eta{eta:g}" if groups == 2 else f"eta{eta:g}_g{groups}"
+    out = ROOT / "artifacts" / "v3_taskgroup" / label / f"world_{world}" / model
     if (out / "summary.json").exists():
         return f"skip {out}"
     result = subprocess.run(
         [sys.executable, "-m", "row.experiments.mixed_lifetime",
          "--config", "configs/v1.yaml", "--model", model,
          "--world-seed", str(world), "--task-group-eta", str(eta),
-         "--output", str(out)],
+         "--task-groups", str(groups), "--output", str(out)],
         cwd=ROOT, capture_output=True, text=True,
     )
     if result.returncode != 0:
@@ -48,10 +49,15 @@ def main() -> None:
     parser.add_argument("--worlds", type=int, nargs="+", default=[0, 1, 2])
     parser.add_argument("--etas", type=float, nargs="+", default=[0.0, 0.5, 0.7, 0.9])
     parser.add_argument("--model", default="shared_residual")
+    parser.add_argument("--groups", type=int, default=2)
     parser.add_argument("--jobs", type=int, default=4)
     args = parser.parse_args()
 
-    cells = [(world, eta, args.model) for eta in args.etas for world in args.worlds]
+    cells = [
+        (world, eta, args.model, args.groups)
+        for eta in args.etas
+        for world in args.worlds
+    ]
     log(f"starting: {len(cells)} cells, jobs={args.jobs}, etas={args.etas}")
     with ProcessPoolExecutor(max_workers=args.jobs) as pool:
         for outcome in pool.map(run_cell, cells):

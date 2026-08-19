@@ -1,0 +1,377 @@
+# Review Index
+
+An index of all reviewer feedback files in this directory, in chronological
+order, with a one-paragraph summary of each. The reviews follow the project
+from the initial encouraging pilot through V1 confirmation, V2's sealed
+replication, and into V3 design.
+
+## Files
+
+### [reviewer-assessment-initial.txt](reviewer-assessment-initial.txt)
+The first assessment of the three-world pilot. Verdict: "genuinely encouraging."
+Praises the oracle positive control (clean reusable structure + zero-shot
+transfer), scratch controls, and the recognition that task-code inference was
+the bottleneck, not reuse itself. Directs the agent to **stop adding mechanisms
+and establish causality** via the ρ control (ρ=1→0.5→0), enforce symmetric
+hyperparameter tuning across models, split development (0–9) from confirmatory
+(100–129) worlds, and reserve clean worlds. Flags five cautions: not yet
+demonstrating "becoming a better learner" (needs checkpointed few-shot curves),
+hyperparameter fairness, the NLL terminology fix (call it "cumulative
+prequential Gaussian log loss"), the teacher/learner family match, and the need
+for a generic hypernetwork baseline. Rates the evidence ★★★★☆ for discovering
+reuse but only ★★☆☆☆ that reuse *causes* the advantage.
+
+### [reviewer-feedback-00.txt](reviewer-feedback-00.txt)
+Response after the causal endpoint and checkpoint results landed. The ρ control
+flipped correctly: Continuous wins by 3,135 at ρ=1 but loses by 6,714 at ρ=0 —
+the first direct evidence the advantage is tied to latent recurrence. The
+learning-to-learn effect appeared: Continuous's 32-shot novel NMSE dropped
+0.0298→0.00467 across the lifetime vs Dense-C's 0.0367→0.0159. The hard-discrete
+result is praised as a useful decomposition (good library recovery, expensive
+online route inference), yielding a storage/learning/inference triangle across
+Dense, Continuous, and Discrete. Endorses the experiment plan (dev/confirmatory
+split, symmetric tuning, ρ sweep). Asks to make **measured functional
+recurrence** the primary x-axis, promote the checkpoint slope analysis to
+co-primary, use ≥16 novel programs per checkpoint, and be careful interpreting
+ρ=0 (the continuous model may be architecturally disadvantaged there). Notes a
+threshold ρ* where sharing becomes economical could emerge, and defers the
+amortized program-inference ("compiler") idea until the causal curve is
+established.
+
+### [reviewer-feedback-01.txt](reviewer-feedback-01.txt)
+A full repository review at commit e6f25e3. Rates methodological hygiene well
+above norm (prequential scoring, oracle/negative controls, paired worlds, seed
+firewall). Highest-priority concern: **teacher/learner functional-family
+inheritance** — learners share the teacher's rank-8 residual tanh family and
+inherit `world.alpha`; promote family-mismatch controls (GELU, rank mismatch)
+ahead of tuning. Also flags global (not per-task) discrete temperature annealing
+as a possible artifact behind the "route inference is the bottleneck" narrative,
+and the convex softmax mixing that cannot express identity/attenuation. Compute
+advice: run the cheap controls first, shrink the tuning grid, and implement
+`forward_tasks` batching by task ID (best ROI). Reporting asks: normalize effect
+sizes, drop n=3 bootstrap intervals, scope "compute-matched" to inference MACs,
+and document the effective batch of 2.
+
+### [reviewer-feedback-02.txt](reviewer-feedback-02.txt)
+The result survived the fairness correction: after symmetric tuning Continuous
+still leads Dense-C by ~3,098 log-loss units on worlds 0–2 with ~2x better
+novel 32-shot NMSE. Recommends the learning-to-learn gain ratio (G = NMSE@8 /
+NMSE@64 ≈ 6.4× Continuous vs 2.3× Dense-C) as a descriptive (not inferential)
+figure. Notes the discrete library learns a real symbolic "language" but lacks
+a compiler from demonstrations into programs, and sketches a wake/sleep
+"continuous inference → discrete consolidation" direction. Observes the
+two-timescale structure (fast task inference, slow shared representation
+learning) shared by both winning models. Defers loops, and reframes the
+sequence to: ρ curve → checkpoint replication → hypernetwork control →
+24-dim dense control → freeze → confirmatory worlds.
+
+### [reviewer-feedback-03.txt](reviewer-feedback-03.txt)
+Verdict on the alpha-decoupling update: the alpha leak is fixed end-to-end and
+the headline result survived both fairness corrections (symmetric tuning and
+decoupled tanh ≈ -170,967 vs coupled -171,866). The first family control
+defuses the most dangerous confound. Remaining priorities: finish the
+family-mismatch sweep (GELU + teacher-rank-16), re-run the oracle gate under
+the new operator config, exclude learnable alpha from weight decay, and resolve
+the still-open per-task discrete annealing, identity-operator ablation, and
+`forward_tasks` batching. Calls out that finished verified work is sitting
+uncommitted (violating AGENTS.md) and asks to seed the "standing scientific
+doubts" section in AGENTS.md. Provides an amended 8-step sequence to
+confirmation.
+
+### [reviewer-feedback-04.txt](reviewer-feedback-04.txt)
+Strategic guidance for the ambitious direction (V1.5+). Ranks four candidate
+mechanisms: MDL-pruned overcomplete library (weakest novelty), fork/merge under
+nonstationarity (most novel, now feasible on Kaggle GPU as a sequel),
+macros/loops (deferred again), and **continuous→discrete consolidation**
+(recommended). Consolidation is nearly free (both endpoints exist, checkpoint
+harness is built), fits the measured storage/learning/inference triangle, and
+is the smallest system that satisfies the novelty criterion literally. Frames
+consolidation as amortized program inference with a J = L_preq + λD criterion
+and a falsifier at ρ=0 (consolidation should refuse when there's no true
+reusable language). Specifies a minimal decisive experiment (V1.5) and an arXiv
+structure that is robust to whether consolidation buys learning speed or only
+compression.
+
+### [reviewer-feedback-05.txt](reviewer-feedback-05.txt)
+Response to the ρ sweep on worlds 0–2. Records a **retraction on the record**:
+the transfer-dissociation ("abstraction quality improves before it pays for
+itself") failed replication — adopt the simpler single-crossover picture, and
+treat the ρ=1 6.4× ratio with suspicion until replicated. The crossover itself
+(0.811/0.852/0.851) is strong and endorsed. Recommends two free analyses:
+re-coordinate the crossover in **measured recurrence** space, and test whether
+ρ*(N) moves with lifetime length (the decisive mechanism test, free from
+existing logs). Proposes unifying the GELU family-mismatch result with the
+crossover via six runs. Promotes a mixed-ρ world (per-primitive reuse levels)
+above Benchmark C as the first Phase II target, since it forces the learner to
+discover factorization structure in a static world.
+
+### [reviewer-feedback-06.txt](reviewer-feedback-06.txt)
+Stage-two milestone. Configuration selection is now essentially closed:
+Continuous wins all seven worlds 3–9 by 2,554–5,054 units (mean 3,787) and
+improves mean 32-shot novel NMSE 0.00731→0.00368, with hyperparameters that
+independently agree with stage-one. The width-128 YAML bug is exactly the kind
+to find now — fix before the ρ sweep. Strengthens the reproducibility ask: make
+every artifact carry and validate a complete **resolved experiment
+fingerprint** (seeds, rho, architecture, LRs, activation, git commit, config
+hash) and snapshot the resolved config into each run directory. The real
+uncertainty has moved to "how does the advantage change as recurrence
+decreases," making the replicated ρ sweep the right next experiment. Cautions
+against retuning per-ρ and against introducing new architecture now.
+
+### [reviewer-feedback-07.txt](reviewer-feedback-07.txt)
+Retention cleanup milestone. Retention is closed: int8 degradation is ~1e-6
+mean / 1.4e-4 worst, so stop spending on it. The retained-bits ordering
+(Discrete 26,208 < Continuous 29,248 < Hypernetwork 33,928 < Dense-24 56,448 <
+Dense-C 66,688) diverges from lifetime-loss ordering, reinforcing the
+resource-frontier interpretation that storage, online learning, and inference
+are distinct objectives — justifying the weighted objective
+J = L_preq + λD + μC. Praises robustness experiments (reverse order, replay
+0/1/4) and asks to plot ΔL against replay ratio (a replay/sharing interaction
+would be informative), compare per-task cost slopes across orderings, and rank
+the remaining obligations: second initialization (essential), shared-parent +
+residual (most conceptually interesting — first model where the amount of reuse
+is learned), with a warning to constrain the residual so it doesn't silently
+rebuild Dense-C.
+
+### [reviewer-feedback-08.txt](reviewer-feedback-08.txt)
+Pre-confirmation assessment through commit 79087f0. The robustness result is
+"the strongest kind: boring" — reverse/no-replay/canonical/heavy-replay all
+flat to ~10%, killing the curriculum and replay nuisance explanations. The
+**checkpoint replication contains a better result than the one being quoted**:
+at 8 tasks Dense is equal or slightly better, then they diverge — so stop
+quoting "6.4× vs 2.3×" and instead show the equal-start divergence; the equal
+start at checkpoint 8 is itself a finding (the advantage is acquired, not
+architectural). Gives a finite, closed remaining list: hypernetwork final
+verdict (last experiment that can change interpretation), second
+initialization, the two free analyses from feedback-05 (measured-recurrence
+crossover, ρ*(N) — highest information per FLOP), GELU crossover-shift, and
+robustness worlds 3–9. States the supportable claim set for the paper and
+endorses closing both robustness axes permanently once worlds 3–9 confirm.
+
+### [reviewer-feedback-09.txt](reviewer-feedback-09.txt)
+A short PI-level **release decision**: no public sharing of results before V1
+confirmation. The preregistration story is only tellable once; quoting
+development numbers now spends it for asterisked claims that are days of
+compute from being asterisk-free. One exception allowed at any time: releasing
+the benchmark and methodology alone (no results), which strengthens the
+preregistration. Adds queue items: commit `notes/` and `reviews/` (untracked,
+and an original was lost to overwrite once), re-derive worlds 0–2 robustness
+means from run directories, run the two free analyses before freezing
+summaries, and do a clean-checkout rehearsal. Everything with numbers waits
+for seeds 100–129, and the confirmation outcome is reported whatever it is.
+
+### [reviewer-feedback-10.txt](reviewer-feedback-10.txt)
+Records anticipated reception folded into the plans (V2 spec §10 and
+RELEASE_PLAN.md). Best audiences: continual/meta-learning and MDL/compression.
+Predictable objections ("toy," "circular," "neural DreamCoder," "we knew this")
+are pre-answered. Notes the agent-executed provenance will attract scrutiny;
+the audit trail exists so work can be verified without trusting authors.
+Internal ceiling: strong niche paper + adoptable benchmark + possibly the
+founding measurement of an "economics of abstraction" program; the most
+valuable single result if it holds is ρ*(N) moving as predicted. Gives H6
+explicit strategic weight (co-primary with H5) because the circularity
+objection is the paper's biggest exposure. Adds the standing instruction to
+keep the objections section synced with current results, and incorporates late
+crossover.txt material (statistical-vs-structural reuse dissociation, H9
+split, elbow test, operator-recovery bridge analysis, no-conflation rule).
+
+### [reviewer-feedback-11.txt](reviewer-feedback-11.txt)
+Major V2 synthesis. The economics of abstraction is real:
+ΔL ≈ 5906r − 2477 (R²≈.97 development; ≈5716r − 2625, R²=.935 sealed) —
+remarkably stable. The amortization hypothesis is weakened usefully: the
+crossover moves from N=16 to N=32 then stops, so "early amortization + stationary
+representational bias" is closer to the truth. Family alignment (GELU) is now
+clearly part of the economics — ΔL = f(r, A, C), with alignment entering mostly
+as an intercept/penalty shift. The exact-posterior discrete result is huge
+conceptually (discreteness isn't expensive; program inference is), and 006b
+killed the "mixtures as Bayesian route beliefs" explanation (mean Spearman
+≈−0.03) — so Continuous exploits a continuous function space, not discrete
+route uncertainty. Proposes three representational regimes (specialization →
+continuous manifold → crystallized primitives). Selective sharing works (H9)
+but loses under the two-part code (allocation solved, compression not) — the
+clearest handoff to V3. The failed consolidation experiments reinforce that
+compression must be based on functional equivalence, not component identity.
+
+### [reviewer-feedback-12.txt](reviewer-feedback-12.txt)
+V3 design review. The V3 question is right, but the V3 mechanism sketch is
+partly obsolete because V2 killed the "continuous learner as discrete route
+posterior" interpretation. Biggest update: **wake should be manifold-first**
+(G_φ(c_τ) + Δ_τ), not a discrete posterior machine. The central V3 problem is
+now sharper: the learner can discover useful sharing but cannot turn it into a
+compact code. Proposes a revised three-level architecture: wake (continuous,
+flexible, overcomplete), during-learning (make bits part of the gradient via a
+variational J = L_preq + β KL), and sleep (discover recurring structure in the
+residual information and promote it functionally). Argues functional
+equivalence should become "constitutional law" (every structural edit answers
+"what happens behaviorally if I substitute this abstraction"). Revises the
+wake/sleep distinction (wake = prediction + continuous information cost; sleep
+= discrete representational changes). Suggests "primitive" in V3 should mean
+one endpoint of compression (continuous manifold → localized subspace →
+parameterized abstraction → discrete primitive), not an ontology imposed at
+init.
+
+### [reviewer-feedback-13.txt](reviewer-feedback-13.txt)
+Twelve candidate V3 analyses/hypotheses, with three prioritized. Top three:
+(1) replace route entropy with **functional-equivalence entropy** (quotient the
+route space by behavioral equivalence; rehabilitate consolidation with a
+correct gate "compile when the function is identified"); (2) measure the
+function-family **intrinsic dimensionality across ρ** to turn the
+specialization→manifold→primitive story into a measured phenomenon; (3)
+**observable recurrence estimators** (gradient alignment, cross-task transfer,
+Jacobian similarity) so a self-organizing learner can decide reuse without
+being told ρ. Also proposes a rate–distortion theory of neural programs
+(R(ε) = min D s.t. d(f_c,f_τ)≤ε), representational capacity as a second axis
+(ΔL = f(r, A, d_eff)), variational-coded residuals, hysteresis (abstraction as
+investment: r_create > r_delete), separating acquisition from retention value,
+promotion as an observable information-flow event, the amortized-inference
+scaling law, context-channel capacity, and an LLM bridge that first tests the
+law (not the architecture) on LoRA task vectors. Cites six arXiv references.
+
+### [reviewer-feedback-14.txt](reviewer-feedback-14.txt)
+A long strategic/visionary document (the grand vision). The learned library at
+scale should become a **learned computational substrate**: memory ↔ workspace ↔
+learned computational language ↔ controller, with experience → discover
+recurrence → compress → revise language. Argues description of computational
+vocabulary ≪ description of all computations it can express (why ordinary
+programs are powerful), that procedural knowledge (not just facts) gets a
+natural persistent representation, that perception/input processing and output
+can be made of the same programs (active perception; attention as a learned
+macro), and that information theory gives a deep interpretation
+(D(F | L) ≪ D(F)). Covers continual learning at three timescales, catastrophic
+forgetting via copy-on-write, loops (D(n) ~ O(log n) compression), branching,
+program synthesis vs language revision, parsimony as endogenous
+(J = L + λD + μC), and compounding intelligence through language improvement.
+Concludes with five milestones (sharing determination [done], information
+migration [V3], prospective utility, macros/control abstractions, real tasks)
+and the recommendation: do not make V3 "the whole architecture"; make V3 the
+clean demonstration that an abstraction can be born.
+
+### [reviewer-feedback-15.txt](reviewer-feedback-15.txt)
+V2 sealed-block milestone. The 30/30 sign pattern replicated with stable
+parameters on a second sealed block (slope 6,194 inside [4,000, 7,500],
+pooled crossing 0.450, R²=0.926), and selective sharing also replicated 30/30
+(allocate more specialization to lower-recurrence primitives) while still
+losing under the two-part code 30/30 — "the learner can discover where sharing
+belongs but cannot encode that discovery compactly." Three solid facts: reuse
+has measurable economics (ΔL ≈ ar+b), the learner estimates allocation
+implicitly, and prediction and description length are fundamentally misaligned.
+V3 should be brutally focused: detect recurring functional component → promote
+into L + cheap residuals → win simultaneously on L_preq and D_total. Defines
+V3 success around **information migration** (D_task↓, D_shared↑, D_total↓ with
+held-out behavior constant). Recommends a variational code, promotion as
+changing the prior (abstraction = shared latent that reduces D of task-local
+states), a hierarchical Benchmark E with a hard negative control
+(accidental/non-predictive similarity), and separating V_retro from V_future.
+Hopes V3's internal economics will predict the V1/V2 crossover.
+
+### [reviewer-feedback-16.txt](reviewer-feedback-16.txt)
+Spec revision pass before V3 execution. Flags issues that could make H11
+impossible or ambiguous. (1) The accidental-similarity control is
+**information-theoretically impossible** as specified (identical observed
+histories can't be distinguished); fix it to a retrospectively-compressible
+but prospectively-dubious history. (2) A real architecture contradiction
+between the hypernetwork substrate and the frozen shared-residual learner —
+choose the H9 shared-residual for causal continuity. (3) Fixed-width two-part
+bits can't shrink when task information disappears unless promotion actually
+removes parameters; need explicit rank reduction / entropy coding. (4) The
+promoted abstraction class is too unconstrained — fix V3.1 to one rank-2
+family. (5) H11.2 is missing the key baseline (same variational learner with
+PROMOTE disabled). Also: split proposal/acceptance probes, separate mean-network
+performance from the variational code, make the prior unquestionably shared,
+freeze the predictive non-inferiority margin, and demote H13. Gives a 10-point
+pre-execution edit list and the crisp V3 signature: D_task↓, D_shared↑,
+D_total↓ with L_heldout not up and L_future,promoted < L_future,unpromoted.
+
+### [reviewer-feedback-17.txt](reviewer-feedback-17.txt)
+Post-V3 forward look: what we'd learn after V3. Questions whether abstraction
+is recursively compositional (macros over abstractions), whether the learner
+can discover the right granularity (neural program synthesis / anti-unification),
+maintain a vocabulary (PROMOTE/MERGE/FORK/DELETE — neural refactoring), exhibit
+hysteresis (r_create > r_delete), become genuinely prospective (horizon-dependent
+promotion), discover loops and branching economically, operate over a stable
+workspace (the neural ABI problem: composition depth → error), discover the
+coordinate system where reuse exists, and amortize language-learning itself
+(learning representation-edit policies). Charts V4 (vocabulary maintenance) →
+V5 (program structure: MACRO/LOOP/BRANCH) → V6/Phase III (meta-learned search
+and restructuring), with the LLM bridge last (measure → factor → learn
+factorization → revise library). Includes a prediction tree for V3 (variational
+allocation likely works; PROMOTE finds structure fairly likely; KL bits shrink
+likely; literal bits shrink uncertain; future exploitation harder; recursive
+abstraction genuinely open) and argues each broken arrow maps to a tractable
+research program. Concludes abstraction is a pipeline, not a single operation.
+
+### [reviewer-feedback-18.txt](reviewer-feedback-18.txt)
+Conceptual pause on the variational wake learner before tuning β. (1) The
+Gaussian parameterization may make "zero task information" inherently noisy — a
+broad prior injects order-1 random residuals for unused coordinates, forcing
+σ_q≪σ_p and paying KL for nothing; test this in a trivial 1-D toy first. (2)
+The right object to code is **presence/innovation**, not the raw task parameter
+(Δ = g·v with g∈{0,1}; rank-component gates giving rank 0/1/2 — exactly the
+physical representation V3 wants). (3) Audit how often KL is actually charged
+(replay may charge a completed task's code multiple times). (4) The empirical-Bayes
+prior deserves its own ablation (acquire variation first, compress second — β
+annealing/delay). (5) The 16-example "empty code is MDL-correct" result is
+actually a within-task threshold n*_task (the same economics at a new scale),
+hinting at abstraction economics nested across examples/tasks/abstractions.
+
+### [reviewer-feedback-19.txt](reviewer-feedback-19.txt)
+The toy result is decisive: a Gaussian code spends 79% of the used-task cost to
+say "do nothing," while a gated code spends ~0. This reveals a constitutional
+requirement: **zero information must correspond to the computational identity
+operation** (Δ=0 should be an exact representational state). Recommends
+replacing Gaussian innovations with gated innovations (g·R, or rank
+r∈{0,1,2}), which is almost already a primitive computational language (REUSE /
+SPECIALIZE rank=1 / SPECIALIZE rank=2). Cautions to charge the gate itself
+honestly, and notes the replay audit needs one more step: count the **relative
+pressure** of KL vs likelihood per task (R_τ), not raw KL appearances — repeated
+SGD visits aren't automatically charging the description multiple times. Warns
+against simply stopping KL during replay (task codes would accumulate information
+for free) unless task codes freeze after acquisition; presents two clean
+options (mutable task state with importance weighting, or acquire-then-freeze).
+
+### [reviewer-feedback-20.txt](reviewer-feedback-20.txt)
+The audits separated training-time information geometry from final achievable
+storage code, and cleared replay of a bug it didn't have (the corrected KL/data
+pressure = 1 for every task; the raw 0.50–3.38× exposure was misleading, and the
+attempted fix created the real problem). Sharpens the key result: the coding
+prior's mode of zero complexity must coincide with the computational identity
+(C=0 ⇔ Δ=0; halt; no write; no fork) — complexity as explicit departures from a
+default. Cautions on the acquisition-then-freeze prediction (P-J) — registers
+it low priority and slightly expects mutable task state to win, since frozen
+residuals anchor to an obsolete shared substrate (reconsolidation, not
+immutability). Recommends rank-component gates (not per-scalar), a deterministic
+rank-coded baseline to isolate the null-state advantage, and comparing
+rate–distortion frontiers (not just β=1) — which may imply a hybrid
+spike-and-slab code. Notes a grotesque trade in collapsed worlds (~5–7 route
+bits vs ~550 residual bits) and proposes a "force route access" experiment
+showing reuse requires both cheap shared computation and a cheap addressing
+mechanism — converging toward opcode/reference + arguments + optional new data.
+
+### [reviewer-feedback-21.txt](reviewer-feedback-21.txt)
+Substrate-selection decision after P-A (the Gaussian variational wake
+experiment) was falsified 0/3 on the two-part objective. Do **not** go straight
+to PROMOTE on the Gaussian substrate, and don't make it a binary Gaussian-vs-
+gated choice: there are three candidates (H9 shared-residual | Gaussian-coded |
+gated innovation), and the evidence disfavors Gaussian as the primary PROMOTE
+substrate. Decision rule: run the preregistered gated experiment (P-I) **before
+any PROMOTE development** — if P-I passes and preserves the family residual
+structure PROMOTE needs, use gated; if it fails, fall back to original H9, not
+Gaussian; keep Gaussian only as a mechanistically informative control. Three
+strikes against Gaussian: wrong null-state semantics (q=p ⇏ Δ=0), the shared prior
+kills routes (the cheap reuse channel) via symmetry-breaking, and the registered
+rate–distortion curve has no hidden sweet spot (β↑ ⇒ D_KL↓ but route structure↓
+and L_preq↑). Narrows the writeup claim: "a continuous information penalty over
+a fixed representational topology cannot by itself create the new shared object
++ reference structure V3 requires" (changing the cost of values ≠ changing the
+vocabulary of representations). Specifies the gated experiment's job (exact
+identity state, semantic rank-component granularity, preserve H9 routes
+unchanged, and verify family-clustered promotable residuals), adds a
+PROMOTE-readiness comparison table across the three substrates, and notes the
+H9 post-hoc result (89% of dense bits under the strict matched-behavior margin)
+eliminates the "just a dumb int8 code" alternative — the learner actually needs
+to change the representation, which makes PROMOTE better motivated and gives it
+a stronger causal test. Concludes that task state contains three distinct
+currencies (REFERENCE / ARGUMENT / INNOVATION) that should not share one
+generic regularizer, and that the self-programming architecture may require a
+typed description language (CALL / CALL(α) / INNOVATE(R) / PROMOTE→j_new, then
+later MACRO/REPEAT/IF) before it requires sophisticated program syntax.

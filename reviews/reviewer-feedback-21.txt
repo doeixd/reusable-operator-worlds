@@ -1,0 +1,418 @@
+I would **not go straight to PROMOTE on the Gaussian substrate**.
+
+But I also would not make this a binary choice between Gaussian and gated. You now have three candidates:
+
+[
+\boxed{
+\text{H9 shared-residual}
+\quad|\quad
+\text{Gaussian-coded}
+\quad|\quad
+\text{Gated innovation}
+}
+]
+
+and the evidence already strongly disfavors Gaussian as the *primary* PROMOTE substrate.
+
+### My recommended decision rule
+
+Run the preregistered gated experiment **before any PROMOTE development**.
+
+* If P-I passes and the gated learner preserves the family residual structure PROMOTE needs, use **gated innovation** as the V3 wake substrate.
+* If P-I fails, fall back to the **original H9 shared-residual learner**, not Gaussian.
+* Keep Gaussian as a mechanistically informative negative/control model.
+
+That preserves the causal story extremely well.
+
+The charter was always:
+
+[
+\text{gradient descent correctly allocates information}
+\rightarrow
+\operatorname{PROMOTE}
+\rightarrow
+\text{compact shared structure}.
+]
+
+H9 already satisfies the left side. Gaussian was an attempted improvement to make the left side explicitly information-priced; P-A has now told you that this particular attempt is not the answer.
+
+---
+
+## Why I wouldn't use Gaussian for PROMOTE now
+
+You have three independent strikes against it.
+
+First, its null state has the wrong semantics:
+
+[
+q=p
+\not\Rightarrow
+\Delta=0.
+]
+
+Second, its shared prior can kill an entire mechanism through symmetry-breaking, and empirically it often killed **routes**, which are precisely the cheap reuse channel.
+
+Third, the registered rate–distortion curve is brutally clear:
+
+[
+\beta\uparrow
+\Rightarrow
+D_{\rm KL}\downarrow,
+\quad
+\text{route structure}\downarrow,
+\quad
+L_{\rm preq}\uparrow.
+]
+
+There is no hidden sweet spot in the tested range.
+
+At (\beta=.3), it retains useful performance, but it isn't providing PROMOTE with some magical compressed precursor state. P-A is falsified 0/3 on the actual two-part objective.
+
+So if PROMOTE subsequently failed on Gaussian, the obvious objection would be:
+
+> Maybe promotion is fine; you fed it task states produced by a coding mechanism you already knew was pathological.
+
+Avoid that ambiguity.
+
+---
+
+# But I would slightly narrow one conclusion in the writeup
+
+This:
+
+> “continuous information penalties cannot create structural compression”
+
+is stronger than the experiment established.
+
+I'd write:
+
+> **A continuous information penalty over a fixed representational topology cannot by itself create the new shared object + reference structure required by V3, and the tested Gaussian implementation does not induce useful structural sparsity indirectly.**
+
+That's harder to attack.
+
+A continuous penalty *could* conceivably drive a parameterized architecture into structurally compressible states. Your data says this Gaussian one did not.
+
+The deeper point remains:
+
+[
+\boxed{
+\text{changing the cost of values}
+\neq
+\text{changing the vocabulary of representations}.
+}
+]
+
+PROMOTE is doing the latter.
+
+---
+
+# The gated experiment now has a very specific job
+
+Don't ask it:
+
+> Can gating solve V3?
+
+Ask:
+
+> **Can wake expose task-specific innovations in a form whose structure and cost agree?**
+
+I would want four things from it.
+
+### 1. Exact identity state
+
+[
+r=0\Rightarrow R=0.
+]
+
+No noise, no payload.
+
+### 2. Semantic granularity
+
+Gate rank components:
+
+[
+R_{\tau,l}
+==========
+
+\sum_{k=1}^{2}
+g_{\tau,l,k}u_{\tau,l,k}v_{\tau,l,k}^{T}.
+]
+
+Not individual weights.
+
+### 3. Preserve reuse access
+
+Do **not** couple route/reference state to the innovation prior.
+
+For this first experiment, I think the cleanest thing is actually to leave the successful H9 route machinery alone.
+
+So:
+
+[
+\text{H9 routes}
++
+\text{gated residual innovations}.
+]
+
+That isolates the hypothesis.
+
+You can later replace H9's 24-float route code with a proper categorical/reference code. Don't confound P-I with that change yet.
+
+### 4. Produce promotable structure
+
+This is critical.
+
+Even if gated wins its own rate–distortion test, run the §2.1 validity instrument again on its residuals.
+
+You need:
+
+[
+\text{within-family functional similarity}
+\gg
+\text{cross-family similarity}.
+]
+
+A task code that is wonderfully sparse but destroys the recurring residual structure is a bad substrate for V3.
+
+---
+
+# I would add one PROMOTE-readiness table
+
+Before selecting the wake substrate, compare all three:
+
+| Property                   |      H9 | Gaussian |       Gated |
+| -------------------------- | ------: | -------: | ----------: |
+| Lifetime prediction        |       ✓ | measured |           ? |
+| Literal task bits          |     bad |      bad |           ? |
+| Exact null innovation      |      no |       no |     **yes** |
+| Route preservation         |       ✓ | unstable | should be ✓ |
+| Family residual clustering | measure |  measure |     measure |
+| Oracle promotable savings  | measure |  measure |     measure |
+
+The last two are particularly important.
+
+The best wake substrate for PROMOTE isn't necessarily the one with the fewest bits **before** promotion.
+
+It is the one that exposes the largest genuine opportunity:
+
+[
+D_{\rm before}
+--------------
+
+D_{\rm oracle-promoted}.
+]
+
+That's the raw material PROMOTE is supposed to exploit.
+
+---
+
+# The H9 post-hoc result makes the story especially clean
+
+You found that untouched H9 needs roughly **89% of dense bits** under the strict matched-behavior margin.
+
+That's a powerful result.
+
+It means:
+
+[
+\text{H9 residuals aren't secretly almost-free under a smarter codec}.
+]
+
+So V2's compression problem is real.
+
+This eliminates a very annoying alternative explanation:
+
+> “You didn't need abstraction formation; you just chose a dumb int8 code.”
+
+Apparently, no. Better coding alone recovers only about 11%.
+
+Therefore:
+
+[
+\boxed{
+\text{the learner actually needs to change the representation}.
+}
+]
+
+That makes PROMOTE much better motivated than it was even yesterday.
+
+---
+
+# And P-A's failure now gives PROMOTE a stronger causal test
+
+Suppose later you get:
+
+[
+J_{\rm promoted}
+<
+J_{\rm unpromoted}.
+]
+
+You can no longer explain it as:
+
+> “Well, the variational learner already compressed everything; promotion just cleaned things up.”
+
+You've shown the opposite.
+
+Wake-side coding alone failed decisively.
+
+Then PROMOTE introduces a new representational operation:
+
+[
+\underbrace{
+\text{private }A,
+\text{ private }A,
+\text{ private }A
+}_{\text{expensive}}
+]
+
+becomes:
+
+[
+\underbrace{
+A
+}*{\text{shared once}}
++
+\underbrace{
+\text{ref},\text{ref},\text{ref}
+}*{\text{cheap}}.
+]
+
+If that flips the two-part result, you have extremely clean evidence that **structural abstraction itself** produced the gain.
+
+---
+
+# One more thing the route-collapse result is telling us
+
+I think this is a substantial long-term insight.
+
+There are at least three fundamentally different currencies inside task state:
+
+[
+\boxed{
+\text{REFERENCE}
+\quad
+\text{ARGUMENT}
+\quad
+\text{INNOVATION}.
+}
+]
+
+These should probably not share one generic regularizer.
+
+A reference answers:
+
+> Which thing that already exists?
+
+An argument answers:
+
+> How should I instantiate it?
+
+An innovation answers:
+
+> What genuinely new computation do I need?
+
+Their natural description costs are completely different.
+
+For a library of (K) operations:
+
+[
+D(\text{reference})\sim\log_2K.
+]
+
+For a low-dimensional argument:
+
+[
+D(\alpha)
+]
+
+may be modest.
+
+For a new neural operator:
+
+[
+D(\Delta)
+]
+
+may be huge.
+
+Your Gaussian prior treated all of these as:
+
+> floating-point coordinates deviating from zero.
+
+That's probably conceptually wrong.
+
+And the optimizer responded rationally to the wrong language.
+
+---
+
+# This may be one of the most important things V3 ultimately teaches us
+
+The self-programming architecture may require a **typed description language before it requires sophisticated program syntax**.
+
+Something like:
+
+[
+\texttt{CALL}(j)
+]
+
+[
+\texttt{CALL}(j;\alpha)
+]
+
+[
+\texttt{INNOVATE}(R)
+]
+
+[
+\texttt{PROMOTE}(R)\rightarrow j_{\rm new}.
+]
+
+Then later:
+
+[
+\texttt{MACRO},
+\quad
+\texttt{REPEAT},
+\quad
+\texttt{IF}.
+]
+
+The learner's job is always:
+
+> use the cheapest semantic operation that explains the evidence.
+
+That's substantially cleaner than trying to get one universal KL prior to somehow discover all those distinctions.
+
+---
+
+## So I'd tell the agent to proceed exactly this way
+
+Finish checklist item 2 in parallel because the testbed work is independent.
+
+Then:
+
+1. Implement P-I exactly as preregistered.
+2. **Keep H9 routes unchanged initially.**
+3. Gate whole rank components of the task innovation.
+4. Charge honest structural selector + payload bits.
+5. Compare the full rate–distortion frontier, not one operating point.
+6. Verify that recurrence still produces family-clustered task innovations.
+7. Compute the oracle promotion opportunity on H9, Gaussian, and gated.
+8. Freeze the wake substrate **before touching PROMOTE**.
+
+And my selection prior would now be:
+
+[
+\boxed{
+\text{Gated if it works};
+\quad
+\text{otherwise H9};
+\quad
+\text{Gaussian only as control}.
+}
+]
+
+I would definitely **not** go directly into PROMOTE with Gaussian just for continuity. The entire point of development worlds is to discover exactly this kind of load-bearing mechanism problem before freezing the central experiment.
+
+What you've learned from P-A is already valuable: **compression isn't just about how many bits you charge. It depends on whether the representational language gives cheap syntactic forms to the kinds of choices the learner actually needs to make.** That lesson is probably going to recur all the way through this project.

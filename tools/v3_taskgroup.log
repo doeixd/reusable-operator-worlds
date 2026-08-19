@@ -1,1 +1,15 @@
 11:41:02 starting: 12 cells, jobs=4, etas=[0.0, 0.5, 0.7, 0.9]
+11:42:50 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0\world_0\shared_residual
+11:42:52 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0\world_1\shared_residual
+11:42:55 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0\world_2\shared_residual
+11:42:55 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.5\world_0\shared_residual
+11:44:50 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.5\world_1\shared_residual
+11:44:50 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.5\world_2\shared_residual
+11:44:54 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.7\world_0\shared_residual
+11:44:54 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.7\world_1\shared_residual
+11:47:20 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.7\world_2\shared_residual
+11:47:22 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9\world_0\shared_residual
+11:47:23 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9\world_1\shared_residual
+11:47:23 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9\world_2\shared_residual
+11:47:23 V3_TASKGROUP_COMPLETE
+11:51:08 starting: 3 cells, jobs=3, etas=[0.9]

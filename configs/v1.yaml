@@ -119,6 +119,31 @@ variational_model:
   replay_ratio: 1.0
   seed: 9000
 
+# V3 wake candidate (P-2026-08-19-I): H9 routes untouched plus gated
+# rank-component innovations, whose null state is exact reuse. Learning
+# rates inherited from shared_residual; the code charge is the literal
+# sparse two-part cost the model is scored under.
+gated_model:
+  operator_slots: 8
+  operator_rank: 8
+  residual_rank: 2
+  task_steps: 3
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  description_beta: 1.0
+  gate_temperature: 0.5
+  gate_logit_init: 2.0
+  gate_learning_rate: 0.05
+  global_learning_rate: 0.003
+  task_learning_rate: 0.05
+  residual_learning_rate: 0.01
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 11000
+
 discrete_model:
   operator_slots: 12
   operator_rank: 8

@@ -310,6 +310,55 @@ class VariationalModelConfig:
 
 
 @dataclass(frozen=True)
+class GatedModelConfig:
+    """V3 wake candidate: H9 routes plus gated rank-component innovations."""
+
+    operator_slots: int = 8
+    operator_rank: int = 8
+    residual_rank: int = 2
+    task_steps: int = 3
+    operator_alpha_init: float = 0.2
+    learnable_alpha: bool = True
+    operator_activation: str = "tanh"
+    description_beta: float = 1.0
+    gate_temperature: float = 0.5
+    gate_logit_init: float = 2.0
+    gate_learning_rate: float = 5e-2
+    global_learning_rate: float = 3e-3
+    task_learning_rate: float = 5e-2
+    residual_learning_rate: float = 1e-2
+    weight_decay: float = 1e-4
+    updates_per_example: int = 1
+    replay_examples_per_task: int = 4
+    replay_ratio: float = 1.0
+    seed: int = 11000
+
+    def validate(self) -> None:
+        dimensions = (
+            self.operator_slots,
+            self.operator_rank,
+            self.residual_rank,
+            self.task_steps,
+        )
+        if min(dimensions) <= 0 or self.residual_rank > 2:
+            raise ValueError("gated dimensions are invalid")
+        if min(
+            self.global_learning_rate,
+            self.task_learning_rate,
+            self.residual_learning_rate,
+            self.gate_learning_rate,
+            self.gate_temperature,
+        ) <= 0.0:
+            raise ValueError("gated learning rates and temperature must be positive")
+        if self.description_beta < 0.0 or self.weight_decay < 0.0:
+            raise ValueError("gated penalties must be nonnegative")
+        if self.updates_per_example <= 0 or self.replay_examples_per_task < 0:
+            raise ValueError("gated update count or replay size is invalid")
+        if self.operator_alpha_init <= 0.0 or self.operator_activation not in {"tanh", "gelu"}:
+            raise ValueError("gated operator initialization is invalid")
+
+
+@dataclass(frozen=True)
 class ExperimentConfig:
     world: WorldConfig
     scratch_model: ScratchModelConfig
@@ -328,6 +377,7 @@ class ExperimentConfig:
     variational_model: VariationalModelConfig = field(
         default_factory=VariationalModelConfig
     )
+    gated_model: GatedModelConfig = field(default_factory=GatedModelConfig)
 
 
 def _require_mapping(data: Any, name: str) -> dict[str, Any]:
@@ -351,6 +401,7 @@ def load_config(path: str | Path) -> ExperimentConfig:
     variational_raw = _require_mapping(
         raw.get("variational_model", {}), "variational_model"
     )
+    gated_raw = _require_mapping(raw.get("gated_model", {}), "gated_model")
     discrete_raw = _require_mapping(raw.get("discrete_model", {}), "discrete_model")
     mdl_raw = _require_mapping(raw.get("mdl_model", {}), "mdl_model")
     eval_raw = _require_mapping(raw.get("evaluation", {}), "evaluation")
@@ -482,6 +533,27 @@ def load_config(path: str | Path) -> ExperimentConfig:
         replay_ratio=float(variational_raw.get("replay_ratio", 1.0)),
         seed=int(variational_raw.get("seed", 9000)),
     )
+    gated_model = GatedModelConfig(
+        operator_slots=int(gated_raw.get("operator_slots", 8)),
+        operator_rank=int(gated_raw.get("operator_rank", 8)),
+        residual_rank=int(gated_raw.get("residual_rank", 2)),
+        task_steps=int(gated_raw.get("task_steps", 3)),
+        operator_alpha_init=float(gated_raw.get("operator_alpha_init", 0.2)),
+        learnable_alpha=bool(gated_raw.get("learnable_alpha", True)),
+        operator_activation=str(gated_raw.get("operator_activation", "tanh")),
+        description_beta=float(gated_raw.get("description_beta", 1.0)),
+        gate_temperature=float(gated_raw.get("gate_temperature", 0.5)),
+        gate_logit_init=float(gated_raw.get("gate_logit_init", 2.0)),
+        gate_learning_rate=float(gated_raw.get("gate_learning_rate", 5e-2)),
+        global_learning_rate=float(gated_raw.get("global_learning_rate", 3e-3)),
+        task_learning_rate=float(gated_raw.get("task_learning_rate", 5e-2)),
+        residual_learning_rate=float(gated_raw.get("residual_learning_rate", 1e-2)),
+        weight_decay=float(gated_raw.get("weight_decay", 1e-4)),
+        updates_per_example=int(gated_raw.get("updates_per_example", 1)),
+        replay_examples_per_task=int(gated_raw.get("replay_examples_per_task", 4)),
+        replay_ratio=float(gated_raw.get("replay_ratio", 1.0)),
+        seed=int(gated_raw.get("seed", 11000)),
+    )
     discrete_model = DiscreteModelConfig(
         operator_slots=int(discrete_raw.get("operator_slots", 12)),
         operator_rank=int(discrete_raw.get("operator_rank", 8)),
@@ -550,4 +622,5 @@ def load_config(path: str | Path) -> ExperimentConfig:
         evaluation=evaluation,
         output_directory=output_directory,
         variational_model=variational_model,
+        gated_model=gated_model,
     )

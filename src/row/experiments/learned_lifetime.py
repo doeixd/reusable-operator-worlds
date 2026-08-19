@@ -27,6 +27,7 @@ from row.models import (
     DiscreteLibraryLearner,
     HypernetworkLearner,
     PresenceGatedDiscreteLibraryLearner,
+    GatedInnovationLearner,
     SharedParentResidualLearner,
     VariationalSharedResidualLearner,
 )
@@ -39,6 +40,7 @@ ModelKind = Literal[
     "hypernetwork",
     "shared_residual",
     "variational",
+    "gated",
     "discrete",
     "mdl",
 ]
@@ -48,6 +50,7 @@ Learner = (
     | HypernetworkLearner
     | SharedParentResidualLearner
     | VariationalSharedResidualLearner
+    | GatedInnovationLearner
     | DiscreteLibraryLearner
     | PresenceGatedDiscreteLibraryLearner
 )
@@ -186,12 +189,12 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "inference_multiply_adds_per_sample": generation + operators,
             "note": "counts per-prediction operator generation; backward and optimizer operations excluded",
         }
-    if kind in {"shared_residual", "variational"}:
-        selected = (
-            config.variational_model
-            if kind == "variational"
-            else config.shared_residual_model
-        )
+    if kind in {"shared_residual", "variational", "gated"}:
+        selected = {
+            "variational": config.variational_model,
+            "gated": config.gated_model,
+            "shared_residual": config.shared_residual_model,
+        }[kind]
         parent = selected.task_steps * selected.operator_slots * (
             d * selected.operator_rank + selected.operator_rank * d
         ) + selected.task_steps * selected.operator_slots * d
@@ -250,6 +253,21 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             seed=model_config.seed,
             learnable_alpha=model_config.learnable_alpha,
             activation=model_config.operator_activation,
+        )
+    if kind == "gated":
+        model_config = config.gated_model
+        return GatedInnovationLearner(
+            d=config.world.state_dim,
+            operator_slots=model_config.operator_slots,
+            operator_rank=model_config.operator_rank,
+            residual_rank=model_config.residual_rank,
+            task_steps=model_config.task_steps,
+            alpha=model_config.operator_alpha_init,
+            seed=model_config.seed,
+            learnable_alpha=model_config.learnable_alpha,
+            activation=model_config.operator_activation,
+            gate_temperature=model_config.gate_temperature,
+            gate_logit_init=model_config.gate_logit_init,
         )
     if kind == "variational":
         model_config = config.variational_model
@@ -318,6 +336,7 @@ def _training_values(
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
         "variational": config.variational_model,
+        "gated": config.gated_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -390,7 +409,18 @@ def run(
     for lifetime_index, world_task_index in enumerate(task_indices):
         task = world.tasks[world_task_index]
         task_parameter = model.begin_task(task.task_id)
-        if isinstance(model, VariationalSharedResidualLearner):
+        if isinstance(model, GatedInnovationLearner):
+            route_parameter, residual_parameter, gate_parameter = task_parameter
+            gated_config = config.gated_model
+            for parameter, parameter_lr in (
+                (route_parameter, task_lr),
+                (residual_parameter, gated_config.residual_learning_rate),
+                (gate_parameter, gated_config.gate_learning_rate),
+            ):
+                optimizer.add_param_group(
+                    {"params": [parameter], "lr": parameter_lr, "weight_decay": 0.0}
+                )
+        elif isinstance(model, VariationalSharedResidualLearner):
             (
                 route_parameter,
                 route_scale_parameter,
@@ -638,6 +668,9 @@ def run(
         if config.evaluation.extended_diagnostics:
             summary["functional_recovery"] = _functional_recovery(model.basis, world, config)
     elif isinstance(model, SharedParentResidualLearner):
+        if isinstance(model, GatedInnovationLearner):
+            summary["gates"] = model.gate_diagnostics()
+            summary["structural_task_bits"] = model.structural_task_bits()
         if isinstance(model, VariationalSharedResidualLearner):
             summary["variational"] = _variational_summary(model, world, config)
         summary["routing"] = model.routing_diagnostics()
@@ -692,6 +725,19 @@ def run(
         update_batch_size,
     )
     return summary
+
+
+def _gated_code_scale(config: ExperimentConfig, examples: int) -> float:
+    """Same MDL conversion as the variational learner, with the gated beta."""
+
+    sigma = config.evaluation.gaussian_sigma
+    return (
+        config.gated_model.description_beta
+        * 2.0
+        * sigma
+        * sigma
+        / (examples * config.world.state_dim)
+    )
 
 
 def _variational_kl_scale(config: ExperimentConfig, examples: int) -> float:
@@ -983,7 +1029,17 @@ def _adapt_novel_composition(
         parameter.requires_grad_(False)
     novel_id = f"task_novel_composition_{novel_index}"
     novel_code = model.begin_task(novel_id)
-    if isinstance(model, VariationalSharedResidualLearner):
+    if isinstance(model, GatedInnovationLearner):
+        route_parameter, residual_parameter, gate_parameter = novel_code
+        gated_config = config.gated_model
+        optimizer = torch.optim.Adam(
+            [
+                {"params": [route_parameter], "lr": task_lr},
+                {"params": [residual_parameter], "lr": gated_config.residual_learning_rate},
+                {"params": [gate_parameter], "lr": gated_config.gate_learning_rate},
+            ]
+        )
+    elif isinstance(model, VariationalSharedResidualLearner):
         (
             route_parameter,
             route_scale_parameter,
@@ -1035,7 +1091,11 @@ def _adapt_novel_composition(
         optimizer.zero_grad(set_to_none=True)
         prediction = model(_tensor(train_x[n_seen : n_seen + 1]), novel_id)
         loss = torch.nn.functional.mse_loss(prediction, _tensor(train_y[n_seen : n_seen + 1]))
-        if isinstance(model, VariationalSharedResidualLearner):
+        if isinstance(model, GatedInnovationLearner):
+            loss = loss + (
+                _gated_code_scale(config, 32) * model.description_penalty([novel_id])
+            )
+        elif isinstance(model, VariationalSharedResidualLearner):
             loss = loss + (
                 # 32 is the novel-adaptation example budget below.
                 _variational_kl_scale(config, 32)
@@ -1174,6 +1234,7 @@ def resolved_learned_config(
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
         "variational": config.variational_model,
+        "gated": config.gated_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1210,6 +1271,7 @@ def _write_artifacts(
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
         "variational": config.variational_model,
+        "gated": config.gated_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1262,6 +1324,7 @@ def main() -> None:
             "hypernetwork",
             "shared_residual",
             "variational",
+            "gated",
             "discrete",
             "mdl",
         ),
@@ -1319,6 +1382,7 @@ def main() -> None:
         "hypernetwork": config.hypernetwork_model,
         "shared_residual": config.shared_residual_model,
         "variational": config.variational_model,
+        "gated": config.gated_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[args.model]
@@ -1367,6 +1431,7 @@ def main() -> None:
                 "hypernetwork",
                 "shared_residual",
                 "variational",
+                "gated",
                 "discrete",
                 "mdl",
             }
@@ -1426,6 +1491,7 @@ def main() -> None:
         variational_model=(
             selected if args.model == "variational" else config.variational_model
         ),
+        gated_model=selected if args.model == "gated" else config.gated_model,
         discrete_model=selected if args.model == "discrete" else config.discrete_model,
         mdl_model=selected if args.model == "mdl" else config.mdl_model,
     )

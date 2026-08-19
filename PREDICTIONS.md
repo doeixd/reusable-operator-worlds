@@ -147,6 +147,49 @@ the shared substrate improves, which is exactly what replay is for.
 ---
 Outcome log (append-only):
 
+- **P-2026-08-18-D: FALSIFIED as written, and the reason redirects V3**
+  (2026-08-19; reports/v3_group_clustering.json,
+  artifacts/v3_taskgroup/). The prediction was that in a task-group
+  testbed the shared-residual learner's TASK-STEP RESIDUALS would
+  cluster by hidden family, within-group functional similarity
+  exceeding cross-group by at least a factor of 3, in a majority of
+  worlds. Measured on trained learners over eta in {0, 0.5, 0.7, 0.9},
+  worlds 0-2, with similarities centered to remove the task-invariant
+  component a shared basis can absorb: residual separation is +0.0007
+  (structureless control), +0.0055, +0.0127, +0.0173 — monotone in eta
+  and positive 3/3 for every eta > 0, but two orders of magnitude short
+  of the registered factor of 3. An operational check confirms the
+  structure is not usable: two-means partition recovery reaches 0.672 at
+  eta = 0.9 against 0.641 IN THE STRUCTURELESS CONTROL, so the recovery
+  figure is selection bias, not signal.
+  * WHERE THE STRUCTURE WENT. The same instrument applied to the ROUTE
+    codes gives separation -0.0152 / +0.0043 / +0.2006 at eta 0 / 0.5 /
+    0.9 — twelve times the residual figure at eta 0.9. Per-group mean
+    route distributions at eta 0.9 (world 0) differ by total variation
+    0.226 against 0.026 in the control, with group 0 placing 0.032 on
+    slot 2 and 0.154 on slot 3 while group 1 places 0.190 and 0.048.
+    The learner has absorbed the two hidden family components INTO ITS
+    SHARED BASIS as dedicated slots and references them through routes.
+    The basis has 8 slots for 6 teacher primitives, so it had exactly
+    two spare, and it used them.
+  * WHY THIS MATTERS MORE THAN THE FALSIFICATION. Gradient descent
+    performed, during ordinary wake learning, the operation V3's core
+    experiment was built to test: recurring cross-task structure became
+    a shared object referenced by a cheap code. It did so for exactly
+    the description-length reason V3 predicts a promoter would — a route
+    reference costs 192 bits per task against 17,712 for a residual —
+    and it needed no sleep phase to do it. The prediction assumed the
+    innovation channel; the learner chose the reference channel, which
+    is the cheaper one. Consequence: H11's premise ("task-specific
+    adaptations CONTAIN recurrent functional structure") does not hold
+    in this testbed, so the testbed cannot support the V3.1 core
+    experiment as specified. The V3 question sharpens to: when is
+    recurring structure NOT absorbable by the shared basis, and is that
+    the regime where an explicit promotion operator earns its place? The
+    natural candidate, being tested now, is capacity — more latent
+    families than the basis has spare slots, which makes promotion a
+    capacity-ALLOCATION decision rather than a discovery problem.
+
 - **P-2026-08-18-A: FALSIFIED** (2026-08-19; confidence had been 0.55;
   reports/v3_variational.json, artifacts/v3_variational/). Scored at the
   stage-one-selected `description_beta` = 0.3 (grid 0.1/0.3/1.0 plus an
@@ -176,3 +219,14 @@ Outcome log (append-only):
   produce a shared object plus a reference to it. Only PROMOTE changes
   the representation class, which makes H11 a sharper hypothesis rather
   than a weaker one.
+  * NARROWING (appended 2026-08-19, same day, before any successor run):
+    the reading above was first written as "continuous information
+    penalties alone cannot create structural compression", which is
+    wider than the experiment supports. The supported claim is that a
+    continuous penalty over a FIXED representational topology does not
+    by itself create shared-object-plus-reference structure, and that
+    this Gaussian implementation did not induce useful structural
+    sparsity indirectly. A continuous penalty over a different
+    parameterization might; that was not tested. The durable distinction
+    is that changing the cost of values is not the same operation as
+    changing the vocabulary of representations.

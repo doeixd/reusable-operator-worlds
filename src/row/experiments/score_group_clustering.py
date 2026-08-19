@@ -80,13 +80,42 @@ def score(config, artifact: Path, world_seed: int, spec: TaskGroupSpec, model_ki
 
     assignment = np.array(world.group_assignment[: len(world.tasks)])
     within, cross = [], []
+    _ = assignment
     for first in range(len(world.tasks)):
         for second in range(first + 1, len(world.tasks)):
             value = float(similarity[first, second])
             (within if assignment[first] == assignment[second] else cross).append(value)
     within_mean = float(np.mean(within))
     cross_mean = float(np.mean(cross))
+
+    # The decision-relevant question: could the promoter's own detection
+    # step RECOVER the hidden partition from these residuals? Separation
+    # being positive is necessary but not sufficient. Two-means on the
+    # centered, normalized residual functions, scored as partition accuracy
+    # against ground truth (chance is 0.5 for two balanced groups; the label
+    # permutation is resolved by taking the better of the two matchings).
+    generator_state = np.random.default_rng(world_seed + 7)
+    best_accuracy = 0.0
+    for _ in range(10):
+        centers = normalized[generator_state.choice(len(normalized), 2, replace=False)]
+        labels = np.zeros(len(normalized), dtype=int)
+        for _ in range(50):
+            distances = np.stack(
+                [np.linalg.norm(normalized - center, axis=1) for center in centers]
+            )
+            labels = distances.argmin(axis=0)
+            for index in range(2):
+                if (labels == index).any():
+                    centers[index] = normalized[labels == index].mean(axis=0)
+        accuracy = max(
+            float(np.mean(labels == assignment)),
+            float(np.mean(labels == 1 - assignment)),
+        )
+        best_accuracy = max(best_accuracy, accuracy)
+
     return {
+        "partition_recovery_accuracy": best_accuracy,
+        "chance_accuracy": 0.5,
         "world_seed": world_seed,
         "eta": spec.eta,
         "model": model_kind,
@@ -131,10 +160,12 @@ def main() -> None:
         if not selected:
             continue
         separations = [row["separation"] for row in selected]
+        recoveries = [row["partition_recovery_accuracy"] for row in selected]
         print(
             f"eta={eta:g}: mean separation {np.mean(separations):+.4f} "
-            f"(worlds {[f'{value:+.4f}' for value in separations]}), "
-            f"positive in {sum(value > 0 for value in separations)}/{len(separations)}"
+            f"positive in {sum(value > 0 for value in separations)}/{len(separations)}; "
+            f"partition recovery {np.mean(recoveries):.3f} "
+            f"(worlds {[f'{value:.3f}' for value in recoveries]}, chance 0.500)"
         )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(rows, indent=2), encoding="utf-8")

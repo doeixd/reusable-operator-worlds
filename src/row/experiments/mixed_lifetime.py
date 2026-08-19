@@ -37,6 +37,7 @@ def main() -> None:
             "shared_residual",
             "hypernetwork",
             "variational",
+            "gated",
         ),
         required=True,
     )
