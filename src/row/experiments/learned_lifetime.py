@@ -397,6 +397,7 @@ def run(
     reuse_decision_at: int = 8,
     lifecycle_enabled: bool = False,
     lifecycle_filter: bool = False,
+    force_retire_at: int | None = None,
     lifecycle_kappa: float = 0.0,
     lifecycle_grace: int = 8,
 ) -> dict[str, object]:
@@ -691,6 +692,14 @@ def run(
             sleep_records.append(record)
             if isinstance(model, LifecycleLibraryLearner):
                 model.sync_lineage(lifetime_index + 1)
+                if (
+                    force_retire_at is not None
+                    and lifetime_index + 1 >= force_retire_at
+                    and not model.retired_abstractions()
+                ):
+                    record["forced_retirement"] = model.force_retire_all(
+                        lifetime_index + 1
+                    )
                 if lifecycle_filter:
                     filter_rng = np.random.default_rng(
                         np.random.SeedSequence([config.world.seed, 91])

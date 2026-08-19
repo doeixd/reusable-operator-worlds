@@ -636,3 +636,68 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
             "kept": len(kept),
             "live_library": len(self.abstractions) - len(self.retired_abstractions()),
         }
+
+    def select_reference(self, task_id: str, x: torch.Tensor, y: torch.Tensor):
+        """Reuse only from the LIVE library.
+
+        V3's `select_reference` scans every abstraction ever created,
+        because V3 has no notion of retirement. A retired abstraction that
+        a new task can still adopt is not deleted in any meaningful sense,
+        and measuring reacquisition cost against such a library measures
+        nothing. Overridden here rather than edited there, so the frozen
+        V3 configuration stays reproducible.
+        """
+
+        retired = self.retired_abstractions()
+        if not retired:
+            return super().select_reference(task_id, x, y)
+        live = [i for i in range(len(self.abstractions)) if i not in retired]
+        if not live:
+            self.task_reference.pop(task_id, None)
+            self.retired.discard(task_id)
+            return None
+        previous = self.task_reference.get(task_id)
+        was_retired = task_id in self.retired
+        best_index, best_loss = None, None
+        with torch.no_grad():
+            for index in [None, *live]:
+                if index is None:
+                    self.task_reference.pop(task_id, None)
+                else:
+                    self.task_reference[task_id] = index
+                loss = float(torch.mean(torch.square(self.forward(x, task_id) - y)))
+                if best_loss is None or loss < best_loss:
+                    best_index, best_loss = index, loss
+        if previous is None:
+            self.task_reference.pop(task_id, None)
+        else:
+            self.task_reference[task_id] = previous
+        if was_retired:
+            self.retired.add(task_id)
+        else:
+            self.retired.discard(task_id)
+        return best_index
+
+    @torch.no_grad()
+    def force_retire_all(self, task_index: int) -> dict[str, object]:
+        """Delete the whole live library, to price REACQUISITION.
+
+        Not a policy — an intervention. Pairing a run against an identical
+        run whose library survives the gap gives `C_reacquire` directly:
+        the extra prequential loss and description the deleted arm pays
+        while it rebuilds what the retained arm already had.
+        """
+
+        self.sync_lineage(task_index)
+        killed = []
+        for index, record in self.lineage.items():
+            if record.retired_at_task is None:
+                record.retired_at_task = task_index
+                record.retirement_reason = "forced (reacquisition probe)"
+                killed.append(index)
+        for task_id, reference in list(self.task_reference.items()):
+            if reference in killed:
+                self.task_reference.pop(task_id, None)
+                self.retired.discard(task_id)
+        self.record_migration("force_retire_all", task_index, {"abstractions": killed})
+        return {"task_index": task_index, "retired": killed}

@@ -739,3 +739,50 @@ Reading. The next bottleneck for this architecture is neural coding
 efficiency, not library topology. Restructuring the computational
 language is not yet rational: the existing words are simply written in
 too many bits.
+
+# C_reacquire measured ONLINE, and it decays with gap length (2026-08-19)
+
+First online measurement of reacquisition cost, and the first time the
+dormancy pressure has produced a graded signal rather than a null.
+
+Two arms per cell, identical single-family worlds with a returning
+regime, differing only in whether the live library is force-deleted at
+the gap (task 32). Deletion had to be made meaningful first: V3's
+`select_reference` scans every abstraction ever created, so a "deleted"
+abstraction was still adoptable by new tasks and deletion was a no-op.
+`LifecycleLibraryLearner` now overrides it to reuse only from the LIVE
+library — an override, never an edit to the frozen V3 class.
+
+Paired cumulative prequential Gaussian log loss, deleted minus retained
+(this project reports loss as a large negative number, so a POSITIVE
+difference means the deleted arm is worse):
+
+| gap | world 0 | world 1 | world 2 | mean |
+| --- | --- | --- | --- | --- |
+| 8  | +1,841 | +1,636 | +1,210 | **+1,563** |
+| 16 | +1,283 | +1,198 |   +841 | **+1,107** |
+| 32 |   +280 |    +11 |   +105 |   **+132** |
+
+C_reacquire is positive in 9/9 cells and DECAYS MONOTONICALLY with gap
+length, 1,563 -> 1,107 -> 132. That is the real-options structure the V4
+dormancy pair was built to produce and never did: the longer the family
+stays away, the less a retained abstraction is worth, because the
+learner has time to rebuild one.
+
+WHAT THIS DOES NOT SHOW. Retention still does not pay on net here,
+because the intervention deletes the WHOLE library, so the carry cost
+being avoided is roughly 5 abstractions at 1,098 nats each, about 5,490,
+against a reacquisition cost of at most 1,563. `V_retain < 0` at every
+gap. The clean test deletes only the DORMANT family's abstraction and
+charges only its carry; that is the next cell and it is not yet run.
+
+So the correct reading is narrow and real: reacquisition is no longer
+free, and its decay curve in `g` is measurable online. Whether it ever
+exceeds carry cost is still open, and the frozen-library oracle's
+earlier crossover between gap 8 and 16 remains the only positive
+retention result.
+
+Reporting note: the first printout of this table carried an inverted
+legend, reading a positive difference as "no cost". The sign convention
+here is that more negative loss is better, so deleted-minus-retained
+POSITIVE means deletion hurt. The numbers were right; the label was not.
