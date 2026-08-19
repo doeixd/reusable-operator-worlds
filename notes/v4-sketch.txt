@@ -1,0 +1,208 @@
+# V4 sketch — Revision 1 (2026-08-19)
+
+A sketch, not a spec, and — unlike the V3 sketch at the equivalent
+moment — a sketch written BEFORE its prerequisite has run: V3.1 has a
+frozen spec but no results. Everything here is therefore conditional,
+and the largest section is deliberately the branch table keyed to V3's
+possible verdicts. The V4 spec is written only after the V3 sealed
+block closes, with the V1/V2/V3 discipline (hypotheses, falsifiers,
+frozen intervals, sealed seeds — 400-429 reserved now, untouched until
+a V4_CONFIRMATION_PLAN freezes). Reviews 15-17 are incorporated;
+review 17's prediction tree is the scaffolding.
+
+## The program ladder and where V4 sits
+
+    V1  When is reuse valuable?                      (confirmed)
+    V2  Can the learner decide what to share?        (confirmed & closed)
+    V3  Can repeated structure become a NEW abstraction?  (spec frozen,
+                                                           running next)
+    V4  Can the vocabulary MAINTAIN itself?          <- this sketch
+    V5  Can the vocabulary acquire program structure?
+        (MACRO/LOOP/BRANCH — review 17's framing)
+    V6  Can the learner learn to build and use such languages?
+        (Phase III: meta-learned search, inference, restructuring)
+
+Milestones: M1 achieved (H9), M2+M3 are V3's core. V4 owns the space
+between M3 and M4: a vocabulary that stays correct as the world
+changes, and that remains usable as it grows. M4 (compositions become
+macros/control structure) is V5's entry criterion, not V4's.
+
+## The V4 question, stated so it cannot drift
+
+V3 asks whether an abstraction can be born. V4 asks:
+
+    Does the learner reorganize its computational language RATIONALLY
+    as the world changes — merging what has become redundant, forking
+    what now serves incompatible regimes, deleting what no longer pays,
+    and keeping retrieval tractable as the library grows?
+
+One-line contrast: V3 is a maternity ward; V4 is an economy. The
+abstractions must live under scarcity (bits, compute, retrieval) and
+under CHANGE (nonstationary recurrence), and the claim is that the
+same lifetime-cost criterion that created them also governs their
+lifecycle correctly.
+
+## Why V4 is not just "V3 plus three more operations"
+
+Three qualitatively new pressures enter, none of which V3 exposes:
+
+1. NONSTATIONARITY. V1-V3 worlds are stationary within a lifetime (the
+   V3 drifting-family control is adversarial, not the environment).
+   V4 makes recurrence itself a process: r_t drifts, jumps, and
+   reverses. Every lifecycle decision is a bet about a moving target,
+   which is what makes hysteresis (below) a prediction rather than a
+   tautology.
+2. SHARED MUTABLE STATE. Once an abstraction serves many tasks,
+   updating it in place propagates changes into every program that
+   references it — catastrophic forgetting re-enters THROUGH the
+   library (review 17). V3 never updates a promoted A after birth; V4
+   must, and the safe-update discipline (copy-on-write below) is
+   arguably V4's most architecturally consequential question.
+3. SEARCH DEBT. Every promotion enlarges the action vocabulary. V3
+   logs the retrieval/inference cost but charges gamma = 0; V4 charges
+   it. The value of an abstraction becomes
+       V(A) = V_learning + V_storage - D(A) - C_execute - C_retrieve
+   and library growth must price its own branching factor.
+
+## Core hypotheses (draft; numbered provisionally H14-H17)
+
+H14 — Rational lifecycle. In worlds where two promoted abstractions
+become functionally redundant, MERGE fires and reduces total
+description length at preserved behavior; where one abstraction comes
+to serve incompatible regimes, FORK fires and reduces lifetime
+prequential cost relative to forced sharing; where recurrence support
+for an abstraction disappears, DELETE fires. Each operation has a
+matched refusal control (stationary worlds where it must NOT fire),
+inheriting V3's refusal-ledger discipline. All detection is
+functional (behavioral redundancy / behavioral regime splits), never
+parameter identity — constitutional law continues.
+
+H15 — Hysteresis (the flagship; reviews 14/16/17 all converge here).
+Because creation has a cost that retention does not,
+    r_create > r_delete:
+sweeping recurrence slowly up then down around the crossover traces a
+loop, not a line — promotion fires above one threshold on the way up,
+deletion fires below a LOWER threshold on the way down, and the area
+of the loop is the acquisition-vs-retention cost difference made
+visible. This is the cleanest possible evidence that abstractions
+behave as INVESTMENTS rather than static architectural preferences.
+Falsifier: thresholds coincide (no loop) — then lifecycle decisions
+are memoryless preferences and the investment framing dies here.
+Design note: r_t schedules must be slow relative to adaptation time or
+the loop confounds with lag; include a rate sweep.
+
+H16 — Safe shared update (copy-on-write). A new task that would
+modify a promoted A instead learns A + delta privately; only when
+accumulated evidence shows the change is universally beneficial does
+the library merge A <- A + mean(delta), otherwise the deltas
+crystallize into a FORK. Prediction: copy-on-write beats both extremes
+— always-update-in-place (interference: old-task held-out loss
+degrades) and never-update (staleness: new-regime cost stays high) —
+on lifetime cost at matched bits. This is FORK earning its existence
+as a SAFETY mechanism, not a taxonomy feature (review 17's argument
+that forking may be necessary, not optional).
+
+H17 — Priced retrieval. With gamma > 0 charged on retrieval/inference
+compute, optimal library size becomes finite and interior: sweeping
+the promotion threshold traces a U-shaped total cost J(|L|), and the
+learner's own lifecycle operations land near the interior optimum
+rather than growing the library monotonically. Exploratory extension,
+only if library sizes get large enough to bite: does hierarchical
+indexing (abstractions grouping abstractions) beat flat retrieval —
+review 17's "hierarchy as a retrieval necessity" conjecture. At ROW
+scale this may not bind; if it does not, report that honestly and
+defer the hierarchy question to cross-world scale.
+
+## Worlds (draft)
+
+- NONSTATIONARY RECURRENCE SCHEDULES on the V3 promotion testbed:
+  step changes (family replaced at task k), slow drifts (direction
+  rotating a fixed angle per task), reversals (up-then-down r_t for
+  H15), and regime splits (one family bifurcates — the FORK trigger).
+  The schedule generator is seeded and validity-gated like every ROW
+  world: measured recurrence traces must match configured schedules
+  before any learner runs.
+- REDUNDANCY-ONSET worlds for MERGE: two families that begin distinct
+  and converge functionally at a configured task index.
+- STATIONARY CONTROLS for every operation (the refusal side).
+- The V3 horizon machinery (P-2026-08-19-G) generalizes: expected
+  remaining lifetime becomes a first-class world parameter, since
+  every lifecycle decision is horizon-dependent.
+
+## The prospective model (the deep new component)
+
+Review 17's sharpest structural point: retrospective recurrence does
+not determine future recurrence, so a rational lifecycle needs some
+model of p(future task structure | history) — even a crude one
+(exponential-decay recurrence estimate; change-point detector). V4
+should introduce the SIMPLEST version that supports H14-H16 and
+measure its value directly: lifecycle quality with the prospective
+model versus with V_retro only. If the gap is large, "a model of what
+kinds of computation the world tends to ask for" is promoted from
+philosophy to measured component. Keep it modest: this is not world
+modeling, it is a scalar-to-low-dim forecast of reuse statistics.
+
+## Branch table: what V3's verdict does to this sketch
+
+- V3 fully passes (M2+M3): V4 proceeds as sketched; lifecycle
+  operations extend a mechanism known to work.
+- M2 passes, M3 fails at ACCESS (the review-17 expected case, M3
+  ladder pointing at inference/retrieval/basin): V4 is REORDERED —
+  H17-style retrieval/access work is pulled forward ahead of
+  nonstationarity, because maintaining a vocabulary nobody can use is
+  pointless. Phase III's recognition-model question arrives early.
+- Literal bits never fall but KL bits do (coding-ladder systems
+  verdict): V4 proceeds on the KL/entropy currency with the coding
+  ladder reported alongside; the fixed-width instrument is retired
+  from gating (kept for continuity reporting).
+- Promotion only works as a parameterized family (the exciting
+  failure): V4's lifecycle operations are defined over operator
+  FAMILIES (merge = family union with shared parameterization; fork =
+  argument-space split). Arguably a cleaner V4 than the atomic one.
+- V3 fails at existence (oracle bound says the wake learner scatters
+  structure): V4 as sketched is BLOCKED; the successor project is the
+  coordinate-discovery / neural-ABI problem (hidden-basis benchmark),
+  because no lifecycle can manage structure the representation never
+  isolates.
+- Refusal fails in V3 controls: V4 is blocked outright; a promoter
+  that cannot refuse cannot be trusted with DELETE.
+
+## Deferred from V4 (destinations unchanged)
+
+- MACRO/LOOP/BRANCH: V5. The compositional-closure depth gate (V3
+  spec section 7) travels with them.
+- Equivalence-class routes / neural e-graphs: instrument work, adopted
+  by whichever rung's substitutability gate proves too coarse first.
+- Memory hierarchy (store example vs adaptation vs abstraction),
+  task-boundary removal, functional IBP, cross-world amortization
+  (G(N) crossover), the staged LLM bridge (measure -> factor ->
+  learn), ROW-P: all as staged in the V3 spec section 8; V4 adds
+  nothing to their gates and steals nothing from their scope.
+
+## Design principles (inherited, binding, plus two new)
+
+All V3 constitutional law carries over unchanged: functional
+instruments only; synthesis/revision separation; endogenous parsimony;
+conditional description length as the progress metric; refusal
+ledgers; one surrendered control per rung; sealed parameter-interval
+discipline. New in V4:
+- LIFECYCLE PROVENANCE: every abstraction carries its full history
+  (created at, from which tasks, merged/forked/deleted when, under
+  what V terms) — the library becomes an auditable ledger, and the
+  H15 loop is read directly from it.
+- NO SILENT MUTATION: in-place update of a shared abstraction outside
+  the H16 merge rule is prohibited by construction, not by convention.
+
+## Pre-V4 checklist
+
+1. V3.1 development verdict complete (all six checklist items of the
+   V3 spec, through its sealed block).
+2. The two post-H11 pre-registered experiments run: horizon
+   (P-2026-08-19-G) and lifetime sweep (P-2026-08-19-H) — both are
+   V4 design inputs (horizon sensitivity and N* locate the lifecycle
+   thresholds).
+3. The branch table above resolved against the actual V3 verdict; the
+   surviving branch becomes the V4 spec's section 0.
+4. Nonstationary schedule generator built and validity-gated.
+5. V4 spec written with full discipline; sealed seeds 400-429; this
+   sketch retired the day it is.

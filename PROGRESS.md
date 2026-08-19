@@ -938,3 +938,23 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - No architecture was added; feedback-17's V4-era material (search
   debt, copy-on-write forking, hierarchy, macro/loop/branch economics)
   is already staged and stays staged.
+
+# 2026-08-19 — V4 sketch written
+
+- Wrote notes/v4-sketch.txt Revision 1. V4 = vocabulary MAINTENANCE:
+  can the language reorganize rationally under nonstationarity, shared
+  mutable state, and search debt. Draft hypotheses H14 (rational
+  MERGE/FORK/DELETE with matched refusal controls), H15 (hysteresis
+  flagship: r_create > r_delete traces a loop whose area is the
+  acquisition-vs-retention cost difference; falsifier = no loop), H16
+  (copy-on-write beats update-in-place and never-update — FORK as a
+  safety mechanism), H17 (priced retrieval gives an interior optimal
+  library size). Introduces the minimal prospective model of future
+  reuse as a measured component, per review 17.
+- Because V3 has not run, the sketch's centerpiece is a branch table
+  keyed to V3's possible verdicts (full pass; M3 access failure pulls
+  retrieval work forward; KL-only currency verdict; parameterized-
+  family promotion redefines lifecycle over families; existence
+  failure blocks V4 in favor of coordinate discovery; refusal failure
+  blocks V4 outright). Sealed seeds 400-429 reserved; sketch retired
+  when the V4 spec is written after the V3 sealed block.
