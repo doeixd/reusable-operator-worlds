@@ -48,6 +48,35 @@ factor of 3) in a majority of worlds. Confidence: 0.6. Rationale: the
 Benchmark E negative traced to absorbable (task-invariant) family
 structure, not to the residuals' inability to carry structure.
 
+## P-2026-08-19-E: the promoter refuses accidental similarity
+
+In a control world with the same marginal statistics, task count, and
+rank distribution as the promotion testbed, but where residual
+similarity is constructed to be non-predictive of the held-out future
+task block, a promotion criterion that includes prospective value
+(V_future estimated from held-out or streamed future prefix) will
+refuse promotion in a majority of worlds, while the same criterion
+fires in a majority of true task-group-family worlds. A
+retrospective-only criterion (V_retro alone) will be fooled: it fires
+in the accidental control at a rate within a factor of two of its rate
+in the true worlds. Confidence: 0.6 for the joint pattern. Rationale:
+the accidental control is designed so retrospective compression exists
+by construction; only the prospective term can distinguish the cases.
+
+## P-2026-08-19-F: internal promotion economics reproduces the crossover
+
+If V3's promotion value V-hat(A) is frozen operationally before any
+promotion run, then across worlds spanning measured recurrence 0.0-1.0,
+the recurrence at which mean V-hat(A) crosses zero will fall within
+[0.35, 0.60] measured recurrence — bracketing the externally measured
+V1/V2 sharing crossover (~0.48) — and V-hat will be monotone
+increasing in measured recurrence across the grid. Confidence: 0.5.
+Rationale: if the learner's decision variable is a consistent estimate
+of the sharing economics, it must inherit the law; but V-hat estimation
+noise at 64-task lifetimes may be large, and the promotion value and
+the paired-architecture crossover are related, not identical,
+quantities.
+
 ---
 Outcome log (append-only):
 - (none yet)

@@ -1,0 +1,750 @@
+This is a **major milestone**. V2 didn’t just “work”; it produced the kind of result that actually changes how I’d think about the project.
+
+The strongest part is not the 30/30 sign pattern by itself. It’s that the **parameters replicated** on a second sealed block: slope 6,194 inside the frozen [4,000, 7,500] interval, pooled crossing 0.450, mean crossing 0.483, (R^2=0.926), and the measured-recurrence coordinate again beats configured (\rho) by a wide margin. That means the dose-response is no longer merely a qualitative phenomenon that keeps reappearing; you have a quantitatively stable relationship across independent sealed worlds. 
+
+Even more important for the long-term vision, the selective-sharing result also replicated **30/30**: the learner allocates more specialization to the primitives with lower true recurrence, and less to the ones that are more reusable. At the same time, it still loses under the two-part code in 30/30, exactly as predicted. 
+
+That gives V2 a beautifully clean ending:
+
+[
+\boxed{
+\text{the learner can discover where sharing belongs}
+}
+]
+
+but:
+
+[
+\boxed{
+\text{it still cannot encode that discovery compactly}.
+}
+]
+
+That is the right handoff to V3.
+
+## I think the project now has three unusually solid empirical facts
+
+First, **reuse has measurable economics**:
+
+[
+\Delta L \approx ar+b,
+]
+
+where recurrence determines the return on sharing and the representation itself imposes a cost/penalty.
+
+Second, **the learner can estimate the correct allocation implicitly**. You don’t tell it “primitive 1 is reusable, primitive 5 is not.” It behaves as though it discovers that fact.
+
+Third, **prediction and description length remain fundamentally misaligned**. The current optimizer is very good at finding low-loss allocation and very bad at turning that allocation into a cheap persistent representation.
+
+Those three facts together are much stronger than any single modular-network result.
+
+---
+
+# V3 should now be almost brutally focused
+
+The agent’s conclusion—
+
+> “promotion-first … targeting the one problem: converting near-perfect allocation into compact reusable structure”
+
+—is exactly right. 
+
+I would resist adding loops, branches, macros, dynamic deletion, fancy compilers, or LLMs to the core V3 experiment.
+
+The experiment I would want is almost painfully simple:
+
+### Start
+
+Tasks contain partially redundant learned residual information:
+
+[
+\Delta_1,\Delta_2,\ldots,\Delta_n.
+]
+
+### Detect
+
+There exists some recurring functional component (A):
+
+[
+\Delta_i \approx A+\epsilon_i.
+]
+
+### Promote
+
+Replace repeated storage of (A) with:
+
+[
+A\in\mathcal L
+]
+
+plus cheap task-specific residuals/references:
+
+[
+\epsilon_i.
+]
+
+### Win
+
+Show simultaneously:
+
+[
+L_{\rm preq}\le L_{\rm baseline},
+]
+
+and:
+
+[
+D_{\rm total}<D_{\rm baseline}.
+]
+
+That second inequality is the one no V2 learner could achieve.
+
+If V3 gets both, that is qualitatively different from H9.
+
+---
+
+# The most important scientific criterion
+
+I would define V3 success around **information migration**.
+
+You want to literally observe:
+
+[
+\boxed{
+\text{task-specific information}
+\rightarrow
+\text{shared information}
+}
+]
+
+over the lifetime.
+
+For example:
+
+[
+D_{\rm task}(t)\downarrow,
+]
+
+[
+D_{\rm shared}(t)\uparrow,
+]
+
+but crucially:
+
+[
+D_{\rm total}(t)\downarrow.
+]
+
+While held-out behavior stays constant or improves.
+
+That would be the cleanest empirical signature I can imagine of an abstraction being *formed*.
+
+Not:
+
+> “the network has another module.”
+
+But:
+
+> “information that was redundantly encoded in several task-local adaptations became represented once as a reusable shared object.”
+
+That is exactly the information-theoretic notion your broader vision needs.
+
+---
+
+# The next representation should probably be variational
+
+The V2 failures make the proposed variational/MDL direction substantially more compelling.
+
+Right now, if the learner has a rank-2 residual with tiny but nonzero values, your crude retained-code measure still charges essentially the full width.
+
+So you want the optimizer to know:
+
+[
+\text{precision itself costs information}.
+]
+
+Something like:
+
+[
+q(\Delta_\tau)=
+\mathcal N(\mu_\tau,\sigma_\tau^2)
+]
+
+and:
+
+[
+J=
+L_{\rm preq}
++
+\beta
+D_{\mathrm{KL}}
+\big[
+q(\Delta_\tau)|p(\Delta)
+\big].
+]
+
+Now the model isn't merely encouraged to make residual weights numerically small.
+
+It is encouraged to make task-specific information **unnecessary**.
+
+That's the right thing.
+
+The beautiful possibility is that in high-recurrence dimensions:
+
+[
+I(\Delta_\tau)\rightarrow0
+]
+
+while genuinely idiosyncratic dimensions retain bits.
+
+Then the learner already has a compressed decomposition before promotion.
+
+---
+
+# Then promotion can be viewed as changing the prior
+
+This is a thought I think is worth exploring.
+
+Suppose several tasks independently need related residual information:
+
+[
+q(\Delta_1),q(\Delta_2),q(\Delta_3).
+]
+
+Instead of “extracting a module” in an ad-hoc way, promotion could mean learning a new shared latent/prior component (A) that makes those residuals cheaper to encode:
+
+Before:
+
+[
+\sum_i
+D_{\mathrm{KL}}
+[q(\Delta_i)|p_0].
+]
+
+After promotion:
+
+[
+D(A)
++
+\sum_i
+D_{\mathrm{KL}}
+[q(\epsilon_i)|p(\epsilon\mid A)].
+]
+
+If the latter is lower, (A) has earned its existence.
+
+This is elegant because abstraction becomes:
+
+[
+\boxed{
+\text{adding a shared latent that reduces the description length of future/task-local states}.
+}
+]
+
+That may be a better foundation than literal operator extraction.
+
+And eventually those shared latents could correspond to:
+
+* continuous subspaces,
+* parameterized functions,
+* discrete operators.
+
+So you don't prematurely decide what “an abstraction” must look like.
+
+---
+
+# Benchmark E should be designed to make this unavoidable
+
+I would make the first V3 world explicitly hierarchical.
+
+Something like:
+
+[
+F_\tau
+======
+
+G
++
+F_{\mathrm{family}(\tau)}
++
+\epsilon_\tau.
+]
+
+But hide the families.
+
+Then there is a known optimal representation:
+
+[
+G
+]
+
+shared globally,
+
+[
+A,\ B,\ C,\ldots
+]
+
+shared within latent families,
+
+and:
+
+[
+\epsilon_\tau
+]
+
+task-specific.
+
+The learner starts without knowing that hierarchy.
+
+The key question is:
+
+> Does it eventually invent approximately that hierarchy because it is shorter?
+
+If yes, you're getting much closer to actual **representation-language discovery**.
+
+And you can score it exactly because you know the ground truth.
+
+---
+
+# I would add one especially hard negative control
+
+Create a world with the same marginal statistics, same number of tasks, same rank distribution, etc., but where the apparent residual similarity is **accidental and non-predictive of future tasks**.
+
+Then a good promotion system should refuse to create a persistent abstraction.
+
+That distinguishes:
+
+[
+\text{retrospective compression}
+]
+
+from:
+
+[
+\text{prospectively useful abstraction}.
+]
+
+This matters a lot for the grand vision.
+
+You don't want the system merely compressing the history it has already seen.
+
+You want it learning structures that reduce the cost of **future learning**.
+
+---
+
+# I would also separate two notions of promotion value
+
+This feels important now that the recurrence law is stable.
+
+A candidate abstraction can have:
+
+### Retrospective compression value
+
+How many stored bits would it remove now?
+
+[
+V_{\rm retro}(A).
+]
+
+### Prospective learning value
+
+How much will it reduce future prequential cost?
+
+[
+V_{\rm future}(A).
+]
+
+Then:
+
+[
+V(A)
+====
+
+V_{\rm retro}
++
+V_{\rm future}
+--------------
+
+## D(A)
+
+\mu C(A).
+]
+
+Some abstraction might barely compress the past but be highly valuable if future tasks are likely to reuse it.
+
+Another might perfectly compress a quirky historical coincidence that never returns.
+
+This is where “prospective neural compression” could become a genuinely distinctive idea.
+
+---
+
+# One result I'd now love: predict the V1/V2 law from V3's internal economics
+
+You currently measure recurrence externally and find:
+
+[
+\Delta L\approx ar+b.
+]
+
+Imagine V3 develops an internal estimate of:
+
+[
+\hat V(A)
+]
+
+from observed reuse.
+
+Then test whether its promotion probability or assigned shared bits predicts the same crossover:
+
+[
+\hat V(A)>0
+]
+
+right around the empirically observed sharing crossover.
+
+That would connect:
+
+[
+\text{external experimental law}
+]
+
+to:
+
+[
+\text{internal learner decision}.
+]
+
+If they line up, the learner isn't merely performing well.
+
+It's apparently learning the same economics you measured from outside.
+
+That would be extremely compelling.
+
+---
+
+# I think the V2 negative results are now an asset
+
+The ledger matters.
+
+You have:
+
+* H8 negative;
+* H10 negative;
+* mixture-as-posterior falsified;
+* strong amortization story weakened;
+* H6 qualified;
+* H9 split cleanly between predictive success and coding failure. 
+
+And yet the pre-specified core phenomena replicated.
+
+That is exactly how you want a research program to look.
+
+If everything had passed, I'd worry the world/model design was simply too obliging.
+
+Instead:
+
+[
+\text{some hypotheses die}
+]
+
+while:
+
+[
+\text{the central structure keeps surviving}.
+]
+
+That gives the project credibility.
+
+---
+
+## My current view of the whole trajectory
+
+I think you are now at:
+
+[
+\boxed{
+\text{V1: discover the law}
+}
+]
+
+[
+\boxed{
+\text{V2: show a learner can respond correctly to the law}
+}
+]
+
+and V3 should be:
+
+[
+\boxed{
+\text{show that responding to the law can change the learner's representational language itself}.
+}
+]
+
+Then everything we've speculated about afterward becomes much less crazy.
+
+Because once you have:
+
+[
+\text{recurrent structure}
+\rightarrow
+\text{named abstraction},
+]
+
+you can recursively apply the same mechanism.
+
+Recurring abstraction sequences:
+
+[
+[A,B,C]
+]
+
+become macros.
+
+Recurring repeated macros:
+
+[
+[M,M,M,\ldots]
+]
+
+become loops.
+
+Recurring conditional differences:
+
+[
+A\rightarrow B,
+\qquad
+A\rightarrow C
+]
+
+become branches.
+
+Repeated update procedures become learning operators.
+
+Repeated sensory-selection procedures become attention/perception operators.
+
+So I think **V2 has ended in almost the ideal place for the grand vision**: not with the whole thing solved, but with one very specific missing mechanism exposed.
+
+The question is no longer vague:
+
+> “Can neural networks invent reusable programs?”
+
+It is now:
+
+[
+\boxed{
+\textbf{Can information that gradient descent has already correctly allocated across tasks be promoted into a shared representation that is strictly cheaper to retain and makes subsequent learning cheaper?}
+}
+]
+
+If V3 gives a strong yes to that, I would update quite significantly upward on the full vision.
+
+
+Yes. The project is now at a point where the missing pieces are becoming unusually clear.
+
+V2 has basically established two things: the learner can **allocate sharing correctly**, even primitive-by-primitive, and that allocation still does **not** become a compact representation under the current coding scheme. The sealed replication makes that a solid foundation rather than a development artifact. 
+
+My strongest intuition is that the next breakthroughs will come from asking:
+
+[
+\boxed{\text{What exactly is an abstraction, from the learner's point of view?}}
+]
+
+I don't think the final answer is “a frequently reused neural module.” I think it's closer to:
+
+> **A representation change that costs something to create but reduces the expected cost of representing, learning, or executing future experience.**
+
+That leads to several things I'd push on.
+
+1. **Prospective abstraction, not merely retrospective compression.** V3 as we've discussed mostly says: “I have seen similar residuals several times; can I factor them now?” But the true value of an abstraction is future-facing:
+   [
+   V(A)=
+   \mathbb E_{\text{future}}
+   [\text{learning/coding savings from }A]
+   ---------------------------------------
+
+   ## C_{\rm create}(A)
+
+   ## C_{\rm retain}(A)
+
+   C_{\rm use}(A).
+   ]
+   This is strikingly close to recent work on *Prospective Compression in Human Abstraction Learning*, which found that human library formation in nonstationary program-building tasks is better explained by anticipated future compression than by compressing the observed corpus alone. ([arXiv][1]) ROW gives you the opportunity to turn that cognitive observation into a neural learning algorithm. Construct two histories that are identical retrospectively but imply different future recurrence. A genuinely prospective learner should promote different abstractions. **That would be a very deep result.**
+
+2. **Replace “program identity” with equivalence classes of computations.** V2 keeps telling you this. Multiple routes can be behaviorally equivalent; route entropy can therefore be high even when the function is effectively known. Symbolic library learning hit an analogous problem: Babble improved library discovery by searching modulo semantic/equational equivalence rather than surface program syntax. ([arXiv][2]) I would try to build the neural analogue of an e-graph: nodes are candidate computations; edges say “these are substitutable within distortion (\epsilon).” Then compression chooses the cheapest representative of the equivalence class. Formally:
+   [
+   r_1\sim_\epsilon r_2
+   \iff
+   d(f_{r_1},f_{r_2})<\epsilon.
+   ]
+   The right consolidation entropy is then (H([R]_\epsilon\mid D)), not (H(R\mid D)). I think this could directly repair the conceptual problem that sank the H8 gates.
+
+3. **The learner must eventually discover the coordinate system in which reuse is simple.** This may be the largest missing piece for LLMs. ROW currently makes related computation fairly aligned in representation space. But H6 already showed that representational family mismatch can consume essentially the entire sharing return.  In real neural networks the “same” computation may occur in different bases. So create a benchmark where
+   [
+   F_{\tau}
+   ========
+
+   B_\tau P A_\tau
+   ]
+   with hidden invertible (A_\tau,B_\tau). There really is one reusable (P), but raw parameters/activations don't line up. Can the learner discover a shared latent workspace in which
+   [
+   A_\tau h\rightarrow P\rightarrow B_\tau^{-1}
+   ]
+   becomes the shorter description? This is closely related to current work on representation alignment and hierarchical modular representation discovery; MoRe, for example, explicitly tries to recover intrinsic hierarchical modular structure rather than assigning modules from task labels. ([arXiv][3]) If this fails, the grand LLM vision has a major problem. If it succeeds, you've learned a **neural ABI**.
+
+4. **Measure causal recurrence, not just output correlation.** I suspect your current functional recurrence measure is good for ROW but not ultimately the right invariant. What we really care about is something like:
+   [
+   R(F_i\rightarrow F_j)
+   =====================
+
+   \text{how much knowing }F_i\text{ reduces the cost of learning }F_j.
+   ]
+   Call it *functional transfer information*. One operational measure:
+   [
+   R_{ij}
+   ======
+
+   ## L_j(\text{scratch})
+
+   L_j(\text{adapt from }i).
+   ]
+   Or directly transplant computation (i) into (j)'s context with a cheap adapter and measure the residual adaptation needed. This could yield a recurrence coordinate more fundamental than teacher parameter correlation. My hunch is that **the true economics will become cleaner when recurrence itself is defined in units of saved learning**.
+
+5. **Discover granularity, not just membership.** This is the jump from “which primitive?” to “what deserves to be a primitive?” Suppose tasks contain:
+   [
+   ABC,\quad ABD,\quad ABE.
+   ]
+   The right library might be (A,B,C,D,E), or (AB,C,D,E), or a parameterized (AB(x;\alpha)). DreamCoder explicitly grows a language by inventing abstractions that shorten future program search, and LILO/Babble extend this library-refactoring lineage. ([arXiv][4]) A neural analogue of **anti-unification** seems very promising: given several residual functions (F_i), find
+   [
+   F_i(z)\approx A(z;\alpha_i)
+   ]
+   minimizing
+   [
+   D(A)+\sum_iD(\alpha_i)+\text{distortion}.
+   ]
+   That allows the discovered abstraction to be a parameterized family rather than an exact duplicated atom.
+
+6. **Account for the search cost created by the library itself.** This is easy to underestimate. Every useful new primitive makes programs shorter, but it also enlarges the action vocabulary:
+   [
+   |\mathcal L|\uparrow
+   \Rightarrow
+   \text{branching factor}\uparrow.
+   ]
+   Too many abstractions can make program inference harder even while description length falls. DreamCoder explicitly couples language compression with a recognition model that amortizes program search, and later work has explored extracting library structure from the recognition model itself. ([arXiv][4]) I would measure an **abstraction's indexing/search tax**. The real objective should eventually include:
+   [
+   J=
+   L_{\rm preq}+
+   \lambda D+
+   \mu C_{\rm execute}+
+   \gamma C_{\rm infer}.
+   ]
+   This may generate a natural limit on library size and motivate macros: a macro can reduce both program length and search depth.
+
+7. **There should probably be a memory hierarchy, not only a computational library.** Some information should never become a program. A one-off phone number belongs in episodic/declarative memory; a recurring transformation belongs in procedural structure. A recurring fact pattern might live somewhere in between. Continual-learning work increasingly treats modular external/internal memory as complementary to parameter updates rather than assuming all knowledge belongs in weights. ([arXiv][5]) I'd eventually construct worlds where the learner can pay to:
+   [
+   \text{store example}
+   \quad|\quad
+   \text{store task adaptation}
+   \quad|\quad
+   \text{create abstraction}.
+   ]
+   Then ask whether it learns the right **memory hierarchy**. That's extremely relevant to the LLM vision: the interesting system should decide what to remember as data versus what to compile into procedure.
+
+8. **Be careful that your notion of “bits” isn't itself the bottleneck.** This is important. V2's two-part code tells a coherent story, but parameter-count/quantization codes need not reflect the true information content of a learned neural function. Blier and Ollivier famously found variational parameter codes surprisingly inefficient compared with prequential codes, despite variational methods explicitly optimizing a coding objective. ([arXiv][6]) Even more recently, *Requential Coding* showed that alternative codes based on encoding a learning process can make large models vastly more compressible than parameter coding suggests and can even reverse intuitions based on parameter count. ([arXiv][7]) So for V3 I would **not let success depend on one coding scheme**. Report at least:
+   [
+   \text{literal quantized two-part bits},
+   \quad
+   \text{entropy/variational code},
+   \quad
+   \text{behavioral/prequential code}.
+   ]
+   If all tell the same story, great. If they diverge, *that divergence is itself research*. In particular, the H9 model's 130k-bit “failure” may partly be a failure of the fixed-width code to exploit structured, near-zero residuals.
+
+9. **Task boundaries should eventually disappear.** ROW currently tells the system when one task ends and another begins. A genuine continual learner won't always get that. The “what/how” work by Shan, Minni, and Duncker is especially relevant here: they infer a latent computational context online and use it to compose/reuse low-rank RNN components during continual learning. ([arXiv][8]) A strong later benchmark would stream experience continuously and make the learner infer:
+   [
+   \text{same latent computation?}
+   \quad
+   \text{new variation?}
+   \quad
+   \text{new regime?}
+   ]
+   before it can even decide whether to reuse or specialize. That is the bridge from task-level library learning to genuine online cognition.
+
+10. **Compositional closure is an underappreciated risk.** Knowing (P) is useful on states from distribution (D) does not imply
+    [
+    P(P(P(z)))
+    ]
+    remains meaningful. Once programs become longer, each operation changes the distribution seen by the next. HOUDINI's lifelong neural-program approach used strongly typed differentiable programs partly because types enormously constrain which compositions are meaningful and accelerate search. ([arXiv][9]) I think you'll eventually need a neural analogue: learned interface/type signatures, plus a closure metric such as
+    [
+    d\big(
+    \operatorname{distribution}(P_i(W)),
+    \mathcal W_{\rm valid}
+    \big).
+    ]
+    Before loops, deliberately test primitives on **novel compositions much deeper than training**. If error explodes, loops won't rescue anything; you'll need to explicitly train the workspace as a stable compositional interface.
+
+11. **Bayesian nonparametrics may contain useful machinery for CREATE/REUSE decisions.** There is prior continual-learning work using Indian Buffet Process priors to let a neural model decide how many reusable weight factors it needs, rather than fixing expansion by hand; hierarchical IBP versions similarly allow model complexity to grow/shrink under a shared structural prior. ([arXiv][10]) I wouldn't copy those architectures, because V2 has already shown raw parameter identity is not your central object. But a **functional IBP** is an intriguing possibility:
+    [
+    z_{\tau k}\sim\text{reuse/new-component prior},
+    \qquad
+    F_\tau\approx \sum_k z_{\tau k}P_k.
+    ]
+    Combined with your lifetime/prequential objective, it could give a principled probabilistic version of create/reuse/retire rather than hand-designed structural penalties.
+
+12. **For LLMs, first test whether the phenomenon exists before exporting the machinery.** There are already encouraging hints that Transformers contain mergeable/reusable structure: one study aligns and merges FFN sublayers while preserving much of model performance, and another line explicitly builds libraries of LoRA adapters and routes new tasks to them. ([arXiv][11]) But these do not establish your law. The compelling experiment is:
+    [
+    \text{measure functional recurrence among LLM adaptations}
+    ]
+    and ask whether it predicts:
+    [
+    \text{benefit from factoring/sharing them}.
+    ]
+    If the ROW dose-response survives even approximately outside the synthetic benchmark, I would consider that a major validation of the entire program.
+
+The **three things I'm most curious about right now** are therefore:
+
+[
+\boxed{\textbf{A. Can the learner discover a coordinate system that exposes hidden recurrence?}}
+]
+
+because H6 says this is likely essential for natural models;
+
+[
+\boxed{\textbf{B. Can abstraction decisions be prospective rather than retrospective?}}
+]
+
+because that is what turns compression into intelligent continual learning;
+
+and
+
+[
+\boxed{\textbf{C. Can repeated task-local information migrate into shared information under a coding objective that survives multiple legitimate notions of description length?}}
+]
+
+because that is the actual “birth of an abstraction.”
+
+One more conceptual intuition: **the final system may look much more like a cache hierarchy than a programming language at first.** New computation is expensive and temporary; frequently reused computation gets promoted; very hot paths get compiled; stale structure gets evicted; some things remain data rather than code; and the representation level depends on frequency, predictability, storage cost, and compute cost.
+
+Only after that machinery works do loops, branching, macros, and self-programming become natural extensions.
+
+That suggests a perhaps cleaner grand thesis than “learn programs”:
+
+[
+\boxed{
+\textbf{Intelligence progressively moves recurring information into representations where its future reuse is cheapest.}
+}
+]
+
+Sometimes that cheapest representation will be memory. Sometimes a continuous latent factor. Sometimes a neural primitive. Sometimes a discrete program or macro. The really ambitious learner is the one that discovers **which representation level each regularity deserves**.
+
+[1]: https://arxiv.org/abs/2605.09985?utm_source=chatgpt.com "Prospective Compression in Human Abstraction Learning"
+[2]: https://arxiv.org/abs/2212.04596?utm_source=chatgpt.com "babble: Learning Better Abstractions with E-Graphs and Anti-Unification"
+[3]: https://arxiv.org/abs/2605.14364?utm_source=chatgpt.com "MoRe: Modular Representations for Principled Continual Representation Learning on Squantial Data"
+[4]: https://arxiv.org/abs/2006.08381?utm_source=chatgpt.com "DreamCoder: Growing generalizable, interpretable knowledge with wake-sleep Bayesian program learning"
+[5]: https://arxiv.org/html/2603.01761v2?utm_source=chatgpt.com "Modular Memory is the Key to Continual Learning Agents"
+[6]: https://arxiv.org/abs/1802.07044?utm_source=chatgpt.com "The Description Length of Deep Learning Models"
+[7]: https://arxiv.org/abs/2607.11883?utm_source=chatgpt.com "Requential Coding: Pushing the Limits of Model Compression with Self-Generated Training Data"
+[8]: https://arxiv.org/abs/2510.20709?utm_source=chatgpt.com "Separating the what and how of compositional computation to enable reuse and continual learning"
+[9]: https://arxiv.org/abs/1804.00218?utm_source=chatgpt.com "HOUDINI: Lifelong Learning as Program Synthesis"
+[10]: https://arxiv.org/abs/2004.10098?utm_source=chatgpt.com "Continual Learning using a Bayesian Nonparametric Dictionary of Weight Factors"
+[11]: https://arxiv.org/abs/2501.06126?utm_source=chatgpt.com "Merging Feed-Forward Sublayers for Compressed Transformers"
+

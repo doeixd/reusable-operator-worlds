@@ -1,0 +1,579 @@
+{
+  "scope": "canonical mixed-profile Benchmark D, development worlds; H9a secondary",
+  "worlds": [
+    {
+      "world_seed": 200,
+      "shared_residual_novel_32": 0.00998545496797437,
+      "continuous_novel_32": 0.012680328962754644,
+      "dense_novel_32": 0.011671083289539605,
+      "losses": {
+        "shared_residual": -160501.34842113222,
+        "continuous": -152872.6221909606,
+        "dense": -153879.38915382256
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 6621.959267309663,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -63646.52930913535
+    },
+    {
+      "world_seed": 201,
+      "shared_residual_novel_32": 0.012603155758741968,
+      "continuous_novel_32": 0.019270045775818444,
+      "dense_novel_32": 0.019467371128353325,
+      "losses": {
+        "shared_residual": -158296.91827020844,
+        "continuous": -149290.83073275184,
+        "dense": -150279.19831618466
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 8017.719954023778,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62250.76862242124
+    },
+    {
+      "world_seed": 202,
+      "shared_residual_novel_32": 0.012623238252932118,
+      "continuous_novel_32": 0.019661505637735124,
+      "dense_novel_32": 0.019720367200761688,
+      "losses": {
+        "shared_residual": -161006.3173741571,
+        "continuous": -153517.0527567225,
+        "dense": -153698.04025022427
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7308.277123932843,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62960.21145251217
+    },
+    {
+      "world_seed": 203,
+      "shared_residual_novel_32": 0.020496169572877074,
+      "continuous_novel_32": 0.029816328685215606,
+      "dense_novel_32": 0.02755753207157641,
+      "losses": {
+        "shared_residual": -162460.50795005617,
+        "continuous": -155510.51287021142,
+        "dense": -156579.34015679208
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 5881.167793264089,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -64387.32078318093
+    },
+    {
+      "world_seed": 204,
+      "shared_residual_novel_32": 0.018708348547789726,
+      "continuous_novel_32": 0.02404293917202955,
+      "dense_novel_32": 0.024531425860270756,
+      "losses": {
+        "shared_residual": -161688.05522670745,
+        "continuous": -154500.73663777215,
+        "dense": -154956.74808929223
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 6731.3071374152205,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -63537.181439029795
+    },
+    {
+      "world_seed": 205,
+      "shared_residual_novel_32": 0.012309609413549654,
+      "continuous_novel_32": 0.020166387055136202,
+      "dense_novel_32": 0.01908474193964444,
+      "losses": {
+        "shared_residual": -160516.95707592863,
+        "continuous": -152030.16571178028,
+        "dense": -152856.05433631482
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7660.902739613812,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62607.585836831204
+    },
+    {
+      "world_seed": 206,
+      "shared_residual_novel_32": 0.008223316277480462,
+      "continuous_novel_32": 0.011981564163590325,
+      "dense_novel_32": 0.012740964223550148,
+      "losses": {
+        "shared_residual": -159642.50778353802,
+        "continuous": -151289.15450484227,
+        "dense": -151903.37052511214
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7739.137258425879,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62529.35131801914
+    },
+    {
+      "world_seed": 207,
+      "shared_residual_novel_32": 0.014731346386842405,
+      "continuous_novel_32": 0.02013829387830857,
+      "dense_novel_32": 0.019622523418850138,
+      "losses": {
+        "shared_residual": -160068.8928561147,
+        "continuous": -152068.10534211007,
+        "dense": -152122.5070732415
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7946.3857828732,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62322.102793571816
+    },
+    {
+      "world_seed": 208,
+      "shared_residual_novel_32": 0.016718916379657937,
+      "continuous_novel_32": 0.021554585232186157,
+      "dense_novel_32": 0.020718085311457215,
+      "losses": {
+        "shared_residual": -161532.02439771427,
+        "continuous": -154297.63762161147,
+        "dense": -154496.1330614954
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7035.891336218861,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -63232.597240226154
+    },
+    {
+      "world_seed": 209,
+      "shared_residual_novel_32": 0.014393698374852486,
+      "continuous_novel_32": 0.020206510687972974,
+      "dense_novel_32": 0.021281168738310482,
+      "losses": {
+        "shared_residual": -159224.4552128994,
+        "continuous": -150321.9084168932,
+        "dense": -152007.37234315407
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7217.082869745325,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -63051.40570669969
+    },
+    {
+      "world_seed": 210,
+      "shared_residual_novel_32": 0.01001344579760751,
+      "continuous_novel_32": 0.016653099482267078,
+      "dense_novel_32": 0.014974534021991052,
+      "losses": {
+        "shared_residual": -160990.17765786417,
+        "continuous": -152846.46020633783,
+        "dense": -153706.4245196725
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7283.753138191678,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62984.73543825334
+    },
+    {
+      "world_seed": 211,
+      "shared_residual_novel_32": 0.014165379488538295,
+      "continuous_novel_32": 0.019138471651856604,
+      "dense_novel_32": 0.017942170133295996,
+      "losses": {
+        "shared_residual": -161334.678638273,
+        "continuous": -155608.070093907,
+        "dense": -155274.41872771148
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 5726.608544365998,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -64541.88003207902
+    },
+    {
+      "world_seed": 212,
+      "shared_residual_novel_32": 0.01789694140015946,
+      "continuous_novel_32": 0.02437838634087017,
+      "dense_novel_32": 0.02430613672051685,
+      "losses": {
+        "shared_residual": -160189.30643409758,
+        "continuous": -153045.45676648917,
+        "dense": -153479.99308439414
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 6709.313349703443,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -63559.17522674157
+    },
+    {
+      "world_seed": 213,
+      "shared_residual_novel_32": 0.015091900631458424,
+      "continuous_novel_32": 0.02564542160281257,
+      "dense_novel_32": 0.024975966192251717,
+      "losses": {
+        "shared_residual": -159104.70604214826,
+        "continuous": -150476.28631846374,
+        "dense": -151761.00377281485
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7343.702269333415,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62924.7863071116
+    },
+    {
+      "world_seed": 214,
+      "shared_residual_novel_32": 0.017021097031562685,
+      "continuous_novel_32": 0.02491615242715589,
+      "dense_novel_32": 0.023075899265052616,
+      "losses": {
+        "shared_residual": -158624.06385885127,
+        "continuous": -149439.92703726582,
+        "dense": -150674.5393363803
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7949.52452247098,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62318.964053974036
+    },
+    {
+      "world_seed": 215,
+      "shared_residual_novel_32": 0.013857811167688545,
+      "continuous_novel_32": 0.019102280546314104,
+      "dense_novel_32": 0.018270808845975685,
+      "losses": {
+        "shared_residual": -160096.66855173465,
+        "continuous": -152086.85082858306,
+        "dense": -152033.59392545692
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 8009.817723151587,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62258.67085329343
+    },
+    {
+      "world_seed": 216,
+      "shared_residual_novel_32": 0.009952563002909138,
+      "continuous_novel_32": 0.014991701991876712,
+      "dense_novel_32": 0.013030998145316818,
+      "losses": {
+        "shared_residual": -161587.9807329732,
+        "continuous": -154291.61170307957,
+        "dense": -155466.23271374582
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 6121.74801922738,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -64146.740557217636
+    },
+    {
+      "world_seed": 217,
+      "shared_residual_novel_32": 0.03749343764889791,
+      "continuous_novel_32": 0.04897289876693019,
+      "dense_novel_32": 0.047943956189673856,
+      "losses": {
+        "shared_residual": -163299.1430594488,
+        "continuous": -157635.04081364925,
+        "dense": -158005.34008378166
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 5293.802975667146,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -64974.68560077787
+    },
+    {
+      "world_seed": 218,
+      "shared_residual_novel_32": 0.019323471946226866,
+      "continuous_novel_32": 0.027200518546559124,
+      "dense_novel_32": 0.025345321895508262,
+      "losses": {
+        "shared_residual": -160881.7722961275,
+        "continuous": -153341.91346723106,
+        "dense": -153935.0631827414
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 6946.70911338611,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -63321.779463058905
+    },
+    {
+      "world_seed": 219,
+      "shared_residual_novel_32": 0.008684447205396996,
+      "continuous_novel_32": 0.013210471416373243,
+      "dense_novel_32": 0.013324271639681542,
+      "losses": {
+        "shared_residual": -159509.2628551792,
+        "continuous": -150716.5558767294,
+        "dense": -152099.61701632335
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7409.645838855853,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62858.84273758916
+    },
+    {
+      "world_seed": 220,
+      "shared_residual_novel_32": 0.02047920838487285,
+      "continuous_novel_32": 0.02314315364812215,
+      "dense_novel_32": 0.027115217306441286,
+      "losses": {
+        "shared_residual": -158859.2579703912,
+        "continuous": -150035.24774786783,
+        "dense": -151095.02519889202
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7764.23277149917,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62504.255804945846
+    },
+    {
+      "world_seed": 221,
+      "shared_residual_novel_32": 0.02874070376691267,
+      "continuous_novel_32": 0.03667411023975694,
+      "dense_novel_32": 0.03347408884104804,
+      "losses": {
+        "shared_residual": -161025.01851273607,
+        "continuous": -152615.69424479522,
+        "dense": -153366.37679563565
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7658.641717100429,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62609.84685934459
+    },
+    {
+      "world_seed": 222,
+      "shared_residual_novel_32": 0.016846045944596,
+      "continuous_novel_32": 0.023480434951990425,
+      "dense_novel_32": 0.02283593562210217,
+      "losses": {
+        "shared_residual": -160284.15248108638,
+        "continuous": -152723.2519624511,
+        "dense": -152614.32151113314
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7560.900518635288,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62707.58805780973
+    },
+    {
+      "world_seed": 223,
+      "shared_residual_novel_32": 0.009187205126540423,
+      "continuous_novel_32": 0.01139648895457922,
+      "dense_novel_32": 0.012255471867660041,
+      "losses": {
+        "shared_residual": -160355.22524493517,
+        "continuous": -152636.1966075334,
+        "dense": -153017.12988264384
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7338.095362291322,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62930.39321415369
+    },
+    {
+      "world_seed": 224,
+      "shared_residual_novel_32": 0.010600340720038936,
+      "continuous_novel_32": 0.014922459437788449,
+      "dense_novel_32": 0.015538849521314303,
+      "losses": {
+        "shared_residual": -159251.6360150192,
+        "continuous": -151756.83242351018,
+        "dense": -152657.90302994312
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 6593.732985076087,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -63674.75559136893
+    },
+    {
+      "world_seed": 225,
+      "shared_residual_novel_32": 0.025332832537829014,
+      "continuous_novel_32": 0.034223327743340894,
+      "dense_novel_32": 0.036315731631771764,
+      "losses": {
+        "shared_residual": -159139.00247627124,
+        "continuous": -150196.91488162064,
+        "dense": -151646.69682614828
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7492.3056501229585,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62776.18292632206
+    },
+    {
+      "world_seed": 226,
+      "shared_residual_novel_32": 0.028805153377027493,
+      "continuous_novel_32": 0.03677396974673829,
+      "dense_novel_32": 0.035897560462370984,
+      "losses": {
+        "shared_residual": -159521.36102462176,
+        "continuous": -150600.02181411113,
+        "dense": -152002.0391115234
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7519.321913098363,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -62749.16666334665
+    },
+    {
+      "world_seed": 227,
+      "shared_residual_novel_32": 0.020349625852401066,
+      "continuous_novel_32": 0.02811736296947714,
+      "dense_novel_32": 0.027944868227362113,
+      "losses": {
+        "shared_residual": -157902.3521368791,
+        "continuous": -149127.08835202688,
+        "dense": -149178.64245573385
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 8723.709681145265,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -61544.77889529975
+    },
+    {
+      "world_seed": 228,
+      "shared_residual_novel_32": 0.024090378448172932,
+      "continuous_novel_32": 0.03582266574584637,
+      "dense_novel_32": 0.02988473059125217,
+      "losses": {
+        "shared_residual": -159669.38659621467,
+        "continuous": -152095.94518135928,
+        "dense": -152717.6732582199
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 6951.713337994763,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -63316.77523845025
+    },
+    {
+      "world_seed": 229,
+      "shared_residual_novel_32": 0.014967865190986645,
+      "continuous_novel_32": 0.018023072701483667,
+      "dense_novel_32": 0.020012392659383055,
+      "losses": {
+        "shared_residual": -162022.2243465165,
+        "continuous": -154549.22390866536,
+        "dense": -154827.84622069777
+      },
+      "retained_bits": {
+        "shared_residual": 130624,
+        "continuous": 29248,
+        "dense": 66688
+      },
+      "envelope_minus_shared_raw_nats": 7194.378125818737,
+      "shared_beats_envelope": true,
+      "two_part_gain_vs_envelope": -63074.11045062628
+    }
+  ],
+  "envelope_wins": 30,
+  "n_worlds": 30,
+  "mean_raw_gain": 7191.716293998621,
+  "two_part_wins": 0
+}

@@ -1,66 +1,143 @@
-# V3 sketch — Revision 2 (2026-08-19)
+# V3 sketch — Revision 3 (2026-08-19)
 
-Supersedes Revision 1 (preserved in git history at f7bdff1/07e11e6, with
-its supersession notice). This revision reflects the full V2 verdict set
-and reviews/reviewer-feedback-11 through -14; it is consistent with the
-V2 spec section 9.5, which remains authoritative where they differ.
-Still a sketch, not a spec: the V3 spec is written after the V2 sealed
-block closes, with hypotheses, falsifiers, pre-registered branches, and
-sealed seeds 300-329.
+Supersedes Revision 2 (preserved in git history; Revision 1 at
+f7bdff1/07e11e6). This revision incorporates reviews/reviewer-feedback-15
+(the reviewer's response to the V2 closure) on top of -11 through -14,
+and reflects the completed pre-V3 checklist: the sealed block is closed,
+006c ran (prediction FAILED — functional-equivalence entropy is ~0 at
+both endpoints; the gate-v2 mechanism is the absolute-NMSE bar, so the
+V3 promotion gate must test BEHAVIORAL SUBSTITUTABILITY, not posterior
+identification), and 006d ran (dimensionality declines smoothly 6.5->5.1
+with recurrence but shows no regime structure — the three regimes live
+in recovery/transfer instruments, so the promotion testbed's placement
+on the recurrence axis is set by those, not by linear dimension).
+Consistent with V2 spec section 9.5, which remains authoritative where
+they differ. Still a sketch, not a spec: the V3 spec is written with
+hypotheses, falsifiers, pre-registered branches, and sealed seeds
+300-329; this sketch is retired the day it exists.
 
 ## The program ladder and where V3 sits
 
     V1  When is reuse valuable?                      (confirmed)
-    V2  Can the learner decide what to share?        (closing)
+    V2  Can the learner decide what to share?        (confirmed & closed)
     V3  Can repeated structure become a NEW abstraction?
     V4  Can the vocabulary revise itself continuously?
     V5  Can programs over it implement variable-depth reasoning?
     ... Can perception, memory, learning, action share the substrate?
 
 Progress metric — the five milestones (review 14):
-    M1  learner knows where sharing helps            ACHIEVED (H9)
+    M1  learner knows where sharing helps            ACHIEVED (H9, 30/30 sealed)
     M2  abstraction birth (the bits-flow event)      V3 core
     M3  promoted abstractions cut future sample cost V3 core
     M4  compositions become macros/control structure V4-era
     M5  machinery survives domains without oracles   bridge-era
 
 **V3 is not the architecture. V3 is M2 plus M3, demonstrated cleanly,
-with refusal in structureless controls.** Everything else is staged
-behind that demonstration.
+with refusal in structureless AND accidental-similarity controls.**
+Everything else is staged behind that demonstration.
+
+Review 15's framing of the handoff, adopted as V3's one-line charter:
+V2 ended with "the learner can discover where sharing belongs, but it
+cannot encode that discovery compactly." The V3 question, stated so it
+cannot drift: can information that gradient descent has already
+correctly allocated across tasks be promoted into a shared
+representation that is strictly cheaper to retain AND makes subsequent
+learning cheaper?
 
 ## The V3 core experiment: an abstraction is born
+
+Reviewer-15 instruction, adopted: keep the core almost painfully simple.
+No loops, branches, macros, compilers, or LLMs in the core experiment.
 
 World: the task-group-family promotion testbed (prediction
 P-2026-08-18-D). Family components are assigned per TASK GROUP —
 cross-cutting structure that a task-invariant shared basis cannot
-absorb — fixing the Benchmark E design flaw (its primitive-indexed
-hierarchy was absorbable; residuals carried nothing shared; measured
-negative in reports/v2_hierarchical/). Family identities are never
-exposed. Structureless control worlds (rho = 0 analogue) run paired.
+absorb — fixing the Benchmark E design flaw. Family identities are never
+exposed. TWO paired controls run alongside every promotion world:
+  (a) structureless (rho = 0 analogue) — no recurring residual
+      structure exists; promotion must not fire;
+  (b) accidental-similarity (NEW, review 15) — same marginal statistics,
+      task count, and rank distribution, but the apparent residual
+      similarity is constructed to be non-predictive of future tasks
+      (e.g. the "shared" direction is resampled independently for the
+      held-out future block). A good promoter must REFUSE here too.
+      This is the control that separates retrospective compression from
+      prospectively useful abstraction, and it is harder and more
+      important than (a).
 
 Learner, wake phase (manifold-first, bits-priced):
 - Shared substrate: hypernetwork-style generated operators (006b/002b:
   mixtures are manifold solutions; the pure manifold wins at partial
   recurrence; do not presuppose slots).
-- Task state: variational-coded residuals — q(Delta_tau) with learned
-  per-parameter precision, KL to a shared prior in the wake loss:
+- Task state: variational-coded residuals — q(Delta_tau) =
+  N(mu_tau, sigma_tau^2) with learned per-parameter precision, KL to a
+  shared prior in the wake loss:
       J_wake = L_preq + beta * KL(q(Delta_tau) || p(Delta))
   Bits are in the gradient DURING learning (the root fix for every V2
-  compression failure). Only irreversible discrete restructuring is
-  sleep-only.
+  compression failure). The point (review 15's phrasing, kept): the
+  model is not encouraged to make residuals numerically small; it is
+  encouraged to make task-specific information UNNECESSARY. The hoped
+  precursor signature: in high-recurrence dimensions I(Delta_tau) -> 0
+  while idiosyncratic dimensions retain bits — a compressed
+  decomposition existing BEFORE promotion. Only irreversible discrete
+  restructuring is sleep-only.
 
 Sleep phase (one operation: PROMOTE):
 - Detect recurring residual structure FUNCTIONALLY (behavioral
   similarity on probes, adapters permitted: F_i ~ B_i A(A_i z)), never
   by parameter identity — constitutional law from V2's instrument
-  failures.
-- Promote candidate A iff the full accounting improves:
-      D(A) + sum_i D(epsilon_i | A) + D(references) + lambda*dL + mu*dC
-      <  sum_i D(Delta_i)
-- The rate-distortion form R(epsilon) (shortest description preserving
-  behavior to tolerance) replaces exact-identity compression and
-  single-lambda accounting where practical; report the bits-fidelity
-  Pareto rather than one point.
+  failures. Per 006c: the gate criterion is behavioral substitutability
+  at tolerance epsilon (rate-distortion), NOT posterior/route entropy —
+  entropy was measured degenerate at both recurrence endpoints.
+- PROMOTION IS A CHANGE OF PRIOR (new formalization, review 15, adopted
+  as the definition). Candidate A is promoted iff it makes the task
+  residuals cheaper to encode under the new prior:
+      D(A) + sum_i KL(q(epsilon_i) || p(epsilon | A))
+      <  sum_i KL(q(Delta_i) || p_0)
+  plus the usual lambda*dL + mu*dC charges. "A earned its existence."
+  This replaces ad-hoc operator extraction and deliberately does not
+  pre-decide what an abstraction looks like: the promoted latent may be
+  a continuous subspace, a parameterized function, or a discrete
+  operator — the MDL criterion decides the form (the abstraction
+  ladder from review 12 falls out naturally here).
+- Split the promotion value (review 15):
+      V(A) = V_retro(A) + V_future(A) - D(A) - mu*C(A)
+  V_retro = stored bits removed now; V_future = expected reduction in
+  future prequential cost. Log both components for every candidate,
+  promoted or refused. The accidental-similarity control is exactly the
+  world where V_retro > 0 but V_future = 0; a promoter scoring only
+  V_retro will be fooled by it.
+
+## Primary endpoint: information migration (review 15, adopted verbatim)
+
+The M2 success criterion is no longer just endpoint inequalities; it is
+the OBSERVED MIGRATION over the lifetime:
+    D_task(t)   falling,
+    D_shared(t) rising,
+    D_total(t)  falling,
+    held-out predictive behavior flat or improving.
+Task-local redundantly-encoded information becomes represented once as
+a shared object. This is the bits-flow figure from section 9.5, now
+promoted from "smoking gun figure" to the pre-registered primary
+endpoint: the V3 spec freezes the migration curves' required signs and
+a minimum total-bits saving, not only the final-state comparison.
+
+## Multi-code robustness (review 15, adopted as a success criterion)
+
+V3 success must not depend on one coding scheme. Report at least three
+description-length currencies for every headline claim:
+    (1) literal quantized two-part bits (V2's instrument, kept for
+        continuity),
+    (2) the variational/entropy code (KL under the learned prior),
+    (3) the behavioral/prequential code.
+If all three agree, the claim stands. If they diverge, the divergence
+is itself reported as a result, not adjudicated away (Blier & Ollivier
+1802.07044 showed variational parameter codes can be surprisingly
+inefficient; the H9 model's 130k-bit two-part "failure" may be partly
+the fixed-width code failing to exploit structured near-zero
+residuals). The two-part cell remains the headline BECAUSE it is the
+cell where every V2 model loses; the other two currencies guard against
+declaring victory or defeat on a coding artifact.
 
 ## H11 — Abstraction Promotion Hypothesis (three required predictions)
 
@@ -68,21 +145,36 @@ When task-specific continuous adaptations contain recurrent functional
 structure, a learner charged for their information content reduces total
 lifetime description length by promoting that structure into shared
 abstractions:
-1. D_promoted < D_unpromoted at matched predictive loss (the bits-flow
-   figure: task bits fall, shared bits rise, total bits fall, prediction
-   flat);
+1. INFORMATION MIGRATION (M2): the four-curve signature above, with
+   D_promoted < D_unpromoted at matched predictive loss, robust across
+   the three coding currencies;
 2. J_promoted < J for shared-residual, Continuous, AND Dense in
    hierarchical/mixed worlds — the first model to win both currencies;
-3. PROSPECTIVE (M3, added per review 14): after promotion, RELATED
-   future tasks cost measurably fewer samples/nats to learn than for the
-   unpromoted control — compression without forward benefit is storage
+3. PROSPECTIVE (M3): after promotion, RELATED future tasks cost
+   measurably fewer samples/nats to learn than for the unpromoted
+   control — compression without forward benefit is storage
    optimization, not abstraction.
-And: NO promotion in structureless controls. A promoter that cannot
-refuse is not a criterion.
+And: NO promotion in structureless controls AND no promotion in
+accidental-similarity controls. A promoter that cannot refuse is not a
+criterion; a promoter that cannot distinguish retrospective coincidence
+from prospective structure is a historian, not a learner.
 
-H12 — Hierarchical Vocabulary: with sharing structure at several levels,
-repeated promotion recovers the world's latent hierarchy functionally
-(global vs family vs task strata), without being given identities.
+H12 — Hierarchical Vocabulary: with sharing structure at several levels
+(global G + hidden family component + task epsilon; HierarchicalWorld
+is already implemented), repeated promotion recovers the world's latent
+hierarchy functionally — global vs family vs task strata — without
+being given identities. Scorable exactly because ground truth is known.
+
+H13 (candidate, review 15's "one result I'd now love"): the learner's
+INTERNAL promotion economics predicts the EXTERNAL law. Test whether
+the internal value estimate V-hat(A) (or promotion probability /
+assigned shared bits) crosses zero near the externally measured sharing
+crossover (V1/V2: measured recurrence ~0.48). If the learner's own
+decision variable reproduces the crossover we measured from outside,
+it is not merely performing well — it has internalized the economics.
+Pre-registered as prediction P-2026-08-19-F; adopt as a formal V3
+hypothesis only if the V3 spec can freeze the operational definition of
+V-hat(A) before any promotion run.
 
 ## Staged operations (each gated on its predecessor)
 
@@ -96,55 +188,111 @@ repeated promotion recovers the world's latent hierarchy functionally
     V3.4 DELETE    (prospective value turns negative)
     V3.5 MACRO     (recurring composition [A,B,C] -> M)
     V3.6 LOOP      (recurring macro -> Repeat(M, n); Benchmark L
-                    constraints in the V2 spec apply: non-contracting
-                    operators, varied counts, count extrapolation,
-                    interpret-vs-compile economics)
+                    constraints in the V2 spec apply)
     Branching, eventually: tested as compression — do two specialized
     programs compress into IF(c, A, B)?
+Review 15 endorses exactly this recursion (abstractions -> macros ->
+loops -> branches -> learning/perception operators) but only AFTER the
+core works; nothing moves up the ladder on a partial M2/M3 verdict.
 
 ## Design principles (binding, all evidence-derived)
 
 - Functional instruments only; nothing downstream of the library may
-  reference identities (V2's uniform instrument failures).
+  reference identities (V2's uniform instrument failures; reconfirmed
+  by 006c).
 - Program synthesis (fast, per-problem, over the existing language) and
-  language revision (slow, consolidation-only) are strictly separate —
-  "the model programs itself" means the former, never online
-  self-modification.
+  language revision (slow, consolidation-only) are strictly separate.
 - Parsimony is endogenous: price persistent bits and execution; never
-  hardcode "fewer modules" or "shorter programs"; interpreter-vs-
-  compiler economics falls out of lambda/mu.
+  hardcode "fewer modules" or "shorter programs."
 - Learning progress is conditional description length: D(F | L_t)
-  decreasing in t — the language improves so future experience is
-  cheaper to describe and to learn (ties compression to sample
-  efficiency; the M3 test operationalizes it).
+  decreasing in t; the M3 test operationalizes it.
+- Every promotion decision logs (V_retro, V_future, D(A), C(A)) whether
+  it fires or refuses — the refusal ledger is a first-class artifact.
 - One surrendered control per rung; sealed seeds 300-329 with the
   parameter-interval discipline inherited from V2.
+- Working definition of abstraction (review 15, adopted): a
+  representation change that costs something to create but reduces the
+  expected cost of representing, learning, or executing future
+  experience. The cache-hierarchy intuition — hot paths promoted, cold
+  structure evicted, some things remaining data rather than code — is
+  the long-run picture; V3 implements only its first promotion rung.
 
-## Deferred workstreams (unchanged destinations, stricter gates)
+## Deferred workstreams (destinations unchanged; review-15 additions *)
 
-- Cross-world scale (V3b/Phase III): the expert-iteration loop (search
-  -> distill -> dream -> verify) trained across thousands of worlds;
-  justified by H10's sample-starvation profile; measure the G(N)
-  amortization crossover rather than retrying bigger; lifetime/meta
-  controls travel with it. Observable recurrence estimators (gradient
-  alignment, one-step transfer) validated against ground truth are the
-  prerequisite for any learner that must sense reuse without oracle rho.
-- LLM bridge, staged measure -> factor -> learn: LLM-A, does estimated
-  functional recurrence (functional-effect probes over frozen-model
-  adapters, not weight similarity) predict sharing benefit — export the
-  V1 law first; LLM-B, shared-plus-residual factoring of adaptations;
-  LLM-C, dynamic promotion. Never build LLM-C before A and B hold.
+- Cross-world scale (V3b/Phase III): expert-iteration loop across
+  thousands of worlds; measure the G(N) amortization crossover.
+  Observable recurrence estimators validated against ground truth
+  remain the prerequisite. *Review 15 sharpens the target estimator:
+  causal recurrence in units of saved learning, R_ij = L_j(scratch) -
+  L_j(adapt from i) ("functional transfer information") — likely a more
+  fundamental coordinate than teacher parameter correlation; validate
+  it against measured recurrence on ROW before exporting it.
+- *Equivalence-class routes (V4-era instrument work): treat routes
+  modulo epsilon-behavioral substitutability (r1 ~ r2 iff
+  d(f_r1, f_r2) < eps) — the neural analogue of e-graphs/babble-style
+  equivalence — and compute consolidation entropy as H([R]_eps | D).
+  006c showed exact-route entropy is degenerate; the equivalence-class
+  version is the candidate repair if V3's substitutability gate proves
+  too coarse.
+- *Hidden-basis coordinate discovery (the H6 successor): a benchmark
+  with F_tau = B_tau P A_tau, hidden invertible per-task bases, one
+  truly reusable P. Can the learner discover a shared latent workspace
+  in which P becomes the shorter description? H6 says family mismatch
+  can consume the sharing return, so this is likely essential for
+  natural models — but it is its own project ("a neural ABI"), staged
+  after V3's core.
+- *Granularity discovery (neural anti-unification): given ABC/ABD/ABE
+  worlds, does the learner promote A,B separately, AB jointly, or a
+  parameterized AB(x; alpha)? F_i(z) ~ A(z; alpha_i) minimizing
+  D(A) + sum_i D(alpha_i) + distortion. Requires MACRO-rung machinery;
+  V4-era.
+- *Search-tax accounting: every promoted abstraction enlarges the
+  action vocabulary; eventually charge gamma * C_infer in J so library
+  growth prices its own branching factor. Log |L| and route-inference
+  cost per promotion from V3.1 onward so the term can be fit later even
+  though it is not charged in V3.
+- *Memory hierarchy: worlds where the learner can pay to store an
+  example, store a task adaptation, or create an abstraction — does it
+  learn which representation level each regularity deserves? Post-V3.
+- *Task-boundary removal: stream experience without task delimiters;
+  the learner infers same-computation/new-variation/new-regime online.
+  The bridge from task-level library learning to online cognition;
+  explicitly out of V3 scope.
+- *Compositional closure: before any LOOP work, test promoted
+  primitives on novel compositions much deeper than training; if error
+  explodes with depth, loops cannot rescue it and the workspace must be
+  trained as a stable interface first. This becomes a V3.5/V3.6 gate.
+- *Functional IBP (candidate machinery, not commitment): reuse/new
+  prior over functional components, z_tau_k ~ IBP, F_tau ~ sum_k
+  z_tau_k P_k, combined with the lifetime objective — a probabilistic
+  create/reuse/retire alternative if the promotion-threshold form
+  proves brittle.
+- LLM bridge, staged measure -> factor -> learn (LLM-A/B/C), unchanged:
+  test whether estimated functional recurrence predicts sharing benefit
+  among frozen-model adapters BEFORE building any dynamic library.
+  Review 15 concurs: first test whether the phenomenon exists, then
+  export the machinery.
 - ROW-P (programmable perception) and Benchmark C stand as before,
   behind their own gates.
 
+## Citation hygiene note
+
+Reviewer-feedback-15's reference list mixes verified citations
+(DreamCoder 2006.08381, Blier & Ollivier 1802.07044, HOUDINI
+1804.00218) with arXiv IDs that do not resolve or look garbled
+(2605.x/2607.x IDs postdating the list's plausible sources; a title
+containing "Squantial"). Verify every citation independently before any
+enters the V3 spec or a paper — same rule that caught the stale
+citations in the V1 draft.
+
 ## Pre-V3 checklist
 
-1. V2 sealed block closed (Components A and B, Family A/B outcomes).
-2. 006c run: functional-equivalence entropy — if it collapses at rho = 1
-   while route entropy stays high, it is the promotion gate's correct
-   instrument and the V3 spec adopts it.
-3. 006d run: function-family intrinsic dimensionality — the three-regime
-   claim measured, informing where on the recurrence axis the promotion
-   testbed should sit.
-4. V3 spec written with V1/V2 discipline; this sketch retired the day it
-   is.
+1. V2 sealed block closed. DONE (Components A and B; all six
+   pre-registered outcomes passed; b938bd9).
+2. 006c run. DONE — prediction failed; consequence adopted above (gate
+   tests behavioral substitutability, not entropy).
+3. 006d run. DONE — weakly supported; regime placement of the promotion
+   testbed uses recovery/transfer instruments, not linear dimension.
+4. V3 spec written with V1/V2 discipline (sealed seeds 300-329, frozen
+   intervals, migration-curve primary endpoint, refusal ledger); this
+   sketch retired the day it is.

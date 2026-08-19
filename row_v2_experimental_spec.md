@@ -1224,6 +1224,38 @@ Recorded in draft form, timestamped before the sealed-block verdict:
    M5 the machinery survives domains without ground-truth verification.
    V3 is not the architecture; V3 is M2 plus M3, demonstrated cleanly
    with refusal in structureless controls.
+7. **Additions from reviewer-feedback-15 (post-closure review,
+   2026-08-19):** (a) the M2 endpoint is INFORMATION MIGRATION observed
+   over the lifetime — D_task(t) falling, D_shared(t) rising, D_total(t)
+   falling, held-out behavior flat or improving — pre-registered as
+   curve signs plus a minimum total-bits saving, not only a final-state
+   comparison; (b) PROMOTION IS FORMALIZED AS A CHANGE OF PRIOR:
+   candidate A is promoted iff D(A) + sum_i KL(q(eps_i) || p(eps|A)) <
+   sum_i KL(q(Delta_i) || p_0) plus the lambda/mu charges — abstraction
+   is "adding a shared latent that reduces the description length of
+   task-local states," leaving the abstraction's form (subspace,
+   parameterized function, discrete operator) to the criterion;
+   (c) a SECOND mandatory refusal control: an accidental-similarity
+   world with matched marginal statistics whose residual similarity is
+   non-predictive of future tasks — separating retrospective
+   compression from prospective abstraction (V_retro > 0, V_future = 0);
+   promotion value is logged split as V(A) = V_retro + V_future - D(A)
+   - mu*C(A) for every candidate, fired or refused; (d) MULTI-CODE
+   ROBUSTNESS: headline V3 claims are reported under the literal
+   quantized two-part code, the variational/entropy code, and the
+   prequential code — agreement confirms, divergence is itself a
+   result (guarding against coding-scheme artifacts in either
+   direction); (e) candidate H13, internal-economics prediction: does
+   the learner's own promotion value V-hat(A) cross zero near the
+   externally measured sharing crossover (~0.48 measured recurrence)?
+   Pre-registered as P-2026-08-19-F; promoted to a formal hypothesis
+   only if V-hat's operational definition freezes before any promotion
+   run. Longer-horizon review-15 items (equivalence-class routes,
+   hidden-basis coordinate discovery, causal-recurrence coordinate,
+   granularity discovery, search tax, memory hierarchy, task-boundary
+   removal, compositional-closure depth gate, functional IBP) are
+   recorded in notes/v3-sketch.txt Revision 3 as deferred workstreams
+   with their staging.
 
 # 10. Anticipated objections and positioning
 

@@ -798,3 +798,29 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   mismatch penalty on shared-residual is roughly a third of what
   mismatch costs the continuous basis). Selective sharing is not
   strongly alignment-conditioned; spec, paper (v0.7), and audit updated.
+
+# 2026-08-19 — reviewer-feedback-15 incorporated into V3 planning
+
+- Read reviewer-feedback-15 in full (the post-closure review). Its five
+  new requirements were folded into three artifacts: notes/v3-sketch.txt
+  Revision 3, the V2 spec's section 9.5 constraint set (new item 7),
+  and PREDICTIONS.md (entries E and F).
+- Adopted: information migration (D_task down, D_shared up, D_total
+  down, held-out behavior flat) as V3's pre-registered primary M2
+  endpoint; promotion formalized as a change of prior (A earns its
+  existence iff it reduces the KL cost of task residuals); a second
+  mandatory refusal control with accidental non-predictive similarity,
+  plus V(A) = V_retro + V_future - D(A) - mu*C(A) logging for every
+  candidate; multi-code robustness (two-part, variational, prequential
+  currencies all reported, divergence itself a result); and candidate
+  H13 — whether the learner's internal promotion value crosses zero
+  near the externally measured ~0.48 crossover.
+- Longer-horizon review-15 items (equivalence-class routes, hidden-basis
+  coordinate discovery, causal recurrence in units of saved learning,
+  granularity discovery, search tax, memory hierarchy, task-boundary
+  removal, compositional-closure depth gate, functional IBP) recorded as
+  staged deferred workstreams in the sketch, not V3 scope.
+- Citation hygiene flag recorded: feedback-15's reference list mixes
+  verified arXiv IDs with unresolvable/garbled ones; every citation is
+  verified independently before entering any spec or paper.
+- Prereg check green (4 frozen files unchanged; all STATUS paths exist).
