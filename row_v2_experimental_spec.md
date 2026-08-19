@@ -1158,6 +1158,33 @@ Recorded in draft form, timestamped before the sealed-block verdict:
    shared bits rise, total bits fall, prediction cost flat — an
    abstraction being born because naming shared structure became cheaper
    than repeatedly encoding it.
+6. **Additions from reviewer-feedback-14:** (a) H11 gains a THIRD
+   required prediction — the promoted abstraction must make RELATED
+   FUTURE tasks cheaper to learn (prospective value, milestone M3
+   below), because compression without forward benefit is storage
+   optimization, not abstraction; (b) program synthesis (fast,
+   per-problem, over the existing language) and language revision (slow,
+   consolidation-only) are kept strictly separate as a stability
+   principle — "the model programs itself" means the former, never
+   online self-modification; (c) structural operations are staged
+   V3.1-V3.6: PROMOTE -> MERGE -> FORK -> DELETE -> MACRO -> LOOP, each
+   gated on its predecessor, with branching eventually tested as
+   compression (do two specialized programs compress into IF(c, A, B)?);
+   (d) the formal definition of learning progress is conditional
+   description length — learning improves the language in which future
+   experience can be described, D(F | L_t) decreasing in t — the
+   quantity the milestone ladder tracks; (e) parsimony is endogenous:
+   never hardcode "prefer fewer modules/shorter programs," only price
+   persistent bits and execution, and let interpreter-vs-compiler
+   economics fall out.
+   **The milestone ladder (progress metric for the whole program):**
+   M1 the learner knows where sharing helps (ACHIEVED — H9);
+   M2 abstraction birth (the bits-flow event; V3's core);
+   M3 promoted abstractions reduce future sample cost (prospective);
+   M4 recurring compositions become macros and control abstractions;
+   M5 the machinery survives domains without ground-truth verification.
+   V3 is not the architecture; V3 is M2 plus M3, demonstrated cleanly
+   with refusal in structureless controls.
 
 # 10. Anticipated objections and positioning
 

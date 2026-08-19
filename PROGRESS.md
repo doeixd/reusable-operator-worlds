@@ -726,3 +726,14 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   LLM bridge, and the recorded H11/H12 drafts), pointing readers to spec
   section 9.5 as authoritative while preserving the original sketch as a
   thinking record.
+- Read reviewer-feedback-14 in full (the grand-vision synthesis) and
+  incorporated its deltas into the V3 constraint set: H11 gains the
+  prospective third prediction (promoted abstractions must reduce future
+  sample cost — compression without forward benefit is storage
+  optimization, not abstraction); program synthesis and language
+  revision separated as a stability principle; structural operations
+  staged V3.1-V3.6 with branching tested as compression; learning
+  progress formalized as decreasing conditional description length
+  D(F | L_t); parsimony endogenous rather than hardcoded; and the
+  five-milestone ladder recorded as the program's progress metric, with
+  M1 marked achieved and V3 scoped to M2 plus M3.

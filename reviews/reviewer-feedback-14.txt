@@ -1,0 +1,2139 @@
+Yes. I think the project has a plausible route to something much larger than “a better modular network,” but the important conceptual move is to stop thinking of the learned library as merely a bag of experts.
+
+At sufficient scale, the natural endpoint is closer to a **learned computational substrate**: a model whose persistent knowledge consists partly of representations and partly of reusable transformations over those representations, with an inference system that composes those transformations into temporary programs for the problem in front of it.
+
+And the V1/V2 results actually point toward a fairly specific version of that architecture rather than just making this speculation unconstrained. 
+
+## The big picture
+
+The architecture I now have in mind looks roughly like:
+
+[
+\boxed{
+\text{Memory}
+\leftrightarrow
+\text{Workspace}
+\leftrightarrow
+\text{Learned computational language}
+\leftrightarrow
+\text{Controller}
+}
+]
+
+with a slower system surrounding all of it:
+
+[
+\boxed{
+\text{experience}
+\rightarrow
+\text{discover recurrence}
+\rightarrow
+\text{compress}
+\rightarrow
+\text{revise language}.
+}
+]
+
+The computational language would not initially consist solely of neat discrete functions like a conventional programming language.
+
+Your results increasingly suggest a hierarchy:
+
+[
+\text{continuous transformations}
+\rightarrow
+\text{parameterized reusable operations}
+\rightarrow
+\text{discrete primitives}
+\rightarrow
+\text{compositions/macros}
+\rightarrow
+\text{loops/control structures}.
+]
+
+The model learns whatever representation is economical at the time.
+
+That distinction matters enormously.
+
+---
+
+# 1. At scale, the library could become enormous in *expressive power* without becoming enormous in storage
+
+Suppose a system has (K) useful learned transformations:
+
+[
+P_1,P_2,\ldots,P_K.
+]
+
+If it can compose them into sequences of length (L), its possible computational repertoire grows combinatorially.
+
+Not every sequence will be useful, of course, but the important principle is:
+
+[
+\boxed{
+\text{description of computational vocabulary}
+\ll
+\text{description of all computations it can express}.
+}
+]
+
+This is exactly why ordinary programs are powerful.
+
+We do not store:
+
+```text
+sort-list-of-length-10
+sort-list-of-length-11
+sort-list-of-length-12
+...
+```
+
+We store something like:
+
+```text
+sort(x)
+```
+
+and apply it to new inputs.
+
+If neural computation acquires the same property, model capability becomes less tightly coupled to:
+
+[
+\text{number of independently stored parameter blocks}.
+]
+
+You could have relatively few reusable computational objects but many possible programs over them.
+
+That is the first major scaling argument for this research.
+
+---
+
+# 2. It could change what “knowledge” in an LLM means
+
+Current LLM knowledge is heavily entangled inside parameters.
+
+But there are really several kinds of knowledge:
+
+[
+\text{facts}
+]
+
+[
+\text{representations/concepts}
+]
+
+[
+\text{procedures}
+]
+
+[
+\text{strategies}
+]
+
+[
+\text{ways of learning}.
+]
+
+Procedural knowledge is especially interesting.
+
+“How do I compare two hypotheses?”
+
+“How do I parse this structure?”
+
+“How do I search for an inconsistency?”
+
+“How do I transform coordinate system A into B?”
+
+“How do I update a hypothesis after observing evidence?”
+
+Those are not merely facts.
+
+They are **computations**.
+
+A learned computational library gives procedural knowledge a natural persistent representation.
+
+So a sufficiently developed model might have learned structures corresponding not to English-language concepts like `COMPARE` or `INFER`, but to neural transformations that functionally implement reusable comparison/inference/binding/search procedures.
+
+---
+
+# 3. And yes: perception/input processing can be made out of the same programs
+
+I think this is one of the deepest extensions.
+
+There is no fundamental reason the reusable computations have to operate only on a representation that has already been produced by a fixed encoder.
+
+Instead give the system:
+
+[
+X=\text{large input store}
+]
+
+and:
+
+[
+W=\text{small active workspace}.
+]
+
+Then learned operations can do things like:
+
+[
+\operatorname{Read}(X,q)
+]
+
+[
+\operatorname{Transform}(W)
+]
+
+[
+\operatorname{Compare}(W_a,W_b)
+]
+
+[
+\operatorname{Bind}(W_a,W_b)
+]
+
+[
+\operatorname{Write}(M,v).
+]
+
+Now “perception” itself becomes an active computation.
+
+The system might initially inspect one part of an image/document/state:
+
+[
+W_1=\operatorname{Read}(X,q_1)
+]
+
+form a hypothesis:
+
+[
+W_2=P_7(W_1),
+]
+
+use that hypothesis to choose another observation:
+
+[
+q_2=P_{13}(W_2),
+]
+
+then inspect again:
+
+[
+W_3=\operatorname{Read}(X,q_2).
+]
+
+That's active perception:
+
+[
+\boxed{
+\text{hypothesis}
+\rightarrow
+\text{look somewhere}
+\rightarrow
+\text{update hypothesis}
+\rightarrow
+\text{look again}.
+}
+]
+
+A Transformer usually gives you a fixed broad computation over the token sequence.
+
+This architecture could instead learn **how to look at the input**.
+
+---
+
+# 4. Attention stops needing to be a sacred architectural primitive
+
+This gets very interesting.
+
+We think of attention as an architectural component because Transformers make it one.
+
+But conceptually attention can be decomposed:
+
+[
+\text{construct query}
+\rightarrow
+\text{match}
+\rightarrow
+\text{compete/select}
+\rightarrow
+\text{read}
+\rightarrow
+\text{bind result}.
+]
+
+Perhaps those operations themselves are reusable learned computations.
+
+Then:
+
+[
+\operatorname{ATTEND}
+]
+
+might eventually emerge as a frequently used macro:
+
+[
+[
+P_{\rm query},
+P_{\rm match},
+P_{\rm select},
+P_{\rm read}
+].
+]
+
+If this sequence is useful enough, sleep/consolidation can compile it.
+
+So the architecture gets to discover:
+
+> This computation occurs so often that it deserves to become atomic.
+
+That's profound.
+
+You're no longer merely learning parameters inside an architecture.
+
+You're learning **which computations deserve architectural status**.
+
+---
+
+# 5. The same applies to output
+
+Output generation can also be treated as a program operating over internal state.
+
+Instead of:
+
+[
+h\rightarrow\text{LM head}\rightarrow y,
+]
+
+you might have:
+
+[
+W
+\rightarrow
+P_4
+\rightarrow
+P_{18}
+\rightarrow
+\operatorname{Emit}(token).
+]
+
+Or for actions:
+
+[
+W
+\rightarrow
+\operatorname{Plan}
+\rightarrow
+\operatorname{SelectAction}
+\rightarrow
+\operatorname{Act}.
+]
+
+The distinction between:
+
+* understanding input,
+* reasoning,
+* retrieving knowledge,
+* deciding,
+* producing output
+
+starts to blur.
+
+They're all programs manipulating information.
+
+That's why I think the eventual architecture might be better described as a **neural virtual machine** than a modular neural network.
+
+---
+
+# 6. Information theory gives you a very deep interpretation
+
+This might be the most important theoretical angle.
+
+Suppose task/environment behavior (F) can be described as:
+
+[
+F=P_7\circ P_3\circ P_{12}.
+]
+
+Then instead of encoding the entire function separately, you encode:
+
+[
+D(F)
+\approx
+D(P_7,P_3,P_{12})
++
+D(7,3,12).
+]
+
+If the primitives already exist, the incremental cost can be tiny.
+
+So abstractions are useful because they reduce conditional description length:
+
+[
+D(F\mid\mathcal L)
+\ll
+D(F),
+]
+
+where (\mathcal L) is the learner's current computational language.
+
+That gives a beautiful definition of learning progress:
+
+[
+\boxed{
+\text{learning improves the language in which future experience can be described}.
+}
+]
+
+This goes beyond parameter compression.
+
+If the model learns `P7`, future experiences involving `P7` become easier both to **encode** and to **learn**.
+
+That directly connects compression and sample efficiency.
+
+---
+
+# 7. This gives a strong account of continual learning
+
+I think the correct architecture has at least three learning timescales.
+
+### Fast: current problem state
+
+Temporary:
+
+[
+W_t,\quad c_t,\quad q_t.
+]
+
+Updated every observation.
+
+This is akin to working memory/in-context learning.
+
+### Medium: task-specific adaptation
+
+Something like:
+
+[
+\Delta_\tau.
+]
+
+It persists long enough to solve a task/domain but isn't automatically made permanent.
+
+### Slow: computational language
+
+Persistent:
+
+[
+\mathcal L={P_1,\ldots,P_K}.
+]
+
+Changed only when enough evidence accumulates.
+
+That gives:
+
+[
+\boxed{
+\text{experience}
+\rightarrow
+\text{temporary solution}
+\rightarrow
+\text{recurring solution}
+\rightarrow
+\text{permanent abstraction}.
+}
+]
+
+That's a very natural continual-learning mechanism.
+
+New experiences do not immediately rewrite globally shared knowledge.
+
+They first get expressed as temporary changes.
+
+If similar changes recur:
+
+[
+\Delta_1\approx\Delta_7\approx\Delta_{23},
+]
+
+the model notices:
+
+> I'm paying repeatedly to encode the same transformation.
+
+Then it promotes the common component:
+
+[
+\Delta_i=A+\epsilon_i
+]
+
+into:
+
+[
+A\in\mathcal L.
+]
+
+That's continual learning through **abstraction formation**.
+
+---
+
+# 8. This could help catastrophic forgetting
+
+It gives you a much more nuanced stability/plasticity strategy.
+
+Suppose primitive:
+
+[
+P_8
+]
+
+is used by thousands of programs.
+
+Changing it aggressively is dangerous.
+
+So when new evidence conflicts with it, you initially create:
+
+[
+P_8'=P_8+\Delta.
+]
+
+That's neural copy-on-write.
+
+You can later determine whether:
+
+* (\Delta) was temporary noise → delete it;
+* it applies only to one task → retain task-specific;
+* it recurs in a family → promote a branch;
+* it becomes universal → merge into (P_8).
+
+So instead of:
+
+[
+\text{overwrite shared weights}
+]
+
+you get:
+
+[
+\text{reuse}
+\rightarrow
+\text{specialize}
+\rightarrow
+\text{fork}
+\rightarrow
+\text{possibly reconsolidate}.
+]
+
+That's an attractive model of continual learning.
+
+---
+
+# 9. Loops change the game dramatically
+
+Composition alone is powerful:
+
+[
+P_3\rightarrow P_7\rightarrow P_2.
+]
+
+But loops give you:
+
+[
+\operatorname{Repeat}(P_3,n).
+]
+
+Now description complexity becomes:
+
+[
+D(P_3)+D(n)
+]
+
+rather than:
+
+[
+nD(P_3).
+]
+
+For large (n):
+
+[
+D(n)\sim O(\log n).
+]
+
+That's a massive compression.
+
+And more importantly, execution length becomes independent of parameter count.
+
+A model can “think longer” by executing more steps:
+
+[
+W_{t+1}=P_{i_t}(W_t)
+]
+
+without loading a new neural layer each time.
+
+That gives you a very different scaling axis:
+
+[
+\boxed{
+\text{computation at inference time}
+\neq
+\text{stored model size}.
+}
+]
+
+---
+
+# 10. Branching gives you genuinely input-dependent algorithms
+
+Now allow:
+
+[
+\operatorname{IF}(c,\pi_A,\pi_B).
+]
+
+Then:
+
+```text
+inspect input
+if condition:
+    execute program A
+else:
+    execute program B
+```
+
+And combine with loops:
+
+```text
+while condition:
+    execute P
+```
+
+Now you're approaching actual algorithmic control flow.
+
+Formally the interesting part isn't that this can eventually become universal. As your V2 spec correctly notes, universality itself is cheap and uninteresting. 
+
+The interesting question is:
+
+[
+\boxed{
+\text{Will learning discover useful control abstractions because they make future computation cheaper?}
+}
+]
+
+That's much harder.
+
+---
+
+# 11. The model could indeed “program itself,” but I'd define that carefully
+
+I would use the phrase:
+
+> **the model synthesizes temporary programs in its own learned computational language.**
+
+Given a problem:
+
+[
+x,
+]
+
+it constructs:
+
+[
+\pi_x
+=====
+
+[
+P_{12},
+P_4,
+\operatorname{Repeat}(P_7,3),
+P_{18}
+].
+]
+
+Then executes:
+
+[
+y=\operatorname{Exec}(\pi_x,x).
+]
+
+So yes, in an important sense it **programs its own computation** for the current task.
+
+But this isn't self-modification yet.
+
+There are two levels:
+
+### Program synthesis
+
+Choose which existing operations to execute.
+
+[
+\pi\leftarrow C(x,\mathcal L).
+]
+
+### Language revision
+
+Create/modify the operations themselves:
+
+[
+\mathcal L_t\rightarrow\mathcal L_{t+1}.
+]
+
+The first happens quickly during problem solving.
+
+The second should happen slowly during consolidation.
+
+Keeping those separate would likely make the system much more stable.
+
+---
+
+# 12. Eventually it could learn programs for learning itself
+
+This is where it reconnects with your optimizer work.
+
+Suppose after an error it executes:
+
+[
+[
+P_{\rm diagnose},
+P_{\rm attribute},
+P_{\rm update},
+P_{\rm verify}
+].
+]
+
+Those are not task-solving programs.
+
+They're **learning programs**.
+
+Then the model could learn:
+
+> When I encounter this kind of evidence, this update procedure works well.
+
+So the computational library can contain:
+
+* perceptual operations;
+* reasoning operations;
+* memory operations;
+* inference operations;
+* learning/update operations.
+
+That gives:
+
+[
+\boxed{
+\text{learned model}
++
+\text{learned program language}
++
+\text{learned learning algorithm}
+}
+]
+
+inside one framework.
+
+That's arguably the endpoint of the model/optimizer co-training idea.
+
+---
+
+# 13. Parsimony becomes endogenous
+
+Yes—this may be one of the strongest arguments for the project.
+
+Today's deep learning typically optimizes something like:
+
+[
+L_{\rm task}.
+]
+
+Parsimony is largely introduced indirectly through:
+
+* regularization;
+* parameter budgets;
+* architecture choices;
+* pruning afterward.
+
+Your desired learner instead optimizes something like:
+
+[
+\boxed{
+J
+=
+
+L_{\rm lifetime}
++
+\lambda D(\text{persistent state})
++
+\mu C(\text{execution})
+}
+]
+
+or some practical approximation.
+
+Then the learner is rewarded for asking:
+
+> Can I explain this new behavior using what I already know?
+
+If yes:
+
+[
+\text{CALL existing abstraction}.
+]
+
+If not:
+
+> Is a small modification enough?
+
+[
+P+\Delta.
+]
+
+If the modification repeatedly recurs:
+
+> Is it cheaper to name it?
+
+[
+\text{PROMOTE}(\Delta).
+]
+
+That's Occam's razor as a learning dynamic.
+
+---
+
+# 14. But importantly, parsimony doesn't necessarily mean “smallest neural network”
+
+It means shortest **whole-system explanation**.
+
+Suppose one program requires:
+
+[
+10\text{ bits}
+]
+
+but takes:
+
+[
+10^9\text{ operations}.
+]
+
+Another requires:
+
+[
+1000\text{ bits}
+]
+
+but takes:
+
+[
+10^4\text{ operations}.
+]
+
+Which is better depends on:
+
+[
+\lambda/\mu.
+]
+
+So:
+
+[
+J=L+\lambda D+\mu C.
+]
+
+This naturally generates things like:
+
+* interpretation;
+* compilation;
+* caching;
+* specialization;
+* macros.
+
+A frequently executed program may be worth compiling into a larger fused primitive:
+
+[
+P_7\circ P_4\circ P_{13}
+\rightarrow
+M.
+]
+
+This costs more memory:
+
+[
+D(M)>D(\text{route}),
+]
+
+but saves execution:
+
+[
+C(M)<C(P_7)+C(P_4)+C(P_{13}).
+]
+
+That's exactly the interpreter/compiler tradeoff in ordinary computing.
+
+A sufficiently mature neural learner might rediscover the same economics.
+
+---
+
+# 15. It could even develop something analogous to a software ecosystem internally
+
+Over a very long lifetime, imagine:
+
+### Low-level operations
+
+Generic transformations.
+
+### Libraries
+
+Frequently reused parameterized procedures.
+
+### Macros
+
+Common compositions.
+
+### Algorithms
+
+Branching/looping programs.
+
+### Cached specializations
+
+Compiled versions of hot paths.
+
+### Temporary scratch code
+
+One-off solutions.
+
+### Deprecated components
+
+Old abstractions awaiting deletion.
+
+That sounds like software engineering because software engineering is itself largely the science of **organizing reusable computation economically**.
+
+The interesting possibility is that many software-like organizational principles emerge naturally from:
+
+[
+\text{prediction accuracy}
++
+\text{storage pressure}
++
+\text{execution pressure}
++
+\text{future reuse}.
+]
+
+---
+
+# 16. Memory fits naturally too
+
+The same computational language can operate over a persistent memory:
+
+[
+M.
+]
+
+Then programs can do:
+
+[
+\operatorname{Query}(M,q)
+]
+
+[
+\operatorname{Retrieve}(M,k)
+]
+
+[
+\operatorname{Write}(M,v)
+]
+
+[
+\operatorname{Compress}(M,S).
+]
+
+This means “RAG” stops being an external system bolted onto an LLM.
+
+Memory access becomes another kind of learned computation.
+
+The model could learn different retrieval procedures for different tasks.
+
+And repeated memories might themselves get compressed into conceptual abstractions.
+
+---
+
+# 17. Input, computation, and memory could all obey the same information bottleneck
+
+Imagine the model has access to a huge context:
+
+[
+X.
+]
+
+But reading information costs:
+
+[
+C_{\rm read}.
+]
+
+Then it has to decide:
+
+> What information is worth bringing into workspace?
+
+That's attention in information-economic terms.
+
+Similarly, writing persistent memory costs:
+
+[
+D_{\rm memory}.
+]
+
+Creating a new abstraction costs:
+
+[
+D_{\rm abstraction}.
+]
+
+Execution costs:
+
+[
+C_{\rm compute}.
+]
+
+Now the entire cognitive system becomes a resource allocation problem:
+
+[
+\boxed{
+\min
+L
++\lambda_1D_{\rm model}
++\lambda_2D_{\rm memory}
++\mu_1C_{\rm compute}
++\mu_2C_{\rm read}.
+}
+]
+
+That could produce behaviors analogous to:
+
+* attention;
+* memory;
+* abstraction;
+* planning;
+* compilation;
+
+without each being separately hardcoded as a psychological faculty.
+
+That's a very compelling long-term theoretical picture.
+
+---
+
+# 18. This also offers a different interpretation of “reasoning”
+
+Reasoning could simply be:
+
+[
+\boxed{
+\text{constructing and executing a temporary computational program over workspace state}.
+}
+]
+
+Easy problems:
+
+[
+|\pi|=2.
+]
+
+Hard problems:
+
+[
+|\pi|=100.
+]
+
+The system allocates more compute when required.
+
+Instead of “reasoning tokens” being natural-language scratchpad text, the actual internal reasoning substrate could be these learned operations.
+
+Natural language becomes one possible I/O representation of the reasoning process, not necessarily the process itself.
+
+---
+
+# 19. There is a potential route to much greater sample efficiency
+
+Suppose a new task is:
+
+[
+F_{\rm new}=P_{17}\circ P_9\circ P_4.
+]
+
+If the learner already knows those primitives, learning the task means learning roughly:
+
+[
+(17,9,4)
+]
+
+rather than fitting (F_{\rm new}) from scratch.
+
+That is enormous compression of the hypothesis space.
+
+Instead of:
+
+[
+\text{search over all functions},
+]
+
+you search:
+
+[
+\text{search over programs in a mature language}.
+]
+
+As the language improves, future learning becomes cheaper.
+
+So you could get:
+
+[
+\boxed{
+\text{the learner becomes more sample-efficient because it has learned a better language for learning new things}.
+}
+]
+
+This is probably one of the most exciting possible consequences.
+
+---
+
+# 20. This produces a kind of compounding intelligence
+
+Early in training:
+
+[
+\mathcal L_0
+]
+
+is poor.
+
+New tasks require lots of learning.
+
+Later:
+
+[
+\mathcal L_{1000}
+]
+
+contains useful abstractions.
+
+New tasks are shorter programs.
+
+Those tasks then reveal higher-order regularities.
+
+Those become abstractions too.
+
+Potentially:
+
+[
+\text{better library}
+\rightarrow
+\text{faster task learning}
+\rightarrow
+\text{more experience processed}
+\rightarrow
+\text{better abstractions}
+\rightarrow
+\text{even faster learning}.
+]
+
+That's a form of **learning-to-learn through language improvement**.
+
+Not because a static meta-optimizer simply becomes better.
+
+Because the hypothesis language itself improves.
+
+---
+
+# 21. But there is one huge warning from your experiments
+
+We shouldn't jump straight to:
+
+> “there must be discrete programs hiding inside neural networks.”
+
+V2 argues against that simplistic picture.
+
+At partial recurrence, the best representation may genuinely be a **continuous functional manifold** rather than a clean discrete library. 
+
+So the mature system probably needs both:
+
+[
+\boxed{
+\text{continuous computation}
++
+\text{discrete/compositional computation}.
+}
+]
+
+Perhaps:
+
+* novel/ambiguous knowledge lives continuously;
+* repeated structure becomes parameterized;
+* highly recurrent structure becomes discrete;
+* repeated discrete sequences become macros;
+* repeated macros eventually become compiled operations.
+
+So discreteness is something that **emerges with certainty and compression opportunity**, not something we impose everywhere.
+
+That makes the whole architecture much more plausible to me.
+
+---
+
+# 22. The final system might look like this
+
+Conceptually:
+
+```text
+                         LONG-TERM MEMORY
+                                ↕
+                         ┌─────────────┐
+INPUT STORE ── READ ───▶│  WORKSPACE  │── WRITE ──▶ OUTPUT/ACTION
+                         └─────────────┘
+                           ↕   ↕   ↕
+                     learned operations
+                           ↕   ↕   ↕
+                  ┌──────────────────────┐
+                  │ computational language│
+                  │                      │
+                  │ continuous manifolds │
+                  │ parameterized ops    │
+                  │ discrete primitives  │
+                  │ macros               │
+                  │ loops / branches     │
+                  └──────────────────────┘
+                            ↑
+                       controller /
+                     program synthesizer
+
+                              ↕
+
+                       CONSOLIDATION
+             observe recurrence / compress / promote
+                 merge / specialize / retire
+```
+
+And surrounding everything:
+
+[
+J
+=
+
+L_{\rm lifetime}
++
+\lambda D
++
+\mu C.
+]
+
+That objective becomes the evolutionary pressure on the model's internal computational organization.
+
+---
+
+# 23. The truly ambitious hypothesis
+
+The deepest version of the research program is no longer merely:
+
+> Neural networks can reuse modules.
+
+It becomes:
+
+[
+\boxed{
+\textbf{A sufficiently capable learner can progressively invent a compact computational language in which its future experience becomes easier to represent, reason about, and learn from.}
+}
+]
+
+That language could determine:
+
+* how it perceives;
+* what it attends to;
+* how it transforms information;
+* how it accesses memory;
+* how it reasons;
+* how it produces outputs;
+* how it updates itself;
+* how long it computes;
+* which computations get compiled into reusable abstractions.
+
+And because representation has an explicit price, it has an intrinsic reason to seek **parsimony**.
+
+The model wouldn't merely solve problems.
+
+It would gradually reorganize itself so that the **kinds of problems its world repeatedly presents become cheap programs in its own language**.
+
+That, to me, is the most compelling interpretation of where this project could eventually go.
+
+And the encouraging part is that the current work isn't just philosophical motivation anymore. V1/V2 have already isolated several pieces of that story experimentally: when sharing is economical, when continuous manifolds are preferable to primitives, when primitives become identifiable, the separation between representation and inference, and the fact that a learner can allocate specialization correctly while still failing to encode it compactly. 
+
+The next major leap is therefore very concrete:
+
+[
+\boxed{
+\text{Can repeated useful continuous computation literally become a cheaper named abstraction during learning?}
+}
+]
+
+If you demonstrate **that** cleanly, then loops, branching, active perception, memory, learned inference, and eventually self-constructed problem-solving programs stop looking like separate speculative ideas. They become successive extensions of the same mechanism.
+
+This is worth thinking through carefully, because your vision is essentially the project's destination — and the useful exercise is mapping each element of it onto what we've now measured, since almost every piece has either a supporting result or a named obstacle with data behind it. Let me take them in turn, then the hard walls.
+
+"Enough learned circuits/programs to accomplish many tasks." The evidence cuts two ways. For it: library learning demonstrably works when recurrence is high (V1 confirmed), allocation is nearly perfect (H9a — the learner knows what deserves to be a shared circuit), and the dream falsifier showed the compiler genuinely learns the program distribution. Against it: nothing yet manages library growth. Promotion is unproven, compression is unsolved, and the deeper issue is that a large library makes the project's central bottleneck worse, not better — the program space grows exponentially with library size, exact enumeration (the only inference method that ever beat the mixtures) dies, and cheap learned inference failed at small scale (H10). The honest statement: we know how to have many circuits; we don't yet know how to find the right one quickly among many. That's why the expert-iteration loop is the spec's Phase III centerpiece — it's the only known answer to inference at library scale, and its sample-starvation profile (H10 + dream) predicts it works exactly when task counts get large. Scale helps this part of your vision rather than hurting it.
+
+"Continual learning built in." Partially demonstrated, with a real asterisk. The no-replay result is genuinely striking — shared parameters carried prior-task information forward with zero episodic rehearsal, 10/10 worlds, which is the modularity-resists-interference story actually cashed out. But our worlds are stationary; nothing has drifted yet. And here's the subtle trap: continual learning at scale requires bounded memory, bounded memory requires compression, and compression is precisely the unsolved column of the research map. A system that accumulates circuits forever without the promotion/merge/retire machinery isn't a continual learner — it's a hoarder with good indexing. Your "parsimony" point and your "continual learning" point are secretly the same point, and both are gated on V3's H11.
+
+"Programs responsible for input/output, processing, identifying it." This is the perception.txt thesis — one machine, programs over information stores, I/O as bandwidth-limited read operations that make attention economic rather than architectural. I still think it's right as a destination, but V2 added a crucial refinement your framing should absorb: at partial recurrence, the winning "programs" aren't discrete circuits — they're points on a continuous function manifold (006b, 002b). And perception almost certainly lives in the partial-recurrence regime: every scene is a perturbed variation, never an exact repeat. So the mature version of your idea is: the I/O and perceptual machinery would be manifold-programs (continuous, task-conditioned processing policies), while discrete circuit-like programs crystallize only fointeresting claim than "everything is a discrete program."
+
+"Loops, branching, programs itself to solve a problem." Two separate walls here, one well-understood and one under-appreciated. The understood one: expressivity is free (the universality ladder — sequence + branching + iteration over writable state is Turing-complete with tiny instruction sets) and learnability is everything; our own discrete learner had full expressive machinery and choked on inference. The under-appreciated one: self-programming is search plus verification, and ROW's superpower is exact verification — every candidate program is checkable against ground truth, which is what makes expert iteration trustworthy (the spec's §9 flags this explicitly: approximate or learned verification reopens reward hacking as a first-class failure mode). The real world doesn't hand you a verifier. So "it programs itself to solve problems" scales exactly as far as you can construct verification — which is why math, code, and games fall first to systems like this, and open-ended domains resist. That's not a reason to abandon the vision; it's the ordering constraint on it.
+
+"Parsimony built in." Here I'll push back on the wording while agreeing with the intent, because this is V2's sharpest single lesson: parsimony is not built in — it is precisely the thing that is not built in. Gradient descent never sees bits; every mechanism we bolted on to inject parsimony after the fact failed (MDL gates, both consolidation gates), and the models that win prediction lose description length in every tested cell. What V2 discovered is that parsimony must be installed in the objective itself — variational coding, bits in the gradient — and that when you do install it, there's a principled reason to expect the whole thing to snap together, because the parsimony pressure and the generalization benefit are the same quantity under MDL. The encouraging half: where parsimony emerged (crystallized primitives at exact reuse), transfer followed — the Occam payoff is real in our data. So amend your claim to "parsimony installable, with measured returns" and it's supported.
+
+The three walls that decide whether the endgame is real, in my ordering: (1) compression — H11, whether recurring structure can be named more cheaply than re-encoded, the abstraction-as-information-event; (2) inference at scale — whether search+distill+dream actually amortizes when task counts get large, measurable as the G(N) crossover; (3) self-knowledge of recurrence — a deployed learner has no oracle ρ, so it must estimate where reuse pays from its own learning dynamics (gradient alignment, transfer probes — review 13's item 4). Notice all three are already pre-registered somewhere in the spec. And one honest comparative note: large transformers already do a diffuse version of much of this — in-context learning is amortized program inference, induction heads are reusable circuits. The differentiated bet isn't that reuse can exist in neural systems; it's that making the economics explicit — priced, allocated, compressed, and continually revised — beats leaving it implicit. V1/V2 established that the economics is real and lawful at lab scale. Whether explicitness beats implicitness at any scale that matters is the wager the whole program rides on, and nobody — including us — has data on it yet.
+
+So: the vision is coherent, and unusually for visions of this shape, every load-bearing element now has either a confirming measurement or a falsifiable next test. That's the difference between this and the usual "neural programs" hand-waving — you can say exactly which experiment kills or vindicates each clause. Want me to fold this scale-vision analysis into the notes as the record of where the program is ultimately pointed? Component A should be finishing about now, so it would slot in naturally before the sealed verdict lands.
+
+Yes. I think **V2 is putting you on track for the larger vision**, and the strongest thing about the project is that the path is becoming *more specific* as experiments fail, rather than remaining a vague “neural programs” idea.
+
+But I would make one major strategic adjustment:
+
+[
+\boxed{\text{V3 should prove abstraction formation before trying to build the whole self-programming machine.}}
+]
+
+V2 has already given you the prerequisites.
+
+V2 shows that a learner can determine **where sharing is useful**: the shared-residual model allocates specialization inversely to actual recurrence, even primitive-by-primitive in mixed worlds. It also shows that partial recurrence is often better represented as a continuous function manifold, while recognizable reusable primitives crystallize only with stronger recurrence. And it shows that exact discrete programs can be excellent once found, while cheap online program inference remains difficult. 
+
+Those are exactly the discoveries you'd want before attempting a self-organizing computational language.
+
+## Where we are on the long-term ladder
+
+I see the program now as:
+
+[
+\boxed{
+\begin{array}{ll}
+\text{V1} & \text{When is reuse valuable?}\
+\text{V2} & \text{Can the learner determine what should be shared?}\
+\text{V3} & \text{Can repeated structure become a new abstraction?}\
+\text{V4} & \text{Can the abstraction vocabulary revise itself continuously?}\
+\text{V5} & \text{Can programs over that vocabulary implement variable-depth reasoning?}\
+\text{Later} & \text{Can perception, memory, learning, and action use the same substrate?}
+\end{array}}
+]
+
+That's a sensible progression.
+
+The old V3 sketch is already aiming at vocabulary revision—promotion, merging, deletion, dynamic libraries, compilers, loops, cross-world meta-learning, and an LLM bridge.  I think its **destination is right**, but doing all of that at once would make the next scientific result much harder to interpret.
+
+# What V2 still needs to establish
+
+I'd let the V2 agent finish the current program almost exactly as planned.
+
+The particularly important V2 outputs are:
+
+### 1. Selective sharing
+
+You already have this quite strongly:
+
+[
+r_k\uparrow
+\Rightarrow
+|\Delta_k|\downarrow.
+]
+
+That's your evidence that the learner can infer something like:
+
+> “this computation deserves sharing; this other one deserves specialization.”
+
+That is foundational.
+
+### 2. Manifold vs primitive
+
+This is becoming equally important.
+
+Your evidence suggests:
+
+[
+\text{weak recurrence}
+\rightarrow
+\text{specialized}
+]
+
+[
+\text{partial recurrence}
+\rightarrow
+\text{continuous shared manifold}
+]
+
+[
+\text{strong recurrence}
+\rightarrow
+\text{identifiable reusable primitive}.
+]
+
+If that continues to hold, the future architecture should **not** start life as a rigid collection of discrete neural functions.
+
+It should permit continuous structure to become discrete when doing so becomes economical.
+
+### 3. Inference versus representation
+
+The exact route posterior result is critical because it says:
+
+[
+\boxed{\text{good library} \neq \text{good program inference}.}
+]
+
+So eventually you need two separate learning systems:
+
+* one that improves the language;
+* one that learns to efficiently program in that language.
+
+That distinction will matter enormously at scale. 
+
+---
+
+# The biggest missing piece is compression
+
+This is where I think the whole research program currently bottlenecks.
+
+V2 has basically demonstrated:
+
+> **The learner knows what to share, but doesn't know how to encode that decision cheaply.**
+
+The shared-residual system performs brilliantly predictively but gets destroyed when you charge its ~130k persistent bits. 
+
+That's almost perfect motivation for V3.
+
+The grand vision requires:
+
+[
+\text{repeated experience}
+\rightarrow
+\text{better abstraction}
+\rightarrow
+\text{shorter future descriptions}.
+]
+
+At the moment you have:
+
+[
+\text{repeated experience}
+\rightarrow
+\text{better predictive parameterization}.
+]
+
+The missing arrow is:
+
+[
+\boxed{
+\text{useful parameterization}
+\rightarrow
+\text{shorter computational representation}.
+}
+]
+
+That should be V3.
+
+# My ideal V3
+
+I would make V3 primarily about **one operation**:
+
+[
+\boxed{\operatorname{PROMOTE}}
+]
+
+rather than immediately supporting CREATE, MERGE, SPLIT, FORK, DELETE, MACRO, LOOP, etc.
+
+Suppose several tasks currently carry:
+
+[
+\Delta_1,\Delta_2,\Delta_3.
+]
+
+And the learner discovers:
+
+[
+\Delta_1\approx A+\epsilon_1
+]
+
+[
+\Delta_2\approx A+\epsilon_2
+]
+
+[
+\Delta_3\approx A+\epsilon_3.
+]
+
+Then promote:
+
+[
+A
+]
+
+into shared persistent structure.
+
+Before promotion:
+
+[
+D_{\rm before}
+==============
+
+D(\Delta_1)+D(\Delta_2)+D(\Delta_3).
+]
+
+After:
+
+[
+D_{\rm after}
+=============
+
+D(A)
++
+D(\epsilon_1)+D(\epsilon_2)+D(\epsilon_3)
++
+D(\text{references}).
+]
+
+Accept iff:
+
+[
+J_{\rm after}<J_{\rm before}.
+]
+
+That is **literal abstraction formation**.
+
+And the smoking-gun plot would be:
+
+```text
+lifetime ───────────────────────────>
+
+task-specific bits  ███████████▆▅▃▂
+shared bits          ██▂▂▃▅▆███████
+total bits           █████████▇▆▅▃▂
+prediction loss      ───────────────
+                         ↑
+                     promotion
+```
+
+If you can demonstrate that cleanly, you have something much more significant than another modular architecture.
+
+You can say:
+
+> **Repeated task-local computation was discovered, promoted into shared structure, and the total description of the learner became shorter without sacrificing behavior.**
+
+That's the core mechanism underlying the entire future vision.
+
+# Put bits into learning before promotion
+
+I strongly agree with the direction already emerging in the V2 synthesis: **the optimizer needs to see information cost.** 
+
+Today you're effectively doing:
+
+[
+\min L
+]
+
+and later measuring:
+
+[
+D.
+]
+
+No wonder predictive solutions happily consume huge task-specific states.
+
+Instead:
+
+[
+\boxed{
+J_{\rm wake}
+============
+
+L_{\rm preq}
++
+\beta D_{\rm task}.
+}
+]
+
+A practical version is variational coding:
+
+[
+q(\Delta_\tau)
+==============
+
+\mathcal N(\mu_\tau,\sigma_\tau^2)
+]
+
+and:
+
+[
+D_{\rm task}
+\approx
+D_{\rm KL}
+\left(
+q(\Delta_\tau)
+\Vert
+p(\Delta)
+\right).
+]
+
+Then unused precision becomes expensive.
+
+This creates exactly the pressure you want:
+
+> explain the task using existing shared structure unless new information is actually necessary.
+
+And promotion becomes the next optimization:
+
+> if many tasks are separately paying for similar information, can I move that information into shared storage once?
+
+That is an extremely natural learning rule.
+
+---
+
+# Benchmark E becomes very important
+
+I think the hierarchical world should be designed to make the **correct abstraction objectively identifiable**.
+
+For example:
+
+[
+P_{\tau}
+========
+
+P_{\rm global}
++
+P_{\rm family(\tau)}
++
+\Delta_\tau.
+]
+
+But don't expose family identities.
+
+The optimal code has three levels:
+
+```text
+Global
+ ├─ Family A
+ │   ├─ task 1
+ │   ├─ task 2
+ │   └─ task 3
+ └─ Family B
+     ├─ task 4
+     ├─ task 5
+     └─ task 6
+```
+
+Initially the learner can bury:
+
+[
+P_{\rm family}
+]
+
+inside every task residual.
+
+The crucial event is when it realizes:
+
+> “I'm repeatedly paying to represent this same functional correction.”
+
+and promotes it.
+
+Now you can check whether the discovered abstraction hierarchy corresponds to the teacher hierarchy.
+
+This would test far more than ordinary parameter sharing.
+
+It would test:
+
+[
+\boxed{
+\text{whether the learner discovers the correct granularity of reusable computation}.
+}
+]
+
+# Use functional equivalence everywhere
+
+This should become a hard design principle.
+
+V2 repeatedly showed that component identity is unreliable:
+
+* route identities can differ while behavior is equivalent;
+* slot identities can be ambiguous;
+* mixture weights aren't route beliefs;
+* entropy can stay high despite useful structure.
+
+
+
+Therefore V3 shouldn't ask:
+
+> “Are these residual tensors the same?”
+
+It should ask:
+
+> “Can these computations substitute for each other?”
+
+For candidate abstraction (A), evaluate:
+
+[
+d(F_i,A)
+========
+
+\mathbb E_{z}
+|F_i(z)-A(z)|^2.
+]
+
+Better still, permit small arguments/adapters:
+
+[
+F_i(z)\approx B_iA(A_i z;\alpha_i).
+]
+
+Then abstractions can capture recurrence even across coordinate changes.
+
+That's going to matter much more in LLMs.
+
+---
+
+# I would add a functional rate–distortion formulation
+
+This could become theoretically central.
+
+Instead of demanding exact compression:
+
+[
+F'=F,
+]
+
+ask:
+
+[
+R(\epsilon)
+===========
+
+\min_cD(c)
+\quad
+\text{s.t.}\quad
+d(F_c,F)\le\epsilon.
+]
+
+Then abstraction becomes:
+
+> find the shortest persistent description that preserves behavior to acceptable distortion.
+
+This gets rid of arbitrary implementation identity.
+
+And it naturally produces a Pareto curve:
+
+[
+\text{bits}
+\leftrightarrow
+\text{behavioral fidelity}.
+]
+
+That is much closer to what a real large model would need.
+
+---
+
+# Then add library revision incrementally
+
+After **PROMOTE** works:
+
+### V3.1 — PROMOTE
+
+Repeated local structure → shared structure.
+
+### V3.2 — MERGE
+
+Two shared abstractions become functionally redundant.
+
+[
+A\approx B
+\Rightarrow
+A,B\rightarrow C.
+]
+
+### V3.3 — FORK
+
+A shared abstraction increasingly serves two incompatible regimes.
+
+[
+A\rightarrow A_1,A_2.
+]
+
+### V3.4 — DELETE
+
+An abstraction is no longer prospectively economical.
+
+### V3.5 — MACRO
+
+Repeated sequence:
+
+[
+[A,B,C]
+]
+
+becomes:
+
+[
+M.
+]
+
+### V3.6 — LOOP
+
+Repeated macro:
+
+[
+M,M,M,M,\ldots
+]
+
+becomes:
+
+[
+\operatorname{Repeat}(M,n).
+]
+
+That's the route to the larger vision.
+
+---
+
+# Don't add loops yet
+
+Loops are absolutely part of the end state.
+
+But they should come **after reusable abstraction formation works**.
+
+Otherwise if a looping model performs better, you won't know whether it learned:
+
+* iteration;
+* a shortcut;
+* a fused function;
+* an artifact of contraction;
+* task-specific memorization.
+
+Your current V2 spec's loop constraints are excellent: varied counts, non-contracting operators, count extrapolation, and explicit interpret-vs-compile economics. 
+
+Keep them parked until the library itself can genuinely revise.
+
+Then loops become a structural compression operation:
+
+[
+[P,P,P,P,P]
+\rightarrow
+\operatorname{Repeat}(P,5).
+]
+
+That's much cleaner.
+
+---
+
+# Same for branching
+
+Eventually:
+
+[
+\operatorname{IF}(c,\pi_A,\pi_B)
+]
+
+should emerge because different inputs require different computations.
+
+But that's yet another controlled relaxation.
+
+V1/V2 have no meaningful input-dependent program inference because task IDs and task distributions make the structure deliberately simple.
+
+A future benchmark should make branching economically necessary.
+
+Then ask whether:
+
+[
+\text{two specialized programs}
+]
+
+compress into:
+
+[
+\operatorname{IF}(c,A,B).
+]
+
+Again, **compression first**, control flow second.
+
+---
+
+# Cross-world meta-learning is also on track
+
+V2's compiler failure is actually a good prerequisite.
+
+Within 64 tasks:
+
+[
+\text{direct optimization}
+
+>
+
+\text{amortized compiler}.
+]
+
+But dream data improves the compiler more when the library actually matches the world. 
+
+That suggests there is a real learning signal but insufficient experience.
+
+Eventually you should deliberately cross into:
+
+[
+\boxed{
+\text{learning how to learn/program the learned language}.
+}
+]
+
+Train across thousands of worlds.
+
+Now the outer system learns:
+
+* how to identify reusable structure;
+* how to infer programs;
+* which abstractions are worth proposing;
+* perhaps how aggressively to promote/fork.
+
+That is where your learned-optimizer work rejoins this project.
+
+The optimizer is no longer merely learning weight updates.
+
+It learns **representation-edit policies**.
+
+---
+
+# For the LLM bridge, don't build the full architecture first
+
+This is one area where I would strongly change strategy.
+
+Before building a self-restructuring LLM, test whether the central ROW variable even exists in real models:
+
+[
+\boxed{\text{functional recurrence}.}
+]
+
+Take many LoRA/task adaptations over a small pretrained LLM.
+
+Measure the functional similarity of the changes:
+
+[
+F_i(h)-F_0(h).
+]
+
+Then ask:
+
+> Does functional recurrence predict whether sharing/factoring those adaptations helps?
+
+If yes, you've exported the V1 law.
+
+Then try:
+
+[
+\Delta_i
+\approx
+A+\epsilon_i.
+]
+
+Does factoring recurring adaptation structure reduce:
+
+* learning examples;
+* stored LoRA bits;
+* maybe inference cost?
+
+If yes, you've exported V2/H9.
+
+Only then let the LLM dynamically promote.
+
+That gives you an external-validity ladder:
+
+[
+\boxed{
+\text{measure}
+\rightarrow
+\text{factor}
+\rightarrow
+\text{learn factorization}
+\rightarrow
+\text{revise library}.
+}
+]
+
+---
+
+# One new thing I'd add: history dependence
+
+Once you have actual promotion, I really want to test **hysteresis**.
+
+Suppose creating abstraction (A) costs:
+
+[
+C_{\rm create}.
+]
+
+Once it exists, keeping it only costs:
+
+[
+C_{\rm retain}.
+]
+
+So creation and deletion thresholds should differ.
+
+A learner coming from high recurrence might keep (A) at recurrence (r=.4).
+
+But a learner that never had (A) might not create it at (r=.4).
+
+Thus:
+
+[
+P(A\mid r,\text{history})
+]
+
+depends on history.
+
+That's what you'd expect of any system where abstractions are investments.
+
+It gives you something very interesting:
+
+[
+r_{\rm create}>r_{\rm delete}.
+]
+
+A hysteresis loop.
+
+This would be the right scientific reason to introduce nonstationarity.
+
+---
+
+# Parsimony is on track too—but don't hardcode “simple”
+
+This is a subtle philosophical point.
+
+You don't want:
+
+> “prefer fewer modules.”
+
+Or:
+
+> “prefer shorter programs.”
+
+You want:
+
+[
+\boxed{
+\text{pay for every persistent bit and every unit of execution}.
+}
+]
+
+Then what counts as simple is endogenous.
+
+Sometimes:
+
+[
+[A,B,C]
+]
+
+is cheaper than a fused operator.
+
+Sometimes a fused operator is worth its storage because it runs constantly.
+
+Sometimes a task residual should remain temporary.
+
+Sometimes a repeated residual should become permanent.
+
+Sometimes an abstraction should be deleted.
+
+That's a much richer notion of parsimony than conventional regularization.
+
+---
+
+# What would convince me the grand vision is genuinely working?
+
+There are about five milestones I'd want.
+
+### Milestone 1 — already largely achieved
+
+The learner can determine where sharing is beneficial.
+
+**V2/H9.**
+
+### Milestone 2 — next
+
+Repeated task-local information spontaneously becomes shared information:
+
+[
+D_{\rm task}\downarrow,\quad
+D_{\rm shared}\uparrow,\quad
+D_{\rm total}\downarrow.
+]
+
+**V3 promotion.**
+
+### Milestone 3
+
+The discovered shared structure reduces the sample cost of future tasks:
+
+[
+L_{\rm future}\downarrow.
+]
+
+Now abstraction is **prospectively** useful.
+
+### Milestone 4
+
+Repeated computational compositions themselves become macros/control abstractions:
+
+[
+[A,B,C]\rightarrow M,
+]
+
+[
+[M,M,M]\rightarrow\operatorname{Repeat}(M,3).
+]
+
+Now you have a learned programming language.
+
+### Milestone 5
+
+The same machinery works on real/high-dimensional tasks where the true factorization is unknown.
+
+At that point the architecture begins to resemble the vision you described.
+
+---
+
+## So: are you on track?
+
+**Yes.**
+
+And importantly, the evidence is taking you toward a more plausible version of the vision than where you started.
+
+The original picture was roughly:
+
+> learn a library of neural primitives and compose them.
+
+The evidence now suggests:
+
+[
+\boxed{
+\text{flexible continuous computation}
+\rightarrow
+\text{detect reusable functional structure}
+\rightarrow
+\text{compress/promote it}
+\rightarrow
+\text{create reusable abstractions}
+\rightarrow
+\text{compose abstractions}
+\rightarrow
+\text{compress recurring compositions}
+\rightarrow
+\text{learn control structures}.
+}
+]
+
+That's much better.
+
+My strongest recommendation would therefore be:
+
+> **Do not make V3 “the whole architecture.” Make V3 the clean demonstration that an abstraction can be born.**
+
+If you can show a learner starting with task-local continuous information, independently discovering that some of it recurs, promoting it into a new shared computational object, reducing total description length, preserving performance, and making later related tasks cheaper—while refusing to do so in structureless controls—
+
+then you have experimentally demonstrated the core mechanism from which almost everything else in the larger vision plausibly follows.
+
+That would be the result I'd optimize V3 around.
+
+
