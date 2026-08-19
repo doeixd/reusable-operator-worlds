@@ -1,0 +1,590 @@
+[
+  {
+    "world_seed": 0,
+    "kappa": 0.0,
+    "library_size": 4,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 17,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 24,
+        "dependents": 7,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 48,
+        "dependents": 17,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 64,
+        "dependents": 15,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  },
+  {
+    "world_seed": 1,
+    "kappa": 0.0,
+    "library_size": 6,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 13,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 32,
+        "dependents": 7,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 32,
+        "dependents": 8,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 48,
+        "dependents": 5,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 4,
+        "born_at": 64,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 5,
+        "born_at": 64,
+        "dependents": 15,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  },
+  {
+    "world_seed": 2,
+    "kappa": 0.0,
+    "library_size": 5,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 24,
+        "dependents": 6,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 32,
+        "dependents": 3,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 48,
+        "dependents": 8,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 4,
+        "born_at": 64,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  },
+  {
+    "world_seed": 0,
+    "kappa": 0.0001,
+    "library_size": 4,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 17,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 24,
+        "dependents": 7,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 48,
+        "dependents": 17,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 64,
+        "dependents": 15,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  },
+  {
+    "world_seed": 1,
+    "kappa": 0.0001,
+    "library_size": 6,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 13,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 32,
+        "dependents": 7,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 32,
+        "dependents": 8,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 48,
+        "dependents": 5,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 4,
+        "born_at": 64,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 5,
+        "born_at": 64,
+        "dependents": 15,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  },
+  {
+    "world_seed": 2,
+    "kappa": 0.0001,
+    "library_size": 5,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 24,
+        "dependents": 6,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 32,
+        "dependents": 3,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 48,
+        "dependents": 8,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 4,
+        "born_at": 64,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  },
+  {
+    "world_seed": 0,
+    "kappa": 0.001,
+    "library_size": 4,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 17,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 24,
+        "dependents": 7,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 48,
+        "dependents": 17,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 64,
+        "dependents": 15,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  },
+  {
+    "world_seed": 1,
+    "kappa": 0.001,
+    "library_size": 6,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 13,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 32,
+        "dependents": 7,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 32,
+        "dependents": 8,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 48,
+        "dependents": 5,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 4,
+        "born_at": 64,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 5,
+        "born_at": 64,
+        "dependents": 15,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  },
+  {
+    "world_seed": 2,
+    "kappa": 0.001,
+    "library_size": 5,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 24,
+        "dependents": 6,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 32,
+        "dependents": 3,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 48,
+        "dependents": 8,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 4,
+        "born_at": 64,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  },
+  {
+    "world_seed": 0,
+    "kappa": 0.01,
+    "library_size": 4,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 17,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 24,
+        "dependents": 7,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 48,
+        "dependents": 17,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 64,
+        "dependents": 15,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  },
+  {
+    "world_seed": 1,
+    "kappa": 0.01,
+    "library_size": 6,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 13,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 32,
+        "dependents": 7,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 32,
+        "dependents": 8,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 48,
+        "dependents": 5,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 4,
+        "born_at": 64,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 5,
+        "born_at": 64,
+        "dependents": 15,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  },
+  {
+    "world_seed": 2,
+    "kappa": 0.01,
+    "library_size": 5,
+    "abstractions": [
+      {
+        "abstraction": 0,
+        "born_at": 24,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 1,
+        "born_at": 24,
+        "dependents": 6,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 2,
+        "born_at": 32,
+        "dependents": 3,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 3,
+        "born_at": 48,
+        "dependents": 8,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      },
+      {
+        "abstraction": 4,
+        "born_at": 64,
+        "dependents": 16,
+        "loss_cost_of_losing_it": 0.0,
+        "best_deletion_time": null,
+        "best_delta_j": 0.0
+      }
+    ],
+    "deletions_that_pay": 0,
+    "oracle_gain_nats": -0.0
+  }
+]

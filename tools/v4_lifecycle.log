@@ -1,0 +1,8 @@
+14:41:57 V4.1 starting: 6 cells, jobs=4
+14:43:53 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\structured\world_0\lifecycle
+14:44:00 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\structured\world_1\lifecycle
+14:44:00 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\structured\world_2\lifecycle
+14:44:00 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\control\world_0\lifecycle
+14:45:43 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\control\world_1\lifecycle
+14:45:48 done C:\Users\Patrick\Downloads\llm\artifacts\v4_dev\control\world_2\lifecycle
+14:45:48 V4_LIFECYCLE_COMPLETE

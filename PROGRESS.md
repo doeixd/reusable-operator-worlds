@@ -1492,3 +1492,31 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   H16's falsifier is pre-answered in the affirmative so V4.3 now tests
   whether copy-on-write recovers the unfrozen basis's prediction advantage
   WITHOUT its forgetting.
+
+# 2026-08-19 — V4.1 validity gate FAILS, and finds a flaw in the charter
+
+- Built the timed lifecycle oracle (B1) and ran the V4.1 world-validity
+  gate. FAILED: 0 of 5 abstractions are worth deleting, oracle gain 0
+  nats, at every kappa in {0, 1e-4, 1e-3, 1e-2}.
+- The reason is structural. Every abstraction carries 3-17 dependents,
+  and deleting one restores n x 198 scalars of private residual against
+  saving 198. Promotion fires only when it saves bits, so DELETE is
+  exactly its inverse and can only pay when the promotion should not have
+  happened — which V3's promotion criterion already prevents.
+- That contradicts V4's own charter. "Invent hypotheses cheaply, then make
+  persistence expensive" requires cheap birth, but V3's PROMOTE is
+  conservative: three or more members, behavioral substitutability within
+  epsilon, a bits improvement, AND prospective generalization. V4.1 as
+  specified paired a conservative birth rule with a deletion rule that had
+  nothing to delete. The gate caught the inconsistency before any operator
+  was tuned, which is exactly what it is for.
+- FIRST RUN OF THE GATE WAS A FALSE POSITIVE, recorded because the failure
+  mode looks like success: it reported 3.7 of 5 deletions paying and 4,026
+  nats of gain, with every abstraction showing ZERO dependents. The cause
+  is that task_reference and retired are plain Python containers, absent
+  from state_dict, so a reloaded V3 model reports an empty reference table
+  and the audit silently analysed an unused library. The oracle now
+  REFUSES to run without a persisted reference table, and
+  LifecycleLibraryLearner writes one (sync_lineage, task_reference and
+  retired_task_ids in the artifact). This is the gap V4's lineage existed
+  to fill, arriving earlier than expected.

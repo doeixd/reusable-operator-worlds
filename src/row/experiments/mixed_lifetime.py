@@ -39,6 +39,7 @@ def main() -> None:
             "variational",
             "gated",
             "promoting",
+            "lifecycle",
         ),
         required=True,
     )
@@ -151,11 +152,12 @@ def main() -> None:
             "variational": config.variational_model,
             "gated": config.gated_model,
             "promoting": config.shared_residual_model,
+            "lifecycle": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, updates_per_example=args.updates_per_example)
         field = (
             "shared_residual_model"
-            if args.model == "promoting"
+            if args.model in {"promoting", "lifecycle"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})
@@ -169,11 +171,12 @@ def main() -> None:
             "gated": config.gated_model,
             # PROMOTE reuses the frozen shared-residual configuration.
             "promoting": config.shared_residual_model,
+            "lifecycle": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, operator_slots=args.operator_slots)
         field = (
             "shared_residual_model"
-            if args.model == "promoting"
+            if args.model in {"promoting", "lifecycle"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})

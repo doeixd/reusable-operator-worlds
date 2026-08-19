@@ -163,8 +163,37 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
         }
 
     @torch.no_grad()
+    def sync_lineage(self, task_index: int) -> None:
+        """Reconcile lineage with the live reference table.
+
+        `task_reference` and `retired` are plain Python containers, so they
+        are NOT in `state_dict` and do not survive a save/load round trip.
+        V3 artifacts therefore cannot say which task depends on which
+        abstraction, which silently turns any dependency-based analysis
+        into an analysis of an empty library. Lineage is the durable
+        record, and it is written to the artifact.
+        """
+
+        for index in range(len(self.abstractions)):
+            if index not in self.lineage:
+                supporting = [
+                    task_id
+                    for task_id, reference in self.task_reference.items()
+                    if reference == index
+                ]
+                self.record_birth(index, task_index, supporting)
+        for record in self.lineage.values():
+            record.dependents = [
+                task_id
+                for task_id, reference in self.task_reference.items()
+                if reference == record.abstraction_id
+            ]
+
+    @torch.no_grad()
     def lifecycle_diagnostics(self) -> dict[str, object]:
         return {
+            "task_reference": {k: int(v) for k, v in self.task_reference.items()},
+            "retired_task_ids": sorted(self.retired),
             "library_size": len(self.abstractions),
             "lineage": [record.as_dict() for record in self.lineage.values()],
             "accounts": [

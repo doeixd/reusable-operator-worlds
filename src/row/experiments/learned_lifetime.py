@@ -28,6 +28,7 @@ from row.models import (
     HypernetworkLearner,
     PresenceGatedDiscreteLibraryLearner,
     GatedInnovationLearner,
+    LifecycleLibraryLearner,
     PromotingSharedResidualLearner,
     SharedParentResidualLearner,
     VariationalSharedResidualLearner,
@@ -43,6 +44,7 @@ ModelKind = Literal[
     "variational",
     "gated",
     "promoting",
+    "lifecycle",
     "discrete",
     "mdl",
 ]
@@ -54,6 +56,7 @@ Learner = (
     | VariationalSharedResidualLearner
     | GatedInnovationLearner
     | PromotingSharedResidualLearner
+    | LifecycleLibraryLearner
     | DiscreteLibraryLearner
     | PresenceGatedDiscreteLibraryLearner
 )
@@ -198,6 +201,7 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "gated": config.gated_model,
             "shared_residual": config.shared_residual_model,
             "promoting": config.shared_residual_model,
+            "lifecycle": config.shared_residual_model,
         }[kind]
         parent = selected.task_steps * selected.operator_slots * (
             d * selected.operator_rank + selected.operator_rank * d
@@ -258,9 +262,12 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             learnable_alpha=model_config.learnable_alpha,
             activation=model_config.operator_activation,
         )
-    if kind == "promoting":
+    if kind in {"promoting", "lifecycle"}:
         model_config = config.shared_residual_model
-        return PromotingSharedResidualLearner(
+        builder = (
+            LifecycleLibraryLearner if kind == "lifecycle" else PromotingSharedResidualLearner
+        )
+        return builder(
             d=config.world.state_dim,
             operator_slots=model_config.operator_slots,
             operator_rank=model_config.operator_rank,
@@ -355,6 +362,7 @@ def _training_values(
         "variational": config.variational_model,
         "gated": config.gated_model,
         "promoting": config.shared_residual_model,
+        "lifecycle": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -677,6 +685,8 @@ def run(
                 lifetime_index=lifetime_index + 1,
             )
             sleep_records.append(record)
+            if isinstance(model, LifecycleLibraryLearner):
+                model.sync_lineage(lifetime_index + 1)
         if isinstance(model, VariationalSharedResidualLearner):
             completed_task_ids.append(task.task_id)
             model.update_prior_scales(completed_task_ids)
@@ -735,6 +745,9 @@ def run(
         }
     )
     if isinstance(model, PromotingSharedResidualLearner):
+        if isinstance(model, LifecycleLibraryLearner):
+            model.sync_lineage(len(world.tasks))
+            summary["lifecycle"] = model.lifecycle_diagnostics()
         summary["promotion"] = model.promotion_diagnostics()
         summary["sleeps"] = sleep_records
     if isinstance(model, ContinuousBasisLearner):
@@ -1310,6 +1323,7 @@ def resolved_learned_config(
         "variational": config.variational_model,
         "gated": config.gated_model,
         "promoting": config.shared_residual_model,
+        "lifecycle": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1348,6 +1362,7 @@ def _write_artifacts(
         "variational": config.variational_model,
         "gated": config.gated_model,
         "promoting": config.shared_residual_model,
+        "lifecycle": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1402,6 +1417,7 @@ def main() -> None:
             "variational",
             "gated",
             "promoting",
+            "lifecycle",
             "discrete",
             "mdl",
         ),
@@ -1461,6 +1477,7 @@ def main() -> None:
         "variational": config.variational_model,
         "gated": config.gated_model,
         "promoting": config.shared_residual_model,
+        "lifecycle": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[args.model]
