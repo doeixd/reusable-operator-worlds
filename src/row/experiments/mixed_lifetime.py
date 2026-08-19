@@ -83,6 +83,12 @@ def main() -> None:
     parser.add_argument("--promotion-epsilon", type=float, default=0.02)
     parser.add_argument("--new-primitive-families", action="store_true")
     parser.add_argument(
+        "--updates-per-example",
+        type=int,
+        default=None,
+        help="compute-matched audit: give the comparator extra gradient steps",
+    )
+    parser.add_argument(
         "--freeze-slots",
         type=int,
         default=None,
@@ -123,6 +129,23 @@ def main() -> None:
         ),
         output_directory=args.output,
     )
+    if args.updates_per_example is not None:
+        selected = {
+            "dense": config.dense_model,
+            "continuous": config.continuous_model,
+            "hypernetwork": config.hypernetwork_model,
+            "shared_residual": config.shared_residual_model,
+            "variational": config.variational_model,
+            "gated": config.gated_model,
+            "promoting": config.shared_residual_model,
+        }[args.model]
+        selected = replace(selected, updates_per_example=args.updates_per_example)
+        field = (
+            "shared_residual_model"
+            if args.model == "promoting"
+            else f"{args.model}_model"
+        )
+        config = replace(config, **{field: selected})
     if args.operator_slots is not None:
         selected = {
             "dense": config.dense_model,

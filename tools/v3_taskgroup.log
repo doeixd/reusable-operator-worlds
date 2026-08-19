@@ -231,3 +231,9 @@ KeyError: 'promoting'
 13:00:42 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_8\promoting
 13:00:50 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_9\promoting
 13:00:50 V3_TASKGROUP_COMPLETE
+14:03:38 starting: 10 cells, jobs=4, etas=[0.9]
+14:03:45 starting: 10 cells, jobs=2, etas=[0.9]
+14:06:03 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_0\shared_residual
+14:06:03 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_1\shared_residual
+14:06:03 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_2\shared_residual
+14:06:03 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_3\shared_residual
