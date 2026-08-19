@@ -1,3 +1,44 @@
+############################################################################
+# SUPERSEDED (2026-08-19) — read this notice before the sketch below.
+#
+# This sketch predates all V2 verdicts and is preserved as a thinking
+# record. The authoritative V3 design constraints now live in the V2 spec,
+# section 9.5 ("Pre-draft V3 constraint set"), incorporating
+# reviews/reviewer-feedback-11 through -13. Where this sketch and section
+# 9.5 disagree, section 9.5 wins. The decisive changes:
+#
+# 1. WAKE IS MANIFOLD-FIRST, NOT POSTERIOR-FIRST. This sketch's Workstream
+#    1 builds the fast state as a program posterior q(pi | D_t); 006b
+#    falsified the premise (trained mixtures are uncorrelated with route
+#    posteriors — the continuous learner does not do route inference).
+#    Route structure is constructed by sleep-time posterior machinery,
+#    never read out of wake representations.
+# 2. BITS ENTER THE GRADIENT DURING WAKE (variational coding of task
+#    state), replacing this sketch's implicit train-then-count accounting.
+#    Only irreversible discrete restructuring is sleep-only.
+# 3. ONE STRUCTURAL OPERATION FIRST: PROMOTE. The consolidation suite
+#    sketched here (compile + promote + merge + delete in one machine) is
+#    staged: merge, fork, and delete wait on promotion's verdict.
+# 4. Discrete primitives are an ENDPOINT of compression, not the imposed
+#    ontology: basis directions -> parameterized operators -> discrete
+#    operators -> macros, with MDL deciding what form each abstraction
+#    earns.
+# 5. The promotion testbed uses TASK-GROUP families (family(tau)); the
+#    primitive-indexed hierarchy of Benchmark E as built is absorbable by
+#    a shared basis and provides nothing to promote (measured negative,
+#    reports/v2_hierarchical/).
+# 6. Workstream 4's LLM bridge is staged measure -> factor -> learn
+#    (LLM-A/B/C), testing the recurrence law with functional-effect
+#    probes before building any dynamic-library learner.
+# 7. Draft hypotheses H11 (Abstraction Promotion) and H12 (Hierarchical
+#    Vocabulary) are recorded in section 9.5; hysteresis and
+#    acquisition-vs-retention value are staged for the nonstationary era.
+#
+# The workstream framing (V1 measurement -> V2 decision-maker -> V3
+# language-reviser), the gate discipline, the one-surrendered-control
+# rule, and sealed seeds 300-329 all still stand.
+############################################################################
+
 # V3 sketch — the project after V2
 
 Status: parked sketch, not a spec. Written 2026-08-18, while V2 steps

@@ -719,3 +719,10 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   (functional-equivalence entropy, the candidate correct consolidation
   signal) and 006d (function-family intrinsic dimensionality across rho)
   added as non-gating development analyses with predictions stated.
+- Prepended a supersession notice to notes/v3-sketch.txt enumerating the
+  seven decisive changes from reviews 11-13 and the V2 verdicts
+  (manifold-first wake, bits during wake, promote-only staging, discrete
+  primitives as compression endpoint, task-group families, the staged
+  LLM bridge, and the recorded H11/H12 drafts), pointing readers to spec
+  section 9.5 as authoritative while preserving the original sketch as a
+  thinking record.
