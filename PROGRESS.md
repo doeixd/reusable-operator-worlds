@@ -1061,3 +1061,38 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   0 / 0.2 / 0.3 / 0.5 / 0.7 / 0.9) once the instrument centers out the
   task-invariant component that spectral renormalization leaves behind
   (without centering, a spurious 0.33 correlation floor).
+
+# 2026-08-19 — P-2026-08-18-A scored: FALSIFIED (one clause passes)
+
+- Stage-one tuning over the registered beta grid {0.1, 0.3, 1.0} plus an
+  exploratory 3.0, selected on mean lifetime loss per the V2 protocol,
+  chose beta = 0.3. The grid is monotone and never crosses: KL bits per
+  task 1054 / 832 / 577 / 114 against mean losses -159,436 / -159,559 /
+  -156,623 / -148,138 and mean maximum route coefficients 0.348 / 0.300 /
+  0.152 / 0.125. Every bit saved costs route structure and predictive
+  loss together.
+- At the selected setting the prediction splits: the two-part win over
+  both fixed architectures FAILS 0/3 (Continuous takes the cell by
+  52-55k nats, retaining 29,248 bits against 117,534-118,278), while the
+  envelope-retention clause PASSES at 0.80 / 0.87 / 0.83. The conjunction
+  fails, so P-A is falsified; outcome appended to the ledger with its
+  mechanism, and a STATUS block added to the V3 spec.
+- The mechanism is measured, not inferred, and rests on three
+  independent results: the bits are structural rather than precision
+  (the untouched H9 baseline needs 89% of dense bits at the same margin
+  in 3/3 worlds, so variational coding's 11% recovery bought nothing
+  structural); a Gaussian code mischarges the identity state (22 bits to
+  say "this task needs nothing"); and the per-tensor-type prior collapses
+  winner-take-all, taking the ROUTE mechanism to uniform in 2/3 worlds at
+  beta = 1 and 3/3 at beta = 3.
+- Reading recorded in both spec and ledger: continuous information
+  penalties alone cannot create structural compression, because
+  shrinking a KL does not produce a shared object plus a reference to
+  it. Only PROMOTE changes the representation class. This sharpens H11
+  rather than weakening it, and it reassigns the wake phase's job to
+  allocating information and exposing a null state that promotion can
+  act on.
+- Launched the remaining PI-requested audit: beta = 0 equivalence on
+  full 128-example worlds (not just the smoke), which must reproduce the
+  frozen shared-residual baseline up to the two documented differences
+  (no L1 surrogate, and 1e-3 sampling noise).

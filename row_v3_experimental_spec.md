@@ -294,6 +294,27 @@ sleep, fired or refused.
   learner BEFORE any sleep machinery is added. Its outcome is appended
   to PREDICTIONS.md either way and calibrates how much of H11.2 the
   wake phase alone delivers.
+
+**P-2026-08-18-A STATUS (scored 2026-08-19 at the stage-one-selected
+beta = 0.3, canonical mixed development worlds 0-2;
+reports/v3_variational.json): FALSIFIED, with one clause passing.**
+The two-part win fails 0/3 — Continuous takes the cell by 52-55k nats,
+retaining 29,248 bits against the variational learner's 117,534-118,278
+inside the behavioral margin — while the envelope-retention clause
+passes at 0.80 / 0.87 / 0.83. The beta grid is monotone and never
+crosses: 0.1 / 0.3 / 1.0 / 3.0 give 1054 / 832 / 577 / 114 KL bits per
+task against mean lifetime losses -159,436 / -159,559 / -156,623 /
+-148,138 and mean maximum route coefficients 0.348 / 0.300 / 0.152 /
+0.125, so every bit saved costs route structure and predictive loss
+together. **Consequence for V3, and it strengthens H11 rather than
+weakening it: continuous information penalties alone cannot produce
+structural compression, because shrinking a KL never yields a shared
+object plus a reference to it.** Only PROMOTE changes the
+representation class. The wake phase's job is therefore to ALLOCATE
+information well and to expose a null state that promotion can act on,
+not to win the two-part cell by itself; H11.2's primary causal
+comparison (promoted against unpromoted-variational) is unaffected,
+and its frontier clause now has a measured, unflattering baseline.
 - Only irreversible discrete restructuring is sleep-only; continuous
   information cost is wake-legal (review 12 refinement, retained).
 

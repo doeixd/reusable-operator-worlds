@@ -146,4 +146,33 @@ the shared substrate improves, which is exactly what replay is for.
 
 ---
 Outcome log (append-only):
-- (none yet)
+
+- **P-2026-08-18-A: FALSIFIED** (2026-08-19; confidence had been 0.55;
+  reports/v3_variational.json, artifacts/v3_variational/). Scored at the
+  stage-one-selected `description_beta` = 0.3 (grid 0.1/0.3/1.0 plus an
+  exploratory 3.0, selected on mean lifetime loss per the V2 protocol) on
+  canonical mixed development worlds 0-2. The prediction had two clauses
+  and they split:
+  * TWO-PART WIN over both fixed architectures: FAILS 0/3. Continuous
+    wins the cell by 52-55k nats (world 0: J = -131,324 against the
+    variational learner's best -76,120), because it retains 29,248 bits
+    against the variational learner's 117,534-118,278 inside the
+    behavioral margin.
+  * ENVELOPE RETENTION ("at least half of the raw prequential envelope
+    gain"): PASSES, 0.80 / 0.87 / 0.83, mean 0.83.
+  The conjunction fails, so the prediction is falsified. Mechanism,
+  measured rather than inferred: (1) the bits are STRUCTURAL, not
+  precision — an independent post-hoc audit of the untouched H9 baseline
+  needs 89% of dense bits at the same margin in 3/3 worlds, and
+  variational coding recovers 11%, the same order, so it bought no
+  structural compression; (2) a Gaussian code mischarges the identity
+  state, paying 22 bits to say "this task needs nothing"; (3) the
+  per-tensor-type prior collapses winner-take-all and took the ROUTE
+  mechanism — the cheap shared-reference channel — to uniform mixtures in
+  2/3 worlds at beta = 1 and 3/3 at beta = 3. The beta sweep is monotone
+  and never crosses: more beta buys fewer bits, less route structure, and
+  worse loss together. Reading: continuous information penalties alone
+  cannot create structural compression, because shrinking a KL does not
+  produce a shared object plus a reference to it. Only PROMOTE changes
+  the representation class, which makes H11 a sharper hypothesis rather
+  than a weaker one.

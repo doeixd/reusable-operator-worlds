@@ -1,0 +1,1272 @@
+This is a very good turn. The audits have separated two things that were getting conflated:
+
+[
+\boxed{\text{training-time information geometry}}
+\neq
+\boxed{\text{final achievable storage code}}
+]
+
+and they also cleared replay of a bug it did **not** have.
+
+The revised interpretation is much stronger.
+
+The Gaussian issue is now precise: it is not that Gaussian task state cannot eventually be sparsified. Your literal-code audit shows it can—both Gaussian and gated reach 4 bits for an unused task after structural pruning. The problem is that **during learning**, the Gaussian KL gives the optimizer the wrong incentive. To represent “no perturbation” reliably, it must pay for precision. The sparse/gated parameterization instead makes the null computation directly accessible to the optimizer.
+
+That is a real architectural lesson.
+
+## I would formulate the key result even more sharply
+
+Not merely:
+
+> zero information should equal zero perturbation.
+
+I'd use:
+
+[
+\boxed{
+\textbf{The coding prior's mode of zero complexity must coincide with the computational identity.}
+}
+]
+
+For task innovations:
+
+[
+C=0
+\quad\Longleftrightarrow\quad
+\Delta=0.
+]
+
+This is what you want eventually for every structural operation:
+
+[
+\begin{aligned}
+\text{innovation cost }0 &\Rightarrow \text{reuse},\
+\text{extra-step cost }0 &\Rightarrow \text{halt},\
+\text{memory-write cost }0 &\Rightarrow \text{don't write},\
+\text{fork cost }0 &\Rightarrow \text{don't fork}.
+\end{aligned}
+]
+
+Complexity should be represented as **explicit departures from an identity/default computation**.
+
+That feels foundational.
+
+---
+
+## The replay audit is also a really nice methodological result
+
+Your corrected calculation:
+
+[
+\frac{\text{KL pressure}}{\text{data pressure}}
+=1
+]
+
+for every task is the right invariant.
+
+So the earlier raw exposure count:
+
+[
+0.50\text{–}3.38\times
+]
+
+was misleading. Early tasks receive more optimization of **both sides of the same objective**, rather than a different rate–distortion price.
+
+And importantly, your attempted fix actually *created* the problem:
+
+[
+0.296\text{–}2.000
+]
+
+with position-dependent pressure.
+
+Excellent catch.
+
+I would preserve this as a general experimental lesson:
+
+> **When auditing online objectives, count relative gradient/objective pressure, not raw regularizer appearances.**
+
+That's likely to matter repeatedly as this project gets more complex.
+
+---
+
+# I would be cautious with P-J
+
+Now that replay has been vindicated, the acquisition-then-freeze experiment is no longer diagnosing a suspected accounting bug.
+
+It's a genuinely new architectural hypothesis:
+
+[
+\text{mutable medium-term state}
+\quad\text{vs}\quad
+\text{freeze-after-acquisition}.
+]
+
+That's interesting, but I don't see strong reason to predict:
+
+> at least 10% fewer retained bits and <1500 nats degradation.
+
+Those thresholds feel considerably less grounded than your V1/V2 parameter predictions.
+
+Since you've already registered it, keep it and score it honestly. But I'd make it **low priority**.
+
+In fact, I slightly expect mutable task state to win.
+
+As the shared representation changes:
+
+[
+P_t\rightarrow P_{t+1},
+]
+
+the residual required by an old task should ideally change too:
+
+[
+\Delta_{\tau,t}\rightarrow\Delta_{\tau,t+1}.
+]
+
+Freezing:
+
+[
+\Delta_{\tau}
+]
+
+means its decomposition is anchored to an obsolete version of the shared substrate.
+
+The eventual architecture probably wants **reconsolidation**, not immutability:
+
+[
+F_\tau
+======
+
+# P_t+\Delta_{\tau,t}
+
+P_{t+1}+\Delta_{\tau,t+1}.
+]
+
+That itself is an interesting future principle:
+
+[
+\boxed{
+\text{persistent behavior can remain stable while its decomposition into shared vs local information changes.}
+}
+]
+
+Very relevant to continual learning.
+
+---
+
+# The gated learner should now be a very clean experiment
+
+I wouldn't overcomplicate it.
+
+I'd make the basic task-step residual:
+
+[
+R_{\tau,l}
+==========
+
+\sum_{k=1}^{2}
+g_{\tau,l,k}
+u_{\tau,l,k}v_{\tau,l,k}^{T},
+]
+
+with:
+
+[
+g_{\tau,l,k}\in{0,1}.
+]
+
+Then:
+
+[
+\operatorname{rank}(R_{\tau,l})
+\in{0,1,2}.
+]
+
+This is unusually nice because the information representation and physical representation coincide:
+
+### Rank 0
+
+```text
+REUSE
+```
+
+No payload.
+
+### Rank 1
+
+```text
+SPECIALIZE(rank=1, payload)
+```
+
+### Rank 2
+
+```text
+SPECIALIZE(rank=2, payload)
+```
+
+Now you can charge an actual structural code:
+
+[
+D(R)
+====
+
+D(r)
++
+D(\text{active components}).
+]
+
+That is much easier to reason about than Gaussian precision.
+
+---
+
+# I would avoid individual scalar gates
+
+Gate **rank components**, not every scalar.
+
+If you gate every weight:
+
+[
+g_{ij}w_{ij},
+]
+
+you create a huge combinatorial mask and potentially turn the problem into ordinary pruning.
+
+But the natural structural object already exists:
+
+[
+uv^T.
+]
+
+So let the learner decide:
+
+> Do I need zero, one, or two task-specific functional directions here?
+
+That is exactly the question H9 was pointing toward.
+
+And eventually PROMOTE asks:
+
+> Are the rank-1 innovations purchased independently by many tasks actually the same reusable computation?
+
+Beautiful progression.
+
+---
+
+# One important control for the gated learner
+
+Because the toy result mixes a representational advantage with a different optimization method, I'd want a **deterministic rank-coded baseline**.
+
+Compare:
+
+### A. Gaussian
+
+Continuous mean + precision KL.
+
+### B. Presence-coded stochastic/relaxed gates
+
+[
+gR.
+]
+
+### C. Deterministic rank selection
+
+Same rank (0/1/2) representation, but using a direct structural penalty / deterministic relaxation rather than a probabilistic gate.
+
+That tells you whether the improvement comes from:
+
+[
+\text{having an exact null structural state}
+]
+
+or something peculiar to the Bernoulli relaxation.
+
+The deeper hypothesis is about the former.
+
+---
+
+# And compare frontiers, not only β=1
+
+The literal-code toy result is already warning you.
+
+Gated had:
+
+[
+35.5\text{ bits}
+]
+
+for the used task versus Gaussian:
+
+[
+21.3,
+]
+
+but much lower error:
+
+[
+0.0028 \text{ vs }0.0071.
+]
+
+So neither strictly dominates at that one operating point.
+
+The right comparison is:
+
+[
+R(\epsilon)
+===========
+
+\min D
+\quad
+\text{s.t. error}\le\epsilon.
+]
+
+Plot error against actual structural bits.
+
+If gated dominates that frontier, excellent.
+
+If they cross, then you have learned something subtler:
+
+[
+\boxed{
+\text{presence coding is better near the identity/sparse regime,
+while Gaussian coding may be more efficient for dense innovations.}
+}
+]
+
+And *that* might imply the ultimate task-state code should itself be hybrid:
+
+[
+\boxed{
+\text{spike-and-slab}.
+}
+]
+
+---
+
+# In fact, spike-and-slab now looks extremely natural
+
+Something like:
+
+[
+g\sim\operatorname{Bernoulli}(\pi)
+]
+
+and:
+
+[
+v\mid g=1\sim q(v).
+]
+
+Then:
+
+[
+\Delta=gv.
+]
+
+You get:
+
+[
+g=0\Rightarrow\Delta=0
+]
+
+exactly.
+
+But conditional on innovation existing, a continuous distribution captures:
+
+[
+\text{how large / precise the innovation is}.
+]
+
+So you separate two questions:
+
+[
+\boxed{\text{Does this task need new computation?}}
+]
+
+and:
+
+[
+\boxed{\text{If yes, what computation?}}
+]
+
+This decomposition feels much closer to the eventual library-learning system.
+
+At a higher level, it'll become:
+
+[
+\text{REUSE?}
+]
+
+If no:
+
+[
+\text{SPECIALIZE?}
+]
+
+If recurring:
+
+[
+\text{PROMOTE?}
+]
+
+The architecture is already beginning to look like a decision tree over description-length investments.
+
+---
+
+# One thing I would now monitor across recurrence
+
+The gated model gives you an excellent new diagnostic:
+
+[
+P(g=1\mid r).
+]
+
+My prediction:
+
+[
+\boxed{
+r\uparrow
+\Rightarrow
+P(\text{task innovation})\downarrow.
+}
+]
+
+More precisely, in your mixed worlds, per primitive:
+
+[
+r_k\uparrow
+\Rightarrow
+E[\operatorname{rank}(R_{\tau,k})]\downarrow.
+]
+
+That's a much cleaner successor to H9's:
+
+[
+r_k\uparrow
+\Rightarrow
+|\Delta_k|\downarrow.
+]
+
+H9 said:
+
+> specialization gets smaller.
+
+The gated model could say:
+
+> specialization increasingly **ceases to exist**.
+
+That is exactly the structural transition you need before PROMOTE.
+
+---
+
+# There is an intriguing possibility here
+
+Imagine the gated learner finds:
+
+[
+r=.2\Rightarrow \text{rank}\approx2,
+]
+
+[
+r=.5\Rightarrow \text{rank}\approx1.5,
+]
+
+[
+r=.8\Rightarrow \text{rank}\approx1,
+]
+
+[
+r=1\Rightarrow \text{rank}\approx0.
+]
+
+Then the recurrence law isn't merely reflected in prediction loss.
+
+It is reflected directly in **representational dimensionality**.
+
+You would have:
+
+[
+\boxed{
+\text{functional recurrence determines how many task-specific degrees of freedom are worth purchasing.}
+}
+]
+
+That would connect V1's external economics directly to the learner's internal structural representation.
+
+Really nice result if it happens.
+
+---
+
+# One more conceptual point: your empirical-Bayes prior may become less important
+
+The Gaussian approach needed to answer:
+
+> What width should the null prior have?
+
+That's inherently awkward because:
+
+* wide prior = cheap large deviations but noisy null;
+* narrow prior = quiet null but expensive deviations.
+
+The presence representation removes that conflict.
+
+Null is:
+
+[
+g=0.
+]
+
+The slab distribution only matters **conditional on (g=1)**.
+
+So you can estimate:
+
+[
+p(v\mid g=1)
+]
+
+from actual innovations without simultaneously asking it to represent “no innovation.”
+
+That is a much better statistical factorization.
+
+I suspect this will eliminate several of the pathological prior-scale behaviors the agent just fought through.
+
+---
+
+# How I would interpret a gated failure
+
+Suppose it still doesn't beat H9 under literal (J).
+
+Don't immediately reject sparse innovations.
+
+Run the oracle:
+
+> If I take the trained task functions, what is the best possible rank-0/1/2 structural encoding at matched distortion?
+
+If the oracle says there's a huge compression opportunity but the learner doesn't select it:
+
+[
+\boxed{\text{structural credit assignment failed}.}
+]
+
+If the oracle says there isn't:
+
+[
+\boxed{\text{the learned representation itself hasn't organized around reusable structure}.}
+]
+
+Again:
+
+[
+\text{existence}\neq\text{discovery}.
+]
+
+That diagnostic tree you've now added to V3 is going to be invaluable.
+
+---
+
+## Where I think you are now
+
+The Gaussian failure has already answered a useful research question:
+
+> Is “put a generic variational KL on task state” sufficient to make information-efficient specialization emerge?
+
+Probably **no**.
+
+And the toy tells you why.
+
+That narrows the hypothesis considerably:
+
+[
+\boxed{
+\text{The learner needs a task-state language whose primitive zero-complexity operation is REUSE.}
+}
+]
+
+The obvious first implementation of that language is:
+
+[
+\boxed{
+\text{presence-coded low-rank innovations}.
+}
+]
+
+Then V3 PROMOTE can operate on actual innovations instead of trying to infer reusable structure from a cloud of continuously noisy residual parameters.
+
+I think that's a substantial improvement to V3.
+
+And I'd now be more interested in the gated experiment than in trying very hard to save the Gaussian one. The Gaussian negative result plus the mechanistic toy is already a complete, interpretable finding.
+
+Yes. I think this is **even more consequential than the Gaussian null-state result**, because it exposes a second mistake: we were treating all task-specific information as though it had the same semantics.
+
+It doesn't.
+
+A route and a residual are fundamentally different kinds of information:
+
+[
+\boxed{
+\text{route}=\text{reference to computation that already exists}
+}
+]
+
+[
+\boxed{
+\text{residual}=\text{new computation that must be stored}
+}
+]
+
+The fact that a single shared prior can randomly collapse one whole mechanism—and happened to collapse the *cheap reuse mechanism* while preserving thousands of private residual parameters—is strong evidence that a generic “task-state prior” is the wrong abstraction.
+
+## The big lesson: the coding language needs types
+
+I would elevate this to a principle alongside the identity-state rule:
+
+[
+\boxed{
+\textbf{Different semantic kinds of task information need different codes.}
+}
+]
+
+You probably don't want:
+
+[
+q(\text{all task state})
+\sim\mathcal N(0,\sigma^2).
+]
+
+You want something more like:
+
+[
+\boxed{
+\text{REFERENCE}
+\quad|\quad
+\text{INNOVATION}
+\quad|\quad
+\text{ARGUMENT}
+}
+]
+
+with different economics.
+
+For example:
+
+### Reference
+
+> Which existing computation do I use?
+
+If there are (K) choices:
+
+[
+D(\text{reference})\approx\log_2K.
+]
+
+Tiny.
+
+### Innovation
+
+> I cannot express this with existing computation; I need something new.
+
+[
+D(\text{innovation})
+====================
+
+D(\text{presence})
++
+D(\text{payload}).
+]
+
+Potentially expensive.
+
+### Argument
+
+> Existing computation works, but with these parameters.
+
+[
+D(\text{argument})\ll D(\text{new operator}).
+]
+
+This is already starting to look like the calling convention of a learned language.
+
+---
+
+## One important correction to the “route null state” wording
+
+I agree with the underlying point, but I'd phrase it carefully.
+
+You wrote that the reference code's null should be:
+
+> “reuse the shared operator”
+
+rather than uniform mixture.
+
+There is a subtlety: in ROW, different tasks genuinely require different routes. So **the route reference itself is task information** and cannot generally be zero-cost.
+
+The right semantics are more like:
+
+[
+\boxed{
+\text{no route innovation}
+==========================
+
+\text{use an existing operator by cheap reference}
+}
+]
+
+not:
+
+[
+\text{no route information at all}.
+]
+
+So a task might pay:
+
+```text id="7fzpqm"
+CALL P3
+CALL P7
+CALL P2
+```
+
+at roughly:
+
+[
+3\log_2K
+]
+
+bits.
+
+That's completely different from storing 24 floating-point logits.
+
+And completely different from:
+
+```text id="m9rqe6"
+uniformly average every operator
+```
+
+which is what zero logits currently mean.
+
+That's the real mismatch.
+
+---
+
+# I think your next wake state should look something like this
+
+At each task-step:
+
+[
+Q_{\tau,l}
+==========
+
+P_{j_{\tau,l}}
++
+R_{\tau,l}.
+]
+
+Where:
+
+### Cheap reference
+
+[
+j_{\tau,l}\in{1,\ldots,K}.
+]
+
+Cost:
+
+[
+D(j)\approx\log_2K.
+]
+
+### Optional innovation
+
+[
+R_{\tau,l}
+==========
+
+\sum_{k=1}^{r_{\tau,l}}
+u_{\tau,l,k}v_{\tau,l,k}^{T}
+]
+
+with:
+
+[
+r_{\tau,l}\in{0,1,2}.
+]
+
+So the program for a task is conceptually:
+
+```text id="2s2fpg"
+CALL P7
+SPECIALIZE rank=0
+
+CALL P2
+SPECIALIZE rank=1 <payload>
+
+CALL P4
+SPECIALIZE rank=0
+```
+
+This is incredibly aligned with what you ultimately want.
+
+The model first asks:
+
+> **Can I reference existing computation?**
+
+Then:
+
+> **Do I need an innovation beyond it?**
+
+That's exactly the economics V1/V2 discovered.
+
+---
+
+# But don't force hard routes everywhere yet
+
+There is an important warning from V2.
+
+At partial recurrence, the Continuous learner's **soft mixture itself was functionally useful**, and 006b showed it wasn't merely uncertainty over a discrete route.
+
+So:
+
+[
+\text{one-hot reference}
+]
+
+may be too restrictive in some regimes.
+
+I'd consider a richer hierarchy:
+
+[
+\boxed{
+\text{reference to atom}
+\quad|\quad
+\text{reference to parameterized mixture/subspace}
+\quad|\quad
+\text{new innovation}.
+}
+]
+
+For V3.1 you can stay simpler, but keep this distinction conceptually clear.
+
+A natural intermediate representation would be:
+
+[
+Q_\tau
+======
+
+P_{j_\tau}
++
+U a_\tau
++
+R_\tau,
+]
+
+where:
+
+* (j_\tau): cheap discrete reference;
+* (a_\tau): cheap continuous argument;
+* (R_\tau): expensive true innovation.
+
+That might eventually reconcile the manifold-vs-primitives result.
+
+---
+
+# The winner-take-all collapse tells us another important thing
+
+The empirical-Bayes prior was effectively performing a global decision:
+
+> “Does this *entire mechanism* deserve information?”
+
+Once route variance happened to shrink:
+
+[
+s_{\rm route}\downarrow
+]
+
+then:
+
+[
+\frac{\mu^2}{s_{\rm route}^2}\uparrow
+]
+
+and the route mechanism couldn't escape.
+
+That's positive feedback:
+
+[
+\text{slightly smaller}
+\rightarrow
+\text{cheaper to keep small}
+\rightarrow
+\text{even smaller}
+\rightarrow
+\text{dead mechanism}.
+]
+
+And world 2 escaping confirms that this is **symmetry breaking**, not a principled structural decision.
+
+So another rule I'd write down is:
+
+[
+\boxed{
+\textbf{Complexity control should operate at the granularity of independent computational decisions, not entire tensor classes.}
+}
+]
+
+For residuals, that may mean:
+
+[
+\text{rank component}.
+]
+
+For routes:
+
+[
+\text{task-step reference}.
+]
+
+Not:
+
+[
+\text{all routes everywhere share one shrinkage fate}.
+]
+
+---
+
+# I would not fix this with per-coordinate Gaussian priors
+
+That's the tempting response:
+
+> Okay, give every coordinate its own (\sigma_p).
+
+I don't think that's the right lesson.
+
+It would remove winner-take-all coupling, but you'd still have:
+
+* Gaussian null-state mismatch;
+* uninterpretable scalar-level complexity decisions;
+* potentially huge hyperparameter state;
+* no alignment between coding structure and computational structure.
+
+I'd instead move **upward in semantic structure**, not downward to individual parameters.
+
+Use:
+
+[
+\text{route references}
+]
+
+and:
+
+[
+\text{rank-component presence}.
+]
+
+That's much cleaner.
+
+---
+
+# A really useful diagnostic now becomes possible
+
+For every task-step, measure where the learner spends its information:
+
+[
+D_{\rm route},
+\qquad
+D_{\rm innovation}.
+]
+
+Then ask what each bit buys.
+
+Define roughly:
+
+[
+ROI_{\rm route}
+===============
+
+\frac{\Delta L_{\rm saved}}{D_{\rm route}}
+]
+
+and:
+
+[
+ROI_{\rm residual}
+==================
+
+\frac{\Delta L_{\rm saved}}{D_{\rm residual}}.
+]
+
+Your current Gaussian learner is evidently making a grotesquely irrational trade in two worlds:
+
+[
+D_{\rm route}\approx5\text{–}7\text{ bits}
+]
+
+while:
+
+[
+D_{\rm residual}\approx550\text{ bits}.
+]
+
+Yet routes reference a library you've already paid to learn.
+
+I'd love an ablation where you give the model one additional bit budget at a time and measure whether it should spend that bit on:
+
+* better reference;
+* extra residual rank;
+* extra precision.
+
+That could lead eventually to an internal **marginal value of information** measure.
+
+---
+
+# This might become a general theory of computational coding
+
+Think about the eventual architecture.
+
+A new task might have a hierarchy of increasing costs:
+
+[
+\boxed{
+\begin{array}{rcl}
+\text{reuse} &<& \text{reference}\
+&<& \text{argument}\
+&<& \text{specialize}\
+&<& \text{new abstraction}.
+\end{array}}
+]
+
+For example:
+
+```text id="247ula"
+USE P4                           3 bits
+USE P4 WITH ARG a              15 bits
+USE P4 + rank-1 innovation     80 bits
+CREATE NEW P17               2000 bits
+```
+
+Numbers illustrative, but the structure is the important part.
+
+Then learning becomes:
+
+> **Choose the cheapest representational operation capable of explaining the evidence.**
+
+That's much closer to MDL/program synthesis than ordinary neural regularization.
+
+---
+
+# It also gives PROMOTE a clearer role
+
+Suppose many tasks currently say:
+
+```text id="mx9uvp"
+CALL P4 + innovation X
+CALL P7 + innovation X
+CALL P2 + innovation X
+```
+
+and the same functional (X) keeps appearing.
+
+Eventually:
+
+[
+\sum_\tau D(X_\tau)
+
+>
+
+D(P_{\rm new})
++
+\sum_\tau D(\text{reference}).
+]
+
+Then:
+
+```text id="38l6y1"
+CREATE P12 := X
+```
+
+and future tasks simply:
+
+```text id="vn7w02"
+CALL P12
+```
+
+So PROMOTE is literally:
+
+[
+\boxed{
+\text{expensive repeated innovation}
+\rightarrow
+\text{cheap shared reference}.
+}
+]
+
+That is even cleaner than the original residual-factorization framing.
+
+---
+
+# I would pre-register one very simple successor prediction
+
+Something like:
+
+> **Typed Innovation Allocation:** Under a representation with reference-coded routes and presence-coded residual rank, increasing functional recurrence shifts retained task information from innovation payload toward references, and reduces total task-specific degrees of freedom.
+
+Operationally:
+
+[
+r\uparrow
+\Rightarrow
+D_{\rm innovation}\downarrow.
+]
+
+And perhaps:
+
+[
+\frac{D_{\rm reference}}
+{D_{\rm reference}+D_{\rm innovation}}
+\uparrow.
+]
+
+In mixed worlds, primitive-by-primitive:
+
+[
+r_k\uparrow
+\Rightarrow
+E[\operatorname{rank}(R_k)]\downarrow.
+]
+
+That's an extremely natural extension of H9.
+
+---
+
+# An experiment I would definitely run: force route access
+
+Take one of the collapsed worlds.
+
+Run exactly the same learner, but remove the Gaussian route code and give each task a cheap categorical route/reference mechanism while keeping the residual coding unchanged.
+
+If performance jumps and residual bits collapse:
+
+[
+D_{\rm residual}\downarrow,
+]
+
+you have direct evidence for a **substitution effect**:
+
+> The learner was buying private computation because its access path to shared computation had been accidentally made expensive.
+
+That's a powerful result.
+
+It means an abstraction library isn't enough.
+
+[
+\boxed{
+\textbf{Reuse requires both cheap shared computation and a cheap addressing mechanism.}
+}
+]
+
+This will matter massively at scale.
+
+A library with a million brilliant functions is useless if identifying which one you need costs more than rebuilding the function locally.
+
+---
+
+# That suggests a new decomposition of abstraction economics
+
+Previously:
+
+[
+V_{\rm reuse}
+=============
+
+## \text{savings}
+
+D(P).
+]
+
+More accurately:
+
+[
+\boxed{
+V_{\rm reuse}
+=============
+
+## \text{savings}
+
+## D(P)
+
+## D(\text{address})
+
+C(\text{retrieve/infer}).
+}
+]
+
+V2 already exposed the inference tax in hard discrete routing.
+
+Now V3 is exposing the **address-description tax**.
+
+These are distinct.
+
+Eventually:
+
+* library storage;
+* address bits;
+* retrieval compute;
+* arguments;
+* innovation bits
+
+all have to enter the accounting.
+
+That's basically the economics of a computer architecture.
+
+---
+
+## My updated interpretation of the whole sequence
+
+The wake experiments have now uncovered two foundational requirements:
+
+### Requirement 1
+
+[
+\boxed{
+\text{zero information}
+\leftrightarrow
+\text{identity/no innovation}.
+}
+]
+
+### Requirement 2
+
+[
+\boxed{
+\text{references and innovations require different coding semantics}.
+}
+]
+
+And possibly a third:
+
+### Requirement 3
+
+[
+\boxed{
+\text{complexity decisions should occur at meaningful computational units,
+not arbitrary tensor granularity}.
+}
+]
+
+Those feel much more important than whether the first Gaussian V3 model beats a baseline.
+
+You're beginning to discover what the **instruction encoding of the eventual learned machine** needs to look like.
+
+And intriguingly, it's converging toward the same distinction ordinary computers make:
+
+[
+\boxed{
+\text{opcode/reference}
++
+\text{arguments}
++
+\text{optional new data}
+}
+]
+
+rather than representing every computation as an undifferentiated vector of floating-point deviations.
+
+I would lean into this. The failed Gaussian wake learner may end up being one of the most useful parts of V3 because it's forcing the task-state representation toward something much closer to an actual **neural computational language**.
+

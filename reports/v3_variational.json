@@ -3,12 +3,12 @@
   "claim": "variational wake learner beats BOTH fixed architectures under the literal two-part code at lambda = ln 2, retaining at least half of the raw prequential envelope gain",
   "worlds_beating_both_fixed": 0,
   "worlds_total": 3,
-  "mean_retained_envelope_share": 0.44478897489686453,
+  "mean_retained_envelope_share": 0.833581877825493,
   "per_world": [
     {
       "world_seed": 0,
       "losses": {
-        "variational": -154395.4394672146,
+        "variational": -158104.21415335505,
         "shared_residual": -159646.76841910376,
         "continuous": -151597.42286009315,
         "dense": -151906.2889776858
@@ -18,31 +18,31 @@
         "shared_residual": 130624,
         "continuous": 29248,
         "dense": 66688,
-        "variational_sparse_code": 111158
+        "variational_sparse_code": 118278
       },
       "two_part_objective": {
-        "variational_dense_code": -62600.572051299925,
+        "variational_dense_code": -66309.34673744037,
         "shared_residual": -69105.11110564147,
         "continuous": -131324.25412307587,
         "dense": -105681.68980050416,
-        "variational_sparse_code": -77346.5851705322
+        "variational_sparse_code": -76120.15193108584
       },
       "beats_both_fixed_under_two_part": false,
       "beats_shared_residual_under_two_part": true,
       "envelope_gain_nats": 7740.479441417963,
-      "retained_envelope_share": 0.3215757510070754,
+      "retained_envelope_share": 0.8007159275567908,
       "variational_diagnostics": {
         "threshold_bits": 0.5,
-        "total_task_kl_bits": 37099.1614074707,
-        "mean_task_kl_bits": 579.6743969917297,
-        "mean_route_kl_bits": 7.434600064530969,
-        "mean_residual_kl_bits": 572.2397906780243,
-        "mean_informative_coordinate_fraction": 0.32580236486486486,
+        "total_task_kl_bits": 53752.151275634766,
+        "mean_task_kl_bits": 839.8773636817932,
+        "mean_route_kl_bits": 138.8750430047512,
+        "mean_residual_kl_bits": 701.0023121833801,
+        "mean_informative_coordinate_fraction": 0.38091216216216217,
         "prior_scales": [
-          0.008310269564390182,
-          0.08588367700576782,
-          0.05195872113108635,
-          0.13938434422016144
+          0.6478186249732971,
+          0.08278852701187134,
+          0.07201280444860458,
+          0.11251950263977051
         ],
         "prior_scale_names": [
           "route",
@@ -50,86 +50,86 @@
           "residual_v",
           "residual_b"
         ],
-        "evaluation_loss_posterior_mean": -292539.15324298287,
-        "evaluation_expected_loss_under_q": -291474.6754036421,
-        "variational_code_nats": -265759.49627291545,
-        "variational_task_bits": 37099.1614074707,
+        "evaluation_loss_posterior_mean": -318245.59282761003,
+        "evaluation_expected_loss_under_q": -317808.77679826453,
+        "variational_code_nats": -280550.62469252665,
+        "variational_task_bits": 53752.151275634766,
         "note": "variational code is E_q[L] + KL on held-out evaluation sets; L_mean + KL is never reported as a codelength"
       },
       "rate_distortion": {
         "dense_two_part_total_bits": 132432,
-        "mean_float_nmse": 0.024688746900061672,
+        "mean_float_nmse": 0.01563941687150697,
         "non_inferiority_margin": 0.0001,
         "points": [
           {
             "threshold_bits": 0.0625,
-            "retained_task_scalars": 9967,
-            "task_bits": 94166,
-            "total_bits": 111158,
-            "mean_nmse": 0.024722196065639763,
-            "mean_nmse_increase": 3.344916557809214e-05,
-            "maximum_task_nmse_increase": 0.0004161128454499355,
+            "retained_task_scalars": 10857,
+            "task_bits": 101286,
+            "total_bits": 118278,
+            "mean_nmse": 0.015701438581920687,
+            "mean_nmse_increase": 6.202171041371441e-05,
+            "maximum_task_nmse_increase": 0.00046007720142766245,
             "within_margin": true
           },
           {
             "threshold_bits": 0.125,
-            "retained_task_scalars": 8528,
-            "task_bits": 82654,
-            "total_bits": 99646,
-            "mean_nmse": 0.024824331168311467,
-            "mean_nmse_increase": 0.0001355842682497946,
-            "maximum_task_nmse_increase": 0.000907916223257161,
+            "retained_task_scalars": 9461,
+            "task_bits": 90118,
+            "total_bits": 107110,
+            "mean_nmse": 0.01587269959647473,
+            "mean_nmse_increase": 0.0002332827249677618,
+            "maximum_task_nmse_increase": 0.0009347163986558292,
             "within_margin": false
           },
           {
             "threshold_bits": 0.25,
-            "retained_task_scalars": 6689,
-            "task_bits": 67942,
-            "total_bits": 84934,
-            "mean_nmse": 0.02516365051214048,
-            "mean_nmse_increase": 0.0004749036120788074,
-            "maximum_task_nmse_increase": 0.002004420998209685,
+            "retained_task_scalars": 7661,
+            "task_bits": 75718,
+            "total_bits": 92710,
+            "mean_nmse": 0.016297012949891852,
+            "mean_nmse_increase": 0.0006575960783848809,
+            "maximum_task_nmse_increase": 0.002469554029505376,
             "within_margin": false
           },
           {
             "threshold_bits": 0.5,
-            "retained_task_scalars": 4663,
-            "task_bits": 51734,
-            "total_bits": 68726,
-            "mean_nmse": 0.026083037186834676,
-            "mean_nmse_increase": 0.0013942902867730021,
-            "maximum_task_nmse_increase": 0.004348887183620975,
+            "retained_task_scalars": 5470,
+            "task_bits": 58190,
+            "total_bits": 75182,
+            "mean_nmse": 0.01753333452746614,
+            "mean_nmse_increase": 0.0018939176559591721,
+            "maximum_task_nmse_increase": 0.005562556637056525,
             "within_margin": false
           },
           {
             "threshold_bits": 1.0,
-            "retained_task_scalars": 2667,
-            "task_bits": 35766,
-            "total_bits": 52758,
-            "mean_nmse": 0.0278017605733852,
-            "mean_nmse_increase": 0.003113013673323529,
-            "maximum_task_nmse_increase": 0.00884513753794422,
+            "retained_task_scalars": 3201,
+            "task_bits": 40038,
+            "total_bits": 57030,
+            "mean_nmse": 0.019900334194887015,
+            "mean_nmse_increase": 0.0042609173233800444,
+            "maximum_task_nmse_increase": 0.0114907024447264,
             "within_margin": false
           },
           {
             "threshold_bits": 2.0,
-            "retained_task_scalars": 1114,
-            "task_bits": 23342,
-            "total_bits": 40334,
-            "mean_nmse": 0.03060222578421278,
-            "mean_nmse_increase": 0.005913478884151106,
-            "maximum_task_nmse_increase": 0.018749740846146862,
+            "retained_task_scalars": 1339,
+            "task_bits": 25142,
+            "total_bits": 42134,
+            "mean_nmse": 0.024759167655829164,
+            "mean_nmse_increase": 0.009119750784322193,
+            "maximum_task_nmse_increase": 0.02067043414468493,
             "within_margin": false
           }
         ],
         "best_within_margin": {
           "threshold_bits": 0.0625,
-          "retained_task_scalars": 9967,
-          "task_bits": 94166,
-          "total_bits": 111158,
-          "mean_nmse": 0.024722196065639763,
-          "mean_nmse_increase": 3.344916557809214e-05,
-          "maximum_task_nmse_increase": 0.0004161128454499355,
+          "retained_task_scalars": 10857,
+          "task_bits": 101286,
+          "total_bits": 118278,
+          "mean_nmse": 0.015701438581920687,
+          "mean_nmse_increase": 6.202171041371441e-05,
+          "maximum_task_nmse_increase": 0.00046007720142766245,
           "within_margin": true
         }
       }
@@ -137,7 +137,7 @@
     {
       "world_seed": 1,
       "losses": {
-        "variational": -157240.67199614836,
+        "variational": -160288.2405587088,
         "shared_residual": -161241.6521638243,
         "continuous": -153686.83446154423,
         "dense": -154063.05350361828
@@ -146,32 +146,30 @@
         "variational_dense_code": 132432,
         "shared_residual": 130624,
         "continuous": 29248,
-        "dense": 66688,
-        "variational_sparse_code": 108854
+        "dense": 66688
       },
       "two_part_objective": {
-        "variational_dense_code": -65445.804580233686,
+        "variational_dense_code": -68493.37314279414,
         "shared_residual": -70699.99485036201,
         "continuous": -133413.66572452695,
-        "dense": -107838.45432643665,
-        "variational_sparse_code": -81788.82880347608
+        "dense": -107838.45432643665
       },
       "beats_both_fixed_under_two_part": false,
-      "beats_shared_residual_under_two_part": true,
+      "beats_shared_residual_under_two_part": false,
       "envelope_gain_nats": 7178.598660206015,
-      "retained_envelope_share": 0.4426516431605168,
+      "retained_envelope_share": 0.8671869468896979,
       "variational_diagnostics": {
         "threshold_bits": 0.5,
-        "total_task_kl_bits": 35352.163162231445,
-        "mean_task_kl_bits": 552.3775494098663,
-        "mean_route_kl_bits": 4.562679348629899,
-        "mean_residual_kl_bits": 547.8148744106293,
-        "mean_informative_coordinate_fraction": 0.31228885135135137,
+        "total_task_kl_bits": 53183.47775268555,
+        "mean_task_kl_bits": 830.9918398857117,
+        "mean_route_kl_bits": 134.19828414916992,
+        "mean_residual_kl_bits": 696.7935457229614,
+        "mean_informative_coordinate_fraction": 0.37605574324324326,
         "prior_scales": [
-          0.006476783659309149,
-          0.08213885128498077,
-          0.0469948910176754,
-          0.1343938708305359
+          0.568234384059906,
+          0.08230428397655487,
+          0.07280024886131287,
+          0.1109197661280632
         ],
         "prior_scale_names": [
           "route",
@@ -179,94 +177,85 @@
           "residual_v",
           "residual_b"
         ],
-        "evaluation_loss_posterior_mean": -299793.66051926,
-        "evaluation_expected_loss_under_q": -298685.039900635,
-        "variational_code_nats": -274180.7876780391,
-        "variational_task_bits": 35352.163162231445,
+        "evaluation_loss_posterior_mean": -321544.8325484949,
+        "evaluation_expected_loss_under_q": -321059.37853870523,
+        "variational_code_nats": -284195.40088205866,
+        "variational_task_bits": 53183.47775268555,
         "note": "variational code is E_q[L] + KL on held-out evaluation sets; L_mean + KL is never reported as a codelength"
       },
       "rate_distortion": {
         "dense_two_part_total_bits": 132432,
-        "mean_float_nmse": 0.02215704066864113,
+        "mean_float_nmse": 0.014501621252362824,
         "non_inferiority_margin": 0.0001,
         "points": [
           {
             "threshold_bits": 0.0625,
-            "retained_task_scalars": 9679,
-            "task_bits": 91862,
-            "total_bits": 108854,
-            "mean_nmse": 0.022194163480590473,
-            "mean_nmse_increase": 3.712281194934282e-05,
-            "maximum_task_nmse_increase": 0.0005082441221999599,
-            "within_margin": true
+            "retained_task_scalars": 10804,
+            "task_bits": 100862,
+            "total_bits": 117854,
+            "mean_nmse": 0.014615437994038475,
+            "mean_nmse_increase": 0.00011381674167565107,
+            "maximum_task_nmse_increase": 0.00048666881914140314,
+            "within_margin": false
           },
           {
             "threshold_bits": 0.125,
-            "retained_task_scalars": 8216,
-            "task_bits": 80158,
-            "total_bits": 97150,
-            "mean_nmse": 0.022266458277474033,
-            "mean_nmse_increase": 0.00010941760883290122,
-            "maximum_task_nmse_increase": 0.000759895595566374,
+            "retained_task_scalars": 9414,
+            "task_bits": 89742,
+            "total_bits": 106734,
+            "mean_nmse": 0.01477750669786129,
+            "mean_nmse_increase": 0.0002758854454984668,
+            "maximum_task_nmse_increase": 0.0008762956269468616,
             "within_margin": false
           },
           {
             "threshold_bits": 0.25,
-            "retained_task_scalars": 6475,
-            "task_bits": 66230,
-            "total_bits": 83222,
-            "mean_nmse": 0.02240900365158458,
-            "mean_nmse_increase": 0.00025196298294345,
-            "maximum_task_nmse_increase": 0.0011515631809584197,
+            "retained_task_scalars": 7614,
+            "task_bits": 75342,
+            "total_bits": 92334,
+            "mean_nmse": 0.015252310519184523,
+            "mean_nmse_increase": 0.0007506892668216996,
+            "maximum_task_nmse_increase": 0.002431812131325272,
             "within_margin": false
           },
           {
             "threshold_bits": 0.5,
-            "retained_task_scalars": 4508,
-            "task_bits": 50494,
-            "total_bits": 67486,
-            "mean_nmse": 0.02283210990955273,
-            "mean_nmse_increase": 0.0006750692409116001,
-            "maximum_task_nmse_increase": 0.002761199032858312,
+            "retained_task_scalars": 5427,
+            "task_bits": 57846,
+            "total_bits": 74838,
+            "mean_nmse": 0.016455032154575576,
+            "mean_nmse_increase": 0.0019534109022127525,
+            "maximum_task_nmse_increase": 0.005589242236051287,
             "within_margin": false
           },
           {
             "threshold_bits": 1.0,
-            "retained_task_scalars": 2644,
-            "task_bits": 35582,
-            "total_bits": 52574,
-            "mean_nmse": 0.023958080283273488,
-            "mean_nmse_increase": 0.0018010396146323558,
-            "maximum_task_nmse_increase": 0.005593977610166698,
+            "retained_task_scalars": 3221,
+            "task_bits": 40198,
+            "total_bits": 57190,
+            "mean_nmse": 0.018866679840580044,
+            "mean_nmse_increase": 0.0043650585882172195,
+            "maximum_task_nmse_increase": 0.01040991951813516,
             "within_margin": false
           },
           {
             "threshold_bits": 2.0,
-            "retained_task_scalars": 1119,
-            "task_bits": 23382,
-            "total_bits": 40374,
-            "mean_nmse": 0.026147146270326813,
-            "mean_nmse_increase": 0.003990105601685683,
-            "maximum_task_nmse_increase": 0.010780841561999523,
+            "retained_task_scalars": 1345,
+            "task_bits": 25190,
+            "total_bits": 42182,
+            "mean_nmse": 0.022683632332137212,
+            "mean_nmse_increase": 0.00818201107977439,
+            "maximum_task_nmse_increase": 0.01905567403694734,
             "within_margin": false
           }
         ],
-        "best_within_margin": {
-          "threshold_bits": 0.0625,
-          "retained_task_scalars": 9679,
-          "task_bits": 91862,
-          "total_bits": 108854,
-          "mean_nmse": 0.022194163480590473,
-          "mean_nmse_increase": 3.712281194934282e-05,
-          "maximum_task_nmse_increase": 0.0005082441221999599,
-          "within_margin": true
-        }
+        "best_within_margin": null
       }
     },
     {
       "world_seed": 2,
       "losses": {
-        "variational": -158232.94346544406,
+        "variational": -160283.83525152988,
         "shared_residual": -161588.81126738817,
         "continuous": -153267.4550383855,
         "dense": -153781.93429164038
@@ -276,31 +265,31 @@
         "shared_residual": 130624,
         "continuous": 29248,
         "dense": 66688,
-        "variational_sparse_code": 109798
+        "variational_sparse_code": 117534
       },
       "two_part_objective": {
-        "variational_dense_code": -66438.07604952938,
+        "variational_dense_code": -68488.9678356152,
         "shared_residual": -71047.15395392588,
         "continuous": -132994.2863013682,
         "dense": -107557.33511445875,
-        "variational_sparse_code": -82126.76933432318
+        "variational_sparse_code": -78815.47453159727
       },
       "beats_both_fixed_under_two_part": false,
       "beats_shared_residual_under_two_part": true,
       "envelope_gain_nats": 7806.876975747786,
-      "retained_envelope_share": 0.5701395305230014,
+      "retained_envelope_share": 0.8328427590299902,
       "variational_diagnostics": {
         "threshold_bits": 0.5,
-        "total_task_kl_bits": 38348.71955871582,
-        "mean_task_kl_bits": 599.1987431049347,
-        "mean_route_kl_bits": 112.28962981700897,
-        "mean_residual_kl_bits": 486.90911877155304,
-        "mean_informative_coordinate_fraction": 0.30363175675675674,
+        "total_task_kl_bits": 52748.99166870117,
+        "mean_task_kl_bits": 824.2029948234558,
+        "mean_route_kl_bits": 136.0437931418419,
+        "mean_residual_kl_bits": 688.1592078208923,
+        "mean_informative_coordinate_fraction": 0.3708474099099099,
         "prior_scales": [
-          0.30597352981567383,
-          0.07017172873020172,
-          0.03523029014468193,
-          0.14605402946472168
+          0.5965458750724792,
+          0.08043129742145538,
+          0.06992902606725693,
+          0.11927313357591629
         ],
         "prior_scale_names": [
           "route",
@@ -308,86 +297,86 @@
           "residual_v",
           "residual_b"
         ],
-        "evaluation_loss_posterior_mean": -303837.5379154015,
-        "evaluation_expected_loss_under_q": -302994.08329899615,
-        "variational_code_nats": -276412.77645878826,
-        "variational_task_bits": 38348.71955871582,
+        "evaluation_loss_posterior_mean": -322454.3583659498,
+        "evaluation_expected_loss_under_q": -322001.3607633992,
+        "variational_code_nats": -285438.54591085896,
+        "variational_task_bits": 52748.99166870117,
         "note": "variational code is E_q[L] + KL on held-out evaluation sets; L_mean + KL is never reported as a codelength"
       },
       "rate_distortion": {
         "dense_two_part_total_bits": 132432,
-        "mean_float_nmse": 0.020822710124592504,
+        "mean_float_nmse": 0.014246369394592938,
         "non_inferiority_margin": 0.0001,
         "points": [
           {
             "threshold_bits": 0.0625,
-            "retained_task_scalars": 9797,
-            "task_bits": 92806,
-            "total_bits": 109798,
-            "mean_nmse": 0.020886094044250472,
-            "mean_nmse_increase": 6.338391965796491e-05,
-            "maximum_task_nmse_increase": 0.0011406711520210444,
+            "retained_task_scalars": 10764,
+            "task_bits": 100542,
+            "total_bits": 117534,
+            "mean_nmse": 0.014300956260717574,
+            "mean_nmse_increase": 5.458686612463497e-05,
+            "maximum_task_nmse_increase": 0.00039654528675640496,
             "within_margin": true
           },
           {
             "threshold_bits": 0.125,
-            "retained_task_scalars": 8162,
-            "task_bits": 79726,
-            "total_bits": 96718,
-            "mean_nmse": 0.02097789010052191,
-            "mean_nmse_increase": 0.00015517997592940608,
-            "maximum_task_nmse_increase": 0.001149830737477632,
+            "retained_task_scalars": 9303,
+            "task_bits": 88854,
+            "total_bits": 105846,
+            "mean_nmse": 0.014452226569988472,
+            "mean_nmse_increase": 0.0002058571753955322,
+            "maximum_task_nmse_increase": 0.0012866548976668175,
             "within_margin": false
           },
           {
             "threshold_bits": 0.25,
-            "retained_task_scalars": 6275,
-            "task_bits": 64630,
-            "total_bits": 81622,
-            "mean_nmse": 0.021122359966235064,
-            "mean_nmse_increase": 0.0002996498416425573,
-            "maximum_task_nmse_increase": 0.0012338509465953523,
+            "retained_task_scalars": 7520,
+            "task_bits": 74590,
+            "total_bits": 91582,
+            "mean_nmse": 0.014860389463017877,
+            "mean_nmse_increase": 0.0006140200684249394,
+            "maximum_task_nmse_increase": 0.002113055893036798,
             "within_margin": false
           },
           {
             "threshold_bits": 0.5,
-            "retained_task_scalars": 4341,
-            "task_bits": 49158,
-            "total_bits": 66150,
-            "mean_nmse": 0.02163964337352193,
-            "mean_nmse_increase": 0.0008169332489294213,
-            "maximum_task_nmse_increase": 0.003122919611094104,
+            "retained_task_scalars": 5322,
+            "task_bits": 57006,
+            "total_bits": 73998,
+            "mean_nmse": 0.015925581230481198,
+            "mean_nmse_increase": 0.0016792118358882578,
+            "maximum_task_nmse_increase": 0.005443844599472274,
             "within_margin": false
           },
           {
             "threshold_bits": 1.0,
-            "retained_task_scalars": 2591,
-            "task_bits": 35158,
-            "total_bits": 52150,
-            "mean_nmse": 0.0227046694211894,
-            "mean_nmse_increase": 0.0018819592965968915,
-            "maximum_task_nmse_increase": 0.007970063472376568,
+            "retained_task_scalars": 3142,
+            "task_bits": 39566,
+            "total_bits": 56558,
+            "mean_nmse": 0.018511490942481938,
+            "mean_nmse_increase": 0.004265121547889,
+            "maximum_task_nmse_increase": 0.011022314838536634,
             "within_margin": false
           },
           {
             "threshold_bits": 2.0,
-            "retained_task_scalars": 1198,
-            "task_bits": 24014,
-            "total_bits": 41006,
-            "mean_nmse": 0.02460976258813316,
-            "mean_nmse_increase": 0.0037870524635406555,
-            "maximum_task_nmse_increase": 0.014179135037793666,
+            "retained_task_scalars": 1324,
+            "task_bits": 25022,
+            "total_bits": 42014,
+            "mean_nmse": 0.022297693076628544,
+            "mean_nmse_increase": 0.008051323682035602,
+            "maximum_task_nmse_increase": 0.02191006682574418,
             "within_margin": false
           }
         ],
         "best_within_margin": {
           "threshold_bits": 0.0625,
-          "retained_task_scalars": 9797,
-          "task_bits": 92806,
-          "total_bits": 109798,
-          "mean_nmse": 0.020886094044250472,
-          "mean_nmse_increase": 6.338391965796491e-05,
-          "maximum_task_nmse_increase": 0.0011406711520210444,
+          "retained_task_scalars": 10764,
+          "task_bits": 100542,
+          "total_bits": 117534,
+          "mean_nmse": 0.014300956260717574,
+          "mean_nmse_increase": 5.458686612463497e-05,
+          "maximum_task_nmse_increase": 0.00039654528675640496,
           "within_margin": true
         }
       }
