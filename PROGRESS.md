@@ -1636,3 +1636,42 @@ census resolves `root/F{families}`, so passing the N=64 root with the
 N=128 config scored 64-task artifacts against a 128-task world
 generation. It reported a spurious FACTORIZE win in world 1. Artifacts
 were moved to a separate root and the cell rerun.
+
+# V4R RETAIN: crossover located, refusal control passes (2026-08-19)
+
+Replicated the frozen-library retention oracle at the scale its own
+registered prerequisite demands: family onset moved from 16 to 8 so
+pre-gap abstractions form reliably, all ten development worlds, and a
+gap sweep. 40 lifetimes, single-family worlds, library frozen after the
+gap so online PROMOTE cannot manufacture a replacement.
+
+| arm | gap | scored | mean V_retain | positive | median |
+| --- | --- | --- | --- | --- | --- |
+| returns | 8 | 10 | +1,594 | 7/10 | +2,113 |
+| returns | 16 | 10 | -240 | 6/10 | +22 |
+| returns | 32 | 9 | -2,068 | 0/9 | -1,962 |
+| permanent | 16 | 9 | -2,068 | 0/9 | -1,962 |
+
+The crossover `g*` lies between gap 8 and gap 16: short gaps favor
+RETAIN (+1,594, 7/10 worlds), gap 16 is marginal (mean -240 but median
++22 and 6/10 positive), and long gaps favor DELETE decisively.
+
+The refusal control PASSES for the first time in this arc: in the
+permanent arm the dormant abstraction is worth nothing to post-gap tasks
+in 0/9 worlds. Retention value appears where the regime returns and
+nowhere else, which is the discrimination three online dormancy designs
+could not produce.
+
+Consistency check, not a bug: `returns` at gap 32 and `permanent` at gap
+16 report identical figures because a returning regime that resumes at
+task 64 resumes at the lifetime's last task and therefore never returns.
+Both conditions are "family gone permanently from task 32", so they
+generate the same worlds and must score alike. Earlier in V4 the same
+identity appeared as a defect precisely because it was NOT expected
+there; here it is the arithmetic working.
+
+Status. V4R §2.1's registered prerequisite for implementing an online
+retention policy — an oracle crossover in gap length — is now satisfied.
+This is still an oracle over frozen libraries, not a learner result: no
+retention policy has been implemented, and the confound that blocks the
+online version (PROMOTE firing on noise) is unchanged.

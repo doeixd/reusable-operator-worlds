@@ -1,0 +1,626 @@
+[
+  {
+    "world_seed": 0,
+    "scoreable": true,
+    "post_gap_tasks": 17,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 0,
+    "value_nats": 3714.425878805094,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 2616.48074479814,
+    "arm": "returns",
+    "gap_end": 40,
+    "gap_length": 8
+  },
+  {
+    "world_seed": 1,
+    "scoreable": true,
+    "post_gap_tasks": 16,
+    "pre_gap_abstractions": [
+      0,
+      1,
+      2
+    ],
+    "best_abstraction": 2,
+    "value_nats": 2141.965422964944,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 1044.0202889579907,
+    "arm": "returns",
+    "gap_end": 40,
+    "gap_length": 8
+  },
+  {
+    "world_seed": 2,
+    "scoreable": true,
+    "post_gap_tasks": 31,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": 4551.4296169267645,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 3453.484482919811,
+    "arm": "returns",
+    "gap_end": 40,
+    "gap_length": 8
+  },
+  {
+    "world_seed": 3,
+    "scoreable": true,
+    "post_gap_tasks": 9,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": 681.6117423453888,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -416.3333916615645,
+    "arm": "returns",
+    "gap_end": 40,
+    "gap_length": 8
+  },
+  {
+    "world_seed": 4,
+    "scoreable": true,
+    "post_gap_tasks": 20,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": -2361.148337094993,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -3459.0934711019463,
+    "arm": "returns",
+    "gap_end": 40,
+    "gap_length": 8
+  },
+  {
+    "world_seed": 5,
+    "scoreable": true,
+    "post_gap_tasks": 17,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 0,
+    "value_nats": 3564.1811691603407,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 2466.236035153387,
+    "arm": "returns",
+    "gap_end": 40,
+    "gap_length": 8
+  },
+  {
+    "world_seed": 6,
+    "scoreable": true,
+    "post_gap_tasks": 22,
+    "pre_gap_abstractions": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "best_abstraction": 0,
+    "value_nats": 3541.929714981682,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 2443.9845809747285,
+    "arm": "returns",
+    "gap_end": 40,
+    "gap_length": 8
+  },
+  {
+    "world_seed": 7,
+    "scoreable": true,
+    "post_gap_tasks": 32,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 0,
+    "value_nats": 7805.96435326807,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 6708.019219261117,
+    "arm": "returns",
+    "gap_end": 40,
+    "gap_length": 8
+  },
+  {
+    "world_seed": 8,
+    "scoreable": true,
+    "post_gap_tasks": 20,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 1,
+    "value_nats": 2880.4150867701087,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 1782.4699527631553,
+    "arm": "returns",
+    "gap_end": 40,
+    "gap_length": 8
+  },
+  {
+    "world_seed": 9,
+    "scoreable": true,
+    "post_gap_tasks": 17,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 1,
+    "value_nats": 402.0793970410987,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -695.8657369658547,
+    "arm": "returns",
+    "gap_end": 40,
+    "gap_length": 8
+  },
+  {
+    "world_seed": 0,
+    "scoreable": true,
+    "post_gap_tasks": 16,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 0,
+    "value_nats": 113.14195316983341,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -984.80318083712,
+    "arm": "returns",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 1,
+    "scoreable": true,
+    "post_gap_tasks": 21,
+    "pre_gap_abstractions": [
+      0,
+      1,
+      2
+    ],
+    "best_abstraction": 0,
+    "value_nats": 795.6544214956839,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -302.2907125112695,
+    "arm": "returns",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 2,
+    "scoreable": true,
+    "post_gap_tasks": 29,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": 2906.417612580219,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 1808.4724785732658,
+    "arm": "returns",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 3,
+    "scoreable": true,
+    "post_gap_tasks": 24,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": 2226.3583541277894,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 1128.413220120836,
+    "arm": "returns",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 4,
+    "scoreable": true,
+    "post_gap_tasks": 14,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": -1692.8486161039464,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -2790.7937501109,
+    "arm": "returns",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 5,
+    "scoreable": true,
+    "post_gap_tasks": 21,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 0,
+    "value_nats": 1528.8017828212733,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 430.8566488143199,
+    "arm": "returns",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 6,
+    "scoreable": true,
+    "post_gap_tasks": 20,
+    "pre_gap_abstractions": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "best_abstraction": 3,
+    "value_nats": 1327.1755002157997,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 229.23036620884636,
+    "arm": "returns",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 7,
+    "scoreable": true,
+    "post_gap_tasks": 15,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 0,
+    "value_nats": 1126.8587074557909,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 28.913573448837496,
+    "arm": "returns",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 8,
+    "scoreable": true,
+    "post_gap_tasks": 10,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 0,
+    "value_nats": -863.7519940886018,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -1961.6971280955552,
+    "arm": "returns",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 9,
+    "scoreable": true,
+    "post_gap_tasks": 6,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 1,
+    "value_nats": 1112.297995004813,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": 14.35286099785958,
+    "arm": "returns",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 0,
+    "scoreable": true,
+    "post_gap_tasks": 14,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 1,
+    "value_nats": -741.5746948076517,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -1839.519828814605,
+    "arm": "permanent",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 1,
+    "scoreable": true,
+    "post_gap_tasks": 13,
+    "pre_gap_abstractions": [
+      0,
+      1,
+      2
+    ],
+    "best_abstraction": 1,
+    "value_nats": -160.10620044547886,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -1258.0513344524322,
+    "arm": "permanent",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 2,
+    "scoreable": true,
+    "post_gap_tasks": 8,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": -205.4581174204436,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -1303.403251427397,
+    "arm": "permanent",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 3,
+    "scoreable": true,
+    "post_gap_tasks": 20,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": -1767.4575382647995,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -2865.4026722717526,
+    "arm": "permanent",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 4,
+    "scoreable": true,
+    "post_gap_tasks": 20,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": -2708.927855244643,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -3806.8729892515967,
+    "arm": "permanent",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 5,
+    "scoreable": true,
+    "post_gap_tasks": 11,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 0,
+    "value_nats": -995.0372186764353,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -2092.982352683389,
+    "arm": "permanent",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 6,
+    "scoreable": true,
+    "post_gap_tasks": 29,
+    "pre_gap_abstractions": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "best_abstraction": 1,
+    "value_nats": 329.05360850106626,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -768.8915255058871,
+    "arm": "permanent",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 7,
+    "scoreable": true,
+    "post_gap_tasks": 12,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 1,
+    "value_nats": -1615.3711528787007,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -2713.3162868856543,
+    "arm": "permanent",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 8,
+    "scoreable": true,
+    "post_gap_tasks": 10,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 0,
+    "value_nats": -863.7519940886018,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -1961.6971280955552,
+    "arm": "permanent",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 9,
+    "scoreable": false,
+    "reason": "no post-gap tasks",
+    "arm": "permanent",
+    "gap_end": 48,
+    "gap_length": 16
+  },
+  {
+    "world_seed": 0,
+    "scoreable": true,
+    "post_gap_tasks": 14,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 1,
+    "value_nats": -741.5746948076517,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -1839.519828814605,
+    "arm": "returns",
+    "gap_end": 64,
+    "gap_length": 32
+  },
+  {
+    "world_seed": 1,
+    "scoreable": true,
+    "post_gap_tasks": 13,
+    "pre_gap_abstractions": [
+      0,
+      1,
+      2
+    ],
+    "best_abstraction": 1,
+    "value_nats": -160.10620044547886,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -1258.0513344524322,
+    "arm": "returns",
+    "gap_end": 64,
+    "gap_length": 32
+  },
+  {
+    "world_seed": 2,
+    "scoreable": true,
+    "post_gap_tasks": 8,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": -205.4581174204436,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -1303.403251427397,
+    "arm": "returns",
+    "gap_end": 64,
+    "gap_length": 32
+  },
+  {
+    "world_seed": 3,
+    "scoreable": true,
+    "post_gap_tasks": 20,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": -1767.4575382647995,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -2865.4026722717526,
+    "arm": "returns",
+    "gap_end": 64,
+    "gap_length": 32
+  },
+  {
+    "world_seed": 4,
+    "scoreable": true,
+    "post_gap_tasks": 20,
+    "pre_gap_abstractions": [
+      0
+    ],
+    "best_abstraction": 0,
+    "value_nats": -2708.927855244643,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -3806.8729892515967,
+    "arm": "returns",
+    "gap_end": 64,
+    "gap_length": 32
+  },
+  {
+    "world_seed": 5,
+    "scoreable": true,
+    "post_gap_tasks": 11,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 0,
+    "value_nats": -995.0372186764353,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -2092.982352683389,
+    "arm": "returns",
+    "gap_end": 64,
+    "gap_length": 32
+  },
+  {
+    "world_seed": 6,
+    "scoreable": true,
+    "post_gap_tasks": 29,
+    "pre_gap_abstractions": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "best_abstraction": 1,
+    "value_nats": 329.05360850106626,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -768.8915255058871,
+    "arm": "returns",
+    "gap_end": 64,
+    "gap_length": 32
+  },
+  {
+    "world_seed": 7,
+    "scoreable": true,
+    "post_gap_tasks": 12,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 1,
+    "value_nats": -1615.3711528787007,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -2713.3162868856543,
+    "arm": "returns",
+    "gap_end": 64,
+    "gap_length": 32
+  },
+  {
+    "world_seed": 8,
+    "scoreable": true,
+    "post_gap_tasks": 10,
+    "pre_gap_abstractions": [
+      0,
+      1
+    ],
+    "best_abstraction": 0,
+    "value_nats": -863.7519940886018,
+    "carry_cost_nats": 1097.9451340069534,
+    "v_retain_nats": -1961.6971280955552,
+    "arm": "returns",
+    "gap_end": 64,
+    "gap_length": 32
+  },
+  {
+    "world_seed": 9,
+    "scoreable": false,
+    "reason": "no post-gap tasks",
+    "arm": "returns",
+    "gap_end": 64,
+    "gap_length": 32
+  }
+]
