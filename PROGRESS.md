@@ -1429,3 +1429,33 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   limitation covering world construction and uncharged search cost.
 - The header now distinguishes three sealed blocks by seed range so a
   reader cannot conflate them.
+
+# 2026-08-19 — plan for the V4 spec
+
+- Wrote notes/v4-spec-plan.md: a blueprint for the V4 specification,
+  incorporating notes/v4-sketch.txt Revision 1, reviewer-feedback-26 (the
+  V4 review) and -27 (the overall assessment), the V3 spec's closure
+  section, the V3 confirmation plan as template, the two standing
+  post-H11 predictions, and the sealed-V3 learnings, with each planned
+  section mapped to its source.
+- Seven decisions fixed so the spec does not re-litigate them. The
+  substantive one reverses the sketch: the sketch bundled merge, fork and
+  delete into a single H14, and both reviews argue for RETAIN/DELETE
+  alone as V4.1 because bundled operations are undiagnosable and DELETE
+  attacks V3's measured weakness directly (5.3 abstractions for 2
+  families on development, 6.2 on sealed worlds). Also fixed: library
+  size is a diagnostic and never an outcome; edits are justified by
+  substitution and never identity; migration costs are logged from V4.1
+  and charged from V4.2; V4.1 stays in the validated V3 world.
+- Six prerequisites ordered before the spec is frozen, including the V3
+  matched-compute audit that reviewer-feedback-27 flagged as load-bearing
+  and that was not run before sealing, and an offline clairvoyant oracle
+  as the V4 validity gate (lifecycle regret J_online - J_oracle), which
+  is the DELETE analogue of V3's four-way substitutability gate. If that
+  gate fails the world is redesigned BEFORE the spec is written, which is
+  the lesson four V3 testbed failures paid for.
+- The most important single addition from the reviews is the hysteresis
+  lag control: any slowly adapting system shows an apparent create/delete
+  loop from lag alone, so the sweep-rate series (does the gap survive as
+  v -> 0) is preregistered as the falsifier rather than left as a design
+  note.

@@ -550,3 +550,44 @@ abstraction to V5 (premature recursion amplifies fragmentation and search debt).
 The desired V4 result table: structured 5.4 births → 2.3 survive → 2.1 useful;
 control 3.0 → 0.4 → 0.1, with L_V4 ≤ L_V3 and D_V4 < D_V3 — "invent hypotheses
 cheaply, then make persistence expensive."
+
+### [reviewer-feedback-27.txt](reviewer-feedback-27.txt)
+Overall assessment after reading the full arc (spec, learnings, all 27 prior
+reviews). Judges the V3 result as a genuine finding: the simultaneous
+"smaller AND better" conjunction (D_task↓, D_shared↑, D_total↓, ΔL>0,
+ΔL_future>0, 10/10 on every sign, flipped decision balance) is not something
+seen cleanly elsewhere in meta-learning/continual-learning literature, and the
+"abstraction pays twice" denoising hypothesis is the right explanation to
+test. Credits the scientific discipline as what makes the result credible:
+sealed-confirmatory protocol, willingness to record falsified claims
+permanently, paired-comparison invariant, symmetric tuning, two-currency
+reporting (after two-part-code accounting reversed the shared-residual
+conclusion), and ambitious preregistered intervals. Calls the V1→V2→V3 ladder
+a real scientific progression (V1 recurrence has economic value; V2 discovers
+where sharing belongs but can't encode it; V3 creates the encoding itself), and
+the four-part abstraction definition a genuine conceptual advance forced by
+four failed testbeds. Raises five honest concerns: (1) the setting is highly
+engineered (hand-designed PROMOTE, known family size, synthetic two-family
+world) — information flow being correct doesn't mean the mechanism transfers,
+and the recursive question is V5 away; (2) refusal is unsolved and the graded
+reframing is changing the claim to match the result (5.3 births for 2 families,
+2.9 in control); (3) the compute asymmetry (Continuous uses materially more
+training compute) means the load-bearing matched-compute audit must run before
+sealing — if the +1,350-nat gain is partly extra SGD, M3 weakens; (4) n is
+still small (10 development worlds; three-world intervals "not inferentially
+meaningful"; rho crossover descriptive) — expect shrinkage on sealed; (5) MDL
+two-part-code accounting has reversed conclusions before, so stay humble about
+any single metric. Endorses the freeze: further mechanism improvement would
+make the sealed test less informative. Adds one pre-seal item: inspect worlds
+3–9 separately before finalizing intervals (0–2 were heavily used for testbed
+redesign, so 3–9 are a cleaner internal generalization check). Endorses the V4
+roadmap (RETAIN/DELETE first, hysteresis as the sharpest prediction with the
+lag-confound control, GC analogy as convergence not failure, macros deferred
+to V5). Flags the biggest narrative risk: if sealed worlds show 5–7
+abstractions for 2 families with weak discrimination, the story becomes
+"PROMOTE creates structure but can't tell good from noise" — V4's survival
+mechanism is the answer but hasn't been built yet, so V3's confirmation rests
+on a known weakness. Gives the precise defensible sealed claim and concludes
+the project has done something rare: a genuine experimental apparatus with
+real rigor around a question that matters, honest about negative results,
+reaching a legitimate miniature of what it set out to study.
