@@ -768,3 +768,15 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   section 12 records the closure, the full hypothesis ledger, and the
   Phase III gate opening with the pivot NOT taken (H9 passed, so V3
   proceeds promotion-first). SPEC_AUDIT re-audited at closure.
+- Updated the paper to draft v0.7 with the V2 sealed results: abstract
+  and contributions carry the parameter replication (second sealed
+  block inside every frozen interval) and the read-versus-write
+  asymmetry; section 4 gains the replication subsection including
+  lifetime-length stationarity; new sections 5.3 (three regimes of
+  representational form) and 5.4 (the pre-sealed falsification of
+  mixtures-as-posterior); section 7 gains the sealed selective-sharing
+  confirmation (allocation 30/30, envelope 30/30, two-part reversal
+  0/30 as pre-registered) and the consolidation/compiler negatives with
+  their design lesson; the discussion closes on the four-line research
+  map; figure list extended with the interval-overlay, sealed
+  allocation, and gate-shape figures.

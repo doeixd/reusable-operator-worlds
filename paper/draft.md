@@ -1,8 +1,12 @@
 # When Does Abstraction Pay? Measuring the Value of Reusable Computation in Neural Learners
 
-*Draft v0.6. Development and confirmatory results labeled throughout;
-all numbers trace to fingerprint-validated artifacts in the public
-repository. Revision history in PROGRESS.md.*
+*Draft v0.7 — extended with the second sealed block (seeds 200-229):
+parameter replication, the selective-sharing confirmation, and the
+three-regime account. Development and sealed results labeled throughout
+(two sealed blocks are distinguished by seed range); all numbers trace
+to fingerprint-validated artifacts in the public repository, with sealed
+artifacts archived as release v2.0-confirmation. Revision history in
+PROGRESS.md.*
 
 ## Abstract
 
@@ -18,7 +22,20 @@ basis consistently beats a compute-matched dense learner under high
 recurrence and consistently loses under low recurrence (30/30 worlds on
 all three pre-specified outcomes; Holm-adjusted p <= 5.6e-9). The paired
 advantage is approximately linear in measured functional recurrence
-(R^2 = 0.935), crossing zero near recurrence r = 0.50. The result is
+(R^2 = 0.935), crossing zero near recurrence r = 0.50. A SECOND sealed
+block of 30 worlds, run against parameter intervals frozen in advance,
+replicates the law's coefficients — slope 6,194 nats per unit recurrence
+(interval 4,000-7,500), crossing 0.45-0.48 (intervals 0.40-0.60 and
+0.42-0.58), R^2 = 0.926 — upgrading the claim from a reproduced
+phenomenon to a measured law with replicated parameters. On the same
+sealed worlds, a learner permitted per-task low-rank corrections to a
+shared parent allocates specialization inversely to each primitive's
+ground-truth recurrence in 30/30 mixed-recurrence worlds (sign test
+p = 1.9e-9) and beats the better fixed architecture everywhere on
+prediction cost — while losing everywhere under literal two-part
+description-length accounting, a replicated dissociation showing that a
+learner can READ the economics of sharing almost perfectly before it can
+WRITE them compactly. The result is
 conditional on representational alignment, and substantially so: when the
 learner's operator family matches the environment's (residual tanh), the
 exact-reuse advantage is large; changing only the learner's activation
@@ -30,7 +47,12 @@ the environment's recurring computation, the value of using that
 vocabulary is linear in measured recurrence.** Development-stage
 mechanistic analyses further show that lower lifetime learning cost
 appears before identifiable, recomposable primitives do: **statistical
-reuse and structural abstraction are distinct phenomena**. The transfer
+reuse and structural abstraction are distinct phenomena** — and the
+representational form tracks recurrence through three regimes:
+task-specific solutions at weak recurrence, a continuous operator
+manifold at partial recurrence (where a slotless hypernetwork beats
+explicit operator slots), and crystallized, recomposable primitives only
+near exact recurrence. The transfer
 advantage is acquired over the lifetime rather than present at
 initialization, and the effect survives changes in task order, replay
 budget, initialization, task-code capacity, batch size, and quantization.
@@ -104,14 +126,33 @@ none of our claims concern scale, and the criterion we test is scale-free.
    reduces the exact-reuse advantage to approximate parity, via an
    approximately additive penalty), and we state every claim under that
    condition.
-3. The statistical-reuse / structural-abstraction dissociation: lifetime
-   economic benefit precedes, and does not imply, identifiable
-   recomposable primitives, which emerge only near exact recurrence.
-4. A measured resource frontier (online learning vs retained description
-   vs inference compute) across five substrate families under actual int8
-   quantization, plus a proof-of-concept adaptive-sharing substrate whose
-   gains and costs sharpen the target for learned consolidation.
-5. One falsified secondary hypothesis and two weakened ones, reported.
+3. Parameter replication: a second sealed block of 30 worlds, tested
+   against intervals frozen in advance, replicates the law's slope,
+   crossing, and linearity — interval misses were pre-committed to count
+   as failures even with passing signs, and none occurred.
+4. The statistical-reuse / structural-abstraction dissociation, extended
+   to a three-regime account of representational form (task-specific ->
+   continuous manifold -> crystallized primitives) supported by four
+   independent instruments, including a slotless hypernetwork that beats
+   explicit operator slots at partial recurrence and loses at exact
+   recurrence.
+5. Selective sharing, confirmed sealed: a shared-parent learner with
+   penalized per-task low-rank corrections allocates specialization
+   inversely to per-primitive ground-truth recurrence (30/30 sealed
+   mixed worlds) and beats the better fixed architecture on prediction
+   cost everywhere — while losing everywhere under two-part
+   description-length accounting. Reading the economics is demonstrated;
+   writing them compactly is the characterized open problem.
+6. A measured resource frontier across five substrate families under
+   actual int8 quantization, and a set of instructive failures reported
+   in full: two consolidation-gate designs (one firing inversely to
+   structure, one barely firing), a within-lifetime amortized compiler
+   that loses to plain gradient descent while its self-test confirms it
+   learns the program distribution, and the falsification — timestamped
+   before the sealed block — of the hypothesis that soft mixtures
+   approximate a Bayesian route posterior.
+7. One falsified secondary hypothesis and two weakened ones from V1,
+   reported alongside.
 
 ## 2. Reusable Operator Worlds
 
@@ -218,6 +259,26 @@ use "crossover," never "phase transition"; on the evidence, the crossing
 is an ordinary zero of a linear function, which is the more elegant and
 more falsifiable claim.
 
+**Parameter replication (second sealed block, seeds 200-229).** The
+strongest test we could construct: before generating a further 30 sealed
+worlds, we froze quantitative intervals for the law's parameters, with
+interval misses pre-committed to count as replication failures even if
+all sign tests passed. The second block ran 360 paired lifetimes with
+zero exclusions and landed inside every interval: slope 6,194 nats per
+unit recurrence (frozen interval 4,000-7,500; first block 5,716); pooled
+zero crossing 0.450 (interval 0.40-0.60) and per-world crossing mean
+0.483 (interval 0.42-0.58), with all 30 worlds crossing; R^2 = 0.926 in
+measured-recurrence coordinates with a +0.262 margin over configured
+coordinates (thresholds 0.85 and +0.15); within-world sign reversal
+30/30 (p = 1.9e-9). Across the two independent sealed blocks the law's
+coefficients agree to within a few percent. We also report, from genuine
+32- and 128-task lifetimes at the bracketing recurrence values
+(development), that the crossing is stationary across a 4x range of
+lifetime lengths — per-task effects are approximately constant — so the
+boundary is a representational-bias sign flip rather than an
+amortization threshold, with amortization movement confined to very
+early lifetime.
+
 ## 5. What does the reusable learner actually acquire?
 
 (Development worlds 0-9; labeled development-stage throughout.)
@@ -281,6 +342,43 @@ on one recurrence axis. We note that an earlier, more attractive hypothesis — 
 recompositional transfer improves before it amortizes — was proposed on
 one development world and falsified on replication; the dissociation
 above, with the opposite ordering, is what survived.
+
+### 5.3 Three regimes of representational form
+
+Assembling the instruments — paired lifetime losses, the hypernetwork
+gap, operator recovery against the untrained baseline, and frozen-
+library transfer — yields one account: representational form tracks
+recurrence through three regimes. At weak recurrence, task-specific
+solutions win. At partial recurrence, the best representation is a
+CONTINUOUS OPERATOR MANIFOLD: the slotless hypernetwork closes its gap
+to the explicit basis in 3/3 worlds at rho = 0.9 and beats it outright
+in 2/3, while operator recovery sits at or below the untrained baseline
+— useful sharing without identifiable parts. Only near exact recurrence
+do explicit slots win, recovery crystallize, and frozen recomposition
+work. Discreteness, on this evidence, is not the substrate of reuse but
+an endpoint that emerges where recurrence is exact enough to make named
+parts economical.
+
+### 5.4 The mixtures are not beliefs about programs (a pre-sealed
+###     falsification)
+
+An attractive mechanism would unify everything: soft mixtures win
+because they approximate a Bayesian posterior over discrete routes. We
+tested it before the second sealed block existed, and it is false: the
+trained mixture weights are uncorrelated with exact route-posterior
+marginals over the same basis (mean Spearman -0.03 across worlds 0-2;
+chance-level sign rate), and miscalibrated by three orders of magnitude
+(mixture entropy ~1.4 nats versus posterior marginal entropy ~0.001).
+Meanwhile the exact posterior itself — a deliberately advantaged bound
+computed over the frozen learned library — beats the continuous learner
+by ~3,900 nats, with its MAP route agreeing with the online learner's
+hard routes on only 25/64 tasks while outperforming both. The corrected
+picture: the continuous learner solves tasks in the basis's continuous
+function space with distributed, compensatory solutions and never does
+route inference at all; route-committed representations are better when
+found, but gradient descent on mixture codes does not find them. This
+falsification is timestamped in the public record ahead of the sealed
+data it might otherwise have been suspected of accommodating.
 
 ## 6. Alternative explanations
 
@@ -418,6 +516,49 @@ flexibility buys this with excessive description length** — giving the V2
 consolidation program an exact target (adaptive sharing plus
 compression).
 
+**Selective sharing, confirmed sealed.** The proof of concept graduated
+to a pre-registered claim on mixed-recurrence worlds, where each
+primitive carries its own reuse level (canonical profile 1.0 / 0.95 /
+0.8 / 0.5 / 0.2 / 0.0) and neither fixed architecture can be correct.
+Attribution is frozen in advance: each task-step residual is attributed
+to the teacher primitive at that position of the hidden program — a
+post-hoc ground-truth diagnostic that stays well-defined even where
+slot-to-primitive matching fails. Development result: the per-world
+Spearman correlation between per-primitive measured recurrence and mean
+residual allocation is negative in 10/10 worlds (range -0.43 to -1.00).
+Sealed result (seeds 200-229, decision rule and outcomes frozen before
+generation): negative in **30/30 worlds** (sign test p = 1.9e-9), with
+the envelope win replicating 30/30 (mean +7,192 nats over the better
+fixed architecture) and the two-part-code reversal replicating 0/30 —
+the reversal was itself a pre-registered expectation, so its
+confirmation completes the dissociation: **a learner can read the
+economics of sharing almost perfectly, allocating specialization
+primitive-by-primitive against ground-truth recurrence it was never
+shown, while still lacking any mechanism to encode that allocation
+compactly.** Reading is solved; writing is the open problem.
+
+**Two more instructive failures.** A wake/sleep consolidation learner
+that compiles soft tasks to hard routes was tested under two gate
+designs with a pre-registered firing-rate shape (non-decreasing in
+recurrence) and a one-re-derivation budget: the relative-quality gate
+fired INVERSELY to structure (43% at zero recurrence, 0% at exact reuse
+— relative bars are easiest to clear where the baseline is worst, and
+single hard routes cannot match compensatory mixtures), and the
+re-derived absolute gate satisfied the shape but barely fired (0-8 of 64
+tasks), because behavioral near-equivalence among routes keeps posterior
+entropy high — entropy measures route identifiability, not
+compilability. A within-lifetime amortized compiler (a set encoder
+warm-starting task codes, trained on the lifetime's own solved tasks)
+lost to plain gradient descent in every world at both recurrence
+extremes; its pre-registered self-test nonetheless passed — augmenting
+compiler training with fantasy tasks sampled from the learner's own
+library helps three times more where the library matches the world
+(+1,554 vs +512 nats), so the compiler learns the program distribution
+and is sample-starved rather than wrong. Both negatives sharpen the same
+design lesson the successes suggest: compression and inference decisions
+must be based on functional equivalence, not component identity, and
+amortization belongs at cross-world scale.
+
 **A characterized negative, briefly.** L0-style presence gating on the
 12-slot library, tuned over a two-stage grid with a selection rule frozen
 in advance, never produced a compact sufficient library: pruning pressure
@@ -539,12 +680,31 @@ are recovered.
 
 Sharing is not inherently good. It is an investment: a learner pays a
 representational price by forcing tasks through shared computation, and
-the return on that investment is determined — linearly, in our worlds —
-by how much genuinely reusable computation the environment contains. Even
-when the investment pays predictively, the learner may not yet have
-discovered a clean abstraction: economic benefit precedes recomposable
-structure, and only near exact recurrence do lifetime efficiency,
-recomposition, and identifiable primitive recovery align.
+the return on that investment is determined — linearly, in our worlds,
+with coefficients that now replicate across two independent sealed
+blocks — by how much genuinely reusable computation the environment
+contains. Even when the investment pays predictively, the learner may
+not yet have discovered a clean abstraction: economic benefit precedes
+recomposable structure, and only near exact recurrence do lifetime
+efficiency, recomposition, and identifiable primitive recovery align.
+
+The second sealed block adds the study's sharpest asymmetry. A learner
+can be shown to READ these economics almost perfectly — allocating
+per-task specialization against per-primitive ground-truth recurrence
+it was never told, in every one of 30 sealed worlds — while every
+mechanism we built for WRITING the result compactly failed, each for an
+identified reason: gradient descent optimizes prediction and never sees
+description length; identity-based instruments (route entropy, slot
+matching) fail in representations where many implementations are
+behaviorally equivalent; and within-lifetime data is too scarce to
+amortize learned inference. Allocation solved, inference solved only
+exactly, compression unsolved, representational form set by recurrence:
+that four-line map, rather than any single winner, is what these two
+sealed blocks establish. The successor program targets the compression
+cell — whether recurring specialization can be promoted into shared,
+named structure that wins prediction and description length at once —
+with the objective carrying description length in the gradient rather
+than discovering it in the accounting.
 
 Why should anyone working at scale care about a 16-dimensional world?
 Because the criterion is scale-free and the phenomena it isolates have
@@ -658,12 +818,18 @@ recollection. (Execution-cost details appear in the repository README.)
 
 ---
 *Figures: (1) regime map, per-world sealed traces, both coordinates;
-(2) linear dose-response with pooled fit (confirmatory); (3) checkpoint
-divergence — indistinguishable at 8 tasks, ~2x at 64; (4) two response
-curves — lifetime advantage, frozen recomposition advantage, and
-operator recovery vs untrained baseline on one measured-recurrence axis;
-(5) resource frontier; (6) robustness forest; (7) adaptive substrate:
-envelope win in nats, loss in bits, allocation signature. Appendices:
-MDL gating grids; batch, initialization, and truncated-lifetime tables;
-mixed-effects sensitivity for the pooled regression; confirmatory
-analysis exactly as pre-specified.*
+(2) linear dose-response with pooled fit — now overlaying BOTH sealed
+blocks with the frozen intervals drawn; (3) checkpoint divergence —
+indistinguishable at 8 tasks, ~2x at 64; (4) two response curves —
+lifetime advantage, frozen recomposition advantage, and operator
+recovery vs untrained baseline on one measured-recurrence axis; (5)
+resource frontier; (6) robustness forest; (7) adaptive substrate:
+envelope win in nats, loss in bits, allocation signature — extended
+with the 30-world sealed allocation replication; (8, new) per-primitive
+allocation vs ground-truth recurrence, sealed worlds, with per-world
+Spearman distribution; (9, new) the two consolidation gates' firing
+rates across recurrence against the pre-registered shape. Appendices:
+MDL gating grids; batch, initialization, and lifetime-length tables;
+mixed-effects sensitivity; gate designs and re-derivation record; both
+confirmatory analyses exactly as pre-specified; sealed artifacts at
+release v2.0-confirmation.*
