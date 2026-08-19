@@ -90,6 +90,21 @@ investment logic promotion is built on; exposing the horizon removes
 the estimation confound, so failure would indicate the criterion does
 not actually use prospective value.
 
+## P-2026-08-19-H: an abstraction-promotion amortization threshold in N
+
+Across lifetime lengths N in {16, 32, 64, 128, 256} on the promotion
+testbed, the rate of correct promotion (candidate matching a true
+family component functionally) increases monotonically with N, and the
+ratio D(A)-plus-overheads to realized reuse savings decreases
+monotonically, yielding an interpolable threshold N* below which
+promotion does not pay under the two-part code and above which it
+does. Confidence: 0.6 for the joint monotone pattern; no interval on
+N* itself is claimed before development data. Rationale: V1/V2
+amortization economics (N * savings > cost) applied one level up; 64
+tasks may sit near the threshold, which is precisely why the sweep is
+informative. Conditional on the H11 development verdict; runs on
+development worlds first.
+
 ---
 Outcome log (append-only):
 - (none yet)

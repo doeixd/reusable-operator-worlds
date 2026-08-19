@@ -333,9 +333,16 @@ sleep, fired or refused.
       D(A) + sum_i KL(q(epsilon_i) || p(epsilon | A))
         <  sum_i KL(q(Delta_i) || p_0)
 
-  plus the lambda*dL and mu*dC charges. "A earns its existence." The
-  abstraction's form — continuous subspace, parameterized function,
-  discrete operator — is decided by the criterion, never imposed.
+  plus the lambda*dL and mu*dC charges, plus a selection charge of
+  log2(M) bits added to D(A) when the sleep considered M candidates
+  (review 17: choosing the best of M conveys information; without the
+  charge, sleep performs hidden search for free — numerically small at
+  ROW scale, charged on principle). "A earns its existence." In V3.1
+  the abstraction's FORM is fixed (rank-2 family, defaults below);
+  form discovery — continuous subspace vs parameterized function vs
+  discrete operator — is a later-rung question, with §4.3's
+  parameterized-family contingency as the only registered V3.1
+  deviation.
 - **Value split and refusal ledger.** Every candidate, fired or
   refused, logs:
 
@@ -459,7 +466,75 @@ a function's true information content (Blier & Ollivier, 1802.07044);
 the H9 130k-bit result may partly reflect fixed-width coding of
 structured near-zero residuals.
 
-## 4.3 Constitutional instrument rules (inherited, binding)
+## 4.3 Registered diagnostics and failure branches (review 17 —
+## adopted BEFORE any promotion run, so no failure is diagnosed with an
+## improvised instrument)
+
+**The oracle factorization bound (mandatory instrument).** For every
+promotion condition, computed post-hoc from the trained task functions
+jointly: the best achievable low-rank shared factorization
+`min_{A, eps_i} D(A) + sum_i D(eps_i)` subject to
+`d(F_i, A + eps_i) < delta` on `Z_audit`, fit by direct optimization
+with teacher access allowed (this is an analysis instrument, never a
+learner). It separates three distinct scientific outcomes wherever
+promotion fails: (A) no compact reusable factorization EXISTS in the
+learned functions (the wake learner scattered the structure — the
+gauge-freedom risk: gradient descent may represent F_i = (A+B) +
+(eps_i − B), rotating shared structure out of the residuals where
+PROMOTE looks); (B) it exists but the promoter cannot DISCOVER it
+(structural inference failed); (C) it exists, is found, but future
+tasks cannot USE it (abstraction access failed). Existence, discovery,
+and use are reported separately in every verdict — the discrete-route
+analogue (representation learned, exact posterior exploits it, online
+inference cannot) is V2's precedent for exactly this decomposition.
+
+**If H11.3 fails (M3 ladder, registered order):** (1) oracle reuse —
+tell the adapting model which abstraction applies; improvement means
+the abstraction is good and inference is the bottleneck; (2)
+retrieval-only — provide the top-k functionally similar abstractions;
+improvement means retrieval is the bottleneck; (3) gradient
+initialization — initialize adaptation from the promoted abstraction
+without forcing it; improvement means the optimization basin is the
+bottleneck. Whichever rung repairs M3 names the Phase III problem.
+
+**If literal bits do not fall (coding ladder, registered order):**
+evaluate the same artifacts under KL code -> entropy-coded
+quantization -> sparse structural encoding -> serialized bytes. A
+monotone improvement that int8 alone misses means fixed-width storage
+is the wrong physical implementation (a systems result); no
+improvement even under the KL code means the theory itself failed.
+These are different verdicts and are reported as such.
+
+**If the variational posterior collapses (KL -> 0 with bad
+prediction):** treat `beta` as a rate-distortion dial, not a tuning
+failure: report the full D(beta) vs L(beta) curve for promoted and
+unpromoted learners. If the promoted curve DOMINATES (lower D at every
+matched L across the beta grid), that is stronger evidence than any
+single registered point and is reported as a supplementary figure; the
+registered scalar endpoint remains primary.
+
+**If promotion keeps finding fake structure:** the §3.2 selection
+charge (below) plus disjoint probe sets are the designed guards;
+persistent false promotion after both is reported as a candidate-
+generation failure, not patched by quietly tightening `epsilon`.
+
+**Parameterized-abstraction contingency (registered branch, not scope
+creep):** if fixed-atom promotion systematically leaves residual error
+above `epsilon` while residuals clearly share structure (oracle bound
+case B with a near-miss), run ONE controlled comparison — fixed atom
+versus rank-k parameterized family `A(z; alpha_i)`, sweeping small k —
+before any redesign. If k = 1–2 dramatically improves compression, the
+elementary unit of the language is a parameterized operator family,
+and that finding (not an architecture pivot) is the V3.1 conclusion.
+
+**Expectation setting (binding on interpretation):** the promoted `A'`
+is NOT expected to match the teacher's component in parameter space —
+behaviorally equivalent factorizations are the predicted outcome, and
+all scoring is functional (§4.4). H12 likewise scores recovered shared
+degrees of freedom before symbolic strata; ontology recovery is not
+the bar.
+
+## 4.4 Constitutional instrument rules (inherited, binding)
 
 Functional instruments only — nothing downstream of the library may
 reference teacher identities (V2's uniform identity-instrument
@@ -530,6 +605,12 @@ horizon experiment — two worlds identical through task 32, one ending
 the learner. A truly prospective promotion policy promotes more
 readily in the long-horizon condition (N_future * s > C). The purest
 "abstraction as investment" test; not V3.1 scope.
+
+Also pre-registered for after H11 (review 17; ledger P-2026-08-19-H):
+the lifetime-length sweep N in {16, 32, 64, 128, 256} on the promotion
+testbed, testing for an abstraction-promotion amortization threshold
+N* — the (r, N) two-dimensional phase diagram (recurrence x lifetime
+-> optimal representation) is the target figure if both axes behave.
 
 # 8. Deferred workstreams
 

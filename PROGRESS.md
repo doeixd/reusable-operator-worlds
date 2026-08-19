@@ -908,3 +908,33 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   predictions ledger and staged it after H11 in the spec.
 - P-2026-08-19-E is scored on the drifting-family control; the ledger
   entry itself is append-only and unedited.
+
+# 2026-08-19 — reviewer-feedback-17 incorporated: registered diagnostics
+
+- Read reviewer-feedback-17 in full (the post-spec prediction tree).
+  Its concrete instruments were adopted into the V3 spec BEFORE any
+  promotion run, as a new section 4.3 "Registered diagnostics and
+  failure branches": the mandatory oracle factorization bound
+  separating existence / discovery / use (with the gauge-freedom risk
+  named — shared structure may rotate out of the residuals where
+  PROMOTE looks); the M3 failure ladder (oracle reuse -> retrieval-only
+  -> gradient initialization) naming the Phase III bottleneck; the
+  coding ladder (KL -> entropy-coded -> sparse -> serialized bytes)
+  separating a systems verdict from a theory failure; the
+  posterior-collapse rule (report the full D(beta)-vs-L(beta)
+  rate-distortion curves, promoted-curve dominance as supplementary
+  evidence); the parameterized-family contingency as the single
+  registered V3.1 deviation; and interpretation guards (behaviorally
+  equivalent factorization expected, not weight recovery; H12 scores
+  shared degrees of freedom before symbolic strata).
+- The promotion criterion now includes a log2(M) candidate-selection
+  charge so sleep cannot perform hidden search for free; the stale
+  "form is never imposed" sentence was reconciled with the review-16
+  fixed-form decision.
+- Added P-2026-08-19-H (lifetime-length sweep N 16-256; monotone
+  correct-promotion rate and an interpolable amortization threshold
+  N*; conditional on H11) and staged the (r, N) phase diagram next to
+  the horizon experiment in section 7.
+- No architecture was added; feedback-17's V4-era material (search
+  debt, copy-on-write forking, hierarchy, macro/loop/branch economics)
+  is already staged and stays staged.
