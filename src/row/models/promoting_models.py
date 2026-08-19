@@ -266,6 +266,10 @@ class PromotingSharedResidualLearner(SharedParentResidualLearner):
         selection_bits = math.log2(len(partitions))
 
         before = self._behavior(eligible, probe_validation)
+        # One global abstraction over ALL eligible tasks, fitted once per
+        # sleep. A candidate must beat this on held-out members or it is
+        # generic compression rather than a family-specific abstraction.
+        global_fit = self._fit_abstraction(eligible, probe_proposal)
 
         def _deviation(task_id: str, reference: Tensor) -> float:
             after = self.forward(probe_validation, task_id)
@@ -284,7 +288,7 @@ class PromotingSharedResidualLearner(SharedParentResidualLearner):
 
             index = len(self.abstractions)
             self.abstractions.append(nn.Parameter(candidate.clone(), requires_grad=False))
-            accepted, generalizing, deviations = [], [], []
+            accepted, deviations = [], []
             for task_id in members:
                 self.task_reference[task_id] = index
                 self.retired.add(task_id)
@@ -292,11 +296,32 @@ class PromotingSharedResidualLearner(SharedParentResidualLearner):
                 deviations.append(deviation)
                 if deviation <= epsilon:
                     accepted.append(task_id)
-                    if task_id in held:
-                        generalizing.append(task_id)
                 del self.task_reference[task_id]
                 self.retired.discard(task_id)
             self.abstractions = nn.ParameterList(list(self.abstractions)[:index])
+
+            # V_transfer: on members it was NOT fitted on, does this
+            # abstraction beat the single global abstraction? A cluster whose
+            # candidate merely compresses its own members is a quantization
+            # artifact; one that predicts a task it never saw is reusable
+            # structure. This is the leave-one-out logic promotion claims,
+            # applied as the promoter's own gate.
+            generalizing = []
+            for task_id in held:
+                own, other = [], []
+                for value, bucket in ((candidate, own), (global_fit, other)):
+                    slot = len(self.abstractions)
+                    self.abstractions.append(
+                        nn.Parameter(value.clone(), requires_grad=False)
+                    )
+                    self.task_reference[task_id] = slot
+                    self.retired.add(task_id)
+                    bucket.append(_deviation(task_id, before[task_id]))
+                    del self.task_reference[task_id]
+                    self.retired.discard(task_id)
+                    self.abstractions = nn.ParameterList(list(self.abstractions)[:slot])
+                if own[0] < other[0] and own[0] <= epsilon:
+                    generalizing.append(task_id)
 
             reference_bits = math.ceil(math.log2(len(self.abstractions) + 2))
             retro = (

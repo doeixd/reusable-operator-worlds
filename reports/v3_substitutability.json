@@ -1,0 +1,26 @@
+[
+  {
+    "world_seed": 0,
+    "leave_one_out": true,
+    "common": {
+      "private_residual_nmse": 0.01274308242980779,
+      "family_abstraction_nmse": 0.017888855197742904,
+      "global_abstraction_nmse": 0.02046700710346919,
+      "zero_residual_nmse": 0.0223687409478811,
+      "load_bearing_span": 0.009625658518073312,
+      "family_capture_fraction": 0.4654108331109692,
+      "global_capture_fraction": 0.19756921989713025,
+      "family_advantage": 0.2678416132138389
+    },
+    "trajectory": {
+      "private_residual_nmse": 0.01274308242980779,
+      "family_abstraction_nmse": 0.01785547646865324,
+      "global_abstraction_nmse": 0.020462987380172704,
+      "zero_residual_nmse": 0.0223687409478811,
+      "load_bearing_span": 0.009625658518073312,
+      "family_capture_fraction": 0.468878515766342,
+      "global_capture_fraction": 0.19798682491490005,
+      "family_advantage": 0.27089169085144194
+    }
+  }
+]

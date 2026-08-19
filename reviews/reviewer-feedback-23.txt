@@ -350,3 +350,554 @@ Then the V3 question becomes very clean:
 And if the functional fit **doesn't** make that jump, that's equally useful: you've learned that even a deliberately repeated primitive becomes represented as a *family of context-dependent neural implementations*, and V3 needs to promote a parameterized equivalence class rather than a fixed operator.
 
 Either outcome moves the project forward.
+Yes. **This is the point where I would finally say the V3 testbed is valid enough to let PROMOTE touch it.**
+
+You now have all three properties that the earlier gates were only imperfect proxies for:
+
+[
+\boxed{\text{residuals are load-bearing}}
+]
+
+because
+
+[
+0.0127\rightarrow0.0224
+]
+
+when you remove them;
+
+[
+\boxed{\text{there is compressible shared functional structure}}
+]
+
+because the family functional fit recovers **53.4%** of their behavioral value;
+
+and crucially,
+
+[
+\boxed{\text{the structure is family-specific}}
+]
+
+because one global abstraction recovers only **24.0%**, leaving a **29.4-point advantage** for the correct family decomposition, 3/3 worlds.
+
+That last control is what makes this a promotion world rather than a deletion/quantization world.
+
+## The progression is actually beautiful
+
+You started with a seemingly simple assumption:
+
+[
+\text{shared teacher structure}
+\Rightarrow
+\text{similar learned residual parameters}.
+]
+
+The experiments systematically dismantled that.
+
+First:
+
+[
+\text{recurrent structure}\rightarrow\text{routes/shared slots}
+]
+
+when free shared capacity existed.
+
+Then, after saturating the library:
+
+[
+\text{recurrent structure}\rightarrow\text{residuals}.
+]
+
+But:
+
+[
+\text{residual clustering}
+\not\Rightarrow
+\text{useful abstraction}.
+]
+
+Then:
+
+[
+\text{family recovery}=1.0
+]
+
+still wasn't enough.
+
+Then:
+
+[
+\text{parameter mean}
+]
+
+failed because of gauge freedom.
+
+Finally:
+
+[
+\boxed{
+\text{functional substitutability}
+}
+]
+
+found the thing you actually care about.
+
+I think that is a real methodological contribution by itself.
+
+---
+
+# I would now make this the constitutional definition of a promotable abstraction
+
+A candidate family (A) is not “shared structure” because parameters are similar.
+
+Nor because tasks cluster.
+
+Nor even because the hidden teacher says so.
+
+It is reusable iff:
+
+[
+A^*
+===
+
+\arg\min_A
+\sum_{\tau\in C}
+d(F_\tau,A)
+]
+
+can actually substitute for the private computations while preserving a significant fraction of their behavioral value.
+
+And it must outperform the simpler alternatives:
+
+[
+A_{\rm family}
+\quad\text{vs}\quad
+A_{\rm global}
+\quad\text{vs}\quad
+0.
+]
+
+So the gate becomes conceptually:
+
+[
+\boxed{
+\begin{aligned}
+\text{load-bearing?} &\quad F_{\rm private} > 0\
+\text{compressible?} &\quad A_{\rm family}\approx F_{\rm private}\
+\text{specific?} &\quad A_{\rm family}>A_{\rm global}
+\end{aligned}}
+]
+
+That's much better than “3× within-family similarity.”
+
+---
+
+## I would still do leave-one-out before calling the oracle completely clean
+
+This is the one remaining thing I'd insist on.
+
+When fitting family abstraction (A_f), don't let task (\tau)'s own residual contribute to the abstraction used to evaluate (\tau).
+
+Fit:
+
+[
+A_{f,-\tau}
+]
+
+on the other family members and substitute it into (\tau).
+
+If the family/global gap persists under:
+
+[
+A_{f,-\tau},
+]
+
+then you've demonstrated true **cross-task reusable computation** rather than merely compressing a collection jointly.
+
+Given your numbers, I expect it to survive, perhaps somewhat weaker.
+
+This matters enormously because PROMOTE's intended semantics are prospective:
+
+> Previous tasks teach me (A); a new related task can reuse (A).
+
+Leave-one-out is the smallest version of that.
+
+---
+
+# 53% capture is probably enough—but it's telling you something
+
+A deliberately repeated teacher primitive only produces:
+
+[
+53.4%
+]
+
+functional capture with the fixed rank-2 promoted operator.
+
+That is quite informative.
+
+The remaining:
+
+[
+46.6%
+]
+
+could come from:
+
+* interactions with existing shared operators;
+* context-dependent compensation;
+* task-specific optimization trajectories;
+* rank-2 abstraction-family limitations;
+* different internal coordinate systems.
+
+I would **not fix that before PROMOTE**.
+
+You don't need 100%.
+
+The economic question is:
+
+[
+\text{Does the 53% shared portion save enough repeated private bits to pay for itself?}
+]
+
+That's more realistic anyway.
+
+Real abstractions won't explain every detail.
+
+They should capture the common part and leave:
+
+[
+\epsilon_\tau
+]
+
+behind.
+
+---
+
+# The actual PROMOTE event should now be very explicit
+
+Before:
+
+[
+R_\tau.
+]
+
+After:
+
+[
+R_\tau
+\approx
+A_f+\epsilon_\tau.
+]
+
+So charge:
+
+[
+D_{\rm before}
+==============
+
+\sum_{\tau\in f}D(R_\tau).
+]
+
+And:
+
+[
+D_{\rm after}
+=============
+
+D(A_f)
++
+\sum_{\tau\in f}
+\left[
+D(\operatorname{ref}A_f)
++
+D(\epsilon_\tau)
+\right]
++
+D_{\rm selection}.
+]
+
+Then require:
+
+[
+D_{\rm after}<D_{\rm before},
+]
+
+while:
+
+[
+\Delta L\le\epsilon.
+]
+
+You don't need the abstraction to recover the other 47% if the residual offsets remain cheap enough.
+
+---
+
+# And now the migration curve becomes meaningful
+
+This was impossible to interpret in the earlier worlds.
+
+Now if PROMOTE fires, you should literally see:
+
+[
+D_{\rm shared}\uparrow
+]
+
+because (A_f) has been born,
+
+while:
+
+[
+D_{\rm task}\downarrow
+]
+
+because 24 private residuals have been partially replaced by references plus smaller corrections.
+
+Then:
+
+[
+D_{\rm total}\downarrow.
+]
+
+This is finally the V3 event you've been trying to create.
+
+The shared bits **weren't preallocated this time**.
+
+That's critical.
+
+---
+
+# One thing to watch carefully when wiring the functional fitter
+
+Don't allow PROMOTE's fitting optimization to silently become an enormous free search procedure.
+
+You've already added the (\log_2 M) candidate-selection charge, which is good.
+
+But there are two costs:
+
+### Selection information
+
+Which candidate did we choose?
+
+[
+D_{\rm select}\sim\log_2M.
+]
+
+### Fitting computation
+
+How much optimization was required to discover (A)?
+
+That's not retained description length, so it belongs under:
+
+[
+C_{\rm search}
+]
+
+rather than (D).
+
+You currently have (\mu=0), so don't charge it in V3.1, but **log it**.
+
+You may later discover:
+
+> promotion saves storage but requires 10,000× more compute than simply retaining residuals.
+
+That becomes V4 economics.
+
+Don't muddy V3 with it; just preserve the data.
+
+---
+
+# Functional candidate fitting should remain isolated
+
+I'd keep exactly the discipline you established:
+
+[
+Z_{\rm proposal}
+]
+
+for fitting;
+
+[
+Z_{\rm validation}
+]
+
+for accept/reject;
+
+[
+Z_{\rm audit}
+]
+
+for final reporting.
+
+And now I'd add the global fit to the normal audit output:
+
+```text
+private residual
+family functional fit
+global functional fit
+zero residual
+```
+
+That should become a standard promotion diagnostic forever.
+
+It tells you immediately whether PROMOTE is doing:
+
+* genuine abstraction;
+* generic compression;
+* deletion.
+
+---
+
+# The prospective/refusal problem will probably come back
+
+Even with a valid structured world, I still expect your first PROMOTE criterion may be too eager.
+
+Because if a cluster of three residuals can be functionally approximated well, retrospective storage savings may justify making lots of tiny abstractions.
+
+So the real discriminating question remains:
+
+[
+\boxed{
+\text{Does this regularity predict another task?}
+}
+]
+
+Your leave-one-out measurement is actually a very natural estimator for that.
+
+Instead of an elaborate (V_{\rm future}) predictor at first:
+
+[
+V_{\rm transfer}(A)
+===================
+
+\text{held-out member improvement from }A_{-\tau}.
+]
+
+That's almost exactly what you want.
+
+If a candidate:
+
+* compresses its fitted members;
+* but doesn't help a held-out member,
+
+it's probably a quantization artifact rather than a useful abstraction.
+
+That could be a much cleaner prospective gate than some of the earlier schemes.
+
+---
+
+# I would expect PROMOTE to behave much better now
+
+My rough prediction:
+
+### Structured family world
+
+Functional fitting should produce a small number of candidates, likely approximately the two true families, and promotion should have real opportunity to reduce bits.
+
+### Structureless control
+
+You may still generate candidate clusters, but:
+
+[
+A_{\rm family}
+\approx
+A_{\rm global}
+]
+
+or:
+
+[
+A_{\rm family}
+\approx0
+]
+
+should destroy the economic case once the global/zero controls and held-out substitution are included.
+
+### Drifting family
+
+Retrospective family fit may look good within windows, but leave-one-out/temporal validation should be weaker.
+
+That's exactly where prospective value should matter.
+
+---
+
+# There is another exciting interpretation if PROMOTE works
+
+The learned abstraction will almost certainly **not equal the seventh teacher primitive** in parameters.
+
+And it may not even equal it exactly as a function.
+
+Instead it will be something like:
+
+[
+A_f^*
+=====
+
+\text{best shared explanation of how this particular learner compensated for the missing primitive}.
+]
+
+That's arguably better.
+
+It means you're not recovering hidden teacher modules.
+
+You're discovering:
+
+[
+\boxed{
+\text{a reusable abstraction in the learner's own computational language}.
+}
+]
+
+That's much closer to the real problem.
+
+An LLM won't come with teacher primitive identities.
+
+It will have lots of idiosyncratic adaptations, and you want to find the reusable functional regularity **within those learned adaptations**.
+
+This testbed now models that.
+
+---
+
+## The most important thing you've learned so far in V3
+
+I think there is now a hierarchy of increasingly strong notions of “shared structure”:
+
+[
+\text{parameter similarity}
+]
+
+<
+
+[
+\text{statistical clustering}
+]
+
+<
+
+[
+\text{recoverable latent identity}
+]
+
+<
+
+[
+\text{functional similarity}
+]
+
+<
+
+[
+\boxed{\text{cross-task substitutability}}
+]
+
+<
+
+[
+\boxed{\text{prospective learning value}}.
+]
+
+And V3 has been climbing that ladder because every weaker criterion failed in a different way.
+
+That is scientifically valuable.
+
+I'd continue wiring the functional fitter into PROMOTE now. I wouldn't redesign anything further **unless leave-one-out substitution collapses**. If LOO preserves a substantial family-over-global advantage, this is finally the clean world in which the actual abstraction-birth experiment deserves to run.

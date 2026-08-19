@@ -713,6 +713,74 @@ motivated and gives it a stronger causal test.
 
 ---
 
+# V3 testbed: the validity-gate failure and the functional-substitutability gate
+
+## 20. Spare shared capacity absorbs recurrence into routes, not residuals
+
+The original V3 testbed assumed recurrent structure would sit patiently in
+task-local residuals until sleep discovered it. It doesn't. When unused shared
+capacity exists, gradient descent puts the recurring family structure **directly
+into the shared basis and addresses it through the route/reference channel**.
+So there was nothing for residual-clustering PROMOTE to factor. This is a "very
+good failure" — the validity gate did its job — but it is not yet MDL-driven
+promotion: the slots were preallocated and already paid for, and the optimizer
+wasn't charged 192 vs 17,712 bits. It establishes that unused shared capacity
+gets spontaneously used for recurrent cross-task structure, which is more
+interesting than residual clustering but is a different claim than "promotion
+creates new shared capacity at a cost."
+
+## 21. The saturated-library / delayed-family testbed redesign
+
+The cleaner V3 testbed forces the abstraction to be *born*: Phase A saturates
+the existing library (K=6, verify each slot is load-bearing by ablation), then
+Phase B introduces a hidden family component with no shared slot for it, so it
+must appear as residuals R_τ ≈ A + ε_τ. Then PROMOTE literally creates
+K=6→7 by setting P_7 = A. The accounting is explicit:
+D_before = D(L_6) + Σ D(R_i) vs D_after = D(L_6) + D(P_7) + Σ[D(ref_7) + D(ε_i)],
+promote iff D_after < D_before at matched prediction. An oracle gate J*(K+1) <
+J*(K) must be established first so the world guarantees there is actually
+something for PROMOTE to discover. This is the V3 analogue of validating that
+V1's teacher structure exists before testing learners.
+
+## 22. Parameter averaging is dead; functional substitutability is the gate
+
+Parameter means captured only ~12% of residual value despite 1.000 family
+recovery — the gauge-freedom / non-identifiability failure is now clean
+evidence. The decisive object is the **functional** fit
+A_f* = argmin_A Σ E_z[|R_τ(z) − A(z)|²], and the operational gate is
+**family-specific functional substitution must recover a substantial fraction of
+the full residual's value and outperform both zeroing and a single global
+abstraction.** The gate now passes: residuals are load-bearing (0.0127→0.0224
+when removed), family functional fit recovers 53.4% of behavioral value, global
+recovers only 24.0% (29.4-point family advantage, 3/3 worlds). Leave-one-out
+functional fitting (A_{f,−τ} substituted into held-out τ) is the remaining
+prerequisite and doubles as a clean prospective-gate estimator. 53% capture is
+probably enough — the economic question is whether the shared part saves enough
+repeated private bits to pay for itself; real abstractions leave ε_τ behind.
+
+## 23. PROMOTE redefined; the hierarchy of "shared structure" notions
+
+PROMOTE is no longer "factor repeated residuals." It is **allocate shared
+representational capacity to recurring innovation** — the structural event is
+private computational capacity → shared computational capacity, which generalizes
+to creating operators, low-rank directions, parameterized families, macros, or
+memory entries. This also yields a two-level structural-learning theory: cheap
+inner adaptation reorganizes existing capacity when it can express the recurrence;
+expensive outer restructuring (PROMOTE) grows the language only when existing
+capacity cannot absorb recurrence economically — so PROMOTE should fire when
+(recurrence exists) + (existing capacity cannot absorb it economically). The
+project has climbed a ladder of increasingly strong notions of "shared structure"
+because every weaker criterion failed in a different way:
+
+parameter similarity < statistical clustering < recoverable latent identity <
+functional similarity < cross-task substitutability < prospective learning value.
+
+That ladder is itself a methodological contribution. The learned abstraction will
+be a reusable object in the **learner's own computational language** (not a
+recovered teacher module), which is exactly the LLM-relevant problem.
+
+---
+
 # Current bottom line
 
 The cleanest statement the evidence currently supports is:
@@ -733,4 +801,9 @@ The cleanest statement the evidence currently supports is:
 
 The next step is **not more architectural complexity**. It is the V3 promotion
 experiment on a correctly-coded (gated or H9-fallback) wake substrate, with
-refusal controls, under both predictive and description-length accounting.
+refusal controls, under both predictive and description-length accounting. The
+immediate prerequisite is the **saturated-library testbed** with the
+functional-substitutability validity gate (family fit > global > zero,
+leave-one-out confirmed) and the oracle J*(K+1) < J*(K) established, so that
+PROMOTE has something real to discover — not a world where spare shared capacity
+silently absorbs the recurrence into routes.

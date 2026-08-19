@@ -375,3 +375,57 @@ currencies (REFERENCE / ARGUMENT / INNOVATION) that should not share one
 generic regularizer, and that the self-programming architecture may require a
 typed description language (CALL / CALL(α) / INNOVATE(R) / PROMOTE→j_new, then
 later MACRO/REPEAT/IF) before it requires sophisticated program syntax.
+
+### [reviewer-feedback-22.txt](reviewer-feedback-22.txt)
+A "very good failure": the V3 validity gate did its job. The central discovery is
+that when spare shared capacity exists, ordinary wake learning puts recurrent
+family structure **directly into the shared basis and addresses it via routes**,
+not into task-local residuals — so there is nothing for residual-clustering
+PROMOTE to discover. This is more interesting than residual clustering, but it
+isn't yet MDL-driven promotion (the slots were preallocated and already paid
+for; the optimizer wasn't charged 192 vs 17,712 bits). The missing thing remains:
+does the learner **create** shared representational capacity when doing so has a
+cost? Cautions that 8 families > 2 spare slots may not force residuals either
+(continuous networks can use mixtures, rotations, distributed families). Proposes
+a cleaner **saturated-library / delayed-family** testbed: Phase A saturate the
+existing library (K=6, ablate-verify each slot is load-bearing), Phase B
+introduce a hidden family component with no shared slot for it, so it must appear
+as residuals R_τ ≈ A + ε_τ, then PROMOTE literally creates K=6→7 (abstraction
+birth). The accounting becomes D_before = D(L_6)+ΣD(R_i) vs D_after =
+D(L_6)+D(P_7)+Σ[D(ref_7)+D(ε_i)]. Adds an oracle gate J*(K+1)<J*K before
+developing PROMOTE, three causal route/slot interventions to verify today's
+"implicit promotion" result (route equalization, route swap, slot ablation), and
+redefines PROMOTE as "allocate shared representational capacity to recurring
+innovation" (private→shared capacity), not just factor residuals. Notes a
+two-level structural-learning theory (cheap inner adaptation reorganizes existing
+capacity; expensive outer restructuring grows the language only when existing
+capacity cannot absorb recurrence economically) and a richer phase diagram
+R* = f(r, N, K, C_create). Keeps P-I paused until the testbed is fixed.
+
+### [reviewer-feedback-23.txt](reviewer-feedback-23.txt)
+The gauge-freedom failure is now clean evidence: 1.000 family recovery while
+parameter means capture only ~12% — so parameter averaging is dead. The decisive
+object is the **functional** fit A_f* = argmin_A Σ E_z[|R_τ(z)−A(z)|²]. Proposes
+a **leave-one-out functional fitting** gate: fit A_{f,−τ} on other family members
+and substitute into held-out τ, comparing L(full residual) vs L(A_{f,−τ}) vs
+L(A_{global,−τ}) vs L(0) — one experiment giving load-bearing / generic-vs-family /
+reusable / ceiling. Replaces the "3× within-family similarity" proxy with an
+operational gate: family-specific functional substitution must recover a
+substantial fraction of the full residual's value and outperform both zeroing and
+a single global abstraction. Distinguishes common-domain functional similarity
+from on-trajectory substitutability (PROMOTE should ultimately use the latter).
+Reports the gate now passes: residuals load-bearing (0.0127→0.0224 when removed),
+family functional fit recovers 53.4% of behavioral value, global recovers only
+24.0% (29.4-point family advantage, 3/3 worlds) — so the V3 testbed is finally
+valid enough for PROMOTE. Frames the progression through five failed/weakened
+notions of "shared structure" (parameter similarity < statistical clustering <
+latent identity < functional similarity < cross-task substitutability <
+prospective learning value) as a real methodological contribution. Notes 53%
+capture is probably enough (the economic question is whether the shared part
+saves enough repeated private bits to pay for itself; real abstractions leave
+ε_τ behind), the PROMOTE event is now explicit (R_τ → A_f + ε_τ with D_after <
+D_before at ΔL≤ε), and the learned abstraction will be a reusable abstraction in
+the **learner's own computational language** (not a recovered teacher module) —
+which is exactly the LLM-relevant problem. Keeps the proposal/validation/audit
+probe discipline and adds global-fit to the standard promotion diagnostic;
+suggests leave-one-out transfer as a clean prospective gate.

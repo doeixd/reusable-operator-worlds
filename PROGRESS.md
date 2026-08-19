@@ -1261,3 +1261,32 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Functional fitting is now wired into PROMOTE and the six unit tests
   still pass. Re-running the operator on the structured testbed and the
   structureless control, which together test P-2026-08-19-E.
+
+# 2026-08-19 — leave-one-out substitutability: the gate the earlier proxies were reaching for
+
+- Ran the PI-insisted leave-one-out test: the abstraction substituted into
+  task tau is fitted WITHOUT tau's own residual, so what is measured is
+  cross-task reuse rather than joint compression of a fixed collection.
+  World 0: private 0.01274, family 0.01789, global 0.02047, zero 0.02237 —
+  family capture 46.5% against global 19.8%, a +26.8 point advantage. The
+  joint fit gave 53.4%, so leave-one-out costs only ~7 points: the shared
+  function genuinely transfers to a member it was never fitted on.
+- Two probe distributions agree closely (common-domain 46.5%, on-trajectory
+  46.9%), so the abstraction is equivalent both as an operator and as a
+  substitution on the states the task actually visits.
+- The gate is now stated operationally and replaces the original
+  "within-family similarity exceeds cross-family by a factor of 3", which
+  was an indirect proxy that certified two unusable worlds:
+    load-bearing?    removing the private computation must cost something
+    compressible?    one fitted shared function recovers much of it
+    family-specific? it must beat a single global abstraction
+  The four-way audit (private / family / global / zero) becomes the
+  standard promotion diagnostic, because only the spread between those
+  four separates abstraction from generic compression from deletion.
+- PROMOTE with functional fitting separated structured from control
+  (8.7 abstractions against 6.0, refusals 0-1 against 2-3) but the control
+  still promoted. Replaced the prospective test with the leave-one-out
+  estimator the PI suggested: a candidate must beat the single GLOBAL
+  abstraction on members it was not fitted on. A candidate that only
+  compresses its own members is a quantization artifact; one that predicts
+  a task it never saw is reusable structure.
