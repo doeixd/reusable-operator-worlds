@@ -148,20 +148,34 @@ buried here.
 When abstraction birth is imperfect, evidence from subsequent reuse lets a
 learner distinguish abstractions that deserved to exist from abstractions
 that merely looked promising when they were born. Concretely: a learner
-with PROMOTE + RETAIN/DELETE reaches a lower lifetime objective
-`J = L + lambda*D` than the frozen V3 PROMOTE-only learner on the same
-worlds and seeds, without sacrificing prediction or future-task
-adaptation, and its surviving library is markedly smaller in structureless
-controls than in structured worlds.
+with PROMOTE + RETAIN/DELETE improves on the frozen V3 PROMOTE-only
+learner. Registered as TWO outcomes, because they can dissociate and a
+single composite would hide which one failed:
+
+- **H14a (economic).** `J = L + lambda*D` is lower than PROMOTE-only on
+  the same worlds and seeds, without degrading lifetime prediction,
+  future-task adaptation, or old-task retention beyond their
+  non-inferiority margins.
+- **H14b (differential survival).** Survival is selective: the fraction
+  of births that survive to the end of the lifetime is materially higher
+  in structured worlds than in matched structureless controls.
+
+H14a can pass while H14b fails (deleting everything shrinks `D` and would
+improve `J` in both conditions equally — which is compression, not
+selection). H14b can pass while H14a fails (selection works but the bits
+saved do not repay the migration cost). Only the conjunction supports the
+charter.
 
 **Primary causal comparison:** PROMOTE+DELETE against frozen V3
 PROMOTE-only, same seeds, re-run rather than reused, so pairing is exact.
+The unfrozen basis and the 2x-updates comparator (§0.1) are reported
+alongside as standing comparators.
 
-**Falsifiers.** DELETE fires indiscriminately (survival rates in
-structured and control worlds within noise of each other); or `J` fails to
-improve over PROMOTE-only; or improvement in `J` is bought by degrading
-either lifetime prediction or future-task adaptation beyond the
-non-inferiority margin.
+**Falsifiers.** `J` fails to improve (H14a); or survival rates in
+structured and control worlds are within noise of each other (H14b); or
+improvement is bought by degrading prediction, future adaptation, or
+old-task retention past their margins. A learner that deletes its entire
+library in both conditions falsifies H14b even if `J` improves.
 
 **What H14 does NOT claim.** It does not claim the surviving library
 matches the teacher's family count. Library size is a diagnostic
@@ -221,6 +235,29 @@ adaptation lag and **H17 is falsified**. If it converges to a positive
 constant the loop is economic. No hysteresis claim may be made from a
 single sweep rate.
 
+**A second confound, and a binding constraint on V4.1 because of it.**
+Review 26 observes that generational garbage collection — treat young
+allocations as speculative and monitor them aggressively, require stronger
+evidence to reclaim old ones — *naturally generates hysteresis*. That is
+offered as an attraction, and it is one architecturally, but for H17 it is
+fatal: if V4.1's retention rule hard-codes any asymmetry between young and
+old abstractions, then `r_create > r_delete` is BUILT INTO THE RULE and
+its observation is a tautology rather than a finding.
+
+Therefore, registered as a constraint on the earlier rung: **V4.1's
+retention rule must be age-neutral.** The only concession is a fixed
+GRACE PERIOD of `G` tasks after birth during which an abstraction is
+exempt from deletion, which is required because `s_bar(A)` is undefined
+before an abstraction has been reused at all, and which applies equally to
+every abstraction regardless of when it was born. `G` is fixed in advance
+and reported. Any age-dependent retention threshold beyond that grace
+period is forbidden in V4.1 and V4.4.
+
+If a generational rule is later wanted for its engineering merits, it is
+introduced only AFTER H17 has been tested with the age-neutral rule, and
+any hysteresis it produces is reported as a property of the rule rather
+than of the economics.
+
 ## H18 — Priced retrieval (exploratory)
 
 With `gamma > 0` charged on retrieval and inference, optimal library size
@@ -264,10 +301,17 @@ counter, and it is the direct analogue of V3's regime-change world.
 
 ## 2.3 Frequency is not value
 
-A world containing one abstraction reused often for small savings and
-another reused rarely for large savings. A rational lifecycle compares
-`N_reuse * S_reuse`, not `N_reuse`. Registered because a popularity
-heuristic would pass every other world in this spec.
+A world containing two hidden families with deliberately mismatched
+frequency and value: family LOW is used by many tasks but its primitive is
+close to something the frozen basis can already express (small per-use
+saving), while family HIGH is used by few tasks but its primitive is far
+from anything expressible (large per-use saving). Concretely, LOW's new
+primitive is drawn as a small perturbation of an existing base primitive
+and assigned to 32 tasks; HIGH's is drawn independently and assigned to 8.
+A rational lifecycle compares `N_reuse * s_bar`, not `N_reuse`, and must
+retain HIGH. Registered because a popularity heuristic would pass every
+other world in this spec, and because `V_retain` as specified in §3.2
+multiplies rate by per-use saving precisely so that it can.
 
 ## 2.4 Per-operation refusal controls
 
@@ -306,20 +350,51 @@ rules are specified here rather than inherited from an implementation.
 An abstraction with no current use is not thereby worthless; its regime
 may return. Retention therefore asks what the option to reuse is worth:
 
-    V_retain(A) = S(A) + P(return) * S_expected(A) - D_retain(A) - C(A)
+    V_retain(A) = P(return) * H * s_bar(A) - D_retain(A) - C(A)
 
-with `S(A)` realized savings in bits, `D_retain` the bits to keep it, and
-`C(A)` the retrieval charge (zero until H18).
+with `s_bar(A)` the abstraction's mean REALIZED saving per reuse in bits
+(estimated from its own history, undefined and therefore infinite-value
+for an abstraction never yet reused, which is why newborns are protected
+by the grace period below), `H` the expected number of remaining tasks,
+`D_retain(A)` the bits to keep it, and `C(A)` the retrieval charge (zero
+until H18). Realized past savings are deliberately NOT in the sum: they
+are sunk, and including them would make an abstraction's retention depend
+on history it can no longer influence.
 
 **The evidence window is frozen here, before any tuning** (plan open
-question 1): `P(return)` is estimated by an exponential-decay recency
-model over the abstraction's reuse history, with a single time constant
-`tau` selected once on development worlds 0-2 and then fixed. Alternatives
-considered and rejected for V4.1: a fixed lookback (discards the
-distinction between a long-dormant and a never-used abstraction) and a
-change-point detector (more expressive but introduces a second free
-mechanism into the rung whose whole point is the simplest possible
-survival rule).
+question 1): `P(return)` is a recency-weighted reuse rate with a single
+time constant `tau`.
+
+**A trap this formulation walks into, and the fix.** A recency-weighted
+rate decays monotonically during an absence, so with a fixed `tau` it
+either always survives a dormancy gap of length `g` (if `tau >> g`) or
+never does (if `tau << g`) — and the dormancy arms are byte-identical
+until the regime would return, so NO estimator using only observed history
+can behave differently across them before that point. The refusal control
+is therefore NOT "retain in one arm, delete in the other" during the gap;
+that is unachievable by construction and demanding it would be demanding
+clairvoyance, the exact error V3's regime-change world was built to avoid.
+
+The achievable and registered criterion is about CALIBRATION of the
+deletion horizon against gap length:
+
+- across worlds with varying gap length `g`, the abstraction survives
+  short gaps and is retired after long absences, with the crossover
+  falling inside a registered interval of `g`;
+- `tau` is selected once on the STRUCTURED world with no dormancy, so the
+  dormancy worlds remain held out for the refusal test and the rule is
+  not tuned on the world that scores it;
+- the permanent arm must delete within a registered deadline (30 tasks
+  after the regime ends) or H14b's refusal clause fails.
+
+**Delete-and-re-promote is a legitimate policy, not a failure.** In the
+returning arm the learner may retire an abstraction during the gap and
+promote an equivalent one when the regime resumes. Whether that beats
+retaining depends on `D_retain` against the cost of re-promotion, which
+is precisely the economic question. Scoring therefore uses `J` and the
+resurrection is recorded in lineage as a re-birth with its parent noted;
+"must retain" is a prediction about which policy wins, not a rule imposed
+on the learner.
 
 ## 3.3 Deterministic edit policy
 
@@ -330,7 +405,23 @@ apply the single best, recompute, and repeat until no candidate improves
 over global search deliberately, so that a later comparison against global
 search is possible; the log makes that comparison cheap.
 
-## 3.4 Deletion semantics
+## 3.4 Addressing, and a recorded prediction about it
+
+V4.1 addresses abstractions by physical index, which is adequate while
+PROMOTE and DELETE are the only operations: deletion tombstones an entry
+rather than compacting the list, so live references never shift.
+
+Review 26 predicts this will not survive MERGE, because consolidating two
+abstractions forces every dependent of both to have its reference
+rewritten, and that an indirection layer — stable abstraction IDs mapped
+to current implementations, i.e. a symbol table — will be forced by the
+economics rather than chosen. **The prediction is recorded here so that if
+it happens it is recorded as FORCED rather than designed**, which is the
+same discipline that made PROMOTE's own necessity credible. V4.1 does not
+build it; V4.2 reports whether reference-rewrite cost in the migration
+ledger justified it.
+
+## 3.5 Deletion semantics
 
 Deleting an abstraction does NOT restore its dependents' private residuals
 — those were retired and their bits reclaimed. Dependents must re-adapt
@@ -369,6 +460,18 @@ Because ROW gives the whole future stream post hoc, an offline clairvoyant
 oracle can compute the best achievable lifecycle decisions:
 
     R_lifecycle = J_online - J_oracle
+
+**Defined tractably, because the unrestricted version is exponential.**
+The oracle takes the online learner's BIRTHS as given and optimizes only
+the keep/delete decision for each abstraction, independently, with all
+other decisions held at the online learner's values: for each abstraction
+compute `J` with it retained for the whole lifetime and `J` with it
+deleted at birth, and take the better. This is a lower bound on the true
+oracle (it cannot exploit interactions between abstractions or choose
+deletion times) and therefore a CONSERVATIVE regret: measured regret is at
+least the reported figure. Reporting a conservative bound is preferred to
+reporting an intractable ideal, and the restriction is stated wherever
+regret is quoted.
 
 This separates "the representation is poor" from "the representation is
 fine but the learner forecasts future reuse poorly", which is otherwise
@@ -417,6 +520,22 @@ cross-world aggregation.
 
 ---
 
+## 4.7 Fixed operational constants
+
+Frozen here so they cannot drift during development:
+
+| constant | value | rationale |
+| --- | --- | --- |
+| consolidation points | after tasks 24, 32, 48, 64 | V3's schedule, unchanged, so promotion behaves identically |
+| grace period `G` | 8 tasks after birth | `s_bar` is undefined before first reuse; age-neutral otherwise (§H17) |
+| deletion deadline (permanent arm) | 30 tasks after regime end | makes "eventually delete" falsifiable |
+| substitutability tolerance | `epsilon = 0.02` NMSE | V3's frozen value, on disjoint probes |
+| `lambda` | `ln 2` | the two-part exchange rate, unchanged |
+| `mu`, `gamma` | 0 in V4.1-V4.3 | compute and retrieval logged, not charged |
+| `gamma` calibration (H18 only) | swept, not fitted | reported as a curve `J(gamma)`; if no `gamma` in a plausible range produces an interior optimum, H18 is reported as not binding at ROW scale (plan open question 4) |
+
+---
+
 # 6. Sealed protocol
 
 Sealed seeds are 400-429, untouched until `V4_CONFIRMATION_PLAN.md` is
@@ -427,6 +546,12 @@ per-operation refusal rates in their control worlds; and the single
 surrendered control for the rung. Interval misses are failures even when
 signs pass. One registered re-derivation per gate. Outcomes are appended
 to `PREDICTIONS.md` whichever way they fall.
+
+**The surrendered control for V4.1** is the frequency-versus-value world
+(§2.3): it is run on development worlds and reported, but not on sealed
+seeds. It tests a property of the retention RULE rather than of the
+learner's behavior in the target regime, and the rung's sealed budget is
+better spent on the dormancy pair.
 
 Each rung seals independently. V4.2 may not be developed until V4.1's
 sealed verdict is recorded, and so on — the staging exists so that
@@ -499,3 +624,54 @@ verified step.
 Development worlds 0-9 only until §6 freezes. Any accidental generation of
 a 400-block world is reported, the artifact deleted, and the incident
 logged in `SPEC_AUDIT.md`.
+
+
+---
+
+# 10. Pre-run checklist
+
+1. **P5, the validity gate, before anything is tuned.** Run the
+   conservative oracle (§4.3) against PROMOTE-only on the V4.1 world. If
+   the oracle's advantage is not materially positive, the world cannot
+   test DELETE and is redesigned first. This is the V3 lesson that four
+   testbed failures paid for, and it is the single most important step in
+   this list.
+2. Run P2's two standing predictions — P-2026-08-19-G (horizon) and
+   P-2026-08-19-H (lifetime sweep for `N*`) — both of which locate where
+   the deletion horizon should sit.
+3. Select `tau` once on the structured world WITHOUT dormancy, and log
+   every value tried. The dormancy worlds stay held out.
+4. Build the varying-gap dormancy family (§3.2) and the
+   frequency-versus-value world (§2.3), each with its own validity check.
+5. Implement RETAIN/DELETE on `LifecycleLibraryLearner`, with the
+   age-neutral rule and the grace period.
+6. Develop on worlds 0-9, reporting 0-2 and 3-9 separately from the first
+   run.
+7. Freeze `V4_CONFIRMATION_PLAN.md` with parameter intervals, hash it into
+   `tools/check_prereg.py`, and only then unseal 400-429.
+8. Retire `notes/v4-sketch.txt` on the day this spec is frozen, as the V3
+   sketch was retired.
+
+# 11. Open questions this spec does NOT settle
+
+Recorded so they are not mistaken for oversights, and so a later choice
+cannot be presented as having been planned:
+
+1. **Does deletion interact with promotion's own threshold?** A learner
+   that knows it can delete later may rationally promote more freely. V4.1
+   holds PROMOTE's configuration frozen at V3's values precisely so this
+   interaction is not silently exercised, but the interaction is real and
+   V4.2 should measure it.
+2. **Is the conservative oracle tight enough to be useful?** If measured
+   regret is dominated by the oracle's own restriction (births taken as
+   given, deletion only at birth), the instrument is too blunt and needs
+   the timed-deletion version.
+3. **What is the right unit of forgetting?** Old-task interference is
+   measured as mean NMSE degradation over pre-onset tasks. Whether a
+   worst-case or a per-task-threshold measure is more appropriate is
+   unresolved; both are logged.
+4. **Whether MERGE and DELETE can be separated at all in practice.**
+   Deleting one of two redundant abstractions is observationally close to
+   merging them. If V4.1's DELETE turns out to be doing deduplication
+   implicitly, V4.2's contribution shrinks and the spec should say so
+   rather than staging an operation with nothing left to do.
