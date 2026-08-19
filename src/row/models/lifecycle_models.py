@@ -189,6 +189,141 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
                 if reference == record.abstraction_id
             ]
 
+    # ---- the V4.1 operator: re-home, then retire orphans ---------------
+
+    @torch.no_grad()
+    def consolidate(
+        self,
+        probe: torch.Tensor,
+        task_index: int,
+        epsilon: float = 0.02,
+        kappa: float = 0.0,
+        tasks_total: int = 64,
+        grace: int = 8,
+    ) -> dict[str, object]:
+        """One lifecycle pass: RE-HOME dependents, then DELETE orphans.
+
+        The validity gate found that V4.1's opportunity is not deleting
+        load-bearing abstractions — promotion fires only when it saves
+        bits, so its inverse can never pay — but deleting REDUNDANT ones.
+        Measured on the frozen testbed, every dependent of every
+        abstraction could be served by some other abstraction within
+        epsilon, so the four to six abstractions V3 creates are redundant
+        estimates of one or two concepts.
+
+        Re-homing is therefore the enabling step and deletion is the
+        collection step. Consolidation is greedy and deterministic: each
+        dependent migrates to the compatible abstraction with the most
+        dependents, ties broken by lowest index, so edit order is not a
+        hidden hyperparameter.
+
+        AGE-NEUTRAL by construction (V4 spec H17): the only age term is the
+        grace period, applied identically to every abstraction. A rule that
+        made old abstractions harder to delete would build the hysteresis
+        H17 is meant to discover.
+        """
+
+        if not self.abstractions:
+            return {"task_index": task_index, "rehomed": 0, "deleted": 0}
+
+        baselines = {
+            task_id: self.forward(probe, task_id)
+            for task_id in list(self.task_reference)
+        }
+
+        def deviation(task_id: str, reference: int) -> float:
+            previous = self.task_reference.get(task_id)
+            self.task_reference[task_id] = reference
+            after = self.forward(probe, task_id)
+            if previous is None:
+                self.task_reference.pop(task_id, None)
+            else:
+                self.task_reference[task_id] = previous
+            base = baselines[task_id]
+            denominator = float(
+                torch.mean(torch.square(base - base.mean(dim=0))).clamp_min(1e-12)
+            )
+            return float(torch.mean(torch.square(after - base))) / denominator
+
+        # --- RE-HOME -----------------------------------------------------
+        population: dict[int, int] = {}
+        for reference in self.task_reference.values():
+            population[int(reference)] = population.get(int(reference), 0) + 1
+        order = sorted(
+            range(len(self.abstractions)),
+            key=lambda index: (-population.get(index, 0), index),
+        )
+        rehomed = 0
+        for task_id in list(self.task_reference):
+            current = int(self.task_reference[task_id])
+            for candidate in order:
+                if candidate == current:
+                    break  # already on the most populous compatible target
+                if deviation(task_id, candidate) <= epsilon:
+                    self.task_reference[task_id] = candidate
+                    self.record_migration(
+                        "rehome",
+                        task_index,
+                        {"task": task_id, "from": current, "to": candidate},
+                    )
+                    rehomed += 1
+                    break
+
+        # --- DELETE ------------------------------------------------------
+        self.sync_lineage(task_index)
+        deleted = []
+        for index in sorted(self.lineage, reverse=True):
+            record = self.lineage[index]
+            if record.retired_at_task is not None:
+                continue
+            if task_index - record.born_at_task < grace:
+                continue
+            if record.dependents:
+                continue  # load-bearing; deleting it would strand dependents
+            retention_bits = BITS_PER_SCALAR * self.residual_scalars_per_task
+            # An orphan contributes its bits to the final description and
+            # buys nothing, so retention value is negative for any positive
+            # price of description or occupancy.
+            value = -(
+                retention_bits * LN2
+                + kappa * retention_bits * max(0, tasks_total - task_index)
+            )
+            self.record_decision(
+                "delete", task_index, value / LN2, applied=True,
+                detail={"abstraction": index, "dependents": 0},
+            )
+            record.retired_at_task = task_index
+            record.retirement_reason = "orphaned after re-homing"
+            deleted.append(index)
+            self.record_migration(
+                "delete", task_index, {"abstraction": index, "reference_rewrites": 0}
+            )
+        return {
+            "task_index": task_index,
+            "rehomed": rehomed,
+            "deleted": len(deleted),
+            "deleted_ids": deleted,
+            "live_library": len(self.abstractions) - len(self.retired_abstractions()),
+        }
+
+    def retired_abstractions(self) -> set[int]:
+        return {
+            index
+            for index, record in self.lineage.items()
+            if record.retired_at_task is not None
+        }
+
+    @property
+    def shared_parameter_count(self) -> int:
+        """Retired abstractions leave the final description."""
+
+        retired = self.retired_abstractions()
+        return sum(p.numel() for p in self.basis.parameters()) + sum(
+            parameter.numel()
+            for index, parameter in enumerate(self.abstractions)
+            if index not in retired
+        )
+
     @torch.no_grad()
     def lifecycle_diagnostics(self) -> dict[str, object]:
         return {

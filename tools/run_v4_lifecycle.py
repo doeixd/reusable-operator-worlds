@@ -24,10 +24,11 @@ def log(message: str) -> None:
         handle.write(f"{time.strftime('%H:%M:%S')} {message}\n")
 
 
-def run_cell(args: tuple[int, float]) -> str:
-    world, eta = args
+def run_cell(args: tuple[int, float, bool]) -> str:
+    world, eta, lifecycle = args
     condition = "structured" if eta > 0 else "control"
-    out = ROOT / "artifacts" / "v4_dev" / condition / f"world_{world}" / "lifecycle"
+    arm = "lifecycle_on" if lifecycle else "lifecycle"
+    out = ROOT / "artifacts" / "v4_dev" / condition / f"world_{world}" / arm
     if (out / "summary.json").exists():
         return f"skip {out}"
     command = [
@@ -42,6 +43,8 @@ def run_cell(args: tuple[int, float]) -> str:
     ]
     if eta > 0:
         command.append("--new-primitive-families")
+    if lifecycle:
+        command.append("--lifecycle")
     result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
     if result.returncode != 0:
         log(f"stderr {out}: {result.stderr[-600:]}")
@@ -54,9 +57,10 @@ def main() -> None:
     parser.add_argument("--worlds", type=int, nargs="+", default=list(range(10)))
     parser.add_argument("--etas", type=float, nargs="+", default=[0.9, 0.0])
     parser.add_argument("--jobs", type=int, default=4)
+    parser.add_argument("--arms", type=int, nargs="+", default=[1])
     args = parser.parse_args()
 
-    cells = [(w, eta) for eta in args.etas for w in args.worlds]
+    cells = [(w, eta, on) for on in args.arms for eta in args.etas for w in args.worlds]
     log(f"V4.1 starting: {len(cells)} cells, jobs={args.jobs}")
     with ProcessPoolExecutor(max_workers=args.jobs) as pool:
         for outcome in pool.map(run_cell, cells):

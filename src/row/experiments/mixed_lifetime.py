@@ -82,6 +82,13 @@ def main() -> None:
         help="task counts at which PROMOTE runs",
     )
     parser.add_argument("--promotion-epsilon", type=float, default=0.02)
+    parser.add_argument(
+        "--lifecycle",
+        action="store_true",
+        help="V4.1: re-home dependents and retire orphaned abstractions",
+    )
+    parser.add_argument("--lifecycle-kappa", type=float, default=0.0)
+    parser.add_argument("--lifecycle-grace", type=int, default=8)
     parser.add_argument("--new-primitive-families", action="store_true")
     parser.add_argument(
         "--dormancy",
@@ -212,6 +219,9 @@ def main() -> None:
             freeze_slots=args.freeze_slots,
             sleeps=tuple(args.sleeps),
             promotion_epsilon=args.promotion_epsilon,
+            lifecycle_enabled=args.lifecycle,
+            lifecycle_kappa=args.lifecycle_kappa,
+            lifecycle_grace=args.lifecycle_grace,
         )
     finally:
         learned_lifetime.World = original_world  # type: ignore[assignment]

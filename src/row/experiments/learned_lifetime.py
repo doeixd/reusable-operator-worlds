@@ -395,6 +395,9 @@ def run(
     sleeps: tuple[int, ...] = (),
     promotion_epsilon: float = 0.02,
     reuse_decision_at: int = 8,
+    lifecycle_enabled: bool = False,
+    lifecycle_kappa: float = 0.0,
+    lifecycle_grace: int = 8,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -687,6 +690,22 @@ def run(
             sleep_records.append(record)
             if isinstance(model, LifecycleLibraryLearner):
                 model.sync_lineage(lifetime_index + 1)
+                if lifecycle_enabled:
+                    consolidation_rng = np.random.default_rng(
+                        np.random.SeedSequence([config.world.seed, 73])
+                    )
+                    record["lifecycle"] = model.consolidate(
+                        _tensor(
+                            consolidation_rng.normal(
+                                size=(256, config.world.state_dim)
+                            )
+                        ),
+                        task_index=lifetime_index + 1,
+                        epsilon=promotion_epsilon,
+                        kappa=lifecycle_kappa,
+                        tasks_total=len(world.tasks),
+                        grace=lifecycle_grace,
+                    )
         if isinstance(model, VariationalSharedResidualLearner):
             completed_task_ids.append(task.task_id)
             model.update_prior_scales(completed_task_ids)

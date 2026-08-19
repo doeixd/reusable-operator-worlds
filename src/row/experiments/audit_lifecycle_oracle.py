@@ -88,7 +88,7 @@ def _task_loss(model, task, sigma: float) -> float:
 
 
 def audit(config, path: Path, world_seed: int, spec: TaskGroupSpec, slots: int,
-          kappa: float) -> dict[str, object]:
+          kappa: float, epsilon: float = 0.02) -> dict[str, object]:
     model, world = _load(config, path, world_seed, spec, slots)
     summary = json.loads((path / "summary.json").read_text(encoding="utf-8"))
     promotion = summary["promotion"]
@@ -125,19 +125,62 @@ def audit(config, path: Path, world_seed: int, spec: TaskGroupSpec, slots: int,
     if not dependents:
         raise ValueError(f"{path} records a library with no dependents at all")
 
+    # Probe for re-homing decisions: disjoint from anything used in training.
+    probe = _tensor(
+        np.random.default_rng(world_seed + 4242).normal(
+            size=(256, config.world.state_dim)
+        )
+    )
+
+    @torch.no_grad()
+    def _deviation(task_id: str, reference: int | None, baseline) -> float:
+        clone = copy.deepcopy(model)
+        if reference is None:
+            clone.task_reference.pop(task_id, None)
+            clone.retired.discard(task_id)
+        else:
+            clone.task_reference[task_id] = reference
+            clone.retired.add(task_id)
+        clone.eval()
+        after = clone(probe, task_id)
+        denominator = float(
+            torch.mean(torch.square(baseline - baseline.mean(dim=0))).clamp_min(1e-12)
+        )
+        return float(torch.mean(torch.square(after - baseline))) / denominator
+
     rows = []
     for abstraction in range(len(model.abstractions)):
         members = dependents.get(abstraction, [])
         born = births[abstraction] if abstraction < len(births) else 0
-        # Prediction cost of losing this abstraction, measured directly.
-        clone = copy.deepcopy(model)
+
+        # Can each dependent be RE-HOMED onto another abstraction within
+        # epsilon (spec 3.5, condition 1)? Assuming they cannot is assuming
+        # the library is not fragmented, which is the very question. A
+        # dependent that re-homes costs nothing; one that cannot must carry
+        # a private residual again.
+        rehomed, stranded = 0, []
         with torch.no_grad():
             for task_id in members:
+                baseline = model(probe, task_id)
+                alternatives = [
+                    _deviation(task_id, other, baseline)
+                    for other in range(len(model.abstractions))
+                    if other != abstraction
+                ]
+                if alternatives and min(alternatives) <= epsilon:
+                    rehomed += 1
+                else:
+                    stranded.append(task_id)
+
+        # Prediction cost is paid only by the stranded dependents.
+        clone = copy.deepcopy(model)
+        with torch.no_grad():
+            for task_id in stranded:
                 clone.task_reference.pop(task_id, None)
                 clone.retired.discard(task_id)
         clone.eval()
         loss_delta = 0.0
-        for task_id in members:
+        for task_id in stranded:
             task = world.tasks[index_of[task_id]]
             loss_delta += _task_loss(clone, task, sigma) - _task_loss(model, task, sigma)
 
@@ -148,7 +191,9 @@ def audit(config, path: Path, world_seed: int, spec: TaskGroupSpec, slots: int,
             keeps = deletion_time >= tasks
             # Final description: the abstraction's own bits, and the private
             # residuals its dependents must carry once it is gone.
-            delta_final = 0.0 if keeps else (-residual_bits + residual_bits * len(members))
+            delta_final = (
+                0.0 if keeps else (-residual_bits + residual_bits * len(stranded))
+            )
             # Occupancy: bit-time the abstraction holds.
             occupancy_kept = residual_bits * (tasks - born)
             occupancy_now = residual_bits * ((tasks if keeps else deletion_time) - born)
@@ -168,6 +213,8 @@ def audit(config, path: Path, world_seed: int, spec: TaskGroupSpec, slots: int,
                 "abstraction": abstraction,
                 "born_at": born,
                 "dependents": len(members),
+                "rehomable": rehomed,
+                "stranded": len(stranded),
                 "loss_cost_of_losing_it": loss_delta,
                 "best_deletion_time": best["deletion_time"],
                 "best_delta_j": best["delta_j"],
