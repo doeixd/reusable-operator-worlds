@@ -231,18 +231,37 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
             for task_id in list(self.task_reference)
         }
 
-        def deviation(task_id: str, reference: int) -> float:
+        def _swap(task_id: str, reference: int | None) -> torch.Tensor:
             previous = self.task_reference.get(task_id)
-            self.task_reference[task_id] = reference
+            if reference is None:
+                self.task_reference.pop(task_id, None)
+            else:
+                self.task_reference[task_id] = reference
             after = self.forward(probe, task_id)
             if previous is None:
                 self.task_reference.pop(task_id, None)
             else:
                 self.task_reference[task_id] = previous
-            base = baselines[task_id]
-            denominator = float(
-                torch.mean(torch.square(base - base.mean(dim=0))).clamp_min(1e-12)
+            return after
+
+        # What the current abstraction actually buys this task. This, not
+        # total output variance, is the denominator: epsilon licenses the
+        # loss of a CONTRIBUTION, so it must be measured against that
+        # contribution. Normalizing against total scale made every
+        # abstraction substitutable for every other (each contributes
+        # ~0.2% of output variance) and admitted the null edit of deleting
+        # the whole library. See PREDICTIONS.md, "V4.1 H14 — RETRACTED".
+        contribution = {
+            task_id: float(
+                torch.mean(torch.square(baselines[task_id] - _swap(task_id, None)))
             )
+            for task_id in baselines
+        }
+
+        def deviation(task_id: str, reference: int) -> float:
+            after = _swap(task_id, reference)
+            base = baselines[task_id]
+            denominator = max(contribution[task_id], 1e-12)
             return float(torch.mean(torch.square(after - base))) / denominator
 
         # --- RE-HOME -----------------------------------------------------

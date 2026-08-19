@@ -3,354 +3,51 @@
     "world_seed": 0,
     "kappa": 0.0,
     "library_size": 4,
-    "abstractions": [
-      {
-        "abstraction": 0,
-        "born_at": 24,
-        "dependents": 17,
-        "rehomable": 17,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 24,
-        "best_delta_j": -1097.9451340069534
-      },
-      {
-        "abstraction": 1,
-        "born_at": 24,
-        "dependents": 7,
-        "rehomable": 7,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 24,
-        "best_delta_j": -1097.9451340069534
-      },
-      {
-        "abstraction": 2,
-        "born_at": 48,
-        "dependents": 17,
-        "rehomable": 17,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 48,
-        "best_delta_j": -1097.9451340069534
-      },
-      {
-        "abstraction": 3,
-        "born_at": 64,
-        "dependents": 15,
-        "rehomable": 15,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": null,
-        "best_delta_j": 0.0
-      }
+    "behavioral_cover": [
+      0,
+      1,
+      2,
+      3
     ],
-    "deletions_that_pay": 3,
-    "oracle_gain_nats": 3293.83540202086
+    "cover_size": 4,
+    "oracle_gain_nats": 0.0,
+    "retirements": 0,
+    "policies": {},
+    "reuse_density": 14.0
   },
   {
     "world_seed": 1,
     "kappa": 0.0,
     "library_size": 6,
-    "abstractions": [
-      {
-        "abstraction": 0,
-        "born_at": 24,
-        "dependents": 13,
-        "rehomable": 13,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 24,
-        "best_delta_j": -1097.9451340069534
-      },
-      {
-        "abstraction": 1,
-        "born_at": 32,
-        "dependents": 7,
-        "rehomable": 7,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 32,
-        "best_delta_j": -1097.9451340069534
-      },
-      {
-        "abstraction": 2,
-        "born_at": 32,
-        "dependents": 8,
-        "rehomable": 8,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 32,
-        "best_delta_j": -1097.9451340069534
-      },
-      {
-        "abstraction": 3,
-        "born_at": 48,
-        "dependents": 5,
-        "rehomable": 5,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 48,
-        "best_delta_j": -1097.9451340069534
-      },
-      {
-        "abstraction": 4,
-        "born_at": 64,
-        "dependents": 16,
-        "rehomable": 16,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": null,
-        "best_delta_j": 0.0
-      },
-      {
-        "abstraction": 5,
-        "born_at": 64,
-        "dependents": 15,
-        "rehomable": 15,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": null,
-        "best_delta_j": 0.0
-      }
+    "behavioral_cover": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5
     ],
-    "deletions_that_pay": 4,
-    "oracle_gain_nats": 4391.7805360278135
+    "cover_size": 6,
+    "oracle_gain_nats": 0.0,
+    "retirements": 0,
+    "policies": {},
+    "reuse_density": 10.666666666666666
   },
   {
     "world_seed": 2,
     "kappa": 0.0,
     "library_size": 5,
-    "abstractions": [
-      {
-        "abstraction": 0,
-        "born_at": 24,
-        "dependents": 16,
-        "rehomable": 16,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 24,
-        "best_delta_j": -1097.9451340069534
-      },
-      {
-        "abstraction": 1,
-        "born_at": 24,
-        "dependents": 6,
-        "rehomable": 6,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 24,
-        "best_delta_j": -1097.9451340069534
-      },
-      {
-        "abstraction": 2,
-        "born_at": 32,
-        "dependents": 3,
-        "rehomable": 3,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 32,
-        "best_delta_j": -1097.9451340069534
-      },
-      {
-        "abstraction": 3,
-        "born_at": 48,
-        "dependents": 8,
-        "rehomable": 8,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 48,
-        "best_delta_j": -1097.9451340069534
-      },
-      {
-        "abstraction": 4,
-        "born_at": 64,
-        "dependents": 16,
-        "rehomable": 14,
-        "stranded": 2,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": null,
-        "best_delta_j": 0.0
-      }
+    "behavioral_cover": [
+      0,
+      1,
+      2,
+      3,
+      4
     ],
-    "deletions_that_pay": 4,
-    "oracle_gain_nats": 4391.7805360278135
-  },
-  {
-    "world_seed": 0,
-    "kappa": 0.001,
-    "library_size": 4,
-    "abstractions": [
-      {
-        "abstraction": 0,
-        "born_at": 24,
-        "dependents": 17,
-        "rehomable": 17,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 24,
-        "best_delta_j": -1161.3051340069533
-      },
-      {
-        "abstraction": 1,
-        "born_at": 24,
-        "dependents": 7,
-        "rehomable": 7,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 24,
-        "best_delta_j": -1161.3051340069533
-      },
-      {
-        "abstraction": 2,
-        "born_at": 48,
-        "dependents": 17,
-        "rehomable": 17,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 48,
-        "best_delta_j": -1123.2891340069534
-      },
-      {
-        "abstraction": 3,
-        "born_at": 64,
-        "dependents": 15,
-        "rehomable": 15,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": null,
-        "best_delta_j": 0.0
-      }
-    ],
-    "deletions_that_pay": 3,
-    "oracle_gain_nats": 3445.89940202086
-  },
-  {
-    "world_seed": 1,
-    "kappa": 0.001,
-    "library_size": 6,
-    "abstractions": [
-      {
-        "abstraction": 0,
-        "born_at": 24,
-        "dependents": 13,
-        "rehomable": 13,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 24,
-        "best_delta_j": -1161.3051340069533
-      },
-      {
-        "abstraction": 1,
-        "born_at": 32,
-        "dependents": 7,
-        "rehomable": 7,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 32,
-        "best_delta_j": -1148.6331340069535
-      },
-      {
-        "abstraction": 2,
-        "born_at": 32,
-        "dependents": 8,
-        "rehomable": 8,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 32,
-        "best_delta_j": -1148.6331340069535
-      },
-      {
-        "abstraction": 3,
-        "born_at": 48,
-        "dependents": 5,
-        "rehomable": 5,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 48,
-        "best_delta_j": -1123.2891340069534
-      },
-      {
-        "abstraction": 4,
-        "born_at": 64,
-        "dependents": 16,
-        "rehomable": 16,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": null,
-        "best_delta_j": 0.0
-      },
-      {
-        "abstraction": 5,
-        "born_at": 64,
-        "dependents": 15,
-        "rehomable": 15,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": null,
-        "best_delta_j": 0.0
-      }
-    ],
-    "deletions_that_pay": 4,
-    "oracle_gain_nats": 4581.860536027813
-  },
-  {
-    "world_seed": 2,
-    "kappa": 0.001,
-    "library_size": 5,
-    "abstractions": [
-      {
-        "abstraction": 0,
-        "born_at": 24,
-        "dependents": 16,
-        "rehomable": 16,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 24,
-        "best_delta_j": -1161.3051340069533
-      },
-      {
-        "abstraction": 1,
-        "born_at": 24,
-        "dependents": 6,
-        "rehomable": 6,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 24,
-        "best_delta_j": -1161.3051340069533
-      },
-      {
-        "abstraction": 2,
-        "born_at": 32,
-        "dependents": 3,
-        "rehomable": 3,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 32,
-        "best_delta_j": -1148.6331340069535
-      },
-      {
-        "abstraction": 3,
-        "born_at": 48,
-        "dependents": 8,
-        "rehomable": 8,
-        "stranded": 0,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": 48,
-        "best_delta_j": -1123.2891340069534
-      },
-      {
-        "abstraction": 4,
-        "born_at": 64,
-        "dependents": 16,
-        "rehomable": 14,
-        "stranded": 2,
-        "loss_cost_of_losing_it": 0.0,
-        "best_deletion_time": null,
-        "best_delta_j": 0.0
-      }
-    ],
-    "deletions_that_pay": 4,
-    "oracle_gain_nats": 4594.532536027813
+    "cover_size": 5,
+    "oracle_gain_nats": 0.0,
+    "retirements": 0,
+    "policies": {},
+    "reuse_density": 9.8
   }
 ]

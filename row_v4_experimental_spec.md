@@ -274,6 +274,23 @@ than left to interpretation.
 
 ## H14 — Survival (primary; V4.1)
 
+> **STATUS 2026-08-19 — GATE FAILS, H14 NOT TESTABLE ON THIS TESTBED.**
+> The exact behavioral-cover oracle finds ZERO compaction room in
+> development worlds 0-2 once the substitution tolerance is normalized
+> against what an abstraction contributes rather than against total
+> output variance. V3's 4-6 abstractions are mutually distinct
+> (substitution costs 0.86-1.60 of the contribution; 99-100% of ordered
+> pairs exceed a 10% tolerance), and compacting to a single abstraction
+> is net -1,180 / -2,393 / -1,377 nats. An earlier +2,928-nat H14 result
+> and a "library of 4-6 compacts to 1" oracle result were artifacts of
+> the loose tolerance and are RETRACTED in `PREDICTIONS.md`. Per §10, no
+> RETIRE operator may be tuned against a testbed whose oracle gate fails.
+> The unblocked successor is V4.2 synthetic merge — refitting one
+> abstraction to cover several DISTINCT contributions — which is a
+> different operator from retiring redundant copies, of which this
+> testbed has none. H14 stands as written and awaits either a testbed
+> whose gate passes or a re-derivation under V4.2.
+
 When abstraction birth is imperfect, evidence from subsequent reuse lets a
 learner distinguish abstractions that deserved to exist from abstractions
 that merely looked promising when they were born. Concretely: a learner

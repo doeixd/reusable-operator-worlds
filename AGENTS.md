@@ -564,4 +564,21 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   correct refusal-to-encode is indistinguishable from a collapse bug.
   Smoke-test with `description_beta: 0.0` instead, which must reproduce
   the frozen non-variational baseline exactly.
-- When auditing online objectives, count relative gradient/objective pressure, not raw regularizer appearances.
+- When auditing online objectives, count relative gradient/objective pressure, not raw regularizer appearances.- A functional tolerance must be normalized against the quantity whose
+  loss it licenses, never against total output scale. V4.1's substitution
+  test divided by total output variance while an abstraction contributes
+  ~0.2% of it, so every abstraction substituted for every other and the
+  oracle "compacted" 4-6 abstractions to 1. Two symptoms identify this
+  class of error immediately: the causal control goes DEGENERATE (random,
+  usage, and functional retirement score identically), and the NULL EDIT
+  passes (deleting an abstraction outright scores a smaller deviation
+  than replacing it). Both are now hard guards in
+  `audit_lifecycle_oracle.py`.
+- On the frozen V4 testbed V3's 4-6 abstractions are mutually DISTINCT,
+  not redundant: contribution-relative substitution costs 0.86-1.60 of
+  what the abstraction buys, and 99-100% of ordered pairs exceed a 10%
+  tolerance. Priced in nats, compacting to one abstraction is net -1,180,
+  -2,393, and -1,377 on worlds 0-2. The representation-fragmentation
+  premise for V4.1-as-compaction is unsupported; the open direction is
+  V4.2 synthetic merge (refit a new abstraction covering several distinct
+  contributions), not retiring copies that do not exist.

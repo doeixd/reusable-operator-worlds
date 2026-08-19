@@ -273,3 +273,55 @@ Outcome log (append-only):
     parameterization might; that was not tested. The durable distinction
     is that changing the cost of values is not the same operation as
     changing the vocabulary of representations.
+
+# V4.1 H14 — RETRACTED (recorded 2026-08-19)
+
+The first V4.1 result reported that lifecycle compaction beats V3 by
++2,928 nats in structured worlds against +1,098 in controls, and the
+exact behavioral-cover oracle then reported that a library of 4-6
+abstractions compacts to a cover of size 1 in 3/3 worlds for 3,371-5,578
+nats. Both are ARTIFACTS of the substitution tolerance and are retracted
+here rather than edited out above.
+
+The defect. Substitutability was tested as
+
+    ||f_j(x) - f_cur(x)||^2 / Var[f_cur(x)]  <=  epsilon = 0.02
+
+normalizing the deviation against TOTAL OUTPUT VARIANCE. On this testbed
+an abstraction contributes about 0.2% of that variance, so the
+denominator is roughly a thousand times larger than the quantity being
+judged. Every abstraction therefore substituted for every other, which
+is why the oracle's causal control came back degenerate: functional,
+usage, and random retirement all stranded 0 dependents at identical
+cost. The control was working correctly and was reporting that the
+relation it had been handed carried no information.
+
+The diagnostic that exposed it. Removing an abstraction ENTIRELY scored
+a smaller deviation (0.0016-0.0024) than replacing it with a different
+one (0.0022-0.0039). A tolerance under which deleting the whole library
+is admissible cannot certify anything about which members are redundant.
+
+The corrected measurement. Normalizing instead against what the
+abstraction itself contributes, ||f_cur - f_no-abs||^2, substitution
+costs 0.86, 1.25, and 1.60 of the contribution in worlds 0-2 — as much
+as or more than deletion — and 99-100% of ordered pairs exceed a 10%
+relative tolerance. Priced in the objective's own currency, compacting
+to a single abstraction costs 4,474 / 7,883 / 5,769 held-out Gaussian
+nats to save 3,294 / 5,490 / 4,392 bits: net -1,180, -2,393, and -1,377,
+mean -1,650 nats.
+
+Reading. On the frozen V4 testbed, V3's 4-6 abstractions are NOT
+redundant estimates of one or two concepts. The representation-
+fragmentation hypothesis that motivated V4.1-as-compaction is not
+supported here, and compaction is net negative in all three development
+worlds. The abstractions are individually weak (0.2% of output variance)
+but mutually distinct, which is a different problem from fragmentation
+and points at V4.2 consolidation — a REFITTED synthetic merge that could
+capture several distinct contributions at once — rather than at
+retiring redundant copies, which there are none of.
+
+Durable methodological rule. A functional tolerance must be normalized
+against the quantity whose loss it is licensing, not against total
+output scale. Any epsilon under which the null edit (delete everything)
+passes is measuring nothing, and a degenerate causal control is the
+symptom to look for.

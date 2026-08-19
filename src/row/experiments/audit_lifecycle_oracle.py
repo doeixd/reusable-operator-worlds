@@ -1,4 +1,24 @@
-"""V4.1 world-validity gate: is there room for TIMED deletion?
+"""V4.1 gate and causal control: EXACT behavioral-cover search.
+
+Two jobs, both exact rather than bounded, because the libraries here hold
+3-7 abstractions and the subset search is at most 2^7 = 128 evaluations.
+
+1. THE COVER ORACLE. Build the substitution relation S[j][tau] = abstraction
+   j serves task tau within epsilon, then search every subset of the library
+   for the cheapest one that still covers every dependent. That is a
+   covering problem and its solution is a BEHAVIORAL COVER: the cheapest set
+   of representatives preserving what the library can do.
+
+   The relation is a directed GRAPH, not an equivalence. Substitutability at
+   tolerance epsilon is neither symmetric (A may serve B's dependents
+   without the reverse) nor transitive (A~B and B~C does not give A~C), so
+   this module never speaks of equivalence classes.
+
+2. THE CAUSAL CONTROL. At a MATCHED number of retirements, compare
+   functional-substitution retirement against random and usage-based
+   retirement. Without it, a gain of k * 1098 nats is equally consistent
+   with the library simply having been too big.
+
 
 The spec (§4.3, §10 step 1) requires this before any operator is tuned. It
 takes the online learner's BIRTHS as given and optimises each
@@ -32,6 +52,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import itertools
 import json
 import math
 from dataclasses import replace
@@ -87,148 +108,145 @@ def _task_loss(model, task, sigma: float) -> float:
     return gaussian_nll(prediction, task.eval_y, sigma)
 
 
-def audit(config, path: Path, world_seed: int, spec: TaskGroupSpec, slots: int,
-          kappa: float, epsilon: float = 0.02) -> dict[str, object]:
+def _substitution_matrix(model, references, probe, epsilon):
+    """S[j][task] = abstraction j serves this task within epsilon."""
+
+    matrix = {}
+    with torch.no_grad():
+        baselines = {t: model(probe, t) for t in references}
+
+        def swap(task_id, reference):
+            previous = model.task_reference.get(task_id)
+            if reference is None:
+                model.task_reference.pop(task_id, None)
+            else:
+                model.task_reference[task_id] = reference
+            after = model(probe, task_id)
+            if previous is None:
+                model.task_reference.pop(task_id, None)
+            else:
+                model.task_reference[task_id] = previous
+            return after
+
+        # Denominator = what the abstraction CONTRIBUTES, not total output
+        # variance. Against total scale every abstraction substituted for
+        # every other, the causal control went degenerate, and the null
+        # edit (delete everything) passed. See PREDICTIONS.md, "V4.1
+        # H14 — RETRACTED".
+        contribution = {
+            t: max(float(torch.mean(torch.square(baselines[t] - swap(t, None)))), 1e-12)
+            for t in references
+        }
+        for j in range(len(model.abstractions)):
+            matrix[j] = {
+                t: float(torch.mean(torch.square(swap(t, j) - baselines[t])))
+                / contribution[t]
+                <= epsilon
+                for t in references
+            }
+    return matrix
+
+
+def audit(config, path, world_seed, spec, slots, kappa, epsilon=0.02):
     model, world = _load(config, path, world_seed, spec, slots)
     summary = json.loads((path / "summary.json").read_text(encoding="utf-8"))
-    promotion = summary["promotion"]
-    sigma = config.evaluation.gaussian_sigma
-    tasks = len(world.tasks)
     residual_bits = BITS * (
         model.residual_u_size + model.residual_v_size + model.residual_b_size
     )
-
-    # Birth time per abstraction, in order of promotion.
-    births = [
-        record["lifetime_index"]
-        for record in promotion["ledger"]
-        if record["decision"] == "promote"
-    ]
-    index_of = {task.task_id: i for i, task in enumerate(world.tasks)}
-
-    # Dependencies come from the ARTIFACT, never from the reloaded model.
-    # `task_reference` is a plain dict and is absent from `state_dict`, so a
-    # reloaded model reports an empty reference table — which silently turns
-    # this audit into an analysis of an unused library where deletion is
-    # trivially free. A first run of this gate "passed" that way, reporting
-    # 0 dependents for every abstraction. Refusing to run is the only safe
-    # behavior, because the failure mode looks exactly like success.
     lifecycle = summary.get("lifecycle")
     if lifecycle is None or "task_reference" not in lifecycle:
         raise ValueError(
-            f"{path} has no persisted reference table: run the `lifecycle` "
-            "model, which records lineage, rather than the V3 `promoting` model"
+            str(path) + " has no persisted reference table: run the `lifecycle` "
+            "model, which records lineage, not the V3 `promoting` model"
         )
-    dependents: dict[int, list[str]] = {}
-    for task_id, reference in lifecycle["task_reference"].items():
-        dependents.setdefault(int(reference), []).append(task_id)
-    if not dependents:
-        raise ValueError(f"{path} records a library with no dependents at all")
+    references = {k: int(v) for k, v in lifecycle["task_reference"].items()}
+    if not references:
+        raise ValueError(str(path) + " records a library with no dependents at all")
+    for task_id, reference in references.items():
+        model.task_reference[task_id] = reference
+        model.retired.add(task_id)
 
-    # Probe for re-homing decisions: disjoint from anything used in training.
     probe = _tensor(
         np.random.default_rng(world_seed + 4242).normal(
             size=(256, config.world.state_dim)
         )
     )
+    library = list(range(len(model.abstractions)))
+    matrix = _substitution_matrix(model, references, probe, epsilon)
 
-    @torch.no_grad()
-    def _deviation(task_id: str, reference: int | None, baseline) -> float:
-        clone = copy.deepcopy(model)
-        if reference is None:
-            clone.task_reference.pop(task_id, None)
-            clone.retired.discard(task_id)
-        else:
-            clone.task_reference[task_id] = reference
-            clone.retired.add(task_id)
-        clone.eval()
-        after = clone(probe, task_id)
-        denominator = float(
-            torch.mean(torch.square(baseline - baseline.mean(dim=0))).clamp_min(1e-12)
+    def covers(subset):
+        return all(any(matrix[j][t] for j in subset) for t in references)
+
+    # NULL-EDIT GUARD. Under a well-scaled tolerance, dropping an
+    # abstraction must cost exactly its own contribution, i.e. a relative
+    # deviation of 1.0 > epsilon. If a task is served by NO abstraction,
+    # epsilon is loose enough to admit deleting the library outright and
+    # every cover it certifies is vacuous.
+    unserved = [t for t in references if not any(matrix[j][t] for j in library)]
+    if len(unserved) == len(references):
+        raise ValueError(
+            "tolerance %.4g admits the null edit for every dependent: the "
+            "substitution relation carries no information (see PREDICTIONS.md, "
+            "'V4.1 H14 — RETRACTED')" % epsilon
         )
-        return float(torch.mean(torch.square(after - baseline))) / denominator
 
-    rows = []
-    for abstraction in range(len(model.abstractions)):
-        members = dependents.get(abstraction, [])
-        born = births[abstraction] if abstraction < len(births) else 0
+    def cost(subset):
+        # Library bits plus the reference code, which shrinks with the LIVE
+        # library size, so compaction is charged and credited correctly.
+        reference_bits = math.ceil(math.log2(len(subset) + 1)) if subset else 0
+        return LN2 * (
+            residual_bits * len(subset) + reference_bits * len(references)
+        )
 
-        # Can each dependent be RE-HOMED onto another abstraction within
-        # epsilon (spec 3.5, condition 1)? Assuming they cannot is assuming
-        # the library is not fragmented, which is the very question. A
-        # dependent that re-homes costs nothing; one that cannot must carry
-        # a private residual again.
-        rehomed, stranded = 0, []
-        with torch.no_grad():
-            for task_id in members:
-                baseline = model(probe, task_id)
-                alternatives = [
-                    _deviation(task_id, other, baseline)
-                    for other in range(len(model.abstractions))
-                    if other != abstraction
-                ]
-                if alternatives and min(alternatives) <= epsilon:
-                    rehomed += 1
-                else:
-                    stranded.append(task_id)
-
-        # Prediction cost is paid only by the stranded dependents.
-        clone = copy.deepcopy(model)
-        with torch.no_grad():
-            for task_id in stranded:
-                clone.task_reference.pop(task_id, None)
-                clone.retired.discard(task_id)
-        clone.eval()
-        loss_delta = 0.0
-        for task_id in stranded:
-            task = world.tasks[index_of[task_id]]
-            loss_delta += _task_loss(clone, task, sigma) - _task_loss(model, task, sigma)
-
-        best = None
-        for deletion_time in [*SLEEPS, tasks]:
-            if deletion_time < born:
+    best_subset, best_cost = None, None
+    for size in range(1, len(library) + 1):
+        for subset in itertools.combinations(library, size):
+            if not covers(subset):
                 continue
-            keeps = deletion_time >= tasks
-            # Final description: the abstraction's own bits, and the private
-            # residuals its dependents must carry once it is gone.
-            delta_final = (
-                0.0 if keeps else (-residual_bits + residual_bits * len(stranded))
-            )
-            # Occupancy: bit-time the abstraction holds.
-            occupancy_kept = residual_bits * (tasks - born)
-            occupancy_now = residual_bits * ((tasks if keeps else deletion_time) - born)
-            delta_occupancy = occupancy_now - occupancy_kept
-            delta_j = (
-                (0.0 if keeps else loss_delta)
-                + LN2 * delta_final
-                + kappa * delta_occupancy
-            )
-            if best is None or delta_j < best["delta_j"]:
-                best = {
-                    "deletion_time": None if keeps else deletion_time,
-                    "delta_j": delta_j,
-                }
-        rows.append(
-            {
-                "abstraction": abstraction,
-                "born_at": born,
-                "dependents": len(members),
-                "rehomable": rehomed,
-                "stranded": len(stranded),
-                "loss_cost_of_losing_it": loss_delta,
-                "best_deletion_time": best["deletion_time"],
-                "best_delta_j": best["delta_j"],
-            }
-        )
+            value = cost(subset)
+            if best_cost is None or value < best_cost:
+                best_subset, best_cost = subset, value
+        if best_subset is not None:
+            break
+    full_cost = cost(tuple(library))
+    oracle_gain = full_cost - (best_cost if best_cost is not None else full_cost)
 
-    oracle_gain = -sum(min(0.0, row["best_delta_j"]) for row in rows)
+    retire_count = len(library) - (len(best_subset) if best_subset else len(library))
+    usage = {j: sum(1 for r in references.values() if r == j) for j in library}
+    policies = {}
+    if retire_count > 0:
+        generator = np.random.default_rng(world_seed + 99)
+        keep_n = len(library) - retire_count
+        random_keep = sorted(
+            int(x) for x in generator.choice(library, keep_n, replace=False)
+        )
+        usage_keep = sorted(sorted(library, key=lambda j: -usage[j])[:keep_n])
+        for name, keep in (
+            ("functional", list(best_subset)),
+            ("usage", usage_keep),
+            ("random", random_keep),
+        ):
+            stranded = sum(
+                0 if any(matrix[j][t] for j in keep) else 1 for t in references
+            )
+            policies[name] = {
+                "kept": keep,
+                "stranded_dependents": stranded,
+                "covers_everything": stranded == 0,
+                "cost_nats": cost(tuple(keep)) + LN2 * residual_bits * stranded,
+            }
+
+    cover = list(best_subset) if best_subset else library
     return {
         "world_seed": world_seed,
         "kappa": kappa,
-        "library_size": len(model.abstractions),
-        "abstractions": rows,
-        "deletions_that_pay": sum(1 for row in rows if row["best_delta_j"] < 0),
+        "library_size": len(library),
+        "behavioral_cover": cover,
+        "cover_size": len(cover),
         "oracle_gain_nats": oracle_gain,
+        "retirements": retire_count,
+        "policies": policies,
+        "reuse_density": len(references) / max(1, len(cover)),
     }
 
 
@@ -257,23 +275,44 @@ def main() -> None:
         new_primitive_families=True,
     )
     results = []
-    print("V4.1 WORLD-VALIDITY GATE: is there room for timed deletion?")
+    print("V4.1 EXACT BEHAVIORAL COVER + CAUSAL CONTROL")
     for kappa in args.kappas:
         rows = [
-            audit(config, args.root / f"world_{w}" / "lifecycle", w, spec, args.slots, kappa)
+            audit(config, args.root / ("world_%d" % w) / "lifecycle", w, spec,
+                  args.slots, kappa)
             for w in args.worlds
         ]
         results.extend(rows)
-        gains = [row["oracle_gain_nats"] for row in rows]
-        pays = [row["deletions_that_pay"] for row in rows]
-        libs = [row["library_size"] for row in rows]
-        print(
-            f"  kappa={kappa:<7g} oracle gain {np.mean(gains):>9.0f} nats  "
-            f"deletions that pay {np.mean(pays):.1f} of {np.mean(libs):.1f} abstractions"
-        )
+        for row in rows:
+            print(
+                "    world %d: library %d -> cover %d   gain %7.0f nats   "
+                "reuse density %.1f"
+                % (row["world_seed"], row["library_size"], row["cover_size"],
+                   row["oracle_gain_nats"], row["reuse_density"])
+            )
+        scored = [r for r in rows if r["policies"]]
+        if scored:
+            print("    causal control at matched retirements:")
+            for name in ("functional", "usage", "random"):
+                stranded = [r["policies"][name]["stranded_dependents"] for r in scored]
+                costs = [r["policies"][name]["cost_nats"] for r in scored]
+                print(
+                    "      %11s: stranded dependents %5.1f   cost %8.0f nats"
+                    % (name, np.mean(stranded), np.mean(costs))
+                )
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(results, indent=2), encoding="utf-8")
-    print("\n  GATE PASSES if the oracle finds material room for timed deletion.")
+    passed = [r for r in results if r["oracle_gain_nats"] > 0]
+    print(
+        "\n  GATE %s: the exact oracle finds compaction room in %d/%d cells."
+        % ("PASSES" if passed else "FAILS", len(passed), len(results))
+    )
+    if not passed:
+        print(
+            "  No subset of any library is redundant at a contribution-relative\n"
+            "  tolerance, so this testbed cannot test compaction. Do not tune a\n"
+            "  RETIRE operator against it (PREDICTIONS.md, 'V4.1 H14 — RETRACTED')."
+        )
 
 
 if __name__ == "__main__":

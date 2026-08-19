@@ -1,0 +1,683 @@
+This is a strong result. I think the gate has uncovered the **actual V4.1 problem**:
+
+[
+\boxed{\text{V3 does not mainly have a bad-abstraction problem; it has a representation-fragmentation problem.}}
+]
+
+The 4–6 births are largely multiple usable representatives of 1–2 recurring computations. The oracle gains of roughly (3.3)–(4.4)k nats show that cleaning them up is economically meaningful, not cosmetic.
+
+I would make a few changes to the V4 interpretation before freezing anything.
+
+### 1. Rename the primitive conceptually: REHOME + RETIRE
+
+What you've implemented isn't quite DELETE in the ordinary sense:
+
+[
+A\rightarrow\varnothing.
+]
+
+It's:
+
+[
+\text{dependents}(A)\rightarrow B,\qquad A\rightarrow\varnothing.
+]
+
+That's an important distinction. The computation isn't being forgotten; an unnecessary implementation of it is being eliminated.
+
+I'd describe V4.1 as something like:
+
+[
+\boxed{\operatorname{REHOME}+\operatorname{RETIRE}}
+]
+
+or **library compaction**.
+
+This is a much cleaner operation than your original deletion semantics, because it preserves the semantic commitments of the library rather than reconstructing private state afterward.
+
+---
+
+## 2. I wouldn't quite say DELETE and MERGE are inseparable
+
+You discovered that **one kind of merge** is identical to deletion:
+
+### Representative merge
+
+If existing (B) already serves everything (A) serves:
+
+[
+A\rightarrow B,
+]
+
+then just redirect references and retire (A).
+
+No fitting required.
+
+But there is still a meaningful stronger operation:
+
+### Synthetic merge
+
+Neither (A) nor (B) can replace the other, but a newly fitted (C) can serve their union:
+
+[
+A+B
+\rightarrow
+C^*.
+]
+
+That gives you an unexpectedly clean V4 decomposition:
+
+[
+\boxed{
+\text{V4.1: select among existing representatives}
+}
+]
+
+[
+\boxed{
+\text{V4.2: synthesize a better shared representative when none exists}
+}
+]
+
+That's better than the original DELETE/MERGE distinction.
+
+So I wouldn't cancel V4.2 yet. I would redefine MERGE as **refit-required consolidation**.
+
+The decisive V4.2 comparison becomes:
+
+[
+\text{best subset of existing abstractions}
+]
+
+versus
+
+[
+\text{new functionally fitted merged abstractions}.
+]
+
+If refitting adds nothing, V4.2 is falsified/ unnecessary. That's a perfectly good result.
+
+---
+
+# 3. You can now build a much better exact oracle
+
+With libraries of size:
+
+[
+3\text{–}7,
+]
+
+there is no reason for the V4.1 oracle to be conservative.
+
+Construct a substitution matrix:
+
+[
+S_{ij\tau}
+==========
+
+1
+]
+
+iff abstraction (A_j) can replace the abstraction currently serving task (\tau) within (\epsilon).
+
+Then search all library subsets:
+
+[
+\mathcal S\subseteq\mathcal L.
+]
+
+For each subset, test whether every dependent can be assigned to a surviving abstraction:
+
+[
+\forall \tau,\quad
+\exists A_j\in\mathcal S:
+S_{j\tau}=1.
+]
+
+Then compute exact:
+
+[
+J(\mathcal S).
+]
+
+At (K\le7), that's at most:
+
+[
+2^7=128
+]
+
+subsets.
+
+Basically free.
+
+This gives you an **exact V4.1 compaction oracle**, not a lower bound.
+
+And it gives a lovely quantity:
+
+[
+R_{\rm compaction}
+==================
+
+## J_{\rm online}
+
+J^*_{\rm subset}.
+]
+
+That's probably more interpretable than the oracle currently in the spec.
+
+---
+
+# 4. Be careful calling these “equivalence classes”
+
+There's a subtle mathematical trap here.
+
+Approximate substitutability under (\epsilon) need not be transitive:
+
+[
+A\sim B
+]
+
+and
+
+[
+B\sim C
+]
+
+does not guarantee:
+
+[
+A\sim C.
+]
+
+And substitution may even be asymmetric:
+
+[
+A\rightarrow B
+]
+
+works while:
+
+[
+B\rightarrow A
+]
+
+doesn't.
+
+So I wouldn't yet say you've discovered literal functional equivalence classes.
+
+The safest representation is a **substitution graph**.
+
+Each abstraction is a node. Draw:
+
+[
+A\rightarrow B
+]
+
+if all dependents of (A) can be re-homed onto (B).
+
+Then V4.1 becomes something very close to a covering problem:
+
+> Find the cheapest surviving set of abstractions that behaviorally covers all current dependents.
+
+That's conceptually excellent.
+
+It may eventually connect naturally to set cover/facility-location-style library optimization.
+
+---
+
+# 5. The most important consequence: H14b may now be the wrong endpoint
+
+Your current spec predicts that:
+
+> fraction of births surviving should be higher in structured than structureless worlds. 
+
+I'm no longer convinced that's the right prediction.
+
+Suppose the structured world creates six estimates of two real concepts:
+
+[
+6\rightarrow2.
+]
+
+Survival rate:
+
+[
+2/6=.33.
+]
+
+The control creates three mediocre abstractions, of which one can cover the others:
+
+[
+3\rightarrow1.
+]
+
+Survival rate:
+
+[
+1/3=.33.
+]
+
+Your lifecycle could be behaving **perfectly** while H14b shows no difference.
+
+Worse, structured recurrence could generate *more redundant estimates*, making its survival fraction lower.
+
+The more meaningful quantities now seem to be:
+
+* reduction in redundant library cost;
+* reuse/tasks served per surviving abstraction;
+* realized savings per survivor;
+* number/cost of behaviorally necessary representatives;
+* final (J);
+* behavioral coverage preserved.
+
+I'd especially like:
+
+[
+\boxed{
+\text{reuse density}
+====================
+
+\frac{\text{tasks successfully served}}
+{\text{surviving abstractions}}
+}
+]
+
+and:
+
+[
+\boxed{
+\text{value density}
+====================
+
+\frac{\text{realized reuse savings}}
+{D(\text{surviving library})}.
+}
+]
+
+Structured worlds should plausibly dominate controls there.
+
+Since V4 is still provisional, I'd reconsider H14b **now**, before development results force your hand.
+
+---
+
+# 6. This also weakens the “speculative birth” framing slightly
+
+You discovered something important:
+
+> V3's PROMOTE isn't actually especially liberal. It promotes only when the abstraction already pays under its acceptance criterion.
+
+So:
+
+> “Invent hypotheses cheaply, then make persistence expensive”
+
+is a nice long-term architecture idea, but it isn't quite what this particular system is doing.
+
+The empirical V4 story is currently more precise:
+
+[
+\boxed{
+\text{independent promotion events produce redundant estimates;
+subsequent functional substitution reveals which implementations are unnecessary.}
+}
+]
+
+That's still very interesting.
+
+You could say:
+
+> **Birth is locally rational but globally redundant.**
+
+That's perhaps the core V4.1 phenomenon.
+
+Each PROMOTE decision can make sense when made locally, yet after several births:
+
+[
+A_1,A_2,A_3
+]
+
+collectively contain redundancy.
+
+Lifecycle consolidation exploits information unavailable to the earlier local decisions.
+
+That is a strong reason for sleep/consolidation.
+
+---
+
+# 7. This gives sleep a much clearer purpose
+
+V3 could almost raise the question:
+
+> If SGD and PROMOTE work during the lifetime, why have a separate consolidation phase?
+
+Now you have an answer.
+
+Local decisions happen with incomplete context:
+
+[
+\operatorname{PROMOTE}(A_1),
+\quad
+\operatorname{PROMOTE}(A_2),
+\quad
+\operatorname{PROMOTE}(A_3).
+]
+
+Later sleep can consider the whole library jointly:
+
+[
+{A_1,A_2,A_3}
+\rightarrow
+{A_2}.
+]
+
+So:
+
+[
+\boxed{
+\text{wake discovers useful computations locally;
+sleep globally refactors their representation.}
+}
+]
+
+That feels extremely aligned with the original project vision.
+
+---
+
+# 8. Charge reference migration now
+
+The spec currently mostly postpones migration charging until V4.2. 
+
+But reference migration is now **the central operation of V4.1**.
+
+If:
+
+[
+A_1\rightarrow A_2
+]
+
+requires rewriting 12 task references, that's part of the structural edit.
+
+At minimum I'd report separately:
+
+[
+\Delta D_{\rm library},
+]
+
+[
+\Delta D_{\rm references},
+]
+
+[
+C_{\rm rehome},
+]
+
+[
+C_{\rm validation}.
+]
+
+You can still keep (\mu=0) and merely log computation. But any persistent reference representation changes need to be incorporated into (D) immediately.
+
+Otherwise the measured (3)-(4)k-nat gain could be somewhat optimistic.
+
+---
+
+# 9. One very important causal control
+
+Take the V3 library and compare:
+
+### Random retirement
+
+Delete the same number of abstractions, randomly re-homing wherever possible.
+
+### Usage-based retirement
+
+Keep the highest-use abstractions.
+
+### Functional-substitution retirement
+
+Your actual algorithm.
+
+If the third decisively wins, you show the gain comes from:
+
+[
+\boxed{\text{semantic redundancy detection}}
+]
+
+rather than simply:
+
+> V3's library is too big, so deleting almost anything helps.
+
+Given the oracle result, I expect functional re-homing to win.
+
+It's cheap and worth having.
+
+---
+
+# 10. Measure whether consolidation improves estimation too
+
+You saw in V3 that pooling could make things smaller **and better**.
+
+Now if several abstractions are redundant estimates:
+
+[
+A_1,A_2,A_3,
+]
+
+which one survives?
+
+If the survivor is simply whichever happened to exist first, you may preserve behavior but miss an opportunity.
+
+Compare:
+
+[
+\text{best existing representative}
+]
+
+against:
+
+[
+\text{functionally refitted centroid }A^*.
+]
+
+This is exactly the boundary between V4.1 and V4.2.
+
+Possible outcome:
+
+[
+J(A_{\rm best})\approx J(A^*).
+]
+
+Then representative selection suffices.
+
+Or:
+
+[
+J(A^*)\ll J(A_{\rm best}).
+]
+
+Then MERGE/refitting has earned its own rung.
+
+Beautifully falsifiable.
+
+---
+
+# 11. Your semantic-regression suite becomes load-bearing now
+
+Sequential re-homing can do:
+
+[
+A\rightarrow B,
+]
+
+then:
+
+[
+B\rightarrow C.
+]
+
+Even if both local substitutions satisfy:
+
+[
+\Delta L<\epsilon,
+]
+
+the total:
+
+[
+A\rightarrow C
+]
+
+might not.
+
+So after every retirement, I would validate **all ultimately affected dependents against their original stable checkpoints**, not just against their immediately previous host.
+
+You already planned this in the spec. 
+
+Now it's not defensive engineering; it is central to the validity of the result.
+
+---
+
+# 12. The new conceptual object might be a “behavioral cover”
+
+I think this is worth naming.
+
+A library:
+
+[
+\mathcal L={A_1,\ldots,A_K}
+]
+
+plus dependent tasks induces some required behavioral set.
+
+You seek the smallest/cheapest subset:
+
+[
+\mathcal C\subseteq\mathcal L
+]
+
+such that:
+
+[
+\forall\tau,\quad
+\exists A\in\mathcal C
+]
+
+that substitutes for the computation (\tau) needs within tolerance.
+
+Call:
+
+[
+\mathcal C
+]
+
+a **behavioral cover**.
+
+Then V4.1 asks:
+
+[
+\boxed{
+\textbf{Can the learner compress a fragmented library toward a low-cost behavioral cover without losing its capabilities?}
+}
+]
+
+I think that's actually a better formal description of what you've found than “garbage collection.”
+
+---
+
+## What I'd expect from the worlds 0–2 run
+
+My prediction now is:
+
+### Description length
+
+Clearly improves.
+
+Probably on the order suggested by the oracle:
+
+[
++3\text{k}–4.5\text{k nats}.
+]
+
+### Prediction
+
+Essentially non-inferior, perhaps slightly better/worse depending on which representative survives.
+
+### Future adaptation
+
+Probably nearly unchanged unless fewer candidate abstractions also make selection easier.
+
+### Library size
+
+Should collapse substantially:
+
+[
+4\rightarrow1,
+\quad
+6\rightarrow2,
+\quad
+5\rightarrow1
+]
+
+or close.
+
+### Reuse density
+
+Should rise dramatically.
+
+That last metric may be the nicest behavioral signature.
+
+---
+
+# And it changes my V4 roadmap slightly
+
+I'd now make it:
+
+[
+\boxed{\text{V4.1 — COMPACTION}}
+]
+
+Select a minimal useful subset of existing abstractions through functional re-homing.
+
+Then:
+
+[
+\boxed{\text{V4.2 — CONSOLIDATION}}
+]
+
+Ask whether synthesizing/refitting new representatives beats simply selecting among existing ones.
+
+Then:
+
+[
+\boxed{\text{V4.3 — EVOLUTION}}
+]
+
+Copy-on-write + FORK under regime divergence.
+
+Then:
+
+[
+\boxed{\text{V4.4 — RETENTION ECONOMICS}}
+]
+
+Dormancy, real options, DELETE of genuinely obsolete—not merely redundant—computation, and hysteresis.
+
+I actually like this ordering **better** than the original spec.
+
+Because the gate has told you that the immediate problem is not:
+
+[
+\text{useful}\rightarrow\text{obsolete}.
+]
+
+It's:
+
+[
+\text{useful}_1,\text{useful}_2,\text{useful}_3
+]
+
+all implementing essentially the same requirement.
+
+First learn to compact **redundancy**.
+
+Then introduce true **obsolescence**.
+
+That's another case where the gate has improved the research program rather than merely approving it.

@@ -1520,3 +1520,41 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   LifecycleLibraryLearner writes one (sync_lineage, task_reference and
   retired_task_ids in the artifact). This is the gap V4's lineage existed
   to fill, arriving earlier than expected.
+
+# V4.1 gate: FAILS under a corrected substitution tolerance (2026-08-19)
+
+Built the exact behavioral-cover oracle (subset search over the whole
+library, at most 2^7 = 128 evaluations, so a solution rather than a
+bound) plus the three-policy causal control (functional / usage /
+random retirement at matched counts).
+
+The control immediately went degenerate: all three policies stranded 0
+dependents at identical cost. That is the signature of a substitution
+relation carrying no information, and it was. The tolerance normalized
+deviation against TOTAL OUTPUT VARIANCE while an abstraction contributes
+about 0.2% of it, so removing an abstraction outright scored a SMALLER
+deviation (0.0016-0.0024) than replacing it with another
+(0.0022-0.0039) — the null edit passed.
+
+Re-normalized against the abstraction's own contribution, the result
+inverts: substitution costs 0.86 / 1.25 / 1.60 of what the abstraction
+buys in worlds 0-2, and 99-100% of ordered pairs are distinguishable at
+a 10% tolerance. Priced in held-out Gaussian nats, compacting to one
+abstraction costs 4,474 / 7,883 / 5,769 to save 3,294 / 5,490 / 4,392
+bits: net -1,180 / -2,393 / -1,377, mean -1,650.
+
+Consequences. The earlier +2,928-nat H14 structured-versus-control
+result and the "4-6 abstractions compact to a cover of size 1" oracle
+result are both retracted in `PREDICTIONS.md` (appended, not rewritten).
+The representation-fragmentation premise for V4.1-as-compaction is
+unsupported on this testbed: V3's abstractions are individually weak but
+mutually distinct, which is a different problem. Both the operator
+(`lifecycle_models.consolidate`) and the oracle now use the
+contribution-relative denominator, the oracle carries a hard null-edit
+guard and an honest pass/fail line, and the spec's H14 section records
+the gate failure. All six lifecycle tests still pass — the redundancy
+test uses a genuinely duplicated abstraction and survives the tighter
+tolerance, which is the discrimination we want.
+
+Next: V4.2 synthetic merge (refit one abstraction covering several
+distinct contributions), which the gate does not block.
