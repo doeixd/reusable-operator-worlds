@@ -823,3 +823,9 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   ask which edits have any oracle advantage at all. Two dormancy designs
   were built and both failed to instantiate retention value -- a census
   would have said so before the lifetimes ran.
+- The world caps `tasks` at the number of distinct programs, which is
+  `primitives ** program_depth` = 6**3 = 216 in the canonical config.
+  N=256 is unreachable; the largest admissible scale point is 200.
+  Raising it means adding primitives, which breaks comparability with
+  every existing artifact. V4R §1.1's registered N in {64,128,256} was
+  therefore unsatisfiable as written and is run at {64,128,200}.
