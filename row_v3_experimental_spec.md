@@ -112,6 +112,40 @@ M3 fails and the milestone ladder halts at M2. If refusal fails in
 either control family, promotion is not a criterion and every positive
 result is reported under that caveat.
 
+**H11 DEVELOPMENT STATUS (worlds 0-9, frozen testbed, 2026-08-19):
+ALL THREE PREDICTIONS HOLD 10/10.** Promoted learner against the
+identical learner with PROMOTE disabled, same worlds and data:
+
+- **H11.1 migration:** the three-sign pattern in 10/10 worlds. D_task
+  falls (110,592 bits to a mean 23,791), D_shared rises (12,720 to a mean
+  21,115), D_total falls by a mean 63.6% (range 52.6-74.3%). The shared
+  capacity was CREATED by promotion, not preallocated, which is what
+  distinguishes this from the implicit absorption measured earlier in
+  overcomplete bases.
+- **H11.2 both currencies:** two-part gain mean +55,697 nats (range
+  +46,127 to +64,840) with lifetime loss ALSO improving by a mean +1,350
+  nats (range +761 to +2,513), both 10/10. Every V2 model lost the
+  literal two-part cell; this is the first learner in the program to win
+  prediction and description length at the same time.
+- **H11.3 prospective value:** on the held-out future block, 32-shot NMSE
+  improves by a mean +0.00310 (range +0.00172 to +0.00438) and adaptation
+  nats by a mean +16, both 10/10, with 8 of 8 future tasks electing to
+  reuse the library in nine worlds and 7 of 8 in the tenth.
+- **Refusal: GRADED, NOT ABSOLUTE — the strict form is falsified.** The
+  promoter does not decline to promote in structureless controls; it
+  builds a smaller library there. Structured worlds promote 5.3 and
+  refuse 4.2 with 31.8 of 40 tasks reusing; matched controls promote 2.9
+  and refuse 6.3 with 12.8 of 40 reusing, a 2.48x reuse ratio with the
+  promote/refuse balance inverted between conditions. The refusal
+  requirement as originally written ("NO promotion in structureless
+  controls") is therefore FALSIFIED, and only the graded contrast is
+  carried into the sealed plan. Recorded here so the weaker criterion is
+  never mistaken for the registered one.
+- An intermediate result worth keeping: before library REUSE was
+  implemented, promoted and unpromoted had identical prequential loss.
+  Bits migrated and nothing learned faster. Promotion without a reuse
+  path is storage optimization, and H11.3 exists precisely to catch that.
+
 ## H12 — Hierarchical Vocabulary (secondary)
 
 With sharing structure at several levels (global component + hidden
