@@ -689,3 +689,53 @@ frozen-library oracle. At this scale, under stationary recurrence with
 cheap reacquisition, the optimal representation IS a static library of
 independently compressed abstractions, and lifecycle machinery costs
 more than the slack it recovers.
+
+# The remaining slack is CODING, not topology (2026-08-19)
+
+Direct test of the hypothesis that V3's library is minimal-sufficient at
+the FUNCTIONAL level but wasteful at the CODING level. Symmetric
+per-tensor quantization of the abstractions, structured worlds 0-2,
+loss increase over the 8-bit reference:
+
+| bits/scalar | 1 | 2 | 3 | 4 | 6 |
+| --- | --- | --- | --- | --- | --- |
+| mean nats paid | 6,224 | 2,681 | 599 | 127 | -7 |
+
+At SIX bits the behavioral cost is zero (-7 nats, i.e. marginally
+better). At four bits it is 127 nats across an entire library. Priced
+against the description saved at lambda = ln 2, the net is positive
+everywhere and is MAXIMIZED at the most aggressive setting tested:
+
+    1 bit: save 38,428, pay 6,224 -> net +32,204
+    2 bit: save 32,938, pay 2,681 -> net +30,258
+    4 bit: save 21,959, pay   127 -> net +21,832
+
+So `D_min(A) ~ 1-2 bits/scalar` against a stored `D(A) = 8`. The
+abstractions carry roughly a quarter to an eighth of the information
+their encoding pays for. CONFIRMED: the expensive thing is the encoding
+of each learned function, not the number of distinct functions.
+
+Consequences, and the second is a caution about this project's own
+accounting.
+
+First, it explains the whole census. FACTORIZE must beat COMPRESS at
+matched bits; if each atom is 4-8x overparameterized, private
+requantization harvests that slack with no fixed cost, while a shared
+basis pays `D(C) + D(B)` up front for structure that is weaker than the
+waste. RETIRE and FORK are unaffected either way. Local compression wins
+because there is a large, cheap, purely numerical reservoir sitting in
+front of every structural edit.
+
+Second, the 8-bit retention proxy used throughout V1-V4 OVERSTATES
+description length by roughly 4-8x in absolute terms. Every paired
+comparison in this project survives, because the proxy is applied
+symmetrically to all models and the comparisons are relative. But any
+ABSOLUTE two-part claim -- "the library costs N bits", "V(A) repays its
+storage by 3x to 20x" -- is inflated by that factor and should be
+restated at the measured frontier rather than at 8 bits. This is worth
+an audit before the paper quotes any absolute figure.
+
+Reading. The next bottleneck for this architecture is neural coding
+efficiency, not library topology. Restructuring the computational
+language is not yet rational: the existing words are simply written in
+too many bits.
