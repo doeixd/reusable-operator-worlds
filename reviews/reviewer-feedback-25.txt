@@ -489,3 +489,101 @@ That’s a much more serious definition of a reusable abstraction.
 
 So yes: freeze, hash, launch sealed. This is exactly the moment where the experiment needs to be allowed to surprise you again.
 
+This is a very strong place to be going into sealed confirmation. The main thing I would do now is **protect the interpretation**: don't let the final story depend on whether all five outcomes pass. The development phase has already separated several scientifically distinct claims, so the sealed block should tell you *which layer replicates*.
+
+The hierarchy I’d use is:
+
+* **O1 / migration:** did private task information actually become newly created shared information?
+* **O2 / economics:** did that representation lower total two-part cost?
+* **O3 / prediction:** did the smaller representation also improve lifetime prediction?
+* **O4 / prospective value:** did the abstraction reduce learning cost on unseen related tasks?
+* **O5 / discrimination:** did the promoter behave materially differently when reusable structure was absent?
+
+Those should stay separate in the verdict. The strongest conceivable result is all five. But even something like O1–O4 passing with O5 weaker would still establish the central V3 mechanism and isolate lifecycle/refusal as the next problem.
+
+The thing I find most important in the development result is that **M2 and M3 happen together**. Compression alone would have been interesting but could still be dismissed as model refactoring. Transfer alone could be ordinary representation learning. You have both:
+
+[
+\text{repeated private computation}
+\rightarrow
+\text{new shared abstraction}
+\rightarrow
+D_{\rm total}\downarrow
+]
+
+and then:
+
+[
+\text{new task}
+\rightarrow
+\text{reuse abstraction}
+\rightarrow
+L_{\rm learn}\downarrow.
+]
+
+That is genuinely the base case of the full Neural Library Learning idea.
+
+The four failed testbeds matter almost as much as the success. I’d preserve that chronology carefully in the eventual paper, because it shows why the final criterion is necessary rather than decorative. Each failed proxy corresponded to a specific false positive:
+
+[
+\begin{aligned}
+\text{parameter similarity} &\rightarrow \text{broken by gauge freedom}\
+\text{clustering} &\rightarrow \text{can detect irrelevant structure}\
+\text{latent identity} &\rightarrow \text{doesn't imply useful compression}\
+\text{functional similarity} &\rightarrow \text{can still be generic compression}\
+\text{cross-task substitution} &\rightarrow \text{establishes reuse}\
+\text{prospective value} &\rightarrow \text{establishes abstraction}
+\end{aligned}
+]
+
+That ladder is a real conceptual contribution. It says **what evidence should count as a neural abstraction**.
+
+I would also be ready for sealed shrinkage. Development is unusually clean—10/10 everywhere—so I’d expect the means to move. My prior would be that the most stable results are the structural ones: bit migration and two-part gain. The most variable will probably be prospective learning and refusal. If the sealed means are materially smaller but remain inside the frozen intervals, that is healthier than numerically repeating development almost exactly.
+
+One outcome would particularly change my view: if O1/O2 replicate but O4 fails. That would say:
+
+> the system can form compact abstractions, but abstraction **access** does not robustly amortize to future learning.
+
+Then the next project is not MERGE/FORK yet; it is retrieval/recognition/initialization. Conversely, if O4 replicates strongly, I would be comfortable moving directly toward the lifecycle work because the entire creation→reuse loop has survived.
+
+And if O5 is the only weak result, I think the interpretation is already emerging:
+
+[
+\boxed{
+\text{birth can be speculative; retention/use determines whether an abstraction deserves permanence.}
+}
+]
+
+The fact that structureless worlds build smaller, much less-used libraries is consistent with that. A future DELETE/MERGE mechanism may be the appropriate solution rather than forcing PROMOTE to have perfect precision.
+
+The other thing I’d preserve from this phase is the distinction between **preallocated capacity** and **created capacity**. The earlier route result showed something valuable but different:
+
+[
+\text{free shared capacity available}
+\Rightarrow
+\text{SGD absorbs recurrence directly}.
+]
+
+The final V3 world tests:
+
+[
+\text{shared capacity saturated}
++
+\text{recurring private computation}
+\Rightarrow
+\text{new shared capacity is created}.
+]
+
+That is the actual abstraction-birth event. It also suggests a broader architecture rule:
+
+[
+\boxed{
+\text{reuse existing language first; expand the language only when recurrence can no longer be represented economically inside it.}
+}
+]
+
+That feels like one of the most important principles the project has uncovered so far.
+
+So at this point I would not change anything, reinterpret anything, or add any new tests to the sealed block. Let the frozen experiment answer the question it was designed to answer. If the sealed result looks anything like development, V3 will have crossed an important threshold: the project will no longer merely have evidence that reusable computation is economically useful; it will have an experimentally demonstrated mechanism for **creating** reusable computation and making later learning cheaper.
+
+

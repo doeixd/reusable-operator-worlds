@@ -461,3 +461,92 @@ treated as internal holdout, predicts M2 very strong / M3 positive but
 noisier / refusal useful but not solved, and frames the V1→V2→V3-pre→V3
 progression as a coherent ladder ending in the recursive question: can
 abstractions born this way become raw material for higher-order abstraction?
+
+### [reviewer-feedback-25.txt](reviewer-feedback-25.txt)
+Freeze recommendation: with the 10/10 development result (ΔL = +1,350 nats,
+ΔJ_two-part = +55,697 nats, D_total ↓ 63.6%, 10/10 on every sign) and the
+control separation now much stronger (reuse ratio 2.48× > library ratio 1.83×;
+the decision balance flips — structured: promote > refuse, control: refuse >
+promote), this is exactly when further tweaking becomes more dangerous than
+useful. Six pre-hash checks: (1) keep the original absolute-refusal requirement
+permanently recorded as **falsified on development**, and register the graded
+discrimination result (reuse-rate, not library-size, which is contaminated by
+fragmentation) separately; (2) audit the +1,350-nat prediction gain against
+extra optimization with a matched-compute/sham-reuse control (representation
+advantage ≠ accidental extra-training advantage); (3) score M2a/M2b/M3 as
+genuinely separable sealed outcomes so a mixed result stays interpretable;
+(4) inspect worlds 3–9 separately before finalizing intervals (0–2 were used
+heavily for testbed redesign, so 3–9 are a cleaner internal generalization
+check — report dev_0:2, dev_3:9, dev_0:9); (5) freeze non-gate diagnostics
+(pairwise functional distances, reuse counts, effective library size, birth
+time, post-birth cumulative advantage, C_search, family/global/zero LOO) —
+expect several of the ~5.3 abstractions to be functionally redundant, which is
+the empirical justification for MERGE; (6) clarify the surrendered-control
+bookkeeping (drifting-family and regime-change are two constructions, not one).
+Restates the "abstraction pays twice" denoising diagnostic (d(A,F_teacher) vs
+median_i d(R_i,F_teacher); diagnostic not sealed criterion) and adds the M3
+ΔL_future(n) curve over examples (immediate divergence ⇒ cheap retrieval;
+divergence only after 8–16 examples ⇒ abstraction access/recognition is the
+next Phase III bottleneck). Gives the precise sealed claim V3 would establish
+and the defensible definition of abstraction forced by the four failed
+testbeds: load-bearing + cross-task substitutable + better than global
+compression + prospectively useful — not "find something similar." Predicts
+D_total and two-part gain replicate strongly, lifetime prediction noisier, M3
+largest variance, library size may wander (fragmentation uncontrolled).
+
+### [reviewer-feedback-26.txt](reviewer-feedback-26.txt)
+Assuming V3 seals, V4 should be about **the lifecycle of abstractions**, not
+more expressive programs yet. V3 establishes birth; V4 asks whether a learner
+can rationally maintain and reorganize its computational language as evidence
+changes. The key conceptual shift: abstraction creation is **speculative** —
+you don't need P(false birth)=0, you need P(false abstraction survives)≈0, which
+is far more realistic. The revised V4 progression is V4.1 RETAIN/DELETE first
+(not MERGE) — give every abstraction a running account
+V_t(A) = [S_t(realized) + Ŝ_future]/[D(retain) + C(retrieval)] and DELETE when
+V_t<0; compare PROMOTE+DELETE vs frozen V3 PROMOTE-only, with the smoking gun
+being the control's spurious library largely disappearing while the structured
+library remains useful. V4.2 MERGE (deduplicate functionally redundant births via
+mutual substitutability A_i ~_ε A_j, refit A* functionally, accepted iff
+J_after < J_before). V4.3 nonstationarity + FORK/copy-on-write (adapt privately
+first A+Δ_local; FORK only when divergence recurs — FORK is just PROMOTE
+conditioned on an existing parent, giving a genealogical library with delta
+encoding D(A') = D(A)+D(Δ)). V4.4 hysteresis + dormancy + horizon. Several
+critical refinements: (a) **abstractions as real options** — DELETE should ask
+the expected value of keeping the option to reuse A, not "has it been used
+recently"; test with an A→B→A (dormancy) vs A→B→B (permanent disappearance)
+world. (b) **The hysteresis lag confound** — any slowly-adapting system shows
+apparent hysteresis from adaptation lag; the decisive test is sweeping the
+recurrence-change rate v and checking whether r_create − r_delete → 0 as v→0
+(fake) or stays >0 (genuine economic hysteresis); preregister this. (c) Every
+edit pays a **migration cost** (reference rewrites, validation, fitting) — log
+it or lifecycle operations look artificially attractive. (d) Lifecycle may
+force emergence of a **stable addressing / symbol table** (indirection so
+MERGE/DELETE can reorganize without rewriting every reference). (e) MERGE must
+ask "can one replacement serve all dependents of both?" — fit C* over all
+dependents, compare A+B vs C vs global vs delete; the constitutional rule is
+**structural edits are justified by substitution, never identity**. (f) Don't
+score V4 by library_size→2; score by J↓ and functional substitutability (the
+learner may discover a finer decomposition than the teacher ontology). (g)
+**Frequency is not value** — an abstraction used twice may save 10k nats/use
+while one used 100 times saves 5; retain on N_reuse × S_reuse, not N. (h)
+Matched refusal controls for each operation (DELETE: dormant-but-returning;
+MERGE: similar-but-incompatible; FORK: noisy-temporary; RETAIN: genuinely-
+obsolete). (i) Deterministic greedy edit policy (generate candidates, estimate
+ΔJ, apply highest-value edit, recompute, repeat — greedy program refactoring;
+log the candidate queue). (j) **Cascading distortion** — chained edits
+accumulate error; validate every dependent task's final behavior against stable
+checkpoints (a semantic regression suite / unit tests for learned abstractions).
+(k) Track **abstraction lineage** metadata from day one (birth_time, parents,
+dependents, reuse_count, savings, merge_history). (l) The architecture may
+resemble a **garbage collector** (PROMOTE=allocation, references=pointers,
+DELETE=GC, MERGE=dedup, FORK=copy-on-write) — generational GC (new/speculative
+abstractions monitored aggressively, long-lived ones require stronger evidence
+to delete) naturally generates hysteresis. (m) Record the (library state,
+candidate edit, ΔJ, outcome) decision dataset so V6 can later learn a
+restructuring policy q_φ(e|M,H). Adds abstraction-survival as a new instrument
+(N_reuse, S(A), T_life; false births → low reuse → short life vs real → high
+reuse → retained — selection over neural abstractions). Defers macros/recursive
+abstraction to V5 (premature recursion amplifies fragmentation and search debt).
+The desired V4 result table: structured 5.4 births → 2.3 survive → 2.1 useful;
+control 3.0 → 0.4 → 0.1, with L_V4 ≤ L_V3 and D_V4 < D_V3 — "invent hypotheses
+cheaply, then make persistence expensive."

@@ -147,6 +147,36 @@ the shared substrate improves, which is exactly what replay is for.
 ---
 Outcome log (append-only):
 
+- **V3 SEALED BLOCK (seeds 300-329): ALL FIVE REGISTERED OUTCOMES PASS**
+  (2026-08-19; plan frozen at bcc8319 BEFORE these seeds were generated;
+  reports/v3_sealed.json, reports/v3_sealed_future.json,
+  artifacts/v3_sealed/). 90 lifetimes, zero failures.
+    O1 two-part gain   PASS  +55,292 nats, positive 30/30 (dev +55,697)
+    O2 loss gain       PASS  +1,174 nats,  positive 30/30 (dev +1,350)
+    O3 migration       PASS  three-sign 30/30, D_total -63.3% (dev -63.6%)
+    O4 prospective     PASS  32-shot +0.00311, positive 30/30 (dev +0.00310)
+    O5 refusal         PASS  reuse ratio 1.80x (floor 1.4; dev 2.48x)
+  The parameters replicate, not merely the signs: the two-part gain
+  reproduces to within 0.7% and the total-bits reduction to within 0.3
+  points, on thirty worlds nobody had inspected, against intervals frozen
+  in advance. H11 is confirmed in all three mandatory parts — an
+  abstraction is born (M2) and it makes future related tasks cheaper to
+  learn (M3).
+  * SCOPE, stated so the result is not over-read: this holds in a
+    deliberately constructed world (saturated 6-slot library, a genuinely
+    new hidden primitive introduced at task 16 at a fixed program
+    position, two hidden task-group families). Four earlier testbeds
+    failed, each because a weaker notion of shared structure certified a
+    world where promotion degenerated into routing, quantization, or
+    deletion. The claim is that promotion works WHEN recurring structure
+    is load-bearing, compressible, and family-specific — the three
+    properties the frozen validity gate measures — not that those
+    conditions arise on their own.
+  * The refusal requirement in its ORIGINAL absolute form (no promotion
+    at all in structureless controls) remains FALSIFIED; only the graded
+    contrast registered in the plan passed. The promoter builds a smaller
+    library on structureless worlds rather than declining to build one.
+
 - **P-2026-08-18-D: FALSIFIED as written, and the reason redirects V3**
   (2026-08-19; reports/v3_group_clustering.json,
   artifacts/v3_taskgroup/). The prediction was that in a task-group

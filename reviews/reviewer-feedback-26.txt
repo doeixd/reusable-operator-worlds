@@ -1,0 +1,1563 @@
+Assuming sealed V3 looks like development, I think **V4 should be about the life cycle of abstractions, not about creating more expressive programs yet**.
+
+V3 would have established the base case:
+
+[
+\text{private recurring computation}
+\rightarrow
+\text{PROMOTE}
+\rightarrow
+\text{shared abstraction}
+\rightarrow
+\text{cheaper future learning}.
+]
+
+But it also gives us the next problem almost for free: the learner creates roughly **5 abstractions for 2 real families**, and even the structureless control creates some abstractions. So birth works, but the library is messy.
+
+The V4 question should be:
+
+[
+\boxed{
+\textbf{Can a learner rationally maintain and reorganize its computational language as evidence changes?}
+}
+]
+
+I'd call it something like **V4: The Life of an Abstraction** or **V4: The Economy of a Library**.
+
+## The key conceptual shift
+
+V3 treats promotion almost like a permanent decision:
+
+[
+\operatorname{PROMOTE}(A).
+]
+
+I think V4 should instead discover that abstraction creation is **speculative**.
+
+A useful lifecycle is:
+
+[
+\boxed{
+\text{birth}
+\rightarrow
+\text{usage}
+\rightarrow
+\text{consolidation}
+\rightarrow
+\begin{cases}
+\text{retain}\
+\text{merge}\
+\text{fork}\
+\text{delete}
+\end{cases}}
+]
+
+This solves the refusal problem in a much more natural way than trying to make PROMOTE perfect.
+
+You don't actually need:
+
+[
+P(\text{false birth})=0.
+]
+
+You need:
+
+[
+P(\text{false abstraction survives})\approx0.
+]
+
+That's a much more realistic objective.
+
+---
+
+# V4.1 should be MERGE + DELETE
+
+I would make this the **core V4 experiment**.
+
+Don't introduce nonstationarity immediately. Stay in the validated V3 world and ask whether the system can clean up after PROMOTE.
+
+You already expect:
+
+[
+A_1,A_2,A_3
+]
+
+to sometimes be functionally redundant representations of the same underlying family.
+
+Define:
+
+[
+A_i\sim_\epsilon A_j
+]
+
+when they are mutually substitutable on held-out functional probes.
+
+Then allow:
+
+[
+\operatorname{MERGE}(A_i,A_j)\rightarrow A_{ij}.
+]
+
+The edit is accepted only if:
+
+[
+J_{\rm after}<J_{\rm before}.
+]
+
+Similarly, an abstraction that was created but subsequently receives little useful reuse gets a prospective retention value:
+
+[
+V_{\rm retain}(A)
+=================
+
+## \mathbb E[\text{future savings from }A]
+
+D(A).
+]
+
+If:
+
+[
+V_{\rm retain}(A)<0,
+]
+
+allow:
+
+[
+\operatorname{DELETE}(A).
+]
+
+This directly tests the weakness V3 exposes.
+
+The smoking-gun result would be:
+
+[
+\text{PROMOTE-only library size}\approx5
+]
+
+becoming something like:
+
+[
+\text{maintained effective library size}\approx2
+]
+
+in the structured world, while the structureless world's speculative library moves toward:
+
+[
+\approx0.
+]
+
+But importantly, **don't require recovery of the teacher's number two**. The primary outcome should be lower:
+
+[
+D_{\rm library}
++
+D_{\rm references}
+]
+
+at equal or better predictive/future-learning performance.
+
+---
+
+# I think this should be the central V4 hypothesis
+
+Something like:
+
+> **H14 — Rational Library Maintenance.** When abstraction birth is imperfect, evidence from subsequent reuse allows a learner to consolidate functionally redundant abstractions and retire abstractions whose prospective value becomes negative, reducing total lifetime description and retrieval burden without sacrificing predictive performance or future-task adaptation.
+
+The comparison should be:
+
+[
+\boxed{
+\text{PROMOTE+MERGE+DELETE}
+\quad\text{vs}\quad
+\text{frozen V3 PROMOTE-only}.
+}
+]
+
+That's beautifully causal.
+
+V3 says birth is useful.
+
+V4 asks whether managing the things you've created adds additional value.
+
+---
+
+# Then V4.2 should introduce FORK
+
+Once retention/merging works, now let the world change.
+
+Suppose abstraction (A) has become heavily shared:
+
+[
+A\rightarrow{\tau_1,\ldots,\tau_{50}}.
+]
+
+Then a new regime appears that wants:
+
+[
+A+\delta.
+]
+
+The naive learner can update (A):
+
+[
+A\leftarrow A+\delta.
+]
+
+But that changes all 50 old programs.
+
+That's catastrophic forgetting through shared mutable state.
+
+The natural solution is **copy-on-write**:
+
+[
+A
+]
+
+remains stable.
+
+The new task starts with:
+
+[
+A+\delta_\tau.
+]
+
+If that deviation is one-off, leave it local.
+
+If the same deviation appears repeatedly:
+
+[
+\delta_1\approx\delta_2\approx\delta_3,
+]
+
+then:
+
+[
+\boxed{
+\operatorname{FORK}(A)\rightarrow A'
+}
+]
+
+where:
+
+[
+A'\approx A+\delta.
+]
+
+Now old tasks reference (A), and the new regime references (A').
+
+That is almost a perfect continual-learning mechanism.
+
+---
+
+# The FORK experiment could be extremely clean
+
+Start with a V3 learner that has successfully promoted family (A).
+
+Then halfway through the lifetime, split the environment:
+
+[
+A\rightarrow
+\begin{cases}
+A_1\
+A_2
+\end{cases}.
+]
+
+Compare three policies:
+
+1. **Update-in-place:** modify (A).
+2. **Never-update:** keep (A), use private residuals forever.
+3. **Copy-on-write:** adapt privately first, FORK when recurrence earns it.
+
+My strong prediction is:
+
+[
+\text{copy-on-write}
+]
+
+wins the lifetime objective.
+
+Update-in-place should suffer old-task interference.
+
+Never-update should retain too many private bits.
+
+Copy-on-write should get:
+
+[
+\text{old behavior preserved}
++
+\text{new-task adaptation}
++
+\text{eventual compression}.
+]
+
+If that works, you've basically demonstrated a neural analogue of persistent data structures/version control.
+
+---
+
+# Then test hysteresis
+
+This is one of the sharpest theoretical predictions in the whole project.
+
+Creating an abstraction costs:
+
+[
+C_{\rm create}.
+]
+
+But retaining an already-existing abstraction costs only:
+
+[
+C_{\rm retain}.
+]
+
+Therefore:
+
+[
+C_{\rm create}>C_{\rm retain}.
+]
+
+So the recurrence level required to create an abstraction should be higher than the recurrence level at which an existing one becomes worth deleting:
+
+[
+\boxed{
+r_{\rm create}>r_{\rm delete}.
+}
+]
+
+That predicts a hysteresis loop.
+
+Increase recurrence slowly:
+
+```text
+private
+private
+private
+PROMOTE
+shared
+shared
+```
+
+Then decrease it:
+
+```text
+shared
+shared
+shared
+shared
+DELETE
+private
+```
+
+The transition points shouldn't coincide.
+
+If you actually observe that, it would provide very strong evidence for your interpretation of abstractions as **investments**.
+
+That's much deeper than merely showing MERGE/DELETE work.
+
+---
+
+# V4 should make the environment nonstationary
+
+V1–V3 mostly answer questions under a stationary recurrence structure.
+
+V4 should change that:
+
+[
+r
+\rightarrow
+r(t).
+]
+
+Now the learner has to estimate:
+
+[
+P(\text{future reuse}\mid H_t).
+]
+
+That turns prospective value from a clever gate into a necessity.
+
+An abstraction that was enormously useful yesterday may be worthless tomorrow.
+
+A previously useless computation may suddenly recur constantly.
+
+The computational language itself should track the environment.
+
+That begins to look like actual continual learning.
+
+---
+
+# I would structure V4 as one ladder
+
+1. **V4.1 — MERGE/DELETE:** Can reuse evidence clean up speculative births? This directly addresses V3's observed fragmentation and false promotions.
+2. **V4.2 — FORK/copy-on-write:** Can the library adapt to regime splits without corrupting old programs?
+3. **V4.3 — hysteresis:** Do CREATE and DELETE thresholds differ as predicted by abstraction-as-investment economics?
+4. **V4.4 — priced retrieval, exploratory:** Start charging for an unnecessarily large library and ask whether lifecycle management reduces not only bits but search/indexing cost.
+
+I would gate every rung on the previous one.
+
+Don't implement the whole thing simultaneously.
+
+---
+
+# I would explicitly measure abstraction survival
+
+This could become a really nice new V4 instrument.
+
+For every abstraction born at time (t_b), record:
+
+[
+N_{\rm reuse}(A),
+]
+
+its cumulative realized savings:
+
+[
+S(A),
+]
+
+and its survival time:
+
+[
+T_{\rm life}(A).
+]
+
+Then compare structured and structureless worlds.
+
+My prediction is something like:
+
+[
+\text{false births}
+\rightarrow
+\text{low reuse}
+\rightarrow
+\text{short life},
+]
+
+while:
+
+[
+\text{real abstraction}
+\rightarrow
+\text{high reuse}
+\rightarrow
+\text{retained}.
+]
+
+That's essentially **selection acting over neural abstractions**.
+
+The model can afford to generate candidate structure somewhat liberally because lifetime evidence selects which structure survives.
+
+That actually reconnects nicely with your old evolutionary/genetic intuition—without requiring a genetic algorithm over weights.
+
+---
+
+# V4 may discover that MERGE is harder than DELETE
+
+DELETE is relatively simple:
+
+> Is this thing still useful?
+
+MERGE has the gauge-freedom problem again.
+
+You cannot decide:
+
+[
+A_i\approx A_j
+]
+
+from their parameters.
+
+You need:
+
+[
+\boxed{\text{mutual functional substitutability}.}
+]
+
+And perhaps:
+
+[
+A_i,A_j\rightarrow A^*
+]
+
+where (A^*) is **refit functionally**, exactly as V3 taught you.
+
+That same methodological ladder carries forward.
+
+V3's functional-substitution machinery is therefore becoming infrastructure for the whole project.
+
+---
+
+# I would not do recursive/macros in V4
+
+This is tempting:
+
+[
+A,B,C
+\rightarrow
+M=[A,B,C].
+]
+
+But I think that's V5.
+
+Why?
+
+Because before abstractions become the components of higher-level programs, you need confidence that the vocabulary itself can remain sane.
+
+Otherwise recursive abstraction will amplify every V3 problem:
+
+[
+5\text{ redundant primitives}
+]
+
+can produce dozens of redundant macros.
+
+Search debt explodes.
+
+So the order I'd use is:
+
+[
+\boxed{
+\text{V3: birth}
+}
+]
+
+[
+\boxed{
+\text{V4: life/death/reorganization}
+}
+]
+
+[
+\boxed{
+\text{V5: abstractions over abstractions}
+}
+]
+
+That feels like the cleanest scientific progression.
+
+---
+
+# And then V5 becomes very exciting
+
+Once V4 establishes a self-maintaining vocabulary, you can finally ask:
+
+[
+[A,B,C]
+\rightarrow
+M
+]
+
+and then:
+
+[
+[M,M,M]
+\rightarrow
+\operatorname{Repeat}(M,3).
+]
+
+That's where the “learned computational language” claim really begins.
+
+But V4 should earn the right to get there.
+
+---
+
+## The larger theoretical model after V4
+
+If V3 and V4 both succeed, I think you'll have something like this:
+
+[
+\boxed{
+\begin{aligned}
+\text{new experience}
+&\rightarrow \text{reuse existing computation}\
+&\rightarrow \text{local innovation if necessary}\
+&\rightarrow \text{PROMOTE if innovation recurs}\
+&\rightarrow \text{MERGE if abstractions become equivalent}\
+&\rightarrow \text{FORK if one abstraction serves divergent regimes}\
+&\rightarrow \text{DELETE if prospective value disappears}.
+\end{aligned}}
+]
+
+That's already a remarkably complete **continual computational-memory system**.
+
+And note that almost none of those operations would have been added arbitrarily. Each was forced by a measured failure:
+
+[
+\text{repeated private bits}\Rightarrow\text{PROMOTE}
+]
+
+[
+\text{fragmented births}\Rightarrow\text{MERGE}
+]
+
+[
+\text{false/stale births}\Rightarrow\text{DELETE}
+]
+
+[
+\text{shared-state interference}\Rightarrow\text{FORK}.
+]
+
+That is exactly how I'd want the grand architecture to emerge.
+
+### My V4 one-line charter
+
+If V3 seals:
+
+[
+\boxed{
+\textbf{Can a continual learner maintain a compact computational vocabulary by letting abstractions be born speculatively, retaining them when future reuse validates them, merging redundant abstractions, forking abstractions under persistent divergence, and retiring abstractions whose prospective value disappears?}
+}
+]
+
+For the actual **first V4 experiment**, though, I would be ruthless: **PROMOTE + MERGE + DELETE versus frozen V3 PROMOTE-only**. Make speculative birth + evidence-based survival work cleanly first. Then bring in nonstationarity and FORK.
+Yes. Assuming V3 seals, I think V4 has the potential to be **even more conceptually important**, because it turns the library from a write-only memory into an adaptive system.
+
+My biggest recommendation is: **do not make V4 “PROMOTE + MERGE + FORK + DELETE all at once.”** The interactions will become impossible to diagnose. I would make each lifecycle operation earn its existence the same way PROMOTE did.
+
+## 1. I would actually start V4 with RETAIN/DELETE, not MERGE
+
+V3 already gives you the clean empirical problem:
+
+[
+\text{structured world: }5.3\text{ births}
+]
+
+[
+\text{control: }2.9\text{ births}.
+]
+
+Some births are speculative mistakes.
+
+So the simplest V4 question is:
+
+> **Can future evidence distinguish abstractions that deserved to exist from abstractions that merely looked promising when they were born?**
+
+Give every abstraction a running account:
+
+[
+V_t(A)
+======
+
+\underbrace{S_t(A)}*{\text{realized reuse savings}}
++
+\underbrace{\hat S*{\rm future}(A)}_{\text{expected future savings}}
+--------------------------------------------------------------------
+
+## \underbrace{D(A)}_{\text{retention}}
+
+\underbrace{C(A)}_{\text{retrieval/search tax}}.
+]
+
+Then:
+
+[
+V_t(A)<0
+\Rightarrow
+\operatorname{DELETE}(A).
+]
+
+Compare:
+
+[
+\boxed{\text{PROMOTE + DELETE}}
+]
+
+against frozen V3:
+
+[
+\boxed{\text{PROMOTE only}}.
+]
+
+If the control's spurious library largely disappears while the structured library remains useful, you've completed the story V3 began:
+
+[
+\boxed{
+\text{birth can be speculative;
+survival is evidence-based}.
+}
+]
+
+I think that's cleaner than introducing MERGE immediately.
+
+---
+
+# 2. Think of abstractions as **real options**
+
+This is a direction I think could become theoretically rich.
+
+An abstraction with no current use isn't necessarily worthless.
+
+Maybe its regime will return.
+
+So DELETE shouldn't ask:
+
+> Has (A) been used recently?
+
+It should ask:
+
+> What is the expected value of keeping the option to reuse (A)?
+
+That means:
+
+[
+V_{\rm retain}(A)
+=================
+
+P(\text{return})\times
+\text{value if returned}
+------------------------
+
+D_{\rm retain}(A).
+]
+
+This gives you an excellent experiment.
+
+### A → B → A world
+
+First (A) is common.
+
+Then it disappears.
+
+Later either:
+
+### Temporary dormancy
+
+[
+A\rightarrow B\rightarrow A.
+]
+
+or:
+
+### Permanent disappearance
+
+[
+A\rightarrow B\rightarrow B\rightarrow\cdots
+]
+
+A good lifecycle learner should retain (A) through short expected dormancy but eventually delete it if evidence says the regime is gone.
+
+That's a much deeper test than:
+
+> delete unused stuff.
+
+It makes long-term memory itself an economic decision.
+
+---
+
+# 3. Hysteresis needs one very important control
+
+Your prediction:
+
+[
+r_{\rm create}>r_{\rm delete}
+]
+
+is excellent.
+
+But there is a nasty confound.
+
+Any slowly adapting dynamical system can show an apparent hysteresis loop simply because it **lags behind a changing environment**.
+
+Increase recurrence:
+
+[
+r\uparrow
+]
+
+and promotion occurs late because learning takes time.
+
+Decrease recurrence:
+
+[
+r\downarrow
+]
+
+and deletion occurs late for the same reason.
+
+Voilà: fake hysteresis.
+
+### The decisive test
+
+Run several sweep rates:
+
+[
+v_1>v_2>v_3.
+]
+
+Measure:
+
+[
+r_{\rm create}(v)
+]
+
+and:
+
+[
+r_{\rm delete}(v).
+]
+
+If the loop is merely adaptation lag:
+
+[
+v\rightarrow0
+\Rightarrow
+r_{\rm create}-r_{\rm delete}\rightarrow0.
+]
+
+If the loop is genuinely economic:
+
+[
+v\rightarrow0
+\Rightarrow
+r_{\rm create}-r_{\rm delete}>0.
+]
+
+**I would preregister this.**
+
+It makes H15 much more convincing.
+
+---
+
+# 4. Every edit needs to pay a migration cost
+
+This is easy to miss.
+
+Suppose:
+
+[
+A,B\rightarrow C.
+]
+
+MERGE doesn't merely cost:
+
+[
+D(C).
+]
+
+Every task referencing (A) or (B) may need its reference rewritten.
+
+So:
+
+[
+C_{\rm merge}
+=============
+
+D(C)
++
+D(\text{reference rewrites})
++
+C_{\rm validation}
++
+C_{\rm fitting}.
+]
+
+Likewise DELETE may require:
+
+* removing table entries;
+* rewriting references;
+* restoring private residuals if something still depends on it.
+
+FORK requires:
+
+* storing (A');
+* changing references for the diverging tasks.
+
+If these edits are treated as free, lifecycle operations will look artificially attractive.
+
+You don't necessarily need to charge all compute in V4.1, but **log every migration cost**.
+
+---
+
+# 5. This may force you to invent stable handles
+
+There's an architectural consequence hiding there.
+
+If tasks point directly to physical slot 7:
+
+```text id="qayh2e"
+task → slot 7
+```
+
+and you merge/delete/reorganize slots, references become expensive to rewrite.
+
+Instead, you may want:
+
+```text id="1vzj6b"
+task → abstraction ID X37
+              ↓
+        current implementation
+```
+
+Then MERGE can do:
+
+```text id="zrn8am"
+X37 ─┐
+     ├→ X91
+X52 ─┘
+```
+
+with a small indirection table.
+
+In other words, lifecycle management may naturally force the emergence of a **symbol table / stable addressing layer**.
+
+That is extremely relevant to the full vision.
+
+A computational language needs stable names.
+
+---
+
+# 6. MERGE should not ask whether two abstractions are “similar”
+
+Use the V3 lesson ruthlessly.
+
+Not:
+
+[
+|\theta_A-\theta_B|.
+]
+
+Not clustering.
+
+Not even simply:
+
+[
+d(A,B)<\epsilon.
+]
+
+Ask:
+
+[
+\boxed{
+\text{Can one replacement serve all dependents of both abstractions?}
+}
+]
+
+Fit:
+
+[
+C^*
+===
+
+\arg\min_C
+\left[
+\sum_{\tau\in\operatorname{deps}(A)}
+d(F_\tau,C)
++
+\sum_{\tau\in\operatorname{deps}(B)}
+d(F_\tau,C)
+\right].
+]
+
+Then compare:
+
+[
+A+B
+]
+
+versus:
+
+[
+C.
+]
+
+And use the familiar controls:
+
+[
+\text{existing pair}
+]
+
+[
+\text{merged function}
+]
+
+[
+\text{global fit}
+]
+
+[
+\text{delete}.
+]
+
+V3 has basically given you a constitutional rule:
+
+[
+\boxed{
+\textbf{structural edits are justified by substitution, never identity}.
+}
+]
+
+Carry that everywhere.
+
+---
+
+# 7. Make sure MERGE isn't just correcting PROMOTE's fragmentation
+
+Actually, measure this explicitly.
+
+Your structured world has two teacher families but approximately:
+
+[
+5.3
+]
+
+abstractions.
+
+Suppose functional equivalence clustering reveals:
+
+[
+A_1\sim A_3\sim A_5
+]
+
+and:
+
+[
+A_2\sim A_4.
+]
+
+Then V3 isn't really discovering five concepts. It's generating multiple estimates/versions of two concepts.
+
+That would mean MERGE is doing something like **statistical consolidation**.
+
+But alternatively you might find the five abstractions are genuinely functionally different:
+
+[
+A_1\not\sim A_2\not\sim\cdots
+]
+
+despite only two teacher families.
+
+Then the learner may have discovered a finer decomposition than the teacher ontology.
+
+Do **not** score V4 by:
+
+[
+\text{library size}\rightarrow2.
+]
+
+Score by:
+
+[
+J\downarrow
+]
+
+and functional substitutability.
+
+Teacher family count is diagnostic only.
+
+---
+
+# 8. FORK should be copy-on-write, not “split a module”
+
+I feel quite strongly about this.
+
+When evidence suggests a shared abstraction needs changing:
+
+[
+A\rightarrow A+\delta,
+]
+
+don't immediately decide whether to fork.
+
+Start with:
+
+[
+\boxed{
+A+\Delta_{\rm local}
+}
+]
+
+for the new tasks.
+
+That's copy-on-write.
+
+Then if:
+
+[
+\Delta_1,\Delta_2,\Delta_3,\ldots
+]
+
+recur:
+
+[
+\operatorname{PROMOTE/FORK}(A,\Delta)
+\rightarrow A'.
+]
+
+So FORK is really just **PROMOTE conditioned on an existing parent**.
+
+This gives you:
+
+[
+A'
+==
+
+A+\Delta.
+]
+
+That's elegant because you don't need an entirely separate conceptual mechanism.
+
+The library becomes genealogical:
+
+```text id="wuzgvt"
+       A
+      / \
+     /   \
+   A'     A''
+```
+
+You may eventually discover useful **inheritance / delta encoding** between abstractions too:
+
+[
+D(A')=D(A)+D(\Delta)
+]
+
+rather than storing both independently.
+
+That's another compression opportunity.
+
+---
+
+# 9. Distinguish temporary divergence from true fork-worthy divergence
+
+This will be the major FORK failure mode.
+
+New tasks may briefly prefer:
+
+[
+A+\delta
+]
+
+because of noise.
+
+If you fork immediately, the library explodes.
+
+So require something like:
+
+[
+\text{repeated divergence}
++
+\text{cross-task substitutability}
++
+\text{prospective value}
+]
+
+before FORK.
+
+Exactly the same ladder V3 discovered.
+
+It's recursive.
+
+---
+
+# 10. Build an offline clairvoyant oracle
+
+This might be one of the most useful V4 instruments.
+
+Because synthetic ROW gives you the entire future stream post-hoc, you can compute an **offline oracle lifecycle** that knows the future.
+
+For a simple DELETE/RETAIN world, calculate:
+
+[
+J^*_{\rm oracle}
+================
+
+\min_{\text{lifecycle decisions}}
+J.
+]
+
+The online learner doesn't get this information.
+
+Then define:
+
+[
+\boxed{
+R_{\rm lifecycle}
+=================
+
+## J_{\rm online}
+
+J^*_{\rm oracle}.
+}
+]
+
+Lifecycle regret.
+
+That gives you a clean way to distinguish:
+
+> the structural representation is bad
+
+from:
+
+> the representation is good but the learner predicts future reuse poorly.
+
+This becomes especially valuable under nonstationarity.
+
+---
+
+# 11. Frequency is not value
+
+A subtle trap:
+
+> retain the most frequently used abstractions.
+
+An abstraction used twice might save:
+
+[
+10,000\text{ nats/use},
+]
+
+while one used 100 times saves:
+
+[
+5\text{ nats/use}.
+]
+
+So construct a matched experiment:
+
+### A
+
+frequent, low-value reuse.
+
+### B
+
+rare, high-value reuse.
+
+A rational lifecycle should compare:
+
+[
+N_{\rm reuse}\times S_{\rm reuse}.
+]
+
+Not merely (N).
+
+This would directly establish that the library is managing **economic value**, not popularity.
+
+---
+
+# 12. Give lifecycle operations matched refusal controls
+
+Every operation should have its own “don't do it” world.
+
+### DELETE
+
+Abstraction temporarily dormant but scheduled to return.
+
+Must retain.
+
+### MERGE
+
+Two abstractions superficially similar but behaviorally incompatible on held-out contexts.
+
+Must refuse.
+
+### FORK
+
+Temporary noisy residual deviation.
+
+Must not fork.
+
+### RETAIN
+
+Abstraction genuinely obsolete.
+
+Must eventually delete.
+
+This should become the V4 equivalent of V3's four-way audit.
+
+---
+
+# 13. Don't let edit order become a hidden hyperparameter
+
+Suppose sleep sees:
+
+```text id="ke8kli"
+A ~ B
+B ~ C
+C low-use
+```
+
+Do you:
+
+1. MERGE A+B, then reconsider C?
+2. DELETE C, then MERGE?
+3. MERGE all three?
+
+Different operation order may produce different libraries.
+
+You need a deterministic policy.
+
+Perhaps:
+
+[
+\Delta J(e)
+]
+
+for every candidate edit (e).
+
+At sleep:
+
+1. generate candidates;
+2. estimate (\Delta J);
+3. apply the highest-value edit;
+4. recompute;
+5. repeat until no:
+
+[
+\Delta J>0.
+]
+
+That's basically greedy program refactoring.
+
+Log the candidate queue.
+
+Later you can ask whether global search improves it.
+
+---
+
+# 14. Avoid cascading distortion
+
+V3 accepts a promotion if substitution error is under:
+
+[
+\epsilon.
+]
+
+Fine.
+
+But V4 might:
+
+[
+A+B\rightarrow C
+]
+
+then later:
+
+[
+C+D\rightarrow E.
+]
+
+Every individually acceptable edit can accumulate distortion.
+
+So don't only validate the *new edit* locally.
+
+Validate every dependent task's final behavior against its stable behavioral checkpoint.
+
+You need something like a **semantic regression suite** for the library.
+
+That's basically unit tests for learned abstractions.
+
+Interesting analogy, but practically important.
+
+---
+
+# 15. Track abstraction lineage from day one
+
+Every abstraction should get metadata like:
+
+```text id="4kenvd"
+id
+birth_time
+parents
+tasks_that_supported_birth
+current_dependents
+reuse_count
+cumulative_savings
+functional_descriptor
+children
+merge_history
+```
+
+Not because the learner needs all of this.
+
+Because **you will**.
+
+Once MERGE/FORK/DELETE start firing, otherwise it will become impossible to reconstruct why the library reached a certain state.
+
+This will save enormous pain.
+
+---
+
+# 16. V4 might discover a garbage collector
+
+There's an amusing but serious possibility.
+
+The architecture may start looking like:
+
+* PROMOTE = allocation;
+* references = pointers;
+* realized reuse = reachability/use;
+* DELETE = garbage collection;
+* MERGE = deduplication;
+* FORK = copy-on-write.
+
+That's not merely analogy.
+
+These are solutions to the same underlying economics:
+
+[
+\text{store reusable structure}
+]
+
+while controlling:
+
+[
+\text{space}
++
+\text{mutation}
++
+\text{aliasing}.
+]
+
+There may be real value in borrowing systems ideas.
+
+For example, abstraction deletion may want **generational GC**:
+
+New abstractions are cheap/speculative and monitored aggressively.
+
+Long-lived/high-reuse abstractions move into a stable generation where deletion requires stronger evidence.
+
+That naturally generates hysteresis!
+
+---
+
+# 17. The V4 sleep policy could itself be learned later
+
+For now:
+
+[
+\operatorname{PROMOTE},
+\operatorname{MERGE},
+\operatorname{DELETE},
+\operatorname{FORK}
+]
+
+are hand-designed operators.
+
+Fine.
+
+But record the decision dataset:
+
+[
+(\text{library state},\text{candidate edit},\Delta J,\text{outcome}).
+]
+
+Because later you can train:
+
+[
+q_\phi(e\mid M,H)
+]
+
+to predict promising structural edits.
+
+That's how this reconnects to the learned-optimizer/meta-learning side of the project:
+
+[
+\boxed{
+\text{expensive structural search}
+\rightarrow
+\text{decision trajectories}
+\rightarrow
+\text{learned restructuring policy}.
+}
+]
+
+V4 could quietly collect the training set for V6.
+
+---
+
+# My preferred V4 progression
+
+I would now make it:
+
+### V4.1 — Survival
+
+[
+\boxed{\text{PROMOTE + RETAIN/DELETE}}
+]
+
+Question:
+
+> Can subsequent usage clean speculative births?
+
+This directly attacks V3's unresolved issue.
+
+### V4.2 — Deduplication
+
+[
+\boxed{\text{MERGE}}
+]
+
+Question:
+
+> Can functionally redundant abstractions consolidate?
+
+### V4.3 — Nonstationarity
+
+[
+\boxed{\text{copy-on-write + FORK}}
+]
+
+Question:
+
+> Can a shared abstraction evolve without corrupting existing dependents?
+
+### V4.4 — Investment dynamics
+
+[
+\boxed{\text{hysteresis + dormancy + horizon}}
+]
+
+Question:
+
+> Do abstraction lifecycles follow rational prospective economics rather than instantaneous recurrence?
+
+Only after all that would I charge retrieval/search strongly.
+
+---
+
+## One result I would especially love from V4
+
+Something like:
+
+```text id="t3m34v"
+            births   survives   final useful
+structured    5.4       2.3          2.1
+control       3.0       0.4          0.1
+```
+
+while:
+
+[
+L_{\rm V4}\le L_{\rm V3}
+]
+
+and:
+
+[
+D_{\rm V4}<D_{\rm V3}.
+]
+
+That would show:
+
+[
+\boxed{
+\textbf{the learner need not know immediately which abstractions are real.
+It can discover them through selection over their subsequent usefulness.}
+}
+]
+
+I think that's a profound idea for the full system.
+
+It replaces an impossible requirement—
+
+> never invent the wrong concept—
+
+with a much more plausible one:
+
+> **invent hypotheses cheaply, then make persistence expensive.**
+
+And that may be exactly how a scalable self-organizing computational language should work.

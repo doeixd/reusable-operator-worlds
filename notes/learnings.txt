@@ -931,6 +931,126 @@ for 2 families" overproduction may organically motivate MERGE once pairwise
 functional equivalence among promoted abstractions is diagnosed — do not add
 MERGE before confirmation, just diagnose it.
 
+## 27. The development result is 10/10 and the control separation has flipped
+
+Across all ten development worlds, every sign holds 10/10: ΔL = +1,350 nats,
+ΔJ_two-part = +55,697 nats, D_total ↓ 63.6%. Crucially the **decision balance
+flips** — structured worlds promote more than they refuse, while structureless
+controls refuse more than they promote — which is a much better behavioral
+signature than demanding zero false promotions. A rational promoter does not need
+perfect specificity on every local decision; it needs to allocate substantially
+more persistent capacity when recurrence is real. Reuse-rate separates more
+strongly than library-size (2.48× vs 1.83×), and reuse is closer to economic
+relevance, so prefer **reuse-rate discrimination** over library-size (which is
+contaminated by fragmentation: ~5.3 abstractions for two latent families). Keep
+the original absolute-refusal requirement permanently recorded as **falsified on
+development**, and register the graded discrimination result separately — do not
+let a sealed pass of the graded criterion retroactively become "H11 including
+refusal passed."
+
+## 28. The load-bearing pre-seal audit: representation advantage ≠ extra training
+
+The one audit considered load-bearing before sealing is a matched-compute /
+sham-reuse control: give the unpromoted learner the same adaptation checkpoints
+and optimization-step budget but no access to promoted abstractions. If the
++1,350-nat prediction gain survives, it is a representation advantage; if not,
+it is an accidental extra-training advantage. Search FLOPs need not be equal for
+the primary J (μ=0), but you must know whether the prediction improvement comes
+from better representation versus extra SGD steps. The model-selection benefit
+from having a library is itself legitimate; extra SGD for free is the thing to
+exclude.
+
+## 29. The defensible definition of a reusable abstraction, forced by four failed testbeds
+
+The failed worlds forced a much richer criterion than "find something similar."
+PROMOTE should mean: find private computation that is **load-bearing + cross-
+task substitutable + more specific than a generic shared approximation +
+prospectively useful on data it was not fitted to**, then allocate shared
+capacity to it. That four-part definition is a more serious definition of a
+reusable abstraction than where V3 began, and is itself a durable conceptual
+output of the research program. The expected sealed-replication pattern: D_total
+and two-part gain replicate strongly, lifetime prediction noisier, M3 (future
+learning) largest variance, refusal positive but drifting, library size may
+wander because fragmentation is not yet controlled.
+
+---
+
+# V4 roadmap: the lifecycle of abstractions (contingent on V3 sealing)
+
+## 30. Abstraction creation is speculative; survival is decided by reuse
+
+V3's ~5 abstractions for 2 real families (and some false births in the
+structureless control) is not a bug to tune away — it implies the right model is
+speculative birth + evidence-based survival. The objective is not P(false
+birth)=0 but P(false abstraction survives)≈0, which is far more realistic and
+directly motivates a CREATE/DELETE lifecycle (V4). The revised V4 progression
+starts with RETAIN/DELETE (V4.1), not MERGE — give every abstraction a running
+account V_t(A) = [S_t(realized) + Ŝ_future] / [D(retain) + C(retrieval)] and
+DELETE when V_t<0; compare PROMOTE+DELETE vs frozen PROMOTE-only. The desired
+result table: structured 5.4 births → 2.3 survive → 2.1 useful; control 3.0 →
+0.4 → 0.1. Abstraction-survival becomes a new instrument: N_reuse, cumulative
+savings S(A), survival time T_life — false births → low reuse → short life vs
+real → high reuse → retained (selection over neural abstractions). The guiding
+principle: **invent hypotheses cheaply, then make persistence expensive.**
+
+## 31. The grand architecture emerges from measured failures, not design
+
+A durable methodological principle is now clear across V1–V4: each structural
+operation is forced by a measured failure of the simpler system, not added
+arbitrarily. Repeated private bits ⇒ PROMOTE; fragmented births ⇒ MERGE;
+false/stale births ⇒ DELETE; shared-state interference ⇒ FORK. The
+continual-computational-memory lifecycle (reuse → innovate → PROMOTE →
+MERGE/FORK/DELETE) is earned rung by rung. The cleanest scientific progression
+is V3 birth → V4 life/death/reorganization → V5 abstractions over abstractions
+(macros, loops, recursion) — premature recursion would amplify fragmentation
+and search debt, so macros are deferred to V5. The constitutional rule carried
+everywhere: **structural edits are justified by substitution, never identity**
+(MERGE asks "can one replacement serve all dependents of both?" — fit C* over
+all dependents, compare A+B vs C vs global vs delete).
+
+## 32. Hysteresis is the sharpest theoretical prediction — but it has a lag confound
+
+If C_create > C_retain (creating an abstraction costs more than keeping one),
+then r_create > r_delete, producing a hysteresis loop — strong evidence that
+abstractions are investments. But there is a nasty confound: any slowly-adapting
+dynamical system shows apparent hysteresis simply because it **lags behind** a
+changing environment. The decisive test is to sweep the recurrence-change rate
+v and check whether r_create − r_delete → 0 as v → 0 (fake, adaptation lag) or
+stays > 0 (genuine economic hysteresis). **Preregister this.**
+
+## 33. Abstractions are real options; frequency is not value
+
+DELETE should not ask "has A been used recently?" but "what is the expected
+value of keeping the option to reuse A?" — V_retain(A) = P(return) ×
+value-if-returned / D_retain. This gives the A→B→A (temporary dormancy) vs
+A→B→B… (permanent disappearance) experiment: a good lifecycle learner should
+retain A through short expected dormancy but eventually delete it if the regime
+is gone. Long-term memory itself becomes an economic decision. Separately,
+frequency ≠ value: an abstraction used twice may save 10,000 nats/use while one
+used 100 times saves 5 — retain on N_reuse × S_reuse, not N. The library
+manages economic value, not popularity.
+
+## 34. Lifecycle management resembles a garbage collector — and may force stable handles
+
+The architecture maps onto systems concepts: PROMOTE = allocation, references =
+pointers, realized reuse = reachability, DELETE = garbage collection, MERGE =
+deduplication, FORK = copy-on-write. These solve the same underlying economics
+(store reusable structure while controlling space + mutation + aliasing).
+Generational GC (new/speculative abstractions monitored aggressively, long-lived
+ones require stronger evidence to delete) naturally generates hysteresis.
+Lifecycle may also force emergence of a **stable addressing / symbol table** —
+indirection (task → abstraction ID → current implementation) so MERGE/DELETE can
+reorganize without rewriting every reference. Every edit pays a **migration
+cost** (reference rewrites, validation, fitting) that must be logged or lifecycle
+operations look artificially attractive. Chained edits risk **cascading
+distortion** — validate every dependent task's final behavior against stable
+checkpoints (a semantic regression suite / unit tests for learned abstractions).
+Track **abstraction lineage** metadata from day one (birth_time, parents,
+dependents, reuse_count, savings, merge_history) — once MERGE/FORK/DELETE fire
+it will be impossible to reconstruct why the library reached a state otherwise.
+V4's (library state, candidate edit, ΔJ, outcome) decision dataset quietly
+collects the training set for a later learned restructuring policy (V6).
+
 ---
 
 # Current bottom line
@@ -953,10 +1073,14 @@ The cleanest statement the evidence currently supports is:
 > remains imperfect and awaits worlds 3–9 as internal holdout before sealed
 > confirmation.
 
-The next step is **not more architectural complexity**. It is to run V3
-exactly as-is on worlds 3–9 (no mechanism changes), freeze ambitious
-preregistered intervals for the three independent sealed verdicts (M2a
-structural migration, M2b economic dominance, M3 prospective learning), and
-only then open seeds 300–329. The recursive question — can abstractions born
-this way become raw material for higher-order abstraction? — is the natural
-sequel once the base case is confirmed.
+The next step is **not more architectural complexity**. The development result
+(10/10, ΔL +1,350 nats, ΔJ +55,697 nats, D_total ↓ 63.6%, control decision
+balance flipped) is strong enough that further tweaking would mostly make the
+sealed test less informative. Freeze now: run the matched-compute audit, inspect
+worlds 3–9 separately (cleaner internal generalization check than the heavily-
+used 0–2), freeze ambitious preregistered intervals for the three independent
+sealed verdicts (M2a structural migration, M2b economic dominance, M3 prospective
+learning) plus the graded reuse-rate discrimination, and only then open seeds
+300–329. The recursive question — can abstractions born this way become raw
+material for higher-order abstraction? — is the natural sequel once the base
+case is confirmed.

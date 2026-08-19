@@ -77,7 +77,8 @@ def main() -> None:
         )
 
     def verdict(name, passed, detail):
-        print(f"  {name}: {'PASS' if passed else 'FAIL'} — {detail}")
+        passed = bool(passed)
+        print(f"  {name}: {'PASS' if passed else 'FAIL'} - {detail}")
         return passed
 
     print("V3 SEALED BLOCK, seeds 300-329, scored against the frozen plan")
@@ -148,7 +149,7 @@ def main() -> None:
         "outcomes": outcomes,
         "two_part_gain": two_part,
         "loss_gain": loss_gain,
-        "migration_pattern": patterns,
+        "migration_pattern": [bool(x) for x in patterns],
         "total_reduction": reductions,
         "structured": {
             "reuse": structured_reuse,
