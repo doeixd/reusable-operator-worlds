@@ -737,3 +737,14 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   D(F | L_t); parsimony endogenous rather than hardcoded; and the
   five-milestone ladder recorded as the program's progress metric, with
   M1 marked achieved and V3 scoped to M2 plus M3.
+- Rewrote notes/v3-sketch.txt as Revision 2 (Revision 1 preserved in git
+  history): V3 scoped to milestones M2 plus M3 — abstraction birth with
+  prospective value and refusal in structureless controls — with the
+  manifold-first variational-coded wake, promote-only sleep under full
+  accounting (rate-distortion form where practical), H11's three
+  predictions, the V3.1-V3.6 operation staging (nonstationarity entering
+  at FORK with hysteresis), binding design principles (functional
+  instruments, synthesis/revision separation, endogenous parsimony,
+  D(F | L_t) as the progress quantity), deferred workstreams with
+  stricter gates, and the pre-V3 checklist keyed to the sealed block and
+  the 006c/006d analyses.
