@@ -831,3 +831,40 @@ Standing reading. Reacquisition is not free, but in this learner it is
 cheap enough, and library evolution divergent enough, that persistent
 retention has no demonstrated net value at any tested gap. n=3 worlds
 per gap; the deltas are reported, no interval is claimed.
+
+# RETURN CURVE: V_retain goes POSITIVE at short gaps (2026-08-19)
+
+The end-of-lifetime V_retain above is superseded as an instrument, not
+as data. A mid-lifetime deletion stops the arms being paired the moment
+it changes what gets promoted next, so final description is
+uncontrolled. The paired window is the RETURN CURVE: prequential loss
+over tasks arriving after the regime resumes.
+
+Deleted minus retained, cumulative over the full return window:
+
+| gap | returning tasks | per world | mean | vs carry (1,098) |
+| --- | --- | --- | --- | --- |
+| 8  | 24 | +1,807 / +1,581 / +1,214 | +1,534 | ABOVE -> RETAIN |
+| 16 | 16 | +1,168 / +1,179 / +829 | +1,059 | at parity |
+
+3/3 worlds in both cells. Over the first eight returning tasks the
+deleted arm is worse on EVERY task (~60 nats each) with no catch-up
+inside the window: the relearning curve has the predicted shape, and
+the area between the curves is the value of memory.
+
+This is the first POSITIVE online retention result. The crossing lies
+between gap 8 and gap 16 and independently reproduces the
+frozen-library oracle's crossover, from an unrelated measurement.
+
+CORRECTION to the entry above. "C_reacquire decays monotonically,
+1,563 -> 1,107 -> 132" was partly an artifact. The g=32 cell uses
+dormancy (32, 64), which resumes at the FINAL task, so its returning
+window is empty; the +132 was no-returning-tasks, not a decayed option.
+The decay between gaps 8 and 16 is real (+1,534 -> +1,059); the
+collapse to +132 is withdrawn.
+
+Standing rule, third occurrence of the same error: a dormancy gap must
+CLOSE strictly before the lifetime ends, with enough tasks after it to
+measure. This has now produced a false reading in V4.1, in the retention
+sweep, and here. Any dormancy config must be validated by counting
+returning tasks BEFORE its numbers are read.
