@@ -1,7 +1,8 @@
 # Neural Library Learning
 ## V3 Experimental Specification: The Birth of an Abstraction
 
-**Status: PROVISIONAL DRAFT — not authoritative until frozen.** The V1
+**Status: CLOSED 2026-08-19. The sealed block on seeds 300-329 is run
+and scored; all five registered outcomes pass. See section 12.** The V1
 spec (`neural_library_learning_v1_experimental_spec.md`) and V2 plans
 remain frozen and govern everything they cover. This document converts
 `notes/v3-sketch.txt` Revision 3 (now retired) into a specification,
@@ -959,3 +960,81 @@ entering this spec's successor documents or any paper.
 - Tuning ledger: every `eta`, `beta`, and `epsilon` value ever tried is
   logged in the artifact tree (no untracked tuning), because the §6
   freeze must cite the full search history.
+
+
+---
+
+# 12. V3 CLOSURE
+
+**Sealed block, seeds 300-329, scored against V3_CONFIRMATION_PLAN.md
+frozen at bcc8319 before those seeds were generated. 90 lifetimes, zero
+failures, 5/5 registered outcomes pass.**
+
+    O1 two-part gain   PASS  +55,292 nats, positive 30/30  (dev +55,697)
+    O2 loss gain       PASS  +1,174 nats,  positive 30/30  (dev +1,350)
+    O3 migration       PASS  three-sign 30/30, -63.3%      (dev -63.6%)
+    O4 prospective     PASS  32-shot +0.00311, 30/30       (dev +0.00310)
+    O5 refusal         PASS  reuse ratio 1.80x (floor 1.4) (dev 2.48x)
+
+The PARAMETERS replicate, not merely the signs: the two-part gain
+reproduces to within 0.7% and the total-bits reduction to within 0.3
+points, which is the standard V2 set for itself and the reason the
+intervals were registered rather than the directions.
+
+**What V3 establishes.** An abstraction can be born. A learner whose
+library is saturated, meeting recurring structure its existing
+vocabulary cannot express, will create a new shared object, migrate the
+repeated private computation into it, pay for it once instead of many
+times, and then USE it to acquire related tasks more cheaply. It is the
+first learner in this program to win prediction and description length
+simultaneously — the exact cell where every V2 model lost — and it does
+so with capacity it created rather than capacity it was handed. M2 and
+M3, which is what V3 was defined to be.
+
+**What V3 does not establish, stated so the result is not over-read.**
+
+1. The world is deliberately constructed: a saturated six-slot library, a
+   genuinely new hidden primitive introduced at task 16 at a fixed
+   program position, two hidden task-group families. FOUR earlier
+   testbeds failed before this one worked, each because a weaker notion
+   of shared structure certified a world where promotion degenerated
+   into something else — routing into spare capacity, vector
+   quantization, or outright deletion. The claim is that promotion works
+   when recurring structure is load-bearing, compressible, and
+   family-specific. Whether those conditions arise unaided is untested.
+2. Refusal is GRADED, not absolute. The original requirement — no
+   promotion at all in structureless controls — is falsified. The
+   promoter builds a smaller library there (3.0 abstractions against
+   6.2, 1.80x fewer tasks reusing) rather than declining to build one.
+3. The abstraction is not the teacher's primitive. It is the best shared
+   explanation of how THIS learner compensated for a computation it
+   could not express, which is the more realistic object but a different
+   one from recovering hidden ground truth.
+4. Promotion is compute-expensive and that compute is logged, not
+   charged (mu = 0). A learner that saves storage while spending far more
+   search is a V4 economics question this block deliberately leaves open.
+
+**The methodological result, which may outlast the headline.** Notions
+of "shared structure" form a ladder, and every rung below the top
+certified a world where promotion was not what it appeared to be:
+
+    parameter similarity < clustering < recoverable latent identity
+      < functional similarity < CROSS-TASK SUBSTITUTABILITY
+      < prospective value
+
+Two failures were especially instructive. Gauge freedom: family members
+computing the same rank-2 innovation under different rotations of (U, V)
+have parameter means that destroy the function (11.9% capture against
+53.4% for a functional fit). And the missing discard control: a gate
+without "zero the channel" and "one global abstraction" arms will pass
+worlds where promotion is deletion wearing a costume. The frozen gate —
+a four-way leave-one-out comparison of private, family, global, and zero
+— is the instrument that finally distinguished them, and it should be
+standard for any future promotion claim.
+
+**Handoff to V4.** The vocabulary can now be born. V4 asks whether it can
+MAINTAIN itself: merge what became redundant, fork what serves
+incompatible regimes, delete what stopped paying, and stay searchable as
+it grows (notes/v4-sketch.txt, sealed seeds 400-429). The branch table
+there is now resolved to its first case — V3 passed — so V4 proceeds as
+sketched rather than into its blocked branches.
