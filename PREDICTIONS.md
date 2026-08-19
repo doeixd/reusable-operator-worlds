@@ -624,3 +624,42 @@ this project: a tolerance normalized against total output variance, a
 sharing claim scored against full-precision atoms instead of matched
 bits, and this one. In all three the favorable number came from
 comparing against something the learner would never actually do.
+
+# The exchange rate discriminates where V(A) does not (2026-08-19)
+
+V(A) is dominated by its description term — not storing n private
+residuals saves `n * 1,098` nats — so every abstraction repays in every
+condition and the economic survival rule cannot sort them. The quantity
+that survives that domination is the RATE of the trade:
+
+    exchange rate = prediction nats GIVEN UP / description nats SAVED
+
+Development worlds 0-2, world-level means (abstractions within a world
+are not independent, so the abstraction-level Mann-Whitney p = 0.0079
+across 15 versus 10 abstractions OVERSTATES the evidence and is not the
+headline):
+
+| world | structured | control | control - structured |
+| --- | --- | --- | --- |
+| 0 | 0.194 | 0.321 | +0.127 |
+| 1 | 0.190 | 0.300 | +0.110 |
+| 2 | 0.164 | 0.275 | +0.111 |
+
+Structured is lower in 3/3 worlds, mean paired difference +0.116. Per
+project rule at n=3, the paired deltas are the result; no interval is
+reported.
+
+Reading. Abstractions over real recurring structure give up about 0.18
+nats of prediction per nat of description saved; abstractions over noise
+give up about 0.30. Both trades are profitable at lambda = ln 2 — 0% of
+abstractions in either condition reach the break-even rate of 1.0 — so
+PROMOTE is not miscalibrated, and this does NOT revive the idea that
+control promotions should be refused. What it shows is that abstraction
+QUALITY is visible in the rate even when it is invisible in the net.
+
+This is the first measurement in the V4/V4R arc that separates
+structured from structureless on a per-abstraction economic quantity.
+It is a diagnostic, not an operator: a rate threshold would be a tuned
+hyperparameter, unlike `T_A = lambda * D(A)`, which is untuned but
+non-discriminating. Whether the rate has any decision-theoretic use is
+untested.
