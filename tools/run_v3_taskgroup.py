@@ -25,9 +25,11 @@ def log(message: str) -> None:
         handle.write(f"{time.strftime('%H:%M:%S')} {message}\n")
 
 
-def run_cell(args: tuple[int, float, str, int]) -> str:
-    world, eta, model, groups = args
+def run_cell(args: tuple[int, float, str, int, float | None]) -> str:
+    world, eta, model, groups, uniform_rho = args
     label = f"eta{eta:g}" if groups == 2 else f"eta{eta:g}_g{groups}"
+    if uniform_rho is not None:
+        label = f"{label}_rho{uniform_rho:g}"
     out = ROOT / "artifacts" / "v3_taskgroup" / label / f"world_{world}" / model
     if (out / "summary.json").exists():
         return f"skip {out}"
@@ -35,7 +37,8 @@ def run_cell(args: tuple[int, float, str, int]) -> str:
         [sys.executable, "-m", "row.experiments.mixed_lifetime",
          "--config", "configs/v1.yaml", "--model", model,
          "--world-seed", str(world), "--task-group-eta", str(eta),
-         "--task-groups", str(groups), "--output", str(out)],
+         "--task-groups", str(groups), "--output", str(out)]
+        + (["--profile"] + [str(uniform_rho)] * 6 if uniform_rho is not None else []),
         cwd=ROOT, capture_output=True, text=True,
     )
     if result.returncode != 0:
@@ -50,11 +53,12 @@ def main() -> None:
     parser.add_argument("--etas", type=float, nargs="+", default=[0.0, 0.5, 0.7, 0.9])
     parser.add_argument("--model", default="shared_residual")
     parser.add_argument("--groups", type=int, default=2)
+    parser.add_argument("--uniform-rho", type=float, default=None)
     parser.add_argument("--jobs", type=int, default=4)
     args = parser.parse_args()
 
     cells = [
-        (world, eta, args.model, args.groups)
+        (world, eta, args.model, args.groups, args.uniform_rho)
         for eta in args.etas
         for world in args.worlds
     ]

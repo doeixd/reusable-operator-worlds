@@ -1108,3 +1108,41 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   ratio runs higher (0.283 against 0.217) exactly as the two documented
   differences predict: the variational learner disables the L1 residual
   surrogate and injects 1e-3 sampling noise. reports/v3_beta0_equivalence.json
+
+# 2026-08-19 — V3.1's testbed fails its gate, for an instructive reason
+
+- P-2026-08-18-D FALSIFIED as written, and the falsification redirects the
+  V3 core experiment. On trained shared-residual learners over eta in
+  {0, 0.5, 0.7, 0.9} and worlds 0-2, task-step RESIDUAL separation by
+  hidden family is +0.0007 (structureless control), +0.0055, +0.0127,
+  +0.0173 — monotone and 3/3 positive, but two orders short of the
+  registered factor of 3. The operational check kills it: two-means
+  partition recovery is 0.672 at eta 0.9 against 0.641 in the
+  STRUCTURELESS CONTROL, so that figure is selection bias from
+  best-of-restarts plus label-permutation freedom, not signal. A promoter
+  could not find these families.
+- Where the structure went: the ROUTES. Same instrument on route codes
+  gives -0.0152 / +0.0043 / +0.2006 at eta 0 / 0.5 / 0.9, twelve times
+  the residual figure. Per-group mean route distributions at eta 0.9
+  differ by total variation 0.226 against 0.026 in the control, with
+  group 0 placing 0.032 on slot 2 and 0.154 on slot 3 while group 1
+  places 0.190 and 0.048. The basis has 8 slots for 6 teacher primitives,
+  so it had exactly two spare, and it absorbed the two hidden families as
+  dedicated slots.
+- Reading: gradient descent performed the promotion operation during
+  ordinary wake learning, for the description-length reason V3 predicts —
+  a route reference costs 192 bits per task against 17,712 for a
+  residual — with no sleep phase. H11's premise that task-specific
+  adaptations CONTAIN the recurrent structure is therefore false in this
+  testbed, which cannot support the V3.1 core experiment as specified.
+  The sharpened question: when is recurring structure NOT addressable by
+  the existing reference vocabulary, since that is the only regime where
+  an explicit promotion operator can earn its place?
+- Capacity is the lever, and it works directionally. With 8 hidden
+  families against 2 spare slots, residual separation rises to +0.0374
+  (2.2x, consistent 3/3 at 0.0340 / 0.0391 / 0.0391) while route
+  separation falls to +0.1147 and becomes erratic across worlds. Testbed
+  search is being logged in full per the spec's tuning rule; the next
+  configuration adds deviation room (uniform rho 0.5, where the canonical
+  profile's high-recurrence primitives leave the family component almost
+  no room to act).

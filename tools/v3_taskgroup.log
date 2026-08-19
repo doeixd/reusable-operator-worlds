@@ -13,3 +13,8 @@
 11:47:23 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9\world_2\shared_residual
 11:47:23 V3_TASKGROUP_COMPLETE
 11:51:08 starting: 3 cells, jobs=3, etas=[0.9]
+11:53:16 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_g8\world_0\shared_residual
+11:53:16 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_g8\world_1\shared_residual
+11:53:17 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_g8\world_2\shared_residual
+11:53:17 V3_TASKGROUP_COMPLETE
+11:54:15 starting: 3 cells, jobs=3, etas=[0.9]
