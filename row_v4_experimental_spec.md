@@ -18,6 +18,56 @@ maps every section below to its sources: the V4 sketch
 **Date:** August 19, 2026
 **Project:** Neural Library Learning / Prospective Neural Compression
 
+**Citation convention.** `[26 §N]` and `[27 §N]` refer to sections of
+[`reviews/reviewer-feedback-26.txt`](reviews/reviewer-feedback-26.txt) and
+[`reviews/reviewer-feedback-27.txt`](reviews/reviewer-feedback-27.txt),
+with line numbers given as `L###` so the original reasoning can be read
+rather than taken on trust. Design choices that came from a review are
+cited; choices that came from measurement cite the report instead.
+
+---
+
+# A. Inventory: what exists, what must be built
+
+An agent picking this up should start here. Everything in the first table
+is working and tested; everything in the second is V4's job.
+
+## A.1 Already built and usable
+
+| Component | Path | What it gives V4 |
+| --- | --- | --- |
+| `PromotingSharedResidualLearner` | `src/row/models/promoting_models.py` | PROMOTE, functional abstraction fitting, disjoint proposal/validation probes, refusal ledger. **Frozen — subclass, never edit** (V3 sealed config, `bcc8319`) |
+| `LifecycleLibraryLearner` | `src/row/models/lifecycle_models.py` | Lineage records, migration ledger, decision dataset, realized-savings accounts. Adds no decision rule yet |
+| `TaskGroupSpec` / world generator | `src/row/task_group_world.py` | The frozen V3 testbed, plus `dormancy=(a,b)` and `dormancy_returns` for the real-options arms |
+| Four-way substitutability gate | `src/row/experiments/audit_substitutability.py` | Private / family / global / zero, leave-one-out. The V4 world-validity instrument |
+| Future-block probe | `src/row/experiments/audit_future_block.py` | Matched-budget adaptation on held-out tasks; the H14a "no future-adaptation regression" check |
+| Sealed scorer pattern | `src/row/experiments/score_v3_sealed.py` | Thresholds transcribed from a frozen plan, written before results are seen. Copy this shape |
+| Lifetime runner | `src/row/experiments/mixed_lifetime.py` | `--task-group-eta`, `--family-onset`, `--freeze-basis-at`, `--dormancy`, `--sleeps`, `--operator-slots` |
+| Detached driver pattern | `tools/run_v3_taskgroup.py`, `tools/run_v3_sealed.py` | Resumable, `summary.json`-guarded, logs to `tools/*.log` |
+
+## A.2 To be built for V4.1
+
+| # | Component | Prior art to imitate | Done when |
+| --- | --- | --- | --- |
+| B1 | Conservative lifecycle oracle | `audit_promotion_oracle.py` | Reports `J_oracle` and regret per world; validity gate runs off it (§4.3) |
+| B2 | RETAIN/DELETE rule on `LifecycleLibraryLearner` | `PromotingSharedResidualLearner.sleep` | Age-neutral, grace period `G`, `V_retain` per §3.2, every decision in the ledger |
+| B3 | Varying-gap dormancy world family | `task_group_world.py` dormancy hooks | Gap lengths sweepable; arms byte-identical to `b` (already unit-tested) |
+| B4 | Frequency-versus-value world | §2.3 recipe | LOW and HIGH families measurably differ in per-use saving |
+| B5 | Old-task interference endpoint | the §0.1 measurement | Re-evaluates against the FINAL model, never `final_nmse` |
+| B6 | Survival-table scorer | `score_group_clustering.py` | Births / survivors / finally-useful per condition |
+| B7 | Semantic regression suite | new | Per-dependent behavioral checkpoints, checked after every edit |
+
+## A.3 Commands
+
+    # a V4.1 development lifetime
+    python -m row.experiments.mixed_lifetime --config configs/v1.yaml         --model lifecycle --world-seed 0 --task-group-eta 0.9         --task-groups 2 --operator-slots 6 --new-primitive-families         --family-onset 16 --freeze-basis-at 16 --sleeps 24 32 48 64         --output artifacts/v4_dev/world_0/lifecycle
+
+    # the world-validity gate, which must pass before any tuning
+    python -m row.experiments.audit_lifecycle_oracle --worlds 0 1 2
+
+    # batches: detached, resumable, 4 jobs (AGENTS.md ceiling)
+    python -m tools.run_v4_lifecycle --worlds 0 1 2 3 4 5 6 7 8 9 --jobs 4
+
 ---
 
 # 0. Charter, and what V3 left behind
@@ -50,8 +100,10 @@ The V4 question, stated so it cannot drift:
 > value disappears?**
 
 The target is not `P(false birth) = 0`. It is
-`P(false abstraction survives) ~ 0`, which is a far more realistic
-objective and the one selection can actually deliver.
+`P(false abstraction survives) ~ 0` [26 §"The key conceptual shift", L27;
+26 §1, L621], which is a far more realistic objective and the one
+selection can actually deliver. The corresponding one-line charter is
+[26 L612]: *invent hypotheses cheaply, then make persistence expensive.*
 
 **Branch resolution.** The V4 sketch's branch table is resolved to its
 first case: V3 passed on all three mandatory predictions, so V4 proceeds
@@ -158,7 +210,11 @@ single composite would hide which one failed:
   non-inferiority margins.
 - **H14b (differential survival).** Survival is selective: the fraction
   of births that survive to the end of the lifetime is materially higher
-  in structured worlds than in matched structureless controls.
+  in structured worlds than in matched structureless controls. This is
+  the "births / survives / final useful" table [26 §"One result I would
+  especially love from V4", L1522] and the reviewer's own framing of it as
+  selection acting over neural abstractions [26 §"I would explicitly
+  measure abstraction survival", L405].
 
 H14a can pass while H14b fails (deleting everything shrinks `D` and would
 improve `J` in both conditions equally — which is compression, not
@@ -189,7 +245,9 @@ abstractions within tolerance, MERGE reduces library-plus-reference
 description length at preserved behavior.
 
 Detection is by MUTUAL SUBSTITUTABILITY, never by parameter similarity or
-clustering — V3's constitutional rule, and the V3 result that forced it
+clustering [26 §6, L913: "Can one replacement serve all dependents of both
+abstractions?"] — V3's constitutional rule, and the V3 result that forced
+it
 (gauge freedom made a parameter mean capture 11.9% of behavioral value
 where a functional fit captured 53.4%). The merged candidate is refit
 functionally to the union of both dependent sets.
@@ -197,13 +255,25 @@ functionally to the union of both dependent sets.
 **Falsifiers.** No refitted replacement serves both dependent sets within
 tolerance; or MERGE fires on the incompatible-pair control (§2.4).
 
+**Before concluding MERGE failed**, check whether the library is
+fragmented at all [26 §7, L997]: cluster the abstractions by mutual
+substitutability and count equivalence classes. If V3's five or six
+abstractions are five or six functionally DISTINCT objects, the learner
+found a finer decomposition than the teacher ontology and MERGE has
+nothing to do — a result, not a bug.
+
 ## H16 — Safe shared update (V4.3)
 
 A shared abstraction can evolve without corrupting its existing
 dependents. A task needing `A + delta` first adapts privately
 (copy-on-write); only when the same deviation recurs does it crystallize
 into a fork, which is PROMOTE conditioned on an existing parent rather
-than a separate mechanism. Prediction: copy-on-write beats both
+than a separate mechanism [26 §8, L1053] — so the library becomes
+genealogical and delta encoding between parent and child becomes a later
+compression opportunity. Distinguishing a one-off noisy deviation from
+genuine fork-worthy divergence requires repeated divergence plus
+cross-task substitutability plus prospective value [26 §9, L1124], which
+is V3's own acceptance ladder applied one level up. Prediction: copy-on-write beats both
 update-in-place (which interferes with old dependents) and never-update
 (which retains too many private bits) on lifetime cost at matched bits.
 
@@ -225,7 +295,9 @@ that loop is the acquisition-versus-retention cost difference made
 visible. This is the sharpest available evidence that abstractions behave
 as INVESTMENTS rather than as instantaneous preferences.
 
-**The lag confound and its control, registered.** Any slowly adapting
+**The lag confound and its control, registered** [26 §3, L751; the
+decisive test at L784; endorsed in 27 §"The V4 roadmap is well-conceived",
+L257]. Any slowly adapting
 system exhibits an apparent loop merely by lagging a changing environment:
 promotion happens late on the way up and deletion late on the way down,
 manufacturing a gap from nothing. The decisive test is a SWEEP-RATE
@@ -308,15 +380,15 @@ saving), while family HIGH is used by few tasks but its primitive is far
 from anything expressible (large per-use saving). Concretely, LOW's new
 primitive is drawn as a small perturbation of an existing base primitive
 and assigned to 32 tasks; HIGH's is drawn independently and assigned to 8.
-A rational lifecycle compares `N_reuse * s_bar`, not `N_reuse`, and must
-retain HIGH. Registered because a popularity heuristic would pass every
+A rational lifecycle compares `N_reuse * s_bar`, not `N_reuse` [26 §11,
+L1201], and must retain HIGH. Registered because a popularity heuristic would pass every
 other world in this spec, and because `V_retain` as specified in §3.2
 multiplies rate by per-use saving precisely so that it can.
 
 ## 2.4 Per-operation refusal controls
 
-Each operation gets a world in which it must NOT fire, the V4 analogue of
-V3's four-way audit:
+Each operation gets a world in which it must NOT fire [26 §12, L1241],
+the V4 analogue of V3's four-way audit:
 
 | operation | control world | required behavior |
 | --- | --- | --- |
@@ -341,14 +413,15 @@ world that failed its gate.
 
 `row.models.LifecycleLibraryLearner`, which subclasses the frozen V3
 `PromotingSharedResidualLearner` and never edits it, so every V3 artifact
-stays reproducible from its own fingerprint. It adds lineage records,
-a migration ledger, and a decision dataset, and NO decision rule — the
+stays reproducible from its own fingerprint. It adds lineage records [26 §15, L1357: track lineage from day one,
+"not because the learner needs all of this, because you will"], a
+migration ledger, and a decision dataset, and NO decision rule — the
 rules are specified here rather than inherited from an implementation.
 
 ## 3.2 Retention value, as a real option
 
 An abstraction with no current use is not thereby worthless; its regime
-may return. Retention therefore asks what the option to reuse is worth:
+may return [26 §2, L688, with the A->B->A world at L719]. Retention therefore asks what the option to reuse is worth:
 
     V_retain(A) = P(return) * H * s_bar(A) - D_retain(A) - C(A)
 
@@ -398,7 +471,7 @@ on the learner.
 
 ## 3.3 Deterministic edit policy
 
-Operation order must not become a hidden hyperparameter. At each
+Operation order must not become a hidden hyperparameter [26 §13, L1273]. At each
 consolidation: generate all candidate edits, estimate `delta J` for each,
 apply the single best, recompute, and repeat until no candidate improves
 `J`. The candidate queue is logged in full. Greedy refactoring is chosen
@@ -448,7 +521,12 @@ signature H14 predicts is that false births attract little reuse and are
 retired, while real abstractions attract reuse and persist — selection
 acting over neural abstractions.
 
-**Library size is diagnostic, never an outcome.** Five abstractions for
+**Library size is diagnostic, never an outcome** [26 §7, L1035: "Do not
+score V4 by library size -> 2"]. Note the tension with [27 §"The one thing
+I would watch most carefully", L293], which warns that a wandering library
+size is the biggest risk to the narrative. Both are right: size is what a
+reader will look at first, and scoring it would still be wrong. It is
+reported prominently and scored never. Five abstractions for
 two teacher families may be a finer decomposition than the teacher
 ontology rather than fragmentation. Scoring "library size -> 2" would
 reward matching an ontology the learner cannot see. The outcomes are `J`,
@@ -457,7 +535,9 @@ substitutability, and adaptation cost.
 ## 4.3 Lifecycle regret
 
 Because ROW gives the whole future stream post hoc, an offline clairvoyant
-oracle can compute the best achievable lifecycle decisions:
+oracle can compute the best achievable lifecycle decisions [26 §10,
+L1156], separating "the representation is bad" from "the representation is
+fine but the learner forecasts future reuse poorly":
 
     R_lifecycle = J_online - J_oracle
 
@@ -482,15 +562,18 @@ the world cannot test DELETE and is redesigned before anything is tuned.
 
 ## 4.4 Migration ledger
 
-Every edit logs its cost: reference rewrites, re-validation forwards,
-refitting steps, and any re-adaptation forced on dependents. Logged from
+Every edit logs its cost [26 §4, L825]: reference rewrites, re-validation
+forwards, refitting steps, and any re-adaptation forced on dependents. If
+these are treated as free, lifecycle operations look artificially
+attractive. Logged from
 V4.1; CHARGED from V4.2, or from V4.1 if Audit B closes the compute gap
 (§0.1).
 
 ## 4.5 Semantic regression suite
 
-Individually acceptable edits can accumulate distortion: `A+B -> C`, later
-`C+D -> E`, each within tolerance, the composition not. Every dependent
+Individually acceptable edits can accumulate distortion [26 §14, L1321]:
+`A+B -> C`, later `C+D -> E`, each within tolerance, the composition
+not. Every dependent
 task's behavior is therefore checked after every edit against a stable
 behavioral checkpoint recorded at its last validated state — unit tests
 for a learned library.
@@ -498,7 +581,7 @@ for a learned library.
 ## 4.6 Decision dataset
 
 `(library state, candidate edit, delta J, outcome)` logged from the first
-run. Not used by V4, and deliberately so: it is the training set a learned
+run [26 §17, L1427]. Not used by V4, and deliberately so: it is the training set a learned
 restructuring policy would need in V6, and collecting it now costs
 nothing.
 
@@ -510,8 +593,7 @@ Development worlds 0-9, with the 0-2 / 3-9 split reported separately from
 the outset. Worlds 0-2 will again absorb debugging and instrument design;
 3-9 are the clean internal generalization check, and any sealed interval
 is widened to encompass drift between them rather than centered on the
-ten-world mean (review 27's recommendation, adopted after V3 did this only
-retrospectively).
+ten-world mean [27 L239, adopted after V3 did this only retrospectively].
 
 Paired per-world deltas reported directly; world-level means with
 bootstrap intervals; exact binomial sign tests for counts. Two
@@ -569,7 +651,8 @@ one of them.
 
 Deferred to V5: MACRO, LOOP, BRANCH, and recursive abstraction over
 abstractions, with the compositional-closure depth gate travelling with
-them. The reasoning is recorded rather than assumed: five redundant
+them. The reasoning is recorded rather than assumed [26 §"I would not do
+recursive/macros in V4", L493; endorsed 27 L285]: five redundant
 primitives can produce dozens of redundant macros, so search debt explodes
 before the vocabulary is sane. V4 must earn V5 by showing the vocabulary
 can remain sane under lifecycle pressure.
@@ -578,6 +661,36 @@ Also deferred, unchanged from V3 §8: equivalence-class routes,
 hidden-basis coordinate discovery, granularity discovery, memory
 hierarchy, task-boundary removal, functional IBP, and the staged LLM
 bridge.
+
+## 7.1 Definition of done, per rung
+
+A rung is complete when all of the following hold. An agent should not
+advance to the next rung on a partial verdict.
+
+**V4.1 SURVIVAL**
+1. World-validity gate passes: conservative oracle beats PROMOTE-only by a
+   margin recorded before any tuning (§4.3).
+2. `tau` and `G` selected on the no-dormancy structured world and frozen;
+   every value tried is logged.
+3. Development on worlds 0-9 with 0-2 and 3-9 reported separately.
+4. H14a and H14b each scored against the standing comparator set (frozen,
+   2x-updates, unfrozen basis) with old-task interference reported.
+5. All four refusal controls (§2.4) run; failures reported, not tuned away.
+6. `V4_CONFIRMATION_PLAN.md` frozen with intervals, hashed into
+   `tools/check_prereg.py`, sealed block 400-429 run and scored, outcomes
+   appended to `PREDICTIONS.md` whichever way they fall.
+
+**V4.2 DEDUPLICATION** — as above, plus the fragmentation check [26 §7]
+run BEFORE concluding anything about MERGE, and a report on whether
+reference-rewrite cost forced the indirection layer predicted in §3.4.
+
+**V4.3 NONSTATIONARITY** — as above, plus the three-policy comparison
+(update-in-place, never-update, copy-on-write) with old-task interference
+as a first-class endpoint, since §0.1 has already measured the hazard to
+be real.
+
+**V4.4 INVESTMENT** — as above, plus the sweep-rate series at no fewer
+than three speeds. A hysteresis claim from a single rate is not a result.
 
 ---
 
@@ -624,6 +737,38 @@ verified step.
 Development worlds 0-9 only until §6 freezes. Any accidental generation of
 a 400-block world is reported, the artifact deleted, and the incident
 logged in `SPEC_AUDIT.md`.
+
+## 9.1 Working agreements for whoever runs this
+
+These are the conventions the previous three versions learned the hard
+way. Violating them does not usually produce an error; it produces a
+result that cannot be trusted later.
+
+1. **Never edit a frozen class.** `PromotingSharedResidualLearner` is part
+   of V3's sealed configuration. Subclass it. The same will apply to V4's
+   own classes once `V4_CONFIRMATION_PLAN.md` is hashed.
+2. **A gate that cannot fail is not a gate.** Before tuning any operator
+   on a world, run the validity instrument and be willing to redesign the
+   world. Four V3 testbeds failed this way, and each failure was cheaper
+   than the false positive it prevented.
+3. **Measure interference against the FINAL model.** A task's
+   `final_nmse` is written at that task's completion and cannot see later
+   drift in shared parameters. This produced a clean, wrong +0.00000 in
+   0/10 worlds once already (§0.1).
+4. **Structural edits are justified by substitution, never identity.**
+   Parameters are gauge-equivalent; functions are not.
+5. **Log refusals as carefully as actions.** The refusal ledger is
+   evidence, not debug output.
+6. **A hung shell during a batch means load, not failure.** Check artifact
+   counts before killing anything; lifetimes write `summary.json` only at
+   completion.
+7. **Append outcomes to `PREDICTIONS.md` whichever way they fall**, and
+   never edit a prediction after its experiment has run. Corrections are
+   appended and dated.
+8. **Report the number that would embarrass you.** V3's absolute-refusal
+   criterion is recorded as falsified; V3's prediction win is recorded as
+   holding only against a frozen substrate. Both are in the specs because
+   a reader would otherwise have to discover them independently.
 
 
 ---
