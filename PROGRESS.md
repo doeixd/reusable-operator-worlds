@@ -1341,3 +1341,21 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   structureless control promotes 3.3, refuses 6.3, and has only 15.0 tasks
   reuse. The control still promotes rather than refusing outright, which is
   reported as a limitation rather than tuned away.
+
+# 2026-08-19 — H11.3 passes: promoted abstractions cut future learning cost
+
+- Held-out future block (8 tasks per world drawn from the same hidden
+  families, never in any lifetime; deep-copied models, library frozen,
+  matched budget and data): 32-shot NMSE 0.01678 -> 0.01425, 0.02261 ->
+  0.01856, 0.02556 -> 0.02384, mean improvement +0.00277 positive 3/3;
+  adaptation nats improve by +11 / +21 / +10, positive 3/3. Every future
+  task in every world chose to reuse the library (8/8, 8/8, 8/8) with
+  "none" always available.
+- ALL THREE MANDATORY H11 PREDICTIONS NOW HOLD on development worlds 0-2:
+  H11.1 migration (task bits -87%, shared bits up, total -70%, 3/3);
+  H11.2 both currencies (loss +982 nats and two-part +57,226, 3/3);
+  H11.3 prospective value (3/3 on both measures). Refusal discriminates
+  but does not fully refuse: structured promotes 5.0 with 31.3 of 40 tasks
+  reusing against the control's 3.3 and 15.0.
+- Extending to development worlds 3-9 before setting any sealed interval,
+  so the confirmation plan is frozen on ten worlds rather than three.

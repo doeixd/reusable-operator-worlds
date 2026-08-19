@@ -204,3 +204,5 @@ KeyError: 'promoting'
 12:49:42 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_1\promoting
 12:49:42 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_2\promoting
 12:49:42 V3_TASKGROUP_COMPLETE
+12:50:43 starting: 7 cells, jobs=4, etas=[0.9]
+12:50:50 starting: 7 cells, jobs=2, etas=[0.9]

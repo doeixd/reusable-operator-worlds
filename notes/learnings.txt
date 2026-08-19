@@ -713,6 +713,103 @@ motivated and gives it a stronger causal test.
 
 ---
 
+# Durable cross-cutting scientific findings
+
+These are replicated experimental results that transcend any single numbered
+hypothesis. They are the findings most likely to survive into the paper and into
+future work, independent of how V3 turns out.
+
+## A. The advantage is robust to every nuisance axis tested
+
+On the exact-reuse development set, Continuous's lifetime-loss advantage is
+10/10 under no replay, canonical (1:1) replay, 1:4 heavy replay, and reverse
+task order — with bootstrap intervals [2,511–3,803] that exclude zero in every
+condition. Reverse order has no consistent absolute penalty for either
+architecture (mean reverse-minus-forward loss is −57 Continuous, −299 Dense-C,
+both spanning zero), so the advantage is not a curriculum artifact. A second
+independent model initialization reproduces it 10/10 (mean 3,081 vs 3,698
+canonical). Opaque-ID reassignment is an exact invariant (every metric and final
+tensor bitwise-identical after remapping). The one boundary: novel 32-shot
+transfer is **not** robust without replay (6/10, interval spanning zero) but is
+10/10 under canonical/strong replay and reverse order — distinguish the
+replay-sensitive retained-transfer endpoint from the replay-robust cumulative
+lifetime-cost result.
+
+## B. Forward transfer is real, measurable, and grows with task index
+
+Same-architecture fresh-task baselines establish explicit forward transfer: mean
+per-task fresh-minus-lifetime Gaussian log loss is +366.8 (Continuous) and +211.6
+(Dense-C), positive in all ten world means (97.5% / 93.75% of individual tasks).
+Transfer **increases with task index in every world** for both models (slopes
++4.35 and +3.77 log-loss units per task). Continuous's extra transfer over
+Dense-C is positive 10/10 at +155.2 [145.5, 165.3]. Route similarity is a strong
+post-hoc explanatory variable: Continuous mean transfer rises from 26 (no
+matching route positions) to 268 (one of three) to 402 (two of three); Dense-C
+from −34 to 115 to 242. Teacher routes are used only for this analysis, never
+training or prediction.
+
+## C. The reusable advantage in novel adaptation is acquired, not architectural
+
+At checkpoint 8 Dense-C is equal or slightly better at 32-shot novel adaptation;
+the two then **diverge with experience**, and by 64 tasks Continuous is ~2×
+better. This equal-start divergence is a stronger learning-to-learn claim than
+any gain ratio — the advantage is acquired over the lifetime, not present at
+initialization. Progressive operator recovery parallels it: from 8 to 64 tasks,
+mean one-to-one primitive functional distance falls from 0.00786 to 0.00211
+(Continuous) and 0.00745 to 0.00131 (Discrete), 10/10 worlds. Matched slots
+also generalize to untrained future programs (future-program teacher-route NMSE
+falls 0.0300→0.0126 Continuous, 0.0280→0.0106 Discrete between checkpoints 8
+and 32).
+
+## D. Measured recurrence is the right explanatory coordinate, but per-world crossing does not collapse
+
+Re-coordinating the 64-task mean effect curve by measured residual-function
+correlation makes it much more nearly linear: linear-fit R² rises from 0.646
+(configured ρ) to 0.974 (measured recurrence), and residual RMSE falls from
+1,329 to 361 log-loss units — so much of the apparent "elbow" is a coordinate
+artifact. But H5b's tighter-alignment prediction fails: at 64 tasks per-world
+crossover SD is 0.0173 in configured ρ versus 0.0381 in measured recurrence
+(ranges 0.0482 vs 0.1308). Report this as mixed: the mean curve smooths in
+measured coordinates, but the cross-world crossing does not collapse onto one
+frontier. Do not claim a universal phase boundary at a precise ρ*.
+
+## E. Mixture representations are distributed/compensatory, not slot-identical
+
+A teacher route through Hungarian-matched individual slots is **not** an oracle
+upper bound: Continuous's learned mixture route is better on completed tasks in
+all ten worlds at every checkpoint (at 64 tasks mean NMSE 0.00191 vs 0.00937 for
+the matched-slot teacher route). So the slot-to-primitive diagnostic is
+basis-dependent — report progressive functional matching as evidence of
+operator-quality improvement, not as proof that Continuous has uniquely
+recovered the teacher's discrete representation. Discrete's learned hard route
+and matched-slot teacher route do converge (0.00456 vs 0.00484, learned better
+only 6/10), consistent with discrete routing recovering a cleaner symbolic
+structure.
+
+## F. Retention is a solved, measured resource frontier — distinct from lifetime loss
+
+Across all ten development worlds, int8 quantization degradation is negligible
+(mean 0.6–3.2e-6, worst individual task ≤1.4e-4), so retained-description
+measurements are trustworthy. The retained-bits ordering
+(Discrete 26,208 < Continuous 29,248 < Hypernetwork 33,928 < Dense-24 56,448 <
+Dense-C 66,688) **diverges from the lifetime-loss ordering**, which is the
+resource-frontier result: storage efficiency, online learning efficiency, and
+inference compute are distinct objectives, and no single representation
+dominates on all three. This is what justifies the weighted objective
+J = L_preq + λD + μC as measurement rather than decoration.
+
+## G. The amortization crossover moves early then stops — a mixed, not clean, law
+
+Truncating existing ρ lifetimes gives mean configured-ρ crossovers of 0.869 (16
+tasks), 0.822 (32), 0.826 (64). The 16→64 crossover declines in 8/10 worlds,
+but the mean is **not monotone** (it edges up from 32→64). So "early
+amortization + stationary representational bias" is closer to the truth than
+"sharing always wins given enough lifetime," but H5a is only partially supported.
+This is a durable negative result: do not claim a monotone economic law of
+reuse amortization.
+
+---
+
 # V3 testbed: the validity-gate failure and the functional-substitutability gate
 
 ## 20. Spare shared capacity absorbs recurrence into routes, not residuals
