@@ -400,3 +400,42 @@ the behavior it asks the learner to refuse. Before building a world in
 which an operator must NOT fire, measure how often the mechanism fires
 with no cause present; if that rate is comparable to the effect, no
 world design can rescue the control.
+
+# V4R RETAIN cell — GATE PASSES under a frozen-library oracle (2026-08-19)
+
+Taking the first of the two admissible routes recorded above: freeze the
+library after the gap so retain-versus-delete is not contaminated by
+fresh promotion. This keeps the census offline and oracle-only as
+V4R §1 requires, and it is the first clean refusal control in the V4/V4R
+arc.
+
+Question: for tasks arriving AFTER the return, is referencing a pre-gap
+abstraction better than referencing none?
+
+| arm | world | post-gap tasks | value of best pre-gap abstraction |
+| --- | --- | --- | --- |
+| returns | 1 | 9 | +2,828 nats |
+| returns | 2 | 13 | +2,433 nats |
+| permanent | 2 | 4 | -90 nats |
+
+The separation is exactly the registered direction and is large. Where
+the regime RETURNS, the dormant abstraction is worth 2,433-2,828 nats to
+tasks that arrive after it; where the regime is PERMANENTLY gone, it is
+worth nothing (-90). Against a carry cost of one residual, about 1,098
+nats, `V_retain = P(return) * C_reacquire - C_carry` is comfortably
+positive in the returning arm and negative in the permanent arm.
+
+So the retention OPPORTUNITY exists. What blocked it was never the
+world's economics; it was that online PROMOTE manufactures replacement
+abstractions from noise, so deletion was never costly. Freezing the
+library removes that confound without modifying the frozen V3 substrate.
+
+LIMITS, and they are real. Only three of six cells are scoreable: the
+other three have no abstraction born before task 32 at all, because
+`family_onset = 16` leaves just sixteen tasks in which to promote. The
+permanent arm contributes a single usable cell. This is a
+three-observation sign separation, not an interval estimate. Before this
+becomes a rung it needs an earlier family onset so pre-gap abstractions
+form reliably, the full ten development worlds, and a gap sweep
+establishing the crossover `g*` that V4R §2.1 registers as the
+prerequisite for implementing any online retention policy.
