@@ -1459,3 +1459,36 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   loop from lag alone, so the sweep-rate series (does the gap survive as
   v -> 0) is preregistered as the falsifier rather than left as a design
   note.
+
+# 2026-08-19 — V4 spec drafted; P1 audits answered, one narrows a V3 claim
+
+- P1 audits, ten development worlds (reports/v3_compute_audits.json):
+    frozen comparator        loss +1,350 (10/10), two-part +55,697 (10/10)
+    2x-updates comparator    loss +3,015 (10/10), two-part +57,362 (10/10)
+    UNFROZEN-basis comparator loss -5,766 ( 0/10), two-part +48,581 (10/10)
+  Compute is not the explanation: doubling the comparator's gradient steps
+  makes it worse, so promotion's advantage widens. But an unfrozen basis
+  predicts better in aggregate while losing the two-part objective badly.
+- Re-evaluated against the FINAL model, the unfrozen basis is worse on the
+  sixteen pre-onset tasks (+0.00415 NMSE, 10/10) and better on the
+  forty-eight post-onset ones (-0.00398, 0/10). It buys prediction by
+  forgetting. Promotion needs no such trade because abstractions are
+  additive. V3 spec gains section 13 recording that its prediction claim
+  holds against a frozen substrate specifically.
+- Instrument lesson: final_nmse is written at task completion and cannot
+  see later drift in shared parameters. The first interference pass used
+  it and reported +0.00000 in 0/10 worlds, a pure artifact. All V4
+  interference measurement re-evaluates against the final model.
+- Wrote row_v4_experimental_spec.md against notes/v4-spec-plan.md: H14
+  survival (primary), H15 deduplication, H16 safe shared update, H17
+  hysteresis with the sweep-rate falsifier, H18 priced retrieval
+  (exploratory); the dormancy pair and per-operation refusal controls; the
+  real-options retention rule with its evidence window frozen in advance;
+  a deterministic greedy edit policy; survival table, lifecycle regret,
+  migration ledger, semantic regression suite, decision dataset.
+- The audits are folded into the spec as adopted consequences rather than
+  commentary: the unfrozen basis joins the standing comparator set,
+  old-task interference becomes a standing endpoint at every rung, and
+  H16's falsifier is pre-answered in the affirmative so V4.3 now tests
+  whether copy-on-write recovers the unfrozen basis's prediction advantage
+  WITHOUT its forgetting.

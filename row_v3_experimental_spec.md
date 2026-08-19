@@ -1038,3 +1038,46 @@ incompatible regimes, delete what stopped paying, and stay searchable as
 it grows (notes/v4-sketch.txt, sealed seeds 400-429). The branch table
 there is now resolved to its first case — V3 passed — so V4 proceeds as
 sketched rather than into its blocked branches.
+
+
+---
+
+# 13. ADDENDUM (2026-08-19): comparator audits run after sealing
+
+Two comparisons that review 27 flagged before sealing, run afterwards on
+the ten development worlds and reported here because one of them narrows a
+V3 claim. `reports/v3_compute_audits.json`.
+
+    comparator                 promoted loss gain    promoted two-part gain
+    unpromoted, frozen              +1,350 (10/10)          +55,697 (10/10)
+    unpromoted, 2x updates          +3,015 (10/10)          +57,362 (10/10)
+    unpromoted, basis UNFROZEN      -5,766 ( 0/10)          +48,581 (10/10)
+
+**Compute is not the explanation.** Doubling the comparator's gradient
+steps makes it worse, widening promotion's advantage from 1,350 to 3,015
+nats. The lifetime gain reported in section 12 is representational, not
+extra optimization.
+
+**The prediction claim is comparator-dependent; the description-length
+claim is not.** An unfrozen basis — the same world with the shared
+operators left free to keep learning — predicts better in aggregate by
+5,766 nats while losing the two-part objective by 48,581. Promotion wins
+the registered objective against every comparator tried, but section 12's
+phrasing "wins prediction and description length simultaneously" holds
+against a FROZEN substrate and should be read that way.
+
+**The aggregate hides a trade, and the trade is forgetting.**
+Re-evaluated against the final model, the unfrozen basis is worse on the
+sixteen tasks learned before the new primitive appeared (+0.00415 NMSE,
+10/10 worlds) and better on the forty-eight after (-0.00398, 0/10). It
+buys new-task accuracy by damaging old dependents. Promotion's gain
+requires no such trade, because abstractions are additive and the
+substrate is untouched. That asymmetry is the honest form of the claim:
+promotion is the cheaper way to absorb new recurring structure WHEN
+modifying the substrate is not free — which is also the setting the LLM
+bridge targets, where a base model is not retrainable.
+
+**Instrument note.** A task's `final_nmse` is recorded at that task's
+completion and cannot reflect later drift in shared parameters; a first
+pass using it reported zero interference, which was an artifact. All
+interference measurements re-evaluate against the final model.
