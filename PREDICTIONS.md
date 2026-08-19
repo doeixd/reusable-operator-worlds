@@ -105,6 +105,45 @@ tasks may sit near the threshold, which is precisely why the sweep is
 informative. Conditional on the H11 development verdict; runs on
 development worlds first.
 
+## P-2026-08-19-I: gated innovation beats Gaussian innovation
+
+Registered BEFORE any gated learner exists, and before any PROMOTE run,
+so the transition away from the Gaussian wake code is not fitted to its
+outcome. Giving the task code an exact null state — delta = g * R with
+a gate over whole RANK COMPONENTS, so rank(R_tau) in {0, 1, 2} and
+rank 0 is exactly "reuse the shared computation" — improves the
+rate-distortion frontier over the Gaussian variational code on canonical
+mixed development worlds: at matched held-out NMSE (within 1e-4), the
+gated learner's retained two-part bits are lower in a majority of worlds
+0-2. Confidence: 0.6. Secondary and more interesting, registered at
+confidence 0.7: the gate becomes an explicit reuse decision that tracks
+recurrence — the probability that a task-step carries rank 0 INCREASES
+with that step's measured primitive recurrence (Spearman positive in a
+majority of worlds). Rationale: the Gaussian code's identity state is
+not free (measured: 22.0 KL bits for a task needing nothing), so its
+gradient prices precision rather than presence; a null-state code makes
+"does this task need an innovation at all" a decision the learner takes
+rather than one a post-hoc pruner takes for it. Risk: relaxed-Bernoulli
+gates were the mechanism that failed in V1/V2 MDL gating, albeit on
+shared library components rather than task innovations.
+
+## P-2026-08-19-J: acquisition-then-freeze versus mutable task state
+
+Two protocols for what replay may change, run as a registered ablation
+rather than adopted silently. Option A (current): replay updates task
+codes and charges their KL, keeping the KL-to-likelihood pressure ratio
+at 1.000 for every task. Option B: a task's code is optimized during its
+own 128 examples and then FROZEN, with replay updating only shared
+structure. Prediction: Option B reduces total retained task bits by at
+least 10% at matched held-out NMSE (frozen codes stop accreting
+information under replay pressure) but loses lifetime prequential loss
+by less than 1,500 nats per world, in a majority of worlds 0-2.
+Confidence: 0.45. Rationale: freezing is the only way "charge the code
+once at acquisition" is coherent, and it has an attractive reading as
+fast acquisition, medium-term frozen episode, slow consolidation — but
+it removes the learner's ability to correct an early task's code once
+the shared substrate improves, which is exactly what replay is for.
+
 ---
 Outcome log (append-only):
 - (none yet)

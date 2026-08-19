@@ -26,16 +26,27 @@ def log(message: str) -> None:
         handle.write(f"{time.strftime('%H:%M:%S')} {message}\n")
 
 
-def _config_for_beta(beta: float) -> Path:
-    """Write a config whose only change from canonical is description_beta."""
-
+def _config_path(beta: float) -> Path:
     if beta == 1.0:
         return ROOT / "configs" / "v1.yaml"
-    raw = yaml.safe_load((ROOT / "configs" / "v1.yaml").read_text(encoding="utf-8"))
-    raw["variational_model"]["description_beta"] = beta
-    path = ROOT / "configs" / f"v3_variational_beta{beta:g}.yaml"
-    path.write_text(yaml.safe_dump(raw, sort_keys=False), encoding="utf-8")
-    return path
+    return ROOT / "configs" / f"v3_variational_beta{beta:g}.yaml"
+
+
+def _write_configs(betas) -> None:
+    """Materialize every beta config BEFORE the pool starts.
+
+    Writing them inside the workers races: two workers on the same beta
+    write the same path while a third reads it, and a truncated read is a
+    yaml parse error rather than a clean failure.
+    """
+
+    for beta in sorted(set(betas)):
+        path = _config_path(beta)
+        if beta == 1.0:
+            continue
+        raw = yaml.safe_load((ROOT / "configs" / "v1.yaml").read_text(encoding="utf-8"))
+        raw["variational_model"]["description_beta"] = beta
+        path.write_text(yaml.safe_dump(raw, sort_keys=False), encoding="utf-8")
 
 
 def run_cell(args: tuple[int, float]) -> str:
@@ -44,7 +55,7 @@ def run_cell(args: tuple[int, float]) -> str:
     out = ROOT / "artifacts" / "v3_variational" / label / f"world_{world}" / "variational"
     if (out / "summary.json").exists():
         return f"skip {out}"
-    config = _config_for_beta(beta)
+    config = _config_path(beta)
     result = subprocess.run(
         [sys.executable, "-m", "row.experiments.mixed_lifetime",
          "--config", str(config), "--model", "variational",
@@ -65,6 +76,7 @@ def main() -> None:
     args = parser.parse_args()
 
     cells = [(world, beta) for beta in args.betas for world in args.worlds]
+    _write_configs(args.betas)
     log(f"starting: {len(cells)} cells, jobs={args.jobs}")
     with ProcessPoolExecutor(max_workers=args.jobs) as pool:
         for outcome in pool.map(run_cell, cells):

@@ -1,0 +1,77 @@
+[
+  {
+    "world_seed": 0,
+    "adopted_policy": "batch mean over unique tasks present",
+    "pressure_ratio": {
+      "note": "integrated KL weight divided by integrated data weight",
+      "mean": 1.0,
+      "minimum": 1.0,
+      "maximum": 1.0,
+      "first_to_last_quarter_tilt": 1.0
+    },
+    "raw_charge_multiple_of_intended": {
+      "note": "integrated KL coefficient over the intended single charge",
+      "mean": 1.0,
+      "minimum": 0.5,
+      "maximum": 3.3828125,
+      "first_to_last_quarter_tilt": 3.0288083806198167
+    },
+    "rejected_current_task_only_policy": {
+      "note": "pressure ratio if only the current task were charged",
+      "mean": 1.2036408056660728,
+      "minimum": 0.2956120092378753,
+      "maximum": 2.0,
+      "first_to_last_quarter_tilt": 0.3534097781596604
+    }
+  },
+  {
+    "world_seed": 1,
+    "adopted_policy": "batch mean over unique tasks present",
+    "pressure_ratio": {
+      "note": "integrated KL weight divided by integrated data weight",
+      "mean": 1.0,
+      "minimum": 1.0,
+      "maximum": 1.0,
+      "first_to_last_quarter_tilt": 1.0
+    },
+    "raw_charge_multiple_of_intended": {
+      "note": "integrated KL coefficient over the intended single charge",
+      "mean": 1.0,
+      "minimum": 0.5,
+      "maximum": 3.3828125,
+      "first_to_last_quarter_tilt": 3.0288083806198167
+    },
+    "rejected_current_task_only_policy": {
+      "note": "pressure ratio if only the current task were charged",
+      "mean": 1.2036408056660728,
+      "minimum": 0.2956120092378753,
+      "maximum": 2.0,
+      "first_to_last_quarter_tilt": 0.3534097781596604
+    }
+  },
+  {
+    "world_seed": 2,
+    "adopted_policy": "batch mean over unique tasks present",
+    "pressure_ratio": {
+      "note": "integrated KL weight divided by integrated data weight",
+      "mean": 1.0,
+      "minimum": 1.0,
+      "maximum": 1.0,
+      "first_to_last_quarter_tilt": 1.0
+    },
+    "raw_charge_multiple_of_intended": {
+      "note": "integrated KL coefficient over the intended single charge",
+      "mean": 1.0,
+      "minimum": 0.5,
+      "maximum": 3.3828125,
+      "first_to_last_quarter_tilt": 3.0288083806198167
+    },
+    "rejected_current_task_only_policy": {
+      "note": "pressure ratio if only the current task were charged",
+      "mean": 1.2036408056660728,
+      "minimum": 0.2956120092378753,
+      "maximum": 2.0,
+      "first_to_last_quarter_tilt": 0.3534097781596604
+    }
+  }
+]

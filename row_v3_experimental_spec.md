@@ -333,6 +333,60 @@ sleep, fired or refused.
   direction H11.1 looks for. Mean KL then reduces to mean log(s/sigma):
   bits relative to what is typical across tasks, which is the semantics
   the promotion criterion needs.
+- **A Gaussian task code mischarges the identity state — a defect in the
+  TRAINING SIGNAL, not in the achievable storage (measured 2026-08-19,
+  `row.experiments.variational_toy`).** Setting q = p is the
+  zero-INFORMATION state but not the zero-PERTURBATION state: a prior
+  wide enough to make a useful deviation cheap injects noise of that same
+  width into an unused coordinate's forward pass, so the optimizer must
+  buy quiet with precision and pay log(s/sigma) nats for a coordinate
+  carrying nothing. In a controlled audit (y = x + delta, half the tasks
+  needing delta = 0) the Gaussian code charged an unused task 22.0 KL
+  bits against 27.8 for a task that genuinely needed adaptation — 79% of
+  the price for none of the content — while a presence-coded variant
+  (delta = g * v, relaxed Bernoulli g) charged 0.00 and produced exactly
+  zero perturbation.
+  **The literal-code control matters and partly reverses this.** Charged
+  under a common sparse code (one presence bit per coordinate plus 8 bits
+  per active scalar), BOTH reach 4.00 bits on unused tasks, because a
+  post-hoc pruner supplies the null state the parameterization lacks; on
+  used tasks the Gaussian is cheaper but at worse distortion (21.3 bits
+  at 0.0071 recovery error against 35.5 at 0.0028), which is a
+  rate-distortion difference rather than a win. So the finding is
+  narrower and sharper than "gating is better": KL(q || p) is a
+  divergence, not a code length, and the Gaussian learner is charged for
+  PRECISION on coordinates a sparse code would store for free. Its
+  gradient therefore optimizes the wrong tradeoff throughout learning
+  even though its final storage can be rescued afterwards. That is V2's
+  "gradient descent never sees bits" one level deeper: here it sees the
+  wrong bits.
+  Consequence for V3: if the LEARNER rather than a post-hoc pruner is to
+  make the reuse-or-specialize decision, its code needs an exact null
+  state. Presence/innovation coding — ideally gating whole rank
+  components, whose states rank(R) = 0, 1, 2 are the representation
+  PROMOTE needs anyway — is pre-registered as the successor wake
+  parameterization (see the Gated Innovation entry in PREDICTIONS.md),
+  with Gaussian retained as the falsified predecessor. This is NOT the
+  failed V1/V2 MDL gate: those pruned SHARED library components during
+  acquisition; this asks whether a TASK needs an innovation beyond what
+  is already shared, which is the H9 question.
+- **Charge the KL as a mean over the tasks present, matching the data
+  term's own weighting (audited 2026-08-19,
+  `row.experiments.audit_kl_charge`).** Replay re-exposes completed
+  tasks, so the integrated KL coefficient is tilted by arrival order
+  (mean x1.00 of intended but range 0.50-3.38, early tasks 3.03x late
+  ones). That tilt is NOT a coding penalty. The decisive quantity is the
+  ratio of KL pressure to likelihood pressure, and because MSE is a mean
+  over batch elements while the KL is a mean over unique tasks present, a
+  task holding one of two examples carries data weight 1/2 and KL weight
+  1/2: the ratio is exactly 1.000 for every task, range 1.000-1.000, tilt
+  1.000x. Replay gives early tasks more optimization STEPS toward the
+  same objective, not a higher price. The alternative of charging only
+  the current task was implemented, audited, and REJECTED: it makes the
+  pressure ratio position-dependent (0.296-2.000, tilt 0.35x) and lets
+  replayed tasks accumulate retained information with no code charge at
+  all. It is coherent only if task state freezes after acquisition, which
+  is a protocol change to be run as an ablation, never a silent fix.
 - Two distinct per-coordinate quantities, never conflated:
   `coordinate_kl` = the full code length (includes the precision term
   log(s/sigma)), used for the variational currency; and
@@ -545,6 +599,23 @@ improvement means retrieval is the bottleneck; (3) gradient
 initialization — initialize adaptation from the promoted abstraction
 without forcing it; improvement means the optimization basin is the
 bottleneck. Whichever rung repairs M3 names the Phase III problem.
+
+**The H9 rate-distortion bound (run 2026-08-19, before PROMOTE, as the
+separable prior question).** Is V2's ~130k-bit shared-residual retention
+the INFORMATION CONTENT of its task residuals or an artifact of
+fixed-width storage? Answered by compressing a trained H9 artifact post
+hoc under magnitude pruning, per-task-step rank reduction, and coarse
+quantization (`row.experiments.audit_h9_rate_distortion`). World 0:
+against 132,400 dense bits, the best code inside the 1e-4 margin retains
+117,966 bits — an 11% saving. Only at materially larger distortion does
+the frontier move (int4: 74,680 bits at +0.00024 NMSE; discarding every
+residual and keeping routes alone: 29,440 bits — essentially
+Continuous's 29,248 — at +0.0089 NMSE). The residuals therefore carry
+genuine information that buys real accuracy, and no serialization
+choice rescues the two-part cell. This is the quantitative case for
+PROMOTE over better coding: V3 must change WHAT is stored, not how it
+is written down, which is also why the post-promotion rank reduction in
+3.2 is load-bearing rather than cosmetic.
 
 **If literal bits do not fall (coding ladder, registered order):**
 evaluate the same artifacts under KL code -> entropy-coded

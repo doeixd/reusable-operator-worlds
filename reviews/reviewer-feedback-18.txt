@@ -1,0 +1,685 @@
+I think the agent is doing good science here—the fact that the first variational idea is already fighting back is useful. But **before I let it keep tuning (\beta)**, I would pause on three conceptual issues. I suspect at least one may explain why P-2026-08-18-A looks bad. 
+
+### 1. The Gaussian variational parameterization may make “zero task information” inherently noisy
+
+This is the biggest thing that jumps out at me.
+
+You want the ideal unused task coordinate to mean:
+
+[
+I(\Delta_{\tau,j})=0
+]
+
+and therefore:
+
+[
+q(\Delta_{\tau,j})=p(\Delta_j).
+]
+
+But training samples from (q). If your shared prior is broad, say
+
+[
+p=\mathcal N(0,1),
+]
+
+then a coordinate carrying **zero information** injects order-1 random task residuals into the network every forward pass.
+
+That's disastrous.
+
+So the optimizer is forced to make
+
+[
+\sigma_q\ll\sigma_p
+]
+
+even when
+
+[
+\mu=0
+]
+
+just to prevent useless noise.
+
+But then it pays:
+
+[
+KL(q|p)>0
+]
+
+for an unused coordinate.
+
+That's a structural mismatch between:
+
+> “no information about this task”
+
+and
+
+> “don't perturb the computation.”
+
+It may be why the prior keeps wanting to collapse.
+
+The observed runaway
+
+[
+s_p:1\rightarrow0.0034
+]
+
+doesn't strike me as just an optimizer pathology. The model is saying:
+
+> “If unused task state should mean zero contribution, then my prior needs to be concentrated at zero.”
+
+But once the prior gets concentrated at zero, useful task deviations become prohibitively expensive.
+
+That's a nasty chicken-and-egg problem.
+
+### I would test this immediately
+
+Construct an extremely simple one-dimensional toy:
+
+[
+y=x+\delta_\tau
+]
+
+where half the task coordinates truly need (\delta=0), and half need a known nonzero offset.
+
+Ask whether the current variational parameterization can simultaneously achieve:
+
+[
+KL_{\rm unused}\approx0
+]
+
+and
+
+[
+\text{good nonzero adaptation}.
+]
+
+If it can't in that trivial setting, don't spend compute tuning (\beta) in ROW.
+
+---
+
+## 2. I suspect the right object to code is **presence / innovation**, not the raw task parameter
+
+This suggests a different formulation.
+
+Instead of:
+
+[
+\Delta_{\tau,j}\sim
+\mathcal N(\mu_{\tau,j},\sigma_{\tau,j}^2)
+]
+
+with a Gaussian prior over (\Delta), introduce something more like:
+
+[
+\Delta_{\tau,j}=g_{\tau,j}v_{\tau,j}.
+]
+
+Where:
+
+[
+g_{\tau,j}\in{0,1}
+]
+
+or a continuous relaxation.
+
+Then:
+
+[
+g=0
+]
+
+means **literally no task-specific computation**.
+
+No noise.
+
+No scalar.
+
+No ambiguity.
+
+And the information cost is something like:
+
+[
+D(g)+gD(v).
+]
+
+Now the desired semantics become exact:
+
+[
+\boxed{
+\text{no task information}
+\Longleftrightarrow
+\text{no task-specific computational contribution}.
+}
+]
+
+You could do this with:
+
+* hard-concrete / (L_0)-style gates;
+* spike-and-slab;
+* Bernoulli-Gaussian latent innovations;
+* group gates over rank components rather than individual weights.
+
+Notice that this is *not* the failed V1/V2 MDL gating experiment.
+
+That gating tried to prune **structural library components during acquisition**.
+
+Here you're using a variational gate to encode:
+
+> does this task need an innovation beyond the shared representation?
+
+That's much more aligned with H9.
+
+I would especially try **rank-component gates**:
+
+[
+R_\tau
+======
+
+\sum_{k=1}^{2}
+g_{\tau,k}u_{\tau,k}v_{\tau,k}^{T}.
+]
+
+Then the natural states are:
+
+[
+\operatorname{rank}(R_\tau)
+===========================
+
+0,1,2.
+]
+
+Which is exactly the physical representation V3 eventually wants anyway.
+
+This may unify the variational and literal code instead of needing a pruning pass afterward.
+
+---
+
+# 3. Audit how often KL is actually being charged
+
+The conversion:
+
+[
+\text{MSE}
++
+\beta\frac{2\sigma_y^2}{Nd}KL
+]
+
+is mathematically right **if the KL is distributed once over the (N) observations whose likelihood it accompanies**.
+
+But your lifetime isn't simply one pass over an isolated dataset.
+
+You have:
+
+* online updates;
+* replay;
+* repeated exposure to old examples;
+* potentially multiple task IDs per update.
+
+So I would verify numerically that over a completed task, the integrated optimization pressure corresponds approximately to:
+
+[
+-\log p(D_\tau\mid\theta)
++
+\beta KL_\tau
+]
+
+rather than:
+
+[
+-\log p(D_\tau\mid\theta)
++
+k\beta KL_\tau
+]
+
+where (k) depends on how often that task appears in replay.
+
+This matters enormously.
+
+If a completed task appears repeatedly in replay and its KL is charged again each time, the code gets charged multiple times even though its retained description is only paid once.
+
+I would add an accounting diagnostic:
+
+[
+C_\tau^{KL}
+===========
+
+\sum_{\text{updates}}
+\text{effective KL coefficient applied to }\tau.
+]
+
+For the intended MDL interpretation, you should know what this integrates to.
+
+This is one place where “correct dimensional units” does **not necessarily imply correct lifetime accounting**.
+
+---
+
+# 4. The empirical-Bayes prior deserves its own ablation
+
+The warmup fix is reasonable engineering, but I'd be cautious about baking it into the theory yet.
+
+The degeneracy:
+
+[
+\mu\approx0,\sigma\approx10^{-3}
+\Rightarrow
+s_p\approx10^{-3}
+]
+
+is exactly the equilibrium you'd expect if the prior is estimated before tasks have had the opportunity to differentiate.
+
+Then:
+
+[
+\frac{\mu^2}{s_p^2}
+]
+
+makes escaping the origin expensive.
+
+That's basically a **symmetry-breaking problem**.
+
+The learner needs enough freedom early to discover task differences before its prior decides those differences don't exist.
+
+That suggests a broader principle:
+
+[
+\boxed{
+\text{acquire variation first; compress variation second.}
+}
+]
+
+Which is surprisingly consistent with your earlier:
+
+> wake flexible, sleep compress.
+
+Maybe putting the full MDL pressure directly into wake was partly the wrong lesson from V2.
+
+Perhaps the better answer is not:
+
+[
+\text{bits in gradient from example 1}.
+]
+
+Maybe it's:
+
+[
+\text{learn task adaptation freely}
+\rightarrow
+\text{estimate its information content}
+\rightarrow
+\text{gradually anneal/compress it}.
+]
+
+For example:
+
+[
+\beta_t:
+0\rightarrow1
+]
+
+within each task, or only after some evidence threshold.
+
+That would allow the task to establish:
+
+[
+\mu_\tau\neq0
+]
+
+before asking whether those deviations earn their bits.
+
+I would test:
+
+1. constant (\beta);
+2. delayed (\beta);
+3. gradually annealed (\beta).
+
+Not as unrestricted tuning—pre-register it as a **mechanism ablation about acquisition vs compression timing**.
+
+If delayed coding wins dramatically, that's conceptually important.
+
+---
+
+# 5. The 16-example result is more interesting than the log suggests
+
+The agent concluded:
+
+> task state buys ~5 nats but costs ~500 nats, therefore empty code is MDL-correct. 
+
+I agree with the arithmetic interpretation.
+
+But think about what that means.
+
+You have rediscovered, *inside one task*, exactly the economics from V1:
+
+[
+\text{benefit of specialization}
+<
+\text{cost of representing specialization}.
+]
+
+Therefore don't specialize.
+
+That's actually neat.
+
+There may be a within-task threshold:
+
+[
+n^*_{\rm task}
+]
+
+where:
+
+[
+n<n^*
+\Rightarrow
+\text{reuse/shared prior}
+]
+
+and:
+
+[
+n>n^*
+\Rightarrow
+\text{task-specific state becomes worth encoding}.
+]
+
+That's a new scale of the same phenomenon.
+
+You could ultimately have:
+
+[
+\boxed{
+\text{abstraction economics at multiple nested levels}
+}
+]
+
+* examples determine whether a task adaptation is worth encoding;
+* tasks determine whether a family abstraction is worth promoting;
+* abstractions determine whether a macro is worth creating.
+
+The same inequality keeps recurring:
+
+[
+N\times s>C.
+]
+
+That feels important.
+
+---
+
+# 6. P-2026-08-18-A failing may actually simplify V3
+
+Remember what P-A claims:
+
+> variational wake **alone** beats the fixed architectures under the two-part code.
+
+That isn't H11.
+
+If it fails, I don't think the V3 thesis is in much trouble.
+
+In fact there is a plausible world in which the correct result is:
+
+[
+\boxed{
+\text{continuous information penalties alone cannot create structural compression}.
+}
+]
+
+Why?
+
+Because shrinking KL does not automatically create:
+
+[
+\text{shared object}
++
+\text{reference}.
+]
+
+Only PROMOTE changes the representation class.
+
+So you might discover:
+
+[
+\text{variational coding improves information allocation}
+]
+
+but:
+
+[
+\text{PROMOTE is necessary for actual description shortening}.
+]
+
+That would make H11 *more* interesting.
+
+I would therefore avoid burning too much effort trying to rescue P-A.
+
+Run the registered (\beta) grid.
+
+Score it.
+
+If it's dead, write:
+
+[
+\boxed{\text{P-A falsified}}
+]
+
+and move on.
+
+---
+
+# 7. There is an even simpler baseline I now want
+
+Given what you're observing, I'd add an analysis—not necessarily a new primary model:
+
+Take the **ordinary successful H9 shared-residual learner**, after training.
+
+Then ask:
+
+> If I optimally encode its residuals post hoc with the best sparse/rank/entropy code available, how many bits do I actually need at fixed distortion?
+
+In other words:
+
+[
+R_{H9}(\epsilon).
+]
+
+This gives you a powerful bound.
+
+If vanilla H9 already has:
+
+[
+R_{H9}(\epsilon)
+\ll130\text{k bits},
+]
+
+then the original 130k “failure” was primarily the fixed-width representation, and V3 wake-side variational learning may be less necessary than we thought.
+
+If:
+
+[
+R_{H9}(\epsilon)
+]
+
+is still terrible, then V3 really does need to alter how task information is learned.
+
+This seems like a nearly free and very informative analysis.
+
+---
+
+# 8. Another distinction: precision information vs functional information
+
+The agent already noticed this and split:
+
+[
+KL(q|p)
+]
+
+from:
+
+[
+\frac{\mu^2}{2s^2}.
+]
+
+Good.
+
+But I think this may become a bigger conceptual result.
+
+A coordinate can carry bits because:
+
+### Its mean differs from prior
+
+[
+\mu\neq0.
+]
+
+That's task-specific **functional information**.
+
+Or because:
+
+### Its value must be represented precisely
+
+[
+\sigma_q\ll\sigma_p.
+]
+
+That's **precision information**.
+
+These are not identical.
+
+A neural computation might be robust to huge uncertainty in some parameter directions and exquisitely sensitive in others.
+
+So abstraction could compress two things:
+
+[
+\boxed{
+\text{which computation}
++
+\text{how precisely it needs to be specified}.
+}
+]
+
+That could eventually matter greatly in LLM compression.
+
+I'd keep both curves.
+
+---
+
+# 9. Watch the “posterior scales are free training state” assumption
+
+The implementation says posterior (\sigma)'s are discarded like optimizer state. 
+
+That's okay for the **literal deterministic model**, because you retain (\mu).
+
+But then be precise that:
+
+[
+KL(q|p)
+]
+
+is a **variational information bound / training diagnostic**, not literally the number of bits in the serialized posterior-mean model unless you provide the corresponding coding scheme.
+
+You've already improved the spec by separating:
+
+[
+L_{\rm mean}
+]
+
+and:
+
+[
+L_{\rm var}=E_q[L]+KL.
+]
+
+Keep that discipline.
+
+I would not let anyone later write:
+
+> “the model stores X KL bits”
+
+without qualifying what code that refers to.
+
+---
+
+# What I think is about to happen
+
+My updated prediction after seeing these first implementation struggles is:
+
+### β = 0
+
+Should reproduce H9.
+
+Critical sanity check.
+
+### Small β
+
+Probably slightly worsens prediction without giving enough literal compression to compensate.
+
+### β around the literal MDL point
+
+May suppress useful task structure considerably.
+
+### Large β
+
+Likely collapses toward the shared solution.
+
+So P-A probably does fail.
+
+But I don't think the important conclusion will be:
+
+> “MDL in the gradient doesn't work.”
+
+I think it'll be:
+
+[
+\boxed{
+\text{a simple factorized Gaussian prior is a poor representation of the reuse/specialization decision}.
+}
+]
+
+That's much more useful.
+
+The natural next representation is likely **structured innovation coding**:
+
+[
+\text{shared computation}
++
+\text{optional low-rank innovation},
+]
+
+where “optional” is a genuine coding event.
+
+That is already much closer to the eventual learned computational language.
+
+---
+
+## What I'd tell the agent right now
+
+**Finish the registered β grid and don't rescue P-A beyond the preregistered budget.**
+
+Then, before PROMOTE implementation, do three cheap audits:
+
+1. **β=0 equivalence** to H9 on full worlds—not just smoke.
+2. **Integrated KL-charge accounting under replay**, to ensure one retained code isn't being repeatedly overcharged.
+3. **Post-hoc rate–distortion of vanilla H9 residuals**, to determine whether V2's 130k-bit problem was mostly representation/storage or genuinely information content.
+
+And I would add the tiny **Gaussian-prior toy** I described to test whether:
+
+[
+q=p
+]
+
+can simultaneously mean “zero information” and “zero computational perturbation.”
+
+If that toy fails—and I suspect it will—you have identified a very clean reason why the first variational formulation is the wrong tool.
+
+That would be a valuable V3 result already: the learner needs a coding representation whose **zero-information state is also the computational identity state**.
+
+For this project, that principle may turn out to be fundamental:
+
+[
+\boxed{
+\textbf{the prior over task-specific computation should represent “do nothing/reuse what exists,” not random computation.}
+}
+]
+
+That is exactly the inductive bias you'd want in the eventual continual self-programming system. 

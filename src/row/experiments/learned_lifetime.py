@@ -522,8 +522,28 @@ def run(
                 loss = torch.nn.functional.mse_loss(prediction, _tensor(np.stack(batch_y)))
                 if isinstance(model, VariationalSharedResidualLearner):
                     # Description length in the wake gradient (V3 spec 3.1):
-                    # KL(q || p) per task, scaled by beta. The L1 surrogate is
-                    # not applied — storage_penalty is identically zero here.
+                    # KL(q || p), scaled by beta. The L1 surrogate is not
+                    # applied — storage_penalty is identically zero here.
+                    #
+                    # Charged as the MEAN over the unique tasks present, which
+                    # matches the data term's own weighting: MSE is a mean over
+                    # batch elements, so a task holding 1 of 2 examples carries
+                    # data weight 1/2 and KL weight 1/2. The KL-to-likelihood
+                    # PRESSURE RATIO is therefore exactly 1.000 for every task
+                    # regardless of arrival order (audited in
+                    # row.experiments.audit_kl_charge), which is the quantity
+                    # that fixes the implied rate-distortion tradeoff.
+                    #
+                    # The raw integrated KL coefficient is tilted by replay
+                    # (0.50x-3.38x, early tasks highest), but that is a
+                    # difference in how many optimization STEPS a task's code
+                    # receives toward the same objective, not in the price it
+                    # pays. Charging only the current task instead would make
+                    # the pressure ratio position-dependent (2.00 for the last
+                    # tasks against 0.55 for the first) and would let replayed
+                    # tasks accumulate retained information with no code charge
+                    # at all -- coherent only if task state froze after
+                    # acquisition, which is a protocol change, not a bug fix.
                     loss = loss + (
                         _variational_kl_scale(config, config.world.examples_per_task)
                         * model.description_penalty(task_ids)

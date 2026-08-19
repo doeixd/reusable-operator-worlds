@@ -1,0 +1,122 @@
+[
+  {
+    "beta": 0.0,
+    "unused_mean_kl_bits": 46.57037862141927,
+    "used_mean_kl_bits": 46.41682815551758,
+    "unused_mean_mse": 1.0026959292493605e-06,
+    "used_mean_mse": 2.7973903608350764e-07,
+    "used_mean_absolute_recovery_error": 0.00039498950354754925,
+    "unused_mean_literal_sparse_bits": 4.0,
+    "used_mean_literal_sparse_bits": 21.5,
+    "unused_active_fraction": 0.0,
+    "used_active_fraction": 0.546875,
+    "unused_mean_absolute_delta": 0.000824628669458131,
+    "prior_scale": 0.6470360358556112,
+    "model": "gaussian",
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "beta": 0.10000000000000002,
+    "unused_mean_kl_bits": 28.835355758666992,
+    "used_mean_kl_bits": 34.37788645426432,
+    "unused_mean_mse": 3.619594523721995e-05,
+    "used_mean_mse": 1.716919117219125e-05,
+    "used_mean_absolute_recovery_error": 0.0030342161965866885,
+    "unused_mean_literal_sparse_bits": 4.0,
+    "used_mean_literal_sparse_bits": 21.5,
+    "unused_active_fraction": 0.0,
+    "used_active_fraction": 0.546875,
+    "unused_mean_absolute_delta": 0.004616569261997938,
+    "prior_scale": 0.6469988226890564,
+    "model": "gaussian",
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "beta": 1.0,
+    "unused_mean_kl_bits": 22.036534627278645,
+    "used_mean_kl_bits": 27.809525807698567,
+    "unused_mean_mse": 0.00013716527125022063,
+    "used_mean_mse": 8.270180114777759e-05,
+    "used_mean_absolute_recovery_error": 0.007142253685742617,
+    "unused_mean_literal_sparse_bits": 4.0,
+    "used_mean_literal_sparse_bits": 21.333333333333332,
+    "unused_active_fraction": 0.0,
+    "used_active_fraction": 0.5416666666666666,
+    "unused_mean_absolute_delta": 0.009101913931469122,
+    "prior_scale": 0.6470824877421061,
+    "model": "gaussian",
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "beta": 0.0,
+    "unused_mean_kl_bits": 2.947862386703491,
+    "used_mean_kl_bits": 17.39310073852539,
+    "unused_mean_mse": 0.0,
+    "used_mean_mse": 7.664895504907084e-05,
+    "used_mean_absolute_recovery_error": 0.0026210032713909945,
+    "unused_mean_literal_sparse_bits": 4.0,
+    "used_mean_literal_sparse_bits": 35.666666666666664,
+    "unused_active_fraction": 0.0,
+    "used_active_fraction": 0.9895833333333334,
+    "unused_mean_absolute_delta": 0.0,
+    "prior_scale": 0.7496709028879801,
+    "model": "gated",
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "beta": 0.10000000000000002,
+    "unused_mean_kl_bits": 1.7198379964611377e-07,
+    "used_mean_kl_bits": 16.23710759480794,
+    "unused_mean_mse": 0.0,
+    "used_mean_mse": 7.696751708863303e-05,
+    "used_mean_absolute_recovery_error": 0.0026595164090394974,
+    "unused_mean_literal_sparse_bits": 4.0,
+    "used_mean_literal_sparse_bits": 35.666666666666664,
+    "unused_active_fraction": 0.0,
+    "used_active_fraction": 0.9895833333333334,
+    "unused_mean_absolute_delta": 0.0,
+    "prior_scale": 0.8766246636708578,
+    "model": "gated",
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "beta": 1.0,
+    "unused_mean_kl_bits": 2.407758472600108e-07,
+    "used_mean_kl_bits": 16.102881113688152,
+    "unused_mean_mse": 0.0,
+    "used_mean_mse": 7.913693116279319e-05,
+    "used_mean_absolute_recovery_error": 0.00276115156399707,
+    "unused_mean_literal_sparse_bits": 4.0,
+    "used_mean_literal_sparse_bits": 35.5,
+    "unused_active_fraction": 0.0,
+    "used_active_fraction": 0.984375,
+    "unused_mean_absolute_delta": 0.0,
+    "prior_scale": 0.8792393207550049,
+    "model": "gated",
+    "seeds": [
+      0,
+      1,
+      2
+    ]
+  }
+]

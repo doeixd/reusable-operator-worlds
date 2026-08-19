@@ -1008,3 +1008,56 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
 - Launched P-2026-08-18-A at full scale: variational on canonical mixed
   development worlds 0-2 against the existing frozen baselines
   (tools/run_v3_variational.py, detached, resumable, 3 jobs).
+
+# 2026-08-19 — three pre-PROMOTE audits (PI-requested), one self-correction
+
+- TOY AUDIT (row.experiments.variational_toy): does a Gaussian task code
+  make "no information" mean "no perturbation"? Under the variational
+  currency, no — it charges an unused task 22.0 KL bits against 27.8 for
+  a task that genuinely needs adaptation, because q = p is the
+  zero-information state but not the zero-perturbation state, so the
+  optimizer buys quiet with precision. But the LITERAL-code control
+  partly reverses the story: charged under a common sparse code (presence
+  bitmap plus 8 bits per active scalar) both codes reach 4.00 bits on
+  unused tasks, since a post-hoc pruner supplies the null state the
+  parameterization lacks, and on used tasks the Gaussian is cheaper at
+  worse distortion. The defect is therefore in the TRAINING SIGNAL, not
+  the achievable storage: KL is a divergence, not a code length, and the
+  Gaussian learner is charged for precision on coordinates a sparse code
+  stores for free. Recorded that way rather than as "gating wins".
+- KL-CHARGE AUDIT, and a change I made and then reverted. I first read
+  the replay-induced tilt in integrated KL coefficient (mean x1.00 of
+  intended, range 0.50-3.38, early tasks 3.03x late) as re-billing a
+  one-time description cost, and changed the objective to charge only the
+  current task. That was wrong and is reverted. The decisive quantity is
+  KL pressure RELATIVE to likelihood pressure, and under the existing
+  batch-mean policy it is exactly 1.000 for every task (range
+  1.000-1.000, tilt 1.000x) because MSE is a mean over batch elements
+  while KL is a mean over unique tasks present. Replay buys early tasks
+  more optimization steps toward the same objective, not a higher price.
+  The rejected policy would have made the ratio position-dependent
+  (0.296-2.000, tilt 0.35x) and let replayed tasks accrete information
+  free of charge. The batch running under it was killed and relaunched.
+  Lesson recorded: audit the ratio before changing an objective.
+- H9 RATE-DISTORTION BOUND (row.experiments.audit_h9_rate_distortion):
+  is V2's ~130k-bit retention information content or storage format? On
+  world 0, against 132,400 dense bits the best post-hoc code inside the
+  1e-4 margin retains 117,966 — an 11% saving. Larger savings need real
+  distortion (int4: 74,680 bits at +0.00024 NMSE; discarding all
+  residuals and keeping routes: 29,440 bits, essentially Continuous's
+  29,248, at +0.0089). The residuals carry genuine information, so no
+  serialization choice rescues the two-part cell. This is the
+  quantitative case for PROMOTE over better coding.
+- Pre-registered P-2026-08-19-I (gated/rank innovation code, with the
+  reuse-tracks-recurrence secondary) and P-2026-08-19-J
+  (acquisition-then-freeze vs mutable task state), both BEFORE any gated
+  learner exists and before any PROMOTE run.
+- Built the V3 promotion testbed generator (src/row/task_group_world.py):
+  hidden task-group families, held-out future block, drifting-family and
+  regime-change variants. At eta = 0 it reproduces the canonical mixed
+  world BIT-EXACTLY, so the structureless control is the same generator
+  rather than one whose equivalence must be argued. Group separation is
+  monotone in eta (0.002 / 0.019 / 0.047 / 0.166 / 0.442 / 1.137 at eta
+  0 / 0.2 / 0.3 / 0.5 / 0.7 / 0.9) once the instrument centers out the
+  task-invariant component that spectral renormalization leaves behind
+  (without centering, a spurious 0.33 correlation floor).

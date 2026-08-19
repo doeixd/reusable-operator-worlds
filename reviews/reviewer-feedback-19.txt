@@ -1,0 +1,738 @@
+Yes. These are **excellent findings**, and they sharpen the architecture substantially. But I would *not* implement the proposed “charge each code exactly once during acquisition” fix quite yet. One part of that interpretation needs another audit.
+
+The toy result, though, I think is genuinely decisive.
+
+## 1. The toy reveals a fundamental design principle
+
+The result is much stronger than “Gaussian priors aren't tuned well”:
+
+[
+\begin{array}{c|cc}
+&\text{unused}&\text{used}\
+\hline
+\text{Gaussian}&22.04&27.81\
+\text{Gated}&0&16.10
+\end{array}
+]
+
+The Gaussian code spends **79% of the used-task cost to say “do nothing.”**
+
+That's structurally wrong for this project.
+
+The natural null hypothesis for a new task should be:
+
+[
+\boxed{\text{reuse existing computation exactly}}
+]
+
+not:
+
+[
+\boxed{\text{sample a random perturbation around existing computation}.}
+]
+
+So I think you've discovered a constitutional requirement for the eventual architecture:
+
+[
+\boxed{
+\textbf{zero information must correspond to the computational identity operation.}
+}
+]
+
+That is bigger than V3.
+
+For a task-specific residual:
+
+[
+\Delta_\tau=0
+]
+
+should be an exact representational state.
+
+For future programs:
+
+```text
+no special case
+no extra operation
+no branch
+no memory write
+```
+
+should likewise be true defaults.
+
+New information should be encoded as **innovations from the default**, not as precision around a random variable.
+
+---
+
+# 2. I would probably replace Gaussian innovations with gated innovations
+
+Something like:
+
+[
+\Delta_{\tau,k}
+===============
+
+g_{\tau,k}R_{\tau,k}
+]
+
+where:
+
+[
+g_{\tau,k}\in{0,1}.
+]
+
+Or even better, because your residuals already have meaningful rank:
+
+[
+r_{\tau,l}\in{0,1,2}.
+]
+
+Then:
+
+[
+r=0
+]
+
+means exactly:
+
+[
+R_\tau=0.
+]
+
+No task-specific computation.
+
+Rank 1 means a small innovation.
+
+Rank 2 means a more expensive innovation.
+
+So the code naturally becomes:
+
+[
+D(R_\tau)
+=========
+
+D(r_\tau)
++
+D(\theta_\tau\mid r_\tau).
+]
+
+Conceptually:
+
+```text
+REUSE
+```
+
+versus:
+
+```text
+SPECIALIZE rank=1 <payload>
+```
+
+versus:
+
+```text
+SPECIALIZE rank=2 <payload>
+```
+
+That is almost *already a primitive computational language*.
+
+And promotion would transform repeated:
+
+```text
+SPECIALIZE <same-ish payload>
+SPECIALIZE <same-ish payload>
+SPECIALIZE <same-ish payload>
+```
+
+into:
+
+```text
+CALL A
+CALL A
+CALL A
+```
+
+That's exactly the V3 story.
+
+---
+
+# 3. One caution: make sure the toy's “0 bits” is honest
+
+Before declaring the gated code superior by the precise 0-vs-22 number, make sure you're charging the **gate itself**.
+
+If a decoder must distinguish:
+
+[
+g=0
+]
+
+from:
+
+[
+g=1,
+]
+
+that decision generally carries some information.
+
+For a Bernoulli prior:
+
+[
+D(g=0)=-\log_2(1-\pi),
+]
+
+[
+D(g=1)=-\log_2\pi.
+]
+
+So unused state need not literally cost zero.
+
+However, under a sparse structural code you can encode only the **active indices**, so inactive coordinates can cost effectively almost nothing individually.
+
+For example:
+
+[
+D=
+D({\text{active positions}})
++
+\sum_{\text{active }j}D(\theta_j).
+]
+
+That's perfectly legitimate.
+
+So audit whether the toy includes:
+
+* gate/presence bits;
+* active-index bits;
+* payload bits.
+
+Even if the true unused cost becomes 0.1 or 1 bit instead of 0, the conclusion probably survives dramatically:
+
+[
+\sim1\ll22.
+]
+
+The important result is **exact identity semantics**, not literally zero metadata bits.
+
+---
+
+# 4. The replay audit needs one more step before changing the objective
+
+This part is subtler.
+
+You've measured an integrated KL coefficient range:
+
+[
+0.50\times\rightarrow3.38\times
+]
+
+with early tasks receiving ~3x the accumulated KL gradient of late tasks.
+
+That is definitely worth understanding.
+
+But repeated application of a regularizer during SGD is **not automatically equivalent to charging the description multiple times**.
+
+Consider a static objective:
+
+[
+J_\tau
+======
+
+L_\tau+\beta KL_\tau.
+]
+
+If SGD visits that task ten times, it evaluates:
+
+[
+\nabla J_\tau
+]
+
+ten times.
+
+That doesn't mean the final mathematical objective contains:
+
+[
+10\beta KL_\tau.
+]
+
+It can simply mean that task got ten optimization steps toward the same objective.
+
+So the important audit isn't:
+
+[
+\text{total KL coefficient applied to task }\tau.
+]
+
+It's the **relative pressure of KL versus likelihood** for that task.
+
+Compute something like:
+
+[
+R_\tau
+======
+
+\frac{
+\text{integrated effective KL weight for }\tau
+}{
+\text{integrated effective data-likelihood weight for }\tau
+}.
+]
+
+If:
+
+[
+R_\tau
+]
+
+is constant across task position, then the replay may be giving early tasks more optimization, but it's not necessarily changing their implied rate–distortion tradeoff.
+
+If instead:
+
+[
+R_{\rm early}\gg R_{\rm late},
+]
+
+then you really do have a task-position-dependent coding penalty.
+
+**That's the decisive audit.**
+
+---
+
+# 5. I would not simply stop charging KL during replay
+
+Suppose task (\tau) completes.
+
+Then later replay updates its task-specific state:
+
+[
+\mu_\tau\rightarrow\mu'_\tau.
+]
+
+If you no longer charge information cost during replay, the task could accumulate more and more retained information **for free**.
+
+That would be wrong too.
+
+So “pay KL only during initial acquisition” is coherent only if:
+
+[
+\boxed{\text{task-specific code freezes after acquisition}.}
+]
+
+Replay could still update:
+
+[
+\text{shared parameters}
+]
+
+but not:
+
+[
+\text{task code}.
+]
+
+That is actually an interesting design!
+
+It creates a clean medium-timescale state:
+
+```text
+learn task code
+     ↓
+freeze task code
+     ↓
+replay consolidates shared substrate
+```
+
+But it changes the V2 learning protocol materially.
+
+I'd treat it as an ablation, not silently adopt it.
+
+---
+
+# 6. There are therefore two clean solutions
+
+### Option A — mutable task state
+
+Replay is allowed to update task codes.
+
+Then every replayed task update must preserve the intended ratio:
+
+[
+\frac{\text{code pressure}}
+{\text{likelihood pressure}}.
+]
+
+Use importance weighting / per-task normalization so that this ratio does not depend on task age.
+
+### Option B — acquisition then freeze
+
+Task (\tau) gets its 128 examples.
+
+Optimize:
+
+[
+L_\tau+\beta D_\tau.
+]
+
+Then freeze its task code.
+
+Replay only updates shared structure.
+
+This has a very attractive conceptual interpretation for your architecture:
+
+[
+\boxed{
+\text{fast task acquisition}
+\rightarrow
+\text{medium-term frozen episode}
+\rightarrow
+\text{slow consolidation}.
+}
+]
+
+I'd probably test both cheaply.
+
+---
+
+# 7. I think the gated result may change the whole V3 model more than the replay issue
+
+The Gaussian learner was based on:
+
+[
+\text{every task has a continuous residual}
+]
+
+whose precision determines its information.
+
+But your toy suggests the more natural representation is:
+
+[
+\boxed{
+\text{reuse by default}
++
+\text{sparse innovations when evidence earns them}.
+}
+]
+
+That fits V2 extraordinarily well.
+
+Remember H9:
+
+[
+\text{high recurrence}\Rightarrow\text{small residual}
+]
+
+[
+\text{low recurrence}\Rightarrow\text{large residual}.
+]
+
+The gated formulation asks the even sharper question:
+
+[
+\text{does this task need a residual at all?}
+]
+
+and:
+
+[
+\text{how much rank does it need?}
+]
+
+So V3's wake state could become:
+
+[
+P_{\tau,l}
+==========
+
+P_{q_{\tau,l}}
++
+\sum_{k=1}^{r_{\tau,l}}
+u_{\tau,l,k}v_{\tau,l,k}^{T}.
+]
+
+with:
+
+[
+r_{\tau,l}\in{0,1,2}.
+]
+
+Now literal structure, information structure, and computational structure all agree.
+
+That's much nicer.
+
+---
+
+# 8. This also makes PROMOTE cleaner
+
+Suppose many tasks have:
+
+[
+r_{\tau,l}=1
+]
+
+and their rank-1 innovations are functionally similar.
+
+Currently they independently pay:
+
+[
+D(g_\tau)+D(R_\tau).
+]
+
+PROMOTE introduces:
+
+[
+A.
+]
+
+Afterward they pay:
+
+[
+D(\text{reference to }A)
++
+D(\epsilon_\tau).
+]
+
+And maybe:
+
+[
+\epsilon_\tau=0.
+]
+
+So the migration event becomes literally visible:
+
+Before:
+
+```text
+task 1: SPECIALIZE <A-like payload>
+task 2: SPECIALIZE <A-like payload>
+task 3: SPECIALIZE <A-like payload>
+```
+
+After:
+
+```text
+shared: A
+
+task 1: USE A
+task 2: USE A
+task 3: USE A
+```
+
+That's remarkably close to the information-theoretic semantics you've wanted from the beginning.
+
+---
+
+# 9. I would finish the registered Gaussian β sweep anyway
+
+Don't bury this negative.
+
+P-2026-08-18-A was defined for the Gaussian variational learner.
+
+Finish the registered grid and score it honestly.
+
+If it fails:
+
+[
+\boxed{\text{P-A FALSIFIED}}
+]
+
+with mechanism:
+
+> A continuous Gaussian innovation code cannot cheaply represent the computational identity state; its no-information state injects stochastic perturbation, forcing unused coordinates to carry precision information.
+
+Then the toy is the mechanistic falsifier.
+
+That's a **great negative result**.
+
+After that I would freeze Gaussian as the negative-control code and pre-register:
+
+> **Gated Innovation hypothesis:** giving the task code an exact identity/null state improves the rate–distortion frontier and yields sparse structural task state suitable for promotion.
+
+Because no PROMOTE run has happened yet, this is a scientifically clean time to make that transition.
+
+---
+
+# 10. I would add one tiny three-model experiment
+
+Before putting the gated learner into the full V3 machinery, test:
+
+### Gaussian
+
+[
+\Delta\sim N(\mu,\sigma).
+]
+
+### Deterministic L1/L0-ish residual
+
+[
+\Delta
+]
+
+with magnitude penalty.
+
+### Gated structural innovation
+
+[
+gR.
+]
+
+On mixed ROW, measure:
+
+[
+L
+]
+
+versus:
+
+[
+D.
+]
+
+And especially:
+
+[
+P(r=0\mid\text{high recurrence})
+]
+
+versus:
+
+[
+P(r>0\mid\text{low recurrence}).
+]
+
+Prediction:
+
+[
+r_{\rm recurrence}\uparrow
+\Rightarrow
+P(\text{innovation present})\downarrow.
+]
+
+If that happens, you now have an even cleaner version of H9:
+
+[
+\boxed{
+\text{the learner doesn't merely shrink specialization—it decides when specialization deserves to exist}.
+}
+]
+
+That's a really nice result.
+
+---
+
+# 11. This teaches us something about the eventual full architecture
+
+This is why I find the toy surprisingly important.
+
+In the eventual self-programming system, every representational extension should probably have a distinguished **null/default**.
+
+For a residual:
+
+[
+\text{NONE}.
+]
+
+For a memory write:
+
+[
+\text{DON'T WRITE}.
+]
+
+For a branch:
+
+[
+\text{NO BRANCH}.
+]
+
+For an extra computation:
+
+[
+\text{HALT}.
+]
+
+For a new module:
+
+[
+\text{REUSE EXISTING}.
+]
+
+For a fork:
+
+[
+\text{DON'T FORK}.
+]
+
+New complexity should be represented as a sparse sequence of **departures from the default**.
+
+That makes parsimony structural:
+
+[
+\boxed{
+\text{existing computation is free/default;}
+\quad
+\text{novel computation has to earn its bits}.
+}
+]
+
+That is probably exactly what you want in a continually learning model.
+
+---
+
+# 12. And the replay issue teaches a second general principle
+
+Description cost is a property of **retained information**, not of how long that information has existed.
+
+So:
+
+[
+\boxed{
+\text{an old abstraction should not become more expensive merely because it has been replayed more times}.
+}
+]
+
+Likewise in the eventual system:
+
+* frequently retrieved memory shouldn't be “recharged” for storage;
+* a program called 1,000 times pays storage once, execution 1,000 times;
+* an abstraction retained for 10 years pays retention/storage, not re-description on every use.
+
+So you should keep the currencies separate:
+
+[
+D=\text{persistent information}
+]
+
+[
+C=\text{number/cost of uses}
+]
+
+[
+L=\text{predictive error}.
+]
+
+That's going to matter hugely when you get to macros and loops.
+
+---
+
+## My recommendation right now
+
+I'd tell the agent:
+
+1. **Finish and score the preregistered Gaussian β grid.**
+2. Preserve the Gaussian toy as a mechanistic negative.
+3. **Before changing replay logic, audit KL-pressure / likelihood-pressure ratio by task index.**
+4. Do *not* remove KL from replay unless task-specific state is frozen there.
+5. Audit whether gated “0 bits” includes structural selector/index cost.
+6. Pre-register a **gated/rank innovation learner** before PROMOTE development.
+7. Compare gated vs Gaussian on the rate–distortion frontier.
+8. If gated behaves as the toy predicts, make it the wake substrate for PROMOTE, while preserving Gaussian as the falsified predecessor.
+
+My expectation has shifted a bit: I now think V3 may end up discovering something more foundational than “variational MDL fixes H9.”
+
+It may discover:
+
+[
+\boxed{
+\textbf{continual abstraction needs a sparse innovation code whose zero-bit/default state is exact reuse.}
+}
+]
+
+That's a much better architectural principle—and it fits the eventual neural-program vision extremely well.
