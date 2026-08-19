@@ -44,6 +44,7 @@ class TaskGroupSpec:
         future_tasks: int = 8,
         resample_future: bool = False,
         family_onset: int = 0,
+        new_primitive_families: bool = False,
     ) -> None:
         if groups < 1:
             raise ValueError("groups must be positive")
@@ -73,6 +74,15 @@ class TaskGroupSpec:
         # saturates on the base primitives with no spare capacity waiting to
         # absorb a family it has not met yet.
         self.family_onset = int(family_onset)
+        # The family as a genuinely NEW primitive rather than a perturbation
+        # of an existing one. A perturbation is approximable by the existing
+        # library, which leaves the task residual holding a small correction:
+        # measured, substituting family means (0.02618 NMSE) barely beat one
+        # global mean (0.02642) or zeroing every residual (0.02661), so
+        # promotion degenerated into deletion and no promoter could refuse.
+        # A new primitive cannot be expressed by a frozen library, so the
+        # residual becomes load-bearing AND shared within the family.
+        self.new_primitive_families = bool(new_primitive_families)
 
     def as_dict(self) -> dict[str, object]:
         return {
@@ -82,6 +92,7 @@ class TaskGroupSpec:
             "future_tasks": self.future_tasks,
             "resample_future": self.resample_future,
             "family_onset": self.family_onset,
+            "new_primitive_families": self.new_primitive_families,
         }
 
 
@@ -196,6 +207,19 @@ def generate_task_group_world(
             return 0
         return task_index // spec.block_size
 
+    # One fresh primitive per family, drawn independently of the base
+    # library, used only after the onset.
+    family_primitives = {
+        group: Primitive.random(
+            seed=config.seed + 500_000,
+            primitive_index=group,
+            d=config.state_dim,
+            rank=config.teacher_rank,
+            alpha=config.alpha,
+        )
+        for group in range(spec.groups)
+    } if spec.new_primitive_families else {}
+
     def _build(task_index: int, program, task_id: str, future: bool) -> Task:
         # Fresh directions for the held-out block only; the lifetime history
         # stays identical to the testbed's.
@@ -210,6 +234,18 @@ def generate_task_group_world(
             _block_of(task_index),
             resampled=resampled,
         )
+        if spec.new_primitive_families and (
+            resampled or task_index >= spec.family_onset
+        ):
+            group = assignment[task_index]
+            task_library = (*task_library, family_primitives[group])
+            # One step of the program calls the family's new primitive; the
+            # position varies deterministically so the effect is not a
+            # positional artifact.
+            position = task_index % config.program_length
+            steps = list(program.primitive_ids)
+            steps[position] = len(task_library) - 1
+            program = replace(program, primitive_ids=tuple(steps))
         train_rng = _rng(config.seed, 30, task_index)
         eval_rng = _rng(config.seed, 31, task_index)
         train_x = train_rng.normal(size=(config.examples_per_task, config.state_dim))

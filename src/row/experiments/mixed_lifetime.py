@@ -81,6 +81,7 @@ def main() -> None:
         help="task counts at which PROMOTE runs",
     )
     parser.add_argument("--promotion-epsilon", type=float, default=0.02)
+    parser.add_argument("--new-primitive-families", action="store_true")
     parser.add_argument(
         "--freeze-slots",
         type=int,
@@ -149,6 +150,7 @@ def main() -> None:
             future_tasks=args.future_tasks,
             resample_future=args.resample_future,
             family_onset=args.family_onset,
+            new_primitive_families=args.new_primitive_families,
         )
         if args.task_group_eta is not None
         else None

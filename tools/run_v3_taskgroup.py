@@ -28,7 +28,7 @@ def log(message: str) -> None:
 
 
 def run_cell(args) -> str:
-    world, eta, model, groups, uniform_rho, slots, onset, freeze, freeze_slots = args
+    world, eta, model, groups, uniform_rho, slots, onset, freeze, freeze_slots, newprim = args
     label = f"eta{eta:g}" if groups == 2 else f"eta{eta:g}_g{groups}"
     if uniform_rho is not None:
         label = f"{label}_rho{uniform_rho:g}"
@@ -40,6 +40,8 @@ def run_cell(args) -> str:
         label = f"{label}_frozen{freeze}"
     if freeze_slots is not None:
         label = f"{label}_fs{freeze_slots}"
+    if newprim:
+        label = f"{label}_newprim"
     out = ROOT / "artifacts" / "v3_taskgroup" / label / f"world_{world}" / model
     if (out / "summary.json").exists():
         return f"skip {out}"
@@ -53,7 +55,8 @@ def run_cell(args) -> str:
         + (["--operator-slots", str(slots)] if slots is not None else [])
         + (["--family-onset", str(onset)] if onset else [])
         + (["--freeze-basis-at", str(freeze)] if freeze is not None else [])
-        + (["--freeze-slots", str(freeze_slots)] if freeze_slots is not None else []),
+        + (["--freeze-slots", str(freeze_slots)] if freeze_slots is not None else [])
+        + (["--new-primitive-families"] if newprim else []),
         cwd=ROOT, capture_output=True, text=True,
     )
     if result.returncode != 0:
@@ -73,6 +76,7 @@ def main() -> None:
     parser.add_argument("--family-onset", type=int, default=0)
     parser.add_argument("--freeze-basis-at", type=int, default=None)
     parser.add_argument("--freeze-slots", type=int, default=None)
+    parser.add_argument("--new-primitive-families", action="store_true")
     parser.add_argument("--jobs", type=int, default=4)
     args = parser.parse_args()
 
@@ -87,6 +91,7 @@ def main() -> None:
             args.family_onset,
             args.freeze_basis_at,
             args.freeze_slots,
+            args.new_primitive_families,
         )
         for eta in args.etas
         for world in args.worlds

@@ -1186,3 +1186,48 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   which is the oracle for promotion: freeze the saturated slots and let
   (K+2) - K new ones learn. Running now to establish the PI's gate,
   J*_{K+1} < J*_K, before any promoter is built.
+
+# 2026-08-19 — PROMOTE implemented; the testbed fails a THIRD time, deeper
+
+- Froze a candidate testbed (K=6 saturated, canonical profile, 2 families
+  at eta 0.9, onset and basis-freeze at task 16) on three gates: residual
+  separation +0.0459 against the control's -0.0025, partition recovery
+  0.861 against 0.677, and a rank-2 oracle worth +50,439 nats 3/3.
+- The first oracle formulation FAILED (0/3) because it grew the library by
+  whole rank-8 operators (265 scalars each) rather than by the rank-2
+  abstraction V3.1 actually specifies (66 scalars), and because it added
+  capacity without retiring the residuals the capacity replaces. Both
+  halves of promotion have to be priced together.
+- Implemented PROMOTE as literal capacity birth: functional clustering of
+  task innovations, a rank-2 abstraction fitted per cluster, acceptance by
+  behavioral substitutability on a probe set DISJOINT from the one used to
+  propose and fit, retirement of the members' private residuals, and a
+  ledger entry for every candidate whether it fires or refuses. Six unit
+  tests including refusal and the three-sign migration signature.
+- First full run: 26 abstractions for 2 true families, and refusal failed.
+  Not a bug — at lambda = ln 2 a private rank-2 residual costs ~1,098 nats
+  and buys ~215, so any behavior-preserving grouping pays and a
+  retrospective-only promoter is a vector quantizer. This is exactly what
+  P-2026-08-19-E predicted.
+- Added the prospective term, estimated from observed history alone (fit
+  the candidate on all but the most recent members, require it to fit
+  those held-out members within epsilon). It did NOT discriminate either:
+  structured promotes 7.0 abstractions against the control's 6.7.
+- The reason is deeper than the gate could see, and it invalidates the
+  frozen testbed. Substituting family means scores 0.02618 NMSE against
+  0.02642 for ONE GLOBAL mean and 0.02661 for ZEROING every residual —
+  differences of ~0.0004. The oracle's +50,439 nats was almost entirely
+  "residuals are not worth their bits", not "families are shared". The
+  gate measured that family structure is PRESENT in residuals; what
+  promotion needs is for it to be BEHAVIORALLY LOAD-BEARING, which is a
+  different and stricter property. Recorded as a gate-design lesson: a
+  validity gate for promotion must include a discard control (zeroing the
+  channel) and a no-structure control (one global abstraction), or it
+  will pass worlds where promotion degenerates into deletion.
+- Root cause across all three failures: the family was a PERTURBATION of
+  existing primitives, which a 6-slot basis approximates well, leaving the
+  residual holding a small correction. Implemented the redesign the
+  diagnosis implies: post-onset tasks call a genuinely NEW primitive drawn
+  independently of the base library, so a frozen library cannot express it,
+  the residual becomes load-bearing, and family members need the same new
+  computation. Running the gate on it now.
