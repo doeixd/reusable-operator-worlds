@@ -868,3 +868,55 @@ CLOSE strictly before the lifetime ends, with enough tasks after it to
 measure. This has now produced a false reading in V4.1, in the retention
 sweep, and here. Any dormancy config must be validated by counting
 returning tasks BEFORE its numbers are read.
+
+# g* WITHDRAWN. The boundary is a HORIZON, not a dormancy length (2026-08-19)
+
+The interpolated "g* = 15.2" from the fine gap sweep is withdrawn. It is
+an artifact of a fixed 64-task lifetime: as the gap grows, the return
+window shrinks (28, 26, 24, 20, 16 tasks), so cumulative value falls
+even if dormancy has no effect at all.
+
+Two checks, both from the same runs:
+
+PER-TASK RATE across gaps 4, 6, 8, 12, 16:
+    63.5  64.6  63.9  62.2  66.2   (mean 64.1, sd 1.3, cv 2%)
+
+MATCHED 16-TASK WINDOW, identical number of returning tasks per gap:
+    +971  +976  +979  +981  +1,059
+
+Both are FLAT. Dormancy length has no detectable effect on what the
+stored abstraction is worth. What varies is only how many post-return
+uses remain to amortize it.
+
+THE LAW, and it is derived rather than fitted:
+
+    retain iff  H_R * s_bar  >  lambda * D(A)
+    H_R* = lambda * D(A) / s_bar = 1,098 / 64.1 = 17.1 returning tasks
+
+Observed: 24 returning tasks retains clearly (+1,534); 16 returning
+tasks is break-even (+1,059 against 1,098). The data bracket the
+prediction at 16-24 with no retention threshold fitted anywhere. This is
+the SAME amortization logic as abstraction birth in V1/V3 — enough
+repeated future use to repay a code cost — now applied one level up, to
+whether a learned abstraction is worth carrying.
+
+So the correct statement is not "memories decay while dormant" but
+"a dormant abstraction is worth carrying when expected remaining reuse
+exceeds its amortization threshold".
+
+TWO LIMITS, both real. (1) The measured quantity is C_reacquire, not
+V_retain: the marginal carry counterfactual is endogenous, because when
+deletion triggers re-promotion the final description is unchanged and
+the true saving is 0, not 1,098. A controlled test must suppress
+re-promotion during the evaluation window so that
+D_retain - D_delete = D(A) exactly. (2) n=3 worlds per cell; deltas
+reported, no interval claimed.
+
+SEPARATE FINDING, not noise. Deleting ONE abstraction at task 32 changes
+later library size to 5/5, 6/5, 5/2, and in one cell 6/7 — the deleted
+arm ending LARGER. Library state is PATH-DEPENDENT: removing one object
+changes what later looks worth promoting, so V(A_i) is not independent
+of the rest of the library or of history. That is a substantive result
+about lifecycle management being sequential rather than per-object, and
+it is why the paired return window, not endpoint J, is the right
+instrument.
