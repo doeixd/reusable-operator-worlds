@@ -537,3 +537,37 @@ H11.3 territory and is not free. Until it exists, the promotion
 false-positive rate cannot be reduced by a retrospective MDL test, and
 the online retention experiment stays blocked. The frozen-library
 oracle remains the only clean route to the RETAIN question.
+
+# V4R FORK census cell — bound too loose to be a gate (2026-08-19)
+
+Attempted the FORK cell with a conservative upper bound: a forked
+abstraction A' can do no better for a subgroup than giving each member
+its own PRIVATE residual, so if that bound fails to exceed one
+abstraction's bits, FORK has no opportunity.
+
+The bound "passes" in 24/33 abstraction-cells across F=2 and F=4. It
+should NOT be reported as a FORK opportunity, because the bound does not
+discriminate. In nearly every cell the best subgroup is ALL dependents,
+which means the quantity measured is "private residuals beat the shared
+abstraction", priced against the cost of ONE abstraction. But serving n
+tasks privately costs n residuals, not one. A single A' can only match
+per-task private residuals if the subgroup is functionally homogeneous,
+and nothing here tests that.
+
+So the cell is UNRESOLVED, not positive. Deciding it requires actually
+fitting A' to each candidate subgroup and pricing the fit -- the same
+functional-fit machinery `factorize` uses -- rather than bounding it.
+
+Incidental finding, worth its own follow-up: private residuals beat the
+shared abstraction for essentially every dependent, by 857-5,869 nats.
+That is not alarming on its face, since PROMOTE exists to trade
+prediction for description length, but the magnitude has not been
+audited against the bits it buys, and it bears on why the V4.1
+compaction and V4.2 factorization gates both failed -- the shared
+objects are cheaper than private state but meaningfully worse at
+prediction.
+
+Method note. An upper bound is only a gate in the direction it bounds. A
+FAILING loose bound is decisive; a PASSING loose bound says nothing.
+This one was built to fail-closed and then read as though it could pass,
+which is the same error as scoring a single dormancy arm.
