@@ -1392,3 +1392,55 @@ matched-budget economic gate failed 9/10 and prospective acquisition recovered
 only 7.5%. The successor direction: "V4: When Does a Library Need a Lifecycle?"
 — studying the phase boundaries of self-restructuring, why and when a neural
 computational language needs an economy rather than merely a library.
+
+
+================================================================================
+SCALE-EXPERIMENT CORRECTION: HOLD m CONSTANT, NOT N
+================================================================================
+
+The first F sweep was not a true library-scale sweep. With lifetime N fixed,
+increasing F simultaneously decreased the evidence available to establish each
+reusable family (N_family/F ↓). By F=8 the learner was asked to build a larger
+vocabulary while starving every candidate abstraction of the repetitions needed
+to be born. The falling library size is expected, not informative about scale.
+
+The correct coordinates are F (breadth of latent vocabulary) and
+m = N_recurring/F (support/repetitions per family), with N ≈ N_base + Fm. To
+isolate scale while holding family evidence fixed, hold m constant and vary F
+(e.g., (2,16)/(4,16)/(8,16)/(16,16)). To isolate evidence per abstraction, hold
+F constant and vary m (e.g., (8,8)/(8,16)/(8,32)). Scale lifetimes as N ∝ F to
+keep m constant — do not increase scale by sacrificing support per concept.
+
+The quantity to track is emergent library size M(F,m) = number of promoted
+abstractions. Holding m constant tests whether M(F,m₀) ≈ cF over some range.
+Only once M actually grows can lifecycle machinery be asked to pay. F isn't
+the resource pressure; the realized live library size M is.
+
+This reveals two nested amortization thresholds: abstraction-birth
+(m > m*_promote, V3's level) and higher-order factorization
+(M > M*_factorize). Examples amortize an abstraction; abstractions amortize a
+schema; eventually schemas amortize macros — the recursive economic structure
+hoped for. The revised V4 centerpiece is **The Economics of Abstraction
+Granularity**: as a learned library grows, when does it become cheaper to
+represent reusable computations independently, compress them locally, or factor
+them into a higher-order parameterized family?
+
+The current result establishes the first curve point: small library ⇒ COMPRESS
+(local precision reduction dominates cross-object restructuring). The
+interesting question is whether increasing M produces a J_COMPRESS(M) vs
+J_FACTORIZE(M) crossing: COMPRESS gets per-object savings, FACTORIZE pays a
+fixed shared cost but amortizes it over more related abstractions, so
+M < M* ⇒ COMPRESS wins and M > M* ⇒ FACTORIZE wins. Finding that M* would be an
+excellent V4 result.
+
+Two confounds to control. (1) Learning duration: longer lifetimes change both
+scale and training history, so compare broad (F=16, m=16) vs narrow (F=2,
+m=128) at the same total recurring-task count — if factorization wins only in
+the broad case, the pressure is genuinely number of reusable objects, not
+longer training. (2) Family relatedness: independently sampled primitives
+won't share factorable structure, so for clean factorization tests introduce a
+controlled meta-family recurrence parameter r_meta (A_f = C + Bα_f + ε_f). The
+higher-order phase diagram becomes (M, r_meta) → COMPRESS vs FACTORIZE — the
+precise analogue of V1's recurrence experiment one abstraction level higher
+(V1: r_task → private vs shared operator; V4: r_meta → independent atoms vs
+parameterized operator family; same economics, recursively applied).

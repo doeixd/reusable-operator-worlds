@@ -1601,3 +1601,38 @@ unexplained at rank 2 and that residual distortion has not been priced
 in nats. Pricing it is exactly the mistake that produced the retracted
 H14 number, so the V4.2 build must compare refitted C + Delta_i against
 the original A_i in held-out Gaussian loss before any claim is made.
+
+# V4R census, first result: COMPRESS dominates 12/12 (2026-08-19)
+
+Ran V4R §1's opportunity census with the V3 learner frozen and no
+operator implemented. Each library is scored on the ambition ladder
+KEEP < COMPRESS < FACTORIZE, in both currencies, with FACTORIZE required
+to beat MATCHED-BUDGET private compression rather than merely full
+precision atoms.
+
+| regime | library size | COMPRESS net | FACTORIZE net | winner |
+| --- | --- | --- | --- | --- |
+| N=64  F=2 | 4-6  | (V4.2 result) | loses 9/10 | COMPRESS |
+| N=64  F=4 | 6-9  | 3,084 / 5,420 / 3,779 | 1,948 / 3,094 / 2,541 | COMPRESS 3/3 |
+| N=64  F=8 | 3-4  | 2,371 / 2,302 / 2,388 | 1,521 / 1,249 / 991 | COMPRESS 3/3 |
+| N=128 F=4 | 9-12 | 4,872 / 5,269 / 7,385 | 4,312 / 3,725 / 3,313 | COMPRESS 3/3 |
+
+Two findings.
+
+Library size is NOT monotone in family count. F=8 produces SMALLER
+libraries (3-4) than F=4 (6-9) because 64 tasks split eight ways leaves
+too few tasks per family to reach `minimum_cluster = 3`. Family count is
+capped by lifetime length, so the scale axis has to be driven by N.
+
+Doubling the lifetime does drive it -- N=128 F=4 reaches libraries of
+9-12 -- and COMPRESS still wins 3/3, with the margin WIDENING rather
+than closing (7,385 versus 3,313 in world 2). So there is no
+`M*_factorize` below a library of about twelve abstractions: the
+prediction registered in V4R §1.1 that "many related atoms" favors
+FACTORIZE is not supported anywhere in the sampled regimes.
+
+Method note. The first N=128 run was invalid and is discarded: the
+census resolves `root/F{families}`, so passing the N=64 root with the
+N=128 config scored 64-task artifacts against a 128-task world
+generation. It reported a spurious FACTORIZE win in world 1. Artifacts
+were moved to a separate root and the cell rerun.

@@ -813,3 +813,54 @@ pressure eventually makes cleanup, factorization, retention, or forking worth
 their structural cost, turning V4 from a collection of anticipated mechanisms
 into a study of the **phase boundaries of self-restructuring** — why and when
 a neural computational language needs an economy rather than merely a library.
+
+### [reviewer-feedback-32.txt](reviewer-feedback-32.txt)
+Corrects the scale experiment design. The first F sweep wasn't a true
+library-scale sweep: with lifetime N fixed, increasing F simultaneously
+decreased evidence per family (N_family/F ↓), so by F=8 the learner was asked
+to build a larger vocabulary while starving every candidate abstraction of
+repetitions. The falling library size is expected. The natural coordinates
+are F (breadth of latent vocabulary) and m = N_recurring/F (support/repetitions
+per family), with N ≈ N_base + Fm. Proposes a small (F,m) grid
+(F∈{2,4,8,16}, m∈{8,16,32}) and two orthogonal slices: hold m constant and
+vary F to isolate scale (2,16)/(4,16)/(8,16)/(16,16), then hold F constant
+and vary m to isolate evidence per abstraction (8,8)/(8,16)/(8,32). The
+quantity to plot is emergent library size M(F,m) = number of promoted
+abstractions; holding m constant tests whether M(F,m₀) ≈ cF over some range.
+Only once M actually grows can lifecycle machinery be asked to pay. Phrases
+COMPRESS winning 6/6 as a real result: at ROW's present library scale, local
+precision reduction dominates cross-object restructuring, giving the edit
+ordering KEEP → COMPRESS → FACTORIZE (don't search for cross-abstraction
+structure until cheap local simplification is exhausted). The interesting
+question is whether increasing M produces a J_COMPRESS(M) vs J_FACTORIZE(M)
+crossing — COMPRESS gets per-object savings, FACTORIZE pays a fixed shared
+cost but amortizes over more related abstractions, so M<M* ⇒ COMPRESS wins and
+M>M* ⇒ FACTORIZE wins; that M* would be an excellent V4 result. Identifies two
+nested amortization thresholds: abstraction-birth (m > m*_promote, V3's level)
+and higher-order factorization (M > M*_factorize) — examples amortize an
+abstraction, abstractions amortize a schema, and eventually schemas amortize
+macros, the recursive economic structure hoped for. Makes the opportunity
+census hierarchical: for each (F,m) point run frozen PROMOTE, record M, compute
+the private COMPRESSION frontier, compute the best FACTORIZE frontier at matched
+bits, compute ΔJ_factorize-vs-compress, and don't build an online factorizer
+until ΔJ > 0 robustly. The key plot is x=M, y=J_COMPRESS − J_FACTORIZE; a
+zero-crossing finds the economic threshold for a new representation type.
+Controls for the learning-duration confound: longer lifetimes change both scale
+and training history, so compare broad (F=16, m=16) vs narrow (F=2, m=128) at
+the same total recurring-task count — if factorization wins only in the broad
+case, the pressure is genuinely number of reusable objects, not longer
+training. Warns not to assume more families are related: independently sampled
+primitives won't share factorable structure, so introduce a controlled
+meta-family recurrence parameter r_meta (A_f = C + Bα_f + ε_f) for clean
+factorization tests. The higher-order phase diagram becomes (M, r_meta) →
+COMPRESS vs FACTORIZE — the precise analogue of V1's recurrence experiment one
+abstraction level higher (V1: r_task → private vs shared operator; V4: r_meta →
+independent atoms vs parameterized operator family; same economics, recursively
+applied). Proposes the revised V4 centerpiece: **The Economics of Abstraction
+Granularity** — as a learned library grows, when does it become cheaper to
+represent reusable computations independently, compress them locally, or factor
+them into a higher-order parameterized family? The current result establishes
+the first curve point (small library ⇒ COMPRESS) and the high-F failure teaches
+that scale cannot be increased by sacrificing support per concept; scale
+lifetimes as N ∝ F to hold m constant, and if that produces a COMPRESS→FACTORIZE
+crossing, it's a much stronger V4 than the lifecycle spec envisioned.

@@ -26,6 +26,224 @@ python -m unittest discover -s tests -v
 python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 ```
 
+# Project structure and layout
+
+## Repository layout
+
+```
+.
+├── src/row/                  # Python package (editable install)
+│   ├── __init__.py            #   public API: ExperimentConfig, World, etc.
+│   ├── config.py              #   frozen dataclass config, YAML loading, fingerprints
+│   ├── world.py               #   deterministic hidden-operator worlds (the teacher)
+│   ├── mixed_world.py         #   Benchmark D: per-primitive rho profiles
+│   ├── task_group_world.py    #   V3 promotion testbed: cross-cutting task families
+│   ├── metrics.py             #   MSE, NMSE, Gaussian log loss, prequential cost
+│   ├── provenance.py          #   resolved-config fingerprints, artifact validation
+│   ├── models/                #   all learner implementations
+│   ├── experiments/           #   lifetime runners, sweeps, audits, plots
+│   └── sitecustomize.py       #   machine workaround (WMI fail-fast, see learnings)
+├── configs/                  # YAML experiment configs
+├── tests/                    # unittest suite (one test per experiment module)
+├── tools/                    # sealed-block launchers, logs, preregistration checker
+├── artifacts/                # experiment outputs (model.pt, summary.json, config.yaml)
+├── reports/                  # analysis JSON and figures
+├── notes/                    # learnings.txt, spec sketches, synthesis notes
+├── reviews/                  # reviewer feedback files and review-index.md
+├── paper/                    # draft, figures, figure-generation script
+├── AGENTS.md                 # THIS FILE: intent, conventions, structure, learnings
+├── CLAUDE.md                 # pointer to AGENTS.md
+├── PROGRESS.md               # running lab record (append per completed step)
+├── README.md                 # public-facing summary
+├── pyproject.toml            # package metadata, deps, entry point
+└── *.md / *_spec.md / *_PLAN.md / *_CONFIRMATION_PLAN.md  # specs and protocols
+```
+
+## Source package (`src/row/`)
+
+### `world.py` — the teacher / data-generation source of truth
+
+Defines `Primitive`, `Program`, `Task`, `World`, and `WorldConfig`. The world
+generates training and evaluation examples once from independent deterministic
+NumPy streams; model code consumes those fixed arrays. Primitives use
+independently spectral-normalized `U` and `V` matrices. Opaque task IDs are
+random tokens decoupled from program order and primitive IDs. `rho` is
+implemented through task-specific correlated teacher parameters followed by
+spectral renormalization.
+
+### `mixed_world.py` — Benchmark D (mixed recurrence)
+
+Per-primitive `rho` profiles replace the single `reuse_rho`. Provenance stays
+OUTSIDE `WorldConfig` (adding a field there would invalidate all existing
+resolved-config fingerprints); runners record the profile in their own artifact
+files. A uniform profile reproduces the homogeneous world bit-exactly.
+
+### `task_group_world.py` — V3 promotion testbed
+
+Family components are assigned per task group rather than per primitive, so
+structure cross-cuts tasks and a task-invariant shared basis cannot absorb it.
+The structureless control is the same generator at `eta = 0` (reproduces the
+canonical mixed world bit-exactly), not a separate generator.
+
+### `config.py` — configuration and fingerprints
+
+Frozen dataclasses (`WorldConfig`, `ScratchModelConfig`, `EvaluationConfig`,
+`ModelConfig`, `ReplayConfig`, `ExperimentConfig`). `load_config()` resolves a
+YAML file into a complete `ExperimentConfig`. Every resolved config is hashed
+into a `fingerprint.json` that exposes seeds, rho, model family/architecture,
+learning rates, replay, alpha, activation, program depth, and git commit. Resume
+paths validate the full resolved config, not merely summary model/rho fields.
+
+### `provenance.py` — artifact validation
+
+Resolved-config fingerprinting and validation. Every new experiment artifact
+writes both `config.yaml` and `fingerprint.json`. `model.pt` is tensor-only
+(embedding NumPy-valued summaries in a torch checkpoint breaks PyTorch's
+restricted `weights_only=True` loader).
+
+### `metrics.py` — scoring
+
+MSE, NMSE, and Gaussian log loss. The density-to-mass term (fixed target
+precision 1/256) gives the quantized-target coding interpretation. Report total,
+per-online-example, and per-target-scalar Gaussian log loss.
+
+### `models/` — learner implementations
+
+| File | Models | Role |
+|------|--------|------|
+| `numpy_mlp.py` | `ScratchResidualMLP` | NumPy-only scratch baseline (no shared substrate) |
+| `torch_oracle.py` | `LearnedOperator`, `OracleCompositor` | PyTorch oracle with access to hidden program structure |
+| `learned_models.py` | `ContinuousBasisLearner`, `DenseLearner`, `DiscreteLibraryLearner`, `HypernetworkLearner`, `PresenceGatedDiscreteLibraryLearner`, `SharedParentResidualLearner`, `VariationalSharedResidualLearner` | V1/V2/V3 learned models (Dense-C, Continuous, etc.) |
+| `gated_models.py` | `GatedInnovationLearner` | presence-gated / MDL-gated models |
+| `promoting_models.py` | `PromotingSharedResidualLearner` | V3 PROMOTE operator: creates new shared abstractions from recurring private residuals |
+| `lifecycle_models.py` | `LifecycleLibraryLearner`, `AbstractionRecord` | V4 lifecycle: RETIRE, FACTORIZE, retention, dormancy |
+
+### `experiments/` — runners, sweeps, audits, plots
+
+The experiment modules follow naming conventions:
+
+- **`*_lifetime.py`** — full prequential lifetime runners (`oracle_lifetime.py`,
+  `learned_lifetime.py`, `compiler_lifetime.py`, `consolidating_lifetime.py`,
+  `mixed_lifetime.py`). These run the 64-task online protocol: score before
+  update, replay, checkpoint probes on deep-copied models.
+- **`sweep_*.py`** — resumable sweep drivers over worlds/rho/checkpoints
+  (`sweep_rho.py`, `sweep_checkpoints.py`, `sweep_robustness.py`,
+  `sweep_forward_transfer.py`, etc.). All are resumable by design: they skip
+  worlds with existing `summary.json` and can be interrupted and relaunched.
+  New sweep drivers must add `--jobs N` for parallel execution.
+- **`audit_*.py`** — offline structural oracles and gate auditors
+  (`audit_substitutability.py`, `audit_lifecycle_oracle.py`,
+  `audit_factorization.py`, `audit_promotion_oracle.py`,
+  `audit_obsolescence.py`, `audit_h9_rate_distortion.py`, etc.). These run on
+  frozen artifacts and never mutate lifetime training.
+- **`summarize_*.py`** — aggregate artifacts into report JSON
+  (`summarize_rho_replication.py`, `summarize_robustness.py`,
+  `summarize_stage2.py`, etc.).
+- **`tune_*.py`** — hyperparameter tuning on development worlds
+  (`tune_development.py`, `tune_mdl.py`, `tune_shared_residual.py`).
+- **`plot_*.py`** — figure generation (`plot_exact_reuse.py`,
+  `plot_structural_controls.py`, `plot_forward_transfer.py`, etc.).
+- **`score_*.py`** — sealed-block scoring against frozen confirmation plans
+  (`score_v3_sealed.py`, `score_variational.py`, `score_group_clustering.py`).
+- **`quantize_artifact.py`** — int8 per-tensor quantization of operator weights.
+- **`exact_route_posterior.py`** — exhaustive route posterior enumeration.
+
+### `sitecustomize.py`
+
+Machine-specific workaround loaded automatically via the editable install.
+Forces WMI `platform.machine()` to fail fast on this Windows host so `import
+torch` does not hang. Harmless on machines without the stall.
+
+## Configuration (`configs/`)
+
+- `v1.yaml` — canonical frozen config. Dense-C width 32, Continuous global/task
+  LR 0.003/0.05, Hypernetwork 0.003/0.05. These are the frozen stage-two
+  winners; the file must not silently revert to pre-tuning values.
+- `smoke.yaml` — fast smoke test.
+- `v3_variational_beta*.yaml` — variational task-code configs at different
+  description-beta values.
+
+## Tests (`tests/`)
+
+One test file per experiment module (`test_learned_models.py`,
+`test_oracle.py`, `test_promoting_learner.py`, `test_lifecycle_learner.py`,
+`test_variational_learner.py`, `test_world.py`, etc.). Run with
+`python -m unittest discover -s tests -v`.
+
+## Tools (`tools/`)
+
+Sealed-block launchers and logs: `run_v3_sealed.py`, `run_v3_taskgroup.py`,
+`run_v3_variational.py`, `run_v4_lifecycle.py`, `run_component_a.py`,
+`run_component_b.py`. `check_prereg.py` validates frozen confirmation-plan
+hashes before sealed worlds are opened. Logs (`.log`, `.out`) record sealed-run
+output for provenance.
+
+## Artifacts (`artifacts/`)
+
+Experiment outputs grouped by experiment type. Each artifact directory contains
+per-world subdirectories with `model.pt` (tensor-only), `summary.json`, resolved
+`config.yaml`, and `fingerprint.json`. Naming convention: `{experiment}_{scope}`
+(e.g., `rho_development/`, `v3_sealed/`, `v4_dev/`, `checkpoints_development/`,
+`paired_seed0/`). Smoke runs use `_smoke` suffix.
+
+## Reports (`reports/`)
+
+Aggregated analysis JSON and figures, organized by experiment
+(`rho_worlds_0_9/`, `structural_controls/`, `v2_confirmatory_mixed/`,
+`v3_sealed.json`, `v4_factorization.json`, etc.). Plots live in `figures/`.
+
+## Notes (`notes/`)
+
+- `learnings.txt` — the primary implementation-learnings and results log.
+- `crossover.txt`, `v2-synthesis.txt`, `v3-sketch.txt`, `v4-sketch.txt` —
+  working notes and spec sketches.
+- `v4-spec-plan.md` — V4 spec planning notes.
+
+## Reviews (`reviews/`)
+
+Reviewer feedback files (`reviewer-feedback-NN.txt`) and `review-index.md` with
+a linked entry and summary for each review. `reviewer-assessment-initial.txt` is
+the founding assessment. Reviews are living documents; the index is updated when
+new feedback arrives.
+
+## Paper (`paper/`)
+
+`draft.md` — the paper draft. `make_figures.py` — figure generation from
+report JSON. `figures/` — generated figures.
+
+## Specification and protocol documents
+
+| File | Role |
+|------|------|
+| `neural_library_learning_v1_experimental_spec.md` | V1 research source of truth |
+| `row_v2_experimental_spec.md` | V2 spec (shared-residual discovery) |
+| `row_v3_experimental_spec.md` | V3 spec (PROMOTE / abstraction birth) |
+| `row_v4_experimental_spec.md` | V4 original spec (preserved unrevised with gate-outcome banner) |
+| `row_v4r_experimental_spec.md` | V4 revised: "When Does a Library Need a Lifecycle?" |
+| `EXPERIMENT_PLAN.md` | separates development (0–9) from confirmatory (100–129+) |
+| `CONFIRMATION_PLAN.md` | V1 frozen confirmation protocol (seeds 100–129) |
+| `V2_CONFIRMATION_PLAN.md` | V2 frozen confirmation protocol (seeds 200–229) |
+| `V3_CONFIRMATION_PLAN.md` | V3 frozen confirmation protocol (seeds 300–329) |
+| `PREDICTIONS.md` | standing predictions ledger (committed before data exists) |
+| `SPEC_AUDIT.md` | spec-to-implementation audit |
+| `RELEASE_PLAN.md` | release sequencing (nothing public before confirmation) |
+| `PROGRESS.md` | running lab record (append per completed, verified step) |
+
+## World seed partitions
+
+- **Development:** seeds 0–9 (used for architecture, tuning, testbed design).
+- **V1 confirmatory:** seeds 100–129 (frozen, scored against
+  `CONFIRMATION_PLAN.md`).
+- **V2 confirmatory:** seeds 200–229 (frozen, scored against
+  `V2_CONFIRMATION_PLAN.md`; tests parameter intervals, not just signs).
+- **V3 confirmatory:** seeds 300–329 (frozen, scored against
+  `V3_CONFIRMATION_PLAN.md`).
+- **V4 sealed:** seeds 400–429 (remain sealed; no registered rung reached
+  sealing eligibility).
+
+Sealed worlds must not be generated, inspected, or summarized until the
+relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
+
 # Implementation learnings
 
 - Python's built-in `hash()` is process-dependent and must not derive experiment

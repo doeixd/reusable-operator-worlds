@@ -1,0 +1,417 @@
+Yes — that's an important correction to the scale experiment.
+
+Your first (F) sweep wasn't really a **library-scale sweep**. With lifetime fixed, increasing (F) simultaneously decreased the evidence available to establish each reusable family:
+
+[
+F\uparrow
+\quad\Rightarrow\quad
+\frac{N_{\text{family tasks}}}{F}\downarrow.
+]
+
+So by (F=8), you were asking the learner to build a larger vocabulary while starving every candidate abstraction of the repetitions needed to be born. The falling library size is exactly what we'd expect.
+
+The more natural coordinates are therefore not just (N) and (F), but:
+
+[
+\boxed{
+F=\text{breadth of latent vocabulary}
+}
+]
+
+and
+
+[
+\boxed{
+m=\frac{N_{\rm recurring}}{F}
+=\text{support/repetitions per family}.
+}
+]
+
+Then approximately:
+
+[
+N=N_{\rm base}+Fm.
+]
+
+That gives you the scale experiment you actually wanted.
+
+## I would run a small ((F,m)) grid
+
+Something like:
+
+[
+F\in{2,4,8,16}
+]
+
+and:
+
+[
+m\in{8,16,32}
+]
+
+with lifetime length increased accordingly.
+
+For example, ignoring the fixed base/onset portion:
+
+| (F) |    (m=8) | (m=16) | (m=32) |
+| --: | -------: | -----: | -----: |
+|   2 | 16 tasks |     32 |     64 |
+|   4 |       32 |     64 |    128 |
+|   8 |       64 |    128 |    256 |
+|  16 |      128 |    256 |    512 |
+
+You don't need the whole grid initially. Worlds 0–2 and maybe:
+
+[
+(F,m)=
+(2,16),(4,16),(8,16),(16,16)
+]
+
+would isolate **scale while holding family evidence fixed**.
+
+Then separately:
+
+[
+(F,m)=
+(8,8),(8,16),(8,32)
+]
+
+isolates **evidence per abstraction**.
+
+That decomposition is much cleaner.
+
+---
+
+# The quantity I'd really plot is emergent library size
+
+Let:
+
+[
+M(F,m)
+======
+
+\text{number of promoted abstractions}.
+]
+
+Your current fixed-(N) experiment seems to have produced something like:
+
+[
+M(F)
+\nearrow
+]
+
+and then:
+
+[
+M(F)
+\searrow
+]
+
+because promotion becomes sample-starved.
+
+Holding (m) constant should tell you whether:
+
+[
+M(F,m_0)\approx cF
+]
+
+over some range.
+
+**Only once library size actually grows** can you ask whether lifecycle machinery starts paying.
+
+This is crucial because:
+
+[
+F
+]
+
+isn't the resource pressure.
+
+The realized:
+
+[
+\boxed{M=\text{live library size}}
+]
+
+is.
+
+---
+
+# COMPRESS winning 6/6 is useful too
+
+I'd now phrase the current phase-diagram point as:
+
+[
+\boxed{
+\text{At ROW's present library scale, local precision reduction dominates cross-object restructuring.}
+}
+]
+
+That is a real result.
+
+And it suggests an ordering of structural edits:
+
+[
+\texttt{KEEP}
+\rightarrow
+\texttt{COMPRESS}
+\rightarrow
+\texttt{FACTORIZE}
+\rightarrow\cdots
+]
+
+A system shouldn't search for sophisticated cross-abstraction structure until it has exhausted cheap local simplification.
+
+The interesting question is whether increasing (M) eventually produces a crossing:
+
+[
+J_{\rm COMPRESS}(M)
+\quad\text{vs}\quad
+J_{\rm FACTORIZE}(M).
+]
+
+My expectation would be:
+
+* COMPRESS gets roughly a per-object saving;
+* FACTORIZE pays a fixed/shared cost but can amortize it over an increasing number of related abstractions.
+
+So you might eventually see:
+
+[
+M<M^*
+\Rightarrow
+\text{COMPRESS wins}
+]
+
+but:
+
+[
+M>M^*
+\Rightarrow
+\text{FACTORIZE wins}.
+]
+
+**That (M^*) would be an excellent V4 result.**
+
+---
+
+# There are actually two amortization thresholds now
+
+This is getting interesting.
+
+### Abstraction-birth threshold
+
+How many task instances must recur before creating an abstraction pays?
+
+[
+m>m_{\rm promote}^*.
+]
+
+V3 essentially studies this level.
+
+### Higher-order factorization threshold
+
+How many distinct abstractions must instantiate related structure before representing their common family pays?
+
+[
+M>M_{\rm factorize}^*.
+]
+
+So you have nested amortization:
+
+[
+\boxed{
+\text{examples amortize an abstraction;
+abstractions amortize a schema}.
+}
+]
+
+That's exactly the recursive economic structure we'd hoped might emerge.
+
+Eventually:
+
+[
+\text{schemas amortize macros},
+]
+
+etc.
+
+---
+
+# I'd make the opportunity census hierarchical
+
+For every ((F,m)) point:
+
+1. Run frozen V3 PROMOTE.
+2. Record:
+   [
+   M=\text{actual library size}.
+   ]
+3. Compute the **private COMPRESSION frontier**.
+4. Compute the best **FACTORIZE frontier**, at matched bits.
+5. Compute:
+   [
+   \Delta J_{\rm factorize-vs-compress}.
+   ]
+6. Don't build an online factorizer until:
+   [
+   \Delta J>0
+   ]
+   robustly.
+
+Then the plot I most want is:
+
+[
+x=M
+]
+
+[
+y=
+J_{\rm COMPRESS}
+----------------
+
+J_{\rm FACTORIZE}.
+]
+
+If it crosses zero, you've found the economic threshold for a new representation type.
+
+That is much more compelling than choosing an arbitrary large testbed where factorization happens to work.
+
+---
+
+# One more confound to control
+
+When you make lifetimes longer, you're changing **learning duration** as well as library scale.
+
+For example, at:
+
+[
+F=16,\quad m=16,
+]
+
+the learner gets much more total optimization/history than at (F=2).
+
+So add a control with the same long lifetime but only a small number of families repeatedly reused.
+
+Compare:
+
+### Broad
+
+[
+F=16,\quad m=16.
+]
+
+### Narrow
+
+[
+F=2,\quad m=128.
+]
+
+Same total recurring-task count, radically different library breadth.
+
+If factorization becomes valuable only in the broad case, that's evidence that the pressure is genuinely:
+
+[
+\boxed{\text{number of reusable objects}}
+]
+
+rather than simply:
+
+[
+\text{longer training}.
+]
+
+---
+
+# And don't assume more families are related
+
+This matters for factorization.
+
+If the (F) teacher families are independently sampled primitives, then increasing (F) may simply create more unrelated atoms. There is no reason a shared parameterized family should eventually win.
+
+For the **scale census**, that's okay: let the oracle tell you.
+
+But if you later want to test the factorization transition cleanly, introduce a controlled **meta-family recurrence** parameter:
+
+[
+A_f
+===
+
+C
++
+B\alpha_f
++
+\epsilon_f.
+]
+
+Call its strength perhaps:
+
+[
+r_{\rm meta}.
+]
+
+Then the real higher-order phase diagram becomes:
+
+[
+\boxed{
+(M,r_{\rm meta})
+\rightarrow
+\text{COMPRESS vs FACTORIZE}.
+}
+]
+
+That is the precise analogue of V1's recurrence experiment, **one abstraction level higher**.
+
+This could be extremely elegant.
+
+V1:
+
+[
+r_{\rm task}
+\rightarrow
+\text{private vs shared operator}.
+]
+
+V4:
+
+[
+r_{\rm meta}
+\rightarrow
+\text{independent atoms vs parameterized operator family}.
+]
+
+Same economics, recursively applied.
+
+---
+
+## I think this gives you the revised V4 centerpiece
+
+Rather than "lifecycle management," I would now seriously consider:
+
+> **V4 — The Economics of Abstraction Granularity**
+
+with the main question:
+
+[
+\boxed{
+\textbf{As a learned library grows, when does it become cheaper to represent reusable computations independently, compress them locally, or factor them into a higher-order parameterized family?}
+}
+]
+
+The current result establishes the first point on that curve:
+
+[
+\boxed{\text{small library}\Rightarrow\texttt{COMPRESS}}
+]
+
+and your fixed-(N), high-(F) failure teaches that **scale cannot be increased by sacrificing support per concept**.
+
+So yes: longer lifetimes are exactly the next diagnostic, but I would scale them as:
+
+[
+N\propto F
+]
+
+to hold repetitions per family constant.
+
+If that eventually produces a COMPRESS→FACTORIZE crossing, I think you've found a much stronger V4 than the lifecycle spec originally envisioned.
