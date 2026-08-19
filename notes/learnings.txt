@@ -1,8 +1,3 @@
-
-# What We’ve Learned So Far
-
-So far, I think we’ve learned **eight fairly solid things**, along with several important limitations and a much clearer picture of what the deeper research question actually is.
-
 # What We’ve Learned So Far
 
 This note records the project's accumulating lessons. The original eight V1-era
@@ -106,11 +101,11 @@ So the current evidence looks qualitatively like:
 
 [
 \begin{array}{c|c|c}
-\rho & \text{measured recurrence} & \text{preferred learner}\
+\rho & \text{measured recurrence} & \text{preferred learner}\\
 \hline
-0 & \approx 0 & \text{Dense}\
-0.5 & 0.064 & \text{Dense}\
-0.75 & 0.317 & \text{Dense}\
+0 & \approx 0 & \text{Dense}\\
+0.5 & 0.064 & \text{Dense}\\
+0.75 & 0.317 & \text{Dense}\\
 1 & 1.0 & \text{Continuous}
 \end{array}
 ]
@@ -290,10 +285,10 @@ Roughly:
 
 [
 \begin{array}{c|c|c|c}
-& \text{online adaptation} & \text{storage} & \text{inference compute}\
+& \text{online adaptation} & \text{storage} & \text{inference compute}\\
 \hline
-\text{Dense-C} & \text{good} & \text{large} & \text{moderate}\
-\text{Continuous} & \text{best so far} & \text{small} & \text{high}\
+\text{Dense-C} & \text{good} & \text{large} & \text{moderate}\\
+\text{Continuous} & \text{best so far} & \text{small} & \text{high}\\
 \text{Discrete} & \text{slower program inference} & \text{very small} & \text{very low}
 \end{array}
 ]
@@ -739,15 +734,3 @@ The cleanest statement the evidence currently supports is:
 The next step is **not more architectural complexity**. It is the V3 promotion
 experiment on a correctly-coded (gated or H9-fallback) wake substrate, with
 refusal controls, under both predictive and description-length accounting.
-
-[
-\boxed{
-\begin{minipage}{0.85\linewidth}
-ROW provides preliminary evidence that learned reusable neural representations can reduce future learning cost when latent functional recurrence is sufficiently strong. The advantage is not universal: task-specific dense learning remains preferable when recurrence is weak, suggesting a specialization-to-reuse crossover governed by the cost of acquiring an abstraction and the opportunities available to amortize it. Continuous and discrete reusable representations further expose a tradeoff between fast program inference and compact execution.
-\end{minipage}
-}
-]
-
-The next important step is **not more architectural complexity**.
-
-It is to establish the shape and location of that crossover, replicate the lifetime learning-to-learn effect, and determine whether a generic architecture can discover the same reusable structure without being given such a favorable functional prior.

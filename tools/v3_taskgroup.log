@@ -51,3 +51,103 @@
 12:05:13 V3_TASKGROUP_COMPLETE
 12:07:11 starting: 3 cells, jobs=3, etas=[0.9]
 12:07:16 starting: 3 cells, jobs=3, etas=[0.9]
+12:09:29 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16\world_0\shared_residual
+12:09:29 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16\world_1\shared_residual
+12:09:32 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16\world_2\shared_residual
+12:09:33 V3_TASKGROUP_COMPLETE
+12:10:24 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k8_onset16_frozen16_fs6\world_0\shared_residual
+12:10:24 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k8_onset16_frozen16_fs6\world_1\shared_residual
+12:10:24 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k8_onset16_frozen16_fs6\world_2\shared_residual
+12:10:24 V3_TASKGROUP_COMPLETE
+12:17:08 starting: 3 cells, jobs=3, etas=[0.9]
+12:17:12 starting: 3 cells, jobs=3, etas=[0.0]
+12:17:14 stderr C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16\world_1\promoting: Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 200, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 126, in main
+    selected = {
+               ~
+    ...<5 lines>...
+        "gated": config.gated_model,
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    }[args.model]
+    ~^^^^^^^^^^^^
+KeyError: 'promoting'
+
+12:17:14 FAIL rc=1 C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16\world_0\promoting
+12:17:14 FAIL rc=1 C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16\world_1\promoting
+12:17:14 stderr C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16\world_2\promoting: Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 200, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 126, in main
+    selected = {
+               ~
+    ...<5 lines>...
+        "gated": config.gated_model,
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    }[args.model]
+    ~^^^^^^^^^^^^
+KeyError: 'promoting'
+
+12:17:14 FAIL rc=1 C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16\world_2\promoting
+12:17:18 V3_TASKGROUP_COMPLETE
+12:17:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_1\promoting: Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 200, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 126, in main
+    selected = {
+               ~
+    ...<5 lines>...
+        "gated": config.gated_model,
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    }[args.model]
+    ~^^^^^^^^^^^^
+KeyError: 'promoting'
+
+12:17:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_0\promoting: Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 200, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 126, in main
+    selected = {
+               ~
+    ...<5 lines>...
+        "gated": config.gated_model,
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    }[args.model]
+    ~^^^^^^^^^^^^
+KeyError: 'promoting'
+
+12:17:21 FAIL rc=1 C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_0\promoting
+12:17:21 FAIL rc=1 C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_1\promoting
+12:17:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_2\promoting: Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 200, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 126, in main
+    selected = {
+               ~
+    ...<5 lines>...
+        "gated": config.gated_model,
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    }[args.model]
+    ~^^^^^^^^^^^^
+KeyError: 'promoting'
+
+12:17:21 FAIL rc=1 C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0_k6_onset16_frozen16\world_2\promoting
+12:17:21 V3_TASKGROUP_COMPLETE
+12:25:45 starting: 3 cells, jobs=3, etas=[0.9]
+12:25:49 starting: 3 cells, jobs=3, etas=[0.0]

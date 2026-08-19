@@ -38,6 +38,7 @@ def main() -> None:
             "hypernetwork",
             "variational",
             "gated",
+            "promoting",
         ),
         required=True,
     )
@@ -72,6 +73,14 @@ def main() -> None:
         default=0,
         help="delayed-family testbed: families appear only from this task index",
     )
+    parser.add_argument(
+        "--sleeps",
+        type=int,
+        nargs="*",
+        default=[],
+        help="task counts at which PROMOTE runs",
+    )
+    parser.add_argument("--promotion-epsilon", type=float, default=0.02)
     parser.add_argument(
         "--freeze-slots",
         type=int,
@@ -121,9 +130,16 @@ def main() -> None:
             "shared_residual": config.shared_residual_model,
             "variational": config.variational_model,
             "gated": config.gated_model,
+            # PROMOTE reuses the frozen shared-residual configuration.
+            "promoting": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, operator_slots=args.operator_slots)
-        config = replace(config, **{f"{args.model}_model": selected})
+        field = (
+            "shared_residual_model"
+            if args.model == "promoting"
+            else f"{args.model}_model"
+        )
+        config = replace(config, **{field: selected})
 
     task_group_spec = (
         TaskGroupSpec(
@@ -151,6 +167,8 @@ def main() -> None:
             kind=args.model,
             freeze_shared_at=args.freeze_basis_at,
             freeze_slots=args.freeze_slots,
+            sleeps=tuple(args.sleeps),
+            promotion_epsilon=args.promotion_epsilon,
         )
     finally:
         learned_lifetime.World = original_world  # type: ignore[assignment]

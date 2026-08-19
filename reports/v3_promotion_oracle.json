@@ -1,0 +1,218 @@
+[
+  {
+    "saturated": {
+      "world_seed": 0,
+      "slots": 6,
+      "lifetime_loss": -156333.64149932022,
+      "mean_float_nmse": 0.014515894329327041,
+      "points": [
+        {
+          "residual_rank": 2,
+          "shared_bits": 12720,
+          "task_bits": 112320,
+          "total_bits": 125040,
+          "two_part_objective": -69662.51804210467,
+          "mean_nmse": 0.014515894329327041,
+          "mean_nmse_increase": 0.0
+        },
+        {
+          "residual_rank": 1,
+          "shared_bits": 12720,
+          "task_bits": 60840,
+          "total_bits": 73560,
+          "two_part_objective": -105345.73489733064,
+          "mean_nmse": 0.01872699201036207,
+          "mean_nmse_increase": 0.004211097681035031
+        },
+        {
+          "residual_rank": 0,
+          "shared_bits": 12720,
+          "task_bits": 9360,
+          "total_bits": 22080,
+          "two_part_objective": -141028.95175255663,
+          "mean_nmse": 0.025908913395366148,
+          "mean_nmse_increase": 0.011393019066039105
+        }
+      ]
+    },
+    "grown": {
+      "world_seed": 0,
+      "slots": 8,
+      "lifetime_loss": -158923.28930162906,
+      "mean_float_nmse": 0.014734247472126462,
+      "points": [
+        {
+          "residual_rank": 2,
+          "shared_bits": 16960,
+          "task_bits": 115440,
+          "total_bits": 132400,
+          "two_part_objective": -67150.60259549231,
+          "mean_nmse": 0.014734247472126462,
+          "mean_nmse_increase": 0.0
+        },
+        {
+          "residual_rank": 1,
+          "shared_bits": 16960,
+          "task_bits": 63960,
+          "total_bits": 80920,
+          "two_part_objective": -102833.81945071829,
+          "mean_nmse": 0.017835280767958907,
+          "mean_nmse_increase": 0.0031010332958324466
+        },
+        {
+          "residual_rank": 0,
+          "shared_bits": 16960,
+          "task_bits": 12480,
+          "total_bits": 29440,
+          "two_part_objective": -138517.03630594426,
+          "mean_nmse": 0.02361823633241478,
+          "mean_nmse_increase": 0.008883988860288319
+        }
+      ]
+    }
+  },
+  {
+    "saturated": {
+      "world_seed": 1,
+      "slots": 6,
+      "lifetime_loss": -157559.50253909515,
+      "mean_float_nmse": 0.014394477330153388,
+      "points": [
+        {
+          "residual_rank": 2,
+          "shared_bits": 12720,
+          "task_bits": 112320,
+          "total_bits": 125040,
+          "two_part_objective": -70888.3790818796,
+          "mean_nmse": 0.014394477330153388,
+          "mean_nmse_increase": 0.0
+        },
+        {
+          "residual_rank": 1,
+          "shared_bits": 12720,
+          "task_bits": 60840,
+          "total_bits": 73560,
+          "two_part_objective": -106571.59593710557,
+          "mean_nmse": 0.018345743605059577,
+          "mean_nmse_increase": 0.003951266274906187
+        },
+        {
+          "residual_rank": 0,
+          "shared_bits": 12720,
+          "task_bits": 9360,
+          "total_bits": 22080,
+          "two_part_objective": -142254.81279233156,
+          "mean_nmse": 0.025128828067815925,
+          "mean_nmse_increase": 0.010734350737662535
+        }
+      ]
+    },
+    "grown": {
+      "world_seed": 1,
+      "slots": 8,
+      "lifetime_loss": -160326.33571104868,
+      "mean_float_nmse": 0.014416349164477949,
+      "points": [
+        {
+          "residual_rank": 2,
+          "shared_bits": 16960,
+          "task_bits": 115440,
+          "total_bits": 132400,
+          "two_part_objective": -68553.64900491193,
+          "mean_nmse": 0.014416349164477949,
+          "mean_nmse_increase": 0.0
+        },
+        {
+          "residual_rank": 1,
+          "shared_bits": 16960,
+          "task_bits": 63960,
+          "total_bits": 80920,
+          "two_part_objective": -104236.86586013791,
+          "mean_nmse": 0.017312026185827473,
+          "mean_nmse_increase": 0.0028956770213495256
+        },
+        {
+          "residual_rank": 0,
+          "shared_bits": 16960,
+          "task_bits": 12480,
+          "total_bits": 29440,
+          "two_part_objective": -139920.08271536388,
+          "mean_nmse": 0.02258306226173404,
+          "mean_nmse_increase": 0.008166713097256091
+        }
+      ]
+    }
+  },
+  {
+    "saturated": {
+      "world_seed": 2,
+      "slots": 6,
+      "lifetime_loss": -157211.69958306284,
+      "mean_float_nmse": 0.014358710247545939,
+      "points": [
+        {
+          "residual_rank": 2,
+          "shared_bits": 12720,
+          "task_bits": 112320,
+          "total_bits": 125040,
+          "two_part_objective": -70540.57612584729,
+          "mean_nmse": 0.014358710247545939,
+          "mean_nmse_increase": 0.0
+        },
+        {
+          "residual_rank": 1,
+          "shared_bits": 12720,
+          "task_bits": 60840,
+          "total_bits": 73560,
+          "two_part_objective": -106223.79298107326,
+          "mean_nmse": 0.018963489587279222,
+          "mean_nmse_increase": 0.004604779339733286
+        },
+        {
+          "residual_rank": 0,
+          "shared_bits": 12720,
+          "task_bits": 9360,
+          "total_bits": 22080,
+          "two_part_objective": -141907.00983629926,
+          "mean_nmse": 0.026888429884335183,
+          "mean_nmse_increase": 0.012529719636789245
+        }
+      ]
+    },
+    "grown": {
+      "world_seed": 2,
+      "slots": 8,
+      "lifetime_loss": -161086.6264487852,
+      "mean_float_nmse": 0.012943172410269176,
+      "points": [
+        {
+          "residual_rank": 2,
+          "shared_bits": 16960,
+          "task_bits": 115440,
+          "total_bits": 132400,
+          "two_part_objective": -69313.93974264844,
+          "mean_nmse": 0.012943172410269176,
+          "mean_nmse_increase": 0.0
+        },
+        {
+          "residual_rank": 1,
+          "shared_bits": 16960,
+          "task_bits": 63960,
+          "total_bits": 80920,
+          "two_part_objective": -104997.15659787442,
+          "mean_nmse": 0.015858004027595306,
+          "mean_nmse_increase": 0.0029148316173261304
+        },
+        {
+          "residual_rank": 0,
+          "shared_bits": 16960,
+          "task_bits": 12480,
+          "total_bits": 29440,
+          "two_part_objective": -140680.3734531004,
+          "mean_nmse": 0.021970637275427838,
+          "mean_nmse_increase": 0.00902746486515866
+        }
+      ]
+    }
+  }
+]

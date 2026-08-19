@@ -18,6 +18,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 LOG = ROOT / "tools" / "v3_taskgroup.log"
+# PROMOTE runs after enough post-onset tasks have accumulated.
+SLEEPS = (24, 32, 48, 64)
 
 
 def log(message: str) -> None:
@@ -46,6 +48,7 @@ def run_cell(args) -> str:
          "--config", "configs/v1.yaml", "--model", model,
          "--world-seed", str(world), "--task-group-eta", str(eta),
          "--task-groups", str(groups), "--output", str(out)]
+        + (["--sleeps"] + [str(x) for x in SLEEPS] if model == "promoting" else [])
         + (["--profile"] + [str(uniform_rho)] * 6 if uniform_rho is not None else [])
         + (["--operator-slots", str(slots)] if slots is not None else [])
         + (["--family-onset", str(onset)] if onset else [])

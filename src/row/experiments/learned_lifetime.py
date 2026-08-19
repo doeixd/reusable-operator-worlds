@@ -28,6 +28,7 @@ from row.models import (
     HypernetworkLearner,
     PresenceGatedDiscreteLibraryLearner,
     GatedInnovationLearner,
+    PromotingSharedResidualLearner,
     SharedParentResidualLearner,
     VariationalSharedResidualLearner,
 )
@@ -41,6 +42,7 @@ ModelKind = Literal[
     "shared_residual",
     "variational",
     "gated",
+    "promoting",
     "discrete",
     "mdl",
 ]
@@ -51,6 +53,7 @@ Learner = (
     | SharedParentResidualLearner
     | VariationalSharedResidualLearner
     | GatedInnovationLearner
+    | PromotingSharedResidualLearner
     | DiscreteLibraryLearner
     | PresenceGatedDiscreteLibraryLearner
 )
@@ -189,11 +192,12 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "inference_multiply_adds_per_sample": generation + operators,
             "note": "counts per-prediction operator generation; backward and optimizer operations excluded",
         }
-    if kind in {"shared_residual", "variational", "gated"}:
+    if kind in {"shared_residual", "variational", "gated", "promoting"}:
         selected = {
             "variational": config.variational_model,
             "gated": config.gated_model,
             "shared_residual": config.shared_residual_model,
+            "promoting": config.shared_residual_model,
         }[kind]
         parent = selected.task_steps * selected.operator_slots * (
             d * selected.operator_rank + selected.operator_rank * d
@@ -248,6 +252,19 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             step_code_dim=model_config.step_code_dim,
             hypernetwork_hidden_dim=model_config.hypernetwork_hidden_dim,
             operator_rank=model_config.operator_rank,
+            task_steps=model_config.task_steps,
+            alpha=model_config.operator_alpha_init,
+            seed=model_config.seed,
+            learnable_alpha=model_config.learnable_alpha,
+            activation=model_config.operator_activation,
+        )
+    if kind == "promoting":
+        model_config = config.shared_residual_model
+        return PromotingSharedResidualLearner(
+            d=config.world.state_dim,
+            operator_slots=model_config.operator_slots,
+            operator_rank=model_config.operator_rank,
+            residual_rank=model_config.residual_rank,
             task_steps=model_config.task_steps,
             alpha=model_config.operator_alpha_init,
             seed=model_config.seed,
@@ -337,6 +354,7 @@ def _training_values(
         "shared_residual": config.shared_residual_model,
         "variational": config.variational_model,
         "gated": config.gated_model,
+        "promoting": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -366,6 +384,8 @@ def run(
     update_batch_size: int | None = None,
     freeze_shared_at: int | None = None,
     freeze_slots: int | None = None,
+    sleeps: tuple[int, ...] = (),
+    promotion_epsilon: float = 0.02,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -407,6 +427,7 @@ def run(
     checkpoint_results: list[dict[str, object]] = []
     observed_update_batch_sizes: list[int] = []
     completed_task_ids: list[str] = []
+    sleep_records: list[dict[str, object]] = []
 
     for lifetime_index, world_task_index in enumerate(task_indices):
         task = world.tasks[world_task_index]
@@ -626,6 +647,26 @@ def run(
                 curve, threshold, config.world.examples_per_task
             )
         rows.append(summary_row)
+        if isinstance(model, PromotingSharedResidualLearner) and (
+            lifetime_index + 1
+        ) in sleeps:
+            # Disjoint proposal and validation probes (V3 spec 3.2): a
+            # promotion may not be validated on the evidence that proposed
+            # it. Both are deterministic in the world seed.
+            proposal_rng = np.random.default_rng(
+                np.random.SeedSequence([config.world.seed, 71])
+            )
+            validation_rng = np.random.default_rng(
+                np.random.SeedSequence([config.world.seed, 72])
+            )
+            record = model.sleep(
+                [world.tasks[i].task_id for i in task_indices[: lifetime_index + 1]],
+                _tensor(proposal_rng.normal(size=(256, config.world.state_dim))),
+                _tensor(validation_rng.normal(size=(256, config.world.state_dim))),
+                epsilon=promotion_epsilon,
+                lifetime_index=lifetime_index + 1,
+            )
+            sleep_records.append(record)
         if isinstance(model, VariationalSharedResidualLearner):
             completed_task_ids.append(task.task_id)
             model.update_prior_scales(completed_task_ids)
@@ -683,6 +724,9 @@ def run(
             "world_functional_reuse": world.functional_reuse_diagnostics(),
         }
     )
+    if isinstance(model, PromotingSharedResidualLearner):
+        summary["promotion"] = model.promotion_diagnostics()
+        summary["sleeps"] = sleep_records
     if isinstance(model, ContinuousBasisLearner):
         summary["routing"] = model.routing_diagnostics()
         if config.evaluation.extended_diagnostics:
@@ -1255,6 +1299,7 @@ def resolved_learned_config(
         "shared_residual": config.shared_residual_model,
         "variational": config.variational_model,
         "gated": config.gated_model,
+        "promoting": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1292,6 +1337,7 @@ def _write_artifacts(
         "shared_residual": config.shared_residual_model,
         "variational": config.variational_model,
         "gated": config.gated_model,
+        "promoting": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1345,6 +1391,7 @@ def main() -> None:
             "shared_residual",
             "variational",
             "gated",
+            "promoting",
             "discrete",
             "mdl",
         ),
@@ -1403,6 +1450,7 @@ def main() -> None:
         "shared_residual": config.shared_residual_model,
         "variational": config.variational_model,
         "gated": config.gated_model,
+        "promoting": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[args.model]

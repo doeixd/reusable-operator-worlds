@@ -1,0 +1,50 @@
+[
+  {
+    "world_seed": 0,
+    "lifetime_loss": -156333.64149932022,
+    "families": 2,
+    "promoted_tasks": 48,
+    "before_bits": 123312,
+    "after_bits": 50544,
+    "bits_saved": 72768,
+    "before_two_part": -70860.27637011225,
+    "after_two_part": -121299.21040509835,
+    "two_part_gain": 50438.9340349861,
+    "mean_nmse_before": 0.014515894329327041,
+    "mean_nmse_after": 0.02400517395087266,
+    "mean_nmse_increase": 0.00948927962154562,
+    "promoted_task_nmse_increase": 0.012652372828727493
+  },
+  {
+    "world_seed": 1,
+    "lifetime_loss": -157559.50253909515,
+    "families": 2,
+    "promoted_tasks": 48,
+    "before_bits": 123312,
+    "after_bits": 50544,
+    "bits_saved": 72768,
+    "before_two_part": -72086.13740988717,
+    "after_two_part": -122525.07144487328,
+    "two_part_gain": 50438.9340349861,
+    "mean_nmse_before": 0.014394477330153388,
+    "mean_nmse_after": 0.02339867297425433,
+    "mean_nmse_increase": 0.00900419564410094,
+    "promoted_task_nmse_increase": 0.012005594192134587
+  },
+  {
+    "world_seed": 2,
+    "lifetime_loss": -157211.69958306284,
+    "families": 2,
+    "promoted_tasks": 48,
+    "before_bits": 123312,
+    "after_bits": 50544,
+    "bits_saved": 72768,
+    "before_two_part": -71738.33445385487,
+    "after_two_part": -122177.26848884097,
+    "two_part_gain": 50438.9340349861,
+    "mean_nmse_before": 0.014358710247545939,
+    "mean_nmse_after": 0.024340657843441648,
+    "mean_nmse_increase": 0.00998194759589571,
+    "promoted_task_nmse_increase": 0.013309263461194279
+  }
+]
