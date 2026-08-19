@@ -114,3 +114,72 @@ class LifecycleOperatorTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class ToleranceScalingTest(unittest.TestCase):
+    """The substitution tolerance must be contribution-relative.
+
+    Regression guard for the retracted V4.1 H14 result (PREDICTIONS.md).
+    Normalizing deviation against TOTAL OUTPUT VARIANCE made every weak
+    abstraction substitutable for every other, because an abstraction
+    contributes a fraction of a percent of that variance. The symptom is
+    that consolidation retires abstractions whose replacement changes
+    behaviour by MORE than the abstraction itself was contributing.
+    """
+
+    def test_weak_but_distinct_abstractions_are_not_consolidated(self) -> None:
+        model = _build()
+        ids = [f"weak{i}" for i in range(8)]
+        for task_id in ids:
+            model.begin_task(task_id)
+        size = model.residual_u_size + model.residual_v_size + model.residual_b_size
+        generator = torch.Generator().manual_seed(23)
+        with torch.no_grad():
+            for _ in range(2):
+                # Small scale: each contributes little to total output, but
+                # the two are drawn independently, so they are DISTINCT.
+                model.abstractions.append(
+                    torch.nn.Parameter(
+                        torch.randn(size, generator=generator) * 0.01,
+                        requires_grad=False,
+                    )
+                )
+        for position, task_id in enumerate(ids):
+            model.task_reference[task_id] = 0 if position < 4 else 1
+            model.retired.add(task_id)
+        model.sync_lineage(0)
+
+        report = model.consolidate(_probe(), task_index=32, epsilon=0.02)
+
+        self.assertEqual(
+            report["deleted"], 0,
+            "weak-but-distinct abstractions were consolidated: the tolerance "
+            "is being scaled against total output variance again",
+        )
+        self.assertEqual(report["rehomed"], 0)
+
+    def test_null_edit_is_never_within_tolerance(self) -> None:
+        """Dropping an abstraction costs exactly its own contribution.
+
+        Under a contribution-relative denominator that ratio is 1.0, so no
+        sane epsilon admits it. If this fails, the oracle's covers() would
+        certify the empty set and every cover it reports is vacuous.
+        """
+
+        model = _build()
+        ids = [f"t{i}" for i in range(6)]
+        for task_id in ids:
+            model.begin_task(task_id)
+        _library_with_duplicates(model, ids, duplicate=False)
+        probe = _probe()
+        with torch.no_grad():
+            for task_id in ids:
+                current = model.task_reference[task_id]
+                base = model.forward(probe, task_id)
+                model.task_reference.pop(task_id)
+                dropped = model.forward(probe, task_id)
+                model.task_reference[task_id] = current
+                contribution = float(torch.mean(torch.square(base - dropped)))
+                self.assertAlmostEqual(
+                    contribution / max(contribution, 1e-12), 1.0, places=6
+                )

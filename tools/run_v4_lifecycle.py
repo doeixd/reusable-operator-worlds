@@ -17,6 +17,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 LOG = ROOT / "tools" / "v4_lifecycle.log"
 SLEEPS = ("24", "32", "48", "64")
+# §2.2: family goes quiet at 32. Late enough for the abstraction to be
+# established and reused, early enough that the remaining 32 tasks make
+# obsolescence measurable in the final description.
+DORMANCY = (32, 64)
 
 
 def log(message: str) -> None:
@@ -24,9 +28,17 @@ def log(message: str) -> None:
         handle.write(f"{time.strftime('%H:%M:%S')} {message}\n")
 
 
-def run_cell(args: tuple[int, float, bool]) -> str:
-    world, eta, lifecycle = args
+def run_cell(args: tuple[int, float, bool, str | None]) -> str:
+    world, eta, lifecycle, dormancy = args
     condition = "structured" if eta > 0 else "control"
+    if dormancy is not None:
+        # The V4.1 DELETE opportunity is OBSOLESCENCE, which the plain
+        # structured world does not contain -- its families stay live to
+        # the end, so the exact oracle correctly found no room for timed
+        # deletion there. §2.2's permanent arm is the world where an
+        # abstraction stops being worth its bits; the returning arm is
+        # its byte-identical refusal control.
+        condition = f"dormancy_{dormancy}"
     arm = "lifecycle_on" if lifecycle else "lifecycle"
     out = ROOT / "artifacts" / "v4_dev" / condition / f"world_{world}" / arm
     if (out / "summary.json").exists():
@@ -45,6 +57,10 @@ def run_cell(args: tuple[int, float, bool]) -> str:
         command.append("--new-primitive-families")
     if lifecycle:
         command.append("--lifecycle")
+    if dormancy is not None:
+        command += ["--dormancy", str(DORMANCY[0]), str(DORMANCY[1])]
+        if dormancy == "permanent":
+            command.append("--dormancy-permanent")
     result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
     if result.returncode != 0:
         log(f"stderr {out}: {result.stderr[-600:]}")
@@ -58,9 +74,23 @@ def main() -> None:
     parser.add_argument("--etas", type=float, nargs="+", default=[0.9, 0.0])
     parser.add_argument("--jobs", type=int, default=4)
     parser.add_argument("--arms", type=int, nargs="+", default=[1])
+    parser.add_argument(
+        "--dormancy",
+        nargs="*",
+        default=[],
+        choices=["returns", "permanent"],
+        help="run the §2.2 dormancy arms instead of the plain worlds",
+    )
     args = parser.parse_args()
 
-    cells = [(w, eta, on) for on in args.arms for eta in args.etas for w in args.worlds]
+    variants = args.dormancy or [None]
+    cells = [
+        (w, eta, on, d)
+        for d in variants
+        for on in args.arms
+        for eta in args.etas
+        for w in args.worlds
+    ]
     log(f"V4.1 starting: {len(cells)} cells, jobs={args.jobs}")
     with ProcessPoolExecutor(max_workers=args.jobs) as pool:
         for outcome in pool.map(run_cell, cells):
