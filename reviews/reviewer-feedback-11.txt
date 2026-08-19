@@ -1,0 +1,580 @@
+I think the project has gotten **considerably more interesting** since V1, because V2 is no longer just accumulating wins. It is starting to reveal a fairly coherent theory of *what reusable neural computation actually looks like*, and several of the nicest-looking hypotheses have failed in informative ways. 
+
+The most important thing I see is that the results are converging on a picture that is **less “neural program library” in the naive discrete sense, and more “continuous function space during learning, discrete structure only after compression/consolidation.”**
+
+## 1. V1’s main empirical result still looks strong
+
+The core result is now very well supported:
+
+[
+\Delta L
+========
+
+L_{\text{Dense}}-L_{\text{Reusable}}
+]
+
+is approximately linear in measured functional recurrence.
+
+Development:
+
+[
+\Delta L \approx 5906r-2477
+]
+
+with (R^2\approx .97).
+
+Sealed V1 confirmation:
+
+[
+\Delta L \approx 5716r-2625
+]
+
+with (R^2=.935).
+
+That is remarkably stable.
+
+So I think the basic “economics of abstraction” result is real:
+
+[
+\boxed{
+\text{the value of sharing rises smoothly with actual reusable functional structure}
+}
+]
+
+and the crossover is just where that return becomes large enough to compensate for the cost/bias of sharing. 
+
+The amortization hypothesis got weakened in a useful way, though. The crossover moves from (N=16) to (N=32), then largely stops moving. So this is **not simply “wait long enough and sharing always wins.”**
+
+Instead:
+
+[
+\boxed{
+\text{early amortization}
++
+\text{stationary representational bias}
+}
+]
+
+seems closer to the truth.
+
+That's a better theory.
+
+---
+
+# 2. Family alignment is now clearly part of the economics
+
+The GELU experiment is one of the most important results you've produced.
+
+With aligned tanh operators, high recurrence yields a large positive Continuous advantage.
+
+With GELU, the recurrence-response curve still rises, but it is shifted downward so far that even exact reuse only gets approximately to parity:
+
+[
+\rho=1:
+\quad
+\Delta L_{\text{GELU}}\approx +134
+]
+
+versus several thousand nats when aligned. 
+
+So the best model of the phenomenon is no longer merely
+
+[
+\Delta L=f(r).
+]
+
+It is something more like:
+
+[
+\boxed{
+\Delta L=f(r,;A,;C)
+}
+]
+
+where:
+
+* (r): functional recurrence in the world;
+* (A): alignment between the learner's representational vocabulary and the recurring computation;
+* (C): cost of using that representation.
+
+And H6 strongly suggests alignment enters mostly as a **penalty/intercept shift**, with some slope attenuation, rather than turning recurrence sensitivity off completely. 
+
+This is exactly the right answer to the “your benchmark favors the learner” criticism.
+
+Not:
+
+> “No it doesn't.”
+
+But:
+
+> **“Yes, prior alignment has a quantitatively large price, and we can measure how it changes the economics.”**
+
+Much stronger.
+
+---
+
+# 3. The discrete result has become extremely revealing
+
+H7 is probably my favorite V2 result conceptually.
+
+The online discrete learner looked terrible:
+
+[
+L\approx-146146.
+]
+
+But take its **final learned library** and perform exact posterior inference over all (12^3=1728) programs:
+
+[
+L_{\text{posterior}}\approx-174844,
+]
+
+which is actually *better* than Continuous:
+
+[
+L_{\text{Continuous}}\approx-170967.
+]
+
+
+
+That's huge conceptually.
+
+It means:
+
+[
+\boxed{
+\text{discreteness itself is not expensive}
+}
+]
+
+and:
+
+[
+\boxed{
+\text{the expensive part is discovering which discrete computation to execute online.}
+}
+]
+
+The representation was good.
+
+The inference algorithm was bad.
+
+That gives us a very clean decomposition:
+
+[
+\text{representation learning}
+]
+
+versus
+
+[
+\text{program inference}.
+]
+
+And the exact-posterior upper bound says there is potentially a *better-than-continuous* discrete solution if we can infer it efficiently.
+
+---
+
+# 4. But then 006b killed our easy explanation for why Continuous works
+
+This is perhaps the most scientifically valuable negative result.
+
+We thought:
+
+> soft mixtures might work because they're an approximate Bayesian posterior over discrete routes.
+
+That would have tied everything together very neatly.
+
+But they aren't.
+
+The mixture weights are basically uncorrelated with posterior marginals:
+
+[
+\text{mean Spearman}\approx-0.03,
+]
+
+and their entropy is wildly different:
+
+[
+H_{\text{mixture}}\sim1.4
+]
+
+versus:
+
+[
+H_{\text{posterior marginals}}\sim0.001.
+]
+
+
+
+So Continuous is **not doing soft route inference**.
+
+That means the actual picture is much more interesting:
+
+[
+\boxed{
+\text{Continuous mixtures exploit a continuous function space that contains solutions which are not interpretable as uncertainty over discrete programs.}
+}
+]
+
+This helps explain several other results simultaneously:
+
+* mixtures outperform forced hard routes;
+* consolidation can't simply harden the mixtures;
+* operator identity becomes ambiguous;
+* hypernetworks become competitive at partial recurrence;
+* clean primitives only crystallize near exact recurrence.
+
+This feels like a real conceptual advance.
+
+---
+
+# 5. I now think there are three representational regimes
+
+The V1/V2 results together suggest something like:
+
+### Weak recurrence
+
+Task-specific/specialized representation.
+
+Dense wins.
+
+### Partial recurrence
+
+A **continuous function manifold** is best.
+
+Hypernetwork becomes competitive and can even beat explicit slots at (\rho=.9).
+
+The system can exploit statistical overlap, but there are no clean, identifiable reusable primitives yet.
+
+### Exact or near-exact recurrence
+
+Discrete-like reusable objects begin to crystallize.
+
+Operator recovery improves sharply.
+
+Continuous explicit slots beat the hypernetwork.
+
+Frozen recomposition begins to work.
+
+So:
+
+[
+\boxed{
+\text{specialization}
+\rightarrow
+\text{continuous shared manifold}
+\rightarrow
+\text{crystallized reusable primitives}
+}
+]
+
+as recurrence increases.
+
+That is a much richer result than the original:
+
+> “reusable operator basis beats dense network.”
+
+And the hypernetwork result gives an **independent instrument** supporting it: at (\rho=.9), hypernetwork beats Continuous in 2/3 worlds; at (\rho=1), Continuous wins all three. 
+
+I would take this pattern seriously.
+
+---
+
+# 6. Selective sharing works extremely well—until you charge for it
+
+H9 is also very important.
+
+The shared-parent + residual model does almost exactly what we hoped:
+
+[
+P_{\tau,k}
+==========
+
+P_k+\Delta_{\tau,k}.
+]
+
+On homogeneous worlds, residual magnitude decreases monotonically with recurrence.
+
+On mixed worlds, per-primitive residual mass is inversely related to actual primitive recurrence in **10/10 worlds**.
+
+And the hybrid beats both fixed architectures on prediction cost in **10/10 mixed worlds** by about:
+
+[
++7153\text{ nats}.
+]
+
+
+
+So the learner really can infer:
+
+> “share this computation, specialize that one.”
+
+That is arguably the first result in the project that directly answers your original ambition:
+
+[
+\boxed{
+\text{the model can discover how much sharing each computation deserves.}
+}
+]
+
+But then the MDL accounting crushes it.
+
+It carries about:
+
+[
+130624\text{ retained bits},
+]
+
+so under actual two-part description length it loses in every tested cell. 
+
+That is **not a disappointing result**.
+
+It identifies the actual unsolved problem:
+
+> **allocation is easy; compression is hard.**
+
+The learner knows where to specialize.
+
+It just has no incentive/mechanism to encode that specialization compactly.
+
+This is probably the clearest handoff from V2 to V3.
+
+---
+
+# 7. The failed consolidation experiments reinforce the same lesson
+
+Model 8 was meant to take soft Continuous solutions and compile them into cheap discrete routes.
+
+The first gate fired in exactly the wrong places.
+
+The corrected gate correctly refused to compile low-(\rho) tasks, but barely compiled anything even at exact reuse. 
+
+Again, that's not random failure.
+
+It follows from the emerging picture:
+
+* the continuous learner isn't maintaining a latent discrete route posterior;
+* its solution may be genuinely distributed across operators;
+* multiple routes may be behaviorally equivalent;
+* route entropy measures **identity uncertainty**, not **whether a compact replacement exists**.
+
+This gives you a very strong design lesson:
+
+[
+\boxed{
+\text{compression decisions must be based on functional equivalence, not component identity.}
+}
+]
+
+That principle is showing up repeatedly.
+
+Slot identity failed.
+
+Route agreement failed.
+
+Entropy gating failed.
+
+Functional prediction/replacement tests keep being the useful instrument.
+
+That's valuable.
+
+---
+
+# 8. H10 tells us something important about in-context/meta learning
+
+The learned compiler failed:
+
+[
+\text{compiler warm start}<\text{plain task-code SGD}
+]
+
+on all tested worlds.
+
+But the dream augmentation helps much more at (\rho=1) than (\rho=0):
+
+[
++1554\quad\text{vs}\quad+512.
+]
+
+
+
+So the compiler is learning something real about the program distribution.
+
+It simply doesn't have enough real tasks within one 64-task lifetime to amortize the cost of learning the inference network.
+
+That makes the conclusion:
+
+[
+\boxed{
+\text{within-lifetime amortized inference is sample-starved}
+}
+]
+
+rather than:
+
+[
+\text{amortized inference is a bad idea}.
+]
+
+This is exactly where cross-world meta-training becomes justified.
+
+And now you have a controlled reason for crossing that conceptual boundary in Phase III.
+
+---
+
+# 9. The project has discovered its actual bottleneck
+
+I think V1 began with:
+
+> Maybe neural networks should use reusable primitives.
+
+V2 has changed that to something much more precise:
+
+> **Neural systems can learn where reuse is useful and can exploit shared structure, but we do not yet know how to turn flexible learned computation into compact reusable structure without damaging its function.**
+
+That is a serious open problem.
+
+You've essentially separated the problem into:
+
+### Allocation
+
+Which computations should be shared?
+
+**Solved surprisingly well.**
+
+### Inference
+
+Given a reusable representation, which computation should I execute?
+
+**Exact methods solve it; cheap learned methods don't yet.**
+
+### Compression
+
+How do flexible solutions become cheap persistent abstractions?
+
+**Still unsolved.**
+
+### Representation discovery
+
+Should reusable structure be a manifold, a primitive library, or hierarchy?
+
+**Current evidence says it depends on recurrence.**
+
+That's a much better research map than we had before.
+
+---
+
+# 10. The V3 variational-MDL idea now seems genuinely motivated
+
+The spec's proposed fix:
+
+> put description length into the gradient itself
+
+makes sense given the failures.
+
+Right now SGD optimizes:
+
+[
+L_{\text{preq}}
+]
+
+and we later say:
+
+> “Oops, your residuals cost 130k bits.”
+
+Of course it didn't care.
+
+Instead optimize something like:
+
+[
+J
+=
+
+L_{\text{preq}}
++
+\beta
+D_{\mathrm{KL}}
+\left(
+q(\theta_{\text{task}})
+|p(\theta_{\text{task}}\mid\theta_{\text{shared}})
+\right).
+]
+
+Now a parameter that doesn't need precision can become noisy / collapse toward the shared prior.
+
+This makes **bits part of the learning signal**.
+
+That directly attacks the H9 failure:
+
+[
+\text{good allocation}
++
+\text{terrible code length}.
+]
+
+If the variational-coded residual model can preserve the H9 prediction-cost advantage while substantially shrinking task-specific information, you'd finally get:
+
+[
+\boxed{
+\text{a model that wins both predictive and description-length currencies}.
+}
+]
+
+That would be a major next result.
+
+---
+
+# How I would summarize what we've learned scientifically
+
+I think we now have something like this:
+
+[
+\boxed{
+\begin{aligned}
+1.&\quad \text{The economic value of sharing scales smoothly with functional recurrence.}\
+2.&\quad \text{Representational alignment adds a large cost term to those economics.}\
+3.&\quad \text{Statistical reuse can pay before discrete reusable abstractions exist.}\
+4.&\quad \text{Partial recurrence favors continuous operator manifolds.}\
+5.&\quad \text{Exact recurrence permits reusable primitives to crystallize.}\
+6.&\quad \text{A learner can discover where specialization is needed.}\
+7.&\quad \text{Exact discrete inference can outperform continuous mixtures.}\
+8.&\quad \text{But cheap gradient-based inference does not recover those discrete programs.}\
+9.&\quad \text{Current learners can allocate reusable structure but cannot yet compress it efficiently.}
+\end{aligned}
+}
+]
+
+That's a coherent research program.
+
+And importantly, several of those statements were **not what we expected going in**.
+
+The failed hypotheses are doing real work:
+
+* strict amortization story: weakened;
+* transfer-before-amortization: falsified;
+* mixtures-as-Bayesian-route-beliefs: falsified;
+* simple consolidation: failed;
+* within-lifetime compiler: failed.
+
+Yet the project has become **more**, not less, coherent after those failures.
+
+That is usually a good sign.
+
+## My current overall assessment
+
+V1 is already a legitimate standalone paper.
+
+V2, if the sealed block behaves, is starting to look like something more interesting than “follow-up experiments.” It is developing a theory of **representation choice across a continuum from specialization to manifolds to discrete abstraction**.
+
+And the most important unresolved question is now very crisp:
+
+[
+\boxed{
+\textbf{Can a learner turn useful continuous computational structure into a shorter reusable representation while preserving the predictive advantages that made that structure useful in the first place?}
+}
+]
+
+If V3 solves *that*—especially in mixed/hierarchical worlds—I think you'd have moved from characterizing the economics of abstraction to actually demonstrating **learned computational self-organization**.
+
+That would be the big result we've been chasing.

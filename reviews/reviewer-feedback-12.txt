@@ -1,0 +1,961 @@
+I think the **V3 question is exactly right**, but the **V3 mechanism in the sketch is now partly obsolete** because V2 taught us more than the sketch anticipated.
+
+The strongest line in the sketch is still:
+
+> V1 was a measurement, V2 is a decision-maker, V3 is a language-reviser. 
+
+I would keep that almost unchanged.
+
+What I would change is *how* the language-reviser works.
+
+## The central V3 problem is now clearer
+
+The sketch says V3 should invent, merge, promote, and retire computational objects according to prospective learning cost plus retained description length. 
+
+That is still the right north star.
+
+But V2 has revealed a much more specific bottleneck:
+
+[
+\boxed{
+\text{the learner can discover useful sharing, but cannot turn that flexible computation into a compact code}
+}
+]
+
+H9 is the key evidence.
+
+The shared-residual learner figures out **where specialization belongs**—even primitive by primitive in mixed worlds—but its task residuals cost so many bits that it loses under description-length accounting. 
+
+So I would make V3's primary question:
+
+> **Can a neural learner preserve the predictive benefit of flexible continuous specialization while progressively converting repeated structure into a shorter shared code?**
+
+That's sharper than the current generic “revise the vocabulary.”
+
+---
+
+# The biggest thing to remove from the old sketch
+
+The old Workstream 1 starts with:
+
+[
+q(\pi\mid D_t)
+]
+
+as the fast state and imagines the continuous learner as performing something like uncertain program inference. 
+
+V2 killed that interpretation.
+
+The actual mixture weights are essentially unrelated to the exact route posterior:
+
+[
+\text{mean Spearman}\approx-0.03
+]
+
+and the entropies are nowhere near calibrated. The V2 spec explicitly concludes that the continuous learner is exploiting a **continuous function space**, not maintaining uncertainty over discrete programs. 
+
+So I would not make the V3 wake learner a discrete posterior machine.
+
+Instead:
+
+[
+\boxed{
+\textbf{Wake should be manifold-first.}
+}
+]
+
+That is perhaps the biggest update.
+
+---
+
+# Revised V3 architecture
+
+I now imagine three levels.
+
+## 1. Wake: continuous, flexible, overcomplete
+
+The learner should initially be allowed to solve tasks with something like:
+
+[
+\theta_\tau
+===========
+
+G_\phi(c_\tau)
++
+\Delta_\tau.
+]
+
+Where:
+
+* (G_\phi(c_\tau)) is a generated/shared continuous operator family;
+* (\Delta_\tau) is a small task-specific correction;
+* neither is assumed to correspond to discrete primitive identities.
+
+This fits what V2 actually found:
+
+* Hypernetwork beats Dense under reuse.
+* Hypernetwork can beat explicit slots at partial recurrence.
+* Explicit slots become better only when genuine identifiable primitives exist.
+* Continuous mixtures do not correspond to latent routes. 
+
+So the wake representation should **not begin by presupposing a program language**.
+
+It should begin as a flexible function manifold.
+
+---
+
+# 2. During learning: make bits part of the gradient
+
+I think this is now the most important V3 idea.
+
+The old sketch says:
+
+> learn greedily awake, compress asleep. 
+
+I would weaken that.
+
+The discrete structural decisions should probably remain sleep-time decisions.
+
+But **information cost should influence wake learning continuously**.
+
+That's because every compression failure in V2 has the same pathology:
+
+[
+\text{optimizer sees prediction loss}
+]
+
+but:
+
+[
+\text{optimizer does not see retained bits}.
+]
+
+Then after training we discover:
+
+> “Great predictive solution—unfortunately it costs 130k bits.”
+
+The V2 synthesis already identifies this as the root issue and proposes variational MDL / learned precision. 
+
+So instead make task specialization stochastic:
+
+[
+q(\Delta_\tau)
+==============
+
+\mathcal N(\mu_\tau,\sigma_\tau^2)
+]
+
+with a shared prior:
+
+[
+p(\Delta).
+]
+
+Optimize:
+
+[
+\boxed{
+J_{\rm wake}
+============
+
+L_{\rm preq}
++
+\beta
+D_{\rm KL}
+\left[
+q(\Delta_\tau)|p(\Delta)
+\right].
+}
+]
+
+Now the learner has to pay for information.
+
+If some task-specific direction isn't important:
+
+[
+\sigma\rightarrow\text{large}
+]
+
+or:
+
+[
+\mu\rightarrow0,
+]
+
+and it becomes cheap.
+
+If a specialization matters greatly:
+
+[
+q(\Delta)
+]
+
+earns the right to carry bits.
+
+This is far more principled than:
+
+> train a big residual and later count all its float/int8 parameters equally.
+
+---
+
+# 3. Sleep: discover recurring structure in the residual information
+
+This is where the original promotion idea remains excellent.
+
+Suppose tasks learn:
+
+[
+\Delta_1,\Delta_2,\ldots,\Delta_n.
+]
+
+Some components may be idiosyncratic noise.
+
+Others may recur:
+
+[
+\Delta_3
+\approx
+\Delta_{17}
+\approx
+\Delta_{41}.
+]
+
+Then sleep asks:
+
+> Can I encode these more cheaply by promoting their common structure?
+
+For candidate abstraction (A):
+
+Before:
+
+[
+D_{\rm old}
+===========
+
+\sum_{\tau\in S}D(\Delta_\tau).
+]
+
+After:
+
+[
+D_{\rm new}
+===========
+
+D(A)
++
+\sum_{\tau\in S}
+D(\Delta_\tau\mid A)
++
+D(\text{calls/arguments}).
+]
+
+Promote iff:
+
+[
+D_{\rm new}
++
+\Delta L
++
+\mu\Delta C
+<
+D_{\rm old}.
+]
+
+That is much closer to actual library learning.
+
+And critically, (A) is not discovered because two residual tensors have similar indices.
+
+It is discovered **functionally**.
+
+---
+
+# Functional equivalence should become constitutional law
+
+This may be the clearest methodological lesson from V2.
+
+Identity-based mechanisms repeatedly failed:
+
+* route identity;
+* slot identity;
+* entropy of discrete routes;
+* hardening soft mixtures.
+
+Functional/behavioral tests repeatedly worked. 
+
+So every V3 structural edit should answer:
+
+> If I substitute this abstraction here, what happens behaviorally?
+
+For a candidate promoted operator (P), compare:
+
+[
+F_\tau
+]
+
+against:
+
+[
+B_\tau
+P
+A_\tau
+]
+
+or whatever adapter form you permit.
+
+Then score:
+
+[
+\operatorname{ReuseGain}(P)
+===========================
+
+## \text{bits removed}
+
+## \text{bits introduced}
+
+## \lambda\Delta L
+
+\mu\Delta C.
+]
+
+If it isn't positive, don't promote.
+
+This finally makes the original **Functional Subroutine Equivalence** idea useful as an actual compiler primitive, not just an analysis metric.
+
+---
+
+# So I would revise the wake/sleep distinction
+
+Not:
+
+[
+\text{Wake = no structural pressure}
+]
+
+[
+\text{Sleep = all compression}.
+]
+
+More like:
+
+### Wake
+
+Optimize:
+
+[
+\text{prediction}
++
+\text{continuous information cost}.
+]
+
+Allow flexible continuous solutions.
+
+No irreversible discrete restructuring.
+
+### Sleep
+
+Perform **discrete representational changes**:
+
+* promote recurring residual structure;
+* merge functionally equivalent abstractions;
+* split/fork where one abstraction has incompatible uses;
+* delete abstractions with negative prospective value;
+* optionally compile stable patterns into cheap discrete programs.
+
+That distinction makes more sense after V2.
+
+---
+
+# I would also change what “primitive” means in V3
+
+The old sketch still subtly assumes that new abstractions become:
+
+[
+P_1,P_2,\ldots
+]
+
+discrete operator slots. 
+
+But V2 suggests the hierarchy might instead be:
+
+[
+\boxed{
+\text{continuous manifold}
+\rightarrow
+\text{localized reusable subspace}
+\rightarrow
+\text{parameterized abstraction}
+\rightarrow
+\text{discrete primitive}
+}
+]
+
+Discrete primitives should be **one possible endpoint of compression**, not the ontology imposed at initialization.
+
+Maybe several residuals have the form:
+
+[
+\Delta_\tau
+\approx
+\alpha_\tau A+\beta_\tau B.
+]
+
+Then the right abstraction isn't:
+
+> create primitive (P_17).
+
+It may be:
+
+[
+P(x;\alpha,\beta).
+]
+
+Or a low-dimensional subspace.
+
+Only if (\alpha,\beta) cluster strongly might discrete atoms become cheaper.
+
+That is consistent with V2's manifold→primitive transition.
+
+---
+
+# This makes the language itself hierarchical
+
+The eventual learned language might contain several kinds of things:
+
+[
+\mathcal L=
+{
+\text{basis directions},
+\text{parameterized operators},
+\text{discrete operators},
+\text{macros},
+\text{control constructs}
+}.
+]
+
+Not everything has to have the same granularity.
+
+And the MDL criterion decides when each form earns its existence.
+
+For example:
+
+### Low recurrence
+
+Keep:
+
+[
+\Delta_\tau.
+]
+
+### Moderate recurrence
+
+Factor:
+
+[
+\Delta_\tau
+===========
+
+U a_\tau.
+]
+
+### Strong recurrence
+
+Create:
+
+[
+P_j.
+]
+
+### Repeated sequence
+
+Create:
+
+[
+M=[P_2,P_7,P_4].
+]
+
+### Repeated variable-length sequence
+
+Create:
+
+[
+\operatorname{Repeat}(P_7,n).
+]
+
+That's an actual **learned representational language**, not just dynamic MoE routing.
+
+---
+
+# Benchmark E should probably become the first true V3 benchmark
+
+I agree with the sketch that hierarchical recurrence is the right next setting. 
+
+But I would design it specifically to force **promotion**.
+
+Something like:
+
+[
+P_{\tau,k}
+==========
+
+P_{\text{global},k}
++
+P_{\text{family}(\tau),k}
++
+\Delta_{\tau,k}.
+]
+
+Now suppose there are several task families.
+
+The optimal representation is not:
+
+[
+\text{one global primitive}
+]
+
+and not:
+
+[
+\text{one residual per task}.
+]
+
+It's:
+
+```text
+GLOBAL
+ ├─ FAMILY A
+ │   ├─ task residual
+ │   ├─ task residual
+ │   └─ task residual
+ │
+ └─ FAMILY B
+     ├─ task residual
+     ├─ task residual
+     └─ task residual
+```
+
+That makes the correct abstraction hierarchy objectively measurable.
+
+The learner should discover:
+
+[
+\text{global}
+\rightarrow
+\text{family}
+\rightarrow
+\text{task}
+]
+
+without being given family IDs.
+
+That's a **much harder-to-fake demonstration of language revision**.
+
+---
+
+# And it directly tests promotion
+
+Initially all family structure can live inside individual task residuals:
+
+[
+\Delta_1,\Delta_2,\Delta_3.
+]
+
+Later sleep notices:
+
+[
+\Delta_1
+\approx
+A+\epsilon_1
+]
+
+[
+\Delta_2
+\approx
+A+\epsilon_2
+]
+
+[
+\Delta_3
+\approx
+A+\epsilon_3.
+]
+
+Then:
+
+[
+A
+]
+
+gets promoted to a shared family abstraction.
+
+After promotion:
+
+[
+D(A)+\sum_iD(\epsilon_i)
+<
+\sum_iD(\Delta_i).
+]
+
+That's exactly the event we want to observe.
+
+You could literally plot:
+
+```text
+task-specific bits
+      ↓
+shared family bits appear
+      ↓
+task residual bits fall
+```
+
+over lifetime.
+
+That would be a beautiful result.
+
+---
+
+# I would delay merge/split/delete complexity
+
+The sketch proposes the whole self-editing library immediately:
+
+* promotion,
+* merge,
+* delete,
+* etc. 
+
+I think that's too much for the first V3 experiment.
+
+You don't yet need a full genetic compiler.
+
+Start with **one structural operation**:
+
+[
+\boxed{\text{PROMOTE}}
+]
+
+Task-local structure becomes shared if doing so reduces total description length without unacceptable predictive cost.
+
+If promotion works, then add:
+
+[
+\text{MERGE}
+]
+
+because two independently promoted abstractions may become equivalent.
+
+Then:
+
+[
+\text{FORK}
+]
+
+for nonstationarity.
+
+Then:
+
+[
+\text{DELETE}.
+]
+
+Scientific progression:
+
+[
+\text{Can it invent abstraction?}
+]
+
+before:
+
+[
+\text{Can it maintain an entire programming language?}
+]
+
+Much cleaner.
+
+---
+
+# I would move nonstationarity later
+
+The sketch wants Benchmark C relatively early. 
+
+I wouldn't.
+
+Nonstationarity introduces another axis:
+
+[
+p(\text{future reuse})
+]
+
+changes over time.
+
+That's fascinating, but first show that promotion works in a stationary hierarchical world.
+
+Then use nonstationarity to test whether abstraction value is **prospective**, not merely retrospective.
+
+For example:
+
+Task family A dominates early.
+
+Then disappears.
+
+Should its abstraction be retained?
+
+You can define:
+
+[
+V(P)
+====
+
+## \mathbb E[\text{future savings}]
+
+D(P).
+]
+
+If expected reuse falls:
+
+[
+V(P)<0
+]
+
+and deletion becomes rational.
+
+That's the correct place for retirement/forking.
+
+---
+
+# Cross-world meta-learning should be its own V3b/Phase III
+
+I agree strongly with the sketch that compiler inference will probably need cross-world experience. 
+
+H10 already told us 64 within-lifetime tasks are not enough.
+
+So:
+
+[
+\text{world}*1,\ldots,\text{world}*{10000}
+]
+
+train a compiler/update policy.
+
+Then on unseen worlds it should rapidly infer:
+
+* which functional regularities matter;
+* which residuals are candidates for sharing;
+* perhaps where to search for abstractions.
+
+That changes the research question from:
+
+> can the model learn a library?
+
+to:
+
+> **can the model learn how to build libraries?**
+
+That's exactly the meta-level you originally wanted with the learned optimizer project.
+
+---
+
+# I like Workstream 4, but I would change the first LLM experiment
+
+The adapter-library idea is sensible. 
+
+But I would not begin by letting the LLM grow a dynamic library.
+
+First do the **measurement bridge**.
+
+Take a frozen small language model and many LoRA task adaptations:
+
+[
+\Delta_1,\ldots,\Delta_N.
+]
+
+Then ask:
+
+> Is there measurable functional recurrence among these adaptations?
+
+Can we factor:
+
+[
+\Delta_\tau
+\approx
+P a_\tau+\epsilon_\tau
+]
+
+or:
+
+[
+F_\tau
+\approx
+B_\tau P(A_\tau h)?
+]
+
+Then test whether measured functional recurrence predicts:
+
+[
+\text{benefit from shared adaptation}
+]
+
+the way ROW predicts.
+
+That is a direct external-validity test of the law before building another complicated learner.
+
+So I'd divide the real-world bridge:
+
+### LLM-A: Measure
+
+Does recurrence predict the sharing advantage?
+
+### LLM-B: Factor
+
+Can repeated adaptations be represented more cheaply as shared + residual?
+
+### LLM-C: Learn dynamically
+
+Can the model decide what to promote/merge?
+
+That ladder is safer.
+
+---
+
+# There is an even bigger theoretical point
+
+V1 and V2 suggest that “abstraction” itself may be a **compression transition** rather than a primitive psychological category.
+
+At low recurrence:
+
+[
+\text{independent solutions}.
+]
+
+At moderate recurrence:
+
+[
+\text{continuous shared manifold}.
+]
+
+At high recurrence:
+
+[
+\text{identifiable reusable operators}.
+]
+
+If V3 then shows that hierarchical recurring residuals spontaneously become explicit shared objects because doing so reduces description length, we'd have a genuinely strong story:
+
+[
+\boxed{
+\text{discrete abstractions emerge when continuous regularities become economical to name.}
+}
+]
+
+That is much deeper than:
+
+> modular neural networks work.
+
+It would suggest why discrete-looking reusable concepts/functions might emerge at all from continuous neural optimization.
+
+---
+
+# So I would rewrite V3 around one primary hypothesis
+
+Something like:
+
+> **H11 — Abstraction Promotion Hypothesis:** When task-specific continuous adaptations contain recurrent functional structure, a learner that is charged for their information content can reduce total lifetime description length by promoting that recurrent structure into shared computational abstractions. Promotion should occur only when the prospective savings exceed the abstraction's storage and execution cost, and should not occur in matched structureless controls.
+
+Then predictions:
+
+[
+\boxed{
+D_{\rm promoted}<D_{\rm unpromoted}
+}
+]
+
+at matched predictive loss.
+
+And:
+
+[
+\boxed{
+J_{\rm promoted}
+<
+J_{\rm shared-residual},
+J_{\rm Continuous},
+J_{\rm Dense}
+}
+]
+
+in hierarchical/mixed worlds.
+
+Plus:
+
+[
+\rho=0
+\Rightarrow
+\text{no promotion}.
+]
+
+That would be a superb V3 core.
+
+Then a second hypothesis:
+
+> **H12 — Hierarchical Vocabulary Hypothesis:** If reusable structure exists at multiple levels, repeated promotion produces a hierarchy whose levels correspond functionally to the world's latent sharing hierarchy.
+
+And only later:
+
+* H13 fork/merge under nonstationarity;
+* H14 cross-world learned compiler;
+* H15 external LLM recurrence.
+
+---
+
+## My verdict on the current sketch
+
+The **research trajectory is excellent**.
+
+The sketch correctly identifies that V3 should move from:
+
+[
+\text{choosing among representations}
+]
+
+to:
+
+[
+\text{changing the representation language itself}.
+]
+
+
+
+But I would **not implement Workstream 1 as currently written**.
+
+V2 has superseded it in three decisive ways:
+
+1. **Wake should be manifold-first, not posterior-first.**
+   Continuous solutions aren't latent route beliefs. 
+
+2. **Bits must enter optimization before sleep.**
+   Allocation already works; the unsolved problem is information-efficient specialization. 
+
+3. **The first discrete structural operation should be promotion, not a full merge/split/delete compiler.**
+   Prove that recurrent task-local information can become a shared abstraction and win both prediction and description length.
+
+If that succeeds, I think V3 becomes the strongest experiment in the entire program.
+
+Because then you'd have progressed from:
+
+[
+\text{V1: when does sharing pay?}
+]
+
+to:
+
+[
+\text{V2: can the learner choose how much to share?}
+]
+
+to:
+
+[
+\boxed{
+\text{V3: can the learner invent a new abstraction when repeated experience makes naming it cheaper than rediscovering it?}
+}
+]
+
+That is the point where **“neural library learning” becomes literally true**, rather than just a metaphor for parameter sharing.

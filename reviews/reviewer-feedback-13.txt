@@ -1,0 +1,226 @@
+Yes. Given everything V1/V2 has produced, I think there are **several genuinely promising research directions that are sharper now than our original ideas**. The important thing is that V2 has exposed specific failure modes rather than merely giving us another architecture leaderboard. 
+
+I would not interrupt the V2 agent's frozen experiments. But I would start recording these as candidate analyses/V3 hypotheses.
+
+1. **Replace route entropy with functional-equivalence entropy.** This is probably my highest-priority idea. H7 says exact posterior inference over discrete programs is excellent, while H8 says route entropy is a terrible consolidation signal because many different routes implement nearly the same function.  So quotient the route space by behavioral equivalence. Define (r\sim r') when
+   [
+   \mathbb E_x|f_r(x)-f_{r'}(x)|^2<\epsilon.
+   ]
+   Aggregate posterior mass over equivalence classes:
+   [
+   p([r]\mid D)=\sum_{r'\in[r]}p(r'\mid D).
+   ]
+   Then measure
+   [
+   H_{\rm func}=H([R]\mid D)
+   ]
+   rather than (H(R\mid D)). **Hypothesis:** at (\rho=1), route entropy may remain high while functional entropy collapses; at (\rho=0), neither collapses to a compact sufficient computation. If true, this could rehabilitate consolidation with a conceptually correct gate:
+   [
+   \boxed{\text{compile when the function is identified, not when its arbitrary implementation is identified}.}
+   ]
+   This also matches independent recent work showing that task updates can transfer across different architectures when defined by their *functional effect* rather than parameter identity. ([arXiv][1])
+
+2. **Turn that into a rate–distortion theory of neural programs.** Instead of asking “how many bits does this exact route take?”, ask:
+   [
+   R(\epsilon)=
+   \min_{\text{representation }c}
+   D(c)
+   \quad
+   \text{s.t.}\quad
+   d(f_c,f_\tau)\le\epsilon.
+   ]
+   This gets around non-identifiability entirely. Two routes with different identities but indistinguishable behavior belong to the same low-distortion code. Then compare architectures by their **functional rate–distortion curves**, not just one int8 point. V2 already shows prediction loss, storage, and compute disagree as currencies.  A curve would tell you *how much predictive fidelity each extra bit buys*. This also makes (\lambda) much less arbitrary: instead of picking one bits-vs-nats price, show the Pareto frontier.
+
+3. **Directly test the “specialization → manifold → primitives” hypothesis geometrically.** Right now this is inferred from multiple results: Dense wins at weak recurrence; Hypernetwork becomes surprisingly competitive around partial recurrence; explicit slots dominate at exact reuse; operator recovery crystallizes only near (\rho=1).  Measure the intrinsic dimensionality and topology of the learned **function family** across (\rho). Take each task-conditioned operation, evaluate it on a common probe set, flatten those functional signatures, and SVD/PCA them. My prediction:
+   [
+   \rho\approx0:\quad\text{high-dimensional/idiosyncratic}
+   ]
+   [
+   \rho\approx.75-.9:\quad\text{low-dimensional continuous manifold}
+   ]
+   [
+   \rho\approx1:\quad\text{manifold collapses around identifiable reusable atoms}.
+   ]
+   If that happens, “manifold vs primitives” stops being a narrative and becomes a measured representational transition. This is particularly timely because recent work independently finds that representational dimensionality controls when modularity becomes beneficial in continual learning. ([arXiv][2])
+
+4. **Find an observable estimator of recurrence.** ROW currently lets *us* know (r), but a real learner doesn't. This is crucial for LLMs and self-restructuring. I would test several quantities using only data available to the learner:
+   [
+   \text{gradient alignment},
+   \quad
+   \text{cross-task transfer},
+   \quad
+   \text{Jacobian similarity},
+   \quad
+   \text{one-step update benefit}.
+   ]
+   For example:
+   [
+   \hat r_{ij}
+   ===========
+
+   ## L_j(\theta)
+
+   L_j(\theta-\eta\nabla L_i).
+   ]
+   If learning task (i) improves task (j), they contain functionally compatible structure. Then ask which estimator best predicts both true recurrence and the observed Dense-vs-Share advantage. Gradient alignment is already used as a task-affinity/transfer signal in current multi-task work, so the novel piece would be validating it against **known functional recurrence and the economically optimal sharing decision**. ([arXiv][3])
+
+   If this succeeds, the learner no longer needs an oracle (\rho):
+   [
+   \boxed{\text{estimate prospective reuse value from its own learning dynamics}.}
+   ]
+
+5. **Add representational capacity as a second controlled axis.** V1 found approximately
+   [
+   \Delta L\approx ar+b.
+   ]
+   H6 says family alignment shifts this line dramatically.  I suspect another major axis is effective representational dimensionality/bottleneck strength. Recent controlled continual-learning work reports that modularity's benefit can depend strongly on whether representations are high-dimensional/lazy or low-dimensional/structured. ([arXiv][2]) So sweep something like learner rank/state dimension while preserving teacher recurrence and estimate:
+   [
+   \Delta L=f(r,A,d_{\rm eff}).
+   ]
+   Maybe the “economics of abstraction” is really a surface:
+   [
+   \boxed{
+   \text{sharing value}
+   ====================
+
+   f(
+   \text{recurrence},
+   \text{prior alignment},
+   \text{representational capacity}
+   ).
+   }
+   ]
+   That would connect ROW to broader neural representation theory.
+
+6. **Put information cost in the gradient—and measure whether specialization bits naturally disappear.** This is the V3 direction I find most promising. V2's shared residual knows *where* to specialize but spends ~130k bits doing it; post-hoc compression repeatedly fails because SGD was never charged for bits.  Make residual state variational:
+   [
+   q(\Delta_\tau)=\mathcal N(\mu_\tau,\sigma_\tau^2)
+   ]
+   and optimize:
+   [
+   J=
+   L_{\rm preq}
+   +
+   \beta
+   D_{\rm KL}
+   \big(q(\Delta_\tau)|p(\Delta_\tau)\big).
+   ]
+   Variational/Bayesian compression has a direct coding interpretation through uncertainty and bits-back arguments, so this is a principled way to make representational information visible to the optimizer rather than counting it after training. ([arXiv][4]) The decisive V3 prediction should be:
+   [
+   \boxed{
+   \text{beat Dense/Continuous in prediction AND total coded description}
+   }
+   ]
+   on mixed/hierarchical worlds. If it can't do both, we've learned that allocation alone isn't abstraction.
+
+7. **Study hysteresis: does abstraction depend on history?** This is a new direction I find very interesting. Train a learner under high recurrence until it has developed a shared abstraction, then lower recurrence. Compare it to another learner arriving at the **same current recurrence** from a low-recurrence history. If abstraction is an investment with acquisition/restructuring costs, the optimal state should depend on history:
+   [
+   P(\text{share}\mid r,\text{previously shared})
+   \neq
+   P(\text{share}\mid r,\text{previously specialized}).
+   ]
+   That would produce **hysteresis**. Economically, once you've paid to learn an abstraction, retaining it can remain worthwhile below the point at which you'd pay to create it from scratch. Conversely, a learner may require recurrence above the static break-even point before investing in a new abstraction. This would turn Benchmark C/nonstationarity into something theoretically sharper than “can it adapt to distribution shift?”
+
+8. **Separate acquisition value from retention value.** Related to hysteresis, define:
+   [
+   V_{\rm create}(P)
+   =================
+
+   ## \text{expected future savings}
+
+   ## \text{creation cost}
+
+   D(P)
+   ]
+   versus
+   [
+   V_{\rm retain}(P)
+   =================
+
+   ## \text{expected future savings}
+
+   D(P).
+   ]
+   These should have different thresholds. This may explain why abstraction creation, maintenance, and deletion should not use the same criterion. It gives your future compiler something much more principled than generic `CREATE/DELETE/MERGE`: each operation has a different counterfactual value.
+
+9. **Promotion should be tested as a literal information-flow event.** In hierarchical worlds, start with family structure buried independently in task residuals. Then track:
+   [
+   \text{task-specific bits}
+   \rightarrow
+   \text{family-shared bits}
+   ]
+   across sleep steps. The smoking-gun result would be:
+   [
+   D_{\rm task}\downarrow,
+   \qquad
+   D_{\rm shared}\uparrow,
+   \qquad
+   D_{\rm total}\downarrow,
+   \qquad
+   L_{\rm prediction}\approx\text{constant}.
+   ]
+   That's better than merely showing a dynamic network grows another module. You would literally observe **an abstraction being born because naming shared structure became cheaper than repeatedly encoding it**.
+
+10. **Measure the scaling law of amortized inference instead of simply retrying it at larger scale.** H10 failed within 64 tasks, while dreaming helped more when the learned library matched the world.  Rather than jumping to “thousands of worlds,” systematically measure compiler performance versus number of solved/dream tasks:
+    [
+    N\in{64,128,256,512,1024,\ldots}.
+    ]
+    Fit the gap:
+    [
+    G(N)
+    ====
+
+    ## L_{\rm direct\ optimization}
+
+    L_{\rm compiler}.
+    ]
+    Is there an amortization crossover (N^*)? Does dream data reduce (N^*)? Modern amortized inference systems can generalize inference across varying models with orders-of-magnitude test-time compute reductions once enough meta-training has been paid, so the general phenomenon is plausible; ROW gives you a uniquely controlled environment for measuring its break-even point. ([arXiv][5])
+
+11. **Context-channel capacity may give you another information-theoretic axis.** A recent theoretical framework defines the information that a task/context signal can transmit into generated parameters and connects this to continual-learning behavior. ([arXiv][6]) ROW is unusually well suited to testing a related but different question:
+    [
+    \text{How many task-specific bits does the learner actually need once shared computation has been learned?}
+    ]
+    Across (\rho), measure:
+    [
+    I(T;\theta_T)
+    \quad\text{or a coding proxy}
+    ]
+    versus prediction cost. My prediction is that high recurrence lowers the task-conditional information needed for good prediction. That would connect your *reuse economics* to a communication-theoretic statement:
+    [
+    \boxed{
+    \text{abstraction reduces the number of task-identifying bits required to specify behavior}.
+    }
+    ]
+
+12. **For the LLM bridge, first test the law—not the architecture.** Take a small frozen pretrained model and learn LoRA/task vectors for many downstream tasks. Represent each adaptation by its *functional effect on a common activation probe set*, not raw weight similarity; current work shows this functional view can transport task updates even across heterogeneous model widths. ([arXiv][1]) Construct an empirical task-recurrence matrix, then ask:
+    [
+    \text{Does estimated functional recurrence predict the benefit of sharing/factoring adapters?}
+    ]
+    If the ROW-shaped relationship survives even weakly, that's a much stronger external-validity bridge than immediately building a self-modifying LLM.
+
+### What I would prioritize
+
+If I could add only **three** things without derailing V2, they'd be:
+
+**First:** functional-equivalence posterior / functional entropy. It's cheap, directly resolves a V2 failure, and may give you the correct consolidation criterion.
+
+**Second:** function-family intrinsic dimensionality across (\rho). It could turn the emerging specialization→manifold→primitive story into an actual measured phenomenon.
+
+**Third:** observable recurrence estimators—especially transfer/gradient based. Because ultimately a self-organizing learner must decide whether reuse is worthwhile **without being told the hidden recurrence**.
+
+Then V3's central experiment should be the variational-coded residual + promotion system, because it attacks the one major thing none of the current learners can do:
+
+[
+\boxed{
+\textbf{discover useful sharing and encode it more cheaply than the alternatives at the same time.}
+}
+]
+
+That's the gap I now think matters most. If you solve that, you're no longer merely characterizing reusable computation. You're demonstrating **the formation of abstraction as an information-economic event**. 
+
+[1]: https://arxiv.org/html/2602.12952v1 "Transporting Task Vectors across Different Architectures without Training"
+[2]: https://arxiv.org/html/2606.17889v1 "Dimensionality Controls When Modularity Helps in Continual Learning"
+[3]: https://arxiv.org/html/2606.14900v1?utm_source=chatgpt.com "GRASP: Gradient-Aligned Sequential Parameter Transfer ..."
+[4]: https://arxiv.org/pdf/1702.04008?utm_source=chatgpt.com "soft weight-sharing for neural network compression"
+[5]: https://arxiv.org/abs/2605.26419?utm_source=chatgpt.com "Amortized Factor Inference Networks for Posterior Inference"
+[6]: https://arxiv.org/pdf/2603.07415 "Context Channel Capacity: An Information-Theoretic Framework for Understanding Catastrophic Forgetting"

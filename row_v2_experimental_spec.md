@@ -906,6 +906,34 @@ then seeds 100–129). No V2 training before that, with one exception — the
 10. **006b** Mixture-vs-posterior mechanism test (§9.5) — zero compute,
     and it MUST run before 009 so the mechanism framing is timestamped
     ahead of any sealed data.
+10b. **006c/006d (pre-registered analyses from reviewer-feedback-13;
+    development artifacts only; do NOT gate V2 closure — they may run
+    after 009):**
+    - **006c, functional-equivalence entropy.** Quotient the route space
+      by behavioral equivalence (r ~ r' when mean squared functional
+      distance on probes < epsilon), aggregate posterior mass over
+      classes, and measure H_func = H([R] | D). Pre-registered
+      prediction: at rho = 1 route entropy stays high while functional
+      entropy collapses; at rho = 0 neither collapses. If confirmed,
+      this is the conceptually correct consolidation signal ("compile
+      when the FUNCTION is identified, not its arbitrary
+      implementation") and rehabilitates the gate family for V3 — as an
+      analysis result, not a third gate derivation.
+    - **006d, function-family intrinsic dimensionality across rho.**
+      SVD/PCA of task-conditioned functional signatures on common
+      probes. Pre-registered prediction: high-dimensional at rho ~ 0, a
+      low-dimensional continuous manifold at partial recurrence,
+      collapsing toward identifiable atoms at rho = 1 — turning the
+      three-regime claim from inference-across-instruments into one
+      measured transition.
+    Also recorded for V3 from the same review: observable recurrence
+    estimators from learning dynamics (gradient alignment, one-step
+    transfer benefit) validated against ground truth — the piece a
+    self-organizing learner needs to operate the economics without an
+    oracle rho; the functional rate-distortion framing R(epsilon) as the
+    principled replacement for single-lambda accounting; and the
+    amortization scaling analysis G(N) with dream-modulated crossover
+    N*, replacing "retry the compiler bigger."
 11. **009** Freeze V2 configurations, metrics, exclusions; open seeds
     200–229. Sequencing within the sealed block: Component A completes
     and is analyzed before Component B runs — if Family A's parameter
@@ -1050,10 +1078,23 @@ nothing to compile because there are no latent route beliefs to
 harden; and the V3 wake-phase theory must be manifold-first, with route
 structure IMPOSED by consolidation rather than read out of the mixture.
 
-**Pre-draft V3 constraint set.** These observations supersede
-notes/v3-sketch.txt as the design constraints for the eventual V3 spec
-(the sketch predates all verdicts). Recorded in draft form, timestamped
-before the sealed-block verdict:
+**The three-regime claim (named per reviewer-feedback-11).** The V1/V2
+results jointly support a representational transition as recurrence
+rises: SPECIALIZATION (dense wins; weak recurrence) -> CONTINUOUS SHARED
+MANIFOLD (hypernetwork competitive, even beating explicit slots at
+rho = 0.9; statistical reuse pays without identifiable primitives) ->
+CRYSTALLIZED PRIMITIVES (explicit slots win, recovery sharpens, frozen
+recomposition works; near-exact recurrence). Supported by four
+independent instruments (paired losses, hypernetwork gap inversion,
+recovery-vs-baseline, frozen transfer). The corresponding research map:
+ALLOCATION is solved surprisingly well; INFERENCE is solved exactly but
+not cheaply; COMPRESSION is unsolved; REPRESENTATIONAL FORM depends on
+recurrence.
+
+**Pre-draft V3 constraint set (revised per reviewer-feedback-12/13).**
+These observations supersede notes/v3-sketch.txt as the design
+constraints for the eventual V3 spec (the sketch predates all verdicts).
+Recorded in draft form, timestamped before the sealed-block verdict:
 
 1. **Make bits differentiable (the root fix for observation 5).** Every
    compression failure shares the diagnosis that gradient descent never
@@ -1082,6 +1123,41 @@ before the sealed-block verdict:
 3. Functional instruments only; amortization at cross-world scale only;
    dream-benefit as the library-quality probe — carried over from the
    synthesis unchanged.
+4. **Refinements from reviewer-feedback-12, accepted:** (a) bits enter
+   the gradient DURING WAKE (the earlier "no structural pressure awake"
+   rule is narrowed: continuous information cost is wake-legal; only
+   IRREVERSIBLE DISCRETE restructuring is sleep-only); (b) V3's first
+   and only initial structural operation is PROMOTE — merge, fork, and
+   delete are staged behind its verdict; (c) discrete primitives are one
+   possible ENDPOINT of compression, not the imposed ontology — the
+   abstraction ladder is basis directions -> parameterized operators ->
+   discrete operators -> macros, with the MDL criterion deciding what
+   form each abstraction earns; (d) the promotion testbed uses
+   TASK-GROUP families (family(tau), not family(k)) — convergent with
+   prediction P-2026-08-18-D and the Benchmark E diagnosis; (e) the LLM
+   bridge is staged measure -> factor -> learn (LLM-A: does estimated
+   functional recurrence predict sharing benefit among frozen-model
+   adapters, using functional-effect probes rather than weight
+   similarity; LLM-B: shared-plus-residual factoring; LLM-C: dynamic
+   library) — test the law before building the learner.
+5. **Draft primary hypothesis for V3 (H11, Abstraction Promotion):**
+   when task-specific continuous adaptations contain recurrent
+   functional structure, a learner charged for their information content
+   (variational coding) reduces total lifetime description length by
+   promoting that structure into shared abstractions — with
+   D_promoted < D_unpromoted at matched predictive loss,
+   J_promoted below shared-residual, Continuous, AND Dense in
+   hierarchical/mixed worlds, and NO promotion in matched structureless
+   controls (rho = 0). Secondary (H12, Hierarchical Vocabulary):
+   repeated promotion recovers the world's latent sharing hierarchy
+   functionally. Staged later: fork/merge under nonstationarity — where
+   HYSTERESIS and the acquisition-vs-retention distinction
+   (V_create < V_retain thresholds; an abstraction worth keeping below
+   the recurrence at which it was worth creating) become the sharp
+   questions. The smoking-gun promotion figure: task-specific bits fall,
+   shared bits rise, total bits fall, prediction cost flat — an
+   abstraction being born because naming shared structure became cheaper
+   than repeatedly encoding it.
 
 # 10. Anticipated objections and positioning
 

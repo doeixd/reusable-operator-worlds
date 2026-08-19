@@ -703,3 +703,19 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   document during development; its invariant is stillness from d655ce0,
   before the confirmation freeze), now encoded in the manifest with
   justification.
+- Incorporated reviewer-feedback-11/12/13 into the V2 spec before the
+  sealed verdict: the three-regime claim named with its four independent
+  instruments and the allocation/inference/compression/form research
+  map; the V3 constraint set revised (bits in the gradient during wake
+  with only irreversible discrete edits sleep-only; PROMOTE as the sole
+  initial structural operation; discrete primitives as one endpoint of a
+  basis-directions -> parameterized -> discrete -> macros ladder;
+  task-group families for the promotion testbed, convergent with
+  prediction P-2026-08-18-D; the LLM bridge staged measure -> factor ->
+  learn); draft V3 hypotheses H11 (abstraction promotion, with the
+  bits-flow smoking-gun figure) and H12 (hierarchical vocabulary)
+  recorded, with hysteresis and acquisition-versus-retention staged for
+  the nonstationary era; and pre-registered analyses 006c
+  (functional-equivalence entropy, the candidate correct consolidation
+  signal) and 006d (function-family intrinsic dimensionality across rho)
+  added as non-gating development analyses with predictions stated.
