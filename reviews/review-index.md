@@ -751,3 +751,65 @@ instantiate," which is the textbook notion of abstraction. V3 showed repeated
 task-local computations can become a reusable object; V4 may show repeated
 reusable objects can themselves become instances of a more general reusable
 schema — more interesting than the original garbage-collection story.
+
+### [reviewer-feedback-31.txt](reviewer-feedback-31.txt)
+Agrees with not unsealing 400–429 and goes further: three gate failures
+(redundancy, obsolescence, factorization economics) mean V4's question should
+change. The current V4 premise is falsified for the canonical V3 regime — the
+V3 library does not contain economically exploitable lifecycle slack. Redundant
+atoms: no. Obsolete atoms: not instantiated by the world. Higher-order sharing:
+geometry yes, economics no (matched-budget private compression dominates).
+Reframes V4 as **"When Does a Library Need a Lifecycle?"** — under what
+conditions does the optimal representation cease to be a static library of
+independently compressed abstractions and begin to require lifecycle
+operations? The three failures become the starting result, not obstacles. The
+V3 regime is a corner of the phase diagram (small library + stationary
+recurrence + cheap reacquisition + no retrieval pressure → KEEP + privately
+compress is near-optimal). Proposes an **opportunity census** before
+implementing anything: keep the V3 learner frozen, generate libraries under
+different regimes, run offline structural oracles only — for each library ask
+whether private compression, factorization (always against the matched-bit
+private-compression frontier), retirement (only where deletion produces actual
+future opportunity-cost saving), retention, or fork could pay. A small phase
+diagram (N∈{64,128,256} lifetime, F∈{2,4,8} families, q∈{0,low,high}
+turnover, g∈{8,16,32,64} return-gap) on worlds 0–2 could classify the
+oracle-optimal edit per regime. If the phase diagram appears, V4 gets much
+stronger: discovering **when each structural edit becomes economically
+justified** rather than demonstrating individually hand-crafted operators. The
+private-compression result should change the architecture — the edit vocabulary
+needs COMPRESS(A) (lower precision, lower rank, pruning, simpler realization)
+below SHARE/FACTORIZE in the edit economy: KEEP < COMPRESS < SHARE/FACTORIZE <
+CREATE/FORK, where a complex edit only earns its place if it beats every
+simpler counterfactual at the same resource budget. Makes this constitutional:
+**every sharing claim needs a matched-budget non-sharing alternative** (alongside
+V3's structural-claims-require-functional-substitutability). Proposes a better
+V4 experiment: can a learner choose the correct representation edit from a
+competing vocabulary {KEEP, COMPRESS, FACTORIZE, RETIRE}? Estimate ΔJ(e) for
+each candidate, choose e*=argmin, initially oracle/hand-designed — the
+scientific question becomes whether one economic criterion can choose the right
+representation class across regimes (extremely aligned with the grand thesis).
+Still build the retrieval-continuity world, but after the census: returning
+tasks must exploit old A immediately (pay only recognition/argument cost) if
+retained, vs accumulate R_1,R_2... until PROMOTE reconstructs A' if deleted —
+creates actual C_reacquire; V_retain ≈ P(return)·C_reacquire − C_carry; first
+establish an oracle crossover (g<g* → retain, g>g* → delete/relearn) before
+implementing online policy. Notes an even more interesting possibility: the
+census may show none of the lifecycle operations matter until scale gets
+substantially larger — a lifecycle phase transition (M*_retrieval, M*_merge,
+M*_retention), meaning lifecycle complexity itself should be amortized (a small
+library doesn't need GC, deduplication, hierarchy, or retrieval indexing).
+Preserve the current failed spec rather than rewrite history: record V4 original
+lifecycle specification — development gate outcome (H14 redundancy gate failed;
+H14 obsolescence world failed to instantiate retention value; H15 factorization
+existence gate passed but matched-budget economic gate failed 9/10 and
+prospective acquisition recovered only 7.5%) — then start a successor document
+"V4 Revised: The Economics of Library Refactoring" or "V4: When Does a Library
+Need a Lifecycle?" The deepest interpretation: V4 assumed successful abstraction
+birth ⇒ library maintenance problem; the measurements say not necessarily. V3
+produced a surprisingly efficient static library whose abstractions are not
+mutually redundant, not obsolete, not profitably factorable once private
+compression is fair — a positive statement about V3. The next question is what
+pressure eventually makes cleanup, factorization, retention, or forking worth
+their structural cost, turning V4 from a collection of anticipated mechanisms
+into a study of the **phase boundaries of self-restructuring** — why and when
+a neural computational language needs an economy rather than merely a library.

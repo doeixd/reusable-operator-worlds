@@ -1,0 +1,545 @@
+I agree with your decision **not to unseal 400–429**. At this point, doing so would be testing operators whose prerequisite opportunities have already failed.
+
+And I would actually go one step further than “build the retrieval-continuity world next.” I think three gate failures are telling you to **change the question of V4**.
+
+The current V4 premise has been falsified *for the canonical V3 regime*:
+
+[
+\boxed{
+\text{the V3 library does not currently contain economically exploitable lifecycle slack.}
+}
+]
+
+More specifically:
+
+[
+\begin{aligned}
+\text{redundant atoms?}&\quad\text{No.}\
+\text{obsolete atoms?}&\quad\text{Not instantiated by the world.}\
+\text{higher-order sharing?}&\quad\text{Geometry yes, economics no.}\
+\end{aligned}
+]
+
+And the last result is especially important. The matched-budget private baseline says the next cheapest representation change is:
+
+[
+\boxed{\text{compress each abstraction better}}
+]
+
+not:
+
+[
+\boxed{\text{share more between abstractions}.}
+]
+
+That is useful information about the representation itself.
+
+## I would make V4: **When Does a Library Need a Lifecycle?**
+
+Rather than constructing another world immediately in which RETAIN is guaranteed to matter, first locate the regime where lifecycle pressure appears naturally.
+
+That gives you a much stronger V4 question:
+
+[
+\boxed{
+\textbf{Under what conditions does the optimal representation cease to be a static library of independently compressed abstractions and begin to require lifecycle operations?}
+}
+]
+
+This turns the three failures into the starting result rather than obstacles.
+
+### The current point in the phase diagram
+
+Your V3 regime appears to be:
+
+[
+\text{small library}
++
+\text{stationary recurrence}
++
+\text{cheap reacquisition}
++
+\text{no retrieval pressure}
+]
+
+and therefore:
+
+[
+\boxed{\text{KEEP + privately compress}}
+]
+
+is close to optimal.
+
+That's a perfectly sensible result.
+
+Lifecycle management should become valuable only when one or more pressures grow:
+
+[
+\text{library scale},
+\quad
+\text{environmental turnover},
+\quad
+\text{reacquisition cost},
+\quad
+\text{interference},
+\quad
+\text{retrieval cost}.
+]
+
+---
+
+# I would run an “opportunity census” before implementing anything else
+
+Keep the V3 learner frozen. No DELETE, MERGE, FORK.
+
+Generate libraries under different regimes and run **offline structural oracles only**.
+
+For each resulting library, ask whether any of these edits *could* pay.
+
+### Private compression
+
+[
+A_i\rightarrow Q(A_i).
+]
+
+How much can each abstraction be quantized/rank-reduced before behavioral loss outweighs bit savings?
+
+You already know this dominates V4.2 at the canonical point.
+
+### Factorization
+
+[
+{A_i}
+\rightarrow
+C+B\alpha_i+E_i.
+]
+
+But always against the matched-bit private-compression frontier.
+
+### Retirement
+
+[
+A\rightarrow\varnothing.
+]
+
+But only where deletion produces an actual future opportunity-cost saving.
+
+### Retention
+
+Compare:
+
+[
+\text{keep dormant }A
+]
+
+against:
+
+[
+\text{delete }A
+\rightarrow
+\text{pay reacquisition when regime returns}.
+]
+
+### Fork
+
+For a recurring deviation:
+
+[
+A+\delta_i,
+]
+
+compare:
+
+[
+\text{private deltas forever}
+]
+
+against:
+
+[
+\operatorname{FORK}(A,\delta)\rightarrow A'.
+]
+
+No online policy yet. Just ask where each operation has an oracle advantage.
+
+---
+
+# A small phase diagram could answer the whole V4 direction
+
+I'd sweep things like:
+
+[
+N\in{64,128,256}
+]
+
+lifetime length,
+
+[
+F\in{2,4,8}
+]
+
+number of recurring families, and some simple nonstationarity variable:
+
+[
+q\in{0,\text{low},\text{high}}
+]
+
+for turnover/regime changes.
+
+Possibly also return-gap length:
+
+[
+g\in{8,16,32,64}.
+]
+
+You don't need ten worlds initially. Worlds 0–2 are enough for an opportunity map.
+
+Then classify the oracle-optimal edit:
+
+| Regime                                                | Best structural response   |
+| ----------------------------------------------------- | -------------------------- |
+| small/stationary                                      | KEEP / private compression |
+| many related atoms                                    | FACTORIZE                  |
+| temporary disappearance + expensive reacquisition     | RETAIN                     |
+| permanent disappearance + live storage/retrieval cost | DELETE                     |
+| persistent divergence                                 | FORK                       |
+| mutable shared substrate                              | COPY-ON-WRITE              |
+
+If that phase diagram appears, V4 gets **much stronger**.
+
+You're no longer demonstrating individually hand-crafted lifecycle operators.
+
+You're discovering **when each kind of structural edit becomes economically justified**.
+
+---
+
+# The private-compression result should change the architecture
+
+I think this is one of the most valuable consequences of your matched-budget control.
+
+Your long-term edit vocabulary shouldn't just be:
+
+[
+\texttt{PROMOTE},
+\texttt{MERGE},
+\texttt{DELETE},
+\texttt{FORK}.
+]
+
+It needs simpler structural operations:
+
+[
+\boxed{
+\texttt{COMPRESS}(A)
+}
+]
+
+perhaps implemented as:
+
+* lower precision;
+* lower rank;
+* pruning;
+* simpler realization of the same function.
+
+Because the experiment just told you:
+
+> Before inventing a shared family to save bits, first ask whether I can save the same bits by representing each existing object more cheaply.
+
+That's exactly what an MDL-driven refactoring system should do.
+
+So the edit economy becomes something like:
+
+[
+\boxed{
+\text{KEEP}
+<
+\text{COMPRESS}
+<
+\text{SHARE/FACTORIZE}
+<
+\text{CREATE/FORK}
+}
+]
+
+in increasing structural ambition.
+
+A complex edit only earns its place if it beats every simpler counterfactual at the same resource budget.
+
+That's a major methodological principle coming out of V4:
+
+[
+\boxed{
+\textbf{Every sharing claim needs a matched-budget non-sharing alternative.}
+}
+]
+
+I'd make that constitutional, alongside V3's:
+
+[
+\textbf{structural claims require functional substitutability.}
+]
+
+---
+
+# This suggests a potentially better V4 experiment
+
+Instead of:
+
+> Can RETIRE work?
+
+or:
+
+> Can MERGE work?
+
+ask:
+
+> **Can a learner choose the correct representation edit from a small competing vocabulary?**
+
+Give it candidate edits:
+
+[
+\mathcal E=
+{
+\texttt{KEEP},
+\texttt{COMPRESS},
+\texttt{FACTORIZE},
+\texttt{RETIRE}
+}.
+]
+
+For each candidate:
+
+[
+e\in\mathcal E
+]
+
+estimate:
+
+[
+\Delta J(e).
+]
+
+Choose:
+
+[
+e^*=\arg\min_eJ(e).
+]
+
+Initially the decision can be oracle/hand-designed. You don't need a learned controller yet.
+
+Then build worlds where you independently know:
+
+* private compression should win;
+* factorization should win;
+* retention should win;
+* retirement should win.
+
+The scientific question becomes:
+
+[
+\boxed{
+\textbf{Can one economic criterion choose the right representation class across regimes?}
+}
+]
+
+That is extremely aligned with the grand thesis.
+
+It's no longer “we invented MERGE and made a MERGE world.”
+
+It's:
+
+> **The representation reorganizes according to whichever structural description is actually cheapest.**
+
+---
+
+# I would still build the retrieval-continuity world—but after the census
+
+Your proposed successor is good.
+
+To make RETAIN have actual option value, returning tasks need to be able to exploit the old abstraction immediately:
+
+### If retained
+
+[
+A
+]
+
+is available as a candidate from the first new task in the returning regime.
+
+The learner pays only recognition/argument cost.
+
+### If deleted
+
+There is no (A).
+
+The learner has to accumulate:
+
+[
+R_1,R_2,\ldots
+]
+
+until PROMOTE can reconstruct:
+
+[
+A'.
+]
+
+That creates an actual:
+
+[
+C_{\rm reacquire}.
+]
+
+Now:
+
+[
+V_{\rm retain}
+\approx
+P(\text{return})
+C_{\rm reacquire}
+-----------------
+
+C_{\rm carry}.
+]
+
+That's the world H14 originally needed.
+
+But I would first establish with an oracle that there is a crossover:
+
+[
+g<g^*
+\Rightarrow
+\text{retain}
+]
+
+[
+g>g^*
+\Rightarrow
+\text{delete/relearn}.
+]
+
+Only then implement an online retention policy.
+
+That protects you from another round of operator-building before existence is established.
+
+---
+
+# There's an even more interesting possibility
+
+The opportunity census may show that **none of the lifecycle operations matter until scale gets substantially larger**.
+
+If so, that's a useful result.
+
+It would mean:
+
+[
+\boxed{
+\text{lifecycle complexity itself should be amortized.}
+}
+]
+
+A small library doesn't need:
+
+* GC;
+* deduplication;
+* hierarchy;
+* sophisticated retention;
+* retrieval indexing.
+
+The overhead isn't worth it.
+
+Only beyond some library scale:
+
+[
+M>M^*
+]
+
+does lifecycle machinery pay.
+
+That's exactly analogous to everything else you've found.
+
+There may be a **lifecycle phase transition**.
+
+You could potentially measure:
+
+[
+M^*_{\rm retrieval},
+\qquad
+M^**{\rm merge},
+\qquad
+M^**{\rm retention}.
+]
+
+That would be an excellent V4 contribution.
+
+---
+
+# I would preserve the current failed spec rather than rewrite history
+
+Since no sealed block ran, you can revise direction freely scientifically—but I would keep the record very explicit.
+
+Something like:
+
+> **V4 original lifecycle specification — development gate outcome:** no registered rung reached sealing eligibility. H14 redundancy gate failed; H14 obsolescence world failed to instantiate retention value; H15 factorization existence gate passed but matched-budget economic gate failed 9/10 and prospective acquisition recovered only 7.5%.
+
+Then start a successor document:
+
+> **V4 Revised Experimental Specification: The Economics of Library Refactoring**
+
+or:
+
+> **V4: When Does a Library Need a Lifecycle?**
+
+Don't quietly morph the old spec.
+
+The failure history is part of why the revised question is credible.
+
+---
+
+# What the three failures collectively mean
+
+I think this is the deepest interpretation:
+
+V4 initially assumed:
+
+[
+\text{successful abstraction birth}
+\Rightarrow
+\text{library maintenance problem}.
+]
+
+Your measurements say:
+
+[
+\boxed{\text{not necessarily}.}
+]
+
+At the scale you're studying, V3 produced a surprisingly efficient static library.
+
+Its abstractions are:
+
+* not mutually redundant;
+* not obsolete under the current environment;
+* not profitably factorable once the private compression counterfactual is fair.
+
+That's actually a **positive statement about V3**.
+
+The library has less obvious slack than we thought.
+
+So the next question shouldn't be:
+
+> How do we clean it up?
+
+It should be:
+
+[
+\boxed{
+\textbf{What pressure eventually makes cleanup, factorization, retention, or forking worth their structural cost?}
+}
+]
+
+That turns V4 from a collection of anticipated mechanisms into a study of the **phase boundaries of self-restructuring**.
+
+I think that's a better V4.
+
+And if the answer turns out to be that lifecycle operations only become valuable under longer lifetimes, more concepts, real nonstationarity, expensive reacquisition, or priced retrieval, then you will have learned exactly **why and when a neural computational language needs an economy rather than merely a library**.

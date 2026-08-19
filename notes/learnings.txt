@@ -1321,3 +1321,74 @@ deletion is inherently a null edit under the objective. True RETIRE requires a
 world with **retrieval continuity** — the returning regime must make reusing
 dormant A materially cheaper than relearning/promoting A' (reacquisition cost
 C_reacquire = L_extra + λD_temporary + C_search). V4.4 must build that world.
+
+
+================================================================================
+V4.2 ECONOMIC GATE: FACTORIZATION FAILS — PRIVATE COMPRESSION DOMINATES
+================================================================================
+
+The V4.2 factorization economic gate (Gate 2) failed on development worlds
+0–9. The functional-PCA existence gate (Gate 1) passed: low-rank structure
+exists beyond the finite-m isotropic null (R² excess +15.7/+26.2/+27.3 at rank
+2 on worlds 0–2). But when the factorization is fully priced with real
+held-out Gaussian loss and actual retained bits, the matched-budget
+private-compression baseline wins 9/10 worlds. The prospective parameterization
+test (Gate 3) also failed: leave-one-abstraction-out recovered only 7.5% of
+the held-out abstraction's behavioral contribution through the inferred
+argument α_m. This is a real falsification, not a tuning issue.
+
+The decisive new control is the **matched-budget private-compression
+frontier**: give each abstraction its own rank-2 approximation and charge
+independently. If the shared C+Bα_i model cannot beat that, the gain is not
+cross-abstraction reuse but each abstraction being individually
+overparameterized. At the canonical V3 scale, the cheapest representation
+change is "compress each abstraction better," not "share more between
+abstractions." This is a positive statement about V3's library: its abstractions
+are not mutually redundant, not obsolete, and not profitably factorable once
+private compression is fair.
+
+This produces a new constitutional methodological rule:
+
+[
+\boxed{
+\textbf{Every sharing claim needs a matched-budget non-sharing alternative.}
+}
+]
+
+alongside V3's "structural claims require functional substitutability." A
+complex structural edit only earns its place if it beats every simpler
+counterfactual at the same resource budget. The edit economy is ordered by
+structural ambition: KEEP < COMPRESS < SHARE/FACTORIZE < CREATE/FORK. COMPRESS(A)
+— lower precision, lower rank, pruning, simpler realization of the same
+function — is a missing primitive the architecture needs, and it sits below
+sharing because the experiment showed private compression dominates at this
+scale.
+
+V4 is now reframed. The original premise (successful abstraction birth ⇒
+library maintenance problem) is falsified for the canonical V3 regime. The
+revised question: **under what conditions does the optimal representation cease
+to be a static library of independently compressed abstractions and begin to
+require lifecycle operations?** The V3 regime is one corner of the phase
+diagram (small library + stationary recurrence + cheap reacquisition + no
+retrieval pressure ⇒ KEEP + privately compress is near-optimal). Lifecycle
+pressure should appear only when one or more of these grow: library scale,
+environmental turnover, reacquisition cost, interference, retrieval cost.
+
+The next step is an **opportunity census**: keep the V3 learner frozen, generate
+libraries under different regimes, run offline structural oracles only, and
+classify which edit (KEEP, COMPRESS, FACTORIZE, RETIRE, RETAIN, FORK) the
+oracle would choose. A small phase diagram (N∈{64,128,256} lifetime, F∈{2,4,8}
+families, q∈{0,low,high} turnover, g∈{8,16,32,64} return-gap) on worlds 0–2
+could map the phase boundaries. There may be a **lifecycle phase transition** —
+none of the lifecycle operations matter until library scale exceeds some M*,
+meaning lifecycle complexity itself should be amortized (a small library
+doesn't need GC, deduplication, hierarchy, or retrieval indexing). Measuring
+M*_retrieval, M*_merge, M*_retention would be an excellent V4 contribution.
+
+The failed spec is preserved rather than rewritten: V4 original lifecycle
+specification — H14 redundancy gate failed; H14 obsolescence world failed to
+instantiate retention value; H15 factorization existence gate passed but
+matched-budget economic gate failed 9/10 and prospective acquisition recovered
+only 7.5%. The successor direction: "V4: When Does a Library Need a Lifecycle?"
+— studying the phase boundaries of self-restructuring, why and when a neural
+computational language needs an economy rather than merely a library.

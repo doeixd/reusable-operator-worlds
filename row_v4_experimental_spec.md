@@ -70,6 +70,43 @@ is working and tested; everything in the second is V4's job.
 
 ---
 
+> # V4 DEVELOPMENT GATE OUTCOME — 2026-08-19
+>
+> **No registered rung reached sealing eligibility. Seeds 400-429 were
+> never generated, inspected, or summarized, and remain sealed.**
+>
+> - **H14 redundancy.** Failed. At a contribution-relative tolerance no
+>   abstraction substitutes for another; compaction is net -1,180 /
+>   -2,393 / -1,377 nats on worlds 0-2. An earlier +2,928-nat pass was a
+>   tolerance artifact and is retracted in `PREDICTIONS.md`.
+> - **H14 obsolescence.** Failed to instantiate. The §2.2 dormancy pair's
+>   refusal control does not refuse: permanent and returning arms retire
+>   at indistinguishable times, because the learner re-promotes rather
+>   than reusing across the gap, so retention carries no option value. A
+>   follow-up retrieval-continuity world (gap 32-62, two returners, below
+>   the promotion cluster threshold) also failed to isolate the option.
+> - **H15 factorization.** Existence gate PASSED (rank-2 excess over an
+>   isotropic null of +15.7 / +26.2 / +27.3 points). Economic gate
+>   FAILED: against a matched-BUDGET private-compression baseline,
+>   coarser private quantization wins 9/10 development worlds. Prospective
+>   acquisition (leave-one-abstraction-out) recovers a mean 7.5% of the
+>   centre-only deficit.
+>
+> **Reading.** This is a positive statement about V3, not only a negative
+> one about V4: at this scale V3 produces a library with little
+> exploitable lifecycle slack — its abstractions are neither mutually
+> redundant, nor obsolete under a stationary environment, nor profitably
+> shared once the private-compression counterfactual is made fair. The
+> premise that successful birth implies a maintenance problem does not
+> hold here.
+>
+> **This document is preserved unrevised as the record of that outcome.**
+> The successor question is carried by
+> `row_v4r_experimental_spec.md` — *When Does a Library Need a
+> Lifecycle?* — which studies the phase boundaries at which each
+> structural edit becomes economically justified, rather than assuming
+> the edits are needed and building worlds in which they must fire.
+
 # 0. Charter, and what V3 left behind
 
 V3 closed with a sealed 5/5: an abstraction can be born. A learner whose

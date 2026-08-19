@@ -582,3 +582,26 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   premise for V4.1-as-compaction is unsupported; the open direction is
   V4.2 synthetic merge (refit a new abstraction covering several distinct
   contributions), not retiring copies that do not exist.
+- CONSTITUTIONAL, alongside "structural claims require functional
+  substitutability": every SHARING claim needs a matched-BUDGET
+  non-sharing alternative. "Shared beats unshared at full precision" and
+  "shared beats unshared at equal bits" are different claims and only
+  the second is evidence of reuse. V4.2's factorization gate passed the
+  first and failed the second 9/10 worlds -- coarser private
+  quantization of each atom beat a shared parameterized family at the
+  same bit budget. This orders the edit vocabulary by ambition,
+  KEEP < COMPRESS < SHARE/FACTORIZE < CREATE/FORK, and makes COMPRESS a
+  first-class operator that any sharing proposal must beat first.
+- V4's premise -- successful abstraction birth implies a maintenance
+  problem -- is FALSIFIED at this scale. All three rungs failed their
+  development gates and seeds 400-429 were never touched. This is a
+  positive statement about V3: its library has little exploitable
+  lifecycle slack. The successor question lives in
+  `row_v4r_experimental_spec.md`; `row_v4_experimental_spec.md` is
+  preserved unrevised with a gate-outcome banner, because the failure
+  history is what makes the revised question credible.
+- Before building another world in which an operator MUST fire, run an
+  offline opportunity census with the learner frozen: sweep regimes and
+  ask which edits have any oracle advantage at all. Two dormancy designs
+  were built and both failed to instantiate retention value -- a census
+  would have said so before the lifetimes ran.
