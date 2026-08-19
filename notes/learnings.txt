@@ -3,6 +3,16 @@
 
 So far, I think we’ve learned **eight fairly solid things**, along with several important limitations and a much clearer picture of what the deeper research question actually is.
 
+# What We’ve Learned So Far
+
+This note records the project's accumulating lessons. The original eight V1-era
+items below are kept, but several have since been **confirmed on sealed
+confirmatory worlds** (seeds 100–129 and 200–229), and a few attractive
+secondary stories were **falsified and retracted**. The later sections add the
+V2 sealed results, the falsifications, the selective-sharing outcome, and the
+current V3 substrate question. Where a numbered item was updated or retracted by
+later evidence, it is flagged inline.
+
 ## 1. ROW is a valid testbed for reusable computation
 
 The basic benchmark appears to work as intended.

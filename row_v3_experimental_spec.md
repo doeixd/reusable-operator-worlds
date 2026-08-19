@@ -165,6 +165,40 @@ testbed and log the failure in the predictions outcome ledger before
 proceeding; do not tune the promoter against a world that failed its
 gate.
 
+**GATE STATUS (run 2026-08-19): FAILED at the tested settings, and the
+failure reframes the section.** Residual separation by family is
++0.0007 (structureless control), +0.0055, +0.0127, +0.0173 across eta
+0 / 0.5 / 0.7 / 0.9 — monotone and 3/3 positive but far short of the
+registered bar, and operationally unusable: two-means partition
+recovery reaches 0.672 at eta 0.9 against 0.641 in the structureless
+control. The structure exists but lives in the ROUTES (separation
++0.2006 at eta 0.9, twelve times the residual figure; per-group route
+distributions differ by total variation 0.226 against 0.026 in the
+control). The basis carries 8 slots for 6 teacher primitives, and it
+spent its two spare slots absorbing the two hidden families, which the
+routes then reference.
+
+The premise of §2.1 as originally written — "cross-cutting structure
+that a task-invariant shared basis cannot absorb" — is therefore FALSE
+as stated. A task-invariant basis cannot absorb family structure into a
+single slot shared by all tasks, but an OVERCOMPLETE basis absorbs each
+family into its own slot and lets the reference code select it. That is
+the promotion operation, performed during wake by gradient descent, for
+the description-length reason V3 predicts: a route reference costs 192
+bits per task against 17,712 for a residual.
+
+**The corrected requirement on the testbed:** an explicit promotion
+operator can only earn its place where recurring structure is NOT
+addressable by the existing reference vocabulary. Capacity is the lever
+— with 8 hidden families against 2 spare slots, residual separation
+rises to +0.0374 (2.2x, consistent 3/3) while route separation falls to
++0.1147 and turns erratic. Promotion then becomes a capacity-ALLOCATION
+decision (which recurring structures deserve a slot) rather than a
+discovery problem, which is both the harder and the more realistic
+question. Every configuration tried in this search is logged in
+PROGRESS.md and the artifact tree per the §2.6 tuning rule; the testbed
+is frozen only when the gate passes on a learner's residuals.
+
 ## 2.2 Hierarchical worlds (H12)
 
 `HierarchicalWorld`: F_tau = G + F_family(tau) + epsilon_tau with
