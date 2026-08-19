@@ -878,6 +878,61 @@ recovered teacher module), which is exactly the LLM-relevant problem.
 
 ---
 
+# V3: abstraction birth demonstrated on development worlds
+
+## 24. The abstraction-birth phenomenon is now demonstrated
+
+V3 has demonstrated, on development worlds, the phenomenon it was designed to
+find: repeated private computation was converted into newly created shared
+computation (K=6→7), and the resulting abstraction subsequently made new
+learning cheaper. The conjunction is qualitatively different from anything in
+V1/V2:
+
+* **Structural migration (M2a):** D_task ↓, D_shared ↑, D_total ↓ — roughly a
+  70% task-bit reduction and ~57,000-nat two-part-code gain.
+* **Economic dominance (M2b):** J_promoted < J_unpromoted, and prediction also
+  improves (+982 lifetime nats) — "smaller AND better," not the usual
+  compression fidelity tradeoff.
+* **Prospective learning (M3):** on genuinely unseen related tasks,
+  L_adaptation ↓, with 8/8 future tasks independently selecting reuse — so the
+  new abstractions are part of the learner's hypothesis space for subsequent
+  learning, not merely post-hoc codecs.
+
+This is the first result in the project that is a miniature of the full
+mechanism rather than merely evidence consistent with it: experience → repeated
+local solutions → functional recurrence detection → new persistent shared
+computation → references from tasks → cheaper future learning. The
+information flow is now correct. Treat worlds 3–9 as an internal holdout (no
+more mechanism changes unless something is broken) and freeze ambitious
+preregistered intervals, not merely "positive."
+
+## 25. Abstraction may pay twice: compression and denoising
+
+The surprising simultaneous D↓ *and* L↓ (compression usually costs fidelity)
+has a leading hypothesis: promotion acts as a **regularizer** — many noisy
+private residuals are replaced by a better-estimated shared family function, so
+pooling across tasks denoises. This is testable by comparing the promoted A
+against the median private residual on a large oracle evaluation set; if A is
+closer to the teacher family function, promotion is denoising repeated
+estimates. If confirmed, abstraction pays twice: once through amortized
+description length, once through improved estimation from pooled evidence.
+
+## 26. Refusal is the weakest link — but abstraction formation may be speculative
+
+Structured worlds promote 5.0 / refuse 4.3; structureless 3.3 / 6.3 —
+discrimination, not a clean criterion. Do not tune refusal away (the danger of
+polishing until the control reaches zero, after four world redesigns). Instead
+measure what false abstractions are: reuse count, future-nat savings, lifetime
+net value. The cleaner usage separation (31.3/40 structured vs 15.0/40
+structureless) hints that creation can be noisy while valuable abstractions
+survive repeated reuse — i.e., abstraction formation should be **speculative,
+with retention decided later** (a CREATE/DELETE lifecycle). The "5 abstractions
+for 2 families" overproduction may organically motivate MERGE once pairwise
+functional equivalence among promoted abstractions is diagnosed — do not add
+MERGE before confirmation, just diagnose it.
+
+---
+
 # Current bottom line
 
 The cleanest statement the evidence currently supports is:
@@ -890,17 +945,18 @@ The cleanest statement the evidence currently supports is:
 > alignment, and cost of use. The learner can discover where sharing belongs
 > (primitive by primitive, 30/30) but cannot yet encode that allocation
 > compactly under a two-part code (0/30) — allocation is solved, compression
-> is not. Discreteness itself is not expensive; program inference is. The
-> current open question is whether repeated continuous specialization can be
-> promoted into a cheaper shared representation while preserving its
-> predictive advantage — and that requires a representation whose zero state
-> is the computational identity.
+> is not. Discreteness itself is not expensive; program inference is. On
+> development worlds, V3 has now demonstrated the missing step: repeated
+> private computation can be promoted into newly created shared computation
+> that reduces total description length (~70%), preserves or improves
+> prediction, and makes subsequent related learning cheaper — though refusal
+> remains imperfect and awaits worlds 3–9 as internal holdout before sealed
+> confirmation.
 
-The next step is **not more architectural complexity**. It is the V3 promotion
-experiment on a correctly-coded (gated or H9-fallback) wake substrate, with
-refusal controls, under both predictive and description-length accounting. The
-immediate prerequisite is the **saturated-library testbed** with the
-functional-substitutability validity gate (family fit > global > zero,
-leave-one-out confirmed) and the oracle J*(K+1) < J*(K) established, so that
-PROMOTE has something real to discover — not a world where spare shared capacity
-silently absorbs the recurrence into routes.
+The next step is **not more architectural complexity**. It is to run V3
+exactly as-is on worlds 3–9 (no mechanism changes), freeze ambitious
+preregistered intervals for the three independent sealed verdicts (M2a
+structural migration, M2b economic dominance, M3 prospective learning), and
+only then open seeds 300–329. The recursive question — can abstractions born
+this way become raw material for higher-order abstraction? — is the natural
+sequel once the base case is confirmed.

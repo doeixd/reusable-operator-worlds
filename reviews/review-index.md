@@ -429,3 +429,35 @@ the **learner's own computational language** (not a recovered teacher module) �
 which is exactly the LLM-relevant problem. Keeps the proposal/validation/audit
 probe discipline and adds global-fit to the standard promotion diagnostic;
 suggests leave-one-out transfer as a clean prospective gate.
+
+### [reviewer-feedback-24.txt](reviewer-feedback-24.txt)
+The first review to declare **V3 has demonstrated its target phenomenon on
+development worlds** — not just evidence consistent with the broader vision, but
+"the first result… a miniature version of the full mechanism." The conjunction
+D_task↓, D_shared↑, D_total↓ (~70% bit reduction, ~57k-nat two-part gain) while
+L_lifetime↓ (+982 nats) and L_adaptation↓ on unseen related tasks (8/8 future
+tasks selecting reuse) is qualitatively different from V1/V2: repeated private
+computation was converted into newly created shared computation, and the
+abstraction subsequently made new learning cheaper. Flags the biggest remaining
+weakness as **refusal** (structured 5.0 promote / 4.3 refuse vs structureless
+3.3 / 6.3 — discrimination but not a clean criterion): do not tune it away, but
+instead measure what the false abstractions are (reuse count, future-nat
+savings, lifetime net value) — the cleaner usage separation (31.3/40 vs 15.0/40)
+hints that abstraction formation should be speculative with retention decided
+later (a natural CREATE/DELETE lifecycle motivating V4). Asks to scrutinize the
+"5 abstractions for 2 families" result via pairwise functional equivalence
+(which may organically motivate MERGE), and to audit the reuse procedure for
+no-lookahead, matched-baseline compute, retained reference costs, and
+selection/search not smuggled into description. Identifies the surprising
+"smaller AND better" result (compression usually costs fidelity) as likely a
+**regularization/denoising** effect — abstraction pays twice, once through
+amortized description and once through improved estimation from pooled evidence
+(testable by comparing the promoted A against the median private residual).
+Separates H11 into three independent sealed verdicts (M2a structural migration,
+M2b economic dominance J_promoted < J_unpromoted, M3 prospective learning
+L_future,promoted < L_future,unpromoted) so a mixed outcome stays interpretable.
+Demands ambitious preregistered intervals (not just "positive") on worlds 3–9
+treated as internal holdout, predicts M2 very strong / M3 positive but
+noisier / refusal useful but not solved, and frames the V1→V2→V3-pre→V3
+progression as a coherent ladder ending in the recursive question: can
+abstractions born this way become raw material for higher-order abstraction?

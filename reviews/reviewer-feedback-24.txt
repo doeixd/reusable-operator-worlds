@@ -1,0 +1,631 @@
+This is the first point where I’d say **V3 has demonstrated the phenomenon it was designed to find on development worlds**.
+
+The important result is not merely the 70% bit reduction. It is the conjunction:
+
+[
+\boxed{
+D_{\text{task}}\downarrow,\quad
+D_{\text{shared}}\uparrow,\quad
+D_{\text{total}}\downarrow
+}
+]
+
+while simultaneously:
+
+[
+\boxed{
+L_{\text{lifetime}}\downarrow
+}
+]
+
+and then, on genuinely unseen related tasks:
+
+[
+\boxed{
+L_{\text{adaptation}}\downarrow.
+}
+]
+
+That is qualitatively different from anything in V1/V2. It is no longer “sharing is useful” or “the learner allocates sharing sensibly.” It is:
+
+> **Repeated private computation was converted into newly created shared computation, and the resulting abstraction subsequently made new learning cheaper.**
+
+That is the core mechanism of the broader research program.
+
+But before sealed confirmation, I would push quite hard on a few things.
+
+### The biggest remaining weakness is refusal
+
+Structured:
+
+[
+5.0\text{ promotes},\quad4.3\text{ refuses}
+]
+
+versus structureless:
+
+[
+3.3\text{ promotes},\quad6.3\text{ refuses}.
+]
+
+That's discrimination, but not yet a clean criterion.
+
+I would **not tune this away now**. The danger of polishing refusal until the control reaches zero is obvious after four world redesigns.
+
+Instead, measure what those false abstractions actually are.
+
+For every promoted abstraction in the control, ask:
+
+[
+\text{How often is it subsequently reused?}
+]
+
+[
+\text{How many future nats does it save?}
+]
+
+[
+\text{What is its lifetime net value?}
+]
+
+My guess is that the more important distinction may be:
+
+[
+\boxed{
+\text{creation can be noisy; valuable abstractions survive repeated reuse.}
+}
+]
+
+You already see a much cleaner usage separation:
+
+[
+31.3/40
+]
+
+versus:
+
+[
+15.0/40.
+]
+
+That hints at a future CREATE/DELETE lifecycle naturally solving false-positive births.
+
+If control abstractions are born but subsequently receive little reuse, that's not fatal to the architecture at all. It says abstraction formation should be **speculative**, with retention decided later.
+
+That would directly motivate V4.
+
+---
+
+## I would scrutinize the “5 abstractions for 2 families” result too
+
+You know the world has two recurring families, yet you're getting roughly five promotions.
+
+Possibilities:
+
+1. the same family is fragmented into several behaviorally different context-specific abstractions;
+2. promotion happens at different stages of learning and later abstractions supersede earlier ones;
+3. the fixed rank-2 representation cannot capture the whole family, so multiple abstractions collectively approximate it;
+4. the promoter is simply overproducing.
+
+These have very different implications.
+
+Run pairwise functional equivalence among promoted abstractions:
+
+[
+d(A_i,A_j).
+]
+
+And interventionally ask whether replacing (A_i) with (A_j) changes behavior.
+
+You may discover:
+
+[
+A_1\sim A_3\sim A_5.
+]
+
+If so, V3 has immediately produced the empirical motivation for:
+
+[
+\operatorname{MERGE}.
+]
+
+That would be a wonderfully organic handoff to V3.2/V4:
+
+> PROMOTE works, but abstraction birth produces duplicate descendants because there is no consolidation operation yet.
+
+Don't add MERGE before confirmation. Just diagnose it.
+
+---
+
+# The future-learning result deserves special attention
+
+This is arguably more important than the 70% compression.
+
+The promoted system gets:
+
+[
++982
+]
+
+lifetime nats on average, and unseen future tasks improve:
+
+[
+0.02261\rightarrow0.01856
+]
+
+etc., with all:
+
+[
+8/8
+]
+
+future tasks independently selecting reuse.
+
+That means the new abstractions aren't merely post-hoc codecs.
+
+They have become part of the learner's **hypothesis space for subsequent learning**.
+
+That is M3.
+
+I'd now add one very diagnostic curve on future tasks:
+
+[
+\Delta L(n)
+===========
+
+## L_{\rm unpromoted}(1:n)
+
+L_{\rm promoted}(1:n).
+]
+
+Plot it over:
+
+[
+n=1,\ldots,32.
+]
+
+I want to know *when* reuse helps.
+
+Does the advantage appear immediately?
+
+```text id="l919x2"
+examples
+1   promoted already much better
+2
+4
+8
+16
+32
+```
+
+Then the abstraction acts like a strong prior.
+
+Or does the advantage emerge only after 10–20 examples because the learner needs time to identify the correct abstraction?
+
+Then **abstraction retrieval** is still expensive.
+
+That's extremely useful for Phase III.
+
+---
+
+# Audit the reuse procedure very carefully
+
+This is probably the most important technical audit before sealed confirmation.
+
+You say:
+
+> “at a fixed point in its own examples a task may select any existing abstraction or none.”
+
+Good.
+
+Make absolutely sure that:
+
+### 1. Selection uses only information available so far
+
+At example (t):
+
+[
+A_t
+===
+
+f(D_{1:t-1})
+]
+
+and then example (t) is scored before it can influence the decision used to predict itself.
+
+No lookahead.
+
+### 2. The baseline receives matched adaptation opportunity
+
+If promoted gets an additional candidate-selection/refinement operation at some checkpoint, the unpromoted learner needs the analogous compute/optimization opportunity where applicable.
+
+You don't necessarily need matched FLOPs for the primary result because (\mu=0), but you should know whether the prediction improvement arises from:
+
+[
+\text{better representation}
+]
+
+versus:
+
+[
+\text{extra optimization steps}.
+]
+
+A cheap control is:
+
+> Give the unpromoted learner the same number of optimization steps but no abstraction library.
+
+### 3. Reference costs are retained
+
+Every reused abstraction must pay:
+
+[
+D(\text{reference}).
+]
+
+You've been careful about this already, but this is now load-bearing.
+
+### 4. Selection/search isn't being smuggled into description
+
+You've charged (\log_2M) for candidate selection and log (C_{\rm search}) separately. Good. Preserve that distinction.
+
+---
+
+# There is one surprising result I would investigate
+
+The two-part gain is enormous:
+
+[
+\sim57,000\text{ nats}.
+]
+
+But prediction also improves:
+
+[
+\sim982\text{ nats}.
+]
+
+Normally compression introduces some fidelity tradeoff.
+
+Here you get:
+
+[
+\text{smaller AND better}.
+]
+
+Why?
+
+My leading hypothesis is that promotion is acting as a **regularizer**:
+
+[
+\text{many noisy private residuals}
+\rightarrow
+\text{better-estimated shared family function}.
+]
+
+Pooling across tasks gives you a better estimator.
+
+That's important because abstraction is doing two things:
+
+### Compression
+
+[
+D\downarrow.
+]
+
+### Statistical denoising
+
+[
+L\downarrow.
+]
+
+This could become a central theoretical result:
+
+[
+\boxed{
+\text{abstraction pays twice:
+once through amortized description,
+and once through improved estimation from pooled evidence.}
+}
+]
+
+You can test this.
+
+Compare the promoted family function against individual residual functions on a large oracle evaluation set.
+
+If the promoted (A) is actually **closer to the teacher family function** than the median private residual, promotion is denoising repeated estimates.
+
+That would explain the simultaneous improvement elegantly.
+
+---
+
+# I'd also measure where the +982 nats comes from
+
+Split tasks into:
+
+[
+\text{before abstraction exists}
+]
+
+and:
+
+[
+\text{after abstraction exists}.
+]
+
+Prediction should be:
+
+[
+\Delta L_{\rm before}\approx0
+]
+
+and:
+
+[
+\Delta L_{\rm after}>0.
+]
+
+Even better, align all worlds at the first promotion event:
+
+[
+t=0=\text{abstraction birth}.
+]
+
+Then plot cumulative advantage.
+
+You want the picture:
+
+```text id="ypmsn3"
+prediction advantage
+      |
+      |             /
+      |           /
+      |         /
+------+--------/---------- lifetime
+             birth
+```
+
+That would visually connect structural change to prospective return.
+
+It could become one of the paper's signature figures.
+
+---
+
+# The ten-world extension is critical now
+
+You have redesigned heavily using worlds 0–2.
+
+That is fine—they are development worlds.
+
+But I would now treat:
+
+[
+3\ldots9
+]
+
+almost like an internal holdout.
+
+**No more mechanism changes unless something is actually broken.**
+
+Run exactly what you have.
+
+I'd want to see distributions for:
+
+* family-vs-global LOO advantage;
+* number of promotions;
+* false promotion count;
+* reuse count;
+* (\Delta D_{\rm task});
+* (\Delta D_{\rm shared});
+* (\Delta D_{\rm total});
+* lifetime (\Delta L);
+* future 32-shot (\Delta)NMSE;
+* future adaptation-nat savings.
+
+And especially correlations.
+
+For example:
+
+[
+\text{LOO transfer strength}
+\quad\text{vs}\quad
+\text{future-task benefit}.
+]
+
+If that relationship is strong, your prospective gate has an actual mechanistic basis.
+
+---
+
+# Do not make the sealed intervals too forgiving
+
+This result is currently huge.
+
+That means the confirmation plan can afford to be ambitious.
+
+For H11.1, don't merely preregister:
+
+[
+D_{\rm total}<0.
+]
+
+Freeze a substantial reduction interval.
+
+Development says approximately:
+
+[
+70%.
+]
+
+Even allowing for shrinkage, a sealed lower bound like 40–50% may be defensible depending on worlds 3–9.
+
+Similarly for H11.2:
+
+[
+\Delta J\sim +57\text{k nats}.
+]
+
+Don't preregister “positive.”
+
+Use a parameter interval derived from all ten dev worlds.
+
+Same for H11.3.
+
+This is where your V2 discipline paid off enormously. Repeat it.
+
+---
+
+# I would separate H11 into three independent sealed verdicts
+
+Even though they're jointly the grand result:
+
+### M2a — structural migration
+
+[
+D_{\rm task}\downarrow,\quad
+D_{\rm shared}\uparrow,\quad
+D_{\rm total}\downarrow.
+]
+
+### M2b — economic dominance
+
+[
+J_{\rm promoted}<J_{\rm unpromoted}.
+]
+
+### M3 — prospective learning
+
+[
+L_{\rm future,promoted}<L_{\rm future,unpromoted}.
+]
+
+Then an interesting mixed sealed outcome remains interpretable.
+
+For example:
+
+* M2 passes, M3 fails = compressor, not abstraction learner.
+* M3 passes, M2 fails = useful transfer representation, not efficient language.
+* both pass = full V3 claim.
+
+Right now development says **both pass**.
+
+---
+
+# What I think you've actually discovered
+
+The progression from V1 through this result is now surprisingly coherent.
+
+### V1
+
+Repeated function creates measurable economic value:
+
+[
+\Delta L\approx ar+b.
+]
+
+### V2
+
+Gradient descent can discover where to allocate shared vs private computation:
+
+[
+r_k\uparrow
+\Rightarrow
+\text{specialization}_k\downarrow.
+]
+
+But it doesn't turn that into cheap structure.
+
+### V3 precursor
+
+If cheap shared capacity already exists, gradient descent directly puts recurring computation there.
+
+### V3 proper
+
+If shared capacity is **saturated**, recurring private computation can justify the creation of a new shared function, which then:
+
+[
+\text{replaces private bits}
+]
+
+and:
+
+[
+\text{accelerates subsequent learning}.
+]
+
+That is a very nice ladder.
+
+---
+
+# And this changes my confidence in the grand vision
+
+This is the first result you've shown me that I'd describe as a miniature version of the full mechanism rather than merely evidence consistent with it.
+
+Because you now literally have:
+
+[
+\boxed{
+\text{experience}
+\rightarrow
+\text{repeated local solutions}
+\rightarrow
+\text{functional recurrence detection}
+\rightarrow
+\text{new persistent shared computation}
+\rightarrow
+\text{references from tasks}
+\rightarrow
+\text{cheaper future learning}.
+}
+]
+
+That's essentially the basic loop we've been talking about for months.
+
+Obviously, it's still a highly engineered synthetic setting with a hand-designed PROMOTE operator and a known-size candidate family. But **the information flow is now correct**.
+
+That's important.
+
+---
+
+## What I predict on worlds 3–9
+
+My guess is the spectacular 70% storage saving will survive strongly.
+
+The prediction advantage will probably be noisier:
+
+[
++982\text{ nats}
+]
+
+may shrink substantially because it's a secondary statistical effect.
+
+Future adaptation should stay positive but with more variance.
+
+And refusal will probably remain imperfect.
+
+If I had to guess the likely 10-world story:
+
+[
+\boxed{\text{M2 very strong}}
+]
+
+[
+\boxed{\text{M3 positive but smaller/noisier}}
+]
+
+[
+\boxed{\text{refusal useful but not solved}}
+]
+
+That would still be an excellent V3.
+
+And if all three remain nearly as clean across 0–9, then I would freeze the confirmation plan and **touch nothing else** before seeds 300–329.
+
+At that point the most scientifically interesting next question really does become recursive:
+
+[
+\boxed{
+\textbf{Can abstractions born this way themselves become the raw material for higher-order abstraction?}
+}
+]
+
+Because V3 would have established the base case.

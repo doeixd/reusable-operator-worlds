@@ -205,6 +205,45 @@ damages group 0 by +0.00419 against group 1's +0.00003; world 1 slot 5
 reverses the asymmetry). Shared functional objects addressed by
 family-specific references, built during wake.
 
+**FROZEN TESTBED (2026-08-19), after four redesigns.** Configuration:
+K = 6 shared slots saturated on the six base primitives for the first 16
+tasks; from task 16 the basis is FROZEN and post-onset tasks call a
+genuinely NEW primitive, drawn independently of the base library, at a
+FIXED program position, with 2 hidden task-group families; canonical rho
+profile; 8 held-out future tasks per world. Each element is there because
+its absence broke a previous testbed:
+  * saturate and freeze, because an overcomplete basis absorbs families
+    into spare slots and references them through routes;
+  * a NEW primitive rather than a perturbation, because a perturbation of
+    existing primitives is approximable by the frozen library and leaves
+    the residual holding a negligible correction (measured: zeroing every
+    residual cost only 0.0004 NMSE more than the best family abstraction);
+  * a FIXED position, because varying it leaves family members' residuals
+    at different steps, so a shared abstraction averages incompatible
+    functions (capture 9% against 53%).
+
+**THE VALIDITY GATE, RESTATED OPERATIONALLY.** The original criterion —
+within-family functional similarity exceeding cross-family by a factor of
+3 — is retired. It is an indirect proxy and it certified two worlds in
+which promotion degenerated into deletion. The gate is now three
+properties, measured together by a four-way LEAVE-ONE-OUT comparison
+(private residual / family abstraction / global abstraction / zero), with
+every abstraction fitted WITHOUT the task it is substituted into:
+
+    load-bearing?     removing the private computation must cost something
+    compressible?     one fitted shared function recovers much of it
+    family-specific?  it must beat a single global abstraction
+
+Frozen testbed result, 3/3 worlds: private 0.0127, family 0.0179, global
+0.0205, zero 0.0224 — family capture 46.5 / 58.0 / 49.3 per cent against
+global 19.8 / 22.6 / 23.7, mean advantage +29.3 points, with an
+on-trajectory probe agreeing with the common-domain probe to within half a
+point. Abstractions must be fitted FUNCTIONALLY (gradient descent on
+behavioral distance), never by averaging parameters: rank-2 innovations
+are gauge-equivalent under rotation and scaling of (U, V), so a parameter
+mean of the same function is not that function (capture 11.9% against
+53.4%).
+
 **The corrected requirement on the testbed:** an explicit promotion
 operator can only earn its place where recurring structure is NOT
 addressable by the existing reference vocabulary. Capacity is the lever

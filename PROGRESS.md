@@ -1359,3 +1359,22 @@ Milestone 007 diagnostics and figures, followed by Milestone 008 reuse sweep.
   reusing against the control's 3.3 and 15.0.
 - Extending to development worlds 3-9 before setting any sealed interval,
   so the confirmation plan is frozen on ten worlds rather than three.
+
+# 2026-08-19 — V3 development complete: H11 holds 10/10 on every prediction
+
+- Ten-world development set on the frozen testbed, promoted against the
+  identical unpromoted learner:
+    loss gain          mean +1,350 nats,  range [+761, +2,513],  10/10
+    two-part gain      mean +55,697 nats, range [+46,127, +64,840], 10/10
+    D_total reduction  mean 63.6%,        range [52.6%, 74.3%],  10/10
+    library size       mean 5.3,          range [3, 7]
+    tasks reusing      mean 31.8 of 40,   range [22, 39]
+- H11.3 future block, ten worlds: 32-shot NMSE improvement mean +0.00310,
+  range [+0.00172, +0.00438], 10/10 positive; adaptation nats improve by a
+  mean +16, 10/10 positive; 8 of 8 future tasks reuse the library in nine
+  worlds and 7 of 8 in the tenth.
+- So all three mandatory H11 predictions hold unanimously on development:
+  migration (H11.1), both currencies (H11.2), prospective value (H11.3).
+  The promoted learner is the first in the program to win prediction and
+  description length at the same time, and it does so with shared capacity
+  it created rather than capacity handed to it.
