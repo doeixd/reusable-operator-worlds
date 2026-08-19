@@ -370,6 +370,26 @@ sleep, fired or refused.
   failed V1/V2 MDL gate: those pruned SHARED library components during
   acquisition; this asks whether a TASK needs an innovation beyond what
   is already shared, which is the H9 question.
+- **A per-tensor-type shared prior collapses winner-take-all, and it
+  took the WRONG tensor (measured 2026-08-19).** Because one prior scale
+  governs all coordinates of a tensor type, whichever type concentrates
+  first gets a tiny prior, whose mu/s^2 gradient then locks it at zero
+  permanently. On canonical mixed worlds the ROUTE tensor collapsed in
+  2 of 3 worlds: mean route code 7.4 and 4.6 bits against ~550 bits of
+  residual, route prior driven to 0.008 and 0.006, and the mixture
+  sitting at exactly uniform (0.1256, 0.1253, where uniform is 0.125 and
+  the frozen baseline reaches 0.374, 0.367). World 2 escaped
+  (route prior 0.306, 112 route bits, mixture 0.205), which shows this is
+  a symmetry-breaking accident rather than a property of the world.
+  The consequence is backwards for description length: routes are 24
+  scalars that SELECT AMONG SHARED OPERATORS — the cheap reference
+  mechanism PROMOTE exists to strengthen — while residuals are 2,214
+  private scalars, and the code abandoned the former to pay for the
+  latter. Two design consequences carry into the gated successor:
+  a reference-style code needs its null state to be "reuse the shared
+  operator" rather than "uniform mixture over all of them", and priors
+  coupled at tensor-type granularity make collapse an all-or-nothing
+  event for a whole mechanism.
 - **Charge the KL as a mean over the tasks present, matching the data
   term's own weighting (audited 2026-08-19,
   `row.experiments.audit_kl_charge`).** Replay re-exposes completed

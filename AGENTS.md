@@ -564,3 +564,4 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
   correct refusal-to-encode is indistinguishable from a collapse bug.
   Smoke-test with `description_beta: 0.0` instead, which must reproduce
   the frozen non-variational baseline exactly.
+- When auditing online objectives, count relative gradient/objective pressure, not raw regularizer appearances.
