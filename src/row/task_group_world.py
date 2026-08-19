@@ -45,6 +45,8 @@ class TaskGroupSpec:
         resample_future: bool = False,
         family_onset: int = 0,
         new_primitive_families: bool = False,
+        dormancy: tuple[int, int] | None = None,
+        dormancy_returns: bool = True,
     ) -> None:
         if groups < 1:
             raise ValueError("groups must be positive")
@@ -83,6 +85,35 @@ class TaskGroupSpec:
         # A new primitive cannot be expressed by a frozen library, so the
         # residual becomes load-bearing AND shared within the family.
         self.new_primitive_families = bool(new_primitive_families)
+        # V4 real-options test (reviewer-feedback-26). `dormancy = (a, b)`
+        # suspends the family primitive for tasks in [a, b): the regime
+        # that motivated an abstraction goes quiet. If `dormancy_returns`
+        # the regime resumes at b and a rational lifecycle must RETAIN
+        # through the gap; if not, the regime is gone for good and the
+        # abstraction must eventually be retired. The two worlds are
+        # identical up to task b, so nothing before that point can
+        # distinguish them — retention has to be an expectation about the
+        # future, not a reading of the past.
+        if dormancy is not None:
+            start, end = dormancy
+            if not 0 <= start < end:
+                raise ValueError("dormancy must be a (start, end) with start < end")
+        self.dormancy = dormancy
+        self.dormancy_returns = bool(dormancy_returns)
+
+    def family_active(self, task_index: int) -> bool:
+        """Is the family primitive in play for this task?"""
+
+        if task_index < self.family_onset:
+            return False
+        if self.dormancy is None:
+            return True
+        start, end = self.dormancy
+        if task_index < start:
+            return True
+        if task_index < end:
+            return False
+        return self.dormancy_returns
 
     def as_dict(self) -> dict[str, object]:
         return {
@@ -93,6 +124,8 @@ class TaskGroupSpec:
             "resample_future": self.resample_future,
             "family_onset": self.family_onset,
             "new_primitive_families": self.new_primitive_families,
+            "dormancy": list(self.dormancy) if self.dormancy else None,
+            "dormancy_returns": self.dormancy_returns,
         }
 
 
@@ -132,7 +165,7 @@ def _task_group_library(
             private.normal(size=(config.state_dim, config.teacher_rank))
         )
         private_b = private.normal(scale=0.2, size=config.teacher_rank)
-        if spec.eta > 0.0 and (resampled or task_index >= spec.family_onset):
+        if spec.eta > 0.0 and (resampled or spec.family_active(task_index)):
             # A distinct stream component, not a sentinel block index:
             # SeedSequence rejects negative components.
             family = (
@@ -235,7 +268,7 @@ def generate_task_group_world(
             resampled=resampled,
         )
         if spec.new_primitive_families and (
-            resampled or task_index >= spec.family_onset
+            resampled or spec.family_active(task_index)
         ):
             group = assignment[task_index]
             task_library = (*task_library, family_primitives[group])

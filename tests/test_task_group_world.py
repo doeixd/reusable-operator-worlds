@@ -136,3 +136,55 @@ class TaskGroupWorldTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DormancyWorldTest(unittest.TestCase):
+    """The V4 real-options world: a regime goes quiet, then returns or does not."""
+
+    def _world(self, returns: bool):
+        config = _config()
+        spec = TaskGroupSpec(
+            groups=2,
+            eta=0.9,
+            future_tasks=0,
+            family_onset=4,
+            new_primitive_families=True,
+            dormancy=(8, 12),
+            dormancy_returns=returns,
+        )
+        return generate_task_group_world(config, CANONICAL_PROFILE, spec)
+
+    def test_the_two_arms_are_identical_until_the_regime_would_return(self) -> None:
+        returning = self._world(True)
+        permanent = self._world(False)
+        # Nothing observable before the end of dormancy separates them, so
+        # retaining an abstraction through the gap must be an expectation
+        # about the future rather than a reading of the past.
+        for index in range(12):
+            self.assertTrue(
+                np.array_equal(
+                    returning.tasks[index].train_y, permanent.tasks[index].train_y
+                ),
+                f"task {index} differs before the regime could return",
+            )
+        differs = any(
+            not np.array_equal(
+                returning.tasks[i].train_y, permanent.tasks[i].train_y
+            )
+            for i in range(12, len(returning.tasks))
+        )
+        self.assertTrue(differs)
+
+    def test_the_family_primitive_is_absent_during_dormancy(self) -> None:
+        world = self._world(True)
+        spec = world.task_group_spec
+        self.assertFalse(spec.family_active(2))    # before onset
+        self.assertTrue(spec.family_active(5))     # active
+        self.assertFalse(spec.family_active(9))    # dormant
+        self.assertTrue(spec.family_active(13))    # returned
+        gone = self._world(False).task_group_spec
+        self.assertFalse(gone.family_active(13))   # never returns
+
+    def test_dormancy_bounds_are_validated(self) -> None:
+        with self.assertRaises(ValueError):
+            TaskGroupSpec(eta=0.9, dormancy=(12, 8))

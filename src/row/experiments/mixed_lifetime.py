@@ -83,6 +83,19 @@ def main() -> None:
     parser.add_argument("--promotion-epsilon", type=float, default=0.02)
     parser.add_argument("--new-primitive-families", action="store_true")
     parser.add_argument(
+        "--dormancy",
+        type=int,
+        nargs=2,
+        default=None,
+        metavar=("START", "END"),
+        help="V4 real-options world: suspend the family primitive in [START, END)",
+    )
+    parser.add_argument(
+        "--dormancy-permanent",
+        action="store_true",
+        help="the dormant regime never returns (the DELETE arm)",
+    )
+    parser.add_argument(
         "--updates-per-example",
         type=int,
         default=None,
@@ -174,6 +187,8 @@ def main() -> None:
             resample_future=args.resample_future,
             family_onset=args.family_onset,
             new_primitive_families=args.new_primitive_families,
+            dormancy=tuple(args.dormancy) if args.dormancy else None,
+            dormancy_returns=not args.dormancy_permanent,
         )
         if args.task_group_eta is not None
         else None

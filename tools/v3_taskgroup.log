@@ -237,3 +237,12 @@ KeyError: 'promoting'
 14:06:03 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_1\shared_residual
 14:06:03 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_2\shared_residual
 14:06:03 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_3\shared_residual
+14:06:59 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16_newprim_u2\world_0\shared_residual
+14:06:59 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16_newprim_u2\world_1\shared_residual
+14:08:07 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_4\shared_residual
+14:08:07 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_5\shared_residual
+14:08:07 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_6\shared_residual
+14:08:07 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_7\shared_residual
+14:09:06 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16_newprim_u2\world_2\shared_residual
+14:09:06 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_frozen16_newprim_u2\world_3\shared_residual
+14:09:31 done C:\Users\Patrick\Downloads\llm\artifacts\v3_taskgroup\eta0.9_k6_onset16_newprim\world_8\shared_residual
