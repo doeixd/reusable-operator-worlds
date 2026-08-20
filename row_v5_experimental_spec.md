@@ -34,7 +34,8 @@ one form rather than two, the 8-bit horizon rows are marked as
 reference arithmetic rather than scoreable cells, H19 is described as
 confirmed ON THE D-ARM with the rung still partial, and the stale
 `measured_r` instrument, the retired rank-4-cannot-load branch and the
-superseded B1 world are cleared. Section numbering, decision ordering
+stale B1 world description are cleared (B1 is now the S0 return-value
+gain, the primary s-arm). Section numbering, decision ordering
 and inheritance attribution corrected.
 
 **Revision 4 (2026-08-20) incorporates reviews 46 and 47**, both of
@@ -377,10 +378,26 @@ Already built and usable (do not reinvent):
 To be built before the corresponding rung is tuned:
 
     B0  residual_rank cap lift         allow 1, 2, 4; default 2
-    B1  RETIRED, superseded by W-H19-S0 (return-value gain): the
-        s-only world is no longer built as a separate generator
+    B1  return-value gain (S0)         teacher applies y = f_base(x)
+                                       + g*A(x) to RETURNING tasks
+                                       only, g in {0.5, 1.0, 1.5};
+                                       gain takes effect strictly
+                                       after the gap closes, so the
+                                       abstraction's birth is
+                                       untouched. Must assert
+                                       byte-identity of the retained
+                                       arm's abstraction tensors
+                                       across g, and D*(A) constant
+                                       to 2%. This is the primary
+                                       s-arm and the first thing
+                                       built; it replaces the
+                                       earlier "s-only world", which
+                                       varied s by changing the
+                                       family rather than its payoff.
     B2  r_meta generator               separately fingerprinted;
-                                       measured-recurrence diagnostic
+                                       R_LOO shared-subspace
+                                       diagnostic (not pairwise
+                                       correlation)
     B3  (F, m) scale control           N ~= N_base + F*m; m held fixed
                                        when F moves
     B4  independent-compression +      Gate 2/3 of FACTORIZE; leave-one-
@@ -1573,7 +1590,8 @@ A rung is complete when all of the following hold. An agent should
 not advance on a partial verdict.
 
 **V5.1 LAW**
-1. B0 done (rank-4 loads).
+1. B0 done (rank-4 loads); B1 built (S0 return-value gain in the
+   teacher, with its byte-identity and D*-invariance assertions).
 2. W-H19 validity holds on 0–2 at ranks 1, 2, 4 with a grid that
    brackets each predicted crossing.
 3. Dual D_8bit / D* report; s_bar by rank; exclusions listed.
