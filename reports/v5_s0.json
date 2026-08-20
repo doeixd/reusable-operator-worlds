@@ -1,0 +1,24 @@
+{
+  "1.0": {
+    "gain": 1.0,
+    "slots": 12,
+    "rows": [
+      {
+        "H_R": 16,
+        "n": 1,
+        "c_reacquire": 1009.754158474318,
+        "s_bar": 63.10963490464488
+      }
+    ],
+    "s_bar": 63.10963490464488,
+    "excluded_post_gap_births": 0,
+    "excluded_pre_intervention_leak": 0,
+    "signatures": {
+      "N56_world500": "14871ec578bca4a5"
+    },
+    "predicted_8-bit": 17.397424904547254,
+    "brackets_8-bit": false,
+    "predicted_D*": 8.481244640966784,
+    "brackets_D*": false
+  }
+}

@@ -1,1 +1,12 @@
 10:42:14 START 2 cells gains=[1.0] slots=[12] totals=[56] jobs=1
+10:45:19 END done=2 failed=0 skipped=0
+10:46:13 START 120 cells gains=[0.5, 1.0, 1.5] slots=[12] totals=[56, 72] jobs=5
+10:47:55 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N56_retained\world_502\lifecycle: 260, in sleep
+    clusters = self._cluster(functions, (k,))
+  File "C:\Users\Patrick\AppData\Local\Programs\Python\Python314\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "C:\Users\Patrick\Downloads\llm\src\row\models\promoting_models.py", line 157, in _cluster
+    distances = ((data[:, None, :] - centers[None, :, :]) ** 2).sum(-1)
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^~~
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 3.38 MiB for an array with shape (24, 3, 12288) and data type float32
+
