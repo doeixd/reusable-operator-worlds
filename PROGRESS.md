@@ -2336,3 +2336,31 @@ because the teacher's operators share hidden features by construction.
 A correct G2 needs functional-effect accounting at matched budget;
 building it in a hurry is how V4.2 produced a sharing claim that passed
 at full precision and failed at equal bits.
+
+# 2026-08-20 — H20b G2: the schema economy exists, the learner misses it
+
+`src/row/experiments/audit_learned_schema.py`, report
+`reports/v5_learned_schema.json`. Schema fitted in effect space
+(gauge-free, since two learned atoms computing the same function can
+have unrelated 198-vectors) and charged in parameter space; uncovered
+members pay full private price, so FACTORIZE is never flattered by an
+invented leftover code.
+
+    r_meta = 0.0   FACTORIZE 0/3 worlds   3,157 vs 1,630 bits
+    r_meta = 1.0   FACTORIZE 0/3 worlds   3,814 vs 2,258 bits
+
+G2 fails 0/6. Checked against the vacuous-guard failure mode before
+reporting: the schema leaves 90.9% (r=0) and 87.3% (r=1) of a held-out
+atom's effect variance unexplained, so 0% coverage is real and not the
+budget being unreachable.
+
+The finding is the CONTRAST with H20a. Over teacher family operators a
+schema pays and its crossing is predicted (H25 passes at r_meta 0.90 and
+0.95). Over the learned library, PROMOTE makes 1.5-1.75x more atoms than
+families and they share almost none of the family's functional
+structure. The representation class is fine; the promoter is what fails
+to reach it. Run only on the learned library — the design before reviews
+46 and 47 — this would have read as "higher-order factorization does not
+pay", and D16's exogenous-atom arm is what makes the two separable.
+
+n = 3 worlds, one operating point. A direction, not an estimate.

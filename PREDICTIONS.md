@@ -1944,3 +1944,52 @@ reproduce those effects to the matched budget. That is a real piece of
 design, and V4.2 is the standing lesson about what happens when a
 sharing claim is scored with the convenient accounting instead of the
 matched-budget one.
+
+## H20b G2 RESULT: the schema economy exists, the learner does not reach it
+
+Cheap-first slice, F=4, N=72, worlds 0-2, learned libraries. Schema
+fitted in EFFECT space (gauge-free) and charged in PARAMETER space, with
+uncovered members paid at full private price so no leftover code is
+invented in FACTORIZE's favour.
+
+    r_meta = 0.0   FACTORIZE wins 0/3 worlds   3,157 vs 1,630 bits
+    r_meta = 1.0   FACTORIZE wins 0/3 worlds   3,814 vs 2,258 bits
+
+G2 FAILS, 0/6. And the reason is not the bit accounting — the schema
+covers 0% of unseen atoms at BOTH relatedness levels, which was checked
+against the vacuous-guard failure mode before being reported:
+
+    unexplained fraction of a held-out atom's effect variance
+        r_meta = 0.0   0.909
+        r_meta = 1.0   0.873
+
+So learned abstractions do NOT lie in a shared low-dimensional
+functional family, even at r_meta = 1.0 where the TEACHER's family
+operators lie in one perfectly (R_LOO = 1.000, H20a). The absolute
+residual is only ~5x the distortion budget, so a looser budget would
+flip the binary "covered" flag; the 87-91% unexplained fraction is what
+carries the result and it is not budget-sensitive.
+
+## Why this is the result the H20a/H20b split was built to produce
+
+Read together with the realized-M reading, the picture is specific:
+
+    H20a   over TEACHER family operators, a schema pays, and its
+           crossing is predicted by D*(S)/s_bar_schema (H25 passes at
+           r_meta 0.90 and 0.95, H26 monotone)
+    H20b   over the LEARNED library, PROMOTE produces 1.5-1.75x more
+           atoms than families, and those atoms share almost none of
+           the family's functional structure, so no schema pays
+
+The representation class is not the problem; the promoter is. Had H20
+been run only on the learned library — the design before review 46 and
+47 — this would have read as "higher-order factorization does not pay"
+and closed the question. The exogenous-atom arm is what makes the two
+distinguishable, and D16 is vindicated.
+
+REGISTERED READING, before any follow-up: this is n=3 worlds at one
+operating point (F=4, K=2, M_0=3, slots=12). It is a direction. The
+obvious next question is whether PROMOTE can be made to produce
+family-aligned atoms at all — which is a question about the promoter's
+clustering, not about schemas — and that is not a V5.2 rung as
+currently written.

@@ -1,0 +1,98 @@
+{
+  "summary": {
+    "r0": {
+      "worlds": 3,
+      "factorize_wins": 0,
+      "mean_covered_fraction": 0.0,
+      "mean_compress": 1630.3957061623848,
+      "mean_factorize": 3156.586355521466
+    },
+    "r100": {
+      "worlds": 3,
+      "factorize_wins": 0,
+      "mean_covered_fraction": 0.0,
+      "mean_compress": 2257.6531104297073,
+      "mean_factorize": 3814.2888740731833
+    }
+  },
+  "cells": [
+    {
+      "condition": "r0",
+      "world": 0,
+      "atoms": 5,
+      "unseen": 2,
+      "covered": 0,
+      "mean_private_bits": 519.7828608274306,
+      "mean_member_bits": 572.6487662787519,
+      "schema_bits": 1453.6167715796487,
+      "s_bar_schema": 0.0,
+      "compress_total": 1145.2975325575037,
+      "factorize_total": 2598.9143041371526
+    },
+    {
+      "condition": "r0",
+      "world": 1,
+      "atoms": 6,
+      "unseen": 3,
+      "covered": 0,
+      "mean_private_bits": 526.4339712679946,
+      "mean_member_bits": 538.7855995246206,
+      "schema_bits": 1542.247029034106,
+      "s_bar_schema": 0.0,
+      "compress_total": 1616.3567985738619,
+      "factorize_total": 3158.603827607968
+    },
+    {
+      "condition": "r0",
+      "world": 2,
+      "atoms": 7,
+      "unseen": 4,
+      "covered": 0,
+      "mean_private_bits": 530.3201335456112,
+      "mean_member_bits": 532.3831968389474,
+      "schema_bits": 1582.7081474634888,
+      "s_bar_schema": 0.0,
+      "compress_total": 2129.5327873557894,
+      "factorize_total": 3712.240934819278
+    },
+    {
+      "condition": "r100",
+      "world": 0,
+      "atoms": 7,
+      "unseen": 4,
+      "covered": 0,
+      "mean_private_bits": 542.7033715367727,
+      "mean_member_bits": 546.1144623656138,
+      "schema_bits": 1614.4657512949536,
+      "s_bar_schema": 0.0,
+      "compress_total": 2184.457849462455,
+      "factorize_total": 3798.923600757409
+    },
+    {
+      "condition": "r100",
+      "world": 1,
+      "atoms": 9,
+      "unseen": 6,
+      "covered": 0,
+      "mean_private_bits": 537.4207677497591,
+      "mean_member_bits": 571.4966172211579,
+      "schema_bits": 1407.8072064208836,
+      "s_bar_schema": 0.0,
+      "compress_total": 3428.9797033269474,
+      "factorize_total": 4836.786909747831
+    },
+    {
+      "condition": "r100",
+      "world": 2,
+      "atoms": 5,
+      "unseen": 2,
+      "covered": 0,
+      "mean_private_bits": 561.431222342862,
+      "mean_member_bits": 579.7608892498597,
+      "schema_bits": 1647.634333214591,
+      "s_bar_schema": 0.0,
+      "compress_total": 1159.5217784997194,
+      "factorize_total": 2807.15611171431
+    }
+  ]
+}
