@@ -1735,3 +1735,71 @@ Added section 10.1 to paper/draft.md as development-stage outlook
 (not confirmatory). Updated review-index.md and learnings.txt with
 the full synthesis. No sealed worlds were run; V4 remains
 development-only.
+
+# Retention: the amortization law, measured and confirmed (2026-08-19)
+
+Three dormancy designs had failed to instantiate retention value. The
+cause was found and it was not the world: V3's `select_reference` scans
+every abstraction ever created, so a "deleted" abstraction remained
+adoptable and deletion was a no-op. `LifecycleLibraryLearner` now
+overrides it to reuse only from the live library (an override, never an
+edit to the frozen V3 class).
+
+With deletion made real, reacquisition cost is positive 9/9 and the
+return curve is the correct instrument: a mid-lifetime deletion stops
+the arms being paired the moment it changes what gets promoted next, so
+end-of-lifetime J is uninformative while the return window is not.
+
+The boundary turned out NOT to be a dormancy length. Per-task saving is
+flat across gaps 4-16 (63.5 / 64.6 / 63.9 / 62.2 / 66.2), so an earlier
+interpolated `g* = 15.2` was pure horizon truncation and is withdrawn.
+What governs the decision is expected remaining reuse.
+
+Registered before the sweep, from independently measured quantities:
+`H_R* = lambda * D(A) / s_bar = 1,098 / 64.1 = 17.1` returning tasks.
+
+Controlled sweep (gap fixed, library frozen at the gap so
+`D_retain - D_delete = D(A)` exactly, verified by zero post-gap births):
+V_retain = -621, -407, -131, +140, +404, +782 at H_R = 8, 12, 16, 20,
+24, 32. Monotone, 3/3 worlds per cell, crossing at 17.9 against 17.1
+predicted, with no fitted threshold. This is the V1/V3 amortization
+criterion applied one level up.
+
+Boundary condition: with re-promotion restored, C_reacquire is unchanged
+(within 5%) but the marginal carry cost is endogenous -- 0 nats when
+deletion merely triggers a replacement -- and V_retain becomes
+non-monotone. A per-object retention rule is not well-posed in an
+evolving library; the decision is sequential.
+
+# V3 coding-frontier audit: the description claim survives (2026-08-19)
+
+The question that had to be settled before any successor benchmark: does
+promotion's description saving survive when BOTH representations are put
+on their own behavioral rate-distortion frontiers, rather than compared
+at a fixed 8-bit serialization?
+
+Answer: yes, and it grows. Across all 30 V3-sealed worlds, at the
+scorer's own accounting scope, the reduction rises from 62.6% at fixed
+precision to 68.7% at the frontier, larger in 30/30 worlds.
+
+Getting there required a bit-exact re-run. V3 artifacts do not persist
+`task_reference`/`retired`, so the promoted-versus-private split could
+not be reconstructed and the first attempt reported reductions of -9.6%,
+-5.5%, -5.5% -- a loading bug, not a measurement, now recorded as void.
+`LifecycleLibraryLearner` is behaviourally identical to the promoting
+learner with its flags off, so seeds 300-329 were re-run to persist the
+table; reproduction verified bit-exact (delta 0.0 nats) before use.
+These are already-scored worlds; 400-429 were not touched.
+
+Reconciling 67.6% against the paper's 63.3% took two attempts. The first
+explanation (reference bits) was wrong and worth 0.1 points. The actual
+cause is route/code state, 1,170 scalars retained in BOTH arms, which my
+audit omitted; adding the same constant to numerator and denominator
+pulls the ratio toward 1, so omitting it inflated the reduction. At the
+scorer's scope the fixed-precision figure reproduces to within 0.7
+points.
+
+Provenance fixed at the source: every promoting artifact now writes a
+`reference_table` summary field. Verified non-vacuously (56 promoted
+tasks, 4 abstractions on a real run); 115 tests pass. Summary field
+only, so no frozen model behaviour and no fingerprint change.
