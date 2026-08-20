@@ -1838,3 +1838,55 @@ is within the preregistered bound".
 O4 (the retention amortization law) is NOT scored here. It needs the
 horizon sweep protocol at 6 horizons x 2 arms x 30 worlds, which is a
 separate run; the census cells stand on their own.
+
+# V4R O4: the retention law confirmed on sealed worlds (2026-08-20)
+
+240 lifetimes, 4 horizons x 2 arms x 30 sealed worlds, controlled
+protocol (gap (32,40), last sleep at the gap so
+`D_retain - D_delete = D(A)` exactly). Scored by
+`score_v4r_retention.py`, thresholds transcribed from the plan frozen at
+2aec65c before any of these runs existed.
+
+| H_R | C_reacquire | s_bar | V_retain | verdict |
+| --- | --- | --- | --- | --- |
+|  8 |   486 | 60.8 | -612 | DELETE |
+| 16 |   976 | 61.0 | -122 | DELETE |
+| 24 | 1,461 | 60.9 | +363 | RETAIN |
+| 32 | 1,961 | 61.3 | +864 | RETAIN |
+
+    monotone in H_R                 PASS
+    s_bar 61.0 (need 50-75)         PASS
+    crossing 18.0 (need 14-22)      PASS
+    O4: PASS (3/3).  0 worlds excluded for post-gap births.
+
+WHAT IS AND IS NOT NON-TRIVIAL HERE. The scorer reports a derived
+prediction of 18.0 against an observed crossing of 18.0, and that exact
+agreement is partly TAUTOLOGICAL: the crossing is by definition where
+`H_R * s_bar = lambda * D(A)`, so with s_bar constant the crossing must
+equal `carry / s_bar`. The two substantive results are:
+
+  1. s_bar IS constant -- 60.8 / 61.0 / 60.9 / 61.3 across horizons,
+     cv 0.3% over 30 worlds. The per-use saving does not depend on the
+     horizon, which is what makes the law linear rather than a fit.
+  2. The DEVELOPMENT-derived prediction of 17.1 (from dev s_bar 64.1)
+     lands at 18.0 out of sample -- 5% error, inside the preregistered
+     [14, 22]. That is the real confirmation.
+
+# V4R SEALED BLOCK CLOSED: 7/7 (2026-08-20)
+
+    O1 count     COMPRESS wins 30/30              PASS
+    O1 interval  mean margin 1,362 nats           PASS
+    O2           0 FACTORIZE wins at M <= 16      PASS
+    O3           FORK pays 2/30 (allowance 2)     PASS (at the boundary)
+    O4 monotone / s_bar / crossing                PASS x3
+
+The project's first preregistered NEGATIVE replicates out of sample,
+with one positive mechanism inside it. In the canonical ROW regime the
+best available refactoring is local private compression; the single
+structural edit that pays is retention, and it pays exactly when
+expected remaining reuse repays the abstraction's code cost.
+
+O3 remains the weak tick: 2/30 against an allowance of 2, where
+development had 0/33. The threshold held and is not being reinterpreted,
+but the defensible phrasing is "FORK pays rarely, within the
+preregistered bound", not "FORK never pays".
