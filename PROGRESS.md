@@ -1890,3 +1890,53 @@ O3 remains the weak tick: 2/30 against an allowance of 2, where
 development had 0/33. The threshold held and is not being reinterpreted,
 but the defensible phrasing is "FORK pays rarely, within the
 preregistered bound", not "FORK never pays".
+
+# V5.0: the component rate-distortion frontier D*(R) (2026-08-20)
+
+The currency for everything downstream, replacing the arbitrary 8-bit
+retention proxy. Minimum bits/scalar per component, each scored ONLY on
+the computations that depend on it, 10 sealed worlds, zero vacuous
+cells:
+
+| component | participants | eps=2 | eps=10 | eps=30 |
+| --- | --- | --- | --- | --- |
+| private (per-task residuals) | 8.2 | 5.8 | 5.0 | 4.2 |
+| shared (abstractions)        | 55.8 | 4.8 | 3.9 | 3.0 |
+| basis (operator basis)       | 64.0 | 5.7 | 4.4 | 3.6 |
+| routes (per-task codes)      | 64.0 | 3.0 | 2.0 | 2.0 |
+
+Every component sits well below 8 bits, so the proxy overstates
+description length by 1.6x (private) to 4x (routes).
+
+THE STRUCTURAL FACT. Shared abstractions are cheaper per scalar (3.9
+bits) than the private residuals they replace (5.0). Promotion does not
+merely move description from many places to one; the destination is
+intrinsically more compressible. That is the mechanism behind the V4R
+audit result that promotion's description reduction GROWS at the
+frontier (62.6% -> 68.7%), and it was not visible under a uniform proxy
+that charged both sides 8 bits.
+
+A NON-VACUITY GUARD is built in, because a component scored over tasks
+it does not participate in returns 0.0 at every depth -- "infinitely
+compressible" when it means "never measured". That exact false result
+occurred once during the V4R audit. All 40 component-cells here are
+non-vacuous.
+
+CONSEQUENCE FOR THE RETENTION LAW, and it is a live prediction rather
+than a re-analysis. The law `RETAIN iff H_R * s_bar > lambda * D(A)`
+was confirmed with D(A) priced at the 8-bit proxy, giving H_R* = 18.0.
+At the measured frontier, D*(A) = 198 scalars x 3.9 bits = 772 bits =
+535 nats, so the same law predicts
+
+    H_R* = 535 / 61.0 = 8.8 returning tasks
+
+Re-scoring the sealed O4 measurements at that carry gives V_retain of
+-49, +440, +926, +1,426 at H_R = 8, 16, 24, 32 -- a crossing just above
+8, consistent with 8.8.
+
+This re-scoring is NOT an independent test: C_reacquire and s_bar are
+unchanged, so moving the carry term necessarily moves the crossing to
+carry/s_bar. The genuine causal test is V5.1 -- manipulate D(A) at the
+generator (e.g. residual rank), predict H_R* proportionally, and check
+that the observed crossing follows. Only that distinguishes a
+quantitative law from an accounting identity.
