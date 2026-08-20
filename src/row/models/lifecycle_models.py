@@ -80,6 +80,46 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
         # from the first run because it is the training set a learned
         # restructuring policy would need later, and it costs nothing now.
         self.decision_dataset: list[dict[str, object]] = []
+        # P_0 for H29: the member residuals as they stood at the sleep
+        # that consumed them. A finished artifact otherwise holds only
+        # the born abstraction and whatever the members' residuals
+        # decayed to afterwards, so the "before" state of a promotion is
+        # unrecoverable — the same class of provenance gap as the
+        # missing `task_reference` table that once voided a coding
+        # audit. Snapshotting here costs one tensor copy per promotion.
+        self.promotion_snapshots: dict[int, dict[str, object]] = {}
+
+    def sleep(self, task_ids, *args, **kwargs) -> dict[str, object]:
+        """Promote as V3 does, and record what each promotion consumed.
+
+        Overridden in the subclass so the frozen V3 learner is not
+        touched. The snapshot is pure bookkeeping: it reads state before
+        and after `super().sleep` and changes no decision.
+        """
+
+        before = {
+            task_id: tensor.detach().clone()
+            for task_id, tensor in self.task_residuals.items()
+        }
+        existing = len(self.abstractions)
+        result = super().sleep(task_ids, *args, **kwargs)
+        for index in range(existing, len(self.abstractions)):
+            record = self.lineage.get(index)
+            members = list(record.supporting_tasks) if record else []
+            self.promotion_snapshots[index] = {
+                # P_0: what the members privately held before promotion.
+                "members": members,
+                "member_residuals": [
+                    before[t] for t in members if t in before
+                ],
+                # P_1: the abstraction as born. Promoted abstractions
+                # carry requires_grad=False and sit in no optimizer
+                # group, so P_2 == P_1 identically in this learner and
+                # H29's restructuring term is structurally zero rather
+                # than merely small.
+                "born": self.abstractions[index].detach().clone(),
+            }
+        return result
 
     # ---- lineage -----------------------------------------------------
 

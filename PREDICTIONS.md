@@ -2145,3 +2145,43 @@ within 15% of a prediction made from a frozen schema before the members
 were counted. The recursive form
 `M* = D*(S) / s_bar_schema` survives its first out-of-sample test; the
 part that failed is my specification of how to count it.
+
+## H29 UNBLOCKED, and one of its three terms is structurally zero
+
+The provenance gap is fixed: `LifecycleLibraryLearner` now overrides
+`sleep` to snapshot, per promotion, the member task ids and their
+residuals AS THEY STOOD BEFORE the promotion consumed them (P_0), plus
+the abstraction as born (P_1). The frozen V3 learner is untouched — the
+override lives in the subclass and changes no decision, only
+bookkeeping. Two tests pin it.
+
+Building it surfaced something the registered prediction assumed away.
+H29 reads
+
+    D*(P_0 selected) < D*(P_0 rejected)   ->  SELECTION
+    D*(P_1) < D*(P_0)                     ->  PURIFICATION
+    D*(P_2) < D*(P_1)                     ->  RESTRUCTURING
+
+but promoted abstractions are created with `requires_grad=False` and
+appear in no optimizer group, so they NEVER change after birth:
+
+    P_2 == P_1, identically, in this learner.
+
+The restructuring term is therefore not small or hard to measure — it is
+structurally zero, and no run of this architecture can produce evidence
+for or against it. That also eliminates a second of the four candidate
+mechanisms for the D* gap: "representation restructuring of the shared
+object by continued learning" cannot be the explanation, because the
+shared object does no continued learning. Combined with H27 eliminating
+effective-dimension reduction, two of four are now out and the live
+candidates are NOISE PURIFICATION and the PROMOTE SELECTION EFFECT —
+which are exactly the two terms the snapshot makes measurable.
+
+A caveat against over-reading: the SYSTEM still restructures around a
+frozen abstraction, because task residuals and routes keep adapting to
+it. What is ruled out is restructuring OF the shared object, which is
+what H29 registered. A version of the claim about the surrounding
+representation is a different hypothesis and is not registered here.
+
+Existing artifacts predate the snapshot and cannot be rescored; H29
+needs fresh runs, which is the honest cost of having found the gap late.

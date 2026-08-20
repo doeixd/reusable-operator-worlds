@@ -183,3 +183,57 @@ class ToleranceScalingTest(unittest.TestCase):
                 self.assertAlmostEqual(
                     contribution / max(contribution, 1e-12), 1.0, places=6
                 )
+
+
+class PromotionSnapshotTest(unittest.TestCase):
+    """H29 provenance: P_0 must survive the sleep that consumes it."""
+
+    def _learner(self):
+        return LifecycleLibraryLearner(
+            d=8, operator_slots=4, operator_rank=4, residual_rank=1,
+            task_steps=3, alpha=0.2, seed=0,
+        )
+
+    def test_snapshot_records_members_and_the_born_abstraction(self) -> None:
+        import torch
+
+        learner = self._learner()
+        generator = torch.Generator().manual_seed(0)
+        ids = [f"task_{i}" for i in range(8)]
+        for task_id in ids:
+            learner.begin_task(task_id)
+            with torch.no_grad():
+                learner.task_residuals[task_id].normal_(generator=generator)
+        probe = torch.randn(32, 8, generator=generator)
+        learner.sleep(ids, probe, probe, minimum_cluster=2, require_prospective=False)
+        for index, snapshot in learner.promotion_snapshots.items():
+            self.assertTrue(snapshot["members"], "promotion recorded no members")
+            self.assertEqual(
+                len(snapshot["member_residuals"]), len(snapshot["members"]),
+                "a member's pre-promotion residual went unrecorded",
+            )
+            self.assertTrue(torch.equal(
+                snapshot["born"], learner.abstractions[index].detach()),
+                "P_1 does not match the abstraction as born",
+            )
+
+    def test_abstractions_never_train_so_p2_equals_p1(self) -> None:
+        # H29's restructuring term is structurally zero here, and this
+        # test is what makes that a property rather than an assumption.
+        import torch
+
+        learner = self._learner()
+        generator = torch.Generator().manual_seed(1)
+        ids = [f"task_{i}" for i in range(8)]
+        for task_id in ids:
+            learner.begin_task(task_id)
+            with torch.no_grad():
+                learner.task_residuals[task_id].normal_(generator=generator)
+        probe = torch.randn(32, 8, generator=generator)
+        learner.sleep(ids, probe, probe, minimum_cluster=2, require_prospective=False)
+        for abstraction in learner.abstractions:
+            self.assertFalse(
+                abstraction.requires_grad,
+                "a promoted abstraction is trainable; P_2 != P_1 and H29's "
+                "restructuring term would no longer be structurally zero",
+            )
