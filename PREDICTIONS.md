@@ -1268,3 +1268,42 @@ sweep was not repeated here. Uniform per-component scalar quantization,
 not an optimal code, so every D* is an upper bound on the true minimum
 description length -- which makes the comparison conservative in the
 right direction for both arms.
+
+# Reconciled: frontier audit at the paper's own accounting scope (2026-08-19)
+
+The 67.6% vs 63.3% discrepancy is resolved, and my first explanation for
+it was wrong. I guessed `reference_bits_total`; including or excluding
+those changes the reduction by 0.1 points (63.3% -> 63.5%), so they are
+not the cause.
+
+The actual cause is ROUTE/CODE STATE. `score_v3_sealed.py` prices
+retained task state including per-task route codes (1,170 scalars),
+which are retained in BOTH arms. My audit omitted them. Adding the same
+constant to numerator and denominator moves the ratio toward 1, so
+omitting it INFLATES the apparent reduction — which is exactly the
+4-point gap.
+
+Re-run with route codes included as a third independently-quantized
+component, matching the scorer's scope:
+
+    MEAN over 30 sealed worlds:  @8bit 62.6%   @frontier 68.7%
+    frontier reduction >= fixed-precision reduction in 30/30 worlds
+
+The fixed-precision figure now reproduces the paper's 63.3% to within
+0.7 points (residual: the scorer's `task_state_scalar_count` and my
+live-residual-plus-codes count differ slightly in which tasks' residuals
+count as retained). The two accountings are therefore the same
+measurement, and the earlier 67.6% is superseded by 62.6%.
+
+FINAL RESULT. At the paper's own scope, placing every component on its
+own behavioral rate-distortion frontier raises the description reduction
+from 62.6% to 68.7%, in 30/30 sealed worlds. Promotion's economic claim
+does not depend on both representations being stored wastefully; it is
+larger when they are not. H11.1 survives in its strongest form.
+
+Method note: three components (task-private residuals, shared
+abstractions plus basis, route codes), each scored only on the
+computations depending on it, uniform scalar quantization at a matched
+10 nats/task behavioral budget. Uniform quantization is not an optimal
+code, so each D* is an upper bound on true minimum description length —
+conservative for both arms.

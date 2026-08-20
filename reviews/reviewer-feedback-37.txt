@@ -1,0 +1,672 @@
+Yes. I think those three are the real core, and almost everything else in the project can be understood as machinery serving them.
+
+The strongest formulation is probably:
+
+[
+\boxed{
+\textbf{Intelligence is search over compositional programs, guided by compression, using a learned computational language.}
+}
+]
+
+Where:
+
+* **Composition** gives combinatorial generality.
+* **Program synthesis** gives adaptation to novel tasks.
+* **MDL** decides which computations deserve to become persistent structure.
+
+That combination is much more powerful than any one of them by itself.
+
+### Composition is what gives you out-of-distribution generalization
+
+If the model learns only a large set of functions:
+
+[
+{A,B,C,D,\ldots},
+]
+
+then its intelligence is bounded by what those functions directly cover.
+
+But if it can construct:
+
+[
+A\circ B,
+]
+
+[
+C(A(x),B(x)),
+]
+
+[
+\operatorname{IF}(P(x),A(x),B(x)),
+]
+
+[
+\operatorname{REPEAT}(A,\text{until }P),
+]
+
+then a relatively small vocabulary generates an enormous computational space.
+
+You get:
+
+[
+|\text{possible programs}|
+\gg
+|\text{library primitives}|.
+]
+
+That's where the real generalization power comes from.
+
+An ARC problem doesn't need to have been seen before if its solution can be expressed as a novel composition of computations that were learned elsewhere.
+
+---
+
+## Program synthesis is what turns that vocabulary into fluid intelligence
+
+Given a novel task, the system asks something like:
+
+[
+P^*
+===
+
+\arg\min_P
+L(D\mid P)+\lambda D(P).
+]
+
+In plain language:
+
+> Find the smallest program built from what I know that explains these observations.
+
+That's basically the ARC problem.
+
+A few demonstrations:
+
+[
+(x_1,y_1),...,(x_k,y_k)
+]
+
+constrain the program.
+
+Maybe:
+
+[
+P=
+\texttt{FindObjects}
+\rightarrow
+\texttt{SelectOddOne}
+\rightarrow
+\texttt{Copy}
+\rightarrow
+\texttt{Reflect}.
+]
+
+The task itself is novel.
+
+The **language isn't**.
+
+And that's the distinction between memorization and genuine compositional reasoning.
+
+---
+
+# MDL is what makes the whole thing improve over time
+
+Without MDL, the easiest solution to every task is:
+
+> create another specialized function.
+
+Then the library eventually becomes:
+
+[
+A_1,A_2,\ldots,A_{10^9}.
+]
+
+That's just memorization with modules.
+
+MDL creates pressure to discover:
+
+[
+\boxed{
+\text{the smallest reusable computational vocabulary that explains many tasks}.
+}
+]
+
+Suppose solutions repeatedly contain:
+
+[
+A\rightarrow B\rightarrow C.
+]
+
+Eventually:
+
+[
+N\times s>D(M)
+]
+
+and the system creates:
+
+[
+M=\texttt{ABC}.
+]
+
+Now future synthesis can use:
+
+[
+M
+]
+
+as one step instead of rediscovering three.
+
+Then perhaps several macros share structure:
+
+[
+M_i\approx M(\alpha_i),
+]
+
+and they become a parameterized schema.
+
+The language becomes progressively more powerful.
+
+---
+
+# This gives you a beautiful positive-feedback loop
+
+Initially solving a task might require expensive search:
+
+[
+\text{search over }10^6\text{ candidate programs}.
+]
+
+The successful program is:
+
+[
+P_1=A\circ B\circ C\circ D.
+]
+
+Then the system solves more tasks and notices:
+
+[
+B\circ C\circ D
+]
+
+appearing repeatedly.
+
+MDL says:
+
+[
+\operatorname{PROMOTE}(B\circ C\circ D)\rightarrow M.
+]
+
+Now:
+
+[
+P_1=A\circ M.
+]
+
+Future program search gets shallower.
+
+Then recurring search strategies themselves may become reusable.
+
+So:
+
+[
+\boxed{
+\text{program synthesis}
+\rightarrow
+\text{successful programs}
+\rightarrow
+\text{compression}
+\rightarrow
+\text{better language}
+\rightarrow
+\text{easier program synthesis}.
+}
+]
+
+That's the engine.
+
+---
+
+# And this is why perception belonging in the same library is so interesting
+
+Normally we'd split:
+
+[
+\text{vision network}
++
+\text{reasoning system}
++
+\text{planner}.
+]
+
+But perhaps that's the wrong decomposition.
+
+Maybe there is just a library of transformations over workspace state.
+
+For example:
+
+[
+\texttt{FindConnectedComponents}
+]
+
+is a perceptual operation.
+
+[
+\texttt{CompareSizes}
+]
+
+feels like reasoning.
+
+[
+\texttt{SimulateMove}
+]
+
+feels like planning.
+
+But computationally they're all:
+
+[
+P_i:W\rightarrow W.
+]
+
+Then programs can mix them freely:
+
+[
+\texttt{FindObjects}
+\rightarrow
+\texttt{InferGoal}
+\rightarrow
+\texttt{Simulate}
+\rightarrow
+\texttt{Compare}
+\rightarrow
+\texttt{Act}.
+]
+
+You don't need architectural borders between perception and thought.
+
+You get a **general computational language**.
+
+---
+
+# Reasoning itself can then be compiled
+
+This is perhaps the most exciting part.
+
+Imagine the system initially solves unfamiliar problems using generic synthesis/search:
+
+[
+\texttt{GenerateHypothesis}
+\rightarrow
+\texttt{Test}
+\rightarrow
+\texttt{Reject}
+\rightarrow
+\texttt{Backtrack}.
+]
+
+That sequence appears across thousands of domains.
+
+MDL eventually notices:
+
+[
+\boxed{
+\text{this computation itself is reusable}.
+}
+]
+
+So something like:
+
+[
+\texttt{HypothesisSearch}
+]
+
+gets promoted.
+
+Now what we call a **reasoning strategy** is literally a learned program abstraction.
+
+Similarly:
+
+[
+\texttt{Plan}
+]
+
+could emerge from repeated patterns of:
+
+[
+\text{simulate}
+\rightarrow
+\text{evaluate}
+\rightarrow
+\text{branch}
+\rightarrow
+\text{select}.
+]
+
+So rather than building a reasoning module, reasoning can become **compiled experience about useful computation**.
+
+---
+
+# This suggests a very strong distinction between System 1 and System 2
+
+Not necessarily psychologically, but computationally.
+
+### Novel problem
+
+The system has no compact compiled solution.
+
+So it performs expensive:
+
+[
+\text{program search/synthesis}.
+]
+
+### Familiar structure
+
+The useful program has already been compressed into the library.
+
+So:
+
+[
+\text{CALL}(M)
+]
+
+solves it cheaply.
+
+Thus:
+
+[
+\boxed{
+\text{slow reasoning}=\text{search}
+}
+]
+
+and:
+
+[
+\boxed{
+\text{fast intuition}=\text{compiled program}.
+}
+]
+
+Repeated reasoning literally becomes intuition.
+
+That seems like a very plausible mechanism.
+
+---
+
+# MDL also gives us a principled notion of abstraction
+
+What is an abstraction?
+
+Not:
+
+> something humans think looks conceptually meaningful.
+
+Instead:
+
+[
+\boxed{
+\textbf{an abstraction is a computation whose reuse savings justify giving it a shorter name.}
+}
+]
+
+That's powerful.
+
+A representation becomes a concept because:
+
+[
+Ns>C.
+]
+
+This works for:
+
+* perceptual objects;
+* transformations;
+* causal rules;
+* planning routines;
+* reasoning heuristics;
+* macros;
+* schemas.
+
+Same mechanism.
+
+---
+
+# And composition gives you recursion
+
+Eventually the things being compressed are themselves programs made from abstractions.
+
+So:
+
+[
+\text{primitive computations}
+]
+
+become:
+
+[
+\text{operators}.
+]
+
+Operators become:
+
+[
+\text{macros}.
+]
+
+Macros become:
+
+[
+\text{schemas}.
+]
+
+Schemas compose into:
+
+[
+\text{larger programs}.
+]
+
+Then repeated large programs become new abstractions.
+
+So you get:
+
+[
+\boxed{
+\text{abstraction over abstraction over abstraction}.
+}
+]
+
+That's where the system starts resembling a self-growing programming language.
+
+---
+
+# I think this suggests a clearer ultimate architecture
+
+Something like:
+
+[
+\boxed{
+\mathcal L=
+\text{learned computational language}
+}
+]
+
+containing:
+
+* perceptual operators;
+* transformation operators;
+* memory operations;
+* world-model operations;
+* search procedures;
+* reasoning strategies;
+* planning procedures;
+* macros;
+* control structures.
+
+Given a new problem:
+
+### 1. Perceive
+
+Construct a useful representation using programs in (\mathcal L).
+
+### 2. Synthesize
+
+Search for:
+
+[
+P\in\operatorname{Programs}(\mathcal L)
+]
+
+that explains/solves the task.
+
+### 3. Execute
+
+Run (P) over workspace/memory.
+
+### 4. Learn
+
+Keep temporary innovations if needed.
+
+### 5. Consolidate
+
+Ask:
+
+[
+\text{What recurring computation from recent solutions deserves a shorter description?}
+]
+
+Update:
+
+[
+\mathcal L\rightarrow\mathcal L'.
+]
+
+Then repeat forever.
+
+---
+
+# And games are almost ideal training data for this
+
+Because games expose all the pieces simultaneously:
+
+[
+\text{perception}
++
+\text{causal inference}
++
+\text{world modeling}
++
+\text{goal inference}
++
+\text{exploration}
++
+\text{planning}
++
+\text{memory}
++
+\text{action}.
+]
+
+If the worlds are procedurally generated and compositional, the system can't merely memorize policies.
+
+It has to synthesize new programs.
+
+And over millions of worlds, repeated useful pieces of those programs become the library.
+
+This is how we might get:
+
+[
+\boxed{
+\text{reasoning primitives learned from experience rather than specified by us}.
+}
+]
+
+---
+
+# I think ARC then becomes a very clean test
+
+The model sees several demonstrations.
+
+It needs to infer:
+
+[
+P^*.
+]
+
+Its prior is the learned program language:
+
+[
+p(P\mid\mathcal L).
+]
+
+A natural objective is something like:
+
+[
+\boxed{
+P^*
+===
+
+\arg\min_P
+\left[
+-\log p(D\mid P)
++
+\lambda L_{\mathcal L}(P)
+\right].
+}
+]
+
+Which is basically Bayesian/MDL program induction.
+
+The crucial measure is not whether the exact transformation was seen during training.
+
+It's whether the system can construct it from pieces.
+
+---
+
+# The dream result eventually
+
+You could train on a huge procedural game ecology.
+
+Then freeze the slow library.
+
+Give the system ARC-like tasks.
+
+And observe:
+
+1. perceptual programs decompose the grid;
+2. program synthesis proposes candidate transformations;
+3. candidates are tested against demonstrations;
+4. the shortest consistent program wins;
+5. it executes on the test grid.
+
+Then inspect the program.
+
+Maybe:
+
+```text id="hkrwan"
+objects = ConnectedComponents(grid)
+target = UniqueBySize(objects)
+target = Rotate(target, 90)
+return PlaceAtMirrorPosition(target)
+```
+
+And **none of that exact program appeared during training**.
+
+That's the kind of evidence I'd want for genuine compositional generalization.
+
+---
+
+So yes: I think **composition + program synthesis + MDL** may be the real triangle here.
+
+The neural-network machinery supplies flexible differentiable computations.
+
+But the thing that potentially gets us beyond ordinary deep learning is:
+
+[
+\boxed{
+\textbf{learn the primitives,
+compose them into programs,
+and continually compress successful programs into a better language.}
+}
+]
+
+If that loop works recursively, then what we've been calling "the library" eventually stops looking like a collection of neural modules and starts looking like a **learned programming language whose compiler, standard library, and optimizer are all being improved by the model's own experience**.

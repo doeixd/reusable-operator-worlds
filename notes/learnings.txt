@@ -1768,3 +1768,200 @@ SIX PREREGISTERED HYPOTHESES (a ladder, not all in one version):
   evolution)
 - H24: learned restructuring (trained policy reduces structural regret on
   held-out economics)
+
+
+================================================================================
+LONG-TERM VISION: PROCEDURAL GAME-WORLD PRETRAINING AND ARC-AGI (NOT EXECUTED)
+================================================================================
+
+If the project reaches the endpoint where perception is library computation and
+arbitrary programs can be assembled from learned library elements, the natural
+next step is to pretrain not on answers but on worlds. ARC-AGI-2 emphasizes
+compositional reasoning from few examples; ARC-AGI-3 is explicitly interactive
+(agent enters novel environments without instructions, must explore, infer
+goals/rules, build a world model, and act over time). The current direction of
+ARC makes this vision more plausible than it would have sounded a few years ago.
+
+CORE ARCHITECTURE. observation → perceptual programs → workspace W → reasoning
+program → W' → planning program → action. The perception/reasoning/planning
+distinction does not exist architecturally — they are all programs over state.
+FindObjects→GroupByColor→InferSymmetry→ApplyTransform solves an ARC-like visual
+problem; FindObjects→PredictCollision→Simulate→ChooseAction solves a game. Same
+computational language.
+
+REASONING EMERGES AS PROGRAMS. If hypothesize→simulate→compare→backtrack recurs
+enough (N·s > C_macro), the theory says TEST_HYPOTHESIS becomes economical.
+Repeated simulate→evaluate→choose becomes PLAN. Repeated try→fail→restore→
+try-alternative becomes SEARCH. This is the recursive amortization law applied
+to thought itself — reasoning and planning become learned reusable programs
+not because we label them "reasoning" but because they recur across enough
+worlds to earn a name.
+
+NOT ORDINARY GAMES. Training on Minecraft/chess/Atari risks accumulating
+game-specific policies. Instead: a procedural universe of millions of generated
+microworlds whose rules are composed from latent primitives (objects, movability,
+collisions, transformations, keys/locks, gravity, symmetry, copying, containment,
+teleportation, resource consumption, ordering, counting, spatial/temporal
+relations, hidden state, goals, adversaries, stochasticity, combined
+compositionally). Each game has two programs to infer: world program
+P_world(s_t,a_t)→s_{t+1} and goal program G:s→{0,1}.
+
+ARC-AGI-2 AS DEGENERATE CASE. Treat (x_1,y_1)...(x_n,y_n) as observations of
+unknown P(x)=y, synthesize P̂ from the learned computational language (not a
+hard-coded DSL), run ŷ=P̂(x_test). ARC-AGI-1/2 is program induction over grids;
+ARC-AGI-3 adds the interactive/agentic dimension.
+
+THREE LEARNING TIMESCALES. Slow: computational language across millions of
+worlds (L_t→L_{t+1}). Medium: world/task program P_τ synthesized from the
+library for one episode. Fast: workspace W_t during individual reasoning. This
+maps onto the slow library / medium program / fast workspace architecture.
+
+PERCEPTION AS TASK-DIRECTED LIBRARY COMPUTATION. Different tasks require
+different perceptual decompositions (ConnectedComponents, FindRepeatedTiles,
+FindInsideOutside, TreatBackgroundAsObject). Perception is stronger than a
+fixed embedding — the system learns how to look at the problem.
+
+PLANNING COMPILES FROM SEARCH. Planning starts as brute-force search over
+P̂_world; repeated useful planning structures compress into macros (10^5 search
+steps → NavigateAroundObstacle(x)). Reasoning starts as expensive search and
+gradually compiles into reusable computation, falling back to search on novel
+situations — wake/sleep at the level of thought.
+
+GAMES TEACH PRIORS NOT SOLUTIONS. Reusable priors: objects persist, boundaries
+matter, symmetry often matters, transformations compose, goals can be inferred,
+unsuccessful hypotheses should be abandoned. The library is {SEGMENT, COUNT,
+COMPARE, ROTATE, TRANSLATE, TRACK, SIMULATE, SEARCH, ...} but at evaluation
+time the program is new — that's fluid intelligence.
+
+EXPLORATION AS REASONING PROGRAM. Actions chosen for information not reward
+(ChooseExperiment to reduce uncertainty over candidate programs). Repeated
+active-learning strategies become library programs. Interactive worlds
+exercise this; static ARC does not.
+
+NINE-STAGE CURRICULUM BY PROGRAM STRUCTURE. (1) primitive induction, (2)
+composition A∘B∘C, (3) conditional IF(cond,A,B), (4) iteration REPEAT(A,until
+C), (5) hidden state, (6) partial observability, (7) information gathering,
+(8) long-horizon planning, (9) new abstractions the library can't yet express.
+
+PROGRAM-STRUCTURE TRAIN/TEST SPLITS. Train on A+B and B+C, test on A+C or
+A∘B∘C or A(α_unseen). Train on depth d≤4, test d=5,6. Train on IF and REPEAT
+separately, test novel nesting REPEAT(IF(...)). This tests whether the library
+really became a language.
+
+THE GOLD-STANDARD GENERALIZATION TEST. A never-seen game with novel perceptual
+presentation, novel rules, no textual instructions, and a small interaction
+budget, where every rule is expressible by compositions of known library
+computations or close enough for a cheap new abstraction. The model
+perceives→experiments→infers the program→plans→solves without changing slow
+pretrained weights.
+
+ARC AS OUT-OF-DISTRIBUTION TEST. Train on the procedural world curriculum, not
+on ARC directly. Then test zero-shot/few-shot: ARC-AGI-1 (transfer?),
+ARC-AGI-2 (deeper interacting rules?), ARC-AGI-3 (interactive rule/goal
+inference and planning?).
+
+KEY RISK: THE CONTROLLER BECOMES THE REAL INTELLIGENCE. A hand-built search
+procedure that takes library primitives and solves everything merely moves
+intelligence from the neural model into the program synthesizer. Trajectory
+must be: handwritten search → learned search heuristics → learned proposal
+model q_φ(P|D,L) → learned restructuring/planning policy.
+
+THE POSITIVE FEEDBACK LOOP. Solving problems improves the language used to
+solve later problems: successful programs → find recurrent computation →
+COMPRESS/PROMOTE/PARAMETERIZE/MACRO → better computational language → future
+programs cheaper to discover.
+
+THE GRAND META-LEARNING OBJECTIVE. J = Σ_t cost-to-understand-and-solve G_t +
+λD(L_T), not merely Σ_t L(G_t). The dream result is dC_solve/dt < 0 even though
+games remain novel — the system is learning how to learn worlds. The games are
+not the goal; they are the ecology that causes perception, experimentation,
+abstraction, reasoning, planning, memory, and program synthesis to become
+economically useful reusable computations.
+
+
+================================================================================
+THE CORE TRIANGLE: COMPOSITION + PROGRAM SYNTHESIS + MDL
+================================================================================
+
+The strongest formulation: intelligence is search over compositional programs,
+guided by compression, using a learned computational language. Almost
+everything else in the project is machinery serving these three.
+
+COMPOSITION gives combinatorial generality. A small vocabulary generates
+|possible programs| >> |library primitives| via A∘B, C(A(x),B(x)),
+IF(P(x),A(x),B(x)), REPEAT(A,until P). An ARC problem need not be seen before
+if its solution is a novel composition of learned computations. This is where
+OOD generalization comes from.
+
+PROGRAM SYNTHESIS turns the vocabulary into fluid intelligence. Given a novel
+task: P* = argmin_P L(D|P) + λD(P) — find the smallest program built from what
+you know that explains the observations. The task is novel but the language
+isn't; that's the distinction between memorization and genuine compositional
+reasoning.
+
+MDL makes the whole thing improve over time. Without it the library degenerates
+into A_1...A_10^9 (memorization with modules). With it, pressure discovers the
+smallest reusable vocabulary, and recurring subprograms get promoted to macros
+(N·s > D(M)), which may parameterize into schemas. The language becomes
+progressively more powerful.
+
+THE POSITIVE FEEDBACK ENGINE. program synthesis → successful programs →
+compression → better language → easier program synthesis. Initially a task may
+require search over 10^6 candidate programs; after PROMOTE, the same solution is
+A∘M (one step instead of four). Recurring search strategies themselves become
+reusable.
+
+PERCEPTION, REASONING, AND PLANNING ARE ALL P_i: W→W. FindConnectedComponents
+(perceptual), CompareSizes (reasoning), SimulateMove (planning) are all
+transformations over workspace state, so programs mix them freely without
+architectural borders — a general computational language.
+
+REASONING ITSELF CAN BE COMPILED. GenerateHypothesis→Test→Reject→Backtrack
+appears across thousands of domains; MDL notices the computation is reusable and
+HypothesisSearch gets promoted. Reasoning strategies become learned program
+abstractions, not built modules. Plan emerges from repeated
+simulate→evaluate→branch→select. Rather than building a reasoning module,
+reasoning becomes compiled experience about useful computation.
+
+SYSTEM 1 / SYSTEM 2 EMERGES COMPUTATIONALLY. Novel problem: no compact
+compiled solution, so perform expensive program search/synthesis (slow
+reasoning = search). Familiar structure: the useful program is already
+compressed into the library, so CALL(M) solves it cheaply (fast intuition =
+compiled program). Repeated reasoning literally becomes intuition.
+
+PRINCIPLED ABSTRACTION. An abstraction is a computation whose reuse savings
+justify giving it a shorter name (N·s > C), not something humans find
+conceptually meaningful. Works for perceptual objects, transformations, causal
+rules, planning routines, reasoning heuristics, macros, schemas — same
+mechanism.
+
+COMPOSITION GIVES RECURSION. primitives → operators → macros → schemas →
+larger programs → new abstractions. Abstraction over abstraction over
+abstraction — the system resembles a self-growing programming language.
+
+THE ULTIMATE ARCHITECTURE. L = learned computational language containing
+perceptual operators, transformation operators, memory operations, world-model
+operations, search procedures, reasoning strategies, planning procedures,
+macros, control structures. Given a new problem: (1) perceive — construct a
+useful representation using programs in L; (2) synthesize — search for
+P ∈ Programs(L) that explains/solves the task; (3) execute — run P over
+workspace/memory; (4) learn — keep temporary innovations if needed; (5)
+consolidate — find recurring computation deserving a shorter description,
+update L→L'. Repeat forever.
+
+ARC AS CLEAN TEST. The prior is p(P|L); the objective is P* = argmin_P
+[-log p(D|P) + λL_L(P)] — Bayesian/MDL program induction. The crucial measure
+is not whether the exact transformation was seen during training but whether the
+system can construct it from pieces. The dream result: train on a procedural
+game ecology, freeze the slow library, give ARC-like tasks, observe
+perceptual decomposition → candidate synthesis → testing → shortest consistent
+program wins → execution, where the solved program never appeared during
+training — genuine compositional generalization.
+
+THE SYNTHESIS. The neural-network machinery supplies flexible differentiable
+computations, but what gets beyond ordinary deep learning is: learn the
+primitives, compose them into programs, and continually compress successful
+programs into a better language. If that loop works recursively, the library
+stops looking like neural modules and starts looking like a learned programming
+language whose compiler, standard library, and optimizer are all being
+improved by the model's own experience.

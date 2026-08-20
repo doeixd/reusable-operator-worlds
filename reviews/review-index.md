@@ -1198,3 +1198,70 @@ games remain novel — the system is learning how to learn worlds. The games are
 not the goal; they are the ecology that causes perception, experimentation,
 abstraction, reasoning, planning, memory, and program synthesis to become
 economically useful reusable computations.
+
+### [reviewer-feedback-37.txt](reviewer-feedback-37.txt)
+Identifies the core triangle: composition + program synthesis + MDL. The
+strongest formulation: intelligence is search over compositional programs,
+guided by compression, using a learned computational language. Composition
+gives combinatorial generality (a small vocabulary generates |possible
+programs| >> |library primitives| via A∘B, C(A(x),B(x)), IF(P,A,B),
+REPEAT(A,until P)); an ARC problem need not be seen before if its solution
+is a novel composition of learned computations. Program synthesis turns the
+vocabulary into fluid intelligence: given a novel task, find P* = argmin_P
+L(D|P) + λD(P) — the smallest program built from what you know that explains
+the observations; that's basically the ARC problem, and the distinction
+between memorization and genuine compositional reasoning is that the task is
+novel but the language isn't. MDL makes the whole thing improve over time:
+without it the library degenerates into A_1...A_10^9 (memorization with
+modules); with it, pressure discovers the smallest reusable vocabulary, and
+recurring subprograms get promoted to macros (N·s > D(M)), which may then
+parameterize into schemas — the language becomes progressively more powerful.
+The positive feedback loop: program synthesis → successful programs →
+compression → better language → easier program synthesis. This is the engine.
+Perception belonging in the same library matters because FindConnectedComponents
+(perceptual), CompareSizes (reasoning), and SimulateMove (planning) are all
+P_i: W→W, so programs mix them freely without architectural borders between
+perception and thought — a general computational language. Reasoning itself
+can be compiled: the GenerateHypothesis→Test→Reject→Backtrack sequence appears
+across thousands of domains, MDL notices the computation is reusable, and
+HypothesisSearch gets promoted — reasoning strategies become learned program
+abstractions rather than built modules; Plan emerges from repeated
+simulate→evaluate→branch→select. System 1 vs System 2 emerges computationally:
+slow reasoning = search (novel problem, no compact compiled solution), fast
+intuition = compiled program (familiar structure, CALL(M) solves it cheaply);
+repeated reasoning literally becomes intuition. MDL gives a principled notion
+of abstraction: an abstraction is a computation whose reuse savings justify
+giving it a shorter name (N·s > C), not something humans find conceptually
+meaningful — works for perceptual objects, transformations, causal rules,
+planning routines, reasoning heuristics, macros, schemas, all by the same
+mechanism. Composition gives recursion: primitives→operators→macros→schemas→
+larger programs→new abstractions — abstraction over abstraction over
+abstraction, where the system starts resembling a self-growing programming
+language. The ultimate architecture: L = learned computational language
+containing perceptual operators, transformation operators, memory operations,
+world-model operations, search procedures, reasoning strategies, planning
+procedures, macros, control structures; given a new problem: perceive →
+synthesize P ∈ Programs(L) → execute over workspace/memory → learn (keep
+temporary innovations) → consolidate (find recurring computation deserving a
+shorter description, update L→L') → repeat forever. Games are ideal training
+data because they expose perception + causal inference + world modeling + goal
+inference + exploration + planning + memory + action simultaneously, and
+procedurally generated compositional worlds prevent policy memorization,
+forcing program synthesis — over millions of worlds, repeated useful program
+pieces become the library, yielding reasoning primitives learned from
+experience rather than specified by us. ARC as clean test: the system's prior
+is p(P|L), the objective is P* = argmin_P [-log p(D|P) + λL_L(P)] (Bayesian/MDL
+program induction), and the crucial measure is not whether the exact
+transformation was seen but whether the system can construct it from pieces.
+The dream result: train on a procedural game ecology, freeze the slow library,
+give ARC-like tasks, and observe perceptual decomposition → candidate
+synthesis → testing against demonstrations → shortest consistent program wins
+→ execution on test grid, where the solved program (e.g., ConnectedComponents
+→ UniqueBySize → Rotate 90 → PlaceAtMirrorPosition) never appeared during
+training — genuine compositional generalization. The neural-network machinery
+supplies flexible differentiable computations, but what gets beyond ordinary
+deep learning is: learn the primitives, compose them into programs, and
+continually compress successful programs into a better language. If that loop
+works recursively, the library stops looking like neural modules and starts
+looking like a learned programming language whose compiler, standard library,
+and optimizer are all being improved by the model's own experience.
