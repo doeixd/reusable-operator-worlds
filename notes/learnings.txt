@@ -2659,3 +2659,63 @@ at slots=12, through a smaller library (2.2 vs 3.3 abstractions) that
 fewer tasks reference (46.7 vs 59.0). Absolute crossings are
 protocol-dependent; the D-arm's internal rank comparison is safe only
 because ranks 1/2/4 all ran at slots=12.
+
+
+================================================================================
+H19: STATE THE INTERVENTION PRECISELY, NOT CONVENIENTLY (2026-08-20)
+================================================================================
+
+The tempting one-line summary of H19 is "we independently manipulate D
+and s". It is false, and it is the same shape of overclaim V5.1 already
+falsified once. The accurate statement admits what each arm actually
+did:
+
+    The D-arm manipulates abstraction CAPACITY, jointly changing
+    storage cost and per-use utility -- residual rank moves both, which
+    is exactly why H* ~ D failed at 46.8% error.
+
+    The S-arm holds the stored abstraction EXACTLY fixed -- the tensors
+    are bit-identical across gains, verified by checksum in 10/10 cells
+    -- while manipulating its post-return utility regime.
+
+    Across both interventions the measured threshold is predicted by
+    C_carry / s_bar.
+
+So the invariant is neither `H* ~ D` nor `H* ~ 1/g`. It is
+
+    H* = C_carry / (expected saving per future use)
+
+and the reason to insist on the longer sentence is that it is the only
+version that survives contact with both arms. A law stated as a
+proportionality in one variable was falsified; the same law stated as a
+ratio predicted out of sample to within 2% at three ranks and (so far)
+two gains.
+
+WHY THIS IS MORE THAN A RETENTION THRESHOLD. The rule says the learner
+should not ask "is this abstraction big?" nor "is this abstraction
+useful?" -- neither is sufficient on its own. It should ask HOW MANY
+FUTURE USES ARE REQUIRED TO AMORTIZE WHAT THIS REPRESENTATION COSTS. A
+small abstraction of little use may deserve deletion; a large one with a
+large per-use benefit may deserve retention. That is the representation
+economics the whole program is trying to make a learner discover, and it
+generalizes with the same form at every level:
+
+    atom birth      N_uses     * s_bar_A > D(A)
+    atom retention  H_R        * s_bar_A > D(A)     H19
+    schema birth    M          * s_bar_S > D(S)     H25
+    macro birth     N_programs * s_bar_M > D(M)     V6
+
+H19 is therefore the quantitative foundation for the recursive story,
+not a local threshold for RETAIN. If the ratio form holds at one level
+and the same form is registered at the next two, a failure upstairs
+becomes informative rather than merely disappointing.
+
+METHOD NOTE that generalizes past this rung: the closure criterion for
+H19 was written down and committed while the last batch was still
+running and before any of its cells were read. Seven conditions,
+including the ones that could only embarrass -- report a 15% miss even
+when the 25% falsifier passes; refuse an off-grid crossing rather than
+extrapolate; keep the slots=6 pairing as a separate robustness debt the
+verdict may not borrow from in either direction. Freezing the verdict
+before the last third of the data is the cheapest available protection
+against reading a criterion off the result.
