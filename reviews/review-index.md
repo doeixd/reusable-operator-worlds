@@ -1643,3 +1643,54 @@ a neural system learns its own compositional language of thought, uses that
 language to synthesize solutions to novel problems, and improves the language
 itself from the solutions it discovers. If we get from V4 to that, ARC is a
 scaling and transfer problem, not a wild conceptual jump.
+
+### [reviewer-feedback-41.txt](reviewer-feedback-41.txt)
+Assessment of the V5–ARC roadmap (reviews 38–40) grounded in what V1–V4 actually
+demonstrated. The thesis is coherent and the project has earned the right to ask
+it: the two-nested-searches formulation (inner: reasoning within L; outer:
+improving L) is a genuine intellectual contribution, not a restatement of
+existing work. V4's negative result is load-bearing — the library having "little
+exploitable lifecycle slack" means abstractions are doing real compression work,
+which is the prerequisite for asking whether they can become a language. V8 is
+the crux: "an invented abstraction reduces future synthesis cost on novel tasks"
+is the first point where the project would have evidence for the core thesis
+itself rather than for its prerequisites. If V8 fails the grand story is in
+trouble; if it works, ARC becomes a scaling problem.
+
+Four concrete concerns: (1) V6's compositional closure gate is the most likely
+failure point and should be tested cheaply before building V6 infrastructure —
+the project has only worked with d=16 operators composed 3–4 deep (the teacher's
+three-stage programs), but the entire roadmap assumes reliable composition at
+depth 8+; error accumulation in learned neural functions is a real possibility;
+test now with a weekend experiment composing existing Continuous/Dense operators
+from V1 artifacts 8-deep on fresh inputs, and if error explodes the V6–V8–ARC
+arc is blocked before it starts (adapters/contracts/normalization needed first).
+(2) V8's fair baseline is subtle — adding macro M changes the grammar and the
+search space has more branching, so the naive comparison (search cost with M vs
+without M) is unfair and the macro wins by construction; need a matched-budget
+search-space control (equivalent-capacity library lacking M but with same
+operator count), the same class of error V4 caught ("shared beats unshared at
+full precision" ≠ "shared beats unshared at equal bits"). (3) The V10 agent-
+environment gap is underappreciated — V1–V4 operate on static input→output
+functions, but V10 requires interactive environments, action spaces, partial
+observability, and an agent that chooses experiments; that's a different kind of
+system and the existing lifetime infrastructure (world generation, prequential
+scoring, checkpoint probes) doesn't transfer; put a hard line between V8 and V10.
+(4) The DreamCoder comparison cuts both ways — DreamCoder's symbolic primitives
+compose perfectly, neural primitives may not, so the project takes on a harder
+version of the composition problem in exchange for a richer vocabulary; that
+trade is the right one but should be stated as the central bet, not a footnote.
+
+What the roadmap gets exactly right: the "don't force a single ontology"
+principle — most representation learning assumes one correct latent space, but
+the library should contain multiple competing representations and program
+synthesis chooses the useful one, which is a genuine architectural insight
+connecting directly to ARC phenomenology (the same grid is cells, objects,
+tiles, or symmetry depending on the task). What to actually do next: run the
+cheap compositional-closure probe on existing artifacts before committing to V5
+— if depth-8 composition is stable, proceed with confidence; if error explodes,
+the first research question becomes "how do we make neural operators compose
+reliably," which is itself a publishable result and a prerequisite for
+everything downstream. The arc from V4 to ARC is the right ambition, but the
+single highest-leverage thing to do now is test whether the foundation holds,
+not start building on it.
