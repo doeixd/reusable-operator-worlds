@@ -16,6 +16,7 @@ from pathlib import Path
 
 from row.config import load_config
 from row.experiments import learned_lifetime
+from row.meta_world import MetaFamilySpec, MetaWorldFactory
 from row.task_group_world import TaskGroupSpec, TaskGroupWorldFactory, teacher_group_clustering
 from row.mixed_world import (
     CANONICAL_PROFILE,
@@ -119,6 +120,16 @@ def main() -> None:
         action="store_true",
         help="the dormant regime never returns (the DELETE arm)",
     )
+    parser.add_argument(
+        "--r-meta",
+        type=float,
+        default=None,
+        help="H20b: meta-recurrence world; how much of each family operator "
+             "lies in a subspace shared with the other families",
+    )
+    parser.add_argument("--meta-families", type=int, default=4)
+    parser.add_argument("--meta-tasks-per-family", type=int, default=16)
+    parser.add_argument("--meta-subspace-rank", type=int, default=2)
     parser.add_argument(
         "--return-gain",
         type=float,
@@ -230,7 +241,30 @@ def main() -> None:
         if args.task_group_eta is not None
         else None
     )
-    if task_group_spec is not None:
+    meta_spec = (
+        MetaFamilySpec(
+            families=args.meta_families,
+            tasks_per_family=args.meta_tasks_per_family,
+            r_meta=args.r_meta,
+            subspace_rank=args.meta_subspace_rank,
+            family_onset=args.family_onset,
+        )
+        if args.r_meta is not None
+        else None
+    )
+    if meta_spec is not None:
+        # The family layout fixes N; the config's own task count would
+        # silently disagree with it.
+        config = replace(
+            config, world=replace(config.world, tasks=meta_spec.total_tasks)
+        )
+
+        # H20b: the learned-library arm. PROMOTE runs normally and the
+        # realized library is an OUTCOME, never a validity condition --
+        # a learner that collapses meta-structure into fewer atoms has
+        # found an alternative solution, not broken the world (D17).
+        factory = MetaWorldFactory(meta_spec)
+    elif task_group_spec is not None:
         factory = TaskGroupWorldFactory(args.profile, task_group_spec)
     elif args.hierarchical:
         factory = HierarchicalWorldFactory(HIERARCHICAL_WEIGHTS)
@@ -264,7 +298,10 @@ def main() -> None:
         ),
         "per_primitive_recurrence": per_primitive_recurrence(world),
     }
-    if task_group_spec is not None:
+    if meta_spec is not None:
+        provenance["meta_family_spec"] = meta_spec.as_dict()
+        label = f"meta r_meta={meta_spec.r_meta:g} F={meta_spec.families}"
+    elif task_group_spec is not None:
         provenance["rho_profile"] = list(factory.profile)
         provenance["task_group_spec"] = task_group_spec.as_dict()
         # Ground truth for post-hoc scoring only; no learner reads this.
