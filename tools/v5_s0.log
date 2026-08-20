@@ -10,3 +10,119 @@
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^~~
 numpy._core._exceptions._ArrayMemoryError: Unable to allocate 3.38 MiB for an array with shape (24, 3, 12288) and data type float32
 
+10:50:18 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N56_deleted\world_500\lifecycle: 
+10:50:19 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N56_deleted\world_501\lifecycle: 
+10:50:19 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N56_retained\world_507\lifecycle: 
+10:50:19 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N56_retained\world_506\lifecycle: 
+10:50:19 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N56_retained\world_508\lifecycle: 
+10:50:20 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N56_deleted\world_502\lifecycle: 
+10:50:20 progress done=5 failed=5 skipped=0
+10:50:20 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N56_deleted\world_504\lifecycle: 
+10:50:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N56_deleted\world_505\lifecycle: 
+10:50:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N56_deleted\world_507\lifecycle: 
+10:50:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N56_deleted\world_506\lifecycle: 
+10:50:21 progress done=5 failed=15 skipped=0
+10:50:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_retained\world_501\lifecycle: 
+10:50:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_retained\world_502\lifecycle: 
+10:50:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_retained\world_503\lifecycle: 
+10:50:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_retained\world_504\lifecycle: 
+10:50:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_retained\world_507\lifecycle: 
+10:50:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_retained\world_508\lifecycle: 
+10:50:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_retained\world_509\lifecycle: 
+10:50:21 progress done=5 failed=25 skipped=0
+10:50:21 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_deleted\world_500\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_deleted\world_501\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_deleted\world_503\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_deleted\world_502\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_deleted\world_505\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_deleted\world_504\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_deleted\world_506\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_deleted\world_507\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_deleted\world_508\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g050_s12_N72_deleted\world_509\lifecycle: 
+10:50:22 progress done=5 failed=35 skipped=0
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_retained\world_501\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_retained\world_502\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_retained\world_503\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_retained\world_504\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_retained\world_506\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_retained\world_505\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_retained\world_507\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_retained\world_509\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_retained\world_508\lifecycle: 
+10:50:22 progress done=5 failed=44 skipped=1
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_deleted\world_502\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_deleted\world_501\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_deleted\world_504\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_deleted\world_503\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_deleted\world_505\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_deleted\world_507\lifecycle: 
+10:50:22 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_deleted\world_506\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_deleted\world_508\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N56_deleted\world_509\lifecycle: 
+10:50:23 progress done=5 failed=53 skipped=2
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_retained\world_501\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_retained\world_502\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_retained\world_500\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_retained\world_506\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_retained\world_504\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_retained\world_507\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_retained\world_505\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_retained\world_508\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_deleted\world_501\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_deleted\world_500\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_deleted\world_502\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_retained\world_509\lifecycle: 
+10:50:23 progress done=5 failed=63 skipped=2
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_deleted\world_506\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_deleted\world_505\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_deleted\world_503\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_deleted\world_504\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_deleted\world_507\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_deleted\world_508\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g100_s12_N72_deleted\world_509\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_retained\world_500\lifecycle: 
+10:50:23 progress done=5 failed=73 skipped=2
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_retained\world_501\lifecycle: 
+10:50:23 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_retained\world_502\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_retained\world_503\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_retained\world_505\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_retained\world_504\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_retained\world_506\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_retained\world_507\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_retained\world_508\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_retained\world_509\lifecycle: 
+10:50:24 progress done=5 failed=83 skipped=2
+\artifacts\v5_s0\g150_s12_N56_deleted\world_500\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_deleted\world_501\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_deleted\world_502\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_deleted\world_505\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_deleted\world_503\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_deleted\world_506\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_deleted\world_504\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_deleted\world_507\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_deleted\world_508\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_retained\world_501\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_retained\world_500\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N56_deleted\world_509\lifecycle: 
+10:50:24 progress done=5 failed=93 skipped=2
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_retained\world_502\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_retained\world_503\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_retained\world_504\lifecycle: 
+10:50:24 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_retained\world_506\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_retained\world_505\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_retained\world_507\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_retained\world_508\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_retained\world_509\lifecycle: 
+10:50:25 progress done=5 failed=103 skipped=2
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_deleted\world_500\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_deleted\world_501\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_deleted\world_502\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_deleted\world_503\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_deleted\world_504\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_deleted\world_505\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_deleted\world_506\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_deleted\world_507\lifecycle: 
+10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_deleted\world_509\lifecycle: 
+10:50:25 progress done=5 failed=113 skipped=2
+10:50:25 END done=5 failed=113 skipped=2

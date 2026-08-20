@@ -1482,3 +1482,85 @@ audit. The stronger sequel — matched lifetimes with PROMOTE disabled
 versus enabled, compared at matched behavioral performance — is NOT
 registered here; it waits until the decomposition says which term
 dominates.
+
+# S0 protocol, frozen before Stage 1 (2026-08-20, review 48)
+
+Registered before any `p_reuse`, `s_conditional`, or fixed-window
+`s_bar(g)` measurement exists. Seven `g=0.5 / N=56 / retained` cells and
+one `g=1.0 / N=56` pair survive an aborted batch; they are development
+scratch and are NOT the Stage-1 estimate, which runs at a separate
+fixed window.
+
+## What S0 is, stated so it cannot drift
+
+S0 is NOT a pure s-only intervention and is not claimed as one. The gain
+scales the family primitive's residual scale, so at `g != 1` the
+post-gap operator is a SCALED version of the pre-gap one:
+
+    g changes the value/match regime while D(A) remains fixed.
+
+`D(A)` is fixed in the strong sense — the carried tensor is
+bit-identical across `g`, so `lambda * D*(A)` is the same number, not a
+number within tolerance. That is what H19 needs; the weaker semantic
+story ("same function, worth more") is not claimed.
+
+## Registered refusal threshold
+
+    p_reuse(g) = P(retained A is selected | returning task)
+
+PREDICTION and REFUSAL: `p_reuse(g) >= 0.5` at every gain. Below that,
+the retained arm has effectively stopped using the abstraction, S0 is
+measuring selection collapse rather than payoff, and the gain is
+reported UNSCOREABLE rather than folded into the law.
+
+## Registered decomposition
+
+    s_bar(g) ~= p_reuse(g) * s_conditional(g) + residual
+
+with `s_conditional` the mean saving on returning tasks that actually
+route to `A`. Three readings, all legitimate for the law because it uses
+measured `s_bar`, but distinguishable in mechanism:
+
+    A  s_conditional up, p_reuse flat   the abstraction became more
+                                        economically important
+    B  p_reuse down                     the scaled target drifted far
+                                        enough that routing stopped
+                                        trusting A
+    C  both                             mixed; report as mixed
+
+## Two-stage protocol, deterministic and committed in advance
+
+STAGE 1 estimates the predictor ONLY, at a fixed window (N=72,
+H_R=32) large enough for a stable rate. It does not locate a crossing.
+
+STAGE 2 estimates the crossing from SEPARATE runs. Using one horizon
+sweep for both the predictor and the outcome would partially reintroduce
+the identity concern that V5.1 exists to rule out.
+
+The Stage-2 grid is a deterministic function of Stage 1, fixed here
+before any Stage-2 outcome exists:
+
+    1. measure s_hat(g) at the fixed window
+    2. H_hat*(g) = lambda * D*(A) / s_hat(g)
+    3. H_low  = largest admissible horizon <= H_hat*(g) - 4
+       H_high = smallest admissible horizon >= H_hat*(g) + 4
+    4. add interior points at the two horizons nearest H_hat*(g),
+       rounded to the N grid (N = H_R + 40, even N only)
+
+## Registered statistic: the dimensionless collapse
+
+    chi = H*_observed * s_bar / (lambda * D(A))
+
+PREDICTION: chi = 1 across every operating point — ranks 1, 2, 4 from
+the D-arm and every gain from S0 — with all points falling on the
+identity line of observed against predicted threshold. Registered
+tolerance: mean |chi - 1| <= 0.15 across operating points, and no single
+point outside [0.7, 1.3].
+
+## Retained, not scored here: reuse under drift
+
+`delta(g)` = functional distance between the carried `A` and the scaled
+post-gap operator, recorded alongside `s_bar(g)`. S0 incidentally
+produces the first reuse-under-drift curve, which is the FORK /
+specialization question in V6+. Measured and stored; no prediction is
+registered on it in V5.
