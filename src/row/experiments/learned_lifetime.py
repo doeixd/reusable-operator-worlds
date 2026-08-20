@@ -790,6 +790,19 @@ def run(
         if isinstance(model, LifecycleLibraryLearner):
             model.sync_lineage(len(world.tasks))
             summary["lifecycle"] = model.lifecycle_diagnostics()
+        # PROVENANCE: `task_reference` and `retired` are plain Python
+        # containers and are NOT in `state_dict`, so an artifact that
+        # omits them cannot say afterwards which task depended on which
+        # abstraction. Every analysis of the promoted-versus-private
+        # split then silently reads an empty library. This cost a voided
+        # coding-frontier audit and a full 30-world re-run (PROGRESS.md,
+        # 2026-08-19). Recorded for EVERY promoting model, not only the
+        # lifecycle subclass; it is a summary field, so no frozen model
+        # behaviour and no resolved-config fingerprint changes.
+        summary["reference_table"] = {
+            "task_reference": {k: int(v) for k, v in model.task_reference.items()},
+            "retired_task_ids": sorted(model.retired),
+        }
         summary["promotion"] = model.promotion_diagnostics()
         summary["sleeps"] = sleep_records
     if isinstance(model, ContinuousBasisLearner):
