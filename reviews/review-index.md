@@ -1999,3 +1999,119 @@ learned types, monoidal structure, tiny-transformer scaling test, the neural
 "compiler pass" endpoint); lines 521–1366 are a verbatim re-paste of
 [reviewer-feedback-43.txt](reviewer-feedback-43.txt) (V5.1–V5.5 and V6.1–V6.5).
 Retained for provenance; no action items beyond those two entries.
+
+### [reviewer-feedback-46.txt](reviewer-feedback-46.txt)
+First review OF `row_v5_experimental_spec.md` (as opposed to the sketch). Calls
+the spec methodologically sound and argues mostly about where the next units of
+research effort should go. Headline: prioritize H28 ahead of H22–H24 — H22–H24
+ask whether the learner can manage representations, H28 asks whether two
+apparently different neural computations are the same abstract computation
+under different coordinates, which is the problem real LLMs pose.
+
+Eight specifics. (1) Split H20 into factorization economics and can-promotion-
+supply-the-atoms; run an exogenous-library version first with A_1..A_M supplied
+and frozen, asking only COMPRESS vs FACTORIZE, because otherwise a failure
+conflates "factorization isn't worthwhile" with "the upstream birth mechanism
+changed with r_meta." Promotion rate is a learner response and does not belong
+in the same hard gate as D*, per-use saving and behavioral contribution.
+(2) Turn H27 into a causal decomposition: on the same residual cluster measure
+P_0 (private residuals before promotion), P_1 (one fitted shared residual, no
+further training), P_2 (that residual after post-promotion SGD), plus
+PROMOTE-rejected clusters as the selection control — giving selection,
+purification and restructuring as separately attributable terms rather than a
+spectral correlation. (3) Do not make H28 logically dependent on H20 succeeding;
+the spec both gated it behind H20 and called it the redesign if H20 fails, and
+those pull opposite ways. (4) Strengthen the compositional-closure test: measure
+E(L) at L = 1..16, distinguish E(L) ~ L from E(L) ~ e^{cL}, and record error
+after every individual call — exposing INTERFACE STABILITY, where A: X->X and
+B: X->X type-check but A(x) lands outside the distribution B was trained on.
+(5) V6's first macro experiment must distinguish M_alias (names the composition,
+no new parameters), M_compiled (distils it into a new circuit), and a
+matched-capacity arbitrary primitive Q — separating naming/compression from
+search-space reduction from execution compilation from extra capacity.
+(6) Add a systematic-generalization holdout to H21: train family members at
+(+,+), (+,-), (-,+) and hold out (-,-), so success cannot be explained as
+interpolation among nearby atoms. (7) Decompose H22-online failures into the
+four error terms (horizon, per-use value, code cost, composed objective), since
+"objective right, forecast wrong" and "forecast right, value model wrong" imply
+different next steps. (8) Be willing to end V5 early: V5.0–V5.3 plus H27 is
+already a coherent block, and H22–H24 form almost another research project.
+
+Preferred sequence: finish H19 repairs -> H20 -> H21 -> H27 -> H28 -> V6, with
+H22–H24 as a side branch. Notes that V5 has already produced its surprise —
+cost and utility co-vary, so abstraction value is C/s and not size — and the
+next surprises worth hunting are whether abstractions form families, whether
+abstract computation survives coordinate changes, and whether compositions
+recursively become primitives.
+
+### [reviewer-feedback-47.txt](reviewer-feedback-47.txt)
+Second review OF the V5 spec. Endorses the LAW -> PHASE DIAGRAM -> SELECTION
+ladder and asks for six substantive changes before freezing, two of them
+important; explicitly does not want a rewrite.
+
+(1) BIGGEST TECHNICAL ISSUE: H20's validity metric. With the generator
+theta_f(r) = sqrt(r) B alpha_f + sqrt(1-r) B_f beta_f, at r = 1 every
+abstraction lies in the shared subspace B, but if the alpha_f point in
+different directions their pairwise behavioral correlation can be ZERO —
+A_1 = B[1,0] and A_2 = B[0,1] are maximally related in the intended sense and
+uncorrelated in the measured one. Replace with functional shared-subspace
+capture, R_meta = 1 - sum|A_f - B_hat alpha_hat_f|^2 / sum|A_f - A_bar|^2, fit
+on one probe set and evaluated on disjoint probes, and better still with
+leave-one-family-out R_LOO. That measures belonging to a common functional
+language rather than superficial correlation.
+
+(2) The parameter-free M* = D*(S)/s_bar_schema needs a cleaner protocol: if S is
+re-fit at every M then D*(S) and s_bar_schema both depend on M and there is no
+fixed C + Ms line whose crossing is being predicted. Split into H20a (calibrate
+on M_0 = 4, FREEZE S, measure s_i = D*(A_i) - [D(alpha_i) + D*(E_i)] on unseen
+members, predict, then add members one at a time — a true amortization
+experiment) and H20b (re-estimate at every M; asks where the actual learning
+system switches). H20a tests the law, H20b tests the learner — the same
+separation that rescued RETAIN.
+
+(3) H19's s-arms are not clean: eta and new_primitive_families change the
+learned function, approximation quality and promotion dynamics, not just s_bar.
+Manipulate future utility directly while keeping A byte-identical: after the
+abstraction forms and the gap begins, give returning tasks y = f_base(x) +
+g A(x) with g in {0.5, 1, 1.5}. Same A, same D*(A), same pre-gap history, same
+library; only what A is worth to a returning task moves. Call it RETURN-VALUE
+GAIN, and establish it only after the abstraction is frozen so it cannot change
+its birth.
+
+(4) Do not require natural PROMOTE dynamics to behave identically before
+establishing H20 economics. If r_meta rising makes PROMOTE birth fewer atoms
+because the continuous representation already absorbs the commonality, that is
+an alternative solution, not an invalid generator — hierarchy need not emerge
+explicitly if a cheaper lower-level representation already absorbs the
+regularity. Two layers: controlled-atom H20 (oracle gets A_1..A_F, no PROMOTE)
+and learned-library H20 with three readable outcomes, the third being collapse.
+
+(5) Tighten the composition probe now: depths 1..12, log NMSE against depth,
+distinguish O(d) / O(d^2) / O(c^d), and report median, p90, worst decile and
+saturation frequency — a median hides "most compositions work but 20%
+explode," which is deadly for program synthesis. V6 needs a composition ERROR
+LAW, not a depth-8 pass.
+
+(6) Fix a conceptual contradiction in H23: "never end-of-lifetime J after two
+libraries have evolved apart" and policy regret over a remaining trajectory are
+two different lessons. Mid-lifetime interventions cease to support a PAIRED
+PER-OBJECT effect after divergence; structural-POLICY evaluation intentionally
+scores the full divergent suffix from a shared prefix. V5.5 is supposed to
+embrace path dependence.
+
+Also: H28 may deserve promotion above H20 and should be a V6 ENTRY QUESTION
+rather than an optional V5.7 — before claiming a language of composable
+operations we should know whether its words survive a change of representational
+coordinates; the adapter-budget restriction is essential or the adapters
+secretly implement the operation. H27 has a stronger causal sequel (matched
+lifetimes with PROMOTE disabled vs enabled, compared at matched behavioral
+performance) but the cheap frozen-artifact version should not wait for it. H22
+should score PROMOTE in the common Delta J currency after its V3 structural
+legality gate, otherwise the "one score chooses" claim is weakened by valuing
+one edit by a special rule.
+
+Strongest possible V5 result, in the reviewer's framing: N_uses * s > C_A for
+the atom AND N_atoms * s_schema > C_S for the schema, with both crossings
+predicted before their sweeps from independently measured costs and benefits —
+evidence for a recursive economic law governing the growth of a learned
+computational language.

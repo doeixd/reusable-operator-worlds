@@ -1,0 +1,211 @@
+Yes. After reading the actual V5 spec, I think it's in very good shape
+methodologically. My suggestions are mostly about **where to spend the next
+units of research effort**, and a few places where I think the current gating
+could hide an interesting result.
+
+The biggest one: **I would seriously consider prioritizing H28 ahead of
+H22-H24.** The spec currently makes H28 "registered, not scheduled," and says
+it is the natural redesign if H20 is blocked. To me, H28 is much closer to the
+motivating research thesis than learned library-management policy. H22-H24 ask
+whether the learner can choose/edit representations; H28 asks whether two
+apparently different neural computations can be recognized as **the same
+abstract computation under different coordinates**. That is exactly the problem
+you expect in real LLMs.
+
+More specifically, I'd suggest these changes/experiments:
+
+1. **Split H20 into "factorization economics" and "can promotion supply the
+   atoms."** Right now H20's balance gates require D*(A_f), per-use saving,
+   behavioral contribution, and **promotion rate** all to remain within 10%
+   across r_meta. I agree with the first three. I'm less convinced promotion
+   rate belongs in the same hard gate. Promotion rate is a learner response to
+   the structure you are manipulating. It may legitimately rise because the
+   family became easier to discover.
+
+   I'd run an exogenous-library version first:
+
+       A_1, ..., A_M are supplied/frozen as learned atoms
+
+   and ask only:
+
+       COMPRESS individually   vs   FACTORIZE into schema.
+
+   That tells you whether the **representation class actually has an economic
+   region**. Then separately ask whether the existing promoter can get you into
+   that region.
+
+   Otherwise H20 can fail because:
+
+   > factorization is worthwhile, but the upstream abstraction-birth mechanism
+   > changes with r_meta.
+
+   That's a very different failure from:
+
+   > higher-order factorization isn't worthwhile.
+
+   I would want those separated.
+
+2. **Turn H27 into a causal decomposition, not just a correlational mechanism
+   study.** H27 is potentially one of the most interesting results in V5:
+   shared abstractions cost ~3.9 bits/scalar while private residuals cost ~5.0,
+   and the spec asks whether this comes from purification, effective dimension,
+   selection, or restructuring. But the spec itself notes that noise
+   purification and restructuring may be impossible to distinguish from frozen
+   artifacts alone.
+
+   There is a nice intervention that could separate them. For exactly the same
+   cluster of private residuals, compare:
+
+       P_0:  the private residuals before promotion
+       P_1:  one functionally fitted shared residual, no further training
+       P_2:  that same shared residual after post-promotion SGD
+
+   Also compare selected residual clusters against equally sized residual
+   clusters that PROMOTE rejected.
+
+   Then you get:
+
+       P_0(selected) < P_0(unselected)  in compressibility -> SELECTION effect
+       D*(P_1) < D*(P_0)                -> PURIFICATION / consolidation effect
+       D*(P_2) < D*(P_1)                -> REPRESENTATION RESTRUCTURING caused
+                                           by continued learning
+
+   That would be much stronger than a spectral correlation. If P_2 < P_1 < P_0,
+   you could legitimately say abstraction formation changes the coding geometry
+   of computation.
+
+3. **I would not make H28 logically dependent on H20 succeeding.** The current
+   spec says H28 is gated behind H20 producing a factorization class, but also
+   says H28 is the natural redesign if H20 is blocked. Those two ideas pull in
+   opposite directions.
+
+   H20 asks roughly A_i = S(alpha_i) + eps_i in common coordinates.
+   H28 asks f_i = d_i . A . e_i in different coordinates.
+
+   H28 can pay even if H20 does not. In fact that's partly the point. So I would
+   make the branch:
+
+       H20 pays
+          v
+       same-coordinate higher-order abstraction exists
+
+       H20 does not pay
+          v
+       try H28
+          v
+       perhaps abstraction only exists modulo coordinate change
+
+   That is scientifically very interesting either way.
+
+4. **Strengthen the compositional-closure test before V6.** The current probe
+   passed: depth-8/depth-3 median NMSE ratios were ~4.1-4.4 and there was no
+   saturation. That's enough as a "not obviously broken" gate, but I wouldn't
+   treat it as evidence that the learned operators are truly closed under
+   composition.
+
+   In V6 I'd measure E(L) for composition depths L = 1,2,3,4,5,6,8,12,16. Then
+   ask what law describes error propagation: E(L) ~ L versus E(L) ~ e^{cL}.
+
+   Also measure error **after every individual call**. That tells you whether
+   one operator is systematically pushing the state off the distribution on
+   which later operators were learned.
+
+   This could expose an important new concept: **interface stability**. Two
+   morphisms may type-check mathematically, A: X->X and B: X->X, while
+   nevertheless being poor neural compositional partners because A(x) falls
+   outside the representational distribution B was trained on.
+
+   That issue is going to become enormous once you leave synthetic (d=16)
+   worlds.
+
+5. **Make V6's first macro experiment distinguish three meanings of "macro."**
+   I would not simply compare "ABC" against a macro M. Use at least:
+
+       M_alias     = C . B . A, storing no new neural parameters and merely
+                     naming the composition
+       M_compiled ~= C . B . A, distilling the composition into a new learned
+                     circuit
+       Q           = a matched-capacity arbitrary new primitive
+
+   That separates naming/compression vs search-space reduction vs execution
+   compilation vs extra neural capacity.
+
+   The spec already correctly requires macros to beat simpler compressed
+   alternatives and a matched-budget search-space control. I would build the V6
+   experiment around that distinction.
+
+6. **In H21, add one systematic-generalization holdout.** Currently H21 holds
+   out a whole abstraction and asks whether learning only alpha_new is cheaper
+   than learning a whole operator, which is exactly the right test. I would add
+   a harder held-out member whose parameter combination is deliberately novel.
+
+   For example, if the schema has two latent directions A(alpha_1, alpha_2),
+   train family members occupying (+,+), (+,-), (-,+) and hold out (-,-), or
+   otherwise create a combination not observed during schema fitting.
+
+   Then success can't be explained quite as easily as interpolation among
+   nearby atoms. It starts to look like the learner has captured the
+   **generative structure of a family of computations**.
+
+7. **Decompose H22-online failures into valuation failure versus forecasting
+   failure.** The spec already separates H22-oracle from H22-online, which is
+   excellent. But if online fails, you will want to know why.
+
+   Record separately: H_R_hat - H_R, s_hat - s, dD_hat - dD, and finally
+   dJ_hat - dJ.
+
+   That turns a failed selector into useful science:
+
+   > the economic objective was right but recurrence forecasting failed,
+
+   versus
+
+   > recurrence was predicted correctly but the representation-value model was
+   > wrong.
+
+   Those imply completely different next steps.
+
+8. **Be willing to end V5 earlier than the spec's maximum scope.** This is
+   probably my strongest project-management suggestion. V5.0-V5.3 + H27 could
+   already be an excellent coherent block:
+
+       real code currency -> causal amortization -> higher-order phase boundary
+       -> prospective schema transfer -> mechanism of compression
+
+   H22-H24 - selection, rollout planning, learned restructuring policy - are
+   interesting, but they form almost another research project. The spec itself
+   already says H19/H20 are the only rungs presently deserving sealed
+   confirmation and that a learned policy isn't required for V5 to count.
+
+   If H20/H21 work, I might be more excited to spend the next research budget on
+   **H28 and V6 composition** than on training q_phi to manage the library.
+
+The overall sequence I'd favor now is:
+
+    finish H19 repairs
+      v
+    H20: does higher-order representation have an economic region?
+      v
+    H21: does it transfer prospectively?
+      v
+    H27: why does abstraction change code efficiency?
+      v
+    H28: same computation modulo representation
+      v
+    V6: compositions become reusable morphisms
+
+with H22-H24 available as a side branch if representation-management itself
+becomes important.
+
+The reason I like that ordering is that it keeps marching toward the original
+scientific question rather than getting trapped optimizing the management system
+around the current toy library. V5 has already produced an interesting
+surprise - **cost and utility co-vary, so abstraction value is C/s, not simply
+size**. The next surprises I'd go hunting for are whether **abstractions
+themselves form reusable families**, whether **abstract computation survives
+coordinate changes**, and whether **compositions recursively become new
+primitives**.
+
+Those three results, if they work, would make the project feel like one
+continuous attack on the composition/efficient-scaling hypothesis rather than a
+sequence of increasingly elaborate library-management experiments.

@@ -2062,3 +2062,37 @@ quantitative law from an accounting identity.
   as the V3 and V4 sketches were. Pointers updated in `CLAUDE.md`,
   `AGENTS.md`, and `README.md`; `row_v3_experimental_spec.md` is no
   longer described as the active spec.
+
+# 2026-08-20 — reviews 46 and 47 (of the spec) incorporated
+
+- Both reviews read `row_v5_experimental_spec.md` itself. Spec taken to
+  Revision 4 before freezing; neither review asked for a rewrite and
+  none was made.
+- H19: primary s-arm replaced by S0, a post-gap return-value gain
+  `y = f_base(x) + g A(x)`, which moves s_bar while leaving the
+  abstraction byte-identical (registered check: D*(A) constant to 2%
+  across g). S1/S2 demoted to secondary cuts with their confounds
+  stated.
+- H20: validity instrument replaced — pairwise correlation reports
+  r_meta = 0 for a perfectly shared subspace (A_1 = B[1,0],
+  A_2 = B[0,1]) and would have voided a valid generator. Now
+  functional shared-subspace capture with leave-one-family-out R_LOO
+  as the reported number. Split into H20a (frozen schema after an
+  M_0 = 4 calibration; where H25 is scored) and H20b (re-fit; tests
+  the learner, three registered outcomes including library collapse).
+  Promotion rate removed from the balance gates and made a reported
+  outcome (D17).
+- H21 gained a novel-combination holdout; H22 scores PROMOTE in the
+  common Delta J currency after a legality gate and decomposes online
+  failures into four error terms; H23's paired-causal and policy rules
+  separated; H27 gained the P_0/P_1/P_2 causal decomposition; H28
+  ungated from H20 and raised to a V6 entry question; the closure
+  probe extended into an error-vs-depth law with p90, worst decile and
+  per-call error (interface stability).
+- New decisions D16–D18; open question 11 settled; staging reordered
+  so V5 may close after H19/H20/H21/H27 with H22–H24 as a side branch.
+- `PREDICTIONS.md`: H25 protocol amendment (frozen schema, or the
+  crossing does not score H25), H26 amendment (three gates, not four),
+  and H29 (the causal decomposition, registered before the audit).
+- Reviews saved as `reviewer-feedback-46.txt` / `-47.txt`, indexed, and
+  the method lessons appended to `notes/learnings.txt`.

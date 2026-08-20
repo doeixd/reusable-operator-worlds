@@ -1,0 +1,318 @@
+Yes. The V5 spec is much stronger than the earlier sketch. The overall ladder -
+LAW -> PHASE DIAGRAM -> SELECTION - is right, and the discipline around
+cost/utility separation, matched-budget comparisons, and blocking rather than
+forcing failed worlds is excellent.
+
+I would make **six substantive changes before freezing**, though. Two are fairly
+important.
+
+## 1. Replace H20's pairwise-correlation validity metric
+
+This is the biggest technical issue I see.
+
+Your generator is:
+
+    theta_f(r) = sqrt(r) B alpha_f + sqrt(1-r) B_f beta_f
+
+At r = 1, every abstraction lies in the same shared subspace B. But if the
+alpha_f's point in different directions, **pairwise function correlation can
+still be near zero**.
+
+For example A_1 = B[1,0] and A_2 = B[0,1]. They are maximally related in the
+sense you care about - they are coordinates in exactly the same two-dimensional
+family - but their behavioral correlation can be zero.
+
+So this validity criterion - mean pairwise residual-function correlation -
+doesn't actually measure your intended r_meta.
+
+I'd replace it with something like **functional shared-subspace capture**:
+
+    R_meta = 1 - ( sum_f |A_f - B_hat alpha_hat_f|^2 )
+                 / ( sum_f |A_f - A_bar|^2 )
+
+Fit B_hat in functional space on one probe set and evaluate on disjoint probes.
+
+Even better, use leave-one-family-out prediction:
+
+    R_LOO = 1 - |A_heldout - B_hat alpha_hat_heldout|^2
+                / |A_heldout - A_bar|^2
+
+Then require R_meta(0) ~ null, and R_meta(r) monotonically increasing.
+
+That measures **belonging to a common functional language**, rather than
+superficial correlation.
+
+---
+
+# 2. H20's parameter-free M* prediction needs a cleaner protocol
+
+The proposed law is great: M* = D*(S) / s_bar_schema.
+
+But there's a subtle problem. If you re-fit S independently at every M, then
+D*(S) = D*(S; M) and s_bar_schema = s_bar_schema(M). The schema gets better
+estimated as more members arrive. Then there's no genuinely fixed C + Ms line
+whose crossing you're predicting. You risk predicting M* using quantities that
+themselves depend on M*.
+
+### I'd split H20 into two experiments.
+
+### H20a - Pure recursive amortization
+
+Take a calibration set of, say, M_0 = 4 members. Fit schema S. **Freeze it.**
+
+On additional unseen family members, measure:
+
+    s_i = D*(A_i) - [ D(alpha_i) + D*(E_i) ]
+
+Then s_bar_schema = E[s_i].
+
+Now predict:
+
+    M*_additional = ( D*(S) - savings already accrued ) / s_bar_schema
+
+Add held-out members one at a time without changing S.
+
+That's a true amortization experiment.
+
+### H20b - Learned phase diagram
+
+Then allow the factorization to be re-estimated at every M. Now ask where the
+*actual learning system* switches representation.
+
+H20a tests the law. H20b tests the learner.
+
+That separation is analogous to the frozen/open-library distinction that rescued
+RETAIN. I think it will save you another round of counterfactual confusion.
+
+---
+
+# 3. Your current H19 s-arms aren't as clean as they could be
+
+This is the nicest immediate improvement available.
+
+You currently propose changing eta, or new_primitive_families. But both can
+alter much more than s_bar. They can change the function that gets learned,
+promotion dynamics, approximation quality, etc.
+
+You can manipulate **future utility directly while keeping A byte-identical**.
+
+After the abstraction has formed and the gap begins, give returning tasks a
+coefficient:
+
+    y = f_base(x) + g A(x)
+
+Sweep g in {0.5, 1, 1.5} or whatever yields useful separation.
+
+Crucially: same A; same D*(A); same pre-gap history; same library; only the
+contribution of A to returning tasks changes.
+
+Then s_bar(g) changes while D*(A) should remain constant. Now predict:
+
+    H*(g) = lambda D*(A) / s_bar(g)
+
+That is a much cleaner inverse-s test. It directly fills the one missing part of
+H19.
+
+I'd call it something like **return-value gain**, not an eta arm. And establish
+the gain only *after* the abstraction is frozen so it cannot change its birth.
+
+---
+
+# 4. Don't require natural PROMOTE dynamics to behave identically before
+establishing H20 economics
+
+Your +/-10% balance gate on promotion rate is defensible, but there's a
+possibility it blocks the interesting phenomenon for the wrong reason.
+
+Suppose r_meta up causes PROMOTE itself to produce fewer atoms because its
+existing continuous representation absorbs their commonality. Then M goes down.
+
+That's not necessarily a broken generator. It could mean:
+
+> **The lower-level representation already captures meta-recurrence, so a new
+> schema object isn't economically necessary.**
+
+That's scientifically interesting.
+
+I would therefore have two layers:
+
+### Teacher / controlled-atom H20
+
+Give the oracle exactly A_1, ..., A_F as the objects to represent. No PROMOTE
+dynamics. Ask purely COMPRESS vs FACTORIZE. This establishes whether a schema
+economy exists at all.
+
+### Learned-library H20
+
+Now let V3 produce the atoms. Possible outcomes:
+
+1. learner produces F atoms and FACTORIZE wins;
+2. learner produces F atoms and COMPRESS wins;
+3. learner collapses meta-structure into fewer atoms already.
+
+Outcome 3 is **not generator invalidity**. It's an alternative solution.
+
+That's potentially very important to your grand theory: hierarchy need not
+emerge explicitly if a cheaper lower-level representation already absorbs the
+regularity. The system should care about cost, not about producing the hierarchy
+we expected.
+
+---
+
+# 5. Tighten the V6 compositional-closure probe now
+
+I'm glad you ran it and it passed the current gate. But because V6-V8 depend so
+heavily on this, I'd extract more information from the same cheap test.
+
+Right now the result is approximately a depth-8/depth-3 degradation of 4.1-4.4x,
+still under the registered 5x gate.
+
+Don't just measure d = 3 and d = 8. Measure d = 1,2,3,4,5,6,8,10,12. Then plot
+log NMSE(d) against depth. We need to know whether error grows approximately
+O(d), O(d^2), or O(c^d). Those imply very different futures.
+
+Also report median, p90, worst decile of routes, and saturation frequency. A
+median can hide "most compositions work but 20% catastrophically explode."
+That's deadly for program synthesis.
+
+What V6 really needs is a **composition error law**, not merely a depth-8 pass.
+
+---
+
+# 6. Fix one conceptual contradiction in H23
+
+The spec says J_pi(t:T) = L_preq[t:T] + lambda D_T and structural regret
+compares policies over the remaining trajectory. That's correct.
+
+But immediately afterward it says:
+
+> never end-of-lifetime J after two libraries have evolved apart.
+
+Those are actually two different lessons getting mixed together.
+
+For **estimating the causal value of deleting one abstraction**, divergent
+endpoint J isn't a paired per-object estimate. Correct.
+
+But for **comparing structural policies**, trajectory divergence is precisely
+what we care about. If pi_1 causes one future library and pi_2 causes another,
+then J_pi1(t:T) - J_pi2(t:T) over the same suffix is absolutely the policy
+comparison.
+
+I'd rewrite the rule:
+
+> Mid-lifetime interventions cease to support a *paired per-object effect* after
+> their trajectories diverge. Structural-policy evaluation intentionally scores
+> the full divergent suffix from a shared prefix.
+
+That's important because V5.5 is specifically supposed to embrace path
+dependence.
+
+---
+
+# One larger suggestion: H28 may deserve promotion in the roadmap
+
+I like H28 a lot. Possibly more than H20.
+
+The eventual learned language will encounter the same computation in different
+neural coordinate systems constantly: f_i = d_i . A . e_i. If the system only
+recognizes reuse when computations literally live in the same coordinates, the
+eventual LLM/vision/world-model story breaks pretty quickly.
+
+The real abstraction relation is closer to: f_i ~ f_j if cheap coordinate
+transformations reveal the same morphism.
+
+And your proposed MDL test is exactly right:
+
+    D*(A) + sum_i [ D*(e_i) + D*(d_i) ]  <  sum_i D*(f_i)
+
+The adapter-budget restriction is essential because otherwise e_i or d_i can
+secretly implement the whole operation.
+
+I wouldn't necessarily run H28 before H20. But I would make it a **V6 entry
+question**, not leave it buried as optional V5.7. Because before we say "we have
+a learned language of composable operations," we should probably know whether
+its "words" can survive a change of representational coordinates.
+
+---
+
+# H27 also has a better causal version available
+
+The observation D*_shared < D*_private may eventually be more important than it
+currently looks.
+
+Your artifact audit can distinguish some hypotheses, but it won't cleanly
+separate selection, purification, and restructuring.
+
+A stronger later experiment would take the **same promotable computation** and
+compare:
+
+    Arm A: PROMOTE disabled. Information remains distributed privately.
+    Arm B: PROMOTE enabled. Same recurrence becomes shared.
+
+Then compare the functionally corresponding computation at matched behavioral
+performance. If D*_after < D*_before even after matching which computation we're
+talking about, then abstraction formation itself changed coding geometry.
+
+That would support: **abstraction is representational restructuring, not merely
+deduplication.**
+
+Don't delay H20 for it - the frozen-artifact H27 is rightly cheap - but keep
+that causal sequel in mind.
+
+---
+
+# One H22 change I'd strongly consider
+
+H22 claims one prospective score chooses among edits. Then **every edit should
+ultimately be converted into the same dJ currency**.
+
+The spec currently gives PROMOTE its "V3 frozen criterion, unchanged." That's
+fine for deciding whether V3 itself births an abstraction. But it weakens the
+H22 theoretical claim if COMPRESS is valued via dJ, RETAIN via dJ, FACTORIZE via
+dJ, and PROMOTE via a special structural acceptance rule.
+
+I'd distinguish PROMOTE legality/structural evidence from PROMOTE economic
+value. So PROMOTE can retain its V3 substitutability/generalization gate, but
+once legal, score it with:
+
+    dJ_hat_promote = dL_hat_future + lambda dD*_hat
+
+Then H22 really is e* = argmin_e dJ_hat(e) subject to operation-specific
+legality constraints. That's much cleaner.
+
+---
+
+# My priority order
+
+I would **not** rewrite the overall spec. It's good. Before freezing I'd do:
+
+1. **Change H20's meta-recurrence instrument** from pairwise correlation to
+   functional shared-subspace/LOO capture.
+2. Add the **fixed-schema H20a** so M* = D(S)/s is genuinely predictive rather
+   than M-dependent.
+3. Replace or supplement H19 S1/S2 with a **post-birth return-value multiplier**
+   that changes s while leaving A fixed.
+4. Clarify H23's policy-regret vs paired-causal distinction.
+5. Make H22 score PROMOTE in the common economic currency after its structural
+   legality gate.
+6. Expand the already-passed composition probe into an **error-vs-depth curve**.
+7. Keep H28 highly visible as the likely bridge between toy neural libraries and
+   actual learned representations.
+
+Everything else I'd mostly leave alone.
+
+The core of this spec is right: V5 shouldn't prove that sophisticated
+representations can exist. It should discover whether **the same prospective
+economics tells us when each representation is worth inventing**.
+
+And the strongest possible V5 result, in my view, would be:
+
+    N_uses * s > C_A        (atom)
+    N_atoms * s_schema > C_S (schema)
+
+with both crossings **predicted before their sweeps from independently measured
+costs and benefits**.
+
+If you get that, then going into V6 you don't merely have a collection of
+successful abstractions. You have evidence for a **recursive economic law
+governing the growth of a learned computational language**.

@@ -1434,3 +1434,51 @@ objection is accepted -- under the rate-distortion currency this project
 now uses, `D*(A + dead bits) = D*(A)`, so padding tests a storage tax
 rather than abstraction economics. The V5.1 note proposing it as the
 clean proportionality test is superseded.
+
+# H25 protocol amendment and H29 (registered 2026-08-20, reviews 46-47)
+
+## H25 amendment, before any V5.2 world
+
+H25 registered `M* = D*(S)/s_bar_schema` within 15%. Review 47 shows
+the protocol as written could not deliver that: re-fitting S at every
+M makes both inputs functions of M, so the prediction would use
+quantities that depend on what it predicts. The interval is unchanged;
+the protocol is now fixed. `D*(S)` and `s_bar_schema` are measured on a
+calibration set of M_0 = 4 members with S FROZEN thereafter, written
+down before any member is added, and members are added one at a time
+without re-fitting. A crossing scored against a re-fit schema (H20b) is
+descriptive and does NOT score H25.
+
+## H26 amendment
+
+The four balance gates become three. Promotion rate is removed: it is a
+learner response, not a generator property, and gating on it would
+discard the outcome where PROMOTE births fewer atoms because the
+lower-level representation already absorbs the commonality. That
+outcome is now registered as a reading in its own right (H20b outcome
+3), not a failure. `D*(A_f)`, `s_bar(A_f)` and behavioral contribution
+remain hard preconditions at 10%.
+
+## H29 — abstraction changes coding geometry, decomposed
+
+Registered before the audit runs. On the same residual clusters, with
+PROMOTE-rejected clusters of matched size as the control:
+
+    P_0   private residuals as they stood before promotion
+    P_1   one functionally fitted shared residual, no further training
+    P_2   that shared residual after post-promotion SGD
+
+PREDICTION: `D*(P_2) < D*(P_1) < D*(P_0)`, and the selection term
+`D*(P_0 selected) < D*(P_0 rejected)` accounts for less than half of
+the measured 5.0 -> 3.9 bits/scalar gap. That is: the gap is mostly
+made, not selected.
+
+Falsified by: selection accounting for the majority of the gap; or
+`D*(P_2) >= D*(P_1)`, which would mean continued learning does not
+restructure the code even though sharing helps.
+
+This is the causal form of H27, which stays as the cheap correlational
+audit. The stronger sequel — matched lifetimes with PROMOTE disabled
+versus enabled, compared at matched behavioral performance — is NOT
+registered here; it waits until the decomposition says which term
+dominates.

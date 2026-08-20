@@ -20,6 +20,21 @@ except where this document says otherwise. It does not revise V4 or V4R.
 Live STATUS annotations are updated in the same commit as the results
 they describe, as in V2 and V3.
 
+**Revision 4 (2026-08-20) incorporates reviews 46 and 47**, both of
+which read this specification rather than the sketch. Changed before
+freezing: H19's s-arm replaced by a return-value gain that moves s
+while leaving the abstraction byte-identical; H20's validity instrument
+replaced (pairwise correlation cannot see a shared subspace); H20 split
+into H20a (fixed schema, tests the law) and H20b (re-fit schema, tests
+the learner); promotion rate removed from the balance gates and made a
+reported outcome; H21 given a novel-combination holdout; H22 scoring
+PROMOTE in the common currency after a legality gate, with a
+four-term failure decomposition; H23's paired-causal and policy rules
+separated; H27 given a causal P_0/P_1/P_2 decomposition; H28 ungated
+from H20 and raised to a V6 entry question; the composition probe
+extended into an error-vs-depth law. Neither review asked for a
+rewrite, and none was made.
+
 ---
 
 # 0. Status at promotion
@@ -295,7 +310,23 @@ downgrade them to reported diagnostics after seeing a sweep.
 
 D15. H27 runs on frozen artifacts in parallel with H20 and is not
 gated behind it. H28 is registered but unscheduled; scheduling it
-requires a new, separately fingerprinted generator family.
+requires a new, separately fingerprinted generator family. H28 is NOT
+contingent on H20's verdict in either direction, and is a V6 entry
+question.
+
+D16. H20 is two experiments. H20a supplies exogenous atoms and freezes
+the schema after a calibration set; it is where H25's interval is
+scored. H20b lets V3 supply the atoms and re-fits. A pass requires
+H20a. They are not merged back into one sweep.
+
+D17. Promotion rate is not a balance gate. It is a reported outcome of
+H20b with three registered readings, and a cell is never discarded for
+it.
+
+D18. V5 may close after H19, H20, H21 and H27. H22–H24 are a side
+branch, entered only if representation MANAGEMENT becomes the live
+question; they are not required for V5 to count, and the next research
+budget after H21 is expected to go to H28 and V6 instead.
 
 D12. Rank-4 requires lifting the `residual_rank > 2` cap in
 SharedResidualModelConfig and VariationalModelConfig. Default stays 2,
@@ -421,7 +452,7 @@ must not call a D* re-score a second confirmation.
 
 ---
 
-# 10. Core hypotheses (H19-H28)
+# 10. Core hypotheses (H19-H29)
 
 H19–H24 and H25–H27 are in PREDICTIONS.md. H28 is registered in this
 specification only, and in no prediction ledger yet, and is unscheduled.
@@ -493,7 +524,36 @@ N=88 is under the 216-program cap. Single-family, onset 8, gap
 the first scorer call omitted it: it is the V4R operating point and
 the interpolation anchor. Rank 4 requires B0 (cap lift).
 
-**s-arm, required, two independent cuts, rank held at 2.**
+**s-arm. PRIMARY CUT: return-value gain (S0).** Revision 4, after
+review 47. S1 and S2 below both move more than s_bar — they change the
+function that is learned, the approximation quality, and the promotion
+dynamics — which is the same class of confound that falsified H19(a).
+S0 manipulates future utility directly while leaving the abstraction
+byte-identical.
+
+    After the abstraction has formed and the gap has begun, returning
+    tasks carry a coefficient on its contribution:
+
+        y = f_base(x) + g * A(x)
+
+    with g in {0.5, 1.0, 1.5}. Same A, same D*(A), same pre-gap
+    history, same library, same routes; only what A is worth to a
+    returning task moves.
+
+    Prediction: s_bar(g) scales with g while D*(A) is unchanged, and
+    the observed crossing tracks H*(g) = lambda D*(A) / s_bar(g).
+
+The gain is established ONLY after the abstraction is frozen at the
+gap, so it cannot change what got born. Verify byte-identity of the
+retained arm's abstraction tensors across g before scoring; if they
+differ, the cut is void. Registered check: D*(A) constant across g to
+within 2%, and s_bar(g) monotone in g. This is the cleanest inverse-s
+test available in this substrate and it is what fills H19's missing
+half.
+
+**s-arm, secondary cuts, rank held at 2.** Retained because they probe
+a different mechanism (family strength rather than payoff size), and
+reported with their confound stated.
 
     S1  eta in {0.5, 0.9} at matched rank, same gap, same N-grid.
         Prediction: measured s_bar falls at eta=0.5; H* rises as
@@ -503,9 +563,12 @@ the interpolation anchor. Rank 4 requires B0 (cap lift).
         rank. False is a weaker family (approximable by the frozen
         basis); s_bar should drop. Same 1.5x rule.
 
-If neither S1 nor S2 moves s_bar by 1.5x, inverse-s is untestable at
-this generator — a respectable partial of H19, not a silent skip.
-Do not then start varying dormancy length; that was the V4 error.
+S1 and S2 may not be quoted as inverse-s evidence without reporting
+what else moved with them (D*(A), promotion count, final NMSE). If S0
+runs, they are supporting evidence, not the cut. If neither S0 nor S1
+nor S2 moves s_bar, inverse-s is untestable at this generator — a
+respectable partial of H19, not a silent skip. Do not then start
+varying dormancy length; that was the V4 error.
 
 **Coder-arm (sensitivity, not primary).** At rank 2, store abstractions
 at 2, 4, 8 bits/scalar post-hoc (V5.0 coder) and re-score V_retain
@@ -515,7 +578,7 @@ honour the letter of PREDICTIONS.md H19.
 
 **Falsifier.** Observed H*-ratio vs D-ratio relative error >= 0.25 on
 (b) after s_bar is measured, on the D-arm *and* on at least one
-informative s-arm. A D-only pass with no informative s-arm is a
+informative s-arm (S0 preferred). A D-only pass with no informative s-arm is a
 partial, not a pass. Re-scoring V4R O4 at D* is not a confirmation
 of H19.
 
@@ -627,15 +690,37 @@ family, separately fingerprinted. Adding a field to WorldConfig would
 invalidate every existing resolved-config hash.
 
 **World-validity gate, before any learner oracle.** On the teacher
-family primitives, with no learner in sight:
+family primitives, with no learner in sight.
 
-    measured_r = mean pairwise residual-function correlation among
-                 family operators
+Revision 4 replaces the instrument. Mean pairwise residual-function
+correlation does NOT measure what r_meta means here: with
+A_1 = B[1,0] and A_2 = B[0,1] the two operators are coordinates in the
+same two-dimensional family — maximally related in the sense the
+hypothesis is about — while their behavioral correlation is zero
+(review 47). Pairwise correlation would report r_meta = 0 for a
+perfectly shared subspace and would have voided a valid generator.
+
+Use functional shared-subspace capture instead, fit in FUNCTIONAL
+space on one probe set and evaluated on DISJOINT probes:
+
+    R_meta = 1 - sum_f |A_f - B_hat alpha_hat_f|^2
+                 / sum_f |A_f - A_bar|^2
+
+and, as the stronger form, leave-one-family-out:
+
+    R_LOO  = 1 - |A_held - B_hat alpha_hat_held|^2
+                 / |A_held - A_bar|^2
+
+with B_hat fit on the other families only. R_LOO is the reported
+number; R_meta is the in-sample companion, and a large R_meta with a
+small R_LOO means the subspace is being memorized rather than shared.
+
     teacher_G1 = R^2 of C + B alpha at rank 2, minus isotropic null
 
-Pass: measured_r increases monotonically with configured r_meta on
-worlds 0–2, and teacher_G1 > 0 at r_meta = 1. Fail: the knob does not
-instantiate meta-recurrence; redesign before running FACTORIZE.
+Pass: R_LOO(r_meta = 0) is within the isotropic null, R_LOO increases
+monotonically with configured r_meta on worlds 0–2, and teacher_G1 > 0
+at r_meta = 1. Fail: the knob does not instantiate meta-recurrence;
+redesign before running FACTORIZE.
 
 **BALANCE GATES, frozen at +/- 10%, a precondition on SCORING and not a
 diagnostic.** This is V5.1's lesson turned into a rule. Across the swept
@@ -644,14 +729,28 @@ r_meta, each of
     D*(A_f)                    per-abstraction frontier cost
     s_bar(A_f)                 per-use saving of an individual member
     behavioral contribution    that member's own share of output
-    promotion rate             how many abstractions get born at all
 
-must be constant to within 10%. A sweep failing any gate is
+must be constant to within 10%. A sweep failing any of these three is
 UNSCOREABLE — not weak evidence, not a partial. If raising r_meta also
 makes individual atoms cheaper or more useful, then M*(r_meta) moves
 for the same confounded reason H19(a) failed and the phase boundary is
-an artifact. Measure all four on the teacher family first (cheap), then
-re-check them on the learned library at the cells actually scored.
+an artifact. Measure all three on the teacher family first (cheap),
+then re-check them on the learned library at the cells actually
+scored.
+
+**Promotion rate is NOT a balance gate.** Revision 4 removes it, on
+both reviewers' objection. Promotion rate is a LEARNER RESPONSE to the
+structure being manipulated, not a property of the generator. If
+r_meta rising causes PROMOTE to birth fewer atoms because the existing
+continuous representation already absorbs the commonality, that is not
+an invalid world — it is an alternative solution, and an interesting
+one:
+
+    hierarchy need not emerge explicitly if a cheaper lower-level
+    representation already absorbs the regularity.
+
+Promotion rate is therefore a REPORTED OUTCOME of H20b (below), with
+its own registered reading, and never a reason to discard a cell.
 
 **Ceiling, registered.** Canonical world: 6**3 = 216 distinct
 programs. N=256 is unreachable without adding primitives. At m=16,
@@ -661,7 +760,53 @@ a TESTBED result, not an H20 failure to be tuned away. A generator
 with more primitives is a separately fingerprinted family and is not
 required by this specification.
 
-**Gates, in order, all mandatory, on the *learned* library:**
+**H20a and H20b: the economics and the learner are separate
+experiments.** Revision 4, on both reviewers' objection, and the same
+move that rescued RETAIN (frozen-library vs open-library).
+
+*H20a — does a schema economy exist at all?* Exogenous atoms: supply
+A_1 .. A_F to the oracle as the objects to be represented, with no
+PROMOTE dynamics in the loop. Ask only COMPRESS-individually versus
+FACTORIZE-into-schema at matched budget. This isolates the
+representation class from the birth mechanism, so a failure means
+"higher-order factorization is not worthwhile," not "the upstream
+promoter changed with r_meta."
+
+H20a also fixes the M-dependence in the point prediction. If S is
+re-fit at every M then D*(S) = D*(S; M) and s_bar_schema =
+s_bar_schema(M), and M* would be predicted from quantities that
+themselves depend on M — there is no fixed C + M s line whose crossing
+is being predicted. So:
+
+    calibrate on M_0 = 4 members; fit S; FREEZE it
+    for each additional unseen member, measure
+        s_i = D*(A_i) - [ D(alpha_i) + D*(E_i) ]
+    s_bar_schema = mean s_i
+    predict  M*_additional = ( D*(S) - savings already accrued )
+                             / s_bar_schema
+    then add held-out members ONE AT A TIME, S unchanged
+
+That is a true amortization experiment and is where H25's 15% interval
+is scored.
+
+*H20b — where does the actual learning system switch?* Let V3 produce
+the atoms and let the factorization be re-estimated at each M. Three
+registered outcomes, all readable:
+
+    1. learner produces ~F atoms and FACTORIZE wins
+    2. learner produces ~F atoms and COMPRESS wins
+    3. learner collapses the meta-structure into fewer atoms already
+
+Outcome 3 is a result, not a broken world. It says the lower-level
+representation absorbed the regularity more cheaply than a schema
+object would have, which is a claim about where hierarchy is worth
+having and belongs in the paper.
+
+H20a tests the law. H20b tests the learner. A pass requires H20a; H20b
+alone is a phenomenology.
+
+**Gates, in order, all mandatory, on the *learned* library (H20b; H20a
+runs the same G1–G3 on the supplied atoms):**
 
     G1  existence: R^2_observed - R^2_isotropic_null > 0 at rank 2
         (V4.2 already passed this at r_meta ~ 0 on development 0–2;
@@ -731,7 +876,18 @@ demand.
 cost AND retained bits. A win on bits alone is storage; a win on loss
 at extra bits is capacity.
 
-Gated on H20 G1. If no family structure exists, H21 has nothing to
+**Systematic-generalization holdout (added Revision 4).** The
+leave-one-member-out test above can be passed by interpolation among
+nearby atoms. Add a second holdout whose position in the family is
+deliberately novel: with a two-direction schema A(alpha_1, alpha_2),
+fit on members occupying (+,+), (+,-), (-,+) and hold out (-,-).
+Report both holdouts separately. Passing the ordinary holdout and
+failing the novel-combination one is a real and publishable
+distinction — it says the schema is a neighbourhood, not a generative
+structure. Passing both is what would license the claim that the
+learner captured the generative structure of a family of computations.
+
+Gated on H20a G1. If no family structure exists, H21 has nothing to
 acquire.
 
 ## H22 — Economic edit selection (V5.4)
@@ -779,7 +935,8 @@ candidate e, at a consolidation point t, with kappa=mu=gamma=0:
     KEEP        0
     COMPRESS    Delta D* from the component RD curve of this A;
                 Delta L from the same curve at eps=10
-    PROMOTE     V3 frozen criterion, unchanged
+    PROMOTE     legality by the V3 frozen criterion; VALUE in the
+                common currency, Delta L_hat_future + lambda Delta D*_hat
     FACTORIZE   G2's J_factorize - J_compress, using current library
                 (online: fit on completed abstractions only)
     RETAIN      H_R_hat * s_hat - lambda * D*(A)
@@ -795,6 +952,29 @@ abstraction is in PROBATION and is not eligible for RETIRE.
 Pick e* = argmin_e Delta J_hat(e) among legal edits, greedily, recompute
 until no edit improves (V4 spec §3.3). Edit order is not a hidden
 hyperparameter.
+
+**Legality and value are separate (Revision 4, review 47).** Every edit
+is valued in the same Delta J currency; operation-specific rules act
+only as legality constraints on the argmin. PROMOTE keeps its V3
+substitutability and generalization gate — that decides whether a
+promotion is ADMISSIBLE — but once admissible it is scored like every
+other edit rather than accepted by a special structural rule. Without
+this, H22's claim degrades to "one score chooses among the edits we
+chose to score with it." D7 still holds: PROMOTE's legality threshold
+is not retuned.
+
+**If H22-online fails, decompose the failure (Revision 4, review 46).**
+Log and report the four error terms separately, not just the decision:
+
+    H_R_hat - H_R          horizon / recurrence forecasting
+    s_hat - s              per-use value estimation
+    Delta D*_hat - Delta D*  code-cost estimation
+    Delta J_hat - Delta J    the composed objective
+
+"The objective was right and the recurrence forecast was wrong" and
+"recurrence was forecast correctly and the value model was wrong" imply
+different next steps, and a bare accuracy number cannot tell them
+apart.
 
 **Falsifier.** World-level accuracy at or below the majority-class
 baseline (always pick the globally most common oracle edit) on the
@@ -818,8 +998,19 @@ then continue on the *same remaining task stream*.
                   births taken as given or searched, declared before
                   the run (V4's conservative vs timed oracle lesson)
 
-Score R on the remaining stream, never end-of-lifetime J after two
-libraries have evolved apart. Deleting A at task 32 is not a paired
+Score R on the remaining stream from a SHARED PREFIX.
+
+Revision 4 disentangles two rules that were compressed into one
+sentence (review 47). Mid-lifetime interventions stop supporting a
+PAIRED PER-OBJECT effect once their trajectories diverge — that is the
+V4 lesson, and it is why per-abstraction retention value is scored on
+the return window. Structural-POLICY evaluation is the opposite case:
+divergence is the thing being measured. If pi_1 and pi_2 induce
+different future libraries, then J_pi1(t:T) - J_pi2(t:T) over the same
+suffix from a common prefix IS the comparison, and refusing it would
+make V5.5's whole point — path dependence — unmeasurable. Per-object
+claims: return window. Policy claims: full divergent suffix, shared
+prefix, and never a per-object attribution read off the difference. Deleting A at task 32 is not a paired
 comparison once it changes what gets promoted next.
 
 **World gate.** Re-promotion restored, so carry is endogenous.
@@ -887,10 +1078,40 @@ sensitivity, functional Jacobian spectrum, quantization-error curve,
 and scalar-value entropy, for the two populations at matched
 participant count.
 
+**Causal decomposition (H29; added Revision 4, review 46).** The
+correlational audit above cannot separate purification from
+restructuring, which the specification already conceded. This can, and
+it is still artifact-cheap. For the SAME cluster of private residuals:
+
+    P_0   the private residuals as they stood before promotion
+    P_1   one functionally fitted shared residual, NO further training
+    P_2   that same shared residual after post-promotion SGD
+
+and, as the selection control, the same measurement on residual
+clusters that PROMOTE considered and REJECTED, matched on size.
+
+    D*(P_0 selected) < D*(P_0 rejected)   ->  SELECTION
+    D*(P_1) < D*(P_0)                     ->  PURIFICATION / consolidation
+    D*(P_2) < D*(P_1)                     ->  RESTRUCTURING by continued
+                                              learning
+
+H29 registers the reading: D*(P_2) < D*(P_1) < D*(P_0), with selection
+accounting for less than half the gap. The three are additive over the
+same objects, so the observed 5.0 ->
+3.9 bits/scalar gap can be apportioned rather than merely attributed.
+If P_2 < P_1 < P_0 holds, the claim "abstraction formation changes the
+coding geometry of computation" is earned rather than argued.
+
+A stronger causal sequel exists and is NOT scheduled here: run matched
+lifetimes with PROMOTE disabled (Arm A, information stays private) and
+enabled (Arm B), and compare the functionally corresponding computation
+at matched behavioral performance. That is a lifetime-scale experiment;
+it waits until the cheap decomposition says which term dominates.
+
 Falsifier. No spectral difference; a spectral difference that does not
-track D*; or the gap vanishing once participant count is matched —
-which makes it a selection effect and closes the question in the dull
-direction.
+track D*; the P-decomposition attributing the whole gap to selection;
+or the gap vanishing once participant count is matched — each of
+which closes the question in the dull direction.
 
 Cheap, artifact-only, and independent of every other rung, so it runs
 alongside H20 rather than queueing behind it. If restructuring is the
@@ -935,12 +1156,30 @@ D*(f), D*(g). This is the matched-budget constitution applied to
 coordinate changes, and it is the methodological rule any later
 LLM-scale version of this test would stand or fall on.
 
-Registered here so the idea is not lost and so its budget rule is
-frozen before anyone runs it. NOT scheduled inside V5's staging: it
-needs a new generator family, and it is gated behind H20 producing a
-factorization class at all. If H20 turns out to be blocked by the
-world, H28 is the more promising redesign, because it makes sharing
-possible in a regime where exact sharing provably cannot win.
+**Not gated on H20 (corrected in Revision 4).** The previous text both
+gated H28 behind H20 succeeding AND called it the natural redesign if
+H20 failed; those pull in opposite directions, and both reviewers
+caught it. H20 asks whether A_i = S(alpha_i) + eps_i pays in COMMON
+coordinates. H28 asks whether f_i = d_i . A . e_i pays across
+DIFFERENT ones. H28 can pay when H20 does not, and that is much of its
+interest. The branch is therefore:
+
+    H20 pays        ->  same-coordinate higher-order abstraction exists
+    H20 blocked     ->  run H28; abstraction may exist only modulo a
+                        change of coordinates
+
+**Standing in the roadmap.** Both reviewers rank this above the
+selection rungs, and one ranks it above H20. It is the bridge between a
+toy library and any real learned representation: if reuse is only
+recognized when computations live in literally the same coordinates,
+the LLM story fails immediately. It is accordingly registered as a
+**V6 ENTRY QUESTION** rather than an optional V5.7 appendix — before
+claiming a language of composable operations, we should know whether
+its words survive a change of representational coordinates.
+
+It still needs a new, separately fingerprinted generator family, and it
+is not scheduled inside V5's staging. What Revision 4 changes is that
+nothing downstream may treat it as contingent on H20's verdict.
 
 ---
 
@@ -1080,8 +1319,22 @@ lies outside the H_R grid, refuse (do not clamp).
 
 If rank 4 cannot load: that is B0 not done, not an H19 fail.
 
-If H20 teacher_G1 fails at r_meta=1: the generator is broken;
-redesign before any learner oracle.
+If H20 teacher_G1 or R_LOO fails at r_meta=1: the generator is broken;
+redesign before any learner oracle. R_LOO flat while R_meta rises means
+the subspace is memorized, not shared — also a redesign.
+
+If H20a pays and H20b does not: the schema economy exists and the
+current promoter cannot reach it. That is a mechanism result, not an
+H20 failure, and it points at PROMOTE rather than at the
+representation class.
+
+If H20b's library COLLAPSES as r_meta rises (outcome 3): report it as
+the alternative solution it is. Do not treat a shrinking M as an
+invalid cell.
+
+If S0 changes D*(A) by more than 2% across g: the gain leaked into the
+abstraction; the cut is void and the arm is rerun with the gain applied
+strictly after the gap.
 
 If H20 G1 passes and G2 fails: geometry without economics, the V4.2
 result one level up. Do not lower the matched-budget bar. If G2
@@ -1166,12 +1419,31 @@ branching.
 # 18. Staging and definition of done
 
     V5.0  CURRENCY         D*(R) component frontier     DONE
-    V5.1  LAW              H19 causal D and s           in flight
-    V5.2  PHASE DIAGRAM    H20 cheap-first, then fill
-    V5.3  SCHEMA           H21 leave-one-out
-    V5.4  SELECTION        H22, gated on a two-class market
-    V5.5  PLANNING         H23, gated on endogenous carry
-    V5.6  LEARNED POLICY   H24, gated on H22+H23 signal
+    V5.0b MECHANISM        H27 P_0/P_1/P_2 decomposition
+                           (artifact-only; runs in parallel)
+    V5.1  LAW              H19 D-arm DONE (P1+P3); S0 and the
+                           slots=6 pairing outstanding
+    V5.2a ECONOMICS        H20a exogenous atoms, frozen schema
+    V5.2b PHASE DIAGRAM    H20b learned library, re-fit schema
+    V5.3  SCHEMA           H21 leave-one-out + novel combination
+    ----- V5 may close here (D18) -----
+    V5.7  COORDINATES      H28, ungated; also the V6 entry question
+    V5.4  SELECTION        H22, side branch, two-class market
+    V5.5  PLANNING         H23, side branch
+    V5.6  LEARNED POLICY   H24, side branch
+
+**Order, and why it is this order (Revision 4).** Both reviewers
+independently argued that H22–H24 form a second research project
+— representation MANAGEMENT — while the motivating question is whether
+abstractions form families (H20/H21), why abstraction changes coding
+efficiency (H27), and whether abstract computation survives a change of
+coordinates (H28). The expected sequence is therefore
+
+    finish H19  ->  H20a/H20b  ->  H21  ->  H27  ->  H28  ->  V6
+
+with the selection rungs entered only if managing the library becomes
+the live question. This is a decision about where research effort goes,
+not a demotion of H22–H24's hypotheses, which stand as written.
 
 A rung is complete when all of the following hold. An agent should
 not advance on a partial verdict.
@@ -1181,19 +1453,38 @@ not advance on a partial verdict.
 2. W-H19 validity holds on 0–2 at ranks 1, 2, 4 with a grid that
    brackets each predicted crossing.
 3. Dual D_8bit / D* report; s_bar by rank; exclusions listed.
-4. At least one s-arm attempted; informative or marked uninformative.
+4. S0 (return-value gain) run, with D*(A) constant to 2% across g
+   verified before scoring; or S0 shown impossible and at least one
+   of S1/S2 attempted, informative or marked uninformative.
 5. Branch table resolved; PREDICTIONS.md appended.
 6. slots=6 paired against the in-flight slots=12 at rank 1, N=48, or
    a written reason that pairing is unnecessary.
 
-**V5.2 PHASE DIAGRAM**
-1. Teacher-validity gate passed on 0–2.
-2. Cheap-first slice run; G1/G2/G3 reported separately.
-3. Either a G2 cell exists and the fill is run, or the ceiling block
-   is recorded as the respectable outcome.
+**V5.2a ECONOMICS (H20a)**
+1. R_LOO and teacher_G1 gates passed on 0–2; the three balance gates
+   held within 10%.
+2. Calibration at M_0 = 4, schema frozen, D*(S) and s_bar_schema
+   written down BEFORE members are added.
+3. Members added one at a time; observed crossing scored against the
+   15% interval of H25.
+4. Either a G2 cell exists at matched budget, or the ceiling block is
+   recorded as the respectable outcome.
+
+**V5.2b PHASE DIAGRAM (H20b)**
+1. H20a complete. H20b is not read alone.
+2. Cheap-first slice run; G1/G2/G3 reported separately; promotion rate
+   and realized M reported as outcomes, never as gates.
+3. Which of outcomes 1/2/3 occurred, stated explicitly per cell.
 4. No interior-grid fishing after the corners fail.
 
-**V5.3–V5.6** as gated above; each with 0–2 / 3–9 split, both
+**V5.0b MECHANISM (H27)**
+1. Participant counts matched between shared and private populations.
+2. P_0 / P_1 / P_2 measured on the same clusters, plus the
+   PROMOTE-rejected control.
+3. The 5.0 -> 3.9 bits/scalar gap apportioned across selection,
+   purification and restructuring, or the failure to apportion stated.
+
+**V5.3 onwards** as gated above; each with 0–2 / 3–9 split, both
 currencies, failure branches followed rather than retuned.
 
 Do not implement online FACTORIZE because H20 "should" pay. Do not
@@ -1331,12 +1622,16 @@ not answer. None of them blocks development work.
    right; a candidate would have to change an operator's encoding
    while provably preserving both its function class and its per-use
    saving.
-11. Whether H20's balance gates can all hold at once. The norm-
-   preserving generator fixes E|theta|^2 by construction, but
-   promotion rate is a LEARNER response and may drift with r_meta
-   anyway. If it does, the honest reading is that r_meta cannot be
-   made orthogonal to individual value at this scale — an
-   H20-blocked result, not a licence to relax the gate.
+11. SETTLED in Revision 4. The question was whether promotion rate
+   could be held within the balance gate; the answer is that it should
+   never have been in it. It is a learner response, and its drift is
+   outcome 3 of H20b — the lower-level representation absorbing the
+   regularity — which is a result. The three generator-side gates
+   (D*, s_bar, behavioral contribution) remain hard preconditions.
+   What stays open: whether those three can hold simultaneously under
+   the norm-preserving generator. E|theta|^2 is fixed by
+   construction; D* and per-use saving are not, and only measurement
+   will say.
 12. Whether H27's four mechanisms are separable with the instruments
    listed. Noise purification and restructuring may not be
    distinguishable on frozen artifacts alone; separating them could
@@ -1378,8 +1673,32 @@ any V6 infrastructure.
     Metric: NMSE vs the teacher composition of the same route, and
     vs the depth-3 typical NMSE of that artifact.
 
-    Pass (draft): median depth-8 NMSE <= 5x the artifact's depth-3
+    Pass: median depth-8 NMSE <= 5x the artifact's depth-3
     novel-composition NMSE, and no output saturation.
+
+**The gate passed; the LAW is what V6 needs (Revision 4).** Observed
+depth-8/depth-3 median ratios were 4.39 / 4.26 / 4.09 on worlds 0–2 with
+no saturation — enough to say "not obviously broken," not enough to
+say the operators are closed under composition. Before V6 starts,
+extend the same cheap probe:
+
+    depths L = 1, 2, 3, 4, 5, 6, 8, 10, 12, 16
+    fit log NMSE(L) against L and report which law holds:
+        E(L) ~ L        benign, additive drift
+        E(L) ~ L^2      tolerable, needs interface conditioning
+        E(L) ~ c^L      compounding; program synthesis is not viable
+                        at depth without repair
+    report median, p90, worst decile of routes, and saturation
+    frequency — a median hides "most compositions work and 20%
+    explode," which is fatal for synthesis
+    record error AFTER EVERY CALL, not only at the end
+
+Per-call error exposes **interface stability**: A: X -> X and B: X -> X
+type-check while still being poor neural partners, because A(x) lands
+outside the distribution B was trained on. That distinction does not
+exist in a symbolic library and will dominate once d = 16 worlds are
+left behind. It is the concept most likely to decide whether V6 is
+about composition or about repair.
     Fail: error explodes. V6–V8 blocked; the negative is publishable
     ("neural operators do not compose past training depth") and the
     next question becomes adapters / typed interfaces / workspace
@@ -1500,3 +1819,5 @@ different coordinates; the adapter complexity budget).
 PREDICTIONS.md H25-H27 (frozen 2026-08-20, after V5.1 and before any
 V5.2 world).
 reports/v5_causal.json (the scored H19 result).
+reviews/reviewer-feedback-46.txt and -47.txt (reviews OF this
+specification; Revision 4's changes).

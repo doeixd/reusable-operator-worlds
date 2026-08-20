@@ -2522,3 +2522,77 @@ R_i ≈ d_i∘A∘e_i, compositions becoming primitives, learned types, monoidal
 structure, tiny-transformer scaling test, the neural "compiler pass"); lines
 521-1366 are a verbatim re-paste of review 43 (V5.1-V5.5, V6.1-V6.5). Indexed
 for provenance only.
+
+
+================================================================================
+REVIEWS 46-47: CHANGES MADE TO THE V5 SPEC BEFORE FREEZING (2026-08-20)
+================================================================================
+
+Both reviews read the promoted spec rather than the sketch, and converged
+independently on three of the same points. Recorded here as method lessons,
+since each generalizes beyond V5.
+
+A CORRELATION INSTRUMENT CAN MISS THE STRUCTURE IT IS SUPPOSED TO GATE. H20's
+world-validity gate used mean pairwise residual-function correlation. Under the
+norm-preserving generator, A_1 = B[1,0] and A_2 = B[0,1] lie in the SAME
+two-dimensional family — exactly the relatedness the hypothesis is about — and
+are behaviorally uncorrelated. The gate would have voided a valid generator.
+Replaced with functional shared-subspace capture and, as the reported number,
+leave-one-family-out R_LOO fit on disjoint probes. General rule: a validity
+instrument must be able to SEE the structure the generator installs; check that
+against a hand-built extreme case before trusting it.
+
+A PARAMETER-FREE PREDICTION IS ONLY PARAMETER-FREE IF ITS INPUTS DO NOT MOVE
+WITH THE THING PREDICTED. M* = D*(S)/s_bar_schema is circular if S is re-fit at
+every M, because then both inputs are functions of M. Fixed by splitting into
+H20a (calibrate on M_0 = 4, FREEZE S, measure per-member savings on unseen
+members, predict, then add members one at a time) and H20b (re-fit freely; asks
+where the learner switches). Same frozen/open separation that rescued RETAIN in
+V4R. Any future crossing prediction gets this check.
+
+DO NOT PUT A LEARNER RESPONSE IN A GENERATOR BALANCE GATE. Promotion rate was
+one of four hard gates on H20's r_meta sweep. It is a response to the structure
+being manipulated, not a property of the generator, and gating on it would have
+discarded the most interesting outcome: if PROMOTE births fewer atoms as r_meta
+rises because the continuous representation already absorbs the commonality,
+that is an alternative solution, not an invalid world. Hierarchy need not emerge
+explicitly if a cheaper lower-level representation absorbs the regularity. Now
+a reported outcome with three registered readings. The three generator-side
+gates (D*, s_bar, behavioral contribution) remain hard.
+
+MANIPULATE UTILITY WITHOUT TOUCHING THE OBJECT. H19's registered s-arms (eta,
+new_primitive_families) move the learned function, approximation quality and
+promotion dynamics as well as s_bar — the same confound class that falsified
+H19(a). The clean cut applies a gain to the abstraction's CONTRIBUTION to
+returning tasks after the gap, y = f_base(x) + g A(x), leaving A byte-identical
+and D*(A) fixed. Registered check: D*(A) constant to 2% across g. This is the
+general shape for any future inverse-s test.
+
+PAIRED-CAUSAL AND POLICY EVALUATION NEED OPPOSITE RULES. "Never end-of-lifetime
+J after two libraries have evolved apart" is right for per-object effects and
+wrong for policy comparison, where divergence is the thing being measured.
+Per-object claims: return window. Policy claims: full divergent suffix from a
+shared prefix, and no per-object attribution read off the difference.
+
+VALUE EVERY EDIT IN ONE CURRENCY; KEEP LEGALITY SEPARATE. H22 valued COMPRESS,
+RETAIN and FACTORIZE in Delta J but accepted PROMOTE by V3's structural rule.
+That weakens "one score chooses among edits" to "one score chooses among the
+edits we scored with it." PROMOTE keeps its substitutability gate as a LEGALITY
+constraint; once legal it is scored like everything else.
+
+A MEDIAN PASS IS NOT A COMPOSITION LAW. The closure probe passed at depth-8/
+depth-3 ~4.1-4.4x, but V6 needs to know whether error grows O(d), O(d^2) or
+O(c^d), needs p90 and worst-decile as well as median (a median hides "most
+compositions work and 20% explode"), and needs error AFTER EVERY CALL. The last
+exposes INTERFACE STABILITY: A: X->X and B: X->X type-check while still being
+poor neural partners because A(x) lands outside the distribution B was trained
+on. That failure mode does not exist in a symbolic library and is likely to
+dominate outside d=16 worlds.
+
+RESEARCH-EFFORT ORDERING, adopted as D18. Both reviewers argued that H22-H24
+(selection, planning, learned policy) are a second research project about
+representation MANAGEMENT, while the motivating question is whether abstractions
+form families, why abstraction changes coding efficiency, and whether abstract
+computation survives coordinate changes. V5 may now close after H19/H20/H21/H27;
+H28 is ungated from H20 and raised to a V6 entry question; H22-H24 are a side
+branch entered only if managing the library becomes the live question.
