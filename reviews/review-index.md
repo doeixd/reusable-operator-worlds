@@ -935,3 +935,106 @@ require the control survivor rate to go to zero (the 2,302-nat control
 abstraction is why): the desired result is that abstractions survive iff their
 measured usefulness repays their own description cost, regardless of where they
 came from.
+
+### [reviewer-feedback-34.txt](reviewer-feedback-34.txt)
+A synthesis of what V4 taught: not "how to delete abstractions" but what kind of
+economy a self-organizing neural library has to obey. The real picture is "first
+compress what you already have; only restructure when a more structural
+representation beats the best simpler alternative," and once the library keeps
+changing, an abstraction's value stops being independent of the rest of the
+system. Eleven findings: (1) V3's library was better than expected — the 4–6
+abstractions for two hidden families were mostly behaviorally distinct (A_i ≉
+A_j) once substitutability was measured contribution-relative, not
+total-variance-relative; V3 discovered distinct useful computations, not sloppy
+duplicates. (2) Apparent higher-order structure ≠ economically reusable
+higher-order structure: the abstractions lie on low-dimensional functional
+geometry (rank-2 family beats isotropic null), but matched-budget private
+COMPRESS beats shared FACTORIZE in essentially every cell — geometric regularity
+≠ economically reusable computation; just because representations lie near a
+manifold doesn't mean the right thing is to name the manifold. (3) The main slack
+was numerical, not structural: abstractions stored at ~8 bits/scalar had a
+behavioral coding frontier of ~1–2 bits/scalar with no penalty around 6 bits, so
+COMPRESS (lower precision, lower rank, pruning) was a huge cheap opportunity
+that won across the reachable census; new architectural principle: local coding
+efficiency should be exhausted before global structural complexity is
+introduced. (4) The correct counterfactual rule (strongest methodological
+discovery): a structural operation earns credit only relative to the cheapest
+behaviorally legitimate alternative the learner would actually take — FACTORIZE
+vs best private compression (not current representation), RETAIN vs
+delete-and-relearn/re-promote (not delete-and-nothing); four or five corrections
+all had the same cause (wrong counterfactual). (5) The main positive V4 result:
+a clean unfitted retention law RETAIN(A) ⟺ H_R·s̄ > λD(A), with the critical
+future-reuse horizon H_R* = λD(A)/s̄; measured s̄ ≈ 64.1 nats/use and λD(A) ≈
+1098 nats predicted H_R* ≈ 17.1 returning tasks, empirical crossing was 17.9
+(within ~5%). (6) Retention and promotion are the same economic law in opposite
+temporal directions: birth asks N_observed·s > D(A), retention asks
+N_future·s > D(A) — not fundamentally separate mechanisms but the same
+amortization decision applied to different horizons, simplifying the grand
+theory. (7) Dormancy itself was not the important variable: across gaps 4–16,
+per-return-task savings were ~constant (~64 nats/task); what changed was the
+number of future opportunities remaining, so the correct variable is H_R
+(expected remaining reuse), not g (time since last use) — recency is merely
+evidence about P(future reuse), not the value function itself. (8) Retention
+becomes path-dependent in a living library: with frozen later promotion the law
+holds, but when the library reopens, deleting A can cause A' to be promoted
+(saving 0 bits) or change library count differently, so V(A) is not a property
+of A alone but V(A | L_t, H_t, π), and the proper decision becomes Q(L_t, e_t) =
+E[J_future | L_t, e_t]. (9) A learned library is a dynamical system, not a bag of
+modules: today's deletion causes tomorrow's promotion, today's fork prevents
+tomorrow's residual, today's factorization changes which future abstraction looks
+worthwhile — library operations interact through the future learning trajectory,
+so per-object garbage collection is eventually insufficient and the true problem
+is sequential structural decision-making. (10) Lifecycle machinery was not
+worthwhile at current scale: the V4R opportunity census was overwhelmingly
+negative (COMPRESS wins, FACTORIZE loses, RETIRE has no useful canonical
+opportunity, FORK has no oracle opportunity, RETAIN works only when future
+opportunity is instantiated carefully); even tripling lifetime and growing the
+library toward ~16 abstractions did not produce a factorization crossing — small
+stationary neural libraries may simply not need sophisticated lifecycle
+machinery, and architecture complexity itself needs to be amortized (you don't
+build GC, hierarchy, indexing, merging, or fork machinery for three objects).
+(11) The missing pressures that should eventually create a lifecycle economy:
+scale (large enough M that independent storage/search is expensive),
+meta-recurrence (enough related abstractions that shared schema beats
+independent COMPRESS), nonstationarity (actual shifts in what's useful),
+reacquisition cost (deletion must have meaningful future penalty), retrieval
+cost (a huge library needs C_retrieval(M)) — without these, KEEP/COMPRESS is
+rational. Transforms the grand picture from "build a library and add lifecycle
+operations" to **learn an economy over representational transformations**: the
+system should ask "what is the cheapest representation available right now?"
+rather than "I have MERGE, so look for things to merge." Every operation (KEEP,
+COMPRESS, PROMOTE, FACTORIZE, FORK, DELETE, MACRO) must earn its existence
+economically. The mature architecture hierarchy: Reuse → Adapt → Promote →
+Compress → Factorize → Retain/Delete → Fork → Compose, with V1–V4 now providing
+empirical conditions for when several pay. A recursive economic law is emerging:
+at every level N×s > C (tasks→abstraction: N_task·s_task > D(A); future
+tasks→retention: H_R·s_reuse > D(A); abstractions→schema:
+N_atoms·s_schema > D(S); programs→macro: N_sequences·s_macro > D(M)) —
+suggesting abstraction, memory, hierarchy, macros, and continual learning may
+all be manifestations of one prospective compression principle: pay a fixed
+representation cost when expected repeated savings exceed it. The necessary
+complication: in a self-modifying library e_t changes L_{t+1} which changes
+later-edit economics, so the objective becomes π* = argmin_π E[L_lifetime +
+λD_lifetime + C_search + C_retrieval] where π is a policy over representation
+edits, and eventually π_φ(e_t | L_t, H_t) can be learned from structural-edit
+trajectories. The methodological constitution accumulated across V3/V4:
+functional substitutability not parameter identity; matched-budget alternatives
+not weak baselines; correct behavioral counterfactual not convenient ablation;
+validate opportunity before tuning the operator; don't confuse geometry with
+economic reuse; don't interpret mid-lifetime interventions as paired after
+trajectories diverge; never trust a validation guard that can pass on zero
+observations. Program summary: V1 (why share?) found the economic relationship
+between recurrence and reuse; V2 (where should sharing occur?) could discover
+where recurrent computation belongs but couldn't encode it compactly; V3 (can a
+new abstraction be born?) showed repeated private computation becomes shared,
+reducing retained representation and making later tasks cheaper; V4 (when should
+that library restructure?) — not automatically, most restructuring disappears
+against the correct simpler alternative, so compress locally first, retain
+according to expected amortization, and recognize structural decisions become
+path-dependent when the library keeps learning. The final system is not a
+neural library learner but a **self-refactoring neural computational system**
+that continually asks where information should live, what form it should take,
+whether it is worth naming, how precisely it should be encoded, and whether
+keeping that representation will make future learning cheaper. V4 didn't give
+MERGE or DELETE — it gave the rules those operations will eventually have to
+obey.

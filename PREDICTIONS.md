@@ -1067,3 +1067,56 @@ tasks whose private residuals are inactive. Second vacuous guard this
 session -- the other printed "CONTROL HOLDS" over zero rows. A check
 that cannot fail is worse than no check; both now score each component
 only where it acts.
+
+# CODING-FRONTIER AUDIT: V3's description claim SURVIVES (2026-08-19)
+
+The audit that had to be settled before anything else: does promotion's
+description reduction survive when BOTH representations are placed on
+their own behavioral rate-distortion frontiers, rather than compared at
+a fixed 8-bit serialization?
+
+Method. For each arm, find the minimum bits/scalar per component -- task
+-private residuals and shared parameters separately -- such that total
+held-out Gaussian loss rises by no more than a matched per-task budget.
+Each component is scored ONLY on the computations that depend on it.
+Paired arms on development worlds 0-2: promotion disabled
+(`shared_residual`) versus promotion enabled (`lifecycle`).
+
+| world | promoted / private (AFTER) | reduction @8bit | reduction @frontier |
+| --- | --- | --- | --- |
+| 0 | 56 / 9  | 71.2% | 73.1% |
+| 1 | 64 / 1  | 79.4% | 80.1% |
+| 2 | 49 / 16 | 60.2% | 55.8% |
+| mean | | 70.3% | 69.7% |
+
+Tolerance sensitivity, mean reduction at the frontier: 71.1% at 2
+nats/task, 69.7% at 10, 73.1% at 30 -- stable across a 15x range.
+Selected component depths are 4-5 bits for task-private state and 4-5
+for shared, so both sides do carry slack; they simply carry comparable
+amounts, which is why the ratio holds.
+
+OUTCOME 1. Promotion reduces description length even after each
+representation is independently compressed near its behavioral frontier.
+The absolute bit counts in V1-V4 are inflated by roughly 2x at this
+tolerance, but the STRUCTURAL claim is unaffected: PROMOTE is not merely
+substituting one naive numerical encoding for another. This answers the
+main available criticism of the two-part accounting, and it makes the
+V3 result harder to dismiss rather than easier.
+
+A PROVENANCE BLOCKER, and the first attempt at this audit was void
+because of it. V3's SEALED artifacts (300-329) do not persist
+`task_reference` or `retired` -- both are plain Python containers absent
+from `state_dict`, the same defect recorded for the V4.1 oracle. Without
+them every task reloads as private in BOTH arms, promotion's entire
+saving disappears, and the audit reported reductions of -9.6%, -5.5%,
+-5.5%. Those figures are VOID; they measure a loading bug, not a
+representation. The audit is therefore run on development worlds where
+the lifecycle learner persists the table, and the sealed worlds CANNOT
+be audited this way without re-running them. Any future artifact whose
+analysis depends on the promoted/private split must persist that split.
+
+LIMITS. Development worlds 0-2, n=3, deltas reported. The sealed-world
+figure (63.3%) is not itself re-derived here; what is shown is that on
+matched development worlds the same comparison survives frontier
+optimization, with the fixed-precision and frontier numbers agreeing to
+within 1 point on average.
