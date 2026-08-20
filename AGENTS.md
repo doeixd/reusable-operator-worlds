@@ -220,7 +220,9 @@ report JSON. `figures/` — generated figures.
 | `row_v3_experimental_spec.md` | V3 spec (PROMOTE / abstraction birth) |
 | `row_v4_experimental_spec.md` | V4 original spec (preserved unrevised with gate-outcome banner) |
 | `row_v4r_experimental_spec.md` | V4 revised: "When Does a Library Need a Lifecycle?" |
-| `notes/v5-sketch.txt` | V5 sketch (representation economy); not a spec until retired |
+| `row_v5_experimental_spec.md` | V5 spec (representation economics); active, provisional draft |
+| `notes/v5-sketch.txt` | V5 sketch, superseded by the V5 spec; kept for history |
+| `V5_CONFIRMATION_PLAN.md` | not written; seeds 600-629 stay sealed until it is frozen and hashed |
 | `EXPERIMENT_PLAN.md` | separates development (0–9) from confirmatory (100–129+) |
 | `CONFIRMATION_PLAN.md` | V1 frozen confirmation protocol (seeds 100–129) |
 | `V2_CONFIRMATION_PLAN.md` | V2 frozen confirmation protocol (seeds 200–229) |
@@ -824,8 +826,9 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   a positive statement about V3: its library has little exploitable
   lifecycle slack. `row_v4_experimental_spec.md` is preserved unrevised
   with a gate-outcome banner; `row_v4r_experimental_spec.md` is the
-  successor that was actually sealed. The V5 sketch is
-  `notes/v5-sketch.txt`.
+  successor that was actually sealed. V5 is now a spec,
+  `row_v5_experimental_spec.md`; `notes/v5-sketch.txt` is superseded
+  and kept only as history.
 - Before building another world in which an operator MUST fire, run an
   offline opportunity census with the learner frozen: sweep regimes and
   ask which edits have any oracle advantage at all. Two dormancy designs

@@ -26,7 +26,10 @@ The original V4 premise — that successful abstraction birth implies a
 maintenance problem — failed in development and is preserved unrevised in
 `row_v4_experimental_spec.md`. V4R is the question that was actually sealed.
 
-**V5** is in progress: a sketch (`notes/v5-sketch.txt`), not a spec. It asks
+**V5** is in progress: a provisional spec
+(`row_v5_experimental_spec.md`), with two rungs already closed (the
+component rate-distortion frontier, and the causal test of the
+amortization law). It asks
 whether the amortization law is quantitative under causal changes to code
 cost, and whether a second representation class exists above independently
 compressed atoms. Confirmatory seeds 600–629 are reserved and untouched.
@@ -48,7 +51,8 @@ research record: `reports/`, `notes/`, `reviews/`. Paper draft:
   unrevised with a gate-outcome banner.
 - `row_v4r_experimental_spec.md` — V4 revised: when does a library need a
   lifecycle?
-- `notes/v5-sketch.txt` — V5 sketch (representation economy); not a spec.
+- `row_v5_experimental_spec.md` — V5 spec (representation economics);
+  active, provisional. `notes/v5-sketch.txt` is its superseded sketch.
 - `EXPERIMENT_PLAN.md`, `CONFIRMATION_PLAN.md`, `V2_CONFIRMATION_PLAN.md`,
   `V3_CONFIRMATION_PLAN.md`, `V4R_CONFIRMATION_PLAN.md`, `RELEASE_PLAN.md`
   — development/confirmation firewall and frozen protocols.

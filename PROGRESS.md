@@ -2039,3 +2039,26 @@ quantitative law from an accounting identity.
   complexity budget; registered, unscheduled). Open question 8 marked
   settled in the uncomfortable direction — no pure D manipulation is
   known in this substrate.
+
+# 2026-08-20 — V5 promoted from sketch to spec
+
+- `row_v5_experimental_spec.md` created from `notes/v5-sketch.txt`
+  Revision 3: 28 numbered sections in V2/V3/V4R house style, plus a
+  new §0 recording V5.0 and V5.1 as closed rungs and stating what
+  V5.1's split verdict forces on the rest of the document (measure
+  cost and utility separately; H20's balance gates are scoring
+  preconditions).
+- Frozen at promotion: §6 decisions D1–D15, §9 operational constants,
+  §14 statistical plan. Sketch hedging ("draft", "the spec may")
+  removed from those sections; §22 keeps the open questions that the
+  freezes genuinely do not answer, marked non-blocking.
+- §25 pre-run checklist rewritten against reality: items 1, 2, 4 and 6
+  discharged (rank cap lifted, causal grid scored, closure probe run,
+  H19 branch resolved). Still owed before seeds 600–629 may be
+  opened: the paired `operator_slots = 6` check, one informative
+  s-arm, the `r_meta` teacher-validity AND balance gates on worlds
+  0–2, and a frozen hashed `V5_CONFIRMATION_PLAN.md`.
+- `notes/v5-sketch.txt` banner-marked SUPERSEDED and left unrevised,
+  as the V3 and V4 sketches were. Pointers updated in `CLAUDE.md`,
+  `AGENTS.md`, and `README.md`; `row_v3_experimental_spec.md` is no
+  longer described as the active spec.

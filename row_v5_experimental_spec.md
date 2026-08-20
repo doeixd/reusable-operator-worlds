@@ -1,57 +1,71 @@
-# V5 sketch — Revision 3 (2026-08-20)
+# Neural Library Learning
+## V5 Experimental Specification: Representation Economics
 
-SUPERSEDED 2026-08-20 by `row_v5_experimental_spec.md`, which promotes
-this document to a specification. Kept unrevised as history, exactly as
-the V3 and V4 sketches were. Do not edit it further and do not work
-from it; the spec is authoritative and carries the frozen decisions,
-the H19 result, and the pre-run checklist.
+**Status: PROVISIONAL DRAFT — not authoritative until frozen.** Sealed
+seeds 600-629 remain sealed and must not be generated, inspected, or
+summarized until this document's development phase is complete and
+`V5_CONFIRMATION_PLAN.md` is frozen with its hash in
+`tools/check_prereg.py`. Development worlds are 0-9, as in V1/V2/V3/V4R.
+Worlds 500-509 are contaminated V5 development and are never
+confirmatory; 510-599 are unused.
 
-A sketch, not a spec. The V5 spec is written only after this document's
-checklist is complete, with the V1–V4R discipline (hypotheses, falsifiers,
-frozen intervals, sealed seeds). Reviews 31–35, 38–41 and
-42–45 are incorporated; H19–H27 in PREDICTIONS.md (H19–H24 committed
-2026-08-20 before any V5 world; H25–H27 committed after V5.1 and before
-any V5.2 world) are the scaffolding.
+**Date:** August 20, 2026
 
-Unlike the V4 sketch, this is not written into a vacuum. V4R's sealed
-block has closed 7/7, V5.0 (the component rate-distortion frontier) has
-run, and **V5.1 has now run and been scored**: 200 lifetimes across
-residual ranks 1, 2 and 4, 10 worlds per cell, 0 excluded. Its outcome
-is the single largest input to this revision and is recorded under H19
-below. The hypotheses were frozen before the worlds existed.
-
-**What Revision 3 adds.** V5.1's result, and what it forces on
-everything downstream: the law survives in the form H* = lambda D*(A) /
-s_bar(D) while the proportional form is falsified, so every later rung
-must measure an intervention's effect on COST and on UTILITY separately
-before reading a crossing. Concretely — H19 closed with its numbers;
-H20's generator rewritten to hold individual abstraction value fixed
-while relatedness varies, with balance gates as a scoring precondition
-rather than a diagnostic; a parameter-free point prediction for M*
-(H25/H26); the padding intervention withdrawn; and two new rungs, H27
-(why shared scalars are individually cheaper) and H28 (the same
-morphism under different coordinates, from reviews 43/45).
-
-**What Revision 2 added.** Revision 1 named the question and the nested
-claims. Revision 2 made them executable: worked H19 arithmetic, a
-horizon grid that can actually observe each predicted crossing, the
-rank-4 config cap, an s-arm recipe, a cheap-first H20 slice, numeric
-G3, a written H22 estimator, a structural-regret definition, a
-statistical plan, a threats table, and an operational composition
-probe. Several "open questions" from Rev 1 are given *defaults* here
-so a spec has something to freeze; they remain marked as defaults.
-
-**Protocol deviations carried in the H19 result, recorded rather than
-excused.** The scored grid ran at operator_slots=12, not the slots=6 of
-V3/V4R (D11); a paired slots=6 check is still owed before the spec
-inherits the number. The D-arm is complete at ranks 1, 2 and 4; the
-s-arm did not run, so H19 closes as partial P1 as well as P3 (below).
-The `residual_rank > 2` cap has been lifted with the default left at 2,
-so no existing fingerprint moves.
+This document promotes `notes/v5-sketch.txt` (Revision 3) to a
+specification. It succeeds
+[`row_v4r_experimental_spec.md`](row_v4r_experimental_spec.md), whose
+sealed block closed 7/7 and whose §0.2 resource model, §4A constants,
+§5 statistical plan, and §9.1 working agreements are inherited unchanged
+except where this document says otherwise. It does not revise V4 or V4R.
+Live STATUS annotations are updated in the same commit as the results
+they describe, as in V2 and V3.
 
 ---
 
-## The program ladder and where V5 sits
+# 0. Status at promotion
+
+Two V5 rungs have already run, and one of them decides the shape of
+everything below.
+
+**V5.0 (component rate-distortion frontier) — CLOSED.** Per-component
+`D*(R)` on 10 sealed worlds, each component scored only over the
+computations that depend on it, zero vacuous cells. At eps = 10
+nats/task: private residuals 5.0 bits/scalar, shared abstractions 3.9,
+operator basis 4.4, routes 2.0. The 8-bit proxy used from V1 through V4
+overstates description length 1.6-4x, so absolute two-part figures in
+those blocks are inflated by roughly that factor; paired comparisons are
+unaffected. Promotion's description saving GREW at the frontier (62.6%
+-> 68.7%, 30/30 V3-sealed worlds), so O1's "COMPRESS dominates
+FACTORIZE" and "promotion's saving survives compression" are not in
+tension.
+
+**V5.1 (causal test of the amortization law) — CLOSED, split verdict.**
+200 lifetimes, ranks 1/2/4, 10 worlds per cell, 0 excluded. The
+proportional form `H_R* ~ D(A)` is FALSIFIED at 46.8% relative error.
+The law itself, `H_R* = lambda D*(A) / s_bar`, is CONFIRMED within 2% at
+all three ranks with carry and s_bar measured independently at each —
+so it is not the accounting identity the single-point V4R confirmation
+could not exclude. Full numbers and the registered partials are in §10
+under H19.
+
+**What that forces on this specification.** Residual rank sets an
+abstraction's cost and its expressive capacity together, so it is not a
+pure intervention on `D`. Every rung below that manipulates a structural
+property must report separately what the manipulation did to COST and
+what it did to UTILITY before any crossing is read. This is why §10's
+H20 uses a norm-preserving generator and why its balance gates are
+preconditions on scoring rather than reported diagnostics.
+
+**Remaining before the confirmatory band may be opened.** §25 is the
+pre-run checklist; four of its seven items were discharged before
+promotion. What is still owed: the paired `operator_slots = 6` check
+against the scored H19 grid, at least one informative s-arm (S1 or S2),
+the `r_meta` teacher-validity and balance gates on worlds 0-2, and a
+frozen `V5_CONFIRMATION_PLAN.md`.
+
+---
+
+# 1. The program ladder and where V5 sits
 
     V1   When is reuse valuable?                         (confirmed)
     V2   Can the learner decide what to share?           (confirmed:
@@ -64,7 +78,7 @@ so no existing fingerprint moves.
                                                           preregistered
                                                           negative + retention
                                                           law)
-    V5   Can one prospective score choose the cheapest   <- this sketch
+    V5   Can one prospective score choose the cheapest   <- this specification
          useful representation as the economics change?
     V6   Can the library become a compositional language?
          (CALL/COMPOSE/BIND/…; compositional-closure gate)
@@ -75,7 +89,7 @@ so no existing fingerprint moves.
 The original V4 sketch named V5 as MACRO/LOOP/BRANCH. That destination
 moved. Reviews 35/40 re-identify V5 as representation economics;
 reviews 38–41 put macros at V6 and language self-improvement at V8.
-This sketch follows that re-identification. MACRO is not a consolation
+This specification follows that re-identification. MACRO is not a consolation
 prize if H20 never pays.
 
 Milestones: M1 (H9) achieved, M2+M3 (H11) achieved. M4 as originally
@@ -85,7 +99,7 @@ V5 owns the space between "abstractions have sensible economics" and
 
 ---
 
-## The V5 question, stated so it cannot drift
+# 2. The V5 question, stated so it cannot drift
 
 V4R asked when a library needs a lifecycle, and answered: not at this
 scale, except for retention, which is birth run forwards. V5 asks:
@@ -118,7 +132,7 @@ those three questions into "implement the policy."
 
 ---
 
-## Why V5 is not just "V4R plus more operations"
+# 3. Why V5 is not just "V4R plus more operations"
 
 Four qualitatively new pressures enter, none of which a census exposes:
 
@@ -150,7 +164,7 @@ Four qualitatively new pressures enter, none of which a census exposes:
 
 ---
 
-## What previous versions established (binding, not restated as hopes)
+# 4. What previous versions established (binding)
 
 V1. A reusable continuous substrate reduces lifetime prequential cost
 when and only when latent functional recurrence is strong enough.
@@ -200,14 +214,14 @@ at the paper's accounting scope, 30/30). Re-scoring V4R O4 at D*(A) =
 accounting identity.
 
 Paper draft §10.1 still says no V4 sealed block was run. §7.6 has one.
-This sketch cites §7.6 and V4R 7/7, not §10.1.
+This specification cites §7.6 and V4R 7/7, not §10.1.
 
 V4's original H14–H18 are not live. Carry the *rules*. Do not carry
 the operators.
 
 ---
 
-## The nested claims V5 is really about
+# 5. The nested claims
 
 Three claims, nested. A later rung is not a consolation prize for an
 earlier failure, and an earlier pass with a later block is a result.
@@ -233,7 +247,7 @@ demonstrate edits but not an economy.
 
 ---
 
-## Decisions this sketch freezes (so the spec does not re-litigate them)
+# 6. Frozen decisions
 
 D1. V5 is representation economics. MACRO/LOOP/BRANCH are V6.
 
@@ -290,7 +304,7 @@ PromotingSharedResidualLearner.
 
 ---
 
-## Inventory: what exists, what must be built
+# 7. Inventory: what exists, what must be built
 
 Already built and usable (do not reinvent):
 
@@ -332,7 +346,7 @@ To be built before the corresponding rung is tuned:
 
 ---
 
-## Currency and resource model
+# 8. Currency and resource model
 
 Through V4R the gating instrument was 8 bits/scalar. V5.0 retired that
 as a *gating* currency. It remains a continuity report.
@@ -384,21 +398,21 @@ must not call a D* re-score a second confirmation.
 
 ---
 
-## Operational constants (draft; freeze in the spec)
+# 9. Operational constants (frozen)
 
-| constant | draft value | why |
+| constant | value | why |
 | --- | --- | --- |
 | lambda | ln 2 | two-part exchange rate, V1–V4R |
 | D* eps | 10 nats/task | V5.0 headline; {2, 30} robustness |
-| H19 relative-error pass | < 0.25 on (b) | named in PREDICTIONS.md spirit; spec may tighten |
+| H19 relative-error pass | < 0.25 on (b) | as registered; not tightened after the fact |
 | H19 ranks | 1, 2, 4 | linear D; 2 is the V4R operating point |
 | H19 gap | (32, 40) | V4R O4; last sleep at the gap |
 | H19 family onset | 8 | V4R retention, so pre-gap abstractions form |
-| H19 operator_slots | 6 | pair with V3/V4R; in-flight 12 is a deviation |
+| H19 operator_slots | 6 | pair with V3/V4R; the scored grid ran at 12 and owes a paired check |
 | H19 H_R grid | must bracket each predicted crossing by >= 4 tasks on both sides | otherwise unscoreable |
 | minimum_cluster | 3 | V3 promotion; return window must contain this many |
 | substitutability eps | 0.02 NMSE, contribution-relative | V3 frozen |
-| G3 leftover | D(E_i) / D(A_i) < 0.25 AND shared capture > 0.5 of spread | draft; "<<" made numeric |
+| G3 leftover | D(E_i) / D(A_i) < 0.25 AND shared capture > 0.5 of spread | "<<" made numeric |
 | H20 first slice | F=4, m=16, r_meta in {0, 1}, worlds 0–2 | cheap existence check |
 | H22 majority | world-level first, then cell-level as descriptive | V1 initialization rule |
 | consolidation sleeps | 16, 24, 32, 48, 64 (truncate to N) | V3 schedule |
@@ -407,15 +421,16 @@ must not call a D* re-score a second confirmation.
 
 ---
 
-## Core hypotheses (H19–H28)
+# 10. Core hypotheses (H19-H28)
 
 H19–H24 and H25–H27 are in PREDICTIONS.md. H28 is registered in this
-sketch only, and is unscheduled.
+specification only, and in no prediction ledger yet, and is unscheduled.
 
-Numbering is not provisional. Falsifiers and operational cuts below
-are what this sketch adds.
+Numbering is not provisional. Falsifiers and operational cuts are
+binding: a rung is scored against what is written here, and a miss is
+reported as a miss.
 
-### H19 — Code-cost invariance (V5.1; flagship of the LAW claim)
+## H19 — Code-cost invariance (V5.1; flagship of the LAW claim)
 
 Prediction. Empirical retention threshold follows
 
@@ -555,7 +570,7 @@ artificial storage tax rather than abstraction economics (review 44).
 Withdrawn, not deferred. The coder-arm above re-codes a fixed function
 and remains a legitimate sensitivity.
 
-### H20 — Higher-order amortization (V5.2; flagship of the PHASE DIAGRAM)
+## H20 — Higher-order amortization (V5.2; flagship of the PHASE DIAGRAM)
 
 Prediction, now in two parts, the second added after V5.1 (H25/H26
 in PREDICTIONS.md).
@@ -644,7 +659,7 @@ max F is 12 (onset 8 => N = 200). At m=16, F=16 is impossible. If no
 FACTORIZE cell exists at max reachable M even at r_meta = 1, that is
 a TESTBED result, not an H20 failure to be tuned away. A generator
 with more primitives is a separately fingerprinted family and is not
-required by this sketch.
+required by this specification.
 
 **Gates, in order, all mandatory, on the *learned* library:**
 
@@ -689,7 +704,7 @@ FACTORIZE as a live class are blocked rather than failed. H22 may
 still proceed on {KEEP, COMPRESS, RETAIN} if those three each pay
 somewhere (they did, in V4R).
 
-### H21 — Prospective schema reuse (V5.3)
+## H21 — Prospective schema reuse (V5.3)
 
 Prediction. A family A(z; alpha) fit on held-in members makes a novel
 member cheaper to acquire by learning only alpha_new, versus a
@@ -719,7 +734,7 @@ at extra bits is capacity.
 Gated on H20 G1. If no family structure exists, H21 has nothing to
 acquire.
 
-### H22 — Economic edit selection (V5.4)
+## H22 — Economic edit selection (V5.4)
 
 Prediction. One prospective scoring rule (initially hand-designed, not
 learned) matches the oracle-optimal edit in a majority of worlds
@@ -786,7 +801,7 @@ baseline (always pick the globally most common oracle edit) on the
 battery, restricted to worlds in which at least two classes appear
 across the battery. Report a confusion matrix on the ambition ladder.
 
-### H23 — Structural planning (V5.5)
+## H23 — Structural planning (V5.5)
 
 Prediction. Under library evolution or nonstationarity, finite-horizon
 rollout structural regret < myopic structural regret. In stationary
@@ -821,7 +836,7 @@ the world gate passed, or myopic is already at oracle in those worlds
 Gated on H22-oracle existing, because rollout needs a Delta J to
 roll out.
 
-### H24 — Learned restructuring (V5.6)
+## H24 — Learned restructuring (V5.6)
 
 Prediction. A policy trained on (L_t, H_t, e, Delta J, outcome) tuples
 has lower structural regret than the hand-designed estimator on held-
@@ -840,7 +855,7 @@ this claim.
 **Falsifier.** No improvement on held-out conditions, or improvement
 only on held-out seeds of the training grid.
 
-### H27 — Why shared scalars are individually cheaper (V5.0b)
+## H27 — Why shared scalars are individually cheaper (V5.0b)
 
 V5.0 measured D*_shared ~= 3.9 bits/scalar against D*_private ~= 5.0.
 That is not a duplication-count effect: shared abstractions are stored
@@ -884,7 +899,7 @@ duplication, it changes the coding geometry of information. That would
 connect ROW's MDL story to representation formation itself, and it is
 the strongest cheap result available in V5.
 
-### H28 — The same morphism under different coordinates (V5.7; registered, not scheduled)
+## H28 — The same morphism under different coordinates (V5.7; registered, not scheduled)
 
 From reviews 43 and 45, which rank this among the three most valuable
 experiments in the roadmap. Every representation class in V5 so far
@@ -929,7 +944,7 @@ possible in a regime where exact sharing provably cannot win.
 
 ---
 
-## Worlds (recipes)
+# 11. Worlds (recipes)
 
 Every world carries a validity gate that is allowed to fail. A gate
 that cannot fail is not a gate. Redesign the world before tuning.
@@ -973,7 +988,7 @@ Frozen-library W-H19 cells are the myopic~oracle null.
 
 ---
 
-## The learner, and what is not a learner yet
+# 12. The learner, and what is not a learner yet
 
 V5.1–V5.3 are oracles on frozen or controlled libraries. The V3
 promoter stays frozen (D7). No online FACTORIZE, no online selector,
@@ -1000,7 +1015,7 @@ This is H24's dataset. It costs nothing to collect now.
 
 ---
 
-## Endpoints and instruments
+# 13. Endpoints and instruments
 
 Inherited: four-way substitutability; contribution-relative tolerance;
 null-edit guard; matched-budget independent compression; return-window
@@ -1024,13 +1039,13 @@ Library size is a diagnostic, never an outcome.
 
 ---
 
-## Statistical plan (draft)
+# 14. Statistical plan
 
-H19 development: worlds 500–509 (already contaminated) for the
-in-flight rank-1 diagnostic; worlds 0–2 for protocol fixes (slots=6,
-rank 2/4, s-arm); worlds 3–9 for clean internal generalization of
-whatever protocol the 0–2 pass selected. Report 0–2 and 3–9
-separately from the first run (V4 spec §5).
+H19 development: worlds 500-509 (contaminated) carried the scored
+rank-1/2/4 grid; worlds 0-2 carry the outstanding protocol repairs
+(slots=6 pairing, s-arm); worlds 3-9 carry clean internal
+generalization of whatever protocol the 0-2 pass selects. Report 0-2
+and 3-9 separately from the first run (V4 spec §5).
 
 H20 cheap-first: worlds 0–2. Fill: 0–2, then 3–9 if a G2 cell exists.
 
@@ -1051,7 +1066,7 @@ interior grid point.
 
 ---
 
-## Registered diagnostics and failure branches
+# 15. Registered diagnostics and failure branches
 
 Adopted before any remaining V5 run, so no failure is diagnosed with
 an improvised instrument.
@@ -1089,7 +1104,7 @@ infer composition from H19–H21.
 
 ---
 
-## Threats to validity (and the pre-registered reading of each)
+# 16. Threats to validity (and the pre-registered reading of each)
 
     T1  Rank changes s_bar. Reading: (a) fails, (b) is the law.
     T2  Rank changes D* per scalar, so D*_ratio != r-ratio. Dual-
@@ -1115,7 +1130,7 @@ infer composition from H19–H21.
 
 ---
 
-## Branch table: what H19 and H20 do to the rest of this sketch
+# 17. Branch table: what H19 and H20 do to the rest of this specification
 
 H19 is in flight. This table is the spec's section 0 once scored.
 
@@ -1129,7 +1144,7 @@ H19 is in flight. This table is the spec's section 0 once scored.
 - H19 fails both readings: LAW claim dies; PHASE DIAGRAM may still be
   asked as a qualitative "does FACTORIZE ever pay," but it is no
   longer the same law one level up. Selection rungs are demoted.
-- H20 G2 pays at reachable (M, r_meta): H21–H24 proceed as sketched.
+- H20 G2 pays at reachable (M, r_meta): H21–H24 proceed as written.
 - H20 blocked by ceiling, G1 may still pass: H21 can run as a weak
   family-fit diagnostic; H22's FACTORIZE class is absent; H22 may
   still be attempted on {KEEP, COMPRESS, RETAIN} if those three are
@@ -1148,7 +1163,7 @@ branching.
 
 ---
 
-## Staging and definition of done
+# 18. Staging and definition of done
 
     V5.0  CURRENCY         D*(R) component frontier     DONE
     V5.1  LAW              H19 causal D and s           in flight
@@ -1186,7 +1201,7 @@ train pi because the decision log exists.
 
 ---
 
-## Deferred from V5 (destinations unchanged)
+# 19. Deferred from V5 (destinations unchanged)
 
 - MACRO / LOOP / BRANCH, and the compositional-closure depth gate:
   V6. A macro must beat COMPRESS and every simpler counterfactual at
@@ -1214,7 +1229,7 @@ is about findability rather than storage.
 
 ---
 
-## Design principles (inherited, binding, plus three new)
+# 20. Design principles (binding)
 
 Inherited, not reopened:
 
@@ -1262,7 +1277,7 @@ New in V5:
 
 ---
 
-## Seed partition and sealed protocol
+# 21. Seed partition and sealed protocol
 
     0–9        historical development (V1–V4R); still usable as
                matched V3/V4R controls and for H20/H21
@@ -1282,11 +1297,11 @@ delete the artifact, log in SPEC_AUDIT.md. Same rule as V3's 300s.
 
 ---
 
-## Open questions this sketch does NOT settle
+# 22. Open questions (recorded, not blocking)
 
-Recorded so they are not mistaken for oversights. Defaults above
-(D1–D12, constants table) are what a spec would freeze; they are not
-yet frozen.
+Recorded so they are not mistaken for oversights. The decisions in §6
+and the constants in §9 are frozen; these are the questions those freezes do
+not answer. None of them blocks development work.
 
 1. Known remaining horizon vs estimated P(return) for H22-online.
    H19's *scorer* knows H_R (the world is built that way). The V5.1
@@ -1297,7 +1312,7 @@ yet frozen.
    Default D7: frozen. The interaction is unmeasured.
 3. Whether kappa, gamma, mu are ever swept in V5. Default D10: no,
    through V5.3. Charging edit cost changes H22's market.
-4. Whether H20 is allowed a new primitive count. This sketch permits
+4. Whether H20 is allowed a new primitive count. This specification permits
    a separately fingerprinted family and forbids a silent config
    change; it does not require the new family.
 5. Whether H22-oracle may use teacher structure. Default: no, except
@@ -1305,7 +1320,7 @@ yet frozen.
 6. H22 clustering: default world-level first. Cell-level is
    descriptive because cells sharing a world are not independent.
 7. Composition probe as V5 checklist vs V6 entry criterion. This
-   sketch puts it on the V5 checklist so V6 is not started on a
+   specification puts it on the V5 checklist so V6 is not started on a
    broken foundation; it is not a V5 hypothesis.
 8. Rank vs bits as the "official" D manipulation. SETTLED by V5.1,
    in the uncomfortable direction: rank is not a pure D intervention
@@ -1334,7 +1349,7 @@ yet frozen.
 
 ---
 
-## Claims not made
+# 23. Claims not made
 
 No claim that these numbers transfer to large models or natural data.
 No claim of relevance to ARC-AGI. No claim that FACTORIZE, MERGE,
@@ -1349,7 +1364,7 @@ No claim that the in-flight rank-1 grid is H19.
 
 ---
 
-## Compositional-closure probe (B7; V5 checklist, V6 gate)
+# 24. Compositional-closure probe (B7; V5 checklist, V6 gate)
 
 Review 41: the project has only composed d=16 operators 3–4 deep.
 V6–V8 assume depth 8+. Test cheaply on existing artifacts, before
@@ -1374,32 +1389,40 @@ Do not wait for H20 to run this. It does not depend on V5.1.
 
 ---
 
-## Pre-V5-spec checklist
+# 25. Pre-run checklist
 
-The spec is not written until these are done. The sketch can exist
-now; the spec cannot.
+No sealed world is opened until every item is discharged. Items 1, 2, 4
+and 6 were discharged before promotion and are recorded here so the
+record is complete.
 
-1. Lift the residual_rank cap (B0) without changing the default.
-2. Score whatever of the in-flight rank-1 grid is complete, as a
-   development diagnostic. Dual-report if D* is cheap to add.
-   Append to PREDICTIONS.md. Do not call it H19.
-3. Repair the H19 grid so each rank's predicted crossing is
-   bracketed; include rank 2; pair slots=6; run at least S1.
-4. Compositional-closure probe (B7). Record pass/fail as a V5
-   addendum.
-5. Design r_meta and pass the teacher-validity gate on worlds 0–2
-   before any FACTORIZE oracle.
-6. Resolve the branch table against the actual H19 verdict.
-7. Freeze V5 spec with full discipline; reserve 600–629; retire this
-   sketch the day the spec is frozen, as v3-sketch and v4-sketch were.
+1. DONE. `residual_rank` cap lifted (B0); default unchanged at 2, so no
+   existing fingerprint moves.
+2. DONE. The causal grid is scored at ranks 1, 2 and 4 and recorded in
+   PREDICTIONS.md and in §10 under H19.
+3. OPEN, and the first expensive item. Pair `operator_slots = 6`
+   against the scored grid, and run at least one informative s-arm (S1
+   or S2). Until then H19 stands as partial P1 + P3.
+4. DONE. Compositional-closure probe (B7) on Continuous checkpoints
+   0–2: depth-8/depth-3 median NMSE 4.39 / 4.26 / 4.09, under the 5x
+   gate, no saturation. V6 is not blocked. Recorded in §24.
+5. OPEN, second expensive item. Build `r_meta`, then pass BOTH the
+   teacher-validity gate and the balance gates on worlds 0–2 before any
+   FACTORIZE oracle runs.
+6. DONE at promotion for H19; §17 resolves against the split verdict
+   (reading (b) confirmed, reading (a) falsified). H20's branch stays
+   open.
+7. Freeze `V5_CONFIRMATION_PLAN.md` with full discipline and register
+   its hash in `tools/check_prereg.py` before 600–629 is touched.
+   `notes/v5-sketch.txt` is superseded by this document, as the V3 and
+   V4 sketches were by theirs.
 
-Cheap-first order inside the checklist: (2) and (4) are free relative
-to a new lifetime sweep; (1) is a config one-liner; (3) is the first
-expensive item; (5) is the second.
+Cheap-first order for what remains: (5)'s teacher-side gates are
+offline and cheap; (3) is a lifetime sweep; (5)'s learner-side balance
+re-check follows (3).
 
 ---
 
-## Working agreements additions (V4 §9.1 still binds)
+# 26. Working agreements additions (V4 §9.1 still binds)
 
 9. A re-score that moves a term appearing on both sides of an identity
    is not a confirmation.
@@ -1423,7 +1446,7 @@ expensive item; (5) is the second.
 
 ---
 
-## Execution notes
+# 27. Execution notes
 
 Machine constraints per AGENTS.md: at most 4–6 concurrent lifetimes
 (4 for anything holding large probe tensors); detached resumable
@@ -1448,7 +1471,7 @@ at the time of this revision. Rank 2 is the V4R operating point and
 must be in the spec's registered grid. Rank 4 needs B0 and a longer
 N grid at 8-bit (or a D* reading whose predicted crossing is on-grid).
 
-## Sources
+# 28. Sources
 
 row_v4r_experimental_spec.md and V4R_CONFIRMATION_PLAN.md (predecessor
 question and sealed negative).
