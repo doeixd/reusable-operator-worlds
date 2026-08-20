@@ -1564,3 +1564,47 @@ post-gap operator, recorded alongside `s_bar(g)`. S0 incidentally
 produces the first reuse-under-drift curve, which is the FORK /
 specialization question in V6+. Measured and stored; no prediction is
 registered on it in V5.
+
+## S0 amendment at baseline, before any gain data (2026-08-20)
+
+The absolute `p_reuse >= 0.5` registered above FAILS at `g = 1.0` — the
+unmodified world — which makes it a specification error, not a result.
+Measured on the first paired cell (N=56, world 500): 4 / 16 returning
+tasks route to the retired abstraction, while 16 / 16 route to SOME
+abstraction, and `s_bar` is a healthy 63.1 against V4R's sealed 61.0.
+
+The threshold was meant to catch "the gain made routing abandon A". A
+bound that the baseline already violates cannot detect that. Amended to
+the relative form the review offered, fixed now while only `g = 1` data
+exists and before any `g != 1` cell is scored:
+
+    REFUSE gain g if  p_reuse(g) < 0.5 * p_reuse(g = 1)
+
+reported alongside the any-abstraction rate and `s_conditional`. The
+absolute form is withdrawn and recorded here rather than deleted.
+
+## Two properties of the retention instrument, measured not assumed
+
+Both are inherited from the V4R O4 protocol and apply to its sealed
+result as much as to S0. Recorded because they were found by looking.
+
+1. DELETING ONE ABSTRACTION COLLAPSES THE REUSE PATHWAY. The deleted
+   arm keeps abstraction 0 live, yet 0 / 16 of its returning tasks adopt
+   anything, against 16 / 16 in the retained arm (12 to id 0, 4 to the
+   retired id 1). So `C_reacquire` prices the loss of the reuse
+   behaviour, not the direct use of one object. Consistent with that,
+   the saving is flat across the split: 61.3 nats/use on tasks routed to
+   the retired abstraction, 63.7 on tasks routed elsewhere.
+
+2. `D_retain - D_delete = D(A)` IS AN ACCOUNTING CONVENTION, NOT A
+   MEASURED DIFFERENCE. Both arms' checkpoints store identical scalar
+   counts — 2 abstractions (396 scalars), 57 task residuals (11,286),
+   57 task codes (2,052). Retirement is logical; the deleted arm is
+   charged as though it need not store `A`, and referencing a live
+   abstraction does not reduce a task's stored residual count.
+
+Neither blocks S0, and S0 is unusually robust to both: whatever the
+carry convention is, it is IDENTICAL across `g` by construction, so the
+s-arm varies only the measured saving. They do bear on how the D-arm's
+absolute crossings should be described, and on any future per-object
+carry claim.
