@@ -2280,3 +2280,36 @@ same families would have manufactured the phenomenon H20 is looking for.
 And the D* reading is INTERPOLATED in (bits, log error): integer depths
 made the per-abstraction rate jump by whole bits, which alone produced a
 16.4% spread and a false balance-gate failure.
+
+# 2026-08-20 — H20a run: the amortization law holds one level up
+
+`src/row/experiments/audit_schema_economics.py`, report
+`reports/v5_schema_economics.json`. Exogenous atoms, schema fitted on
+M_0 = 4 and frozen, matched distortion budget on every piece. F=12,
+K=2, worlds 0-2. Offline.
+
+| r_meta | s_bar_schema | M* pred | M* obs | matched-budget winner |
+| --- | --- | --- | --- | --- |
+| 0.00 |  -33 |  inf | none | COMPRESS |
+| 0.50 |   -9 |  inf | none | COMPRESS |
+| 0.70 |   24 | 39.7 | none | FACTORIZE |
+| 0.90 |  103 |  8.0 |  7.5 | FACTORIZE |
+| 0.95 |  157 |  5.1 |  5.7 | FACTORIZE |
+| 1.00 |  495 |  1.6 |  2.0 | FACTORIZE |
+
+- H26 (dM*/dr_meta < 0): SUPPORTED, monotone across the sweep. The
+  COMPRESS -> FACTORIZE boundary is between r_meta 0.5 and 0.7.
+- H25: PASS at r_meta 0.90 (6.4%) and 0.95 (10.1%); MISS at 1.00
+  (25.7%), reported as a miss. Observed M is an integer, so at a
+  predicted 1.6 the finest attainable error is 25% and ceil(1.6) = 2 is
+  what was observed — the law is consistent there, the registered
+  metric is not resolvable there. A better small-M criterion is
+  registered for next time and NOT applied retroactively.
+- The r_meta = 0 cell reproduces V4R's negative as the low-relatedness
+  limit of a knob rather than as a separate finding: the schema has
+  negative per-member saving and never pays.
+
+Scope: exogenous atoms by design (D16), so this says nothing about
+whether PROMOTE reaches the region. H20b is the separate experiment and
+its outcome 3 — the learner collapsing meta-structure into fewer atoms
+instead of forming a schema — is still live.
