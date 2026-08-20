@@ -2003,3 +2003,26 @@ quantitative law from an accounting identity.
   corrects the seed partition (200–229 and 400–429 are closed, not
   sealed-and-waiting). Repository map lists V2–V4R specs, confirmation
   plans, and `notes/v5-sketch.txt`.
+
+# 2026-08-20 — reviews 44 and 45 incorporated
+
+- `reviews/review-index.md`: entry for
+  `reviewer-feedback-44.txt` (response to the V5.1 causal result;
+  V5.2 design as recursive amortization). Entry for
+  `reviewer-feedback-45.txt` recording that it carries no new content
+  — its two halves restate feedback 42 and re-paste feedback 43
+  verbatim. Kept for provenance.
+- `PREDICTIONS.md`: registered H25 (schema crossing
+  `M* = D*(S)/s_bar_schema` predicted from unfitted quantities),
+  H26 (`dM*/drho < 0`, with generator balance gates frozen at 10% as a
+  precondition on scoring), and H27 (shared scalars are individually
+  cheaper because promoted abstractions have lower effective functional
+  rank). All three registered before any V5.2 world exists.
+- Withdrew the padding follow-up proposed in the V5.1 note. Review 44's
+  objection is accepted and recorded in both `PREDICTIONS.md` and
+  `AGENTS.md`: under the rate-distortion currency,
+  `D*(A + dead bits) = D*(A)`.
+- `AGENTS.md`: four learnings — separate cost from utility under any
+  structural manipulation; padding is not a valid `D` intervention;
+  realized library size needs an F-families knob, not depth; a
+  relatedness knob needs frozen balance gates.

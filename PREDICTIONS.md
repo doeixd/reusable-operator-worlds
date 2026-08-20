@@ -1376,3 +1376,61 @@ failed while the mechanism behind it survived (cf. H5b, where the mean
 recurrence curve smoothed but cross-world dispersion worsened). Report
 both halves; the failure of the simple scaling form is as informative as
 the success of the underlying relation.
+
+# H25-H27 — recursive amortization (registered 2026-08-20, before any V5.2 world)
+
+Registered after review 44 and before the V5.2 generator exists. The
+V5.1 outcome licenses exactly one form of the law -- `H* = lambda D*(A)
+/ s_bar`, with cost and utility measured SEPARATELY -- so the
+higher-order version is registered in the same form and never as a
+proportionality.
+
+## H25 — the schema crossing is predictable from unfitted quantities
+
+With `A_i = S(alpha_i) + eps_i`, private cost `sum_i D*(A_i)` and schema
+cost `D*(S) + sum_i [D(alpha_i) + D*(eps_i)]`:
+
+    FACTORIZE  iff  M * s_bar_schema > D*(S)
+    M*(rho)    =    D*(S) / s_bar_schema(rho)
+
+PREDICTION: with `D*(S)` and the leave-one-out per-member saving
+`s_bar_schema` measured independently at a fixed meta-recurrence rho,
+the observed COMPRESS-to-FACTORIZE crossing in a sweep over realized
+library size M lands within 15% of `D*(S)/s_bar_schema`. Both
+quantities are recorded before the M sweep is run; fitting the crossing
+and then explaining it with them does not count.
+
+Falsified by: a crossing outside 15%, or no crossing at any reachable M
+when the predicted M* is reachable.
+
+## H26 — meta-recurrence moves the boundary, and only the boundary
+
+    dM*/drho < 0
+
+PREDICTION: the more related the abstractions, the fewer family members
+are needed before naming the family. Registered jointly with the
+generator BALANCE GATES, which are a precondition on reading H26 at all
+and are frozen here at +/- 10%: across the swept rho, each of
+`D*(A_i)`, `s_bar(A_i)`, per-abstraction behavioral contribution, and
+promotion rate must be constant to within 10%. If any gate fails, the
+sweep is UNSCOREABLE, not weak evidence -- the boundary would then move
+for the same confounded reason proportionality failed in V5.1.
+
+## H27 — shared scalars are individually cheaper, and it is a mechanism
+
+V5.0 measured `D*_shared ~ 3.9` bits/scalar against `D*_private ~ 5.0`.
+PREDICTION: this gap is not a selection artifact. Specifically, promoted
+abstractions have lower effective functional rank than private residuals
+of matched participant count, and the per-component `D*` gap is
+predicted by that spectral difference (rank-order correlation across
+worlds |r| >= 0.5) rather than by abstraction size or usage count.
+
+Falsified by: no spectral difference; or a spectral difference that does
+not track `D*`; or the gap disappearing once participant count is
+matched, which would make it a selection effect.
+
+Not registered: any padding/dead-bit manipulation of `D(A)`. Review 44's
+objection is accepted -- under the rate-distortion currency this project
+now uses, `D*(A + dead bits) = D*(A)`, so padding tests a storage tax
+rather than abstraction economics. The V5.1 note proposing it as the
+clean proportionality test is superseded.

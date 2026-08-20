@@ -1,0 +1,1366 @@
+Yes. I think your intuitions suggest a more specific research program than “modular neural networks + category theory.”
+
+The core problem I would pursue is:
+
+> **Can a learner discover that apparently different neural computations are instances of the same underlying morphism, factor them into one reusable computation plus cheap interfaces, and then build increasingly complex computations by composing those learned morphisms?**
+
+That connects almost everything you've been circling around: scaling, duplicated circuits, composition, abstraction, MDL, continual learning, program synthesis, and category theory.
+
+And there is some encouraging prior art around the edges, but I don't see the whole package already put together. HOUDINI, for example, already showed that strongly typed differentiable neural functions can be composed by type-directed program search, so “typed neural program synthesis” itself isn't new. ([Google Research][1]) DreamCoder-style library learning similarly turns useful programs into higher-level primitives. ([OpenReview][2]) Your distinctive angle could be **discovering the reusable computational ontology from neural behavior itself and pricing that discovery by lifetime MDL economics**.
+
+Here are the research directions I would take most seriously, roughly in order.
+
+1. **Same computation, different coordinates: search for commuting diagrams.** This may be the most important idea. Right now ROW asks whether two residual circuits directly behave similarly. But in a real transformer, the “same” computation at layer 8 and layer 25 may operate on completely different internal representations. So direct comparison will say they're different even if they implement the same abstract algorithm.
+
+   Categorically, suppose you have:
+
+   [
+   f_i:X_i\rightarrow Y_i
+   ]
+
+   and
+
+   [
+   f_j:X_j\rightarrow Y_j.
+   ]
+
+   Instead of asking (f_i\approx f_j), learn cheap adapters
+
+   [
+   a:X_i\rightarrow X_j,\qquad
+   b:Y_i\rightarrow Y_j
+   ]
+
+   and test whether the square approximately commutes:
+
+   [
+   b\circ f_i
+   \approx
+   f_j\circ a.
+   ]
+
+   Visually:
+
+   ```text
+         f_i
+   X_i ───────→ Y_i
+    │            │
+    a            b
+    │            │
+    ▼            ▼
+   X_j ───────→ Y_j
+         f_j
+   ```
+
+   That says something much stronger than “these activations look similar.” It says:
+
+   > **These circuits implement the same computation modulo a change of representation.**
+
+   This is closely related to model stitching, where learned adapters connect different representations, although stitching has important false-positive problems if you only judge end-task performance. ([arXiv][3]) ROW's behavioral-substitution methodology gives you a way to make the test stricter.
+
+   Then your MDL question becomes:
+
+   [
+   D(f)+\sum_i[D(a_i)+D(b_i)]
+   \stackrel{?}{<}
+   \sum_iD(f_i).
+   ]
+
+   If yes, you've discovered a **shared abstract circuit hidden beneath several concrete implementations**.
+
+   That feels extremely aligned with your original LLM hypothesis.
+
+2. **Turn ROW promotion into categorical factorization.** Instead of promotion meaning only
+
+   [
+   R_1,R_2,R_3
+   \rightarrow A,
+   ]
+
+   allow:
+
+   [
+   R_i
+   \approx
+   d_i\circ A\circ e_i.
+   ]
+
+   So a reusable abstraction has a stable core and small context-specific encoders/decoders.
+
+   ```text
+   task/context 1:
+   ── e₁ ──→ [ A ] ── d₁ ──→
+
+   task/context 2:
+   ── e₂ ──→ [ A ] ── d₂ ──→
+
+   task/context 3:
+   ── e₃ ──→ [ A ] ── d₃ ──→
+   ```
+
+   This is much closer to what you'd expect inside an LLM than literal identical circuits.
+
+   It also gives a wonderfully clean scientific question:
+
+   > As recurrence increases, does the optimal representation move from independent functions → common core + adapters → exact shared primitive?
+
+   That's basically a **rate-distortion curve over abstraction level**.
+
+3. **Make whole compositions eligible to become new primitives.** This is the next critical ROW benchmark in my view.
+
+   Suppose the library contains:
+
+   [
+   A,\ B,\ C,\ D.
+   ]
+
+   Across tasks it repeatedly encounters:
+
+   [
+   B\circ A.
+   ]
+
+   It should eventually create:
+
+   [
+   M=B\circ A
+   ]
+
+   and add (M) to the vocabulary.
+
+   Then later perhaps:
+
+   [
+   N=D\circ M\circ C.
+   ]
+
+   Then (N) itself can become a primitive.
+
+   So the vocabulary undergoes closure:
+
+   [
+   \mathcal L_0
+   \rightarrow
+   \mathcal L_1
+   \rightarrow
+   \mathcal L_2
+   \rightarrow\cdots
+   ]
+
+   with:
+
+   [
+   \mathcal L_{t+1}
+   ================
+
+   \mathcal L_t
+   \cup
+   {\text{economically useful compositions of }\mathcal L_t}.
+   ]
+
+   DreamCoder is the obvious intellectual neighbor because library learning compresses solved programs into reusable abstractions. ([OpenReview][2]) But ROW gives you a potentially interesting alternative criterion: **not merely compression of a corpus of programs, but reduction in total lifetime predictive + representational cost.**
+
+   This experiment would get you much closer to your claim that *programs become primitives*.
+
+4. **Learn types instead of specifying them.** HOUDINI already demonstrates why strong types are useful: type-directed search can dramatically prune the combinatorial program space. ([Google Research][1]) Your interesting question is therefore not “do types help?” but:
+
+   > **Can the learner discover useful computational interfaces from experience?**
+
+   Imagine initially every circuit is just:
+
+   [
+   \mathbb R^d\rightarrow\mathbb R^d.
+   ]
+
+   That's technically composable with everything and therefore gives you almost no search constraint.
+
+   But perhaps experience reveals latent distinctions:
+
+   ```text
+   entity-like state
+   relation-like state
+   sequence-position state
+   accumulator state
+   boolean/control state
+   ```
+
+   Then the system learns something akin to:
+
+   [
+   A:\text{Entity}\rightarrow\text{Relation}
+   ]
+
+   [
+   B:\text{Relation}\times\text{Entity}\rightarrow\text{Boolean}.
+   ]
+
+   Now composition search collapses because most expressions are ill-typed.
+
+   This is where category theory could become *algorithmically useful*, rather than descriptive.
+
+   You could even treat “type formation” itself as abstraction:
+
+   > A type is worth inventing when recognizing a shared interface substantially reduces the description/search cost of the library.
+
+5. **Build a categorical ROW with richer program structure.** Fixed three-step chains are just ordinary categorical composition:
+
+   [
+   f;,g;,h.
+   ]
+
+   But eventually you'll want more wiring.
+
+   The natural progression is:
+
+   [
+   \text{category}
+   \rightarrow
+   \text{symmetric monoidal category}
+   \rightarrow
+   \text{richer wiring structure}.
+   ]
+
+   Sequential composition gives:
+
+   ```text
+   A → B → C
+   ```
+
+   Monoidal composition gives independent parallel computation:
+
+   ```text
+   ┌→ A ─┐
+   │     │
+   └→ B ─┘
+   ```
+
+   products/copying let one value feed several computations; coproduct-like structure gives alternatives; feedback/traced structures can describe recurrent wiring. Applied category theory already has very mature machinery around wiring diagrams, circuits, hypergraph categories and operads. ([MIT OpenCourseWare][4])
+
+   In fact, for your purposes, **operads/wiring diagrams may eventually be more useful than vanilla categories**, because you want to ask:
+
+   > Which components may be plugged into which holes of a larger computation?
+
+   That's precisely an algebra of composition.
+
+6. **Test the actual LLM scaling hypothesis on tiny transformers.** This should eventually become a parallel empirical branch.
+
+   Train the same transformer family at, say:
+
+   [
+   1\times,;2\times,;4\times,;8\times
+   ]
+
+   on a synthetic environment with known reusable algorithms.
+
+   Design the tasks so you know that the same abstract operations recur under different contexts and representations.
+
+   Then measure three quantities separately:
+
+   [
+   U(M)=\text{unique useful computations}
+   ]
+
+   [
+   R(M)=\text{functional computational redundancy}
+   ]
+
+   [
+   C(M)=\text{number/richness of useful compositions}.
+   ]
+
+   Your hypothesis predicts that scale doesn't merely increase (U). It may increase both:
+
+   [
+   C(M)\uparrow
+   ]
+
+   and
+
+   [
+   R(M)\uparrow.
+   ]
+
+   There is already intriguing evidence that transformer computation can exhibit both composition and redundancy. A 2026 mechanistic study of a synthetic compositional task isolated a general function-composition circuit and also found overlapping redundant circuits: ablating individual heads often had little effect because multiple heads supported the same algorithmic step. ([PLOS][5])
+
+   That is surprisingly close to your intuition.
+
+   The decisive experiment would then be:
+
+   > Can ROW-like factorization compress the larger model's redundant computations into a smaller explicit library while preserving its compositional repertoire?
+
+   If yes, you've directly connected ROW to neural scaling.
+
+7. **Eventually build a neural “compiler pass.”** This is the ambitious endpoint I now see.
+
+   Start with an ordinary trained dense network:
+
+   ```text
+   dense neural model
+          ↓
+   identify candidate subcomputations
+          ↓
+   test functional equivalence
+          ↓
+   discover coordinate transformations
+          ↓
+   factor recurring circuits
+          ↓
+   build explicit typed library
+          ↓
+   rewrite network as composition graph
+   ```
+
+   In other words:
+
+   [
+   \text{neural weights}
+   \rightarrow
+   \text{compositional IR}.
+   ]
+
+   Then the really interesting experiment is **continue training after compilation**.
+
+   Does the compiled model now learn subsequent tasks faster than the original dense network because it can explicitly reuse and extend its library?
+
+   That's much stronger than compression.
+
+   It would say that you've changed the *learning dynamics*.
+
+---
+
+## I think the commuting-diagram experiment should come surprisingly early
+
+It could actually fit into ROW without jumping to LLMs.
+
+Modify the world so the same hidden primitive appears under different coordinate systems.
+
+For task/context (i):
+
+[
+P_i
+===
+
+B_i\circ P\circ A_i.
+]
+
+The learner sees only (P_i)'s input-output behavior.
+
+So naively:
+
+[
+P_1,P_2,P_3
+]
+
+look unrelated.
+
+But there is secretly one computation:
+
+[
+P
+]
+
+plus adapters.
+
+Then compare three learners:
+
+```text
+Independent
+P₁ P₂ P₃ P₄
+
+Exact sharing
+one P used everywhere
+
+Factorized sharing
+Aᵢ → P → Bᵢ
+```
+
+Exact sharing should fail because representations don't line up.
+
+Independent learning should work but waste information.
+
+The factorizing learner should eventually discover:
+
+[
+\boxed{\text{common morphism}}
++
+\boxed{\text{context maps}}.
+]
+
+And there should again be an economic crossover:
+
+[
+nD(P_i)
+\quad\text{vs}\quad
+D(P)+\sum_i(D(A_i)+D(B_i)).
+]
+
+That would be a **beautiful extension of the existing ROW story**.
+
+V1:
+
+> When does exact computational reuse pay?
+
+Next:
+
+> When does reuse remain possible when the same abstraction appears in different representations?
+
+And that question is much more realistic for deep networks.
+
+---
+
+## There's also a deeper categorical way to think about abstraction
+
+Right now you can think of a primitive as just a function.
+
+But perhaps the correct thing for the learner to discover isn't a particular implementation (f).
+
+It's an **equivalence class of implementations**:
+
+[
+[f]
+===
+
+{f_1,f_2,\ldots:
+f_i\text{ realizes the same abstract computation}}.
+]
+
+Then:
+
+```text
+abstract COMPARE
+      │
+      ├─ implementation in representation A
+      ├─ implementation in representation B
+      ├─ implementation in representation C
+      └─ ...
+```
+
+That gets very close to what “concept” or “algorithm” should mean computationally.
+
+The abstraction is not:
+
+> these neurons.
+
+Nor:
+
+> these weights.
+
+Nor even:
+
+> this exact function on (\mathbb R^{16}).
+
+It is something more like:
+
+> **this invariant transformation under admissible changes of representation.**
+
+That's where I think category theory may contribute something genuinely deep to your research rather than merely providing compositional syntax.
+
+Natural transformations, isomorphisms, factorization, universal constructions, operadic substitution—all of those start becoming relevant because you're trying to distinguish **implementation** from **compositional role**.
+
+---
+
+## I would also keep one principle from ROW
+
+Don't decide in advance that every clever categorical structure should exist.
+
+Let the **economics force the ontology**.
+
+For example, don't say:
+
+> “Now we're adding products, functors, macros and traces because intelligence uses them.”
+
+Instead construct worlds where increasingly sophisticated factorization *might* pay and ask:
+
+[
+\min_R
+\left[
+L_{\text{lifetime}}(R)
++
+\lambda D(R)
++
+\gamma C_{\text{search}}(R)
++
+\eta C_{\text{execution}}(R)
+\right].
+]
+
+Then see what representation wins.
+
+Maybe exact sharing wins.
+
+Maybe adapter-mediated sharing wins.
+
+Maybe a new macro wins.
+
+Maybe hierarchy wins.
+
+Maybe keeping four separate circuits really is cheaper.
+
+That turns your larger question into something almost Darwinian:
+
+> **What computational abstractions are selected when representations compete on total lifetime economics?**
+
+And that could eventually give you a much deeper thesis than “category theory improves neural networks”:
+
+[
+\boxed{
+\text{Intelligence emerges through economical closure under composition.}
+}
+]
+
+A learner accumulates transformations; transformations become reusable; reusable transformations compose; frequently useful compositions become new abstractions; and the resulting vocabulary changes what can be learned cheaply next.
+
+That, to me, is the research program hiding inside ROW.
+
+[1]: https://research.google/pubs/houdini-lifelong-learning-as-program-synthesis/?utm_source=chatgpt.com "Houdini: Lifelong Learning as Program Synthesis"
+[2]: https://openreview.net/pdf?id=qzFxBcK9Cg&utm_source=chatgpt.com "Published in Transactions on Machine Learning Research (06/2026)"
+[3]: https://arxiv.org/abs/2106.07682?utm_source=chatgpt.com "Revisiting Model Stitching to Compare Neural Representations"
+[4]: https://ocw.mit.edu/courses/18-s097-applied-category-theory-january-iap-2019/pages/lecture-videos-and-readings/?utm_source=chatgpt.com "Lecture Videos and Readings | Applied Category Theory | Mathematics | MIT OpenCourseWare"
+[5]: https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0340088&utm_source=chatgpt.com "Circuit explained: How does a transformer perform compositional generalization | PLOS One"
+
+Yes. After looking at the current V5 sketch, I think the project is at a useful fork. The sketch already has a strong structure:
+
+[
+\text{LAW}\rightarrow\text{PHASE DIAGRAM}\rightarrow\text{SELECTION}
+]
+
+and explicitly reserves V6 for turning the library into a compositional language.
+
+I would preserve that. But I would make one conceptual adjustment: **V5 should increasingly test whether the economics can discover representations that are invariant across different implementations of the same computation.** That would bridge ROW's current results to your actual hypothesis about duplicated/entangled neural circuits.
+
+## What I think V5 should ultimately establish
+
+Right now the proposed V5 question is roughly:
+
+> Can one prospective score choose the cheapest useful representation as code cost, reuse, meta-recurrence, and horizon change?
+
+That's good.
+
+I would try to leave V5 having established something stronger:
+
+[
+\boxed{
+\text{The representation chosen by the learner changes predictably with the economics of reuse.}
+}
+]
+
+Not just one crossover.
+
+Ideally you end V5 with a **phase diagram**.
+
+Something like:
+
+```text
+                     future recurrence
+                           ↑
+                           │      shared core
+                           │      + adapters
+                           │
+                           │            exact
+                           │            shared
+                           │
+          compressed       │
+          private          │
+                           │
+                           └──────────────────→
+                              functional similarity
+```
+
+And the boundaries should be predicted from quantities measured independently.
+
+That would be a much bigger result than another mechanism winning.
+
+---
+
+# V5.1: Make the amortization law genuinely causal
+
+The current sketch already recognizes the problem: recomputing
+
+[
+H^*=\frac{\lambda D(A)}{\bar{s}}
+]
+
+with a different accounting scheme isn't an empirical test. So V5.1 manipulates the underlying quantities instead.
+
+I think this is exactly right.
+
+The experiment I would want is:
+
+[
+D(A)\uparrow \quad\Rightarrow\quad H^*\uparrow
+]
+
+and independently:
+
+[
+\bar{s}\uparrow \quad\Rightarrow\quad H^*\downarrow.
+]
+
+Then ideally:
+
+[
+H^*\bar{s}\approx\lambda D(A)
+]
+
+across the whole grid.
+
+### The major danger
+
+Changing residual **rank** doesn't only change description length.
+
+It can also change:
+
+* functional complexity,
+* trainability,
+* approximation quality,
+* reacquisition speed,
+* magnitude of improvement,
+* optimization geometry.
+
+So rank isn't a pure intervention on (D).
+
+The current sketch partially handles this correctly by saying the actual law should be tested as
+
+[
+H^*\bar{s}\propto D
+]
+
+rather than assuming (\bar{s}) stays fixed.
+
+I would go further and make this a core diagnostic.
+
+For every rank arm separately measure:
+
+[
+D^*(A),\quad \bar{s},\quad C_{\text{reacquire}}
+]
+
+before looking at the crossing.
+
+Then predict the crossing.
+
+Do **not** fit the crossing and subsequently explain it using those quantities.
+
+That's the difference between a law and curve-fitting.
+
+---
+
+# V5.2: I would make the “second representation class” categorical
+
+This is where I think you can substantially improve the current plan.
+
+V4R found that factorization didn't pay: independently compressed abstractions were cheaper.
+
+The current V5 plan proposes creating a world with enough **meta-recurrence** that factorization can genuinely become economical.
+
+Good.
+
+But I wouldn't make the meta-recurrence arbitrary.
+
+I would create the following world.
+
+There is some latent reusable computation:
+
+[
+A:X\rightarrow Y.
+]
+
+But every family sees it through a different representation:
+
+[
+f_i
+===
+
+d_i\circ A\circ e_i.
+]
+
+So:
+
+```text
+     e₁          A          d₁
+X₁ ───→ X ───────────→ Y ───→ Y₁
+
+     e₂          A          d₂
+X₂ ───→ X ───────────→ Y ───→ Y₂
+
+     e₃          A          d₃
+X₃ ───→ X ───────────→ Y ───→ Y₃
+```
+
+Now compare:
+
+[
+R_1={f_1,f_2,\ldots,f_n}
+]
+
+against:
+
+[
+R_2={A,e_1,d_1,e_2,d_2,\ldots}.
+]
+
+The MDL decision is:
+
+[
+D(A)+\sum_i[D(e_i)+D(d_i)]
+\overset{?}{<}
+\sum_iD(f_i).
+]
+
+This is **exactly** the issue you expect to encounter in LLMs.
+
+The same abstract computation probably doesn't appear at layer 8 and layer 26 operating in identical coordinates.
+
+It might instead be:
+
+> the same morphism expressed in two different internal representational systems.
+
+That gives category theory a real job.
+
+The experiment asks whether a commuting diagram exists cheaply enough to be worth representing.
+
+---
+
+# Why that V5 experiment could be very important
+
+You could sweep the cost of the adapters.
+
+At one extreme:
+
+[
+e_i,d_i\approx I.
+]
+
+Then exact sharing should win.
+
+As adapters become more complicated:
+
+[
+D(e_i)+D(d_i)\uparrow
+]
+
+there should eventually be a crossover where maintaining independent implementations becomes cheaper.
+
+So you'd get:
+
+[
+\text{exact sharing}
+\rightarrow
+\text{shared abstraction + adapters}
+\rightarrow
+\text{independent implementations}.
+]
+
+That's a **representation phase transition**.
+
+And suddenly your project is studying exactly the distinction that matters to your duplicate-circuit hypothesis:
+
+> When are two different neural circuits economically better understood as implementations of the same abstract computation?
+
+That is much deeper than parameter clustering.
+
+---
+
+# V5.3: Require factorization to predict something it hasn't seen
+
+This should be non-negotiable.
+
+Suppose you discover:
+
+[
+f_1=d_1Ae_1,\quad
+f_2=d_2Ae_2,\quad
+f_3=d_3Ae_3.
+]
+
+It is easy to create some representation that compresses those three retrospectively.
+
+The real test is:
+
+> Does (A) help with (f_4)?
+
+So hold out an entire family member.
+
+Learn the core from:
+
+[
+f_1,f_2,f_3.
+]
+
+Then on (f_4), allow learning only the adapters:
+
+[
+e_4,d_4.
+]
+
+Compare that against learning (f_4) independently.
+
+If:
+
+[
+L_{\text{learn adapters}}
+<
+L_{\text{learn whole }f_4},
+]
+
+you've discovered something genuinely reusable.
+
+That's analogous to V3's distinction between compression of the past and prospective abstraction.
+
+I'd call this **meta-transfer**.
+
+---
+
+# V5.4: Can one score actually choose the representation?
+
+This is the really important culmination of V5.
+
+Don't tell the learner which world it is in.
+
+Sometimes generate:
+
+```text
+unrelated computations
+```
+
+sometimes:
+
+```text
+weak recurrence
+```
+
+sometimes:
+
+```text
+same abstract computation
++ expensive adapters
+```
+
+sometimes:
+
+```text
+same computation
++ cheap adapters
+```
+
+sometimes:
+
+```text
+exact recurrence
+```
+
+And allow:
+
+[
+{\text{KEEP PRIVATE},
+\text{COMPRESS},
+\text{FACTORIZE},
+\text{SHARE}}.
+]
+
+Then compare the learner's predicted choice with an oracle that can evaluate the actual remaining lifetime.
+
+The important metric isn't simply classification accuracy.
+
+Use **regret**:
+
+[
+\operatorname{Regret}
+=====================
+
+## J(\text{chosen representation})
+
+\min_R J(R).
+]
+
+Then you can ask whether estimated value is calibrated:
+
+[
+\hat V(R)\approx V_{\text{actual}}(R).
+]
+
+That gets you toward something extremely important:
+
+> the learner doesn't merely possess abstraction mechanisms; it knows when to use them.
+
+The current V5 plan already moves toward structural regret and a prospective score.  I think that's the right endpoint.
+
+---
+
+# V5.5: The open-library problem
+
+This is where things become sequential.
+
+The current sketch recognizes that once the library can change, an abstraction's value isn't independent anymore. Deleting (A) might cause (A') to be rediscovered, so the apparent storage saving disappears.
+
+Now you're no longer solving:
+
+[
+\arg\min_R J(R).
+]
+
+You're solving:
+
+[
+\pi^*
+=====
+
+\arg\min_\pi
+E\left[
+\sum_t
+J(R_t,a_t)
+\right].
+]
+
+This is where I'd introduce **short counterfactual rollouts** before trying to learn a policy.
+
+For each candidate edit:
+
+```text
+KEEP
+DELETE
+COMPRESS
+FACTORIZE
+```
+
+clone the learner and simulate perhaps the next (k) tasks.
+
+Then compare:
+
+[
+Q_k(R,a)
+========
+
+C(a)+
+\sum_{i=1}^{k}J_{t+i}.
+]
+
+If even a short rollout beats a myopic score substantially, you've demonstrated that **representation management is genuinely a planning problem**.
+
+That's already beginning to touch the reasoning/planning theme without anthropomorphizing it.
+
+The learner is literally hypothesizing:
+
+> “What happens if I rewrite my representation this way?”
+
+and rolling that representation forward.
+
+---
+
+# One issue I would take especially seriously: functional equivalence can lie
+
+This matters for the category-theoretic direction.
+
+There's existing work showing that simple model-stitching success is not sufficient evidence that two representations contain the same information: surprisingly different or even pathological representations can sometimes be stitched successfully. ([Proceedings of Machine Learning Research][1])
+
+So don't define:
+
+[
+f\sim g
+]
+
+merely because some powerful learned adapter makes them interchangeable.
+
+A sufficiently expressive adapter could itself implement all the computation.
+
+Your test needs an **adapter complexity budget**.
+
+For example:
+
+[
+f\sim g
+]
+
+only when there exist cheap (a,b) such that:
+
+[
+b\circ f
+\approx
+g\circ a
+]
+
+on proposal data **and disjoint validation interventions**, while:
+
+[
+D(a)+D(b)\ll D(f),D(g).
+]
+
+Otherwise you've merely hidden the computation in the adapters.
+
+This is potentially one of the most important methodological rules for later LLM experiments.
+
+---
+
+# Then V6: don't start with loops
+
+I would make V6 much smaller and cleaner than “CALL / COMPOSE / BIND / BRANCH / LOOP.”
+
+Start with the simplest possible category.
+
+Objects:
+
+[
+X,Y,Z,\ldots
+]
+
+Morphisms:
+
+[
+f:X\to Y.
+]
+
+Operations:
+
+[
+\operatorname{id}_X
+]
+
+and:
+
+[
+g\circ f.
+]
+
+That's it.
+
+Before products.
+
+Before branches.
+
+Before loops.
+
+Before recursion.
+
+The first V6 question should simply be:
+
+> **Can learned computational primitives be explicitly composed into unseen larger programs?**
+
+---
+
+## V6.1: Held-out composition
+
+Suppose the library has discovered:
+
+[
+A,B,C,D,E.
+]
+
+Training tasks contain combinations like:
+
+[
+B\circ A
+]
+
+[
+D\circ B
+]
+
+[
+C\circ A
+]
+
+but never:
+
+[
+D\circ C\circ A.
+]
+
+Then test whether the learner can assemble:
+
+[
+D\circ C\circ A
+]
+
+with little or no parameter learning.
+
+That's the first real compositional-generalization result.
+
+And depth should matter.
+
+Train on programs of length:
+
+[
+1,2,3
+]
+
+and test:
+
+[
+4,5,6,8.
+]
+
+If execution remains correct as depth grows, you've separated:
+
+[
+\text{knowing primitives}
+]
+
+from:
+
+[
+\text{having memorized combinations}.
+]
+
+The current V5 sketch already mentions an operational compositional-closure probe at depth 8.  I think that probe should become the **entry criterion for V6**.
+
+---
+
+# V6.2: Programs should become primitives
+
+This is the experiment I consider central to your ultimate thesis.
+
+Suppose:
+
+[
+C\circ B\circ A
+]
+
+keeps appearing.
+
+The learner initially executes:
+
+```text
+CALL A
+CALL B
+CALL C
+```
+
+Eventually it should ask whether to create:
+
+[
+M=C\circ B\circ A.
+]
+
+Then future programs can say:
+
+```text
+CALL M
+```
+
+instead.
+
+The economic condition becomes something like:
+
+[
+D(M)
++
+N,D(\operatorname{CALL}M)
++
+C_{\text{creation}}
+<
+N[D(A)+D(B)+D(C)]
+]
+
+while also considering execution/search costs.
+
+And then the crucial part:
+
+[
+M
+]
+
+must itself be composable:
+
+[
+E\circ M\circ D.
+]
+
+Now you have:
+
+[
+\text{program}
+\rightarrow
+\text{abstraction}
+\rightarrow
+\text{primitive}
+\rightarrow
+\text{larger program}.
+]
+
+That is the beginning of **recursive abstraction**.
+
+---
+
+# V6.3: Category laws can stop the library exploding
+
+Suppose the learner represents:
+
+[
+(C\circ B)\circ A
+]
+
+and separately:
+
+[
+C\circ(B\circ A).
+]
+
+These aren't two programs.
+
+Associativity says:
+
+[
+(C\circ B)\circ A
+=================
+
+C\circ(B\circ A).
+]
+
+Similarly:
+
+[
+f\circ \operatorname{id}=f.
+]
+
+This matters computationally.
+
+Without canonicalization, the learner's library can accumulate enormous numbers of syntactically different expressions representing the same computation.
+
+Category theory therefore gives you a **quotient over program syntax**.
+
+Instead of storing syntax trees literally, normalize modulo laws such as:
+
+[
+(f\circ g)\circ h
+\equiv
+f\circ(g\circ h).
+]
+
+That could make search and MDL substantially cleaner.
+
+This is one place where category theory isn't decoration at all—it tells you which distinctions the learner should *not pay bits for*.
+
+---
+
+# V6.4: Types should eventually constrain search
+
+If every module is:
+
+[
+\mathbb R^{16}\rightarrow\mathbb R^{16},
+]
+
+then everything technically composes with everything.
+
+As the library grows:
+
+[
+K^L
+]
+
+candidate programs become impossible to search.
+
+Eventually you need interfaces like:
+
+[
+A:X\rightarrow Y
+]
+
+[
+B:Y\rightarrow Z
+]
+
+while:
+
+[
+C:Q\rightarrow R
+]
+
+can't follow (A).
+
+HOUDINI is relevant prior art here: it represents differentiable neural programs in a strongly typed functional language and found that type-directed search substantially reduces the search problem. ([Google Research][2])
+
+But I wouldn't have ROW **learn the types immediately**.
+
+First:
+
+```text
+V6a: known types
+V6b: inferred types
+```
+
+Otherwise if something fails you won't know whether:
+
+* composition failed,
+* program search failed,
+* type induction failed,
+* or the neural primitives failed.
+
+Keep those hypotheses separable.
+
+---
+
+# V6.5: Only then add richer categorical structure
+
+Once sequential composition works, then introduce things like parallel composition / multiple inputs.
+
+That's where symmetric monoidal structure starts becoming relevant.
+
+Later:
+
+```text
+COPY
+PAIR
+SELECT
+CASE
+```
+
+and eventually:
+
+```text
+LOOP / TRACE
+```
+
+But I would make each new structural primitive earn its place exactly the way ROW has made abstractions earn theirs.
+
+Don't assume branches are useful.
+
+Create an opportunity census.
+
+Ask an oracle:
+
+[
+\text{Would BRANCH reduce lifetime cost here?}
+]
+
+If no, don't build it.
+
+That's one of the most valuable lessons V4 gave you.
+
+---
+
+# The three experiments I would be most excited about
+
+If I had to prioritize the whole roadmap, I'd choose these:
+
+| Experiment                                               | Why it matters                                                                                                     |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Causal amortization law**                              | Establishes that the economics actually predict interventions rather than redescribe outcomes                      |
+| **Same morphism under different coordinates**            | Connects ROW directly to your duplicated/entangled-circuit hypothesis and gives category theory a substantive role |
+| **Repeated composition → new primitive → recomposition** | Demonstrates the recursive abstraction mechanism needed for a genuinely growing computational language             |
+
+If all three worked, the story would become much stronger:
+
+[
+\boxed{
+\text{repeated computation}
+\rightarrow
+\text{shared morphism}
+\rightarrow
+\text{economically selected abstraction}
+\rightarrow
+\text{composition}
+\rightarrow
+\text{repeated composition}
+\rightarrow
+\text{new morphism}.
+}
+]
+
+At that point, I think you'd have experimentally instantiated a surprisingly large piece of your original intuition.
+
+The most important thing is not to rush from ROW to an LLM. **V5 should establish the economics as predictive; V6 should establish recursive compositional abstraction as real.** If those succeed, then V7/V8 can ask the much more consequential question: whether a learner whose language itself improves can solve increasingly novel programs—and whether that mechanism gives you a different, more efficient route to scaling than simply making a dense model larger.
+
+[1]: https://proceedings.mlr.press/v267/smith25a.html?utm_source=chatgpt.com "Functional Alignment Can Mislead: Examining Model Stitching"
+[2]: https://research.google/pubs/houdini-lifelong-learning-as-program-synthesis/?utm_source=chatgpt.com "Houdini: Lifelong Learning as Program Synthesis"
+

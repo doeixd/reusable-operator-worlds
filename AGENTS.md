@@ -862,3 +862,27 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   4. This is why every structural edit loses to local compression, and
   it means absolute (not paired) two-part figures in V1-V4 are inflated
   by that factor.
+- Whenever a structural property is manipulated, measure separately what
+  it did to COST and what it did to UTILITY. V5.1's registered
+  proportionality failed only because residual rank moved both: rank 4
+  costs 4x rank 1 and also saves 1.86x per use. The law
+  `H* = lambda D*(A) / s_bar` survived precisely because the two were
+  measured independently at each rank. Any future intervention on a
+  representation's economics must report both halves before its
+  crossing is read.
+- Padding is NOT a valid intervention on description length. Under the
+  rate-distortion currency established in V5.0,
+  `D*(A + dead bits) = D*(A)`; charging for dead bits tests an
+  artificial storage tax, not abstraction economics. Manipulate what an
+  abstraction can compute, or manipulate the code, but do not inflate
+  the serialization.
+- Task-space capacity is not realized library size. Raising composition
+  depth (L=4) did not raise M. The direct knob is F explicit recurring
+  innovation families with m tasks each, N = Fm, holding m fixed while
+  sweeping F -- then PROMOTE yields M ~ F. Use this for any experiment
+  whose independent variable is library scale.
+- A generator knob that is supposed to vary RELATEDNESS must not vary
+  individual value. Frozen balance gates (each within 10% across the
+  sweep): per-abstraction `D*`, `s_bar`, behavioral contribution, and
+  promotion rate. A sweep failing any gate is unscoreable rather than
+  weak -- this is the V5.1 confound restated as a precondition.

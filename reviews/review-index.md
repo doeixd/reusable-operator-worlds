@@ -1912,3 +1912,90 @@ compositional abstraction as real; if those succeed, V7/V8 can ask whether a
 learner whose language itself improves can solve increasingly novel programs and
 whether that gives a different, more efficient route to scaling than making a
 dense model larger.
+
+### [reviewer-feedback-44.txt](reviewer-feedback-44.txt)
+Response to the V5.1 causal result. Reads the outcome as the registered simple
+prediction failing while the deeper relation survived in a more informative
+form: H_R* = λD*(A)/s̄(A), not H_R* ∝ D(A). Rank changed both the cost of the
+abstraction and its usefulness; once both were measured independently the
+predicted crossings matched observation to ~2% at ranks 1, 2, 4.
+
+Explicitly advises AGAINST the padding follow-up: under the rate-distortion
+philosophy V5.0 established, meaningless padding ought to be compressed away
+(D*(A + dead bits) = D*(A)), so forcing the learner to pay for dead bits tests
+an artificial storage tax rather than abstraction economics. The transferable
+lesson instead: whenever a structural property is manipulated, measure
+separately what it did to COST and what it did to UTILITY.
+
+V5.2 should test the amortization law one level higher — when should a SCHEMA
+over abstractions exist? With A_i = S(α_i) + ε_i, C_schema = D*(S) + Σ[D(α_i) +
+D*(ε_i)], the same theory predicts FACTORIZE ⟺ M·s̄_schema > D*(S), hence
+M* = D*(S)/s̄_schema. Demonstrating the same economic transition at two levels
+(uses→abstraction, abstractions→schema) is the beginning of recursive
+abstraction formation.
+
+The critical trick is making meta-recurrence orthogonal to individual
+abstraction value: do not manipulate rank; construct abstractions whose marginal
+distribution is approximately identical at every meta-recurrence level while
+only their relationship to one another changes. Proposed generator
+θ_i(ρ) = √ρ·Bα_i + √(1−ρ)·B_i β_i with B a common functional subspace, B_i
+independent private subspaces of identical dimensionality, α_i,β_i from the same
+distribution, total norm held constant — so E|θ_i|² is constant but at ρ→1 all
+abstractions inhabit a common low-dimensional operator family. Define in
+FUNCTIONAL space, not parameter space (gauge freedom).
+
+Hard balance gates on the generator, frozen in advance at ±5–10%: D*(A_i|ρ),
+s̄(A_i|ρ), behavioral contribution(A_i|ρ), and promotion rate(ρ) each
+approximately constant. If raising ρ also makes individual atoms cheaper or more
+useful, do not read the factorization sweep.
+
+Solve the realized-library-size problem directly rather than by composition
+depth (L=4 showed task-space capacity ≠ realized M): build a world with F
+explicit recurring innovation families, each with m tasks, N = Fm; hold m
+constant and vary F ∈ {4,8,16,32,64} so PROMOTE yields M ≈ F. This is the
+direct scale knob the project has been missing.
+
+Together these give a two-dimensional phase diagram (M, ρ_meta) →
+{COMPRESS, FACTORIZE}, with COMPRESS winning forever at low ρ, an M*(ρ) at high
+ρ, and the prediction dM*/dρ < 0 — the more related the abstractions, the fewer
+family members needed before naming the family; exactly analogous to V1's
+recurrence threshold.
+
+Do not start by teaching the learner FACTORIZE. Four gates in order:
+(1) opportunity — does any shared representation beat componentwise
+rate-distortion-optimal private compression; (2) leave-one-out structure — fit S
+on A_1..A_{M−1}, represent unseen A_M by learning only α_M, else the schema is
+retrospective compression rather than reusable structure; (3) prospective value
+— a new family member must be cheaper in prequential cost, sample count, AND
+retained bits when learned as α_new under S; (4) discovery — only now ask the
+learner to find S. Preregister M*(ρ) = D*(S)/s̄_schema(ρ) from independently
+measured quantities BEFORE the scale sweep.
+
+Also flags V5.0's frontier result as a question in its own right: D*_shared ≈
+3.9 bits/scalar vs D*_private ≈ 5.0 — shared abstractions are not merely stored
+fewer times, their individual scalars are cheaper. Four candidate mechanisms:
+noise purification (promotion averages away task-specific variation),
+effective-dimensionality reduction (faster-decaying sensitivity spectrum),
+selection effect (PROMOTE preferentially selects naturally compressible
+computations), and representation restructuring (sharing causes SGD to encode in
+a more robust, lower-rate geometry). The last would mean abstraction does not
+merely reduce duplication — it changes the coding geometry of information.
+Cheap mechanistic audit: compare effective rank, singular-value spectrum,
+parameter-perturbation sensitivity, functional Jacobian spectrum, quantization-
+error curve, and scalar-value entropy between private residuals and promoted
+abstractions, and ask whether the D* difference is predictable from any of them.
+
+Closing frame: "structure has no intrinsic economic value; its value is always
+cost relative to the future computation it saves." Rank 4 costs four times rank
+1 but saves nearly twice as much per use, which is exactly what a theory of
+learned abstractions should care about.
+
+### [reviewer-feedback-45.txt](reviewer-feedback-45.txt)
+No new content. Lines 1–520 restate the category-theoretic research directions
+already indexed under [reviewer-feedback-42.txt](reviewer-feedback-42.txt)
+(commuting diagrams b∘f_i ≈ f_j∘a with an adapter complexity budget, promotion
+as categorical factorization R_i ≈ d_i∘A∘e_i, compositions becoming primitives,
+learned types, monoidal structure, tiny-transformer scaling test, the neural
+"compiler pass" endpoint); lines 521–1366 are a verbatim re-paste of
+[reviewer-feedback-43.txt](reviewer-feedback-43.txt) (V5.1–V5.5 and V6.1–V6.5).
+Retained for provenance; no action items beyond those two entries.

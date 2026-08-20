@@ -1216,6 +1216,60 @@ N grid at 8-bit (or a D* reading whose predicted crossing is on-grid).
 
 ---
 
+## V5.2 REVISION after review 44 (2026-08-20)
+
+The question becomes: does the SAME amortization law govern the birth of
+abstractions over abstractions?
+
+  A_i = S(alpha_i) + eps_i
+  C_private = sum_i D*(A_i)
+  C_schema  = D*(S) + sum_i [ D(alpha_i) + D*(eps_i) ]
+  FACTORIZE iff  M * s_bar_schema > D*(S)
+  M*(rho)   =    D*(S) / s_bar_schema(rho)
+
+Registered as H25-H27 in PREDICTIONS.md before the generator exists.
+
+GENERATOR. Do not manipulate rank. In FUNCTIONAL space (gauge freedom):
+
+  theta_i(rho) = sqrt(rho) * B alpha_i + sqrt(1-rho) * B_i beta_i
+
+B a common subspace, B_i independent private subspaces of identical
+dimensionality, alpha_i/beta_i from one distribution, total norm held
+constant, so E|theta_i|^2 does not move with rho while the fraction of
+each abstraction lying in a common family does.
+
+BALANCE GATES, frozen at 10%, checked BEFORE the factorization sweep is
+read: D*(A_i|rho), s_bar(A_i|rho), behavioral contribution, promotion
+rate. A failing sweep is unscoreable.
+
+SCALE KNOB. F recurring innovation families, m tasks each, N = Fm; hold
+m fixed and sweep F in {4,8,16,32,64} so PROMOTE realizes M ~ F. Do not
+raise composition depth again -- L=4 showed task-space capacity is not
+realized M.
+
+PHASE DIAGRAM. (M, rho_meta) -> {COMPRESS, FACTORIZE}; COMPRESS wins at
+all M for low rho; M*(rho) exists at high rho; dM*/drho < 0.
+
+GATE ORDER, inherited from V4's lesson. (1) opportunity against
+componentwise rate-distortion-optimal private compression; (2)
+leave-one-out structure -- fit S on A_1..A_{M-1}, represent unseen A_M
+by alpha_M alone, else the schema is retrospective compression;
+(3) prospective value -- a new family member cheaper in prequential
+cost, sample count, AND retained bits; (4) discovery, last. No operator
+is implemented before gate 1 passes.
+
+WITHDRAWN. The padding/dead-bit proportionality test proposed in the
+V5.1 note. D*(A + dead bits) = D*(A).
+
+OPEN, from V5.0: D*_shared ~ 3.9 bits/scalar vs D*_private ~ 5.0.
+Candidate mechanisms are noise purification, effective-dimensionality
+reduction, a PROMOTE selection effect, and representation restructuring.
+The cheap audit compares effective rank, singular-value spectrum,
+perturbation sensitivity, Jacobian spectrum, quantization-error curve,
+and scalar entropy between the two populations (H27).
+
+---
+
 ## Sources
 
 row_v4r_experimental_spec.md and V4R_CONFIRMATION_PLAN.md (predecessor
@@ -1237,3 +1291,5 @@ src/row/config.py SharedResidualModelConfig residual_rank cap.
 src/row/experiments/audit_component_frontier.py and score_v5_causal.py
 (V5.0 result; V5.1 protocol).
 artifacts/v5_causal/ (in-flight rank-1 grid; development only).
+reviews/reviewer-feedback-44.txt (V5.2 as recursive amortization;
+balance gates; F-families scale knob; padding withdrawn).

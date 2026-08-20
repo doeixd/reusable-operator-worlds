@@ -1,0 +1,669 @@
+This is a strong V5.1 result. The registered simple prediction failed, but the deeper relation survived in a more informative form:
+
+[
+\boxed{
+H_R^*=\frac{\lambda D^*(A)}{\bar s(A)}
+}
+]
+
+not
+
+[
+H_R^*\propto D(A).
+]
+
+Rank changed both the cost of the abstraction and its usefulness, and once both were measured independently, the predicted crossings matched the observed ones to within ~2% across ranks 1, 2, and 4. 
+
+That actually tells us exactly how V5.2 should be designed.
+
+## First: I would *not* spend much time on padding
+
+Padding would technically separate cost from function, but under the rate-distortion philosophy you've just established, meaningless padding ought to be compressed away:
+
+[
+D^*(A+\text{dead bits})=D^*(A).
+]
+
+If we force the learner to pay for dead bits, we're testing an artificial storage tax rather than abstraction economics.
+
+The more interesting lesson from V5.1 is:
+
+> **Whenever we manipulate a structural property, measure separately what it did to cost and what it did to utility.**
+
+That's going to matter enormously downstream.
+
+---
+
+# V5.2 should test the amortization law one level higher
+
+This is now the cleanest next hypothesis.
+
+V5.1 says an individual abstraction should persist when:
+
+[
+H\bar s > D^*(A).
+]
+
+Now ask when a **schema over abstractions** should exist.
+
+Suppose we have:
+
+[
+A_1,A_2,\ldots,A_M.
+]
+
+Independent representation costs:
+
+[
+C_{\rm private}
+===============
+
+\sum_iD^*(A_i).
+]
+
+A higher-order representation might be:
+
+[
+A_i
+===
+
+S(\alpha_i)+\epsilon_i
+]
+
+with:
+
+* shared schema (S);
+* small argument (\alpha_i);
+* residual (\epsilon_i).
+
+Its cost is:
+
+[
+C_{\rm schema}
+==============
+
+D^*(S)
++
+\sum_i
+[
+D(\alpha_i)+D^*(\epsilon_i)
+].
+]
+
+Define the average saving from representing another abstraction through the schema as:
+
+[
+\bar s_{\rm schema}.
+]
+
+Then exactly the same theory predicts:
+
+[
+\boxed{
+\operatorname{FACTORIZE}
+\iff
+M\bar s_{\rm schema}>D^*(S)
+}
+]
+
+and therefore:
+
+[
+\boxed{
+M^*
+===
+
+\frac{D^*(S)}
+{\bar s_{\rm schema}}.
+}
+]
+
+That would be huge.
+
+Because we'd have demonstrated the same economic transition at two levels:
+
+[
+\text{uses}\rightarrow\text{abstraction}
+]
+
+and
+
+[
+\text{abstractions}\rightarrow\text{schema}.
+]
+
+That's the beginning of **recursive abstraction formation**.
+
+---
+
+# The critical trick is making meta-recurrence orthogonal to individual abstraction value
+
+V5.1 warned us about exactly this.
+
+Don't manipulate rank.
+
+Don't make stronger meta-recurrence simultaneously produce simpler or more useful operators.
+
+Instead construct abstractions whose **marginal distribution is approximately identical** at every value of meta-recurrence, while only their relationship to one another changes.
+
+I think the clean generator is something like:
+
+[
+\theta_i(\rho)
+==============
+
+\sqrt{\rho},B\alpha_i
++
+\sqrt{1-\rho},B_i\beta_i.
+]
+
+Here:
+
+* (B) is a common functional subspace;
+* (B_i) is an independent private subspace;
+* all have identical dimensionality;
+* (\alpha_i,\beta_i) come from the same distribution;
+* total norm/variance is held constant.
+
+Thus:
+
+[
+E|\theta_i(\rho)|^2=\text{constant}
+]
+
+but:
+
+[
+\rho\uparrow
+\Rightarrow
+\text{more of each abstraction lies in a common family}.
+]
+
+Ideally these are defined in **functional space**, not arbitrary neural parameter space, because V3 already taught us what gauge freedom does.
+
+At:
+
+[
+\rho=0
+]
+
+the abstractions are unrelated.
+
+At:
+
+[
+\rho=1
+]
+
+they all inhabit a common low-dimensional operator family.
+
+And critically, an individual (A_i) should remain approximately equally:
+
+* difficult;
+* useful;
+* large;
+* behaviorally important
+
+throughout the sweep.
+
+---
+
+# Put hard balance gates on the generator
+
+Before interpreting FACTORIZE at all, require something like:
+
+[
+D^*(A_i\mid\rho)
+\approx \text{constant}
+]
+
+[
+\bar s(A_i\mid\rho)
+\approx\text{constant}
+]
+
+[
+\text{behavioral contribution}(A_i\mid\rho)
+\approx\text{constant}
+]
+
+[
+\text{promotion rate}(\rho)
+\approx\text{constant}.
+]
+
+Say ±5–10%, frozen in advance.
+
+If increasing (\rho) also makes individual atoms cheaper or more useful, don't read the factorization sweep.
+
+V5.1 has earned us that rule.
+
+---
+
+# We also need to solve the realized-library-size problem directly
+
+The L=4 experiment showed:
+
+[
+\text{task-space capacity}\neq\text{realized }M.
+]
+
+So don't increase composition depth again.
+
+Build a world with (F) explicit recurring innovation families.
+
+Each family gets:
+
+[
+m
+]
+
+tasks.
+
+Then:
+
+[
+N=Fm.
+]
+
+Hold:
+
+[
+m=\text{constant}
+]
+
+while varying:
+
+[
+F\in{4,8,16,32,64}.
+]
+
+Each family (f) has its recurring operator:
+
+[
+A_f.
+]
+
+Every task from that family contains (A_f), perhaps combined with:
+
+* ordinary base primitives;
+* a small private nuisance residual;
+* different inputs/context;
+* opaque task identity.
+
+Then V3/PROMOTE should produce approximately:
+
+[
+M\approx F.
+]
+
+That's the direct scale knob you've been missing.
+
+No more hoping that a bigger task universe happens to yield a bigger library.
+
+---
+
+# This creates a genuine two-dimensional phase diagram
+
+Sweep:
+
+[
+M
+]
+
+and:
+
+[
+\rho_{\rm meta}.
+]
+
+Then ask which representation actually wins:
+
+[
+\boxed{
+(M,\rho_{\rm meta})
+\rightarrow
+{\texttt{COMPRESS},\texttt{FACTORIZE}}.
+}
+]
+
+I would expect something like:
+
+```text
+meta-recurrence
+↑
+│           FACTORIZE
+│         /
+│       /
+│     /
+│   COMPRESS
+└────────────────→ library size M
+```
+
+At low (\rho):
+
+[
+\texttt{COMPRESS}
+]
+
+should win forever.
+
+At high (\rho), there should be some:
+
+[
+M^*(\rho).
+]
+
+And as meta-recurrence increases:
+
+[
+\boxed{
+\frac{dM^*}{d\rho}<0.
+}
+]
+
+The more related the abstractions are, the fewer examples of the family you need before naming the family.
+
+That would be exactly analogous to V1's recurrence threshold.
+
+---
+
+# But don't start by teaching the learner FACTORIZE
+
+Use the same discipline V4 taught us.
+
+### Gate 1 — Opportunity
+
+Given ground-truth functions, does any shared representation beat:
+
+[
+\text{componentwise rate-distortion-optimal private compression}?
+]
+
+If not, stop.
+
+### Gate 2 — Leave-one-out structure
+
+Fit (S) on:
+
+[
+A_1,\ldots,A_{M-1}.
+]
+
+Then represent unseen:
+
+[
+A_M
+]
+
+by learning only:
+
+[
+\alpha_M.
+]
+
+If it can't do this, the “schema” is retrospective compression rather than reusable structure.
+
+### Gate 3 — Prospective value
+
+Create a new family member:
+
+[
+A_{\rm new}.
+]
+
+Compare:
+
+[
+\text{learn whole }A_{\rm new}
+]
+
+against:
+
+[
+\text{learn }\alpha_{\rm new}\text{ under }S.
+]
+
+Require lower:
+
+* prequential cost;
+* sample count;
+* retained bits.
+
+Only then do we have a **higher-order abstraction**.
+
+### Gate 4 — Discovery
+
+Only now ask the learner to discover (S).
+
+This prevents another V4 situation where we spend time engineering an operator before proving the opportunity exists.
+
+---
+
+# And we can preregister a parameter-free prediction again
+
+This is the exciting part.
+
+At some (\rho), estimate independently:
+
+[
+D^*(S)
+]
+
+and the leave-one-out per-member savings:
+
+[
+\bar s_{\rm schema}(\rho).
+]
+
+Then predict:
+
+[
+\boxed{
+M^*(\rho)
+=========
+
+\frac{D^*(S)}
+{\bar s_{\rm schema}(\rho)}
+}
+]
+
+**before doing the scale sweep.**
+
+Then vary (M).
+
+If the COMPRESS→FACTORIZE crossing lands around the prediction, we've reproduced V5.1's law recursively.
+
+That would give us:
+
+[
+\boxed{
+\text{reuse count}\times\text{savings per reuse}
+
+>
+
+\text{fixed abstraction cost}
+}
+]
+
+at multiple representational levels.
+
+That's potentially one of the deepest findings in this whole project.
+
+---
+
+# V5.0 gave us another question worth pursuing
+
+The frontier result is actually fascinating:
+
+[
+D^*_{\rm shared}\approx3.9\text{ bits/scalar}
+]
+
+versus:
+
+[
+D^*_{\rm private}\approx5.0.
+]
+
+Shared abstractions aren't merely stored fewer times.
+
+**Their individual scalars are cheaper.** 
+
+Why?
+
+There are several possibilities.
+
+### Noise purification
+
+Promotion averages away task-specific variation:
+
+[
+\text{signal}+\text{private noise}
+\rightarrow
+\text{stable reusable signal}.
+]
+
+### Effective-dimensionality reduction
+
+Shared objects may use fewer functionally important directions.
+
+Their sensitivity spectrum might decay faster:
+
+[
+\sigma_1\ge\sigma_2\gg\sigma_3...
+]
+
+### Selection effect
+
+PROMOTE might preferentially select computations that are naturally compressible.
+
+### Representation restructuring
+
+Moving recurring information into a shared object might actually cause SGD to encode it in a more robust, lower-rate geometry.
+
+The last possibility is especially interesting.
+
+Because then:
+
+[
+\boxed{
+\textbf{abstraction does not merely reduce duplication;
+it changes the coding geometry of information.}
+}
+]
+
+That would connect the MDL story much more deeply to learned representation formation.
+
+---
+
+# A cheap mechanistic audit
+
+For private residuals versus promoted abstractions, compare:
+
+* effective rank;
+* singular-value spectrum;
+* parameter perturbation sensitivity;
+* functional Jacobian spectrum;
+* quantization-error curve;
+* Fisher/Hessian-ish sensitivity if cheap enough;
+* entropy/distribution of scalar values.
+
+Ask whether the difference in:
+
+[
+D^*
+]
+
+can be predicted from one of these.
+
+If shared abstractions systematically have lower effective functional dimension, that's a mechanistic story worth carrying forward.
+
+It would suggest that abstraction formation itself produces **more discretizable / language-like representations**.
+
+---
+
+# The trajectory after V5.2 becomes much clearer if this works
+
+Suppose we get:
+
+### Level 1
+
+Repeated task computation creates:
+
+[
+A.
+]
+
+### Level 2
+
+Repeated relationships among (A_i) create:
+
+[
+S(\alpha).
+]
+
+Then the next obvious question is:
+
+### Level 3
+
+Repeated compositions:
+
+[
+A\circ B\circ C
+]
+
+create:
+
+[
+M.
+]
+
+And again:
+
+[
+N_{\rm compositions}\bar s_{\rm macro}>D(M).
+]
+
+At that point we're no longer postulating recursive language growth.
+
+We've demonstrated the same **abstraction economics repeatedly building deeper vocabulary**.
+
+Then program synthesis becomes the obvious next mechanism.
+
+---
+
+## So I think V5.1 has actually sharpened the entire project
+
+The naive story would have been:
+
+[
+\text{bigger abstraction}
+\Rightarrow
+\text{more expensive}
+\Rightarrow
+\text{retain longer}.
+]
+
+That failed.
+
+The better story is:
+
+[
+\boxed{
+\textbf{structure has no intrinsic economic value.
+Its value is always cost relative to the future computation it saves.}
+}
+]
+
+Rank 4 costs four times rank 1, but it also saves nearly twice as much every time it is used.
+
+That's exactly what we should expect a theory of learned abstractions to care about.
+
+So for V5.2 I would make the central question:
+
+> **Does the same amortization law govern the birth of abstractions over abstractions?**
+
+And I would design the world specifically so that **meta-relatedness is the only thing changing**.
+
+If that passes, then we're not just accumulating empirical observations anymore. We're beginning to uncover a recursive quantitative principle for when a learned computational language should increase its own expressive hierarchy.
