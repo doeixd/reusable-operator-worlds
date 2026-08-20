@@ -1683,3 +1683,25 @@ NOT YET TESTED: whether `H* = lambda D / s_bar` still holds at slots=6.
 That needs its own bracketing grid around 24.8, and until it is run the
 slots=6 arm establishes that s_bar moves, not that the law survives.
 Carry invariance held 10/10 here as well.
+
+## Stage-2 grid: one correction, made before any Stage-2 cell ran
+
+The committed g=0.5 grid began at N=72 (H_R=32). Two reasons to move
+that point to N=74 (H_R=34), both applied before running:
+
+  1. The registered rule says `H_low` is the LARGEST admissible horizon
+     <= H_hat* - 4. With H_hat* = 38.0 that is 34, not 32; the helper
+     script's floor arithmetic emitted the conservative value. N=74
+     follows the registered rule more exactly.
+  2. N=72 at g=0.5 is the fixed window Stage 1 measured s_bar on. Using
+     it again as a Stage-2 outcome point would let one cell serve as
+     both predictor and outcome, which is precisely the shared-noise
+     path the two-stage split exists to close.
+
+Final Stage-2 grids, unchanged otherwise:
+
+    g=0.5   N 74, 76, 78, 82     (H_R 34, 36, 38, 42)   H_hat* 38.0
+    g=1.0   N 54, 58, 60, 64     (H_R 14, 18, 20, 24)   H_hat* 18.9
+    g=1.5   N 48, 52, 54, 58     (H_R  8, 12, 14, 18)   H_hat* 12.9
+
+No Stage-2 cell shares a run with Stage 1. 240 cells.
