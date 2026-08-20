@@ -1660,3 +1660,26 @@ At the D* currency (535 nats) the predicted crossings are 18.5 / 9.2 /
 grid selection, as it did for the D-arm; D* crossings are reported where
 a grid happens to bracket them and are otherwise declared unscoreable
 rather than interpolated.
+
+## slots=6 protocol robustness, g=1.0, N=72, 10 worlds (2026-08-20)
+
+The registered constant is `operator_slots = 6`; the scored D-arm ran at
+12. Both artifact roots were internally consistent at 12, so this is
+external protocol robustness, not repair of an invalid experiment.
+
+    slots=12   s_bar 58.1   library 3.3 abstractions   59.0 tasks referencing
+    slots= 6   s_bar 44.3   library 2.2 abstractions   46.7 tasks referencing
+
+`D(A)` is unchanged (residual rank 2 = 198 scalars either way), so the
+law predicts the crossing moves purely as 1/s_bar: H* 18.9 -> 24.8.
+
+FINDING: the protocol constant is NOT neutral for magnitude. Halving the
+slot budget costs 24% of the per-use saving, and it does so by producing
+a smaller library (3.3 -> 2.2 abstractions) that fewer tasks reference
+(59.0 -> 46.7). The D-arm's absolute crossings are therefore
+protocol-dependent and are not transferable between slot budgets.
+
+NOT YET TESTED: whether `H* = lambda D / s_bar` still holds at slots=6.
+That needs its own bracketing grid around 24.8, and until it is run the
+slots=6 arm establishes that s_bar moves, not that the law survives.
+Carry invariance held 10/10 here as well.

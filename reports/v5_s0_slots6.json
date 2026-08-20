@@ -1,0 +1,33 @@
+{
+  "1.0": {
+    "gain": 1.0,
+    "slots": 6,
+    "rows": [
+      {
+        "H_R": 32,
+        "n": 10,
+        "c_reacquire": 1416.9706845724959,
+        "s_bar": 44.280333892890496
+      }
+    ],
+    "s_bar": 44.280333892890496,
+    "excluded_post_gap_births": 0,
+    "excluded_pre_intervention_leak": 0,
+    "signatures": {
+      "N72_world500": "305c1002a019222f",
+      "N72_world501": "354203a823063fc4",
+      "N72_world502": "9ca1c1c5694ed6a3",
+      "N72_world503": "3f05d0596c93596b",
+      "N72_world504": "bd4d6cb91b64201e",
+      "N72_world505": "9104b3ca0e104f13",
+      "N72_world506": "5b9ca050e3a5671a",
+      "N72_world507": "b48d502f89b32bc5",
+      "N72_world508": "88c63eb9fdda1d1f",
+      "N72_world509": "692b37ebe6dbc692"
+    },
+    "predicted_8-bit": 24.795321929206043,
+    "brackets_8-bit": false,
+    "predicted_D*": 12.087719440487945,
+    "brackets_D*": false
+  }
+}
