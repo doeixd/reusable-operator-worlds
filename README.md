@@ -11,45 +11,55 @@ synthetic on purpose: the hidden operator library, the programs composing
 it, and a continuous reuse knob `rho` are all known to the experimenter and
 hidden from the learner, so every claim can be checked against ground truth.
 
-**Status: V1 confirmed.** On 30 sealed, preregistered worlds (seeds 100-129,
-opened only after configurations, metrics, and analysis were frozen in
-`CONFIRMATION_PLAN.md`), all three pre-registered primary outcomes passed in
-30/30 worlds (Holm-adjusted p <= 5.6e-9):
+**Status: four sealed blocks closed.** Each block was run against a protocol
+frozen and hashed before those worlds existed. Development used seeds 0–9;
+confirmatory bands were never inspected before the corresponding freeze.
 
-1. an explicit reusable operator basis beats a compute-matched dense learner
-   on lifetime cost at exact reuse (mean +3,204 nats);
-2. the advantage increases with measured functional recurrence
-   (linear dose-response, R^2 = 0.935; ~5,700 nats per unit recurrence);
-3. the preference reverses within every world: dense wins when recurrence is
-   weak, the reusable basis wins when it is strong, with the crossover at
-   configured `rho* = 0.835 +/- 0.023` (measured recurrence
-   `r* = 0.499 +/- 0.050`).
+| Block | Seeds | Question | Verdict |
+| --- | --- | --- | --- |
+| **V1** | 100–129 | When is reuse valuable? | Confirmed 30/30. A reusable operator basis beats a compute-matched dense learner at exact reuse (mean +3,204 nats); the advantage is linear in measured functional recurrence (\(R^2 = 0.935\)); the preference reverses inside every world, dense at weak recurrence and reusable at strong, with crossover \(\rho^* = 0.835 \pm 0.023\) (\(r^* = 0.499 \pm 0.050\)). |
+| **V2** | 200–229 | Can the learner decide what to share? | Confirmed split. Allocation tracks per-primitive recurrence 30/30 (the learner can *read* the economics); the same learner loses the literal two-part code 30/30 (it cannot yet *write* them compactly). The V1 law's coefficients also replicate (slope 6,194 nats per unit recurrence, \(R^2 = 0.926\)). |
+| **V3** | 300–329 | Can repeated structure become a new abstraction? | Confirmed 5/5. PROMOTE creates a shared object, migrates description (−63.3%), improves prediction (+1,174 nats), and cheapens related future tasks. First learner in the program to win prediction and description length at once, with capacity it created. |
+| **V4R** | 400–429 | When does a library *need* a lifecycle? | Confirmed negative, 7/7. Local private compression beats factorization 30/30. No factorization win at library size \(\le 16\). FORK pays in 2/30 (bound 2). The one structural edit that pays is **retention**, and it obeys the same amortization law as birth: \(\mathrm{RETAIN}\) iff \(H_R \cdot \bar{s} > \lambda D(A)\). Sealed crossing 18.0 returning tasks against a development-derived prediction of 17.1. |
 
-Details: `reports/confirmatory/confirmatory.json`. One secondary hypothesis
-("transfer improves before it amortizes") was falsified during development
-and is reported as such; see `notes/` and `reviews/` for the full research
-record.
+The original V4 premise — that successful abstraction birth implies a
+maintenance problem — failed in development and is preserved unrevised in
+`row_v4_experimental_spec.md`. V4R is the question that was actually sealed.
+
+**V5** is in progress: a sketch (`notes/v5-sketch.txt`), not a spec. It asks
+whether the amortization law is quantitative under causal changes to code
+cost, and whether a second representation class exists above independently
+compressed atoms. Confirmatory seeds 600–629 are reserved and untouched.
+No V5 claim is confirmatory.
+
+One V1 secondary hypothesis ("transfer improves before it amortizes") was
+falsified during development and is reported as such. Details and the
+research record: `reports/`, `notes/`, `reviews/`. Paper draft:
+`paper/draft.md`.
 
 ## Repository map
 
-- `neural_library_learning_v1_experimental_spec.md` — the frozen V1 spec
+- `neural_library_learning_v1_experimental_spec.md` — frozen V1 spec
   (written before any code; the preregistration anchor).
-- `row_v2_experimental_spec.md` — the provisional V2 spec (economics of
-  abstraction: consolidation, amortized program inference, mixed-recurrence
-  worlds), with live status annotations.
-- `EXPERIMENT_PLAN.md`, `CONFIRMATION_PLAN.md`, `RELEASE_PLAN.md` — the
-  development/confirmation firewall, the frozen confirmatory protocol, and
-  the release gate.
-- `PROGRESS.md` — the running lab record. `AGENTS.md` — working conventions
-  and implementation learnings for the agent loop that executes this
-  project (this is agent-executed research with a human PI; the commit
-  history is part of the record).
-- `notes/` — research thinking records. `reviews/` — the reviewer dialogue.
-- `src/row/` — world generator, models (oracle, dense, continuous basis,
-  discrete library, hypernetwork, shared-residual, MDL-gated), experiments,
-  and analyses. `tests/` — unit tests. `reports/` — analysis outputs.
-  `artifacts/` — per-run outputs with full provenance (config, metrics,
-  model, world programs, seeds, git commit, environment, fingerprint).
+- `row_v2_experimental_spec.md` — V2 spec, closed with live status
+  annotations.
+- `row_v3_experimental_spec.md` — V3 spec (PROMOTE); sealed block closed.
+- `row_v4_experimental_spec.md` — original V4 lifecycle spec, preserved
+  unrevised with a gate-outcome banner.
+- `row_v4r_experimental_spec.md` — V4 revised: when does a library need a
+  lifecycle?
+- `notes/v5-sketch.txt` — V5 sketch (representation economy); not a spec.
+- `EXPERIMENT_PLAN.md`, `CONFIRMATION_PLAN.md`, `V2_CONFIRMATION_PLAN.md`,
+  `V3_CONFIRMATION_PLAN.md`, `V4R_CONFIRMATION_PLAN.md`, `RELEASE_PLAN.md`
+  — development/confirmation firewall and frozen protocols.
+- `PREDICTIONS.md` — standing predictions ledger, appended not rewritten.
+- `PROGRESS.md` — running lab record. `AGENTS.md` — working conventions.
+- `notes/` — research thinking records. `reviews/` — reviewer dialogue.
+- `paper/draft.md` — write-up in progress.
+- `src/row/` — world generator, models, experiments. `tests/` — unittest
+  suite. `reports/` — analysis JSON and figures. `artifacts/` — per-run
+  outputs with provenance (untracked; regenerable from committed seeds
+  and configs).
 
 ## Quick start
 
@@ -75,6 +85,19 @@ Every run writes a fingerprint-validated artifact directory; worlds are
 generated from explicit NumPy `SeedSequence` components (never process-
 dependent hashes); paired models receive identical worlds, task orders,
 examples, replay budgets, and evaluation sets; and online examples are
-scored before the model updates on them. Development used seeds 0-9;
-confirmatory seeds 100-129 were never inspected before the freeze; seeds
-200-229 remain sealed for V2.
+scored before the model updates on them.
+
+Seed partitions:
+
+- **Development:** 0–9 (architecture, tuning, testbed design). V5 also
+  used 500–509 as a contaminated development band; those worlds are not
+  confirmatory.
+- **V1 confirmatory:** 100–129 (closed).
+- **V2 confirmatory:** 200–229 (closed).
+- **V3 confirmatory:** 300–329 (closed).
+- **V4R confirmatory:** 400–429 (closed).
+- **V5 confirmatory:** 600–629 reserved; not to be generated until a
+  `V5_CONFIRMATION_PLAN.md` is frozen and hashed.
+
+The public history is part of the verifiability claim:
+https://github.com/doeixd/reusable-operator-worlds

@@ -1995,3 +1995,11 @@ quantitative law from an accounting identity.
   `tests/test_config.py`. Did not launch rank-4 lifetimes.
 - Paper draft to v0.9: header names the fourth sealed block;
   section 10.1 no longer says no V4 sealed block was run.
+
+# 2026-08-20 — README brought up to four sealed blocks
+
+- Public README no longer stops at V1. Status table covers V1–V4R
+  sealed verdicts, names V5 as a sketch with 600–629 reserved, and
+  corrects the seed partition (200–229 and 400–429 are closed, not
+  sealed-and-waiting). Repository map lists V2–V4R specs, confirmation
+  plans, and `notes/v5-sketch.txt`.
