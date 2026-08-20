@@ -2778,3 +2778,103 @@ The law that survives is the ratio, not either proportionality:
 which is the same form registered for schema birth (H25) and macro
 birth (V6). H19 is now the measured base case of that ladder rather
 than a threshold for RETAIN alone.
+
+
+================================================================================
+V5.2: THE SCHEMA RUNG, AND WHAT BUILDING IT TAUGHT (2026-08-20)
+================================================================================
+
+Five rungs ran after H19 closed: the r_meta generator (B2), schema
+economics on teacher atoms (H20a), the same on the learned library
+(H20b), prospective reuse (H21), and coding geometry (H27). Then the
+sealed block opened. The results split cleanly into "the economics
+work" and "the learner does not realize them", and most of the lessons
+are about instruments rather than about schemas.
+
+THE HEADLINE PAIR. Over TEACHER family operators a schema pays and its
+crossing is predicted by D*(S)/s_bar_schema: M* falls monotonically with
+relatedness (inf, inf, 39.7, 8.0, 5.1, 1.6), the boundary sits between
+r_meta 0.5 and 0.7, and H25 passed at 0.90 and 0.95. Over the LEARNED
+library the same measurement fails 0/6, because PROMOTE makes 1.5-1.75x
+more atoms than there are families and those atoms share almost none of
+the family's functional structure -- 87-91% of a held-out atom's effect
+variance is unexplained, even at r_meta = 1.0 where the teacher's
+operators lie in one subspace perfectly. The representation class is
+fine; the promoter does not reach it. Had H20 been run only on the
+learned library, as the design before reviews 46 and 47 did, this would
+have read as "higher-order factorization does not pay" and closed the
+question. Separating the arms is what made the failure localizable.
+
+A MIXTURE CAN BE MADE EXACTLY FUNCTIONAL. The spec demanded the r_meta
+knob be defined in function space because of gauge freedom, which
+sounds like it needs an expensive per-family fit. It does not. A
+primitive computes tanh(z + alpha * h(z) U^T) with h(z) = tanh(zV^T+b);
+SHARE V and b across the family operators and h becomes one fixed
+function, so the residual is LINEAR in U and a mixture of U matrices is
+a mixture of functions at every input at once. Look for the coordinate
+in which the construction is linear before reaching for optimization.
+
+MAKE INVARIANTS EXACT, NOT EXPECTED. The first generator matched
+component norms in expectation; the random inner product between the
+shared and private parts then made ||theta_f|| wobble and the balance
+gate failed at 31.6% spread on contribution. Projecting the private
+component out of the shared subspace makes ||theta||^2 = r + (1-r) = 1
+exactly, for every family at every r. Spread went to 0.0%.
+
+AN INSTRUMENT'S GRANULARITY CAN FAIL A GATE ON ITS OWN. The same sweep
+then failed the balance gate on D* at 16.4% -- entirely because bits
+were integers and one family flipping 4->5 moves a four-family mean by
+0.25. Interpolating in (bits, log error) recovered a continuous rate and
+the spread fell to 2.9%. Before believing a gate failure, check whether
+the measurement can even express the tolerance.
+
+FIT AND SCORE ON DIFFERENT OBJECTS. In-sample subspace capture reads
+0.730 at r_meta = 0, where the truth is that no shared structure exists.
+Leave-one-family-out reads 0.021. Same data, same fit, opposite
+conclusions. Any "shared structure" measurement that fits and scores on
+the same set is manufacturing the phenomenon it reports.
+
+CHECK THAT A REGISTERED TERM IS ARCHITECTURALLY POSSIBLE. H29 registered
+D*(P_2) < D*(P_1) as evidence of "restructuring by continued learning".
+Promoted abstractions carry requires_grad=False and sit in no optimizer
+group, so P_2 == P_1 identically and that term is structurally zero --
+no run of this architecture could ever bear on it. Combined with H27
+eliminating effective-dimension reduction (shared objects use MORE of
+their functional dimension, sigma_2/sigma_1 ~0.70 against ~0.54, the
+opposite of the registered direction), two of the four candidate
+mechanisms for the D* gap are gone without a single new lifetime. The
+survivors -- noise purification and the PROMOTE selection effect -- are
+exactly what the new P_0 snapshot makes measurable.
+
+STATE THE DENOMINATOR WITH THE THRESHOLD. The sealed C2 clause reads
+"within 15% in >= 4 of 6 cells" and never says what happens to a world
+that produces no observable crossing. On worlds that crossed, 79% and
+73% clear the bar; on all worlds, 37% and 63% do not. Both readings are
+faithful to the words, and the result is therefore UNRESOLVED rather
+than a pass or a fail. A fraction-of-cells threshold is only well posed
+once "unobservable" is assigned to a side.
+
+A SWEEP NEEDS ITS OBSERVABLE RANGE CHECKED. The cause of those silent
+worlds is reachability: at F = 12 with a calibration set of 4 there are
+only 8 unseen members, and sealed r_meta = 0.90 predicted M* ~ 20. No
+law can show a crossing that the design cannot display. Development
+missed it because its r_meta 0.90 predicted 8.0, exactly at the edge.
+Any crossing experiment must verify that its range CONTAINS the
+predicted crossing before it runs -- the same rule H19's horizon grid
+already had, applied one level up and forgotten.
+
+WHAT REPLICATED. Sealed C1 Stage 1 reproduced the S0 per-use savings on
+untouched seeds to within 8% at every gain (26.6/57.3/84.3 against
+28.9/58.1/85.2), with the abstraction checksum identical in 10/10 cells.
+Sealed C2 reproduced monotone M*, the r_meta = 0 negative, and the
+ceil criterion exactly in 30/30 worlds. The mechanisms that were going
+to replicate did; what broke was my specification of how to count them.
+
+H21, briefly: prospective reuse passes at r_meta = 1.0 (one example
+against eight, two retained arguments against 128 scalars) and fails
+below it for a CAPACITY reason -- a rank-2 schema cannot express a
+member only partly in the subspace, so its error plateaus above any
+fixed target regardless of support. Worth recording that the
+independent baseline there is unrealistically strong, because shared
+hidden features make acquisition an exactly-determined linear solve; the
+1-vs-8 win is a lower bound.

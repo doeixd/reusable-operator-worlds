@@ -176,3 +176,11 @@ numpy._core._exceptions._ArrayMemoryError: Unable to allocate 3.38 MiB for an ar
 18:06:22 progress done=50 failed=0 skipped=0
 18:11:35 progress done=60 failed=0 skipped=0
 18:11:35 END done=60 failed=0 skipped=0
+18:12:32 START 80 cells rank=2 gains=[0.5] slots=[12] totals=[76, 80, 82, 86] worlds=600..609 jobs=3
+18:19:42 progress done=10 failed=0 skipped=0
+18:25:14 progress done=20 failed=0 skipped=0
+18:31:04 progress done=30 failed=0 skipped=0
+18:38:19 progress done=40 failed=0 skipped=0
+18:44:14 progress done=50 failed=0 skipped=0
+18:50:06 progress done=60 failed=0 skipped=0
+18:57:50 progress done=70 failed=0 skipped=0

@@ -927,3 +927,34 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   (12 -> 6) cost 24% of the per-use saving by producing a smaller
   library that fewer tasks reference. Absolute retention crossings must
   always be quoted with their slot budget.
+- Look for the coordinate in which a construction is LINEAR before
+  reaching for optimization. V5's meta-recurrence knob had to mix
+  operators in function space; sharing `V` and `b` across the family
+  makes the hidden features common, the residual linear in `U`, and a
+  mixture of `U` matrices exactly a mixture of functions.
+- Make a generator's invariants exact rather than expected. Matching
+  component norms in expectation left a random cross term that failed
+  the balance gate at 31.6%; projecting the private component out of
+  the shared subspace made the norm exactly constant (0.0% spread).
+- Before believing a gate FAILURE, check the instrument can express the
+  tolerance. Integer bit depths made a per-object rate jump by whole
+  bits and failed a 10% balance gate at 16.4%; interpolating in
+  (bits, log error) gave 2.9%. The generator was never at fault.
+- Never fit and score a shared-structure measurement on the same
+  objects. In-sample subspace capture read 0.730 where the truth was no
+  structure at all; leave-one-out on the same data read 0.021.
+- Check that a registered term is ARCHITECTURALLY POSSIBLE before
+  registering it. H29 predicted `D*(P_2) < D*(P_1)` from continued
+  learning, but promoted abstractions carry `requires_grad=False` and
+  join no optimizer group, so `P_2 == P_1` identically and the term is
+  structurally zero.
+- State the DENOMINATOR with any fraction-of-cells threshold. "Within
+  15% in >= 4 of 6 cells" is ambiguous once a cell can be
+  unobservable: sealed C2 read 79%/73% counting only worlds that
+  crossed and 37%/63% counting all of them, so the clause resolved to
+  neither pass nor fail.
+- A crossing experiment must verify its range CONTAINS the predicted
+  crossing before running. At F=12 with M_0=4 only 8 unseen members
+  exist, so a predicted M* ~ 20 is unobservable and half the worlds go
+  silent rather than wrong. This is the horizon-grid bracketing rule
+  from H19, applied one level up.
