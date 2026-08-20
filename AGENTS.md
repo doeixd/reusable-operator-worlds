@@ -889,3 +889,15 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   sweep): per-abstraction `D*`, `s_bar`, behavioral contribution, and
   promotion rate. A sweep failing any gate is unscoreable rather than
   weak -- this is the V5.1 confound restated as a precondition.
+- Never run `git checkout <file>` (or any resetting command) while
+  uncommitted edits exist in that file. During the V5 spec work this
+  discarded eight applied consistency fixes that had to be re-derived
+  and re-applied. Commit first, then reset; the commit is cheap and
+  the reconstruction is not.
+- A specification that changes its generator must be re-read for
+  everything DOWNSTREAM of the generator. V5's Revision 3 replaced the
+  meta-recurrence generator and removed its fixed centre `C`, but
+  `teacher_G1` and H21's entire five-way instrument were still written
+  against `C`. Editing a definition is not the same as editing what
+  depends on it, and an independent audit found this where three
+  self-reviews had not.

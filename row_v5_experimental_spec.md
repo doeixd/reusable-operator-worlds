@@ -14,11 +14,28 @@ confirmatory; 510-599 are unused.
 This document promotes `notes/v5-sketch.txt` (Revision 3) to a
 specification. It succeeds
 [`row_v4r_experimental_spec.md`](row_v4r_experimental_spec.md), whose
-sealed block closed 7/7 and whose §0.2 resource model, §4A constants,
-§5 statistical plan, and §9.1 working agreements are inherited unchanged
+sealed block closed 7/7. The §0.2 resource model, §4A constants, §5
+statistical plan and §9.1 working agreements originate in
+`row_v4_experimental_spec.md`, were inherited unchanged by V4R, and are
+inherited unchanged here
 except where this document says otherwise. It does not revise V4 or V4R.
 Live STATUS annotations are updated in the same commit as the results
 they describe, as in V2 and V3.
+
+**Revision 5 (2026-08-20)** is an internal-consistency pass, not new
+science: an independent audit against reviews 46 and 47 found that the
+Revision-3 generator had dropped the fixed centre `C` while H21's
+five-way instrument and the `teacher_G1` gate were still written in
+terms of it. The fitted schema is now defined explicitly
+(`S_hat = C_hat + B_hat alpha`, with `C_hat` the fitted family mean and
+nothing in the generator corresponding to it), the isotropic null is
+defined once for every gate that invokes it, H25's formula is stated in
+one form rather than two, the 8-bit horizon rows are marked as
+reference arithmetic rather than scoreable cells, H19 is described as
+confirmed ON THE D-ARM with the rung still partial, and the stale
+`measured_r` instrument, the retired rank-4-cannot-load branch and the
+superseded B1 world are cleared. Section numbering, decision ordering
+and inheritance attribution corrected.
 
 **Revision 4 (2026-08-20) incorporates reviews 46 and 47**, both of
 which read this specification rather than the sketch. Changed before
@@ -74,7 +91,7 @@ preconditions on scoring rather than reported diagnostics.
 **Remaining before the confirmatory band may be opened.** §25 is the
 pre-run checklist; four of its seven items were discharged before
 promotion. What is still owed: the paired `operator_slots = 6` check
-against the scored H19 grid, at least one informative s-arm (S1 or S2),
+against the scored H19 grid, the S0 return-value-gain s-arm,
 the `r_meta` teacher-validity and balance gates on worlds 0-2, and a
 frozen `V5_CONFIRMATION_PLAN.md`.
 
@@ -281,7 +298,7 @@ Raising F at fixed N is forbidden as a scale sweep.
 
 D6. H22 is blocked, not failed, in a one-edit market. A two-class
 market can be {KEEP, COMPRESS, RETAIN} without FACTORIZE; FACTORIZE
-joins only after H20 G2.
+joins only after H20a G2.
 
 D7. PROMOTE's V3 configuration stays frozen through V5.4. The
 interaction "promote more freely because you can edit later" is
@@ -300,6 +317,11 @@ and reports kappa = 0 as a registered null.
 D11. H19 uses operator_slots = 6 to pair with V3/V4R. The in-flight
 grid's slots=12 is a deviation; do not carry it into the spec without
 a paired slots=6 check.
+
+D12. Rank-4 requires lifting the `residual_rank > 2` cap in
+SharedResidualModelConfig and VariationalModelConfig. Default stays 2,
+so existing fingerprints do not move. Do not edit
+PromotingSharedResidualLearner.
 
 D13. Padding / dead-bit inflation of D is excluded from V5 entirely,
 not deferred (review 44). The coder-arm re-codes a fixed function and
@@ -328,11 +350,6 @@ branch, entered only if representation MANAGEMENT becomes the live
 question; they are not required for V5 to count, and the next research
 budget after H21 is expected to go to H28 and V6 instead.
 
-D12. Rank-4 requires lifting the `residual_rank > 2` cap in
-SharedResidualModelConfig and VariationalModelConfig. Default stays 2,
-so existing fingerprints do not move. Do not edit
-PromotingSharedResidualLearner.
-
 ---
 
 # 7. Inventory: what exists, what must be built
@@ -354,14 +371,14 @@ Already built and usable (do not reinvent):
       /v5_horizon, v5_horizon_open,    development, not confirmatory
       v5_reacquire, v5_frontier
     configs/v5_*.yaml                  residual_rank=1 and horizon
-                                       variants; rank 4 configs may not
-                                       currently load
+                                       variants; rank 4 loads since B0
     V4R_CONFIRMATION_PLAN.md           template for V5's own plan
 
 To be built before the corresponding rung is tuned:
 
     B0  residual_rank cap lift         allow 1, 2, 4; default 2
-    B1  s-only world                   same D(A), different per-use value
+    B1  RETIRED, superseded by W-H19-S0 (return-value gain): the
+        s-only world is no longer built as a separate generator
     B2  r_meta generator               separately fingerprinted;
                                        measured-recurrence diagnostic
     B3  (F, m) scale control           N ~= N_base + F*m; m held fixed
@@ -371,7 +388,7 @@ To be built before the corresponding rung is tuned:
     B5  structural-regret oracle       shared-prefix trajectories
     B6  decision-tuple log             schema below; oracle runs included
     B7  compositional-closure probe    existing V1 operators, depth 8
-    B8  H19 scorer extensions          rank 2, dual D_8bit/D*, s-arm,
+    B8  H19 scorer extensions          rank 2, dual D_8bit/D*, S0 gain,
                                        refuse empty windows, refuse
                                        crossings off-grid
 
@@ -442,20 +459,31 @@ must not call a D* re-score a second confirmation.
 | H19 operator_slots | 6 | pair with V3/V4R; the scored grid ran at 12 and owes a paired check |
 | H19 H_R grid | must bracket each predicted crossing by >= 4 tasks on both sides | otherwise unscoreable |
 | minimum_cluster | 3 | V3 promotion; return window must contain this many |
-| substitutability eps | 0.02 NMSE, contribution-relative | V3 frozen |
+| substitutability tol | 0.02 NMSE, contribution-relative | V3 frozen; distinct from the D* budget eps |
 | G3 leftover | D(E_i) / D(A_i) < 0.25 AND shared capture > 0.5 of spread | "<<" made numeric |
 | H20 first slice | F=4, m=16, r_meta in {0, 1}, worlds 0–2 | cheap existence check |
 | H22 majority | world-level first, then cell-level as descriptive | V1 initialization rule |
 | consolidation sleeps | 16, 24, 32, 48, 64 (truncate to N) | V3 schedule |
 | grace G | 8 tasks after birth | V4 §4A |
 | kappa, gamma, mu | 0 in V5.1–V5.3 | logged, not charged |
+| S0 gain g | 0.5, 1.0, 1.5 | return-value arm; 1.0 is the unmodified world |
+| S0 invariance | D*(A) constant to 2% across g | the arm is void otherwise |
+| H20 balance gates | 10% on D*, s_bar, behavioral contribution | promotion rate is NOT among them |
+| H20a calibration | M_0 = 4 members, schema frozen thereafter | keeps M* prediction non-circular |
+| H25 interval | observed crossing within 15% of D*(S)/s_bar_schema | scored on H20a only |
+| meta-recurrence instrument | leave-one-family-out R_LOO, disjoint probes | pairwise correlation cannot see a shared subspace |
+| composition depths | L = 1, 2, 3, 4, 5, 6, 8, 10, 12, 16 | error-law probe, not a depth-8 pass |
+| composition reporting | median, p90, worst decile, saturation rate, per-call error | a median hides a 20% explosion tail |
 
 ---
 
 # 10. Core hypotheses (H19-H29)
 
-H19–H24 and H25–H27 are in PREDICTIONS.md. H28 is registered in this
-specification only, and in no prediction ledger yet, and is unscheduled.
+H19–H24, H25–H27 and H29 are in PREDICTIONS.md, each registered
+before the data that tests it existed. H29 is the causal form of H27 and
+is stated inside H27's section rather than as a separate rung. H28 is
+registered in this specification only, in no prediction ledger yet, and
+is unscheduled.
 
 Numbering is not provisional. Falsifiers and operational cuts are
 binding: a rung is scored against what is written here, and a miss is
@@ -497,6 +525,21 @@ s_bar is not yet known) by at least 4 returning tasks on both sides.
     r=1, H*_8bit ~ 9    N in {48, 52, 56, 64}     H_R = 8, 12, 16, 24
     r=2, H*_8bit ~ 18   N in {52, 56, 64, 72}     H_R = 12, 16, 24, 32
     r=4, H*_8bit ~ 36   N in {68, 76, 80, 88}     H_R = 28, 36, 40, 48
+
+**Bracketing, and where the 8-bit rows fail it (Revision 5).** §9
+requires the H_R grid to bracket the predicted crossing by >= 4
+returning tasks on BOTH sides. The 8-bit rows above do not satisfy it:
+r=1 predicts ~9 against a nearest lower grid point of 8, and r=2
+predicts ~18 against a nearest lower point of 16. Those rows are
+therefore reference arithmetic, NOT scoreable cells, and are not what
+was scored.
+
+The scored grid is the D* one, read against the crossings actually
+observed (15.2 / 18.0 / 32.4), each interior to N in {48, 56, 64, 72}
+with >= 4 returning tasks on both sides. Any future cell failing the
+rule is refused — not clamped, not interpolated off the end. If a
+rank's predicted crossing moves after S0, the grid moves with it before
+that rank is re-scored.
 
 The in-flight grid (N in {48, 56, 64, 72} at rank 1 only) can see
 rank 1's 8-bit crossing and cannot see rank 4's. Scoring rank 4 on
@@ -603,7 +646,11 @@ Reading (a): FALSIFIED. D-ratio rank4/rank1 = 4.00 against an observed
 crossing ratio 2.13 — 46.8% relative error, well past the registered
 0.25 falsifier.
 
-Reading (b): CONFIRMED, and it is not the same statement. At each rank
+Reading (b): CONFIRMED ON THE D-ARM, and it is not the same statement.
+The RUNG remains partial: the falsifier below requires the D-arm AND
+one informative s-arm, and S0 has not run. "The law holds across three
+values of D" is established; "H19 passed" is not, and the two may not
+be used interchangeably. At each rank
 carry and s_bar are measured independently, and the crossing lands
 within 2% of carry/s_bar in three regimes it was not fitted to. That is
 exactly what the single-point V4R O4 confirmation could not distinguish
@@ -617,7 +664,7 @@ and a success for (b).
 
 Because the s-arm never ran, H19 also closes as **P1**: quote "H*
 tracks code cost at measured s_bar," never "inversely proportional to
-s." Running S1/S2 later upgrades H19; it does not reopen (a).
+s." Running S0 later upgrades H19; it does not reopen (a).
 
 **What this forbids downstream.** Residual rank is not a pure
 intervention on D in this substrate — it sets an abstraction's cost and
@@ -715,7 +762,30 @@ with B_hat fit on the other families only. R_LOO is the reported
 number; R_meta is the in-sample companion, and a large R_meta with a
 small R_LOO means the subspace is being memorized rather than shared.
 
-    teacher_G1 = R^2 of C + B alpha at rank 2, minus isotropic null
+    teacher_G1 = R^2 of S_hat at rank 2, minus the isotropic null
+
+**GENERATOR AND FIT ARE DIFFERENT OBJECTS (clarified Revision 5).** The
+generator has no fixed centre: Revision 3 removed it precisely because
+it moved individual difficulty with r_meta. The SCHEMA THE LEARNER FITS
+is a separate object and does contain a centre, because a family of
+operators has an empirical mean whether or not the generator was built
+around one:
+
+    S_hat(alpha) = C_hat + B_hat alpha,    C_hat = A_bar (family mean)
+
+`C_hat` is FITTED from the atoms, never supplied. Every later use of
+"C, B" in H20 and H21 means this fitted pair, and `D*(S)` is the cost
+of storing both. Nothing in the generator corresponds to `C_hat`; at
+r_meta = 0 it degenerates to the mean of unrelated operators and buys
+nothing, which is what the structureless control checks.
+
+**Isotropic null, defined once.** Every "minus isotropic null" and
+"within the null" in this specification means: refit the same rank-2
+schema on a matched set of operators drawn isotropically at the same
+spectral norm and participant count, and take the 95th percentile of
+that null distribution over 100 draws. A gate passes only if the
+observed R^2 exceeds it. Without this, a rank-2 fit to any M operators
+returns a positive R^2 by dimension counting alone — the V4.2 error.
 
 Pass: R_LOO(r_meta = 0) is within the isotropic null, R_LOO increases
 monotonically with configured r_meta on worlds 0–2, and teacher_G1 > 0
@@ -782,9 +852,18 @@ is being predicted. So:
     for each additional unseen member, measure
         s_i = D*(A_i) - [ D(alpha_i) + D*(E_i) ]
     s_bar_schema = mean s_i
-    predict  M*_additional = ( D*(S) - savings already accrued )
-                             / s_bar_schema
+    predict  M* = D*(S) / s_bar_schema        [H25, as registered]
+    equivalently, since the M_0 calibration members already pay their
+    own way, the number of ADDITIONAL members needed is
+        M*_additional = max(0, M* - M_0)
     then add held-out members ONE AT A TIME, S unchanged
+
+`M*` is the registered quantity and the one scored against H25's 15%
+interval; `M*_additional` is that same prediction expressed in units of
+the sweep, and the two may not drift apart. There is no separate
+"savings already accrued" term — the calibration members' savings are
+already inside `s_bar_schema`, and subtracting them again double
+counts.
 
 That is a true amortization experiment and is where H25's 15% interval
 is scored.
@@ -842,7 +921,15 @@ If G2 pays at F=4, r_meta=1, then fill:
 Plot x=M (emergent library size, diagnostic), y = J_COMPRESS -
 J_FACTORIZE, one curve per r_meta. The zero-crossing is M*(r_meta).
 
-**Falsifier.** No G2 win on the cheap-first slice and the two larger
+**Which slice decides what (Revision 5).** The cheap-first slice below
+is configured as a LEARNED-library run and therefore scores H20b. H20's
+verdict rests on H20a, whose exogenous-atom cells must be run at the
+same (F, m, r_meta) corners before H20 is called blocked. A learned
+slice failing while the exogenous cells pay is the outcome "the schema
+economy exists and PROMOTE cannot reach it" — a mechanism result about
+the promoter, not a verdict on the representation class.
+
+**Falsifier.** No G2 win on the EXOGENOUS (H20a) cheap-first slice and the two larger
 corners at r_meta=1. Then H20 is blocked by the world, the phase
 diagram does not appear at ROW scale, and H22–H24 that depend on
 FACTORIZE as a live class are blocked rather than failed. H22 may
@@ -856,16 +943,18 @@ member cheaper to acquire by learning only alpha_new, versus a
 complete new operator, on at least prequential cost and retained bits,
 always against a matched-budget independently compressed operator.
 
-**Instrument.** Leave-one-abstraction-out, at an H20 cell where G1
-passed (ideally G2, but G1 is the gate). Fit C, B on A_1..A_{M-1}.
-Held-out A_M never used in that fit. Then, on proposal probes for
-the held-out member's tasks:
+**Instrument.** Leave-one-abstraction-out, at an H20a cell where G1
+passed. G1 is H21's gate; G2 is not required, because a family can be
+prospectively useful before it is retrospectively cheaper. Fit the
+schema S_hat = C_hat + B_hat alpha (defined under H20) on A_1..A_{M-1};
+the held-out A_M is never used in that fit. Then, on proposal probes
+for the held-out member's tasks:
 
     learn-full              new residual of rank r, from scratch
     independent-compress    rank-2 private approximation of A_M, matched bits
-    family                  freeze C, B; learn only alpha_M
+    family                  freeze C_hat, B_hat; learn only alpha_M
     family+E                family plus a small leftover E_M (G3-sized)
-    global-only             C with no alpha (rank-0 collapse)
+    global-only             C_hat with no alpha (rank-0 collapse)
 
 V4 recovered ~7.5% of the centre-only deficit with the current rank-2
 family at uncontrolled r_meta. H21 is that instrument at the r_meta
@@ -894,14 +983,14 @@ acquire.
 
 Prediction. One prospective scoring rule (initially hand-designed, not
 learned) matches the oracle-optimal edit in a majority of worlds
-(world-level; D11 analogue of V1's "average initializations within
-world"), in a battery where different edits are oracle-optimal in
+(world-level; the V1 rule of averaging initializations within a world
+before aggregating across worlds), in a battery where different edits are oracle-optimal in
 different registered regimes.
 
     low r / eta=0          KEEP
     bloated atoms (8-bit)  COMPRESS
     repeated innovation    PROMOTE          (V3 structured; already known)
-    related atoms          FACTORIZE        (only if H20 G2 paid)
+    related atoms          FACTORIZE        (only if H20a G2 paid)
     future return, H_R>H*  RETAIN
     future return, H_R<H*  RETIRE / delete-and-relearn
     obsolete / permanent   RETIRE           (only if the world instantiates
@@ -1120,7 +1209,7 @@ duplication, it changes the coding geometry of information. That would
 connect ROW's MDL story to representation formation itself, and it is
 the strongest cheap result available in V5.
 
-## H28 — The same morphism under different coordinates (V5.7; registered, not scheduled)
+## H28 — The same morphism under different coordinates (V6 entry question; registered, not scheduled)
 
 From reviews 43 and 45, which rank this among the three most valuable
 experiments in the roadmap. Every representation class in V5 so far
@@ -1202,16 +1291,39 @@ that cannot fail is not a gate. Redesign the world before tuning.
     Validity: returning-task count >= 3; zero births after task 32;
     arms byte-identical through task 39; s_bar reported.
 
-**W-H19-S1 / S2.** Same as W-H19 at rank=2, eta or
+**W-H19-S0 (primary s-arm).** Same as W-H19 at rank=2, with a
+return-value gain applied to the abstraction's contribution on
+returning tasks only:
+
+    y = f_base(x) + g * A(x),   g in {0.5, 1.0, 1.5}
+    gain applied strictly after the gap closes at task 40
+    pre-gap stream, library, routes and abstraction tensors identical
+    across g (assert byte-identity before scoring)
+
+    Validity: D*(A) constant across g to within 2%; s_bar(g) monotone
+    in g; zero births after task 32. A cell violating byte-identity is
+    void, not weak.
+
+**W-H19-S1 / S2 (secondary s-arms).** Same as W-H19 at rank=2, eta or
 new_primitive_families as above. Validity: s_bar ratio vs the eta=0.9
-new-primitive cell >= 1.5 or the arm is marked uninformative.
+new-primitive cell >= 1.5 or the arm is marked uninformative. Report
+what else moved (D*(A), promotion count, final NMSE) alongside s_bar;
+these arms may not be quoted as clean inverse-s evidence.
 
 **W-H20 meta-recurrence.** New generator family. r_meta knob on teacher
 family primitives as in H20. (F, m) as in the cheap-first slice, then
 the fill. Structureless control: r_meta=0 must reproduce independent
-atoms (COMPRESS wins; teacher_G1 ~ 0). Validity: measured_r monotone
-in configured r_meta; M grows with F at fixed m over some range,
-otherwise scale is not instantiated.
+atoms (COMPRESS wins; teacher_G1 ~ 0). Validity: R_LOO within the
+isotropic null at r_meta=0 and monotone in configured r_meta; the
+three balance gates held within 10%; M grows with F at fixed m over
+some range, otherwise scale is not instantiated. Realized M and
+promotion rate are recorded as OUTCOMES of H20b, never as validity
+conditions.
+
+**W-H20a (exogenous atoms).** The same generator, but the atoms
+A_1 .. A_F are supplied to the oracle directly rather than promoted,
+and the schema is frozen after an M_0 = 4 calibration set. No PROMOTE
+dynamics in the loop. This is the cell where H25's interval scores.
 
 **W-H21.** An H20 cell where G1 passed. One family member's tasks held
 out from the family fit. Those tasks are the acquisition stream.
@@ -1265,7 +1377,7 @@ New, or newly load-bearing:
     H19  s_bar across ranks and across s-arms; H*-ratio vs D-ratio
          at both D_8bit and D*; predicted vs observed crossing;
          exclusion count for post-gap births; off-grid refuse
-    H20  teacher measured_r vs configured r_meta; M(F, m, r_meta);
+    H20  teacher R_LOO (and in-sample R_meta) vs configured r_meta; M(F, m, r_meta);
          J_COMPRESS - J_FACTORIZE vs M; G1/G2/G3 separately
     H21  five-way leave-one-out table (nats, shots, D*, held-out NMSE)
     H22  world-level accuracy vs majority-class; confusion on the
@@ -1317,7 +1429,8 @@ point. If post-gap births exclude most worlds, the freeze failed and
 the cell is unscoreable (do not impute). If the predicted crossing
 lies outside the H_R grid, refuse (do not clamp).
 
-If rank 4 cannot load: that is B0 not done, not an H19 fail.
+(Retired: the "rank 4 cannot load" branch. B0 is done and ranks 1, 2
+and 4 are scored. Kept so the branch is not re-derived.)
 
 If H20 teacher_G1 or R_LOO fails at r_meta=1: the generator is broken;
 redesign before any learner oracle. R_LOO flat while R_meta rises means
@@ -1336,7 +1449,7 @@ If S0 changes D*(A) by more than 2% across g: the gain leaked into the
 abstraction; the cut is void and the arm is rerun with the gain applied
 strictly after the gap.
 
-If H20 G1 passes and G2 fails: geometry without economics, the V4.2
+If H20a G1 passes and G2 fails: geometry without economics, the V4.2
 result one level up. Do not lower the matched-budget bar. If G2
 passes only because E_i restores capacity, G3 fails and the family is
 decorative.
@@ -1397,13 +1510,16 @@ H19 is in flight. This table is the spec's section 0 once scored.
 - H19 fails both readings: LAW claim dies; PHASE DIAGRAM may still be
   asked as a qualitative "does FACTORIZE ever pay," but it is no
   longer the same law one level up. Selection rungs are demoted.
-- H20 G2 pays at reachable (M, r_meta): H21–H24 proceed as written.
+- H20a G1 passes: H21 proceeds (G1 is H21's gate, not G2). If G2 also
+  pays at reachable (M, r_meta): H20b then asks
+  whether the learner reaches that region, and H22–H24 remain a side
+  branch under D18.
 - H20 blocked by ceiling, G1 may still pass: H21 can run as a weak
   family-fit diagnostic; H22's FACTORIZE class is absent; H22 may
   still be attempted on {KEEP, COMPRESS, RETAIN} if those three are
   each optimal somewhere, otherwise blocked. V6 macros have no
   higher-order substrate from this testbed.
-- H20 G1 fails (no family geometry even at r_meta = 1, after the
+- H20a G1 fails (no family geometry even at r_meta = 1, after the
   teacher-validity gate passed): neural abstractions do not share a
   parameterizable family even when the teacher does. That is a
   learner result, and the recursive-language story is in trouble at
@@ -1421,16 +1537,24 @@ branching.
     V5.0  CURRENCY         D*(R) component frontier     DONE
     V5.0b MECHANISM        H27 P_0/P_1/P_2 decomposition
                            (artifact-only; runs in parallel)
-    V5.1  LAW              H19 D-arm DONE (P1+P3); S0 and the
-                           slots=6 pairing outstanding
+    V5.1  LAW              H19 D-arm DONE (P1+P3); RUNG PARTIAL,
+                           S0 and the slots=6 pairing outstanding
     V5.2a ECONOMICS        H20a exogenous atoms, frozen schema
     V5.2b PHASE DIAGRAM    H20b learned library, re-fit schema
     V5.3  SCHEMA           H21 leave-one-out + novel combination
     ----- V5 may close here (D18) -----
-    V5.7  COORDINATES      H28, ungated; also the V6 entry question
+    (V6.0) COORDINATES     H28, ungated by H20; a V6 ENTRY question,
+                           run before V6 rather than as a V5 rung
     V5.4  SELECTION        H22, side branch, two-class market
     V5.5  PLANNING         H23, side branch
     V5.6  LEARNED POLICY   H24, side branch
+
+**Parallel work is not advancement (Revision 5).** §18's completion
+rule stands: a rung is complete only when all its items hold, and
+V5.1's do not. H20 work may begin in parallel, because it shares no
+apparatus with S0 and cannot change H19's numbers — but H19 may not be
+called passed, may not be sealed, and may not be cited as a confirmed
+law until S0 runs or is shown impossible.
 
 **Order, and why it is this order (Revision 4).** Both reviewers
 independently argued that H22–H24 form a second research project
@@ -1500,6 +1624,24 @@ train pi because the decision log exists.
   space control (equivalent operator count without M). Naive "search
   is cheaper with M in the grammar" wins by construction — V4's
   matched-budget lesson applied to branching factor.
+
+  Registered now so V6 does not conflate four different things under
+  one word (review 46). The first macro experiment compares at least:
+
+      M_alias      names C . B . A; stores NO new neural parameters
+      M_compiled   distils C . B . A into a new learned circuit
+      Q            a matched-capacity arbitrary new primitive
+      (baseline)   the composition executed call-by-call
+
+  which separates naming/compression from search-space reduction from
+  execution compilation from extra neural capacity. A macro result
+  that does not say which of the four it is, is not a result.
+
+- H28 (same morphism under different coordinates) is a V6 ENTRY
+  QUESTION, not a V5 rung: before claiming a language of composable
+  operations, we should know whether its words survive a change of
+  representational coordinates. Its adapter complexity budget is
+  frozen in §10 and applies wherever the question is asked.
 - Program synthesis, C_synth as a charged term: V7.
 - Successful programs improving the language: V8. Review 41: this is
   the first point that would evidence the grand thesis. V5 does not
@@ -1559,9 +1701,11 @@ New in V5:
   D*(A + dead bits) = D*(A). Manipulate what an abstraction can
   compute, or manipulate the code; never inflate the container.
 - A RELATEDNESS KNOB MUST NOT MOVE INDIVIDUAL VALUE. Balance gates
-  (D*, s_bar, behavioral contribution, promotion rate; each within
-  10% across the sweep) are preconditions on scoring. A failing sweep
-  is unscoreable, not weak.
+  (D*, s_bar, behavioral contribution; each within 10% across the
+  sweep) are preconditions on scoring. A failing sweep is unscoreable,
+  not weak. A LEARNER RESPONSE is never a balance gate: gating on
+  promotion rate would discard the finding that a cheaper lower-level
+  representation absorbed the regularity.
 - TWO-CLASS MARKET BEFORE SELECTION. A selector is unfalsifiable in
   a one-edit census. H22 blocked until two structurally different
   edits each pay somewhere.
@@ -1622,9 +1766,18 @@ not answer. None of them blocks development work.
    right; a candidate would have to change an operator's encoding
    while provably preserving both its function class and its per-use
    saving.
-11. SETTLED in Revision 4. The question was whether promotion rate
-   could be held within the balance gate; the answer is that it should
-   never have been in it. It is a learner response, and its drift is
+9. The unit of forgetting / old-task interference, still unresolved
+   from V4 §11, and not V5.1's problem.
+10. Whether H19's first score, if taken from 500–509 rank-1 cells,
+    is quoted as development (yes) or waiting (also fine). It is not
+    confirmatory.
+11. SETTLED in Revision 4. The question, as posed in Revision 3, was
+   whether all four balance gates — D*, s_bar, behavioral
+   contribution, and promotion rate — could hold simultaneously
+   under the norm-preserving generator; the answer is that promotion
+   rate should
+   never have been among them. It is a learner response, and its
+   drift is
    outcome 3 of H20b — the lower-level representation absorbing the
    regularity — which is a result. The three generator-side gates
    (D*, s_bar, behavioral contribution) remain hard preconditions.
@@ -1636,11 +1789,7 @@ not answer. None of them blocks development work.
    listed. Noise purification and restructuring may not be
    distinguishable on frozen artifacts alone; separating them could
    require a training-time intervention, which V5 does not schedule.
-9. The unit of forgetting / old-task interference, still unresolved
-   from V4 §11, and not V5.1's problem.
-10. Whether H19's first score, if taken from 500–509 rank-1 cells,
-    is quoted as development (yes) or waiting (also fine). It is not
-    confirmatory.
+
 
 ---
 
@@ -1699,12 +1848,19 @@ outside the distribution B was trained on. That distinction does not
 exist in a symbolic library and will dominate once d = 16 worlds are
 left behind. It is the concept most likely to decide whether V6 is
 about composition or about repair.
-    Fail: error explodes. V6–V8 blocked; the negative is publishable
+    Fail (of the original depth-8 gate, retained): error explodes.
+    V6–V8 blocked; the negative is publishable
     ("neural operators do not compose past training depth") and the
     next question becomes adapters / typed interfaces / workspace
     contracts, not synthesis.
 
 Do not wait for H20 to run this. It does not depend on V5.1.
+
+Together with H28, this is what V6 entry rests on: the error law says
+whether learned operators compose at depth, and H28 says whether they
+compose across a change of coordinates. A V6 that assumes both without
+measuring either is building on two unverified premises, which is the
+V4 mistake in a new place.
 
 ---
 
@@ -1719,8 +1875,9 @@ record is complete.
 2. DONE. The causal grid is scored at ranks 1, 2 and 4 and recorded in
    PREDICTIONS.md and in §10 under H19.
 3. OPEN, and the first expensive item. Pair `operator_slots = 6`
-   against the scored grid, and run at least one informative s-arm (S1
-   or S2). Until then H19 stands as partial P1 + P3.
+   against the scored grid, and run the S0 return-value-gain arm
+   (secondary S1/S2 only if S0 proves impossible). Until then H19
+   stands as partial P1 + P3.
 4. DONE. Compositional-closure probe (B7) on Continuous checkpoints
    0–2: depth-8/depth-3 median NMSE 4.39 / 4.26 / 4.09, under the 5x
    gate, no saturation. V6 is not blocked. Recorded in §24.

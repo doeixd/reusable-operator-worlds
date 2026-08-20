@@ -2096,3 +2096,32 @@ quantitative law from an accounting identity.
   and H29 (the causal decomposition, registered before the audit).
 - Reviews saved as `reviewer-feedback-46.txt` / `-47.txt`, indexed, and
   the method lessons appended to `notes/learnings.txt`.
+
+# 2026-08-20 — V5 spec Revision 5 (internal-consistency audit)
+
+- Ran an independent audit of `row_v5_experimental_spec.md` against
+  reviews 46 and 47 rather than self-certifying Revision 4. Coverage
+  came back complete except for H28's ungating, which had not
+  propagated to the branch table or §5.
+- Most serious finding, now fixed: Revision 3 replaced the H20
+  generator and removed its fixed centre `C`, but `teacher_G1` and
+  H21's five-way instrument were still written in terms of `C`. The
+  fitted schema is now defined explicitly as
+  `S_hat = C_hat + B_hat alpha` with `C_hat` the fitted family mean,
+  and the generator's lack of a centre stated as the reason the
+  structureless control behaves as it does.
+- Also fixed: the isotropic null is now defined once (95th percentile
+  of 100 matched isotropic refits) instead of being invoked by three
+  gates and defined by none; H25 stated in one form, with the
+  undefined "savings already accrued" term removed; the 8-bit horizon
+  rows marked as reference arithmetic, since they violate the spec's
+  own >= 4-task bracketing rule; H19 described as confirmed on the
+  D-arm with the rung explicitly still partial; H20's falsifier moved
+  onto the H20a exogenous slice, which is what D16 says decides it;
+  H21's gate stated once (G1); H28's staging status made consistent;
+  inheritance attributed to V4 rather than V4R; a wrong D11 reference,
+  the stale `measured_r` endpoint, the retired rank-4 branch, the
+  superseded B1 world, §22's numbering, and D12's position all
+  corrected.
+- Eight earlier fixes were lost to a `git checkout` on uncommitted
+  work and re-applied. Learning recorded in `AGENTS.md`.
