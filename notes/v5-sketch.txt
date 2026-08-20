@@ -1,19 +1,33 @@
-# V5 sketch — Revision 2 (2026-08-20)
+# V5 sketch — Revision 3 (2026-08-20)
 
 A sketch, not a spec. The V5 spec is written only after this document's
 checklist is complete, with the V1–V4R discipline (hypotheses, falsifiers,
-frozen intervals, sealed seeds). Reviews 31–35 and 38–41 are
-incorporated; H19–H24 in PREDICTIONS.md (committed 2026-08-20, before
-any V5 world) are the scaffolding.
+frozen intervals, sealed seeds). Reviews 31–35, 38–41 and
+42–45 are incorporated; H19–H27 in PREDICTIONS.md (H19–H24 committed
+2026-08-20 before any V5 world; H25–H27 committed after V5.1 and before
+any V5.2 world) are the scaffolding.
 
 Unlike the V4 sketch, this is not written into a vacuum. V4R's sealed
-block has closed 7/7. V5.0 (the component rate-distortion frontier) has
-already run. H19's causal grid is in flight on worlds 500–509 and is
-NOT YET SCORED; nothing in this sketch may treat that grid as a result.
-The hypotheses were frozen before the worlds existed.
+block has closed 7/7, V5.0 (the component rate-distortion frontier) has
+run, and **V5.1 has now run and been scored**: 200 lifetimes across
+residual ranks 1, 2 and 4, 10 worlds per cell, 0 excluded. Its outcome
+is the single largest input to this revision and is recorded under H19
+below. The hypotheses were frozen before the worlds existed.
 
-**What Revision 2 adds.** Revision 1 named the question and the nested
-claims. This revision makes them executable: worked H19 arithmetic, a
+**What Revision 3 adds.** V5.1's result, and what it forces on
+everything downstream: the law survives in the form H* = lambda D*(A) /
+s_bar(D) while the proportional form is falsified, so every later rung
+must measure an intervention's effect on COST and on UTILITY separately
+before reading a crossing. Concretely — H19 closed with its numbers;
+H20's generator rewritten to hold individual abstraction value fixed
+while relatedness varies, with balance gates as a scoring precondition
+rather than a diagnostic; a parameter-free point prediction for M*
+(H25/H26); the padding intervention withdrawn; and two new rungs, H27
+(why shared scalars are individually cheaper) and H28 (the same
+morphism under different coordinates, from reviews 43/45).
+
+**What Revision 2 added.** Revision 1 named the question and the nested
+claims. Revision 2 made them executable: worked H19 arithmetic, a
 horizon grid that can actually observe each predicted crossing, the
 rank-4 config cap, an s-arm recipe, a cheap-first H20 slice, numeric
 G3, a written H22 estimator, a structural-regret definition, a
@@ -21,14 +35,13 @@ statistical plan, a threats table, and an operational composition
 probe. Several "open questions" from Rev 1 are given *defaults* here
 so a spec has something to freeze; they remain marked as defaults.
 
-**Protocol deviations already in the tree, recorded rather than
-adopted.** The in-flight H19 artifacts (`artifacts/v5_causal/`, git
-b07b37a) are rank-1 only, operator_slots=12, N in {48, 56, some 64},
-no rank-4 cells, and no s-arm. `SharedResidualModelConfig` and
-`VariationalModelConfig` reject `residual_rank > 2`, so the scorer's
-rank-4 arm cannot currently load through `load_config`. Rank 4's
-8-bit predicted crossing sits off the current horizon grid. The spec
-must not treat this partial grid as H19.
+**Protocol deviations carried in the H19 result, recorded rather than
+excused.** The scored grid ran at operator_slots=12, not the slots=6 of
+V3/V4R (D11); a paired slots=6 check is still owed before the spec
+inherits the number. The D-arm is complete at ranks 1, 2 and 4; the
+s-arm did not run, so H19 closes as partial P1 as well as P3 (below).
+The `residual_rank > 2` cap has been lifted with the default left at 2,
+so no existing fingerprint moves.
 
 ---
 
@@ -199,6 +212,12 @@ earlier failure, and an earlier pass with a later block is a result.
     SELECTION      one prospective score picks the
                    right class across regimes           (H22–H24)
 
+Two rungs sit beside the ladder rather than on it. H27 (why shared
+scalars are individually cheaper) is artifact-only and runs in
+parallel. H28 (the same computation under different coordinates) is a
+registered alternative representation class, and is the natural
+redesign if the PHASE DIAGRAM claim is blocked by the world.
+
 If the law fails, stop quoting N*s > C as more than one fitted
 crossing. If the law holds and the phase diagram never appears, the
 library is a set of compressed atoms, not a language, and V6 macros
@@ -246,6 +265,17 @@ and reports kappa = 0 as a registered null.
 D11. H19 uses operator_slots = 6 to pair with V3/V4R. The in-flight
 grid's slots=12 is a deviation; do not carry it into the spec without
 a paired slots=6 check.
+
+D13. Padding / dead-bit inflation of D is excluded from V5 entirely,
+not deferred (review 44). The coder-arm re-codes a fixed function and
+remains admissible.
+
+D14. H20's balance gates are scoring preconditions. The spec may not
+downgrade them to reported diagnostics after seeing a sweep.
+
+D15. H27 runs on frozen artifacts in parallel with H20 and is not
+gated behind it. H28 is registered but unscheduled; scheduling it
+requires a new, separately fingerprinted generator family.
 
 D12. Rank-4 requires lifting the `residual_rank > 2` cap in
 SharedResidualModelConfig and VariationalModelConfig. Default stays 2,
@@ -371,7 +401,10 @@ must not call a D* re-score a second confirmation.
 
 ---
 
-## Core hypotheses (H19–H24; already in PREDICTIONS.md)
+## Core hypotheses (H19–H28)
+
+H19–H24 and H25–H27 are in PREDICTIONS.md. H28 is registered in this
+sketch only, and is unscheduled.
 
 Numbering is not provisional. Falsifiers and operational cuts below
 are what this sketch adds.
@@ -474,17 +507,74 @@ of H19.
     P3  s_bar moves with rank enough to kill (a) but save (b). This
         is the predicted risk and a success for (b).
 
-**In-flight status, not a result.** `artifacts/v5_causal/` at the
-time of this revision: r1_N48 both arms (worlds 500–509), r1_N56
-both arms, r1_N64 retained only. No deleted N64, no N72, no rank 2,
-no rank 4, slots=12, config residual_rank=1. Score it as a rank-1
-development diagnostic if useful; do not call it H19.
+**RESULT (scored 2026-08-20; 200 lifetimes, 10 worlds/cell, 0
+excluded).**
+
+    rank  D(A)   carry    s_bar   crossing   predicted (carry/s_bar)
+      1     99     549     36.8     15.2          14.9
+      2    198   1,098     61.0     18.0          18.0
+      4    396   2,196     68.3     32.4          32.2
+
+Reading (a): FALSIFIED. D-ratio rank4/rank1 = 4.00 against an observed
+crossing ratio 2.13 — 46.8% relative error, well past the registered
+0.25 falsifier.
+
+Reading (b): CONFIRMED, and it is not the same statement. At each rank
+carry and s_bar are measured independently, and the crossing lands
+within 2% of carry/s_bar in three regimes it was not fitted to. That is
+exactly what the single-point V4R O4 confirmation could not distinguish
+from an accounting identity, and it now is distinguished.
+
+Diagnosis: s_bar co-varies with D(A) — 36.8, 61.0, 68.3. A higher-rank
+abstraction is both more expensive to carry and more useful per use.
+Dividing that out closes the arithmetic: 4.00 / 1.86 = 2.15 against an
+observed 2.13. This is registered partial **P3**, the predicted risk,
+and a success for (b).
+
+Because the s-arm never ran, H19 also closes as **P1**: quote "H*
+tracks code cost at measured s_bar," never "inversely proportional to
+s." Running S1/S2 later upgrades H19; it does not reopen (a).
+
+**What this forbids downstream.** Residual rank is not a pure
+intervention on D in this substrate — it sets an abstraction's cost and
+its expressive capacity together. Any later rung that manipulates a
+structural property must report separately what the manipulation did to
+COST and what it did to UTILITY before its crossing is read. H20's
+generator is redesigned on exactly this constraint.
+
+**What this does NOT license.** Padding or dead-bit inflation of D(A)
+as the "clean" proportionality test. Under the frontier currency this
+project gates on, D*(A + dead bits) = D*(A), so padding measures an
+artificial storage tax rather than abstraction economics (review 44).
+Withdrawn, not deferred. The coder-arm above re-codes a fixed function
+and remains a legitimate sensitivity.
 
 ### H20 — Higher-order amortization (V5.2; flagship of the PHASE DIAGRAM)
 
-Prediction. A COMPRESS-to-FACTORIZE crossing exists, and M*(r_meta)
-is monotone non-increasing in r_meta. M small => COMPRESS even at
-decent r_meta; M up and r_meta up eventually produce FACTORIZE.
+Prediction, now in two parts, the second added after V5.1 (H25/H26
+in PREDICTIONS.md).
+
+*Point prediction (H25).* The amortization law applies one level up.
+With A_i = S(alpha_i) + eps_i, private cost sum_i D*(A_i) against
+schema cost D*(S) + sum_i [ D(alpha_i) + D*(eps_i) ]:
+
+    FACTORIZE  iff  M * s_bar_schema > D*(S)
+    M*(r_meta) =    D*(S) / s_bar_schema(r_meta)
+
+D*(S) and the leave-one-out per-member saving s_bar_schema are measured
+at a fixed r_meta and WRITTEN DOWN BEFORE the M sweep runs; the sweep's
+observed crossing must then land within 15%. Fitting the crossing and
+explaining it afterwards with those quantities does not count — that
+distinction is what made V5.1 a law rather than curve-fitting.
+
+*Boundary prediction (H26).* M*(r_meta) is monotone non-increasing:
+dM*/dr_meta < 0. The more related the abstractions, the fewer family
+members are needed before naming the family. M small => COMPRESS even
+at decent r_meta; M up and r_meta up eventually produce FACTORIZE.
+
+Getting the crossing at both levels — uses to abstraction, and
+abstractions to schema — is what would make this recursive
+amortization rather than a second, unrelated threshold.
 
 **Coordinates.** Family count F and support per family m, with
 
@@ -493,14 +583,21 @@ decent r_meta; M up and r_meta up eventually produce FACTORIZE.
 Holding m fixed isolates scale; holding F fixed isolates evidence per
 abstraction. Raising F at fixed N starves every candidate and shrinks
 the library — the confound that made the first F-sweep invalid
-(review 32). Independently, r_meta mixes a shared family-schema with
-a private remainder on the *teacher* family primitives:
+(review 32). Independently, r_meta must vary how RELATED the
+family primitives are without varying what any one of them costs or is
+worth. Revision 2's form (a fixed centre C plus an r_meta-scaled family
+term) does not do that: it moves each abstraction's own difficulty
+along with the knob, which is precisely the confound that falsified
+H19(a). Revision 3 adopts the norm-preserving mixture of review 44,
+defined in FUNCTIONAL space because of gauge freedom:
 
-    A_f(z) = C(z)
-           + r_meta * B(z; alpha_f)
-           + sqrt(1 - r_meta^2) * eps_f(z)
+    theta_f(r) = sqrt(r) * B alpha_f  +  sqrt(1 - r) * B_f beta_f
 
-then spectral-normalize as in every ROW primitive. At r_meta = 0 this
+with B a common functional subspace, B_f independent private subspaces
+of IDENTICAL dimensionality, and alpha_f, beta_f drawn from the same
+distribution. Then E|theta_f|^2 is constant in r while the fraction of
+each abstraction lying in a common family rises from 0 to 1. Spectral-
+normalize as in every ROW primitive. At r_meta = 0 this
 must reproduce independent family primitives (current V4R; COMPRESS
 wins). At r_meta = 1 the families are exact instances of a
 parameterized schema (G1 should pass on the teacher; G2 is then the
@@ -518,6 +615,22 @@ family primitives, with no learner in sight:
 Pass: measured_r increases monotonically with configured r_meta on
 worlds 0–2, and teacher_G1 > 0 at r_meta = 1. Fail: the knob does not
 instantiate meta-recurrence; redesign before running FACTORIZE.
+
+**BALANCE GATES, frozen at +/- 10%, a precondition on SCORING and not a
+diagnostic.** This is V5.1's lesson turned into a rule. Across the swept
+r_meta, each of
+
+    D*(A_f)                    per-abstraction frontier cost
+    s_bar(A_f)                 per-use saving of an individual member
+    behavioral contribution    that member's own share of output
+    promotion rate             how many abstractions get born at all
+
+must be constant to within 10%. A sweep failing any gate is
+UNSCOREABLE — not weak evidence, not a partial. If raising r_meta also
+makes individual atoms cheaper or more useful, then M*(r_meta) moves
+for the same confounded reason H19(a) failed and the phase boundary is
+an artifact. Measure all four on the teacher family first (cheap), then
+re-check them on the learned library at the cells actually scored.
 
 **Ceiling, registered.** Canonical world: 6**3 = 216 distinct
 programs. N=256 is unreachable without adding primitives. At m=16,
@@ -720,6 +833,93 @@ this claim.
 
 **Falsifier.** No improvement on held-out conditions, or improvement
 only on held-out seeds of the training grid.
+
+### H27 — Why shared scalars are individually cheaper (V5.0b)
+
+V5.0 measured D*_shared ~= 3.9 bits/scalar against D*_private ~= 5.0.
+That is not a duplication-count effect: shared abstractions are stored
+fewer times AND their individual scalars are cheaper. Review 44 is
+right that this deserves a mechanism rather than a footnote, because
+one of the branches would change what abstraction IS.
+
+Four candidate mechanisms, all measurable on frozen artifacts:
+
+    noise purification      promotion averages away task-specific
+                            variation, leaving a stable signal
+    effective-dimension     shared objects use fewer functionally
+                            important directions; faster spectral decay
+    selection effect        PROMOTE preferentially selects naturally
+                            compressible computations
+    restructuring           moving recurring information into a shared
+                            object causes SGD to encode it in a more
+                            robust, lower-rate geometry
+
+Prediction (H27). The gap is not a selection artifact: promoted
+abstractions have lower effective functional rank than private
+residuals at MATCHED PARTICIPANT COUNT, and the per-component D* gap
+tracks that spectral difference (rank-order correlation |r| >= 0.5
+across worlds) rather than tracking abstraction size or usage count.
+
+Instrument, entirely on frozen V3/V4R artifacts, no new lifetimes:
+effective rank, singular-value spectrum, parameter-perturbation
+sensitivity, functional Jacobian spectrum, quantization-error curve,
+and scalar-value entropy, for the two populations at matched
+participant count.
+
+Falsifier. No spectral difference; a spectral difference that does not
+track D*; or the gap vanishing once participant count is matched —
+which makes it a selection effect and closes the question in the dull
+direction.
+
+Cheap, artifact-only, and independent of every other rung, so it runs
+alongside H20 rather than queueing behind it. If restructuring is the
+mechanism, the claim becomes: abstraction does not merely reduce
+duplication, it changes the coding geometry of information. That would
+connect ROW's MDL story to representation formation itself, and it is
+the strongest cheap result available in V5.
+
+### H28 — The same morphism under different coordinates (V5.7; registered, not scheduled)
+
+From reviews 43 and 45, which rank this among the three most valuable
+experiments in the roadmap. Every representation class in V5 so far
+assumes recurring computations appear in the SAME coordinates. In a
+real network they would not: the same abstract operation at layer 8 and
+at layer 25 acts on different internal representations, and direct
+behavioral comparison would call them unrelated.
+
+World. Each family sees one latent computation through its own
+coordinates:
+
+    f_i = d_i . A . e_i
+
+The learner sees only each f_i's input-output behavior, so f_1..f_n
+look unrelated. Three arms: independent implementations; exact sharing
+(one A everywhere, which should FAIL because the coordinates do not
+line up); factorized sharing (A plus per-context adapters). The MDL
+decision is
+
+    D*(A) + sum_i [ D*(e_i) + D*(d_i) ]   ?<   sum_i D*(f_i)
+
+Sweeping adapter cost should give a representation phase transition:
+exact sharing (adapters near identity) -> shared core plus adapters ->
+independent implementations (adapters expensive).
+
+**Adapter complexity budget, mandatory.** Do not declare f ~ g merely
+because some learned adapter makes them interchangeable — a
+sufficiently expressive adapter implements the computation itself, and
+the model-stitching literature has exactly this false positive (Smith
+et al., PMLR v267). Require cheap a, b with b.f ~= g.a on proposal data
+AND on disjoint validation interventions, while D*(a) + D*(b) <<
+D*(f), D*(g). This is the matched-budget constitution applied to
+coordinate changes, and it is the methodological rule any later
+LLM-scale version of this test would stand or fall on.
+
+Registered here so the idea is not lost and so its budget rule is
+frozen before anyone runs it. NOT scheduled inside V5's staging: it
+needs a new generator family, and it is gated behind H20 producing a
+factorization class at all. If H20 turns out to be blocked by the
+world, H28 is the more promising redesign, because it makes sharing
+possible in a regime where exact sharing provably cannot win.
 
 ---
 
@@ -1037,6 +1237,19 @@ New in V5:
   both sides of an identity is not a test. Manipulate D and s where
   the world is built, predict, then score. A grid that cannot see the
   predicted crossing is not a test either.
+- COST AND UTILITY, SEPARATELY. Any manipulation of a structural
+  property reports what it did to the thing's cost and what it did to
+  its usefulness, before any crossing is read. V5.1: rank 4 costs 4x
+  rank 1 and also saves 1.86x per use, and measuring both is the only
+  reason the law survived its own falsified corollary.
+- SERIALIZATION IS NOT COST. Padding, dead bits, and deliberately
+  wasteful encodings are not interventions on D, because
+  D*(A + dead bits) = D*(A). Manipulate what an abstraction can
+  compute, or manipulate the code; never inflate the container.
+- A RELATEDNESS KNOB MUST NOT MOVE INDIVIDUAL VALUE. Balance gates
+  (D*, s_bar, behavioral contribution, promotion rate; each within
+  10% across the sweep) are preconditions on scoring. A failing sweep
+  is unscoreable, not weak.
 - TWO-CLASS MARKET BEFORE SELECTION. A selector is unfalsifiable in
   a one-edit census. H22 blocked until two structurally different
   edits each pay somewhere.
@@ -1088,10 +1301,25 @@ yet frozen.
 7. Composition probe as V5 checklist vs V6 entry criterion. This
    sketch puts it on the V5 checklist so V6 is not started on a
    broken foundation; it is not a V5 hypothesis.
-8. Rank vs bits as the "official" D manipulation. Default D3: rank
-   primary. The spec may reverse that if the s-confound on rank is
-   fatal and the coder-arm is cleaner; it may not treat them as
-   interchangeable after seeing numbers.
+8. Rank vs bits as the "official" D manipulation. SETTLED by V5.1,
+   in the uncomfortable direction: rank is not a pure D intervention
+   (s_bar moved 36.8 -> 68.3 with it), and padding — the obvious
+   repair — is excluded by D13. So no pure D manipulation is known in
+   this substrate, and the law is stated and tested in form (b) only.
+   Whether a pure one EXISTS is now an open question in its own
+   right; a candidate would have to change an operator's encoding
+   while provably preserving both its function class and its per-use
+   saving.
+11. Whether H20's balance gates can all hold at once. The norm-
+   preserving generator fixes E|theta|^2 by construction, but
+   promotion rate is a LEARNER response and may drift with r_meta
+   anyway. If it does, the honest reading is that r_meta cannot be
+   made orthogonal to individual value at this scale — an
+   H20-blocked result, not a licence to relax the gate.
+12. Whether H27's four mechanisms are separable with the instruments
+   listed. Noise purification and restructuring may not be
+   distinguishable on frozen artifacts alone; separating them could
+   require a training-time intervention, which V5 does not schedule.
 9. The unit of forgetting / old-task interference, still unresolved
    from V4 §11, and not V5.1's problem.
 10. Whether H19's first score, if taken from 500–509 rank-1 cells,
@@ -1214,62 +1442,6 @@ at the time of this revision. Rank 2 is the V4R operating point and
 must be in the spec's registered grid. Rank 4 needs B0 and a longer
 N grid at 8-bit (or a D* reading whose predicted crossing is on-grid).
 
----
-
-## V5.2 REVISION after review 44 (2026-08-20)
-
-The question becomes: does the SAME amortization law govern the birth of
-abstractions over abstractions?
-
-  A_i = S(alpha_i) + eps_i
-  C_private = sum_i D*(A_i)
-  C_schema  = D*(S) + sum_i [ D(alpha_i) + D*(eps_i) ]
-  FACTORIZE iff  M * s_bar_schema > D*(S)
-  M*(rho)   =    D*(S) / s_bar_schema(rho)
-
-Registered as H25-H27 in PREDICTIONS.md before the generator exists.
-
-GENERATOR. Do not manipulate rank. In FUNCTIONAL space (gauge freedom):
-
-  theta_i(rho) = sqrt(rho) * B alpha_i + sqrt(1-rho) * B_i beta_i
-
-B a common subspace, B_i independent private subspaces of identical
-dimensionality, alpha_i/beta_i from one distribution, total norm held
-constant, so E|theta_i|^2 does not move with rho while the fraction of
-each abstraction lying in a common family does.
-
-BALANCE GATES, frozen at 10%, checked BEFORE the factorization sweep is
-read: D*(A_i|rho), s_bar(A_i|rho), behavioral contribution, promotion
-rate. A failing sweep is unscoreable.
-
-SCALE KNOB. F recurring innovation families, m tasks each, N = Fm; hold
-m fixed and sweep F in {4,8,16,32,64} so PROMOTE realizes M ~ F. Do not
-raise composition depth again -- L=4 showed task-space capacity is not
-realized M.
-
-PHASE DIAGRAM. (M, rho_meta) -> {COMPRESS, FACTORIZE}; COMPRESS wins at
-all M for low rho; M*(rho) exists at high rho; dM*/drho < 0.
-
-GATE ORDER, inherited from V4's lesson. (1) opportunity against
-componentwise rate-distortion-optimal private compression; (2)
-leave-one-out structure -- fit S on A_1..A_{M-1}, represent unseen A_M
-by alpha_M alone, else the schema is retrospective compression;
-(3) prospective value -- a new family member cheaper in prequential
-cost, sample count, AND retained bits; (4) discovery, last. No operator
-is implemented before gate 1 passes.
-
-WITHDRAWN. The padding/dead-bit proportionality test proposed in the
-V5.1 note. D*(A + dead bits) = D*(A).
-
-OPEN, from V5.0: D*_shared ~ 3.9 bits/scalar vs D*_private ~ 5.0.
-Candidate mechanisms are noise purification, effective-dimensionality
-reduction, a PROMOTE selection effect, and representation restructuring.
-The cheap audit compares effective rank, singular-value spectrum,
-perturbation sensitivity, Jacobian spectrum, quantization-error curve,
-and scalar entropy between the two populations (H27).
-
----
-
 ## Sources
 
 row_v4r_experimental_spec.md and V4R_CONFIRMATION_PLAN.md (predecessor
@@ -1292,4 +1464,10 @@ src/row/experiments/audit_component_frontier.py and score_v5_causal.py
 (V5.0 result; V5.1 protocol).
 artifacts/v5_causal/ (in-flight rank-1 grid; development only).
 reviews/reviewer-feedback-44.txt (V5.2 as recursive amortization;
-balance gates; F-families scale knob; padding withdrawn).
+norm-preserving generator; balance gates; padding withdrawn; the
+D*_shared vs D*_private mechanism question behind H27).
+reviews/reviewer-feedback-43.txt and -45.txt (H28: same morphism under
+different coordinates; the adapter complexity budget).
+PREDICTIONS.md H25-H27 (frozen 2026-08-20, after V5.1 and before any
+V5.2 world).
+reports/v5_causal.json (the scored H19 result).

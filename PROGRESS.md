@@ -2026,3 +2026,16 @@ quantitative law from an accounting identity.
   structural manipulation; padding is not a valid `D` intervention;
   realized library size needs an F-families knob, not depth; a
   relatedness knob needs frozen balance gates.
+
+- `notes/v5-sketch.txt` to Revision 3. H19 closed with the scored V5.1
+  numbers (reading (a) falsified, reading (b) confirmed, partials P1
+  and P3). H20's generator replaced with the norm-preserving
+  functional-space mixture and given balance gates as a scoring
+  precondition, plus the parameter-free point prediction
+  `M* = D*(S)/s_bar_schema` (H25/H26). Padding excluded by D13; D14
+  and D15 added. Two new rungs: H27 (why shared scalars are
+  individually cheaper; artifact-only, runs in parallel) and H28 (the
+  same morphism under different coordinates, with a mandatory adapter
+  complexity budget; registered, unscheduled). Open question 8 marked
+  settled in the uncomfortable direction — no pure D manipulation is
+  known in this substrate.
