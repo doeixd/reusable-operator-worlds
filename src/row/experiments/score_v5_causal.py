@@ -57,55 +57,97 @@ def crossing_of(rows, carry) -> float | None:
     return None
 
 
-def main() -> None:
-    p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--root", type=Path, default=Path("artifacts/v5_causal"))
-    p.add_argument("--ranks", type=int, nargs="+", default=[1, 4])
-    p.add_argument("--horizons", type=int, nargs="+", default=[48, 56, 64, 72])
-    p.add_argument("--worlds", type=int, nargs="+", default=list(range(500, 510)))
-    p.add_argument("--output", type=Path, default=Path("reports/v5_causal.json"))
-    args = p.parse_args()
+def condition_root(root: Path, template: str, rank: int, total: int, arm: str) -> Path:
+    return root / template.format(rank=rank, total=total, arm=arm)
 
-    print("V5.1 CAUSAL TEST — does H_R* scale with D(A)?")
+
+def score_rank(root: Path, template: str, rank: int, horizons: list[int],
+               worlds: list[int], gap_end: int, last_sleep: int) -> dict:
+    carry = LN2 * PROXY_BITS * SCALARS[rank]
+    rows, excluded = [], 0
+    for total in horizons:
+        horizon = total - gap_end
+        if horizon <= 0:
+            continue
+        vals = []
+        for world in worlds:
+            retained = (condition_root(root, template, rank, total, "retained")
+                        / f"world_{world}" / "lifecycle")
+            deleted = (condition_root(root, template, rank, total, "deleted")
+                       / f"world_{world}" / "lifecycle")
+            if not (retained / "summary.json").exists() or not (deleted / "summary.json").exists():
+                continue
+            bad = False
+            for directory in (retained, deleted):
+                lifecycle = json.loads((directory / "summary.json").read_text(encoding="utf-8")).get("lifecycle")
+                if lifecycle and any(record["born_at_task"] > last_sleep
+                                     for record in lifecycle.get("lineage", [])):
+                    bad = True
+            if bad:
+                excluded += 1
+                continue
+            retained_nll = per_task(retained / "metrics.jsonl")
+            deleted_nll = per_task(deleted / "metrics.jsonl")
+            vals.append(sum(deleted_nll.get(gap_end + offset, 0.0)
+                            - retained_nll.get(gap_end + offset, 0.0)
+                            for offset in range(horizon)))
+        if vals:
+            rows.append({"H": horizon, "n": len(vals), "c": float(np.mean(vals))})
+    if not rows:
+        return {}
+    s_bar = float(np.mean([row["c"] / row["H"] for row in rows]))
+    crossing = crossing_of(rows, carry)
+    return {
+        "carry": carry,
+        "s_bar": s_bar,
+        "crossing": crossing,
+        "predicted": carry / s_bar if s_bar else None,
+        "rows": rows,
+        "excluded": excluded,
+        "scalars": SCALARS[rank],
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", type=Path, default=Path("artifacts/v5_causal"))
+    parser.add_argument("--ranks", type=int, nargs="+", default=[1, 4])
+    parser.add_argument("--horizons", type=int, nargs="+", default=[48, 56, 64, 72])
+    parser.add_argument("--worlds", type=int, nargs="+", default=list(range(500, 510)))
+    parser.add_argument("--dir-template", default="r{rank}_N{total}_{arm}",
+                        help="condition directory; horizon layout uses N{total}_{arm}")
+    parser.add_argument("--gap-end", type=int, default=40)
+    parser.add_argument("--last-sleep", type=int, default=32)
+    parser.add_argument("--diagnostic", action="store_true",
+                        help="banner the run as a development diagnostic, not H19")
+    parser.add_argument("--output", type=Path, default=Path("reports/v5_causal.json"))
+    args = parser.parse_args()
+
+    title = "V5.1 CAUSAL TEST — does H_R* scale with D(A)?"
+    if args.diagnostic:
+        title = "DIAGNOSTIC (not H19) — " + title
+    print(title)
     print("  prediction: H_R* proportional to residual rank (D(A) is linear in rank)\n")
     results = {}
     for rank in args.ranks:
-        carry = LN2 * PROXY_BITS * SCALARS[rank]
-        rows, excluded = [], 0
-        for total in args.horizons:
-            H = total - 40
-            vals = []
-            for w in args.worlds:
-                rd = args.root / f"r{rank}_N{total}_retained" / f"world_{w}" / "lifecycle"
-                dd = args.root / f"r{rank}_N{total}_deleted" / f"world_{w}" / "lifecycle"
-                if not (rd / "summary.json").exists() or not (dd / "summary.json").exists():
-                    continue
-                bad = False
-                for d in (rd, dd):
-                    lc = json.loads((d / "summary.json").read_text(encoding="utf-8")).get("lifecycle")
-                    if lc and any(x["born_at_task"] > 32 for x in lc.get("lineage", [])):
-                        bad = True
-                if bad:
-                    excluded += 1
-                    continue
-                pr, pd = per_task(rd / "metrics.jsonl"), per_task(dd / "metrics.jsonl")
-                vals.append(sum(pd.get(40 + j, 0.0) - pr.get(40 + j, 0.0) for j in range(H)))
-            if vals:
-                rows.append({"H": H, "n": len(vals), "c": float(np.mean(vals))})
-        if not rows:
+        scored = score_rank(
+            args.root, args.dir_template, rank, args.horizons, args.worlds,
+            args.gap_end, args.last_sleep,
+        )
+        if not scored:
             continue
-        sbar = float(np.mean([r["c"] / r["H"] for r in rows]))
-        cross = crossing_of(rows, carry)
-        results[rank] = {"carry": carry, "s_bar": sbar, "crossing": cross,
-                         "predicted": carry / sbar if sbar else None,
-                         "rows": rows, "excluded": excluded}
-        print(f"  rank {rank}: D(A)={SCALARS[rank]} scalars, carry={carry:,.0f} nats, "
-              f"s_bar={sbar:.1f}")
-        for r in rows:
-            print(f"      H_R={r['H']:>2} (n={r['n']:>2})  C_reacquire={r['c']:>7,.0f}  "
-                  f"V_retain={r['c']-carry:>+8,.0f}")
-        print(f"      crossing: {'n/a' if cross is None else f'{cross:.1f}'}"
-              f"   excluded {excluded}\n")
+        results[rank] = scored
+        print(f"  rank {rank}: D(A)={scored['scalars']} scalars, carry={scored['carry']:,.0f} nats, "
+              f"s_bar={scored['s_bar']:.1f}")
+        for row in scored["rows"]:
+            print(f"      H_R={row['H']:>2} (n={row['n']:>2})  C_reacquire={row['c']:>7,.0f}  "
+                  f"V_retain={row['c']-scored['carry']:>+8,.0f}")
+        crossing = scored["crossing"]
+        predicted = scored["predicted"]
+        crossing_text = "n/a" if crossing is None else f"{crossing:.1f}"
+        predicted_text = "n/a" if predicted is None else f"{predicted:.1f}"
+        print(f"      crossing {crossing_text}   predicted {predicted_text}   "
+              f"excluded {scored['excluded']}\n")
 
     print("  SCALING CHECK")
     ranks = sorted(k for k in results if results[k]["crossing"] is not None)

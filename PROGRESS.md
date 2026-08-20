@@ -1976,3 +1976,22 @@ quantitative law from an accounting identity.
   not H19. D1–D12 freeze the decisions a spec should not re-litigate.
   Checklist reordered: score the rank-1 diagnostic and run the
   composition probe before another lifetime sweep.
+
+# 2026-08-20 — V5 preflight: diagnostics, rank cap, paper hygiene
+
+- Scored the in-flight rank-1 causal grid (worlds 500-509, slots=12)
+  and the rank-2 horizon grid (worlds 0-2, slots=12) as diagnostics,
+  not H19. Rank 1: s_bar 36.5, crossing 15.2. Rank 2: s_bar 60.1,
+  crossing 17.9 (reproduces V4R O4 development). Unpaired H* ratio
+  1.18 against D ratio 2.0; s_bar may move with rank. Reports:
+  `reports/v5_causal_rank1_dev.json`,
+  `reports/v5_horizon_rank2_dev.json`, `reports/v5_preflight.json`.
+- Compositional-closure probe on Continuous checkpoints 0-2:
+  depth-8/depth-3 median NMSE 4.39 / 4.26 / 4.09, all under the
+  draft 5x gate, no saturation. V6 is not blocked. Module:
+  `src/row/experiments/probe_compositional_closure.py`.
+- Lifted `residual_rank` cap from 2 to 4 in shared-residual,
+  variational, and gated configs; default remains 2. Tests in
+  `tests/test_config.py`. Did not launch rank-4 lifetimes.
+- Paper draft to v0.9: header names the fourth sealed block;
+  section 10.1 no longer says no V4 sealed block was run.

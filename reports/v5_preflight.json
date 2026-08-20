@@ -1,0 +1,45 @@
+{
+  "status": "development diagnostic, not H19, not a sealed result",
+  "date": "2026-08-20",
+  "rank_cap": "SharedResidualModelConfig residual_rank now allowed through 4; default remains 2",
+  "retention": {
+    "note": "The two grids are NOT paired: different world seeds, same slots=12. Do not treat the ratio as H19.",
+    "rank1_causal": {
+      "root": "artifacts/v5_causal",
+      "worlds": "500-509",
+      "slots": 12,
+      "s_bar": 36.52,
+      "crossing": 15.22,
+      "predicted_from_sbar": 15.03,
+      "carry_nats": 549,
+      "report": "reports/v5_causal_rank1_dev.json"
+    },
+    "rank2_horizon": {
+      "root": "artifacts/v5_horizon",
+      "worlds": "0-2",
+      "slots": 12,
+      "s_bar": 60.13,
+      "crossing": 17.93,
+      "predicted_from_sbar": 18.26,
+      "carry_nats": 1098,
+      "report": "reports/v5_horizon_rank2_dev.json",
+      "note": "Reproduces V4R O4 development (s_bar ~61, crossing ~17.9) at rank 2."
+    },
+    "unpaired_ratios": {
+      "D_ratio_rank2_over_rank1": 2.0,
+      "Hstar_ratio": 1.18,
+      "s_bar_ratio": 1.65,
+      "reading": "If this survived pairing it would be T1: s_bar moves with rank, so H* does not track D. It is not paired, so H19 is still unrun."
+    }
+  },
+  "compositional_closure": {
+    "artifact": "artifacts/checkpoints_development/world_{0,1,2}/continuous",
+    "worlds": [0, 1, 2],
+    "depth8_over_depth3_median_nmse": [4.39, 4.26, 4.09],
+    "threshold": 5.0,
+    "pass": "3/3",
+    "saturation": "neither teacher nor learned saturates at depth 8",
+    "reading": "V6 is not blocked. Error grows smoothly (about 4.2x from the training depth). The draft 5x gate is tight, not a blow-up.",
+    "report": "reports/v5_compositional_closure.json"
+  }
+}

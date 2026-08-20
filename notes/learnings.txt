@@ -1666,9 +1666,13 @@ V5 PROPOSAL: LEARNING THE REPRESENTATION ECONOMY
 ================================================================================
 
 Sketch: notes/v5-sketch.txt Revision 2 (2026-08-20). Not a spec.
-V5.0 (D* frontier) has run. H19 causal grid is in flight on worlds
-500-509 and is not yet scored. H19-H24 were frozen in PREDICTIONS.md
+V5.0 (D* frontier) has run. H19-H24 were frozen in PREDICTIONS.md
 before any V5 world. MACRO/LOOP/BRANCH are V6, not V5.
+
+Preflight 2026-08-20 (NOT H19): unpaired rank-1 (s_bar 36.5, H* 15.2)
+vs rank-2 (s_bar 60.1, H* 17.9) diagnostics. Compositional closure
+PASS 3/3, depth-8/depth-3 NMSE ~4.2. Rank cap lifted to 4; no rank-4
+lifetimes launched.
 
 V5 should stop asking "does operation X work?" and ask: can the system choose
 the right representation transformation for the economics it faces? PROMOTE,

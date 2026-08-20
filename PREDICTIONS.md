@@ -1225,6 +1225,34 @@ hand-designed estimator's on held-out conditions.
 Confidence: low-moderate. This is the most ambitious rung and depends
 on H22 and H23 producing usable signal first.
 
+# V5 preflight diagnostics — NOT H19 (2026-08-20)
+
+Scored existing artifacts as development diagnostics. Neither grid is
+the H19 protocol in notes/v5-sketch.txt (unpaired seeds, slots=12,
+no s-arm, no rank 4). Outcomes appended so the scores are not
+mistaken for the registered test.
+
+Rank 1, artifacts/v5_causal, worlds 500-509, N in {48,56,64},
+slots=12: s_bar = 36.5 nats/use (flat across H_R=8/16/24), crossing
+15.2 against predicted 15.0 at 8-bit carry 549. Zero post-gap-birth
+exclusions.
+
+Rank 2, artifacts/v5_horizon, worlds 0-2, N in {48,52,56,60,64,72},
+slots=12: s_bar = 60.1, crossing 17.9 against predicted 18.3 at carry
+1098. This cell reproduces the V4R O4 development numbers
+(s_bar ~61, crossing 17.9).
+
+Unpaired rank-2/rank-1 ratios: D = 2.00, H* = 1.18, s_bar = 1.65.
+If this survived a paired grid it would be sketch T1 (s_bar moves
+with rank, so H* does not track D). It is not paired. H19 as
+specified remains unrun.
+
+Compositional closure, Continuous checkpoints worlds 0-2: Hungarian-
+matched slots vs teacher primitives, random programs. Median NMSE
+depth-8 / depth-3 = 4.39 / 4.26 / 4.09, all under the draft 5x gate;
+neither teacher nor learned saturates at depth 8. V6 is not blocked.
+The gate is tight: error grows smoothly, it does not explode.
+
 # Frontier audit on ALL 30 SEALED worlds: the claim strengthens (2026-08-19)
 
 The development-world audit above is superseded by the real thing. The

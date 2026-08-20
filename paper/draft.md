@@ -1,15 +1,16 @@
 # When Does Abstraction Pay? Measuring the Value of Reusable Computation in Neural Learners
 
-*Draft v0.8 — extended with the THIRD sealed block (seeds 300-329):
-promotion, in which a saturated learner creates new shared computation
-and wins prediction and description length simultaneously (section 7.5).
-Earlier blocks contribute the recurrence law and its parameter
-replication (seeds 100-129, 200-229) and the read/write dissociation.
-Development and sealed results are labeled throughout and the three
-sealed blocks are distinguished by seed range; all numbers trace to
-fingerprint-validated artifacts in the public repository, with the first
-two blocks archived as release v2.0-confirmation. Revision history in
-PROGRESS.md.*
+*Draft v0.9 — extended with the FOURTH sealed block (seeds 400-429;
+section 7.6): a preregistered negative that a learned library does not
+need lifecycle machinery at this scale, plus a retention law that is
+birth run forwards. The third block (seeds 300-329, section 7.5) is
+promotion. Earlier blocks contribute the recurrence law and its
+parameter replication (seeds 100-129, 200-229) and the read/write
+dissociation. Development and sealed results are labeled throughout
+and the four sealed blocks are distinguished by seed range; all
+numbers trace to fingerprint-validated artifacts in the public
+repository, with the first two blocks archived as release
+v2.0-confirmation. Revision history in PROGRESS.md.*
 
 ## Abstract
 
@@ -48,7 +49,13 @@ nats) and making held-out related tasks cheaper to acquire (+0.0031
 32-shot NMSE) — 30/30 on all four, with parameters matching development to
 within 0.7%. This is the first learner in the program to win prediction and
 description length simultaneously, and it does so with capacity it created
-rather than capacity it was given. The result is
+rather than capacity it was given. A FOURTH sealed block (seeds 400-429)
+asks whether that library then needs lifecycle machinery: it does not,
+at this scale. Local private compression beats factorization in 30/30
+worlds; the one structural edit that pays is retention, and it pays
+when expected remaining reuse repays the abstraction's code cost
+(crossing 18.0 returning tasks against a development-derived prediction
+of 17.1). The result is
 conditional on representational alignment, and substantially so: when the
 learner's operator family matches the environment's (residual tanh), the
 exact-reuse advantage is large; changing only the learner's activation
@@ -900,9 +907,13 @@ The third sealed block closed the compression cell by showing that a
 saturated learner can create a new shared abstraction (PROMOTE) and win
 prediction and description length simultaneously. The natural follow-up
 -- whether a learned library then needs lifecycle operations (MERGE,
-DELETE, FACTORIZE, RETAIN) -- was pursued as V4 on development worlds
-only; no sealed block was run. The development findings are reported
-here as orientation, not confirmation.
+DELETE, FACTORIZE, RETAIN) -- was first pursued as V4 on development
+worlds, where the original premise failed, and then as V4R. V4R's
+sealed block (seeds 400-429, section 7.6) confirmed the development
+picture: local compression dominates restructuring, and the one
+structural edit that pays is retention, obeying the same amortization
+law as birth. The findings below remain the development account of
+*why*; the sealed numbers live in 7.6.
 
 The V4 development program falsified its original premise. The
 assumption that successful abstraction birth implies a library maintenance
@@ -968,9 +979,11 @@ continually asks where information should live, what form it should
 take, whether it is worth naming, how precisely it should be encoded,
 and whether keeping that representation will make future learning
 cheaper. V4 did not deliver MERGE or DELETE; it delivered the economic
-rules those operations will eventually have to obey. These are
-development results only; confirmatory testing awaits a frozen V4
-protocol and sealed worlds.
+rules those operations will eventually have to obey. V4R confirmed
+that those rules, not a lifecycle operator suite, are the result at
+this scale. The successor question -- whether the amortization law is
+quantitative, and whether a second representation class exists above
+compressed atoms -- is V5 (`notes/v5-sketch.txt`).
 
 Why should anyone working at scale care about a 16-dimensional world?
 Because the criterion is scale-free and the phenomena it isolates have

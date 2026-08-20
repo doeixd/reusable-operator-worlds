@@ -178,7 +178,7 @@ class SharedResidualModelConfig:
             self.residual_rank,
             self.task_steps,
         )
-        if min(dimensions) <= 0 or self.residual_rank > 2:
+        if min(dimensions) <= 0 or self.residual_rank > 4:
             raise ValueError("shared-residual dimensions are invalid")
         if min(
             self.global_learning_rate,
@@ -286,7 +286,7 @@ class VariationalModelConfig:
             self.task_steps,
             self.variational_samples,
         )
-        if min(dimensions) <= 0 or self.residual_rank > 2:
+        if min(dimensions) <= 0 or self.residual_rank > 4:
             raise ValueError("variational dimensions are invalid")
         if min(
             self.global_learning_rate,
@@ -340,7 +340,7 @@ class GatedModelConfig:
             self.residual_rank,
             self.task_steps,
         )
-        if min(dimensions) <= 0 or self.residual_rank > 2:
+        if min(dimensions) <= 0 or self.residual_rank > 4:
             raise ValueError("gated dimensions are invalid")
         if min(
             self.global_learning_rate,

@@ -1,0 +1,224 @@
+[
+  {
+    "slot_match": {
+      "0": 2,
+      "1": 6,
+      "2": 3,
+      "3": 7,
+      "4": 1,
+      "5": 0
+    },
+    "depths": [
+      {
+        "depth": 1,
+        "mean_nmse": 0.0022561901171601582,
+        "median_nmse": 0.0017466548655167796,
+        "learned_saturation": 0.07059097290039062,
+        "teacher_saturation": 0.06916427612304688,
+        "learned_variance": 0.3955233688466251,
+        "teacher_variance": 0.39481920484668026
+      },
+      {
+        "depth": 2,
+        "mean_nmse": 0.005289393928267037,
+        "median_nmse": 0.0045686879997677435,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.27799755707383156,
+        "teacher_variance": 0.2764864361294318
+      },
+      {
+        "depth": 3,
+        "mean_nmse": 0.008743166564500702,
+        "median_nmse": 0.007801940017247977,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.21836252184584737,
+        "teacher_variance": 0.2169839370893174
+      },
+      {
+        "depth": 4,
+        "mean_nmse": 0.013347430042799369,
+        "median_nmse": 0.01081069119306231,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.18324828636832535,
+        "teacher_variance": 0.18142619154929585
+      },
+      {
+        "depth": 6,
+        "mean_nmse": 0.023849150939308374,
+        "median_nmse": 0.018708932314726232,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.14156658574938774,
+        "teacher_variance": 0.13878991940270186
+      },
+      {
+        "depth": 8,
+        "mean_nmse": 0.03865323068366201,
+        "median_nmse": 0.03425918185054555,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.11888596054632217,
+        "teacher_variance": 0.11490179117296984
+      }
+    ],
+    "depth8_over_depth3_median_nmse": 4.39111064361015,
+    "teacher_saturated_at_8": false,
+    "learned_more_saturated_than_teacher": false,
+    "pass": true,
+    "pass_if_teacher_stable": true,
+    "pass_ratio_threshold": 5.0,
+    "world": 0,
+    "artifact": "artifacts\\checkpoints_development\\world_0\\continuous"
+  },
+  {
+    "slot_match": {
+      "0": 4,
+      "1": 2,
+      "2": 3,
+      "3": 0,
+      "4": 6,
+      "5": 1
+    },
+    "depths": [
+      {
+        "depth": 1,
+        "mean_nmse": 0.0016887454025493326,
+        "median_nmse": 0.001417427705580259,
+        "learned_saturation": 0.07192230224609375,
+        "teacher_saturation": 0.07080459594726562,
+        "learned_variance": 0.39805040415376425,
+        "teacher_variance": 0.3960626763532712
+      },
+      {
+        "depth": 2,
+        "mean_nmse": 0.004468803458265955,
+        "median_nmse": 0.004334051414168044,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.2816901677288115,
+        "teacher_variance": 0.278240296022013
+      },
+      {
+        "depth": 3,
+        "mean_nmse": 0.007036273385200598,
+        "median_nmse": 0.006192891522083839,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.2256947096902877,
+        "teacher_variance": 0.2209895220634528
+      },
+      {
+        "depth": 4,
+        "mean_nmse": 0.010589214631069918,
+        "median_nmse": 0.00886827270842364,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.18820866663008928,
+        "teacher_variance": 0.18348507114537016
+      },
+      {
+        "depth": 6,
+        "mean_nmse": 0.019117062958470064,
+        "median_nmse": 0.01680500974950073,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.1482945396564901,
+        "teacher_variance": 0.14243490306460838
+      },
+      {
+        "depth": 8,
+        "mean_nmse": 0.03208974739976338,
+        "median_nmse": 0.026376323150663135,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.1252715609734878,
+        "teacher_variance": 0.1184577520998477
+      }
+    ],
+    "depth8_over_depth3_median_nmse": 4.259128882946717,
+    "teacher_saturated_at_8": false,
+    "learned_more_saturated_than_teacher": false,
+    "pass": true,
+    "pass_if_teacher_stable": true,
+    "pass_ratio_threshold": 5.0,
+    "world": 1,
+    "artifact": "artifacts\\checkpoints_development\\world_1\\continuous"
+  },
+  {
+    "slot_match": {
+      "0": 0,
+      "1": 5,
+      "2": 1,
+      "3": 3,
+      "4": 4,
+      "5": 7
+    },
+    "depths": [
+      {
+        "depth": 1,
+        "mean_nmse": 0.0017661148917573074,
+        "median_nmse": 0.0015595352298566263,
+        "learned_saturation": 0.06444549560546875,
+        "teacher_saturation": 0.06371688842773438,
+        "learned_variance": 0.39034675480797887,
+        "teacher_variance": 0.3888527767438531
+      },
+      {
+        "depth": 2,
+        "mean_nmse": 0.004297586206773383,
+        "median_nmse": 0.004074977730002668,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.276571458671242,
+        "teacher_variance": 0.2738661366945173
+      },
+      {
+        "depth": 3,
+        "mean_nmse": 0.007494702078234343,
+        "median_nmse": 0.007290836994748395,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.21935573779046535,
+        "teacher_variance": 0.21597840374396704
+      },
+      {
+        "depth": 4,
+        "mean_nmse": 0.011237870329072365,
+        "median_nmse": 0.010436968310962948,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.183144313050434,
+        "teacher_variance": 0.17945155174701782
+      },
+      {
+        "depth": 6,
+        "mean_nmse": 0.020054879339898676,
+        "median_nmse": 0.01934302921374001,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.14285357692278922,
+        "teacher_variance": 0.13806675303811192
+      },
+      {
+        "depth": 8,
+        "mean_nmse": 0.033769008375553106,
+        "median_nmse": 0.02982082962643307,
+        "learned_saturation": 0.0,
+        "teacher_saturation": 0.0,
+        "learned_variance": 0.11904796317685395,
+        "teacher_variance": 0.11312908134518453
+      }
+    ],
+    "depth8_over_depth3_median_nmse": 4.0901791725577015,
+    "teacher_saturated_at_8": false,
+    "learned_more_saturated_than_teacher": false,
+    "pass": true,
+    "pass_if_teacher_stable": true,
+    "pass_ratio_threshold": 5.0,
+    "world": 2,
+    "artifact": "artifacts\\checkpoints_development\\world_2\\continuous"
+  }
+]
