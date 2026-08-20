@@ -2387,3 +2387,27 @@ acquisition an exactly-determined linear solve that hits machine
 precision at support 8. The 1-vs-8 win is a lower bound on the schema's
 advantage; the sub-1.0 failures are measured against a baseline no real
 learner attains.
+
+# 2026-08-20 — H27: gap confirmed, mechanism falsified; H29 blocked on provenance
+
+`src/row/experiments/audit_coding_geometry.py`, report
+`reports/v5_coding_geometry.json`. 16 artifacts, matched participant
+count.
+
+    mean D* gap (private - shared)        +0.253 bits/scalar
+    mean spectral gap (private - shared)  -0.157
+    rank correlation of the gaps          -0.009  (registered |r| >= 0.5)
+
+H27 FAILS both halves. Shared abstractions have HIGHER sigma_2/sigma_1
+(~0.70 vs ~0.54), so they use more of their functional dimension, not
+less — the opposite of the registered direction — and the two gaps are
+uncorrelated. Effective-dimensionality reduction is eliminated as the
+mechanism. The D* gap's SIGN survives, reproducing V5.0's direction, so
+noise purification, the selection effect, and restructuring remain live.
+
+H29 is blocked, and not by compute: a finished artifact holds P_2 and
+the surviving private residuals but not P_0, the residuals as they stood
+at the promoting sleep. Nothing checkpoints them. Same class of defect
+as the missing `task_reference` table that once voided a coding audit;
+the fix is to record the consumed member residuals in the sleep path.
+No approximation substituted.

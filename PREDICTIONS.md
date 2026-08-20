@@ -2032,3 +2032,55 @@ TWO CAVEATS, recorded with the result:
    where the floor lies is precisely what this project forbids. The
    honest follow-up is a schema+leftover arm at matched bits, which is
    registered as the H20a ladder and not yet run prospectively.
+
+## H27 VERDICT: the D* gap is real, the spectral mechanism is FALSIFIED
+
+16 frozen artifacts, shared abstractions against an equally sized
+sample of private residuals, matched participant count.
+
+    mean D* gap (private - shared)     +0.253 bits/scalar
+    mean spectral gap (private - shared)  -0.157
+    rank correlation of the two gaps      -0.009   (registered |r| >= 0.5)
+
+Both halves of the registered prediction fail, and they fail in
+different ways:
+
+1. DIRECTION. H27 predicted promoted abstractions would have LOWER
+   effective functional rank — faster spectral decay — than private
+   residuals. Observed the OPPOSITE: shared objects run at
+   sigma_2/sigma_1 ~ 0.70 against ~0.54 for private ones. A shared
+   abstraction uses MORE of its available functional dimension, not
+   less. "Effective-dimensionality reduction" is out as the mechanism.
+2. RELATIONSHIP. The registered link between the two gaps is absent:
+   rank correlation -0.009 against a required |r| >= 0.5. Whatever
+   makes shared scalars cheaper, it is not tracked by how many
+   functional directions the object uses.
+
+WHAT SURVIVES. The sign of the D* gap itself: private residuals cost
+more per scalar than shared abstractions, reproducing the direction of
+V5.0's 5.0-vs-3.9 headline on a different probe and budget (the
+magnitude here is smaller, +0.25, and the two are not directly
+comparable). So the phenomenon is real and one of its four candidate
+explanations is now eliminated. Noise purification, the PROMOTE
+selection effect, and representation restructuring remain live, and
+they are exactly the three H29 was designed to separate.
+
+This is the third time in this project a registered prediction has
+failed while the phenomenon behind it survived (H5b, H19(a), now H27).
+The pattern is worth naming: a mechanism guess attached to a real
+measurement is the cheapest thing to get wrong and the most useful
+thing to have registered.
+
+## H29 BLOCKED by a provenance gap, not by cost
+
+The P_0 / P_1 / P_2 decomposition needs the same cluster at three
+moments. A finished lifecycle artifact holds P_2 (the trained shared
+abstraction) and the surviving private residuals, but NOT P_0 — the
+residuals as they stood at the sleep that promoted them. Nothing
+checkpoints them there.
+
+This is the same class of defect as the missing `task_reference` table
+that once voided a coding audit and forced a 30-world re-run. Fixing it
+is a one-field change to the promoting learner's sleep path: record the
+member residuals it consumed. H29 is not attempted until then, and no
+approximation is substituted.
