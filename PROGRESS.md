@@ -2313,3 +2313,26 @@ Scope: exogenous atoms by design (D16), so this says nothing about
 whether PROMOTE reaches the region. H20b is the separate experiment and
 its outcome 3 — the learner collapsing meta-structure into fewer atoms
 instead of forming a schema — is still live.
+
+# 2026-08-20 — H20b first reading: the library does not track F
+
+Meta world wired into `mixed_lifetime` (`--r-meta`, `--meta-families`,
+`--meta-tasks-per-family`, `--meta-subspace-rank`), provenance recorded
+in `rho_profile.json`. Cheap-first slice, F=4, N=72, worlds 0-2:
+
+    r_meta = 0.0   realized M = 5, 6, 7   mean 6.0
+    r_meta = 1.0   realized M = 7, 9, 5   mean 7.0
+
+PROMOTE produces 1.5-1.75x more abstractions than there are families,
+and the count does not fall as relatedness rises. Outcome 3 (collapse)
+does not occur; outcomes 1 and 2 assumed M ~ F and that premise fails.
+The F knob controls task structure, not realized library size, at this
+operating point. n = 3, spread 5-9: a direction, not an estimate.
+
+H20b's G2 is deliberately NOT run. A learned abstraction is a flat
+198-vector of (u, v, b), so schema-fitting it is parameter-space
+fitting — the gauge-sensitive move the spec forbids. H20a escaped this
+because the teacher's operators share hidden features by construction.
+A correct G2 needs functional-effect accounting at matched budget;
+building it in a hurry is how V4.2 produced a sharing claim that passed
+at full precision and failed at equal bits.

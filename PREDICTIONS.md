@@ -1899,3 +1899,48 @@ are exogenous atoms by design (D16). H20b is the separate experiment,
 and outcome 3 there — the learner collapsing meta-structure into fewer
 atoms rather than forming a schema — remains a live and interesting
 possibility.
+
+## H20b first reading: PROMOTE does not deliver M ~ F (2026-08-20)
+
+Cheap-first slice, F=4, m=16, K=2, N=72, worlds 0-2, learned library,
+sleeps 16/24/32/48/64.
+
+    r_meta = 0.0    realized M = 5, 6, 7   mean 6.0
+    r_meta = 1.0    realized M = 7, 9, 5   mean 7.0
+
+Against the three registered outcomes, this is none of them cleanly.
+Outcome 3 (the learner collapsing meta-structure into fewer atoms) does
+NOT occur: M does not fall as relatedness rises, it is flat to slightly
+higher. Nor is it outcome 1 or 2 as stated, because those assume the
+learner "produces ~F atoms" and it produces MORE — 1.5 to 1.75x F.
+
+So the premise carried over from review 44, that F explicit recurring
+families make PROMOTE yield M ~ F, is NOT satisfied at this operating
+point. The learner fragments each family across several abstractions.
+n = 3 worlds and the spread is wide (5 to 9), so this is a direction,
+not an estimate.
+
+CONSEQUENCE FOR G2, recorded before the accounting is built: a schema
+fitted over the LEARNED library would be fitting over fragments of
+families rather than over one object per family. That is not a reason
+to skip H20b — it may be the most interesting thing about it — but it
+does mean H20b's G2 is not the same measurement as H20a's, and the two
+must not be reported as one number.
+
+## Why H20b's G2 is not yet run, stated rather than left implicit
+
+A learned abstraction is a flat 198-vector of (u, v, b) over three
+steps. Fitting a schema to those vectors is parameter-space fitting,
+which is exactly the gauge-sensitive move this project forbids: two
+abstractions computing the same function can have unrelated parameter
+vectors, and a schema that "captures" them may be capturing coordinates.
+H20a avoided this because the teacher's family operators share hidden
+features by construction, so a mixture of U matrices IS a mixture of
+functions. The learned atoms have no such shared frame.
+
+A correct H20b G2 therefore needs a functional accounting: fit the
+schema on probe-set effects, and charge bits for what must be stored to
+reproduce those effects to the matched budget. That is a real piece of
+design, and V4.2 is the standing lesson about what happens when a
+sharing claim is scored with the convenient accounting instead of the
+matched-budget one.
