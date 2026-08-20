@@ -2221,3 +2221,23 @@ outside [0.7, 1.3]. Every input above was measured on runs that contain
 no crossing, and no Stage-2 cell shares a run with Stage 1.
 
 240 cells. Report: `reports/v5_sealed_c1_stage2_grid.json`.
+
+## Sealed C1, first crossing (g=0.5), scored 2026-08-20
+
+Grid committed before the batch ran; predictor from Stage 1's separate
+fixed-window runs. 80 cells, 0 failures, all 10 worlds contributing at
+every horizon.
+
+| H_R | n | C_reacquire | V_retain |
+| --- | --- | --- | --- |
+| 36 | 10 |   941 | -157 |
+| 40 | 10 | 1,042 |  -56 |
+| 42 | 10 | 1,081 |  -17 |
+| 46 | 10 | 1,204 | +106 |
+
+    observed H* 42.5   predicted 41.3   error 3.0%   chi 1.031
+
+Monotone in H_R with a single sign change. Inside the registered
+[0.7, 1.3] and inside the tighter 15%. One of three C1 points; the
+verdict waits on g=1.0 (predicted 19.1) and g=1.5 (predicted 13.0),
+which are queued.

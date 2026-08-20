@@ -2411,3 +2411,26 @@ at the promoting sleep. Nothing checkpoints them. Same class of defect
 as the missing `task_reference` table that once voided a coding audit;
 the fix is to record the consumed member residuals in the sleep path.
 No approximation substituted.
+
+# 2026-08-20 — sealed C1: stage 1 replicates, first crossing lands at 3.0%
+
+Sealed Stage 1 (seeds 600-609, fixed window N=72, 60 cells, 0 failures):
+s_bar 26.6 / 57.3 / 84.3 at g = 0.5 / 1.0 / 1.5, against development's
+28.9 / 58.1 / 85.2 — within 8% at every gain, with the abstraction
+checksum identical in 10/10 cells. The S0 intervention itself
+replicates on untouched seeds.
+
+Stage-2 grids derived by the frozen deterministic rule and committed
+before any Stage-2 cell ran:
+
+    g=0.5  H_hat* 41.3  N 76, 80, 82, 86
+    g=1.0  H_hat* 19.1  N 54, 58, 60, 64
+    g=1.5  H_hat* 13.0  N 48, 52, 54, 58
+
+First batch complete (80/80, 0 failures). g=0.5 observed crossing 42.5
+against predicted 41.3 — 3.0% error, chi 1.031, V_retain monotone with a
+single sign change (-157, -56, -17, +106). Inside the registered
+[0.7, 1.3] and the tighter 15%.
+
+g=1.0 and g=1.5 are running; the C1 verdict and the full chi collapse
+wait on them. Configs v5_h80 and v5_h86 added for the g=0.5 grid.
