@@ -53,19 +53,28 @@ def log(message: str) -> None:
         handle.write(f"{time.strftime('%H:%M:%S')} {message}\n")
 
 
-def cell_root(gain: float, slots: int, total: int, arm: str) -> Path:
-    tag = f"g{int(round(gain * 100)):03d}_s{slots}_N{total}_{arm}"
-    return ROOT / "artifacts" / "v5_s0" / tag
+def cell_root(gain: float, slots: int, total: int, arm: str,
+              rank: int = 2, root: str = "v5_s0") -> Path:
+    prefix = "" if rank == 2 else f"r{rank}_"
+    tag = f"{prefix}g{int(round(gain * 100)):03d}_s{slots}_N{total}_{arm}"
+    return ROOT / "artifacts" / root / tag
 
 
-def run_cell(job: tuple[float, int, int, str, int]) -> str:
-    gain, slots, total, arm, world = job
-    out = cell_root(gain, slots, total, arm) / f"world_{world}" / "lifecycle"
+def config_for(rank: int, total: int) -> str:
+    """Rank 2 is the default config family; 1 and 4 have their own."""
+
+    return (f"configs/v5_h{total}.yaml" if rank == 2
+            else f"configs/v5_r{rank}_h{total}.yaml")
+
+
+def run_cell(job: tuple[float, int, int, str, int, int]) -> str:
+    gain, slots, total, arm, world, rank = job
+    out = cell_root(gain, slots, total, arm, rank) / f"world_{world}" / "lifecycle"
     if (out / "summary.json").exists():
         return f"skip {out}"
     command = [
         sys.executable, "-m", "row.experiments.mixed_lifetime",
-        "--config", f"configs/v5_h{total}.yaml",
+        "--config", config_for(rank, total),
         "--model", "lifecycle",
         "--world-seed", str(world),
         "--task-group-eta", ETA, "--task-groups", "1",
@@ -98,20 +107,23 @@ def main() -> None:
     parser.add_argument("--slots", type=int, nargs="+", default=[12],
                         help="12 pairs with the scored D-arm; 6 is the registered constant")
     parser.add_argument("--worlds", type=int, nargs="+", default=list(range(500, 510)))
+    parser.add_argument("--rank", type=int, default=2,
+                        help="residual rank; selects the config family")
     parser.add_argument("--jobs", type=int, default=5,
                         help="memory, not cores, is the binding constraint here")
     args = parser.parse_args()
 
     jobs = [
-        (gain, slots, total, arm, world)
+        (gain, slots, total, arm, world, args.rank)
         for gain in args.gains
         for slots in args.slots
         for total in args.totals
         for arm in ("retained", "deleted")
         for world in args.worlds
     ]
-    log(f"START {len(jobs)} cells gains={args.gains} slots={args.slots} "
-        f"totals={args.totals} jobs={args.jobs}")
+    log(f"START {len(jobs)} cells rank={args.rank} gains={args.gains} "
+        f"slots={args.slots} totals={args.totals} worlds={args.worlds[0]}.."
+        f"{args.worlds[-1]} jobs={args.jobs}")
     print(f"{len(jobs)} cells, {args.jobs} at a time")
     done = failed = skipped = 0
     with ProcessPoolExecutor(max_workers=args.jobs) as pool:

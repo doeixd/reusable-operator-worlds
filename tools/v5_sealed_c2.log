@@ -1,0 +1,26 @@
+H20a SCHEMA ECONOMICS — exogenous atoms, frozen schema, matched budget
+  F=12  M_0=4  K=2  probe=256  distortion=0.0001
+
+   r_meta     D*(S)  private/atom    member     s_bar   M* pred   M* obs
+     0.00       826           492       528       -35       inf     none
+     0.50       813           491       501       -10       inf     none
+     0.70       809           490       470        20       inf     none
+     0.90       798           489       396        94      20.2      7.1
+     0.95       794           489       347       143       6.5      5.6
+     1.00       797           489        16       472       1.7      2.0
+
+  H25 — does the frozen-schema prediction hold?
+    r_meta=0.00: no crossing within 8 unseen members (predicted inf) — consistent
+    r_meta=0.50: no crossing within 8 unseen members (predicted inf) — consistent
+    r_meta=0.70: no crossing within 8 unseen members (predicted inf) — consistent
+    r_meta=0.90: observed 7.1 vs predicted 20.2, error 65.1% MISS (registered 15%)  [14/30 worlds]
+    r_meta=0.95: observed 5.6 vs predicted 6.5, error 13.6% PASS  [26/30 worlds]
+    r_meta=1.00: observed 2.0 vs predicted 1.7, error 18.5% MISS (registered 15%)  [30/30 worlds]
+
+  G2 — does FACTORIZE beat matched-budget COMPRESS at all?
+    r_meta=0.00: 528 bits/member vs 492 private  COMPRESS cheaper
+    r_meta=0.50: 501 bits/member vs 491 private  COMPRESS cheaper
+    r_meta=0.70: 470 bits/member vs 490 private  FACTORIZE cheaper
+    r_meta=0.90: 396 bits/member vs 489 private  FACTORIZE cheaper
+    r_meta=0.95: 347 bits/member vs 489 private  FACTORIZE cheaper
+    r_meta=1.00: 16 bits/member vs 489 private  FACTORIZE cheaper

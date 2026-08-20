@@ -2084,3 +2084,64 @@ that once voided a coding audit and forced a 30-world re-run. Fixing it
 is a one-field change to the promoting learner's sleep path: record the
 member residuals it consumed. H29 is not attempted until then, and no
 approximation is substituted.
+
+# SEALED BLOCK, C2 (schema crossing) — seeds 600-629 opened 2026-08-20
+
+Scored against `V5_CONFIRMATION_PLAN.md`, frozen at 1ed227d and hashed
+into `tools/check_prereg.py` before these worlds were generated.
+
+| r_meta | predicted M* | worlds with a crossing | within 15% | observed == ceil(pred) |
+| --- | --- | --- | --- | --- |
+| 0.00 | inf | 0/30 | — | — |
+| 0.50 | inf | 0/30 | — | — |
+| 0.70 | inf | 0/30 | — | — |
+| 0.90 | 20.2 | 14/30 | 11 | 10 |
+| 0.95 |  6.5 | 26/30 | 19 | 20 |
+| 1.00 |  1.7 | 30/30 | 13 | **30** |
+
+## Verdicts
+
+MONOTONE M*(r_meta): PASS. inf, inf, inf, 20.2, 6.5, 1.7.
+
+r_meta = 0 NEVER PAYS: PASS. Negative per-member saving in every world;
+the V4R negative reproduced as the low-relatedness limit of a knob.
+
+r_meta = 1.0 UNDER THE REGISTERED CEIL CRITERION: PASS, 30/30. The plan
+excluded this point from the 15% test in advance, because integer M
+cannot resolve 15% at a predicted 1.7, and specified
+`observed == ceil(predicted)` instead. It is exact in every world.
+
+r_meta in {0.90, 0.95} AT 15%: **AMBIGUOUS AS REGISTERED, and reported
+as such.** The plan says "within 15% ... in >= 4 of 6 sealed cells" and
+does not say what the denominator is when a world produces no
+observable crossing:
+
+    of worlds that CROSSED     r=0.90  11/14 = 79%   r=0.95  19/26 = 73%
+    of ALL worlds              r=0.90  11/30 = 37%   r=0.95  19/30 = 63%
+
+On the first denominator both clear 4/6 = 67% and C2 passes. On the
+second both fall short and C2 fails. I will not pick the flattering
+reading of my own plan after seeing the numbers, so C2's 15% clause is
+recorded as UNRESOLVED, with both figures reported and the cause named:
+
+REACHABILITY, not a mechanism failure. At F = 12 with a calibration set
+of 4 there are only 8 unseen members, so any world whose M* exceeds 8
+cannot show a crossing however well the law holds. Sealed r=0.90
+predicted M* = 20.2 on average — well past 8 — which is why 16 of 30
+worlds are silent there rather than wrong. Development did not hit this
+because its r=0.90 predicted 8.0, right at the edge.
+
+REGISTERED FOR ANY REPLICATION, not applied retroactively: the
+denominator must be stated with the threshold, and F must satisfy
+F - M_0 > M* at the r_meta being tested. The clean rerun is F = 32 at
+r_meta 0.90, which is a generator change and a new fingerprint.
+
+## What C2 establishes despite the unresolved clause
+
+The three unambiguous predictions all pass — monotonicity, the r=0
+negative, and the ceil criterion at r=1.0 in 30/30 worlds. Where a
+crossing was observable at all, roughly three quarters of worlds landed
+within 15% of a prediction made from a frozen schema before the members
+were counted. The recursive form
+`M* = D*(S) / s_bar_schema` survives its first out-of-sample test; the
+part that failed is my specification of how to count it.
