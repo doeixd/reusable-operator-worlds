@@ -1803,3 +1803,38 @@ Provenance fixed at the source: every promoting artifact now writes a
 `reference_table` summary field. Verified non-vacuously (56 promoted
 tasks, 4 abstractions on a real run); 115 tests pass. Summary field
 only, so no frozen model behaviour and no fingerprint change.
+
+# V4R SEALED BLOCK OPENED AND SCORED (seeds 400-429, 2026-08-19)
+
+`V4R_CONFIRMATION_PLAN.md` frozen at commit 2aec65c and hashed into
+`tools/check_prereg.py`; `python tools/check_prereg.py` verifies the
+trail (6 frozen files unchanged). Thresholds were transcribed into
+`score_v4r_sealed.py` before any sealed world existed. Seeds 400-429
+were untouched until the hash was registered.
+
+This is the project's first PREREGISTERED NEGATIVE: the registered
+prediction was that no structural edit pays.
+
+    O1 count     COMPRESS wins 30/30           (need >= 27)      PASS
+    O1 interval  mean margin 1,362 nats        (need 1k-4k)      PASS
+    O2           FACTORIZE wins at M <= 16: 0  (need 0)          PASS
+    O3           FORK pays in 2/30 worlds      (need <= 2)       PASS
+
+    Library sizes: min 3, max 9, mean 5.5.
+    FORK: 126 abstraction-cells evaluated, 2 paying.
+
+4/4 registered census criteria met. The V4R development negative
+REPLICATES out of sample: in the canonical ROW regime, at every scale
+this benchmark can reach, the best available refactoring is local
+private compression, not lifecycle restructuring.
+
+O3 deserves a note rather than a clean tick. FORK pays in exactly 2/30
+worlds against an allowance of <= 2 -- it passes at the boundary, not
+comfortably, where development had 0/33. The registered threshold held,
+but a replication would be prudent before the claim is stated as "FORK
+never pays"; the defensible statement is "FORK pays rarely and the rate
+is within the preregistered bound".
+
+O4 (the retention amortization law) is NOT scored here. It needs the
+horizon sweep protocol at 6 horizons x 2 arms x 30 worlds, which is a
+separate run; the census cells stand on their own.
