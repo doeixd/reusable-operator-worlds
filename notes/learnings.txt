@@ -2417,3 +2417,108 @@ confidence. If error explodes, the first research question becomes "how do we
 make neural operators compose reliably" — itself a publishable result and a
 prerequisite for everything downstream. The single highest-leverage thing to do
 now is test whether the foundation holds, not start building on it.
+
+
+================================================================================
+V5.0 AND V5.1 RESULTS, AND REVIEWS 44-45 (2026-08-20)
+================================================================================
+
+The V5 plan was logged here at lines ~1669-1693 before the runs. The results
+were not; this section closes that gap and records what reviews 44 and 45
+changed about V5.2.
+
+V5.0 — COMPONENT RATE-DISTORTION FRONTIER (ran). Per-component D*(R), each
+component scored ONLY over the computations that depend on it, with an explicit
+non-vacuity assertion (a component costing nothing at 1 bit was never exercised;
+that vacuous cell was produced once during the V4R audit). Headline: shared
+abstractions need ~3.9 bits/scalar against ~5.0 for private residuals. The
+8-bit retention proxy used from V1 through V4 overstates description length
+several-fold, so absolute two-part figures in those blocks are inflated by
+roughly that factor — paired comparisons are unaffected. Separately, promotion's
+description saving GREW under frontier optimization rather than shrinking
+(62.6% at fixed 8-bit to 68.7% at the frontier, larger in 30/30 V3-sealed
+worlds), which is why O1 (COMPRESS dominates FACTORIZE) and "promotion's saving
+survives compression" are not in tension: local requantization harvests
+numerical slack, promotion changes the representation class.
+
+V5.1 — CAUSAL TEST OF THE AMORTIZATION LAW (ran; 200 lifetimes, 10 worlds per
+cell, 0 excluded). Registered prediction H_R* ∝ D(A), manipulated at the
+generator through residual rank:
+
+    rank 1   D(A)=99    carry=549     s̄=36.8   crossing 15.2   predicted 14.9
+    rank 2   D(A)=198   carry=1,098   s̄=61.0   crossing 18.0   predicted 18.0
+    rank 4   D(A)=396   carry=2,196   s̄=68.3   crossing 32.4   predicted 32.2
+
+PROPORTIONALITY FALSIFIED: D ratio 4.00 against an observed crossing ratio 2.13,
+46.8% error. THE LAW CONFIRMED, and these are different statements — at each
+rank carry and s̄ are measured independently and the crossing lands within 2% of
+carry/s̄, across three regimes it was not fitted to. So it is not the accounting
+identity the single-point V4R confirmation could not rule out. Cause of the
+failure: s̄ co-varies with D(A) (36.8 → 61.0 → 68.3), because residual rank sets
+an abstraction's cost and its expressive capacity together. Dividing that out
+closes the arithmetic (4.00/1.86 = 2.15 vs 2.13 observed). Second time in this
+project a registered prediction failed while its mechanism survived (cf. H5b).
+
+The governing form is therefore H* = λ D*(A) / s̄(D), NOT H* ∝ D(A). The general
+rule this yields — now in AGENTS.md — is that any manipulation of a structural
+property must report separately what it did to COST and what it did to UTILITY
+before its crossing is read.
+
+REVIEW 44 (response to V5.1). Three things it changed:
+
+1. The padding follow-up is WITHDRAWN, not pending. Under the rate-distortion
+   currency V5.0 established, D*(A + dead bits) = D*(A); charging for dead bits
+   tests an artificial storage tax rather than abstraction economics. The V5.1
+   note proposing padding as the clean proportionality intervention is
+   superseded.
+
+2. V5.2 becomes RECURSIVE AMORTIZATION — does the same law govern the birth of
+   abstractions over abstractions? With A_i = S(α_i) + ε_i, C_schema = D*(S) +
+   Σ[D(α_i) + D*(ε_i)], the theory predicts FACTORIZE ⟺ M·s̄_schema > D*(S),
+   hence M* = D*(S)/s̄_schema. Same transition at two levels: uses→abstraction,
+   abstractions→schema. Registered as H25 before the generator exists.
+
+3. The open design question V5.1 raised gets a concrete answer. The
+   meta-recurrence knob must vary how RELATED abstractions are without varying
+   what each one costs or is worth. Generator, in functional space because of
+   gauge freedom: θ_i(ρ) = √ρ·Bα_i + √(1−ρ)·B_iβ_i, with B a common subspace,
+   B_i independent private subspaces of identical dimensionality, α_i/β_i from
+   one distribution, total norm held constant — E|θ_i|² flat in ρ while the
+   fraction of each abstraction lying in a common family rises. BALANCE GATES
+   frozen at ±10% (per-abstraction D*, s̄, behavioral contribution, promotion
+   rate) are a PRECONDITION on scoring: a sweep failing any gate is
+   unscoreable, not weak evidence. Registered with H26 (dM*/dρ < 0).
+
+Also from review 44, and the reason L=4 was a dead end: task-space capacity is
+not realized library size. The direct knob is F explicit recurring innovation
+families with m tasks each, N = Fm, holding m fixed while sweeping
+F ∈ {4,8,16,32,64} so PROMOTE realizes M ≈ F. Do not raise composition depth
+again.
+
+Gate order for V5.2, inherited from V4's most expensive lesson (no operator
+before the opportunity is proven): (1) opportunity against componentwise
+rate-distortion-optimal private compression; (2) leave-one-out structure — fit S
+on A_1..A_{M−1} and represent unseen A_M by α_M alone, else the schema is
+retrospective compression rather than reusable structure; (3) prospective value
+— a new family member cheaper in prequential cost, sample count, AND retained
+bits; (4) discovery, last.
+
+OPEN QUESTION raised by V5.0 and elevated by review 44: shared scalars are not
+merely stored fewer times, they are individually cheaper (3.9 vs 5.0). Four
+candidate mechanisms — noise purification (promotion averages away task-specific
+variation), effective-dimensionality reduction, a PROMOTE selection effect
+(preferentially promoting naturally compressible computations), and
+representation restructuring (sharing causes SGD to encode in a lower-rate
+geometry). The last would mean abstraction does not merely reduce duplication;
+it changes the coding geometry of information. Cheap audit: compare effective
+rank, singular-value spectrum, perturbation sensitivity, functional Jacobian
+spectrum, quantization-error curve, and scalar entropy between private residuals
+and promoted abstractions, matched on participant count so a selection effect
+can be distinguished. Registered as H27.
+
+REVIEW 45 — no new content. Lines 1-520 restate review 42 (commuting diagrams
+with an adapter complexity budget, promotion as categorical factorization
+R_i ≈ d_i∘A∘e_i, compositions becoming primitives, learned types, monoidal
+structure, tiny-transformer scaling test, the neural "compiler pass"); lines
+521-1366 are a verbatim re-paste of review 43 (V5.1-V5.5, V6.1-V6.5). Indexed
+for provenance only.
