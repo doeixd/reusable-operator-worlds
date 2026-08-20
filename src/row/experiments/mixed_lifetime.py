@@ -120,6 +120,16 @@ def main() -> None:
         help="the dormant regime never returns (the DELETE arm)",
     )
     parser.add_argument(
+        "--return-gain",
+        type=float,
+        default=1.0,
+        help=(
+            "V5 H19 s-arm (B1): scale the family primitive's contribution on "
+            "RETURNING tasks only. Moves s_bar while leaving the promoted "
+            "abstraction untouched. 1.0 reproduces the pre-B1 world exactly."
+        ),
+    )
+    parser.add_argument(
         "--updates-per-example",
         type=int,
         default=None,
@@ -215,6 +225,7 @@ def main() -> None:
             new_primitive_families=args.new_primitive_families,
             dormancy=tuple(args.dormancy) if args.dormancy else None,
             dormancy_returns=not args.dormancy_permanent,
+            return_gain=args.return_gain,
         )
         if args.task_group_eta is not None
         else None

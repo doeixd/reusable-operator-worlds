@@ -47,6 +47,7 @@ class TaskGroupSpec:
         new_primitive_families: bool = False,
         dormancy: tuple[int, int] | None = None,
         dormancy_returns: bool = True,
+        return_gain: float = 1.0,
     ) -> None:
         if groups < 1:
             raise ValueError("groups must be positive")
@@ -100,6 +101,39 @@ class TaskGroupSpec:
                 raise ValueError("dormancy must be a (start, end) with start < end")
         self.dormancy = dormancy
         self.dormancy_returns = bool(dormancy_returns)
+        # V5 H19 s-arm (B1, "return-value gain"). Scales the family
+        # primitive's CONTRIBUTION on returning tasks only, leaving the
+        # abstraction itself untouched. This is the one intervention in
+        # this substrate that moves `s_bar` without moving `D(A)`:
+        # residual rank moves both (V5.1 falsified the proportional form
+        # for exactly that reason), and padding is excluded because
+        # `D*(A + dead bits) = D*(A)`.
+        #
+        # It applies strictly AFTER the dormancy gap closes, so nothing
+        # before the gap differs and the abstraction that was born
+        # pre-gap is bit-identical across the sweep. Promoted
+        # abstractions carry `requires_grad=False`, so post-gap training
+        # cannot move them either; the scorer asserts both.
+        if return_gain <= 0.0:
+            raise ValueError("return_gain must be positive")
+        if return_gain != 1.0 and (dormancy is None or not dormancy_returns):
+            raise ValueError(
+                "return_gain applies to RETURNING tasks; it needs a dormancy "
+                "gap that closes (dormancy set and dormancy_returns True)"
+            )
+        self.return_gain = float(return_gain)
+
+    def family_gain(self, task_index: int) -> float:
+        """Contribution multiplier for the family primitive at this task.
+
+        1.0 everywhere unless a return gain is configured, and then only
+        for tasks after the gap closes. `return_gain = 1.0` must leave
+        every generated array bit-identical to the pre-B1 world.
+        """
+
+        if self.return_gain == 1.0 or self.dormancy is None:
+            return 1.0
+        return self.return_gain if task_index >= self.dormancy[1] else 1.0
 
     def family_active(self, task_index: int) -> bool:
         """Is the family primitive in play for this task?"""
@@ -126,6 +160,7 @@ class TaskGroupSpec:
             "new_primitive_families": self.new_primitive_families,
             "dormancy": list(self.dormancy) if self.dormancy else None,
             "dormancy_returns": self.dormancy_returns,
+            "return_gain": self.return_gain,
         }
 
 
@@ -271,7 +306,20 @@ def generate_task_group_world(
             resampled or spec.family_active(task_index)
         ):
             group = assignment[task_index]
-            task_library = (*task_library, family_primitives[group])
+            family_primitive = family_primitives[group]
+            gain = spec.family_gain(task_index)
+            if gain != 1.0:
+                # Scale ONLY this primitive's contribution. `alpha` is the
+                # residual scale in `Primitive.__call__`, so multiplying it
+                # changes what the family is worth to a returning task and
+                # nothing else: U, V and b are untouched, every other
+                # primitive is untouched, and both x streams are drawn from
+                # the same seeds. No spectral renormalization here — that
+                # would undo the very thing being manipulated.
+                family_primitive = replace(
+                    family_primitive, alpha=family_primitive.alpha * gain
+                )
+            task_library = (*task_library, family_primitive)
             # One step calls the family's new primitive, at a FIXED
             # position. Varying the position per task was tried first and
             # measured: families were still perfectly recoverable from

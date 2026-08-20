@@ -188,3 +188,108 @@ class DormancyWorldTest(unittest.TestCase):
     def test_dormancy_bounds_are_validated(self) -> None:
         with self.assertRaises(ValueError):
             TaskGroupSpec(eta=0.9, dormancy=(12, 8))
+
+
+class ReturnValueGainTest(unittest.TestCase):
+    """V5 H19 s-arm (B1): move s_bar without moving the abstraction."""
+
+    def _world(self, gain: float):
+        spec = TaskGroupSpec(
+            groups=2,
+            eta=0.9,
+            future_tasks=0,
+            family_onset=4,
+            new_primitive_families=True,
+            dormancy=(8, 12),
+            dormancy_returns=True,
+            return_gain=gain,
+        )
+        return generate_task_group_world(_config(), CANONICAL_PROFILE, spec)
+
+    def test_unit_gain_is_bit_exact(self) -> None:
+        # The whole arm rests on this: g = 1.0 must reproduce every
+        # existing artifact exactly, or the s-arm silently invalidates
+        # the D-arm it is compared against.
+        baseline = generate_task_group_world(
+            _config(),
+            CANONICAL_PROFILE,
+            TaskGroupSpec(
+                groups=2,
+                eta=0.9,
+                future_tasks=0,
+                family_onset=4,
+                new_primitive_families=True,
+                dormancy=(8, 12),
+                dormancy_returns=True,
+            ),
+        )
+        gained = self._world(1.0)
+        for index in range(len(baseline.tasks)):
+            for field in ("train_x", "train_y", "eval_x", "eval_y"):
+                self.assertTrue(
+                    np.array_equal(
+                        getattr(baseline.tasks[index], field),
+                        getattr(gained.tasks[index], field),
+                    ),
+                    f"task {index} {field} moved at unit gain",
+                )
+
+    def test_the_gain_touches_returning_tasks_only(self) -> None:
+        plain, loud = self._world(1.0), self._world(1.5)
+        # Everything up to the moment the gap closes is identical, so the
+        # abstraction's birth cannot depend on g.
+        for index in range(12):
+            self.assertTrue(
+                np.array_equal(plain.tasks[index].train_y, loud.tasks[index].train_y),
+                f"task {index} moved before the gap closed",
+            )
+        differs = [
+            index
+            for index in range(12, len(plain.tasks))
+            if not np.array_equal(
+                plain.tasks[index].train_y, loud.tasks[index].train_y
+            )
+        ]
+        self.assertTrue(differs, "the gain changed no returning task")
+
+    def test_inputs_never_move_with_the_gain(self) -> None:
+        # Only the family's CONTRIBUTION may change. If the x streams
+        # moved, s_bar and difficulty would be confounded.
+        plain, loud = self._world(1.0), self._world(1.5)
+        for index in range(len(plain.tasks)):
+            self.assertTrue(
+                np.array_equal(plain.tasks[index].train_x, loud.tasks[index].train_x)
+            )
+            self.assertTrue(
+                np.array_equal(plain.tasks[index].eval_x, loud.tasks[index].eval_x)
+            )
+
+    def test_only_the_family_primitive_is_scaled(self) -> None:
+        plain, loud = self._world(1.0), self._world(1.5)
+        returning = 13
+        base = plain.tasks[returning].teacher_library
+        scaled = loud.tasks[returning].teacher_library
+        self.assertEqual(len(base), len(scaled))
+        for position in range(len(base) - 1):
+            self.assertTrue(np.array_equal(base[position].U, scaled[position].U))
+            self.assertTrue(np.array_equal(base[position].V, scaled[position].V))
+            self.assertEqual(base[position].alpha, scaled[position].alpha)
+        # The family primitive keeps its parameters and changes only the
+        # residual scale, so it is the same operation worth more.
+        self.assertTrue(np.array_equal(base[-1].U, scaled[-1].U))
+        self.assertTrue(np.array_equal(base[-1].V, scaled[-1].V))
+        self.assertTrue(np.array_equal(base[-1].b, scaled[-1].b))
+        self.assertAlmostEqual(scaled[-1].alpha, base[-1].alpha * 1.5)
+
+    def test_a_gain_needs_a_gap_that_closes(self) -> None:
+        # Without returning tasks there is nothing for the gain to price.
+        with self.assertRaises(ValueError):
+            TaskGroupSpec(eta=0.9, dormancy=(8, 12), dormancy_returns=False,
+                          return_gain=1.5)
+        with self.assertRaises(ValueError):
+            TaskGroupSpec(eta=0.9, return_gain=1.5)
+        with self.assertRaises(ValueError):
+            TaskGroupSpec(eta=0.9, dormancy=(8, 12), return_gain=0.0)
+
+    def test_the_gain_is_recorded_in_provenance(self) -> None:
+        self.assertEqual(self._world(1.5).task_group_spec.as_dict()["return_gain"], 1.5)

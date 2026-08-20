@@ -603,6 +603,36 @@ byte-identical.
     Prediction: s_bar(g) scales with g while D*(A) is unchanged, and
     the observed crossing tracks H*(g) = lambda D*(A) / s_bar(g).
 
+**How the gain is applied, and what that costs (implementation note,
+Revision 6).** `g` multiplies the family primitive's `alpha`, the
+residual scale in `Primitive.__call__`. Its `U`, `V` and `b` are
+untouched, every other primitive is untouched, and both `x` streams are
+drawn from the same seeds, so the family's contribution is the only
+thing that moves.
+
+The obvious alternative — computing `y = f_base(x) + g*(f_full(x) -
+f_base(x))` by executing the program twice and blending — was rejected.
+That target is not realizable by ANY composition of primitives, so at
+`g != 1` even a perfect learner would carry irreducible misspecification
+and `s_bar` would be confounded with it. Scaling `alpha` keeps the
+target exactly what some program over some library computes.
+
+The price is an honest one and is registered here rather than
+discovered later: at `g != 1` the post-gap family operator is a SCALED
+version of the pre-gap one, not literally the same operator. So `g`
+raises realized per-use saving through two channels — the family is
+worth more, and the frozen abstraction is a slightly less exact match.
+That does not damage the law test, because `s_bar` is MEASURED at each
+`g` and the crossing is predicted from it, and because the carry term
+is not merely stable but IDENTICAL: the abstraction tensor is
+bit-identical across `g`, so `lambda * D*(A)` is the same number, not a
+number within 2%. It does mean `g` may not be described as "the same
+computation worth more"; the defensible phrasing is "the same
+computation, scaled, worth more". Report the retained arm's post-gap
+routing to the abstraction alongside `s_bar(g)`: if the arm stops
+reusing it at high `g`, the mismatch channel is dominating and the
+reading changes.
+
 The gain is established ONLY after the abstraction is frozen at the
 gap, so it cannot change what got born. Verify byte-identity of the
 retained arm's abstraction tensors across g before scoring; if they
@@ -1317,9 +1347,18 @@ returning tasks only:
     pre-gap stream, library, routes and abstraction tensors identical
     across g (assert byte-identity before scoring)
 
-    Validity: D*(A) constant across g to within 2%; s_bar(g) monotone
-    in g; zero births after task 32. A cell violating byte-identity is
-    void, not weak.
+    Validity: the abstraction tensor bit-identical across g (stronger
+    than the registered 2% on D*(A), and free, because promotion sets
+    requires_grad=False and the pre-gap stream does not depend on g);
+    s_bar(g) monotone in g; zero births after task 32. A cell violating
+    byte-identity is void, not weak.
+
+    Grid: H_R = N - 40 must bracket the PREDICTED crossing by >= 4 on
+    both sides (§9), and the crossing moves as 1/s_bar(g), so the grid
+    cannot be fixed before s_bar(g) is known. Run in two stages:
+    measure s_bar(g) on a coarse two-point grid, then run the
+    bracketing grid each gain actually needs. Choosing one grid for all
+    three gains would leave at least one gain unscoreable.
 
 **W-H19-S1 / S2 (secondary s-arms).** Same as W-H19 at rank=2, eta or
 new_primitive_families as above. Validity: s_bar ratio vs the eta=0.9
