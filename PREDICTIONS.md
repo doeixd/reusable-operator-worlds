@@ -2185,3 +2185,39 @@ representation is a different hypothesis and is not registered here.
 
 Existing artifacts predate the snapshot and cannot be rescored; H29
 needs fresh runs, which is the honest cost of having found the gap late.
+
+# SEALED C1 STAGE 1, and the Stage-2 grid it fixes (2026-08-20)
+
+Seeds 600-609, fixed window N=72 (H_R=32), 60 cells, 0 failures,
+0 post-gap births, 0 pre-intervention leaks. The predictor only; no
+crossing is located here and none is claimed.
+
+| g | s_bar sealed | s_bar development | carry invariance |
+| --- | --- | --- | --- |
+| 0.5 | 26.6 | 28.9 | identical 10/10 |
+| 1.0 | 57.3 | 58.1 | identical 10/10 |
+| 1.5 | 84.3 | 85.2 | identical 10/10 |
+
+s_bar monotone in g: PASS. The sealed worlds reproduce the development
+per-use savings to within 8% at every gain, which is itself a
+replication of the S0 intervention on untouched seeds.
+
+## Stage-2 grid, deterministic from Stage 1, committed before any Stage-2 cell runs
+
+H_hat*(g) = lambda * D(A) / s_hat(g) at the 8-bit carry of 1,098 nats;
+H_low <= H_hat* - 4, H_high >= H_hat* + 4, plus the two nearest interior
+even horizons. N = H_R + 40.
+
+| g | s_hat | H_hat* | H_R grid | N grid |
+| --- | --- | --- | --- | --- |
+| 0.5 | 26.6 | 41.3 | 36, 40, 42, 46 | 76, 80, 82, 86 |
+| 1.0 | 57.3 | 19.1 | 14, 18, 20, 24 | 54, 58, 60, 64 |
+| 1.5 | 84.3 | 13.0 |  8, 12, 14, 18 | 48, 52, 54, 58 |
+
+PREDICTION (C1, as frozen in V5_CONFIRMATION_PLAN.md): each gain's
+observed crossing lands so that chi = H*_observed * s_bar / (lambda D)
+has mean |chi - 1| <= 0.15 across operating points, with no point
+outside [0.7, 1.3]. Every input above was measured on runs that contain
+no crossing, and no Stage-2 cell shares a run with Stage 1.
+
+240 cells. Report: `reports/v5_sealed_c1_stage2_grid.json`.

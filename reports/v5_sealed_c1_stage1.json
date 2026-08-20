@@ -1,0 +1,95 @@
+{
+  "0.5": {
+    "gain": 0.5,
+    "slots": 12,
+    "rows": [
+      {
+        "H_R": 32,
+        "n": 10,
+        "c_reacquire": 851.7173156455898,
+        "s_bar": 26.61616611392468
+      }
+    ],
+    "s_bar": 26.61616611392468,
+    "excluded_post_gap_births": 0,
+    "excluded_pre_intervention_leak": 0,
+    "signatures": {
+      "N72_world600": "d34e801f87cb6223",
+      "N72_world601": "c2b798d72cf9c133",
+      "N72_world602": "99df080f50460c60",
+      "N72_world603": "55f4c5157b12a131",
+      "N72_world604": "c568ef7648bc297a",
+      "N72_world605": "ff3591dba6f2bab4",
+      "N72_world606": "11941cb9c0f29268",
+      "N72_world607": "016510145a7ac159",
+      "N72_world608": "1a60199463dea8d1",
+      "N72_world609": "ffee172c36c86689"
+    },
+    "predicted_8-bit": 41.25106258006654,
+    "brackets_8-bit": false,
+    "predicted_D*": 20.109893007782432,
+    "brackets_D*": false
+  },
+  "1.0": {
+    "gain": 1.0,
+    "slots": 12,
+    "rows": [
+      {
+        "H_R": 32,
+        "n": 10,
+        "c_reacquire": 1835.137762829409,
+        "s_bar": 57.34805508841903
+      }
+    ],
+    "s_bar": 57.34805508841903,
+    "excluded_post_gap_births": 0,
+    "excluded_pre_intervention_leak": 0,
+    "signatures": {
+      "N72_world600": "d34e801f87cb6223",
+      "N72_world601": "c2b798d72cf9c133",
+      "N72_world602": "99df080f50460c60",
+      "N72_world603": "55f4c5157b12a131",
+      "N72_world604": "c568ef7648bc297a",
+      "N72_world605": "ff3591dba6f2bab4",
+      "N72_world606": "11941cb9c0f29268",
+      "N72_world607": "016510145a7ac159",
+      "N72_world608": "1a60199463dea8d1",
+      "N72_world609": "ffee172c36c86689"
+    },
+    "predicted_8-bit": 19.145289797782077,
+    "brackets_8-bit": false,
+    "predicted_D*": 9.33332877641876,
+    "brackets_D*": false
+  },
+  "1.5": {
+    "gain": 1.5,
+    "slots": 12,
+    "rows": [
+      {
+        "H_R": 32,
+        "n": 10,
+        "c_reacquire": 2696.455563481143,
+        "s_bar": 84.26423635878572
+      }
+    ],
+    "s_bar": 84.26423635878572,
+    "excluded_post_gap_births": 0,
+    "excluded_pre_intervention_leak": 0,
+    "signatures": {
+      "N72_world600": "d34e801f87cb6223",
+      "N72_world601": "c2b798d72cf9c133",
+      "N72_world602": "99df080f50460c60",
+      "N72_world603": "55f4c5157b12a131",
+      "N72_world604": "c568ef7648bc297a",
+      "N72_world605": "ff3591dba6f2bab4",
+      "N72_world606": "11941cb9c0f29268",
+      "N72_world607": "016510145a7ac159",
+      "N72_world608": "1a60199463dea8d1",
+      "N72_world609": "ffee172c36c86689"
+    },
+    "predicted_8-bit": 13.029787979470335,
+    "brackets_8-bit": false,
+    "predicted_D*": 6.352021639991787,
+    "brackets_D*": false
+  }
+}
