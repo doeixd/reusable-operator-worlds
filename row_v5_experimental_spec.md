@@ -1593,8 +1593,8 @@ branching.
     V5.0  CURRENCY         D*(R) component frontier     DONE
     V5.0b MECHANISM        H27 P_0/P_1/P_2 decomposition
                            (artifact-only; runs in parallel)
-    V5.1  LAW              H19 D-arm DONE (P1+P3); RUNG PARTIAL,
-                           S0 and the slots=6 pairing outstanding
+    V5.1  LAW              H19 PASS (2026-08-20): D-arm + S0,
+                           chi = 1.012 mean over six operating points
     V5.2a ECONOMICS        H20a exogenous atoms, frozen schema
     V5.2b PHASE DIAGRAM    H20b learned library, re-fit schema
     V5.3  SCHEMA           H21 leave-one-out + novel combination
@@ -1637,10 +1637,10 @@ not advance on a partial verdict.
 4. S0 (return-value gain) run, with D*(A) constant to 2% across g
    verified before scoring; or S0 shown impossible and at least one
    of S1/S2 attempted, informative or marked uninformative.
-   STATUS 2026-08-20: Stage 1 done and the invariance check passed in
-   its strong form (bit-identical abstraction tensors, 10/10 cells,
-   not merely within 2%). The item stays OPEN until Stage 2 observes a
-   crossing — measuring s_bar is not the same as testing the law.
+   STATUS 2026-08-20: DONE. Stage 1's invariance check passed in its
+   strong form (bit-identical abstraction tensors, 10/10 cells, not
+   merely within 2%), and Stage 2 observed all three crossings within
+   2% of their frozen predictions. H19 PASSES.
 5. Branch table resolved; PREDICTIONS.md appended.
 6. slots=6 paired against the in-flight slots=12 at rank 1, N=48, or
    a written reason that pairing is unnecessary.
@@ -1955,14 +1955,19 @@ record is complete.
    their slot budget; the D-arm's internal rank comparison is
    unaffected.
 
-   OPEN — the crossing itself. Stage 1 deliberately located none, so
-   the predictor and the outcome come from separate runs. Stage 2's
-   grid is frozen in PREDICTIONS.md (g=0.5 -> N {72,76,78,82}; g=1.0 ->
-   {54,58,60,64}; g=1.5 -> {48,52,54,58}), registered at +/- 15%, 240
-   cells. Also open: a slots=6 crossing grid around 24.8, and D*
-   currency grids (predicted 18.5 / 9.2 / 6.3, unbracketed by the
-   8-bit grids). Until a crossing is observed H19 stands as partial
-   P1 + P3.
+   DONE — Stage 2, the crossings. 240 cells, zero failures, zero
+   post-gap births, zero leaks. Observed against frozen predictions:
+   38.7 vs 38.0 (g=0.5), 19.2 vs 18.9 (g=1.0), 13.0 vs 12.9 (g=1.5).
+   Combined with the D-arm, chi = H* s_bar / (lambda D) has mean
+   |chi - 1| = 0.012 over six operating points, range [1.000, 1.019].
+   All seven frozen closure conditions met. **H19 PASSES**; the rung is
+   no longer partial. (The g=0.5 low point moved 72 -> 74 before
+   running, both to follow the registered rule exactly and to keep
+   Stage 1's fixed window out of the Stage-2 outcome set.)
+
+   REMAINING DEBTS, not part of the H19 verdict: a slots=6 crossing
+   grid around 24.8, and D* currency grids (predicted 18.5 / 9.2 / 6.3,
+   unbracketed by the 8-bit grids).
 4. DONE. Compositional-closure probe (B7) on Continuous checkpoints
    0–2: depth-8/depth-3 median NMSE 4.39 / 4.26 / 4.09, under the 5x
    gate, no saturation. V6 is not blocked. Recorded in §24.

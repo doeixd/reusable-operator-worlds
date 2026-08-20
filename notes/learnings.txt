@@ -2719,3 +2719,62 @@ extrapolate; keep the slots=6 pairing as a separate robustness debt the
 verdict may not borrow from in either direction. Freezing the verdict
 before the last third of the data is the cheapest available protection
 against reading a criterion off the result.
+
+
+================================================================================
+H19 CLOSED: PASS. THE RATIO PREDICTS OUT OF SAMPLE (2026-08-20)
+================================================================================
+
+Stage 2, 240 cells, zero failures. Every predictor came from Stage 1's
+separate fixed-window runs, so nothing was fitted to the data it
+predicted.
+
+  operating point   D(A)  s_bar   H* pred  H* obs   err    chi
+  D-arm rank 1        99   36.8     14.9    15.2   2.0%  1.019
+  D-arm rank 2       198   61.0     18.0    18.0   0.0%  1.000
+  D-arm rank 4       396   68.3     32.2    32.4   0.6%  1.008
+  S-arm g=0.5        198   28.9     38.0    38.7   1.8%  1.019
+  S-arm g=1.0        198   58.1     18.9    19.2   1.6%  1.016
+  S-arm g=1.5        198   85.2     12.9    13.0   0.8%  1.009
+
+  mean |chi - 1| = 0.012 (registered 0.15); range [1.000, 1.019].
+
+Three points move cost fourfold at roughly fixed utility; three hold the
+carried tensor bit-identical and move utility threefold. All six land on
+the identity line. The strongest single detail is that routing did not
+move at all: p_reuse is IDENTICAL between g=1.0 and g=1.5 in every world
+inspected, so the gain changed what an abstraction was worth without
+changing whether it was chosen.
+
+WHAT THIS COST TO GET RIGHT, and what generalizes:
+
+  * The first launch failed 113/120 cells on memory. Concurrency for
+    slots=12 promoting lifetimes is 3.
+  * The registered p_reuse >= 0.5 threshold FAILED at the baseline
+    world, which made it a specification error rather than a result.
+    Compute a threshold's baseline before freezing it.
+  * A single N grid cannot serve three gains, because the crossing
+    moves as 1/s_bar. Measure the predictor, then choose the grid,
+    then run -- and keep the two in separate runs so they cannot share
+    noise. The three grids ended up disjoint (H_R 34-42, 14-24, 8-18).
+  * The closure criterion was written and committed while the last
+    batch was still running. Nothing about the verdict was decided
+    after seeing the third gain.
+
+WHAT IS NOT LICENSED. Six points on a LINE, not a crossed 3x3 design:
+every S-arm point shares D(A) = 198, so all cost-axis spread comes from
+the D-arm. One currency: the 8-bit proxy; the D* crossings (18.5 / 9.2 /
+6.3) are unbracketed by these grids and untested. One protocol point:
+slots=12, one dormancy geometry, development seeds 500-509. And the two
+instrument properties still stand -- deleting one abstraction collapses
+the reuse pathway, and D_retain - D_delete = D(A) is a convention. Both
+are constant across gains, which is why the S-arm is unaffected, but
+both bear on the absolute numbers.
+
+The law that survives is the ratio, not either proportionality:
+
+    H* = C_carry / (expected saving per future use)
+
+which is the same form registered for schema birth (H25) and macro
+birth (V6). H19 is now the measured base case of that ladder rather
+than a threshold for RETAIN alone.

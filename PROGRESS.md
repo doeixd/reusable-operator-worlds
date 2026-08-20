@@ -2189,3 +2189,46 @@ itself survives at slots=6 is NOT tested and needs its own grid.
 Stage 2 (240 cells, ~3h, grids frozen); the slots=6 crossing grid around
 24.8; D* currency grids (predicted crossings 18.5 / 9.2 / 6.3, which the
 8-bit grids do not bracket).
+
+# 2026-08-20 — H19 CLOSED: PASS. The amortization law predicts out of sample
+
+Stage 2 ran the three frozen grids: 240 cells, zero failures, zero
+post-gap births, zero pre-intervention leaks. Every predictor came from
+Stage 1's separate fixed-window runs, so no cell served as both
+predictor and outcome.
+
+| operating point | D(A) | s_bar | H* predicted | H* observed | err | chi |
+| --- | --- | --- | --- | --- | --- | --- |
+| D-arm rank 1 |  99 | 36.8 | 14.9 | 15.2 | 2.0% | 1.019 |
+| D-arm rank 2 | 198 | 61.0 | 18.0 | 18.0 | 0.0% | 1.000 |
+| D-arm rank 4 | 396 | 68.3 | 32.2 | 32.4 | 0.6% | 1.008 |
+| S-arm g=0.5  | 198 | 28.9 | 38.0 | 38.7 | 1.8% | 1.019 |
+| S-arm g=1.0  | 198 | 58.1 | 18.9 | 19.2 | 1.6% | 1.016 |
+| S-arm g=1.5  | 198 | 85.2 | 12.9 | 13.0 | 0.8% | 1.009 |
+
+mean |chi - 1| = 0.012 against a registered 0.15; range [1.000, 1.019]
+against registered bounds [0.7, 1.3]. Report:
+`reports/v5_h19_collapse.json`.
+
+All seven conditions of the criterion frozen before g=1.5 was read are
+met. Routing validity passed in its strong form: p_reuse is IDENTICAL
+between g=1.0 and g=1.5 in every world inspected, so the gain moved
+payoff without touching selection.
+
+- The claim, stated to admit what each arm did: the D-arm manipulates
+  abstraction CAPACITY (cost and utility together), the S-arm holds the
+  stored abstraction bit-identical and moves only its post-return
+  utility regime; across both, the threshold is predicted by
+  C_carry / s_bar. Neither `H* ~ D` (falsified at 46.8% in V5.1) nor
+  `H* ~ 1/g` is the law.
+- Limits recorded alongside the result rather than after it: six points
+  on a line and not a crossed 3x3 design (every S-arm point shares
+  D(A) = 198); one currency (8-bit — the D* crossings 18.5 / 9.2 / 6.3
+  are unbracketed by these grids); one protocol point (slots=12, one
+  dormancy geometry); development seeds 500-509, nothing sealed.
+
+## Spec and rung status
+
+V5.1 moves from partial P1 + P3 to PASS. §25 checklist item 3 is
+discharged for the s-arm; the slots=6 crossing grid and the D* grids
+remain as named debts, and 600-629 stay untouched.
