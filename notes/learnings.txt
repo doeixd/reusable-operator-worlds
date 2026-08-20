@@ -1965,3 +1965,144 @@ programs into a better language. If that loop works recursively, the library
 stops looking like neural modules and starts looking like a learned programming
 language whose compiler, standard library, and optimizer are all being
 improved by the model's own experience.
+
+
+================================================================================
+THE CONCEPTUAL HEART: PROSPECTIVE PARSIMONY AND THE LANGUAGE OF THOUGHT
+================================================================================
+
+Intelligence is the continual invention and testing of simpler ways of
+generating experience. Not merely compressing observations after the fact — the
+system actively proposes new explanatory/computational organizations, runs them
+forward, asks what they predict, and keeps the ones that make the world and
+future problem-solving cheaper. This is the deeper story connecting MDL,
+composition, PROMOTE, program synthesis, dreaming, and reusable primitives.
+
+PROGRAMS AS HYPOTHESES ABOUT HOW TO LOOK AT THE PROBLEM. Program synthesis is
+fundamentally abductive: P* = argmin_P [L(D|P) + L(P)]. Different candidate
+programs are different ways of seeing the same input, not merely different
+answers. Find a compact program under which what seemed complicated becomes
+simple.
+
+ABSTRACTION AS DISCOVERING A COORDINATE SYSTEM. If A makes T_i = A + δ_i
+with tiny δ_i, then L(A) + Σ L(δ_i) << Σ L(T_i). A concept is a learned
+representational transformation that makes a class of future explanations
+shorter. The observations didn't change; the language did. (Momentum, object
+permanence, recursion, symmetry, conservation, functions, variables.)
+
+ACTIVE PRIMITIVE HYPOTHESIS. Go beyond detecting repeated computation (PROMOTE)
+to asking: what new primitive, if it existed, would make these experiences much
+easier to explain? This is program-language learning — hypothesizing X(α) that
+explains several programs as instances of a deeper operation, not just literal
+macro extraction.
+
+RUN THE HYPOTHESIS FORWARD. A candidate program H should be executed:
+s_{t+1}^(H) = H(s_t, a_t), then prediction ↔ actual observation. Reasoning
+becomes hypothesize→simulate→compare→revise. This is theorizing.
+
+DREAMING AS A TECHNICAL CONCEPT. Running programs without immediate external
+input: internal state → P → ŝ_{t+1} → P → ŝ_{t+2} → ... Used for prediction,
+planning, discrimination (dream H_1 and H_2, find where they disagree, choose
+the experiment that reveals which is right), compression (test candidate
+abstractions against old experience), and program discovery (generate synthetic
+trajectories, notice deeper regularities). Dreaming is using the learned
+computational language as a generative simulator for hypothesis evaluation and
+invention.
+
+REASONING AS SEARCH THROUGH PROGRAM SPACE. Maintain candidate programs P_1...P_k
+each scored S(P) = L(P) + L(D|P) + C_execution(P). Reasoning moves P→P' through
+substitute primitive, add condition, compose, introduce latent object, bind
+variable, generalize constant to parameter, factor subprogram, recurse, fork
+hypothesis. Thought is movement through program space.
+
+PROSPECTIVE PARSIMONY. Naïve min L(P) prefers uselessly simple theories. The
+actual tradeoff is L(P) + L(D|P) and ultimately L(P) + L(prediction errors) +
+C_reasoning + E[C_future learning | P]. A more complicated abstraction can be
+worth creating because it makes vast amounts of future computation cheaper.
+This is prospective parsimony, not merely retrospective compression.
+
+PERCEPTION AND REASONING ARE COUPLED. (R*, P*) = argmin_{R,P} [L(R) + L(P) +
+L(D|P,R)]. The model reasons about how it should perceive. The correct
+decomposition (pixels vs objects vs rows vs tiles vs symmetry groups) is
+whichever yields the shortest successful program. In ARC the hard part is often
+realizing "those aren't twenty-seven cells, those are three objects," after
+which reasoning collapses.
+
+INSIGHT = discovering a representation in which search collapses. Before
+insight L(D|L) >> 0; after inventing A, L(D|L∪{A}) << L(D|L). The problem
+suddenly becomes easy. This operationalizes the "ohhh, that's what is going
+on" phenomenology.
+
+THEORY = compact executable explanation. Distinguish pattern recognition
+(resemblance), abstraction (reusable object), and theory (generative: H +
+s_t → ŝ_{t+1}). A theory is testable because it produces consequences, not
+merely compressed memory.
+
+ACTIVE PROGRAM INDUCTION. Two candidate programs making different predictions
+under action a* let the agent select a* = argmax_a expected discrimination
+(P_1, P_2), act, observe, eliminate a theory. The emergent sequence:
+observe→hypothesize→simulate→design experiment→observe→revise. This is
+science-like behavior, much richer than classical synthesis from static
+examples.
+
+TWO MODES: COMPILATION AND INVENTION. Compilation mode: search programs
+expressible by L. Invention mode: allow L→L'. The system should be able to say
+"my language itself is making this problem unnecessarily difficult" and invent
+a better one.
+
+SEARCH DIFFICULTY AS EVIDENCE FOR ABSTRACTION. If many tasks are solvable but
+require extremely long searches, that is evidence the language is poorly
+matched. Abstraction discovery should minimize D(L) + E[C_synthesis | L],
+creating an abstraction when it makes future programs easier to find, not merely
+when it saves program bits. Two languages can encode the same functions while
+having radically different search complexity.
+
+GOOD PRIMITIVES RESHAPE THE SEARCH LANDSCAPE. Under L_1 a program is
+A∘B∘C∘D∘E∘F; under L_2 it's M∘F. The second isn't merely shorter — its
+solution is vastly easier to discover. The objective needs representation cost
++ execution cost + synthesis/search cost. This is learned algorithmic priors.
+
+REASONING STRATEGIES AS META-PRIMITIVES. BackwardChain, TryExtremeCase,
+SplitProblem, FindInvariant, SimulateAhead, SearchForCounterexample emerge
+because across the task ecology they reduce future solution cost enough to be
+promoted. The library begins containing not merely knowledge of the world but
+ways of thinking.
+
+INVENTING REPRESENTATIONS HUMANS DIDN'T PROVIDE. The system may discover
+A: R^d→R^k that looks meaningless to us but makes a huge family of worlds have
+simple dynamics z_{t+1} = F(z_t, a_t). This is "find latent variables under
+which the world has simple laws." Objects might emerge because objects are
+economical; other representations could emerge too.
+
+TWO COUPLED SEARCHES. Search 1 (reasoning): P* = argmin_{P∈Programs(L)} J(P).
+Search 2 (abstraction/invention): L* = argmin_L [D(L) + E_T C_solve(T|L)]. They
+bootstrap each other: L→programs→experience→better L→better programs.
+
+WAKE/SLEEP REINTERPRETED. WAKE: use L_t, search programs, test hypotheses,
+simulate futures, act, accumulate reasoning trajectories. SLEEP: ask why
+reasoning was expensive, what computations recurring, what variables made
+prediction simple, what distinctions irrelevant, what new primitive would
+shorten many programs, which existing primitives to parameterize/compress/merge/
+discard; then L_t→L_{t+1}. This is periodic self-refactoring of the model's
+ontology and computational language, much more than memory consolidation.
+
+DREAMING BRIDGES WAKE AND SLEEP. Take candidate primitive A, generate A(x_1),
+A(x_2),..., compose with others, ask what behaviors it implies, where it fails,
+whether it's equivalent to another, whether two can be unified, whether a
+candidate macro generalizes outside its suggesting trajectories, what
+hypothetical worlds would distinguish competing abstractions. Some dreams test
+theories against replayed data, some generate counterfactual data, some search
+the abstraction space itself — offline program-space exploration using learned
+world models.
+
+THE OPERATIONAL LOOP. Observe → Propose program/interpretation → Execute forward
+→ Predict/plan/test → Compare with reality → Revise program → Accumulate
+reasoning trajectories → Invent/compress computational primitives → Change the
+language → Reason more cheaply next time.
+
+THE ULTIMATE OBJECTIVE. min_{L,π} D(L) + E_T [C_perceive + C_synthesize +
+C_reason + C_act + L_error]. The model minimizes the total cost of making the
+world intelligible and acting successfully in it, including the cost of the
+language it has invented for thinking. Parsimony becomes the force that drives
+ontology formation, abstraction, theory creation, compilation of reasoning, and
+ultimately the evolution of the model's own language of thought.

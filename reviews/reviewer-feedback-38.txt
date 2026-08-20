@@ -1,0 +1,1046 @@
+Yes. I think this is the part that needs to become the **conceptual heart of the whole project**. Right now we have pieces—MDL, composition, PROMOTE, program synthesis, dreaming, reusable primitives—but there is a deeper story connecting them:
+
+[
+\boxed{
+\textbf{Intelligence is the continual invention and testing of simpler ways of generating experience.}
+}
+]
+
+Not merely compressing observations after the fact. The system actively proposes **new explanatory/computational organizations**, runs them forward, asks what they predict, and keeps the ones that make the world and future problem-solving cheaper.
+
+That gives us a much richer picture of what "parsimony" means.
+
+## 1. A program is a hypothesis about how to look at the problem
+
+Suppose the model receives some unfamiliar situation (D).
+
+It could just search for an action:
+
+[
+D\rightarrow a.
+]
+
+But our system should instead search for a **program that makes the situation intelligible**:
+
+[
+P:\quad D\rightarrow \text{structured explanation/prediction/action}.
+]
+
+For an ARC problem, one candidate might implicitly say:
+
+> "These pixels should be viewed as four objects, one is anomalous, the transformation copies the anomalous object across an axis."
+
+Another candidate says:
+
+> "No, this is one tiled pattern with a missing completion."
+
+Those aren't merely different answers.
+
+They are different **ways of seeing the same input**.
+
+So perhaps program synthesis is fundamentally abductive:
+
+[
+\boxed{
+P^*
+===
+
+\arg\min_P
+\left[
+L(D\mid P)+L(P)
+\right].
+}
+]
+
+Find a compact program under which what seemed complicated becomes simple.
+
+That starts connecting MDL to reasoning much more deeply.
+
+---
+
+# 2. "A new abstraction" means discovering a coordinate system in which many things become simpler
+
+This is more powerful than saying an abstraction is a reusable function.
+
+Suppose ten tasks look unrelated in the current representation.
+
+Then the system discovers a transformation (A) such that afterward:
+
+[
+T_i=A+\delta_i
+]
+
+with tiny (\delta_i).
+
+That means (A) has changed the **description language**.
+
+Before:
+
+[
+L(T_1)+\cdots+L(T_{10})
+]
+
+was large.
+
+After inventing (A):
+
+[
+L(A)+\sum_iL(\delta_i)
+]
+
+is much smaller.
+
+So the abstraction is valuable because it creates a new basis from which the world becomes easier to describe.
+
+This gives us a richer notion of "concept":
+
+[
+\boxed{
+\textbf{A concept is a learned representational transformation that makes a class of future explanations shorter.}
+}
+]
+
+That's closer to what humans seem to do when they discover:
+
+* momentum;
+* object permanence;
+* recursion;
+* symmetry;
+* conservation;
+* supply and demand;
+* functions;
+* variables.
+
+The observations didn't change.
+
+The **language in which we describe them changed**.
+
+---
+
+# 3. This means the system should actively hypothesize new primitives
+
+So far PROMOTE has mostly been:
+
+> repeated computation exists → detect it → turn it into an abstraction.
+
+Eventually we want something stronger:
+
+> **What new primitive, if it existed, would make these experiences much easier to explain?**
+
+That's much closer to theory formation.
+
+Imagine current library:
+
+[
+\mathcal L={A,B,C,\ldots}.
+]
+
+Recent solutions require ugly programs:
+
+[
+A\circ B\circ A\circ C
+]
+
+[
+A\circ B\circ A\circ D
+]
+
+[
+A\circ B\circ A\circ E.
+]
+
+The model could hypothesize:
+
+[
+X=A\circ B\circ A.
+]
+
+That's straightforward macro extraction.
+
+But it could go further and hypothesize something not literally present as a repeated sequence:
+
+[
+X(\alpha)
+]
+
+that explains all three as instances of some deeper operation.
+
+That's invention.
+
+The system asks:
+
+[
+\boxed{
+\text{What computation could I invent that would cause many current programs to collapse into shorter ones?}
+}
+]
+
+This is essentially **program-language learning**.
+
+---
+
+# 4. And yes: the model should run the hypothesis forward
+
+This is where I think your "dreaming" intuition becomes crucial.
+
+Suppose the model proposes:
+
+[
+H=\text{"red things attract blue things."}
+]
+
+It shouldn't just score whether (H) compresses past observations.
+
+It should execute (H):
+
+[
+s_{t+1}^{(H)}=H(s_t,a_t).
+]
+
+Then ask:
+
+> If this were really the right program, what would happen next?
+
+That's a **counterfactual rollout**.
+
+Then:
+
+[
+\text{prediction}
+\leftrightarrow
+\text{actual observation}.
+]
+
+A candidate program survives insofar as it predicts correctly.
+
+So reasoning becomes:
+
+[
+\boxed{
+\text{hypothesize}
+\rightarrow
+\text{simulate}
+\rightarrow
+\text{compare}
+\rightarrow
+\text{revise}.
+}
+]
+
+That's very close to theorizing.
+
+---
+
+# 5. "Dreaming" could mean running programs without immediate external input
+
+This should probably be a technical concept in the architecture rather than metaphor.
+
+During normal interaction:
+
+[
+\text{world}
+\rightarrow
+\text{observation}
+\rightarrow
+\text{update}.
+]
+
+During dream/simulation:
+
+[
+\text{internal state}
+\rightarrow
+P
+\rightarrow
+\hat s_{t+1}
+\rightarrow
+P
+\rightarrow
+\hat s_{t+2}
+\rightarrow\cdots
+]
+
+The system runs a candidate world/program forward internally.
+
+Why?
+
+Several reasons.
+
+### Prediction
+
+> What should happen if my theory is correct?
+
+### Planning
+
+> What happens if I do (a)?
+
+### Discrimination
+
+Two hypotheses (H_1,H_2) fit everything seen so far.
+
+Dream both:
+
+[
+H_1\rightarrow\hat y_1
+]
+
+[
+H_2\rightarrow\hat y_2.
+]
+
+Find where they disagree.
+
+Then choose an experiment that reveals which one is right.
+
+### Compression
+
+Run candidate abstractions across old experiences and ask whether they actually replace lots of previous computation.
+
+### Program discovery
+
+Generate synthetic trajectories under known abstractions and notice deeper regularities among them.
+
+So "dreaming" is really:
+
+[
+\boxed{
+\textbf{using the learned computational language as a generative simulator for hypothesis evaluation and invention.}
+}
+]
+
+---
+
+# 6. Reasoning could be search through possible explanations
+
+This gives us a cleaner definition of reasoning in the system.
+
+At time (t), maintain candidate programs:
+
+[
+P_1,P_2,\ldots,P_k.
+]
+
+Each has something like a score:
+
+[
+S(P)
+====
+
+L(P)+L(D\mid P)+C_{\rm execution}(P).
+]
+
+Then reasoning involves operations like:
+
+[
+P\rightarrow P'
+]
+
+through:
+
+* substitute primitive;
+* add condition;
+* compose operation;
+* introduce latent object;
+* bind variable;
+* generalize constant to parameter;
+* factor repeated subprogram;
+* recurse;
+* fork hypothesis.
+
+You can think of thought as movement through **program space**.
+
+Then execution tells us what each program entails.
+
+This is almost a computational version of:
+
+> "Suppose that were true... then..."
+
+---
+
+# 7. Parsimony doesn't mean "pick the shortest theory"
+
+This needs to be very explicit.
+
+Naïve MDL sounds like:
+
+[
+\min L(P).
+]
+
+But that would prefer uselessly simple theories.
+
+The actual tradeoff is:
+
+[
+\boxed{
+L(P)
++
+L(D\mid P)
+}
+]
+
+and ultimately, in our setting:
+
+[
+\boxed{
+L(P)
++
+L(\text{prediction errors})
++
+C_{\rm reasoning}
++
+\mathbb E[C_{\rm future learning}\mid P].
+}
+]
+
+A more complicated abstraction can be worth creating because it makes vast amounts of future computation cheaper.
+
+That's **prospective parsimony**, not merely retrospective compression.
+
+Which fits the entire project.
+
+---
+
+# 8. New ways of looking at things can literally be searched for
+
+Here's where perception becomes really interesting.
+
+Suppose the image is a grid.
+
+A fixed encoder produces:
+
+[
+z=E(x).
+]
+
+But there may be many valid decompositions:
+
+[
+R_1(x)=\text{pixels},
+]
+
+[
+R_2(x)=\text{connected objects},
+]
+
+[
+R_3(x)=\text{rows},
+]
+
+[
+R_4(x)=\text{repeating tiles},
+]
+
+[
+R_5(x)=\text{symmetry groups}.
+]
+
+Which one is "correct"?
+
+Potentially whichever yields the shortest successful program.
+
+So:
+
+[
+(R^*,P^*)
+=========
+
+\arg\min_{R,P}
+\left[
+L(R)+L(P)+L(D\mid P,R)
+\right].
+]
+
+That's huge.
+
+It means perception and reasoning are coupled.
+
+The model doesn't merely:
+
+> perceive → reason.
+
+It can:
+
+> **reason about how it should perceive.**
+
+ARC is full of precisely this issue.
+
+Maybe the hard part isn't applying the transformation.
+
+It's realizing:
+
+> "Oh, those aren't twenty-seven cells. Those are three objects."
+
+Once the representation changes, the reasoning collapses.
+
+---
+
+# 9. This gives us a computational account of "insight"
+
+An insight may correspond to a sudden representation change:
+
+Before:
+
+[
+L(D\mid\mathcal L)\gg0.
+]
+
+Invent (A).
+
+After:
+
+[
+L(D\mid\mathcal L\cup{A})\ll L(D\mid\mathcal L).
+]
+
+The problem suddenly becomes easy.
+
+That's exactly the phenomenology of:
+
+> "Ohhh, that's what is going on."
+
+Computationally:
+
+[
+\boxed{
+\textbf{insight = discovering a representation in which search collapses.}
+}
+]
+
+That's something our architecture could actually operationalize.
+
+---
+
+# 10. Theory formation can be viewed as compression plus consequences
+
+I think we can make a distinction among three increasingly powerful processes.
+
+### Pattern recognition
+
+> These cases resemble each other.
+
+### Abstraction
+
+> I can represent them with one reusable object.
+
+### Theory
+
+> This compact object can be **executed forward** to predict unseen consequences.
+
+That last one matters.
+
+A theory isn't merely compressed memory.
+
+It's generative.
+
+[
+H+s_t\rightarrow \hat s_{t+1}.
+]
+
+And because it generates consequences, the system can test it.
+
+So:
+
+[
+\boxed{
+\text{theory}
+=============
+
+\text{compact executable explanation}.
+}
+]
+
+That's almost exactly the representation our project is moving toward.
+
+---
+
+# 11. Then science-like behavior falls out naturally
+
+Imagine two candidate programs explain observed interactions:
+
+[
+P_1,;P_2.
+]
+
+They make different predictions under action (a^*):
+
+[
+P_1(s,a^*)\neq P_2(s,a^*).
+]
+
+The agent can select:
+
+[
+a^*
+===
+
+\arg\max_a
+\text{expected discrimination}(P_1,P_2).
+]
+
+Then act.
+
+Observe.
+
+Eliminate a theory.
+
+That's experimentation.
+
+So we could eventually see this sequence emerge:
+
+[
+\boxed{
+\text{observe}
+\rightarrow
+\text{hypothesize}
+\rightarrow
+\text{simulate}
+\rightarrow
+\text{design experiment}
+\rightarrow
+\text{observe}
+\rightarrow
+\text{revise}.
+}
+]
+
+That's much richer than classical program synthesis from static examples.
+
+It's **active program induction**.
+
+---
+
+# 12. The model needs both exploitation and invention
+
+This suggests two fundamentally different modes.
+
+## Compilation mode
+
+Search among programs expressible by:
+
+[
+\mathcal L.
+]
+
+Question:
+
+> Can I solve this using concepts I already have?
+
+## Invention mode
+
+Allow:
+
+[
+\mathcal L\rightarrow\mathcal L'.
+]
+
+Question:
+
+> Is this difficult because I am missing a useful primitive?
+
+That's critical.
+
+A conventional program synthesizer has a fixed DSL.
+
+Our end-state system should be able to say:
+
+[
+\boxed{
+\textbf{My language itself is making this problem unnecessarily difficult.}
+}
+]
+
+And invent a better one.
+
+That's a much stronger form of learning.
+
+---
+
+# 13. Search difficulty itself becomes evidence for abstraction
+
+This could be a fascinating hypothesis.
+
+Suppose many tasks are solvable, but require extremely long searches:
+
+[
+C_{\rm synth}\gg0.
+]
+
+Maybe that is evidence that the current language is poorly matched to the world's structure.
+
+So abstraction discovery shouldn't only minimize storage.
+
+It could minimize:
+
+[
+\boxed{
+D(\mathcal L)
++
+\mathbb E[
+C_{\rm synthesis}
+\mid
+\mathcal L
+].
+}
+]
+
+This means we should create an abstraction not merely when it saves final program bits, but when it makes important future programs **easier to find**.
+
+That's probably necessary for intelligence.
+
+Because two languages can encode the same functions while having radically different search complexity.
+
+---
+
+# 14. That's where "good primitives" become profound
+
+A good primitive isn't merely one that compresses past programs.
+
+It's one that reshapes the search landscape.
+
+Suppose both languages can represent:
+
+[
+P.
+]
+
+Under language (\mathcal L_1):
+
+[
+P=A\circ B\circ C\circ D\circ E\circ F.
+]
+
+Under (\mathcal L_2):
+
+[
+P=M\circ F.
+]
+
+The second isn't merely shorter.
+
+Its solution may be vastly easier to discover.
+
+So the objective eventually needs:
+
+[
+\boxed{
+\text{representation cost}
++
+\text{execution cost}
++
+\text{synthesis/search cost}.
+}
+]
+
+This is where our project starts becoming about **learned algorithmic priors**.
+
+---
+
+# 15. Reasoning strategies become meta-primitives
+
+Suppose the system repeatedly encounters problems where:
+
+> Work backward from the goal.
+
+Initially it discovers this through expensive search.
+
+Then eventually:
+
+[
+\texttt{BackwardChain}
+]
+
+becomes a reusable program.
+
+Other strategies could emerge:
+
+[
+\texttt{TryExtremeCase}
+]
+
+[
+\texttt{SplitProblem}
+]
+
+[
+\texttt{FindInvariant}
+]
+
+[
+\texttt{SimulateAhead}
+]
+
+[
+\texttt{SearchForCounterexample}.
+]
+
+Not because we hand-label them.
+
+Because across the ecology of tasks, those computation patterns reduce future solution cost enough to be promoted.
+
+Then the library begins containing not merely knowledge of the world but **ways of thinking**.
+
+That's the point where this becomes really interesting for AGI.
+
+---
+
+# 16. Eventually the system could invent representations that humans didn't provide
+
+That's perhaps the grandest consequence.
+
+The system's library need not consist of interpretable human concepts.
+
+It might discover (A) such that:
+
+[
+A:\mathbb R^d\rightarrow\mathbb R^k
+]
+
+looks meaningless to us, but suddenly a huge family of worlds has simple dynamics:
+
+[
+z_{t+1}=F(z_t,a_t).
+]
+
+Then (A) is a useful ontology.
+
+This is basically:
+
+> Find latent variables under which the world has simple laws.
+
+That's a deep interpretation of representation learning.
+
+Instead of asking for "objects" explicitly, we ask:
+
+[
+\boxed{
+\text{what representation makes prediction, control and explanation simplest?}
+}
+]
+
+Objects might emerge because objects are economical.
+
+But other representations could emerge too.
+
+---
+
+# 17. I think there are really two coupled searches
+
+This is perhaps the formulation I'd use going forward.
+
+### Search 1: Programs within the current language
+
+[
+P^*
+===
+
+\arg\min_{P\in\mathcal P(\mathcal L)}
+J(P).
+]
+
+This is reasoning.
+
+### Search 2: Better languages
+
+[
+\mathcal L^*
+============
+
+\arg\min_{\mathcal L}
+\left[
+D(\mathcal L)
++
+\mathbb E_T C_{\rm solve}(T\mid\mathcal L)
+\right].
+]
+
+This is abstraction/invention.
+
+And they bootstrap each other:
+
+[
+\boxed{
+\mathcal L
+\rightarrow
+\text{programs}
+\rightarrow
+\text{experience}
+\rightarrow
+\text{better }\mathcal L
+\rightarrow
+\text{better programs}.
+}
+]
+
+That's the complete loop.
+
+---
+
+# 18. Wake/sleep becomes much clearer under this interpretation
+
+I think our old wake/sleep intuition now has a much stronger meaning.
+
+### WAKE — theorize and act
+
+Use the current language.
+
+[
+\mathcal L_t
+]
+
+Search programs.
+
+Test hypotheses.
+
+Simulate futures.
+
+Act.
+
+Accumulate successful and failed reasoning trajectories.
+
+### SLEEP — rethink the language
+
+Take all those trajectories and ask:
+
+> Why was reasoning expensive?
+
+> What computations kept recurring?
+
+> What variables made prediction simple?
+
+> Which distinctions turned out irrelevant?
+
+> What new primitive would shorten many successful programs?
+
+> Which existing primitives should be parameterized, compressed, merged, or discarded?
+
+Then:
+
+[
+\mathcal L_t\rightarrow\mathcal L_{t+1}.
+]
+
+Next wake cycle starts with a better language.
+
+That's much more than memory consolidation.
+
+It's:
+
+[
+\boxed{
+\textbf{periodic self-refactoring of the model's ontology and computational language.}
+}
+]
+
+---
+
+# 19. "Dreaming" could bridge wake and sleep
+
+During sleep, the model could also use its current abstractions generatively.
+
+Take candidate primitive (A).
+
+Generate:
+
+[
+A(x_1),A(x_2),\ldots
+]
+
+Compose it with others.
+
+Ask:
+
+* what behaviors does it imply?
+* where does it fail?
+* is another primitive equivalent?
+* can these two be unified?
+* does a candidate macro generalize outside the trajectories that suggested it?
+* what hypothetical worlds would distinguish competing abstractions?
+
+That becomes **internal experimentation**.
+
+Some dreams test theories against replayed data.
+
+Some dreams generate counterfactual data.
+
+Some dreams search the abstraction space itself.
+
+So dreaming becomes:
+
+[
+\boxed{
+\textbf{offline program-space exploration using learned world models.}
+}
+]
+
+---
+
+# 20. And now we can articulate a much bigger thesis
+
+I think the project may eventually be about this:
+
+> An intelligent system does not merely accumulate predictions or skills. It continually searches for a computational language in which its experience, reasoning, and future learning become simpler.
+
+The operational loop is:
+
+[
+\boxed{
+\begin{array}{c}
+\text{Observe}\\
+\downarrow\\
+\text{Propose program / interpretation}\\
+\downarrow\\
+\text{Execute it forward}\\
+\downarrow\\
+\text{Predict / plan / test}\\
+\downarrow\\
+\text{Compare with reality}\\
+\downarrow\\
+\text{Revise program}\\
+\downarrow\\
+\text{Accumulate reasoning trajectories}\\
+\downarrow\\
+\text{Invent/compress computational primitives}\\
+\downarrow\\
+\text{Change the language}\\
+\downarrow\\
+\text{Reason more cheaply next time}
+\end{array}
+}
+]
+
+That's the story I think has been hiding underneath V1–V4.
+
+---
+
+And there's a particularly strong formulation of the ultimate objective:
+
+[
+\boxed{
+\min_{\mathcal L,\pi}
+D(\mathcal L)
++
+\mathbb E_{T}
+\left[
+C_{\rm perceive}
++
+C_{\rm synthesize}
++
+C_{\rm reason}
++
+C_{\rm act}
++
+L_{\rm error}
+\right].
+}
+]
+
+The model isn't just minimizing mistakes.
+
+It's minimizing the **total cost of making the world intelligible and acting successfully in it**, including the cost of the language it has invented for thinking.
+
+That gives parsimony a much deeper role than regularization.
+
+Parsimony becomes the force that drives **ontology formation, abstraction, theory creation, compilation of reasoning, and ultimately the evolution of the model's own language of thought**.
+
+And I think *that* is the version of the idea worth building toward.
