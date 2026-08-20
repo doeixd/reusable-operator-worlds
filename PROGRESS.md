@@ -2232,3 +2232,51 @@ payoff without touching selection.
 V5.1 moves from partial P1 + P3 to PASS. §25 checklist item 3 is
 discharged for the s-arm; the slots=6 crossing grid and the D* grids
 remain as named debts, and 600-629 stay untouched.
+
+# 2026-08-20 — B2 built: the r_meta generator, and its gates PASS
+
+Checklist item 5's teacher-side half is discharged. `src/row/meta_world.py`
+and `src/row/experiments/audit_meta_recurrence.py`; 9 tests in
+`tests/test_meta_world.py`; report
+`reports/v5_meta_recurrence_gates.json`.
+
+THE MIXTURE IS FUNCTIONAL, EXACTLY, NOT BY ARGUMENT. A primitive
+computes `tanh(z + alpha * h(z) U^T)` with `h(z) = tanh(z V^T + b)`.
+The generator SHARES `V` and `b` across the family operators, so `h` is
+one fixed function of the input and the residual contribution is LINEAR
+in `U`. A mixture of `U` matrices is then exactly a mixture of the
+functions they compute, at every input at once — which is how the spec's
+"defined in functional space because of gauge freedom" is satisfied
+rather than approximated.
+
+    theta_f(r) = sqrt(r) * B alpha_f + sqrt(1 - r) * C_f
+
+with the shared basis orthonormalized in matrix space and `C_f`
+PROJECTED OUT of that subspace. The projection is not decoration: with
+the two components merely independent, their random inner product made
+`||theta_f||` wobble and the balance gate failed at 31.6% spread on
+contribution. Orthogonality makes `||theta_f||^2 = r + (1 - r) = 1`
+exactly, for every family at every r.
+
+GATES, worlds 0-2, F=4, m=16, K=2, probe 256:
+
+| r_meta | R_LOO | null | R_in-sample | contribution | D* bits | norm |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0.0 | 0.021 | 0.049 | 0.730 | 0.00771 | 3.92 | 1.945 |
+| 0.5 | 0.165 | 0.049 | 0.845 | 0.00781 | 3.99 | 1.945 |
+| 0.9 | 0.547 | 0.049 | 0.970 | 0.00776 | 3.88 | 1.945 |
+| 1.0 | 1.000 | 0.049 | 1.000 | 0.00770 | 3.88 | 1.945 |
+
+- VALIDITY: r=0 inside the isotropic null, R_LOO monotone, r=1 far
+  above the null. PASS.
+- BALANCE: contribution 1.4%, rate 2.9%, norm 0.0% spread, all inside
+  the registered 10%. PASS. Promotion rate is deliberately not gated.
+- GATES: PASS — the sweep is scoreable.
+
+Two instrument notes worth keeping. The in-sample capture reads 0.730
+at r_meta = 0, where the truth is "no shared structure at all"; only the
+leave-one-family-out version reports 0.021. Fitting and scoring on the
+same families would have manufactured the phenomenon H20 is looking for.
+And the D* reading is INTERPOLATED in (bits, log error): integer depths
+made the per-abstraction rate jump by whole bits, which alone produced a
+16.4% spread and a false balance-gate failure.
