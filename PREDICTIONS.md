@@ -920,3 +920,54 @@ of the rest of the library or of history. That is a substantive result
 about lifecycle management being sequential rather than per-object, and
 it is why the paired return window, not endpoint J, is the right
 instrument.
+
+# CONFIRMED: retention obeys the amortization law (2026-08-19)
+
+The controlled horizon sweep. Gap fixed at (32,40); library FROZEN at
+task 32 (last sleep at the gap start), so no replacement abstraction can
+be born and `D_retain - D_delete = D(A)` exactly. Verified in every
+inspected cell: zero births after task 32, retained arm carries exactly
+one more abstraction than deleted. This is the counterfactual the
+earlier probe could not supply.
+
+Registered BEFORE the sweep, from independently measured quantities:
+
+    H_R* = lambda * D(A) / s_bar = 1,098 / 64.1 = 17.1 returning tasks
+
+Result:
+
+| H_R | C_reacquire | per-task rate | V_retain | verdict |
+| --- | --- | --- | --- | --- |
+|  8 |   476 | 59.6 |   -621 | DELETE |
+| 12 |   691 | 57.6 |   -407 | DELETE |
+| 16 |   967 | 60.5 |   -131 | DELETE |
+| 20 | 1,238 | 61.9 |   +140 | RETAIN |
+| 24 | 1,502 | 62.6 |   +404 | RETAIN |
+| 32 | 1,880 | 58.8 |   +782 | RETAIN |
+
+Monotone in H_R, 3/3 worlds agreeing in every cell. Interpolated
+crossing 17.9 against a prediction of 17.1 — within 5%, with NO fitted
+retention threshold. Using this sweep's own rate (60.2 nats/use) the
+prediction is 18.2, closer still. The per-task saving is flat across
+horizons (57.6-62.6), which is what makes the law linear.
+
+    RETAIN A  iff  H_R * s_bar  >  lambda * D(A)
+
+This is the same amortization logic as abstraction birth in V1/V3 --
+enough repeated use to repay a code cost -- now operating one level up,
+on whether a learned abstraction is worth carrying. Retention is not a
+separate mechanism requiring its own theory; it is the birth criterion
+applied to a future horizon instead of a past one.
+
+It also settles what the dormancy experiments were failing to find. The
+boundary is NOT a dormancy length. Gap length has no detectable effect
+on the stored abstraction's value (per-task rate flat across gaps 4-16);
+what matters is expected remaining reuse. Every earlier dormancy design
+failed because it varied the wrong quantity.
+
+LIMITS. n=3 worlds per cell, deltas reported, no interval claimed. The
+law is established with promotion SUPPRESSED after the gap; with
+endogenous re-promotion the marginal carry cost falls toward zero and
+the crossing must move. Measuring that shift is the next step, and it is
+the difference between retention economics in isolation and retention
+under a library that keeps evolving.
