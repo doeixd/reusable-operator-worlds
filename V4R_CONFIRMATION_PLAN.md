@@ -1,7 +1,11 @@
 # V4R Confirmation Plan — a NEGATIVE result, preregistered
 
-**Status: FROZEN on the commit that adds its hash to
-`tools/check_prereg.py`. No edits after that commit.**
+**Status: DRAFT — NOT FROZEN.** No hash for this file exists in
+`tools/check_prereg.py`, and seeds 400-429 remain untouched. Freezing is
+a deliberate separate act: add the hash, and no edits after that commit.
+Before freezing, re-read every interval below against
+`PREDICTIONS.md` — the coding-frontier audit changed O5's context after
+this draft was first written, and the same could happen again.
 
 Sealed worlds: **seeds 400-429**, untouched to date. They must not be
 generated, inspected, or summarized until this plan is frozen.
@@ -69,6 +73,23 @@ in gap length (coefficient of variation < 10% across gaps).
     PREDICTION: mean behavioral cost of quantizing shared abstractions
     is <= 300 nats at 4 bits/scalar and <= 50 nats at 6 bits.
     Development: 127 and -7.
+
+Registered alongside it, because the V3 coding-frontier audit
+(2026-08-19, all 30 V3-sealed worlds) settled the question this rung
+originally put at risk:
+
+    PREDICTION: componentwise frontier optimization does NOT reduce
+    promotion's description saving. Measured on V3's sealed block at the
+    scorer's own accounting scope, the reduction rises from 62.6% at
+    fixed 8-bit precision to 68.7% at the frontier, larger in 30/30
+    worlds. Any V4R-sealed replication must reproduce a frontier
+    reduction >= its own fixed-precision reduction in >= 27/30 worlds.
+
+This matters for the ordering of the ladder. COMPRESS dominating
+FACTORIZE (O1) and promotion's saving surviving compression are NOT in
+tension: local requantization harvests numerical slack, promotion
+changes the representation class, and the audit shows the second does
+not depend on the first being left undone.
 
 ---
 
