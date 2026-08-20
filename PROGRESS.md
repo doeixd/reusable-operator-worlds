@@ -1962,3 +1962,17 @@ quantitative law from an accounting identity.
 - Sketch is not a spec. It retires the day `row_v5_experimental_spec.md`
   is frozen. Next: score the H19 grid and append the outcome before
   writing the spec.
+
+# 2026-08-20 — V5 sketch Revision 2
+
+- Expanded `notes/v5-sketch.txt`. Revision 1 named the question;
+  Revision 2 makes it executable: worked H19 arithmetic (rank 4's
+  8-bit crossing is off the current horizon grid), the
+  `residual_rank > 2` config cap, slots=12 as a deviation from V3/V4R,
+  an s-arm recipe with an uninformative-arm rule, H20 cheap-first
+  slice, numeric G3, a written H22 estimator, structural-regret
+  definitions, a threats table, and an operational composition probe.
+- In-flight `artifacts/v5_causal/` is recorded as rank-1 only and is
+  not H19. D1–D12 freeze the decisions a spec should not re-litigate.
+  Checklist reordered: score the rank-1 diagnostic and run the
+  composition probe before another lifetime sweep.
