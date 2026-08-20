@@ -829,3 +829,28 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   Raising it means adding primitives, which breaks comparability with
   every existing artifact. V4R §1.1's registered N in {64,128,256} was
   therefore unsatisfiable as written and is run at {64,128,200}.
+- Retention obeys the SAME amortization law as abstraction birth:
+  `RETAIN iff H_R * s_bar > lambda * D(A)`. Measured on the V5 probe,
+  the predicted crossing (1,098 / 64.1 = 17.1 returning tasks) matched
+  the observed one (17.9) with no fitted threshold. Dormancy LENGTH is
+  the wrong variable and cost three failed world designs: per-task
+  saving is flat across gaps, and only expected remaining reuse matters.
+- A dormancy gap must CLOSE strictly before the lifetime ends, with
+  enough tasks after it to measure. This error produced false readings
+  three separate times (V4.1, the retention sweep, the fine gap sweep).
+  Count returning tasks before reading any dormancy config's numbers.
+- A mid-lifetime deletion is NOT a paired comparison: the arms stop
+  being matched the moment the intervention changes what gets promoted
+  next. Library state is path-dependent (deleting one abstraction at
+  task 32 gave final sizes 5/5, 6/5, 5/2, and once 6/7 -- the deleted
+  arm ending LARGER). Use the return-curve window where the arms are
+  still comparable, never an end-of-lifetime J difference.
+- In an evolving library the marginal carry cost of an abstraction is
+  ENDOGENOUS: when deletion triggers a replacement promotion it saves 0
+  bits, not `lambda * D(A)`. Per-object retention rules are therefore
+  ill-posed; the decision is sequential.
+- Abstractions are ~4-8x overparameterized: `D_min ~ 1-2 bits/scalar`
+  against 8 stored, with ZERO behavioral cost at 6 bits and 127 nats at
+  4. This is why every structural edit loses to local compression, and
+  it means absolute (not paired) two-part figures in V1-V4 are inflated
+  by that factor.

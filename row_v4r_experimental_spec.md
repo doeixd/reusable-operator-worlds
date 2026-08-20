@@ -116,7 +116,7 @@ the measurements, per project convention.
 | COMPRESS | **dominates** | wins 15/15 regime-worlds over FACTORIZE across F in {2,4,8}, N in {64,128,200}; margin does not close with scale |
 | FACTORIZE | **negative** | existence gate passes (rank-2 excess over isotropic null +15.7/+26.2/+27.3 points) but the matched-budget economic gate fails 9/10 worlds; leave-one-abstraction-out recovers a mean 7.5% |
 | RETIRE | **negative** | obsolescence oracle's refusal control does not refuse |
-| RETAIN | **positive (oracle)** | frozen-library oracle: crossover between gap 8 (+1,594, 7/10) and gap 16 (-240); refusal control passes 0/9 in the permanent arm |
+| RETAIN | **POSITIVE — law confirmed** | see §1.0a. `RETAIN iff H_R * s_bar > lambda * D(A)`; predicted crossing 17.1 returning tasks, observed 17.9, no fitted threshold |
 | FORK | **negative** | 0/30 abstraction-cells with an actual A' refit; best gain 670 nats against a 1,098 cost, five splits negative. The earlier 24/33 "pass" was a too-loose bound measuring un-promotion |
 
 **Registered prediction 1.1 outcome: FALSIFIED.** "Many related atoms
@@ -159,6 +159,41 @@ recovers, and no `M*` was located below twelve abstractions.
 An at-birth filter fails because an abstraction has its minimum
 dependent set exactly when the decision is made; implemented and
 measured, it collapses libraries in both conditions.
+
+
+## 1.0a RETAIN: the amortization law, and where it stops applying
+
+The census's one positive cell, resolved. Three earlier dormancy designs
+failed because they varied DORMANCY LENGTH; gap length has no detectable
+effect on a stored abstraction's value (per-task saving flat at ~60 nats
+across gaps 4-16). The governing variable is expected remaining reuse.
+
+**Registered before the sweep**, from independently measured quantities:
+
+    H_R* = lambda * D(A) / s_bar = 1,098 / 64.1 = 17.1 returning tasks
+
+**Controlled sweep** (gap fixed at (32,40); library frozen at the gap so
+`D_retain - D_delete = D(A)` exactly, verified by zero post-gap births):
+
+| H_R | 8 | 12 | 16 | 20 | 24 | 32 |
+| --- | --- | --- | --- | --- | --- | --- |
+| V_retain | -621 | -407 | -131 | +140 | +404 | +782 |
+
+Monotone, 3/3 worlds per cell, crossing at **17.9** against 17.1
+predicted. This is the V1/V3 amortization criterion applied one level up:
+retention is the birth test evaluated over a future horizon rather than
+a past one, and it needs no theory of its own.
+
+**Boundary condition.** With re-promotion restored, `C_reacquire` is
+unchanged (within 5% at every horizon) but the marginal carry cost
+becomes endogenous — 0 nats when deletion merely triggers a replacement
+promotion — and `V_retain` goes non-monotone. So the law is correct
+economics but `D(A)` is the wrong carry term in an evolving library. A
+per-object retention rule is not well-posed: the value of retaining A
+depends on what the learner would build instead, which depends on
+whether A was retained. Lifecycle decisions are SEQUENTIAL, closer to
+`Q(L_t, e_t)` than to a scalar per abstraction. Any future retention
+operator must be specified against that, not against `lambda * D(A)`.
 
 ## 1.1 The sweep
 
