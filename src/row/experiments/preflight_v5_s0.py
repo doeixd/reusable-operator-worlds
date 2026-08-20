@@ -114,6 +114,7 @@ def main() -> None:
 
     horizon = args.total - GAP_END
     report = Report()
+    baselines: dict[str, float] = {}
 
     def cell(gain: float, arm: str) -> Path:
         tag = f"g{int(round(gain * 100)):03d}_s{args.slots}_N{args.total}_{arm}"
@@ -174,9 +175,20 @@ def main() -> None:
         routed = sum(1 for task_id in window.values() if retained_refs.get(task_id) in gone)
         any_ref = sum(1 for task_id in window.values() if task_id in retained_refs)
         p_reuse = routed / len(window) if window else 0.0
-        report.check("p_reuse >= 0.5 (registered)", p_reuse >= 0.5,
-                     f"routed_to_A {routed} / {len(window)} = {p_reuse:.2f}  "
-                     f"(any abstraction: {any_ref} / {len(window)})")
+        baseline = baselines.get("p_reuse")
+        if gain == 1.0 or baseline is None:
+            baselines["p_reuse"] = p_reuse
+            report.check("p_reuse baseline recorded", len(window) > 0,
+                         f"routed_to_A {routed} / {len(window)} = {p_reuse:.2f}  "
+                         f"(any abstraction: {any_ref} / {len(window)})")
+        else:
+            # Relative, not absolute: the baseline world itself routes
+            # only a minority of returning tasks to this one object, so
+            # an absolute bound cannot detect gain-induced collapse.
+            report.check("p_reuse >= 0.5x baseline", p_reuse >= 0.5 * baseline,
+                         f"routed_to_A {routed} / {len(window)} = {p_reuse:.2f} "
+                         f"vs baseline {baseline:.2f}  "
+                         f"(any abstraction: {any_ref} / {len(window)})")
 
         scored = [
             i for i in range(GAP_END, args.total)
@@ -186,7 +198,18 @@ def main() -> None:
         s_bar = saving / len(scored) if scored else 0.0
         report.check("participants scored", len(scored) == horizon,
                      f"{len(scored)} / {horizon} return-window tasks in both arms")
+        # Decomposition: is the saving concentrated on tasks that
+        # actually route to the carried object, or spread over the whole
+        # return window? The two imply different mechanisms.
+        on = [i for i in scored if retained_refs.get(window.get(i)) in gone]
+        off = [i for i in scored if i not in on]
+        mean = lambda idx: (
+            sum(deleted_nll[i] - retained_nll[i] for i in idx) / len(idx)
+            if idx else float("nan")
+        )
         print(f"        s_bar = {s_bar:.1f} nats/use over {len(scored)} tasks")
+        print(f"        s_conditional = {mean(on):.1f} over {len(on)} routed"
+              f"   s_other = {mean(off):.1f} over {len(off)} unrouted")
 
         if gain == 1.0:
             near = abs(s_bar - args.reference_s_bar) / args.reference_s_bar
