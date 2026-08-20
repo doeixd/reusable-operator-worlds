@@ -823,6 +823,84 @@ named structure that wins prediction and description length at once —
 with the objective carrying description length in the gradient rather
 than discovering it in the accounting.
 
+### 10.1 Development-stage outlook: the economy over representational transformations
+
+The third sealed block closed the compression cell by showing that a
+saturated learner can create a new shared abstraction (PROMOTE) and win
+prediction and description length simultaneously. The natural follow-up
+-- whether a learned library then needs lifecycle operations (MERGE,
+DELETE, FACTORIZE, RETAIN) -- was pursued as V4 on development worlds
+only; no sealed block was run. The development findings are reported
+here as orientation, not confirmation.
+
+The V4 development program falsified its original premise. The
+assumption that successful abstraction birth implies a library maintenance
+problem did not hold at this scale: V3's 4-6 abstractions for two hidden
+families were mostly behaviorally distinct once substitutability was
+measured relative to each abstraction's own contribution rather than
+total output variance; apparent low-dimensional functional geometry
+existed but representing it explicitly as a shared parameterized family
+lost to matched-budget private compression in essentially every tested
+cell; and the dominant slack was numerical (abstractions stored at ~8
+bits/scalar had a behavioral coding frontier of ~1-2 bits/scalar), not
+structural. A simple COMPRESS operation -- lower precision, lower rank,
+pruning -- beat every cross-abstraction restructuring opportunity across
+the reachable census, establishing that local coding efficiency should
+be exhausted before global structural complexity is introduced. The
+cumulative lesson is constitutional: every sharing or restructuring
+claim requires a matched-budget non-sharing alternative, and a structural
+operation earns credit only relative to the cheapest behaviorally
+legitimate counterfactual the learner would actually take -- not raw
+ablation.
+
+The one positive V4 development result is a retention law that was not
+fitted. Retaining an abstraction obeys the same amortization logic as
+its birth: RETAIN(A) iff H_R * s_bar > lambda*D(A), where H_R is expected
+remaining reuse, s_bar is mean per-reuse savings, and D(A) is the
+abstraction's serialized cost. The predicted critical horizon
+H_R* = lambda*D(A)/s_bar ~= 1098/64.1 ~= 17.1 returning tasks matched the
+empirical crossing of 17.9 (within ~5%). Promotion and retention are
+therefore the same economic decision viewed in opposite temporal
+directions (birth: N_observed * s > D(A); retention: N_future * s >
+D(A)), and dormancy length was not the relevant variable -- per-return
+savings were flat across gaps, and only expected remaining reuse
+mattered.
+
+Two complications qualify the simple law. In a self-modifying library,
+deleting an abstraction can trigger a replacement promotion that saves
+zero bits, so an abstraction's value is conditional on library state:
+V(A | L_t, H_t, pi), not V(A) alone. And because today's edit changes
+tomorrow's representation search, library operations interact through the
+future learning trajectory -- making the eventual problem sequential
+structural decision-making rather than per-object garbage collection.
+The development census was otherwise negative: FACTORIZE, RETIRE, and
+FORK had no oracle advantage at current scale, and even tripling lifetime
+and growing the library toward ~16 abstractions did not produce a
+factorization crossing. Small stationary neural libraries may simply not
+need sophisticated lifecycle machinery; architecture complexity itself
+must be amortized. The pressures that should eventually create a
+lifecycle economy -- scale, meta-recurrence, nonstationarity,
+reacquisition cost, retrieval cost -- now name the axes the next
+benchmark must vary.
+
+These development findings reframe the ultimate goal. The system should
+not be a neural library with a fixed checklist of lifecycle operators;
+it should ask, at every point, what the cheapest available
+representation is -- KEEP, COMPRESS, PROMOTE, FACTORIZE, RETAIN, FORK --
+with each operation earning its existence economically. At every level
+the same law appears: pay a fixed representation cost when expected
+repeated savings exceed it (N * s > C), whether the unit is tasks
+amortizing an abstraction, abstractions amortizing a schema, or
+sequences amortizing a macro. The final system this program points
+toward is a self-refactoring neural computational system that
+continually asks where information should live, what form it should
+take, whether it is worth naming, how precisely it should be encoded,
+and whether keeping that representation will make future learning
+cheaper. V4 did not deliver MERGE or DELETE; it delivered the economic
+rules those operations will eventually have to obey. These are
+development results only; confirmatory testing awaits a frozen V4
+protocol and sealed worlds.
+
 Why should anyone working at scale care about a 16-dimensional world?
 Because the criterion is scale-free and the phenomena it isolates have
 scaled analogues that are currently argued by anecdote: mixture-of-

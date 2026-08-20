@@ -1,0 +1,947 @@
+Yes. In fact, the current direction of ARC makes your idea more plausible than it would have sounded a few years ago. ARC-AGI-2 emphasizes compositional reasoning from only a handful of examples, while ARC-AGI-3 is explicitly an **interactive** benchmark: the agent enters novel environments without instructions and must explore, infer goals/rules, build an adaptable world model, and act over time. ([ARC Prize][1])
+
+If our project reaches the endpoint you're describing—**perception is library computation, and arbitrary programs can be assembled from learned library elements**—then I think the natural next step is almost exactly what you suggest:
+
+[
+\boxed{
+\text{pretrain not on answers, but on worlds}
+}
+]
+
+And games are probably one of the best ways to do it.
+
+## The architecture I have in mind
+
+At that point, we'd want something like:
+
+[
+\text{observation}
+\xrightarrow{\text{perceptual programs}}
+W
+\xrightarrow{\text{reasoning program}}
+W'
+\xrightarrow{\text{planning program}}
+\text{action}
+]
+
+where (W) is a common workspace.
+
+The distinction between perception, reasoning and planning would **not necessarily exist architecturally**.
+
+They're all programs over state.
+
+For example:
+
+[
+\texttt{FindObjects}
+\rightarrow
+\texttt{GroupByColor}
+\rightarrow
+\texttt{InferSymmetry}
+\rightarrow
+\texttt{ApplyTransform}
+]
+
+could solve an ARC-like visual problem.
+
+While:
+
+[
+\texttt{FindObjects}
+\rightarrow
+\texttt{PredictCollision}
+\rightarrow
+\texttt{Simulate}
+\rightarrow
+\texttt{ChooseAction}
+]
+
+could solve a game.
+
+Same computational language.
+
+That's important.
+
+---
+
+# I think reasoning could literally emerge as programs
+
+Suppose during pretraining the learner repeatedly finds itself doing something like:
+
+1. hypothesize a rule;
+2. apply it;
+3. compare prediction to observation;
+4. reject it if inconsistent;
+5. try another.
+
+Initially that's just a repeated sequence of operations:
+
+[
+H
+\rightarrow
+S
+\rightarrow
+C
+\rightarrow
+B
+]
+
+for hypothesize, simulate, compare, backtrack.
+
+If that sequence recurs sufficiently often:
+
+[
+Ns>C_{\rm macro},
+]
+
+our own theory says it should become economical to create something like:
+
+[
+\texttt{TEST_HYPOTHESIS}(\cdots).
+]
+
+Likewise repeated:
+
+[
+\text{simulate action}
+\rightarrow
+\text{evaluate result}
+\rightarrow
+\text{choose best}
+]
+
+could eventually become:
+
+[
+\texttt{PLAN}.
+]
+
+Repeated:
+
+[
+\text{try}
+\rightarrow
+\text{fail}
+\rightarrow
+\text{restore state}
+\rightarrow
+\text{try alternative}
+]
+
+could become:
+
+[
+\texttt{SEARCH}.
+]
+
+So yes:
+
+[
+\boxed{
+\textbf{reasoning and planning themselves could become learned reusable programs.}
+}
+]
+
+Not because we label something "reasoning," but because certain patterns of computation recur across enough worlds to earn a name.
+
+That is an extremely attractive consequence of the project.
+
+---
+
+# But I wouldn't pretrain on ordinary games
+
+If we train on Minecraft, chess, Atari, Mario-like games, etc., there's a danger that the system just accumulates game-specific policies.
+
+We want a **procedural universe of small games**.
+
+Think thousands or millions of generated microworlds whose rules are composed from latent primitives.
+
+For example, a generator could vary:
+
+* what objects exist;
+* which objects are movable;
+* what collides;
+* what transforms into what;
+* object ownership;
+* keys/locks;
+* conservation rules;
+* gravity;
+* symmetry;
+* copying;
+* containment;
+* teleportation;
+* resource consumption;
+* ordering;
+* counting;
+* spatial relations;
+* temporal sequences;
+* hidden state;
+* goals;
+* adversaries;
+* stochasticity.
+
+Then combine them compositionally.
+
+One world might be:
+
+> Push red objects onto matching goals, but blue objects duplicate when pushed vertically.
+
+Another:
+
+> Keys open objects of the same shape rather than color, and touching yellow reverses gravity.
+
+Another:
+
+> Reach the target, but only after visiting objects in size order.
+
+The learner cannot solve this by memorizing "the game."
+
+It has to infer:
+
+[
+\boxed{\text{the program governing this world}.}
+]
+
+---
+
+# I'd make each game have two programs to infer
+
+This feels particularly important.
+
+### World program
+
+What dynamics govern the environment?
+
+[
+P_{\rm world}:
+(s_t,a_t)\rightarrow s_{t+1}.
+]
+
+### Goal program
+
+What counts as success?
+
+[
+G:s\rightarrow{0,1}
+]
+
+or a richer reward.
+
+Then the agent's job is:
+
+[
+\text{observations}
+\rightarrow
+\hat P_{\rm world},\hat G
+]
+
+followed by:
+
+[
+\operatorname{PLAN}(\hat P_{\rm world},\hat G,s_t)
+\rightarrow a_t.
+]
+
+That's extremely close to general problem solving.
+
+ARC-AGI-3's current framing is explicitly about entering novel interactive environments, discovering how they work, acquiring goals, and acting efficiently. ([ARC Prize][2])
+
+---
+
+# ARC-AGI-2 then becomes almost a degenerate case
+
+ARC-AGI-1/2 gives the solver a few input-output examples and asks it to infer the transformation for a new input; ARC's official guide describes tasks as roughly 3–5 demonstrations followed by a test input. ARC-AGI-2 deliberately stresses compositional rules and interacting rules. ([ARC Prize][3])
+
+Our system could treat:
+
+[
+(x_1,y_1),...,(x_n,y_n)
+]
+
+as observations of an unknown program:
+
+[
+P(x)=y.
+]
+
+Then infer:
+
+[
+\hat P
+======
+
+\operatorname{SYNTHESIZE}
+\left(
+(x_1,y_1),...,(x_n,y_n)
+\right)
+]
+
+and run:
+
+[
+\hat y=P(x_{\rm test}).
+]
+
+The crucial point is that (P) need not be assembled from a hard-coded DSL.
+
+It gets assembled from the **learned computational language** produced by our project.
+
+That's why I think this could be unusually well suited to ARC. ARC Prize itself has argued that the static ARC tasks are productively viewed as program-induction problems over grids rather than merely image-recognition problems. ([ARC Prize][4])
+
+---
+
+# The games should teach priors, not solutions
+
+This is the distinction I'd build the entire training regime around.
+
+We don't want the pretrained model to know:
+
+> "When you see pattern X, output pattern Y."
+
+We want it to acquire reusable priors like:
+
+* objects persist;
+* boundaries matter;
+* symmetry often matters;
+* identical objects can be grouped;
+* causes precede effects;
+* transformations compose;
+* goals can be inferred from demonstrations;
+* actions have consequences;
+* unsuccessful hypotheses should be abandoned;
+* unseen rules can often be composed from previously learned operations.
+
+In library terms, pretraining builds:
+
+[
+\mathcal L=
+{
+\texttt{SEGMENT},
+\texttt{COUNT},
+\texttt{COMPARE},
+\texttt{ROTATE},
+\texttt{TRANSLATE},
+\texttt{TRACK},
+\texttt{SIMULATE},
+\texttt{SEARCH},
+...
+}.
+]
+
+But at evaluation time the **program is new**.
+
+That's fluid intelligence.
+
+ARC Prize explicitly frames ARC-AGI around learning/generalizing efficiently from minimal information rather than relying primarily on accumulated crystallized knowledge. ([ARC Prize][5])
+
+---
+
+# There should probably be three learning timescales
+
+This dovetails almost perfectly with everything we've developed.
+
+### Slow: computational language
+
+Across millions of worlds:
+
+[
+\mathcal L_t\rightarrow\mathcal L_{t+1}.
+]
+
+This learns durable things:
+
+* perception;
+* primitive transformations;
+* reasoning operators;
+* planning operators;
+* macros.
+
+### Medium: world/task program
+
+For one novel game:
+
+[
+P_\tau
+]
+
+is synthesized from the library.
+
+It might persist for one episode or task family.
+
+### Fast: workspace
+
+During individual reasoning:
+
+[
+W_t.
+]
+
+Contains:
+
+* current objects;
+* hypotheses;
+* partial plans;
+* intermediate results;
+* temporary memory.
+
+So:
+
+[
+\boxed{
+\text{slow library}
+\rightarrow
+\text{medium program}
+\rightarrow
+\text{fast workspace}.
+}
+]
+
+That architecture makes a lot of sense to me.
+
+---
+
+# Perception being library programs is actually important for ARC
+
+Suppose the input is a pixel/grid observation.
+
+We don't necessarily want a fixed vision encoder to give us one frozen representation.
+
+Different tasks may require different perceptual decompositions.
+
+One puzzle may require:
+
+[
+\texttt{ConnectedComponents}.
+]
+
+Another:
+
+[
+\texttt{FindRepeatedTiles}.
+]
+
+Another:
+
+[
+\texttt{FindInsideOutside}.
+]
+
+Another:
+
+[
+\texttt{TreatBackgroundAsObject}.
+]
+
+So perception itself can be **task-directed computation**:
+
+[
+x
+\rightarrow
+P_{\rm perception}^{(\tau)}(x)
+\rightarrow
+W.
+]
+
+That's stronger than:
+
+[
+x\rightarrow\text{fixed embedding}.
+]
+
+It means the system can learn *how to look at the problem*.
+
+That's very relevant to ARC.
+
+---
+
+# And planning could just be program synthesis over a world model
+
+Once you have:
+
+[
+\hat P_{\rm world},
+]
+
+planning can initially be something crude:
+
+[
+\operatorname{Search}
+(
+\hat P_{\rm world},
+s,
+G
+).
+]
+
+Maybe brute force.
+
+But across millions of games, repeated useful planning structures would themselves be compressed:
+
+[
+\text{search trajectories}
+\rightarrow
+\text{heuristics}
+\rightarrow
+\text{planning macros}.
+]
+
+So eventually something that initially requires:
+
+[
+10^5
+]
+
+search steps might become:
+
+[
+\texttt{NavigateAroundObstacle}(x).
+]
+
+This gives us an interesting view of intelligence:
+
+[
+\boxed{
+\textbf{reasoning starts as expensive search and gradually compiles into reusable computation.}
+}
+]
+
+And when a genuinely novel situation occurs, the system falls back toward search again.
+
+That's reminiscent of the fast/slow distinction we want:
+
+[
+\text{familiar}
+\Rightarrow
+\text{compiled program}
+]
+
+[
+\text{novel}
+\Rightarrow
+\text{search/synthesis}.
+]
+
+Then successful novel solutions become candidates for later compilation.
+
+That's basically wake/sleep at the level of thought.
+
+---
+
+# Games let us train this loop naturally
+
+For every episode:
+
+### 1. Observe
+
+[
+o_t.
+]
+
+Run learned perceptual programs.
+
+### 2. Hypothesize
+
+Construct candidate world/task programs.
+
+### 3. Predict
+
+[
+\hat o_{t+1}
+============
+
+P(o_t,a_t).
+]
+
+### 4. Act experimentally
+
+Choose actions partly for reward and partly for information.
+
+### 5. Update hypotheses
+
+Reject inconsistent programs.
+
+### 6. Plan
+
+Use surviving programs to reach the inferred goal.
+
+### 7. Consolidate
+
+Across games:
+
+* compress useful operators;
+* promote recurrent computations;
+* form parameterized families;
+* eventually macro repeated reasoning routines.
+
+That is already an AGI-ish training loop.
+
+---
+
+# Exploration becomes another reasoning program
+
+This is something static ARC doesn't exercise much but games do.
+
+The agent sometimes needs to choose an action because it is **informative**, not immediately rewarding.
+
+For example:
+
+> I don't know whether red blocks are lethal. Touch one safely to learn.
+
+That means reasoning includes:
+
+[
+\texttt{ChooseExperiment}
+]
+
+based on reduction in uncertainty over candidate programs.
+
+Repeated active-learning strategies may themselves become library programs.
+
+That's why interactive worlds are so attractive.
+
+And ARC-AGI-3 explicitly adds this interactive/agentic dimension beyond ARC-AGI-1/2. ([ARC Prize][6])
+
+---
+
+# I would use a curriculum of world complexity
+
+Not "easy game → hard game" merely in terms of score.
+
+Instead increase **program structure**.
+
+### Stage 1 — Primitive induction
+
+One hidden rule.
+
+Examples:
+
+[
+\text{touch red}\rightarrow\text{red disappears}.
+]
+
+### Stage 2 — Composition
+
+Two or three known rules:
+
+[
+A\circ B\circ C.
+]
+
+### Stage 3 — Conditional structure
+
+[
+\texttt{IF}(condition,A,B).
+]
+
+### Stage 4 — Iteration
+
+[
+\texttt{REPEAT}(A,\text{until }C).
+]
+
+### Stage 5 — Hidden state
+
+World behavior depends on memory.
+
+### Stage 6 — Partial observability
+
+Need to remember unseen state.
+
+### Stage 7 — Information gathering
+
+Need experiments to identify rules.
+
+### Stage 8 — Long-horizon planning
+
+World program is understood but achieving the goal requires planning.
+
+### Stage 9 — New abstractions
+
+The existing library doesn't efficiently express the world; invent something.
+
+That's basically a curriculum toward ARC-AGI-3-like intelligence.
+
+---
+
+# Importantly, we should procedurally generate train/test splits by *program structure*
+
+A normal random split would be too easy.
+
+Suppose training contains:
+
+[
+A+B
+]
+
+and:
+
+[
+B+C.
+]
+
+Testing should contain:
+
+[
+A+C,
+]
+
+or perhaps:
+
+[
+A\circ B\circ C,
+]
+
+or a new rule parameter:
+
+[
+A(\alpha_{\rm unseen}).
+]
+
+Even harder:
+
+Train on programs with depth:
+
+[
+d\le4,
+]
+
+test:
+
+[
+d=5,6.
+]
+
+Or train on:
+
+[
+\texttt{IF},
+\quad
+\texttt{REPEAT}
+]
+
+separately, then test novel nesting:
+
+[
+\texttt{REPEAT}(
+\texttt{IF}(...)
+).
+]
+
+This tests whether the library really became a **language**.
+
+---
+
+# The essential generalization test
+
+I think the gold-standard experiment eventually looks like this:
+
+The model has never encountered game (G^*).
+
+It gets:
+
+* a novel perceptual presentation;
+* novel rules;
+* no textual instructions;
+* maybe a small interaction budget.
+
+But every rule is either:
+
+1. expressible by compositions of known library computations, or
+2. close enough to known computations that a cheap new abstraction can be invented.
+
+The model:
+
+[
+\boxed{
+\text{perceives}
+\rightarrow
+\text{experiments}
+\rightarrow
+\text{infers the program}
+\rightarrow
+\text{plans}
+\rightarrow
+\text{solves}.
+}
+]
+
+Without changing the slow pretrained weights.
+
+That is very close to what we'd want from fluid intelligence.
+
+---
+
+# Then ARC becomes an out-of-distribution test
+
+I would **not initially train directly on ARC**.
+
+I'd train on the procedural world curriculum.
+
+Then test zero-shot/few-shot on:
+
+### ARC-AGI-1
+
+Does it transfer?
+
+### ARC-AGI-2
+
+Can it synthesize deeper interacting rules? ARC-AGI-2 explicitly emphasizes compositional reasoning and interacting rules. ([ARC Prize][1])
+
+### ARC-AGI-3
+
+Can the same architecture infer rules/goals interactively and plan in novel environments? ([ARC Prize][2])
+
+That would be much more convincing than training on thousands of ARC-like puzzles and then scoring ARC.
+
+---
+
+# A very important risk: the controller becomes the real intelligence
+
+Suppose we have an amazing hand-built search procedure that takes library primitives and solves everything.
+
+Then we've merely moved the intelligence from the neural model into our program synthesizer.
+
+We need to watch this carefully.
+
+Initially a strong search algorithm is fine experimentally.
+
+But the long-term trajectory should be:
+
+[
+\text{handwritten search}
+\rightarrow
+\text{learned search heuristics}
+\rightarrow
+\text{learned proposal model}
+\rightarrow
+\text{learned restructuring/planning policy}.
+]
+
+Eventually:
+
+[
+q_\phi(P\mid D,\mathcal L)
+]
+
+should propose likely programs.
+
+And V5's planned learned representation-economy policy could become part of this.
+
+---
+
+# This ties everything together
+
+The whole research program could eventually form this loop:
+
+[
+\boxed{
+\begin{array}{ccccc}
+\text{WORLD}
+&\rightarrow&
+\text{PERCEPTION}
+&\rightarrow&
+\text{WORKSPACE}\\
+&&&&\downarrow\\
+&&&&\text{PROGRAM SYNTHESIS}\\
+&&&&\downarrow\\
+&&&&\text{REASON/PLAN}\\
+&&&&\downarrow\\
+&&&&\text{ACT}\\
+&&&&\downarrow\\
+&&&&\text{LEARN}
+\end{array}
+}
+]
+
+Then during consolidation:
+
+[
+\boxed{
+\begin{array}{c}
+\text{successful programs}\\
+\downarrow\\
+\text{find recurrent computation}\\
+\downarrow\\
+\text{COMPRESS / PROMOTE / PARAMETERIZE / MACRO}\\
+\downarrow\\
+\text{better computational language}\\
+\downarrow\\
+\text{future programs become cheaper to discover}
+\end{array}
+}
+]
+
+That's the crucial positive feedback loop:
+
+[
+\boxed{
+\textbf{solving problems improves the language used to solve later problems.}
+}
+]
+
+---
+
+## And that suggests a much grander meta-learning objective
+
+Imagine training over a sequence of games:
+
+[
+G_1,G_2,\ldots,G_T.
+]
+
+Don't optimize merely:
+
+[
+\sum_t L(G_t).
+]
+
+Optimize:
+
+[
+\boxed{
+J
+=
+
+\sum_t
+\text{cost to understand and solve }G_t
++
+\lambda D(\mathcal L_T).
+}
+]
+
+Now the learner is rewarded for developing a library that makes **later unseen games increasingly cheap to understand**.
+
+Measure:
+
+[
+C_{\rm solve}(t).
+]
+
+The dream result is:
+
+[
+\boxed{
+\frac{dC_{\rm solve}}{dt}<0
+}
+]
+
+even though the games remain novel.
+
+That would mean the system isn't merely learning games.
+
+It is:
+
+[
+\boxed{\textbf{learning how to learn worlds}.}
+]
+
+And that may be the real bridge from this project to something like ARC-level general intelligence.
+
+The games are not the goal. They are the **ecology that causes perception, experimentation, abstraction, reasoning, planning, memory, and program synthesis to become economically useful reusable computations**.
+
+[1]: https://arcprize.org/arc-agi/2?utm_source=chatgpt.com "ARC-AGI-2"
+[2]: https://arcprize.org/arc-agi/3?utm_source=chatgpt.com "ARC-AGI-3"
+[3]: https://arcprize.org/guide/1?utm_source=chatgpt.com "ARC-AGI-1 & ARC-AGI-2 Guide"
+[4]: https://arcprize.org/blog/beat-arc-agi-deep-learning-and-program-synthesis?utm_source=chatgpt.com "How to Beat ARC-AGI by Combining Deep Learning and ..."
+[5]: https://arcprize.org/arc-agi?utm_source=chatgpt.com "What is ARC-AGI?"
+[6]: https://arcprize.org/leaderboard?utm_source=chatgpt.com "ARC Prize - Leaderboard"

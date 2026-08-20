@@ -1703,3 +1703,35 @@ testbed can reach: lifecycle machinery costs more than the slack it
 recovers. Locating a sharing threshold would require a library an order
 of magnitude larger than the 216-program world can generate, which is a
 statement about the testbed's ceiling, not only about the learner.
+
+## V4 synthesis: economy over representational transformations
+
+Synthesized the full V4 development program into the paper draft
+(section 10.1), review feedback (reviewer-feedback-34.txt), and
+learnings. The V4 development program falsified its original premise
+(lifecycle management) but produced a stronger result: the economic
+rules that govern when a neural library should restructure.
+
+Key development findings:
+- V3's abstractions were behaviorally distinct, not redundant
+- COMPRESS (local precision/rank reduction) beats FACTORIZE,
+  RETIRE, and FORK across the entire reachable census (15/15
+  regime-worlds, including tripled lifetimes)
+- The retention law H_R * s_bar > lambda*D(A) was not fitted:
+  predicted crossing 17.1, empirical 17.9 (within ~5%)
+- Promotion and retention are the same amortization decision in
+  opposite temporal directions
+- Dormancy length is not the relevant variable; only expected
+  remaining reuse matters
+- In a self-modifying library, abstraction value is conditional on
+  library state V(A | L_t, H_t, pi), making the problem sequential
+  structural decision-making
+- The recursive economic law N*s > C appears at every level (tasks,
+  retention, schema, macro)
+- Missing pressures identified: scale, meta-recurrence,
+  nonstationarity, reacquisition cost, retrieval cost
+
+Added section 10.1 to paper/draft.md as development-stage outlook
+(not confirmatory). Updated review-index.md and learnings.txt with
+the full synthesis. No sealed worlds were run; V4 remains
+development-only.

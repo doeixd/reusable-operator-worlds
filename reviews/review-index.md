@@ -1038,3 +1038,163 @@ whether it is worth naming, how precisely it should be encoded, and whether
 keeping that representation will make future learning cheaper. V4 didn't give
 MERGE or DELETE — it gave the rules those operations will eventually have to
 obey.
+
+### [reviewer-feedback-35.txt](reviewer-feedback-35.txt)
+Proposes V5 — Learning the Representation Economy. The charter: given a stream
+of experience and an evolving computational library, can a learner determine
+what form information should take (private, compressed, shared, parameterized,
+retained, or replaced) so as to minimize prospective lifetime cost? PROMOTE,
+COMPRESS, RETAIN, FACTORIZE, FORK, DELETE are not independent tricks but
+candidate actions in a representation economy. Six sub-proposals: (V5.0) Finish
+the coding-frontier audit — V4 found 8-bit storage is 4–8× above the behavioral
+minimum, so every future structural comparison must use D*(R) = min over
+behavior-preserving encodings of D(R) rather than arbitrary fixed-width
+D_8bit(R); new constitutional rule: compare representation classes after each
+has been locally compressed to its own rate-distortion frontier. (V5.1) Test
+whether the amortization law is universal — the V4 retention result H* = λD(A)/s̄
+predicted 17.1 and observed 17.9; now deliberately change D(A) (store at
+2,3,4,6,8 bits/scalar) and s̄ independently, predict H*(D) = λD/s̄ before
+running, and check H* ∝ D and H* ∝ 1/s; H19 (amortization invariance: N*·s ≈ C
+across independently manipulated code cost, reuse value, and horizon, with no
+fitted threshold) would be a central theoretical result. (V5.2) Build a
+genuinely hierarchical recurrence benchmark — create a continuous meta-recurrence
+knob A_f(z) = C(z) + r_meta·B(z;α_f) + √(1−r_meta²)·ε_f(z) controlling how much
+abstractions belong to a common operator family, simultaneously control library
+scale M while holding task support per abstraction fixed, and map (M, r_meta) →
+best representation (COMPRESS vs FACTORIZE); predict M small ⇒ COMPRESS even at
+decent meta-recurrence, but M↑ and r_meta↑ should eventually produce FACTORIZE;
+the experiment discovers M*(r_meta), which is V1 one abstraction level higher
+(V1: task recurrence → sharing threshold; V5: abstraction recurrence → schema
+threshold). (V5.3) The strongest test of a parameterized abstraction — learn a
+family A(z;α), then present a new member not used to fit it; compare full
+acquisition (learn entirely new A_new) vs family acquisition (keep A(·;α) fixed,
+learn only α_new); the higher-order abstraction claim is that a new family member
+requires few arguments rather than a whole new operator; measure prequential
+cost, samples to criterion, retained bits, held-out behavior, always against
+matched-budget independently compressed operator; if the family wins, we've
+moved from reusable computations to reusable spaces of computations. (V5.4)
+Build an "edit market" — at every consolidation point generate candidate edits
+{KEEP, COMPRESS, PROMOTE, FACTORIZE, RETAIN, RETIRE} (later add FORK), estimate
+ΔJ(e) for each, and choose e* = argmax_e ΔJ(e); initially not learned, using
+hand-designed estimators based on V1–V4; the experiment asks whether one common
+economic objective can correctly choose different edits across regimes (low
+recurrence→KEEP, repeated innovation→PROMOTE, bloated atoms→COMPRESS, related
+atoms→FACTORIZE, future return→RETAIN, obsolete→RETIRE). (V5.5) Structural
+regret — V4's path-dependence means myopic edit value is insufficient; define an
+offline oracle π* = argmin_π J(whole future structural trajectory), then compare
+myopic (argmin_e J_{t+1}), short-horizon rollout Q_h(L_t,e), and clairvoyant
+oracle; predict myopic ≈ oracle in stationary worlds but rollout < myopic
+structural regret under library evolution/nonstationarity, establishing that
+representation management requires planning. (V5.6) Learn the refactoring policy
+— the logged (L_t, H_t, e, ΔJ, outcome) tuples are training data; train
+q_φ(e | L_t, H_t) or Q̂_φ(L_t, e) to predict valuable structural edits;
+meta-train across many synthetic economies (different recurrence, horizons, code
+costs, library sizes, nonstationarity, meta-recurrence) and test on unseen
+conditions; the claim is that the system learned how to restructure itself
+rather than executing hand-written rules — the first point where "train the
+optimizer with the model" becomes experimentally tractable. Holds macros/loops
+for V6 (compositional abstraction) because V4 showed structural compressibility
+isn't sufficient — a macro must beat COMPRESS and every simpler counterfactual;
+once V5 works, a macro is just another candidate edit (MACRO) with fixed
+creation cost and repeated execution savings, and the theory carries over. Tests
+a deeper hypothesis: a natural order of compression opportunities (KEEP →
+COMPRESS → PROMOTE → FACTORIZE → MACRO) emerges not by programming but because
+each successive operation has larger fixed structural cost requiring more
+recurrence to amortize; increasing recurrence/scale should cause discrete
+transitions in the optimal representation, so the computational language's
+structure emerges from economic phase transitions. Upgrades the theory from
+N×s > C to Choose R = argmin_R [C(R) + E[future cost | R]], and because edits
+alter future learning (R_{t+1} = U(R_t, e_t)), the endpoint becomes π* = argmin_π
+E[Σ_t (L_t + λD_t + μC_t)] — learn a policy for continually choosing the cheapest
+useful representation of accumulated computation. Six preregistered hypotheses:
+H19 (code-cost invariance), H20 (higher-order amortization), H21 (prospective
+schema reuse), H22 (economic edit selection), H23 (structural planning), H24
+(learned restructuring), forming a ladder. Execution order: (1) finish V3/V4
+coding-frontier audit, (2) run H19, (3) build hierarchical/meta-recurrence
+benchmark with support per family controlled, (4) run oracles until a
+COMPRESS→FACTORIZE phase boundary exists, (5) test prospective family-member
+acquisition, (6) construct the edit market, (7) measure myopic vs rollout
+structural regret, (8) train the edit-value/refactoring policy, (9) if that
+works, V6 gets MACRO/LOOP/recursive composition.
+
+### [reviewer-feedback-36.txt](reviewer-feedback-36.txt)
+Connects the representation economy to ARC-AGI through a procedural game-world
+pretraining vision. If the project reaches the endpoint where perception is
+library computation and arbitrary programs can be assembled from learned library
+elements, then the natural next step is to pretrain not on answers but on worlds.
+ARC-AGI-2 emphasizes compositional reasoning from few examples; ARC-AGI-3 is
+explicitly interactive (agent enters novel environments without instructions,
+must explore, infer goals/rules, build a world model, and act over time). The
+proposed architecture: observation → perceptual programs → workspace W →
+reasoning program → W' → planning program → action, where the perception/
+reasoning/planning distinction does not exist architecturally — they are all
+programs over state (e.g., FindObjects→GroupByColor→InferSymmetry→ApplyTransform
+solves an ARC-like visual problem; FindObjects→PredictCollision→Simulate→
+ChooseAction solves a game; same computational language). Reasoning and planning
+themselves could emerge as learned reusable programs: if the hypothesize→
+simulate→compare→backtrack sequence recurs enough (N·s > C_macro), the theory
+says TEST_HYPOTHESIS should become economical; repeated simulate→evaluate→
+choose becomes PLAN; repeated try→fail→restore→try-alternative becomes SEARCH.
+This is the recursive amortization law applied one level higher, to thought
+itself. Argues against pretraining on ordinary games (Minecraft, chess, Atari)
+because the system would accumulate game-specific policies; instead wants a
+procedural universe of millions of generated microworlds whose rules are
+composed from latent primitives (varying objects, movability, collisions,
+transformations, keys/locks, gravity, symmetry, copying, containment,
+teleportation, resource consumption, ordering, counting, spatial/temporal
+relations, hidden state, goals, adversaries, stochasticity, combined
+compositionally). Each game has two programs to infer: a world program
+P_world(s_t,a_t)→s_{t+1} and a goal program G:s→{0,1}. ARC-AGI-2 becomes a
+near-degenerate case: treat (x_1,y_1)...(x_n,y_n) as observations of an unknown
+program P(x)=y, synthesize P̂, run ŷ=P̂(x_test) — but assembled from the learned
+computational language, not a hard-coded DSL. The games should teach priors not
+solutions (objects persist, boundaries matter, symmetry often matters,
+transformations compose, goals can be inferred, unsuccessful hypotheses should
+be abandoned); pretraining builds a library {SEGMENT, COUNT, COMPARE, ROTATE,
+TRANSLATE, TRACK, SIMULATE, SEARCH, ...} but at evaluation time the program is
+new — that's fluid intelligence. Three learning timescales: slow (computational
+language across millions of worlds, L_t→L_{t+1}), medium (world/task program
+P_τ synthesized from the library for one episode), fast (workspace W_t during
+individual reasoning, holding objects/hypotheses/partial plans/intermediate
+results). Perception as task-directed library computation (ConnectedComponents,
+FindRepeatedTiles, FindInsideOutside, TreatBackgroundAsObject) is stronger than a
+fixed embedding — the system learns how to look at the problem. Planning starts
+as brute-force search over P̂_world but repeated useful planning structures
+compress into macros (10^5 search steps → NavigateAroundObstacle(x)); reasoning
+starts as expensive search and gradually compiles into reusable computation,
+falling back to search on genuinely novel situations — wake/sleep at the level
+of thought. The per-episode training loop: observe → hypothesize → predict →
+act experimentally → update hypotheses → plan → consolidate. Exploration is
+another reasoning program: actions chosen for information not reward
+(ChooseExperiment to reduce uncertainty over candidate programs), and repeated
+active-learning strategies become library programs. A nine-stage curriculum of
+increasing program structure: primitive induction → composition → conditional
+(IF) → iteration (REPEAT) → hidden state → partial observability → information
+gathering → long-horizon planning → new abstractions. Train/test splits should
+be by program structure, not random: train on A+B and B+C, test on A+C or
+A∘B∘C or A(α_unseen); train on depth d≤4, test d=5,6; train on IF and REPEAT
+separately, test novel nesting REPEAT(IF(...)). The gold-standard
+generalization test: a never-seen game with novel perceptual presentation,
+novel rules, no textual instructions, and a small interaction budget, where
+every rule is expressible by compositions of known library computations or close
+enough for a cheap new abstraction — the model perceives→experiments→infers the
+program→plans→solves without changing slow pretrained weights. ARC becomes an
+out-of-distribution test: train on the procedural world curriculum, then test
+zero-shot/few-shot on ARC-AGI-1 (transfer?), ARC-AGI-2 (deeper interacting
+rules?), ARC-AGI-3 (interactive rule/goal inference and planning?). Key risk:
+the controller becomes the real intelligence — a hand-built search procedure
+that takes library primitives and solves everything merely moves intelligence
+from the neural model into the program synthesizer; the trajectory must be
+handwritten search → learned search heuristics → learned proposal model
+q_φ(P|D,L) → learned restructuring/planning policy. The full program loop:
+WORLD→PERCEPTION→WORKSPACE→PROGRAM SYNTHESIS→REASON/PLAN→ACT→LEARN, with
+consolidation feeding successful programs back through find-recurrent-
+computation→COMPRESS/PROMOTE/PARAMETERIZE/MACRO→better computational language→
+future programs cheaper to discover. The crucial positive feedback: solving
+problems improves the language used to solve later problems. The grand
+meta-learning objective: optimize J = Σ_t cost-to-understand-and-solve G_t +
+λD(L_T), not merely Σ_t L(G_t); the dream result is dC_solve/dt < 0 even though
+games remain novel — the system is learning how to learn worlds. The games are
+not the goal; they are the ecology that causes perception, experimentation,
+abstraction, reasoning, planning, memory, and program synthesis to become
+economically useful reusable computations.

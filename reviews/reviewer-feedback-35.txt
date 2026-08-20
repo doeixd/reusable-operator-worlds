@@ -1,0 +1,709 @@
+I think V5 should be the version where the project stops asking **"does operation X work?"** and starts asking:
+
+[
+\boxed{\textbf{Can the system choose the right representation transformation for the economics it faces?}}
+]
+
+V4 suggests that this is the deeper problem. PROMOTE, COMPRESS, RETAIN, FACTORIZE, FORK, DELETE are not independent tricks. They are candidate actions in a **representation economy**.
+
+## My proposed V5
+
+### **V5 — Learning the Representation Economy**
+
+**Charter:**
+
+> Given a stream of experience and an evolving computational library, can a learner determine what form information should take—private, compressed, shared, parameterized, retained, or replaced—so as to minimize prospective lifetime cost?
+
+That gets us much closer to the ultimate system than simply adding MERGE or LOOP.
+
+---
+
+# V5.0 — First, finish one foundational audit
+
+Before changing worlds, finish the coding-frontier audit.
+
+V4 discovered that 8-bit storage can be 4–8× above the behavioral minimum. That means every future structural comparison should use:
+
+[
+D^*(R)
+======
+
+\min_{\text{behavior-preserving encodings}}D(R)
+]
+
+rather than arbitrary fixed-width:
+
+[
+D_{8bit}(R).
+]
+
+The new constitutional rule should be:
+
+[
+\boxed{
+\textbf{Compare representation classes after each has been locally compressed to its own rate-distortion frontier.}
+}
+]
+
+This might modify V3's absolute compression numbers, but whichever way it lands, V5 needs this cleaner currency.
+
+---
+
+# V5.1 — Test whether the amortization law is really universal
+
+This is the cheapest and perhaps most theoretically valuable next experiment.
+
+You found:
+
+[
+H^*
+===
+
+\frac{\lambda D(A)}{\bar s}.
+]
+
+And predicted (17.1), observed (17.9).
+
+Now deliberately change (D(A)).
+
+For example, create equally functional versions stored at:
+
+[
+2,3,4,6,8\text{ bits/scalar}.
+]
+
+Measure (\bar s) once.
+
+Then predict, **before running**:
+
+[
+H^*(D)=\frac{\lambda D}{\bar s}.
+]
+
+If reducing the abstraction's code cost by half moves the empirical retention threshold by approximately half, then you have something much stronger than one lucky boundary.
+
+You'd have:
+
+[
+\boxed{
+H^*\propto D.
+}
+]
+
+Likewise, change the usefulness per reuse (s) while holding (D) fixed:
+
+[
+H^*\propto\frac1s.
+]
+
+This is almost a little empirical law of neural abstraction economics.
+
+### H19 — Amortization invariance
+
+[
+\boxed{
+N^*s\approx C
+}
+]
+
+predicts representational transitions across independently manipulated:
+
+* code cost;
+* reuse value;
+* horizon.
+
+No fitted threshold.
+
+If this survives, I would seriously consider it a central theoretical result of the whole project.
+
+---
+
+# V5.2 — Build a genuinely hierarchical recurrence benchmark
+
+The original V4 factorization failed because:
+
+[
+\texttt{COMPRESS}>\texttt{FACTORIZE}.
+]
+
+Good.
+
+Now don't make a world where FACTORIZE trivially wins. Instead create a **continuous knob controlling recurrence among abstractions**.
+
+Something like:
+
+[
+A_f(z)
+======
+
+C(z)
++
+r_{\rm meta}B(z;\alpha_f)
++
+\sqrt{1-r_{\rm meta}^2}\epsilon_f(z).
+]
+
+Here:
+
+[
+r_{\rm meta}
+]
+
+controls how much different abstractions genuinely belong to a common operator family.
+
+Simultaneously control actual library scale:
+
+[
+M
+]
+
+while holding task support per abstraction fixed.
+
+Then map:
+
+[
+(M,r_{\rm meta})
+\rightarrow
+\text{best representation}.
+]
+
+Candidates:
+
+[
+\texttt{COMPRESS}
+]
+
+versus
+
+[
+\texttt{FACTORIZE}.
+]
+
+I would predict:
+
+[
+M\text{ small}\Rightarrow\texttt{COMPRESS}
+]
+
+even at decent meta-recurrence, because the shared representation cannot amortize its fixed cost.
+
+But:
+
+[
+M\uparrow,\quad r_{\rm meta}\uparrow
+]
+
+should eventually produce:
+
+[
+\boxed{\texttt{FACTORIZE}}.
+]
+
+The experiment should discover:
+
+[
+M^*(r_{\rm meta}).
+]
+
+That's essentially **V1 one abstraction level higher**.
+
+V1:
+
+[
+\text{task recurrence}
+\rightarrow
+\text{sharing threshold}.
+]
+
+V5:
+
+[
+\boxed{
+\text{abstraction recurrence}
+\rightarrow
+\text{schema threshold}.
+}
+]
+
+That would be a beautiful recursion in the research program.
+
+---
+
+# V5.3 — The strongest test of a parameterized abstraction
+
+If a FACTORIZE region exists, don't stop at retrospective compression.
+
+Do the analogue of V3 H11.3.
+
+Learn a family:
+
+[
+A(z;\alpha).
+]
+
+Then present a **new member that wasn't used to fit the family**.
+
+Compare:
+
+### Full acquisition
+
+Learn an entirely new:
+
+[
+A_{\rm new}.
+]
+
+### Family acquisition
+
+Keep (A(\cdot;\alpha)) fixed and learn only:
+
+[
+\alpha_{\rm new}.
+]
+
+The real higher-order abstraction claim is:
+
+[
+\boxed{
+\text{new family member}
+\rightarrow
+\text{few arguments rather than a whole new operator}.
+}
+]
+
+Measure:
+
+* prequential learning cost;
+* samples to criterion;
+* retained bits;
+* held-out behavior.
+
+And always compare against:
+
+[
+\text{matched-budget independently compressed operator}.
+]
+
+If the family wins, then you have moved from:
+
+[
+\text{reusable computations}
+]
+
+to:
+
+[
+\boxed{\text{reusable spaces of computations}.}
+]
+
+That's a major step toward learned program structure.
+
+---
+
+# V5.4 — Build an "edit market"
+
+Once you have at least two or three regimes where different choices are genuinely optimal, stop testing edits separately.
+
+At every consolidation point generate:
+
+[
+\mathcal E=
+{
+\texttt{KEEP},
+\texttt{COMPRESS},
+\texttt{PROMOTE},
+\texttt{FACTORIZE},
+\texttt{RETAIN},
+\texttt{RETIRE}
+}.
+]
+
+Later add FORK.
+
+For each candidate:
+
+[
+e
+]
+
+estimate:
+
+[
+\widehat{\Delta J}(e).
+]
+
+Then choose:
+
+[
+e^*=\arg\max_e\widehat{\Delta J}(e).
+]
+
+Initially this should **not be learned**.
+
+Use hand-designed estimators based on everything V1–V4 taught us.
+
+The experiment asks:
+
+> Can the same economic objective correctly choose different representation transformations in different regimes?
+
+For example:
+
+| Regime                      | Correct edit |
+| --------------------------- | ------------ |
+| low recurrence              | KEEP/private |
+| repeated local innovation   | PROMOTE      |
+| individually bloated atoms  | COMPRESS     |
+| many strongly related atoms | FACTORIZE    |
+| valuable future return      | RETAIN       |
+| genuinely obsolete          | RETIRE       |
+
+If one common decision framework navigates all of these, that's much more impressive than six independently successful operators.
+
+---
+
+# V5.5 — Structural regret
+
+V4's path-dependence result tells us that myopic edit value won't ultimately be enough.
+
+Deleting (A) changes what gets promoted later.
+
+So define an offline oracle:
+
+[
+\pi^*
+=====
+
+\arg\min_\pi J(\text{whole future structural trajectory}).
+]
+
+For small worlds, exact or beam-search this.
+
+Then:
+
+[
+\boxed{
+R_{\rm structural}
+==================
+
+J(\pi_{\rm online})-J(\pi^*).
+}
+]
+
+Now compare:
+
+### Myopic
+
+[
+\arg\min_e J_{t+1}.
+]
+
+### Short-horizon rollout
+
+Estimate:
+
+[
+Q_h(\mathcal L_t,e)
+]
+
+over the next (h) tasks.
+
+### Clairvoyant oracle
+
+Full future.
+
+I'd expect:
+
+[
+\text{myopic}\approx\text{oracle}
+]
+
+in simple stationary worlds.
+
+But under library evolution/nonstationarity:
+
+[
+\boxed{
+\text{rollout}<\text{myopic structural regret}.
+}
+]
+
+That would establish experimentally that **representation management requires planning**.
+
+This follows directly from V4 rather than being an arbitrary new feature.
+
+---
+
+# V5.6 — Then learn the refactoring policy
+
+This is where your old **model + learned optimizer** idea reconnects directly.
+
+You've already been logging things of the form:
+
+[
+(
+\mathcal L_t,
+H_t,
+e,
+\Delta J,
+\text{outcome}
+).
+]
+
+That's training data.
+
+Train:
+
+[
+q_\phi(e\mid\mathcal L_t,H_t)
+]
+
+or perhaps:
+
+[
+\hat Q_\phi(\mathcal L_t,e)
+]
+
+to predict which structural edit is valuable.
+
+Meta-train it across many synthetic economies:
+
+* different recurrence;
+* different horizons;
+* different code costs;
+* different library sizes;
+* different nonstationarity;
+* different meta-recurrence.
+
+Then **test on unseen economics**.
+
+For example, never train on:
+
+[
+D(A)=5\text{ bits/scalar}
+]
+
+but see if it generalizes there.
+
+Or train on horizons:
+
+[
+8,16,32
+]
+
+and test:
+
+[
+24.
+]
+
+The ultimate claim would be:
+
+[
+\boxed{
+\textbf{the system learned how to restructure itself,
+rather than merely executing hand-written restructuring rules.}
+}
+]
+
+This is the first point where I think "train the optimizer with the model" becomes experimentally tractable.
+
+---
+
+# I would hold macros/loops one more version
+
+I'm still tempted by:
+
+[
+[A,B,C]
+\rightarrow
+M
+]
+
+and later:
+
+[
+[M,M,M]\rightarrow\operatorname{REPEAT}(M).
+]
+
+But V4 revealed something important:
+
+> A structural pattern looking compressible isn't sufficient. It has to beat COMPRESS and every simpler counterfactual.
+
+If we jump to macros before the representation economy works, we'll almost certainly rediscover the same false positives at a higher level.
+
+So I'd make:
+
+[
+\boxed{\text{V6 = compositional abstraction}}
+]
+
+once V5 can choose representations rationally.
+
+Then a macro is merely another candidate edit in the same economic system:
+
+[
+\texttt{MACRO}
+]
+
+with fixed creation cost and repeated execution savings.
+
+The theory carries over automatically.
+
+---
+
+# A deeper hypothesis I would explicitly test
+
+V4 suggests that there may be a **natural order in which compression opportunities become rational**:
+
+[
+\boxed{
+\texttt{KEEP}
+\rightarrow
+\texttt{COMPRESS}
+\rightarrow
+\texttt{PROMOTE}
+\rightarrow
+\texttt{FACTORIZE}
+\rightarrow
+\texttt{MACRO}
+}
+]
+
+not because we programmed that hierarchy, but because each successive operation has larger fixed structural cost and therefore requires more recurrence to amortize.
+
+If true, increasing recurrence/scale should cause discrete transitions in the optimal representation.
+
+Something like:
+
+```text
+recurrence / support →
+
+private     compressed     atom       schema       macro
+──────────────┬─────────────┬──────────┬─────────────
+              N1            N2         N3
+```
+
+That would be fascinating.
+
+The structure of the computational language would emerge from **economic phase transitions**.
+
+---
+
+# The theory I think V5 should pursue
+
+We've now seen the same shape repeatedly:
+
+[
+\boxed{N\times s>C.}
+]
+
+But I think V5 should upgrade it to:
+
+[
+\boxed{
+\text{Choose representation }R
+==============================
+
+\arg\min_R
+\left[
+C(R)
++
+\mathbb E[\text{future cost}\mid R]
+\right].
+}
+]
+
+Where (R) might mean:
+
+* private residual;
+* compressed atom;
+* shared atom;
+* parameterized family;
+* retained memory;
+* eventually macro/program.
+
+And because edits alter future learning:
+
+[
+R_{t+1}=U(R_t,e_t),
+]
+
+the ultimate problem becomes:
+
+[
+\boxed{
+\pi^*
+=====
+
+\arg\min_\pi
+\mathbb E
+\left[
+\sum_t
+L_t
++
+\lambda D_t
++
+\mu C_t
+\right].
+}
+]
+
+So the endpoint of the research program is no longer merely:
+
+> Learn a library of neural primitives.
+
+It is:
+
+[
+\boxed{
+\textbf{Learn a policy for continually choosing the cheapest useful representation of accumulated computation.}
+}
+]
+
+That's more general.
+
+---
+
+## The V5 hypotheses I'd preregister conceptually
+
+**H19 — Code-cost invariance.**
+Representation/retention thresholds move quantitatively as predicted by (C/s) when code cost or per-use savings are independently manipulated.
+
+**H20 — Higher-order amortization.**
+At sufficiently high abstraction-level recurrence and support, FACTORIZE overtakes matched-budget COMPRESS.
+
+**H21 — Prospective schema reuse.**
+A learned operator family makes a novel family member cheaper to acquire by learning arguments rather than a complete operator.
+
+**H22 — Economic edit selection.**
+One prospective scoring rule selects the correct representation edit across regimes where different edits are oracle-optimal.
+
+**H23 — Structural planning.**
+When edits alter future library formation, finite-horizon structural planning beats myopic per-object decisions.
+
+**H24 — Learned restructuring.**
+A policy trained on restructuring trajectories reduces structural regret on held-out worlds/economic conditions.
+
+I wouldn't promise all six in one experimental version. They form a ladder.
+
+---
+
+# My actual execution order
+
+If I were directing the project from here:
+
+1. **Finish the V3/V4 coding-frontier audit.**
+2. **Run H19**, because it's cheap, sharp, and could establish a genuine quantitative law.
+3. Build the **hierarchical/meta-recurrence benchmark** with support per family controlled.
+4. Run only oracles until a COMPRESS→FACTORIZE phase boundary exists.
+5. Test **prospective family-member acquisition**.
+6. Construct the small **edit market**.
+7. Measure myopic vs rollout structural regret.
+8. Only then train the edit-value/refactoring policy.
+9. If that works, V6 gets MACRO/LOOP/recursive composition.
+
+The key is that V5 shouldn't be about adding complexity.
+
+It should test whether the discoveries from V1–V4 can be compressed into **one general principle that tells the learner when complexity is worth adding**.
+
+If that works, we've moved from manually constructing a neural library to the beginnings of a system that can **design its own computational representation over its learning lifetime**.

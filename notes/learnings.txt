@@ -1659,3 +1659,112 @@ should take, whether it is worth naming, how precisely it should be encoded,
 and whether keeping that representation will make future learning cheaper. V4
 didn't give MERGE or DELETE — it gave the rules those operations will
 eventually have to obey.
+
+
+================================================================================
+V5 PROPOSAL: LEARNING THE REPRESENTATION ECONOMY (NOT YET EXECUTED)
+================================================================================
+
+V5 should stop asking "does operation X work?" and ask: can the system choose
+the right representation transformation for the economics it faces? PROMOTE,
+COMPRESS, RETAIN, FACTORIZE, FORK, DELETE are candidate actions in a
+representation economy. Charter: given a stream of experience and an evolving
+computational library, can a learner determine what form information should
+take (private, compressed, shared, parameterized, retained, or replaced) so as
+to minimize prospective lifetime cost?
+
+V5.0 — CODING-FRONTIER AUDIT (prerequisite). V4 found 8-bit storage is 4–8×
+above the behavioral minimum. Every future structural comparison must use
+D*(R) = min over behavior-preserving encodings of D(R), not arbitrary
+D_8bit(R). New constitutional rule: compare representation classes after each
+has been locally compressed to its own rate-distortion frontier.
+
+V5.1 — AMORTIZATION INVARIANCE (H19). The V4 retention result H* = λD(A)/s̄
+predicted 17.1, observed 17.9. Now deliberately change D(A) (store at
+2,3,4,6,8 bits/scalar) and s̄ independently, predict H*(D) = λD/s̄ before
+running, and check H* ∝ D and H* ∝ 1/s. H19: N*·s ≈ C across independently
+manipulated code cost, reuse value, and horizon, with no fitted threshold.
+This is the cheapest and potentially most theoretically valuable experiment.
+
+V5.2 — HIERARCHICAL RECURRENCE BENCHMARK. Create a continuous meta-recurrence
+knob A_f(z) = C(z) + r_meta·B(z;α_f) + √(1−r_meta²)·ε_f(z) controlling how
+much abstractions belong to a common operator family. Simultaneously control
+library scale M while holding task support per abstraction fixed. Map (M,
+r_meta) → best representation (COMPRESS vs FACTORIZE). Predict M small ⇒
+COMPRESS even at decent meta-recurrence, but M↑ and r_meta↑ eventually produce
+FACTORIZE. The experiment discovers M*(r_meta) — V1 one abstraction level
+higher (V1: task recurrence → sharing threshold; V5: abstraction recurrence →
+schema threshold). H20: at sufficiently high abstraction-level recurrence and
+support, FACTORIZE overtakes matched-budget COMPRESS.
+
+V5.3 — PROSPECTIVE SCHEMA REUSE (H21). Learn a family A(z;α), then present a
+new member not used to fit it. Compare full acquisition (learn entirely new
+A_new) vs family acquisition (keep A(·;α) fixed, learn only α_new). The
+higher-order abstraction claim: a new family member requires few arguments
+rather than a whole new operator. Measure prequential cost, samples to
+criterion, retained bits, held-out behavior, always against matched-budget
+independently compressed operator. If the family wins, we've moved from
+reusable computations to reusable spaces of computations.
+
+V5.4 — ECONOMIC EDIT SELECTION (H22). At every consolidation point generate
+candidate edits {KEEP, COMPRESS, PROMOTE, FACTORIZE, RETAIN, RETIRE} (later
+add FORK), estimate ΔJ(e) for each, choose e* = argmax_e ΔJ(e). Initially
+not learned — use hand-designed estimators based on V1–V4. The experiment
+asks whether one common economic objective can correctly choose different
+edits across regimes (low recurrence→KEEP, repeated innovation→PROMOTE,
+bloated atoms→COMPRESS, related atoms→FACTORIZE, future return→RETAIN,
+obsolete→RETIRE).
+
+V5.5 — STRUCTURAL REGRET (H23). V4's path-dependence means myopic edit value
+is insufficient. Define π* = argmin_π J(whole future structural trajectory),
+then compare myopic (argmin_e J_{t+1}), short-horizon rollout Q_h(L_t,e),
+and clairvoyant oracle. Predict myopic ≈ oracle in stationary worlds but
+rollout < myopic structural regret under library evolution/nonstationarity,
+establishing that representation management requires planning.
+
+V5.6 — LEARNED REFACTORING POLICY (H24). The logged (L_t, H_t, e, ΔJ, outcome)
+tuples are training data. Train q_φ(e | L_t, H_t) or Q̂_φ(L_t, e) to predict
+valuable structural edits. Meta-train across many synthetic economies and test
+on unseen conditions. The claim: the system learned how to restructure itself
+rather than executing hand-written rules — the first point where "train the
+optimizer with the model" becomes experimentally tractable.
+
+MACROS/LOOPS HELD FOR V6. V4 showed structural compressibility isn't
+sufficient — a macro must beat COMPRESS and every simpler counterfactual. Once
+V5 works, a macro is just another candidate edit (MACRO) with fixed creation
+cost and repeated execution savings; the theory carries over. V6 =
+compositional abstraction.
+
+DEEPER HYPOTHESIS. A natural order of compression opportunities (KEEP →
+COMPRESS → PROMOTE → FACTORIZE → MACRO) emerges not by programming but because
+each successive operation has larger fixed structural cost requiring more
+recurrence to amortize. Increasing recurrence/scale should cause discrete
+transitions in the optimal representation — the computational language's
+structure emerges from economic phase transitions.
+
+UPGRADED THEORY. From N×s > C to Choose R = argmin_R [C(R) + E[future cost |
+R]], and because edits alter future learning (R_{t+1} = U(R_t, e_t)), the
+endpoint becomes π* = argmin_π E[Σ_t (L_t + λD_t + μC_t)] — learn a policy for
+continually choosing the cheapest useful representation of accumulated
+computation.
+
+EXECUTION ORDER. (1) Finish V3/V4 coding-frontier audit. (2) Run H19. (3)
+Build hierarchical/meta-recurrence benchmark with support per family
+controlled. (4) Run oracles until COMPRESS→FACTORIZE phase boundary exists.
+(5) Test prospective family-member acquisition. (6) Construct the edit market.
+(7) Measure myopic vs rollout structural regret. (8) Train the edit-value/
+refactoring policy. (9) If that works, V6 gets MACRO/LOOP/recursive
+composition.
+
+SIX PREREGISTERED HYPOTHESES (a ladder, not all in one version):
+- H19: code-cost invariance (thresholds move as C/s predicts)
+- H20: higher-order amortization (FACTORIZE overtakes COMPRESS at high r_meta
+  and M)
+- H21: prospective schema reuse (new family member needs arguments, not a
+  whole operator)
+- H22: economic edit selection (one scoring rule selects correct edit across
+  regimes)
+- H23: structural planning (finite-horizon rollout beats myopic under library
+  evolution)
+- H24: learned restructuring (trained policy reduces structural regret on
+  held-out economics)

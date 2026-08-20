@@ -1120,3 +1120,151 @@ figure (63.3%) is not itself re-derived here; what is shown is that on
 matched development worlds the same comparison survives frontier
 optimization, with the fixed-precision and frontier numbers agreeing to
 within 1 point on average.
+
+# V5 proposed hypotheses — preregistered before any V5 experiment (2026-08-20)
+
+These six hypotheses form a ladder, not a single version. They are
+committed here before any V5 world is generated, in the same spirit as
+the V1/V2/V3 confirmation plans. None has been run.
+
+## H19 — Code-cost invariance
+
+The V4 retention law H* = lambda*D(A)/s_bar predicted 17.1 returning
+tasks and observed 17.9 (within ~5%). V5.1 deliberately and
+independently manipulates D(A) (store equally functional abstractions
+at 2, 3, 4, 6, 8 bits/scalar) and s_bar (vary per-reuse savings while
+holding D fixed), predicting before running that the empirical
+retention threshold follows H*(D) = lambda*D/s_bar -- i.e., H* is
+proportional to D and inversely proportional to s. If halving the code
+cost approximately halves the threshold, and halving s_bar approximately
+doubles it, then N*·s ~ C is an empirical law of neural abstraction
+economics, not one lucky boundary. No fitted threshold.
+
+Prediction: the threshold moves quantitatively as C/s predicts across
+at least two independent manipulations of C and two of s.
+
+Confidence: high. The single-point V4 result was unfitted and within 5%.
+The strongest risk is that s_bar changes when D changes (coarser
+operators may be slightly less useful per reuse), which would bend but
+not break the proportionality.
+
+## H20 — Higher-order amortization
+
+At sufficiently high abstraction-level recurrence (r_meta) and library
+scale (M), FACTORIZE overtakes matched-budget COMPRESS. V4 found no
+factorization crossing below ~16 abstractions. V5.2 controls r_meta
+and M independently while holding task support per abstraction fixed.
+Predicted: M small => COMPRESS wins even at decent r_meta; M↑ and
+r_meta↑ eventually produce FACTORIZE. The experiment discovers
+M*(r_meta), which is V1's recurrence experiment one abstraction level
+higher.
+
+Prediction: a COMPRESS-to-FACTORIZE crossing exists and M*(r_meta) is
+monotone non-increasing in r_meta.
+
+Confidence: moderate. The existence of a crossing is theoretically
+expected from the amortization law, but the required M may exceed the
+216-program world's ceiling unless primitives are added.
+
+## H21 — Prospective schema reuse
+
+A learned operator family A(z;alpha) makes a novel family member
+cheaper to acquire by learning only its arguments alpha_new rather
+than a complete new operator. Measured by prequential cost, samples to
+criterion, retained bits, and held-out behavior, always against a
+matched-budget independently compressed operator.
+
+Prediction: family acquisition beats full acquisition on at least
+prequential cost and retained bits when the family was fit on enough
+members.
+
+Confidence: moderate. V4's leave-one-abstraction-out test recovered
+only ~7.5% of the centre-only deficit, so the current rank-2 family is
+weak. A richer family parameterization or higher r_meta may be needed.
+
+## H22 — Economic edit selection
+
+One prospective scoring rule selects the correct representation edit
+across regimes where different edits are oracle-optimal (low recurrence
+=> KEEP, repeated innovation => PROMOTE, bloated atoms => COMPRESS,
+related atoms => FACTORIZE, future return => RETAIN, obsolete => RETIRE).
+Initially hand-designed, not learned.
+
+Prediction: a single scoring rule matches the oracle-optimal edit in
+a majority of (regime, world) cells.
+
+Confidence: moderate. The rule must generalize across structurally
+different edits; the risk is that no single hand-designed estimator
+covers all regimes.
+
+## H23 — Structural planning
+
+When edits alter future library formation, finite-horizon structural
+planning beats myopic per-object decisions. V4 showed deleting A can
+trigger replacement promotion A', saving 0 bits -- path-dependence.
+V5.5 compares myopic (argmin_e J_{t+1}), short-horizon rollout Q_h, and
+clairvoyant oracle.
+
+Prediction: under library evolution or nonstationarity, rollout
+structural regret < myopic structural regret. In stationary worlds,
+myopic ~ oracle.
+
+Confidence: high for the qualitative claim (myopic is insufficient
+under path-dependence); moderate for the quantitative margin.
+
+## H24 — Learned restructuring
+
+A policy trained on restructuring trajectories reduces structural regret
+on held-out worlds/economic conditions not seen during training (e.g.,
+held-out code cost, held-out horizon). The first test of "train the
+optimizer with the model."
+
+Prediction: the trained policy's structural regret is lower than the
+hand-designed estimator's on held-out conditions.
+
+Confidence: low-moderate. This is the most ambitious rung and depends
+on H22 and H23 producing usable signal first.
+
+# Frontier audit on ALL 30 SEALED worlds: the claim strengthens (2026-08-19)
+
+The development-world audit above is superseded by the real thing. The
+sealed worlds could not initially be audited because V3 artifacts do not
+persist `task_reference`/`retired`. Resolved WITHOUT re-opening anything:
+`LifecycleLibraryLearner` is behaviourally identical to the promoting
+learner with its flags off, so re-running seeds 300-329 reproduces the
+same trajectory and persists the table. Verified BIT-EXACT against the
+original artifacts in the first three worlds (delta 0.0 nats in each);
+these are already-scored worlds, and sealed seeds 400-429 were not
+touched.
+
+Componentwise behavioral rate-distortion, each component scored only on
+the computations depending on it, tolerance 10 nats/task:
+
+    MEAN over 30 sealed worlds:  @8bit 67.6%   @frontier 71.1%
+    frontier reduction >= fixed-precision reduction in 29/30 worlds
+
+The reduction is LARGER once both representations are independently
+compressed near their behavioral frontiers. Promotion is therefore not
+buying its description saving from numerical slack that quantization
+could have harvested anyway; the saving grows when that slack is removed
+from both sides. This is the strongest available form of H11.1 and it
+answers the main criticism of the two-part accounting.
+
+DISCREPANCY TO RECONCILE BEFORE PUBLICATION. This audit's
+fixed-precision figure is 67.6%, while the paper reports 63.3% for the
+same sealed block. The gap is an accounting-scope difference, not a
+disagreement about the data: this audit prices task-private residuals
+plus abstractions plus shared basis, and the paper's retained-description
+figure evidently includes or excludes a component differently (route or
+reference state being the likely candidate). The two must be reconciled
+and a single accounting fixed before either number is quoted. Until then
+the defensible claim is the RELATIVE one: whatever the exact scope,
+frontier optimization does not reduce the effect and increases it in
+29/30 worlds.
+
+LIMITS. Single tolerance (10 nats/task) on the sealed block; the
+development-world check showed stability from 2 to 30 nats/task but that
+sweep was not repeated here. Uniform per-component scalar quantization,
+not an optimal code, so every D* is an upper bound on the true minimum
+description length -- which makes the comparison conservative in the
+right direction for both arms.
