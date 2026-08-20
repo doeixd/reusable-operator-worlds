@@ -1770,3 +1770,72 @@ H19 is foundational rather than a local threshold:
     atom retention  H_R         * s_bar_A > D(A)      <- H19
     schema birth    M           * s_bar_S > D(S)      <- H25
     macro birth     N_programs  * s_bar_M > D(M)      <- V6
+
+# H19 VERDICT: PASS (2026-08-20), scored against the criterion frozen above
+
+Stage 2 ran 240 cells, 3 gains x 4 horizons x 10 worlds x 2 arms, zero
+failures, zero post-gap births, zero pre-intervention leaks.
+
+| operating point | D(A) | s_bar | carry | H* predicted | H* observed | err | chi |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| D-arm rank 1 |  99 | 36.8 |   549 | 14.9 | 15.2 | 2.0% | 1.019 |
+| D-arm rank 2 | 198 | 61.0 | 1,098 | 18.0 | 18.0 | 0.0% | 1.000 |
+| D-arm rank 4 | 396 | 68.3 | 2,196 | 32.2 | 32.4 | 0.6% | 1.008 |
+| S-arm g=0.5  | 198 | 28.9 | 1,098 | 38.0 | 38.7 | 1.8% | 1.019 |
+| S-arm g=1.0  | 198 | 58.1 | 1,098 | 18.9 | 19.2 | 1.6% | 1.016 |
+| S-arm g=1.5  | 198 | 85.2 | 1,098 | 12.9 | 13.0 | 0.8% | 1.009 |
+
+    mean |chi - 1| = 0.012   (registered <= 0.15)
+    chi range      = [1.000, 1.019]   (registered inside [0.7, 1.3])
+
+## The seven frozen conditions
+
+1. Routing validity. PASS, and more strongly than required: p_reuse is
+   IDENTICAL between g=1.0 and g=1.5 in every world inspected
+   (0.22/0.22, 0.00/0.00, 1.00/1.00 at the common N=58). The gain moved
+   payoff without touching selection.
+2. Bracketing. PASS. 12.9 sits inside H_R {8, 12, 14, 18} with 4.9 and
+   5.1 returning tasks on either side.
+3. Relative error < 0.25. PASS at 0.6%, and also inside the tighter
+   Stage-2 registration of 15%. No miss to report.
+4. s_bar variation >= 1.5x. PASS at 2.95x.
+5. Zero post-gap births, zero leaks. PASS, 240/240 cells.
+6. No off-grid interpolation. PASS; every crossing is interior to its
+   own grid.
+7. slots=6 stays a separate robustness debt. Honoured; the verdict
+   borrows nothing from it in either direction.
+
+## What is licensed, and what is not
+
+LICENSED, within this testbed:
+
+    The lifetime over which a reusable computation is worth retaining is
+    quantitatively determined by its representation cost divided by its
+    realized per-use saving.
+
+The D-arm manipulates abstraction CAPACITY, moving storage cost and
+per-use utility together. The S-arm holds the stored abstraction
+bit-identical and moves only its post-return utility regime. Across both
+interventions the threshold is predicted by C_carry / s_bar. Neither
+`H* ~ D` (falsified, 46.8%) nor `H* ~ 1/g` is the law; the ratio is.
+
+NOT LICENSED, stated so the result is not over-read:
+
+  * SIX POINTS ON A LINE, NOT A 3x3 GRID. Every S-arm point shares
+    D(A) = 198, so all cost-axis spread comes from the D-arm. A crossed
+    design (each gain at each rank) is not run.
+  * ONE CURRENCY. Every crossing is priced at the 8-bit proxy. At D*
+    the predicted gain crossings are 18.5 / 9.2 / 6.3, which these grids
+    do not bracket, so the law is confirmed in one currency and untested
+    in the other.
+  * ONE PROTOCOL POINT. All of it is slots=12, rank 2 for the S-arm,
+    worlds 500-509, one dormancy geometry. slots=6 changes s_bar by 24%
+    and its crossing is unmeasured.
+  * DEVELOPMENT, NOT CONFIRMATORY. Worlds 500-509 are contaminated V5
+    development seeds. Nothing here is sealed, and 600-629 remain
+    untouched.
+  * The instrument's two known properties still hold: deleting one
+    abstraction collapses the reuse pathway, and D_retain - D_delete =
+    D(A) is an accounting convention. Both are identical across gains,
+    which is why the S-arm is unaffected, but both bear on the absolute
+    numbers.

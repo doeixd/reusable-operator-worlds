@@ -1,0 +1,79 @@
+{
+  "currency": "8-bit proxy",
+  "lambda": "ln 2",
+  "points": [
+    {
+      "point": "D-arm rank 1",
+      "scalars": 99,
+      "s_bar": 36.8,
+      "carry_nats": 548.9725670034767,
+      "predicted": 14.9,
+      "observed": 15.2,
+      "rel_error": 0.020134228187919392,
+      "chi": 1.0189215884743061
+    },
+    {
+      "point": "D-arm rank 2",
+      "scalars": 198,
+      "s_bar": 61.0,
+      "carry_nats": 1097.9451340069534,
+      "predicted": 18.0,
+      "observed": 18.0,
+      "rel_error": 0.0,
+      "chi": 1.0000499715253042
+    },
+    {
+      "point": "D-arm rank 4",
+      "scalars": 396,
+      "s_bar": 68.3,
+      "carry_nats": 2195.8902680139067,
+      "predicted": 32.2,
+      "observed": 32.4,
+      "rel_error": 0.006211180124223469,
+      "chi": 1.0077552745845972
+    },
+    {
+      "point": "S-arm g=0.5",
+      "scalars": 198,
+      "s_bar": 28.9,
+      "carry_nats": 1097.9451340069534,
+      "predicted": 38.0,
+      "observed": 38.7,
+      "rel_error": 0.018421052631579022,
+      "chi": 1.0186574587004062
+    },
+    {
+      "point": "S-arm g=1.0",
+      "scalars": 198,
+      "s_bar": 58.1,
+      "carry_nats": 1097.9451340069534,
+      "predicted": 18.9,
+      "observed": 19.2,
+      "rel_error": 0.01587301587301591,
+      "chi": 1.0160070530381669
+    },
+    {
+      "point": "S-arm g=1.5",
+      "scalars": 198,
+      "s_bar": 85.2,
+      "carry_nats": 1097.9451340069534,
+      "predicted": 12.9,
+      "observed": 13.0,
+      "rel_error": 0.007751937984496096,
+      "chi": 1.0087935778337223
+    }
+  ],
+  "mean_abs_chi_minus_1": 0.01169748735941715,
+  "chi_range": [
+    1.0000499715253042,
+    1.0189215884743061
+  ],
+  "registered": {
+    "mean_abs_chi_minus_1_max": 0.15,
+    "chi_bounds": [
+      0.7,
+      1.3
+    ]
+  },
+  "verdict": "H19 PASS"
+}
