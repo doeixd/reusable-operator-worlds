@@ -1,0 +1,758 @@
+# V5 sketch — Revision 1 (2026-08-20)
+
+A sketch, not a spec. The V5 spec is written only after this document's
+checklist is complete, with the V1–V4R discipline (hypotheses, falsifiers,
+frozen intervals, sealed seeds). Reviews 31–35 and 38–41 are
+incorporated; H19–H24 in PREDICTIONS.md (committed 2026-08-20, before
+any V5 world) are the scaffolding.
+
+Unlike the V4 sketch, this is not written into a vacuum. V4R's sealed
+block has closed 7/7. V5.0 (the component rate-distortion frontier) has
+already run. H19's causal grid is in flight on worlds 500–509 and is
+NOT YET SCORED; nothing in this sketch may treat that grid as a result.
+The hypotheses were frozen before the worlds existed. The protocol
+deviation from the letter of H19 (rank at the generator, rather than
+bits/scalar at the coder) is recorded below rather than silently
+adopted.
+
+## The program ladder and where V5 sits
+
+    V1   When is reuse valuable?                         (confirmed)
+    V2   Can the learner decide what to share?           (confirmed:
+                                                          read yes, write no)
+    V3   Can repeated structure become a NEW abstraction? (confirmed)
+    V4   Can the vocabulary MAINTAIN itself?             (premise
+                                                          falsified; spec
+                                                          preserved unrevised)
+    V4R  When does a library NEED a lifecycle?           (confirmed:
+                                                          preregistered
+                                                          negative + retention
+                                                          law)
+    V5   Can one prospective score choose the cheapest   <- this sketch
+         useful representation as the economics change?
+    V6   Can the library become a compositional language?
+         (CALL/COMPOSE/BIND/…; compositional-closure gate)
+    V7   Can novel programs be synthesized in that language?
+    V8   Do successful programs improve the language?
+         (the first point that would evidence the grand thesis)
+
+The original V4 sketch named V5 as MACRO/LOOP/BRANCH. That destination
+moved. Reviews 35/40 re-identify V5 as representation economics;
+reviews 38–41 put macros at V6 and language self-improvement at V8.
+This sketch follows that re-identification. MACRO is not a consolation
+prize if H20 never pays.
+
+Milestones: M1 (H9) achieved, M2+M3 (H11) achieved, M4 as originally
+drawn (compositions become macros) is V6's entry criterion, not V5's.
+V5 owns the space between "abstractions have sensible economics" and
+"those economics can select among representation classes."
+
+## The V5 question, stated so it cannot drift
+
+V4R asked when a library needs a lifecycle, and answered: not at this
+scale, except for retention, which is birth run forwards. V5 asks:
+
+    Under what conditions does the cheapest useful representation of
+    accumulated computation stop being a static library of independently
+    compressed abstractions, and can one prospective scoring rule track
+    that boundary as code cost, reuse value, meta-recurrence, and
+    horizon change?
+
+One-line contrast: V4R is a census of which edits pay; V5 is a test of
+whether the amortization law is quantitative, whether a second
+representation class exists above compressed atoms, and whether a
+single score can choose among classes. V3 is a maternity ward; V4R is
+an audit of the household budget; V5 is whether the household can
+allocate.
+
+## Why V5 is not just "V4R plus more operations"
+
+Four qualitatively new pressures enter, none of which a census exposes:
+
+1. CAUSAL D, NOT A RE-SCORE. V4R confirmed RETAIN iff H_R * s_bar >
+   lambda * D(A) at one value of D(A). Repricing D at the V5.0 frontier
+   moves the crossing by arithmetic (carry / s_bar) and is not a test.
+   V5 manipulates D and s independently at the generator and predicts
+   the threshold *before* scoring.
+
+2. A SECOND REPRESENTATION CLASS. V4R's FACTORIZE cell lost to matched-
+   budget COMPRESS at every reachable library size. Without a class
+   other than compressed atoms, "edit selection" is a forced choice.
+   V5.2 has to *create* the missing cell with controlled meta-recurrence
+   and support-per-family, or register that the 216-program world
+   cannot instantiate one.
+
+3. SEQUENTIAL VALUE. In an evolving library the carry cost of A is
+   endogenous: deleting A can trigger replacement promotion A' and
+   save 0 bits. Per-object rules are then ill-posed. V5.1 stays on the
+   frozen-library protocol where D_retain - D_delete = D(A) exactly;
+   V5.5 is where endogeneity is the phenomenon.
+
+4. SELECTION, NOT DEMONSTRATION. V1–V4R demonstrated individual
+   representations under experimenter-chosen regimes. V5.4 asks whether
+   one prospective score chooses the right class when the regime is
+   not announced. That is a different claim, and it is gated on (2).
+
+## What previous versions established (binding, not restated as hopes)
+
+V1. A reusable continuous substrate reduces lifetime prequential cost
+when and only when latent functional recurrence is strong enough.
+Delta L ~= a*r + b, sealed 100–129, 30/30. Statistical reuse and
+structural abstraction dissociate.
+
+V2. The learner can READ those economics (H9a allocation 30/30) and
+cannot WRITE them compactly (H9b two-part loss 30/30). Consolidation
+failed. Premature commitment, not discreteness, is the discrete tax.
+
+V3. PROMOTE creates a shared object, migrates bits (−63.3%), improves
+prediction, and cheapens related future tasks. First learner to win
+both currencies, with capacity it created. Four testbeds failed first;
+the substitutability ladder is the instrument. Absolute refusal is
+falsified; graded refusal held. Search cost logged, not charged.
+
+V4 original. Premise "birth implies a maintenance problem" is
+falsified at this scale. Spec preserved unrevised with a gate-outcome
+banner. Seeds 400–429 were not used for that spec.
+
+V4R. Opportunity census, then a sealed block on 400–429 against a
+hashed plan. COMPRESS beats FACTORIZE 30/30 (mean margin 1,362 nats).
+No FACTORIZE win at M <= 16. FORK pays 2/30 against an allowance of 2
+("rarely, within the bound," not "never"). Retention: s_bar constant
+at 61.0 nats/use (cv 0.3%); development-derived H_R* = 17.1 lands at
+18.0 out of sample, interval [14, 22]. Governing variable is expected
+remaining reuse, not dormancy length.
+
+V5.0 (already run; starting fact, not a V5.1 result). Component
+frontier on 10 sealed worlds, each component scored only on
+computations that depend on it, zero vacuous cells. At eps=10 nats:
+private 5.0, shared 3.9, basis 4.4, routes 2.0 bits/scalar. The 8-bit
+proxy overstates description 1.6–4x. Shared scalars are intrinsically
+cheaper than the private residuals they replace, which is why V3's
+description reduction grew at the frontier (62.6% -> 68.7% at the
+paper's accounting scope, 30/30). Re-scoring V4R O4 at D*(A) predicts
+H_R* ~= 8.8; that re-score is an accounting identity.
+
+Paper draft §10.1 still says no V4 sealed block was run. §7.6 has one.
+This sketch cites §7.6 and V4R 7/7, not §10.1.
+
+V4's original H14–H18 are not live. Carry the *rules* (substitutability,
+matched-budget, contribution-relative tolerance, census-before-operator,
+return-window, no single-arm verdicts). Do not carry the operators.
+
+## The nested claims V5 is really about
+
+Three claims, nested. A later rung is not a consolation prize for an
+earlier failure, and an earlier pass with a later block is a result.
+
+    LAW            thresholds move as C/s says          (H19)
+    PHASE DIAGRAM  a second representation class exists
+                   at reachable (M, r_meta)             (H20, H21)
+    SELECTION      one prospective score picks the
+                   right class across regimes           (H22–H24)
+
+If the law fails, stop quoting N*s > C as more than one fitted
+crossing. If the law holds and the phase diagram never appears, the
+library is a set of compressed atoms, not a language, and V6 macros
+have no substrate — a respectable outcome, registered in advance. If
+both hold and selection fails, we can demonstrate edits but not an
+economy.
+
+## Inventory: what exists, what must be built
+
+Already built and usable (do not reinvent):
+
+    PromotingSharedResidualLearner     frozen V3; subclass, never edit
+    LifecycleLibraryLearner            lineage, ledgers; deletion is real
+                                       (select_reference overridden to the
+                                       live library)
+    TaskGroupWorld / dormancy pair     V3 testbed; return-window rules
+    census_opportunity.py              KEEP/COMPRESS/FACTORIZE/FORK oracles
+    audit_factorization.py             existence vs economics vs leftover E_i
+    audit_retention.py                 frozen-library V_retain
+    audit_component_frontier.py        V5.0; D*(R) per component
+    score_v5_causal.py                 H19 scorer (rank x horizon)
+    artifacts/v5_causal, v5_horizon,   in-flight H19 material; development
+      v5_horizon_open, v5_reacquire,   only; not confirmatory
+      v5_frontier
+    configs/v5_*.yaml                  residual_rank and horizon variants
+    V4R_CONFIRMATION_PLAN.md           template for V5's own plan
+    score_v4r_*.py                     hashed-plan scorer pattern
+
+To be built before the corresponding rung is tuned:
+
+    B1  s-only world                   same D(A), different per-use value
+    B2  r_meta generator               A_f = C + r_meta B(alpha_f)
+                                       + sqrt(1-r_meta^2) eps_f, with a
+                                       measured-recurrence diagnostic
+    B3  (F, m) scale control           N ~= N_base + F*m; m held fixed
+                                       when F or M moves
+    B4  independent-compression +      Gate 2/3 of FACTORIZE; leave-one-
+        leave-one-abstraction-out      abstraction-out is H21's instrument
+    B5  structural-regret oracle       shared-prefix trajectories; never
+                                       end-of-lifetime J after divergence
+    B6  decision-tuple log             (L_t, H_t, e, Delta J, outcome)
+                                       from every consolidation, oracle
+                                       runs included
+    B7  compositional-closure probe    existing V1 operators, depth 8,
+                                       fresh inputs; V6 gate, V5 checklist
+
+## Currency and resource model
+
+Through V4R the gating instrument was 8 bits/scalar. V5.0 retired that
+as a *gating* currency. It remains a continuity report.
+
+    D_8bit(R)     8 bits per retained scalar (V1–V4R, comparable)
+    D*(R; eps)    min bits/scalar s.t. Delta L_c <= eps, component c
+                  scored only on computations that depend on it
+    J             L_preq + lambda * D_T + kappa * SUM_t D_live(t)
+                  + gamma * C_retrieval + mu * C_edit
+
+lambda = ln 2, unchanged. kappa, gamma, mu stay at 0 with logging in
+V5.1–V5.3, as in V4.1: occupancy and edit cost are not the H19
+question. Any V5.4 claim that depends on a nonzero kappa/gamma/mu must
+say so, and kappa = 0 remains a registered null.
+
+New constitutional instrument rule:
+
+    Compare representation classes after each has been locally
+    compressed to its own rate-distortion frontier. A sharing claim
+    at full precision against a compressed private alternative is
+    the error that made V4.2 look positive.
+
+Non-vacuity is a refuse-to-score, not a warning. A component with an
+empty participant set is unscoreable at every depth.
+
+H19's D(A) manipulation is at the GENERATOR (residual rank: 99 / 198 /
+396 scalars at rank 1 / 2 / 4). That is the cut that cannot be an
+accounting identity. Bits/scalar at the coder (the letter of the
+PREDICTIONS.md entry) is a second arm, not a substitute: it still
+moves carry by construction unless s_bar moves too. Both are reported.
+The in-flight scorer currently prices carry as LN2 * 8 * scalars(rank);
+the spec must dual-report proxy-bit D and frontier D* of the same
+artifacts, and H19's ratio test is against whichever D was manipulated.
+
+## Core hypotheses (H19–H24; already in PREDICTIONS.md)
+
+Numbering is not provisional. Falsifiers and operational cuts below
+are what this sketch adds.
+
+### H19 — Code-cost invariance (V5.1; flagship of the LAW claim)
+
+Prediction. Empirical retention threshold follows H*(D, s) =
+lambda * D / s_bar across at least two independent manipulations of D
+and two of s. No fitted threshold. Dual reading, both registered:
+
+    (a) H* ∝ D at measured s_bar
+    (b) H* · s_bar ∝ D even if s_bar moves with D
+
+(b) is the law. (a) fails with a diagnosis if coarser operators are
+less useful per reuse — the risk named in the original prediction,
+not a post-hoc excuse.
+
+Protocol. Frozen library at the gap so D_retain - D_delete = D(A)
+exactly; zero post-gap births or the world is excluded; score the
+RETURN WINDOW; count returning tasks before reading any number.
+Primary D-arm: residual rank {1, 2, 4} (in flight on worlds 500–509,
+horizons 48/56/64/72, gap (32, 40)). Required s-arm: same rank,
+different per-use value (frequency-versus-value, or family strength);
+without it inverse-proportionality is untested. Optional coder-arm:
+store at 2/3/4/6/8 bits/scalar at matched rank, to honour the letter
+of the frozen prediction as a sensitivity.
+
+Falsifier. Observed H*-ratio vs D-ratio relative error >= 0.25 on (b)
+after s_bar is measured, on both a D-manipulation and an s-
+manipulation. A D-only pass with no s-arm is a partial, not a pass.
+Re-scoring V4R O4 at D* is not a confirmation of H19.
+
+Respectable partial. Rank ratios track (b) and the s-arm is noisy:
+report (b) as supported for code cost, inverse-s as unconfirmed.
+
+### H20 — Higher-order amortization (V5.2; flagship of the PHASE DIAGRAM)
+
+Prediction. A COMPRESS-to-FACTORIZE crossing exists, and M*(r_meta) is
+monotone non-increasing in r_meta. M small => COMPRESS even at decent
+r_meta; M up and r_meta up eventually produce FACTORIZE.
+
+Coordinates, not N. Family count F and support per family m, with
+N ~= N_base + F*m. Holding m fixed isolates scale; holding F fixed
+isolates evidence per abstraction. Raising F at fixed N starves every
+candidate and shrinks the library — the confound that made the first
+F-sweep invalid. Independently, r_meta in A_f(z) = C(z) + r_meta *
+B(z; alpha_f) + sqrt(1-r_meta^2) * eps_f(z). Measured abstraction-
+level recurrence must track configured r_meta before any FACTORIZE
+oracle runs, analogue of V1's residual-function correlation.
+
+Ceiling, registered. The canonical world caps tasks at 6**3 = 216
+programs. N=256 is unreachable without adding primitives, which
+breaks comparability. If no FACTORIZE cell exists at max reachable M
+even at r_meta = 1, that is a TESTBED result, not an H20 failure to
+be tuned away. A new generator with more primitives is a separately
+fingerprinted world family, not a silent WorldConfig field.
+
+Gates, in order, all mandatory:
+
+    G1  existence: R^2_observed - R^2_isotropic_null > 0 at rank 2
+    G2  economics: J_factorize < J_independent_compress at matched bits
+        (not merely < J_full_precision_atoms)
+    G3  leftover: D(E_i) << D(A_i) AND substantial shared capture
+        (a fat E_i makes the family decorative)
+
+Falsifier. No G2 win on the (F, m, r_meta) grid the testbed can reach,
+including r_meta = 1 at maximum M with m held at V3's promotion
+minimum. Then H20 is blocked by the world, the phase diagram does not
+appear at ROW scale, and H22–H24 that depend on FACTORIZE as a live
+class are blocked rather than failed.
+
+### H21 — Prospective schema reuse (V5.3)
+
+Prediction. A family A(z; alpha) fit on held-in members makes a novel
+member cheaper to acquire by learning only alpha_new, versus a
+complete new operator, on at least prequential cost and retained bits,
+always against a matched-budget independently compressed operator.
+
+Instrument. Leave-one-abstraction-out: fit C, B on A_1..A_{m-1}, infer
+only alpha_m on proposal probes for held-out A_m. Compare learn-full /
+independent-compressed / family / family+E / global-only. V4 recovered
+~7.5% of the centre-only deficit with the current rank-2 family; H21
+is not a rewrite of that diagnostic, it is the same instrument at the
+r_meta that G1–G2 required.
+
+Falsifier. Family acquisition does not beat matched-budget independent
+compression on prequential cost AND retained bits. A win on bits alone
+is storage; a win on loss at extra bits is capacity.
+
+Gated on H20 G1. If no family structure exists, H21 has nothing to
+acquire.
+
+### H22 — Economic edit selection (V5.4)
+
+Prediction. One prospective scoring rule (initially hand-designed, not
+learned) matches the oracle-optimal edit in a majority of (regime,
+world) cells, where different edits are oracle-optimal in different
+registered regimes.
+
+    low r              KEEP
+    bloated atoms      COMPRESS
+    repeated innovation  PROMOTE
+    related atoms      FACTORIZE     (only if H20 G2 paid)
+    future return      RETAIN
+    obsolete           RETIRE        (only if a world instantiates it)
+
+Gate, load-bearing. H22 is blocked, not failed, unless at least two
+structurally different edits are each oracle-optimal in some
+registered regime. A selector that always picks COMPRESS in a market
+where only COMPRESS pays is unfalsifiable. Refusal cells are first-
+class: the rule must NOT pick FACTORIZE where COMPRESS wins.
+
+Oracle vs estimator are separate rungs. H22-oracle: Delta J computed
+with access the learner will not have (future stream, true dependents).
+Tests whether one *objective* selects. H22-online: Delta J estimated
+from history only. Tests whether the learner can estimate it. Do not
+collapse them. Teacher structure never enters the online estimator.
+
+Falsifier. Accuracy at or below the majority-class baseline (always
+pick the globally most common oracle edit) on cells where at least two
+classes appear.
+
+### H23 — Structural planning (V5.5)
+
+Prediction. Under library evolution or nonstationarity, finite-horizon
+rollout structural regret < myopic structural regret. In stationary
+worlds with frozen libraries, myopic ~= oracle.
+
+Protocol. Arms share history up to t, then diverge. Score the remaining
+stream, never end-of-lifetime J after two libraries have evolved
+apart. The clairvoyant oracle is a trajectory pi* = argmin_pi
+J(future structural path), not a per-object table. Deleting A at task
+32 is not a paired comparison once it changes what gets promoted next.
+
+Falsifier. Rollout does not reduce regret relative to myopic wherever
+edits change later promotions, or myopic is already at oracle in those
+worlds (then path-dependence does not bind at this scale).
+
+Gated on a world where the open-library carry is actually endogenous.
+If every deletion saves D(A) because nothing is re-promoted, H23 is
+unmotivated rather than false — same pattern as V4.1's empty DELETE.
+
+### H24 — Learned restructuring (V5.6)
+
+Prediction. A policy trained on (L_t, H_t, e, Delta J, outcome) tuples
+has lower structural regret than the hand-designed estimator on held-
+out *economic conditions* (held-out code cost, horizon, r_meta, M),
+not merely held-out seeds of the same economy.
+
+Falsifier. No improvement on held-out conditions, or improvement only
+on held-out seeds of the training grid.
+
+Gated on H22 producing a non-vacuous market and H23 producing a regret
+signal. Training and evaluating on worlds 0–9 of one regime is not
+this claim.
+
+## Worlds (draft)
+
+H19 retention world. Single-family, family onset early enough that
+pre-gap abstractions form, gap (32, 40) or equivalent with a counted
+return window, library frozen at the gap, retained vs deleted arms.
+Validity: returning-task count >= minimum_cluster; zero post-gap
+births; arms byte-identical to the gap. Rank and horizon vary; s-arm
+is a different family-value or frequency schedule at matched rank.
+
+H20 meta-recurrence world. NEW generator family, separately
+fingerprinted. r_meta knob with a measured-recurrence diagnostic that
+must pass before oracles. (F, m) grid with m held at or above
+minimum_cluster. Structureless control: r_meta = 0 must reproduce
+independent atoms (COMPRESS wins). Validity: measured r_meta tracks
+configured; M grows with F at fixed m over some range, otherwise
+scale is not instantiated.
+
+H21 uses the H20 world at a point where G1 passed. Held-out member
+never used to fit C, B.
+
+H22 regime battery. Existing V3 structured / control / dormancy worlds
+plus H20 cells, labelled with their oracle-optimal edit *before* the
+selector runs. No new operator.
+
+H23 open-library retention. Re-promotion restored, so carry is
+endogenous. Validity: at least some deletions trigger a replacement
+promotion (carry ~ 0) and some do not. If that split cannot be
+produced, H23 waits.
+
+Stationary frozen-library cells are the H23 null: myopic ~= oracle.
+
+Every world carries a validity gate that is allowed to fail. A gate
+that cannot fail is not a gate. Redesign the world before tuning.
+
+## The learner, and what is not a learner yet
+
+V5.1–V5.3 are oracles on frozen or controlled libraries. The V3
+promoter stays frozen. No online FACTORIZE, no online selector, no
+learned pi. This is the V4R census discipline applied to the new
+knobs.
+
+V5.4 introduces a deterministic greedy edit policy (generate
+candidates, estimate Delta J, apply the best, recompute, repeat until
+no edit improves — V4 spec §3.3, so edit order is not a hidden
+hyperparameter). Hand-designed estimators from V1–V4R: H_R * s_hat vs
+lambda D*(A) for RETAIN; matched-budget RD for COMPRESS vs FACTORIZE;
+V3's promotion criterion unchanged and FROZEN (a learner that knows it
+can FACTORIZE later may promote more freely; that interaction is an
+open question, not a silent coupling).
+
+V5.5 adds short-horizon rollout over that policy. V5.6 trains q_phi or
+Q_hat on the decision dataset. Neither exists until the gates above
+pass.
+
+Never edit PromotingSharedResidualLearner. Subclass. The same will
+apply to V5's own classes once a confirmation plan is hashed.
+
+## Endpoints and instruments
+
+Inherited: four-way substitutability; contribution-relative tolerance;
+null-edit guard; matched-budget independent compression; return-window
+V_retain; non-vacuous D*; refusal ledgers; both currencies always.
+
+New, or newly load-bearing:
+
+    H19  s_bar across ranks and across s-arms; H*-ratio vs D-ratio;
+         predicted vs observed crossing; exclusion count for post-gap
+         births; dual D_8bit / D* report
+    H20  M(F, m, r_meta); J_COMPRESS - J_FACTORIZE vs M; measured
+         r_meta; G1/G2/G3 separately
+    H21  leave-one-out acquisition nats, samples-to-criterion, D*,
+         held-out behavior
+    H22  per-cell oracle edit vs chosen edit; majority-class baseline;
+         confusion across the ambition ladder
+    H23  structural regret R = J_pi - J_oracle on shared prefixes;
+         myopic / rollout / oracle
+    All  decision tuples in lifecycle_ledger.json from the first run
+
+Library size is a diagnostic, never an outcome.
+
+## Registered diagnostics and failure branches
+
+Adopted before any remaining V5 run, so no failure is diagnosed with
+an improvised instrument.
+
+If H19 ratios do not track D: report s_bar by rank. If s_bar falls
+with rank in proportion to D, (a) fails and (b) may still hold. If
+s_bar is flat and H* is flat, the law is an artifact of one operating
+point. If post-gap births exclude most worlds, the freeze failed and
+the cell is unscoreable (do not impute).
+
+If H20 G1 passes and G2 fails: geometry without economics, the V4.2
+result one level up. Do not lower the matched-budget bar. If G2
+passes only because E_i restores capacity, G3 fails and the family is
+decorative.
+
+If H20 never instantiates M large enough: report the ceiling and stop.
+Do not add primitives inside the canonical fingerprint.
+
+If H22 accuracy equals always-COMPRESS: the market was one-class; the
+rung was blocked and should not have been scored as a fail or a pass.
+
+If H23 myopic already matches oracle under open-library evolution:
+path-dependence does not bind at this scale; sequential decision-
+making is a true statement that this world does not exercise.
+
+If the composition probe explodes at depth 8: V6–V8 are blocked; the
+probe is a V5 addendum result and a publishable negative. Do not
+infer composition from H19–H21.
+
+## Branch table: what H19 and H20 do to the rest of this sketch
+
+H19 is in flight. This table is the spec's section 0 once scored.
+
+- H19 (b) holds on D-arm and s-arm: V5.2 proceeds; N*s > C is a law.
+- H19 (b) holds on D-arm only: proceed, with inverse-s as unconfirmed;
+  do not quote "inversely proportional to s" in the paper.
+- H19 fails both readings: LAW claim dies; PHASE DIAGRAM may still be
+  asked as a qualitative "does FACTORIZE ever pay," but it is no
+  longer the same law one level up. Selection rungs are demoted.
+- H20 G2 pays at reachable (M, r_meta): H21–H24 proceed as sketched.
+- H20 blocked by ceiling, G1 may still pass: H21 can run as a weak
+  family-fit diagnostic; H22's FACTORIZE class is absent; H22 may
+  still be attempted on {KEEP, COMPRESS, RETAIN} if those three are
+  each optimal somewhere, otherwise blocked. V6 macros have no
+  higher-order substrate from this testbed.
+- H20 G1 fails (no family geometry even at r_meta = 1): the r_meta
+  generator is broken or neural abstractions do not share a
+  parameterizable family. Redesign the world before any selector.
+  Recursive-language story is in trouble at the representation
+  layer, independent of composition.
+
+V4R already resolved the V4 sketch's branch table (V3 passed; V4
+premise failed; V4R census is the predecessor). No further V3/V4
+branching.
+
+## Staging and definition of done
+
+    V5.0  CURRENCY         D*(R) component frontier     DONE
+    V5.1  LAW              H19 causal D and s           in flight
+    V5.2  PHASE DIAGRAM    H20 (F, m, r_meta) oracles
+    V5.3  SCHEMA           H21 leave-one-out
+    V5.4  SELECTION        H22, gated on a two-class market
+    V5.5  PLANNING         H23, gated on endogenous carry
+    V5.6  LEARNED POLICY   H24, gated on H22+H23 signal
+
+A rung is complete when: validity gate passed (or the block was the
+registered respectable outcome); development 0–2 and 3–9 or 500–509
+reported separately; both currencies reported; failure branches
+followed rather than retuned; PREDICTIONS.md appended whichever way
+it fell; and the next rung's gate condition is actually met.
+
+Do not advance on a partial verdict. Do not implement online
+FACTORIZE because H20 "should" pay. Do not train pi because the
+decision log exists.
+
+## Deferred from V5 (destinations unchanged)
+
+- MACRO / LOOP / BRANCH, and the compositional-closure depth gate:
+  V6. A macro must beat COMPRESS and every simpler counterfactual at
+  matched bits, and must be scored against a matched-budget search-
+  space control (equivalent operator count without M). Naive "search
+  is cheaper with M in the grammar" wins by construction — V4's
+  matched-budget lesson applied to branching factor.
+- Program synthesis, C_synth as a charged term: V7.
+- Successful programs improving the language: V8. Review 41: this is
+  the first point that would evidence the grand thesis. V5 does not
+  pretend to.
+- Perception / ways of seeing: V9.
+- Interactive worlds, dreaming, experimentation: V10. Hard line.
+  Existing lifetime infrastructure does not transfer.
+- Reasoning macros, procedural games, ARC: V11+. ARC is an exam, not
+  a V5 target. No claim of relevance.
+
+Also deferred, unchanged from V3 §8 / V4 §7: equivalence-class routes,
+hidden-basis coordinate discovery, memory hierarchy, task-boundary
+removal, functional IBP, staged LLM bridge.
+
+Search/synthesis cost may be LOGGED in V5 (candidate counts, fit
+steps) so V6 can charge it. It is not in J until a rung whose claim
+is about findability rather than storage.
+
+## Design principles (inherited, binding, plus three new)
+
+Inherited, not reopened:
+
+    functional substitutability, never parameter identity
+    matched-budget non-sharing alternative for every sharing claim
+    contribution-relative tolerances; null-edit guard
+    census before operators
+    no single-arm verdicts where end-of-life deletion is free
+    return-window for mid-lifetime interventions
+    V(A | L_t, H_t, pi) in evolving libraries; per-object rules only
+      on frozen-library protocols that enforce D_retain - D_delete = D(A)
+    library size is a diagnostic, never an outcome
+    one surrendered control per rung; parameter intervals, not signs
+    one re-derivation per frozen gate
+    both currencies always
+    geometry is not economics
+    never edit a frozen class
+    append predictions, never rewrite them
+    report the number that would embarrass you
+
+New in V5:
+
+- FRONTIER CURRENCY. Gate on D*(R). 8-bit is continuity. Vacuous
+  participant sets refuse to score.
+- GENERATOR-SIDE INTERVENTION FOR LAWS. A quantity that appears on
+  both sides of an identity is not a test. Manipulate D and s where
+  the world is built, predict, then score.
+- TWO-CLASS MARKET BEFORE SELECTION. A selector is unfalsifiable in
+  a one-edit census. H22 blocked until two structurally different
+  edits each pay somewhere.
+
+## Seed partition and sealed protocol
+
+    0–9        historical development (V1–V4R); still usable as
+               matched V3/V4R controls
+    100–129    V1 confirmatory (closed)
+    200–229    V2 confirmatory (closed)
+    300–329    V3 confirmatory (closed)
+    400–429    V4R confirmatory (closed)
+    500–509    V5.1 DEVELOPMENT. Already generated. Contaminated.
+               Never confirmatory. Fingerprints retained.
+    510–599    do not use; too close to a contaminated band
+    600–629    V5 confirmatory, reserved now, untouched until
+               V5_CONFIRMATION_PLAN.md is frozen and hashed into
+               tools/check_prereg.py
+
+Accidental generation of a 600-block world is an incident: report,
+delete the artifact, log in SPEC_AUDIT.md. Same rule as V3's 300s.
+
+Which rungs are sealed at all is decided after development. H19 and
+H20 are the only rungs that currently deserve a confirmation plan if
+they pass. H22–H24 are not sealed in the same breath as H19.
+
+Surrendered control per rung, named at freeze, not after seeing data.
+H19's candidate: the s-arm (if only D is confirmed, that is already
+the respectable partial). H20's candidate: r_meta = 1 at max M, not
+an interior grid point.
+
+## Open questions this sketch does NOT settle
+
+Recorded so they are not mistaken for oversights, and so a later
+choice cannot be presented as having been planned.
+
+1. Known remaining horizon vs estimated P(return). H19 can give the
+   learner H_R; H22-online maybe cannot. The estimator is not frozen.
+2. Whether PROMOTE's threshold stays frozen while V5 edits run. V4
+   froze it. The interaction (promote more freely if you can
+   compress/factorize/delete later) is real and unmeasured.
+3. Whether kappa, gamma, mu are ever swept in V5 or stay zero-with-
+   logging. Charging edit cost changes H22's market.
+4. Whether H20 is allowed a new primitive count (new world family) or
+   must stay inside 6 x 3 = 216. This sketch permits a separately
+   fingerprinted family and forbids a silent config change; it does
+   not require the new family.
+5. Whether H22-oracle may use teacher structure. This sketch says no
+   except post-hoc scoring. If development shows the hand-designed
+   rule needs an oracle factorization bound, that is a new
+   instrument, declared before use.
+6. What "majority of (regime, world) cells" means when cells share a
+   world. The spec must freeze a clustering (world-level first, as
+   V1 did for initializations).
+7. Whether the composition probe is a V5 checklist item or only a V6
+   entry criterion. This sketch puts it on the V5 checklist so V6 is
+   not started on a broken foundation; it is not a V5 hypothesis.
+8. How to treat 500–509: development only, never confirmatory. If
+   H19's first score is taken from them, that score is a development
+   result, like worlds 0–9 for V1.
+9. Rank vs bits as the "official" D manipulation. This sketch makes
+   rank primary and bits/scalar a sensitivity. The spec may reverse
+   that if the s-confound on rank is fatal and the coder-arm is
+   cleaner; it may not treat them as interchangeable after seeing
+   numbers.
+10. The unit of forgetting / old-task interference, still unresolved
+    from V4 §11, and not V5.1's problem.
+
+## Claims not made
+
+No claim that these numbers transfer to large models or natural data.
+No claim of relevance to ARC-AGI. No claim that FACTORIZE, MERGE,
+FORK, or MACRO pay at current scale — V4R said they do not, and H20
+is the test of whether they can be made to. No claim that a learned
+policy is required for V5 to count as a version. No claim that D* is
+the information-theoretic minimum (uniform scalar quantization is an
+upper bound on true description length, conservative for both arms).
+No claim that V5.0's shared-cheaper-than-private generalises beyond
+this coder and this family. No n=3 bootstrap as an inferential claim.
+
+## Pre-V5-spec checklist
+
+The spec is not written until these are done. The sketch can exist
+now; the spec cannot.
+
+1. Score the in-flight H19 grid. Append the outcome to PREDICTIONS.md.
+   Dual-report D_8bit and D*. Report s_bar by rank. Do not write the
+   spec as if H19 were still future if the number already exists.
+2. If rank confounds s_bar, run the s-only arm before freezing H19's
+   interpretation.
+3. Compositional-closure probe on existing V1 operators, depth 8,
+   fresh inputs. Record pass/fail as a V5 addendum. This is review
+   41's highest-leverage measurement and it was skipped in favour of
+   H19; the sketch does not repeat that skip.
+4. Design r_meta and verify that measured abstraction-level recurrence
+   tracks the knob, on worlds 0–2, before any FACTORIZE oracle.
+5. Resolve the branch table above against the actual H19 verdict.
+6. Freeze V5 spec with full discipline; reserve 600–629; retire this
+   sketch the day the spec is frozen, as v3-sketch and v4-sketch were.
+
+## Working agreements additions (V4 §9.1 still binds)
+
+9. A re-score that moves a term appearing on both sides of an identity
+   is not a confirmation.
+10. Count returning tasks before reading a dormancy/horizon number.
+    Empty return windows are void. This error produced false readings
+    three separate times.
+11. Mid-lifetime interventions are scored on the window where arms
+    are still paired. Final J after divergence is not a paired
+    comparison.
+12. Worlds 500–509 are development. Worlds 600–629 do not exist until
+    a hashed plan says they may.
+13. H22 in a one-edit market is blocked. Do not tune a selector into
+    firing.
+14. Log decision tuples from oracle runs. They are cheap now and
+    H24's entire dataset later.
+
+## Execution notes
+
+Machine constraints per AGENTS.md: at most 4–6 concurrent lifetimes
+(4 for anything holding large probe tensors); detached resumable
+drivers guarded by summary.json; hung shells during a batch mean
+load, not failure. Provenance: resolved config.yaml, fingerprint.json,
+git_commit.txt, and for task-group/meta-recurrence worlds a ground-
+truth file the learner never reads. python tools/check_prereg.py
+before commits that touch sealed-plan files. PROGRESS.md gains an
+entry per completed verified step.
+
+H19 scoring command, once the grid is complete:
+
+    python -m row.experiments.score_v5_causal
+        --root artifacts/v5_causal
+        --ranks 1 4
+        --horizons 48 56 64 72
+        --worlds 500 501 502 503 504 505 506 507 508 509
+        --output reports/v5_causal.json
+
+Rank 2 is the V4R operating point and should be included in the spec's
+registered grid even if the first scorer call omitted it.
+
+## Sources
+
+row_v4r_experimental_spec.md and V4R_CONFIRMATION_PLAN.md (predecessor
+question and sealed negative).
+row_v4_experimental_spec.md §0.2, §4A, §5, §9.1 (resource model,
+constants, statistics, working agreements) — inherited, not rewritten.
+row_v3_experimental_spec.md §4.3, §12 (failure branches, closure
+limits).
+PREDICTIONS.md H19–H24 (frozen 2026-08-20, before V5 worlds).
+notes/learnings.txt V5 proposal and V5–ARC roadmap (reviews 35, 40,
+41).
+reviews/reviewer-feedback-31.txt through -35.txt (census, matched-
+budget constitution, representation economy).
+reviews/reviewer-feedback-38.txt through -41.txt (nested searches,
+compositional-closure risk, V8 as thesis-crux, hard line before V10).
+paper/draft.md §7.6 (V4R sealed write-up), not §10.1.
+src/row/experiments/audit_component_frontier.py and score_v5_causal.py
+(V5.0 result; V5.1 protocol).

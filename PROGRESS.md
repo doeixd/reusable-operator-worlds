@@ -1940,3 +1940,25 @@ carry/s_bar. The genuine causal test is V5.1 -- manipulate D(A) at the
 generator (e.g. residual rank), predict H_R* proportionally, and check
 that the observed crossing follows. Only that distinguishes a
 quantitative law from an accounting identity.
+
+# 2026-08-20 — V5 sketch written
+
+- Wrote `notes/v5-sketch.txt` Revision 1. V5 is representation
+  economics, not MACRO/LOOP/BRANCH (those moved to V6, per reviews
+  35/40/41). Question: under what conditions the cheapest useful
+  representation stops being a static library of independently
+  compressed abstractions, and whether one prospective score can track
+  that boundary.
+- Nested claims, gated in order: LAW (H19) → PHASE DIAGRAM (H20/H21)
+  → SELECTION (H22–H24). A later rung is not a consolation prize; H20
+  blocked by the 216-program ceiling is a registered respectable
+  outcome, not a failure to retune.
+- Records V5.0 as a starting fact, H19–H24 as already frozen in
+  `PREDICTIONS.md` before any V5 world, and the in-flight H19 protocol
+  deviation (rank at the generator vs bits/scalar at the coder) rather
+  than silently adopting it. Worlds 500–509 are V5 development;
+  600–629 reserved for confirmation. Compositional-closure probe is on
+  the pre-spec checklist, not skipped again.
+- Sketch is not a spec. It retires the day `row_v5_experimental_spec.md`
+  is frozen. Next: score the H19 grid and append the outcome before
+  writing the spec.

@@ -195,8 +195,8 @@ Aggregated analysis JSON and figures, organized by experiment
 ## Notes (`notes/`)
 
 - `learnings.txt` — the primary implementation-learnings and results log.
-- `crossover.txt`, `v2-synthesis.txt`, `v3-sketch.txt`, `v4-sketch.txt` —
-  working notes and spec sketches.
+- `crossover.txt`, `v2-synthesis.txt`, `v3-sketch.txt`, `v4-sketch.txt`,
+  `v5-sketch.txt` — working notes and spec sketches.
 - `v4-spec-plan.md` — V4 spec planning notes.
 
 ## Reviews (`reviews/`)
@@ -220,6 +220,7 @@ report JSON. `figures/` — generated figures.
 | `row_v3_experimental_spec.md` | V3 spec (PROMOTE / abstraction birth) |
 | `row_v4_experimental_spec.md` | V4 original spec (preserved unrevised with gate-outcome banner) |
 | `row_v4r_experimental_spec.md` | V4 revised: "When Does a Library Need a Lifecycle?" |
+| `notes/v5-sketch.txt` | V5 sketch (representation economy); not a spec until retired |
 | `EXPERIMENT_PLAN.md` | separates development (0–9) from confirmatory (100–129+) |
 | `CONFIRMATION_PLAN.md` | V1 frozen confirmation protocol (seeds 100–129) |
 | `V2_CONFIRMATION_PLAN.md` | V2 frozen confirmation protocol (seeds 200–229) |
@@ -238,8 +239,13 @@ report JSON. `figures/` — generated figures.
   `V2_CONFIRMATION_PLAN.md`; tests parameter intervals, not just signs).
 - **V3 confirmatory:** seeds 300–329 (frozen, scored against
   `V3_CONFIRMATION_PLAN.md`).
-- **V4 sealed:** seeds 400–429 (remain sealed; no registered rung reached
-  sealing eligibility).
+- **V4 original:** seeds 400–429 were reserved; no original-V4 rung reached
+  sealing eligibility. **V4R confirmatory** used the same band (frozen
+  against `V4R_CONFIRMATION_PLAN.md`; closed 7/7).
+- **V5 development:** seeds 500–509 (H19 causal grid; contaminated;
+  never confirmatory). Do not use 510–599.
+- **V5 confirmatory:** seeds 600–629 reserved; untouched until a
+  `V5_CONFIRMATION_PLAN.md` is frozen and hashed.
 
 Sealed worlds must not be generated, inspected, or summarized until the
 relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
@@ -811,13 +817,15 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   KEEP < COMPRESS < SHARE/FACTORIZE < CREATE/FORK, and makes COMPRESS a
   first-class operator that any sharing proposal must beat first.
 - V4's premise -- successful abstraction birth implies a maintenance
-  problem -- is FALSIFIED at this scale. All three rungs failed their
-  development gates and seeds 400-429 were never touched. This is a
-  positive statement about V3: its library has little exploitable
-  lifecycle slack. The successor question lives in
-  `row_v4r_experimental_spec.md`; `row_v4_experimental_spec.md` is
-  preserved unrevised with a gate-outcome banner, because the failure
-  history is what makes the revised question credible.
+  problem -- is FALSIFIED at this scale. All three original rungs failed
+  their development gates. V4R then opened seeds 400-429 against a
+  hashed plan and closed 7/7: COMPRESS dominates, FACTORIZE/FORK do not
+  pay at reachable M, and retention obeys the amortization law. This is
+  a positive statement about V3: its library has little exploitable
+  lifecycle slack. `row_v4_experimental_spec.md` is preserved unrevised
+  with a gate-outcome banner; `row_v4r_experimental_spec.md` is the
+  successor that was actually sealed. The V5 sketch is
+  `notes/v5-sketch.txt`.
 - Before building another world in which an operator MUST fire, run an
   offline opportunity census with the learner frozen: sweep regimes and
   ask which edits have any oracle advantage at all. Two dormancy designs

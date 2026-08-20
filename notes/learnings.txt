@@ -1662,8 +1662,13 @@ eventually have to obey.
 
 
 ================================================================================
-V5 PROPOSAL: LEARNING THE REPRESENTATION ECONOMY (NOT YET EXECUTED)
+V5 PROPOSAL: LEARNING THE REPRESENTATION ECONOMY
 ================================================================================
+
+Sketch: notes/v5-sketch.txt Revision 1 (2026-08-20). Not a spec.
+V5.0 (D* frontier) has run. H19 causal grid is in flight on worlds
+500-509 and is not yet scored. H19-H24 were frozen in PREDICTIONS.md
+before any V5 world. MACRO/LOOP/BRANCH are V6, not V5.
 
 V5 should stop asking "does operation X work?" and ask: can the system choose
 the right representation transformation for the economics it faces? PROMOTE,
