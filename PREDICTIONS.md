@@ -1335,3 +1335,44 @@ computations depending on it, uniform scalar quantization at a matched
 10 nats/task behavioral budget. Uniform quantization is not an optimal
 code, so each D* is an upper bound on true minimum description length —
 conservative for both arms.
+
+# V5.1 CAUSAL TEST: the law holds, the proportionality prediction FAILS (2026-08-20)
+
+Registered prediction: `H_R* proportional to D(A)`, manipulated at the
+generator via residual rank (99 / 198 / 396 scalars at rank 1 / 2 / 4).
+200 lifetimes, 10 worlds per cell, controlled protocol, 0 excluded.
+
+| rank | D(A) | carry | s_bar | crossing | predicted (carry/s_bar) |
+| --- | --- | --- | --- | --- | --- |
+| 1 |  99 |   549 | 36.8 | 15.2 | 14.9 |
+| 2 | 198 | 1,098 | 61.0 | 18.0 | 18.0 |
+| 4 | 396 | 2,196 | 68.3 | 32.4 | 32.2 |
+
+PROPORTIONALITY: FALSIFIED. D(A) ratio rank4/rank1 = 4.00; observed
+crossing ratio = 2.13; relative error 46.8%.
+
+THE LAW ITSELF: CONFIRMED, and this is not the same statement. At each
+rank, carry and s_bar are measured independently and the crossing lands
+within 2% of carry/s_bar (14.9 vs 15.2, 18.0 vs 18.0, 32.2 vs 32.4).
+The relation predicts across three regimes it was not fitted to, so it
+is not the accounting identity the single-point V4R confirmation could
+not rule out.
+
+WHY PROPORTIONALITY FAILS. `s_bar` co-varies with D(A): 36.8, 61.0,
+68.3. A higher-rank abstraction is both more expensive to carry AND more
+useful per use. Factoring that out closes the arithmetic exactly:
+D ratio 4.00 / s_bar ratio 1.86 = 2.15 against an observed 2.13.
+
+Reading. The governing relation is `H_R* = lambda * D(A) / s_bar(D)`,
+and in this substrate D(A) is NOT an independently manipulable knob --
+residual rank sets an abstraction's cost and its expressive capacity
+together. Testing proportionality alone requires a manipulation that
+inflates the ENCODING of an abstraction without changing what it can
+compute (padding, or a coarser code), which is a different intervention
+and is not yet run.
+
+This is the second time in this project that a registered prediction
+failed while the mechanism behind it survived (cf. H5b, where the mean
+recurrence curve smoothed but cross-world dispersion worsened). Report
+both halves; the failure of the simple scaling form is as informative as
+the success of the underlying relation.

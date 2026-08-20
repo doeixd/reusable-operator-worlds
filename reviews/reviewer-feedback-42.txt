@@ -1,0 +1,1056 @@
+Yes. I think that is the **central hypothesis** you should organize the project around.
+
+A sharper version would be:
+
+> **Part of neural scaling comes from increasing the number of useful computations the network can represent and compose. Dense networks obtain this compositional capacity inefficiently because reusable computations are not explicitly addressable objects; equivalent or near-equivalent circuits may therefore be learned repeatedly in different contexts. A learner with an explicit, typed, compositional computational vocabulary should achieve comparable capability with less learned information and should improve its learning efficiency as that vocabulary grows.**
+
+That is substantially more interesting than “modularity is good.”
+
+## The intuition
+
+Suppose an LLM needs computations like:
+
+```text
+parse noun phrase
+retrieve entity relation
+compare two quantities
+track reference
+apply negation
+increment counter
+copy token
+select maximum
+```
+
+A dense transformer can certainly implement these.
+
+But there's no guarantee it learns:
+
+```text
+COMPARE
+```
+
+once and then invokes it everywhere.
+
+Instead you might get:
+
+```text
+Layer 8 / heads 3,7   ≈ COMPARE-like circuit
+Layer 19 / MLP        ≈ another COMPARE-like circuit
+Layer 31 / heads 1,4  ≈ yet another implementation
+...
+```
+
+because gradients arrive in different contexts and the network has no native concept of:
+
+> “I already know how to do this computation. Call that.”
+
+So scaling may partly buy performance by brute-force accumulation of enough locally useful circuitry that useful compositions become possible.
+
+Your proposal is basically to replace:
+
+[
+\text{many entangled implementations}
+]
+
+with
+
+[
+\boxed{\text{small reusable vocabulary}}
++
+\boxed{\text{composition}}
++
+\boxed{\text{small innovations}}.
+]
+
+That potentially changes the scaling law.
+
+---
+
+# Why composition matters so much
+
+Suppose you know (N) primitives.
+
+A noncompositional system roughly gets (N) useful things.
+
+But if those primitives compose, the number of realizable computations can grow combinatorially.
+
+For programs of length (L):
+
+[
+N^L
+]
+
+possible sequences before even considering branching, arguments, recursion, etc.
+
+With 100 useful operators:
+
+[
+100^3=1,000,000
+]
+
+three-step compositions.
+
+So what matters might not simply be:
+
+[
+\text{number of parameters}
+]
+
+but something closer to:
+
+[
+\text{number and quality of reusable primitives}
+\times
+\text{ability to compose them}.
+]
+
+A larger LLM may accidentally have both:
+
+1. more useful computational motifs;
+2. enough representational space to combine them in more contexts.
+
+Your hypothesis says we should **factor those apart** and make composition explicit.
+
+---
+
+# Where ROW fits
+
+ROW is actually testing the first few pieces of exactly this story.
+
+V1 says:
+
+[
+\text{explicit reusable computations}
+]
+
+can beat a dense representation when the environment really contains recurrence.
+
+V3 says something stronger:
+
+[
+\text{repeated private computation}
+\rightarrow
+\text{new reusable computation}.
+]
+
+That's the beginning of a learner constructing its own vocabulary.
+
+But the current ROW architecture still says beforehand:
+
+```text
+here is where shared computation lives
+here is where task-local computation lives
+here are three composition steps
+```
+
+Your ultimate hypothesis goes further:
+
+> **The learner should discover the computational ontology itself.**
+
+It should be able to say:
+
+```text
+I keep implementing this transformation.
+
+It appears in these 37 contexts.
+
+These implementations are functionally equivalent.
+
+I can replace them with one object A.
+
+A composes with B and C.
+
+I'll store A once and reference it.
+```
+
+That is much closer to what you ultimately want.
+
+---
+
+# And this is where category theory could actually be useful
+
+I would be careful not to use category theory merely as mathematical decoration.
+
+There is, however, a very natural categorical structure here.
+
+The core object isn't really a neuron or parameter.
+
+It's a **transformation**:
+
+[
+f:A\rightarrow B.
+]
+
+Another computation:
+
+[
+g:B\rightarrow C.
+]
+
+They compose:
+
+[
+g\circ f:A\rightarrow C.
+]
+
+That's already the heart of your thesis.
+
+An intelligent learner accumulates a vocabulary of morphisms and constructs increasingly complicated morphisms by composition.
+
+So instead of thinking:
+
+```text
+neural network = giant tensor of weights
+```
+
+you start thinking:
+
+```text
+learner state = evolving category of usable computations
+```
+
+with:
+
+* **objects** = representations / interfaces / types;
+* **morphisms** = learned computations;
+* **composition** = program construction;
+* **identity morphisms** = passing values unchanged;
+* perhaps **products** = computations consuming several pieces of information;
+* **coproducts** = alternatives / branching;
+* monoidal composition = parallel computation;
+* higher-order structure = computations manipulating/composing computations.
+
+Now there is an enormously useful constraint:
+
+[
+f:A\to B,\quad
+g:C\to D
+]
+
+cannot simply be composed unless the interfaces line up.
+
+That gives you **typed composition**.
+
+And I suspect typed composition is crucial if you ever want the library to scale.
+
+Without it, program search over a thousand primitives is absurd.
+
+With interfaces:
+
+```text
+TOKEN_SEQ → ENTITY
+ENTITY × ENTITY → RELATION
+RELATION → BOOLEAN
+BOOLEAN × ACTION × ACTION → ACTION
+```
+
+most candidate compositions are illegal.
+
+Category/type structure becomes a **search-space compressor**.
+
+That's where I think it may genuinely contribute.
+
+---
+
+# The key thing is probably not literal categories first
+
+I would derive the categorical structure from the computational problem rather than starting with category theory and fitting the learner into it.
+
+You probably want the primitive abstraction to look roughly like:
+
+[
+A_i:
+(X_i,;S_i)
+\rightarrow
+(Y_i,;S_i')
+]
+
+where it has:
+
+* an input interface;
+* an output interface;
+* potentially state/effects;
+* behavioral semantics;
+* description cost;
+* execution cost;
+* evidence for future reuse.
+
+Then composition is legal when interfaces match.
+
+The library becomes something like:
+
+```text
+A : X → Y
+B : Y → Z
+C : X × Z → W
+D : W → W
+```
+
+and programs are compositions of them.
+
+Category theory then tells you which structures and equivalences are worth respecting.
+
+---
+
+# Your duplicate-circuit hypothesis is especially testable
+
+I think this is one of the next major experiments.
+
+Take a trained transformer and ask:
+
+> **How much computational recurrence is hidden inside the dense network?**
+
+Not merely parameter similarity.
+
+Functional recurrence.
+
+For various candidate subcircuits (C_i), measure their behavior under interventions/probes and ask whether:
+
+[
+C_i \simeq C_j
+]
+
+functionally despite living at different locations.
+
+If larger models contain increasing amounts of **duplicated function**, that directly supports your motivating story.
+
+You could measure something like:
+
+[
+R(M)
+====
+
+\frac{
+D(\text{dense realization})
+---------------------------
+
+D(\text{best reusable factorization})
+}{
+D(\text{dense realization})
+}
+]
+
+a sort of **computational redundancy ratio**.
+
+Then ask how (R(M)) changes with model scale.
+
+Your hypothesis predicts something interesting:
+
+perhaps larger models have:
+
+* more unique circuits;
+* **and more repeated variants of the same circuits**;
+* because duplication is the price dense architectures pay to make those functions available in different representational contexts.
+
+If so, explicit reuse might recover a lot of capacity.
+
+---
+
+# There are two different hypotheses here
+
+I'd separate them because they're independently falsifiable.
+
+### Hypothesis A: compositional scaling
+
+Larger neural networks perform better partly because their learned computational repertoire supports more useful compositions.
+
+Prediction:
+
+[
+\text{performance}
+]
+
+should track some measure of **compositional repertoire** better than parameter count alone.
+
+### Hypothesis B: entanglement tax
+
+Dense architectures represent this repertoire inefficiently because useful computations are repeatedly instantiated rather than stored as reusable addressable objects.
+
+Prediction:
+
+[
+\text{functional duplicate computation}
+]
+
+should increase substantially with model size/context diversity.
+
+And then the architectural hypothesis:
+
+### Hypothesis C: explicit computational reuse
+
+A system that learns:
+
+[
+\text{library}+\text{composition}+\text{innovation}
+]
+
+should reach the same functional repertoire with fewer learned bits / examples / parameters.
+
+That's the really ambitious claim.
+
+---
+
+# And MDL ties all three together
+
+This is why the MDL thread in ROW feels important rather than incidental.
+
+Suppose the network contains:
+
+[
+C_1,\ C_2,\ C_3,\ C_4
+]
+
+and they're all approximations of the same computation (C).
+
+The refactoring:
+
+[
+C_1,C_2,C_3,C_4
+\rightarrow
+C+{r_1,r_2,r_3,r_4}
+]
+
+is worthwhile if:
+
+[
+D(C)+\sum_iD(r_i)
+<
+\sum_iD(C_i)
+]
+
+while preserving behavior.
+
+That is essentially what abstraction is.
+
+And if (C) subsequently enables cheaper learning:
+
+[
+\text{future savings}(C)
+
+>
+
+\text{cost}(C)
+]
+
+then it is not merely compression—it is a useful learned primitive.
+
+ROW has already stumbled onto this distinction.
+
+---
+
+# The real architecture I think you're heading toward
+
+Something like:
+
+```text
+                 EXPERIENCE
+                     │
+                     ▼
+             ┌───────────────┐
+             │ fast inference │
+             └───────┬───────┘
+                     │
+        compose existing primitives
+                     │
+              sufficient?
+              /          \
+            yes           no
+             │             │
+          execute       innovation
+                           │
+                           ▼
+                   private computation
+                           │
+                repeats across contexts?
+                           │
+                           ▼
+                  abstraction discovery
+                           │
+                    MDL / future-value
+                           │
+                           ▼
+                   promote to library
+                           │
+                           ▼
+                 available for future
+                    composition
+```
+
+That is a continual-learning system whose **representation itself evolves**.
+
+And eventually:
+
+```text
+primitive
+   ↓
+composition
+   ↓
+macro
+   ↓
+new primitive
+   ↓
+higher-level composition
+   ↓
+...
+```
+
+You get a hierarchy:
+
+[
+\mathcal L_0
+\rightarrow
+\mathcal L_1
+\rightarrow
+\mathcal L_2
+\rightarrow \cdots
+]
+
+where today's programs become tomorrow's primitives.
+
+That is where things like planning and reasoning might emerge without having to separately label them “reasoning modules.”
+
+A plan could simply be a useful reusable program.
+
+An algorithm could be a reusable program.
+
+A perceptual concept could be a reusable program.
+
+A strategy could be a reusable program.
+
+---
+
+# The strongest version of your idea
+
+I think it is something like:
+
+> **Scale works partly because neural networks approximate a growing compositional library implicitly. Explicitly representing the library and its composition structure should allow the same effective computational repertoire to be acquired with substantially less data and storage, while enabling continual growth through abstraction.**
+
+And then there is an even deeper claim:
+
+> **Intelligence may scale primarily with the size and compositional closure of an agent's learned computational vocabulary, rather than directly with the number of parameters used to encode it.**
+
+That is a real research thesis.
+
+ROW is still several steps away from testing the strongest version, but it now looks like a sensible **bottom-up path toward testing it**, rather than a disconnected toy.
+
+The next big milestone, in my view, is not simply a better ROW score. It is showing that **whole learned computations can themselves become primitives and be recomposed into novel larger computations**, with the learner choosing that refactoring because it lowers lifetime description/learning cost. Once you demonstrate that, the connection between the toy system and your original scaling/composition hypothesis becomes much tighter.
+
+Yes. I think your intuitions suggest a more specific research program than “modular neural networks + category theory.”
+
+The core problem I would pursue is:
+
+> **Can a learner discover that apparently different neural computations are instances of the same underlying morphism, factor them into one reusable computation plus cheap interfaces, and then build increasingly complex computations by composing those learned morphisms?**
+
+That connects almost everything you've been circling around: scaling, duplicated circuits, composition, abstraction, MDL, continual learning, program synthesis, and category theory.
+
+And there is some encouraging prior art around the edges, but I don't see the whole package already put together. HOUDINI, for example, already showed that strongly typed differentiable neural functions can be composed by type-directed program search, so “typed neural program synthesis” itself isn't new. ([Google Research][1]) DreamCoder-style library learning similarly turns useful programs into higher-level primitives. ([OpenReview][2]) Your distinctive angle could be **discovering the reusable computational ontology from neural behavior itself and pricing that discovery by lifetime MDL economics**.
+
+Here are the research directions I would take most seriously, roughly in order.
+
+1. **Same computation, different coordinates: search for commuting diagrams.** This may be the most important idea. Right now ROW asks whether two residual circuits directly behave similarly. But in a real transformer, the “same” computation at layer 8 and layer 25 may operate on completely different internal representations. So direct comparison will say they're different even if they implement the same abstract algorithm.
+
+   Categorically, suppose you have:
+
+   [
+   f_i:X_i\rightarrow Y_i
+   ]
+
+   and
+
+   [
+   f_j:X_j\rightarrow Y_j.
+   ]
+
+   Instead of asking (f_i\approx f_j), learn cheap adapters
+
+   [
+   a:X_i\rightarrow X_j,\qquad
+   b:Y_i\rightarrow Y_j
+   ]
+
+   and test whether the square approximately commutes:
+
+   [
+   b\circ f_i
+   \approx
+   f_j\circ a.
+   ]
+
+   Visually:
+
+   ```text
+         f_i
+   X_i ───────→ Y_i
+    │            │
+    a            b
+    │            │
+    ▼            ▼
+   X_j ───────→ Y_j
+         f_j
+   ```
+
+   That says something much stronger than “these activations look similar.” It says:
+
+   > **These circuits implement the same computation modulo a change of representation.**
+
+   This is closely related to model stitching, where learned adapters connect different representations, although stitching has important false-positive problems if you only judge end-task performance. ([arXiv][3]) ROW's behavioral-substitution methodology gives you a way to make the test stricter.
+
+   Then your MDL question becomes:
+
+   [
+   D(f)+\sum_i[D(a_i)+D(b_i)]
+   \stackrel{?}{<}
+   \sum_iD(f_i).
+   ]
+
+   If yes, you've discovered a **shared abstract circuit hidden beneath several concrete implementations**.
+
+   That feels extremely aligned with your original LLM hypothesis.
+
+2. **Turn ROW promotion into categorical factorization.** Instead of promotion meaning only
+
+   [
+   R_1,R_2,R_3
+   \rightarrow A,
+   ]
+
+   allow:
+
+   [
+   R_i
+   \approx
+   d_i\circ A\circ e_i.
+   ]
+
+   So a reusable abstraction has a stable core and small context-specific encoders/decoders.
+
+   ```text
+   task/context 1:
+   ── e₁ ──→ [ A ] ── d₁ ──→
+
+   task/context 2:
+   ── e₂ ──→ [ A ] ── d₂ ──→
+
+   task/context 3:
+   ── e₃ ──→ [ A ] ── d₃ ──→
+   ```
+
+   This is much closer to what you'd expect inside an LLM than literal identical circuits.
+
+   It also gives a wonderfully clean scientific question:
+
+   > As recurrence increases, does the optimal representation move from independent functions → common core + adapters → exact shared primitive?
+
+   That's basically a **rate-distortion curve over abstraction level**.
+
+3. **Make whole compositions eligible to become new primitives.** This is the next critical ROW benchmark in my view.
+
+   Suppose the library contains:
+
+   [
+   A,\ B,\ C,\ D.
+   ]
+
+   Across tasks it repeatedly encounters:
+
+   [
+   B\circ A.
+   ]
+
+   It should eventually create:
+
+   [
+   M=B\circ A
+   ]
+
+   and add (M) to the vocabulary.
+
+   Then later perhaps:
+
+   [
+   N=D\circ M\circ C.
+   ]
+
+   Then (N) itself can become a primitive.
+
+   So the vocabulary undergoes closure:
+
+   [
+   \mathcal L_0
+   \rightarrow
+   \mathcal L_1
+   \rightarrow
+   \mathcal L_2
+   \rightarrow\cdots
+   ]
+
+   with:
+
+   [
+   \mathcal L_{t+1}
+   ================
+
+   \mathcal L_t
+   \cup
+   {\text{economically useful compositions of }\mathcal L_t}.
+   ]
+
+   DreamCoder is the obvious intellectual neighbor because library learning compresses solved programs into reusable abstractions. ([OpenReview][2]) But ROW gives you a potentially interesting alternative criterion: **not merely compression of a corpus of programs, but reduction in total lifetime predictive + representational cost.**
+
+   This experiment would get you much closer to your claim that *programs become primitives*.
+
+4. **Learn types instead of specifying them.** HOUDINI already demonstrates why strong types are useful: type-directed search can dramatically prune the combinatorial program space. ([Google Research][1]) Your interesting question is therefore not “do types help?” but:
+
+   > **Can the learner discover useful computational interfaces from experience?**
+
+   Imagine initially every circuit is just:
+
+   [
+   \mathbb R^d\rightarrow\mathbb R^d.
+   ]
+
+   That's technically composable with everything and therefore gives you almost no search constraint.
+
+   But perhaps experience reveals latent distinctions:
+
+   ```text
+   entity-like state
+   relation-like state
+   sequence-position state
+   accumulator state
+   boolean/control state
+   ```
+
+   Then the system learns something akin to:
+
+   [
+   A:\text{Entity}\rightarrow\text{Relation}
+   ]
+
+   [
+   B:\text{Relation}\times\text{Entity}\rightarrow\text{Boolean}.
+   ]
+
+   Now composition search collapses because most expressions are ill-typed.
+
+   This is where category theory could become *algorithmically useful*, rather than descriptive.
+
+   You could even treat “type formation” itself as abstraction:
+
+   > A type is worth inventing when recognizing a shared interface substantially reduces the description/search cost of the library.
+
+5. **Build a categorical ROW with richer program structure.** Fixed three-step chains are just ordinary categorical composition:
+
+   [
+   f;,g;,h.
+   ]
+
+   But eventually you'll want more wiring.
+
+   The natural progression is:
+
+   [
+   \text{category}
+   \rightarrow
+   \text{symmetric monoidal category}
+   \rightarrow
+   \text{richer wiring structure}.
+   ]
+
+   Sequential composition gives:
+
+   ```text
+   A → B → C
+   ```
+
+   Monoidal composition gives independent parallel computation:
+
+   ```text
+   ┌→ A ─┐
+   │     │
+   └→ B ─┘
+   ```
+
+   products/copying let one value feed several computations; coproduct-like structure gives alternatives; feedback/traced structures can describe recurrent wiring. Applied category theory already has very mature machinery around wiring diagrams, circuits, hypergraph categories and operads. ([MIT OpenCourseWare][4])
+
+   In fact, for your purposes, **operads/wiring diagrams may eventually be more useful than vanilla categories**, because you want to ask:
+
+   > Which components may be plugged into which holes of a larger computation?
+
+   That's precisely an algebra of composition.
+
+6. **Test the actual LLM scaling hypothesis on tiny transformers.** This should eventually become a parallel empirical branch.
+
+   Train the same transformer family at, say:
+
+   [
+   1\times,;2\times,;4\times,;8\times
+   ]
+
+   on a synthetic environment with known reusable algorithms.
+
+   Design the tasks so you know that the same abstract operations recur under different contexts and representations.
+
+   Then measure three quantities separately:
+
+   [
+   U(M)=\text{unique useful computations}
+   ]
+
+   [
+   R(M)=\text{functional computational redundancy}
+   ]
+
+   [
+   C(M)=\text{number/richness of useful compositions}.
+   ]
+
+   Your hypothesis predicts that scale doesn't merely increase (U). It may increase both:
+
+   [
+   C(M)\uparrow
+   ]
+
+   and
+
+   [
+   R(M)\uparrow.
+   ]
+
+   There is already intriguing evidence that transformer computation can exhibit both composition and redundancy. A 2026 mechanistic study of a synthetic compositional task isolated a general function-composition circuit and also found overlapping redundant circuits: ablating individual heads often had little effect because multiple heads supported the same algorithmic step. ([PLOS][5])
+
+   That is surprisingly close to your intuition.
+
+   The decisive experiment would then be:
+
+   > Can ROW-like factorization compress the larger model's redundant computations into a smaller explicit library while preserving its compositional repertoire?
+
+   If yes, you've directly connected ROW to neural scaling.
+
+7. **Eventually build a neural “compiler pass.”** This is the ambitious endpoint I now see.
+
+   Start with an ordinary trained dense network:
+
+   ```text
+   dense neural model
+          ↓
+   identify candidate subcomputations
+          ↓
+   test functional equivalence
+          ↓
+   discover coordinate transformations
+          ↓
+   factor recurring circuits
+          ↓
+   build explicit typed library
+          ↓
+   rewrite network as composition graph
+   ```
+
+   In other words:
+
+   [
+   \text{neural weights}
+   \rightarrow
+   \text{compositional IR}.
+   ]
+
+   Then the really interesting experiment is **continue training after compilation**.
+
+   Does the compiled model now learn subsequent tasks faster than the original dense network because it can explicitly reuse and extend its library?
+
+   That's much stronger than compression.
+
+   It would say that you've changed the *learning dynamics*.
+
+---
+
+## I think the commuting-diagram experiment should come surprisingly early
+
+It could actually fit into ROW without jumping to LLMs.
+
+Modify the world so the same hidden primitive appears under different coordinate systems.
+
+For task/context (i):
+
+[
+P_i
+===
+
+B_i\circ P\circ A_i.
+]
+
+The learner sees only (P_i)'s input-output behavior.
+
+So naively:
+
+[
+P_1,P_2,P_3
+]
+
+look unrelated.
+
+But there is secretly one computation:
+
+[
+P
+]
+
+plus adapters.
+
+Then compare three learners:
+
+```text
+Independent
+P₁ P₂ P₃ P₄
+
+Exact sharing
+one P used everywhere
+
+Factorized sharing
+Aᵢ → P → Bᵢ
+```
+
+Exact sharing should fail because representations don't line up.
+
+Independent learning should work but waste information.
+
+The factorizing learner should eventually discover:
+
+[
+\boxed{\text{common morphism}}
++
+\boxed{\text{context maps}}.
+]
+
+And there should again be an economic crossover:
+
+[
+nD(P_i)
+\quad\text{vs}\quad
+D(P)+\sum_i(D(A_i)+D(B_i)).
+]
+
+That would be a **beautiful extension of the existing ROW story**.
+
+V1:
+
+> When does exact computational reuse pay?
+
+Next:
+
+> When does reuse remain possible when the same abstraction appears in different representations?
+
+And that question is much more realistic for deep networks.
+
+---
+
+## There's also a deeper categorical way to think about abstraction
+
+Right now you can think of a primitive as just a function.
+
+But perhaps the correct thing for the learner to discover isn't a particular implementation (f).
+
+It's an **equivalence class of implementations**:
+
+[
+[f]
+===
+
+{f_1,f_2,\ldots:
+f_i\text{ realizes the same abstract computation}}.
+]
+
+Then:
+
+```text
+abstract COMPARE
+      │
+      ├─ implementation in representation A
+      ├─ implementation in representation B
+      ├─ implementation in representation C
+      └─ ...
+```
+
+That gets very close to what “concept” or “algorithm” should mean computationally.
+
+The abstraction is not:
+
+> these neurons.
+
+Nor:
+
+> these weights.
+
+Nor even:
+
+> this exact function on (\mathbb R^{16}).
+
+It is something more like:
+
+> **this invariant transformation under admissible changes of representation.**
+
+That's where I think category theory may contribute something genuinely deep to your research rather than merely providing compositional syntax.
+
+Natural transformations, isomorphisms, factorization, universal constructions, operadic substitution—all of those start becoming relevant because you're trying to distinguish **implementation** from **compositional role**.
+
+---
+
+## I would also keep one principle from ROW
+
+Don't decide in advance that every clever categorical structure should exist.
+
+Let the **economics force the ontology**.
+
+For example, don't say:
+
+> “Now we're adding products, functors, macros and traces because intelligence uses them.”
+
+Instead construct worlds where increasingly sophisticated factorization *might* pay and ask:
+
+[
+\min_R
+\left[
+L_{\text{lifetime}}(R)
++
+\lambda D(R)
++
+\gamma C_{\text{search}}(R)
++
+\eta C_{\text{execution}}(R)
+\right].
+]
+
+Then see what representation wins.
+
+Maybe exact sharing wins.
+
+Maybe adapter-mediated sharing wins.
+
+Maybe a new macro wins.
+
+Maybe hierarchy wins.
+
+Maybe keeping four separate circuits really is cheaper.
+
+That turns your larger question into something almost Darwinian:
+
+> **What computational abstractions are selected when representations compete on total lifetime economics?**
+
+And that could eventually give you a much deeper thesis than “category theory improves neural networks”:
+
+[
+\boxed{
+\text{Intelligence emerges through economical closure under composition.}
+}
+]
+
+A learner accumulates transformations; transformations become reusable; reusable transformations compose; frequently useful compositions become new abstractions; and the resulting vocabulary changes what can be learned cheaply next.
+
+That, to me, is the research program hiding inside ROW.
+
+[1]: https://research.google/pubs/houdini-lifelong-learning-as-program-synthesis/?utm_source=chatgpt.com "Houdini: Lifelong Learning as Program Synthesis"
+[2]: https://openreview.net/pdf?id=qzFxBcK9Cg&utm_source=chatgpt.com "Published in Transactions on Machine Learning Research (06/2026)"
+[3]: https://arxiv.org/abs/2106.07682?utm_source=chatgpt.com "Revisiting Model Stitching to Compare Neural Representations"
+[4]: https://ocw.mit.edu/courses/18-s097-applied-category-theory-january-iap-2019/pages/lecture-videos-and-readings/?utm_source=chatgpt.com "Lecture Videos and Readings | Applied Category Theory | Mathematics | MIT OpenCourseWare"
+[5]: https://journals.plos.org/plosone/article?id=10.1371%2Fjournal.pone.0340088&utm_source=chatgpt.com "Circuit explained: How does a transformer perform compositional generalization | PLOS One"
