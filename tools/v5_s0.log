@@ -126,3 +126,12 @@ numpy._core._exceptions._ArrayMemoryError: Unable to allocate 3.38 MiB for an ar
 10:50:25 stderr C:\Users\Patrick\Downloads\llm\artifacts\v5_s0\g150_s12_N72_deleted\world_509\lifecycle: 
 10:50:25 progress done=5 failed=113 skipped=2
 10:50:25 END done=5 failed=113 skipped=2
+11:02:43 START 60 cells gains=[0.5, 1.0, 1.5] slots=[12] totals=[72] jobs=3
+11:10:12 progress done=10 failed=0 skipped=0
+11:17:24 progress done=20 failed=0 skipped=0
+11:24:34 progress done=30 failed=0 skipped=0
+11:31:45 progress done=40 failed=0 skipped=0
+11:39:02 progress done=50 failed=0 skipped=0
+11:44:31 progress done=60 failed=0 skipped=0
+11:44:31 END done=60 failed=0 skipped=0
+11:44:32 START 20 cells gains=[1.0] slots=[6] totals=[72] jobs=3

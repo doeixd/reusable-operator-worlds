@@ -1,24 +1,95 @@
 {
+  "0.5": {
+    "gain": 0.5,
+    "slots": 12,
+    "rows": [
+      {
+        "H_R": 32,
+        "n": 10,
+        "c_reacquire": 925.1836468090153,
+        "s_bar": 28.911988962781727
+      }
+    ],
+    "s_bar": 28.911988962781727,
+    "excluded_post_gap_births": 0,
+    "excluded_pre_intervention_leak": 0,
+    "signatures": {
+      "N72_world500": "14871ec578bca4a5",
+      "N72_world501": "5a1b83f44bd14545",
+      "N72_world502": "c365f38b67dd528b",
+      "N72_world503": "c9095f205b19c1c3",
+      "N72_world504": "abd5dbb84329ef5f",
+      "N72_world505": "a3b3d90b7608738e",
+      "N72_world506": "ac871d0b34a7c7d2",
+      "N72_world507": "fef686eca41d0850",
+      "N72_world508": "35123c3eb66c9314",
+      "N72_world509": "6d69d161b3b739fd"
+    },
+    "predicted_8-bit": 37.975427267225825,
+    "brackets_8-bit": false,
+    "predicted_D*": 18.51302079277259,
+    "brackets_D*": false
+  },
   "1.0": {
     "gain": 1.0,
     "slots": 12,
     "rows": [
       {
-        "H_R": 16,
-        "n": 1,
-        "c_reacquire": 1009.754158474318,
-        "s_bar": 63.10963490464488
+        "H_R": 32,
+        "n": 10,
+        "c_reacquire": 1858.3851730673646,
+        "s_bar": 58.07453665835514
       }
     ],
-    "s_bar": 63.10963490464488,
+    "s_bar": 58.07453665835514,
     "excluded_post_gap_births": 0,
     "excluded_pre_intervention_leak": 0,
     "signatures": {
-      "N56_world500": "14871ec578bca4a5"
+      "N72_world500": "14871ec578bca4a5",
+      "N72_world501": "5a1b83f44bd14545",
+      "N72_world502": "c365f38b67dd528b",
+      "N72_world503": "c9095f205b19c1c3",
+      "N72_world504": "abd5dbb84329ef5f",
+      "N72_world505": "a3b3d90b7608738e",
+      "N72_world506": "ac871d0b34a7c7d2",
+      "N72_world507": "fef686eca41d0850",
+      "N72_world508": "35123c3eb66c9314",
+      "N72_world509": "6d69d161b3b739fd"
     },
-    "predicted_8-bit": 17.397424904547254,
+    "predicted_8-bit": 18.9057924037521,
     "brackets_8-bit": false,
-    "predicted_D*": 8.481244640966784,
+    "predicted_D*": 9.216573796829147,
+    "brackets_D*": false
+  },
+  "1.5": {
+    "gain": 1.5,
+    "slots": 12,
+    "rows": [
+      {
+        "H_R": 32,
+        "n": 10,
+        "c_reacquire": 2724.9407096325153,
+        "s_bar": 85.1543971760161
+      }
+    ],
+    "s_bar": 85.1543971760161,
+    "excluded_post_gap_births": 0,
+    "excluded_pre_intervention_leak": 0,
+    "signatures": {
+      "N72_world500": "14871ec578bca4a5",
+      "N72_world501": "5a1b83f44bd14545",
+      "N72_world502": "c365f38b67dd528b",
+      "N72_world503": "c9095f205b19c1c3",
+      "N72_world504": "abd5dbb84329ef5f",
+      "N72_world505": "a3b3d90b7608738e",
+      "N72_world506": "ac871d0b34a7c7d2",
+      "N72_world507": "fef686eca41d0850",
+      "N72_world508": "35123c3eb66c9314",
+      "N72_world509": "6d69d161b3b739fd"
+    },
+    "predicted_8-bit": 12.893581193904472,
+    "brackets_8-bit": false,
+    "predicted_D*": 6.28562083202843,
     "brackets_D*": false
   }
 }

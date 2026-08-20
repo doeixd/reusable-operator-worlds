@@ -1608,3 +1608,55 @@ carry convention is, it is IDENTICAL across `g` by construction, so the
 s-arm varies only the measured saving. They do bear on how the D-arm's
 absolute crossings should be described, and on any future per-object
 carry claim.
+
+# S0 STAGE 1 RESULT and the Stage-2 grid it determines (2026-08-20)
+
+Stage 1 measured the PREDICTOR only, at a fixed window N=72 (H_R=32),
+10 worlds per gain, both arms, 0 excluded, 0 pre-intervention leaks.
+No crossing was located and none is claimed; Stage 2 estimates the
+threshold from separate runs.
+
+| g | s_bar (nats/use) | C_reacquire | p_reuse (w500) | s_conditional |
+| --- | --- | --- | --- | --- |
+| 0.5 | 28.9 |   925 | 0.41 | 27.0 |
+| 1.0 | 58.1 | 1,858 | 0.44 | 52.8 |
+| 1.5 | 85.2 | 2,725 | 0.44 | 80.2 |
+
+CARRY INVARIANCE: the abstraction checksum is identical in 10/10 cells.
+The carry term is the same number across gains, not a number within
+tolerance, which is what makes this a clean s-arm.
+
+MONOTONE in g: PASS. s_bar ratio g=1.5/g=0.5 = 2.95 against a gain ratio
+of 3.00 — very nearly linear, better than the sub-linear behaviour
+expected from the tanh and the mismatch channel.
+
+MECHANISM, against the registered decomposition: reading A. `p_reuse` is
+flat (0.41 / 0.44 / 0.44) while `s_conditional` rises (27.0 / 52.8 /
+80.2). The gain made the same abstraction more economically important;
+it did not make routing abandon it. Reading B (selection collapse) is
+excluded, and the relative refusal threshold never fired.
+
+`g=1.0` reproduces the V4R sealed operating point: s_bar 58.1 across 10
+worlds (60.1 on world 500) against the sealed 61.0.
+
+## Stage-2 grid, computed by the frozen rule, committed before any Stage-2 outcome
+
+H_hat*(g) = lambda * D(A) / s_hat(g) at the 8-bit carry of 1,098 nats,
+then H_low <= H_hat* - 4, H_high >= H_hat* + 4, plus the two nearest
+interior even horizons. N = H_R + 40.
+
+| g | s_hat | H_hat* | N grid |
+| --- | --- | --- | --- |
+| 0.5 | 28.9 | 38.0 | 72, 76, 78, 82 |
+| 1.0 | 58.1 | 18.9 | 54, 58, 60, 64 |
+| 1.5 | 85.2 | 12.9 | 48, 52, 54, 58 |
+
+PREDICTION: each gain's observed crossing lands within 15% of its
+H_hat* above. These are parameter-free — every input was measured at a
+window that contains no crossing.
+
+At the D* currency (535 nats) the predicted crossings are 18.5 / 9.2 /
+6.3, which the grids above do NOT bracket. The 8-bit currency governs
+grid selection, as it did for the D-arm; D* crossings are reported where
+a grid happens to bracket them and are otherwise declared unscoreable
+rather than interpolated.
