@@ -1839,3 +1839,63 @@ NOT LICENSED, stated so the result is not over-read:
     D(A) is an accounting convention. Both are identical across gains,
     which is why the S-arm is unaffected, but both bear on the absolute
     numbers.
+
+# H20a / H25 / H26 FIRST RESULT — the amortization law one level up (2026-08-20)
+
+Exogenous atoms, schema fitted on M_0 = 4 and FROZEN, every piece coded
+to the same distortion budget. F=12, K=2, worlds 0-2, probe 256.
+Offline; no learner, no lifetimes.
+
+| r_meta | s_bar_schema | M* predicted | M* observed | matched-budget winner |
+| --- | --- | --- | --- | --- |
+| 0.00 |  -33 |  inf | none | COMPRESS |
+| 0.50 |   -9 |  inf | none | COMPRESS |
+| 0.70 |   24 | 39.7 | none (M* unreachable at F=12) | FACTORIZE |
+| 0.90 |  103 |  8.0 | 7.5 | FACTORIZE |
+| 0.95 |  157 |  5.1 | 5.7 | FACTORIZE |
+| 1.00 |  495 |  1.6 | 2.0 | FACTORIZE |
+
+## H26 — dM*/dr_meta < 0: SUPPORTED
+
+M* falls monotonically from unreachable through 39.7, 8.0, 5.1 to 1.6.
+The more related the abstractions, the fewer members are needed before
+naming the family. The COMPRESS -> FACTORIZE boundary sits between
+r_meta 0.5 and 0.7, and the structureless control behaves: at r_meta = 0
+the schema has NEGATIVE per-member saving and never pays, which is the
+V4R result reproduced as the low-relatedness limit of a knob.
+
+## H25 — the frozen-schema point prediction: 2 PASS, 1 MISS, 3 not applicable
+
+    r_meta 0.90   observed 7.5 vs predicted 8.0    6.4%   PASS
+    r_meta 0.95   observed 5.7 vs predicted 5.1   10.1%   PASS
+    r_meta 1.00   observed 2.0 vs predicted 1.6   25.7%   MISS
+
+The miss is reported as a miss. It is also, on inspection, at the edge
+of what the metric can resolve: observed M is an INTEGER, so with a
+predicted 1.6 the attainable values are 1 and 2 and the finest possible
+relative error is 25%. ceil(1.6) = 2 is exactly what was observed, so
+the law is consistent with the data at that point while the registered
+15% criterion is not attainable there.
+
+REGISTERED FOR NEXT TIME, not applied retroactively: at small M* the
+criterion should be `observed == ceil(predicted)` or
+`|observed - predicted| <= 1`, whichever is stated in advance. The 15%
+relative form is only meaningful for M* >~ 7. The r_meta 0.90 and 0.95
+cells satisfy both forms.
+
+Also recorded: at r_meta = 0.90 only 2/3 worlds produced a crossing
+within the 8 unseen members available; the third needs F > 12.
+
+## What this does and does not establish
+
+DOES: a schema over abstractions has an economic region; it is entered
+by relatedness, not by scale alone; and its crossing is predicted by
+`D*(S) / s_bar_schema` measured on a frozen schema before the members
+are counted. That is the same ratio form H19 just confirmed one level
+down, which is the first evidence for the recursive reading.
+
+DOES NOT: say anything about whether PROMOTE reaches this region. These
+are exogenous atoms by design (D16). H20b is the separate experiment,
+and outcome 3 there — the learner collapsing meta-structure into fewer
+atoms rather than forming a schema — remains a live and interesting
+possibility.

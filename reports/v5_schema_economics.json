@@ -1,0 +1,264 @@
+{
+  "summary": {
+    "0.0": {
+      "schema_bits": 834.9018916634865,
+      "private_bits": 504.88222087278297,
+      "member_bits": 540.0703622337829,
+      "s_bar_schema": -32.55572445799814,
+      "predicted_M": Infinity,
+      "observed_M": null,
+      "worlds_with_crossing": 0,
+      "worlds": 3
+    },
+    "0.5": {
+      "schema_bits": 828.7865321516019,
+      "private_bits": 506.81292491177146,
+      "member_bits": 515.7382936199847,
+      "s_bar_schema": -9.498151193364107,
+      "predicted_M": Infinity,
+      "observed_M": null,
+      "worlds_with_crossing": 0,
+      "worlds": 3
+    },
+    "0.7": {
+      "schema_bits": 827.1668844246193,
+      "private_bits": 503.4175379959693,
+      "member_bits": 479.9083932221635,
+      "s_bar_schema": 23.972952297105596,
+      "predicted_M": 39.71930339473115,
+      "observed_M": null,
+      "worlds_with_crossing": 0,
+      "worlds": 3
+    },
+    "0.9": {
+      "schema_bits": 809.4346239558208,
+      "private_bits": 504.30042102952456,
+      "member_bits": 405.23936477039683,
+      "s_bar_schema": 103.41469228438706,
+      "predicted_M": 8.009112187226686,
+      "observed_M": 7.5,
+      "worlds_with_crossing": 2,
+      "worlds": 3
+    },
+    "0.95": {
+      "schema_bits": 803.7903157280462,
+      "private_bits": 504.911575614828,
+      "member_bits": 350.91255787676624,
+      "s_bar_schema": 156.75784679440258,
+      "predicted_M": 5.1455921345251285,
+      "observed_M": 5.666666666666667,
+      "worlds_with_crossing": 3,
+      "worlds": 3
+    },
+    "1.0": {
+      "schema_bits": 787.1823290726803,
+      "private_bits": 505.6026049761306,
+      "member_bits": 16.0,
+      "s_bar_schema": 494.5929770253338,
+      "predicted_M": 1.591211855981939,
+      "observed_M": 2.0,
+      "worlds_with_crossing": 3,
+      "worlds": 3
+    }
+  },
+  "cells": [
+    {
+      "r_meta": 0.0,
+      "world": 0,
+      "schema_bits": 779.1844248833473,
+      "mean_private_bits": 506.30841512306216,
+      "mean_member_bits": 551.2807357595262,
+      "s_bar_schema": -47.41247001784344,
+      "predicted_M": Infinity,
+      "observed_M": null,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.0,
+      "world": 1,
+      "schema_bits": 868.6896477083991,
+      "mean_private_bits": 499.25893811126326,
+      "mean_member_bits": 530.6186504625227,
+      "s_bar_schema": -29.31405507002141,
+      "predicted_M": Infinity,
+      "observed_M": null,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.0,
+      "world": 2,
+      "schema_bits": 856.8316023987131,
+      "mean_private_bits": 509.0793093840236,
+      "mean_member_bits": 538.3117004792998,
+      "s_bar_schema": -20.940648286129566,
+      "predicted_M": Infinity,
+      "observed_M": null,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.5,
+      "world": 0,
+      "schema_bits": 809.5626520027656,
+      "mean_private_bits": 508.8738734479903,
+      "mean_member_bits": 529.8745303840619,
+      "s_bar_schema": -27.292312353470912,
+      "predicted_M": Infinity,
+      "observed_M": null,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.5,
+      "world": 1,
+      "schema_bits": 832.045161310127,
+      "mean_private_bits": 500.0788180672621,
+      "mean_member_bits": 500.0571537951001,
+      "s_bar_schema": 0.02180678041212758,
+      "predicted_M": 38155.34185172035,
+      "observed_M": null,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.5,
+      "world": 2,
+      "schema_bits": 844.7517831419132,
+      "mean_private_bits": 511.486083220062,
+      "mean_member_bits": 517.2831966807921,
+      "s_bar_schema": -1.2239480070335347,
+      "predicted_M": Infinity,
+      "observed_M": null,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.7,
+      "world": 0,
+      "schema_bits": 814.0498186264322,
+      "mean_private_bits": 505.88991143385925,
+      "mean_member_bits": 493.33593623837305,
+      "s_bar_schema": 13.255253218162494,
+      "predicted_M": 61.413373643516074,
+      "observed_M": null,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.7,
+      "world": 1,
+      "schema_bits": 823.878549513347,
+      "mean_private_bits": 500.6402750141906,
+      "mean_member_bits": 468.385853332241,
+      "s_bar_schema": 32.820322551732616,
+      "predicted_M": 25.102695082131472,
+      "observed_M": null,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.7,
+      "world": 2,
+      "schema_bits": 843.5722851340789,
+      "mean_private_bits": 503.72242753985824,
+      "mean_member_bits": 478.00339009587645,
+      "s_bar_schema": 25.843281121421683,
+      "predicted_M": 32.641841458545905,
+      "observed_M": null,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.9,
+      "world": 0,
+      "schema_bits": 802.8540093606266,
+      "mean_private_bits": 499.3862918978748,
+      "mean_member_bits": 418.1475838180666,
+      "s_bar_schema": 82.67562067418916,
+      "predicted_M": 9.710891830187045,
+      "observed_M": null,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.9,
+      "world": 1,
+      "schema_bits": 809.990461050083,
+      "mean_private_bits": 501.59607937611304,
+      "mean_member_bits": 389.2377044308132,
+      "s_bar_schema": 118.89774438672349,
+      "predicted_M": 6.812496445815916,
+      "observed_M": 7,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.9,
+      "world": 2,
+      "schema_bits": 815.4594014567531,
+      "mean_private_bits": 511.9188918145858,
+      "mean_member_bits": 408.3328060623107,
+      "s_bar_schema": 108.67071179224854,
+      "predicted_M": 7.503948285677095,
+      "observed_M": 8,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.95,
+      "world": 0,
+      "schema_bits": 795.256958002473,
+      "mean_private_bits": 505.39461893668937,
+      "mean_member_bits": 360.0652384492246,
+      "s_bar_schema": 145.52728407120065,
+      "predicted_M": 5.464658830665634,
+      "observed_M": 6,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.95,
+      "world": 1,
+      "schema_bits": 796.6392717417435,
+      "mean_private_bits": 498.6632312842939,
+      "mean_member_bits": 335.8968098411723,
+      "s_bar_schema": 168.41311135041514,
+      "predicted_M": 4.730268714555043,
+      "observed_M": 5,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 0.95,
+      "world": 2,
+      "schema_bits": 819.4747174399222,
+      "mean_private_bits": 510.6768766235006,
+      "mean_member_bits": 356.7756253399019,
+      "s_bar_schema": 156.33314496159198,
+      "predicted_M": 5.241848858354709,
+      "observed_M": 6,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 1.0,
+      "world": 0,
+      "schema_bits": 746.8892169890697,
+      "mean_private_bits": 500.36789860063715,
+      "mean_member_bits": 16.0,
+      "s_bar_schema": 486.9880452566548,
+      "predicted_M": 1.5336910716061634,
+      "observed_M": 2,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 1.0,
+      "world": 1,
+      "schema_bits": 763.0642103429651,
+      "mean_private_bits": 504.38000616069377,
+      "mean_member_bits": 16.0,
+      "s_bar_schema": 499.03252210293726,
+      "predicted_M": 1.529087136700812,
+      "observed_M": 2,
+      "unseen_members": 8
+    },
+    {
+      "r_meta": 1.0,
+      "world": 2,
+      "schema_bits": 851.5935598860065,
+      "mean_private_bits": 512.0599101670608,
+      "mean_member_bits": 16.0,
+      "s_bar_schema": 497.7583637164094,
+      "predicted_M": 1.710857359638842,
+      "observed_M": 2,
+      "unseen_members": 8
+    }
+  ]
+}
