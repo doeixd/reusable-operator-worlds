@@ -2364,3 +2364,26 @@ to reach it. Run only on the learned library — the design before reviews
 pay", and D16's exogenous-atom arm is what makes the two separable.
 
 n = 3 worlds, one operating point. A direction, not an estimate.
+
+# 2026-08-20 — H21: prospective reuse passes at exact meta-recurrence
+
+`src/row/experiments/audit_schema_transfer.py`, report
+`reports/v5_schema_transfer.json`. Leave-one-family-out, F=8, K=2,
+worlds 0-2, target held-out MSE 1e-3.
+
+    r_meta 1.0   schema reaches target from 1 example, independent 8
+                 retains 2 arguments vs 128 operator scalars      PASS
+    r_meta 0.9   schema plateaus at 1.21e-3, never reaching target FAIL
+    r_meta 0.0   schema plateaus at 8.4e-3                         FAIL
+
+The failures are the registered falsifier working: at partial
+relatedness a rank-2 schema cannot EXPRESS a member that is only partly
+in the subspace, so its error plateaus regardless of support. Capacity,
+not sample efficiency.
+
+Caveat recorded with the result: the independent baseline is
+unrealistically strong here, because shared hidden features make
+acquisition an exactly-determined linear solve that hits machine
+precision at support 8. The 1-vs-8 win is a lower bound on the schema's
+advantage; the sub-1.0 failures are measured against a baseline no real
+learner attains.

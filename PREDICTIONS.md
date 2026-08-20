@@ -1993,3 +1993,42 @@ obvious next question is whether PROMOTE can be made to produce
 family-aligned atoms at all — which is a question about the promoter's
 clustering, not about schemas — and that is not a V5.2 rung as
 currently written.
+
+## H21 PROSPECTIVE SCHEMA REUSE: PASS at r_meta 1.0, FAIL at 0.9 and 0.0
+
+Leave-one-family-out on teacher operators, F=8, K=2, worlds 0-2, target
+held-out functional MSE 1e-3.
+
+    r_meta   examples to target: schema / independent   verdict
+      0.0    never (floor 8.4e-3) / 8                   FAIL
+      0.9    never (floor 1.21e-3) / 8                  FAIL
+      1.0    1 / 8                                      PASS
+
+At r_meta = 1.0 a frozen schema acquires an unseen family member from a
+SINGLE example, against 8 for independent acquisition, and retains 2
+arguments against 128 operator scalars. Both halves of the registered
+falsifier are satisfied.
+
+The two failures are informative rather than surprising, and they are
+the falsifier working as written ("a win on loss at extra bits is
+capacity"): at r_meta < 1 a rank-2 schema cannot express a member that
+is only partly in the subspace, so its error PLATEAUS above the target
+(1.21e-3 at r_meta 0.9) no matter how many examples arrive. That is a
+capacity limit of the schema, not a sample-efficiency loss.
+
+TWO CAVEATS, recorded with the result:
+
+1. The independent baseline here is unrealistically strong. Hidden
+   features are shared and known, so acquiring the operator is an
+   exactly-determined linear solve that hits machine precision the
+   moment support reaches 8 (128 unknowns, 16 outputs per example). A
+   learner that must discover its own features would need far more.
+   The 1-vs-8 win at r_meta = 1.0 is therefore a LOWER BOUND on the
+   schema's advantage, and the r_meta < 1 failures are measured against
+   a baseline no real learner attains.
+2. The registered target is a fixed absolute MSE. A target above the
+   schema's expressible floor would flip r_meta 0.9 to a pass on
+   samples. Not done here, because changing a threshold after seeing
+   where the floor lies is precisely what this project forbids. The
+   honest follow-up is a schema+leftover arm at matched bits, which is
+   registered as the H20a ladder and not yet run prospectively.
