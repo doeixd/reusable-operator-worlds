@@ -673,6 +673,77 @@ the promoted abstraction is not the environment's seventh primitive; it is
 the best shared explanation of how this learner compensated for a
 computation it could not express.
 
+## 7.6 When a library does NOT need a lifecycle (fourth sealed block)
+
+Having shown that abstractions can be born, we asked whether they need
+managing. The premise of a lifecycle — that successful birth creates a
+maintenance problem — turns out to be false at this scale, and the
+negative was preregistered rather than discovered after the fact.
+
+**Development.** An opportunity census, run with the learner frozen and
+no operator implemented, scored every candidate structural edit on an
+ambition ladder, KEEP < COMPRESS < SHARE/FACTORIZE < CREATE/FORK, with
+each rung required to beat the cheapest simpler edit **at the same
+resource budget**. Across families F in {2,4,8} and lifetimes N in
+{64,128,200}, local private requantization beat shared factorization in
+15/15 regime-worlds, and the margin widened with library size rather
+than closing. Deduplication had nothing to remove: at a
+contribution-relative tolerance no abstraction substituted for another,
+and compacting the library was net negative. The reason is measurable —
+the abstractions are 4-8x overparameterized, carrying zero behavioral
+cost at 6 bits per scalar and 127 nats at 4 — so every structural edit
+competes against a large reservoir of purely numerical slack that no
+restructuring is needed to harvest.
+
+**Sealed block (seeds 400-429), scored against a plan frozen and hashed
+before the worlds were generated.** COMPRESS beat FACTORIZE in 30/30
+worlds with a mean margin of 1,362 nats (registered interval
+1,000-4,000); no world showed a factorization win at any realized
+library size at or below 16; FORK paid, with an actual refit charged one
+abstraction, in 2/30 worlds against a registered allowance of 2 — a pass
+at the boundary, and we state it as "FORK pays rarely, within the
+preregistered bound" rather than as never.
+
+**The exception, and it is a mechanism rather than an absence.**
+Retention pays, and it pays for the reason abstraction birth pays.
+Deleting an abstraction imposes a real reacquisition cost when its
+regime returns, and the decision obeys
+
+    RETAIN A  iff  H_R * s_bar  >  lambda * D(A)
+
+where `H_R` is the number of post-return uses and `s_bar` the per-use
+saving. On sealed worlds, under a controlled counterfactual in which the
+library is frozen at the gap so that deletion saves exactly one
+abstraction's code, `s_bar` is constant at 61.0 nats per use across
+horizons (coefficient of variation 0.3%), and the crossing falls at
+`H_R = 18.0`. The prediction derived from development data alone was
+17.1. Notably, the governing variable is NOT dormancy length: the
+per-use saving is flat across gaps, and three earlier world designs
+failed precisely because they varied dormancy rather than expected
+remaining reuse.
+
+**What this adds to the birth result.** V3's amortization criterion —
+enough repeated use to repay a code cost — reappears one level up,
+deciding whether a learned abstraction is worth carrying rather than
+whether it is worth creating. Retention needs no theory of its own. The
+boundary is that in a library which keeps evolving the carry term
+becomes endogenous: when deletion merely triggers a replacement
+promotion it saves nothing, and a per-object retention rule stops being
+well-posed. Lifecycle decisions are sequential, not per-object.
+
+**A methodological result we consider the most portable.** Every
+apparent structural win in this block dissolved once it was scored
+against the right counterfactual. A shared parameterization beat
+full-precision atoms and lost to the same atoms at equal bits; a
+retirement rule looked selective until value was measured against the
+alternative the learner would actually have rather than against
+ablation; a compaction gate passed until its tolerance was normalized
+against the contribution it was licensing the loss of. We therefore
+state as a standing rule: **never claim value for a structural edit
+unless it beats the cheapest simpler edit at the same resource budget**,
+and **measure value against the cheapest legitimate alternative, never
+against removal**.
+
 ## 8. Related work
 
 **Controlled models of task relatedness.** The closest methodological
