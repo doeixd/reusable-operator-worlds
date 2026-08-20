@@ -971,3 +971,52 @@ endogenous re-promotion the marginal carry cost falls toward zero and
 the crossing must move. Measuring that shift is the next step, and it is
 the difference between retention economics in isolation and retention
 under a library that keeps evolving.
+
+# Open library: C_reacquire survives, the DECISION RULE does not (2026-08-19)
+
+Same horizon sweep with re-promotion restored (sleeps inside the return
+window), so the marginal carry cost is endogenous rather than fixed.
+
+| H_R | C_reacquire | marginal carry | V_retain | vs frozen-library |
+| --- | --- | --- | --- | --- |
+|  8 |   473 |     0 |   +473 | frozen said -621 |
+| 16 |   971 | 1,098 |   -127 | frozen said -131 |
+| 24 | 1,529 | 1,098 |   +431 | frozen said +404 |
+| 32 | 1,960 |   366 | +1,594 | frozen said +782 |
+
+TWO SIDES BEHAVE DIFFERENTLY, and this is the result.
+
+The LOSS side is invariant. C_reacquire is 473 / 971 / 1,529 / 1,960
+against 476 / 967 / 1,502 / 1,880 with the library frozen — within 5% at
+every horizon. Allowing re-promotion does NOT materially reduce the cost
+of having deleted the abstraction, at least within these windows. The
+per-use saving and the amortization arithmetic are robust properties of
+the learner.
+
+The CARRY side collapses. What deleting an abstraction SAVES is not
+lambda*D(A); it is whatever the altered trajectory ends up costing. Here
+it is 0, 1,098, 1,098, and 366 nats across the four horizons — zero when
+deletion simply triggers a replacement promotion, full when it does not,
+and fractional when the library sizes diverge by a non-integer mean.
+V_retain therefore becomes NON-MONOTONE in horizon (+473, -127, +431,
++1,594) even though C_reacquire rises smoothly.
+
+Reading. The amortization law
+`RETAIN iff H_R * s_bar > lambda * D(A)` is correct as an economic
+statement and predicts the crossing to within 5% when the counterfactual
+is controlled. But in a library that keeps evolving, `D(A)` is the wrong
+carry term: the quantity that matters is the marginal description of the
+whole trajectory, which is endogenous to the decision being evaluated.
+
+This is the same path-dependence recorded earlier, now with a
+consequence. A per-object retention rule is not well-posed in an
+evolving library, because the value of retaining A depends on what the
+learner would build instead — which depends on whether A was retained.
+The decision is sequential, not per-object: the right object is
+something like Q(L_t, e_t), not a scalar attached to each abstraction.
+
+LIMITS. n=3 worlds per cell, four horizons, deltas only. The carry
+figures are cross-world means of integer library-size differences, so
+the fractional 366 reflects worlds disagreeing, not a partial
+abstraction. A larger sweep would be needed to say whether V_retain is
+genuinely non-monotone or merely noisy at this n.
