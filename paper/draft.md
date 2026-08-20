@@ -494,7 +494,15 @@ examples — a number the V2 consolidation program uses directly.)
 **The frontier (Figure 5).** Evaluated int8 retention: Discrete 26,208
 bits and ~768 inference multiply-adds; Continuous 29,248 / 6,528;
 Hypernetwork 33,928 / 7,296; Dense-24 56,448 / 5,376; Dense-C 66,688 /
-6,144. Retention, online-learning, and execution orderings all disagree:
+6,144. These are UPPER BOUNDS at 8 bits per scalar, not measured minimum
+description lengths: the frontier was never swept below int8. A later
+sweep on the shared-abstraction tensors of the promotion learner found
+zero behavioral cost at 6 bits and 127 nats at 4 across an entire
+library, implying those tensors are stored at roughly four to eight
+times their functional information content. Whether the dense and
+hypernetwork parameterizations tolerate the same depth is untested, so
+the ordering above is a comparison at a common proxy rather than a
+comparison of minimal codes. Retention, online-learning, and execution orderings all disagree:
 storage efficiency, learning efficiency, and inference cost are distinct
 objectives, and "compute-matched" in this paper means inference-forward
 multiply-adds (training compute is not matched at the same ratio; no
@@ -645,7 +653,9 @@ select any library entry or none from their own early examples.
 **Result.** Against the identical learner with promotion disabled, on 30
 sealed worlds under intervals registered in advance: total retained
 description length falls 63.3% (task bits down, shared bits up, total
-down, 30/30); lifetime prediction improves by 1,174 nats (30/30); held-out
+down, 30/30; conservative, since shared state proved 6-14x more
+compressible per task than private state, and promotion moves
+description from private into shared); lifetime prediction improves by 1,174 nats (30/30); held-out
 future tasks from the same hidden families are cheaper to acquire, 32-shot
 NMSE improving by 0.0031 (30/30). Development and sealed parameters agree
 to within 0.7%.
