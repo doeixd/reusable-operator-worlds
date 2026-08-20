@@ -1,11 +1,10 @@
 # V4R Confirmation Plan — a NEGATIVE result, preregistered
 
-**Status: DRAFT — NOT FROZEN.** No hash for this file exists in
-`tools/check_prereg.py`, and seeds 400-429 remain untouched. Freezing is
-a deliberate separate act: add the hash, and no edits after that commit.
-Before freezing, re-read every interval below against
-`PREDICTIONS.md` — the coding-frontier audit changed O5's context after
-this draft was first written, and the same could happen again.
+**Status: FROZEN.** Its hash is registered in `tools/check_prereg.py`
+and this file may not change after that commit. Every interval below was
+re-read against `PREDICTIONS.md` immediately before freezing. Seeds
+400-429 were untouched at the moment of freezing and may be opened only
+against the thresholds recorded here.
 
 Sealed worlds: **seeds 400-429**, untouched to date. They must not be
 generated, inspected, or summarized until this plan is frozen.
