@@ -1020,3 +1020,50 @@ figures are cross-world means of integer library-size differences, so
 the fractional 366 reflects worlds disagreeing, not a partial
 abstraction. A larger sweep would be needed to say whether V_retain is
 genuinely non-monotone or merely noisy at this n.
+
+# Audit: which absolute two-part figures are affected (2026-08-19)
+
+Triggered by the coding-frontier result (`D_min ~ 1-2 bits/scalar`
+against 8 stored). Checked every absolute description-length claim in
+`paper/draft.md`.
+
+ROBUST (ratios and orderings, unaffected by a rescaling):
+  * "per-task residuals retain ~130,624 bits (9x the Continuous task
+    state)" -- a ratio between two components at the same proxy.
+  * The retention/compute frontier ORDERING (Discrete < Continuous <
+    Hypernetwork < Dense-24 < Dense-C).
+
+NEEDS RELABELLING, not correction:
+  * "int8 retention: Discrete 26,208 bits, Continuous 29,248, ..." is
+    presented as the retention cost when it is one point on a frontier
+    that was never swept downward. It is an upper bound at 8 bits, and
+    should say so. Caveat on my own generalization: the 1-2 bit frontier
+    was measured on the V3/V4 ABSTRACTION tensors, not on Dense-C or
+    Hypernetwork parameters. Whether those tolerate the same depth is
+    untested, so no absolute figure should be restated downward without
+    measuring that model's own frontier.
+
+CHECKED AND CONSERVATIVE:
+  * "total retained description length falls 63.3%" survives, and if
+    anything UNDERSTATES the effect. The ratio is only rescaling-proof
+    if task-private and shared components compress equally, and they do
+    not. Nats paid per task at 4 bits/scalar, each component scored only
+    on the tasks it actually affects:
+
+        shared abstractions   2.0 / 1.2 / 4.0
+        task-private          24.5 /  -  / 11.1   (world 1 has no live
+                                                   private tasks)
+
+    Shared state is 6-14x more compressible per task than private state.
+    Promotion moves description FROM private INTO shared, so the 8-bit
+    proxy overcharges the post-promotion side more than the
+    pre-promotion side, and the true reduction exceeds 63.3%.
+
+METHOD NOTE. The first version of this measurement returned exactly 0.0
+for task-private at every bit depth, which reads as "infinitely
+compressible" and is instead "never measured": the loss was scored over
+`refs`, the tasks that USE abstractions, which are precisely the retired
+tasks whose private residuals are inactive. Second vacuous guard this
+session -- the other printed "CONTROL HOLDS" over zero rows. A check
+that cannot fail is worse than no check; both now score each component
+only where it acts.
