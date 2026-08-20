@@ -1705,3 +1705,68 @@ Final Stage-2 grids, unchanged otherwise:
     g=1.5   N 48, 52, 54, 58     (H_R  8, 12, 14, 18)   H_hat* 12.9
 
 No Stage-2 cell shares a run with Stage 1. 240 cells.
+
+# WHAT CLOSES H19 — frozen 2026-08-20, before g=1.5 was scored
+
+Written while batch 3 was still running and before any g=1.5 cell was
+read. Not to be modified after that point lands.
+
+## The claim, stated so it admits what actually happened
+
+NOT "we independently manipulate D and s". That is false and the
+project has already paid once for a claim of that shape.
+
+    The D-arm manipulates abstraction CAPACITY, jointly changing
+    storage cost and per-use utility. The S-arm holds the stored
+    abstraction EXACTLY fixed — bit-identical tensors — while
+    manipulating its post-return utility regime. Across both
+    interventions the measured threshold is predicted by
+    C_carry / s_bar.
+
+The invariant is neither `H* ~ D` (falsified in V5.1 at 46.8% error)
+nor `H* ~ 1/g`. It is
+
+    H* = C_carry / (expected saving per future use).
+
+## H19 PASSES iff all of the following hold on the g=1.5 grid
+
+1. Routing validity: `p_reuse(1.5) >= 0.5 * p_reuse(1.0)`.
+2. The predicted crossing 12.9 is bracketed by the grid (H_R 8, 12, 14,
+   18) with >= 4 returning tasks on both sides.
+3. Observed-vs-predicted relative error < 0.25, the registered H19
+   falsifier. The tighter Stage-2 registration of 15% is reported
+   separately; missing 15% while meeting 25% is a PASS with the miss
+   stated, not a quiet pass.
+4. The S-arm delivers >= 1.5x variation in s_bar across gains. (Already
+   satisfied at 2.95x from Stage 1; restated so it is part of the
+   criterion rather than an assumption.)
+5. Zero post-gap births, zero pre-intervention leaks, in every scored
+   cell.
+6. No off-grid interpolation. A crossing outside the grid is refused,
+   not extrapolated.
+7. The slots=6 pairing stays a SEPARATE robustness debt. It is not
+   evidence for or against the s-arm verdict, and H19 does not borrow
+   its result either way.
+
+If all seven hold: H19 PASS, and the rung moves off partial P1 + P3.
+The claim licensed is then, within this testbed:
+
+    The lifetime over which a reusable computation is worth retaining
+    is quantitatively determined by its representation cost divided by
+    its realized per-use saving.
+
+## Why this matters beyond RETAIN
+
+The decision rule is not "is this abstraction big?" nor "is this
+abstraction useful?" — neither is sufficient. It is "how many future
+uses are required to amortize what this representation costs?" A small
+abstraction of little use may deserve deletion; a large one with a large
+per-use benefit may deserve retention.
+
+The same form is what H25 and V6 are registered against, which is why
+H19 is foundational rather than a local threshold:
+
+    atom birth      N_uses      * s_bar_A > D(A)
+    atom retention  H_R         * s_bar_A > D(A)      <- H19
+    schema birth    M           * s_bar_S > D(S)      <- H25
+    macro birth     N_programs  * s_bar_M > D(M)      <- V6
