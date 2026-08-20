@@ -2596,3 +2596,66 @@ form families, why abstraction changes coding efficiency, and whether abstract
 computation survives coordinate changes. V5 may now close after H19/H20/H21/H27;
 H28 is ungated from H20 and raised to a V6 entry question; H22-H24 are a side
 branch entered only if managing the library becomes the live question.
+
+
+================================================================================
+S0: BUILDING AN INTERVENTION THAT MOVES UTILITY WITHOUT MOVING COST (2026-08-20)
+================================================================================
+
+V5.1 left H19 half-done: three values of D(A) at one protocol, and no
+clean way to move s_bar. S0 is that other half, and building it produced
+four lessons worth keeping.
+
+REALIZABILITY BEATS LITERALNESS. The registered formula was
+y = f_base(x) + g*(f_full(x) - f_base(x)). Implemented literally, by
+executing the program twice and blending, the target is not producible
+by ANY composition of primitives -- so at g != 1 a perfect learner still
+carries irreducible approximation error and rising reacquisition loss
+becomes uninterpretable. Scaling the family primitive's alpha keeps the
+task inside the generative model. The price is that the post-gap
+operator is a SCALED version of the pre-gap one, so g changes the
+value/match regime rather than being a pure s-only lever. That is
+enough for H19, because the law is scored against MEASURED s_bar and
+because the carry term is identical by construction -- the abstraction
+is frozen at promotion (requires_grad=False) and the pre-gap stream does
+not depend on g, so the same tensor is carried in every arm.
+
+THE MEASUREMENT: s_bar 28.9 / 58.1 / 85.2 at g = 0.5 / 1.0 / 1.5, ten
+worlds each, ratio 2.95 against a gain ratio of 3.00. Nearly linear,
+better than the sub-linear behaviour the tanh and the mismatch channel
+predicted. p_reuse flat (0.41 / 0.44 / 0.44) while s_conditional tripled
+(27.0 / 52.8 / 80.2): the gain made the same abstraction more
+economically important rather than making routing abandon it. g = 1.0
+reproduced the V4R sealed 61.0 at 58.1.
+
+MEASURE THE PREDICTOR AND THE OUTCOME IN SEPARATE RUNS. Stage 1 measures
+s_bar at a fixed window that contains no crossing; Stage 2 estimates the
+crossing from its own runs. Using one horizon sweep for both would let
+the predictor and the outcome share noise, which partially reintroduces
+the identity concern V5.1 exists to rule out. The Stage-2 grid is a
+deterministic function of Stage 1 and was committed before any Stage-2
+cell existed -- sequential experimental design, not post-hoc tuning.
+
+A GRID CANNOT BE FIXED BEFORE THE PREDICTOR IS KNOWN. The bracketing
+rule needs the predicted crossing, and the crossing moves as 1/s_bar, so
+one N grid cannot serve three gains. The three grids differ completely
+(N 72-82, 54-64, 48-58). Any future crossing experiment inherits this:
+measure, then choose the grid, then run.
+
+TWO PROPERTIES OF THE RETENTION INSTRUMENT, found by looking rather than
+assumed, and inherited by the V4R sealed O4 result:
+  1. deleting one abstraction collapses the reuse pathway -- 0/32
+     returning tasks in the deleted arm adopt anything although a second
+     abstraction stays live, and the saving is no larger on tasks that
+     routed to the deleted object than on those that did not;
+  2. D_retain - D_delete = D(A) is a convention, not a measurement --
+     both arms store identical scalar counts and retirement is logical.
+Neither blocks S0, which is unusually robust to both because the carry
+term is identical across gains; both bear on how ABSOLUTE crossings are
+described.
+
+SLOTS IS NOT A NEUTRAL CONSTANT. slots=6 gives s_bar 44.3 against 58.1
+at slots=12, through a smaller library (2.2 vs 3.3 abstractions) that
+fewer tasks reference (46.7 vs 59.0). Absolute crossings are
+protocol-dependent; the D-arm's internal rank comparison is safe only
+because ranks 1/2/4 all ran at slots=12.

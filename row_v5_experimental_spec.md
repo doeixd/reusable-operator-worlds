@@ -1637,6 +1637,10 @@ not advance on a partial verdict.
 4. S0 (return-value gain) run, with D*(A) constant to 2% across g
    verified before scoring; or S0 shown impossible and at least one
    of S1/S2 attempted, informative or marked uninformative.
+   STATUS 2026-08-20: Stage 1 done and the invariance check passed in
+   its strong form (bit-identical abstraction tensors, 10/10 cells,
+   not merely within 2%). The item stays OPEN until Stage 2 observes a
+   crossing — measuring s_bar is not the same as testing the law.
 5. Branch table resolved; PREDICTIONS.md appended.
 6. slots=6 paired against the in-flight slots=12 at rank 1, N=48, or
    a written reason that pairing is unnecessary.
@@ -1931,10 +1935,34 @@ record is complete.
    existing fingerprint moves.
 2. DONE. The causal grid is scored at ranks 1, 2 and 4 and recorded in
    PREDICTIONS.md and in §10 under H19.
-3. OPEN, and the first expensive item. Pair `operator_slots = 6`
-   against the scored grid, and run the S0 return-value-gain arm
-   (secondary S1/S2 only if S0 proves impossible). Until then H19
-   stands as partial P1 + P3.
+3. PART DONE (2026-08-20), part open.
+
+   DONE — S0 Stage 1, the predictor. B1 built; 60 cells at the fixed
+   window N=72, 10 worlds, both arms, 0 failures / 0 exclusions / 0
+   pre-intervention leaks. s_bar = 28.9 / 58.1 / 85.2 at g = 0.5 / 1.0
+   / 1.5, ratio 2.95 against a gain ratio of 3.00. Carry invariance
+   held in 10/10 cells — the abstraction checksum is identical across
+   gains, so the cost side is the same NUMBER while the utility side
+   moves threefold. Mechanism is the registered reading A: p_reuse flat
+   (0.41 / 0.44 / 0.44), s_conditional tripled. g = 1.0 reproduces the
+   V4R sealed 61.0 at 58.1.
+
+   DONE — the slots=6 pairing, as external robustness rather than
+   repair (both artifact roots were internally consistent at 12).
+   s_bar 44.3 against 58.1, via a smaller library (2.2 vs 3.3
+   abstractions) referenced by fewer tasks (46.7 vs 59.0). ABSOLUTE
+   crossings are therefore protocol-dependent and must be quoted with
+   their slot budget; the D-arm's internal rank comparison is
+   unaffected.
+
+   OPEN — the crossing itself. Stage 1 deliberately located none, so
+   the predictor and the outcome come from separate runs. Stage 2's
+   grid is frozen in PREDICTIONS.md (g=0.5 -> N {72,76,78,82}; g=1.0 ->
+   {54,58,60,64}; g=1.5 -> {48,52,54,58}), registered at +/- 15%, 240
+   cells. Also open: a slots=6 crossing grid around 24.8, and D*
+   currency grids (predicted 18.5 / 9.2 / 6.3, unbracketed by the
+   8-bit grids). Until a crossing is observed H19 stands as partial
+   P1 + P3.
 4. DONE. Compositional-closure probe (B7) on Continuous checkpoints
    0–2: depth-8/depth-3 median NMSE 4.39 / 4.26 / 4.09, under the 5x
    gate, no saturation. V6 is not blocked. Recorded in §24.

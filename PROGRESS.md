@@ -2125,3 +2125,67 @@ quantitative law from an accounting identity.
   corrected.
 - Eight earlier fixes were lost to a `git checkout` on uncommitted
   work and re-applied. Learning recorded in `AGENTS.md`.
+
+# 2026-08-20 — S0 built and Stage 1 run (H19 s-arm)
+
+- Built B1, the return-value gain: `TaskGroupSpec.return_gain` scales
+  the family primitive's residual `alpha` on RETURNING tasks only,
+  exposed as `mixed_lifetime --return-gain`, recorded in
+  `rho_profile.json`. Eight tests in `tests/test_task_group_world.py`,
+  the load-bearing one being that `g = 1.0` is bit-exact against the
+  pre-B1 world, so every existing artifact and fingerprint stays valid.
+- Chose `alpha` scaling over the additive blend
+  `y = f_base + g*(f_full - f_base)`. The blend is the literal
+  registered formula but its target is not realizable by ANY composition
+  of primitives, so at `g != 1` even a perfect learner would carry
+  irreducible misspecification and `s_bar` would be confounded with it.
+  Rationale recorded in the spec, since a reviewer could otherwise read
+  the choice as a deviation.
+- `src/row/experiments/preflight_v5_s0.py`: eight invariants, each
+  printing its DENOMINATOR (`routed_to_A 14 / 32`, `0 late / 2 born`),
+  because this project has twice shipped a guard that printed PASS over
+  zero rows.
+- `src/row/experiments/score_v5_s0.py`: scores the arm, hashes the
+  carried abstraction tensors to assert carry invariance across `g`,
+  voids any cell whose pre-intervention delta is nonzero, and refuses
+  crossings the grid does not bracket rather than interpolating.
+
+## Results
+
+STAGE 1 (fixed window N=72, H_R=32, 10 worlds, both arms, 60 cells,
+0 failures, 0 exclusions, 0 leaks):
+
+| g | s_bar | C_reacquire | p_reuse | s_conditional |
+| --- | --- | --- | --- | --- |
+| 0.5 | 28.9 |   925 | 0.41 | 27.0 |
+| 1.0 | 58.1 | 1,858 | 0.44 | 52.8 |
+| 1.5 | 85.2 | 2,725 | 0.44 | 80.2 |
+
+- s_bar ratio 2.95 against a gain ratio of 3.00 — very nearly linear,
+  better than the sub-linear behaviour expected from the tanh and the
+  mismatch channel.
+- Carry invariance: abstraction checksum identical in 10/10 cells. The
+  cost side is the SAME NUMBER across gains while the utility side moves
+  threefold.
+- Mechanism: `p_reuse` flat, `s_conditional` triples — the registered
+  reading A (the abstraction became more important), not B (routing
+  abandoned it). The relative refusal threshold never fired.
+- `g = 1.0` reproduces the V4R sealed operating point: 58.1 vs 61.0.
+- Stage-2 grid computed by the frozen rule and committed BEFORE any
+  Stage-2 cell exists: g=0.5 -> N {72,76,78,82}; g=1.0 -> {54,58,60,64};
+  g=1.5 -> {48,52,54,58}. Registered at +/- 15%.
+
+SLOTS=6 PROTOCOL ROBUSTNESS (g=1.0, N=72, 10 worlds, 20 cells): s_bar
+44.3 against 58.1 at slots=12, via a smaller library (2.2 vs 3.3
+abstractions) that fewer tasks reference (46.7 vs 59.0). `D(A)` is
+unchanged, so the law predicts the crossing moves as 1/s_bar, 18.9 ->
+24.8. The D-arm's ABSOLUTE crossings are therefore protocol-dependent
+and do not transfer between slot budgets; its internal rank comparison
+is unaffected because ranks 1/2/4 all ran at slots=12. Whether the law
+itself survives at slots=6 is NOT tested and needs its own grid.
+
+## Not yet run
+
+Stage 2 (240 cells, ~3h, grids frozen); the slots=6 crossing grid around
+24.8; D* currency grids (predicted crossings 18.5 / 9.2 / 6.3, which the
+8-bit grids do not bracket).

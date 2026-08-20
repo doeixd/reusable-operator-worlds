@@ -901,3 +901,29 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   against `C`. Editing a definition is not the same as editing what
   depends on it, and an independent audit found this where three
   self-reviews had not.
+- Concurrency for lifecycle lifetimes is 3, not 5. Five concurrent
+  `slots=12` promoting runs exhausted RAM and failed 113 of 120 cells
+  with `Unable to allocate 3.38 MiB` inside the promotion clustering
+  step; the same cells run clean at `--jobs 3`. The clustering holds
+  `(tasks, centres, features)` tensors, so slot count drives peak
+  memory more than task count does.
+- Check a registered threshold against its own BASELINE before freezing
+  it. The S0 arm registered `p_reuse >= 0.5`, and the unmodified world
+  scored 0.25 — a bound the control already violates cannot detect the
+  effect it was written to catch. Compute the baseline first, then
+  register the threshold relative to it.
+- A learner's routing table is not a proxy for an abstraction's value.
+  Deleting one abstraction made 0/32 returning tasks adopt ANY
+  abstraction though a second one stayed live, and the saving was no
+  larger on tasks that routed to the deleted object (52.8) than on those
+  that did not (65.9). `C_reacquire` prices the loss of the reuse
+  pathway, not the direct use of one object.
+- `D_retain - D_delete = D(A)` is an accounting convention in this
+  codebase, not a measured difference: both arms' checkpoints store
+  identical scalar counts, retirement is logical, and referencing a live
+  abstraction does not shrink a task's stored residual. Fine as a
+  convention, but never describe it as measured.
+- `operator_slots` is not a neutral protocol constant. Halving it
+  (12 -> 6) cost 24% of the per-use saving by producing a smaller
+  library that fewer tasks reference. Absolute retention crossings must
+  always be quoted with their slot budget.
