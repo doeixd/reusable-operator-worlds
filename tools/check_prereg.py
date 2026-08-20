@@ -28,6 +28,7 @@ FROZEN = {
     "CONFIRMATION_PLAN.md": "e0b0552",
     "V2_CONFIRMATION_PLAN.md": "085b1a3",
     "V3_CONFIRMATION_PLAN.md": "bcc8319",
+    "V4R_CONFIRMATION_PLAN.md": "2aec65c",
 }
 
 STATUS_PATH_PATTERN = re.compile(
