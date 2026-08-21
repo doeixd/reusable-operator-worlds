@@ -1,14 +1,28 @@
 {
   "rows": [
     {
-      "condition": "prospective",
+      "condition": "supervised",
       "world": 0,
       "tasks": 24,
-      "r_effective": 0.17629044787640624,
+      "r_effective": 0.6982068283198157,
       "null": 0.0029477609039063597
+    },
+    {
+      "condition": "supervised",
+      "world": 1,
+      "tasks": 24,
+      "r_effective": 0.8851635000228578,
+      "null": 0.002203693773377283
+    },
+    {
+      "condition": "supervised",
+      "world": 2,
+      "tasks": 24,
+      "r_effective": 0.8680169932973483,
+      "null": 0.003067292936546619
     }
   ],
-  "mean_r_effective": 0.17629044787640624,
-  "null": 0.0029477609039063597,
+  "mean_r_effective": 0.8171291072133405,
+  "null": 0.0027395825379434202,
   "r_residual_reference": 0.095
 }

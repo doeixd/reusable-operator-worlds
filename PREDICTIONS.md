@@ -3514,3 +3514,42 @@ reading suggests may already be past the optimum. A lower-pressure cell
 is the cheapest discriminating follow-up, and its prediction is
 registered here: if over-alignment is the mechanism, Phi should rise
 toward zero as pressure falls and never become positive.
+
+## H32: passes its threshold, and the threshold is the wrong instrument
+
+    R_effective   ordinary 0.762 -> prospective 0.791  (+0.029)
+                  replay 0.784, supervised 0.817, null 0.003
+
+Against the registered "> 0.19" this is a PASS, but that threshold was
+written when the ordinary baseline was believed to be 0.19 and is
+meaningless now that the corrected baseline is 0.762. The honest reading
+of +0.029 on an already-high number is "no material change".
+
+THE INFORMATIVE PART IS THE DISSOCIATION. Geometry went slightly UP in
+every intervention arm while fertility went sharply DOWN
+(Phi_related -8.58 for the same prospective arm). Review 52 warned that
+a large Phi with flat geometry would be a legitimate outcome; the
+observed pattern is the mirror image, and it is worse for the geometric
+endpoint. R_effective rising while adaptation cost rises means
+R_effective is NOT tracking the thing V6 cares about.
+
+That vindicates making Phi primary. Had H32 been the pass criterion,
+V6.1 would have been reported as a success on the basis of +0.029 while
+the intervention was making related futures 65% more expensive to learn.
+
+## H33: NOT EVALUABLE, and the reason is structural
+
+Realized library sizes across all four arms and three worlds:
+
+    ordinary     2, 5, 3        replay       2, 5, 4
+    prospective  4, 2, 4        supervised   4, 3, 2
+
+The schema audit needs M > M_0 + 1 = 4 to fit a schema and hold members
+out. Exactly one cell of twelve qualifies. This is the same tension
+recorded earlier: an unfrozen basis absorbs recurrence continuously and
+the discrete library never grows large enough for a schema over
+abstractions to be defined, while a frozen basis makes every prospective
+gradient dead.
+
+H33 therefore cannot be answered in either extreme regime, which is what
+the partial-freeze allocation sweep exists to fix.

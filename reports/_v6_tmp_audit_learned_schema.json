@@ -2,8 +2,18 @@
   "summary": {},
   "cells": [
     {
-      "condition": "prospective",
+      "condition": "supervised",
       "world": 0,
+      "reason": "only 4 atoms, need > 4"
+    },
+    {
+      "condition": "supervised",
+      "world": 1,
+      "reason": "only 3 atoms, need > 4"
+    },
+    {
+      "condition": "supervised",
+      "world": 2,
       "reason": "only 2 atoms, need > 4"
     }
   ]

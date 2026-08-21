@@ -1,0 +1,34 @@
+{
+  "ordinary": {
+    "r_effective": 0.7620526212795031,
+    "null": 0.0027395825379434202,
+    "factorize_wins": 0,
+    "worlds": 1,
+    "covered": 1.0,
+    "errors": []
+  },
+  "replay": {
+    "r_effective": 0.7843886893415125,
+    "null": 0.0027395825379434202,
+    "factorize_wins": 0,
+    "worlds": 1,
+    "covered": 0.5,
+    "errors": []
+  },
+  "prospective": {
+    "r_effective": 0.7913783111477629,
+    "null": 0.0027395825379434202,
+    "factorize_wins": null,
+    "worlds": null,
+    "covered": null,
+    "errors": []
+  },
+  "supervised": {
+    "r_effective": 0.8171291072133405,
+    "null": 0.0027395825379434202,
+    "factorize_wins": null,
+    "worlds": null,
+    "covered": null,
+    "errors": []
+  }
+}
