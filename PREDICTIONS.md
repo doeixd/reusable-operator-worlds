@@ -3365,3 +3365,46 @@ and the residual retirement removed), and a rollout that ran only the
 routed basis. Each individually depressed the estimate. The reviewer's
 spot check on one world predicted 0.41 -> 0.65; the full fix gives
 0.762 across three.
+
+## CORRECTED POPULATION SPAN: 0.491, and the verdict flips
+
+Same coordinate fix — one common on-trajectory state set for every
+innovation and every target, retirement state restored, rollout matching
+`forward`.
+
+    mean single-innovation unexplained   0.695
+    mean top-2 span                      0.773
+    mean top-4 span                      0.737
+    mean top-8 span                      0.676
+    mean FULL span                       0.491   (retracted value: 0.707)
+
+WITHDRAWN: "NOT in the span. No global linear reparameterization of this
+population recovers the teacher family, cheap or otherwise, so the
+global-rotation hypothesis is dead."
+
+CORRECTED VERDICT: about half of a teacher family operator IS linearly
+recoverable from the learner's population of innovations, and
+essentially none of it from any single one (0.695 for the best single
+object against 0.491 for all 24). The structure is DISTRIBUTED across
+the population, which is precisely the hypothesis the retracted number
+declared dead.
+
+## The three corrected numbers now tell one coherent story
+
+    R_effective        0.762   the learner's task-conditioned operators
+                               carry most of the family structure
+    full span          0.491   half of a teacher operator is linearly
+                               recoverable from the innovation population
+    promoted library   0.921 unexplained, FACTORIZE 0/6
+
+The learner computes the structure. It is spread across route and
+residual and across tasks rather than concentrated in any one object.
+And PROMOTE, which extracts single task residuals into single
+abstractions, captures almost none of it. The failure is the extraction
+step's UNIT, not the wake objective and not the absence of structure.
+
+This also revives what review 48 called Hypothesis B and what review 49
+called the global-rotation branch, both of which I reported as
+eliminated. They are live again, and a sleep phase that refactors over
+the POPULATION — rather than promoting one residual at a time — is now
+the intervention the evidence points at.

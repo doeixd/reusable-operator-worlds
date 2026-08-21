@@ -50,6 +50,7 @@ from row.config import load_config
 from row.experiments.audit_effective_operator import (
     effective_innovation,
     load_learner,
+    rollout,
 )
 from row.experiments.audit_meta_recurrence import residual_effect
 from row.meta_world import MetaFamilySpec, family_operators, generate_meta_world
@@ -112,25 +113,33 @@ def main() -> None:
         ).mean(dim=0).view(model.task_steps, model.operator_slots)
         mean_route = torch.softmax(mean_code, dim=-1)
 
-        # Both sides must be measured on the SAME states, and those
-        # states must be the ones the operator actually acts on.
+        # ONE COMMON STATE SET for every innovation and every target.
+        # The first version built each innovation on its own task's
+        # states and then used those mutually unaligned vectors as a
+        # shared regression basis, so a "span" was fitted across
+        # incomparable coordinates (review 55). A span question is only
+        # meaningful when all vectors live in the same space.
+        pooled = []
+        for task in family_tasks:
+            start = torch.tensor(task.eval_x[: args.probe], dtype=torch.float32)
+            with torch.no_grad():
+                pooled.append(rollout(model, task.task_id, start, step))
+        common = torch.cat(pooled, dim=0)
+        if len(common) > args.probe:
+            pick = torch.randperm(
+                len(common), generator=torch.Generator().manual_seed(world)
+            )[: args.probe]
+            common = common[pick]
+        common_np = common.cpu().numpy().astype(np.float64)
+
         innovations, targets = [], []
         for task in family_tasks:
-            z = torch.tensor(task.eval_x[: args.probe], dtype=torch.float32)
-            with torch.no_grad():
-                route, *_ = model._unpack(task.task_id)
-                weights = torch.softmax(route, dim=-1)
-                for earlier in range(step):
-                    candidates = torch.stack([o(z) for o in model.basis], dim=0)
-                    z = torch.sum(
-                        weights[earlier].view(model.operator_slots, 1, 1)
-                        * candidates, dim=0)
             innovations.append(
-                effective_innovation(model, task.task_id, z, step, mean_route))
+                effective_innovation(model, task.task_id, common, step,
+                                     mean_route))
             index = generated.tasks.index(task)
             targets.append(
-                residual_effect(teachers[spec.family_of(index)],
-                                z.cpu().numpy().astype(np.float64)))
+                residual_effect(teachers[spec.family_of(index)], common_np))
 
         pool = np.stack(innovations).astype(np.float64)
         centred = pool - pool.mean(axis=0)
