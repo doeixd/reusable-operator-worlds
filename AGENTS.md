@@ -1043,3 +1043,20 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   retirement, so retired tasks were rebuilt with both the abstraction
   and the residual retirement had removed — a model that never existed
   during training.
+- NESTED-LEARNING AUDIT, run before any meta-learning result is read.
+  V6 produced six failures each of which could have supported a
+  coherent but false story: (1) does the intervention change parameters
+  at all — a frozen basis made every arm secretly identical; (2) does
+  the inner learner actually learn — SGD moved the support loss 0.000%;
+  (3) does the probe have dynamic range — a saturated probe reports the
+  same number for every arm; (4) is the future genuinely unseen — the
+  "held out" sibling was later trained on; (5) does the outer objective
+  depend on the inner adaptation — k=0 versus k=many must differ;
+  (6) does the result replicate across worlds — a positive world 0
+  vanished at n=3.
+- A negative endpoint does not identify its own mechanism. Phi said the
+  intervention hurt; only a direct measurement of discrimination and
+  task-code sensitivity could say whether the representation LOST
+  information or merely became harder to optimize, and those imply
+  different successor designs. Measure the mechanism before designing
+  the fix.

@@ -1,0 +1,208 @@
+This is a much cleaner V6 story now, and I think the current
+interpretation is mostly right. The decisive result is not merely
+"prospective pressure failed"; it is that the VALID INTERVENTION
+ACTIVELY DAMAGED THE EXACT CAPABILITY IT WAS INTENDED TO IMPROVE, with
+the harm concentrated on related futures. That makes H35 and the
+allocation sweep exactly the right remaining experiments.
+
+Phi_prospective = -8.58 with all three worlds negative, while unrelated
+futures are harmed much less, giving Phi_specific ~ -6.6. So this isn't
+generic degradation. The intervention has specifically made members of
+the relevant task distribution harder to distinguish and adapt to.
+
+## I like the over-alignment hypothesis, with one caveat
+
+The pattern is very consistent with it: prospective pressure -> make
+related tasks look alike -> erase member-specific coordinates ->
+few-shot identification gets harder. The support-size curve is
+especially suggestive: harm largest at k=1, diminishing as more evidence
+arrives. That's exactly what you'd expect if the learner made the family
+mean easier to represent but made the residual identity of individual
+family members harder to infer.
+
+But I would call this the LEADING mechanism, not yet the mechanism.
+There's a closely related alternative: prospective training worsened the
+CONDITIONING of the adaptation problem without literally collapsing
+representations toward a mean. Those can look identical in Phi.
+
+So while H35 runs, add a cheap mechanistic audit. For each family
+member, measure d_between = E_{i!=j}||z_i - z_j||^2 against within-member
+variation d_within, and define a discrimination ratio D =
+d_between / d_within — or the functional equivalent rather than latent
+coordinates. If D_prospective < D_ordinary, especially on the dimensions
+the task adaptor uses, then over-alignment becomes much more than a
+story.
+
+An even better measure would be the Fisher/Jacobian sensitivity of query
+behavior to the new task code. If prospective training reduces
+||df/dc_task||, then the representation has literally become less
+responsive to the few-shot variable that distinguishes family members.
+That would explain the result beautifully.
+
+# H32 is actually a very important negative lesson
+
+R_effective 0.762 -> 0.791 while Phi 0 -> -8.58. So more recoverable
+shared family geometry did NOT produce a more useful representation.
+That's a major methodological result:
+
+    Representations can become "more structured" by our geometric
+    measure while becoming worse languages for learning.
+
+This is exactly why making Phi primary was right, and I would elevate it
+in the V6 closure. V5 taught geometry != economics. V6 now adds
+geometry != fertility. Even the right-looking structure can be
+destructive if it collapses distinctions required for rapid
+specialization. So the real target isn't "maximize shared structure" —
+it is SEPARATE WHAT SHOULD BE SHARED FROM WHAT MUST REMAIN CHEAPLY
+IDENTIFIABLE.
+
+# This points toward a richer representation model
+
+Perhaps the right family representation isn't T_i ~ S but
+T_i = S(alpha_i) + eps_i. We've already encountered this exact form
+economically; now it may matter dynamically too. A fertile
+representation needs SHARED COORDINATES that cheaply encode "what family
+am I in / what computation recurs?" and simultaneously ARGUMENT
+COORDINATES that make alpha_i very cheap to infer from a few examples.
+The prospective objective you implemented may be rewarding the first
+while accidentally crushing the second.
+
+So think of fertility as two factors: shared prior quality (family
+compression) plus argument identifiability (fast specialization). This
+is closely related to the old typed-code distinction REFERENCE /
+ARGUMENT / INNOVATION. That lesson may be coming back at a deeper level.
+The learner should not be told "make related tasks identical"; it should
+learn "make the shared part identical while giving differences a
+low-dimensional, easy-to-infer coordinate system."
+
+# A candidate V6 successor objective
+
+Rather than min_R L_query(Adapt(R, D_sibling)), which can apparently
+reduce the incentive to preserve distinguishing information, the right
+target eventually becomes something like
+
+    min  L_query + lambda D*(R) + beta C_infer(alpha_new)
+
+where adaptation is constrained to a known ARGUMENT CHANNEL: S_theta is
+slow and shared, and new tasks may only learn alpha plus a small
+innovation eps. Then the prospective objective explicitly asks: is my
+shared representation such that a new family member can be acquired by
+learning only a small argument? That is much closer to what H20 schema
+economics says should be valuable.
+
+But do NOT implement this yet. First let H35 and allocation finish. This
+is the likely V7/V6R mechanism if the current negative survives.
+
+# The allocation sweep may tell you something deeper than H33
+
+Frozen basis -> M ~ 7 with the prospective gradient dead; unfrozen ->
+M ~ 2-5 with it live. The partial-freeze sweep may expose a continuum
+between continuous shared absorption and explicit abstraction birth.
+Plot at each free-slot setting: n_free against M, R_effective, Phi, the
+FACTORIZE margin, current lifetime loss, and perhaps private residual
+bits.
+
+Possible result: n_free up => M down, because recurrence gets swallowed
+by the continuous basis. If H33 only becomes evaluable at intermediate
+plasticity, that suggests a REPRESENTATION PHASE BOUNDARY: too little
+plasticity forces structure into a discrete library that cannot be
+prospectively shaped; too much dissolves it into the continuous basis;
+intermediate lets shared features adapt while explicit reusable atoms
+still form. That would be an excellent V6 result even if prospective
+fertility itself fails.
+
+# H35 now has a particularly clean interpretation
+
+Over-alignment: as pressure approaches zero, Phi -> 0 from below, so
+Phi <= 0 throughout the low-pressure region. Interior optimum: there
+exists eta* > 0 with Phi(eta*) > 0. That is the clean discriminating
+test.
+
+I would resist further pressure tuning after this sweep. If the
+registered low cells remain nonpositive, close the hypothesis: this
+prospective objective has no demonstrated beneficial operating point.
+Otherwise you risk eventually finding an eta where noise gives a
+positive cell and turning V6 into hyperparameter fishing.
+
+# A possibility worth keeping in mind: the objective may point the wrong way
+
+Meta-learning intuition says optimize the representation so a few
+adaptation steps work well. But if those steps operate only over
+task-local codes while shared weights receive the outer gradient, the
+cheapest outer solution can be to MOVE THE SHARED PREDICTION TOWARD THE
+EXPECTED MEMBER rather than to build coordinates in which member
+identity is quickly inferable. The outer objective cares about the
+endpoint after adaptation, not why adaptation succeeded. It can improve
+that endpoint either by making adaptation effective, or by making
+adaptation unnecessary. Your intervention seems to have drifted toward
+the second.
+
+And then, paradoxically, unseen members with small support become harder
+because the shared prediction has become a strong prior around the wrong
+family-average point. That would explain why the corrected prospective
+and explicit-sharing objectives have similar qualitative effects even
+though they are no longer implementation-identical. If so, the fix isn't
+a better optimizer: we need to distinguish reusable prior from rapidly
+identifiable arguments in the architecture and the objective.
+
+# This may alter the grand theory in a useful way
+
+We've often phrased the goal as "make future learning cheaper." V6 shows
+that MAKING A FUTURE TASK CLOSER TO WHAT YOU ALREADY KNOW IS NOT
+EQUIVALENT TO MAKING IT EASY TO LEARN. A representation can have a very
+strong prior and still be awful for updating. So a good representation
+needs compression of regularity AND identifiability of novelty. This is
+almost Bayesian: the shared representation is a prior, while alpha_task
+and eps_task must form a likelihood-sensitive coordinate system. Too
+strong a prior crushes the likelihood.
+
+# My guess for the remaining outcomes
+
+H35: over-alignment / no-positive-optimum is more likely than a hidden
+positive window, maybe 65/35. The support-size signature and the
+structurally specific harm are fairly persuasive.
+
+Allocation: I expect a clear monotone relationship, free capacity up =>
+M down. I would not be surprised if H33 becomes technically measurable
+at some intermediate point but FACTORIZE still loses.
+
+If H33 wins that would be fascinating — partial plasticity -> explicit
+fertile atoms -> schema economy — meaning the architectural distribution
+of plasticity itself controls the abstraction hierarchy. If H33 loses
+everywhere, V6 should close negatively and the next version should
+explicitly introduce SHARED SCHEMA + FAST ARGUMENT + PRIVATE INNOVATION.
+That would be a principled response to the result, not a rescue.
+
+# One methodological point I would preserve prominently
+
+The sequence in this run is worth documenting because it demonstrates
+why the guards matter: a frozen basis made all interventions secretly
+identical; the supervised objective had zero shared gradient; apparent
+future tasks had already been trained on; a supposedly adaptive probe
+did not adapt; the prospective inner loop itself later turned out not to
+adapt; and a weak positive world-0 result vanished across three worlds.
+Any one of those could have produced a coherent but false scientific
+story.
+
+Extract a general NESTED-LEARNING AUDIT checklist:
+
+    1. Does the intervention change parameters?
+    2. Does the inner learner actually learn?
+    3. Does the probe have dynamic range?
+    4. Is the future genuinely unseen?
+    5. Does the outer objective depend on inner adaptation?
+    6. Do results replicate across worlds?
+
+That's legitimately valuable research practice.
+
+So let the two registered sweeps finish and build nothing else yet. If
+H35 stays negative and allocation produces no fertile schema regime,
+close V6 with a strong coherent negative: naively optimizing
+representations for post-adaptation performance does not produce
+fertility; it slightly increases shared family geometry while destroying
+the member-specific information needed for rapid future adaptation. And
+the next hypothesis becomes much more specific: fertile representation
+requires factorizing reusable computation from cheaply inferable task
+arguments, rather than merely pulling related tasks into a shared
+representation. That is a substantially better hypothesis than the one
+V6 started with.

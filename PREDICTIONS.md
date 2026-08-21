@@ -3604,3 +3604,56 @@ pressure, over-alignment predicts Phi rises toward zero and never
 becomes positive, while "pressure was too low" predicts Phi becomes
 positive. This is the one V6 follow-up worth running, and it is one
 sweep rather than a new mechanism.
+
+# MECHANISM AUDIT: over-alignment is NOT what happened (2026-08-21)
+
+Review 56 named over-alignment as the leading explanation for
+Phi_prospective = -8.58 and gave it ~65% — the representation collapsing
+family members toward a shared mean, erasing the coordinates that
+distinguish them. It also named the discriminating measurement, which
+runs offline on the existing artifacts.
+
+| arm | discrimination d_between/d_within | \|\|df/dc_task\|\| |
+| --- | --- | --- |
+| ordinary    | 0.0088 | 0.1688 |
+| replay      | 0.0088 | 0.1716 |
+| prospective | 0.0097 | 0.1710 |
+| supervised  | 0.0099 | 0.1747 |
+
+Over-alignment predicts BOTH fall under prospective pressure. Both
+rose: discrimination +11.1%, code sensitivity +1.3%.
+
+So the prospective representation separates family members slightly
+MORE than ordinary, and is slightly MORE responsive to the task code —
+the very channel few-shot adaptation moves. The members did not collapse
+and the argument channel was not crushed.
+
+VERDICT: over-alignment is REFUTED as the mechanism for V6.1's harm.
+What remains is the alternative review 56 flagged as
+indistinguishable-in-Phi: the adaptation problem became harder to
+OPTIMIZE — a conditioning effect — without any collapse of the
+representation's content.
+
+## This changes what H35 should be expected to show
+
+I registered the over-alignment reading as predicting Phi rises toward
+zero as pressure falls and never turns positive. That prediction was
+conditional on a mechanism now refuted, so it is withdrawn as a
+prediction while the sweep still runs as a measurement.
+
+Conditioning damage should scale with how far the prospective gradient
+drags the shared parameters, which means the low-pressure cells have a
+genuine chance of being neutral or positive rather than merely
+less-negative. H35 is now a more open question than it was an hour ago,
+which is the opposite of what I expected from running a mechanism audit.
+
+## Why this measurement was worth running before the sweep finished
+
+Phi says an intervention hurt. It cannot say whether the representation
+lost information or merely became awkward to optimize, and those imply
+different successors: the first wants an architecture that protects
+argument coordinates, the second wants a better-conditioned objective
+over the same architecture. Review 56's proposed successor — separating
+SHARED SCHEMA from FAST ARGUMENT from PRIVATE INNOVATION — is a response
+to the first. On this evidence it is not yet motivated, because the
+argument channel is intact.

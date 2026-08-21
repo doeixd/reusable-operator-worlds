@@ -1,0 +1,122 @@
+{
+  "summary": {
+    "ordinary": {
+      "discrimination": 0.008752386498054394,
+      "code_sensitivity": 0.1688471769739408,
+      "worlds": 3
+    },
+    "replay": {
+      "discrimination": 0.008795517762728735,
+      "code_sensitivity": 0.1716274862782383,
+      "worlds": 3
+    },
+    "prospective": {
+      "discrimination": 0.009723735285945294,
+      "code_sensitivity": 0.170988718705808,
+      "worlds": 3
+    },
+    "supervised": {
+      "discrimination": 0.009855557444113662,
+      "code_sensitivity": 0.17473626014382007,
+      "worlds": 3
+    }
+  },
+  "cells": [
+    {
+      "world": 0,
+      "arm": "ordinary",
+      "d_between": 2.34388330578804,
+      "d_within": 221.6102294921875,
+      "discrimination": 0.010576602493300833,
+      "code_sensitivity": 0.17766067132470198
+    },
+    {
+      "world": 0,
+      "arm": "replay",
+      "d_between": 2.178673952817917,
+      "d_within": 221.86521530151367,
+      "discrimination": 0.009819808616042449,
+      "code_sensitivity": 0.18138214577144632
+    },
+    {
+      "world": 0,
+      "arm": "prospective",
+      "d_between": 2.2373668253421783,
+      "d_within": 220.80044174194336,
+      "discrimination": 0.010132981653891171,
+      "code_sensitivity": 0.18568885937080873
+    },
+    {
+      "world": 0,
+      "arm": "supervised",
+      "d_between": 2.8519533276557922,
+      "d_within": 223.63763809204102,
+      "discrimination": 0.012752564156852851,
+      "code_sensitivity": 0.1893117610112919
+    },
+    {
+      "world": 1,
+      "arm": "ordinary",
+      "d_between": 1.6120603382587433,
+      "d_within": 224.12580108642578,
+      "discrimination": 0.0071926584554051955,
+      "code_sensitivity": 0.16733007643779274
+    },
+    {
+      "world": 1,
+      "arm": "replay",
+      "d_between": 1.779685616493225,
+      "d_within": 224.08817672729492,
+      "discrimination": 0.007941898776118925,
+      "code_sensitivity": 0.1761099036472539
+    },
+    {
+      "world": 1,
+      "arm": "prospective",
+      "d_between": 1.904170423746109,
+      "d_within": 222.32976531982422,
+      "discrimination": 0.008564622109895791,
+      "code_sensitivity": 0.16050929327320773
+    },
+    {
+      "world": 1,
+      "arm": "supervised",
+      "d_between": 1.7107651233673096,
+      "d_within": 224.16643142700195,
+      "discrimination": 0.007631673986496978,
+      "code_sensitivity": 0.16701076786072613
+    },
+    {
+      "world": 2,
+      "arm": "ordinary",
+      "d_between": 1.914451241493225,
+      "d_within": 225.55067443847656,
+      "discrimination": 0.008487898545457152,
+      "code_sensitivity": 0.1615507831593277
+    },
+    {
+      "world": 2,
+      "arm": "replay",
+      "d_between": 1.951388657093048,
+      "d_within": 226.25200271606445,
+      "discrimination": 0.008624845896024833,
+      "code_sensitivity": 0.15739040941601465
+    },
+    {
+      "world": 2,
+      "arm": "prospective",
+      "d_between": 2.372237592935562,
+      "d_within": 226.49682235717773,
+      "discrimination": 0.010473602094048916,
+      "code_sensitivity": 0.1667680034734076
+    },
+    {
+      "world": 2,
+      "arm": "supervised",
+      "d_between": 2.072792023420334,
+      "d_within": 225.73448181152344,
+      "discrimination": 0.00918243418899115,
+      "code_sensitivity": 0.16788625155944223
+    }
+  ]
+}
