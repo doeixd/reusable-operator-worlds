@@ -3213,3 +3213,93 @@ representation or simply fights the task loss.
 The registered sweep is now `outer in {2, 8, 32}` across three worlds,
 spanning an order of magnitude around parity with task training, which
 is the range H35's predicted optimum should live in if it exists.
+
+# CODE REVIEW 55: THREE PUBLISHED CONCLUSIONS RETRACTED (2026-08-21)
+
+An independent code review found conclusion-impacting bugs in audits I
+had already reported results from. The retractions come first, before
+the fixes, because they change what this project currently claims.
+
+## RETRACTED 1 — R_effective = 0.190, and everything read off it
+
+`audit_effective_operator` builds each task's innovation vector on THAT
+TASK'S OWN `eval_x`, then compares the vectors coordinate-by-coordinate
+with an SVD. Coordinate 20 therefore means a different input for every
+task, so the "shared subspace" is fitted across unaligned coordinates.
+On a common aligned probe the reviewer's spot check moved capture from
+~0.41 to ~0.65.
+
+WITHDRAWN: R_effective ~ 0.19; the corrected-H29 claim that the learner
+holds "about a fifth of the family geometry"; and V6's H32 reading of
+0.137 -> 0.176. All three are artifacts of the misalignment.
+
+## RETRACTED 2 — "no post-hoc linear refactor can recover the structure"
+
+`audit_population_span` has the same defect and one more: it uses
+mutually unaligned innovation vectors as a common regression basis for
+every target. A valid test evaluates every candidate innovation on each
+TARGET's state set before fitting. The spot check moved unexplained
+variance from ~0.59 to ~0.43 against my reported 0.707.
+
+WITHDRAWN: the 0.707 figure and the conclusion that the global-rotation
+hypothesis is dead. That conclusion was the basis for saying
+post-hoc refactoring cannot be the remedy and for pointing V6 upstream
+at the wake objective. It is now UNRESOLVED, and V6's premise is
+weaker than I stated.
+
+## RETRACTED 3 — every V6 arm's lifetime comparison
+
+`_sibling_of` draws the prospective sibling from `world.tasks`, i.e.
+from the ORDINARY LIFETIME, and the hook trains shared parameters on
+that task's support AND query labels before the task legitimately
+arrives in the prequential stream. The comment claims the sibling is
+held out; it is not. So every non-ordinary arm received future
+supervision, and the cumulative-loss comparisons between arms are void.
+
+WITHDRAWN: replay's Phi = +0.072 as a clean control result, and all
+arm-versus-arm lifetime deltas. The world already generates
+`held_out_family_tasks` for exactly this purpose and the hook must draw
+from there.
+
+## Also confirmed, and affecting the same audits
+
+* `load_learner` restores `task_reference` but never `retired`, so for
+  retired tasks the effective-operator audit adds BOTH the promoted
+  abstraction and the private residual that retirement was supposed to
+  remove. Most H29 tasks are retired.
+* The "on-trajectory" state runs only the routed basis for earlier
+  steps, omitting promoted references and residuals, so it is not the
+  trajectory `forward()` actually produces.
+* Replay is not a matched control: it uses one AdamW at lr 0.003 for
+  shared, code and residual together, while ordinary acquisition uses
+  route LR 0.05 and residual LR 0.01, and prospective additionally runs
+  an inner loop per outer step.
+* The fertility scorer reports an endpoint query MSE after 60 steps on
+  one batch. That supports "better few-shot endpoint", NOT the
+  registered acquisition gate of prequential loss, samples AND
+  description cost.
+* H31's unrelated futures are PRE-ONSET TASKS THE LIFETIME TRAINED ON,
+  while its related futures are genuinely novel. The asymmetry cannot
+  separate structural specificity from generic plasticity.
+* Protocol knobs (arm, freeze settings, inner steps, sleeps, meta-world
+  spec) are absent from the resolved fingerprint, and resume only checks
+  that `summary.json` exists, so a differently-configured artifact can
+  be silently accepted.
+* Compute accounting omits `lifecycle` and `prospective` from the
+  shared-residual branch, so their multiply-add counts use the wrong
+  fallback.
+* `family_operators` now generates `families + held_out_families`
+  operators by default, so V5 audit scripts rerun today are not
+  semantically identical to the reports they produced before that API
+  change.
+
+## What is NOT affected
+
+V1-V4 stand. V5's primary causal results stand: the amortization law
+across seven operating points, the sealed C1 pass, the schema-crossing
+economics of H20a/H25/H26, and the C3 finding that FACTORIZE loses to
+matched-budget COMPRESS on the learned library. None of those depend on
+the misaligned audits or the leaking hook.
+
+What moves to UNRESOLVED: V5's H29 localization, the population-span
+conclusion, and V6's H30-H32.
