@@ -1,0 +1,109 @@
+Reviewer feedback 61 — received 2026-08-21, on the DRAFT H39 confirmation
+plan (seeds 700-729), minutes after the PI's freeze. Filed while the sealed
+lifetimes were running and before any sealed cell was read; its change
+became H39_CONFIRMATION_PLAN.md Amendment 1.
+
+----------------------------------------------------------------------
+
+I would make ONE change before freezing, then freeze.
+
+The overall design is good. O/M/G is the right confirmatory triangle:
+O = ordinary, M = learned schema directions, G = same architecture, random
+frozen directions. That lets you distinguish architecture/capacity from
+actually learning a useful parameterized family. And the five estimands
+cover the right distinct claims: relative schema value, absolute
+opportunity, present-task value, full-interface value, and actual channel
+use.
+
+CHANGE E2. I would not make Pr(R_M <= 1.5) >= 0.5 a load-bearing
+confirmatory clause. The problem is not that 1.5x is unreasonable; it is
+that 1.5 has no special theoretical meaning. It was inherited from C0 as an
+operational licensing threshold. Turning that historical convenience into
+a scientific phase boundary risks a silly outcome like R_M = 1.51 on many
+worlds causing a qualitatively different verdict from R_M = 1.49. The
+actual claim is continuous: how much future opportunity does the jointly
+formed parameterized representation preserve? So make the distributional
+magnitude of R_M the primary E2.
+
+Preferred E2: because R_M is a positive ratio, use log ratios
+z_w = log R_{M,w} and report the geometric mean R~_M = exp(mean_w z_w).
+Freeze R~_M in [1.2, 1.8] — or retain the arithmetic mean if switching
+now would create implementation debt. The key point is the interval is
+the confirmation, not crossing 1.5 in 15 worlds. Still report
+Pr(R_M <= 1.5) prominently as a CONTINUITY statistic against C0, but do
+not let it control the main verdict.
+
+Why geometric mean: ratios are asymmetric. A world with R = 3 pulls an
+arithmetic mean much harder than a world with R = 1/3 in the opposite
+direction, though multiplicatively they are symmetric; log 3 = -log(1/3).
+And if an ordinary denominator becomes unusually small on one world,
+arithmetic ratios can get ugly. For a 30-world confirmatory statement of
+multiplicative opportunity loss, prefer E[log R]; report the arithmetic
+mean for continuity with development.
+
+VERDICT TABLE. CONFIRMED-RELATIVE is currently triggered by failure of
+the 1.5x fraction. The more principled hierarchy: CONFIRMED = E1-E5 all
+satisfy their frozen intervals/gates including the E2 magnitude interval.
+CONFIRMED-RELATIVE = E1, E3, E4, E5 pass but E2 misses its predicted
+magnitude interval — learned parameterized directions are causally
+useful, improve current/full-interface behaviour, and are used, but the
+stronger claim that alpha-only acquisition approaches the ordinary
+future-task opportunity level did not generalize quantitatively. That is
+scientifically meaningful; "only 14/30 rather than 15/30 fell below 1.5"
+is not a meaningful reason to demote the whole result. Keep a named
+secondary statement, "C0 continuity: fraction with R_M <= 1.5", but do
+not let one integer determine the headline.
+
+TIGHTEN BEFORE FREEZE. The predicted E2 fraction 0.55-0.75 comes from
+development that is effectively 2/3. Do not preregister such a tight
+confirmatory prediction for a Bernoulli-style fraction from three worlds;
+that is false precision. The continuous R_M prediction (1.46, with actual
+magnitudes behind it) has considerably more information.
+
+THE OTHER FOUR. E1 (R_G - R_M > 0) is essential: learned directions matter
+beyond handing the system two extra slots; keep it, score paired per
+world, and if practical also report log(R_G / R_M), but do not redesign
+around that now. E3 ([-2000, -500] nats) is strong development evidence
+and prevents the reading "we paid current performance to preserve
+hypothetical future opportunity"; keep it load-bearing. E4 (R_full < 1,
+[0.65, 0.90]) may become one of the most important results: if alpha-only
+stays only moderately close but the complete typed interface
+S(alpha) + eps beats ordinary future acquisition, that is the principle we
+have been converging toward — shared structure handles recurrence while
+private innovation preserves novelty; keep it load-bearing. E5: definitely
+keep; otherwise M could win while ignoring the mechanism claimed to
+matter; the alpha-zeroed degradation test is a good causal usage check.
+
+ONE CONCEPTUAL SENTENCE TO FREEZE. Make explicit that this block tests
+EXISTENCE AND USE, NOT DISCOVERY. If oracle family grouping or
+architecture is supplied, a positive result means a jointly formed
+parameterized representation can preserve future variation opportunity
+and improve acquisition. It does NOT mean the learner can autonomously
+discover that representation; that is the next rung. This distinction
+will matter enormously if this seals successfully.
+
+WHAT I PREDICT. The CONFIRMED-RELATIVE intuition is plausible, but after
+the development numbers my central expectation is a little more
+optimistic about E2's mean than its world-count threshold. E1: very
+likely passes. E3: likely passes, though the development lower edge at
+-1991 means some world variability. E4: likely the cleanest strong
+positive. E5: very likely passes. E2 mean/geometric mean: probably around
+1.4-1.7. Fraction R_M <= 1.5: genuinely uncertain and likely the least
+stable quantity — which is exactly why it should not be load-bearing.
+Expected result: jointly learned directions are real and useful;
+alpha-only acquisition preserves substantial but incomplete opportunity;
+the full schema + innovation interface clearly beats ordinary. If that
+holds across 30 unseen worlds it is a very important result: the H39
+census failed not because parameterized families are impossible, but
+because the useful family coordinates have to be created during learning;
+they cannot be reliably extracted from the finished extensional
+population afterward. That is directly relevant to the eventual learned
+programming language.
+
+RECOMMENDATION. Append one amendment before freeze: E2 primary = mean /
+geometric-mean R_M in the preregistered interval [1.2, 1.8]; the fraction
+R_M <= 1.5 is retained as a reported continuity statistic against census
+C0 but is not independently verdict-determining. Use the geometric mean if
+comfortable; arithmetic mean is still much better than making the 1.5x
+fraction decisive. Then freeze the plan. I would not change anything else
+based on the development data. The experiment is ready.

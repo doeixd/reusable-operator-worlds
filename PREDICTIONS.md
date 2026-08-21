@@ -4356,3 +4356,29 @@ reported, not gated. A confirmation plan is the correct instrument for
 exactly this situation: the development evidence is positive but marginal,
 and only a sealed 30-world block with a preregistered interval can decide
 whether the two-slot effect is real.
+
+# H39 CONFIRMATION BLOCK OPENED (2026-08-21); REVIEW 61 → AMENDMENT 1 BEFORE ANY CELL WAS READ
+
+`H39_CONFIRMATION_PLAN.md` was frozen at `1c98017` after PI approval and
+the 90-lifetime block on seeds 700-729 launched (`tools/run_h39_confirmation.py`,
+pool of 3, prereg check enforced at launch). Review 61 arrived minutes later
+and asked for one change to the decision rule; since the change touches
+only the scorer and no sealed artifact had been opened or scored, it was
+appended as Amendment 1 and the plan re-frozen at `f78f209` (current hash in
+`check_prereg.py`). The scorer (`score_h39_confirmation.py`) implements the
+amended rule and was committed before any sealed number existed.
+
+Registered decision rule (final): E1 mean(R_G − R_M) > 0, CI excludes 0,
+predicted [0.8, 2.2]; E2 geometric mean of R_M in [1.2, 1.8] with its CI
+below 1.8, the 1.5x fraction reported as C0 continuity only; E3 mean
+present-task gap < 0, CI excludes 0, predicted [−2,000, −500] nats; E4 mean
+full-interface ratio < 1, CI excludes 1, predicted [0.65, 0.90]; E5
+alpha-zeroed ratio ≥ 1.25 in ≥ 27/30 worlds. CONFIRMED = all; CONFIRMED-
+RELATIVE = E1/E3/E4/E5 with E2 missing its interval; FAILED = E1, E3, or
+E5 fails. Interval misses with passing signs are PARTIAL, never upgraded.
+Scope: existence and use, not discovery.
+
+Our prediction, registered before scoring: CONFIRMED-RELATIVE more likely
+than CONFIRMED, driven by world-to-world spread in R_M (development 1.27 /
+1.74 / 1.36); E1, E4, E5 pass; E3 passes with its mean inside [−2,000, −500].
+Reviewer 61's predictions are in the plan's Amendment 1.

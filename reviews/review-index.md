@@ -2591,3 +2591,23 @@ frame: extensional vs intensional compression — `rotate(angle)` versus
 {rotate10, rotate20, rotate30}; a learned primitive P(α) must contain
 useful unobserved instances, which is systematic generalization in the
 primitive itself.
+
+### [reviewer-feedback-61.txt](reviewer-feedback-61.txt)
+On the draft H39 confirmation plan. Endorses the O/M/G triangle and the
+five estimands, and asks for exactly one change before freezing: make E2's
+**magnitude** the confirmatory quantity — geometric mean of R_M (log
+ratios, since ratios are asymmetric and a small ordinary denominator can
+blow up an arithmetic mean) inside the preregistered [1.2, 1.8] — and
+demote the 1.5× fraction to a reported *continuity statistic* against
+census C0, since 1.5 is an inherited operational threshold with no
+theoretical meaning and a 14/30-vs-15/30 integer should not flip the
+headline. Withdraws the 0.55–0.75 fraction prediction as false precision
+from three worlds. Restates the verdict table: CONFIRMED-RELATIVE means E2
+misses its magnitude interval while E1/E3/E4/E5 hold. Keeps E1, E3, E4
+(possibly the most important result: the full S(α)+ε interface beating
+ordinary = shared structure handles recurrence while private innovation
+preserves novelty), and E5 load-bearing. Freezes the scope sentence:
+**existence and use, not discovery**. Predictions: E1/E5 very likely,
+E3 likely, E4 cleanest positive, E2 geometric mean ≈1.4–1.7, the fraction
+least stable. Became Amendment 1; the lifetimes were already running and
+no sealed cell had been read.
