@@ -1,2 +1,5 @@
 prospective world=0 meta r_meta=1 F=4: loss=-189705.5
 steps=16 world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-193814.7
+steps=16 world 1 exit=0
+steps=16 world 2 exit=1

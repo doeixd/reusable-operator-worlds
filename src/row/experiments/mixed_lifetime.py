@@ -138,7 +138,15 @@ def main() -> None:
              "license an architectural verdict (review 53)",
     )
     parser.add_argument("--prospective-weight", type=float, default=1.0)
-    parser.add_argument("--prospective-steps", type=int, default=4)
+    parser.add_argument("--prospective-steps", type=int, default=4,
+                        help="OUTER steps: how hard the shared representation "
+                             "is pushed per task")
+    parser.add_argument("--prospective-inner-steps", type=int, default=16,
+                        help="INNER steps: how far the sibling's task code is "
+                             "adapted before its query loss is charged. These "
+                             "were one knob, which conflated 'how much "
+                             "pressure' with 'how much adaptation the pressure "
+                             "is measured after'.")
     parser.add_argument("--prospective-support", type=int, default=8)
     parser.add_argument(
         "--r-meta",
@@ -400,7 +408,7 @@ def main() -> None:
                 optimizer.zero_grad()
                 penalty = model.prospective_penalty(
                     probe_id, support_x, support_y, query_x, query_y,
-                    steps=args.prospective_steps,
+                    steps=args.prospective_inner_steps,
                 )
                 (args.prospective_weight * penalty).backward()
                 optimizer.step()
