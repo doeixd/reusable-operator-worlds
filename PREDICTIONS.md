@@ -3408,3 +3408,37 @@ called the global-rotation branch, both of which I reported as
 eliminated. They are live again, and a sleep phase that refactors over
 the POPULATION — rather than promoting one residual at a time — is now
 the intervention the evidence points at.
+
+# REVIEW 55 REMEDIATION STATUS: FIXED INSTRUMENTS, NO NEW V6 VERDICT (2026-08-21)
+
+The code paths identified above have now been changed: prospective
+siblings come from `held_out_family_tasks`; replay uses the lifetime's
+separate shared, route, and residual learning rates; H31 uses unseen
+unrelated tasks; the fertility scorer exposes cumulative adaptation-
+trajectory cost, endpoint error, and steps-to-target; lifecycle and
+prospective compute accounting use the shared-residual branch; and V6
+provenance records the intervention knobs.
+
+These repairs do NOT reinstate any old result. All artifacts produced by
+the leaking hook, dead inner SGD loop, unmatched replay optimizer, or
+asymmetric scorer remain invalid. In particular:
+
+    H30 fertility exists                 UNRESOLVED
+    H31 fertility is specific            UNRESOLVED
+    H32 pressure raises structure         UNRESOLVED
+    replay Phi = +0.072                   WITHDRAWN
+    old prospective pressure sweeps       WITHDRAWN
+
+The corrected H29 results change the question those hypotheses address.
+Ordinary wake is already at `R_effective = 0.762`, so the registered H32
+threshold `> 0.19` is vacuous and must not be reused. Any successor test
+must ask whether prospective pressure makes existing distributed
+structure more EXTRACTABLE or more economical on genuinely unseen tasks,
+not whether it creates structure absent from ordinary wake.
+
+One provenance debt remains explicit: `rho_profile.json` now records the
+full V6 intervention record, but the current early resume check compares
+only the arm name. Before a clean result is accepted, resume must validate
+the entire stored protocol (or the run must use a fresh empty output
+path), including inner/outer steps, support, freeze allocation, sleeps,
+lifecycle settings, and the meta-world specification.

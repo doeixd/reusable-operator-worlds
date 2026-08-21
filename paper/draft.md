@@ -1,6 +1,6 @@
 # When Does Abstraction Pay? Measuring the Value of Reusable Computation in Neural Learners
 
-*Draft v0.9 — extended with the FOURTH sealed block (seeds 400-429;
+*Draft v0.9.1 — extended with the FOURTH sealed block (seeds 400-429;
 section 7.6): a preregistered negative that a learned library does not
 need lifecycle machinery at this scale, plus a retention law that is
 birth run forwards. The third block (seeds 300-329, section 7.5) is
@@ -10,7 +10,9 @@ dissociation. Development and sealed results are labeled throughout
 and the four sealed blocks are distinguished by seed range; all
 numbers trace to fingerprint-validated artifacts in the public
 repository, with the first two blocks archived as release
-v2.0-confirmation. Revision history in PROGRESS.md.*
+v2.0-confirmation. A later V5 structural-audit correction is recorded in
+Sections 9 and 10.1 but is outside the four-block evidentiary scope of
+this draft. Revision history in PROGRESS.md.*
 
 ## Abstract
 
@@ -850,6 +852,13 @@ are recovered.
 - Additional limitations: one functional family of teachers; length-3
   programs; 64-task lifetimes; Gaussian likelihood with fixed sigma;
   single-machine scale throughout.
+- A later V5 diagnostic initially understated higher-order structure by
+  comparing task functions on unaligned inputs and incompletely restoring
+  model state. Correcting the audit changed effective-operator capture
+  from 0.190 to 0.762 and full-population unexplained variance from 0.707
+  to 0.491. Those V5 diagnostics are not evidence for the four sealed
+  claims above; we report the correction because it reverses the proposed
+  mechanism for the learned library's failure.
 - Lifetime-length dependence: a truncated-lifetime analysis (appendix)
   reads the crossover at 16, 32, and 64 tasks from the per-example logs;
   the mean crossing moves from configured rho 0.869 to 0.822 between 16
@@ -981,9 +990,27 @@ and whether keeping that representation will make future learning
 cheaper. V4 did not deliver MERGE or DELETE; it delivered the economic
 rules those operations will eventually have to obey. V4R confirmed
 that those rules, not a lifecycle operator suite, are the result at
-this scale. The successor question -- whether the amortization law is
-quantitative, and whether a second representation class exists above
-compressed atoms -- is V5 (`notes/v5-sketch.txt`).
+this scale.
+
+Subsequent V5 experiments, outside the four-block scope of this draft,
+made the amortization law quantitative and found a teacher-level schema
+economy, while matched-budget FACTORIZE over the learned promoted library
+lost in all six tested cells. A first audit attributed that gap to wake
+learning failing to preserve higher-order structure. That interpretation
+was wrong: the audit evaluated different tasks on unaligned states,
+omitted retirement state, and used an incomplete rollout. With those
+defects corrected, ordinary wake's effective task-conditioned operators
+capture 0.762 of the family structure, and the full innovation population
+leaves 0.491 of a teacher operator unexplained, versus 0.695 for the best
+single innovation. Yet the promoted library still leaves 0.921
+unexplained and FACTORIZE remains 0/6. The structure is therefore present
+but distributed across routes, residuals, and tasks; PROMOTE's extraction
+of one private residual at a time is the failing unit. This reverses the
+outlook from "change the wake objective to create missing structure" to
+"discover reusable objects by functionally refactoring the population."
+Prospective V6 comparisons remain unresolved because the original hook
+used future lifetime labels and its controls and acquisition metric were
+not matched; no V6 result is claimed here.
 
 Why should anyone working at scale care about a 16-dimensional world?
 Because the criterion is scale-free and the phenomena it isolates have

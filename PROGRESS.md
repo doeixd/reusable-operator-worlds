@@ -2544,3 +2544,26 @@ Reviews saved as `reviewer-feedback-48.txt` (indexed) and 49 pending
 index. Instrument lessons in `notes/learnings.txt` and `AGENTS.md`:
 stale-report hazard, on-trajectory probing, invariance-before-search,
 and the third instance of a target belonging to one arm of a comparison.
+
+# 2026-08-21 — CODE REVIEW 55 DOCUMENTATION AND INTERPRETATION CORRECTION
+
+Updated `notes/learnings.txt`, `PREDICTIONS.md`, and `paper/draft.md` to
+record the conclusion-level consequences of review 55. The original
+effective-operator value (`0.190`), population-span value (`0.707`
+unexplained), replay `Phi = +0.072`, all old V6 arm comparisons, and the
+old H32 reading are explicitly withdrawn.
+
+The corrected H29 audits restore retirement state, reproduce the actual
+model rollout, and evaluate all functions in common coordinates. They
+reverse the localization result: `R_effective = 0.762`, full-population
+unexplained variance `0.491`, best-single unexplained `0.695`, while the
+promoted library remains at `0.921` unexplained and FACTORIZE remains
+0/6. The paper now states the resulting interpretation: ordinary wake
+encodes distributed family structure, but PROMOTE extracts the wrong
+unit by promoting one private residual at a time.
+
+V1-V4 and V5's primary causal economics remain unchanged. H30-H32 remain
+UNRESOLVED pending completed, clean scoring from the repaired V6
+pipeline. The repaired runner has been launched elsewhere in the shared
+workspace, but completion or a new verdict is not claimed by this
+documentation milestone.
