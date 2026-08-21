@@ -2701,3 +2701,67 @@ Calibration note, since it cuts the other way as often as not: the
 registered expectation was correct here, and the value of registering it
 was that "0.190" could otherwise have been told as either a success
 (doubled!) or a failure (still 5x short) after the fact.
+
+# POPULATION SPAN: the global-rotation hypothesis is DEAD (2026-08-20)
+
+Review 49's global-rotation idea, made well posed. A global ORTHOGONAL
+rotation cannot change leave-one-out capture at all — capture is a
+property of the point set — so the testable version is the span
+question: does the teacher's family operator lie in span{I_tau}, the
+learner's effective task-conditioned innovations? A basis like
+B_1 = A_1 + A_2, B_2 = A_1 - A_2 defeats every local adapter while
+leaving the spans identical, so this is exactly the hypothesis that
+local tests cannot reach.
+
+Unexplained fraction of a teacher family operator, six worlds, 24
+innovations each:
+
+    best single innovation      0.801
+    top-2 principal directions  0.864
+    top-4                       0.839
+    top-8                       0.812
+    FULL span (all 24)          0.707
+
+The full-span figure is an UPPER BOUND on what any global linear
+refactor could achieve, which is what makes this decisive rather than
+another similarity measurement. At 0.707 the answer is no: 71% of a
+teacher family operator lies outside everything the learner's population
+spans. No reparameterization, cheap or expensive, local or global,
+recovers it.
+
+## Where that leaves V5's closing question
+
+Four hypotheses were on the table for why a schema pays over teacher
+operators and fails over the learned library. Three are now eliminated:
+
+    A  fragmentation          rejected: k-subsets barely beat k=1
+    C  local coordinates      not reachable: the objects are not
+                              coordinate-variants of the teacher's
+    global rotation           dead: not in the span
+
+What remains is the wake objective. Nothing in it rewards representing
+related tasks relatedly, so SGD is free to choose any member of a large
+equivalence class of task-solving implementations, and the one it picks
+does not contain the family structure in any linearly recoverable form.
+
+This makes the ordering explicit and, I think, is V5's most consequential
+negative: POST-HOC REFACTORING CANNOT BE THE REMEDY. Not local
+alignment, not global reparameterization, not a sleep oracle over the
+promoted library — none of them can recover structure that is not in the
+span of what wake produced. If a fertile representation is wanted, the
+pressure has to be present while the representation is being formed.
+
+Registered before any follow-up: the corresponding positive claim — that
+adding prospective pressure during wake DOES yield a representation with
+recoverable family structure — is NOT established by any of this. It is
+the natural next experiment and it is a V6 question, not a V5 one.
+
+## One caveat that limits the strength
+
+The learner's innovations are measured against its own shared basis,
+which already absorbs part of every computation. A teacher operator
+could in principle be reconstructible from innovations PLUS basis
+outputs while not being in the innovation span alone. This audit does
+not test that, and the honest scope of the claim is: not recoverable
+from the task-conditioned innovations, which are the objects any
+refactor over the library would actually manipulate.
