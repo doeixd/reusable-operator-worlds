@@ -1,0 +1,20 @@
+V6 FERTILITY — adaptation cost on futures the arm never trained on
+  standardized adaptation: 40 steps, [1, 2, 4, 8] support examples, lr 0.05, shared parameters FROZEN
+
+  related-future adaptation cost by support size
+  arm                k=1       k=2       k=4       k=8  worlds
+  ordinary         13.36     10.44      8.66      7.68       3
+  replay           16.17     10.92     10.09      9.39       3
+  prospective      21.94     14.85     12.72      9.80       3
+  supervised       13.09     11.02      9.90      8.91       3
+
+  Phi against the ordinary arm (positive = cheaper future learning)
+  arm           Phi related  Phi unrelated  Phi specific
+  replay               -2.8           -2.1          -0.7
+  prospective          -8.6           -2.0          -6.6
+  supervised            0.3           -0.5           0.8
+
+  H30 (fertility exists): prospective Phi_related > 0
+  H31 (structurally specific): Phi_specific >= half of Phi_related
+    H30 FAIL  Phi_related = -8.575 sd 4.765 positive 0/3 worlds
+    H31 FAIL  Phi_specific = -6.597

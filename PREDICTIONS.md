@@ -3442,3 +3442,75 @@ only the arm name. Before a clean result is accepted, resume must validate
 the entire stored protocol (or the run must use a fresh empty output
 path), including inner/outer steps, support, freeze allocation, sleeps,
 lifecycle settings, and the meta-world specification.
+
+# V6.1 FIRST VALID RESULT: H30 FAILS, and prospective pressure HURTS
+
+12 cells, 4 arms x 3 worlds, serialized, every review-55 fix applied.
+This is the first V6 measurement in which the prospective arm actually
+implemented the prospective objective and no arm saw future labels.
+
+Adaptation cost on UNSEEN related futures (prequential acquisition cost,
+one standardized adaptor, shared parameters frozen):
+
+| arm | k=1 | k=2 | k=4 | k=8 |
+| --- | --- | --- | --- | --- |
+| ordinary    | 13.36 | 10.44 |  8.66 | 7.68 |
+| replay      | 16.17 | 10.92 | 10.09 | 9.39 |
+| prospective | 21.94 | 14.85 | 12.72 | 9.80 |
+| supervised  | 13.09 | 11.02 |  9.90 | 8.91 |
+
+Phi against ordinary, per world at k=1:
+
+    replay        -7.83, -2.77, +2.19    mean -2.81   1/3 positive
+    prospective  -10.05, -13.53, -2.14   mean -8.58   0/3 positive
+    supervised    -0.51, +1.53, -0.22    mean +0.27   1/3 positive
+
+H30: FAILS. Prospective Phi_related = -8.58, negative in 3/3 worlds.
+Prospective pressure does not produce fertility; it DESTROYS it.
+
+H31: not a pass, and informative anyway. Phi_specific = -6.6, because
+prospective damages RELATED futures (-8.6) far more than unrelated ones
+(-2.0). The harm is structurally specific in the direction opposite to
+the hypothesis: the intervention aimed at making relatives cheap makes
+relatives expensive.
+
+## The precondition also fails, and that matters for the reading
+
+H30 was registered "at matched current-task performance and matched
+D*". The arms are NOT matched: every intervention makes the lifetime
+loss worse than ordinary by 1,000-2,000 nats (ordinary -191,907 against
+prospective -189,953 on world 0). So this is not a clean
+fertility-at-equal-cost comparison. The honest statement is stronger
+than a failed H30 and weaker than a matched refutation:
+
+    the intervention degrades BOTH current-task loss AND future
+    adaptation, so there is no trade to evaluate.
+
+## Reading, registered before the follow-ups
+
+The most likely mechanism is H35's over-alignment, arriving early rather
+than at high pressure. The objective rewards a shared representation
+that makes a sibling's query loss low AFTER a short adaptation, and the
+cheapest way to do that appears to be collapsing capacity toward the
+family mean — which is exactly what would make a NEW relative harder to
+fit quickly, because the coordinates that distinguish family members
+have been squeezed out. That predicts the harm should be worst at small
+support, and it is: -8.6 at k=1 falling to -2.1 at k=8.
+
+Replay also hurts on average (-2.81, 1/3 positive), which withdraws the
+earlier claim that replay was the one arm producing fertility. That
+claim came from the leaking configuration and does not survive.
+
+Supervised is the only arm near neutral (+0.27, 1/3 positive) and is
+within noise of ordinary.
+
+## What this does NOT say
+
+It does not say prospective pressure cannot work. It says THIS
+prospective objective, at this pressure, on this substrate, is harmful.
+The pressure was chosen at 52% of one task's training movement, which
+H35 registered as inside the plausible band but which the over-alignment
+reading suggests may already be past the optimum. A lower-pressure cell
+is the cheapest discriminating follow-up, and its prediction is
+registered here: if over-alignment is the mechanism, Phi should rise
+toward zero as pressure falls and never become positive.

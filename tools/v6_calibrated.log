@@ -13,3 +13,6 @@ prospective world=0 meta r_meta=1 F=4: loss=-177067.0
 outer=32 world 0 exit=0
 prospective world=1 meta r_meta=1 F=4: loss=-187793.9
 outer=32 world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-181569.5
+outer=32 world 2 exit=0
+V6_CALIBRATED_DONE
