@@ -1,6 +1,6 @@
 # H39 confirmation plan: two-slot in-basis arguments on sealed seeds 700-729
 
-Status: DRAFT. Not frozen. Seeds 700-729 must not be generated, inspected,
+Status: FROZEN (2026-08-21, after PI approval). Seeds 700-729 must not be generated, inspected,
 or summarized until this file is frozen with its commit hash in
 `tools/check_prereg.py` and `python tools/check_prereg.py` passes. Licensed
 by `H39D_CAPACITY_PLAN.md` verdict A (marginal; see the H39d RESULT entry in
