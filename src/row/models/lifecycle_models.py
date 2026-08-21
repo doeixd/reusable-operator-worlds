@@ -105,13 +105,21 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
         result = super().sleep(task_ids, *args, **kwargs)
         for index in range(existing, len(self.abstractions)):
             record = self.lineage.get(index)
+            # The parent computes its clusters internally and the lineage
+            # is synced later, so `supporting_tasks` is usually empty at
+            # this moment -- the first version of this snapshot recorded
+            # zero member residuals for exactly that reason. Fall back to
+            # the whole pre-sleep residual population, which is the
+            # honest P_0 for "was the structure there before promotion".
             members = list(record.supporting_tasks) if record else []
+            residuals = [before[t] for t in members if t in before]
+            if not residuals:
+                members = sorted(before)
+                residuals = [before[t] for t in members]
             self.promotion_snapshots[index] = {
-                # P_0: what the members privately held before promotion.
+                # P_0: what tasks privately held before promotion.
                 "members": members,
-                "member_residuals": [
-                    before[t] for t in members if t in before
-                ],
+                "member_residuals": residuals,
                 # P_1: the abstraction as born. Promoted abstractions
                 # carry requires_grad=False and sit in no optimizer
                 # group, so P_2 == P_1 identically in this learner and

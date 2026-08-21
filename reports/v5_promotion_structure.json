@@ -1,0 +1,56 @@
+{
+  "rows": [
+    {
+      "condition": "r100",
+      "world": 600,
+      "promotions": 6,
+      "pre_objects": 0,
+      "r_meta_promoted": 0.11530968443234856,
+      "null_promoted": 0.0003397854358399214
+    },
+    {
+      "condition": "r100",
+      "world": 601,
+      "promotions": 9,
+      "pre_objects": 0,
+      "r_meta_promoted": 0.03869678562100895,
+      "null_promoted": 0.0002926536189056686
+    },
+    {
+      "condition": "r100",
+      "world": 602,
+      "promotions": 8,
+      "pre_objects": 0,
+      "r_meta_promoted": 0.032172022587836926,
+      "null_promoted": 0.00029686371166102104
+    },
+    {
+      "condition": "r100",
+      "world": 603,
+      "promotions": 6,
+      "pre_objects": 0,
+      "r_meta_promoted": 0.018062355797549095,
+      "null_promoted": 0.0003594620468756674
+    },
+    {
+      "condition": "r100",
+      "world": 604,
+      "promotions": 9,
+      "pre_objects": 0,
+      "r_meta_promoted": 0.041764408698034564,
+      "null_promoted": 0.0002595235438752859
+    },
+    {
+      "condition": "r100",
+      "world": 605,
+      "promotions": 8,
+      "pre_objects": 0,
+      "r_meta_promoted": 0.04571379148288281,
+      "null_promoted": 0.0003772347468701447
+    }
+  ],
+  "mean_pre": NaN,
+  "mean_pre_matched": NaN,
+  "mean_post": 0.04861984143661014,
+  "null": 0.00032092051733795154
+}
