@@ -98,8 +98,8 @@ class LifecycleLibraryLearner(PromotingSharedResidualLearner):
         """
 
         before = {
-            task_id: tensor.detach().clone()
-            for task_id, tensor in self.task_residuals.items()
+            task_id: self.effective_residual(task_id).detach().clone()
+            for task_id in self.task_residuals
         }
         existing = len(self.abstractions)
         result = super().sleep(task_ids, *args, **kwargs)

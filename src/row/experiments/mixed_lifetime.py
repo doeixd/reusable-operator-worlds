@@ -29,6 +29,24 @@ from row.mixed_world import (
 )
 
 
+def _pilot_record(args) -> dict[str, object] | None:
+    """Complete H39 pilot intervention record; None when not a pilot cell."""
+
+    if args.model != "factorized" and not args.snapshot_history:
+        return None
+    record: dict[str, object] = {"model": args.model,
+                                 "snapshot_history": bool(args.snapshot_history)}
+    if args.model == "factorized":
+        record.update({
+            "schema_dim": args.schema_dim,
+            "schema_grouping": args.schema_grouping,
+            "schema_seed": args.schema_seed,
+            "schema_init_scale": args.schema_init_scale,
+            "freeze_schema": bool(args.freeze_schema),
+        })
+    return record
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("configs/v1.yaml"))
@@ -44,6 +62,7 @@ def main() -> None:
             "promoting",
             "lifecycle",
             "prospective",
+            "factorized",
         ),
         required=True,
     )
@@ -192,6 +211,19 @@ def main() -> None:
         default=None,
         help="override shared basis capacity K (the V3 capacity sweep)",
     )
+    # ---- H39 pilot (H39_PILOT_PLAN.md) ------------------------------
+    parser.add_argument("--schema-dim", type=int, default=2,
+                        help="factorized: fast-argument dimension a")
+    parser.add_argument("--schema-grouping", choices=("pooled", "oracle"), default="pooled",
+                        help="factorized: one schema for all tasks, or one per ORACLE "
+                             "teacher family plus one for pre-onset tasks (explicit; "
+                             "tests representation, not discovery)")
+    parser.add_argument("--schema-seed", type=int, default=39001)
+    parser.add_argument("--schema-init-scale", type=float, default=1e-2)
+    parser.add_argument("--freeze-schema", action="store_true",
+                        help="factorized: W frozen at initialization (generic-channel control)")
+    parser.add_argument("--snapshot-history", action="store_true",
+                        help="record every task's residual at completion (read-only)")
     parser.add_argument(
         "--resample-future",
         action="store_true",
@@ -210,6 +242,13 @@ def main() -> None:
                 raise SystemExit(
                     f"{args.output} holds arm '{stored}' but '{args.arm}' was "
                     "requested; refusing to treat it as a completed cell"
+                )
+            stored_pilot = recorded.get("h39_pilot")
+            expected_pilot = _pilot_record(args)
+            if (stored_pilot or expected_pilot) and stored_pilot != expected_pilot:
+                raise SystemExit(
+                    f"{args.output} holds pilot record {stored_pilot} but "
+                    f"{expected_pilot} was requested; refusing"
                 )
         print("summary exists; skipping")
         return
@@ -237,11 +276,12 @@ def main() -> None:
             "promoting": config.shared_residual_model,
             "lifecycle": config.shared_residual_model,
             "prospective": config.shared_residual_model,
+            "factorized": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, updates_per_example=args.updates_per_example)
         field = (
             "shared_residual_model"
-            if args.model in {"promoting", "lifecycle", "prospective"}
+            if args.model in {"promoting", "lifecycle", "prospective", "factorized"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})
@@ -257,11 +297,12 @@ def main() -> None:
             "promoting": config.shared_residual_model,
             "lifecycle": config.shared_residual_model,
             "prospective": config.shared_residual_model,
+            "factorized": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, operator_slots=args.operator_slots)
         field = (
             "shared_residual_model"
-            if args.model in {"promoting", "lifecycle", "prospective"}
+            if args.model in {"promoting", "lifecycle", "prospective", "factorized"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})
@@ -440,6 +481,25 @@ def main() -> None:
             return {"arm": "prospective", "sibling": sibling.task_id,
                     "query_penalty": value}
 
+    schema_index_hook = None
+    if args.model == "factorized":
+        if meta_spec is None:
+            raise SystemExit("factorized requires --r-meta (the meta-recurrence world)")
+        if args.arm != "ordinary":
+            raise SystemExit("the H39 pilot forbids any non-ordinary arm")
+        schema_count = 1 if args.schema_grouping == "pooled" else meta_spec.families + 1
+        learned_lifetime.FACTORIZED_SETTINGS = {
+            "schema_dim": args.schema_dim,
+            "schema_count": schema_count,
+            "schema_seed": args.schema_seed,
+            "schema_init_scale": args.schema_init_scale,
+            "freeze_schema": args.freeze_schema,
+        }
+        if args.schema_grouping == "oracle":
+            def schema_index_hook(world_task_index: int) -> int:
+                family = meta_spec.family_of(world_task_index)
+                return meta_spec.families if family is None else int(family)
+
     original_world = learned_lifetime.World
     learned_lifetime.World = factory  # type: ignore[assignment]
     try:
@@ -457,6 +517,8 @@ def main() -> None:
             lifecycle_kappa=args.lifecycle_kappa,
             lifecycle_grace=args.lifecycle_grace,
             prospective_hook=prospective_hook,
+            schema_index_hook=schema_index_hook,
+            snapshot_history=args.snapshot_history,
         )
     finally:
         learned_lifetime.World = original_world  # type: ignore[assignment]
@@ -487,6 +549,9 @@ def main() -> None:
             "lifecycle": args.lifecycle,
             "promotion_epsilon": args.promotion_epsilon,
         }
+        pilot = _pilot_record(args)
+        if pilot:
+            provenance["h39_pilot"] = pilot
         label = f"meta r_meta={meta_spec.r_meta:g} F={meta_spec.families}"
     elif task_group_spec is not None:
         provenance["rho_profile"] = list(factory.profile)

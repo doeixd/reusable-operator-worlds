@@ -78,6 +78,16 @@ class PromotingSharedResidualLearner(SharedParentResidualLearner):
 
     # ---- forward -----------------------------------------------------
 
+    def effective_residual(self, task_id: str) -> Tensor:
+        """The residual vector a task actually applies.
+
+        Identity here; the H39 factorized learner overrides it so that
+        every reader of a task's residual (forward, promotion fitting,
+        lifecycle snapshots) sees `W alpha + eps` rather than `eps` alone.
+        """
+
+        return self.task_residuals[task_id]
+
     def _split_residual(self, flat: Tensor) -> tuple[Tensor, Tensor, Tensor]:
         u, v, b = torch.split(
             flat,
@@ -180,7 +190,7 @@ class PromotingSharedResidualLearner(SharedParentResidualLearner):
 
         with torch.enable_grad():
             initial = torch.stack(
-                [self.task_residuals[t].detach() for t in member_ids]
+                [self.effective_residual(t).detach() for t in member_ids]
             ).mean(dim=0)
             candidate = nn.Parameter(initial.clone())
             optimizer = torch.optim.Adam([candidate], lr=lr)
@@ -191,7 +201,7 @@ class PromotingSharedResidualLearner(SharedParentResidualLearner):
                             [
                                 self._innovation(
                                     probe,
-                                    *self._split_residual(self.task_residuals[t].detach()),
+                                    *self._split_residual(self.effective_residual(t).detach()),
                                     step,
                                 )
                                 for step in range(self.task_steps)

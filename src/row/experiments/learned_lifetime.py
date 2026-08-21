@@ -34,6 +34,15 @@ from row.models import (
     VariationalSharedResidualLearner,
 )
 from row.models.prospective_models import ProspectiveLifecycleLearner
+from row.models.factorized_models import FactorizedLifecycleLearner
+
+# H39 pilot: architecture knobs for kind="factorized". The runner sets
+# these before calling `run`; they are recorded in the artifact's
+# provenance by the runner and in `factorized.json` by the model.
+FACTORIZED_SETTINGS: dict[str, object] = {
+    "schema_dim": 2, "schema_count": 1, "schema_seed": 39001,
+    "schema_init_scale": 1e-2, "freeze_schema": False,
+}
 from row.provenance import current_git_commit, write_fingerprint
 from row.world import Program, Task, World
 
@@ -47,6 +56,7 @@ ModelKind = Literal[
     "promoting",
     "lifecycle",
     "prospective",
+    "factorized",
     "discrete",
     "mdl",
 ]
@@ -198,7 +208,7 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "note": "counts per-prediction operator generation; backward and optimizer operations excluded",
         }
     if kind in {"shared_residual", "variational", "gated", "promoting",
-                "lifecycle", "prospective"}:
+                "lifecycle", "prospective", "factorized"}:
         selected = {
             "variational": config.variational_model,
             "gated": config.gated_model,
@@ -206,6 +216,7 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "promoting": config.shared_residual_model,
             "lifecycle": config.shared_residual_model,
         "prospective": config.shared_residual_model,
+        "factorized": config.shared_residual_model,
         }[kind]
         parent = selected.task_steps * selected.operator_slots * (
             d * selected.operator_rank + selected.operator_rank * d
@@ -266,7 +277,7 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             learnable_alpha=model_config.learnable_alpha,
             activation=model_config.operator_activation,
         )
-    if kind in {"promoting", "lifecycle", "prospective"}:
+    if kind in {"promoting", "lifecycle", "prospective", "factorized"}:
         model_config = config.shared_residual_model
         # `prospective` is a strict superset of `lifecycle`: it adds the
         # V6 adaptation penalty and no parameters, so a prospective run
@@ -277,7 +288,13 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             "lifecycle": LifecycleLibraryLearner,
             "prospective": ProspectiveLifecycleLearner,
             "promoting": PromotingSharedResidualLearner,
+            "factorized": FactorizedLifecycleLearner,
         }[kind]
+        extra = {}
+        if kind == "factorized":
+            # H39 pilot knobs, set by the runner; world seed fixes the
+            # schema initialization stream.
+            extra = dict(FACTORIZED_SETTINGS, world_seed=config.world.seed)
         return builder(
             d=config.world.state_dim,
             operator_slots=model_config.operator_slots,
@@ -288,6 +305,7 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             seed=model_config.seed,
             learnable_alpha=model_config.learnable_alpha,
             activation=model_config.operator_activation,
+            **extra,
         )
     if kind == "gated":
         model_config = config.gated_model
@@ -375,6 +393,7 @@ def _training_values(
         "promoting": config.shared_residual_model,
         "lifecycle": config.shared_residual_model,
         "prospective": config.shared_residual_model,
+        "factorized": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -414,6 +433,8 @@ def run(
     lifecycle_kappa: float = 0.0,
     lifecycle_grace: int = 8,
     prospective_hook=None,
+    schema_index_hook=None,
+    snapshot_history: bool = False,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -456,6 +477,9 @@ def run(
     observed_update_batch_sizes: list[int] = []
     completed_task_ids: list[str] = []
     sleep_records: list[dict[str, object]] = []
+    history_residuals: dict[str, torch.Tensor] = {}
+    history_codes: dict[str, torch.Tensor] = {}
+    history_eps: dict[str, torch.Tensor] = {}
 
     for lifetime_index, world_task_index in enumerate(task_indices):
         task = world.tasks[world_task_index]
@@ -477,8 +501,29 @@ def run(
                     if slot_index < freeze_slots:
                         for parameter in operator.parameters():
                             parameter.requires_grad_(False)
-        task_parameter = model.begin_task(task.task_id)
-        if isinstance(model, GatedInnovationLearner):
+        if isinstance(model, FactorizedLifecycleLearner):
+            schema_index = (
+                schema_index_hook(world_task_index) if schema_index_hook else 0
+            )
+            task_parameter = model.begin_task(task.task_id, schema_index=schema_index)
+        else:
+            task_parameter = model.begin_task(task.task_id)
+        if isinstance(model, FactorizedLifecycleLearner):
+            route_parameter, residual_parameter, alpha_parameter = task_parameter
+            optimizer.add_param_group(
+                {"params": [route_parameter], "lr": task_lr, "weight_decay": 0.0}
+            )
+            optimizer.add_param_group(
+                {
+                    "params": [residual_parameter],
+                    "lr": config.shared_residual_model.residual_learning_rate,
+                    "weight_decay": 0.0,
+                }
+            )
+            optimizer.add_param_group(
+                {"params": [alpha_parameter], "lr": task_lr, "weight_decay": 0.0}
+            )
+        elif isinstance(model, GatedInnovationLearner):
             route_parameter, residual_parameter, gate_parameter = task_parameter
             gated_config = config.gated_model
             for parameter, parameter_lr in (
@@ -684,6 +729,18 @@ def run(
                 curve, threshold, config.world.examples_per_task
             )
         rows.append(summary_row)
+        # H39 pilot: read-only snapshot of the task's residual as it stands
+        # when the task completes, BEFORE any sleep can retire it.
+        if snapshot_history and isinstance(model, SharedParentResidualLearner):
+            with torch.no_grad():
+                history_residuals[task.task_id] = (
+                    model.effective_residual(task.task_id).detach().clone()
+                    if hasattr(model, "effective_residual")
+                    else model.task_residuals[task.task_id].detach().clone()
+                )
+                history_codes[task.task_id] = model.task_codes[task.task_id].detach().clone()
+                if isinstance(model, FactorizedLifecycleLearner):
+                    history_eps[task.task_id] = model.task_residuals[task.task_id].detach().clone()
         # V6: prospective pressure. Called after the task is learned and
         # before any sleep, so it shapes the representation the next task
         # inherits rather than second-guessing a promotion.
@@ -885,6 +942,15 @@ def run(
         order,
         task_id_scramble_seed,
         update_batch_size,
+        history=(
+            {
+                "residuals": history_residuals,
+                "codes": history_codes,
+                "eps": history_eps,
+                "order": list(history_residuals),
+            }
+            if snapshot_history else None
+        ),
     )
     return summary
 
@@ -1190,7 +1256,11 @@ def _adapt_novel_composition(
     for parameter in model.shared_parameters():
         parameter.requires_grad_(False)
     novel_id = f"task_novel_composition_{novel_index}"
-    novel_code = model.begin_task(novel_id)
+    novel_code = (
+        model.begin_task(novel_id, schema_index=model.schema_count - 1)
+        if isinstance(model, FactorizedLifecycleLearner)
+        else model.begin_task(novel_id)
+    )
     if isinstance(model, GatedInnovationLearner):
         route_parameter, residual_parameter, gate_parameter = novel_code
         gated_config = config.gated_model
@@ -1224,6 +1294,18 @@ def _adapt_novel_composition(
                     "params": [residual_scale_parameter],
                     "lr": variational_config.scale_learning_rate,
                 },
+            ]
+        )
+    elif isinstance(model, FactorizedLifecycleLearner):
+        route_parameter, residual_parameter, alpha_parameter = novel_code
+        optimizer = torch.optim.Adam(
+            [
+                {"params": [route_parameter], "lr": task_lr},
+                {
+                    "params": [residual_parameter],
+                    "lr": config.shared_residual_model.residual_learning_rate,
+                },
+                {"params": [alpha_parameter], "lr": task_lr},
             ]
         )
     elif isinstance(model, SharedParentResidualLearner):
@@ -1400,6 +1482,7 @@ def resolved_learned_config(
         "promoting": config.shared_residual_model,
         "lifecycle": config.shared_residual_model,
         "prospective": config.shared_residual_model,
+        "factorized": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1427,6 +1510,7 @@ def _write_artifacts(
     order: str,
     task_id_scramble_seed: int | None,
     update_batch_size: int | None,
+    history: dict[str, object] | None = None,
 ) -> None:
     output = config.output_directory
     output.mkdir(parents=True, exist_ok=True)
@@ -1440,6 +1524,7 @@ def _write_artifacts(
         "promoting": config.shared_residual_model,
         "lifecycle": config.shared_residual_model,
         "prospective": config.shared_residual_model,
+        "factorized": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1462,6 +1547,10 @@ def _write_artifacts(
     # Summary data is already stored as JSON. Keeping model.pt tensor-only lets
     # downstream tools use PyTorch's restricted weights-only loader.
     torch.save({"model_state_dict": model.state_dict()}, output / "model.pt")
+    if hasattr(model, "save_extras"):
+        model.save_extras(output)
+    if history is not None:
+        torch.save(history, output / "history.pt")
     if isinstance(model, DiscreteLibraryLearner):
         (output / "hard_routes.json").write_text(
             json.dumps(model.hard_routes(), indent=2), encoding="utf-8"
@@ -1577,6 +1666,7 @@ def main() -> None:
         "promoting": config.shared_residual_model,
         "lifecycle": config.shared_residual_model,
         "prospective": config.shared_residual_model,
+        "factorized": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[args.model]
