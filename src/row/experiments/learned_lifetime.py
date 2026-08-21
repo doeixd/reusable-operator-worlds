@@ -33,6 +33,7 @@ from row.models import (
     SharedParentResidualLearner,
     VariationalSharedResidualLearner,
 )
+from row.models.prospective_models import ProspectiveLifecycleLearner
 from row.provenance import current_git_commit, write_fingerprint
 from row.world import Program, Task, World
 
@@ -45,6 +46,7 @@ ModelKind = Literal[
     "gated",
     "promoting",
     "lifecycle",
+    "prospective",
     "discrete",
     "mdl",
 ]
@@ -202,6 +204,7 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "shared_residual": config.shared_residual_model,
             "promoting": config.shared_residual_model,
             "lifecycle": config.shared_residual_model,
+        "prospective": config.shared_residual_model,
         }[kind]
         parent = selected.task_steps * selected.operator_slots * (
             d * selected.operator_rank + selected.operator_rank * d
@@ -262,11 +265,18 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             learnable_alpha=model_config.learnable_alpha,
             activation=model_config.operator_activation,
         )
-    if kind in {"promoting", "lifecycle"}:
+    if kind in {"promoting", "lifecycle", "prospective"}:
         model_config = config.shared_residual_model
-        builder = (
-            LifecycleLibraryLearner if kind == "lifecycle" else PromotingSharedResidualLearner
-        )
+        # `prospective` is a strict superset of `lifecycle`: it adds the
+        # V6 adaptation penalty and no parameters, so a prospective run
+        # with no arm reproduces a lifecycle run exactly. Kept as its own
+        # kind rather than swapping the class under `lifecycle`, so V5's
+        # artifacts stay reproducible from their own fingerprints.
+        builder = {
+            "lifecycle": LifecycleLibraryLearner,
+            "prospective": ProspectiveLifecycleLearner,
+            "promoting": PromotingSharedResidualLearner,
+        }[kind]
         return builder(
             d=config.world.state_dim,
             operator_slots=model_config.operator_slots,
@@ -363,6 +373,7 @@ def _training_values(
         "gated": config.gated_model,
         "promoting": config.shared_residual_model,
         "lifecycle": config.shared_residual_model,
+        "prospective": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -401,6 +412,7 @@ def run(
     force_retire_one: bool = False,
     lifecycle_kappa: float = 0.0,
     lifecycle_grace: int = 8,
+    prospective_hook=None,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -671,6 +683,13 @@ def run(
                 curve, threshold, config.world.examples_per_task
             )
         rows.append(summary_row)
+        # V6: prospective pressure. Called after the task is learned and
+        # before any sleep, so it shapes the representation the next task
+        # inherits rather than second-guessing a promotion.
+        if prospective_hook is not None:
+            record = prospective_hook(model, lifetime_index, world_task_index)
+            if record:
+                rows.append({"record_type": "prospective", **record})
         if isinstance(model, PromotingSharedResidualLearner) and (
             lifetime_index + 1
         ) in sleeps:
@@ -1379,6 +1398,7 @@ def resolved_learned_config(
         "gated": config.gated_model,
         "promoting": config.shared_residual_model,
         "lifecycle": config.shared_residual_model,
+        "prospective": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1418,6 +1438,7 @@ def _write_artifacts(
         "gated": config.gated_model,
         "promoting": config.shared_residual_model,
         "lifecycle": config.shared_residual_model,
+        "prospective": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1554,6 +1575,7 @@ def main() -> None:
         "gated": config.gated_model,
         "promoting": config.shared_residual_model,
         "lifecycle": config.shared_residual_model,
+        "prospective": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[args.model]

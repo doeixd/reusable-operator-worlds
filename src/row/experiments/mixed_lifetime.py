@@ -11,6 +11,8 @@ from __future__ import annotations
 
 import argparse
 import json
+
+import torch
 from dataclasses import replace
 from pathlib import Path
 
@@ -41,6 +43,7 @@ def main() -> None:
             "gated",
             "promoting",
             "lifecycle",
+            "prospective",
         ),
         required=True,
     )
@@ -121,6 +124,20 @@ def main() -> None:
         help="the dormant regime never returns (the DELETE arm)",
     )
     parser.add_argument(
+        "--arm",
+        choices=("ordinary", "replay", "prospective", "supervised"),
+        default="ordinary",
+        help="V6.1 arm. ordinary = the V5 learner; replay = also train on a "
+             "sibling's examples (does merely SEEING relatives suffice?); "
+             "prospective = charge the cost of ADAPTING to a held-out sibling "
+             "back to the shared representation; supervised = pull siblings' "
+             "task codes together directly (substrate upper bound, not a "
+             "candidate architecture)",
+    )
+    parser.add_argument("--prospective-weight", type=float, default=1.0)
+    parser.add_argument("--prospective-steps", type=int, default=4)
+    parser.add_argument("--prospective-support", type=int, default=8)
+    parser.add_argument(
         "--r-meta",
         type=float,
         default=None,
@@ -197,11 +214,12 @@ def main() -> None:
             "gated": config.gated_model,
             "promoting": config.shared_residual_model,
             "lifecycle": config.shared_residual_model,
+            "prospective": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, updates_per_example=args.updates_per_example)
         field = (
             "shared_residual_model"
-            if args.model in {"promoting", "lifecycle"}
+            if args.model in {"promoting", "lifecycle", "prospective"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})
@@ -216,11 +234,12 @@ def main() -> None:
             # PROMOTE reuses the frozen shared-residual configuration.
             "promoting": config.shared_residual_model,
             "lifecycle": config.shared_residual_model,
+            "prospective": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, operator_slots=args.operator_slots)
         field = (
             "shared_residual_model"
-            if args.model in {"promoting", "lifecycle"}
+            if args.model in {"promoting", "lifecycle", "prospective"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})
@@ -270,6 +289,111 @@ def main() -> None:
         factory = HierarchicalWorldFactory(HIERARCHICAL_WEIGHTS)
     else:
         factory = MixedWorldFactory(args.profile)
+    # ---- V6.1 arms -------------------------------------------------
+    # Oracle knowledge enters in exactly ONE place: which task is offered
+    # as a sibling. The learner never sees the teacher operator, the
+    # family parameters, or the sibling's query set during adaptation.
+    prospective_hook = None
+    if args.arm != "ordinary":
+        if meta_spec is None:
+            raise SystemExit("V6 arms require --r-meta (the meta-recurrence world)")
+        probe_world = factory.generate(config.world)
+
+        def _sibling_of(world_task_index: int) -> int | None:
+            """A LATER task from the same family, never the current one."""
+
+            family = meta_spec.family_of(world_task_index)
+            if family is None:
+                return None
+            start = meta_spec.family_onset + family * meta_spec.tasks_per_family
+            end = start + meta_spec.tasks_per_family
+            later = [i for i in range(start, end) if i > world_task_index]
+            if not later:
+                return None
+            # Deterministic in the world seed, and the LAST member is
+            # reserved for evaluation so the prospective gradient never
+            # touches the task Phi is measured on.
+            reserved = end - 1
+            usable = [i for i in later if i != reserved]
+            if not usable:
+                return None
+            return usable[world_task_index % len(usable)]
+
+        def prospective_hook(model, lifetime_index, world_task_index):
+            sibling_index = _sibling_of(world_task_index)
+            if sibling_index is None:
+                return None
+            sibling = probe_world.tasks[sibling_index]
+            support = args.prospective_support
+            support_x = learned_lifetime._tensor(sibling.train_x[:support])
+            support_y = learned_lifetime._tensor(sibling.train_y[:support])
+            query_x = learned_lifetime._tensor(
+                sibling.train_x[support:support * 2])
+            query_y = learned_lifetime._tensor(
+                sibling.train_y[support:support * 2])
+            probe_id = f"__probe_{sibling.task_id}"
+
+            if args.arm == "replay":
+                # Does merely SEEING a relative produce the geometry?
+                # Same examples, ordinary training, no adaptation loop.
+                model.begin_task(probe_id)
+                optimizer = torch.optim.AdamW(
+                    list(model.shared_parameters())
+                    + [model.task_codes[probe_id], model.task_residuals[probe_id]],
+                    lr=config.shared_residual_model.global_learning_rate,
+                )
+                for _ in range(args.prospective_steps):
+                    optimizer.zero_grad()
+                    loss = torch.mean(
+                        (model(support_x, probe_id) - support_y) ** 2)
+                    loss.backward()
+                    optimizer.step()
+                value = float(loss.detach())
+                model.forget_task(probe_id)
+                return {"arm": "replay", "sibling": sibling.task_id,
+                        "support_mse": value}
+
+            if args.arm == "supervised":
+                # Substrate upper bound: pull the sibling's route toward
+                # the current task's directly. Not a candidate
+                # architecture -- it answers only whether the substrate
+                # CAN express the organization.
+                current_id = probe_world.tasks[world_task_index].task_id
+                if current_id not in model.task_codes:
+                    return None
+                model.begin_task(probe_id)
+                optimizer = torch.optim.AdamW(
+                    model.shared_parameters(),
+                    lr=config.shared_residual_model.global_learning_rate,
+                )
+                optimizer.zero_grad()
+                penalty = torch.mean(
+                    (model.task_codes[probe_id]
+                     - model.task_codes[current_id].detach()) ** 2)
+                (args.prospective_weight * penalty).backward()
+                optimizer.step()
+                value = float(penalty.detach())
+                model.forget_task(probe_id)
+                return {"arm": "supervised", "sibling": sibling.task_id,
+                        "code_distance": value}
+
+            # prospective: charge the ADAPTATION cost to shared state.
+            optimizer = torch.optim.AdamW(
+                model.shared_parameters(),
+                lr=config.shared_residual_model.global_learning_rate,
+            )
+            optimizer.zero_grad()
+            penalty = model.prospective_penalty(
+                probe_id, support_x, support_y, query_x, query_y,
+                steps=args.prospective_steps,
+            )
+            (args.prospective_weight * penalty).backward()
+            optimizer.step()
+            value = float(penalty.detach())
+            model.forget_task(probe_id)
+            return {"arm": "prospective", "sibling": sibling.task_id,
+                    "query_penalty": value}
+
     original_world = learned_lifetime.World
     learned_lifetime.World = factory  # type: ignore[assignment]
     try:
@@ -286,6 +410,7 @@ def main() -> None:
             force_retire_one=args.force_retire_one,
             lifecycle_kappa=args.lifecycle_kappa,
             lifecycle_grace=args.lifecycle_grace,
+            prospective_hook=prospective_hook,
         )
     finally:
         learned_lifetime.World = original_world  # type: ignore[assignment]
@@ -300,6 +425,12 @@ def main() -> None:
     }
     if meta_spec is not None:
         provenance["meta_family_spec"] = meta_spec.as_dict()
+        provenance["v6_arm"] = {
+            "arm": args.arm,
+            "prospective_weight": args.prospective_weight,
+            "prospective_steps": args.prospective_steps,
+            "prospective_support": args.prospective_support,
+        }
         label = f"meta r_meta={meta_spec.r_meta:g} F={meta_spec.families}"
     elif task_group_spec is not None:
         provenance["rho_profile"] = list(factory.profile)
