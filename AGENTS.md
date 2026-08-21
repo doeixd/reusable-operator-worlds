@@ -1006,3 +1006,16 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
 - A guard that parses its own input must fail when it parses nothing.
   The first `check_invalid.py` omitted `re.MULTILINE`, matched zero
   paths, and printed a clean pass over a manifest listing six.
+- Two functions can only be compared when evaluated at the SAME inputs.
+  V5's effective-operator and population-span audits built each task's
+  vector on that task's own probe, then compared them coordinate-by-
+  coordinate; coordinate j meant a different state per task. Corrected,
+  R_effective went 0.190 -> 0.762 and span-unexplained 0.707 -> 0.491,
+  reversing a published conclusion. Same error family as slot-index
+  versus primitive-index and parameter-mean versus function: whenever
+  two things are compared, ask what coordinate system each lives in.
+- Reconstructing a learner from an artifact means reconstructing ALL of
+  its state. `load_learner` restored promoted references but not
+  retirement, so retired tasks were rebuilt with both the abstraction
+  and the residual retirement had removed — a model that never existed
+  during training.

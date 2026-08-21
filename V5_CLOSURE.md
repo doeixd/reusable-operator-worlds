@@ -1,5 +1,15 @@
 # V5 closure — representation economics
 
+> **AMENDED 2026-08-21 after code review 55.** Finding V5-D below is
+> WITHDRAWN. Two audits compared functions across unaligned coordinates
+> and one loader dropped retirement state; corrected, `R_effective` is
+> 0.762 rather than 0.190 and the population-span figure is 0.491 rather
+> than 0.707. The learner DOES encode the family structure. What fails
+> is PROMOTE's extraction of it. See "V5-D, corrected" at the end of
+> this document. Findings V5-A, V5-B and V5-C are unaffected: they rest
+> on lifetime results and on audits that already used one shared probe
+> per world.
+
 **Status: CLOSED, 2026-08-21.** The sealed block (seeds 600-629) was
 opened against `V5_CONFIRMATION_PLAN.md`, frozen at 1ed227d and hashed
 into `tools/check_prereg.py` before any sealed world was generated.
@@ -162,3 +172,58 @@ because the failure modes recur:
 Every one of these was caught by a guard that reported its denominator
 or by a reviewer asking which side a number belonged to. Both practices
 are load-bearing and are recorded in `AGENTS.md`.
+
+
+---
+
+# V5-D, CORRECTED (2026-08-21)
+
+The original V5-D read: "the majority of this discrepancy exists BEFORE
+PROMOTE", with R_teacher 1.0 -> R_effective 0.19 -> R_residual 0.095 ->
+R_promoted 0.05, and concluded that fragmentation and post-hoc linear
+refactoring could neither explain nor fix it.
+
+Three defects produced those numbers. Each task's innovation was
+evaluated on that task's OWN inputs and then compared coordinate-by-
+coordinate, so the subspace fit ran across incomparable axes; the
+artifact loader restored promoted references but not retirement state,
+so retired tasks were reconstructed with both the abstraction and the
+residual retirement had removed; and the "on-trajectory" rollout ran
+only the routed basis, a state the model never visits.
+
+Corrected, on the same artifacts:
+
+    R_teacher              1.000   by construction
+    R_effective            0.762   was 0.190
+    full-span unexplained  0.491   was 0.707
+    promoted library       0.921 unexplained, FACTORIZE 0/6 — unchanged
+
+WHAT V5 ACTUALLY FOUND, restated. The wake learner encodes about
+three-quarters of the family structure in its effective task-conditioned
+operators, distributed across route and residual and across the task
+population rather than concentrated in any single object — the best
+single innovation leaves 0.695 unexplained where all of them together
+leave 0.491. PROMOTE, which extracts one task residual into one
+abstraction, captures almost none of it.
+
+So the gap is between what the learner COMPUTES and what the promoter
+EXTRACTS. That is a claim about the extraction step's UNIT, not about
+the wake objective being blind to relatedness.
+
+CONSEQUENCES. "Post-hoc refactoring cannot be the remedy" is withdrawn;
+roughly half of a teacher operator is linearly recoverable from the
+population, so a sleep phase refactoring over the POPULATION is exactly
+what the evidence now points at. Review 48's Hypothesis B and review
+49's global-rotation branch, both of which I reported as eliminated,
+are live again. And V6's premise — "ordinary wake does not form
+representations preserving the structure" — is false as stated; the
+sharper V6 question is whether prospective pressure makes structure the
+learner ALREADY HAS extractable as reusable objects.
+
+METHOD. The error class was the same one V5 recorded twice already:
+comparing objects in incompatible coordinate systems (learner slot
+indices versus teacher primitive indices; parameter means versus
+functions). It reappeared in a subtler form — the same function
+evaluated at different inputs — and survived three self-reviews because
+the numbers were plausible and the instrument printed non-vacuous
+denominators. Plausibility is not a check.

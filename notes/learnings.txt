@@ -2959,3 +2959,71 @@ effect, so the teacher arm had zero residual by construction and "won"
 total-variance tolerance and the raw-ablation counterfactual were the
 same error. Check which side the TARGET belongs to before reading a
 ratio.
+
+
+# CODE REVIEW 55: ALIGN THE FUNCTION SPACE BEFORE INTERPRETING STRUCTURE (2026-08-21)
+
+Three defects in the H29 follow-up changed the scientific conclusion,
+not merely its numerical precision. `audit_effective_operator` compared
+task innovations evaluated on different tasks' `eval_x`, failed to
+restore the retirement table stored outside `state_dict`, and rolled
+earlier steps through the routed basis while omitting promoted and
+private residuals. The resulting vectors did not share coordinates and
+the reconstructed learner did not compute the function saved by the
+lifetime. The reported `R_effective = 0.190` is withdrawn.
+
+With one common set of actual on-trajectory states, retirement restored,
+and rollout matching `forward`, mean effective-operator capture is
+`0.762` against the teacher's `1.000` and a `0.003` null. Ordinary wake
+therefore encodes most of the family structure. The earlier conclusion
+that roughly 80-90% of the structure was absent before PROMOTE was wrong.
+The relevant rule is stronger than "measure functions, not parameters":
+when comparing functions, evaluate every function on the SAME states and
+reconstruct every non-tensor part of model state.
+
+The population-span audit had the same coordinate defect. Its reported
+`0.707` unexplained fraction and the conclusion that no global linear
+refactor could help are withdrawn. The corrected full-population value is
+`0.491`; the best single innovation leaves `0.695` unexplained. Roughly
+half a teacher operator is recoverable only from the population, so the
+structure is distributed across tasks as well as across route and
+residual. A population-level refactor is live again.
+
+The corrected chain is now coherent:
+
+    effective task-conditioned operators   R = 0.762
+    full innovation population             unexplained = 0.491
+    promoted abstraction library           unexplained = 0.921
+    learned-library FACTORIZE               0/6 wins
+
+The learner COMPUTES the structure, but PROMOTE extracts one task's
+private residual at a time and therefore chooses the wrong unit of
+abstraction. The failure is at extraction, not at wake representation
+formation. The next structural intervention should search or refactor
+over the task population, rather than assuming that a parameter boundary
+already marks a reusable computational object.
+
+The same review voided every existing V6 arm comparison. The prospective
+hook selected a later task from the ordinary lifetime and used its labels
+before that task's legitimate prequential arrival. Replay also used
+unmatched local learning rates; the fertility scorer measured a repeated-
+batch endpoint rather than cumulative acquisition cost; and H31 compared
+novel related tasks with already-trained unrelated tasks. Replay's former
+`Phi = +0.072`, every prospective-arm delta, and the old H32
+`0.137 -> 0.176` reading are withdrawn. H30-H32 are UNRESOLVED, not
+negative.
+
+The repaired protocol draws pressure siblings from held-out tasks that
+never enter the lifetime, gives replay the ordinary route/residual/shared
+learning-rate groups, creates symmetric unseen unrelated controls, and
+reports cumulative adaptation-trajectory cost separately from endpoint
+error and samples-to-target. No conclusion may be read from that repaired
+pipeline until clean artifacts exist. Record every intervention knob in
+provenance and validate the complete record on resume; merely recording
+knobs while checking only the arm name is not sufficient.
+
+WHAT SURVIVES. V1-V4 and V5's primary causal economics do not depend on
+these audits: the recurrence/amortization results, sealed C1, the teacher
+schema crossing, H25/H26, and the learned-library FACTORIZE 0/6 result
+stand. What changed is the localization of the learned-library failure
+and therefore the motivation for V6.
