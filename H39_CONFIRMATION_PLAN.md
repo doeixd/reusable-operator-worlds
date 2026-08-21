@@ -126,3 +126,40 @@ Seeds outside 700-729, any other K or slot count, any retuning after the
 block is opened, gates, prospective pressure, or learner-discovered
 grouping. Anything learned from this block that suggests a different
 architecture goes back to development seeds 0-9.
+
+# Amendment 1 (2026-08-21, review 61; before any sealed cell was read)
+
+Registered while the lifetimes were running and before the scorer had been
+executed or any seed-700-729 artifact opened. It changes the decision rule
+only; the lifetimes, arms, fits, and E1/E3/E4/E5 are unchanged.
+
+1. **E2 primary is the magnitude, not the 1.5x fraction.** Let
+   `z_w = log R_M(w)` and `R~_M = exp(mean_w z_w)` (geometric mean). E2
+   passes iff `R~_M` lies in the preregistered interval **[1.2, 1.8]** and
+   its 95% paired bootstrap interval lies entirely below 1.8 (the claim is an
+   upper bound on multiplicative opportunity loss). The arithmetic mean and
+   its interval are reported for continuity with development (1.46).
+2. **The fraction `Pr(R_M <= 1.5)` is a reported CONTINUITY STATISTIC against
+   census C0, not verdict-determining.** Its development-derived prediction
+   (0.55-0.75 from three worlds) is withdrawn as false precision.
+3. **Verdict table, restated.** CONFIRMED: E1-E5 all satisfy their frozen
+   intervals/gates including E2's magnitude interval. CONFIRMED-RELATIVE:
+   E1, E3, E4, E5 pass and E2 misses its magnitude interval — learned
+   directions are causally useful, improve present and full-interface
+   behaviour, and are used, but alpha-only acquisition did not reach the
+   predicted opportunity level. FAILED: E1, E3, or E5 fails. PARTIAL marks
+   are unchanged.
+4. **Scope sentence, frozen.** This block tests EXISTENCE AND USE, NOT
+   DISCOVERY. The architecture (two parameterized slots, K = 32) is
+   supplied. A positive result means a jointly formed parameterized
+   representation can preserve future variation opportunity and improve
+   acquisition; it does not mean the learner can autonomously discover that
+   representation. Discovery is the next rung.
+
+Reviewer predictions (review 61), registered for scorekeeping: E1 very
+likely passes; E3 likely passes with world variability; E4 likely the
+cleanest strong positive; E5 very likely passes; E2 geometric mean about
+1.4-1.7; the 1.5x fraction the least stable quantity. Expected headline:
+learned directions real and useful, alpha-only preserves substantial but
+incomplete opportunity, the full schema + innovation interface clearly beats
+ordinary.
