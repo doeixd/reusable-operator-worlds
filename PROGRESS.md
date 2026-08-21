@@ -2858,3 +2858,19 @@ agree), full fit 1.06x; channel ablation shows the residual channel carries
 at full rank ("ordinary wake never formed those directions"). Verdict per the
 frozen table: **branch C**. Nothing licensed. Recorded in `PREDICTIONS.md`
 with reviewer-prediction scorekeeping and in `notes/learnings.txt`.
+
+# 2026-08-21 — H39b P(alpha)-IN-BASIS PILOT: BRANCH U (THRESHOLD MISCALIBRATED); CHANNEL IS USED
+
+Froze `H39B_PSLOT_PILOT_PLAN.md` (`83ac418`), implemented
+`ParameterizedSlotLearner` (basis slot 12 becomes P(alpha) with U_0 + sum
+alpha_k U_k; frozen-alpha control bitwise equal to ordinary, verified on the
+smoke world and on the real artifact), wired `--model pslot`, tests (full
+suite OK), launched P2 / P8 / P2-frozen in a pool of three, and scored with
+`score_h39b_pslot.py`.
+
+Results: P2 -507 nats vs ordinary, alpha-only k=128 3.94x, full fit 0.94x,
+alpha-zeroed ratio 1.38, route mass on P 0.093; P8 -1,028 nats, alpha-only
+1.89x (three optimizers agree), full fit 0.79x, alpha-zeroed 2.68, route mass
+0.169. Frozen verdict U via the route-mass criterion, which the ledger entry
+annotates as miscalibrated (ordinary routes are diffuse; any one slot ~0.08-
+0.10). Nothing licensed. Recorded in `PREDICTIONS.md` and `notes/learnings.txt`.

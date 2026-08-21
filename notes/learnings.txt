@@ -3295,3 +3295,40 @@ lives. If the schema is to parameterize anything, it must parameterize the
 operators or routes the learner actually uses for family tasks — a
 parameterized (nonlinear) operator P(alpha) in the basis, not a linear
 offset on a residual the learner discards.
+
+
+================================================================================
+H39b: AN IN-BASIS ARGUMENT IS USED; THE ROUTE-MASS THRESHOLD WAS NOT CHECKED (2026-08-21)
+================================================================================
+
+P(alpha) = tanh(z + a (U_0 + sum_k alpha_k U_k) tanh(Vz+b)) replacing basis
+slot 12 (`reports/h39b_pslot_pilot.json`, world 0). The frozen-alpha control
+is BITWISE the ordinary learner, so every difference is the channel. K=2
+improved present-task loss by 507 nats and K=8 by 1,028; the full
+task-local future fit went below ordinary (0.94x, 0.79x); the alpha-only
+k=128 endpoint fell from 3.5-4.2x (census, residual schema) to 1.89x at
+K=8. Not 1.5x. Licenses nothing. But it is the first argument channel the
+learner actually uses: zeroing alpha raises family NMSE 1.38x / 2.68x.
+
+THE FROZEN VERDICT WAS "UNUSED" BECAUSE OF A THRESHOLD I DID NOT CHECK
+AGAINST ITS BASELINE. Ordinary routes are diffuse (mean max coefficient
+0.29-0.44; any single slot ~0.08-0.10 mass), so "route mass on P >= 0.5"
+was unattainable and "< 0.2 means unused" sits at the uniform reference.
+Second time this project has registered a bound its own baseline cannot
+satisfy (S0 p_reuse). Rule, restated: before freezing any threshold on a
+learner statistic, MEASURE that statistic on the baseline artifact and
+register the threshold relative to it. The functional companion criterion
+(alpha-zeroed ratio >= 1.25) was correctly calibrated and passed.
+
+WHERE FERTILITY LIVES. Two residual-side schemas (post-hoc, jointly formed)
+did nothing; one basis-side argument moved every endpoint. Parameterize the
+objects the learner routes through, not the objects it discards.
+
+K IS A VARIABLE, NOT THE GENERATOR'S RANK. K=8 beat K=2 everywhere. The
+learner's coordinate for the family is not the teacher's 2-dim subspace in
+U; do not hard-code generator ranks into learner channels.
+
+ZERO-INIT ALPHA IS FINE HERE AND WAS NOT FOR THE RESIDUAL. dL/dalpha_k =
+<dL/dU, U_k> is nonzero at alpha=0 because tanh(Vz+b) != 0; U_k learns
+only after some alpha moves (its gradient is alpha-weighted) — a two-phase
+start that the unit test now documents.

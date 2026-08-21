@@ -4217,3 +4217,53 @@ advanced. The representation branch of the review-58 tree is not falsified
 in general — only the LINEAR pooled schema at this operating point — and the
 reviewer's registered next direction (nonlinear parameterized operators /
 conditional primitives) requires its own frozen plan.
+
+# H39b PILOT RESULT (2026-08-21): BRANCH U BY THE FROZEN TABLE; THRESHOLD MISCALIBRATED; FIRST ARGUMENT CHANNEL THAT IS USED
+
+Plan: `H39B_PSLOT_PILOT_PLAN.md` frozen at `83ac418` (no amendments).
+Report: `reports/h39b_pslot_pilot.json` (EXPLORATORY, world 0). Instrument
+and scorer at `6f33a2b`/later.
+
+Preconditions: the frozen-argument control P2-frozen reproduces the ordinary
+V6 artifact BITWISE on every ordinary tensor and in loss (-191,906.786), so
+the only difference between P2 and ordinary is the argument channel. The
+ordinary anchor (k=128 0.02226; per task 0.02672 / 0.01780) reproduced to
+1e-12. All non-vacuity checks pass for both arms.
+
+Primary arm P2 (K=2): present-task loss -192,413.8, i.e. **507 nats BETTER
+than ordinary** (parity PASS). Alpha-only k=128 = 3.94x ordinary (robust
+3.92x, 3.92x): FAIL against 1.5x. Full task-local fit k=128 = 0.936x
+ordinary. Channel use over all 64 family tasks: max-step mean route mass on
+P 0.093 (uniform reference 0.083); alpha-zeroed NMSE ratio 1.381.
+Secondary arm P8 (K=8): loss -192,934.5 (**1,028 nats better**); alpha-only
+k=128 = **1.89x** (robust 1.88x, 1.88x); per task 0.0624 / 0.0217 against
+ordinary 0.0267 / 0.0178; full fit 0.790x ordinary; max-step route mass
+0.169; alpha-zeroed ratio 2.677.
+
+Verdict by the frozen table: **U** — `route_mass_P_max_step < 0.2`.
+
+ANNOTATION, appended rather than re-judged: the plan's P-CARRIES and
+UNUSED thresholds (route mass on P >= 0.5 / < 0.2) were registered without
+checking the baseline learner's route concentration. The ordinary learner's
+routes are diffuse — mean maximum coefficient 0.44 / 0.29 / 0.32 by step,
+mean mass on any one slot about 0.08-0.10 — so >= 0.5 on a single slot was
+unattainable for this learner and < 0.2 is near the uniform reference. This
+is the same error class as the S0 `p_reuse >= 0.5` bound (learnings). The
+functional criterion registered alongside it, alpha-zeroed ratio >= 1.25,
+PASSES in both arms (1.38, 2.68). The route-mass criterion is therefore
+reported as miscalibrated, and the branch U description "the learner never
+routed family tasks through P" is NOT supported by the functional evidence.
+No branch is re-assigned; the substantive readings below are exploratory.
+
+What the pilot shows regardless of the table: (1) an argument channel in
+the basis is the first one this project has built that the learner USES
+and that LOWERS present-task cost; (2) the full task-local interface
+becomes better than ordinary (0.79-0.94x); (3) the alpha-only gap falls
+from 3.5x (post-hoc census) and 4.2x (residual schema) to 1.89x at K=8,
+still short of 1.5x; (4) K=8 beats K=2 on every endpoint, so the
+generator's rank-2 coordinate is not the learner's coordinate.
+
+Historical-span diagnostic unchanged (2.75x at full rank). Licensing: none.
+A successor must (a) register the channel-use criterion against the
+baseline's measured route concentration, (b) treat K as an independent
+variable, and (c) be frozen before running; worlds 1-2 remain unopened.
