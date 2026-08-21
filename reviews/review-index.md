@@ -3,7 +3,9 @@
 An index of all reviewer feedback files in this directory, in chronological
 order, with a one-paragraph summary of each. The reviews follow the project
 from the initial encouraging pilot through V1 confirmation, V2's sealed
-replication, and into V3 design.
+replication, V3's abstraction birth, V4/V4R's lifecycle economics, V5's
+sealed amortization law and the review-55 audit corrections, and V6's
+prospective-fertility negative.
 
 ## Files
 
@@ -2420,3 +2422,121 @@ criterion, since n = 3 is a diagnostic and not evidence. Closes with the
 discipline rule the run log illustrates: every apparent null must survive a
 gradient check, a dynamic-range check, a future-task validity check, and a
 non-vacuity check before it becomes a scientific result.
+
+### Numbering note: reviews 54 and 55
+No `reviewer-feedback-54.txt` or `reviewer-feedback-55.txt` exists in this
+directory. Review 55 was the independent code review whose findings are
+recorded directly in `PREDICTIONS.md` ("CODE REVIEW 55: THREE PUBLISHED
+CONCLUSIONS RETRACTED"), `notes/learnings.txt`, and `V5_CLOSURE.md`; its
+content was acted on without a preserved feedback file. The numbering
+resumes at 56.
+
+### [reviewer-feedback-56.txt](reviewer-feedback-56.txt)
+Reads the first valid (post-review-55) V6 result — Phi_prospective = −8.58,
+negative in 3/3 worlds, with harm concentrated on related futures
+(Phi_specific ≈ −6.6) — and states the decisive finding: the valid
+intervention ACTIVELY DAMAGED THE EXACT CAPABILITY IT WAS INTENDED TO
+IMPROVE, making H35 and the allocation sweep exactly the right remaining
+experiments. Proposes **over-alignment** as the LEADING mechanism
+(prospective pressure collapses family members toward a shared mean, erasing
+the member-specific coordinates few-shot identification needs; harm largest
+at k=1 and shrinking with support), but flags a conditioning degradation of
+the adaptation problem as indistinguishable in Phi, and prescribes the cheap
+discriminating audit — between/within-member discrimination ratio and
+task-code sensitivity ‖df/dc_task‖ — that later REFUTED over-alignment.
+Elevates H32's dissociation (R_effective 0.762 → 0.791 while Phi fell to
+−8.58) into a headline methodological result: representations can become
+"more structured" by the geometric measure while becoming worse languages
+for learning — **geometry ≠ fertility** — so the real target is to SEPARATE
+WHAT SHOULD BE SHARED FROM WHAT MUST REMAIN CHEAPLY IDENTIFIABLE. First
+proposes T_i = S(α_i) + ε_i (shared coordinates plus cheaply inferable
+argument coordinates; the V3 REFERENCE/ARGUMENT/INNOVATION typing returning
+at a deeper level) and a candidate successor objective
+min L_query + λD*(R) + β·C_infer(α_new) constrained to an argument channel —
+explicitly NOT to be built until H35 and allocation finish. Diagnoses why
+the naive objective pointed the wrong way: the outer loss rewards the
+post-adaptation endpoint, which can be improved by making adaptation
+unnecessary (a strong prior at the family mean) rather than effective.
+Predictions: H35 65/35 over-alignment/no-positive-window; allocation
+monotone n_free↑ ⇒ M↓. Prescribes the six-point NESTED-LEARNING AUDIT
+checklist (intervention changes parameters; inner learner learns; probe has
+dynamic range; future genuinely unseen; outer objective depends on inner
+adaptation; replication across worlds) now in AGENTS.md. Counsel: let the
+two registered sweeps finish and build nothing else; if both fail, close V6
+with a strong negative and make schema + argument + innovation the next
+hypothesis — "a substantially better hypothesis than the one V6 started
+with."
+
+### [reviewer-feedback-57.txt](reviewer-feedback-57.txt)
+Post-closure synthesis of V6. The strongest lesson is not "the prospective
+objective failed" but **geometry ≠ fertility**, and more deeply
+**compression of regularity ≠ identifiability of novelty**: in the repaired
+runs, prospective pressure had no beneficial operating point (weak pressure
+neutral/mixed, strong pressure hurt present learning and related-future
+adaptation specifically) while R_effective rose slightly. Frames V1–V5 as
+establishing the economics of reusable computation (N·s̄ > C, and
+H* ≈ λD*/s̄ holding one level up for schemas), V5 as showing the economics
+can exist in the teacher while the learner's representations don't expose
+them, and V6 as answering "can we simply pressure the learner to make future
+related tasks cheap?" with **no** — the missing ingredient is not "add
+future loss" but the interface between shared structure and task-specific
+change. New core hypothesis: a fertile representation must separate reusable
+structure from cheaply inferable variation — T_i = S(α_i) + ε_i, SHARED
+SCHEMA + FAST ARGUMENT + PRIVATE INNOVATION. But before building it, run the
+localization fork on frozen ordinary/prospective representations: near-oracle
+adaptation (long optimization, restarts, LBFGS) vs the standardized adaptor.
+If the oracle gap closes, fertility is a property of representation +
+optimizer and the next direction is joint model/optimizer training
+(R_{t+1} = U_φ(R_t, D_t)); if it persists, the representation genuinely lost
+future degrees of freedom and the typed architecture is warranted.
+Introduces the **expressibility/findability** decomposition
+C_acquire = C_express + C_find — the same distinction that will govern
+program synthesis (a short program existing in the language vs the
+synthesizer finding it) — making V6 central to the long-term program, and
+the richer abstraction definition: a good abstraction compresses what is
+common while providing cheap coordinates for what can vary; a bad one
+summarizes the past while making the next distinction difficult to express.
+Revised roadmap: close V6 → oracle-vs-standard audit → branch to joint
+(R,U) training or S(α)+ε → compositional language (CALL/COMPOSE/BIND/
+BRANCH/HALT) only after a positive fertility regime exists, with the
+eventual language objective D*(L) + E[C_express] + α·E[C_find] and language
+revision L_t → L_{t+1}.
+
+### [reviewer-feedback-58.txt](reviewer-feedback-58.txt)
+Turns review 57's fork into a preregisterable hypothesis tree H37–H46 that
+progressively localizes what fertility depends on, explicitly avoiding a new
+architecture before distinguishing "representation problem" from
+"optimizer/search problem." **H37** (the experiment already frozen as
+`V6R_ADAPTATION_GEOMETRY_PLAN.md`): fertility may be partly an optimization
+property — compare the registered finite-step adaptor against near-oracle
+fitting on frozen representations, defining C_find = L^{U,k} − L*; reviewer
+leans toward the gap shrinking substantially but not disappearing. **H38**:
+Φ = Φ(R, U), not Φ(R) — trained per-representation/learned updaters,
+evaluated on unseen families. **H39**: the architectural branch — an
+explicit fast argument channel S(α) + ε should beat unconstrained task codes
+at matched present loss and D*, with matched-budget/budget/steps/D* and
+unrelated-refusal controls. **H40**: exact-null private innovation
+(g·ε with g=0 a literal no-deviation state) is necessary for fertile
+sharing. **H41**: the critical quantity is argument IDENTIFIABILITY —
+C_adapt ∝ C_identify(α); if sparse-evidence argument error predicts Φ while
+R_effective does not, "shared geometry is secondary; identifiable
+coordinates are primary" (reviewer: fairly likely). **H42**: expressibility
+and findability are independent axes of representation quality (reviewer
+strongly expects the dissociation), implying objectives of the form
+J = D*(R) + C_express + β·C_find. **H43**: plasticity allocation determines
+representation level — n_free↑ ⇒ M↓, watching for an intermediate
+fertile/FACTORIZE regime (data already exists; see PREDICTIONS.md).
+**H44**: sharing sits on a Pareto frontier against cheap specialization —
+manipulate the architecture's sharing capacity rather than an objective
+coefficient, a better version of H35. **H45**: branching-futures prospective
+objectives should be more robust than single-sibling ones — only after a
+positive fertility regime exists; the clean bridge to dreaming. **H46**:
+meta-learned update rules favor fertile representations without future
+leakage — late, not next. The tree: H43 → H37 first; then H38 → H42 → H46
+on the findability branch, H39 → H40 → H41 → H44 on the representation
+branch, H45 once either works. Reviewer's overall guess: a hybrid — V6
+failed partly because fertility is relational between representation and
+update rule, and partly because task variation lacks a clean fast coordinate
+system — so H37 should remove some but not all of the deficit, and each
+component (SHARED SCHEMA + FAST ARGUMENT + PRIVATE INNOVATION + LEARNED
+UPDATER) must be earned separately rather than built because it sounds good.

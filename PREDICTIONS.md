@@ -3835,3 +3835,207 @@ fixed updates. Adam 0.05 and LBFGS are fixed robustness checks. Query labels
 never choose the optimizer, restart, checkpoint, or stopping point. The audit
 must reproduce the original 40-step anchor exactly before the new result is
 read.
+
+# H37 RESULT — REPRESENTATIONAL OPPORTUNITY LOSS (2026-08-21)
+
+The anchor reproduced all 12 registered ordinary/prospective task costs exactly
+(maximum absolute difference 0). All primary and robustness fits were finite;
+no task, optimizer, or endpoint was excluded. The frozen decision tree gives the
+same result for primary Adam and both robustness optimizers:
+
+| optimizer | k | ordinary | prospective | gap | per-world gaps |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Adam 0.01, 2,000 | 1 | 0.2387 | 0.2730 | +0.0343 | +0.0315, +0.0366, +0.0346 |
+| Adam 0.01, 2,000 | 128 | 0.01814 | 0.02976 | +0.01162 | +0.01930, +0.00906, +0.00651 |
+| Adam 0.05, 2,000 | 128 | 0.01771 | 0.02916 | +0.01145 | +0.01840, +0.00873, +0.00721 |
+| LBFGS | 128 | 0.01783 | 0.02991 | +0.01207 | +0.02021, +0.00941, +0.00660 |
+
+Values are final query MSE divided by `2 * 0.1^2`; positive gaps mean the
+prospective checkpoint is worse. At k=128, primary prospective cost is 64%
+higher than ordinary. Every one of the six task-paired gaps is positive, every
+world mean is positive, and the mean exceeds both its population SD and the
+registered 10% threshold. The endpoints are nearly invariant to optimizer:
+Adam 0.01, Adam 0.05, and LBFGS all reach ordinary means near 0.018 and
+prospective means near 0.030. Primary final support MSE is also higher for
+prospective (`0.000414` versus `0.000250`).
+
+VERDICT: H37 localizes the repaired V6 deficit as **operational
+representational opportunity loss**. A large support set and 2,000 updates do
+not recover an ordinary-quality solution using the allowed fresh task code and
+private residual under the frozen prospective representation. This rejects the
+specific optimizer/findability branch proposed after V6; changing only the
+optimizer is not the earned next mechanism.
+
+This is deliberately not a claim of global impossibility: every "near-oracle"
+fit is finite. The conclusion is strong because three substantially different
+registered optimizers converge to the same arm-specific gap, not because any
+one optimizer proves a global optimum. The k=1 primary and LBFGS gaps are also
+replicated worse, and support-selected perturbation restarts preserve the sign,
+so sparse generalization may contribute too. The registered tree assigns the
+result to opportunity loss first because the deficit already survives k=128.
+
+The next architecture is therefore earned: separate slow shared schema from a
+cheaply inferable fast argument and exact-null private innovation. Its first
+experiment must test existence and use of that factorization before asking a
+learner to discover it or reviving prospective amortization.
+
+# H38-H46 — THE POST-V6R FERTILITY DECISION TREE (REGISTERED 2026-08-21)
+
+Registered from review 58 (`reviews/reviewer-feedback-58.txt`). H37 above IS
+review 58's H37: the frozen `V6R_ADAPTATION_GEOMETRY_PLAN.md` is the
+standardized-versus-near-oracle adaptation audit the review calls for, and its
+registered fork is the plan's fork. Review 58's four outcome rows refine the
+reading: oracle removes the disadvantage (findability bottleneck), oracle
+reduces but does not eliminate it (both representation and optimizer), oracle
+leaves the full disadvantage (representational damage), and prospective
+becoming BETTER than ordinary under the oracle (V6 built good representations
+paired with the wrong adaptor).
+
+STATUS AT REGISTRATION, recorded because the review was written before the
+V6R audit ran and its outcome is now KNOWN (report
+`reports/v6r_adaptation_geometry.json`, H37 RESULT immediately above): H37
+has resolved to the REPRESENTATIONAL OPPORTUNITY LOSS branch. At k=128 the
+high-budget gap remained — primary Adam 0.01 endpoints 0.01814 ordinary versus
+0.02976 prospective (+64%), every task and world gap positive, Adam 0.05 and
+LBFGS agreeing — so the reviewer's core equality prediction
+`L*_prospective ≈ L*_ordinary` is falsified. Its narrower prediction that
+high-budget fitting would shrink but not erase the k=1 deficit is supported by
+primary Adam (88% smaller than the standardized endpoint gap) and approximately
+by LBFGS (80% smaller), while Adam 0.05 is unstable at k=1. The ACTIVE branch
+of the tree is therefore the representation branch, H39 -> H40 -> H41 -> H44.
+H38/H42/H46 remain the findability research line and stay registered — V6R
+establishes an opportunity-loss component but does not exclude an additional
+findability component — so optimizer work is not licensed as the next
+mechanism. H39-H46 themselves have no code, artifacts, or measurements at
+registration.
+
+The tree's discipline rule, registered as binding on the project: earn each
+component separately. Do not build SHARED SCHEMA + FAST ARGUMENT + PRIVATE
+INNOVATION + LEARNED UPDATER as a unit because it sounds good; H37 chooses
+the branch and each later hypothesis licenses its own mechanism.
+
+## H38 — fertility is a property of the representation-updater pair
+
+Branch: H37 says findability. Phi = Phi(R, U), not Phi(R). Frozen
+representations; compare generic standardized Adam, a per-representation
+tuned preconditioner, a learned updater U_phi, and possibly Fisher-whitened
+adaptation; train updaters on development families, evaluate on UNSEEN
+families. Prediction: C_adapt(R_prospective, U_learned) <
+C_adapt(R_prospective, U_generic), with the stronger form
+C_adapt(R_prospective, U_learned) < C_adapt(R_ordinary, U_learned).
+Registered outcomes: only prospective recovers (V6 built useful coordinates
+the generic adaptor cannot exploit); both improve equally (the updater was
+generically poor, no evidence for prospective value); ordinary still wins
+(prospective genuinely shaped a worse representation); learned updater works
+only on known families (meta-overfitting, needs a structural architecture).
+
+## H39 — a fertile representation requires an explicit fast argument channel
+
+Branch: H37 says representational damage. T_i = S(alpha_i) + eps_i with S
+slow/shared, alpha_i a low-dimensional fast task argument, eps_i private
+exact-null innovation. Prediction: C_future^{S+alpha+eps} < C_future^current
+at matched present performance, matched parameter budget, matched adaptation
+steps, and matched D*, against an equal-sized generic task code control, with
+unrelated-family refusal intact. Registered outcomes: strong help (V6's
+problem was the shared/variation interface); help only with teacher family
+labels (expression without discovery); no help even with oracle grouping
+(explicit factorization insufficient); helps related but badly hurts
+unrelated (schema too rigid, innovation/refusal required). REVIEWER
+PREDICTION: decent chance of working on seen meta-families, but private
+innovation will be necessary to avoid forcing every task through S.
+
+## H40 — exact-null private innovation is necessary for fertile sharing
+
+T_i = S(alpha_i) + g_i eps_i with g_i = 0 a literal no-deviation state.
+Prediction: on strongly related tasks D*(eps) falls AND C_adapt falls,
+without hurting unrelated tasks (which activate innovation). Registered
+outcomes: strong benefit (typed schema/argument/innovation channels
+justified); storage benefit only; adaptation benefit only (exact-null is
+about optimization, not MDL); no benefit (the V3 null-state lesson does not
+transfer to this level).
+
+## H41 — the critical quantity is argument identifiability
+
+Not merely T_i = S(alpha_i), but the map few observations -> alpha_i must be
+easy. Prediction: C_adapt is proportional to C_identify(alpha), measured by
+task-code uncertainty after k samples, Fisher information in alpha, argument
+Jacobian conditioning, or alpha recovery error from k examples; more fertile
+representations show lower argument error after k shots. If an
+identifiability metric predicts Phi while R_effective does not, the standing
+diagnostic changes: shared geometry is secondary, identifiable coordinates
+are primary. REVIEWER PREDICTION: fairly likely.
+
+## H42 — expressibility and findability are independent axes
+
+E(R, T) = best achievable future-task cost; F(R, T, U) = cost of finding it
+with U. Prediction: there exist R_1, R_2 with E(R_1) approximately E(R_2)
+but F(R_1) << F(R_2), and possibly the reverse. REVIEWER PREDICTION:
+strongly expected to exist. If it does, objectives must carry explicit
+search cost: J = D*(R) + C_express + beta * C_find. This is the bridge to
+program synthesis: a short program existing in the language is distinct from
+the synthesizer finding it.
+
+## H43 — plasticity allocation determines representation level
+
+Prediction: n_free up implies M down, with information migrating into the
+shared substrate, and possibly an intermediate n* where the shared basis
+stays adaptable, explicit atoms still form, and FACTORIZE becomes
+economically viable. STATUS AT REGISTRATION, recorded because the review was
+written while the sweep was in flight and its data now EXISTS: the
+directional claim is SUPPORTED (mean M fell 7.00 -> 3.67 prospective and
+7.00 -> 4.67 replay from free0 to free6, with R_effective rising in all nine
+paired comparisons); the intermediate fertile regime did NOT appear (Phi
+negative at every plastic setting; FACTORIZE 0/34 scoreable cells). H43's
+remaining open content is interpretive, not prospective: whether "allocation
+moves the storage level but creates no fertility" is a general law beyond
+this operating point. See the V6 ALLOCATION RESULT AND CLOSURE entry.
+
+## H44 — good sharing requires preserving independent innovation
+
+The best representation lies on a Pareto frontier between shared compression
+and capacity for cheap specialization; too little sharing raises D* and
+hurts transfer, too much raises C_identify and hurts novelty. Prediction:
+an intermediate shared/private allocation minimizes
+J = L_current + lambda D* + C_future, where the manipulation is the
+ARCHITECTURE's sharing capacity, not an objective coefficient — registered
+as the better form of H35's question.
+
+## H45 — prospective value should be measured across branching futures
+
+J_option(R) = E_{T' ~ p(T'|H)} C_adapt(T' | R). Prediction:
+Phi_branching > Phi_single, especially on held-out families. Gated: do not
+run until H37-H41 establish a positive fertile representation. If it works
+it is the bridge to dreaming (real future branches -> imagined plausible
+branches); if it fails, breadth alone is not the missing mechanism.
+
+## H46 — learned update rules favor fertile representations without future leakage
+
+R_{t+1} = U_phi(R_t, D_t), outer objective min_phi E[sum_t L_preq(T_t) +
+lambda D*(R_T)], no future information at update time. Prediction:
+C_adapt^{U_phi} < C_adapt^{SGD} on held-out generator families. Registered
+outcomes: works across new generators (major evidence for model+optimizer
+co-training); works only within the training generator (meta-overfitting);
+no effect while an oracle architecture works (update-policy capacity
+problem); no effect AND the explicit fertile architecture fails (the grand
+hypothesis needs revision). Sequencing: late, not next.
+
+## The decision tree, fixed
+
+    H43 (answered above) -> H37 (answered above: representation branch) ->
+        findability:     H38 -> H42 -> H46     (inactive; see H37 status)
+        representation:  H39 -> H40 -> H41 -> H44   (ACTIVE)
+    either branch positive -> H45 -> compositional language (V7+)
+
+REVIEWER OVERALL PREDICTION, registered verbatim: a hybrid — V6 failed
+partly because fertility is relational between representation and update
+rule, and partly because task variation lacks a clean fast coordinate
+system; H37 removes some but not all of the prospective deficit. STATUS:
+still plausible but not localized cleanly. High-budget fitting removes most
+of the k=1 endpoint gap for primary Adam and LBFGS, yet a replicated residual
+gap remains and abundant-support harm survives every optimizer. The pure
+findability account is falsified; a mixed account remains live, while the
+registered decision tree makes the fast-coordinate representation branch
+H39-H41 the next one to test.
+
+None of H38-H46 opens or implies a sealed block. All are development-stage
+hypotheses; any confirmatory run requires its own frozen plan.

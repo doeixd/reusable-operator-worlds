@@ -1,0 +1,529 @@
+Yes. I'd turn the next stage into a small set of hypotheses that
+progressively localize **what fertility actually depends on**. The key is
+to avoid jumping straight to a new architecture before distinguishing
+"representation problem" from "optimizer/search problem."
+
+## H37 — Fertility is partly an optimization property, not just a representation property
+
+**Hypothesis**
+
+The prospective V6 representation still contains solutions for future
+tasks, but the standardized adaptor has greater difficulty finding them.
+
+Formally, define:
+
+    L*_future(R) = min_c L_future(R, c)
+
+using near-oracle optimization over task-local variables, versus
+finite-budget adaptation:
+
+    L^{U,k}_future(R).
+
+Prediction:
+
+    L*_prospective ≈ L*_ordinary
+
+while:
+
+    L^{U,k}_prospective > L^{U,k}_ordinary.
+
+### Experiment
+
+Freeze both representations.
+
+Evaluate future tasks using:
+
+* registered finite-step adaptor;
+* long Adam;
+* multiple restarts;
+* perhaps LBFGS;
+* convergence-based fitting.
+
+Define:
+
+    C_find = L^{U,k} - L*.
+
+### Results and meanings
+
+| Result                                   | Meaning                                                                                         |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| Oracle removes prospective disadvantage  | **Optimization/findability bottleneck.** Representation still contains useful future solutions. |
+| Oracle reduces but does not eliminate it | Both representation quality and optimization geometry matter.                                   |
+| Oracle leaves full disadvantage          | **Representational capacity/opportunity was damaged.** Move toward architecture changes.        |
+| Prospective becomes better under oracle  | Very interesting: V6 produced potentially better representations paired with the wrong adaptor. |
+
+**My prediction:** I lean toward the gap shrinking substantially, perhaps
+not disappearing entirely.
+
+---
+
+# H38 — Fertility is a property of the representation–updater pair
+
+If H37 supports an optimization problem:
+
+    Phi = Phi(R, U)
+
+rather than merely:
+
+    Phi(R).
+
+**Hypothesis**
+
+An updater adapted to the prospective representation can recover the
+fertility that a fixed generic updater misses.
+
+### Experiment
+
+Keep representations frozen and compare:
+
+1. generic standardized Adam;
+2. per-representation tuned preconditioner;
+3. learned updater U_phi;
+4. perhaps natural-gradient/Fisher-whitened adaptation.
+
+Crucially, train the updater on development families and evaluate on
+unseen families.
+
+Prediction:
+
+    C_adapt(R_prospective, U_learned) < C_adapt(R_prospective, U_generic).
+
+The stronger comparison is:
+
+    C_adapt(R_prospective, U_learned) < C_adapt(R_ordinary, U_learned).
+
+### Interpretations
+
+* **Only prospective recovers:** V6 created useful coordinates but
+  ordinary adaptation couldn't exploit them.
+* **Both improve equally:** updater was generally poor; little evidence
+  for prospective representation value.
+* **Ordinary still wins:** prospective objective genuinely shaped a worse
+  representation.
+* **Learned updater overfits known families:** optimization solution does
+  not generalize; need a more structural architecture.
+
+---
+
+# H39 — A fertile representation requires an explicit fast argument channel
+
+This is the architectural alternative if H37 shows genuine
+representational damage.
+
+Model a family as:
+
+    T_i = S(alpha_i) + eps_i.
+
+Where:
+
+* S: shared slow structure;
+* alpha_i: low-dimensional, fast task argument;
+* eps_i: private exact-null innovation.
+
+**Hypothesis**
+
+Constraining task variation into a small explicitly adaptable argument
+channel produces lower future acquisition cost than unconstrained task
+codes at matched present performance and description cost.
+
+Prediction:
+
+    C_future^{S+alpha+eps} < C_future^current.
+
+And ideally:
+
+    D*(S, alpha, eps) <= D*(R_current).
+
+### Important controls
+
+Compare against:
+
+* same model with equally sized generic task code;
+* same total parameter budget;
+* same adaptation steps;
+* same D*;
+* unrelated-family refusal.
+
+### Meanings
+
+| Result                                   | Meaning                                                                        |
+| ---------------------------------------- | ------------------------------------------------------------------------------ |
+| Fast argument strongly helps             | V6's problem was a poor interface between shared structure and task variation. |
+| Helps only if teacher family is given    | Architecture can express fertility but discovery remains unsolved.             |
+| No improvement even with oracle grouping | Explicit factorization is not sufficient; likely optimizer/substrate issue.    |
+| Helps related but hurts unrelated badly  | Too rigid a schema; need innovation/refusal mechanisms.                        |
+
+**My prediction:** this has a decent chance of working, especially on seen
+meta-families, but private innovation will be necessary to avoid forcing
+every task through S.
+
+---
+
+# H40 — Exact-null private innovation is necessary for fertile sharing
+
+This follows from the earlier gated-innovation lesson.
+
+Suppose:
+
+    T_i = S(alpha_i) + g_i eps_i.
+
+with:
+
+    g_i = 0
+
+meaning literally no private deviation.
+
+**Hypothesis**
+
+A representation with a true zero-innovation state outperforms one where
+every task must express a continuous residual, because the latter forces
+task differences even when a schema already explains them.
+
+### Prediction
+
+On strongly related tasks:
+
+    D*(eps) down
+
+and:
+
+    C_adapt down
+
+without hurting unrelated tasks, because unrelated tasks can simply
+activate innovation.
+
+### Possible results
+
+* **Strong benefit:** typed schema/argument/innovation channels are
+  justified.
+* **Storage benefit only:** architecture compresses better but does not
+  improve learning.
+* **Adaptation benefit only:** exact-null changes optimization more than
+  MDL.
+* **No benefit:** previous null-state lesson does not transfer to this
+  level.
+
+---
+
+# H41 — The critical quantity is argument identifiability
+
+This is perhaps the most conceptually important architectural hypothesis.
+
+It is not enough that:
+
+    T_i = S(alpha_i).
+
+The mapping:
+
+    few observations -> alpha_i
+
+must itself be easy.
+
+**Hypothesis**
+
+Future sample efficiency is predicted by how well sparse task evidence
+identifies alpha, not simply by shared-family capture.
+
+Possible operational metrics:
+
+    I(alpha; D_k)
+
+or more practically:
+
+* posterior/task-code uncertainty after k samples;
+* Fisher information in alpha;
+* condition number of the argument Jacobian;
+* error in recovering alpha from k examples.
+
+Prediction:
+
+    C_adapt ∝ C_identify(alpha).
+
+More fertile representations should have:
+
+    argument error after k shots down.
+
+### Interpretations
+
+If this strongly predicts Phi while R_effective does not, you have a much
+better diagnostic for future versions:
+
+    shared geometry is secondary; identifiable coordinates are primary.
+
+I think this is fairly likely.
+
+---
+
+# H42 — Representation quality has two independent axes: expressibility and findability
+
+This generalizes H37.
+
+Define:
+
+    E(R, T) = best achievable future-task cost
+
+and:
+
+    F(R, T, U) = cost of finding that solution using U.
+
+**Hypothesis**
+
+Representations can be independently good or bad on these axes.
+
+There should exist conditions where:
+
+    E(R_1) ≈ E(R_2)
+
+but:
+
+    F(R_1) << F(R_2).
+
+And perhaps vice versa.
+
+### Why test it?
+
+Because this would be a conceptual bridge all the way to program
+synthesis.
+
+Later:
+
+    short program exists ≠ synthesizer finds short program.
+
+Now:
+
+    good task representation exists ≠ gradient learner finds it.
+
+### Prediction
+
+I strongly expect this dissociation to exist.
+
+If it does, the ultimate objective needs explicit learning/search cost:
+
+    J = D*(R) + C_express + beta * C_find.
+
+---
+
+# H43 — Plasticity allocation determines representation level
+
+This should come directly from your almost-complete allocation sweep.
+
+**Hypothesis**
+
+The amount/location of shared plasticity determines whether recurring
+information is represented as:
+
+* continuous shared basis;
+* task-local variation;
+* promoted discrete abstractions.
+
+Prediction:
+
+    n_free up  =>  M down
+
+with information migrating into the shared substrate.
+
+Potentially there is an intermediate regime:
+
+    n_free = n*
+
+where:
+
+* shared representation remains adaptable;
+* explicit atoms still form;
+* higher-order FACTORIZE becomes economically viable.
+
+### Interpretations
+
+* **Monotone (M down), no FACTORIZE anywhere:** discrete hierarchy isn't
+  naturally preferred under available plasticity.
+* **Intermediate FACTORIZE regime:** abstraction level is controlled by
+  plasticity allocation — a major finding.
+* **Little effect of free capacity:** freeze/unfreeze difference was
+  specific to earlier configuration rather than a general law.
+* **Phi improves at intermediate allocation:** architecture/plasticity can
+  create fertility even though prospective pressure could not.
+
+This is worth finishing regardless of H30.
+
+---
+
+# H44 — Good sharing requires preserving independent innovation
+
+This is broader than H39.
+
+**Hypothesis**
+
+The best representation lies on a Pareto frontier between:
+
+    shared compression
+
+and:
+
+    capacity for cheap specialization.
+
+Too little sharing:
+
+    D* up, poor transfer.
+
+Too much sharing:
+
+    C_identify up, poor novelty handling.
+
+Prediction: there exists an intermediate shared/private allocation
+minimizing:
+
+    J = L_current + lambda D* + C_future.
+
+This is a better version of H35 than simply sweeping prospective loss
+weight: manipulate the **representation architecture's sharing capacity**,
+not an indirect objective coefficient.
+
+---
+
+# H45 — Prospective value should be measured across branching futures
+
+V6 used future acquisition, but an eventual representation shouldn't
+optimize for one likely continuation.
+
+**Hypothesis**
+
+Representations optimized for expected acquisition across multiple
+possible future tasks are more robust than representations optimized for
+one sibling.
+
+Define:
+
+    J_option(R) = E_{T' ~ p(T'|H)} C_adapt(T' | R).
+
+Compare:
+
+* one-future meta-objective;
+* branching-future objective;
+* ordinary learner.
+
+Prediction:
+
+    Phi_branching > Phi_single
+
+especially on held-out families.
+
+### If it works
+
+This becomes the clean bridge to "dreaming" later:
+
+    real future branches -> imagined plausible branches.
+
+### If it doesn't
+
+Simply adding breadth to the prospective objective isn't the missing
+mechanism.
+
+I would not run this until H37–H41 establish a positive fertile
+representation.
+
+---
+
+# H46 — Learned update rules can favor fertile representations without future leakage
+
+This would be the big meta-learning test.
+
+**Hypothesis**
+
+Across many training lifetimes, an updater can learn a prior for
+representation formation that improves future acquisition on new worlds,
+even though it sees only present data at deployment.
+
+    R_{t+1} = U_phi(R_t, D_t)
+
+with outer objective:
+
+    min_phi E[ sum_t L_preq(T_t) + lambda D*(R_T) ].
+
+At test time:
+
+    U_phi
+
+gets no future task information.
+
+Prediction:
+
+    C_adapt^{U_phi} < C_adapt^{SGD}
+
+on held-out generator families.
+
+### Interpretations
+
+* **Works across new generators:** major evidence for model+optimizer
+  co-training.
+* **Works only within training generator:** meta-overfitting.
+* **No effect but oracle architecture works:** update-policy
+  capacity/training problem.
+* **No effect and explicit fertile architecture fails:** grand hypothesis
+  itself needs revision.
+
+This should be late, not next.
+
+---
+
+# The sequence I would actually run
+
+I wouldn't run all these. They form a decision tree.
+
+### Immediate
+
+**H43** — finish the allocation sweep already underway.
+
+Then:
+
+**H37** — standardized versus near-oracle future adaptation.
+
+That tells you which branch matters.
+
+### If H37 says optimization/findability
+
+Run:
+
+**H38 → H42 → H46**
+
+    learn/update rule -> formalize findability -> meta-learn model+optimizer.
+
+### If H37 says representation capacity
+
+Run:
+
+**H39 → H40 → H41 → H44**
+
+    S+alpha+eps -> exact-null innovation -> argument identifiability
+    -> shared/private frontier.
+
+### Once either branch gives positive fertility
+
+Then test:
+
+**H45**, and after that return to compositional language.
+
+---
+
+# What I expect most
+
+My current best guess is actually a hybrid:
+
+    V6 failed partly because fertility is relational between representation
+    and update rule, and partly because task variation lacks a clean fast
+    coordinate system.
+
+In other words, I would expect H37 to show that powerful optimization
+removes **some but not all** of the prospective deficit.
+
+That would lead naturally to:
+
+    SHARED SCHEMA + FAST ARGUMENT + PRIVATE INNOVATION + LEARNED UPDATER
+
+But critically, we shouldn't build all four because they sound good.
+
+The next few hypotheses let us earn each component separately.
+
+And if this works, it puts us materially closer to the ultimate goal: a
+system whose learned computational language doesn't merely compress prior
+experience, but gives it **good coordinates and good learning procedures
+for discovering the next program, concept, or theory cheaply**.

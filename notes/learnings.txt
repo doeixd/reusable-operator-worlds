@@ -3094,3 +3094,85 @@ structure: accessible geometry rises along the allocation frontier. It is that
 the current learning interface cannot turn that structure into cheap future
 acquisition. The next localization must separate representational opportunity
 from optimization/findability under the adaptor.
+
+
+================================================================================
+V6R: HIGH-BUDGET FITTING LOCALIZES REPRESENTATIONAL OPPORTUNITY LOSS (2026-08-21)
+================================================================================
+
+The frozen V6R audit first reproduced the 12 corrected V6 k=1 acquisition-cost
+anchors exactly. It then fit only fresh task-local code and residual state at
+k=1 and k=128, keeping each ordinary/prospective representation frozen. Query
+labels were read only at registered reporting checkpoints and never selected an
+optimizer, restart, checkpoint, or stopping time.
+
+At k=128, primary Adam 0.01 for 2,000 updates ended at scaled query costs
+0.01814 ordinary versus 0.02976 prospective, a +0.01162 gap or 64% increase.
+All six task gaps and all three world means were positive. Adam 0.05 and LBFGS
+independently reached essentially the same arm-specific endpoints and both pass
+the registered replicated-harm gate. All cells were finite. This is the frozen
+decision tree's REPRESENTATIONAL OPPORTUNITY LOSS branch, not the proposed
+optimizer/findability branch.
+
+"Near-oracle" is an operational budget, not proof of a global optimum. Require
+optimizer agreement and inspect support as well as query convergence before
+using this label. Here the three endpoint pairs cluster near 0.018 versus 0.030,
+and prospective final support MSE is also higher, so the result is not one bad
+optimizer failing to reach the same basin.
+
+The k=1 deficit also survives primary Adam, LBFGS, and support-selected
+perturbation restarts, but the decision tree prioritizes opportunity loss
+because harm already survives abundant support. Do not claim V6R cleanly
+separates all contributing mechanisms.
+
+DESIGN CONSEQUENCE: the next earned mechanism is representational, not merely a
+new updater. Test a typed decomposition `SHARED SCHEMA + FAST ARGUMENT +
+PRIVATE INNOVATION`, first as an existence/use experiment. A successful
+architecture must preserve cheap coordinates for novelty rather than only
+compressing family regularity.
+
+
+================================================================================
+REVIEW 58: EARN EACH COMPONENT; EXPRESSIBILITY IS NOT FINDABILITY (2026-08-21)
+================================================================================
+
+Review 58 (`reviews/reviewer-feedback-58.txt`, indexed) turned the V6R fork
+into a hypothesis tree, H37-H46, registered in `PREDICTIONS.md` with the
+reviewer's predictions attached. Its durable content for this file:
+
+ACQUISITION COST HAS TWO INDEPENDENT AXES. C_acquire = C_express + C_find:
+whether a cheap solution EXISTS in the representation, and whether a given
+updater can FIND it cheaply. V6R's audit is the first measurement on that
+grid: all three high-budget optimizers leave an abundant-support opportunity
+gap, while primary Adam and LBFGS also remove most, but not all, of the k=1
+standardized endpoint gap. It therefore establishes a C_express component
+without ruling out C_find. This is the same distinction that will govern
+program synthesis later — a short program existing in the language versus
+the synthesizer finding it — and it is why the eventual language objective
+must carry D*(L) + E[C_express] + E[C_find] rather than description length
+alone.
+
+THE WORKING DEFINITION OF A GOOD ABSTRACTION IS NOW TWO-SIDED: it compresses
+what is common WHILE providing cheap coordinates for what can vary. A bad
+abstraction can summarize the past perfectly and still make the next
+distinction difficult to express. Compression of regularity is not
+identifiability of novelty.
+
+EARN EACH COMPONENT SEPARATELY. The candidate endpoint — SHARED SCHEMA +
+FAST ARGUMENT + PRIVATE INNOVATION + LEARNED UPDATER — is NOT to be built as
+a unit. H37 chose the branch (representation, not optimizer); H39 tests the
+fast argument channel against an equal-sized generic code at matched budget;
+H40 tests exact-null innovation; H41 tests whether argument identifiability
+predicts Phi better than R_effective does; H44 reframes H35 as an
+architectural sharing-capacity sweep rather than an objective-weight sweep.
+Each mechanism enters only after its own hypothesis licenses it.
+
+REVIEWER-PREDICTION SCOREKEEPING: review 58's core H37 prediction of equal
+high-budget arm endpoints was falsified within hours: the k=128 prospective
+cost remained 64% higher across three optimizers. Its narrower prediction of
+substantial but incomplete shrinkage was supported at k=1 by primary Adam
+(88%) and approximately by LBFGS (80%), though not by Adam 0.05. The hybrid
+guess remains plausible, but the registered tree makes the representation
+branch active because opportunity loss is already present with abundant
+support. Record reviewer predictions beside ours precisely enough that this
+calibration remains visible.

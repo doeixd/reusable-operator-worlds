@@ -1024,7 +1024,19 @@ settings. No allocation produced reliable prospective fertility, and
 FACTORIZE won 0/12 scoreable prospective cells (0/34 overall). V6 therefore
 closes in development without a confirmatory block: plasticity influences
 where recurrence is stored, but the current objective never makes that
-structure economical for future acquisition.
+structure economical for future acquisition. A subsequently frozen
+adaptation-geometry audit localized the deficit. With the representation fixed
+and 128 support examples, 2,000-step Adam reached scaled query endpoints of
+0.01814 for ordinary versus 0.02976 for prospective, a 64% increase; all six
+paired tasks and all three world means favored ordinary. Adam at a second
+learning rate and LBFGS independently converged to nearly identical arm-specific
+endpoints. Thus the tested pressure damaged the representational opportunity
+available through fresh task code and private residual, rather than merely
+miscalibrating the original 40-step optimizer. This is an operational
+finite-budget localization, not a proof of global impossibility. Together the
+results sharpen `geometry != fertility`: compressing common structure does not
+ensure cheap coordinates for learning novel variation, motivating an explicit
+shared-schema/fast-argument/private-innovation factorization.
 
 Why should anyone working at scale care about a 16-dimensional world?
 Because the criterion is scale-free and the phenomena it isolates have

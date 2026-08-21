@@ -1092,3 +1092,8 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   mismatched summaries. Encode sweep-specific inner/outer steps per job; require
   model, summary, provenance, and fingerprint files; refuse a non-empty
   mismatched target; and exit nonzero if any cell fails.
+- Treat "oracle" adaptation as a finite operational envelope, never proof of a
+  global optimum. Freeze the representation, optimize support only, keep query
+  labels out of selection, include abundant-support and sparse-support cells,
+  and require agreement across materially different optimizers before assigning
+  a capacity, identifiability, or findability mechanism.

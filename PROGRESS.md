@@ -2709,3 +2709,55 @@ V6 is closed in development without opening confirmatory seeds. H30, H31, H33,
 and H35 are unsupported; H32's original threshold is non-diagnostic; H34 and
 H36 were correctly gated off. The remaining question is localization:
 representational opportunity versus adaptation findability.
+
+# 2026-08-21 — H37 V6R LOCALIZES REPRESENTATIONAL OPPORTUNITY LOSS
+
+Froze `V6R_ADAPTATION_GEOMETRY_PLAN.md` and its preregistration hash before
+writing or running the audit. Added `audit_v6r_adaptation_geometry.py` with
+exact historical-anchor reproduction, fixed high-budget Adam and LBFGS fits,
+support-only restart selection, full frozen-representation reconstruction, and
+machine-tested decision gates. The first invocation stopped before new fitting
+because the anchor reader expected a richer report schema; it wrote no report.
+After fixing only that reader, all 12 anchor values reproduced exactly.
+
+The completed report is `reports/v6r_adaptation_geometry.json`. At k=128,
+primary Adam 0.01 gives ordinary/prospective scaled query endpoints
+0.01814/0.02976 (gap +0.01162, +64%). Every task and world gap is positive.
+Adam 0.05 gives +0.01145 and LBFGS +0.01207; all three optimizers pass the
+registered representational-opportunity-loss gate, and every fit is finite.
+The primary k=1 gap is +0.03426 and support-selected restarts preserve it.
+
+H37 therefore resolves the registered fork toward lost representational
+opportunity under the allowed task-local interface, not optimizer-only
+findability. This remains an operational finite-budget result, not proof of a
+global optimum. The earned successor is an existence/use test of an explicit
+shared-schema, fast-argument, private-innovation factorization.
+
+# 2026-08-21 — REVIEW 58 INTEGRATED: H38-H46 REGISTERED AS THE FERTILITY DECISION TREE
+
+Saved review 58 as `reviews/reviewer-feedback-58.txt` and indexed it along
+with the previously unindexed reviews 56 and 57 (plus a numbering note
+recording that 54/55 have no preserved feedback files — review 55's content
+lives in PREDICTIONS.md and the learnings). Updated the review-index header,
+which still described the arc as ending "into V3 design."
+
+Registered review 58's hypothesis tree H38-H46 in `PREDICTIONS.md` with the
+reviewer's per-hypothesis predictions attached, the binding discipline rule
+(earn each component separately; H37 chooses the branch), and two honest
+status annotations where the review's writing predates data this project
+already holds: H43's directional claim is supported by the completed
+allocation sweep while its intermediate-fertile-regime hope is not, and H37
+itself has already resolved to the representational-opportunity-loss branch
+(`reports/v6r_adaptation_geometry.json`). This falsifies the reviewer's core
+prediction that high-budget ordinary/prospective endpoints would become equal,
+but not the narrower expectation of partial shrinkage: primary Adam reduced
+the k=1 endpoint gap by 88%, while a replicated residual and the k=128 gap
+remained. The active branch is therefore H39 -> H40 -> H41 -> H44;
+H38/H42/H46 remain registered as the findability research line but are not
+licensed as the next mechanism.
+
+Recorded the durable lessons in `notes/learnings.txt`: acquisition cost
+decomposes as C_express + C_find; a good abstraction compresses what is
+common while providing cheap coordinates for what can vary; and each
+component of SHARED SCHEMA + FAST ARGUMENT + PRIVATE INNOVATION + LEARNED
+UPDATER must be earned by its own hypothesis rather than built as a unit.
