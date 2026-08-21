@@ -987,3 +987,22 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   refactor can achieve. Use it to kill or keep a whole class of remedies
   in one measurement, rather than sampling the class one adapter at a
   time.
+- A NESTED objective has TWO non-vacuity requirements, and V6 checked
+  only one. The inner learner must actually learn, AND the outer
+  gradient must actually depend on that learning. The V6 prospective
+  arm verified the second and shipped an inner loop that moved the
+  support loss by 0.000%, so it charged a zero-shot loss and silently
+  ran a different objective than the registered one. Constitutional for
+  any meta-learning rung: inner loss materially decreases; inner state
+  materially changes; query loss is evaluated after that change; the
+  outer gradient changes when the inner adaptation is disabled; and
+  k = 0 versus k = many objectives are measurably different. The last
+  is the cheapest and catches this whole class.
+- Invalidated artifacts get a MACHINE-CHECKABLE manifest, not a
+  paragraph. `artifacts/INVALID_MANIFEST.md` plus
+  `tools/check_invalid.py`, run alongside `check_prereg.py`. And retire
+  the path: rebuilding corrected runs into an invalidated directory
+  makes "invalid" and "rebuilt" indistinguishable to the checker.
+- A guard that parses its own input must fail when it parses nothing.
+  The first `check_invalid.py` omitted `re.MULTILINE`, matched zero
+  paths, and printed a clean pass over a manifest listing six.

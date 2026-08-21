@@ -127,3 +127,65 @@ class InnerAdaptationTest(unittest.TestCase):
             ProspectiveLifecycleLearner.prospective_penalty)
         self.assertEqual(
             signature.parameters["inner_optimizer"].default, "adam")
+
+
+class NestedObjectiveNonVacuityTest(unittest.TestCase):
+    """A nested objective has TWO non-vacuity requirements, not one.
+
+    The inner learner must actually learn, AND the outer gradient must
+    actually depend on that learning. V6 verified the second and not the
+    first, and shipped an arm whose inner loop moved the support loss by
+    0.000% -- so the "adaptation cost" it charged was a zero-shot loss
+    and the prospective arm was silently running the family-sharing
+    objective (review 54).
+    """
+
+    def _batches(self, seed: int):
+        generator = torch.Generator().manual_seed(seed)
+        return (torch.randn(16, 8, generator=generator),
+                torch.randn(16, 8, generator=generator),
+                torch.randn(16, 8, generator=generator),
+                torch.randn(16, 8, generator=generator))
+
+    def test_zero_step_and_full_step_objectives_differ(self) -> None:
+        # The cheapest possible check that the adaptation objective is
+        # alive: if k = 0 and k = many give the same penalty to float
+        # noise, the objective is dead however plausible the code looks.
+        learner = _learner()
+        support_x, support_y, query_x, query_y = self._batches(21)
+        zero = float(learner.prospective_penalty(
+            "s0", support_x, support_y, query_x, query_y, steps=0).detach())
+        learner.forget_task("s0")
+        full = float(learner.prospective_penalty(
+            "s1", support_x, support_y, query_x, query_y, steps=32).detach())
+        self.assertGreater(
+            abs(zero - full), 1e-3 * max(abs(zero), 1.0),
+            f"zero-step penalty {zero:.6f} and 32-step penalty {full:.6f} are "
+            "indistinguishable: the adaptation objective is not doing anything",
+        )
+
+    def test_more_adaptation_lowers_the_charged_cost(self) -> None:
+        # Direction matters too: adapting further should make the
+        # sibling cheaper, not merely different.
+        #
+        # The targets must be a FUNCTION of the inputs. With independent
+        # random targets, 32 steps on 16 support points simply overfits
+        # noise and the query loss rises (measured 59.2 -> 57.0 -> 75.5),
+        # which says nothing about the mechanism.
+        learner = _learner()
+        generator = torch.Generator().manual_seed(22)
+        weight = torch.randn(8, 8, generator=generator) * 0.3
+        support_x = torch.randn(64, 8, generator=generator)
+        query_x = torch.randn(64, 8, generator=generator)
+        support_y = torch.tanh(support_x @ weight)
+        query_y = torch.tanh(query_x @ weight)
+        costs = []
+        for index, steps in enumerate((0, 8, 32)):
+            name = f"probe{index}"
+            costs.append(float(learner.prospective_penalty(
+                name, support_x, support_y, query_x, query_y,
+                steps=steps).detach()))
+            learner.forget_task(name)
+        self.assertLess(costs[-1], costs[0],
+                        f"32 steps ({costs[-1]:.4f}) did not beat 0 steps "
+                        f"({costs[0]:.4f})")

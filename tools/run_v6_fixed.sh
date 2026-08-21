@@ -11,7 +11,7 @@
 # cell before this commit is invalid and was deleted.
 cd "$(dirname "$0")/.."
 for w in 0 1 2; do
-  out="artifacts/v6/prospective/world_${w}/lifecycle"
+  out="artifacts/v6/prospective_fixed/world_${w}/lifecycle"
   [ -f "$out/summary.json" ] && continue
   python -m row.experiments.mixed_lifetime --config configs/v5_h72.yaml \
     --model prospective --world-seed "$w" --r-meta 1.0 --meta-families 4 \
