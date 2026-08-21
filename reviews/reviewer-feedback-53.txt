@@ -1,0 +1,159 @@
+This is exactly the kind of V6 development sequence I was worried about, and the
+good news is that the experiment is getting cleaner rather than merely more
+complicated. The current status suggests three things very strongly.
+
+First, H30 HAS NOT FAILED YET. The low-weight prospective intervention was
+simply too weak to count as a meaningful causal test: a 54-nat change against
+roughly 192k nats of lifetime loss is about 0.03%. You were right to distinguish
+"no downstream effect" from "we actually changed the representation and
+fertility did not improve." The weight sweep is therefore justified, especially
+because H35 already registered that prospective pressure should have an optimum
+rather than being monotone.
+
+Second, REPLAY IS NOW A VERY SERIOUS BASELINE. It is the only arm positive in
+all three worlds at the current operating point, with mean Phi ~ 0.072 and
+relatively small dispersion. If that persists while stronger prospective
+pressure fails, the scientific conclusion should probably become: ordinary
+continual exposure to related tasks is sufficient to produce most available
+fertility in this substrate — rather than trying to rescue the meta-objective.
+That would still be useful, because it would tell us the missing V5 pressure was
+not necessarily an explicit "future adaptability" objective; it may simply have
+been continued shared-representation plasticity across related tasks.
+
+Third, the frozen/unfrozen contrast has exposed a major architecture-level
+interaction: freeze basis => M ~ 7 but prospective gradient dead; unfreeze basis
+=> M ~ 2-5 but prospective gradient live. That is probably not a nuisance. It is
+telling us that WHERE PLASTICITY IS ALLOWED DETERMINES WHERE RECURRENCE GETS
+STORED.
+
+## The next experiment I would prioritize
+
+The partial-freeze experiment is the right next move, but I would treat it as
+more than an H33 workaround. Sweep the number of trainable shared slots,
+n_free in {0, 1, 2, 3, 6} or an equivalent grid. For each cell record M, Phi,
+R_effective, J_COMPRESS - J_FACTORIZE, and perhaps the fraction of family
+computation carried by basis, routes, and promoted atoms.
+
+You may get a genuinely interesting phase diagram: plastic shared basis <->
+explicit promoted library. Too much frozen capacity forces recurrence into
+explicit objects. Too much trainable capacity lets the shared substrate absorb
+everything continuously. Some intermediate point may be where prospective
+gradients can reshape representation, enough discrete abstractions still form,
+and higher-order factorization becomes testable. That could be much more
+important than simply finding a configuration where H33 runs.
+
+## I would preregister three possible outcomes
+
+1. STRONGER PRESSURE IMPROVES Phi BEYOND REPLAY. Then H30 becomes interesting
+   again. The strongest result would be Phi_prospective > Phi_replay > 0 across
+   worlds with current-task performance and representation cost matched —
+   evidence that seeing related experience helps but explicit future-learning
+   pressure adds something above ordinary continual learning.
+2. REPLAY REMAINS BEST. Then don't fight it. The next question becomes why
+   replay forms more fertile representations, which points toward an
+   optimization-path explanation rather than a special prospective objective:
+   repeated gradients across related tasks may align shared computation enough
+   to break representational degeneracy on their own. Elegant and simpler.
+3. STRONG PRESSURE HURTS. Fairly plausible. Then H35 becomes the main result:
+   Phi rises then falls with eta, because aggressive prospective training forces
+   unrelated computations into an overly shared geometry. That gives the
+   specialization-fertility frontier we expected.
+
+# One thing I would change about the supervised upper bound
+
+Your corrected supervised arm is better than the no-op, but I would be cautious
+about calling it a SUBSTRATE UPPER BOUND. "Make sibling predictable from
+relative's route without adaptation" is stronger and more specific than "can the
+substrate represent family structure?" So if it fails, that does NOT mean the
+substrate cannot support fertility. I would label it EXPLICIT-FAMILY-SHARING
+PRESSURE instead.
+
+A true architecture capability bound would be more direct: give family labels
+and explicitly optimize a functional shared-subspace criterion,
+min sum_f |F_f - S_hat(alpha_f)|^2, while retaining task performance. If even
+that cannot raise R_effective, you really do have an architectural bottleneck.
+But I wouldn't block the current work to implement it.
+
+# The "novel family" choice deserves careful framing
+
+The adaptation probe now evaluates a family unseen during the lifetime because
+members of seen families were almost zero-shot already. That's useful, but it
+changes the interpretation. Originally: does learning family f make another
+member of f cheaper? Now: does the representation learned from some families
+make a NEW FAMILY drawn from the same meta-distribution easier to acquire? That
+is a more ambitious and arguably more interesting notion — META-FERTILITY rather
+than within-family transfer.
+
+Preserve both eventually: Phi_within for unseen members of seen families, and
+Phi_meta for unseen families. The fact that Phi_within has ceiling effects is
+itself informative: the unfrozen basis already generalizes so well within family
+that there is little economic room left. That may be telling you the true useful
+future is indeed the NEXT ABSTRACTION FAMILY, not the next member.
+
+# This could change our interpretation of V5 too
+
+V5 found higher-order teacher structure that learned promoted atoms did not
+expose. But fully unfrozen learning gives M ~ 2-5 and seen-family held-out tasks
+nearly solved zero-shot. That suggests some of the "missing explicit schema" may
+not be missing computation at all — it may have been absorbed into a CONTINUOUS
+SHARED SUBSTRATE.
+
+This connects back to V1/V2: partial recurrence favors a continuous operator
+manifold; exact recurrence favors explicit atoms. Perhaps V6 is rediscovering
+the same phenomenon one level higher: a continuous shared representation may
+absorb higher-order recurrence before discrete schema birth becomes economical.
+That would explain why H33 and H30 naturally want different freeze regimes. If
+true, it is not a tooling inconvenience. It is a representation phase
+transition.
+
+## That suggests a new measurement
+
+For each freeze setting, measure where the family/meta-family signal lives:
+R_basis, R_route, R_residual, R_promoted, R_effective. You may see: more plastic
+basis => R_basis up, M down; more frozen basis => R_promoted up, M up. Then the
+deeper question becomes not "did FACTORIZE appear?" but AT WHAT LEVEL DOES THE
+LEARNER CHOOSE TO STORE RECURRENT STRUCTURE AS THE ECONOMICS AND PLASTICITY
+CONSTRAINTS CHANGE? That is very much in the spirit of the whole project.
+
+# I also like the stricter H30 criterion
+
+Changing the scorer after seeing that a weak positive mean with huge variance
+printed PASS was necessary, and recording the change was the right way to do it.
+For development, use same-sign-in-every-world plus |mean Phi| > SD(Phi) as a
+DEVELOPMENT GATE, not a final inferential statistic. For any eventual sealed
+claim, freeze a proper criterion separately. The important lesson is that n = 3
+is a diagnostic, not evidence by itself.
+
+# My updated hypothesis probabilities
+
+Replay gives meaningful fertility: high probability. Strong prospective pressure
+beats replay: maybe 40-50%. Prospective pressure improves geometry but not
+downstream fertility: fairly plausible. An intermediate partial-freeze sweet
+spot where H33 becomes positive: maybe 50%. Fully unfrozen basis makes explicit
+schema unnecessary because continuous sharing already solves the useful
+transfer: also quite plausible.
+
+That last one would be scientifically valuable. It could mean the hierarchy
+isn't residual -> atom -> schema at every stage. It may be: continuous shared
+manifold -> discrete atom only when recurrence becomes sufficiently
+exact/economical -> higher-order schema only when the next level also crosses
+its own amortization boundary. Which is remarkably consistent with V1-V5.
+
+# So my immediate recommendation
+
+Finish the registered weight sweep. Then, regardless of whether prospective
+weight 10/100 works, run the PARTIAL-FREEZE SWEEP AS A REPRESENTATION-ALLOCATION
+EXPERIMENT, not merely an H33 repair. Central table: free shared capacity vs
+Phi, R_effective, M, FACTORIZE margin, current loss, for ordinary/replay/
+prospective.
+
+If a coherent frontier emerges, V6 may become less about "prospective objective
+yes/no" and more about something deeper: PROSPECTIVE LEARNING PRESSURE AND
+ARCHITECTURAL PLASTICITY JOINTLY DETERMINE THE LEVEL AT WHICH REUSABLE STRUCTURE
+BECOMES EXPLICIT. That would unify several otherwise disconnected observations
+from the entire project.
+
+And keep the same discipline: each apparent null needs to survive a gradient
+check, a dynamic-range check, a future-task validity check, and a non-vacuity
+check before it gets to become a scientific result. The run log is basically a
+case study in why that rule matters.

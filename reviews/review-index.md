@@ -2366,3 +2366,57 @@ meta-learning and explicit language formation are distinct steps. Closes by
 naming the most exciting possible outcome: not "prospective beats standard" but
 a phase diagram of specialize ↔ preserve flexibility ↔ form reusable
 abstraction, driven by the expected economics of the future.
+
+### [reviewer-feedback-53.txt](reviewer-feedback-53.txt)
+Reads the V6.1 development sequence and makes three calls. H30 HAS NOT FAILED —
+a 54-nat change against ~192k of lifetime loss (0.03%) is too weak to count as a
+causal test, so the weight sweep is justified and H35 already registers that the
+pressure should have an optimum. REPLAY IS NOW A SERIOUS BASELINE, positive in
+3/3 worlds at mean Φ ≈ 0.072 with small dispersion; if it survives while stronger
+prospective pressure fails, the conclusion should be that ordinary continual
+exposure to related tasks already produces most available fertility, meaning the
+pressure V5 found missing was continued shared-representation plasticity rather
+than an explicit future-adaptability objective. And the frozen/unfrozen contrast
+(M ≈ 7 with dead gradients vs M ≈ 2–5 with live ones) is not a nuisance: WHERE
+PLASTICITY IS ALLOWED DETERMINES WHERE RECURRENCE GETS STORED.
+
+Redirects the partial-freeze work from an H33 repair into a
+REPRESENTATION-ALLOCATION experiment: sweep trainable shared slots n_free ∈
+{0,1,2,3,6} and record M, Φ, R_effective, the FACTORIZE margin, and where the
+family signal lives (basis / routes / promoted atoms). Predicts a phase diagram
+— plastic shared basis ↔ explicit promoted library — with an intermediate point
+where gradients can reshape representation, discrete abstractions still form,
+and higher-order factorization becomes testable.
+
+Three preregistered outcomes: stronger pressure beats replay (H30 revives);
+replay stays best (points to an optimization-path explanation — repeated
+gradients across related tasks breaking representational degeneracy, simpler and
+more elegant); or strong pressure hurts (H35 becomes the main result, giving the
+specialization–fertility frontier).
+
+Two corrections. The corrected supervised arm should NOT be called a substrate
+upper bound — "make a sibling predictable from a relative's route with no
+adaptation" is stronger and more specific than "can the substrate represent
+family structure", so its failure would not license an architectural verdict;
+relabel it EXPLICIT-FAMILY-SHARING PRESSURE, with a true capability bound being
+direct optimization of a functional shared-subspace criterion. And the novel-
+family probe changed the construct: it now measures META-FERTILITY (a new family
+from the same meta-distribution) rather than within-family transfer. Keep both
+Φ_within and Φ_meta; the ceiling on Φ_within is itself informative, suggesting
+the useful future is the next abstraction FAMILY, not the next member.
+
+Reinterprets V5 in light of this: with M ≈ 2–5 and seen-family tasks nearly
+zero-shot, some of the "missing explicit schema" may not be missing computation
+but computation ABSORBED INTO A CONTINUOUS SHARED SUBSTRATE — the V1/V2 result
+(partial recurrence favours a continuous manifold, exact recurrence favours
+explicit atoms) reappearing one level up. If so the hierarchy is not
+residual → atom → schema at every stage, but continuous manifold → discrete atom
+only when recurrence is exact enough to pay → higher-order schema only when the
+next level crosses its own amortization boundary, which is consistent with V1–V5.
+
+Endorses the stricter H30 criterion as a DEVELOPMENT GATE (same sign in every
+world plus |mean| > SD) while insisting a sealed claim needs its own frozen
+criterion, since n = 3 is a diagnostic and not evidence. Closes with the
+discipline rule the run log illustrates: every apparent null must survive a
+gradient check, a dynamic-range check, a future-task validity check, and a
+non-vacuity check before it becomes a scientific result.
