@@ -3176,3 +3176,42 @@ guess remains plausible, but the registered tree makes the representation
 branch active because opportunity loss is already present with abundant
 support. Record reviewer predictions beside ours precisely enough that this
 calibration remains visible.
+
+
+================================================================================
+REVIEW 59: ABSTRACTION MUST PRESERVE A COORDINATE SYSTEM FOR NOVELTY (2026-08-21)
+================================================================================
+
+Review 59 (`reviews/reviewer-feedback-59.txt`) reads V6R as closing the
+optimizer rescue: three materially different high-budget optimizers agree the
+prospective representation's reachable future solutions are ~64% worse through
+the task-local interface. Learned optimizers are DEPRIORITIZED for the main
+line; H38/H42/H46 stay registered but inactive.
+
+STRONGER FORM OF THE V6 LESSON. Not "geometry != fertility" but: compressing
+recurring information can make useful NEARBY functions more expensive or
+unreachable. An abstraction has two sides — what it identifies and what it
+leaves easy to vary — and can be excellent at the first while poor at the
+second. R_effective measured only the first.
+
+PROGRAM-SYNTHESIS ANALOGUE, worth carrying forward. An opaque macro
+M = A o B o C shortens old traces but can make the family A o B(alpha) o C
+costlier to express; the primitive that survives is M(alpha). The neural
+S(alpha) + eps experiment is therefore testing the SHAPE of the eventual
+language's primitives, not detouring before it.
+
+NUMBERING COLLISIONS BETWEEN REVIEWS ARE A LEDGER HAZARD. Review 59 reused
+H40-H42 for different content than review 58 registered. Append-only means
+the registered numbers win and the mapping is written down explicitly
+(PREDICTIONS.md, REVIEW 59 entry); never renumber a registered hypothesis to
+match a later document.
+
+ORDER THE EXISTENCE CHECKLIST BEFORE DATA. The H39 experiment has eight
+ordered questions; 1-5 (parity, D*, near-oracle endpoint, few-shot, related-
+specificity) are the H39 gate, 6-8 belong to H41/H40/H44. Registered now so
+a partial pass cannot be re-described as the gate afterwards.
+
+CANDIDATE THREE-TERM CRITERION, not yet a rule: Value(A) = compression
+savings + search savings - lost variation opportunity. No instrument for the
+third term exists; V6R's frozen-representation k=128 gap is the nearest
+measurement. Build the instrument before using the criterion.

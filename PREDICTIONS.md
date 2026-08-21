@@ -4039,3 +4039,75 @@ H39-H41 the next one to test.
 
 None of H38-H46 opens or implies a sealed block. All are development-stage
 hypotheses; any confirmatory run requires its own frozen plan.
+
+# REVIEW 59 (2026-08-21): H37 READ AS OPPORTUNITY LOSS; REPRESENTATION BRANCH CONFIRMED ACTIVE
+
+Registered from `reviews/reviewer-feedback-59.txt`, written after the V6R
+result. This entry appends; it registers no new sealed block and opens no
+seeds.
+
+## Numbering reconciliation (binding)
+
+Review 59 labels its ladder H39-H42 with a different assignment from the
+review-58 tree already registered above. The registered numbers stand. The
+review's content maps as follows:
+
+- review-59 "H39" (existence test: explicit S/alpha/eps channels, no teacher
+  values, L*_future lower at matched present loss and D*) -> registered H39.
+- review-59 "H40" (matched-capacity generic task-code/residual control) ->
+  the equal-sized generic-code CONTROL already required inside registered
+  H39; it is not a separate hypothesis number.
+- review-59 "H41" (argument identifiability predicts C_acquire better than
+  R_effective) -> registered H41.
+- review-59 "H42" (exact-null innovation, g_i = 0, unrelated tasks not
+  forced through the schema) -> registered H40.
+- Registered H42 (expressibility vs findability axes) is untouched by
+  review 59.
+
+## Reviewer position, registered verbatim in substance
+
+The optimizer-only account is "increasingly implausible"; the V6 prospective
+objective damaged the set of useful future solutions reachable through the
+task-local interface. Learned optimizers are deprioritized for the main ROW
+line (H38/H42/H46 remain registered but inactive). The next earned mechanism
+is SHARED SCHEMA + FAST ARGUMENT + PRIVATE INNOVATION, built first as the
+smallest ORACLE-FORM architecture on the V6 worlds — not as learner-discovered
+decomposition, which is a later question, and not as program synthesis, which
+is later still.
+
+## Registered ordered checklist for the H39 existence experiment
+
+To be frozen in the H39 plan before any lifetime runs; listed here so the
+order cannot be rearranged after data:
+
+1. present-task parity with the ordinary arm;
+2. D* preserved or reduced;
+3. near-oracle (k=128, three-optimizer, V6R instrument) future endpoint
+   improves;
+4. finite few-shot (k=1) acquisition improves;
+5. gain specific to related futures (unrelated futures unchanged);
+6. alpha identifiable quickly (registered H41 instruments);
+7. exact-null eps refuses inappropriate sharing (registered H40);
+8. learned library exposes schema economics.
+
+Items 1-5 are the H39 gate; 6-8 belong to H41/H40/H44 and are not H39
+pass/fail criteria.
+
+## Long-term criterion, registered as a CANDIDATE, not a rule
+
+Review 59 proposes replacing `PROMOTE iff N * s_bar > D*(A)` with
+`Value(A) = compression savings + search savings - lost variation
+opportunity`. No instrument for "lost variation opportunity" exists yet;
+V6R's k=128 frozen-representation gap is the closest measurement. This is
+recorded so that any future claim that the amortization law was "always"
+three-term can be checked against the date it was first written.
+
+## Reviewer predictions attached for scorekeeping
+
+- H39 existence test: if it fails with the architecture handed to the
+  learner, "the entire schema/argument idea is probably wrong for this
+  substrate" (reviewer's own falsification condition).
+- H41: identifiability cost tracks C_acquire "much better than R_effective";
+  review 58 rated this "fairly likely".
+- Registered H40 (exact-null): related tasks use S+alpha, atypical tasks
+  activate eps, controls not forced through the schema.

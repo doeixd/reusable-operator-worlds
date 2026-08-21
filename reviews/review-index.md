@@ -5,7 +5,8 @@ order, with a one-paragraph summary of each. The reviews follow the project
 from the initial encouraging pilot through V1 confirmation, V2's sealed
 replication, V3's abstraction birth, V4/V4R's lifecycle economics, V5's
 sealed amortization law and the review-55 audit corrections, and V6's
-prospective-fertility negative.
+prospective-fertility negative and the V6R localization to representational
+opportunity loss.
 
 ## Files
 
@@ -2540,3 +2541,29 @@ update rule, and partly because task variation lacks a clean fast coordinate
 system — so H37 should remove some but not all of the deficit, and each
 component (SHARED SCHEMA + FAST ARGUMENT + PRIVATE INNOVATION + LEARNED
 UPDATER) must be earned separately rather than built because it sounds good.
+
+### [reviewer-feedback-59.txt](reviewer-feedback-59.txt)
+Response to the V6R / H37 result. Reads the three-optimizer k=128 gap
+(0.018 ordinary vs 0.030 prospective, +64%, every task/world positive) as
+ruling out the "optimizer just can't find what's there" rescue: the V6
+prospective objective **damaged the set of useful future solutions reachable
+through the task-local interface**. Consequence: deprioritize learned
+optimizers for the main ROW line; the earned next mechanism is representational
+— SHARED SCHEMA + FAST ARGUMENT + PRIVATE INNOVATION. Restates the ladder as an
+existence test (explicit S/α/ε channels, no teacher values, lower near-oracle
+future endpoint at matched present loss and D*), a matched-capacity generic
+task-code control, argument identifiability as the predictor of C_acquire
+(over R_effective), and exact-null innovation (g_i = 0) so unrelated tasks
+are not forced through the schema. NOTE: its H40/H41/H42 labels differ from
+the registered review-58 numbering; PREDICTIONS.md maps them. Conceptual
+update: a useful abstraction must preserve a good coordinate system for
+novelty — two sides, what gets identified and what remains easy to vary.
+Program-synthesis reading: an opaque macro M = A∘B∘C compresses old traces
+but can make the nearby family A∘B(α)∘C costlier; the right primitive is
+M(α). Proposes the long-term criterion Value(A) = compression savings +
+search savings − lost variation opportunity. Concrete plan: stop diagnosing
+V6; build the smallest oracle-form S+α+ε architecture on the V6 worlds and
+check, in order, present-task parity, D*, near-oracle future endpoint,
+few-shot adaptation, related-specificity, α identifiability, exact-null
+refusal, and schema economics — only then ask whether the learner can
+discover the decomposition itself.

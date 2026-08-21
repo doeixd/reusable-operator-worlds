@@ -1,0 +1,177 @@
+Reviewer feedback 59 — received 2026-08-21, after the V6R / H37 result
+(`reports/v6r_adaptation_geometry.json`) and the review-58 integration.
+
+NUMBERING NOTE (added at filing, not part of the review): this review labels
+its ladder H39-H42 with H40 = matched-capacity control, H41 = argument
+identifiability, H42 = exact-null innovation. PREDICTIONS.md had already
+registered review 58's tree with H40 = exact-null innovation, H41 =
+identifiability, H42 = expressibility/findability. The ledger is append-only,
+so the registered numbers stand; the mapping is recorded in PREDICTIONS.md
+under "REVIEW 59". Text below is verbatim.
+
+----------------------------------------------------------------------
+
+This is a major sharpening of the story. H37 rules out the most attractive
+"maybe the optimizer just can't find what is already there" rescue.
+
+The key result is:
+
+    L*_ordinary ~ 0.018        L*_prospective ~ 0.030
+
+under three materially different high-budget optimizers, with the prospective
+representation about 64% worse at k=128, and every task/world comparison going
+the same direction.
+
+So the best current interpretation is:
+
+    THE V6 PROSPECTIVE OBJECTIVE DAMAGED THE SET OF USEFUL FUTURE SOLUTIONS
+    AVAILABLE THROUGH THE TASK-LOCAL INTERFACE.
+
+Not merely: it made the same solutions harder for Adam to find.
+
+The finite-optimizer caveat you've kept is exactly right. You haven't proved a
+global optimum, but agreement among Adam at two learning rates and LBFGS makes
+the optimizer-only explanation increasingly implausible.
+
+## This resolves the next branch
+
+I would now deprioritize learned optimizers for the main ROW line. The
+model+optimizer idea remains independently interesting, but H37 says it is not
+the earned repair for this specific failure.
+
+The earned next mechanism is representational:
+
+    SHARED SCHEMA + FAST ARGUMENT + PRIVATE INNOVATION
+
+And I think there is now a very clean hypothesis ladder for it.
+
+### H39 — Explicit argument factorization creates representational opportunity
+
+Construct tasks as T_i = S(alpha_i) + eps_i. Compare the current flexible
+representation against one where the learner is explicitly given architectural
+channels for: slow shared S; small fast alpha_i; private eps_i. Do NOT give
+teacher values.
+
+Prediction: L*_{future,factorized} < L*_{future,current} at matched current
+performance and D*. This is the existence test. If this fails even with the
+architecture handed to the learner, the entire schema/argument idea is probably
+wrong for this substrate.
+
+## H40 — Fast arguments, not merely more capacity, cause the gain
+
+This needs a matched-capacity control. Compare S+alpha+eps against an equally
+sized generic task code/residual model.
+
+Prediction: C_acquire^{S+alpha+eps} < C_acquire^{generic} despite equal or
+closely matched parameter and description budgets. Otherwise we may simply have
+created a larger/more convenient task-local channel.
+
+## H41 — Argument identifiability predicts fertility
+
+This is the mechanism I now find most compelling. For a new task, ask how
+quickly sparse examples identify alpha. Measure: argument recovery error versus
+shots; Fisher information / Jacobian spectrum in alpha; posterior or
+optimization uncertainty; samples-to-criterion.
+
+Prediction: C_acquire tracks argument-identification cost much better than
+R_effective.
+
+This would explain V6 neatly. The prospective learner slightly improved
+R_effective while destroying future opportunity. The factorized learner should
+instead improve the property that actually matters: few examples -> correct
+task-specific coordinates.
+
+## H42 — Exact-null innovation prevents the schema from becoming a straitjacket
+
+Use T_i = S(alpha_i) + g_i eps_i where g_i = 0 is a literal no-innovation
+state.
+
+Prediction: highly related tasks mostly use S+alpha; atypical tasks activate
+eps; unrelated/control tasks are not forced through an inappropriate schema.
+
+This is crucial because V6 demonstrated exactly the danger of overusing shared
+structure, even though literal over-alignment was not the measured mechanism.
+The system needs a cheap way to say: "This new thing is not explained by the
+current abstraction."
+
+# The really important conceptual update
+
+H37 makes the lesson stronger than geometry != fertility. It's now closer to:
+
+    A USEFUL ABSTRACTION MUST PRESERVE A GOOD COORDINATE SYSTEM FOR POSSIBLE
+    NOVELTY.
+
+The V6 prospective representation did not merely make sparse optimization
+awkward. Even abundant-support fitting found a worse attainable future solution
+through the allowed interface. That means compressing recurring information can
+alter the representation such that some useful nearby functions become more
+expensive or inaccessible.
+
+So abstraction has two sides: what gets identified, and what remains easy to
+vary. A representation can be excellent at the first and poor at the second.
+
+# This is directly relevant to program synthesis
+
+I think H37 actually strengthens our program-language direction. The analogous
+failure would be: invent a macro that beautifully compresses known programs,
+but removes the cheap degrees of freedom needed to express nearby programs.
+
+Suppose M = A o B o C. That's a great compression of old traces. But future
+tasks need A o B(alpha) o C. An opaque M can make the old program shorter
+while making the family of nearby programs worse to express.
+
+The right primitive is: M(alpha) = A o B(alpha) o C.
+
+So the schema/argument/innovation experiment isn't a detour before program
+synthesis. It is testing the form that learned program primitives themselves
+probably need to take. The neural version S(alpha) + eps eventually becomes the
+language version P(alpha) + optional novel subprogram.
+
+# I would therefore revise the long-term abstraction criterion
+
+Previously: promote abstraction if N s_bar > D*(A).
+
+Eventually I think it becomes something like:
+
+    Value(A) = compression savings + search savings - lost variation opportunity.
+
+A new primitive or macro should not merely shorten yesterday's solutions. It
+should preserve — or improve — the ease of expressing tomorrow's nearby
+solutions. That's abstraction fertility in a much stronger sense than the
+original V6 metric.
+
+# What I would do next, concretely
+
+I would stop further diagnosis of the failed V6 objective. H37 has localized
+enough.
+
+Build the smallest possible oracle-form architecture experiment, S+alpha+eps,
+on the same worlds where V6 failed. Then ask, in order:
+
+1. Can it match ordinary present-task behavior?
+2. Does it preserve or reduce D*?
+3. Does near-oracle future-task endpoint cost improve?
+4. Does finite few-shot adaptation improve?
+5. Is the gain specific to related futures?
+6. Can alpha be identified quickly?
+7. Does exact-null eps refuse inappropriate sharing?
+8. Does the resulting learned library finally expose schema economics?
+
+Only if those pass should we ask: can the learner discover this decomposition
+itself? And only after that should we move into full compositional program
+synthesis.
+
+That path now looks unusually coherent:
+
+    V1-V5: when reuse is worth representing
+      -> V6: naive shared/prospective representation is insufficient
+      -> H37: failure is representational opportunity, not merely optimizer access
+      -> NEXT: shared structure + identifiable arguments + innovation
+      -> parameterized neural primitives
+      -> composition
+      -> program synthesis
+      -> fertile macros / language improvement
+
+In other words, the next experiment is no longer just about fixing V6. It's
+testing the basic shape of the vocabulary that the eventual learned language of
+thought may need.

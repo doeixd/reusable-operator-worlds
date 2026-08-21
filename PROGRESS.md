@@ -2761,3 +2761,23 @@ decomposes as C_express + C_find; a good abstraction compresses what is
 common while providing cheap coordinates for what can vary; and each
 component of SHARED SCHEMA + FAST ARGUMENT + PRIVATE INNOVATION + LEARNED
 UPDATER must be earned by its own hypothesis rather than built as a unit.
+
+# 2026-08-21 — REVIEW 59 INTEGRATED: REPRESENTATION BRANCH CONFIRMED, H39 CHECKLIST REGISTERED
+
+Saved review 59 as `reviews/reviewer-feedback-59.txt` and indexed it. The
+review reads V6R as closing the optimizer-only rescue and deprioritizes learned
+optimizers for the main ROW line; the earned next mechanism is the oracle-form
+SHARED SCHEMA + FAST ARGUMENT + PRIVATE INNOVATION architecture on the V6
+worlds.
+
+Its H39-H42 labels collide with the review-58 numbering already in
+`PREDICTIONS.md`. Kept the registered numbers and wrote the mapping into a new
+REVIEW 59 ledger entry (review-59 H40 is H39's matched-capacity control;
+review-59 H41 is H41; review-59 H42 is registered H40). Registered the
+reviewer's eight-item ordered checklist, with items 1-5 fixed as the H39 gate
+and 6-8 assigned to H41/H40/H44, and recorded the proposed three-term
+abstraction criterion as a candidate without an instrument. Learnings appended.
+
+No code, artifacts, or runs. Next step: freeze an H39 plan (architecture,
+matched-budget generic-code control, V6R k=128 instrument reuse, gate
+thresholds) before writing learner code.
