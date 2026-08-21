@@ -2575,3 +2575,74 @@ nothing leaves the previous answer in place, and nothing in the output
 says so. Capping the P_0 population at 24 and the null at 10 draws makes
 it tractable. Any audit that writes to a fixed path should either write
 a run stamp or refuse to read a report older than its inputs.
+
+## H29 INTERPRETATION CORRECTED (review 49): I measured the wrong unit
+
+The entry above says "roughly 90% of the available meta-structure is
+already missing in the private residuals, before PROMOTE runs at all",
+and then slides into treating that as a statement about the LEARNER.
+Those are not the same claim, and only the first is earned.
+
+WHAT IS ESTABLISHED: the learner's RESIDUAL OBJECTS carry little of the
+teacher's meta-family geometry before PROMOTE.
+
+WHAT IS NOT: that the learner as a whole has lost it. The wake learner
+has more places to put a family than the private residual. A task is
+solved as
+
+    shared basis  +  task route  +  private residual
+
+so two tasks drawing on the same teacher family can carry residuals that
+look unrelated because the common computation is split differently
+between the route and the residual. If so, R_pre = 0.095 does not mean
+the structure vanished; it means THE RESIDUAL TENSOR IS THE WRONG
+COMPUTATIONAL UNIT to call "the task's innovation" — which is a mistake
+this project has made before in a different costume (learner slot
+indices vs teacher primitive indices; parameter means vs functions).
+
+The claim that the REFACTOR ceiling is low is therefore also withdrawn
+pending the corrected measurement. It follows from the over-claim, not
+from the data.
+
+## The measurement that decides it: effective-operator H29
+
+Define, at the step where the family fires and on the on-trajectory
+state distribution,
+
+    F_tau(z)   the learner's ACTUAL transformation for task tau —
+               basis mixture, route, residual, everything
+    F_0(z)     the same with task-specific information nulled, not an
+               arbitrary parameter baseline
+    I_tau(z)   = F_tau(z) - F_0(z), the effective task-conditioned
+               innovation
+
+then run the same leave-one-out capture instrument on {I_tau} instead of
+{Delta_tau}, giving R_effective.
+
+REGISTERED FORK, before running it:
+
+    R_effective high (~0.7+)   the information was never lost, only
+                               DISTRIBUTED across the wake
+                               representation. PROMOTE has been
+                               promoting the wrong object, and
+                               abstraction boundaries should be found
+                               functionally rather than inherited from
+                               parameter boundaries.
+    R_effective low, cheap
+    adapters recover it        coordinate-equivalent computation, at the
+                               stage where it originates (H28/Hypothesis
+                               C, one stage earlier than review 48 put
+                               it).
+    R_effective low, local
+    adapters fail, one cheap
+    GLOBAL rotation Q works    the meta-structure exists at the level of
+                               the population, not in individual atoms.
+    nothing recovers it        the wake objective does not identify the
+                               fertile representation at all, and
+                               post-hoc REFACTOR cannot be sufficient.
+
+My expectation, registered: R_effective is materially higher than 0.095
+but not high — the route carries some of the family and the residual
+carries some, so neither unit alone shows it. That would put the answer
+between fork 1 and fork 3 and would make the global-rotation test the
+decisive one.
