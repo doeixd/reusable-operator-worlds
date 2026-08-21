@@ -1,0 +1,165 @@
+Yes. At this point I would CLOSE V5 COMPLETELY and move the main line of the
+project upstream, rather than continuing H22-H24.
+
+V5 has done its job: the economics work, but ordinary wake learning does not
+form representations that preserve the structure those economics could exploit.
+That is now the bottleneck. So I would make the next version:
+
+# V6 — Prospective Representation Formation
+
+The central question: can a learner be trained to represent today's tasks in a
+way that makes related future tasks cheaper to learn? That's the direct
+experiment suggested by H29.
+
+## The core hypothesis
+
+Standard wake optimizes J_now = L_current + lambda D*(R). V6 adds a prospective
+term:
+
+    J_prospective = L_current + lambda D*(R) + eta C_adapt(T_future | R)
+
+where C_adapt is the cost of learning a related held-out task from the
+representation currently being formed. The hypothesis is not merely that
+prospective training improves future accuracy. It should be: PROSPECTIVE
+PRESSURE SELECTS A DIFFERENT INTERNAL REPRESENTATION, AND THAT REPRESENTATION
+EXPOSES REUSABLE HIGHER-ORDER STRUCTURE.
+
+# V6.1 should be an existence test, not a clever learner
+
+Use the SAME H20 worlds. That matters because V5 already established that the
+teacher contains meta-structure, a schema is economically worthwhile, ordinary
+wake does not preserve enough of it, and post-hoc span-preserving refactoring
+cannot recover it. So don't change the world. Change only the objective.
+
+ARM A — ordinary wake. Exactly the V5 learner. Expected R_effective ~ 0.19.
+
+ARM B — prospective wake. While learning tasks from family f, provide an
+auxiliary held-out sibling task from the same family ONLY for the
+meta/prospective objective: learn current task; snapshot the representation;
+adapt to a held-out sibling for k examples; measure adaptation cost; update the
+earlier representation to make that adaptation cheaper. Essentially a tiny
+meta-learning problem. For the first experiment, using teacher family identity
+to CHOOSE the sibling is fine. Don't give it the teacher primitive. This is an
+existence proof: if we actually reward fertility, can the architecture represent
+the structure?
+
+# The first gate should be brutally simple
+
+Require ordinary and prospective arms to have comparable current-task
+performance and comparable representation budget. Then ask whether
+R_effective(prospective) > R_effective(ordinary). Not +2%. Given 0.19 against a
+teacher 1.0, something like 0.19 -> 0.5+ would be genuinely interesting. If
+prospective pressure can't move this measure at all, stop before implementing
+anything complicated.
+
+# But geometry alone absolutely cannot be the pass
+
+V4/V5 have beaten this lesson into us. Suppose R_effective goes 0.19 -> 0.7.
+Unless it causes economic/prospective benefit, it's decorative geometry. So
+V6.1 needs three nested gates.
+
+G1 — REPRESENTATION: R_effective up.
+G2 — HIGHER-ORDER ECONOMICS: rerun matched-frontier COMPRESS vs FACTORIZE on the
+     learned objects. V5 gave FACTORIZE 0/6. Does prospective wake turn that into
+     actual wins?
+G3 — FUTURE ACQUISITION: hold out a new member of the meta-family; compare
+     learning a full new operator against learning schema arguments / a small
+     innovation. Require lower prequential loss, samples, AND D*. This is the
+     most important gate. If it passes, the representation is genuinely more
+     fertile.
+
+# I would define fertility explicitly now
+
+    Phi(R) = E_{T'~F}[ C_adapt(T' | R_baseline) - C_adapt(T' | R) ]
+
+where F is a future-task distribution not used to fit the current task. Then V6
+asks whether two representations can satisfy J_current(R_1) ~ J_current(R_2)
+while Phi(R_2) >> Phi(R_1). That is exactly the phenomenon we've been discussing
+philosophically as "better ways of looking at things." Now it's measurable.
+
+# V6.2 — Remove the teacher-family hint
+
+If V6.1 works, the obvious criticism is that you told the learner which tasks
+were related. So the next rung removes that information: give the learner only
+the actual sequence T_1..T_n and use future adaptation directly, training the
+earlier update partly according to how well it prepares for later tasks. The
+objective might simply be lifetime prequential cost
+J = sum_t L_preq(T_t) + lambda D*(R_T), but now differentiating/meta-learning
+through the update process. No family labels required. Then the system has
+incentive to discover whatever relationships make later learning cheap.
+
+# V6.3 — Meta-learn the updater
+
+Instead of hand-designing the prospective regularizer, learn U_phi with
+R_{t+1} = U_phi(R_t, D_t) and meta-objective
+min_phi E[ sum_t L(T_t | R_t) + lambda D*(R_T) ]. Then U_phi learns what update
+to make now so the entire future lifetime becomes cheaper. Synthetic ROW worlds
+are ideal because you know the hidden structure and can determine what the
+updater learned, instead of merely observing downstream performance.
+
+# A result I'd really want
+
+Two learners after identical first-half experience, matched on current
+performance and D*, but on unseen related tasks C_adapt(prospective) <<
+C_adapt(ordinary) and structurally R_meta(prospective) >> R_meta(ordinary).
+That's a clean demonstration that THE SAME PAST EXPERIENCE CAN BE ENCODED IN
+REPRESENTATIONS WITH DIFFERENT FUTURE LEARNING VALUE.
+
+# Only after that would I return to compositional language
+
+Move CALL/COMPOSE/BIND to V7, because H29 revealed a deeper prerequisite: before
+composing words into programs, we need a mechanism that learns good words.
+Otherwise you'll have an executable library whose atoms are arbitrary locally
+useful chunks and program synthesis will be unnecessarily hard. Revised ladder:
+
+    V5   When is representation worth paying for?
+    V6   Can prospective pressure produce fertile representations?
+    V7   Can those representations form a compositional language?
+    V8   Can novel programs be synthesized?
+    V9   Can successful programs improve the language?
+    V10  Perception / alternative ways of seeing
+    V11  Theories, dreaming, experimentation, planning
+    V12+ Procedural worlds/games and ARC transfer
+
+# What about H22-H24?
+
+Freeze them as a side branch. Don't throw them away. But they're currently
+downstream of a representation we know is malformed for higher-order structure.
+Getting really good at choosing edits over the wrong vocabulary is less
+important than fixing how the vocabulary forms. Once V6 works, H22-H24 become
+much more interesting because the market can contain genuine COMPRESS, PROMOTE,
+FACTORIZE and RETAIN decisions over fertile representations.
+
+# One cheap thing before starting V6
+
+Write a clean V5 CLOSURE DOCUMENT. Four findings:
+
+V5-A QUANTITATIVE AMORTIZATION. H* = lambda D* / s_bar holds across
+independently manipulated economic regimes and survives frontier repricing.
+
+V5-B RECURSIVE ECONOMICS. The analogous fixed-cost/reuse-saving relationship
+predicts schema economics.
+
+V5-C LEARNER GAP. Higher-order structure is economically available in teacher
+operators but not in learned library objects.
+
+V5-D LOCALIZATION. The majority of this discrepancy exists BEFORE PROMOTE:
+R_teacher = 1 -> R_effective ~ 0.19 -> R_residual ~ 0.095 -> R_promoted ~ 0.05.
+Fragmentation and linear post-hoc refactoring do not explain or fix it.
+
+Therefore V6 must intervene during representation formation. That makes the
+handoff extremely clean.
+
+## The first actual V6 experiment I would run
+
+Cheap, three worlds, no sealed block: same H20 world, same architecture,
+ordinary vs oracle-prospective wake. Use one held-out sibling per family as an
+adaptation probe. Don't build a learned optimizer yet. Don't change PROMOTE.
+Don't build composition machinery. Just ask: if we explicitly reward a
+representation for making a related unseen task cheap to acquire, does the
+missing meta-structure appear?
+
+If no, we've learned the architecture itself may be the bottleneck. If yes, the
+next question becomes how to obtain that pressure without teacher labels — and
+that naturally leads into meta-learning, dreaming, prospective MDL, and
+eventually the self-improving computational language we've been aiming for.

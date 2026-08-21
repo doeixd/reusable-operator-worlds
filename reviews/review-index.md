@@ -2261,3 +2261,51 @@ continual intelligence requires selecting among behaviorally equivalent
 representations by their prospective learning value, so retrospective MDL is
 strengthened rather than abandoned — "which compact explanation of the past also
 makes plausible extensions cheap?"
+
+### [reviewer-feedback-51.txt](reviewer-feedback-51.txt)
+Closes V5 and redirects the main line upstream. V5 did its job — the economics
+work, but ordinary wake learning does not form representations preserving the
+structure those economics could exploit — so the next version is V6, PROSPECTIVE
+REPRESENTATION FORMATION: can a learner be trained to represent today's tasks in
+a way that makes related future tasks cheaper to learn?
+
+The objective gains a prospective term, J = L_current + λD*(R) +
+η·C_adapt(T_future | R), and the hypothesis is not that this improves future
+accuracy but that it SELECTS A DIFFERENT INTERNAL REPRESENTATION which exposes
+reusable higher-order structure.
+
+V6.1 is an existence test, not a clever learner: same H20 worlds (so V5 is the
+control), same architecture, only the objective changes. Arm A is the V5 learner
+(expected R_effective ≈ 0.19); Arm B snapshots the representation, adapts to a
+held-out sibling from the same family for k examples, and updates the earlier
+representation to make that adaptation cheaper — a tiny meta-learning problem.
+Using teacher family identity to CHOOSE the sibling is acceptable at this rung;
+handing over the teacher primitive is not.
+
+Three nested gates, because geometry alone cannot pass: G1 R_effective rises
+substantially (0.19 → 0.5+ would be interesting, +2% would not); G2 the learned
+objects now win matched-frontier FACTORIZE against COMPRESS, where V5 gave 0/6;
+G3 — the most important — a held-out new family member is cheaper to acquire in
+prequential loss, samples AND D*. Fertility gets a definition:
+Φ(R) = E[C_adapt(T′ | R_baseline) − C_adapt(T′ | R)], making "better ways of
+looking at things" measurable, with the target phenomenon being J_current(R₁) ≈
+J_current(R₂) while Φ(R₂) ≫ Φ(R₁).
+
+Later rungs remove the teacher-family hint (V6.2, using only the chronological
+stream and lifetime prequential cost) and meta-learn the updater itself (V6.3,
+R_{t+1} = U_φ(R_t, D_t)), which connects directly to the standing
+train-the-optimizer aspiration and needs no family labels at deployment.
+Synthetic ROW worlds are ideal there because the hidden structure is known, so
+one can determine what the updater learned rather than only observing downstream
+performance.
+
+Compositional language moves to V7, on the grounds that H29 revealed a
+prerequisite: before composing words into programs, a mechanism must learn good
+words, or program synthesis inherits a library of arbitrary locally useful
+chunks. Revised ladder V5→V12+. H22–H24 are frozen as a side branch rather than
+abandoned — they are downstream of a vocabulary now known to be malformed for
+higher-order structure.
+
+Also prescribes the V5 closure document with four findings (V5-A quantitative
+amortization, V5-B recursive economics, V5-C learner gap, V5-D localization
+before PROMOTE), written as `V5_CLOSURE.md`.
