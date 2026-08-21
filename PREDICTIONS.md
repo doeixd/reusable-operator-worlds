@@ -2378,3 +2378,53 @@ inside [0.7, 1.3]. If it does, the law is currency-independent and the
 while the 8-bit ones hit, then `lambda D(A)` is doing work that the
 frontier accounting does not reproduce, and P2 of H19's registered
 partials ("the law is currency-dependent") is the reading.
+
+# FRAGMENTATION AUDIT (review 48, Hypothesis A): REJECTED
+
+Sealed C3 artifacts, 12 cells. Unexplained fraction of a TEACHER family
+operator by the best k-subset of the learned library, measured on the
+state distribution the operator actually acts on:
+
+    condition   atoms   F     k=1     k=2     k=3
+    r0            7.2   4   0.938   0.926   0.923
+    r100          7.7   4   0.935   0.918   0.911
+
+Fragmentation predicts k=1 poor and k=2 or 3 good. Observed: k=3 barely
+improves on k=1 (drop 0.015 and 0.025) and all of it stays above 0.91.
+One family is NOT split across several promoted atoms. M > F is not
+oversegmentation.
+
+INSTRUMENT NOTE, recorded because it nearly produced a wrong number.
+The first run probed at N(0, I) and reported 0.98 unexplained at every
+k. The family primitive fires at the LAST program step, so its input is
+the state after two base-primitive steps — a distribution neither object
+acts on at the origin. Probing at the operating distribution moved the
+figure to 0.92-0.94. The conclusion is unchanged, but the first version
+was measuring the wrong thing and would have overstated the effect.
+
+## What this does NOT settle, and why the next test is global
+
+A promoted abstraction is a RESIDUAL on top of the learner's own shared
+basis, which already models much of the computation. So it should not be
+expected to equal the teacher's family operator even in principle — it
+should equal whatever the basis leaves over. This audit therefore
+rejects Hypothesis A but cannot separate:
+
+    B  the learner found a DIFFERENT, equally economical basis, and the
+       teacher's decomposition is simply not the one it uses
+    C  promotion preserved the computation but in per-object coordinates
+       a plain schema cannot see (the H28 reading)
+    D  PROMOTE's objective is myopic and its objects are locally
+       economical but globally poor building blocks
+
+Distinguishing them needs the GLOBAL comparison review 48 names:
+`D*(L_learned) + D*(programs | L_learned)` against the teacher-aligned
+representation at matched behaviour. If the learner's library is equally
+cheap overall, B is right and there is nothing to fix at the task level
+— the cost is in future extensibility. If it is dearer, PROMOTE is
+leaving description on the table and REFACTOR has something to do.
+
+Registered before that test runs: I expect B. The learner's basis is
+fitted to its own residual structure and there is no gradient pressure
+anywhere in V3's PROMOTE toward the teacher's decomposition, so
+recovering it would be a coincidence rather than a consequence.

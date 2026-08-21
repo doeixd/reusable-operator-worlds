@@ -1,0 +1,224 @@
+This is a very good place to end V5. More importantly, I think it changes what the
+next bottleneck is.
+
+V5 did NOT end with "we need a better economic rule." The economics are now the
+part that looks unusually clean.
+
+The bottleneck has moved to:
+
+    Can the learner actually construct representations in which the available
+    economics can be exploited?
+
+That is a much more interesting problem.
+
+### What I think V5 has actually established
+
+The strongest result is the recurrence of the same prospective amortization
+relation at two different representational levels. For individual abstractions
+H* ~= lambda D*(A) / s_bar_A, and sealed C1 gives chi = H* s_bar_A / (lambda
+D*(A)) ~= 1 with mean absolute deviation only 0.016. Then one level higher, for
+schemas, M* ~= D*(S) / s_bar_schema, with the threshold moving monotonically
+with relatedness and the integer/ceiling prediction landing correctly across the
+sealed worlds.
+
+Even with C2's strict 15% clause unresolved, the important structural fact seems
+to survive: fixed representation cost vs repeated prospective savings predicts
+when another level of abstraction becomes economically justified. That is
+exactly the recursive story we hoped might exist. It is now much more than
+N s > C being a nice metaphor.
+
+## But C3 may be the most important V5 result
+
+You deliberately created worlds in which a higher-order factorization
+economically EXISTS. The teacher operators have the structure. The
+matched-budget oracle says there is something worth exploiting. Yet after
+PROMOTE, FACTORIZE wins 0/6 at both meta-recurrence levels. And sealed makes the
+discrepancy worse: unexplained fraction 0.921 versus 0.873 in development.
+Meanwhile M > F in every cell.
+
+That is telling us something very specific:
+
+    PROMOTE can create useful abstractions without creating the right
+    abstractions for recursive abstraction.
+
+That's a major distinction. V3 showed recurrent computation can become a new
+reusable object. V5 now says those objects do not automatically organize
+themselves into a representation whose higher-order regularities remain
+accessible. That is probably the next scientific bottleneck.
+
+# I think there are now three notions of "good abstraction"
+
+We've been implicitly conflating them.
+
+1. LOCALLY USEFUL. Does A help tasks? s_bar_A > 0. V3 says yes.
+2. ECONOMICALLY WORTHWHILE. Does its future reuse repay its description cost?
+   N s_bar_A > D*(A). V5 says we can predict this remarkably well.
+3. STRUCTURALLY FERTILE. Does creating A preserve/expose relationships that
+   allow further abstraction? This is new.
+
+A representation could be very useful and economical while being a terrible
+substrate for A_1, A_2, ... -> S(alpha). And C3 suggests current PROMOTE may
+produce exactly that. I would introduce this concept explicitly: ABSTRACTION
+FERTILITY, or refactorability. The grand architecture doesn't merely need
+abstractions that compress the present. It needs abstractions that remain
+composable and abstractable in the future. That's a stronger requirement.
+
+# Why might PROMOTE destroy the higher-order structure?
+
+## Hypothesis A - fragmentation
+
+The strongest clue is M > F, 12/12. Maybe one true family-level computation is
+being represented by several promoted pieces: instead of A_f the learner creates
+A_f1, A_f2, A_f3. Each is locally useful, but the clean teacher geometry becomes
+fragmented across them. Then fitting S(alpha) over those promoted objects
+naturally fails. This would make PROMOTE analogous to an oversegmentation
+algorithm.
+
+TEST. For each teacher family f, measure whether its functional contribution is
+distributed across multiple promoted abstractions. Not merely "which abstraction
+matches A_f best?" but min over subsets S of the library with |S| = k of
+|A_f - Compose/Aggregate(S)|. If k=1 is poor but k=2,3 recovers the teacher
+operator well, you have fragmentation. That would immediately explain M > F.
+
+## Hypothesis B - the learner chooses a different, equally economical basis
+
+Suppose teachers are A_1..A_4 but the learner discovers B_1..B_5 such that task
+programs are cheap under the B's even though individual B_i do not correspond to
+individual A_f. Then C3 isn't necessarily representational failure - it might be
+a different basis with the same or better task economy. The teacher schema would
+look absent only because we're asking whether the learner recreated the
+teacher's decomposition. The proper test is global: D*(L_learned) +
+D*(task programs | L_learned) versus the teacher-aligned representation. If the
+learner's weird fragmented basis is equally cheap overall, we shouldn't force it
+toward the teacher ontology. But because FACTORIZE loses on its own learned
+library, there may still be a cost in future extensibility/search even if
+current task description is fine.
+
+## Hypothesis C - promotion destroys canonical coordinates
+
+Even if two promoted objects implement related computation, their internal
+functional coordinates might differ enough that the simple schema model cannot
+see it. That connects directly to H28: f_i = d_i . A_i . e_i. Perhaps teacher
+abstractions share A_i = S(alpha_i) but after learning we observe
+A~_i = d_i . S(alpha_i) . e_i. Then direct factorization fails while
+adapter-mediated factorization succeeds. If so, C3 is telling us that neural
+abstraction requires quotienting out representational coordinates before
+higher-order recurrence becomes visible. That is a very plausible bridge toward
+real deep networks, where the same computation absolutely will not occur in
+identical coordinates everywhere. It makes H28 look increasingly important.
+
+## Hypothesis D - PROMOTE's objective is too myopic
+
+V3 PROMOTE asks roughly "does this abstraction replace enough task-local
+computation now?" It does not ask "will representing the computation this way
+make future abstractions easier?" So perhaps it rationally finds locally
+economical objects that are globally poor building blocks. The true objective
+should eventually include current savings plus future representational
+optionality: J(A) = D*(A) - N s_bar_A + eta E[C_future_abstraction | A]. I'm not
+suggesting adding that term now. But conceptually this could be the origin of
+the distinction between ordinary compression and representation learning for
+compositional intelligence. A good primitive is not only one that compresses
+what you've already seen; it is one that makes the next layer of explanation
+easier to discover.
+
+# C4 is useful precisely because it killed an attractive story
+
+I would treat H27's original mechanism as dead. You had a tempting aggregate
+observation D*_shared < D*_private and a plausible explanation. But the sealed D*
+gap is only 6/12, the mean difference is tiny, spectral decay goes the wrong way
+(0/12 sealed and 0/16 development), and the correlation flips dramatically
+between development and sealed. So: do not build theory on "shared abstractions
+are intrinsically more compressible per scalar." At least not yet. First
+establish whether a stable per-world phenomenon exists at all. The pooling
+problem matters. If H29 is designed to provide the missing matched snapshot, I'd
+make that the next measurement.
+
+# My priority from here
+
+I would NOT go directly into H22-H24. The central scientific mystery has
+changed. The economy already knows a schema should exist; the learner fails to
+manufacture the objects over which the schema pays. That's much closer to the
+ultimate goal than edit-selection accuracy.
+
+1. H29 - LOCATE WHERE THE STRUCTURE DISAPPEARS. Use the fresh P_0 snapshots to
+   determine whether meta-structure exists before PROMOTE and disappears after.
+   The ideal diagnostic is R_meta(P_0) vs R_meta(L_promoted). If
+   R_meta(P_0) >> R_meta(L), promotion is causally destroying an available
+   family structure. If both are bad, the wake learner never represented the
+   teacher meta-structure in a recoverable form. Very different research
+   directions.
+
+2. EXPLICITLY AUDIT FRAGMENTATION. Because M > F is so unanimous, do this almost
+   regardless of H29. Measure teacher family -> number of promoted abstractions
+   needed to reconstruct it, and the reverse, promoted abstraction -> number of
+   teacher families contributing. This produces a functional mixing matrix. You
+   may discover one teacher concept split across two learner concepts. That's
+   actionable.
+
+3. TRY A GLOBAL CONSOLIDATION ORACLE BEFORE CHANGING PROMOTE. Take the learned
+   library as given and ask whether a different set of abstractions explains the
+   same task behavior more cheaply and restores schema structure: L -> L' with
+   recombination, rotation of the library basis, merge+split, adapter-mediated
+   alignment. If an oracle can transform the ugly promoted library into a cheap
+   factorable one without hurting tasks, you've established that local PROMOTE
+   produces a representation that global sleep can improve. That would
+   beautifully revive the original wake/sleep vision. Wake: solve locally.
+   Sleep: refactor globally. V4 tried simple lifecycle edits and found no
+   opportunity; V5 may have finally created the case where global
+   representational refactoring actually has something substantive to do.
+
+# This may be the bridge to V6
+
+Originally V6 was going to be "make abstractions compositional." I would now add
+a prerequisite: can the learner produce/refactor abstractions into a canonical
+enough form that higher-order structure survives? A compositional language whose
+words are arbitrary fragmented local solutions is going to be awful for program
+synthesis. The goal isn't merely that A . B . C executes; we need A, B, C to be
+GOOD WORDS. C3 shows "useful/promotable" and "good word" are not equivalent.
+That's a major discovery.
+
+# The ultimate project story has therefore become richer
+
+    experience -> private solutions -> PROMOTE -> reusable computations
+    -> REFACTOR / CANONICALIZE -> fertile computational vocabulary
+    -> FACTORIZE / MACRO -> hierarchical language
+    -> PROGRAM SYNTHESIS -> novel solutions
+
+We had been missing the bolded step. V5 may have discovered why it is necessary.
+
+# And this connects directly to "different ways of looking at things"
+
+A representation can solve all current tasks while still being a bad way of
+looking at the domain, because it makes the deeper regularity obscure. Another
+representation can encode identical behavior but reveal A_i = S(alpha_i). The
+second is preferable not merely because it currently saves more bits; it gives
+the learner a better vocabulary for future abstraction, future composition,
+extrapolating new family members, and program synthesis.
+
+    A good abstraction doesn't merely summarize experience. It exposes structure
+    that makes future thought cheaper.
+
+C3 is our first empirical evidence that this distinction matters.
+
+## So my reading of V5 is
+
+DEMONSTRATED STRONGLY: prospective abstraction economics obey a surprisingly
+precise amortization law, apparently recursively across atoms and schemas.
+
+DEMONSTRATED NEGATIVELY: a learner that can create useful abstractions need not
+create abstractions that expose higher-order reusable structure, even when such
+structure is economically available.
+
+FALSIFIED: the current "shared abstractions are intrinsically cheaper because
+they have lower-dimensional coding geometry" story.
+
+NEWLY EXPOSED BOTTLENECK: representation discovery/refactoring between
+abstraction levels.
+
+Not "how do we add another operator?" But: why does the economically correct
+higher-order representation exist in the world yet fail to exist in the
+learner's vocabulary - and can sleep discover the change of representation that
+makes it visible? If we can solve that, the jump to V6/V7 becomes much more
+credible, because we'd be moving toward a system that doesn't merely accumulate
+primitives - it learns how to organize its primitives into an increasingly
+powerful language.
