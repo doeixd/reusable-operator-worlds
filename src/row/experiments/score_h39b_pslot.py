@@ -194,7 +194,7 @@ def factorized_fit(base_model, task, support: int, mode: str, optimizer_name: st
         "final_query_mse": final_query, "final_query_scaled": final_query / SCALE,
         "query_curve_mse": curve,
         "local_displacement": float(torch.linalg.vector_norm(final - initial)),
-        "alpha": [float(a) for a in alpha.detach()],
+        "alpha": [float(a) for a in alpha.detach().flatten()],
         "alpha_norm": float(torch.linalg.vector_norm(alpha.detach())),
         "eps_norm": float(torch.linalg.vector_norm(eps.detach())),
         "finite": bool(finite and math.isfinite(final_support) and math.isfinite(final_query)),
