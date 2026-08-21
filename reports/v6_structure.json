@@ -1,0 +1,18 @@
+{
+  "ordinary": {
+    "r_effective": 0.13729900742545023,
+    "null": 0.0029477609039063597,
+    "factorize_wins": null,
+    "worlds": null,
+    "covered": null,
+    "errors": []
+  },
+  "prospective": {
+    "r_effective": 0.17629044787640624,
+    "null": 0.0029477609039063597,
+    "factorize_wins": null,
+    "worlds": null,
+    "covered": null,
+    "errors": []
+  }
+}

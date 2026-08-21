@@ -1,0 +1,10 @@
+{
+  "summary": {},
+  "cells": [
+    {
+      "condition": "prospective",
+      "world": 0,
+      "reason": "only 2 atoms, need > 4"
+    }
+  ]
+}

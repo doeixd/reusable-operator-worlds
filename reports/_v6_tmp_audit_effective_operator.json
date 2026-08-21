@@ -1,0 +1,14 @@
+{
+  "rows": [
+    {
+      "condition": "prospective",
+      "world": 0,
+      "tasks": 24,
+      "r_effective": 0.17629044787640624,
+      "null": 0.0029477609039063597
+    }
+  ],
+  "mean_r_effective": 0.17629044787640624,
+  "null": 0.0029477609039063597,
+  "r_residual_reference": 0.095
+}

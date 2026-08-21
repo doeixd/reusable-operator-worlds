@@ -3080,3 +3080,37 @@ result -- if merely seeing relatives suffices, the meta-objective is
 unnecessary. Registered follow-up: sweep the prospective weight before
 concluding anything about the mechanism, since the current weight is
 demonstrably too small to change the representation.
+
+## H33 is not evaluable in V6's unfrozen regime, and why that matters
+
+Realized library sizes on the V6 arms: M = 2, 5, 3 per world (identical
+across arms). `audit_learned_schema` needs M > M_0 + 1 = 4 to fit a
+schema over abstractions and hold members out, so H33 can be scored in
+at most one of three worlds.
+
+This is a structural tension in V6's design, not a scoring accident:
+
+    frozen basis    M = 7, schemas definable, but every prospective
+                    gradient is dead (measured: all arms bit-identical)
+    unfrozen basis  prospective gradients live, but the basis absorbs
+                    the structure that used to become abstractions and
+                    M collapses to 2-5
+
+So the protocol that lets prospective pressure act is the protocol in
+which the higher-order library barely exists. H33 asks whether
+prospective pressure makes FACTORIZE pay over that library; with two
+abstractions there is nothing for a schema to be a schema OF.
+
+REGISTERED RESOLUTION, before running it: partial freeze. The runner
+already supports `--freeze-slots N`, which freezes the first N basis
+slots and leaves the rest trainable — introduced in V3 as the promotion
+oracle. That gives prospective pressure somewhere to act while still
+forcing recurring structure into promotions. The V6.1 configuration
+should therefore be a partial freeze, and the fully-unfrozen runs
+reported above are the wrong operating point for H33 even though they
+are the right one for H30.
+
+H32 is unaffected: it reads the effective operator, which exists
+regardless of library size. First reading on world 0 is ordinary 0.137
+-> prospective 0.176 (+0.039), consistent in direction with H32 and far
+too small and too singular to claim.
