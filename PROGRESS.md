@@ -2874,3 +2874,14 @@ alpha-zeroed ratio 1.38, route mass on P 0.093; P8 -1,028 nats, alpha-only
 0.169. Frozen verdict U via the route-mass criterion, which the ledger entry
 annotates as miscalibrated (ordinary routes are diffuse; any one slot ~0.08-
 0.10). Nothing licensed. Recorded in `PREDICTIONS.md` and `notes/learnings.txt`.
+
+# 2026-08-21 — H39c K-SWEEP FROZEN AND LAUNCHED (WORLDS 0-2)
+
+Froze `H39C_KSWEEP_PLAN.md` (`1e99904`) with channel-use thresholds
+registered RELATIVE to the measured ordinary slot-12 route mass per world
+(0.0971 / 0.1147 / 0.1168; threshold 2x), K in {2, 4, 8, 16}, and a matched-
+budget control G_8 (U_k frozen at init, alpha learns). Added the
+`--freeze-matrices` control with a unit test, sweep cells to the bounded-pool
+launcher (15 cells, 3 workers), and `score_h39c_ksweep.py` (fail-closed
+non-vacuity per cell, verdicts A / A-capacity / P / B / NOT COMPARABLE). The
+sweep is running; no cell has been read.
