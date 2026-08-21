@@ -3143,3 +3143,44 @@ This is the gradient check that review 53 asks every apparent null to
 survive. H30's null at weight 1 remains a null AT A PRESSURE THAT WAS
 NEVER RAISED — the three weight cells are three samples of the same
 pressure, not a sweep, so they do not strengthen the null at all.
+
+## CODE AUDIT: the prospective arm was not applying the prospective objective
+
+Asked to double-check the V6 implementation, and the check found a bug
+that invalidates every prospective cell run so far.
+
+`prospective_penalty` adapted the sibling's task-local parameters with
+SGD at lr 0.05 for a handful of steps. Measured on a trained model:
+
+    support loss before  0.840895
+    support loss after   0.840891     reduction 0.000%
+    task code moved by   8.06e-04
+
+So the "adapted" code was unadapted, and the penalty was the query loss
+of a task the learner had NOT adapted to. That is not the registered
+objective. "Make a sibling predictable without adaptation" is the
+EXPLICIT-FAMILY-SHARING objective; the prospective arm is supposed to
+charge the cost of ADAPTING. The two arms were, in effect, running the
+same pressure under different names.
+
+This is the same failure that the fertility scorer had — gradients here
+are ~1e-3, so SGD at any sane learning rate moves nothing — and I fixed
+it there without checking whether the learner shared it. Fixed: the
+inner loop now uses Adam at the task learning rate, which is what the
+lifetime itself uses to fit a task code. Verified: the adapted code now
+moves the support loss materially.
+
+WHAT THIS INVALIDATES. Every prospective cell in `artifacts/v6`,
+`artifacts/v6_pressure/w*` and `artifacts/v6_pressure/s*`. H30's null
+was measured on an arm that was not implementing H30's intervention, so
+the null carries no information about H30. It is withdrawn rather than
+downgraded.
+
+WHAT SURVIVES. The ordinary and replay arms are untouched by this bug —
+replay does not call `prospective_penalty` — so replay's Phi = +0.072
+positive in 3/3 worlds stands. So does the finding that the weight is
+inert under Adam, and the frozen/unfrozen allocation contrast.
+
+Two regression tests now pin the property: the inner loop must move the
+support loss by more than 10%, and the default inner optimizer must be
+Adam. The first is the test that would have caught this on day one.

@@ -86,3 +86,44 @@ class ProspectivePenaltyTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class InnerAdaptationTest(unittest.TestCase):
+    """The penalty must measure ADAPTATION, not zero-shot loss."""
+
+    def test_inner_loop_materially_reduces_support_loss(self) -> None:
+        # The original inner loop used SGD at lr 0.05 and moved the
+        # support loss by 0.000% on a trained model, so the penalty was
+        # the query loss of an UNADAPTED code -- the
+        # explicit-family-sharing objective wearing the prospective
+        # one's name. This test is what would have caught it.
+        learner = _learner()
+        generator = torch.Generator().manual_seed(11)
+        support_x = torch.randn(16, 8, generator=generator)
+        support_y = torch.randn(16, 8, generator=generator)
+        learner.begin_task("probe")
+        code = learner.task_codes["probe"]
+        residual = learner.task_residuals["probe"]
+        with torch.no_grad():
+            first = float(torch.mean(
+                (learner(support_x, "probe") - support_y) ** 2))
+        inner = torch.optim.Adam([code, residual], lr=0.05)
+        for _ in range(16):
+            inner.zero_grad()
+            loss = torch.mean((learner(support_x, "probe") - support_y) ** 2)
+            loss.backward(inputs=[code, residual])
+            inner.step()
+        with torch.no_grad():
+            last = float(torch.mean(
+                (learner(support_x, "probe") - support_y) ** 2))
+        self.assertLess(last, 0.9 * first,
+                        "inner adaptation must move the support loss by more "
+                        "than 10%, or the penalty is not an adaptation cost")
+
+    def test_default_inner_optimizer_is_adam(self) -> None:
+        import inspect
+
+        signature = inspect.signature(
+            ProspectiveLifecycleLearner.prospective_penalty)
+        self.assertEqual(
+            signature.parameters["inner_optimizer"].default, "adam")

@@ -59,6 +59,7 @@ class ProspectiveLifecycleLearner(LifecycleLibraryLearner):
         query_y: torch.Tensor,
         steps: int = 4,
         inner_lr: float = 0.05,
+        inner_optimizer: str = "adam",
         sigma: float = 0.1,
     ) -> torch.Tensor:
         """Loss on a held-out sibling after adapting only its task code.
@@ -78,7 +79,20 @@ class ProspectiveLifecycleLearner(LifecycleLibraryLearner):
         # Inner loop: task-local parameters only, detached from the
         # outer graph. The shared representation is what is being
         # judged, so it must not be updated here.
-        inner = torch.optim.SGD([code, residual], lr=inner_lr)
+        #
+        # ADAM, NOT SGD. Measured on a trained model: four SGD steps at
+        # lr 0.05 reduce the support loss by 0.000% and move the task
+        # code by 8e-4, because gradients here are ~1e-3. The penalty
+        # was therefore the query loss of an UNADAPTED code -- i.e. it
+        # applied "make siblings predictable with no adaptation", which
+        # is the explicit-family-sharing objective, not the registered
+        # prospective one. Adam at the task learning rate is what the
+        # lifetime itself uses to fit a task code.
+        inner = (
+            torch.optim.Adam([code, residual], lr=inner_lr)
+            if inner_optimizer == "adam"
+            else torch.optim.SGD([code, residual], lr=inner_lr)
+        )
         for _ in range(steps):
             inner.zero_grad()
             prediction = self(support_x, sibling_id)
