@@ -2115,3 +2115,74 @@ the atom AND N_atoms * s_schema > C_S for the schema, with both crossings
 predicted before their sweeps from independently measured costs and benefits —
 evidence for a recursive economic law governing the growth of a learned
 computational language.
+
+### [reviewer-feedback-48.txt](reviewer-feedback-48.txt)
+Reads the completed V5 sealed block and argues the BOTTLENECK HAS MOVED. V5 did
+not end needing a better economic rule — the economics are now the clean part.
+The open question is whether the learner can construct representations in which
+the available economics can be exploited.
+
+Reads C3 as possibly V5's most important result: worlds were built where
+higher-order factorization economically exists, the matched-budget oracle says
+so, and after PROMOTE FACTORIZE still wins 0/6, with the sealed unexplained
+fraction (0.921) worse than development (0.873) and M > F in every cell. The
+lesson: "PROMOTE can create useful abstractions without creating the right
+abstractions for recursive abstraction." V3 showed recurrent computation can
+become a reusable object; V5 says those objects do not automatically organize
+into a representation whose higher-order regularities stay accessible.
+
+Introduces a distinction the project had been conflating — THREE notions of good
+abstraction: (1) locally useful, s̄_A > 0, which V3 established; (2) economically
+worthwhile, N·s̄_A > D*(A), which V5 predicts precisely; and (3) STRUCTURALLY
+FERTILE — does creating A preserve or expose the relationships that allow
+further abstraction? A representation can be useful and economical while being a
+terrible substrate for A_1, A_2, … → S(α). Proposes naming this ABSTRACTION
+FERTILITY or refactorability.
+
+Four hypotheses for why PROMOTE might destroy higher-order structure, with
+tests: (A) FRAGMENTATION — one family computation spread over several promoted
+pieces, tested by min over k-subsets rather than best single match, and predicted
+to explain M > F; (B) DIFFERENT BASIS — the learner found an equally economical
+decomposition that simply is not the teacher's, tested globally by
+D*(L_learned) + D*(programs | L_learned) rather than by teacher alignment;
+(C) LOST CANONICAL COORDINATES — related objects in per-object frames, Ã_i =
+d_i∘S(α_i)∘e_i, which would make direct factorization fail while adapter-mediated
+factorization succeeds, and which makes H28 look increasingly important;
+(D) MYOPIC OBJECTIVE — PROMOTE asks whether an abstraction replaces enough
+task-local computation now, never whether it makes future abstraction easier;
+the eventual objective would carry a future-optionality term
+η·E[C_future_abstraction | A].
+
+Treats H27's original mechanism as dead and says not to build theory on "shared
+abstractions are intrinsically more compressible per scalar" until a stable
+per-world phenomenon is established; the pooling problem matters.
+
+Priority: NOT H22–H24. Instead (1) H29 to locate where the structure disappears,
+comparing R_meta(P_0) against R_meta(L_promoted) — if the first greatly exceeds
+the second, promotion is causally destroying available family structure; if both
+are near zero, the wake learner never represented it recoverably, and those are
+very different research directions. (2) Audit fragmentation regardless, building
+a functional mixing matrix in both directions. (3) Try a GLOBAL CONSOLIDATION
+ORACLE before changing PROMOTE — take the learned library as given and ask
+whether a different set of abstractions explains the same behavior more cheaply
+and restores schema structure (recombination, basis rotation, merge+split,
+adapter-mediated alignment). If an oracle can do it without hurting tasks, that
+establishes "local PROMOTE produces a representation that global sleep can
+improve" and revives the wake/sleep vision — wake solves locally, sleep
+refactors globally. V4 found no opportunity for simple lifecycle edits; V5 may
+have created the case where global refactoring has something substantive to do.
+
+Adds a prerequisite to V6: a compositional language whose words are arbitrary
+fragmented local solutions will be bad for program synthesis, so before "make
+abstractions compositional" comes "can the learner refactor abstractions into a
+canonical enough form that higher-order structure survives?" The revised
+hierarchy inserts a missing step: experience → private solutions → PROMOTE →
+reusable computations → **REFACTOR / CANONICALIZE** → fertile vocabulary →
+FACTORIZE / MACRO → hierarchical language → program synthesis.
+
+Closing frame, and where the philosophical thread meets the experiment: a
+representation can solve every current task while still being a bad way of
+looking at the domain, because it makes the deeper regularity obscure. "A good
+abstraction doesn't merely summarize experience. It exposes structure that makes
+future thought cheaper." C3 is the first empirical evidence that the distinction
+matters.
