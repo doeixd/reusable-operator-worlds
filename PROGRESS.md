@@ -2567,3 +2567,23 @@ UNRESOLVED pending completed, clean scoring from the repaired V6
 pipeline. The repaired runner has been launched elsewhere in the shared
 workspace, but completion or a new verdict is not claimed by this
 documentation milestone.
+
+# 2026-08-21 — SCIENTIFIC OPERATING STANDARD HARDENED
+
+Expanded `AGENTS.md` and `CLAUDE.md` so future work treats ROW explicitly
+as careful scientific research rather than rapid experimentation. Added
+claim-status discipline; construct, instrument, comparison, holdout, and
+coordinate-system validity rules; complete model-state reconstruction;
+full-protocol fingerprint/resume requirements; and artifact acceptance and
+quarantine rules. The top-level scientific standard is intentionally one
+compact paragraph; detailed incidents remain in implementation learnings.
+
+Resolved contradictory local concurrency guidance. The authoritative rule
+is now one full-lifetime PyTorch/SciPy process at a time on this Windows
+host, one writer per artifact cell, and no experiment launches from dirty
+or changing code. `--jobs N` remains an interface requirement for isolated
+remote workers, while local full lifetimes use `--jobs 1`.
+
+Updated stale V5 pointers in both files: V5 and its confirmation plan are
+closed, `V5_CLOSURE.md` records the review-55 corrections, and seeds
+600-629 are completed confirmatory worlds rather than unopened reserves.

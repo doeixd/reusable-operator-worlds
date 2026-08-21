@@ -4,6 +4,13 @@ Reusable Operator Worlds (ROW) tests whether reusable computational substrates
 reduce lifetime/prequential learning cost on tasks generated from recurring
 hidden neural operations.
 
+This is a careful scientific research project, not a demo, benchmark chase, or
+rapid-prototyping exercise. Correctness of the experimental construct,
+traceability of every number, and honest treatment of negative or invalid
+results take priority over throughput and narrative continuity. A plausible
+number is not a result until its instrument, artifact, and protocol have passed
+the checks below.
+
 # Working conventions
 
 - Treat `neural_library_learning_v1_experimental_spec.md` as the research source
@@ -17,6 +24,22 @@ hidden neural operations.
   implementation checkpoints only in the working tree.
 - Use H1 Markdown headings for section beginnings in this file and
   `PROGRESS.md`.
+
+# Scientific integrity standard
+
+Treat every result as provisional until its registered estimand, controls,
+instrument, artifacts, and scorer validate: pre-register confirmatory hypotheses
+and decision rules; preserve exact pairing and strict train/held-out/future/sealed
+separation; score before update; test positive, negative, and non-vacuity cases;
+compare functions only on common on-trajectory states and reconstruct all model
+state; run from clean committed code with one local full lifetime and one writer
+per cell; fingerprint the complete protocol and fail closed on resume mismatch;
+accept results only after exit codes, expected cell counts, finite metrics,
+artifact freshness, `check_prereg.py`, `check_invalid.py`, and paired outputs pass;
+and preserve exploratory/confirmatory/invalid/withdrawn/unresolved status by
+appending corrections to `PREDICTIONS.md`, learnings, progress, and the paper
+rather than rewriting history. A launched job or plausible number is not a
+scientific result.
 
 # Commands
 
@@ -52,7 +75,7 @@ python -m row.experiments.scratch_difficulty --config configs/v1.yaml
 ├── reviews/                  # reviewer feedback files and review-index.md
 ├── paper/                    # draft, figures, figure-generation script
 ├── AGENTS.md                 # THIS FILE: intent, conventions, structure, learnings
-├── CLAUDE.md                 # pointer to AGENTS.md
+├── CLAUDE.md                 # front-door safety summary and pointer to AGENTS.md
 ├── PROGRESS.md               # running lab record (append per completed step)
 ├── README.md                 # public-facing summary
 ├── pyproject.toml            # package metadata, deps, entry point
@@ -130,7 +153,8 @@ The experiment modules follow naming conventions:
   (`sweep_rho.py`, `sweep_checkpoints.py`, `sweep_robustness.py`,
   `sweep_forward_transfer.py`, etc.). All are resumable by design: they skip
   worlds with existing `summary.json` and can be interrupted and relaunched.
-  New sweep drivers must add `--jobs N` for parallel execution.
+  New sweep drivers must add `--jobs N`, but full-lifetime runs on this local
+  Windows host use `--jobs 1`; parallelism is for isolated remote workers.
 - **`audit_*.py`** — offline structural oracles and gate auditors
   (`audit_substitutability.py`, `audit_lifecycle_oracle.py`,
   `audit_factorization.py`, `audit_promotion_oracle.py`,
@@ -220,9 +244,10 @@ report JSON. `figures/` — generated figures.
 | `row_v3_experimental_spec.md` | V3 spec (PROMOTE / abstraction birth) |
 | `row_v4_experimental_spec.md` | V4 original spec (preserved unrevised with gate-outcome banner) |
 | `row_v4r_experimental_spec.md` | V4 revised: "When Does a Library Need a Lifecycle?" |
-| `row_v5_experimental_spec.md` | V5 spec (representation economics); active, provisional draft |
+| `row_v5_experimental_spec.md` | V5 spec (representation economics); sealed program closed |
 | `notes/v5-sketch.txt` | V5 sketch, superseded by the V5 spec; kept for history |
-| `V5_CONFIRMATION_PLAN.md` | not written; seeds 600-629 stay sealed until it is frozen and hashed |
+| `V5_CONFIRMATION_PLAN.md` | V5 frozen confirmation protocol (seeds 600-629; completed) |
+| `V5_CLOSURE.md` | V5 closure record, including review-55 withdrawals and corrected interpretation |
 | `EXPERIMENT_PLAN.md` | separates development (0–9) from confirmatory (100–129+) |
 | `CONFIRMATION_PLAN.md` | V1 frozen confirmation protocol (seeds 100–129) |
 | `V2_CONFIRMATION_PLAN.md` | V2 frozen confirmation protocol (seeds 200–229) |
@@ -246,8 +271,10 @@ report JSON. `figures/` — generated figures.
   against `V4R_CONFIRMATION_PLAN.md`; closed 7/7).
 - **V5 development:** seeds 500–509 (H19 causal grid; contaminated;
   never confirmatory). Do not use 510–599.
-- **V5 confirmatory:** seeds 600–629 reserved; untouched until a
-  `V5_CONFIRMATION_PLAN.md` is frozen and hashed.
+- **V5 confirmatory:** seeds 600–629 opened only after
+  `V5_CONFIRMATION_PLAN.md` was frozen and hashed; the V5 sealed program is
+  complete. Later audit corrections do not turn these seeds back into
+  development data.
 
 Sealed worlds must not be generated, inspected, or summarized until the
 relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
@@ -676,8 +703,9 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   below threshold on world 0, forcing the one-slot safety fallback and degrading
   log loss to -86,937. Tune presence LR at 1e-4 and 1e-3 before interpreting
   pruning; the default gate optimizer was two orders of magnitude too fast.
-- `CLAUDE.md` is a pointer to this file; keep conventions and learnings
-  here only.
+- `CLAUDE.md` is a short front-door safety summary and pointer to this file.
+  Keep the detailed, authoritative conventions and implementation learnings
+  here; mirror only the non-negotiable safety rules there.
 - Background shell jobs die silently with the session that launched them.
   After any interruption, verify expected artifacts exist before assuming
   a launched run completed; relaunch idempotently (all sweep drivers are
@@ -705,13 +733,11 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
 - Sealed-block discipline extended in V2: seeds 200-229 test parameter
   intervals (slope, crossing, R^2), not just signs; interval misses are
   reported as failures even when signs pass.
-- This machine has 16 cores but every lifetime pins itself to one thread
-  (`torch.set_num_threads(1)`) and the sweep drivers run runs
-  sequentially, so unmodified sweeps use ~1/16th of the machine. Launch
-  independent runs as parallel processes (guarded by existing
-  `summary.json`, since drivers are resumable); a 360-run sweep drops
-  from ~6 hours to ~30-40 minutes. Add a `--jobs N` process pool to any
-  new sweep driver; cap around 12 concurrent runs to leave headroom.
+- Although each lifetime pins itself to one thread, local throughput is bounded
+  by memory, I/O, and safe artifact ownership rather than core count. Earlier
+  advice to launch up to 12 local processes is **superseded**: run one local
+  full lifetime at a time. Keep `--jobs N` in sweep interfaces for isolated
+  remote workers, where every worker owns disjoint output cells.
 - Kaggle is available for throughput beyond local cores (token provided
   by the PI as an environment variable). Its value is parallel sessions,
   not per-run speed — the models are too small to benefit from a GPU.
@@ -757,12 +783,11 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   automatically via the editable install. If new processes ever hang
   before any output, check for this class of stall first
   (`faulthandler.dump_traceback_later` locates it in seconds).
-- Memory, not cores, is the binding constraint for parallel lifetimes on
-  this machine: 8 concurrent consolidating lifetimes exhausted RAM and
-  took the whole session down (and 7 plain lifetimes plus pip did the
-  same earlier). Use at most 4-6 concurrent PyTorch processes, prefer 4
-  for consolidating runs (the 512-route enumeration holds larger
-  tensors), and never co-schedule installs with a running batch.
+- Memory, I/O, and writer ownership—not cores—are the binding constraints for
+  local lifetimes. Historical limits of 4-6 concurrent processes still produced
+  paging failures and overlapping launchers. They are **superseded** by the
+  one-local-lifetime rule. Never co-schedule installs or another experiment batch
+  with a running lifetime.
 - During a heavy batch, a hung shell command is evidence of LOAD, not of
   batch failure: lifetimes only write summary.json at completion, so an
   apparently empty output directory plus an unresponsive filesystem most
@@ -901,12 +926,11 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   against `C`. Editing a definition is not the same as editing what
   depends on it, and an independent audit found this where three
   self-reviews had not.
-- Concurrency for lifecycle lifetimes is 3, not 5. Five concurrent
-  `slots=12` promoting runs exhausted RAM and failed 113 of 120 cells
-  with `Unable to allocate 3.38 MiB` inside the promotion clustering
-  step; the same cells run clean at `--jobs 3`. The clustering holds
-  `(tasks, centres, features)` tensors, so slot count drives peak
-  memory more than task count does.
+- A historical lifecycle batch found that five concurrent `slots=12` runs
+  exhausted RAM and failed 113/120 cells; even the later `--jobs 3` rule is now
+  **superseded locally**. Lifecycle and prospective lifetimes run serially on
+  this host. The clustering holds `(tasks, centres, features)` tensors, so slot
+  count still predicts peak memory on remote workers.
 - Check a registered threshold against its own BASELINE before freezing
   it. The S0 arm registered `p_reuse >= 0.5`, and the unmodified world
   scored 0.25 — a bound the control already violates cannot detect the
