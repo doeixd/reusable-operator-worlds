@@ -157,3 +157,19 @@ sigma, and git commit, before any console summary.
 Worlds 1-2, a generic-channel control, H40/H41/H44 instruments, any
 prospective or sibling-replay pressure, learner-discovered grouping, or any
 confirmatory seed.
+
+# Amendment 1 (2026-08-21, before any pilot lifetime; found in smoke testing)
+
+"`eps_i` EXACT-NULL AT BIRTH — initialized to exactly zero" is unrealizable
+in this parameterization. The rank-2 innovation `u . tanh(v z + b)` has a
+stationary point at `u = v = b = 0` (the gradient with respect to `u` is
+`tanh(0) = 0` and the gradient with respect to `v` is proportional to `u`),
+so a zero-initialized `eps` never moves; and because `dL/dalpha = W^T dL/dr`
+is evaluated at that same point, `alpha` never moves either. A scratch smoke
+run confirmed both norms at exactly 0.0 with identical loss for a = 2 and
+a = 8. A literal null state requires a gate, which is H40.
+
+Amended: `eps_i` is initialized exactly as in the ordinary learner (the
+shared `1e-3` random `initial_residual_state`), under the unchanged L1
+storage penalty. The plan's statement that `eps` "is never forced to stay
+zero" stands. Everything else is unchanged.
