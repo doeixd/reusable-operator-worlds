@@ -2844,3 +2844,48 @@ The CAUSAL evidence for H19 still comes from the independently generated
 D and s regimes — the three residual ranks and the three return gains —
 and the seven-point collapse should be quoted on those, not padded with
 re-priced versions of cells already counted.
+
+# D* CURRENCY COMPLETE: partial P2 closes favourably (2026-08-20)
+
+Both viable gains, sealed worlds 600-609, grids committed before the
+batches ran, frontier carry 535 nats.
+
+| g | s_bar | D* predicted | observed | error | chi |
+| --- | --- | --- | --- | --- | --- |
+| 0.5 | 27.3 | 20.1 | 19.5 | 3.0% | 0.994 |
+| 1.0 | 58.4 |  9.3 |  9.3 | 0.3% | 1.018 |
+
+g = 1.5 remains structurally unreachable: its D* crossing at 6.3 needs a
+grid point at H_R = 2, below `minimum_cluster = 3`. Recorded when the
+grids were derived, not discovered afterwards.
+
+H19 registered partial P2 as the live risk — "the law is
+currency-dependent; report both and do not pick after seeing". It closes
+in the favourable direction. The economically relevant crossing moves by
+more than a factor of two when the carry is re-priced from the 8-bit
+proxy to the measured frontier (42.5 -> 19.5 at g=0.5, 18.9 -> 9.3 at
+g=1.0), and chi stays on 1 at both.
+
+STATED WITH THE DISCIPLINE REVIEW 50 ASKED FOR: this is a currency
+robustness check, not a third and fourth causal point. The same
+lifetimes are re-priced, so these results share all their noise with the
+8-bit readings. The defensible sentence is:
+
+    The amortization law survived replacement of the project's
+    historical 8-bit proxy with the independently measured component
+    rate-distortion currency.
+
+The causal evidence remains the seven independently generated regimes —
+three residual ranks and three return gains, plus the slot budget — and
+the collapse should be quoted on those alone.
+
+## V5.1's registered debts are now all discharged
+
+    slots=6 crossing grid    closed, chi 0.982
+    D* currency grids        closed at both viable gains
+    s-arm (S0)               closed, three gains, sealed
+    rank cap / B0            closed
+
+H19 therefore stands as a full pass rather than partial P1 + P3: the
+D-arm and an informative s-arm both ran, the s-arm on sealed seeds, and
+the protocol and currency robustness checks both hold.
