@@ -2799,3 +2799,48 @@ g = 1.0 at D* is running. g = 1.5 at D* is structurally unreachable at
 this dormancy geometry (predicted crossing 6.3 needs a low grid point at
 H_R = 2, below `minimum_cluster = 3`), and that was recorded before the
 grids were derived rather than discovered as a gap afterwards.
+
+## Two corrections to the claims above (review 50)
+
+### 1. The refactoring negative was stated too broadly
+
+I wrote "POST-HOC REFACTORING CANNOT BE THE REMEDY" and listed a sleep
+oracle among the things ruled out. The span result does not support that
+scope. What it rules out is:
+
+    no SPAN-PRESERVING post-hoc refactor of the learned OBJECTS can
+    recover the structure
+
+i.e. `L -> QL`, or any relabelling, rotation, merge, split, or adapter
+applied to the finished library. Those all live inside the span, and the
+teacher operator is 0.707 outside it.
+
+It does NOT rule out a sleep phase that returns to the original
+experience and RE-SOLVES it under a different objective:
+
+    (D, L) -> L'
+
+That is not refactoring, because it is not a function of the library
+alone. The distinction matters for what V6 may attempt, and the earlier
+wording would have foreclosed the most promising architecture on
+evidence that does not reach it.
+
+### 2. The D* result is a robustness check, not a fourth causal point
+
+I described the D* crossing as testing whether the law is
+currency-dependent, which is right, but the surrounding language drifted
+toward treating chi = 0.994 as another independent confirmation. It is
+not: the same lifetimes are re-priced, so the outcome shares all its
+noise with the 8-bit reading.
+
+The disciplined statement:
+
+    The amortization law survived replacement of the project's
+    historical 8-bit proxy with the independently measured component
+    rate-distortion currency, with the economically relevant crossing
+    moving from 42.5 to 19.5 and chi staying at 0.994.
+
+The CAUSAL evidence for H19 still comes from the independently generated
+D and s regimes — the three residual ranks and the three return gains —
+and the seven-point collapse should be quoted on those, not padded with
+re-priced versions of cells already counted.
