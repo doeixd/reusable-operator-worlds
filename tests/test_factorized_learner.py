@@ -85,3 +85,43 @@ class FactorizedLearnerTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FactorizedSaveLoadTests(unittest.TestCase):
+    def test_state_dict_round_trip_is_functionally_exact(self):
+        source = _build()
+        for index, tid in enumerate(("a", "b", "c")):
+            source.begin_task(tid, schema_index=index)
+        with torch.no_grad():
+            for tid in ("a", "b", "c"):
+                source.task_alphas[tid].normal_()
+                source.task_residuals[tid].normal_()
+                source.task_codes[tid].normal_()
+            for schema in source.schemas:
+                schema.normal_()
+        state = {k: v.clone() for k, v in source.state_dict().items()}
+        assignment = dict(source.task_schema)
+        target = _build()
+        for key in state:
+            if key.startswith("task_codes."):
+                tid = key.split(".", 1)[1]
+                target.begin_task(tid, schema_index=assignment[tid])
+        target.load_state_dict(state)
+        x = torch.randn(32, 8)
+        for tid in ("a", "b", "c"):
+            self.assertTrue(torch.equal(source(x, tid), target(x, tid)))
+
+    def test_round_trip_guard_can_fail(self):
+        # Companion: a wrong schema assignment must be detected by the
+        # functional comparison, so the guard above is not vacuous.
+        source = _build()
+        source.begin_task("a", schema_index=0)
+        with torch.no_grad():
+            source.task_alphas["a"].fill_(2.0)
+            for schema in source.schemas:
+                schema.normal_()
+        target = _build()
+        target.begin_task("a", schema_index=1)  # wrong schema
+        target.load_state_dict(source.state_dict())
+        x = torch.randn(32, 8)
+        self.assertFalse(torch.equal(source(x, "a"), target(x, "a")))
