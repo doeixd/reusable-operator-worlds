@@ -361,17 +361,25 @@ def main() -> None:
                 current_id = probe_world.tasks[world_task_index].task_id
                 if current_id not in model.task_codes:
                     return None
-                model.begin_task(probe_id)
+                # Ask the shared representation to make a sibling
+                # predictable FROM ITS RELATIVE'S ROUTE, with no
+                # adaptation at all. That is the strongest form of
+                # "same-family structure is expressible here", and
+                # unlike a distance between two task codes it actually
+                # depends on the shared parameters -- the first version
+                # penalized only task-local state, so its gradient into
+                # the shared basis was identically zero and the arm
+                # returned bit-identical lifetimes to ordinary.
                 optimizer = torch.optim.AdamW(
                     model.shared_parameters(),
                     lr=config.shared_residual_model.global_learning_rate,
                 )
-                optimizer.zero_grad()
-                penalty = torch.mean(
-                    (model.task_codes[probe_id]
-                     - model.task_codes[current_id].detach()) ** 2)
-                (args.prospective_weight * penalty).backward()
-                optimizer.step()
+                for _ in range(args.prospective_steps):
+                    optimizer.zero_grad()
+                    penalty = torch.mean(
+                        (model(support_x, current_id) - support_y) ** 2)
+                    (args.prospective_weight * penalty).backward()
+                    optimizer.step()
                 value = float(penalty.detach())
                 model.forget_task(probe_id)
                 return {"arm": "supervised", "sibling": sibling.task_id,
@@ -382,13 +390,17 @@ def main() -> None:
                 model.shared_parameters(),
                 lr=config.shared_residual_model.global_learning_rate,
             )
-            optimizer.zero_grad()
-            penalty = model.prospective_penalty(
-                probe_id, support_x, support_y, query_x, query_y,
-                steps=args.prospective_steps,
-            )
-            (args.prospective_weight * penalty).backward()
-            optimizer.step()
+            # Matched to the other arms: the same number of outer steps
+            # on the shared parameters, so an arm cannot win by simply
+            # taking more gradient.
+            for _ in range(args.prospective_steps):
+                optimizer.zero_grad()
+                penalty = model.prospective_penalty(
+                    probe_id, support_x, support_y, query_x, query_y,
+                    steps=args.prospective_steps,
+                )
+                (args.prospective_weight * penalty).backward()
+                optimizer.step()
             value = float(penalty.detach())
             model.forget_task(probe_id)
             return {"arm": "prospective", "sibling": sibling.task_id,
