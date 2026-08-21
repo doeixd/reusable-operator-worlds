@@ -4151,3 +4151,19 @@ to a finished ordinary learner; it does not measure what a jointly trained
 schema would contain. Any successor plan must say how the schema is to be
 obtained other than from the final residual population, and must be frozen
 before running.
+
+# CORRECTION (2026-08-21) to the H39 RESULT entry: "siblings" are unseen-family members
+
+The H39 RESULT entry and `H39_EXISTENCE_PLAN.md` describe the held-out
+future tasks as "siblings" of trained families. Per `meta_world.py`, at
+`r_meta = 1` every family operator lies in one shared rank-2 functional
+subspace, and `novel_family_tasks` are members of two families the lifetime
+never trains on; held-out members of SEEN families were found
+non-discriminating in V6 design. Census C0, its exploratory calibrations, and
+the V6R anchors all used `novel_family_tasks`, so every number stands. The
+corrected reading is stronger, not weaker: the unseen family's operator is
+in the span of the trained families' teacher operators by construction, and
+the ordinary learner's residual population does not contain it at any rank.
+The H39 existence plan's rationale for `a = 8` ("four rank-2 family
+subspaces") was also wrong about the generator; the oracle-form schema rank
+is 2. See `H39_PILOT_PLAN.md` Amendment 2.

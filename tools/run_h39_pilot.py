@@ -22,7 +22,9 @@ COMMON = [
 ]
 CELLS = {
     "ordinary_history": ["--model", "prospective", "--snapshot-history"],
-    "factorized_grouped": ["--model", "factorized", "--schema-grouping", "oracle",
+    # factorized_grouped withdrawn (plan Amendment 2): ill-posed for an
+    # unseen-family future. Primary is the pooled a=2 oracle form.
+    "factorized_pooled2": ["--model", "factorized", "--schema-grouping", "pooled",
                            "--schema-dim", "2", "--snapshot-history"],
     "factorized_pooled": ["--model", "factorized", "--schema-grouping", "pooled",
                           "--schema-dim", "8", "--snapshot-history"],

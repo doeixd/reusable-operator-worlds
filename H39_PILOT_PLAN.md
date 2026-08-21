@@ -173,3 +173,38 @@ Amended: `eps_i` is initialized exactly as in the ordinary learner (the
 shared `1e-3` random `initial_residual_state`), under the unchanged L1
 storage penalty. The plan's statement that `eps` "is never forced to stay
 zero" stands. Everything else is unchanged.
+
+# Amendment 2 (2026-08-21, before any pilot artifact is read)
+
+The plan above calls the held-out future tasks "siblings" and assigns each a
+"oracle family schema". Re-reading `meta_world.py` before scoring: at
+`r_meta = 1` ALL family operators — the four trained families and the two
+held-out ones — lie in ONE shared rank-2 functional subspace ("a schema of
+rank K is sufficient at r_meta = 1 by construction"), and
+`novel_family_tasks` are members of two families the lifetime NEVER sees.
+Held-out members of seen families were found non-discriminating during V6
+design and are deliberately not the future. Census C0 and the V6R anchors
+both used `novel_family_tasks`, so their numbers stand; only the word
+"sibling" was wrong. The correct reading of C0 is stronger: the new family's
+teacher operator lies in the span of the trained families' operators, yet
+the learner's residual population does not contain it.
+
+Consequences, fixed before any pilot artifact is opened:
+
+- **F-grouped is withdrawn as ill-posed.** Per-family schemas have no
+  schema for an unseen family, and the teacher has no per-family subspaces
+  to represent. Its cell (`factorized_grouped`) failed at its first sleep
+  with a transient Windows allocation error and is not rerun; any partial
+  output is quarantined, unscored.
+- **Primary arm is F-pooled with `a = 2`** — the exact oracle FORM: one
+  shared schema `W in R^{198 x 2}` matching the generator's meta-subspace
+  rank, one `alpha_i in R^2` per task, no grouping information of any kind.
+  Cell `factorized_pooled2`.
+- **Secondary arm is F-pooled with `a = 8`** (cell `factorized_pooled`),
+  reported beside the primary; cannot change the branch.
+- The alpha-only fit for a held-out future task uses the single schema.
+- "Sibling" throughout this plan means a member of an unseen family drawn
+  from the shared subspace.
+
+Thresholds, branches, non-vacuity checks, the historical-span diagnostic,
+and the ordinary bit-exactness requirement are unchanged.
