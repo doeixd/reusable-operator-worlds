@@ -4267,3 +4267,9 @@ Historical-span diagnostic unchanged (2.75x at full rank). Licensing: none.
 A successor must (a) register the channel-use criterion against the
 baseline's measured route concentration, (b) treat K as an independent
 variable, and (c) be frozen before running; worlds 1-2 remain unopened.
+
+Correction to the entry above (same day, before any further use): the
+ordinary per-task k=128 anchors are 0.02524 / 0.01928 (mean 0.02226), not
+"0.02672 / 0.01780" as written. P8's per-task alpha-only endpoints 0.0624 /
+0.0217 therefore sit at 2.47x / 1.13x; the mean ratio 1.89x and every
+decision are unaffected.
