@@ -2309,3 +2309,60 @@ higher-order structure.
 Also prescribes the V5 closure document with four findings (V5-A quantitative
 amortization, V5-B recursive economics, V5-C learner gap, V5-D localization
 before PROMOTE), written as `V5_CLOSURE.md`.
+
+### [reviewer-feedback-52.txt](reviewer-feedback-52.txt)
+The V6 design review. Central hypothesis: ordinary task loss UNDERDETERMINES the
+representation, and prospective learning pressure breaks that degeneracy toward
+representations making related future learning cheaper.
+
+Twelve ways to fool ourselves, each with a fix: future-task cheating (strict
+support/query split, opaque family relabeling, evaluation on families and worlds
+never used for the prospective gradient); generic plasticity masquerading as
+structure (always measure unrelated futures too, report Φ_specific =
+Φ_related − Φ_unrelated); the optimizer improving rather than the representation
+(freeze both representations and adapt with an identical standardized optimizer);
+teacher-geometry recovery as a false target (R_effective is a SECONDARY
+mechanistic endpoint, the primary is C_adapt at matched behaviour);
+over-alignment collapse; short-horizon myopia (sample the horizon); the wrong
+future distribution (fertility is only defined relative to p(T_future), so sweep
+the recurrence probability); the prospective term becoming an arbitrary
+regularizer (put it in the same lifetime-prequential currency rather than tuning
+η until geometry appears); capacity cheating (matched budget, plus a
+larger-ordinary-learner baseline); ordinary replay possibly already sufficing;
+meta-overfitting to the ROW generator; and the compute cost of differentiating
+through learning (tiny exact unrolls first).
+
+Hypothesis ladder H30–H36: fertility exists (the load-bearing claim); fertility
+is structurally specific; prospective pressure raises R_effective above 0.19;
+fertility makes schema economics realizable, turning V5's FACTORIZE 0/6 into
+wins (the bridge from V5, and genuinely uncertain); there is an ECONOMIC
+THRESHOLD for prospective structure, p·H·s̄ > C_F, so that even learning a good
+way of looking at things obeys the amortization law; too much fertility pressure
+hurts, giving a U-shaped optimum; and meta-learned updates rediscover
+prospective organization without family labels.
+
+Introduces the TRANSFER KERNEL K_ij — the saving when adapting to task j after
+learning task i — as a more principled definition of representation geometry:
+related tasks should be close because learning one makes learning the other
+cheaper, not because the teacher assigned them a label. Suggests the natural
+equivalence relation is T_i ~ T_j iff learning one materially reduces the cost
+of learning the other, making concepts clusters in transfer space — which
+matters because real data has no teacher families.
+
+Prescribes four arms (ordinary wake, replay/joint baseline, oracle-prospective,
+supervised-family upper bound) whose failure pattern localizes the problem:
+supervised failing means a substrate problem, supervised working while
+prospective fails means an objective problem, prospective working while replay
+doesn't means future-adaptation pressure matters specifically, and replay
+working means simpler continual multitask learning sufficed. Adds branching
+futures (clone and adapt to several possible continuations including an
+unrelated one) as the option-value form that later maps onto dreaming, with the
+discipline that dreams may PROPOSE a representation but never VALIDATE it.
+
+Predicts oracle prospective pressure works, R_effective improves to ~0.4–0.6
+rather than ~1, replay recovers some but not all, and H33 is uncertain — if
+transfer improves without a schema that beats COMPRESS, that would show
+meta-learning and explicit language formation are distinct steps. Closes by
+naming the most exciting possible outcome: not "prospective beats standard" but
+a phase diagram of specialize ↔ preserve flexibility ↔ form reusable
+abstraction, driven by the expected economics of the future.
