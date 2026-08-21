@@ -2993,3 +2993,31 @@ representation-space distance d_R(i,j) and K_ij. This matters beyond
 V6: it defines relatedness as "learning one makes the other cheaper"
 rather than "the teacher gave them the same label", which is the only
 form available in data that has no teacher.
+
+## V6.1 design conflict, found in the smoke test (2026-08-21)
+
+The first four-arm smoke run returned BIT-IDENTICAL lifetimes for
+ordinary, replay and prospective: cumulative loss -178,669 and M = 7 in
+all three, with the hook firing 56 times and changing nothing.
+
+Cause, and it is a genuine conflict rather than a coding error. V5's
+protocol passes `--freeze-basis-at 8`, which sets `requires_grad=False`
+on every shared parameter at task 8 — and families begin at task 8. V5
+wanted that: with the basis frozen, new structure has nowhere to go but
+task-local innovations, which is what makes an explicit promoter
+necessary. V6's mechanism is the opposite: prospective pressure acts by
+SHAPING the shared representation, so a frozen basis makes every
+prospective gradient dead on arrival.
+
+CONSEQUENCE FOR THE CONTROL, recorded because it weakens a claim I made
+when registering V6. I wrote "V5 is the control: the same H20 worlds,
+the same architecture, only the objective changes". That is no longer
+exactly true. V6 must leave the basis trainable, so the honest control
+is `ordinary` WITHOUT the freeze, run alongside the other three arms.
+V5's numbers become a reference point rather than the control arm.
+
+All four arms are re-run without the freeze. The comparison stays
+internally matched — same world, same architecture, same schedule, one
+knob — which is what the four-arm design needs. What is lost is the
+ability to quote V5's 0.19 as the ordinary baseline for R_effective; the
+V6 ordinary arm supplies its own.
