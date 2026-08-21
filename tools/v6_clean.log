@@ -1,0 +1,10 @@
+prospective world=0 meta r_meta=1 F=4: loss=-191906.8
+world 0 ordinary exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-190483.7
+world 0 replay exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-189953.5
+world 0 prospective exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-190357.6
+world 0 supervised exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-194941.6
+world 1 ordinary exit=0

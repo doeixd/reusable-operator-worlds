@@ -3,3 +3,13 @@ prospective world=1 meta r_meta=1 F=4: loss=-195031.0
 outer=2 world 1 exit=0
 prospective world=2 meta r_meta=1 F=4: loss=-194130.6
 outer=2 world 2 exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-189953.5
+outer=8 world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-193867.6
+outer=8 world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-193296.7
+outer=8 world 2 exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-177067.0
+outer=32 world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-187793.9
+outer=32 world 1 exit=0
