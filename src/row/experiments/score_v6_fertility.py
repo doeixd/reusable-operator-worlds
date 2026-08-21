@@ -123,10 +123,16 @@ def main() -> None:
         # of this scorer useless -- such a task already sits at 0.006
         # support loss, so adaptation has nothing to do and every arm
         # reports the same saturated number.
-        # An unseen FAMILY, from the same shared subspace: the future
-        # that actually has headroom. Members of seen families are
-        # nearly free for every arm and cannot discriminate.
+        # PHI_META, not Phi_within. An unseen FAMILY from the same
+        # meta-distribution, which is a more ambitious construct than
+        # "another member of a family already learned" (review 53). The
+        # within-family version is measured too, and its ceiling is
+        # itself informative: an unfrozen basis already generalizes to a
+        # new member so well that no arm can distinguish itself, which
+        # suggests the useful future is the next FAMILY, not the next
+        # member.
         related = list(getattr(generated, "novel_family_tasks", ()))
+        within = list(getattr(generated, "held_out_family_tasks", ()))
         # UNRELATED futures: pre-onset tasks belong to no family. They
         # ARE in the lifetime, which biases against finding specificity
         # (an unrelated task the arm trained on is unfairly cheap), so
@@ -150,6 +156,11 @@ def main() -> None:
                 "unrelated": {
                     str(k): [adapt_cost(model, t, args.steps, k, args.inner_lr)
                              for t in unrelated]
+                    for k in args.support
+                },
+                "within": {
+                    str(k): [adapt_cost(model, t, args.steps, k, args.inner_lr)
+                             for t in within]
                     for k in args.support
                 },
             })

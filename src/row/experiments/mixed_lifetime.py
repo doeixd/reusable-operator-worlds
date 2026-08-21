@@ -130,9 +130,12 @@ def main() -> None:
         help="V6.1 arm. ordinary = the V5 learner; replay = also train on a "
              "sibling's examples (does merely SEEING relatives suffice?); "
              "prospective = charge the cost of ADAPTING to a held-out sibling "
-             "back to the shared representation; supervised = pull siblings' "
-             "task codes together directly (substrate upper bound, not a "
-             "candidate architecture)",
+             "back to the shared representation; supervised = EXPLICIT-FAMILY-SHARING pressure, "
+             "asking the shared representation to predict a sibling from "
+             "its relative's route. NOT a substrate upper bound: it is a "
+             "stronger and more specific demand than 'can the substrate "
+             "represent family structure', so its failure would not "
+             "license an architectural verdict (review 53)",
     )
     parser.add_argument("--prospective-weight", type=float, default=1.0)
     parser.add_argument("--prospective-steps", type=int, default=4)
