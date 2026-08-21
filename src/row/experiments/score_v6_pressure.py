@@ -98,9 +98,21 @@ def main() -> None:
     if not pressures or pressures[0] != 0:
         raise SystemExit("--pressures must start with the ordinary pressure-0 baseline")
 
+    # Fail before loading or adapting any model when even one cell is missing or
+    # mismatched. Scoring the complete baseline and only then discovering a
+    # missing pressure cell wastes minutes and can leave a misleading partial
+    # impression even though no report is written.
+    paths: dict[tuple[int, int], Path] = {}
+    sources: list[dict[str, object]] = []
+    for world in args.worlds:
+        for pressure in pressures:
+            path = _artifact_path(args, pressure, world)
+            paths[(world, pressure)] = path
+            sources.append(_validate_artifact(
+                path, pressure, world, args.reference_pressure))
+
     config = load_config(args.config)
     cells: list[dict[str, object]] = []
-    sources: list[dict[str, object]] = []
     for world in args.worlds:
         spec = MetaFamilySpec(families=4, tasks_per_family=16, r_meta=1.0,
                               subspace_rank=2)
@@ -115,9 +127,7 @@ def main() -> None:
             raise SystemExit(f"world {world} has an empty H35 evaluation set")
 
         for pressure in pressures:
-            path = _artifact_path(args, pressure, world)
-            sources.append(_validate_artifact(
-                path, pressure, world, args.reference_pressure))
+            path = paths[(world, pressure)]
             model = load_learner(config, path, args.slots, kind="prospective")
             scored: dict[str, object] = {
                 "world": world,
@@ -186,7 +196,6 @@ def main() -> None:
             })
         summary[str(pressure)] = row
 
-    candidates = [summary[str(pressure)] for pressure in pressures if pressure != 0]
     beneficial = [
         pressure for pressure in pressures if pressure != 0
         and summary[str(pressure)]["phi_related"] > 0
