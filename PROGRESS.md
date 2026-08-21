@@ -2434,3 +2434,23 @@ single sign change (-157, -56, -17, +106). Inside the registered
 
 g=1.0 and g=1.5 are running; the C1 verdict and the full chi collapse
 wait on them. Configs v5_h80 and v5_h86 added for the g=0.5 grid.
+
+# 2026-08-20 — SEALED C1: PASS. The law predicts on untouched seeds
+
+300 cells (60 Stage 1 + 240 Stage 2) on seeds 600-609. Zero failures,
+zero exclusions, every crossing in-grid.
+
+| g | s_bar | H* pred | H* obs | err | chi |
+| --- | --- | --- | --- | --- | --- |
+| 0.5 | 26.6 | 41.3 | 42.5 | 3.0% | 1.031 |
+| 1.0 | 57.3 | 19.1 | 18.9 | 0.8% | 0.989 |
+| 1.5 | 84.3 | 13.0 | 12.9 | 0.5% | 0.993 |
+
+mean |chi - 1| = 0.016 against a registered 0.15; range
+[0.989, 1.031] against [0.7, 1.3]. The crossing moves 3.3x across the
+sweep while the carried abstraction stays bit-identical.
+
+Sealed status: C1 PASS. C2 passes its three unambiguous clauses
+(monotone M*, r_meta=0 never pays, ceil-exact 30/30) with its 15% clause
+unresolved by a denominator the plan failed to specify. C3 and C4 are
+registered negatives and not yet run on sealed worlds.

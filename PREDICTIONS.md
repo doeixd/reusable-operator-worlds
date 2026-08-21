@@ -2241,3 +2241,49 @@ Monotone in H_R with a single sign change. Inside the registered
 [0.7, 1.3] and inside the tighter 15%. One of three C1 points; the
 verdict waits on g=1.0 (predicted 19.1) and g=1.5 (predicted 13.0),
 which are queued.
+
+# SEALED C1 VERDICT: PASS (2026-08-20)
+
+Seeds 600-609, two-stage, 300 cells total (60 Stage 1 + 240 Stage 2),
+zero failures, zero post-gap births, zero pre-intervention leaks, every
+crossing interior to its own grid.
+
+| g | s_bar | H* predicted | H* observed | error | chi |
+| --- | --- | --- | --- | --- | --- |
+| 0.5 | 26.6 | 41.3 | 42.5 | 3.0% | 1.031 |
+| 1.0 | 57.3 | 19.1 | 18.9 | 0.8% | 0.989 |
+| 1.5 | 84.3 | 13.0 | 12.9 | 0.5% | 0.993 |
+
+    mean |chi - 1| = 0.016   (registered <= 0.15)
+    chi range      = [0.989, 1.031]   (registered inside [0.7, 1.3])
+
+Every protocol condition the plan made mandatory held: the predictor was
+measured at a fixed window containing no crossing; the Stage-2 grid was
+a deterministic function of Stage 1 and committed before any Stage-2
+cell ran; carry invariance was verified by checksum rather than
+tolerance; no cell served as both predictor and outcome.
+
+The crossing moves by a factor of 3.3 across the sweep (42.5 to 12.9)
+while the carried abstraction is bit-identical in every arm. Nothing
+about the three predictions was fitted to the data that tested them.
+
+## What the sealed block licenses
+
+    Within this testbed, the lifetime over which a reusable computation
+    is worth retaining is quantitatively determined by its
+    representation cost divided by its realized per-use saving.
+
+Stated to admit what each arm did: the development D-arm manipulated
+abstraction CAPACITY, moving cost and utility together; the S-arm here
+holds the stored abstraction exactly fixed and moves only its
+post-return utility regime. Across both, the threshold is predicted by
+C_carry / s_bar. It is not `H* ~ D` (falsified at 46.8% in V5.1) and not
+`H* ~ 1/g`.
+
+## Scope, unchanged by the pass
+
+Ten sealed worlds at one protocol point (slots=12, rank 2, one dormancy
+geometry, 8-bit currency). The D-arm was NOT rerun on sealed seeds, so
+the sealed evidence covers the s-arm only; the six-point collapse
+reported for H19 remains development plus this. The slots=6 crossing
+grid and the D* currency grids remain the named debts they were.
