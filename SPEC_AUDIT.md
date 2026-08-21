@@ -281,3 +281,88 @@ control (open item 2) before any unconditional H9 claim, and the
 - Remaining watch-list is now only V3-era items (H10 compiler-capacity
   accounting on reuse; forward_tasks batching before any large V3
   sweep; PREDICTIONS.md outcomes as their experiments run).
+
+# Re-audit at H39 development closure (2026-08-21)
+
+Scope: the H39 line (reviews 58-61), from census C0 through the H39d
+capacity sweep, and the code it added. The V1-V6 audits above are untouched
+by this work; the items checked here are the ones the new code could have
+broken.
+
+## Plans versus implementation, item by item
+
+- `H39_EXISTENCE_PLAN.md` (frozen `b6fc27d`, Amendment 1 `16906ff`):
+  census C0 implemented in `census_h39_schema.py` exactly as amended
+  (PCA over live residuals + abstractions within one artifact; alpha-only
+  B1 fit, eps frozen at zero, k=128; 1.5x in >= 2/3 worlds). Verdict NOT RUN
+  is the plan's own. The rank-16 and max-rank runs are labeled exploratory
+  in their reports and required a non-registered output path.
+- `H39_PILOT_PLAN.md` (frozen `effaf6b`; Amendments 1-3): every amendment
+  was appended before the data it concerned was read (eps stationarity found
+  on a scratch world; the unseen-family correction before any pilot artifact
+  was opened; the alpha-only fit's stationarity after the registered
+  non-vacuity check refused the first scorer run, whose report is preserved
+  as discarded). Branch C read from the frozen table.
+- `H39B_PSLOT_PILOT_PLAN.md` (frozen `83ac418`, no amendments): branch U
+  read from the table; the route-mass threshold is annotated as
+  miscalibrated in `PREDICTIONS.md` and NOT re-judged.
+- `H39C_KSWEEP_PLAN.md` (frozen `1e99904`): 15/15 cells; verdict P from the
+  table. The baseline-relative route-mass term never fired; the plan's
+  verdict did not depend on it.
+- `H39D_CAPACITY_PLAN.md` (frozen `c6b1b7b`): 12/12 cells; verdict A from
+  the table, recorded with its marginality. The functional usage criterion
+  replaced route mass as deciding, as the plan states.
+- `H39_CONFIRMATION_PLAN.md` (frozen `1c98017`; Amendment 1 `f78f209`):
+  lifetimes launched under the original freeze; the amendment changed only
+  the scorer's E2 rule and was registered before any sealed cell was read
+  or scored. The scorer implements the amended rule.
+
+## Code-level checks
+
+- `PromotingSharedResidualLearner.effective_residual` is an identity for
+  every pre-existing learner; the ordinary world-0 rerun with the history
+  hook reproduced the V6 artifact BITWISE (loss and every tensor), so the
+  base-class change and the snapshot hook are read-only for existing
+  models.
+- `ParameterizedSlotLearner` at `alpha = 0` with arguments frozen
+  reproduced the ordinary artifact bitwise on all ordinary tensors (real
+  world-0 artifact, not only the smoke world). Multi-slot at `alpha = 0`
+  equals ordinary in unit tests; the single-slot state-dict layout is
+  unchanged, so H39b/H39c artifacts load under the multi-slot code.
+- Loaders reconstruct abstractions, references, retirement, schema/slot
+  assignment, and both slots' argument matrices; save/load functional-
+  equivalence tests with failing companions exist for both new learners.
+- Scorers: anchors reproduced to 1e-12 before any new value is read; fits
+  are support-only with fixed budgets; reports are written atomically;
+  every cell is reported; non-vacuity fails closed. The two scorer crashes
+  this line produced (serializing a 2xK alpha; a stationary alpha-only
+  protocol) both occurred BEFORE the atomic write and left nothing on disk.
+- Launchers: bounded pool of three, one writer per cell, complete
+  intervention records, resume refusal on mismatch, nonzero exit on any
+  failure; the confirmation launcher additionally runs `check_prereg.py`
+  before opening any seed >= 700.
+
+## Deviations and open items
+
+1. Two thresholds were registered without a baseline check (route mass on
+   P in H39b; its 2x successor in H39c). Neither changed a verdict; both are
+   annotated. The functional ablation is now the deciding usage criterion
+   and is written into AGENTS.md.
+2. `schema_share` in the H39 pilot is a ratio of ~2% NMSE differences and is
+   reported, not relied on.
+3. `D*` for the argument matrices is an 8-bit scalar-count proxy throughout
+   the H39 line; the rate-distortion instrument was not run on these
+   artifacts. Any description-length claim about `P(alpha)` needs it.
+4. The ordinary per-task anchors were mis-transcribed once in the ledger
+   and corrected by appended note on the same day; no decision used them.
+5. Slot structure at matched capacity (M2K16 vs P32) is NOT supported;
+   only the K=32 two-slot arm crossed, in two worlds.
+
+## Verdict
+
+The H39 development line is complete as registered: six frozen plans, six
+verdicts read from their own tables, every amendment dated and prior to the
+data it governs, every new learner bitwise-equivalent to the baseline under
+its null switch, and every scorer fail-closed. The sealed confirmation
+block is open; its verdict will be read from the amended table and nothing
+else.
