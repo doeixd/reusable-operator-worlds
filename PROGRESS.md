@@ -2897,3 +2897,15 @@ interface beats ordinary in 13/15 cells. No K reaches 1.5x in two worlds, so
 the frozen verdict is P: real, learned, capacity-limited at K <= 16. Licenses
 a larger-K / multi-slot development plan only. Recorded in `PREDICTIONS.md`
 and `notes/learnings.txt`.
+
+# 2026-08-21 — H39d CAPACITY SWEEP FROZEN AND LAUNCHED
+
+Froze `H39D_CAPACITY_PLAN.md` (`c6b1b7b` plan commit; hash registered):
+arms P32, P64 (one slot) and M2K16, M2K32 (two parameterized slots, matched
+total arguments) on worlds 0-2; usage criterion is the functional alpha-
+zeroed ablation with route mass reported only; verdicts A / P+ / S against
+H39c's K=16 points. Generalized `ParameterizedSlotLearner` to `pslot_count`
+slots with the single-slot state-dict layout unchanged (tests: two-slot at
+alpha=0 equals ordinary bitwise; second slot gets gradient), added
+`--pslot-count`, launcher cells, and `score_h39d_capacity.py`. Full suite OK.
+12 cells running; none read.
