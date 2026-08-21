@@ -40,6 +40,7 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
         freeze_args: bool = False,
         freeze_matrices: bool = False,
         pslot_index: int | None = None,
+        pslot_count: int = 1,
         **kwargs,
     ) -> None:
         super().__init__(*args, **kwargs)
@@ -54,22 +55,37 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
         )
         if not 0 <= self.pslot_index < self.operator_slots:
             raise ValueError("pslot_index out of range")
-        base = self.basis[self.pslot_index]
-        d, rank = base.U.shape
+        # Multi-slot (H39d): additional parameterized slots descend from the
+        # primary index (11, 10, ...). Slot s's matrices are seeded
+        # seed + 997*s + 31*k, so the primary slot's layout is unchanged
+        # and single-slot artifacts remain loadable.
+        self.pslot_count = int(pslot_count)
+        if not 1 <= self.pslot_count <= self.pslot_index + 1:
+            raise ValueError("pslot_count out of range")
+        self.pslot_indices = [self.pslot_index - i for i in range(self.pslot_count)]
         seed = int(kwargs.get("seed", 0))
-        matrices = []
-        for k in range(1, self.slot_args + 1):
-            generator = torch.Generator(device="cpu").manual_seed(
-                seed + 997 * self.pslot_index + 31 * k
-            )
-            U = torch.randn(d, rank, generator=generator)
-            U = U / torch.linalg.matrix_norm(U, ord=2)
-            matrices.append(U)
+
+        def _matrices(slot: int) -> Tensor:
+            d, rank = self.basis[slot].U.shape
+            out = []
+            for k in range(1, self.slot_args + 1):
+                generator = torch.Generator(device="cpu").manual_seed(seed + 997 * slot + 31 * k)
+                U = torch.randn(d, rank, generator=generator)
+                out.append(U / torch.linalg.matrix_norm(U, ord=2))
+            return torch.stack(out)
+
         self.argument_matrices = nn.Parameter(
-            torch.stack(matrices), requires_grad=not self.freeze_matrices
+            _matrices(self.pslot_index), requires_grad=not self.freeze_matrices
         )
         self.register_buffer("initial_argument_matrices",
                              self.argument_matrices.detach().clone())
+        if self.pslot_count > 1:
+            self.extra_argument_matrices = nn.Parameter(
+                torch.stack([_matrices(slot) for slot in self.pslot_indices[1:]]),
+                requires_grad=not self.freeze_matrices,
+            )
+            self.register_buffer("initial_extra_argument_matrices",
+                                 self.extra_argument_matrices.detach().clone())
         self.task_alphas = nn.ParameterDict()
 
     # ---- task state ---------------------------------------------------
@@ -78,8 +94,8 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
         # `schema_index` is accepted for interface parity with the
         # factorized learner and ignored: there is one P slot.
         code, residual = super().begin_task(task_id)
-        alpha = nn.Parameter(torch.zeros(self.slot_args),
-                             requires_grad=not self.freeze_args)
+        shape = (self.slot_args,) if self.pslot_count == 1 else (self.pslot_count, self.slot_args)
+        alpha = nn.Parameter(torch.zeros(shape), requires_grad=not self.freeze_args)
         self.task_alphas[task_id] = alpha
         return code, residual, alpha
 
@@ -90,20 +106,29 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
 
     # ---- forward ------------------------------------------------------
 
-    def _pslot(self, z: Tensor, task_id: str) -> Tensor:
-        base = self.basis[self.pslot_index]
+    def _slot_argument(self, task_id: str, position: int) -> tuple[Tensor, Tensor]:
+        alpha = self.task_alphas[task_id]
+        if self.pslot_count == 1:
+            return alpha, self.argument_matrices
+        if position == 0:
+            return alpha[0], self.argument_matrices
+        return alpha[position], self.extra_argument_matrices[position - 1]
+
+    def _pslot(self, z: Tensor, task_id: str, position: int = 0) -> Tensor:
+        base = self.basis[self.pslot_indices[position]]
         hidden = torch.nn.functional.linear(z, base.V, base.b)
         hidden = (torch.tanh(hidden) if base.activation == "tanh"
                   else torch.nn.functional.gelu(hidden))
-        alpha = self.task_alphas[task_id]
+        alpha, matrices = self._slot_argument(task_id, position)
         # U_0 + sum_k alpha_k U_k; exactly U_0 when alpha == 0.
-        U = base.U + torch.einsum("k,kdr->dr", alpha, self.argument_matrices)
+        U = base.U + torch.einsum("k,kdr->dr", alpha, matrices)
         return torch.tanh(z + base.alpha * torch.nn.functional.linear(hidden, U))
 
     def _candidates(self, z: Tensor, task_id: str) -> Tensor:
+        position = {slot: i for i, slot in enumerate(self.pslot_indices)}
         return torch.stack(
             [
-                self._pslot(z, task_id) if index == self.pslot_index else operator(z)
+                self._pslot(z, task_id, position[index]) if index in position else operator(z)
                 for index, operator in enumerate(self.basis)
             ],
             dim=0,
@@ -139,11 +164,20 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
         shared = super().shared_parameters()
         if not self.freeze_matrices:
             shared.append(self.argument_matrices)
+            if self.pslot_count > 1:
+                shared.append(self.extra_argument_matrices)
         return shared
+
+    def all_argument_matrices(self) -> list[tuple[int, Tensor, Tensor]]:
+        """(slot index, current, initial) for every parameterized slot."""
+        out = [(self.pslot_index, self.argument_matrices, self.initial_argument_matrices)]
+        for i, slot in enumerate(self.pslot_indices[1:]):
+            out.append((slot, self.extra_argument_matrices[i], self.initial_extra_argument_matrices[i]))
+        return out
 
     @property
     def shared_parameter_count(self) -> int:
-        return super().shared_parameter_count + self.argument_matrices.numel()
+        return super().shared_parameter_count + sum(m.numel() for _, m, _ in self.all_argument_matrices())
 
     @property
     def task_state_scalar_count(self) -> int:
@@ -153,10 +187,15 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
 
     @torch.no_grad()
     def pslot_diagnostics(self) -> dict[str, object]:
-        initial = self.initial_argument_matrices
-        moved = float(torch.linalg.norm(self.argument_matrices - initial)
-                      / (torch.linalg.norm(initial) or 1.0))
+        moved_all = [float(torch.linalg.norm(m - init) / (torch.linalg.norm(init) or 1.0))
+                     for _, m, init in self.all_argument_matrices()]
+        moved = moved_all[0]
         alpha_norms = [float(torch.linalg.norm(a)) for a in self.task_alphas.values()]
+        alpha_norms_by_slot = [
+            [float(torch.linalg.norm(a if self.pslot_count == 1 else a[i]))
+             for a in self.task_alphas.values()]
+            for i in range(self.pslot_count)
+        ]
         masses = []
         for code in self.task_codes.values():
             coefficients = torch.softmax(code.reshape(self.task_steps, self.operator_slots), dim=-1)
@@ -167,11 +206,15 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
             "freeze_args": self.freeze_args,
             "freeze_matrices": self.freeze_matrices,
             "pslot_index": self.pslot_index,
+            "pslot_count": self.pslot_count,
+            "pslot_indices": list(self.pslot_indices),
             "argument_matrices_relative_movement": moved,
+            "argument_matrices_relative_movement_by_slot": moved_all,
+            "alpha_norm_mean_by_slot": [float(np.mean(v)) if v else 0.0 for v in alpha_norms_by_slot],
             "alpha_norm_mean": float(np.mean(alpha_norms)) if alpha_norms else 0.0,
             "alpha_nonzero_tasks": int(sum(1 for n in alpha_norms if n > 0)),
             "route_mass_on_P_by_step_all_tasks": mass,
-            "argument_scalars": int(self.argument_matrices.numel()),
+            "argument_scalars": int(sum(m.numel() for _, m, _ in self.all_argument_matrices())),
             "alpha_scalars": sum(p.numel() for p in self.task_alphas.values()),
         }
 

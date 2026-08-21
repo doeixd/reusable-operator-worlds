@@ -44,6 +44,14 @@ for _w in (0, 1, 2):
                                                  "--snapshot-history"])
     SWEEP[f"ksweep_g8/world_{_w}"] = (_w, ["--model", "pslot", "--slot-args", "8",
                                            "--freeze-matrices", "--snapshot-history"])
+# H39d cells (H39D_CAPACITY_PLAN.md)
+for _w in (0, 1, 2):
+    for _k in (32, 64):
+        SWEEP[f"cap_p{_k}/world_{_w}"] = (_w, ["--model", "pslot", "--slot-args", str(_k),
+                                              "--snapshot-history"])
+    for _k in (16, 32):
+        SWEEP[f"cap_m2k{_k}/world_{_w}"] = (_w, ["--model", "pslot", "--slot-args", str(_k),
+                                                "--pslot-count", "2", "--snapshot-history"])
 REQUIRED = ("model.pt", "summary.json", "rho_profile.json", "fingerprint.json",
             "config.yaml", "history.pt")
 
@@ -74,7 +82,9 @@ def run(name: str) -> tuple[str, int]:
 def main() -> int:
     names = sys.argv[1:] or list(CELLS)
     if names == ["sweep"]:
-        names = list(SWEEP)
+        names = [n for n in SWEEP if n.startswith("ksweep_")]
+    elif names == ["capacity"]:
+        names = [n for n in SWEEP if n.startswith("cap_")]
     with ProcessPoolExecutor(max_workers=3) as pool:  # slots=12: cap 3 (memory)
         results = list(pool.map(run, names))
     failed = [n for n, c in results if c != 0]

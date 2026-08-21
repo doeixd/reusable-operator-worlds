@@ -1,0 +1,31 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 579, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\mixed_lifetime.py", line 506, in main
+    summary = learned_lifetime.run(
+        config,
+    ...<13 lines>...
+        snapshot_history=args.snapshot_history,
+    )
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\learned_lifetime.py", line 763, in run
+    record = model.sleep(
+        [world.tasks[i].task_id for i in task_indices[: lifetime_index + 1]],
+    ...<3 lines>...
+        lifetime_index=lifetime_index + 1,
+    )
+  File "C:\Users\Patrick\Downloads\llm\src\row\models\lifecycle_models.py", line 105, in sleep
+    result = super().sleep(task_ids, *args, **kwargs)
+  File "C:\Users\Patrick\AppData\Local\Programs\Python\Python314\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "C:\Users\Patrick\Downloads\llm\src\row\models\promoting_models.py", line 270, in sleep
+    clusters = self._cluster(functions, (k,))
+  File "C:\Users\Patrick\AppData\Local\Programs\Python\Python314\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "C:\Users\Patrick\Downloads\llm\src\row\models\promoting_models.py", line 167, in _cluster
+    distances = ((data[:, None, :] - centers[None, :, :]) ** 2).sum(-1)
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^~~
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 3.66 MiB for an array with shape (26, 3, 12288) and data type float32
+exit=1

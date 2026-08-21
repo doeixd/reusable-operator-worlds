@@ -39,6 +39,8 @@ def _pilot_record(args) -> dict[str, object] | None:
     if args.model == "pslot":
         record.update({"slot_args": args.slot_args, "freeze_args": bool(args.freeze_args),
                        "freeze_matrices": bool(args.freeze_matrices), "pslot_index": 11})
+        if args.pslot_count != 1:
+            record["pslot_count"] = args.pslot_count
     if args.model == "factorized":
         record.update({
             "schema_dim": args.schema_dim,
@@ -231,6 +233,8 @@ def main() -> None:
                         help="pslot: argument dimension K of the parameterized basis slot")
     parser.add_argument("--freeze-args", action="store_true",
                         help="pslot: freeze every alpha at zero and U_k at init (bit-exact control)")
+    parser.add_argument("--pslot-count", type=int, default=1,
+                        help="pslot: number of parameterized slots (11, 10, ...)")
     parser.add_argument("--freeze-matrices", action="store_true",
                         help="pslot: freeze U_k at init, alpha learns (matched-budget generic channel)")
     parser.add_argument("--snapshot-history", action="store_true",
@@ -500,7 +504,8 @@ def main() -> None:
             raise SystemExit("pslot requires --r-meta and --arm ordinary")
         learned_lifetime.PSLOT_SETTINGS = {"slot_args": args.slot_args,
                                            "freeze_args": args.freeze_args,
-                                           "freeze_matrices": args.freeze_matrices}
+                                           "freeze_matrices": args.freeze_matrices,
+                                           "pslot_count": args.pslot_count}
     if args.model == "factorized":
         if meta_spec is None:
             raise SystemExit("factorized requires --r-meta (the meta-recurrence world)")

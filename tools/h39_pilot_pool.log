@@ -1,0 +1,4 @@
+ordinary_history: exit=0
+factorized_grouped: exit=1
+factorized_pooled: exit=0
+FAILED cells: ['factorized_grouped']

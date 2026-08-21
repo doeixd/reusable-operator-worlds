@@ -101,3 +101,36 @@ class FreezeMatricesTests(unittest.TestCase):
         torch.mean(model(torch.randn(16, 8), "t") ** 2).backward()
         self.assertGreater(float(alpha.grad.abs().sum()), 0.0)
         self.assertIsNone(model.argument_matrices.grad)
+
+
+class MultiSlotTests(unittest.TestCase):
+    def test_two_slots_at_zero_alpha_equal_ordinary_and_single_slot_layout_unchanged(self):
+        multi = ParameterizedSlotLearner(slot_args=3, pslot_count=2, **KW)
+        single = ParameterizedSlotLearner(slot_args=3, **KW)
+        ordinary = ProspectiveLifecycleLearner(**KW)
+        for m in (multi, single, ordinary):
+            m.begin_task("t")
+        with torch.no_grad():
+            for m in (multi, single, ordinary):
+                m.task_codes["t"].copy_(torch.linspace(-1, 1, multi.route_size))
+        x = torch.randn(16, 8)
+        self.assertTrue(torch.equal(multi(x, "t"), ordinary(x, "t")))
+        self.assertEqual(tuple(multi.task_alphas["t"].shape), (2, 3))
+        self.assertEqual(multi.pslot_indices, [3, 2])
+        self.assertTrue(torch.equal(multi.argument_matrices, single.argument_matrices))
+        self.assertEqual(set(single.state_dict()) - set(multi.state_dict()), set())
+
+    def test_second_slot_argument_changes_output_and_gets_gradient(self):
+        multi = ParameterizedSlotLearner(slot_args=2, pslot_count=2, **KW)
+        code, eps, alpha = multi.begin_task("t")
+        with torch.no_grad():
+            code.view(3, 4)[:, 2] = 5.0  # route onto the second parameterized slot
+        x = torch.randn(16, 8)
+        before = multi(x, "t").detach()
+        with torch.no_grad():
+            alpha[1].fill_(1.0)
+        after = multi(x, "t")
+        self.assertFalse(torch.allclose(before, after))
+        torch.mean(after ** 2).backward()
+        self.assertGreater(float(multi.extra_argument_matrices.grad.abs().sum()), 0.0)
+        self.assertEqual(len(multi.shared_parameters()), len(list(multi.basis.parameters())) + 2)

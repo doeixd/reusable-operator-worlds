@@ -82,7 +82,8 @@ def validate_pilot_cell(path: Path, expected: dict) -> dict:
 
 def load_pslot(config, path: Path, record: dict) -> ParameterizedSlotLearner:
     settings = {"slot_args": record["slot_args"], "freeze_args": record["freeze_args"],
-                "freeze_matrices": record.get("freeze_matrices", False)}
+                "freeze_matrices": record.get("freeze_matrices", False),
+                "pslot_count": record.get("pslot_count", 1)}
     saved = learned_lifetime.PSLOT_SETTINGS
     learned_lifetime.PSLOT_SETTINGS = settings
     try:
@@ -225,16 +226,19 @@ def channel_use(model: ParameterizedSlotLearner, tasks: list) -> dict:
         zeroed = float(torch.mean((model(x, task.task_id) - y) ** 2)) / var
         alpha.copy_(alpha0)
         code = model.task_codes[task.task_id].reshape(model.task_steps, model.operator_slots)
-        mass = torch.softmax(code, dim=-1)[:, model.pslot_index].tolist()
-        masses.append(mass)
+        soft = torch.softmax(code, dim=-1)
+        mass = soft[:, model.pslot_index].tolist()
+        masses.append([soft[:, slot].tolist() for slot in model.pslot_indices])
         rows.append({"task_id": task.task_id, "retired": task.task_id in model.retired,
                      "nmse_full": full, "nmse_alpha_zeroed": zeroed,
                      "route_mass_P": mass, "alpha_norm": float(torch.linalg.norm(alpha0))})
-    mass_by_step = np.mean(masses, axis=0).tolist() if masses else []
+    by_slot = np.mean(masses, axis=0).tolist() if masses else []
+    mass_by_step = by_slot[0] if by_slot else []
     full = float(np.mean([r["nmse_full"] for r in rows]))
     zeroed = float(np.mean([r["nmse_alpha_zeroed"] for r in rows]))
     return {"family_tasks": len(rows), "retired_family_tasks": sum(r["retired"] for r in rows),
             "route_mass_P_by_step": mass_by_step,
+            "route_mass_by_parameterized_slot": dict(zip(map(str, model.pslot_indices), by_slot)),
             "route_mass_P_max_step": max(mass_by_step) if mass_by_step else float("nan"),
             "uniform_reference": 1.0 / model.operator_slots,
             "nmse_full": full, "nmse_alpha_zeroed": zeroed,
