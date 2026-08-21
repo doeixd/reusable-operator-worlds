@@ -6,3 +6,8 @@ prospective world=2 meta r_meta=1 F=4: loss=-194256.9
 w=10 world 2 exit=0
 prospective world=0 meta r_meta=1 F=4: loss=-191968.3
 w=100 world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-195126.6
+w=100 world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-194247.1
+w=100 world 2 exit=0
+V6_PRESSURE_DONE
