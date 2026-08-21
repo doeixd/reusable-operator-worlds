@@ -2878,3 +2878,84 @@ fixed target regardless of support. Worth recording that the
 independent baseline there is unrealistically strong, because shared
 hidden features make acquisition an exactly-determined linear solve; the
 1-vs-8 win is a lower bound.
+
+
+================================================================================
+LOCALIZING WHY THE SCHEMA ECONOMY IS UNREACHABLE (2026-08-20, reviews 48-49)
+================================================================================
+
+V5's sealed block left one live puzzle: over TEACHER family operators a
+schema pays and its crossing is predicted (C1, C2), and over the LEARNED
+library it fails 0/6 (C3). Four hypotheses were on the table for why.
+Three are now eliminated, and the elimination is the result.
+
+    A  fragmentation           REJECTED. Best k-subset of promoted atoms
+                               leaves 0.92 of a teacher family operator
+                               unexplained at k=3 against 0.94 at k=1.
+                               M > F is not oversegmentation.
+    C  local coordinates       NOT REACHABLE. The promoted objects are
+                               not coordinate-variants of the teacher's;
+                               there is nothing for an adapter to align.
+    global rotation            DEAD. The teacher operator is not in the
+                               SPAN of the learner's innovations: 0.707
+                               unexplained by all 24 at once, which is
+                               an upper bound on any linear refactor.
+    D  wake objective          WHAT REMAINS.
+
+CONSEQUENCE, and V5's most consequential negative: POST-HOC REFACTORING
+CANNOT BE THE REMEDY. Not local alignment, not global
+reparameterization, not a sleep oracle over the promoted library. None
+of them can recover structure that is not in the span of what wake
+produced. If a fertile representation is wanted, the pressure has to
+exist while the representation is being formed. That is a V6 question.
+
+THE MEASUREMENT-UNIT LESSON, which cost a published over-claim. The
+first H29 measured capture over the learner's private RESIDUAL tensors,
+got 0.095, and I wrote that "90% of the meta-structure is already
+missing before PROMOTE runs". That conflates the residual objects with
+the learner. A task is solved as basis + route + residual, so two tasks
+sharing a family can split the common computation differently between
+route and residual and look unrelated in the residuals alone. Measuring
+the EFFECTIVE task-conditioned operator, I_tau = F_tau - F_0 with
+task-specific information nulled, gives 0.190 — double. The residual
+tensor was the wrong computational unit, exactly as the review said.
+Same error family as comparing learner slot indices to teacher primitive
+indices, and as averaging parameters instead of functions. Measure what
+the learner COMPUTES, not what it stores.
+
+WHAT SURVIVED THE CORRECTION: 0.190 is still 5x below the teacher's
+1.000, so the corrected reading is "the learner holds about a fifth of
+the family geometry, half of it invisible in residuals alone", not "it
+was there all along".
+
+A ROTATION CANNOT CHANGE A ROTATION-INVARIANT STATISTIC. Review 49
+proposed searching for a global Q that maximizes family capture.
+Leave-one-out subspace capture is invariant to a global orthogonal map
+of the point set, so that search is empty by construction. The
+well-posed version of the same intuition is the SPAN question — are the
+teacher's atoms mixtures of the learner's — which is what B_1 = A_1+A_2,
+B_2 = A_1-A_2 actually expresses. Before implementing a proposed search,
+check whether the objective is invariant to the thing being searched
+over.
+
+TWO INSTRUMENT FAILURES, both of which produced readable but wrong
+numbers:
+
+  * A scorer that dies partway leaves the PREVIOUS report on disk and
+    nothing in the output says so. H29's first two attempts timed out
+    silently — the LOO null over a 70-object population of 3,072-wide
+    vectors is thousands of SVDs — and I read the stale file as a
+    result twice. Any audit writing to a fixed path should stamp its run
+    or refuse a report older than its inputs.
+  * Probing at N(0, I) when the operator acts at the LAST program step
+    measures both objects on a distribution neither sees. It moved the
+    fragmentation figure from 0.98 to 0.92. The conclusion held, but the
+    first number was measuring the wrong thing.
+
+AND ONE RIGGED COMPARISON, the third of its kind here. The whole-library
+economy test defined each task's target as the teacher operator's own
+effect, so the teacher arm had zero residual by construction and "won"
+16x. Any ratio that large is a definition, not a finding. V4.1's
+total-variance tolerance and the raw-ablation counterfactual were the
+same error. Check which side the TARGET belongs to before reading a
+ratio.
