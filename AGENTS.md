@@ -1097,3 +1097,64 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   labels out of selection, include abundant-support and sparse-support cells,
   and require agreement across materially different optimizers before assigning
   a capacity, identifiability, or findability mechanism.
+- ZERO IS A STATIONARY POINT OF `u.tanh(vz+b)`. A zero-initialized rank-2
+  residual never moves (d/du = tanh(0), d/dv is proportional to u), and any
+  argument that reaches the output only through that residual
+  (`dL/dalpha = W^T dL/dr`) is pinned with it. This froze training once
+  (exact-null eps) and an adaptation fit once (eps = 0 in the alpha-only
+  protocol); both were caught only because a non-vacuity check required
+  `alpha_norm > 0`. A literal null state in this family needs a gate, never a
+  zero vector. Arguments that enter a basis operator's `U` matrix do not have
+  this problem: `dL/dalpha_k = <dL/dU, U_k>` is nonzero at alpha = 0.
+- The residual vector is not where family computation lives. Zeroing the
+  whole residual channel (schema + eps) of live family tasks moved NMSE by
+  about 2%, and 56/64 family tasks had been retired into promoted references
+  where the channel does not fire. Two residual-side schemas (post-hoc PCA
+  over the learner's own residuals, and one formed jointly online) were both
+  infertile for exactly this reason; an argument inside a routed basis slot
+  moved every endpoint. Parameterize the objects the learner routes through.
+- The affine span of what the ordinary learner stores does not contain nearby
+  novelty. Fitting only a coordinate in the span of all live residuals and
+  abstractions (any rank, up to the full span) leaves an unseen-family member
+  at 2.2-3.1x the free-residual endpoint, and the pre-retirement population
+  is no better (2.75x). Retirement did not erase the directions; ordinary
+  wake never formed them.
+- `novel_family_tasks` are members of two families the lifetime never sees,
+  all family operators sharing one rank-2 functional subspace at `r_meta=1`;
+  held-out members of SEEN families are nearly free for every arm and are
+  deliberately not the future. Re-read the generator before naming a future
+  "sibling"; the per-family schema arm this error produced was ill-posed.
+- Check a learner-statistic threshold against the BASELINE ARTIFACT before
+  freezing it, every time. Ordinary routes are diffuse (mean maximum
+  coefficient 0.29-0.44; any one slot averages ~0.08-0.12 mass), so a "route
+  mass on P >= 0.5" usage criterion was unattainable by construction and its
+  2x-baseline successor still never fired while the functional ablation
+  passed everywhere. Prefer the functional criterion (zero the channel,
+  measure the loss) as the deciding usage test; route statistics are
+  diagnostics.
+- A frozen-argument variant that is BITWISE the baseline is the cheapest
+  strong control: `P(alpha)` at `alpha = 0` reproduces the ordinary artifact
+  tensor-for-tensor, so every later difference is the channel. Build new
+  architectures so that a switch recovers the baseline exactly, and verify it
+  on the real artifact, not only the smoke world.
+- Fertility of an in-basis argument scales with argument dimension and needs
+  LEARNED directions: on worlds 0-2 the alpha-only future ratio fell
+  monotonically from 3.4 (K=2) to 1.56 (K=16) while a matched-budget control
+  with `U_k` frozen at random init stayed at ~3.1 and was essentially unused
+  (alpha-zeroed ratio ~1.05). A single linear-in-U slot then SATURATES at
+  K~16 (K=32/64: 1.59/1.57) even though present-task loss keeps improving;
+  a second parameterized slot at K=32 reached 1.46 and passed 1.5x in two of
+  three worlds while hurting the third. Treat K as a capacity knob, not the
+  generator's rank, and treat the two-slot A verdict as marginal until a
+  sealed block decides it.
+- Heredocs fed to the Bash tool break on an apostrophe inside a quoted
+  Python or Markdown body and leave NOTHING applied (the whole chain aborts).
+  Write multi-file patches as a scratch `.py` with explicit UTF-8 I/O (this
+  file is not cp1252-clean) and run it; check `git status` before assuming
+  any part landed.
+- Lifetimes write artifacts only at completion, so an interrupted or
+  allocation-killed cell leaves no directory; a transient 3.66 MiB Windows
+  allocation failure at a sleep is a commit-limit spike, not sustained
+  pressure (three `slots=12` cells sat at 345 MB each with 9 GB free). Let
+  the survivors run and relaunch the cell; the launcher skips completed
+  cells and refuses mismatched records.
