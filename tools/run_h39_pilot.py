@@ -29,6 +29,13 @@ CELLS = {
     "factorized_pooled": ["--model", "factorized", "--schema-grouping", "pooled",
                           "--schema-dim", "8", "--snapshot-history"],
 }
+# H39b cells (H39B_PSLOT_PILOT_PLAN.md)
+CELLS.update({
+    "pslot2": ["--model", "pslot", "--slot-args", "2", "--snapshot-history"],
+    "pslot8": ["--model", "pslot", "--slot-args", "8", "--snapshot-history"],
+    "pslot2_frozen": ["--model", "pslot", "--slot-args", "2", "--freeze-args",
+                      "--snapshot-history"],
+})
 REQUIRED = ("model.pt", "summary.json", "rho_profile.json", "fingerprint.json",
             "config.yaml", "history.pt")
 
@@ -49,8 +56,9 @@ def run(name: str) -> tuple[str, int]:
 
 
 def main() -> int:
+    names = sys.argv[1:] or list(CELLS)
     with ProcessPoolExecutor(max_workers=3) as pool:
-        results = list(pool.map(run, list(CELLS)))
+        results = list(pool.map(run, names))
     failed = [n for n, c in results if c != 0]
     for name, code in results:
         print(f"{name}: exit={code}")

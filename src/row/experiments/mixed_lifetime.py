@@ -32,10 +32,13 @@ from row.mixed_world import (
 def _pilot_record(args) -> dict[str, object] | None:
     """Complete H39 pilot intervention record; None when not a pilot cell."""
 
-    if args.model != "factorized" and not args.snapshot_history:
+    if args.model not in {"factorized", "pslot"} and not args.snapshot_history:
         return None
     record: dict[str, object] = {"model": args.model,
                                  "snapshot_history": bool(args.snapshot_history)}
+    if args.model == "pslot":
+        record.update({"slot_args": args.slot_args, "freeze_args": bool(args.freeze_args),
+                       "pslot_index": 11})
     if args.model == "factorized":
         record.update({
             "schema_dim": args.schema_dim,
@@ -63,6 +66,7 @@ def main() -> None:
             "lifecycle",
             "prospective",
             "factorized",
+            "pslot",
         ),
         required=True,
     )
@@ -222,6 +226,11 @@ def main() -> None:
     parser.add_argument("--schema-init-scale", type=float, default=1e-2)
     parser.add_argument("--freeze-schema", action="store_true",
                         help="factorized: W frozen at initialization (generic-channel control)")
+    # ---- H39b pilot (H39B_PSLOT_PILOT_PLAN.md) --------------------
+    parser.add_argument("--slot-args", type=int, default=2,
+                        help="pslot: argument dimension K of the parameterized basis slot")
+    parser.add_argument("--freeze-args", action="store_true",
+                        help="pslot: freeze every alpha at zero and U_k at init (bit-exact control)")
     parser.add_argument("--snapshot-history", action="store_true",
                         help="record every task's residual at completion (read-only)")
     parser.add_argument(
@@ -277,11 +286,12 @@ def main() -> None:
             "lifecycle": config.shared_residual_model,
             "prospective": config.shared_residual_model,
             "factorized": config.shared_residual_model,
+            "pslot": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, updates_per_example=args.updates_per_example)
         field = (
             "shared_residual_model"
-            if args.model in {"promoting", "lifecycle", "prospective", "factorized"}
+            if args.model in {"promoting", "lifecycle", "prospective", "factorized", "pslot"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})
@@ -298,11 +308,12 @@ def main() -> None:
             "lifecycle": config.shared_residual_model,
             "prospective": config.shared_residual_model,
             "factorized": config.shared_residual_model,
+            "pslot": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, operator_slots=args.operator_slots)
         field = (
             "shared_residual_model"
-            if args.model in {"promoting", "lifecycle", "prospective", "factorized"}
+            if args.model in {"promoting", "lifecycle", "prospective", "factorized", "pslot"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})
@@ -482,6 +493,11 @@ def main() -> None:
                     "query_penalty": value}
 
     schema_index_hook = None
+    if args.model == "pslot":
+        if meta_spec is None or args.arm != "ordinary":
+            raise SystemExit("pslot requires --r-meta and --arm ordinary")
+        learned_lifetime.PSLOT_SETTINGS = {"slot_args": args.slot_args,
+                                           "freeze_args": args.freeze_args}
     if args.model == "factorized":
         if meta_spec is None:
             raise SystemExit("factorized requires --r-meta (the meta-recurrence world)")
