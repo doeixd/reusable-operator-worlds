@@ -81,7 +81,8 @@ def validate_pilot_cell(path: Path, expected: dict) -> dict:
 
 
 def load_pslot(config, path: Path, record: dict) -> ParameterizedSlotLearner:
-    settings = {"slot_args": record["slot_args"], "freeze_args": record["freeze_args"]}
+    settings = {"slot_args": record["slot_args"], "freeze_args": record["freeze_args"],
+                "freeze_matrices": record.get("freeze_matrices", False)}
     saved = learned_lifetime.PSLOT_SETTINGS
     learned_lifetime.PSLOT_SETTINGS = settings
     try:

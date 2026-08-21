@@ -36,16 +36,32 @@ CELLS.update({
     "pslot2_frozen": ["--model", "pslot", "--slot-args", "2", "--freeze-args",
                       "--snapshot-history"],
 })
+# H39c K-sweep cells (H39C_KSWEEP_PLAN.md): name -> (world, extra args)
+SWEEP = {}
+for _w in (0, 1, 2):
+    for _k in (2, 4, 8, 16):
+        SWEEP[f"ksweep_p{_k}/world_{_w}"] = (_w, ["--model", "pslot", "--slot-args", str(_k),
+                                                 "--snapshot-history"])
+    SWEEP[f"ksweep_g8/world_{_w}"] = (_w, ["--model", "pslot", "--slot-args", "8",
+                                           "--freeze-matrices", "--snapshot-history"])
 REQUIRED = ("model.pt", "summary.json", "rho_profile.json", "fingerprint.json",
             "config.yaml", "history.pt")
 
 
 def run(name: str) -> tuple[str, int]:
-    out = ROOT / "artifacts" / "h39_pilot" / name / "world_0" / "lifecycle"
-    log = ROOT / "tools" / f"h39_pilot_{name}.log"
+    if name in SWEEP:
+        world, extra = SWEEP[name]
+        out = ROOT / "artifacts" / "h39c" / name / "lifecycle"
+        common = list(COMMON)
+        common[common.index("--world-seed") + 1] = str(world)
+    else:
+        world, extra = 0, CELLS[name]
+        out = ROOT / "artifacts" / "h39_pilot" / name / "world_0" / "lifecycle"
+        common = COMMON
+    log = ROOT / "tools" / f"h39_{name.replace('/', '_')}.log"
     with log.open("a", encoding="utf-8") as handle:
         code = subprocess.run(
-            COMMON + CELLS[name] + ["--output", str(out)],
+            common + extra + ["--output", str(out)],
             cwd=ROOT, stdout=handle, stderr=subprocess.STDOUT,
         ).returncode
         handle.write(f"exit={code}\n")
@@ -57,7 +73,9 @@ def run(name: str) -> tuple[str, int]:
 
 def main() -> int:
     names = sys.argv[1:] or list(CELLS)
-    with ProcessPoolExecutor(max_workers=3) as pool:
+    if names == ["sweep"]:
+        names = list(SWEEP)
+    with ProcessPoolExecutor(max_workers=3) as pool:  # slots=12: cap 3 (memory)
         results = list(pool.map(run, names))
     failed = [n for n, c in results if c != 0]
     for name, code in results:

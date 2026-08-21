@@ -87,3 +87,17 @@ class PSlotTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class FreezeMatricesTests(unittest.TestCase):
+    def test_frozen_matrices_alpha_learns_but_directions_do_not(self):
+        model = ParameterizedSlotLearner(slot_args=2, freeze_matrices=True, **KW)
+        code, eps, alpha = model.begin_task("t")
+        with torch.no_grad():
+            code.view(3, 4)[:, model.pslot_index] = 5.0
+        self.assertFalse(model.argument_matrices.requires_grad)
+        self.assertTrue(alpha.requires_grad)
+        self.assertNotIn(id(model.argument_matrices), {id(p) for p in model.shared_parameters()})
+        torch.mean(model(torch.randn(16, 8), "t") ** 2).backward()
+        self.assertGreater(float(alpha.grad.abs().sum()), 0.0)
+        self.assertIsNone(model.argument_matrices.grad)

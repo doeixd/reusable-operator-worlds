@@ -38,6 +38,7 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
         *args,
         slot_args: int = 2,
         freeze_args: bool = False,
+        freeze_matrices: bool = False,
         pslot_index: int | None = None,
         **kwargs,
     ) -> None:
@@ -46,6 +47,8 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
             raise ValueError("slot_args must be positive")
         self.slot_args = int(slot_args)
         self.freeze_args = bool(freeze_args)
+        # G control: argument directions fixed at random init, alpha learns.
+        self.freeze_matrices = bool(freeze_matrices) or self.freeze_args
         self.pslot_index = (
             self.operator_slots - 1 if pslot_index is None else int(pslot_index)
         )
@@ -63,7 +66,7 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
             U = U / torch.linalg.matrix_norm(U, ord=2)
             matrices.append(U)
         self.argument_matrices = nn.Parameter(
-            torch.stack(matrices), requires_grad=not self.freeze_args
+            torch.stack(matrices), requires_grad=not self.freeze_matrices
         )
         self.register_buffer("initial_argument_matrices",
                              self.argument_matrices.detach().clone())
@@ -134,7 +137,7 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
 
     def shared_parameters(self) -> list[nn.Parameter]:
         shared = super().shared_parameters()
-        if not self.freeze_args:
+        if not self.freeze_matrices:
             shared.append(self.argument_matrices)
         return shared
 
@@ -162,6 +165,7 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
         return {
             "slot_args": self.slot_args,
             "freeze_args": self.freeze_args,
+            "freeze_matrices": self.freeze_matrices,
             "pslot_index": self.pslot_index,
             "argument_matrices_relative_movement": moved,
             "alpha_norm_mean": float(np.mean(alpha_norms)) if alpha_norms else 0.0,

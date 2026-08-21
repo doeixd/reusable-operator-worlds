@@ -38,7 +38,7 @@ from row.models.factorized_models import FactorizedLifecycleLearner
 from row.models.pslot_models import ParameterizedSlotLearner
 
 # H39b pilot knobs for kind="pslot"; set by the runner.
-PSLOT_SETTINGS: dict[str, object] = {"slot_args": 2, "freeze_args": False}
+PSLOT_SETTINGS: dict[str, object] = {"slot_args": 2, "freeze_args": False, "freeze_matrices": False}
 ARGUMENT_LEARNERS = (FactorizedLifecycleLearner, ParameterizedSlotLearner)
 
 # H39 pilot: architecture knobs for kind="factorized". The runner sets
