@@ -2765,3 +2765,37 @@ outputs while not being in the innovation span alone. This audit does
 not test that, and the honest scope of the claim is: not recoverable
 from the task-conditioned innovations, which are the objects any
 refactor over the library would actually manipulate.
+
+# D* CURRENCY, first crossing: the law is not an artifact of the 8-bit proxy
+
+Grid committed before the batch ran, derived from the sealed Stage-1
+s_bar by the same frozen rule, at the frontier carry
+(3.9 bits/scalar x 198 = 535 nats).
+
+    g = 0.5, D* currency
+
+    H_R   n   C_reacquire   V_retain
+     16  10          441         -94
+     20  10          549         +14
+     22  10          597         +62
+     26  10          703        +168
+
+    s_bar 27.3   observed H* 19.5   predicted 20.1   error 3.0%
+    chi 0.994
+
+Every crossing scored in V5 until now used the 8-bit serialization
+proxy, and H19's registered partial P2 named the risk explicitly: the
+law could be currency-dependent, with `lambda D(A)` doing work the
+frontier accounting does not reproduce. At this gain it is not. The same
+lifetimes, re-priced at 3.9 bits/scalar instead of 8, put the crossing
+at a completely different horizon (19.5 against 42.5 at 8-bit) and the
+ratio still lands on 1.
+
+That is a stronger form of the result than another gain at the same
+currency would have been: it varies the ACCOUNTING rather than the
+world, and the relation survives.
+
+g = 1.0 at D* is running. g = 1.5 at D* is structurally unreachable at
+this dormancy geometry (predicted crossing 6.3 needs a low grid point at
+H_R = 2, below `minimum_cluster = 3`), and that was recorded before the
+grids were derived rather than discovered as a gap afterwards.
