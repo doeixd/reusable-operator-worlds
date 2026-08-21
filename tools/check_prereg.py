@@ -36,6 +36,7 @@ FROZEN = {
     "H39B_PSLOT_PILOT_PLAN.md": "a6f9b4a",
     "H39C_KSWEEP_PLAN.md": "061b912",
     "H39D_CAPACITY_PLAN.md": "05ccaa0",
+    "H39_CONFIRMATION_PLAN.md": "88d5d25",
 }
 
 STATUS_PATH_PATTERN = re.compile(
