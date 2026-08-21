@@ -2472,3 +2472,44 @@ this project (V4.1's tolerance, the raw-ablation counterfactual, now
 this): when one arm of a comparison is defined in terms of the other
 arm's objects, the winner is decided by the definition. Check which side
 the TARGET belongs to before reading any ratio.
+
+# slots=6 DEBT CLOSED: the protocol moves the numbers, not the relation
+
+Sealed worlds 600-609, g=1.0, grid N {60, 64, 66, 70}, 80 cells, 0
+failures.
+
+| H_R | n | C_reacquire | V_retain |
+| --- | --- | --- | --- |
+| 20 | 10 |   913 | -185 |
+| 24 | 10 | 1,118 |  +20 |
+| 26 | 10 | 1,179 |  +81 |
+| 30 | 10 | 1,351 | +253 |
+
+    s_bar 45.7   observed H* 23.6   predicted 24.8   error 4.8%
+    chi 0.982
+
+Halving the slot budget cuts s_bar 24% (58.1 -> 45.7) through a smaller
+library that fewer tasks reference, while D(A) is unchanged at 198
+scalars. The law predicted the crossing would move purely as 1/s_bar,
+18.9 -> 24.8. It moved to 23.6.
+
+So the protocol constant changes the NUMBERS substantially and leaves
+the RELATION intact. Absolute crossings stay protocol-dependent and must
+be quoted with their slot budget; the ratio survives the change. This
+converts the slots=6 item from a named debt into a seventh operating
+point.
+
+## Seven points on the identity line
+
+| point | D(A) | s_bar | H* pred | H* obs | chi |
+| --- | --- | --- | --- | --- | --- |
+| D-arm rank 1 |  99 | 36.8 | 14.9 | 15.2 | 1.019 |
+| D-arm rank 2 | 198 | 61.0 | 18.0 | 18.0 | 1.000 |
+| D-arm rank 4 | 396 | 68.3 | 32.2 | 32.4 | 1.008 |
+| sealed g=0.5 | 198 | 26.6 | 41.3 | 42.5 | 1.031 |
+| sealed g=1.0 | 198 | 57.3 | 19.1 | 18.9 | 0.989 |
+| sealed g=1.5 | 198 | 84.3 | 13.0 | 12.9 | 0.993 |
+| slots=6      | 198 | 45.7 | 24.8 | 23.6 | 0.982 |
+
+Spanning a 4x range in D(A) and a 3.2x range in s_bar, with mean
+|chi - 1| = 0.015. Three of the seven are on sealed seeds.
