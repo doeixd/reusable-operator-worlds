@@ -3657,3 +3657,34 @@ over the same architecture. Review 56's proposed successor — separating
 SHARED SCHEMA from FAST ARGUMENT from PRIVATE INNOVATION — is a response
 to the first. On this evidence it is not yet motivated, because the
 argument channel is intact.
+
+## Correction to the mechanism audit's wording (same day)
+
+I wrote that the prospective representation "separates family members
+slightly MORE than ordinary, and is slightly MORE responsive to the task
+code". Per-world numbers do not support the direction:
+
+    prospective, discrimination vs ordinary   -4.2%, +19.1%, +23.4%
+    prospective, code sensitivity vs ordinary  +4.5%,  -4.1%,  +3.2%
+
+Neither is sign-consistent, and the sensitivity mean of +1.3% sits well
+inside a world-to-world spread of about +/-4%. The same discipline I
+applied to Phi — same sign in every world, mean exceeding the spread —
+rejects both directions here.
+
+WHAT THE AUDIT SUPPORTS, stated correctly: neither discrimination nor
+task-code sensitivity FELL. Over-alignment predicts a clear fall in
+both, and there is no fall in either, in any world. So over-alignment
+remains refuted as the mechanism. What is NOT established is the
+opposite claim that the prospective arm improved these quantities.
+
+INSTRUMENT CHECKS, run because this conclusion is load-bearing: the
+sensitivity estimate is in its linear regime (0.1597 at eps=0.01 through
+0.1587 at eps=1.0, so not saturated), and the task code is genuinely
+influential (zeroing it moves the output by 1.86 against an output norm
+of 14.84, i.e. 12.5%). The measure has dynamic range; the arms simply do
+not differ on it.
+
+The refutation therefore stands on an absence of the predicted effect,
+which is weaker than a measured reversal and is the honest form of the
+claim.
