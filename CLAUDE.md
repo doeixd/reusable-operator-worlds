@@ -11,7 +11,9 @@ single detailed source of truth; this file is the front-door safety summary.
 Score before update; preserve paired controls and strict held-out/future/sealed
 separation; make metrics match registered estimands; compare functions only on
 common states and reconstruct all model state; require non-vacuity tests; launch
-only committed clean code with one local lifetime and one writer per cell;
+only committed clean code with a MEMORY-BOUNDED pool of lifetimes (3-4 for
+`slots=12` promoting runs, up to 6 for lighter models) and exactly one writer
+per cell;
 fingerprint and resume-check the complete protocol; and record no verdict until
 expected artifacts, exit codes, paired results, `check_prereg.py`,
 `check_invalid.py`, and the registered scorer pass. Preserve invalid results and
