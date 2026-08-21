@@ -14,3 +14,53 @@ prospective world=0 meta r_meta=1 F=4: loss=-178668.8
 free=0 prospective world 0 exit=0
 prospective world=1 meta r_meta=1 F=4: loss=-184063.1
 free=0 prospective world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-181934.6
+free=0 prospective world 2 exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-182446.5
+free=1 ordinary world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-185775.7
+free=1 ordinary world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-184620.4
+free=1 ordinary world 2 exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-182473.9
+free=1 replay world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-186150.7
+free=1 replay world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-185607.0
+free=1 replay world 2 exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-181756.7
+free=1 prospective world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-185619.4
+free=1 prospective world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-185145.6
+free=1 prospective world 2 exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-184819.4
+free=2 ordinary world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-188044.1
+free=2 ordinary world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-187033.7
+free=2 ordinary world 2 exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-183926.8
+free=2 replay world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-188226.3
+free=2 replay world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-186390.9
+free=2 replay world 2 exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-182336.9
+free=2 prospective world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-186416.2
+free=2 prospective world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-185248.8
+free=2 prospective world 2 exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-186915.8
+free=3 ordinary world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-189780.8
+free=3 ordinary world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-187856.8
+free=3 ordinary world 2 exit=0
+prospective world=0 meta r_meta=1 F=4: loss=-185188.1
+free=3 replay world 0 exit=0
+prospective world=1 meta r_meta=1 F=4: loss=-189163.6
+free=3 replay world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-187298.4
+free=3 replay world 2 exit=0

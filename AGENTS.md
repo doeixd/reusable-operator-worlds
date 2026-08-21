@@ -1060,3 +1060,19 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   information or merely became harder to optimize, and those imply
   different successor designs. Measure the mechanism before designing
   the fix.
+- CONCURRENCY, corrected. Memory is the binding constraint, not cores;
+  this host has 16 and a lifetime pins one thread, so serial execution
+  wastes ~94% of it. Use a bounded pool: 3-4 concurrent for `slots=12`
+  promoting/lifecycle runs (the promotion clustering step allocates
+  `(tasks, centres, features)` tensors and is what exhausted RAM at 5),
+  up to 6 for lighter models. Two independent failures taught this and
+  they have different fixes: 5 concurrent lifetimes exhausted memory and
+  killed 113 of 120 cells, while two launcher INSTANCES over the same
+  output paths raced and logged completions for cells that had no
+  artifacts. The first is fixed by a cap, the second by one writer per
+  cell — a `ProcessPoolExecutor` over a job list gives both, a shell
+  loop relaunched twice gives neither.
+- Before scaling a batch up, check free memory against one run's
+  resident size rather than guessing. A `slots=12` lifetime sits around
+  340 MB; the ceiling is RAM divided by that, minus headroom, not the
+  core count.
