@@ -1086,3 +1086,9 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   A Windows console-encoding failure after H35 scoring discarded a finished
   computation because the report write came last; console output is not the
   scientific artifact.
+- A pool job must carry and validate its own complete intervention record before
+  treating `summary.json` as resumable. The V6 allocation pool accidentally
+  reused H35's 8 inner steps for a 16-step sweep and silently skipped nine
+  mismatched summaries. Encode sweep-specific inner/outer steps per job; require
+  model, summary, provenance, and fingerprint files; refuse a non-empty
+  mismatched target; and exit nonzero if any cell fails.

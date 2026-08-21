@@ -2676,3 +2676,36 @@ first result failed to reproduce the old anchor costs. The final report uses
 One separate partial-freeze allocation cell failed from a memory error during
 the shared bounded-pool run. It is unrelated to H35, is not counted as an H35
 failure, and remains resumable; no allocation conclusion is recorded here.
+
+# 2026-08-21 — V6 ALLOCATION COMPLETE AND V6 CLOSED IN DEVELOPMENT
+
+Preflight of the nominally 44/45 allocation grid found nine cells produced with
+8 prospective inner steps rather than the allocation protocol's 16. Preserved
+those artifacts under `artifacts/v6_alloc_superseded_inner8`, hardened the
+bounded-pool launcher, and reran the nine mismatches plus the missing
+`free6/ordinary/world_1` cell. The repaired run completed 10/10 with zero
+failures; all 45 active cells pass full protocol validation. Ordinary/replay
+reruns were bit-exact across the inert inner-step difference.
+
+Added `score_v6_allocation.py`, which fail-closes on an incomplete or mismatched
+grid and combines the corrected 40-step fertility scorer, aligned
+effective-operator audit, matched-budget learned-schema audit, and lifetime
+allocation statistics. The report is `reports/v6_allocation.json`.
+
+The structural endpoint is a noisy frontier rather than a sharp boundary. From
+free0 to free6, explicit library size decreases in all nine paired arm-world
+comparisons while R_effective increases in all nine. Intermediate means are not
+strictly monotone. Thus where plasticity is allowed influences whether recurring
+information is absorbed by the continuous shared basis or emitted as explicit
+promoted objects.
+
+The frontier contains no fertile/schema regime. Prospective Phi is negative at
+every plastic setting and negative in 3/3 worlds at free2, free3, and free6.
+FACTORIZE wins 0/12 scoreable prospective cells and 0/34 scoreable cells overall.
+Prospective current-loss disadvantage grows from +107 nats at free1 to +3,362
+at free6. H33 is not supported, and the allocation result does not rescue H30.
+
+V6 is closed in development without opening confirmatory seeds. H30, H31, H33,
+and H35 are unsupported; H32's original threshold is non-diagnostic; H34 and
+H36 were correctly gated off. The remaining question is localization:
+representational opportunity versus adaptation findability.

@@ -3056,3 +3056,41 @@ initially lost when a Unicode console label failed under Windows cp1252 before
 the report write. Console formatting is not part of the scientific result.
 Write the complete report to a temporary path, atomically replace the target,
 then print an ASCII-safe summary.
+
+
+================================================================================
+V6 ALLOCATION: PLASTICITY MOVES THE STORAGE LEVEL, NOT FERTILITY (2026-08-21)
+================================================================================
+
+The completed 5 x 3 x 3 allocation matrix varies free shared slots in
+{0,1,2,3,6}. More free shared capacity generally raises R_effective and lowers
+explicit library size: every arm-world pair has higher geometry and a smaller
+library at free6 than free0. The intermediate means are not monotone, so this is
+a graded frontier rather than evidence for a sharp representation phase
+boundary.
+
+No intermediate regime rescues V6. Prospective Phi_related is 0, -5.18,
+-11.83, -9.99, and -8.43 across free slots 0,1,2,3,6; zero is the fully frozen,
+bit-identical dead-gradient endpoint. FACTORIZE wins 0/12 scoreable prospective
+cells and 0/34 scoreable cells overall. Plasticity determines whether recurrence
+is stored continuously or as explicit atoms, but no tested allocation makes the
+current prospective objective fertile or the resulting learned schema pay.
+
+A RESUME CHECK MUST VALIDATE THE JOB-SPECIFIC PROTOCOL, NOT JUST SUMMARY.JSON.
+The shared pool accidentally applied H35's 8 inner steps to nine allocation
+cells whose intended setting was 16. Existing summaries caused the old launcher
+to skip them silently. The repaired pool encodes inner steps per job, validates
+all required artifacts and intervention fields, refuses non-empty mismatches,
+caps slots=12 runs at four workers, and exits nonzero on any failed cell.
+
+An unused knob can still be a provenance mismatch. Ordinary/replay reruns were
+bit-exact across inner-step settings because those arms never invoke the
+prospective inner loop, but that fact was checked rather than assumed. Keeping
+the whole active matrix at one explicit protocol makes later auditing possible;
+the superseded cells remain quarantined and recoverable.
+
+V6 closes without sealing. Its useful negative is not that representations lack
+structure: accessible geometry rises along the allocation frontier. It is that
+the current learning interface cannot turn that structure into cheap future
+acquisition. The next localization must separate representational opportunity
+from optimization/findability under the adaptor.

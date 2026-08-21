@@ -1016,7 +1016,15 @@ non-replicating effects, while eight-step pressure increased current lifetime
 loss and made related futures more expensive in all three worlds. This is
 exploratory evidence that the tested prospective objective becomes harmful at
 high pressure, not a confirmatory V6 result or evidence for a beneficial
-interior optimum.
+interior optimum. A separate 45-cell plasticity-allocation matrix found a
+graded shift in representation form: increasing free shared capacity reduced
+explicit library size from 7.0 to 3.7 and increased accessible geometry in
+every paired arm-world endpoint, but not monotonically at intermediate
+settings. No allocation produced reliable prospective fertility, and
+FACTORIZE won 0/12 scoreable prospective cells (0/34 overall). V6 therefore
+closes in development without a confirmatory block: plasticity influences
+where recurrence is stored, but the current objective never makes that
+structure economical for future acquisition.
 
 Why should anyone working at scale care about a 16-dimensional world?
 Because the criterion is scale-free and the phenomena it isolates have

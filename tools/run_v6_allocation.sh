@@ -22,7 +22,7 @@ for frozen in 12 11 10 9 6; do
         --meta-tasks-per-family 16 --meta-subspace-rank 2 --family-onset 8 \
         --operator-slots 12 --freeze-basis-at 8 --freeze-slots "$frozen" \
         --sleeps 16 24 32 48 64 --lifecycle --arm "$arm" \
-        --prospective-steps 16 \
+        --prospective-steps 16 --prospective-inner-steps 16 \
         --output "$out" >> tools/v6_alloc.log 2>&1
       echo "free=$free $arm world $w exit=$?" >> tools/v6_alloc.log
     done

@@ -1,0 +1,33 @@
+11:50:05 START 17 pending of 51 cells, pool=4
+11:50:05 progress done=0 failed=0 skipped=5
+11:50:05 progress done=0 failed=0 skipped=10
+11:50:05 progress done=0 failed=0 skipped=15
+11:50:05 progress done=0 failed=0 skipped=20
+11:50:05 progress done=0 failed=0 skipped=25
+11:50:05 progress done=0 failed=0 skipped=30
+11:50:41 FAIL artifacts/v6_alloc/free6/ordinary/world_1/lifecycle: n _find_and_load
+  File "<frozen importlib._bootstrap>", line 1342, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 938, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 758, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 891, in get_code
+  File "<frozen importlib._bootstrap_external>", line 516, in _compile_bytecode
+MemoryError
+
+11:54:38 progress done=1 failed=0 skipped=34
+11:57:56 progress done=5 failed=1 skipped=34
+12:01:45 progress done=10 failed=1 skipped=34
+12:05:20 progress done=15 failed=1 skipped=34
+12:06:01 END done=16 failed=1 skipped=34
+V6_POOL_DONE
+12:36:02 START 10 pending of 45 cells, pool=4
+12:36:04 progress done=0 failed=0 skipped=5
+12:36:04 progress done=0 failed=0 skipped=10
+12:36:04 progress done=0 failed=0 skipped=15
+12:36:04 progress done=0 failed=0 skipped=20
+12:36:04 progress done=0 failed=0 skipped=25
+12:36:04 progress done=0 failed=0 skipped=30
+12:40:21 progress done=1 failed=0 skipped=34
+12:42:13 progress done=5 failed=0 skipped=35
+12:48:07 progress done=10 failed=0 skipped=35
+12:48:07 END done=10 failed=0 skipped=35
+V6_POOL_DONE

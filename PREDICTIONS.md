@@ -3734,3 +3734,104 @@ steps. That changed absolute costs but not the signs. The scorer now defaults
 to 40, records the full evaluation protocol in the report, exposes related,
 unrelated, and within-family paired effects, and writes atomically before
 console presentation. Only the corrected 40-step report is interpreted.
+
+# V6 ALLOCATION RESULT AND CLOSURE (2026-08-21)
+
+The independently motivated allocation matrix is complete: free shared slots
+in {0,1,2,3,6}, three arms, and development worlds 0--2. Every cell freezes the
+basis at task 8, uses 12 slots, 16 prospective outer steps, 16 inner steps, and
+the same sleep schedule. The allocation result is descriptive and cannot rescue
+the separately closed H30/H35 pressure claim.
+
+## Protocol repair before scoring
+
+Preflight found that a pooled launcher had accidentally reused H35's 8-step
+inner setting for nine allocation cells, while the allocation protocol used 16.
+The nine artifacts were quarantined rather than deleted, then rerun along with
+the one cell that had failed from memory pressure. All 45 active artifacts now
+pass the complete protocol check. Rerun ordinary/replay checkpoints were
+bit-exact to their quarantined versions, confirming that the inner-step knob is
+inert for those arms; the prospective cells were outcome-changing and had to be
+replaced.
+
+## The allocation frontier
+
+Mean results by free capacity:
+
+| free slots | arm | M | R_effective | Phi_related | FACTORIZE | current-loss delta vs ordinary |
+| ---: | --- | ---: | ---: | ---: | ---: | ---: |
+| 0 | prospective | 7.00 | 0.485 | 0.000 | 0/3 | 0 |
+| 1 | prospective | 6.33 | 0.525 | -5.182 | 0/3 | +107 |
+| 2 | prospective | 5.33 | 0.673 | -11.827 | 0/3 | +1,965 |
+| 3 | prospective | 6.00 | 0.660 | -9.991 | 0/2 | +1,999 |
+| 6 | prospective | 3.67 | 0.716 | -8.433 | 0/1 | +3,362 |
+
+At zero free slots all three arms are bit-identical: prospective and replay
+gradients have nowhere shared to act. At every plastic setting prospective Phi
+is negative. It is negative in all three worlds at free slots 2, 3, and 6; the
+free-1 mean is also negative with only 1/3 worlds positive. No allocation
+setting produces reliable fertility.
+
+The structural relationship is graded, not a sharp phase boundary. From zero
+to six free slots, mean library size falls 7.00 -> 3.67 in ordinary and
+prospective and 7.00 -> 4.67 in replay. Every one of the nine paired arm-world
+endpoints has a smaller library at six free slots than at zero, while every one
+has higher R_effective. Intermediate means are not monotone, so the supported
+claim is an overall allocation frontier: plastic shared capacity tends to
+absorb recurrence continuously and leaves fewer explicit promoted objects.
+
+H33 DOES NOT CROSS. FACTORIZE wins 0/12 scoreable prospective cells and 0/34
+scoreable cells across all arms. Every measured margin favors COMPRESS. Greater
+plasticity makes the mean margin less negative, but it also makes more worlds
+unscoreable by shrinking M; no intermediate regime combines fertility with a
+paying explicit schema.
+
+## V6 closed in development; no sealed block
+
+The final status is:
+
+    H30  NOT SUPPORTED   no beneficial prospective setting
+    H31  NOT SUPPORTED   related futures are harmed more, not helped more
+    H32  NON-DIAGNOSTIC  geometry and fertility dissociate
+    H33  NOT SUPPORTED   FACTORIZE 0/12 scoreable prospective cells
+    H34  NOT ATTEMPTED   no positive benefit exists to amortize
+    H35  NOT SUPPORTED   high pressure harms; no beneficial interior optimum
+    H36  NOT ATTEMPTED   gated on a positive fertility mechanism
+
+V6 will not open confirmatory seeds. It falsified this prospective-learning
+strategy in development and localized the next question without earning a
+confirmation block. The durable result is `geometry != fertility`: useful
+structure can be present or increase while the fixed learning interface becomes
+less economical. What V6 has NOT established is whether the deficit is a loss
+of representational opportunity or a failure of the adaptor to find an
+available solution.
+
+# H37 — V6R ADAPTATION GEOMETRY (REGISTERED 2026-08-21)
+
+Registered after V6 closure and before any V6R audit code or measurements. The
+full frozen protocol is `V6R_ADAPTATION_GEOMETRY_PLAN.md`.
+
+H37 asks whether V6's prospective deficit is representational or algorithmic.
+On the existing valid ordinary/prospective checkpoints and the same six unseen
+related future tasks, compare the registered 40-step adaptor with fixed
+high-budget support-only optimizers at k=1 and k=128.
+
+The registered fork is:
+
+    k=128 prospective remains worse
+        -> representational opportunity was damaged
+
+    k=128 equal; k=1 remains worse after high-budget fitting
+        -> sparse member identifiability/generalization was damaged
+
+    k=128 and k=1 equal under high budget; 40-step gap remains
+        -> optimizer/findability failure; fertility is a property of (R,U)
+
+    gates disagree across optimizers/worlds
+        -> unresolved; measure conditioning directly
+
+The primary optimizer is canonical-start Adam at learning rate 0.01 for 2,000
+fixed updates. Adam 0.05 and LBFGS are fixed robustness checks. Query labels
+never choose the optimizer, restart, checkpoint, or stopping point. The audit
+must reproduce the original 40-step anchor exactly before the new result is
+read.
