@@ -1,0 +1,49 @@
+{
+  "rows": [
+    {
+      "condition": "r100",
+      "world": 600,
+      "tasks": 24,
+      "r_effective": 0.3200981941913199,
+      "null": 0.003000884288694154
+    },
+    {
+      "condition": "r100",
+      "world": 601,
+      "tasks": 24,
+      "r_effective": 0.31404921250338136,
+      "null": 0.0023584320421511586
+    },
+    {
+      "condition": "r100",
+      "world": 602,
+      "tasks": 24,
+      "r_effective": 0.048393857380106764,
+      "null": 0.0022497190737455295
+    },
+    {
+      "condition": "r100",
+      "world": 603,
+      "tasks": 24,
+      "r_effective": 0.22463776271268168,
+      "null": 0.0027157882040044633
+    },
+    {
+      "condition": "r100",
+      "world": 604,
+      "tasks": 24,
+      "r_effective": 0.14062242915679826,
+      "null": 0.0033965203571382843
+    },
+    {
+      "condition": "r100",
+      "world": 605,
+      "tasks": 24,
+      "r_effective": 0.0902936825587521,
+      "null": 0.004240705973513093
+    }
+  ],
+  "mean_r_effective": 0.18968252308384004,
+  "null": 0.0029936749898744467,
+  "r_residual_reference": 0.095
+}

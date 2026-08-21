@@ -2646,3 +2646,58 @@ but not high — the route carries some of the family and the residual
 carries some, so neither unit alone shows it. That would put the answer
 between fork 1 and fork 3 and would make the global-rotation test the
 decisive one.
+
+# H29 CORRECTED RESULT: the residual was hiding half of it (2026-08-20)
+
+Effective task-conditioned operator, I_tau = F_tau - F_0 with the route,
+the shared reference and the residual all included and task-specific
+information nulled by the population mean route. Six worlds, r_meta =
+1.0, 24 family tasks each, same LOO instrument.
+
+    mean R_effective            0.190
+    mean R_residual (H29)       0.095
+    isotropic null              0.003
+    teacher operators at r=1    1.000 by construction
+
+Per world: 0.320, 0.314, 0.048, 0.225, 0.141, 0.090 — wide, so the mean
+is a direction rather than an estimate.
+
+VERDICT against the registered fork: the MIDDLE branch, which is what I
+predicted before running it ("materially higher than 0.095 but not
+high"). Measuring the right unit DOUBLES the visible family structure,
+so the review is right that the residual tensor was the wrong
+computational unit and the earlier 0.095 understated what the learner
+holds. And it is still 5x below the teacher's, so the information is not
+merely relocated — most of it is genuinely not in the learner's
+task-conditioned computation either.
+
+## What this leaves standing
+
+The "90% lost before PROMOTE" claim is now properly retired: the honest
+figure is that the learner's effective operators carry about a fifth of
+the family geometry the teacher's do, with roughly half of what they
+carry invisible in the residuals alone.
+
+Two hypotheses remain live and are now cleanly ordered:
+
+    global rotation   the family may exist at the POPULATION level —
+                      one cheap Q over the library/innovations rather
+                      than per-object adapters. This is the decisive
+                      test, because a basis like B_1 = A_1 + A_2,
+                      B_2 = A_1 - A_2 defeats every local adapter while
+                      one global reparameterization recovers everything.
+    wake objective    nothing in the wake objective rewards representing
+                      related tasks relatedly, so SGD is free to pick
+                      any member of a large equivalence class of
+                      task-solving implementations, most of which
+                      destroy cheap higher-order abstraction.
+
+The two are distinguishable: if a cheap global Q lifts R_effective from
+0.19 to ~0.8, the structure was there and the coordinates hid it. If no
+cheap Q helps, the wake objective never encoded it and post-hoc
+refactoring — global or local — cannot be the remedy.
+
+Calibration note, since it cuts the other way as often as not: the
+registered expectation was correct here, and the value of registering it
+was that "0.190" could otherwise have been told as either a success
+(doubled!) or a failure (still 5x short) after the fact.
