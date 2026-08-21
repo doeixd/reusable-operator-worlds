@@ -2287,3 +2287,65 @@ geometry, 8-bit currency). The D-arm was NOT rerun on sealed seeds, so
 the sealed evidence covers the s-arm only; the six-point collapse
 reported for H19 remains development plus this. The slots=6 crossing
 grid and the D* currency grids remain the named debts they were.
+
+# SEALED C3 and C4 (2026-08-20)
+
+## C3 — the learned library does not realize the schema economy: PASS, 3/3 clauses
+
+12 sealed lifetimes, seeds 600-605, r_meta 0 and 1, F=4.
+
+    FACTORIZE fails vs matched-budget COMPRESS   0/6 wins at BOTH r_meta
+                                                 (registered: fails >= 5/6)
+    unexplained fraction at r_meta = 1.0         0.921
+                                                 (registered: > 0.6)
+    realized M > F                               12/12 cells, mean 7.2 and
+                                                 7.7 against F = 4
+                                                 (registered: >= 4/6)
+
+Every clause replicates, and the unexplained fraction is HIGHER on
+sealed worlds (0.921) than in development (0.873). The negative is a
+real property of the promoter, not a development artifact.
+
+## C4 — the coding-geometry mechanism: MIXED, and one clause FAILS
+
+    D* gap positive (private costs more)   6/12 cells   registered >= 5/6
+                                                        -> FAIL
+    shared shows FASTER spectral decay     0/12 cells   registered: should
+                                                        not -> PASS
+    rank correlation of the two gaps       +0.888       registered within
+                                                        [-0.5, 0.5] -> FAIL
+
+Two of three clauses miss, in opposite directions, and both are
+reported rather than reconciled.
+
+THE SIGN CLAUSE FAILS. Private residuals cost more per scalar than
+shared abstractions in only 6 of 12 sealed cells — a coin flip. The
+mean gap is +0.087 bits/scalar, down from +0.253 in development and far
+below V5.0's headline 1.1. So the D* gap that motivated H27 does NOT
+survive as a per-world regularity at this operating point. V5.0's
+measurement stands on its own worlds and accounting; what fails is the
+generalization I registered from it.
+
+THE CORRELATION CLAUSE FAILS IN THE INTERESTING DIRECTION. Development
+found no relationship between the D* gap and the spectral gap
+(-0.009), and I registered that it would stay absent. On 12 homogeneous
+sealed artifacts the rank correlation is +0.888. So there IS a
+relationship between how much cheaper a shared object is and how its
+functional spectrum compares to a private one — the opposite of what
+the development null suggested.
+
+WHAT SURVIVES CLEANLY. Shared abstractions never show faster spectral
+decay: 0/12 cells, and 0/16 in development. H27's original direction is
+falsified twice over, on separate worlds. Shared objects consistently
+use MORE of their functional dimension, not less.
+
+READING, registered before any follow-up: H27's mechanism question is
+now in worse shape than a clean negative. The phenomenon it was
+explaining (a robust per-scalar D* gap) is itself unstable across
+worlds at this operating point, while a relationship the development
+data said was absent appears strongly in the sealed data. Both point at
+the same methodological fact -- 16 development artifacts pooled across
+two different roots were too heterogeneous to estimate either quantity.
+The honest next step is not another mechanism guess but a
+properly powered measurement of whether the D* gap exists per-world at
+all, which V5.0's aggregate never established.

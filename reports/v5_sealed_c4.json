@@ -1,0 +1,140 @@
+{
+  "rows": [
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r0\\world_600\\lifecycle",
+      "n_shared": 5,
+      "n_private_sampled": 5,
+      "shared_bits": 2.4521602751310994,
+      "private_bits": 3.311045608258726,
+      "shared_spectral_ratio": 0.6377426967481401,
+      "private_spectral_ratio": 0.5842847402687269,
+      "shared_scale": 0.01938678119536445,
+      "private_scale": 0.04815396896286839
+    },
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r0\\world_601\\lifecycle",
+      "n_shared": 8,
+      "n_private_sampled": 8,
+      "shared_bits": 2.888446149815031,
+      "private_bits": 3.0605203935162324,
+      "shared_spectral_ratio": 0.6325130212023051,
+      "private_spectral_ratio": 0.5894890147733107,
+      "shared_scale": 0.02396412828383357,
+      "private_scale": 0.03616088074513452
+    },
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r0\\world_602\\lifecycle",
+      "n_shared": 9,
+      "n_private_sampled": 9,
+      "shared_bits": 3.127103993529935,
+      "private_bits": 3.1263434926596436,
+      "shared_spectral_ratio": 0.6677602316760237,
+      "private_spectral_ratio": 0.5032254581454976,
+      "shared_scale": 0.02665644575754113,
+      "private_scale": 0.035893337170772095
+    },
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r0\\world_603\\lifecycle",
+      "n_shared": 7,
+      "n_private_sampled": 7,
+      "shared_bits": 2.5162854028869828,
+      "private_bits": 2.272903827048041,
+      "shared_spectral_ratio": 0.658485094001238,
+      "private_spectral_ratio": 0.4567717560565708,
+      "shared_scale": 0.017663077269012364,
+      "private_scale": 0.023165744535216182
+    },
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r0\\world_604\\lifecycle",
+      "n_shared": 7,
+      "n_private_sampled": 7,
+      "shared_bits": 2.686585349781557,
+      "private_bits": 3.00023215044028,
+      "shared_spectral_ratio": 0.6481846405053096,
+      "private_spectral_ratio": 0.48291247826684996,
+      "shared_scale": 0.020344669546288517,
+      "private_scale": 0.034651906745515215
+    },
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r0\\world_605\\lifecycle",
+      "n_shared": 7,
+      "n_private_sampled": 7,
+      "shared_bits": 2.609530657804883,
+      "private_bits": 2.7440645174045883,
+      "shared_spectral_ratio": 0.7052082745149805,
+      "private_spectral_ratio": 0.5969274970495734,
+      "shared_scale": 0.019131709884903116,
+      "private_scale": 0.031093934635221646
+    },
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r100\\world_600\\lifecycle",
+      "n_shared": 6,
+      "n_private_sampled": 6,
+      "shared_bits": 2.460209568969444,
+      "private_bits": 3.5718196651140075,
+      "shared_spectral_ratio": 0.6552156848229288,
+      "private_spectral_ratio": 0.6148067264101142,
+      "shared_scale": 0.019674539101845388,
+      "private_scale": 0.04515459685649171
+    },
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r100\\world_601\\lifecycle",
+      "n_shared": 9,
+      "n_private_sampled": 9,
+      "shared_bits": 2.7165448157448058,
+      "private_bits": 2.437827832029443,
+      "shared_spectral_ratio": 0.6543460005484382,
+      "private_spectral_ratio": 0.41146217346040553,
+      "shared_scale": 0.020112976971966512,
+      "private_scale": 0.022954445918852692
+    },
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r100\\world_602\\lifecycle",
+      "n_shared": 8,
+      "n_private_sampled": 8,
+      "shared_bits": 3.045567234618841,
+      "private_bits": 2.5161006426650445,
+      "shared_spectral_ratio": 0.7007081083247562,
+      "private_spectral_ratio": 0.459299080693798,
+      "shared_scale": 0.025910080153210488,
+      "private_scale": 0.027022399273158762
+    },
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r100\\world_603\\lifecycle",
+      "n_shared": 6,
+      "n_private_sampled": 6,
+      "shared_bits": 2.348658801907678,
+      "private_bits": 2.0848517850959283,
+      "shared_spectral_ratio": 0.7162696049975753,
+      "private_spectral_ratio": 0.48747708607877693,
+      "shared_scale": 0.014697355253966253,
+      "private_scale": 0.01717346096757485
+    },
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r100\\world_604\\lifecycle",
+      "n_shared": 9,
+      "n_private_sampled": 9,
+      "shared_bits": 2.884154890672303,
+      "private_bits": 2.519303013868831,
+      "shared_spectral_ratio": 0.6847589310121525,
+      "private_spectral_ratio": 0.4175506844836511,
+      "shared_scale": 0.024086942610035675,
+      "private_scale": 0.027024319973962346
+    },
+    {
+      "artifact": "artifacts\\v5_sealed_c3\\r100\\world_605\\lifecycle",
+      "n_shared": 8,
+      "n_private_sampled": 8,
+      "shared_bits": 2.744568919199149,
+      "private_bits": 2.876784561234575,
+      "shared_spectral_ratio": 0.6349340685344179,
+      "private_spectral_ratio": 0.5272839235276557,
+      "shared_scale": 0.019833767631348597,
+      "private_scale": 0.030805318728879864
+    }
+  ],
+  "mean_bit_gap": 0.08683178577280264,
+  "mean_spectral_gap": -0.1553863114727779,
+  "rank_correlation": 0.8881118881118882,
+  "h29": "not computed; P_0 is not checkpointed"
+}

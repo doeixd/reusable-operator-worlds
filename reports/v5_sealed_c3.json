@@ -1,0 +1,176 @@
+{
+  "summary": {
+    "r0": {
+      "worlds": 6,
+      "factorize_wins": 0,
+      "mean_covered_fraction": 0.0,
+      "mean_compress": 2410.744641581926,
+      "mean_factorize": 3920.799376646257
+    },
+    "r100": {
+      "worlds": 6,
+      "factorize_wins": 0,
+      "mean_covered_fraction": 0.0,
+      "mean_compress": 2539.7767224433474,
+      "mean_factorize": 4158.832774963149
+    }
+  },
+  "cells": [
+    {
+      "condition": "r0",
+      "world": 600,
+      "atoms": 5,
+      "unseen": 2,
+      "covered": 0,
+      "mean_private_bits": 485.59744407247854,
+      "mean_member_bits": 505.7252648086209,
+      "schema_bits": 1416.5366907451507,
+      "s_bar_schema": 0.0,
+      "compress_total": 1011.4505296172418,
+      "factorize_total": 2427.9872203623927
+    },
+    {
+      "condition": "r0",
+      "world": 601,
+      "atoms": 8,
+      "unseen": 5,
+      "covered": 0,
+      "mean_private_bits": 576.68886763081,
+      "mean_member_bits": 640.26207970466,
+      "schema_bits": 1412.2005425231812,
+      "s_bar_schema": 0.0,
+      "compress_total": 3201.310398523299,
+      "factorize_total": 4613.51094104648
+    },
+    {
+      "condition": "r0",
+      "world": 602,
+      "atoms": 9,
+      "unseen": 6,
+      "covered": 0,
+      "mean_private_bits": 625.4777632215132,
+      "mean_member_bits": 611.6034077616574,
+      "schema_bits": 1959.6794224236758,
+      "s_bar_schema": 0.0,
+      "compress_total": 3669.6204465699443,
+      "factorize_total": 5629.29986899362
+    },
+    {
+      "condition": "r0",
+      "world": 603,
+      "atoms": 7,
+      "unseen": 4,
+      "covered": 0,
+      "mean_private_bits": 498.4284111697161,
+      "mean_member_bits": 562.9464999992854,
+      "schema_bits": 1237.2128781908712,
+      "s_bar_schema": 0.0,
+      "compress_total": 2251.7859999971415,
+      "factorize_total": 3488.998878188013
+    },
+    {
+      "condition": "r0",
+      "world": 604,
+      "atoms": 7,
+      "unseen": 4,
+      "covered": 0,
+      "mean_private_bits": 532.3272124290366,
+      "mean_member_bits": 522.9525568497106,
+      "schema_bits": 1634.4802596044142,
+      "s_bar_schema": 0.0,
+      "compress_total": 2091.810227398843,
+      "factorize_total": 3726.290487003257
+    },
+    {
+      "condition": "r0",
+      "world": 605,
+      "atoms": 7,
+      "unseen": 4,
+      "covered": 0,
+      "mean_private_bits": 519.81555204054,
+      "mean_member_bits": 559.6225618462714,
+      "schema_bits": 1400.2186168986934,
+      "s_bar_schema": 0.0,
+      "compress_total": 2238.4902473850857,
+      "factorize_total": 3638.708864283779
+    },
+    {
+      "condition": "r100",
+      "world": 600,
+      "atoms": 6,
+      "unseen": 3,
+      "covered": 0,
+      "mean_private_bits": 487.66321075564247,
+      "mean_member_bits": 577.2805039724223,
+      "schema_bits": 1194.1377526165884,
+      "s_bar_schema": 0.0,
+      "compress_total": 1731.8415119172664,
+      "factorize_total": 2925.979264533855
+    },
+    {
+      "condition": "r100",
+      "world": 601,
+      "atoms": 9,
+      "unseen": 6,
+      "covered": 0,
+      "mean_private_bits": 539.3602161379208,
+      "mean_member_bits": 501.9918550337448,
+      "schema_bits": 1842.2908150388175,
+      "s_bar_schema": 0.0,
+      "compress_total": 3011.9511302024684,
+      "factorize_total": 4854.241945241286
+    },
+    {
+      "condition": "r100",
+      "world": 602,
+      "atoms": 8,
+      "unseen": 5,
+      "covered": 0,
+      "mean_private_bits": 606.2906336877671,
+      "mean_member_bits": 574.8597461984326,
+      "schema_bits": 1976.026338509973,
+      "s_bar_schema": 0.0,
+      "compress_total": 2874.2987309921637,
+      "factorize_total": 4850.325069502136
+    },
+    {
+      "condition": "r100",
+      "world": 603,
+      "atoms": 6,
+      "unseen": 3,
+      "covered": 0,
+      "mean_private_bits": 468.89571825864397,
+      "mean_member_bits": 468.09552487998036,
+      "schema_bits": 1409.0877349119228,
+      "s_bar_schema": 0.0,
+      "compress_total": 1404.2865746399411,
+      "factorize_total": 2813.374309551864
+    },
+    {
+      "condition": "r100",
+      "world": 604,
+      "atoms": 9,
+      "unseen": 6,
+      "covered": 0,
+      "mean_private_bits": 568.85060103715,
+      "mean_member_bits": 565.249406876536,
+      "schema_bits": 1728.158968075135,
+      "s_bar_schema": 0.0,
+      "compress_total": 3391.496441259216,
+      "factorize_total": 5119.655409334351
+    },
+    {
+      "condition": "r100",
+      "world": 605,
+      "atoms": 8,
+      "unseen": 5,
+      "covered": 0,
+      "mean_private_bits": 548.6775814519253,
+      "mean_member_bits": 564.9571891298057,
+      "schema_bits": 1564.6347059663742,
+      "s_bar_schema": 0.0,
+      "compress_total": 2824.785945649028,
+      "factorize_total": 4389.420651615402
+    }
+  ]
+}
