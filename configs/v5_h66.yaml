@@ -1,0 +1,198 @@
+world:
+  seed: 0
+  state_dim: 16
+  teacher_rank: 8
+  teacher_primitives: 6
+  program_length: 3
+  tasks: 66
+  examples_per_task: 128
+  evaluation_examples: 256
+  reuse_rho: 1.0
+  alpha: 0.35
+
+scratch_model:
+  hidden_dim: 64
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  batch_size: 8
+  updates_per_example: 4
+  seed: 1000
+
+oracle_model:
+  operator_rank: 8
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 2000
+
+dense_model:
+  task_embedding_dim: 32
+  hidden_width: 32
+  residual_blocks: 3
+  global_learning_rate: 0.001
+  task_learning_rate: 0.05
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 3000
+
+continuous_model:
+  operator_slots: 8
+  operator_rank: 8
+  task_steps: 3
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  include_identity: false
+  global_learning_rate: 0.003
+  task_learning_rate: 0.05
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 4000
+
+hypernetwork_model:
+  step_code_dim: 8
+  hypernetwork_hidden_dim: 8
+  operator_rank: 8
+  task_steps: 3
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  global_learning_rate: 0.003
+  task_learning_rate: 0.05
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 6000
+
+shared_residual_model:
+  operator_slots: 8
+  operator_rank: 8
+  residual_rank: 2
+  task_steps: 3
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  residual_penalty: 0.01
+  global_learning_rate: 0.003
+  task_learning_rate: 0.05
+  residual_learning_rate: 0.01
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 7000
+
+# V3 wake learner. Learning rates are inherited verbatim from the frozen
+# shared-residual setting above; stage-one tuning varies only
+# description_beta (V3 spec 3.1).
+variational_model:
+  operator_slots: 8
+  operator_rank: 8
+  residual_rank: 2
+  task_steps: 3
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  description_beta: 1.0
+  prior_scale_init: 1.0
+  posterior_scale_init: 0.001
+  prior_warmup_tasks: 8
+  prune_threshold_bits: 0.5
+  variational_samples: 16
+  global_learning_rate: 0.003
+  task_learning_rate: 0.05
+  residual_learning_rate: 0.01
+  scale_learning_rate: 0.01
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 9000
+
+# V3 wake candidate (P-2026-08-19-I): H9 routes untouched plus gated
+# rank-component innovations, whose null state is exact reuse. Learning
+# rates inherited from shared_residual; the code charge is the literal
+# sparse two-part cost the model is scored under.
+gated_model:
+  operator_slots: 8
+  operator_rank: 8
+  residual_rank: 2
+  task_steps: 3
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  description_beta: 1.0
+  gate_temperature: 0.5
+  gate_logit_init: 2.0
+  gate_learning_rate: 0.05
+  global_learning_rate: 0.003
+  task_learning_rate: 0.05
+  residual_learning_rate: 0.01
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 11000
+
+discrete_model:
+  operator_slots: 12
+  operator_rank: 8
+  task_steps: 3
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  initial_temperature: 1.0
+  final_temperature: 0.1
+  temperature_schedule: global
+  global_learning_rate: 0.001
+  task_learning_rate: 0.05
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 5000
+
+mdl_model:
+  operator_slots: 12
+  operator_rank: 8
+  task_steps: 3
+  operator_alpha_init: 0.2
+  learnable_alpha: true
+  operator_activation: tanh
+  initial_temperature: 1.0
+  final_temperature: 0.1
+  temperature_schedule: per_task
+  presence_logit_init: 2.0
+  presence_threshold: 0.5
+  presence_learning_rate: 0.01
+  library_presence_penalty: 0.0001
+  route_entropy_penalty: 0.0001
+  global_learning_rate: 0.001
+  task_learning_rate: 0.05
+  weight_decay: 0.0001
+  updates_per_example: 1
+  replay_examples_per_task: 4
+  replay_ratio: 1.0
+  seed: 8000
+
+evaluation:
+  support_points: [0, 1, 2, 4, 8, 16, 32, 64, 128]
+  nmse_thresholds: [0.1, 0.05, 0.02]
+  gaussian_sigma: 0.1
+  target_precision: 0.00390625
+  lifetime_checkpoints: [8, 16, 32, 64]
+  checkpoint_novel_tasks: 4
+  extended_diagnostics: true
+
+output:
+  directory: artifacts/scratch_difficulty

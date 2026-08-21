@@ -2349,3 +2349,32 @@ two different roots were too heterogeneous to estimate either quantity.
 The honest next step is not another mechanism guess but a
 properly powered measurement of whether the D* gap exists per-world at
 all, which V5.0's aggregate never established.
+
+# D* CURRENCY GRIDS: two of three viable, committed before running (2026-08-20)
+
+At the frontier carry (3.9 bits/scalar x 198 scalars = 535 nats) the
+predicted crossings sit at roughly half the 8-bit ones, so each gain
+needs its own grid. Derived by the same frozen rule from the SEALED
+Stage-1 s_bar values, and committed here before any cell runs:
+
+| g | s_bar | H* at D* | H_R grid | N grid | status |
+| --- | --- | --- | --- | --- | --- |
+| 0.5 | 26.6 | 20.1 | 16, 20, 22, 26 | 56, 60, 62, 66 | viable |
+| 1.0 | 57.3 |  9.3 |  4,  8, 10, 14 | 44, 48, 50, 54 | viable |
+| 1.5 | 84.3 |  6.3 |  2,  6,  8, 12 | 42, 46, 48, 52 | **NOT VIABLE** |
+
+g = 1.5 IS UNREACHABLE AT THIS GEOMETRY, and that is a structural fact
+rather than a budget choice. Bracketing 6.3 by four returning tasks
+requires a low point at H_R = 2, and the promotion protocol's
+`minimum_cluster = 3` means a two-task return window cannot be scored at
+all. Measuring the D* crossing at high gain would need a different
+dormancy geometry — an earlier gap, so more tasks remain after it —
+which is a different world and a new fingerprint, not a re-scoring.
+
+PREDICTION for the two viable gains: the observed crossing lands within
+15% of the D* prediction, i.e. chi computed at the frontier carry stays
+inside [0.7, 1.3]. If it does, the law is currency-independent and the
+8-bit result is not an artifact of the proxy. If the D* crossings miss
+while the 8-bit ones hit, then `lambda D(A)` is doing work that the
+frontier accounting does not reproduce, and P2 of H19's registered
+partials ("the law is currency-dependent") is the reading.

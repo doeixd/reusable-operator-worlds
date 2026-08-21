@@ -1444,6 +1444,27 @@ def _write_artifacts(
         (output / "hard_routes.json").write_text(
             json.dumps(model.hard_routes(), indent=2), encoding="utf-8"
         )
+    # H29's P_0: the member residuals a promotion consumed, as they
+    # stood at that sleep. Written to its own file rather than into
+    # model.pt, which stays tensor-only for the restricted loader. An
+    # in-memory snapshot that never reaches disk is not provenance --
+    # the whole point is that a finished artifact can be re-audited.
+    snapshots = getattr(model, "promotion_snapshots", None)
+    if snapshots:
+        payload = {}
+        for index, record in snapshots.items():
+            payload[f"born_{index}"] = record["born"].cpu().numpy()
+            if record["member_residuals"]:
+                payload[f"members_{index}"] = torch.stack(
+                    record["member_residuals"]
+                ).cpu().numpy()
+        np.savez_compressed(output / "promotion_snapshots.npz", **payload)
+        (output / "promotion_members.json").write_text(
+            json.dumps(
+                {str(k): list(v["members"]) for k, v in snapshots.items()}, indent=2
+            ),
+            encoding="utf-8",
+        )
     commit = current_git_commit()
     (output / "git_commit.txt").write_text(commit + "\n", encoding="utf-8")
     write_fingerprint(output, resolved, kind, commit)
