@@ -2454,3 +2454,59 @@ Sealed status: C1 PASS. C2 passes its three unambiguous clauses
 (monotone M*, r_meta=0 never pays, ceil-exact 30/30) with its 15% clause
 unresolved by a denominator the plan failed to specify. C3 and C4 are
 registered negatives and not yet run on sealed worlds.
+
+# 2026-08-20 — V5 SEALED BLOCK COMPLETE: 2 pass, 1 split, 1 mixed
+
+Seeds 600-629 opened against `V5_CONFIRMATION_PLAN.md`, frozen at
+1ed227d and hashed into `tools/check_prereg.py` before any sealed world
+was generated. `python tools/check_prereg.py` verifies.
+
+| rung | verdict | headline |
+| --- | --- | --- |
+| C1 amortization law | **PASS** | mean \|chi-1\| = 0.016, range [0.989, 1.031] |
+| C2 schema crossing | **SPLIT** | 3 clauses pass; the 15% clause unresolved |
+| C3 learned library | **PASS** | 3/3 clauses; FACTORIZE 0/6 at both r_meta |
+| C4 coding geometry | **MIXED** | 1/3 clauses; the D* gap does not hold per-world |
+
+C1. 300 cells, zero failures, zero exclusions. Crossings 42.5 / 18.9 /
+12.9 against predictions 41.3 / 19.1 / 13.0 made before the runs
+existed. The crossing moves 3.3x while the carried abstraction is
+bit-identical in every arm.
+
+C2. Monotone M*, r_meta = 0 never pays, and the ceil criterion exact in
+30/30 worlds. The 15% clause is unresolved because the plan never said
+whether a world with no observable crossing counts as a failure: 79% and
+73% on worlds that crossed, 37% and 63% on all worlds. Cause is
+reachability — at F=12 with M_0=4 only 8 unseen members exist and sealed
+r_meta 0.90 predicted M* ~ 20.
+
+C3. Replicates harder than development: unexplained fraction 0.921 at
+r_meta = 1.0 against 0.873, and M > F in 12/12 cells (mean 7.2 and 7.7
+against F = 4).
+
+C4. Two clauses fail in opposite directions. The D* gap holds in only
+6/12 cells — a coin flip, mean +0.087 bits/scalar against development's
++0.253 — so the per-world regularity I registered from V5.0's aggregate
+does not exist at this operating point. And the correlation registered
+as absent (-0.009 in development) is +0.888 on sealed worlds. What
+survives cleanly: shared abstractions never show faster spectral decay,
+0/12 sealed and 0/16 development.
+
+## What V5 established
+
+The amortization law, at two levels and out of sample:
+
+    H* = lambda D*(A) / s_bar        atom retention, sealed, chi ~ 1
+    M* = D*(S) / s_bar_schema        schema birth, monotone in
+                                     relatedness, ceil-exact 30/30
+
+and one clean negative with a located cause: the economics exist over
+teacher operators, and PROMOTE does not reach them, because it
+fragments families into 1.5-1.9x more atoms that share almost none of
+the family's functional structure.
+
+## Still open
+
+H29's measurement (instrument built this session — the P_0 snapshot —
+but existing artifacts predate it, so it needs fresh runs); the slots=6
+crossing grid; D* currency grids; H22-H24, a side branch under D18.

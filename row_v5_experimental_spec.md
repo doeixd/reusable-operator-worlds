@@ -1,11 +1,14 @@
 # Neural Library Learning
 ## V5 Experimental Specification: Representation Economics
 
-**Status: PROVISIONAL DRAFT — not authoritative until frozen.** Sealed
-seeds 600-629 remain sealed and must not be generated, inspected, or
-summarized until this document's development phase is complete and
-`V5_CONFIRMATION_PLAN.md` is frozen with its hash in
-`tools/check_prereg.py`. Development worlds are 0-9, as in V1/V2/V3/V4R.
+**Status: SEALED BLOCK COMPLETE (2026-08-20).** `V5_CONFIRMATION_PLAN.md`
+was frozen at 1ed227d and hashed into `tools/check_prereg.py` before any
+sealed world was generated; seeds 600-629 were then opened and scored.
+Verdicts: C1 (amortization law) PASS, mean |chi-1| = 0.016; C2 (schema
+crossing) SPLIT, three clauses pass and the 15% clause is unresolved by
+a denominator the plan failed to specify; C3 (learned library does not
+realize the schema economy) PASS 3/3; C4 (coding geometry) MIXED, two of
+three clauses fail. See PREDICTIONS.md for the scored detail. Development worlds are 0-9, as in V1/V2/V3/V4R.
 Worlds 500-509 are contaminated V5 development and are never
 confirmatory; 510-599 are unused.
 
