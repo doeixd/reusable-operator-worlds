@@ -964,3 +964,15 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   construction and "won" 16x. Any ratio that large is a rigged
   comparison, not a result. This is the same error class as V4.1's
   total-variance tolerance and the raw-ablation counterfactual.
+- The residual tensor is not "the task's innovation". A learner solves a
+  task through shared basis + route + private residual, so a family
+  shared by two tasks can be split differently between route and
+  residual and look absent in the residuals alone. Measure the
+  EFFECTIVE task-conditioned operator, F_tau(z) - F_0(z) with
+  task-specific information nulled, before concluding anything about
+  what the learner represents. Same error family as comparing learner
+  slot indices to teacher primitive indices.
+- An audit that writes to a fixed report path must stamp its run or
+  refuse a report older than its inputs. A scorer that dies partway
+  leaves the PREVIOUS answer on disk and nothing in the output says so;
+  H29's first two attempts were read as results that way.
