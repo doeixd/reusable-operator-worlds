@@ -2186,3 +2186,78 @@ looking at the domain, because it makes the deeper regularity obscure. "A good
 abstraction doesn't merely summarize experience. It exposes structure that makes
 future thought cheaper." C3 is the first empirical evidence that the distinction
 matters.
+
+### [reviewer-feedback-49.txt](reviewer-feedback-49.txt)
+Corrects the first H29 interpretation. The result licenses "the learner's
+RESIDUAL OBJECTS contain little of the teacher's meta-family geometry", not "the
+learner has lost 90% of that information" — because a task is solved through
+shared basis + task route + private residual, so two tasks sharing a family can
+split the common computation differently between route and residual and look
+unrelated in the residuals alone. If so, the residual tensor is simply the wrong
+computational unit to call the task's innovation.
+
+Prescribes the EFFECTIVE task-conditioned operator as the right unit:
+I_tau(z) = F_tau(z) − F_0(z), where F_tau includes basis mixture, route and
+residual, F_0 nulls task-specific information (not an arbitrary parameter
+baseline), and both are measured on the on-trajectory state distribution. Four
+registered outcomes: R_effective high means the information was DISTRIBUTED not
+lost, and PROMOTE has been promoting the wrong object ("a compiler shouldn't
+care which registers happened to implement a computation"); low with cheap
+adapters recovering it is the coordinate hypothesis at the stage where it
+originates; low with local adapters failing but one cheap GLOBAL Q working means
+the meta-structure lives at the population level (B₁ = A₁+A₂, B₂ = A₁−A₂ defeats
+every local adapter); nothing recovering it means the wake objective never
+identified the fertile representation and post-hoc REFACTOR cannot suffice.
+
+Introduces the three-level distinction — behavioral equivalence, current
+economic equivalence, and PROSPECTIVE equivalence — and notes the project may
+ultimately care about the third: two representations can encode today's
+experience equally well while one exposes A_i = S(α_i) and the other hides it.
+Proposes the fertility experiment (matched J_now, compare cost of acquiring an
+unseen family member) and a revised sleep objective
+J_sleep = D*(L) + L(D_past | L) + η·E[C_adapt(T | L)], which gives dreaming a
+concrete job: evaluate representations against plausible futures without
+treating dreams as evidence about the world.
+
+### [reviewer-feedback-50.txt](reviewer-feedback-50.txt)
+Reads the completed diagnostic chain (R_teacher 1.0, R_effective 0.19,
+R_residual 0.095, full span 0.707 unexplained) and states V5's central result:
+"the system knows when higher-order abstraction would pay, but its wake learning
+does not produce representations in which that abstraction is accessible." The
+main loss happens during REPRESENTATION FORMATION; PROMOTE's further degradation
+(0.095 → 0.052) is downstream of it.
+
+Two disciplinary corrections. First, the refactoring negative was stated too
+broadly: the result rules out any SPAN-PRESERVING post-hoc refactor of the
+learned objects (L → QL), but NOT a sleep phase that returns to the original
+experience and re-solves it, (D, L) → L′, which is not a function of the library
+alone. Second, the D* crossing is a CURRENCY ROBUSTNESS CHECK rather than a
+fourth causal point, since the same lifetimes are re-priced and share all their
+noise with the 8-bit reading; the causal evidence still comes from the
+independently generated D and s regimes.
+
+Redirects V6 from "can the library compose programs?" (depth-8 composition is
+already known not to be catastrophically broken) to PROSPECTIVE REPRESENTATION
+FORMATION: can pressure for cheap future learning cause wake to form
+representations that expose structure ordinary task optimization hides? The
+experiment runs on the existing H20 world so V5 is the control, comparing
+standard wake (L_current + λD*) against prospective wake
+(+ η·C_adapt(future task)), on an existence→discovery ladder: oracle prospective
+pressure using known family relationships in development only, then removing
+family labels, then meta-learning the pressure across worlds, then testing
+program-language consequences. Both failure modes are informative — if
+prospective pressure cannot move R_effective the problem is architectural, and
+if it moves 0.19 → 0.7 with FACTORIZE 0/6 → 6/6 the finding is that
+representations optimized for present performance differ from those optimized to
+make future learning cheap.
+
+Defines abstraction fertility precisely as
+Φ(R) = E[C_adapt(T | R_baseline) − C_adapt(T | R)], connects it to the
+meta-optimizer aspiration (train U_φ so its updates make tomorrow's task easier,
+needing no family labels at deployment), and argues this is why ordinary SGD is
+insufficient for the grand goal: many θ give similar L_t and nothing selects the
+one whose structure makes unknown future concepts expressible. Closing thesis:
+continual intelligence requires selecting among behaviorally equivalent
+representations by their prospective learning value, so retrospective MDL is
+strengthened rather than abandoned — "which compact explanation of the past also
+makes plausible extensions cheap?"

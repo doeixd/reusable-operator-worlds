@@ -1,0 +1,168 @@
+Yes. H29 is a much better localization result than "PROMOTE fragments things." But
+I would make one correction to the interpretation before building the adapter
+experiment.
+
+The conclusion I think you have earned is:
+
+    the learner's RESIDUAL OBJECTS contain little of the teacher's meta-family
+    geometry before PROMOTE.
+
+You have NOT quite established:
+
+    the learner as a whole has already lost 90% of that information.
+
+That distinction matters because the wake learner has more places to encode a
+family than the private residual.
+
+## The missing possibility: the family is distributed
+
+A task is being solved through something closer to
+
+    shared basis + task-specific route + private residual.
+
+The teacher says T_f(z) = B_teacher(z) + A_f(z). But the learner is free to
+implement the same thing as T_tau(z) = sum_j r_tau_j P_j(z) + Delta_tau(z).
+
+So two tasks sharing the same teacher family may have residuals Delta_1,
+Delta_2 that look unrelated because the common computation has been distributed
+differently between r_tau and Delta_tau.
+
+If so, the R_pre = 0.095 result doesn't mean the family structure vanished. It
+means THE RESIDUAL TENSOR IS THE WRONG COMPUTATIONAL UNIT to call "the task's
+innovation." And that would be extremely consistent with lessons you've already
+learned elsewhere in the project.
+
+# I would therefore put one cheap audit before the adapter experiment
+
+Construct the EFFECTIVE task-conditioned operator at the family step. For each
+task tau, define functionally F_tau(z) = the actual learner transformation
+applied at that step, including basis selection/mixture, route, residual, and
+any adapters already involved. Use the correct on-trajectory state distribution,
+as your latest probing error just reinforced.
+
+Then extract the task-conditioned innovation relative to an appropriate
+shared/default computation: I_tau(z) = F_tau(z) - F_0(z), where F_0 is the
+learner with the relevant task-specific information nulled — not an arbitrary
+parameter baseline.
+
+Then run exactly H29's family-capture instrument on {I_tau} rather than only
+{Delta_tau}. Call the result R_effective. Now you get a very informative fork.
+
+## Outcome 1: R_effective is high
+
+Suppose R_residual ~ 0.095 but R_effective ~ 0.7 or 0.9. Then the information
+was never lost. It was DISTRIBUTED across the wake representation. And the V3
+PROMOTE mechanism has been promoting the wrong thing. That would be a major
+finding: abstraction boundaries should be discovered functionally, not inherited
+from parameter boundaries. PROMOTE currently says "here is the private residual
+object; maybe it deserves to become shared." The better operation would say
+"here is a recurrent causal transformation, even though its implementation
+currently spans routes, basis calls, and residual state — compile that
+transformation into one reusable object." A compiler shouldn't care which
+registers happened to implement a computation before compilation.
+
+# Outcome 2: effective operator is still low, but cheap adapters recover it
+
+Then your current Hypothesis C is probably right. You have I_i that look
+different directly, but there exist cheap e_i, d_i with d_i . I_i . e_i ~
+S(alpha_i). This is H28, but now at exactly the stage where the problem
+originates. Test adapters in an explicit complexity ladder: identity -> scalar/
+diagonal -> orthogonal linear -> low-rank linear -> full linear. Stop as soon as
+structure recovers. For each adapter family require D*(e_i) + D*(d_i) <<
+D*(I_i), and evaluate on disjoint interventions. If only full expressive
+adapters work, don't count it — they can simply hide the computation. The
+interesting result is: a tiny coordinate change reveals a large shared
+computation.
+
+# Outcome 3: effective operator is low and cheap adapters fail
+
+Then test your registered B next: the learner has chosen a different
+basis/decomposition. But this likely requires a GLOBAL rather than
+per-abstraction coordinate transformation. Imagine the teacher basis is
+A_1..A_4 while wake represents B_1 = A_1 + A_2, B_2 = A_1 - A_2, etc. No
+individual adapter between B_i and A_j will solve this. But a global rotation of
+the computational dictionary might: A = Q B. So search for a low-cost global
+change of basis over the library/task innovations that maximizes family capture
+while preserving all task behavior. Critically, charge D*(Q). If one global
+cheap Q turns R ~ 0.1 into R ~ 0.8, then the meta-structure exists only at the
+level of the population, not in individual learned atoms. That's a different
+form of canonicalization, and arguably even more interesting.
+
+# Outcome 4: none of those recover the structure
+
+Then the interpretation becomes much deeper: the wake objective simply does not
+identify the fertile representation. The learner has enough capacity to solve
+all the tasks. Teacher meta-structure exists. A schema would be economically
+useful. But nothing in the current objective rewards representing related tasks
+relatedly. Therefore SGD is free to choose any one of a huge equivalence class
+of task-solving implementations. Most of those implementations may destroy the
+possibility of cheap higher-order abstraction. That would mean post-hoc REFACTOR
+is not sufficient. You need some prospective pressure during representation
+formation.
+
+# This would reveal a very important distinction
+
+There may be three levels. BEHAVIORAL EQUIVALENCE: both solve current tasks.
+CURRENT ECONOMIC EQUIVALENCE: J_now(R_1) ~ J_now(R_2), both encode current
+experience equally cheaply. PROSPECTIVE EQUIVALENCE: E[C_future | R_1] ~
+E[C_future | R_2] — this need not hold. And the whole project may ultimately
+care about the third. Two representations can encode today's experience equally
+well while one exposes A_i = S(alpha_i) and the other hides it. When a new
+family member arrives, the first learns alpha_new while the second learns a
+whole new operator. The first representation is more FERTILE.
+
+# That suggests an experiment more important than ordinary refactoring
+
+Obtain two behaviorally/current-MDL-matched representations L_A, L_B where A has
+high schema accessibility and B doesn't. Give both exactly the same unseen
+family member. Measure L_preq, N_shots, and Delta D* for each. If J_now(A) ~
+J_now(B) but J_learn-new(A) << J_learn-new(B), you've directly demonstrated that
+representations can have OPTION VALUE for future learning. That's an enormous
+conceptual bridge from V5 toward the ultimate system.
+
+# It would also tell us what "sleep" should actually optimize
+
+Our original sleep picture was: compress current representation. V4 taught us to
+compare against COMPRESS. V5 now suggests sleep might instead need to optimize
+
+    J_sleep = D*(L) + L(D_past | L) + eta E_{T~p(T|H)}[C_adapt(T | L)].
+
+The first two terms say don't make the past worse. The third asks which equally
+good way of representing the past makes plausible future learning cheapest. That
+is PROSPECTIVE REPRESENTATION LEARNING. And now "dreaming" has a concrete job:
+during sleep, sample hypothetical future tasks from the regularities the model
+believes exist, try adapting to them under candidate representations, and let
+representations that make those hypothetical extensions easy acquire option
+value. Importantly, dreams don't count as evidence that the world works this
+way — they evaluate the CONSEQUENCES of representations under plausible futures.
+Reality still decides whether those future distributions were useful.
+
+# This connects extremely directly to program synthesis
+
+A good programming language isn't merely one in which the programs you've
+already written are short. It is one in which the programs you're likely to want
+next are short and easy to discover. Wake can produce some arbitrary basis
+{B_1..B_8} that solves everything, but another vocabulary {A_1..A_4, S} may make
+the next family member S(alpha_5) almost trivial to express. So abstraction
+fertility is basically: how good is this representation as a language for future
+programs? That is much closer to our ultimate goal than teacher recovery.
+
+# So I would revise the immediate experimental sequence
+
+Don't jump straight from H29 to adapters. Do: (1) effective-operator H29 —
+measure family structure over the full task-conditioned computation, not
+residuals alone; (2) cheap coordinate alignment, if effective structure remains
+low; (3) global basis alignment, if local adapters fail; (4) current-economy
+comparison at matched behavior and D*; (5) prospective fertility — give them
+unseen family members and measure adaptation cost. Only after that decide
+whether the remedy is: promote the functional unit, canonicalize coordinates,
+globally refactor, or change the wake objective itself.
+
+The key thing H29 has done is eliminate a tempting but shallow story: "PROMOTE
+makes bad abstractions." The result is more interesting. It looks increasingly
+like: the representational choices made while solving tasks determine whether
+later abstraction is even visible. That is exactly the issue we'll face when we
+eventually ask the system to invent concepts, perceptual decompositions,
+reasoning primitives, and programs. A learner can solve a problem without
+learning it in a FORM WORTH THINKING WITH LATER. The next stage is figuring out
+how to distinguish — and eventually prefer — the representations that are.

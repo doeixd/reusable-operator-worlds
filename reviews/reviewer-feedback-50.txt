@@ -1,0 +1,189 @@
+Yes. I think this gives the project a much sharper next move.
+
+The central result of V5 is now:
+
+    The system knows when higher-order abstraction would pay, but its wake
+    learning does not produce representations in which that abstraction is
+    accessible.
+
+That is a much more interesting failure than FACTORIZE simply not working.
+
+H29 localizes it surprisingly well: R_teacher = 1.0, R_effective,wake ~ 0.19,
+R_residual ~ 0.095, and even the full linear span leaves 0.707 unexplained. So
+the main loss happens DURING REPRESENTATION FORMATION. PROMOTE makes things
+somewhat worse (0.095 -> 0.052) but it's downstream of the main failure.
+
+## One qualification I'd put on the conclusion
+
+I wouldn't quite write "no sleep oracle can recover it." I'd write: NO
+SPAN-PRESERVING POST-HOC REFACTOR OF THE LEARNED OBJECTS can recover it.
+
+A sufficiently powerful sleep phase that goes back to the original tasks and
+RELEARNS a new representation might recover it. But that's no longer ordinary
+refactoring L -> QL. It's more like (D, L) -> L'. That distinction may
+eventually matter. The result rules out "just rotate/canonicalize the finished
+library." It doesn't rule out a sleep phase that re-solves experience under a
+prospective objective. And that observation actually points toward a beautiful
+wake/sleep architecture.
+
+# I think V6's question has changed
+
+I would no longer make the immediate flagship question "can the library compose
+programs?" You already know depth-8 composition isn't catastrophically broken.
+There's a more upstream problem. I'd make V6:
+
+    V6 — PROSPECTIVE REPRESENTATION FORMATION
+
+    Can pressure for cheap future learning cause wake to form representations
+    that expose reusable higher-order structure which ordinary task
+    optimization hides?
+
+That's directly caused by V5. The key causal comparison becomes retrospective
+learner vs prospective learner. Both see the same tasks, both have comparable
+capacity, both solve the current tasks. But only one is rewarded for making
+later related tasks cheap.
+
+# The experiment I most want to see
+
+Use exactly the H20 world where teacher meta-structure is known to exist, schema
+economics are known to pay, and standard PROMOTE fails to expose it. Don't
+change the world — that makes V5 the control. Now train two wake learners.
+
+STANDARD WAKE:      J = L_current + lambda D*_current
+PROSPECTIVE WAKE:   J = L_current + lambda D*_current + eta C_adapt(future task)
+
+The crucial term is C_adapt: given the representation I have just formed, how
+expensive is it to learn another task from this world? That's exactly
+abstraction fertility.
+
+# But do it as an existence -> discovery ladder
+
+I would not immediately invent a clever label-free algorithm. That repeats
+mistakes we've successfully avoided throughout ROW. Run the hierarchy:
+
+1. ORACLE PROSPECTIVE PRESSURE. During development only, use known family
+   relationships to select a related held-out task. Do not give the learner the
+   teacher operator itself. Optimize representation formation so learning that
+   held-out sibling is cheap. Question: can prospective pressure actually move
+   R_effective from ~0.19 toward the accessible teacher structure?
+2. REMOVE FAMILY LABELS. Sample future tasks from the actual chronological
+   stream. The learner knows only that future performance matters, not which
+   hidden family generated a task.
+3. META-LEARN THE PRESSURE. Across many worlds, train an update policy/optimizer
+   whose objective is lifetime prequential improvement. At test time on unseen
+   worlds it gets no future information, but its learned update dynamics may
+   have acquired a prior for forming representations that remain reusable.
+4. THEN TEST PROGRAM-LANGUAGE CONSEQUENCES. Do those representations actually
+   produce cheaper schemas, easier novel-member acquisition, and eventually
+   cheaper program synthesis?
+
+That gives clean failure locations.
+
+# The oracle experiment is extremely important
+
+Suppose we add explicit prospective pressure and still get R_effective ~ 0.2.
+Then the problem isn't merely the objective — maybe the architecture cannot
+simultaneously solve the task and preserve the relevant family geometry. Then we
+investigate substrate/ABI/representation constraints.
+
+But suppose prospective training yields R_effective 0.19 -> 0.7 and FACTORIZE
+0/6 -> 6/6. Then we have demonstrated something conceptually major:
+representations optimized only for present performance differ from
+representations optimized to make future learning cheap.
+
+# It also gives "abstraction fertility" a precise definition
+
+    Phi(R) = E_{T_future}[ C_adapt(T_future | R_baseline) - C_adapt(T_future | R) ]
+
+Higher Phi means the representation makes plausible future learning cheaper.
+Then two representations can have J_now(R_1) ~ J_now(R_2) while Phi(R_2) >>
+Phi(R_1). That operationalizes exactly the thing we've been calling: better way
+of looking at things, fertile abstraction, better language, future-useful
+representation.
+
+# And this is where dreaming starts becoming non-metaphorical
+
+Suppose the learner doesn't have future tasks available during deployment. How
+can it optimize fertility? It can DREAM plausible extensions. Given experience
+suggesting a family A_1, A_2, A_3, generate a hypothetical A_4. Then ask: under
+my present representation, how expensive would it be to accommodate this
+possible continuation? If R_1 costs 500 and R_2 costs 30, and they explain the
+observed past equally well, R_2 has OPTION VALUE.
+
+This gives dreaming a very precise purpose: dreaming evaluates representations
+against possible futures that have not occurred yet. The dreamed examples do not
+become evidence that the world contains A_4. They simply answer: if the world
+extends this way, which representation would leave me better prepared? That's
+exactly analogous to planning over actions, except you're planning over
+REPRESENTATIONAL CHOICES.
+
+# This connects directly to your meta-optimizer idea
+
+The original aspiration was to train model and optimizer together so the system
+becomes more sample-efficient over its lifetime. This may be the concrete
+mechanism. Let an inner learner experience T_1..T_k, updating its representation
+with optimizer U_phi. Then evaluate how cheaply it learns T_{k+1}..T_{k+h}.
+Outer objective: min_phi E[L_future + lambda D*_representation]. Backpropagate/
+meta-optimize through the earlier updates. Then U_phi isn't merely learning how
+to reduce today's loss — it's learning how to update today's representation so
+tomorrow's task will be easier. That is precisely the missing pressure H29 says
+standard wake lacks. And importantly, it doesn't need teacher family labels at
+deployment.
+
+# V5 may therefore have found why ordinary SGD is insufficient for the grand goal
+
+SGD asks locally theta_{t+1} = theta_t - eta grad L_t. There are many thetas
+that give similar L_t. Nothing says "pick the one whose internal structure will
+make unknown future concepts easiest to express." So representations can drift
+into arbitrary task-solving coordinates. This explains your result remarkably
+naturally: behavior good, family geometry largely absent. The objective never
+cared.
+
+The deeper hypothesis becomes: CONTINUAL INTELLIGENCE REQUIRES SELECTING AMONG
+BEHAVIORALLY EQUIVALENT REPRESENTATIONS ACCORDING TO THEIR PROSPECTIVE LEARNING
+VALUE.
+
+# This also tells us why MDL alone may not be sufficient
+
+Retrospective MDL D(R) + L(D_past | R) doesn't distinguish two representations
+that compress the past equally. But one might be much better for the future. So
+prospective MDL is more like
+
+    D(R) + L(D_past | R) + eta E_{T~}[C_learn(T~ | R)].
+
+This is not abandoning parsimony. It's strengthening it. The question becomes:
+which compact explanation of the past also makes plausible extensions cheap?
+That's very close to how good scientific theories and useful concepts seem to
+work.
+
+# Then we can return to composition
+
+If V6 can form fertile representations, THEN the compositional-language work
+becomes much more meaningful. Because we don't merely have functions that happen
+to compose — we have words selected partly because they make future computation
+easy to express. The loop becomes: solve current tasks -> form representations
+-> evaluate future adaptability -> prefer fertile representations -> compose
+them into programs -> compress recurring programs -> better language for the
+future.
+
+## About the D* result
+
+I agree it closes the currency-dependence concern favorably, but I'd keep the
+language disciplined. Because you're reusing the same lifetimes and changing the
+charged carry, this isn't another independent causal confirmation like the
+gain/rank interventions. It's a strong CURRENCY ROBUSTNESS CHECK: chi_D* = 0.994
+even though the economically relevant crossing moves from roughly 42.5 under the
+old price to 19.5 under the frontier price. That's valuable because it says the
+relation isn't peculiar to the old 8-bit proxy. But the causal evidence for H19
+still comes primarily from the independently generated D/s regimes. I'd write:
+"The amortization law survived replacement of the project's historical 8-bit
+proxy with the independently measured component rate-distortion currency." That's
+strong enough.
+
+So I think H29 has given you the actual V6 starting point. V1-V5 discovered WHEN
+INFORMATION DESERVES ABSTRACTION. The next phase asks HOW A LEARNER CAN FORM
+REPRESENTATIONS THAT LEAVE USEFUL FUTURE ABSTRACTIONS DISCOVERABLE. And that's
+directly on the path to what you've been imagining all along: not merely a
+network that learns skills, but a system that progressively learns better
+languages in which to think, theorize, compose programs, and learn the next
+thing.
