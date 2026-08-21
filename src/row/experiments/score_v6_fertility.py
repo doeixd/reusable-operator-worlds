@@ -73,17 +73,37 @@ def adapt_cost(model, task, steps: int, support: int, inner_lr: float,
     # curve was flat in support size, which is a broken instrument
     # rather than an absence of fertility.
     optimizer = torch.optim.Adam([code, residual], lr=inner_lr)
+    # PREQUENTIAL, not endpoint. The registered gate is acquisition
+    # COST -- loss paid while learning, plus samples, plus retained
+    # description. Reporting only the query MSE after N steps supports
+    # the narrower claim "better few-shot endpoint" and not the
+    # hypothesis as written (review 55). The area under the query curve
+    # is the learning cost: a representation that reaches the same
+    # endpoint more slowly is not equally fertile.
+    curve = []
     for _ in range(steps):
+        with torch.no_grad():
+            curve.append(float(torch.mean(
+                (model(query_x, probe_id) - query_y) ** 2)))
         optimizer.zero_grad()
         loss = torch.mean((model(support_x, probe_id) - support_y) ** 2)
         loss.backward(inputs=[code, residual])
         optimizer.step()
     with torch.no_grad():
-        query = float(torch.mean((model(query_x, probe_id) - query_y) ** 2))
+        final = float(torch.mean((model(query_x, probe_id) - query_y) ** 2))
+    curve.append(final)
     model.forget_task(probe_id)
-    # Reported in the project's currency: Gaussian nats per target
-    # scalar at the standing sigma.
-    return query / (2 * sigma * sigma)
+    scale = 2 * sigma * sigma
+    return {
+        # Cumulative query loss over the adaptation trajectory, in the
+        # project's currency: the prequential cost of acquiring the task.
+        "prequential": float(sum(curve)) / scale,
+        # Endpoint, kept because it is what the earlier runs reported.
+        "endpoint": final / scale,
+        # Samples to reach a fixed tolerance, the third registered term.
+        "steps_to_target": next(
+            (i for i, v in enumerate(curve) if v <= 0.01), len(curve)),
+    }
 
 
 def main() -> None:
@@ -104,6 +124,11 @@ def main() -> None:
                              "than an absence of fertility")
     parser.add_argument("--inner-lr", type=float, default=0.05,
                         help="task learning rate, matching the lifetime's")
+    parser.add_argument("--metric", default="prequential",
+                        choices=("prequential", "endpoint", "steps_to_target"),
+                        help="registered gate is prequential acquisition cost; "
+                             "endpoint is the weaker claim the first version "
+                             "reported")
     parser.add_argument("--output", type=Path,
                         default=Path("reports/v6_fertility.json"))
     args = parser.parse_args()
@@ -133,11 +158,12 @@ def main() -> None:
         # member.
         related = list(getattr(generated, "novel_family_tasks", ()))
         within = list(getattr(generated, "held_out_family_tasks", ()))
-        # UNRELATED futures: pre-onset tasks belong to no family. They
-        # ARE in the lifetime, which biases against finding specificity
-        # (an unrelated task the arm trained on is unfairly cheap), so
-        # H31 is conservative in the direction that matters.
-        unrelated = [generated.tasks[i] for i in range(min(4, spec.family_onset))]
+        # UNSEEN unrelated futures, symmetric with the related ones:
+        # base-primitive programs the lifetime never trained on. Using
+        # pre-onset lifetime tasks made "related" novel and "unrelated"
+        # familiar, so the difference confounded specificity with
+        # novelty (review 55).
+        unrelated = list(getattr(generated, "unseen_unrelated_tasks", ()))
         if not related:
             continue
 
@@ -149,17 +175,20 @@ def main() -> None:
             rows.append({
                 "world": world, "arm": arm,
                 "related": {
-                    str(k): [adapt_cost(model, t, args.steps, k, args.inner_lr)
+                    str(k): [adapt_cost(model, t, args.steps, k,
+                                        args.inner_lr)[args.metric]
                              for t in related]
                     for k in args.support
                 },
                 "unrelated": {
-                    str(k): [adapt_cost(model, t, args.steps, k, args.inner_lr)
+                    str(k): [adapt_cost(model, t, args.steps, k,
+                                        args.inner_lr)[args.metric]
                              for t in unrelated]
                     for k in args.support
                 },
                 "within": {
-                    str(k): [adapt_cost(model, t, args.steps, k, args.inner_lr)
+                    str(k): [adapt_cost(model, t, args.steps, k,
+                                        args.inner_lr)[args.metric]
                              for t in within]
                     for k in args.support
                 },

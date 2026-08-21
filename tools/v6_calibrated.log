@@ -1,3 +1,5 @@
 outer=2 world 0 exit=1
 prospective world=1 meta r_meta=1 F=4: loss=-195031.0
 outer=2 world 1 exit=0
+prospective world=2 meta r_meta=1 F=4: loss=-194130.6
+outer=2 world 2 exit=0

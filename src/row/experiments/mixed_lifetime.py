@@ -200,6 +200,17 @@ def main() -> None:
     args = parser.parse_args()
 
     if (args.output / "summary.json").exists():
+        # Verify the EXISTING artifact was produced by this protocol.
+        # "summary.json exists" is not "the same experiment ran here".
+        existing = args.output / "rho_profile.json"
+        if existing.exists():
+            recorded = json.loads(existing.read_text(encoding="utf-8"))
+            stored = recorded.get("v6_arm", {}).get("arm")
+            if stored is not None and stored != args.arm:
+                raise SystemExit(
+                    f"{args.output} holds arm '{stored}' but '{args.arm}' was "
+                    "requested; refusing to treat it as a completed cell"
+                )
         print("summary exists; skipping")
         return
 
@@ -351,11 +362,20 @@ def main() -> None:
                 # Does merely SEEING a relative produce the geometry?
                 # Same examples, ordinary training, no adaptation loop.
                 model.begin_task(probe_id)
-                optimizer = torch.optim.AdamW(
-                    list(model.shared_parameters())
-                    + [model.task_codes[probe_id], model.task_residuals[probe_id]],
-                    lr=config.shared_residual_model.global_learning_rate,
-                )
+                # MATCHED to ordinary acquisition: separate parameter
+                # groups at the learning rates the lifetime itself uses
+                # (route 0.05, residual 0.01, shared 0.003). The first
+                # version put all three in one AdamW at 0.003, so replay
+                # was not the control it claimed to be (review 55).
+                settings = config.shared_residual_model
+                optimizer = torch.optim.AdamW([
+                    {"params": list(model.shared_parameters()),
+                     "lr": settings.global_learning_rate},
+                    {"params": [model.task_codes[probe_id]],
+                     "lr": settings.task_learning_rate},
+                    {"params": [model.task_residuals[probe_id]],
+                     "lr": settings.residual_learning_rate},
+                ])
                 for _ in range(args.prospective_steps):
                     optimizer.zero_grad()
                     loss = torch.mean(
@@ -451,11 +471,21 @@ def main() -> None:
     }
     if meta_spec is not None:
         provenance["meta_family_spec"] = meta_spec.as_dict()
+        # EVERY protocol knob. Resume only checks that summary.json
+        # exists, so an artifact configured differently would otherwise
+        # be silently accepted as a match (review 55).
         provenance["v6_arm"] = {
             "arm": args.arm,
             "prospective_weight": args.prospective_weight,
             "prospective_steps": args.prospective_steps,
+            "prospective_inner_steps": args.prospective_inner_steps,
             "prospective_support": args.prospective_support,
+            "freeze_basis_at": args.freeze_basis_at,
+            "freeze_slots": args.freeze_slots,
+            "operator_slots": args.operator_slots,
+            "sleeps": list(args.sleeps),
+            "lifecycle": args.lifecycle,
+            "promotion_epsilon": args.promotion_epsilon,
         }
         label = f"meta r_meta={meta_spec.r_meta:g} F={meta_spec.families}"
     elif task_group_spec is not None:

@@ -197,7 +197,8 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "inference_multiply_adds_per_sample": generation + operators,
             "note": "counts per-prediction operator generation; backward and optimizer operations excluded",
         }
-    if kind in {"shared_residual", "variational", "gated", "promoting"}:
+    if kind in {"shared_residual", "variational", "gated", "promoting",
+                "lifecycle", "prospective"}:
         selected = {
             "variational": config.variational_model,
             "gated": config.gated_model,

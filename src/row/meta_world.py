@@ -300,7 +300,37 @@ def generate_meta_world(config: WorldConfig, spec: MetaFamilySpec) -> World:
                 )
             )
 
+    # UNSEEN UNRELATED tasks: base-primitive programs, no family
+    # operator, never in the lifetime. H31 previously used PRE-ONSET
+    # tasks, which the lifetime trains on, so "related" was novel and
+    # "unrelated" was familiar — an asymmetry that cannot separate
+    # structural specificity from generic plasticity (review 55).
+    unrelated: list[Task] = []
+    if spec.held_out_per_family:
+        count = spec.held_out_per_family * spec.families
+        base = (config.tasks + spec.families * spec.held_out_per_family
+                + spec.held_out_families * spec.held_out_per_family)
+        extended = replace(config, tasks=base + count)
+        programs_u = _sample_programs(extended)[base:]
+        ids_u = _opaque_task_ids(extended)[base:]
+        for offset, (program, task_id) in enumerate(
+            zip(programs_u, ids_u, strict=True)
+        ):
+            index = base + offset
+            train_rng = _rng(config.seed, 30, index)
+            eval_rng = _rng(config.seed, 31, index)
+            train_x = train_rng.normal(size=(config.examples_per_task, config.state_dim))
+            eval_x = eval_rng.normal(size=(config.evaluation_examples, config.state_dim))
+            unrelated.append(
+                Task(
+                    task_id=task_id, program=program, teacher_library=library,
+                    train_x=train_x, train_y=program.execute(library, train_x),
+                    eval_x=eval_x, eval_y=program.execute(library, eval_x),
+                )
+            )
+
     world = World(config=config, library=library, tasks=tuple(tasks))
+    object.__setattr__(world, "unseen_unrelated_tasks", tuple(unrelated))
     object.__setattr__(world, "novel_family_tasks", tuple(novel))
     object.__setattr__(world, "held_out_family_tasks", tuple(held_out))
     object.__setattr__(world, "held_out_family_index",
