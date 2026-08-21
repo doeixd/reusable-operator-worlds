@@ -4111,3 +4111,43 @@ three-term can be checked against the date it was first written.
   review 58 rated this "fairly likely".
 - Registered H40 (exact-null): related tasks use S+alpha, atypical tasks
   activate eps, controls not forced through the schema.
+
+# H39 RESULT (2026-08-21): NOT RUN — CENSUS C0 NEGATIVE IN 3/3 WORLDS
+
+Plan: `H39_EXISTENCE_PLAN.md`, frozen at `b6fc27d`, Amendment 1 at
+`16906ff` (appended before any census code or data; corrected the C0 fit set
+from leave-one-family-out to all trained family objects, since the F arm
+trains on all families and only the siblings are held out). Instrument:
+`census_h39_schema.py` at `63a8e9e`. Report: `reports/h39_census.json`.
+
+Registered gate: alpha-only k=128 B1 endpoint through a rank-8 linear schema
+over the ordinary learner's own residual vectors, at most 1.5x the ordinary
+V6R endpoint, in at least 2 of 3 worlds.
+
+Observed ratios: 3.531, 2.243, 3.305 (alpha-only 0.07860 / 0.03452 / 0.05537
+versus ordinary 0.02226 / 0.01539 / 0.01675). 0/3 worlds pass. Per the
+frozen verdict table: **H39 NOT RUN: census negative.** No factorized or
+generic-control lifetime was launched. H39 is neither supported nor
+falsified; its existence lifetimes were not licensed.
+
+Instrument non-vacuity: every fit reduced the k=0 query loss 3-10x and the
+curves are flat from update 1,000 to 2,000; the unit tests include a zero-
+channel companion guard.
+
+Exploratory calibration, NOT registered (`reports/h39_census_exploratory_
+rank16.json`, `..._rankmax.json`): at rank 16 the ratios are 3.441, 2.236,
+3.078; at the MAXIMUM available rank — the full affine span of every live
+residual and promoted abstraction in the artifact (26, 12, 34 dimensions) —
+they are 3.075, 2.250, 2.806. The shortfall is therefore not a rank-8
+limitation: the held-out siblings' best residual solutions lie OUTSIDE the
+affine span of the ordinary learner's residual population. A contributing
+fact is that the ordinary lifetimes retired 39/64, 56/64, and 32/64 family
+tasks, so the population is small, and in worlds 0 and 2 its spectrum is
+flat (rank-8 variance 0.67 and 0.51, no knee).
+
+Status of the branch: the representation branch H39 -> H40 -> H41 -> H44
+is not advanced. The census is a statement about a schema fitted POST HOC
+to a finished ordinary learner; it does not measure what a jointly trained
+schema would contain. Any successor plan must say how the schema is to be
+obtained other than from the final residual population, and must be frozen
+before running.

@@ -2781,3 +2781,34 @@ abstraction criterion as a candidate without an instrument. Learnings appended.
 No code, artifacts, or runs. Next step: freeze an H39 plan (architecture,
 matched-budget generic-code control, V6R k=128 instrument reuse, gate
 thresholds) before writing learner code.
+
+# 2026-08-21 — H39 PLAN FROZEN; CENSUS C0 NEGATIVE 3/3; H39 NOT RUN
+
+Froze `H39_EXISTENCE_PLAN.md` (`b6fc27d`) and registered it in
+`check_prereg.py`. Before writing any code, re-reading found that the census
+gate C0 fitted its schema leave-one-family-out, a different question from the
+one the factorized arm faces; appended Amendment 1 (`16906ff`) and re-froze.
+
+Wrote `census_h39_schema.py` with tests (`63a8e9e`): within one ordinary
+artifact, PCA the live family residual vectors plus promoted abstractions into
+a rank-8 linear schema, then fit only a fresh route code and an 8-dim alpha on
+each held-out sibling at k=128 under protocol B1 with the representation
+frozen and the private residual zero. Report written atomically;
+`reports/h39_census.json`.
+
+Result: alpha-only endpoints 0.07860 / 0.03452 / 0.05537 against ordinary
+V6R anchors 0.02226 / 0.01539 / 0.01675, ratios 3.53 / 2.24 / 3.31 versus the
+registered 1.5 threshold. 0/3 worlds pass; per the frozen verdict table H39 is
+NOT RUN. No factorized or control lifetime was launched. Fits are non-vacuous
+(3-10x reduction from k=0, converged by 1,000 updates).
+
+Exploratory calibration (separate, non-registered reports): rank 16 and the
+maximum available rank (the population's full affine span, 26/12/34 dims) give
+ratios 2.2-3.4, so the shortfall is span, not rank. The ordinary lifetimes
+retired 39/64, 56/64, 32/64 family residuals, leaving 13-35 vectors with a
+flat spectrum in two worlds.
+
+Recorded the verdict and exploratory finding in `PREDICTIONS.md` and the
+lessons in `notes/learnings.txt`. Next: a successor plan must specify how a
+schema is obtained other than post hoc from the final residual population;
+nothing is licensed until it is frozen.

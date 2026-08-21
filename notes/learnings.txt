@@ -3215,3 +3215,39 @@ CANDIDATE THREE-TERM CRITERION, not yet a rule: Value(A) = compression
 savings + search savings - lost variation opportunity. No instrument for the
 third term exists; V6R's frozen-representation k=128 gap is the nearest
 measurement. Build the instrument before using the criterion.
+
+
+================================================================================
+H39 CENSUS: THE RESIDUAL POPULATION'S SPAN EXCLUDES NEARBY NOVELTY (2026-08-21)
+================================================================================
+
+The H39 census gate failed 0/3 before any lifetime was spent
+(`reports/h39_census.json`). A linear schema over the ordinary learner's own
+residual objects, fitted with the learner frozen, reaches a k=128 endpoint
+2.2-3.5x worse than a free 198-scalar residual. Raising the rank to the
+maximum the population allows (its full affine span) leaves the ratio at
+2.2-3.1x. The siblings are not in the span of what the learner stored.
+
+TWO THINGS THIS TEACHES. (1) The census paid for itself again: nine
+`slots=12` lifetimes were not run on a schema construction the substrate
+cannot carry. (2) It is a measurement of "lost variation opportunity" on the
+ORDINARY arm, not the prospective one. Even the undamaged learner's stored
+family objects do not contain the coordinates for a nearby family member.
+Review 59's two-sided criterion — what gets identified versus what remains
+easy to vary — applies to the baseline representation, not only to V6's
+failure.
+
+RETIREMENT SHRINKS THE POPULATION A SCHEMA COULD BE FITTED TO. The ordinary
+lifetimes retired 39/64, 56/64, 32/64 family residuals into abstraction
+references, leaving 13-35 vectors; in two worlds their spectrum has no knee.
+Any post-hoc schema construction on this learner is fitting a small, flat
+cloud. A schema that is to contain novelty must be formed while the tasks
+are being learned, which is what the (unlicensed) F arm would have done —
+so the census does not falsify H39; it refuses to license the specific
+post-hoc construction and says the successor must obtain its schema another
+way, registered first.
+
+FROZEN PLANS CAN STILL CONTAIN DESIGN ERRORS. The original C0 fitted leave-
+one-family-out, which asks whether three families express a fourth — not the
+F arm's situation. Caught on re-reading before any code; fixed by an
+appended dated amendment and a re-freeze, never by editing the frozen text.
