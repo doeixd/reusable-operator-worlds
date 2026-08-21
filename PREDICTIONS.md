@@ -4167,3 +4167,53 @@ the ordinary learner's residual population does not contain it at any rank.
 The H39 existence plan's rationale for `a = 8` ("four rank-2 family
 subspaces") was also wrong about the generator; the oracle-form schema rank
 is 2. See `H39_PILOT_PLAN.md` Amendment 2.
+
+# H39 PILOT RESULT (2026-08-21): BRANCH C — PRIVATE RELEARNING, NOT A FERTILE ARGUMENT
+
+Plan: `H39_PILOT_PLAN.md` frozen at `effaf6b`; Amendments 1-3 appended and
+re-frozen before the corresponding data was read (eps init stationarity;
+pooled a=2 primary after the unseen-family correction; alpha-only fit freezes
+eps at init rather than zero). Report: `reports/h39_pilot.json` (EXPLORATORY,
+world 0). The first scorer run was refused by the registered non-vacuity
+check (alpha did not move) and is preserved as
+`reports/h39_pilot_discarded_stationary_protocol.json`.
+
+Preconditions: the ordinary history rerun is bitwise identical to
+`artifacts/v6_clean/ordinary/world_0/lifecycle` (loss -191,906.786); the
+ordinary V6R k=128 anchor (0.02226) reproduced to 1e-12; every non-vacuity
+check passes for both factorized arms.
+
+Primary arm, pooled a=2 (the oracle form): present parity PASS (+302 nats
+versus ordinary). Alpha-only k=128 endpoint 0.0931 = **4.18x** ordinary
+(Adam 0.05: 4.17x, LBFGS: 4.17x) — FAIL against 1.5x. Full task-local fit
+(code + alpha + eps) k=128 = 1.063x ordinary, within the registered 1.2x.
+Branch **C**: the architecture preserved the ability to relearn privately;
+the jointly formed linear schema provides no cheap coordinate for the unseen
+family. Secondary arm, pooled a=8: parity +460 nats; alpha-only 3.22x
+(robust 3.21x, 3.20x); full fit 0.892x ordinary.
+
+Channel use, end of lifetime, live family tasks: zeroing W alpha and eps
+together moves mean NMSE from 0.00303 to only 0.00310 (a=2) — the entire
+residual channel carries about 2% of the fit; 56/64 (a=2) and 36/64 (a=8)
+family tasks were retired into abstraction references, for which neither
+channel fires. The registered `schema_share` (0.836 at a=2; undefined at
+a=8 where ablation improves NMSE) is a ratio of these small differences and
+is reported, not leaned on.
+
+Historical-span diagnostic (ordinary arm, pre-retirement residuals of all
+64 family tasks): alpha-only ratios 4.02 (rank 8), 3.82 (rank 16), 2.75
+(rank 63). Registered reading: **ordinary wake never formed those
+directions**; retirement did not discard them. This matches the reviewer's
+stated prior.
+
+Reviewer-prediction scorekeeping (review 60): A ~50%, partial ~30%,
+insufficient ~20%. Observed: not A; the alpha-only endpoint is WORSE than
+the post-hoc census (4.18x versus 3.53x on the same world), so "helps but a
+gap remains" is not supported either. Closest registered outcome: "simple
+linear schema fundamentally insufficient", via branch C.
+
+Licensing: per the plan, branch C licenses nothing. H40-H44 are not
+advanced. The representation branch of the review-58 tree is not falsified
+in general — only the LINEAR pooled schema at this operating point — and the
+reviewer's registered next direction (nonlinear parameterized operators /
+conditional primitives) requires its own frozen plan.

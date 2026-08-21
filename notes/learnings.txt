@@ -3251,3 +3251,47 @@ FROZEN PLANS CAN STILL CONTAIN DESIGN ERRORS. The original C0 fitted leave-
 one-family-out, which asks whether three families express a fourth — not the
 F arm's situation. Caught on re-reading before any code; fixed by an
 appended dated amendment and a re-freeze, never by editing the frozen text.
+
+
+================================================================================
+H39 PILOT: A JOINTLY FORMED LINEAR SCHEMA IS NOT FERTILE EITHER (2026-08-21)
+================================================================================
+
+World-0 pilot, branch C (`reports/h39_pilot.json`). The pooled `W alpha +
+eps` learner matched ordinary present-task loss within 302 nats and its FULL
+task-local interface reached the ordinary future endpoint (1.06x; a=8 0.89x)
+— but alpha alone reached 4.18x, worse than the post-hoc census (3.53x).
+Joint formation did not create a cheap coordinate; eps did all the work.
+
+WHY THE SCHEMA HAD NOTHING TO FORM AROUND. End-of-lifetime ablation: zeroing
+W alpha AND eps on the live family tasks moves NMSE 0.00303 -> 0.00310. The
+residual channel carries ~2% of the fit, and 56/64 family tasks were
+retired into promoted references where it does not fire at all. Family
+structure is absorbed by routes over the basis and by PROMOTE'd atoms, not
+by the residual vector the schema parameterizes. A schema over a channel
+the learner barely uses cannot become fertile however it is trained — the
+V5 lesson "the residual tensor is not the task's innovation" applied to
+architecture design.
+
+THE HISTORICAL POPULATION IS NO BETTER. Pre-retirement residuals of all 64
+family tasks: 2.75x at full rank. Ordinary wake never formed the
+directions; retirement did not erase them. Census C0's "final span" result
+is not a lifecycle artifact.
+
+ZERO IS A STATIONARY POINT OF `u.tanh(vz+b)`, TWICE. Exact-null eps at
+birth froze training (Amendment 1); eps = 0 in the alpha-only fit froze
+alpha (Amendment 3). Both were caught by non-vacuity checks (alpha norm =
+0.0), not by eyeballing endpoints — the first scorer run printed plausible
+"alpha-only" numbers that were route-code-only fits. Any future literal
+null state in this family needs a gate, not a zero vector.
+
+GENERATOR SEMANTICS MUST BE RE-READ BEFORE NAMING A FUTURE. "Sibling"
+versus "member of an unseen family sharing the subspace" changed the
+correct architecture (per-family schemas are ill-posed) though not the
+census numbers. Amendment 2 caught it before any pilot artifact was opened.
+
+DESIGN CONSEQUENCE. Fertility has to live where the family computation
+lives. If the schema is to parameterize anything, it must parameterize the
+operators or routes the learner actually uses for family tasks — a
+parameterized (nonlinear) operator P(alpha) in the basis, not a linear
+offset on a residual the learner discards.

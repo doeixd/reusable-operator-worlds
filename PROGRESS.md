@@ -2842,3 +2842,19 @@ The ordinary history rerun reproduced the V6 world-0 loss exactly
 transient 3.66 MiB Windows allocation failure (no partial output). The a=8
 pooled cell completed (-191,446.8). The primary a=2 cell is running; no
 pilot endpoint has been read.
+
+# 2026-08-21 — H39 PILOT SCORED: BRANCH C; LINEAR SCHEMA NOT FERTILE
+
+The primary a=2 pooled cell completed (-191,604.5). The first scorer run was
+refused by the registered non-vacuity check: alpha norm 0.0 in every
+alpha-only fit because `eps = 0` is a stationary point; Amendment 3 freezes
+eps at the shared 1e-3 init instead, re-frozen before re-scoring; the refused
+report is preserved as `reports/h39_pilot_discarded_stationary_protocol.json`.
+
+`reports/h39_pilot.json`: ordinary rerun bit-exact; anchor reproduced to
+1e-12; parity +302 nats; alpha-only k=128 4.18x ordinary (three optimizers
+agree), full fit 1.06x; channel ablation shows the residual channel carries
+~2% of live family-task fit with 56/64 tasks retired; historical span 2.75x
+at full rank ("ordinary wake never formed those directions"). Verdict per the
+frozen table: **branch C**. Nothing licensed. Recorded in `PREDICTIONS.md`
+with reviewer-prediction scorekeeping and in `notes/learnings.txt`.
