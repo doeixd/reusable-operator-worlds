@@ -976,3 +976,14 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   refuse a report older than its inputs. A scorer that dies partway
   leaves the PREVIOUS answer on disk and nothing in the output says so;
   H29's first two attempts were read as results that way.
+- Before implementing a proposed search, check whether the objective is
+  INVARIANT to the thing being searched over. Review 49 asked for a
+  global rotation Q maximizing subspace capture; capture is invariant to
+  a global orthogonal map of the point set, so that search is empty by
+  construction. The well-posed version was the span question — are the
+  teacher's atoms mixtures of the learner's — which is what the
+  motivating example (B1 = A1+A2, B2 = A1-A2) actually expresses.
+- A full-span least squares gives an UPPER BOUND on what any linear
+  refactor can achieve. Use it to kill or keep a whole class of remedies
+  in one measurement, rather than sampling the class one adapter at a
+  time.

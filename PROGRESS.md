@@ -2510,3 +2510,37 @@ the family's functional structure.
 H29's measurement (instrument built this session — the P_0 snapshot —
 but existing artifacts predate it, so it needs fresh runs); the slots=6
 crossing grid; D* currency grids; H22-H24, a side branch under D18.
+
+# 2026-08-20 — reviews 48-49 acted on: three hypotheses eliminated
+
+Review 48 argued V5's bottleneck had moved from "find a better economic
+rule" to "can the learner build representations in which the available
+economics are exploitable", and named four hypotheses. Review 49
+corrected an over-claim in my first answer. Net result: three of the
+four are eliminated and the remaining one is not fixable after the fact.
+
+    A  fragmentation      REJECTED, best k-subset leaves 0.92 at k=3
+                          against 0.94 at k=1 (`audit_fragmentation.py`)
+    C  local coordinates  not reachable — nothing for an adapter to align
+    global rotation       DEAD, teacher operator 0.707 unexplained by the
+                          FULL span of the learner's innovations
+                          (`audit_population_span.py`)
+    D  wake objective     what remains
+
+Along the way, H29 corrected: capture over the learner's private
+residuals is 0.095, but over the EFFECTIVE task-conditioned operator
+(`audit_effective_operator.py`, I_tau = F_tau - F_0) it is 0.190 —
+double. The residual tensor was the wrong computational unit. Still 5x
+below the teacher's 1.000, so the honest reading is "a fifth of the
+family geometry, half of it invisible in residuals alone".
+
+V5's closing negative: POST-HOC REFACTORING CANNOT BE THE REMEDY. No
+local alignment, global reparameterization, or sleep oracle over the
+promoted library can recover structure outside the span of what wake
+produced. Prospective pressure has to exist while the representation is
+formed — a V6 question, and explicitly not established here.
+
+Reviews saved as `reviewer-feedback-48.txt` (indexed) and 49 pending
+index. Instrument lessons in `notes/learnings.txt` and `AGENTS.md`:
+stale-report hazard, on-trajectory probing, invariance-before-search,
+and the third instance of a target belonging to one arm of a comparison.
