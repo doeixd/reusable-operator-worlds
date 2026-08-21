@@ -139,8 +139,8 @@ def factorized_fit(base_model, task, support: int, mode: str, optimizer_name: st
     for schema in model.schemas:
         schema.requires_grad_(False)
     if mode == "alpha_only":
-        with torch.no_grad():
-            eps.zero_()
+        # Amendment 3: eps frozen at the shared 1e-3 initial state (no task
+        # information), not zero -- zero is stationary and pins alpha.
         eps.requires_grad_(False)
         params = [code, alpha]
     elif mode == "full":
@@ -204,6 +204,8 @@ def factorized_fit(base_model, task, support: int, mode: str, optimizer_name: st
         "finite": bool(finite and math.isfinite(final_support) and math.isfinite(final_query)),
     }
     model.forget_task(probe_id)
+    if mode == "alpha_only" and result["alpha_norm"] == 0.0:
+        raise SystemExit(f"alpha did not move in alpha-only fit {label}: stationary protocol")
     return result
 
 
@@ -449,7 +451,7 @@ def main() -> None:
         "D": "restrictive ABI: present-task parity fails; fertility untested",
     }
     report = {
-        "frozen_plan": "H39_PILOT_PLAN.md (Amendments 1-2)",
+        "frozen_plan": "H39_PILOT_PLAN.md (Amendments 1-3)",
         "status": "EXPLORATORY world-0 pilot",
         "git_commit": git_commit(),
         "protocol": {"world": 0, "supports": [1, 128], "sigma": 0.1,

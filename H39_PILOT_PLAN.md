@@ -208,3 +208,22 @@ Consequences, fixed before any pilot artifact is opened:
 
 Thresholds, branches, non-vacuity checks, the historical-span diagnostic,
 and the ordinary bit-exactness requirement are unchanged.
+
+# Amendment 3 (2026-08-21, after the first scorer run was refused by non-vacuity)
+
+The primary endpoint specified `eps_new = 0 and FROZEN` for the alpha-only
+fit. The first scorer run reported `|alpha| = 0.000` in every alpha-only fit
+and the registered non-vacuity check `alpha moves in every fit` failed, so no
+branch was read. Cause: with `eps = 0` and `alpha = 0` the effective residual
+is exactly the stationary point described in Amendment 1, and
+`dL/dalpha = W^T dL/dr = 0` there for every optimizer. The "alpha-only"
+endpoints of that run were route-code-only fits and are discarded as
+uninformative, not recorded as a result.
+
+Amended: in the alpha-only fit, `eps_new` is FROZEN at the learner's shared
+`1e-3` initial residual state (the same fixed vector every task starts from,
+carrying no task information) rather than at zero. `alpha` still starts at
+zero, exactly as it does for every task in the lifetime, and is the only
+residual-channel parameter that moves. Thresholds, branches, and the
+robustness requirement are unchanged. The scorer now also fails closed on
+`alpha_norm == 0` in any alpha-only fit instead of reporting an endpoint.
