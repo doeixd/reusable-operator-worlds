@@ -2920,3 +2920,21 @@ K = 32 reach 1.27 / 1.74 / 1.36 and pass the fertile rule in worlds 0 and
 2. Frozen verdict A, recorded with explicit marginality caveats in
 `PREDICTIONS.md`; it licenses only the writing of a confirmation plan on
 seeds 700-729, which are not opened. Learnings appended.
+
+# 2026-08-21 — H39 CONFIRMATION BLOCK OPENED; REVIEW 61 AMENDMENT; DEVELOPMENT CLOSURE
+
+Froze `H39_CONFIRMATION_PLAN.md` after PI approval (`1c98017`), wrote
+`tools/run_h39_confirmation.py` (prereg check enforced at launch, pool of
+3, one writer per cell, world-major so triples complete together) and
+launched the 90-lifetime block on seeds 700-729. Review 61 arrived after
+launch asking for one decision-rule change (E2 as the geometric mean of R_M
+in [1.2, 1.8]; the 1.5x fraction as a C0 continuity statistic only; scope
+sentence "existence and use, not discovery"); appended as Amendment 1 and
+re-frozen (`f78f209`) before any sealed cell was read, and implemented in
+`score_h39_confirmation.py` before any sealed number existed. Filed and
+indexed review 61; registered the block opening, the final rule, and our
+own prediction (CONFIRMED-RELATIVE more likely than CONFIRMED) in
+`PREDICTIONS.md`. Appended the H39 re-audit to `SPEC_AUDIT.md` and wrote
+`H39_DEVELOPMENT_CLOSURE.md` with the ladder, what was and was not
+established, the methodological record, and reviewer scorekeeping. The
+block is running; no sealed cell has been opened.
