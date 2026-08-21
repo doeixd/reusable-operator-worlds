@@ -32,7 +32,7 @@ FROZEN = {
     "V5_CONFIRMATION_PLAN.md": "1ed227d",
     "V6R_ADAPTATION_GEOMETRY_PLAN.md": "4c1bfaa",
     "H39_EXISTENCE_PLAN.md": "16906ff",
-    "H39_PILOT_PLAN.md": "85806b3",
+    "H39_PILOT_PLAN.md": "108df94",
 }
 
 STATUS_PATH_PATTERN = re.compile(
