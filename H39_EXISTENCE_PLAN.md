@@ -207,3 +207,24 @@ instruments) as separate plans. Capacity-only or falsified: return to the
 findability line (H38/H42) or re-examine the generator; neither is licensed
 by this plan. Nothing here authorizes learner-discovered decomposition, H44,
 H45, program synthesis, or confirmatory seeds.
+
+# Amendment 1 (2026-08-21, before any census code or data)
+
+C0 as written above fits the schema leave-one-FAMILY-out. That asks whether
+three families' coordinates express a fourth, which is not the question the
+F arm faces: F trains on all 64 family members and only the two siblings per
+world are held out. The amended C0:
+
+1. Collect, within one ordinary artifact (common parameterization), the
+   198-scalar residual vectors of all non-retired trained family tasks and
+   all promoted abstraction vectors. Siblings never trained and are disjoint
+   from this set, so fit and score are on different objects.
+2. Fit the rank-8 linear schema `W` as the top-8 principal directions of
+   that set (mean included as a fixed offset).
+3. For each held-out sibling, fit the route code and an 8-dim `alpha` with
+   protocol B1 at `k=128`; the residual is `mean + W alpha`, `eps` is held
+   at zero, schema and representation frozen.
+
+The 1.5x pass threshold and the 2-of-3-worlds rule are unchanged. The
+"effect space" wording in the original C0 is superseded by this
+parameter-space construction; the later lifetime arms are unaffected.
