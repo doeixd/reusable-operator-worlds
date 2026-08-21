@@ -3553,3 +3553,54 @@ gradient dead.
 
 H33 therefore cannot be answered in either extreme regime, which is what
 the partial-freeze allocation sweep exists to fix.
+
+# H34 and H36: NOT ATTEMPTED, with reasons (2026-08-21)
+
+Recorded as an explicit decision rather than left as unfinished work,
+because "untested" and "declined for cause" are different statuses and
+only the second is honest here.
+
+## H34 — the recurrence-probability threshold: NOT ATTEMPTED
+
+H34 predicts fertile organization pays iff `p * H * s_bar > C_F`, with
+p the probability a future task belongs to a reusable family. It needs a
+new generator knob (a mixture of family and non-family futures) and a
+measurement of `C_F`, the cost of organizing prospectively.
+
+Declined because `C_F` is not measurable in the current substrate: the
+one intervention that produces prospective organization makes BOTH
+current loss and future adaptation worse, so its "cost" has no
+well-defined benefit side to trade against. A threshold experiment over
+a quantity whose favourable side does not exist would produce a crossing
+at p = 1 by construction. V4's standing lesson applies: do not build an
+operator before the opportunity census shows there is something to buy.
+
+## H36 — meta-learned updater: NOT ATTEMPTED
+
+H36 asks whether an updater trained across lifetimes forms
+higher-Phi representations on held-out worlds without family labels. It
+is the largest build in the V6 ladder — differentiating through the
+update process across many lifetimes — and it is downstream of H30,
+which failed.
+
+Declined because the hand-specified version of the same pressure is
+actively harmful (Phi -8.58, 0/3 worlds). Meta-learning a pressure whose
+explicit form damages the endpoint would be optimizing a proxy this
+project has just shown to be miscalibrated. If a later result shows
+prospective pressure helping in SOME regime, H36 becomes worth building
+against that regime.
+
+## H35 — partially answered, and the partial answer matters
+
+H35 predicted a non-monotonic optimum: Phi rising then falling with
+pressure. Observed at 52% of one task's training movement, Phi is
+already sharply negative and the harm is largest at the smallest support
+(-8.6 at k=1 falling to -2.1 at k=8). That is consistent with being PAST
+the optimum rather than below it, so the registered U-shape may exist
+entirely at pressures lower than the one tested.
+
+The cheap discriminating cell is registered: at a materially lower
+pressure, over-alignment predicts Phi rises toward zero and never
+becomes positive, while "pressure was too low" predicts Phi becomes
+positive. This is the one V6 follow-up worth running, and it is one
+sweep rather than a new mechanism.
