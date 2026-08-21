@@ -3114,3 +3114,32 @@ H32 is unaffected: it reads the effective operator, which exists
 regardless of library size. First reading on world 0 is ordinary 0.137
 -> prospective 0.176 (+0.039), consistent in direction with H32 and far
 too small and too singular to claim.
+
+## The prospective WEIGHT is not a pressure knob (2026-08-21)
+
+The registered follow-up to H30's null was "sweep the prospective
+weight before concluding anything about the mechanism". The sweep is
+uninformative, and the reason is a property of the optimizer rather
+than of the learner.
+
+    weight    lifetime change vs ordinary
+       1      0.01%, 0.07%, 0.15%
+      10      0.02%, 0.10%, 0.07%
+     100      0.03%
+
+A hundredfold weight buys nothing. The hook constructs a FRESH AdamW on
+each call, and Adam divides by its own running second-moment estimate,
+so with a handful of steps from a cold start the update is essentially
+`lr * sign(gradient)` and is INVARIANT to the loss scale. Multiplying
+the penalty by 100 multiplies both the gradient and the normalizer.
+
+CONSEQUENCE: the pressure in this design is set by learning rate and
+step count, not by `--prospective-weight`, and the H35 sweep must vary
+those instead. The weight argument is retained for the loss-scale
+bookkeeping it does provide but is no longer described as the pressure
+knob.
+
+This is the gradient check that review 53 asks every apparent null to
+survive. H30's null at weight 1 remains a null AT A PRESSURE THAT WAS
+NEVER RAISED — the three weight cells are three samples of the same
+pressure, not a sweep, so they do not strengthen the null at all.
