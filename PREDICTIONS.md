@@ -3184,3 +3184,32 @@ inert under Adam, and the frozen/unfrozen allocation contrast.
 Two regression tests now pin the property: the inner loop must move the
 support loss by more than 10%, and the default inner optimizer must be
 Adam. The first is the test that would have caught this on day one.
+
+## The prospective pressure is now calibrated against task training
+
+The corrected arm at 2 outer steps still moved the lifetime by only 5
+nats in 191,907 (0.003%), so "is the pressure material?" needed a
+measurement rather than another guess. Measured on a trained model, in
+shared-parameter displacement:
+
+    one task of ordinary training      2.51   (100%)
+    prospective hook,  2 outer steps   0.34   (13%)
+    prospective hook,  8 outer steps   1.31   (52%)
+    prospective hook, 32 outer steps   4.99   (199%)
+    prospective hook, 64 outer steps   9.35   (373%)
+
+So outer steps IS a real pressure knob — unlike the weight, which Adam's
+scale invariance makes inert — and the earlier configuration was
+applying about an eighth of one task's worth of gradient per task, then
+having it largely overwritten by the next task's training.
+
+Worth noting the discrepancy this exposes: 13% relative displacement per
+task produced a 0.003% lifetime change, which means the prospective
+gradient direction is largely orthogonal to, or cancelled by, ordinary
+training. That is itself informative and is the thing the sweep should
+resolve — whether more pressure accumulates into a different
+representation or simply fights the task loss.
+
+The registered sweep is now `outer in {2, 8, 32}` across three worlds,
+spanning an order of magnitude around parity with task training, which
+is the range H35's predicted optimum should live in if it exists.
