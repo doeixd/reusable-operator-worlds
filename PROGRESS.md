@@ -2587,3 +2587,67 @@ remote workers, while local full lifetimes use `--jobs 1`.
 Updated stale V5 pointers in both files: V5 and its confirmation plan are
 closed, `V5_CLOSURE.md` records the review-55 corrections, and seeds
 600-629 are completed confirmatory worlds rather than unopened reserves.
+
+# 2026-08-21 — review 55: three conclusions retracted, ten defects fixed
+
+An independent code review found conclusion-impacting bugs in audits
+that had already produced reported results. Retractions were published
+before fixes, and two headline V5 numbers changed.
+
+## Retracted and corrected
+
+    R_effective            0.190  ->  0.762
+    full-span unexplained  0.707  ->  0.491
+    all V6 arm comparisons        ->  void (future-label leak)
+
+Three defects produced the first two: each task's innovation was
+evaluated on ITS OWN inputs and then compared coordinate-by-coordinate,
+so the subspace fit ran across incomparable axes; the loader restored
+promoted references but not retirement state, reconstructing a model
+that never existed; and the "on-trajectory" rollout ran only the routed
+basis. The third came from `_sibling_of` drawing prospective siblings
+from `world.tasks`, so the hook trained on a later task's labels before
+that task legitimately arrived.
+
+V5-D is withdrawn. What V5 actually found: the wake learner encodes ~76%
+of the family structure, distributed across route and residual and
+across the population rather than concentrated in any single object, and
+PROMOTE captures almost none of it. The gap is between what the learner
+COMPUTES and what the promoter EXTRACTS — the extraction unit, not the
+wake objective. "Post-hoc refactoring cannot be the remedy" is
+withdrawn; population-level refactoring is now what the evidence points
+at, and reviews 48/49's hypotheses B and global-rotation are live again.
+
+## Scope of damage, checked rather than assumed
+
+Only V6 needs re-running: its bugs were in the LIFETIME. The audit bugs
+read frozen artifacts, so V5 was re-scored without a new lifetime. V1-V4
+untouched. Sealed C1 involves no audit. Sealed C2 verified bit-identical
+after the `family_operators` API change (first F operators compared
+across four seeds). C3/C4 already used one shared probe per world and
+never had the coordinate bug.
+
+## Fixes
+
+Leak closed (siblings from `held_out_family_tasks`, zero overlap with
+the lifetime verified); coordinates aligned in both audits; retirement
+state restored; rollout matches `forward`; replay matched to ordinary
+acquisition learning rates (route 0.05 / residual 0.01 / shared 0.003
+rather than one group at 0.003); H31 given symmetric UNSEEN unrelated
+futures; fertility scorer returns prequential acquisition cost, endpoint
+and steps-to-target, defaulting to the registered gate; protocol knobs
+fingerprinted and resume refuses a mismatched arm; compute accounting
+covers `lifecycle` and `prospective`.
+
+Two guards added that would have caught this class: a save/load
+functional-equivalence test with a companion that verifies the guard can
+FAIL, and the nested-objective non-vacuity tests. `check_invalid.py` was
+itself vacuous on first write (missing `re.MULTILINE`) and now refuses
+to pass when it parses nothing.
+
+## State
+
+`artifacts/v6*` deleted rather than resumed. The first valid V6 run is
+executing: 12 cells, serialized, every fix applied. H30-H36 remain
+untested — every previous prospective number came from an arm that was
+not adapting, or was training on future labels, or both.
