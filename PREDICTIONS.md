@@ -3303,3 +3303,65 @@ the misaligned audits or the leaking hook.
 
 What moves to UNRESOLVED: V5's H29 localization, the population-span
 conclusion, and V6's H30-H32.
+
+# CORRECTED H29: THE STRUCTURE WAS THERE ALL ALONG (2026-08-21)
+
+With coordinates aligned — every task's innovation evaluated on a COMMON
+on-trajectory state set, retirement state restored, and the rollout
+matching `forward` — the effective task-conditioned operator carries:
+
+    R_effective   0.762      (retracted value: 0.190)
+    teacher       1.000      by construction at r_meta = 1
+    null          0.003
+
+The registered fork's FIRST branch fires, and it is the branch I
+reported as excluded:
+
+    the information was never lost, only DISTRIBUTED across route and
+    residual. PROMOTE is promoting the wrong object; abstraction
+    boundaries should be found functionally rather than inherited from
+    parameter boundaries.
+
+## What this reverses
+
+WRONG, and withdrawn: "roughly 90% of the meta-structure is already
+missing before PROMOTE runs"; "the learner holds about a fifth of the
+family geometry"; and the whole reading in which V5 ends by pointing
+upstream at the wake objective because the structure was never encoded.
+
+RIGHT, on the corrected measurement: the wake learner DOES encode the
+family structure — 76% of it, against a teacher ceiling of 100% and a
+null of 0.3%. What fails is the promoted library: C3's FACTORIZE 0/6 and
+the 0.921 unexplained fraction over promoted atoms are measured on
+`abstractions.*` tensors and are NOT affected by this bug. So the gap is
+between what the learner COMPUTES and what PROMOTE EXTRACTS, which is a
+statement about the promoter's unit of abstraction rather than about the
+wake objective's blindness.
+
+That is a better result than the one it replaces, and it is not the one
+I predicted: I registered "materially higher than 0.095 but not high"
+and the answer is high.
+
+## What it does to V6
+
+V6's premise was "ordinary wake does not form representations preserving
+the structure". That premise is now false as stated. The V6 question
+becomes narrower and sharper: not "can prospective pressure create
+structure the learner lacks", but "can it make the structure the learner
+ALREADY HAS extractable as reusable objects".
+
+H30-H32 stay UNRESOLVED. H32 in particular was registered as
+"R_effective(prospective) > 0.19", a threshold that is now meaningless —
+the ordinary arm alone is at 0.762. A corrected H32 has to ask whether
+prospective pressure moves an already-high number, and the honest answer
+may be that there is little headroom.
+
+## Method note
+
+Three separate defects had to be fixed before this number was
+trustworthy: per-task probe coordinates (the SVD compared incomparable
+axes), missing retirement state (retired tasks got both the abstraction
+and the residual retirement removed), and a rollout that ran only the
+routed basis. Each individually depressed the estimate. The reviewer's
+spot check on one world predicted 0.41 -> 0.65; the full fix gives
+0.762 across three.

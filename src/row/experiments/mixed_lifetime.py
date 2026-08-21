@@ -310,31 +310,34 @@ def main() -> None:
             raise SystemExit("V6 arms require --r-meta (the meta-recurrence world)")
         probe_world = factory.generate(config.world)
 
-        def _sibling_of(world_task_index: int) -> int | None:
-            """A LATER task from the same family, never the current one."""
+        # Siblings come from HELD-OUT tasks the lifetime never trains on.
+        # The first version drew them from `world.tasks`, so the hook
+        # trained shared parameters on a later task's support AND query
+        # labels before that task legitimately arrived in the
+        # prequential stream -- future-label leakage that voided every
+        # arm-versus-arm comparison (review 55). The world already
+        # generates `held_out_family_tasks` for exactly this purpose.
+        held_out = list(getattr(probe_world, "held_out_family_tasks", ()))
+        held_out_family = list(getattr(probe_world, "held_out_family_index", ()))
+
+        def _sibling_of(world_task_index: int):
+            """A held-out member of the CURRENT task's family, or None."""
 
             family = meta_spec.family_of(world_task_index)
-            if family is None:
+            if family is None or not held_out:
                 return None
-            start = meta_spec.family_onset + family * meta_spec.tasks_per_family
-            end = start + meta_spec.tasks_per_family
-            later = [i for i in range(start, end) if i > world_task_index]
-            if not later:
+            candidates = [
+                task for task, owner in zip(held_out, held_out_family)
+                if owner == family
+            ]
+            if not candidates:
                 return None
-            # Deterministic in the world seed, and the LAST member is
-            # reserved for evaluation so the prospective gradient never
-            # touches the task Phi is measured on.
-            reserved = end - 1
-            usable = [i for i in later if i != reserved]
-            if not usable:
-                return None
-            return usable[world_task_index % len(usable)]
+            return candidates[world_task_index % len(candidates)]
 
         def prospective_hook(model, lifetime_index, world_task_index):
-            sibling_index = _sibling_of(world_task_index)
-            if sibling_index is None:
+            sibling = _sibling_of(world_task_index)
+            if sibling is None:
                 return None
-            sibling = probe_world.tasks[sibling_index]
             support = args.prospective_support
             support_x = learned_lifetime._tensor(sibling.train_x[:support])
             support_y = learned_lifetime._tensor(sibling.train_y[:support])

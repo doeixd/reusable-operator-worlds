@@ -66,10 +66,39 @@ def load_learner(config, path: Path, slots: int, kind: str = "lifecycle"):
     model.load_state_dict(state)
     model.eval()
     summary = json.loads((path / "summary.json").read_text(encoding="utf-8"))
-    table = (summary.get("reference_table") or {}).get("task_reference") or {}
-    for task_id, reference in table.items():
+    reference_table = summary.get("reference_table") or {}
+    for task_id, reference in (reference_table.get("task_reference") or {}).items():
         model.task_reference[task_id] = int(reference)
+    # RETIREMENT STATE. Without this, `forward` adds BOTH the promoted
+    # abstraction and the private residual that retirement removed, for
+    # every retired task -- and most tasks in these artifacts are
+    # retired, so the reconstructed model computes something the trained
+    # model never did (review 55).
+    for task_id in reference_table.get("retired_task_ids") or []:
+        model.retired.add(task_id)
     return model
+
+
+@torch.no_grad()
+def rollout(model, task_id: str, z, upto: int):
+    """State after `upto` steps of the model's ACTUAL forward pass."""
+
+    route, own_u, own_v, own_b = model._unpack(task_id)
+    weights = torch.softmax(route, dim=-1)
+    reference = model.task_reference.get(task_id)
+    shared = (model._split_residual(model.abstractions[reference])
+              if reference is not None else None)
+    retired = task_id in model.retired
+    for step in range(upto):
+        candidates = torch.stack([o(z) for o in model.basis], dim=0)
+        state = torch.sum(
+            weights[step].view(model.operator_slots, 1, 1) * candidates, dim=0)
+        if shared is not None:
+            state = state + model._innovation(z, *shared, step)
+        if not retired:
+            state = state + model._innovation(z, own_u, own_v, own_b, step)
+        z = state
+    return z
 
 
 @torch.no_grad()
@@ -154,19 +183,32 @@ def main() -> None:
             ).mean(dim=0).view(model.task_steps, model.operator_slots)
             mean_route = torch.softmax(mean_code, dim=-1)
 
+            # COMMON STATE SET. Every task's innovation must be
+            # evaluated at the SAME inputs, or coordinate j of one
+            # vector and coordinate j of another describe different
+            # states and the SVD fits a subspace across incomparable
+            # axes. The first version used each task's own eval_x and
+            # the resulting capture was not interpretable (review 55).
+            #
+            # The shared states are the union of on-trajectory states,
+            # subsampled: they are the states these operators actually
+            # act on, unlike a fresh Gaussian probe.
+            pooled = []
+            for task in family_tasks:
+                start = torch.tensor(task.eval_x[: args.probe],
+                                     dtype=torch.float32)
+                with torch.no_grad():
+                    pooled.append(rollout(model, task.task_id, start, step))
+            common = torch.cat(pooled, dim=0)
+            if len(common) > args.probe:
+                pick = torch.randperm(
+                    len(common), generator=torch.Generator().manual_seed(world)
+                )[: args.probe]
+                common = common[pick]
+
             innovations = []
             for task in family_tasks:
-                z = torch.tensor(task.eval_x[: args.probe], dtype=torch.float32)
-                # On-trajectory state: run the learner's own first steps.
-                with torch.no_grad():
-                    route, own_u, own_v, own_b = model._unpack(task.task_id)
-                    weights = torch.softmax(route, dim=-1)
-                    for earlier in range(step):
-                        candidates = torch.stack(
-                            [o(z) for o in model.basis], dim=0)
-                        z = torch.sum(
-                            weights[earlier].view(model.operator_slots, 1, 1)
-                            * candidates, dim=0)
+                z = common
                 innovations.append(
                     effective_innovation(model, task.task_id, z, step, mean_route))
             effects = np.stack(innovations).astype(np.float64)

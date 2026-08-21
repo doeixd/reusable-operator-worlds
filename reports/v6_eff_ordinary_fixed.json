@@ -1,0 +1,28 @@
+{
+  "rows": [
+    {
+      "condition": "ordinary",
+      "world": 0,
+      "tasks": 24,
+      "r_effective": 0.5185413033071452,
+      "null": 0.0029477609039063597
+    },
+    {
+      "condition": "ordinary",
+      "world": 1,
+      "tasks": 24,
+      "r_effective": 0.9074953458680236,
+      "null": 0.002203693773377283
+    },
+    {
+      "condition": "ordinary",
+      "world": 2,
+      "tasks": 24,
+      "r_effective": 0.8601212146633405,
+      "null": 0.003067292936546619
+    }
+  ],
+  "mean_r_effective": 0.7620526212795031,
+  "null": 0.0027395825379434202,
+  "r_residual_reference": 0.095
+}
