@@ -2889,3 +2889,107 @@ the collapse should be quoted on those alone.
 H19 therefore stands as a full pass rather than partial P1 + P3: the
 D-arm and an informative s-arm both ran, the s-arm on sealed seeds, and
 the protocol and currency robustness checks both hold.
+
+# H30-H36 — V6, prospective representation formation (registered 2026-08-21)
+
+Registered before any V6 code exists, and before the V6 worlds are run.
+V5 is the control: the same H20 worlds, the same architecture, only the
+objective changes.
+
+    CENTRAL CLAIM: ordinary task loss UNDERDETERMINES the representation.
+    Prospective pressure breaks that degeneracy toward representations
+    that make related future learning cheaper.
+
+## The primary endpoint is adaptation cost, not geometry
+
+    Phi(R) = E_{T'~F}[ C_adapt(T' | R_baseline) - C_adapt(T' | R) ]
+
+with F a future-task distribution never used to fit the current task.
+`R_effective` is a SECONDARY, mechanistic endpoint. A prospective
+learner may find a representation unlike the teacher's and better for
+future learning, and V4/V5 have twice punished this project for treating
+geometry as the pass. The pass is economic.
+
+## H30 — fertility exists (load-bearing)
+
+At matched current-task loss and matched D*, prospective pressure
+reduces adaptation cost on unseen related tasks:
+`Phi(R_prospective) > Phi(R_standard)`.
+
+## H31 — fertility is structurally specific
+
+`Phi_related >> Phi_unrelated`. Registered as: the related-minus-
+unrelated difference is at least half of the related gain. If both move
+equally the finding is generic plasticity, not abstraction, and must be
+reported as such.
+
+## H32 — prospective pressure raises accessible structure
+
+`R_effective(prospective) > 0.19`. Predicted range 0.4-0.6, explicitly
+NOT ~1.0. A large Phi with a flat R_effective is a legitimate outcome
+and means the learner found a different mechanism for cheap adaptation;
+that is a finding about the library model being too restrictive, not a
+failure.
+
+## H33 — fertility makes schema economics realizable (the bridge)
+
+V5: teacher FACTORIZE pays, learned FACTORIZE 0/6. Prediction: at least
+2/6 cells become FACTORIZE > COMPRESS at matched frontier coding.
+Genuinely uncertain. If H30 passes and H33 fails, meta-learning and
+explicit language formation are distinct steps, which is itself a
+result.
+
+## H34 — prospective structure obeys the amortization law
+
+With p = Pr(a future task belongs to a reusable family), organizing cost
+C_F and per-use saving s_bar over horizon H:
+
+    fertile organization pays iff  p * H * s_bar > C_F
+
+Prediction: sweeping p produces a threshold, and the crossing is
+predicted by independently measured C_F and s_bar within 25%. This would
+put V5's law one level further up — even learning a good way of looking
+at things amortizes.
+
+## H35 — too much fertility pressure hurts
+
+A non-monotonic optimum in the prospective weight: current loss and
+unrelated-task adaptation both degrade at large pressure while related
+adaptation saturates. Registered as a U-shape in total lifetime cost,
+not merely "large eta is worse on something".
+
+## H36 — meta-learned updates rediscover it without labels
+
+An updater trained across lifetimes on lifetime prequential cost forms
+representations with greater Phi than SGD on HELD-OUT worlds, with no
+future information at update time.
+
+## Anti-fooling guards, fixed now
+
+* strict support/query split on every adaptation probe; the prospective
+  gradient never sees the query set;
+* the sibling used for prospective pressure is never the sibling used
+  for evaluation;
+* at evaluation both arms are adapted by the SAME standardized
+  optimizer from frozen representations, so an advantage cannot be the
+  optimizer;
+* matched parameter budget and matched D*, plus a larger-ordinary-learner
+  arm, so the effect cannot be spare capacity;
+* four arms, because the failure pattern localizes the cause:
+  ordinary / replay-joint / oracle-prospective / supervised-family.
+  Supervised failing means a substrate problem; supervised working while
+  prospective fails means an objective problem; prospective working
+  while replay does not means future-adaptation pressure specifically;
+  replay matching prospective means continual multitask learning was
+  enough.
+
+## The transfer kernel, registered as V6's structural instrument
+
+    K_ij = saving when adapting to task j after learning task i
+
+A fertile representation should have an internal geometry that PREDICTS
+K. The registered analysis is the rank correlation between a
+representation-space distance d_R(i,j) and K_ij. This matters beyond
+V6: it defines relatedness as "learning one makes the other cheaper"
+rather than "the teacher gave them the same label", which is the only
+form available in data that has no teacher.
