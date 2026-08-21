@@ -1076,3 +1076,13 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   resident size rather than guessing. A `slots=12` lifetime sits around
   340 MB; the ceiling is RAM divided by that, minus headroom, not the
   core count.
+- Scorer CLI arguments are part of the experimental protocol. Before extending
+  a curve, rerun its anchor cells and require exact reproduction; do not assume
+  today's source defaults equal the arguments used for the prior report. H35's
+  first scorer silently used 60 adaptation steps against a 40-step anchor and
+  changed the absolute acquisition costs. Reports must record the executed
+  steps, supports, learning rate, seeds, and noise scale.
+- Write a completed report atomically before printing its presentation summary.
+  A Windows console-encoding failure after H35 scoring discarded a finished
+  computation because the report write came last; console output is not the
+  scientific artifact.

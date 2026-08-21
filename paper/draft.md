@@ -1008,9 +1008,15 @@ but distributed across routes, residuals, and tasks; PROMOTE's extraction
 of one private residual at a time is the failing unit. This reverses the
 outlook from "change the wake objective to create missing structure" to
 "discover reusable objects by functionally refactoring the population."
-Prospective V6 comparisons remain unresolved because the original hook
-used future lifetime labels and its controls and acquisition metric were
-not matched; no V6 result is claimed here.
+The original prospective V6 comparisons remain void because the hook used
+future lifetime labels and its controls and acquisition metric were not
+matched. In a repaired three-world development run, the preregistered H35
+pressure optimum was not observed: one- and two-step pressure produced mixed,
+non-replicating effects, while eight-step pressure increased current lifetime
+loss and made related futures more expensive in all three worlds. This is
+exploratory evidence that the tested prospective objective becomes harmful at
+high pressure, not a confirmatory V6 result or evidence for a beneficial
+interior optimum.
 
 Why should anyone working at scale care about a 16-dimensional world?
 Because the criterion is scale-free and the phenomena it isolates have

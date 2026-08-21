@@ -2651,3 +2651,28 @@ to pass when it parses nothing.
 executing: 12 cells, serialized, every fix applied. H30-H36 remain
 untested — every previous prospective number came from an arm that was
 not adapting, or was training on future labels, or both.
+
+# 2026-08-21 — H35 LOW-PRESSURE CURVE COMPLETE: OPTIMUM NOT SUPPORTED
+
+Completed the six registered low-pressure lifetimes (outer steps 1 and 2,
+worlds 0--2) and scored them with the existing ordinary and eight-step anchors.
+All H35 artifacts passed protocol, world-seed, completeness, and unfrozen-basis
+validation before any checkpoint was loaded.
+
+The corrected 40-step acquisition instrument gives Phi_related of -0.432,
+-0.833, and -8.575 at pressures 1, 2, and 8. Sign counts are 1/3, 2/3, and
+0/3 positive. Current-lifetime deltas are -46, +64, and +1,281 nats; the first
+two are mixed across worlds, while pressure 8 is harmful in all three. Thus no
+low-pressure cell is a robust benefit and H35's registered non-monotonic
+optimum is not supported. The narrower high-pressure-harm result stands.
+
+Added `score_v6_pressure.py` with fail-closed full-grid preflight, complete
+protocol metadata, paired related/unrelated/within-family effects, explicit
+Phi and lifetime-cost decisions, and atomic report output. During validation,
+a 60-versus-40 adaptation-horizon mismatch was caught because the new scorer's
+first result failed to reproduce the old anchor costs. The final report uses
+40 steps and reproduces both ordinary and pressure-8 anchors exactly.
+
+One separate partial-freeze allocation cell failed from a memory error during
+the shared bounded-pool run. It is unrelated to H35, is not counted as an H35
+failure, and remains resumable; no allocation conclusion is recorded here.

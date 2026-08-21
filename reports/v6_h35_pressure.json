@@ -1,0 +1,3623 @@
+{
+  "generated_at_utc": "2026-08-21T16:17:49.726872+00:00",
+  "estimand": "paired ordinary-minus-pressure cumulative adaptation-trajectory cost",
+  "evaluation_protocol": {
+    "worlds": [
+      0,
+      1,
+      2
+    ],
+    "support": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "adaptation_steps": 40,
+    "inner_lr": 0.05,
+    "sigma": 0.1
+  },
+  "primary_support": 1,
+  "pressures": [
+    0,
+    1,
+    2,
+    8
+  ],
+  "beneficial_pressures": [],
+  "lifetime_beneficial_pressures": [],
+  "lifetime_harmful_pressures": [
+    8
+  ],
+  "h35_phi_nonmonotonic_supported": false,
+  "h35_lifetime_u_shape_supported": false,
+  "h35_nonmonotonic_supported": false,
+  "summary": {
+    "0": {
+      "worlds": 3,
+      "adaptation": {
+        "related": {
+          "prequential": {
+            "1": 13.360408115355915,
+            "2": 10.43929369964947,
+            "4": 8.659995593673857,
+            "8": 7.678387020132502
+          },
+          "endpoint": {
+            "1": 0.4354158144754667,
+            "2": 0.2641633172364284,
+            "4": 0.20568931164840853,
+            "8": 0.17289475751264638
+          },
+          "steps_to_target": {
+            "1": 0.0,
+            "2": 0.0,
+            "4": 0.0,
+            "8": 0.0
+          }
+        },
+        "unrelated": {
+          "prequential": {
+            "1": 10.133589051353432,
+            "2": 9.742659354621232,
+            "4": 9.999536146642638,
+            "8": 7.280106942441002
+          },
+          "endpoint": {
+            "1": 0.2579074304473275,
+            "2": 0.2533503711068381,
+            "4": 0.2549286766831452,
+            "8": 0.15988395510551826
+          },
+          "steps_to_target": {
+            "1": 0.0,
+            "2": 0.0,
+            "4": 0.0,
+            "8": 0.0
+          }
+        },
+        "within": {
+          "prequential": {
+            "1": 10.818883543834088,
+            "2": 9.680018116099138,
+            "4": 8.612798563262912,
+            "8": 7.666906232770997
+          },
+          "endpoint": {
+            "1": 0.2868886571377515,
+            "2": 0.24983813539923475,
+            "4": 0.20607049712756023,
+            "8": 0.17750357510522005
+          },
+          "steps_to_target": {
+            "1": 0.08333333333333333,
+            "2": 0.16666666666666666,
+            "4": 0.16666666666666666,
+            "8": 0.16666666666666666
+          }
+        }
+      },
+      "related": {
+        "1": 13.360408115355915,
+        "2": 10.43929369964947,
+        "4": 8.659995593673857,
+        "8": 7.678387020132502
+      },
+      "endpoint": {
+        "1": 0.4354158144754667,
+        "2": 0.2641633172364284,
+        "4": 0.20568931164840853,
+        "8": 0.17289475751264638
+      },
+      "current_prequential_loss": -193653.9641012502
+    },
+    "1": {
+      "worlds": 3,
+      "adaptation": {
+        "related": {
+          "prequential": {
+            "1": 13.792158903864518,
+            "2": 9.73125145731804,
+            "4": 10.052988654933868,
+            "8": 7.364601102502394
+          },
+          "endpoint": {
+            "1": 0.4549866115363934,
+            "2": 0.23785342151919997,
+            "4": 0.2524634862008193,
+            "8": 0.16801068947340048
+          },
+          "steps_to_target": {
+            "1": 0.0,
+            "2": 0.0,
+            "4": 0.0,
+            "8": 0.0
+          }
+        },
+        "unrelated": {
+          "prequential": {
+            "1": 9.960936532782698,
+            "2": 9.618673025397582,
+            "4": 9.584801191037208,
+            "8": 7.264168534796528
+          },
+          "endpoint": {
+            "1": 0.25808764039538795,
+            "2": 0.24729949266960216,
+            "4": 0.24689769973823172,
+            "8": 0.16294868934589124
+          },
+          "steps_to_target": {
+            "1": 0.0,
+            "2": 0.0,
+            "4": 0.0,
+            "8": 0.0
+          }
+        },
+        "within": {
+          "prequential": {
+            "1": 10.903886740561573,
+            "2": 9.455062086635733,
+            "4": 8.629413519035246,
+            "8": 7.873075918663137
+          },
+          "endpoint": {
+            "1": 0.3028524040322129,
+            "2": 0.24080350752531857,
+            "4": 0.20834949585453913,
+            "8": 0.18729472697790087
+          },
+          "steps_to_target": {
+            "1": 0.0,
+            "2": 0.0,
+            "4": 0.0,
+            "8": 0.0
+          }
+        }
+      },
+      "related": {
+        "1": 13.792158903864518,
+        "2": 9.73125145731804,
+        "4": 10.052988654933868,
+        "8": 7.364601102502394
+      },
+      "endpoint": {
+        "1": 0.4549866115363934,
+        "2": 0.23785342151919997,
+        "4": 0.2524634862008193,
+        "8": 0.16801068947340048
+      },
+      "current_prequential_loss": -193700.03325847027,
+      "paired_effects": {
+        "related": {
+          "mean": -0.43175078850860454,
+          "per_world": [
+            0.5593196430709195,
+            -1.5687021892517805,
+            -0.2858698193449527
+          ],
+          "sd": 0.8748638646797608,
+          "worlds_positive": 1
+        },
+        "unrelated": {
+          "mean": 0.17265251857073358,
+          "per_world": [
+            1.02175797219388,
+            -0.5878929194295761,
+            0.08409250294789672
+          ],
+          "sd": 0.6601142100684217,
+          "worlds_positive": 2
+        },
+        "within": {
+          "mean": -0.08500319672748446,
+          "per_world": [
+            -0.37815770192537457,
+            0.17025877023115754,
+            -0.04711065848823637
+          ],
+          "sd": 0.22548767900384822,
+          "worlds_positive": 1
+        }
+      },
+      "phi_related": -0.43175078850860454,
+      "phi_unrelated": 0.17265251857073358,
+      "phi_within": -0.08500319672748446,
+      "phi_per_world": [
+        0.5593196430709195,
+        -1.5687021892517805,
+        -0.2858698193449527
+      ],
+      "phi_sd": 0.8748638646797608,
+      "worlds_positive": 1,
+      "current_loss_delta_per_world": [
+        75.83346970882849,
+        -7.316425585391698,
+        -206.7245157835423
+      ],
+      "current_loss_delta_mean": -46.06915722003517,
+      "current_loss_delta_sd": 118.56386309562379,
+      "current_loss_worlds_improved": 2
+    },
+    "2": {
+      "worlds": 3,
+      "adaptation": {
+        "related": {
+          "prequential": {
+            "1": 14.193828718271105,
+            "2": 12.078406799507015,
+            "4": 9.524027533673989,
+            "8": 7.709225404929988
+          },
+          "endpoint": {
+            "1": 0.42824467333654553,
+            "2": 0.3323074216799189,
+            "4": 0.22968422466268135,
+            "8": 0.1746844131654749
+          },
+          "steps_to_target": {
+            "1": 0.0,
+            "2": 0.0,
+            "4": 0.0,
+            "8": 0.0
+          }
+        },
+        "unrelated": {
+          "prequential": {
+            "1": 10.457371641920567,
+            "2": 9.27352459693793,
+            "4": 10.035445843823252,
+            "8": 7.510549236515845
+          },
+          "endpoint": {
+            "1": 0.2768219759066899,
+            "2": 0.23339815573611603,
+            "4": 0.26141822066468495,
+            "8": 0.16771255080432937
+          },
+          "steps_to_target": {
+            "1": 0.0,
+            "2": 0.0,
+            "4": 0.0,
+            "8": 0.0
+          }
+        },
+        "within": {
+          "prequential": {
+            "1": 11.283003586383224,
+            "2": 9.000208282183545,
+            "4": 8.669360176039238,
+            "8": 7.820362947434962
+          },
+          "endpoint": {
+            "1": 0.32188319116054714,
+            "2": 0.22771956282667813,
+            "4": 0.2141442009209034,
+            "8": 0.18254384000708035
+          },
+          "steps_to_target": {
+            "1": 0.0,
+            "2": 0.0,
+            "4": 0.0,
+            "8": 0.0
+          }
+        }
+      },
+      "related": {
+        "1": 14.193828718271105,
+        "2": 12.078406799507015,
+        "4": 9.524027533673989,
+        "8": 7.709225404929988
+      },
+      "endpoint": {
+        "1": 0.42824467333654553,
+        "2": 0.3323074216799189,
+        "4": 0.22968422466268135,
+        "8": 0.1746844131654749
+      },
+      "current_prequential_loss": -193590.1640688145,
+      "paired_effects": {
+        "related": {
+          "mean": -0.8334206029151883,
+          "per_world": [
+            1.8003230565227568,
+            -6.6972745466046035,
+            2.396689681336282
+          ],
+          "sd": 4.153512617250552,
+          "worlds_positive": 2
+        },
+        "unrelated": {
+          "mean": -0.3237825905671337,
+          "per_world": [
+            -0.014497115625999868,
+            -0.9555343742249516,
+            -0.0013162818504497409
+          ],
+          "sd": 0.44674837862856714,
+          "worlds_positive": 0
+        },
+        "within": {
+          "mean": -0.4641200425491358,
+          "per_world": [
+            -0.5076803761767223,
+            -0.05060186085756868,
+            -0.8340778906131163
+          ],
+          "sd": 0.321332433573798,
+          "worlds_positive": 0
+        }
+      },
+      "phi_related": -0.8334206029151883,
+      "phi_unrelated": -0.3237825905671337,
+      "phi_within": -0.4641200425491358,
+      "phi_per_world": [
+        1.8003230565227568,
+        -6.6972745466046035,
+        2.396689681336282
+      ],
+      "phi_sd": 4.153512617250552,
+      "worlds_positive": 2,
+      "current_loss_delta_per_world": [
+        188.48797295056283,
+        20.06383849453414,
+        -17.15171413795906
+      ],
+      "current_loss_delta_mean": 63.80003243571264,
+      "current_loss_delta_sd": 89.46716798845479,
+      "current_loss_worlds_improved": 1
+    },
+    "8": {
+      "worlds": 3,
+      "adaptation": {
+        "related": {
+          "prequential": {
+            "1": 21.935801227421805,
+            "2": 14.845160746093216,
+            "4": 12.717940553557126,
+            "8": 9.798581667322042
+          },
+          "endpoint": {
+            "1": 0.7223027603079873,
+            "2": 0.4166620744702716,
+            "4": 0.3317959373816847,
+            "8": 0.23570100117164347
+          },
+          "steps_to_target": {
+            "1": 0.0,
+            "2": 0.0,
+            "4": 0.0,
+            "8": 0.0
+          }
+        },
+        "unrelated": {
+          "prequential": {
+            "1": 12.111706977399685,
+            "2": 11.774219034123233,
+            "4": 11.336505461561801,
+            "8": 9.27036431773255
+          },
+          "endpoint": {
+            "1": 0.32515329172989965,
+            "2": 0.3056612913496792,
+            "4": 0.29641189903486515,
+            "8": 0.22132988378871224
+          },
+          "steps_to_target": {
+            "1": 0.0,
+            "2": 0.0,
+            "4": 0.0,
+            "8": 0.0
+          }
+        },
+        "within": {
+          "prequential": {
+            "1": 14.77925285726087,
+            "2": 10.851103107658368,
+            "4": 10.069352381105999,
+            "8": 8.881905143304417
+          },
+          "endpoint": {
+            "1": 0.42926624203876895,
+            "2": 0.28094351776720333,
+            "4": 0.24874748972554997,
+            "8": 0.2094130507127071
+          },
+          "steps_to_target": {
+            "1": 0.08333333333333333,
+            "2": 0.08333333333333333,
+            "4": 0.08333333333333333,
+            "8": 0.08333333333333333
+          }
+        }
+      },
+      "related": {
+        "1": 21.935801227421805,
+        "2": 14.845160746093216,
+        "4": 12.717940553557126,
+        "8": 9.798581667322042
+      },
+      "endpoint": {
+        "1": 0.7223027603079873,
+        "2": 0.4166620744702716,
+        "4": 0.3317959373816847,
+        "8": 0.23570100117164347
+      },
+      "current_prequential_loss": -192372.60114110995,
+      "paired_effects": {
+        "related": {
+          "mean": -8.57539311206589,
+          "per_world": [
+            -10.049930622335523,
+            -13.53238106239587,
+            -2.14386765146628
+          ],
+          "sd": 4.764819344572951,
+          "worlds_positive": 0
+        },
+        "unrelated": {
+          "mean": -1.9781179260462516,
+          "per_world": [
+            -2.2392979415599257,
+            -2.571242110570891,
+            -1.1238137260079384
+          ],
+          "sd": 0.6190979903523199,
+          "worlds_positive": 0
+        },
+        "within": {
+          "mean": -3.9603693134267814,
+          "per_world": [
+            -5.04275553394109,
+            -6.829161841596942,
+            -0.009190564742311835
+          ],
+          "sd": 2.8875216596070734,
+          "worlds_positive": 0
+        }
+      },
+      "phi_related": -8.57539311206589,
+      "phi_unrelated": -1.9781179260462516,
+      "phi_within": -3.9603693134267814,
+      "phi_per_world": [
+        -10.049930622335523,
+        -13.53238106239587,
+        -2.14386765146628
+      ],
+      "phi_sd": 4.764819344572951,
+      "worlds_positive": 0,
+      "current_loss_delta_per_world": [
+        1953.3146422807768,
+        1073.9896215876506,
+        816.7846165524679
+      ],
+      "current_loss_delta_mean": 1281.3629601402984,
+      "current_loss_delta_sd": 486.6058644682579,
+      "current_loss_worlds_improved": 0
+    }
+  },
+  "sources": [
+    {
+      "path": "artifacts\\v6_clean\\ordinary\\world_0\\lifecycle",
+      "git_commit": "f4b2755500d13d616854a7ad97e61ff4ad38f038",
+      "resolved_config_sha256": "4cdd15acd12f8e0c2dbfababe4a27af950e4fd5e294f27202ba10eeec802f042",
+      "protocol": {
+        "arm": "ordinary",
+        "prospective_weight": 1.0,
+        "prospective_steps": 8,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    },
+    {
+      "path": "artifacts\\v6_lowp\\o1\\world_0\\lifecycle",
+      "git_commit": "fd89fa5e36aa284d77ca5c502594fe0ed0e698ad",
+      "resolved_config_sha256": "3c2eb733425e2d51a2bad89ed4ec2cb864af0afdd7d65bcf4becc9a64e5ec55f",
+      "protocol": {
+        "arm": "prospective",
+        "prospective_weight": 1.0,
+        "prospective_steps": 1,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    },
+    {
+      "path": "artifacts\\v6_lowp\\o2\\world_0\\lifecycle",
+      "git_commit": "fd89fa5e36aa284d77ca5c502594fe0ed0e698ad",
+      "resolved_config_sha256": "1f06df4e2bcc194874b490f697a989a81acc855e3e373a1773babf17bf4a2ef9",
+      "protocol": {
+        "arm": "prospective",
+        "prospective_weight": 1.0,
+        "prospective_steps": 2,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    },
+    {
+      "path": "artifacts\\v6_clean\\prospective\\world_0\\lifecycle",
+      "git_commit": "2545926190a7d722938879ee64b258b3d34b38d8",
+      "resolved_config_sha256": "e6cb2fb6b89a2d8f5381e368f564b214beb363a13f3db2cfcbe50fdc90900e1e",
+      "protocol": {
+        "arm": "prospective",
+        "prospective_weight": 1.0,
+        "prospective_steps": 8,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    },
+    {
+      "path": "artifacts\\v6_clean\\ordinary\\world_1\\lifecycle",
+      "git_commit": "2545926190a7d722938879ee64b258b3d34b38d8",
+      "resolved_config_sha256": "7eb759fcf1f10137445dea02a9b3d7d1ed47c5f37d8fca3aae2c5b6cb9cdbe9d",
+      "protocol": {
+        "arm": "ordinary",
+        "prospective_weight": 1.0,
+        "prospective_steps": 8,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    },
+    {
+      "path": "artifacts\\v6_lowp\\o1\\world_1\\lifecycle",
+      "git_commit": "fd89fa5e36aa284d77ca5c502594fe0ed0e698ad",
+      "resolved_config_sha256": "63909eeb6a0d7717da513b6b5f5d8145d5308b279894fda4adf4592f28b55dc2",
+      "protocol": {
+        "arm": "prospective",
+        "prospective_weight": 1.0,
+        "prospective_steps": 1,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    },
+    {
+      "path": "artifacts\\v6_lowp\\o2\\world_1\\lifecycle",
+      "git_commit": "fd89fa5e36aa284d77ca5c502594fe0ed0e698ad",
+      "resolved_config_sha256": "6c402afcb5d5a4e330b6add5fd6cd2022a4284b7e1c1721d7306c177183aee4b",
+      "protocol": {
+        "arm": "prospective",
+        "prospective_weight": 1.0,
+        "prospective_steps": 2,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    },
+    {
+      "path": "artifacts\\v6_clean\\prospective\\world_1\\lifecycle",
+      "git_commit": "bf2aacf8b21d29fe252b927fc8ae6bcbfa7d4ce7",
+      "resolved_config_sha256": "6c62b86a0ca838f2be2a0a89e5ad8c36706bc485f2d2ce04a9cea8432fde294d",
+      "protocol": {
+        "arm": "prospective",
+        "prospective_weight": 1.0,
+        "prospective_steps": 8,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    },
+    {
+      "path": "artifacts\\v6_clean\\ordinary\\world_2\\lifecycle",
+      "git_commit": "bf2aacf8b21d29fe252b927fc8ae6bcbfa7d4ce7",
+      "resolved_config_sha256": "b1d36d6c4e123be51cd74e0e049d35dee2cf6f3b47fa562961bc0d9cd7978537",
+      "protocol": {
+        "arm": "ordinary",
+        "prospective_weight": 1.0,
+        "prospective_steps": 8,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    },
+    {
+      "path": "artifacts\\v6_lowp\\o1\\world_2\\lifecycle",
+      "git_commit": "fd89fa5e36aa284d77ca5c502594fe0ed0e698ad",
+      "resolved_config_sha256": "17d87329542ebd35bd3b7e0515e9103dcd5ffffe8f1b423aa942964acf4ce3ef",
+      "protocol": {
+        "arm": "prospective",
+        "prospective_weight": 1.0,
+        "prospective_steps": 1,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    },
+    {
+      "path": "artifacts\\v6_lowp\\o2\\world_2\\lifecycle",
+      "git_commit": "fd89fa5e36aa284d77ca5c502594fe0ed0e698ad",
+      "resolved_config_sha256": "2b5b5a0a07c632ee7d2474706513ea406e3be319eb10a967b13bebb92e17d256",
+      "protocol": {
+        "arm": "prospective",
+        "prospective_weight": 1.0,
+        "prospective_steps": 2,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    },
+    {
+      "path": "artifacts\\v6_clean\\prospective\\world_2\\lifecycle",
+      "git_commit": "bf2aacf8b21d29fe252b927fc8ae6bcbfa7d4ce7",
+      "resolved_config_sha256": "d32f39da9f0ffd847bbd803c401126f41698b99b0214efc0484fedf36375bd3c",
+      "protocol": {
+        "arm": "prospective",
+        "prospective_weight": 1.0,
+        "prospective_steps": 8,
+        "prospective_inner_steps": 8,
+        "prospective_support": 8,
+        "freeze_basis_at": null,
+        "freeze_slots": null,
+        "operator_slots": 12,
+        "sleeps": [
+          16,
+          24,
+          32,
+          48,
+          64
+        ],
+        "lifecycle": true,
+        "promotion_epsilon": 0.02
+      },
+      "reference_pressure": 8
+    }
+  ],
+  "cells": [
+    {
+      "world": 0,
+      "pressure": 0,
+      "current_prequential_loss": -191906.78608938368,
+      "related": {
+        "1": [
+          {
+            "prequential": 21.88336609397083,
+            "endpoint": 0.8477572351694106,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.974399229511617,
+            "endpoint": 0.14680773019790647,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 14.944118401035663,
+            "endpoint": 0.39767487905919546,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.530134646687656,
+            "endpoint": 0.12439782731235025,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 11.671454715542493,
+            "endpoint": 0.27683393564075226,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.0325315231457335,
+            "endpoint": 0.18389383330941197,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 10.466107819229363,
+            "endpoint": 0.25983664672821755,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.712893365649506,
+            "endpoint": 0.0954045506659895,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 10.35979352891445,
+            "endpoint": 0.2927471417933702,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.620696539990602,
+            "endpoint": 0.320423231460154,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.1930179023183864,
+            "endpoint": 0.1598867122083902,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 19.806243106722828,
+            "endpoint": 0.4948166199028491,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 8.692042529582976,
+            "endpoint": 0.22505461238324637,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.653798221144823,
+            "endpoint": 0.19714902155101297,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.708703716751186,
+            "endpoint": 0.27427591849118466,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 17.279691901057955,
+            "endpoint": 0.43055349960923184,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 7.489653560332952,
+            "endpoint": 0.16307492041960356,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 12.128227634821085,
+            "endpoint": 0.3830212634056806,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.482765974942594,
+            "endpoint": 0.14120605774223802,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 16.65991137269884,
+            "endpoint": 0.42750290594995016,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 8.885207888670264,
+            "endpoint": 0.22330079227685923,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.804704526439308,
+            "endpoint": 0.1517663476988673,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.061359773389994,
+            "endpoint": 0.10771789820864794,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 13.148863194510339,
+            "endpoint": 0.27909202035516495,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 18.566608428955075,
+            "endpoint": 0.44568264856934536,
+            "steps_to_target": 1
+          },
+          {
+            "prequential": 8.602527785114942,
+            "endpoint": 0.21081459708511827,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.737854962237178,
+            "endpoint": 0.2414165530353784,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 17.27883950807154,
+            "endpoint": 0.4208123311400413,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 21.325794374570247,
+            "endpoint": 0.5779400933533906,
+            "steps_to_target": 2
+          },
+          {
+            "prequential": 8.094668353442101,
+            "endpoint": 0.18328664591535923,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.041292544454334,
+            "endpoint": 0.16810948727652428,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 18.848213879391547,
+            "endpoint": 0.5350028164684771,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 19.88000222481787,
+            "endpoint": 0.4890221171081065,
+            "steps_to_target": 2
+          },
+          {
+            "prequential": 7.852577290032057,
+            "endpoint": 0.16918928595259783,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.716114177834242,
+            "endpoint": 0.15602853382006285,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 15.071125235408541,
+            "endpoint": 0.37018167786300177,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 20.686918217688795,
+            "endpoint": 0.5740366410464047,
+            "steps_to_target": 2
+          },
+          {
+            "prequential": 7.1323633659631,
+            "endpoint": 0.12111758114770052,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.141950654797255,
+            "endpoint": 0.11382667580619452,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 12.041919399052857,
+            "endpoint": 0.27118031866848463,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    },
+    {
+      "world": 0,
+      "pressure": 1,
+      "current_prequential_loss": -191830.95261967485,
+      "related": {
+        "1": [
+          {
+            "prequential": 20.967457001097497,
+            "endpoint": 0.8771221153438089,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.77166903624311,
+            "endpoint": 0.15212330035865304,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 11.920391442254184,
+            "endpoint": 0.2876187209039926,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.74133482389152,
+            "endpoint": 0.15525945927947757,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 11.63047202862799,
+            "endpoint": 0.2765903249382972,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.440970896277575,
+            "endpoint": 0.19672606140375135,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 10.437011579051612,
+            "endpoint": 0.26499035302549595,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.3791482583619645,
+            "endpoint": 0.11672814143821594,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 8.975890395231543,
+            "endpoint": 0.21117527503520248,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 12.030407798010854,
+            "endpoint": 0.3864603349938988,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.840122560970484,
+            "endpoint": 0.15477890847250816,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 16.04629843495786,
+            "endpoint": 0.40704864077270025,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 7.002659619320182,
+            "endpoint": 0.1606501871719956,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.721190236043183,
+            "endpoint": 0.2098321449011564,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.670664577744899,
+            "endpoint": 0.1940300338901579,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 18.997446261346337,
+            "endpoint": 0.4811371210962533,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 7.67163075506687,
+            "endpoint": 0.18119071610271928,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.27412391360849,
+            "endpoint": 0.3490954870358109,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.42669282387942,
+            "endpoint": 0.13661462580785153,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 15.103714028373357,
+            "endpoint": 0.38364168722182507,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 8.148708916269241,
+            "endpoint": 0.1969096018001437,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.889562319498508,
+            "endpoint": 0.13533652527257797,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.157487809425219,
+            "endpoint": 0.0753041706047952,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 13.014335092157124,
+            "endpoint": 0.2798932837322354,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 18.438327126204964,
+            "endpoint": 0.4537699744105338,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.43915125587955,
+            "endpoint": 0.20906168501824138,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.102149982936679,
+            "endpoint": 0.20651174709200856,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 18.71883312705904,
+            "endpoint": 0.532323122024536,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 19.6359830442816,
+            "endpoint": 0.5105121061205863,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.891925949137656,
+            "endpoint": 0.2076486591249704,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.584179647732524,
+            "endpoint": 0.21324194967746732,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 19.268231699243184,
+            "endpoint": 0.5513975396752356,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 20.67160750739276,
+            "endpoint": 0.5476281978189944,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.295357470866291,
+            "endpoint": 0.15237570041790602,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.233199825510382,
+            "endpoint": 0.13074735179543492,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 14.402795769274231,
+            "endpoint": 0.33918726257979864,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 18.63041380420327,
+            "endpoint": 0.4748479928821324,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.194933993741868,
+            "endpoint": 0.14214594848453996,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.428063777275383,
+            "endpoint": 0.1496852491982281,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 13.022200623527167,
+            "endpoint": 0.31019449234008784,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    },
+    {
+      "world": 0,
+      "pressure": 2,
+      "current_prequential_loss": -191718.2981164331,
+      "related": {
+        "1": [
+          {
+            "prequential": 17.341492371633645,
+            "endpoint": 0.5432711914181708,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.9156268388032895,
+            "endpoint": 0.1814303686842322,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 12.019449053332208,
+            "endpoint": 0.3008674364537,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.092188438400624,
+            "endpoint": 0.17259767046198246,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 10.733437887392936,
+            "endpoint": 0.2446898957714438,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.864396623335777,
+            "endpoint": 0.20748202223330733,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 10.447589005343614,
+            "endpoint": 0.24777778889983887,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.535076966974883,
+            "endpoint": 0.1640111790038645,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 8.097378944512455,
+            "endpoint": 0.17597277183085677,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 15.0076481513679,
+            "endpoint": 0.5398141220211982,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.381889421027153,
+            "endpoint": 0.14087912859395144,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 18.55082302354276,
+            "endpoint": 0.47182082198560227,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 8.007393765728919,
+            "endpoint": 0.1892348052933812,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.085964188445358,
+            "endpoint": 0.18253945745527742,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.335099134594201,
+            "endpoint": 0.1490740571171045,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 15.518916165456172,
+            "endpoint": 0.37423027679324145,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 7.793580938596277,
+            "endpoint": 0.19156184280291197,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 14.723090233746913,
+            "endpoint": 0.47560841776430596,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.739723297301679,
+            "endpoint": 0.12627306859940288,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 15.236425469629463,
+            "endpoint": 0.39017887320369476,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 7.9998358385637385,
+            "endpoint": 0.1910061342641711,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.370284431613981,
+            "endpoint": 0.14746641973033545,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.960394382942467,
+            "endpoint": 0.11069917818531391,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 12.968397163785992,
+            "endpoint": 0.26805724482983345,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 19.33009061031043,
+            "endpoint": 0.5219435319304465,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.966016896534709,
+            "endpoint": 0.18957310821861026,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.318498290143905,
+            "endpoint": 0.2967294538393616,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 17.601946392096576,
+            "endpoint": 0.4853807855397462,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 18.188424827530977,
+            "endpoint": 0.47243423759937275,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.699325145222245,
+            "endpoint": 0.18168730894103644,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.011526987887917,
+            "endpoint": 0.21063804160803554,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 17.045265925116833,
+            "endpoint": 0.4889102652668952,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 19.808339513838288,
+            "endpoint": 0.5323482677340506,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.291306880302726,
+            "endpoint": 0.13503652298822996,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.04852861817926,
+            "endpoint": 0.14370211865752933,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 14.27657161839306,
+            "endpoint": 0.3613081527873873,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 16.808964801020917,
+            "endpoint": 0.4296844359487294,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.761260601226239,
+            "endpoint": 0.251770531758666,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.038473431952296,
+            "endpoint": 0.1971672987565398,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.93723231460899,
+            "endpoint": 0.22355765104293818,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    },
+    {
+      "world": 0,
+      "pressure": 8,
+      "current_prequential_loss": -189953.4714471029,
+      "related": {
+        "1": [
+          {
+            "prequential": 25.4852176643908,
+            "endpoint": 0.8281877264380454,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 23.472408903762695,
+            "endpoint": 0.7690194062888621,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 25.97370687872171,
+            "endpoint": 0.7947605103254317,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.167493984568862,
+            "endpoint": 0.2444779966026544,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 17.918042629025873,
+            "endpoint": 0.5032001063227652,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.517914509866385,
+            "endpoint": 0.21951724775135512,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 13.579133362509308,
+            "endpoint": 0.3477899124845862,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.799775536637752,
+            "endpoint": 0.16473002033308146,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 13.729724474251267,
+            "endpoint": 0.35156090743839735,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 19.786510569974777,
+            "endpoint": 0.720766931772232,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.785604158882051,
+            "endpoint": 0.13278499245643613,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 17.635103641077873,
+            "endpoint": 0.44109136797487725,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 13.431879761628805,
+            "endpoint": 0.3224899526685476,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.9909126535058,
+            "endpoint": 0.29608441982418293,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.7140854788012785,
+            "endpoint": 0.20247455686330793,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 22.69732975400984,
+            "endpoint": 0.6034040823578833,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 12.825218611396847,
+            "endpoint": 0.3176953643560409,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.627940983977167,
+            "endpoint": 0.2798294881358742,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.402025767602026,
+            "endpoint": 0.15721658710390327,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 18.73646359890699,
+            "endpoint": 0.5340337753295897,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 10.63962592743337,
+            "endpoint": 0.23671705275773997,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.792159110773354,
+            "endpoint": 0.15451490180566904,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.252596909645944,
+            "endpoint": 0.09561728220432995,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 15.503074042499062,
+            "endpoint": 0.3545003710314631,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 15.181286050938066,
+            "endpoint": 0.37442850880324835,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.883664154447613,
+            "endpoint": 0.30105602927505964,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 23.469543922692534,
+            "endpoint": 0.7623226847499608,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 22.822358692064878,
+            "endpoint": 0.7616904564201831,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 16.568228625692424,
+            "endpoint": 0.41814255528151983,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.188759957440196,
+            "endpoint": 0.2668132539838552,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 12.771815271116791,
+            "endpoint": 0.3234948962926864,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.461642128415404,
+            "endpoint": 0.28629892040044064,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 18.967115716077384,
+            "endpoint": 0.4899651277810334,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.412299819290636,
+            "endpoint": 0.23515599314123387,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 13.230642490088938,
+            "endpoint": 0.3414761740714311,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 13.43422378413379,
+            "endpoint": 0.3564350772649049,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 15.966140944510695,
+            "endpoint": 0.38544882554560894,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 13.272255309857426,
+            "endpoint": 0.3342292737215757,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.255652597174047,
+            "endpoint": 0.27250451967120165,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.605005897581576,
+            "endpoint": 0.2991528948768973,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    },
+    {
+      "world": 1,
+      "pressure": 0,
+      "current_prequential_loss": -194941.62120072555,
+      "related": {
+        "1": [
+          {
+            "prequential": 18.54074920993298,
+            "endpoint": 0.6586467847228049,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.361245646141468,
+            "endpoint": 0.2279357519000768,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 12.659807526506482,
+            "endpoint": 0.31723785214126105,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 15.994694130495187,
+            "endpoint": 0.4304833710193633,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 10.428991774097083,
+            "endpoint": 0.2332029398530721,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.641046530101447,
+            "endpoint": 0.19452732522040603,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 7.890569104347376,
+            "endpoint": 0.1460272120311856,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.09626306965947,
+            "endpoint": 0.2078685676679015,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 6.576810299884527,
+            "endpoint": 0.1573612564243376,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.823325192090123,
+            "endpoint": 0.15893578529357907,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.362465326674282,
+            "endpoint": 0.15680746873840687,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 16.34502722881734,
+            "endpoint": 0.44194087386131276,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 6.034162559080868,
+            "endpoint": 0.1509048510342836,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.084394226782022,
+            "endpoint": 0.337080773897469,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.079040996264665,
+            "endpoint": 0.3432524157688021,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.142752342857419,
+            "endpoint": 0.26884386315941805,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 8.22981469100341,
+            "endpoint": 0.22828315850347275,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.630812716204671,
+            "endpoint": 0.24848557077348227,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.032244092784821,
+            "endpoint": 0.1350329373963177,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 17.13965279050171,
+            "endpoint": 0.4718482960015534,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 4.80559731950052,
+            "endpoint": 0.09288777364417909,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.038916983176022,
+            "endpoint": 0.12549603125080463,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.899429414421319,
+            "endpoint": 0.12382374843582508,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.53388724196702,
+            "endpoint": 0.25891347322612995,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 14.895094162784513,
+            "endpoint": 0.3629421349614858,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.476629911456255,
+            "endpoint": 0.3127263160422444,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.4983411808498195,
+            "endpoint": 0.16878981841728088,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.237555433996021,
+            "endpoint": 0.1311593689024448,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 16.708234208635982,
+            "endpoint": 0.4750074818730353,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.376372672617435,
+            "endpoint": 0.14367605326697228,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.461131513584404,
+            "endpoint": 0.13223132118582723,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.1433401638641945,
+            "endpoint": 0.08520741248503326,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 8.769569231662897,
+            "endpoint": 0.1935332082211971,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.067910428624599,
+            "endpoint": 0.12391455238685009,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.667469535022973,
+            "endpoint": 0.1804265542887151,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.581102066207676,
+            "endpoint": 0.14563119038939473,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 8.518067584373055,
+            "endpoint": 0.18439680570736525,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.756680737249552,
+            "endpoint": 0.13347016647458074,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.174198956228792,
+            "endpoint": 0.11875629425048825,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.5737487254664293,
+            "endpoint": 0.06970377871766685,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    },
+    {
+      "world": 1,
+      "pressure": 1,
+      "current_prequential_loss": -194948.93762631094,
+      "related": {
+        "1": [
+          {
+            "prequential": 21.23655343893915,
+            "endpoint": 0.7488559000194072,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.802845795638857,
+            "endpoint": 0.2273844322189688,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 11.835916154086588,
+            "endpoint": 0.285459985025227,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 13.937870739027854,
+            "endpoint": 0.37126105744391674,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 10.917625296860932,
+            "endpoint": 0.24724705144762987,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.99101612344384,
+            "endpoint": 0.26442934758961195,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 8.460634760558603,
+            "endpoint": 0.18250853754580018,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.902234280481933,
+            "endpoint": 0.1780872233211994,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 6.96220528334379,
+            "endpoint": 0.19514379091560838,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.676556240767239,
+            "endpoint": 0.19236932275816795,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.3788839275948686,
+            "endpoint": 0.22722533904016012,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 16.441554273478683,
+            "endpoint": 0.41771419346332544,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 5.025623296387493,
+            "endpoint": 0.12272311141714451,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.069451877847312,
+            "endpoint": 0.3411068813875317,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.559188575483857,
+            "endpoint": 0.35067191347479815,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.21827159076929,
+            "endpoint": 0.26254137046635145,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 5.79239404760301,
+            "endpoint": 0.13991170562803742,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.695484791882334,
+            "endpoint": 0.26963343843817705,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.436415877193212,
+            "endpoint": 0.1168902846984565,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 18.646720028482374,
+            "endpoint": 0.5166859365999698,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 4.9134806147776535,
+            "endpoint": 0.12062899768352506,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.719409300014376,
+            "endpoint": 0.10911467252299187,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.8709360426291815,
+            "endpoint": 0.1520531019195914,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 12.750427168793975,
+            "endpoint": 0.28668949380517,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 15.311514213681217,
+            "endpoint": 0.4337866324931382,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.225766126997767,
+            "endpoint": 0.3088086377829313,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.662862816825508,
+            "endpoint": 0.12986703077331183,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.226442450657486,
+            "endpoint": 0.11828106362372634,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 15.048223966732618,
+            "endpoint": 0.42883064597845066,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.1522481022402635,
+            "endpoint": 0.12556578731164333,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.770837433170526,
+            "endpoint": 0.09903584141284226,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.099209053674712,
+            "endpoint": 0.09235924226231872,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 8.0538286245428,
+            "endpoint": 0.17466752324253318,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.52322027995251,
+            "endpoint": 0.09584416402503847,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.845225253142416,
+            "endpoint": 0.14540664851665494,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.255440100561826,
+            "endpoint": 0.2090890426188707,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 8.754825696814803,
+            "endpoint": 0.2082112245261669,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.531076504848897,
+            "endpoint": 0.13277556281536815,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.973981355782597,
+            "endpoint": 0.14887072611600158,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.062631208216771,
+            "endpoint": 0.09006755426526068,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    },
+    {
+      "world": 1,
+      "pressure": 2,
+      "current_prequential_loss": -194921.55736223102,
+      "related": {
+        "1": [
+          {
+            "prequential": 31.203274149447672,
+            "endpoint": 1.1369557119905946,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.093269799835978,
+            "endpoint": 0.257551809772849,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 12.980449036695061,
+            "endpoint": 0.3222956554964184,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 27.258955617435273,
+            "endpoint": 0.8930404670536516,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 11.432185140438376,
+            "endpoint": 0.25858487933874125,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.07151789870113,
+            "endpoint": 0.21424575243145225,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 8.565269876271485,
+            "endpoint": 0.17511023906990883,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.104093198198823,
+            "endpoint": 0.17727049998939035,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 7.57246980210766,
+            "endpoint": 0.21526166237890715,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.072367857675998,
+            "endpoint": 0.19251466728746888,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.767875900026409,
+            "endpoint": 0.21077655255794522,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 16.517051984556016,
+            "endpoint": 0.4615969955921172,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 5.877644906286149,
+            "endpoint": 0.15017332043498752,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 14.323094964493063,
+            "endpoint": 0.4425027407705783,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.280525835696606,
+            "endpoint": 0.3001426579430699,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.072587803937493,
+            "endpoint": 0.2553571015596389,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 7.049637532327322,
+            "endpoint": 0.178985099773854,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.244233103003351,
+            "endpoint": 0.28745671734213823,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.697307887021451,
+            "endpoint": 0.13392479158937928,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 18.39365195482969,
+            "endpoint": 0.48978636041283596,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 5.337884312029927,
+            "endpoint": 0.13601380633190271,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.620500048622488,
+            "endpoint": 0.10293258819729088,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.5149552994407705,
+            "endpoint": 0.11646591592580077,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 14.349894295446571,
+            "endpoint": 0.3555263858288526,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 15.840726601891216,
+            "endpoint": 0.42682057246565813,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.561760197859256,
+            "endpoint": 0.2629433991387486,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.881560129113494,
+            "endpoint": 0.17910707974806425,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.0259812036529175,
+            "endpoint": 0.1259913435205817,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 11.625436204485593,
+            "endpoint": 0.2804172690957784,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.796875117812305,
+            "endpoint": 0.16523649683222172,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.8620558585971585,
+            "endpoint": 0.14451706083491442,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.893893479835241,
+            "endpoint": 0.09192326106131075,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 10.54364158771932,
+            "endpoint": 0.2535908250138163,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.13968946179375,
+            "endpoint": 0.11803776724264023,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.442799209617077,
+            "endpoint": 0.1589654246345162,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.171587877906858,
+            "endpoint": 0.17908600857481358,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 8.924619411118327,
+            "endpoint": 0.2109243534505367,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.054992403369396,
+            "endpoint": 0.14655218692496416,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.2250745007768264,
+            "endpoint": 0.11049252934753892,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.5480928141623727,
+            "endpoint": 0.08168366039171814,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    },
+    {
+      "world": 1,
+      "pressure": 8,
+      "current_prequential_loss": -193867.6315791379,
+      "related": {
+        "1": [
+          {
+            "prequential": 44.78534096851944,
+            "endpoint": 1.80587638169527,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.181416012346743,
+            "endpoint": 0.2353016752749681,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 20.575786079280075,
+            "endpoint": 0.5883832462131976,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 15.05529580172151,
+            "endpoint": 0.42504398152232165,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 18.060779129154977,
+            "endpoint": 0.4675266332924365,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.936833661049603,
+            "endpoint": 0.24513928219676012,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 11.370325321331618,
+            "endpoint": 0.24353293702006334,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.377552080899475,
+            "endpoint": 0.2814411418512463,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 12.481549358926712,
+            "endpoint": 0.40007880888879294,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.989501093514262,
+            "endpoint": 0.2443935023620724,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.274258486926554,
+            "endpoint": 0.1903870026580989,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 15.647287550382313,
+            "endpoint": 0.39043040014803404,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 6.713313434738665,
+            "endpoint": 0.16257546376436946,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 12.791012180969117,
+            "endpoint": 0.36290262360125775,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 15.310588921420273,
+            "endpoint": 0.4678274504840373,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 12.267628405243157,
+            "endpoint": 0.29110242612659926,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 9.60208491887897,
+            "endpoint": 0.24424339644610876,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.926755002699791,
+            "endpoint": 0.19468208774924275,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.166313705965875,
+            "endpoint": 0.1690996461547911,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 21.853804518468674,
+            "endpoint": 0.6202888675034045,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 7.988140161614863,
+            "endpoint": 0.19829962402582166,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.683715479448437,
+            "endpoint": 0.15369674656540153,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.6992009882815164,
+            "endpoint": 0.16543685924261806,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 13.558466709218918,
+            "endpoint": 0.3405747935175895,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 37.176546594128006,
+            "endpoint": 1.1695467866957185,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.512007389683275,
+            "endpoint": 0.37289017345756287,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.563128883019088,
+            "endpoint": 0.22151980083435768,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.172585188644006,
+            "endpoint": 0.09753209305927156,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 18.20189016871154,
+            "endpoint": 0.5003440659493207,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.48878539400175,
+            "endpoint": 0.23675013799220318,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.405775438062845,
+            "endpoint": 0.27686138637363905,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.474896433064713,
+            "endpoint": 0.18369284225627777,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 11.715461150743065,
+            "endpoint": 0.2728398656472563,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.395424507558344,
+            "endpoint": 0.16881293850019571,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.702540840953587,
+            "endpoint": 0.2665000036358833,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.433794413693248,
+            "endpoint": 0.14058053493499753,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 9.523167461156843,
+            "endpoint": 0.20354699809104201,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.373149612452833,
+            "endpoint": 0.20578736439347264,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.91622319864109,
+            "endpoint": 0.16129987780004737,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.285590530140325,
+            "endpoint": 0.07420774782076477,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    },
+    {
+      "world": 2,
+      "pressure": 0,
+      "current_prequential_loss": -194113.48501364145,
+      "related": {
+        "1": [
+          {
+            "prequential": 13.826127629727122,
+            "endpoint": 0.5033137742429971,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.57656088285148,
+            "endpoint": 0.22803361061960453,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 5.232520529534667,
+            "endpoint": 0.1211993279866874,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.274486963637171,
+            "endpoint": 0.193986645899713,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 6.298719765618443,
+            "endpoint": 0.16498772893100974,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.887229253537951,
+            "endpoint": 0.1806901069357991,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 4.695572447963058,
+            "endpoint": 0.09764031274244188,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.208916313946245,
+            "endpoint": 0.2305912552401423,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 8.017580548766999,
+            "endpoint": 0.21510722581297154,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.69986621942371,
+            "endpoint": 0.1513474038802087,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.696294740773736,
+            "endpoint": 0.2522862050682306,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 12.101947981864212,
+            "endpoint": 0.2932292409241199,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 5.476185050792991,
+            "endpoint": 0.12334052007645366,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.41536390269175,
+            "endpoint": 0.1912228064611554,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.129103437066076,
+            "endpoint": 0.2333327662199735,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.216673371382056,
+            "endpoint": 0.2651934046298265,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 6.132049195002764,
+            "endpoint": 0.13859253376722333,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.786515132058411,
+            "endpoint": 0.12890835059806702,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 13.724386086687442,
+            "endpoint": 0.35073580220341677,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.558400512672959,
+            "endpoint": 0.242452323436737,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 4.567245853831991,
+            "endpoint": 0.09604591177776454,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.091005039867013,
+            "endpoint": 0.11000897502526638,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.57609922531992,
+            "endpoint": 0.18277212511748073,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.948966848198323,
+            "endpoint": 0.1667823642492294,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 20.69002776406705,
+            "endpoint": 0.6043899338692426,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.487604870926588,
+            "endpoint": 0.17898688092827794,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.716213748790322,
+            "endpoint": 0.209368672221899,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.639304768759756,
+            "endpoint": 0.15557463048025963,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 12.891482049599288,
+            "endpoint": 0.3025228157639503,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.995325964409857,
+            "endpoint": 0.12088045477867124,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.433463282883166,
+            "endpoint": 0.15504766488447783,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.84089838573709,
+            "endpoint": 0.11914537753909824,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 13.095223577693103,
+            "endpoint": 0.31161422375589604,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.185106012504547,
+            "endpoint": 0.11746657546609637,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.400822567753493,
+            "endpoint": 0.12394081568345425,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.066560411592945,
+            "endpoint": 0.09189723059535025,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 12.216258421540259,
+            "endpoint": 0.2881395164877176,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.5219293204136184,
+            "endpoint": 0.0698335003107786,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.016530503053217,
+            "endpoint": 0.12011958751827476,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.2223089074250306,
+            "endpoint": 0.0654620351269841,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    },
+    {
+      "world": 2,
+      "pressure": 1,
+      "current_prequential_loss": -194320.209529425,
+      "related": {
+        "1": [
+          {
+            "prequential": 14.210339344572272,
+            "endpoint": 0.4923666361719369,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.764088806696234,
+            "endpoint": 0.232067285105586,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 5.384023755323141,
+            "endpoint": 0.12231830041855571,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.567971829324959,
+            "endpoint": 0.20520300604403016,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 7.5259326840750855,
+            "endpoint": 0.1978205982595682,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.811914900317786,
+            "endpoint": 0.3319675335660576,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 4.819391400087624,
+            "endpoint": 0.10784973856061694,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.189186336472629,
+            "endpoint": 0.15790014294907448,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 6.8018733290955415,
+            "endpoint": 0.16889628022909162,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.994910527486352,
+            "endpoint": 0.1964753959327936,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.732640232890843,
+            "endpoint": 0.2506753429770469,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.649895389564334,
+            "endpoint": 0.28908886015415186,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 6.38992532622069,
+            "endpoint": 0.15487710479646918,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.787717109546064,
+            "endpoint": 0.174748501740396,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.2098629809916,
+            "endpoint": 0.24816705845296377,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.772074853070079,
+            "endpoint": 0.2671084832400083,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 5.589236016385256,
+            "endpoint": 0.13127787970006463,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.838972947094589,
+            "endpoint": 0.13420759933069346,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 13.53465262800455,
+            "endpoint": 0.37300628609955305,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.007576434873043,
+            "endpoint": 0.2306167501956224,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 4.620572749990969,
+            "endpoint": 0.09702673414722084,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.767123505007475,
+            "endpoint": 0.09995095897465943,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.909681974910198,
+            "endpoint": 0.18729504663497207,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.408296924084423,
+            "endpoint": 0.21518168505281204,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 23.430785420350727,
+            "endpoint": 0.7729494478553532,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.4570640195161095,
+            "endpoint": 0.11042548576369879,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.69887726055458,
+            "endpoint": 0.222777877934277,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.1348670860752454,
+            "endpoint": 0.13566614361479876,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 12.740378826856611,
+            "endpoint": 0.29165381565690035,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.634748119860887,
+            "endpoint": 0.1074472442269325,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.980941327288746,
+            "endpoint": 0.1454553101211786,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.653837869409471,
+            "endpoint": 0.1164939487352967,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 13.695210847072302,
+            "endpoint": 0.3235525451600551,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.508868639823048,
+            "endpoint": 0.10199664393439888,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.73263631761074,
+            "endpoint": 0.17409760039299724,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.335571592673658,
+            "endpoint": 0.10560126975178717,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 11.915528890676795,
+            "endpoint": 0.28804440516978497,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.5757178033236405,
+            "endpoint": 0.07470346754416822,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.14196469541639,
+            "endpoint": 0.15598209574818608,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.2455726701300587,
+            "endpoint": 0.07200800464488565,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    },
+    {
+      "world": 2,
+      "pressure": 2,
+      "current_prequential_loss": -194130.6367277794,
+      "related": {
+        "1": [
+          {
+            "prequential": 7.754681678488849,
+            "endpoint": 0.2142638200893998,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.854627471417187,
+            "endpoint": 0.23599513806402678,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 4.740612662862985,
+            "endpoint": 0.10840145405381915,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.378785988315938,
+            "endpoint": 0.19664184655994174,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 8.475258969701825,
+            "endpoint": 0.2229430945590138,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.567368682473896,
+            "endpoint": 0.23015970364212984,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 4.846454272046684,
+            "endpoint": 0.11328610125929114,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.756869110744445,
+            "endpoint": 0.1706506707705557,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 7.158007426187394,
+            "endpoint": 0.1898008398711681,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.952328235842286,
+            "endpoint": 0.18725326517596838,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.238496238365768,
+            "endpoint": 0.2667603781446814,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.172122717835007,
+            "endpoint": 0.2694125054404139,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 5.470882123336195,
+            "endpoint": 0.11825662804767487,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.888125686440615,
+            "endpoint": 0.20129261538386342,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.579170682467518,
+            "endpoint": 0.24644106160849327,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.842889906372873,
+            "endpoint": 0.19153314642608163,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 5.7474690838716915,
+            "endpoint": 0.1261379802599549,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.1535954591818145,
+            "endpoint": 0.14379848726093766,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 14.550346601754423,
+            "endpoint": 0.3943692427128553,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.09628856461495,
+            "endpoint": 0.19893776625394818,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 4.806109284982084,
+            "endpoint": 0.09970802348107098,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.423890345264225,
+            "endpoint": 0.11230276431888339,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.968071662820874,
+            "endpoint": 0.18653162987902758,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.806373772677032,
+            "endpoint": 0.1858405186794698,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 21.965948794968423,
+            "endpoint": 0.6669107358902692,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.002350965514778,
+            "endpoint": 0.11597045231610534,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.97300114436075,
+            "endpoint": 0.4459073767066001,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.928161810152232,
+            "endpoint": 0.14532045461237428,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 13.713961699977515,
+            "endpoint": 0.3196205245330929,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.719092254526912,
+            "endpoint": 0.11672569671645758,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.521115357987582,
+            "endpoint": 0.1327005913481116,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.925526527222245,
+            "endpoint": 0.12782400008291003,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 14.49630260467529,
+            "endpoint": 0.3503727260977029,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.996225680224597,
+            "endpoint": 0.12389366747811434,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.9026885884813955,
+            "endpoint": 0.11651681270450351,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.914640471339225,
+            "endpoint": 0.09687211713753639,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 12.688424042426048,
+            "endpoint": 0.27789568994194264,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.7546089733950785,
+            "endpoint": 0.08066646987572311,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.987220605835318,
+            "endpoint": 0.11243855115026233,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.1153914693277325,
+            "endpoint": 0.06769272149540483,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    },
+    {
+      "world": 2,
+      "pressure": 8,
+      "current_prequential_loss": -193296.70039708898,
+      "related": {
+        "1": [
+          {
+            "prequential": 8.245421829633413,
+            "endpoint": 0.21954951807856554,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 19.44500198587775,
+            "endpoint": 0.47588185407221306,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 7.682529441080986,
+            "endpoint": 0.19297290127724406,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.616152291186152,
+            "endpoint": 0.25433381088078016,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 10.567625670228152,
+            "endpoint": 0.28319885022938246,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 11.306447722017763,
+            "endpoint": 0.2721935044974088,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 6.135139917023479,
+            "endpoint": 0.14016244094818828,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.529563785530625,
+            "endpoint": 0.23654955439269537,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "unrelated": {
+        "1": [
+          {
+            "prequential": 8.12505941139534,
+            "endpoint": 0.198434735648334,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.187828144058583,
+            "endpoint": 0.22624195553362364,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 13.88088283129036,
+            "endpoint": 0.31517047900706524,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 10.817174008116124,
+            "endpoint": 0.2904984168708324,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 7.999262306839226,
+            "endpoint": 0.19557154737412927,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.558820315171031,
+            "endpoint": 0.18672738224267957,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 14.65061132330447,
+            "endpoint": 0.3704355098307132,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.165183873847125,
+            "endpoint": 0.20634008105844256,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 7.006913691293446,
+            "endpoint": 0.166126643307507,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.41969479806721,
+            "endpoint": 0.21917202975600952,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 16.015736409462985,
+            "endpoint": 0.4436331335455178,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 9.45511353202164,
+            "endpoint": 0.21092176903039214,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 5.976986035238951,
+            "endpoint": 0.13536070473492143,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.825346627738326,
+            "endpoint": 0.17396137118339536,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 16.652751690708097,
+            "endpoint": 0.4539163317531346,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 8.672308130189775,
+            "endpoint": 0.19336256664246318,
+            "steps_to_target": 0
+          }
+        ]
+      },
+      "within": {
+        "1": [
+          {
+            "prequential": 23.705575661733743,
+            "endpoint": 0.6384056992828845,
+            "steps_to_target": 1
+          },
+          {
+            "prequential": 6.121552479453384,
+            "endpoint": 0.13810597592964766,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 7.216301443986593,
+            "endpoint": 0.18733819015324113,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.526483826339244,
+            "endpoint": 0.12635850580409166,
+            "steps_to_target": 0
+          }
+        ],
+        "2": [
+          {
+            "prequential": 18.296197615563866,
+            "endpoint": 0.4564036149531602,
+            "steps_to_target": 1
+          },
+          {
+            "prequential": 6.299898517318069,
+            "endpoint": 0.14800280332565305,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.702133605722337,
+            "endpoint": 0.16084255184978244,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.353214136790483,
+            "endpoint": 0.11367518454790113,
+            "steps_to_target": 0
+          }
+        ],
+        "4": [
+          {
+            "prequential": 13.905645301565524,
+            "endpoint": 0.3102858550846576,
+            "steps_to_target": 1
+          },
+          {
+            "prequential": 6.0017711482942095,
+            "endpoint": 0.14319284819066522,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 6.570343778003006,
+            "endpoint": 0.1633405336178839,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 4.062965622870251,
+            "endpoint": 0.09638492483645676,
+            "steps_to_target": 0
+          }
+        ],
+        "8": [
+          {
+            "prequential": 12.289514974690972,
+            "endpoint": 0.25234010536223644,
+            "steps_to_target": 1
+          },
+          {
+            "prequential": 5.129228474106639,
+            "endpoint": 0.11000697268173096,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 5.604315048549323,
+            "endpoint": 0.13447349192574617,
+            "steps_to_target": 0
+          },
+          {
+            "prequential": 3.362617670791223,
+            "endpoint": 0.07995853666216134,
+            "steps_to_target": 0
+          }
+        ]
+      }
+    }
+  ]
+}

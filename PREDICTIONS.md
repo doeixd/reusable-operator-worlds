@@ -3688,3 +3688,49 @@ not differ on it.
 The refutation therefore stands on an absence of the predicted effect,
 which is weaker than a measured reversal and is the honest form of the
 claim.
+
+# H35 RESULT: THE REGISTERED NON-MONOTONIC OPTIMUM IS NOT SUPPORTED (2026-08-21)
+
+The registered low-pressure cells are complete: outer steps 1 and 2
+(approximately 6% and 13% of one task's ordinary parameter movement),
+paired with the existing pressure-0 ordinary arm and pressure-8 arm on
+development worlds 0--2. Every checkpoint was scored by the same frozen-
+representation adaptor used for the first valid V6 result: 40 Adam steps,
+learning rate 0.05, disjoint support/query data, and k in {1,2,4,8}. The
+pressure-0 and pressure-8 anchors reproduce that result exactly.
+
+At the primary k=1 support:
+
+| outer steps | Phi related | per-world Phi | positive worlds | Phi unrelated | current-loss delta |
+| ---: | ---: | --- | ---: | ---: | ---: |
+| 1 | -0.432 | +0.559, -1.569, -0.286 | 1/3 | +0.173 | -46.1 |
+| 2 | -0.833 | +1.800, -6.697, +2.397 | 2/3 | -0.324 | +63.8 |
+| 8 | -8.575 | -10.050, -13.532, -2.144 | 0/3 | -1.978 | +1,281.4 |
+
+Positive Phi means cheaper future acquisition. Negative current-loss delta
+means a lower (better) cumulative lifetime loss. Neither low-pressure cell
+meets the standing replication rule of one sign in every world with a mean
+larger than its spread. Pressure 1's apparently favourable -46.1 current-
+loss mean is mixed (+75.8, -7.3, -206.7) and smaller than its 118.6 standard
+deviation. Pressure 2 is mixed on both endpoints. Pressure 8 robustly harms
+both related-future acquisition and current lifetime loss.
+
+VERDICT: H35 is NOT SUPPORTED in the tested range. There is no reliable
+beneficial interior cell followed by deterioration, either in Phi or in total
+lifetime cost. "Large pressure hurts" is supported; the preregistered U-shape
+is not. H30 is likewise unsupported at every tested nonzero pressure, but this
+does not establish that every possible pressure or objective must fail.
+
+The mechanism remains unresolved. The earlier audit ruled against a clear
+loss of family discrimination or task-code sensitivity, leaving conditioning
+damage plausible, but H35 does not identify it. The next move should not be a
+finer sweep around a nonexistent positive cell; it requires a changed,
+independently justified objective or optimizer and a new prospective
+prediction.
+
+METHOD CORRECTION DURING SCORING: the first H35 scorer run silently used its
+60-step source default, whereas the valid V6 report had been invoked with 40
+steps. That changed absolute costs but not the signs. The scorer now defaults
+to 40, records the full evaluation protocol in the report, exposes related,
+unrelated, and within-family paired effects, and writes atomically before
+console presentation. Only the corrected 40-step report is interpreted.

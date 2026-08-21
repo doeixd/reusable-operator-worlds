@@ -75,6 +75,27 @@ def _mean_nested(cells: list[dict], key: str, metric: str,
     ]))
 
 
+def _paired_effect(baseline_cells: list[dict], pressure_cells: list[dict],
+                   task_set: str, support: int) -> dict[str, object]:
+    effects = []
+    for cell in pressure_cells:
+        base = next(reference for reference in baseline_cells
+                    if reference["world"] == cell["world"])
+        base_cost = np.mean([
+            task["prequential"] for task in base[task_set][str(support)]
+        ])
+        cell_cost = np.mean([
+            task["prequential"] for task in cell[task_set][str(support)]
+        ])
+        effects.append(float(base_cost - cell_cost))
+    return {
+        "mean": float(np.mean(effects)),
+        "per_world": effects,
+        "sd": float(np.std(effects)),
+        "worlds_positive": int(sum(value > 0 for value in effects)),
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("configs/v5_h72.yaml"))
@@ -87,7 +108,10 @@ def main() -> None:
     parser.add_argument("--pressures", type=int, nargs="+", default=[0, 1, 2, 8])
     parser.add_argument("--worlds", type=int, nargs="+", default=[0, 1, 2])
     parser.add_argument("--support", type=int, nargs="+", default=[1, 2, 4, 8])
-    parser.add_argument("--steps", type=int, default=60)
+    parser.add_argument(
+        "--steps", type=int, default=40,
+        help="adaptation steps; 40 matches the first valid V6 fertility result",
+    )
     parser.add_argument("--inner-lr", type=float, default=0.05)
     parser.add_argument("--slots", type=int, default=12)
     parser.add_argument("--output", type=Path,
@@ -153,6 +177,18 @@ def main() -> None:
         pressure_cells = [cell for cell in cells if cell["pressure"] == pressure]
         row: dict[str, object] = {
             "worlds": len(pressure_cells),
+            "adaptation": {
+                task_set: {
+                    metric: {
+                        str(support): _mean_nested(
+                            pressure_cells, task_set, metric, support)
+                        for support in args.support
+                    }
+                    for metric in ("prequential", "endpoint", "steps_to_target")
+                }
+                for task_set in ("related", "unrelated", "within")
+            },
+            # Compatibility aliases for the primary related-future curves.
             "related": {
                 str(support): _mean_nested(
                     pressure_cells, "related", "prequential", support)
@@ -168,31 +204,33 @@ def main() -> None:
             ])),
         }
         if pressure != 0:
-            paired_phi = []
             current_delta = []
             for cell in pressure_cells:
                 base = next(reference for reference in baseline_cells
                             if reference["world"] == cell["world"])
-                base_cost = np.mean([
-                    task["prequential"]
-                    for task in base["related"][str(primary_support)]
-                ])
-                cell_cost = np.mean([
-                    task["prequential"]
-                    for task in cell["related"][str(primary_support)]
-                ])
-                paired_phi.append(float(base_cost - cell_cost))
                 current_delta.append(float(
                     cell["current_prequential_loss"]
                     - base["current_prequential_loss"]
                 ))
+            effects = {
+                task_set: _paired_effect(
+                    baseline_cells, pressure_cells, task_set, primary_support)
+                for task_set in ("related", "unrelated", "within")
+            }
             row.update({
-                "phi_related": float(np.mean(paired_phi)),
-                "phi_per_world": paired_phi,
-                "phi_sd": float(np.std(paired_phi)),
-                "worlds_positive": int(sum(value > 0 for value in paired_phi)),
+                "paired_effects": effects,
+                "phi_related": effects["related"]["mean"],
+                "phi_unrelated": effects["unrelated"]["mean"],
+                "phi_within": effects["within"]["mean"],
+                "phi_per_world": effects["related"]["per_world"],
+                "phi_sd": effects["related"]["sd"],
+                "worlds_positive": effects["related"]["worlds_positive"],
                 "current_loss_delta_per_world": current_delta,
                 "current_loss_delta_mean": float(np.mean(current_delta)),
+                "current_loss_delta_sd": float(np.std(current_delta)),
+                "current_loss_worlds_improved": int(sum(
+                    value < 0 for value in current_delta
+                )),
             })
         summary[str(pressure)] = row
 
@@ -202,25 +240,63 @@ def main() -> None:
         and summary[str(pressure)]["worlds_positive"] == len(args.worlds)
         and summary[str(pressure)]["phi_related"] > summary[str(pressure)]["phi_sd"]
     ]
+    lifetime_beneficial = [
+        pressure for pressure in pressures if pressure != 0
+        and summary[str(pressure)]["current_loss_delta_mean"] < 0
+        and summary[str(pressure)]["current_loss_worlds_improved"] == len(args.worlds)
+        and abs(summary[str(pressure)]["current_loss_delta_mean"])
+        > summary[str(pressure)]["current_loss_delta_sd"]
+    ]
+    lifetime_harmful = [
+        pressure for pressure in pressures if pressure != 0
+        and summary[str(pressure)]["current_loss_delta_mean"] > 0
+        and summary[str(pressure)]["current_loss_worlds_improved"] == 0
+        and summary[str(pressure)]["current_loss_delta_mean"]
+        > summary[str(pressure)]["current_loss_delta_sd"]
+    ]
+    phi_nonmonotonic = bool(
+        beneficial
+        and any(summary[str(later)]["phi_related"] < 0
+                for later in pressures if later > min(beneficial))
+    )
+    lifetime_u_shape = bool(
+        lifetime_beneficial
+        and any(later in lifetime_harmful
+                for later in pressures if later > min(lifetime_beneficial))
+    )
     result = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "estimand": "paired ordinary-minus-pressure cumulative adaptation-trajectory cost",
+        "evaluation_protocol": {
+            "worlds": args.worlds,
+            "support": args.support,
+            "adaptation_steps": args.steps,
+            "inner_lr": args.inner_lr,
+            "sigma": 0.1,
+        },
         "primary_support": primary_support,
         "pressures": pressures,
         "beneficial_pressures": beneficial,
-        "h35_nonmonotonic_supported": bool(
-            beneficial
-            and any(summary[str(later)]["phi_related"] < 0
-                    for later in pressures if later > min(beneficial))
-        ),
+        "lifetime_beneficial_pressures": lifetime_beneficial,
+        "lifetime_harmful_pressures": lifetime_harmful,
+        "h35_phi_nonmonotonic_supported": phi_nonmonotonic,
+        "h35_lifetime_u_shape_supported": lifetime_u_shape,
+        "h35_nonmonotonic_supported": phi_nonmonotonic and lifetime_u_shape,
         "summary": summary,
         "sources": sources,
         "cells": cells,
     }
 
-    print("H35 PRESSURE CURVE — positive Phi means cheaper future acquisition")
+    # Commit the complete report atomically before presentation. A console
+    # encoding failure must not discard a finished scientific computation.
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    temporary = args.output.with_suffix(args.output.suffix + ".tmp")
+    temporary.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    temporary.replace(args.output)
+
+    print("H35 PRESSURE CURVE - positive Phi means cheaper future acquisition")
     print(f"{'outer':>7} {'Phi k=1':>12} {'positive':>10} "
-          f"{'current Δ':>12} {'related k=1':>14}")
+          f"{'current delta':>12} {'related k=1':>14}")
     for pressure in pressures:
         row = summary[str(pressure)]
         phi = 0.0 if pressure == 0 else row["phi_related"]
@@ -229,13 +305,10 @@ def main() -> None:
         current = 0.0 if pressure == 0 else row["current_loss_delta_mean"]
         print(f"{pressure:>7} {phi:>12.3f} {positive:>10} "
               f"{current:>12.1f} {row['related'][str(primary_support)]:>14.3f}")
-    print(f"H35 non-monotonic optimum: "
-          f"{'SUPPORTED' if result['h35_nonmonotonic_supported'] else 'NOT SUPPORTED'}")
-
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    temporary = args.output.with_suffix(args.output.suffix + ".tmp")
-    temporary.write_text(json.dumps(result, indent=2), encoding="utf-8")
-    temporary.replace(args.output)
+    print(f"H35 Phi optimum: "
+          f"{'SUPPORTED' if phi_nonmonotonic else 'NOT SUPPORTED'}")
+    print(f"H35 lifetime-cost U-shape: "
+          f"{'SUPPORTED' if lifetime_u_shape else 'NOT SUPPORTED'}")
 
 
 if __name__ == "__main__":
