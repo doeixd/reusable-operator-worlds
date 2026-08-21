@@ -34,9 +34,9 @@ PASS_RATIO = 1.5
 ALPHA_ZEROED_MIN = 1.25
 BOOT = 10_000
 BOOT_SEED = (700, 39)
-PREDICTED = {"E1_mean_D": (0.8, 2.2), "E2_mean_R": (1.2, 1.8), "E2_fraction": (0.55, 0.75),
+PREDICTED = {"E1_mean_D": (0.8, 2.2), "E2_geomean_R": (1.2, 1.8),
              "E3_mean_L": (-2000.0, -500.0), "E4_mean_F": (0.65, 0.90)}
-E2_FRACTION_MIN = 0.5
+E2_UPPER = 1.8  # Amendment 1: CI of the geometric mean must lie below this
 E5_MIN_WORLDS = 27
 REQUIRED = ("model.pt", "summary.json", "rho_profile.json", "fingerprint.json",
             "config.yaml", "history.pt")
@@ -198,32 +198,41 @@ def main() -> None:
     E1 = estimand("E1", D, lambda m: m > 0, "E1_mean_D", ci_excludes=0.0)
     E3 = estimand("E3", L, lambda m: m < 0, "E3_mean_L", ci_excludes=0.0)
     E4 = estimand("E4", F, lambda m: m < 1, "E4_mean_F", ci_excludes=1.0)
+    # Amendment 1: E2 is the geometric mean of R_M with its bootstrap CI
+    # below 1.8 and its point estimate inside [1.2, 1.8]; the 1.5x fraction
+    # is a continuity statistic against census C0 and decides nothing.
+    z = np.log(R_M)
+    geomean = float(np.exp(z.mean()))
+    zlo, zhi = bootstrap_ci(z, rng)
+    geo_ci = [float(np.exp(zlo)), float(np.exp(zhi))]
+    plo, phi = PREDICTED["E2_geomean_R"]
     fraction = float(np.mean(R_M <= PASS_RATIO))
     mean_R = float(R_M.mean())
-    E2 = {"fraction_le_1_5": fraction, "fraction_rule_pass": fraction >= E2_FRACTION_MIN,
-          "predicted_fraction": PREDICTED["E2_fraction"],
-          "fraction_in_predicted": PREDICTED["E2_fraction"][0] <= fraction <= PREDICTED["E2_fraction"][1],
-          "mean_R": mean_R, "mean_R_ci95": list(bootstrap_ci(R_M, rng)),
-          "predicted_mean": PREDICTED["E2_mean_R"],
-          "mean_in_predicted": PREDICTED["E2_mean_R"][0] <= mean_R <= PREDICTED["E2_mean_R"][1],
+    E2 = {"geomean_R": geomean, "geomean_ci95": geo_ci,
+          "predicted_interval": [plo, phi],
+          "in_predicted_interval": bool(plo <= geomean <= phi),
+          "ci_below_upper": bool(geo_ci[1] < E2_UPPER),
+          "continuity_fraction_le_1_5": fraction,
+          "arithmetic_mean_R": mean_R, "arithmetic_mean_ci95": list(bootstrap_ci(R_M, rng)),
           "per_world": R_M.tolist()}
-    E2["pass"] = bool(E2["fraction_rule_pass"] and E2["mean_in_predicted"])
-    E2["partial"] = bool(E2["fraction_rule_pass"] and not E2["mean_in_predicted"])
+    E2["pass"] = bool(E2["in_predicted_interval"] and E2["ci_below_upper"])
+    E2["partial"] = bool(E2["ci_below_upper"] and not E2["in_predicted_interval"])
     used_worlds = int(np.sum(U >= ALPHA_ZEROED_MIN))
     E5 = {"worlds_used": used_worlds, "required": E5_MIN_WORLDS, "pass": used_worlds >= E5_MIN_WORLDS,
           "per_world": U.tolist()}
     core = E1["pass"] and E3["pass"] and E4["pass"] and E5["pass"]
     core_partial = (E1["sign_pass"] and E1["ci_excludes_null"] and E3["sign_pass"] and E3["ci_excludes_null"]
                     and E4["sign_pass"] and E4["ci_excludes_null"] and E5["pass"])
-    if core_partial and E2["fraction_rule_pass"]:
-        verdict = "CONFIRMED" if core and E2["pass"] else "CONFIRMED (with PARTIAL estimands)"
+    if core_partial and E2["pass"]:
+        verdict = "CONFIRMED" if core else "CONFIRMED (with PARTIAL estimands)"
     elif core_partial:
         verdict = "CONFIRMED-RELATIVE" if core else "CONFIRMED-RELATIVE (with PARTIAL estimands)"
     else:
         verdict = "FAILED"
     partials = [n for n, e in (("E1", E1), ("E2", E2), ("E3", E3), ("E4", E4)) if e.get("partial")]
     report = {
-        "frozen_plan": "H39_CONFIRMATION_PLAN.md", "status": "SEALED CONFIRMATION seeds 700-729",
+        "frozen_plan": "H39_CONFIRMATION_PLAN.md (Amendment 1)",
+        "scope": "existence and use, not discovery", "status": "SEALED CONFIRMATION seeds 700-729",
         "git_commit": git_commit(),
         "protocol": {"seeds": SEEDS, "pass_ratio": PASS_RATIO, "alpha_zeroed_min": ALPHA_ZEROED_MIN,
                      "bootstrap": {"resamples": BOOT, "seed": list(BOOT_SEED)},
@@ -238,7 +247,8 @@ def main() -> None:
     tmp.write_text(json.dumps(report, indent=2), encoding="utf-8")
     os.replace(tmp, args.output)
     print(f"E1 mean D {E1['mean']:.3f} CI {E1['ci95']} pass={E1['pass']} partial={E1['partial']}")
-    print(f"E2 fraction {fraction:.3f} mean R {mean_R:.3f} CI {E2['mean_R_ci95']} pass={E2['pass']} partial={E2['partial']}")
+    print(f"E2 geomean R {geomean:.3f} CI {geo_ci} (arith {mean_R:.3f}; C0-continuity fraction<=1.5 {fraction:.3f}) "
+          f"pass={E2['pass']} partial={E2['partial']}")
     print(f"E3 mean L {E3['mean']:.1f} CI {E3['ci95']} pass={E3['pass']} partial={E3['partial']}")
     print(f"E4 mean F {E4['mean']:.3f} CI {E4['ci95']} pass={E4['pass']} partial={E4['partial']}")
     print(f"E5 used {used_worlds}/30 pass={E5['pass']}")
