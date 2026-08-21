@@ -2812,3 +2812,33 @@ Recorded the verdict and exploratory finding in `PREDICTIONS.md` and the
 lessons in `notes/learnings.txt`. Next: a successor plan must specify how a
 schema is obtained other than post hoc from the final residual population;
 nothing is licensed until it is frozen.
+
+# 2026-08-21 — REVIEW 60 FILED; H39 WORLD-0 JOINT-FORMATION PILOT FROZEN AND LAUNCHED
+
+Filed review 60 (`reviews/reviewer-feedback-60.txt`, indexed). Froze
+`H39_PILOT_PLAN.md` (`effaf6b`) and registered it in `check_prereg.py`. Two
+amendments were appended and re-frozen before any pilot artifact was read:
+
+- Amendment 1 (`189b4cb`): "exact-null eps at birth" is unrealizable — a
+  scratch smoke showed alpha and eps norms exactly 0.0 and identical loss for
+  a=2 and a=8, because `u.tanh(vz+b)` is stationary at zero and
+  `dL/dalpha = W^T dL/dr` vanishes there. eps keeps the ordinary 1e-3 init.
+- Amendment 2 (`99e3c73`): `novel_family_tasks` are members of two families
+  the lifetime NEVER sees, all family operators sharing one rank-2 subspace
+  at r_meta=1; the per-family "grouped" arm is ill-posed and withdrawn. The
+  primary arm is pooled a=2 (the oracle FORM); pooled a=8 is secondary. A
+  correction about the word "sibling" was appended to `PREDICTIONS.md`; no
+  census number changes.
+
+Implemented `FactorizedLifecycleLearner` (`residual = W alpha + eps`, all
+residual readers routed through a new base-class `effective_residual`
+accessor), a `factorized` model kind with complete provenance records and
+resume refusal, a read-only history snapshot hook, unit tests including a
+save/load functional-equivalence guard with a failing companion, a
+bounded-pool launcher, and `score_h39_pilot.py`. Full suite: 169 tests OK.
+
+The ordinary history rerun reproduced the V6 world-0 loss exactly
+(-191,906.786). The first grouped cell died at its first sleep with a
+transient 3.66 MiB Windows allocation failure (no partial output). The a=8
+pooled cell completed (-191,446.8). The primary a=2 cell is running; no
+pilot endpoint has been read.
