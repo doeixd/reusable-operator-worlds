@@ -2909,3 +2909,14 @@ slots with the single-slot state-dict layout unchanged (tests: two-slot at
 alpha=0 equals ordinary bitwise; second slot gets gradient), added
 `--pslot-count`, launcher cells, and `score_h39d_capacity.py`. Full suite OK.
 12 cells running; none read.
+
+# 2026-08-21 — H39d SCORED: VERDICT A (MARGINAL) VIA TWO-SLOT K=32
+
+12/12 cells complete, zero failures. `score_h39d_capacity.py` first crashed
+serializing a two-slot alpha (no report written; flatten fix, no numerics
+changed) and then completed: `reports/h39d_capacity.json`. Single-slot K =
+32 / 64 are flat against K = 16 (means 1.59 / 1.57 vs 1.56); two slots at
+K = 32 reach 1.27 / 1.74 / 1.36 and pass the fertile rule in worlds 0 and
+2. Frozen verdict A, recorded with explicit marginality caveats in
+`PREDICTIONS.md`; it licenses only the writing of a confirmation plan on
+seeds 700-729, which are not opened. Learnings appended.

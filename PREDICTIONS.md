@@ -4311,3 +4311,48 @@ or multi-slot development plan, NOT confirmation. Seeds 700-729 remain
 closed. The gap has fallen from 3.5x (post-hoc census) / 4.2x (residual
 schema) to a three-world mean of 1.56x at K=16 with no sign of saturation
 between K=8 and K=16.
+
+# H39d RESULT (2026-08-21): VERDICT A VIA THE TWO-SLOT ARM; SINGLE SLOT SATURATES
+
+Plan `H39D_CAPACITY_PLAN.md` frozen at `c6b1b7b`, no amendments. Report
+`reports/h39d_capacity.json`. 12/12 cells completed with zero failures;
+anchors reproduced to 1e-12; every cell passed fail-closed non-vacuity
+(both slots' argument matrices moved, both slots' alphas nonzero, alpha
+moved in every fit). The first scorer invocation crashed on serializing a
+two-slot alpha before writing any report; the fix (flatten) touched no
+numerics.
+
+Alpha-only k=128 ratio to ordinary (worlds 0 / 1 / 2; mean):
+
+    P16 (H39c)  1.75 / 1.58 / 1.35   1.56
+    P32         1.74 / 1.56 / 1.47   1.59
+    P64         1.71 / 1.54 / 1.45   1.57
+    M2K16       1.38 / 1.79 / 1.60   1.59
+    M2K32       1.27 / 1.74 / 1.36   1.46   <- fertile in worlds 0 and 2
+
+Every arm passes parity and the functional usage criterion (alpha-zeroed
+NMSE ratios 2.4-4.4); present-task loss improves in every cell, most for the
+two-slot arms (M2K32: -1,991 / -975 / -1,162 nats); the full interface beats
+ordinary in 12/12 cells (0.68-0.87x).
+
+Decision rules: fertile_M2K32 TRUE (2/3 worlds <= 1.5 with robustness and
+usage). Single-slot TREND holds in 2/3 worlds but is essentially FLAT
+(means 1.56 -> 1.59 -> 1.57): the single linear-in-U slot has saturated at
+K >= 16. SLOT_STRUCTURE is NOT supported (M2K16 < P32 in 1/3 worlds; M2K32
+< P64 in 2/3). Improvement of the best mean over H39c: +0.104.
+
+Verdict by the frozen table: **A**. Per the plan this licenses only the
+WRITING of a frozen confirmation plan on seeds 700-729 around M2K32, with
+the frozen-direction control and a parity gate. Seeds 700-729 are NOT
+opened by this entry.
+
+CAVEATS, registered with the verdict: (1) A is met at the minimum — one arm,
+two worlds, margins 0.23 and 0.14 below threshold, and world 1 is WORSE
+under both two-slot arms (1.74-1.79) than under any single-slot arm. (2)
+The +0.104 improvement clears the P+ line by 0.004. (3) The second slot's
+contribution is not monotone in K per world (M2K16 loses to P32 in two
+worlds). (4) M2K32 adds 8,192 shared scalars to a 3,576-scalar basis; D* is
+reported, not gated. A confirmation plan is the correct instrument for
+exactly this situation: the development evidence is positive but marginal,
+and only a sealed 30-world block with a preregistered interval can decide
+whether the two-slot effect is real.

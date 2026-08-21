@@ -3367,3 +3367,33 @@ usage criterion; route statistics are diagnostics.
 NEXT STEP IS DEVELOPMENT, NOT CONFIRMATION. One world passes 1.5x at K=16
 and the curve has not flattened. The licensed move is K = 32 / 64 and a
 multi-slot variant on worlds 0-2, frozen first.
+
+
+================================================================================
+H39d: THE SINGLE LINEAR SLOT SATURATES AT K~16; A SECOND SLOT CROSSES 1.5x (2026-08-21)
+================================================================================
+
+Single-slot K = 16/32/64 gives three-world mean ratios 1.56/1.59/1.57 — a
+plateau, not a curve. Two parameterized slots at K = 32 each reach 1.46
+(1.27/1.74/1.36) and pass the registered gate in two worlds; verdict A at
+the minimum margin (`reports/h39d_capacity.json`). Present-task loss keeps
+improving with capacity everywhere (up to -1,991 nats), so the plateau is
+in FUTURE expressibility through alpha, not in present fit.
+
+WHAT SATURATES AND WHAT DOES NOT. A single operator linear in U with more
+directions stops helping the unseen family at K ~ 16; a second routed
+operator helps in two of three worlds and HURTS in the third. The
+structural variable that moved the endpoint is how many routed objects
+carry an argument, not how many directions one object carries — but the
+evidence is marginal and world-dependent. This is the situation sealed
+confirmation exists for.
+
+DO NOT READ A MARGINAL A AS A RESULT. Everything that licenses the next
+step is within ~0.1-0.2 of its threshold. Write the confirmation plan with
+an interval, the frozen-direction control, a parity gate, and the
+registered per-world rule, and let seeds 700-729 decide.
+
+SERIALIZATION IS PART OF THE SCORER. A 2xK alpha crashed `float(a)` after
+two arms of fits; the atomic report write meant nothing false was written,
+and the fix touched no numerics. Keep report writes atomic and keep
+non-numeric bugs unable to leave partial answers on disk.

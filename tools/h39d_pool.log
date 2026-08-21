@@ -1,0 +1,13 @@
+cap_p32/world_0: exit=0
+cap_p64/world_0: exit=0
+cap_m2k16/world_0: exit=0
+cap_m2k32/world_0: exit=0
+cap_p32/world_1: exit=0
+cap_p64/world_1: exit=0
+cap_m2k16/world_1: exit=0
+cap_m2k32/world_1: exit=0
+cap_p32/world_2: exit=0
+cap_p64/world_2: exit=0
+cap_m2k16/world_2: exit=0
+cap_m2k32/world_2: exit=0
+H39_PILOT_DONE

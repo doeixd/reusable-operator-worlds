@@ -1,0 +1,22 @@
+all 12 cells and 3 ordinary artifacts validated
+world 0: anchor 0.02226 reproduced; ordinary slot-12 mass 0.0971
+  p32: loss gap -1339.1, alpha-only ratio 1.742 (robust 1.728), full 0.780, mass 0.137 (ordinary 0.097), alpha-zeroed 2.72, used=True
+  p64: loss gap -1435.7, alpha-only ratio 1.706 (robust 1.689), full 0.771, mass 0.124 (ordinary 0.097), alpha-zeroed 2.67, used=True
+  m2k16: loss gap -1863.1, alpha-only ratio 1.375 (robust 1.370), full 0.676, mass 0.168 (ordinary 0.097), alpha-zeroed 4.32, used=True
+  m2k32: loss gap -1991.4, alpha-only ratio 1.272 (robust 1.265), full 0.710, mass 0.157 (ordinary 0.097), alpha-zeroed 4.43, used=True
+world 1: anchor 0.01539 reproduced; ordinary slot-12 mass 0.1147
+  p32: loss gap -759.6, alpha-only ratio 1.556 (robust 1.535), full 0.784, mass 0.116 (ordinary 0.115), alpha-zeroed 2.41, used=True
+  p64: loss gap -651.5, alpha-only ratio 1.541 (robust 1.524), full 0.768, mass 0.116 (ordinary 0.115), alpha-zeroed 2.49, used=True
+  m2k16: loss gap -825.8, alpha-only ratio 1.791 (robust 1.772), full 0.871, mass 0.126 (ordinary 0.115), alpha-zeroed 3.37, used=True
+  m2k32: loss gap -974.6, alpha-only ratio 1.741 (robust 1.726), full 0.823, mass 0.122 (ordinary 0.115), alpha-zeroed 3.50, used=True
+world 2: anchor 0.01675 reproduced; ordinary slot-12 mass 0.1168
+  p32: loss gap -845.6, alpha-only ratio 1.465 (robust 1.454), full 0.732, mass 0.189 (ordinary 0.117), alpha-zeroed 3.17, used=True
+  p64: loss gap -962.8, alpha-only ratio 1.447 (robust 1.430), full 0.681, mass 0.159 (ordinary 0.117), alpha-zeroed 2.80, used=True
+  m2k16: loss gap -1046.6, alpha-only ratio 1.599 (robust 1.587), full 0.809, mass 0.119 (ordinary 0.117), alpha-zeroed 3.78, used=True
+  m2k32: loss gap -1162.0, alpha-only ratio 1.355 (robust 1.342), full 0.757, mass 0.151 (ordinary 0.117), alpha-zeroed 4.19, used=True
+p32: ratios [1.742, 1.556, 1.465] mean 1.588 loss gaps [-1339, -760, -846] used [True, True, True] fertile=False
+p64: ratios [1.706, 1.541, 1.447] mean 1.565 loss gaps [-1436, -651, -963] used [True, True, True] fertile=False
+m2k16: ratios [1.375, 1.791, 1.599] mean 1.589 loss gaps [-1863, -826, -1047] used [True, True, True] fertile=False
+m2k32: ratios [1.272, 1.741, 1.355] mean 1.456 loss gaps [-1991, -975, -1162] used [True, True, True] fertile=True
+H39c K=16 mean 1.560; best m2k32 improvement +0.104; trend worlds [0, 1]; slot_structure=False {'m2k16_lt_p32': [0], 'm2k32_lt_p64': [0, 2]}
+VERDICT A: some arm is fertile on >= 2/3 worlds: licenses WRITING a confirmation plan (seeds 700-729, not opened)
