@@ -1,0 +1,159 @@
+# H39 world-0 pilot: joint-formation existence test
+
+Status: frozen before any learner code, launcher, scorer, or lifetime is
+written or run. EXPLORATORY, one development world (seed 0). It is not the
+H39 gate (`H39_EXISTENCE_PLAN.md`, which remains NOT RUN after census C0),
+opens no sealed seeds, and licenses nothing by itself except, on branch A,
+the writing of a frozen three-world H39 plan with a matched-budget control.
+Registered from review 60 (`reviews/reviewer-feedback-60.txt`).
+
+# The one question
+
+Census C0 established that the finished ordinary learner does not contain the
+held-out siblings in the affine span of the objects it retained — at any
+rank up to the full span (2.2-3.1x the free-residual endpoint). The pilot asks
+the complementary question:
+
+    Can a parameterized family representation, FORMED ONLINE while the family
+    tasks are learned under the ordinary objective, preserve a low-dimensional
+    argument space in which an unseen sibling is cheaply expressible?
+
+No prospective loss is used anywhere. The only intervention is the
+representation architecture.
+
+# Arms (all world 0, `configs/v5_h72.yaml`, V6 generator arguments verbatim
+from `tools/run_v6_clean.sh`, `--arm ordinary`, model seeds unchanged)
+
+- **O** ordinary with history snapshot. A rerun of the ordinary world-0
+  lifetime with a read-only hook that records every task's residual vector
+  at the moment the task completes, before any sleep can retire it. O must
+  reproduce `artifacts/v6_clean/ordinary/world_0/lifecycle` exactly:
+  identical cumulative prequential loss and bitwise-identical `model.pt`
+  tensors. If it does not, the snapshot hook is not read-only and the pilot
+  stops.
+- **F-grouped** (primary). `residual_i = W_{s(i)} alpha_i + eps_i`. One
+  schema `W_s in R^{198 x 2}` per teacher family, `s(i)` supplied by ORACLE
+  family grouping (`MetaFamilySpec.family_of`), plus one extra schema for
+  pre-onset tasks. `alpha_i in R^2`. This is explicit and registered: the
+  arm tests whether the substrate can REPRESENT the decomposition, not
+  whether it can discover the grouping. No teacher operator values, family
+  parameters, or subspaces are supplied.
+- **F-pooled** (secondary). One schema `W in R^{198 x 8}`, `alpha_i in R^8`,
+  no grouping information. Reported beside F-grouped; cannot change the
+  branch.
+
+No matched-budget generic control is run in the pilot; that is H39 proper.
+
+## Shared architecture details
+
+- `W` init: Gaussian, std `1e-2 / sqrt(a)`, from
+  `SeedSequence([39001, 0, schema_index])`; global learning rate 0.003,
+  weight decay 1e-4 (the shared group).
+- `alpha_i`: zero-initialized, task learning rate 0.05, no weight decay.
+- `eps_i`: EXACT-NULL AT BIRTH — initialized to exactly zero rather than the
+  ordinary learner's `1e-3` random state — under the unchanged residual
+  learning rate 0.01 and residual penalty 0.01. It is never forced to stay
+  zero; a hard gate is H40. The ordinary arm keeps its own initialization.
+- Everything that reads a task's residual (forward, promotion fitting,
+  lifecycle snapshots, retirement) reads the EFFECTIVE residual
+  `W alpha + eps`. Routes, basis, PROMOTE, sleeps, replay: unchanged.
+- Every arm records its complete intervention record (`model`, schema dim,
+  grouping, schema seed, history flag) in `rho_profile.json`; resume refuses
+  a mismatched record.
+
+# Primary endpoint: alpha-only future opportunity
+
+After training, freeze everything. For each of the two held-out siblings
+(`novel_family_tasks`, never trained), with `eps_new = 0` and FROZEN, fit
+only a fresh route code and `alpha_new` (in the sibling's oracle family
+schema for F-grouped; the single schema for F-pooled) on support `k=128`
+under protocol B1 (Adam 0.01, 2,000 updates, fixed query checkpoints, query
+labels never select anything), exactly as census C0 did. Robustness: Adam
+0.05 and LBFGS (lr 1.0, max_iter 500, history 100, strong Wolfe) on the same
+state.
+
+    PASS iff  mean alpha-only k=128 B1 scaled endpoint over the two siblings
+              <= 1.5 x the ordinary world-0 V6R k=128 endpoint (0.02226),
+              AND at least one robustness optimizer also satisfies 1.5x.
+
+The ordinary anchor is re-derived by the scorer from
+`reports/v6r_adaptation_geometry.json` and must be reproduced to 1e-12 by a
+fresh ordinary fit before any F value is read.
+
+Secondary (reported, non-deciding): full task-local fit (code + alpha +
+eps) at `k=128` and `k=1`; alpha-only at `k=1`.
+
+# Channel-use diagnostics (deciding for branch A only)
+
+On the final F artifact, over the 64 trained family tasks, evaluation set,
+NMSE under: full model; `W alpha` zeroed; `eps` zeroed; both zeroed. Define
+
+    schema_share = (NMSE[W alpha zeroed] - NMSE[full])
+                   / (NMSE[both zeroed] - NMSE[full])
+
+Report `D*` proxies as 8-bit scalar counts for `W`, all `alpha`, all live
+`eps`; and `alpha` and `eps` norms. Branch A requires `schema_share >= 0.5`;
+an alpha-only pass with `schema_share < 0.5` is flagged ACCIDENTAL and
+resolves to branch B*, not A.
+
+# Historical-span diagnostic (O arm; reported, does not decide the branch)
+
+From O's history, PCA the 64 pre-retirement family residual vectors at rank
+8, 16, and the maximum available, and run the census alpha-only fit on the
+siblings at `k=128`. Registered reading, against the 1.5x threshold:
+
+- historical passes, final (census C0) fails: retirement/lifecycle discarded
+  variation directions;
+- both fail: ordinary wake never formed those directions.
+
+Reviewer's prior: the latter.
+
+# Present-task parity
+
+F-grouped cumulative prequential Gaussian log loss over the 72 lifetime
+tasks is not worse than O's by more than 2,000 nats (the single-world
+tolerance of `H39_EXISTENCE_PLAN.md`).
+
+# Branches (fixed; apply in order to F-grouped)
+
+- **D — restrictive ABI**: parity fails. Fertility untested; points to a
+  richer `S_theta(alpha)` rather than linear `W alpha`.
+- **A — joint schema works**: parity passes, alpha-only PASS, schema_share
+  >= 0.5. Licenses writing a frozen three-world H39 plan with the G control.
+- **B\* — accidental**: parity passes, alpha-only PASS, schema_share < 0.5.
+  Treated as B for licensing.
+- **C — private relearning only**: parity passes, alpha-only FAILS, and the
+  full (code + alpha + eps) k=128 fit is within 1.2x of the ordinary
+  endpoint. The architecture preserved relearning, not a fertile argument.
+- **B — schema describes the past, not the neighbourhood**: parity passes,
+  alpha-only FAILS, full fit > 1.2x ordinary. Do not proceed to H40-H44;
+  the next direction is nonlinear parameterized operators.
+
+Reviewer's registered priors for F-grouped: A ~50%, "helps but substantial
+gap remains" ~30%, "linear schema fundamentally insufficient" ~20%.
+
+# Non-vacuity (all must hold before a branch is read)
+
+- O reproduces the existing ordinary artifact bitwise.
+- Each `W_s` that received any task moved from initialization (relative
+  Frobenius change > 1e-3).
+- In every alpha-only fit, `alpha` displacement is nonzero and support loss
+  falls by more than 1% from initialization; the k=0 and final query
+  endpoints differ.
+- F-grouped and F-pooled are not functionally identical on a common probe.
+
+# Anti-fooling guards
+
+Same support/query arrays, initializations, and optimizer protocols as V6R
+and census C0; support-only optimization; fixed budgets; complete learner
+reconstruction (schemas, alphas, schema assignment, references, retirement);
+fresh probe IDs removed after every fit; fail closed on missing artifacts,
+mismatched records, anchor mismatch, or non-finite primary cells; report
+written atomically with executed steps, learning rates, supports, seeds,
+sigma, and git commit, before any console summary.
+
+# Not authorized
+
+Worlds 1-2, a generic-channel control, H40/H41/H44 instruments, any
+prospective or sibling-replay pressure, learner-discovered grouping, or any
+confirmatory seed.

@@ -2567,3 +2567,27 @@ check, in order, present-task parity, D*, near-oracle future endpoint,
 few-shot adaptation, related-specificity, α identifiability, exact-null
 refusal, and schema economics — only then ask whether the learner can
 discover the decomposition itself.
+
+### [reviewer-feedback-60.txt](reviewer-feedback-60.txt)
+Response to census C0. Reads the max-rank calibration as the strong result:
+the finished ordinary learner does not contain nearby novel solutions in the
+affine span of what it retained, so "lost variation opportunity" predates
+V6's harmful intervention. Reframes the next run as a **joint-formation
+existence pilot** on world 0, not a rescue: same stream, ordinary objective,
+no prospective loss; the only intervention is the architecture
+r = Wα + ε with oracle family grouping explicitly allowed (represent, not
+discover), exact-null ε that is never forced to zero. Primary endpoint:
+α-only (ε_new = 0) abundant-support acquisition at the registered 1.5×
+threshold. Demands channel-use measurement (D* per channel, fraction of
+family computation carried by Wα) so ε cannot cheat, and a historical
+pre-retirement residual snapshot to separate "retirement discarded the
+directions" from "wake never formed them" (reviewer guesses the latter).
+Preregisters branches A (works → H39 licensed, then generic-channel
+control), B (fits the past, no coordinates for novelty → stop linear
+schemas, go nonlinear parameterized operators), C (works only via large
+ε_new → not fertile), D (cannot match present tasks → restrictive ABI).
+Priors shifted down: A ~50%, partial ~30%, insufficient ~20%. Conceptual
+frame: extensional vs intensional compression — `rotate(angle)` versus
+{rotate10, rotate20, rotate30}; a learned primitive P(α) must contain
+useful unobserved instances, which is systematic generalization in the
+primitive itself.

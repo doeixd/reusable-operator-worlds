@@ -1,0 +1,128 @@
+Reviewer feedback 60 — received 2026-08-21, after census C0 (H39 NOT RUN)
+and its exploratory max-rank calibration.
+
+----------------------------------------------------------------------
+
+I agree with your recommendation, with one important refinement: the next
+run should be framed as a JOINT-FORMATION EXISTENCE PILOT, not as a rescue
+of the failed post-hoc H39 construction.
+
+The census has established something quite useful:
+
+    The finished ordinary learner does not contain the nearby novel
+    solutions in the affine span of the objects it retained.
+
+The max-rank result makes that much stronger than "rank 8 was too small".
+And because this is already true for the ordinary learner, the "lost
+variation opportunity" problem predates the harmful V6 prospective
+intervention.
+
+What remains genuinely unknown is: can a schema preserve those directions
+if it is allowed to form while the tasks are being learned? That is the
+experiment I would run next.
+
+1. One world is appropriate — but make the question binary. World 0,
+explicitly exploratory, is enough for a feasibility test. Pilot hypothesis:
+online factorized formation can preserve a low-dimensional space in which
+an unseen sibling is cheaply expressible, even though no such space can be
+recovered post hoc from the ordinary learner. Same task stream/world and
+ordinary objective. Crucially, do NOT revive the prospective loss. The only
+substantive intervention should be the representation architecture:
+r_f = W alpha_f + eps_f, with W a slow shared schema learned jointly across
+observed family operators, alpha_f a small fast argument, eps_f exact-null
+private innovation. No teacher operator values. For an existence
+experiment, using oracle family grouping to determine which examples update
+the same structured mechanism is acceptable, as long as it is explicit:
+you're asking whether the substrate CAN REPRESENT the decomposition, not
+whether it can discover the grouping.
+
+2. Make the primary pilot endpoint alpha-only future opportunity. After
+training, freeze everything. For the genuinely held-out sibling, eps_new = 0
+and learn only alpha_new. Then repeat exactly the abundant-support
+acquisition measurement that killed the post-hoc census. Desired:
+L*_alpha-only <= 1.5 L*_ordinary, using the already registered threshold
+for continuity. That's the critical test. Not geometry. Not PCA capture. Not
+whether W looks like the teacher. Ask: did joint formation leave the next
+sibling economically reachable through a small argument?
+
+3. Also measure whether the architecture actually uses the schema.
+Otherwise it can cheat through eps. During training report D*(W), D*(alpha),
+D*(eps) and functional contribution from each channel — particularly the
+fraction of family computation carried by W alpha, or a causal ablation
+equivalent. If current tasks are solved almost entirely through private
+innovation and the held-out alpha happens to work by accident, that's not
+the mechanism. Conversely, don't demand eps = 0 during ordinary training;
+exact-null innovation should let the learner use private computation when
+genuinely necessary.
+
+4. Collect one extra diagnostic during the same fresh run. The census
+revealed an ambiguity around retirement: the final ordinary population is
+small because many residuals were retired into references. Cheaply snapshot
+the HISTORICAL pre-retirement family solutions. Then: if the historical span
+works but the final span fails, lifecycle/retirement discarded variation
+directions; if historical also fails, ordinary wake never formed those
+directions in the first place. My guess is the latter, given how flat the
+residual spectra are, but it is worth measuring.
+
+5. Preregister these failure branches.
+A. Joint schema works: current tasks competitive and L*_alpha-only,new near
+   the ordinary free-residual endpoint. Major positive: variation
+   opportunity must be preserved during representation formation; it cannot
+   necessarily be reconstructed afterward. Then full H39 is licensed; next
+   compare against an equally sized generic task-local channel.
+B. Current tasks fit, but alpha-only future still fails. Most informative
+   negative: W alpha + eps can describe the observed population but creates
+   no useful coordinates for nearby novelty. Do not proceed to H40-H44; look
+   seriously at nonlinear parameterized operators / conditional primitives.
+C. Future works only with a large eps_new. W alpha is not genuinely fertile;
+   the architecture merely preserved the ability to relearn privately. A
+   failure of the schema hypothesis even if total adaptation is good.
+D. The factorized learner cannot even match current-task performance. We
+   have not tested fertility; we have built an overly restrictive ABI.
+   Points toward a richer schema family S_theta(alpha) rather than linear
+   W alpha.
+
+6. My prediction has shifted. I am less confident than before this census
+that a simple linear schema will work. The strongest warning is the full
+available affine span at 2.2-3.1x the ordinary endpoint: the ordinary
+learner is not merely choosing the wrong low-rank projection; its solutions
+occupy a representation whose observed directions do not extrapolate to
+nearby novelty. Rough priors: jointly trained W alpha + eps materially
+improves alpha-only novelty, ~50%; helps but leaves a substantial gap,
+~30%; simple linear schema fundamentally insufficient, ~20%. Joint
+formation has a real chance because it changes the optimization trajectory
+rather than compressing an already-degenerate cloud. But I would not assume
+success.
+
+7. This illuminates the program-synthesis goal. The census is the neural
+analogue of a language whose existing programs cannot span the next natural
+program: compress everything seen, and the next nearby concept still lies
+outside closure(L) under the cheap transformations supported. No post-hoc
+compression of L fixes that. A future computational language must preserve
+PRODUCTIVE DIMENSIONS, not merely summarize realized programs. A learned
+primitive P(alpha) should not just compress observed instances; its
+parameter space should contain useful nearby instances that have not yet
+occurred — systematic generalization in the primitive itself.
+
+8. Two kinds of compression. EXTENSIONAL: compactly encode the computations
+actually observed (the ordinary learner / post-hoc schema). INTENSIONAL:
+learn a rule or parameterization describing a family of possible
+computations including unobserved ones — P(alpha); rotate(angle) rather
+than {rotate10, rotate20, rotate30}. The census suggests extensional
+compression alone is insufficient for the grand project. The held-out
+sibling tests whether the representation learned rotate(angle) or merely
+stored several rotations.
+
+9. If the pilot works the roadmap is clean: observed related computations
+-> jointly form P(alpha) -> new sibling => infer only alpha_new ->
+P_i(alpha_i) o P_j(alpha_j) -> program synthesis over parameterized
+primitives -> discover recurring program families -> M(beta), where even
+macros become parameterized abstractions.
+
+So yes: write and freeze a small one-world jointly-trained schema pilot
+answering exactly one question: can forcing a parameterized family
+representation to form online preserve a useful direction for a sibling
+that does not yet exist? Save every historical task solution during that
+same run. If yes, H39 gets a genuinely earned second life. If no, stop
+trying to extract linear schemas from these residuals and move toward a
+richer learned parameterized-operator representation.
