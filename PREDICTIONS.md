@@ -3021,3 +3021,62 @@ internally matched — same world, same architecture, same schedule, one
 knob — which is what the four-arm design needs. What is lost is the
 ability to quote V5's 0.19 as the ordinary baseline for R_effective; the
 V6 ordinary arm supplies its own.
+
+# V6.1 FIRST RESULT: H30 NOT SUPPORTED at this pressure (2026-08-21)
+
+Four arms x three worlds, unfrozen basis, oracle sibling selection.
+Fertility measured on an UNSEEN FAMILY from the same shared subspace,
+adapted by one standardized routine (Adam at the task learning rate, 60
+steps) from frozen shared parameters.
+
+Adaptation cost on related futures, by support size:
+
+| arm | k=1 | k=2 | k=4 | k=8 | k=16 |
+| --- | --- | --- | --- | --- | --- |
+| ordinary    | 0.47 | 0.26 | 0.20 | 0.18 | 0.13 |
+| replay      | 0.40 | 0.27 | 0.23 | 0.19 | 0.12 |
+| prospective | 0.42 | 0.24 | 0.23 | 0.18 | 0.12 |
+| supervised  | 0.50 | 0.30 | 0.23 | 0.18 | 0.12 |
+
+Phi at k=1, per world:
+
+    replay        +0.087, +0.029, +0.099   mean +0.072  sd 0.031  3/3 positive
+    prospective   +0.216, -0.173, +0.087   mean +0.043  sd 0.162  2/3 positive
+    supervised    +0.095, -0.216, +0.017   mean -0.035  sd 0.132  2/3 positive
+
+H30: NOT SUPPORTED. The prospective mean is positive but smaller than
+its own spread and one world reverses. On world 0 alone Phi_related was
++0.216, which I would have reported as a pass had I stopped there; it
+did not replicate.
+
+H31: not evaluable while H30 fails.
+
+The scorer's threshold has been tightened accordingly, and the change is
+recorded rather than silent: `Phi > 0` on a mean of three worlds is not
+a pass. It now requires every world to agree in sign AND the mean to
+exceed the spread. The earlier version printed PASS for +0.043 with
+sd 0.162.
+
+## What this does and does not say
+
+DOES NOT say prospective pressure fails. The intervention as run is
+weak: one hook per task, four inner steps, four outer steps, weight 1.0,
+and the resulting lifetime differs from ordinary by 54 nats in 191,907
+(0.03%). An intervention that barely moves the lifetime cannot be
+expected to move a downstream endpoint, and H35 already registers that
+the pressure has an optimum which this run does not attempt to find.
+
+DOES say the pipeline is now able to detect an effect and this
+configuration has none to detect. Three measurement failures had to be
+fixed before that sentence was true: a frozen basis that made every
+prospective gradient dead, a supervised arm whose penalty had no
+gradient into shared state, and a probe with no dynamic range -- first
+because the "future" tasks were tasks the lifetime had trained on, then
+because the adaptor moved nothing.
+
+NOTABLE: replay is the only arm positive in 3/3 worlds (+0.072, sd
+0.031). Weak, but it is the arm review 52 warned would deflate the
+result -- if merely seeing relatives suffices, the meta-objective is
+unnecessary. Registered follow-up: sweep the prospective weight before
+concluding anything about the mechanism, since the current weight is
+demonstrably too small to change the representation.

@@ -46,13 +46,13 @@ from row.experiments.learned_lifetime import _build_model
 from row.meta_world import MetaFamilySpec, generate_meta_world
 
 
-def load_learner(config, path: Path, slots: int):
+def load_learner(config, path: Path, slots: int, kind: str = "lifecycle"):
     local = replace(
         config,
         shared_residual_model=replace(
             config.shared_residual_model, operator_slots=slots),
     )
-    model = _build_model(local, "lifecycle")
+    model = _build_model(local, kind)
     state = torch.load(path / "model.pt", weights_only=True)["model_state_dict"]
     count = sum(1 for k in state if k.startswith("abstractions."))
     for index in range(count):

@@ -64,6 +64,8 @@ class MetaFamilySpec:
         r_meta: float = 0.0,
         subspace_rank: int = 2,
         family_onset: int = 8,
+        held_out_per_family: int = 1,
+        held_out_families: int = 2,
     ) -> None:
         if families < 1:
             raise ValueError("families must be positive")
@@ -88,6 +90,22 @@ class MetaFamilySpec:
         # not a property of the world.
         self.subspace_rank = int(subspace_rank)
         self.family_onset = int(family_onset)
+        # Extra members of each family, GENERATED BUT NEVER PLACED IN
+        # `world.tasks`. V6 measures whether a representation makes a
+        # related future task cheap to learn, and a "future" task the
+        # lifetime already trained on is not future: measured, such a
+        # task starts at 0.006 support loss and adaptation changes
+        # nothing, so every arm ties at the same saturated number.
+        self.held_out_per_family = int(held_out_per_family)
+        # Whole FAMILIES the lifetime never sees, drawn from the same
+        # shared subspace. A held-out member of a SEEN family turned out
+        # to be nearly free for every arm (0.005 support loss zero-shot,
+        # flat in support size), so it cannot discriminate. An unseen
+        # family is the honest future: its operator lies in the same
+        # functional subspace, so a representation that captured the
+        # subspace should acquire it cheaply and one that did not should
+        # not.
+        self.held_out_families = int(held_out_families)
 
     @property
     def total_tasks(self) -> int:
@@ -109,6 +127,8 @@ class MetaFamilySpec:
             "r_meta": self.r_meta,
             "subspace_rank": self.subspace_rank,
             "family_onset": self.family_onset,
+            "held_out_per_family": self.held_out_per_family,
+            "held_out_families": self.held_out_families,
             "total_tasks": self.total_tasks,
         }
 
@@ -144,7 +164,7 @@ def family_operators(config: WorldConfig, spec: MetaFamilySpec) -> tuple[Primiti
         return vector / norm if norm > 0 else vector
 
     operators = []
-    for family in range(spec.families):
+    for family in range(spec.families + spec.held_out_families):
         generator = _rng(config.seed, 62, family)
         coefficients = _unit(generator.normal(size=spec.subspace_rank))
         shared_part = _unit(coefficients @ shared_basis)
@@ -218,7 +238,73 @@ def generate_meta_world(config: WorldConfig, spec: MetaFamilySpec) -> World:
             )
         )
 
+    # Held-out family members: extra programs from an EXTENDED sampler,
+    # so the lifetime's own task list is bit-identical to a run with
+    # held_out_per_family = 0 and existing artifacts stay valid.
+    held_out: list[Task] = []
+    if spec.held_out_per_family:
+        extra = spec.families * spec.held_out_per_family
+        extended = replace(config, tasks=config.tasks + extra)
+        extra_programs = _sample_programs(extended)[config.tasks:]
+        extra_ids = _opaque_task_ids(extended)[config.tasks:]
+        for offset, (program, task_id) in enumerate(
+            zip(extra_programs, extra_ids, strict=True)
+        ):
+            family = offset % spec.families
+            task_library = (*library, operators[family])
+            steps = list(program.primitive_ids)
+            steps[config.program_length - 1] = len(task_library) - 1
+            program = replace(program, primitive_ids=tuple(steps))
+            index = config.tasks + offset
+            train_rng = _rng(config.seed, 30, index)
+            eval_rng = _rng(config.seed, 31, index)
+            train_x = train_rng.normal(size=(config.examples_per_task, config.state_dim))
+            eval_x = eval_rng.normal(size=(config.evaluation_examples, config.state_dim))
+            held_out.append(
+                Task(
+                    task_id=task_id,
+                    program=program,
+                    teacher_library=task_library,
+                    train_x=train_x,
+                    train_y=program.execute(task_library, train_x),
+                    eval_x=eval_x,
+                    eval_y=program.execute(task_library, eval_x),
+                )
+            )
+
+    novel: list[Task] = []
+    if spec.held_out_families:
+        extra = spec.held_out_families * spec.held_out_per_family
+        base = config.tasks + spec.families * spec.held_out_per_family
+        extended = replace(config, tasks=base + extra)
+        novel_programs = _sample_programs(extended)[base:]
+        novel_ids = _opaque_task_ids(extended)[base:]
+        for offset, (program, task_id) in enumerate(
+            zip(novel_programs, novel_ids, strict=True)
+        ):
+            operator = operators[spec.families + offset % spec.held_out_families]
+            task_library = (*library, operator)
+            steps = list(program.primitive_ids)
+            steps[config.program_length - 1] = len(task_library) - 1
+            program = replace(program, primitive_ids=tuple(steps))
+            index = base + offset
+            train_rng = _rng(config.seed, 30, index)
+            eval_rng = _rng(config.seed, 31, index)
+            train_x = train_rng.normal(size=(config.examples_per_task, config.state_dim))
+            eval_x = eval_rng.normal(size=(config.evaluation_examples, config.state_dim))
+            novel.append(
+                Task(
+                    task_id=task_id, program=program, teacher_library=task_library,
+                    train_x=train_x, train_y=program.execute(task_library, train_x),
+                    eval_x=eval_x, eval_y=program.execute(task_library, eval_x),
+                )
+            )
+
     world = World(config=config, library=library, tasks=tuple(tasks))
+    object.__setattr__(world, "novel_family_tasks", tuple(novel))
+    object.__setattr__(world, "held_out_family_tasks", tuple(held_out))
+    object.__setattr__(world, "held_out_family_index",
+                       tuple(i % spec.families for i in range(len(held_out))))
     object.__setattr__(world, "meta_family_spec", spec)
     object.__setattr__(world, "family_operators", operators)
     return world
