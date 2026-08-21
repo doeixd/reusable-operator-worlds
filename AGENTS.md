@@ -958,3 +958,9 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   exist, so a predicted M* ~ 20 is unobservable and half the worlds go
   silent rather than wrong. This is the horizon-grid bracketing rule
   from H19, applied one level up.
+- Check which side the TARGET belongs to before reading a comparison. A
+  whole-library economy test defined each task's target as the teacher
+  operator's own effect, so the teacher arm had zero residual by
+  construction and "won" 16x. Any ratio that large is a rigged
+  comparison, not a result. This is the same error class as V4.1's
+  total-variance tolerance and the raw-ablation counterfactual.

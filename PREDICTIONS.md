@@ -2428,3 +2428,47 @@ Registered before that test runs: I expect B. The learner's basis is
 fitted to its own residual structure and there is no gradient pressure
 anywhere in V3's PROMOTE toward the teacher's decomposition, so
 recovering it would be a coincidence rather than a consequence.
+
+# WHOLE-LIBRARY ECONOMY, FIRST ATTEMPT: INVALID INSTRUMENT, RESULT RETRACTED
+
+The run produced learner/teacher cost ratios of 14-17x, 0/6 worlds to
+the learner at both r_meta, which would read as B3 — "PROMOTE leaves
+enormous compression on the table". That reading is WITHDRAWN. The
+instrument is rigged and the number means nothing.
+
+THE FLAW. I defined each task's target as the innovation it needs at the
+family step, and took that from the world as
+`residual_effect(teacher_operator, z)`. But that target IS the
+teacher-aligned library's own object, so its residual is identically
+zero and its per-task cost collapses to a reference index, while the
+learner has to code a large leftover against a target defined in the
+other side's terms. The comparison asks "how well does each library
+reproduce the teacher's operators", which is teacher recovery — the
+exact question review 48 said to stop asking, and which the
+fragmentation audit already answered.
+
+A 16x gap should have been the tell. No representation that solves the
+same tasks to the same behaviour is sixteen times dearer; a ratio that
+large means the two sides were not being asked the same question.
+
+WHAT A VALID VERSION NEEDS. The target must be the task's own required
+BEHAVIOUR — its held-out outputs — not either library's internal
+object. Each library is then charged for reproducing that behaviour to
+a matched tolerance:
+
+    J_rep(L) = D*(L) + D*(per-task state | L) + L_behaviour(holdout)
+
+with the teacher-aligned arm REFIT to the tasks rather than handed the
+answer: its operators are a proposed library like any other, and its
+per-task residuals must be fitted under the same budget the learner's
+were. Only then are both sides solving the same problem with different
+vocabularies.
+
+Registered before the rebuild, unchanged from before: I still expect B
+(roughly tied). Nothing in the flawed run bears on that either way.
+
+STANDING LESSON, and the third time this class of error has appeared in
+this project (V4.1's tolerance, the raw-ablation counterfactual, now
+this): when one arm of a comparison is defined in terms of the other
+arm's objects, the winner is decided by the definition. Check which side
+the TARGET belongs to before reading any ratio.

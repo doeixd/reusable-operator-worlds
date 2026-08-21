@@ -1,0 +1,176 @@
+{
+  "summary": {
+    "r0": {
+      "learner_total": 34921.57278413879,
+      "teacher_total": 2176.0,
+      "ratio": 16.048516904475548,
+      "learner_wins": 0,
+      "worlds": 6
+    },
+    "r100": {
+      "learner_total": 34481.94267330468,
+      "teacher_total": 2176.0,
+      "ratio": 15.846481007952518,
+      "learner_wins": 0,
+      "worlds": 6
+    }
+  },
+  "cells": [
+    {
+      "condition": "r0",
+      "world": 600,
+      "atoms": 5,
+      "families": 4,
+      "learner_total": 34954.02412158484,
+      "teacher_total": 2176.0,
+      "learner_library": 1852.5682799167348,
+      "teacher_library": 2048.0,
+      "learner_task": 33101.4558416681,
+      "teacher_task": 128.0,
+      "tasks": 64
+    },
+    {
+      "condition": "r0",
+      "world": 601,
+      "atoms": 8,
+      "families": 4,
+      "learner_total": 36834.06823024977,
+      "teacher_total": 2304.0,
+      "learner_library": 3697.6813733191316,
+      "teacher_library": 2176.0,
+      "learner_task": 33136.38685693064,
+      "teacher_task": 128.0,
+      "tasks": 64
+    },
+    {
+      "condition": "r0",
+      "world": 602,
+      "atoms": 9,
+      "families": 4,
+      "learner_total": 37010.336633875755,
+      "teacher_total": 2176.0,
+      "learner_library": 3925.8703284153253,
+      "teacher_library": 2048.0,
+      "learner_task": 33084.46630546043,
+      "teacher_task": 128.0,
+      "tasks": 64
+    },
+    {
+      "condition": "r0",
+      "world": 603,
+      "atoms": 7,
+      "families": 4,
+      "learner_total": 32730.97203977835,
+      "teacher_total": 2176.0,
+      "learner_library": 2643.511707496917,
+      "teacher_library": 2048.0,
+      "learner_task": 30087.460332281433,
+      "teacher_task": 128.0,
+      "tasks": 64
+    },
+    {
+      "condition": "r0",
+      "world": 604,
+      "atoms": 7,
+      "families": 4,
+      "learner_total": 33824.6826341594,
+      "teacher_total": 2176.0,
+      "learner_library": 2633.4163088997266,
+      "teacher_library": 2048.0,
+      "learner_task": 31191.266325259672,
+      "teacher_task": 128.0,
+      "tasks": 64
+    },
+    {
+      "condition": "r0",
+      "world": 605,
+      "atoms": 7,
+      "families": 4,
+      "learner_total": 34175.35304518462,
+      "teacher_total": 2048.0,
+      "learner_library": 2746.2527475546076,
+      "teacher_library": 1920.0,
+      "learner_task": 31429.100297630015,
+      "teacher_task": 128.0,
+      "tasks": 64
+    },
+    {
+      "condition": "r100",
+      "world": 600,
+      "atoms": 6,
+      "families": 4,
+      "learner_total": 35239.90101793806,
+      "teacher_total": 2176.0,
+      "learner_library": 2214.0416789799874,
+      "teacher_library": 2048.0,
+      "learner_task": 33025.85933895807,
+      "teacher_task": 128.0,
+      "tasks": 64
+    },
+    {
+      "condition": "r100",
+      "world": 601,
+      "atoms": 9,
+      "families": 4,
+      "learner_total": 36417.267837466236,
+      "teacher_total": 2176.0,
+      "learner_library": 3876.178481250805,
+      "teacher_library": 2048.0,
+      "learner_task": 32541.08935621543,
+      "teacher_task": 128.0,
+      "tasks": 64
+    },
+    {
+      "condition": "r100",
+      "world": 602,
+      "atoms": 8,
+      "families": 4,
+      "learner_total": 35541.49318672034,
+      "teacher_total": 2176.0,
+      "learner_library": 3628.6430215930686,
+      "teacher_library": 2048.0,
+      "learner_task": 31912.850165127275,
+      "teacher_task": 128.0,
+      "tasks": 64
+    },
+    {
+      "condition": "r100",
+      "world": 603,
+      "atoms": 6,
+      "families": 4,
+      "learner_total": 30495.176585913447,
+      "teacher_total": 2176.0,
+      "learner_library": 1404.2265640110365,
+      "teacher_library": 2048.0,
+      "learner_task": 29090.95002190241,
+      "teacher_task": 128.0,
+      "tasks": 64
+    },
+    {
+      "condition": "r100",
+      "world": 604,
+      "atoms": 9,
+      "families": 4,
+      "learner_total": 34121.7645359395,
+      "teacher_total": 2176.0,
+      "learner_library": 3931.4105428604626,
+      "teacher_library": 2048.0,
+      "learner_task": 30190.35399307904,
+      "teacher_task": 128.0,
+      "tasks": 64
+    },
+    {
+      "condition": "r100",
+      "world": 605,
+      "atoms": 8,
+      "families": 4,
+      "learner_total": 35076.052875850495,
+      "teacher_total": 2176.0,
+      "learner_library": 3150.674010060414,
+      "teacher_library": 2048.0,
+      "learner_task": 31925.378865790084,
+      "teacher_task": 128.0,
+      "tasks": 64
+    }
+  ]
+}
