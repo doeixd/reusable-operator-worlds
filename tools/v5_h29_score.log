@@ -1,0 +1,18 @@
+H29 — does promotion destroy the family structure, or was it never there?
+  leave-one-out subspace capture, rank 2, probe 96
+
+   world  promos  pre objs    R_pre  R_pre(m)  R_promoted    null
+     600       6        24    0.098     0.062       0.128   0.001
+     601       9        24    0.062     0.069       0.044   0.001
+     602       8        24    0.104     0.138       0.038   0.001
+     603       6        24    0.029     0.145       0.021   0.001
+     604       9        24    0.100     0.116       0.041   0.001
+     605       8        24    0.031     0.041       0.043   0.001
+
+  mean R_meta before promotion (all)     0.071
+  mean R_meta before promotion (matched) 0.095
+  mean R_meta after promotion            0.052
+  isotropic null                         0.001
+
+  READING
+    Neither clean reading holds; report the numbers, not a story.

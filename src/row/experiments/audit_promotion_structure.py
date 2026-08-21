@@ -48,7 +48,7 @@ def capture_of(vectors: np.ndarray, rank: int) -> float:
 
 
 def isotropic_null(count: int, width: int, rank: int, seed: int,
-                   draws: int = 50) -> float:
+                   draws: int = 10) -> float:
     """95th percentile of LOO capture on matched random objects."""
 
     scores = []
@@ -68,7 +68,10 @@ def main() -> None:
     parser.add_argument("--residual-rank", type=int, default=2)
     parser.add_argument("--task-steps", type=int, default=3)
     parser.add_argument("--schema-rank", type=int, default=2)
-    parser.add_argument("--probe", type=int, default=256)
+    parser.add_argument("--probe", type=int, default=96)
+    parser.add_argument("--max-pre", type=int, default=24,
+                        help="cap on the P_0 population per world; the LOO "
+                             "null is quadratic in it")
     parser.add_argument("--output", type=Path,
                         default=Path("reports/v5_promotion_structure.json"))
     args = parser.parse_args()
@@ -96,11 +99,20 @@ def main() -> None:
             promoted = np.stack([
                 effect(b.astype(np.float64), probe, d, rank, steps) for b in born
             ])
-            pre = np.concatenate([
-                np.stack([effect(r.astype(np.float64), probe, d, rank, steps)
-                          for r in group])
-                for group in members if len(group)
-            ]) if members else np.empty((0, promoted.shape[1]))
+            # Subsample before computing effects. The full pre-sleep
+            # population is ~70 objects per promotion and the effect
+            # vectors are thousands of dimensions wide, so the LOO fit
+            # and its null become thousands of SVDs -- the first version
+            # of this scorer silently timed out and left a stale report
+            # that read as "no structure before promotion".
+            pool = [r for group in members if len(group) for r in group]
+            if len(pool) > args.max_pre:
+                pick = np.random.default_rng(world).choice(
+                    len(pool), size=args.max_pre, replace=False)
+                pool = [pool[i] for i in pick]
+            pre = (np.stack([effect(r.astype(np.float64), probe, d, rank, steps)
+                             for r in pool])
+                   if pool else np.empty((0, promoted.shape[1])))
 
             row = {
                 "condition": condition, "world": world,

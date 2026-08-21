@@ -2513,3 +2513,65 @@ point.
 
 Spanning a 4x range in D(A) and a 3.2x range in s_bar, with mean
 |chi - 1| = 0.015. Three of the seven are on sealed seeds.
+
+# H29 RESULT: the structure is mostly gone BEFORE promotion (2026-08-20)
+
+Six fresh lifetimes at r_meta = 1.0 with P_0 snapshots, worlds 600-605.
+Leave-one-out subspace capture, matched-count control, isotropic null.
+
+    mean R_meta before promotion (matched count)   0.095
+    mean R_meta after promotion                    0.052
+    isotropic null                                 0.001
+
+Neither of review 48's two clean readings holds exactly, and the module
+refused to pick one. The honest statement is a third thing:
+
+BOTH populations are ~10x above the null, so there IS a trace of shared
+structure in the learner's residuals. But both are ~10x BELOW what the
+same instrument reports on the teacher's family operators at this
+r_meta, where capture is 1.000 by construction. So roughly 90% of the
+available meta-structure is already missing in the private residuals,
+before PROMOTE runs at all.
+
+Promotion then roughly halves what little remains (0.095 -> 0.052). That
+is a real secondary effect and it is in the destructive direction, but
+it is not the main story: PROMOTE cannot destroy structure that its
+inputs never carried.
+
+## What this does to the REFACTOR hypothesis
+
+Review 48's proposal was that a global sleep oracle might reorganize the
+promoted library into a fertile one. This result says the ceiling on
+that is low: a refactor of the promoted objects can only recover
+structure present in them, and by the time PROMOTE sees its inputs, 90%
+is already gone. REFACTOR-after-PROMOTE is repairing the wrong stage.
+
+The question moves UPSTREAM, to what the wake learner encodes. Its
+per-task residuals are fitted against a shared basis with no pressure of
+any kind toward representing related tasks relatedly; two tasks drawing
+on the same family operator can land on residuals that compute the same
+thing in unrelated coordinates. That is Hypothesis C (lost canonical
+coordinates) relocated one stage earlier than review 48 placed it, and
+it makes the cheap-adapter alignment test (test C) the most informative
+next measurement: if cheap e_i, d_i recover the family structure from
+the PRE-promotion residuals, the information is there and the wake
+learner's coordinates are the problem.
+
+## Instrument note, and a near-miss worth recording
+
+Two versions of this scorer reported "no structure before promotion"
+for reasons that had nothing to do with the science.
+
+1. The first snapshot read `record.supporting_tasks` from the lineage,
+   which the parent syncs AFTER the sleep returns, so it stored zero
+   member residuals and the audit reported pre_objects = 0.
+2. The corrected snapshot worked, but the scorer then timed out
+   silently -- the null does LOO refits over a ~70-object population of
+   3,072-wide vectors, thousands of SVDs -- and left a STALE report on
+   disk from run 1, which I read as a result.
+
+The second is the more dangerous: a scorer that dies after writing
+nothing leaves the previous answer in place, and nothing in the output
+says so. Capping the P_0 population at 24 and the null at 10 draws makes
+it tractable. Any audit that writes to a fixed path should either write
+a run stamp or refuse to read a report older than its inputs.

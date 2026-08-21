@@ -4,53 +4,71 @@
       "condition": "r100",
       "world": 600,
       "promotions": 6,
-      "pre_objects": 0,
-      "r_meta_promoted": 0.11530968443234856,
-      "null_promoted": 0.0003397854358399214
+      "pre_objects": 24,
+      "r_meta_promoted": 0.12787807373429727,
+      "null_promoted": 0.0007220753168705961,
+      "r_meta_pre": 0.09768225340548786,
+      "null_pre": 0.0006401943811325751,
+      "r_meta_pre_matched": 0.06214623024760707
     },
     {
       "condition": "r100",
       "world": 601,
       "promotions": 9,
-      "pre_objects": 0,
-      "r_meta_promoted": 0.03869678562100895,
-      "null_promoted": 0.0002926536189056686
+      "pre_objects": 24,
+      "r_meta_promoted": 0.043953223454388825,
+      "null_promoted": 0.0006149195946411443,
+      "r_meta_pre": 0.062420168838751816,
+      "null_pre": 0.0006081426298867935,
+      "r_meta_pre_matched": 0.06873322691183646
     },
     {
       "condition": "r100",
       "world": 602,
       "promotions": 8,
-      "pre_objects": 0,
-      "r_meta_promoted": 0.032172022587836926,
-      "null_promoted": 0.00029686371166102104
+      "pre_objects": 24,
+      "r_meta_promoted": 0.037654649079489455,
+      "null_promoted": 0.0008702677495709819,
+      "r_meta_pre": 0.1041300482088328,
+      "null_pre": 0.000591938476224158,
+      "r_meta_pre_matched": 0.13819362587226813
     },
     {
       "condition": "r100",
       "world": 603,
       "promotions": 6,
-      "pre_objects": 0,
-      "r_meta_promoted": 0.018062355797549095,
-      "null_promoted": 0.0003594620468756674
+      "pre_objects": 24,
+      "r_meta_promoted": 0.021184457039887583,
+      "null_promoted": 0.0007006901512448416,
+      "r_meta_pre": 0.029040641766894495,
+      "null_pre": 0.0005056580076702794,
+      "r_meta_pre_matched": 0.14521627571000734
     },
     {
       "condition": "r100",
       "world": 604,
       "promotions": 9,
-      "pre_objects": 0,
-      "r_meta_promoted": 0.041764408698034564,
-      "null_promoted": 0.0002595235438752859
+      "pre_objects": 24,
+      "r_meta_promoted": 0.04143820686406954,
+      "null_promoted": 0.0006945933098276229,
+      "r_meta_pre": 0.1000706189187938,
+      "null_pre": 0.0007597147880547828,
+      "r_meta_pre_matched": 0.11639987230320144
     },
     {
       "condition": "r100",
       "world": 605,
       "promotions": 8,
-      "pre_objects": 0,
-      "r_meta_promoted": 0.04571379148288281,
-      "null_promoted": 0.0003772347468701447
+      "pre_objects": 24,
+      "r_meta_promoted": 0.04255335652262372,
+      "null_promoted": 0.0005931876144042758,
+      "r_meta_pre": 0.030612222574537117,
+      "null_pre": 0.0007308663168633338,
+      "r_meta_pre_matched": 0.04080092701067198
     }
   ],
-  "mean_pre": NaN,
-  "mean_pre_matched": NaN,
-  "mean_post": 0.04861984143661014,
-  "null": 0.00032092051733795154
+  "mean_pre": 0.07065932561888298,
+  "mean_pre_matched": 0.09524835967593208,
+  "mean_post": 0.05244366111579273,
+  "null": 0.0006992889560932438
 }

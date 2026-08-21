@@ -1,0 +1,13 @@
+lifecycle world=600 meta r_meta=1 F=4: loss=-181277.9
+world 600 done
+lifecycle world=601 meta r_meta=1 F=4: loss=-182310.1
+world 601 done
+lifecycle world=602 meta r_meta=1 F=4: loss=-178991.6
+world 602 done
+lifecycle world=603 meta r_meta=1 F=4: loss=-184777.4
+world 603 done
+lifecycle world=604 meta r_meta=1 F=4: loss=-181635.9
+world 604 done
+lifecycle world=605 meta r_meta=1 F=4: loss=-181055.9
+world 605 done
+H29_DONE

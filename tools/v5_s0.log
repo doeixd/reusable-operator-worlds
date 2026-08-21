@@ -220,3 +220,6 @@ numpy._core._exceptions._ArrayMemoryError: Unable to allocate 3.38 MiB for an ar
 21:22:18 progress done=10 failed=0 skipped=0
 21:26:49 progress done=20 failed=0 skipped=0
 21:31:46 progress done=30 failed=0 skipped=0
+21:38:14 progress done=40 failed=0 skipped=0
+21:43:28 progress done=50 failed=0 skipped=0
+21:49:04 progress done=60 failed=0 skipped=0
