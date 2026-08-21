@@ -3332,3 +3332,38 @@ ZERO-INIT ALPHA IS FINE HERE AND WAS NOT FOR THE RESIDUAL. dL/dalpha_k =
 <dL/dU, U_k> is nonzero at alpha=0 because tanh(Vz+b) != 0; U_k learns
 only after some alpha moves (its gradient is alpha-weighted) — a two-phase
 start that the unit test now documents.
+
+
+================================================================================
+H39c: FERTILITY SCALES WITH ARGUMENT DIMENSION AND NEEDS LEARNED DIRECTIONS (2026-08-21)
+================================================================================
+
+Three worlds, K in {2,4,8,16} (`reports/h39c_ksweep.json`): the alpha-only
+future ratio falls monotonically with K in every world (mean 3.37 -> 2.73
+-> 1.83 -> 1.56), present-task loss improves monotonically with K, and the
+full interface beats ordinary in 13/15 cells. The matched-budget control
+with U_k frozen at random init sits at 2.8-3.3x with alpha-zeroed ratios of
+~1.05: the learner does not use a random fixed channel at all. What works
+is LEARNED argument directions inside a routed operator, and more of them.
+
+WHAT THIS OVERTURNS. "A useful abstraction must preserve coordinates for
+novelty" now has a positive instance: those coordinates can be formed
+online under the ordinary objective, provided they parameterize an object
+the learner routes through. The negative results (census, residual schema)
+were about WHERE the channel was, not whether such channels can form.
+
+THE GENERATOR'S RANK IS NOT THE LEARNER'S. Teacher families share a rank-2
+subspace in U; the learner needs K >= 8-16 argument directions in the same
+coordinate to make the unseen family cheap. The learner's basis slot is not
+aligned with the teacher's operator, so its family coordinate is not
+low-dimensional in the teacher's sense. Treat K as a capacity knob.
+
+A STRICT SECONDARY CRITERION THAT NEVER FIRES IS STILL A DESIGN ERROR. The
+route-mass term was registered at 2x baseline this time and still failed in
+every cell while the functional criterion passed everywhere. Prefer the
+functional ablation (zero the channel, measure the loss) as the primary
+usage criterion; route statistics are diagnostics.
+
+NEXT STEP IS DEVELOPMENT, NOT CONFIRMATION. One world passes 1.5x at K=16
+and the curve has not flattened. The licensed move is K = 32 / 64 and a
+multi-slot variant on worlds 0-2, frozen first.

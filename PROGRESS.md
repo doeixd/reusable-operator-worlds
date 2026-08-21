@@ -2885,3 +2885,15 @@ budget control G_8 (U_k frozen at init, alpha learns). Added the
 launcher (15 cells, 3 workers), and `score_h39c_ksweep.py` (fail-closed
 non-vacuity per cell, verdicts A / A-capacity / P / B / NOT COMPARABLE). The
 sweep is running; no cell has been read.
+
+# 2026-08-21 — H39c K-SWEEP SCORED: VERDICT P
+
+All 15 cells completed (zero failures) and scored with `score_h39c_ksweep.py`
+(`reports/h39c_ksweep.json`). Alpha-only k=128 ratios fall monotonically with
+K in all three worlds (K=16: 1.75 / 1.58 / 1.35); the frozen-direction control
+G_8 sits at 3.3 / 2.8 / 3.2 with alpha-zeroed ratios ~1.05; present-task loss
+improves with K everywhere (K=16: -1,119 / -708 / -844 nats); the full
+interface beats ordinary in 13/15 cells. No K reaches 1.5x in two worlds, so
+the frozen verdict is P: real, learned, capacity-limited at K <= 16. Licenses
+a larger-K / multi-slot development plan only. Recorded in `PREDICTIONS.md`
+and `notes/learnings.txt`.

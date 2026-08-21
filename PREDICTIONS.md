@@ -4273,3 +4273,41 @@ ordinary per-task k=128 anchors are 0.02524 / 0.01928 (mean 0.02226), not
 "0.02672 / 0.01780" as written. P8's per-task alpha-only endpoints 0.0624 /
 0.0217 therefore sit at 2.47x / 1.13x; the mean ratio 1.89x and every
 decision are unaffected.
+
+# H39c RESULT (2026-08-21): VERDICT P — THE IN-BASIS ARGUMENT IS REAL, LEARNED, AND CAPACITY-LIMITED AT K <= 16
+
+Plan `H39C_KSWEEP_PLAN.md` frozen at `1e99904`, no amendments. Report
+`reports/h39c_ksweep.json`. 15/15 cells completed with zero failures; all
+three ordinary anchors reproduced to 1e-12; every cell passed the fail-closed
+non-vacuity checks (G_8's argument matrices bitwise at init; U_k moved in
+every P_K; alpha moved in every fit).
+
+Alpha-only k=128 ratio to the ordinary endpoint (worlds 0 / 1 / 2):
+
+    K=2   3.94 / 2.53 / 3.64
+    K=4   3.56 / 2.15 / 2.49
+    K=8   1.89 / 2.02 / 1.57
+    K=16  1.75 / 1.58 / 1.35
+    G_8   3.32 / 2.84 / 3.22   (U_k frozen at init, alpha learns)
+
+Robustness optimizers agree within 0.02 everywhere. TREND: non-increasing in
+K in 3/3 worlds. LEARNED DIRECTIONS: G_8 - P_8 = +1.44 / +0.82 / +1.65
+(3/3 positive, mean 1.30 > 0.2); G_8's alpha-zeroed NMSE ratios are
+1.03-1.06 — the frozen random channel is essentially unused — so the effect
+is the learned U_k, not K extra task-local scalars. Present-task loss
+improves monotonically with K in every world (K=16: -1,119 / -708 / -844
+nats); the full task-local future interface beats ordinary in 13/15 cells
+(K=16: 0.75 / 0.88 / 0.73). FERTILE_K: no K reaches 1.5x in >= 2 worlds;
+K=16 passes in world 2 only (1.35).
+
+Channel use: alpha-zeroed ratios 1.37-3.59 for every P_K (pass); the
+baseline-relative route-mass term (>= 2x ordinary slot-12 mass) is not met
+in any cell, though P_8 / P_16 reach 0.96x / 0.91x of it in world 2. The
+verdict does not depend on that term: fertile_K already fails on the
+ratio. Registered as a strictness observation, not re-judged.
+
+Verdict by the frozen table: **P**. Per the plan this licenses a larger-K
+or multi-slot development plan, NOT confirmation. Seeds 700-729 remain
+closed. The gap has fallen from 3.5x (post-hoc census) / 4.2x (residual
+schema) to a three-world mean of 1.56x at K=16 with no sign of saturation
+between K=8 and K=16.
