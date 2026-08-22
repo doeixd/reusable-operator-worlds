@@ -4447,3 +4447,89 @@ with the tightest relative interval; E5 "very likely" — 30/30; E2 geomean
 "about 1.4-1.7" — 1.636; fraction "least stable" — 0.433, below the old
 bar. Our own registered prediction (CONFIRMED-RELATIVE more likely) was
 wrong under the amended rule and right under the original one.
+
+# REVIEW 62 (2026-08-22): DISCOVERY REGISTERED AS H47-H49; PRE-DESIGN AUDIT OF THE SEALED REPORT
+
+Filed as `reviews/reviewer-feedback-62.txt`. Registers the next rung and the
+reviewer's predictions. Nothing here opens a seed or licenses a run; each
+of H47-H49 needs its own frozen development plan on seeds 0-9.
+
+## H47 — membership discovery (review 62 D1)
+
+With the number of parameterized slots FIXED at the confirmed architecture
+(two, K = 32) and NO family information of any kind, the learner discovers
+which tasks share a slot well enough that its economics approach the
+supplied-architecture arm: J_present, R_alpha, R_full within registered
+tolerances of the confirmation arm M on the same worlds. Teacher membership
+recovery (ARI / NMI / route agreement) is diagnostic, never deciding.
+Reviewer prediction: likely solvable; soft or annealed routing with an
+MDL/usefulness pressure beats hard early commitment. Note for design: the
+confirmed arm M already used NO family labels (pooled slots; oracle
+grouping was withdrawn in H39 pilot Amendment 2) — so membership in M is
+already discovered by soft routing. H47 must therefore be stated as a
+comparison against a labelled-routing oracle (tasks told which slot), not
+against M, or it is already answered. To be resolved in the H47 plan.
+
+## H48 — cardinality discovery (review 62 D2)
+
+Given a candidate pool of K_max parameterized slots and an explicit charge
+for active ones, J = L_preq + lambda D*(active schemas) + lambda D*(routes,
+arguments, innovation), the number of ACTIVE parameterized objects tracks
+the economic recurrence condition (birth when N s_bar_schema > D*(S))
+rather than the teacher count or the available capacity. Controls: fixed
+too-few, fixed correct, fixed too-many, discovered. Discovery wins only if
+it approaches the oracle architecture without using all available
+capacity. Reviewer prediction: harder; failure modes are too many objects
+(local specialization is easy) or too few (a flexible schema absorbs
+several families); the D* charge should matter a lot. A granularity sweep
+F_schema in {1, 2, 4, 8} at constant support per schema tests whether the
+discovered count tracks F.
+
+## H49 — representation-type discovery (review 62 D3)
+
+The learner chooses per recurring computation among ordinary private
+object, parameterized schema + argument, and private innovation, and the
+choice tracks economy and future usefulness. Not next. Reviewer prediction:
+much harder; probably requires a sleep/consolidation decision rather than
+pure online gradient descent.
+
+Binding safeguard for all three (review 62): reward economy and future
+usefulness, never teacher-looking grouping; a grouping that differs from
+the teacher but yields J_present <= J_oracle and C_future <= C_oracle is a
+valid discovery. Functional/economic equivalence before ontology recovery.
+
+## Pre-design audit: review 62's six attack points, answered from the sealed report where possible
+
+(2) DOES E3 REFLECT CAPACITY OR OPTIMIZER BUDGET? No. The frozen-direction
+arm G has exactly M's parameter count, per-task scalars, optimizer groups,
+and budget; its present-task gap is +53 nats mean, negative in 12/30
+worlds, range -827 to +834 — i.e., nothing. M is -1,545 in 30/30. The
+present-task gain is the learned directions.
+(3) DOES E4 SURVIVE A MATCHED TASK-LOCAL BUDGET? Partly. G's full-interface
+ratio is 0.917 (22/30 worlds below 1), M's 0.815. So about half of M's
+full-interface gain over ordinary is available to a matched fixed channel
+(the 64 extra task-local scalars) and about half (paired M - G = -0.10) is
+the learned directions. E4 stands as registered (M vs O) and is now also
+stated against G: the learned-direction share of the full-interface gain
+is ~0.10 in ratio. This qualification is recorded with the result.
+(6) ORACLE GROUPING? None in the sealed block. M and G use two POOLED
+slots; no family label, family parameter, or grouping enters any arm. The
+only supplied structure is the architecture (two parameterized slots,
+K = 32). "Parameterized representation" is qualified as
+architecture-supplied, not supervised.
+(5) E2 TRANSPARENCY: both verdicts and the 0.0003 margin are in the H39
+SEALED RESULT entry; nothing further to add.
+(1) CENSUS VS ONLINE APPLES-TO-APPLES and (4) ASYMMETRIC COMPENSATION IN
+THE ALPHA-ZERO ABLATION are left for an outside reviewer. For (1), the
+two measurements share worlds 0-2, futures, instrument, support, and
+baseline, but differ in the learner (O's population versus M's slots) and
+in the alpha-only protocol's eps (zero in the census, task-free init
+online); a version of the census run ON M's final argument matrices would
+close the gap and is cheap. For (4), the ablation measures reliance
+without re-adaptation; the alpha-only versus full future fits partially
+address compensation, but a "zero alpha then re-fit everything else" cell
+on the trained family tasks has not been run.
+
+G's own alpha-zeroed ratio is 1.29 in the sealed block (two slots), versus
+~1.05 for single-slot G_8 in development: a fixed random two-slot channel
+is slightly used, which is consistent with E4's partial budget share.

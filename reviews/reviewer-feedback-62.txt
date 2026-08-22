@@ -1,0 +1,130 @@
+Reviewer feedback 62 — received 2026-08-22, on the sealed H39 confirmation
+(`reports/h39_confirmation.json`, CONFIRMED under Amendment 1).
+
+----------------------------------------------------------------------
+
+This is a genuinely strong confirmation, and I agree with your
+interpretation of what it licenses. The most important result is not the
+borderline E2. It is the JOINT PATTERN: learned online parameterization ->
+better present performance + better future full-interface performance +
+causally used argument channel, across 30 sealed worlds. That is much
+harder to explain away than any single ratio.
+
+MY OUTSIDE READ. I would describe the result as: a parameterized
+representation, when built jointly during learning, preserves useful
+future variation that cannot be recovered by post-hoc factorization of the
+finished residual population. That claim seems earned. The strongest
+pieces are E1 (learned directions beat frozen random directions, so this
+is not merely "two extra slots help"), E3 (every world improves present-
+task cost, so the architecture did not purchase future flexibility by
+sacrificing the present), E4 (the complete schema+innovation interface
+beats ordinary future acquisition by about 18.5% in 28/30 worlds; this may
+ultimately matter more than alpha-only), and E5 (zeroing alpha hurts
+2.9-4.3x in all 30 worlds, so the representation really uses the
+mechanism). Those four together establish existence and causal use very
+convincingly.
+
+E2 is real but should remain modestly stated: geomean 1.636 with CI ending
+at 1.7997 against the frozen ceiling 1.8 — "confirmed at the registered
+bound, not beyond it" is the right sentence. Do not write anything like
+"alpha alone nearly recovers ordinary" without immediately giving 1.64x.
+It preserves substantial future opportunity, not all of it. Recording the
+original-rule verdict is excellent practice; the amendment was justified
+before sealed data, and sealed data then demonstrated why the change
+mattered, which strengthens the case for the amendment.
+
+THE CENSUS + CONFIRMATION PAIRING is probably the deepest result: post hoc
+R ~ 2.2-3.5 even at maximal span; online formation R ~ 1.64. Same broad
+problem, radically different result depending on WHEN the coordinates are
+created. Scientific phrasing: in this testbed, useful parameterized family
+coordinates were substantially more recoverable when formed jointly with
+task learning than when extracted afterward from the final learned
+population; "made, not mined" as the shorthand. Consequence: abstraction
+may not be reliably discoverable by train -> inspect finished network ->
+extract latent program. The learning dynamics themselves may have to
+maintain the degrees of freedom from which future abstractions can be
+constructed.
+
+DISCOVERY IS THE EARNED NEXT RUNG, in three separated problems, not one
+giant learner.
+
+D1 — Discover membership. Keep the number of parameterized slots fixed and
+correct; remove family labels; can the learner discover which tasks share
+a slot? Primary endpoints are the economic ones (J_present, R_alpha,
+R_full); teacher membership recovery is diagnostic. Prediction: likely
+solvable; soft routing with MDL/usefulness pressure should beat hard early
+commitment (V2: the discrete tax came largely from premature commitment).
+
+D2 — Discover cardinality. Give a larger candidate pool K_max and charge
+for active parameterized objects; objective J = L_preq + lambda D*(active
+schemas) + lambda D*(routes/arguments/innovation). Predict birth when
+N s_bar_schema > D*(S). The interesting result is that the active count
+tracks the economic recurrence conditions, not exact teacher count.
+Controls: fixed too-few, fixed correct, fixed too-many, discovered.
+Discovery wins only if it approaches the oracle architecture without
+simply using all available capacity.
+
+D3 — Discover representation type. Let the learner choose between an
+ordinary private object, a parameterized schema + argument, and private
+innovation; does it autonomously decide which recurring computations
+deserve parameterization? Do not start here; membership, then cardinality.
+
+SAFEGUARD: do not reward teacher-looking grouping; reward economy and
+future usefulness. A grouping that differs from the teacher but yields
+J_present <= J_oracle and C_future <= C_oracle is a valid discovery. ARI /
+NMI / route recovery are secondary. Functional/economic equivalence before
+ontology recovery.
+
+GRANULARITY: is the useful decomposition really 2 schemas x arguments, or
+just the architecture supplied? A developmental sweep with F_schema in
+{1,2,4,8} at constant support per schema, asking whether discovered object
+count tracks F, directly tests whether the mechanism scales.
+
+PREDICTIONS FOR DISCOVERY: membership probably works moderately well
+(economics near oracle even with imperfect teacher recovery); cardinality
+harder (too many objects because local specialization is easy, or too few
+because a flexible schema absorbs several families — both pressures have
+appeared before; the description-length charge should matter a lot);
+fully autonomous type discovery much harder, probably requiring a
+sleep/consolidation step rather than pure online gradient descent (WAKE:
+solve with soft structure; SLEEP: decide which recurring variation
+deserves a named parameterized object).
+
+PATH TO PROGRAM SYNTHESIS: P(alpha) with a causally used argument channel
+is much closer to a language primitive than an opaque promoted residual.
+Parameterized primitive exists -> discover which tasks share it ->
+discover how many -> P_i(alpha_i) compose -> infer routes + arguments for
+novel programs -> program synthesis; the synthesizer searches over
+(primitive identity, argument) rather than thousands of opaque objects.
+Concrete composition experiment after discovery: train on some
+combinations P_1(a) o P_2(b), P_1(c) o P_3(d), test held-out crosses
+P_1(a) o P_3(d) and novel arguments P_2(b') o P_3(d'), decomposing
+generalization into primitive identity reuse, argument reuse, new
+composition, new argument + new composition. The grand prize: infer the
+correct primitive sequence and arguments from a handful of examples.
+
+PRESERVE E4: R_full = 0.815 means the best representation is not alpha
+alone but schema + argument + innovation. Future "programs" probably have
+a reusable skeleton + bound arguments + a small novel patch; a continuum
+private solution -> schema + large innovation -> schema + small innovation
+-> pure argument specialization, along which the learner may migrate as
+recurrence accumulates — essentially a compilation pathway.
+
+BEFORE DESIGNING THE DISCOVERY PLAN, get another outside read on the
+confirmation report. Points to attack: (1) is the post-hoc census versus
+online formation comparison apples-to-apples enough to support "formed
+online"? (2) does E3 accidentally benefit from a capacity or optimization-
+budget difference between O and M? (3) does E4's full-interface gain
+survive a matched total task-local parameter/bit budget? (4) is the
+alpha-zero ablation the correct causal-use test, or can other pathways
+compensate asymmetrically? (5) is the amended E2 verdict defensible and
+sufficiently transparent? (6) does any part of the result rely on oracle
+family grouping strongly enough that "parameterized representation" should
+be qualified as supervised/oracle-structured? Unless one reveals a serious
+confound, the discovery stage is earned.
+
+The big conceptual result: useful abstraction is not merely the discovery
+of structure already latent in finished solutions; learning can create a
+coordinate system in which future variation becomes expressible. That is
+exactly the kind of phenomenon the eventual self-improving computational
+language needs.

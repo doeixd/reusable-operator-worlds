@@ -2950,3 +2950,17 @@ with the 0.0003 E2 margin and the fact that the pre-amendment rule
 (fraction 0.433) would have read CONFIRMED-RELATIVE; appended the sealed
 verdict to `H39_DEVELOPMENT_CLOSURE.md`; learnings appended. Nothing further
 is licensed by this entry; the next rung (discovery) needs its own plan.
+
+# 2026-08-22 — REVIEW 62 FILED; DISCOVERY REGISTERED (H47-H49); PRE-DESIGN AUDIT
+
+Filed and indexed review 62. Registered membership / cardinality /
+representation-type discovery as H47-H49 with the reviewer's predictions
+and the binding "economics before ontology" safeguard. Answered three of
+the six attack points on the sealed report from the frozen-direction
+control already in it: E3 is not capacity (G +53 nats vs M -1,545); E4
+survives a matched budget only in part (G 0.917 vs M 0.815; learned share
+~0.10); no oracle grouping was used (architecture supplied only). Noted
+that M already soft-discovers membership, so H47 must be framed against a
+labelled-routing oracle. Two cheap audits identified for the remaining
+points (census on M's matrices; zero-alpha-then-refit). No plan drafted,
+no run launched.

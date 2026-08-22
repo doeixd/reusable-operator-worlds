@@ -3434,3 +3434,36 @@ NEXT IS DISCOVERY, NOT CAPACITY. The block tested existence and use with
 the architecture supplied. Do not read it as evidence the learner can
 find this structure on its own; that is the next hypothesis and needs its
 own frozen plan and its own baseline-checked thresholds.
+
+
+
+================================================================================
+REVIEW 62: THE JOINT PATTERN IS THE RESULT; G ANSWERS THE CAPACITY QUESTIONS (2026-08-22)
+================================================================================
+
+The sealed result's weight is E1 + E3 + E4 + E5 together, not the
+borderline E2. State E2 only with its number (1.64x) and its bound.
+
+A MATCHED FIXED-DIRECTION CONTROL ANSWERS MOST CAPACITY OBJECTIONS FOR
+FREE. G (same parameters, scalars, optimizer, budget; directions frozen)
+gains +53 nats on present tasks (nothing) where M gains -1,545; G's full
+interface is 0.917 where M's is 0.815. So E3 is entirely learned
+directions and E4 is roughly half capacity, half learned directions. Put
+the control's numbers beside every estimand it can speak to, not only the
+one it was registered for.
+
+NO ORACLE GROUPING WAS USED IN THE SEALED BLOCK. The pilot's per-family
+arm was withdrawn; the confirmed arms are pooled. When a reviewer asks
+whether the result is "supervised", the answer is: architecture supplied,
+membership already soft-discovered. That reframes H47: membership
+discovery must be compared against a labelled-routing oracle, not against
+M, or it is already done.
+
+TWO CHEAP AUDITS BEFORE DISCOVERY IS DESIGNED: run the census construction
+on M's own argument matrices (apples-to-apples for "made, not mined"), and
+a zero-alpha-then-refit cell on trained family tasks (compensation).
+Neither needs a new lifetime.
+
+DISCOVERY IS THREE PROBLEMS. Membership (fixed count), cardinality
+(pool + D* charge, with too-few / correct / too-many / discovered
+controls), then type. Economics decide; teacher recovery is a diagnostic.

@@ -2611,3 +2611,23 @@ preserves novelty), and E5 load-bearing. Freezes the scope sentence:
 E3 likely, E4 cleanest positive, E2 geometric mean ≈1.4–1.7, the fraction
 least stable. Became Amendment 1; the lifetimes were already running and
 no sealed cell had been read.
+
+### [reviewer-feedback-62.txt](reviewer-feedback-62.txt)
+On the sealed H39 confirmation. Calls it genuinely strong and locates the
+weight in the **joint pattern** (E1 learned > frozen directions, E3 present
+cost down in every world, E4 full interface +18.5% in 28/30, E5 causal use
+30/30) rather than the borderline E2, which should stay "confirmed at the
+registered bound, not beyond it" and always be quoted with 1.64×. Endorses
+recording the original-rule verdict. Reads the census/online pairing
+(2.2–3.5× post hoc vs 1.64× formed online) as the deepest result — "made,
+not mined" — with the consequence that learning dynamics may have to
+maintain the degrees of freedom from which abstractions are later built.
+Sets the next rung as **discovery**, split into D1 membership (fixed slot
+count, no labels; economic endpoints primary, teacher recovery diagnostic;
+predicts soft/annealed routing beats hard commitment), D2 cardinality
+(candidate pool + D* charge; controls too-few/correct/too-many/discovered;
+predicts the hard case), D3 representation type (later; probably needs a
+sleep step). Adds an F_schema ∈ {1,2,4,8} granularity sweep, a composition
+experiment over (primitive, argument) crosses, the safeguard "economic
+equivalence before ontology recovery", and six attack points for an
+outside read of the confirmation before designing discovery.
