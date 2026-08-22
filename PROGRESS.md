@@ -2964,3 +2964,18 @@ that M already soft-discovers membership, so H47 must be framed against a
 labelled-routing oracle. Two cheap audits identified for the remaining
 points (census on M's matrices; zero-alpha-then-refit). No plan drafted,
 no run launched.
+
+# 2026-08-22 — REVIEW 63 FILED; NEXT-STEPS PLAN AMENDED TWICE; STAGE A RUNNING
+
+Filed and indexed review 63. Appended Amendment 1 to
+`H39_NEXT_STEPS_PLAN.md` (A1 claim narrowed to the extensional population;
+A2 robustness band with a second optimizer; L redefined as an exact route-
+mask oracle verified at correct-slot fraction 1.000; H_late control;
+relative tolerances; Stage C rebuilt census-first around the economic K*
+with K_max = 8 and the full marginal D* charge) and re-froze. Wrote
+`audit_h39_confirmation_followups.py`. A one-world sampled smoke exposed a
+refit-budget confound in A2 (ratio 0.58 against the intact model);
+Amendment 2 registered a matched-budget denominator (alpha-zeroed refit /
+alpha-free refit) before the registered run and re-froze. Re-smoke: A2
+2.08 on two tasks. The registered 30-world run is in progress; no Stage A
+result has been read.
