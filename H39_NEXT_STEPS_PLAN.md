@@ -229,3 +229,22 @@ families onto two slots.
 
 Stage A is unchanged in protocol and remains the only frozen, runnable
 stage of this file.
+
+# Amendment 2 (2026-08-22, before the registered Stage A run; found in a one-world smoke)
+
+A2 as written divides the alpha-zeroed RE-FIT NMSE by the INTACT model's
+NMSE. The intact model's task state came from one online pass with
+replay; the re-fit gets 2,000 full-batch updates on the task's own 128
+examples. On world 700 (sampled smoke) the "compensated ratio" was 0.58 —
+the re-fit beats the intact model with or without alpha — so the ratio
+measured refit budget, not substitutability. Amended denominator: the
+SAME re-fit (2,000 updates, same optimizer, same data) with the alphas
+trainable and starting from their trained values. The registered
+statistic is
+
+    compensated_ratio = NMSE(re-fit, alphas zeroed and frozen)
+                      / NMSE(re-fit, alphas free)
+
+with thresholds, robustness band, and verdicts unchanged. The
+uncompensated E5 ratio continues to be reported against the intact model.
+A1 is unchanged. The smoke report is not a result and is discarded.
