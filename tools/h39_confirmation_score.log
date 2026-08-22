@@ -1,0 +1,38 @@
+prereg check OK: 14 frozen files unchanged; all STATUS-cited paths exist
+sealed block complete: 90/90 cells validated
+world 700: R_M 1.580 R_G 1.761 L -1219 F 0.966 U 3.56
+world 701: R_M 1.625 R_G 2.554 L -1471 F 0.936 U 3.27
+world 702: R_M 1.655 R_G 2.064 L -1591 F 0.924 U 3.42
+world 703: R_M 2.171 R_G 3.901 L -594 F 0.893 U 3.20
+world 704: R_M 1.381 R_G 2.614 L -1535 F 0.857 U 4.11
+world 705: R_M 2.177 R_G 3.714 L -1962 F 0.646 U 3.24
+world 706: R_M 1.909 R_G 2.791 L -1527 F 0.863 U 3.54
+world 707: R_M 1.357 R_G 2.224 L -1378 F 0.623 U 2.96
+world 708: R_M 1.084 R_G 2.084 L -2208 F 0.518 U 2.86
+world 709: R_M 1.530 R_G 2.397 L -1593 F 0.821 U 3.76
+world 710: R_M 1.919 R_G 2.576 L -979 F 1.043 U 4.05
+world 711: R_M 1.376 R_G 1.867 L -1541 F 0.819 U 3.47
+world 712: R_M 1.405 R_G 3.122 L -1751 F 0.671 U 3.56
+world 713: R_M 2.663 R_G 3.118 L -1628 F 0.820 U 3.51
+world 714: R_M 1.395 R_G 1.939 L -1767 F 0.775 U 4.34
+world 715: R_M 1.104 R_G 2.389 L -1653 F 0.673 U 3.91
+world 716: R_M 1.420 R_G 2.786 L -1613 F 0.650 U 3.53
+world 717: R_M 1.363 R_G 1.325 L -1826 F 0.851 U 4.09
+world 718: R_M 1.585 R_G 3.127 L -1595 F 0.834 U 4.13
+world 719: R_M 1.370 R_G 2.128 L -1394 F 0.759 U 3.34
+world 720: R_M 1.978 R_G 2.803 L -1448 F 0.651 U 3.36
+world 721: R_M 1.439 R_G 2.033 L -1654 F 0.957 U 3.57
+world 722: R_M 3.499 R_G 4.803 L -1343 F 0.859 U 3.18
+world 723: R_M 1.967 R_G 2.232 L -1520 F 0.842 U 3.56
+world 724: R_M 2.139 R_G 3.242 L -1375 F 0.920 U 3.77
+world 725: R_M 1.602 R_G 2.905 L -1791 F 0.826 U 4.10
+world 726: R_M 1.742 R_G 1.875 L -1814 F 0.913 U 3.58
+world 727: R_M 1.200 R_G 2.421 L -1229 F 0.602 U 3.87
+world 728: R_M 2.080 R_G 2.822 L -1455 F 1.206 U 4.01
+world 729: R_M 1.159 R_G 1.825 L -1888 F 0.722 U 4.21
+E1 mean D 0.886 CI [0.7169008747485249, 1.0537366231690666] pass=True partial=False
+E2 geomean R 1.636 CI [1.4954986307183555, 1.7996867731504238] (arith 1.696; C0-continuity fraction<=1.5 0.433) pass=True partial=False
+E3 mean L -1544.8 CI [-1648.8064040473225, -1434.8647996761777] pass=True partial=False
+E4 mean F 0.815 CI [0.764464195821265, 0.8661425381327444] pass=True partial=False
+E5 used 30/30 pass=True
+VERDICT CONFIRMED

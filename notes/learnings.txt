@@ -3397,3 +3397,40 @@ SERIALIZATION IS PART OF THE SCORER. A 2xK alpha crashed `float(a)` after
 two arms of fits; the atomic report write meant nothing false was written,
 and the fix touched no numerics. Keep report writes atomic and keep
 non-numeric bugs unable to leave partial answers on disk.
+
+
+
+================================================================================
+H39 SEALED: CONFIRMED BY 0.0003, AND BY AN AMENDMENT (2026-08-21)
+================================================================================
+
+Seeds 700-729, 90/90 cells, five estimands, all pass
+(`reports/h39_confirmation.json`). Learned in-basis arguments are real
+(E1), used (E5), cheaper now (E3, every world), better through the full
+interface (E4, 28/30), and leave an unseen family expressible through
+alpha alone at geometric mean 1.64x ordinary (E2).
+
+TWO LESSONS ABOUT HOW TO REPORT A PASS. (1) The E2 CI upper bound was
+1.7997 against 1.8. A pass is a pass, but the margin goes in the same
+sentence as the verdict; the magnitude claim is confirmed AT its bound,
+not beyond it. (2) The review-61 amendment, registered before any cell
+was read, flipped what the verdict would otherwise have been (fraction
+0.433 < 0.5 -> CONFIRMED-RELATIVE). The amendment was correct on its
+merits and its timing was clean, but a reader who only sees CONFIRMED has
+been told less than the truth. Record both verdicts whenever a rule
+changed between freeze and read, and say which one is in force and why.
+
+THE FRACTION WAS THE LEAST STABLE STATISTIC, AS PREDICTED. Development
+gave 2/3; the block gave 13/30. A Bernoulli fraction from three worlds is
+not a prediction. Magnitudes with intervals are.
+
+WHAT THE CENSUS WAS REALLY SAYING. Post-hoc extraction from the finished
+population failed (3.5x) not because parameterized families are
+impossible but because the useful coordinates have to be formed during
+learning: same worlds, same objective, same futures, coordinates formed
+online, 1.64x. Intensional structure is made, not mined.
+
+NEXT IS DISCOVERY, NOT CAPACITY. The block tested existence and use with
+the architecture supplied. Do not read it as evidence the learner can
+find this structure on its own; that is the next hypothesis and needs its
+own frozen plan and its own baseline-checked thresholds.

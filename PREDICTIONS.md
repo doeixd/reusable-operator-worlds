@@ -4382,3 +4382,68 @@ Our prediction, registered before scoring: CONFIRMED-RELATIVE more likely
 than CONFIRMED, driven by world-to-world spread in R_M (development 1.27 /
 1.74 / 1.36); E1, E4, E5 pass; E3 passes with its mean inside [−2,000, −500].
 Reviewer 61's predictions are in the plan's Amendment 1.
+
+# H39 SEALED RESULT (2026-08-21, seeds 700-729): CONFIRMED — WITH THE MARGIN AND THE AMENDMENT STATED
+
+Report `reports/h39_confirmation.json`, scorer `score_h39_confirmation.py`
+at `aa5a5b2`, plan `H39_CONFIRMATION_PLAN.md` Amendment 1 (`f78f209`).
+90/90 cells completed with zero failures; all records and protocols
+validated; every cell passed the fail-closed non-vacuity checks; prereg
+check passed at launch and at scoring.
+
+    E1  mean(R_G - R_M) = 0.886   CI [0.717, 1.054]   pred [0.8, 2.2]   PASS
+    E2  geomean R_M     = 1.636   CI [1.495, 1.7997]  pred [1.2, 1.8]   PASS
+    E3  mean L          = -1,545  CI [-1,649, -1,435] pred [-2000,-500] PASS
+    E4  mean F          = 0.815   CI [0.764, 0.866]   pred [0.65, 0.90] PASS
+    E5  used            = 30/30 worlds (alpha-zeroed ratio 2.86-4.34)   PASS
+
+    C0 continuity: fraction of worlds with R_M <= 1.5 = 0.433 (13/30);
+    arithmetic mean R_M 1.696; per-world R_M min 1.084, median 1.582, max
+    3.499; 24/30 worlds below 2.0. R_G < R_M in one world (717); F > 1 in
+    two (710, 728).
+
+Verdict by the frozen (amended) table: **CONFIRMED**. All five estimands
+pass on sign, bootstrap interval, and predicted interval. No PARTIAL marks.
+
+TWO THINGS STATED WITH THE VERDICT, NOT AFTER IT.
+
+1. The E2 bootstrap upper bound is 1.7997 against a registered ceiling of
+   1.8 — a margin of 0.0003. The point estimate (1.636) sits inside its
+   interval with room; the interval test did not. Had the CI crossed 1.8
+   the verdict would have been CONFIRMED-RELATIVE. The E2 magnitude claim
+   is therefore confirmed at its registered bound and not one digit
+   stronger.
+2. The amendment changed the verdict. Under the ORIGINAL E2 rule
+   (fraction of worlds with R_M <= 1.5 at least 0.5) this block reads
+   0.433 and the verdict would have been CONFIRMED-RELATIVE. Amendment 1
+   was registered before any sealed cell was read or scored, on the
+   review-61 argument that 1.5 is an inherited operational threshold with
+   no theoretical meaning and that the magnitude is the claim; the
+   reviewer predicted the fraction would be the least stable quantity, and
+   it was. Both verdicts are recorded here so no reader has to reconstruct
+   this.
+
+What is confirmed, as the plan states it: on 30 unseen worlds, two routed
+parameterized operators P(alpha) with K = 32 LEARNED argument directions,
+formed online under the ordinary objective with no family labels, (i) make
+an unseen-family member expressible through the arguments alone at a
+geometric-mean 1.64x the ordinary full-residual cost — an upper bound on
+multiplicative opportunity loss of 1.8 at 95%; (ii) do so because the
+directions are learned (a matched fixed-direction channel is 0.89 worse in
+ratio, 29/30 worlds); (iii) lower present-task cost by 1,545 nats on
+average, in every world; (iv) leave a full schema + innovation interface
+18.5% better than ordinary on the future task, in 28/30 worlds; and (v)
+are used (zeroing the arguments raises family NMSE 2.9-4.3x in every
+world).
+
+What is NOT confirmed: discovery (the architecture was supplied); the 1.5x
+absolute level (13/30 worlds); any description-length economy of the
+argument matrices (8-bit proxy only); slot structure at matched capacity.
+
+Reviewer-61 scorekeeping: E1 "very likely" — passed, near its lower
+predicted edge; E3 "likely, with world variability" — passed, every world
+negative, mean inside its interval; E4 "cleanest strong positive" — passed
+with the tightest relative interval; E5 "very likely" — 30/30; E2 geomean
+"about 1.4-1.7" — 1.636; fraction "least stable" — 0.433, below the old
+bar. Our own registered prediction (CONFIRMED-RELATIVE more likely) was
+wrong under the amended rule and right under the original one.

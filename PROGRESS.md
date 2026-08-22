@@ -2938,3 +2938,15 @@ own prediction (CONFIRMED-RELATIVE more likely than CONFIRMED) in
 `H39_DEVELOPMENT_CLOSURE.md` with the ladder, what was and was not
 established, the methodological record, and reviewer scorekeeping. The
 block is running; no sealed cell has been opened.
+
+# 2026-08-21 — H39 SEALED BLOCK SCORED: CONFIRMED
+
+The 90-lifetime block on seeds 700-729 completed with zero failures;
+`score_h39_confirmation.py` validated every record, passed every non-
+vacuity check, and read CONFIRMED from the amended table: E1 0.886 [0.717,
+1.054]; E2 geomean 1.636 [1.495, 1.7997] vs ceiling 1.8; E3 -1,545 [-1,649,
+-1,435]; E4 0.815 [0.764, 0.866]; E5 30/30. Recorded in `PREDICTIONS.md`
+with the 0.0003 E2 margin and the fact that the pre-amendment rule
+(fraction 0.433) would have read CONFIRMED-RELATIVE; appended the sealed
+verdict to `H39_DEVELOPMENT_CLOSURE.md`; learnings appended. Nothing further
+is licensed by this entry; the next rung (discovery) needs its own plan.

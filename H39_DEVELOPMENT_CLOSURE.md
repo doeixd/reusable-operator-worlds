@@ -111,3 +111,20 @@ schema +302; P2 -507; P8 -1,028; P16 -1,119 / -708 / -844; M2K32 -1,991 /
 
 (To be appended from `reports/h39_confirmation.json`; nothing above changes
 when it is.)
+
+# Sealed verdict (appended 2026-08-21 from `reports/h39_confirmation.json`)
+
+**CONFIRMED** on seeds 700-729 under `H39_CONFIRMATION_PLAN.md` Amendment
+1: E1 0.886 [0.717, 1.054]; E2 geometric mean 1.636 [1.495, 1.7997] against
+a ceiling of 1.8; E3 -1,545 nats [-1,649, -1,435]; E4 0.815 [0.764,
+0.866]; E5 30/30. C0-continuity fraction 0.433 — under the pre-amendment
+rule the verdict would have been CONFIRMED-RELATIVE; the E2 interval
+clears its bound by 0.0003. Full statement, both verdicts, and
+scorekeeping in `PREDICTIONS.md`. The development ladder above is
+unchanged by this.
+
+The sentence this block licenses, exactly: a jointly formed parameterized
+representation, supplied as architecture, preserves future variation
+opportunity and improves acquisition — existence and use. The next rung is
+discovery: can the learner decide for itself how many routed objects carry
+arguments, and which tasks use them, without being handed the slots.
