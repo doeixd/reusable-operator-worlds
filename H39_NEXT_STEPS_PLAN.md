@@ -143,3 +143,89 @@ premature commitment is the failure mode. C can say whether the
 abstraction mechanism scales with recurrence rather than with supplied
 capacity. None of them opens a sealed seed; a second confirmation block
 (seeds 800-829) would be written only if C passes on development worlds.
+
+# Amendment 1 (2026-08-22, review 63; before Stage A was implemented or run)
+
+## Stage A, interpretation and one robustness rule
+
+- A1's claim is narrowed, registered now: if A1 passes, the sentence is
+  "useful coordinates were not recoverable from the final EXTENSIONAL
+  task-object population (private residuals and promoted objects); they
+  had to be maintained in an explicit intensional channel during
+  learning." The census deliberately excludes M's learned `W`, which is
+  part of the finished model and is useful; the contrast is mining
+  realized solutions versus preserving a parameterization while solutions
+  form. "Nothing can be mined from the finished learner" is not a claim
+  this audit can make.
+- A2 robustness, added before running: the compensation fit keeps B1
+  (128 examples, 2,000 updates, fixed checkpoints; the plateau is read
+  from the recorded curve). If the world-mean compensated ratio lands in
+  [1.10, 1.50), a second optimizer (Adam 0.05, 2,000 updates) is run on
+  every cell and A2 passes only if both agree above 1.25; a pass with
+  either optimizer below 1.25 is PARTIAL and reads "used, and not cheaply
+  replaced by one optimizer". Above 1.50 on B1, the single-optimizer pass
+  stands. This is H37's operational-envelope discipline applied to the
+  ablation.
+
+## Stage B design, superseding the section above where they differ
+
+- H47 is stated as: what economic price is paid for DISCOVERING
+  membership rather than being told it. M already discovers it.
+- **L is an exact membership oracle, not a logit bias.** At the family
+  step, each trained family task's route over the two parameterized slots
+  is a hard mask onto its designated slot (families 0-1 -> slot 11, 2-3 ->
+  slot 10), with the remaining route mass over the ten plain slots learned
+  as usual; every other trainable component is identical to M. Mechanical
+  verification before scoring: correct-slot fraction = 1.000 over all 64
+  trained family tasks in every world. Unseen-family futures receive no
+  mask (discovered at adaptation time, as in M).
+- **H_early vs H_late.** The first run keeps H (anneal to near-one-hot
+  over the two parameterized slots by task 24) and adds H_late (same
+  endpoint hardness, commitment by task 56). M > H_early alone does NOT
+  establish premature commitment as the cause; the registered pattern for
+  that reading is H_early < H_late ~ M.
+- **Tolerances are relative.** Membership cost on J_present is
+  `|J_M - J_L| / |J_L - J_O|` with a registered bound (proposal 0.25);
+  on R_alpha and R_full it is `|R_M - R_L| / (R_G - R_L)` with the same
+  bound. Bounds are set after measuring M's existing route entropy and
+  slot agreement on worlds 0-2, before the B plan is frozen.
+- Teacher ARI / NMI / route agreement: diagnostic only. A different but
+  equally economical membership is a valid discovery.
+- Registered B predictions (review 63): J_M ~ J_L and R_full,M ~ R_full,L;
+  the largest discovery tax in R_alpha because innovation repairs
+  imperfect membership for the full interface but not for alpha-only
+  ("innovation buffers imperfect abstraction discovery"); H_early < M ~
+  H_late.
+
+## Stage C design, replacing the section above
+
+Stage C asks whether the learner discovers the ECONOMICALLY optimal
+cardinality K*, not the teacher family count F. H39 itself mapped four
+families onto two slots.
+
+- **C0 — opportunity census (runs before any discovery mechanism exists).**
+  Worlds with F in {1, 2, 4, 8} families at 16 tasks each; fixed
+  cardinality K in {1, 2, 4, 8} parameterized slots (K_max raised to 8 so
+  every F is representable one-per-family); matched coding currency with
+  the FULL marginal cost per active slot: D*(U_k) + D*(alpha channel) +
+  D*(routing over the extra slot) + D*(references), 8-bit proxy for the
+  census and the rate-distortion instrument for the decision. Determine
+  K*(F) = argmin_K J(K). If K*(F) does not vary with F, there is no
+  cardinality-discovery problem and C stops here.
+- **C1 — oracle cardinality.** K* supplied, membership learned: the
+  ceiling.
+- **C2 — discover cardinality.** K_max = 8 candidates with presence
+  decided at sleeps under the full marginal charge (never online; compress
+  after evidence). Controls: fixed 1, 2, 4, 8, and K*. Discovery wins if
+  J_discover is within tolerance of J_K* and K_discover ~ K* without
+  activating all of K_max.
+- **C3 — the economic law.** Vary recurrence and evidence; K_discover
+  should move when N_k s_bar_k > D*(S_k) changes.
+- Registered C predictions (review 63): substantially harder than B;
+  overbirth early (local specialization pays immediately, schema cost
+  amortizes slowly) or underbirth (expressive schemas absorb heterogeneous
+  families); the working mechanism is likely soft overcomplete WAKE ->
+  economic consolidation in SLEEP.
+
+Stage A is unchanged in protocol and remains the only frozen, runnable
+stage of this file.

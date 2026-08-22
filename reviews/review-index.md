@@ -2631,3 +2631,21 @@ sleep step). Adds an F_schema ∈ {1,2,4,8} granularity sweep, a composition
 experiment over (primitive, argument) crosses, the safeguard "economic
 equivalence before ontology recovery", and six attack points for an
 outside read of the confirmation before designing discovery.
+
+### [reviewer-feedback-63.txt](reviewer-feedback-63.txt)
+On the post-confirmation plan. Keeps Stage A with two cautions: A1 can
+only claim that coordinates were not recoverable from the *extensional*
+task-object population (M's learned W is in the finished model and is
+useful — the contrast is mining realized solutions vs preserving a
+parameterization while they form); a marginal A2 needs H37-style optimizer
+robustness before "cannot compensate". Reframes H47 as the economic
+*price* of discovering membership, since M already discovers it; demands
+L be an exact route-mask oracle verified at correct-slot fraction 1.000,
+not a +4 logit; adds H_late so M > H_early is not misread as "premature
+commitment"; prefers relative tolerances. Rejects Stage C as sketched:
+run a fixed-cardinality opportunity census first and test discovery of
+the *economic* optimum K*, not the teacher count F (H39 mapped four
+families onto two slots); raise K_max ≥ 8; charge the full marginal D* of
+an activated schema. Predictions: B — discovery tax shows up in R_α, not
+J or R_full ("innovation buffers imperfect abstraction discovery");
+C — overbirth then sleep consolidation.

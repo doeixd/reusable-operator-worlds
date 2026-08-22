@@ -1,0 +1,126 @@
+Reviewer feedback 63 — received 2026-08-22, on H39_NEXT_STEPS_PLAN.md
+(Stage A frozen; Stages B and C as designs).
+
+----------------------------------------------------------------------
+
+The sequencing is good: audit the interpretation -> isolate membership
+discovery -> only then cardinality. Keep Stage A, make two interpretive
+cautions, and make more substantial changes to B/C before they are frozen.
+
+STAGE A. Good, but be precise about what A1 can establish. M's learned W
+is itself part of the finished model; the post-hoc census intentionally
+excludes that online-created schema and asks whether the realized
+task-object population (private residuals / promoted objects) contains
+coordinates from which the same opportunity can be mined. If A1 passes,
+the strongest defensible statement is: useful coordinates were not
+recoverable from the final extensional task-object population; they had
+to be maintained in an explicit intensional channel during learning. Do
+not say "nothing useful can be mined from the finished M learner" — W is
+sitting in it and is useful. The distinction is: mine coordinates from
+realized solutions versus preserve a parameterization while solutions are
+formed. That is arguably an even better claim.
+
+A2 has one possible weakness: if it passes you want to conclude
+representational non-substitutability, not merely that the standard
+optimizer could not find compensation. Given H37, the compensation fit
+should satisfy the operational-envelope discipline: abundant support,
+convergence plateau, preferably a second optimizer or restart robustness
+if the result is close to 1.25. A compensated ratio near 2x is no
+problem; at 1.28 I would be much less comfortable on one finite
+optimizer. Since A is frozen, do not rewrite it unless the protocol lacks
+a convergence guard; interpret a marginal pass cautiously.
+
+STAGE B is the right next question, and there is an important conceptual
+fact: M has already demonstrated discovery of membership well enough to
+work. So H47 is not "can membership be discovered" but "what economic
+price do we pay for discovering membership rather than being told it".
+
+Tighten L. A +4 correct-family bias with frozen logits is not necessarily
+a pure membership oracle; depending on the other logits it may not enforce
+membership and its initialization could matter. Define L semantically:
+p(designated parameterized slot) = 1 at the family step, or an explicit
+route mask; keep all other trainable components identical; verify
+mechanically that the correct-slot fraction is 1.000 for all trained
+family tasks. No magic +4.
+
+Keep teacher ARI non-load-bearing. If M reaches ARI 0.6 with J_M ~ J_L and
+R_alpha,M ~ R_alpha,L, the conclusion is "a different but equally useful
+membership structure", not "discovery failed".
+
+Add one control to the hard-commitment question eventually: H_early vs
+H_late, both ending equally hard, H_late committing only after much more
+evidence. Prediction H_early < H_late ~ M: discreteness is not expensive;
+committing before sufficient evidence is. Not needed for the first
+three-world run, but do not interpret M > H as proving premature
+commitment without it.
+
+Tolerances should be relative where possible (e.g. |J_M - J_L| normalized
+by |J_L - J_O|); absolute ones become historical accidents as world size
+and family count vary. For worlds 0-2 the proposed thresholds are fine as
+provisional gates.
+
+STAGE C has a more important issue: do not freeze C as sketched. Before
+implementing cardinality discovery, run a fixed-cardinality opportunity
+census (the V4 lesson): for every regime evaluate fixed K in {1,2,4,6,...}
+under the same coding currency and determine K*_oracle = argmin_K J(K).
+Only after an economic optimum is known should you ask whether a learner
+discovers it. The current scoring assumes K* = F, but H39 itself warns
+against that: four teacher families were mapped onto two parameterized
+slots ({0,1} -> S1, {2,3} -> S2), so the number of observed families is
+already not the number of useful schema objects. Optimum cardinality is
+an economic property, not a teacher-count property. Stage C should ask
+K_discovered ~ K*_economic, not K_discovered = F_teacher.
+
+Ceiling issue: K_max = 6 with F in {1,2,4,8} — if fixed-correct ever means
+one slot per family, F = 8 cannot be represented by six slots. Raise
+K_max >= 8, change the grid, or define explicitly why F = 8 does not imply
+eight candidate objects.
+
+Charge the whole marginal representation cost: activating a schema also
+creates references, routing complexity, argument code, presence metadata.
+The marginal decision should approximate Delta D* = D*(S_k) +
+D*(references) + D*(alpha channel) + D*(routing overhead) minus whatever
+disappears elsewhere; otherwise the learner over-activates because
+schemas are underpriced. V5 makes this quantitative.
+
+Preferred Stage C ladder: C0 opportunity census (fixed K per F, matched
+D*; if K*(F) does not change across F, stop — there is no cardinality
+problem); C1 oracle cardinality (K* given, membership learned: the
+ceiling); C2 discover cardinality (K_max > K*, sleep birth/retire; ask
+J_discover ~ J_K* and K_discover ~ K*); C3 generalization of the economic
+law (vary recurrence/evidence; K_discover should change when
+N_k s_bar_k > D*(S_k) changes — much stronger than recovering a teacher
+count).
+
+PREDICTIONS FOR B: J_M ~ J_L and R_full,M ~ R_full,L; the largest
+discovery tax in R_alpha, because imperfect membership can be repaired
+through eps, which helps full-interface but not alpha-only acquisition —
+"innovation buffers imperfect abstraction discovery", another reason E4
+matters. M > H; stronger prediction H_early < M ~ H_late, showing soft
+routing buys time to gather evidence.
+
+PREDICTIONS FOR C: substantially harder than membership. Overbirth
+(K_discovered > K*: local specialization gives immediate gains while
+schema cost amortizes slowly) or underbirth (existing schemas stretch to
+absorb heterogeneous families); both pressures have appeared in ROW.
+Guess: overbirth early, consolidation pressure required to shrink — the
+successful mechanism may be soft overcomplete WAKE -> economic
+consolidation during SLEEP, a satisfying reappearance of the original
+architecture.
+
+If B + C work: the learner autonomously determines which experiences
+belong to a reusable parameterized primitive, how many primitives, their
+directions, their arguments, and when private innovation is still
+necessary — a learned vocabulary L = {P_1(alpha), ..., P_K(alpha)}.
+Composition P_i o P_j o P_k is then the natural next question and program
+synthesis becomes inferring (i, alpha_i), (j, alpha_j), (k, alpha_k) from
+examples.
+
+RECOMMENDATION. Run Stage A as frozen, with narrower A1 wording and a
+cautious reading of a marginal A2. Freeze Stage B after making L an exact
+membership oracle, keeping ARI diagnostic, and not calling M > H proof of
+premature commitment without the late-hardening control. Redesign Stage C
+before freezing: census fixed cardinalities first -> identify K*_economic
+-> then test whether the learner discovers K*. The grand thesis is about
+a learner discovering the economically useful language, not
+reconstructing the hidden ontology used to generate the world.
