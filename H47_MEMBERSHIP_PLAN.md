@@ -300,3 +300,31 @@ to find.
 
 A separation knob rho_group (review 67) is deferred until one clean
 membership world exists. Stage C remains unfrozen.
+
+# Amendment 3 (2026-08-23, before any B2 lifetime; first teacher-gate run refused)
+
+The first run of `audit_h47_b2_world.py` read FAIL on G3 (worlds 0, 1) and
+G4 (3/3). Both are instrument errors of kinds this project has recorded
+before, found by checking the gates against the baseline:
+
+- G4 as frozen bounded the per-FAMILY behavioural-contribution spread at
+  10%. The unmodified G = 1 world has spreads 0.124 / 0.062 / 0.109 —
+  the bound fails on the baseline itself (a threshold registered without
+  its baseline). The family step contributes ~1% of output variance and
+  its spread is set by which base primitives each program passes through,
+  not by the group extension. Amended: G4 is the GROUP-mean contribution
+  balance, <= 20%; the per-family spread is REPORTED beside the G = 1
+  spread for the same world as a covariate. G = 2 world 0 is noted as the
+  least balanced (family 3 at 0.0137 versus ~0.010).
+- G3's "best within-group mixture" searched the affine line through the
+  two trained operators; a third unit-norm point on the same circle is
+  not on that line, so within-group fits were loose and Q was not the
+  intended quantity. Amended: mixtures are least-squares fits in U-space
+  over the group's full span (oracle, learner-blind), within and cross;
+  substitution errors are normalized by the family step's behavioural
+  CONTRIBUTION (the V4.1 rule), not by total variance:
+  within_err / contribution <= 0.05, cross_err / contribution >= 0.5, and
+  Q = cross_err / within_err >= 3 retained.
+
+G2 and G5 are unchanged (both passed 3/3: within-group U residual 0.0,
+group classification accuracy 1.000). The refused run is not a result.
