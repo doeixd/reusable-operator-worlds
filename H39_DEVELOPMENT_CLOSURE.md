@@ -128,3 +128,15 @@ representation, supplied as architecture, preserves future variation
 opportunity and improves acquisition — existence and use. The next rung is
 discovery: can the learner decide for itself how many routed objects carry
 arguments, and which tasks use them, without being handed the slots.
+
+# Stage A audits (appended 2026-08-22; `reports/h39_confirmation_followups.json`)
+
+A1 PASS: post-hoc census on the sealed ordinary populations 2.59x versus
+online M 1.64x (+0.96); on M's own residual populations 6.33x. The
+narrowed sentence stands: useful coordinates were not recoverable from
+the final extensional task-object population; they had to be maintained
+in an explicit intensional channel during learning. A2 PASS: at matched
+re-fit budget, removing the arguments costs 2.01x (1.69-2.54 across
+worlds); the argument channel is used and not substitutable by route +
+residual. Review 62's attack points 1 and 4 are closed; 2, 3, 6 were
+closed from the G control; 5 is on record.

@@ -1,0 +1,63 @@
+prereg check OK: 15 frozen files unchanged; all STATUS-cited paths exist
+world 700 A1: R_M 1.580 | census(M) max 6.460 r8 6.632 | census(O) max 1.524
+world 700 A2: uncompensated median 3.39 -> compensated median 2.106
+world 701 A1: R_M 1.625 | census(M) max 5.283 r8 5.993 | census(O) max 2.357
+world 701 A2: uncompensated median 3.14 -> compensated median 2.176
+world 702 A1: R_M 1.655 | census(M) max 5.653 r8 6.067 | census(O) max 1.960
+world 702 A2: uncompensated median 3.26 -> compensated median 2.018
+world 703 A1: R_M 2.171 | census(M) max 9.268 r8 10.436 | census(O) max 5.534
+world 703 A2: uncompensated median 3.12 -> compensated median 1.932
+world 704 A1: R_M 1.381 | census(M) max 8.487 r8 8.747 | census(O) max 1.736
+world 704 A2: uncompensated median 3.93 -> compensated median 1.956
+world 705 A1: R_M 2.177 | census(M) max 6.644 r8 7.068 | census(O) max 4.434
+world 705 A2: uncompensated median 3.14 -> compensated median 1.690
+world 706 A1: R_M 1.909 | census(M) max 7.508 r8 7.914 | census(O) max 4.089
+world 706 A2: uncompensated median 3.54 -> compensated median 2.025
+world 707 A1: R_M 1.357 | census(M) max 4.121 r8 4.224 | census(O) max 2.662
+world 707 A2: uncompensated median 2.91 -> compensated median 1.696
+world 708 A1: R_M 1.084 | census(M) max 4.028 r8 4.303 | census(O) max 3.349
+world 708 A2: uncompensated median 2.82 -> compensated median 1.751
+world 709 A1: R_M 1.530 | census(M) max 6.166 r8 6.266 | census(O) max 1.780
+world 709 A2: uncompensated median 3.79 -> compensated median 2.227
+world 710 A1: R_M 1.919 | census(M) max 7.853 r8 8.194 | census(O) max 2.404
+world 710 A2: uncompensated median 3.98 -> compensated median 2.159
+world 711 A1: R_M 1.376 | census(M) max 7.123 r8 7.314 | census(O) max 1.844
+world 711 A2: uncompensated median 3.40 -> compensated median 2.156
+world 712 A1: R_M 1.405 | census(M) max 7.269 r8 7.428 | census(O) max 3.074
+world 712 A2: uncompensated median 3.45 -> compensated median 1.887
+world 713 A1: R_M 2.663 | census(M) max 7.310 r8 7.587 | census(O) max 3.400
+world 713 A2: uncompensated median 3.28 -> compensated median 1.760
+world 714 A1: R_M 1.395 | census(M) max 6.258 r8 6.487 | census(O) max 2.443
+world 714 A2: uncompensated median 4.16 -> compensated median 2.063
+world 715 A1: R_M 1.104 | census(M) max 4.906 r8 5.245 | census(O) max 2.855
+world 715 A2: uncompensated median 3.78 -> compensated median 2.164
+world 716 A1: R_M 1.420 | census(M) max 4.684 r8 4.867 | census(O) max 3.080
+world 716 A2: uncompensated median 3.49 -> compensated median 1.841
+world 717 A1: R_M 1.363 | census(M) max 6.935 r8 7.548 | census(O) max 1.890
+world 717 A2: uncompensated median 3.93 -> compensated median 2.188
+world 718 A1: R_M 1.585 | census(M) max 7.001 r8 8.415 | census(O) max 2.227
+world 718 A2: uncompensated median 3.91 -> compensated median 2.051
+world 719 A1: R_M 1.370 | census(M) max 5.133 r8 5.541 | census(O) max 1.846
+world 719 A2: uncompensated median 3.27 -> compensated median 1.972
+world 720 A1: R_M 1.978 | census(M) max 5.963 r8 6.449 | census(O) max 4.251
+world 720 A2: uncompensated median 3.29 -> compensated median 1.877
+world 721 A1: R_M 1.439 | census(M) max 5.924 r8 6.286 | census(O) max 1.547
+world 721 A2: uncompensated median 3.62 -> compensated median 1.877
+world 722 A1: R_M 3.499 | census(M) max 7.662 r8 8.121 | census(O) max 5.350
+world 722 A2: uncompensated median 3.03 -> compensated median 1.850
+world 723 A1: R_M 1.967 | census(M) max 7.265 r8 7.637 | census(O) max 2.462
+world 723 A2: uncompensated median 3.68 -> compensated median 1.962
+world 724 A1: R_M 2.139 | census(M) max 6.638 r8 6.951 | census(O) max 3.897
+world 724 A2: uncompensated median 3.60 -> compensated median 2.229
+world 725 A1: R_M 1.602 | census(M) max 8.502 r8 8.701 | census(O) max 1.818
+world 725 A2: uncompensated median 4.12 -> compensated median 2.536
+world 726 A1: R_M 1.742 | census(M) max 6.233 r8 6.322 | census(O) max 2.097
+world 726 A2: uncompensated median 3.31 -> compensated median 1.992
+world 727 A1: R_M 1.200 | census(M) max 4.961 r8 5.540 | census(O) max 3.038
+world 727 A2: uncompensated median 4.19 -> compensated median 1.937
+world 728 A1: R_M 2.080 | census(M) max 7.340 r8 7.645 | census(O) max 1.957
+world 728 A2: uncompensated median 4.34 -> compensated median 2.203
+world 729 A1: R_M 1.159 | census(M) max 5.405 r8 5.738 | census(O) max 2.226
+world 729 A2: uncompensated median 3.98 -> compensated median 2.130
+A1: online R_M 1.636 | census(M) max-rank 6.334 (rank 8 6.714) | census(O) max-rank 2.592 -> PASS
+A2: mean of world-median compensated ratio 2.014 (robustness None) -> PASS

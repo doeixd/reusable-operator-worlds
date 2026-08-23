@@ -2979,3 +2979,13 @@ Amendment 2 registered a matched-budget denominator (alpha-zeroed refit /
 alpha-free refit) before the registered run and re-froze. Re-smoke: A2
 2.08 on two tasks. The registered 30-world run is in progress; no Stage A
 result has been read.
+
+# 2026-08-22 — STAGE A COMPLETE: A1 PASS, A2 PASS
+
+The registered 30-world audit finished (`reports/h39_confirmation_followups.json`,
+`tools/h39_followups.log`). A1: census on O 2.59x and on M 6.33x against
+online M 1.64x — both exceed the +0.5 margin; the narrowed "extensional
+population" sentence stands. A2: matched-budget compensated ratio 2.01
+(1.69-2.54), no robustness band entered. Recorded in `PREDICTIONS.md`
+(including one missed diagnostic prediction), appended to the closure,
+learnings added. Stage A gate satisfied; Stage B may be frozen next.

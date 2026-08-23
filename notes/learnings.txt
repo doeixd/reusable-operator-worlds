@@ -3467,3 +3467,34 @@ Neither needs a new lifetime.
 DISCOVERY IS THREE PROBLEMS. Membership (fixed count), cardinality
 (pool + D* charge, with too-few / correct / too-many / discovered
 controls), then type. Economics decide; teacher recovery is a diagnostic.
+
+
+
+================================================================================
+STAGE A: THE AUDITS HELD, AND ONE OF THEM NEEDED A MATCHED-BUDGET DENOMINATOR (2026-08-22)
+================================================================================
+
+Post-hoc extraction from O: 2.59x. Online formation in M: 1.64x. Same 30
+sealed worlds, same futures, same fitting instrument. Extraction from M's
+own residual population: 6.33x — because in M the family structure has
+moved into the arguments. Both registered rules passed
+(`reports/h39_confirmation_followups.json`).
+
+THE DENOMINATOR IS PART OF THE CLAIM. A2 as first frozen divided an
+alpha-zeroed RE-FIT by the INTACT model and read 0.58: a 2,000-update
+full-batch re-fit beats one online pass with or without the argument.
+The statistic was measuring refit budget. Caught on a one-world smoke
+before the registered run; fixed by giving both arms the same re-fit
+(Amendment 2). Any ablation that re-optimizes must compare against the
+intact model re-optimized identically, or it compares two budgets.
+
+PREDICT DIAGNOSTICS TOO, AND SCORE THEM. We predicted census(M) in
+[2.2, 3.5] and got 6.3. The rule did not depend on it, but the miss says
+something: we still under-estimate how completely an argument channel
+drains family structure out of the residuals once it exists.
+
+OPERATIONAL ENVELOPE, APPLIED. A2's rule had a robustness band for a
+marginal result (a second optimizer if the mean landed in [1.10, 1.50)).
+It was not entered (2.01). Write the band into the rule before running;
+then a clear result needs no post-hoc defence and a marginal one gets the
+extra optimizer automatically.

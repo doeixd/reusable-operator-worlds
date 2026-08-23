@@ -4533,3 +4533,51 @@ on the trained family tasks has not been run.
 G's own alpha-zeroed ratio is 1.29 in the sealed block (two slots), versus
 ~1.05 for single-slot G_8 in development: a fixed random two-slot channel
 is slightly used, which is consistent with E4's partial budget share.
+
+# STAGE A RESULT (2026-08-22): BOTH AUDITS PASS; "MADE, NOT MINED" STANDS IN ITS NARROWED FORM
+
+Plan `H39_NEXT_STEPS_PLAN.md` Stage A, frozen with Amendments 1-2 before
+the registered run (`27e5a36`). Report
+`reports/h39_confirmation_followups.json`. Reads only the 30 sealed
+ordinary and M artifacts and the sealed report; no new lifetimes.
+
+A1 — post-hoc extraction versus online formation, same worlds, same
+futures, same instrument (geometric means over seeds 700-729):
+
+    online alpha-only, M (sealed E2)             1.636
+    census on O's realized population, max rank  2.592   (+0.96)
+    census on M's realized population, max rank  6.334   (+4.70; rank 8: 6.714)
+
+Registered rule: PASS iff both census geomeans exceed online M by >= 0.5.
+Both do. The O-census beat online M in 2/30 worlds (700, 728); its
+per-world range is 1.52-5.53; O's realized populations held 11-36 objects.
+Verdict: **PASS**. Registered sentence (Amendment 1): useful coordinates
+were not recoverable from the final EXTENSIONAL task-object population;
+they had to be maintained in an explicit intensional channel during
+learning. Not claimed: that nothing useful can be mined from the finished
+M learner — its learned argument matrices are in it and are what the
+online fit uses. The M-population census at 6.3x is consistent with the
+confirmation's E5: in M the family structure lives in the arguments, and
+M's private residuals carry even less of it than O's.
+
+A2 — compensation at matched re-fit budget (Amendment 2: alpha-zeroed
+re-fit / alpha-free re-fit, both 2,000 updates on the task's own 128
+examples): mean of world medians **2.014**, per-world medians 1.69-2.54,
+all finite, maximum plateau change between updates 1,000 and 2,000 of
+3.9e-4 NMSE. Above the 1.50 line, so the robustness band was not entered
+and no second optimizer was required. Verdict: **PASS**. Re-optimizing
+route and private residual with the arguments removed recovers less than
+half of what the arguments carry. E5's "causally used" reading is kept,
+now with the qualification it needed: used, and not replaceable by the
+other task-local pathways at matched budget under one finite optimizer
+(2.0x is far from the 1.25 bar; H37-style agreement was not required by
+the rule and was not run).
+
+Predicted intervals: A1 census(M) [2.2, 3.5] — MISSED high (6.33; we
+under-predicted how little family structure M's residuals hold); census(O)
+[2.2, 3.5] — 2.59, inside. A2 [1.4, 2.5] — 2.01, inside. The A1 miss is a
+prediction error on a diagnostic quantity and does not touch the rule.
+
+Stage A gate: satisfied. Stage B (H47) may now be frozen as its own plan,
+with L as an exact route-mask oracle, H_early / H_late, and relative
+tolerances set after measuring M's route statistics on worlds 0-2.
