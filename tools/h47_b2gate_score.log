@@ -1,0 +1,6 @@
+prereg check OK: 16 frozen files unchanged; all STATUS-cited paths exist
+6 cells validated on the G=2 world
+world 0: E_alpha M 0.05288 L 0.04034 tax +0.271 (robust +0.273) | full tax +0.159 | J M-L -479 | M entropy 0.913 ARI -0.01 | L entropy 0.000
+world 1: E_alpha M 0.02999 L 0.02716 tax +0.099 (robust +0.099) | full tax +0.094 | J M-L -529 | M entropy 0.940 ARI -0.01 | L entropy 0.000
+world 2: E_alpha M 0.03374 L 0.03467 tax -0.027 (robust -0.028) | full tax +0.058 | J M-L -522 | M entropy 0.956 ARI 0.05 | L entropy 0.000
+tax log alpha by world: [0.271, 0.099, -0.027]; M_G2 entropy [0.913, 0.94, 0.956]; VERDICT NO-OPPORTUNITY

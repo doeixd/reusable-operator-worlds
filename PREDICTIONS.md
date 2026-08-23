@@ -4698,3 +4698,57 @@ learned directions is cheap, and earlier is a little less cheap".
 Licensing: B1 licenses nothing by itself. B2 (true membership on a two-
 subspace world) proceeds as designed, with the generator tests required
 by review 66 before freezing.
+
+# H47 B2 OPPORTUNITY GATE (2026-08-23): NO-OPPORTUNITY — THE LEARNER ABSORBS TWO ORTHOGONAL FAMILIES INTO ONE DISTRIBUTED CHANNEL
+
+Plan `H47_MEMBERSHIP_PLAN.md` Amendments 2-3 (frozen before any B2
+lifetime). Report `reports/h47_b2_gate.json`; teacher gates
+`reports/h47_b2_world_gates.json` (PASS 3/3). 6/6 cells completed; all
+non-vacuity checks passed (L_true masked 64/64 family tasks onto their
+GROUP's slot in every world; argument matrices and alphas moved in every
+arm and fit).
+
+The G = 2 world has two ORTHOGONAL rank-2 family subspaces (cross-group
+least-squares residual 1.0; held-out families exactly in their group's
+span; group classification from teacher behaviour 1.000). Membership is
+real and, at the teacher level, perfectly separable.
+
+Membership tax, log E_alpha(M) - log E_alpha(L_true), k=128 B1 (robust
+optimizers within 0.002): **+0.271 / +0.099 / -0.027** (worlds 0 / 1 / 2).
+Gate: >= +0.15 in >= 2 of 3 worlds — **1/3**. Verdict **NO-OPPORTUNITY**;
+per the plan, H_early / H_late are NOT launched on this world.
+
+Secondary: full-interface tax +0.159 / +0.094 / +0.058 (L_true better,
+small, consistent); present-task J(M) - J(L_true) = -479 / -529 / -522
+nats (M BETTER in every world: the mask costs the present). M_G2's route
+diagnostics against the true group labels: median conditional entropy
+0.913 / 0.940 / 0.956 bits of 1.0, ARI -0.01 / -0.01 / 0.05. The learner
+did NOT separate the two groups even though they exist and are
+orthogonal; it again used both slots as one distributed 64-direction
+channel — and paid only a small, inconsistent alpha-only tax and NO
+present-task cost for doing so.
+
+Reading, registered: at this argument capacity (two slots x K = 32), one
+distributed channel is expressively sufficient for the union of two
+rank-2 family subspaces, so discrete identity buys nothing the learner
+needs. Naming two manifolds is not cheaper than stretching one when the
+one has 64 directions to stretch with. This is the amortization question
+review 67 deferred ("when does it become cheaper to name two manifolds
+than to stretch one?") answering itself at the generous end: not here.
+It is also H48b's variable (within-schema dimensionality) showing up
+before H48a (schema count) was even asked.
+
+Scorekeeping: review 67 predicted R_alpha,M > R_alpha,L_true "by a
+measurable amount" — true in 2/3 worlds but below the registered gate in
+2/3; and J_M ~ J_L — wrong in direction: M beats L on J in 3/3. Ours
+("gate passes; M_G2's entropy falls well below 0.93 and group ARI rises
+above 0.5") — wrong on all three counts. The learner does not find
+orthogonal groups because it does not need to.
+
+Licensing: nothing. The registered next question, for a separate frozen
+plan: make discrete identity ECONOMICALLY necessary by restricting
+argument capacity — K per slot at or near the group rank (K = 2 or 4), so
+that one distributed channel can no longer absorb both groups — and
+re-run the gate there; if membership then has value, B2's H arms follow
+on that world. A separation knob (review 67's rho_group) remains
+deferred.

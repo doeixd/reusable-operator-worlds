@@ -3057,3 +3057,16 @@ Gates then passed 3/3 (`reports/h47_b2_world_gates.json`), with the note
 that G2/G3/G5 are near-tautological at r_meta = 1 and the economic gate
 is the decisive one. M_G2 and L_true are running on worlds 0-2; the gate
 scorer `score_h47_b2_gate.py` is committed. No B2 endpoint has been read.
+
+# 2026-08-23 — B2 OPPORTUNITY GATE: NO-OPPORTUNITY; H ARMS NOT LAUNCHED
+
+6/6 gate cells completed; `score_h47_b2_gate.py` validated the G = 2
+records and non-vacuity and read the membership tax at +0.271 / +0.099 /
+-0.027 log units (gate >= 0.15 in >= 2/3 worlds: 1/3). Verdict
+NO-OPPORTUNITY; per the plan H_early / H_late are not launched. M_G2
+routes the two orthogonal groups as one distributed channel (entropy
+~0.93, ARI ~0), beats the oracle mask on present cost by ~500 nats in
+every world, and trails it slightly on the full interface. Recorded in
+`PREDICTIONS.md` with scorekeeping (both prediction sets wrong in the
+same direction) and the registered follow-up (restrict K so that discrete
+identity becomes economically necessary); learnings appended.

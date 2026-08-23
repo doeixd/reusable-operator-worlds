@@ -3601,3 +3601,42 @@ DISCRETIZATION AFTER FORMATION IS NEARLY FREE HERE. H_late is within
 noise of M on everything while being essentially one-hot. That is the
 compile step of the wake/sleep story working at small cost — but the
 table did not license that sentence, so it is recorded as an observation.
+
+
+
+================================================================================
+B2 GATE: ORTHOGONAL GROUPS, AND THE LEARNER STILL DID NOT NAME THEM (2026-08-23)
+================================================================================
+
+Two perfectly separable family subspaces; teacher-level classification
+1.000; the two-slot K = 32 learner routes both with entropy ~0.93/1.0 and
+ARI ~ 0, pays +0.27 / +0.10 / -0.03 log units on alpha-only acquisition
+for it, is BETTER than the told-membership oracle on present cost by ~500
+nats in every world, and is only slightly worse on the full interface
+(`reports/h47_b2_gate.json`). Gate NO-OPPORTUNITY (1/3).
+
+DISCRETE IDENTITY HAS TO BE ECONOMICALLY NECESSARY BEFORE A LEARNER WILL
+FORM IT. Existence of structure in the world is not enough; the learner
+must be unable to afford NOT representing it. With 64 argument directions
+the union of two rank-2 subspaces fits in one channel, so the learner
+stretches one manifold rather than naming two. This is the same
+economics as PROMOTE in V3-V5: no object is born unless the saving beats
+the cost, and here the cost of not separating is ~0.
+
+THE ORACLE MASK IS NOT FREE. Being told the group cost ~500 nats of
+present-task loss in 3/3 worlds (each task loses half its directions at
+every step of the lifetime) while buying small future gains. "Told the
+truth" and "better off" are different claims when the truth is a
+restriction.
+
+REVIEWER AND PI PREDICTIONS BOTH MISSED THE SAME WAY. We both expected
+separable groups to induce separation. The baseline-first rule caught a
+category error last time; this time a frozen gate caught an economics
+error: we registered the world's structure, not the learner's incentive.
+Next time ask: what does the learner lose by ignoring this structure?
+
+CAPACITY IS THE KNOB. The registered follow-up is K at or near the group
+rank, so that one channel cannot absorb both groups. That is H48b
+(within-schema dimensionality) arriving before H48a (schema count) —
+they are not separable questions; the economics of naming a manifold
+depend on how wide the existing ones are.
