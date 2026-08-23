@@ -3100,3 +3100,15 @@ routing at small K without aligning to the groups (ARI ~0). Recorded in
 `PREDICTIONS.md` with scorekeeping and the registered next plan
 (discovery arms at K = 4 with a present-tolerance band, frozen before
 any run); learnings appended.
+
+# 2026-08-23 — REVIEW 69 FILED; H49 DISCOVERABILITY CENSUS FROZEN AND RUNNING
+
+Filed review 69 (do not anneal M at K = 4: the grouping has future value
+but no present value, so non-discovery is rational; first find a
+retrospective signal). Froze `H49_DISCOVERABILITY_PLAN.md`: on the
+existing K = 4 artifacts (M_4 label-free, L_4 told), six candidate
+partitions applied as re-fit policies; C_LOO, a two-part D* proxy, and
+substitutability from experienced tasks only; outcomes A DISCOVERABLE /
+B UNDERDETERMINED / C SIGNAL NEEDS ORGANIZATION; our prediction C. Wrote
+`audit_h49_discoverability.py` (mechanics smoke-tested); the ~2,300-refit
+census is running. Nothing read.
