@@ -140,3 +140,12 @@ directed, before any code or run:
 Estimated cost after tightening: migrations ~2 h; scoring ~ 18 cells
 (6 arms x 3 worlds at m = 16, 64 plus reused m = 0) x ~7 min plus
 substitutability for 3 arms x 2 budgets — about 5 h total.
+
+# Amendment 2 (2026-08-23, before any code): RANDOM partitions reuse H49's
+
+The candidate list gave RANDOM-1/2 fresh seeds `SeedSequence([50, world,
+r])` while defining the m = 0 row as H49's data. H49's random partitions
+were drawn with `SeedSequence([49, world, r])`; fresh draws would leave
+the RANDOM arms without a valid m = 0 baseline. Amended: RANDOM-1/2 are
+H49's partitions, seeds `[49, world, r]`, so every arm's m = 0 row is
+H49's measurement. No other change.
