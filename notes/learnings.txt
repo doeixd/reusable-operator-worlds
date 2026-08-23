@@ -3567,3 +3567,37 @@ statements, for this file:
   membership" — it uses two slots as one distributed channel in a world
   with one family subspace (h47_baselines). Discovery is still the open
   rung, and it needs a world with something to discover.
+
+
+
+================================================================================
+H47 B1: QUANTIZING THE CONTINUOUS MANIFOLD IS CHEAP, NOT FREE (2026-08-22)
+================================================================================
+
+Forcing every task onto one of the two parameterized slots (hard routing
+at T = 0.1, entropies ~0.005 bits) costs ~10-15% in alpha-only future
+acquisition and 7-25% of the present-task gain; doing it late costs about
+half of doing it early; an ARBITRARY partition from onset costs 36-69% of
+the present gain (`reports/h47_b1.json`). The frozen table read MIXED
+because every hardening effect on R_alpha fell just under the +0.15
+log-unit tolerance; the ordering M < H_late < H_early < L_arb held in
+every world.
+
+SET TOLERANCES AT THE EFFECT SIZE YOU WANT TO DETECT, NOT AT THE
+BASELINE'S SPREAD ALONE. One cross-world SD of M was a defensible
+"neutral" band, but the hardening effects turned out to be about one SD
+too, so a three-world block could only say "small". If the question is
+"is there a premature-commitment penalty", register a one-sided paired
+test on the sign across worlds alongside the magnitude band.
+
+WHERE THE COST LANDS IS INFORMATIVE. A wrong ontology imposed early
+hurts the PRESENT far more than the FUTURE on this world (J cost large,
+R_alpha cost small): the innovation channel repairs future acquisition
+but cannot repair a lifetime of routing through the wrong half of the
+manifold. This is the "innovation buffers imperfect abstraction" pattern
+showing up on the present-future axis rather than the alpha-full axis.
+
+DISCRETIZATION AFTER FORMATION IS NEARLY FREE HERE. H_late is within
+noise of M on everything while being essentially one-hot. That is the
+compile step of the wake/sleep story working at small cost — but the
+table did not license that sentence, so it is recorded as an observation.

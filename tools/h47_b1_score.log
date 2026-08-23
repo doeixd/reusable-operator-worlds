@@ -1,0 +1,9 @@
+prereg check OK: 16 frozen files unchanged; all STATUS-cited paths exist
+all 12 cells validated
+world 0: m: J +0 R_a 1.272 R_f 0.710 H 0.912 | larb: J +725 R_a 1.458 R_f 0.593 H 0.000 | hearly: J +405 R_a 1.449 R_f 0.704 H 0.007 | hlate: J +210 R_a 1.318 R_f 0.752 H 0.004 | M R_a 1.272
+world 1: m: J +0 R_a 1.741 R_f 0.823 H 0.939 | larb: J +676 R_a 1.909 R_f 0.958 H 0.000 | hearly: J +245 R_a 1.859 R_f 0.938 H 0.004 | hlate: J +137 R_a 1.909 R_f 0.881 H 0.006 | M R_a 1.741
+world 2: m: J +0 R_a 1.355 R_f 0.757 H 0.960 | larb: J +654 R_a 1.616 R_f 0.781 H 0.000 | hearly: J +134 R_a 1.537 R_f 0.711 H 0.004 | hlate: J +97 R_a 1.328 R_f 0.806 H 0.011 | M R_a 1.355
+larb: {'J_class': 'COST', 'R_alpha_class': 'NEUTRAL', 'R_full_class': 'MIXED'}  per-world dlogR_alpha [0.137, 0.092, 0.176]
+hearly: {'J_class': 'NEUTRAL', 'R_alpha_class': 'NEUTRAL', 'R_full_class': 'NEUTRAL'}  per-world dlogR_alpha [0.13, 0.066, 0.127]
+hlate: {'J_class': 'NEUTRAL', 'R_alpha_class': 'NEUTRAL', 'R_full_class': 'NEUTRAL'}  per-world dlogR_alpha [0.036, 0.092, -0.02]
+LABEL MIXED (reported cell by cell)

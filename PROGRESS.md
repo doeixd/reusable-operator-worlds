@@ -3027,3 +3027,15 @@ temperature on their conditional; policies off are bitwise M; tests), the
 runner hooks and provenance records, loader tolerance for pre-policy
 artifacts, launcher cells, and `score_h47_b1.py`. Full suite OK. The nine
 B1 lifetimes are running; none read.
+
+# 2026-08-22 — H47 B1 SCORED: MIXED; ORDERING HOLDS IN SIGN BELOW TOLERANCE
+
+9/9 B1 cells completed; `score_h47_b1.py` validated records and
+non-vacuity (mask 64/64; H arms at 0.004-0.011 bits, pair comparable) and
+read MIXED: L_arb a COST on J (36-69% of the M-O gain) but NEUTRAL on
+R_alpha (+0.135 mean, tolerance 0.15); H_early and H_late NEUTRAL on all
+three with the predicted ordering M < H_late < H_early in every world.
+Recorded in `PREDICTIONS.md` with the tolerance-calibration note and
+scorekeeping; learnings added. Next: B2 generator extension
+(`schema_groups`) with its bitwise G = 1 test and functional-separation
+audit, then B2's own plan.

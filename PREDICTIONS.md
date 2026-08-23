@@ -4642,3 +4642,59 @@ H48 is split: H48a discrete schema cardinality (functional manifold
 count, never occupied slots), H48b within-schema dimensionality; both
 under one D*. B2 acquires generator tests (G = 1 bitwise; oracle
 functional-separation audit) before it can be frozen.
+
+# H47 B1 RESULT (2026-08-22): MIXED BY THE TABLE; THE PREDICTED ORDERING HOLDS IN SIGN AT SUB-TOLERANCE MAGNITUDE
+
+Plan `H47_MEMBERSHIP_PLAN.md` Amendment 1 (B1), frozen `11aff52`. Report
+`reports/h47_b1.json`, scorer `score_h47_b1.py`. 9/9 new cells completed
+with zero failures; M reused from H39d. Non-vacuity: L_arb masked 64/64
+family tasks in every world; H_early / H_late reached median conditional
+entropies of 0.004-0.011 bits (target <= 0.20) at the registered final
+temperature 0.1, within 0.05 bits of each other (pair comparable); alpha
+moved in every fit; argument matrices moved in every arm.
+
+Per world (J relative to M in nats; R_alpha; R_full; median entropy bits):
+
+    world 0   M  +0     1.272  0.710  0.912 | L_arb +725 1.458 0.593 0.000 | H_early +405 1.449 0.704 0.007 | H_late +210 1.318 0.752 0.004
+    world 1   M  +0     1.741  0.823  0.939 | L_arb +676 1.909 0.958 0.000 | H_early +245 1.859 0.938 0.004 | H_late +137 1.909 0.881 0.006
+    world 2   M  +0     1.355  0.757  0.960 | L_arb +654 1.616 0.781 0.000 | H_early +134 1.537 0.711 0.004 | H_late  +97 1.328 0.806 0.011
+
+Classifications by the frozen rules (COST needs >= 0.25 of |J_M - J_O|, or
+log-ratio >= +0.15 on R_alpha / +0.08 on R_full, in >= 2 of 3 worlds):
+
+    L_arb    J COST (0.36 / 0.69 / 0.56)   R_alpha NEUTRAL (+0.137 / +0.092 / +0.176)   R_full MIXED (-0.18 / +0.15 / +0.03)
+    H_early  J NEUTRAL (0.20 / 0.25 / 0.12) R_alpha NEUTRAL (+0.130 / +0.066 / +0.127)  R_full NEUTRAL
+    H_late   J NEUTRAL (0.11 / 0.14 / 0.08) R_alpha NEUTRAL (+0.036 / +0.092 / -0.020)  R_full NEUTRAL
+
+Label: **MIXED** (no row of the matrix is satisfied: L_arb is a COST on J
+but not on R_alpha; neither H arm is a COST on anything).
+
+What the numbers say, stated beside the label and not in place of it:
+- The ordering predicted by review 66 and by us, M < H_late < H_early on
+  R_alpha, holds in sign in every world on the means (dlog R_alpha 0.036 /
+  0.108 / 0.135 for H_late / H_early / L_arb) and on J (+148 / +261 / +685
+  nats), but every hardening effect on R_alpha sits BELOW the registered
+  tolerance of +0.15 log units. Forcing one slot per task costs about
+  10-15% in alpha-only future acquisition and 7-25% of M's present-task
+  gain over ordinary; committing late costs roughly half of committing
+  early. The effects are real in direction and small in size.
+- L_arb is the only arm with a registered COST: an arbitrary partition
+  imposed from task onset forfeits 36-69% of M's present-task gain — the
+  largest effect in the block — while leaving alpha-only acquisition only
+  ~14% worse. On this world, imposing the wrong ontology costs the
+  PRESENT more than it costs the future.
+- The tolerances were set at about one cross-world SD of M (0.136 on log
+  R_alpha). The measured effects are of that same size, so a three-world
+  block with this rule cannot resolve them; that is a property of the
+  rule we froze, not a retrospective complaint. B2, or more worlds, would.
+
+Scorekeeping: review 66 — ordering right in sign (M < H_late < H_early;
+L_arb > M), magnitudes below its implied "cost" expectation; ours —
+L_arb COST on R_alpha: no (+0.135 mean, under 0.15); H_early COST on
+R_alpha: no; H_late NEUTRAL: yes. The registered COMPILE-AFTER-FORMATION
+reading is not licensed; the data are closest to "discretization after
+learned directions is cheap, and earlier is a little less cheap".
+
+Licensing: B1 licenses nothing by itself. B2 (true membership on a two-
+subspace world) proceeds as designed, with the generator tests required
+by review 66 before freezing.
