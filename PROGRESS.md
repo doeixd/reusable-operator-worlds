@@ -3070,3 +3070,12 @@ every world, and trails it slightly on the full interface. Recorded in
 `PREDICTIONS.md` with scorekeeping (both prediction sets wrong in the
 same direction) and the registered follow-up (restrict K so that discrete
 identity becomes economically necessary); learnings appended.
+
+# 2026-08-23 — REVIEW 68 FILED; OPPORTUNITY GATE MADE CONSTITUTIONAL; H48b WIDTH SWEEP FROZEN AND LAUNCHED
+
+Filed review 68 and elevated its opportunity-gate rule into AGENTS.md.
+Froze `H48B_WIDTH_SWEEP_PLAN.md` (K in {2,4,8,16,32} on the G = 2 world,
+M_K versus L_true,K only; rules alpha/present/full pay; outcomes
+CROSSOVER / CAPACITY NOT BINDING / INNOVATION BUFFERS / FULLY LICENSED;
+our prediction: outcome 3 at K = 4, possibly 4 at K = 2). Added launcher
+cells and `score_h48b_width.py`. 24 lifetimes running; none read.
