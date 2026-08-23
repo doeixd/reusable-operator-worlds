@@ -3161,3 +3161,15 @@ TRUE > SHAM as the added optimization-credit control; recovery fraction
 as a primary descriptive; migration-cost ingredients recorded;
 post-selection sibling diagnostic if a wrong partition wins) and froze
 it. Implementation next.
+
+# 2026-08-23 — H50 FROZEN (AMENDMENTS 1-2) AND RUNNING
+
+Implemented `audit_h50_reorganization.py` per the frozen plan: six arms
+from the same frozen M_4 checkpoint, identical migration budgets and
+seeded data order, m in {4, 16, 64} migrated and {16, 64} scored with all
+64 LOO tasks, substitutability for TRUE / best-wrong / SHAM, migration
+cost and drift recorded, sibling endpoints computed only after past-data
+quantities and only diagnostically, recovery fractions against the L_4
+reference. Smoke: masking initially raises family NMSE (0.0054 ->
+0.0075), the deficit migration must repair. The full audit is running;
+nothing read.
