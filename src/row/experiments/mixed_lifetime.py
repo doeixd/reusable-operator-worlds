@@ -41,6 +41,11 @@ def _pilot_record(args) -> dict[str, object] | None:
                        "freeze_matrices": bool(args.freeze_matrices), "pslot_index": 11})
         if args.pslot_count != 1:
             record["pslot_count"] = args.pslot_count
+        if args.route_policy != "none":
+            record["route_policy"] = {"kind": args.route_policy}
+            if args.route_policy == "anneal":
+                record["route_policy"].update({"start": args.anneal_start, "commit": args.anneal_commit,
+                                               "final": args.anneal_final})
     if args.model == "factorized":
         record.update({
             "schema_dim": args.schema_dim,
@@ -237,6 +242,12 @@ def main() -> None:
                         help="pslot: number of parameterized slots (11, 10, ...)")
     parser.add_argument("--freeze-matrices", action="store_true",
                         help="pslot: freeze U_k at init, alpha learns (matched-budget generic channel)")
+    parser.add_argument("--route-policy", choices=("none", "mask_arbitrary", "anneal"), default="none",
+                        help="H47 B1: hard mask of family tasks onto an arbitrary slot split, or a "
+                             "global temperature anneal on the two parameterized slots")
+    parser.add_argument("--anneal-start", type=int, default=8)
+    parser.add_argument("--anneal-commit", type=int, default=24)
+    parser.add_argument("--anneal-final", type=float, default=0.1)
     parser.add_argument("--snapshot-history", action="store_true",
                         help="record every task's residual at completion (read-only)")
     parser.add_argument(
@@ -499,6 +510,26 @@ def main() -> None:
                     "query_penalty": value}
 
     schema_index_hook = None
+    route_policy_hook = None
+    if args.model == "pslot" and args.route_policy != "none":
+        if args.pslot_count < 2:
+            raise SystemExit("route policies require --pslot-count 2")
+        if args.route_policy == "mask_arbitrary":
+            def route_policy_hook(lifetime_index: int, world_task_index: int) -> dict:
+                family = meta_spec.family_of(world_task_index)
+                if family is None:
+                    return {}
+                return {"mask": 11 if family in (0, 1) else 10}
+        else:
+            start, commit, final = args.anneal_start, args.anneal_commit, args.anneal_final
+
+            def route_policy_hook(lifetime_index: int, world_task_index: int) -> dict:
+                if lifetime_index < start:
+                    return {"temperature": 1.0}
+                if lifetime_index >= commit:
+                    return {"temperature": final}
+                frac = (lifetime_index - start) / max(commit - start, 1)
+                return {"temperature": 1.0 + frac * (final - 1.0)}
     if args.model == "pslot":
         if meta_spec is None or args.arm != "ordinary":
             raise SystemExit("pslot requires --r-meta and --arm ordinary")
@@ -543,6 +574,7 @@ def main() -> None:
             prospective_hook=prospective_hook,
             schema_index_hook=schema_index_hook,
             snapshot_history=args.snapshot_history,
+            route_policy_hook=route_policy_hook,
         )
     finally:
         learned_lifetime.World = original_world  # type: ignore[assignment]

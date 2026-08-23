@@ -100,8 +100,16 @@ def load_pslot(config, path: Path, record: dict) -> ParameterizedSlotLearner:
     for key in state:
         if key.startswith("task_codes."):
             model.begin_task(key.split(".", 1)[1])
-    model.load_state_dict(state)
+    # Artifacts written before the H47 route policies lack the
+    # `route_temperature` buffer (policy off == 1.0, the buffer's init).
+    # Tolerate exactly that key and nothing else.
+    result = model.load_state_dict(state, strict=False)
+    if set(result.missing_keys) - {"route_temperature"} or result.unexpected_keys:
+        raise SystemExit(f"state mismatch at {path}: {result}")
     model.eval()
+    extras = read_json(path / "pslot.json")
+    for task_id, slot in (extras.get("task_mask") or {}).items():
+        model.task_mask[task_id] = int(slot)
     summary = read_json(path / "summary.json")
     table = summary.get("reference_table") or {}
     for task_id, reference in (table.get("task_reference") or {}).items():

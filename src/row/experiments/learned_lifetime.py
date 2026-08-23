@@ -446,6 +446,7 @@ def run(
     prospective_hook=None,
     schema_index_hook=None,
     snapshot_history: bool = False,
+    route_policy_hook=None,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -512,6 +513,12 @@ def run(
                     if slot_index < freeze_slots:
                         for parameter in operator.parameters():
                             parameter.requires_grad_(False)
+        if route_policy_hook is not None and isinstance(model, ParameterizedSlotLearner):
+            policy = route_policy_hook(lifetime_index, world_task_index)
+            if "temperature" in policy:
+                model.set_route_temperature(policy["temperature"])
+            if policy.get("mask") is not None:
+                model.task_mask[task.task_id] = int(policy["mask"])
         if isinstance(model, ARGUMENT_LEARNERS):
             schema_index = (
                 schema_index_hook(world_task_index) if schema_index_hook else 0

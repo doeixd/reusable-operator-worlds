@@ -134,3 +134,42 @@ class MultiSlotTests(unittest.TestCase):
         torch.mean(after ** 2).backward()
         self.assertGreater(float(multi.extra_argument_matrices.grad.abs().sum()), 0.0)
         self.assertEqual(len(multi.shared_parameters()), len(list(multi.basis.parameters())) + 2)
+
+
+class RoutePolicyTests(unittest.TestCase):
+    def _two(self):
+        m = ParameterizedSlotLearner(slot_args=2, pslot_count=2, **KW)
+        m.begin_task("t")
+        with torch.no_grad():
+            m.task_codes["t"].copy_(torch.linspace(-1, 1, m.route_size))
+            m.task_alphas["t"].normal_()
+        return m
+
+    def test_policies_off_are_bitwise_plain_softmax(self):
+        m = self._two()
+        x = torch.randn(16, 8)
+        before = m(x, "t")
+        m.set_route_temperature(1.0)
+        self.assertTrue(torch.equal(before, m(x, "t")))
+
+    def test_mask_moves_all_parameterized_mass_and_keeps_plain_mass(self):
+        m = self._two()
+        route = m.task_codes["t"].reshape(3, 4)
+        plain_before = torch.softmax(route, -1)[:, [0, 1]].sum(-1)
+        m.task_mask["t"] = 2
+        c = m._coefficients(route, "t")
+        self.assertTrue(torch.allclose(c[:, [0, 1]].sum(-1), plain_before))
+        self.assertTrue(torch.all(c[:, 3] == 0))
+        self.assertEqual(m.conditional_entropy_bits("t"), [0.0, 0.0, 0.0])
+
+    def test_temperature_sharpens_conditional_only(self):
+        m = self._two()
+        route = m.task_codes["t"].reshape(3, 4)
+        plain_before = torch.softmax(route, -1)[:, [0, 1]].sum(-1)
+        soft = m.conditional_entropy_bits("t")
+        m.set_route_temperature(0.05)
+        c = m._coefficients(route, "t")
+        self.assertTrue(torch.allclose(c[:, [0, 1]].sum(-1), plain_before))
+        hard = m.conditional_entropy_bits("t")
+        self.assertTrue(all(h < s_ for h, s_ in zip(hard, soft)))
+        self.assertIn("route_temperature", m.state_dict())

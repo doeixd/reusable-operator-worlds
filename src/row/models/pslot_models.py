@@ -87,6 +87,13 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
             self.register_buffer("initial_extra_argument_matrices",
                                  self.extra_argument_matrices.detach().clone())
         self.task_alphas = nn.ParameterDict()
+        # H47 B1 route policies over the parameterized slots (multi-slot
+        # only). `route_temperature` scales the two slots' logits when
+        # forming their conditional (1.0 = plain softmax, bitwise M).
+        # `task_mask` pins a task's parameterized-slot mass onto one slot.
+        # Plain-slot mass is never touched by either.
+        self.register_buffer("route_temperature", torch.tensor(1.0))
+        self.task_mask: dict[str, int] = {}
 
     # ---- task state ---------------------------------------------------
 
@@ -103,6 +110,20 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
         super().forget_task(task_id)
         if task_id in self.task_alphas:
             del self.task_alphas[task_id]
+        self.task_mask.pop(task_id, None)
+
+    def set_route_temperature(self, value: float) -> None:
+        with torch.no_grad():
+            self.route_temperature.fill_(float(value))
+
+    @torch.no_grad()
+    def conditional_entropy_bits(self, task_id: str) -> list[float]:
+        """Entropy of the policy-applied conditional over the P slots, per step."""
+        route = self.task_codes[task_id].reshape(self.task_steps, self.operator_slots)
+        coefficients = self._coefficients(route, task_id)
+        idx = list(self.pslot_indices)
+        cond = coefficients[:, idx] / coefficients[:, idx].sum(-1, keepdim=True).clamp_min(1e-12)
+        return (-(cond * cond.clamp_min(1e-12).log()).sum(-1) / np.log(2)).tolist()
 
     # ---- forward ------------------------------------------------------
 
@@ -134,9 +155,28 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
             dim=0,
         )
 
+    def _coefficients(self, route: Tensor, task_id: str) -> Tensor:
+        coefficients = torch.softmax(route, dim=-1)
+        if self.pslot_count < 2:
+            return coefficients
+        mask_slot = self.task_mask.get(task_id)
+        temperature = float(self.route_temperature)
+        if mask_slot is None and temperature == 1.0:
+            return coefficients
+        idx = list(self.pslot_indices)
+        total = coefficients[:, idx].sum(-1, keepdim=True)          # P mass per step
+        if mask_slot is not None:
+            cond = torch.zeros_like(coefficients[:, idx])
+            cond[:, idx.index(mask_slot)] = 1.0
+        else:
+            cond = torch.softmax(route[:, idx] / temperature, dim=-1)
+        new = coefficients.clone()
+        new[:, idx] = total * cond
+        return new
+
     def forward(self, x: Tensor, task_id: str) -> Tensor:
         route, own_u, own_v, own_b = self._unpack(task_id)
-        coefficients = torch.softmax(route, dim=-1)
+        coefficients = self._coefficients(route, task_id)
         reference = self.task_reference.get(task_id)
         shared = (
             self._split_residual(self.abstractions[reference])
@@ -208,6 +248,8 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
             "pslot_index": self.pslot_index,
             "pslot_count": self.pslot_count,
             "pslot_indices": list(self.pslot_indices),
+            "route_temperature": float(self.route_temperature),
+            "masked_tasks": len(self.task_mask),
             "argument_matrices_relative_movement": moved,
             "argument_matrices_relative_movement_by_slot": moved_all,
             "alpha_norm_mean_by_slot": [float(np.mean(v)) if v else 0.0 for v in alpha_norms_by_slot],
@@ -220,6 +262,7 @@ class ParameterizedSlotLearner(ProspectiveLifecycleLearner):
 
     def save_extras(self, output: Path) -> None:
         (output / "pslot.json").write_text(
-            json.dumps({"diagnostics": self.pslot_diagnostics()}, indent=2) + "\n",
+            json.dumps({"diagnostics": self.pslot_diagnostics(),
+                        "task_mask": dict(self.task_mask)}, indent=2) + "\n",
             encoding="utf-8",
         )
