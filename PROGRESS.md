@@ -3004,3 +3004,11 @@ commitment on the current world: M, L_arbitrary, H_early, H_late, with
 relative tolerances from the measured spreads) and B2 (true membership on
 a two-subspace world via a `schema_groups` generator extension with a
 bitwise G = 1 check). Not frozen; awaiting review.
+
+# 2026-08-22 — REVIEW 65 (SYNTHESIS) FILED AND PROPAGATED
+
+Filed the post-Stage-A synthesis verbatim as review 65, indexed it,
+annotated its one superseded line (M does not discover membership; the
+confirmed world has a single family subspace), and propagated the durable
+content to `AGENTS.md` (the H39 central lesson and the reformulated
+thesis) and `notes/learnings.txt`.

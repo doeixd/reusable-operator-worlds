@@ -1158,3 +1158,27 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   pressure (three `slots=12` cells sat at 345 MB each with 9 GB free). Let
   the survivors run and relaunch the cell; the launcher skips completed
   cells and refuses mismatched records.
+
+- THE H39 LINE'S CENTRAL LESSON (reviews 62-65; `H39_DEVELOPMENT_CLOSURE.md`,
+  `reports/h39_confirmation.json`, `reports/h39_confirmation_followups.json`):
+  the useful abstraction is not sitting in the finished collection of task
+  solutions waiting to be extracted; the learner has to create and maintain
+  the coordinate system while it learns. Online alpha-only acquisition of an
+  unseen family costs 1.64x ordinary; post-hoc extraction from the ordinary
+  learner's realized population costs 2.59x and from the argument learner's
+  own residual population 6.33x, because an explicit argument channel drains
+  family structure out of the residuals. Removing the arguments and
+  re-optimizing the other task-local channels at matched budget still costs
+  2.0x. Working definition of an abstraction from here on: it compresses
+  what is invariant while exposing useful coordinates for what may vary —
+  `A(alpha) + eps`, not `A`. The V6 prospective LOSS was the wrong
+  mechanism; giving recurrence, variation, and innovation different
+  representational ROLES was the right one. Thesis, reformulated:
+  intelligence learns parameterized computational representations that
+  compress what recurs while preserving cheap coordinates for novelty; the
+  eventual language is made of parameterized primitives P_i(alpha), and
+  adaptation is identify-primitive + infer-argument (+ a small patch).
+  Existence and use are sealed; discovery (whether, which, how many, which
+  dimensions) is the open rung. Do not describe the confirmed result in
+  cluster language: its two slots form one distributed argument channel,
+  and the confirmed world has a single family subspace.

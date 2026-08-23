@@ -1,0 +1,127 @@
+Reviewer feedback 65 — received 2026-08-22, after Stage A and the H47
+baselines. A synthesis of what the H39 line established, filed at the
+PI's request ("remember this").
+
+ANNOTATION AT FILING (not part of the review): the paragraph "Since M
+already discovers membership through soft routing" predates, or does not
+incorporate, the H47 baselines measured the same day
+(`reports/h47_baselines.json`): M's routing over the two parameterized
+slots is nearly uniform (conditional entropy 0.92-0.95 of 1.0 bits, ARI
+with teacher family ~0), and at r_meta = 1 the generator places all
+families in ONE rank-2 subspace, so there is no slot-level membership in
+the confirmed world to discover. M's representation is a distributed
+argument channel. H47 is redrafted accordingly (`H47_MEMBERSHIP_PLAN.md`).
+Everything else in the synthesis stands as written.
+
+----------------------------------------------------------------------
+
+We just learned something fairly central to the whole program: the
+useful abstraction is not sitting inside the finished collection of task
+solutions waiting to be extracted. The learner has to create and maintain
+the right coordinate system while it is learning. That is much stronger
+than the original "reuse is valuable" result. The sequence now looks
+like: recurring computation exists -> sharing is economically valuable ->
+post-hoc solutions do not expose it well -> ONLINE LEARNING CAN CREATE A
+USEFUL PARAMETERIZED REPRESENTATION. Stage A makes the last step much
+harder to explain away.
+
+WHAT WE LEARNED EMPIRICALLY. R_alpha,online = 1.64x versus post-hoc
+reconstruction R_census,O = 2.59x and, strikingly, R_census,M = 6.33x.
+The 6.33x is especially revealing: once the learner has an explicit
+parameterized channel W alpha, the reusable family information gets
+routed into that channel; the private residual population becomes LESS,
+not more, suitable for reconstructing the family afterwards. The
+architecture induces a division of labour: W, reusable family structure;
+alpha, task-specific variation within that structure; eps, genuinely
+private innovation. That is very close to the semantic decomposition we
+have been trying to get to for a long time. And A2 says this is not
+cosmetic: removing alpha and giving route + private residual 2,000
+updates to compensate costs ~2.01x. Alpha is used and operationally
+non-substitutable by the other task-local channels. That makes H39 much
+more than a probing result.
+
+THE DEEPER FINDING: INTENSIONAL VERSUS EXTENSIONAL REPRESENTATION. An
+extensional representation stores the solutions actually encountered,
+r_1 ... r_n, and hopes to discover a common abstraction afterwards — what
+the census tries. An intensional representation stores P(alpha), a rule
+describing an entire family of possible computations; observed tasks
+instantiate P(alpha_1), P(alpha_2), ... but the representation also
+provides coordinates for P(alpha_new) that has never occurred. That is
+exactly the capability H39 is beginning to demonstrate. Compression of
+observed objects and learning a generative coordinate system are
+different things; the second is much closer to abstraction in the sense
+we ultimately care about.
+
+THIS RESOLVES AN AMBIGUITY FROM V5 AND V6. V5: the learner allocated
+recurring information correctly but the higher-order structure could not
+be recovered afterwards; we wondered whether the extraction method was
+wrong; H29 showed much of it was not even in the effective span. V6
+tried to force the right representation by training for future
+adaptation; that hurt. H37 showed it was not just bad optimization
+(0.018 -> 0.030 under high-budget fitting). Now H39 says the idea that
+representation formation matters was right, but the naive prospective
+objective was the wrong mechanism. The successful intervention was not
+"care more about the future"; it was architectural: give recurring
+structure, variation, and innovation different representational roles.
+
+IT CHANGES OUR CONCEPTION OF ABSTRACTION. The MDL story — create A if
+repeated savings exceed D*(A) — remains correct economically but is
+incomplete. A good abstraction also needs an internal parameterization
+of variation: not A = one reusable function but A(alpha), with a cheap
+escape hatch + eps. A better definition: an abstraction compresses what
+is invariant while exposing useful coordinates for what may vary. This
+explains V6: one can increase measured common structure while making the
+coordinates for variation worse.
+
+DIRECTLY RELATED TO PROGRAM SYNTHESIS. The eventual learned language
+should not consist mostly of opaque neural macros P_1, P_2, ... but of
+parameterized primitives P_i(alpha), with composition P_3(alpha_3) o
+P_2(alpha_2) o P_1(alpha_1). Otherwise every new variant requires a new
+primitive or a patch to an opaque one; with parameterized primitives
+adaptation becomes identify primitive + infer argument — a dramatically
+nicer synthesis problem. Rotate(37 deg) is a better primitive than
+Rotate37. H39 is essentially a neural demonstration of why.
+
+EPS MATTERS TOO. R_full = 0.815 while R_alpha = 1.64 means the right
+system is not "everything must fit the abstraction" but reusable skeleton
++ bound argument + optional novel patch — P(alpha) + Delta P, or
+macro(alpha) + a small local subprogram. New knowledge need not be
+completely known or completely new; it can be mostly an instance of
+something known plus a small innovation.
+
+IT VINDICATES WAKE/SLEEP MORE PRECISELY. Pure post-hoc sleep may be too
+weak: if wake solves each task in arbitrary private coordinates, sleep
+may not have enough structure to reconstruct the abstraction. The
+architecture probably needs interaction between timescales — WAKE: solve
+while maintaining candidate shared coordinates; SLEEP: decide which
+coordinates deserve persistent objects; WAKE: use those objects to
+structure subsequent solutions — rather than solve arbitrarily first and
+compress later. Representation formation has to be prospective in
+ARCHITECTURE even though the explicit V6 prospective loss was harmful.
+
+WHAT REMAINS MISSING. Existence and use are demonstrated; discovery is
+not. We supplied the form (two parameterized slots, K = 32, argument
+matrices, private innovation channel); the learner learned the directions
+and used them, which is substantial. A fully autonomous learner must
+answer: should there be an abstraction here at all; which tasks belong to
+it; how many should exist; which dimensions deserve to become arguments;
+when should private innovation become another reusable primitive. Those
+are the next research problems. [See annotation above regarding the
+"M already discovers membership" paragraph.] Roadmap: reuse economics ->
+online parameterized abstraction -> membership discovery -> cardinality
+discovery -> parameterized primitive vocabulary -> composition -> program
+synthesis -> language improvement.
+
+THE BIGGEST THEORETICAL UPDATE. Originally: intelligence progressively
+compresses recurring computation into reusable abstractions. Now:
+INTELLIGENCE LEARNS PARAMETERIZED COMPUTATIONAL REPRESENTATIONS THAT
+COMPRESS WHAT RECURS WHILE PRESERVING CHEAP COORDINATES FOR NOVELTY. Then
+reasoning / program synthesis searches over those coordinates and their
+compositions. And eventually: learning improves not only what the system
+knows, but the language in which future learning and reasoning take
+place. H39 is the first result in the project that looks distinctly like
+evidence for that latter idea rather than merely for parameter sharing or
+compression. The system did not just store reusable computation more
+cheaply. It created a new representational degree of freedom — alpha —
+that changed how future computations could be learned. That is very close
+to the phenomenon we have been trying to isolate from the beginning.

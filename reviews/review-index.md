@@ -2665,3 +2665,22 @@ commitment); primary estimand the membership tax on J, R_α, R_full
 separately; prediction J and R_full neutral, R_α taxed ("private
 innovation buffers imperfect abstraction discovery"), preregistered;
 teacher recovery never decides. No Stage C until B is clean.
+
+### [reviewer-feedback-65.txt](reviewer-feedback-65.txt)
+Synthesis after Stage A, filed at the PI's request. States the central
+lesson: the useful abstraction is not waiting inside the finished
+solutions to be extracted; the learner must create and maintain the
+coordinate system while learning (1.64× online vs 2.59× post hoc on O and
+6.33× on M — the argument channel drains family structure out of the
+residuals). Names the division of labour W / α / ε, the intensional-vs-
+extensional distinction (P(α) as a generative coordinate system, not a
+compressed list), the resolution of V5/V6 (representation formation
+matters; the prospective *loss* was the wrong mechanism; the fix was
+architectural roles), the refined definition of abstraction (compress the
+invariant while exposing coordinates for variation), the program-synthesis
+consequence (parameterized primitives P_i(α); skeleton + argument +
+patch), and the wake/sleep refinement (maintain candidate shared
+coordinates during wake). Reformulates the thesis: intelligence learns
+parameterized computational representations that compress what recurs
+while preserving cheap coordinates for novelty. Annotated at filing: its
+"M already discovers membership" line is superseded by the H47 baselines.

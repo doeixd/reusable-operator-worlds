@@ -3529,3 +3529,41 @@ does forcing it early cost more than forcing it late.
 WRITE TOLERANCES IN THE UNITS THE QUANTITY LIVES IN. Relative J gaps
 normalized by |J_M - J_O| per world; log-ratio bounds for R set from M's
 measured cross-world SD (0.136 for log R_alpha, 0.060 for log R_full).
+
+
+
+================================================================================
+SYNTHESIS (REVIEW 65): MADE, NOT MINED — WHAT IT MEANS FOR THE PROGRAM (2026-08-22)
+================================================================================
+
+Filed verbatim as reviews/reviewer-feedback-65.txt; the durable
+statements, for this file:
+
+- Post-hoc extraction versus online formation is now the project's
+  cleanest conceptual split: EXTENSIONAL (store r_1..r_n, hope to
+  abstract later) versus INTENSIONAL (store P(alpha), which has
+  coordinates for P(alpha_new) before it occurs). Compression of observed
+  objects and learning a generative coordinate system are different
+  things; only the second is abstraction in the sense that matters.
+- The architecture induces a division of labour: W reusable structure,
+  alpha within-family variation, eps private innovation — and it is not
+  cosmetic (A2: 2.0x at matched budget without alpha).
+- V5/V6 resolved: representation formation matters, but the prospective
+  LOSS was the wrong lever; representational ROLES were the right one.
+- Abstraction, redefined: compress the invariant, expose coordinates for
+  variation. A(alpha) + eps, with the escape hatch mattering (R_full 0.82
+  < R_alpha 1.64): skeleton + bound argument + small patch.
+- Wake/sleep, refined: wake must maintain candidate shared coordinates
+  while solving; sleep decides which become persistent objects; pure
+  solve-then-compress is too weak because wake in arbitrary private
+  coordinates leaves sleep nothing to reconstruct.
+- Thesis: intelligence learns parameterized representations that
+  compress what recurs while preserving cheap coordinates for novelty;
+  later, learning improves the language future learning is done in.
+  H39 is the first result that reads as evidence for the latter rather
+  than for parameter sharing: the system created a new degree of
+  freedom, alpha, that changed how future computation is learned.
+- One line of the synthesis is already superseded: M does not "discover
+  membership" — it uses two slots as one distributed channel in a world
+  with one family subspace (h47_baselines). Discovery is still the open
+  rung, and it needs a world with something to discover.
