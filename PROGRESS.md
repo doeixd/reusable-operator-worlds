@@ -3012,3 +3012,18 @@ annotated its one superseded line (M does not discover membership; the
 confirmed world has a single family subspace), and propagated the durable
 content to `AGENTS.md` (the H39 central lesson and the reformulated
 thesis) and `notes/learnings.txt`.
+
+# 2026-08-22 — REVIEW 66 FILED; H47 B1 FROZEN, BUILT, AND LAUNCHED
+
+Filed and indexed review 66 (H39 reread as one continuous parameterized
+manifold; B1 reframed as the cost of imposing discrete commitment on a
+continuous family; B2 generator tests; H48 split into schema count and
+within-schema dimensionality). Appended Amendment 1 to
+`H47_MEMBERSHIP_PLAN.md` freezing B1 (arms M / L_arb / H_early / H_late,
+baseline-relative tolerances, the four-way result matrix, registered
+predictions) and registered its hash. Implemented route policies on the
+two-slot learner (per-task hard mask over the parameterized slots; global
+temperature on their conditional; policies off are bitwise M; tests), the
+runner hooks and provenance records, loader tolerance for pre-policy
+artifacts, launcher cells, and `score_h47_b1.py`. Full suite OK. The nine
+B1 lifetimes are running; none read.
