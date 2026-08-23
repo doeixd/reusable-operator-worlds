@@ -517,8 +517,8 @@ def run(
             policy = route_policy_hook(lifetime_index, world_task_index)
             if "temperature" in policy:
                 model.set_route_temperature(policy["temperature"])
-            if policy.get("mask") is not None:
-                model.task_mask[task.task_id] = int(policy["mask"])
+            if policy.get("mask_position") is not None:
+                model.task_mask[task.task_id] = int(model.pslot_indices[policy["mask_position"]])
         if isinstance(model, ARGUMENT_LEARNERS):
             schema_index = (
                 schema_index_hook(world_task_index) if schema_index_hook else 0

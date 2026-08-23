@@ -52,6 +52,14 @@ for _w in (0, 1, 2):
     for _k in (16, 32):
         SWEEP[f"cap_m2k{_k}/world_{_w}"] = (_w, ["--model", "pslot", "--slot-args", str(_k),
                                                 "--pslot-count", "2", "--snapshot-history"])
+# H47 B1 cells (H47_MEMBERSHIP_PLAN.md Amendment 1); M = cap_m2k32, reused
+for _w in (0, 1, 2):
+    _base = ["--model", "pslot", "--slot-args", "32", "--pslot-count", "2", "--snapshot-history"]
+    SWEEP[f"b1_larb/world_{_w}"] = (_w, _base + ["--route-policy", "mask_arbitrary"])
+    SWEEP[f"b1_hearly/world_{_w}"] = (_w, _base + ["--route-policy", "anneal", "--anneal-start", "8",
+                                                  "--anneal-commit", "24", "--anneal-final", "0.1"])
+    SWEEP[f"b1_hlate/world_{_w}"] = (_w, _base + ["--route-policy", "anneal", "--anneal-start", "40",
+                                                 "--anneal-commit", "56", "--anneal-final", "0.1"])
 REQUIRED = ("model.pt", "summary.json", "rho_profile.json", "fingerprint.json",
             "config.yaml", "history.pt")
 
@@ -85,6 +93,8 @@ def main() -> int:
         names = [n for n in SWEEP if n.startswith("ksweep_")]
     elif names == ["capacity"]:
         names = [n for n in SWEEP if n.startswith("cap_")]
+    elif names == ["b1"]:
+        names = [n for n in SWEEP if n.startswith("b1_")]
     with ProcessPoolExecutor(max_workers=3) as pool:  # slots=12: cap 3 (memory)
         results = list(pool.map(run, names))
     failed = [n for n, c in results if c != 0]

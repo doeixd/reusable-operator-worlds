@@ -519,7 +519,7 @@ def main() -> None:
                 family = meta_spec.family_of(world_task_index)
                 if family is None:
                     return {}
-                return {"mask": 11 if family in (0, 1) else 10}
+                return {"mask_position": 0 if family in (0, 1) else 1}  # primary / secondary P slot
         else:
             start, commit, final = args.anneal_start, args.anneal_commit, args.anneal_final
 
