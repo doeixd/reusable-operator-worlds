@@ -1216,3 +1216,15 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   toward a discrete decision its objective never rewarded and call the
   result a discovery test. H49 is the census that asks this on the K = 4
   artifacts; its outcome decides whether a sleep operator has an objective.
+
+- SCORING ECONOMY AND THE SHAM RULE (review 71, H50): when compute forces
+  cuts, drop curve-refinement cells (fewer scored budgets), never the
+  sample of the causal statistic (all LOO tasks); run corroborating
+  instruments only on leading/best-wrong/sham arms. Any propose-
+  reorganize-score loop needs a SHAM arm (same start, optimizer, data,
+  parameter count, steps, no structure) — beating sham proves
+  optimization, beating max(WRONG/RANDOM) proves abstraction, and both
+  are required. Report the recovery fraction against the from-scratch
+  reference so a yes/no separation becomes a mechanism claim (cheap
+  counterfactual evaluation vs disguised retraining). Reused baseline
+  rows inherit the original seeds (H50 Amendment 2).

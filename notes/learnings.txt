@@ -3748,3 +3748,42 @@ A CHEAP TRUE-LOO EXISTS AND WAS NOT RUN. The census left task state in
 place during representation training (registered leak, shared across
 candidates). If a future rule needs absolute rather than paired numbers,
 hide the task during a brief re-fit of the schema too.
+
+
+
+================================================================================
+REVIEW 71: HOW TO SPEND SCORING COMPUTE, AND WHAT THE MIGRATION CURVE MEANS (2026-08-23)
+================================================================================
+
+CUT BUDGET POINTS, NEVER THE CAUSAL SAMPLE. When an experiment's cost
+must shrink, drop cells that only refine a curve (score fewer migration
+budgets; keep the m = 4 migrations unscored unless the transition is
+already below 16) — never thin the statistic that carries the causal
+comparison (all 64 LOO tasks stay). Corroborating instruments
+(substitutability) run only where they corroborate: the leading arm, the
+best wrong arm, and the sham.
+
+THE SHAM ARM IS THE CLAIM'S OTHER HALF. Any reorganization loop gets
+credit for being another pass over the data unless a structureless
+migration with the same start, optimizer, data, parameter count, and
+steps runs beside it. The reportable quantity is S(h, m) - S(SHAM, m),
+and TRUE must beat max(WRONG/RANDOM) — beating SHAM alone proves
+optimization, not abstraction.
+
+RECOVERY FRACTION TURNS A YES/NO INTO A MECHANISM. Separation at modest
+m with partial recovery of the from-scratch endpoint = a plausible sleep
+operator (cheap counterfactual evaluation); separation only at large m
+with ~full recovery = retrain-and-select, valid but expensive; no
+separation at any m = experience underdetermines the structure. The
+migration-budget axis is the hypothesis, not an implementation detail.
+
+COLLECT THE COST INGREDIENTS BEFORE THE OBJECTIVE NEEDS THEM. Steps,
+wall-clock, post-migration old-task loss, and functional drift are
+recorded now so that J_sleep = C_migrate + lambda D* + eta C_LOO can be
+evaluated later without rerunning; an abstraction that only pays after
+an expensive migration may not pay at all.
+
+BASELINE ROWS MUST BE THE SAME MEASUREMENT. Amendment 2 exists because
+fresh random-partition seeds would have silently invalidated the m = 0
+baselines that the plan defined as H49's data. When a new experiment
+reuses an old row, it inherits the old row's seeds.

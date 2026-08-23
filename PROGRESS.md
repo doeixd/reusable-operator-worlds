@@ -3173,3 +3173,12 @@ quantities and only diagnostically, recovery fractions against the L_4
 reference. Smoke: masking initially raises family NMSE (0.0054 ->
 0.0075), the deficit migration must repair. The full audit is running;
 nothing read.
+
+# 2026-08-23 — REVIEW 71 LEARNINGS DISTILLED
+
+Review 71 was already filed, indexed, and frozen into the H50 plan
+(Amendment 1); added its durable lessons to `notes/learnings.txt` and
+`AGENTS.md`: cut budget points never the causal sample; the SHAM arm as
+the claim's other half; recovery fraction as the mechanism axis; collect
+J_sleep cost ingredients ahead of need; reused baselines inherit their
+seeds. H50 is still running.
