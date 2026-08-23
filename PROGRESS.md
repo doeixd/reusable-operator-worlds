@@ -3079,3 +3079,13 @@ M_K versus L_true,K only; rules alpha/present/full pay; outcomes
 CROSSOVER / CAPACITY NOT BINDING / INNOVATION BUFFERS / FULLY LICENSED;
 our prediction: outcome 3 at K = 4, possibly 4 at K = 2). Added launcher
 cells and `score_h48b_width.py`. 24 lifetimes running; none read.
+
+# 2026-08-23 — H48b SWEEP INTERRUPTED BY SESSION EXIT; RELAUNCHED IDEMPOTENTLY
+
+The Claude Code session that launched the width sweep exited; its
+background pool died with it (the learnings' silent-death case). State on
+inspection: 6/24 cells complete (K = 2, 4, 8, both arms, world 0), three
+cells mid-flight with no partial output, no Python processes running.
+Relaunched `python tools/run_h39_pilot.py width`, which skips completed
+cells and refuses mismatched records; the killed cells restart from
+scratch. No cell has been read.
