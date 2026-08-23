@@ -1038,6 +1038,99 @@ results sharpen `geometry != fertility`: compressing common structure does not
 ensure cheap coordinates for learning novel variation, motivating an explicit
 shared-schema/fast-argument/private-innovation factorization.
 
+### 7.7 Parameterized primitives: made online, not mined afterwards (fifth sealed block)
+
+The factorization was then tested in a development ladder and a fifth
+sealed block (seeds 700-729; `H39_CONFIRMATION_PLAN.md`,
+`reports/h39_confirmation.json`). The ladder first established a negative
+that turned out to be the result's foundation: a post-hoc linear schema
+fitted to the finished ordinary learner's own residual objects cannot
+express a member of an unseen family — at rank 8 the alpha-only endpoint
+is 3.5x the free-residual cost, and at the full affine span of everything
+the learner stored it is still 2.2-3.1x (`reports/h39_census.json`). A
+schema formed jointly online over the same residual channel did no
+better (4.2x), because the residual carries about 2% of family
+computation once promotion has retired most family tasks into
+references. Moving the argument into a routed basis operator,
+P(alpha) = tanh(z + a (U_0 + sum_k alpha_k U_k) tanh(Vz + b)), changed
+every endpoint: the alpha-only cost fell monotonically with the argument
+dimension K in all three development worlds (3.37 -> 1.56 from K = 2 to
+16), a matched-budget control with the U_k frozen at random init stayed
+at ~3.1 and was essentially unused, a single slot saturated at K ~ 16,
+and two slots at K = 32 reached 1.46 (`reports/h39c_ksweep.json`,
+`reports/h39d_capacity.json`).
+
+The sealed block compared three paired arms on 30 unseen worlds: the
+ordinary learner O, the two-slot K = 32 learner M, and G, identical to M
+with its argument directions frozen at initialization. All five
+preregistered estimands passed: learned directions beat frozen ones
+(mean log-ratio gap 0.886, CI [0.717, 1.054]); the geometric-mean
+alpha-only cost relative to O's full-residual fit was 1.636 with CI
+[1.495, 1.7997] against a registered ceiling of 1.8 — confirmed at its
+bound and not beyond it; present-task cost fell by 1,545 nats on average
+(CI [-1,649, -1,435]) and in every world; the full schema-plus-innovation
+interface beat O on the future task by 18.5% (ratio 0.815, CI [0.764,
+0.866], 28/30 worlds); and zeroing the arguments raised family-task NMSE
+2.9-4.3x in all 30 worlds. Two facts are recorded with the verdict: the
+E2 interval clears its bound by 0.0003, and the E2 rule was amended
+before any sealed cell was read (from a fraction-of-worlds rule, which
+would have read 0.433 and CONFIRMED-RELATIVE, to the geometric-mean
+interval, on a reviewer's argument that the 1.5x threshold was an
+inherited convenience with no theoretical standing).
+
+Two audits on the sealed artifacts closed the obvious objections
+(`reports/h39_confirmation_followups.json`). Post-hoc extraction from the
+realized task-object populations costs 2.59x (O) and 6.33x (M's own
+residuals, which the argument channel has drained of family structure)
+against 1.64x for the online arguments — the difference is WHEN the
+coordinates were formed, not which learner. And removing the arguments
+and re-optimizing route and residual at matched budget still costs
+2.01x: the channel is used and not substitutable.
+
+What the block licenses is existence and use, not discovery. The
+architecture — two parameterized slots, K = 32 — was supplied. And a
+baseline measurement taken before the discovery experiments showed that
+M's two slots are not two abstractions: routing over them has conditional
+entropy 0.92-0.95 of a possible 1.0 bit and agreement with the teacher
+families at chance, because at full recurrence the generator places all
+four families on one rank-2 manifold. The confirmed representation is a
+single distributed continuous coordinate system, P(alpha) with alpha in
+R^64, not a pair of operators. Forcing discrete commitment on that
+continuous family (H47 B1) cost 10-15% in alpha-only acquisition and
+7-25% of the present gain, less when the commitment came late; an
+arbitrary partition imposed from the start forfeited 36-69% of the
+present gain while barely touching the future, the innovation channel
+repairing what the wrong ontology broke.
+
+A generator extension with two orthogonal family subspaces (G = 1
+reproducing the original bitwise) then asked whether real membership is
+worth representing. At K = 32 it was not: the learner absorbed both
+groups into one channel, paid an inconsistent +0.27 / +0.10 / -0.03 log
+units on alpha-only acquisition, and beat the told-membership oracle on
+present cost by ~500 nats per world (`reports/h47_b2_gate.json`).
+Narrowing the channel changed that: at K <= 8 the oracle wins the future
+channels in every world (alpha-only by 0.12-0.52, full interface by
+0.08-0.26 log units) while its present cost shrinks tenfold without
+quite crossing zero (`reports/h48b_width.json`). Discrete identity
+therefore starts to pay for future acquisition below a width threshold
+between K = 8 and 16 — a resource boundary, not a truth boundary — and
+the label-free learner still does not find the groups at widths where it
+pays for ignoring them (ARI ~0 at K = 2). That is, finally, a real
+discovery problem; the registered next question (H49) is whether any
+quantity computable from experienced tasks alone prefers the fertile
+partition, since at K = 4 the grouping has future value but no
+present-objective value and the learner's non-discovery is rational
+under the objective it was trained on.
+
+The lesson this block adds to the earlier ones is the most consequential
+in the paper: the useful abstraction was not latent in the finished
+solutions waiting to be extracted; the learner had to maintain an
+explicit intensional channel while it learned. An abstraction, on this
+evidence, compresses what recurs while exposing cheap coordinates for
+what may vary — A(alpha) + eps, not A — and whether such a coordinate
+system should be split into named types is decided by capacity
+economics rather than by the world's latent ontology.
+
 Why should anyone working at scale care about a 16-dimensional world?
 Because the criterion is scale-free and the phenomena it isolates have
 scaled analogues that are currently argued by anecdote: mixture-of-

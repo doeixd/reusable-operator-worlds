@@ -1201,3 +1201,18 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   WIDEN-versus-SPLIT decision under one D*, and the capacity knob (K per
   slot) is the independent variable that can make discrete identity
   necessary.
+
+- THREE ECONOMIC QUANTITIES, KEPT SEPARATE (review 69, after H48b): current
+  utility (does representing a structure make seen tasks cheaper), future
+  fertility (does it make an unseen relative cheaper), and representational
+  cost (does it shorten the description). At K = 4 on the two-subspace
+  world the true grouping had future value (+0.1-0.5 log units) and no
+  present value (-26 to -121 nats), so the label-free learner's refusal to
+  separate the groups was RATIONAL under its objective. Before any
+  discovery experiment, verify that a quantity computable from the
+  learner's own past (leave-one-out reacquisition, a two-part description
+  proxy, substitutability) actually prefers the fertile structure; if none
+  does, non-discovery is not a learner failure. Never anneal a learner
+  toward a discrete decision its objective never rewarded and call the
+  result a discovery test. H49 is the census that asks this on the K = 4
+  artifacts; its outcome decides whether a sleep operator has an objective.

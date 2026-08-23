@@ -3677,3 +3677,39 @@ HIGH-K CELLS ARE NOISY WITH THREE WORLDS. K = 16 is non-monotone and
 K = 32 full-pays on two worlds. Read the low-K end, where the three
 worlds agree, and treat the high end as unresolved rather than as a
 second crossover.
+
+
+
+================================================================================
+REVIEW 69: THREE ECONOMIC QUANTITIES, AND THE RIGHT ORDER TO ASK ABOUT THEM (2026-08-23)
+================================================================================
+
+H48b separated what earlier work conflated. CURRENT UTILITY: does
+representing the structure make already-seen tasks cheaper (at K = 4,
+no: -115 / -121 / -26 nats). FUTURE FERTILITY: does it make an unseen
+relative cheaper (yes: +0.1-0.5 log units). REPRESENTATIONAL COST: does
+the split reduce description length (unmeasured). A learner trained on
+the first cannot be blamed for ignoring a structure that only the second
+rewards. "Discovery failure" was the wrong name for rational behaviour.
+
+BEFORE TESTING DISCOVERY, VERIFY AN ACCESSIBLE SIGNAL EXISTS. Existence
+(an oracle benefits) and discovery (the learner finds it) had one more
+step between them: is there a quantity the learner can compute from its
+own past that points at the fertile structure? Annealing a learner
+toward a decision its objective never rewarded produces confident
+arbitrariness, not discovery. The H_early / H_late block at K = 4 was
+withdrawn on this ground before any cell ran.
+
+PAST TASKS ARE THE ONLY HONEST FUTURE. V6 failed by training on future
+labels; the retrospective alternative hides an experienced task, rebuilds
+the representation's policy from the rest, and asks whether the task is
+cheap to re-acquire. Cross-validation over one's own experience is the
+label-free proxy for fertility, and it is the same move a program
+synthesizer would make before inventing a primitive: hide one solved
+program, see whether the candidate abstraction makes it cheaper.
+
+THE CANDIDATE SLEEP OBJECTIVE, WRITTEN DOWN SO IT CAN BE TESTED RATHER
+THAN ASSUMED: J_sleep = lambda D*(L) + eta sum_i C_reacquire(T_i | L_-i).
+H49 tests only whether its terms carry a signal on the label-free
+representation; it is not a result until a sleep operator optimizing it
+is built and compared.

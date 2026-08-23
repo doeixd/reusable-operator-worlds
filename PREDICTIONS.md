@@ -4813,3 +4813,51 @@ full +0.26 / +0.13 / +0.18) and its present cost smallest (-115 / -121 /
 -26) — with "present" registered as a TOLERANCE band around zero rather
 than a one-sided bound, since the quantity of interest there is whether
 discretization is nearly free, not whether it is profitable.
+
+# H49 REGISTERED (2026-08-23): STRUCTURAL DISCOVERABILITY — IS THE FERTILE PARTITION VISIBLE IN PAST EXPERIENCE?
+
+From review 69 (`reviews/reviewer-feedback-69.txt`). Plan
+`H49_DISCOVERABILITY_PLAN.md`, frozen `f806c8c`; instrument
+`audit_h49_discoverability.py`; running at registration, no value read.
+
+Motivation, registered: at K = 4 on the two-subspace world the true
+grouping has FUTURE value (alpha +0.30 / +0.12 / +0.52, full +0.26 /
++0.13 / +0.18 log units) and no PRESENT value (-115 / -121 / -26 nats).
+M's non-discovery is therefore rational under its objective, and
+annealing it (the planned K = 4 H_early / H_late block) would force a
+discrete decision its objective never rewarded — withdrawn before any
+run. Three economic quantities are now distinguished: current utility,
+future fertility, and representational cost; discovery needs a signal
+computable from PAST experience that tracks the second.
+
+Hypothesis H49: on the label-free learner's own frozen representation
+(M_4), at least one retrospective quantity computable without labels or
+future tasks — leave-one-out reacquisition C_LOO under a candidate
+partition, a two-part description proxy D*, or own- versus other-group
+substitutability — prefers the true grouping over the distributed policy
+and over every wrong or random partition.
+
+Registered rules: SIGNAL (C_LOO) iff log C_LOO(DISTRIBUTED) - log
+C_LOO(TRUE) >= +0.15 AND the margin over the best wrong/random partition
+>= +0.10, in >= 2 of 3 worlds; SIGNAL (D*) iff D*(DISTRIBUTED) > D*(TRUE)
+and the two-part score prefers TRUE in >= 2 of 3. Instrument check: on
+L_4 (representation trained with the grouping) TRUE must beat both wrong
+pairings by >= 0.15 or nothing is read. Outcomes: A DISCOVERABLE (signal
+on M_4) -> build a sleep operator on the signalling quantity, then
+H_early / H_late; B UNDERDETERMINED (no signal on M_4 or L_4) -> option
+value not inferable from current observations; C SIGNAL NEEDS
+ORGANIZATION (signal on L_4 only) -> discovery needs a proposal-and-
+reorganize step, not just a score.
+
+Predictions: review 69 — A (a signal exists that wake ignores). Ours —
+C: M_4's two slots are interchangeable (entropy ~0.75, ARI ~0), so
+masking onto either slot re-fits about equally and P_LOO sits near zero,
+while L_4 shows a clear signal.
+
+Candidate sleep objective, registered as a design target and not as a
+result: J_sleep = lambda D*(L) + eta sum_i C_reacquire(T_i | L_{-i}) —
+description economics (V1-V5) plus retrospective fertility (H39/H48b),
+with no future label. Its program-synthesis form: invent A iff D*(A) <
+the cross-validated reduction in reacquisition cost. Neither is tested by
+H49; H49 asks only whether the quantities they would optimize carry a
+signal.

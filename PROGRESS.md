@@ -3112,3 +3112,14 @@ substitutability from experienced tasks only; outcomes A DISCOVERABLE /
 B UNDERDETERMINED / C SIGNAL NEEDS ORGANIZATION; our prediction C. Wrote
 `audit_h49_discoverability.py` (mechanics smoke-tested); the ~2,300-refit
 census is running. Nothing read.
+
+# 2026-08-23 — LEDGER, LEARNINGS, AGENTS, AND PAPER DRAFT UPDATED THROUGH H49
+
+Registered H49 in `PREDICTIONS.md` (rules, outcomes, both prediction
+sets, the candidate sleep objective as a design target). Added review
+69's three-quantity distinction and the accessible-signal rule to
+`notes/learnings.txt` and `AGENTS.md`. Added section 7.7 to
+`paper/draft.md`: the H39 ladder, the fifth sealed block with its margin
+and amendment stated, the two audits, the continuous-manifold reading,
+H47 B1, the B2 gate, H48b, and the H49 question, written with the same
+claim discipline as the earlier blocks. H49 is still running.
