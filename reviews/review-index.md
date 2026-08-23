@@ -2736,3 +2736,24 @@ gate to a project rule: before any structural-recovery experiment, ask
 what refusing to represent the structure costs. Connects to synthesis:
 SPLIT a primitive only when one manifold costs more than several — the
 route from continuous representation to discrete program symbols.
+
+### [reviewer-feedback-69.txt](reviewer-feedback-69.txt)
+On H48b. Declines the proposed K=4 H_early/H_late block: at K=4 the true
+grouping has future value but no present-objective value, so M's failure
+to discover it is *rational* and annealing would produce confident
+arbitrariness. Refines the rule — before testing discovery, verify the
+learner has an accessible signal from which the structure can be
+discovered — and separates three economic quantities (current utility,
+future fertility, representational cost). Registers **H49 structural
+discoverability**: a census on the existing K=4 artifacts of
+retrospective signals a sleep process could compute without future
+labels — leave-one-out reacquisition C_LOO, two-part description cost D*,
+and retrospective substitutability — comparing the true partition, M's
+distributed representation, and random/wrong partitions. Outcomes: A
+(signal exists → build a sleep operator on it), B (no signal → option
+value not inferable from current observations; the "little scientist"
+direction), C (signal exists but wake ignores it → wake/sleep gets a
+precise causal role). Proposes the sleep objective J_sleep = λD*(L) +
+η Σ_i C_reacquire(T_i | L_−i) — cross-validation for a learned language
+of thought — and the symbol-emergence rule SPLIT iff ΔC_reacquire >
+ΔD*_split.

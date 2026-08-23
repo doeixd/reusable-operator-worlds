@@ -1,0 +1,120 @@
+Reviewer feedback 69 — received 2026-08-23, on the H48b width sweep (MIXED;
+future channels pay for discrete identity at K <= 8, present never does).
+
+----------------------------------------------------------------------
+
+I would NOT draft the proposed H_early / H_late discovery block yet. H48b
+revealed a more important problem than routing. At K = 4, true discrete
+membership has real FUTURE value (dlog R_alpha = +.30, +.12, +.52; dlog
+R_full = +.26, +.13, +.18) but essentially no PRESENT-objective value
+(dJ = -115, -121, -26 nats; positive would mean the oracle helps, and it
+does not). So: membership is useful for the future but is not rewarded by
+the learner's current objective. That changes what the next experiment
+should be.
+
+THE FAILURE TO DISCOVER GROUPS IS CURRENTLY RATIONAL. M has ARI ~ 0 even
+at widths where ignoring identity costs future acquisition. But why
+should M discover the groups? The lifetime objective is telling it: use
+both slots, you learn today's tasks slightly better that way. Annealing M
+into H_early / H_late would ask what happens when an optimizer is forced
+to make a discrete decision its objective never gave it a reason to make
+correctly; I predict it becomes confidently arbitrary. Existence !=
+discovery, refined: BEFORE TESTING DISCOVERY, VERIFY THAT THE LEARNER HAS
+AN ACCESSIBLE SIGNAL FROM WHICH THE USEFUL STRUCTURE CAN BE DISCOVERED.
+
+WHAT H48b REALLY FOUND: three different economic quantities. Current
+utility (does representing g make already-encountered tasks cheaper? dJ
+<~ 0: no). Future fertility (does it make a nearby unseen task cheaper?
+at K <= 8: yes). Representational cost (does splitting one manifold into
+two reduce the description cost of schemas, arguments, routes, or
+innovations? not yet established) — and that third quantity is now the
+key. We need a signal available from PAST experience that predicts the
+second quantity without seeing future tasks. That is the abstraction-
+learning problem. V6 tried explicitly optimizing future adaptation and
+failed; H39 showed the right architecture can create fertile coordinates;
+H48b shows a fertile discrete decomposition may not be preferred by
+present predictive loss. Neither L_current nor naive L_future has solved
+representation discovery; we need a better local proxy, and that is
+probably where MDL / compression re-enters.
+
+NEXT: AN OPPORTUNITY AUDIT FOR THE DISCOVERY OBJECTIVE. Freeze a cheap
+audit on the existing K = 4 artifacts: is true group membership
+detectable as economically better using ONLY already-observed tasks? No
+unseen siblings, no future labels. Compare candidate decompositions:
+teacher partition g; M's distributed representation; random balanced
+partitions; perhaps optimized alternatives. Evaluate retrospective
+quantities a sleep process could actually compute.
+Candidate 1, leave-one-out transfer within the observed lifetime: remove
+one observed member from schema fitting, build the representation from
+the others, fit only its argument, measure acquisition: C_LOO(g). Past
+tasks become pseudo-futures; no leakage. Prediction C_LOO(true) <
+C_LOO(distributed / random). If so, a usable discovery signal exists.
+Candidate 2, two-part description cost D*(schemas) + D*(arguments) +
+D*(routes) + D*(innovation): the two-group representation may need more
+identity bits but far fewer argument / innovation bits; if D*_true <
+D*_distributed, MDL can discover what present loss does not reward,
+closing the loop with V1-V5.
+Candidate 3, retrospective substitutability: for each task, how much of
+its learned computation can be replaced by a schema learned from the
+other members of its group: S_subst = E_i[L_i(other-group schema) -
+L_i(own-group schema)], all evidence from the experienced lifetime — the
+project's functional definition of abstraction, operationalized.
+
+DECISION TREE, H49 — STRUCTURAL DISCOVERABILITY. Outcome A: the true
+grouping wins retrospectively (C_LOO,true < C_LOO,M and/or D*_true <
+D*_distributed): future-fertile structure leaves a detectable signature
+in past experience; build a sleep / consolidation operator that optimizes
+that quantity; THEN H_early / H_late becomes meaningful. Outcome B: only
+teacher labels reveal the advantage (C_LOO and D* indifferent): no
+learnable evidence in the experienced lifetime under these statistics;
+failure to discover g is not a learner failure — the world
+underdetermines which representation will prove fertile. A major
+theoretical result in its own right: some representational distinctions
+have option value that cannot be inferred from current observations
+alone; then one needs longer / more diverse experience, active
+experimentation, or a learned meta-prior across lifetimes — the "little
+scientist". Outcome C (what I expect): a retrospective signal exists but
+gradient wake ignores it: WAKE solves tasks; SLEEP discovers structure
+using cross-task compression / transfer — finally a precise causal role
+for wake/sleep.
+
+THE SLEEP OBJECTIVE WE HAVE BEEN LOOKING FOR. Instead of naive future
+loss, sleep constructs pseudo-futures from the past: for each learned
+task i, L_{-i} -> adapt to T_i; optimize J_sleep = lambda D*(L) + eta
+sum_i C_reacquire(T_i | L_{-i}), possibly plus migration / edit cost.
+This combines description economics (V1-V5: D* matters) with fertility
+(H39 / H48b: C_reacquire matters), uses no literal future labels, and
+asks: if I had encoded the rest of my experience this way, would this
+representation have made one of my already-seen tasks cheap to
+rediscover? A natural empirical proxy for future usefulness.
+
+FOR PROGRAM SYNTHESIS: invent a primitive not merely because a
+subsequence recurs but by hiding one solved program, building the
+candidate abstraction from the others, asking whether it makes the
+hidden solution cheaper to synthesize, and charging its description
+cost: invent A iff D*(A) < cross-validated reduction in synthesis /
+reacquisition cost. Cross-validation for a learned language of thought.
+It protects against exactly what H48b exposed — real latent structure
+that is not useful, arbitrary ontology, overly broad manifolds,
+unnecessary discrete symbols — and rewards abstractions that help solve
+another instance. Symbol emergence: at high width P(alpha) passes the
+retrospective test and there is no reason to split; at low width
+C_LOO(P) > C_LOO(P_1, P_2), and once dC_reacquire > dD*_split, SPLIT is
+justified — a better theory than clustering activations.
+
+CHANGE THE IMMEDIATE PLAN: not the K = 4 H_early / H_late run. Next: the
+H49 discovery-signal census on existing K = 4 worlds, no new lifetimes if
+possible; ask whether true membership improves C_LOO, D*, and/or cross-
+task substitutability using only experienced tasks. If one clearly
+prefers the true grouping, that is the objective to give the discovery
+mechanism; the learner experiment then becomes soft continuous WAKE ->
+sleep optimizing retrospective fertility -> discrete compilation, and
+only then early versus late commitment.
+
+THE LARGER LESSON. We started with "can the learner discover hidden
+structure?" The more fundamental question is: WHAT OBSERVABLE EVIDENCE
+SHOULD CAUSE A LEARNER TO REPRESENT ONE USEFUL STRUCTURE RATHER THAN
+ANOTHER? The emerging answer: prefer representations that compress past
+experience and make held-out portions of that experience cheap to
+relearn. If that works it connects MDL, continual learning, abstraction
+formation, wake/sleep, and eventually program synthesis in one objective.
