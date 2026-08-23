@@ -1,0 +1,135 @@
+{
+  "frozen_plan": "H47_MEMBERSHIP_PLAN.md Amendment 2 (B2 teacher gates)",
+  "git_commit": "4efee19",
+  "frozen_amendment": 3,
+  "thresholds": {
+    "within_resid": 0.05,
+    "within_err_over_contribution": 0.05,
+    "cross_resid": 0.5,
+    "cross_err_over_contribution": 0.5,
+    "q_min": 3.0,
+    "group_balance": 0.2,
+    "accuracy": 0.95
+  },
+  "groups": 2,
+  "worlds": {
+    "0": {
+      "heldout": [
+        {
+          "family": 4,
+          "group": 0,
+          "within_resid": 4.4739656869306254e-15,
+          "cross_resid": 1.0,
+          "contribution_mse": 0.0019162669443630585,
+          "within_err_over_contribution": 2.3638804953026982e-29,
+          "cross_err_over_contribution": 1.0,
+          "Q": 1916266944.3630586
+        },
+        {
+          "family": 5,
+          "group": 1,
+          "within_resid": 3.3845425905211083e-16,
+          "cross_resid": 1.0,
+          "contribution_mse": 0.0022423991758996837,
+          "within_err_over_contribution": 4.712252064020816e-31,
+          "cross_err_over_contribution": 1.0,
+          "Q": 2242399175.8996835
+        }
+      ],
+      "G2": true,
+      "G3": true,
+      "contributions": {
+        "0": 0.010074834772888074,
+        "1": 0.009696052071978864,
+        "2": 0.010357580674297139,
+        "3": 0.013723950196813196
+      },
+      "contribution_spread": 0.3674048852605725,
+      "baseline_g1_family_spread": 0.12429124367406254,
+      "group_spread": 0.19659778186746804,
+      "G4": true,
+      "group_classification_accuracy_loo": 1.0,
+      "G5": true,
+      "all_pass": true
+    },
+    "1": {
+      "heldout": [
+        {
+          "family": 4,
+          "group": 0,
+          "within_resid": 1.6353522205669344e-16,
+          "cross_resid": 1.0,
+          "contribution_mse": 0.002165139581074965,
+          "within_err_over_contribution": 2.0423347252463523e-31,
+          "cross_err_over_contribution": 1.0,
+          "Q": 2165139581.074965
+        },
+        {
+          "family": 5,
+          "group": 1,
+          "within_resid": 4.568836430783244e-16,
+          "cross_resid": 1.0,
+          "contribution_mse": 0.0019127122042682508,
+          "within_err_over_contribution": 5.799563510671473e-31,
+          "cross_err_over_contribution": 1.0000000000000002,
+          "Q": 1912712204.268251
+        }
+      ],
+      "G2": true,
+      "G3": true,
+      "contributions": {
+        "0": 0.01003207285302159,
+        "1": 0.009546185661363619,
+        "2": 0.010676503531149753,
+        "3": 0.009462462241561779
+      },
+      "contribution_spread": 0.12226849296539483,
+      "baseline_g1_family_spread": 0.06202815303973428,
+      "group_spread": 0.028234966989296086,
+      "G4": true,
+      "group_classification_accuracy_loo": 1.0,
+      "G5": true,
+      "all_pass": true
+    },
+    "2": {
+      "heldout": [
+        {
+          "family": 4,
+          "group": 0,
+          "within_resid": 2.8289537835660223e-16,
+          "cross_resid": 1.0,
+          "contribution_mse": 0.002818943242647644,
+          "within_err_over_contribution": 3.3013437349816787e-31,
+          "cross_err_over_contribution": 1.0,
+          "Q": 2818943242.647644
+        },
+        {
+          "family": 5,
+          "group": 1,
+          "within_resid": 5.158351393456931e-16,
+          "cross_resid": 1.0,
+          "contribution_mse": 0.002512978691074823,
+          "within_err_over_contribution": 6.645319627361842e-31,
+          "cross_err_over_contribution": 0.9999999999999998,
+          "Q": 2512978691.074823
+        }
+      ],
+      "G2": true,
+      "G3": true,
+      "contributions": {
+        "0": 0.013045084278613181,
+        "1": 0.012152456519814007,
+        "2": 0.011940785023397491,
+        "3": 0.0110165128302389
+      },
+      "contribution_spread": 0.1685040594181164,
+      "baseline_g1_family_spread": 0.10855762210515703,
+      "group_spread": 0.09304331641426013,
+      "G4": true,
+      "group_classification_accuracy_loo": 1.0,
+      "G5": true,
+      "all_pass": true
+    }
+  },
+  "verdict": "PASS"
+}

@@ -60,6 +60,16 @@ for _w in (0, 1, 2):
                                                   "--anneal-commit", "24", "--anneal-final", "0.1"])
     SWEEP[f"b1_hlate/world_{_w}"] = (_w, _base + ["--route-policy", "anneal", "--anneal-start", "40",
                                                  "--anneal-commit", "56", "--anneal-final", "0.1"])
+# H47 B2 cells (H47_MEMBERSHIP_PLAN.md Amendments 2-3): the G = 2 world
+for _w in (0, 1, 2):
+    _base = ["--model", "pslot", "--slot-args", "32", "--pslot-count", "2", "--snapshot-history",
+             "--schema-groups", "2"]
+    SWEEP[f"b2_m/world_{_w}"] = (_w, list(_base))
+    SWEEP[f"b2_ltrue/world_{_w}"] = (_w, _base + ["--route-policy", "mask_group"])
+    SWEEP[f"b2_hearly/world_{_w}"] = (_w, _base + ["--route-policy", "anneal", "--anneal-start", "8",
+                                                  "--anneal-commit", "24", "--anneal-final", "0.1"])
+    SWEEP[f"b2_hlate/world_{_w}"] = (_w, _base + ["--route-policy", "anneal", "--anneal-start", "40",
+                                                 "--anneal-commit", "56", "--anneal-final", "0.1"])
 REQUIRED = ("model.pt", "summary.json", "rho_profile.json", "fingerprint.json",
             "config.yaml", "history.pt")
 
@@ -95,6 +105,10 @@ def main() -> int:
         names = [n for n in SWEEP if n.startswith("cap_")]
     elif names == ["b1"]:
         names = [n for n in SWEEP if n.startswith("b1_")]
+    elif names == ["b2gate"]:
+        names = [n for n in SWEEP if n.startswith("b2_m/") or n.startswith("b2_ltrue/")]
+    elif names == ["b2h"]:
+        names = [n for n in SWEEP if n.startswith("b2_hearly/") or n.startswith("b2_hlate/")]
     with ProcessPoolExecutor(max_workers=3) as pool:  # slots=12: cap 3 (memory)
         results = list(pool.map(run, names))
     failed = [n for n, c in results if c != 0]
