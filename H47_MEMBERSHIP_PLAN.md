@@ -227,3 +227,76 @@ D*(routing) + D*(innovation); a learner can buy capacity either way and
 the economics must compare both. Principle: discover the geometry of
 variation first; discretize only where the world contains
 discontinuities.
+
+# Amendment 2 (2026-08-23, review 67; B2 GATE frozen, B2 arms staged)
+
+## Generator, implemented and verified
+
+`MetaFamilySpec(schema_groups=G)`: G disjoint rank-2 subspaces of U-space
+(group 0 draws the original seeds; later groups are projected out of
+earlier spans before orthonormalization), V and b shared by all, families
+assigned to groups contiguously, held-out families one per group.
+`G = 1` reproduces the previous generator BITWISE on seeds 0, 1, 2, 700
+(tasks, examples, held-out, novel, unrelated, operators; sha256 of all
+arrays identical). Unit tests: G = 1 spec identity; G = 2 group
+assignment (0, 0, 1, 1, 0, 1), within-group rank <= 2, cross-group
+cosine < 1e-6, group 0 identical to the G = 1 operators.
+
+## Teacher-level gates (oracle; no learner; `audit_h47_b2_world.py`), worlds 0-2, G = 2
+
+- G2 **within-group continuity**: for each held-out family, the relative
+  residual of the best linear fit of its operator's U from its group's two
+  trained operators' U (least squares in U-space) is <= 0.05; and at task
+  level, substituting the held-out family's operator by the best within-
+  group mixture in its teacher programs gives evaluation NMSE <= 0.05.
+- G3 **cross-group non-substitutability**: the same fits using the OTHER
+  group's two trained operators give relative residual >= 0.5, and
+  `Q = NMSE(best cross-group substitute) / NMSE(best within-group
+  substitute) >= 3` on every held-out family, every world.
+- G4 **balance** (V5 gates): per-family operator norm exact by
+  construction; per-family behavioural contribution (NMSE of the program
+  with the family step replaced by identity) within 10% across the four
+  trained families; per-group mean within 10% of each other.
+- G5 **distinguishable from behaviour**: nearest-centroid classification
+  of the 64 trained family tasks into two groups from their effective
+  innovation vectors on a common probe (teacher operators, no learner)
+  recovers the group labels with accuracy >= 0.95.
+All five must pass in 3 of 3 worlds before any B2 lifetime.
+
+## Opportunity gate = B2's primary estimand, read once
+
+Arms M_G2 (pooled soft routing, two slots, K = 32) and L_true (exact mask
+of each trained family task's parameterized-slot mass onto its GROUP's
+slot, group 0 -> 11, group 1 -> 10; held-out futures unmasked) on worlds
+0-2 of the G = 2 world. Registered gate, identical to the membership tax:
+
+    MEMBERSHIP HAS VALUE iff  log R_alpha,M - log R_alpha,L_true >= +0.15
+                              in at least 2 of 3 worlds.
+
+If it fails, there is no discovery problem in this world and the H arms
+are not launched; the result is recorded as NO-OPPORTUNITY. If it
+passes, M_G2's route baselines (entropy, margins, group consistency, ARI
+against GROUP labels — diagnostic) are measured and the H arms' bands are
+set from M_G2's cross-world spread (same construction as B1) in a final
+amendment before H_early / H_late are launched.
+
+Secondary, read with the gate: the tax on J and R_full under the B1
+relative bands; review 67 predicts both NEUTRAL ("innovation buffers the
+full system") with R_alpha taxed.
+
+## Registered predictions (review 67 and ours)
+
+R_alpha,M > R_alpha,L_true by a measurable amount (gate passes);
+R_full,M ~ R_full,L_true; J_M ~ J_L_true. For the H arms, more strongly
+than B1: H_early < H_late <~ M; a near-neutral H_late would read "learn
+continuously while uncertain; compile into discrete identities once
+evidence accumulates", which B1 could not license because its world had
+no identities. Ours: gate passes with the tax concentrated in R_alpha;
+M_G2's route entropy falls well below B1's 0.93 and its group ARI rises
+above 0.5 — the first world in which the learner has something discrete
+to find.
+
+## Not in this amendment
+
+A separation knob rho_group (review 67) is deferred until one clean
+membership world exists. Stage C remains unfrozen.
