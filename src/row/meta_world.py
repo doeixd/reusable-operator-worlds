@@ -66,6 +66,7 @@ class MetaFamilySpec:
         family_onset: int = 8,
         held_out_per_family: int = 1,
         held_out_families: int = 2,
+        schema_groups: int = 1,
     ) -> None:
         if families < 1:
             raise ValueError("families must be positive")
@@ -106,6 +107,17 @@ class MetaFamilySpec:
         # subspace should acquire it cheaply and one that did not should
         # not.
         self.held_out_families = int(held_out_families)
+        # H47 B2: G disjoint shared subspaces. Families are assigned to
+        # groups contiguously (families 0..F/G-1 -> group 0, ...); held-out
+        # families round-robin, one per group when held_out_families == G.
+        # G = 1 is the original generator, bit for bit.
+        if schema_groups < 1:
+            raise ValueError("schema_groups must be positive")
+        if self.families % int(schema_groups):
+            raise ValueError("families must be divisible by schema_groups")
+        if self.held_out_families and self.held_out_families % int(schema_groups):
+            raise ValueError("held_out_families must be divisible by schema_groups")
+        self.schema_groups = int(schema_groups)
 
     @property
     def total_tasks(self) -> int:
@@ -120,7 +132,19 @@ class MetaFamilySpec:
         family = offset // self.tasks_per_family
         return family if family < self.families else None
 
+    def group_of_family(self, family: int) -> int:
+        """Schema group of a family index (trained or held-out)."""
+
+        if family < self.families:
+            return family // (self.families // self.schema_groups)
+        return (family - self.families) % self.schema_groups
+
     def as_dict(self) -> dict[str, object]:
+        if self.schema_groups != 1:
+            return {**self._base_dict(), "schema_groups": self.schema_groups}
+        return self._base_dict()
+
+    def _base_dict(self) -> dict[str, object]:
         return {
             "families": self.families,
             "tasks_per_family": self.tasks_per_family,
@@ -142,16 +166,25 @@ def family_operators(config: WorldConfig, spec: MetaFamilySpec) -> tuple[Primiti
     # below a mixture of functions rather than of coordinates.
     V = _spectral_normalize(shared.normal(size=(rank, d)))
     b = shared.normal(scale=0.2, size=rank)
-    basis = [
-        _spectral_normalize(_rng(config.seed, 61, k).normal(size=(d, rank)))
-        for k in range(spec.subspace_rank)
-    ]
-    # Orthonormal basis for the shared subspace, in MATRIX space. The
-    # span is what carries the relatedness; orthonormalizing it changes
-    # no operator's family membership and makes the algebra below exact.
-    flat = np.stack([B.ravel() for B in basis])
-    shared_basis, _ = np.linalg.qr(flat.T)
-    shared_basis = shared_basis.T[: spec.subspace_rank]
+    # One orthonormal basis per schema group, in MATRIX space. Group 0
+    # draws exactly the original seeds (61, k); later groups draw
+    # (61, g*rank + k) and are projected out of every earlier group's
+    # span before orthonormalization, so the G subspaces are disjoint and
+    # G = 1 is the original construction bit for bit.
+    group_bases = []
+    for g in range(spec.schema_groups):
+        basis = [
+            _spectral_normalize(
+                _rng(config.seed, 61, g * spec.subspace_rank + k).normal(size=(d, rank))
+            )
+            for k in range(spec.subspace_rank)
+        ]
+        flat = np.stack([B.ravel() for B in basis])
+        for earlier in group_bases:
+            flat = flat - (flat @ earlier.T) @ earlier
+        q, _ = np.linalg.qr(flat.T)
+        group_bases.append(q.T[: spec.subspace_rank])
+    shared_basis = group_bases[0]
     # One scale for every family at every r_meta, so magnitude cannot
     # co-vary with the knob. Taken from a spectrally normalized draw so
     # the family operators sit at the same scale as the base library.
@@ -166,15 +199,16 @@ def family_operators(config: WorldConfig, spec: MetaFamilySpec) -> tuple[Primiti
     operators = []
     for family in range(spec.families + spec.held_out_families):
         generator = _rng(config.seed, 62, family)
+        family_basis = group_bases[spec.group_of_family(family)]
         coefficients = _unit(generator.normal(size=spec.subspace_rank))
-        shared_part = _unit(coefficients @ shared_basis)
+        shared_part = _unit(coefficients @ family_basis)
         private = generator.normal(size=d * rank)
         # Project the private part OUT of the shared subspace. Without
         # this the two components have a random nonzero inner product,
         # so ||theta_f|| wobbles with the draw and the balance gate
         # fails for a reason that has nothing to do with relatedness —
         # measured at 31.6% spread on contribution before the fix.
-        private = private - (private @ shared_basis.T) @ shared_basis
+        private = private - (private @ family_basis.T) @ family_basis
         private = _unit(private)
         mixed = (
             np.sqrt(spec.r_meta) * shared_part
@@ -337,6 +371,8 @@ def generate_meta_world(config: WorldConfig, spec: MetaFamilySpec) -> World:
                        tuple(i % spec.families for i in range(len(held_out))))
     object.__setattr__(world, "meta_family_spec", spec)
     object.__setattr__(world, "family_operators", operators)
+    object.__setattr__(world, "family_group",
+                       tuple(spec.group_of_family(f) for f in range(spec.families + spec.held_out_families)))
     return world
 
 

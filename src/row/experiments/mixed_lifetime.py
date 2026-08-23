@@ -36,6 +36,8 @@ def _pilot_record(args) -> dict[str, object] | None:
         return None
     record: dict[str, object] = {"model": args.model,
                                  "snapshot_history": bool(args.snapshot_history)}
+    if getattr(args, "schema_groups", 1) != 1:
+        record["schema_groups"] = args.schema_groups
     if args.model == "pslot":
         record.update({"slot_args": args.slot_args, "freeze_args": bool(args.freeze_args),
                        "freeze_matrices": bool(args.freeze_matrices), "pslot_index": 11})
@@ -188,6 +190,8 @@ def main() -> None:
     parser.add_argument("--meta-families", type=int, default=4)
     parser.add_argument("--meta-tasks-per-family", type=int, default=16)
     parser.add_argument("--meta-subspace-rank", type=int, default=2)
+    parser.add_argument("--schema-groups", type=int, default=1,
+                        help="H47 B2: number of disjoint family subspaces (1 = original generator)")
     parser.add_argument(
         "--return-gain",
         type=float,
@@ -242,7 +246,7 @@ def main() -> None:
                         help="pslot: number of parameterized slots (11, 10, ...)")
     parser.add_argument("--freeze-matrices", action="store_true",
                         help="pslot: freeze U_k at init, alpha learns (matched-budget generic channel)")
-    parser.add_argument("--route-policy", choices=("none", "mask_arbitrary", "anneal"), default="none",
+    parser.add_argument("--route-policy", choices=("none", "mask_arbitrary", "mask_group", "anneal"), default="none",
                         help="H47 B1: hard mask of family tasks onto an arbitrary slot split, or a "
                              "global temperature anneal on the two parameterized slots")
     parser.add_argument("--anneal-start", type=int, default=8)
@@ -358,6 +362,7 @@ def main() -> None:
             r_meta=args.r_meta,
             subspace_rank=args.meta_subspace_rank,
             family_onset=args.family_onset,
+            schema_groups=args.schema_groups,
         )
         if args.r_meta is not None
         else None
@@ -514,12 +519,14 @@ def main() -> None:
     if args.model == "pslot" and args.route_policy != "none":
         if args.pslot_count < 2:
             raise SystemExit("route policies require --pslot-count 2")
-        if args.route_policy == "mask_arbitrary":
+        if args.route_policy in ("mask_arbitrary", "mask_group"):
             def route_policy_hook(lifetime_index: int, world_task_index: int) -> dict:
                 family = meta_spec.family_of(world_task_index)
                 if family is None:
                     return {}
-                return {"mask_position": 0 if family in (0, 1) else 1}  # primary / secondary P slot
+                if args.route_policy == "mask_group":
+                    return {"mask_position": meta_spec.group_of_family(family)}  # true membership
+                return {"mask_position": 0 if family in (0, 1) else 1}  # arbitrary split
         else:
             start, commit, final = args.anneal_start, args.anneal_commit, args.anneal_final
 

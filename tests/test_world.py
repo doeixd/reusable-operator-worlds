@@ -95,3 +95,44 @@ class WorldTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class SchemaGroupTests(unittest.TestCase):
+    """H47 B2 generator extension: G disjoint family subspaces."""
+
+    def _world(self, groups, seed=0):
+        from dataclasses import replace
+        from row.config import load_config
+        from row.meta_world import MetaFamilySpec, generate_meta_world
+        spec = MetaFamilySpec(families=4, tasks_per_family=16, r_meta=1.0, subspace_rank=2,
+                              schema_groups=groups)
+        cfg = load_config("configs/v5_h72.yaml")
+        return generate_meta_world(replace(cfg.world, seed=seed, tasks=spec.total_tasks), spec), spec
+
+    def test_g1_is_the_default_spec(self):
+        from row.meta_world import MetaFamilySpec
+        a = MetaFamilySpec(families=4, tasks_per_family=16, r_meta=1.0, subspace_rank=2)
+        b = MetaFamilySpec(families=4, tasks_per_family=16, r_meta=1.0, subspace_rank=2, schema_groups=1)
+        self.assertEqual(a.as_dict(), b.as_dict())
+        self.assertNotIn("schema_groups", a.as_dict())
+
+    def test_g2_assigns_groups_and_separates_subspaces(self):
+        import numpy as np
+        world, spec = self._world(2)
+        self.assertEqual(world.family_group, (0, 0, 1, 1, 0, 1))
+        U = [op.U.ravel() for op in world.family_operators]
+        # At r_meta = 1 every operator lies in its group's rank-2 subspace:
+        # within-group pairs span <= 2 dims, cross-group pairs are orthogonal.
+        g0 = np.stack(U[:2] + [U[4]]); g1 = np.stack(U[2:4] + [U[5]])
+        self.assertLessEqual(np.linalg.matrix_rank(g0, tol=1e-6), 2)
+        self.assertLessEqual(np.linalg.matrix_rank(g1, tol=1e-6), 2)
+        cross = np.abs(g0 @ g1.T) / (np.linalg.norm(g0, axis=1)[:, None] * np.linalg.norm(g1, axis=1)[None, :])
+        self.assertLess(float(cross.max()), 1e-6)
+        world1, _ = self._world(1)
+        self.assertTrue(np.allclose(world1.family_operators[0].U, world.family_operators[0].U))
+        self.assertFalse(np.allclose(world1.family_operators[2].U, world.family_operators[2].U))
+
+    def test_invalid_group_counts_are_rejected(self):
+        from row.meta_world import MetaFamilySpec
+        with self.assertRaises(ValueError):
+            MetaFamilySpec(families=4, tasks_per_family=16, schema_groups=3)
