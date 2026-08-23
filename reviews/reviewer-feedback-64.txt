@@ -1,0 +1,64 @@
+Reviewer feedback 64 — received 2026-08-22, on the Stage A result
+(`reports/h39_confirmation_followups.json`: A1 PASS, A2 PASS).
+
+----------------------------------------------------------------------
+
+Yes — measure the baselines and draft Stage B.
+
+Stage A did exactly what it needed to do. The strongest update is now:
+online intensional channel >> post-hoc recovery from realized task
+objects; and A2 closes the obvious substitution objection. The fact that
+M's residual population gets even worse post hoc, 6.33x, is especially
+informative: once the explicit argument channel exists, the learner seems
+to actively route reusable family structure away from the residual
+population. That is stronger than merely saying the online channel
+preserved something extra.
+
+For Stage B, measure the existing M baselines on worlds 0-2 first, then
+draft/freeze around them. Specifically: route entropy over the two
+parameterized slots, both early and late in the lifetime; dominant-slot
+consistency within each teacher family; ARI/NMI as diagnostics only;
+per-task route margins, so the H_early / H_late annealing targets can be
+chosen relative to M's actual decisiveness rather than arbitrarily; the
+existing J_present, R_alpha, R_full, and E5 quantities needed to define
+relative tolerances; ideally the distribution, not just the mean, of M's
+route entropy across tasks and worlds.
+
+Then draft H47 around four arms: M, L, H_early, H_late, with G reused
+only where it is still informative rather than automatically rerun.
+
+For L, use the exact route mask as planned: p(correct slot) = 1 for
+trained family tasks; no +4-logit convention; unseen futures remain
+unlabelled.
+
+For the hard arms, make them end at approximately the same final
+hardness: H_early commits before enough evidence; H_late commits after M
+has mostly stabilized. Then H_early < H_late ~ M would support PREMATURE
+COMMITMENT specifically, rather than merely "soft routing is better than
+one arbitrary hard-routing schedule".
+
+The primary scientific estimand remains the membership discovery tax,
+Delta_membership = performance(M) - performance(L), evaluated separately
+for J_present, R_alpha, R_full. Prediction: J_M ~ J_L, R_full,M ~
+R_full,L, but R_alpha,M > R_alpha,L. Label-free discovery will probably be
+nearly free for overall learning and for the full schema+innovation
+interface, but imperfect routing will leave a measurable tax when the
+novel task must rely on the argument channel alone. That would be
+scientifically interesting rather than a partial failure: private
+innovation buffers imperfect abstraction discovery. Preregister that
+interpretation before running.
+
+Tolerances: set them from the existing M distributions rather than
+importing arbitrary absolute numbers; prefer relative quantities, e.g.
+(J_M - J_L) / |J_O - J_M| for present cost, and multiplicative / log-ratio
+differences for R_alpha and R_full if the development distributions make
+those stable.
+
+Do not let teacher-family recovery decide H47. If M has mediocre ARI but
+matches L economically, that is evidence the learner found an alternative
+useful partition. The headline question is "how much does not being told
+membership cost?", not "did it rediscover our generator labels?".
+
+So: measure the M route baselines on worlds 0-2, then draft H47 with L +
+early/late hardening and relative tolerances. Do not start Stage C until
+that block has a clean answer.

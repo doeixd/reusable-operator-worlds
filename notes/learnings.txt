@@ -3498,3 +3498,34 @@ marginal result (a second optimizer if the mean landed in [1.10, 1.50)).
 It was not entered (2.01). Write the band into the rule before running;
 then a clear result needs no post-hoc defence and a marginal one gets the
 extra optimizer automatically.
+
+
+
+================================================================================
+MEASURE THE BASELINE BEFORE NAMING THE QUESTION (2026-08-22)
+================================================================================
+
+Review 64 asked for M's route baselines before H47 was frozen. They
+showed that M never assigns a task to a parameterized slot (conditional
+entropy 0.92-0.95 of 1.0 bits; ARI ~ 0) and, on re-reading the
+generator, that at r_meta = 1 all four families lie on one circle in one
+rank-2 subspace: the "membership" I had written into the plan was an
+arbitrary split of a continuous family. A frozen H47 would have measured
+the cost of forcing an arbitrary partition and called it the price of
+discovery. The baseline step is not a formality; it is where the
+question gets checked against the world.
+
+A DISTRIBUTED CODE CAN PASS EVERY ECONOMIC GATE. The confirmed E1/E5
+came from two slots used jointly as one 64-direction channel. Do not
+describe the result with cluster language ("the learner discovered which
+tasks share a slot") — it did not, and it did not need to.
+
+MEMBERSHIP NEEDS A WORLD WITH MEMBERSHIP. True discovery requires
+disjoint family subspaces (a `schema_groups` generator extension whose
+G = 1 case is bitwise the current world). What the current world can
+still test is commitment: does forcing a discrete assignment cost, and
+does forcing it early cost more than forcing it late.
+
+WRITE TOLERANCES IN THE UNITS THE QUANTITY LIVES IN. Relative J gaps
+normalized by |J_M - J_O| per world; log-ratio bounds for R set from M's
+measured cross-world SD (0.136 for log R_alpha, 0.060 for log R_full).

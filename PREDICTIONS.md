@@ -4581,3 +4581,42 @@ prediction error on a diagnostic quantity and does not touch the rule.
 Stage A gate: satisfied. Stage B (H47) may now be frozen as its own plan,
 with L as an exact route-mask oracle, H_early / H_late, and relative
 tolerances set after measuring M's route statistics on worlds 0-2.
+
+# H47 BASELINES (2026-08-22): M DOES NOT ASSIGN TASKS TO SLOTS, AND THE WORLD HAS NO MEMBERSHIP TO DISCOVER
+
+`reports/h47_baselines.json` (`audit_h47_baselines.py`, read-only on the
+H39d two-slot K=32 artifacts, worlds 0-2). Conditional route entropy over
+the two parameterized slots at the dominant step: late means 0.922 /
+0.943 / 0.949 bits of a 1.0 maximum (medians 0.974 / 0.974 / 0.990);
+early 0.944 / 0.961 / 0.973. Median margins 0.19 / 0.19 / 0.12. Teacher-
+family ARI 0.00 / 0.03 / -0.00, NMI 0.04 / 0.05 / 0.02. Economics: J gap
+-1,991 / -975 / -1,162; R_alpha 1.27 / 1.74 / 1.36; R_full 0.71 / 0.82 /
+0.76. Cross-world SD of log R_alpha 0.136, of log R_full 0.060.
+
+Finding, registered: the confirmed architecture's family representation
+is one DISTRIBUTED 64-direction argument channel spread across two routed
+operators; no task commits to a slot, early or late, in any world. And
+the generator (`meta_world.family_operators`) places every family
+operator, trained or unseen, on one circle in a single rank-2 subspace of
+U-space at `r_meta = 1`, so the {0,1} -> S1, {2,3} -> S2 split in the
+Stage B design was an arbitrary partition of a continuous family, not a
+teacher fact. H47 as "the economic price of discovering membership" is
+ill-posed on this world: there is no membership. Review 64's baseline
+step caught this before a plan was frozen.
+
+Consequences: (1) E1 and E5 of the sealed result were produced by
+distributed arguments, not discovered clusters — consistent with every
+number and stated now so no later reading invents clusters; (2) H47 is
+redrafted in two parts (`H47_MEMBERSHIP_PLAN.md`, DRAFT): B1, the cost of
+discreteness and of premature commitment on the existing world (M,
+L_arbitrary, H_early, H_late), testable now; B2, true membership on a
+world with two disjoint family subspaces, requiring a generator extension
+`schema_groups` whose `G = 1` case must reproduce the current world
+bitwise before any lifetime. Neither part is frozen.
+
+Registered predictions for B1: L_arbitrary a COST on R_alpha (32 directions
+per task instead of 64; H39d single-slot K=32 1.59 versus two-slot 1.46),
+NEUTRAL on J and R_full; H_early a COST on R_alpha, H_late NEUTRAL — the
+premature-commitment pattern. For B2, review 64's prediction stands as
+written (J and R_full neutral, R_alpha taxed: innovation buffers
+imperfect discovery), to be re-registered with that world's baselines.

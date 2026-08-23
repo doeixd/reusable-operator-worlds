@@ -2989,3 +2989,18 @@ population" sentence stands. A2: matched-budget compensated ratio 2.01
 (1.69-2.54), no robustness band entered. Recorded in `PREDICTIONS.md`
 (including one missed diagnostic prediction), appended to the closure,
 learnings added. Stage A gate satisfied; Stage B may be frozen next.
+
+# 2026-08-22 — REVIEW 64 FILED; H47 BASELINES MEASURED; H47 REDRAFTED (NOT FROZEN)
+
+Filed and indexed review 64. Wrote `audit_h47_baselines.py` and measured
+M's routing on worlds 0-2 (`reports/h47_baselines.json`): conditional
+entropy over the two parameterized slots 0.92-0.95 bits of 1.0, ARI ~ 0 —
+M uses both slots as one distributed argument channel and never commits.
+Re-reading `meta_world.family_operators` confirmed that at r_meta = 1 all
+families share one rank-2 subspace, so the planned slot "membership" was
+an arbitrary partition. Registered the finding in `PREDICTIONS.md`,
+redrafted `H47_MEMBERSHIP_PLAN.md` as B1 (discreteness and premature
+commitment on the current world: M, L_arbitrary, H_early, H_late, with
+relative tolerances from the measured spreads) and B2 (true membership on
+a two-subspace world via a `schema_groups` generator extension with a
+bitwise G = 1 check). Not frozen; awaiting review.

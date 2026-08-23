@@ -2649,3 +2649,19 @@ families onto two slots); raise K_max ≥ 8; charge the full marginal D* of
 an activated schema. Predictions: B — discovery tax shows up in R_α, not
 J or R_full ("innovation buffers imperfect abstraction discovery");
 C — overbirth then sleep consolidation.
+
+### [reviewer-feedback-64.txt](reviewer-feedback-64.txt)
+On the Stage A result. Takes the strongest update as "online intensional
+channel ≫ post-hoc recovery from realized task objects", reads M's 6.33×
+residual census as the learner actively routing family structure *away*
+from residuals once an argument channel exists, and treats A2 as closing
+the substitution objection. Directs Stage B: measure M's route baselines
+on worlds 0–2 first (entropy early/late, dominant-slot consistency,
+ARI/NMI as diagnostics, per-task margins so annealing targets are set
+relative to M's actual decisiveness, J/R spreads for relative
+tolerances); then H47 with arms M, L (exact route mask), H_early, H_late
+(same final hardness, so H_early < H_late ≈ M isolates premature
+commitment); primary estimand the membership tax on J, R_α, R_full
+separately; prediction J and R_full neutral, R_α taxed ("private
+innovation buffers imperfect abstraction discovery"), preregistered;
+teacher recovery never decides. No Stage C until B is clean.
