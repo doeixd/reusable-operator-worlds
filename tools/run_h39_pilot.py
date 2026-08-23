@@ -70,6 +70,13 @@ for _w in (0, 1, 2):
                                                   "--anneal-commit", "24", "--anneal-final", "0.1"])
     SWEEP[f"b2_hlate/world_{_w}"] = (_w, _base + ["--route-policy", "anneal", "--anneal-start", "40",
                                                  "--anneal-commit", "56", "--anneal-final", "0.1"])
+# H48b width sweep (H48B_WIDTH_SWEEP_PLAN.md): G = 2 world, K in {2,4,8,16}; K = 32 reuses b2_m / b2_ltrue
+for _w in (0, 1, 2):
+    for _k in (2, 4, 8, 16):
+        _base = ["--model", "pslot", "--slot-args", str(_k), "--pslot-count", "2", "--snapshot-history",
+                 "--schema-groups", "2"]
+        SWEEP[f"w_m{_k}/world_{_w}"] = (_w, list(_base))
+        SWEEP[f"w_l{_k}/world_{_w}"] = (_w, _base + ["--route-policy", "mask_group"])
 REQUIRED = ("model.pt", "summary.json", "rho_profile.json", "fingerprint.json",
             "config.yaml", "history.pt")
 
@@ -107,6 +114,8 @@ def main() -> int:
         names = [n for n in SWEEP if n.startswith("b1_")]
     elif names == ["b2gate"]:
         names = [n for n in SWEEP if n.startswith("b2_m/") or n.startswith("b2_ltrue/")]
+    elif names == ["width"]:
+        names = [n for n in SWEEP if n.startswith("w_")]
     elif names == ["b2h"]:
         names = [n for n in SWEEP if n.startswith("b2_hearly/") or n.startswith("b2_hlate/")]
     with ProcessPoolExecutor(max_workers=3) as pool:  # slots=12: cap 3 (memory)
