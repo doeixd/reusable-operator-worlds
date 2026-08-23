@@ -1,0 +1,82 @@
+Reviewer feedback 71 — received 2026-08-23, on the H50 draft plan.
+
+----------------------------------------------------------------------
+
+This is the right next experiment, and the sanity anchors are exactly the
+ones I would want. Keep the overall design; tighten the scoring economy
+before freezing — the current version spends compute on cells unlikely to
+change the conclusion.
+
+The most important anchor is m = 64 against the from-scratch L_4
+endpoint: recovery fraction = (migration-induced separation recovered) /
+(separation achieved by organized-from-scratch L_4), for both the C_LOO
+margin and substitutability. It distinguishes cheap reorganization vs
+partial migration vs essentially-retraining-required, which matters more
+than whether TRUE eventually beats RANDOM. Make recovery fraction a
+primary descriptive quantity even if not verdict-determining.
+
+THE CURVE IS SCIENTIFICALLY IMPORTANT. S_TRUE(m) - S_WRONG(m) as a
+function of reorganization effort tests a substantive hypothesis: is
+there a modest m* with separation well before from-scratch retraining?
+If separation appears quickly, a plausible sleep operator exists; if only
+at m = 64 with near-total L_4 recovery, "sleep reorganization" may be
+disguised retraining. Preserve a low/intermediate/high curve.
+
+REDUCE SCORING COST BY SCORING FEWER m VALUES, NOT FEWER LOO TASKS. The
+LOO statistic is what distinguishes TRUE from wrong partitions; halving
+its sample weakens the core causal comparison, while dropping one scored
+budget sacrifices little. Order: (1) keep all 64 LOO tasks; (2) score
+m in {0, 16, 64}, scoring m = 4 only if the transition is already below
+16; (3) sample tasks only if compute still demands it. Substitutability
+is mechanistic corroboration, not the primary signal: score it only for
+TRUE, the best WRONG/RANDOM, and SHAM, at m = 16 and 64.
+
+THE MOST IMPORTANT CONTROL IS SHAM. The comparison that matters is
+Delta_structure(h, m) = S(h, m) - S(SHAM, m); otherwise another 4,096
+updates can make almost anything look better. Same start, optimizer,
+data, trainable parameter count, and updates for every arm. If TRUE
+improves but SHAM improves by the same amount, there is no abstraction
+result.
+
+WRONG STRUCTURES MUST BE MORE THAN ONE FLAVOUR, and after the H49 bug be
+especially conservative: any discoverability verdict requires
+TRUE > max(WRONG/RANDOM) by a preregistered margin — not TRUE > SHAM.
+Apply the new constitutional rule literally.
+
+RECORD THE MIGRATION COST ITSELF: extra steps, temporary state, the
+functional drift during migration, and old-task loss immediately after
+migration. The eventual decision is J_sleep(h) = C_migrate(h) +
+lambda D*(R_h) + eta C_LOO(R_h); collect the ingredients now even if the
+verdict does not use them. A TRUE organization that becomes better only
+after 4,096 expensive steps may not be economically worthwhile.
+
+PREDICTIONS. At m = 0, TRUE ~ WRONG (known). At m = 16, TRUE begins to
+separate. At m = 64, clear TRUE advantage but NOT full recovery of L_4:
+C_LOO recovery perhaps 25-50% at m = 16 and 50-80% at m = 64;
+substitutability may recover somewhat faster. The most exciting result:
+TRUE separates from every wrong partition at a modest budget while
+recovering only part of the fully supervised endpoint — you do not need
+to recreate the whole representation to know which structural hypothesis
+is promising, which is exactly what a practical search operator needs.
+
+INTERPRETATION DISCIPLINE. Separation by m = 16: strong evidence for
+counterfactual reorganization as a discovery mechanism. Separation only
+at m = 64 with near-100% recovery: closer to "retrain under each
+hypothesis and select", valid but expensive. All candidates improving
+similarly: the operator is extra optimization. A random partition
+beating TRUE would be particularly informative — an economically
+equivalent alternative ontology, or a retrospective objective still
+misaligned with fertility; score the winning partition on held-out
+siblings only AFTER selection, diagnostically.
+
+THE CONNECTION IS DIRECT: this is the first experiment testing
+abstraction discovery as counterfactual model restructuring rather than
+probing or clustering. If it succeeds the loop is WAKE -> PROPOSE ->
+REORGANIZE -> CROSS-VALIDATE on past experience -> KEEP/REJECT, and the
+program-synthesis analogue (solved programs -> propose primitive ->
+rewrite -> measure savings -> keep) is almost identical. Freeze after
+tightening compute around fewer scored budgets, with TRUE-versus-best-
+wrong load-bearing everywhere. The core question: can a useful
+abstraction become visible after a cheap partial reorganization, rather
+than requiring full retraining under the hypothesis? If yes, it is the
+first plausible mechanism for autonomous sleep-time abstraction search.

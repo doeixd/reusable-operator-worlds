@@ -1,7 +1,6 @@
-# H50: propose -> reorganize -> score — DRAFT, not frozen
+# H50: propose -> reorganize -> score
 
-Status: DRAFT for review (review 70 asked for careful design before
-running). Development worlds 0-2, the `schema_groups = 2` world at
+Status: FROZEN at Amendment 1 (review 71). Development worlds 0-2, the `schema_groups = 2` world at
 K = 4, starting every arm from the SAME frozen M_4 checkpoint. No new
 worlds, no sealed seeds. Nothing runs until this is frozen.
 
@@ -99,3 +98,45 @@ sampling seed.
 
 A learned proposer; schema splits (P -> P_1, P_2) as hypotheses; changes
 to wake; any future-task selection; sealed seeds.
+
+# Amendment 1 (2026-08-23, review 71; PLAN FROZEN WITH THIS AMENDMENT)
+
+Design unchanged; scoring economy and decision emphasis tightened as
+directed, before any code or run:
+
+1. **Score m in {0, 16, 64} with ALL 64 LOO tasks.** m = 4 migrations are
+   run (cheap) but scored only if SEPARATION already holds at m = 16 (to
+   locate the transition). Never reduce the LOO sample; it is the causal
+   comparison.
+2. **Substitutability** is scored only for TRUE, the best WRONG/RANDOM
+   (by C_LOO at that m), and SHAM, at m in {16, 64}. Corroboration, not
+   the primary signal.
+3. **Load-bearing comparison, everywhere**: `TRUE > max(WRONG/RANDOM)` by
+   the registered margin (+0.15 log C_LOO, 2 of 3 worlds). TRUE > SHAM
+   (+0.15) is additionally required as the optimization-credit control
+   (`Delta_structure`), but can never substitute for the wrong-structure
+   margin. The H49 constitutional rule applied literally in every branch.
+4. **Recovery fraction is a primary descriptive quantity** (never
+   verdict-determining): for C_LOO margin and substitutability,
+   `(TRUE(m) - baseline) / (L_4 - baseline)` with baseline = m = 0.
+   Interpretation registered: separation at m = 16 with partial recovery
+   = a plausible sleep operator; separation only at m = 64 with ~100%
+   recovery = retrain-and-select, valid but expensive.
+5. **Migration-cost ingredients recorded** for every arm and m: steps,
+   wall-clock, mean family-task NMSE immediately after migration (old-
+   task loss), and functional drift (mean output change on a fixed probe
+   between m = 0 and m). Not in the verdict; collected for the future
+   J_sleep = C_migrate + lambda D* + eta C_LOO.
+6. **If a WRONG/RANDOM partition beats TRUE**, its held-out-sibling
+   endpoints are computed AFTER selection, diagnostically, and reported
+   beside TRUE's — either an economically equivalent ontology or a
+   misaligned retrospective objective; the report must say which the
+   sibling data supports.
+7. Registered predictions (review 71): separation begins at m = 16
+   (C_LOO recovery 25-50%), clear at m = 64 (50-80%), substitutability
+   recovering faster; ours (unchanged): separation at large-but-partial
+   m, SHAM improving uniformly with no ordering.
+
+Estimated cost after tightening: migrations ~2 h; scoring ~ 18 cells
+(6 arms x 3 worlds at m = 16, 64 plus reused m = 0) x ~7 min plus
+substitutability for 3 arms x 2 budgets — about 5 h total.

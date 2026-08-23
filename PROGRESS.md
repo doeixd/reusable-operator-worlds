@@ -3151,3 +3151,13 @@ scoring with wrong-structure margins in every branch, the SHAM guard
 against optimization-only credit, and the m* / L_4-recovery anchors — as
 a DRAFT for review per the reviewer's instruction to stop and design
 carefully. Nothing runs until it is frozen.
+
+# 2026-08-23 — REVIEW 71 FILED; H50 FROZEN AT AMENDMENT 1
+
+Filed and indexed review 71. Amended the H50 plan as directed (score
+m in {0, 16, 64} with all 64 LOO tasks; substitutability only for TRUE /
+best-wrong / SHAM; TRUE > max(WRONG/RANDOM) load-bearing everywhere with
+TRUE > SHAM as the added optimization-credit control; recovery fraction
+as a primary descriptive; migration-cost ingredients recorded;
+post-selection sibling diagnostic if a wrong partition wins) and froze
+it. Implementation next.

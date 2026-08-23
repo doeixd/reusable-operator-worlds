@@ -2778,3 +2778,18 @@ synthesis analogue: PROPOSE → REWRITE → RESCORE (a macro may be useless
 against old programs and valuable once they are rewritten around it).
 Conceptual shift: ABSTRACT(R) = search for an organization that makes
 regularities cheap — new variables can be part of the discovery.
+
+### [reviewer-feedback-71.txt](reviewer-feedback-71.txt)
+On the H50 draft. Keeps the design; tightens economy: score m ∈ {0,16,64}
+with all 64 LOO tasks (never fewer — the LOO statistic is the causal
+comparison), substitutability only for TRUE / best-wrong / SHAM at
+m ∈ {16,64}, m = 4 scored only if the transition is already below 16.
+Makes recovery fraction against L₄ a primary descriptive quantity
+(cheap reorganization vs partial migration vs disguised retraining),
+demands Δ_structure(h,m) = S(h,m) − S(SHAM,m) as the optimization-credit
+control and TRUE > max(WRONG/RANDOM) as the load-bearing comparison
+everywhere, and asks for migration-cost ingredients (drift, old-task
+loss) toward J_sleep = C_migrate + λD* + ηC_LOO. Predicts separation
+beginning at m = 16 with 25–50% recovery, clear at m = 64 with 50–80%;
+the exciting result is separation at modest budget with partial
+recovery. Freeze after these changes.
