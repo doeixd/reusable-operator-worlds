@@ -3640,3 +3640,40 @@ rank, so that one channel cannot absorb both groups. That is H48b
 (within-schema dimensionality) arriving before H48a (schema count) —
 they are not separable questions; the economics of naming a manifold
 depend on how wide the existing ones are.
+
+
+
+================================================================================
+H48b: NARROW THE CHANNEL AND DISCRETE IDENTITY STARTS TO PAY — FOR THE FUTURE (2026-08-23)
+================================================================================
+
+At K <= 8 per slot the told-identity oracle beats the pooled learner on
+alpha-only acquisition (3/3 at K = 2 and 4) and on the full interface
+(3/3 at K = 2, 4, 8); at K >= 16 it does not. Its present-task cost
+shrinks from ~-510 nats (K = 32) to ~-40 (K = 2) but crosses zero in
+only one world (`reports/h48b_width.json`). Table verdict MIXED because
+the present never pays; the phase boundary review 68 asked for exists on
+the future axes between K = 8 and 16.
+
+THE CAPACITY KNOB DOES WHAT THE ECONOMICS SAID IT WOULD. With 64
+directions one channel absorbs two orthogonal groups; with 4-8 it cannot,
+and naming the groups becomes worth 0.1-0.5 log units of future cost.
+Discrete identity is a resource decision, not a truth decision — now
+measured, not argued.
+
+THE LEARNER STILL DOES NOT FIND THE GROUPS WHEN IT PAYS FOR NOT FINDING
+THEM. Entropy sharpens at small K (0.66-0.83 bits) but ARI stays ~0. An
+opportunity now exists (future pays) and soft routing does not discover
+it on its own: this is finally a real discovery problem — the first one
+in the H47 line.
+
+ONE-SIDED "PRESENT PAYS" WAS THE WRONG REGISTRATION. The question at
+small K is whether discretization is nearly free on the present, not
+whether it is profitable; a tolerance band around zero would have read
+K <= 4 as neutral. Logged so the next plan registers it that way
+BEFORE data, not because of this data.
+
+HIGH-K CELLS ARE NOISY WITH THREE WORLDS. K = 16 is non-monotone and
+K = 32 full-pays on two worlds. Read the low-K end, where the three
+worlds agree, and treat the high end as unresolved rather than as a
+second crossover.

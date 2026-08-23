@@ -3089,3 +3089,14 @@ cells mid-flight with no partial output, no Python processes running.
 Relaunched `python tools/run_h39_pilot.py width`, which skips completed
 cells and refuses mismatched records; the killed cells restart from
 scratch. No cell has been read.
+
+# 2026-08-23 — H48b SCORED: MIXED; FUTURE CHANNELS PAY FOR IDENTITY AT K <= 8
+
+30/30 cells validated and scored (`reports/h48b_width.json`). Alpha pays
+at K = 2, 4, 8 and full pays at K = 2, 4, 8, 32; present never pays
+(oracle cost falls from ~-510 to ~-40 nats but crosses zero in one world
+only); K* undefined; outcome MIXED per the frozen table. M_K sharpens its
+routing at small K without aligning to the groups (ARI ~0). Recorded in
+`PREDICTIONS.md` with scorekeeping and the registered next plan
+(discovery arms at K = 4 with a present-tolerance band, frozen before
+any run); learnings appended.

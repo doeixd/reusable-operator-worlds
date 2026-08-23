@@ -1,0 +1,23 @@
+prereg check OK: 17 frozen files unchanged; all STATUS-cited paths exist
+30 cells validated
+K= 2 world 0: d_alpha +0.151 (robust +0.140) d_full +0.078 d_J -66 | M entropy 0.754 ARI 0.05 usage 2.25
+K= 4 world 0: d_alpha +0.297 (robust +0.298) d_full +0.258 d_J -115 | M entropy 0.754 ARI -0.00 usage 2.40
+K= 8 world 0: d_alpha +0.177 (robust +0.179) d_full +0.227 d_J -347 | M entropy 0.913 ARI -0.02 usage 3.00
+K=16 world 0: d_alpha -0.026 (robust -0.027) d_full -0.010 d_J -732 | M entropy 0.913 ARI -0.00 usage 3.86
+K=32 world 0: d_alpha +0.271 (robust +0.273) d_full +0.159 d_J -479 | M entropy 0.913 ARI -0.01 usage 4.05
+K= 2 world 1: d_alpha +0.356 (robust +0.354) d_full +0.181 d_J -111 | M entropy 0.657 ARI -0.01 usage 1.42
+K= 4 world 1: d_alpha +0.122 (robust +0.121) d_full +0.132 d_J -121 | M entropy 0.787 ARI -0.01 usage 1.84
+K= 8 world 1: d_alpha -0.162 (robust -0.162) d_full +0.086 d_J -257 | M entropy 0.841 ARI -0.00 usage 2.63
+K=16 world 1: d_alpha +0.123 (robust +0.124) d_full +0.020 d_J -265 | M entropy 0.941 ARI -0.02 usage 2.90
+K=32 world 1: d_alpha +0.099 (robust +0.099) d_full +0.094 d_J -529 | M entropy 0.940 ARI -0.01 usage 3.13
+K= 2 world 2: d_alpha +0.117 (robust +0.118) d_full +0.107 d_J +57 | M entropy 0.834 ARI 0.27 usage 2.03
+K= 4 world 2: d_alpha +0.517 (robust +0.516) d_full +0.183 d_J -26 | M entropy 0.877 ARI 0.02 usage 2.56
+K= 8 world 2: d_alpha +0.289 (robust +0.290) d_full +0.221 d_J -104 | M entropy 0.947 ARI 0.05 usage 3.20
+K=16 world 2: d_alpha +0.511 (robust +0.513) d_full +0.269 d_J -303 | M entropy 0.968 ARI 0.00 usage 3.47
+K=32 world 2: d_alpha -0.027 (robust -0.028) d_full +0.058 d_J -522 | M entropy 0.956 ARI 0.05 usage 3.68
+K= 2: d_alpha [0.151, 0.356, 0.117] d_J [-66, -111, 57] d_full [0.078, 0.181, 0.107] -> alpha True present False full True | M entropy [0.75, 0.66, 0.83] ARI [0.05, -0.01, 0.27]
+K= 4: d_alpha [0.297, 0.122, 0.517] d_J [-115, -121, -26] d_full [0.258, 0.132, 0.183] -> alpha True present False full True | M entropy [0.75, 0.79, 0.88] ARI [-0.0, -0.01, 0.02]
+K= 8: d_alpha [0.177, -0.162, 0.289] d_J [-347, -257, -104] d_full [0.227, 0.086, 0.221] -> alpha True present False full True | M entropy [0.91, 0.84, 0.95] ARI [-0.02, -0.0, 0.05]
+K=16: d_alpha [-0.026, 0.123, 0.511] d_J [-732, -265, -303] d_full [-0.01, 0.02, 0.269] -> alpha False present False full False | M entropy [0.91, 0.94, 0.97] ARI [-0.0, -0.02, 0.0]
+K=32: d_alpha [0.271, 0.099, -0.027] d_J [-479, -529, -522] d_full [0.159, 0.094, 0.058] -> alpha False present False full True | M entropy [0.91, 0.94, 0.96] ARI [-0.01, -0.01, 0.05]
+K* = None; OUTCOME MIXED (reported per K)

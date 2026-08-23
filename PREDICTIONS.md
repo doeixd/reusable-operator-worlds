@@ -4752,3 +4752,64 @@ that one distributed channel can no longer absorb both groups — and
 re-run the gate there; if membership then has value, B2's H arms follow
 on that world. A separation knob (review 67's rho_group) remains
 deferred.
+
+# H48b RESULT (2026-08-23): MIXED BY THE TABLE — THE FUTURE CHANNELS PAY FOR DISCRETE IDENTITY AT K <= 8; THE PRESENT NEVER QUITE DOES
+
+Plan `H48B_WIDTH_SWEEP_PLAN.md` frozen `377579a`, no amendments. Report
+`reports/h48b_width.json`. 30 cells (24 new + the K = 32 pair), all
+records validated on the G = 2 world, all non-vacuity checks passed
+(L masks 64/64; M_K's alpha-zeroed usage 1.42-2.40 at K <= 4, above the
+1.25 floor). The sweep was interrupted once by a session exit and resumed
+idempotently (6 cells skipped, none reread).
+
+Oracle-minus-learner deltas (positive = told-identity better), worlds 0/1/2:
+
+    K    d_alpha (log)            d_full (log)            d_J (nats)          alpha  present  full
+    2    +0.151 +0.356 +0.117     +0.078 +0.181 +0.107    -66  -111   +57     yes    no       yes
+    4    +0.297 +0.122 +0.517     +0.258 +0.132 +0.183    -115 -121   -26     yes    no       yes
+    8    +0.177 -0.162 +0.289     +0.227 +0.086 +0.221    -347 -257  -104     yes    no       yes
+    16   -0.026 +0.123 +0.511     -0.010 +0.020 +0.269    -732 -265  -303     no     no       no
+    32   +0.271 +0.099 -0.027     +0.159 +0.094 +0.058    -479 -529  -522     no     no       yes
+
+Rules: alpha pays at K = 2, 4, 8 (3/3 worlds at K = 2 and 4; robust
+optimizers agree in sign); full pays at K = 2, 4, 8 (3/3 each) and 32
+(2/3); PRESENT pays at no K — d_J >= 0 in 1/3 worlds at K = 2 (+57) and
+0/3 elsewhere. K* is undefined. Outcome: **MIXED (reported per K)**.
+
+What the table says beside its label:
+- Restricting argument width makes discrete identity valuable for FUTURE
+  acquisition: with K <= 8 per slot the told-identity oracle is better on
+  alpha-only by 0.12-0.52 log units (one world at K = 8 reversed) and on
+  the full interface by 0.08-0.26 log units in every world.
+- The oracle's present-task cost shrinks ~10x as K falls — from ~-510
+  nats at K = 32 to -66 / -111 / +57 at K = 2 — but crosses zero in only
+  one world; the registered "present pays" bound (d_J >= 0 in 2/3) was
+  not met. The mask is nearly free, not free.
+- M_K's routing sharpens as capacity shrinks (median entropy 0.66-0.83
+  bits at K = 2 versus 0.91-0.97 at K >= 16) but still does not align
+  with the groups (ARI 0.05 / -0.01 / 0.27 at K = 2). The learner pays
+  for ignoring the groups at small K and still does not find them.
+- K = 16 is non-monotone (alpha and full do not pay; world 2 alone pays
+  strongly), and K = 32's full-pays is carried by two worlds. With three
+  worlds the high-K end is noisy; the low-K end (K = 2, 4) is consistent.
+
+Reading, registered with the label: the reviewer's phase boundary exists
+for the future channels — discrete identity starts to pay for alpha-only
+and full-interface acquisition somewhere between K = 8 and K = 16 per
+slot — while on the present-task axis the boundary has not been reached
+by K = 2. This is outcome (3) ("structured channel wants discreteness")
+extended: the FULL interface wants it too at small K; only present cost
+declines to flip. Our registered prediction (outcome 3 at K = 4, possibly
+4 at K = 2) was right about alpha and full at K = 4 and wrong about
+present crossing zero at K <= 4 (it nearly did: -115 / -121 / -26).
+Review 68's crossover prediction: true for the future channels, false for
+the present.
+
+Licensing: MIXED licenses nothing. The natural next plan, to be frozen
+separately and NOT read from this data's thresholds: B2's discovery arms
+(H_early / H_late) at K = 4 — the width where the oracle's future
+advantage is largest and most consistent (alpha +0.30 / +0.12 / +0.52,
+full +0.26 / +0.13 / +0.18) and its present cost smallest (-115 / -121 /
+-26) — with "present" registered as a TOLERANCE band around zero rather
+than a one-sided bound, since the quantity of interest there is whether
+discretization is nearly free, not whether it is profitable.
