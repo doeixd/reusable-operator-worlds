@@ -1182,3 +1182,22 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   dimensions) is the open rung. Do not describe the confirmed result in
   cluster language: its two slots form one distributed argument channel,
   and the confirmed world has a single family subspace.
+
+- OPPORTUNITY GATE, constitutional (review 68, after the B2 gate): before
+  any structural-recovery or discovery experiment, measure the
+  counterfactual cost of REFUSING to represent the proposed structure —
+  an oracle that is told the structure versus the learner that ignores it.
+  If the gap is ~0, failure to recover the structure is not a learning
+  failure; there is nothing economically worth recovering. On a world with
+  two ORTHOGONAL family subspaces and teacher-level group classification
+  of 1.000, the two-slot K = 32 learner ignored the groups (entropy ~0.93,
+  ARI ~0), paid +0.27 / +0.10 / -0.03 log units on alpha-only acquisition
+  for it, and was ~500 nats BETTER than the told-membership oracle on
+  present cost: one 64-direction channel absorbs the union of two rank-2
+  subspaces. Truth of a latent decomposition is not utility of
+  representing it; abstraction tracks computational necessity, not
+  ground-truth labels. Schema count and within-schema width trade off
+  directly (2 x 32 versus 1 x 64), so "how many abstractions" is a
+  WIDEN-versus-SPLIT decision under one D*, and the capacity knob (K per
+  slot) is the independent variable that can make discrete identity
+  necessary.

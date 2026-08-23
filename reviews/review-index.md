@@ -2720,3 +2720,19 @@ first B2). Predicts B2 effects larger than B1: R_α,M > R_α,L_true with
 R_full ≈; H_early < H_late ≲ M; late hardening near-neutral would be a
 real wake/sleep result because the world now contains discrete
 identities.
+
+### [reviewer-feedback-68.txt](reviewer-feedback-68.txt)
+On the B2 NO-OPPORTUNITY gate. Reads it as a positive principle —
+discrete identity is not worth discovering when a continuous channel can
+absorb the same structure cheaply; truth of a latent decomposition ≠
+utility of representing it; abstraction should track computational
+necessity, not ground-truth labels. Accepts that H48b (within-schema
+width) arrived before H48a (schema count) and that they trade off
+(2×32 vs 1×64), making the real birth criterion WIDEN vs SPLIT under one
+D*. Asks for a schema-width opportunity sweep K ∈ {2,4,8,16,32} on the
+G=2 world, M_K vs L_true,K only, to find the crossover K* below which
+discrete schemas pay; four registered outcomes. Elevates the opportunity
+gate to a project rule: before any structural-recovery experiment, ask
+what refusing to represent the structure costs. Connects to synthesis:
+SPLIT a primitive only when one manifold costs more than several — the
+route from continuous representation to discrete program symbols.

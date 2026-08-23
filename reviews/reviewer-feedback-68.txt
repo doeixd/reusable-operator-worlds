@@ -1,0 +1,83 @@
+Reviewer feedback 68 — received 2026-08-23, on the B2 opportunity gate
+(NO-OPPORTUNITY).
+
+----------------------------------------------------------------------
+
+This is a very useful result. It says something stronger than
+"membership discovery failed": DISCRETE IDENTITY IS NOT WORTH DISCOVERING
+WHEN A CONTINUOUS CHANNEL CAN ABSORB THE SAME STRUCTURE CHEAPLY. That is
+exactly the kind of pressure we want the eventual system to obey. The
+teacher ontology was real — orthogonal subspaces, perfect behavioural
+group classification — but the learner had no economic reason to
+represent it discretely; L_true was worse on present learning by ~500
+nats/world because the oracle mask removed half the available
+directions. Truth of a latent decomposition != utility of representing
+that decomposition.
+
+WHAT WE LEARNED. The effective choice was P(alpha), alpha in R^64 (one
+distributed schema) versus g in {1,2}, P_g(alpha_g), alpha_g in R^32
+(two discrete schemas). The first was sufficient; the learner correctly
+ignored the generator's discrete ontology. A weaker project would score
+ARI ~ 0 as failure; the economic criterion says: if the supposedly wrong
+representation predicts and adapts just as cheaply, why force the hidden
+labels? Principle: ABSTRACTION SHOULD TRACK COMPUTATIONAL NECESSITY, NOT
+LATENT GROUND-TRUTH LABELS.
+
+H48b REALLY HAS ARRIVED BEFORE H48a. Schema cardinality and within-schema
+dimensionality trade off directly (2 x 32 versus 1 x 64). The meaningful
+decision is min over {S_i, d_i} of D*({S_i}) + D*(arguments) +
+L_acquire, where complexity can be spent by widening a manifold or by
+splitting it into named manifolds. That is the actual birth/split
+criterion: WIDEN d -> d + delta d versus SPLIT S(alpha) -> {S_1, S_2};
+compare J_widen with J_split. It gives a real reason for discrete
+primitives to emerge: not "the teacher says two categories" but
+"maintaining one continuous coordinate system has become more expensive
+than naming two reusable types".
+
+THE K RESTRICTION IS THE RIGHT NEXT AUDIT — as a capacity phase diagram,
+not one K. Test K in {2, 4, 8, 16, 32}; for each, compare only M_K versus
+L_true,K; measure Delta_member(K) = J(M_K) - J(L_K) and Delta_alpha(K) =
+log R_alpha,M_K - log R_alpha,L_K, plus R_full, D*, innovation usage.
+Prediction: Delta ~ 0 at high K (one distributed representation absorbs
+everything); Delta > 0 at sufficiently low K (separating groups gives
+each a dedicated budget); a crossover K*: below it discrete schemas pay,
+above it one manifold wins — the representational analogue of the
+reuse/amortization phase transitions. Outcomes: (1) clean crossover —
+discrete abstraction emerges from a resource trade-off between manifold
+width and schema count; (2) oracle never helps even at K = 2 — per-slot
+capacity is not binding, a different capacity control is needed; (3)
+oracle helps alpha-only but not the full interface — innovation buffers
+the shortage, and innovation must be charged before discrete birth is
+justified; (4) oracle helps everything at low K — B2 discovery fully
+licensed; the cleanest launch point for H_early / H_late. Existence ->
+discovery again: only after L_true wins ask whether the learner discovers
+it.
+
+FOR PROGRAM SYNTHESIS: do not expect a learned language to contain a
+discrete symbol for every genuine latent category. If one parameterized
+primitive cheaply expresses both, inventing P_1, P_2 is unnecessary
+symbolic fragmentation. The primitive-invention rule is SPLIT a primitive
+when C_one manifold > C_multiple manifolds — a principled route from
+continuous neural representation to discrete program symbols, and a
+plausible answer to why discrete abstractions should emerge from a
+continuous learner at all: start with P(alpha); as the range of
+computations grows, D*(P) + D*(alpha) + C_identify(alpha) rises; at some
+point splitting pays for another identity, routing bits, and another
+schema. Concept formation: continuous variation -> strained manifold ->
+split -> named abstractions -> tokens for composition. More organic than
+preallocating a MoE and hoping routing discovers categories.
+
+METHODOLOGICAL RULE, to be elevated into the project rules: before any
+structural-recovery experiment, run the OPPORTUNITY GATE — what is the
+counterfactual cost of refusing to represent the proposed structure? If
+Delta J ~ 0, failure to recover the structure is not a learning failure;
+there is nothing economically worth recovering.
+
+WHAT TO RUN NEXT: a schema-width opportunity sweep on the existing G = 2
+generator, K in {2, 4, 8, 16, 32}, M_K versus L_true,K only, measuring
+J_present, R_alpha, R_full, D*, innovation usage; find whether a regime
+exists where L_true has a genuine economic advantage; if yes, freeze
+discovery arms there. This could yield something more general than H47:
+the phase boundary between continuous parameterization and discrete
+abstraction — probably one of the most important bridges between ROW's
+representation work and autonomously inventing a compositional language.
