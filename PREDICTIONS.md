@@ -4861,3 +4861,56 @@ with no future label. Its program-synthesis form: invent A iff D*(A) <
 the cross-validated reduction in reacquisition cost. Neither is tested by
 H49; H49 asks only whether the quantities they would optimize carry a
 signal.
+
+# H49 RESULT (2026-08-23): "A" BY THE FROZEN TABLE VIA A NON-DISCRIMINATING BRANCH; SUBSTANTIVE READING C — THE SIGNAL NEEDS ORGANIZATION
+
+Plan `H49_DISCOVERABILITY_PLAN.md` frozen `f806c8c`, no amendments.
+Report `reports/h49_discoverability.json`. All ~2,300 re-fits finite with
+alpha moving and support falling; the instrument check passed (on L_4 the
+true partition beats the best wrong partition by +0.601 / +0.304 / +0.646
+log units).
+
+    artifact  P_LOO (DIST - TRUE)        margin vs best wrong       P_D (nats)        S_subst
+    M_4       -0.464 -0.525 -0.489       +0.059 -0.034 -0.043       +16.9 +15.0 +9.4  +0.119 -0.019 +0.207
+    L_4       -0.065 -0.086 -0.045       +0.601 +0.304 +0.646       +24.3 +26.6 +22.5 +1.273 +0.815 +1.303
+
+Frozen verdict: **A — DISCOVERABLE**, because SIGNAL (D*) fired on M_4
+(P_D > 0 and two-part TRUE < DISTRIBUTED in 3/3 worlds).
+
+ANNOTATION, recorded with the verdict and before any use of it: the D*
+branch of the frozen rule does not discriminate the true partition. On
+M_4 every MASKED candidate — true, wrong, or random — has nearly the same
+description proxy (281-288 nats; the ~15-nat saving is 4 paid alphas
+instead of 8, a property of masking itself) and nearly the same C_LOO
+(0.0043-0.0064, with RANDOM-2 beating TRUE in two worlds). The C_LOO
+branch required a margin over the best wrong partition; the D* branch,
+as frozen, did not — the same registered-threshold error class as the
+route-mass criteria (S0, H39b), now in its third appearance. The A
+verdict therefore stands in the table but licenses nothing: a sleep
+operator built on this D* term would prefer ANY partition over none.
+
+Substantive reading, which the registered outcome C describes exactly:
+every quantity that discriminates the true partition from wrong ones —
+the C_LOO margin (+0.30 to +0.65) and own-versus-other-group
+substitutability (+0.8 to +1.3) — appears ONLY on L_4, the
+representation trained with the grouping. On the label-free M_4 those
+same quantities sit at noise (margins -0.04 to +0.06; S_subst -0.02 to
++0.21), and the distributed policy re-acquires past tasks better than
+any mask (P_LOO -0.46 to -0.53) because masking halves the directions of
+an interchangeable-slot representation. The fertile partition leaves a
+detectable signature in experienced tasks only once the representation
+has been organized around it.
+
+Scorekeeping: our registered prediction (C, with a clear signal on L_4
+and none on M_4) is what the discriminating statistics show; review 69's
+prediction (A, a signal wake ignores) is met only by the letter of the
+non-discriminating branch.
+
+Consequence, registered: discovery on this world cannot be a scoring
+problem alone. A sleep operator would have to PROPOSE a partition,
+REORGANIZE the representation under it (re-fit task states, possibly
+briefly re-train), and RE-SCORE — the bootstrap loop outcome C implies —
+or the world's statistics must change (more worlds, more diverse
+experience, meta-priors). Building that proposal-reorganize-score
+operator is the next design; it requires its own frozen plan, and its
+score must carry a wrong-partition margin in every branch.

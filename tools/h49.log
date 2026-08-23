@@ -1,0 +1,49 @@
+prereg check OK: 18 frozen files unchanged; all STATUS-cited paths exist
+C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_h49_discoverability.py:104: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:823.)
+  initial_support = float(torch.mean((model(x, tid) - y) ** 2))
+world 0 M4 TRUE       : C_LOO 0.00560 D* 281.3
+world 0 M4 WRONG-A    : C_LOO 0.00619 D* 287.8
+world 0 M4 WRONG-B    : C_LOO 0.00642 D* 285.8
+world 0 M4 RANDOM-1   : C_LOO 0.00606 D* 286.0
+world 0 M4 RANDOM-2   : C_LOO 0.00594 D* 283.4
+world 0 M4 DISTRIBUTED: C_LOO 0.00352 D* 298.2
+world 0 M4: P_LOO -0.464 margin +0.059 P_D +16.9 two-part TRUE 289.1 vs DIST 303.1 S_subst +0.119
+world 0 L4 TRUE       : C_LOO 0.00262 D* 272.5
+world 0 L4 WRONG-A    : C_LOO 0.00492 D* 294.4
+world 0 L4 WRONG-B    : C_LOO 0.00509 D* 291.0
+world 0 L4 RANDOM-1   : C_LOO 0.00478 D* 290.9
+world 0 L4 RANDOM-2   : C_LOO 0.00520 D* 292.5
+world 0 L4 DISTRIBUTED: C_LOO 0.00246 D* 296.8
+world 0 L4: P_LOO -0.065 margin +0.601 P_D +24.3 two-part TRUE 276.1 vs DIST 300.2 S_subst +1.273
+world 1 M4 TRUE       : C_LOO 0.00549 D* 284.8
+world 1 M4 WRONG-A    : C_LOO 0.00587 D* 286.9
+world 1 M4 WRONG-B    : C_LOO 0.00568 D* 288.2
+world 1 M4 RANDOM-1   : C_LOO 0.00547 D* 283.8
+world 1 M4 RANDOM-2   : C_LOO 0.00531 D* 282.5
+world 1 M4 DISTRIBUTED: C_LOO 0.00325 D* 299.9
+world 1 M4: P_LOO -0.525 margin -0.034 P_D +15.0 two-part TRUE 292.5 vs DIST 304.4 S_subst -0.019
+world 1 L4 TRUE       : C_LOO 0.00290 D* 278.5
+world 1 L4 WRONG-A    : C_LOO 0.00521 D* 291.9
+world 1 L4 WRONG-B    : C_LOO 0.00462 D* 291.8
+world 1 L4 RANDOM-1   : C_LOO 0.00393 D* 287.1
+world 1 L4 RANDOM-2   : C_LOO 0.00461 D* 292.4
+world 1 L4 DISTRIBUTED: C_LOO 0.00266 D* 305.1
+world 1 L4: P_LOO -0.086 margin +0.304 P_D +26.6 two-part TRUE 282.6 vs DIST 308.8 S_subst +0.815
+world 2 M4 TRUE       : C_LOO 0.00447 D* 287.0
+world 2 M4 WRONG-A    : C_LOO 0.00428 D* 283.5
+world 2 M4 WRONG-B    : C_LOO 0.00461 D* 284.6
+world 2 M4 RANDOM-1   : C_LOO 0.00469 D* 286.2
+world 2 M4 RANDOM-2   : C_LOO 0.00485 D* 286.3
+world 2 M4 DISTRIBUTED: C_LOO 0.00274 D* 296.4
+world 2 M4: P_LOO -0.489 margin -0.043 P_D +9.4 two-part TRUE 293.2 vs DIST 300.2 S_subst +0.207
+world 2 L4 TRUE       : C_LOO 0.00239 D* 270.9
+world 2 L4 WRONG-A    : C_LOO 0.00455 D* 291.0
+world 2 L4 WRONG-B    : C_LOO 0.00462 D* 293.7
+world 2 L4 RANDOM-1   : C_LOO 0.00472 D* 290.4
+world 2 L4 RANDOM-2   : C_LOO 0.00499 D* 290.3
+world 2 L4 DISTRIBUTED: C_LOO 0.00228 D* 293.4
+world 2 L4: P_LOO -0.045 margin +0.646 P_D +22.5 two-part TRUE 274.2 vs DIST 296.6 S_subst +1.303
+M4: P_LOO [-0.464, -0.525, -0.489] margin [0.059, -0.034, -0.043] P_D [16.9, 15.0, 9.4] S_subst [0.119, -0.019, 0.207]
+L4: P_LOO [-0.065, -0.086, -0.045] margin [0.601, 0.304, 0.646] P_D [24.3, 26.6, 22.5] S_subst [1.273, 0.815, 1.303]
+OUTCOME A — DISCOVERABLE

@@ -3123,3 +3123,17 @@ sets, the candidate sleep objective as a design target). Added review
 and amendment stated, the two audits, the continuous-manifold reading,
 H47 B1, the B2 gate, H48b, and the H49 question, written with the same
 claim discipline as the earlier blocks. H49 is still running.
+
+# 2026-08-23 — H49 SCORED: "A" BY A NON-DISCRIMINATING BRANCH; SUBSTANTIVE OUTCOME C
+
+The census completed with all non-vacuity and instrument checks passing.
+The frozen table read A because the D* branch (TRUE versus DISTRIBUTED
+only) fired on the mechanical saving any mask gets; on M_4 the true
+partition is indistinguishable from wrong and random ones on every
+discriminating statistic, while on L_4 all of them see it clearly.
+Recorded verdict-plus-annotation in `PREDICTIONS.md` (third instance of
+the missing-wrong-control error class, now in a decision-rule branch),
+substantive outcome C — the signal needs organization — and the
+registered consequence: discovery requires a propose-reorganize-score
+sleep loop, to be designed under its own frozen plan with wrong-partition
+margins in every branch. Learnings appended.

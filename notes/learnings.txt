@@ -3713,3 +3713,38 @@ THAN ASSUMED: J_sleep = lambda D*(L) + eta sum_i C_reacquire(T_i | L_-i).
 H49 tests only whether its terms carry a signal on the label-free
 representation; it is not a result until a sleep operator optimizing it
 is built and compared.
+
+
+
+================================================================================
+H49: THE DISCRIMINATING SIGNALS EXIST ONLY AFTER ORGANIZATION; AND A RULE BRANCH WITHOUT A WRONG-CONTROL FIRED AGAIN (2026-08-23)
+================================================================================
+
+On the label-free K = 4 representation, no retrospective quantity
+distinguishes the fertile partition from wrong or random ones: C_LOO
+margins at noise, substitutability ~0, description proxies equal across
+all masks. On the representation TRAINED with the grouping, the same
+instruments see it plainly (margins +0.3-0.65, substitutability
++0.8-1.3). Reacquisition, compression, and substitutability are
+consequences of an organized representation, not precursors visible in a
+disorganized one (`reports/h49_discoverability.json`).
+
+EVERY BRANCH OF A DECISION RULE NEEDS ITS WRONG-STRUCTURE CONTROL. The
+C_LOO branch required beating the best wrong partition; the D* branch
+did not, and it fired on the ~15 nats that ANY mask saves by paying for
+half the alphas. Third instance of this error class (S0 p_reuse, H39b
+route mass). The control is not a threshold question; it is part of the
+estimand: "prefers the TRUE structure" always means "over wrong
+structures", never "over nothing".
+
+DISCOVERY HERE IS A PROPOSE-REORGANIZE-SCORE LOOP OR NOTHING. A score
+computed on the current representation cannot bootstrap a structure the
+representation does not yet carry. The candidate sleep operator must
+spend compute reorganizing under a proposed partition before its score
+means anything — which is also why V4/V5-style post-hoc refactoring kept
+failing: scoring precedes reorganization in those designs too.
+
+A CHEAP TRUE-LOO EXISTS AND WAS NOT RUN. The census left task state in
+place during representation training (registered leak, shared across
+candidates). If a future rule needs absolute rather than paired numbers,
+hide the task during a brief re-fit of the schema too.
