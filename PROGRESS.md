@@ -3039,3 +3039,21 @@ Recorded in `PREDICTIONS.md` with the tolerance-calibration note and
 scorekeeping; learnings added. Next: B2 generator extension
 (`schema_groups`) with its bitwise G = 1 test and functional-separation
 audit, then B2's own plan.
+
+# 2026-08-23 — REVIEW 67 FILED; B2 GENERATOR BUILT AND VERIFIED; GATES FROZEN; OPPORTUNITY GATE RUNNING
+
+Filed review 67. Implemented `MetaFamilySpec(schema_groups=G)` with group 0
+on the original seeds and later groups projected out of earlier spans;
+G = 1 reproduces the previous generator bitwise on seeds 0, 1, 2, 700
+(sha256 over all task arrays, futures, and operators). Unit tests added.
+Wired `--schema-groups`, the `mask_group` route policy, and provenance.
+Froze Amendment 2 (teacher gates G2-G5; the opportunity gate stated as the
+membership tax itself; staged arms). The first teacher-gate run was
+refused: G4's 10% per-family bound fails on the baseline G = 1 world, and
+G3's mixture search covered only an affine line; Amendment 3 fixed both
+(group-level balance with the baseline spread as covariate; least-squares
+span fits normalized by the family step's contribution) and re-froze.
+Gates then passed 3/3 (`reports/h47_b2_world_gates.json`), with the note
+that G2/G3/G5 are near-tautological at r_meta = 1 and the economic gate
+is the decisive one. M_G2 and L_true are running on worlds 0-2; the gate
+scorer `score_h47_b2_gate.py` is committed. No B2 endpoint has been read.
