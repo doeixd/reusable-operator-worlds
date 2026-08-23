@@ -2704,3 +2704,19 @@ gave functional G = 1; split into H48a (schema count) and H48b
 (within-schema dimensionality) under one D*. Principle: discover the
 geometry of variation first; discretize only where the world has
 discontinuities — Rotate(θ), not Rotate10/11/12.
+
+### [reviewer-feedback-67.txt](reviewer-feedback-67.txt)
+On B1 (MIXED) and the B2 generator. Reads B1 as "continuous
+representation matters, but late discretization is surprisingly cheap":
+the one registered cost is an arbitrary ontology imposed early (36–69%
+of the present gain), with ε repairing the future but not the lifetime —
+S persistent regularity, α cheap structured variation, ε error
+correction. Sets an unusually strict B2 pre-run gate: (1) G=1 bitwise;
+(2) within-group continuity; (3) cross-group non-substitutability Q ≫ 1;
+(4) membership must have economic value — an oracle route must beat the
+unstructured learner on R_α by δ before discovery is asked ("existence
+before discovery"). Flags a future ρ_group separation knob (not for the
+first B2). Predicts B2 effects larger than B1: R_α,M > R_α,L_true with
+R_full ≈; H_early < H_late ≲ M; late hardening near-neutral would be a
+real wake/sleep result because the world now contains discrete
+identities.

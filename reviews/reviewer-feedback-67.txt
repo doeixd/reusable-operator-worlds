@@ -1,0 +1,87 @@
+Reviewer feedback 67 — received 2026-08-23, on the H47 B1 result (MIXED)
+and the B2 generator extension.
+
+----------------------------------------------------------------------
+
+B1 is a useful negative/mixed result: the effect of discretizing a
+genuinely continuous family is SMALLER than expected, and it localizes
+where the cost appears. Cleanest summary: continuous representation
+matters, but late discretization is surprisingly cheap. That is
+encouraging for the larger program. The frozen verdict must remain MIXED,
+but the directional structure is unusually coherent — M < H_late <
+H_early < L_arb on both present cost and R_alpha in every development
+world; the effect size was not large enough relative to the
+preregistered one-SD bands to license that ordering.
+
+WHAT B1 SUGGESTS. First, forcing an arbitrary ontology is meaningfully
+costly: L_arb throws away 36-69% of M's present-task advantage, the one
+effect large enough to clear the gate. A bad discrete vocabulary can
+interfere with learning even when it remains expressively adequate; eps
+repairs much of the mistake for the future, but the lifetime is less
+efficient. Second, the cost of hardening itself is small: dlog R_alpha ~
+0.04 late versus ~0.11 early. The picture is less "continuous good,
+discrete bad" and more: continuous formation first, discrete compilation
+later MAY be nearly lossless — closer to the original wake/sleep
+hypothesis than expected. The key word remains "may": B1's table did not
+license it, but it is the right developmental hypothesis to test again
+where discreteness is actually justified.
+
+THE INNOVATION CHANNEL AGAIN. The wrong partition badly hurts J_present
+while barely-to-moderately hurting R_full: eps functions as a robustness
+mechanism — structured abstraction can be imperfect because private
+innovation repairs local representational errors — but cannot
+retroactively recover the learning efficiency lost while the wrong
+abstraction was in use. Three-channel roles: S persistent regularity;
+alpha cheap structured variation; eps error correction / genuinely novel
+computation. For synthesis later: a synthesizer need not get every
+abstraction exactly right if it has a bounded local patch mechanism.
+
+B2 IS EXACTLY THE RIGHT EXPERIMENT. Do not push B1 further on this
+generator; there is no true membership variable. B2 creates T =
+P_g(alpha) + eps with g a discrete group and alpha continuous within-
+group variation — the first world where the learner must infer operator
+identity versus operator arguments, a precursor to program induction.
+
+MAKE THE B2 PRE-RUN GATE UNUSUALLY STRICT. Before any M/L/H lifetime,
+establish from the generator: (1) exact backward compatibility, G = 1
+bit-for-bit, no approximate compatibility; (2) within-group continuity —
+a held-out family should be strongly representable by its group's shared
+coordinates, otherwise you have clusters without useful internal
+parameterization; (3) cross-group non-substitutability — a schema from
+group g1 should fit held-out tasks of g2 materially worse than its own,
+Q = L(P_g' -> T_g) / L(P_g -> T_g) substantially above 1, else membership
+is nominal again; (4) membership must have ECONOMIC value — an oracle
+route should materially improve at least the structured interface,
+R_alpha,L_true < R_alpha,unstructured - delta, on cheap development
+worlds before launching the full comparison. Existence before discovery.
+
+ONE DESIGN ISSUE TO WATCH. Completely disjoint rank-2 subspaces may make
+membership too easy, reducing B2 to obvious clustering. Eventually a
+separation knob rho_group interpolating from clearly distinct schemas
+through ambiguous to the G = 1 continuous world would test whether
+discrete identity becomes worthwhile exactly when functional separation
+is large enough — connecting back to the amortization laws: when does it
+become cheaper to name two manifolds than to stretch one? Do NOT add that
+complexity to the first B2 test; get one clean positive membership world
+first.
+
+PREDICTIONS FOR B2. Effects larger than B1. R_alpha,M > R_alpha,L_true by
+a measurable amount, but R_full,M ~ R_full,L_true: membership discovery
+costs in the structured channel while innovation buffers the full system.
+For hardening, more strongly than B1: H_early < H_late <~ M, because
+committing to the wrong discrete group now has semantic consequences. If
+late hardening is still near-neutral, that is a substantially stronger
+result than B1: learn continuously while uncertain; compile into discrete
+identities once evidence accumulates — a real wake/sleep result because
+the world now actually contains discrete identities.
+
+FOR THE LANGUAGE: B1 taught us not to manufacture discrete primitives
+when the world gives one continuous parameterized family; B2 asks when
+the opposite is true. The hierarchy is P_g(alpha), not P(alpha) for
+everything nor P_1, P_2, P_3 for every variant; composition is
+P_g3(alpha_3) o P_g2(alpha_2) o P_g1(alpha_1) and synthesis infers the
+(g, alpha) pairs — a neural analogue of operator + arguments before
+program structure is introduced. Principle: continuous parameterization
+first; discrete identities only where the environment makes them real
+and useful. Proceed to the schema_groups generator and its pre-lifetime
+separation/opportunity audits; if those gates pass, freeze B2.
