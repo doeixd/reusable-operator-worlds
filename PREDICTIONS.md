@@ -4914,3 +4914,34 @@ or the world's statistics must change (more worlds, more diverse
 experience, meta-priors). Building that proposal-reorganize-score
 operator is the next design; it requires its own frozen plan, and its
 score must carry a wrong-partition margin in every branch.
+
+# H50 REGISTERED (2026-08-23): PROPOSE -> REORGANIZE -> SCORE (review 70)
+
+Hypothesis: a structural hypothesis h that is future-fertile but
+invisible in the current representation becomes distinguishable from
+wrong hypotheses, using PAST data only, after a bounded matched-budget
+reorganization of the representation under h. Central quantitative
+variable: the migration budget m at which the separation first appears
+(m small -> sleep-like restructuring is plausible; m near full
+retraining -> wake must preserve more reorganizable state).
+
+Registered outcomes (review 70): (1) TRUE beats WRONG/RANDOM after equal
+reorganization — counterfactual restructuring is a valid discovery
+objective; next problem is proposal/search. (2) Indistinguishable —
+experience underdetermines the fertile structure. (3) Everything
+improves — the loop is only extra optimization; a SHAM no-split control
+and stronger charges are required before any claim. Non-negotiables
+carried from H49/H50 design review: identical start checkpoint,
+parameters, optimizer, steps, data, and D* accounting per candidate; a
+SHAM arm; wrong-structure margins in EVERY branch; future siblings never
+select the hypothesis.
+
+Predictions: review 70 — outcome 1, with the open question being the
+size of m*. Ours — outcome 1 at a large-but-partial m (the L_4 endpoint
+is reachable without full retraining because the argument matrices and
+task states carry most of the group structure and the basis is shared),
+with the SHAM arm improving C_LOO uniformly but showing no TRUE-vs-WRONG
+separation.
+
+Plan: `H50_REORGANIZATION_PLAN.md`, DRAFT at registration — the reviewer
+asked for careful design; it is not frozen and nothing runs until it is.

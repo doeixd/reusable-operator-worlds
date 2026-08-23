@@ -3137,3 +3137,17 @@ substantive outcome C — the signal needs organization — and the
 registered consequence: discovery requires a propose-reorganize-score
 sleep loop, to be designed under its own frozen plan with wrong-partition
 margins in every branch. Learnings appended.
+
+# 2026-08-23 — REVIEW 70 FILED; H50 REGISTERED; PROPOSE-REORGANIZE-SCORE PLAN DRAFTED (NOT FROZEN)
+
+Filed and indexed review 70 (the value of an abstraction is
+representation-dependent; sleep as search over representational
+counterfactuals; PROPOSE -> REORGANIZE -> SCORE with a SHAM control and
+migration fraction m as the central variable). Registered H50 in
+`PREDICTIONS.md` with both prediction sets. Drafted
+`H50_REORGANIZATION_PLAN.md` — six external candidates from the same
+frozen M_4 checkpoint, a brutally matched migration operator, past-only
+scoring with wrong-structure margins in every branch, the SHAM guard
+against optimization-only credit, and the m* / L_4-recovery anchors — as
+a DRAFT for review per the reviewer's instruction to stop and design
+carefully. Nothing runs until it is frozen.

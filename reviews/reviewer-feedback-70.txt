@@ -1,0 +1,117 @@
+Reviewer feedback 70 — received 2026-08-23, on the H49 result ("A" via a
+non-discriminating branch; substantive outcome C).
+
+----------------------------------------------------------------------
+
+This is a major mechanistic result. The key thing H49 taught us is not
+merely "the signal is weak before organization." It is: THE VALUE OF AN
+ABSTRACTION IS REPRESENTATION-DEPENDENT. The true partition is not
+sitting there as a good partition of the existing representation; it
+becomes a good partition AFTER the representation has been transformed to
+make that partition meaningful. On M_4 the two slots are interchangeable
+pieces of one distributed channel, so evaluating a candidate partition by
+masking the existing representation asks the wrong counterfactual — of
+course TRUE, WRONG, and RANDOM look alike. After training under TRUE, the
+same structural hypothesis becomes strongly visible (C_LOO +0.60 / +0.30
+/ +0.65; substitutability +1.27 / +0.82 / +1.30). There is a real
+circularity: you need the abstraction to reorganize the representation,
+and you need the reorganized representation to reveal the abstraction's
+value. Probably one of the deepest things found so far.
+
+The broken D* branch is broken regardless of the frozen mechanical
+verdict; the new rule is exactly right: "prefers structure S" means S
+beats plausible wrong structures, not merely no structure. A mask saving
+bits by throwing away half the parameters is not evidence it found the
+right abstraction. The wrong-partition control must exist on every
+branch.
+
+THIS EXPLAINS EARLIER FAILURES. We repeatedly tried solve -> inspect
+finished representation -> find structure -> refactor. H49 says that can
+fail even when an excellent abstraction exists, because the current
+representation may be in a gauge in which the candidate has no meaningful
+local score. The value appears only under the counterfactual "what would
+this system look like if it had been organized around this hypothesis?",
+which is fundamentally different from "how good is this hypothesis as a
+mask on the current system?". A candidate edit can require a coordinated
+representational migration before its economics are measurable.
+
+NEXT MECHANISM: PROPOSE -> REORGANIZE -> SCORE. Formalize sleep as search
+over representational counterfactuals: from R, propose h (a partition of
+tasks into schemas; later, split P(alpha) into P_1, P_2); apply a bounded
+reorganization operator R_h = T_h(R, D_past); only then evaluate
+S(h) = J_retrospective(R_h). h* = argmin_h [C_reorganize(h) + D*(R_h) +
+C_reacquire(D_past | R_h)]. The important new term is C_reorganize;
+without performing T_h you are scoring the wrong representation.
+
+THE DECISIVE EXPERIMENT SHOULD BE VERY SMALL. Do not build a learned
+proposer yet; supply candidate hypotheses externally on the existing
+G = 2, K = 4 worlds: TRUE, several balanced RANDOM, one or more
+deliberately WRONG-but-plausible partitions. Every candidate starts from
+the SAME frozen M_4 checkpoint and receives EXACTLY the same
+reorganization budget (e.g. clone the two-slot representation into
+partition-specific channels and optimize only the allowed migration
+variables for N steps on already-seen tasks). After migration measure
+C_LOO, D*, substitutability, migration cost, and eventually the held-out
+sibling metric — but never use future siblings to select the hypothesis.
+The critical question: AFTER EQUAL REORGANIZATION, DOES TRUE BECOME
+DISTINGUISHABLE FROM WRONG USING ONLY PAST DATA? If yes, that is a valid
+sleep search objective, substantially more important than ARI rising.
+
+PREREGISTER THREE OUTCOMES. (1) TRUE reorganizes into a better
+retrospective representation than WRONG: useful abstractions are
+discoverable through counterfactual restructuring even when invisible in
+the current representation; the next problem is proposal/search. (2) TRUE
+and WRONG remain indistinguishable after equal reorganization: the
+structure is underdetermined by experience; more diverse experience,
+active experiments, or a meta-prior are needed. (3) EVERY partition
+improves after reorganization: the process is just adding optimization
+capacity; a matched no-structure migration control and stronger
+complexity/migration charges are needed before saying anything. The
+third is especially important — a sleep phase can get credit simply for
+another pass over the data.
+
+THE REORGANIZATION BUDGET MUST BE MATCHED BRUTALLY: same start
+checkpoint, parameter count, optimizer, update budget, data, and D*
+accounting for every candidate; and include a SHAM reorganization (same
+steps, no structural split) separating the benefit of another training
+phase from the benefit of the proposed abstraction.
+
+CONCEPTUAL SHIFT: ABSTRACT(R) is not "find a short description of R" but
+"search for an alternative organization R' that makes regularities
+cheaper and more useful". Like scientific theorizing: a theory often
+introduces NEW VARIABLES under which observations become simple;
+temperature is not a literal cluster inside molecular trajectories. A
+coordinate system can be part of the discovery.
+
+FOR PROGRAM SYNTHESIS: the analogous mistake is promoting repeated
+literal substrings of current programs — that only finds abstractions
+aligned with the current language. The powerful system does PROPOSE a new
+primitive -> REWRITE/recompile old programs using it -> RESCORE the
+rewritten corpus. PROPOSE -> REWRITE -> RESCORE is the symbolic analogue
+of PROPOSE -> REORGANIZE -> SCORE. A macro may be useless scored against
+old programs and reveal large savings once they are rewritten around it.
+
+SLEEP'S REAL JOB: WAKE solves tasks in a representation permissive enough
+not to commit prematurely; SLEEP proposes latent organizations, migrates
+computation into them, and retains those whose post-migration economics
+beat alternatives; the next wake begins from R_{h*}. Abstraction
+formation is literally a structural learning operator, and eventually
+sleep can invent program primitives, not just neural schemas.
+
+PREDICTION: TRUE becomes distinguishable from RANDOM after equal
+reorganization on these worlds — the generator contains genuine
+group-specific subspaces and a representation trained around them shows
+large margins. The uncertain part is whether a BOUNDED migration from M
+suffices or one must essentially retrain L from scratch. Make that the
+central quantitative variable: migration fraction m in [0, 1], m = 0 pure
+post-hoc scoring, m = 1 approximating full retraining; ask whether a
+modest m* exists with S_TRUE(m*) < S_WRONG(m*). If m* is small,
+sleep-like restructuring is plausible; if near-total retraining is
+required, discovery is much more expensive and wake must preserve more
+reorganizable state. Stop here and design this carefully. The question is
+no longer "can we score the right abstraction?" but: CAN WE CHEAPLY
+IMAGINE AND PARTIALLY INSTANTIATE ALTERNATIVE ORGANIZATIONS OF OUR OWN
+COMPUTATION, THEN USE EXPERIENCE TO DECIDE WHICH ORGANIZATION IS BETTER?
+If that works, it is a major step toward a system that proposes changes
+to its own computational language, recompiles what it knows under them,
+and keeps the changes that make future learning and reasoning cheaper.

@@ -2757,3 +2757,24 @@ precise causal role). Proposes the sleep objective J_sleep = λD*(L) +
 η Σ_i C_reacquire(T_i | L_−i) — cross-validation for a learned language
 of thought — and the symbol-emergence rule SPLIT iff ΔC_reacquire >
 ΔD*_split.
+
+### [reviewer-feedback-70.txt](reviewer-feedback-70.txt)
+On H49. Names the mechanism: **the value of an abstraction is
+representation-dependent** — the true partition becomes good only after
+the representation is transformed to make it meaningful, a genuine
+circularity that retrospectively explains why solve→inspect→refactor
+kept failing (the candidate had no meaningful local score in the current
+gauge). Endorses the every-branch wrong-structure rule. Sets the next
+mechanism as PROPOSE → REORGANIZE → SCORE: sleep as search over
+representational counterfactuals, h* = argmin[C_reorganize + D*(R_h) +
+C_reacquire(past | R_h)], with the decisive experiment kept small —
+external candidates (TRUE / WRONG / RANDOM) all migrated from the same
+frozen M₄ checkpoint under a brutally matched budget plus a SHAM
+(no-split) control, scored on past data only; three preregistered
+outcomes, the third guarding against sleep getting credit for another
+data pass. Central variable: migration fraction m — does a modest m*
+make TRUE distinguishable, or is near-full retraining needed? Program-
+synthesis analogue: PROPOSE → REWRITE → RESCORE (a macro may be useless
+against old programs and valuable once they are rewritten around it).
+Conceptual shift: ABSTRACT(R) = search for an organization that makes
+regularities cheap — new variables can be part of the discovery.
