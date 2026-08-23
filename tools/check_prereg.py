@@ -40,6 +40,7 @@ FROZEN = {
     "H39_NEXT_STEPS_PLAN.md": "eec41b2",
     "H47_MEMBERSHIP_PLAN.md": "1d3902a",
     "H48B_WIDTH_SWEEP_PLAN.md": "525baac",
+    "H49_DISCOVERABILITY_PLAN.md": "5302c92",
 }
 
 STATUS_PATH_PATTERN = re.compile(
