@@ -1,0 +1,103 @@
+Reviewer feedback 66 — received 2026-08-22, on the H47 baselines and the
+redrafted H47 plan (B1 commitment / B2 two-subspace membership).
+
+----------------------------------------------------------------------
+
+Yes — run B1 first. And this baseline check just prevented a fairly
+serious category error. The key new fact: M did not discover two
+abstractions; it learned one distributed parameterized manifold. The two
+physical slots are implementation detail; functionally the representation
+is closer to P(alpha), alpha in R^64, than to {P_1(alpha_1), P_2(alpha_2)}.
+
+WHAT H39 ACTUALLY ESTABLISHED: joint learning can create an intensional
+continuous coordinate system over a family of related computations, and
+future tasks can exploit that coordinate system. Not: the learner
+discovered clusters of reusable operators. Route entropy ~0.94/1.0, tiny
+margins, ARI ~ 0 are decisive — there are no clusters to recover in this
+world, and the generator confirms it (r_meta = 1 puts all families on one
+continuous rank-2 family). This makes H39 more conceptually interesting,
+not less.
+
+ANOTHER REPRESENTATION LEVEL. The implicit ladder was private -> shared
+primitive -> multiple primitives -> programs. The empirical picture is
+private -> CONTINUOUS PARAMETERIZED MANIFOLD -> discrete families of
+manifolds -> discrete primitives -> composition. H39 lives at the first
+transition. The correct abstraction need not be discrete: if nature
+contains P(alpha), forcing a choice P_1 or P_2 is not abstraction, it is
+quantization of a genuinely continuous structure. That is exactly what
+B1 can test.
+
+B1, RENAMED: what is the cost of imposing discrete commitment on a
+computational family whose true useful representation is continuous?
+Arms answer progressively stronger questions: M (the continuous
+representation, alpha in R^64); L_arbitrary (does merely introducing
+discrete membership damage the manifold? each task loses half the
+directions, 64 -> 32, so R_alpha should worsen; J and R_full may be
+buffered by innovation); H_early (discretize before enough evidence);
+H_late (discretize after the representation is mature) — a much better
+test of the V2 premature-commitment idea.
+
+RESULT MATRIX. Strongest prediction: R_alpha,M < R_alpha,H_late <
+R_alpha,H_early, or R_alpha,M ~ R_alpha,H_late < R_alpha,H_early; and
+R_alpha,L_arb > R_alpha,M. If M beats all hard/discrete arms: the correct
+representation for this world is fundamentally continuous. If late
+hardening is neutral but early hurts: discrete compilation is safe after
+a continuous representation has formed but harmful during formation —
+almost exactly the wake/sleep story (WAKE continuous -> SLEEP
+discretize/compile). If the arbitrary labelled partition hurts but learned
+hardening does not: discreteness itself is not the problem; imposing the
+wrong ontology is. If all hardening is neutral: the continuous appearance
+may be overparameterized redundancy rather than functionally necessary
+geometry — also useful.
+
+B2 is the correct way to ask the membership question. schema_groups = G
+with G = 1 reproducing the existing generator bitwise gives a clean causal
+extension. For G > 1 there is actual discrete structure: manifolds M_1..
+M_G, each with its own continuous within-group coordinate system —
+T = P_g(alpha), g discrete schema identity, alpha continuous argument.
+The learner must infer two qualitatively different latent variables,
+(g, alpha): which family, and where inside it — the first clean precursor
+to neural program induction, not merely a routing experiment. The
+predicted discovery tax (J and R_full neutral, R_alpha taxed) makes
+mechanistic sense: with P_g(alpha) + eps, innovation repairs membership
+mistakes; if it appears, innovation acts as an error-correcting channel
+for imperfect abstraction discovery, and a system need not solve discrete
+ontology perfectly before benefiting from abstractions.
+
+STAGE C, CORRECTED. "Cardinality" conflates three quantities: the number
+of discrete schema groups G; the dimensionality of each schema d_alpha;
+the number of implementation slots K_slots. H39 showed K_slots = 2 does
+not imply G = 2 (functionally G = 1). Cardinality discovery must measure
+FUNCTIONAL schema count, not occupied module count. Split the problem:
+H48a, discrete schema cardinality (how many manifolds P_1..P_G are
+economically justified — the genuine birth/death question); H48b,
+within-schema dimensionality (how many argument directions each manifold
+should expose, d_alpha*). A learner can overfit with too many schemas or
+one schema with too many dimensions; the economics must compare both:
+D*(L) = D*(schemas) + D*(argument dimensions) + D*(routing) +
+D*(innovation), and the learner decides where to put complexity.
+
+THE CORRECTION, STATED: first discover the geometry of variation;
+discretize only where the world actually contains discontinuities. A
+system should not invent nouns where a parameter would do — not Rotate10,
+Rotate11, Rotate12 but Rotate(theta); yet Rotate(theta) and
+Translate(x, y) are genuinely different families and discrete primitive
+identity is then appropriate. B2 creates exactly that distinction
+synthetically. The learned language is hierarchical, P_g(alpha); programs
+are P_g3(alpha_3) o P_g2(alpha_2) o P_g1(alpha_1); synthesis infers both
+g_1:L and alpha_1:L. Operators g, arguments alpha, composition, and
+escape eps — derived empirically rather than stipulated.
+
+RECOMMENDATION: run B1 first (cheap, existing world, validates mask and
+hardening machinery, answers continuous-versus-imposed-discretization).
+Then B2 with schema_groups. Before freezing B2 require the generator
+tests: G = 1 bitwise equal to the old generator; and an oracle functional-
+separation audit showing within-group tasks lie on the intended shared
+manifold, cross-group substitution is substantially worse, groups are
+distinguishable from behaviour, and group difficulty and within-group
+variation are balanced. The lesson: do not ask whether the learner
+recovered a discrete abstraction until you have established that the
+environment actually contains one. H39 discovered something more
+primitive and arguably more important: a continuous computational concept
+with arguments. B2 can ask when such concepts should themselves become
+discrete types.

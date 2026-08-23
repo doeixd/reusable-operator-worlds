@@ -4620,3 +4620,25 @@ NEUTRAL on J and R_full; H_early a COST on R_alpha, H_late NEUTRAL — the
 premature-commitment pattern. For B2, review 64's prediction stands as
 written (J and R_full neutral, R_alpha taxed: innovation buffers
 imperfect discovery), to be re-registered with that world's baselines.
+
+# REVIEW 66 (2026-08-22): H39 REREAD AS A CONTINUOUS MANIFOLD; B1 FROZEN; H48 SPLIT
+
+Filed as `reviews/reviewer-feedback-66.txt`. Registered reading of the
+sealed H39 result: joint learning created an intensional CONTINUOUS
+coordinate system P(alpha), alpha in R^64, over one family of related
+computations; it did not discover clusters (none exist in the confirmed
+world). A new level enters the representation ladder between private
+solutions and discrete primitives: the continuous parameterized manifold.
+
+B1 is frozen with `H47_MEMBERSHIP_PLAN.md` Amendment 1: the cost of
+imposing discrete commitment on a continuous family, arms M / L_arb /
+H_early / H_late, result matrix CONTINUOUS / COMPILE-AFTER-FORMATION /
+WRONG-ONTOLOGY / REDUNDANT, tolerances from the measured baselines.
+Predictions registered in the plan (ours: COMPILE-AFTER-FORMATION with
+L_arb also costly on R_alpha; review 66: M < H_late < H_early on R_alpha,
+L_arb > M).
+
+H48 is split: H48a discrete schema cardinality (functional manifold
+count, never occupied slots), H48b within-schema dimensionality; both
+under one D*. B2 acquires generator tests (G = 1 bitwise; oracle
+functional-separation audit) before it can be frozen.

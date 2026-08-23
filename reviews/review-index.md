@@ -2684,3 +2684,23 @@ coordinates during wake). Reformulates the thesis: intelligence learns
 parameterized computational representations that compress what recurs
 while preserving cheap coordinates for novelty. Annotated at filing: its
 "M already discovers membership" line is superseded by the H47 baselines.
+
+### [reviewer-feedback-66.txt](reviewer-feedback-66.txt)
+On the H47 baselines. Endorses running B1 first and names the category
+error the baselines prevented: M learned one distributed parameterized
+manifold P(α), α ∈ R⁶⁴, not two abstractions — the slots are
+implementation detail. Inserts a new level in the representation ladder
+(private → **continuous parameterized manifold** → discrete families of
+manifolds → primitives → composition) and reframes B1 as the cost of
+imposing discrete commitment on a continuous family, with a four-way
+result matrix (M beats all → fundamentally continuous; late neutral /
+early hurts → compile after formation, the wake/sleep story; arbitrary
+partition hurts but learned hardening does not → wrong ontology, not
+discreteness; all neutral → redundancy). Reads B2's (g, α) inference as
+the first precursor to program induction and requires, before freezing
+it, G = 1 bitwise reproduction plus an oracle functional-separation audit.
+Corrects Stage C: cardinality conflates G, d_α, and K_slots; K_slots = 2
+gave functional G = 1; split into H48a (schema count) and H48b
+(within-schema dimensionality) under one D*. Principle: discover the
+geometry of variation first; discretize only where the world has
+discontinuities — Rotate(θ), not Rotate10/11/12.

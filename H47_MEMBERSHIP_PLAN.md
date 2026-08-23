@@ -142,3 +142,88 @@ B1 first (no generator change; answers the commitment question on the
 confirmed world and exercises the mask and annealing machinery). B2
 second, frozen as its own plan after the generator extension passes its
 bit-exact check and its baselines are measured. Stage C waits for both.
+
+# Amendment 1 (2026-08-22, review 66; B1 FROZEN with this amendment, B2 still a design)
+
+## B1, restated and frozen
+
+Question: what is the cost of imposing discrete commitment on a
+computational family whose useful representation is continuous? The
+confirmed learner M holds one distributed manifold P(alpha), alpha in
+R^64, across two physical slots; the slots are implementation detail.
+
+Arms (worlds 0-2; `configs/v5_h72.yaml`; V6 generator arguments verbatim;
+two parameterized slots at K = 32; everything else as M):
+- **M**: the H39d `cap_m2k32` cells, reused.
+- **L_arb**: for every trained family task, at every step, the route
+  mass on the two parameterized slots is moved entirely onto the slot of
+  the arbitrary split ({0,1} -> 11, {2,3} -> 10); plain-slot mass is
+  untouched and learned as usual. Pre-onset tasks and unseen futures are
+  unmasked. Mechanical check: masked fraction 1.000.
+- **H_early**: the conditional route over the two parameterized slots is
+  computed with a temperature T applied to their two logits, annealed
+  linearly from 1.0 at lifetime task 8 to 0.1 at task 24 and held there.
+- **H_late**: identical schedule shape, annealed from 1.0 at task 40 to
+  0.1 at task 56 and held there.
+- Temperature is global (applies to every task's forward, including
+  replay), mirroring the V1 global-annealing protocol; it is stored in
+  the artifact and reproduced by the loader, so unseen-future fits in the
+  H arms adapt under the arm's final hardness.
+- Non-vacuity: L_arb mask fraction 1.000; H arms' median conditional
+  entropy over the two slots at the dominant step <= 0.20 bits on the
+  final artifact and within 0.05 bits of each other; argument matrices
+  moved in every arm. If an H arm does not reach 0.20 bits the pair is
+  reported NOT COMPARABLE for the premature-commitment rule.
+
+Endpoints: J_present, R_alpha (alpha-only k=128 B1 with robustness),
+R_full, alpha-zeroed usage, all by the confirmation scorer's fits;
+entropy / margin diagnostics.
+
+Tolerances (from `reports/h47_baselines.json`): J cost if
+`(J_X - J_M) / |J_M - J_O| >= 0.25`; R cost if `log R_X - log R_M >=
++0.15` (R_alpha) or `>= +0.08` (R_full); gain if `<= -0.15 / -0.08`;
+otherwise NEUTRAL. A rule holds if it holds in at least 2 of 3 worlds.
+
+Result matrix (fixed):
+- **CONTINUOUS**: M better than L_arb, H_early, and H_late on R_alpha
+  (each a COST) — the useful representation is fundamentally continuous.
+- **COMPILE-AFTER-FORMATION**: H_early a COST on R_alpha or J, H_late
+  NEUTRAL on both, L_arb any — discretization is safe after formation,
+  harmful during it (the wake/sleep story).
+- **WRONG-ONTOLOGY**: L_arb a COST on R_alpha, both H arms NEUTRAL —
+  discreteness is not the problem; imposing a partition the learner did
+  not choose is.
+- **REDUNDANT**: all three NEUTRAL on everything — the continuous
+  appearance is overparameterized redundancy.
+- Mixed patterns are reported cell by cell without a label.
+
+Registered predictions: ours — L_arb COST on R_alpha, NEUTRAL on J and
+R_full; H_early COST on R_alpha; H_late NEUTRAL (COMPILE-AFTER-FORMATION
+with L_arb also costly). Review 66 — R_alpha,M < R_alpha,H_late <
+R_alpha,H_early (or M ~ H_late < H_early) and R_alpha,L_arb > R_alpha,M.
+
+## B2, additional requirements before it is frozen (review 66)
+
+Generator tests, all before any B2 lifetime: `schema_groups = 1`
+reproduces the existing generator bitwise (tasks, examples, held-out and
+unseen futures); an oracle functional-separation audit on the G = 2 world
+showing within-group tasks lie on their group's shared manifold,
+cross-group substitution is substantially worse than within-group,
+groups are distinguishable from behaviour alone, and group difficulty and
+within-group variation are balanced (V5 gates, 10%). B2's latent is
+(g, alpha) — which family and where inside it.
+
+## Stage C, corrected (review 66)
+
+"Cardinality" is three quantities: discrete schema count G, within-schema
+dimensionality d_alpha, and implementation slot count K_slots. H39 showed
+K_slots = 2 with functional G = 1. Any cardinality claim must measure the
+FUNCTIONAL schema count (e.g. the number of separable manifolds the
+learner's arguments span, by the functional-separation audit), never
+occupied slots. The problem is split: H48a, discrete schema cardinality
+(birth/death of manifolds); H48b, within-schema dimensionality d_alpha*.
+Both are priced in one currency, D*(schemas) + D*(argument dimensions) +
+D*(routing) + D*(innovation); a learner can buy capacity either way and
+the economics must compare both. Principle: discover the geometry of
+variation first; discretize only where the world contains
+discontinuities.
