@@ -37,3 +37,16 @@ withdrawals in the append-only scientific record rather than rewriting history.
   the corrected distributed-structure interpretation.
 - `neural_library_learning_v1_experimental_spec.md`, `EXPERIMENT_PLAN.md`,
   `CONFIRMATION_PLAN.md` — frozen; never edit.
+
+# Before any long-running run
+
+ALWAYS re-read and double-check experiment code for correctness BEFORE
+launching it, every time. A launch commits hours of compute and, worse,
+produces numbers that look like results; a silent construct error is not
+visible in the output. Read the code you are about to run end to end
+against its frozen plan — arms, controls, budgets, seeds, denominators,
+what is frozen and what is trainable, what the scorer discards and
+re-fits — and run the cheap structural dry run first (a few steps, a
+couple of tasks) to prove every path executes and its equivalence
+controls hold. If a run is already in flight, audit it anyway and
+disclose whatever the audit finds with the result.

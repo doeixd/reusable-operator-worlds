@@ -1248,3 +1248,18 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   never as the branch. Working target for the substrate: executable +
   composable + REWRITEABLE -- learning should produce editable
   computational objects, not only weight changes.
+
+- DOUBLE-CHECK BEFORE ANY LONG RUN, ALWAYS (PI directive, 2026-08-24).
+  Re-read the experiment code end to end against its frozen plan before
+  launching: arms and their controls, budgets and step counts, seeds and
+  which are reused, the denominator of every ratio, what is frozen versus
+  trainable in each phase, what the scorer discards and re-fits, and
+  whether each non-vacuity check can actually fail. Then run the cheap
+  structural dry run (a few steps over a couple of tasks) and verify the
+  equivalence controls on the REAL artifact, not only a smoke world. The
+  cost asymmetry is the whole argument: minutes of reading against hours
+  of compute and, far worse, a plausible number produced by a wrong
+  construct — this project's recurring failure mode (V4.1's tolerance,
+  V6's inner loop that never learned, H50's `[50,...]` seeds, the alpha
+  fit pinned at a stationary point). If a run is already in flight, audit
+  it anyway and disclose what the audit finds alongside the result.
