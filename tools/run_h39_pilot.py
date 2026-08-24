@@ -77,6 +77,12 @@ for _w in (0, 1, 2):
                  "--schema-groups", "2"]
         SWEEP[f"w_m{_k}/world_{_w}"] = (_w, list(_base))
         SWEEP[f"w_l{_k}/world_{_w}"] = (_w, _base + ["--route-policy", "mask_group"])
+# H51 arm R_2 (H51_REORGANIZABILITY_PLAN.md Amendment 2): the same G = 2
+# world and K = 4 as H49/H50's M_4, with a pooled 4-component innovation basis.
+for _w in (0, 1, 2):
+    SWEEP[f"h51_r2/world_{_w}"] = (_w, ["--model", "pslot_factorized", "--slot-args", "4",
+                                        "--pslot-count", "2", "--snapshot-history",
+                                        "--schema-groups", "2", "--schema-dim", "4"])
 REQUIRED = ("model.pt", "summary.json", "rho_profile.json", "fingerprint.json",
             "config.yaml", "history.pt")
 
@@ -84,7 +90,8 @@ REQUIRED = ("model.pt", "summary.json", "rho_profile.json", "fingerprint.json",
 def run(name: str) -> tuple[str, int]:
     if name in SWEEP:
         world, extra = SWEEP[name]
-        out = ROOT / "artifacts" / "h39c" / name / "lifecycle"
+        root = "h51" if name.startswith("h51_") else "h39c"
+        out = ROOT / "artifacts" / root / name / "lifecycle"
         common = list(COMMON)
         common[common.index("--world-seed") + 1] = str(world)
     else:
@@ -116,6 +123,8 @@ def main() -> int:
         names = [n for n in SWEEP if n.startswith("b2_m/") or n.startswith("b2_ltrue/")]
     elif names == ["width"]:
         names = [n for n in SWEEP if n.startswith("w_")]
+    elif names == ["h51"]:
+        names = [n for n in SWEEP if n.startswith("h51_")]
     elif names == ["b2h"]:
         names = [n for n in SWEEP if n.startswith("b2_hearly/") or n.startswith("b2_hlate/")]
     with ProcessPoolExecutor(max_workers=3) as pool:  # slots=12: cap 3 (memory)
