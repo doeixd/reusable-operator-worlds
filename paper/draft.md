@@ -1122,6 +1122,28 @@ partition, since at K = 4 the grouping has future value but no
 present-objective value and the learner's non-discovery is rational
 under the objective it was trained on.
 
+The answer was no, and then a stronger no. A census of every
+retrospective signal available to the learner (leave-one-out
+reacquisition cost, a two-part description proxy, own-versus-other slot
+substitutability) found that all three discriminate the true grouping on
+a representation that was ORGANIZED around it during its lifetime, and
+none discriminate it on the representation ordinary learning actually
+produces (`reports/h49_discoverability.json`). The value of a structure
+is a property of the representation that holds it, not of the task
+population. The obvious repair — propose a grouping, reorganize the
+finished representation under it, then score — failed as well: 4,096
+budget-matched migration steps under the true partition, with every
+task-local variable and both argument matrices free, recovered
+approximately none of the organized representation's separation
+(recovery fraction -0.09 to +0.09) and none of its advantage on unseen
+family members, while a structureless control with the identical budget
+beat every partition by 0.39-0.58 log units
+(`reports/h50_reorganization.json`). Worse, migration under ANY
+partition manufactured the surface signature of organization —
+substitutability rose from ~0 to 0.24-0.66 regardless of which grouping
+was imposed — without the discrimination or the fertility. A metric that
+the intervention itself inflates cannot certify the intervention.
+
 The lesson this block adds to the earlier ones is the most consequential
 in the paper: the useful abstraction was not latent in the finished
 solutions waiting to be extracted; the learner had to maintain an
@@ -1129,7 +1151,17 @@ explicit intensional channel while it learned. An abstraction, on this
 evidence, compresses what recurs while exposing cheap coordinates for
 what may vary — A(alpha) + eps, not A — and whether such a coordinate
 system should be split into named types is decided by capacity
-economics rather than by the world's latent ontology.
+economics rather than by the world's latent ontology. The corollary,
+earned by the two negative rungs above, is that representation formation
+is PATH-DEPENDENT: two learners can reach the same present cost on the
+same task stream and leave behind states with very different future
+abstraction options, and the difference is not recoverable afterwards at
+any fraction of the formation budget we could afford. That suggests a
+third property beside present cheapness and description length —
+reorganizability, the expected cost of migrating a representation into a
+plausible alternative organization — and a design target in which
+learning produces editable computational objects rather than only weight
+changes.
 
 Why should anyone working at scale care about a 16-dimensional world?
 Because the criterion is scale-free and the phenomena it isolates have
