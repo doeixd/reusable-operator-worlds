@@ -3787,3 +3787,42 @@ BASELINE ROWS MUST BE THE SAME MEASUREMENT. Amendment 2 exists because
 fresh random-partition seeds would have silently invalidated the m = 0
 baselines that the plan defined as H49's data. When a new experiment
 reuses an old row, it inherits the old row's seeds.
+
+
+
+================================================================================
+H50: PARTIAL MIGRATION RECOVERS NOTHING; ORGANIZATION IS A FORMATION-TIME PROPERTY (2026-08-24)
+================================================================================
+
+Budget-matched migration of the label-free representation under the true
+partition — 4,096 steps, everything task-local plus the argument
+matrices free — recovers ~0% of the retrospective separation that
+whole-lifetime organization yields, and none of the future advantage
+(`reports/h50_reorganization.json`). SHAM beats every partition
+throughout. The H39 lesson now has a quantitative floor: the coordinates
+are made DURING learning, and at K = 4 they cannot be retrofitted at any
+tested fraction of the formation cost.
+
+MIGRATION MANUFACTURES THE SIGNATURE WITHOUT THE SUBSTANCE. After
+migration under ANY partition, own-versus-other-slot substitutability
+rises from ~0 to 0.24-0.66 — the surface look of an organized
+representation — while discrimination between true and wrong partitions
+stays at ~0.05 and fertility does not move. Post-hoc structure metrics
+can be created by the act of imposing structure; only margins over wrong
+structures and future-task behaviour separate real organization from
+imposed costume. (The wrong-control rule again, now for metrics that the
+intervention itself inflates.)
+
+THE PROPOSE-REORGANIZE-SCORE LOOP, AS TESTED, DEGENERATES TO
+RETRAIN-AND-SELECT. The counterfactual "what if I had been organized
+around h" is answerable, on this world, only by approximately BEING
+organized around h from the start. Two exits, each a plan of its own:
+pay the full price per candidate, or change wake so formation leaves
+reorganizable state behind (representations whose organization can be
+revised cheaply are an ARCHITECTURAL property, not an add-on audit).
+
+BOTH PREDICTION SETS WERE WRONG IN THE OPTIMISTIC DIRECTION, AGAIN. The
+running pattern across H47-H50: every expectation that structure would
+be found, used, or retrofitted more easily than the economics require
+has failed, and every "the learner is being rational under its
+objective" reading has held. Trust the objective, not the ontology.

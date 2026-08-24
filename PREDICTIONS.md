@@ -4945,3 +4945,65 @@ separation.
 
 Plan: `H50_REORGANIZATION_PLAN.md`, DRAFT at registration — the reviewer
 asked for careful design; it is not frozen and nothing runs until it is.
+
+# H50 RESULT (2026-08-24): UNDERDETERMINED — BOUNDED MIGRATION RECOVERS ESSENTIALLY NONE OF THE SEPARATION
+
+Plan `H50_REORGANIZATION_PLAN.md` (Amendments 1-2, frozen `aff9042`).
+Report `reports/h50_reorganization.json`. All migrations and ~2,700
+re-fits finite; every non-vacuity check passed; identical budgets
+verified across arms.
+
+    C_LOO margins, TRUE vs best wrong (need >= +0.15 in 2/3):
+        m = 16:  +0.008 / -0.029 / +0.016
+        m = 64:  +0.023 / -0.003 / +0.003
+    TRUE vs SHAM: -0.39 to -0.58 at both budgets (SHAM far better).
+    Recovery fraction of the L_4 separation: -0.09 to +0.09 — zero.
+    Substitutability at m = 64: TRUE 0.46 / 0.29 / 0.66 versus best wrong
+        0.39 / 0.24 / 0.61 — migration under ANY partition manufactures
+        slot specialization; the TRUE-minus-wrong difference (~0.05) is
+        far below the 0.30 margin.
+    Sibling diagnostics (computed after all past-data decisions, selecting
+        nothing): TRUE 0.0734 / 0.0570 / 0.0505 versus SHAM 0.0681 /
+        0.0430 / 0.0542 — migrated-TRUE does not even recover a FUTURE
+        advantage (worse than SHAM in 2/3 worlds).
+
+Verdict by the frozen table: **UNDERDETERMINED** (no SEPARATION at any
+scored m; SHAM's own m0 -> m64 gain, 0.20 log units, is below the 0.30
+that would have read OPTIMIZATION-ONLY).
+
+What the numbers say beside the label: 4,096 steps of budget-matched
+reorganization under the true partition recover approximately 0% of the
+retrospective separation that whole-lifetime organization produces
+(L_4 margins 0.60 / 0.30 / 0.65), and none of the future advantage
+either. Masking under any hypothesis creates the surface signature of
+organization (elevated substitutability) without the substance
+(discrimination or fertility). The chicken-and-egg from H49 is stronger
+than "the score needs some reorganization": at these budgets the score
+needs essentially the FULL formation process. Within the tested
+operator, the propose-reorganize-score loop degenerates to
+retrain-under-each-hypothesis-and-select — valid (L_4 exists and works)
+but priced at one full lifetime per candidate.
+
+Scorekeeping: review 71 predicted separation beginning at m = 16 with
+25-50% recovery — wrong; our prediction of separation at large-but-
+partial m — also wrong; our SHAM expectation (uniform improvement, no
+ordering) — right. Review 70's fallback branch ("if it requires
+near-total retraining, discovery is much more expensive and the
+architecture needs to preserve more reorganizable state during wake") is
+the branch the data chose.
+
+Instrument disclosures, recorded with the result: (1) optimizer state
+resets at the m = 4 / 16 / 64 snapshot boundaries (three AdamW instances,
+identical for every arm); (2) retirement was lifted during migration, so
+previously retired tasks start from the reference-plus-stored-residual
+double-count state and migrate out of it (identical across arms; the
+scoring re-fit resets residuals and is unaffected). Neither favours an
+arm; both are matched deviations from an idealized single continuous
+migration.
+
+Licensing: nothing. The registered fork for the successor (each side
+needs its own frozen plan): (a) test the retrain-and-select reading
+directly — one full lifetime per candidate hypothesis is the price; or
+(b) change WAKE so that reorganizable state is preserved during
+formation (review 70's fallback), making future migrations cheaper —
+which is a new architecture question, not a new score.

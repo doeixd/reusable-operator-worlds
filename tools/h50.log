@@ -1,0 +1,44 @@
+prereg check OK: 19 frozen files unchanged; all STATUS-cited paths exist
+C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_h49_discoverability.py:104: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:823.)
+  initial_support = float(torch.mean((model(x, tid) - y) ** 2))
+world 0 TRUE      m=16: C_LOO 0.00472 (m0 0.00560) fam-NMSE 0.0038
+world 0 TRUE      m=64: C_LOO 0.00445 (m0 0.00560) fam-NMSE 0.0025
+world 0 WRONG-A   m=16: C_LOO 0.00476 (m0 0.00619) fam-NMSE 0.0039
+world 0 WRONG-A   m=64: C_LOO 0.00455 (m0 0.00619) fam-NMSE 0.0025
+world 0 WRONG-B   m=16: C_LOO 0.00516 (m0 0.00642) fam-NMSE 0.0040
+world 0 WRONG-B   m=64: C_LOO 0.00497 (m0 0.00642) fam-NMSE 0.0025
+world 0 RANDOM-1  m=16: C_LOO 0.00544 (m0 0.00606) fam-NMSE 0.0043
+world 0 RANDOM-1  m=64: C_LOO 0.00532 (m0 0.00606) fam-NMSE 0.0027
+world 0 RANDOM-2  m=16: C_LOO 0.00531 (m0 0.00594) fam-NMSE 0.0041
+world 0 RANDOM-2  m=64: C_LOO 0.00528 (m0 0.00594) fam-NMSE 0.0026
+world 0 SHAM      m=16: C_LOO 0.00303 (m0 0.00352) fam-NMSE 0.0029
+world 0 SHAM      m=64: C_LOO 0.00289 (m0 0.00352) fam-NMSE 0.0021
+world 1 TRUE      m=16: C_LOO 0.00478 (m0 0.00549) fam-NMSE 0.0038
+world 1 TRUE      m=64: C_LOO 0.00448 (m0 0.00549) fam-NMSE 0.0023
+world 1 WRONG-A   m=16: C_LOO 0.00464 (m0 0.00587) fam-NMSE 0.0037
+world 1 WRONG-A   m=64: C_LOO 0.00446 (m0 0.00587) fam-NMSE 0.0022
+world 1 WRONG-B   m=16: C_LOO 0.00470 (m0 0.00568) fam-NMSE 0.0037
+world 1 WRONG-B   m=64: C_LOO 0.00450 (m0 0.00568) fam-NMSE 0.0022
+world 1 RANDOM-1  m=16: C_LOO 0.00494 (m0 0.00547) fam-NMSE 0.0038
+world 1 RANDOM-1  m=64: C_LOO 0.00480 (m0 0.00547) fam-NMSE 0.0024
+world 1 RANDOM-2  m=16: C_LOO 0.00480 (m0 0.00531) fam-NMSE 0.0037
+world 1 RANDOM-2  m=64: C_LOO 0.00469 (m0 0.00531) fam-NMSE 0.0023
+world 1 SHAM      m=16: C_LOO 0.00268 (m0 0.00325) fam-NMSE 0.0025
+world 1 SHAM      m=64: C_LOO 0.00253 (m0 0.00325) fam-NMSE 0.0018
+world 2 TRUE      m=16: C_LOO 0.00337 (m0 0.00447) fam-NMSE 0.0029
+world 2 TRUE      m=64: C_LOO 0.00329 (m0 0.00447) fam-NMSE 0.0019
+world 2 WRONG-A   m=16: C_LOO 0.00343 (m0 0.00428) fam-NMSE 0.0028
+world 2 WRONG-A   m=64: C_LOO 0.00330 (m0 0.00428) fam-NMSE 0.0019
+world 2 WRONG-B   m=16: C_LOO 0.00355 (m0 0.00461) fam-NMSE 0.0030
+world 2 WRONG-B   m=64: C_LOO 0.00334 (m0 0.00461) fam-NMSE 0.0019
+world 2 RANDOM-1  m=16: C_LOO 0.00396 (m0 0.00469) fam-NMSE 0.0032
+world 2 RANDOM-1  m=64: C_LOO 0.00385 (m0 0.00469) fam-NMSE 0.0020
+world 2 RANDOM-2  m=16: C_LOO 0.00414 (m0 0.00485) fam-NMSE 0.0033
+world 2 RANDOM-2  m=64: C_LOO 0.00407 (m0 0.00485) fam-NMSE 0.0021
+world 2 SHAM      m=16: C_LOO 0.00228 (m0 0.00274) fam-NMSE 0.0023
+world 2 SHAM      m=64: C_LOO 0.00220 (m0 0.00274) fam-NMSE 0.0017
+m=16: margins vs best wrong [0.008, -0.029, 0.016] vs SHAM [-0.445, -0.58, -0.394] SEPARATION=False
+m=64: margins vs best wrong [0.023, -0.003, 0.003] vs SHAM [-0.431, -0.572, -0.404] SEPARATION=False
+recovery {"0": {"m16": -0.09, "m64": -0.07}, "1": {"m16": 0.01, "m64": 0.09}, "2": {"m16": 0.09, "m64": 0.07}}
+m* = None; OUTCOME UNDERDETERMINED

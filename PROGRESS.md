@@ -3182,3 +3182,17 @@ Review 71 was already filed, indexed, and frozen into the H50 plan
 the claim's other half; recovery fraction as the mechanism axis; collect
 J_sleep cost ingredients ahead of need; reused baselines inherit their
 seeds. H50 is still running.
+
+# 2026-08-24 — H50 SCORED: UNDERDETERMINED; MIGRATION RECOVERS ~0% OF THE SEPARATION
+
+All migrations and re-fits completed and validated. TRUE-vs-best-wrong
+C_LOO margins at noise at both budgets; SHAM better than every partition
+by 0.39-0.58 log units; recovery fractions -0.09 to +0.09; migrated-TRUE
+substitutability elevated but not discriminating; sibling diagnostics
+show no recovered future advantage. Verdict UNDERDETERMINED per the
+frozen table. Recorded with instrument disclosures (matched optimizer
+resets; retirement lifted during migration), scorekeeping (both
+prediction sets wrong toward optimism; review 70's preserve-
+reorganizable-state fallback is the live branch), and the registered
+fork for the successor (retrain-and-select at full price, or a wake
+architecture that preserves reorganizable state). Learnings appended.
