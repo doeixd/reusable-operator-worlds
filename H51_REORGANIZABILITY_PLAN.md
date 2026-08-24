@@ -238,3 +238,33 @@ denominator" rule.
    initialization, so `R_2` starts as `R_0` and every later difference is the
    channel); and `dL/da` at `a = 0` is nonzero (norm 1.8e-5 on a random batch),
    so the zero-stationary-point trap does not apply.
+
+# Amendment 3 (2026-08-24, before any scoring): economy, baseline, and the LOO instrument
+
+1. **Primary budget `m = 64`; `m = 16` scored only if an arm separates at 64.**
+   H50 measured margins that are flat in `m` (TRUE-vs-best-wrong +0.008 /
+   -0.029 / +0.016 at 16 and +0.023 / -0.003 / +0.003 at 64), so the question
+   H51 asks is whether ANY representation separates at all, not where its
+   transition sits. This drops curve-refinement cells only; the LOO sample
+   stays at all 64 tasks in every cell (review 71's rule). `m = 4` is migrated
+   for the cost curve and never scored.
+2. **One common recovery baseline.** Recovery fraction is
+   `(margin(arm, m) - margin(R_0, m = 0)) / (margin(L_4) - margin(R_0, m = 0))`
+   for EVERY arm, using H49's measured `M_4` margins (0.059 / -0.034 / -0.043).
+   The denominator is then the same distance for all arms and the fractions are
+   comparable, which is the whole point of the testbed. Each arm's own `m = 0`
+   row is additionally measured and reported wherever it differs from `R_0`'s
+   (`R_1a` and `R_2`; `R_1b`'s coefficients start at zero, so its `m = 0` IS
+   `R_0`'s and H49's row is re-used).
+3. **The LOO instrument discards ALL task-local state, including an arm's
+   extra fast state.** `refit` now zeroes and re-fits `schema_alphas` (R_2) and
+   `trace_coefficients` (R_1b) alongside the route code and slot argument.
+   Without this an arm would be scored while retaining trained task-local state
+   the other arms had discarded — the opposite of the intended comparison.
+   Models carrying neither attribute (every H49/H50 artifact) are unaffected, so
+   H50's numbers remain reproducible by the same function.
+4. **`D*` is not comparable across representations** in this report: the H49
+   proxy prices the route code and slot argument only, and the arms differ in
+   their extra fast scalars (recorded per fit as `extra_fast_scalars`). `D*` was
+   already registered as never decisive; here it is descriptive within an arm
+   only.

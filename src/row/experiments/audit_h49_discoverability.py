@@ -97,12 +97,27 @@ def refit(base_model, task, position: int | None, label: str) -> dict:
     code, alpha = model.task_codes[tid], model.task_alphas[tid]
     code.requires_grad_(True)
     alpha.requires_grad_(True)
+    # H51: a representation may carry ADDITIONAL task-local fast state (R_2's
+    # innovation-component coordinate, R_1b's trace coefficients). "Discard the
+    # task's local state" must discard those too, and the re-fit must be
+    # allowed to recover them, or the arm would be scored with trained state the
+    # other arms do not have. Models without these attributes -- every H49/H50
+    # artifact -- are unaffected, so the instrument is unchanged there.
+    extras = []
+    for _attr in ("schema_alphas", "trace_coefficients"):
+        _store = getattr(model, _attr, None)
+        if _store is not None and tid in _store:
+            _p = _store[tid]
+            with torch.no_grad():
+                _p.zero_()
+            _p.requires_grad_(True)
+            extras.append(_p)
     x = torch.tensor(task.train_x, dtype=torch.float32)
     y = torch.tensor(task.train_y, dtype=torch.float32)
     ex = torch.tensor(task.eval_x, dtype=torch.float32)
     ey = torch.tensor(task.eval_y, dtype=torch.float32)
     initial_support = float(torch.mean((model(x, tid) - y) ** 2))
-    optimizer = torch.optim.Adam([code, alpha], lr=LR)
+    optimizer = torch.optim.Adam([code, alpha] + extras, lr=LR)
     finite = True
     for _ in range(STEPS):
         optimizer.zero_grad()
@@ -110,11 +125,12 @@ def refit(base_model, task, position: int | None, label: str) -> dict:
         if not bool(torch.isfinite(loss)):
             finite = False
             break
-        loss.backward(inputs=[code, alpha])
+        loss.backward(inputs=[code, alpha] + extras)
         optimizer.step()
     final_support = float(torch.mean((model(x, tid) - y) ** 2))
     value = nmse(model, tid, ex, ey)
     return {"task_id": tid, "position": position, "nmse": value,
+            "extra_fast_scalars": int(sum(p.numel() for p in extras)),
             "support_reduction": (initial_support - final_support) / initial_support if initial_support > 0 else 0.0,
             "alpha_norm": float(torch.linalg.norm(alpha.detach())),
             "description_nats": description_nats(code, alpha, position),

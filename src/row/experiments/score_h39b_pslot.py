@@ -80,18 +80,31 @@ def validate_pilot_cell(path: Path, expected: dict) -> dict:
             "pilot_record": record, "protocol": arm}
 
 
-def load_pslot(config, path: Path, record: dict) -> ParameterizedSlotLearner:
+def load_pslot(config, path: Path, record: dict, world_seed: int | None = None):
     settings = {"slot_args": record["slot_args"], "freeze_args": record["freeze_args"],
                 "freeze_matrices": record.get("freeze_matrices", False),
                 "pslot_count": record.get("pslot_count", 1)}
+    kind = record.get("model", "pslot")
     saved = learned_lifetime.PSLOT_SETTINGS
+    saved_f = learned_lifetime.PSLOT_FACTORIZED_SETTINGS
     learned_lifetime.PSLOT_SETTINGS = settings
+    if kind == "pslot_factorized":
+        # H51 arm R_2: the composed learner needs its component-basis knobs and
+        # the artifact's own world seed (the basis initialization stream).
+        learned_lifetime.PSLOT_FACTORIZED_SETTINGS = dict(
+            settings, schema_dim=record["schema_dim"], schema_count=record.get("schema_count", 1),
+            schema_seed=record.get("schema_seed", 51001),
+            schema_init_scale=record.get("schema_init_scale", 1e-2),
+            freeze_schema=record.get("freeze_schema", False))
     try:
         local = replace(config, shared_residual_model=replace(
             config.shared_residual_model, operator_slots=12))
-        model = _build_model(local, "pslot")
+        if world_seed is not None:
+            local = replace(local, world=replace(local.world, seed=int(world_seed)))
+        model = _build_model(local, kind)
     finally:
         learned_lifetime.PSLOT_SETTINGS = saved
+        learned_lifetime.PSLOT_FACTORIZED_SETTINGS = saved_f
     state = torch.load(path / "model.pt", weights_only=True)["model_state_dict"]
     count = sum(1 for k in state if k.startswith("abstractions."))
     for index in range(count):
