@@ -379,8 +379,8 @@ def balance_gates(name, world, base_dir) -> dict:
                 return d[k]
         return None
 
-    loss0, loss = get(r0, "gaussian_log_loss", "cumulative_gaussian_log_loss"), \
-        get(arm, "gaussian_log_loss", "cumulative_gaussian_log_loss")
+    key = "cumulative_prequential_gaussian_log_loss"
+    loss0, loss = get(r0, key), get(arm, key)
     shared0, shared = get(r0, "shared_parameter_count"), get(arm, "shared_parameter_count")
     task0, task = get(r0, "task_state_scalar_count"), get(arm, "task_state_scalar_count")
     rel = lambda a, b: None if (a is None or b is None or a == 0) else abs(b - a) / abs(a)
@@ -393,6 +393,9 @@ def balance_gates(name, world, base_dir) -> dict:
         "arm": {"loss": loss, "shared": shared, "task_state": task},
     }
     gates["G3_pass"] = ((gates["G3_shared_rel"] or 1.0) <= 0.20 and (gates["G3_total_rel"] or 1.0) <= 0.20)
+    if any(v is None for v in (loss0, loss, shared0, shared, task0, task)):
+        raise SystemExit(f"balance gate inputs missing for {name} world {world}: "
+                         "a gate that cannot read its input must not report a verdict")
     return gates
 
 

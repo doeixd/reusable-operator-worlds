@@ -290,3 +290,29 @@ than assumed: including the self-trace improved the re-fit by about 2%
 0.00585 versus 0.00597), equally in both arms. The effect was small and
 arm-neutral — this is a construct correction, not a rescue of a broken number.
 `R_1a` and `R_2` are untouched by it and continued running.
+
+# Amendment 5 (2026-08-24, R_2 re-launched): two instrument defects found by the standing pre-run audit
+
+Both found by re-reading the code while it ran, under the PI's standing rule
+that experiment code is double-checked before (and, here, during) any long run.
+Neither changes the design; both are recorded because a reader must know what
+was wrong and when it was fixed.
+
+1. **R_2's sibling diagnostic would have crashed the whole run.**
+   `factorized_fit` unpacked `begin_task` as a fixed three-tuple, while the
+   composed learner returns its slot argument AND its innovation-component
+   coordinate. The failure lands at the END of a world's loop, after all of
+   that world's expensive scoring, and the scorer fails closed — so the entire
+   R_2 report would have been lost. Verified by direct reproduction
+   (`AttributeError: 'list' object has no attribute 'detach'`) and fixed: every
+   task-local fast argument enters the fitted parameter set, which is the same
+   principle as Amendment 3. Single-argument learners are bitwise unaffected
+   (checked on the ordinary artifact). R_2 was restarted.
+2. **The balance-gate reader used key names the summaries do not have**, so it
+   would have written `G1_pass = false` for an arm that passes G1 with room to
+   spare. Fixed to the real key, and the function now REFUSES to report a gate
+   whose input it could not read rather than silently reporting failure — the
+   `check_invalid.py` lesson (a guard that parses nothing must fail, not pass)
+   applied to its mirror image. Verified against the artifacts: G1 relative
+   change 0.0019 / 0.0009 / 0.0014 (passes), G3-shared 0.289 / 0.152 / 0.159
+   (world 0 fails), G3-total 0.026 / 0.008 / 0.145 (passes).

@@ -152,6 +152,13 @@ def factorized_fit(base_model, task, support: int, mode: str, optimizer_name: st
     model = copy.deepcopy(base_model)
     probe_id = f"__h39pilot_{label}_{task.task_id}"
     code, eps, alpha = model.begin_task(probe_id)
+    # H51: a learner may expose SEVERAL task-local fast arguments (R_2's slot
+    # argument plus its innovation-component coordinate). They are all part of
+    # the fast interface an acquisition is allowed to use, so they all enter the
+    # fitted parameter set. Single-argument learners are unchanged.
+    extra_fast = []
+    if isinstance(alpha, (list, tuple)):
+        alpha, *extra_fast = alpha
     for parameter in model.shared_parameters():
         parameter.requires_grad_(False)
     model.argument_matrices.requires_grad_(False)
@@ -159,9 +166,9 @@ def factorized_fit(base_model, task, support: int, mode: str, optimizer_name: st
         # Amendment 3: eps frozen at the shared 1e-3 initial state (no task
         # information), not zero -- zero is stationary and pins alpha.
         eps.requires_grad_(False)
-        params = [code, alpha]
+        params = [code, alpha] + extra_fast
     elif mode == "full":
-        params = [code, alpha, eps]
+        params = [code, alpha, eps] + extra_fast
     else:
         raise ValueError(mode)
     initial = torch.cat([p.detach().flatten() for p in params]).clone()
