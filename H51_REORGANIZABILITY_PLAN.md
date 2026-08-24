@@ -173,3 +173,46 @@ A learned proposer; the reviewer's H53 overcomplete provisional schemas; any
 change to the migration operator or the scoring instrument; the
 `gamma * C_restructure` objective as a trained term (it is a conceptual
 criterion here, measured, not optimized); sealed seeds.
+
+# Amendment 1 (2026-08-24, before any code): how R_1 is realized, and why it needs no lifetime
+
+Discovered while reading the existing artifacts, before implementation.
+
+1. **Provenance never enters prediction, so a provenance-preserving wake IS
+   R_0.** Review 72's H51 stores which computation came from which experience;
+   a trace that is never predicted from and never optimized during wake cannot
+   change the wake trajectory. The arm is therefore not a different lifetime —
+   it is R_0 plus retained evidence that the MIGRATION operator may use. R_1
+   requires no new run, and passes G1-G3 exactly (bitwise R_0).
+2. **The trace is not already available, and this was measured, not assumed.**
+   The frozen `M_4` artifacts already carry `history.pt`: each task's route
+   code, private `eps`, and effective residual snapshotted AT TASK COMPLETION,
+   before any sleep. Replay keeps training completed tasks afterwards, so those
+   snapshots differ substantially from the final stored state — mean relative
+   difference over the 72 recorded tasks, worlds 0/1/2: `eps` 0.91 / 1.03 /
+   1.00, route code 0.49 / 0.61 / 0.49. H50's migration saw only the final
+   state. (Had this come out ~0, R_1 would have been vacuous and is recorded
+   here as the check that decided it.)
+3. **Two R_1 variants, both scored.**
+   - `R_1a` **trace initialization**: H50's migration verbatim, except each
+     family task's route code and `eps` are initialized from its completion
+     trace before masking. Trainable-variable count identical to `R_0` — G4
+     holds exactly, with no companion needed.
+   - `R_1b` **trace recombination** (the reviewer's "sleep can recombine these
+     traces"): during migration a task's residual is
+     `sum_j c_j trace_j + eps`, over the traces of the tasks CO-ASSIGNED to its
+     slot under the candidate partition, with `c` learned at the task learning
+     rate. The wrong/random partitions supply the G4 control by construction:
+     they give each task the same number of coefficients over a differently
+     chosen trace set, so a `TRUE` advantage cannot be a coefficient-count
+     advantage. `SHAM` recombines over all family tasks' traces (same
+     coefficient count as the largest partition cell, no structure).
+4. `R_2` is unchanged and still needs the composed learner and three
+   lifetimes.
+5. Registered prediction for the new split: `R_1a` moves nothing (recovery
+   within 0.1 of `R_0`); `R_1b` improves the recovery fraction but does not
+   reach SEPARATION, because the traces are exactly the EXTENSIONAL population
+   that H39's Stage-A audits already found infertile (post-hoc extraction from
+   the ordinary learner's realized population cost 2.59x online acquisition).
+   If `R_1b` DOES separate, the H39 conclusion needs revisiting, and that —
+   not the separation — is the headline.
