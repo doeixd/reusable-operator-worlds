@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
 import json
 import os
 import subprocess
@@ -38,6 +39,8 @@ import torch
 from torch import Tensor, nn
 
 from row.config import load_config
+from row.experiments.audit_h49_discoverability import LR as H49_LR
+from row.experiments.audit_h49_discoverability import STEPS as H49_STEPS
 from row.experiments.audit_h49_discoverability import refit
 from row.experiments.audit_h50_reorganization import (
     ARMS, H49_KEY, MARGIN, SUBST_MARGIN, WORLDS, assignments, drift, family_nmse,
@@ -60,6 +63,45 @@ BASE_R2 = dict(BASE_PSLOT, model="pslot_factorized", schema_dim=4, schema_count=
 # from (the point ordinary wake leaves the learner at).
 R0_BASE_MARGIN = {0: 0.059, 1: -0.034, 2: -0.043}
 TRACE_BASIS = 31   # cell size 32 minus the task itself (Amendment 4)
+CACHE = Path("reports/h51_cache")
+
+
+def protocol_fingerprint() -> str:
+    """Everything a cached cell's value depends on, besides its own key.
+
+    A resumed run must refuse a cell computed under a different protocol; this
+    is the sweep-driver rule (`refuse a non-empty mismatched target`) applied to
+    a scorer's cache. Migration is re-run on every launch -- it is cheap and
+    deterministic in the shared data seed -- so only SCORED quantities are
+    cached.
+    """
+
+    payload = {"budgets": list(BUDGETS), "primary": PRIMARY, "trace_basis": TRACE_BASIS,
+               "base_pslot": BASE_PSLOT, "base_r2": BASE_R2,
+               "refit_steps": H49_STEPS, "refit_lr": H49_LR,
+               "migration": {"task_lr": 0.05, "residual_lr": 0.01, "uk_lr": 0.003,
+                             "batch": 8, "data_seed": [50, "world", 11]}}
+    return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:16]
+
+
+def cached(key: str, compute):
+    """Return a scored cell, computing it only if no matching cache entry exists."""
+    CACHE.mkdir(parents=True, exist_ok=True)
+    path = CACHE / f"{key}.json"
+    fingerprint = protocol_fingerprint()
+    if path.exists():
+        stored = json.loads(path.read_text(encoding="utf-8"))
+        if stored.get("protocol") != fingerprint:
+            raise SystemExit(f"cached cell {key} was computed under protocol "
+                             f"{stored.get('protocol')}, not {fingerprint}; "
+                             "delete reports/h51_cache to rescore")
+        print(f"[cache] {key}", flush=True)
+        return stored["value"]
+    value = compute()
+    tmp = path.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps({"protocol": fingerprint, "value": value}), encoding="utf-8")
+    os.replace(tmp, path)
+    return value
 
 
 class TraceRecombiningLearner(ParameterizedSlotLearner):
@@ -234,10 +276,14 @@ def run_representation(name, world, config, spec, generated, base_dir, h49, budg
             row["m0"] = {"C_LOO": m0_rows[H49_KEY[arm]]["C_LOO"],
                          "D_star_nats": m0_rows[H49_KEY[arm]]["D_star_nats"], "source": "h49"}
         else:
-            s0 = score_loo(reference, family_tasks, cands[arm], f"h51_{name}_{arm}_w{world}_m0")
+            s0 = cached(f"{name}_w{world}_{arm}_m0",
+                        lambda: score_loo(reference, family_tasks, cands[arm],
+                                          f"h51_{name}_{arm}_w{world}_m0"))
             row["m0"] = {"C_LOO": s0["C_LOO"], "D_star_nats": s0["D_star_nats"], "source": "measured"}
         for m in budgets_scored:
-            s = score_loo(snapshots[m], family_tasks, cands[arm], f"h51_{name}_{arm}_w{world}_m{m}")
+            s = cached(f"{name}_w{world}_{arm}_m{m}",
+                       lambda m=m: score_loo(snapshots[m], family_tasks, cands[arm],
+                                             f"h51_{name}_{arm}_w{world}_m{m}"))
             row[f"m{m}"] = {"C_LOO": s["C_LOO"], "D_star_nats": s["D_star_nats"]}
             row[f"m{m}_fits"] = s["fits"]
             print(f"[{name}] world {world} {arm:9s} m={m:2d}: C_LOO {s['C_LOO']:.5f} "
@@ -250,20 +296,25 @@ def run_representation(name, world, config, spec, generated, base_dir, h49, budg
         best_wrong = min(wrongs, key=wrongs.get)
         for arm in ("TRUE", best_wrong):
             comp = {t: (1 - p if p is not None else None) for t, p in cands[arm].items()}
-            other = [refit(arms_out[arm]["snapshots"][m], t, comp[t.task_id], f"h51sub_{name}_{arm}_w{world}_m{m}")
-                     for t in family_tasks]
             own = arms_out[arm][f"m{m}_fits"]
-            arms_out[arm][f"m{m}"]["S_subst"] = float(np.mean(
-                [np.log(o["nmse"]) - np.log(w["nmse"]) for o, w in zip(other, own)]))
+            arms_out[arm][f"m{m}"]["S_subst"] = cached(
+                f"{name}_w{world}_{arm}_m{m}_subst",
+                lambda arm=arm, m=m, own=own: float(np.mean(
+                    [np.log(refit(arms_out[arm]["snapshots"][m], t, comp[t.task_id],
+                                  f"h51sub_{name}_{arm}_w{world}_m{m}")["nmse"]) - np.log(w["nmse"])
+                     for t, w in zip(family_tasks, own)])))
         arms_out["SHAM"][f"m{m}"]["S_subst"] = None
         arms_out[f"best_wrong_m{m}"] = best_wrong
     for arm in ("TRUE", arms_out[f"best_wrong_m{PRIMARY}"], "SHAM"):
-        vals = []
-        for index, task in enumerate(futures):
-            fit = factorized_fit(arms_out[arm]["snapshots"][PRIMARY], task, 128, "alpha_only", "adam",
-                                 0.01, 2000, f"h51sib_{name}_{arm}_w{world}_t{index}")
-            vals.append(fit["final_query_scaled"])
-        arms_out[arm][f"m{PRIMARY}"]["sibling_alpha_k128"] = float(np.mean(vals))
+        def _sibling(arm=arm):
+            vals = []
+            for index, task in enumerate(futures):
+                fit = factorized_fit(arms_out[arm]["snapshots"][PRIMARY], task, 128, "alpha_only",
+                                     "adam", 0.01, 2000, f"h51sib_{name}_{arm}_w{world}_t{index}")
+                vals.append(fit["final_query_scaled"])
+            return float(np.mean(vals))
+        arms_out[arm][f"m{PRIMARY}"]["sibling_alpha_k128"] = cached(
+            f"{name}_w{world}_{arm}_sibling", _sibling)
     for arm in ARMS:
         arms_out[arm].pop("snapshots", None)
         for m in budgets_scored:
