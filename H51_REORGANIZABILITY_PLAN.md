@@ -216,3 +216,25 @@ Discovered while reading the existing artifacts, before implementation.
    the ordinary learner's realized population cost 2.59x online acquisition).
    If `R_1b` DOES separate, the H39 conclusion needs revisiting, and that —
    not the separation — is the headline.
+
+# Amendment 2 (2026-08-24, before any run): G3's denominator, and R_2's component count
+
+Fixing an ambiguity in G3 BEFORE the arm is run, per the "state the
+denominator" rule.
+
+1. **G3 is read on BOTH denominators** and must pass both: shared (slow)
+   trainable scalars, and total trainable scalars (shared plus retained task
+   state over the 73 recorded tasks). Reporting only the total would let a
+   large shared component hide behind the task-state mass.
+2. **`R_2` uses `schema_dim = 4`.** Measured on the real architecture
+   (`slots = 12`, `rank = 8`, `residual_rank = 2`, `slot_args = 4`,
+   `pslot_count = 2`): shared 4,204 -> 4,996 (+18.8%), total 21,870 -> 22,954
+   (+5.0%). `schema_dim = 8` was the first choice and is rejected here because
+   it fails the shared reading (+37.7%). The component count is a capacity knob
+   and is registered at 4 before any lifetime runs.
+3. **Equivalence and non-vacuity, both verified on the real classes**:
+   `freeze_schema=True` reproduces the `pslot` forward output bitwise; the free
+   learner also matches bitwise at `a = 0` (the component is exactly zero at
+   initialization, so `R_2` starts as `R_0` and every later difference is the
+   channel); and `dL/da` at `a = 0` is nonzero (norm 1.8e-5 on a random batch),
+   so the zero-stationary-point trap does not apply.

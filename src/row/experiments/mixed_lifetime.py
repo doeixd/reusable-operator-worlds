@@ -32,13 +32,13 @@ from row.mixed_world import (
 def _pilot_record(args) -> dict[str, object] | None:
     """Complete H39 pilot intervention record; None when not a pilot cell."""
 
-    if args.model not in {"factorized", "pslot"} and not args.snapshot_history:
+    if args.model not in {"factorized", "pslot", "pslot_factorized"} and not args.snapshot_history:
         return None
     record: dict[str, object] = {"model": args.model,
                                  "snapshot_history": bool(args.snapshot_history)}
     if getattr(args, "schema_groups", 1) != 1:
         record["schema_groups"] = args.schema_groups
-    if args.model == "pslot":
+    if args.model in {"pslot", "pslot_factorized"}:
         record.update({"slot_args": args.slot_args, "freeze_args": bool(args.freeze_args),
                        "freeze_matrices": bool(args.freeze_matrices), "pslot_index": 11})
         if args.pslot_count != 1:
@@ -48,6 +48,14 @@ def _pilot_record(args) -> dict[str, object] | None:
             if args.route_policy == "anneal":
                 record["route_policy"].update({"start": args.anneal_start, "commit": args.anneal_commit,
                                                "final": args.anneal_final})
+    if args.model == "pslot_factorized":
+        record.update({
+            "schema_dim": args.schema_dim,
+            "schema_count": 1,
+            "schema_seed": args.schema_seed,
+            "schema_init_scale": args.schema_init_scale,
+            "freeze_schema": bool(args.freeze_schema),
+        })
     if args.model == "factorized":
         record.update({
             "schema_dim": args.schema_dim,
@@ -76,6 +84,7 @@ def main() -> None:
             "prospective",
             "factorized",
             "pslot",
+            "pslot_factorized",
         ),
         required=True,
     )
@@ -308,11 +317,12 @@ def main() -> None:
             "prospective": config.shared_residual_model,
             "factorized": config.shared_residual_model,
             "pslot": config.shared_residual_model,
+            "pslot_factorized": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, updates_per_example=args.updates_per_example)
         field = (
             "shared_residual_model"
-            if args.model in {"promoting", "lifecycle", "prospective", "factorized", "pslot"}
+            if args.model in {"promoting", "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})
@@ -330,11 +340,12 @@ def main() -> None:
             "prospective": config.shared_residual_model,
             "factorized": config.shared_residual_model,
             "pslot": config.shared_residual_model,
+            "pslot_factorized": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, operator_slots=args.operator_slots)
         field = (
             "shared_residual_model"
-            if args.model in {"promoting", "lifecycle", "prospective", "factorized", "pslot"}
+            if args.model in {"promoting", "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})
@@ -537,13 +548,32 @@ def main() -> None:
                     return {"temperature": final}
                 frac = (lifetime_index - start) / max(commit - start, 1)
                 return {"temperature": 1.0 + frac * (final - 1.0)}
-    if args.model == "pslot":
+    if args.model in {"pslot", "pslot_factorized"}:
         if meta_spec is None or args.arm != "ordinary":
             raise SystemExit("pslot requires --r-meta and --arm ordinary")
         learned_lifetime.PSLOT_SETTINGS = {"slot_args": args.slot_args,
                                            "freeze_args": args.freeze_args,
                                            "freeze_matrices": args.freeze_matrices,
                                            "pslot_count": args.pslot_count}
+    if args.model == "pslot_factorized":
+        # H51 arm R_2: the parameterized slots plus a POOLED, separately
+        # addressable innovation-component basis. `schema_count` is 1 and no
+        # group label ever reaches the learner.
+        if meta_spec is None or args.arm != "ordinary":
+            raise SystemExit("pslot_factorized requires --r-meta and --arm ordinary")
+        if args.schema_grouping != "pooled":
+            raise SystemExit("H51 R_2 is pooled: the arm may not receive a grouping")
+        learned_lifetime.PSLOT_FACTORIZED_SETTINGS = {
+            "slot_args": args.slot_args,
+            "freeze_args": args.freeze_args,
+            "freeze_matrices": args.freeze_matrices,
+            "pslot_count": args.pslot_count,
+            "schema_dim": args.schema_dim,
+            "schema_count": 1,
+            "schema_seed": args.schema_seed,
+            "schema_init_scale": args.schema_init_scale,
+            "freeze_schema": args.freeze_schema,
+        }
     if args.model == "factorized":
         if meta_spec is None:
             raise SystemExit("factorized requires --r-meta (the meta-recurrence world)")

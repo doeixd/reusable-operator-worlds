@@ -36,10 +36,24 @@ from row.models import (
 from row.models.prospective_models import ProspectiveLifecycleLearner
 from row.models.factorized_models import FactorizedLifecycleLearner
 from row.models.pslot_models import ParameterizedSlotLearner
+from row.models.pslot_factorized_models import PslotFactorizedLearner
 
 # H39b pilot knobs for kind="pslot"; set by the runner.
 PSLOT_SETTINGS: dict[str, object] = {"slot_args": 2, "freeze_args": False, "freeze_matrices": False, "pslot_count": 1}
+# H51 arm R_2 knobs for kind="pslot_factorized"; set by the runner.
+PSLOT_FACTORIZED_SETTINGS: dict[str, object] = {}
 ARGUMENT_LEARNERS = (FactorizedLifecycleLearner, ParameterizedSlotLearner)
+
+
+def _as_params(value):
+    """A learner's fast-argument slot may be one parameter or several.
+
+    `PslotFactorizedLearner` returns both the slot argument and the
+    innovation-component coordinate; both belong in the task learning-rate
+    group, so every caller passes the value through here.
+    """
+
+    return list(value) if isinstance(value, (list, tuple)) else [value]
 
 # H39 pilot: architecture knobs for kind="factorized". The runner sets
 # these before calling `run`; they are recorded in the artifact's
@@ -63,6 +77,7 @@ ModelKind = Literal[
     "prospective",
     "factorized",
     "pslot",
+    "pslot_factorized",
     "discrete",
     "mdl",
 ]
@@ -214,7 +229,7 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "note": "counts per-prediction operator generation; backward and optimizer operations excluded",
         }
     if kind in {"shared_residual", "variational", "gated", "promoting",
-                "lifecycle", "prospective", "factorized", "pslot"}:
+                "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized"}:
         selected = {
             "variational": config.variational_model,
             "gated": config.gated_model,
@@ -224,6 +239,7 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
         "prospective": config.shared_residual_model,
         "factorized": config.shared_residual_model,
         "pslot": config.shared_residual_model,
+        "pslot_factorized": config.shared_residual_model,
         }[kind]
         parent = selected.task_steps * selected.operator_slots * (
             d * selected.operator_rank + selected.operator_rank * d
@@ -284,7 +300,7 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             learnable_alpha=model_config.learnable_alpha,
             activation=model_config.operator_activation,
         )
-    if kind in {"promoting", "lifecycle", "prospective", "factorized", "pslot"}:
+    if kind in {"promoting", "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized"}:
         model_config = config.shared_residual_model
         # `prospective` is a strict superset of `lifecycle`: it adds the
         # V6 adaptation penalty and no parameters, so a prospective run
@@ -297,10 +313,13 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             "promoting": PromotingSharedResidualLearner,
             "factorized": FactorizedLifecycleLearner,
             "pslot": ParameterizedSlotLearner,
+            "pslot_factorized": PslotFactorizedLearner,
         }[kind]
         extra = {}
         if kind == "pslot":
             extra = dict(PSLOT_SETTINGS)
+        if kind == "pslot_factorized":
+            extra = dict(PSLOT_FACTORIZED_SETTINGS, world_seed=config.world.seed)
         if kind == "factorized":
             # H39 pilot knobs, set by the runner; world seed fixes the
             # schema initialization stream.
@@ -405,6 +424,7 @@ def _training_values(
         "prospective": config.shared_residual_model,
         "factorized": config.shared_residual_model,
         "pslot": config.shared_residual_model,
+        "pslot_factorized": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -539,7 +559,7 @@ def run(
                 }
             )
             optimizer.add_param_group(
-                {"params": [alpha_parameter], "lr": task_lr, "weight_decay": 0.0}
+                {"params": _as_params(alpha_parameter), "lr": task_lr, "weight_decay": 0.0}
             )
         elif isinstance(model, GatedInnovationLearner):
             route_parameter, residual_parameter, gate_parameter = task_parameter
@@ -1323,7 +1343,7 @@ def _adapt_novel_composition(
                     "params": [residual_parameter],
                     "lr": config.shared_residual_model.residual_learning_rate,
                 },
-                {"params": [alpha_parameter], "lr": task_lr},
+                {"params": _as_params(alpha_parameter), "lr": task_lr},
             ]
         )
     elif isinstance(model, SharedParentResidualLearner):
@@ -1502,6 +1522,7 @@ def resolved_learned_config(
         "prospective": config.shared_residual_model,
         "factorized": config.shared_residual_model,
         "pslot": config.shared_residual_model,
+        "pslot_factorized": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1545,6 +1566,7 @@ def _write_artifacts(
         "prospective": config.shared_residual_model,
         "factorized": config.shared_residual_model,
         "pslot": config.shared_residual_model,
+        "pslot_factorized": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1688,6 +1710,7 @@ def main() -> None:
         "prospective": config.shared_residual_model,
         "factorized": config.shared_residual_model,
         "pslot": config.shared_residual_model,
+        "pslot_factorized": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[args.model]
