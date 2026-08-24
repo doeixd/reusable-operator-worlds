@@ -268,3 +268,25 @@ denominator" rule.
    their extra fast scalars (recorded per fit as `extra_fast_scalars`). `D*` was
    already registered as never decisive; here it is descriptive within an arm
    only.
+
+# Amendment 4 (2026-08-24, R_1b re-launched before it produced a row): no self-trace
+
+Found by the standing double-check-before-a-long-run audit, with the R_1b
+process running and no scored row yet written; the process was stopped and
+restarted under this amendment.
+
+`R_1b` as first implemented put the task's OWN completion trace into its
+32-trace basis. The LOO instrument exists to DISCARD a task's local state and
+re-acquire it from its own support; a coefficient on its own trace lets the
+re-fit restore exactly what was discarded, which is the reconstruct-all-state
+error in reverse. Amended: a task's basis is the 31 OTHER tasks in its cell
+under the candidate (SHAM: 31 random others), so counts stay matched at 31
+across every arm and the question the arm asks is the intended one — do the
+traces of the tasks GROUPED WITH ME help me re-acquire?
+
+Measured before the change, so the size of the defect is on the record rather
+than assumed: including the self-trace improved the re-fit by about 2%
+(world 0, first tasks: TRUE 0.00567 with self versus 0.00578 without; WRONG-A
+0.00585 versus 0.00597), equally in both arms. The effect was small and
+arm-neutral — this is a construct correction, not a rescue of a broken number.
+`R_1a` and `R_2` are untouched by it and continued running.

@@ -59,7 +59,7 @@ BASE_R2 = dict(BASE_PSLOT, model="pslot_factorized", schema_dim=4, schema_count=
 # H49's M_4 m = 0 margins: the COMMON baseline every arm's recovery is measured
 # from (the point ordinary wake leaves the learner at).
 R0_BASE_MARGIN = {0: 0.059, 1: -0.034, 2: -0.043}
-TRACE_BASIS = 32
+TRACE_BASIS = 31   # cell size 32 minus the task itself (Amendment 4)
 
 
 class TraceRecombiningLearner(ParameterizedSlotLearner):
@@ -124,11 +124,16 @@ def build_r1b(base, traces, family_tasks, assignment, world: int):
     basis = {}
     for tid in ids:
         cell = assignment.get(tid)
-        if cell is None:                                   # SHAM: self + 31 random others
+        # Amendment 4: the task's OWN trace is excluded from its basis. The LOO
+        # instrument exists to discard a task's local state and re-acquire it;
+        # leaving a copy of that state reachable through a coefficient would let
+        # the re-fit restore what it just discarded. The question the arm asks is
+        # whether the traces of the tasks GROUPED WITH IT help.
+        if cell is None:                                   # SHAM: 31 random others
             others = [o for o in ids if o != tid]
-            chosen = [tid] + [others[i] for i in rng.permutation(len(others))[:TRACE_BASIS - 1]]
+            chosen = [others[i] for i in rng.permutation(len(others))[:TRACE_BASIS]]
         else:
-            chosen = [o for o in ids if assignment[o] == cell]
+            chosen = [o for o in ids if assignment[o] == cell and o != tid]
         if len(chosen) != TRACE_BASIS:
             raise SystemExit(f"R_1b: trace basis {len(chosen)} != {TRACE_BASIS} for {tid}")
         basis[tid] = torch.stack([traces["residuals"][o] for o in chosen], dim=1)

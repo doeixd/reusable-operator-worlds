@@ -2,3 +2,4 @@ prereg check OK: 20 frozen files unchanged; all STATUS-cited paths exist
 C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_h49_discoverability.py:119: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
 Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:823.)
   initial_support = float(torch.mean((model(x, tid) - y) ** 2))
+[R_1b] world 0 TRUE      m=64: C_LOO 0.00363 (m0 0.00560) fam-NMSE 0.0026
