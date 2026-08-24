@@ -3210,3 +3210,23 @@ the numbering mapping against the reviewer's own H51/H52/H53 labels. Not yet
 frozen; no code written. Noted in the plan that `R_2` needs new composition
 work: `FactorizedLifecycleLearner` and `ParameterizedSlotLearner` are separate
 kinds today and do not compose.
+
+# 2026-08-24 - H51 IMPLEMENTED AND LAUNCHED
+
+Plan frozen and re-frozen through Amendment 3 (`479bcd5`). Built the composed
+`pslot_factorized` learner (`src/row/models/pslot_factorized_models.py`) with
+its bitwise controls verified on the real classes; wired the new kind through
+`learned_lifetime.py` and `mixed_lifetime.py`; extended the H49 `refit`
+instrument to discard and re-fit an arm's extra task-local fast state (models
+without it are unaffected, so H50 stays reproducible); wrote
+`audit_h51_reorganizability.py` (arms R_1a trace-initialization, R_1b trace
+recombination, R_2 decomposable wake, against R_0 and the L_4 reference).
+184 tests pass. Three R_2 lifetimes ran in the bounded pool and completed
+(exit 0). Balance gates measured before scoring: G1 passes everywhere
+(present loss changes by only +0.09 to +0.19%), G3-total passes
+(+2.6 / +0.8 / +14.5%), G3-shared passes in worlds 1-2 (+15.2 / +15.9%) and
+FAILS in world 0 (+28.9%) because R_2 promoted three more abstractions there —
+so world 0's R_2 row is descriptive-only for the causal claim, per the frozen
+plan. The component channel is live: 48-55% of innovation norm sits in the
+shared addressable basis, all 73 tasks have nonzero coordinates. Scoring for
+all three representations is running.
