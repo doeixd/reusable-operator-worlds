@@ -5007,3 +5007,43 @@ directly — one full lifetime per candidate hypothesis is the price; or
 (b) change WAKE so that reorganizable state is preserved during
 formation (review 70's fallback), making future migrations cheaper —
 which is a new architecture question, not a new score.
+
+# H51 REGISTRATION (2026-08-24): THE REORGANIZABILITY TESTBED
+
+Review 72 (`reviews/reviewer-feedback-72.txt`) answers the H50 fork: branch
+(b), change wake so reorganizable state is preserved; retrain-and-select is
+kept only as an oracle ceiling because C_search ~ N x C_lifetime makes it
+unusable as a mechanism. Plan drafted at `H51_REORGANIZABILITY_PLAN.md`;
+nothing runs until it is frozen with its commit hash in
+`tools/check_prereg.py`.
+
+NUMBERING MAPPING (appended, never renumbered): review 72 labels its three
+successors H51 (provenance), H52 (decomposable innovation basis), and H53
+(overcomplete provisional schemas). Our ledger uses H51 for the TESTBED the
+same review recommends running first; the reviewer's H51 and H52 are its arms
+`R_1` and `R_2`. The reviewer's H53 keeps its label and is out of scope for
+this plan.
+
+New endpoint, registered: `C_restructure(R) = min m in the scored grid at which
+the H50 SEPARATION rule holds when the unchanged H50 migration operator is
+applied to representation R`. The independent variable is the WAKE
+representation; the migration operator and the H49 scoring instrument move by
+nothing. Arms: `R_0` ordinary (re-used M_4), `R_1` provenance-preserving,
+`R_2` decomposable-innovation, `R_3` oracle organized (re-used L_4, the
+positive control that separation is expressible at m = 0).
+
+Balance gates before any causal reading (the V5.1 confound rule and the
+matched-budget constitutional rule): present loss within 10%, retained D*
+within 20%, parameter budget within 20%, migration-variable count within 20%
+with the step count matched exactly and a frozen-extra-variable companion where
+an arm exposes more migration freedom. Failing arms are unscoreable for the
+causal claim, not weak.
+
+Registered predictions. Reviewer: `ordinary ~ provenance < decomposable <
+oracle`; preserving residual vectors alone will not suffice; highest prior on
+`R_2`. Ours: `R_1` moves nothing (H50 showed the retrospective OBJECTIVE, not
+missing evidence, is what fails to discriminate); `R_2` improves the recovery
+fraction but does not reach SEPARATION at m <= 64; modal outcome 2 (PARTIAL),
+second outcome 3 (FORMATION-TIME CONFIRMED). If `R_2` does separate, we predict
+a measurable present-performance cost near the G1 boundary, and that cost is
+the result, not the separation alone.

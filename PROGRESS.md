@@ -3196,3 +3196,17 @@ prediction sets wrong toward optimism; review 70's preserve-
 reorganizable-state fallback is the live branch), and the registered
 fork for the successor (retrain-and-select at full price, or a wake
 architecture that preserves reorganizable state). Learnings appended.
+
+# 2026-08-24 - REVIEW 72 FILED; H51 REORGANIZABILITY TESTBED DRAFTED
+
+Review 72 filed verbatim and indexed: branch (b) chosen (change wake to
+preserve reorganizable state), retrain-and-select demoted to an oracle ceiling,
+REORGANIZABILITY named as a representational property, and a synthetic testbed
+recommended before any full architecture change. Drafted
+`H51_REORGANIZABILITY_PLAN.md` (arms R_0/R_1/R_2/R_3, the unchanged H50
+migration instrument, C_restructure as the endpoint, four balance gates, three
+registered outcomes, both prediction sets). Registered in `PREDICTIONS.md` with
+the numbering mapping against the reviewer's own H51/H52/H53 labels. Not yet
+frozen; no code written. Noted in the plan that `R_2` needs new composition
+work: `FactorizedLifecycleLearner` and `ParameterizedSlotLearner` are separate
+kinds today and do not compose.

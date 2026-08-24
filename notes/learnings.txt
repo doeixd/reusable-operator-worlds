@@ -3826,3 +3826,45 @@ running pattern across H47-H50: every expectation that structure would
 be found, used, or retrofitted more easily than the economics require
 has failed, and every "the learner is being rational under its
 objective" reading has held. Trust the objective, not the ontology.
+
+
+
+================================================================================
+REVIEW 72: REORGANIZABILITY AS A REPRESENTATIONAL PROPERTY (2026-08-24)
+================================================================================
+
+REPRESENTATION FORMATION IS PATH-DEPENDENT. The whole V1-H50 arc reads as one
+statement: two learners can solve the same task stream to the same present cost
+and leave behind states with radically different FUTURE ABSTRACTION OPTIONS.
+V4-V5 (post-hoc structural edits fail economically), H29 (the finished
+representation's span does not contain the wanted structure), H39 (an argument
+channel present DURING formation makes fertile structure exist), H49 (the value
+of a structure is invisible until the representation is organized around it),
+H50 (once wake is finished, migrating into that organization is effectively
+impossible) are all the same fact seen from different sides.
+
+THE THIRD PROPERTY OF A GOOD REPRESENTATION. Present cheapness (L) and
+description (D*) are not the whole objective. Add REORGANIZABILITY:
+`Omega(R) = E_{h~H}[-C_migrate(R -> R_h)]` -- how many plausible structural
+revisions stay NEARBY. Conceptually `J = L_preq + lambda D* + mu C_search +
+gamma C_restructure`. A representation that reaches an excellent current
+solution by entangling everything may be strictly worse than an equal-loss one
+that stays editable. This is measurable before it is trainable: measure it.
+
+EDITABLE COMPUTATIONAL OBJECTS, NOT ONLY WEIGHT CHANGES. Program
+representations are cheap to rewrite -- given `C(B(A(x)))` one can consider
+`C(D(A(x)))` for free -- and dense weights are not. The reviewer's prediction,
+registered: merely REMEMBERING which experience produced which update
+(provenance) will not buy reorganizability; the updates themselves have to be
+represented in separately addressable pieces. If that holds, "executable +
+composable + REWRITEABLE" is the design target, and it is an argument for a
+program-like substrate that arrives BEFORE any explicit reasoning or synthesis
+rung.
+
+WHEN AN ORACLE IS A CEILING, NOT A BRANCH. Retrain-and-select answers "does
+some hypothesis h yield a better representation" (we already know it does, from
+L_4) at a price of one lifetime per candidate, `C_search ~ N x C_lifetime`.
+Keep it as the reference the recovery fraction is taken against; do not make it
+the research program. The question worth a program is the one about the
+learner's own economics: can it revise its structure without paying to be
+retrained?

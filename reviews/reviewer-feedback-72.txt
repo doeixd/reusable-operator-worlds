@@ -1,0 +1,261 @@
+I would choose **(b): change wake so it preserves cheaply reorganizable state**.
+
+H50 is telling us that the failure is not in the scoring rule anymore. It is upstream in the *state the learner leaves behind*.
+
+The core result is:
+
+    the representation produced by ordinary wake is not locally
+    transformable into the fertile organization
+
+At m=64, after 4,096 migration steps:
+
+* TRUE still does not beat plausible wrong partitions;
+* it recovers essentially 0% of L_4's separation;
+* future fertility does not recover;
+* and migration can manufacture superficial substitutability without creating the underlying useful organization.
+
+That last point is particularly important:
+
+    structural-looking diagnostics can be effects of the intervention
+    rather than evidence that the right structure was found
+
+So I agree this is the strongest negative in the H47-H50 line.
+
+## What H50 changes conceptually
+
+We had gradually moved toward:
+
+    WAKE -> PROPOSE -> REORGANIZE -> SCORE
+
+H50 says that is still missing something. The more accurate loop seems to require:
+
+    WAKE_reorganizable -> PROPOSE -> CHEAP REORGANIZE -> SCORE
+
+Ordinary wake commits too much representational history into a particular
+organization. Once that happens, the fertile alternative is not a nearby edit.
+It is basically another training trajectory. That explains why post-hoc refactor
+has kept failing throughout the project.
+
+## Why I would not choose retrain-and-select as the main branch
+
+Retrain-and-select is scientifically valid. It would establish:
+
+    exists h: training under h produces a better representation
+
+But we already know something very close to that from L_4. It doesn't solve the
+problem we ultimately care about:
+
+> How can one learner revise its own abstractions without paying for a new
+> lifetime for every candidate?
+
+If we have N candidate abstractions and each evaluation costs an entire lifetime:
+
+    C_search ~ N * C_lifetime
+
+then the abstraction mechanism is unusably expensive long before program
+synthesis becomes interesting. Retrain-and-select can remain an oracle
+ceiling/control -- "what would perfect structural foresight buy?" -- but I would
+not make it the next research program.
+
+# The new question is much better
+
+I would formulate the successor as:
+
+> **What state must wake preserve so that alternative abstractions remain
+> cheaply reachable later?**
+
+This is a very general question. And it leads to a new property:
+**reorganizability**, or perhaps **representational optionality**.
+
+A representation is not only good because L_current goes down, or because D*
+goes down. It may also be good because many plausible future reorganizations
+remain nearby. Something like:
+
+    Omega(R) = E_{h ~ H} [ -C_migrate(R -> R_h) ]
+
+Then we want wake to produce representations that perform well now while keeping
+C_migrate small for plausible structural edits. That is a genuinely new axis.
+
+# This fits the whole empirical history
+
+### V1-V3
+Reuse is valuable and abstractions can compress recurring computation.
+
+### V4-V5
+Post-hoc structural edits often fail economically.
+
+### H29
+Finished wake representations don't even contain much of the desired
+higher-order structure in their span.
+
+### V6/H37
+Naively pushing directly on future performance makes the representation worse.
+
+### H39
+If we architecturally preserve an argument channel **during formation**, fertile
+structure can exist.
+
+### H47-H48
+Discrete structure is only worth representing when continuous capacity becomes
+insufficient.
+
+### H49
+The value of that structure isn't visible until the representation is organized
+around it.
+
+### H50
+And once ordinary wake has finished, cheaply reorganizing into that organization
+is effectively impossible.
+
+So the emerging law is:
+
+    representation formation is path-dependent
+
+Not merely the final function. Two learners can solve essentially the same task
+stream yet leave behind states with radically different future abstraction
+options. That is hugely relevant to continual learning.
+
+# What I think the next architecture should preserve
+
+I would test three increasingly strong versions rather than inventing a giant
+new mechanism.
+
+## H51 -- Preserve task provenance
+
+Ordinary wake aggressively consolidates computations into shared state and
+retires task-local evidence. Perhaps sleep cannot reorganize because it no
+longer knows **which pieces of computation came from which experiences**.
+
+Maintain lightweight provenance: z_t = task contribution / innovation trace,
+without forcing a schema. At sleep, proposed partitions can recombine these
+traces.
+
+Prediction: C_migrate^provenance < C_migrate^ordinary.
+
+This is probably the cheapest hypothesis.
+
+## H52 -- Preserve a decomposable innovation basis
+
+Instead of allowing task information to immediately become arbitrary shared
+weight changes, represent wake updates as:
+
+    W_t = W_0 + sum_i a_i Delta_i
+
+or a low-rank/component basis. Crucially, the Delta_i remain separately
+addressable long enough for sleep to merge, split, reroute, parameterize. Then
+structural hypotheses operate on components rather than trying to
+reverse-engineer a dense result. This is much closer to: solve flexibly, but
+keep the solution factored enough to rewrite later. My prior is highest on some
+version of this.
+
+## H53 -- Explicit overcomplete provisional schemas
+
+During wake, don't immediately decide the final ontology. Maintain an
+overcomplete soft representation:
+
+    R(x) = sum_{k=1}^{K_max} g_k P_k(alpha_k) + epsilon
+
+But unlike the previous MoE-like setup, these aren't supposed to become final
+"experts." They are **provisional rewriteable components**. Sleep can then
+merge/split/retire them.
+
+Prediction: higher wake redundancy -> lower sleep migration cost, up to an
+optimum. Too much redundancy will be expensive, so there should be a tradeoff:
+
+    J = L_wake + lambda D* + gamma C_reorganize
+
+# I would start cheaper than all three
+
+Before changing full wake, construct a synthetic **reorganizability testbed**.
+
+Take your G=2, K=4 world and train several wake representations with
+progressively more preserved decomposition, while matching current performance.
+For example:
+
+    R_0 = ordinary dense/shared wake
+    R_1 = wake + retained task innovations
+    R_2 = wake + decomposable low-rank components
+    R_3 = oracle factorized L_4
+
+Then apply the exact same H50 migration procedure. Primary metric:
+
+    C_restructure = min m : TRUE beats best WRONG by registered margin
+
+And also: recovery fraction(m).
+
+Now we directly test: does preserving decomposition during wake make fertile
+counterfactuals locally reachable? That's the immediate causal hypothesis H50
+earned.
+
+# The critical control
+
+We must not simply give the reorganizable representation more effective
+capacity. So compare representations at matched current lifetime loss, retained
+D*, parameter budget, and training compute if possible. Then ask whether they
+differ specifically in C_restructure. If so:
+
+    reorganizability is a real representational property independent of
+    current task performance
+
+That would be a major result.
+
+# My prediction
+
+I would now predict something quite different from my pre-H50 expectations. I
+don't think a small architectural tweak that merely preserves more residual
+vectors will be enough. My guess is:
+
+    ordinary ~ provenance-only < explicitly decomposable wake < oracle organized wake
+
+in reorganizability. In other words, I suspect the system needs to represent
+*changes themselves* in a modular/rewriteable form, not merely remember where
+they came from. That points toward: **learning should produce editable
+computational objects rather than only weight changes.**
+
+# This feeds directly into program synthesis
+
+Program representations have a property dense neural representations lack: they
+are easy to rewrite. If I have f(x) = C(B(A(x))), I can cheaply consider
+C(D(A(x))) or M(x) = B(A(x)). The representation exposes editable structure.
+Dense weights don't.
+
+H50 may therefore be telling us why moving toward a program-like substrate is
+useful **even before explicit reasoning/program synthesis**. A good learned
+computational representation should be: executable + composable + **rewriteable**.
+We've talked a lot about the first two. H50 gives experimental motivation for the
+third.
+
+# This changes the grand objective again
+
+Previously: J = L_preq + lambda D* + mu C_search. I would now include
++ gamma C_restructure. Not literally as something we immediately train
+end-to-end, but as a conceptual criterion. A system that achieves an excellent
+current solution by entangling everything may be worse than one with equal
+performance that leaves its computation cheaply editable. So:
+
+    A good representation makes present computation cheap, future variation
+    identifiable, and structural revision affordable.
+
+## The path I would take now
+
+I would have a reviewer inspect H50, especially the matched migration procedure
+and the claim that full-formation is approximately required. Assuming it
+survives:
+
+1. Keep retrain-and-select as an oracle reference, not the main branch.
+2. Define a quantitative reorganizability endpoint.
+3. Build the cheapest wake intervention that preserves separately addressable
+   task innovations/components.
+4. Re-run the H50 TRUE-vs-WRONG migration test.
+5. Only if migration cost falls materially do we return to autonomous
+   propose->reorganize->score.
+6. Then eventually move that mechanism onto solved program traces.
+
+The project has moved from asking "can we discover reusable computations?" to a
+much deeper question:
+
+    Can a learner organize what it learns so that its own computational
+    structure remains cheaply revisable?
+
+That is not a detour from the program-synthesis goal. I think it may be one of
+the missing prerequisites for it.

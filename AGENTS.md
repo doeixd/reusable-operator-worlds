@@ -1228,3 +1228,23 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   reference so a yes/no separation becomes a mechanism claim (cheap
   counterfactual evaluation vs disguised retraining). Reused baseline
   rows inherit the original seeds (H50 Amendment 2).
+
+- REORGANIZABILITY (review 72, after H50): representation formation is
+  PATH-DEPENDENT -- equal present loss and equal D* can leave radically
+  different future abstraction options, which is the single statement
+  behind V4-V5's failed post-hoc edits, H29's missing span, H39's
+  formation-time argument channel, H49's representation-dependent value,
+  and H50's ~0% migration recovery. Treat
+  `Omega(R) = E_h[-C_migrate(R -> R_h)]` as a third property beside
+  present cost and description length (`J = L + lambda D* + mu C_search +
+  gamma C_restructure`), and MEASURE it before trying to optimize it:
+  the endpoint is `C_restructure(R)`, the migration budget at which the
+  true structure becomes distinguishable, with the migration operator and
+  the scorer held fixed so the wake representation is the only independent
+  variable. Any arm claiming better reorganizability must first pass
+  matched present loss, D*, parameter, and migration-variable gates --
+  reorganizability bought with capacity is not reorganizability. Keep
+  retrain-and-select as an oracle CEILING (`C_search ~ N x C_lifetime`),
+  never as the branch. Working target for the substrate: executable +
+  composable + REWRITEABLE -- learning should produce editable
+  computational objects, not only weight changes.

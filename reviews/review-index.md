@@ -2793,3 +2793,24 @@ loss) toward J_sleep = C_migrate + λD* + ηC_LOO. Predicts separation
 beginning at m = 16 with 25–50% recovery, clear at m = 64 with 50–80%;
 the exciting result is separation at modest budget with partial
 recovery. Freeze after these changes.
+
+
+### [reviewer-feedback-72.txt](reviewer-feedback-72.txt)
+On the H50 verdict. Chooses branch (b): change WAKE so it preserves cheaply
+reorganizable state; keeps retrain-and-select only as an oracle ceiling
+(C_search ~ N x C_lifetime makes it unusable as a mechanism). Reads H50 as
+"the representation ordinary wake produces is not locally transformable into
+the fertile organization", and names the emerging law REPRESENTATION FORMATION
+IS PATH-DEPENDENT. Proposes a new representational property, REORGANIZABILITY
+/ representational optionality, Omega(R) = E_h[-C_migrate(R -> R_h)], and a
+fourth objective term + gamma C_restructure. Three successors: H51 preserve
+task provenance, H52 preserve a decomposable innovation basis, H53 overcomplete
+provisional schemas. Advises starting cheaper with a synthetic REORGANIZABILITY
+TESTBED (R_0 ordinary / R_1 provenance / R_2 decomposable / R_3 oracle L_4)
+scored by the unchanged H50 migration instrument, with the critical control
+that arms are matched on present loss, D*, parameters, and compute so that any
+difference is specifically in C_restructure. Predicts
+ordinary ~ provenance < decomposable < oracle, and that merely retaining
+residual vectors will not be enough: learning should produce EDITABLE
+COMPUTATIONAL OBJECTS, not only weight changes -- which is also the argument
+for a program-like substrate (executable + composable + REWRITEABLE).
