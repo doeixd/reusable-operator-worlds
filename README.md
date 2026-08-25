@@ -65,17 +65,22 @@ and all five returned negatives that are themselves the result:
 
 Together these say representation formation is **path-dependent**: two
 learners can reach the same present cost and the same description length and
-leave behind states with very different future abstraction options.
+leave behind states with very different future abstraction options. Across
+H50, H51 and H53 a *structureless* control beat every structural hypothesis in
+every cell — when a sham keeps winning under the learner's own retrospective
+objective, it is the objective that fails to value structure, not the
+hypothesis set and not the search.
 
-**In progress — H53** (`H53_PARALLEL_FORMATION_PLAN.md`): can several
-candidate organizations develop *concurrently* in one lifetime, so the true
-one becomes distinguishable at less than one full lifetime per candidate? It
-measures a **shared-parameter co-formation frontier**, not amortization of
-computation in general — a deliberate limit, since every head contributes
-gradient to the parameters the true one develops through. Its two gating
-controls pass bitwise: at `H = 1` the multi-head learner reproduces the
-ordinary and the organized reference lifetimes tensor-for-tensor. No H53
-claim exists yet.
+- **H53** — six candidate organizations developed *concurrently* in one
+  lifetime, at two sharing depths, asked whether the true one becomes
+  distinguishable at less than one lifetime per candidate. **No**, at either
+  depth. What makes the negative informative is that it is *not* a collapse
+  story: the heads diverged to 10–44% of what independent development produces
+  and remain retrospectively indistinguishable anyway. Co-formation bought only
+  15–23% of training compute, and at the depth where state sharing does pay
+  (5.3×) the heads are structurally incapable of differing on an unseen task at
+  all. Licensed conclusion, deliberately narrow: the co-formation frontier, if
+  it exists, lies deeper than tested.
 
 **Next branch — export.** Everything confirmed so far is about ECONOMICS. It
 does not yet show that the learner acquired a computational *language*, and the

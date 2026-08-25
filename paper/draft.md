@@ -1144,6 +1144,20 @@ substitutability rose from ~0 to 0.24-0.66 regardless of which grouping
 was imposed — without the discrimination or the fertility. A metric that
 the intervention itself inflates cannot certify the intervention.
 
+One further attempt closed the line. If organization must be developmental,
+perhaps several candidate organizations can develop side by side and be
+selected between afterwards. Six were co-formed inside a single lifetime at two
+sharing depths, scored by the same instrument. Neither depth separated the true
+grouping from plausible wrong ones, and the failure was not that the candidates
+merged: measured with their externally supplied policies neutralised, they had
+diverged to 10-44% of the distance between independently trained
+representations, and remained indistinguishable anyway. The accounting was
+equally discouraging - concurrent formation cost 77-86% of six independent
+lifetimes in device-seconds, and at the one sharing depth where state was
+genuinely amortised (5.3x) a candidate's only private state was per-task, hence
+absent for an unseen task, so differential future value was impossible by
+construction rather than merely unobserved.
+
 The lesson this block adds to the earlier ones is the most consequential
 in the paper: the useful abstraction was not latent in the finished
 solutions waiting to be extracted; the learner had to maintain an
