@@ -37,11 +37,14 @@ from row.models.prospective_models import ProspectiveLifecycleLearner
 from row.models.factorized_models import FactorizedLifecycleLearner
 from row.models.pslot_models import ParameterizedSlotLearner
 from row.models.pslot_factorized_models import PslotFactorizedLearner
+from row.models.multihead_models import MultiHeadPslotLearner
 
 # H39b pilot knobs for kind="pslot"; set by the runner.
 PSLOT_SETTINGS: dict[str, object] = {"slot_args": 2, "freeze_args": False, "freeze_matrices": False, "pslot_count": 1}
 # H51 arm R_2 knobs for kind="pslot_factorized"; set by the runner.
 PSLOT_FACTORIZED_SETTINGS: dict[str, object] = {}
+# H53 knobs for kind="multihead"; set by the runner.
+MULTIHEAD_SETTINGS: dict[str, object] = {}
 ARGUMENT_LEARNERS = (FactorizedLifecycleLearner, ParameterizedSlotLearner)
 
 
@@ -78,6 +81,7 @@ ModelKind = Literal[
     "factorized",
     "pslot",
     "pslot_factorized",
+    "multihead",
     "discrete",
     "mdl",
 ]
@@ -229,7 +233,7 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
             "note": "counts per-prediction operator generation; backward and optimizer operations excluded",
         }
     if kind in {"shared_residual", "variational", "gated", "promoting",
-                "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized"}:
+                "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized", "multihead"}:
         selected = {
             "variational": config.variational_model,
             "gated": config.gated_model,
@@ -240,6 +244,7 @@ def _compute_accounting(config: ExperimentConfig, kind: ModelKind) -> dict[str, 
         "factorized": config.shared_residual_model,
         "pslot": config.shared_residual_model,
         "pslot_factorized": config.shared_residual_model,
+        "multihead": config.shared_residual_model,
         }[kind]
         parent = selected.task_steps * selected.operator_slots * (
             d * selected.operator_rank + selected.operator_rank * d
@@ -300,7 +305,7 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             learnable_alpha=model_config.learnable_alpha,
             activation=model_config.operator_activation,
         )
-    if kind in {"promoting", "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized"}:
+    if kind in {"promoting", "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized", "multihead"}:
         model_config = config.shared_residual_model
         # `prospective` is a strict superset of `lifecycle`: it adds the
         # V6 adaptation penalty and no parameters, so a prospective run
@@ -314,12 +319,15 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             "factorized": FactorizedLifecycleLearner,
             "pslot": ParameterizedSlotLearner,
             "pslot_factorized": PslotFactorizedLearner,
+            "multihead": MultiHeadPslotLearner,
         }[kind]
         extra = {}
         if kind == "pslot":
             extra = dict(PSLOT_SETTINGS)
         if kind == "pslot_factorized":
             extra = dict(PSLOT_FACTORIZED_SETTINGS, world_seed=config.world.seed)
+        if kind == "multihead":
+            extra = dict(MULTIHEAD_SETTINGS)
         if kind == "factorized":
             # H39 pilot knobs, set by the runner; world seed fixes the
             # schema initialization stream.
@@ -425,6 +433,7 @@ def _training_values(
         "factorized": config.shared_residual_model,
         "pslot": config.shared_residual_model,
         "pslot_factorized": config.shared_residual_model,
+        "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -467,6 +476,7 @@ def run(
     schema_index_hook=None,
     snapshot_history: bool = False,
     route_policy_hook=None,
+    head_policy_hook=None,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -533,7 +543,15 @@ def run(
                     if slot_index < freeze_slots:
                         for parameter in operator.parameters():
                             parameter.requires_grad_(False)
-        if route_policy_hook is not None and isinstance(model, ParameterizedSlotLearner):
+        if isinstance(model, MultiHeadPslotLearner) and head_policy_hook is not None:
+            # H53: every head is pinned by its OWN assignment before the task
+            # starts, so each candidate organization is live from the first
+            # example of every task.
+            for name in model.head_names:
+                model.head_assignment[name][task.task_id] = head_policy_hook(
+                    name, world_task_index)
+            model.apply_head_policies(task.task_id)
+        elif route_policy_hook is not None and isinstance(model, ParameterizedSlotLearner):
             policy = route_policy_hook(lifetime_index, world_task_index)
             if "temperature" in policy:
                 model.set_route_temperature(policy["temperature"])
@@ -561,6 +579,12 @@ def run(
             optimizer.add_param_group(
                 {"params": _as_params(alpha_parameter), "lr": task_lr, "weight_decay": 0.0}
             )
+            if isinstance(model, MultiHeadPslotLearner):
+                for group in model.extra_task_param_groups(
+                    task.task_id, task_lr,
+                    config.shared_residual_model.residual_learning_rate,
+                ):
+                    optimizer.add_param_group(group)
         elif isinstance(model, GatedInnovationLearner):
             route_parameter, residual_parameter, gate_parameter = task_parameter
             gated_config = config.gated_model
@@ -633,6 +657,21 @@ def run(
             online_nll = gaussian_nll(
                 online_prediction, task.train_y[n_seen : n_seen + 1], config.evaluation.gaussian_sigma
             )
+            if isinstance(model, MultiHeadPslotLearner) and model.head_count > 1:
+                # Score-before-update, per head: each candidate organization is
+                # charged for its own prediction on the same arriving example.
+                with torch.no_grad():
+                    for name, value in model.head_predictions(x, task.task_id).items():
+                        rows.append({
+                            "record_type": "head_prequential",
+                            "task_index": lifetime_index,
+                            "world_task_index": world_task_index,
+                            "task_id": task.task_id,
+                            "n_seen": n_seen,
+                            "head": name,
+                            "nll": gaussian_nll(value, task.train_y[n_seen : n_seen + 1],
+                                                config.evaluation.gaussian_sigma),
+                        })
             cumulative_nll += online_nll
             online_mass_log_loss = online_nll - config.world.state_dim * np.log(
                 config.evaluation.target_precision
@@ -709,8 +748,12 @@ def run(
                     model.set_training_progress(progress)
                 model.train()
                 optimizer.zero_grad(set_to_none=True)
-                prediction = model.forward_tasks(_tensor(np.stack(batch_x)), task_ids)
-                loss = torch.nn.functional.mse_loss(prediction, _tensor(np.stack(batch_y)))
+                if isinstance(model, MultiHeadPslotLearner):
+                    loss = model.multihead_loss(
+                        _tensor(np.stack(batch_x)), _tensor(np.stack(batch_y)), task_ids)
+                else:
+                    prediction = model.forward_tasks(_tensor(np.stack(batch_x)), task_ids)
+                    loss = torch.nn.functional.mse_loss(prediction, _tensor(np.stack(batch_y)))
                 if isinstance(model, VariationalSharedResidualLearner):
                     # Description length in the wake gradient (V3 spec 3.1):
                     # KL(q || p), scaled by beta. The L1 surrogate is not
@@ -752,6 +795,8 @@ def run(
                         * model.route_entropy_penalty(task_ids)
                     )
                 loss.backward()
+                if isinstance(model, MultiHeadPslotLearner):
+                    model.finalize_gradients()
                 optimizer.step()
 
         summary_row: dict[str, object] = {
@@ -1523,6 +1568,7 @@ def resolved_learned_config(
         "factorized": config.shared_residual_model,
         "pslot": config.shared_residual_model,
         "pslot_factorized": config.shared_residual_model,
+        "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1567,6 +1613,7 @@ def _write_artifacts(
         "factorized": config.shared_residual_model,
         "pslot": config.shared_residual_model,
         "pslot_factorized": config.shared_residual_model,
+        "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
@@ -1711,6 +1758,7 @@ def main() -> None:
         "factorized": config.shared_residual_model,
         "pslot": config.shared_residual_model,
         "pslot_factorized": config.shared_residual_model,
+        "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[args.model]

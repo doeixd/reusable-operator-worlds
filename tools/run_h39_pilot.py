@@ -83,6 +83,14 @@ for _w in (0, 1, 2):
     SWEEP[f"h51_r2/world_{_w}"] = (_w, ["--model", "pslot_factorized", "--slot-args", "4",
                                         "--pslot-count", "2", "--snapshot-history",
                                         "--schema-groups", "2", "--schema-dim", "4"])
+# H53 (H53_PARALLEL_FORMATION_PLAN.md Amendment 1): six candidate organizations
+# co-formed in one lifetime, at the two bracketing sharing levels.
+for _w in (0, 1, 2):
+    for _lvl in ("L1", "L3"):
+        SWEEP[f"h53_{_lvl.lower()}/world_{_w}"] = (_w, [
+            "--model", "multihead", "--slot-args", "4", "--pslot-count", "2",
+            "--snapshot-history", "--schema-groups", "2", "--sharing-level", _lvl,
+            "--heads", "SHAM", "TRUE", "WRONG-A", "WRONG-B", "RANDOM-1", "RANDOM-2"])
 REQUIRED = ("model.pt", "summary.json", "rho_profile.json", "fingerprint.json",
             "config.yaml", "history.pt")
 
@@ -90,7 +98,7 @@ REQUIRED = ("model.pt", "summary.json", "rho_profile.json", "fingerprint.json",
 def run(name: str) -> tuple[str, int]:
     if name in SWEEP:
         world, extra = SWEEP[name]
-        root = "h51" if name.startswith("h51_") else "h39c"
+        root = "h51" if name.startswith("h51_") else ("h53" if name.startswith("h53_") else "h39c")
         out = ROOT / "artifacts" / root / name / "lifecycle"
         common = list(COMMON)
         common[common.index("--world-seed") + 1] = str(world)
@@ -123,6 +131,8 @@ def main() -> int:
         names = [n for n in SWEEP if n.startswith("b2_m/") or n.startswith("b2_ltrue/")]
     elif names == ["width"]:
         names = [n for n in SWEEP if n.startswith("w_")]
+    elif names == ["h53"]:
+        names = [n for n in SWEEP if n.startswith("h53_")]
     elif names == ["h51"]:
         names = [n for n in SWEEP if n.startswith("h51_")]
     elif names == ["b2h"]:

@@ -32,13 +32,13 @@ from row.mixed_world import (
 def _pilot_record(args) -> dict[str, object] | None:
     """Complete H39 pilot intervention record; None when not a pilot cell."""
 
-    if args.model not in {"factorized", "pslot", "pslot_factorized"} and not args.snapshot_history:
+    if args.model not in {"factorized", "pslot", "pslot_factorized", "multihead"} and not args.snapshot_history:
         return None
     record: dict[str, object] = {"model": args.model,
                                  "snapshot_history": bool(args.snapshot_history)}
     if getattr(args, "schema_groups", 1) != 1:
         record["schema_groups"] = args.schema_groups
-    if args.model in {"pslot", "pslot_factorized"}:
+    if args.model in {"pslot", "pslot_factorized", "multihead"}:
         record.update({"slot_args": args.slot_args, "freeze_args": bool(args.freeze_args),
                        "freeze_matrices": bool(args.freeze_matrices), "pslot_index": 11})
         if args.pslot_count != 1:
@@ -48,6 +48,13 @@ def _pilot_record(args) -> dict[str, object] | None:
             if args.route_policy == "anneal":
                 record["route_policy"].update({"start": args.anneal_start, "commit": args.anneal_commit,
                                                "final": args.anneal_final})
+    if args.model == "multihead":
+        record.update({
+            "heads": list(args.heads),
+            "sharing_level": args.sharing_level,
+            "slot_args": args.slot_args,
+            "pslot_count": args.pslot_count,
+        })
     if args.model == "pslot_factorized":
         record.update({
             "schema_dim": args.schema_dim,
@@ -85,6 +92,7 @@ def main() -> None:
             "factorized",
             "pslot",
             "pslot_factorized",
+            "multihead",
         ),
         required=True,
     )
@@ -261,6 +269,11 @@ def main() -> None:
     parser.add_argument("--anneal-start", type=int, default=8)
     parser.add_argument("--anneal-commit", type=int, default=24)
     parser.add_argument("--anneal-final", type=float, default=0.1)
+    parser.add_argument("--heads", nargs="+",
+                        default=["SHAM", "TRUE", "WRONG-A", "WRONG-B", "RANDOM-1", "RANDOM-2"],
+                        help="H53 candidate organizations; head 0 is primary")
+    parser.add_argument("--sharing-level", choices=["L1", "L2", "L3"], default="L1",
+                        help="H53: which tensors branch per head")
     parser.add_argument("--snapshot-history", action="store_true",
                         help="record every task's residual at completion (read-only)")
     parser.add_argument(
@@ -318,11 +331,12 @@ def main() -> None:
             "factorized": config.shared_residual_model,
             "pslot": config.shared_residual_model,
             "pslot_factorized": config.shared_residual_model,
+            "multihead": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, updates_per_example=args.updates_per_example)
         field = (
             "shared_residual_model"
-            if args.model in {"promoting", "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized"}
+            if args.model in {"promoting", "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized", "multihead"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})
@@ -341,11 +355,12 @@ def main() -> None:
             "factorized": config.shared_residual_model,
             "pslot": config.shared_residual_model,
             "pslot_factorized": config.shared_residual_model,
+            "multihead": config.shared_residual_model,
         }[args.model]
         selected = replace(selected, operator_slots=args.operator_slots)
         field = (
             "shared_residual_model"
-            if args.model in {"promoting", "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized"}
+            if args.model in {"promoting", "lifecycle", "prospective", "factorized", "pslot", "pslot_factorized", "multihead"}
             else f"{args.model}_model"
         )
         config = replace(config, **{field: selected})
@@ -527,6 +542,58 @@ def main() -> None:
 
     schema_index_hook = None
     route_policy_hook = None
+    head_policy_hook = None
+    if args.model == "multihead":
+        # H53: the candidate organizations, identical to H49-H51's and with
+        # H49's random seeds, made live during formation. Head 0 is primary:
+        # its predictions are the lifetime's recorded metrics and its residuals
+        # drive PROMOTE, so `--heads SHAM` reproduces M_4 and `--heads TRUE`
+        # reproduces L_4 (the plan's two equivalence controls).
+        if meta_spec is None or args.arm != "ordinary":
+            raise SystemExit("multihead requires --r-meta and --arm ordinary")
+        if args.pslot_count < 2:
+            raise SystemExit("multihead requires --pslot-count 2")
+        names = tuple(args.heads)
+        pairings = {"TRUE": None, "WRONG-A": ((0, 2), (1, 3)), "WRONG-B": ((0, 3), (1, 2))}
+        unknown = [n for n in names if n not in set(pairings) | {"SHAM", "RANDOM-1", "RANDOM-2"}]
+        if unknown:
+            raise SystemExit(f"unknown head(s): {unknown}")
+        family_count = meta_spec.families
+        tasks_per_family = meta_spec.tasks_per_family
+        random_assignment = {}
+        for r in (1, 2):
+            name = f"RANDOM-{r}"
+            if name not in names:
+                continue
+            # H49's partitions: balanced at task level, seeds [49, world, r].
+            rng = np.random.default_rng(np.random.SeedSequence([49, args.world_seed, r]))
+            indices = [i for i in range(meta_spec.total_tasks)
+                       if meta_spec.family_of(i) is not None]
+            perm = rng.permutation(len(indices))
+            random_assignment[name] = {
+                indices[i]: (0 if rank < len(indices) // 2 else 1)
+                for rank, i in enumerate(perm)
+            }
+
+        def head_policy_hook(head_name: str, world_task_index: int):
+            family = meta_spec.family_of(world_task_index)
+            if family is None or head_name == "SHAM":
+                return None
+            if head_name == "TRUE":
+                return meta_spec.group_of_family(family)
+            if head_name in random_assignment:
+                return random_assignment[head_name].get(world_task_index)
+            first, _ = pairings[head_name]
+            return 0 if family in first else 1
+
+        learned_lifetime.MULTIHEAD_SETTINGS = {
+            "slot_args": args.slot_args,
+            "freeze_args": args.freeze_args,
+            "freeze_matrices": args.freeze_matrices,
+            "pslot_count": args.pslot_count,
+            "head_names": names,
+            "sharing_level": args.sharing_level,
+        }
     if args.model == "pslot" and args.route_policy != "none":
         if args.pslot_count < 2:
             raise SystemExit("route policies require --pslot-count 2")
@@ -548,7 +615,7 @@ def main() -> None:
                     return {"temperature": final}
                 frac = (lifetime_index - start) / max(commit - start, 1)
                 return {"temperature": 1.0 + frac * (final - 1.0)}
-    if args.model in {"pslot", "pslot_factorized"}:
+    if args.model in {"pslot", "pslot_factorized", "multihead"}:
         if meta_spec is None or args.arm != "ordinary":
             raise SystemExit("pslot requires --r-meta and --arm ordinary")
         learned_lifetime.PSLOT_SETTINGS = {"slot_args": args.slot_args,
@@ -612,6 +679,7 @@ def main() -> None:
             schema_index_hook=schema_index_hook,
             snapshot_history=args.snapshot_history,
             route_policy_hook=route_policy_hook,
+            head_policy_hook=head_policy_hook,
         )
     finally:
         learned_lifetime.World = original_world  # type: ignore[assignment]
