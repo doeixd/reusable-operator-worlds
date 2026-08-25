@@ -3338,3 +3338,18 @@ reference-plus-residual configuration the lifetime never used) and that no claim
 rests on it beyond unused capacity. Review 75's prediction that residuals would
 be load-bearing is scored WRONG. Phase 0 remains: E4 correlation is contingent
 on E1, so Phase 0's audits are complete.
+
+# 2026-08-25 - H53 SCORED: OUTCOME D, FRONTIER DEEPER THAN L3
+
+All six co-formation lifetimes and all scoring complete; merged into
+`reports/h53_parallel_formation.json`. No SEPARATION at L1 or L3; depth effect
+reaches the registered +0.05 in only 1 of 3 worlds, so the machine-testable L2
+trigger is FALSE and L2 is not run. Heads did NOT collapse (neutralised
+divergence 10-44% of independent development, against a 5% threshold), every
+head learned, and `H = 1` reproduces M_4 and L_4 bitwise, so outcome D is
+readable. Licensed conclusion is only that the co-formation frontier lies deeper
+than L3. Cost: A_train 0.77-0.86, A_state 0.19 at L1 and 0.85 at L3 — and at L1
+the heads give identical sibling endpoints because their only private state does
+not exist for an unseen task, so differential fertility is impossible there by
+construction. All three prediction sets scored, ours wrong on both halves of C_2
+and right that SHAM would bind.

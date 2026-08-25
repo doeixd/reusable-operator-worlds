@@ -3975,3 +3975,38 @@ And the structural half of the answer costs nothing to obtain: two of the three
 substrates have no residual channel at all, so their task state IS the route.
 Read the state dict before designing an ablation for a channel that may not
 exist.
+
+
+
+================================================================================
+H53: CO-FORMED HYPOTHESES STAY DISTINCT AND STILL CANNOT BE TOLD APART (2026-08-25)
+================================================================================
+
+Six candidate organizations developed side by side inside one lifetime, at two
+sharing depths, scored by the unchanged H49/H50/H51 instrument. Outcome D: no
+separation at either level, and the machine-testable L2 trigger said not to
+refine the curve (`reports/h53_parallel_formation.json`).
+
+THE INTERESTING PART IS WHY IT IS NOT A COLLAPSE STORY. The mask-neutralised
+divergence between heads reached 10-44% of what INDEPENDENT development produces
+(M_4 versus L_4 on the same probe), so the heads genuinely diverged; they simply
+remain retrospectively indistinguishable. "Sharing crushed the alternatives" was
+the comfortable explanation and the data refuse it.
+
+AMORTISATION AND DIFFERENTIATION TRADE OFF STRUCTURALLY, NOT JUST EMPIRICALLY.
+At the most-shared level the state ratio is 0.19 (a real 5x saving) and a head's
+only private state is per-task arguments — which DO NOT EXIST for an unseen
+task. Every head therefore gives a bitwise-identical future endpoint: at that
+level differential fertility is impossible by construction, not merely absent.
+Where the heads own enough state to differ (L3), the saving is gone (0.85).
+Check whether an architecture CAN express the difference you intend to measure
+on the objects you intend to measure it on, before spending the lifetimes.
+
+COMPUTE AMORTISATION WAS SMALL EVEN AT ITS BEST: A_train 0.77-0.86 in
+device-seconds against six independent lifetimes. Concurrency is not a discount.
+
+FOURTH CONSECUTIVE RUNG WHERE THE STRUCTURELESS CONTROL WINS. SHAM was the best
+head in all six cells, as in H50 and H51. When a sham keeps beating every
+structural hypothesis under the learner's own retrospective objective, the
+objective — not the hypothesis set and not the search — is what is failing to
+value structure.

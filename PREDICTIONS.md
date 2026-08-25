@@ -5441,3 +5441,83 @@ Ours registered the rung as unpredictable and declined to give a number, which
 was honest but scores as no prediction. The one substantive thing we said —
 that H39's ~2% family-computation figure said nothing about ordinary task
 identity — is now answered: ordinary task identity is in the library too.
+
+# H53 RESULT (2026-08-25): OUTCOME D — NO DISCRIMINATION AT EITHER SHARING LEVEL
+
+Plan `H53_PARALLEL_FORMATION_PLAN.md` (Amendment 1, frozen `68688b7`). Report
+`reports/h53_parallel_formation.json`. Six candidate organizations co-formed in
+one lifetime at two bracketing sharing levels, scored by the UNCHANGED H49 LOO
+instrument and H50/H51 margins.
+
+    margin vs best wrong (need +0.15 in >= 2/3):
+        L1  -0.050 / -0.025 / -0.036
+        L3  -0.072 / +0.027 / -0.150
+    margin vs SHAM (need +0.15):
+        L1  -0.133 / -0.108 / -0.080
+        L3  -0.137 / -0.062 / -0.150
+    depth effect (L3 minus L1, need >= +0.05 in >= 2/3):
+        -0.022 / +0.052 / -0.114        -> 1 of 3 worlds
+    recovery of L_4's separation:
+        L1  -0.202 / +0.026 / +0.010
+        L3  -0.242 / +0.179 / -0.155
+
+Verdict by the frozen table: **D — NO DISCRIMINATION AT EITHER LEVEL.** The
+machine-testable L2 trigger evaluates to FALSE, so L2 is not run and the
+decision was made without discretion.
+
+Licensed conclusion, exactly as narrowed by Amendment 1: **the shared-parameter
+co-formation frontier, if it exists, lies deeper than L3.** NOT that structural
+alternatives cost full retraining on this substrate — this design never reaches
+independent libraries, and the stop-this-architecture recommendation was
+withdrawn from D before the data existed.
+
+The controls that make D readable rather than vacuous all pass:
+
+- **Heads are demonstrably distinct.** Mask-neutralised pairwise divergence is
+  0.0068-0.0302 against an independent-development reference (M_4 versus L_4 on
+  the same probe) of 0.0596-0.0747 — that is 10-44% of genuine independence, far
+  above the registered 5% collapse threshold. NO WORLD COLLAPSED at either
+  level. So this is not "sharing destroyed the hypotheses"; the heads really did
+  develop differently and still cannot be told apart retrospectively.
+- **Every head learned** (first-to-last-quarter prequential improvement, all six
+  heads, all six cells) and every head's policy fired on all 64 family tasks.
+- **`H = 1` reproduces `M_4` and `L_4` bitwise**, so the substrate contains both
+  reference mechanisms exactly.
+
+**The cost accounting is the other half of the result.**
+
+    A_train (device-seconds, six heads vs six independent lifetimes)
+        L1  0.767 / 0.833 / 0.833      L3  0.859 / 0.782 / 0.847
+    A_state (unique live state vs six independent)
+        L1  0.188 (5.3x amortised)     L3  0.848-0.860 (barely amortised)
+
+Co-formation saves 15-23% of training compute at best. The one place amortisation
+is real is L1's STATE (heads share everything but their per-task arguments,
+0.19), and L1 is precisely the level with no discrimination and — structurally —
+no possible future differentiation: at L1 a head's only private state is
+per-task alphas, which do not exist for an unseen task, so all six heads give
+IDENTICAL sibling endpoints (0.0703 / 0.0553 / 0.0742, equal to four decimals
+across heads). L1 co-formation cannot produce differential future fertility even
+in principle. At L3, where heads own real state, sibling endpoints finally differ
+— TRUE beats SHAM in 2 of 3 worlds, by 0.0026 and 0.0024 log units, which is
+noise beside L_4's separation.
+
+Substitutability corroborates nothing, again: at L1 the best WRONG head is MORE
+substitutable than TRUE in all three worlds (TRUE -0.010/+0.026/-0.012 versus
+0.091/0.077/0.060); at L3 TRUE leads in only 1 of 3.
+
+Scorekeeping. Review 74 (the PI) predicted L1 would COLLAPSE with neutralised
+head state very similar across heads — WRONG: L1 heads reached 21%, 21% and 9%
+of independent divergence and never fired the collapse test. Review 73 predicted
+a frontier `s*` between the levels — NOT FOUND in this range. Ours predicted
+outcome C_2 (collapse at L1, L3 margin >= +0.10 short of +0.15) — WRONG on both
+halves: no collapse, and L3's margins are mostly NEGATIVE. Ours also predicted
+SHAM would remain the best head and be the binding clause — CORRECT, in all six
+cells. That is now four consecutive rungs (H50, H51, H53) in which the
+structureless control beats every structural hypothesis.
+
+Licensing: nothing new. What H53 removes is the hope that developing candidate
+organizations CONCURRENTLY is a cheap substitute for developing them
+independently: at the sharing levels reachable here it is neither cheap (A_train
+0.77-0.86) nor discriminating (no margin anywhere near +0.15), and the failure
+is not explained by the heads collapsing into one another.

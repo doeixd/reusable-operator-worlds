@@ -14,3 +14,9 @@ prereg check OK: 21 frozen files unchanged; all STATUS-cited paths exist
 [L1] world 1 RANDOM-2 : C_LOO 0.00396
 [L1] world 2 SHAM     : C_LOO 0.00286
 [L1] world 2 TRUE     : C_LOO 0.00310
+[L1] world 2 WRONG-A  : C_LOO 0.00299
+[L1] world 2 WRONG-B  : C_LOO 0.00303
+[L1] world 2 RANDOM-1 : C_LOO 0.00306
+[L1] world 2 RANDOM-2 : C_LOO 0.00307
+[L1] SEPARATION=False margins [-0.05, -0.025, -0.036] vs SHAM [-0.133, -0.108, -0.08] collapsed []
+OUTCOME INCOMPLETE; L2 required: False
