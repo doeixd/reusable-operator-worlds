@@ -3868,3 +3868,49 @@ Keep it as the reference the recovery fraction is taken against; do not make it
 the research program. The question worth a program is the one about the
 learner's own economics: can it revise its structure without paying to be
 retrained?
+
+
+
+================================================================================
+H51: PRESERVING STATE DOES NOT BUY REORGANIZABILITY (2026-08-24)
+================================================================================
+
+Three wake representations — provenance-initialized, provenance-
+recombining, and decomposable-innovation — were put through the UNCHANGED
+H50 migration operator and H49 scorer. All three returned
+`C_restructure = None` with recovery of L_4's separation between -0.12 and
++0.19, i.e. zero, and structureless SHAM beat every partition in every
+world by 0.33-0.54 log units (`reports/h51_reorganizability.json`). The
+H50 negative is therefore not about what ordinary wake THROWS AWAY and not
+about the FORM in which it stores innovation.
+
+USEFULNESS IS NOT INFORMATIVENESS. R_1b let each task re-acquire itself
+from a learned mixture of the completion traces of the 31 tasks grouped
+with it. That channel is genuinely valuable — absolute reacquisition cost
+fell 18-38% below ordinary — and it is ANTI-informative about grouping:
+the wrong partition won in all three worlds. Before reading any channel's
+benefit as evidence about structure, check whether the benefit is
+indifferent to which structure is assumed.
+
+A BALANCE GATE IS NOT BUREAUCRACY. R_2's one strong margin (+0.084) is in
+the single world where its shared-parameter count fails the registered
+20% gate (+28.9%, three extra promotions); the two gate-passing worlds
+give +0.030 and -0.045. The headline that the gate prevented — "the
+decomposable representation discriminates in 2 of 3 worlds" — is exactly
+the kind of claim this project has had to withdraw before. Register the
+gate, then read the cells it admits.
+
+THE MANUFACTURED SIGNATURE IS GENERAL. Elevated own-versus-other-slot
+substitutability appeared under every partition in every arm and every
+world (gaps 0.008-0.119 against a required 0.30, with the WRONG partition
+higher twice). It is a property of imposing a mask and re-optimizing, not
+of having found the right structure. Any structural metric that the
+intervention itself can inflate needs its wrong-structure control quoted
+beside it, always.
+
+A LONG SCORER MUST BE RESUMABLE. A reboot killed ~4 hours of scoring that
+had no cache. The fix is the sweep-driver rule applied to scorers: write
+each scored cell to disk as it completes, key it, stamp it with a
+PROTOCOL FINGERPRINT (budgets, model records, refit steps and LR,
+migration rates and seeds), and refuse a cell computed under a different
+fingerprint rather than silently mixing protocols.

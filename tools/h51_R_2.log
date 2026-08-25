@@ -1,0 +1,21 @@
+prereg check OK: 20 frozen files unchanged; all STATUS-cited paths exist
+[R_2] world 0 TRUE      m=64: C_LOO 0.00460 (m0 0.00542) fam-NMSE 0.0026
+[R_2] world 0 WRONG-A   m=64: C_LOO 0.00501 (m0 0.00601) fam-NMSE 0.0026
+[R_2] world 0 WRONG-B   m=64: C_LOO 0.00501 (m0 0.00602) fam-NMSE 0.0026
+[R_2] world 0 RANDOM-1  m=64: C_LOO 0.00559 (m0 0.00612) fam-NMSE 0.0029
+[R_2] world 0 RANDOM-2  m=64: C_LOO 0.00517 (m0 0.00581) fam-NMSE 0.0027
+[R_2] world 0 SHAM      m=64: C_LOO 0.00277 (m0 0.00344) fam-NMSE 0.0021
+[R_2] world 1 TRUE      m=64: C_LOO 0.00429 (m0 0.00526) fam-NMSE 0.0023
+[R_2] world 1 WRONG-A   m=64: C_LOO 0.00442 (m0 0.00534) fam-NMSE 0.0022
+[R_2] world 1 WRONG-B   m=64: C_LOO 0.00471 (m0 0.00542) fam-NMSE 0.0023
+[R_2] world 1 RANDOM-1  m=64: C_LOO 0.00465 (m0 0.00523) fam-NMSE 0.0024
+[R_2] world 1 RANDOM-2  m=64: C_LOO 0.00466 (m0 0.00510) fam-NMSE 0.0024
+[R_2] world 1 SHAM      m=64: C_LOO 0.00251 (m0 0.00309) fam-NMSE 0.0018
+[R_2] world 2 TRUE      m=64: C_LOO 0.00381 (m0 0.00485) fam-NMSE 0.0022
+[R_2] world 2 WRONG-A   m=64: C_LOO 0.00366 (m0 0.00483) fam-NMSE 0.0022
+[R_2] world 2 WRONG-B   m=64: C_LOO 0.00364 (m0 0.00456) fam-NMSE 0.0021
+[R_2] world 2 RANDOM-1  m=64: C_LOO 0.00384 (m0 0.00458) fam-NMSE 0.0022
+[R_2] world 2 RANDOM-2  m=64: C_LOO 0.00412 (m0 0.00471) fam-NMSE 0.0023
+[R_2] world 2 SHAM      m=64: C_LOO 0.00223 (m0 0.00271) fam-NMSE 0.0017
+[R_2] C_restructure = None; recovery {"0": {"m64": 0.05}, "1": {"m64": 0.19}, "2": {"m64": -0.0}}
+OUTCOME FORMATION-TIME-CONFIRMED

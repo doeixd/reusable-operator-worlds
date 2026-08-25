@@ -5047,3 +5047,83 @@ fraction but does not reach SEPARATION at m <= 64; modal outcome 2 (PARTIAL),
 second outcome 3 (FORMATION-TIME CONFIRMED). If `R_2` does separate, we predict
 a measurable present-performance cost near the G1 boundary, and that cost is
 the result, not the separation alone.
+
+# H51 RESULT (2026-08-24): FORMATION-TIME-CONFIRMED — REORGANIZABILITY IS NOT BOUGHT BY PRESERVING STATE
+
+Plan `H51_REORGANIZABILITY_PLAN.md` (Amendments 1-5, frozen `b03a1be`).
+Report `reports/h51_reorganizability.json` (merged from the three
+per-representation files). The H50 migration operator and the H49 LOO
+scorer were used UNCHANGED; the wake representation was the only
+independent variable.
+
+    C_restructure:  R_0 None   R_1a None   R_1b None   R_2 None
+    Recovery of L_4's separation at m = 64 (worlds 0/1/2):
+        R_0   -0.066 / +0.091 / +0.067      (H50, re-used)
+        R_1a  -0.074 / +0.173 / +0.076
+        R_1b  -0.119 / +0.021 / +0.050
+        R_2   +0.047 / +0.189 / -0.003
+    Margin vs best wrong (need +0.15 in >= 2/3):
+        R_1a  +0.019 / +0.025 / +0.009
+        R_1b  -0.005 / -0.027 / -0.009
+        R_2   +0.084 / +0.030 / -0.045
+    Margin vs SHAM (need +0.15): every arm, every world, -0.33 to -0.54.
+
+Verdict by the frozen table: **FORMATION-TIME-CONFIRMED** (outcome 3). No
+arm separates at any scored budget, and no pairwise recovery gain reaches
+the 0.25 that would have read PARTIAL. Preserving task provenance — as
+initialization (R_1a) or as a re-fittable recombination channel over the
+traces of co-assigned tasks (R_1b) — and storing innovation in a
+separately addressable component basis learned during the lifetime (R_2)
+all leave the fertile counterfactual as unreachable as ordinary wake did.
+
+Three findings beside the label.
+
+1. USEFULNESS AND INFORMATIVENESS COME APART. R_1b's trace channel cut
+   absolute reacquisition cost 18-38% below R_0 (e.g. world 2 TRUE
+   0.00276 versus R_0's 0.00329) while being ANTI-informative about
+   grouping: the wrong partition scored better in all three worlds. A
+   channel can be worth having and carry no evidence about which
+   structure produced it.
+2. THE PARAMETER GATE EARNED ITS PLACE. R_2's only strong margin
+   (+0.084) is in world 0 — the world whose G3-shared reading fails at
+   +28.9% because R_2 promoted three more abstractions there. The two
+   gate-PASSING worlds give +0.030 and -0.045. Without the registered
+   gate this would have been reported as "decomposable wake improves
+   discrimination in 2 of 3 worlds"; with it, the effect is confined to
+   the cell that is unscoreable for the causal claim. G1 passed
+   everywhere (present loss changed by 0.09-0.19%), so R_2 is a genuinely
+   matched representation on cost.
+3. THE MANUFACTURED SIGNATURE REPLICATES ACROSS REPRESENTATIONS.
+   Substitutability rose under every partition in every arm, with
+   TRUE-minus-best-wrong gaps of 0.008-0.119 against a required 0.30, and
+   the WRONG partition scoring HIGHER in R_1b world 1 and R_2 world 2.
+   Sibling endpoints show no recovered future advantage either: migrated
+   TRUE is worse than SHAM in 2/3 worlds for R_1a, R_1b, and R_2 alike.
+
+Scorekeeping. Review 72 predicted `ordinary ~ provenance < decomposable <
+oracle`; the ordering in recovery is within noise (all |values| < 0.19)
+and its qualitative claim — that provenance alone would not suffice — is
+upheld, while the expectation that an explicitly decomposable wake WOULD
+buy reorganizability is not. Ours: R_1a moves nothing — CORRECT; R_1b
+improves recovery without separating — WRONG in sign (it lowered
+recovery and made the margin negative); no arm separates at m <= 64 —
+CORRECT; modal outcome PARTIAL — WRONG, outcome 3.
+
+Instrument disclosures. (a) An arm's own m = 0 row is measured for R_1a
+and R_2 and re-used from H49 for R_1b (its coefficients start at zero, so
+its m = 0 IS R_0's; verified bitwise on the real artifact). R_1a's three
+measured m = 0 rows reproduce H49's recorded M_4 values exactly
+(0.00560 / 0.00549 / 0.00447), which independently validates this
+re-implementation of the H49 scorer. (b) H50's two matched deviations
+(optimizer state resets at snapshot boundaries; retirement lifted during
+migration) are inherited unchanged, by design. (c) Amendments 4 and 5
+record two defects found by the standing pre-run audit while the scorers
+ran — R_1b's basis originally contained the task's own trace (worth ~2%,
+arm-neutral, fixed and re-run) and `factorized_fit` would have crashed
+R_2's sibling step and lost the whole report (fixed and re-run).
+
+Licensing: nothing new. What H51 removes is a class of explanations: the
+H50 negative is NOT an artifact of ordinary wake discarding task-local
+evidence, nor of storing innovation densely rather than in addressable
+components. Whatever L_4 has that M_4 lacks, it is not preserved state
+and not storage form.

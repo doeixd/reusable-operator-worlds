@@ -3230,3 +3230,19 @@ so world 0's R_2 row is descriptive-only for the causal claim, per the frozen
 plan. The component channel is live: 48-55% of innovation norm sits in the
 shared addressable basis, all 73 tasks have nonzero coordinates. Scoring for
 all three representations is running.
+
+# 2026-08-24 — H51 SCORED: FORMATION-TIME-CONFIRMED
+
+All three representations completed and merged into
+`reports/h51_reorganizability.json`. `C_restructure = None` for R_0, R_1a,
+R_1b and R_2; recovery of L_4's separation between -0.12 and +0.19 (zero);
+SHAM ahead of every partition in every world by 0.33-0.54. R_1b's
+provenance channel cut absolute reacquisition cost 18-38% while making the
+margin NEGATIVE in all three worlds; R_2's single strong margin fell in
+the world that fails the G3-shared gate, and its gate-passing worlds show
+nothing. Recorded with the scorekeeping (review 72's provenance prediction
+upheld, its decomposable-wake prediction not; our PARTIAL prediction
+wrong), the Amendment 4-5 disclosures from the standing pre-run audit, and
+the R_1a m = 0 rows that reproduce H49's scorer exactly. Learnings
+appended; scorer made resumable with a protocol-fingerprinted per-cell
+cache.
