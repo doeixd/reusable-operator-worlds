@@ -2872,3 +2872,25 @@ independence versus amortization is a continuum, and if structural hypotheses
 need nearly independent substrates to become meaningful, the neural
 representation is missing the stable shareable ABI that makes program-like
 beam search cheap.
+
+
+### [reviewer-feedback-75.txt](reviewer-feedback-75.txt)
+Opens the successor BRANCH while the formation line finishes untouched: pivot to
+EXPORTABILITY, and separate four questions the earlier program-synthesis story
+blended — does an object exist, does it compose, can a program be written or
+found, can the language invent new objects. Constitutional criterion: SYNTHESIS
+STARTS WHEN A FROZEN LEARNED OBJECT COMPOSES IN A PROGRAM THAT WAS NEVER JOINTLY
+OPTIMIZED WITH IT; until then the word PRIMITIVE is not licensed. Nine rungs
+(E0 existing-artifact audit, E1 frozen-library export, E2 support-split
+composition, E3 writability, E4 functional identity, E5 program recognizer,
+E6 primitive invention under a birth charge, E7 residual load-bearing,
+E8 length generalization) with a failure-localizing decision tree, arm sets
+(oracle / route-only / scratch / finetune / dense-frozen / wrong-library),
+`G_export` as the oracle-normalized closure, and fifteen binding methodological
+rules including "report the embarrassing number". Explicitly makes the STOP
+condition first-class: if oracle routing cannot make a frozen library work on
+unseen programs, route inference is irrelevant and the synthesis interpretation
+of this substrate ends — publishable and decisive. Predicts partial rather than
+clean teacher identity, load-bearing residuals, and as the modal interesting
+outcome "oracle export works, learned route inference lags", which would
+localize the next problem to writing/search rather than vocabulary.

@@ -3271,3 +3271,15 @@ mask-neutralized collapse probe, three cost ratios in device-seconds including
 selection, narrowed C_1/C_2/D outcomes with the architecture-stop
 recommendation withdrawn from D, and a machine-testable L2 trigger. Re-frozen;
 still no code.
+
+# 2026-08-25 - REVIEW 75 FILED; EXPORT BRANCH PROGRAM FROZEN
+
+Review 75 filed verbatim and indexed. Wrote `EXPORT_BRANCH_PROGRAM.md` — the
+Export -> Composition -> Synthesis branch, frozen as a decision tree and
+terminology contract rather than as a single experiment: nine rungs (E0-E8),
+five layers kept apart so failure localizes, arm sets and primary quantities per
+rung, the registered STOP at E1-oracle, fifteen binding methodological rules, and
+both prediction sets. Registered in `PREDICTIONS.md`; terminology rules mirrored
+into `AGENTS.md`. H53 continues untouched and may not be used to move any
+threshold registered here. No rung has been run; each needs its own frozen plan
+first.

@@ -5215,3 +5215,40 @@ reaching 0.15 or separates at a poor cost ratio; low probability on clean
 separation with A_train << 1. Ours, now stated against the narrowed split: **C_2
 specifically** — collapse at L1, and at L3 a TRUE margin >= +0.10 that still
 misses +0.15, with SHAM the binding clause.
+
+# EXPORT BRANCH REGISTRATION (2026-08-25, review 75): EXPORT -> COMPOSITION -> SYNTHESIS
+
+Review 75 opens the successor branch. Program document
+`EXPORT_BRANCH_PROGRAM.md`, frozen as the branch's DECISION TREE and
+TERMINOLOGY CONTRACT; each rung gets its own frozen plan before its own code.
+The running formation line (H53) is untouched and its result may not be used to
+change any threshold registered here.
+
+Question: does learning produce frozen computational objects that remain useful
+when exported into programs the lifetime never optimized? Constitutional
+criterion: synthesis starts when a FROZEN learned object composes in a program
+never jointly optimized with it. Binding terminology from now on: an object is a
+SHARED OBJECT / BASIS ELEMENT / SLOT / ABSTRACTION until it passes an export
+test; PRIMITIVE is reserved; unseen-task reuse is not COMPOSITION without unseen
+PROGRAM COMBINATIONS; route optimization is not SYNTHESIS without a compact
+program variable.
+
+Rungs and order: Phase 0 E0/E4/E7 on existing artifacts (no new lifetimes);
+Phase 1 E1 frozen-library export (arms O/R/S/F/D/W, `G_export` reported with
+absolute losses); Phase 2 E2 support-split composition, whole programs withheld,
+strata H1 triple-novel and H2 pair-novel; Phase 3 E8 length generalization;
+Phase 4 E3 writability then E5 program recognizer; Phase 5 E6 primitive
+invention under an explicit birth charge with refusal controls. Registered STOP:
+if E1's oracle arm fails, the synthesis interpretation of this substrate ends.
+
+Predictions. Review 75: partial functional identity; residuals more load-bearing
+than hoped; reasonable chance E1-oracle passes; lower confidence in E1-route, so
+the modal interesting outcome is ORACLE EXPORT WORKS, ROUTE INFERENCE LAGS,
+localizing the next problem to writing/search; E2 genuinely uncertain and not
+implied by E1. Ours: we agree on E1's modal outcome; we are PESSIMISTIC on E2,
+because V1's crossover shows the basis is preferred only above `r ~ 0.83` and
+H47 showed this learner absorbing distinct latent structure into a single
+channel — the opposite of the stable per-object interface E2 needs. If E2's
+oracle arm fails, our registered reading is that the OPERATOR ABI, not the router
+and not the library's contents, is what must be redesigned. E7 is the rung we are
+least able to predict and we say so in advance.

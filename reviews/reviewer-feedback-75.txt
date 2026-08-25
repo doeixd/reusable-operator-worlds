@@ -1,0 +1,412 @@
+Yes. I would pivot the next research branch around **exportability**, while letting the
+current H39/H53 work finish untouched. The key improvement is to separate four questions
+that the earlier draft sometimes blended:
+
+    Does an object exist? -> Does it compose? -> Can a program be written/found?
+    -> Can the language invent new objects?
+
+Below is the version I would hand to the agent.
+
+# Export -> Composition -> Synthesis
+
+## Program goal
+
+The representation-formation line has established that reusable structure can improve
+lifetime economics, that useful coordinates can be developmental/path-dependent, and
+that post-hoc restructuring is difficult. None of those results by itself establishes
+that the learner has acquired a COMPUTATIONAL LANGUAGE.
+
+This branch asks a harder question:
+
+> Does learning produce frozen computational objects that remain useful when exported
+> into programs the lifetime never optimized?
+
+Constitutional criterion:
+
+    Synthesis starts when a frozen learned object composes in a program that was never
+    jointly optimized with it.
+
+Until that happens, use terms such as SHARED OBJECT, OPERATOR BASIS, SLOT, or
+ABSTRACTION. Reserve PRIMITIVE for an object that passes an export/composition test.
+
+This branch is independent of the currently running formation experiment. Do not stop
+it, modify it, or use its eventual result to change preregistered export thresholds
+after data are read.
+
+# Core distinctions
+
+Keep these separate throughout the line:
+
+    representation reuse != exportable computation != composition != program writing
+    != program synthesis != primitive invention
+
+A failure at each rung should localize the problem.
+
+| Layer       | Question                                                       |
+| Vocabulary  | Does a frozen learned operation do useful work elsewhere?      |
+| Composition | Do frozen operations work in unseen combinations?              |
+| Write       | Can the solution be represented by a compact program variable? |
+| Search      | Can the correct program be inferred cheaply from examples?     |
+| Invention   | Can new primitives be created when economically justified?     |
+
+# E0 - Existing-artifact export audit
+
+**No new lifetimes. Run first.** Use the strongest existing high-reuse artifacts,
+preferably exact/high-r cells where the reusable substrate clearly bought lifetime
+loss. The purpose is not yet to claim composition. It is to determine whether the
+objects are even plausible candidates for export.
+
+## E0.1 - Functional contextual substitutability
+
+Do NOT use raw parameter similarity as the primary identity test. For learned object
+A_i and teacher primitive P_j, define contextual functional distance
+
+    d(A_i, P_j) = E_{c,x} [ || c[A_i](x) - c[P_j](x) ||^2 ]
+
+where c[.] places the operation into several positions and surrounding compositions
+drawn from a frozen probe set. Solve the learned<->teacher assignment with Hungarian
+matching. Report: best assignment; assignment margin over second-best; contextual
+functional distance; stability across program position; stability across contexts;
+global/random assignment controls.
+
+Interpretation. Strong alignment supports the claim that learned objects correspond to
+teacher-like reusable subroutines. Weak teacher alignment DOES NOT by itself falsify
+composition, because the learner may discover an alternative computational basis.
+Therefore E0.1 controls terminology, not E1/E2's verdict.
+
+Allowed sentence if it passes: "Learned objects are functionally substitutable for
+stable teacher operations across multiple program contexts."
+Not allowed merely from parameter matching: "The learner recovered the teacher
+primitives."
+
+## E0.2 - Residual load-bearing audit
+
+The earlier formulation "residual must literally go to zero" is too strong. Instead ask
+whether task-specific residual computation remains necessary once the correct
+library/program is available. On exact/high-reuse trained tasks evaluate: (1) intact
+model; (2) correct library/program with private residual disabled; (3) library disabled
+with private residual retained; (4) residual optionally re-fit under frozen library.
+
+Define a normalized residual reliance score, e.g.
+
+    R_residual = (L_no_residual - L_full) / (L_no_library - L_full)
+
+when the denominator is well behaved, with absolute losses always reported. The
+scientific question is: does task identity substantially live in the reusable objects,
+or does it still live in per-task patches?
+
+Interpretation. Low residual reliance supports export. High residual reliance means the
+"library" may be a useful bias while the actual task program remains in private state.
+Do not automatically stop E1 unless residuals are overwhelmingly load-bearing; E1 is
+the direct test.
+
+# E1 - Frozen-library export
+
+This is the first decisive new test.
+
+Question: can a library learned during one lifetime be frozen and used to solve UNSEEN
+TEACHER PROGRAMS by adapting only task-local program state? No operator/library
+updates. Use compositions not encountered during the lifetime but composed from
+operations that were encountered.
+
+For K=6, D=3 the teacher space contains K^D = 216 possible programs; existing lifetimes
+used only a subset. Construct a frozen unseen-program set subject to: every primitive
+appeared during training; every tested primitive appeared in every relevant position
+during training, where possible; no exact held-out program appeared during training;
+support/query examples are disjoint; no test selection based on performance.
+
+## Arms
+
+O - Oracle program: frozen learned library, teacher route/program supplied. Tests
+    C_express.
+R - Route/program-only adaptation: frozen learned library; infer only route/program
+    code and registered task-local arguments. Tests C_express + C_find.
+S - Scratch: matched task-local learner initialized without reusable library access.
+F - Full finetune: same library but operator parameters may update. Measures how much
+    REPAIR the supposedly reusable objects still require.
+D - Dense frozen control: freeze a compute/parameter-matched dense learner from the
+    same lifetime and adapt its allowed task-local interface.
+W - Wrong-library control: permute/shuffle learned objects, or a library from an
+    incompatible world.
+
+## Primary quantities
+
+Oracle-normalized export closure, reported only when the denominator is positive and
+nontrivial:
+
+    G_export = (L_S - L_R) / (L_S - L_O)
+
+Also report raw L_O, L_R, L_S, L_F, L_D, L_W, and C_repair = L_R - L_F.
+
+## Decision localization
+
+E1a - vocabulary/export exists: if O strongly beats S/D/W, the frozen learned library
+contains transferable computation.
+E1b - writer/inference works: if R approaches O and beats S, the task can cheaply
+identify/use that frozen computation.
+O passes, R fails (very important branch): the computational vocabulary exists; the
+program writer/search procedure is missing. Proceed later to E3/E5 rather than changing
+the library immediately.
+O fails: stop the synthesis interpretation for this substrate. If oracle routing cannot
+make the frozen library work on unseen programs, route inference is irrelevant.
+Conclusion: "ROW learned economically useful shared computation, but these objects are
+not exportable program primitives." That is publishable and decisive.
+
+# E2 - Support-split compositional generalization
+
+This is the first rung allowed to make a strong claim about composition. E1 uses
+opportunistic holdouts from existing lifetimes; E2 constructs a lifetime specifically so
+whole program structures are withheld.
+
+Generator split: use length-3 programs and create P_train strictly inside {1..K}^3.
+Hold out entire programs, not examples. Coverage constraints: every primitive occurs;
+every primitive occurs in every position; each primitive occurs in multiple surrounding
+contexts; program frequencies balanced enough that identity cannot be inferred from
+trivial counts.
+
+Two held-out strata if feasible:
+H1 - Triple novelty: exact triple unseen, but its primitives and most local pair
+     contexts appeared.
+H2 - Pair novelty: at least one adjacent primitive pair never encountered during
+     training. H2 is the stronger systematic-composition test.
+
+Freeze the split before training.
+
+Conditions: first run r = 1 or the cleanest exact/high-reuse regime. Use a low-reuse
+endpoint as a preregistered control (r = 0 or another validated low-recurrence
+condition). Do NOT immediately run a large r-sweep. If a high-vs-low difference exists,
+a later experiment can ask whether composition follows the previously measured
+recurrence law/crossover.
+
+Arms: same hierarchy as E1 (oracle frozen program; inferred frozen program; scratch;
+full finetune; dense frozen; wrong library). No operator updates in the compositional
+arm.
+
+Claim: at high reuse, L_route-only,heldout -> L_oracle,heldout and substantially beats
+scratch/dense controls. At low reuse the advantage should shrink or disappear.
+
+Interpretation.
+Pass: a computation learned in one set of programs remains usable inside an unseen
+combination. First clean evidence of a compositional learned object.
+Trained programs work, held-out triples fail: the system learned pipeline/task
+regularities rather than stable operations. Do not describe V1 as program synthesis.
+Oracle held-out works, inferred route fails: composition exists; synthesis/search does
+not. Move to E3/E5.
+Oracle held-out fails: the object interface itself is not compositionally stable. The
+next architectural target is the neural ABI/operator representation, not the router.
+
+# E3 - Can the program be written?
+
+Do this AFTER E1/E2 establishes something worth writing. Split into two tests.
+
+E3a - Post-hoc discrete compilability. Before training a new discrete learner, ask
+whether existing successful soft routes can be compiled. Convert successful soft
+programs into z = (z_1..z_D), z_i in {1..K}. Use frozen argmax/beam/search without
+operator updates. Charge literal program code D log2 K plus registered
+arguments/residual bits. Compare predictive degradation; D*; two-part code;
+wrong/shuffled library; incorrect depth D'. If this works, soft training may already
+contain a compact writable program.
+
+E3b - Explicit discrete program variable. Only if E3a is inadequate or direct discrete
+learning is itself scientifically interesting. Straight-through/Gumbel; beam-enumerated
+latent program; or an explicit small program decoder. The claim is not merely "discrete
+works." The claim is: at high recurrence an explicit symbolic program wins predictive +
+description economics; at low recurrence it does not.
+
+If E1/E2 pass but E3 fails: "we have compositional computation but not yet a good
+symbolic code." That distinction must be preserved.
+
+# E4 - Functional primitive identity
+
+The strengthened version of the original teacher-alignment test; run alongside
+E0/E1/E2 as an interpretive audit.
+
+Claim: successful export/composition should correlate with contextual functional
+substitutability. Ask whether the same learned object remains interchangeable with the
+same teacher operation across different positions; different neighboring primitives;
+unseen compositions; depth changes later. Use functional assignment, not parameter
+identity.
+
+Strong result: better contextual alignment => better E1/E2 export. That would connect
+"primitive-like identity" to actual compositional behavior.
+
+Cheap prediction but no teacher alignment: do NOT automatically say statistical reuse
+only. Inspect whether there is an alternative learned basis that itself composes.
+Teacher identity is not the definition of a program primitive.
+
+# E5 - Program recognizer / amortized synthesizer
+
+Only after either E1 vocabulary passes but route optimization is expensive, or E2
+establishes composition and we want synthesis.
+
+Question: can a learned inference model map a few support examples to a program over
+the frozen library, q_phi(z, alpha | D_support), where z is primitive
+sequence/structure and alpha optional arguments? Do NOT rely on semantic task IDs.
+Held-out programs must be inferable from support examples. Opaque episodic IDs may
+exist only as bookkeeping, not as predictive information.
+
+Training: recognizer trained only on training programs; tested on held-out E2 programs;
+operator library remains frozen.
+
+Compare against: oracle program; optimization-based route inference;
+enumerative/beam search; scratch; H53-style multi-hypothesis representation
+maintenance, if useful as a compute reference. Measure query loss; examples required;
+search/evaluation count; wall/device compute; program accuracy where identifiable.
+
+Key interpretation: if the recognizer succeeds where structural-head discovery did not,
+we were previously searching over the wrong latent objects: PROGRAMS, not partitions of
+the network, are the useful hypothesis space. This would be a major bridge from ROW to
+synthesis.
+
+# E6 - Primitive invention under an explicit birth charge
+
+Do NOT run before E1 and preferably E2. A promoted object is only called a primitive if
+an already existing frozen library has demonstrated export/composition.
+
+Objective: a new object A pays creation cost lambda D*(A) immediately, in the same
+currency as prediction/reacquisition savings. The basic law:
+
+    H_remaining * s_bar_program > lambda D*(A)
+
+where s_bar_program is measured savings from having the primitive available for
+subsequent programs.
+
+Manipulations, independently varied: remaining horizon; functional recurrence;
+size/complexity of the candidate primitive; accidental similarity without true
+substitutability.
+
+Required refusal controls: the learner should not invent primitives for structureless
+worlds; accidental activation similarity; computations that do not export; motifs whose
+future amortization cannot repay birth cost.
+
+Success: primitive birth frequency and timing track measured amortization economics.
+This reconnects the validated V5 amortization law to an actual computational language.
+
+# E7 - Residual load-bearing
+
+Retain as a cross-cutting mechanism audit rather than its own sequential rung. For
+exact in-language tasks the correct program should explain most task-specific
+computation. Track residual reliance across trained programs; E1 unseen programs; E2
+held-out compositions; depth generalization. Prediction: R_residual falls as primitive
+identity/export quality improves.
+
+If residuals remain highly load-bearing at r = 1 even when apparent program routing
+works: the library is functioning as a reusable prior/bias, not as the task's
+executable program.
+
+# E8 - Length generalization
+
+Run only after same-depth E2 composition passes. Requirement: the executor must
+genuinely support variable program length; do not interpret failure if the architecture
+itself hardcodes D = 3. Freeze the library learned from depth-3 lifetimes; test D = 2
+and D = 4 teacher programs; first oracle programs, then inferred programs.
+
+| Result                            | Meaning                                                        |
+| D2 and D4 oracle + inference work | Strong DSL-like evidence                                       |
+| D2 works, D4 oracle fails         | Repeated composition/interface instability                     |
+| D4 oracle works, inference fails  | Library composes; search/writer fails                          |
+| Held-out D3 works, D4 fails       | Limited systematic composition, not full length generalization |
+| Only trained-depth/programs work  | Likely program-space interpolation                             |
+
+This is a much cleaner test than simply increasing route depth during training.
+
+# Run order
+
+Phase 0 - Cheap audit: E0/E4 + E7 on existing high-r artifacts. No new lifetimes.
+Purpose: determine whether current objects even look primitive-like. Do not reject
+export purely because teacher alignment is imperfect.
+
+Phase 1 - Frozen export: E1, using existing artifacts and unseen teacher compositions
+where possible. Decision: oracle frozen library fails -> stop the synthesis branch for
+this substrate. Oracle passes, route inference fails -> vocabulary exists; move toward
+E3/E5. Both pass -> proceed.
+
+Phase 2 - Genuine composition: train the controlled support-split world, E2. This is
+the main milestone. Only a positive E2 licenses the strong sentence: "the learner
+acquired operations that compose in programs never jointly optimized during training."
+
+Phase 3 - Structural extrapolation: E8.
+
+Phase 4 - Write and synthesize: E3 -> E5.
+
+Phase 5 - Grow the language: E6. Only now return to CREATE/PROMOTE as primitive
+invention.
+
+# Decision tree for the entire branch
+
+    Frozen oracle export?
+      NO  => shared representation, not program primitives
+      YES v
+    Held-out composition?
+      NO  => exportable task features/pipelines, not compositional language
+      YES v
+    Compact writable program?
+      NO  => composition exists, syntax missing
+      YES v
+    Program inferable cheaply?
+      NO  => language exists, synthesizer/search missing
+      YES v
+    New primitives invented economically?
+      => learned compositional computational language
+
+This is the failure localization we want.
+
+# Required methodological rules
+
+1. Freeze before every new rung. Do not make E2 thresholds conditional on exploratory
+   E1 outcomes except through an explicitly frozen decision tree.
+2. Existence before discovery. Never optimize a program recognizer if oracle frozen
+   programs fail.
+3. Teacher ontology is diagnostic, not ground truth about the best representation.
+4. Functional substitution beats parameter identity.
+5. TRUE must beat plausible WRONG controls whenever a structural claim is made.
+6. Support/query split is mandatory for program inference.
+7. Whole programs, not examples, define E2 train/test separation.
+8. No future-query labels enter route/program selection.
+9. Report absolute losses alongside normalized gap-closure statistics.
+10. Program success cannot depend on operator finetuning.
+11. Residual/task-local repair must be separately measured.
+12. Do not call a promoted object a primitive until export is demonstrated.
+13. Do not call unseen-task reuse composition until unseen PROGRAM COMBINATIONS are
+    demonstrated.
+14. Do not call route optimization synthesis until a compact program variable exists or
+    the search space is explicitly program-structured.
+15. Report the embarrassing number.
+
+# Predictions
+
+My current predictions are deliberately less optimistic than the original
+program-synthesis story.
+
+E0/E4: I expect partial functional identity rather than beautiful one-to-one teacher
+recovery.
+E7: I expect residuals to remain more load-bearing than we would like. This may be the
+first warning sign.
+E1 oracle: reasonable chance of passing at exact/high reuse. If it fails, that is a very
+important negative result.
+E1 route inference: lower confidence. V2 already showed online route inference is hard.
+Therefore my modal interesting result is: oracle export works; learned route inference
+lags. That would be good news: it localizes the next problem to WRITING/SEARCH, not
+vocabulary.
+E2: the true uncertainty. I would not assume it passes merely because E1 does. If it
+passes, it materially changes the project.
+E3: I suspect discrete compilation will be possible only after the operator interface
+becomes cleaner than the early V2 hard-library substrate.
+E5: if E2 passes, relatively optimistic that a small recognizer can eventually amortize
+program inference.
+E6: where I expect the earlier amortization laws to reappear cleanly - but only if
+E1/E2 demonstrate that the created objects have genuine export value.
+
+# What a positive result would mean
+
+The desired sequence would establish: learned operation -> frozen export -> unseen
+composition -> program code -> program inference -> primitive invention. At that point
+the next phase of the broader research program becomes obvious: REASONING AS SEARCH
+OVER LEARNED PARAMETERIZED PROGRAMS. Then we can return to branches; loops; memory
+reads/writes; macro creation; learned search; program rewriting; language improvement.
+
+But we should not build those until this branch answers the much cheaper foundational
+question: do the reusable computations we have already learned actually behave like
+exportable program primitives? That is now the shortest path to either validating the
+program-synthesis direction or decisively falsifying the interpretation of the current
+operator-mixture substrate.

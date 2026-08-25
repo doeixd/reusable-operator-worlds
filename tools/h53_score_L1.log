@@ -5,3 +5,4 @@ prereg check OK: 21 frozen files unchanged; all STATUS-cited paths exist
 [L1] world 0 WRONG-B  : C_LOO 0.00335
 [L1] world 0 RANDOM-1 : C_LOO 0.00344
 [L1] world 0 RANDOM-2 : C_LOO 0.00349
+[cache] refdiv_w1

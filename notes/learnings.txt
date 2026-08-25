@@ -3914,3 +3914,40 @@ each scored cell to disk as it completes, key it, stamp it with a
 PROTOCOL FINGERPRINT (budgets, model records, refit steps and LR,
 migration rates and seeds), and refuse a cell computed under a different
 fingerprint rather than silently mixing protocols.
+
+
+
+================================================================================
+REVIEW 75: EXPORT IS THE TEST THE PROGRAM-SYNTHESIS STORY ACTUALLY NEEDS (2026-08-25)
+================================================================================
+
+The formation line answered an economics question and we kept reaching for a
+language conclusion. The separating test is EXPORT: freeze the learned objects
+and put them into programs the lifetime never optimized. Everything before that
+— lifetime advantage, allocation tracking recurrence, PROMOTE, the amortization
+law, made-not-mined coordinates — is compatible with a useful reusable PRIOR
+that is not a vocabulary.
+
+FIVE LAYERS, NEVER BLENDED: representation reuse, exportable computation,
+composition, program writing, program synthesis, primitive invention. Each rung
+that fails should say WHICH of those is missing. The two branches worth naming
+in advance: oracle export passes but route inference fails => the vocabulary
+exists and the WRITER is missing (fix search, not the library); oracle export
+fails => this substrate's objects are not exportable program primitives, and
+that is a decisive publishable negative rather than a reason to try another
+router.
+
+THE WORD `PRIMITIVE` IS NOW EARNED, NOT ASSUMED. Reserved for an object that has
+passed an export/composition test; before that, shared object / basis element /
+slot / abstraction. Same discipline for COMPOSITION (needs unseen program
+combinations, not unseen tasks) and SYNTHESIS (needs a compact program variable
+or an explicitly program-structured search space). This is the same lesson as
+the slot-index-versus-primitive-index and the V4.1 tolerance errors, applied to
+vocabulary instead of to metrics: a word that presumes the conclusion will get
+used as evidence for it.
+
+CHEAP AUDITS FIRST, ON ARTIFACTS THAT ALREADY EXIST. E0/E4/E7 need no new
+lifetimes and can already say whether the objects look primitive-like; the
+residual-reliance score in particular asks whether task identity lives in the
+reusable objects or still in per-task patches. Run those before building any
+world, and let the oracle arm gate everything downstream.

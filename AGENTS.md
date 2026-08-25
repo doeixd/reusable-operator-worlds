@@ -1281,3 +1281,17 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   FINGERPRINT (budgets, model records, refit steps/LR, migration rates
   and seeds), and refuse a cell computed under a different fingerprint;
   a reboot cost four hours of unscored work before this existed.
+
+- TERMINOLOGY CONTRACT, CONSTITUTIONAL (review 75, `EXPORT_BRANCH_PROGRAM.md`).
+  Synthesis starts when a FROZEN learned object composes in a program that was
+  never jointly optimized with it. Until an object passes an export test it is a
+  SHARED OBJECT, a BASIS ELEMENT, a SLOT, or an ABSTRACTION — never a PRIMITIVE.
+  Unseen-TASK reuse is not COMPOSITION; that word requires unseen PROGRAM
+  COMBINATIONS. Route optimization is not SYNTHESIS until a compact program
+  variable exists or the search space is explicitly program-structured. And keep
+  the five layers apart in every claim, because that is what makes a failure
+  localize: representation reuse != exportable computation != composition !=
+  program writing != program synthesis != primitive invention. Everything ROW
+  has confirmed so far is ECONOMICS (reuse lowers lifetime cost; the amortization
+  law is quantitative; coordinates are made during learning); none of it yet
+  shows a computational LANGUAGE.
