@@ -77,6 +77,16 @@ controls pass bitwise: at `H = 1` the multi-head learner reproduces the
 ordinary and the organized reference lifetimes tensor-for-tensor. No H53
 claim exists yet.
 
+**Next branch — export.** Everything confirmed so far is about ECONOMICS. It
+does not yet show that the learner acquired a computational *language*, and the
+project now says so explicitly: `EXPORT_BRANCH_PROGRAM.md` freezes a decision
+tree (E0-E8) around one criterion — *synthesis starts when a frozen learned
+object composes in a program that was never jointly optimized with it* — and a
+terminology contract that reserves the word **primitive** for objects that pass
+an export test. Its first registered stop condition is real: if a frozen library
+cannot solve unseen teacher programs even with oracle routing, the synthesis
+interpretation of this substrate ends.
+
 Details and the research record: `reports/`, `notes/`, `reviews/`. Paper
 draft: `paper/draft.md`.
 
@@ -91,6 +101,8 @@ draft: `paper/draft.md`.
   sealed.
 - `row_v5_experimental_spec.md` + `V5_CLOSURE.md` — V5 spec and its closure
   record, including the review-55 withdrawal.
+- `EXPORT_BRANCH_PROGRAM.md` — the export/composition/synthesis branch:
+  decision tree, terminology contract, and binding methodological rules.
 - `H39_*_PLAN.md`, `H39_DEVELOPMENT_CLOSURE.md`, `H47_*`, `H48B_*`, `H49_*`,
   `H50_*`, `H51_*`, `H53_*` — the frozen plans of the discovery line, each
   hashed in `tools/check_prereg.py` before its code was written. Design errors
