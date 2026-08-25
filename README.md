@@ -11,58 +11,103 @@ synthetic on purpose: the hidden operator library, the programs composing
 it, and a continuous reuse knob `rho` are all known to the experimenter and
 hidden from the learner, so every claim can be checked against ground truth.
 
-**Status: four sealed blocks closed.** Each block was run against a protocol
-frozen and hashed before those worlds existed. Development used seeds 0–9;
+**Status: five sealed blocks closed.** Each was run against a protocol frozen
+and hashed before those worlds existed. Development used seeds 0–9;
 confirmatory bands were never inspected before the corresponding freeze.
+`python tools/check_prereg.py` verifies the trail (21 frozen plans);
+`python tools/check_invalid.py` verifies that no withdrawn artifact path has
+been resurrected.
 
 | Block | Seeds | Question | Verdict |
 | --- | --- | --- | --- |
 | **V1** | 100–129 | When is reuse valuable? | Confirmed 30/30. A reusable operator basis beats a compute-matched dense learner at exact reuse (mean +3,204 nats); the advantage is linear in measured functional recurrence (\(R^2 = 0.935\)); the preference reverses inside every world, dense at weak recurrence and reusable at strong, with crossover \(\rho^* = 0.835 \pm 0.023\) (\(r^* = 0.499 \pm 0.050\)). |
 | **V2** | 200–229 | Can the learner decide what to share? | Confirmed split. Allocation tracks per-primitive recurrence 30/30 (the learner can *read* the economics); the same learner loses the literal two-part code 30/30 (it cannot yet *write* them compactly). The V1 law's coefficients also replicate (slope 6,194 nats per unit recurrence, \(R^2 = 0.926\)). |
-| **V3** | 300–329 | Can repeated structure become a new abstraction? | Confirmed 5/5. PROMOTE creates a shared object, migrates description (−63.3%), improves prediction (+1,174 nats), and cheapens related future tasks. First learner in the program to win prediction and description length at once, with capacity it created. |
-| **V4R** | 400–429 | When does a library *need* a lifecycle? | Confirmed negative, 7/7. Local private compression beats factorization 30/30. No factorization win at library size \(\le 16\). FORK pays in 2/30 (bound 2). The one structural edit that pays is **retention**, and it obeys the same amortization law as birth: \(\mathrm{RETAIN}\) iff \(H_R \cdot \bar{s} > \lambda D(A)\). Sealed crossing 18.0 returning tasks against a development-derived prediction of 17.1. |
+| **V3** | 300–329 | Can repeated structure become a new abstraction? | Confirmed 5/5. PROMOTE creates a shared object, migrates description (−63.3%), improves prediction (+1,174 nats), and cheapens related future tasks. |
+| **V4R** | 400–429 | When does a library *need* a lifecycle? | Confirmed negative, 7/7. Local private compression beats factorization 30/30. The one structural edit that pays is **retention**, obeying the same amortization law as birth: RETAIN iff \(H_R \cdot \bar{s} > \lambda D(A)\). Sealed crossing 18.0 returning tasks against a development prediction of 17.1. |
+| **V5** | 600–629 | Is the amortization law quantitative under causal change? | Closed. `V5_CLOSURE.md` records what held (quantitative amortization; the rate–distortion currency) **and the withdrawal of finding V5-D** after code review 55: two audits had compared functions across unaligned coordinates and one loader dropped retirement state. Corrected, the learner *does* encode the family structure — what fails is PROMOTE's extraction of it. |
+| **H39** | 700–729 | Are useful abstractions *made* during learning, or *mined* afterwards? | Confirmed, 5/5 estimands. An abstraction parameterized in the basis — \(P(\alpha)\), argument-plus-patch — makes an unseen family member cheap to acquire online (E1 0.886, CI [0.717, 1.054]; E3 −1,545 nats, CI [−1,649, −1,435]; E4 0.815, CI [0.765, 0.866]). |
 
 The original V4 premise — that successful abstraction birth implies a
 maintenance problem — failed in development and is preserved unrevised in
 `row_v4_experimental_spec.md`. V4R is the question that was actually sealed.
+One V6 arm was **invalidated and withdrawn** (its inner loop never adapted);
+the quarantine is machine-checkable in `artifacts/INVALID_MANIFEST.md`.
 
-**V5** is in progress: a provisional spec
-(`row_v5_experimental_spec.md`), with two rungs already closed (the
-component rate-distortion frontier, and the causal test of the
-amortization law). It asks
-whether the amortization law is quantitative under causal changes to code
-cost, and whether a second representation class exists above independently
-compressed atoms. Confirmatory seeds 600–629 are reserved and untouched.
-No V5 claim is confirmatory.
+## What the H39 line established, and the negatives after it
 
-One V1 secondary hypothesis ("transfer improves before it amortizes") was
-falsified during development and is reported as such. Details and the
-research record: `reports/`, `notes/`, `reviews/`. Paper draft:
-`paper/draft.md`.
+The confirmed result is narrow on purpose: **existence and use, not
+discovery.** The useful abstraction is not sitting in the finished collection
+of task solutions waiting to be extracted — the learner has to create and
+maintain the coordinate system *while it learns*. Online acquisition of an
+unseen family costs 1.64× ordinary; post-hoc extraction from the finished
+learner's own realized population costs 2.59×.
+
+Five development rungs then asked whether such structure can be *discovered*,
+and all five returned negatives that are themselves the result:
+
+- **H47** — imposing discrete membership on a continuous manifold is a cost,
+  not a gain; on a world with two genuinely orthogonal family subspaces the
+  learner rationally absorbs both into one channel and beats the
+  told-membership oracle on present cost.
+- **H48b** — identity pays for *future* acquisition only below a channel-width
+  threshold; never for present cost. Current utility, future fertility, and
+  description cost must be priced separately.
+- **H49** — discriminating retrospective signals exist **only** on a
+  representation already organized around the true structure.
+- **H50** — 4,096 steps of budget-matched reorganization recover ≈ 0% of that
+  separation, and migration under *any* hypothesis manufactures the surface
+  signature (substitutability) without the substance.
+- **H51** — neither preserved provenance nor a decomposable innovation basis
+  buys reorganizability: three alternative wake representations all give
+  \(C_{\text{restructure}} = \text{None}\). One arm cut absolute reacquisition
+  cost 18–38% while being *anti*-informative about grouping — **useful
+  retained information is not information about how to reorganize.**
+
+Together these say representation formation is **path-dependent**: two
+learners can reach the same present cost and the same description length and
+leave behind states with very different future abstraction options.
+
+**In progress — H53** (`H53_PARALLEL_FORMATION_PLAN.md`): can several
+candidate organizations develop *concurrently* in one lifetime, so the true
+one becomes distinguishable at less than one full lifetime per candidate? It
+measures a **shared-parameter co-formation frontier**, not amortization of
+computation in general — a deliberate limit, since every head contributes
+gradient to the parameters the true one develops through. Its two gating
+controls pass bitwise: at `H = 1` the multi-head learner reproduces the
+ordinary and the organized reference lifetimes tensor-for-tensor. No H53
+claim exists yet.
+
+Details and the research record: `reports/`, `notes/`, `reviews/`. Paper
+draft: `paper/draft.md`.
 
 ## Repository map
 
 - `neural_library_learning_v1_experimental_spec.md` — frozen V1 spec
   (written before any code; the preregistration anchor).
-- `row_v2_experimental_spec.md` — V2 spec, closed with live status
-  annotations.
-- `row_v3_experimental_spec.md` — V3 spec (PROMOTE); sealed block closed.
-- `row_v4_experimental_spec.md` — original V4 lifecycle spec, preserved
-  unrevised with a gate-outcome banner.
-- `row_v4r_experimental_spec.md` — V4 revised: when does a library need a
-  lifecycle?
-- `row_v5_experimental_spec.md` — V5 spec (representation economics);
-  active, provisional. `notes/v5-sketch.txt` is its superseded sketch.
-- `EXPERIMENT_PLAN.md`, `CONFIRMATION_PLAN.md`, `V2_CONFIRMATION_PLAN.md`,
-  `V3_CONFIRMATION_PLAN.md`, `V4R_CONFIRMATION_PLAN.md`, `RELEASE_PLAN.md`
-  — development/confirmation firewall and frozen protocols.
-- `PREDICTIONS.md` — standing predictions ledger, appended not rewritten.
-- `PROGRESS.md` — running lab record. `AGENTS.md` — working conventions.
-- `notes/` — research thinking records. `reviews/` — reviewer dialogue.
-- `paper/draft.md` — write-up in progress.
-- `src/row/` — world generator, models, experiments. `tests/` — unittest
-  suite. `reports/` — analysis JSON and figures. `artifacts/` — per-run
-  outputs with provenance (untracked; regenerable from committed seeds
+- `row_v2_experimental_spec.md`, `row_v3_experimental_spec.md` — closed specs
+  with live status annotations.
+- `row_v4_experimental_spec.md` — original V4 spec, preserved unrevised with a
+  gate-outcome banner. `row_v4r_experimental_spec.md` — the successor actually
+  sealed.
+- `row_v5_experimental_spec.md` + `V5_CLOSURE.md` — V5 spec and its closure
+  record, including the review-55 withdrawal.
+- `H39_*_PLAN.md`, `H39_DEVELOPMENT_CLOSURE.md`, `H47_*`, `H48B_*`, `H49_*`,
+  `H50_*`, `H51_*`, `H53_*` — the frozen plans of the discovery line, each
+  hashed in `tools/check_prereg.py` before its code was written. Design errors
+  found later are appended as dated Amendments; plans are never edited.
+- `PREDICTIONS.md` — standing predictions ledger, appended not rewritten:
+  every hypothesis, verdict, withdrawal and correction, including the ones
+  that went against us.
+- `artifacts/INVALID_MANIFEST.md` + `tools/check_invalid.py` — machine-checkable
+  quarantine of withdrawn artifacts.
+- `SPEC_AUDIT.md` — spec-to-implementation audit, re-run after each milestone.
+- `PROGRESS.md` — running lab record. `AGENTS.md` — working conventions and
+  accumulated implementation learnings. `CLAUDE.md` — front-door safety summary.
+- `notes/` — research thinking records. `reviews/` — the full reviewer dialogue
+  (74 numbered rounds, 73 filed plus the founding assessment), indexed in `reviews/review-index.md`.
+- `src/row/` — world generators, models, experiments. `tests/` — unittest
+  suite (184 tests). `reports/` — analysis JSON and figures. `artifacts/` —
+  per-run outputs with provenance (untracked; regenerable from committed seeds
   and configs).
 
 ## Quick start
@@ -70,38 +115,50 @@ research record: `reports/`, `notes/`, `reviews/`. Paper draft:
 ```powershell
 python -m pip install -e .
 python -m unittest discover -s tests -v
+python tools/check_prereg.py          # preregistration trail
+python tools/check_invalid.py         # quarantine trail
 python -m row.experiments.scratch_difficulty --config configs/v1.yaml
-python -m row.experiments.oracle_lifetime --config configs/v1.yaml --output artifacts/oracle
 python -m row.experiments.learned_lifetime --config configs/v1.yaml --model continuous --output artifacts/continuous
 python -m row.experiments.learned_lifetime --config configs/v1.yaml --model dense --output artifacts/dense
 python -m row.experiments.sweep_rho --help
 python -m row.experiments.quantize_artifact artifacts/continuous
 ```
 
-Scratch controls accept `--world-seed`, `--learning-rate`,
-`--updates-per-example`, and `--output` overrides. Learned-model runs accept
-`--reuse-rho`, `--teacher-rank`, `--operator-activation`,
-`--operator-alpha-init`, `--order reverse`, and `--fast-tuning`.
+The meta-recurrence line (H39 onward) runs through `mixed_lifetime`, whose
+learners include the parameterized-slot family and the H53 multi-head
+co-formation learner:
+
+```powershell
+python -m row.experiments.mixed_lifetime --config configs/v5_h72.yaml --r-meta 1.0 --model pslot --slot-args 4 --pslot-count 2 --help
+```
 
 ## Reproducibility
 
 Every run writes a fingerprint-validated artifact directory; worlds are
 generated from explicit NumPy `SeedSequence` components (never process-
 dependent hashes); paired models receive identical worlds, task orders,
-examples, replay budgets, and evaluation sets; and online examples are
-scored before the model updates on them.
+examples, replay budgets, and evaluation sets; and online examples are scored
+before the model updates on them. Long scorers cache each completed cell under
+a protocol fingerprint and refuse a cell computed under a different protocol.
 
 Seed partitions:
 
-- **Development:** 0–9 (architecture, tuning, testbed design). V5 also
-  used 500–509 as a contaminated development band; those worlds are not
+- **Development:** 0–9 (architecture, tuning, testbed design). V5 also used
+  500–509 as a contaminated development band; those worlds are not
   confirmatory.
-- **V1 confirmatory:** 100–129 (closed).
-- **V2 confirmatory:** 200–229 (closed).
-- **V3 confirmatory:** 300–329 (closed).
-- **V4R confirmatory:** 400–429 (closed).
-- **V5 confirmatory:** 600–629 reserved; not to be generated until a
-  `V5_CONFIRMATION_PLAN.md` is frozen and hashed.
+- **V1** 100–129, **V2** 200–229, **V3** 300–329, **V4R** 400–429,
+  **V5** 600–629, **H39** 700–729 — all closed.
+
+## How this project treats results
+
+Negative and invalid results are first-class. Verdicts are read from a frozen
+table and recorded even when the threshold turns out to have been the wrong
+one — annotated, never re-judged. Corrections are appended rather than
+rewritten, so the ledger shows what was believed when. Two standing rules earned
+the hard way: every structural claim needs a **matched-budget** and a
+**wrong-structure** control, and experiment code is **double-checked against
+its frozen plan before any long run** — a practice that has caught five
+construct errors that would otherwise have produced plausible numbers.
 
 The public history is part of the verifiability claim:
 https://github.com/doeixd/reusable-operator-worlds
