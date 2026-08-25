@@ -186,3 +186,43 @@ Amended, before any verdict:
    program schedule**, and E2's plan must then freeze that schedule explicitly
    as part of its generator — a lifetime whose task order was chosen to preserve
    a test stratum is a designed instrument and must be declared as one.
+
+
+# Amendment 2 (2026-08-25, before E0.1 or E1.0 is run): the distance denominator was the V4.1 error
+
+The plan defines contextual functional distance as
+
+    d(A_i, P_j) = E || c[A_i](x) - c[P_j](x) ||^2  /  E || c[P_j](x) ||^2
+
+and justifies the denominator by citing the V4.1 lesson. It IS the V4.1 error.
+`E || c[P_j](x) ||^2` is TOTAL OUTPUT SCALE, and in this world an operator
+changes its input only slightly (`alpha = 0.35`, tanh-bounded state), so
+dividing by total output makes every learned object look substitutable for every
+teacher primitive — exactly the failure that made V4.1's oracle "compact" four
+to six distinct abstractions into one.
+
+Amended before any E0.1 or E1.0 number exists. The denominator is the
+CONTRIBUTION of the teacher operation in that context — what applying it does
+relative to not applying it:
+
+    d(A_i, P_j) = E || c[A_i](x) - c[P_j](x) ||^2  /  E || c[P_j](x) - c[id](x) ||^2
+
+where `c[id]` is the same context with the identity in the tested position. A
+distance of 1.0 therefore means "as wrong as omitting the operation entirely",
+which is the scale a substitutability claim needs.
+
+Two guards are added with it, both from the same lesson:
+
+1. **NULL-EDIT GUARD.** `d(identity, P_j)` is computed and reported for every
+   teacher primitive. It must be approximately 1.0 by construction; if any
+   learned object scores a distance ABOVE its own null edit, the instrument is
+   reporting that deleting the operation beats substituting it and the audit is
+   void rather than negative.
+2. **DEGENERATE-CONTEXT GUARD.** A context whose teacher contribution
+   `E || c[P_j](x) - c[id](x) ||^2` is below 1% of the mean contribution across
+   contexts is dropped and counted, because a context in which the operation
+   does nothing cannot discriminate anything.
+
+The registered E0.1 readings (best assignment beats both controls by 2x;
+per-position distances agree within 50%) are unchanged and are read against the
+corrected distance.
