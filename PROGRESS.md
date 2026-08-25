@@ -3258,3 +3258,16 @@ four registered outcomes including an explicit stop condition, and two bitwise
 equivalence controls (`H = 1` must reproduce `M_4` and `L_4` exactly).
 Registered in `PREDICTIONS.md` with both prediction sets and the disclosed
 limitation that PROMOTE stays shared. Not yet frozen; no code written.
+
+# 2026-08-25 - REVIEW 74 FILED; H53 AMENDED BEFORE ANY CODE
+
+Review 74 filed and indexed: the H53 draft conflated sharing a substrate with
+sharing a gradient trajectory. Appended Amendment 1 to
+`H53_PARALLEL_FORMATION_PLAN.md` — the measured quantity renamed the
+shared-parameter co-formation frontier, mean-gradient rule for shared
+parameters with head gradients kept at full scale, L3's partition specified
+object by object including optimizer state and PROMOTE's input, a
+mask-neutralized collapse probe, three cost ratios in device-seconds including
+selection, narrowed C_1/C_2/D outcomes with the architecture-stop
+recommendation withdrawn from D, and a machine-testable L2 trigger. Re-frozen;
+still no code.

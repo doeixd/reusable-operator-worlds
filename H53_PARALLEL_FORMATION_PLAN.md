@@ -181,3 +181,128 @@ default), and drop the sibling diagnostics before thinning any LOO sample.
 A learned proposer; PRUNE/MERGE/FORK operators over heads; sleep-time selection
 (H53 measures whether the evidence to select on EXISTS, not the selection
 mechanism); branching the promoted library; sealed seeds.
+
+# Amendment 1 (2026-08-25, review 74, BEFORE ANY CODE): what H53 measures, and five instrument fixes
+
+Review 74's framing objection is accepted in full and changes what the result may
+be called. H53 does not compare a shared trajectory against six independent
+ones; it introduces a NEW COUPLED LEARNER in which every head contributes
+gradient to the parameters TRUE must develop through. A failure at L1 therefore
+has two readings — "these computations cannot be shared while preserving
+structural alternatives" and "co-training six incompatible objectives drives the
+shared parameters to a compromise" — and this instrument cannot separate them.
+
+The quantity is renamed accordingly, everywhere: the **shared-parameter
+co-formation frontier**. `H = 1` bitwise equivalence to `M_4` and `L_4` shows
+the implementation contains both known mechanisms as limiting cases; it does NOT
+show that the six-head trajectory is an amortized version of six independent
+ones, and no verdict may claim that.
+
+## 1. Loss combination, corrected
+
+Registered rule, replacing the sum and the (withdrawn) claim that Adam
+normalizes magnitude away — Adam is not invariant to how losses are combined
+once epsilon, moments, decay, and differing gradient directions enter:
+
+- **Shared parameters** receive the MEAN of the heads' gradients: the backward
+  pass accumulates `sum_h L_h`, then every shared parameter's `.grad` is scaled
+  by `1/H` before the optimizer step.
+- **Head-specific parameters** receive their OWN gradient at full scale, exactly
+  as in a single-head lifetime.
+
+This is stricter than review 74's literal proposal, which would have divided the
+head-specific gradients by `H` as well and silently changed each head's
+effective learning rate relative to `M_4`/`L_4`. At `H = 1` both rules collapse
+to the ordinary objective, so the bitwise controls remain exact. The scaling is
+asserted in code and logged.
+
+## 2. L3 defined completely
+
+Every object is classified. `H` = number of heads.
+
+| object | L1 | L3 |
+|---|---|---|
+| 12 basis operators (`U`, `V`, `b`, learnable alpha) | SHARED | SHARED |
+| parameterized slots' argument matrices `U_k` (2 x K) | SHARED | HEAD-SPECIFIC |
+| task route codes `task_codes` | SHARED | HEAD-SPECIFIC |
+| task residuals `task_residuals` | SHARED | HEAD-SPECIFIC |
+| task slot arguments `task_alphas` | HEAD-SPECIFIC | HEAD-SPECIFIC |
+| route policy / mask (`task_mask`) | HEAD-SPECIFIC | HEAD-SPECIFIC |
+| promoted abstractions and `task_reference` | SHARED | SHARED |
+| retirement (`retired`) | SHARED | SHARED |
+| optimizer state (Adam moments) | per parameter tensor: SHARED for shared tensors, HEAD-SPECIFIC for head tensors | same rule |
+| world, task order, examples, replay draws, seeds | SHARED (identical across heads by construction) | SHARED |
+
+Promotion input, at both levels: PROMOTE clusters over the SHARED residual
+population at L1; at L3, where residuals are head-specific, it clusters over the
+**SHAM head's** residuals, so the library remains one head-agnostic object and
+the levels differ only in what each head may develop. This is registered, not
+discovered later, and is the reason H53 does not reach `s = 0`.
+
+## 3. Collapse, made non-tautological
+
+The divergence probe **neutralizes the externally supplied mask**: every head's
+`task_mask` is cleared and its `route_temperature` set to 1.0 before the probe
+is run, so what is compared is the LEARNED state, not six hard-coded policies.
+Reported per pair of heads on the fixed probe, as mean normalized output
+distance, and referenced against the same quantity measured between the
+INDEPENDENT `M_4` and `L_4` artifacts (which is what genuine independent
+development looks like on this world). COLLAPSE fires when mean pairwise
+neutralized divergence is below 5% of that reference. A tautological version
+(masks left in place) is additionally reported, labelled as such, and used for
+nothing.
+
+## 4. Three cost ratios, not one
+
+`C_candidate` is split, and compute is counted in DEVICE-SECONDS (process CPU
+time, summed over workers) with FLOP-proportional step counts recorded
+alongside; wall-clock is reported separately as an engineering number only,
+because concurrency can manufacture apparent amortization in wall time.
+
+    A_train = total training device-seconds / (H * single-head training device-seconds)
+    A_state = unique live state scalars / (H * single-head state scalars)
+    A_total = (C_train + C_selection) / (H * (C_lifetime + C_independent_selection))
+
+`C_selection` is the LOO scoring of all `H` heads; `C_independent_selection` is
+the same scoring applied to one independent lifetime. `A_total` is the honest
+end-to-end number and is expected to be dominated by scoring, which is itself a
+finding worth stating: selection, not formation, may be the binding cost.
+
+## 5. Outcomes C and D narrowed
+
+- **C_1 — FRONTIER BRACKETED.** L1 fails SEPARATION and L3 passes. The
+  co-formation frontier lies between the two levels tested, and its location is
+  the result.
+- **C_2 — DEPTH MATTERS, FRONTIER UNLOCALIZED.** L3's TRUE-vs-best-wrong margin
+  exceeds L1's by >= 0.05 in >= 2 of 3 worlds, but L3 does not separate. Branch
+  depth is causally implicated; the frontier is not localized and lies deeper
+  than L3.
+- **D — NO DISCRIMINATION AT EITHER LEVEL**, with heads demonstrably distinct
+  (neutralized divergence above the collapse threshold) and learning. Licensed
+  conclusion, exactly: **the co-formation frontier, if it exists, lies deeper
+  than L3** — not that structural alternatives cost full retraining on this
+  substrate, which this design cannot establish because it never reaches
+  independent libraries. The stop-pushing-this-architecture recommendation is
+  withdrawn from D and reserved for a future design that does reach `s = 0`.
+
+## 6. The L2 trigger, machine-testable
+
+L2 runs if and only if, after L1 and L3 are scored:
+
+    (exactly one of {L1, L3} meets SEPARATION)
+    OR
+    (neither meets SEPARATION AND L3's TRUE-vs-best-wrong margin exceeds L1's
+     by >= 0.05 in >= 2 of 3 worlds)
+
+Evaluated by the scorer and printed before any L2 cell is launched; no
+discretion at the point where the result becomes interesting.
+
+## Predictions, updated
+
+Review 74 (the PI): L1 collapses, with the learned head state after mask
+neutralization very similar across heads; L3 either lifts the TRUE margin
+without reaching 0.15, or separates at a disappointing cost ratio; low
+probability on clean separation with `A_train << 1`. Ours is unchanged (outcome
+C, collapse at L1, L3 margin >= +0.10 but short of +0.15, SHAM the binding
+clause) and is now stated against the narrowed C_1/C_2 split: we expect **C_2**
+specifically.

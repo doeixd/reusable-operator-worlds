@@ -1,0 +1,131 @@
+I think H53 is the right experiment, but I would **not freeze this draft yet**. The
+central idea is strong; there are a few places where the current plan could produce a
+clean-looking result that would not answer the intended amortization question.
+
+The biggest issue is that H53 currently conflates SHARING A SUBSTRATE with SHARING THE
+GRADIENT TRAJECTORY. With six heads, every wrong hypothesis and SHAM actively
+contributes gradients to the parameters TRUE is supposed to develop through. So if L1
+collapses, there are two readings:
+
+    "these computations cannot be shared while preserving structural alternatives"
+
+versus
+
+    "averaging six incompatible training objectives drives the shared parameters
+     toward a compromise."
+
+The latter may be part of the real cost of sharing, but it needs to be explicit.
+`H=1 TRUE == L4` and `H=1 SHAM == M4` do NOT establish that the six-head shared
+trajectory is an amortized version of six independent trajectories. It is a new
+coupled learner.
+
+I would still run that learner -- but call the quantity what it is: a SHARED-PARAMETER
+CO-FORMATION FRONTIER. If this succeeds, great. If it fails, it does not yet prove
+computation itself cannot be amortized; it says the candidate hypotheses cannot share
+those parameter trajectories under this co-training rule.
+
+There are six things I would fix before freeze:
+
+1. USE THE MEAN OF HEAD LOSSES, NOT THE SUM. I would remove the claim that Adam
+   "normalizes the magnitude away." Adam is not exactly invariant to multiplying or
+   combining losses once epsilon, moments, decay, clipping, different gradient
+   directions, etc. enter. Use L_shared = (1/H) sum_h L_h so head count does not
+   silently change the optimization scale.
+
+2. DEFINE L3 COMPLETELY. In the paste I can see exactly what L1 branches, but not the
+   precise L3 parameter partition. This is the causal intervention, so every
+   tensor/object must be classified SHARED or HEAD-SPECIFIC, including optimizer
+   state. Especially say what happens to the basis, U_k, routes, residuals,
+   promotions, and retirement.
+
+3. MAKE COLLAPSE NON-TAUTOLOGICAL. A functional divergence test can pass simply
+   because TRUE and WRONG have different fixed masks. Measure candidate-specific
+   divergence under a COMMON NEUTRALIZED ROUTE POLICY or otherwise remove the
+   externally supplied mask from the probe. What you need to know is whether different
+   LEARNED ORGANIZATIONS developed, not whether six hard-coded policies produce
+   different outputs.
+
+4. SEPARATE COMPUTE, MEMORY, AND END-TO-END SELECTION COST. Right now `C_candidate`
+   mixes state scalars and wall-clock conceptually, while
+   A = (C_shared + H C_candidate) / (H C_lifetime) only prices wake. But your LOO
+   scoring costs more than a lifetime per head. I would report
+
+       A_train = total training work / (H * single-head training work)
+       A_state = unique live state / (H * single-head state)
+       A_total = (C_train + C_selection) / (H * (C_lifetime + C_independent-selection))
+
+   Device-seconds/FLOPs are preferable to raw wall time for the scientific compute
+   ratio. Wall time can be reported as an engineering metric. Otherwise
+   batching/concurrency can manufacture apparent amortization.
+
+5. NARROW OUTCOMES C AND D. Because L3 explicitly does NOT reach independent libraries
+   / s = 0, failure at L3 cannot license "structural alternatives cost approximately
+   full retraining on this substrate." It licenses: THE FRONTIER, IF IT EXISTS, LIES
+   DEEPER THAN L3. Likewise, if L1 fails and L3 merely has a "materially larger" TRUE
+   margin but still no SEPARATION, you have not bracketed s*. I would distinguish
+
+       C_1: L1 fails, L3 passes            => s* bracketed
+       C_2: L3 > L1 but L3 fails           => branch depth matters, frontier unlocalized
+
+6. REGISTER THE L2 TRIGGER EXACTLY. "If the endpoints disagree" should mean something
+   machine-testable before seeing results. For example: run L2 iff exactly one
+   endpoint meets SEPARATION, or iff L3 improves TRUE-vs-best-wrong margin over L1 by
+   at least x even without passing. Otherwise you will have discretion precisely when
+   the result gets interesting.
+
+Those are the things I consider important enough to amend before freeze.
+
+## What I especially like about the design
+
+The TRUE-vs-BEST-WRONG criterion is now exactly right. H49 taught us this the hard
+way, and H53 applies the lesson correctly: a structural score is evidence only if it
+prefers the proposed structure over plausible alternatives. SHAM is necessary, but it
+is not sufficient.
+
+I also really like retaining the sibling endpoint strictly as a last diagnostic. If
+TRUE is selected from past-data quantities and THEN turns out to have better future
+fertility, that would be a genuinely strong validation of the retrospective
+abstraction signal.
+
+And the H = 1 bitwise equivalence tests are excellent. They establish that the
+implementation contains the known M_4 and L_4 mechanisms as limiting cases.
+
+## My prediction after H51
+
+I now lean even more toward your prediction than the reviewer's. I expect L1 to
+collapse into something close to a shared distributed solution. More precisely, I
+expect the LEARNED CANDIDATE-SPECIFIC STATE AFTER NEUTRALIZING THE MASKS to be very
+similar across heads.
+
+For L3, I think there are two plausible outcomes: TRUE margin rises somewhat but still
+misses 0.15, or TRUE finally separates but the compute/state ratio is disappointingly
+high. I put less probability on the attractive result -- TRUE cleanly separates with
+A_train << 1.
+
+H39-H51 have repeatedly shown that useful organization is deeply trajectory-dependent.
+That makes me suspect branching will have to penetrate rather far into the actual
+learned computation before competing organizations can develop independently. But that
+is exactly why H53 is worth doing.
+
+## And a negative H53 would be scientifically important
+
+If increasing candidate-specific depth systematically gives L1: no structure -> L3:
+more structure -> independent L_4: full structure, then we have identified a
+continuum: REPRESENTATIONAL INDEPENDENCE <-> AMORTIZATION. That itself would tell us
+something fundamental: alternative abstractions compete for the very computation we
+hoped they could share.
+
+And this maps directly onto program synthesis. A beam search can cheaply maintain many
+candidate programs because most of the immutable semantics of ADD, CALL, LOOP, etc. is
+shared while the candidate syntax trees remain distinct. If neural structural
+hypotheses require nearly independent learned substrates merely to become meaningful,
+that is evidence that this neural representation is missing precisely the kind of
+stable, shareable ABI that would make program-like search efficient.
+
+So H53 can tell us whether we're close to "shared computational substrate + cheap
+alternative organizations", or whether we need to move one level further toward an
+explicitly COPY-ON-WRITE / PROGRAM-LIKE representation.
+
+My call is therefore: AMEND THESE ISSUES, THEN FREEZE H53. I would not change its
+central question or add another architecture arm. The experiment is asking exactly the
+right next question.

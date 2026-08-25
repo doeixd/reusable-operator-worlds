@@ -5177,3 +5177,41 @@ ARI ~0), and at L3 a TRUE margin clearly above H51's (>= +0.10) but short of
 shared library still carry most of the computation. We further predict SHAM
 remains the best head on raw `C_LOO` at both levels, as in H50 and H51, making
 the SHAM clause the binding one.
+
+# H53 AMENDMENT 1 (2026-08-25, review 74, before any code): WHAT H53 CAN AND CANNOT CLAIM
+
+Review 74 rejected the first freeze and its framing objection is accepted in
+full. H53 does not compare a shared trajectory with six independent ones; it
+introduces a NEW COUPLED LEARNER in which every head contributes gradient to the
+parameters TRUE must develop through. The measured quantity is renamed the
+SHARED-PARAMETER CO-FORMATION FRONTIER, and no H53 verdict may claim that
+computation in general cannot be amortized.
+
+Six fixes registered before any code (`H53_PARALLEL_FORMATION_PLAN.md`
+Amendment 1): (1) shared parameters take the MEAN of head gradients while
+head-specific parameters keep their own gradient at full scale — stricter than
+review 74's literal proposal, which would have divided head gradients by H and
+changed each head's effective learning rate relative to M_4/L_4; at H = 1 both
+rules reduce to the ordinary objective, so the bitwise controls stay exact.
+(2) L3's partition is specified object by object, optimizer state included, with
+PROMOTE clustering over the SHAM head's residuals at L3 so the library stays one
+head-agnostic object. (3) The collapse probe CLEARS every head's mask and
+resets its route temperature, so it compares learned state rather than six
+hard-coded policies, referenced against the divergence between the independent
+M_4 and L_4 artifacts. (4) Cost splits into A_train, A_state and A_total in
+device-seconds, with selection cost included — LOO scoring exceeds a lifetime
+per head, so selection rather than formation may be the binding cost, which is
+itself a registered possible finding. (5) Outcomes C_1 (L1 fails, L3 passes:
+frontier bracketed) and C_2 (L3 beats L1 by >= 0.05 in >= 2/3 worlds but does
+not separate: depth matters, frontier unlocalized) replace the old C, and D now
+licenses only "the frontier, if it exists, lies deeper than L3"; the
+stop-pushing-this-architecture recommendation is WITHDRAWN from D because this
+design never reaches independent libraries. (6) The L2 trigger is machine-
+testable and printed before any L2 cell launches.
+
+Predictions after the amendment. Review 74 (PI): L1 collapses, with neutralized
+head state very similar across heads; L3 either lifts the TRUE margin without
+reaching 0.15 or separates at a poor cost ratio; low probability on clean
+separation with A_train << 1. Ours, now stated against the narrowed split: **C_2
+specifically** — collapse at L1, and at L3 a TRUE margin >= +0.10 that still
+misses +0.15, with SHAM the binding clause.

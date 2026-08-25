@@ -2845,3 +2845,30 @@ INNOVATION — HYPOTHESIS / PROVISIONAL STRUCTURE — and an option-value term
 V(R_t) = current utility + value of still-accessible representational futures.
 Connects the whole line to program synthesis: beam search / version space over
 {P^(h)} is the same algorithmic pattern as {R^(h)}.
+
+
+### [reviewer-feedback-74.txt](reviewer-feedback-74.txt)
+On the H53 draft: right experiment, do not freeze yet. Names the framing error
+— the design conflates SHARING A SUBSTRATE with SHARING A GRADIENT TRAJECTORY,
+so a failure at L1 admits two readings (these computations cannot be shared /
+co-training six incompatible objectives compromises the shared parameters), and
+`H = 1` bitwise equivalence to M_4 and L_4 does NOT make the six-head
+trajectory an amortized version of six independent ones. Renames the quantity
+the SHARED-PARAMETER CO-FORMATION FRONTIER. Six required fixes before freeze:
+mean not sum for the shared objective (Adam is not invariant to how losses are
+combined); L3's parameter partition specified object by object including
+optimizer state; the collapse probe must NEUTRALIZE the externally supplied
+masks or it merely detects six hard-coded policies; cost split into A_train /
+A_state / A_total in device-seconds rather than wall time, with selection cost
+included because LOO scoring exceeds a lifetime per head; outcomes C and D
+narrowed (C_1 bracketed versus C_2 unlocalized; D licenses only "the frontier
+lies deeper than L3", and the stop-this-architecture recommendation is
+withdrawn from it); and a machine-testable L2 trigger. Endorses the
+TRUE-vs-best-WRONG criterion, the sibling endpoint as a last diagnostic, and
+the bitwise limiting-case tests. Predicts L1 collapse with neutralized head
+state very similar across heads, and low probability on clean separation at
+A_train << 1. Frames the negative as itself important: representational
+independence versus amortization is a continuum, and if structural hypotheses
+need nearly independent substrates to become meaningful, the neural
+representation is missing the stable shareable ABI that makes program-like
+beam search cheap.
