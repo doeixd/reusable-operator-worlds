@@ -3283,3 +3283,16 @@ both prediction sets. Registered in `PREDICTIONS.md`; terminology rules mirrored
 into `AGENTS.md`. H53 continues untouched and may not be used to move any
 threshold registered here. No rung has been run; each needs its own frozen plan
 first.
+
+# 2026-08-25 - EXPORT BRANCH AMENDED BEFORE ANY RUNG
+
+Appended Amendment 1 to `EXPORT_BRANCH_PROGRAM.md` and re-froze: E1 must include
+a route-expressible substrate or its STOP is unearned (with the V1 matched-slot
+numbers as the reason); new E1.0 non-vacuity gate on seen programs with a
+threshold set against those baselines; an adaptable/frozen tensor table per arm
+with R split into R-route (primary) and R-full; a Phase 0 feasibility gate
+proving the E2 pair-novel stratum exists before the world is designed; a new
+rung E9 (export-constrained formation) registered in advance as the constructive
+successor to an E1 negative, with matched and wrong-constraint controls; and an
+explicit statement of what a clean sweep would and would not license. H53
+untouched.

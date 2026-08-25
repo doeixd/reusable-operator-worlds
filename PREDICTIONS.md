@@ -5252,3 +5252,36 @@ channel — the opposite of the stable per-object interface E2 needs. If E2's
 oracle arm fails, our registered reading is that the OPERATOR ABI, not the router
 and not the library's contents, is what must be redesigned. E7 is the rung we are
 least able to predict and we say so in advance.
+
+# EXPORT BRANCH AMENDMENT 1 (2026-08-25, before any rung runs)
+
+Five changes to `EXPORT_BRANCH_PROGRAM.md`, made while no data from the branch
+exists.
+
+1. E1 must include a ROUTE-EXPRESSIBLE substrate (the discrete-library family)
+   beside the strongest-loss one, and the branch STOP requires the oracle arm to
+   fail THERE. Our V1 measurements already show the continuous learner solution
+   is not expressible as a teacher route through matched slots (0.00191 own
+   mixture versus 0.00937 matched-slot route, ~4.9x) while the discrete learner
+   is (0.00456 versus 0.00484, ~1.06x). Selecting on lifetime loss alone would
+   have produced a negative about mixture routing and licensed a STOP about
+   export.
+2. New gate E1.0: oracle routing on SEEN programs must recover within 2.0x of the
+   intact model before any unseen-program claim. Threshold set against those two
+   measured baselines (geometric midpoint 2.28x), not guessed.
+3. E1 gets an adaptable/frozen tensor table per arm, and arm R splits into
+   R-route (residual frozen; PRIMARY) and R-full (residual adaptable; capacity
+   reference), so `G_export` cannot be manufactured by a 198-scalar patch.
+4. New Phase 0 gate E2-feas: enumerate whether the E2 pair-novel stratum EXISTS
+   at usable size under the coverage constraints, before designing the world.
+5. New rung E9, EXPORT-CONSTRAINED FORMATION, registered now with its trigger,
+   matched controls (including a wrong-constraint arm) and endpoint, so an E1
+   negative lands on a plan instead of a pause. Rationale: H29, H50 and H51 all
+   say a property not built into formation is not recoverable afterward, and
+   exportability is such a property.
+
+Registered predictions for the new material: E1.0 passes on discrete and fails on
+the mixture substrate; E9 works where the audit fails and costs present-task
+loss, the same trade H39 found for the argument channel. Ceiling stated in the
+document: a clean sweep licenses a fixed-depth sequential-composition DSL, a
+foundation claim, not program synthesis in the usual sense.

@@ -239,3 +239,138 @@ above `r ~ 0.83`, and H47 showed the learner absorbs distinct latent structure
 into one channel, which is the opposite of the stable per-object interface E2
 requires. If E2's oracle arm fails, our registered reading is that the operator
 ABI — not the router and not the library's contents — is the thing to redesign.
+
+
+# Amendment 1 (2026-08-25, before any rung is run): five changes that make this a better plan
+
+No data from this branch exists. These changes are made now, while nothing can
+be fitted to a result.
+
+## 1. E1 must include a route-expressible substrate, or its STOP is unearned
+
+Review 75 selects "the strongest existing high-reuse artifacts, where the
+reusable substrate clearly bought lifetime loss." On this project that selects
+the continuous/parameterized-slot family — and our OWN record already says that
+family is the least likely to pass an oracle-route test, for a reason that has
+nothing to do with exportability:
+
+    Continuous, 64 tasks: own learned mixture route                    0.00191 NMSE
+                          teacher route through Hungarian-matched slots 0.00937   (~4.9x)
+    Discrete,   64 tasks: own learned hard route                       0.00456
+                          teacher route through matched slots           0.00484   (~1.06x)
+
+E1's oracle arm IS "teacher route through the frozen library". The continuous
+learner's solution is distributed and compensatory — it is not expressible as a
+route through individually matched objects, and we measured that in V1. Running
+E1 only on the strongest-loss artifacts would therefore produce a negative about
+MIXTURE ROUTING and license a STOP about EXPORT.
+
+Registered: E1 runs on at least one **route-expressible substrate** (the
+discrete-library family) alongside the strongest-loss substrate, despite its
+weaker lifetime economics. **The branch STOP condition requires the oracle arm to
+fail on the route-expressible substrate too.** A failure only on the mixture
+substrate is recorded as "mixture routing is not route-expressible" — a
+substrate-selection result, not an export result. The dissociation between the
+substrate that wins the economics and the substrate that has a vocabulary is
+itself a registered possible finding.
+
+## 2. E1.0 — a non-vacuity gate on SEEN programs, before any unseen-program claim
+
+Oracle routing on UNSEEN programs is uninterpretable if oracle routing fails on
+programs the lifetime actually optimized. Registered gate, run first:
+
+    freeze the library, supply the teacher route, evaluate on TRAINED programs.
+    E1 proceeds only if oracle-route NMSE <= 2.0x the intact model NMSE.
+
+The threshold is set against the known baselines above rather than guessed: the
+two measured substrates sit at 1.06x and 4.9x, and 2.0x is near their geometric
+midpoint (2.28x), so the gate cleanly separates the substrate whose solution is
+route-expressible from the one whose is not. It is recomputed on the actual
+artifacts used; a substrate that fails E1.0 has its E1 rows reported as
+UNINTERPRETABLE rather than as export failures.
+
+## 3. E1 needs an adaptable-state table as strict as H53's partition
+
+"Adapt only task-local state" is ambiguous in this codebase: task-local means a
+36-scalar route code AND a 198-scalar rank-2 residual AND the slot arguments,
+against a 16-dimensional three-step task. If the residual is adaptable,
+`G_export` may measure residual CAPACITY rather than library value, and every arm
+converges for uninteresting reasons.
+
+Registered: every tensor is classified adaptable/frozen per arm, in a table, in
+E1's own plan. Arm **R** is run in two registered variants, both reported:
+
+    R-route  route code + registered slot arguments only; residual FROZEN at its
+             task-free initial state                         <- PRIMARY
+    R-full   residual additionally adaptable                 <- capacity reference
+
+`G_export` is reported for both. The primary claim uses R-route; R-full exists so
+that "the library exports" cannot be manufactured by a 198-scalar patch.
+
+## 4. E2 held-out strata must be shown to EXIST before the world is designed
+
+With `K = 6, D = 3` there are 36 adjacent primitive pairs per position boundary
+and a lifetime uses 64 programs. The H2 (pair-novel) stratum may be
+unconstructible at usable size while also satisfying E2 coverage constraints
+(every primitive in every position, in multiple surrounding contexts). This is the
+horizon-grid bracketing rule one level up: verify the held-out stratum exists
+before building a world around it.
+
+Registered as a Phase 0 gate, **E2-feas**: enumerate the constraint system and
+report the maximum achievable |H1| and |H2| under the coverage rules. If |H2| is
+below a usable size, E2 must change its generator (more primitives, or depth 4)
+BEFORE it is designed — and the plan must state that changing `K` breaks
+comparability with every existing artifact.
+
+## 5. E9 — export-constrained formation, registered now as the constructive successor
+
+The branch as written audits existing artifacts for exportability. But the most
+robust finding this project has — H29 (the finished span does not contain the
+wanted structure), H50 (~0% migration recovery), H51 (three preservation
+strategies, all `C_restructure = None`) — is that **a property not built into
+formation is not recoverable afterward.** Exportability is such a property. So an
+E1 negative on learners that were never trained under any export pressure is the
+expected outcome, and treating it purely as a terminus would repeat the mistake
+the H39 line already corrected.
+
+Registered in advance, so it cannot be reverse-engineered from E1 results:
+
+**Trigger.** E9 is licensed if E1 oracle fails on the route-expressible substrate
+(the true STOP of section 1), OR if E1 passes but E2 oracle fails.
+
+**Design.** A lifetime that carries an export constraint DURING formation:
+periodic episodes in which the task must be solved with the library frozen and an
+externally supplied route, and/or a held-out-composition term evaluated on
+programs withheld from that lifetime. The objects must stay usable under an
+interface they do not control while they form.
+
+**Controls, matched and mandatory.** Same architecture, same parameter budget,
+same total training compute, same task stream, no export pressure — plus a
+WRONG-CONSTRAINT arm (export episodes with permuted routes), because a constraint
+that helps regardless of its content is a regularizer, not exportability.
+Lifetime economics must be reported beside the export gain: if export is bought
+with present cost, that price IS the result.
+
+**Endpoint.** The same E1 test, unchanged, applied afterward. The question is
+whether `G_export` under R-route is materially higher for the export-constrained
+learner than for its matched control.
+
+**Registered prediction.** We expect E9 to work where the audit fails, and to
+cost present-task loss — the same trade H39 found when the argument channel had
+to be maintained during learning rather than extracted after it.
+
+## 6. What a clean sweep would, and would not, license
+
+Stated now so that success is not over-read. The teacher programs are fixed-depth
+sequential compositions: no branching, no data-dependent control flow, no reuse
+of intermediate values, one combinator. A clean pass through E0-E8 licenses
+exactly:
+
+> Neural-learned objects can serve as the primitives of a fixed-depth
+> sequential-composition DSL, and a program over them can be inferred from
+> examples.
+
+It does not license "program synthesis" in the usual sense, and it is a
+FOUNDATION claim rather than a capability. Control flow, loops, intermediate
+values and macro creation are outside this branch and require a different
+teacher.
