@@ -105,13 +105,35 @@ class MultiHeadPslotLearner(ParameterizedSlotLearner):
     def head_count(self) -> int:
         return len(self.head_names)
 
+    @staticmethod
+    def head_parameters(head) -> list[nn.Parameter]:
+        """A head's OWN tensors, enumerated structurally.
+
+        `head.parameters()` cannot be used for this: the followers are
+        submodules of the primary, so every follower tensor would also appear
+        in the primary's list and be misclassified as shared. That
+        misclassification would have scaled the follower gradients by 1/H —
+        precisely the effective-learning-rate error Amendment 1 exists to
+        prevent — so this is enumerated explicitly instead.
+        """
+
+        out = list(head.basis.parameters())
+        out.append(head.argument_matrices)
+        if head.pslot_count > 1:
+            out.append(head.extra_argument_matrices)
+        out.extend(list(head.abstractions))
+        out.extend(head.task_codes.values())
+        out.extend(head.task_residuals.values())
+        out.extend(head.task_alphas.values())
+        return out
+
     def shared_parameter_ids(self) -> set[int]:
         """Ids of tensors reachable from more than one head."""
         if self.head_count == 1:
             return set()
         counts: dict[int, int] = {}
         for head in self.heads:
-            for parameter in {id(p): p for p in head.parameters()}.values():
+            for parameter in {id(p): p for p in self.head_parameters(head)}.values():
                 counts[id(parameter)] = counts.get(id(parameter), 0) + 1
         return {i for i, c in counts.items() if c > 1}
 
@@ -197,7 +219,7 @@ class MultiHeadPslotLearner(ParameterizedSlotLearner):
         scale = 1.0 / self.head_count
         shared = self.shared_parameter_ids()
         for head in self.heads:
-            for parameter in head.parameters():
+            for parameter in self.head_parameters(head):
                 if id(parameter) in shared and parameter.grad is not None:
                     parameter.grad.mul_(scale)
                     shared.discard(id(parameter))   # one tensor, scaled once
@@ -254,8 +276,9 @@ class MultiHeadPslotLearner(ParameterizedSlotLearner):
                 for index, name in enumerate(self.head_names)
             },
             "shared_state_scalars": int(sum(
-                p.numel() for p in self.parameters() if id(p) in self.shared_parameter_ids()
-            )) if self.head_count > 1 else int(sum(p.numel() for p in self.parameters())),
+                p.numel() for p in {id(q): q for q in self.head_parameters(self)}.values()
+                if self.head_count == 1 or id(p) in self.shared_parameter_ids()
+            )),
         }
         if probe is not None and task_ids:
             out["neutralized_divergence"] = self.neutralized_divergence(probe, task_ids)
@@ -266,7 +289,7 @@ class MultiHeadPslotLearner(ParameterizedSlotLearner):
         shared = self.shared_parameter_ids()
         head = self.heads[index]
         seen, out = set(), []
-        for parameter in head.parameters():
+        for parameter in self.head_parameters(head):
             if id(parameter) in shared or id(parameter) in seen:
                 continue
             seen.add(id(parameter))

@@ -12,6 +12,8 @@ from __future__ import annotations
 import argparse
 import json
 
+import numpy as np
+
 import torch
 from dataclasses import replace
 from pathlib import Path
