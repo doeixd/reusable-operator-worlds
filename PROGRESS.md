@@ -3309,3 +3309,18 @@ fixed before any verdict was recorded (training set bounded rather than equal to
 the lifetime; verdict computed from one arm only); both are disclosed in the
 ledger entry. Next in Phase 0: the E1.0 oracle-route gate, then E0.1 contextual
 substitutability and E0.2/E7 residual load-bearing.
+
+# 2026-08-25 - E0.1 AND E1.0 SCORED: DISC ELIGIBLE, MIX NOT
+
+Phase 0 continued beside the H53 scoring. E1.0 oracle-route gate: DISC 1.02
+(eligible), MIX 4.53 and 4.06 (not eligible), against a registered 2.0x, with
+random and shuffled controls at 3.2-31x confirming the gate is non-vacuous. The
+branch amendment is vindicated: had E1 run on the economics-selected substrate
+alone, its negative would have been about mixture routing and would have been
+cashed as an export STOP. Only DISC may now carry that STOP. E0.1: both
+substrates are functionally substitutable (matched 0.075-0.094 against a null
+edit of 1.000, position spread <= 0.29), but assignment margins of 0.000-0.023
+mean identity is barely determined - substitutable objects, not recovered
+primitives, under the terminology contract. Recorded with scorekeeping (our
+E1.0 numbers correct; our expectation that MIX would align worse was wrong) and
+three instrument disclosures. Next: E0.2/E7 residual load-bearing.

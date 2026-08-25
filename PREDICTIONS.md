@@ -5325,3 +5325,65 @@ Registered prediction scored: ours said this was the rung we could not guess and
 that |H2| >= 16 might be impossible. It is possible, comfortably, under a
 neutral schedule -- so the prediction was right to abstain and wrong in its
 worry.
+
+# E0.1 + E1.0 RESULT (2026-08-25): THE SUBSTRATE THAT WINS THE ECONOMICS IS NOT THE ONE THAT ROUTES
+
+Plan `E0_PHASE0_AUDIT_PLAN.md` (Amendments 1-2, frozen). Report
+`reports/e0_export_audit.json`. Existing artifacts only, no new lifetimes.
+
+    substrate                      E0.1 matched  random  null-edit  margin  spread   E1.0 intact  oracle-route  ratio
+    DISC  discrete, seed 0             0.094     0.390     1.000    0.003    0.25      0.00948      0.00967      1.02
+    MIX   continuous, rho=1 world 1    0.075     0.546     1.000    0.000    0.22      0.00163      0.00739      4.53
+    MIX   continuous, rho=1 world 2    0.075     0.662     1.000    0.023    0.29      0.00182      0.00738      4.06
+
+**E1.0 (eligibility for E1): DISC PASSES (1.02), MIX FAILS (4.53 / 4.06)** against
+the registered gate of 2.0x, with both controls far worse in every case (random
+assignment 3.5-31x, shuffled library 3.2-30x), so the gate itself is non-vacuous.
+
+This is exactly the case the branch amendment was written for. Selecting
+artifacts by lifetime economics — as the branch originally specified — would
+have put E1 on MIX alone, produced a negative, and cashed it as "these objects
+are not exportable program primitives". The correct reading of that negative is
+narrower: **the continuous mixture's solution is not expressible as a route
+through individual objects.** Registered branch consequence: only DISC may carry
+the branch STOP; MIX's later E1 rows are UNINTERPRETABLE as export failures.
+
+The dissociation is sharp and is the finding worth keeping: MIX beats DISC by
+~5.8x on its own intact task loss (0.00163 versus 0.00948) and is the substrate
+the whole project selected on economics, yet under oracle routing the two are
+comparable (0.00739 versus 0.00967). The mixture's advantage lives precisely in
+the part that is NOT a program.
+
+**E0.1 (terminology): both substrates pass substitutability, with a caveat that
+matters.** Matched contextual distances are 0.075-0.094 against a null edit of
+1.000, i.e. a matched object is about 11-13x closer to the teacher operation
+than omitting that operation entirely, and 4-9x better than a random assignment;
+per-position spread is 0.22-0.29, inside the registered 50%. The licensed
+sentence is therefore available: LEARNED OBJECTS ARE FUNCTIONALLY SUBSTITUTABLE
+FOR STABLE TEACHER OPERATIONS ACROSS MULTIPLE PROGRAM CONTEXTS.
+
+The caveat: the ASSIGNMENT MARGIN is 0.000-0.023. The identity of the matching is
+barely determined — several assignments are nearly as good as the best one. So
+substitutability holds while one-to-one identity does not, which is review 75's
+prediction of "partial functional identity rather than beautiful one-to-one
+teacher recovery", confirmed quantitatively. Under the terminology contract this
+licenses "substitutable object", not "recovered primitive".
+
+Scorekeeping. Ours: DISC passes E1.0 near 1.1 (actual 1.02) and MIX fails at 3-5
+(actual 4.53 / 4.06) — CORRECT, and it reproduces the V1-era matched-slot
+measurement (1.06 and 4.9) on different artifacts with today's loader. Ours also
+said MIX would show weaker alignment than DISC; that is WRONG, MIX's matched
+distance is slightly better (0.075 versus 0.094) — alignment quality and route
+expressibility are independent, which we had not anticipated. Review 75's
+partial-identity prediction: CORRECT.
+
+Instrument disclosures. (a) Amendment 2 corrected the distance denominator from
+total output scale to the teacher operation's CONTRIBUTION before any number
+existed; the null-edit guard it added reads exactly 1.000 for every primitive on
+every substrate, as it must by construction, and no matched object scored above
+its own null edit. (b) The discrete artifact predates learnable operator scales,
+so the alpha convention is read from the checkpoint rather than assumed; the
+continuous artifacts are legacy pickle checkpoints and are loaded through the
+provenance-checked fallback the quantizer already used. Both facts are recorded
+per artifact in the report. (c) DISC exists for one world only; every DISC number
+here is n = 1, and E1 requires two further DISC lifetimes before any E1 verdict.

@@ -1,0 +1,198 @@
+{
+  "frozen_plan": "E0_PHASE0_AUDIT_PLAN.md (Amendments 1-2)",
+  "git_commit": "2d2eece",
+  "protocol": {
+    "contexts_per_position": 8,
+    "probe": 256,
+    "gate_ratio": 2.0,
+    "distance": "contribution-normalised; 1.0 == as wrong as omitting the operation"
+  },
+  "substrates": {
+    "DISC": {
+      "artifact": "artifacts\\discrete\\seed_0",
+      "kind": "discrete",
+      "learnable_alpha": false,
+      "legacy_pickle_checkpoint": false,
+      "E0_1": {
+        "assignment": {
+          "0": 9,
+          "1": 4,
+          "2": 1,
+          "3": 7,
+          "4": 6,
+          "5": 11
+        },
+        "mean_distance": 0.0935252650303257,
+        "assignment_margin": 0.0030132103063794935,
+        "random_assignment_distance": 0.3897532454503734,
+        "null_edit_distance": 1.0,
+        "matched_distances": [
+          0.10735588090214855,
+          0.07597987810261318,
+          0.1095890943749511,
+          0.10116231735306472,
+          0.09665021761897886,
+          0.0704142018301978
+        ],
+        "per_position_distance": [
+          0.034182892480030674,
+          0.02640953931909108,
+          0.032932833231203947
+        ],
+        "position_spread_fraction": 0.24934502431249161,
+        "dropped_degenerate_contexts": 0,
+        "objects_worse_than_null_edit": [],
+        "beats_random_by_2x": true,
+        "position_stable_within_50pct": true,
+        "substitutable": true
+      },
+      "E1_0": {
+        "teacher_route": {
+          "intact_nmse": 0.009482128865784034,
+          "oracle_route_nmse": 0.00966601302206982,
+          "ratio": 1.0193927079971803,
+          "tasks": 64
+        },
+        "random_assignment_route": {
+          "intact_nmse": 0.009482128865784034,
+          "oracle_route_nmse": 0.03297730378108099,
+          "ratio": 3.4778375455409134,
+          "tasks": 64
+        },
+        "shuffled_library_route": {
+          "intact_nmse": 0.009482128865784034,
+          "oracle_route_nmse": 0.029899066561483778,
+          "ratio": 3.153201879524505,
+          "tasks": 64
+        },
+        "gate_ratio": 2.0,
+        "controls_ok": true,
+        "eligible_for_E1": true
+      }
+    },
+    "MIX": {
+      "artifact": "artifacts\\rho_development\\rho_1\\world_1\\continuous",
+      "kind": "continuous",
+      "learnable_alpha": true,
+      "legacy_pickle_checkpoint": true,
+      "E0_1": {
+        "assignment": {
+          "0": 4,
+          "1": 2,
+          "2": 3,
+          "3": 0,
+          "4": 6,
+          "5": 1
+        },
+        "mean_distance": 0.07536248226262487,
+        "assignment_margin": 5.1230090462553446e-05,
+        "random_assignment_distance": 0.5464477922994734,
+        "null_edit_distance": 1.0,
+        "matched_distances": [
+          0.06767555898043437,
+          0.14067946609616686,
+          0.06424862659536251,
+          0.06258514548598061,
+          0.035274195506535565,
+          0.08171190091126931
+        ],
+        "per_position_distance": [
+          0.02628240952617931,
+          0.021734580224602413,
+          0.02734549251184314
+        ],
+        "position_spread_fraction": 0.2233569855496941,
+        "dropped_degenerate_contexts": 0,
+        "objects_worse_than_null_edit": [],
+        "beats_random_by_2x": true,
+        "position_stable_within_50pct": true,
+        "substitutable": true
+      },
+      "E1_0": {
+        "teacher_route": {
+          "intact_nmse": 0.0016331930964952335,
+          "oracle_route_nmse": 0.007392030867777066,
+          "ratio": 4.526121793950799,
+          "tasks": 64
+        },
+        "random_assignment_route": {
+          "intact_nmse": 0.0016331930964952335,
+          "oracle_route_nmse": 0.045038103708066046,
+          "ratio": 27.576716926318145,
+          "tasks": 64
+        },
+        "shuffled_library_route": {
+          "intact_nmse": 0.0016331930964952335,
+          "oracle_route_nmse": 0.0486250724279671,
+          "ratio": 29.77300879627433,
+          "tasks": 64
+        },
+        "gate_ratio": 2.0,
+        "controls_ok": true,
+        "eligible_for_E1": false
+      }
+    },
+    "MIX_w2": {
+      "artifact": "artifacts\\rho_development\\rho_1\\world_2\\continuous",
+      "kind": "continuous",
+      "learnable_alpha": true,
+      "legacy_pickle_checkpoint": true,
+      "E0_1": {
+        "assignment": {
+          "0": 0,
+          "1": 5,
+          "2": 1,
+          "3": 3,
+          "4": 4,
+          "5": 7
+        },
+        "mean_distance": 0.07462327585155963,
+        "assignment_margin": 0.023453479316132134,
+        "random_assignment_distance": 0.6618264193957518,
+        "null_edit_distance": 1.0,
+        "matched_distances": [
+          0.08003009840335751,
+          0.11570799913701232,
+          0.07009501667507456,
+          0.06109900960355056,
+          0.0701637936161828,
+          0.05064373767417993
+        ],
+        "per_position_distance": [
+          0.024313609579494234,
+          0.021582391832149703,
+          0.028727274439915674
+        ],
+        "position_spread_fraction": 0.28723809801563327,
+        "dropped_degenerate_contexts": 0,
+        "objects_worse_than_null_edit": [],
+        "beats_random_by_2x": true,
+        "position_stable_within_50pct": true,
+        "substitutable": true
+      },
+      "E1_0": {
+        "teacher_route": {
+          "intact_nmse": 0.001816055328163202,
+          "oracle_route_nmse": 0.007376899651717395,
+          "ratio": 4.062045653189736,
+          "tasks": 64
+        },
+        "random_assignment_route": {
+          "intact_nmse": 0.001816055328163202,
+          "oracle_route_nmse": 0.05702589743304998,
+          "ratio": 31.400969204350847,
+          "tasks": 64
+        },
+        "shuffled_library_route": {
+          "intact_nmse": 0.001816055328163202,
+          "oracle_route_nmse": 0.04582808913255576,
+          "ratio": 25.23496306630002,
+          "tasks": 64
+        },
+        "gate_ratio": 2.0,
+        "controls_ok": true,
+        "eligible_for_E1": false
+      }
+    }
+  }
+}
