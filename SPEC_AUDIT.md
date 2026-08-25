@@ -366,3 +366,52 @@ data it governs, every new learner bitwise-equivalent to the baseline under
 its null switch, and every scorer fail-closed. The sealed confirmation
 block is open; its verdict will be read from the amended table and nothing
 else.
+
+
+# H49-H51 re-audit (2026-08-25)
+
+Scope: the code added or changed for the discoverability census (H49), the
+reorganization loop (H50), and the reorganizability testbed (H51).
+
+New or changed implementation, and its equivalence control:
+
+1. `src/row/models/pslot_factorized_models.py` (H51 arm R_2) composes the
+   parameterized slots with a pooled, separately addressable innovation basis
+   (`residual = W a + eps`). Controls verified on the real classes, not only a
+   smoke world: `freeze_schema=True` reproduces the `pslot` forward output
+   bitwise, the free learner is bitwise equal at `a = 0` (the component is
+   exactly zero at initialization), and `dL/da` is nonzero there, so the
+   zero-stationary-point trap does not apply. `schema_dim = 4` was registered
+   before any lifetime ran, chosen so both G3 denominators pass.
+2. `learned_lifetime.py` / `mixed_lifetime.py` gained the
+   `pslot_factorized` kind. A learner may now return several task-local fast
+   arguments; every caller routes them through `_as_params`, and
+   single-argument learners are unaffected.
+3. `audit_h49_discoverability.refit` was extended to zero AND re-fit an
+   arm's extra task-local fast state (`schema_alphas`, `trace_coefficients`).
+   Models carrying neither attribute — every H49/H50 artifact — take the
+   identical path, so H50's numbers remain reproducible by the same function.
+   Independently confirmed by H51: R_1a's three measured `m = 0` rows
+   reproduce H49's recorded M_4 values exactly (0.00560 / 0.00549 / 0.00447).
+4. `score_h39b_pslot.load_pslot` takes the artifact's own world seed and
+   builds the composed learner from its record; `factorized_fit` accepts a
+   multi-argument fast interface. Both were reached by defects found in the
+   standing pre-run audit (plan Amendments 4-5), fixed before any row was
+   written, and disclosed with the result.
+5. `audit_h51_reorganizability.py` caches each SCORED cell under a protocol
+   fingerprint (budgets, model records, refit steps and LR, migration rates
+   and seeds) and refuses a cell computed under a different fingerprint.
+   Migration is re-run every launch, so no cached quantity can outlive the
+   state it was computed from.
+
+Registered-versus-implemented check: H51's migration operator, candidate set,
+seeds, learning rates, batch policy, LOO sample, margins and decision table
+are H50's, unchanged and imported rather than re-coded — the arms differ only
+in the wake representation, which is what the plan registers as the sole
+independent variable. Balance gates are computed from the artifacts before
+any causal reading and now fail loudly when an input cannot be read.
+
+Outstanding, unchanged from the H39 audit: `schema_share` remains a ratio of
+~2% NMSE differences and is reported as a diagnostic only; the
+rate-distortion instrument has still not been run on these artifacts, so `D*`
+figures in this line are the H49 proxy and are comparable within an arm only.
