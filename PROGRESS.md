@@ -3246,3 +3246,15 @@ wrong), the Amendment 4-5 disclosures from the standing pre-run audit, and
 the R_1a m = 0 rows that reproduce H49's scorer exactly. Learnings
 appended; scorer made resumable with a protocol-fingerprinted per-cell
 cache.
+
+# 2026-08-25 - REVIEW 73 FILED; H53 PARALLEL-FORMATION PLAN DRAFTED
+
+Review 73 filed verbatim and indexed: the PI's call is to change the substrate.
+Drafted `H53_PARALLEL_FORMATION_PLAN.md` — six candidate organizations
+developing concurrently in one lifetime, sharing level as the independent
+variable (L1 and L3 bracketing the predicted frontier), the unchanged
+H49/H50/H51 scoring instrument, the amortization ratio as the cost endpoint,
+four registered outcomes including an explicit stop condition, and two bitwise
+equivalence controls (`H = 1` must reproduce `M_4` and `L_4` exactly).
+Registered in `PREDICTIONS.md` with both prediction sets and the disclosed
+limitation that PROMOTE stays shared. Not yet frozen; no code written.

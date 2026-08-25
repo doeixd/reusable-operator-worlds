@@ -2822,3 +2822,26 @@ appear: an explicitly decomposable innovation basis learned during the
 lifetime also returns `C_restructure = None`, so the H52 direction is
 closed at this scale too. H53 (overcomplete provisional schemas, never
 committed during wake) is the branch this review leaves open.
+
+
+### [reviewer-feedback-73.txt](reviewer-feedback-73.txt)
+On the H51 result; the PI's call is to CHANGE THE SUBSTRATE. Reads H51 as
+falsifying a whole family — "solve normally, preserve enough pieces, then
+discover the right abstraction by rearranging them later" — and names the
+separation R_1b exposed: useful retained information is not information about
+how the computation should be REORGANIZED (reuse and abstraction discovery come
+apart). Since M_4 and L_4 differ in TRAJECTORY rather than in final content,
+proposes that some abstractions are DEVELOPMENTAL OBJECTS whose usefulness
+arises from learning under them. Sharpens H53 away from "more soft components"
+(M already collapsed overcomplete soft capacity into one distributed channel)
+toward MULTIPLE PROVISIONAL ORGANIZATIONS maintained concurrently during one
+lifetime — wake as a bounded version space over representational organizations,
+sleep as selection and consolidation among them (Q(h) = -D* - C_reacquire -
+C_carry; PRUNE/MERGE/FORK/PROMOTE). Registers four outcomes A-D including an
+explicit stop condition, and predicts an AMORTIZATION FRONTIER s*: how much
+computation alternative representations can share before they cease to be
+genuinely alternative. Adds a fourth state type to REFERENCE/ARGUMENT/
+INNOVATION — HYPOTHESIS / PROVISIONAL STRUCTURE — and an option-value term
+V(R_t) = current utility + value of still-accessible representational futures.
+Connects the whole line to program synthesis: beam search / version space over
+{P^(h)} is the same algorithmic pattern as {R^(h)}.

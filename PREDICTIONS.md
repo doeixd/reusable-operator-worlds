@@ -5127,3 +5127,53 @@ H50 negative is NOT an artifact of ordinary wake discarding task-local
 evidence, nor of storing innovation densely rather than in addressable
 components. Whatever L_4 has that M_4 lacks, it is not preserved state
 and not storage form.
+
+# H53 REGISTRATION (2026-08-25): PARALLEL FORMATION OF STRUCTURAL HYPOTHESES
+
+Review 73 (`reviews/reviewer-feedback-73.txt`) answers H51 with the PI's call:
+change the substrate. Plan `H53_PARALLEL_FORMATION_PLAN.md`; nothing runs
+until it is frozen with its commit hash in `tools/check_prereg.py`.
+
+Numbering: this is the reviewer's own H53 label. The reviewer's H52
+(decomposable innovation basis) was already run as H51's arm `R_2` and is
+closed; H52 is therefore retired as a label and not reused.
+
+Question: can several candidate organizations develop CONCURRENTLY within one
+lifetime, so the true one becomes retrospectively distinguishable at
+substantially less than one full-lifetime cost per candidate? Six externally
+supplied heads (TRUE, WRONG-A/B, RANDOM-1/2 with H49's seeds, SHAM), no
+learned proposer. Each head predicts every task, is scored before update, and
+is updated on the same data; the objective is the SUM of the heads' ordinary
+prequential objectives, so `H = 1` is exactly the ordinary lifetime.
+
+Independent variable: the sharing level. L1 branches only the task-local slot
+arguments; L3 additionally branches the argument matrices, route codes and
+residuals, sharing only the basis and the promoted library. L1 and L3 are run
+first because they BRACKET the predicted frontier `s*`; L2 runs only if they
+disagree. Disclosed in advance: PROMOTE and retirement stay shared at every
+level, so H53 spans `s = 1` toward but not to `s = 0` — the separate-lifetime
+endpoint is `M_4` and `L_4` themselves.
+
+Endpoints: `C_LOO` per head under H50/H51's UNCHANGED margins (+0.15 vs every
+wrong head AND vs SHAM, >= 2/3 worlds, substitutability +0.30), recovery
+against `L_4` with `M_4`'s m = 0 baseline, and the AMORTIZATION RATIO
+`A = (C_shared_wake + H C_candidate) / (H C_lifetime)`. Outcomes A (works
+cheaply, `A <= 0.5`), B (works only at L3, `A > 0.5` — concurrent
+retrain-and-select), C (sharing collapses the heads; frontier localized
+between the levels), D (no discrimination anywhere, with heads demonstrably
+distinct and learning — registered stop condition for this architecture).
+
+Equivalence controls, required before any verdict: `H = 1` SHAM must reproduce
+`M_4` BITWISE and `H = 1` TRUE must reproduce `L_4` BITWISE, at each level;
+heads must be functionally distinct; every head must learn; every head's
+policy must fire on the expected task count.
+
+Registered predictions. Reviewer: a frontier exists, heads collapse at high
+sharing, and the hoped-for result is `A << 1` with TRUE developing `L_4`-like
+signal. Ours: outcome C — collapse at L1 (H47's baselines showed this world's
+learner absorbs imposed structure into one distributed channel: entropy ~0.93,
+ARI ~0), and at L3 a TRUE margin clearly above H51's (>= +0.10) but short of
+`L_4`'s 0.30-0.65 and probably short of +0.15, because the shared basis and
+shared library still carry most of the computation. We further predict SHAM
+remains the best head on raw `C_LOO` at both levels, as in H50 and H51, making
+the SHAM clause the binding one.

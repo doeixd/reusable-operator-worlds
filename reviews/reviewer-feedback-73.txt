@@ -1,0 +1,195 @@
+My call is to **change the substrate**, but I would sharpen H53 considerably. I would
+*not* merely add more soft provisional slots. M already taught us that overcomplete
+soft capacity can collapse into one distributed channel.
+
+The next hypothesis should be:
+
+    Useful alternative organizations must COEXIST DURING FORMATION, not merely
+    remain reconstructible afterward.
+
+H51 has now earned that hypothesis.
+
+## What H51 actually killed
+
+We have now tried three increasingly generous post-formation stories:
+
+    R_0:   ordinary state
+    R_1b:  retained/recombinable provenance
+    R_2:   explicitly decomposable state
+
+None gave C_restructure < infinity. And none recovered anything like the L_4
+separation.
+
+The especially revealing result is R_1b: reacquisition cost down 18-38% while TRUE
+discrimination ~ 0 and WRONG actually wins. So:
+
+    useful retained information is not necessarily information about how that
+    computation should be reorganized.
+
+That's a strong separation between REUSE and ABSTRACTION DISCOVERY. Likewise R_2 says
+simply storing learning in more decomposable pieces isn't enough.
+
+So I would consider the following family substantially falsified:
+
+> Solve normally, preserve enough pieces/history, then discover the right abstraction
+> by rearranging them later.
+
+At least on this substrate.
+
+# What seems to matter instead
+
+Compare M_4 and L_4. They don't differ primarily in what information exists at the
+end. They differ in the LEARNING TRAJECTORY: M_4's computation develops in a
+distributed organization; L_4's develops inside the group-conditioned organization
+from the beginning. And only the latter develops LOO discrimination,
+substitutability, and future fertility.
+
+So the live hypothesis is now:
+
+    some abstractions are DEVELOPMENTAL OBJECTS. Their usefulness arises from
+    learning under them, not from applying them afterward.
+
+That's much stronger than "path dependence" in the vague sense. The path
+*constructs* the abstraction.
+
+# So H53 shouldn't be "more components"
+
+It should be MULTIPLE PROVISIONAL ORGANIZATIONS.
+
+Instead of: WAKE one representation -> later consider TRUE/WRONG/RANDOM, maintain
+R^(1), R^(2), ..., R^(H) representing several candidate organizations DURING THE SAME
+LIFETIME. Conceptually: WAKE maintains a small version space over representational
+organizations.
+
+Each hypothesis gets enough candidate-specific state that its schema can develop
+under that hypothesis from the moment evidence arrives. Then sleep doesn't have to
+manufacture R -> R_h. It just evaluates already-developed alternatives:
+{R^(h)} -> score -> retain/prune.
+
+# The cheapest decisive experiment
+
+Still use the G = 2, K = 4 world. Externally supply candidate organizations: TRUE,
+WRONG-A, WRONG-B, RANDOM-A, RANDOM-B, SHAM/distributed. No learned proposer yet.
+
+But instead of six separate lifetimes, train them CONCURRENTLY. Share whatever
+genuinely organization-independent substrate can safely be shared, while giving each
+candidate its own small schema/argument state: B = shared generic computation, and
+S_h, alpha_h for structural hypothesis h. During wake B_t -> B_{t+1} once, while
+candidate heads each receive their hypothesis-appropriate updates.
+
+Then after the lifetime use only past-task statistics (C_LOO, D*, substitutability)
+to choose a hypothesis. Future sibling performance remains a held-out diagnostic.
+
+# The experiment is not asking whether TRUE can work
+
+We know that. The key question becomes:
+
+    Can formation under multiple candidate organizations be amortized enough that
+    structural search is cheaper than retraining once per hypothesis?
+
+That's new. Measure C_candidate -- the incremental compute/state cost of maintaining
+another organization. Compare H * C_lifetime for literal retrain-and-select against
+C_shared-wake + H * C_candidate. If C_candidate << C_lifetime while TRUE develops the
+same retrospective signal as L_4, you've solved H50's fundamental problem in a useful
+way.
+
+# I would want four outcomes preregistered
+
+A. PARALLEL FORMATION WORKS CHEAPLY. TRUE becomes distinguishable from every wrong
+   hypothesis, perhaps recovering most of L_4's signal, while incremental head cost
+   is small. Then maintaining representational optionality during wake works. Major
+   result. Next step: learn to propose/prune hypotheses.
+
+B. WORKS, BUT COSTS ~A LIFETIME PER HYPOTHESIS. The mechanism exists but
+   C_search ~ H * C_lifetime -- retrain-and-select implemented concurrently.
+   Scientifically useful, algorithmically disappointing. Next question: how much
+   computation candidate organizations can share.
+
+C. SHARING CAUSES HYPOTHESES TO COLLAPSE. TRUE/WRONG heads all become distributed and
+   indistinguishable. Then organization-specific learning must extend deeper into the
+   substrate. Becomes an architecture-localization experiment: shared depth up =>
+   structural discrimination down.
+
+D. EVEN INDEPENDENTLY MAINTAINED PROVISIONAL HYPOTHESES DON'T DISCRIMINATE. Then
+   something is seriously inconsistent with the L_4 result, or candidate formation
+   needs essentially the complete L_4 lifecycle. Honest conclusion: structural
+   alternatives cost approximately full retraining on this substrate. And I'd stop
+   pushing this particular neural architecture.
+
+# There may be another phase transition here
+
+Let s be how much state/compute candidate organizations share. s = 0 is separate
+retraining; s = 1 is basically M plus post-hoc bookkeeping, which we've shown fails.
+There may be a boundary s* such that s < s* allows distinct organizational hypotheses
+to develop, while s > s* causes them to collapse into the same distributed solution.
+
+    abstraction search has an AMORTIZATION FRONTIER: how much computation can
+    alternative representations share before they cease being genuinely alternative?
+
+That is much more informative than simply trying another module.
+
+# Why this is relevant to program synthesis
+
+This result pushes the project closer to SEARCH, not away from it. A program
+synthesizer doesn't fully commit to P_1, compile all knowledge under P_1, then later
+mutate the compiled system into P_2. It maintains multiple partial hypotheses -- beam
+search / version space / particles -- and develops them as evidence arrives. H51 is
+beginning to suggest the representation learner may need the same structure.
+Representation level {R^(1)...R^(H)}; program level {P^(1)...P^(H)}. Evidence updates
+them; bad hypotheses die; promising ones specialize; common pieces can be shared. That
+makes representation learning and program synthesis look increasingly like instances
+of the same algorithmic pattern.
+
+# It also changes wake/sleep again
+
+WAKE: solve the present while maintaining a bounded population of plausible
+representational explanations H_t = {h_1, ..., h_k}.
+
+SLEEP: evaluate accumulated evidence
+Q(h) = -D*(R_h) - C_reacquire(R_h) - C_carry(h), then PRUNE / MERGE / FORK / PROMOTE.
+
+So sleep may not chiefly invent structure from one finished representation. Instead:
+WAKE GROWS POSSIBILITIES; SLEEP PERFORMS SELECTION AND CONSOLIDATION AMONG THEM. That
+is a substantially different -- and I think better -- model.
+
+# This also resembles biological/developmental learning more
+
+> Once a representation has committed to one coordinate system, alternative
+> factorizations may become extremely expensive.
+
+A sensible learner therefore maintains uncertainty not just over VALUES, but over
+REPRESENTATIONAL STRUCTURE. That means our old distinction REFERENCE / ARGUMENT /
+INNOVATION may need another type: HYPOTHESIS / PROVISIONAL STRUCTURE, whose semantics
+are: this computation is maintained because it represents a plausible future
+organization, not because it is currently the single best explanation.
+
+# My updated theoretical picture
+
+A strong learner may need to optimize not just accuracy + compression + fertility +
+reorganizability, but OPTION VALUE:
+
+    V(R_t) = current utility + value of still-accessible representational futures.
+
+H50/H51 are telling us that once an option is discarded, reconstructing it can be
+extremely expensive. So sometimes the efficient strategy is to carry several cheap
+possibilities forward until evidence resolves them. That's precisely what a good
+search algorithm does.
+
+## My recommendation
+
+I would NOT run retrain-and-select as the main successor -- L_4 already supplies the
+crucial oracle existence result. And I would NOT do another provenance/decomposition
+bookkeeping variant. I'd draft one very specific H53:
+
+    Can multiple candidate organizations be allowed to develop concurrently during
+    wake, such that the correct one becomes retrospectively distinguishable at
+    substantially less than one full-lifetime cost per candidate?
+
+Start with externally supplied TRUE/WRONG/RANDOM hypotheses. No learned proposer.
+
+If that works, the next rung is enormously clear: generate hypotheses -> maintain a
+small beam -> update with experience -> prune during sleep. And that begins to look
+like the architecture we'd eventually want for program synthesis and self-improving
+computational-language discovery: not repeatedly rewriting one committed model, but
+maintaining, testing, and consolidating competing computational organizations as it
+learns.
