@@ -1,0 +1,7 @@
+prereg check OK: 23 frozen files unchanged; all STATUS-cited paths exist
+[DISC] private residual channel: False (task state = ['task_codes'])
+[MIX] private residual channel: False (task state = ['task_codes'])
+[M4 w0] full 0.00579  no-residual 0.00580  no-library 1.61801  refit 0.00253  retired 57/72  R_residual=0.0  | live-only (15): full 0.00349 no-residual 0.00350 R_residual=0.0
+[M4 w1] full 0.00537  no-residual 0.00540  no-library 1.59600  refit 0.00222  retired 59/72  R_residual=0.0  | live-only (13): full 0.00436 no-residual 0.00457 R_residual=0.0001
+[M4 w2] full 0.00457  no-residual 0.00457  no-library 1.63119  refit 0.00208  retired 55/72  R_residual=-0.0  | live-only (17): full 0.00355 no-residual 0.00354 R_residual=-0.0
+written reports\e0_residual_audit.json

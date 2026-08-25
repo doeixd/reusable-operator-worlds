@@ -5387,3 +5387,57 @@ continuous artifacts are legacy pickle checkpoints and are loaded through the
 provenance-checked fallback the quantizer already used. Both facts are recorded
 per artifact in the report. (c) DISC exists for one world only; every DISC number
 here is n = 1, and E1 requires two further DISC lifetimes before any E1 verdict.
+
+# E0.2 / E7 RESULT (2026-08-25): THE PRIVATE RESIDUAL IS INERT AS TRAINED, NOT INCAPABLE
+
+Plan `E0_PHASE0_AUDIT_PLAN.md`. Report `reports/e0_residual_audit.json`.
+Existing artifacts only.
+
+**Structural, for the two substrates E1 actually concerns.** DISC and MIX carry
+`task_codes` and nothing else: there is NO private residual channel, so task
+identity lives wholly in the routed library. Reported as an architectural fact
+rather than as a measured zero.
+
+**Measured, on the modern substrate that does have residuals** (`w_m4`, all 64
+family tasks plus the 8 pre-onset tasks per world):
+
+    world   L_full     L_no_residual   L_no_library   L_refit    retired   R_residual   live-only R
+    0       0.00579    0.00580         1.61801        0.00253    57/72     0.0000       0.0000  (15 tasks)
+    1       0.00537    0.00540         1.59600        0.00222    59/72     0.0000       0.0001  (13 tasks)
+    2       0.00457    0.00457         1.63119        0.00208    55/72     -0.0000      -0.0000 (17 tasks)
+
+Disabling every private residual moves the loss by 0.0-0.5%; disabling the
+routed library moves it by a factor of ~280-357. `R_residual` is zero to four
+decimals in every world, and the LIVE-ONLY slice gives the same answer, so the
+aggregate is not an artifact of most tasks being retired.
+
+**The refit condition is the informative one.** Re-fitting that same residual
+under the frozen library and route reaches 0.00253 / 0.00222 / 0.00208 — 41-46%
+of the trained loss, i.e. LESS THAN HALF. The channel is therefore not
+incapable; it is UNUSED AS TRAINED. Online learning plus retirement left a
+capacity the task never exploited.
+
+Registered consequence for E1, already anticipated: an export arm that leaves
+the private residual adaptable can recover a large fraction of loss for reasons
+that have nothing to do with the library. Export-branch Amendment 1's split of
+arm R into **R-route** (residual frozen, PRIMARY) and **R-full** (residual
+adaptable, capacity reference) is not a formality — this result gives it a
+number, and any `G_export` computed with an adaptable residual must be read as
+a capacity measurement.
+
+Instrument disclosure, important: the refit condition LIFTS RETIREMENT so that a
+retired task has a residual to fit at all. That configuration — a promoted
+reference AND a private residual on the same task — is one the lifetime never
+used, and it is exactly the state the review-55 loader bug produced by accident.
+Here it is deliberate and necessary (there is otherwise nothing to re-fit), but
+`L_refit` is therefore a counterfactual capacity probe, not a reconstruction of
+anything that existed during training, and no claim rests on it beyond
+"the channel had unused capacity". `L_full`, `L_no_residual` and `L_no_library`
+all use the true retirement state.
+
+Scorekeeping. Review 75 predicted residuals would be "more load-bearing than we
+would like ... the first warning sign" — WRONG, decisively: they are inert.
+Ours registered the rung as unpredictable and declined to give a number, which
+was honest but scores as no prediction. The one substantive thing we said —
+that H39's ~2% family-computation figure said nothing about ordinary task
+identity — is now answered: ordinary task identity is in the library too.

@@ -3324,3 +3324,17 @@ mean identity is barely determined - substitutable objects, not recovered
 primitives, under the terminology contract. Recorded with scorekeeping (our
 E1.0 numbers correct; our expectation that MIX would align worse was wrong) and
 three instrument disclosures. Next: E0.2/E7 residual load-bearing.
+
+# 2026-08-25 - E0.2/E7 SCORED: RESIDUAL INERT AS TRAINED, HALF THE LOSS AVAILABLE ON REFIT
+
+Phase 0's third rung. DISC and MIX have no private residual channel at all
+(structural). On `w_m4`, `R_residual` is 0.0000 in all three worlds and in the
+live-task-only slice, while removing the library costs a factor of ~280-357 —
+task identity lives in the routed library. The refit condition reaches 41-46% of
+the trained loss, so the channel is unused rather than incapable, which puts a
+number behind the export branch's R-route / R-full split. Recorded with the
+disclosure that the refit condition deliberately lifts retirement (a
+reference-plus-residual configuration the lifetime never used) and that no claim
+rests on it beyond unused capacity. Review 75's prediction that residuals would
+be load-bearing is scored WRONG. Phase 0 remains: E4 correlation is contingent
+on E1, so Phase 0's audits are complete.

@@ -3951,3 +3951,27 @@ lifetimes and can already say whether the objects look primitive-like; the
 residual-reliance score in particular asks whether task identity lives in the
 reusable objects or still in per-task patches. Run those before building any
 world, and let the oracle arm gate everything downstream.
+
+
+
+================================================================================
+E0.2: A CHANNEL CAN BE INERT WITHOUT BEING INCAPABLE (2026-08-25)
+================================================================================
+
+The private residual in the modern substrate carries essentially none of the
+task computation as trained (`R_residual` = 0.0000 in all three worlds, live
+tasks included; disabling the library instead costs a factor of ~280-357). But
+re-fitting that same residual under the frozen library reaches 41-46% of the
+trained loss. The capacity was there and online learning never used it.
+
+Two consequences worth carrying. First, an ablation that finds a channel
+CONTRIBUTES nothing has not shown the channel COULD do nothing — those are
+different measurements, and only the second constrains an architecture. Second,
+any later comparison that leaves such a channel free will recover loss for
+reasons unrelated to the object under test; the export branch already splits its
+adaptation arm on exactly this line, and now has the number that justifies it.
+
+And the structural half of the answer costs nothing to obtain: two of the three
+substrates have no residual channel at all, so their task state IS the route.
+Read the state dict before designing an ablation for a channel that may not
+exist.

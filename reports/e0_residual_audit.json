@@ -1,0 +1,90 @@
+{
+  "frozen_plan": "E0_PHASE0_AUDIT_PLAN.md",
+  "git_commit": "06d4615",
+  "protocol": {
+    "refit_steps": 2000,
+    "refit_lr": 0.01,
+    "definition": "R_residual = (L_no_residual - L_full)/(L_no_library - L_full)"
+  },
+  "substrates": {
+    "DISC": {
+      "artifact": "artifacts\\discrete\\seed_0",
+      "state_prefixes": [
+        "library",
+        "task_codes"
+      ],
+      "has_private_residual_channel": false,
+      "R_residual": 0.0,
+      "note": "no private residual channel exists: the entire task state is the route, so task identity lives wholly in the routed library. Structural, not measured."
+    },
+    "MIX": {
+      "artifact": "artifacts\\rho_development\\rho_1\\world_1\\continuous",
+      "state_prefixes": [
+        "basis",
+        "task_codes"
+      ],
+      "has_private_residual_channel": false,
+      "R_residual": 0.0,
+      "note": "no private residual channel exists: the entire task state is the route, so task identity lives wholly in the routed library. Structural, not measured."
+    },
+    "M4": {
+      "artifact": "artifacts/h39c/w_m4",
+      "worlds": {
+        "0": {
+          "tasks": 72,
+          "retired_tasks": 57,
+          "live_tasks_only": {
+            "tasks": 15,
+            "L_full": 0.00348563917602102,
+            "L_no_residual": 0.003499743000914653,
+            "L_no_library": 1.6159526666005453,
+            "denominator_degenerate": false,
+            "R_residual": 8.746736927799466e-06
+          },
+          "L_full": 0.005793930280358634,
+          "L_no_residual": 0.005796868577211474,
+          "L_no_library": 1.6180141386058595,
+          "L_refit": 0.002527257446975758,
+          "denominator_degenerate": false,
+          "R_residual": 1.8225158310674732e-06
+        },
+        "1": {
+          "tasks": 72,
+          "retired_tasks": 59,
+          "live_tasks_only": {
+            "tasks": 13,
+            "L_full": 0.0043613499460312035,
+            "L_no_residual": 0.0045709904605666036,
+            "L_no_library": 1.5646652716856737,
+            "denominator_degenerate": false,
+            "R_residual": 0.00013435876922084756
+          },
+          "L_full": 0.005366044199844409,
+          "L_no_residual": 0.0054038959594133,
+          "L_no_library": 1.5960018502341375,
+          "L_refit": 0.0022234937011186653,
+          "denominator_degenerate": false,
+          "R_residual": 2.3796622347677387e-05
+        },
+        "2": {
+          "tasks": 72,
+          "retired_tasks": 55,
+          "live_tasks_only": {
+            "tasks": 17,
+            "L_full": 0.003549367730396197,
+            "L_no_residual": 0.00354176082456594,
+            "L_no_library": 1.632052933468538,
+            "denominator_degenerate": false,
+            "R_residual": -4.671101734314635e-06
+          },
+          "L_full": 0.0045694793564810725,
+          "L_no_residual": 0.004567683281493373,
+          "L_no_library": 1.6311863611141841,
+          "L_refit": 0.0020782349440398524,
+          "denominator_degenerate": false,
+          "R_residual": -1.1041782535531548e-06
+        }
+      }
+    }
+  }
+}
