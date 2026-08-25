@@ -92,6 +92,34 @@ class MultiHeadPslotLearner(ParameterizedSlotLearner):
         # head name -> {task_id: slot position or None}; filled by the runner.
         self.head_assignment: dict[str, dict[str, int | None]] = {n: {} for n in self.head_names}
 
+    def sync_heads(self) -> None:
+        """Re-establish the shared bindings after the primary REBINDS one.
+
+        Sharing is by object identity, but promotion's prune paths do
+        `self.abstractions = nn.ParameterList(...)` rather than mutating in
+        place, which silently leaves the followers holding the previous object
+        while the SHARED `task_reference` already points at the new indices.
+        Called before every forward and at every task boundary; assignment is a
+        no-op when the object has not changed.
+        """
+
+        branch = BRANCHED[self.sharing_level]
+        for follower in self.followers:
+            if follower.basis is not self.basis:
+                follower.basis = self.basis
+            if follower.abstractions is not self.abstractions:
+                follower.abstractions = self.abstractions
+            follower.task_reference = self.task_reference
+            follower.retired = self.retired
+            if "arguments" not in branch and follower.argument_matrices is not self.argument_matrices:
+                follower.argument_matrices = self.argument_matrices
+                if self.pslot_count > 1:
+                    follower.extra_argument_matrices = self.extra_argument_matrices
+            if "codes" not in branch and follower.task_codes is not self.task_codes:
+                follower.task_codes = self.task_codes
+            if "residuals" not in branch and follower.task_residuals is not self.task_residuals:
+                follower.task_residuals = self.task_residuals
+
     # ---- head access ---------------------------------------------------
 
     @property
@@ -140,6 +168,7 @@ class MultiHeadPslotLearner(ParameterizedSlotLearner):
     # ---- task state ----------------------------------------------------
 
     def begin_task(self, task_id: str, schema_index: int = 0):
+        self.sync_heads()
         code, residual, alpha = super().begin_task(task_id)
         alphas = [alpha]
         for follower in self.followers:
@@ -194,6 +223,7 @@ class MultiHeadPslotLearner(ParameterizedSlotLearner):
 
     def apply_head_policies(self, task_id: str) -> None:
         """Pin each head's parameterized-slot mass per its own assignment."""
+        self.sync_heads()
         for name, head in zip(self.head_names, self.heads):
             position = self.head_assignment[name].get(task_id)
             if position is None:
@@ -205,6 +235,7 @@ class MultiHeadPslotLearner(ParameterizedSlotLearner):
 
     def multihead_loss(self, x: Tensor, y: Tensor, task_ids) -> Tensor:
         """Sum of the heads' ordinary MSE objectives on the same batch."""
+        self.sync_heads()
         total = None
         for head in self.heads:
             loss = torch.nn.functional.mse_loss(head.forward_tasks(x, task_ids), y)
@@ -226,6 +257,7 @@ class MultiHeadPslotLearner(ParameterizedSlotLearner):
 
     @torch.no_grad()
     def head_predictions(self, x: Tensor, task_id: str) -> dict[str, np.ndarray]:
+        self.sync_heads()
         return {name: head(x, task_id).cpu().numpy()
                 for name, head in zip(self.head_names, self.heads)}
 
