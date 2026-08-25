@@ -2814,3 +2814,11 @@ ordinary ~ provenance < decomposable < oracle, and that merely retaining
 residual vectors will not be enough: learning should produce EDITABLE
 COMPUTATIONAL OBJECTS, not only weight changes -- which is also the argument
 for a program-like substrate (executable + composable + REWRITEABLE).
+Annotated after H51 (`reports/h51_reorganizability.json`): the testbed
+this review asked for was run and returned FORMATION-TIME-CONFIRMED. Its
+qualitative prediction held — preserving task provenance is not enough —
+but the predicted ordering `provenance < decomposable < oracle` did not
+appear: an explicitly decomposable innovation basis learned during the
+lifetime also returns `C_restructure = None`, so the H52 direction is
+closed at this scale too. H53 (overcomplete provisional schemas, never
+committed during wake) is the branch this review leaves open.

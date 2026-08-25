@@ -1163,6 +1163,34 @@ plausible alternative organization — and a design target in which
 learning produces editable computational objects rather than only weight
 changes.
 
+We then tested the obvious repair on the representation itself. Holding
+the migration operator and the scorer fixed and varying only what wake
+leaves behind, three alternative representations were measured against
+the same endpoint — the migration budget at which the true grouping
+becomes distinguishable. One initialized each task's local state from a
+provenance trace snapshotted when the task completed; one let each task
+re-acquire itself from a learned mixture of the traces of the tasks
+grouped with it; one stored every task's innovation in a separately
+addressable component basis learned over the lifetime, at matched present
+cost (its lifetime loss differs from ordinary by 0.09-0.19%). None of the
+three separated at any scored budget, recovery of the organized
+representation's margin stayed within [-0.12, +0.19] of zero, and a
+structureless control beat every candidate grouping in every world by
+0.33-0.54 log units (`reports/h51_reorganizability.json`). So the
+negative is not that ordinary learning discards task-local evidence, and
+not that it stores innovation densely: whatever the organized
+representation has, it is neither preserved state nor storage format.
+
+One of those arms is worth stating on its own, because it separates two
+things that are easy to conflate. The provenance-recombination channel
+was genuinely valuable — it cut absolute reacquisition cost 18-38% below
+ordinary — and it was actively uninformative about grouping, the wrong
+partition scoring better in all three worlds. A representational addition
+can be worth its cost and carry no evidence about which structure
+produced the data; usefulness and informativeness are different
+properties, and only the second is what a discovery procedure can run
+on.
+
 Why should anyone working at scale care about a 16-dimensional world?
 Because the criterion is scale-free and the phenomena it isolates have
 scaled analogues that are currently argued by anecdote: mixture-of-
