@@ -1263,3 +1263,21 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   V6's inner loop that never learned, H50's `[50,...]` seeds, the alpha
   fit pinned at a stationary point). If a run is already in flight, audit
   it anyway and disclose what the audit finds alongside the result.
+
+- H51, THE LIMIT OF PRESERVED STATE (2026-08-24;
+  `reports/h51_reorganizability.json`). Three wake representations —
+  provenance-initialized, provenance-recombining, and
+  decomposable-innovation — all returned `C_restructure = None` under the
+  UNCHANGED H50 migration operator and H49 scorer, with recovery of
+  L_4's separation in [-0.12, +0.19] and SHAM ahead everywhere by
+  0.33-0.54. So the H50 negative is not about what ordinary wake
+  discards, nor about the FORM in which it stores innovation. Two
+  transferable rules came out of it. (1) USEFULNESS IS NOT
+  INFORMATIVENESS: a channel that cut absolute reacquisition cost 18-38%
+  was ANTI-informative about grouping (the wrong partition won 3/3), so
+  a benefit that is indifferent to which structure is assumed is not
+  evidence about structure. (2) A LONG SCORER MUST BE RESUMABLE — write
+  each scored cell to disk as it completes, stamped with a PROTOCOL
+  FINGERPRINT (budgets, model records, refit steps/LR, migration rates
+  and seeds), and refuse a cell computed under a different fingerprint;
+  a reboot cost four hours of unscored work before this existed.
