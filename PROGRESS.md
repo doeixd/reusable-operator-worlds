@@ -3296,3 +3296,16 @@ rung E9 (export-constrained formation) registered in advance as the constructive
 successor to an E1 negative, with matched and wrong-constraint controls; and an
 explicit statement of what a clean sweep would and would not license. H53
 untouched.
+
+# 2026-08-25 - E2-FEAS SCORED: E2 IS CONSTRUCTIBLE AT K=6, D=3
+
+First rung of the export branch, run beside the H53 scoring. At the true
+lifetime size of 64 programs the neutral fill reaches |H1| = 31 and |H2| = 121
+against thresholds of 16 and 16, so E2 needs no generator change and stays
+comparable with existing artifacts. The pair-minimising fill exposes a direct
+tension between the strata (|H2| = 152 but |H1| = 4), which E2's own plan must
+resolve by freezing a target split. Two instrument defects were caught and
+fixed before any verdict was recorded (training set bounded rather than equal to
+the lifetime; verdict computed from one arm only); both are disclosed in the
+ledger entry. Next in Phase 0: the E1.0 oracle-route gate, then E0.1 contextual
+substitutability and E0.2/E7 residual load-bearing.

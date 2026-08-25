@@ -5285,3 +5285,43 @@ the mixture substrate; E9 works where the audit fails and costs present-task
 loss, the same trade H39 found for the argument channel. Ceiling stated in the
 document: a clean sweep licenses a fixed-depth sequential-composition DSL, a
 foundation claim, not program synthesis in the usual sense.
+
+# E2-FEAS RESULT (2026-08-25): E2 IS CONSTRUCTIBLE; THE STRATA TRADE OFF AGAINST EACH OTHER
+
+Plan `E0_PHASE0_AUDIT_PLAN.md` (Amendment 1, frozen). Report
+`reports/e2_feasibility.json`. Pure combinatorics, no model, seconds of compute.
+
+At the TRUE lifetime size (64 distinct programs of 216, with every primitive in
+every position, at least 3 distinct surrounding contexts each, and frequency
+balance <= 2.0), over 64 seeded constructions per fill objective:
+
+    pair-minimising fill:  best |H1| =   4    best |H2| = 152   (64/64 valid)
+    neutral random fill:   best |H1| =  31    best |H2| = 121   (62/64 valid)
+    registered thresholds: |H1| >= 16 AND |H2| >= 16
+
+**CONSTRUCTIBLE = True**, and no designed program schedule is required: the
+neutral fill reaches both thresholds on its own (an example construction has
+|H1| = 111, |H2| = 41, balance 1.4, minimum 25 contexts per primitive). E2 may
+therefore keep `K = 6, D = 3` and stay comparable with every existing artifact.
+
+The informative part is the TRADE-OFF the two arms expose. Minimising newly
+covered adjacent pairs maximises the pair-novel stratum (152) and collapses the
+triple-novel one (4): concentrating training on few pairs pushes nearly every
+unseen triple into H2, leaving almost nothing that is triple-novel with all
+pairs seen. The two strata are in direct tension, so E2's plan must FREEZE its
+target split rather than maximise either -- a lifetime tuned for H2 has almost
+no H1, and vice versa.
+
+Instrument disclosure, recorded because the first run was wrong: the initial
+implementation satisfied the coverage constraints with 9-13 programs and
+reported |H1| = 19, |H2| = 203 -- void, because E2's training set IS the
+lifetime (64 tasks), not something bounded by it. Amendment 1 fixed the
+quantifier before any verdict was recorded; that first run is preserved as an
+instrument dry run. A second reporting bug (the verdict read only the
+pair-minimising arm, printing False while the random arm passed) was fixed in
+the same pass, before this result was recorded.
+
+Registered prediction scored: ours said this was the rung we could not guess and
+that |H2| >= 16 might be impossible. It is possible, comfortably, under a
+neutral schedule -- so the prediction was right to abstain and wrong in its
+worry.

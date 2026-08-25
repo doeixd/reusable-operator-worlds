@@ -154,3 +154,35 @@ Seconds for E2-feas; minutes for E1.0 and E0.1 (forward passes only); E0.2's
 re-fit condition is the only one that trains anything, and it trains task-local
 state only, on existing artifacts. Phase 0 runs beside the H53 scoring without
 competing for memory.
+
+
+# Amendment 1 (2026-08-25, before any E2-feas verdict is recorded): the training set must be the LIFETIME
+
+The first E2-feas implementation satisfied the coverage constraints with 9-13
+programs and reported CONSTRUCTIBLE with `|H1| = 19`, `|H2| = 203`. That reading
+is void, and the run is preserved as an instrument dry run rather than a result.
+
+The plan said "a training set of at most 64 programs". That is the wrong
+quantifier: E2's lifetime TRAINS ON 64 TASKS, so the training set size is
+fixed at the lifetime length, not bounded by it. A 13-program construction leaves
+most of the 216-program space unseen for the trivial reason that the learner
+never ran; the question the gate exists to ask is whether the held-out strata
+survive a REAL lifetime, in which 64 programs cover most of the adjacent pairs.
+
+Amended, before any verdict:
+
+1. **`train_size` must EQUAL the lifetime task count** (64 by default, reported
+   explicitly). The search fills to exactly that many distinct programs.
+2. The filling objective is registered: after coverage is met, each further
+   program is chosen to **minimise newly covered adjacent pairs** (subject to the
+   balance constraint), because the adversarial question is whether a lifetime
+   CAN be built that preserves an unseen-pair stratum — not whether a random one
+   does. A random-fill arm is reported alongside as the neutral reference.
+3. Both arms report `|H1|` and `|H2|` at the true train size; the registered
+   thresholds (`|H1| >= 16`, `|H2| >= 16`) are unchanged and are read only at
+   that size.
+4. If the pair-minimising fill reaches the thresholds but the random fill does
+   not, the finding is recorded as **E2 is constructible only with a designed
+   program schedule**, and E2's plan must then freeze that schedule explicitly
+   as part of its generator — a lifetime whose task order was chosen to preserve
+   a test stratum is a designed instrument and must be declared as one.

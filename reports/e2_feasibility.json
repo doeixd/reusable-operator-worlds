@@ -1,0 +1,92 @@
+{
+  "frozen_plan": "E0_PHASE0_AUDIT_PLAN.md",
+  "grid": {
+    "K": 6,
+    "depth": 3,
+    "budget": 64,
+    "context_min": 3,
+    "starts": 64,
+    "program_space": 216
+  },
+  "thresholds": {
+    "min_H1": 16,
+    "min_H2": 16
+  },
+  "valid_constructions": {
+    "min_pairs": 64,
+    "random": 62
+  },
+  "best_H1": {
+    "seed": 27,
+    "fill": "min_pairs",
+    "train_size": 64,
+    "coverage": {
+      "all_primitives": true,
+      "every_position": true,
+      "context_min": 31,
+      "context_ok": true,
+      "balance_ratio": 1.096774193548387,
+      "balance_ok": true,
+      "missing_positions": [],
+      "thin_primitives": []
+    },
+    "H1": 4,
+    "H2": 148
+  },
+  "best_H2": {
+    "seed": 2,
+    "fill": "min_pairs",
+    "train_size": 64,
+    "coverage": {
+      "all_primitives": true,
+      "every_position": true,
+      "context_min": 30,
+      "context_ok": true,
+      "balance_ratio": 1.1,
+      "balance_ok": true,
+      "missing_positions": [],
+      "thin_primitives": []
+    },
+    "H1": 0,
+    "H2": 152
+  },
+  "best_random": {
+    "seed": 38,
+    "fill": "random",
+    "train_size": 64,
+    "coverage": {
+      "all_primitives": true,
+      "every_position": true,
+      "context_min": 25,
+      "context_ok": true,
+      "balance_ratio": 1.64,
+      "balance_ok": true,
+      "missing_positions": [],
+      "thin_primitives": []
+    },
+    "H1": 31,
+    "H2": 121
+  },
+  "constructible": true,
+  "constructible_designed_fill": false,
+  "constructible_random_fill": true,
+  "designed_schedule_required": false,
+  "example_satisfying_both": {
+    "seed": 0,
+    "fill": "random",
+    "train_size": 64,
+    "coverage": {
+      "all_primitives": true,
+      "every_position": true,
+      "context_min": 25,
+      "context_ok": true,
+      "balance_ratio": 1.4,
+      "balance_ok": true,
+      "missing_positions": [],
+      "thin_primitives": []
+    },
+    "H1": 111,
+    "H2": 41
+  },
+  "note": "greedy seeded search reports a LOWER bound; a negative means not found by this search, not proven impossible"
+}
