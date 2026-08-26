@@ -42,7 +42,7 @@ FROZEN = {
     "H48B_WIDTH_SWEEP_PLAN.md": "525baac",
     "H49_DISCOVERABILITY_PLAN.md": "5302c92",
     "H50_REORGANIZATION_PLAN.md": "0b1b5e9",
-    "E3_PROGRAM_ECONOMY_PLAN.md": "edbebec",
+    "E3_PROGRAM_ECONOMY_PLAN.md": "da7f6da",
     "E8_LENGTH_PLAN.md": "473d34b",
     "E2_COMPOSITION_PLAN.md": "36d7dbf",
     "E1R_RECURRENCE_CONTROL_PLAN.md": "bed3b91",
