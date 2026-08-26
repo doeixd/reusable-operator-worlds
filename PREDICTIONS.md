@@ -5717,3 +5717,74 @@ Licensing: E1's interpretation stands and is now causally anchored. E2 proceeds
 as the frozen run order specifies, and inherits a stronger prior: whatever E2
 finds about composition will be about learned reusable structure, since the same
 measurement says the structure vanishes when recurrence does.
+
+# E2 RESULT (2026-08-26): COMPOSITION HOLDS, INCLUDING IN POSITIONS THE OPERATOR NEVER OCCUPIED
+
+Plan `E2_COMPOSITION_PLAN.md` (Amendment 1, frozen `36d7dbf`). Report
+`reports/e2_composition.json`. Support-split worlds 0-2, discrete substrate,
+interface E1-P. 12 held-out programs per stratum per world.
+
+    stratum / world      O        O-W      R        R-W      S       O-S     R-S     R-O
+    H1 triple-novel  w0 0.00315  0.06418  0.00315  0.05739  0.04630  +2.688  +2.688  +0.000
+                     w1 0.00347  0.06158  0.00342  0.05221  0.03283  +2.246  +2.263  -0.017
+                     w2 0.00287  0.06608  0.00290  0.05730  0.03809  +2.584  +2.576  +0.008
+    H2 pair-novel    w0 0.00283  0.06135  0.00283  0.05643  0.04149  +2.684  +2.684  +0.000
+                     w1 0.00373  0.06470  0.00321  0.05455  0.02861  +2.037  +2.186  -0.149
+                     w2 0.00374  0.05846  0.00377  0.05332  0.03653  +2.280  +2.270  +0.010
+    H3 position-novel w0 0.00313 0.06902  0.00293  0.05882  0.04533  +2.674  +2.739  -0.065
+                     w1 0.00403  0.05958  0.00309  0.05247  0.03399  +2.132  +2.398  -0.266
+                     w2 0.00393  0.06797  0.00351  0.06128  0.03446  +2.171  +2.284  -0.113
+
+**All three strata pass in all three worlds**, against a registered +0.15 margin
+on three separate comparisons (oracle vs scratch, oracle vs an incompatible
+world's library, inference vs scratch). Under the terminology contract this is
+the rung licensed to use the word COMPOSITION, and it is earned: a
+pre-specified split with verified coverage, balance <= 2.0, and >= 21 distinct
+contexts per primitive, frozen and written to the artifact before training.
+
+**H3 is the result worth stating on its own.** Three `(primitive, position)`
+placements per world were withheld from training ENTIRELY — verified in code
+that no training program contains one — and held-out programs then placed those
+primitives exactly where they had never occurred. Performance is
+INDISTINGUISHABLE from the familiar-position strata: H3's oracle losses
+(0.0031 / 0.0040 / 0.0039) sit inside H1's range (0.0029-0.0035), and its
+margins (+2.13 to +2.67) match H1's (+2.25 to +2.69).
+
+    A learned operator retains its semantics in a program position it never
+    occupied during training.
+
+The withheld positions included the LAST position in all three worlds (0,1),
+(1,2) and (3,2) among them, so the prediction that any positional penalty would
+grow with depth was testable and found nothing to grow.
+
+**Inference beats the teacher's own route on H3, consistently** (`R - O` =
+-0.065 / -0.266 / -0.113, negative in all three worlds, and negative or zero in
+7 of 9 cells overall). The functional assignment from E0.1 is not optimal, and
+support-only inference finds a better route through the same frozen library.
+This sits with E0.1's weak assignment margins (0.002-0.019 here): the mapping
+from learned object to teacher primitive is barely determined, yet execution and
+composition work regardless. Substitutability without sharp identity is
+sufficient for export — which is a substantive finding about what "primitive"
+needs to mean, and an argument for the terminology contract's insistence that
+identity claims and use claims are different.
+
+Scorekeeping. `H1`/`H2` pass as predicted, with margins within ~0.5 log units of
+E1's — CORRECT. On `H3` we registered "near even, slight lean to PASS for the
+oracle arm and FAIL-or-marginal for the inference arm", plus a prediction that
+any failure would be larger for later positions. The oracle lean was CORRECT;
+the inference call was WRONG in the interesting direction — inference is the
+BETTER arm on H3, not the weaker one; and the depth prediction was untestable
+because there was no failure to grade.
+
+Non-vacuity, all satisfied: withheld placements verified absent from every
+training program; every held-out program verified absent from training; every
+H3 program verified to contain a withheld placement; `R` and `S` each reduce
+their own objective by more than 1% in every cell (0 weak of 108); split
+diagnostics (balance 1.69-2.00, contexts 21-26) recorded in the artifact before
+the lifetime ran.
+
+Licensing: the branch may now say COMPOSITION for this substrate at exact reuse.
+It may NOT yet say synthesis (no compact program variable has been priced, and
+route optimization is not synthesis under the contract) and it may not say
+anything about depth beyond 3. The frozen run order sends the branch to E8
+(length generalization) next.

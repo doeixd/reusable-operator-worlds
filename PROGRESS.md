@@ -3392,3 +3392,18 @@ architecture's function-space coverage. The rho = 1 cells reproduce E1 within
 (our rho = 1 and rho = 0 predictions correct, the rho = 0.9 point over-estimated)
 and the disclosure that two hand-rolled recurrence measurements were wrong before
 the scorer was switched to the project's registered diagnostic. Next: E2.
+
+# 2026-08-26 - E2 SCORED: COMPOSITION HOLDS, INCLUDING POSITION-NOVEL PLACEMENTS
+
+Three support-split lifetimes, three strata, three worlds; all nine cells pass
+the registered margins on all three comparisons. H3 - programs placing a
+primitive in a position withheld from training entirely - performs
+indistinguishably from the familiar-position strata, so a learned operator keeps
+its semantics in a position it never occupied. Inference beats the teacher's own
+matched-assignment route on H3 in all three worlds, and the assignment margin
+remains tiny (0.002-0.019), so usability does not require sharp identity.
+Recorded with full non-vacuity (0 weak cells of 108; withheld placements and
+held-out programs verified in code) and scorekeeping (H1/H2 correct; the H3
+oracle lean correct; the H3 inference call wrong in the interesting direction).
+The branch may now say COMPOSITION for this substrate at exact reuse. Next in
+the frozen run order: E8, length generalization.

@@ -4080,3 +4080,35 @@ measured recurrence were wrong in opposite directions (0.000 at rho = 1;
 0.983 at rho = 0) before it was noticed that every artifact already carries the
 registered measurement. A central coordinate should have exactly one definition
 in a codebase, and new scorers should read it, not recompute it.
+
+
+
+================================================================================
+E2: OPERATORS SURVIVE POSITIONS THEY NEVER OCCUPIED (2026-08-26)
+================================================================================
+
+A support-split lifetime withheld three (primitive, position) PLACEMENTS
+entirely, then tested programs that put those primitives exactly where they had
+never appeared. The result is indistinguishable from the familiar-position
+strata: oracle loss 0.0031-0.0040 against 0.0029-0.0035, margins +2.13 to +2.67
+against +2.25 to +2.69, in all three worlds. The withheld set included the last
+program position, so the predicted depth-dependent penalty had every chance to
+appear and did not.
+
+SUBSTITUTABILITY WITHOUT SHARP IDENTITY IS ENOUGH. Across E0.1, E1 and E2 the
+Hungarian assignment from learned object to teacher primitive has a margin of
+0.001-0.019 — several assignments are nearly as good, so WHICH object is which
+is barely determined. And yet the frozen library executes unseen programs, and
+support-only inference finds routes BETTER than the teacher's own program
+through the matched assignment (R - O negative in 7 of 9 cells). Identity and
+usability are separate properties; a substrate can have the second without much
+of the first. This is why the terminology contract separates "recovered
+primitive" from "substitutable object", and the separation earned its keep here.
+
+A CONSTRAINT SOLVER IS NOT A SELECTION EFFECT, BUT SAY SO EXPLICITLY. E2's split
+had to be searched (a neutral fill covered every adjacent pair and left the
+pair-novel stratum EMPTY). Searching a training split until it satisfies
+structural constraints is legitimate; searching it until a result looks good is
+not. The difference is what the search is allowed to read, and that belongs in
+the amendment in writing — stratum sizes, balance and context counts, never a
+model or a loss.
