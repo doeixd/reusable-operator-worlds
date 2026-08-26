@@ -5907,3 +5907,45 @@ substrate at exact reuse: they export (E1), the effect is caused by recurrence
 and they compose at lengths never trained (E8). It may still NOT say SYNTHESIS —
 no compact program variable has been priced (E3) and no recognizer has been
 built (E5). The frozen run order sends the branch to E3 next.
+
+# E3 REGISTRATION + BRANCH ORDER (2026-08-26, review 78)
+
+Review 78 accepted. Official branch order, registered before any of it runs:
+
+    E3 development -> freeze the sealed export confirmation -> open 800-829
+    -> close the composition/program claim -> E5 synthesizer -> E6 invention
+
+with the CONFIRMATION BLOCK treated as more important than E3: E1, E1-R, E2 and
+E8 are all development results on worlds 0-2 and none has been banked, which by
+this project's own standards is overdue. E5 does not start before the block.
+
+E3 plan: `E3_PROGRAM_ECONOMY_PLAN.md`. Three separate claims — E3a syntax
+sufficiency (store nothing but `(z_1..z_D)`), E3b two-part economy (the
+headline), E3c semantic controls including the GAUGE control where route and
+library are permuted CONSISTENTLY and behaviour must be preserved. Every
+component charged: `D*(library)` by the established interpolated
+rate-distortion instrument at three contribution-relative budgets (1%, 5%, 25%),
+plus a length code `log2(D_max)` charged even at constant depth, plus route bits
+`D log2(slots)`. Correctness is FUNCTIONAL throughout; no claim reads route
+agreement against teacher IDs.
+
+Registered predictions. E3a passes structurally; E3c passes with the gauge
+control exact. **E3b: we predict PROGRAM ECONOMY HOLDS DECISIVELY, and we
+disagree with review 78's hedge that the library is "the elephant in the room".**
+The shared library is 12 operators; the private alternative needs 64 x 3 = 192
+operator-equivalents for the same tasks, so sharing wins by ~16x on the only
+expensive term while the program corpus costs ~688 bits. The failure condition is
+therefore TASK COUNT, not library size — the amortization law one level up, a
+vocabulary paying when `H x s_bar > lambda D*(V)` — and we predict the measured
+amortization point lands in the low single digits to low tens of tasks. If it
+lands above 64, review 78 is right and we are wrong. Least confident:
+`D_program` versus `D_continuous`, where both amortize a library and the contest
+is 10.75 route bits against the continuous route's `D*`; we expect the program to
+win by a much smaller factor than against the private alternative.
+
+Also registered from review 78, to be honoured when the sealed plan is drafted:
+seeds 800-829; orthogonal estimands (C1 export, C2a/b/c the three novelty strata
+with H3 as flagship, C3 depth-4 closure, C4 drift quantified rather than merely
+monotone, C5 optional E3 economy); a HIERARCHICAL verdict so that a drift miss
+cannot erase a composition pass; and structural assertions that FAIL THE RUN
+rather than warn.

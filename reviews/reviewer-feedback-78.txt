@@ -1,0 +1,232 @@
+This is a major milestone. E8 removes one of the last plausible "composition, but only
+inside the training scaffold" explanations.
+
+You now have a frozen learned vocabulary whose operations retain their semantics across
+unseen combinations, unseen positions, and unseen program lengths, at exact reuse.
+
+The depth-4 result is especially strong because position 4 literally never existed
+during training. The fact that failure is SMOOTH ACCUMULATED APPROXIMATION ERROR, rather
+than a discontinuity at the novel execution position, is exactly what you would expect
+from a reusable operator interface.
+
+## What E8 tells us
+
+Two very different explanations were live for E2: "the network learned a special algebra
+for three-stage pipelines", or "the network learned operations that can actually be
+iterated". E8 makes the first hard to maintain. The per-step numbers are beautiful:
+e_1 < e_2 < e_3 < e_4 with no special jump at e_4. And this check matters: e_3 inside a
+depth-4 program ~ e_final on trained depth-3 programs. So appending a new call does not
+corrupt the previous computation; it just incurs another finite approximation error.
+That's basically the neural analogue of a stable calling convention.
+
+# I would now say the project has earned a "neural ABI" claim
+
+With appropriate synthetic/testbed qualification: P_i : W -> W, where the learned P_i
+can be called in new neighboring contexts, in program positions where they were never
+trained, and a different number of times than the training horizon. That is much closer
+to an operation than to an ordinary learned feature. Phrasing: "At exact reuse, the
+learned frozen operator vocabulary is compositionally reusable and length-closed over
+the tested depth range." Not universally length-closed - you tested D = 2, 3, 4 - but
+within that range the phrase is earned.
+
+# The drift curve is itself a useful new object
+
+Composition depth now has an error budget. If each application injects effective error
+e_{t+1} ~ a e_t + b, or e_t ~ e_0 g^t over some range, there is a predictable maximum
+usable program length D_max(eps) = max{D : e_D < eps}. I would not turn this into
+another experiment yet, but fit both simple additive and multiplicative models
+diagnostically from E8. Later you can predict, before running, where composition should
+cease to be useful. That gives a quantitative COMPOSITIONAL HORIZON rather than
+works/doesn't-work, and architecture improvements can then be evaluated by whether they
+reduce per-call drift.
+
+# More importantly: E3 has changed status
+
+Before E2/E8, E3 was speculative - are we forcing symbolic syntax onto something that
+isn't really a program? That objection is gone. Now E3 asks the clean next question: ARE
+THOSE SEMANTICS REPRESENTED ECONOMICALLY AS PROGRAMS? And because DISC already exposes a
+discrete length-D route, E3 should be mostly a CODING/ECONOMICS AUDIT, not another
+architecture experiment.
+
+# I would make E3a extremely literal
+
+For a depth-D program over K primitives the ideal fixed-width structural code is
+L_route = D log2 K. If variable length is part of the language, include the length code:
+L_program = L(D) + D log2 K. If primitives take learned arguments,
+L_program = L(D) + D log2 K + L(alpha) + L(eps). Don't hide any component. Then compare
+that literal code against the actual best behavior-preserving two-part alternatives.
+
+# E3 should answer three different things
+
+E3.1 - IS THE DISCRETE ROUTE SUFFICIENT? Replace whatever task-code storage exists with
+only the literal discrete route, freeze everything else, measure predictive degradation.
+If yes, the task solution really can be written as the claimed discrete syntax. If not,
+the nominal one-hot route isn't actually the whole program representation.
+
+E3.2 - IS IT CHEAPER? Compare D*(discrete program) against the original task code, the
+continuous MIX route, a matched private task representation, a generic compressed latent
+code, and the scratch residual/task-specific solution. The interesting quantity is the
+TWO-PART total D*(L) + sum_t D*(p_t | L), not route bits in isolation. DISC may have a
+nice 8-bit task program but a more expensive library. That whole accounting matters.
+
+E3.3 - DOES THE CODE POSSESS THE RIGHT SEMANTICS? Wrong library: same discrete route
+bits, shuffled operator meanings - performance should collapse. Wrong depth: decode the
+same task under D' != D - should not preserve the solution. Wrong route: same code
+length, different sequence - should behave like a different program. And the GAUGE
+control: (P_i, z_i) -> (P_pi(i), pi(z_i)) should preserve behavior. That makes clear the
+symbols themselves are arbitrary labels while the syntax-semantics relation is real.
+Given the tiny teacher assignment margin you just found, this is especially important.
+
+# The strongest E3 result would be a two-part phase transition
+
+Eventually compare exact/high reuse to low reuse. The grand result would be
+J_program < J_continuous/private at high recurrence and J_program > J_continuous/private
+at low recurrence, connecting the whole story: recurrence -> reusable operators ->
+composition -> economically preferred program syntax. But close E3 at exact reuse first.
+
+# What would license "program"?
+
+1. Compositional semantics - E2/E8: passed. 2. Frozen vocabulary - passed. 3. Compact
+explicit syntax - E3. 4. Syntax causally determines computation - wrong-route/library
+controls. 5. Minimal repair - E7 / no residual dependence: passed on trained tasks,
+should remain reported on held-outs. If E3 passes those, you have LEARNED PROGRAMS OVER
+A LEARNED COMPUTATIONAL VOCABULARY. I still reserve PROGRAM SYNTHESIS for E5, because
+synthesis means efficiently mapping evidence to the program, D_support -> p.
+
+# An interesting subtlety about R already beating O
+
+The "teacher program" under the learned vocabulary is not necessarily the teacher
+primitive IDs, because the learned language seems to use an alternative basis. So don't
+define correctness of a learned program by sequence accuracy against teacher IDs. Define
+it by FUNCTIONAL EXECUTION. There may be multiple programs in the learned language
+implementing the same teacher function - perfectly normal in a programming language. E5
+should eventually be evaluated primarily on execution loss and secondarily on exact
+route recovery, not vice versa.
+
+# This is a much bigger update to the grand project
+
+You have successively removed the private-residual explanation, whole-pipeline
+memorization, pair memorization, position-specific operator semantics, and now the
+fixed-depth executor explanation. What remains is looking increasingly program-like:
+learned frozen operators + ordered calls = novel executable computation. The next tests
+are no longer trying to prove composition exists; they are: can this compositional
+vocabulary be represented, inferred, and extended as an economical language?
+
+So yes: E3 NEXT. Make it boringly literal - count every bit, test wrong syntax with
+matched code length, compare the complete two-part representation, and don't demand
+alignment to the teacher's arbitrary symbol names.
+
+# On ordering: E3 -> sealed export confirmation -> E5
+
+I agree with that ordering and would make it the official branch plan. THE CONFIRMATION
+BLOCK IS MORE IMPORTANT. We now have enough positive development results that continuing
+to add capabilities before banking the foundation would violate the methodology that
+made the earlier ROW results credible.
+
+## Run E3 first, deliberately boring
+
+DISC supplies p_t = (z_1, z_2, z_3), z_i in {1..12}, so D(p_t) = 3 log2 12 ~ 10.75
+bits/task, ~688 bits across 64 tasks. The question is simply whether
+D*(L) + sum_t D(p_t) < D*(best non-program alternative) while preserving behavior.
+
+E3a syntax sufficiency; E3b two-part economy (the headline); E3c semantic code controls
+with the gauge-preserving joint permutation.
+
+# Why E3 matters disproportionately
+
+V2 had already gotten surprisingly far: allocation economics worked but the two-part MDL
+LOST 30/30. So if E3 wins, this closes a long-standing failure mode: the learner can now
+both USE reusable computation and WRITE the task compactly in terms of it. Read + write.
+Combined with E2/E8: read + write + compose. That's basically the minimum substrate
+before "program synthesis" is a sensible phrase. And it can absolutely still lose,
+because D*(L) ~ 25k bits is the elephant in the room. A tiny 688-bit program corpus does
+not automatically amortize an expensive vocabulary. That's exactly why this is worth
+measuring rather than narrating.
+
+# One E3 accounting detail I'd insist on
+
+Don't compare 688 route bits against private-task bits by themselves. Compare full
+representations: D_program = D*(L) + D*(routes) + D*(arguments) + D*(other required
+state) versus D_independent. And compress every component to its own established
+rate-distortion frontier where possible; otherwise we regress from the V5 constitution.
+If exact route storage is already lossless, fine: D*(routes) = D log2 K. But the library
+itself still deserves its proper D*, not a fixed-width proxy.
+
+# Then freeze a sealed export confirmation
+
+This is now mandatory. E1 (frozen library export), E1-R (export depends on recurrence),
+E2 (systematic composition on unseen triples, unseen adjacent pairs, unseen
+primitive-position placements), E8 (length closure at D = 2, 4 from a depth-3 library)
+together make a substantial scientific claim: EXACT REUSE PRODUCES A FROZEN
+COMPUTATIONAL VOCABULARY WITH SYSTEMATIC COMPOSITIONAL SEMANTICS. That deserves the same
+treatment V1/V2/V3/H39 received. Bank it before E5.
+
+Suggested block: seeds 800-829, provided the audit confirms they are untouched. Freeze
+and hash the entire plan before generating or reading any cell. Don't confirm every
+development statistic; pick a small set of orthogonal claims.
+
+C1 - FROZEN EXPORT. Primary G_export = (L_S - L_R)/(L_S - L_O). Development has R almost
+indistinguishable from O, so don't set the prediction at perfection; give it room to
+detect shrinkage honestly.
+
+C2 - SYSTEMATIC PROGRAM NOVELTY, keeping E2's three strata SEPARATE: C2a H1 triple-novel,
+C2b H2 pair-novel, C2c H3 position-novel. H3 should be the flagship estimand because it
+has the cleanest semantics. Register Delta_route = log L_S - log L_R rather than raw MSE,
+because development ranges vary and the effect is multiplicative. Observed gains are
+~2.0-2.7 log units, so the sealed interval can be meaningfully conservative - derive it
+mechanically from your development protocol rather than from my illustrative numbers.
+
+C3 - LENGTH CLOSURE. Depth 4 is the important one: a longer program than training AND a
+new execution position. Make depth-4 route-only versus scratch a load-bearing
+confirmatory estimand. Depth 2 can be a secondary clause.
+
+C4 - COMPOSITIONAL DRIFT, its own estimand. Don't just preregister "monotonic error";
+quantify it. Fit log e_t = a + b t and register positive b, fit quality, and no
+discontinuous fourth-position penalty. Or define
+q = (e_4/e_3) / mean(e_2/e_1, e_3/e_2) and predict q near 1. That directly tests whether
+the unseen fourth call behaves like another ordinary application of the learned ABI. I
+like this better than fitting a grand extrapolation law from four points.
+
+C5 - OPTIONAL: E3's two-part economy. If E3 is clean, including its primary MDL estimand
+makes the confirmation thesis much stronger: frozen vocabulary + compact programs +
+systematic composition. I prefer running E3 development and then including it in the same
+frozen 800-829 block, assuming E3 takes little time.
+
+# Structure the sealed verdict hierarchically
+
+Don't make one all-or-nothing label where an ancillary drift statistic kills composition:
+EXPORT CONFIRMED (C1); COMPOSITION CONFIRMED (C1 + C2a/b/c); LENGTH-CLOSED COMPOSITION
+CONFIRMED (C1 + C2 + C3); PROGRAM REPRESENTATION CONFIRMED (above + E3 primary); MECHANISM
+CORROBORATED (C4). Then a miss on drift does not erase the direct fact that frozen
+depth-4 programs worked. That's the right scientific dependency graph.
+
+# Preregister the structural assertions brutally
+
+The sealed test must reproduce the exact train/test structural splitting procedure, not
+merely generate "new programs" after training. Machine-check p_test not in P_train; H2's
+existence of an unseen adjacent pair; H3's (primitive, position) not in the trained
+placements; and E8's D_train = 3, D_test in {2, 4}. All of those should FAIL THE RUN, not
+merely print warnings.
+
+# Don't run E5 before this block
+
+E5 will involve another model, hyperparameters, a curriculum, support-set design, search
+baselines, maybe discrete latents. It can become its own research project. Right now we
+have a remarkably simple result: the vocabulary already composes. Bank that before adding
+a learned synthesizer. If the sealed block weakens materially, we'd want to know BEFORE
+optimizing an inference system around development quirks.
+
+# Assuming confirmation succeeds, E5 changes character
+
+We would already know there exists p in Programs(L) such that Execute(L, p) solves unseen
+tasks. Then learn q_phi(p | D_support) - actual program induction - and the evaluation
+decomposes into oracle program vs optimization/search program vs amortized recognizer, so
+we can finally talk about C_find rather than arguing about whether the vocabulary exists.
+
+# Expected ordering
+
+E3 development -> freeze export confirmation -> 800-829 sealed -> close the
+composition/program paper claim -> E5 program synthesizer -> E6 primitive invention. Park
+new H53-style formation work after its current commitments close. The export branch has
+produced the most direct positive evidence for the ultimate research program; it deserves
+to be banked before we make the system more complicated.

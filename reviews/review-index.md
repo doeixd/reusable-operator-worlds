@@ -2941,3 +2941,33 @@ and record PER-STEP error e_1..e_D rather than only final NMSE, so a depth-4
 failure can be diagnosed as fourth-step breakage versus error compounding with
 depth. Predicts depth 2 very likely passes, depth-4 oracle 60-70%, depth-4
 inference lower.
+
+
+### [reviewer-feedback-78.txt](reviewer-feedback-78.txt)
+On E8. Calls the length result a milestone that removes the "composition only
+inside the training scaffold" explanation, and reads the smooth per-step drift
+(no discontinuity at the never-trained fourth position, with e_3 inside a
+depth-4 program matching e_final on trained depth-3 programs) as the neural
+analogue of a STABLE CALLING CONVENTION — earning a qualified "neural ABI" claim
+and the phrase "compositionally reusable and length-closed over the tested depth
+range". Proposes treating the drift curve as an object in its own right: fit
+additive and multiplicative models diagnostically, so a COMPOSITIONAL HORIZON
+D_max(eps) can be predicted before running deeper tests and architectures can be
+compared by per-call drift. Then sets the branch order:
+E3 -> SEALED EXPORT CONFIRMATION -> E5, with the confirmation block called
+MANDATORY and more important than E3, because adding capabilities before banking
+the foundation would violate the methodology that made the earlier results
+credible. For E3: make it boringly literal (L(D) + D log2 K + L(alpha) +
+L(eps), nothing hidden), answer syntax sufficiency / two-part economy / semantic
+controls separately, charge every component its own D* rather than a fixed-width
+proxy, and include the GAUGE control — route and library permuted consistently
+must preserve behaviour — since the teacher-assignment margin is tiny. Insists
+correctness be FUNCTIONAL, never sequence accuracy against teacher IDs, because
+the learned language may implement a teacher function by a different program.
+Notes E3 closes V2's long-standing failure (allocation economics worked, the
+two-part code lost 30/30) if it wins: read + write + compose. For the sealed
+block: seeds 800-829, orthogonal estimands C1 export / C2a-c the three novelty
+strata with H3 as flagship / C3 depth-4 length closure / C4 drift quantified as
+log e_t = a + bt or q = (e_4/e_3)/mean(e_2/e_1, e_3/e_2) ~ 1 / C5 optional E3
+economy, a HIERARCHICAL verdict so a drift miss cannot erase composition, and
+structural assertions that FAIL THE RUN rather than warn.

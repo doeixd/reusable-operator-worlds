@@ -3438,3 +3438,17 @@ degradation SHAPE was correct - and full non-vacuity (0 weak of 144). The branch
 may now say the objects form a compositional vocabulary closed under length; it
 may still not say synthesis. Next: E3, whether solutions are compact programs
 over that vocabulary.
+
+# 2026-08-26 - REVIEW 78 FILED; E3 PLANNED; BRANCH ORDER SET
+
+Review 78 filed and indexed: E8 read as earning a qualified neural-ABI claim,
+the drift curve promoted to an object worth modelling, and the branch order fixed
+as E3 -> sealed export confirmation (800-829) -> E5, with the confirmation called
+mandatory and more important than E3. Drafted `E3_PROGRAM_ECONOMY_PLAN.md` as a
+coding/economics audit with three separately-answered claims, every component
+charged its own D* by the established interpolated instrument at three budgets,
+a length code charged even at constant depth, and the gauge control (route and
+library permuted consistently) as the test that symbol names are arbitrary while
+the syntax-semantics relation is real. Registered our disagreement with review
+78 on E3b: we predict the economy holds decisively and that the binding variable
+is task count rather than library size.
