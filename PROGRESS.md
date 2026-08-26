@@ -3452,3 +3452,20 @@ library permuted consistently) as the test that symbol names are arbitrary while
 the syntax-semantics relation is real. Registered our disagreement with review
 78 on E3b: we predict the economy holds decisively and that the binding variable
 is task count rather than library size.
+
+# 2026-08-26 - E3 SCORED: PROGRAM REPRESENTATION SUFFICIENT, ECONOMICAL AND CAUSAL
+
+E3a bitwise 64/64 in all three worlds; E3b primary clause passes 3/3 (program
+15.8-16.8k bits against private 234-258k, amortizing at 4.0-4.3 tasks); E3c
+passes with the gauge permutation bitwise-exact and all three wrong-code controls
+collapsing by 1.7-2.2 log units at identical bit cost. The registered secondary
+clause against a continuous-route learner FAILS, and the decomposition says why:
+the discrete program wins the route term 4.5x and loses the total to a smaller
+8-slot library, a capacity difference rather than a representational one -
+recorded as a failure, with the confound named. Two instrument corrections were
+made before any verdict (per-operator budgets do not control composed error;
+the continuous comparison is vacuous within the discrete artifact). Scorekeeping:
+our amortization prediction correct (4.0-4.3 against a registered "low single
+digits"), review 78's elephant-in-the-room hedge wrong, and both of us wrong on
+the continuous comparison. Next, and now overdue: the sealed export confirmation
+on seeds 800-829.

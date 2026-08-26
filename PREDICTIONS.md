@@ -5949,3 +5949,80 @@ with H3 as flagship, C3 depth-4 closure, C4 drift quantified rather than merely
 monotone, C5 optional E3 economy); a HIERARCHICAL verdict so that a drift miss
 cannot erase a composition pass; and structural assertions that FAIL THE RUN
 rather than warn.
+
+# E3 RESULT (2026-08-26): PROGRAM REPRESENTATION - SUFFICIENT, ECONOMICAL AND CAUSAL
+
+Plan `E3_PROGRAM_ECONOMY_PLAN.md` (Amendments 1-2, frozen `97f2413`). Report
+`reports/e3_program_economy.json`. Existing artifacts only.
+
+**E3a SYNTAX SUFFICIENCY: PASSES, and structurally.** Storing nothing but the
+literal sequence `(z_1, z_2, z_3)` reproduces the model's predictions BITWISE for
+64/64 tasks in all three worlds (max NMSE deviation 0.00e+00). The task solution
+really is the discrete syntax; there is no residual task state doing hidden work.
+
+**E3b PROGRAM ECONOMY: PASSES on the primary clause, 3/3 worlds.** All rates are
+BEHAVIOURAL (Amendment 1): the smallest interpolated bits/scalar whose COMPOSED
+task NMSE stays within 10% of the unquantized model, so every representation is
+behaviour-preserving by construction of its own rate.
+
+    world 0: rate 4.99 b/scalar | library  15877 + programs 880 =  16758   private  236214   amortize@4.3 tasks
+    world 1: rate 5.00 b/scalar | library  15889 + programs 880 =  16769   private  257687   amortize@4.0 tasks
+    world 2: rate 4.70 b/scalar | library  14962 + programs 880 =  15842   private  234075   amortize@4.1 tasks
+
+A program costs **10.75 bits of route plus a 3-bit length code = 13.75 bits per
+task**; the whole 64-task corpus is 880 bits against a library of ~15-16k. The
+private alternative — each task keeping its own copies of the operators it uses,
+each compressed until THAT TASK degrades by the tolerance — costs 234-258k bits.
+The shared vocabulary plus explicit programs is **14-15x cheaper**, and the
+measured amortization point is **4.0-4.3 tasks**.
+
+Note the private operators DO compress harder in two of three worlds (4.60-5.06
+b/scalar against the shared 4.70-5.00): a private operator serves one
+distribution and a shared one serves all of them, which is the V4R mechanism and
+the real risk this comparison was built to expose. It is simply swamped by the
+count: 12 shared operators against 64 x 3 = 192 private ones.
+
+**E3b SECONDARY (versus a continuous-route learner): FAILS, and the failure is
+informative.**
+
+    world 0: continuous artifact ABSENT (not substituted)
+    world 1: D_continuous  14775 = library  10852 + routes  3923   (8 slots, 2.55 b/scalar routes)
+    world 2: D_continuous  14579 = library  10229 + routes  4349   (8 slots, 2.83 b/scalar routes)
+
+The discrete program wins the ROUTE term decisively — 13.75 bits per task against
+61.3 (3923/64), a **4.5x** advantage for explicit syntax — and loses the total
+because the continuous artifact's library is smaller: **8 slots against 12**, for
+the same six teacher primitives. That is a capacity choice made when those
+lifetimes were configured, not a property of program representation, so the
+aggregate comparison is CONFOUNDED BY SLOT COUNT and is reported as failing
+exactly as registered rather than reinterpreted. A matched-slot continuous
+comparison is the obvious successor and is not run here.
+
+**E3c SEMANTIC CONTROLS: PASSES, 3/3 worlds.** The GAUGE control — library and
+route permuted CONSISTENTLY — preserves predictions BITWISE for 64/64 tasks in
+every world. The three wrong-code controls, all at identical bit cost, collapse:
+wrong route +1.94 to +2.13 log units, shuffled library +1.80 to +2.16, wrong
+depth +1.72 to +2.12. So the symbol names are arbitrary while the
+syntax-semantics relation is causal - which is exactly what the tiny
+teacher-assignment margins (0.001-0.019) demanded be shown separately.
+
+Scorekeeping. E3a and E3c as predicted. **E3b primary: OURS CORRECT and review
+78's hedge WRONG** - we predicted a decisive win with the binding variable being
+TASK COUNT rather than library size, and registered that the amortization point
+should land "in the low single digits to low tens of tasks". Measured: 4.0-4.3.
+Review 78 called `D*(L) ~ 25k bits` "the elephant in the room"; at 64 tasks the
+elephant amortizes in four. **E3b secondary: BOTH WRONG in the same direction** -
+we expected the program to beat the continuous representation by a smaller
+margin; it loses outright, on a slot-count difference neither of us anticipated.
+
+Licensing. With E1 (export), E1-R (recurrence-caused), E2 (composition including
+position-novel), E8 (length closure) and now E3, the five conditions review 78
+set for the word PROGRAM are met for this substrate at exact reuse: compositional
+semantics, a frozen vocabulary, compact explicit syntax, syntax that causally
+determines computation, and no operator repair. The branch may say LEARNED
+PROGRAMS OVER A LEARNED COMPUTATIONAL VOCABULARY. It may NOT say SYNTHESIS, which
+is E5.
+
+All of this remains DEVELOPMENT evidence on worlds 0-2. The registered next step
+is unchanged and is now overdue: freeze the sealed export confirmation and open
+seeds 800-829.

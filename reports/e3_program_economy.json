@@ -1,0 +1,281 @@
+{
+  "frozen_plan": "E3_PROGRAM_ECONOMY_PLAN.md",
+  "git_commit": "96db8a8",
+  "protocol": {
+    "budgets": [
+      0.01,
+      0.05,
+      0.25
+    ],
+    "depths": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12
+    ],
+    "D_max": 8,
+    "behaviour_tolerance": 0.1,
+    "collapse_margin": 1.0,
+    "note": "correctness is functional; no claim reads route agreement"
+  },
+  "worlds": {
+    "0": {
+      "E3a": {
+        "tasks": 64,
+        "bitwise_identical": 64,
+        "max_nmse_deviation": 0.0,
+        "passes": true
+      },
+      "E3b": {
+        "economy": {
+          "behavioural_rate_shared": {
+            "bits_per_scalar": 4.992892034554072,
+            "nmse_ratio": 1.0995402984999398,
+            "saturated": false
+          },
+          "mean_private_bits_per_scalar": 4.6425742047988985,
+          "scalars_per_operator": 265,
+          "library_operators": 12,
+          "D_library_bits": 15877.396669881948,
+          "bits_per_task_program": 13.754887502163468,
+          "program_bits": 880.312800138462,
+          "D_program_bits": 16757.70947002041,
+          "D_private_bits": 236214.1755401679,
+          "program_beats_private": true,
+          "amortization_point_tasks": 4.317922525221019,
+          "continuous": {
+            "available": false,
+            "reason": "no continuous artifact at artifacts\\rho_development\\rho_1\\world_0\\continuous"
+          },
+          "program_beats_continuous": null
+        },
+        "contribution_budgets": {
+          "0.01": {
+            "mean_bits_per_scalar": 2.3213261707180286,
+            "D_library_bits": 7381.817222883332,
+            "composed_nmse_ratio": 1.93925091813335,
+            "note": "secondary currency: a per-operator budget under-controls composed error"
+          },
+          "0.05": {
+            "mean_bits_per_scalar": 1.0,
+            "D_library_bits": 3180.0,
+            "composed_nmse_ratio": 4.818692626849718,
+            "note": "secondary currency: a per-operator budget under-controls composed error"
+          },
+          "0.25": {
+            "mean_bits_per_scalar": 1.0,
+            "D_library_bits": 3180.0,
+            "composed_nmse_ratio": 4.818692626849718,
+            "note": "secondary currency: a per-operator budget under-controls composed error"
+          }
+        }
+      },
+      "E3c": {
+        "geomean_nmse": {
+          "true": 0.005999908324981082,
+          "wrong_route": 0.050521304490147495,
+          "shuffled_library": 0.05187127971045259,
+          "wrong_depth": 0.033672008328659075,
+          "gauge": 0.005999908324981082
+        },
+        "gauge_bitwise_tasks": 64,
+        "tasks": 64,
+        "gauge_preserves": true,
+        "collapse": {
+          "wrong_route": 2.1306509284692465,
+          "shuffled_library": 2.1570210696125987,
+          "wrong_depth": 1.7249226888734608
+        }
+      },
+      "slots": 12,
+      "depth": 3,
+      "tasks": 64
+    },
+    "1": {
+      "E3a": {
+        "tasks": 64,
+        "bitwise_identical": 64,
+        "max_nmse_deviation": 0.0,
+        "passes": true
+      },
+      "E3b": {
+        "economy": {
+          "behavioural_rate_shared": {
+            "bits_per_scalar": 4.996454129534172,
+            "nmse_ratio": 1.099636507433272,
+            "saturated": false
+          },
+          "mean_private_bits_per_scalar": 5.064594185655048,
+          "scalars_per_operator": 265,
+          "library_operators": 12,
+          "D_library_bits": 15888.724131918665,
+          "bits_per_task_program": 13.754887502163468,
+          "program_bits": 880.312800138462,
+          "D_program_bits": 16769.036932057126,
+          "D_private_bits": 257686.5521661289,
+          "program_beats_private": true,
+          "amortization_point_tasks": 3.9597104297515853,
+          "continuous": {
+            "available": true,
+            "artifact": "artifacts\\rho_development\\rho_1\\world_1\\continuous",
+            "tasks": 64,
+            "library_rate": {
+              "bits_per_scalar": 5.119077240984616,
+              "nmse_ratio": 1.0212496060064773,
+              "saturated": false
+            },
+            "scalars_per_operator": 265,
+            "library_operators": 8,
+            "D_library_bits": 10852.443750887387,
+            "route_scalars_per_task": 24,
+            "mean_route_bits_per_scalar": 2.5538204412448544,
+            "D_routes_bits": 3922.6681977520966,
+            "D_continuous_bits": 14775.111948639484
+          },
+          "program_beats_continuous": false
+        },
+        "contribution_budgets": {
+          "0.01": {
+            "mean_bits_per_scalar": 2.341846337098967,
+            "D_library_bits": 7447.071351974713,
+            "composed_nmse_ratio": 2.2134600716321033,
+            "note": "secondary currency: a per-operator budget under-controls composed error"
+          },
+          "0.05": {
+            "mean_bits_per_scalar": 1.0,
+            "D_library_bits": 3180.0,
+            "composed_nmse_ratio": 7.83763734607272,
+            "note": "secondary currency: a per-operator budget under-controls composed error"
+          },
+          "0.25": {
+            "mean_bits_per_scalar": 1.0,
+            "D_library_bits": 3180.0,
+            "composed_nmse_ratio": 7.83763734607272,
+            "note": "secondary currency: a per-operator budget under-controls composed error"
+          }
+        }
+      },
+      "E3c": {
+        "geomean_nmse": {
+          "true": 0.002721479721854603,
+          "wrong_route": 0.04124502291307246,
+          "shuffled_library": 0.03914576997719598,
+          "wrong_depth": 0.029137687621143604,
+          "gauge": 0.002721479721854603
+        },
+        "gauge_bitwise_tasks": 64,
+        "tasks": 64,
+        "gauge_preserves": true,
+        "collapse": {
+          "wrong_route": 2.7183547010753992,
+          "shuffled_library": 2.66611662226697,
+          "wrong_depth": 2.3708566957323294
+        }
+      },
+      "slots": 12,
+      "depth": 3,
+      "tasks": 64
+    },
+    "2": {
+      "E3a": {
+        "tasks": 64,
+        "bitwise_identical": 64,
+        "max_nmse_deviation": 0.0,
+        "passes": true
+      },
+      "E3b": {
+        "economy": {
+          "behavioural_rate_shared": {
+            "bits_per_scalar": 4.704907760633496,
+            "nmse_ratio": 1.073111745258767,
+            "saturated": false
+          },
+          "mean_private_bits_per_scalar": 4.600528118921485,
+          "scalars_per_operator": 265,
+          "library_operators": 12,
+          "D_library_bits": 14961.606678814518,
+          "bits_per_task_program": 13.754887502163468,
+          "program_bits": 880.312800138462,
+          "D_program_bits": 15841.91947895298,
+          "D_private_bits": 234074.8706907251,
+          "program_beats_private": true,
+          "amortization_point_tasks": 4.106197143302984,
+          "continuous": {
+            "available": true,
+            "artifact": "artifacts\\rho_development\\rho_1\\world_2\\continuous",
+            "tasks": 64,
+            "library_rate": {
+              "bits_per_scalar": 4.825216371694974,
+              "nmse_ratio": 1.078370869171245,
+              "saturated": false
+            },
+            "scalars_per_operator": 265,
+            "library_operators": 8,
+            "D_library_bits": 10229.458707993344,
+            "route_scalars_per_task": 24,
+            "mean_route_bits_per_scalar": 2.8314851959576286,
+            "D_routes_bits": 4349.161260990917,
+            "D_continuous_bits": 14578.619968984262
+          },
+          "program_beats_continuous": false
+        },
+        "contribution_budgets": {
+          "0.01": {
+            "mean_bits_per_scalar": 2.1542310729494445,
+            "D_library_bits": 6850.454811979234,
+            "composed_nmse_ratio": 2.117444146790171,
+            "note": "secondary currency: a per-operator budget under-controls composed error"
+          },
+          "0.05": {
+            "mean_bits_per_scalar": 1.0,
+            "D_library_bits": 3180.0,
+            "composed_nmse_ratio": 7.1841622105338265,
+            "note": "secondary currency: a per-operator budget under-controls composed error"
+          },
+          "0.25": {
+            "mean_bits_per_scalar": 1.0,
+            "D_library_bits": 3180.0,
+            "composed_nmse_ratio": 7.1841622105338265,
+            "note": "secondary currency: a per-operator budget under-controls composed error"
+          }
+        }
+      },
+      "E3c": {
+        "geomean_nmse": {
+          "true": 0.0038161477302769606,
+          "wrong_route": 0.04101837380150173,
+          "shuffled_library": 0.023136117329192518,
+          "wrong_depth": 0.031818383778719275,
+          "gauge": 0.0038161477302769606
+        },
+        "gauge_bitwise_tasks": 64,
+        "tasks": 64,
+        "gauge_preserves": true,
+        "collapse": {
+          "wrong_route": 2.374778641597294,
+          "shuffled_library": 1.802153451024377,
+          "wrong_depth": 2.1208027627744777
+        }
+      },
+      "slots": 12,
+      "depth": 3,
+      "tasks": 64
+    }
+  },
+  "decisions": {
+    "E3a_syntax_sufficient": true,
+    "E3b_program_economy": true,
+    "E3b_secondary_beats_continuous": false,
+    "E3b_continuous_worlds": 2,
+    "E3c_semantics_causal": true
+  },
+  "outcome": "PROGRAM REPRESENTATION: sufficient, economical and causal"
+}

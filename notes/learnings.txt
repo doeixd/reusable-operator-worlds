@@ -4150,3 +4150,37 @@ reproduces the shipped executor tensor-for-tensor at the trained depth, kept
 every artifact untouched and made the length result interpretable. Without the
 gate, a failure would have been unreadable — which is precisely why the plan
 required it before any cell was scored.
+
+
+
+================================================================================
+E3: THE PROGRAM IS THE WHOLE SOLUTION, AND IT AMORTIZES IN FOUR TASKS (2026-08-26)
+================================================================================
+
+Storing nothing but three integers reproduces the model bitwise on 64/64 tasks in
+three worlds. A shared vocabulary plus 13.75-bit programs costs 15.8-16.8k bits
+against 234-258k for per-task private copies - 14-15x - and the library amortizes
+after 4.0-4.3 tasks. V2's long-standing failure (allocation economics worked, the
+two-part code lost 30/30) is closed on this substrate: the learner can now both
+USE reusable computation and WRITE the task compactly in terms of it.
+
+A PER-OPERATOR TOLERANCE DOES NOT CONTROL COMPOSED ERROR. The V5 rate-distortion
+instrument charges each operator against its own contribution. At 1%, 5% and 25%
+budgets the composed task NMSE degraded by 1.94x, 4.82x and 4.82x - because error
+COMPOUNDS through composition, exactly as E8 measured. Any MDL accounting for a
+COMPOSED representation must define its rate on the composed prediction, or it
+will credit a code that does not preserve behaviour. The fix is the same
+interpolation, applied to a different quantity.
+
+THE COUNT BEATS THE RATE. Private operators genuinely compress harder than shared
+ones (they serve one distribution, the V4R mechanism, and it reproduced here:
+4.60-5.06 b/scalar private against 4.70-5.00 shared). It did not matter, because
+sharing changes the COUNT from 192 to 12. When comparing shared against private
+representations, measure both terms - a rate advantage of a few percent cannot
+survive a 16x count disadvantage.
+
+AN AGGREGATE CAN LOSE FOR A REASON THAT IS NOT THE CLAIM. The discrete program
+beats a continuous route by 4.5x on the route term and loses the total, because
+that artifact's library has 8 slots to the discrete one's 12. Report the
+decomposition, record the registered clause as failing, and name the confound -
+do not reinterpret the rule after seeing which way it went.
