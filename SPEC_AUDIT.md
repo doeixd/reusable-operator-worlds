@@ -415,3 +415,62 @@ Outstanding, unchanged from the H39 audit: `schema_share` remains a ratio of
 ~2% NMSE differences and is reported as a diagnostic only; the
 rate-distortion instrument has still not been run on these artifacts, so `D*`
 figures in this line are the H49 proxy and are comparable within an arm only.
+
+
+# Export-branch re-audit (2026-08-26): E0 through E2
+
+Scope: the modules added for the export/composition/synthesis branch, audited
+after its first licensed claim (composition).
+
+New implementation, and what makes each trustworthy:
+
+1. `audit_e2_feasibility.py` — pure combinatorics, no model. Establishes that a
+   held-out stratum EXISTS at usable size before a world is designed around it.
+   Two defects were caught and disclosed before any verdict: the training set
+   was bounded by rather than equal to the lifetime, and the constructibility
+   verdict read one fill objective while the other satisfied it.
+2. `audit_e0_export.py` — E0.1 contextual substitutability and the E1.0 gate.
+   Distances are CONTRIBUTION-normalised (Amendment 2 corrected a denominator
+   that repeated the V4.1 total-scale error) with a null-edit guard that reads
+   exactly 1.000 by construction and a degenerate-context guard. The artifact's
+   alpha convention is read from the checkpoint rather than assumed, and legacy
+   pickle checkpoints load through the same provenance-checked fallback the
+   quantizer uses.
+3. `audit_e0_residual.py` — the four-condition residual audit, with a live-task
+   disaggregation added before recording because most tasks are retired and
+   contribute a guaranteed zero. Discloses that the refit condition lifts
+   retirement, a configuration the lifetime never used.
+4. `audit_e1_export.py` — frozen-library export. Mode-consistent support
+   diagnostics (Amendment 2; the first pass was VOIDED for mixing train-mode and
+   eval-mode endpoints and is preserved at
+   `reports/e1_export_void_firstpass.json`). The wrong-library control is a
+   library from an incompatible world, because a slot permutation is vacuous
+   under free route inference.
+5. `audit_e1r_recurrence.py` — the recurrence control. Uses a held-out TASK
+   protocol because programs are not comparable objects across `rho`, and reads
+   MEASURED RECURRENCE from the project's own registered diagnostic
+   (`world_functional_reuse.json`) after two hand-rolled versions were wrong in
+   opposite directions. The `rho = 1` cells reproduce E1 within 0.13 log units
+   under an independently built protocol.
+6. `support_split_world.py` — E2's generator. Follows the `mixed_world` /
+   `task_group_world` pattern and adds NO field to `WorldConfig`, so no existing
+   resolved-config fingerprint is invalidated. The split is searched over seeded
+   attempts against STRUCTURAL constraints only (stratum sizes, balance, context
+   counts) and never against a model or loss; the accepted attempt index and the
+   full program list are written to the artifact before training.
+7. `audit_e2_composition.py` — three strata with the E1 arm set, so E1 and E2
+   are directly comparable. Verifies in code that no training program touches a
+   withheld placement, that no held-out program appears in training, and that
+   every H3 program contains a withheld placement.
+
+Registered-versus-implemented check: E1 and E2 share arms, budget (2,000 Adam
+steps at lr 0.01), interface (E1-P), margins (+0.15) and scorer, so the rungs
+differ only in which programs the lifetime saw. Every long scorer caches each
+completed cell under a protocol fingerprint and refuses a cell computed under a
+different one.
+
+Outstanding: the object-to-primitive assignment margin is 0.001-0.019 throughout,
+so functional identity is weakly determined even where export and composition
+succeed; every claim in this branch is phrased as substitutability and use, never
+as recovery. `D*` accounting for the program variable has not been run (that is
+E3) and no depth beyond 3 has been tested (E8).
