@@ -146,3 +146,32 @@ protocol-fingerprinted per-cell cache.
 
 Depth/length generalization (E8); the program recognizer (E5); primitive
 invention (E6); the mixture substrate; any change to E1's or E1-R's verdicts.
+
+
+# Amendment 1 (2026-08-26, before any lifetime): the split must be SEARCHED, not merely seeded
+
+The plan says the training program list is "chosen by the frozen seeded
+construction". Implemented literally — cover every required placement, then fill
+neutrally to 64 — that construction produced `|H2| = 0` for world 0: a neutral
+fill covers every adjacent pair, so no unseen-pair program survives. E2
+registers minimum stratum sizes as a design constraint, and a stratum of size
+zero cannot be scored.
+
+Amended before any lifetime runs. The fill ORDER is searched over seeded
+attempts (`SeedSequence([spec_seed, world, 1, attempt])`) until the split
+satisfies every registered structural constraint simultaneously:
+
+    every stratum >= 16 programs;  frequency balance <= 2.0;
+    >= 3 distinct contexts per primitive;  all required placements covered.
+
+The accepted attempt index is recorded in the artifact. **The search reads only
+the SPLIT's structural properties** — stratum sizes, balance, context counts —
+and never a model, a loss, or any performance quantity, so it cannot select a
+split that flatters a result. It is a constraint solver, not a selection effect,
+and the distinction is stated here rather than left to a reader.
+
+Accepted splits (deterministic, recorded before training):
+
+    world 0: withheld [(0,1), (5,0), (1,2)]  attempt 36  H1 41  H2 20  H3 91  balance 1.91
+    world 1: withheld [(1,2), (4,0), (0,1)]  attempt 66  H1 42  H2 19  H3 91  balance 2.00
+    world 2: withheld [(5,0), (3,2), (1,1)]  attempt 31  H1 43  H2 18  H3 91  balance 1.69
