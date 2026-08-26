@@ -2971,3 +2971,31 @@ strata with H3 as flagship / C3 depth-4 length closure / C4 drift quantified as
 log e_t = a + bt or q = (e_4/e_3)/mean(e_2/e_1, e_3/e_2) ~ 1 / C5 optional E3
 economy, a HIERARCHICAL verdict so a drift miss cannot erase composition, and
 structural assertions that FAIL THE RUN rather than warn.
+
+
+### [reviewer-feedback-79.txt](reviewer-feedback-79.txt)
+On E3, and the instruction to STOP ADDING CAPABILITY AND BANK THE CLAIM. Judges
+the branch to have moved past "program-like": the task solution itself is a
+compact discrete program over the frozen vocabulary, so all five registered
+conditions (frozen vocabulary, systematic unseen composition, length
+generalization, compact explicit syntax, causal syntax-semantics relation) hold
+developmentally and the word PROGRAM is licensed while SYNTHESIS still waits for
+the inference rung. Reads the private-operators-compress-harder control as
+"almost the perfect control" - the win comes from 192 private operators becoming
+12 shared ones plus 64 tiny programs, not from shared parameters being easier to
+quantize - and the gauge result as the right notion of symbolic representation:
+symbol identity is GAUGE while the syntax-semantics binding is CAUSAL, which
+turns the tiny teacher-assignment margins from an embarrassment into a feature
+(the learned language need not use the teacher's names or basis to be a
+language). Keeps the failed continuous comparison as recorded, calling it a
+different architectural question rather than something to fix post hoc. Then
+specifies the sealed block: seeds 800-829, one integrated thesis with
+independently preregistered components C1 program representation (syntax
+sufficiency, two-part economy with Q_D and the amortization point N*, causal
+semantics), C2 frozen export with the oracle and inference legs separated, C3 the
+three composition strata kept separate with H3 as flagship, C4 length closure
+with depth 4 load-bearing, C5 drift as a separate MECHANISM clause; a
+HIERARCHICAL verdict so an auxiliary drift prediction cannot invalidate a direct
+30-world composition result; and fatal structural assertions. Notes the main
+scientific risk has changed: no longer "maybe there is nothing programmatic
+here" but "does this entire pattern survive thirty untouched worlds".

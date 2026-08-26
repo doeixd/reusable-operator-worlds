@@ -1,0 +1,104 @@
+Yes. This is the point where I'd stop adding capability and BANK THE CLAIM.
+
+E3 changes the status of the branch materially. Before E3 we had frozen vocabulary ->
+composition -> length closure. Now we also have:
+
+    the task solution itself is a compact discrete program over that vocabulary.
+
+That is stronger than "program-like". For this substrate at exact reuse, development
+evidence now supports all five requirements we set: (1) frozen vocabulary;
+(2) systematic unseen composition; (3) length generalization; (4) compact explicit
+syntax; (5) causal syntax-semantics relation. So I agree with your terminology
+judgment: PROGRAM is now licensed developmentally. "Program synthesis" still waits for
+the inference/search rung.
+
+The numbers are also much stronger than I expected. The two-part result isn't marginal:
+~16k bits versus ~234k-258k bits. And the amortization point N* ~ 4.0-4.3 tasks is tiny.
+That closes the V2 write failure in a very satisfying way: V2 could READ reuse but not
+WRITE it compactly; E3 shows reusable computation is both executable and compactly
+writable as a program.
+
+The private operators compressing slightly better per scalar is almost the perfect
+control here. It shows the win isn't coming from pretending shared parameters are
+intrinsically easier to quantize. It's coming from the structural fact: 192 private
+operators -> 12 shared operators + 64 tiny programs. That's exactly the MDL story.
+
+## The E3c result is particularly clean
+
+Permute symbols and meanings together => bitwise same behaviour, while changing syntax
+at identical bit cost => large functional failure. So symbol identity is GAUGE; the
+syntax-semantics binding is CAUSAL. That is the right notion of symbolic
+representation. The tiny teacher-assignment margins now look like a feature rather than
+an embarrassment: the learned language doesn't need to use the teacher's names or basis
+to constitute a real language.
+
+I would keep the failed continuous comparison exactly as you've recorded it. It does NOT
+undermine E3's primary result. It asks a different architectural question: given two
+separately trained libraries with different slot counts, which complete two-part
+representation is cheaper? The discrete route wins the task-code term strongly (13.75 vs
+61.3 bits/task) but the 12-vs-8 library-size asymmetry dominates total cost. That's
+useful information for later matched-capacity work, not something to fix post hoc.
+
+# Now freeze the confirmation block
+
+Test one integrated thesis: at exact reuse, lifetime learning produces a compact learned
+program language whose frozen operations systematically compose on unseen programs and
+unseen execution lengths. But preregister the components independently so one
+mechanistic miss does not erase direct behavioural results. Use untouched seeds 800-829
+after mechanically verifying they're clean.
+
+C1 - PROGRAM REPRESENTATION (confirm E3).
+  C1a syntax sufficiency: literal route-only representation reproduces DISC behaviour
+      exactly or within a registered numerical tolerance. Prediction: 64/64 tasks/world.
+  C1b two-part economy: D_program = D*(L) + sum_t D(p_t) against behavioural-rate
+      private coding. Primary statistic Q_D = log(D_private / D_program); development
+      implies roughly 14-16x in raw description size. Also register the amortization
+      point N* = D*(L) / (D*_private/task - D_program/task); development 4.0-4.3. That
+      is a beautiful independent quantitative prediction.
+  C1c causal semantics: joint symbol/library permutation preserves behaviour;
+      wrong-route/library/depth controls fail by a registered margin. This seals the
+      "arbitrary labels, causal program" claim.
+
+C2 - FROZEN EXPORT (confirm E1). G_export = (L_S - L_R)/(L_S - L_O), but also report raw
+O/R/S losses, and separate oracle vocabulary expressibility from inferred-route export.
+This protects localization if R degrades but O remains strong.
+
+C3 - SYSTEMATIC COMPOSITION. Keep all three E2 strata separate: H1 whole-triple novel,
+H2 adjacent-pair novel, H3 primitive-position novel. H3 remains the headline. Use
+Delta_comp = log L_S - log L_R; development gives roughly 2.0-2.7. Register a
+conservative interval rather than simply requiring positive sign. And require the split
+assertions to be FATAL.
+
+C4 - LENGTH CLOSURE. Confirm D = 2 and D = 4 from a depth-3 trained vocabulary, with
+depth 4 load-bearing. Delta_D4 = log L_S - log L_R; development 1.76-2.34. The
+scientific statement: a vocabulary learned only in depth-3 programs remains executable
+at an unseen fourth call.
+
+C5 - COMPOSITIONAL DRIFT, its own mechanistic clause. The direct result already
+establishes depth-4 composition; this clause tests WHY error grows. Fit log e_t = a + bt,
+or use a parameter-free continuation ratio. The critical prediction is that step 4 is a
+continuation of previous error accumulation rather than a discontinuity. This should be
+MECHANISM CONFIRMED/MISSED, not determine whether length composition itself is real.
+
+# Hierarchical sealed verdict
+
+PROGRAM CONFIRMED (C1); EXPORT CONFIRMED (C2); COMPOSITION CONFIRMED (C2 + C3);
+LENGTH-CLOSED COMPOSITION CONFIRMED (C2 + C3 + C4); FULL PROGRAM-LANGUAGE BLOCK
+CONFIRMED (C1-C4); DRIFT MECHANISM CONFIRMED (C5 separately). That prevents an auxiliary
+prediction about error growth from bizarrely invalidating a direct 30-world composition
+result.
+
+# And then E5
+
+Only after the sealed block. If C1-C4 replicate, the next question becomes incredibly
+clean: we will already know there exists p in Programs(L) such that Execute(L, p) solves
+structurally novel tasks. Then E5 is genuinely D_support -> p, with no ambiguity about
+whether we're "really" doing synthesis. Compare oracle program, optimization/search over
+programs, a learned recognizer, and perhaps beam/enumerative search, and measure C_find.
+If the learned recognizer amortizes that search on unseen programs, THAT is when I would
+say PROGRAM SYNTHESIS without qualification beyond the synthetic-domain scope.
+
+So yes: stop here, freeze the 800-829 confirmation plan, and bank this result before
+adding the synthesizer. The development evidence has now become strong enough that the
+main scientific risk is no longer "maybe there's nothing programmatic here"; it's "does
+this entire beautiful pattern survive thirty untouched worlds?"

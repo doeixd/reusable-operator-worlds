@@ -6026,3 +6026,62 @@ is E5.
 All of this remains DEVELOPMENT evidence on worlds 0-2. The registered next step
 is unchanged and is now overdue: freeze the sealed export confirmation and open
 seeds 800-829.
+
+# EXPORT CONFIRMATION REGISTRATION (2026-08-26, review 79): SEEDS 800-829
+
+Plan `EXPORT_CONFIRMATION_PLAN.md`, frozen before any world in the band is
+generated. **Band verified untouched mechanically** before drafting: no artifact
+carries a world seed in 800-829 and no report references it.
+
+Thesis: at exact reuse, lifetime learning produces a compact learned PROGRAM
+LANGUAGE whose frozen operations systematically compose on unseen programs and
+unseen execution lengths. Components preregistered independently, with a
+HIERARCHICAL verdict (PROGRAM / EXPORT / COMPOSITION / LENGTH-CLOSED COMPOSITION
+/ FULL BLOCK / DRIFT MECHANISM) so one mechanistic miss cannot erase a direct
+behavioural result.
+
+Protocol: ONE support-split discrete lifetime per world carries every estimand -
+trained tasks for C1, the three held-out strata for C2/C3, depth-2/4 programs for
+C4/C5. Consequence recorded because it changes provenance: C2's interval derives
+from E2's H1 stratum (support-split) rather than E1's opportunistic holdouts.
+8 programs per stratum/condition, 30 worlds; the replication unit is the world.
+
+Intervals derived MECHANICALLY from the development statistics, not from
+illustrative numbers:
+
+    C1a  bitwise 64/64 in >= 28/30                  (dev 64/64, 3/3)
+    C1b  mean Q_D >= 2.0, >= 28/30 above 1.5        (dev 2.646/2.732/2.693)
+         mean N* in [3.0, 6.0]                      (dev 4.32/3.96/4.11)
+    C1c  gauge bitwise >= 28/30; each wrong-code
+         control >= 1.0 log unit in >= 28/30        (dev bitwise 3/3; 1.72-2.16)
+    C2   mean G_export in [0.75, 1.15]; and
+         log L_S - log L_O >= 1.5 in >= 28/30       (dev 0.983-1.039; 2.04-2.79)
+    C3   per stratum mean >= 1.5, >= 28/30 above 1.0
+         H1 dev 2.688/2.263/2.576, H2 2.684/2.186/2.270,
+         H3 (flagship) 2.739/2.398/2.284
+    C4   mean Delta_D4 >= 1.25, >= 28/30 above 0.75 (dev 1.761/2.342/2.319)
+         depth 2 mean >= 1.5 (secondary)            (dev 2.204/2.265/2.679)
+    C5   mean b in [0.3, 0.9]; mean q in [0.45, 0.95];
+         q < 1.5 in >= 28/30                        (dev b 0.661/0.566/0.566,
+                                                     q 0.611/0.745/0.687)
+
+**A correction to review 79's own proposal, made before freezing.** It suggested
+predicting `q ~ 1` on the grounds that the fourth call should behave like another
+ordinary application. Our development data says otherwise: the step ratios
+DECELERATE (2.99 -> 1.74 -> 1.45 in world 0), giving `q` = 0.611 / 0.745 / 0.687.
+Registering `q ~ 1` would have preregistered a prediction our own data
+contradicts, so the interval is [0.45, 0.95] and the registered statement is that
+depth-4 drift is a DECELERATING continuation rather than a novel-position
+discontinuity.
+
+Registered predictions. Ours: C1a, C1c and C3 pass comfortably (development
+effects are 10-20x the registered floors); C1b passes near Q_D 2.65 and N* 4;
+C2 passes. **C4 is the estimand we would bet against most readily** - its
+development minimum (1.761) sits closest to its floor and depth 4 is the only
+condition asking the vocabulary to leave the distribution it was fitted on.
+**C5's q is where a sealed miss would be most informative**: if q returns near 1,
+the deceleration we measured was a three-world accident.
+
+Review 79's: expects replication, with shrinkage rather than absence as the risk.
+
+E5 does not start before this block closes.

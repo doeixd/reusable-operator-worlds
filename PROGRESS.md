@@ -3469,3 +3469,18 @@ our amortization prediction correct (4.0-4.3 against a registered "low single
 digits"), review 78's elephant-in-the-room hedge wrong, and both of us wrong on
 the continuous comparison. Next, and now overdue: the sealed export confirmation
 on seeds 800-829.
+
+# 2026-08-26 - REVIEW 79 FILED; EXPORT CONFIRMATION PLAN DRAFTED FOR SEEDS 800-829
+
+Review 79 filed and indexed: bank the claim before adding capability. Verified
+the 800-829 band untouched mechanically, then drafted
+`EXPORT_CONFIRMATION_PLAN.md` - one integrated thesis, five independently
+preregistered components with a hierarchical verdict, fatal structural
+assertions, and every interval derived mechanically from the development
+statistics rather than from illustrative numbers. One correction to the review
+itself, made before freezing: it proposed predicting the drift continuation ratio
+q ~ 1, but development gives 0.611/0.745/0.687 because the step ratios
+decelerate, so the registered interval is [0.45, 0.95] and the claim is a
+decelerating continuation rather than an ordinary-application constant. Protocol
+is one support-split lifetime per world carrying all five estimands. Nothing in
+the band has been generated.
