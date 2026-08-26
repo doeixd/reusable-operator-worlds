@@ -115,6 +115,21 @@ architecture, same operator budget, same adaptation budget. The exact-reuse
 cells also reproduce E1 within 0.13 log units under an independently built
 protocol.
 
+**Composition holds, including in positions an operator never occupied (E2).**
+A support-split lifetime withheld three `(primitive, position)` placements
+entirely — verified in code that no training program contains one — then tested
+programs putting those primitives exactly where they had never appeared. All
+three held-out strata pass in all three worlds against a +0.15 margin on three
+separate comparisons; the position-novel stratum is **indistinguishable** from
+the familiar-position ones (oracle loss 0.0031–0.0040 against 0.0029–0.0035).
+So a learned operator keeps its semantics in a program position it never
+occupied. Two things sharpen the claim: support-only route inference beats the
+teacher's own matched route on that stratum in all three worlds, and the
+object↔primitive assignment stays barely determined throughout (margin
+0.002–0.019) — **usability does not require sharp identity.** Under this
+project's terminology contract, this is the rung licensed to say *composition*;
+it says nothing yet about synthesis or about program depth beyond 3.
+
 Details and the research record: `reports/`, `notes/`, `reviews/`. Paper
 draft: `paper/draft.md`.
 

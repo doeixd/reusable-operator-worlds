@@ -1186,6 +1186,23 @@ zero: a library formed where nothing recurs is worth nothing on a held-out task,
 with the same architecture, operator budget and adaptation budget throughout.
 Export is a consequence of what the world made available to learn.
 
+The sharper question is whether these objects are operators or
+position-specialised variants, and answering it requires building the lifetime
+rather than sampling it: three operator-position placements were withheld from
+training entirely, and held-out programs then placed those operators exactly
+where they had never appeared. Performance is indistinguishable from held-out
+programs using familiar placements - oracle error 0.0031-0.0040 against
+0.0029-0.0035, with margins over a from-scratch learner of 2.13-2.67 against
+2.25-2.69 - and the withheld set included the final program position, where a
+distributional penalty would have been largest. A learned operator therefore
+retains its semantics in a position it never occupied. Two details qualify what
+that means. Inferring the program from support examples BEATS executing the
+teacher's own program through the functionally matched objects, in every world
+of that stratum; and the matching itself is barely determined, several
+assignments scoring within 0.02 of the best. Which object corresponds to which
+teacher operation is not settled, and does not need to be for the objects to
+compose.
+
 The lesson this block adds to the earlier ones is the most consequential
 in the paper: the useful abstraction was not latent in the finished
 solutions waiting to be extracted; the learner had to maintain an
