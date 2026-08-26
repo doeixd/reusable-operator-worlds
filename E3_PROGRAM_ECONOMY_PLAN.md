@@ -140,3 +140,48 @@ The low-reuse comparison (review 78's two-part phase transition) — registered 
 a successor, not run here; the program recognizer (E5); primitive invention (E6);
 any change to E1, E1-R, E2 or E8; the sealed block, which is drafted separately
 once E3 reports.
+
+
+# Amendment 1 (2026-08-26, before any E3 verdict): a per-operator budget does not control COMPOSED error
+
+The first pass exposed a defect in this plan's own rate definition, and its
+verdict is not recorded.
+
+E3b charges `D*` at contribution-relative budgets of 1%, 5% and 25% of each
+operator's own effect energy — the V5 instrument, ported. Measured on the real
+artifacts, those rates give composed task NMSE ratios of **1.94, 4.82 and 4.82**
+against this plan's own 1.10 behaviour-preservation requirement. So no budget in
+the registered grid credits a behaviour-preserving code, and E3b could not pass
+for instrument reasons rather than scientific ones — precisely the failure the
+project's rule about checking that an instrument can express its tolerance is
+meant to catch.
+
+The cause is not a bug and is worth stating as a finding: **a per-operator
+tolerance under-controls end-to-end error, because error COMPOUNDS through
+composition.** E8 measured that compounding directly (`e_t` growing roughly
+linearly in `t`); charging each operator 5% of its own contribution therefore
+buys far more than 5% degradation once three of them are composed.
+
+A behaviour-preserving rate does exist — 6 bits/scalar gives a ratio of 1.026 and
+5 bits gives 1.100 — so the instrument can reach the tolerance once the grid is
+extended.
+
+Amended, before any verdict:
+
+1. **The PRIMARY rate is BEHAVIOURAL `D*`**: the smallest interpolated
+   bits/scalar at which the COMPOSED task NMSE ratio is <= 1 + 0.10. It is
+   computed globally for the shared library, and PER TASK for the private
+   alternative — so a private operator, which serves one task, may be charged a
+   lower rate than a shared one, which must serve all of them. That asymmetry is
+   the whole substance of the comparison (the V4R mechanism), and this
+   definition is what makes it measurable.
+2. Contribution-relative budgets are RETAINED and reported as a secondary
+   currency, because they are the project's established instrument, but they no
+   longer gate the verdict — with the disclosure above attached wherever they
+   appear.
+3. The depth grid is extended to 1..12 bits so the behavioural search has
+   headroom, and a rate that saturates the ceiling is reported as uninformative
+   rather than as a result.
+4. The decision rule is otherwise unchanged: `D_program < D_private` AND
+   `D_program < D_continuous`, in >= 2 of 3 worlds, at the behavioural rate,
+   with every representation behaviour-preserving by construction of that rate.
