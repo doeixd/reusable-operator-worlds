@@ -144,6 +144,75 @@ def build(k: int, d: int, budget: int, c_min: int, seed: int, fill: str = "min_p
             "H1": len(h1), "H2": len(h2)}
 
 
+def build_h3(k: int, d: int, budget: int, c_min: int, seed: int, holdouts: int) -> dict:
+    """E2 with a POSITION-NOVEL stratum.
+
+    A set of (primitive, position) pairs is withheld entirely from training, so
+    the test can place a primitive where it never occurred. This CONTRADICTS the
+    original coverage constraint ("every primitive in every position"), which is
+    therefore relaxed to "every primitive in every position except its own
+    held-out one", and each primitive may lose at most one position.
+
+    H3  a program placing a held-out primitive in its held-out position
+    H1  no held-out placement, every adjacent pair seen
+    H2  no held-out placement, at least one adjacent pair unseen
+    """
+
+    rng = np.random.default_rng(np.random.SeedSequence([764, seed]))
+    primitives = [int(v) for v in rng.permutation(k)[:holdouts]]
+    positions = [int(v) for v in rng.permutation(d)[:holdouts]] if holdouts <= d else         [int(rng.integers(0, d)) for _ in range(holdouts)]
+    held = list(zip(primitives, positions))
+    all_programs = [tuple(p) for p in itertools.product(range(k), repeat=d)]
+
+    def touches(program):
+        return any(program[i] == p for p, i in held)
+
+    pool = [p for p in all_programs if not touches(p)]
+    if len(pool) < budget:
+        return {"seed": seed, "feasible": False, "reason": "pool smaller than budget",
+                "pool": len(pool), "held_out_placements": held}
+    order = list(rng.permutation(len(pool)))
+    train: list[tuple[int, ...]] = []
+    need = {(p, i) for p in range(k) for i in range(d) if (p, i) not in held}
+    for index in order:
+        if not need:
+            break
+        program = pool[index]
+        gain = {(p, i) for i, p in enumerate(program)} & need
+        if gain:
+            train.append(program)
+            need -= gain
+    for index in order:
+        if len(train) >= budget:
+            break
+        program = pool[index]
+        if program not in train:
+            train.append(program)
+    check = coverage_ok(train, k, d, c_min)
+    # relaxed position coverage: only the non-held-out placements are required
+    missing = [(p, i) for (p, i) in need]
+    seen_pairs = set()
+    for program in train:
+        seen_pairs |= pairs_of(program)
+    train_set = set(train)
+    h1, h2, h3 = [], [], []
+    for program in all_programs:
+        if program in train_set:
+            continue
+        if touches(program):
+            h3.append(program)
+        elif pairs_of(program) <= seen_pairs:
+            h1.append(program)
+        else:
+            h2.append(program)
+    return {"seed": seed, "feasible": not missing, "held_out_placements": held,
+            "train_size": len(train), "pool": len(pool),
+            "coverage": {"context_min": check["context_min"], "context_ok": check["context_ok"],
+                         "balance_ratio": check["balance_ratio"], "balance_ok": check["balance_ok"],
+                         "missing_required_placements": missing},
+            "H1": len(h1), "H2": len(h2), "H3": len(h3)}
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--k", type=int, default=6)
@@ -151,6 +220,8 @@ def main() -> None:
     parser.add_argument("--budget", type=int, default=64)
     parser.add_argument("--context-min", type=int, default=3)
     parser.add_argument("--starts", type=int, default=64)
+    parser.add_argument("--h3-holdouts", type=int, default=3,
+                        help="how many (primitive, position) placements to withhold entirely")
     parser.add_argument("--output", type=Path, default=Path("reports/e2_feasibility.json"))
     args = parser.parse_args()
     if subprocess.run(["python", "tools/check_prereg.py"]).returncode != 0:
@@ -167,8 +238,18 @@ def main() -> None:
     both = [r for r in valid if r["H1"] >= MIN_H1 and r["H2"] >= MIN_H2]
     both_random = [r for r in valid_random if r["H1"] >= MIN_H1 and r["H2"] >= MIN_H2]
     best_random = max(valid_random, key=lambda r: r["H2"]) if valid_random else None
+    h3_runs = [build_h3(args.k, args.depth, args.budget, args.context_min, s, args.h3_holdouts)
+               for s in range(args.starts)]
+    h3_valid = [r for r in h3_runs if r.get("feasible") and r["coverage"]["context_ok"]
+                and r["coverage"]["balance_ok"] and r["train_size"] == args.budget]
+    h3_best = max(h3_valid, key=lambda r: min(r["H1"], r["H2"], r["H3"])) if h3_valid else None
     report = {
         "frozen_plan": "E0_PHASE0_AUDIT_PLAN.md",
+        "h3_position_novel": {
+            "holdouts": args.h3_holdouts, "valid_constructions": len(h3_valid),
+            "best": h3_best,
+            "constructible": bool(h3_best and min(h3_best["H1"], h3_best["H2"],
+                                                  h3_best["H3"]) >= MIN_H1)},
         "grid": {"K": args.k, "depth": args.depth, "budget": args.budget,
                  "context_min": args.context_min, "starts": args.starts,
                  "program_space": args.k ** args.depth},
@@ -199,6 +280,14 @@ def main() -> None:
         print(f"  designed fill: best |H1| = {best_h1['H1']}, best |H2| = {best_h2['H2']}")
     if best_random:
         print(f"  random fill:   best |H1| = {best_random['H1']}, best |H2| = {best_random['H2']}")
+    if h3_best:
+        print(f"  H3 mode ({args.h3_holdouts} withheld placements): {len(h3_valid)}/{args.starts} valid, "
+              f"best |H1|={h3_best['H1']} |H2|={h3_best['H2']} |H3|={h3_best['H3']} "
+              f"(balance {h3_best['coverage']['balance_ratio']:.2f}, "
+              f"contexts>={h3_best['coverage']['context_min']}) -> "
+              f"constructible={report['h3_position_novel']['constructible']}")
+    else:
+        print(f"  H3 mode ({args.h3_holdouts} withheld placements): NO valid construction found")
     print(f"  CONSTRUCTIBLE at |H1|>={MIN_H1} and |H2|>={MIN_H2}: {report['constructible']}"
           f" (random fill: {report['constructible_random_fill']}; "
           f"designed schedule required: {report['designed_schedule_required']})")
