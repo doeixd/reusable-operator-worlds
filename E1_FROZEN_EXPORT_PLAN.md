@@ -144,3 +144,59 @@ protocol-fingerprinted per-cell cache.
 
 E2's constructed world; the program recognizer; primitive invention; any change
 to the library; any claim from the MIX substrate; depth generalization.
+
+
+# Amendment 1 (2026-08-25, before any E1 arm is run): a vacuous control and an unavailable one
+
+Found by reading the frozen arm table against what each arm can actually
+measure, before writing the scorer.
+
+## 1. The wrong-library control cannot be a slot permutation
+
+The plan defines **W** as "frozen, slots permuted by a seeded derangement,
+route inferred". Under FREE ROUTE INFERENCE a permutation of slot indices is
+vacuous: the set of available operators is unchanged, and inference simply finds
+the permuted index. The control would measure nothing and would pass trivially.
+
+Amended, before any arm runs. The wrong-library control is a library from an
+INCOMPATIBLE WORLD — review 75's own alternative — and it is applied to both
+interfaces:
+
+    O-W   teacher program executed through ANOTHER world's frozen library,
+          using that library's own E0.1 functional assignment
+    R-W   route inferred, with the SAME budget, over another world's frozen
+          library
+
+The donor world is fixed by a seeded rotation (world `w` receives world
+`(w + 1) mod 3`'s library), recorded per cell. This asks the question the claim
+needs — is it THIS library that carries the program, or would any trained
+library of the same architecture do — rather than testing index bookkeeping.
+
+The slot-permutation control is retained only for the ORACLE arm, where it is
+NOT vacuous (a permuted assignment sends each program step to the wrong
+operator); it is exactly the `shuffled_library_route` figure E1.0 already
+reports, and is cited from there rather than recomputed.
+
+## 2. The dense control is not available in every world
+
+`D` requires a compute-matched dense artifact from the same world and config
+family. At exact reuse those exist for worlds 1 and 2
+(`artifacts/rho_development/rho_1/world_*/dense`) and not for world 0, and
+`E1_FROZEN_EXPORT_PLAN.md` forbids substituting another era's artifact.
+
+Amended: **E1a's threshold is stated over the two controls that exist in every
+world** — scratch (`S`, no library at all) and wrong library (`O-W` / `R-W`).
+`D` is reported wherever an artifact exists, as an additional reference, and is
+never part of the criterion. This keeps the decision rule well defined in every
+world instead of silently varying with artifact availability.
+
+Restated E1a, superseding the arm list in the body: `L_O` beats `L_S` and
+`L_O-W` by >= 0.15 log units in >= 2 of 3 worlds. E1b is unchanged.
+
+## 3. Gate re-check, completed
+
+Run before this amendment and reported here because it is a precondition, not a
+result: the three fresh DISC lifetimes score E1.0 ratios of 1.17 / 1.09 / 1.20
+against the 2.0 gate, with random-assignment and shuffled-library controls at
+7.1-13.4x, and all three pass E0.1 substitutability (matched 0.040-0.072 against
+a null edit of 1.000). All three worlds are eligible; none is excluded.

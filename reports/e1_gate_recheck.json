@@ -1,0 +1,198 @@
+{
+  "frozen_plan": "E0_PHASE0_AUDIT_PLAN.md (Amendments 1-2)",
+  "git_commit": "da4cb53",
+  "protocol": {
+    "contexts_per_position": 8,
+    "probe": 256,
+    "gate_ratio": 2.0,
+    "distance": "contribution-normalised; 1.0 == as wrong as omitting the operation"
+  },
+  "substrates": {
+    "DISC_w0": {
+      "artifact": "artifacts\\e1_disc\\world_0",
+      "kind": "discrete",
+      "learnable_alpha": true,
+      "legacy_pickle_checkpoint": false,
+      "E0_1": {
+        "assignment": {
+          "0": 9,
+          "1": 4,
+          "2": 2,
+          "3": 7,
+          "4": 3,
+          "5": 11
+        },
+        "mean_distance": 0.07152547137710938,
+        "assignment_margin": 0.006535029149528179,
+        "random_assignment_distance": 0.618874939175415,
+        "null_edit_distance": 1.0,
+        "matched_distances": [
+          0.146192988253094,
+          0.011574326209565623,
+          0.015465314315932406,
+          0.09570457654999921,
+          0.14023565573463434,
+          0.01997996719943069
+        ],
+        "per_position_distance": [
+          0.02843814123995728,
+          0.019608446252680163,
+          0.023478883884471932
+        ],
+        "position_spread_fraction": 0.3703447800039074,
+        "dropped_degenerate_contexts": 0,
+        "objects_worse_than_null_edit": [],
+        "beats_random_by_2x": true,
+        "position_stable_within_50pct": true,
+        "substitutable": true
+      },
+      "E1_0": {
+        "teacher_route": {
+          "intact_nmse": 0.0073347677189303795,
+          "oracle_route_nmse": 0.008548741216145572,
+          "ratio": 1.1655094672026267,
+          "tasks": 64
+        },
+        "random_assignment_route": {
+          "intact_nmse": 0.0073347677189303795,
+          "oracle_route_nmse": 0.0523044774599839,
+          "ratio": 7.131033928312511,
+          "tasks": 64
+        },
+        "shuffled_library_route": {
+          "intact_nmse": 0.0073347677189303795,
+          "oracle_route_nmse": 0.05516259824798908,
+          "ratio": 7.520701453928711,
+          "tasks": 64
+        },
+        "gate_ratio": 2.0,
+        "controls_ok": true,
+        "eligible_for_E1": true
+      }
+    },
+    "DISC_w1": {
+      "artifact": "artifacts\\e1_disc\\world_1",
+      "kind": "discrete",
+      "learnable_alpha": true,
+      "legacy_pickle_checkpoint": false,
+      "E0_1": {
+        "assignment": {
+          "0": 1,
+          "1": 0,
+          "2": 7,
+          "3": 11,
+          "4": 8,
+          "5": 5
+        },
+        "mean_distance": 0.040002967372287555,
+        "assignment_margin": 0.008029749429662003,
+        "random_assignment_distance": 0.5445331308546648,
+        "null_edit_distance": 1.0,
+        "matched_distances": [
+          0.01264354499306593,
+          0.1540541904499985,
+          0.016064898570447392,
+          0.0102664318748919,
+          0.021938285962126994,
+          0.0250504523831946
+        ],
+        "per_position_distance": [
+          0.017092551093357864,
+          0.010649936915270412,
+          0.012260479363659283
+        ],
+        "position_spread_fraction": 0.48316022045034357,
+        "dropped_degenerate_contexts": 0,
+        "objects_worse_than_null_edit": [],
+        "beats_random_by_2x": true,
+        "position_stable_within_50pct": true,
+        "substitutable": true
+      },
+      "E1_0": {
+        "teacher_route": {
+          "intact_nmse": 0.0038056496059653,
+          "oracle_route_nmse": 0.004156850337494689,
+          "ratio": 1.0922840429079141,
+          "tasks": 64
+        },
+        "random_assignment_route": {
+          "intact_nmse": 0.0038056496059653,
+          "oracle_route_nmse": 0.04482259230280761,
+          "ratio": 11.777908358286282,
+          "tasks": 64
+        },
+        "shuffled_library_route": {
+          "intact_nmse": 0.0038056496059653,
+          "oracle_route_nmse": 0.04677301428455394,
+          "ratio": 12.290415337039418,
+          "tasks": 64
+        },
+        "gate_ratio": 2.0,
+        "controls_ok": true,
+        "eligible_for_E1": true
+      }
+    },
+    "DISC_w2": {
+      "artifact": "artifacts\\e1_disc\\world_2",
+      "kind": "discrete",
+      "learnable_alpha": true,
+      "legacy_pickle_checkpoint": false,
+      "E0_1": {
+        "assignment": {
+          "0": 6,
+          "1": 10,
+          "2": 8,
+          "3": 0,
+          "4": 7,
+          "5": 9
+        },
+        "mean_distance": 0.04990937887543944,
+        "assignment_margin": 0.0014105064165435,
+        "random_assignment_distance": 0.41800790316933406,
+        "null_edit_distance": 1.0,
+        "matched_distances": [
+          0.06432013600420311,
+          0.04333297019487821,
+          0.01761917154724971,
+          0.07838647622407999,
+          0.010454526487689977,
+          0.08534299279453561
+        ],
+        "per_position_distance": [
+          0.019479965870277737,
+          0.013681995680669771,
+          0.016747417324491927
+        ],
+        "position_spread_fraction": 0.3485098584824003,
+        "dropped_degenerate_contexts": 0,
+        "objects_worse_than_null_edit": [],
+        "beats_random_by_2x": true,
+        "position_stable_within_50pct": true,
+        "substitutable": true
+      },
+      "E1_0": {
+        "teacher_route": {
+          "intact_nmse": 0.00434356903861044,
+          "oracle_route_nmse": 0.005226161310929456,
+          "ratio": 1.203195175320931,
+          "tasks": 64
+        },
+        "random_assignment_route": {
+          "intact_nmse": 0.00434356903861044,
+          "oracle_route_nmse": 0.03735278254316654,
+          "ratio": 8.59955999573939,
+          "tasks": 64
+        },
+        "shuffled_library_route": {
+          "intact_nmse": 0.00434356903861044,
+          "oracle_route_nmse": 0.05808821639220696,
+          "ratio": 13.373383932856765,
+          "tasks": 64
+        },
+        "gate_ratio": 2.0,
+        "controls_ok": true,
+        "eligible_for_E1": true
+      }
+    }
+  }
+}

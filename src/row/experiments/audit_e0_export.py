@@ -48,6 +48,12 @@ DEGENERATE_FRACTION = 0.01
 
 SUBSTRATES = {
     "DISC": {"path": "artifacts/discrete/seed_0", "kind": "discrete", "route": "library"},
+    # E1: three fresh discrete lifetimes from current committed code. The
+    # `DISC` row above predates learnable operator scales and is kept as an
+    # era-labelled reference, never pooled with these.
+    "DISC_w0": {"path": "artifacts/e1_disc/world_0", "kind": "discrete", "route": "library"},
+    "DISC_w1": {"path": "artifacts/e1_disc/world_1", "kind": "discrete", "route": "library"},
+    "DISC_w2": {"path": "artifacts/e1_disc/world_2", "kind": "discrete", "route": "library"},
     "MIX": {"path": "artifacts/rho_development/rho_1/world_1/continuous", "kind": "continuous",
             "route": "basis"},
     "MIX_w2": {"path": "artifacts/rho_development/rho_1/world_2/continuous", "kind": "continuous",
