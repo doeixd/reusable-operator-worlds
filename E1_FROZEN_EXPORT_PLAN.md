@@ -200,3 +200,55 @@ result: the three fresh DISC lifetimes score E1.0 ratios of 1.17 / 1.09 / 1.20
 against the 2.0 gate, with random-assignment and shuffled-library controls at
 7.1-13.4x, and all three pass E0.1 substitutability (matched 0.040-0.072 against
 a null edit of 1.000). All three worlds are eligible; none is excluded.
+
+
+# Amendment 2 (2026-08-25, after a first pass, BEFORE any verdict is recorded): a mode-mixed diagnostic, and what the non-vacuity clause actually asks
+
+A first full pass completed and its verdict is NOT recorded. Two problems were
+found by reading the per-cell diagnostics, and both are fixed before any number
+from this rung enters the ledger.
+
+## 1. The support-reduction diagnostic mixed model modes
+
+`DiscreteLibraryLearner` is relaxed-in-training and hard-at-evaluation by
+design: `train()` routes with a softmax at temperature, `eval()` routes by
+argmax. The first implementation measured the INITIAL support loss in train mode
+and the FINAL support loss in eval mode, so the reported reduction mixed two
+different routing rules and is not a measurement of anything. The reported query
+NMSEs are unaffected — every one of them is computed in eval mode, consistently,
+for every arm — but the non-vacuity statistic built on the mixed pair is void.
+
+Fixed: each adapting arm now reports TWO reductions, both mode-consistent:
+
+    support_reduction_objective   train mode at both endpoints — did the
+                                  optimizer reduce THE LOSS IT WAS MINIMISING
+    support_reduction_eval        eval mode at both endpoints — did the
+                                  hard-routed prediction improve
+
+## 2. The clause as written conflates "adapted" with "improved"
+
+The frozen clause reads "every arm's adaptation reduces its own support loss by
+> 1%". Its purpose is to prove each adapting arm actually optimized, so that a
+comparison is not between two un-adapted models. But two arms are EXPECTED not
+to improve, and their failure to improve is the instrument working:
+
+- **R-W** (wrong library) — a library from an incompatible world should not fit
+  the task. Measured: -0.026 support change. That is the control succeeding.
+- **F** (full finetune) — at the registered budget (2,000 Adam steps at lr 0.01
+  on one task's 128 support examples) training the whole library DEGRADES it
+  badly (-2.1, i.e. support loss roughly tripled). This is a real property of
+  the budget, not a bug, and it means `C_repair = L_R - L_F` is NEGATIVE: at
+  this budget finetuning does not repair, it destroys. `C_repair` is reported as
+  measured and is NOT interpreted as repair. No registered threshold depends on
+  it.
+
+Registered reading, fixed now rather than argued after the verdict: the
+non-vacuity clause is satisfied when **`support_reduction_objective > 0.01` for
+every arm whose claim depends on having adapted** — that is `R` and `S`, the two
+arms entering E1a and E1b. `R-W` and `F` report their numbers and are exempt,
+because an arm designed to fail is not evidence that the instrument failed. Both
+exemptions are stated in the report beside the numbers rather than hidden in the
+pass/fail flag.
+
+This is a correction to a clause of our own drafting, made before its data was
+read into a verdict, and the first pass is preserved as an instrument dry run.

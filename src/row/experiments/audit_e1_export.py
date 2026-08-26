@@ -49,7 +49,8 @@ CACHE = Path("reports/e1_cache")
 
 def protocol_fingerprint() -> str:
     payload = {"per_stratum": PER_STRATUM, "steps": ADAPT_STEPS, "lr": ADAPT_LR,
-               "margin": MARGIN, "arms": ["O", "O-W", "R", "R-W", "S", "F"]}
+               "margin": MARGIN, "arms": ["O", "O-W", "R", "R-W", "S", "F"],
+               "diagnostics": "amendment2-mode-consistent"}
     return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:16]
 
 
@@ -149,9 +150,16 @@ def adapt(model, task, probe_id: str, train_library: bool) -> dict:
                 parameter.requires_grad_(True)
                 params.append(parameter)
     optimizer = torch.optim.Adam(params, lr=ADAPT_LR)
+    # Amendment 2: both endpoints of each reduction are measured in the SAME
+    # mode. This learner is relaxed-in-training and hard-at-evaluation, so a
+    # train-mode initial against an eval-mode final measures nothing.
     local.train()
     with torch.no_grad():
-        initial = nmse(local(task["support_x"], probe_id), task["support_y"])
+        initial_objective = nmse(local(task["support_x"], probe_id), task["support_y"])
+    local.eval()
+    with torch.no_grad():
+        initial_eval = nmse(local(task["support_x"], probe_id), task["support_y"])
+    local.train()
     for _ in range(ADAPT_STEPS):
         optimizer.zero_grad()
         loss = torch.mean((local(task["support_x"], probe_id) - task["support_y"]) ** 2)
@@ -159,12 +167,17 @@ def adapt(model, task, probe_id: str, train_library: bool) -> dict:
             raise SystemExit(f"non-finite adaptation loss for {probe_id}")
         loss.backward(inputs=params)
         optimizer.step()
+    with torch.no_grad():
+        final_objective = nmse(local(task["support_x"], probe_id), task["support_y"])
     local.eval()
     with torch.no_grad():
         final_support = nmse(local(task["support_x"], probe_id), task["support_y"])
         query = nmse(local(task["query_x"], probe_id), task["query_y"])
     return {"query_nmse": query, "support_nmse": final_support,
-            "support_reduction": (initial - final_support) / max(initial, 1e-12)}
+            "support_reduction_objective":
+                (initial_objective - final_objective) / max(initial_objective, 1e-12),
+            "support_reduction_eval":
+                (initial_eval - final_support) / max(initial_eval, 1e-12)}
 
 
 def scratch_model(config, kind: str, seed_offset: int):
@@ -226,7 +239,7 @@ def main() -> None:
                 "donor_world": donor, "strata": {}}
         for stratum, programs in selection["programs"].items():
             arms = {a: [] for a in ("O", "O-W", "R", "R-W", "S", "F")}
-            checks = []
+            checks, exempt = [], []
             for index, program in enumerate(programs):
                 task = synth_task(world, program, index, world.config.seed)
                 tag = f"w{w}_{stratum}_{index}"
@@ -242,7 +255,11 @@ def main() -> None:
                 })
                 for arm in arms:
                     arms[arm].append(cell[arm]["query_nmse"])
-                checks.append({a: cell[a].get("support_reduction") for a in ("R", "R-W", "S", "F")})
+                checks.append({a: cell[a].get("support_reduction_objective")
+                               for a in ("R", "S")})     # Amendment 2: claim-bearing arms only
+                exempt.append({a: {k: cell[a].get(k) for k in
+                                   ("support_reduction_objective", "support_reduction_eval")}
+                               for a in ("R-W", "F")})
                 print(f"[w{w} {stratum} {index}] O {cell['O']['query_nmse']:.4f} "
                       f"O-W {cell['O-W']['query_nmse']:.4f} R {cell['R']['query_nmse']:.4f} "
                       f"S {cell['S']['query_nmse']:.4f} F {cell['F']['query_nmse']:.4f}", flush=True)
@@ -259,7 +276,14 @@ def main() -> None:
                 "G_export": (float((summary["S"] - summary["R"]) / (summary["S"] - summary["O"]))
                              if summary["S"] - summary["O"] > 0 and summary["S"] > 2 * summary["O"]
                              else None),
-                "weak_adaptation_cells": len(weak),
+                "weak_adaptation_cells_claim_bearing": len(weak),
+                "exempt_arms_note": ("R-W and F are exempt from the non-vacuity clause "
+                                     "(Amendment 2): a wrong library and a destructive "
+                                     "finetune budget are DESIGNED not to improve"),
+                "exempt_arm_reductions": {
+                    a: {k: float(np.mean([e[a][k] for e in exempt])) for k in
+                        ("support_reduction_objective", "support_reduction_eval")}
+                    for a in ("R-W", "F")},
             }
         out["worlds"][str(w)] = rows
     # ---- decisions -------------------------------------------------------
