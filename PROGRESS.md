@@ -3365,3 +3365,18 @@ exports-versus-reconstructs distinction made mandatory in write-ups, and E1's
 question restated. Recorded our note that the confound cannot arise on DISC (no
 residual channel exists), so the split is load-bearing at E9 instead, whose
 export endpoint is now fixed to E1-P.
+
+# 2026-08-26 - E1 SCORED: BOTH HALVES PASS, THE BRANCH PROCEEDS TO E2
+
+Frozen-library export on unseen teacher programs, three fresh DISC lifetimes,
+all eligible by the E1.0 gate. E1a (vocabulary exports) passes with margins of
++1.76 to +2.79 over scratch and +2.20 to +3.44 over an incompatible world's
+library; E1b (route findable) passes with `G_export` 0.98-1.04 and inferred
+routing matching the teacher route in 5 of 6 cells. Both strata pass, the
+pair-novel one as strongly as the triple-novel one. Recorded with two boundaries
+(E1b is OFFLINE inference and does not overturn V2's online result; full
+finetune overfits rather than repairs at this budget), the terminology limit
+(this licenses EXPORT, not yet COMPOSITION — that is E2's), full non-vacuity,
+and the disclosure that a first pass was voided for a mode-mixed diagnostic
+before any verdict existed. Both prediction sets were wrong about E1b. Next:
+E2, the constructed support-split world.

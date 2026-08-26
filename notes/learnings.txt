@@ -4010,3 +4010,39 @@ head in all six cells, as in H50 and H51. When a sham keeps beating every
 structural hypothesis under the learner's own retrospective objective, the
 objective — not the hypothesis set and not the search — is what is failing to
 value structure.
+
+
+
+================================================================================
+E1: THE FIRST STRONG POSITIVE OF THE EXPORT BRANCH (2026-08-26)
+================================================================================
+
+A frozen discrete library executes teacher programs it never trained on at
+0.0019-0.0076 NMSE — at or below its own trained-task loss — against 0.031-0.044
+for scratch and 0.048-0.073 for a library from an incompatible world. Support-
+only route inference matches the teacher route (`G_export` 0.98-1.04). Both
+held-out strata pass, including the one whose programs contain an adjacent
+primitive pair that never occurred in training.
+
+ONLINE DIFFICULTY IS NOT OFFLINE DIFFICULTY. Both prediction sets expected route
+inference to lag, citing V2's finding that online route inference is hard and
+DISC's own weak online routing. With a frozen library, 128 support examples and
+2,000 steps, inference matches the oracle almost exactly. The quantity V2
+measured (find the route WHILE learning the operators, one example at a time) and
+the quantity E1 measures (find the route over a FINISHED library, offline) are
+different problems, and a result about one is not evidence about the other. We
+have made this category slip in both directions now; name the regime whenever
+citing a routing result.
+
+FINETUNING IS NOT REPAIR AT SMALL SUPPORT. Unfreezing the library on one task's
+128 examples drives the training objective to zero and generalises WORSE than
+leaving it frozen (C_repair -0.035 to -0.063). "Full finetune" is an overfitting
+arm here, not an upper bound, and any plan that treats it as a repair ceiling
+should say what budget makes it one.
+
+A MODE-MIXED DIAGNOSTIC MEASURES NOTHING. This learner routes softly in training
+and hard at evaluation. Measuring an initial loss in one mode and a final loss in
+the other produced a number that looked like a failed non-vacuity check and was
+in fact an artifact; the corrected version shows every claim-bearing arm adapting
+cleanly. Whenever a model has two forward modes, state which mode each endpoint
+of a difference was measured in.

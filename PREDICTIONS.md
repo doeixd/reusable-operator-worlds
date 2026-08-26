@@ -5554,3 +5554,92 @@ actually passed E1.0. DISC has NO private residual channel, so E1-P is the only
 interface it has and E1-PR/E1-R are undefined there. The three-way split becomes
 load-bearing when a residual-bearing substrate enters — i.e. at E9, whose export
 endpoint is therefore fixed to E1-P by this amendment.
+
+# E1 RESULT (2026-08-26): THE FROZEN LIBRARY EXECUTES PROGRAMS IT NEVER TRAINED ON, AND THE ROUTE IS FINDABLE
+
+Plan `E1_FROZEN_EXPORT_PLAN.md` (Amendments 1-2, frozen `dc161fc`), under
+`EXPORT_BRANCH_PROGRAM.md` (Amendments 1-2). Report `reports/e1_export.json`.
+Substrate: the three fresh DISC lifetimes, all three eligible by the E1.0 gate
+(1.17 / 1.09 / 1.20 against 2.0). Interface E1-P throughout — frozen library,
+route only; DISC has no private residual channel, so E1-PR and E1-R are
+undefined here rather than skipped.
+
+Geometric-mean query NMSE over 12 held-out programs per stratum per world:
+
+    H1 (triple-novel)      O        O-W      R        R-W      S        F
+        world 0          0.00760  0.06874  0.00735  0.05842  0.04432  0.07035
+        world 1          0.00190  0.05936  0.00190  0.04810  0.03096  0.03955
+        world 2          0.00418  0.06886  0.00374  0.05605  0.04139  0.05310
+    H2 (pair-novel)
+        world 0          0.00610  0.06520  0.00503  0.05889  0.04379  0.05686
+        world 1          0.00451  0.05455  0.00501  0.04859  0.03413  0.04020
+        world 2          0.00473  0.07298  0.00334  0.05826  0.04009  0.05064
+
+**E1a — VOCABULARY EXPORTS: PASS**, on both strata, in all three worlds.
+`O` beats scratch by +1.76 to +2.79 log units and beats an incompatible world's
+library by +2.20 to +3.44, against a registered margin of +0.15. The oracle
+figures (0.0019-0.0076) sit at or below the substrates' own TRAINED-task loss
+(0.0038-0.0073): executing a program the lifetime never saw costs the frozen
+library nothing measurable.
+
+**E1b — THE ROUTE IS FINDABLE: PASS**, on both strata, in all three worlds.
+`R` beats scratch by +1.80 to +2.48, and `|log R - log O| <= 0.15` in 5 of 6
+cells (H2 world 2 is -0.346 — inferred routing BEATS the teacher route there).
+`G_export` is 0.983-1.039: support-only route inference closes essentially all
+of the scratch-to-oracle gap.
+
+**H2 is as strong as H1.** The pair-novel stratum — held-out programs containing
+an adjacent primitive pair that never occurred in training — matches or exceeds
+the triple-novel one on every margin. Whatever the library holds does not depend
+on having seen a particular adjacency.
+
+What this licenses under the terminology contract, exactly: the frozen learned
+objects CONTAIN TRANSFERABLE COMPUTATION and a task can cheaply IDENTIFY AND USE
+that computation. It does NOT yet license the word COMPOSITION: E1's held-out
+programs are opportunistic leftovers of the world's own 64-program sample
+(constrained so every primitive appeared in every tested position), while the
+contract reserves the composition claim for E2's constructed support-split
+lifetime. E1's `O` arm passing on H2 is strong evidence that E2 will not fail
+for lack of stable objects.
+
+Two boundaries stated so the result is not over-read:
+
+1. **E1b is OFFLINE route inference** — 2,000 Adam steps on 128 support examples
+   against a frozen library — not the ONLINE routing that V2 found hard during a
+   lifetime. These are different problems and the result does not overturn V2.
+2. `F` (full finetune) drives its training objective to ~0 (objective reduction
+   1.000 in every cell) and generalises WORSE than route-only adaptation
+   (`C_repair` = -0.035 to -0.063). At this budget, unfreezing the library on one
+   task's support OVERFITS rather than repairs. Reported as measured; no
+   threshold depends on it.
+
+Non-vacuity, all satisfied: claim-bearing arms `R` and `S` reduce their own
+objective by more than 1% in every cell (0 weak cells); held-out programs
+verified absent from training in code; every primitive of every held-out program
+appeared in training in that position; support and query drawn from disjoint
+seeded streams; no query label entered any selection.
+
+Scorekeeping. **E1a: ours CORRECT** (we predicted a pass, reasoning from the
+1.02 trained-program gate, and predicted `L_O` near trained-task NMSE — it landed
+at or below it). Review 75 also gave it a reasonable chance. **E1b: BOTH
+PREDICTION SETS WRONG.** Ours said route inference would fail or sit near the
+boundary, citing V2's online-routing difficulty and DISC's own weak online
+routing; review 75 called "oracle export works, learned route inference lags"
+its modal interesting result. Instead inference matched the oracle almost
+exactly. The error in both cases was importing an ONLINE result into an OFFLINE
+question — the same category slip this project has made before in the other
+direction. Our stratum prediction (H2 no worse than H1 for the oracle arm, worse
+for inference) is CORRECT for the oracle arm and WRONG for inference: H2's
+inference margins are the larger ones.
+
+Licensing: E1a and E1b both pass, so the branch proceeds to **E2** as the frozen
+run order specifies. The registered E1a-failure STOP is not triggered, and E9
+(export-constrained formation) is not triggered — its trigger was an E1 oracle
+failure or an E2 oracle failure, and the first has not occurred.
+
+Instrument disclosure: a first full pass with a MODE-MIXED support-reduction
+diagnostic was VOIDED before any verdict was recorded and is preserved at
+`reports/e1_export_void_firstpass.json`; its query NMSEs were computed
+consistently and match this pass, but its non-vacuity statistic was meaningless.
+Amendment 2 replaced it with two mode-consistent reductions and fixed the
+clause's conflation of "adapted" with "improved" before the data was read.
