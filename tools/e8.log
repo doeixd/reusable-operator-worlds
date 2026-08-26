@@ -1,0 +1,11 @@
+prereg check OK: 27 frozen files unchanged; all STATUS-cited paths exist
+equivalence control: bitwise equal at depth 3 in all worlds (48 tasks)
+[w0 E8a_depth2] O 0.00333 O-W 0.03743 R 0.00334 S 0.03213 | O-S +2.267 O-OW +2.420 R-S +2.265 | e_O [0.0012, 0.0033]
+[w0 E8b_depth4] O 0.00959 O-W 0.10409 R 0.01018 S 0.05924 | O-S +1.821 O-OW +2.384 R-S +1.761 | e_O [0.0013, 0.0038, 0.0066, 0.0096]
+[w1 E8a_depth2] O 0.00151 O-W 0.03601 R 0.00150 S 0.02188 | O-S +2.671 O-OW +3.170 R-S +2.679 | e_O [0.0007, 0.0015]
+[w1 E8b_depth4] O 0.00292 O-W 0.09518 R 0.00359 S 0.03731 | O-S +2.549 O-OW +3.486 R-S +2.342 | e_O [0.0005, 0.0011, 0.002, 0.0029]
+[w2 E8a_depth2] O 0.00283 O-W 0.03702 R 0.00264 S 0.02392 | O-S +2.136 O-OW +2.573 R-S +2.204 | e_O [0.0011, 0.0028]
+[w2 E8b_depth4] O 0.00676 O-W 0.10892 R 0.00574 S 0.05830 | O-S +2.155 O-OW +2.780 R-S +2.319 | e_O [0.0012, 0.0029, 0.0049, 0.0068]
+E8a_depth2: oracle=True inference=True
+E8b_depth4: oracle=True inference=True
+OUTCOME LENGTH-CLOSED AT BOTH DEPTHS

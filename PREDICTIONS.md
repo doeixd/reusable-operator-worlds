@@ -5836,3 +5836,74 @@ OPERATIONAL definition of primitive-like status — survives freezing, is
 load-bearing, works in unseen combinations, retains meaning across positions, and
 needs no operator repair — in place of teacher matching. E1, E1-R and E2 together
 satisfy all five for this substrate at exact reuse.
+
+# E8 RESULT (2026-08-26): THE OPERATOR INTERFACE IS CLOSED UNDER VARIABLE-LENGTH COMPOSITION
+
+Plan `E8_LENGTH_PLAN.md` (frozen `473d34b`). Report `reports/e8_length.json`.
+Libraries are the E1 discrete artifacts, trained at depth 3 and FROZEN; only the
+executor changed, and its registered gate passed first.
+
+**Equivalence control: BITWISE EQUAL AT DEPTH 3 in all three worlds** (16 tasks
+each, 48 total). The variable-depth executor reproduces the shipped one
+tensor-for-tensor, so a length result here is about the interface and not about
+an architecture that hardcoded `D = 3`.
+
+    condition / world      O        O-W      R        R-W      S       O-S     R-S     R-O
+    E8a depth 2   w0    0.00333  0.03743  0.00334  0.03416  0.03213  +2.267  +2.265  +0.002
+                  w1    0.00151  0.03601  0.00150  0.03005  0.02188  +2.671  +2.679  -0.008
+                  w2    0.00283  0.03702  0.00264  0.03375  0.02392  +2.136  +2.204  -0.068
+    E8b depth 4   w0    0.00959  0.10409  0.01018  0.08926  0.05924  +1.821  +1.761  +0.059
+                  w1    0.00292  0.09518  0.00359  0.07747  0.03731  +2.549  +2.342  +0.208
+                  w2    0.00676  0.10892  0.00574  0.08564  0.05830  +2.155  +2.319  -0.164
+
+**LENGTH-CLOSED at both depths**: oracle and inference both clear the registered
++0.15 margin over scratch and over an incompatible world's library, in 3 of 3
+worlds, at a length SHORTER and a length LONGER than anything trained. Depth 4
+introduces a fourth execution position that never existed during training, and
+it is handled.
+
+**The per-step diagnostic answers the question it was designed for.** Oracle
+errors after each step, geometric means:
+
+    depth 4, world 0:  0.0013  0.0038  0.0066  0.0096
+    depth 4, world 1:  0.0005  0.0011  0.0020  0.0029
+    depth 4, world 2:  0.0012  0.0029  0.0049  0.0068
+
+Error GROWS SMOOTHLY with step index — roughly linearly, about 6-7x from step 1
+to step 4 — rather than staying flat and breaking at the fourth. So the interface
+degrades by COMPOUNDING, not by failing at an unseen execution position. Two
+consequences worth stating. First, the error at step 3 OF A FOUR-STEP PROGRAM
+(0.0066 / 0.0020 / 0.0049) is comparable to these libraries' own trained-task
+loss at the end of a three-step program (0.0073 / 0.0038 / 0.0043), so the
+executor is not degraded by being asked to continue. Second, the degradation is
+gentle enough that depth-4 final error stays 6-20x better than scratch.
+
+**Inference tracks the oracle at both depths** (`R - O` = +0.002 / -0.008 /
+-0.068 at depth 2 and +0.059 / +0.208 / -0.164 at depth 4; inference is better in
+one world at each depth). The writer is not the bottleneck here, which is the
+outcome review 77 called less likely than the oracle-only branch.
+
+Scorekeeping. Review 77: depth 2 "very likely passes" — CORRECT; depth-4 oracle
+"60-70%" — CORRECT and better calibrated than ours; depth-4 inference "lower than
+oracle" — PARTIALLY CORRECT (worse in 2 of 3 worlds, better in the third, and it
+passes everywhere). Ours: depth 2 passes — CORRECT; **we leaned AGAINST the
+depth-4 oracle passing at the registered margin — WRONG**, and it passed by
++1.82 to +2.55. Our reasoning was that each operator had been fitted on states at
+most two compositions deep and a fourth step leaves that distribution; the
+distributional effect is REAL and visible in `e_t`, but an order of magnitude too
+small to matter. **Our prediction about the SHAPE was CORRECT**: `e_t` grows with
+`t` rather than breaking at step 4, exactly as registered, and that is the
+diagnostic review 77 asked for.
+
+Non-vacuity: equivalence control bitwise in all worlds before any cell scored;
+test programs verified of the right depth and absent from training; `R` and `S`
+each reduce their own objective by more than 1% in every cell (0 weak of 144);
+the frozen libraries are the E1 artifacts, unmodified.
+
+Licensing, under the terminology contract. The branch may now say that these
+learned objects behave as a COMPOSITIONAL VOCABULARY CLOSED UNDER LENGTH for this
+substrate at exact reuse: they export (E1), the effect is caused by recurrence
+(E1-R), they compose systematically including in positions never occupied (E2),
+and they compose at lengths never trained (E8). It may still NOT say SYNTHESIS —
+no compact program variable has been priced (E3) and no recognizer has been
+built (E5). The frozen run order sends the branch to E3 next.

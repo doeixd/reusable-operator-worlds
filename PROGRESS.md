@@ -3422,3 +3422,19 @@ fourth-step breakage from compounding. Both preconditions were verified first:
 the teacher library is identical across program lengths, and the executor
 hardcodes depth so a variable-depth executor with a bitwise depth-3 control is
 required before any failure is interpretable.
+
+# 2026-08-26 - E8 SCORED: LENGTH-CLOSED AT BOTH DEPTHS
+
+The variable-depth executor passed its registered bitwise gate at depth 3 in all
+three worlds, then frozen depth-3 libraries executed depth-2 and depth-4
+programs: oracle and inference both clear +0.15 over scratch and over an
+incompatible library, 3/3 worlds, margins +1.76 to +2.68. Per-step errors grow
+smoothly with step index rather than breaking at the never-trained fourth
+position, so the depth limit is compounding drift rather than a missing execution
+slot; step 3 of a four-step program matches the trained-task loss at the end of a
+three-step one. Recorded with scorekeeping - review 77's 60-70% oracle estimate
+was better calibrated than our lean against it, while our prediction of the
+degradation SHAPE was correct - and full non-vacuity (0 weak of 144). The branch
+may now say the objects form a compositional vocabulary closed under length; it
+may still not say synthesis. Next: E3, whether solutions are compact programs
+over that vocabulary.

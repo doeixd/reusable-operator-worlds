@@ -4112,3 +4112,41 @@ structural constraints is legitimate; searching it until a result looks good is
 not. The difference is what the search is allowed to read, and that belongs in
 the amendment in writing — stratum sizes, balance and context counts, never a
 model or a loss.
+
+
+
+================================================================================
+E8: THE INTERFACE IS CLOSED UNDER LENGTH, AND DEGRADES BY COMPOUNDING (2026-08-26)
+================================================================================
+
+Frozen depth-3 libraries execute depth-2 and depth-4 teacher programs, oracle and
+inferred, in all three worlds, at margins of +1.76 to +2.68 over scratch. Depth 4
+introduces an execution position that never existed in training and it is
+handled. Together with E1, E1-R and E2 the substrate now shows export, causal
+dependence on recurrence, composition across unseen programs and positions, and
+closure under length.
+
+THE PER-STEP DIAGNOSTIC EARNED ITS PLACE. Final-output error alone would have
+said only "depth 4 works". The step-wise trace says HOW: error grows smoothly
+with step index (about 6-7x from step 1 to step 4) instead of staying flat and
+breaking at the unseen fourth position. So the limit on depth is COMPOUNDING
+DRIFT, not a missing execution slot — and the error at step 3 of a four-step
+program matches these libraries' own trained-task loss at the end of a three-step
+program, so continuing does not degrade what came before. A future depth limit
+should therefore be predicted from the growth rate, not from an architectural
+boundary.
+
+A DISTRIBUTIONAL WORRY CAN BE REAL AND STILL NOT MATTER. We predicted the
+depth-4 oracle would fail because each operator was fitted on states at most two
+compositions deep. The effect exists and is visible in `e_t`; it is simply an
+order of magnitude too small to cross the threshold. Predicting the SHAPE of a
+degradation is a different skill from predicting whether it BINDS, and only the
+second decides a verdict — worth separating in future registrations.
+
+CHANGE THE EXECUTOR, NOT THE ARTIFACT, AND PROVE IT BITWISE. The only change E8
+needed was looping over the task's own route length instead of a model constant.
+Making that a subclass used at scoring time, with a registered gate that it
+reproduces the shipped executor tensor-for-tensor at the trained depth, kept
+every artifact untouched and made the length result interpretable. Without the
+gate, a failure would have been unreadable — which is precisely why the plan
+required it before any cell was scored.
