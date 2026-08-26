@@ -4046,3 +4046,37 @@ the other produced a number that looked like a failed non-vacuity check and was
 in fact an artifact; the corrected version shows every claim-bearing arm adapting
 cleanly. Whenever a model has two forward modes, state which mode each endpoint
 of a difference was measured in.
+
+
+
+================================================================================
+E1-R: EXPORT TRACKS RECURRENCE, AND VANISHES WITHOUT IT (2026-08-26)
+================================================================================
+
+Same architecture, same operator budget, same adaptation budget, same scorer,
+three levels of world recurrence. Export margin over a from-scratch learner:
++1.82/+2.67/+2.36 at r = 1.0, +0.54/+0.62/+0.49 at r ~ 0.64, and
++0.03/-0.02/+0.03 at r ~ 0. A frozen library formed in a world with no
+recurrence is worth NOTHING on a held-out task from that world.
+
+WHAT A CONTROL IS FOR. E1's controls varied the LIBRARY (untrained; trained on a
+different world). Both failed hard, which felt conclusive. But neither varied the
+property the project treats as causal, and the alternative explanation — twelve
+tanh-residual operators simply span this function class — survived them both. It
+does not survive this one. When a result could be explained by the ARCHITECTURE
+rather than by the LEARNING, the control that separates them is a sweep over the
+world property, not another ablation of the model.
+
+COMPARABILITY CAN FAIL SILENTLY WHEN A KNOB CHANGES WHAT THE OBJECTS ARE. At
+rho < 1 the teacher primitives are task-specific, so a held-out PROGRAM index
+denotes a different operator per task and is not the same object across the
+sweep. The comparable held-out unit is a TASK. Generating the world longer gives
+that for free, with the first 64 tasks bitwise identical — and at rho = 1 it
+reduces to the original protocol, which turned the control into a reproduction
+check of the rung it was controlling (agreement within 0.13 log units).
+
+DO NOT REINVENT THE PROJECT'S OWN COORDINATE. Two hand-rolled versions of
+measured recurrence were wrong in opposite directions (0.000 at rho = 1;
+0.983 at rho = 0) before it was noticed that every artifact already carries the
+registered measurement. A central coordinate should have exactly one definition
+in a codebase, and new scorers should read it, not recompute it.

@@ -1,0 +1,195 @@
+{
+  "frozen_plan": "E1R_RECURRENCE_CONTROL_PLAN.md",
+  "git_commit": "f1f715d",
+  "protocol": {
+    "held_out_tasks": 12,
+    "rhos": [
+      "0.0",
+      "0.9",
+      "1.0"
+    ],
+    "note": "held-out TASK protocol; reduces to E1's at rho = 1"
+  },
+  "cells": {
+    "rho0.0_w0": {
+      "artifact": "artifacts\\e1r_disc\\rho0p0_world_0",
+      "measured_recurrence": {
+        "mean_pairwise_residual_correlation": -0.0006476644309042104,
+        "configured_rho": 0.0,
+        "source": "artifact world_functional_reuse.json"
+      },
+      "geomean_query_nmse": {
+        "O": 0.0385936922471008,
+        "R": 0.03675947425002035,
+        "S": 0.03785966908878051
+      },
+      "M_R": 0.029490410196474137,
+      "M_O": -0.019202444478284342,
+      "assignment_margin_mean": 0.0012389374472099497,
+      "weak_adaptation_cells": 0,
+      "n": 12
+    },
+    "rho0.0_w1": {
+      "artifact": "artifacts\\e1r_disc\\rho0p0_world_1",
+      "measured_recurrence": {
+        "mean_pairwise_residual_correlation": -0.0014709967883820524,
+        "configured_rho": 0.0,
+        "source": "artifact world_functional_reuse.json"
+      },
+      "geomean_query_nmse": {
+        "O": 0.044584691645095056,
+        "R": 0.03848235032755956,
+        "S": 0.03777398179552288
+      },
+      "M_R": -0.018579149788653382,
+      "M_O": -0.16577001010764558,
+      "assignment_margin_mean": 0.001555607145921914,
+      "weak_adaptation_cells": 0,
+      "n": 12
+    },
+    "rho0.0_w2": {
+      "artifact": "artifacts\\e1r_disc\\rho0p0_world_2",
+      "measured_recurrence": {
+        "mean_pairwise_residual_correlation": 0.0020727756173130815,
+        "configured_rho": 0.0,
+        "source": "artifact world_functional_reuse.json"
+      },
+      "geomean_query_nmse": {
+        "O": 0.045228150330906616,
+        "R": 0.03910070366269731,
+        "S": 0.04010253829081829
+      },
+      "M_R": 0.02529916801431753,
+      "M_O": -0.12028005658134377,
+      "assignment_margin_mean": 0.0013400126550746395,
+      "weak_adaptation_cells": 0,
+      "n": 12
+    },
+    "rho0.9_w0": {
+      "artifact": "artifacts\\e1r_disc\\rho0p9_world_0",
+      "measured_recurrence": {
+        "mean_pairwise_residual_correlation": 0.6539145667002604,
+        "configured_rho": 0.9,
+        "source": "artifact world_functional_reuse.json"
+      },
+      "geomean_query_nmse": {
+        "O": 0.02384849071911633,
+        "R": 0.023073255465589092,
+        "S": 0.039640651109655665
+      },
+      "M_R": 0.5411809601589157,
+      "M_O": 0.5081342017838231,
+      "assignment_margin_mean": 0.0030832666018441035,
+      "weak_adaptation_cells": 0,
+      "n": 12
+    },
+    "rho0.9_w1": {
+      "artifact": "artifacts\\e1r_disc\\rho0p9_world_1",
+      "measured_recurrence": {
+        "mean_pairwise_residual_correlation": 0.6276603897834403,
+        "configured_rho": 0.9,
+        "source": "artifact world_functional_reuse.json"
+      },
+      "geomean_query_nmse": {
+        "O": 0.018478368806269567,
+        "R": 0.019094786474422164,
+        "S": 0.03535310272672308
+      },
+      "M_R": 0.6159708217716013,
+      "M_O": 0.6487853658509586,
+      "assignment_margin_mean": 0.0144938218449363,
+      "weak_adaptation_cells": 0,
+      "n": 12
+    },
+    "rho0.9_w2": {
+      "artifact": "artifacts\\e1r_disc\\rho0p9_world_2",
+      "measured_recurrence": {
+        "mean_pairwise_residual_correlation": 0.6385585950125762,
+        "configured_rho": 0.9,
+        "source": "artifact world_functional_reuse.json"
+      },
+      "geomean_query_nmse": {
+        "O": 0.023681446513217512,
+        "R": 0.022064298997843654,
+        "S": 0.036113620572424086
+      },
+      "M_R": 0.4927092230058481,
+      "M_O": 0.42197820134146236,
+      "assignment_margin_mean": 0.001501817264632987,
+      "weak_adaptation_cells": 0,
+      "n": 12
+    },
+    "rho1.0_w0": {
+      "artifact": "artifacts\\e1_disc\\world_0",
+      "measured_recurrence": {
+        "mean_pairwise_residual_correlation": 1.0,
+        "configured_rho": 1.0,
+        "source": "artifact world_functional_reuse.json"
+      },
+      "geomean_query_nmse": {
+        "O": 0.006741591543574704,
+        "R": 0.006831669768190846,
+        "S": 0.042136873098490034
+      },
+      "M_R": 1.8193540836488422,
+      "M_O": 1.8326271718187623,
+      "assignment_margin_mean": 0.0060120389773382354,
+      "weak_adaptation_cells": 0,
+      "n": 12
+    },
+    "rho1.0_w1": {
+      "artifact": "artifacts\\e1_disc\\world_1",
+      "measured_recurrence": {
+        "mean_pairwise_residual_correlation": 1.0,
+        "configured_rho": 1.0,
+        "source": "artifact world_functional_reuse.json"
+      },
+      "geomean_query_nmse": {
+        "O": 0.002190298457743313,
+        "R": 0.002251566381949677,
+        "S": 0.03235498060932123
+      },
+      "M_R": 2.66514182544095,
+      "M_O": 2.6927301525815115,
+      "assignment_margin_mean": 0.010535460196731827,
+      "weak_adaptation_cells": 0,
+      "n": 12
+    },
+    "rho1.0_w2": {
+      "artifact": "artifacts\\e1_disc\\world_2",
+      "measured_recurrence": {
+        "mean_pairwise_residual_correlation": 1.0,
+        "configured_rho": 1.0,
+        "source": "artifact world_functional_reuse.json"
+      },
+      "geomean_query_nmse": {
+        "O": 0.00497959022658297,
+        "R": 0.0031351904962392133,
+        "S": 0.03320964010554173
+      },
+      "M_R": 2.3601502618101127,
+      "M_O": 1.8974925945671628,
+      "assignment_margin_mean": 0.0013412587084666097,
+      "weak_adaptation_cells": 0,
+      "n": 12
+    }
+  },
+  "decision": {
+    "M_R_rho1": [
+      1.8193540836488422,
+      2.66514182544095,
+      2.3601502618101127
+    ],
+    "M_R_rho09": [
+      0.5411809601589157,
+      0.6159708217716013,
+      0.4927092230058481
+    ],
+    "M_R_rho0": [
+      0.029490410196474137,
+      -0.018579149788653382,
+      0.02529916801431753
+    ],
+    "outcome": "RECURRENCE-DEPENDENT"
+  }
+}

@@ -5643,3 +5643,77 @@ diagnostic was VOIDED before any verdict was recorded and is preserved at
 consistently and match this pass, but its non-vacuity statistic was meaningless.
 Amendment 2 replaced it with two mode-consistent reductions and fixed the
 clause's conflation of "adapted" with "improved" before the data was read.
+
+# E1-R RESULT (2026-08-26): EXPORT IS RECURRENCE-DEPENDENT
+
+Plan `E1R_RECURRENCE_CONTROL_PLAN.md` (frozen `bed3b91`). Report
+`reports/e1r_recurrence.json`. Held-out TASK protocol, uniform across `rho`;
+12 held-out tasks per cell; interface E1-P.
+
+    rho   measured r        O        R        S      M_R (log S - log R)
+    1.0   +1.000 (3/3)   0.00674  0.00683  0.04214   +1.819
+                         0.00219  0.00225  0.03235   +2.665
+                         0.00498  0.00314  0.03321   +2.360
+    0.9   +0.654/+0.628/+0.639
+                         0.02385  0.02307  0.03964   +0.541
+                         0.01848  0.01909  0.03535   +0.616
+                         0.02368  0.02206  0.03611   +0.493
+    0.0   -0.001/-0.001/+0.002
+                         0.03859  0.03676  0.03786   +0.029
+                         0.04458  0.03848  0.03777   -0.019
+                         0.04523  0.03910  0.04010   +0.025
+
+Verdict by the frozen rule: **RECURRENCE-DEPENDENT.** `M_R(1.0) >= +1.0` in 3/3
+worlds and `M_R(0.0) <= +0.3` in 3/3, with `rho = 0.9` strictly between.
+
+**At zero recurrence the frozen library is worth nothing.** `M_R` is +0.03 /
+-0.02 / +0.03 — a trained 12-operator library gives a held-out task no advantage
+over a library initialised at random and trained on that task's own 128 support
+examples. The oracle arm is if anything slightly NEGATIVE (`M_O` -0.02 / -0.17 /
+-0.12): with independent per-task teachers there is no operator to route to.
+
+So E1's result is about LEARNED REUSE, not about the architecture's function-space
+coverage. The alternative reading — twelve tanh-residual operators span enough of
+this function class that any trained basis serves — is refuted: the same
+architecture, the same operator budget, the same adaptation budget, and the same
+scorer produce zero export margin when the world has no recurrence to learn.
+
+**The reproduction check passes.** The `rho = 1` cells were built by an
+independent protocol (the world's own tasks 64-75 of a 76-task world, verified
+bitwise-identical in its first 64) and land within 0.13 log units of E1's
+corresponding margins (+1.797 / +2.793 / +2.403 there against +1.819 / +2.665 /
++2.360 here), inside the registered 0.15 tolerance.
+
+**Export is graded in recurrence, and grows faster than linearly.** Mean `M_R`
+is 0.011 at r ~ 0, 0.550 at r ~ 0.64, and 2.281 at r = 1.0. V1's lifetime
+advantage was LINEAR in measured recurrence (`R^2 = 0.935`); export margin is
+not — most of it appears between r = 0.64 and r = 1.0. Recorded as an
+observation, not a law: three grid points cannot fit a curve, and the two
+quantities are different (lifetime cost versus held-out-task export).
+
+Scorekeeping. Ours: `M_R(1.0)` reproduces E1 at +1.8 to +2.8 — **CORRECT**
+(+1.82 to +2.67). `M_R(0.0)` near zero — **CORRECT** (+0.03 / -0.02 / +0.03),
+including the subsidiary prediction that absolute losses would be high for both
+arms and the MARGIN would vanish (S 0.038-0.040, R 0.037-0.039). `M_R(0.9)`
+above +1.0 — **WRONG**: it is +0.49 to +0.62. We over-estimated the intermediate
+point by treating V1's crossing (r ~ 0.484) as though export would be near its
+ceiling just above it; instead r = 0.64 delivers under a quarter of the r = 1.0
+margin.
+
+Non-vacuity: prefix property verified in code for all nine cells; `R` and `S`
+each reduce their own objective by more than 1% in every cell (0 weak); measured
+recurrence read from the project's OWN registered instrument
+(`world_functional_reuse.json`) rather than recomputed.
+
+Instrument disclosure: two earlier attempts to compute measured recurrence
+inside this scorer were wrong (cross-task centering read 0.000 at `rho = 1`
+where the true value is exactly 1.0; removing it read 0.983 at `rho = 0`). Both
+were caught in the dry run, before any cell was scored. The scorer now reads the
+artifact's registered diagnostic, which is the definition every other rung of
+this project uses. The `O` arm's per-task functional assignment uses teacher
+information and is a CEILING; the verdict is read from `R`, which uses none.
+
+Licensing: E1's interpretation stands and is now causally anchored. E2 proceeds
+as the frozen run order specifies, and inherits a stronger prior: whatever E2
+finds about composition will be about learned reusable structure, since the same
+measurement says the structure vanishes when recurrence does.

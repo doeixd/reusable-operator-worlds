@@ -3380,3 +3380,15 @@ finetune overfits rather than repairs at this budget), the terminology limit
 and the disclosure that a first pass was voided for a mode-mixed diagnostic
 before any verdict existed. Both prediction sets were wrong about E1b. Next:
 E2, the constructed support-split world.
+
+# 2026-08-26 - E1-R SCORED: RECURRENCE-DEPENDENT
+
+Registered control on E1, run before E2. Export margin over scratch is
++1.82/+2.67/+2.36 at measured recurrence 1.0, +0.54/+0.62/+0.49 at ~0.64, and
++0.03/-0.02/+0.03 at ~0 — so the frozen library is worth nothing when the world
+has no recurrence, and E1's result is about learned reuse rather than the
+architecture's function-space coverage. The rho = 1 cells reproduce E1 within
+0.13 log units under an independently built protocol. Recorded with scorekeeping
+(our rho = 1 and rho = 0 predictions correct, the rho = 0.9 point over-estimated)
+and the disclosure that two hand-rolled recurrence measurements were wrong before
+the scorer was switched to the project's registered diagnostic. Next: E2.
