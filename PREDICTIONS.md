@@ -5788,3 +5788,51 @@ It may NOT yet say synthesis (no compact program variable has been priced, and
 route optimization is not synthesis under the contract) and it may not say
 anything about depth beyond 3. The frozen run order sends the branch to E8
 (length generalization) next.
+
+# E8 REGISTRATION (2026-08-26, review 77): IS THE OPERATOR INTERFACE CLOSED UNDER LENGTH?
+
+Plan `E8_LENGTH_PLAN.md`; frozen before any code. Review 77 accepted in full,
+with its two design additions folded in before the plan was written.
+
+Question: E2 established same-depth systematicity; E8 asks whether the interface
+is closed under a CHANGE OF LENGTH, separating "a learned length-3 algebra" from
+"operators that iterate as a DSL".
+
+Two preconditions VERIFIED before the plan was frozen. (a) `Primitive.random`
+does not depend on `program_length`, so depth-2 and depth-4 worlds from the same
+seed carry EXACTLY the same six teacher operators (checked elementwise on U, V, b
+for all three worlds) — no confound between new depth and new operators. (b) The
+executor hardcodes depth (`for step in range(self.task_steps)`), so a
+variable-depth executor is required before any length failure is interpretable;
+its registered control is BITWISE reproduction of the current executor at depth 3
+on the real artifacts, and E8 does not run if that fails.
+
+Conditions, per review 77: **E8a** depth 2, familiar positions; **E8b** depth 4,
+whose fourth operation occupies an execution position that never existed in
+training — the direct continuation of E2's H3. Arms are E1/E2's unchanged, oracle
+computed and reported FIRST. Registered diagnostic: per-step error `e_1..e_D`
+against the teacher's intermediate states, so a depth-4 failure can be read as
+fourth-step breakage (`e_4` alone large) versus compounding (`e_t` growing).
+
+Registered branches: both depths closed -> the interface extrapolates in length;
+depth-4 oracle closed but inference not -> the WRITER is missing, successor
+E3/E5, library unchanged; depth-4 oracle not closed while depth 2 is ->
+composition is bounded by the executor and the successor is a variable-length
+executor, not a better recognizer; depth 2 not closed -> re-examine the
+equivalence control before concluding anything.
+
+Predictions. Review 77: depth 2 very likely; depth-4 oracle 60-70%; depth-4
+inference lower. Ours: depth 2 passes; **we lean slightly AGAINST depth-4 oracle
+passing at the registered margin**, on distributional rather than architectural
+grounds — each operator was fitted on states produced by at most two prior
+operators, and a fourth step feeds it a state one composition deeper than
+anything it saw. We therefore predict `e_t` GROWING with `t` rather than a clean
+fourth-step break, and that depth-4 inference partially compensates (as inference
+beat the oracle on H3), possibly landing closer to the threshold than the oracle.
+If depth 4 passes cleanly, our distributional worry was wrong.
+
+Also recorded from review 77, as a refinement of the terminology contract: an
+OPERATIONAL definition of primitive-like status — survives freezing, is
+load-bearing, works in unseen combinations, retains meaning across positions, and
+needs no operator repair — in place of teacher matching. E1, E1-R and E2 together
+satisfy all five for this substrate at exact reuse.

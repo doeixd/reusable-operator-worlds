@@ -3407,3 +3407,18 @@ held-out programs verified in code) and scorekeeping (H1/H2 correct; the H3
 oracle lean correct; the H3 inference call wrong in the interesting direction).
 The branch may now say COMPOSITION for this substrate at exact reuse. Next in
 the frozen run order: E8, length generalization.
+
+# 2026-08-26 - REVIEW 77 FILED; E8 PLANNED WITH ITS TWO PRECONDITIONS VERIFIED
+
+Review 77 filed and indexed: E2's position-novel result rules out the
+position-specialised and local-pipeline explanations, "composition" is judged
+earned with its recorded qualifications, and R-beating-O plus tiny assignment
+margins are read as usability without sharp identity. Its operational definition
+of primitive-like status is now a constitutional entry in AGENTS.md. Drafted
+`E8_LENGTH_PLAN.md` with review 77's two additions folded in before writing:
+the E8a/E8b split (new length with familiar positions versus a genuinely new
+fourth position) and per-step error `e_1..e_D` as the diagnostic that separates
+fourth-step breakage from compounding. Both preconditions were verified first:
+the teacher library is identical across program lengths, and the executor
+hardcodes depth so a variable-depth executor with a bitwise depth-3 control is
+required before any failure is interpretable.

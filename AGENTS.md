@@ -1295,3 +1295,16 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   has confirmed so far is ECONOMICS (reuse lowers lifetime cost; the amortization
   law is quantitative; coordinates are made during learning); none of it yet
   shows a computational LANGUAGE.
+
+- PRIMITIVE-LIKE STATUS IS OPERATIONAL, NOT REFERENTIAL (review 77, after E2).
+  A learned object earns the word by behaviour: it survives FREEZING, it is
+  LOAD-BEARING for the task, it works in UNSEEN COMBINATIONS, it retains meaning
+  across POSITIONS it never occupied, and it needs no OPERATOR REPAIR. It does
+  not earn it by matching a teacher primitive. The evidence for the distinction
+  is quantitative: across E0.1, E1 and E2 the object-to-primitive assignment
+  margin is 0.001-0.019 — several assignments are nearly as good, so identity is
+  barely determined — while support-only route inference BEATS the teacher's own
+  matched route in 7 of 9 composition cells. Stable usability and sharp semantic
+  naming are different properties, and only the first is required for a
+  vocabulary to compose. Expect many equivalent vocabularies for one
+  computational domain, and never let a matching statistic gate a use claim.

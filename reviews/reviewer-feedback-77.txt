@@ -1,0 +1,154 @@
+This is the strongest evidence so far that the substrate has crossed from "shared
+representation" into something genuinely COMPOSITIONAL.
+
+The key result is not merely that held-out triples work. It is that POSITION-NOVEL
+operators work:
+
+    a learned operator retains its functional role in a program position it never
+    occupied during training
+
+That rules out a very large class of weaker explanations. Before E2, the system could
+still have been doing something like "operator A means one thing in slot 1 and another
+thing in slot 3", or "the model memorized common local pipelines/pairs". H3 attacks
+that directly. If a primitive never appeared in position 3 during training and then
+works there in a held-out program, its semantics are substantially POSITION-INDEPENDENT.
+That is exactly the sort of property a programming-language primitive needs.
+
+## What E2 has now established
+
+1. WHOLE-PROGRAM MEMORIZATION IS RULED OUT. H1: (i,j,k) not in P_train, yet
+   frozen-library performance stays near 0.003 versus scratch 0.03-0.046.
+2. LOCAL-PAIR MEMORIZATION IS NOT SUFFICIENT. H2 with unseen adjacent pairs passes
+   too. A model could conceivably learn a bigram transition table between operator
+   pairs while still failing true systematic composition; H2 substantially weakens
+   that explanation.
+3. OPERATOR SEMANTICS SURVIVE UNSEEN SYNTACTIC POSITION. H3 is the deepest one: the
+   learned operation can be moved into a position where it was never trained and still
+   behave correctly. So we have evidence for P_i : W -> W rather than
+   P_{i,position}. That is a real neural ABI result.
+
+# I think the project is now allowed to say "composition"
+
+Your terminology discipline paid off. Before this, reuse != composition. After E2, at
+exact reuse: FROZEN LEARNED OPERATIONS COMPOSE SYSTEMATICALLY IN UNSEEN LENGTH-3
+PROGRAMS. I would still qualify it exactly as you did: exact-reuse regime; depth 3;
+this synthetic operator substrate; program route not yet priced as a compact code; no
+claim yet about synthesis. But "composition" is earned. That is a meaningful milestone.
+
+# The R beating O result is very interesting
+
+You have R < O on H3 in all three worlds, and R <= O in 7/9 cells overall. So the
+teacher-derived functional assignment is NOT the optimal way to use the learned
+library. That dovetails perfectly with the tiny assignment margins (0.002-0.019).
+
+    the learned computational language works even though its vocabulary is not
+    uniquely aligned to the teacher's vocabulary
+
+This is a big conceptual point. We were right not to define primitive identity by
+teacher matching. The learner seems to have discovered an alternative basis or coding
+of the same computational space, and that basis can still compose. So stable usability
+> sharp semantic naming. That could matter enormously later when we think about learned
+concepts or learned DSLs: there may be many equivalent vocabularies for the same
+computational domain.
+
+# This also strengthens the idea that "program" should be defined operationally
+
+A learned object deserves primitive-like status if it: (1) survives freezing; (2) is
+load-bearing for the task; (3) works in unseen combinations; (4) retains meaning across
+contexts/positions; (5) supports task solution without operator repair. Not: "it
+matches teacher primitive #4." That is a much better scientific definition.
+
+# What is still missing before "synthesis"
+
+Right now the task-local state may still be a soft route of nontrivial capacity. We
+have shown a compositional computational vocabulary exists. We have NOT shown that
+solutions are compact programs over that vocabulary, nor that a synthesizer can infer
+those programs efficiently. So the remaining ladder is cleaner now:
+
+    composition -> program representation -> program inference -> language growth
+
+# E8 is exactly the right next test
+
+And it has a genuine chance of failing. E2 established SAME-DEPTH systematicity. E8
+asks whether the computational interface is actually closed under variable-length
+composition. That distinguishes a "learned length-3 algebra" from "learned operators
+that can be iterated as a DSL."
+
+## The most important E8 split
+
+Run oracle programs first.
+
+IF DEPTH-4 ORACLE WORKS: the primitive interface itself extrapolates beyond the
+training program length. If inferred depth-4 then fails, the problem is search/program
+writing. That's a very good failure.
+
+IF DEPTH-4 ORACLE FAILS: E2's composition is real but BOUNDED by the
+executor/training architecture. The learned objects compose across unseen combinations
+and positions, but not indefinitely. Then the next target is not a better recognizer;
+it is a variable-length executor / stable recurrent neural ABI. That's still a major
+localization win.
+
+# Depth 2 is also useful
+
+Depth-2 is not just an easy sanity check. If D=2 works but D=4 fails, the system can
+omit operations and recombine subsets but cannot extrapolate execution horizon. That
+points toward depth/iteration stability rather than primitive semantics. If even
+depth-2 fails, I'd worry that the executor has baked-in positional structure despite
+H3.
+
+# One especially important E8 control
+
+Because H3 showed position invariance within three positions, depth 4 introduces a
+genuinely new fourth position. So explicitly isolate:
+
+    E8a - new length, familiar positions: depth 2 using positions already seen
+    E8b - new position: depth 4 where the fourth operation occupies a completely
+          unseen execution position
+
+That gives a direct continuation of H3. If depth-4 failure is concentrated at the
+fourth step, the learned operators are fine but the executor/state distribution at
+unseen depth breaks. If earlier operations degrade when a fourth step is appended,
+composition isn't stable under continuation. That distinction is important.
+
+# Another metric I'd record in E8
+
+Measure error after EVERY intermediate program step: e_1, e_2, e_3, e_4 — not just
+final output NMSE. Then if depth 4 fails you can see whether e_1 ~ e_2 ~ e_3 ~ 0 with
+e_4 >> 0 ("fourth-step execution failed") versus e_t growing progressively with t
+("numerical/representational errors compound with depth"). That's exactly the
+information needed to design the next ABI.
+
+# This result also changes how I see H53
+
+The export branch has now produced a positive phenomenon much closer to the grand goal
+than the structural-reorganization branch has. H39-H53 taught us important things about
+formation, fertility, path dependence, and the inability to retrofit ontology. But E2
+has shown something concrete: LEARNED COMPUTATIONS CAN ALREADY BEHAVE LIKE REUSABLE
+COMPOSITIONAL OPERATIONS. That suggests the next major bottleneck may indeed be program
+representation/search, not structural clustering. So keep letting H53/H39 finish as its
+own scientific line, but clearly prioritize E8 -> E3 -> E5.
+
+# My updated predictions
+
+DEPTH 2: very likely passes.
+DEPTH 4 ORACLE: maybe 60-70% chance of passing meaningfully if the executor really
+applies a shared operation recurrently. If the architecture has hard-coded three-step
+pathways, much lower.
+DEPTH 4 INFERRED: lower than oracle, because route/program inference may become the
+bottleneck.
+E3 DISCRETE COMPILATION: now considerably more plausible. E2 tells us there is real
+combinatorial structure to encode; before E2 a discrete route might just have been
+forcing symbolic syntax onto a continuous function basis.
+E5 RECOGNIZER: also more plausible. Support-only inference outperforming the teacher
+assignment is a good sign that inference has useful freedom rather than merely
+recovering arbitrary labels.
+
+# The big research-program update
+
+The project has demonstrated three increasingly strong phenomena: reuse; then
+exportable/task-defining shared computation; and now systematic composition across
+unseen programs and unseen operator positions. The next question is no longer "do we
+have anything remotely program-like?" It is: HOW FAR DOES THE COMPOSITIONAL SEMANTICS
+GENERALIZE, AND CAN WE TURN IT INTO AN EXPLICIT SEARCHABLE PROGRAM LANGUAGE? That's a
+much better place to be. If E8 passes and E3/E5 work, the project moves from "neural
+reuse economics" into something genuinely adjacent to learned program synthesis.

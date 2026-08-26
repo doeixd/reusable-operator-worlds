@@ -2917,3 +2917,27 @@ E1's question as whether a library that fully specifies trained tasks retains
 stable semantics on an unseen program, with the live alternatives being stable
 reusable operations versus a distributed routed basis that only works in
 familiar contexts.
+
+
+### [reviewer-feedback-77.txt](reviewer-feedback-77.txt)
+On E2. Reads the position-novel stratum as the load-bearing result: it rules out
+"operator A means one thing in slot 1 and another in slot 3" and the bigram/
+local-pipeline explanations at once, giving evidence for `P_i : W -> W` rather
+than `P_{i,position}` — a neural ABI result. Judges the word COMPOSITION earned,
+with the qualifications already recorded (exact reuse, depth 3, this substrate,
+route not yet priced, no synthesis claim). Highlights R BEATING O as
+conceptually important: with assignment margins of 0.002-0.019, the learned
+vocabulary is not uniquely aligned to the teacher's and composes anyway, so
+STABLE USABILITY > SHARP SEMANTIC NAMING and there may be many equivalent
+vocabularies for one computational domain. Proposes an OPERATIONAL definition of
+primitive-like status (survives freezing; load-bearing; works in unseen
+combinations; retains meaning across positions; needs no operator repair) in
+place of teacher matching. Sets the remaining ladder as composition -> program
+representation -> program inference -> language growth, and prioritises
+E8 -> E3 -> E5 while letting the H39/H53 formation line finish as its own
+question. For E8 specifically: run ORACLE FIRST; split E8a (new length, familiar
+positions) from E8b (depth 4, a genuinely new fourth position, continuing H3);
+and record PER-STEP error e_1..e_D rather than only final NMSE, so a depth-4
+failure can be diagnosed as fourth-step breakage versus error compounding with
+depth. Predicts depth 2 very likely passes, depth-4 oracle 60-70%, depth-4
+inference lower.
