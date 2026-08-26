@@ -3353,3 +3353,15 @@ the heads give identical sibling endpoints because their only private state does
 not exist for an unseen task, so differential fertility is impossible there by
 construction. All three prediction sets scored, ours wrong on both halves of C_2
 and right that SHAM would bind.
+
+# 2026-08-25 - REVIEW 76 FILED; EXPORT BRANCH AMENDED BEFORE THE E1 PLAN
+
+Review 76 filed and indexed: Phase 0's refit number exposes a false-positive
+route through E1. Appended Amendment 2 to `EXPORT_BRANCH_PROGRAM.md` and
+re-froze — three interfaces (E1-P primary, E1-PR endpoint, E1-R control) with
+`Delta_library`, the oracle-no-residual arm as the cleanest vocabulary test with
+its repair-branch frozen, E7 promoted to a per-cell control, the
+exports-versus-reconstructs distinction made mandatory in write-ups, and E1's
+question restated. Recorded our note that the confound cannot arise on DISC (no
+residual channel exists), so the split is load-bearing at E9 instead, whose
+export endpoint is now fixed to E1-P.

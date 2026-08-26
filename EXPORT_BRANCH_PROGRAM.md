@@ -374,3 +374,84 @@ It does not license "program synthesis" in the usual sense, and it is a
 FOUNDATION claim rather than a capability. Control flow, loops, intermediate
 values and macro creation are outside this branch and require a different
 teacher.
+
+
+# Amendment 2 (2026-08-25, review 76, before the E1 rung plan is written): the residual is a repair channel, never evidence
+
+Phase 0 measured that the private residual is INERT AS TRAINED (`R_residual` =
+0.0000 in all three worlds) but recovers 41-46% of the trained loss when re-fitted
+under a frozen library. Usage and capacity are different quantities, and an
+export test that lets a fresh residual adapt could therefore look excellent while
+the supposedly exported program contributes almost nothing. That is a false
+positive this branch would not otherwise have caught.
+
+Binding from here, on every E1 and E2 test:
+
+## 1. Three interfaces, reported together, never collapsed
+
+    E1-P   PURE PROGRAM      frozen library; ONLY route/program state inferred;
+                             private residual absent or frozen at its task-free
+                             state.                                    <- PRIMARY
+    E1-PR  PROGRAM+RESIDUAL  frozen library; route AND residual inferred.
+                             A full-system endpoint; NOT evidence of export.
+    E1-R   RESIDUAL ONLY     library contribution neutralised (routed parent
+                             replaced by the identity); the SAME residual
+                             adaptation budget as E1-PR.
+
+with `Delta_library = L_R - L_PR` reported as the performance uniquely
+attributable to the frozen library. Every export or composition claim rests on
+**E1-P**. `E1-PR` may never carry one on its own, and the R-route/R-full split
+of Amendment 1 is subsumed by this three-way version.
+
+## 2. The oracle-with-no-residual arm is the cleanest vocabulary test, and its
+failure branch is frozen now
+
+For an unseen program, `L_oracle-program, eps = 0` asks directly whether the
+frozen library contains the computation the program needs. Registered readings:
+
+- **oracle-no-residual works** -> the library genuinely executes that program.
+- **oracle+residual works while oracle-no-residual fails** -> the residual is
+  REPAIRING the library, and we do NOT have an exported program. Recorded as
+  such; no export claim is licensed, and the successor question is the operator
+  interface, not the router.
+
+## 3. E7 stops being a one-time audit
+
+Program-only / program+residual / residual-only are reported for every E1 and E2
+cell, not once in Phase 0. The trained-lifetime answer ("almost all of it lives
+in the library") is established; whether it SURVIVES ON UNSEEN PROGRAMS is the
+export question itself.
+
+## 4. A distinction that must appear in every write-up
+
+    what the learned representation EXPORTS
+        != what a powerful downstream adaptor can RECONSTRUCT AROUND IT
+
+Unleashing 2,000 steps of private-channel adaptation gives the test-time learner
+a capability the lifetime policy deliberately declined to use — the residual sat
+idle while the shared route absorbed the task. Reporting the second number as the
+first is the same methodological error H37 produced from the other direction.
+
+## 5. What E1 is now testing, restated
+
+Not "is there anything worth exporting" — Phase 0 answered that: task identity is
+carried by the routed library, and on the two substrates E1 actually concerns it
+is carried there ARCHITECTURALLY, since neither has a residual channel at all.
+The sharper question is:
+
+> does a library that fully specifies its TRAINED tasks retain stable semantics
+> on a program it never trained on?
+
+with the two live alternatives being STABLE REUSABLE OPERATIONS versus A
+DISTRIBUTED ROUTED FUNCTION BASIS THAT ONLY WORKS IN FAMILIAR PROGRAM CONTEXTS.
+E1 separates export; E2 separates systematic composition.
+
+## 6. Where the confound can and cannot bite (our note, recorded with the amendment)
+
+The eligible substrate makes the primary path clean by construction: **DISC has
+no private residual channel**, so `E1-P` is the only interface it HAS, and
+`E1-PR` / `E1-R` are undefined there rather than merely discouraged. The
+three-way split becomes load-bearing exactly when a residual-bearing substrate
+enters the branch — which is E9's export-constrained formation, since that will
+be built on the `pslot` family. Registered consequence: E9's plan inherits this
+amendment in full, and its export endpoint must be E1-P.

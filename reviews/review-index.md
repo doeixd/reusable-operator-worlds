@@ -2894,3 +2894,26 @@ of this substrate ends — publishable and decisive. Predicts partial rather tha
 clean teacher identity, load-bearing residuals, and as the modal interesting
 outcome "oracle export works, learned route inference lags", which would
 localize the next problem to writing/search rather than vocabulary.
+
+
+### [reviewer-feedback-76.txt](reviewer-feedback-76.txt)
+On Phase 0. Reads the headline as strong — during normal lifetime learning task
+identity is carried almost entirely by the routed library (R_residual ~ 0,
+library removal costs 280-357x, live-task slice reproduces it) — and kills the
+pessimistic alternative that ROW's gains hide the real solution in per-task
+state. But names the confound the same rung exposed: the residual is INERT, not
+incapable (refit reaches 41-46% of trained loss), so ONLINE USAGE ~ 0 is not
+EXPRESSIVE CAPACITY ~ 0, and an E1 that lets a fresh residual adapt could look
+excellent while the exported program contributes little. Tightens E1 into three
+interfaces (E1-P pure program as PRIMARY, E1-PR program+residual as a
+full-system endpoint that is never evidence, E1-R residual-only with the library
+neutralised) with Delta_library = L_R - L_PR; makes oracle-with-eps-zero the
+cleanest vocabulary test and freezes its failure branch (oracle+residual working
+while oracle-no-residual fails means the residual is REPAIRING the library);
+promotes E7 to a per-cell continuing control; and requires every write-up to
+separate what the representation EXPORTS from what a powerful downstream adaptor
+RECONSTRUCTS AROUND IT, the same lesson H37 taught from the other side. Restates
+E1's question as whether a library that fully specifies trained tasks retains
+stable semantics on an unseen program, with the live alternatives being stable
+reusable operations versus a distributed routed basis that only works in
+familiar contexts.

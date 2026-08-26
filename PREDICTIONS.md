@@ -5521,3 +5521,36 @@ organizations CONCURRENTLY is a cheap substitute for developing them
 independently: at the sharing levels reachable here it is neither cheap (A_train
 0.77-0.86) nor discriminating (no margin anywhere near +0.15), and the failure
 is not explained by the heads collapsing into one another.
+
+# EXPORT BRANCH AMENDMENT 2 (2026-08-25, review 76, before the E1 rung plan exists)
+
+Phase 0's refit measurement (residual inert as trained, 41-46% of trained loss
+recoverable when re-fitted) identifies a false-positive route through E1 that the
+branch as written would not have caught: an adaptable private residual can
+manufacture export-looking numbers while the frozen program contributes little.
+
+Registered in `EXPORT_BRANCH_PROGRAM.md` Amendment 2:
+
+1. Three interfaces on every E1/E2 test — **E1-P** pure program (PRIMARY),
+   **E1-PR** program+residual (full-system endpoint, never evidence on its own),
+   **E1-R** residual-only with the library neutralised — with
+   `Delta_library = L_R - L_PR` as the performance uniquely attributable to the
+   library. This subsumes Amendment 1's R-route/R-full split.
+2. `L_oracle-program, eps = 0` is the cleanest vocabulary test, and its failure
+   branch is frozen now: oracle+residual working while oracle-no-residual fails
+   means THE RESIDUAL IS REPAIRING THE LIBRARY and no export claim is licensed.
+3. E7 becomes a continuing control reported per cell rather than a Phase 0 audit.
+4. Every write-up must separate WHAT THE REPRESENTATION EXPORTS from WHAT A
+   DOWNSTREAM ADAPTOR RECONSTRUCTS AROUND IT — 2,000 steps of private adaptation
+   grants a capability the lifetime policy declined to use.
+5. E1's question is restated: not whether anything is worth exporting (Phase 0
+   settled that) but whether a library that fully specifies its trained tasks
+   retains stable semantics on an unseen program. Live alternatives: stable
+   reusable operations versus a distributed routed basis that only works in
+   familiar contexts.
+
+Our note, registered with it: the confound cannot bite on the substrate that
+actually passed E1.0. DISC has NO private residual channel, so E1-P is the only
+interface it has and E1-PR/E1-R are undefined there. The three-way split becomes
+load-bearing when a residual-bearing substrate enters — i.e. at E9, whose export
+endpoint is therefore fixed to E1-P by this amendment.

@@ -1,0 +1,116 @@
+It's looking better for the export branch, but Phase 0 also just exposed an important
+confound that should change E1's design.
+
+The headline result is very strong:
+
+    during normal lifetime learning, task identity is carried almost entirely by the
+    routed library.
+
+Across all three worlds R_residual ~ 0. Disabling the residual barely changes loss,
+while disabling the library blows loss up by roughly 280-357x. And the live-task-only
+slice reproduces it, so retirement is not manufacturing the result.
+
+That is substantially better than the pessimistic alternative where the "library" is
+just a shared prior and task-specific computation secretly lives in eps_t.
+
+## But the refit result is equally important
+
+The surprise is L_refit ~ 0.0021-0.0025, versus trained full losses around
+0.0046-0.0058. So the private residual is not weak. It is UNUSED.
+
+That gives us a much sharper distinction:
+
+    online residual usage ~ 0   !=   residual expressive capacity ~ 0
+
+In fact, when given 2,000 adaptation steps, the residual can solve a large amount of
+the task under a frozen library. So an export experiment that allows a fresh/private
+residual to adapt can look excellent even if the supposedly exported program
+contributes little. That would be a serious false positive.
+
+# This should tighten E1
+
+I would now make E1 explicitly separate three interfaces.
+
+E1-P - PURE PROGRAM. Freeze the library and infer ONLY route/program state. No private
+residual. This is the primary export test: can the frozen vocabulary solve the unseen
+program?
+
+E1-PR - PROGRAM + RESIDUAL. Freeze library, infer route plus residual. Useful as a
+robustness/full-system endpoint, but NOT evidence of export by itself.
+
+E1-R - RESIDUAL ONLY / CRIPPLED LIBRARY. Freeze or neutralize route/library
+contribution appropriately and allow the same residual adaptation budget. This
+establishes how much of E1-PR can be obtained without the supposed program.
+
+Then the useful quantity is something like Delta_library = L_R - L_PR. And the strong
+compositional claim should depend on E1-P, not merely E1-PR.
+
+# The oracle arm becomes even more important
+
+For unseen program p, L_oracle-program,no-residual is now probably the single cleanest
+vocabulary test. If the teacher/oracle route over the frozen library works with
+eps = 0, then the library genuinely contains the computation needed to execute that
+program. If oracle+residual works but oracle-no-residual fails, the residual is
+repairing the library and we do NOT have an exported program. That branch should be
+frozen explicitly.
+
+# This also upgrades E7 from a one-time audit to a continuing control
+
+For every E1/E2 test, report: program only; program + residual; residual only/control.
+The key causal question is: how much performance is uniquely attributable to the frozen
+program? The trained-lifetime E7 result says "almost all of it" on familiar tasks. Now
+we need to see whether that remains true on UNSEEN programs. That is exactly the export
+question.
+
+# Scientifically, though, this is good news
+
+The worrying possibility was: "ROW's library gains are fake from a synthesis
+perspective because each task still stores its real solution privately." Phase 0 pretty
+decisively says NO. The current architecture behaves more like
+
+    T_t = Execute(L, z_t)
+
+than
+
+    T_t = SharedPrior(L) + eps_t
+
+and on DISC/MIX this is architectural, since there is no residual channel at all.
+
+So E1 is no longer mainly testing whether there is something worth exporting. It is
+testing the sharper question:
+
+    does a library that fully specifies trained tasks retain stable semantics on a
+    program it never trained on?
+
+That's exactly where we wanted to get.
+
+# One slightly surprising implication
+
+The fact that the residual refit actually gets BELOW the original trained loss is also
+telling us that normal continual training intentionally leaves task-local capacity on
+the table. That likely means the lifetime objective/dynamics are strongly incentivizing
+a shared route/library solution over private task memorization. That is favorable for
+program formation.
+
+But it means adaptation-time evaluation has a mismatch: if you suddenly unleash the
+private channel with 2,000 steps, you are giving the test-time learner a capability the
+lifetime policy chose not to use. So comparisons should distinguish WHAT THE LEARNED
+REPRESENTATION EXPORTS from WHAT A POWERFUL DOWNSTREAM ADAPTOR CAN RECONSTRUCT AROUND
+IT. H37 taught essentially the same methodological lesson from another direction.
+
+## Where I think we are now
+
+Phase 0 has removed one major failure mode: task solution hidden in residuals. The
+remaining serious alternatives are now mostly
+
+    stable reusable operations
+
+versus
+
+    a distributed routed function basis that only works in familiar program contexts.
+
+E1 distinguishes export. E2 distinguishes actual systematic composition.
+
+So I'd say the branch is LOOKING MORE PROMISING than before Phase 0, while also
+becoming methodologically cleaner: any adaptable residual must now be treated as a
+repair/control channel, never as part of the evidence that a frozen program exported.
