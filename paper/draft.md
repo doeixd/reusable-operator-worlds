@@ -1174,6 +1174,18 @@ online routing problem an earlier block found hard, and unfreezing the library
 on a single task's support drives its training objective to zero while
 generalising worse, so finetuning here is overfitting rather than repair.
 
+That result would be compatible with a duller explanation - that twelve
+tanh-residual operators simply span this function class, so any trained basis
+would serve - and the controls used there (an untrained library, and one
+transplanted from an incompatible world) cannot separate it, because both vary
+the library rather than the property the earlier blocks established as causal.
+Repeating the measurement across worlds that differ only in recurrence does
+separate it. The export margin over a from-scratch learner is 1.82-2.67 log
+units at measured recurrence 1.0, 0.49-0.62 at 0.64, and 0.03/-0.02/0.03 at
+zero: a library formed where nothing recurs is worth nothing on a held-out task,
+with the same architecture, operator budget and adaptation budget throughout.
+Export is a consequence of what the world made available to learn.
+
 The lesson this block adds to the earlier ones is the most consequential
 in the paper: the useful abstraction was not latent in the finished
 solutions waiting to be extracted; the learner had to maintain an

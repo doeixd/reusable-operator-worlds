@@ -105,6 +105,16 @@ Two limits are recorded with it: the route inference is *offline* over a frozen
 library and does not overturn V2's online-routing result, and unfreezing the
 library on one task's support overfits rather than repairs.
 
+**And export is caused by recurrence, not by architecture (E1-R).** Repeating
+the measurement across worlds that differ only in how much their hidden
+computation recurs: the export margin over a from-scratch learner is
+**+1.82 / +2.67 / +2.36** at measured recurrence 1.0, **+0.54 / +0.62 / +0.49**
+at 0.64, and **+0.03 / −0.02 / +0.03** at 0. A library formed in a world with no
+recurrence is worth nothing on a held-out task from that world — same
+architecture, same operator budget, same adaptation budget. The exact-reuse
+cells also reproduce E1 within 0.13 log units under an independently built
+protocol.
+
 Details and the research record: `reports/`, `notes/`, `reviews/`. Paper
 draft: `paper/draft.md`.
 
