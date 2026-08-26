@@ -1158,6 +1158,22 @@ genuinely amortised (5.3x) a candidate's only private state was per-task, hence
 absent for an unseen task, so differential future value was impossible by
 construction rather than merely unobserved.
 
+A separate line then asked the question all of this had been circling: are
+these objects usable outside the lifetime that made them? Freezing a discrete
+library and asking it to execute teacher programs the lifetime never trained on
+costs nothing measurable - query error 0.0019-0.0076 against a trained-task loss
+of 0.0038-0.0073, where a from-scratch learner given the same adaptation budget
+reaches 0.031-0.044 and a library transplanted from an incompatible world
+reaches 0.048-0.073. Inferring the program from support examples alone recovers
+essentially the whole gap between scratch and the teacher's own program
+(0.98-1.04 of it). Held-out programs containing an adjacent operator pair that
+never occurred in training behave like the rest, so what the library holds does
+not depend on having seen a particular adjacency. Two boundaries belong with
+that result: the inference is offline over a finished library and is not the
+online routing problem an earlier block found hard, and unfreezing the library
+on a single task's support drives its training objective to zero while
+generalising worse, so finetuning here is overfitting rather than repair.
+
 The lesson this block adds to the earlier ones is the most consequential
 in the paper: the useful abstraction was not latent in the finished
 solutions waiting to be extracted; the learner had to maintain an

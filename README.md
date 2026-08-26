@@ -92,6 +92,19 @@ an export test. Its first registered stop condition is real: if a frozen library
 cannot solve unseen teacher programs even with oracle routing, the synthesis
 interpretation of this substrate ends.
 
+**First result of that branch (E1, 2026-08-26): the stop condition did not
+fire.** A frozen discrete library executes teacher programs it never trained on
+at 0.0019–0.0076 NMSE — at or below its own *trained*-task loss — against
+0.031–0.044 for a from-scratch learner and 0.048–0.073 for a library taken from
+an incompatible world. Support-only route inference matches the teacher route
+(`G_export` 0.98–1.04), and held-out programs containing an adjacent primitive
+pair that never occurred in training do as well as the rest. Under this
+project's terminology contract that licenses **export**, not yet composition —
+the composition claim is reserved for a constructed support-split world (E2).
+Two limits are recorded with it: the route inference is *offline* over a frozen
+library and does not overturn V2's online-routing result, and unfreezing the
+library on one task's support overfits rather than repairs.
+
 Details and the research record: `reports/`, `notes/`, `reviews/`. Paper
 draft: `paper/draft.md`.
 
