@@ -185,3 +185,36 @@ Amended, before any verdict:
 4. The decision rule is otherwise unchanged: `D_program < D_private` AND
    `D_program < D_continuous`, in >= 2 of 3 worlds, at the behavioural rate,
    with every representation behaviour-preserving by construction of that rate.
+
+
+# Amendment 2 (2026-08-26, before any E3 verdict): where the continuous comparison is available, and what is primary
+
+`D_continuous` was registered as a co-primary clause. Two facts, both established
+before any verdict:
+
+1. **It cannot be computed within the discrete artifact.** That executor routes
+   by `argmax` at evaluation, so quantizing its logits changes nothing until an
+   argmax flips; a "continuous route" stored there is pure waste and would be
+   charged an artificially low behavioural rate. The information content of its
+   route genuinely IS `D log2(slots)`. A within-artifact continuous comparison is
+   therefore vacuous, not merely inconvenient.
+2. **The meaningful continuous alternative is a learner that actually USES a
+   mixture** — the continuous-basis artifacts at exact reuse. Those exist for
+   worlds 1 and 2 (`artifacts/rho_development/rho_1/world_*/continuous`, 8 slots,
+   rank 8, depth 3) and not for world 0 in the same config family, and this plan
+   forbids substituting another era's artifact.
+
+Amended, before any verdict:
+
+- **`D_program < D_private` is the PRIMARY clause** of E3b and is evaluated in
+  all three worlds. It is the comparison that answers the question the rung
+  exists for: does a shared vocabulary plus explicit programs beat storing each
+  task's computation privately, when BOTH are compressed to their own
+  behaviour-preserving rates.
+- **`D_program < D_continuous` is a SECONDARY clause**, computed and reported
+  wherever a compatible continuous artifact exists (worlds 1 and 2), never
+  decisive on its own, and reported as `absent` for world 0 rather than
+  substituted. This mirrors E1 Amendment 1's treatment of the dense control.
+- The verdict phrasing changes accordingly: PROGRAM ECONOMY HOLDS names the
+  private comparison; the continuous comparison is reported beside it as
+  corroboration or as a qualification.
