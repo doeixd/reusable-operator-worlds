@@ -3484,3 +3484,30 @@ decelerate, so the registered interval is [0.45, 0.95] and the claim is a
 decelerating continuation rather than an ordinary-application constant. Protocol
 is one support-split lifetime per world carrying all five estimands. Nothing in
 the band has been generated.
+
+# 2026-08-26 - SEALED SCORER VALIDATED ON DEVELOPMENT; TWO BUGS CAUGHT BEFORE THE BAND OPENED
+
+`score_export_confirmation.py` was dry-run against the E2 support-split
+DEVELOPMENT artifacts before being pointed at 800-829, and the run caught two
+defects that would each have corrupted the sealed block.
+
+1. WORLD MISMATCH. `load_world` reconstructed the world with `World.generate`,
+   which produces the SAME 64 opaque task IDs from the same seed but DIFFERENT
+   programs (63 of 64 differ). The scorer was therefore pairing a support-split
+   model's routes with an ordinary world's targets, and the identical IDs hid it
+   perfectly: the "true" program scored 0.031-0.041 - as bad as a wrong route -
+   where E2 had measured 0.003 on the same artifacts. Fixed to build the world
+   through `generate_support_split_world`, with a fatal assertion that the
+   reconstructed programs equal the recorded training split. After the fix,
+   Q_D reproduces E3 exactly (2.69-2.72 against 2.646-2.732), N* lands at
+   4.0-4.1, gauge is bitwise 64/64 and the wrong-code controls collapse by
+   2.17-2.84 log units.
+2. PROCESS-DEPENDENT SEED. The held-out sampler derived a `SeedSequence`
+   component from Python's built-in `hash()`, which is randomized per process -
+   the project's OLDEST recorded rule. The same tag gave 8593 and 25 in two
+   fresh processes; a sealed sample drawn that way would differ between runs of
+   identical code. Replaced with a sha256-derived stable integer, verified
+   identical across processes.
+
+The frozen plan is unchanged; both are implementation corrections made before
+any world in the band existed.
