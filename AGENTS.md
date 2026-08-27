@@ -1353,3 +1353,38 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   eligibility gate would have labeled the setting UNINTERPRETABLE had the
   forecast failed, instead of leaving a degraded executor indistinguishable from
   a bad arm.
+
+
+- A FIRST-CROSSING ESTIMAND MANUFACTURES A HORIZON FROM NOISE (E5.1,
+  2026-08-27). "The smallest depth whose anchor fails" always has a value if the
+  series wobbles, so the statistic CANNOT return "no horizon" and is guaranteed
+  to name one. E5.1 registered it, depth 7 failed, depths 8-10 passed, and the
+  rule printed `SEARCH BINDS FIRST` off a single cell. Before registering any
+  threshold-crossing rule, ask what it would return on pure noise; pair it with
+  a trend test, or register the trend itself. Report the registered output
+  unrewritten and disclose the refutation beside it.
+
+- REUSING AN ARM IS REUSING A CONSTRUCTION, NOT A NAME (E5 correction, found
+  while building E5.1). E1 and E8 build the scratch arm with
+  `scratch_model(config, "discrete", 7717)`; E5 built it with
+  `copy.deepcopy(model)` -- the TRAINED library -- making its `S` column a
+  fine-tuning arm mislabeled as scratch (measured impact ~0.23-0.44 log units;
+  no E5 verdict flips). Three modules in one branch had an arm called `S` and
+  the label hid the difference at every call site. Diff how a baseline is BUILT
+  before reusing it across modules, the same way scorer CLI arguments and
+  protocol fingerprints are already treated.
+
+- SEARCH COST SCALES WITH PROGRAM LENGTH, NOT PROGRAM-SPACE SIZE (E5.1). Across
+  depths 3-10 the space grew 3.58e7-fold while route-optimization seconds grew
+  3.30-fold at unchanged oracle parity: `C_find` linear in depth, logarithmic in
+  space. Exhaustive search scales with the space and stops being the right tool
+  between depth 4 and 5 (ENUM/OPT seconds 0.04x, 0.42x, 4.66x). When a cost is
+  claimed to grow with a combinatorial quantity, measure it against the
+  STRUCTURAL parameter too -- the two can differ by seven orders of magnitude.
+
+- EXTRAPOLATE A DECELERATING PROCESS WITH ITS DECELERATION TERM (E5.1). The
+  sealed block gave both a per-step drift `b = 0.581` and a continuation ratio
+  `q = 0.785 < 1`. Compounding `b` alone forecast depth 6 within 8% and then
+  overestimated depths 7-10 badly (measured `b_eff ~ 0.248`). Both numbers were
+  always consistent; we extrapolated with the one that was easier to compound. A
+  fit is only trustworthy across the region it covers.

@@ -4258,3 +4258,46 @@ than as a one-off miss.
   proposed the drift curve for: a COMPOSITIONAL HORIZON you can calculate.
   Register such a forecast with a gate attached, so that being wrong produces an
   UNINTERPRETABLE label rather than a silently degraded arm.
+
+- E5.1, SEARCH COST SCALES WITH PROGRAM LENGTH, NOT PROGRAM-SPACE SIZE
+  (2026-08-27; `reports/e5_1_search_scaling.json`, plan frozen `8e66828`).
+  Sweeping depth 3-10 x budget {250,500,1000,2000} on worlds 0-2: the discrete
+  program space grew 3.58e7-fold (1,728 -> 6.19e10) while route optimization's
+  device-seconds grew 3.30-fold (7.7 -> 25.4) at unchanged parity with the
+  oracle. `C_find` is linear in DEPTH and therefore logarithmic in the size of
+  the space. Exhaustive search scales the other way and crosses over exactly
+  where predicted (ENUM/OPT seconds 0.04x, 0.42x, 4.66x at depths 3, 4, 5).
+  This is the defensible form of review 81's "smoothly searchable": a statement
+  about COST SCALING at fixed quality, not about an absent limit.
+
+- A FIRST-CROSSING ESTIMAND NEEDS A MONOTONE UNDERLYING SERIES, AND OURS WAS
+  NOT (E5.1). `D_search` was registered as "the smallest eligible depth whose
+  anchor fails". Depth 7 failed; depths 8, 9 and 10 all passed. The rule
+  therefore returned `SEARCH BINDS FIRST` from a single noisy cell, with a mean
+  anchor-gap series (-0.055, -0.079, -0.267, -0.058, +0.091, +0.063, +0.244,
+  -0.073) that has no trend at all. We report the registered outcome unrewritten
+  and disclose beside it that no horizon was located below depth 11. Before
+  registering a threshold-crossing estimand, ask what its value would be if the
+  series were pure noise -- a first crossing of a noisy series ALWAYS exists, so
+  the statistic cannot return "no horizon" and is guaranteed to manufacture one.
+  Pair any crossing rule with a trend test, or register the trend instead. Same
+  family as the V1 rho-crossover being descriptive between grid points.
+
+- WE ALSO TALKED OURSELVES INTO A PER-WORLD TREND ON FOUR POINTS (E5.1). World
+  1's anchor gap rose +0.13, +0.27, +0.43, +0.81 over depths 6-9, which looked
+  like clean monotone degradation and suggested searchability was a property of
+  the individual learned library. Depth 10 returned -0.04 and refuted it. Four
+  monotone points out of five is what noise looks like at n=8 tasks per cell;
+  the hypothesis was formed and discarded within the hour, which is the correct
+  outcome, but it should not have been stated before the series was complete.
+
+- DECELERATION MEANS A SINGLE SLOPE IS THE WRONG FORECASTING OBJECT (E5.1).
+  E5 Amendment 1 forecast the depth-6 oracle error from the sealed per-step
+  drift `b = 0.581` and hit it within 8%. Extended to depths 7-10 the same
+  constant-`b` extrapolation OVERESTIMATES badly: measured effective growth is
+  `b_eff ~ 0.248` over depths 3-10 (oracle error 0.00472 -> 0.02812), which is
+  precisely what the OTHER sealed estimand predicts, the step-continuation ratio
+  `q = 0.785 < 1`. The two sealed numbers were always consistent; we
+  extrapolated with the one that was easier to compound. A forecast is only as
+  good as the region its fit covers, and a decelerating process must be
+  extrapolated with its deceleration term.

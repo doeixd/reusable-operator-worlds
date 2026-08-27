@@ -6426,3 +6426,92 @@ Incidental observation worth keeping: fine-tuning a trained 12-slot library on a
 single task's 128 support examples was WORSE than training from scratch in 1 of
 3 probes (0.186 against 0.102), so a trained start is not automatically an
 advantage at this scale.
+
+# E5.1 complete (2026-08-27): neither horizon was located, and the real result is the cost scaling
+
+Plan `E5_1_SEARCH_SCALING_PLAN.md` frozen at `8e66828`. Development worlds 0-2,
+depths 3-10, budgets {250, 500, 1000, 2000}, 8 held-out programs per
+(world, depth). Report `reports/e5_1_search_scaling.json`.
+
+## What the registered rule returned, reported as required
+
+    D_execute = None (eligibility held 3/3 at EVERY depth through 10)
+    D_search  = 7
+    outcome   = SEARCH BINDS FIRST
+
+## Why that outcome does not identify a horizon, disclosed rather than overturned
+
+`D_search` is a FIRST-CROSSING statistic and depth 7 is the ONLY failing depth:
+depths 8, 9 and 10 all pass the anchor. The mean anchor gap by depth is
+
+    d3 -0.055  d4 -0.079  d5 -0.267  d6 -0.058
+    d7 +0.091  d8 +0.063  d9 +0.244  d10 -0.073
+
+which has no monotone trend; depth 10 is among the best cells in the sweep. At
+8 tasks per cell, cross-depth variation is dominated by task-draw noise. The
+registered outcome stands as the rule's output and is NOT rewritten, but the
+licensed claim is only this: neither horizon was located at or below depth 10.
+Anyone quoting `SEARCH BINDS FIRST` from this report must quote this paragraph
+with it.
+
+A per-world degradation story was also considered and REJECTED on the data:
+world 1 rose +0.13, +0.27, +0.43, +0.81 across depths 6-9 and then returned to
+-0.04 at depth 10. Four points suggested a trend and the fifth refuted it.
+
+## The robust finding
+
+`C_find` scales with program LENGTH, not with program-space SIZE. Between depth
+3 and depth 10 the discrete space grew by a factor of 3.58e7 (1,728 to
+61,917,364,224) while route optimization's device-seconds grew by 3.30
+(7.7s to 25.4s) at unchanged quality - almost exactly linear in depth, hence
+LOGARITHMIC in the size of the space being searched.
+
+Exhaustive search scales the other way and crosses over exactly where predicted:
+
+    depth   ENUM executions   ENUM seconds   OPT2000 seconds   ENUM/OPT
+      3           1,728           0.29             7.7          0.04
+      4          20,736           4.03             9.7          0.42
+      5         248,832          59.07            12.7          4.66
+
+## Scorekeeping
+
+- **`D_execute in {8, 9}`: WRONG.** Eligibility held at every depth; oracle
+  error only reached 0.0281 at depth 10 against scratch ~0.15. Effective
+  per-step growth over depths 3-10 is `b_eff ~ 0.248`, well below the sealed
+  shallow `b = 0.581`, which is exactly what the sealed continuation ratio
+  `q = 0.785 < 1` predicts. CONSTANT-`b` EXTRAPOLATION OVERESTIMATES DEPTH
+  ERROR: the E5 Amendment 1 forecast worked at depth 6 because it was close to
+  the fitted region, and degrades further out. The right forecasting object is
+  the decelerating series, not the single slope.
+- **`D_search` absent from the sweep: WRONG by the registered rule** (it
+  returned 7), though the rule's output is not robust as described above.
+- **`K*` flat in depth: PARTIALLY CONFIRMED.** `K*` was 1000, 1000, 1000, then
+  2000 from depth 6 onward - one doubling, then flat through depth 10, against
+  a space growing 3.58e7-fold.
+- **ENUM the wrong tool by `D = 5`: CONFIRMED EXACTLY** (0.04x, 0.42x, 4.66x).
+- **Review 81's "current evidence suggests execution binds first": NOT
+  SUPPORTED, but not refuted either** - execution demonstrably did not bind
+  through depth 10, while the search side failed to produce a locatable horizon.
+- **Review 81's "smoothly searchable": SUPPORTED in the cost sense** (quality
+  held at parity while the space grew 7.5 orders of magnitude) and UNTESTED in
+  the sense of an eventual limit, which this sweep did not reach.
+
+## Non-vacuity, all four checks
+
+1. Depth-3 executor equivalence re-verified per world by `load_cell`.
+2. OPT reduced support loss in EVERY scored cell (`cells_without_optimization`
+   empty at all 24 world-depth cells).
+3. Budget axis non-vacuous (`budget_axis_vacuous` false; `K*` moved).
+4. Depth axis non-vacuous: oracle error rose monotonically 0.00472 -> 0.02812
+   across depths 3-10.
+
+## Consequences registered for E6
+
+`V_find` is NOT negligible in the way review 81 assumed, but neither is it a
+growing cost that a macro could relieve: at fixed program length, search is
+cheap and stays cheap. So a macro's search value must come from SHORTENING
+programs (fewer steps to optimize), not from taming a large space - which is a
+sharper and more falsifiable mechanism than the original `beta H s_search` term.
+Registered prediction for E6 updated accordingly: a macro of length `L`
+replacing a recurring subprogram should reduce `C_find` by approximately the
+fraction `(L-1)/D` of the per-task search time, and by nothing else.

@@ -3578,3 +3578,45 @@ licensed; the terminology contract's PROGRAM WRITING layer remains open.
 
 Full scorekeeping against every registered prediction, ours and review 80's, is
 appended to `PREDICTIONS.md`.
+
+# E5.1 complete: search cost is logarithmic in program-space size (2026-08-27)
+
+Ran `src/row/experiments/audit_e5_1_search_scaling.py` on development worlds
+0-2, depths 3-10, budgets {250, 500, 1000, 2000}, 8 held-out programs per
+(world, depth), against `E5_1_SEARCH_SCALING_PLAN.md` (frozen `8e66828`).
+Report `reports/e5_1_search_scaling.json`; cache `reports/e5_1_cache`; log
+`tools/e5_1.log`.
+
+**Registered outcome:** `D_execute = None`, `D_search = 7`, `SEARCH BINDS
+FIRST`. **Reported with its own refutation:** depth 7 is the only failing depth,
+8/9/10 all pass, and the mean anchor gap has no trend, so no horizon was located
+at or below depth 10. The registered rule's output is preserved unrewritten; the
+licensed claim is the weaker one.
+
+| depth | space | S/O (w0,w1,w2) | K2000 gaps | mean | ENUM sec | OPT sec |
+|---|---|---|---|---|---|---|
+| 3 | 1,728 | +2.13 +2.57 +1.91 | +0.01 -0.15 -0.03 | -0.055 | 0.29 | 7.7 |
+| 4 | 20,736 | +1.67 +2.30 +2.02 | -0.14 -0.10 -0.00 | -0.079 | 4.03 | 9.7 |
+| 5 | 248,832 | +1.72 +2.46 +1.70 | -0.10 -0.12 -0.58 | -0.267 | 59.07 | 12.7 |
+| 6 | 2.99e6 | +1.74 +2.43 +1.67 | +0.07 +0.13 -0.37 | -0.058 | - | 16.4 |
+| 7 | 3.58e7 | +1.86 +2.57 +1.77 | +0.26 +0.27 -0.26 | +0.091 | - | 17.1 |
+| 8 | 4.30e8 | +1.69 +2.34 +1.75 | +0.09 +0.43 -0.33 | +0.063 | - | 22.4 |
+| 9 | 5.16e9 | +1.80 +2.33 +1.78 | -0.17 +0.81 +0.09 | +0.244 | - | 26.3 |
+| 10 | 6.19e10 | +1.63 +1.69 +1.94 | -0.03 -0.04 -0.15 | -0.073 | - | 25.4 |
+
+- **The robust result:** space x3.58e7, OPT device-seconds x3.30, quality
+  unchanged. `C_find` is linear in depth, logarithmic in space size.
+- `K*` by depth: 1000, 1000, 1000, 2000, >2000, 2000, 2000, 2000.
+- Eligibility held 3/3 at every depth; oracle error rose monotonically
+  0.00472 -> 0.02812, with effective per-step growth `b_eff ~ 0.248` against the
+  sealed shallow `b = 0.581`, consistent with the sealed deceleration
+  `q = 0.785`.
+- All four registered non-vacuity checks pass, including OPT reducing support
+  loss in every one of the 24 world-depth cells.
+- Also recorded this session: a CORRECTION to E5's scratch arm, which
+  deep-copied the trained library instead of building a fresh one. Measured
+  impact ~0.23-0.44 log units on the `S` column; the E5 verdict and its `D = 6`
+  gate are unaffected (corrected margins ~1.74 against a registered >= 0.75).
+
+Full scorekeeping in `PREDICTIONS.md`. Three of our four registered predictions
+failed; the ENUM crossover prediction was confirmed exactly.
