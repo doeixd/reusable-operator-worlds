@@ -11,7 +11,7 @@ synthetic on purpose: the hidden operator library, the programs composing
 it, and a continuous reuse knob `rho` are all known to the experimenter and
 hidden from the learner, so every claim can be checked against ground truth.
 
-**Status: five sealed blocks closed.** Each was run against a protocol frozen
+**Status: six sealed blocks closed.** Each was run against a protocol frozen
 and hashed before those worlds existed. Development used seeds 0–9;
 confirmatory bands were never inspected before the corresponding freeze.
 `python tools/check_prereg.py` verifies the trail (21 frozen plans);
@@ -26,6 +26,7 @@ been resurrected.
 | **V4R** | 400–429 | When does a library *need* a lifecycle? | Confirmed negative, 7/7. Local private compression beats factorization 30/30. The one structural edit that pays is **retention**, obeying the same amortization law as birth: RETAIN iff \(H_R \cdot \bar{s} > \lambda D(A)\). Sealed crossing 18.0 returning tasks against a development prediction of 17.1. |
 | **V5** | 600–629 | Is the amortization law quantitative under causal change? | Closed. `V5_CLOSURE.md` records what held (quantitative amortization; the rate–distortion currency) **and the withdrawal of finding V5-D** after code review 55: two audits had compared functions across unaligned coordinates and one loader dropped retirement state. Corrected, the learner *does* encode the family structure — what fails is PROMOTE's extraction of it. |
 | **H39** | 700–729 | Are useful abstractions *made* during learning, or *mined* afterwards? | Confirmed, 5/5 estimands. An abstraction parameterized in the basis — \(P(\alpha)\), argument-plus-patch — makes an unseen family member cheap to acquire online (E1 0.886, CI [0.717, 1.054]; E3 −1,545 nats, CI [−1,649, −1,435]; E4 0.815, CI [0.765, 0.866]). |
+| **Export** | 800–829 | Do the learned objects behave as an exportable, composable program language? | Confirmed on every clause. A frozen vocabulary executes unseen programs (`G_export` 1.005); composes on unseen triples, unseen adjacent pairs and in **positions its operators never occupied** (2.41 / 2.46 / 2.41 log units over scratch); stays executable at unseen program lengths including a fourth execution position (2.29); and each task's solution *is* the discrete sequence, bitwise in 30/30 worlds, 14–15× cheaper than private coding and amortizing after **4.0 tasks**. Symbol names are arbitrary (a consistent library+route permutation is bitwise identical) while wrong codes at identical bit cost collapse by 2.2–2.5. |
 
 The original V4 premise — that successful abstraction birth implies a
 maintenance problem — failed in development and is preserved unrevised in
@@ -82,7 +83,8 @@ hypothesis set and not the search.
   all. Licensed conclusion, deliberately narrow: the co-formation frontier, if
   it exists, lies deeper than tested.
 
-**Next branch — export.** Everything confirmed so far is about ECONOMICS. It
+**The export branch is now banked (seeds 800–829).** Everything confirmed
+*before* it was about ECONOMICS. It
 does not yet show that the learner acquired a computational *language*, and the
 project now says so explicitly: `EXPORT_BRANCH_PROGRAM.md` freezes a decision
 tree (E0-E8) around one criterion — *synthesis starts when a frozen learned

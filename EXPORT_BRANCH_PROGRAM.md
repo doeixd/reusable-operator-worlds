@@ -455,3 +455,20 @@ three-way split becomes load-bearing exactly when a residual-bearing substrate
 enters the branch — which is E9's export-constrained formation, since that will
 be built on the `pslot` family. Registered consequence: E9's plan inherits this
 amendment in full, and its export endpoint must be E1-P.
+
+
+# STATUS (2026-08-27): CONFIRMED ON SEEDS 800-829
+
+The branch's run order is complete through Phase 4's first half, and the claim is
+banked. `EXPORT_CONFIRMATION_PLAN.md` was frozen at `4b1f8cd` before any world in
+the band existed; the verdict was read once from its table and every clause
+confirmed (`reports/export_confirmation.json`):
+
+    PROGRAM / EXPORT / COMPOSITION / LENGTH-CLOSED COMPOSITION /
+    FULL PROGRAM-LANGUAGE BLOCK / DRIFT MECHANISM   - all CONFIRMED, n = 30
+
+Rungs closed: E0 (Phase 0 audits), E1 + E1-R (export, and its dependence on
+recurrence), E2 (composition, including the position-novel stratum), E8 (length
+closure), E3 (program representation), and the sealed block. Rungs open: E5 (the
+program recognizer / synthesizer) and E6 (primitive invention), both now
+unblocked. The terminology contract still forbids the word SYNTHESIS until E5.

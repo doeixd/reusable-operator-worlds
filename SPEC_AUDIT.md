@@ -474,3 +474,36 @@ so functional identity is weakly determined even where export and composition
 succeed; every claim in this branch is phrased as substitutability and use, never
 as recovery. `D*` accounting for the program variable has not been run (that is
 E3) and no depth beyond 3 has been tested (E8).
+
+
+# Sealed export-confirmation audit (2026-08-27)
+
+Scope: `score_export_confirmation.py` and `tools/run_export_confirmation.py`, the
+only new code between E3 and the sealed block.
+
+- The scorer was dry-run against DEVELOPMENT artifacts before being pointed at the
+  band, and caught two defects that would each have corrupted it. (1) WORLD
+  MISMATCH: `World.generate` produces the same 64 opaque task IDs from the same
+  seed but different programs (63/64 differ), so reconstructing the world that way
+  paired a support-split model's routes with another world's targets; the symptom
+  looked like a scientific failure of C1b/C1c rather than a bug. Fixed to build
+  through `generate_support_split_world`, with a FATAL assertion that the
+  reconstructed programs equal the recorded split. (2) PROCESS-DEPENDENT SEED: the
+  held-out sampler derived a `SeedSequence` component from Python's built-in
+  `hash()`, which is randomized per process; replaced with a sha256-derived
+  integer and verified identical across processes.
+- Structural assertions are fatal, not advisory: held-out programs absent from
+  training, H2's unseen adjacent pair, H3's withheld placement, split coverage and
+  balance, `D_train = 3` with `D_test in {2, 4}`, the variable-depth executor
+  bitwise-identical at depth 3, non-saturated behavioural rates, and every
+  claim-bearing arm adapting by more than 1%.
+- Scoring reuses the E1/E2/E3/E8 instruments unchanged (`adapt_cell`,
+  `oracle_cell`, `behavioural_rate`, `quantize_operator`, `predict_with_route`),
+  so the sealed block and the development rungs are measured by the same code.
+- Cells are cached under a protocol fingerprint; the block survived a harness
+  crash mid-scoring without losing work, because the scorer was launched detached
+  and every completed cell was already on disk.
+
+Outstanding, unchanged: the object-to-primitive assignment margin remains small
+(0.001-0.019), so every claim is phrased as substitutability and use rather than
+recovery; SYNTHESIS is unclaimed pending E5.

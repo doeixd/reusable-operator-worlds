@@ -1195,7 +1195,24 @@ programs using familiar placements - oracle error 0.0031-0.0040 against
 0.0029-0.0035, with margins over a from-scratch learner of 2.13-2.67 against
 2.25-2.69 - and the withheld set included the final program position, where a
 distributional penalty would have been largest. A learned operator therefore
-retains its semantics in a position it never occupied. Two details qualify what
+retains its semantics in a position it never occupied. The whole pattern was then banked
+in a sixth sealed block of thirty untouched worlds, against a protocol frozen and
+hashed before any of them existed, with the components registered independently so
+that a mechanistic miss could not erase a behavioural result. Every clause
+confirmed: each task's solution is literally its three-integer program, bitwise, in
+thirty of thirty worlds; that program costs 13.75 bits against a vocabulary whose
+description amortizes after 4.02 tasks and which is 14-15x cheaper than coding each
+task privately; a consistent relabelling of library and program leaves behaviour
+bitwise unchanged while wrong programs of identical length collapse by 2.2-2.5 log
+units; the frozen vocabulary executes programs it never trained on, composes on
+unseen triples, unseen adjacent pairs and unseen operator positions, and remains
+executable one call beyond the horizon it was trained at. Two features of the
+replication are worth separating. The behavioural margins shrank slightly, as one
+expects. The description-length quantities did not: across thirty untouched worlds
+the two-part advantage spans 0.10 log units and the amortization point sits at
+4.02 with a range of 0.43, essentially on top of three development worlds - a
+description-length statistic of a substrate appears far more stable across worlds
+than any performance margin measured on it. Two details qualify what
 that means. Inferring the program from support examples BEATS executing the
 teacher's own program through the functionally matched objects, in every world
 of that stratum; and the matching itself is barely determined, several
