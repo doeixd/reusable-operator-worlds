@@ -1388,3 +1388,31 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   overestimated depths 7-10 badly (measured `b_eff ~ 0.248`). Both numbers were
   always consistent; we extrapolated with the one that was easier to compound. A
   fit is only trustworthy across the region it covers.
+
+
+- A HORIZON REQUIRES PERSISTENCE OR A FITTED TREND (review 82, after E5.1).
+  `min{D : X_D > tau}` cannot distinguish a threshold crossing from one noisy
+  excursion, and always returns a value, so it manufactures a boundary from
+  noise. Define a horizon as `min{D : failure persists for m subsequent depths}`
+  or fit an isotonic/monotone curve and locate its threshold with uncertainty.
+  A bare first crossing is DESCRIPTIVE and may not be called a horizon.
+
+- AN ARM IS A CONSTRUCTION, NOT A NAME, AND THE HARNESS NOW CHECKS IT
+  (review 82, implemented). `src/row/arm_provenance.py` records arm name, init
+  source (`fresh` / `trained` / `copy:<origin>`), checkpoint hash, seed,
+  trainable and frozen parameter counts, optimizer, lr, steps and data seen;
+  `assert_arm` fails closed when an arm is not the registered construction, and
+  `arms_differ` compares two same-named arms. `tests/test_arm_provenance.py`
+  encodes the E5 bug itself as a regression test. New scorers should describe
+  every arm and assert the fields their plan registered, instead of trusting
+  that two call sites spelling `S` mean the same thing.
+
+- CHECK A REGISTERED THRESHOLD'S ARITHMETIC AT DESIGN TIME, NOT ONLY ITS
+  BASELINE (E6 freeze). The natural macro accounting -- a macro costs its own
+  definition -- gives `H* = L/(L-1)`, i.e. 1.5 uses at `L = 3`: a threshold
+  nearly every pattern clears, which would have made the whole rung vacuous and
+  its refusal controls unable to fire. Charging the ALPHABET TAX that a new
+  symbol imposes on every program in the corpus moves `H*` to 5-14 and makes the
+  decision economic. Compute a registered threshold's value under the null
+  BEFORE freezing it; "the formula is standard" is not the same as "the number
+  it produces can discriminate".

@@ -6515,3 +6515,75 @@ sharper and more falsifiable mechanism than the original `beta H s_search` term.
 Registered prediction for E6 updated accordingly: a macro of length `L`
 replacing a recurring subprogram should reduce `C_find` by approximately the
 fraction `(L-1)/D` of the per-task search time, and by nothing else.
+
+# Review 82 (2026-08-27): E6 frozen as macro invention, and a threshold caught at design time
+
+Filed `reviews/reviewer-feedback-82.txt`, indexed. Plan `E6_MACRO_PLAN.md`.
+Both constitutional rules adopted into `AGENTS.md`; the arm-fingerprint rule is
+implemented as `src/row/arm_provenance.py` with `tests/test_arm_provenance.py`,
+whose first test is the E5 bug itself.
+
+## A registered threshold checked against its own baseline BEFORE freezing
+
+Review 82 proposes `H*_desc = D*(M) / s_desc` with `s_desc ~ (L-1) log2 K`. Under
+the natural reading - the macro costs its own definition - that gives
+
+    H* = L log2 K / ((L-1) log2 K) = L/(L-1) = 2.00, 1.50, 1.33 uses (L = 2, 3, 4)
+
+A macro would pay for itself after ONE AND A HALF USES. Essentially every
+recurring pattern clears that, the refusal controls in E6D could never fire, and
+E6A would be vacuous by construction - the exact failure this project already
+has a standing rule against (the S0 arm registered `p_reuse >= 0.5` against a
+baseline of 0.25).
+
+REGISTERED FIX, before any E6 data exists: adding a symbol raises the per-symbol
+cost of EVERY program in the corpus, so the cost is the definition PLUS an
+alphabet tax:
+
+    H* = [ L log2 K + N D log2((K+1)/K) ] / [ (L-1) log2(K+1) ]
+
+At `K = 12, D = 6, N = 64`: `H* =` 13.92 / 7.44 / 5.29 for `L =` 2 / 3 / 4. The
+naive accounting is recorded as REJECTED IN ADVANCE rather than silently
+replaced.
+
+Registered secondary predictions of the same formula, each falsifiable:
+`H*` grows with corpus size `N` (2.95, 4.45, 7.44, 13.44 at N = 16, 32, 64, 128),
+grows with depth `D` (5.45, 7.44, 9.44, 11.44 at D = 4, 6, 8, 10), and falls with
+`L`. The `N` dependence is counterintuitive and registered deliberately: a LARGER
+corpus makes a macro HARDER to justify, since every program pays the tax while
+only `H` collect the saving.
+
+## Registered before any E6 code
+
+**Ours: DESCRIPTION WITHOUT SEARCH is the modal outcome**, at roughly even odds
+against LANGUAGE GROWTH DEMONSTRATED. The description half is arithmetic and
+should work. We doubt the search half on E5.1's own numbers: `C_find` rose from
+7.7 s at `D = 3` to 25.4 s at `D = 10`, about 2.5 s per unit depth, so an
+`L = 3` macro on a `D = 6` program saves roughly 5 s - close to the cell-to-cell
+noise E5.1 measured. We predict the effect is REAL, SMALL, and possibly not
+resolvable at n = 8 tasks per cell, which is why E6B is registered with a
+factor-of-2 agreement criterion and its sample size must be set from E5.1's
+observed variance before running.
+
+We also predict E6C PASSES (E2 and E8 both found this substrate more
+context-robust than intuition predicted, and review 80 made that a standing prior
+update), and that E6D's WRONG-GROUPING control is the likeliest failure, because
+contiguous subsequences of a 6-symbol program overlap heavily and `A B` is a
+strict prefix of `A B C`.
+
+**Review 82's:** the `(L-1)/D` law is load-bearing and macro invention yields
+shorter description plus proportionally cheaper synthesis.
+
+## Scope, per the terminology contract
+
+E6 covers DEFINITIONAL macros only - a symbol whose execution expands to its
+constituents, creating no new neural object. Inventing one is LANGUAGE GROWTH,
+not PRIMITIVE INVENTION. COMPILED macros (a distilled `P_M`) are deferred to E6.2
+because a positive result there could not separate linguistic compression from
+neural distillation.
+
+One construct point registered explicitly because the gauge results make it
+non-obvious: the macro is a symbol of the LEARNER's language, defined over the
+learner's own INFERRED routes, never over teacher primitive indices. Whether a
+planted teacher subsequence survives into the inferred corpus is a MEASURED
+quantity and a non-vacuity gate, not an assumption.

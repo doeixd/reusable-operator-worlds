@@ -1,0 +1,164 @@
+E5.1 is a very good result because it corrected the SHAPE of the search problem. The clean
+conclusion is not "search binds at depth 7". The registered first-crossing statistic says
+that, but the full sweep shows that interpretation is wrong: depths 8-10 recover, depth 10
+is among the strongest cells, and the fixed-budget gap is noisy rather than monotone. The
+robust result is that the discrete program space grows by roughly 3.6e7 while optimization
+cost grows only about 3.3x, with quality remaining around oracle parity.
+
+That gives us a much better E6.
+
+## The real E5.1 law
+
+The important empirical relationship is approximately C_find(D) ~ D while
+|P(D)| = K^D. Therefore C_find ~ log |P| over the tested regime. That is much stronger and
+more defensible than "search never becomes hard". It says the learned language has a
+search geometry where gradient optimization pays primarily for PROGRAM LENGTH, not
+combinatorial program count.
+
+And that makes the macro prediction wonderfully sharp. If a macro replaces a length-L
+subsequence by one call, then D' = D - (L-1). So if the E5.1 scaling law is causal,
+
+    Delta C_find / C_find ~ (L-1)/D
+
+to first order. That is exactly the prediction I would make load-bearing in E6.
+
+## I would make E6 specifically: LANGUAGE GROWTH BY MACRO INVENTION
+
+Not generic "primitive birth". You now have learned primitives, compact programs,
+composition, length closure, search-based synthesis, and measured synthesis cost. So the
+clean next question is: WHEN SHOULD A LEARNER CREATE A NEW PROGRAM-LANGUAGE PRIMITIVE THAT
+ABBREVIATES RECURRING COMPUTATION?
+
+Let M := (P_a, P_b, ..., P_l) be a candidate macro of expansion length L. Creating it
+costs D*(M), and each future use may save description bits s_desc(M), search compute
+s_find(M), and perhaps execution error/compute s_exec(M). I would keep these SEPARATE
+CURRENCIES initially.
+
+### E6A -- Oracle macro economics
+
+This should be the first rung. Do NOT ask the learner to discover the macro yet. Provide a
+known recurring subsequence A B C, define M := A B C, then compare programs before and
+after replacing every occurrence.
+
+If one use replaces L symbols with one, s_desc ~ (L-1) log2 K modulo macro-index/length
+coding. Thus H*_desc = D*(M) / s_desc. This is the direct descendant of V5:
+H s_desc > D*(M), and should give you a prospective crossing. Vary future recurrence H,
+macro length L, macro definition cost, and number of distinct contexts. Predict the
+crossover BEFORE running the band.
+
+### E6B -- Search savings
+
+Now test the E5.1 law. For a program of original length D, a length-L macro produces
+D' = D - L + 1. Registered prediction:
+
+    C_find(D') ~ C_find(D) * (D - L + 1)/D
+    s_find     ~ C_find(D) * (L-1)/D
+
+This is excellent because it does NOT involve an arbitrary beta. You can ask two
+independent questions: did description cost fall by the predicted amount, and did search
+compute fall by the predicted amount? Only later decide how to exchange seconds for bits.
+That avoids allowing an arbitrary scalarization to manufacture a macro win.
+
+### E6C -- Does the macro actually improve the language?
+
+This is the crucial prospective test. Form the language before future tasks, create M,
+then evaluate novel programs where the same subcomputation appears in new prefixes, new
+suffixes, new neighboring primitives, perhaps novel positions. You want M to remain
+SUBSTITUTABLE for its expansion in unseen contexts. This is basically E2 for macros. If
+M == A B C only works in the exact contexts where it was created, it is a cached pipeline,
+not a reusable abstraction.
+
+### E6D -- Refusal controls
+
+This is where your accumulated methodological rules matter enormously. Give the learner
+candidate regularities that SHOULD NOT become macros.
+
+Too little recurrence: H < H*. Must refuse.
+
+Accidental pattern: a subsequence happened to repeat in observed tasks but does not recur
+prospectively. Must refuse if creation cost is not recovered.
+
+Wrong grouping: true repeated pattern A B C versus plausible competitors A B, B C, A C,
+B A C. "Discovers true macro" must mean better than plausible wrong macros, not merely
+better than no macro.
+
+Sham alias: create a new symbol M but do not shorten anything or supply reusable
+semantics. This isolates whether savings come from actual structural abbreviation.
+
+### E6E -- Learner discovers the macro
+
+Only after E6A-D establish that there is an economic opportunity. Now provide the solved
+program corpus and ask the learner to propose M := N where N is a recurring
+subsequence. A very simple first search might enumerate contiguous subsequences and score
+Delta D* plus measured predicted Delta C_find. No neural meta-learner necessary yet. The
+strong result would be: THE LEARNER INVENTS THE MACRO EXACTLY WHEN PROSPECTIVE SAVINGS
+EXCEED CREATION COST. That would be the first genuine LANGUAGE-GROWTH result.
+
+## Then there is a second, more ambitious E6
+
+E5.1 also changed how I think about execution. Your original shallow extrapolation with
+b = 0.581 overpredicted deep error because q = 0.785 < 1 meant degradation decelerates. So
+execution is not binding by depth 10. But macros could still eventually improve execution
+fidelity if they are COMPILED, rather than merely textual aliases.
+
+Definitional macro: M == A B C and execution expands it back to A -> B -> C. This saves
+description and search dimension, but not execution calls.
+
+Compiled macro: train/distil a single reusable operator P_M ~ P_C o P_B o P_A. Now one
+operation replaces three. Potential savings in Delta D, Delta C_find, Delta C_execute and
+Delta e_execute. That is a much more profound abstraction. But I would make it E6.2, after
+definitional macros. Otherwise a positive result cannot tell you whether macro invention
+paid because of linguistic compression or neural distillation.
+
+## The first-crossing failure should become constitutional
+
+The issue is exactly what you wrote: if X_D is noisy, then D* = min{D : X_D > tau} almost
+always manufactures some "horizon". It cannot distinguish a monotone threshold crossing
+from one noisy excursion. So I would add:
+
+    A HORIZON REQUIRES PERSISTENCE OR A FITTED MONOTONE TREND. A FIRST CROSSING ALONE IS
+    DESCRIPTIVE AND CANNOT ESTABLISH A BOUNDARY.
+
+For future work, define a horizon more like D_search = min{D : failure persists for m
+subsequent depths}, or fit a monotonic/isotonic curve and locate its threshold with
+uncertainty. E5.1 should retain its registered D_search = 7, but the scientific
+interpretation is correctly "registered statistic fired; no stable horizon observed".
+
+## And the scratch-arm bug gives another constitutional rule
+
+I would make this automatic in the harness. Every arm should emit a fingerprint:
+
+    arm_name
+    init_source
+    checkpoint_hash
+    fresh_seed
+    trainable_parameters
+    frozen_parameters
+    optimizer
+    steps
+    data_seen
+
+Then registered experiments assert those. Because S != S if one is fresh(theta) and the
+other is finetune(theta_trained). The fact that the E5 correction left its verdict
+unchanged is fortunate; the framework should prevent needing fortune again.
+
+## The bigger picture
+
+The trajectory has become surprisingly coherent: learn reusable operators -> write tasks
+as tiny programs -> compose them systematically -> search them at cost roughly linear in
+program length. And now the natural next step is INVENT NEW VOCABULARY THAT SHORTENS
+PROGRAMS, which should produce shorter description plus proportionally cheaper synthesis.
+
+That is much cleaner than the original vague idea that "macros might make search over an
+exponential space tractable". The exponential space is already tractable through the
+continuous relaxation. The actual hypothesis now is more precise:
+
+    ABSTRACTION IMPROVES SYNTHESIS PRIMARILY BY REDUCING EFFECTIVE PROGRAM LENGTH, NOT BY
+    REDUCING THE NOMINAL CARDINALITY OF THE SEARCH SPACE.
+
+That is the version of E6 I would freeze.
+
+And if macro invention works, THEN I think the interaction-net / editable graph
+representation becomes especially attractive, because the next question becomes how the
+language can do this not only for contiguous linear subsequences, but for branches,
+repeated structures, loops, and arbitrary reusable subgraphs.

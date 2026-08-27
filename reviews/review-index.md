@@ -3066,3 +3066,41 @@ when search does become expensive, distil it from OPT as a teacher, trained
 toward functional quality or a posterior over low-loss programs rather than one
 exact route, because the gauge results warn that symbolic identity is
 underdetermined.
+
+### [reviewer-feedback-82.txt](reviewer-feedback-82.txt)
+
+Read after E5.1. Accepts that the registered first-crossing statistic fired
+without locating a horizon, and names the robust result: `C_find ~ D` while
+`|P(D)| = K^D`, hence `C_find ~ log |P|` over the tested regime - gradient
+optimization pays for PROGRAM LENGTH, not combinatorial program count. Turns
+that into the load-bearing E6 prediction: a length-`L` macro shortens a program
+to `D' = D - L + 1`, so `Delta C_find / C_find ~ (L-1)/D` with no free
+coefficient.
+
+Redirects E6 to LANGUAGE GROWTH BY MACRO INVENTION over five rungs: E6A oracle
+macro economics (candidate given, crossing `H*` predicted before running), E6B
+search savings testing the E5.1 law causally, E6C prospective substitutability
+in unseen contexts (E2 for macros - a macro that works only where it was created
+is a cached pipeline), E6D four refusal controls (too little recurrence,
+accidental pattern, WRONG GROUPING against `A B`/`B C`/`A C`/`B A C`, and a sham
+alias that shortens nothing), and E6E learner discovery by enumerating its own
+corpus. Keeps `V_desc`, `V_find`, `V_exec` as separate currencies so no
+arbitrary `beta` can manufacture a win, and defers COMPILED macros (a distilled
+`P_M`) to E6.2, since a positive result there could not distinguish linguistic
+compression from neural distillation.
+
+Proposes two constitutional rules, both adopted. A HORIZON REQUIRES PERSISTENCE
+OR A FITTED MONOTONE TREND - a first crossing alone cannot distinguish a
+threshold from one noisy excursion, so future horizons should be defined as
+`min{D : failure persists for m subsequent depths}` or by an isotonic fit with
+uncertainty. And every arm should emit a FINGERPRINT (name, init source,
+checkpoint hash, seed, trainable/frozen counts, optimizer, steps, data seen)
+that registered experiments assert, because `S != S` when one is `fresh(theta)`
+and the other `finetune(theta_trained)`; E5's correction leaving its verdict
+intact was fortune, and the framework should not need fortune again.
+
+States the sharpened hypothesis E6 exists to test: ABSTRACTION IMPROVES SYNTHESIS
+PRIMARILY BY REDUCING EFFECTIVE PROGRAM LENGTH, NOT BY REDUCING THE NOMINAL
+CARDINALITY OF THE SEARCH SPACE. Places the interaction-net / editable graph
+substrate after macro invention succeeds, where the question becomes branches,
+loops and arbitrary reusable subgraphs rather than contiguous subsequences.
