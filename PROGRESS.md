@@ -3525,3 +3525,15 @@ strata with H3 the flagship; depth-4 length closure 2.286; drift `b` 0.581 and
 the second time (a standing calibration error now noted), and our refusal to
 register review 79's `q ~ 1` vindicated - sealed `q` of 0.785 would have missed
 that registration. The export branch is banked; E5 and E6 are unblocked.
+
+# 2026-08-27 - REVIEW 80 FILED; E5 SYNTHESIZER PLAN DRAFTED
+
+Review 80 filed and indexed: the project changes phase, the program-language
+premise is banked, and SYNTHESIS stays unlicensed until an efficient learned
+WRITER is shown. Its two methodological lessons are now standing rules in
+`AGENTS.md`. Drafted `E5_SYNTHESIZER_PLAN.md` around the three costs, with
+exhaustive enumeration registered as a FIRST-CLASS baseline (1,728 programs at
+slots=12, D=3 is cheaper than 2,000 gradient steps, so the recognizer's real
+opponent is ENUM, not OPT) and with the modal outcome registered in advance as
+QUALITY WITHOUT AMORTIZATION - together with its consequence, that the correct
+successor would then be a larger program space rather than a better recognizer.

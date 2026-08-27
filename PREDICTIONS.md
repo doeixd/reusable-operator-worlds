@@ -6169,3 +6169,47 @@ recorded split. The frozen plan was not changed.
 **Licensing.** The export branch is banked. E5 (the program recognizer /
 synthesizer) is now unblocked, as is E6. No development verdict is altered by
 this block; it confirms them.
+
+# E5 REGISTRATION (2026-08-27, review 80): CAN THE LEARNER WRITE THE PROGRAMS?
+
+Plan `E5_SYNTHESIZER_PLAN.md`, frozen before any code. Development worlds 0-2;
+the sealed band 800-829 is spent and is NOT reused as development data.
+
+The sealed block closed `C_express`. E5 measures `C_find` and `C_amortize`:
+can learned inference recover FUNCTIONALLY GOOD programs at substantially less
+search or sample cost than optimization? Correctness is functional throughout -
+E0.1's assignment margins and E2/E8's `R < O` cells established that the learned
+vocabulary uses a different gauge, so exact-route recovery is a diagnostic and
+gates nothing.
+
+Arms: **O** oracle, **ENUM** exhaustive search over all `slots^D` programs,
+**OPT** the sealed route optimization, **REC** a deep-sets recognizer
+`q_phi(p | D_support)` with top-`k` re-ranking (`k in {1, 5, 25}`), **S**
+scratch. The recognizer trains only on a world's 64 training programs against
+each task's OWN argmax route (its program under E3's syntax sufficiency), never
+a teacher label, with the library frozen.
+
+Registered outcomes: SYNTHESIS DEMONSTRATED requires BOTH an oracle gap <= 0.15
+AND `C_find(REC) <= 0.1 x C_find(best of ENUM, OPT)` in executions AND
+device-seconds; otherwise AMORTIZATION WITHOUT QUALITY, QUALITY WITHOUT
+AMORTIZATION, or NO SYNTHESIS. The word SYNTHESIS is licensed by the first only.
+
+Registered predictions. Ours: **`ENUM` beats `OPT`** - 1,728 forward executions
+against 2,000 forward+backward passes - so the meaningful comparison is `REC`
+versus `ENUM`, registered now rather than after seeing it. **Modal outcome:
+QUALITY WITHOUT AMORTIZATION.** A recognizer should reach the oracle gap easily
+(the target is three integers and E3 showed the behaviour-to-program mapping is
+well determined), but beating 1,728 cheap executions by 10x once training is
+charged is a different matter. Registered consequence if that is what happens:
+at `D = 3, slots = 12` this domain is too small for amortized synthesis to pay,
+and the correct successor is a DEEPER or WIDER program space where enumeration
+is infeasible - not a better recognizer.
+
+Review 80's: expects `C_find(REC) << C_find(OPT)` with `L_REC ~ L_O`, licensing
+learned program synthesis.
+
+Also registered from review 80, as standing rules now in `AGENTS.md`: do not
+infer a binding generalization barrier from unseen internal-state distributions;
+and register the region the data supports rather than the story that sounds
+clean. E6's successor law is recorded as `H s_desc + beta H s_search > D*(A)` -
+a primitive may now pay through description AND search savings.

@@ -1,0 +1,107 @@
+This is the point where the project genuinely changes phase.
+
+You now have a BANKED, sealed result that the substrate learns a compact compositional
+program language - not merely reusable features or a convenient factorization.
+
+The core chain is now
+
+    recurrence -> shared vocabulary -> compact discrete programs -> unseen composition
+    -> position invariance -> length closure
+
+and every link has survived the confirmatory band.
+
+The E3 numbers are particularly strong: Q_D = 2.714, N* = 4.024, with remarkably little
+cross-world variation. The "amortizes after about four tasks" result is now more than a
+development curiosity - it looks like a genuine property of this substrate under the
+registered coding scheme.
+
+The causal semantics result also matters a lot: rename symbols consistently => same
+computation, while same bit cost + wrong syntax => collapse. That is exactly the right
+notion of symbolicity here: LABELS ARE ARBITRARY, RELATIONS ARE NOT.
+
+And the q episode is a good methodological lesson. The correct move was not "register
+the story that sounds theoretically clean" but "register the quantitative region
+actually supported by development". The sealed result landing at 0.785 is a nice
+demonstration that mechanistic intuition can get the direction right while
+miscalibrating the magnitude.
+
+The C4 calibration miss is equally useful. You now have repeated evidence that this
+substrate tolerates compositional distribution shift better than our intuitions predict.
+That should become a standing prior update: DO NOT INFER A BINDING GENERALIZATION
+BARRIER MERELY FROM UNSEEN INTERNAL-STATE DISTRIBUTIONS. Measure where it actually
+binds.
+
+## What is licensed now
+
+I think the clean wording is:
+
+> At exact reuse, lifetime learning produced a compact learned program language whose
+> frozen operators executed structurally novel programs, including unseen
+> operator-position assignments and unseen program lengths. Task solutions were
+> represented entirely by short discrete programs over the learned vocabulary, and the
+> syntax-semantics mapping was causal up to symbol renaming.
+
+That is a strong claim, but the sealed block earns it.
+
+What remains unlicensed is still PROGRAM SYNTHESIS, because we have shown the programs
+exist and can be inferred by the current route-optimization machinery, but not yet that
+the system has learned an efficient reusable WRITER: D_support -> p.
+
+So E5 is now the right next experiment.
+
+## E5 should be extremely clean now
+
+I would structure it around three costs: C_express, C_find, C_amortize. We have
+essentially closed C_express: the language contains good programs.
+
+Now compare: (1) oracle program - lower bound on achievable execution loss;
+(2) optimization/search over programs - current non-amortized inference; (3) a learned
+recognizer q_phi(p | D_support); (4) scratch / non-program baseline.
+
+The primary question should be: CAN LEARNED INFERENCE RECOVER FUNCTIONALLY GOOD PROGRAMS
+WITH SUBSTANTIALLY LESS SEARCH/SAMPLE COST? - not necessarily "does it recover the
+teacher route exactly?", because E0/E2 already taught us the learned vocabulary may use
+a different gauge/basis than the teacher.
+
+So program accuracy should be secondary to: query loss, oracle gap, examples required,
+number of candidate programs evaluated, and wall-clock/search compute if reliable.
+
+A particularly strong E5 result would be C_find(recognizer) << C_find(optimization)
+while preserving L_recognizer ~ L_oracle. That would license LEARNED PROGRAM SYNTHESIS
+in this domain.
+
+## Then E6
+
+Once E5 passes, E6 becomes much more interesting than it was originally, because the
+economics can now be priced in a real program language. The question becomes: should the
+system create a new primitive because doing so makes future programs cheaper to WRITE or
+to FIND? The law becomes something like
+
+    H s_desc + beta H s_search > D*(A)
+
+which is richer than the old V5 retention law, because now a primitive can pay for
+itself through description savings AND through synthesis/search savings. This is
+probably where the old MDL work and the new program-language work really merge.
+
+## And I would now put the interaction-net idea after E5
+
+Not because it became less interesting - the opposite. Now we have a concrete thing to
+compare against. The current substrate has demonstrated compact syntax, stable learned
+operations, composition and length closure. So an interaction-net / graph-rewrite
+substrate does not need to prove "programs are possible". It can be tested on the things
+the current representation does NOT yet naturally expose: branching, recursion, loops,
+macros, structural rewriting, language growth. That makes the comparison much cleaner.
+
+I would not replace the current substrate before E5. First prove that this learned
+language can be WRITTEN by a learned synthesizer. Then the longer arc becomes:
+
+    E5 synthesize programs -> E6 invent economical primitives -> typed graph/rewrite
+    substrate -> branching -> iteration/recursion -> macro extraction -> language
+    refactoring -> learned search over a self-improving language
+
+The difference now is that this is no longer a speculative architecture roadmap resting
+on "maybe neural computations can be treated as reusable program objects". That premise
+is now EMPIRICALLY BANKED for this substrate.
+
+The next scientific question is simply: CAN THE LEARNER EFFICIENTLY WRITE THE PROGRAMS
+THAT WE NOW KNOW EXIST?

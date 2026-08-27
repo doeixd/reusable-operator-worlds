@@ -2999,3 +2999,28 @@ HIERARCHICAL verdict so an auxiliary drift prediction cannot invalidate a direct
 30-world composition result; and fatal structural assertions. Notes the main
 scientific risk has changed: no longer "maybe there is nothing programmatic
 here" but "does this entire pattern survive thirty untouched worlds".
+
+### [reviewer-feedback-80.txt](reviewer-feedback-80.txt)
+On the sealed export block. Reads the project as changing PHASE: the chain
+recurrence -> shared vocabulary -> compact discrete programs -> unseen
+composition -> position invariance -> length closure has now survived a
+confirmatory band, so the premise that neural computations can be treated as
+reusable program objects is EMPIRICALLY BANKED for this substrate rather than
+speculative. Singles out the causal-semantics result as the right notion of
+symbolicity (labels arbitrary, relations not) and the `q` episode as the
+methodological lesson: register the quantitative region development supports,
+not the story that sounds theoretically clean. Turns the repeated C4 miss into a
+STANDING PRIOR UPDATE - do not infer a binding generalization barrier merely
+from unseen internal-state distributions; measure where it binds. Supplies the
+licensed wording, and holds SYNTHESIS unlicensed because the programs are known
+to exist and be inferable by route optimization, but no efficient reusable
+WRITER has been shown. Specifies E5 around three costs (C_express closed,
+C_find, C_amortize) with four arms (oracle, optimization, learned recognizer,
+scratch), insisting the primary question is functional recovery at lower
+search/sample cost rather than exact route recovery, since the learned
+vocabulary uses a different gauge. Then E6, whose law becomes
+`H s_desc + beta H s_search > D*(A)` - a primitive can now pay through
+description AND search savings, which is where the MDL work and the
+program-language work merge. Defers the interaction-net / graph-rewrite
+substrate until after E5, where it would be tested on branching, recursion,
+loops, macros and language growth rather than on whether programs are possible.

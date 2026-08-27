@@ -1308,3 +1308,19 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   naming are different properties, and only the first is required for a
   vocabulary to compose. Expect many equivalent vocabularies for one
   computational domain, and never let a matching statistic gate a use claim.
+- DO NOT INFER A BINDING GENERALIZATION BARRIER FROM UNSEEN INTERNAL-STATE
+  DISTRIBUTIONS (review 80, after the sealed export block). Twice we predicted
+  that composition would fail at depth 4 because each operator had been fitted
+  on states at most two compositions deep - at E8 and again at the sealed C4 -
+  and both times the effect was real, visible in the per-step trace, and an
+  order of magnitude too small to bind. Predicting the SHAPE of a degradation
+  and predicting whether it BINDS are different skills; only the second decides
+  a verdict. Measure where it binds.
+- REGISTER THE REGION THE DATA SUPPORTS, NOT THE STORY THAT SOUNDS CLEAN
+  (review 80, from the `q` episode). Review 79 proposed preregistering the drift
+  continuation ratio at `q ~ 1` on the theoretically tidy grounds that an unseen
+  call behaves like an ordinary one. Development said 0.681 because the step
+  ratios decelerate, so [0.45, 0.95] was registered instead; the sealed block
+  returned 0.785. A `q ~ 1` registration would have MISSED a clause that is
+  true. Mechanistic intuition can get the direction right and the magnitude
+  wrong, and only the interval decides.
