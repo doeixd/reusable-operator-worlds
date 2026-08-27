@@ -6646,3 +6646,79 @@ uses, measured per condition from the inferred corpus, and a condition whose
 `H_eff` falls below the crossing is reported as below-threshold rather than as a
 refusal. Reading the sweep in planted uses would have overstated every point by
 about 2.8x and could have manufactured a spurious CREATE decision.
+
+# E6A at the primary depth (2026-08-27): PAYS 3/3, with the interpretation still open
+
+Plan `E6_MACRO_PLAN.md` frozen at `00726f0` (Amendment 1). Development worlds
+0-2, `D = 6`, corpus 128 with a 50% plant, routes inferred by the sealed/E5.1
+protocol. Report `reports/e6a_macro_economics.json`.
+
+## Registered primary (Amendment 1): realized sufficiency `H_eff >= H*`
+
+At the primary cell (`D = 6`, `L = 3`, `N = 64`): **PAYS in 3 of 3 worlds.**
+
+    world  macro       H_eff   H*     ratio   degenerate?
+      0    (11,6,4)      22    7.44    3.0x   clean
+      1    (8,8,5)       54    7.44    7.3x   semi (repeated slot)
+      2    (8,9,6)       26    7.44    3.5x   clean
+
+The implementation check (observed crossing == `H*`) returned 3/3 at ratios
+1.01-1.10, which per Amendment 1 evidences correct implementation and NOTHING
+ELSE; it is an algebraic identity and is not cited as support.
+
+## The empirical content Amendment 1 bought: macro length has an optimum
+
+`H*` FALLS with `L` (11.28 at `L = 3`, 8.91 at `L = 4`), so the coding scheme
+says longer macros are easier to justify. Realized uses move the other way and
+move harder:
+
+    L      w0 uses   w1 uses   w2 uses
+    2         35        97        39
+    3         23        56        26
+    4          6        14         6
+
+At `L = 4` the crossing is never reached in worlds 0 and 2 (`bracketed: false`).
+Extending a macro by one symbol makes it cheaper per the formula and rarer in
+fact, and RARITY WINS. This is the V5.1 rule -- measure what an intervention did
+to COST and to UTILITY separately -- reappearing as a property of the language,
+and it is invisible to the identity estimand the plan originally registered.
+
+## The alphabet tax's distinctive prediction is CONFIRMED empirically
+
+World 2 at `L = 4`: the SAME macro with the SAME 6 uses PAYS at `N = 64`
+(`H* = 5.29`) and DOES NOT PAY at `N = 128` (`H* = 9.34`). A larger corpus makes
+a macro harder to justify, because every program pays the per-symbol tax while
+only `H` of them collect the saving. This counterintuitive `N`-dependence was
+registered before any data existed and is what distinguishes the alphabet-tax
+accounting from the naive `H* = L/(L-1)` rejected at design time.
+
+## The caveat that governs the interpretation
+
+**Several of the winning macros abbreviate SLOT REPETITION, not recurring
+computation.** At `L = 2` the top gram is a constant in worlds 0 and 1
+((11,11), (8,8)); at `L = 4` world 1's is (8,8,8,8); and world 1's `L = 3`
+winner (8,8,5) is half repetition. Only worlds 0 and 2 have clean non-degenerate
+`L = 3` macros. World 1 also had the lowest route diversity in step 0 (3.78
+distinct slots per 6-position route), so its macros are plausibly an artifact of
+what route inference likes to emit rather than structure in the world.
+
+The BITS ARE REAL under the registered code either way. What is unresolved is
+whether the compressed thing is a recurring computation or a habit of the
+inference procedure, and E6A cannot separate them. This makes E6C
+(substitutability in unseen contexts) and E6D's WRONG-GROUPING and SHAM controls
+load-bearing rather than confirmatory: a macro that merely abbreviates repetition
+should fail E6C and should not beat a sham alias by more than its symbol count
+explains.
+
+## Scorekeeping against our registered predictions
+
+- **"PAYS at the primary cell": CORRECT**, 3/3.
+- **"marginally, clearing by roughly 2-4x": PARTIALLY.** Worlds 0 and 2 cleared
+  by 3.0x and 3.5x as predicted; world 1 cleared by 7.3x, inflated by its
+  degenerate macro.
+- **"FAILS at `N = 128` where `H* = 13.44`": WRONG for `L = 3`.** All three
+  worlds pay there (23, 56, 26 uses). It was RIGHT in the place we did not
+  name -- `L = 4`, where world 2 crosses from PAYS to no between `N = 64` and
+  `N = 128`.
+- **"the `L = 2` macro is frequently a CONSTANT gram": CORRECT**, in 2 of 3
+  worlds, and reported as degenerate rather than as a macro.

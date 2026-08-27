@@ -138,6 +138,24 @@ def infer_corpus(cell, world: int, depth: int, teacher_library) -> dict:
     return {"motif": list(motif), "routes": routes, "carries": carries}
 
 
+def realized_sufficiency(routes, macro, slots: int, depth: int) -> dict:
+    """E6 Amendment 1's primary: `H_eff >= H*` in the learner's ACTUAL corpus.
+
+    `H_eff` is the number of macro uses the inferred routes really contain. This
+    is empirical -- step 0 measured that only ~36% of planted teacher recurrences
+    survive as the same learner gram, so a corpus planted well above the crossing
+    can land below it.
+    """
+    n = len(routes)
+    uses = sum(substitute(r, macro)[1] for r in routes)
+    bearing = sum(1 for r in routes if substitute(r, macro)[1] > 0)
+    star = predicted_crossing(len(macro), depth, n, slots)
+    lengths = code_lengths(routes, macro, slots)
+    return {"n": n, "H_eff": uses, "bearing_routes": bearing,
+            "H_star": star, "ratio": uses / star if star > 0 else None,
+            "pays": bool(uses >= star), "net_saving_bits": lengths["saving"]}
+
+
 def crossing_at_n(routes_with_uses, macro, slots, depth, n_target: int) -> dict:
     """The observed/predicted crossing at a FIXED corpus size `n_target`.
 
@@ -243,6 +261,12 @@ def main() -> None:
                     "by_corpus_size": {
                         str(n): crossing_at_n(with_uses, macro, slots, depth, n)
                         for n in CORPUS_SIZES},
+                    # E6 Amendment 1: the EMPIRICAL estimand. Does the learner's
+                    # realized corpus contain enough macro uses to pay for the
+                    # macro? Unlike the crossing comparison, this CAN fail.
+                    "realized_sufficiency": {
+                        str(n): realized_sufficiency(routes[:n], macro, slots, depth)
+                        for n in CORPUS_SIZES if n <= len(routes)},
                 }
                 r = entry["by_macro_len"][str(macro_len)]
                 print(f"[d{depth} w{world} L{macro_len}] macro {macro}"
@@ -251,6 +275,11 @@ def main() -> None:
                       f"H_obs {r['observed_crossing_uses']} vs H* {pred:.2f}"
                       + (f" (x{ratio:.2f})" if ratio else "")
                       + f" | bracketed {bracketed}", flush=True)
+                rs = r["realized_sufficiency"]
+                print("        realized: " + "  ".join(
+                    f"N{n}:H_eff {rs[str(n)]['H_eff']}/H* {rs[str(n)]['H_star']:.1f} "
+                    f"{'PAYS' if rs[str(n)]['pays'] else 'no'}"
+                    for n in CORPUS_SIZES if str(n) in rs), flush=True)
                 ns = r["by_corpus_size"]
                 print("        N sweep: " + "  ".join(
                     (f"N{n}:obs {ns[str(n)]['observed_crossing_uses']}"
@@ -265,14 +294,29 @@ def main() -> None:
     # in >= 2 of 3 worlds, at the primary cell?
     key = str(PRIMARY_DEPTH)
     if key in out["depths"]:
-        flags = [out["depths"][key]["worlds"][str(w)]["by_macro_len"][str(PRIMARY_L)]
-                 ["within_factor_2"] for w in WORLDS]
-        out["primary"] = {"depth": PRIMARY_DEPTH, "macro_len": PRIMARY_L,
-                          "worlds_within_factor_2": sum(1 for f in flags if f),
-                          "passes": sum(1 for f in flags if f) >= 2}
-        print(f"\nPRIMARY (d{PRIMARY_DEPTH}, L{PRIMARY_L}): "
-              f"{out['primary']['worlds_within_factor_2']}/3 worlds within a factor of 2 "
-              f"-> {'PASS' if out['primary']['passes'] else 'FAIL'}")
+        cells = [out["depths"][key]["worlds"][str(w)]["by_macro_len"][str(PRIMARY_L)]
+                 for w in WORLDS]
+        ident = [c["within_factor_2"] for c in cells]
+        pays = [c["realized_sufficiency"]["64"]["pays"] for c in cells
+                if "64" in c["realized_sufficiency"]]
+        out["primary"] = {
+            "depth": PRIMARY_DEPTH, "macro_len": PRIMARY_L, "n": 64,
+            "implementation_check_worlds": sum(1 for f in ident if f),
+            "implementation_check_note":
+                "Amendment 1: the crossing comparison is an algebraic identity and "
+                "cannot fail; it evidences correct implementation only.",
+            "realized_sufficiency_worlds": sum(1 for f in pays if f),
+            "worlds_evaluated": len(pays),
+            # An unevaluated cell is NOT a negative: distinguish "measured and
+            # insufficient" from "never measured at this corpus size".
+            "verdict": ("NOT EVALUATED" if len(pays) < 2 else
+                        "PAYS" if sum(1 for f in pays if f) >= 2 else "DOES NOT PAY"),
+        }
+        print(f"\nimplementation check (crossing == H*): "
+              f"{out['primary']['implementation_check_worlds']}/3 -- identity, not evidence")
+        print(f"PRIMARY (d{PRIMARY_DEPTH}, L{PRIMARY_L}, N64) realized sufficiency: "
+              f"{out['primary']['realized_sufficiency_worlds']}/3 worlds -> "
+              f"{out['primary']['verdict']}")
     write(out, args.output)
 
 

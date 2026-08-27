@@ -3650,3 +3650,32 @@ Measured input for E6A: only ~36% of planted recurrences survive as the same
 learner trigram, so E6A's `H` sweep and its bracketing gate must be read in
 EFFECTIVE uses (`H_eff ~ 0.36 H_planted`), not planted ones. Registered in
 `PREDICTIONS.md` before the sweep runs.
+
+# E6A primary cell complete: a macro pays, but sometimes for a degenerate reason (2026-08-27)
+
+Ran `src/row/experiments/audit_e6a_macro_economics.py --depths 6` on development
+worlds 0-2 against `E6_MACRO_PLAN.md` (frozen `00726f0`, Amendment 1). Report
+`reports/e6a_macro_economics.json`; cache `reports/e6a_cache`; log
+`tools/e6a.log`.
+
+**Registered primary (realized sufficiency `H_eff >= H*` at `D=6, L=3, N=64`):
+PAYS 3/3** -- (11,6,4) x22, (8,8,5) x54, (8,9,6) x26 against `H* = 7.44`.
+
+The implementation check returned 3/3 at ratios 1.01-1.10 and is reported as an
+identity, not as evidence, per Amendment 1.
+
+Three findings the amended estimand made visible:
+
+1. **Macro length has an optimum.** `H*` falls with `L` while realized uses fall
+   faster (23/56/26 at `L=3` against 6/14/6 at `L=4`), so `L=4` never reaches its
+   crossing in worlds 0 and 2. Cost and utility move in opposite directions.
+2. **The alphabet tax's `N`-dependence is confirmed.** World 2's `L=4` macro,
+   unchanged and with the same 6 uses, pays at `N=64` and does not at `N=128`.
+3. **Some winning macros abbreviate slot repetition, not computation.** `L=2` is
+   a constant gram in 2 of 3 worlds and world 1's `L=3` winner is half
+   repetition; world 1 also had the lowest route diversity in step 0. The bits
+   are real under the registered code, but whether the compressed thing is
+   recurring computation or an inference habit is unresolved, which makes E6C and
+   E6D's wrong-grouping and sham controls load-bearing.
+
+Depth sweep (`D = 4, 8, 10`) launched behind the same cache.

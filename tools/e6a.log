@@ -1,0 +1,31 @@
+prereg check OK: 32 frozen files unchanged; all STATUS-cited paths exist
+[d6 w0 L2] macro (11, 11) CONSTANT uses 35 in 33 routes | H_obs 20 vs H* 19.73 (x1.01) | bracketed True
+        realized: N16:H_eff 8/H* 4.9 PAYS  N32:H_eff 15/H* 7.9 PAYS  N64:H_eff 23/H* 13.9 PAYS  N128:H_eff 35/H* 25.9 PAYS
+        N sweep: N16:obs 5/H* 4.9  N32:obs 8/H* 7.9  N64:obs 14/H* 13.9  N128:unreachable
+[d6 w0 L3] macro (11, 6, 4) uses 23 in 23 routes | H_obs 12 vs H* 11.28 (x1.06) | bracketed True
+        realized: N16:H_eff 4/H* 3.0 PAYS  N32:H_eff 9/H* 4.4 PAYS  N64:H_eff 22/H* 7.4 PAYS  N128:H_eff 23/H* 13.4 PAYS
+        N sweep: N16:obs 3/H* 3.0  N32:obs 5/H* 4.4  N64:obs 8/H* 7.4  N128:unreachable
+[d6 w0 L4] macro (11, 6, 4, 4) uses 6 in 6 routes | H_obs None vs H* 8.91 | bracketed False
+        realized: N16:H_eff 1/H* 2.3 no  N32:H_eff 1/H* 3.3 no  N64:H_eff 5/H* 5.3 no  N128:H_eff 6/H* 9.3 no
+        N sweep: N16:obs 3/H* 2.3  N32:obs 4/H* 3.3  N64:obs 6/H* 5.3  N128:unreachable
+[d6 w1 L2] macro (8, 8) CONSTANT uses 97 in 78 routes | H_obs 12 vs H* 11.30 (x1.06) | bracketed True
+        realized: N16:H_eff 22/H* 4.9 PAYS  N32:H_eff 44/H* 7.9 PAYS  N64:H_eff 82/H* 13.9 PAYS  N128:H_eff 97/H* 25.9 PAYS
+        N sweep: N16:obs 5/H* 4.9  N32:obs 9/H* 7.9  N64:unreachable  N128:unreachable
+[d6 w1 L3] macro (8, 8, 5) uses 56 in 56 routes | H_obs 9 vs H* 8.19 (x1.10) | bracketed True
+        realized: N16:H_eff 12/H* 3.0 PAYS  N32:H_eff 25/H* 4.4 PAYS  N64:H_eff 54/H* 7.4 PAYS  N128:H_eff 56/H* 13.4 PAYS
+        N sweep: N16:obs 3/H* 3.0  N32:obs 5/H* 4.4  N64:obs 8/H* 7.4  N128:unreachable
+[d6 w1 L4] macro (8, 8, 8, 8) CONSTANT uses 14 in 14 routes | H_obs 9 vs H* 8.41 (x1.07) | bracketed True
+        realized: N16:H_eff 5/H* 2.3 PAYS  N32:H_eff 9/H* 3.3 PAYS  N64:H_eff 13/H* 5.3 PAYS  N128:H_eff 14/H* 9.3 PAYS
+        N sweep: N16:obs 3/H* 2.3  N32:obs 4/H* 3.3  N64:obs 6/H* 5.3  N128:unreachable
+[d6 w2 L2] macro (8, 9) uses 39 in 39 routes | H_obs 19 vs H* 18.60 (x1.02) | bracketed True
+        realized: N16:H_eff 4/H* 4.9 no  N32:H_eff 17/H* 7.9 PAYS  N64:H_eff 33/H* 13.9 PAYS  N128:H_eff 39/H* 25.9 PAYS
+        N sweep: N16:obs 5/H* 4.9  N32:obs 8/H* 7.9  N64:obs 14/H* 13.9  N128:unreachable
+[d6 w2 L3] macro (8, 9, 6) uses 26 in 26 routes | H_obs 12 vs H* 11.00 (x1.09) | bracketed True
+        realized: N16:H_eff 2/H* 3.0 no  N32:H_eff 12/H* 4.4 PAYS  N64:H_eff 26/H* 7.4 PAYS  N128:H_eff 26/H* 13.4 PAYS
+        N sweep: N16:obs 3/H* 3.0  N32:obs 5/H* 4.4  N64:obs 8/H* 7.4  N128:unreachable
+[d6 w2 L4] macro (7, 8, 9, 6) uses 6 in 6 routes | H_obs None vs H* 8.91 | bracketed False
+        realized: N16:H_eff 0/H* 2.3 no  N32:H_eff 2/H* 3.3 no  N64:H_eff 6/H* 5.3 PAYS  N128:H_eff 6/H* 9.3 no
+        N sweep: N16:obs 3/H* 2.3  N32:obs 4/H* 3.3  N64:obs 6/H* 5.3  N128:unreachable
+
+implementation check (crossing == H*): 3/3 -- identity, not evidence
+PRIMARY (d6, L3, N64) realized sufficiency: 3/3 worlds -> PAYS

@@ -4333,3 +4333,32 @@ than as a one-off miss.
   alongside any structure statistic (here: top NON-constant gram, distinct slots
   per route, fraction of constant routes) so a collapse pass is visible rather
   than congratulatory.
+
+- A REGISTERED ESTIMAND CAN BE AN ALGEBRAIC IDENTITY, AND OURS WAS (E6A,
+  2026-08-27). E6A registered "the observed crossing matches the predicted `H*`
+  within a factor of 2" -- but `H*` is solved FROM the same coding scheme the
+  measurement re-evaluates, so agreement is arithmetic, not evidence. The dry run
+  returned ratios 1.04-1.31 across six cells and a 3/3 PASS on macros that were
+  degenerate constants. Caught before compute was spent; Amendment 1 demoted it
+  to an implementation check and registered REALIZED SUFFICIENCY (`H_eff >= H*`
+  in the learner's actual corpus) in its place, which CAN fail. Ask of every
+  registered estimand not only "can the control fail" but "is the prediction
+  derived from the same equations as the measurement" -- if so it tests the code,
+  not the world.
+
+- COST AND UTILITY MOVED IN OPPOSITE DIRECTIONS AGAIN, AND UTILITY WON (E6A).
+  Lengthening a macro makes it CHEAPER to justify by the formula (`H*` 11.28 ->
+  8.91 from `L=3` to `L=4`) and RARER in the realized corpus (23/56/26 uses ->
+  6/14/6), so `L=4` never reaches its crossing in 2 of 3 worlds. There is an
+  optimal macro length, and it is set by the use count rather than by the code.
+  Same lesson as V5.1's residual rank, in a linguistic currency.
+
+- WATCH FOR ABBREVIATION OF THE INSTRUMENT'S HABITS (E6A). The most frequent
+  gram in a corpus of inferred routes is often a CONSTANT run -- (11,11), (8,8),
+  (8,8,8,8) -- so a macro can pay handsomely while compressing nothing but route
+  inference's taste for repeating a slot. The world with the lowest route
+  diversity (3.78 distinct slots per 6-position route) produced the most
+  degenerate macros and the largest apparent win (7.3x its crossing). Bits saved
+  under a correct code are still real bits; what they MEAN depends on whether the
+  abbreviated pattern is structure or artifact, and only a substitutability test
+  in unseen contexts and a sham-alias control can say which.
