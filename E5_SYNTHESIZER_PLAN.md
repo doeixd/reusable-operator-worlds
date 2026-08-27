@@ -128,3 +128,50 @@ E6 (primitive invention, whose law review 80 restates as
 any change to a sealed or development verdict; the interaction-net / graph-rewrite
 substrate, which review 80 defers until after E5 and which would be tested on
 branching, recursion, loops and macros rather than on whether programs exist.
+
+# Amendment 1 (2026-08-27, before any code): a second setting where search is actually expensive
+
+E5 as frozen tests the writer only at `slots = 12, D = 3`, a space of 1,728
+programs. Exhaustive enumeration is already cheap there, so even a perfect
+recognizer has almost nothing to buy and the rung would mostly measure a
+property of the TESTBED. The amendment is made now, while no E5 data exists, so
+that a deeper setting cannot later be accused of having been chosen because the
+shallow one disappointed.
+
+**Second setting: `D = 6`.** The space is `12^6 ~ 2.99M` programs, so `ENUM` is
+infeasible by construction and is reported as such rather than run; `OPT`, `REC`
+and `S` all still run, and `C_find` becomes a quantity that can actually differ
+between them. The variable-depth executor from E8 (bitwise-identical to the
+shipped one at depth 3, re-verified per world) makes this a change of test data
+rather than of architecture.
+
+**Feasibility predicted before running, from the sealed drift law.** C5 measured
+`b = 0.581` per step, and the depth-4 oracle error is ~0.006, so
+
+    e_6 ~ e_4 * exp(2b) ~ 0.006 * 3.2 ~ 0.019
+
+against a scratch baseline of 0.04-0.06. Depth 6 should therefore remain
+executable with room to spare. This is the first use of the drift curve as a
+FORECAST rather than a description, which is what review 78 proposed it for; if
+the forecast is wrong that is itself worth recording, and the gate below makes
+the failure legible instead of silent.
+
+**Registered gate, because the forecast may be wrong.** The `D = 6` ORACLE arm
+must beat `S` by >= 0.75 log units in >= 2 of 3 worlds. If it does not, the
+whole `D = 6` setting is reported as UNINTERPRETABLE for E5's question - a
+degraded executor and a bad writer are not distinguishable there - and no E5
+verdict is read from it. `D = 3` is unaffected either way. Same structure as
+E1.0's eligibility gate.
+
+**Decision rules per setting.** The registered outcomes apply independently at
+`D = 3` and `D = 6`, and the verdict names the setting. At `D = 6`,
+`C_find(best of ENUM, OPT)` reduces to `C_find(OPT)` since enumeration is
+infeasible; the infeasibility is reported as a number (2.99M executions) rather
+than as an omission.
+
+**Registered predictions for the new setting.** Ours: the `D = 6` oracle passes
+its gate (predicted `e_6 ~ 0.019`); `OPT` degrades relative to `D = 3` because
+route optimization now searches a 2.99M-point discrete space by gradients on a
+relaxation; and `REC` has its best chance here - this is the setting where
+SYNTHESIS DEMONSTRATED is actually reachable. We put it near even at `D = 6`,
+against our registered modal QUALITY WITHOUT AMORTIZATION at `D = 3`.
