@@ -1,0 +1,3 @@
+prog (4, 5, 2, 4, 5, 1) | E5 S (deepcopy trained) 0.10859 | true scratch 0.10047
+prog (1, 0, 3, 1, 4, 0) | E5 S (deepcopy trained) 0.09791 | true scratch 0.10035
+prog (1, 3, 1, 1, 1, 0) | E5 S (deepcopy trained) 0.18562 | true scratch 0.10188

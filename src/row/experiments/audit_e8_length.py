@@ -152,7 +152,8 @@ def oracle_cell(model, task, program, assignment, probe_id: str, library) -> dic
 
 
 def adapt_cell(model, task, probe_id: str, depth: int, train_library: bool, library,
-               program) -> dict:
+               program, steps: int | None = None) -> dict:
+    """`steps` defaults to ADAPT_STEPS, so every pre-E5.1 caller is unchanged."""
     local = copy.deepcopy(model)
     if not isinstance(local, VariableDepthDiscrete):
         local.__class__ = VariableDepthDiscrete    # the scratch arm gets the same executor
@@ -172,7 +173,7 @@ def adapt_cell(model, task, probe_id: str, depth: int, train_library: bool, libr
     local.train()
     with torch.no_grad():
         initial = nmse(local(t["support_x"], probe_id), t["support_y"])
-    for _ in range(ADAPT_STEPS):
+    for _ in range(ADAPT_STEPS if steps is None else int(steps)):
         optimizer.zero_grad()
         loss = torch.mean((local(t["support_x"], probe_id) - t["support_y"]) ** 2)
         if not bool(torch.isfinite(loss)):
@@ -188,7 +189,9 @@ def adapt_cell(model, task, probe_id: str, depth: int, train_library: bool, libr
     reference = teacher_trace(program, library, task.eval_x)
     per_step = [nmse(state, torch.tensor(reference[i], dtype=torch.float32))
                 for i, state in enumerate(states)]
-    return {"query_nmse": query, "per_step_nmse": per_step,
+    with torch.no_grad():
+        route = [int(v) for v in torch.argmax(local.task_codes[probe_id], dim=-1)]
+    return {"query_nmse": query, "per_step_nmse": per_step, "route": route,
             "support_reduction_objective": (initial - final_objective) / max(initial, 1e-12)}
 
 

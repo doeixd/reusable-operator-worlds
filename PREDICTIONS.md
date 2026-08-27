@@ -6373,3 +6373,56 @@ registered below as a real rung rather than an aside.
   oracle at every depth where the executor remains eligible. If true, the
   binding horizon of this substrate is EXECUTION FIDELITY, not search - which
   reverses the assumption the project has carried since V1.
+
+# CORRECTION to E5 (2026-08-27, found while building E5.1): the S arm was mislabeled
+
+Found by reading E5's arm construction against E1's and E8's before reusing it.
+E1 and E8 build the scratch arm with `scratch_model(config, "discrete", 7717)`,
+a genuinely fresh model. **E5 built it with `copy.deepcopy(model)`** - the
+TRAINED library, then unfroze it. That is not scratch; it is E1's FINE-TUNE
+arm (`F`) wearing the label `S`. The error is in
+`src/row/experiments/audit_e5_synthesizer.py` and affects only E5.
+
+## Measured impact, rather than asserted
+
+Three depth-6 world-0 programs, both constructions, same tasks and budget:
+
+    program              E5 "S" (trained start)   true scratch
+    (4,5,2,4,5,1)              0.10859               0.10047
+    (1,0,3,1,4,0)              0.09791               0.10035
+    (1,3,1,1,1,0)              0.18562               0.10188
+    geomean                    0.1268                0.1009
+
+True scratch is BETTER by ~0.23 log units, so the corrected `D = 6` eligibility
+margins are approximately 1.79 / 1.93 / 1.81 rather than the reported
+2.02 / 2.16 / 2.04 - still far above the registered `>= 0.75`, in 3/3 worlds.
+
+## What changes, and what does not
+
+**The E5 verdict is untouched.** `AMORTIZATION WITHOUT QUALITY` rests on the
+oracle gap (quality) and on ENUM/OPT costs (cost); the `S` column enters only
+the `D = 6` eligibility gate, which still passes 3/3 under the correction. No
+recorded E5 decision flips, and the report is left in place rather than rebuilt,
+with this entry as its correction of record.
+
+**What must be re-read:** every E5 `S` number is a fine-tuning number, and the
+E5 report's `S` column is NOT comparable to E1's or E8's `S` column. Anywhere
+E5's scratch band was quoted (including the `e_D` forecast's "scratch band of
+~0.05-0.13"), the correct band is the true-scratch one.
+
+**E5.1 uses `scratch_model`,** matching E1 and E8, and its plan says so
+explicitly in the arm table.
+
+## The transferable rule
+
+REUSING AN ARM IS REUSING A CONSTRUCTION, NOT A NAME. Three modules in this
+branch have an arm called `S`; two build it fresh and one copied the trained
+model, and the label made them look identical at every call site. Before reusing
+a baseline across modules, diff how it is CONSTRUCTED, not what it is called -
+the same discipline already required for scorer CLI arguments (H35) and for
+protocol fingerprints.
+
+Incidental observation worth keeping: fine-tuning a trained 12-slot library on a
+single task's 128 support examples was WORSE than training from scratch in 1 of
+3 probes (0.186 against 0.102), so a trained start is not automatically an
+advantage at this scale.
