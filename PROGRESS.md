@@ -3511,3 +3511,17 @@ defects that would each have corrupted the sealed block.
 
 The frozen plan is unchanged; both are implementation corrections made before
 any world in the band existed.
+
+# 2026-08-27 - SEALED EXPORT CONFIRMATION CLOSED: FULL PROGRAM-LANGUAGE BLOCK CONFIRMED
+
+Seeds 800-829, thirty support-split discrete lifetimes, plan frozen at 4b1f8cd
+before the band existed. All six hierarchical verdicts confirmed, every clause
+passing with zero worlds below any per-world floor and no fatal assertion.
+Headline numbers: syntax sufficiency bitwise 64/64 in 30/30 worlds; `Q_D` 2.714
+[2.667, 2.771] with `N*` 4.024; gauge bitwise 30/30 against wrong-code collapses
+of 2.16-2.47; `G_export` 1.0049; composition 2.411 / 2.457 / 2.406 on the three
+strata with H3 the flagship; depth-4 length closure 2.286; drift `b` 0.581 and
+`q` 0.785 inside [0.45, 0.95]. Scorekeeping recorded: our C4 pessimism wrong for
+the second time (a standing calibration error now noted), and our refusal to
+register review 79's `q ~ 1` vindicated - sealed `q` of 0.785 would have missed
+that registration. The export branch is banked; E5 and E6 are unblocked.

@@ -4184,3 +4184,37 @@ beats a continuous route by 4.5x on the route term and loses the total, because
 that artifact's library has 8 slots to the discrete one's 12. Report the
 decomposition, record the registered clause as failing, and name the confound -
 do not reinterpret the rule after seeing which way it went.
+
+
+
+================================================================================
+SEALED EXPORT CONFIRMATION: THE PROGRAM LANGUAGE REPLICATES ON 30 UNTOUCHED WORLDS (2026-08-27)
+================================================================================
+
+Seeds 800-829, plan frozen before the band existed, verdict read once. Every
+clause confirmed: syntax sufficiency bitwise in 30/30, two-part economy
+`Q_D` 2.714 with amortization at 4.02 tasks, gauge permutation bitwise in 30/30
+while wrong codes collapse by 2.16-2.47, `G_export` 1.005, composition 2.41-2.46
+across all three novelty strata, depth-4 length closure 2.286, and the drift
+mechanism inside its interval.
+
+DERIVE THE INTERVAL FROM THE DATA, NOT FROM THE STORY. The reviewer proposed
+registering the drift continuation ratio at `q ~ 1`, reasoning that an unseen
+fourth call should behave like an ordinary one. Development said 0.681 - the step
+ratios DECELERATE - so the registered interval was [0.45, 0.95]. Sealed `q` came
+back 0.785. A `q ~ 1` registration would have missed a clause that is in fact
+true. The mechanical derivation was not bookkeeping; it decided the outcome.
+
+MDL QUANTITIES REPLICATE HARDER THAN BEHAVIOURAL ONES. Across thirty untouched
+worlds `Q_D` spans 0.104 and `N*` spans 0.43, essentially on top of the three
+development worlds, while the behavioural margins span 1.3-1.6 log units. A
+description-length statistic of a substrate appears to be far more stable across
+worlds than any performance margin measured on it - useful to know when choosing
+what to preregister.
+
+WE OVER-WEIGHT DISTRIBUTIONAL ARGUMENTS AGAINST THIS SUBSTRATE. Twice now - at
+E8 and again at C4 - we predicted that depth-4 composition would fail because
+each operator was fitted on states at most two compositions deep. The effect is
+real and visible in the per-step trace, and both times it was an order of
+magnitude too small to bind. Recorded as a standing calibration error rather
+than as a one-off miss.

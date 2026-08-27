@@ -6085,3 +6085,87 @@ the deceleration we measured was a three-world accident.
 Review 79's: expects replication, with shrinkage rather than absence as the risk.
 
 E5 does not start before this block closes.
+
+# SEALED EXPORT CONFIRMATION RESULT (2026-08-27): FULL PROGRAM-LANGUAGE BLOCK CONFIRMED
+
+Plan `EXPORT_CONFIRMATION_PLAN.md`, frozen and hashed at `4b1f8cd` BEFORE any
+world in the band existed. Seeds 800-829, thirty support-split discrete
+lifetimes, one per world, all 30 completed. Report
+`reports/export_confirmation.json`. Verdict read once, from the frozen table.
+
+    VERDICT
+      PROGRAM CONFIRMED                       yes   (C1a + C1b + C1c)
+      EXPORT CONFIRMED                        yes   (C2)
+      COMPOSITION CONFIRMED                   yes   (C2 + C3)
+      LENGTH-CLOSED COMPOSITION CONFIRMED     yes   (C2 + C3 + C4)
+      FULL PROGRAM-LANGUAGE BLOCK CONFIRMED   yes   (C1-C4)
+      DRIFT MECHANISM CONFIRMED               yes   (C5)
+
+    estimand                     sealed (n=30)              registered        development
+    C1a syntax sufficiency       bitwise 64/64, 30/30       >= 28/30          64/64, 3/3
+    C1b Q_D                      2.714  [2.667, 2.771]      mean >= 2.0       2.646-2.732
+    C1b N*                       4.024  [3.800, 4.225]      mean in [3, 6]    3.96-4.32
+    C1c gauge                    bitwise 64/64, 30/30       >= 28/30          bitwise 3/3
+    C1c collapse (route/lib/dep) 2.460 / 2.470 / 2.162      each >= 1.0       1.72-2.16
+                                 mins 1.995 / 1.817 / 1.749
+    C2  G_export                 1.0049 [0.998, 1.044]      mean in [.75,1.15] 0.983-1.039
+    C2  oracle leg               2.379  min 1.836           >= 1.5, 28/30     2.04-2.79
+    C3  H1 / H2 / H3             2.411 / 2.457 / 2.406      each mean >= 1.5  2.19-2.74
+                                 mins 1.933 / 1.771 / 1.670; 0 worlds below 1.0
+    C4  depth 4                  2.286  min 1.796           mean >= 1.25      1.761-2.342
+                                 0 worlds below 0.75
+    C4  depth 2 (secondary)      2.452                      mean >= 1.5       2.204-2.679
+    C5  b                        0.581  [0.470, 0.782]      in [0.3, 0.9]     0.566-0.661
+    C5  q                        0.785  [0.574, 1.107]      in [0.45, 0.95]   0.611-0.745
+                                 2 worlds >= 0.95; 0 worlds >= 1.5
+
+Every clause passed with no world below any per-world floor, no fatal structural
+assertion, and no arm failing its adaptation check across 30 worlds.
+
+**What is now confirmed, in the terminology the contract permits.** At exact
+reuse, on this synthetic operator substrate, lifetime learning produces a
+COMPACT LEARNED PROGRAM LANGUAGE: a frozen vocabulary whose operations execute
+programs the lifetime never trained on (C2), compose systematically on unseen
+triples, unseen adjacent pairs and — the flagship — in POSITIONS THE OPERATOR
+NEVER OCCUPIED (C3), remain executable at program lengths never trained
+including a fourth execution position that did not exist (C4); whose task
+solutions are literally the discrete sequence, bitwise (C1a), 14-15x cheaper
+than private coding and amortizing after four tasks (C1b), with symbol names
+arbitrary but the syntax-semantics binding causal (C1c). SYNTHESIS remains
+unclaimed: E5 has not run.
+
+**Scorekeeping.**
+- **C4 was the estimand we said we would bet against most readily.** WRONG:
+  2.286 mean, min 1.796, zero worlds below the floor - and above its own
+  development minimum. Our stated reason (operators fitted on states at most two
+  compositions deep) has now been wrong twice in the same direction, at E8 and
+  here. Recorded as a standing calibration error: we over-weight distributional
+  arguments against this substrate.
+- **C5's q was where we said a miss would be most informative.** It did not
+  miss, but it moved: development 0.681 -> sealed 0.785, with two worlds above
+  0.95 and a maximum of 1.107. The deceleration is real and slightly weaker than
+  three development worlds implied.
+- **The mechanical derivation of C5's interval is what made it pass.** Review 79
+  proposed registering `q ~ 1` on the reasoning that the fourth call behaves like
+  an ordinary application. We refused, derived [0.45, 0.95] from development, and
+  recorded the disagreement. Sealed `q` is 0.785 - which a `q ~ 1` registration
+  (any interval centred there) would have MISSED. Deriving intervals from the
+  data rather than from a plausible story is not a formality; here it decided a
+  clause.
+- Review 79 expected replication with SHRINKAGE as the risk. Shrinkage was
+  minimal: composition means moved from 2.19-2.74 (development) to 2.41-2.46
+  (sealed), and the MDL quantities barely moved at all - `Q_D` spans 0.104 across
+  thirty untouched worlds and `N*` sits at 4.02 +/- 0.21.
+
+**Instrument disclosures, all made before the band opened.** Two defects were
+caught by dry-running the sealed scorer against development artifacts: a WORLD
+MISMATCH in which `World.generate` produced the same 64 opaque task IDs but
+different programs (63/64), silently pairing a support-split model's routes with
+another world's targets; and a PROCESS-DEPENDENT SEED derived from Python's
+built-in `hash()`, which gave different values in different processes. Both were
+fixed, the first with a fatal assertion that the reconstructed programs equal the
+recorded split. The frozen plan was not changed.
+
+**Licensing.** The export branch is banked. E5 (the program recognizer /
+synthesizer) is now unblocked, as is E6. No development verdict is altered by
+this block; it confirms them.
