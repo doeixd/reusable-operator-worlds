@@ -96,7 +96,7 @@ interpretation of this substrate ends.
 
 **But the language cannot yet be *written* (E5, development worlds 0–2).** With
 the vocabulary frozen and the sealed block having established that good programs
-exist, a learned recognizer \(q_\phi(p \mid D_{	ext{support}})\) was asked to
+exist, a learned recognizer \(q_\phi(p \mid D_{\text{support}})\) was asked to
 produce them in one forward pass. It fails on **quality**, not on cost: its best
 oracle gap is +0.32 at depth 3 and +0.31 at depth 6 against a pre-registered
 requirement of ≤0.15, in both cases second-best in every world. The registered
@@ -104,7 +104,7 @@ verdict is *amortization without quality*, and the word **synthesis** stays
 unlicensed.
 
 Two results make the failure informative rather than merely negative. **Finding
-is easy and does not get harder with program-space size:** exhaustive search over
+is easy, and its cost tracks program length rather than program count:** exhaustive search over
 1,728 programs was 26–28× cheaper than 2,000 gradient steps and better in 2 of 3
 worlds, and at depth 6 — 2,985,984 programs, where enumeration is infeasible —
 route optimization *matched or beat the oracle* in 3 of 3, contradicting the
@@ -116,8 +116,49 @@ against route optimization's entire 16–18 s per-task search — more expensive
 
 One methodological first is worth recording: the depth-6 setting was declared
 viable *before* it ran, by forecasting its oracle error from the sealed per-step
-drift \(b = 0.581\) as \(e_6 \approx 0.019\). Measured: 0.0175 / 0.0096 /
+drift \(b = 0.581\) as \(e_6 \approx 0.019\). Measured: 0.0175 / 0.0096 /
 0.0143.
+
+**Search-based synthesis, however, *is* sealed.** The confirmation block's
+inference arm was exactly this procedure — routes "inferred from 128 support
+examples, 2,000 Adam steps" — and the learner's discrete route is a hard
+`argmax` outside training, so every reported number is a genuine discrete
+program executing. On 30 sealed worlds, gradient search over a frozen learned
+vocabulary recovered discrete programs that solved structurally novel tasks,
+including programs using operators in positions those operators never occupied.
+The project therefore separates two claims that had been running together:
+
+| claim | status |
+|---|---|
+| search-based program synthesis | **demonstrated (sealed, seeds 800–829)** |
+| amortized program *writer* | not demonstrated (E5) |
+
+**And search cost is logarithmic in the size of the program space (E5.1).**
+Sweeping depth 3–10 against search budgets {250, 500, 1000, 2000} on three
+worlds: the discrete program space grew **3.58 × 10⁷-fold** (1,728 →
+61,917,364,224) while route optimization's device-seconds grew **3.30-fold**
+(7.7 s → 25.4 s), with quality holding at oracle parity. \(C_{\text{find}}\)
+is linear in program *length* and therefore logarithmic in program *count*.
+Exhaustive search scales the other way and stops being the right tool between
+depths 4 and 5 (ENUM/OPT seconds 0.04×, 0.42×, 4.66×).
+
+E5.1 also failed to find a horizon, and says so. Its registered first-crossing
+statistic returned `D_search = 7`, but depth 7 is the *only* failing depth —
+8, 9 and 10 all recover, and depth 10 is among the strongest cells. The
+registered output is preserved unrewritten, with the refutation printed beside
+it: **neither the execution nor the search horizon was located at or below depth
+10.** The methodological lesson is now constitutional here — a first-crossing
+rule always returns a value on a noisy series, so it cannot report "no horizon"
+and will manufacture one; a horizon requires persistence or a fitted trend.
+
+Three of our four registered predictions for E5.1 failed. The one that held
+exactly was the ENUM crossover. The one that failed most usefully was the depth
+forecast: extrapolating the sealed per-step drift \(b = 0.581\) at constant
+rate predicted execution would bind by depth 8–9, but measured growth was
+\(b_{\text{eff}} \approx 0.248\) — precisely what the *other* sealed
+estimand, the step-continuation ratio \(q = 0.785 < 1\), implies. Both numbers
+were always consistent; we had extrapolated with the one that was easier to
+compound.
 
 **First result of that branch (E1, 2026-08-26): the stop condition did not
 fire.** A frozen discrete library executes teacher programs it never trained on
