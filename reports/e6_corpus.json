@@ -1,0 +1,180 @@
+{
+ "frozen_plan": "E6_MACRO_PLAN.md",
+ "git_commit": "b0c6a93",
+ "protocol": {
+  "depth": 6,
+  "macro_len": 3,
+  "n_tasks": 64,
+  "planted_H": 32,
+  "steps": 2000,
+  "lr": 0.01,
+  "null": "per-position marginal resampling from UNPLANTED routes only",
+  "note": "gate only; a failing condition is UNSCOREABLE, not negative"
+ },
+ "worlds": {
+  "0": {
+   "teacher_motif": [
+    3,
+    4,
+    4
+   ],
+   "planted_H": 32,
+   "top_learner_gram": [
+    4,
+    4,
+    4
+   ],
+   "top_count": 8,
+   "gram_at_planted_site": [
+    7,
+    6,
+    1
+   ],
+   "count_at_planted_site": 7,
+   "distinct_grams": 172,
+   "top_gram_is_constant": true,
+   "top_nonconstant_gram": [
+    7,
+    6,
+    1
+   ],
+   "top_nonconstant_count": 7,
+   "mean_distinct_slots_per_route": 4.578125,
+   "fraction_constant_routes": 0.0,
+   "null_max_count": {
+    "mean": 4.64745,
+    "p95": 6.0,
+    "p99": 7.0,
+    "max": 10
+   },
+   "survives_gate": true,
+   "null_source": "unplanted routes only (contamination fix)",
+   "motif_survival_rate": 0.21875,
+   "mean_query_nmse": 0.021253269878798164,
+   "arm": {
+    "arm_name": "OPT",
+    "init_source": "trained",
+    "checkpoint_hash": "11cce74b75c5c327",
+    "fresh_seed": null,
+    "trainable_parameters": 0,
+    "trainable_tensors": 0,
+    "frozen_parameters": 5520,
+    "optimizer": null,
+    "optimizer_lr": null,
+    "steps": 2000,
+    "data_seen": "support only"
+   }
+  },
+  "1": {
+   "teacher_motif": [
+    3,
+    2,
+    3
+   ],
+   "planted_H": 32,
+   "top_learner_gram": [
+    11,
+    7,
+    11
+   ],
+   "top_count": 16,
+   "gram_at_planted_site": [
+    11,
+    7,
+    11
+   ],
+   "count_at_planted_site": 14,
+   "distinct_grams": 127,
+   "top_gram_is_constant": false,
+   "top_nonconstant_gram": [
+    11,
+    7,
+    11
+   ],
+   "top_nonconstant_count": 16,
+   "mean_distinct_slots_per_route": 3.78125,
+   "fraction_constant_routes": 0.0,
+   "null_max_count": {
+    "mean": 6.1921,
+    "p95": 9.0,
+    "p99": 10.0,
+    "max": 15
+   },
+   "survives_gate": true,
+   "null_source": "unplanted routes only (contamination fix)",
+   "motif_survival_rate": 0.4375,
+   "mean_query_nmse": 0.011221399287023814,
+   "arm": {
+    "arm_name": "OPT",
+    "init_source": "trained",
+    "checkpoint_hash": "97f89f5ee2f76ac3",
+    "fresh_seed": null,
+    "trainable_parameters": 0,
+    "trainable_tensors": 0,
+    "frozen_parameters": 5520,
+    "optimizer": null,
+    "optimizer_lr": null,
+    "steps": 2000,
+    "data_seen": "support only"
+   }
+  },
+  "2": {
+   "teacher_motif": [
+    3,
+    3,
+    2
+   ],
+   "planted_H": 32,
+   "top_learner_gram": [
+    11,
+    0,
+    8
+   ],
+   "top_count": 13,
+   "gram_at_planted_site": [
+    11,
+    0,
+    8
+   ],
+   "count_at_planted_site": 13,
+   "distinct_grams": 163,
+   "top_gram_is_constant": false,
+   "top_nonconstant_gram": [
+    11,
+    0,
+    8
+   ],
+   "top_nonconstant_count": 13,
+   "mean_distinct_slots_per_route": 4.5,
+   "fraction_constant_routes": 0.0,
+   "null_max_count": {
+    "mean": 4.70185,
+    "p95": 6.0,
+    "p99": 8.0,
+    "max": 11
+   },
+   "survives_gate": true,
+   "null_source": "unplanted routes only (contamination fix)",
+   "motif_survival_rate": 0.40625,
+   "mean_query_nmse": 0.009081290652829921,
+   "arm": {
+    "arm_name": "OPT",
+    "init_source": "trained",
+    "checkpoint_hash": "26ee717e8031b133",
+    "fresh_seed": null,
+    "trainable_parameters": 0,
+    "trainable_tensors": 0,
+    "frozen_parameters": 5520,
+    "optimizer": null,
+    "optimizer_lr": null,
+    "steps": 2000,
+    "data_seen": "support only"
+   }
+  }
+ },
+ "gate": {
+  "worlds_surviving": 3,
+  "scoreable": true,
+  "rule": "planted recurrence must survive inference in >= 2 of 3 worlds"
+ }
+}

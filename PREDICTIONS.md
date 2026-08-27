@@ -6587,3 +6587,62 @@ non-obvious: the macro is a symbol of the LEARNER's language, defined over the
 learner's own INFERRED routes, never over teacher primitive indices. Whether a
 planted teacher subsequence survives into the inferred corpus is a MEASURED
 quantity and a non-vacuity gate, not an assumption.
+
+# E6 step 0 (2026-08-27): the corpus gate PASSES, and a null of ours was contaminated
+
+Plan `E6_MACRO_PLAN.md` frozen at `d58a918`, non-vacuity check 1. Development
+worlds 0-2, `D = 6`, `L = 3`, `N = 64`, `H = 32` planted, routes inferred by the
+sealed/E5.1 protocol (2,000 steps, support only). Report `reports/e6_corpus.json`.
+
+## Result: planted recurrence survives inference in 3/3 worlds
+
+    world  teacher motif  learner image   at planted sites   null p99   verdict
+      0      (3,4,4)        (7,6,1)          7 / 32            7.0      marginal
+      1      (3,2,3)       (11,7,11)        14 / 32           10.0      clean
+      2      (3,3,2)        (11,0,8)        13 / 32            8.0      clean
+
+Routes are NOT degenerate (4.58 / 3.78 / 4.50 distinct slots per 6-position
+route), so this is not slot collapse.
+
+**Reported honestly as 2 clean and 1 marginal.** World 0 clears the gate on the
+CONSTANT gram `(4,4,4)` x8; its motif image `(7,6,1)` x7 does not exceed its own
+null. Worlds 1 and 2 pass on non-constant motif grams that are also the top gram
+overall. The registered rule (>= 2 of 3) is met without relying on world 0.
+
+## CORRECTION, made before any E6 verdict: the null was contaminated
+
+The first null resampled per-position slot marginals from the FULL corpus. But
+those marginals are already shaped by the planted motif -- with 32 of 64 routes
+carrying it, the enriched slots appear in every column, so the null could
+reproduce the very gram it was meant to baseline. It scored world 1's
+`(11,7,11)`, present at 14 of 32 planted sites and the top gram in the corpus, as
+INDISTINGUISHABLE FROM CHANCE (16 against a p99 of 16.0).
+
+This is the standing rule against fitting and scoring a structure measurement on
+the same objects -- V5's in-sample subspace capture read 0.730 where
+leave-one-out read 0.021 -- reproduced in a new place. Corrected to estimate the
+null from the UNPLANTED routes only, resampled to the full corpus size. The bar
+fell materially in every world (world 1: 16.0 -> 10.0; world 2: 10.0 -> 8.0) and
+world 1 flipped to SURVIVES.
+
+No frozen threshold changed. `E6_MACRO_PLAN.md` specifies "materially above the
+rate of an equally-long random subsequence" and does not prescribe the null's
+construction; the original construction did not estimate that quantity at all.
+Routes were cached, so only the null was recomputed.
+
+## Measured input that E6A must now use: the survival rate
+
+Only 22% / 44% / 41% (mean ~36%) of planted recurrences produce the SAME learner
+trigram. The gauge freedom is real and quantified: the learner is under no
+obligation to write a recurring teacher computation as a recurring learner
+subsequence, and roughly two thirds of the time it does not.
+
+REGISTERED CONSEQUENCE for E6A, recorded before its sweep is run: the crossing
+`H*` is a count of ACTUAL macro uses, so E6A's bracketing gate (non-vacuity 2)
+must be evaluated in EFFECTIVE uses, `H_eff ~ 0.36 H_planted`, not in planted
+ones. At `H* = 7.44` this requires `H_planted >= ~21` for the crossing to be
+reachable at all; the registered sweep of `H` is therefore specified in effective
+uses, measured per condition from the inferred corpus, and a condition whose
+`H_eff` falls below the crossing is reported as below-threshold rather than as a
+refusal. Reading the sweep in planted uses would have overstated every point by
+about 2.8x and could have manufactured a spurious CREATE decision.

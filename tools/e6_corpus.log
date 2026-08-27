@@ -1,0 +1,6 @@
+prereg check OK: 32 frozen files unchanged; all STATUS-cited paths exist
+[w0] motif (3, 4, 4) planted 32/64 | top learner gram (4, 4, 4) x8 (null p99 7.0, mean 4.1) | at planted site (7, 6, 1) x7 | top non-const (7, 6, 1) x7 | slots/route 4.58 | SURVIVES
+[w1] motif (3, 2, 3) planted 32/64 | top learner gram (11, 7, 11) x16 (null p99 16.0, mean 8.8) | at planted site (11, 7, 11) x14 | top non-const (11, 7, 11) x16 | slots/route 3.78 | DOES NOT SURVIVE
+[w2] motif (3, 3, 2) planted 32/64 | top learner gram (11, 0, 8) x13 (null p99 10.0, mean 5.6) | at planted site (11, 0, 8) x13 | top non-const (11, 0, 8) x13 | slots/route 4.50 | SURVIVES
+
+planted recurrence survives in 2/3 worlds -> E6 is SCOREABLE

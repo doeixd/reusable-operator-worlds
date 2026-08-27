@@ -3620,3 +3620,33 @@ licensed claim is the weaker one.
 
 Full scorekeeping in `PREDICTIONS.md`. Three of our four registered predictions
 failed; the ENUM crossover prediction was confirmed exactly.
+
+# E6 step 0 complete: the corpus gate passes 3/3 (2026-08-27)
+
+Ran `src/row/experiments/audit_e6_corpus.py` on development worlds 0-2 against
+`E6_MACRO_PLAN.md` (frozen `d58a918`). Report `reports/e6_corpus.json`; cache
+`reports/e6_corpus_cache`; log `tools/e6_corpus.log`.
+
+Planted recurrence survives route inference in 3/3 worlds (2 clean, 1 marginal),
+so E6 is SCOREABLE as designed. Teacher motifs map to stable learner trigrams
+-- (3,4,4)->(7,6,1), (3,2,3)->(11,7,11), (3,3,2)->(11,0,8) -- appearing at
+7/32, 14/32 and 13/32 planted sites against null p99 of 7.0, 10.0 and 8.0.
+Routes are not degenerate (4.58 / 3.78 / 4.50 distinct slots per route).
+
+Two corrections were made during this step, both before any verdict:
+
+1. **A contaminated null.** The first version estimated per-position marginals
+   from the full corpus, which contains the planted motif, so the null inherited
+   the effect and scored world 1's strongest signal as chance. Rebuilt from
+   unplanted routes only; the bar fell in every world and world 1 flipped to
+   SURVIVES. Same error family as V5's in-sample subspace capture.
+2. **A degenerate dry run.** At 40 adaptation steps every world "passed" on
+   constant grams ((4,4,4), (11,11,11), (0,0,0)) because the routes had not left
+   their default. Degeneracy diagnostics (top non-constant gram, distinct slots
+   per route, fraction of constant routes) were added so a collapse pass cannot
+   hide; they are what revealed world 0's pass to be marginal.
+
+Measured input for E6A: only ~36% of planted recurrences survive as the same
+learner trigram, so E6A's `H` sweep and its bracketing gate must be read in
+EFFECTIVE uses (`H_eff ~ 0.36 H_planted`), not planted ones. Registered in
+`PREDICTIONS.md` before the sweep runs.

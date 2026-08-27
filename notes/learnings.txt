@@ -4301,3 +4301,35 @@ than as a one-off miss.
   extrapolated with the one that was easier to compound. A forecast is only as
   good as the region its fit covers, and a decelerating process must be
   extrapolated with its deceleration term.
+
+- A NULL MUST NOT BE ESTIMATED FROM DATA CONTAINING THE EFFECT (E6 step 0,
+  2026-08-27). The recurrence gate resampled per-position slot marginals from the
+  full corpus to build its chance baseline -- but 32 of 64 routes carried the
+  planted motif, so the enriched slots were in every column and the null could
+  reproduce the gram it was baselining. World 1's `(11,7,11)`, present at 14 of
+  32 planted sites and the top gram in its corpus, scored as indistinguishable
+  from chance (16 against p99 16.0). Rebuilding the null from the UNPLANTED
+  routes only dropped the bar to 10.0 and flipped the verdict. This is V5's
+  in-sample-versus-leave-one-out lesson (0.730 versus 0.021) in a new costume:
+  whenever a baseline is estimated from data, ask whether the effect is IN that
+  data.
+
+- GAUGE FREEDOM IS NOW QUANTIFIED, AND IT IS LARGE (E6 step 0). A teacher
+  subsequence planted in 32 of 64 tasks produces the SAME learner trigram in only
+  22% / 44% / 41% of its occurrences (mean ~36%), even though routes are healthy
+  (3.8-4.6 distinct slots per 6-position route) and the mapping itself is stable
+  and identifiable ((3,4,4)->(7,6,1) and so on). A recurring computation is not
+  obliged to be written as a recurring SYMBOL SEQUENCE. Any economics counting
+  "uses of a macro" must count uses in the LEARNER's realized corpus; counting
+  planted recurrences would overstate them by ~2.8x here. Same family as slot
+  indices versus primitive indices, and effective operator versus residual.
+
+- A DRY RUN AT REDUCED BUDGET CAN PASS A GATE FOR A DEGENERATE REASON (E6
+  step 0). At 40 adaptation steps instead of 2,000, all three worlds "passed" the
+  recurrence gate on CONSTANT grams -- the routes had never left their default
+  argmax, so the statistic measured slot collapse, not structure. The dry run is
+  for proving every path executes; it cannot validate a statistic whose meaning
+  depends on the instrument having actually moved. Ship degeneracy diagnostics
+  alongside any structure statistic (here: top NON-constant gram, distinct slots
+  per route, fraction of constant routes) so a collapse pass is visible rather
+  than congratulatory.
