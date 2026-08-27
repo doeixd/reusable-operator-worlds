@@ -226,3 +226,68 @@ review 81 postpones until search is expensive; and the interaction-net /
 graph-rewrite substrate, which review 82 places AFTER macro invention succeeds,
 where the question becomes branches, loops and arbitrary reusable subgraphs
 rather than contiguous linear subsequences.
+
+# Amendment 1 (2026-08-27, before any E6A cell was scored): E6A's primary estimand cannot fail
+
+Found in a structural dry run, before compute was spent. Disclosed here rather
+than discovered in the result.
+
+## The defect
+
+E6A registers as its primary estimand "the observed crossing `H_obs` where the
+macro-bearing code becomes shorter, against the formula's `H*`", passing when the
+two agree within a factor of 2. But `H*` is DERIVED FROM the same coding scheme
+that the measurement re-computes: the formula solves for the point at which
+
+    L log2 K + [N D - H(L-1)] log2(K+1)  <  N D log2 K
+
+and the measurement evaluates both sides and reports where the inequality flips.
+Agreement is therefore an ALGEBRAIC IDENTITY, not an empirical finding. The only
+slack is discretization -- uses arrive in integer steps, and a route may contain
+the macro more than once. The dry run confirmed it: ratios 1.04, 1.04, 1.25,
+1.23, 1.31, 1.08 across six cells, and a 3/3 PASS on macros that were degenerate
+constants.
+
+A test that cannot come out wrong is not evidence. This is the project's standing
+non-vacuity requirement applied to a registered estimand rather than to a control.
+
+## What is retained, and what it now means
+
+E6A's crossing comparison is RETAINED and reported, DEMOTED to what it actually
+is: an ARITHMETIC CONSISTENCY CHECK on the implementation of the registered
+coding scheme. A large deviation would indicate a substitution or accounting bug.
+Its passing is evidence of correct implementation and of nothing else, and it may
+not be cited as support for macro economics.
+
+## The empirical estimand, registered here in its place
+
+The empirical question E6A was meant to ask is whether the LEARNER's realized
+corpus actually contains enough macro uses to pay for the macro:
+
+    E6A-1  REALIZED SUFFICIENCY.  H_eff(condition) >= H*(L, D, N)
+           where H_eff is the number of macro uses in the inferred corpus.
+
+This CAN fail, and E6 step 0 gives concrete reason to expect it might: only ~36%
+of planted teacher recurrences survive as the same learner gram, so a condition
+planted well above the crossing can land below it. Reported per (world, depth,
+L, N) as `H_eff`, `H*`, and the ratio, with the registered rule:
+
+- **PAYS** iff `H_eff >= H*` in >= 2 of 3 worlds at the primary cell
+  (`D = 6`, `L = 3`, `N = 64`).
+- **DOES NOT PAY** otherwise, which is a real negative about macro economics on
+  this substrate and not an instrument failure.
+
+Secondary and also empirical, because none of these are fixed by the formula:
+the realized `H_eff` as a fraction of planted recurrence; whether the most
+frequent gram is CONSTANT (a degenerate macro abbreviating slot repetition
+rather than recurring computation); and how `H_eff` varies with `D`, since a
+deeper program offers more sites but the same motif.
+
+## Registered prediction for the replacement estimand
+
+Ours: **PAYS at the primary cell, marginally.** Step 0 measured 13-14 surviving
+uses of a motif planted in 32 of 64 tasks, against `H*(3, 6, 64) = 7.44`. We
+expect `H_eff` in the 20-30 range at `N = 64, D = 6` with a 50% plant, clearing
+the bar by roughly 2-4x. We predict it FAILS at `N = 128` where `H* = 13.44` if
+the survival rate falls at all, and we predict the `L = 2` macro is frequently a
+CONSTANT gram, which we will report as degenerate rather than as a macro.
