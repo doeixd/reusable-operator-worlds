@@ -3024,3 +3024,45 @@ description AND search savings, which is where the MDL work and the
 program-language work merge. Defers the interaction-net / graph-rewrite
 substrate until after E5, where it would be tested on branching, recursion,
 loops, macros and language growth rather than on whether programs are possible.
+
+### [reviewer-feedback-81.txt](reviewer-feedback-81.txt)
+
+Read after E5 returned AMORTIZATION WITHOUT QUALITY at both settings. Argues
+the negative localizes the bottleneck: PROGRAM SEARCH IS ALREADY CHEAP, because
+the learned language admits an effective continuous relaxation, so the result
+understates itself if reported only as "the writer failed". Proposes splitting
+the claim into SEARCH-BASED PROGRAM SYNTHESIS (demonstrated) versus AMORTIZED
+PROGRAM WRITER (not demonstrated), and names the property behind it: the
+language is not merely expressive, compact and compositional but SMOOTHLY
+SEARCHABLE, which answers the old worry that "a short program exists" does not
+imply "a short program is findable".
+
+Bends E6 before it is frozen. The registered law
+`H s_desc + beta H s_search > D*(A)` assumed search savings were a major source
+of value; E5 says `s_search` is small, so E6 must SEPARATE THE CURRENCIES -
+`V_desc`, `V_find`, `V_exec` measured independently, combined only under an
+exchange rate frozen in advance, lest `beta` carry the conclusion. Description
+economy is primary for the first E6, search economy secondary.
+
+Redirects E6 from neural-primitive birth to MACRO INVENTION over the learned
+program language: `M := A B C`, whose cost is literal
+(`D(M) = D(definition) + D(symbol)`) and whose crossover is exactly
+`H* = D(M) / s_desc`. Three rungs: E6A oracle macro economics (candidate given,
+`D*` measured, `H*` predicted, horizon varied), E6B macro discovery (candidate
+withheld, scored against plausible WRONG candidates per the constitution), E6C
+prospective value (bits, search cost and behaviour on new programs containing
+the structure). Registers the interesting null in advance: `Delta D > 0` with
+`Delta C_find ~ 0` would mean the macro pays in compression and not in
+synthesis, and a macro that makes optimization HARDER would establish
+`description-optimal language != search-optimal language`.
+
+Also proposes a later search-scaling audit - `C_find(D, K)` swept until either
+execution error or optimization binds, separating `D_execute` from `D_search`,
+since the discrete space grew 1728x between our two settings with no visible
+degradation. Keeps the drift-law forecast as a distinct result rather than a
+footnote (confirmed mechanism -> prospective prediction -> successful
+unseen-condition forecast), and postpones rather than abandons the recognizer:
+when search does become expensive, distil it from OPT as a teacher, trained
+toward functional quality or a posterior over low-loss programs rather than one
+exact route, because the gauge results warn that symbolic identity is
+underdetermined.

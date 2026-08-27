@@ -6297,3 +6297,79 @@ Exact-route agreement with the teacher was 0.00-0.33 at `D = 3` and 0.00 in all
 three `D = 6` worlds, while the same recognizers' functional NMSE improved
 monotonically in `k`. Consistent with E0.1/E2/E8: the learned vocabulary uses a
 different gauge, and route agreement remains uninformative about use.
+
+# Review 81 (2026-08-27): terminology correction, and a claim we were understating
+
+Filed `reviews/reviewer-feedback-81.txt`, indexed. Read after E5. No E5 number
+changes; this entry records a TERMINOLOGY split and one correction to the
+reviewer, both registered before E6 is drafted.
+
+## The split, adopted
+
+    SEARCH-BASED PROGRAM SYNTHESIS   demonstrated
+    AMORTIZED PROGRAM WRITER          not demonstrated
+
+`EXPORT_BRANCH_PROGRAM.md`'s contract said route optimization "is not SYNTHESIS
+until a compact program variable exists or the search space is explicitly
+program-structured". Both conditions are now MET and have been since E3: the
+program variable is a length-`D` vector of integer slot indices, the search
+space IS that variable, and E3 confirmed bitwise in 30/30 sealed worlds that a
+task's solution IS the discrete sequence. The clause was written when neither
+held; it is satisfied now, so the word is earned for the SEARCH sense only.
+
+Verified on the artifact rather than accepted from the narrative:
+`DiscreteLibraryLearner._coefficients` returns a ONE-HOT route whenever the
+module is not in training mode, and `adapt_cell` calls `.eval()` before scoring.
+Every OPT and R number this project has reported is therefore the execution of a
+hard discrete program; the relaxation is the search medium, never the answer.
+
+## Correction to review 81: this is SEALED, not developmental
+
+Review 81 labels search-based synthesis "demonstrated developmentally". That
+understates it. The sealed block's **R** arm IS this procedure -
+`EXPORT_CONFIRMATION_PLAN.md` line 43, routes "inferred from 128 support
+examples, 2,000 Adam steps at lr 0.01" - and it confirmed on unseen triples,
+unseen adjacent pairs, unseen operator POSITIONS and unseen program lengths
+across seeds 800-829. So the licensed sentence is:
+
+> On 30 sealed worlds, gradient search over a frozen learned vocabulary
+> recovered discrete programs that solved structurally novel tasks, including
+> programs using operators in positions those operators never occupied.
+
+This is a REINTERPRETATION of confirmed sealed clauses under corrected
+terminology, not a new claim and not new evidence: no threshold, estimand or
+artifact changes, and nothing here re-opens seeds 800-829. Registered as such so
+that the upgrade is dated and traceable rather than appearing silently in prose.
+
+## What is NOT licensed by it
+
+Findability was measured only at `slots = 12`, `D in {3, 6}`, on this operator
+family, with 128 support examples and a fixed 2,000-step budget. "Smoothly
+searchable" is a hypothesis about the language, not a measured property, until
+`C_find(D, K)` is swept - which is why review 81's search-scaling audit is
+registered below as a real rung rather than an aside.
+
+## Registered before E6 is drafted
+
+- **E6 must not assume search savings.** The law
+  `H s_desc + beta H s_search > D*(A)` is SUSPENDED as a single equation.
+  `V_desc`, `V_find` and `V_exec` are measured independently; any combination
+  requires a bits-per-second exchange rate frozen in advance. This is the V5.1
+  lesson restated (measure what an intervention did to COST and to UTILITY
+  separately) plus a new one: never let a free coefficient carry a verdict.
+- **E6 becomes MACRO invention over the language**, not neural-primitive birth,
+  with the exact crossover `H* = D(M) / s_desc` as its registered estimand.
+- **Registered prediction, ours, before E6 exists.** Given E5, we predict
+  `Delta D > 0` with `Delta C_find ~ 0` - the macro will pay in description and
+  NOT in search, because search is already cheap. We further predict macros will
+  not make search materially HARDER (no crossing of the description-optimal and
+  search-optimal languages) at reachable `D`; we register that second half at
+  low confidence and would treat its falsification as the more interesting
+  outcome.
+- **Registered prediction, ours, for the search-scaling audit.** `D_search` does
+  NOT bind before `D_execute`. From the sealed drift `b = 0.581`, execution
+  error grows as `e_D ~ e_4 exp(b(D-4))`, reaching the scratch band (~0.05-0.13)
+  near `D ~ 8-9`; we predict route optimization still matches or beats the
+  oracle at every depth where the executor remains eligible. If true, the
+  binding horizon of this substrate is EXECUTION FIDELITY, not search - which
+  reverses the assumption the project has carried since V1.

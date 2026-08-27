@@ -1,0 +1,171 @@
+E5 is a very useful negative because it tells us which part of the grand story is not
+currently a bottleneck. I would change the roadmap before freezing E6.
+
+The central surprise is: PROGRAM SEARCH IS ALREADY CHEAP -- not in the naive enumerative
+sense, but because the learned language admits a very effective continuous relaxation. At
+D=6 there are 12^6 ~ 3 million discrete programs, yet route optimization still finds
+programs matching or beating the teacher reference in ~16-18 seconds. That is a bigger
+result than "the recognizer failed".
+
+## I would slightly revise the terminology
+
+Under the contract you registered, amortized PROGRAM WRITING remains open. That's correct.
+
+But in the broader program-synthesis sense, I think you already have
+
+    D_support --gradient search--> p
+
+where p is an explicit compact discrete program whose execution solves the task. That's
+program synthesis by search. So I'd distinguish
+
+    SEARCH-BASED PROGRAM SYNTHESIS: demonstrated developmentally
+
+from
+
+    AMORTIZED PROGRAM WRITER: not demonstrated
+
+Otherwise I think you're actually understating what E5 found.
+
+The remarkable thing is that the program language is not merely expressive, compact,
+compositional, but apparently also SMOOTHLY SEARCHABLE. That directly answers an old
+concern: "short program exists" does not imply "short program is findable". Here it seems
+surprisingly findable.
+
+## Why the recognizer probably shouldn't be the priority
+
+The recognizer does have information: REC_1 < REC_5 < REC_25 everywhere it actually
+learns. So this is not "neural network can't understand the task". It's more like: its
+ranking is useful, but not useful enough to beat direct optimization. And direct
+optimization is annoyingly good.
+
+At D=3, C_ENUM ~ 0.3s, so virtually no learned amortizer can justify substantial training
+cost. At D=6, C_OPT ~ 17s. Even there the recognizer costs roughly twice as much per
+served task after amortizing its own training. The economically rational learner would
+currently say: why learn a writer? I'll just solve the program when I need it. That's
+exactly the sort of economic refusal we want the project to discover.
+
+## This bends E6 substantially
+
+Your original E6 value equation was approximately
+
+    H s_desc + beta H s_search > D*(A)
+
+But E5 says, on the current substrate, s_search is probably much smaller than we expected.
+So I would NOT freeze E6 with search savings as an assumed major source of value.
+
+Instead separate the currencies experimentally. For a candidate abstraction A, measure
+
+    V_desc = H s_desc - D*(A)
+    V_find = H s_find
+    V_exec = H s_exec
+
+and only combine them if you've already frozen an explicit exchange rate between bits and
+computation. Otherwise we risk making beta carry the conclusion. For this first E6, I'd
+make description economy primary and search economy secondary.
+
+## More importantly: I think E6 should now be MACRO invention
+
+This is where the program representation suddenly gives us a cleaner experiment than the
+original "birth a neural primitive". Suppose solved programs repeatedly contain A B C. The
+system proposes M := A B C. That's a new primitive in the LANGUAGE, but it doesn't require
+learning another large neural operator. Its cost is literal:
+
+    D(M) = D(definition) + D(symbol/metadata)
+
+Every future occurrence changes A B C into M. Then there is an exact predicted crossover
+
+    H* = D(M) / s_desc
+
+where s_desc is the bits saved per use. This is almost the ideal successor to V5.
+
+You can vary: number of future uses H; macro length; overlap between macros; parameterized
+vs fixed patterns; accidental recurrence; structureless control. And require the learner
+to CREATE above the economic boundary and REFUSE below it.
+
+## Why this is better than immediately inventing new neural primitives
+
+Because it cleanly tests: CAN A LEARNED PROGRAM LANGUAGE IMPROVE ITSELF? without
+simultaneously asking whether a neural network can discover a new function. We already
+have good functions. We now have programs. So test LANGUAGE LEARNING directly.
+
+E6A -- Oracle macro economics. Give candidate M = A o B o C. Measure actual D*, predict
+H*, vary horizon. Existence/economics first.
+
+E6B -- Macro discovery. Don't provide the candidate. Give solved program corpus and ask
+the learner to identify repeated useful subprograms. Compare true candidate against
+plausible wrong candidates -- not against nothing, per the constitution.
+
+E6C -- Prospective value. After creation, give new tasks/programs containing that
+structure. Measure whether M reduces program bits, reduces search cost, preserves
+behavior. That tests actual language fertility.
+
+## E5 gives a great control for E6
+
+It may turn out that Delta D > 0 while Delta C_find ~ 0. That would be a perfectly good
+result: the macro exists because it compresses programs, not because it improves
+synthesis. Or perhaps a macro makes optimization HARDER, despite shortening programs. That
+would be even more interesting, because then we'd discover a genuine tradeoff:
+
+    description-optimal language != search-optimal language
+
+This is exactly the kind of question the project ultimately needs to answer.
+
+## There may be a deeper E5 result hiding here
+
+I would eventually do a small search-scaling audit, though not necessarily before E6. You
+now have D=3: 12^3 = 1,728 versus D=6: 12^6 ~ 2.99M. The discrete space grew by 1728x. And
+gradient route optimization didn't visibly fall apart. That's bizarre enough to deserve
+characterization.
+
+Test C_find(D, K) while the drift-law eligibility gate ensures programs are still
+executable. Potentially D = 3,4,5,6,7,... until either (1) execution error binds, or
+(2) optimization fails. Those are different horizons: D_execute and D_search. We
+previously assumed search would probably bind first. Current evidence suggests the
+opposite. That is a major architecture lesson.
+
+## The drift forecast is also more important than a footnote
+
+You had a sealed mechanism b = 0.581. Before running D=6, it predicted roughly
+e_6 ~ 0.019. Observed 0.0175, 0.0096, 0.0143. That is the first real demonstration of
+
+    confirmed mechanism -> prospective architectural prediction
+    -> successful unseen-condition forecast
+
+I'd keep that as a distinct result. It suggests we can now choose future program depths
+based on a predicted compositional-error budget instead of arbitrarily picking D. That's
+exactly what a useful theory is supposed to buy.
+
+## And I'd postpone the recognizer
+
+Not abandon it. The likely future setting where amortization becomes rational is when
+programs become structurally richer; branching expands search; loops introduce latent
+control structure; programs become longer; the same task distribution generates
+thousands/millions of queries. Then C_search might actually become material.
+
+At that point we can train q_phi(p | D) using something much better than the current
+setup. In particular, since OPT is cheap and high-quality, it can become a TEACHER.
+Generate D_t -> p_t* with OPT across huge numbers of synthetic tasks. Then train the
+writer by imitation/distillation. And because there may be multiple equivalent good
+programs, don't train solely against a single exact route. Train toward functional
+execution quality or a set/posterior of low-loss programs. The E0/E3 gauge results already
+warned us that exact symbolic identity can be underdetermined.
+
+## Revised longer-term roadmap
+
+    Banked program language
+      -> search-based synthesis / characterize C_find
+      -> E6: macro invention + economic language growth
+      -> parameterized macros
+      -> branching / explicit state
+      -> loops / recursion
+      -> graph-rewrite / interaction-net-inspired editable IR
+      -> revisit amortized synthesis when search becomes expensive
+      -> self-refactoring language
+
+The deepest update from E5 is therefore not "the writer failed". It's: THE LEARNED
+LANGUAGE APPEARS TO MAKE DIRECT PROGRAM OPTIMIZATION SO CHEAP THAT LEARNING A SEPARATE
+WRITER IS CURRENTLY IRRATIONAL. That's actually a favorable result for the grand theory. A
+good computational language should make useful programs EASY TO FIND, not merely easy to
+express. And it gives E6 a cleaner purpose: don't ask a new primitive to rescue search
+that isn't broken. Ask whether the system can INVENT NEW VOCABULARY when the future
+description savings genuinely pay for the invention.
