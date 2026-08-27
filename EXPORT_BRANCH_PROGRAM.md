@@ -459,6 +459,13 @@ amendment in full, and its export endpoint must be E1-P.
 
 # STATUS (2026-08-27): CONFIRMED ON SEEDS 800-829
 
+*Freeze note: this section is a STATUS ANNOTATION, the pattern the closed V2
+and V3 specs already use. NO decision rule, threshold, arm, terminology clause
+or run order in this document was changed - only an outcome recorded - and the
+frozen hash in `tools/check_prereg.py` moves to this commit accordingly. The
+checker caught the edit before it could pass unnoticed, which is the behaviour
+it exists for.*
+
 The branch's run order is complete through Phase 4's first half, and the claim is
 banked. `EXPORT_CONFIRMATION_PLAN.md` was frozen at `4b1f8cd` before any world in
 the band existed; the verdict was read once from its table and every clause
