@@ -116,7 +116,7 @@ against route optimization's entire 16–18 s per-task search — more expensive
 
 One methodological first is worth recording: the depth-6 setting was declared
 viable *before* it ran, by forecasting its oracle error from the sealed per-step
-drift \(b = 0.581\) as \(e_6 pprox 0.019\). Measured: 0.0175 / 0.0096 /
+drift \(b = 0.581\) as \(e_6 \approx 0.019\). Measured: 0.0175 / 0.0096 /
 0.0143.
 
 **First result of that branch (E1, 2026-08-26): the stop condition did not
