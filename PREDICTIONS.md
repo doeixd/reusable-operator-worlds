@@ -6213,3 +6213,87 @@ infer a binding generalization barrier from unseen internal-state distributions;
 and register the region the data supports rather than the story that sounds
 clean. E6's successor law is recorded as `H s_desc + beta H s_search > D*(A)` -
 a primitive may now pay through description AND search savings.
+
+# E5 (2026-08-27): the writer. VERDICT AMORTIZATION WITHOUT QUALITY at BOTH settings
+
+Plan `E5_SYNTHESIZER_PLAN.md` frozen at `72a4ae6` (Amendments 1-2). Development
+worlds 0-2. Report `reports/e5_synthesizer.json`. Decision rules registered
+before any code; outcome computed per setting by the scorer.
+
+    D = 3 (space 1,728, ENUM feasible)     AMORTIZATION WITHOUT QUALITY
+    D = 6 (space 2,985,984, ENUM infeasible) AMORTIZATION WITHOUT QUALITY
+
+The word SYNTHESIS is NOT licensed. `EXPORT_BRANCH_PROGRAM.md`'s five layers
+stand where the sealed block left them: representation reuse, exportable
+computation, composition and length closure are banked; PROGRAM WRITING is not.
+
+## D = 6 eligibility gate: PASSED 3/3
+
+Registered: the oracle must beat scratch by >= 0.75 log units in >= 2 of 3
+worlds, or `D = 6` is reported UNINTERPRETABLE. Measured 2.02 / 2.16 / 2.04.
+Depth 6 is a real test of the writer, not a degraded executor.
+
+## Scorekeeping against the registered predictions
+
+**Ours, prediction 1 (ENUM beats OPT on cost "at least ~2x, probably more", and
+matches or beats it on quality): CONFIRMED, magnitude badly underestimated.**
+ENUM was 26-28x cheaper in device-seconds (0.298-0.354 s against 7.66-9.94 s)
+and better in 2/3 worlds on quality (0.00424 vs 0.00516; 0.00350 vs 0.00422;
+tie in w1). The registered reframing follows: the opponent a writer must beat
+at `D = 3` is exhaustive search, not gradient search.
+
+**Ours, prediction 2 (QUALITY WITHOUT AMORTIZATION as the modal `D = 3`
+outcome): WRONG, and exactly inverted.** We predicted the recognizer would
+reach the oracle gap easily and fail on cost. It failed on quality (best gap
++0.32 against <= 0.15) and passed the cost clause with enormous room.
+
+**Ours, prediction 3 (`OPT` degrades at `D = 6` because gradients now search a
+2.99M-point space): WRONG, 3/3.** OPT MATCHED OR BEAT THE ORACLE at depth 6
+(-0.21 / -0.04 / -0.15) having sat at parity at depth 3 (+0.00 / +0.05 / -0.18).
+Route optimization does not degrade with program-space size in this domain.
+
+**Ours, prediction 4 (SYNTHESIS near even at `D = 6`): WRONG.** The quality
+clause failed by more at `D = 6` (+0.42 / +1.51 / +0.31) than at `D = 3`.
+
+**Review 80's (`C_find(REC) << C_find(OPT)` with `L_REC ~ L_O`, which would
+license learned program synthesis): HALF CONFIRMED.** The cost half is true by
+orders of magnitude; the quality half is false in every cell.
+
+**Amendment 1's drift-law forecast: SUCCESSFUL, the first out-of-sample use.**
+Predicted `e_6 ~ e_4 exp(2b) ~ 0.019` from the sealed `b = 0.581` before any
+`D = 6` cell ran; measured 0.01752 / 0.00962 / 0.01430. World 0 within 8%; all
+three at or below the forecast, so the forecast was conservative in the safe
+direction. Review 78 proposed the drift curve as a computable compositional
+horizon and it now has one confirmed predictive use.
+
+## The finding the registered cost clause does not capture, reported per the plan
+
+The clause counts `C_find` only, with `C_amortize` "reported beside it". Beside
+it, the writer never pays for itself:
+
+    setting  C_amortize (s/task)   the search it replaces (s/task)
+    D = 3    7.6 / 9.1 / 11.6      ENUM 0.30-0.35
+    D = 6    33.7 / 36.7 / 34.0    OPT  16.2-17.8
+
+In 6 of 6 cells, TRAINING the writer costs more than simply searching, and at
+`D = 6` it costs about twice as much. So the honest one-line reading is not
+"cheap but worse" - it is that at this scale amortization is a net loss even
+before quality is considered, and the recognizer is second-best at a premium.
+
+## Non-vacuity, disclosed: one cell FAILS its registered check
+
+The plan required the recognizer's training loss to decrease materially before
+its numbers may be read. `D = 6` world 1 does NOT: 14.917 -> 14.706 against a
+uniform-prior loss of 14.909. Its REC arm is therefore not a writer at all but
+"draw k programs from a near-uniform prior, keep the best on support", and its
++1.90/+1.62/+1.51 gaps are labeled vacuous rather than counted as evidence about
+recognizers. The scorer did not enforce this clause; it is enforced here by
+hand. THE VERDICT IS UNCHANGED: the rule is 2 of 3, and worlds 0 and 2 trained
+(14.93 -> 0.00 and 14.94 -> 0.25) and fail the quality clause on their own.
+
+## Secondary, never decisive
+
+Exact-route agreement with the teacher was 0.00-0.33 at `D = 3` and 0.00 in all
+three `D = 6` worlds, while the same recognizers' functional NMSE improved
+monotonically in `k`. Consistent with E0.1/E2/E8: the learned vocabulary uses a
+different gauge, and route agreement remains uninformative about use.

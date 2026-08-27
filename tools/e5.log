@@ -1,0 +1,9 @@
+prereg check OK: 30 frozen files unchanged; all STATUS-cited paths exist
+[D3 w0] O 0.00516 ENUM 0.00424 OPT 0.00516 S 0.06693 | REC1 0.03380 REC5 0.01589 REC25 0.00874 | gaps 1:+1.88 5:+1.12 25:+0.53
+[D3 w1] O 0.00245 ENUM 0.00245 OPT 0.00258 S 0.04839 | REC1 0.01602 REC5 0.00814 REC25 0.00378 | gaps 1:+1.88 5:+1.20 25:+0.43
+[D3 w2] O 0.00504 ENUM 0.00350 OPT 0.00422 S 0.04721 | REC1 0.01774 REC5 0.01245 REC25 0.00696 | gaps 1:+1.26 5:+0.90 25:+0.32
+[D6 w0] O 0.01752 ENUM infeasible OPT 0.01422 S 0.13255 | REC1 0.05428 REC5 0.04013 REC25 0.02679 | gaps 1:+1.13 5:+0.83 25:+0.42
+[D6 w1] O 0.00962 ENUM infeasible OPT 0.00928 S 0.08312 | REC1 0.06448 REC5 0.04866 REC25 0.04334 | gaps 1:+1.90 5:+1.62 25:+1.51
+[D6 w2] O 0.01430 ENUM infeasible OPT 0.01234 S 0.10967 | REC1 0.03308 REC5 0.02417 REC25 0.01942 | gaps 1:+0.84 5:+0.52 25:+0.31
+D3: AMORTIZATION WITHOUT QUALITY  {"REC1": {"quality": false, "cost": true, "synthesis": false}, "REC5": {"quality": false, "cost": true, "synthesis": false}, "REC25": {"quality": false, "cost": true, "synthesis": false}}
+D6: AMORTIZATION WITHOUT QUALITY  {"REC1": {"quality": false, "cost": true, "synthesis": false}, "REC5": {"quality": false, "cost": true, "synthesis": false}, "REC25": {"quality": false, "cost": true, "synthesis": false}}

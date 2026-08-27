@@ -1,0 +1,108 @@
+<div id="v6-v6r-viz">
+  <style>
+    #v6-v6r-viz { color: var(--foreground); width: 100%; }
+    #v6-v6r-viz .plots { align-items: start; }
+    #v6-v6r-viz .plot { min-width: 0; }
+    #v6-v6r-viz .plot-label { margin: 0 0 0.4rem; font-weight: 500; }
+    #v6-v6r-viz .caption { margin-top: 0.35rem; color: var(--muted-foreground); }
+    #v6-v6r-viz .chart { display: block; width: 100%; height: auto; overflow: visible; }
+    #v6-v6r-viz .axis, #v6-v6r-viz .grid { stroke: var(--border); fill: none; }
+    #v6-v6r-viz .grid { stroke-width: 1; }
+    #v6-v6r-viz .axis { stroke-width: 1.25; }
+    #v6-v6r-viz .label { fill: var(--muted-foreground); font-size: 11px; }
+    #v6-v6r-viz .value { fill: var(--foreground); font-size: 11px; font-weight: 500; }
+    #v6-v6r-viz .phi { fill: color-mix(in srgb, var(--viz-series-2) 35%, transparent); stroke: var(--viz-series-2); }
+    #v6-v6r-viz .geometry-line { fill: none; stroke: var(--viz-series-1); stroke-width: 2.5; }
+    #v6-v6r-viz .geometry-point { fill: var(--background); stroke: var(--viz-series-1); stroke-width: 2.5; }
+    #v6-v6r-viz .ordinary { fill: color-mix(in srgb, var(--viz-series-1) 42%, transparent); stroke: var(--viz-series-1); }
+    #v6-v6r-viz .prospective { fill: color-mix(in srgb, var(--viz-series-2) 42%, transparent); stroke: var(--viz-series-2); }
+    #v6-v6r-viz .legend-line { stroke: var(--viz-series-1); stroke-width: 2.5; }
+    #v6-v6r-viz .legend-box { fill: color-mix(in srgb, var(--viz-series-2) 35%, transparent); stroke: var(--viz-series-2); }
+  </style>
+  <div class="viz-grid plots">
+    <section class="plot" aria-labelledby="allocation-label">
+      <p id="allocation-label" class="plot-label">V6 allocation: structure rose while fertility stayed negative</p>
+      <svg class="chart" viewBox="0 0 350 270" role="img" aria-labelledby="allocation-title allocation-desc">
+        <title id="allocation-title">Prospective allocation sweep</title>
+        <desc id="allocation-desc">As free shared slots increase from zero to six, effective geometry rises from 0.485 to 0.716 while related-future fertility is zero or negative at every point.</desc>
+        <line class="grid" x1="48" y1="28" x2="310" y2="28" />
+        <line class="grid" x1="48" y1="88" x2="310" y2="88" />
+        <line class="grid" x1="48" y1="148" x2="310" y2="148" />
+        <line class="grid" x1="48" y1="208" x2="310" y2="208" />
+        <line class="axis" x1="48" y1="28" x2="48" y2="208" />
+        <line class="axis" x1="310" y1="28" x2="310" y2="208" />
+        <text class="label" x="42" y="32" text-anchor="end">0</text>
+        <text class="label" x="42" y="92" text-anchor="end">−4</text>
+        <text class="label" x="42" y="152" text-anchor="end">−8</text>
+        <text class="label" x="42" y="212" text-anchor="end">−12</text>
+        <text class="label" x="316" y="32">.75</text>
+        <text class="label" x="316" y="122">.60</text>
+        <text class="label" x="316" y="212">.45</text>
+        <text class="label" x="48" y="16">Φ related</text>
+        <text class="label" x="310" y="16" text-anchor="end">R effective</text>
+        <rect class="phi" x="43" y="28" width="22" height="0" />
+        <rect class="phi" x="98" y="28" width="22" height="77.7" />
+        <rect class="phi" x="153" y="28" width="22" height="177.4" />
+        <rect class="phi" x="208" y="28" width="22" height="149.9" />
+        <rect class="phi" x="273" y="28" width="22" height="126.5" />
+        <polyline class="geometry-line" points="54,187 109,163 164,74.2 219,82 284,48.4" />
+        <circle class="geometry-point" cx="54" cy="187" r="4" />
+        <circle class="geometry-point" cx="109" cy="163" r="4" />
+        <circle class="geometry-point" cx="164" cy="74.2" r="4" />
+        <circle class="geometry-point" cx="219" cy="82" r="4" />
+        <circle class="geometry-point" cx="284" cy="48.4" r="4" />
+        <text class="value" x="109" y="100" text-anchor="middle">−5.18</text>
+        <text class="value" x="164" y="199" text-anchor="middle">−11.83</text>
+        <text class="value" x="219" y="172" text-anchor="middle">−9.99</text>
+        <text class="value" x="284" y="149" text-anchor="middle">−8.43</text>
+        <text class="label" x="54" y="229" text-anchor="middle">0</text>
+        <text class="label" x="109" y="229" text-anchor="middle">1</text>
+        <text class="label" x="164" y="229" text-anchor="middle">2</text>
+        <text class="label" x="219" y="229" text-anchor="middle">3</text>
+        <text class="label" x="284" y="229" text-anchor="middle">6</text>
+        <text class="label" x="179" y="248" text-anchor="middle">free shared slots</text>
+        <line class="legend-line" x1="62" y1="261" x2="79" y2="261" />
+        <text class="label" x="84" y="265">R effective</text>
+        <rect class="legend-box" x="180" y="255" width="14" height="11" />
+        <text class="label" x="199" y="265">Φ related</text>
+      </svg>
+    </section>
+    <section class="plot" aria-labelledby="audit-label">
+      <p id="audit-label" class="plot-label">V6R at k=128: the endpoint gap survives optimizer changes</p>
+      <svg class="chart" viewBox="0 0 350 270" role="img" aria-labelledby="audit-title audit-desc">
+        <title id="audit-title">High-budget future-task endpoints</title>
+        <desc id="audit-desc">For Adam at learning rates 0.01 and 0.05 and for LBFGS, prospective final query cost is about 0.030 compared with about 0.018 for ordinary.</desc>
+        <line class="grid" x1="48" y1="208" x2="326" y2="208" />
+        <line class="grid" x1="48" y1="152" x2="326" y2="152" />
+        <line class="grid" x1="48" y1="96" x2="326" y2="96" />
+        <line class="grid" x1="48" y1="40" x2="326" y2="40" />
+        <line class="axis" x1="48" y1="28" x2="48" y2="208" />
+        <text class="label" x="42" y="212" text-anchor="end">0</text>
+        <text class="label" x="42" y="156" text-anchor="end">.01</text>
+        <text class="label" x="42" y="100" text-anchor="end">.02</text>
+        <text class="label" x="42" y="44" text-anchor="end">.03</text>
+        <text class="label" x="48" y="16">scaled query cost</text>
+        <rect class="ordinary" x="75" y="106.4" width="27" height="101.6" />
+        <rect class="prospective" x="104" y="41.3" width="27" height="166.7" />
+        <rect class="ordinary" x="164" y="108.8" width="27" height="99.2" />
+        <rect class="prospective" x="193" y="44.7" width="27" height="163.3" />
+        <rect class="ordinary" x="253" y="108.1" width="27" height="99.9" />
+        <rect class="prospective" x="282" y="40.5" width="27" height="167.5" />
+        <text class="value" x="89" y="101" text-anchor="middle">.0181</text>
+        <text class="value" x="118" y="35" text-anchor="middle">.0298</text>
+        <text class="value" x="178" y="103" text-anchor="middle">.0177</text>
+        <text class="value" x="207" y="39" text-anchor="middle">.0292</text>
+        <text class="value" x="267" y="103" text-anchor="middle">.0178</text>
+        <text class="value" x="296" y="34" text-anchor="middle">.0299</text>
+        <text class="label" x="103" y="229" text-anchor="middle">Adam .01</text>
+        <text class="label" x="192" y="229" text-anchor="middle">Adam .05</text>
+        <text class="label" x="281" y="229" text-anchor="middle">LBFGS</text>
+        <rect class="ordinary" x="90" y="250" width="14" height="11" />
+        <text class="label" x="109" y="260">ordinary</text>
+        <rect class="prospective" x="200" y="250" width="14" height="11" />
+        <text class="label" x="219" y="260">prospective</text>
+      </svg>
+      <p class="caption text-small">Primary prospective cost is 64% higher; all six paired task gaps are positive.</p>
+    </section>
+  </div>
+</div>

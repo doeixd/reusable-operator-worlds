@@ -1324,3 +1324,32 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   returned 0.785. A `q ~ 1` registration would have MISSED a clause that is
   true. Mechanistic intuition can get the direction right and the magnitude
   wrong, and only the interval decides.
+
+- AN AMORTIZATION CLAIM MUST CHARGE THE COST OF BUILDING THE AMORTIZER, AND
+  NAME ITS DENOMINATOR (E5, 2026-08-27). Counting only `C_find` said E5's
+  recognizer beat search by orders of magnitude; counting `C_amortize`
+  (training seconds per task served) showed that in 6 of 6 cells TRAINING the
+  writer cost more than simply searching -- 7.6-11.6 s/task against exhaustive
+  search at 0.30 s, and 33.7-36.7 s/task against route optimization's entire
+  16-18 s per-task search. Same family as the matched-BUDGET rule for sharing
+  claims: "faster at inference" and "cheaper overall" are different claims and
+  only the second is a reason to build the thing. State how many tasks the
+  amortization is spread over before reading any speedup.
+
+- SEARCH THAT DOES NOT DEGRADE IS THE REAL OPPONENT (E5). We registered that
+  gradient route optimization would degrade in a 2,985,984-program space; it
+  MATCHED OR BEAT THE ORACLE in 3/3 worlds, having sat at parity in a
+  1,728-program space -- and exhaustive enumeration was 26-28x cheaper than
+  gradient search where it was feasible at all. Before building a learned
+  proposer, measure how the dumb baseline scales in the dimension you intend to
+  grow; program-space SIZE is not automatically what makes finding hard, and
+  growing it may buy no difficulty at all.
+
+- REGISTER A FORECAST WITH A GATE ATTACHED (E5 Amendment 1). Predicting the
+  depth-6 oracle error from the sealed drift `b = 0.581` (`e_6 ~ 0.019`,
+  measured 0.01752/0.00962/0.01430) was this project's first successful
+  out-of-sample use of a confirmed estimand to decide whether an untested
+  condition was worth running. It was safe to do only because a registered
+  eligibility gate would have labeled the setting UNINTERPRETABLE had the
+  forecast failed, instead of leaving a degraded executor indistinguishable from
+  a bad arm.

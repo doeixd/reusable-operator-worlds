@@ -4218,3 +4218,43 @@ each operator was fitted on states at most two compositions deep. The effect is
 real and visible in the per-step trace, and both times it was an order of
 magnitude too small to bind. Recorded as a standing calibration error rather
 than as a one-off miss.
+
+- E5, THE WRITER IS THE BOTTLENECK, NOT THE SEARCH (2026-08-27;
+  `reports/e5_synthesizer.json`, plan frozen `72a4ae6`). Both settings returned
+  AMORTIZATION WITHOUT QUALITY, so SYNTHESIS stays unlicensed. The surprise is
+  which half failed. Finding a good program is EASY and gets easier than we
+  predicted: exhaustive search over 1,728 programs was 26-28x cheaper than 2,000
+  Adam steps and better in 2/3 worlds, and at depth 6 - a 2,985,984-program
+  space where enumeration is infeasible - route optimization MATCHED OR BEAT THE
+  ORACLE in 3/3 worlds (-0.21/-0.04/-0.15) rather than degrading as registered.
+  What failed is amortizing that search into a feed-forward map: the recognizer
+  was second-best in every cell (best oracle gap +0.32 at D=3, +0.31 at D=6
+  against a required <= 0.15) while improving monotonically in k, so its ranking
+  carries real information and is simply not sharp enough. Transferable rules.
+  (1) CHARGE THE COST OF MAKING THE AMORTIZER, ALWAYS: `C_find` alone said the
+  cost clause passed by orders of magnitude, while `C_amortize` (training
+  seconds per task served) was 7.6-11.6 s/task at D=3 against ENUM's 0.30 and
+  33.7-36.7 s/task at D=6 against OPT's ENTIRE 16-18 s search - in 6 of 6 cells
+  building the writer cost more than not having one. An amortization claim needs
+  the amortization denominator stated, and at this task count it is never
+  reached. (2) A SEARCH BASELINE THAT SCALES IS THE REAL OPPONENT: we registered
+  that gradient route search would degrade in a 3M-point space and it did not,
+  which means the successor rung is not a bigger space - depth already gave us
+  one - but a setting where search itself is expensive per QUERY, or a writer
+  trained where its supervision is not self-generated. (3) The registered
+  non-vacuity clause EARNED ITS KEEP AGAIN: D=6 world 1's recognizer never
+  learned (loss 14.917 -> 14.706 against a uniform 14.909) and its arm is
+  labeled vacuous rather than read as a recognizer result; the scorer did not
+  enforce the clause and hand enforcement caught it. Same family as V6's inner
+  loop that moved the support loss 0.000%.
+
+- THE DRIFT LAW FORECAST WORKED, ONCE, OUT OF SAMPLE (2026-08-27). Amendment 1
+  predicted the depth-6 oracle error as `e_6 ~ e_4 exp(2b) ~ 0.019` from the
+  SEALED per-step drift `b = 0.581`, and registered a gate that would have made
+  a wrong forecast legible. Measured 0.01752 / 0.00962 / 0.01430; world 0 within
+  8%, all three at or below the prediction. This is the first time this project
+  computed the viability of an untested condition from a confirmed mechanism
+  estimand instead of discovering it by running, and it is what review 78
+  proposed the drift curve for: a COMPOSITIONAL HORIZON you can calculate.
+  Register such a forecast with a gate attached, so that being wrong produces an
+  UNINTERPRETABLE label rather than a silently degraded arm.

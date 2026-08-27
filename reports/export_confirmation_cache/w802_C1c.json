@@ -1,0 +1,1 @@
+{"protocol": "22a506ccb1e410b6", "value": {"geomean": {"true": 0.0027785248760759784, "wrong_route": 0.03748634389914143, "shuffled_library": 0.03880270210602953, "wrong_depth": 0.02996133986444589}, "gauge_bitwise": 64, "tasks": 64, "collapse": {"wrong_route": 2.6020565372061517, "shuffled_library": 2.636569719355003, "wrong_depth": 2.3779877126689453}}}

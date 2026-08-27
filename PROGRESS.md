@@ -3537,3 +3537,44 @@ slots=12, D=3 is cheaper than 2,000 gradient steps, so the recognizer's real
 opponent is ENUM, not OPT) and with the modal outcome registered in advance as
 QUALITY WITHOUT AMORTIZATION - together with its consequence, that the correct
 successor would then be a larger program space rather than a better recognizer.
+
+# E5 complete: the writer fails on quality, not on cost (2026-08-27)
+
+Ran `src/row/experiments/audit_e5_synthesizer.py` on development worlds 0-2 at
+both registered settings against `E5_SYNTHESIZER_PLAN.md` (frozen `72a4ae6`,
+Amendments 1-2). Report `reports/e5_synthesizer.json`; protocol-fingerprinted
+cell cache `reports/e5_cache`; log `tools/e5.log`.
+
+**Verdict, computed by the scorer from the pre-registered rules:**
+AMORTIZATION WITHOUT QUALITY at `D = 3` AND at `D = 6`. SYNTHESIS is not
+licensed; the terminology contract's PROGRAM WRITING layer remains open.
+
+| setting | O | ENUM | OPT | S | REC1 | REC5 | REC25 |
+|---|---|---|---|---|---|---|---|
+| D3 w0 | 0.00516 | 0.00424 | 0.00516 | 0.06693 | 0.03380 | 0.01589 | 0.00874 |
+| D3 w1 | 0.00245 | 0.00245 | 0.00258 | 0.04839 | 0.01602 | 0.00814 | 0.00378 |
+| D3 w2 | 0.00504 | 0.00350 | 0.00422 | 0.04721 | 0.01774 | 0.01245 | 0.00696 |
+| D6 w0 | 0.01752 | infeasible | 0.01422 | 0.13255 | 0.05428 | 0.04013 | 0.02679 |
+| D6 w1 | 0.00962 | infeasible | 0.00928 | 0.08312 | 0.06448 | 0.04866 | 0.04334 |
+| D6 w2 | 0.01430 | infeasible | 0.01234 | 0.10967 | 0.03308 | 0.02417 | 0.01942 |
+
+- `D = 6` eligibility gate PASSED 3/3 (oracle over scratch 2.02 / 2.16 / 2.04
+  against a registered >= 0.75), so the depth-6 cells are interpretable.
+- Best REC oracle gaps are +0.53/+0.43/+0.32 (D3) and +0.42/+1.51/+0.31 (D6)
+  against a required <= 0.15. Quality clause fails everywhere.
+- Cost clause passes as registered (25 executions against 1,728; 0.008-0.014 s
+  against 0.30-17.8 s), but `C_amortize` reported beside it is 7.6-11.6 s/task
+  at D3 and 33.7-36.7 s/task at D6 - larger in 6/6 cells than the search it
+  replaces, and about 2x OPT's whole per-task cost at D6.
+- `OPT` matched or beat the oracle at depth 6 in 3/3 worlds, contradicting our
+  registered prediction that gradient search would degrade in a 2.99M space.
+- Amendment 1's drift-law forecast of `e_6 ~ 0.019` was borne out (measured
+  0.01752 / 0.00962 / 0.01430) - the first out-of-sample use of a sealed
+  estimand as a forecast in this project.
+- DISCLOSED: `D = 6` world 1 fails the plan's recognizer non-vacuity clause
+  (training loss 14.917 -> 14.706, uniform 14.909); its REC arm is labeled
+  vacuous. Verdict unaffected - worlds 0 and 2 trained and fail quality alone
+  under the registered 2-of-3 rule.
+
+Full scorekeeping against every registered prediction, ours and review 80's, is
+appended to `PREDICTIONS.md`.
