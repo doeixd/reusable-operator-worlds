@@ -94,6 +94,31 @@ an export test. Its first registered stop condition is real: if a frozen library
 cannot solve unseen teacher programs even with oracle routing, the synthesis
 interpretation of this substrate ends.
 
+**But the language cannot yet be *written* (E5, development worlds 0–2).** With
+the vocabulary frozen and the sealed block having established that good programs
+exist, a learned recognizer \(q_\phi(p \mid D_{	ext{support}})\) was asked to
+produce them in one forward pass. It fails on **quality**, not on cost: its best
+oracle gap is +0.32 at depth 3 and +0.31 at depth 6 against a pre-registered
+requirement of ≤0.15, in both cases second-best in every world. The registered
+verdict is *amortization without quality*, and the word **synthesis** stays
+unlicensed.
+
+Two results make the failure informative rather than merely negative. **Finding
+is easy and does not get harder with program-space size:** exhaustive search over
+1,728 programs was 26–28× cheaper than 2,000 gradient steps and better in 2 of 3
+worlds, and at depth 6 — 2,985,984 programs, where enumeration is infeasible —
+route optimization *matched or beat the oracle* in 3 of 3, contradicting the
+registered prediction that it would degrade. **And the amortizer never pays for
+itself:** charged over the tasks it serves, training the recognizer cost
+7.6–11.6 s/task against exhaustive search at 0.30 s, and 33.7–36.7 s/task
+against route optimization's entire 16–18 s per-task search — more expensive, in
+6 of 6 cells, than simply not having a writer.
+
+One methodological first is worth recording: the depth-6 setting was declared
+viable *before* it ran, by forecasting its oracle error from the sealed per-step
+drift \(b = 0.581\) as \(e_6 pprox 0.019\). Measured: 0.0175 / 0.0096 /
+0.0143.
+
 **First result of that branch (E1, 2026-08-26): the stop condition did not
 fire.** A frozen discrete library executes teacher programs it never trained on
 at 0.0019–0.0076 NMSE — at or below its own *trained*-task loss — against
