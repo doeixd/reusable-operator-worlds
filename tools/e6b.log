@@ -1,0 +1,13 @@
+prereg check OK: 32 frozen files unchanged; all STATUS-cited paths exist
+[w0] macro (11, 6, 4) | P 17.88s M 14.55s K 19.23s
+       dC_macro +3.33s (SE 0.65) vs predicted 5.66s -> x0.59 WITHIN 2x
+       dC_width +1.35s (SE 1.20) | dC_length +4.68s | quality M-P +0.088 log | M uses macro in 100% of tasks
+[w1] macro (8, 8, 5) | P 23.35s M 17.29s K 24.41s
+       dC_macro +6.07s (SE 1.88) vs predicted 5.66s -> x1.07 WITHIN 2x
+       dC_width +1.06s (SE 1.99) | dC_length +7.13s | quality M-P -0.021 log | M uses macro in 100% of tasks
+[w2] macro (8, 9, 6) | P 20.44s M 16.61s K 21.73s
+       dC_macro +3.83s (SE 1.27) vs predicted 5.66s -> x0.68 WITHIN 2x
+       dC_width +1.29s (SE 0.57) | dC_length +5.12s | quality M-P -0.107 log | M uses macro in 100% of tasks
+
+E6B: 3/3 worlds within a factor of 2 of the predicted 5.66s -> PREDICTED SAVING CONFIRMED
+mean width cost +1.23s (over the registered 1s)

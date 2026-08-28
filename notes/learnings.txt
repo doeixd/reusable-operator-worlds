@@ -4398,3 +4398,32 @@ than as a one-off miss.
   validated; at depth 8 it reads 56%/73%/44% against a truth of 3%/25%/11%.
   Agreement in the easy regime is not validation of a shortcut -- check it where
   the confound is large, not where it is absent.
+
+- E6B, A COST LAW SURVIVED A CAUSAL TEST (2026-08-28;
+  `reports/e6b_search_savings.json`). E5.1 fitted `C_find` against program depth
+  across a sweep where depth and task distribution move together. E6B held the
+  TASK fixed and moved only the program's length by substituting a macro, and the
+  measured length effect was `+5.64 s` against a `5.66 s` prediction registered
+  before the run (`1.00 +/- 0.13` at n = 3 worlds). Abstraction shortens a program
+  and synthesis cost falls by the amount forecast from a different experiment's
+  law, with no free coefficient. Report the interval, not the point agreement --
+  three worlds cannot support three-figure precision.
+
+- DECOMPOSE AN INTERVENTION THAT MOVES TWO THINGS (E6B). Macro substitution
+  shortens the program (`D -> D-L+1`) AND widens the alphabet (`K -> K+1`) at the
+  same time. The raw effect read `x0.78` of prediction, which is equally
+  consistent with a slightly wrong law and with two partly cancelling effects. A
+  matched control that added the 13th symbol WITHOUT shortening anything measured
+  the width cost at `+1.23 s` (world SE 0.09, about 22% of the length saving),
+  and the residual matched the law. We had registered `|Delta C_K| < 1 s` and it
+  was WRONG -- a "surely negligible" overhead that was neither negligible nor
+  noisy. Measure the nuisance term; do not assume it away.
+
+- HUNT HARDEST FOR THE BIAS THAT FLATTERS YOUR HYPOTHESIS (E6B). The dry run
+  showed the first timed adaptation in a process costs ~2.5x a later one (1.10 s
+  against 0.44 s). The estimand was `P - M` with `P` always measured first, so
+  the warmup would have been added to the reference arm in every cell and pushed
+  the result toward the registered prediction. Fixed with an untimed warmup per
+  world plus ROTATION of arm order across paired tasks, recording the position
+  each arm occupied. Ordering effects are invisible in a summary statistic and
+  systematic in a fixed loop.

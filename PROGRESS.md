@@ -3713,3 +3713,39 @@ https://claude.ai/code/artifact/78f6807c-9206-41ba-913a-0e08cd70fba6
 
 It is a synthesis for reading. `PREDICTIONS.md`, this file and
 `notes/learnings.txt` remain authoritative.
+
+# E6B complete: macro substitution reduces search cost by the predicted amount (2026-08-28)
+
+Ran `src/row/experiments/audit_e6b_search_savings.py` on development worlds 0-2,
+`D = 6`, `L = 3`, 8 paired tasks per world, against `E6_MACRO_PLAN.md` (frozen
+`7ff5edb`, Amendment 2). Report `reports/e6b_search_savings.json`; cache
+`reports/e6b_cache`; log `tools/e6b.log`.
+
+**PREDICTED SAVING CONFIRMED, 3/3 worlds**, and 3/3 on the quality gate.
+
+Three arms paired by task: `P` (12 slots, depth 6), `M` (13 slots incl. the
+macro, depth 4), `K` (13 slots incl. a duplicate operator, depth 6 -- pure width
+control).
+
+    pooled  dC_macro  +4.41 s   x0.78 of the predicted 5.66 s
+            dC_width  +1.23 s   (world SE 0.09)
+            dC_length +5.64 s   x1.00, i.e. 1.00 +/- 0.13 at n = 3 worlds
+
+The prediction came from E5.1's fitted law `C_hat(D) = 2.8287 D - 1.1719` (192
+cells) and was registered before any E6B cell ran. E5.1 measured the law across a
+depth sweep where depth and task distribution move together; E6B holds the task
+fixed and moves only length, so the law now survives a causal test.
+
+Two things worth carrying forward. The dummy-symbol control (review 83) is what
+turned an ambiguous x0.78 into a clean decomposition -- without it there was no
+way to distinguish a slightly wrong law from two partly cancelling effects. And a
+warmup bias was found in the dry run and removed before the run: the first timed
+adaptation costs ~2.5x a later one, and with a fixed arm order that cost would
+have landed on the reference arm every time, inflating the result toward the
+registered prediction.
+
+Registered prediction `|Delta C_K| < 1 s` FAILED (1.23 s, tightly estimated).
+The claim that the saving is independent of `D` remains UNTESTED -- E6B ran at
+one depth.
+
+Next: E6D, the four refusal controls, at depths 4-6 only.

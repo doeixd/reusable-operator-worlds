@@ -6851,3 +6851,81 @@ predicted from the pre-existing search law.
     E6E   can the learner discover which macro?
     E6.2  can the macro be COMPILED into independent semantics? (E6C's question,
           plus a fourth currency Delta e_execute)
+
+# E6B (2026-08-28): PREDICTED SAVING CONFIRMED 3/3 -- abstraction causally reduces synthesis cost
+
+Plan `E6_MACRO_PLAN.md` frozen at `7ff5edb` (Amendment 2). Development worlds
+0-2, `D = 6`, `L = 3`, 8 paired tasks per world, 2,000-step route optimization.
+Report `reports/e6b_search_savings.json`.
+
+## Result
+
+Registered prediction, from E5.1's own 192 cells and fixed before any E6B cell
+ran: `C_hat(D) = 2.8287 D - 1.1719`, so `Delta C_pred = a(L-1) = 5.66 s`.
+
+    world  macro        dC_macro   dC_width   dC_length   quality (log)
+      0    (11,6,4)      +3.33      +1.35      +4.68        +0.088
+      1    (8,8,5)       +6.07      +1.06      +7.13        -0.021
+      2    (8,9,6)       +3.83      +1.29      +5.12        -0.107
+
+    pooled  dC_macro  +4.41 s (world SE 0.84)   x0.78 of predicted
+            dC_width  +1.23 s (world SE 0.09)   x0.22
+            dC_length +5.64 s (world SE 0.75)   x1.00
+
+**Verdict: PREDICTED SAVING CONFIRMED, 3/3 worlds within a factor of 2, and 3/3
+passing the quality gate** (pooled quality gap -0.013 log; the macro arm is not
+cheaper by being worse, and used the macro in 100% of tasks in all three worlds).
+
+## What this establishes
+
+Shortening a program by macro substitution causes synthesis cost to fall by the
+amount FORECAST FROM A DIFFERENT EXPERIMENT'S FITTED LAW, with no free
+coefficient and with the prediction registered before the intervention. E5.1
+measured `C_find ~ D` across a depth SWEEP, where depth and task distribution
+move together; E6B holds the task fixed and moves only the program's length. The
+law survives the causal test.
+
+This is the first rung of the E6 line whose positive result is not an identity.
+Amendment 1 retired one estimand for being algebraic, Amendment 2 retired another
+for being definitional; this one was predicted out of sample and could have
+failed.
+
+## The decomposition did the real work
+
+`Delta C_macro` alone reads x0.78 -- an approximate confirmation that could
+equally have been a law slightly wrong or two effects partly cancelling. Review
+83's dummy-symbol control separates them: adding the 13th symbol WITHOUT
+shortening anything costs `+1.23 s`, and once that width cost is removed the
+length effect is `+5.64 s` against a predicted `5.66 s`.
+
+**The 0.3% point agreement is not to be quoted as precision.** With three worlds
+and a world-level SE of 0.75 s the honest statement is `ratio 1.00 +/- 0.13`. The
+claim is that the length effect is CONSISTENT WITH the pre-existing law, not that
+it reproduces it to three figures.
+
+## Scorekeeping
+
+- **"`Delta C_macro` within a factor of 2 in >= 2 of 3 worlds": CORRECT**, 3/3.
+- **"`|Delta C_K| < 1 s`": WRONG.** Measured `+1.23 s`, and wrong with an
+  unusually tight estimate -- the three worlds give 1.35, 1.06 and 1.29, a world
+  SE of 0.09. Widening the route variable from 12 to 13 costs real time, about
+  22% of the length saving it accompanies. Registered as a measured quantity for
+  future rungs rather than an assumption.
+- **"the saving is independent of `D`": NOT TESTED.** E6B ran at `D = 6` only.
+  The distinctive claim of the fitted law against the `(L-1)/D` ratio form
+  therefore remains open, and must not be reported as supported. At `D = 6` the
+  two forms predict 5.66 s and 5.27 s and this rung cannot separate them.
+- An informal pre-launch estimate from counting operator applications
+  (`4 x (12+3) = 60` against `6 x 12 = 72`, implying ~2.8 s) was TOO PESSIMISTIC
+  for `Delta C_macro` (4.41 s measured). Recorded because it was stated aloud
+  before the run; the fitted law was the better instrument.
+
+## Measurement bias found and removed before the run
+
+The dry run showed the first timed adaptation in a process costs ~2.5x a later
+one (1.10 s against 0.44 s). With a fixed arm order that warmup lands on `P`
+every time, and since the estimand is `P - M`, it would have inflated the result
+TOWARD the registered prediction. Fixed by an untimed warmup adaptation per world
+and by ROTATING arm order across the paired tasks, with the position each arm
+occupied recorded per cell. A bias that flatters the hypothesis is the one most
+worth hunting for.

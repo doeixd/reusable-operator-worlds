@@ -1,0 +1,323 @@
+{
+ "frozen_plan": "E6_MACRO_PLAN.md (Amendment 2)",
+ "git_commit": "ca34694",
+ "protocol": {
+  "depth": 6,
+  "macro_len": 3,
+  "pairs": 8,
+  "steps": 2000,
+  "lr": 0.01,
+  "cost_law": {
+   "a": 2.8287,
+   "b": -1.1719,
+   "source": "E5.1, 192 cells"
+  },
+  "predicted_delta_seconds": 5.6574,
+  "ratio_form_seconds": 5.266766666666666,
+  "dummy": "duplicate of library[0]: width without capability",
+  "note": "paired by task; macro arm must not be cheaper by being worse"
+ },
+ "worlds": {
+  "0": {
+   "macro": [
+    11,
+    6,
+    4
+   ],
+   "macro_is_constant": false,
+   "tasks": [
+    2,
+    8,
+    11,
+    14,
+    19,
+    23,
+    24,
+    25
+   ],
+   "seconds": {
+    "P": {
+     "mean": 17.8828125,
+     "sd": 3.7039866764213856,
+     "se": 1.3095570481610919
+    },
+    "M": {
+     "mean": 14.552734375,
+     "sd": 3.784402625201459,
+     "se": 1.337988379510062
+    },
+    "K": {
+     "mean": 19.23046875,
+     "sd": 4.550610962095993,
+     "se": 1.6088839349199577
+    }
+   },
+   "nmse": {
+    "P": 0.012677887314608356,
+    "M": 0.01383759204414168,
+    "K": 0.015545766829114965
+   },
+   "delta_macro": {
+    "mean": 3.330078125,
+    "sd": 1.8304498629063402,
+    "se": 0.6471617553415296
+   },
+   "delta_width": {
+    "mean": 1.34765625,
+    "sd": 3.3880138274972404,
+    "se": 1.1978437760885443
+   },
+   "delta_length": {
+    "mean": 4.677734375,
+    "sd": 4.503059921180134,
+    "se": 1.5920721031779166
+   },
+   "predicted": 5.6574,
+   "ratio_predicted": 5.9609375,
+   "ratio_observed_over_predicted": 0.588623418001202,
+   "within_factor_2": true,
+   "quality_log_gap_M_minus_P": {
+    "mean": 0.08752963024245619,
+    "sd": 0.6234004385359548,
+    "se": 0.22040533874172058
+   },
+   "quality_ok": true,
+   "arm_fields_differing": [
+    "init_source",
+    "frozen_parameters"
+   ],
+   "macro_used_by_M": 1.0,
+   "arm_records": {
+    "P": {
+     "arm_name": "P",
+     "init_source": "trained",
+     "checkpoint_hash": "11cce74b75c5c327",
+     "fresh_seed": null,
+     "trainable_parameters": 0,
+     "trainable_tensors": 0,
+     "frozen_parameters": 5520,
+     "optimizer": null,
+     "optimizer_lr": null,
+     "steps": 2000,
+     "data_seen": "support only"
+    },
+    "M": {
+     "arm_name": "M",
+     "init_source": "copy:trained",
+     "checkpoint_hash": "506df32074d775c3",
+     "fresh_seed": null,
+     "trainable_parameters": 0,
+     "trainable_tensors": 0,
+     "frozen_parameters": 3975,
+     "optimizer": null,
+     "optimizer_lr": null,
+     "steps": 2000,
+     "data_seen": "support only"
+    }
+   }
+  },
+  "1": {
+   "macro": [
+    8,
+    8,
+    5
+   ],
+   "macro_is_constant": false,
+   "tasks": [
+    1,
+    3,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+   ],
+   "seconds": {
+    "P": {
+     "mean": 23.353515625,
+     "sd": 5.3030834184486055,
+     "se": 1.8749231231914731
+    },
+    "M": {
+     "mean": 17.28515625,
+     "sd": 3.4061552861995823,
+     "se": 1.204257750323065
+    },
+    "K": {
+     "mean": 24.412109375,
+     "sd": 2.576615325034594,
+     "se": 0.9109710844205707
+    }
+   },
+   "nmse": {
+    "P": 0.005971016356423321,
+    "M": 0.005846099096993554,
+    "K": 0.005971016356423321
+   },
+   "delta_macro": {
+    "mean": 6.068359375,
+    "sd": 5.321361683967364,
+    "se": 1.8813854659397944
+   },
+   "delta_width": {
+    "mean": 1.05859375,
+    "sd": 5.634959870305676,
+    "se": 1.9922591680036057
+   },
+   "delta_length": {
+    "mean": 7.126953125,
+    "sd": 1.8562011007718686,
+    "se": 0.6562661928008612
+   },
+   "predicted": 5.6574,
+   "ratio_predicted": 7.784505208333333,
+   "ratio_observed_over_predicted": 1.072641032099551,
+   "within_factor_2": true,
+   "quality_log_gap_M_minus_P": {
+    "mean": -0.021142539078659817,
+    "sd": 0.26897115310083153,
+    "se": 0.09509566315058152
+   },
+   "quality_ok": true,
+   "arm_fields_differing": [
+    "init_source",
+    "frozen_parameters"
+   ],
+   "macro_used_by_M": 1.0,
+   "arm_records": {
+    "P": {
+     "arm_name": "P",
+     "init_source": "trained",
+     "checkpoint_hash": "97f89f5ee2f76ac3",
+     "fresh_seed": null,
+     "trainable_parameters": 0,
+     "trainable_tensors": 0,
+     "frozen_parameters": 5520,
+     "optimizer": null,
+     "optimizer_lr": null,
+     "steps": 2000,
+     "data_seen": "support only"
+    },
+    "M": {
+     "arm_name": "M",
+     "init_source": "copy:trained",
+     "checkpoint_hash": "7a152c36c3e5f3ce",
+     "fresh_seed": null,
+     "trainable_parameters": 0,
+     "trainable_tensors": 0,
+     "frozen_parameters": 3975,
+     "optimizer": null,
+     "optimizer_lr": null,
+     "steps": 2000,
+     "data_seen": "support only"
+    }
+   }
+  },
+  "2": {
+   "macro": [
+    8,
+    9,
+    6
+   ],
+   "macro_is_constant": false,
+   "tasks": [
+    2,
+    8,
+    16,
+    17,
+    19,
+    20,
+    21,
+    22
+   ],
+   "seconds": {
+    "P": {
+     "mean": 20.439453125,
+     "sd": 5.1654911608439225,
+     "se": 1.8262769139959543
+    },
+    "M": {
+     "mean": 16.609375,
+     "sd": 4.369942868006727,
+     "se": 1.545008117682673
+    },
+    "K": {
+     "mean": 21.73046875,
+     "sd": 5.43778061416719,
+     "se": 1.9225457734411846
+    }
+   },
+   "nmse": {
+    "P": 0.00859808864890057,
+    "M": 0.007727311809575625,
+    "K": 0.0086194991955752
+   },
+   "delta_macro": {
+    "mean": 3.830078125,
+    "sd": 3.598477456395311,
+    "se": 1.2722539056820215
+   },
+   "delta_width": {
+    "mean": 1.291015625,
+    "sd": 1.6109440491934215,
+    "se": 0.5695547306483917
+   },
+   "delta_length": {
+    "mean": 5.12109375,
+    "sd": 3.293967171445778,
+    "se": 1.1645932619675903
+   },
+   "predicted": 5.6574,
+   "ratio_predicted": 6.813151041666666,
+   "ratio_observed_over_predicted": 0.677003239120444,
+   "within_factor_2": true,
+   "quality_log_gap_M_minus_P": {
+    "mean": -0.10677888704145888,
+    "sd": 0.33702687259352065,
+    "se": 0.11915699352648651
+   },
+   "quality_ok": true,
+   "arm_fields_differing": [
+    "init_source",
+    "frozen_parameters"
+   ],
+   "macro_used_by_M": 1.0,
+   "arm_records": {
+    "P": {
+     "arm_name": "P",
+     "init_source": "trained",
+     "checkpoint_hash": "26ee717e8031b133",
+     "fresh_seed": null,
+     "trainable_parameters": 0,
+     "trainable_tensors": 0,
+     "frozen_parameters": 5520,
+     "optimizer": null,
+     "optimizer_lr": null,
+     "steps": 2000,
+     "data_seen": "support only"
+    },
+    "M": {
+     "arm_name": "M",
+     "init_source": "copy:trained",
+     "checkpoint_hash": "64dad9ac4f0e048b",
+     "fresh_seed": null,
+     "trainable_parameters": 0,
+     "trainable_tensors": 0,
+     "frozen_parameters": 3975,
+     "optimizer": null,
+     "optimizer_lr": null,
+     "steps": 2000,
+     "data_seen": "support only"
+    }
+   }
+  }
+ },
+ "verdict": {
+  "worlds_within_factor_2": 3,
+  "worlds_quality_ok": 3,
+  "passes": true,
+  "mean_delta_width_seconds": 1.232421875,
+  "width_under_1s": false
+ }
+}
