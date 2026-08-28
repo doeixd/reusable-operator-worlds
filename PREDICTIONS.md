@@ -7012,3 +7012,60 @@ that survives.
 - **Amendment 3's post-hoc expectation** (formed after a pre-check on nested
   competitors, and labelled as carrying less weight) is borne out and now extends
   to permuted, non-adjacent and random rivals.
+
+# CORRECTION to E6D's interpretation (2026-08-28, same day): control 2 is adversarial
+
+Found while designing E6E, by asking whether the criterion E6D demands could
+exist. It cannot, in that construction.
+
+## The measurement
+
+The accidental pattern's uses per quarter of the corpus (observed | future):
+
+    world  0-31  32-63  |  64-95  96-127   late/early within observed
+      0      9     13   |    1      0            1.44
+      1     25     29   |    1      1            1.16
+      2     12     14   |    0      0            1.17
+
+The motif is UNIFORM -- slightly increasing -- across the whole observed window
+and then stops dead. `plant_corpus` sets `carry = index < planted`, so the split
+is a step function by construction.
+
+## What this changes
+
+**E6D's verdict STANDS.** "The registered retrospective rule creates a macro that
+does not continue, losing 40-55 bits" is true, measured, and paired against a
+positive case where the rule is correct 3/3.
+
+**Our recorded interpretation was too strong and is corrected here.** The E6D
+entry says "E6E must score candidates by a PROSPECTIVE estimate -- held-out or
+forward-looking recurrence". That implies a better past-only criterion exists.
+It does not, in this construction: the observed corpus contains NO signal about
+non-continuation, so every past-only statistic -- recurrence stability, trend,
+recency weighting, sub-split cross-validation -- is equally blind. Asking a
+learner to refuse here is asking it to know something absent from its data.
+
+The licensed conclusion narrows to: **a two-part code over past programs cannot
+decide creation TIMING when the generator's recurrence changes abruptly, and this
+particular control cannot distinguish "the rule lacks a criterion" from "the task
+is impossible".**
+
+## Consequence for E6E, registered before it is built
+
+E6E's control set must GRADE DETECTABILITY, so that the impossible case is
+labelled rather than scored:
+
+    A  continuing      recurrence stable into the future     must CREATE
+    B  decaying        recurrence falls across the OBSERVED
+                       window before the future begins        must REFUSE
+    C  sharp step      uniform then absent (E6D's control)    UNSCOREABLE
+
+Only B can discriminate between criteria, because only B places the evidence
+inside the data the learner is allowed to see. A is the positive case; C is
+retained as a LIMIT CASE and reported as unscoreable rather than as a failure.
+
+This is the project's opportunity-gate discipline applied to a decision rule
+rather than to a representation: before asking whether a learner can decide
+something, verify the signal that would license the decision is present in its
+input. We ran the check this time only because E6D's negative was about to become
+a design requirement for the next rung.
