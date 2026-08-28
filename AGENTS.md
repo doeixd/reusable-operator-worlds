@@ -1416,3 +1416,19 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   decision economic. Compute a registered threshold's value under the null
   BEFORE freezing it; "the formula is standard" is not the same as "the number
   it produces can discriminate".
+
+
+- NEVER USE AN OBJECT'S DEFINING INVARIANT AS EVIDENCE THAT THE OBJECT HAS
+  LEARNED THAT INVARIANT (review 83, after two retirements in one plan). Three
+  instances are now on record and they look different until you state the rule:
+  a predicted crossing `H*` recomputed from the same coding scheme the
+  measurement evaluates (E6A, Amendment 1); a DEFINITIONAL macro tested for
+  substitutability against its own expansion, which holds bitwise because that is
+  what "definitional" means (E6C, Amendment 2); and an exact alias compared to
+  its source. Each reads as a positive experimental result and each measures only
+  whether the implementation is correct. The diagnostic question at design time
+  is: could this comparison come out any other way given how the object is
+  CONSTRUCTED? If not, the rung is an implementation check -- keep it, label it
+  as one, and find the estimand that can fail. Both retirements here were caught
+  before compute was spent, one by a dry run and one by re-reading the plan's own
+  definition.

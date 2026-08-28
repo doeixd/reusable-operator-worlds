@@ -3104,3 +3104,46 @@ PRIMARILY BY REDUCING EFFECTIVE PROGRAM LENGTH, NOT BY REDUCING THE NOMINAL
 CARDINALITY OF THE SEARCH SPACE. Places the interaction-net / editable graph
 substrate after macro invention succeeds, where the question becomes branches,
 loops and arbitrary reusable subgraphs rather than contiguous subsequences.
+
+### [reviewer-feedback-83.txt](reviewer-feedback-83.txt)
+
+Read after E6A. Confirms the retirement of E6C and names the principle behind it:
+DEFINITIONAL EQUIVALENCE CANNOT BE EVIDENCE FOR SEMANTIC SUBSTITUTABILITY. If `M`
+is defined to execute `A -> B -> C`, then `c[M] =? c[A B C]` tests only that the
+expansion runtime is implemented correctly; the question becomes scientific only
+once `M` has independent semantics, i.e. a compiled operator in E6.2. Generalizes
+it to a constitutional rule covering three now-observed instances -- a predicted
+`H*` recomputed from the same code, a definitional macro against its own
+expansion, and an exact alias against its source: NEVER USE AN OBJECT'S DEFINING
+INVARIANT AS EVIDENCE THAT THE OBJECT HAS LEARNED THAT INVARIANT.
+
+Promotes E6B to the load-bearing positive rung and tightens it three ways:
+PAIR BY TASK (build `p_M` from the same task as `p` so the within-task difference
+removes the task-draw noise that produced E5.1's spurious horizon); predict from
+the FITTED E5.1 cost law `C_hat(D) - C_hat(D-L+1)` rather than the `(L-1)/D`
+ratio, since the former has no post-hoc scaling; and add a DUMMY-SYMBOL CONTROL
+that adds an unused `(K+1)`-th symbol without shortening anything, so the effect
+decomposes as `Delta C_macro = Delta C_length + Delta C_K` and the pure
+search-width cost is measured rather than assumed small. Notes that our
+"maybe underpowered" concern is falsified by the measured within-depth variance.
+
+States what E6B would establish: ABSTRACTION SHORTENS A PROGRAM AND CAUSES
+SYNTHESIS COST TO FALL BY THE AMOUNT PREDICTED FROM THE PRE-EXISTING SEARCH LAW --
+connecting compression to computational efficiency causally rather than
+rhetorically, with the prediction made before the intervention.
+
+Frames E6D as the rung that separates intelligence from compression: E6A alone
+shows only that representing repeated syntax by a symbol can save bits, which is
+almost classical compression; E6D asks whether the same accounting CREATES when
+profitable and REFUSES when not, across four deliberately orthogonal families.
+Endorses depths 4-6 only, since the depth-8 attractor regime destroys
+identifiability. Sets E6E's objective explicitly as
+`M* = argmax_M [Delta D(M) + lambda_compute * Delta C_find(M)]`, and reserves
+E6.2 for the compiled macro -- where E6C's retired question is answerable, where
+failure is possible, where PRIMITIVE INVENTION could be licensed in the stronger
+semantic sense, and where a fourth currency `Delta e_execute` appears because one
+compiled call may accumulate less error than three approximate ones.
+
+Closes by noting that two planned positive experiments have now been removed for
+being identities, and that this is the program becoming better at distinguishing
+facts about the world from facts about its own implementation.

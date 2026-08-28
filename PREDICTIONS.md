@@ -6793,3 +6793,61 @@ We further register, as a NEW prediction from this sweep: at `D >= 8` the
 WRONG-GROUPING control of E6D would be passed trivially, because any competing
 grouping of an attractor run is also an attractor run. A control that cannot
 discriminate at a given depth is UNSCOREABLE there, not passed.
+
+# Review 83 (2026-08-28): E6C retired as an identity; E6B tightened and made load-bearing
+
+Filed `reviews/reviewer-feedback-83.txt`, indexed. `E6_MACRO_PLAN.md` Amendment 2,
+re-frozen at `7ff5edb`.
+
+## The second identity retired from this plan
+
+E6C asked whether a macro "remains functionally substitutable for its expansion in
+unseen contexts". But this plan defines a definitional macro as a symbol whose
+execution IS its expansion, so the comparison holds bitwise everywhere. It could
+only ever have measured the expansion runtime. Retired from E6.1 and relocated to
+E6.2, where a compiled `P_M` has independent semantics and the test can fail.
+
+Two estimands in one plan have now been retired for the same reason (Amendment 1's
+crossing test, Amendment 2's substitutability test). The shared rule is added to
+`AGENTS.md`.
+
+## E6B's registered design, after Amendment 2
+
+- **Paired by task.** `p_M` is built from the same task as `p`; the estimand is
+  the within-task difference. This removes the noise source that produced E5.1's
+  spurious `D_search = 7`.
+- **Predicted from the fitted law.** E5.1's own 192 cells give
+  `C_hat(D) = 2.8287 D - 1.1719` (`r^2 = 0.873`), so
+  `Delta C_find_pred = a(L-1) = 5.66 s` at `L = 3`, INDEPENDENT OF `D`. The
+  `(L-1)/D` ratio form predicts 5.07-5.27 s and depends on depth; both are
+  reported and the fitted law is registered.
+- **Dummy-symbol control.** Adds an unused `(K+1)`-th symbol without shortening
+  anything, decomposing `Delta C_macro = Delta C_length + Delta C_K`.
+
+## Registered predictions
+
+Ours: `Delta C_macro` within a factor of 2 of 5.66 s in >= 2 of 3 worlds at
+`D = 6, L = 3`; `|Delta C_K| < 1 s`; and the saving INDEPENDENT of `D` within
+noise. That last is the fitted law's distinctive claim against the ratio form, and
+if the saving instead scales with `D` we report the ratio form as right and the
+linear fit as locally wrong.
+
+Power, computed before running from E5.1's within-depth spread: `sigma = 2.19 s`,
+so `SE ~ 0.77 s` at `n = 8` paired tasks and the predicted effect is ~7.1 SE.
+**This supersedes the concern registered with Amendment 1 that E6B might be
+underpowered.** That concern estimated noise from cross-depth cell means rather
+than within-depth per-cell spread and was simply WRONG -- recorded here rather
+than quietly dropped.
+
+Review 83's: `Delta C_K` will be small; E6B landing would establish that
+abstraction shortens a program and causes synthesis cost to fall by the amount
+predicted from the pre-existing search law.
+
+## Revised rung order, registered
+
+    E6A   DONE - PAYS 3/3
+    E6B   next - does shortening causally reduce search cost?
+    E6D   does the economics correctly REFUSE?
+    E6E   can the learner discover which macro?
+    E6.2  can the macro be COMPILED into independent semantics? (E6C's question,
+          plus a fourth currency Delta e_execute)
