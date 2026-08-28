@@ -3702,3 +3702,14 @@ image at 83% survival rather than a degenerate repeat as first described.
 Registered before building the remaining rungs: E6C and E6D run at `D = 4` or
 `D = 6` only, and are UNSCOREABLE at `D >= 8` where every competing grouping of
 an attractor run is also an attractor run.
+
+# Session synthesis: E5 -> E6A (2026-08-28)
+
+`E5_E6A_SESSION_REPORT.md` collects the E5 / E5.1 / E6 step 0 / E6A arc into one
+readable record: the three verdicts, the corrections ledger (ten defects, none of
+which reached a published verdict), the constitutional rules added, and the
+drift-law forecast. Published copy:
+https://claude.ai/code/artifact/78f6807c-9206-41ba-913a-0e08cd70fba6
+
+It is a synthesis for reading. `PREDICTIONS.md`, this file and
+`notes/learnings.txt` remain authoritative.
