@@ -3679,3 +3679,26 @@ Three findings the amended estimand made visible:
    E6D's wrong-grouping and sham controls load-bearing.
 
 Depth sweep (`D = 4, 8, 10`) launched behind the same cache.
+
+# E6A depth sweep complete: macro meaning collapses between depth 6 and 8 (2026-08-28)
+
+Ran `audit_e6a_macro_economics.py` over `D in {4, 6, 8, 10}`, worlds 0-2, corpus
+128 at a 50% plant. Report `reports/e6a_macro_economics.json`; cache
+`reports/e6a_cache` (1,538 cells); logs `tools/e6a.log`, `tools/e6a_depths.log`.
+
+Registered primary unchanged: **PAYS 3/3** at `D=6, L=3, N=64`.
+
+Site-restricted motif survival by depth (mean over worlds): **91%, 53%, 13%,
+7%** at depths 4, 6, 8, 10, with chance matches in unplanted routes rising from
+0 to ~12. At depths 8 and 10 every macro at every length is a run of a
+per-library attractor slot (2, 11, 7) and every cell still reports PAYS -- the
+bits are real, the structure is not.
+
+Two corrections made and recorded in `PREDICTIONS.md`: `H_eff/planted` is not a
+survival rate (right by luck at depth 4 where chance matches are zero, wrong by
+a factor of ~5 at depth 8), and world 1's depth-6 `(8,8,5)` is the genuine motif
+image at 83% survival rather than a degenerate repeat as first described.
+
+Registered before building the remaining rungs: E6C and E6D run at `D = 4` or
+`D = 6` only, and are UNSCOREABLE at `D >= 8` where every competing grouping of
+an attractor run is also an attractor run.

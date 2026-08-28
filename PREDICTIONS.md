@@ -6722,3 +6722,74 @@ explains.
   `N = 128`.
 - **"the `L = 2` macro is frequently a CONSTANT gram": CORRECT**, in 2 of 3
   worlds, and reported as degenerate rather than as a macro.
+
+# E6A depth sweep (2026-08-28): the macro pays everywhere, and MEANS something only while the language still writes programs
+
+Plan `E6_MACRO_PLAN.md` frozen at `00726f0` (Amendment 1). Worlds 0-2, corpus 128
+at a 50% plant, `D in {4, 6, 8, 10}`. Report `reports/e6a_macro_economics.json`.
+
+## Registered primary, unchanged: PAYS 3/3 at (`D=6`, `L=3`, `N=64`)
+
+`H_eff` 22 / 54 / 26 against `H* = 7.44`. The implementation check returned 3/3
+at ratios 1.02-1.14 and remains an identity, not evidence, per Amendment 1.
+
+## The depth sweep, with the site-restricted survival measure
+
+Motif survival = planted routes whose PLANTED SITE holds the macro, over planted
+routes. Chance = unplanted routes containing the macro anywhere.
+
+    depth   survival (w0/w1/w2)     mean    chance matches   L=3 macro
+      4     94% / 80% / 100%        91%     0 / 0 / 0        clean, 3/3
+      6     34% / 83% /  41%        53%     1 / 2 / 0        clean, 3/3
+      8      3% / 25% /  11%        13%    20 / 10 / 6       constant run, 3/3
+     10     17% /  5% /   0%         7%    11 / 13 / 13      constant run, 3/3
+
+**Every cell at every depth reports PAYS at `N = 128`, including the cells whose
+macro is a run of one slot.** At `D >= 8` the most compressible pattern in the
+learner's corpus is a per-library ATTRACTOR SLOT -- 2 in world 0, 11 in world 1,
+7 in world 2 -- and the planted recurring computation has been swamped by it.
+Route inference still fits the support set; the program it emits has stopped
+being a description of the computation.
+
+The economics are correct in every cell: the bits are genuinely saved under the
+registered code. What varies is whether the abbreviated thing is structure. This
+is the E6A result: A MACRO PAYS WHEREVER SOMETHING RECURS, AND WHETHER THAT
+SOMETHING IS COMPUTATION IS A SEPARATE QUESTION THE CODE LENGTH CANNOT ANSWER.
+
+## Two corrections to statements made while the sweep ran
+
+1. **`H_eff / planted` is not a survival rate** and was quoted as one. It counts
+   gram occurrences anywhere, so chance matches inflate it and misses at planted
+   sites are hidden. At depth 4 chance matches are ZERO, so the shortcut happened
+   to equal the correct measure (94% / 80% / 100%) -- right by luck. At depth 8
+   the shortcut reads 56% / 73% / 44% where the site-restricted truth is
+   3% / 25% / 11%. Fixed in `motif_survival`, which reports the chance rate as
+   its own column so the two quantities cannot be conflated again.
+
+2. **World 1's depth-6 macro `(8,8,5)` was wrongly called semi-degenerate.** Its
+   survival is 83% with 2 chance matches: it is the genuine image of the planted
+   motif, which merely contains a repeated slot. Degeneracy must be diagnosed by
+   SURVIVAL AND CHANCE RATE, never by inspecting whether a gram contains a
+   repeat. Under the corrected diagnosis, depth 4 and depth 6 are clean in 3/3
+   worlds and only depths 8 and 10 are degenerate.
+
+## Scorekeeping added to the primary-cell entry
+
+- The `N`-dependence of the alphabet tax is confirmed twice more: world 2 at
+  `D = 10, L = 2` and `L = 3` pays ONLY at `N = 128`, and at `L = 4` never.
+- The macro-length optimum holds at every depth: `L = 4` fails to reach its
+  crossing in world 0 at `D = 8` and world 2 at `D = 10`.
+
+## Consequences registered for the remaining E6 rungs
+
+E6C (substitutability in unseen contexts) and E6D (refusal controls) must be run
+at `D = 4` or `D = 6`, where the macro is the motif's image, and MUST NOT be run
+at `D >= 8`, where the candidate is an attractor run and every control would be
+answering a question about inference drift rather than about language growth.
+This is registered before those rungs are built so the depth choice cannot later
+look like it was made to obtain a result.
+
+We further register, as a NEW prediction from this sweep: at `D >= 8` the
+WRONG-GROUPING control of E6D would be passed trivially, because any competing
+grouping of an attractor run is also an attractor run. A control that cannot
+discriminate at a given depth is UNSCOREABLE there, not passed.

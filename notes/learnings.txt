@@ -4362,3 +4362,39 @@ than as a one-off miss.
   under a correct code are still real bits; what they MEAN depends on whether the
   abbreviated pattern is structure or artifact, and only a substitutability test
   in unseen contexts and a sham-alias control can say which.
+
+- A CODE-LENGTH WIN DOES NOT KNOW WHAT IT COMPRESSED (E6A, 2026-08-28). Across
+  depths 4-10 every macro cell reported PAYS under the registered two-part code,
+  including cells whose macro was a run of a single slot. Site-restricted motif
+  survival fell 91% -> 53% -> 13% -> 7% as depth went 4 -> 6 -> 8 -> 10, while
+  chance matches in unplanted routes rose from 0 to ~12: past depth 8 the most
+  compressible pattern in the learner's corpus is a per-library ATTRACTOR SLOT
+  (2, 11, 7 in worlds 0, 1, 2), not the planted computation. Route inference
+  still fits the support set; the program stops being a description of it.
+  Whenever a compression argument is the evidence, carry a separate measure of
+  WHAT was compressed -- the bits cannot tell you.
+
+- GAUGE SURVIVAL IS DEPTH-DEPENDENT, AND THAT BOUNDS WHERE LANGUAGE QUESTIONS
+  CAN BE ASKED (E6A). A teacher subsequence planted in half the corpus is written
+  as the same learner subsequence 91% of the time at depth 4 and 7% of the time
+  at depth 10. Longer programs give route inference more freedom to satisfy the
+  support set some other way, so recurring COMPUTATION stops being recurring
+  SYNTAX. E6's later rungs are therefore restricted to depths 4-6 in advance;
+  at depth 8+ a wrong-grouping control would be passed trivially because every
+  competing grouping of an attractor run is also an attractor run, which makes
+  the control UNSCOREABLE there rather than passed.
+
+- DIAGNOSE DEGENERACY BY MEASUREMENT, NOT BY APPEARANCE (E6A). World 1's
+  depth-6 macro `(8,8,5)` was called semi-degenerate because it contains a
+  repeated slot; its site-restricted survival is 83% with 2 chance matches, so
+  it is the genuine image of the planted motif. Conversely `(2,2,2)` at depth 8
+  looks equally repetitive and has 3% survival with 20 chance matches. The
+  surface form of a pattern says nothing; survival and chance rate say
+  everything.
+
+- AN APPROXIMATION CAN BE RIGHT BY LUCK IN THE REGION YOU CHECKED IT (E6A).
+  `H_eff / planted` was quoted as a survival rate. At depth 4 chance matches are
+  exactly zero, so it equalled the correct site-restricted measure and looked
+  validated; at depth 8 it reads 56%/73%/44% against a truth of 3%/25%/11%.
+  Agreement in the easy regime is not validation of a shortcut -- check it where
+  the confound is large, not where it is absent.

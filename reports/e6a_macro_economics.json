@@ -1,9 +1,12 @@
 {
  "frozen_plan": "E6_MACRO_PLAN.md",
- "git_commit": "5f0469c",
+ "git_commit": "3ffa095",
  "protocol": {
   "depths": [
-   6
+   4,
+   6,
+   8,
+   10
   ],
   "corpus": 128,
   "plant_fraction": 0.5,
@@ -23,6 +26,886 @@
   "note": "uses counted in the LEARNER corpus, never planted"
  },
  "depths": {
+  "4": {
+   "worlds": {
+    "0": {
+     "teacher_motif": [
+      1,
+      2,
+      0
+     ],
+     "by_macro_len": {
+      "2": {
+       "macro": [
+        4,
+        2
+       ],
+       "macro_is_constant": false,
+       "total_uses_in_corpus": 70,
+       "bearing_routes": 70,
+       "observed_crossing_uses": 10,
+       "predicted_H_star": 9.177460526212151,
+       "ratio_observed_over_predicted": 1.0896260432217124,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 58,
+       "max_uses": 58,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.934793707065884,
+         "ratio": 1.0165717183132172,
+         "within_factor_2": true,
+         "max_uses": 16,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.9320001143597,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 32,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": false,
+         "reason": "needs 64 macro-free routes, corpus has 58"
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 58"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 16,
+         "bearing_routes": 16,
+         "H_star": 3.934793707065884,
+         "ratio": 4.066286873252869,
+         "pays": true,
+         "net_saving_bits": 44.64656857393925
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 32,
+         "bearing_routes": 32,
+         "H_star": 5.9320001143597,
+         "ratio": 5.394470563568774,
+         "pays": true,
+         "net_saving_bits": 96.46306214932082
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 64,
+         "bearing_routes": 64,
+         "H_star": 9.92641292894733,
+         "ratio": 6.447444858289511,
+         "pays": true,
+         "net_saving_bits": 200.09604930008402
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 70,
+         "bearing_routes": 70,
+         "H_star": 17.915238558122592,
+         "ratio": 3.907288187812754,
+         "pays": true,
+         "net_saving_bits": 192.7365199494268
+        }
+       }
+      },
+      "3": {
+       "macro": [
+        4,
+        2,
+        9
+       ],
+       "macro_is_constant": false,
+       "total_uses_in_corpus": 60,
+       "bearing_routes": 60,
+       "observed_crossing_uses": 6,
+       "predicted_H_star": 5.69725409032841,
+       "ratio_observed_over_predicted": 1.0531389165502603,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 68,
+       "max_uses": 60,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 3,
+         "predicted_H_star": 2.4517936784759593,
+         "ratio": 1.2235939860424174,
+         "within_factor_2": true,
+         "max_uses": 16,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.450396882122867,
+         "ratio": 1.159286927461802,
+         "within_factor_2": true,
+         "max_uses": 32,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.447603289416683,
+         "ratio": 1.1014017873982278,
+         "within_factor_2": true,
+         "max_uses": 60,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 68"
+        }
+       },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 60,
+        "survival_rate": 0.9375,
+        "chance_matches_in_unplanted": 0,
+        "chance_rate": 0.0
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 16,
+         "bearing_routes": 16,
+         "H_star": 2.4517936784759593,
+         "ratio": 6.525834592226226,
+         "pays": true,
+         "net_saving_bits": 100.26864156347557
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 32,
+         "bearing_routes": 32,
+         "H_star": 3.450396882122867,
+         "ratio": 9.274295419694417,
+         "pays": true,
+         "net_saving_bits": 211.29217062911462
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 60,
+         "bearing_routes": 60,
+         "H_star": 5.447603289416683,
+         "ratio": 11.01401787398228,
+         "pays": true,
+         "net_saving_bits": 403.735711015264
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 60,
+         "bearing_routes": 60,
+         "H_star": 9.442016104004315,
+         "ratio": 6.354575054638413,
+         "pays": true,
+         "net_saving_bits": 374.17354335576033
+        }
+       }
+      },
+      "4": {
+       "macro": [
+        4,
+        2,
+        9,
+        7
+       ],
+       "macro_is_constant": false,
+       "total_uses_in_corpus": 10,
+       "bearing_routes": 10,
+       "observed_crossing_uses": 7,
+       "predicted_H_star": 6.2015239511120095,
+       "ratio_observed_over_predicted": 1.1287548117499109,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 118,
+       "max_uses": 10,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 2,
+         "predicted_H_star": 1.9574603356126508,
+         "ratio": 1.0217320696687502,
+         "within_factor_2": true,
+         "max_uses": 10,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 3,
+         "predicted_H_star": 2.623195804710589,
+         "ratio": 1.1436431831023695,
+         "within_factor_2": true,
+         "max_uses": 10,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.9546667429064666,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 10,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 118"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 3,
+         "bearing_routes": 3,
+         "H_star": 1.9574603356126508,
+         "ratio": 1.5325981045031252,
+         "pays": true,
+         "net_saving_bits": 11.573565545509297
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 4,
+         "bearing_routes": 4,
+         "H_star": 2.623195804710589,
+         "ratio": 1.524857577469826,
+         "pays": true,
+         "net_saving_bits": 15.284342785056651
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 10,
+         "bearing_routes": 10,
+         "H_star": 3.9546667429064666,
+         "ratio": 2.528658076672863,
+         "pays": true,
+         "net_saving_bits": 67.11117388184448
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 10,
+         "bearing_routes": 10,
+         "H_star": 6.61760861929822,
+         "ratio": 1.5111198886616044,
+         "pays": true,
+         "net_saving_bits": 37.54900622234095
+        }
+       }
+      }
+     }
+    },
+    "1": {
+     "teacher_motif": [
+      4,
+      0,
+      1
+     ],
+     "by_macro_len": {
+      "2": {
+       "macro": [
+        8,
+        1
+       ],
+       "macro_is_constant": false,
+       "total_uses_in_corpus": 74,
+       "bearing_routes": 74,
+       "observed_crossing_uses": 9,
+       "predicted_H_star": 8.678158924388697,
+       "ratio_observed_over_predicted": 1.0370863311464389,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 54,
+       "max_uses": 54,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.934793707065884,
+         "ratio": 1.0165717183132172,
+         "within_factor_2": true,
+         "max_uses": 16,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.9320001143597,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 32,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": false,
+         "reason": "needs 64 macro-free routes, corpus has 54"
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 54"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 16,
+         "bearing_routes": 16,
+         "H_star": 3.934793707065884,
+         "ratio": 4.066286873252869,
+         "pays": true,
+         "net_saving_bits": 44.64656857393925
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 32,
+         "bearing_routes": 32,
+         "H_star": 5.9320001143597,
+         "ratio": 5.394470563568774,
+         "pays": true,
+         "net_saving_bits": 96.46306214932082
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 64,
+         "bearing_routes": 64,
+         "H_star": 9.92641292894733,
+         "ratio": 6.447444858289511,
+         "pays": true,
+         "net_saving_bits": 200.09604930008402
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 74,
+         "bearing_routes": 74,
+         "H_star": 17.915238558122592,
+         "ratio": 4.130561798544911,
+         "pays": true,
+         "net_saving_bits": 207.53827882199107
+        }
+       }
+      },
+      "3": {
+       "macro": [
+        8,
+        1,
+        4
+       ],
+       "macro_is_constant": false,
+       "total_uses_in_corpus": 51,
+       "bearing_routes": 51,
+       "observed_crossing_uses": 7,
+       "predicted_H_star": 6.258968392379796,
+       "ratio_observed_over_predicted": 1.1183951669291698,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 77,
+       "max_uses": 51,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 3,
+         "predicted_H_star": 2.4517936784759593,
+         "ratio": 1.2235939860424174,
+         "within_factor_2": true,
+         "max_uses": 16,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.450396882122867,
+         "ratio": 1.159286927461802,
+         "within_factor_2": true,
+         "max_uses": 32,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.447603289416683,
+         "ratio": 1.1014017873982278,
+         "within_factor_2": true,
+         "max_uses": 51,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 77"
+        }
+       },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 51,
+        "survival_rate": 0.796875,
+        "chance_matches_in_unplanted": 0,
+        "chance_rate": 0.0
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 12,
+         "bearing_routes": 12,
+         "H_star": 2.4517936784759593,
+         "ratio": 4.89437594416967,
+         "pays": true,
+         "net_saving_bits": 70.66512381834684
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 24,
+         "bearing_routes": 24,
+         "H_star": 3.450396882122867,
+         "ratio": 6.955721564770812,
+         "pays": true,
+         "net_saving_bits": 152.08513513885714
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 51,
+         "bearing_routes": 51,
+         "H_star": 5.447603289416683,
+         "ratio": 9.361915192884938,
+         "pays": true,
+         "net_saving_bits": 337.12779608872427
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 51,
+         "bearing_routes": 51,
+         "H_star": 9.442016104004315,
+         "ratio": 5.401388796442651,
+         "pays": true,
+         "net_saving_bits": 307.5656284292206
+        }
+       }
+      },
+      "4": {
+       "macro": [
+        4,
+        8,
+        1,
+        4
+       ],
+       "macro_is_constant": false,
+       "total_uses_in_corpus": 8,
+       "bearing_routes": 8,
+       "observed_crossing_uses": 7,
+       "predicted_H_star": 6.284740884749253,
+       "ratio_observed_over_predicted": 1.1138088472328935,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 120,
+       "max_uses": 8,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 2,
+         "predicted_H_star": 1.9574603356126508,
+         "ratio": 1.0217320696687502,
+         "within_factor_2": true,
+         "max_uses": 8,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 3,
+         "predicted_H_star": 2.623195804710589,
+         "ratio": 1.1436431831023695,
+         "within_factor_2": true,
+         "max_uses": 8,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.9546667429064666,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 8,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 120"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 2,
+         "bearing_routes": 2,
+         "H_star": 1.9574603356126508,
+         "ratio": 1.0217320696687502,
+         "pays": true,
+         "net_saving_bits": 0.4722463910860313
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 4,
+         "bearing_routes": 4,
+         "H_star": 2.623195804710589,
+         "ratio": 1.524857577469826,
+         "pays": true,
+         "net_saving_bits": 15.284342785056651
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 8,
+         "bearing_routes": 8,
+         "H_star": 3.9546667429064666,
+         "ratio": 2.0229264613382902,
+         "pays": true,
+         "net_saving_bits": 44.90853557299795
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 8,
+         "bearing_routes": 8,
+         "H_star": 6.61760861929822,
+         "ratio": 1.2088959109292834,
+         "pays": true,
+         "net_saving_bits": 15.346367913494305
+        }
+       }
+      }
+     }
+    },
+    "2": {
+     "teacher_motif": [
+      4,
+      0,
+      2
+     ],
+     "by_macro_len": {
+      "2": {
+       "macro": [
+        6,
+        8
+       ],
+       "macro_is_constant": false,
+       "total_uses_in_corpus": 69,
+       "bearing_routes": 69,
+       "observed_crossing_uses": 10,
+       "predicted_H_star": 9.302285926668015,
+       "ratio_observed_over_predicted": 1.0750045826189627,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 59,
+       "max_uses": 59,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.934793707065884,
+         "ratio": 1.0165717183132172,
+         "within_factor_2": true,
+         "max_uses": 16,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.9320001143597,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 32,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": false,
+         "reason": "needs 64 macro-free routes, corpus has 59"
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 59"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 16,
+         "bearing_routes": 16,
+         "H_star": 3.934793707065884,
+         "ratio": 4.066286873252869,
+         "pays": true,
+         "net_saving_bits": 44.64656857393925
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 32,
+         "bearing_routes": 32,
+         "H_star": 5.9320001143597,
+         "ratio": 5.394470563568774,
+         "pays": true,
+         "net_saving_bits": 96.46306214932082
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 64,
+         "bearing_routes": 64,
+         "H_star": 9.92641292894733,
+         "ratio": 6.447444858289511,
+         "pays": true,
+         "net_saving_bits": 200.09604930008402
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 69,
+         "bearing_routes": 69,
+         "H_star": 17.915238558122592,
+         "ratio": 3.851469785129715,
+         "pays": true,
+         "net_saving_bits": 189.03608023128572
+        }
+       }
+      },
+      "3": {
+       "macro": [
+        7,
+        6,
+        8
+       ],
+       "macro_is_constant": false,
+       "total_uses_in_corpus": 64,
+       "bearing_routes": 64,
+       "observed_crossing_uses": 6,
+       "predicted_H_star": 5.447603289416683,
+       "ratio_observed_over_predicted": 1.1014017873982278,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 64,
+       "max_uses": 64,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 3,
+         "predicted_H_star": 2.4517936784759593,
+         "ratio": 1.2235939860424174,
+         "within_factor_2": true,
+         "max_uses": 16,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.450396882122867,
+         "ratio": 1.159286927461802,
+         "within_factor_2": true,
+         "max_uses": 32,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.447603289416683,
+         "ratio": 1.1014017873982278,
+         "within_factor_2": true,
+         "max_uses": 64,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 64"
+        }
+       },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 64,
+        "survival_rate": 1.0,
+        "chance_matches_in_unplanted": 0,
+        "chance_rate": 0.0
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 16,
+         "bearing_routes": 16,
+         "H_star": 2.4517936784759593,
+         "ratio": 6.525834592226226,
+         "pays": true,
+         "net_saving_bits": 100.26864156347557
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 32,
+         "bearing_routes": 32,
+         "H_star": 3.450396882122867,
+         "ratio": 9.274295419694417,
+         "pays": true,
+         "net_saving_bits": 211.29217062911462
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 64,
+         "bearing_routes": 64,
+         "H_star": 5.447603289416683,
+         "ratio": 11.748285732247764,
+         "pays": true,
+         "net_saving_bits": 433.3392287603927
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 64,
+         "bearing_routes": 64,
+         "H_star": 9.442016104004315,
+         "ratio": 6.778213391614307,
+         "pays": true,
+         "net_saving_bits": 403.7770611008891
+        }
+       }
+      },
+      "4": {
+       "macro": [
+        7,
+        6,
+        8,
+        8
+       ],
+       "macro_is_constant": false,
+       "total_uses_in_corpus": 10,
+       "bearing_routes": 10,
+       "observed_crossing_uses": 7,
+       "predicted_H_star": 6.2015239511120095,
+       "ratio_observed_over_predicted": 1.1287548117499109,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 118,
+       "max_uses": 10,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 2,
+         "predicted_H_star": 1.9574603356126508,
+         "ratio": 1.0217320696687502,
+         "within_factor_2": true,
+         "max_uses": 10,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 3,
+         "predicted_H_star": 2.623195804710589,
+         "ratio": 1.1436431831023695,
+         "within_factor_2": true,
+         "max_uses": 10,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.9546667429064666,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 10,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 118"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 2,
+         "bearing_routes": 2,
+         "H_star": 1.9574603356126508,
+         "ratio": 1.0217320696687502,
+         "pays": true,
+         "net_saving_bits": 0.4722463910860313
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 5,
+         "bearing_routes": 5,
+         "H_star": 2.623195804710589,
+         "ratio": 1.9060719718372825,
+         "pays": true,
+         "net_saving_bits": 26.385661939479917
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 10,
+         "bearing_routes": 10,
+         "H_star": 3.9546667429064666,
+         "ratio": 2.528658076672863,
+         "pays": true,
+         "net_saving_bits": 67.11117388184448
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 10,
+         "bearing_routes": 10,
+         "H_star": 6.61760861929822,
+         "ratio": 1.5111198886616044,
+         "pays": true,
+         "net_saving_bits": 37.54900622234095
+        }
+       }
+      }
+     }
+    }
+   }
+  },
   "6": {
    "worlds": {
     "0": {
@@ -82,6 +965,10 @@
          "reachable": false,
          "reason": "needs 128 macro-free routes, corpus has 95"
         }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
        },
        "realized_sufficiency": {
         "16": {
@@ -174,6 +1061,14 @@
          "reason": "needs 128 macro-free routes, corpus has 105"
         }
        },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 22,
+        "survival_rate": 0.34375,
+        "chance_matches_in_unplanted": 1,
+        "chance_rate": 0.015625
+       },
        "realized_sufficiency": {
         "16": {
          "n": 16,
@@ -265,6 +1160,10 @@
          "reachable": false,
          "reason": "needs 128 macro-free routes, corpus has 122"
         }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
        },
        "realized_sufficiency": {
         "16": {
@@ -359,6 +1258,10 @@
          "reason": "needs 128 macro-free routes, corpus has 50"
         }
        },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
        "realized_sufficiency": {
         "16": {
          "n": 16,
@@ -449,6 +1352,14 @@
          "reachable": false,
          "reason": "needs 128 macro-free routes, corpus has 72"
         }
+       },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 53,
+        "survival_rate": 0.828125,
+        "chance_matches_in_unplanted": 2,
+        "chance_rate": 0.03125
        },
        "realized_sufficiency": {
         "16": {
@@ -541,6 +1452,10 @@
          "reachable": false,
          "reason": "needs 128 macro-free routes, corpus has 114"
         }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
        },
        "realized_sufficiency": {
         "16": {
@@ -641,6 +1556,10 @@
          "reason": "needs 128 macro-free routes, corpus has 89"
         }
        },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
        "realized_sufficiency": {
         "16": {
          "n": 16,
@@ -731,6 +1650,14 @@
          "reachable": false,
          "reason": "needs 128 macro-free routes, corpus has 102"
         }
+       },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 26,
+        "survival_rate": 0.40625,
+        "chance_matches_in_unplanted": 0,
+        "chance_rate": 0.0
        },
        "realized_sufficiency": {
         "16": {
@@ -824,6 +1751,10 @@
          "reason": "needs 128 macro-free routes, corpus has 122"
         }
        },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
        "realized_sufficiency": {
         "16": {
          "n": 16,
@@ -860,6 +1791,1784 @@
          "ratio": 0.6465133725403993,
          "pays": false,
          "net_saving_bits": -36.41843805485587
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "8": {
+   "worlds": {
+    "0": {
+     "teacher_motif": [
+      5,
+      3,
+      2
+     ],
+     "by_macro_len": {
+      "2": {
+       "macro": [
+        2,
+        2
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 76,
+       "bearing_routes": 61,
+       "observed_crossing_uses": 19,
+       "predicted_H_star": 18.664190960857773,
+       "ratio_observed_over_predicted": 1.017992156201492,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 67,
+       "max_uses": 76,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.9320001143597,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 19,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 10,
+         "predicted_H_star": 9.92641292894733,
+         "ratio": 1.0074132591077363,
+         "within_factor_2": true,
+         "max_uses": 39,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 18,
+         "predicted_H_star": 17.915238558122592,
+         "ratio": 1.0047312482947082,
+         "within_factor_2": true,
+         "max_uses": 76,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 67"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 13,
+         "bearing_routes": 10,
+         "H_star": 5.9320001143597,
+         "ratio": 2.1915036664498144,
+         "pays": true,
+         "net_saving_bits": 26.154707504640044
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 19,
+         "bearing_routes": 16,
+         "H_star": 9.92641292894733,
+         "ratio": 1.9140851923046989,
+         "pays": true,
+         "net_saving_bits": 33.57626198373487
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 38,
+         "bearing_routes": 31,
+         "H_star": 17.915238558122592,
+         "ratio": 2.121099301955495,
+         "pays": true,
+         "net_saving_bits": 74.32244896891189
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 76,
+         "bearing_routes": 61,
+         "H_star": 33.89288981647312,
+         "ratio": 2.2423582176537025,
+         "pays": true,
+         "net_saving_bits": 155.81482293926638
+        }
+       }
+      },
+      "3": {
+       "macro": [
+        2,
+        2,
+        2
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 36,
+       "bearing_routes": 34,
+       "observed_crossing_uses": 15,
+       "predicted_H_star": 13.186778117680218,
+       "ratio_observed_over_predicted": 1.137503025086067,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 94,
+       "max_uses": 36,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.450396882122867,
+         "ratio": 1.159286927461802,
+         "within_factor_2": true,
+         "max_uses": 17,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.447603289416683,
+         "ratio": 1.1014017873982278,
+         "within_factor_2": true,
+         "max_uses": 33,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 10,
+         "predicted_H_star": 9.442016104004315,
+         "ratio": 1.0590958424397356,
+         "within_factor_2": true,
+         "max_uses": 36,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 94"
+        }
+       },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 2,
+        "survival_rate": 0.03125,
+        "chance_matches_in_unplanted": 20,
+        "chance_rate": 0.3125
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 5,
+         "bearing_routes": 5,
+         "H_star": 3.450396882122867,
+         "ratio": 1.4491086593272524,
+         "pays": true,
+         "net_saving_bits": 11.468425849495645
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 9,
+         "bearing_routes": 9,
+         "H_star": 5.447603289416683,
+         "ratio": 1.6521026810973418,
+         "pays": true,
+         "net_saving_bits": 26.290859764872607
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 15,
+         "bearing_routes": 14,
+         "H_star": 9.442016104004315,
+         "ratio": 1.5886437636596034,
+         "pays": true,
+         "net_saving_bits": 41.133968723062026
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 36,
+         "bearing_routes": 34,
+         "H_star": 17.430841733179577,
+         "ratio": 2.0653047369177853,
+         "pays": true,
+         "net_saving_bits": 137.4281015659808
+        }
+       }
+      },
+      "4": {
+       "macro": [
+        2,
+        2,
+        2,
+        2
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 11,
+       "bearing_routes": 10,
+       "observed_crossing_uses": null,
+       "predicted_H_star": 11.111323035709304,
+       "ratio_observed_over_predicted": null,
+       "within_factor_2": false,
+       "bracketed": false,
+       "n_held": 118,
+       "max_uses": 11,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 2.623195804710589,
+         "ratio": 1.524857577469826,
+         "within_factor_2": true,
+         "max_uses": 11,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.9546667429064666,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 11,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 7,
+         "predicted_H_star": 6.61760861929822,
+         "ratio": 1.057783922063123,
+         "within_factor_2": true,
+         "max_uses": 11,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 118"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 1,
+         "bearing_routes": 1,
+         "H_star": 2.623195804710589,
+         "ratio": 0.3812143943674565,
+         "pays": false,
+         "net_saving_bits": -18.019614678213202
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 1,
+         "bearing_routes": 1,
+         "H_star": 3.9546667429064666,
+         "ratio": 0.2528658076672863,
+         "pays": false,
+         "net_saving_bits": -32.80069850796497
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 4,
+         "bearing_routes": 3,
+         "H_star": 6.61760861929822,
+         "ratio": 0.6044479554646417,
+         "pays": false,
+         "net_saving_bits": -29.058908704198757
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 11,
+         "bearing_routes": 10,
+         "H_star": 11.94349237208173,
+         "ratio": 0.921003644270149,
+         "pays": false,
+         "net_saving_bits": -10.474009942243356
+        }
+       }
+      }
+     }
+    },
+    "1": {
+     "teacher_motif": [
+      3,
+      3,
+      1
+     ],
+     "by_macro_len": {
+      "2": {
+       "macro": [
+        11,
+        11
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 107,
+       "bearing_routes": 83,
+       "observed_crossing_uses": 14,
+       "predicted_H_star": 13.171873340799781,
+       "ratio_observed_over_predicted": 1.0628708337663029,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 45,
+       "max_uses": 58,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.9320001143597,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 21,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 10,
+         "predicted_H_star": 9.92641292894733,
+         "ratio": 1.0074132591077363,
+         "within_factor_2": true,
+         "max_uses": 43,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": false,
+         "reason": "needs 64 macro-free routes, corpus has 45"
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 45"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 21,
+         "bearing_routes": 16,
+         "H_star": 5.9320001143597,
+         "ratio": 3.540121307342008,
+         "pays": true,
+         "net_saving_bits": 55.75822524976877
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 43,
+         "bearing_routes": 32,
+         "H_star": 9.92641292894733,
+         "ratio": 4.331877014163266,
+         "pays": true,
+         "net_saving_bits": 122.3868152191211
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 83,
+         "bearing_routes": 63,
+         "H_star": 17.915238558122592,
+         "ratio": 4.632927422692266,
+         "pays": true,
+         "net_saving_bits": 240.84223628526092
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 107,
+         "bearing_routes": 83,
+         "H_star": 33.89288981647312,
+         "ratio": 3.157004332749292,
+         "pays": true,
+         "net_saving_bits": 270.5284542016402
+        }
+       }
+      },
+      "3": {
+       "macro": [
+        11,
+        11,
+        11
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 47,
+       "bearing_routes": 43,
+       "observed_crossing_uses": 13,
+       "predicted_H_star": 12.063349513577448,
+       "ratio_observed_over_predicted": 1.0776443130797413,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 85,
+       "max_uses": 47,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 5,
+         "predicted_H_star": 3.450396882122867,
+         "ratio": 1.4491086593272524,
+         "within_factor_2": true,
+         "max_uses": 18,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.447603289416683,
+         "ratio": 1.1014017873982278,
+         "within_factor_2": true,
+         "max_uses": 36,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 10,
+         "predicted_H_star": 9.442016104004315,
+         "ratio": 1.0590958424397356,
+         "within_factor_2": true,
+         "max_uses": 47,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 85"
+        }
+       },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 16,
+        "survival_rate": 0.25,
+        "chance_matches_in_unplanted": 10,
+        "chance_rate": 0.15625
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 10,
+         "bearing_routes": 9,
+         "H_star": 3.450396882122867,
+         "ratio": 2.898217318654505,
+         "pays": true,
+         "net_saving_bits": 48.47282303090657
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 16,
+         "bearing_routes": 14,
+         "H_star": 5.447603289416683,
+         "ratio": 2.937071433061941,
+         "pays": true,
+         "net_saving_bits": 78.09701581884781
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 37,
+         "bearing_routes": 33,
+         "H_star": 9.442016104004315,
+         "ratio": 3.9186546170270216,
+         "pays": true,
+         "net_saving_bits": 203.95331632127
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 47,
+         "bearing_routes": 43,
+         "H_star": 17.430841733179577,
+         "ratio": 2.69637007319822,
+         "pays": true,
+         "net_saving_bits": 218.83777536508478
+        }
+       }
+      },
+      "4": {
+       "macro": [
+        11,
+        11,
+        11,
+        11
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 19,
+       "bearing_routes": 19,
+       "observed_crossing_uses": 11,
+       "predicted_H_star": 10.362370632974127,
+       "ratio_observed_over_predicted": 1.0615331558395404,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 109,
+       "max_uses": 19,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 3,
+         "predicted_H_star": 2.623195804710589,
+         "ratio": 1.1436431831023695,
+         "within_factor_2": true,
+         "max_uses": 16,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.9546667429064666,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 19,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 7,
+         "predicted_H_star": 6.61760861929822,
+         "ratio": 1.057783922063123,
+         "within_factor_2": true,
+         "max_uses": 19,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 109"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 4,
+         "bearing_routes": 4,
+         "H_star": 2.623195804710589,
+         "ratio": 1.524857577469826,
+         "pays": true,
+         "net_saving_bits": 15.284342785056651
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 9,
+         "bearing_routes": 9,
+         "H_star": 3.9546667429064666,
+         "ratio": 2.2757922690055765,
+         "pays": true,
+         "net_saving_bits": 56.00985472742116
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 15,
+         "bearing_routes": 15,
+         "H_star": 6.61760861929822,
+         "ratio": 2.2666798329924065,
+         "pays": true,
+         "net_saving_bits": 93.05560199445722
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 19,
+         "bearing_routes": 19,
+         "H_star": 11.94349237208173,
+         "ratio": 1.590824476466621,
+         "pays": true,
+         "net_saving_bits": 78.33654329314277
+        }
+       }
+      }
+     }
+    },
+    "2": {
+     "teacher_motif": [
+      5,
+      0,
+      4
+     ],
+     "by_macro_len": {
+      "2": {
+       "macro": [
+        7,
+        7
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 72,
+       "bearing_routes": 51,
+       "observed_crossing_uses": 24,
+       "predicted_H_star": 21.160698969975044,
+       "ratio_observed_over_predicted": 1.13417803608726,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 77,
+       "max_uses": 72,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.9320001143597,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 24,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 10,
+         "predicted_H_star": 9.92641292894733,
+         "ratio": 1.0074132591077363,
+         "within_factor_2": true,
+         "max_uses": 48,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 19,
+         "predicted_H_star": 17.915238558122592,
+         "ratio": 1.0605496509777474,
+         "within_factor_2": true,
+         "max_uses": 72,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 77"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 11,
+         "bearing_routes": 9,
+         "H_star": 5.9320001143597,
+         "ratio": 1.854349256226766,
+         "pays": true,
+         "net_saving_bits": 18.753828068357848
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 26,
+         "bearing_routes": 18,
+         "H_star": 9.92641292894733,
+         "ratio": 2.619274473680114,
+         "pays": true,
+         "net_saving_bits": 59.47934001072247
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 45,
+         "bearing_routes": 31,
+         "H_star": 17.915238558122592,
+         "ratio": 2.5118281207367703,
+         "pays": true,
+         "net_saving_bits": 100.22552699589937
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 72,
+         "bearing_routes": 51,
+         "H_star": 33.89288981647312,
+         "ratio": 2.1243393640929815,
+         "pays": true,
+         "net_saving_bits": 141.0130640667021
+        }
+       }
+      },
+      "3": {
+       "macro": [
+        7,
+        7,
+        7
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 28,
+       "bearing_routes": 24,
+       "observed_crossing_uses": 15,
+       "predicted_H_star": 14.435032122238853,
+       "ratio_observed_over_predicted": 1.0391386643948473,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 104,
+       "max_uses": 28,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.450396882122867,
+         "ratio": 1.159286927461802,
+         "within_factor_2": true,
+         "max_uses": 19,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 6,
+         "predicted_H_star": 5.447603289416683,
+         "ratio": 1.1014017873982278,
+         "within_factor_2": true,
+         "max_uses": 28,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 10,
+         "predicted_H_star": 9.442016104004315,
+         "ratio": 1.0590958424397356,
+         "within_factor_2": true,
+         "max_uses": 28,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 104"
+        }
+       },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 7,
+        "survival_rate": 0.109375,
+        "chance_matches_in_unplanted": 6,
+        "chance_rate": 0.09375
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 6,
+         "bearing_routes": 6,
+         "H_star": 3.450396882122867,
+         "ratio": 1.738930391192703,
+         "pays": true,
+         "net_saving_bits": 18.86930528577784
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 14,
+         "bearing_routes": 12,
+         "H_star": 5.447603289416683,
+         "ratio": 2.5699375039291983,
+         "pays": true,
+         "net_saving_bits": 63.29525694628353
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 21,
+         "bearing_routes": 18,
+         "H_star": 9.442016104004315,
+         "ratio": 2.2241012691234445,
+         "pays": true,
+         "net_saving_bits": 85.53924534075509
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 28,
+         "bearing_routes": 24,
+         "H_star": 17.430841733179577,
+         "ratio": 1.606348128713833,
+         "pays": true,
+         "net_saving_bits": 78.22106607572323
+        }
+       }
+      },
+      "4": {
+       "macro": [
+        7,
+        7,
+        7,
+        7
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 15,
+       "bearing_routes": 15,
+       "observed_crossing_uses": 11,
+       "predicted_H_star": 10.695238367523094,
+       "ratio_observed_over_predicted": 1.0284950762203053,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 113,
+       "max_uses": 15,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 3,
+         "predicted_H_star": 2.623195804710589,
+         "ratio": 1.1436431831023695,
+         "within_factor_2": true,
+         "max_uses": 15,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.9546667429064666,
+         "ratio": 1.0114632306691451,
+         "within_factor_2": true,
+         "max_uses": 15,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 7,
+         "predicted_H_star": 6.61760861929822,
+         "ratio": 1.057783922063123,
+         "within_factor_2": true,
+         "max_uses": 15,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 113"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 2,
+         "bearing_routes": 2,
+         "H_star": 2.623195804710589,
+         "ratio": 0.762428788734913,
+         "pays": false,
+         "net_saving_bits": -6.918295523789936
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 6,
+         "bearing_routes": 6,
+         "H_star": 3.9546667429064666,
+         "ratio": 1.5171948460037177,
+         "pays": true,
+         "net_saving_bits": 22.705897264151417
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 11,
+         "bearing_routes": 11,
+         "H_star": 6.61760861929822,
+         "ratio": 1.6622318775277647,
+         "pays": true,
+         "net_saving_bits": 48.65032537676416
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 15,
+         "bearing_routes": 15,
+         "H_star": 11.94349237208173,
+         "ratio": 1.2559140603683852,
+         "pays": true,
+         "net_saving_bits": 33.93126667544993
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "10": {
+   "worlds": {
+    "0": {
+     "teacher_motif": [
+      2,
+      5,
+      2
+     ],
+     "by_macro_len": {
+      "2": {
+       "macro": [
+        2,
+        2
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 116,
+       "bearing_routes": 83,
+       "observed_crossing_uses": 17,
+       "predicted_H_star": 15.98044485105671,
+       "ratio_observed_over_predicted": 1.0638001731770235,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 45,
+       "max_uses": 69,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 7,
+         "predicted_H_star": 6.930603318006607,
+         "ratio": 1.0100130794981572,
+         "within_factor_2": true,
+         "max_uses": 23,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 12,
+         "predicted_H_star": 11.923619336241146,
+         "ratio": 1.0064058287676712,
+         "within_factor_2": true,
+         "max_uses": 48,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": false,
+         "reason": "needs 64 macro-free routes, corpus has 45"
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 45"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 21,
+         "bearing_routes": 14,
+         "H_star": 6.930603318006607,
+         "ratio": 3.0300392384944717,
+         "pays": true,
+         "net_saving_bits": 52.0629542923308
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 43,
+         "bearing_routes": 29,
+         "H_star": 11.923619336241146,
+         "ratio": 3.6062875530841554,
+         "pays": true,
+         "net_saving_bits": 114.99627330424482
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 88,
+         "bearing_routes": 59,
+         "H_star": 21.909651372710226,
+         "ratio": 4.016494763107424,
+         "pays": true,
+         "net_saving_bits": 244.5633510462144
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 116,
+         "bearing_routes": 83,
+         "H_star": 41.88171544564839,
+         "ratio": 2.7697050793093214,
+         "pays": true,
+         "net_saving_bits": 274.2702440054054
+        }
+       }
+      },
+      "3": {
+       "macro": [
+        2,
+        2,
+        2
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 56,
+       "bearing_routes": 52,
+       "observed_crossing_uses": 14,
+       "predicted_H_star": 13.311603518136081,
+       "ratio_observed_over_predicted": 1.051714016341159,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 76,
+       "max_uses": 56,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 5,
+         "predicted_H_star": 3.949698483946321,
+         "ratio": 1.2659194164624628,
+         "within_factor_2": true,
+         "max_uses": 19,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 7,
+         "predicted_H_star": 6.446206493063591,
+         "ratio": 1.0859099855911094,
+         "within_factor_2": true,
+         "max_uses": 36,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 12,
+         "predicted_H_star": 11.43922251129813,
+         "ratio": 1.0490223429212964,
+         "within_factor_2": true,
+         "max_uses": 56,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 76"
+        }
+       },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 11,
+        "survival_rate": 0.171875,
+        "chance_matches_in_unplanted": 11,
+        "chance_rate": 0.171875
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 10,
+         "bearing_routes": 8,
+         "H_star": 3.949698483946321,
+         "ratio": 2.5318388329249255,
+         "pays": true,
+         "net_saving_bits": 44.77755207346854
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 22,
+         "bearing_routes": 19,
+         "H_star": 6.446206493063591,
+         "ratio": 3.412859954714915,
+         "pays": true,
+         "net_saving_bits": 115.11175052166482
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 45,
+         "bearing_routes": 41,
+         "H_star": 11.43922251129813,
+         "ratio": 3.9338337859548616,
+         "pays": true,
+         "net_saving_bits": 248.37926798177546
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 56,
+         "bearing_routes": 52,
+         "H_star": 21.425254547767207,
+         "ratio": 2.6137379079977343,
+         "pays": true,
+         "net_saving_bits": 255.88352263211982
+        }
+       }
+      },
+      "4": {
+       "macro": [
+        2,
+        2,
+        2,
+        2
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 22,
+       "bearing_routes": 22,
+       "observed_crossing_uses": 13,
+       "predicted_H_star": 12.31796857344932,
+       "ratio_observed_over_predicted": 1.0553688233968026,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 106,
+       "max_uses": 22,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 3,
+         "predicted_H_star": 2.9560635392595587,
+         "ratio": 1.0148631652049829,
+         "within_factor_2": true,
+         "max_uses": 16,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 5,
+         "predicted_H_star": 4.6204022120044055,
+         "ratio": 1.0821568708908826,
+         "within_factor_2": true,
+         "max_uses": 22,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 8,
+         "predicted_H_star": 7.949079557494097,
+         "ratio": 1.0064058287676712,
+         "within_factor_2": true,
+         "max_uses": 22,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 106"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 4,
+         "bearing_routes": 4,
+         "H_star": 2.9560635392595587,
+         "ratio": 1.3531508869399773,
+         "pays": true,
+         "net_saving_bits": 11.589071827618682
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 9,
+         "bearing_routes": 9,
+         "H_star": 4.6204022120044055,
+         "ratio": 1.9478823676035888,
+         "pays": true,
+         "net_saving_bits": 48.61931281254533
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 19,
+         "bearing_routes": 19,
+         "H_star": 7.949079557494097,
+         "ratio": 2.390213843323219,
+         "pays": true,
+         "net_saving_bits": 122.67979478239795
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 22,
+         "bearing_routes": 22,
+         "H_star": 14.606434248473484,
+         "ratio": 1.5061855361652838,
+         "pays": true,
+         "net_saving_bits": 82.07833309690886
+        }
+       }
+      }
+     }
+    },
+    "1": {
+     "teacher_motif": [
+      1,
+      2,
+      3
+     ],
+     "by_macro_len": {
+      "2": {
+       "macro": [
+        11,
+        11
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 90,
+       "bearing_routes": 71,
+       "observed_crossing_uses": 20,
+       "predicted_H_star": 19.725206864732613,
+       "ratio_observed_over_predicted": 1.0139310648122377,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 57,
+       "max_uses": 72,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 8,
+         "predicted_H_star": 6.930603318006607,
+         "ratio": 1.1543006622836083,
+         "within_factor_2": true,
+         "max_uses": 20,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 13,
+         "predicted_H_star": 11.923619336241146,
+         "ratio": 1.0902729811649772,
+         "within_factor_2": true,
+         "max_uses": 40,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": false,
+         "reason": "needs 64 macro-free routes, corpus has 57"
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 57"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 14,
+         "bearing_routes": 10,
+         "H_star": 6.930603318006607,
+         "ratio": 2.0200261589963144,
+         "pays": true,
+         "net_saving_bits": 26.1598762653432
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 23,
+         "bearing_routes": 18,
+         "H_star": 11.923619336241146,
+         "ratio": 1.9289445051380365,
+         "pays": true,
+         "net_saving_bits": 40.98747894142298
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 46,
+         "bearing_routes": 38,
+         "H_star": 21.909651372710226,
+         "ratio": 2.099531353442517,
+         "pays": true,
+         "net_saving_bits": 89.14488288428856
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 90,
+         "bearing_routes": 71,
+         "H_star": 41.88171544564839,
+         "ratio": 2.148909113257232,
+         "pays": true,
+         "net_saving_bits": 178.05881133373714
+        }
+       }
+      },
+      "3": {
+       "macro": [
+        11,
+        11,
+        11
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 30,
+       "bearing_routes": 30,
+       "observed_crossing_uses": 17,
+       "predicted_H_star": 16.744302030672326,
+       "ratio_observed_over_predicted": 1.0152707451680747,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 98,
+       "max_uses": 30,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.949698483946321,
+         "ratio": 1.0127355331699701,
+         "within_factor_2": true,
+         "max_uses": 16,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 7,
+         "predicted_H_star": 6.446206493063591,
+         "ratio": 1.0859099855911094,
+         "within_factor_2": true,
+         "max_uses": 30,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 12,
+         "predicted_H_star": 11.43922251129813,
+         "ratio": 1.0490223429212964,
+         "within_factor_2": true,
+         "max_uses": 30,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 98"
+        }
+       },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 3,
+        "survival_rate": 0.046875,
+        "chance_matches_in_unplanted": 13,
+        "chance_rate": 0.203125
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 4,
+         "bearing_routes": 4,
+         "H_star": 3.949698483946321,
+         "ratio": 1.0127355331699701,
+         "pays": true,
+         "net_saving_bits": 0.3722754557754797
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 9,
+         "bearing_routes": 9,
+         "H_star": 6.446206493063591,
+         "ratio": 1.3961699814742836,
+         "pays": true,
+         "net_saving_bits": 18.900317849996554
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 17,
+         "bearing_routes": 17,
+         "H_star": 11.43922251129813,
+         "ratio": 1.4861149858051699,
+         "pays": true,
+         "net_saving_bits": 41.154643765874425
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 30,
+         "bearing_routes": 30,
+         "H_star": 21.425254547767207,
+         "ratio": 1.4002167364273577,
+         "pays": true,
+         "net_saving_bits": 63.460657288783295
+        }
+       }
+      },
+      "4": {
+       "macro": [
+        11,
+        11,
+        11,
+        11
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 14,
+       "bearing_routes": 14,
+       "observed_crossing_uses": 14,
+       "predicted_H_star": 13.150137909821742,
+       "ratio_observed_over_predicted": 1.0646276180528496,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 114,
+       "max_uses": 14,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 3,
+         "predicted_H_star": 2.9560635392595587,
+         "ratio": 1.0148631652049829,
+         "within_factor_2": true,
+         "max_uses": 14,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 5,
+         "predicted_H_star": 4.6204022120044055,
+         "ratio": 1.0821568708908826,
+         "within_factor_2": true,
+         "max_uses": 14,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 8,
+         "predicted_H_star": 7.949079557494097,
+         "ratio": 1.0064058287676712,
+         "within_factor_2": true,
+         "max_uses": 14,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 114"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 2,
+         "bearing_routes": 2,
+         "H_star": 2.9560635392595587,
+         "ratio": 0.6765754434699887,
+         "pays": false,
+         "net_saving_bits": -10.613566481227963
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 3,
+         "bearing_routes": 3,
+         "H_star": 4.6204022120044055,
+         "ratio": 0.6492941225345296,
+         "pays": false,
+         "net_saving_bits": -17.988602113994375
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 6,
+         "bearing_routes": 6,
+         "H_star": 7.949079557494097,
+         "ratio": 0.7548043715757534,
+         "pays": false,
+         "net_saving_bits": -21.637354225104446
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 14,
+         "bearing_routes": 14,
+         "H_star": 14.606434248473484,
+         "ratio": 0.9584817048324534,
+         "pays": false,
+         "net_saving_bits": -6.732220138476805
+        }
+       }
+      }
+     }
+    },
+    "2": {
+     "teacher_motif": [
+      0,
+      1,
+      3
+     ],
+     "by_macro_len": {
+      "2": {
+       "macro": [
+        7,
+        7
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 46,
+       "bearing_routes": 34,
+       "observed_crossing_uses": 33,
+       "predicted_H_star": 31.271556406899986,
+       "ratio_observed_over_predicted": 1.0552720680291638,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 94,
+       "max_uses": 46,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 7,
+         "predicted_H_star": 6.930603318006607,
+         "ratio": 1.0100130794981572,
+         "within_factor_2": true,
+         "max_uses": 21,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 12,
+         "predicted_H_star": 11.923619336241146,
+         "ratio": 1.0064058287676712,
+         "within_factor_2": true,
+         "max_uses": 44,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 22,
+         "predicted_H_star": 21.909651372710226,
+         "ratio": 1.004123690776856,
+         "within_factor_2": true,
+         "max_uses": 46,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 94"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 2,
+         "bearing_routes": 1,
+         "H_star": 6.930603318006607,
+         "ratio": 0.28857516557090207,
+         "pays": false,
+         "net_saving_bits": -18.24540035234986
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 5,
+         "bearing_routes": 4,
+         "H_star": 11.923619336241146,
+         "ratio": 0.41933576198652966,
+         "pays": false,
+         "net_saving_bits": -25.6204359851165
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 12,
+         "bearing_routes": 10,
+         "H_star": 21.909651372710226,
+         "ratio": 0.5477038313328305,
+         "pays": false,
+         "net_saving_bits": -36.670067532508256
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 46,
+         "bearing_routes": 34,
+         "H_star": 41.88171544564839,
+         "ratio": 1.0983313245536963,
+         "pays": true,
+         "net_saving_bits": 15.23946373552917
+        }
+       }
+      },
+      "3": {
+       "macro": [
+        7,
+        7,
+        7
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 22,
+       "bearing_routes": 20,
+       "observed_crossing_uses": 19,
+       "predicted_H_star": 18.30461953637062,
+       "ratio_observed_over_predicted": 1.0379893426491429,
+       "within_factor_2": true,
+       "bracketed": true,
+       "n_held": 108,
+       "max_uses": 22,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 4,
+         "predicted_H_star": 3.949698483946321,
+         "ratio": 1.0127355331699701,
+         "within_factor_2": true,
+         "max_uses": 18,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 7,
+         "predicted_H_star": 6.446206493063591,
+         "ratio": 1.0859099855911094,
+         "within_factor_2": true,
+         "max_uses": 22,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 12,
+         "predicted_H_star": 11.43922251129813,
+         "ratio": 1.0490223429212964,
+         "within_factor_2": true,
+         "max_uses": 22,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 108"
+        }
+       },
+       "motif_survival": {
+        "applicable": true,
+        "planted": 64,
+        "hits_at_planted_site": 0,
+        "survival_rate": 0.0,
+        "chance_matches_in_unplanted": 13,
+        "chance_rate": 0.203125
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 1,
+         "bearing_routes": 1,
+         "H_star": 3.949698483946321,
+         "ratio": 0.25318388329249253,
+         "pays": false,
+         "net_saving_bits": -21.83036285307105
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 3,
+         "bearing_routes": 3,
+         "H_star": 6.446206493063591,
+         "ratio": 0.4653899938247612,
+         "pays": false,
+         "net_saving_bits": -25.504958767696507
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 7,
+         "bearing_routes": 7,
+         "H_star": 11.43922251129813,
+         "ratio": 0.6119297000374229,
+         "pays": false,
+         "net_saving_bits": -32.85415059694742
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 22,
+         "bearing_routes": 20,
+         "H_star": 21.425254547767207,
+         "ratio": 1.0268256067133956,
+         "pays": true,
+         "net_saving_bits": 4.253621798525273
+        }
+       }
+      },
+      "4": {
+       "macro": [
+        7,
+        7,
+        7,
+        7
+       ],
+       "macro_is_constant": true,
+       "total_uses_in_corpus": 9,
+       "bearing_routes": 9,
+       "observed_crossing_uses": null,
+       "predicted_H_star": 13.670243745054506,
+       "ratio_observed_over_predicted": null,
+       "within_factor_2": false,
+       "bracketed": false,
+       "n_held": 119,
+       "max_uses": 9,
+       "by_corpus_size": {
+        "16": {
+         "reachable": true,
+         "n": 16,
+         "observed_crossing_uses": 3,
+         "predicted_H_star": 2.9560635392595587,
+         "ratio": 1.0148631652049829,
+         "within_factor_2": true,
+         "max_uses": 9,
+         "bracketed": true
+        },
+        "32": {
+         "reachable": true,
+         "n": 32,
+         "observed_crossing_uses": 5,
+         "predicted_H_star": 4.6204022120044055,
+         "ratio": 1.0821568708908826,
+         "within_factor_2": true,
+         "max_uses": 9,
+         "bracketed": true
+        },
+        "64": {
+         "reachable": true,
+         "n": 64,
+         "observed_crossing_uses": 8,
+         "predicted_H_star": 7.949079557494097,
+         "ratio": 1.0064058287676712,
+         "within_factor_2": true,
+         "max_uses": 9,
+         "bracketed": true
+        },
+        "128": {
+         "reachable": false,
+         "reason": "needs 128 macro-free routes, corpus has 119"
+        }
+       },
+       "motif_survival": {
+        "applicable": false,
+        "planted": 64
+       },
+       "realized_sufficiency": {
+        "16": {
+         "n": 16,
+         "H_eff": 1,
+         "bearing_routes": 1,
+         "H_star": 2.9560635392595587,
+         "ratio": 0.33828772173499433,
+         "pays": false,
+         "net_saving_bits": -21.71488563565117
+        },
+        "32": {
+         "n": 32,
+         "H_eff": 1,
+         "bearing_routes": 1,
+         "H_star": 4.6204022120044055,
+         "ratio": 0.21643137417817654,
+         "pays": false,
+         "net_saving_bits": -40.19124042284102
+        },
+        "64": {
+         "n": 64,
+         "H_eff": 2,
+         "bearing_routes": 2,
+         "H_star": 7.949079557494097,
+         "ratio": 0.2516014571919178,
+         "pays": false,
+         "net_saving_bits": -66.04263084279773
+        },
+        "128": {
+         "n": 128,
+         "H_eff": 9,
+         "bearing_routes": 9,
+         "H_star": 14.606434248473484,
+         "ratio": 0.6161668102494343,
+         "pays": false,
+         "net_saving_bits": -62.238815910593075
         }
        }
       }

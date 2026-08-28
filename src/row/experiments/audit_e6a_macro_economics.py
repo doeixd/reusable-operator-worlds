@@ -135,7 +135,28 @@ def infer_corpus(cell, world: int, depth: int, teacher_library) -> dict:
         res = cached(tag, cellwise)
         fatal(res["support_reduction"] > 0.0, f"route inference did not optimize at {tag}")
         routes.append(res["route"])
-    return {"motif": list(motif), "routes": routes, "carries": carries}
+    return {"motif": list(motif), "routes": routes, "carries": carries, "sites": sites}
+
+
+def motif_survival(routes, carries, sites, macro, length: int) -> dict:
+    """Fraction of PLANTED sites whose inferred route holds `macro` there.
+
+    `H_eff` is NOT a survival rate: it counts every occurrence of the gram
+    anywhere, so chance matches in unplanted routes inflate it while misses in
+    planted routes are hidden. Survival must be restricted to the planted site.
+    """
+    planted = sum(1 for c in carries if c)
+    if planted == 0 or len(macro) != length:
+        return {"applicable": False, "planted": planted}
+    hits = sum(1 for route, carry, site in zip(routes, carries, sites)
+               if carry and 0 <= site and tuple(route[site:site + length]) == tuple(macro))
+    chance = sum(1 for route, carry in zip(routes, carries)
+                 if not carry and tuple(macro) in set(ngrams(route, length)))
+    unplanted = len(routes) - planted
+    return {"applicable": True, "planted": planted, "hits_at_planted_site": hits,
+            "survival_rate": hits / planted,
+            "chance_matches_in_unplanted": chance,
+            "chance_rate": (chance / unplanted) if unplanted else None}
 
 
 def realized_sufficiency(routes, macro, slots: int, depth: int) -> dict:
@@ -264,6 +285,8 @@ def main() -> None:
                     # E6 Amendment 1: the EMPIRICAL estimand. Does the learner's
                     # realized corpus contain enough macro uses to pay for the
                     # macro? Unlike the crossing comparison, this CAN fail.
+                    "motif_survival": motif_survival(
+                        routes, corpus["carries"], corpus["sites"], macro, PRIMARY_L),
                     "realized_sufficiency": {
                         str(n): realized_sufficiency(routes[:n], macro, slots, depth)
                         for n in CORPUS_SIZES if n <= len(routes)},
@@ -275,6 +298,12 @@ def main() -> None:
                       f"H_obs {r['observed_crossing_uses']} vs H* {pred:.2f}"
                       + (f" (x{ratio:.2f})" if ratio else "")
                       + f" | bracketed {bracketed}", flush=True)
+                ms = r["motif_survival"]
+                if ms.get("applicable"):
+                    print(f"        motif survival {ms['hits_at_planted_site']}"
+                          f"/{ms['planted']} = {ms['survival_rate']:.0%} at planted sites"
+                          f" | chance in unplanted {ms['chance_matches_in_unplanted']}",
+                          flush=True)
                 rs = r["realized_sufficiency"]
                 print("        realized: " + "  ".join(
                     f"N{n}:H_eff {rs[str(n)]['H_eff']}/H* {rs[str(n)]['H_star']:.1f} "
