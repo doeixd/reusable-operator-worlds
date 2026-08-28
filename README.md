@@ -160,6 +160,96 @@ estimand, the step-continuation ratio \(q = 0.785 < 1\), implies. Both numbers
 were always consistent; we had extrapolated with the one that was easier to
 compound.
 
+## Can the language grow? (E6, development worlds 0–2)
+
+If task solutions are short programs over a learned vocabulary, the next
+question is whether the vocabulary can be **extended**: should the learner mint
+a new symbol that abbreviates a recurring fragment? This is the V5 amortization
+law moved from neural abstractions to linguistic ones — the first rung where the
+object created is a *symbol* rather than a tensor.
+
+**The accounting has to charge for the symbol, not just define it.** A macro
+`M := A B C` costs its definition *plus an alphabet tax*: every symbol in every
+program gets more expensive once the alphabet grows from \(K\) to \(K+1\).
+That gives a crossing
+
+\[
+H^\* = \frac{L\log_2 K + ND\log_2\frac{K+1}{K}}{(L-1)\log_2 (K+1)}
+\]
+
+which at \(K=12, D=6, N=64\) is **7.44** uses for a length-3 macro. The naive
+alternative — charging only the definition — gives \(H^\*=L/(L-1)=1.5\) uses,
+a threshold almost any repeated pattern clears, which would have made the whole
+rung vacuous. That was computed and rejected *before* the plan was frozen.
+
+**A macro pays (E6A): `PAYS` in 3/3 worlds**, with realized uses of 22, 54 and 26
+against the required 7.44. Two economic results came with it. Macro *length* has
+an optimum set by use count rather than by the code — `H*` falls with length
+while realized uses fall faster, so a length-4 macro never reaches its crossing
+in two of three worlds. And the alphabet tax's counterintuitive prediction is
+confirmed: the *same* macro with the *same* 6 uses pays at \(N=64\) and stops
+paying at \(N=128\), because every program pays the tax while only \(H\)
+collect the saving.
+
+**But a code-length win does not know what it compressed.** Sweeping depth 4–10,
+every cell reports `PAYS` — including cells whose macro is a run of a single
+slot. Site-restricted motif survival falls **91% → 53% → 13% → 7%** across
+depths 4, 6, 8, 10 as chance matches rise from 0 to ~12. Past depth 8 all three
+worlds converge on a per-library *attractor slot* and abbreviate that. Route
+inference still fits the support set; the program it emits has stopped being a
+description of the computation. Macro questions are therefore only well-posed at
+shallow depth here, which is registered as a scope limit on every later rung.
+
+**Abstraction causally reduces synthesis cost, by the predicted amount (E6B).**
+E5.1 fitted \(\hat C(D) = 2.8287D - 1.1719\) across a depth *sweep*, where
+depth and task distribution move together. E6B holds the task fixed and shortens
+only the program, comparing three arms paired per task: plain, macro-bearing,
+and a width control that adds an unused 13th symbol without shortening anything.
+
+| quantity | pooled | vs. predicted 5.66 s |
+|---|---|---|
+| ΔC(macro) | +4.41 s | ×0.78 |
+| ΔC(width) | +1.23 s | ×0.22 |
+| **ΔC(length)** | **+5.64 s** | **×1.00 ± 0.13** |
+
+The raw effect alone reads ×0.78 — equally consistent with a slightly wrong law
+or two partly cancelling effects. The width control separates them, and the
+residual matches a law fitted on entirely different data. This is the first E6
+result that is not an identity: it was forecast out of sample and could have
+failed.
+
+**The economics picks the right macro and cannot refuse a dead one (E6D).**
+Given an open field of rivals — nested prefix and suffix, both permutations, a
+non-adjacent pair, three random trigrams — the code selects the true macro in
+3/3 worlds. The shorter, *more frequent* `A B` loses, because the extra symbol
+saved per use outweighs its higher count. But on a pattern that stops recurring,
+the same code creates and loses 40–55 bits, in 3/3 worlds, while correctly
+creating on continuing patterns 3/3. It is specifically blind to
+**non-continuation**: \(H_{\text{eff}}\) counts uses that *have* happened,
+and the decision needs uses that *will*.
+
+Structure identification and creation *timing* are different problems, and one
+retrospective accounting solves only the first.
+
+### Two estimands retired for being true by construction
+
+E6's plan lost two registered "positive experiments" before they were run, both
+for the same reason, now constitutional here: **never use an object's defining
+invariant as evidence that the object has learned that invariant.**
+
+- E6A's original primary compared an observed crossing against a predicted
+  \(H^\*\) *derived from the same coding scheme the measurement recomputes* —
+  an algebraic identity. Caught in a dry run; demoted to an implementation check
+  and replaced by realized sufficiency, which can fail.
+- E6C asked whether a macro stays substitutable for its expansion in unseen
+  contexts. But a *definitional* macro **is** its expansion, bitwise, everywhere.
+  The question is only answerable for a *compiled* macro with independently
+  learned semantics, and moves to E6.2.
+
+Each would have produced a confident-looking positive result measuring nothing
+but correct implementation.
+
+
 **First result of that branch (E1, 2026-08-26): the stop condition did not
 fire.** A frozen discrete library executes teacher programs it never trained on
 at 0.0019–0.0076 NMSE — at or below its own *trained*-task loss — against

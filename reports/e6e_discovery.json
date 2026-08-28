@@ -1,0 +1,510 @@
+{
+ "frozen_plan": "E6_MACRO_PLAN.md (Amendment 4)",
+ "git_commit": "452f356",
+ "protocol": {
+  "depth": 6,
+  "macro_len": 3,
+  "corpus": 128,
+  "split": 64,
+  "late_window": 32,
+  "decay_scale": 72.0,
+  "cases": {
+   "A": "continuing (CREATE)",
+   "B": "decaying (REFUSE)",
+   "C": "sharp step (UNSCOREABLE)"
+  },
+  "note": "discovery and timing reported separately"
+ },
+ "worlds": {
+  "0": {
+   "A": {
+    "candidates_enumerated": 165,
+    "motif_learner_image": [
+     11,
+     6,
+     4
+    ],
+    "image_share_at_planted_sites": 0.3448275862068966,
+    "observed_early_uses": 2,
+    "observed_late_uses": 9,
+    "within_observed_ratio": 4.5,
+    "picks": {
+     "RETRO": {
+      "macro": [
+       11,
+       6,
+       4
+      ],
+      "decision": {
+       "uses_used": 11.0,
+       "realized_uses": 11,
+       "observed_early_uses": 2,
+       "observed_late_uses": 9,
+       "net_saving_bits": 26.311534807685092,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 12,
+      "future_net_saving_bits": 33.71241424396726,
+      "was_right": true
+     },
+     "PROSP_RATE": {
+      "macro": [
+       11,
+       6,
+       4
+      ],
+      "decision": {
+       "uses_used": 18.0,
+       "realized_uses": 11,
+       "observed_early_uses": 2,
+       "observed_late_uses": 9,
+       "net_saving_bits": 78.11769086166039,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 12,
+      "future_net_saving_bits": 33.71241424396726,
+      "was_right": true
+     },
+     "PROSP_TREND": {
+      "macro": [
+       11,
+       6,
+       4
+      ],
+      "decision": {
+       "uses_used": 39.0,
+       "realized_uses": 11,
+       "observed_early_uses": 2,
+       "observed_late_uses": 9,
+       "net_saving_bits": 233.53615902358626,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 12,
+      "future_net_saving_bits": 33.71241424396726,
+      "was_right": true
+     }
+    },
+    "planted_motif": [
+     5,
+     4,
+     1
+    ],
+    "carries_observed": 29,
+    "carries_future": 35
+   },
+   "B": {
+    "candidates_enumerated": 144,
+    "motif_learner_image": [
+     6,
+     4,
+     4
+    ],
+    "image_share_at_planted_sites": 0.29411764705882354,
+    "observed_early_uses": 7,
+    "observed_late_uses": 7,
+    "within_observed_ratio": 1.0,
+    "picks": {
+     "RETRO": {
+      "macro": [
+       4,
+       4,
+       4
+      ],
+      "decision": {
+       "uses_used": 14.0,
+       "realized_uses": 14,
+       "observed_early_uses": 7,
+       "observed_late_uses": 7,
+       "net_saving_bits": 48.51417311653165,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": false,
+      "future_uses": 6,
+      "future_net_saving_bits": -10.692862373725802,
+      "was_right": false
+     },
+     "PROSP_RATE": {
+      "macro": [
+       4,
+       4,
+       4
+      ],
+      "decision": {
+       "uses_used": 14.0,
+       "realized_uses": 14,
+       "observed_early_uses": 7,
+       "observed_late_uses": 7,
+       "net_saving_bits": 48.51417311653165,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": false,
+      "future_uses": 6,
+      "future_net_saving_bits": -10.692862373725802,
+      "was_right": false
+     },
+     "PROSP_TREND": {
+      "macro": [
+       4,
+       4,
+       4
+      ],
+      "decision": {
+       "uses_used": 14.0,
+       "realized_uses": 14,
+       "observed_early_uses": 7,
+       "observed_late_uses": 7,
+       "net_saving_bits": 48.51417311653165,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": false,
+      "future_uses": 6,
+      "future_net_saving_bits": -10.692862373725802,
+      "was_right": false
+     }
+    },
+    "planted_motif": [
+     4,
+     1,
+     1
+    ],
+    "carries_observed": 34,
+    "carries_future": 1
+   },
+   "C": {
+    "candidates_enumerated": 119,
+    "motif_learner_image": [
+     11,
+     6,
+     4
+    ],
+    "image_share_at_planted_sites": 0.34375,
+    "observed_early_uses": 9,
+    "observed_late_uses": 13,
+    "within_observed_ratio": 1.4444444444444444,
+    "picks": {
+     "RETRO": {
+      "macro": [
+       11,
+       6,
+       4
+      ],
+      "decision": {
+       "uses_used": 22.0,
+       "realized_uses": 22,
+       "observed_early_uses": 9,
+       "observed_late_uses": 13,
+       "net_saving_bits": 107.72120860678913,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 1,
+      "future_net_saving_bits": -47.697259555136725,
+      "was_right": false
+     },
+     "PROSP_RATE": {
+      "macro": [
+       11,
+       6,
+       4
+      ],
+      "decision": {
+       "uses_used": 26.0,
+       "realized_uses": 22,
+       "observed_early_uses": 9,
+       "observed_late_uses": 13,
+       "net_saving_bits": 137.32472635191786,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 1,
+      "future_net_saving_bits": -47.697259555136725,
+      "was_right": false
+     },
+     "PROSP_TREND": {
+      "macro": [
+       11,
+       6,
+       4
+      ],
+      "decision": {
+       "uses_used": 38.0,
+       "realized_uses": 22,
+       "observed_early_uses": 9,
+       "observed_late_uses": 13,
+       "net_saving_bits": 226.13527958730407,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 1,
+      "future_net_saving_bits": -47.697259555136725,
+      "was_right": false
+     }
+    },
+    "planted_motif": [
+     5,
+     4,
+     1
+    ],
+    "carries_observed": 64,
+    "carries_future": 0
+   }
+  },
+  "1": {
+   "A": {
+    "candidates_enumerated": 113,
+    "motif_learner_image": [
+     8,
+     8,
+     5
+    ],
+    "image_share_at_planted_sites": 0.8,
+    "observed_early_uses": 13,
+    "observed_late_uses": 16,
+    "within_observed_ratio": 1.2307692307692308,
+    "picks": {
+     "RETRO": {
+      "macro": [
+       8,
+       8,
+       5
+      ],
+      "decision": {
+       "uses_used": 29.0,
+       "realized_uses": 29,
+       "observed_early_uses": 13,
+       "observed_late_uses": 16,
+       "net_saving_bits": 159.52736466076442,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 27,
+      "future_net_saving_bits": 144.72560578820003,
+      "was_right": true
+     },
+     "PROSP_RATE": {
+      "macro": [
+       8,
+       8,
+       5
+      ],
+      "decision": {
+       "uses_used": 32.0,
+       "realized_uses": 29,
+       "observed_early_uses": 13,
+       "observed_late_uses": 16,
+       "net_saving_bits": 181.73000296961098,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 27,
+      "future_net_saving_bits": 144.72560578820003,
+      "was_right": true
+     },
+     "PROSP_TREND": {
+      "macro": [
+       8,
+       8,
+       5
+      ],
+      "decision": {
+       "uses_used": 41.0,
+       "realized_uses": 29,
+       "observed_early_uses": 13,
+       "observed_late_uses": 16,
+       "net_saving_bits": 248.33791789615066,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 27,
+      "future_net_saving_bits": 144.72560578820003,
+      "was_right": true
+     }
+    },
+    "planted_motif": [
+     4,
+     4,
+     5
+    ],
+    "carries_observed": 35,
+    "carries_future": 29
+   },
+   "B": {
+    "candidates_enumerated": 146,
+    "motif_learner_image": [
+     0,
+     8,
+     5
+    ],
+    "image_share_at_planted_sites": 0.34210526315789475,
+    "observed_early_uses": 8,
+    "observed_late_uses": 5,
+    "within_observed_ratio": 0.625,
+    "picks": {
+     "RETRO": {
+      "macro": [
+       0,
+       8,
+       5
+      ],
+      "decision": {
+       "uses_used": 13.0,
+       "realized_uses": 13,
+       "observed_early_uses": 8,
+       "observed_late_uses": 5,
+       "net_saving_bits": 41.113293680249456,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 0,
+      "future_net_saving_bits": -55.098138991418864,
+      "was_right": false
+     },
+     "PROSP_RATE": {
+      "macro": [
+       0,
+       8,
+       5
+      ],
+      "decision": {
+       "uses_used": 10.0,
+       "realized_uses": 13,
+       "observed_early_uses": 8,
+       "observed_late_uses": 5,
+       "net_saving_bits": 18.91065537140291,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 0,
+      "future_net_saving_bits": -55.098138991418864,
+      "was_right": false
+     },
+     "PROSP_TREND": {
+      "macro": [
+       8,
+       5,
+       4
+      ],
+      "decision": {
+       "uses_used": 17.0,
+       "realized_uses": 5,
+       "observed_early_uses": 1,
+       "observed_late_uses": 4,
+       "net_saving_bits": 70.7168114253782,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": false,
+      "future_uses": 0,
+      "future_net_saving_bits": -55.098138991418864,
+      "was_right": false
+     }
+    },
+    "planted_motif": [
+     1,
+     4,
+     5
+    ],
+    "carries_observed": 38,
+    "carries_future": 0
+   },
+   "C": {
+    "candidates_enumerated": 76,
+    "motif_learner_image": [
+     8,
+     8,
+     5
+    ],
+    "image_share_at_planted_sites": 0.828125,
+    "observed_early_uses": 25,
+    "observed_late_uses": 29,
+    "within_observed_ratio": 1.16,
+    "picks": {
+     "RETRO": {
+      "macro": [
+       8,
+       8,
+       5
+      ],
+      "decision": {
+       "uses_used": 54.0,
+       "realized_uses": 54,
+       "observed_early_uses": 25,
+       "observed_late_uses": 29,
+       "net_saving_bits": 344.54935056781903,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 2,
+      "future_net_saving_bits": -40.296380118854586,
+      "was_right": false
+     },
+     "PROSP_RATE": {
+      "macro": [
+       8,
+       8,
+       5
+      ],
+      "decision": {
+       "uses_used": 58.0,
+       "realized_uses": 54,
+       "observed_early_uses": 25,
+       "observed_late_uses": 29,
+       "net_saving_bits": 374.15286831294776,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 2,
+      "future_net_saving_bits": -40.296380118854586,
+      "was_right": false
+     },
+     "PROSP_TREND": {
+      "macro": [
+       8,
+       8,
+       5
+      ],
+      "decision": {
+       "uses_used": 70.0,
+       "realized_uses": 54,
+       "observed_early_uses": 25,
+       "observed_late_uses": 29,
+       "net_saving_bits": 462.963421548334,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 2,
+      "future_net_saving_bits": -40.296380118854586,
+      "was_right": false
+     }
+    },
+    "planted_motif": [
+     4,
+     4,
+     5
+    ],
+    "carries_observed": 64,
+    "carries_future": 0
+   }
+  }
+ }
+}

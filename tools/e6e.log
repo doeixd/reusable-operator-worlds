@@ -1,0 +1,25 @@
+prereg check OK: 32 frozen files unchanged; all STATUS-cited paths exist
+[w0 A] 165 candidates | image [11, 6, 4] (34% of planted sites) | observed uses early 2 late 9 (ratio 4.50)
+    RETRO        picks     [11, 6, 4] -> CREATE | future uses  12, future    +33.7 bits | right | found motif image
+    PROSP_RATE   picks     [11, 6, 4] -> CREATE | future uses  12, future    +33.7 bits | right | found motif image
+    PROSP_TREND  picks     [11, 6, 4] -> CREATE | future uses  12, future    +33.7 bits | right | found motif image
+[w0 B] 144 candidates | image [6, 4, 4] (29% of planted sites) | observed uses early 7 late 7 (ratio 1.00)
+    RETRO        picks      [4, 4, 4] -> CREATE | future uses   6, future    -10.7 bits | WRONG
+    PROSP_RATE   picks      [4, 4, 4] -> CREATE | future uses   6, future    -10.7 bits | WRONG
+    PROSP_TREND  picks      [4, 4, 4] -> CREATE | future uses   6, future    -10.7 bits | WRONG
+[w0 C] 119 candidates | image [11, 6, 4] (34% of planted sites) | observed uses early 9 late 13 (ratio 1.44)
+    RETRO        picks     [11, 6, 4] -> CREATE | future uses   1, future    -47.7 bits | WRONG | found motif image
+    PROSP_RATE   picks     [11, 6, 4] -> CREATE | future uses   1, future    -47.7 bits | WRONG | found motif image
+    PROSP_TREND  picks     [11, 6, 4] -> CREATE | future uses   1, future    -47.7 bits | WRONG | found motif image
+[w1 A] 113 candidates | image [8, 8, 5] (80% of planted sites) | observed uses early 13 late 16 (ratio 1.23)
+    RETRO        picks      [8, 8, 5] -> CREATE | future uses  27, future   +144.7 bits | right | found motif image
+    PROSP_RATE   picks      [8, 8, 5] -> CREATE | future uses  27, future   +144.7 bits | right | found motif image
+    PROSP_TREND  picks      [8, 8, 5] -> CREATE | future uses  27, future   +144.7 bits | right | found motif image
+[w1 B] 146 candidates | image [0, 8, 5] (34% of planted sites) | observed uses early 8 late 5 (ratio 0.62)
+    RETRO        picks      [0, 8, 5] -> CREATE | future uses   0, future    -55.1 bits | WRONG | found motif image
+    PROSP_RATE   picks      [0, 8, 5] -> CREATE | future uses   0, future    -55.1 bits | WRONG | found motif image
+    PROSP_TREND  picks      [8, 5, 4] -> CREATE | future uses   0, future    -55.1 bits | WRONG
+[w1 C] 76 candidates | image [8, 8, 5] (83% of planted sites) | observed uses early 25 late 29 (ratio 1.16)
+    RETRO        picks      [8, 8, 5] -> CREATE | future uses   2, future    -40.3 bits | WRONG | found motif image
+    PROSP_RATE   picks      [8, 8, 5] -> CREATE | future uses   2, future    -40.3 bits | WRONG | found motif image
+    PROSP_TREND  picks      [8, 8, 5] -> CREATE | future uses   2, future    -40.3 bits | WRONG | found motif image
