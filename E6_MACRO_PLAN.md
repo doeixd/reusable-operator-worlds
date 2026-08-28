@@ -388,3 +388,91 @@ E6D's four refusal families are kept orthogonal as registered, and run at depths
 4-6 ONLY: at depth >= 8 the attractor regime destroys identifiability, and
 declaring one constant-run grouping "true" there would assert an opportunity gate
 that did not pass.
+
+# Amendment 3 (2026-08-28, before any E6D code): which of E6D's controls are evidence
+
+Made before E6D was built. Two of its four registered controls are arithmetic
+consequences of the decision rule and cannot fail; they are kept, relabelled, and
+excluded from the verdict.
+
+## The classification
+
+The registered creation rule is CREATE iff the two-part code gets shorter, i.e.
+iff net saving > 0.
+
+**Control 1, below-crossing: IMPLEMENTATION CHECK.** `H*` is DEFINED as the point
+where the net saving changes sign, so a corpus with `H_eff < H*` has negative
+saving by construction and the rule refuses arithmetically.
+
+**Control 4, sham alias: IMPLEMENTATION CHECK.** A symbol that shortens nothing
+collects no `(L-1)` saving and still pays the alphabet tax, so its net saving is
+`-tax < 0` and the rule refuses arithmetically.
+
+Both are retained and reported — they would catch a sign or accounting error, and
+a failure would be serious — but they are labelled implementation checks and MUST
+NOT be counted toward the verdict. This is the third instance in this plan of the
+rule registered at Amendment 2 (`AGENTS.md`: never use an object's defining
+invariant as evidence that the object has learned that invariant), and the first
+where it is applied per-control rather than per-rung.
+
+**Controls 2 and 3 carry the empirical content and the verdict rests on them.**
+
+## Control 2 is the sharpest test in E6, and we expect it to FAIL
+
+E6A's accounting is RETROSPECTIVE: it scores the corpus already observed. An
+accidental pattern — over-represented historically, absent prospectively — has
+high observed recurrence, so the registered rule will CREATE and will be wrong.
+
+Registered design, requiring no new compute. `plant_corpus` places the motif in
+tasks `0..63` and not in `64..127`, so E6A's existing `D = 6` corpus already
+contains the structure:
+
+    STRUCTURED split   observed = routes[0:64]   (motif present)
+                       future   = routes[64:128] (motif absent)   -> accidental
+    RANDOM split       observed/future drawn at random from all 128
+                                                                  -> genuine
+
+The rule scores the OBSERVED half only, then the realized saving is computed on
+the FUTURE half. The paired comparison is the test: on the random split the rule
+should create and be right; on the structured split it creates and is wrong.
+
+**Registered prediction: control 2 FAILS for the rule as registered**, and the
+failure is INFORMATIVE rather than fatal — it would establish that a two-part
+code over past programs is not sufficient to decide macro creation, and that a
+prospective estimate is required. A rung that can diagnose the insufficiency of
+its own decision rule is worth more than one that confirms it.
+
+## Control 3, with the competitor set stated
+
+The true macro is the planted motif's learner image. Competitors, all scored by
+the same code on the same corpus:
+
+    nested:       (A B), (B C), (A B C X) for the observed continuation X
+    permuted:     (B A C), (C B A)
+    non-adjacent: (A C) taken as a contiguous pair
+    random:       trigrams drawn from the alphabet
+
+The true macro must score above ALL of them.
+
+**Disclosure, because it changes our expectation after the fact.** The frozen
+body predicts wrong-grouping is the likeliest failure, on the reasoning that
+`A B` is a strict prefix of `A B C` and must occur at least as often. A pre-check
+on EXISTING E6A data contradicts that for the NESTED competitors: the scorer
+prefers `L = 3` in 3/3 worlds (net saving 107.7 vs 33.6 bits in world 0; 344.5 vs
+251.9 in world 1; 137.3 vs 70.6 in world 2), because the extra symbol saved per
+use outweighs the lower use count. The original prediction STANDS AS REGISTERED
+and is now doubted; this revised expectation was formed after seeing data and
+therefore carries less weight. The pre-check covers nested competitors only — the
+permuted, non-adjacent and random families remain untested.
+
+## Verdict rule
+
+- **CREATION CRITERION DEMONSTRATED** iff controls 2 and 3 both pass in >= 2 of 3
+  worlds, with controls 1 and 4 reported as passing implementation checks.
+- **RETROSPECTIVE ECONOMICS INSUFFICIENT** iff control 3 passes and control 2
+  fails — the scorer identifies the right structure but cannot tell a continuing
+  pattern from a historical coincidence.
+- **NO CREATION CRITERION** iff control 3 fails.
+
+Depths 4-6 only, as registered; at depth >= 8 the attractor regime makes every
+competing grouping of a constant run also a constant run.
