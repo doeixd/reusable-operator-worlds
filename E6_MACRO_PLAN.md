@@ -476,3 +476,91 @@ permuted, non-adjacent and random families remain untested.
 
 Depths 4-6 only, as registered; at depth >= 8 the attractor regime makes every
 competing grouping of a constant run also a constant run.
+
+# Amendment 4 (2026-08-28, before any E6E code): a detectability-graded control set
+
+E6D returned RETROSPECTIVE ECONOMICS INSUFFICIENT, and the correction recorded
+the same day showed its accidental-pattern control is a STEP FUNCTION: the motif
+is uniform (slightly increasing: late/early 1.44, 1.16, 1.17) across the whole
+observed window and absent after it. No past-only statistic can detect that, so
+that control cannot distinguish "the rule lacks a criterion" from "the task is
+impossible". E6E as registered would have inherited both the broken objective and
+the impossible control.
+
+## The graded control set
+
+    case  recurrence                                       correct  role
+      A   stable into the future                            CREATE   positive
+      B   DECAYING across the OBSERVED window               REFUSE   discriminating
+      C   uniform then absent (E6D's control)               --       limit, UNSCOREABLE
+
+Only **B** places the evidence inside the data the learner may see, so only B can
+discriminate between criteria. A is the positive case, without which a rule that
+refuses everything would look successful. C is retained and reported as a LIMIT
+CASE -- the point at which the question stops being answerable -- and never
+counted as a failure.
+
+This is the opportunity-gate discipline applied to a DECISION RULE rather than to
+a representation: before asking whether a learner can decide something, verify
+the signal that would license the decision is present in its input.
+
+## Generators
+
+**A** reuses E6A's `D = 6` corpus under a random permutation, so the motif is
+distributed uniformly across observed and future halves. No new compute.
+
+**B** is a new corpus with a declining carry probability
+`p(i) = max(0, 1 - i/72)` over 128 tasks: the motif is dense early, thins
+measurably across the observed window (0-31 versus 32-63), and is essentially
+absent in the future. Requires route inference; ~1.7 h.
+
+**C** reuses E6D's structured split unchanged.
+
+## The two criteria compared
+
+Both enumerate every contiguous `L`-gram of the OBSERVED half, score it, and take
+the argmax; neither is told the motif.
+
+    RETRO        create iff the two-part code over the OBSERVED corpus shortens
+                 (the E6D rule, using realized `H_eff`)
+    PROSPECTIVE  create iff the code shortens under a PROJECTED use count,
+                 `H_proj = uses_in_late_observed * (future_size / late_size)`,
+                 estimated from the observed window ALONE
+
+`PROSPECTIVE` uses no future data. It is deliberately the simplest honest
+estimator -- a trend read off the second half of what has been seen -- so that a
+positive result is attributable to the ACT of projecting rather than to a
+sophisticated projector.
+
+## Two questions, reported separately
+
+1. **DISCOVERY.** Does the argmax over all candidate grams recover the motif's
+   learner image? E6D's control 3 showed the code ranks correctly against a
+   supplied field of rivals; this asks whether it wins an open enumeration.
+2. **TIMING.** Does the criterion CREATE on A and REFUSE on B?
+
+A rung that discovers the right object and mistimes its creation is a different
+result from one that finds the wrong object, and the two are not pooled.
+
+## Decision rules
+
+- **PROSPECTIVE CRITERION DEMONSTRATED** iff, in >= 2 of 3 worlds, discovery
+  recovers the motif image on A and B, and `PROSPECTIVE` creates on A and refuses
+  on B while `RETRO` creates on both.
+- **NO IMPROVEMENT** iff `PROSPECTIVE` and `RETRO` behave alike on B.
+- **DISCOVERY FAILS** iff the argmax does not recover the motif image, in which
+  case the timing comparison is reported but not read as a criterion result.
+
+## Registered predictions
+
+**Ours.** DISCOVERY succeeds on A and B (E6D's control 3 passed 3/3 against a
+supplied rival field, and an open enumeration is the same computation over a
+larger set). `RETRO` creates on both A and B, i.e. it fails B. `PROSPECTIVE`
+creates on A and refuses on B in >= 2 of 3 worlds, giving PROSPECTIVE CRITERION
+DEMONSTRATED. Both criteria create on C and it is reported unscoreable.
+
+We put lower confidence on the B refusal than on the A creation: `H_proj` is a
+crude linear read-off from 32 tasks, and if the decay is too shallow in the late
+observed window the projection will still clear the crossing. If B fails for that
+reason we will report it as an ESTIMATOR limitation and say so, rather than as
+evidence that prospective criteria cannot work.
