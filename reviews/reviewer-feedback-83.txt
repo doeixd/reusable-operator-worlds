@@ -1,0 +1,151 @@
+Yes -- I think that ordering is right, and Amendment 2 is the correct move.
+
+The key conceptual correction is: DEFINITIONAL EQUIVALENCE CANNOT BE EVIDENCE FOR SEMANTIC
+SUBSTITUTABILITY.
+
+If M is literally defined to execute A -> B -> C, then testing c[M] =? c[A B C] is only
+testing whether the macro expansion/runtime is implemented correctly. E6C becomes
+scientifically meaningful only once M has INDEPENDENT SEMANTICS -- e.g. a
+distilled/compiled operator in E6.2. That is the same pathology you caught in E6A's
+original crossing test: the claimed empirical result was baked into the construction.
+
+So I would amend exactly as you propose.
+
+## 1. Amendment 2: retire E6C
+
+I would write the rationale explicitly into the plan:
+
+    E6C retired from E6.1. For a definitional macro whose executor is exactly its
+    registered expansion, contextual substitutability is true by construction and
+    therefore cannot distinguish reusable semantic abstraction from correct macro
+    implementation. Semantic substitutability moves to E6.2, where a compiled macro has
+    independently learned/approximated semantics.
+
+That also gives you a reusable constitutional rule:
+
+    NEVER USE AN OBJECT'S DEFINING INVARIANT AS EVIDENCE THAT THE OBJECT HAS LEARNED THAT
+    INVARIANT.
+
+Examples now include: predicted H* recomputed from the same code -> implementation check;
+definitional macro vs its own expansion -> implementation check; exact alias vs source ->
+implementation check. This is becoming a recognizable class of experimental error.
+
+## 2. E6B should now be the load-bearing positive rung
+
+This experiment is much better than the original E6C because there is an actual causal
+prediction. E5.1 observed C_find(D) ~ aD + b over a roughly 3.6e7-fold expansion of the
+nominal program space. A length-L macro changes D -> D' = D - (L-1). So the clean
+prediction is approximately
+
+    Delta C_find / C_find ~ (L-1)/D
+
+or, preferably, using the actual fitted E5.1 cost law:
+
+    Delta C_find_pred = C_hat(D) - C_hat(D - L + 1)
+
+No learned beta, no post-hoc scaling.
+
+And now the power calculation says the predicted saving is 5.48s against a within-cell
+sigma of about 2.19s, so at n = 8, SE ~ 2.19/sqrt(8) ~ 0.77s, giving roughly 7.1 standard
+errors. So your earlier "maybe underpowered" prediction is simply falsified. Good
+correction.
+
+### One design point I would make especially strict
+
+Make E6B PAIRED BY TASK/PROGRAM. For every original program p, construct its
+macro-rewritten counterpart p_M from the exact same underlying task:
+
+    p   = A B C X Y Z
+    p_M = M X Y Z
+
+Then compare C_find(p) - C_find(p_M). That removes most of the task-draw noise that caused
+E5.1's fake horizon. This should be much cleaner than comparing independently sampled
+depth-D and depth-(D-L+1) tasks.
+
+## There is one subtle E6B confound worth guarding
+
+The macro shortens length but also changes vocabulary size: K -> K+1. So two things happen
+simultaneously: D goes down and K goes up. E5.1 tells us program count itself seems largely
+irrelevant, but the optimizer still has a (K+1)-way route variable instead of a K-way one.
+
+If the registered prediction already ignores that, keep it as frozen and treat deviations
+as informative. But I would include a matched DUMMY-SYMBOL CONTROL if permitted by the
+plan: add an unused (K+1)th symbol, leave program length unchanged. That estimates the pure
+vocabulary-width cost. Then the causal decomposition is
+
+    Delta C_macro = Delta C_length (wanted) + Delta C_K (alphabet/search overhead)
+
+My expectation is Delta C_K will be small, but measuring it makes the result much cleaner.
+
+## What E6B would establish if it lands
+
+E6A already shows macro => description savings. E6B would add macro => search savings. And
+critically, the latter would have been predicted BEFORE intervention from E5.1. So you
+would get: ABSTRACTION SHORTENS A PROGRAM AND CAUSES SYNTHESIS COST TO FALL BY THE AMOUNT
+PREDICTED FROM THE PRE-EXISTING SEARCH LAW. That is a genuinely strong result. It begins
+connecting compression to sample/computational efficiency causally rather than
+rhetorically.
+
+## 3. E6D is what decides whether this is intelligence rather than compression
+
+Strong agreement that E6D comes next. E6A by itself proves something like: if you find
+repeated syntax, representing it by a symbol can save bits. That is almost classical
+compression. E6D asks whether the system has an actual CREATION CRITERION. You need the
+same accounting to say CREATE when profitable and REFUSE when not.
+
+I would make the refusal families as orthogonal as possible.
+
+Below-crossing: real computation, real recurrence, but H_eff < H*. Tests economics cleanly.
+
+Accidental recurrence: a substring repeats in observed programs but lacks prospective
+recurrence. If E6 is prospective, it should not pay creation cost based merely on
+historical coincidence.
+
+Wrong grouping: given a real repeated A B C, compare plausible A B, B C, B A C, ... The
+selected macro must beat plausible alternatives, not just NO_MACRO.
+
+Sham alias: pay vocabulary/alphabet costs without actually shortening the relevant program
+or exposing reusable computation. Tests whether the score is responding to real
+compression.
+
+And yes, depths 4-6 only. At depth 8+, the attractor regime destroys identifiability;
+trying to declare one constant-run grouping "true" there would be pretending the
+opportunity gate passed when it did not.
+
+## Then E6E becomes much more meaningful
+
+Only after E6A (there is an economic opportunity), E6B (creating the macro causally reduces
+search) and E6D (the decision rule refuses bad opportunities) should you ask: can the
+learner discover which macro to create? Then E6E is not vague structure discovery. It has
+an explicit objective:
+
+    M* = argmax_M [ Delta D(M) + lambda_compute * Delta C_find(M) ]
+
+subject to the already-established opportunity/refusal criteria. And because E5.1 says
+search cost is basically a function of resulting length, even the search-value term can be
+forecast mechanically.
+
+## E6.2 then becomes the genuinely semantic macro experiment
+
+This is where I would resurrect the old E6C. Take M := A B C but instead of implementing M
+by expansion, train/distil an independent operator P_M(x) ~ P_C(P_B(P_A(x))). Now test
+c[P_M] ~? c[A B C] under unseen prefixes, suffixes, neighbours, positions and depths. Now
+failure is possible. And success means something important: A RECURRING PROGRAM FRAGMENT
+HAS BEEN COMPILED INTO A NEW REUSABLE COMPUTATIONAL PRIMITIVE. That is where I would
+license primitive invention in the stronger semantic sense.
+
+It can also buy a fourth currency, Delta e_execute, because one compiled call might
+accumulate less error than three sequential approximate calls. Given everything E5.1 taught
+you, that may eventually be as important as the MDL saving.
+
+So I think your revised E6 sequence is now very clean:
+
+    E6A  - Does the macro economically pay?
+    E6B  - Does shortening causally reduce synthesis cost as predicted?
+    E6D  - Does the economics correctly refuse bad macros?
+    E6E  - Can the learner discover the right macro?
+    E6.2 - Can the macro be compiled into independent reusable semantics?
+
+And I especially like that two planned "positive experiments" have now been removed because
+they were identities. That is not lost work; it is the research program becoming better at
+distinguishing FACTS ABOUT THE WORLD from FACTS ABOUT ITS OWN IMPLEMENTATION.

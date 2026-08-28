@@ -291,3 +291,100 @@ expect `H_eff` in the 20-30 range at `N = 64, D = 6` with a 50% plant, clearing
 the bar by roughly 2-4x. We predict it FAILS at `N = 128` where `H* = 13.44` if
 the survival rate falls at all, and we predict the `L = 2` macro is frequently a
 CONSTANT gram, which we will report as degenerate rather than as a macro.
+
+# Amendment 2 (2026-08-28, before any E6B/E6C code): E6C retired, E6B made paired and decomposed
+
+Source: review 83 (`reviews/reviewer-feedback-83.txt`). Made before either rung
+was built, and before any E6B cell existed.
+
+## E6C is RETIRED from E6.1
+
+**For a definitional macro whose executor is exactly its registered expansion,
+contextual substitutability is true by construction and therefore cannot
+distinguish reusable semantic abstraction from correct macro implementation.**
+`M` is defined in this plan as "a symbol whose execution expands to its
+constituent operators ... a naming and coding decision, nothing more", so
+`c[M] = c[A B C]` holds bitwise in every context, seen or unseen. E6C as
+registered would have measured the expansion runtime.
+
+Semantic substitutability MOVES TO E6.2, where a compiled macro
+`P_M ~ P_c o P_b o P_a` has independently learned semantics and the comparison
+can fail. This is the second estimand in this plan retired for the same reason as
+Amendment 1's, and the shared rule is registered in `AGENTS.md`: NEVER USE AN
+OBJECT'S DEFINING INVARIANT AS EVIDENCE THAT THE OBJECT HAS LEARNED THAT
+INVARIANT.
+
+Nothing is lost from the scientific record: E6C's question is not answered, it is
+relocated to the rung where it is answerable.
+
+## E6B becomes the load-bearing positive rung, with three changes
+
+**(1) PAIRED BY TASK.** For every original program `p` the macro-rewritten
+counterpart `p_M` is built from the SAME underlying task:
+
+    p   = A B C X Y Z        (length D)
+    p_M = M X Y Z            (length D - L + 1)
+
+and the estimand is the within-task difference `C_find(p) - C_find(p_M)`. E5.1's
+spurious `D_search = 7` came from comparing independently drawn task sets across
+depths; pairing removes that noise source rather than averaging over it.
+
+**(2) PREDICTION FROM THE FITTED LAW, NOT THE RATIO.** E5.1's own 192 cells give
+
+    C_hat(D) = 2.8287 D - 1.1719      (r^2 = 0.873)
+
+so the registered prediction is
+
+    Delta C_find_pred = C_hat(D) - C_hat(D - L + 1) = a (L - 1)
+
+which is **5.66 s at `L = 3`, independent of `D`** — a sharper claim than
+`(L-1)/D` (5.07-5.27 s), and one that fails if the saving turns out to scale with
+depth. Both forms are reported; the fitted law is the registered one.
+
+**(3) A DUMMY-SYMBOL CONTROL, to decompose the effect.** Macro substitution
+changes two things at once: length falls (`D -> D-L+1`) and vocabulary width
+rises (`K -> K+1`). The control adds an unused `(K+1)`-th symbol and leaves
+program length UNCHANGED, isolating the pure search-width cost:
+
+    Delta C_macro = Delta C_length  +  Delta C_K
+                    (wanted)          (alphabet/search overhead)
+
+Registered: the headline estimand remains `Delta C_macro`; `Delta C_K` is
+reported beside it and subtracted to give `Delta C_length` as a secondary.
+
+## Non-vacuity for E6B, all required
+
+1. The macro-bearing executor reproduces the expansion's predictions BITWISE on
+   the same tasks (this is Amendment 2's own point: an identity, and therefore an
+   implementation check, reported as one and never as evidence).
+2. Route optimization reduces support loss in every scored cell, both arms.
+3. The dummy-symbol control is measurably distinguishable from zero, or
+   `Delta C_K` is reported as below resolution rather than as zero.
+
+## Registered predictions
+
+**Ours.** `Delta C_macro` lands within a factor of 2 of `a(L-1) = 5.66 s` in
+>= 2 of 3 worlds at `D = 6, L = 3`, and `|Delta C_K| < 1 s` (well under 20% of
+the length effect). We further predict the saving is INDEPENDENT of `D` within
+noise, which is the fitted law's distinctive claim against the ratio form; if the
+saving instead scales with `D`, the ratio form is right and the linear fit is
+locally wrong, and we would report that rather than the reverse.
+
+Power, computed from E5.1's within-depth spread before running: `sigma = 2.19 s`
+per cell, so at `n = 8` paired tasks `SE ~ 0.77 s` and the predicted effect is
+~7.1 SE. This supersedes the concern registered with Amendment 1 that E6B might
+be underpowered at `n = 8`; that concern used cross-depth rather than
+within-depth variance and was WRONG.
+
+## Revised rung order
+
+    E6A   does the macro economically pay?              DONE - PAYS 3/3
+    E6B   does shortening causally reduce search cost?   next
+    E6D   does the economics correctly REFUSE?
+    E6E   can the learner discover which macro?
+    E6.2  can the macro be compiled into independent semantics? (E6C's question)
+
+E6D's four refusal families are kept orthogonal as registered, and run at depths
+4-6 ONLY: at depth >= 8 the attractor regime destroys identifiability, and
+declaring one constant-run grouping "true" there would assert an opportunity gate
+that did not pass.
