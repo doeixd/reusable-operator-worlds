@@ -4427,3 +4427,32 @@ than as a one-off miss.
   world plus ROTATION of arm order across paired tasks, recording the position
   each arm occupied. Ordering effects are invisible in a summary statistic and
   systematic in a fixed loop.
+
+- E6D, A CODE OVER THE PAST CANNOT DECIDE WHAT TO BUILD FOR THE FUTURE
+  (2026-08-28; `reports/e6d_refusal.json`). The registered two-part code picks the
+  RIGHT macro out of a field of plausible rivals -- nested prefix and suffix, both
+  permutations, a non-adjacent pair and random trigrams -- in 3/3 worlds. It then
+  creates that macro on a pattern which stops recurring, losing 40-55 bits, in 3/3
+  worlds, while correctly creating on continuing patterns in 3/3. `H_eff` counts
+  uses that HAVE happened; the decision needs uses that WILL happen, and a
+  retrospective code cannot separate them. Structure identification and
+  creation-timing are different problems and one accounting solves only the first.
+
+- THE PAIRED POSITIVE IS WHAT TURNS A NULL INTO A DIAGNOSIS (E6D). "The rule
+  creates on an accidental pattern" alone is consistent with a rule that creates
+  on everything. Adding a RANDOM split, where the same pattern continues and
+  creating is correct, showed the rule is right 3/3 there and wrong 3/3 on the
+  structured split -- so the mechanism is blindness to NON-CONTINUATION
+  specifically. Any control that reports a failure should carry the matched case
+  where success is the correct answer.
+
+- A COMPETITOR CAN COINCIDE WITH THE OBJECT IT IS MEANT TO RIVAL (E6D). World 1's
+  macro `(8,8,5)` repeats a symbol, so its b-a-c permutation IS the macro; scored
+  as a rival it failed the control by equality (`true > true` is false). We had
+  guarded the RANDOM competitor draws against this and not the structured
+  permutations. Whenever a control constructs alternatives by transforming the
+  true object, check that the transformation is non-trivial ON THAT OBJECT -- a
+  permutation is only a permutation when the elements differ. The uncorrected run
+  left the headline verdict unchanged, which is exactly why it would have
+  survived: a defect that does not move the conclusion is the one nobody
+  re-examines.

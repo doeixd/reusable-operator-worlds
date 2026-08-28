@@ -1,0 +1,485 @@
+{
+ "frozen_plan": "E6_MACRO_PLAN.md (Amendment 3)",
+ "git_commit": "59e9465",
+ "protocol": {
+  "depth": 6,
+  "macro_len": 3,
+  "corpus": 128,
+  "split": 64,
+  "evidence_controls": [
+   "accidental",
+   "wrong_grouping"
+  ],
+  "implementation_checks": [
+   "below_crossing",
+   "sham_alias"
+  ],
+  "note": "verdict rests on the evidence controls only"
+ },
+ "worlds": {
+  "0": {
+   "macro": [
+    11,
+    6,
+    4
+   ],
+   "control_1_below_crossing": {
+    "kind": "implementation check",
+    "uses": 4,
+    "H_star": 4.449000085769775,
+    "net_saving_bits": -3.32299550166249,
+    "refused": true,
+    "passes": true
+   },
+   "control_4_sham_alias": {
+    "kind": "implementation check",
+    "alias": [
+     0,
+     0,
+     0
+    ],
+    "uses": 0,
+    "net_saving_bits": -99.44139048067427,
+    "refused": true,
+    "passes": true
+   },
+   "control_2_accidental": {
+    "kind": "evidence",
+    "structured": {
+     "macro": [
+      11,
+      6,
+      4
+     ],
+     "observed": {
+      "uses": 22,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": 107.7212086067891,
+      "create": true
+     },
+     "future": {
+      "uses": 1,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": -47.697259555136725,
+      "create": false
+     }
+    },
+    "random": {
+     "macro": [
+      11,
+      6,
+      4
+     ],
+     "observed": {
+      "uses": 13,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": 41.1132936802494,
+      "create": true
+     },
+     "future": {
+      "uses": 10,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": 18.91065537140298,
+      "create": true
+     }
+    },
+    "fooled_by_accidental_pattern": true,
+    "correct_on_continuing_pattern": true,
+    "passes": false
+   },
+   "control_3_wrong_grouping": {
+    "kind": "evidence",
+    "true_macro": [
+     11,
+     6,
+     4
+    ],
+    "true_net_saving_bits": 70.77883655381584,
+    "competitors": {
+     "nested_prefix": {
+      "gram": [
+       11,
+       6
+      ],
+      "net_saving_bits": 18.85720328242087,
+      "beaten": true
+     },
+     "nested_suffix": {
+      "gram": [
+       6,
+       4
+      ],
+      "net_saving_bits": 4.055444409856591,
+      "beaten": true
+     },
+     "permuted_bac": {
+      "gram": [
+       6,
+       11,
+       4
+      ],
+      "net_saving_bits": -77.23875217182785,
+      "beaten": true
+     },
+     "permuted_cba": {
+      "gram": [
+       4,
+       6,
+       11
+      ],
+      "net_saving_bits": -84.63963160811,
+      "beaten": true
+     },
+     "non_adjacent_ac": {
+      "gram": [
+       11,
+       4
+      ],
+      "net_saving_bits": 7.755884127997433,
+      "beaten": true
+     },
+     "random_0": {
+      "gram": [
+       6,
+       8,
+       11
+      ],
+      "net_saving_bits": -99.44139048067427,
+      "beaten": true
+     },
+     "random_1": {
+      "gram": [
+       9,
+       0,
+       6
+      ],
+      "net_saving_bits": -99.44139048067427,
+      "beaten": true
+     },
+     "random_2": {
+      "gram": [
+       0,
+       11,
+       5
+      ],
+      "net_saving_bits": -99.44139048067427,
+      "beaten": true
+     }
+    },
+    "degenerate_competitors_dropped": [],
+    "beats_all": true,
+    "beaten_by": [],
+    "passes": true
+   }
+  },
+  "1": {
+   "macro": [
+    8,
+    8,
+    5
+   ],
+   "control_1_below_crossing": {
+    "kind": "implementation check",
+    "uses": 4,
+    "H_star": 4.449000085769775,
+    "net_saving_bits": -3.32299550166249,
+    "refused": true,
+    "passes": true
+   },
+   "control_4_sham_alias": {
+    "kind": "implementation check",
+    "alias": [
+     0,
+     0,
+     0
+    ],
+    "uses": 0,
+    "net_saving_bits": -99.44139048067427,
+    "refused": true,
+    "passes": true
+   },
+   "control_2_accidental": {
+    "kind": "evidence",
+    "structured": {
+     "macro": [
+      8,
+      8,
+      5
+     ],
+     "observed": {
+      "uses": 54,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": 344.5493505678189,
+      "create": true
+     },
+     "future": {
+      "uses": 2,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": -40.296380118854586,
+      "create": false
+     }
+    },
+    "random": {
+     "macro": [
+      8,
+      8,
+      5
+     ],
+     "observed": {
+      "uses": 31,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": 174.3291235333288,
+      "create": true
+     },
+     "future": {
+      "uses": 25,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": 129.92384691563575,
+      "create": true
+     }
+    },
+    "fooled_by_accidental_pattern": true,
+    "correct_on_continuing_pattern": true,
+    "passes": false
+   },
+   "control_3_wrong_grouping": {
+    "kind": "evidence",
+    "true_macro": [
+     8,
+     8,
+     5
+    ],
+    "true_net_saving_bits": 315.0078579511278,
+    "competitors": {
+     "nested_prefix": {
+      "gram": [
+       8,
+       8
+      ],
+      "net_saving_bits": 263.0862246797328,
+      "beaten": true
+     },
+     "nested_suffix": {
+      "gram": [
+       8,
+       5
+      ],
+      "net_saving_bits": 126.16995510851257,
+      "beaten": true
+     },
+     "permuted_cba": {
+      "gram": [
+       5,
+       8,
+       8
+      ],
+      "net_saving_bits": -3.2299578090060095,
+      "beaten": true
+     },
+     "non_adjacent_ac": {
+      "gram": [
+       8,
+       5
+      ],
+      "net_saving_bits": 126.16995510851257,
+      "beaten": true
+     },
+     "random_0": {
+      "gram": [
+       8,
+       11,
+       9
+      ],
+      "net_saving_bits": -99.44139048067427,
+      "beaten": true
+     },
+     "random_1": {
+      "gram": [
+       4,
+       2,
+       2
+      ],
+      "net_saving_bits": -99.44139048067427,
+      "beaten": true
+     },
+     "random_2": {
+      "gram": [
+       3,
+       0,
+       0
+      ],
+      "net_saving_bits": -99.44139048067427,
+      "beaten": true
+     }
+    },
+    "degenerate_competitors_dropped": [
+     "permuted_bac"
+    ],
+    "beats_all": true,
+    "beaten_by": [],
+    "passes": true
+   }
+  },
+  "2": {
+   "macro": [
+    8,
+    9,
+    6
+   ],
+   "control_1_below_crossing": {
+    "kind": "implementation check",
+    "uses": 4,
+    "H_star": 4.449000085769775,
+    "net_saving_bits": -3.32299550166249,
+    "refused": true,
+    "passes": true
+   },
+   "control_4_sham_alias": {
+    "kind": "implementation check",
+    "alias": [
+     0,
+     0,
+     1
+    ],
+    "uses": 0,
+    "net_saving_bits": -99.44139048067427,
+    "refused": true,
+    "passes": true
+   },
+   "control_2_accidental": {
+    "kind": "evidence",
+    "structured": {
+     "macro": [
+      8,
+      9,
+      6
+     ],
+     "observed": {
+      "uses": 26,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": 137.3247263519179,
+      "create": true
+     },
+     "future": {
+      "uses": 0,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": -55.098138991418864,
+      "create": false
+     }
+    },
+    "random": {
+     "macro": [
+      8,
+      9,
+      6
+     ],
+     "observed": {
+      "uses": 14,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": 48.514173116531765,
+      "create": true
+     },
+     "future": {
+      "uses": 12,
+      "H_star": 7.444809696710498,
+      "net_saving_bits": 33.71241424396726,
+      "create": true
+     }
+    },
+    "fooled_by_accidental_pattern": true,
+    "correct_on_continuing_pattern": true,
+    "passes": false
+   },
+   "control_3_wrong_grouping": {
+    "kind": "evidence",
+    "true_macro": [
+     8,
+     9,
+     6
+    ],
+    "true_net_saving_bits": 92.98147486266225,
+    "competitors": {
+     "nested_prefix": {
+      "gram": [
+       8,
+       9
+      ],
+      "net_saving_bits": 48.460721027549425,
+      "beaten": true
+     },
+     "nested_suffix": {
+      "gram": [
+       9,
+       6
+      ],
+      "net_saving_bits": 29.95852243684385,
+      "beaten": true
+     },
+     "permuted_bac": {
+      "gram": [
+       9,
+       8,
+       6
+      ],
+      "net_saving_bits": -77.23875217182785,
+      "beaten": true
+     },
+     "permuted_cba": {
+      "gram": [
+       6,
+       9,
+       8
+      ],
+      "net_saving_bits": -99.44139048067427,
+      "beaten": true
+     },
+     "non_adjacent_ac": {
+      "gram": [
+       8,
+       6
+      ],
+      "net_saving_bits": -36.6493924896954,
+      "beaten": true
+     },
+     "random_0": {
+      "gram": [
+       4,
+       2,
+       2
+      ],
+      "net_saving_bits": -99.44139048067427,
+      "beaten": true
+     },
+     "random_1": {
+      "gram": [
+       1,
+       1,
+       11
+      ],
+      "net_saving_bits": -99.44139048067427,
+      "beaten": true
+     },
+     "random_2": {
+      "gram": [
+       3,
+       7,
+       2
+      ],
+      "net_saving_bits": -99.44139048067427,
+      "beaten": true
+     }
+    },
+    "degenerate_competitors_dropped": [],
+    "beats_all": true,
+    "beaten_by": [],
+    "passes": true
+   }
+  }
+ },
+ "verdict": {
+  "accidental_worlds": 0,
+  "wrong_grouping_worlds": 3,
+  "implementation_checks_all_pass": true,
+  "verdict": "RETROSPECTIVE ECONOMICS INSUFFICIENT"
+ }
+}

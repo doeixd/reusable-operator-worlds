@@ -3749,3 +3749,37 @@ The claim that the saving is independent of `D` remains UNTESTED -- E6B ran at
 one depth.
 
 Next: E6D, the four refusal controls, at depths 4-6 only.
+
+# E6D complete: the economics picks the right macro and cannot refuse a dead one (2026-08-28)
+
+Ran `src/row/experiments/audit_e6d_refusal.py` on development worlds 0-2 against
+`E6_MACRO_PLAN.md` (frozen `1bfb93d`, Amendment 3). Report
+`reports/e6d_refusal.json`. No new compute: every control is arithmetic over
+E6A's cached `D = 6` corpus.
+
+**Verdict: RETROSPECTIVE ECONOMICS INSUFFICIENT.**
+
+    1  below-crossing      implementation check   REFUSED 3/3
+    4  sham alias          implementation check   REFUSED 3/3
+    3  wrong grouping      EVIDENCE               PASS    3/3
+    2  accidental pattern  EVIDENCE               FAIL    0/3
+
+Control 3: the true macro beats nested prefix and suffix, both permutations, the
+non-adjacent pair and three random trigrams, in all three worlds. Our frozen
+prediction that this was the likeliest failure is refuted -- the shorter, more
+frequent `(A B)` loses because the extra symbol saved per use outweighs its
+higher count.
+
+Control 2: on a structured split (motif present in the observed half, absent from
+the future half) the rule creates and loses 40-55 bits on the future; on a random
+split, where the pattern continues, it creates and gains 19-130 bits. It is
+specifically blind to non-continuation, not broadly miscalibrated.
+
+Registered for E6E before it is designed: candidates must be scored by a
+PROSPECTIVE estimate of recurrence. An E6E maximizing the retrospective objective
+would inherit this failure exactly.
+
+Also fixed before recording: world 1's macro `(8,8,5)` has a b-a-c permutation
+equal to itself, so the wrong-grouping control was scoring the macro against its
+own object and reported a false negative. Degenerate competitors are now dropped
+and recorded. The verdict was unchanged by the fix, which is why it mattered.

@@ -6929,3 +6929,86 @@ TOWARD the registered prediction. Fixed by an untimed warmup adaptation per worl
 and by ROTATING arm order across the paired tasks, with the position each arm
 occupied recorded per cell. A bias that flatters the hypothesis is the one most
 worth hunting for.
+
+# E6D (2026-08-28): RETROSPECTIVE ECONOMICS INSUFFICIENT
+
+Plan `E6_MACRO_PLAN.md` frozen at `1bfb93d` (Amendment 3). Development worlds
+0-2, `D = 6`, `L = 3`, arithmetic over E6A's cached corpus (no new compute).
+Report `reports/e6d_refusal.json`.
+
+## Result
+
+    control                     kind                    outcome
+    1  below-crossing           implementation check    REFUSED 3/3
+    4  sham alias               implementation check    REFUSED 3/3
+    3  wrong grouping           EVIDENCE                PASS    3/3
+    2  accidental pattern       EVIDENCE                FAIL    0/3
+
+**Verdict: RETROSPECTIVE ECONOMICS INSUFFICIENT.** The scorer identifies the
+right structure and cannot tell a continuing pattern from a historical
+coincidence.
+
+Per Amendment 3, controls 1 and 4 are arithmetic consequences of the decision
+rule's sign and are reported as implementation checks; they pass, which means the
+accounting is implemented correctly, and they are NOT counted toward the verdict.
+
+## Control 3 PASSES 3/3, refuting our frozen prediction
+
+The true macro beat every competitor in every world: nested prefix `(A B)`,
+nested suffix `(B C)`, both permutations, the non-adjacent pair `(A C)`, and
+three random trigrams. Net savings: +70.8 / +315.0 / +93.0 bits for the true
+macro against all rivals below.
+
+**Our frozen prediction that wrong-grouping was "the likeliest failure" is
+WRONG.** The reasoning was that `A B` is a strict prefix of `A B C` and must
+occur at least as often; that is true, and it loses anyway, because the extra
+symbol saved per use outweighs the lower use count. This is E6A's macro-length
+optimum doing real work: the registered code prefers the correct grouping without
+being told the motif.
+
+## Control 2 FAILS 0/3, exactly as Amendment 3 registered
+
+    world  structured future   random future   fooled   correct on continuing
+      0        -47.7 bits        +18.9 bits     yes            yes
+      1        -40.3 bits       +129.9 bits     yes            yes
+      2        -55.1 bits        +33.7 bits     yes            yes
+
+The paired positive is what makes this a diagnosis rather than a null: on a
+RANDOM split, where the pattern continues, the rule creates and is right 3/3. On
+the STRUCTURED split, where the motif is present in the observed half and absent
+from the future half, it creates and is wrong 3/3. The rule is not broadly
+miscalibrated — it is specifically blind to NON-CONTINUATION.
+
+**Registered consequence.** A two-part code over PAST programs is not sufficient
+to decide macro creation. `H_eff` counts uses that have already happened, while
+the decision needs uses that WILL happen, and nothing in the registered
+accounting distinguishes them. E6E must therefore score candidates by a
+PROSPECTIVE estimate — held-out or forward-looking recurrence — and an E6E that
+maximized the retrospective objective would inherit this exact failure. This is
+registered before E6E is designed.
+
+## A defect in our own control, found and fixed before the verdict was recorded
+
+The first run reported control 3 as FAIL in world 1, "beaten by permuted_bac".
+World 1's macro is `(8,8,5)`; its b-a-c permutation is `(8,8,5)` — the macro
+ITSELF. The competitor coincided with the true object and the comparison
+`true > rival` was false by equality, failing the control against its own macro.
+
+We had guarded the RANDOM competitor draws against exactly this and not the
+structured permutations. Fixed by dropping any competitor equal to the true
+macro and recording which were dropped. Control 3 then passes 3/3. The
+uncorrected run would have reported a false negative in one world and, since the
+rule is 2-of-3, would still have returned the same verdict — which is precisely
+why it needed catching: a defect that does not change the headline is the kind
+that survives.
+
+## Scorekeeping
+
+- **Amendment 3's "control 2 FAILS for the rule as registered": CORRECT**, 0/3,
+  with the paired positive confirming the mechanism is non-continuation blindness
+  rather than general miscalibration.
+- **The frozen body's "wrong-grouping is the likeliest failure": WRONG**, 3/3
+  pass.
+- **Amendment 3's post-hoc expectation** (formed after a pre-check on nested
+  competitors, and labelled as carrying less weight) is borne out and now extends
+  to permuted, non-adjacent and random rivals.
