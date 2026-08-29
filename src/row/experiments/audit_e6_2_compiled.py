@@ -157,14 +157,28 @@ def distil(library, macro, states, d: int, rank: int, alpha: float,
                    "scalars": operator_scalars(model)}
 
 
+MAX_ATTEMPTS = 4000
+
+
 def make_programs(rng, slots: int, macro, cls: str, seen_positions, depth: int,
                   seen_neighbours):
-    """Programs containing the macro, in contexts graded by distribution shift."""
+    """Programs containing the macro, in contexts graded by distribution shift.
+
+    Amendment 2: C3 ("positions never occupied") is EMPTY at depth 6 -- a length-3
+    fragment has only four possible starts and the macro occupies all of them --
+    so C3 is built in LONGER programs at start index >= 4, which confounds
+    position with depth. The confound is disclosed, and every class reports
+    whether it was constructible instead of spinning forever looking.
+    """
     out = []
     L = MACRO_LEN
-    while len(out) < PROGRAMS_PER_CLASS:
+    attempts = 0
+    while len(out) < PROGRAMS_PER_CLASS and attempts < MAX_ATTEMPTS:
+        attempts += 1
         if cls == "C4":
             d = depth + int(rng.integers(2, 5))          # depths never seen
+        elif cls == "C3":
+            d = depth + int(rng.integers(1, 4))          # long enough for a late start
         else:
             d = depth
         span = d - L
@@ -246,10 +260,13 @@ def main() -> None:
                     if j + MACRO_LEN < len(route):
                         neighbours.add((route[j + MACRO_LEN], "right"))
 
+        # P_M is built from the SAME hyperparameters as a library slot, read off
+        # the frozen config rather than hard-coded, so "matched budget" is a fact
+        # about the artifact and not an assumption.
         proto = library[0]
-        rank = proto.V.shape[0]
-        alpha = float(proto.alpha) if torch.is_tensor(proto.alpha) else float(proto.alpha)
-        activation = config.discrete_model.activation
+        rank = config.discrete_model.operator_rank
+        alpha = config.discrete_model.operator_alpha_init
+        activation = config.discrete_model.operator_activation
 
         trained, fitinfo = distil(library, macro, states, d, rank, alpha,
                                   activation, seed=4200 + world)
@@ -271,6 +288,15 @@ def main() -> None:
 
         for cls in ("C0", "C1", "C2", "C3", "C4"):
             progs = make_programs(rng, slots, macro, cls, positions, DEPTH, neighbours)
+            if len(progs) < PROGRAMS_PER_CLASS:
+                entry["classes"][cls] = {
+                    "constructible": False, "programs": len(progs),
+                    "reason": "no admissible context exists for this class",
+                    "within_tolerance": None, "untrained_fails": None}
+                print(f"[w{world} {cls}] UNCONSTRUCTIBLE "
+                      f"({len(progs)}/{PROGRAMS_PER_CLASS} programs) -- excluded",
+                      flush=True)
+                continue
             gaps, wrong, shifts = [], [], []
             for program, j in progs:
                 x = torch.tensor(rng.normal(size=(PROBES, d)), dtype=torch.float32)
@@ -285,6 +311,7 @@ def main() -> None:
             g = float(np.exp(np.mean(np.log(np.maximum(gaps, 1e-12)))))
             w = float(np.exp(np.mean(np.log(np.maximum(wrong, 1e-12)))))
             entry["classes"][cls] = {
+                "constructible": True,
                 "programs": len(progs), "substitution_nmse": g,
                 "untrained_nmse": w, "input_shift": float(np.mean(shifts)),
                 "within_tolerance": bool(g <= TOLERANCE),
@@ -332,12 +359,14 @@ def main() -> None:
         write(out, args.output)
 
     def passes(cls):
-        return sum(1 for w in WORLDS if out["worlds"][str(w)]["classes"][cls]["within_tolerance"])
+        return sum(1 for w in WORLDS
+                   if out["worlds"][str(w)]["classes"][cls].get("within_tolerance") is True)
 
     c0 = passes("C0")
     control = sum(1 for w in WORLDS
-                  if all(out["worlds"][str(w)]["classes"][c]["untrained_fails"]
-                         for c in ("C0", "C1", "C2", "C3", "C4")))
+                  if all(out["worlds"][str(w)]["classes"][c].get("untrained_fails") is True
+                         for c in ("C0", "C1", "C2", "C3", "C4")
+                         if out["worlds"][str(w)]["classes"][c].get("constructible")))
     if c0 < 2 or control < 2:
         verdict = "UNSCOREABLE (non-vacuity failed)"
     elif passes("C3") >= 2 and passes("C2") >= 2 and passes("C1") >= 2:

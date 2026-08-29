@@ -275,3 +275,48 @@ Every context class must report whether it was CONSTRUCTIBLE. A class that canno
 be built is reported as such and excluded from the verdict; the generator takes a
 bounded number of attempts and never spins. A class that yields fewer than the
 registered program count is reported with its realized count.
+
+# Amendment 3 (2026-08-29, before any E6.2 verdict): the tolerance was output-relative, and an untrained operator passed it
+
+Found in the structural dry run by the registered non-vacuity control, which is
+what that control exists for.
+
+## The defect
+
+`agreement_nmse` divided the substitution error by the magnitude of the PROGRAM
+OUTPUT. But the library's operators are residual perturbations, so a length-3
+fragment changes the output by only a few percent. A randomly initialized `P_M`
+therefore scored 0.050-0.078 against a 0.15 tolerance and **PASSED in 3/3
+worlds** -- the null edit succeeded.
+
+This is `AGENTS.md`'s V4.1 rule, verbatim: *a functional tolerance must be
+normalized against the quantity whose loss it licenses, never against total
+output scale.* V4.1 divided by total output variance while an abstraction
+contributed ~0.2% of it, and every abstraction substituted for every other. The
+stated diagnostic for the error class is that THE NULL EDIT PASSES. It did.
+
+## Registered correction
+
+The substitution error is normalized by the MACRO'S OWN CONTRIBUTION:
+
+    error = || out(P_M) - out(expansion) ||^2  /  || out(expansion) - out(identity) ||^2
+
+where `out(identity)` executes the same program with the fragment replaced by a
+pass-through. The denominator is what the macro actually does to the state, so
+the ratio answers "what fraction of the fragment's own effect did the compiled
+operator get wrong", which is the quantity the tolerance is meant to license.
+
+An error of 1.0 now means "no better than deleting the fragment". The E2
+tolerance of 0.15 applies to this contribution-relative quantity.
+
+## Consequence for the non-vacuity requirement
+
+The untrained control becomes able to fail, which it must be for the rung to
+carry evidence: a random operator should score at or above 1.0, since it
+reproduces none of the fragment's specific effect. **If the untrained control
+still passes under the corrected normalization, the rung is UNSCOREABLE and no
+substitutability claim may be made from it.**
+
+The dry-run numbers under the OLD normalization are recorded here so the
+correction is legible, and are not reported as results: substitution 0.010-0.021,
+untrained 0.050-0.078, both nominally "within tolerance".
