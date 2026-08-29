@@ -227,3 +227,51 @@ removed from the denominator, the compiled crossing is `H* = 7.44` scaled by
 crossing near 138 uses against E6A's realized 22-56, so **COMPILATION DOES NOT
 PAY** is predicted more firmly than before, and the semantic verdict is where the
 interest lies.
+
+# Amendment 2 (2026-08-29, before any E6.2 cell was scored): context class C3 is unconstructible
+
+Found in a structural dry run, which hung and was killed rather than producing a
+number. Disclosed here.
+
+## The defect
+
+C3 is registered as "positions the fragment never occupied". At `D = 6` with
+`L = 3` a length-3 fragment can start at only 4 positions (0, 1, 2, 3), and the
+macro is measured to occupy ALL FOUR in the observed corpus of every world:
+
+    world 0  macro (11, 6, 4)   seen positions [0, 1, 2, 3]   unseen: none
+    world 1  macro (8, 8, 5)    seen positions [0, 1, 2, 3]   unseen: none
+    world 2  macro (8, 9, 6)    seen positions [0, 1, 2, 3]   unseen: none
+
+The class is EMPTY by construction. The generator looped forever looking for a
+position that does not exist.
+
+This is the horizon-bracketing rule (H19, V5) applied to a context class rather
+than to a sweep range: **verify that a registered condition can be CONSTRUCTED
+before freezing it**, not merely that it is well defined.
+
+## Registered correction
+
+**C3 is redefined as position novelty in LONGER programs**: the fragment placed
+at a start index `>= 4`, which exists only at depth `>= 7`. Those indices are
+genuinely never occupied in the observed corpus, since that corpus is depth 6.
+
+**The confound is disclosed rather than hidden.** C3 so defined varies position
+AND depth together, and C4 varies depth alone, so the two are no longer
+independent. Reported consequence: a C3 failure cannot be attributed to position
+novelty without checking C4, and if C4 fails too the honest reading is DEPTH, not
+position. The comparison C3-versus-C4 is reported as the disambiguating contrast.
+
+We considered and rejected reducing `L` to 2 to free a position: it would change
+the macro under test and break comparability with every E6 rung.
+
+**Position novelty at fixed depth is not available in this testbed**, and that is
+itself a small finding: a fragment frequent enough to be worth compiling in a
+depth-6 corpus will have been seen at every position it can occupy.
+
+## Implementation requirement
+
+Every context class must report whether it was CONSTRUCTIBLE. A class that cannot
+be built is reported as such and excluded from the verdict; the generator takes a
+bounded number of attempts and never spins. A class that yields fewer than the
+registered program count is reported with its realized count.
