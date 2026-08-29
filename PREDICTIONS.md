@@ -7160,3 +7160,92 @@ case B, exactly as case C is.
   limitation" -- and that caveat is what fired: a decaying pattern still has a
   positive late-window RATE, so scaling it forward predicts continuation.
 - **"Both criteria create on C and it is reported unscoreable": CORRECT.**
+
+# E6F (2026-08-29): GATED CRITERION DEMONSTRATED
+
+Plan `E6_MACRO_PLAN.md` frozen at `ab81b01` (Amendment 5). Development worlds
+0-2, `D = 6`, `L = 3`, corpus 128, observed/future split at 64. Report
+`reports/e6f_gated.json`.
+
+## Result, against the registered rule
+
+    A gated-creates      2/3
+    B gated-refuses      2/2 eligible   (w2 excluded: decay did not take)
+    B ungated-creates    2/2 eligible   (the failure being improved on is real)
+
+    -> GATED CRITERION DEMONSTRATED
+
+All three clauses required by Amendment 5 are met. The third matters as much as
+the first two: the ungated retrospective rule creates on every eligible case-B
+world, so the gate is an IMPROVEMENT rather than a restatement.
+
+    world  case  realized ratio  ungated   gated    correct
+      0     A        0.50        CREATE    REFUSE   no   (see disclosure)
+      0     B        0.50        CREATE    REFUSE   yes
+      1     A        0.93        CREATE    CREATE   yes
+      1     B        0.24        CREATE    REFUSE   yes
+      2     A        3.00        CREATE    CREATE   yes
+      2     B        1.00        CREATE    CREATE   INELIGIBLE
+
+## What this establishes
+
+A recurrence-trend projection, applied as a GATE on a candidate nominated by the
+retrospective code, refuses a macro whose pattern is dying while accepting one
+whose pattern continues. The same statistic used as the OBJECTIVE OF AN ARGMAX
+over ~150 candidates failed 0/3 in E6E. The division of labour is the result:
+
+**Rank with a statistic you can estimate well; test with the one you cannot.**
+
+This is now registered rather than post-hoc. E6E observed it; E6F predicted it in
+advance and measured it under a repaired generator with a pre-declared
+eligibility rule.
+
+## The registered eligibility gate worked on its first run
+
+World 2's case B realized a decay ratio of 1.00 -- the manipulation did not take,
+exactly the silent failure that made E6E's world 0 look like a refusal failure.
+Amendment 5's rule excluded it automatically and reported it UNSCOREABLE. Without
+that rule the verdict would have read "B refuses 2/3" and invited the reading
+that the gate is unreliable, when the cell contained no decay to detect.
+
+## DISCLOSURE: eligibility was registered for case B only, and case A needed it too
+
+World 0's case A realized a within-observed ratio of 0.50 -- it LOOKS decaying,
+because case A is a random permutation of E6A's corpus and this draw happened to
+front-load the motif. The gate refused it and was scored WRONG.
+
+This is a gap in the control design, not a gate failure, and the evidence is
+direct: **world 0's case A and case B have IDENTICAL realized ratios (0.50), and
+the gate made the SAME decision in both.** It responded to the evidence it was
+shown rather than to the label on the cell, which is the behaviour wanted; the
+cell was simply not a valid positive case.
+
+Applying the same eligibility rule symmetrically (a positive case must not look
+decaying) would make it `A gated-creates 2/2 eligible`. The verdict is UNCHANGED
+either way, and is reported as registered -- 2/3 -- rather than restated under a
+rule invented after seeing the data. Registered for any successor: **a control's
+eligibility must be checked on EVERY arm whose realized profile can differ from
+its intended one, not only on the arm where the manipulation is applied.**
+
+## Scorekeeping
+
+- **"GATED CRITERION DEMONSTRATED": CORRECT.**
+- **"A create 3/3": 2/3** as scored; 2/2 among cells whose realized profile
+  matched their intended one.
+- **"B refuse 3/3 given the repaired generator": 2/2 eligible.** The repaired
+  schedule delivered a usable decay in 2 of 3 worlds against E6E's 2 of 3, so it
+  did not improve the take rate; what improved is that the failure is now
+  LABELLED rather than counted.
+- **"ungated creates on B": CORRECT**, 2/2 eligible.
+- **The registered risk did NOT materialize.** Amendment 5 flagged that a richer
+  plant might make the projection clear the crossing anyway; the pre-check
+  predicted projections near zero and the run measured exactly 0.0 projected uses
+  in both eligible case-B worlds.
+
+## Nomination is not discovery, and is not claimed as such
+
+The nominated grams in case B were `(6,3,2)`, `(11,11,11)` and `(11,0,0)` -- the
+retrospective argmax did not recover the motif image in these corpora, where the
+plant is thinner than E6A's. E6F's registered question is TIMING, not discovery;
+E6E answered discovery separately (3/3 on case A, 2/3 on case B). The two are not
+pooled, and E6F's verdict makes no claim about which object was found.

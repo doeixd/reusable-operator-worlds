@@ -1,0 +1,246 @@
+{
+ "frozen_plan": "E6_MACRO_PLAN.md (Amendment 5)",
+ "git_commit": "f5d3c5b",
+ "protocol": {
+  "depth": 6,
+  "macro_len": 3,
+  "corpus": 128,
+  "split": 64,
+  "late_window": 32,
+  "schedule": "p(i) = min(1, max(0, 2 - i/32))",
+  "eligible_ratio": 0.7,
+  "rule": "nominate by retrospective argmax, gate by trend",
+  "note": "total planted cannot match case A while decaying; reported as a covariate"
+ },
+ "worlds": {
+  "0": {
+   "A": {
+    "nominated": [
+     11,
+     6,
+     4
+    ],
+    "candidate_field": 174,
+    "retro_net_saving_bits": 33.712414243967274,
+    "retro_creates": true,
+    "gate": {
+     "observed_early_uses": 8,
+     "observed_late_uses": 4,
+     "realized_ratio": 0.5,
+     "projected_uses": 0.0,
+     "gated_net_saving_bits": -55.098138991418935,
+     "accept": false,
+     "H_star": 7.444809696710498
+    },
+    "eligible": true,
+    "planted_total": 64,
+    "future_uses": 11,
+    "future_net_saving_bits": 26.31153480768512,
+    "gated_correct": false
+   },
+   "B": {
+    "nominated": [
+     6,
+     3,
+     2
+    ],
+    "candidate_field": 140,
+    "retro_net_saving_bits": 78.11769086166039,
+    "retro_creates": true,
+    "gate": {
+     "observed_early_uses": 12,
+     "observed_late_uses": 6,
+     "realized_ratio": 0.5,
+     "projected_uses": 0.0,
+     "gated_net_saving_bits": -55.098138991418935,
+     "accept": false,
+     "H_star": 7.444809696710498
+    },
+    "eligible": true,
+    "planted_total": 49,
+    "future_uses": 2,
+    "future_net_saving_bits": -40.296380118854586,
+    "gated_correct": true
+   },
+   "C": {
+    "nominated": [
+     11,
+     6,
+     4
+    ],
+    "candidate_field": 119,
+    "retro_net_saving_bits": 107.72120860678913,
+    "retro_creates": true,
+    "gate": {
+     "observed_early_uses": 9,
+     "observed_late_uses": 13,
+     "realized_ratio": 1.4444444444444444,
+     "projected_uses": 38.0,
+     "gated_net_saving_bits": 226.13527958730407,
+     "accept": true,
+     "H_star": 7.444809696710498
+    },
+    "eligible": true,
+    "planted_total": 64,
+    "future_uses": 1,
+    "future_net_saving_bits": -47.697259555136725,
+    "gated_correct": null
+   }
+  },
+  "1": {
+   "A": {
+    "nominated": [
+     8,
+     8,
+     5
+    ],
+    "candidate_field": 121,
+    "retro_net_saving_bits": 144.72560578820006,
+    "retro_creates": true,
+    "gate": {
+     "observed_early_uses": 14,
+     "observed_late_uses": 13,
+     "realized_ratio": 0.9285714285714286,
+     "projected_uses": 23.0,
+     "gated_net_saving_bits": 115.12208804307133,
+     "accept": true,
+     "H_star": 7.444809696710498
+    },
+    "eligible": true,
+    "planted_total": 64,
+    "future_uses": 29,
+    "future_net_saving_bits": 159.52736466076453,
+    "gated_correct": true
+   },
+   "B": {
+    "nominated": [
+     11,
+     11,
+     11
+    ],
+    "candidate_field": 118,
+    "retro_net_saving_bits": 137.32472635191786,
+    "retro_creates": true,
+    "gate": {
+     "observed_early_uses": 21,
+     "observed_late_uses": 5,
+     "realized_ratio": 0.23809523809523808,
+     "projected_uses": 0.0,
+     "gated_net_saving_bits": -55.098138991418935,
+     "accept": false,
+     "H_star": 7.444809696710498
+    },
+    "eligible": true,
+    "planted_total": 46,
+    "future_uses": 3,
+    "future_net_saving_bits": -32.89550068257245,
+    "gated_correct": true
+   },
+   "C": {
+    "nominated": [
+     8,
+     8,
+     5
+    ],
+    "candidate_field": 76,
+    "retro_net_saving_bits": 344.54935056781903,
+    "retro_creates": true,
+    "gate": {
+     "observed_early_uses": 25,
+     "observed_late_uses": 29,
+     "realized_ratio": 1.16,
+     "projected_uses": 70.0,
+     "gated_net_saving_bits": 462.963421548334,
+     "accept": true,
+     "H_star": 7.444809696710498
+    },
+    "eligible": true,
+    "planted_total": 64,
+    "future_uses": 2,
+    "future_net_saving_bits": -40.296380118854586,
+    "gated_correct": null
+   }
+  },
+  "2": {
+   "A": {
+    "nominated": [
+     8,
+     9,
+     6
+    ],
+    "candidate_field": 174,
+    "retro_net_saving_bits": 33.712414243967274,
+    "retro_creates": true,
+    "gate": {
+     "observed_early_uses": 3,
+     "observed_late_uses": 9,
+     "realized_ratio": 3.0,
+     "projected_uses": 36.0,
+     "gated_net_saving_bits": 211.33352071473973,
+     "accept": true,
+     "H_star": 7.444809696710498
+    },
+    "eligible": true,
+    "planted_total": 64,
+    "future_uses": 14,
+    "future_net_saving_bits": 48.514173116531765,
+    "gated_correct": true
+   },
+   "B": {
+    "nominated": [
+     11,
+     0,
+     0
+    ],
+    "candidate_field": 150,
+    "retro_net_saving_bits": 48.51417311653165,
+    "retro_creates": true,
+    "gate": {
+     "observed_early_uses": 7,
+     "observed_late_uses": 7,
+     "realized_ratio": 1.0,
+     "projected_uses": 14.0,
+     "gated_net_saving_bits": 48.51417311653165,
+     "accept": true,
+     "H_star": 7.444809696710498
+    },
+    "eligible": false,
+    "planted_total": 47,
+    "future_uses": 2,
+    "future_net_saving_bits": -40.296380118854586,
+    "gated_correct": false
+   },
+   "C": {
+    "nominated": [
+     8,
+     9,
+     6
+    ],
+    "candidate_field": 126,
+    "retro_net_saving_bits": 137.32472635191786,
+    "retro_creates": true,
+    "gate": {
+     "observed_early_uses": 12,
+     "observed_late_uses": 14,
+     "realized_ratio": 1.1666666666666667,
+     "projected_uses": 34.0,
+     "gated_net_saving_bits": 196.53176184217534,
+     "accept": true,
+     "H_star": 7.444809696710498
+    },
+    "eligible": true,
+    "planted_total": 64,
+    "future_uses": 0,
+    "future_net_saving_bits": -55.098138991418864,
+    "gated_correct": null
+   }
+  }
+ },
+ "verdict": {
+  "A_gated_creates": 2,
+  "B_gated_refuses": 2,
+  "B_eligible_worlds": 2,
+  "B_ungated_creates": 2,
+  "verdict": "GATED CRITERION DEMONSTRATED"
+ }
+}

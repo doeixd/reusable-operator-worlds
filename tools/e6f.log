@@ -1,0 +1,22 @@
+prereg check OK: 32 frozen files unchanged; all STATUS-cited paths exist
+[w0 A] nominated     [11, 6, 4] from 174 candidates | planted 64 | early  8 late  4 (ratio 0.50)
+      ungated CREATE (   +33.7 bits) | gated REFUSE (proj   0.0 uses vs H* 7.4) | future    +26.3 bits | gated WRONG
+[w0 B] nominated      [6, 3, 2] from 140 candidates | planted 49 | early 12 late  6 (ratio 0.50)
+      ungated CREATE (   +78.1 bits) | gated REFUSE (proj   0.0 uses vs H* 7.4) | future    -40.3 bits | gated right
+[w0 C] nominated     [11, 6, 4] from 119 candidates | planted 64 | early  9 late 13 (ratio 1.44)
+      ungated CREATE (  +107.7 bits) | gated CREATE (proj  38.0 uses vs H* 7.4) | future    -47.7 bits
+[w1 A] nominated      [8, 8, 5] from 121 candidates | planted 64 | early 14 late 13 (ratio 0.93)
+      ungated CREATE (  +144.7 bits) | gated CREATE (proj  23.0 uses vs H* 7.4) | future   +159.5 bits | gated right
+[w1 B] nominated   [11, 11, 11] from 118 candidates | planted 46 | early 21 late  5 (ratio 0.24)
+      ungated CREATE (  +137.3 bits) | gated REFUSE (proj   0.0 uses vs H* 7.4) | future    -32.9 bits | gated right
+[w1 C] nominated      [8, 8, 5] from 76 candidates | planted 64 | early 25 late 29 (ratio 1.16)
+      ungated CREATE (  +344.5 bits) | gated CREATE (proj  70.0 uses vs H* 7.4) | future    -40.3 bits
+[w2 A] nominated      [8, 9, 6] from 174 candidates | planted 64 | early  3 late  9 (ratio 3.00)
+      ungated CREATE (   +33.7 bits) | gated CREATE (proj  36.0 uses vs H* 7.4) | future    +48.5 bits | gated right
+[w2 B] nominated     [11, 0, 0] from 150 candidates | planted 47 | early  7 late  7 (ratio 1.00)
+      ungated CREATE (   +48.5 bits) | gated CREATE (proj  14.0 uses vs H* 7.4) | future    -40.3 bits | gated WRONG  [INELIGIBLE: decay did not take]
+[w2 C] nominated      [8, 9, 6] from 126 candidates | planted 64 | early 12 late 14 (ratio 1.17)
+      ungated CREATE (  +137.3 bits) | gated CREATE (proj  34.0 uses vs H* 7.4) | future    -55.1 bits
+
+A gated-create 2/3 | B gated-refuse 2/2 eligible | B ungated-create 2/2
+E6F: GATED CRITERION DEMONSTRATED

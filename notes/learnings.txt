@@ -4485,3 +4485,33 @@ than as a one-off miss.
   the question stops being answerable, and when case B accidentally degenerated
   into the same shape in world 0, the existing label made that immediately
   legible instead of looking like a criterion failure.
+
+- E6F, RANK WITH WHAT YOU CAN ESTIMATE; TEST WITH WHAT YOU CANNOT (2026-08-29;
+  `reports/e6f_gated.json`). A recurrence-trend projection refuses a dying macro
+  and accepts a continuing one when applied as a GATE on a candidate nominated by
+  a robust retrospective statistic (A create 2/3, B refuse 2/2 eligible, ungated
+  create 2/2). The SAME statistic maximised over ~150 candidates failed 0/3 in
+  E6E. Registered in advance this time rather than observed after. Any pipeline
+  that proposes and then judges should use different statistics for the two
+  roles, and the fragile one belongs in the judging seat where it sees a single
+  candidate.
+
+- CHECK ELIGIBILITY ON EVERY ARM, NOT ONLY THE MANIPULATED ONE (E6F). We
+  registered "case B is unscoreable if its realized decay did not take", and it
+  fired correctly on world 2. We did NOT register the same check for case A, the
+  positive control -- and world 0's case A came out with a realized ratio of 0.50,
+  a "continuing" pattern that looks decaying because the permutation front-loaded
+  it. The gate refused it and scored WRONG. The diagnostic that settles the
+  interpretation: world 0's A and B had IDENTICAL realized ratios and received
+  IDENTICAL decisions, so the rule was reading the evidence, not the label. A
+  control arm's realized profile can differ from its intended one wherever
+  randomness touches it, which includes arms where nothing was deliberately
+  manipulated.
+
+- A REPAIRED GENERATOR NEED NOT IMPROVE THE TAKE RATE TO BE WORTH REPAIRING
+  (E6F). E6E's decay schedule produced a usable case B in 2 of 3 worlds; the
+  repaired schedule also produced 2 of 3. What changed is that the failure is now
+  LABELLED unscoreable instead of counted as a negative, which moved the verdict
+  from NO IMPROVEMENT to GATED CRITERION DEMONSTRATED without any change in the
+  underlying rule. Sometimes the fix that matters is to the bookkeeping rather
+  than to the physics.

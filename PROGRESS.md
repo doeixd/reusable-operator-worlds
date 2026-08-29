@@ -3822,3 +3822,34 @@ unedited: it was true when written, and the lab record is not rewritten to match
 later state. The published copy is updated in place at the same URL,
 https://claude.ai/code/artifact/78f6807c-9206-41ba-913a-0e08cd70fba6 -- six
 verdict cards, fifteen corrections-ledger entries.
+
+# E6F complete: the gated criterion is demonstrated (2026-08-29)
+
+Ran `src/row/experiments/audit_e6f_gated.py` on development worlds 0-2 against
+`E6_MACRO_PLAN.md` (frozen `ab81b01`, Amendment 5). Report
+`reports/e6f_gated.json`; cache `reports/e6f_cache`; log `tools/e6f.log`.
+
+**Verdict: GATED CRITERION DEMONSTRATED.** A gated-creates 2/3; B gated-refuses
+2/2 eligible; B ungated-creates 2/2, so the improvement is over a real failure.
+
+This converts E6E's post-hoc observation into a registered result: a recurrence
+trend applied as a GATE on a retrospectively nominated candidate refuses a dying
+macro and accepts a continuing one, where the same statistic used as a search
+OBJECTIVE failed 0/3. Rank with a statistic you can estimate well; test with the
+one you cannot.
+
+Amendment 5's per-world eligibility rule fired correctly on its first run,
+excluding world 2's case B (realized decay ratio 1.00 -- the manipulation did not
+take). That is exactly the silent failure that made E6E's world 0 look like a
+refusal failure, now labelled instead of counted.
+
+Disclosed: eligibility was registered for case B only, and world 0's case A
+realized a ratio of 0.50 -- a positive case that looks decaying, which the gate
+refused. Its case A and case B have identical realized ratios and received the
+same decision, so the gate responded to evidence rather than to the case label.
+Symmetric eligibility would give A 2/2; the verdict is reported as registered at
+2/3 rather than restated under a rule invented after the fact.
+
+E6 rung status: A PAYS 3/3 | B PREDICTED SAVING CONFIRMED 3/3 | D RETROSPECTIVE
+ECONOMICS INSUFFICIENT | E NO IMPROVEMENT | F GATED CRITERION DEMONSTRATED.
+C retired to E6.2 as an identity.
