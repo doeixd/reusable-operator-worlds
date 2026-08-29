@@ -84,13 +84,18 @@ def cached(key: str, compute):
     return value
 
 
-def agreement_nmse(a: torch.Tensor, b: torch.Tensor) -> float:
-    """How far the substituted program's output is from the expansion's.
+def contribution_relative(sub: torch.Tensor, ref: torch.Tensor,
+                          null: torch.Tensor) -> float:
+    """Substitution error as a fraction of what the fragment ITSELF does.
 
-    Substitutability is agreement WITH THE EXPANSION -- that is what the macro is
-    defined to reproduce -- so the expansion supplies the reference.
+    Amendment 3. Dividing by the program output was wrong: the operators are
+    residual perturbations, so the fragment moves the output only a few percent
+    and an UNTRAINED `P_M` scored 0.05-0.08 against a 0.15 tolerance -- the null
+    edit passed, which is `AGENTS.md`'s stated diagnostic for the V4.1 error
+    class. The denominator is now the fragment's own effect (expansion versus a
+    pass-through), so 1.0 means "no better than deleting the fragment".
     """
-    return float(torch.mean((a - b) ** 2) / torch.mean(b ** 2))
+    return float(torch.mean((sub - ref) ** 2) / torch.mean((ref - null) ** 2))
 
 
 @torch.no_grad()
@@ -226,7 +231,7 @@ def main() -> None:
            "protocol": {"depth": DEPTH, "macro_len": MACRO_LEN,
                         "fit_states": FIT_STATES, "fit_steps": FIT_STEPS,
                         "tolerance": TOLERANCE, "per_class": PROGRAMS_PER_CLASS,
-                        "reference": "agreement with the expansion",
+                        "reference": "contribution-relative: expansion versus pass-through",
                         "note": "C0 is a non-vacuity check; evidence is C2-C4"},
            "worlds": {}}
 
@@ -303,8 +308,9 @@ def main() -> None:
                 ref = run_program(library, x, program)
                 got = run_program(library, x, program, macro, trained)
                 bad = run_program(library, x, program, macro, untrained)
-                gaps.append(agreement_nmse(got, ref))
-                wrong.append(agreement_nmse(bad, ref))
+                null = run_program(library, x, program, macro, lambda z: z)
+                gaps.append(contribution_relative(got, ref, null))
+                wrong.append(contribution_relative(bad, ref, null))
                 seen = states_before(library, x, program, j)
                 shifts.append(float(torch.norm(seen.mean(dim=0) - fit_mean) /
                                     (torch.norm(fit_mean) + 1e-12)))
@@ -326,13 +332,16 @@ def main() -> None:
         probe_progs = make_programs(rng, slots, macro, "C0", positions, DEPTH, neighbours)
         x = torch.tensor(rng.normal(size=(PROBES, d)), dtype=torch.float32)
         refs = [run_program(library, x, p) for p, _ in probe_progs]
-        base = float(np.mean([agreement_nmse(run_program(library, x, p, macro, trained), r)
-                              for (p, _), r in zip(probe_progs, refs)]))
+        nulls = [run_program(library, x, p, macro, lambda z: z) for p, _ in probe_progs]
+        base = float(np.mean([contribution_relative(
+            run_program(library, x, p, macro, trained), r, n)
+            for (p, _), r, n in zip(probe_progs, refs, nulls)]))
 
         def evaluate(bits: int) -> float:
             q = quantize_operator(trained, bits)
-            got = float(np.mean([agreement_nmse(run_program(library, x, p, macro, q), r)
-                                 for (p, _), r in zip(probe_progs, refs)]))
+            got = float(np.mean([contribution_relative(
+                run_program(library, x, p, macro, q), r, n)
+                for (p, _), r, n in zip(probe_progs, refs, nulls)]))
             return got / max(base, 1e-12)
 
         rate = behavioural_rate(evaluate)

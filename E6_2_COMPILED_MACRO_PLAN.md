@@ -320,3 +320,62 @@ substitutability claim may be made from it.**
 The dry-run numbers under the OLD normalization are recorded here so the
 correction is legible, and are not reported as results: substitution 0.010-0.021,
 untrained 0.050-0.078, both nominally "within tolerance".
+
+# Amendment 4 (2026-08-29, before any E6.2 verdict): matched-budget compilation fails, and a capacity ladder to say by how much
+
+Found by the registered non-vacuity check C0 ("the fit works on-distribution"),
+which failed at matched budget. Diagnosed before scoring.
+
+## The measurement
+
+`P_M` at a library slot's own size cannot reproduce the fragment's contribution
+even on the states it was fitted on, and this is REPRESENTATIONAL rather than
+optimizational: the fit is converged (3,000 steps 1.236e-2, 12,000 steps
+1.231e-2 -- identical), and capacity alone moves it.
+
+    rank  multiple  scalars  fit loss   C0 (contribution-relative)
+      8      x1       265    1.23e-2       0.180   fail
+     16      x2       529    6.96e-3       0.158   fail
+     32      x4      1057    3.50e-3       0.082   PASS
+     64      x8      2113    8.76e-5       0.003   PASS
+
+**A compiled macro needs roughly 4x a library slot's parameters to stand in for a
+composition of three of them.**
+
+## Why this is a result and not a blocked rung
+
+Left as registered, C0's failure would make E6.2 UNSCOREABLE and the finding
+would be lost in a label. The finding is specific and worth stating:
+COMPILATION FAILS AT MATCHED BUDGET, and the budget it needs is measurable.
+
+## Registered structure, replacing the single matched-budget run
+
+The **primary** verdict stays at matched budget and is now expected to read
+`COMPILATION FAILS AT MATCHED BUDGET` -- reported as a substantive negative, not
+as unscoreable, because the reason is measured.
+
+A **capacity ladder** is added as a registered secondary: ranks `x1, x2, x4, x8`,
+with every class reported at every rank and CAPACITY CARRIED AS AN EXPLICIT
+COVARIATE. Any substitutability that appears above `x1` is labelled BOUGHT WITH
+CAPACITY and may not be reported as "compilation works" without that
+qualification. This is the project's matched-budget rule preserved rather than
+relaxed: the constraint still decides the headline; the ladder only says what
+lifting it would cost.
+
+The economics are recomputed at each rung of the ladder. `D*(P_M)` scales with
+the scalar count, so the crossing rises with capacity, and the prediction
+`COMPILATION DOES NOT PAY` becomes stronger at exactly the capacities where the
+semantics start working. That dissociation -- **the capacity that makes
+compilation correct is the capacity that makes it uneconomic** -- is the sharpest
+form the result can take and is registered here as our expectation.
+
+## Registered predictions, updated
+
+- `COMPILATION FAILS AT MATCHED BUDGET` (x1), on C0, in 3/3 worlds.
+- Substitutability holds from `x4` upward, including in the shifted classes
+  C1-C4, per review 80's standing prior on distribution shift.
+- `COMPILATION DOES NOT PAY` at EVERY rung, and by a widening margin: the
+  matched-budget crossing already measured ~151 uses against realized 22-54, and
+  a 4x operator quadruples `D*(P_M)`.
+- The untrained control fails at every rung (it already fails 3/3 under
+  Amendment 3's corrected normalization, at 0.55-0.81).
