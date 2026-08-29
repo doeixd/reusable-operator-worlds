@@ -3783,3 +3783,33 @@ Also fixed before recording: world 1's macro `(8,8,5)` has a b-a-c permutation
 equal to itself, so the wrong-grouping control was scoring the macro against its
 own object and reported a false negative. Degenerate competitors are now dropped
 and recorded. The verdict was unchanged by the fix, which is why it mattered.
+
+# E6E complete: the prospective criterion works as a gate, not as a search objective (2026-08-28)
+
+Ran `src/row/experiments/audit_e6e_discovery.py` on development worlds 0-2
+against `E6_MACRO_PLAN.md` (frozen `b515c0b`, Amendment 4). Report
+`reports/e6e_discovery.json`; cache `reports/e6e_cache`; log `tools/e6e.log`.
+
+**Registered verdict: NO IMPROVEMENT.** The registered prospective estimator
+(late-window rate scaled forward) behaves identically to the retrospective rule
+on the discriminating case, creating on a decaying pattern 3/3.
+
+Discovery, reported separately: the open enumeration over 113-165 candidates
+recovered the motif's learner image 3/3 on case A, 2/3 on case B, 3/3 on case C.
+
+The informative part is post-hoc and labelled as such. `PROSP_TREND` failed as an
+argmax objective because maximizing a noisy trend over ~150 candidates selects
+flukes -- a hazard recorded BEFORE launch. Re-applied as a GATE on a
+`RETRO`-nominated candidate it gives A create 3/3, B refuse 2/3. The criterion is
+sound; using it as a search objective is not. SEPARATE NOMINATION FROM GATING.
+
+A generator confound is disclosed: case B's realized within-observed decay ratios
+were 1.00 / 0.62 / 0.43, so the manipulation took in only two worlds. World 0's
+case B has no decay signal and is effectively a second copy of case C. The cause
+is that the decay schedule also cut total planted instances (~36 against 64),
+moving two quantities at once. Any successor must front-load the plant and gate
+each world on its realized ratio.
+
+E6 rung status: A PAYS 3/3, B PREDICTED SAVING CONFIRMED 3/3, D RETROSPECTIVE
+ECONOMICS INSUFFICIENT, E NO IMPROVEMENT (with a working gate-mode successor
+identified). C retired to E6.2 as an identity.

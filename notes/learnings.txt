@@ -4456,3 +4456,32 @@ than as a one-off miss.
   left the headline verdict unchanged, which is exactly why it would have
   survived: a defect that does not move the conclusion is the one nobody
   re-examines.
+
+- SEPARATE NOMINATION FROM GATING (E6E, 2026-08-28). A prospective criterion that
+  extrapolates a recurrence trend REFUSES a decaying pattern correctly when it is
+  applied as a test on one nominated candidate (gate mode: A create 3/3, B refuse
+  2/3), and FAILS completely when the same statistic is maximized over the ~150
+  candidate grams of a corpus (argmax mode: B refuse 0/3), because the maximum of
+  a noisy trend estimate is reliably a fluke -- world 1 picked `(8,5,4)` over the
+  correctly discovered `(0,8,5)`, world 2 `(7,7,7)` over `(6,10,7)`. Use a robust
+  statistic to NOMINATE and the fragile one to TEST; never rank a large field by
+  the quantity you are least able to estimate. We flagged this hazard before the
+  run and it is a confirmed prediction rather than a surprise.
+
+- A DECAY SCHEDULE THAT ALSO CUTS TOTAL COUNT MOVES TWO KNOBS (E6E). Case B was
+  meant to isolate DECAYING recurrence. `p(i) = max(0, 1 - i/72)` produced ~36
+  planted instances against 64 in the flanking cases, so it varied decay AND
+  total recurrence together; with ~30% gauge survival the motif image appeared
+  ~10 times and lost the open enumeration to a constant run in one of three
+  worlds. Realized within-observed ratios were 1.00 / 0.62 / 0.43 -- the
+  manipulation took in two worlds and silently failed in the third. Always
+  measure and report the REALIZED strength of a manipulation per cell, and gate
+  on it: a cell where the intervention did not take is unscoreable, not negative.
+  Same family as V5.1's residual rank.
+
+- A LIMIT CASE IS WORTH CARRYING (E6E). Case C -- a pattern uniform until it
+  stops -- cannot be refused by any past-only criterion, and was registered as
+  UNSCOREABLE rather than as a failure. It earned its place twice: it marks where
+  the question stops being answerable, and when case B accidentally degenerated
+  into the same shape in world 0, the existing label made that immediately
+  legible instead of looking like a criterion failure.

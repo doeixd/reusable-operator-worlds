@@ -1,6 +1,6 @@
 {
  "frozen_plan": "E6_MACRO_PLAN.md (Amendment 4)",
- "git_commit": "452f356",
+ "git_commit": "95d8dce",
  "protocol": {
   "depth": 6,
   "macro_len": 3,
@@ -505,6 +505,262 @@
     "carries_observed": 64,
     "carries_future": 0
    }
+  },
+  "2": {
+   "A": {
+    "candidates_enumerated": 162,
+    "motif_learner_image": [
+     8,
+     9,
+     6
+    ],
+    "image_share_at_planted_sites": 0.45714285714285713,
+    "observed_early_uses": 9,
+    "observed_late_uses": 7,
+    "within_observed_ratio": 0.7777777777777778,
+    "picks": {
+     "RETRO": {
+      "macro": [
+       8,
+       9,
+       6
+      ],
+      "decision": {
+       "uses_used": 16.0,
+       "realized_uses": 16,
+       "observed_early_uses": 9,
+       "observed_late_uses": 7,
+       "net_saving_bits": 63.315931989096015,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 10,
+      "future_net_saving_bits": 18.91065537140298,
+      "was_right": true
+     },
+     "PROSP_RATE": {
+      "macro": [
+       8,
+       9,
+       6
+      ],
+      "decision": {
+       "uses_used": 14.0,
+       "realized_uses": 16,
+       "observed_early_uses": 9,
+       "observed_late_uses": 7,
+       "net_saving_bits": 48.51417311653165,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 10,
+      "future_net_saving_bits": 18.91065537140298,
+      "was_right": true
+     },
+     "PROSP_TREND": {
+      "macro": [
+       10,
+       8,
+       9
+      ],
+      "decision": {
+       "uses_used": 15.0,
+       "realized_uses": 3,
+       "observed_early_uses": 0,
+       "observed_late_uses": 3,
+       "net_saving_bits": 55.91505255281383,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": false,
+      "future_uses": 3,
+      "future_net_saving_bits": -32.89550068257245,
+      "was_right": false
+     }
+    },
+    "planted_motif": [
+     2,
+     5,
+     0
+    ],
+    "carries_observed": 35,
+    "carries_future": 29
+   },
+   "B": {
+    "candidates_enumerated": 147,
+    "motif_learner_image": [
+     6,
+     10,
+     7
+    ],
+    "image_share_at_planted_sites": 0.7894736842105263,
+    "observed_early_uses": 21,
+    "observed_late_uses": 9,
+    "within_observed_ratio": 0.42857142857142855,
+    "picks": {
+     "RETRO": {
+      "macro": [
+       6,
+       10,
+       7
+      ],
+      "decision": {
+       "uses_used": 30.0,
+       "realized_uses": 30,
+       "observed_early_uses": 21,
+       "observed_late_uses": 9,
+       "net_saving_bits": 166.92824409704662,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 1,
+      "future_net_saving_bits": -47.697259555136725,
+      "was_right": false
+     },
+     "PROSP_RATE": {
+      "macro": [
+       6,
+       10,
+       7
+      ],
+      "decision": {
+       "uses_used": 18.0,
+       "realized_uses": 30,
+       "observed_early_uses": 21,
+       "observed_late_uses": 9,
+       "net_saving_bits": 78.11769086166039,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 1,
+      "future_net_saving_bits": -47.697259555136725,
+      "was_right": false
+     },
+     "PROSP_TREND": {
+      "macro": [
+       7,
+       7,
+       7
+      ],
+      "decision": {
+       "uses_used": 19.0,
+       "realized_uses": 7,
+       "observed_early_uses": 2,
+       "observed_late_uses": 5,
+       "net_saving_bits": 85.51857029794257,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": false,
+      "future_uses": 5,
+      "future_net_saving_bits": -18.09374181000794,
+      "was_right": false
+     }
+    },
+    "planted_motif": [
+     0,
+     1,
+     4
+    ],
+    "carries_observed": 38,
+    "carries_future": 0
+   },
+   "C": {
+    "candidates_enumerated": 126,
+    "motif_learner_image": [
+     8,
+     9,
+     6
+    ],
+    "image_share_at_planted_sites": 0.40625,
+    "observed_early_uses": 12,
+    "observed_late_uses": 14,
+    "within_observed_ratio": 1.1666666666666667,
+    "picks": {
+     "RETRO": {
+      "macro": [
+       8,
+       9,
+       6
+      ],
+      "decision": {
+       "uses_used": 26.0,
+       "realized_uses": 26,
+       "observed_early_uses": 12,
+       "observed_late_uses": 14,
+       "net_saving_bits": 137.32472635191786,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 0,
+      "future_net_saving_bits": -55.098138991418864,
+      "was_right": false
+     },
+     "PROSP_RATE": {
+      "macro": [
+       8,
+       9,
+       6
+      ],
+      "decision": {
+       "uses_used": 28.0,
+       "realized_uses": 26,
+       "observed_early_uses": 12,
+       "observed_late_uses": 14,
+       "net_saving_bits": 152.12648522448225,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 0,
+      "future_net_saving_bits": -55.098138991418864,
+      "was_right": false
+     },
+     "PROSP_TREND": {
+      "macro": [
+       8,
+       9,
+       6
+      ],
+      "decision": {
+       "uses_used": 34.0,
+       "realized_uses": 26,
+       "observed_early_uses": 12,
+       "observed_late_uses": 14,
+       "net_saving_bits": 196.53176184217534,
+       "create": true,
+       "H_star": 7.444809696710498
+      },
+      "recovers_motif_image": true,
+      "future_uses": 0,
+      "future_net_saving_bits": -55.098138991418864,
+      "was_right": false
+     }
+    },
+    "planted_motif": [
+     2,
+     5,
+     0
+    ],
+    "carries_observed": 64,
+    "carries_future": 0
+   }
   }
+ },
+ "verdict": {
+  "registered_estimator": "PROSP_RATE",
+  "trend_creates_on_A": 3,
+  "trend_refuses_on_B": 0,
+  "trend_note": "added after Amendment 4 was frozen; secondary",
+  "prospective_creates_on_A": 3,
+  "prospective_refuses_on_B": 0,
+  "retro_creates_on_B": 3,
+  "verdict": "NO IMPROVEMENT",
+  "C_note": "limit case; reported, never counted"
  }
 }

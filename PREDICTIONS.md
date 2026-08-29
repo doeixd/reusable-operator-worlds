@@ -7069,3 +7069,94 @@ rather than to a representation: before asking whether a learner can decide
 something, verify the signal that would license the decision is present in its
 input. We ran the check this time only because E6D's negative was about to become
 a design requirement for the next rung.
+
+# E6E (2026-08-28): NO IMPROVEMENT as registered -- and the criterion works, the SEARCH over it does not
+
+Plan `E6_MACRO_PLAN.md` frozen at `b515c0b` (Amendment 4). Development worlds
+0-2, `D = 6`, `L = 3`, corpus 128, observed/future split at 64. Report
+`reports/e6e_discovery.json`.
+
+## Registered verdict: NO IMPROVEMENT
+
+    criterion      A create   B refuse   C (limit case)
+    RETRO             3/3        0/3        creates 3/3
+    PROSP_RATE        3/3        0/3        creates 3/3
+    PROSP_TREND       -          0/3        -
+
+The registered estimator (`PROSP_RATE`) behaves identically to `RETRO` on the
+discriminating case, so the rule as frozen is NO IMPROVEMENT. Case C creates in
+every world and is reported UNSCOREABLE, as Amendment 4 requires: no past-only
+criterion can refuse a pattern that is uniform until it stops.
+
+## Discovery, reported separately as registered
+
+The open enumeration over 113-165 candidate grams recovered the motif's LEARNER
+IMAGE (the gram written where the motif was planted, not the teacher's symbols):
+
+    case A  3/3      case B  2/3      case C  3/3
+
+Case B's world-0 miss is a generator failure, not a discovery failure: see below.
+
+## The finding the registered verdict does not capture
+
+`PROSP_TREND` failed 0/3 on case B, but NOT because trend extrapolation is wrong.
+It failed because it was used as the OBJECTIVE OF AN ARGMAX over ~150 candidates,
+which reliably selects a gram whose apparent rise is a fluke. In world 1 it
+picked `(8,5,4)` while the correctly-discovered macro was `(0,8,5)`; in world 2
+it picked `(7,7,7)` over `(6,10,7)`.
+
+POST-HOC ANALYSIS, added after observing that pathology and labelled as such.
+Nominate the candidate with `RETRO` (realized saving), then apply the trend
+criterion as a GATE on that single nomination:
+
+    case A (must CREATE)                  case B (must REFUSE)
+    w0 (11,6,4)  proj 39.0  CREATE  ok    w0 (4,4,4)   proj 14.0  CREATE  no
+    w1 (8,8,5)   proj 41.0  CREATE  ok    w1 (0,8,5)   proj  2.0  REFUSE  ok
+    w2 (8,9,6)   proj  8.0  CREATE  ok    w2 (6,10,7)  proj  0.0  REFUSE  ok
+
+    gate-mode: A create 3/3, B refuse 2/3
+
+Under the registered 2-of-3 rule that would be PROSPECTIVE CRITERION
+DEMONSTRATED. It is NOT claimed as such: the gate mode was not registered, and
+this is reported as a post-hoc analysis that motivates a successor design, not as
+a verdict. The registered verdict stands at NO IMPROVEMENT.
+
+**The transferable claim: SEPARATE NOMINATION FROM GATING.** A noisy estimator
+used to RANK a large candidate field becomes a selection device for its own
+noise; the same estimator used to TEST one nominated candidate is sound. This is
+the multiple-comparisons hazard, and it was flagged in advance -- before launch we
+recorded that "maximizing a trend statistic over ~600 candidates will favour
+grams whose increase is a fluke" -- so the failure is a confirmed prediction
+rather than a surprise.
+
+## A generator confound in case B, world 0
+
+Case B was built to decay across the observed window. Realized within-observed
+ratios were 1.00 (w0), 0.62 (w1), 0.43 (w2): the manipulation took in two worlds
+and not in the third. World 0's case B therefore has NO decay signal, discovery
+picked a constant run `(4,4,4)` over the motif image `(6,4,4)`, and no criterion
+could have refused. It is the same failure as case C, arrived at by accident.
+
+Cause: `p(i) = max(0, 1 - i/72)` sums to ~36 planted instances against 64 in
+cases A and C, so case B varies DECAY and TOTAL RECURRENCE together. Combined
+with ~30% gauge survival at depth 6 the motif image appears ~10 times, too few to
+beat a constant run in an open enumeration. Same error family as V5.1's residual
+rank: one knob moving two quantities.
+
+Registered fix for any successor: front-load the plant (`p ~ 1` early, declining
+to zero by ~task 70) so total planted instances match case A while the decline
+stays inside the observed window, and REPORT the realized within-observed ratio
+as an eligibility gate per world -- a cell whose ratio is ~1 is unscoreable for
+case B, exactly as case C is.
+
+## Scorekeeping
+
+- **"DISCOVERY succeeds on A and B": PARTIALLY.** A 3/3, B 2/3, with the miss
+  attributable to the generator confound above.
+- **"`RETRO` creates on both A and B": CORRECT**, 3/3 each.
+- **"`PROSP_RATE` creates on A and refuses on B, giving PROSPECTIVE CRITERION
+  DEMONSTRATED": WRONG.** It created on B 3/3. Amendment 4 registered the reason
+  in advance -- "if B fails for that reason we will report it as an ESTIMATOR
+  limitation" -- and that caveat is what fired: a decaying pattern still has a
+  positive late-window RATE, so scaling it forward predicts continuation.
+- **"Both criteria create on C and it is reported unscoreable": CORRECT.**

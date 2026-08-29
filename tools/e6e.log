@@ -23,3 +23,19 @@ prereg check OK: 32 frozen files unchanged; all STATUS-cited paths exist
     RETRO        picks      [8, 8, 5] -> CREATE | future uses   2, future    -40.3 bits | WRONG | found motif image
     PROSP_RATE   picks      [8, 8, 5] -> CREATE | future uses   2, future    -40.3 bits | WRONG | found motif image
     PROSP_TREND  picks      [8, 8, 5] -> CREATE | future uses   2, future    -40.3 bits | WRONG | found motif image
+[w2 A] 162 candidates | image [8, 9, 6] (46% of planted sites) | observed uses early 9 late 7 (ratio 0.78)
+    RETRO        picks      [8, 9, 6] -> CREATE | future uses  10, future    +18.9 bits | right | found motif image
+    PROSP_RATE   picks      [8, 9, 6] -> CREATE | future uses  10, future    +18.9 bits | right | found motif image
+    PROSP_TREND  picks     [10, 8, 9] -> CREATE | future uses   3, future    -32.9 bits | WRONG
+[w2 B] 147 candidates | image [6, 10, 7] (79% of planted sites) | observed uses early 21 late 9 (ratio 0.43)
+    RETRO        picks     [6, 10, 7] -> CREATE | future uses   1, future    -47.7 bits | WRONG | found motif image
+    PROSP_RATE   picks     [6, 10, 7] -> CREATE | future uses   1, future    -47.7 bits | WRONG | found motif image
+    PROSP_TREND  picks      [7, 7, 7] -> CREATE | future uses   5, future    -18.1 bits | WRONG
+[w2 C] 126 candidates | image [8, 9, 6] (41% of planted sites) | observed uses early 12 late 14 (ratio 1.17)
+    RETRO        picks      [8, 9, 6] -> CREATE | future uses   0, future    -55.1 bits | WRONG | found motif image
+    PROSP_RATE   picks      [8, 9, 6] -> CREATE | future uses   0, future    -55.1 bits | WRONG | found motif image
+    PROSP_TREND  picks      [8, 9, 6] -> CREATE | future uses   0, future    -55.1 bits | WRONG | found motif image
+
+A create (PROSPECTIVE) 3/3 | B refuse (PROSPECTIVE) 0/3 | B create (RETRO, the failure being improved on) 3/3
+E6E (registered estimator): NO IMPROVEMENT
+secondary trend estimator: A create 3/3, B refuse 0/3
