@@ -1,0 +1,166 @@
+{
+ "kind": "CENSUS -- decides whether to write a plan; produces no verdict",
+ "source": "notes/e7-sketch.txt section 3",
+ "git_commit": "7731267",
+ "protocol": {
+  "depth": 6,
+  "macro_len": 3,
+  "probe": 512,
+  "dims": [
+   1,
+   2,
+   3,
+   4,
+   6,
+   8
+  ],
+  "guards": [
+   "common probe",
+   "leave-one-out",
+   "uncontaminated random-gram null"
+  ]
+ },
+ "worlds": {
+  "0": {
+   "modal_gram": [
+    11,
+    6,
+    4
+   ],
+   "modal_count": 22,
+   "planted_sites": 64,
+   "modal_share": 0.34375,
+   "distinct_non_matching_grams": 19,
+   "informative": true,
+   "capture": {
+    "1": {
+     "family": 0.14197756113972682,
+     "random_null": 0.08801036607988563,
+     "learner_null": 0.10507975350619748,
+     "excess_over_random": 0.05396719505984118,
+     "excess_over_learner": 0.03689780763352933
+    },
+    "2": {
+     "family": 0.23320305403565617,
+     "random_null": 0.15562939501921572,
+     "learner_null": 0.16860955582338225,
+     "excess_over_random": 0.07757365901644045,
+     "excess_over_learner": 0.06459349821227392
+    },
+    "3": {
+     "family": 0.4230449581829269,
+     "random_null": 0.20953654084928494,
+     "learner_null": 0.22025947704619983,
+     "excess_over_random": 0.21350841733364198,
+     "excess_over_learner": 0.2027854811367271
+    },
+    "4": {
+     "family": 0.4949521394418424,
+     "random_null": 0.2650641828545622,
+     "learner_null": 0.4306251695983548,
+     "excess_over_random": 0.22988795658728023,
+     "excess_over_learner": 0.06432696984348762
+    },
+    "6": {
+     "family": 0.5999761802258025,
+     "random_null": 0.3540084380229005,
+     "learner_null": 0.49669180354380993,
+     "excess_over_random": 0.24596774220290196,
+     "excess_over_learner": 0.10328437668199253
+    },
+    "8": {
+     "family": 0.6810178331845835,
+     "random_null": 0.5556184369979379,
+     "learner_null": 0.564780658057841,
+     "excess_over_random": 0.12539939618664564,
+     "excess_over_learner": 0.11623717512674259
+    }
+   },
+   "modal_in_family_subspace": {
+    "1": 0.04300006554635449,
+    "2": 0.25991243937922215,
+    "3": 0.2665202573890777,
+    "4": 0.3268530818848472,
+    "6": 0.3459721061820811,
+    "8": 0.6204646017775586
+   }
+  },
+  "1": {
+   "modal_gram": [
+    8,
+    8,
+    5
+   ],
+   "modal_count": 53,
+   "planted_sites": 64,
+   "modal_share": 0.828125,
+   "distinct_non_matching_grams": 1,
+   "informative": false,
+   "reason": "too few non-matching grams; the gauge is tight in this world, so a parameterized macro would have little to collect"
+  },
+  "2": {
+   "modal_gram": [
+    8,
+    9,
+    6
+   ],
+   "modal_count": 26,
+   "planted_sites": 64,
+   "modal_share": 0.40625,
+   "distinct_non_matching_grams": 17,
+   "informative": true,
+   "capture": {
+    "1": {
+     "family": 0.07608593144655429,
+     "random_null": 0.0445351824546658,
+     "learner_null": 0.09636520630146066,
+     "excess_over_random": 0.03155074899188849,
+     "excess_over_learner": -0.020279274854906368
+    },
+    "2": {
+     "family": 0.24294263346187273,
+     "random_null": 0.13426415249086454,
+     "learner_null": 0.20933913484042396,
+     "excess_over_random": 0.10867848097100818,
+     "excess_over_learner": 0.03360349862144876
+    },
+    "3": {
+     "family": 0.3624108466952916,
+     "random_null": 0.19623542982480088,
+     "learner_null": 0.2144954201495551,
+     "excess_over_random": 0.16617541687049073,
+     "excess_over_learner": 0.1479154265457365
+    },
+    "4": {
+     "family": 0.4256296566151377,
+     "random_null": 0.29413576873834674,
+     "learner_null": 0.38955156643839695,
+     "excess_over_random": 0.13149388787679095,
+     "excess_over_learner": 0.03607809017674074
+    },
+    "6": {
+     "family": 0.6356202007774323,
+     "random_null": 0.41364616997423875,
+     "learner_null": 0.5145116129989118,
+     "excess_over_random": 0.22197403080319356,
+     "excess_over_learner": 0.12110858777852052
+    },
+    "8": {
+     "family": 0.7893667834715937,
+     "random_null": 0.5307039319805208,
+     "learner_null": 0.6310122600632716,
+     "excess_over_random": 0.25866285149107293,
+     "excess_over_learner": 0.15835452340832212
+    }
+   },
+   "modal_in_family_subspace": {
+    "1": 0.31216553863759133,
+    "2": 0.3947781304612571,
+    "3": 0.570241011709903,
+    "4": 0.587879892171566,
+    "6": 0.6214216946989831,
+    "8": 0.8343703480088973
+   }
+  }
+ }
+}

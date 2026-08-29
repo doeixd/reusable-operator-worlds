@@ -171,3 +171,67 @@ is past the point where a written rule is the right fix.
 PROPOSAL: the estimand analogue of `src/row/arm_provenance.py`. Require every
 registered estimand to ship with a NULL CONSTRUCTION under which it must return
 the negative, and assert it as a test. One mechanism would have caught all five.
+
+
+================================================================================
+9. CENSUS RESULT (2026-08-29, run same day) -- SECTION 2's RATIONALE IS REFUTED
+================================================================================
+
+Ran `src/row/experiments/audit_e7_census.py`. Report `reports/e7_census.json`.
+CENSUS ONLY: no verdict, no registered hypothesis, ~zero compute.
+
+The question was whether the ~64% of planted recurrences that do NOT produce the
+modal learner gram form a low-dimensional family in function space. If they do,
+`M(alpha)` collects them and the economics of E6A change materially.
+
+    world  modal share  distinct non-matching grams
+      0        34%              19
+      1        83%               1   -- UNINFORMATIVE, tight gauge, nothing to collect
+      2        41%              17
+
+Leave-one-out subspace capture, common probe, against two nulls:
+
+    world 0   dim  random null        learner-written null
+               3   +0.214              +0.203
+               4   +0.230              +0.064
+               6   +0.246              +0.103
+               8   +0.125              +0.116
+    world 2    3   +0.166              +0.148
+               4   +0.131              +0.036
+               6   +0.222              +0.121
+               8   +0.259              +0.158
+
+AGAINST RANDOM GRAMS the family looks clearly structured (+0.13 to +0.26).
+AGAINST GRAMS THE SAME LEARNER WROTE AT UNPLANTED SITES the motif-specific excess
+collapses to +0.03 to +0.15, crossing 0.15 at ONE dimension per world, and at
+DIFFERENT dimensions in the two worlds (3 in w0, 8 in w2).
+
+CONCLUSION: the near-misses are barely more of a family than any other gram this
+learner writes. **Section 2's rationale does not survive.** A parameterized macro
+would not collect the missing 64%, because those 64% are not a motif-specific
+family -- most of the structure they have is structure that learner-written grams
+have in general.
+
+WHAT THE NULL DID. The first null was RANDOM grams, and it would have opened the
+line (+0.21 to +0.25, "structured"). The second null -- same author, same corpus,
+no planted structure -- removed most of it. Random grams answer "is this a
+subspace at all"; only the learner-written null answers "is this subspace ABOUT
+THE MOTIF". Ask what a null actually controls for. This is the contaminated-null
+family again, in a new costume: not a null estimated from the effect, but a null
+too weak to isolate it.
+
+WHAT SURVIVES. Section 2 is dead; sections 4, 5 and 6 are untouched:
+
+  * `q(alpha | D, p)` -- the inference problem E5 never tested. H39's confirmed
+    success parameterized an IN-BASIS argument inside a routed slot, NOT a
+    collection of surface near-misses. That is a different construction and this
+    census says nothing against it.
+  * the CLOSURE obstruction, and whether effective rank predicts compilability.
+  * the ATTRACTOR COLLAPSE rung.
+  * the deflationary reading for the paper.
+
+WHAT THIS COST. About twenty minutes and no lifetimes, to close a line that would
+have taken days and produced a null with an appealing story attached. That is the
+opportunity gate working exactly as the constitution intends -- and it is worth
+noting that the gate only worked because the SECOND null was built. With the
+first null alone this note would now be recommending the rung.

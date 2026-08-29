@@ -3929,3 +3929,35 @@ deflationary reading of what the library is for that belongs in the paper; and a
 proposal for an estimand-level falsifiability harness, the analogue of
 `arm_provenance`, which would have caught all five of the E6 line's
 unable-to-fail estimands.
+
+# E7 census: the parameterized-macro rationale is refuted before it was built (2026-08-29)
+
+Ran `src/row/experiments/audit_e7_census.py`; report `reports/e7_census.json`.
+A CENSUS, not a scored rung -- it decides whether a plan is worth writing and
+records no verdict.
+
+`notes/e7-sketch.txt` section 2 argued that the ~64% of planted recurrences which
+do not produce the modal learner gram are the same computation written
+differently, and that a parameterized macro would collect them. The census asked
+whether they form a low-dimensional family, using a common probe and
+leave-one-out scoring.
+
+They do not, in the sense that matters. Against RANDOM grams the family looks
+structured (+0.13 to +0.26 excess capture). Against grams THE SAME LEARNER WROTE
+AT UNPLANTED SITES -- same author, same corpus, no planted structure -- the
+motif-specific excess falls to +0.03 to +0.15 and crosses 0.15 at one dimension
+per world, at different dimensions in each. Most of the apparent structure is a
+property of learner-written grams in general, not of the motif.
+
+Section 2's rationale is recorded as REFUTED in the sketch. Sections 4-6 are
+untouched: `q(alpha | D, p)`, the closure obstruction, the attractor collapse,
+and the deflationary reading.
+
+Also disclosed there: the FIRST null (random grams) would have opened the line.
+Only the second, harder null isolated the motif. Cost of the whole check: about
+twenty minutes and no lifetimes.
+
+World 1 was UNINFORMATIVE and is reported rather than crashed on -- its gauge is
+tight (83% modal share, 1 non-matching gram), so there is nothing to collect
+there. Gauge tightness varies 34%/83%/41% across worlds, so "the missing 64%" is
+not a stable quantity either.

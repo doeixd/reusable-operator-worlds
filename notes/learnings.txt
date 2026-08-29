@@ -4549,3 +4549,24 @@ than as a one-off miss.
   untrained operator pass) but to hold the normalizer's determinants fixed across
   conditions, or to compare only WITHIN a condition. Check what else moves when
   you change the denominator.
+
+- A NULL CAN BE TOO WEAK TO ISOLATE THE EFFECT, NOT ONLY TOO CONTAMINATED
+  (E7 census, 2026-08-29). Asking whether a set of learner-written grams forms a
+  motif-specific family, we first scored subspace capture against RANDOM grams:
+  excess +0.13 to +0.26, clearly "structured", and it would have opened a
+  multi-day rung. Scored against grams the SAME LEARNER wrote at UNPLANTED sites
+  -- same author, same corpus, no planted structure -- the excess fell to
+  +0.03 to +0.15, crossing threshold at one dimension per world and at DIFFERENT
+  dimensions in each. Most of the structure belonged to learner-written grams in
+  general. A random null answers "is this a subspace at all"; only a
+  same-author null answers "is this subspace ABOUT THE THING I PLANTED". Ask what
+  a null controls for, not merely whether it is uncontaminated.
+
+- THE OPPORTUNITY GATE PAID FOR ITSELF IN TWENTY MINUTES (E7 census). A sketch
+  argued that the ~64% of recurrences which do not survive as the same learner
+  gram are the same computation written differently, and that a parameterized
+  macro would collect them. An arithmetic check over cached routes -- no
+  lifetimes -- refuted the rationale before any plan was frozen. The rung would
+  have produced a null with an appealing story attached. Run the census BEFORE
+  the plan, every time, and note that this one only worked because a second,
+  harder null was built after the first gave a green light.
