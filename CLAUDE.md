@@ -27,8 +27,8 @@ withdrawals in the append-only scientific record rather than rewriting history.
   ledger. Never rewrite history to make a later interpretation look preregistered.
 - `artifacts/INVALID_MANIFEST.md` — machine-checkable quarantine list; invalid
   paths must not be reused for corrected runs.
-- `E5_E6E_SESSION_REPORT.md` — readable synthesis of the E5 → E6E arc,
-  including the corrections ledger and the rules it added.
+- `EXPORT_BRANCH_SESSION_REPORT.md` — readable synthesis of the export
+  branch's development rungs (E5 → E6.2), with its corrections ledger.
 - `SPEC_AUDIT.md` — spec-to-implementation audit; re-audit after major
   milestones (gate closures, confirmations, new spec versions).
 - `row_v2_experimental_spec.md` — the V2 spec (closed), with live STATUS

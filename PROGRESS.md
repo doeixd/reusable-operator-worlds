@@ -3887,3 +3887,10 @@ self-referential and saturates at x8, so only the x1/x2 crossings are quotable;
 and the contribution denominator shrinks ~2x with class depth, so cross-class
 comparison at fixed capacity is confounded while the within-class ladder is
 clean. No headline verdict depends on the confounded comparison.
+
+# Session synthesis renamed for scope stability (2026-08-29)
+
+`E5_E6E_SESSION_REPORT.md` is renamed `EXPORT_BRANCH_SESSION_REPORT.md` and
+extended with E6F and E6.2. Named for the BRANCH rather than the rung list so it
+does not need renaming again as rungs land -- the previous name had already gone
+stale twice. Earlier PROGRESS entries naming the old paths are left unedited.

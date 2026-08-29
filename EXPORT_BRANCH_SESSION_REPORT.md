@@ -1,6 +1,8 @@
 # Writer, Search, Macro — session record, 2026-08-27/28
 
-Covers E5, E5.1, E6 step 0, E6A, E6B, E6D and E6E.
+Covers the export branch's development rungs: E5, E5.1, E6 step 0,
+E6A, E6B, E6D, E6E, E6F and E6.2. Named for the branch rather than the
+rung list so it does not need renaming as rungs land.
 
 Three rungs of the export branch, each run against a frozen plan: whether the
 learned program language can be WRITTEN, how its search actually SCALES, and
@@ -280,6 +282,60 @@ Disclosed: case B's decay schedule also cut total planted instances (~36 against
 manipulation silently failed in world 0, which degenerated into a second copy of
 the unscoreable limit case.
 
+# E6F — nominate with one statistic, gate with another
+
+E6E's post-hoc observation, registered and repeated under a repaired generator
+with a pre-declared eligibility rule.
+
+    A gated-creates      2/3
+    B gated-refuses      2/2 eligible
+    B ungated-creates    2/2 eligible   (the failure being improved on is real)
+
+    -> GATED CRITERION DEMONSTRATED
+
+All three clauses are required; the third is what makes the first two an
+improvement rather than a restatement. **Rank with a statistic you can estimate
+well; test with the one you cannot.**
+
+The per-world eligibility rule fired on its first run, excluding a case-B world
+whose realized decay ratio was 1.00 -- the manipulation did not take. That is the
+silent failure that had made E6E's world 0 look like a refusal failure.
+
+Disclosed: eligibility was registered for case B only, and world 0's case A
+realized a decaying profile and was refused. Its A and B cells had IDENTICAL
+realized ratios and received IDENTICAL decisions, so the gate read the evidence
+rather than the label. Symmetric eligibility would give A 2/2; the verdict is
+reported as registered at 2/3.
+
+# E6.2 — compiling a fragment into an operator
+
+E6C's retired question, answerable once the macro has independent semantics.
+
+    capacity          C0    C1    C2    C3    C4
+    x1 matched         1     1     1     2     2
+    x2                 3     2     3     1     0
+    x4                 3     3     3     2     2
+    x8                 3     3     3     3     3
+
+**COMPILATION FAILS AT MATCHED BUDGET.** One operator the size of one library
+slot cannot represent a composition of three; the fit is converged (3k and 12k
+steps identical), so it is representational. It takes ~4x a slot's capacity.
+
+**Given that capacity it works completely** -- at x8 every class passes in every
+world, including unseen positions and unseen depths.
+
+**COMPILATION DOES NOT PAY, 0/3 at every capacity.** A definitional macro pays
+after 7.44 uses; a compiled one needs ~200 at matched budget where it does not
+work, and far more where it does, against 22-54 realized. The capacity that makes
+compilation correct is the capacity that makes it uneconomic.
+
+Two measurement caveats, both found before recording: `D*(P_M)` is
+self-referential and SATURATES at x8 (5.22 -> 12.00 bits/scalar), so only the
+x1/x2 crossings are quotable; and the contribution denominator falls ~2x with
+class depth, so cross-class comparison at fixed capacity is confounded while the
+within-class ladder is clean. No headline verdict depends on the confounded
+comparison.
+
 # Where this leaves the branch
 
 The five layers of the terminology contract remain cleanly separated.
@@ -288,7 +344,7 @@ banked and sealed. Search-based synthesis is now correctly counted as sealed too
 Program WRITING is not demonstrated. Macro invention has an established
 economics but an unresolved semantics.
 
-The E6 line is complete: four rungs run, one retired. It establishes that a
+The E6 line is complete: six rungs run, one retired and relocated. It establishes that a
 macro PAYS under honest accounting, CAUSALLY REDUCES synthesis cost by the amount
 forecast from an independent experiment's law, and is correctly IDENTIFIED out of
 an open field of rivals -- and that it cannot be correctly TIMED, because a code

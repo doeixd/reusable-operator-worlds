@@ -249,6 +249,96 @@ invariant as evidence that the object has learned that invariant.**
 Each would have produced a confident-looking positive result measuring nothing
 but correct implementation.
 
+### Discovery, and the difference between proposing and judging
+
+**The learner can find the right macro but not the right moment (E6E).** Given an
+open enumeration over 113–165 candidate fragments — told nothing — the
+retrospective code recovers the motif's *learner image* in 3/3 worlds on a
+continuing pattern. But the registered prospective estimator, a late-window rate
+projected forward, behaves identically to the retrospective rule: a decaying
+pattern still has a positive late rate, so scaling it forward predicts
+continuation. Registered verdict: **no improvement**.
+
+The informative part was how a *trend* estimator failed. Used as the objective of
+an `argmax` over ~150 candidates it lost 0/3, picking grams whose apparent rise
+was a fluke. Applied as a **gate** on a candidate nominated by the robust
+retrospective statistic, it works.
+
+**E6F registered that and confirmed it**: create 2/3 where creation is right,
+refuse 2/2 where refusal is right, while the ungated rule creates on every
+eligible case — so the gate improves on a real failure rather than restating it.
+
+\[
+\boxed{\text{Rank with a statistic you can estimate well; test with the one you cannot.}}
+\]
+
+A per-world eligibility rule, registered in advance, fired on its first run and
+excluded a world where the planted decay did not take — the same silent failure
+that had made an earlier cell look like a refusal failure when it contained no
+decay to detect.
+
+### Compiling a fragment into an operator (E6.2)
+
+E6C's retired question becomes answerable once the macro has *independent*
+semantics. Distil \(P_M(x) \approx P_c(P_b(P_a(x)))\) into one operator and
+substitute it in contexts graded by how far they move its input distribution.
+
+| capacity | C0 | C1 | C2 | C3 | C4 |
+|---|---|---|---|---|---|
+| ×1 (matched budget) | 1 | 1 | 1 | 2 | 2 |
+| ×2 | 3 | 2 | 3 | 1 | 0 |
+| ×4 | 3 | 3 | 3 | 2 | 2 |
+| **×8** | **3** | **3** | **3** | **3** | **3** |
+
+*(worlds within tolerance, out of 3; an untrained operator fails 3/3 everywhere)*
+
+**At matched budget, compilation fails.** One operator the size of one library
+slot cannot represent the composition of three — and the fit is converged (3,000
+and 12,000 steps give identical loss), so this is representational, not
+optimization. It takes roughly **4× a library slot's capacity**.
+
+**Given that capacity, it works completely.** At ×8 every context class passes in
+every world, including positions the fragment never occupied and program depths
+it never saw. That is the third time this substrate has tolerated compositional
+distribution shift better than we predicted.
+
+**And that is exactly what makes it uneconomic:**
+
+\[
+\boxed{\text{the capacity that makes compilation correct is the capacity that makes it not worth doing}}
+\]
+
+A *definitional* macro pays after 7.44 uses. A *compiled* one needs ~200 at
+matched budget, where it does not work, and far more where it does — against
+22–54 uses actually realized. `COMPILATION DOES NOT PAY` in 0/3 worlds at every
+capacity, including the world with the most macro uses.
+
+What this licenses: *a recurring fragment of the learned program language can be
+compiled into a single reusable operator that stands in for its expansion in
+contexts it was never fitted on — at roughly four times a library slot's
+capacity, where the description cost exceeds what the abbreviation saves by more
+than an order of magnitude.* What it does not license: **"the learner invented a
+primitive."** The fragment was supplied by the economics, the compilation is a
+fitting step we performed, and at the one budget where this substrate's own
+objects live, it does not work.
+
+### Two measurement caveats, recorded rather than smoothed
+
+Both were found before the result was written down, and both limit what may be
+quoted from it.
+
+\(D^*(P_M)\) is **self-referential**: it asks for the bits needed to stay within
+10% of *the model's own* float error, so a better fit demands more precision
+(5.22 → 6.65 → 10.00 → 12.00 bits/scalar) and **saturates** at the sweep ceiling.
+Only the ×1 and ×2 crossings are quotable; the direction of the dissociation
+holds, its magnitude across the ladder does not.
+
+The **contribution denominator is not comparable across context classes** —
+downstream residual operators attenuate the fragment's effect, so the normalizer
+falls ~2× from the shallowest class to the deepest. Cross-class comparison at
+fixed capacity is confounded; the within-class capacity ladder is clean, and no
+headline verdict depends on the confounded comparison.
+
 
 **First result of that branch (E1, 2026-08-26): the stop condition did not
 fire.** A frozen discrete library executes teacher programs it never trained on
