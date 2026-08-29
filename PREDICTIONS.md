@@ -7249,3 +7249,96 @@ retrospective argmax did not recover the motif image in these corpora, where the
 plant is thinner than E6A's. E6F's registered question is TIMING, not discovery;
 E6E answered discovery separately (3/3 on case A, 2/3 on case B). The two are not
 pooled, and E6F's verdict makes no claim about which object was found.
+
+# E6.2 (2026-08-29): COMPILATION FAILS AT MATCHED BUDGET; COMPILATION DOES NOT PAY
+
+Plan `E6_2_COMPILED_MACRO_PLAN.md` frozen at `ebec48e` (Amendments 1-4).
+Development worlds 0-2, `D = 6`, `L = 3`. Report `reports/e6_2_compiled.json`.
+
+## Verdicts
+
+    semantic   COMPILATION FAILS AT MATCHED BUDGET
+    economics  COMPILATION DOES NOT PAY (0/3 worlds, at every capacity)
+
+The untrained control fails in 3/3 worlds at every capacity (0.55-0.60 against a
+0.15 bar), so the non-vacuity requirement Amendment 3 introduced is satisfied and
+the tolerance discriminates.
+
+## The capacity ladder (worlds within tolerance, out of 3)
+
+    capacity          C0    C1    C2    C3    C4
+    x1 matched         1     1     1     2     2
+    x2                 3     2     3     1     0
+    x4                 3     3     3     2     2
+    x8                 3     3     3     3     3
+
+**At x8 every context class passes in every world**, including positions the
+fragment never occupied and depths it never saw. Given enough capacity, a
+compiled operator stands in for its expansion under strong distribution shift.
+This is review 80's standing prior confirmed a third time: do not infer a binding
+generalization barrier from unseen internal-state distributions.
+
+**At matched budget it fails.** One operator the size of one library slot cannot
+represent the composition of three. World 1 is the exception (C0 = 0.141 against
+0.15), and its macro `(8,8,5)` contains a REPEATED operator, which plausibly
+occupies a lower-dimensional function space than three distinct ones. Registered
+as a hypothesis, not a finding: n = 3 with one structurally different macro.
+
+## The dissociation, which is the point
+
+    world  x1 crossing  x8 crossing  realized uses
+      0        193         3432           22
+      1        221         3432           54
+      2        196         3432           26
+
+**The capacity that makes compilation correct is the capacity that makes it
+uneconomic.** A definitional macro pays after 7.44 uses; a compiled one needs
+~200 at matched budget, where it does not work, and far more where it does.
+
+## TWO MEASUREMENT CAVEATS, both found before recording
+
+**1. `D*(P_M)` is self-referential and SATURATES.** `behavioural_rate` asks for
+the bits needed to stay within 10% of THE MODEL'S OWN float error. As the fit
+improves that reference tightens toward zero, so a better model appears to need
+more precision: 5.22 -> 6.65 -> 10.00 -> 12.00 bits/scalar across the ladder, and
+12.00 is the sweep's CEILING. The x8 crossing of 3,432 is therefore **not a
+usable number** -- it is produced by a saturated rate, not a measured description
+length. Only the x1 and x2 crossings (5.2-9.1 bits/scalar, clear of the ceiling)
+are quotable. The DIRECTION of the dissociation is unaffected; its MAGNITUDE
+across the ladder is not measured. A comparable absolute-tolerance rate is the
+right successor instrument and is not claimed here.
+
+**2. The contribution denominator is not comparable across context classes.**
+Measured on world 0: the fragment's own effect is 0.0153 at C0/C1/C2 (depth 6),
+0.0093 at C3 (mean depth 8.1) and 0.0078 at C4 (mean depth 8.9) -- downstream
+residual operators attenuate it, so the normalizer changes by ~2x between the
+shallowest and deepest classes. **Cross-class comparison at fixed capacity is
+therefore confounded**, which is the likely source of the non-monotone row
+`x1: C3 2/3, C4 2/3` against `x1: C0 1/3`. The WITHIN-class capacity ladder holds
+the class fixed and is clean, and no headline verdict depends on the cross-class
+gradient: the semantic verdict rests on C0 alone and the economics on the
+crossing. The graded-shift narrative is reported with this caveat attached.
+
+## Scorekeeping
+
+- **"COMPILATION FAILS AT MATCHED BUDGET": CORRECT** as a verdict, but our
+  registered "in 3/3 worlds" was WRONG -- it fails in 2/3, with world 1 passing
+  marginally.
+- **"Substitutability holds from x4 upward, including C1-C4": PARTIALLY.** True
+  at x8 (3/3 every class); at x4 the shifted classes are 2/3, and the cross-class
+  comparison is confounded as described.
+- **"COMPILATION DOES NOT PAY at every rung": CORRECT**, 0/3 everywhere,
+  including in the world with the most macro uses.
+- **"The untrained control fails at every rung": CORRECT**, 3/3.
+
+## What this licenses, and what it does not
+
+Licensed: *a recurring fragment of the learned program language can be compiled
+into a single reusable operator that stands in for its expansion in contexts it
+was never fitted on -- but only at roughly four times a library slot's capacity,
+and at that size the description cost exceeds what the abbreviation saves by more
+than an order of magnitude.*
+
+NOT licensed: "the learner invented a primitive". The fragment was supplied by
+E6's economics, the compilation is a fitting step we performed, and at the one
+budget where the substrate's own objects live, it does not work.

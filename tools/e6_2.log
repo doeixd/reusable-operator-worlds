@@ -1,0 +1,85 @@
+prereg check OK: 33 frozen files unchanged; all STATUS-cited paths exist
+C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_e6_2_compiled.py:161: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:823.)
+  first = float(loss)
+[w0 x1 C0] substitution NMSE 0.17390 (OUTSIDE 0.15) | untrained 0.5678 (fails) | input shift 2.208
+[w0 x1 C1] substitution NMSE 0.18647 (OUTSIDE 0.15) | untrained 0.5628 (fails) | input shift 2.775
+[w0 x1 C2] substitution NMSE 0.18259 (OUTSIDE 0.15) | untrained 0.5674 (fails) | input shift 2.761
+[w0 x1 C3] substitution NMSE 0.20081 (OUTSIDE 0.15) | untrained 0.7297 (fails) | input shift 2.647
+[w0 x1 C4] substitution NMSE 0.21195 (OUTSIDE 0.15) | untrained 0.7654 (fails) | input shift 2.683
+        x1 economics: D*(P_M) 1382 bits (5.22/scalar over 265) | crossing 192.8 uses vs definitional 7.4 | realized 22 -> DOES NOT PAY
+[w0 x2 C0] substitution NMSE 0.14272 (within 0.15) | untrained 0.5747 (fails) | input shift 2.687
+[w0 x2 C1] substitution NMSE 0.15055 (OUTSIDE 0.15) | untrained 0.5779 (fails) | input shift 2.614
+[w0 x2 C2] substitution NMSE 0.14106 (within 0.15) | untrained 0.5751 (fails) | input shift 2.595
+[w0 x2 C3] substitution NMSE 0.33706 (OUTSIDE 0.15) | untrained 0.7226 (fails) | input shift 2.476
+[w0 x2 C4] substitution NMSE 0.40607 (OUTSIDE 0.15) | untrained 0.8011 (fails) | input shift 2.791
+        x2 economics: D*(P_M) 3519 bits (6.65/scalar over 529) | crossing 481.5 uses vs definitional 7.4 | realized 22 -> DOES NOT PAY
+[w0 x4 C0] substitution NMSE 0.07356 (within 0.15) | untrained 0.5574 (fails) | input shift 2.348
+[w0 x4 C1] substitution NMSE 0.08025 (within 0.15) | untrained 0.5627 (fails) | input shift 2.517
+[w0 x4 C2] substitution NMSE 0.07877 (within 0.15) | untrained 0.5580 (fails) | input shift 2.624
+[w0 x4 C3] substitution NMSE 0.18212 (OUTSIDE 0.15) | untrained 0.7041 (fails) | input shift 2.598
+[w0 x4 C4] substitution NMSE 0.21661 (OUTSIDE 0.15) | untrained 0.7740 (fails) | input shift 2.737
+        x4 economics: D*(P_M) 10573 bits (10.00/scalar over 1057) | crossing 1434.6 uses vs definitional 7.4 | realized 22 -> DOES NOT PAY
+[w0 x8 C0] substitution NMSE 0.00276 (within 0.15) | untrained 0.5929 (fails) | input shift 2.348
+[w0 x8 C1] substitution NMSE 0.00297 (within 0.15) | untrained 0.5812 (fails) | input shift 2.604
+[w0 x8 C2] substitution NMSE 0.00292 (within 0.15) | untrained 0.5847 (fails) | input shift 2.552
+[w0 x8 C3] substitution NMSE 0.00394 (within 0.15) | untrained 0.7503 (fails) | input shift 2.477
+[w0 x8 C4] substitution NMSE 0.00495 (within 0.15) | untrained 0.8245 (fails) | input shift 2.872
+        x8 economics: D*(P_M) 25356 bits (12.00/scalar over 2113) | crossing 3432.1 uses vs definitional 7.4 | realized 22 -> DOES NOT PAY
+[w1 x1 C0] substitution NMSE 0.14062 (within 0.15) | untrained 0.5937 (fails) | input shift 2.273
+[w1 x1 C1] substitution NMSE 0.15446 (OUTSIDE 0.15) | untrained 0.5881 (fails) | input shift 2.325
+[w1 x1 C2] substitution NMSE 0.14848 (within 0.15) | untrained 0.5891 (fails) | input shift 2.481
+[w1 x1 C3] substitution NMSE 0.13841 (within 0.15) | untrained 0.7505 (fails) | input shift 2.221
+[w1 x1 C4] substitution NMSE 0.14905 (within 0.15) | untrained 0.7859 (fails) | input shift 2.322
+        x1 economics: D*(P_M) 1592 bits (6.01/scalar over 265) | crossing 221.1 uses vs definitional 7.4 | realized 54 -> DOES NOT PAY
+[w1 x2 C0] substitution NMSE 0.07216 (within 0.15) | untrained 0.5816 (fails) | input shift 2.248
+[w1 x2 C1] substitution NMSE 0.08592 (within 0.15) | untrained 0.5846 (fails) | input shift 2.499
+[w1 x2 C2] substitution NMSE 0.07300 (within 0.15) | untrained 0.5806 (fails) | input shift 2.327
+[w1 x2 C3] substitution NMSE 0.13116 (within 0.15) | untrained 0.7367 (fails) | input shift 2.326
+[w1 x2 C4] substitution NMSE 0.15133 (OUTSIDE 0.15) | untrained 0.7837 (fails) | input shift 2.355
+        x2 economics: D*(P_M) 4816 bits (9.10/scalar over 529) | crossing 656.7 uses vs definitional 7.4 | realized 54 -> DOES NOT PAY
+[w1 x4 C0] substitution NMSE 0.02970 (within 0.15) | untrained 0.5837 (fails) | input shift 2.589
+[w1 x4 C1] substitution NMSE 0.02800 (within 0.15) | untrained 0.5788 (fails) | input shift 2.332
+[w1 x4 C2] substitution NMSE 0.02973 (within 0.15) | untrained 0.5882 (fails) | input shift 2.249
+[w1 x4 C3] substitution NMSE 0.04721 (within 0.15) | untrained 0.7344 (fails) | input shift 2.344
+[w1 x4 C4] substitution NMSE 0.05578 (within 0.15) | untrained 0.7860 (fails) | input shift 2.306
+        x4 economics: D*(P_M) 10996 bits (10.40/scalar over 1057) | crossing 1491.8 uses vs definitional 7.4 | realized 54 -> DOES NOT PAY
+[w1 x8 C0] substitution NMSE 0.00187 (within 0.15) | untrained 0.6041 (fails) | input shift 2.424
+[w1 x8 C1] substitution NMSE 0.00192 (within 0.15) | untrained 0.5960 (fails) | input shift 2.381
+[w1 x8 C2] substitution NMSE 0.00198 (within 0.15) | untrained 0.6009 (fails) | input shift 2.368
+[w1 x8 C3] substitution NMSE 0.00149 (within 0.15) | untrained 0.7725 (fails) | input shift 2.216
+[w1 x8 C4] substitution NMSE 0.00157 (within 0.15) | untrained 0.8112 (fails) | input shift 2.510
+        x8 economics: D*(P_M) 25356 bits (12.00/scalar over 2113) | crossing 3432.1 uses vs definitional 7.4 | realized 54 -> DOES NOT PAY
+[w2 x1 C0] substitution NMSE 0.17521 (OUTSIDE 0.15) | untrained 0.5495 (fails) | input shift 2.270
+[w2 x1 C1] substitution NMSE 0.14841 (within 0.15) | untrained 0.5550 (fails) | input shift 2.168
+[w2 x1 C2] substitution NMSE 0.16236 (OUTSIDE 0.15) | untrained 0.5522 (fails) | input shift 2.095
+[w2 x1 C3] substitution NMSE 0.12737 (within 0.15) | untrained 0.7256 (fails) | input shift 2.185
+[w2 x1 C4] substitution NMSE 0.13142 (within 0.15) | untrained 0.7706 (fails) | input shift 2.116
+        x1 economics: D*(P_M) 1402 bits (5.29/scalar over 265) | crossing 195.5 uses vs definitional 7.4 | realized 26 -> DOES NOT PAY
+[w2 x2 C0] substitution NMSE 0.08403 (within 0.15) | untrained 0.5546 (fails) | input shift 2.327
+[w2 x2 C1] substitution NMSE 0.09180 (within 0.15) | untrained 0.5390 (fails) | input shift 2.329
+[w2 x2 C2] substitution NMSE 0.08145 (within 0.15) | untrained 0.5504 (fails) | input shift 2.250
+[w2 x2 C3] substitution NMSE 0.16304 (OUTSIDE 0.15) | untrained 0.7533 (fails) | input shift 2.261
+[w2 x2 C4] substitution NMSE 0.17495 (OUTSIDE 0.15) | untrained 0.7821 (fails) | input shift 2.314
+        x2 economics: D*(P_M) 3680 bits (6.96/scalar over 529) | crossing 503.2 uses vs definitional 7.4 | realized 26 -> DOES NOT PAY
+[w2 x4 C0] substitution NMSE 0.04337 (within 0.15) | untrained 0.5611 (fails) | input shift 2.204
+[w2 x4 C1] substitution NMSE 0.04354 (within 0.15) | untrained 0.5564 (fails) | input shift 2.174
+[w2 x4 C2] substitution NMSE 0.04559 (within 0.15) | untrained 0.5474 (fails) | input shift 2.115
+[w2 x4 C3] substitution NMSE 0.09009 (within 0.15) | untrained 0.7374 (fails) | input shift 2.179
+[w2 x4 C4] substitution NMSE 0.10253 (within 0.15) | untrained 0.7791 (fails) | input shift 2.301
+        x4 economics: D*(P_M) 10623 bits (10.05/scalar over 1057) | crossing 1441.4 uses vs definitional 7.4 | realized 26 -> DOES NOT PAY
+[w2 x8 C0] substitution NMSE 0.00179 (within 0.15) | untrained 0.5487 (fails) | input shift 2.395
+[w2 x8 C1] substitution NMSE 0.00164 (within 0.15) | untrained 0.5516 (fails) | input shift 2.169
+[w2 x8 C2] substitution NMSE 0.00163 (within 0.15) | untrained 0.5580 (fails) | input shift 2.107
+[w2 x8 C3] substitution NMSE 0.00157 (within 0.15) | untrained 0.7354 (fails) | input shift 2.332
+[w2 x8 C4] substitution NMSE 0.00180 (within 0.15) | untrained 0.8021 (fails) | input shift 2.309
+        x8 economics: D*(P_M) 25356 bits (12.00/scalar over 2113) | crossing 3432.1 uses vs definitional 7.4 | realized 26 -> DOES NOT PAY
+
+capacity ladder (worlds within tolerance, 3 = all):
+  x1 (matched budget): C0 1/3  C1 1/3  C2 1/3  C3 2/3  C4 2/3
+  x2 (x2 -- bought with capacity): C0 3/3  C1 2/3  C2 3/3  C3 1/3  C4 0/3
+  x4 (x4 -- bought with capacity): C0 3/3  C1 3/3  C2 3/3  C3 2/3  C4 2/3
+  x8 (x8 -- bought with capacity): C0 3/3  C1 3/3  C2 3/3  C3 3/3  C4 3/3
+untrained control fails everywhere in 3/3 worlds
+E6.2 semantic: COMPILATION FAILS AT MATCHED BUDGET
+E6.2 economics: COMPILATION DOES NOT PAY (0/3 worlds)

@@ -3853,3 +3853,37 @@ Symmetric eligibility would give A 2/2; the verdict is reported as registered at
 E6 rung status: A PAYS 3/3 | B PREDICTED SAVING CONFIRMED 3/3 | D RETROSPECTIVE
 ECONOMICS INSUFFICIENT | E NO IMPROVEMENT | F GATED CRITERION DEMONSTRATED.
 C retired to E6.2 as an identity.
+
+# E6.2 complete: compiled macros work only above matched budget, and never pay (2026-08-29)
+
+Ran `src/row/experiments/audit_e6_2_compiled.py` on development worlds 0-2
+against `E6_2_COMPILED_MACRO_PLAN.md` (frozen `ebec48e`, Amendments 1-4). Report
+`reports/e6_2_compiled.json`; log `tools/e6_2.log`.
+
+**Semantic: COMPILATION FAILS AT MATCHED BUDGET. Economics: COMPILATION DOES NOT
+PAY (0/3 at every capacity).** Untrained control fails 3/3 everywhere.
+
+    capacity          C0    C1    C2    C3    C4      x1 crossing / realized
+    x1 matched         1     1     1     2     2       193-221 / 22-54
+    x2                 3     2     3     1     0
+    x4                 3     3     3     2     2
+    x8                 3     3     3     3     3       3432 (saturated, unusable)
+
+At x8 every class passes in every world, including unseen positions and unseen
+depths -- review 80's prior on distribution shift confirmed a third time. At
+matched budget one operator cannot represent a composition of three.
+
+Four amendments were required and all were made before any verdict: the crossing
+summed bits with operator applications (units error); context class C3 was
+unconstructible because the macro occupies all four available positions at depth
+6; the substitution tolerance was output-relative and an untrained operator
+PASSED it (the V4.1 error class, caught by the registered non-vacuity control);
+and the matched-budget C0 failure was diagnosed as capacity rather than
+optimization, converting a blocked rung into a measured negative with a capacity
+ladder.
+
+Two measurement caveats are recorded rather than smoothed: `D*(P_M)` is
+self-referential and saturates at x8, so only the x1/x2 crossings are quotable;
+and the contribution denominator shrinks ~2x with class depth, so cross-class
+comparison at fixed capacity is confounded while the within-class ladder is
+clean. No headline verdict depends on the confounded comparison.

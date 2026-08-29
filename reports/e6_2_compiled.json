@@ -1,0 +1,957 @@
+{
+ "frozen_plan": "E6_2_COMPILED_MACRO_PLAN.md (Amendment 1)",
+ "git_commit": "e09ff6a",
+ "protocol": {
+  "depth": 6,
+  "macro_len": 3,
+  "fit_states": 2048,
+  "fit_steps": 6000,
+  "tolerance": 0.15,
+  "per_class": 32,
+  "reference": "contribution-relative: expansion versus pass-through",
+  "note": "C0 is a non-vacuity check; evidence is C2-C4"
+ },
+ "worlds": {
+  "0": {
+   "macro": [
+    11,
+    6,
+    4
+   ],
+   "seen_positions": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "ranks": {
+    "1": {
+     "rank": 8,
+     "multiple": 1,
+     "fit": {
+      "first_loss": 0.025448588654398918,
+      "last_loss": 0.012340521439909935,
+      "scalars": 265
+     },
+     "scalars": 265,
+     "library_slot_scalars": 265,
+     "matched_budget": true,
+     "capacity_note": "primary: matched budget",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.17390384820347635,
+       "untrained_nmse": 0.5678398027135354,
+       "input_shift": 2.2081666439771652,
+       "within_tolerance": false,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.18647303501457815,
+       "untrained_nmse": 0.5628344201251596,
+       "input_shift": 2.775300480425358,
+       "within_tolerance": false,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.18258989328174513,
+       "untrained_nmse": 0.5674344902575568,
+       "input_shift": 2.7611114904284477,
+       "within_tolerance": false,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.2008110403171475,
+       "untrained_nmse": 0.7296881155009421,
+       "input_shift": 2.6472578570246696,
+       "within_tolerance": false,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.21194527323313653,
+       "untrained_nmse": 0.7654266377502104,
+       "input_shift": 2.6833458244800568,
+       "within_tolerance": false,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 5.215918130993169,
+      "D_star_bits": 1382.2183047131896,
+      "saturated": false,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 192.75568106255696,
+      "realized_uses": 22,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    },
+    "2": {
+     "rank": 16,
+     "multiple": 2,
+     "fit": {
+      "first_loss": 0.02530241571366787,
+      "last_loss": 0.006959114223718643,
+      "scalars": 529
+     },
+     "scalars": 529,
+     "library_slot_scalars": 265,
+     "matched_budget": false,
+     "capacity_note": "bought with capacity: 2x a library slot",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.14272049729671793,
+       "untrained_nmse": 0.5747107689221623,
+       "input_shift": 2.6868481747806072,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.15054558050208264,
+       "untrained_nmse": 0.5779235528648476,
+       "input_shift": 2.613839626312256,
+       "within_tolerance": false,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.14106321665023425,
+       "untrained_nmse": 0.575102092450948,
+       "input_shift": 2.5947781316936016,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.3370574590459105,
+       "untrained_nmse": 0.7226228066548237,
+       "input_shift": 2.4761485755443573,
+       "within_tolerance": false,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.406074432231419,
+       "untrained_nmse": 0.8010529513593349,
+       "input_shift": 2.7906871773302555,
+       "within_tolerance": false,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 6.65303874960047,
+      "D_star_bits": 3519.457498538649,
+      "saturated": false,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 481.5374687171194,
+      "realized_uses": 22,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    },
+    "4": {
+     "rank": 32,
+     "multiple": 4,
+     "fit": {
+      "first_loss": 0.0255181435495615,
+      "last_loss": 0.003496900899335742,
+      "scalars": 1057
+     },
+     "scalars": 1057,
+     "library_slot_scalars": 265,
+     "matched_budget": false,
+     "capacity_note": "bought with capacity: 4x a library slot",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.0735600979609182,
+       "untrained_nmse": 0.5573540122822706,
+       "input_shift": 2.3480583243072033,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.08024803707949565,
+       "untrained_nmse": 0.562698193870486,
+       "input_shift": 2.5171859562397003,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.0787697328120149,
+       "untrained_nmse": 0.5579689113547548,
+       "input_shift": 2.6239145770668983,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.18212465684794496,
+       "untrained_nmse": 0.7041126019759153,
+       "input_shift": 2.5980996675789356,
+       "within_tolerance": false,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.21660701891265768,
+       "untrained_nmse": 0.7739597581562592,
+       "input_shift": 2.7373361587524414,
+       "within_tolerance": false,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 10.002869538785324,
+      "D_star_bits": 10573.033102496089,
+      "saturated": false,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 1434.6100953806322,
+      "realized_uses": 22,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    },
+    "8": {
+     "rank": 64,
+     "multiple": 8,
+     "fit": {
+      "first_loss": 0.025382021442055702,
+      "last_loss": 8.762552897678688e-05,
+      "scalars": 2113
+     },
+     "scalars": 2113,
+     "library_slot_scalars": 265,
+     "matched_budget": false,
+     "capacity_note": "bought with capacity: 8x a library slot",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.002763998004528097,
+       "untrained_nmse": 0.592863839105153,
+       "input_shift": 2.3484253510832787,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.0029708945440921116,
+       "untrained_nmse": 0.5811787986813428,
+       "input_shift": 2.6040706411004066,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.002923114344469919,
+       "untrained_nmse": 0.5846722366614545,
+       "input_shift": 2.5518320985138416,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.003942346752459914,
+       "untrained_nmse": 0.750335771076911,
+       "input_shift": 2.4768207482993603,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.004953036010683348,
+       "untrained_nmse": 0.8245049705464726,
+       "input_shift": 2.8723419718444347,
+       "within_tolerance": true,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 12.0,
+      "D_star_bits": 25356.0,
+      "saturated": true,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 3432.070941051441,
+      "realized_uses": 22,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    }
+   }
+  },
+  "1": {
+   "macro": [
+    8,
+    8,
+    5
+   ],
+   "seen_positions": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "ranks": {
+    "1": {
+     "rank": 8,
+     "multiple": 1,
+     "fit": {
+      "first_loss": 0.018752790987491608,
+      "last_loss": 0.0071944789960980415,
+      "scalars": 265
+     },
+     "scalars": 265,
+     "library_slot_scalars": 265,
+     "matched_budget": true,
+     "capacity_note": "primary: matched budget",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.1406212900346771,
+       "untrained_nmse": 0.5936979378993383,
+       "input_shift": 2.2732922360301018,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.15445790216808125,
+       "untrained_nmse": 0.5880542986502314,
+       "input_shift": 2.324886880815029,
+       "within_tolerance": false,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.14847977583445773,
+       "untrained_nmse": 0.589095103921623,
+       "input_shift": 2.4808518290519714,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.13840671931300838,
+       "untrained_nmse": 0.7504527892871614,
+       "input_shift": 2.221326019614935,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.14904855905194606,
+       "untrained_nmse": 0.7859467461557873,
+       "input_shift": 2.3221996277570724,
+       "within_tolerance": true,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 6.008109726258557,
+      "D_star_bits": 1592.1490774585177,
+      "saturated": false,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 221.12133335465623,
+      "realized_uses": 54,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    },
+    "2": {
+     "rank": 16,
+     "multiple": 2,
+     "fit": {
+      "first_loss": 0.018854783847928047,
+      "last_loss": 0.004336923360824585,
+      "scalars": 529
+     },
+     "scalars": 529,
+     "library_slot_scalars": 265,
+     "matched_budget": false,
+     "capacity_note": "bought with capacity: 2x a library slot",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.0721646514822009,
+       "untrained_nmse": 0.5816121072955315,
+       "input_shift": 2.2479677759110928,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.08592200955763249,
+       "untrained_nmse": 0.5846234570790322,
+       "input_shift": 2.4985678009688854,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.07300410280440535,
+       "untrained_nmse": 0.5806246936978409,
+       "input_shift": 2.3266737051308155,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.13116308739190322,
+       "untrained_nmse": 0.7367441960644154,
+       "input_shift": 2.3259273171424866,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.15132709589621976,
+       "untrained_nmse": 0.7836800898200621,
+       "input_shift": 2.3551432751119137,
+       "within_tolerance": false,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 9.104287621341449,
+      "D_star_bits": 4816.168151689626,
+      "saturated": false,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 656.7478155840016,
+      "realized_uses": 54,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    },
+    "4": {
+     "rank": 32,
+     "multiple": 4,
+     "fit": {
+      "first_loss": 0.018372463062405586,
+      "last_loss": 0.0013359866570681334,
+      "scalars": 1057
+     },
+     "scalars": 1057,
+     "library_slot_scalars": 265,
+     "matched_budget": false,
+     "capacity_note": "bought with capacity: 4x a library slot",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.029700707173843106,
+       "untrained_nmse": 0.5836904029337178,
+       "input_shift": 2.5892589427530766,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.028004161137445985,
+       "untrained_nmse": 0.5787928532291085,
+       "input_shift": 2.3323580399155617,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.02973433590132084,
+       "untrained_nmse": 0.5881953104927682,
+       "input_shift": 2.2488515339791775,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.047208493244354006,
+       "untrained_nmse": 0.734420428862881,
+       "input_shift": 2.3436711244285107,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.05577561735424495,
+       "untrained_nmse": 0.7860111120336898,
+       "input_shift": 2.3057114854454994,
+       "within_tolerance": true,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 10.40315768930561,
+      "D_star_bits": 10996.13767759603,
+      "saturated": false,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 1491.779595133014,
+      "realized_uses": 54,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    },
+    "8": {
+     "rank": 64,
+     "multiple": 8,
+     "fit": {
+      "first_loss": 0.018575122579932213,
+      "last_loss": 3.821693826466799e-05,
+      "scalars": 2113
+     },
+     "scalars": 2113,
+     "library_slot_scalars": 265,
+     "matched_budget": false,
+     "capacity_note": "bought with capacity: 8x a library slot",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.0018693511830294989,
+       "untrained_nmse": 0.604068051027514,
+       "input_shift": 2.423870410770178,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.0019200793082130027,
+       "untrained_nmse": 0.5959568523538565,
+       "input_shift": 2.381292685866356,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.0019792092282438245,
+       "untrained_nmse": 0.6008919033917398,
+       "input_shift": 2.367669578641653,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.001488046058824724,
+       "untrained_nmse": 0.7724866005094478,
+       "input_shift": 2.2164537757635117,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.0015742337925402172,
+       "untrained_nmse": 0.8111843392325684,
+       "input_shift": 2.509671587496996,
+       "within_tolerance": true,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 12.0,
+      "D_star_bits": 25356.0,
+      "saturated": true,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 3432.070941051441,
+      "realized_uses": 54,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    }
+   }
+  },
+  "2": {
+   "macro": [
+    8,
+    9,
+    6
+   ],
+   "seen_positions": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "ranks": {
+    "1": {
+     "rank": 8,
+     "multiple": 1,
+     "fit": {
+      "first_loss": 0.017237382009625435,
+      "last_loss": 0.0071752420626580715,
+      "scalars": 265
+     },
+     "scalars": 265,
+     "library_slot_scalars": 265,
+     "matched_budget": true,
+     "capacity_note": "primary: matched budget",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.1752058779002463,
+       "untrained_nmse": 0.5495489311283208,
+       "input_shift": 2.2697219848632812,
+       "within_tolerance": false,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.14841244699830203,
+       "untrained_nmse": 0.5550068062375423,
+       "input_shift": 2.1676490530371666,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.16235751252275243,
+       "untrained_nmse": 0.5521925416865912,
+       "input_shift": 2.0953293070197105,
+       "within_tolerance": false,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.1273704287622122,
+       "untrained_nmse": 0.7256323801903587,
+       "input_shift": 2.1847468614578247,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.13141675396442445,
+       "untrained_nmse": 0.7705840762480811,
+       "input_shift": 2.1163829043507576,
+       "within_tolerance": true,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 5.292391968996287,
+      "D_star_bits": 1402.4838717840162,
+      "saturated": false,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 195.49394578437858,
+      "realized_uses": 26,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    },
+    "2": {
+     "rank": 16,
+     "multiple": 2,
+     "fit": {
+      "first_loss": 0.016951031982898712,
+      "last_loss": 0.0038377312012016773,
+      "scalars": 529
+     },
+     "scalars": 529,
+     "library_slot_scalars": 265,
+     "matched_budget": false,
+     "capacity_note": "bought with capacity: 2x a library slot",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.08403371320847094,
+       "untrained_nmse": 0.554610833648722,
+       "input_shift": 2.326535589993,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.09179892594448233,
+       "untrained_nmse": 0.5390330988825913,
+       "input_shift": 2.3286625668406487,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.08144782498806755,
+       "untrained_nmse": 0.5503662929627255,
+       "input_shift": 2.2498650662600994,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.16303895239884195,
+       "untrained_nmse": 0.7533189798208084,
+       "input_shift": 2.2607943154871464,
+       "within_tolerance": false,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.17495327027996674,
+       "untrained_nmse": 0.7820719851042873,
+       "input_shift": 2.313657909631729,
+       "within_tolerance": false,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 6.956753034934062,
+      "D_star_bits": 3680.1223554801186,
+      "saturated": false,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 503.24635592771546,
+      "realized_uses": 26,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    },
+    "4": {
+     "rank": 32,
+     "multiple": 4,
+     "fit": {
+      "first_loss": 0.016954373568296432,
+      "last_loss": 0.0021194047294557095,
+      "scalars": 1057
+     },
+     "scalars": 1057,
+     "library_slot_scalars": 265,
+     "matched_budget": false,
+     "capacity_note": "bought with capacity: 4x a library slot",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.04336880847892004,
+       "untrained_nmse": 0.5610550827065222,
+       "input_shift": 2.2039592675864697,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.04353566158030827,
+       "untrained_nmse": 0.556434557483972,
+       "input_shift": 2.1741744466125965,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.04559255292576076,
+       "untrained_nmse": 0.5473679727547873,
+       "input_shift": 2.115324556827545,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.09008710688123052,
+       "untrained_nmse": 0.7373710879576505,
+       "input_shift": 2.1793778240680695,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.10252971906636377,
+       "untrained_nmse": 0.7790709716688745,
+       "input_shift": 2.3014362938702106,
+       "within_tolerance": true,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 10.050432921095476,
+      "D_star_bits": 10623.307597597919,
+      "saturated": false,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 1441.4031387661742,
+      "realized_uses": 26,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    },
+    "8": {
+     "rank": 64,
+     "multiple": 8,
+     "fit": {
+      "first_loss": 0.01756901666522026,
+      "last_loss": 3.7335405068006366e-05,
+      "scalars": 2113
+     },
+     "scalars": 2113,
+     "library_slot_scalars": 265,
+     "matched_budget": false,
+     "capacity_note": "bought with capacity: 8x a library slot",
+     "classes": {
+      "C0": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.001792106572063613,
+       "untrained_nmse": 0.548650561342719,
+       "input_shift": 2.394644644111395,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C1": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.0016443002724227554,
+       "untrained_nmse": 0.5516113275620969,
+       "input_shift": 2.168807089328766,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C2": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.0016311074829614422,
+       "untrained_nmse": 0.5579935794325303,
+       "input_shift": 2.1071296632289886,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C3": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.001574926344001731,
+       "untrained_nmse": 0.7354039369958181,
+       "input_shift": 2.3322633542120457,
+       "within_tolerance": true,
+       "untrained_fails": true
+      },
+      "C4": {
+       "constructible": true,
+       "programs": 32,
+       "substitution_nmse": 0.0017997564920875615,
+       "untrained_nmse": 0.8020890311473678,
+       "input_shift": 2.3091405257582664,
+       "within_tolerance": true,
+       "untrained_fails": true
+      }
+     },
+     "economics": {
+      "D_star_bits_per_scalar": 12.0,
+      "D_star_bits": 25356.0,
+      "saturated": true,
+      "definitional_crossing": 7.444809696710498,
+      "compiled_crossing": 3432.070941051441,
+      "realized_uses": 26,
+      "pays": false,
+      "execution_saving_per_use_ops": 2,
+      "units_note": "crossing in description bits only; execution saving reported separately and never summed with bits"
+     }
+    }
+   }
+  }
+ },
+ "verdict": {
+  "per_class_matched_budget": {
+   "C0": 1,
+   "C1": 1,
+   "C2": 1,
+   "C3": 2,
+   "C4": 2
+  },
+  "capacity_ladder": {
+   "1": {
+    "C0": 1,
+    "C1": 1,
+    "C2": 1,
+    "C3": 2,
+    "C4": 2
+   },
+   "2": {
+    "C0": 3,
+    "C1": 2,
+    "C2": 3,
+    "C3": 1,
+    "C4": 0
+   },
+   "4": {
+    "C0": 3,
+    "C1": 3,
+    "C2": 3,
+    "C3": 2,
+    "C4": 2
+   },
+   "8": {
+    "C0": 3,
+    "C1": 3,
+    "C2": 3,
+    "C3": 3,
+    "C4": 3
+   }
+  },
+  "ladder_note": "any pass above x1 is BOUGHT WITH CAPACITY",
+  "untrained_control_worlds": 3,
+  "semantic": "COMPILATION FAILS AT MATCHED BUDGET",
+  "economics": "COMPILATION DOES NOT PAY",
+  "economics_worlds": 0
+ }
+}

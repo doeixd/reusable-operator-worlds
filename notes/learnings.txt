@@ -4515,3 +4515,37 @@ than as a one-off miss.
   from NO IMPROVEMENT to GATED CRITERION DEMONSTRATED without any change in the
   underlying rule. Sometimes the fix that matters is to the bookkeeping rather
   than to the physics.
+
+- E6.2, THE CAPACITY THAT MAKES COMPILATION CORRECT MAKES IT UNECONOMIC
+  (2026-08-29; `reports/e6_2_compiled.json`). A macro compiled into ONE operator
+  the size of one library slot cannot reproduce the composition of three: C0
+  fails in 2/3 worlds, and the fit is converged (3k and 12k steps give identical
+  loss), so it is representational. Capacity fixes it -- at 4x every context class
+  passes, at 8x all five classes pass in all three worlds including unseen
+  positions and depths -- and simultaneously destroys the economics: the crossing
+  goes from ~200 uses at matched budget to far beyond it, against 22-54 realized.
+  A definitional macro pays after 7.4 uses; a compiled one never does. When an
+  intervention has a capacity knob, price the capacity in the same ledger as the
+  benefit, or the benefit will look free.
+
+- A SELF-REFERENTIAL RATE SATURATES AND STOPS BEING A MEASUREMENT (E6.2). E3's
+  `behavioural_rate` asks for the bits needed to stay within 10% of THE MODEL'S
+  OWN float error. As a model fits better that reference tightens toward zero, so
+  precision demand climbs: 5.22 -> 6.65 -> 10.00 -> 12.00 bits/scalar across a
+  capacity ladder, with 12.00 the sweep ceiling. The best model's "description
+  length" is then an artifact of its own accuracy, and the crossing computed from
+  it is unusable. We predicted the artifact from the 5.2 -> 6.7 -> 10.0 trend and
+  saturation confirmed it. A rate defined relative to the object being measured
+  is not comparable ACROSS objects; pair it with an absolute-tolerance rate
+  whenever a ladder is swept.
+
+- A NORMALIZER THAT VARIES WITH THE CONDITION BREAKS CROSS-CONDITION COMPARISON
+  (E6.2). Amendment 3 correctly replaced an output-relative tolerance with a
+  contribution-relative one -- but the fragment's own contribution is attenuated
+  by downstream operators, so the denominator fell from 0.0153 at depth 6 to
+  0.0078 at mean depth 8.9. The graded context classes are therefore not on a
+  common scale, which is the likely source of a non-monotone ladder row. The fix
+  is not to abandon contribution-relative normalization (the alternative let an
+  untrained operator pass) but to hold the normalizer's determinants fixed across
+  conditions, or to compare only WITHIN a condition. Check what else moves when
+  you change the denominator.
