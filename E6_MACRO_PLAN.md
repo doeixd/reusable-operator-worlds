@@ -564,3 +564,84 @@ crude linear read-off from 32 tasks, and if the decay is too shallow in the late
 observed window the projection will still clear the crossing. If B fails for that
 reason we will report it as an ESTIMATOR limitation and say so, rather than as
 evidence that prospective criteria cannot work.
+
+# Amendment 5 (2026-08-28, before any E6F code): rung E6F, nominate-then-gate, registered
+
+E6E returned NO IMPROVEMENT for the registered estimator, and a POST-HOC analysis
+found that the same trend statistic works when applied as a GATE on a nominated
+candidate (create 3/3 where creation is right, refuse 2/3 where refusal is
+right) and fails as the OBJECTIVE OF AN ARGMAX over ~150 candidates. That
+observation was not registered and is not a verdict. E6F registers it so it can
+become one, and repairs the generator confound that made E6E's world 0
+unscoreable.
+
+## The registered rule
+
+    NOMINATE   take the argmax of the RETROSPECTIVE net saving over every
+               contiguous L-gram of the observed corpus (a robust statistic over
+               a large field)
+    GATE       accept the nomination only if a TREND projection of its recurrence
+               clears the crossing: per-block rates over the observed window,
+               extrapolated forward and clipped at zero (a fragile statistic
+               applied to ONE candidate)
+
+The division of labour is the claim: rank with what you can estimate well, test
+with what you cannot. A gate that is also the ranker is a selection device for
+its own noise.
+
+## The corrected case-B generator
+
+E6E's `p(i) = max(0, 1 - i/72)` yielded ~36 planted instances against 64 in the
+flanking cases, so it varied DECAY and TOTAL RECURRENCE together; world 0's
+realized decay ratio came out at 1.00 and the motif lost the enumeration to a
+constant run. Registered replacement, chosen by computing its profile BEFORE
+freezing:
+
+    p(i) = min(1, max(0, 2 - i/32))
+
+    total planted 48.5   early 32.0   late 16.5   ratio 0.52   future 0.0
+    surviving at ~35% gauge: ~17   (E6E had ~10; case A has ~22)
+
+**Disclosed limitation, not a tuning failure:** total planted CANNOT reach case
+A's 64 while decaying to zero inside a 64-task observed window -- the two are
+arithmetically opposed. 48.5 is near the maximum for a schedule that both decays
+visibly and empties the future. Total planted is therefore reported as a
+COVARIATE beside every E6F cell rather than matched.
+
+## Per-world eligibility, the fix for E6E's silent failure
+
+A world's case B is ELIGIBLE only if its REALIZED within-observed decay ratio is
+`<= 0.7`. E6E world 0 realized 1.00 -- the manipulation did not take, and the
+cell was a second copy of the unscoreable limit case while being counted as a
+refusal failure. An ineligible cell is reported UNSCOREABLE, never negative.
+Realized ratios are printed per world whether or not they pass.
+
+## Controls, unchanged in role
+
+    A  continuing   must CREATE     paired positive; without it a rule that
+                                    refuses everything would look successful
+    B  decaying     must REFUSE     the discriminating case
+    C  sharp step   UNSCOREABLE     limit case, reported never counted
+
+## Decision rule
+
+**GATED CRITERION DEMONSTRATED** iff, over ELIGIBLE cells, the gated rule creates
+on A in >= 2 of 3 worlds AND refuses on B in >= 2 of 3 worlds, while the
+ungated retrospective rule creates on B in >= 2 of 3. All three clauses are
+required: the third is what makes the first two an improvement rather than a
+restatement.
+
+**NO IMPROVEMENT** if the gated and ungated rules behave alike on B.
+**UNSCOREABLE** if fewer than 2 worlds have an eligible case B.
+
+## Registered predictions
+
+Ours: GATED CRITERION DEMONSTRATED. A create 3/3; B refuse 3/3 given the repaired
+generator (E6E already refused 2/3 with the weaker one, and the failing cell is
+precisely the one the eligibility gate now excludes); ungated creates on B 3/3.
+
+We register one way this could fail that would NOT be the gate's fault: if the
+richer plant makes the motif dense enough early that the trend projection still
+clears the crossing, B would be created for an arithmetic reason rather than a
+conceptual one. In that case we report the projection's SENSITIVITY -- the decay
+ratio at which it flips -- rather than a bare negative.
