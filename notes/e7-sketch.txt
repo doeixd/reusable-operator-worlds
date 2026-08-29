@@ -1,0 +1,173 @@
+E7 SKETCH -- parameterized macros, and the inference problem E5 did not test
+Written 2026-08-29, after the E6 line closed. NOT a plan and NOT registered;
+a plan must be frozen before any code, as always.
+
+================================================================================
+1. THE CRITIQUE E6 MAKES OF ITSELF
+================================================================================
+
+H39's confirmed central lesson is that the useful abstraction is
+
+    A(alpha) + eps
+
+-- parameterized, made during learning, with cheap coordinates for novelty --
+and NOT a rigid `A`. That was established on tensors, sealed on seeds 700-729.
+
+The entire E6 line then tested `A`. A macro is a CONSTANT fragment: `M := A B C`
+is a fixed symbol sequence with no argument. Read in that light, E6's results
+stop looking like facts about macros and start looking like a rediscovery, in
+linguistic currency, of what H39 already established about tensors:
+
+    E6A  a rigid macro pays in description, but only ~3-7x its crossing
+    E6D  its creation cannot be timed from a retrospective code
+    E6.2 it cannot be compiled at matched budget at all
+
+We should not have expected otherwise. The object under test was the one the
+project's own confirmed result says is the wrong object.
+
+================================================================================
+2. THE NUMBER THAT MAKES THIS CONCRETE
+================================================================================
+
+E6 step 0 measured MOTIF SURVIVAL: the fraction of planted recurrences that
+produce the SAME learner gram.
+
+    world 0   7/32 = 22%
+    world 1  14/32 = 44%
+    world 2  13/32 = 41%
+    mean            ~36%
+
+We treated the missing ~64% as gauge noise that limited the rung. That reading is
+available but it is not the only one. Those are recurrences of the SAME
+COMPUTATION written as DIFFERENT SYMBOL SEQUENCES -- which is exactly what a
+parameterized macro should capture and a rigid one structurally cannot.
+
+    A rigid macro collects only exact repeats.
+    A parameterized macro `M(alpha)` should collect the family.
+
+QUANTITATIVE PREDICTION, to be registered before it is measured: a parameterized
+macro's effective use count is ~2-3x a rigid one's on the SAME corpus, because it
+collects the near-misses. E6A's realized 22-56 uses against a crossing of 7.44
+becomes a materially different economic picture at 60-150.
+
+It also attacks E6.2's capacity obstruction from the right side. A single
+composition needed ~4x a library slot to represent. But a FAMILY of related
+compositions may share a low-dimensional argument even when no individual member
+is representable at matched budget -- the family can be cheaper per member than
+any one member is alone.
+
+================================================================================
+3. THE FREE PRE-CHECK, WHICH DECIDES WHETHER TO OPEN THE LINE AT ALL
+================================================================================
+
+Before building anything: measure, on the EXISTING E6 corpora, whether the ~64%
+of non-matching recurrences form a LOW-DIMENSIONAL FAMILY in function space.
+
+    - take the planted sites whose learner gram is NOT the modal image
+    - compute each one's effective task-conditioned operator on a common probe
+      (E5's lesson: two functions can only be compared at the SAME inputs)
+    - ask whether those operators lie near a low-dimensional subspace, scored
+      LEAVE-ONE-OUT (V5's lesson: never fit and score on the same objects)
+
+This is arithmetic over cached routes. No new compute, no lifetimes.
+
+    structured   -> `M(alpha)` has a real economic case; open the rung
+    unstructured -> the argument channel buys nothing, `M(alpha)` collapses to
+                    `M`, and the line is closed before it is built
+
+This is the opportunity gate applied to a language question: measure that the
+opportunity EXISTS before building the machine to exploit it. It is the same
+discipline that should have preceded two dormancy designs and the B2 gate.
+
+================================================================================
+4. THE INFERENCE PROBLEM E5 DID NOT TEST
+================================================================================
+
+The thesis says adaptation is IDENTIFY-PRIMITIVE + INFER-ARGUMENT + SMALL PATCH.
+
+E5 asked for `q(p | D)` -- write the whole program -- and it failed on quality
+while search stayed cheap. But that is not the decomposition the thesis predicts.
+The narrower object is
+
+    q(alpha | D, p)
+
+given the program's structure, infer its argument. That is a far smaller
+inference problem, continuous rather than combinatorial, and it is the half the
+H39 line actually confirmed works. E5's negative does not touch it.
+
+If amortization pays anywhere in this substrate it should be here. And if it does
+NOT, that is a much more damaging result for the thesis than E5 was -- which is
+precisely why it is worth running. E5 tested a decomposition the thesis never
+claimed; this tests the one it does.
+
+Note the asymmetry to register in advance: `q(alpha | D, p)` is given the
+program. That is a real information advantage over E5's writer and must be
+disclosed as such -- the comparison to E5 is NOT apples to apples, and the rung
+should carry a control where `p` is given to the E5-style writer too.
+
+================================================================================
+5. TWO CHEAPER DIAGNOSTICS, BOTH FROM E6.2's LEFTOVERS
+================================================================================
+
+CLOSURE. E6.2 found that one operator at matched budget cannot represent three
+composed, with a converged fit -- so the function class is NOT CLOSED UNDER
+COMPOSITION at fixed capacity. The vocabulary can EXPRESS compositions it cannot
+INTERNALIZE. That is a structural bound on what primitive invention could mean
+here, and it does not depend on the coding scheme.
+
+There is a hint in the data: world 1 was the ONLY world that passed at matched
+budget, and its macro `(8,8,5)` contains a REPEATED operator. Test: does the
+effective rank / spectral profile of `P_c o P_b o P_a` predict matched-budget
+compilability across many fragments? If it does, we get a FUNCTIONAL criterion
+for which fragments are worth compiling -- a property of the function rather than
+of the accounting. Hours, no lifetimes. Feeds directly into section 3.
+
+ATTRACTOR COLLAPSE. At depth >= 8 all three worlds converge on a single
+per-library slot (2, 11, 7) and the inferred program stops describing the
+computation while the executor still solves the task. This was found incidentally
+and labelled a scope limit. It deserves its own rung: it marks where the PROGRAM
+abstraction fails even though the EXECUTOR does not, which bounds the whole
+export-branch story, and nothing currently measures it directly.
+
+================================================================================
+6. A DEFLATIONARY READING THAT BELONGS IN THE PAPER
+================================================================================
+
+The standard motivation for library learning is that libraries make search
+tractable. E5.1 killed that here: `C_find` is linear in program length and
+logarithmic in program count, and route optimization matched or beat the oracle
+in a 2.99M-program space. E6 then showed the description saving is small and the
+creation timing undecidable from the past.
+
+So in this substrate the value of the learned vocabulary is that it EXISTS and
+TRANSFERS, not that it makes anything cheaper. That is the honest summary and it
+should be stated rather than left implicit, because it is a real negative result
+about WHY one would build a library at all.
+
+================================================================================
+7. ORDERING
+================================================================================
+
+    (a) the free pre-check of section 3          -- decides whether to proceed
+    (b) the closure diagnostic of section 5      -- hours, feeds (a)'s reading
+    (c) parameterized macros `M(alpha)`          -- the main line
+    (d) `q(alpha | D, p)`                        -- the thesis's own adaptation claim
+    (e) attractor collapse                       -- bounds the program story
+    (f) interaction-net / graph-rewrite substrate -- review 82 places it after
+        macro invention, tested on branching, loops and reusable subgraphs
+
+(a) and (b) cost almost nothing and can reorder everything after them. Neither
+should be skipped on the grounds that the direction already looks right.
+
+================================================================================
+8. METHODOLOGICAL, CARRIED FORWARD
+================================================================================
+
+Five estimands or controls in the E6 line turned out unable to fail, each caught
+before compute: an algebraic crossing, a definitional substitutability test, two
+arithmetic refusal controls, and a tolerance that a random operator passed. That
+is past the point where a written rule is the right fix.
+
+PROPOSAL: the estimand analogue of `src/row/arm_provenance.py`. Require every
+registered estimand to ship with a NULL CONSTRUCTION under which it must return
+the negative, and assert it as a test. One mechanism would have caught all five.

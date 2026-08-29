@@ -3894,3 +3894,38 @@ clean. No headline verdict depends on the confounded comparison.
 extended with E6F and E6.2. Named for the BRANCH rather than the rung list so it
 does not need renaming again as rungs land -- the previous name had already gone
 stale twice. Earlier PROGRESS entries naming the old paths are left unedited.
+
+# Next-direction sketch recorded: notes/e7-sketch.txt (2026-08-29)
+
+Written after the E6 line closed. NOT a plan and NOT registered; a plan must be
+frozen before any code.
+
+The substantive point is a critique E6 makes of itself. H39's confirmed central
+lesson is that the useful abstraction is `A(alpha) + eps` -- PARAMETERIZED, with
+cheap coordinates for novelty -- and the entire E6 line tested `A`, a rigid
+constant fragment. Read that way, E6's three negatives (pays only ~3-7x its
+crossing, cannot be timed, cannot be compiled at matched budget) look less like
+facts about macros and more like a rediscovery, in linguistic currency, of what
+H39 established about tensors.
+
+The number that makes it concrete is already measured: E6 step 0 found only ~36%
+of planted recurrences produce the SAME learner gram. We read the missing ~64% as
+gauge noise limiting the rung. They are also recurrences of the same COMPUTATION
+written as DIFFERENT SYMBOL SEQUENCES -- exactly what a parameterized macro
+should collect and a rigid one structurally cannot.
+
+The sketch's first item is a FREE PRE-CHECK over cached routes: do those
+non-matching recurrences form a low-dimensional family in function space, scored
+leave-one-out on a common probe? If yes, `M(alpha)` has an economic case; if no,
+the argument channel buys nothing and the line closes before it is built. That is
+the opportunity gate applied to a language question.
+
+Also recorded there: `q(alpha | D, p)` as the inference problem E5 never tested
+(the thesis claims identify-primitive + infer-argument, E5 asked for whole-program
+writing), with the disclosure that being given `p` is a real information
+advantage requiring its own control; the closure obstruction from E6.2 and the
+world-1 repeated-operator hint; the attractor collapse as its own rung; a
+deflationary reading of what the library is for that belongs in the paper; and a
+proposal for an estimand-level falsifiability harness, the analogue of
+`arm_provenance`, which would have caught all five of the E6 line's
+unable-to-fail estimands.
