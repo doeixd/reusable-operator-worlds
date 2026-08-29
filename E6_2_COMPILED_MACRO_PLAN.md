@@ -185,3 +185,45 @@ or macros over macros. Any change to a sealed verdict. The interaction-net /
 graph-rewrite substrate, which review 82 places after macro invention and which
 would be tested on branching, recursion and loops rather than on contiguous
 fragments.
+
+# Amendment 1 (2026-08-29, before any E6.2 code): a units error in this plan's own crossing
+
+Found while implementing E6.2b. The frozen crossing reads
+
+    H*_compiled = [ D*(P_M) + N D log2((K+1)/K) ] / [ (L-1) log2(K+1) + s_exec ]
+
+The numerator is in BITS. The denominator adds `(L-1) log2(K+1)`, which is bits,
+to `s_exec`, which is operator applications. **They cannot be summed without an
+exchange rate between bits and computation**, and no such rate is registered
+anywhere in this project. Left as written, whatever value was chosen for that
+rate would silently carry the verdict -- the failure mode registered at
+`E6_MACRO_PLAN.md` Amendment 2 and in `AGENTS.md` as "never let a free
+coefficient carry a verdict".
+
+## Registered correction
+
+**The crossing is evaluated in DESCRIPTION BITS ALONE**, i.e. with `s_exec = 0`:
+
+    H*_compiled = [ D*(P_M) + N D log2((K+1)/K) ] / [ (L-1) log2(K+1) ]
+
+This is dimensionally clean and directly comparable to the definitional macro's
+`H* = 7.44`, since the two differ only by `D*(P_M)` replacing `L log2 K` in the
+numerator. `COMPILATION PAYS` is decided on this quantity.
+
+**The execution saving is reported SEPARATELY, in its own units** -- operator
+applications per use, three becoming one -- and is never added to a bit count.
+Whether a project should trade bits for operations is a real question and needs
+its own registered exchange rate; it is not settled here by an implicit one.
+
+This is the V5.1 separate-currencies rule applied to this plan's own arithmetic:
+`V_desc`, `V_find` and `V_exec` are measured independently and combined only
+under a rate frozen in advance.
+
+## Consequence for the registered prediction
+
+The prediction is unchanged in direction and becomes sharper: with `s_exec`
+removed from the denominator, the compiled crossing is `H* = 7.44` scaled by
+`D*(P_M) / (L log2 K)` = `D*(P_M) / 10.75`. A `D*(P_M)` of even 200 bits puts the
+crossing near 138 uses against E6A's realized 22-56, so **COMPILATION DOES NOT
+PAY** is predicted more firmly than before, and the semantic verdict is where the
+interest lies.
