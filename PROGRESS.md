@@ -3813,3 +3813,12 @@ each world on its realized ratio.
 E6 rung status: A PAYS 3/3, B PREDICTED SAVING CONFIRMED 3/3, D RETROSPECTIVE
 ECONOMICS INSUFFICIENT, E NO IMPROVEMENT (with a working gate-mode successor
 identified). C retired to E6.2 as an identity.
+
+# Session synthesis extended and renamed (2026-08-28)
+
+`E5_E6A_SESSION_REPORT.md` is renamed `E5_E6E_SESSION_REPORT.md` and extended to
+cover E6B, E6D and E6E. The earlier PROGRESS entry naming the old path is left
+unedited: it was true when written, and the lab record is not rewritten to match
+later state. The published copy is updated in place at the same URL,
+https://claude.ai/code/artifact/78f6807c-9206-41ba-913a-0e08cd70fba6 -- six
+verdict cards, fifteen corrections-ledger entries.

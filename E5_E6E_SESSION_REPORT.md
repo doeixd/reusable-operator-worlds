@@ -1,5 +1,7 @@
 # Writer, Search, Macro — session record, 2026-08-27/28
 
+Covers E5, E5.1, E6 step 0, E6A, E6B, E6D and E6E.
+
 Three rungs of the export branch, each run against a frozen plan: whether the
 learned program language can be WRITTEN, how its search actually SCALES, and
 whether it can GROW new vocabulary.
@@ -206,6 +208,78 @@ setting UNINTERPRETABLE had the forecast failed. Extended to depths 7-10 the sam
 constant-rate extrapolation overestimates badly — which is how the deceleration
 rule was earned.
 
+# E6B — abstraction causally reduces synthesis cost
+
+E5.1 fitted `C_hat(D) = 2.8287 D - 1.1719` across a depth SWEEP, where depth and
+task distribution move together. E6B holds the task fixed and shortens only the
+program. Three arms paired per task: plain (12 slots, depth 6), macro-bearing
+(13 slots, depth 4), and a WIDTH CONTROL that adds an unused 13th symbol without
+shortening anything.
+
+    pooled over 3 worlds x 8 paired tasks      vs predicted 5.66 s
+      dC_macro   +4.41 s  (world SE 0.84)          x0.78
+      dC_width   +1.23 s  (world SE 0.09)          x0.22
+      dC_length  +5.64 s  (world SE 0.75)          x1.00 +/- 0.13
+
+The raw effect alone reads x0.78 -- equally consistent with a slightly wrong law
+or with two partly cancelling effects. The width control separates them and the
+residual matches a law fitted on entirely different data. **This is the first E6
+result that is not an identity:** forecast out of sample, no free coefficient,
+and it could have failed. Quality gate passed 3/3 (pooled -0.013 log), so the
+macro arm is not cheaper by being worse.
+
+One registered prediction failed usefully: we assumed the alphabet-width overhead
+would be under 1 s. It is 1.23 s with a world SE of 0.09 -- neither negligible
+nor noisy.
+
+# E6D — the right macro, the wrong moment
+
+Four controls. Two -- below-crossing and sham alias -- are arithmetic
+consequences of the decision rule's sign, and were relabelled IMPLEMENTATION
+CHECKS before running and excluded from the verdict (Amendment 3). Both pass.
+
+- **Wrong grouping: PASSES 3/3.** The true macro beats nested prefix and suffix,
+  both permutations, the non-adjacent pair and three random trigrams, in every
+  world. The shorter and MORE FREQUENT `A B` loses, because the extra symbol
+  saved per use outweighs its higher count. This refutes our frozen prediction
+  that wrong-grouping was the likeliest failure.
+- **Accidental pattern: FAILS 3/3.** On a pattern that stops recurring the rule
+  creates and loses 40-55 bits; on one that continues it creates and gains 19-130
+  bits. Not miscalibrated -- specifically blind to NON-CONTINUATION.
+
+> `H_eff` counts uses that have happened. The decision needs uses that will.
+
+Structure identification and creation TIMING are different problems, and one
+retrospective accounting solves only the first.
+
+# E6E — the criterion works; the search over it does not
+
+Registered verdict: **NO IMPROVEMENT.** The prospective estimator as frozen -- a
+late-window RATE projected forward -- behaves identically to the retrospective
+rule, because a decaying pattern still has a positive late rate. Amendment 4
+registered that failure mode in advance.
+
+Discovery, reported separately: the open enumeration over 113-165 candidates
+recovered the motif's LEARNER IMAGE 3/3 on case A, 2/3 on case B, 3/3 on case C.
+
+The informative part is POST-HOC and labelled as such. A TREND estimator failed
+0/3 as the objective of an argmax over ~150 candidates -- it picked `(8,5,4)`
+over the correctly discovered `(0,8,5)`, and `(7,7,7)` over `(6,10,7)`. Applied
+as a GATE on a candidate nominated by the retrospective rule:
+
+    case A (must CREATE)  3/3        case B (must REFUSE)  2/3
+
+**SEPARATE NOMINATION FROM GATING.** A noisy estimator used to RANK a large field
+becomes a selection device for its own noise; the same estimator used to TEST one
+nominee is sound. The hazard was flagged before launch. The gate result is
+reported as motivating a successor design, never as a verdict, because gate mode
+was not registered.
+
+Disclosed: case B's decay schedule also cut total planted instances (~36 against
+64), so it moved two knobs; realized decay ratios were 1.00 / 0.62 / 0.43 and the
+manipulation silently failed in world 0, which degenerated into a second copy of
+the unscoreable limit case.
+
 # Where this leaves the branch
 
 The five layers of the terminology contract remain cleanly separated.
@@ -214,10 +288,17 @@ banked and sealed. Search-based synthesis is now correctly counted as sealed too
 Program WRITING is not demonstrated. Macro invention has an established
 economics but an unresolved semantics.
 
-**E6C is next:** whether a macro remains substitutable for its expansion in
-unseen contexts — new prefixes, new suffixes, new neighbours, novel positions —
-which is what separates a reusable abstraction from a cached pipeline. It is
-pre-registered to run at depths 4-6 ONLY, and declared UNSCOREABLE at depth >= 8,
-where every competing grouping of an attractor run is also an attractor run.
-Fixing that depth in advance means the choice cannot later look like it was made
-to obtain a result.
+The E6 line is complete: four rungs run, one retired. It establishes that a
+macro PAYS under honest accounting, CAUSALLY REDUCES synthesis cost by the amount
+forecast from an independent experiment's law, and is correctly IDENTIFIED out of
+an open field of rivals -- and that it cannot be correctly TIMED, because a code
+over past programs counts uses that have happened while the decision needs uses
+that will.
+
+Two things stand open, both registered rather than left implicit. The GATE-MODE
+successor to E6E, which needs its own registration before it can be a verdict
+rather than a post-hoc observation. And E6.2, the COMPILED macro, where E6C's
+retired question becomes answerable: if a distilled operator stands in for its
+expansion in contexts it never saw, that is where PRIMITIVE INVENTION in the
+strong semantic sense could be licensed, along with a fourth currency -- one
+compiled call may accumulate less error than three approximate ones.
