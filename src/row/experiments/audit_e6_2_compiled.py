@@ -52,11 +52,12 @@ MACRO_LEN = 3
 CORPUS = 128
 SPLIT = 64
 FIT_STATES = 2048
-FIT_STEPS = 3000
+FIT_STEPS = 6000            # converged; 12k gives the same loss
 FIT_LR = 3e-3
 PROBES = 256
 PROGRAMS_PER_CLASS = 32
-TOLERANCE = 0.15            # E2's log tolerance
+TOLERANCE = 0.15            # E2 tolerance, on the CONTRIBUTION-relative error
+RANK_MULTIPLES = (1, 2, 4, 8)   # Amendment 4 capacity ladder; x1 is the primary
 CACHE = Path("reports/e6_2_cache")
 E6A_CACHE = Path("reports/e6a_cache")
 
@@ -64,7 +65,8 @@ E6A_CACHE = Path("reports/e6a_cache")
 def fingerprint() -> str:
     payload = {"depth": DEPTH, "L": MACRO_LEN, "fit_states": FIT_STATES,
                "fit_steps": FIT_STEPS, "fit_lr": FIT_LR, "probes": PROBES,
-               "per_class": PROGRAMS_PER_CLASS, "tolerance": TOLERANCE}
+               "per_class": PROGRAMS_PER_CLASS, "tolerance": TOLERANCE,
+               "ranks": list(RANK_MULTIPLES)}
     return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:16]
 
 
@@ -273,126 +275,149 @@ def main() -> None:
         alpha = config.discrete_model.operator_alpha_init
         activation = config.discrete_model.operator_activation
 
-        trained, fitinfo = distil(library, macro, states, d, rank, alpha,
-                                  activation, seed=4200 + world)
-        fatal(fitinfo["last_loss"] < fitinfo["first_loss"],
-              "distillation loss did not fall")
-        untrained = LearnedOperator(d, rank, alpha, 9900 + world,
-                                    learnable_alpha=True, activation=activation)
+        entry = {"macro": list(macro), "seen_positions": positions, "ranks": {}}
+        fit_mean_all = states.mean(dim=0)
 
-        entry = {"macro": list(macro), "fit": fitinfo,
-                 "seen_positions": positions,
-                 "matched_budget": {"P_M_scalars": operator_scalars(trained),
-                                    "library_slot_scalars": operator_scalars(proto)},
-                 "classes": {}}
-        fatal(operator_scalars(trained) == operator_scalars(proto),
-              "P_M is not matched to a library slot")
+        for mult in RANK_MULTIPLES:
+            trained, fitinfo = distil(library, macro, states, d, rank * mult, alpha,
+                                      activation, seed=4200 + world)
+            fatal(fitinfo["last_loss"] < fitinfo["first_loss"],
+                  "distillation loss did not fall")
+            untrained = LearnedOperator(d, rank * mult, alpha, 9900 + world,
+                                        learnable_alpha=True, activation=activation)
+            matched = operator_scalars(trained) == operator_scalars(proto)
+            if mult == 1:
+                fatal(matched, "x1 P_M is not matched to a library slot")
+            rank_entry = {"rank": rank * mult, "multiple": mult, "fit": fitinfo,
+                          "scalars": operator_scalars(trained),
+                          "library_slot_scalars": operator_scalars(proto),
+                          "matched_budget": bool(matched),
+                          "capacity_note": ("primary: matched budget" if mult == 1 else
+                                            f"bought with capacity: {mult}x a library slot"),
+                          "classes": {}}
+            entry["ranks"][str(mult)] = rank_entry
 
-        fit_mean = states.mean(dim=0)
-        fit_std = states.std(dim=0).mean()
+            fit_mean = fit_mean_all
 
-        for cls in ("C0", "C1", "C2", "C3", "C4"):
-            progs = make_programs(rng, slots, macro, cls, positions, DEPTH, neighbours)
-            if len(progs) < PROGRAMS_PER_CLASS:
-                entry["classes"][cls] = {
-                    "constructible": False, "programs": len(progs),
-                    "reason": "no admissible context exists for this class",
-                    "within_tolerance": None, "untrained_fails": None}
-                print(f"[w{world} {cls}] UNCONSTRUCTIBLE "
-                      f"({len(progs)}/{PROGRAMS_PER_CLASS} programs) -- excluded",
-                      flush=True)
-                continue
-            gaps, wrong, shifts = [], [], []
-            for program, j in progs:
-                x = torch.tensor(rng.normal(size=(PROBES, d)), dtype=torch.float32)
-                ref = run_program(library, x, program)
-                got = run_program(library, x, program, macro, trained)
-                bad = run_program(library, x, program, macro, untrained)
-                null = run_program(library, x, program, macro, lambda z: z)
-                gaps.append(contribution_relative(got, ref, null))
-                wrong.append(contribution_relative(bad, ref, null))
-                seen = states_before(library, x, program, j)
-                shifts.append(float(torch.norm(seen.mean(dim=0) - fit_mean) /
-                                    (torch.norm(fit_mean) + 1e-12)))
-            g = float(np.exp(np.mean(np.log(np.maximum(gaps, 1e-12)))))
-            w = float(np.exp(np.mean(np.log(np.maximum(wrong, 1e-12)))))
-            entry["classes"][cls] = {
-                "constructible": True,
-                "programs": len(progs), "substitution_nmse": g,
-                "untrained_nmse": w, "input_shift": float(np.mean(shifts)),
-                "within_tolerance": bool(g <= TOLERANCE),
-                "untrained_fails": bool(w > TOLERANCE)}
-            r = entry["classes"][cls]
-            print(f"[w{world} {cls}] substitution NMSE {g:.5f} "
-                  f"({'within' if r['within_tolerance'] else 'OUTSIDE'} {TOLERANCE}) | "
-                  f"untrained {w:.4f} ({'fails' if r['untrained_fails'] else 'PASSES?!'}) | "
-                  f"input shift {r['input_shift']:.3f}", flush=True)
+            for cls in ("C0", "C1", "C2", "C3", "C4"):
+                progs = make_programs(rng, slots, macro, cls, positions, DEPTH, neighbours)
+                if len(progs) < PROGRAMS_PER_CLASS:
+                    rank_entry["classes"][cls] = {
+                        "constructible": False, "programs": len(progs),
+                        "reason": "no admissible context exists for this class",
+                        "within_tolerance": None, "untrained_fails": None}
+                    print(f"[w{world} x{mult} {cls}] UNCONSTRUCTIBLE "
+                          f"({len(progs)}/{PROGRAMS_PER_CLASS} programs) -- excluded",
+                          flush=True)
+                    continue
+                gaps, wrong, shifts = [], [], []
+                for program, j in progs:
+                    x = torch.tensor(rng.normal(size=(PROBES, d)), dtype=torch.float32)
+                    ref = run_program(library, x, program)
+                    got = run_program(library, x, program, macro, trained)
+                    bad = run_program(library, x, program, macro, untrained)
+                    null = run_program(library, x, program, macro, lambda z: z)
+                    gaps.append(contribution_relative(got, ref, null))
+                    wrong.append(contribution_relative(bad, ref, null))
+                    seen = states_before(library, x, program, j)
+                    shifts.append(float(torch.norm(seen.mean(dim=0) - fit_mean) /
+                                        (torch.norm(fit_mean) + 1e-12)))
+                g = float(np.exp(np.mean(np.log(np.maximum(gaps, 1e-12)))))
+                w = float(np.exp(np.mean(np.log(np.maximum(wrong, 1e-12)))))
+                rank_entry["classes"][cls] = {
+                    "constructible": True,
+                    "programs": len(progs), "substitution_nmse": g,
+                    "untrained_nmse": w, "input_shift": float(np.mean(shifts)),
+                    "within_tolerance": bool(g <= TOLERANCE),
+                    "untrained_fails": bool(w > TOLERANCE)}
+                r = rank_entry["classes"][cls]
+                print(f"[w{world} x{mult} {cls}] substitution NMSE {g:.5f} "
+                      f"({'within' if r['within_tolerance'] else 'OUTSIDE'} {TOLERANCE}) | "
+                      f"untrained {w:.4f} ({'fails' if r['untrained_fails'] else 'PASSES?!'}) | "
+                      f"input shift {r['input_shift']:.3f}", flush=True)
 
-        # --- economics: D*(P_M) measured behaviourally, bits only (Amendment 1)
-        probe_progs = make_programs(rng, slots, macro, "C0", positions, DEPTH, neighbours)
-        x = torch.tensor(rng.normal(size=(PROBES, d)), dtype=torch.float32)
-        refs = [run_program(library, x, p) for p, _ in probe_progs]
-        nulls = [run_program(library, x, p, macro, lambda z: z) for p, _ in probe_progs]
-        base = float(np.mean([contribution_relative(
-            run_program(library, x, p, macro, trained), r, n)
-            for (p, _), r, n in zip(probe_progs, refs, nulls)]))
-
-        def evaluate(bits: int) -> float:
-            q = quantize_operator(trained, bits)
-            got = float(np.mean([contribution_relative(
-                run_program(library, x, p, macro, q), r, n)
+            # --- economics: D*(P_M) measured behaviourally, bits only (Amendment 1)
+            probe_progs = make_programs(rng, slots, macro, "C0", positions, DEPTH, neighbours)
+            x = torch.tensor(rng.normal(size=(PROBES, d)), dtype=torch.float32)
+            refs = [run_program(library, x, p) for p, _ in probe_progs]
+            nulls = [run_program(library, x, p, macro, lambda z: z) for p, _ in probe_progs]
+            base = float(np.mean([contribution_relative(
+                run_program(library, x, p, macro, trained), r, n)
                 for (p, _), r, n in zip(probe_progs, refs, nulls)]))
-            return got / max(base, 1e-12)
 
-        rate = behavioural_rate(evaluate)
-        d_star = rate["bits_per_scalar"] * operator_scalars(trained)
-        a, b = math.log2(slots), math.log2(slots + 1)
-        crossing = (d_star + SPLIT * DEPTH * (b - a)) / ((MACRO_LEN - 1) * b)
-        realized = sum(substitute(r, macro)[1] for r in observed)
-        entry["economics"] = {
-            "D_star_bits_per_scalar": rate["bits_per_scalar"],
-            "D_star_bits": d_star, "saturated": rate["saturated"],
-            "definitional_crossing": predicted_crossing(MACRO_LEN, DEPTH, SPLIT, slots),
-            "compiled_crossing": crossing,
-            "realized_uses": realized,
-            "pays": bool(realized >= crossing),
-            "execution_saving_per_use_ops": MACRO_LEN - 1,
-            "units_note": "crossing in description bits only; execution saving "
-                          "reported separately and never summed with bits"}
-        e = entry["economics"]
-        print(f"      economics: D*(P_M) {d_star:.0f} bits ({rate['bits_per_scalar']:.2f}"
-              f"/scalar over {operator_scalars(trained)}) | crossing {crossing:.1f} uses "
-              f"vs definitional {e['definitional_crossing']:.1f} | realized {realized} -> "
-              f"{'PAYS' if e['pays'] else 'DOES NOT PAY'}", flush=True)
+            def evaluate(bits: int) -> float:
+                q = quantize_operator(trained, bits)
+                got = float(np.mean([contribution_relative(
+                    run_program(library, x, p, macro, q), r, n)
+                    for (p, _), r, n in zip(probe_progs, refs, nulls)]))
+                return got / max(base, 1e-12)
+
+            rate = behavioural_rate(evaluate)
+            d_star = rate["bits_per_scalar"] * operator_scalars(trained)
+            a, b = math.log2(slots), math.log2(slots + 1)
+            crossing = (d_star + SPLIT * DEPTH * (b - a)) / ((MACRO_LEN - 1) * b)
+            realized = sum(substitute(r, macro)[1] for r in observed)
+            rank_entry["economics"] = {
+                "D_star_bits_per_scalar": rate["bits_per_scalar"],
+                "D_star_bits": d_star, "saturated": rate["saturated"],
+                "definitional_crossing": predicted_crossing(MACRO_LEN, DEPTH, SPLIT, slots),
+                "compiled_crossing": crossing,
+                "realized_uses": realized,
+                "pays": bool(realized >= crossing),
+                "execution_saving_per_use_ops": MACRO_LEN - 1,
+                "units_note": "crossing in description bits only; execution saving "
+                              "reported separately and never summed with bits"}
+            e = rank_entry["economics"]
+            print(f"        x{mult} economics: D*(P_M) {d_star:.0f} bits ({rate['bits_per_scalar']:.2f}"
+                  f"/scalar over {operator_scalars(trained)}) | crossing {crossing:.1f} uses "
+                  f"vs definitional {e['definitional_crossing']:.1f} | realized {realized} -> "
+                  f"{'PAYS' if e['pays'] else 'DOES NOT PAY'}", flush=True)
         out["worlds"][str(world)] = entry
         write(out, args.output)
 
-    def passes(cls):
+    def passes(cls, mult=1):
         return sum(1 for w in WORLDS
-                   if out["worlds"][str(w)]["classes"][cls].get("within_tolerance") is True)
+                   if out["worlds"][str(w)]["ranks"][str(mult)]["classes"][cls]
+                   .get("within_tolerance") is True)
 
     c0 = passes("C0")
     control = sum(1 for w in WORLDS
-                  if all(out["worlds"][str(w)]["classes"][c].get("untrained_fails") is True
+                  if all(out["worlds"][str(w)]["ranks"]["1"]["classes"][c]
+                         .get("untrained_fails") is True
                          for c in ("C0", "C1", "C2", "C3", "C4")
-                         if out["worlds"][str(w)]["classes"][c].get("constructible")))
-    if c0 < 2 or control < 2:
-        verdict = "UNSCOREABLE (non-vacuity failed)"
+                         if out["worlds"][str(w)]["ranks"]["1"]["classes"][c]
+                         .get("constructible")))
+    if control < 2:
+        verdict = "UNSCOREABLE (untrained control did not fail)"
+    elif c0 < 2:
+        # Amendment 4: measured as a CAPACITY limit, so this is a substantive
+        # negative rather than a blocked rung.
+        verdict = "COMPILATION FAILS AT MATCHED BUDGET"
     elif passes("C3") >= 2 and passes("C2") >= 2 and passes("C1") >= 2:
         verdict = "COMPILATION HOLDS"
     elif passes("C1") >= 2:
         verdict = "COMPILATION IS CONTEXT-BOUND"
     else:
         verdict = "COMPILATION FAILS"
-    pays = sum(1 for w in WORLDS if out["worlds"][str(w)]["economics"]["pays"])
-    out["verdict"] = {"per_class": {c: passes(c) for c in ("C0", "C1", "C2", "C3", "C4")},
+    pays = sum(1 for w in WORLDS
+               if out["worlds"][str(w)]["ranks"]["1"]["economics"]["pays"])
+    ladder = {str(mlt): {c: passes(c, mlt) for c in ("C0", "C1", "C2", "C3", "C4")}
+              for mlt in RANK_MULTIPLES}
+    out["verdict"] = {"per_class_matched_budget":
+                          {c: passes(c) for c in ("C0", "C1", "C2", "C3", "C4")},
+                      "capacity_ladder": ladder,
+                      "ladder_note": "any pass above x1 is BOUGHT WITH CAPACITY",
                       "untrained_control_worlds": control,
                       "semantic": verdict,
                       "economics": "COMPILATION PAYS" if pays >= 2 else "COMPILATION DOES NOT PAY",
                       "economics_worlds": pays}
     write(out, args.output)
-    print("\nper class within tolerance: " +
-          "  ".join(f"{c} {passes(c)}/3" for c in ("C0", "C1", "C2", "C3", "C4")))
+    print(chr(10) + "capacity ladder (worlds within tolerance, 3 = all):")
+    for mlt in RANK_MULTIPLES:
+        tag = "matched budget" if mlt == 1 else f"x{mlt} -- bought with capacity"
+        print(f"  x{mlt} ({tag}): " +
+              "  ".join(f"{c} {passes(c, mlt)}/3"
+                        for c in ("C0", "C1", "C2", "C3", "C4")))
     print(f"untrained control fails everywhere in {control}/3 worlds")
     print(f"E6.2 semantic: {verdict}")
     print(f"E6.2 economics: {out['verdict']['economics']} ({pays}/3 worlds)")
