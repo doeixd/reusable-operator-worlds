@@ -44,7 +44,7 @@ FROZEN = {
     "H50_REORGANIZATION_PLAN.md": "0b1b5e9",
     "E5_SYNTHESIZER_PLAN.md": "72a4ae6",
     "E5_1_SEARCH_SCALING_PLAN.md": "8e66828",
-    "E6_MACRO_PLAN.md": "b515c0b",
+    "E6_MACRO_PLAN.md": "ab81b01",
     "EXPORT_CONFIRMATION_PLAN.md": "4b1f8cd",
     "E3_PROGRAM_ECONOMY_PLAN.md": "97f2413",
     "E8_LENGTH_PLAN.md": "473d34b",
