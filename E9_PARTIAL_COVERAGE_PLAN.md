@@ -264,3 +264,69 @@ of the generator -- never any arm's performance.
 If the gate still fails at `delta = 2.0`, the honest reading is that this
 perturbation cannot create partial coverage in this substrate, and E9 is reported
 as UNSCOREABLE rather than pushed to larger deltas until something moves.
+
+# Amendment 3 (2026-08-30, before any E9 verdict): no fitted arm can be the ceiling
+
+Found in the dry run. This is the THIRD ceiling in this line to fail, and the
+three failures share one cause, so the fix is structural rather than another
+substitution.
+
+## The measurement
+
+Amendment 1 replaced the degenerate generator-ceiling with "route + slot 11 fully
+free (U, V, b), fit on support". The dry run shows it is WORSE than route-only:
+
+    delta = 0     P 0.01737   CEILING 0.02434   gap -0.34
+    delta_V = 2   P 0.03577   CEILING 0.05082   gap -0.35
+
+## The cause, and why it is not fixable by choosing a different arm
+
+Targets are NOISELESS and support is 128 examples. Any arm with more free
+parameters fits that support better and generalizes worse. E8D's library
+fine-tuning failed this way (~10x worse than route inference); Amendment 1's
+free operator fails the same way. **In this regime a fitted arm cannot be an
+upper bound**, because capacity buys overfitting before it buys reach.
+
+## Registered correction: the denominator becomes a REFERENCE, not an arm
+
+The estimand is redefined as RECOVERY OF DEGRADATION. The perturbation does a
+measured amount of damage, and the question is how much of it each channel
+repairs:
+
+    degradation   = log L(P at delta) - log L(P at delta = 0)
+    recovery(X)   = [ log L(P at delta) - log L(X at delta) ] / degradation
+
+Both endpoints are MEASURED performances of the same arm, so nothing is fitted
+into the denominator and nothing can overfit into it. `recovery = 1` means the
+channel fully repairs what the perturbation broke; `recovery = 0` means it
+repairs nothing. It is undefined at `delta = 0` by construction, where the
+control column reports raw values only.
+
+This also states the question more directly than the ceiling ever did: novelty
+was INTRODUCED by a known amount, and the thesis says `p + alpha + eps` should
+absorb it.
+
+## What is retained
+
+`CEILING` is kept and REPORTED as a diagnostic, because "a freely fitted operator
+generalizes worse than a frozen library plus a route" is itself a result about
+this regime -- it is the E8D finding reproduced under a different construction.
+It is no longer a denominator.
+
+The registered gate is restated in the new currency: `degradation >= 0.5` at the
+largest `delta` in >= 2 of 3 worlds, or the rung is UNSCOREABLE. This is the same
+requirement as before -- the perturbation must actually break something -- with
+the damage measured against the unperturbed control instead of against a fitted
+arm.
+
+The decision thresholds carry over unchanged in form, now on `recovery`:
+DECOMPOSITION ADEQUATE iff `recovery(P+A+E) >= 0.8` in both directions, and so
+on.
+
+## Note for the successor
+
+THREE ceilings failed here: the generating function (exactly zero error, so the
+share was identically zero), library fine-tuning, and a freely fitted operator
+(both overfit). When targets are noiseless and support is small, define
+improvement against a MEASURED REFERENCE POINT -- an unperturbed control, an
+earlier checkpoint -- and never against something you fit.

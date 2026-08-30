@@ -55,7 +55,7 @@ PROGRAMS = 12
 K_ARGS = 16                     # H39's confirmed argument dimension
 PSLOT = 11                      # H39 parameterizes the last slot
 PATCH_RANK = 2
-DELTAS = (0.0, 0.15, 0.3, 0.5)
+DELTAS = (0.0, 0.5, 1.0, 2.0)   # Amendment 2: sized so the gate can fire
 DIRECTIONS = ("U", "V")
 CACHE = Path("reports/e9_cache")
 
@@ -250,17 +250,24 @@ def main() -> None:
         rmats = np.stack([m / max(np.linalg.norm(m, ord=2), 1e-12) for m in rmats])
         rand_matrices = torch.tensor(rmats, dtype=torch.float32)
 
+        # Amendment 2: the perturbed primitive is chosen FIRST and every held-out
+        # program must contain it. Drawing programs freely and then perturbing
+        # the most-used primitive left most programs untouched and halved the
+        # realized manipulation.
         prng = np.random.default_rng(np.random.SeedSequence([1202, world]))
         trained = {tuple(t.program.primitive_ids) for t in cell["world"].tasks}
+        target_primitive = int(prng.integers(0, config.world.teacher_primitives))
         programs = []
-        while len(programs) < PROGRAMS:
+        guard = 0
+        while len(programs) < PROGRAMS and guard < 20000:
+            guard += 1
             cand = tuple(int(v) for v in prng.integers(0, config.world.teacher_primitives, DEPTH))
-            if cand in trained or cand in programs:
+            if target_primitive not in cand or cand in trained or cand in programs:
                 continue
             programs.append(cand)
-        # perturb a primitive the held-out programs actually use
-        used = [p for prog in programs for p in prog]
-        target_primitive = max(set(used), key=used.count)
+        fatal(len(programs) == PROGRAMS,
+              f"world {world}: only {len(programs)} programs contain primitive "
+              f"{target_primitive}")
 
         entry = {"programs": [list(p) for p in programs],
                  "perturbed_primitive": target_primitive, "cells": {}}
