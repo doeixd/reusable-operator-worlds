@@ -1,0 +1,24 @@
+prereg check OK: 34 frozen files unchanged; all STATUS-cited paths exist
+C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_e9_partial_coverage.py:211: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:823.)
+  "alpha_norm": (float(torch.norm(pslot.alpha)) if pslot is not None
+[w0 dU=0.0] shift 0.0000 | P 0.00720 | degradation n/a | recovery P+A n/a A-RAND n/a P+A+E n/a CEIL n/a | |a| 4.430 |e| 0.268
+[w0 dU=0.5] shift 0.0033 | P 0.01009 | degradation +0.34 | recovery P+A -0.01 A-RAND -0.11 P+A+E +0.40 CEIL +0.72 | |a| 5.497 |e| 0.346
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_e9_partial_coverage.py", line 364, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_e9_partial_coverage.py", line 309, in main
+    res = cached(tag, cellwise)
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_e9_partial_coverage.py", line 129, in cached
+    tmp.write_text(json.dumps({"protocol": stamp, "value": value}), encoding="utf-8")
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Patrick\AppData\Local\Programs\Python\Python314\Lib\pathlib\__init__.py", line 814, in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Patrick\AppData\Local\Programs\Python\Python314\Lib\pathlib\__init__.py", line 776, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'reports\\e9_cache\\w0_U_1p0_0.json.tmp'

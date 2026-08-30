@@ -330,3 +330,59 @@ share was identically zero), library fine-tuning, and a freely fitted operator
 (both overfit). When targets are noiseless and support is small, define
 improvement against a MEASURED REFERENCE POINT -- an unperturbed control, an
 earlier checkpoint -- and never against something you fit.
+
+# Amendment 4 (2026-08-30, run KILLED after two cells): the argument channel was on the wrong slot
+
+Found by disbelieving a positive control that returned nothing. The run was
+stopped, its cache deleted, and no number from it is reported.
+
+## The defect
+
+`delta_U` is registered as a perturbation "within span{U_k} -- alpha can express
+it exactly". The implementation perturbed TEACHER PRIMITIVE `target_primitive`
+and parameterized LEARNER SLOT 11. Those are different index spaces, and the
+E0.1 assignment says they disagree in 2 of 3 worlds:
+
+    world 0   teacher primitive 4  ->  learner slot 3     alpha was on slot 11
+    world 1   teacher primitive 3  ->  learner slot 11    correct by luck
+    world 2   teacher primitive 0  ->  learner slot 6     alpha was on slot 11
+
+So in two worlds the argument channel was attached to an operator unrelated to
+the perturbation, and `delta_U` was not in its span at all. The symptom was
+visible immediately: at `delta_U = 0.5`, `recovery(P+A) = -0.01` -- the positive
+control recovered NOTHING -- while the patch recovered 0.40 and a free operator
+0.72.
+
+This is `AGENTS.md`'s oldest recurring error: **learner slot indices and teacher
+primitive indices live in different spaces**, and any route-agreement or
+correspondence claim must map through the functional matching. It cost this
+project a silently-zero metric once before.
+
+## Registered correction
+
+The parameterized slot is chosen PER WORLD as `assignment[target_primitive]` --
+the learner slot functionally matched to the perturbed teacher primitive -- rather
+than a fixed index. The argument basis `U_k` is unchanged; only which slot it is
+attached to changes.
+
+## A residual caveat that survives the fix, disclosed rather than hidden
+
+Even with matched indices, the teacher primitive and its matched learner slot are
+DIFFERENT MATRICES -- that is the gauge result. Perturbing the teacher's `U` by
+`Delta` and letting `alpha` add `Delta` to the learner's `U` are therefore not
+identical operations, only approximately so, and the approximation is as good as
+the functional matching (measured at ~0.0005 normalized distance in E0.1).
+
+Consequently `delta_U` is registered from here as a NEAR-positive control:
+`alpha` should be able to express most of that perturbation, not exactly all of
+it. If `recovery(P+A)` under `delta_U` is high, that confirms the implementation;
+if it is moderate, the gauge gap is the first explanation to check before any
+claim about the argument channel is made.
+
+## Status of the killed run
+
+Two cells were printed before the run was stopped (`delta_U` 0.0 and 0.5, world
+0). Their cache is deleted and no value from them is reported. The `delta = 0`
+anchor did reproduce E1's independently measured route-only performance
+(0.00720 against 0.00735), which is recorded here only as evidence that the
+exact-reduction control works.
