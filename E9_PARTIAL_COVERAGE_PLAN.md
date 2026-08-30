@@ -165,3 +165,56 @@ a day; the `delta = 0` column is the existing construction and is cheap.
 Amortizing any of these inferences. The closure diagnostic and the
 attractor-collapse rung. Any change to a sealed verdict or to an existing
 artifact.
+
+# Amendment 1 (2026-08-30, before any E9 code): the registered CEILING is degenerate
+
+Found by reading `_build_tasks` before writing the generator.
+
+## The defect
+
+`CEILING` is registered as "the TRUE perturbed operator substituted in". But task
+targets are NOISELESS -- `eval_y = executor.execute(task_library, eval_x)` -- so
+executing the true program through the true perturbed library reproduces the
+targets EXACTLY. `L(CEILING) = 0`, `log L(CEILING) = -inf`, and therefore
+
+    share(X) = [log L(P) - log L(X)] / [log L(P) - log L(CEILING)] == 0
+
+for every arm at every `delta`. The primary estimand could not have come out any
+other way. This is the FIFTH estimand in this branch to be unable to fail (after
+E6A's algebraic crossing, E6C's definitional substitutability, E6D's two
+arithmetic refusal controls, and E6.2's output-relative tolerance), and the first
+to survive into a plan that was actually frozen -- caught one hour later, before
+any code.
+
+## Registered correction
+
+`CEILING` is redefined to live in the SAME FITTING REGIME as the arms it bounds:
+
+    CEILING = route inference + a FREELY FITTED full operator at the perturbed
+              step (all of U, V and b free), fit on SUPPORT ONLY
+
+This strictly dominates both channels under test -- `alpha` moves `U` within a
+16-dimensional subspace, `eps` is a rank-2 output residual, and the ceiling moves
+all of `U`, `V` and `b` without constraint -- so it upper-bounds what any
+structured correction of one step could achieve from the same data. It is
+achievable, finite, and fitted from support like every other arm, so query labels
+still never enter.
+
+The true perturbed operator is retained and reported as `GENERATOR` -- the
+zero-error reference that says what the task actually is -- and is explicitly NOT
+used as a denominator.
+
+## Consequence for the decision rules
+
+The thresholds are unchanged in form and now measure something attainable:
+`share(P+A+E) >= 0.8` asks whether the three registered terms recover most of
+what an unconstrained one-step correction recovers from the same support. That
+can fail, and the failure would be exactly the informative one -- the three terms
+being the wrong shape for the novelty.
+
+## A note for the successor
+
+Noiseless targets mean any "oracle" defined as the generating function is a
+degenerate ceiling for share-style estimands. Whenever a denominator is a
+performance gap, check whether either endpoint is exactly zero BY CONSTRUCTION
+before freezing the ratio.
