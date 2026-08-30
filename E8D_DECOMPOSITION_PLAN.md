@@ -1,4 +1,19 @@
 
+# WITHDRAWN BEFORE FREEZING (2026-08-30) -- DO NOT RUN
+
+This plan was never frozen and no hash was recorded in `tools/check_prereg.py`.
+Its own non-vacuity gate ("the gap exists") fails against E1's existing report:
+route-only inference is at or better than every other arm in 6/6 cells, and the
+intended ceiling (library fine-tuning) is ~10x WORSE because it overfits the
+support. On tasks the program language covers, adaptation already IS just `p`,
+so there is no gap for `alpha` and `eps` to explain.
+
+Kept in the tree as a withdrawn draft rather than deleted, per the project's
+rule that the scientific record is append-only. The reframe it forces -- a ladder
+over COVERAGE rather than at one operating point -- is recorded in
+`notes/e7-sketch.txt` section 10 and `PROGRESS.md`.
+
+
 # E8D: does `p + alpha + eps` account for adaptation?
 
 Status: DRAFT (freeze commit recorded in `tools/check_prereg.py` before any code).
