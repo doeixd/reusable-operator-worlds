@@ -273,7 +273,7 @@ def main() -> None:
                  "perturbed_primitive": target_primitive, "cells": {}}
 
         for direction in DIRECTIONS:
-            for delta in DELTAS:
+            for delta in sorted(DELTAS):      # delta = 0 first: it is the reference
                 # `ParameterDict` keys cannot contain ".", and the probe id is
                 # derived from this key, so the delta is written as `0p5`.
                 key = f"{direction}_{str(delta).replace('.', 'p')}"
@@ -315,24 +315,36 @@ def main() -> None:
 
                 geo = {a: float(np.exp(np.mean(np.log(np.maximum(v, 1e-12)))))
                        for a, v in arms.items()}
-                gap = math.log(geo["P"]) - math.log(geo["CEILING"])
-                shares = {a: ((math.log(geo["P"]) - math.log(geo[a])) / gap
-                              if abs(gap) > 1e-9 else None)
-                          for a in ("P+A", "A-RAND", "P+A+E")}
+                # Amendment 3: the denominator is a MEASURED reference -- the same
+                # arm at delta = 0 -- not a fitted ceiling. Three fitted ceilings
+                # failed here; in a noiseless small-support regime capacity buys
+                # overfitting before it buys reach.
+                baseline = entry["cells"].get(f"{direction}_0p0", {}).get(
+                    "geomean_nmse", {}).get("P")
+                degradation = (math.log(geo["P"]) - math.log(baseline)
+                               if baseline else None)
+                recovery = {a: ((math.log(geo["P"]) - math.log(geo[a])) / degradation
+                                if degradation and abs(degradation) > 1e-9 else None)
+                            for a in ("P+A", "A-RAND", "P+A+E", "CEILING")}
                 entry["cells"][key] = {
                     "direction": direction, "delta": delta,
-                    "geomean_nmse": geo, "gap_P_to_CEILING": gap,
+                    "geomean_nmse": geo,
+                    "degradation": degradation,
+                    "gap_P_to_CEILING_diagnostic": math.log(geo["P"]) - math.log(geo["CEILING"]),
                     "realized_perturbation": float(np.mean(shift)),
-                    "shares": shares,
+                    "recovery": recovery,
                     "alpha_norm": float(np.mean([c["P+A"]["alpha_norm"] for c in checks])),
                     "patch_norm": float(np.mean([c["P+A+E"]["patch_norm"] for c in checks])),
                     "generator_nmse": 0.0}
                 r = entry["cells"][key]
-                sh = lambda a: ("n/a" if r["shares"][a] is None else f"{r['shares'][a]:+.2f}")
-                print(f"[w{world} d{direction}={delta}] shift {r['realized_perturbation']:.4f} | "
-                      f"P {geo['P']:.5f} CEIL {geo['CEILING']:.5f} (gap {gap:+.2f}) | "
-                      f"share P+A {sh('P+A')} A-RAND {sh('A-RAND')} P+A+E {sh('P+A+E')} | "
-                      f"|a| {r['alpha_norm']:.3f} |e| {r['patch_norm']:.3f}", flush=True)
+                rec = lambda a: ("n/a" if r["recovery"][a] is None
+                                 else f"{r['recovery'][a]:+.2f}")
+                deg = "n/a" if r["degradation"] is None else f"{r['degradation']:+.2f}"
+                print(f"[w{world} d{direction}={delta}] shift {r['realized_perturbation']:.4f} "
+                      f"| P {geo['P']:.5f} | degradation {deg} | recovery "
+                      f"P+A {rec('P+A')} A-RAND {rec('A-RAND')} P+A+E {rec('P+A+E')} "
+                      f"CEIL {rec('CEILING')} | |a| {r['alpha_norm']:.3f} "
+                      f"|e| {r['patch_norm']:.3f}", flush=True)
                 write(out, args.output)
         out["worlds"][str(world)] = entry
         write(out, args.output)
