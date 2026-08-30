@@ -53,7 +53,9 @@ WORLDS = (0, 1, 2)
 DEPTH = 3                       # the world's native program length
 PROGRAMS = 12
 K_ARGS = 16                     # H39's confirmed argument dimension
-PSLOT = 11                      # H39 parameterizes the last slot
+# Amendment 4: the parameterized slot is chosen PER WORLD as the learner
+# slot functionally matched to the perturbed teacher primitive. A fixed
+# index put the argument channel on an unrelated operator in 2 of 3 worlds.
 PATCH_RANK = 2
 DELTAS = (0.0, 0.5, 1.0, 2.0)   # Amendment 2: sized so the gate can fire
 DIRECTIONS = ("U", "V")
@@ -109,7 +111,7 @@ class Patch(nn.Module):
 
 
 def fingerprint() -> str:
-    payload = {"depth": DEPTH, "programs": PROGRAMS, "K": K_ARGS, "pslot": PSLOT,
+    payload = {"depth": DEPTH, "programs": PROGRAMS, "K": K_ARGS,
                "patch_rank": PATCH_RANK, "deltas": list(DELTAS),
                "steps": ADAPT_STEPS, "lr": ADAPT_LR}
     return hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()[:16]
@@ -157,7 +159,7 @@ def perturb(library, index: int, direction: str, delta: float,
 
 
 def fit(model, task, probe_id: str, arm: str, matrices: torch.Tensor,
-        rand_matrices: torch.Tensor, d: int, seed: int) -> dict:
+        rand_matrices: torch.Tensor, d: int, seed: int, pslot_index: int) -> dict:
     """Fit the arm's channels on SUPPORT only and score the query."""
     local = copy.deepcopy(model)
     local.__class__ = VariableDepthDiscrete
@@ -170,9 +172,10 @@ def fit(model, task, probe_id: str, arm: str, matrices: torch.Tensor,
     pslot = patch = None
     if arm in ("P+A", "A-RAND", "P+A+E", "CEILING"):
         basis = rand_matrices if arm == "A-RAND" else matrices
-        pslot = PSlot(local.library[PSLOT], basis, free_operator=(arm == "CEILING"))
+        pslot = PSlot(local.library[pslot_index], basis,
+                      free_operator=(arm == "CEILING"))
         local.library = nn.ModuleList(
-            [pslot if i == PSLOT else op for i, op in enumerate(local.library)])
+            [pslot if i == pslot_index else op for i, op in enumerate(local.library)])
         if arm == "CEILING":
             params += [pslot.U, pslot.V, pslot.b]
         else:
@@ -225,7 +228,7 @@ def main() -> None:
     out = {"frozen_plan": "E9_PARTIAL_COVERAGE_PLAN.md (Amendment 1)",
            "git_commit": git_commit(),
            "protocol": {"depth": DEPTH, "programs": PROGRAMS, "K": K_ARGS,
-                        "pslot": PSLOT, "deltas": list(DELTAS),
+                        "pslot": "per-world matched slot", "deltas": list(DELTAS),
                         "directions": list(DIRECTIONS), "steps": ADAPT_STEPS,
                         "ceiling": "route + slot 11 fully free (Amendment 1)",
                         "note": "GENERATOR is a zero-error reference, never a denominator"},
@@ -268,9 +271,16 @@ def main() -> None:
         fatal(len(programs) == PROGRAMS,
               f"world {world}: only {len(programs)} programs contain primitive "
               f"{target_primitive}")
+        # Amendment 4: attach the argument channel to the learner slot that the
+        # perturbed TEACHER primitive is functionally matched to. Teacher
+        # primitive indices and learner slot indices are different spaces.
+        pslot_index = int(cell["assignment"][target_primitive])
 
         entry = {"programs": [list(p) for p in programs],
-                 "perturbed_primitive": target_primitive, "cells": {}}
+                 "perturbed_primitive": target_primitive,
+                 "parameterized_slot": pslot_index,
+                 "slot_note": "matched to the perturbed primitive via the E0.1 assignment",
+                 "cells": {}}
 
         for direction in DIRECTIONS:
             for delta in sorted(DELTAS):      # delta = 0 first: it is the reference
@@ -302,7 +312,8 @@ def main() -> None:
                         res = {}
                         for arm in arms:
                             got = fit(cell["model"], task, f"e9{arm}_{tag}", arm,
-                                      matrices, rand_matrices, d, seed=7700 + index)
+                                      matrices, rand_matrices, d, seed=7700 + index,
+                                      pslot_index=pslot_index)
                             res[arm] = got
                         return res
 

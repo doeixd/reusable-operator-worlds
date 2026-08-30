@@ -1,0 +1,10 @@
+prereg check OK: 34 frozen files unchanged; all STATUS-cited paths exist
+[w0 dU=0.0] shift 0.0000 | P 0.01142 | degradation n/a | recovery P+A n/a A-RAND n/a P+A+E n/a CEIL n/a | |a| 0.403 |e| 0.150
+[w0 dU=2.0] shift 0.0399 | P 0.05197 | degradation +1.52 | recovery P+A -0.06 A-RAND -0.04 P+A+E +0.29 CEIL +0.99 | |a| 3.706 |e| 0.796
+[w0 dV=0.0] shift 0.0000 | P 0.01142 | degradation n/a | recovery P+A n/a A-RAND n/a P+A+E n/a CEIL n/a | |a| 0.403 |e| 0.150
+C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_e9_partial_coverage.py:214: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\torch\csrc\autograd\generated\python_variable_methods.cpp:823.)
+  "alpha_norm": (float(torch.norm(pslot.alpha)) if pslot is not None
+[w0 dV=2.0] shift 0.0176 | P 0.02828 | degradation +0.91 | recovery P+A +0.00 A-RAND -0.10 P+A+E +0.36 CEIL +0.41 | |a| 2.417 |e| 0.419
+
+E9 complete. Gate: the gap must OPEN with delta, or the rung is unscoreable.

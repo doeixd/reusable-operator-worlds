@@ -386,3 +386,68 @@ Two cells were printed before the run was stopped (`delta_U` 0.0 and 0.5, world
 anchor did reproduce E1's independently measured route-only performance
 (0.00720 against 0.00735), which is recorded here only as evidence that the
 exact-reduction control works.
+
+# WITHDRAWN (2026-08-30, after four amendments and no scored cell)
+
+E9 is withdrawn. Its central construct -- a perturbation that lies in the argument
+channel's span, paired with one that does not -- is UNBUILDABLE in teacher space,
+and the four amendments before this one were repairs to an experiment whose root
+was already broken.
+
+## The measurement that ends it
+
+`delta_U` perturbs a TEACHER primitive's `U` by a combination of `U_k`; `alpha`
+adds a combination of `U_k` to the MATCHED LEARNER SLOT's `U`. Amendment 4 fixed
+the index-space error so those are the corresponding operators. They are still
+not corresponding MATRICES:
+
+    teacher primitive 4 U      norm 1.881
+    matched learner slot 3 U   norm 2.106
+    relative difference        1.466
+    cosine                     +0.047
+
+The matched operators are functionally equivalent (E0.1 measured ~0.0005
+normalized functional distance) and their parameterizations are essentially
+ORTHOGONAL, because `U` and `V` absorb an invertible transform between them. So
+adding `Delta U` to the learner reproduces nothing about a `Delta U` applied to
+the teacher.
+
+The symptom, with the slot correctly matched: at `delta_U = 2.0` the argument
+channel recovers `-0.06` of the degradation while a FREE OPERATOR AT THE SAME
+SLOT recovers `+0.99`. The perturbation is entirely repairable there; `alpha`'s
+16-dimensional subspace simply does not point at it.
+
+**Both registered directions are, from `alpha`'s perspective, arbitrary novelty.**
+The matched pair that the whole design rests on does not exist, and the clause
+ARGUMENT CARRIES STRUCTURED NOVELTY is untestable in this construction.
+
+## Why this is the gauge result, again
+
+`AGENTS.md` records it three ways already -- slot indices are not primitive
+indices, parameter means are not functions, effective operators must be compared
+at common inputs. This is the fourth face: **functional matching does not license
+PARAMETRIC correspondence.** Two operators that compute the same function can
+have unrelated coordinates, so "a perturbation in the basis" is a statement about
+WHOSE basis, and the answer here was never the learner's.
+
+## The successor, if the question is pursued
+
+Generate tasks from the LEARNER's own library with one slot perturbed along
+`U_k`. Then "novelty is a coordinate in the existing basis" is true BY
+CONSTRUCTION and in the right coordinate system, and the paired condition
+(perturb `V`) is genuinely outside it. The cost is that tasks no longer come from
+the world's teacher, so this measures self-adaptation rather than adaptation to
+the world -- a weaker but well-posed question. It would need its own plan; it is
+NOT an amendment to this one.
+
+## What was and was not spent
+
+No cell was ever scored. Two cells printed during the killed run and their cache
+was deleted. The only number carried forward is the `delta = 0` anchor
+reproducing E1's route-only performance (0.00720 against 0.00735), which confirms
+the exact-reduction control worked.
+
+The honest lesson is about the amendments themselves: FOUR corrections to one
+plan, each individually justified, were a signal that the construct was wrong at
+the root rather than in its details. A rung that needs repeated repair before it
+can measure anything should be re-derived, not re-patched.
