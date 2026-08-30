@@ -235,3 +235,49 @@ have taken days and produced a null with an appealing story attached. That is th
 opportunity gate working exactly as the constitution intends -- and it is worth
 noting that the gate only worked because the SECOND null was built. With the
 first null alone this note would now be recommending the rung.
+
+
+================================================================================
+10. E8D WITHDRAWN BEFORE FREEZING, AND THE REFRAME IT FORCES (2026-08-30)
+================================================================================
+
+Section 4's successor -- a decomposition ladder asking what share of adaptation
+`p`, `alpha` and `eps` each carry -- was drafted as `E8D_DECOMPOSITION_PLAN.md`
+and WITHDRAWN before a freeze hash was recorded. Its own non-vacuity gate fails
+against E1's existing numbers:
+
+    route-only inference is at or better than EVERY other arm in 6/6 cells,
+    including the oracle program, and library fine-tuning (the intended
+    ceiling) is ~10x WORSE because it overfits the support.
+
+So on the export branch's held-out programs there is NO adaptation gap to
+decompose. `p` alone is sufficient -- which is exactly what the sealed block
+established, seen from the other side.
+
+THE REFRAME. The decomposition question is only contentful where the language
+does NOT already cover the task. So the experiment is not a ladder at one
+operating point; it is a ladder AS A FUNCTION OF COVERAGE:
+
+    coverage knob  ->  share(P), share(P+A), share(P+A+E)
+
+At full coverage the answer is already known and verifiable from E1: `share(P)`
+is everything. The question is what picks up the slack as coverage degrades --
+the ARGUMENT (thesis-supporting: novelty is a coordinate in the existing basis)
+or the PATCH (thesis-undermining: novelty is unstructured residual).
+
+A COVERAGE KNOB ALREADY EXISTS. E1-R used DONOR-WORLD libraries as its recurrence
+control -- a library trained on a different world is precisely a partially
+covering language, and E1's report records `donor_world` per cell. Grading donor
+mismatch gives coverage without inventing a new generator, and it reuses
+machinery that is already sealed-adjacent and understood.
+
+Registered before any such plan is written: at full coverage `share(P) ~ 1` and
+the other terms are undefined-by-saturation; that anchor point must be VERIFIED
+from E1 rather than re-run, and any coverage sweep must include it so the
+saturated end is visible in the same figure as the informative end.
+
+WHAT THIS COST. Twenty minutes of checking a drafted plan's own gate against data
+already on disk. What it avoided: a multi-arm rung returning `share(P+A) ~ 0`,
+which without this check reads as evidence against the project's central sentence
+when it only says the tasks were too easy. Second time in two days that a
+pre-check has killed a plan before it was frozen.

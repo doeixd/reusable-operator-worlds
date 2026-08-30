@@ -3961,3 +3961,38 @@ World 1 was UNINFORMATIVE and is reported rather than crashed on -- its gauge is
 tight (83% modal share, 1 non-matching gram), so there is nothing to collect
 there. Gauge tightness varies 34%/83%/41% across worlds, so "the missing 64%" is
 not a stable quantity either.
+
+# E8D withdrawn BEFORE freezing: its own non-vacuity gate fails on existing data (2026-08-30)
+
+Drafted `E8D_DECOMPOSITION_PLAN.md` to ask whether `p + alpha + eps` accounts for
+adaptation, with `share(P+A)` as the primary estimand against a ceiling of library
+fine-tuning. Before recording a freeze hash, checked the plan's own non-vacuity
+gate -- "the gap exists: `log L(P) - log L(FREE) >= 0.5`" -- against E1's existing
+report. It fails, decisively and for two separate reasons.
+
+    cell    R (route only)   O (oracle)   F (fine-tune)   S (scratch)
+    w0 H1     0.00735         0.00760       0.07035        0.04432
+    w0 H2     0.00503         0.00610       0.05686        0.04379
+    w1 H1     0.00190         0.00190       0.03955        0.03096
+    w1 H2     0.00501         0.00451       0.04020        0.03413
+    w2 H1     0.00374         0.00418       0.05310        0.04139
+    w2 H2     0.00334         0.00473       0.05064        0.04009
+
+1. **The intended ceiling is not a ceiling.** Library fine-tuning on 128 support
+   examples is about 10x WORSE than route-only inference on the query -- it
+   overfits. `log L(P) - log L(FREE)` is strongly NEGATIVE.
+2. **There is no gap at all.** Route-only inference is at or better than every
+   other arm in 6/6 cells, including the oracle program.
+
+The second point is the sealed result restated: ON TASKS THE PROGRAM LANGUAGE
+COVERS, ADAPTATION ALREADY IS JUST `p`. The argument and patch terms have nothing
+left to explain, so the ladder would have returned `share(P+A) ~ 0` for a reason
+that has nothing to do with the thesis -- the tasks are too easy, not the
+decomposition wrong. Read without this check that would have looked like evidence
+AGAINST the project's own central sentence.
+
+The plan is NOT frozen and is kept in the tree as a withdrawn draft with this
+entry as its record. The decomposition question is real but is only contentful
+where the language does NOT already cover the task; defining that regime is the
+actual experimental problem, and the revised direction is recorded in
+`notes/e7-sketch.txt`.
