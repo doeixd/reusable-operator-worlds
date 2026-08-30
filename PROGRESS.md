@@ -4019,3 +4019,44 @@ and a negative for the three-term thesis in this testbed).
 Three pre-checks, three kills, in three days, none costing more than half an hour.
 That rate is read as a signal that the development testbed is exhausted for this
 class of question, not as bad luck.
+
+# E9 withdrawn after four amendments, no cell scored (2026-08-30)
+
+Built the partial-coverage generator the exhausted-testbed finding called for:
+perturb one teacher primitive by `delta` in a direction the argument channel can
+express (`U` within span{U_k}) or cannot (`V`), with an exact `delta = 0`
+reduction to the existing construction. Four amendments were needed before it
+could measure anything, and the fifth problem ended it.
+
+  1. The registered CEILING was the generating function, and targets are
+     noiseless, so it scored exactly zero error and every share was identically
+     zero. Fifth unable-to-fail estimand in this branch, first to reach a frozen
+     plan.
+  2. The manipulation was diluted -- programs were drawn freely and the most-used
+     primitive perturbed, so most programs did not contain it. Realized target
+     shift 0.002 against a baseline error of 0.007.
+  3. The replacement ceiling OVERFIT, as E8D's had. Three fitted ceilings failed
+     for one reason: with noiseless targets and 128 support examples, capacity
+     buys overfitting before reach. Replaced by recovery of MEASURED degradation
+     against the unperturbed control.
+  4. The argument channel was on learner slot 11 while the perturbation hit a
+     teacher primitive matched to a different slot in 2 of 3 worlds -- the
+     project's oldest index-space error.
+
+**The end.** With the slot correctly matched, `alpha` still recovered -0.06 of
+the degradation while a FREE OPERATOR AT THE SAME SLOT recovered +0.99. The cause
+is measured: the matched teacher primitive and learner slot are functionally
+equivalent (~0.0005 distance) with essentially ORTHOGONAL parameterizations
+(cosine +0.047), because `U` and `V` absorb an invertible transform. Adding
+`Delta U` to the learner reproduces nothing about `Delta U` on the teacher, so a
+perturbation inside the argument channel's span is UNBUILDABLE in teacher space
+and both registered directions are, from `alpha`'s view, arbitrary novelty.
+
+No cell was scored; the killed run's cache was deleted. The one number carried
+forward is the `delta = 0` anchor reproducing E1's route-only performance
+(0.00720 against 0.00735), confirming the exact-reduction control worked.
+
+The successor, if pursued, generates tasks from the LEARNER's own library with a
+perturbed slot, making "novelty is a coordinate in the basis" true by
+construction in the right coordinate system. It measures self-adaptation rather
+than adaptation to the world, and needs its own plan.

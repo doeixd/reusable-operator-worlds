@@ -1432,3 +1432,23 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   as one, and find the estimand that can fail. Both retirements here were caught
   before compute was spent, one by a dry run and one by re-reading the plan's own
   definition.
+
+- FUNCTIONAL MATCHING DOES NOT LICENSE PARAMETRIC CORRESPONDENCE (E9, 2026-08-30).
+  A teacher primitive and its matched learner slot were functionally equivalent
+  at ~0.0005 normalized distance with essentially ORTHOGONAL parameterizations
+  (relative difference 1.466, cosine +0.047), because `U` and `V` absorb an
+  invertible transform. A perturbation built "inside the argument channel's span"
+  in TEACHER coordinates therefore lands nowhere near that span in LEARNER
+  coordinates: `alpha` recovered -0.06 of the induced degradation where a free
+  operator at the same slot recovered +0.99. "A perturbation in the basis" is a
+  statement about WHOSE basis. Fourth face of the gauge result, after
+  slot-versus-primitive indices, parameter-mean-versus-function, and
+  common-coordinate comparison.
+
+- REPEATED AMENDMENT IS A SIGNAL, NOT A PROCESS (E9). Four amendments to one plan
+  -- a degenerate ceiling, a diluted manipulation, an overfitting ceiling, an
+  index-space error -- were each individually correct and each a repair to an
+  experiment whose root construct was already unbuildable. The amendment count
+  was itself the evidence and went unread until the fifth problem. Ask at the
+  SECOND amendment whether the construct can work at all, not whether this defect
+  is fixable.

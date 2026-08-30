@@ -4570,3 +4570,35 @@ than as a one-off miss.
   have produced a null with an appealing story attached. Run the census BEFORE
   the plan, every time, and note that this one only worked because a second,
   harder null was built after the first gave a green light.
+
+- FUNCTIONAL MATCHING DOES NOT LICENSE PARAMETRIC CORRESPONDENCE (E9, withdrawn
+  2026-08-30). A teacher primitive and its matched learner slot were functionally
+  equivalent at ~0.0005 normalized distance and had parameterizations that were
+  essentially ORTHOGONAL: `||tU - lU|| / ||tU|| = 1.466`, cosine `+0.047`. `U`
+  and `V` absorb an invertible transform, so two operators can compute the same
+  function from unrelated coordinates. Consequently a perturbation constructed
+  "inside the argument channel's span" in TEACHER space lands nowhere near that
+  span in LEARNER space: with the slot correctly matched, `alpha` recovered
+  `-0.06` of the induced degradation while a free operator at the same slot
+  recovered `+0.99`. "A perturbation in the basis" is a statement about WHOSE
+  basis. This is the fourth face of the gauge result, after slot-versus-primitive
+  indices, parameter-mean-versus-function, and common-coordinate comparison.
+
+- REPEATED AMENDMENT IS A SIGNAL, NOT A PROCESS (E9). Four amendments were
+  written for one plan -- a degenerate ceiling, a diluted manipulation, an
+  overfitting ceiling, an index-space error -- each individually correct and each
+  a repair to an experiment whose ROOT construct was already unbuildable. The
+  amendment count itself was the evidence and it was not read until the fifth
+  problem. A rung that needs repeated repair before it can measure anything
+  should be RE-DERIVED, not re-patched; the question to ask at the second
+  amendment is whether the construct can work at all, not whether this particular
+  defect is fixable.
+
+- A CEILING CANNOT BE A FITTED ARM WHEN TARGETS ARE NOISELESS AND SUPPORT IS
+  SMALL (E9, and E8D before it). Three ceilings failed in this line: the
+  generating function (exactly zero error, so every share was identically zero),
+  library fine-tuning (~10x worse than route inference), and a freely fitted
+  operator (worse than route-only even at zero perturbation). Capacity buys
+  overfitting before it buys reach. Define improvement against a MEASURED
+  REFERENCE POINT -- an unperturbed control, an earlier checkpoint -- and never
+  against something you fit on the same support.
