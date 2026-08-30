@@ -281,3 +281,58 @@ already on disk. What it avoided: a multi-arm rung returning `share(P+A) ~ 0`,
 which without this check reads as evidence against the project's central sentence
 when it only says the tasks were too easy. Second time in two days that a
 pre-check has killed a plan before it was frozen.
+
+
+================================================================================
+11. THE COVERAGE REFRAME DIES TOO, AND WHAT THAT SAYS ABOUT THE TESTBED
+================================================================================
+
+Section 10 proposed running the decomposition ladder as a function of COVERAGE,
+with recurrence `rho` or donor libraries as the knob. Checked against E1-R's
+existing nine cells before drafting anything.
+
+  regime          O         R         S      best-other minus R
+  rho = 0.0     0.0386    0.0368    0.0379        +0.03
+  rho = 0.9     0.0239    0.0231    0.0396        +0.03
+  rho = 1.0     0.0067    0.0068    0.0421        -0.01
+
+Across ALL NINE cells route-only inference is within +/-0.07 log units of the
+best available arm in 8 of 9. There is no coverage regime with a decomposable
+gap.
+
+THE STRUCTURAL FACT, which is bigger than the dead plan:
+
+    `p` IS SUFFICIENT WHEREVER ANYTHING IS SUFFICIENT.
+
+Where the library covers the task, route inference reaches the oracle. Where it
+does not, nothing reaches anything -- at `rho = 0` the oracle, the inferred route
+and a from-scratch learner all sit at ~0.038. This generator produces tasks that
+are either IN-LANGUAGE (solved by a route) or OUT-OF-LANGUAGE (solved by
+nothing), and nothing in between.
+
+CONSEQUENCE. The decomposition question -- what share of adaptation `p`, `alpha`
+and `eps` each carry -- CANNOT BE ASKED on this testbed as constructed. It needs
+tasks a program gets PARTWAY, and this generator does not make them. Any rung
+that tries will return `share(P) ~ 1` for a reason that has nothing to do with
+the thesis.
+
+TWO HONEST OPTIONS, and they should be chosen deliberately rather than drifted
+into:
+
+  (a) BUILD A PARTIAL-COVERAGE GENERATOR. Tasks whose teacher program is mostly
+      in-language with a controlled component outside the library's span. This is
+      a NEW GENERATOR: it breaks comparability with every existing artifact, and
+      the project's own history says a spec that changes its generator must be
+      re-read for everything downstream. Substantial commitment.
+
+  (b) REPORT THE FINDING AS THE ANSWER. In this substrate, adaptation IS
+      identify-program. That is a clean positive statement about the export
+      branch and the honest joint reading of E1, E1-R and E5 -- and it is a
+      NEGATIVE for the three-term thesis in this testbed, since two of its three
+      terms have nothing to do here.
+
+THREE PRE-CHECKS, THREE KILLS, IN THREE DAYS: the E7 census (near-misses are not
+a family), E8D's gate (no gap on covered tasks), and this one (no gap at any
+coverage). None of them cost more than half an hour. That rate is not bad luck --
+it is a signal that the development testbed has been exhausted for THIS class of
+question, and that the next real move is either a new generator or consolidation.

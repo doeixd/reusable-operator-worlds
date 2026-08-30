@@ -3996,3 +3996,26 @@ entry as its record. The decomposition question is real but is only contentful
 where the language does NOT already cover the task; defining that regime is the
 actual experimental problem, and the revised direction is recorded in
 `notes/e7-sketch.txt`.
+
+# The coverage reframe dies on the same check (2026-08-30)
+
+Checked E1-R's nine cells before drafting the coverage ladder. Route-only
+inference is within +/-0.07 log units of the best available arm in 8 of 9 cells,
+across rho = 0.0, 0.9 and 1.0. No coverage regime has a decomposable gap.
+
+The structural fact this exposes is bigger than the dead plan: **`p` is sufficient
+wherever anything is sufficient.** Where the library covers, route inference
+reaches the oracle; where it does not, nothing reaches anything (at rho = 0 the
+oracle, the inferred route and a from-scratch learner all sit at ~0.038). This
+generator makes tasks that are in-language or out-of-language, with nothing in
+between -- so the decomposition question cannot be asked on it as constructed.
+
+Recorded in `notes/e7-sketch.txt` section 11 with the two honest options: build a
+partial-coverage generator (a new generator, breaking comparability with every
+existing artifact) or report the finding as the answer (in this substrate,
+adaptation IS identify-program -- a positive statement about the export branch
+and a negative for the three-term thesis in this testbed).
+
+Three pre-checks, three kills, in three days, none costing more than half an hour.
+That rate is read as a signal that the development testbed is exhausted for this
+class of question, not as bad luck.
