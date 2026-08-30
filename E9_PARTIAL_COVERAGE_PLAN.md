@@ -218,3 +218,49 @@ Noiseless targets mean any "oracle" defined as the generating function is a
 degenerate ceiling for share-style estimands. Whenever a denominator is a
 performance gap, check whether either endpoint is exactly zero BY CONSTRUCTION
 before freezing the ratio.
+
+# Amendment 2 (2026-08-30, before any E9 cell was scored): the manipulation was too weak to open the gate
+
+Found in a structural dry run. Both changes below were chosen AFTER measuring
+realized target shift in a pilot, and are disclosed as such.
+
+## What the pilot showed
+
+The plan left the `delta` grid and the program-selection rule unspecified. The
+first implementation drew held-out programs freely and then perturbed the
+most-used primitive, so MOST PROGRAMS DID NOT CONTAIN IT and the manipulation was
+diluted. Measured mean relative target shift, world 0, direction `U`:
+
+    delta      programs drawn freely     all programs use the primitive
+     0.5              0.0020                      0.0043
+     1.0              0.0078                      0.0166
+     2.0              0.0329                      0.0692
+
+Route inference's baseline query NMSE on these tasks is ~0.007, so a shift of
+0.002-0.004 is at or below the error already present -- the perturbation was
+invisible. The dry run confirmed it: at `delta = 0.5` the `P -> CEILING` gap was
+`+0.21` in direction `U` and `-0.33` in direction `V`, against a registered gate
+of `>= 0.5`.
+
+## Registered corrections
+
+**(1) Every held-out program must CONTAIN the perturbed primitive.** Otherwise
+the arms are averaged over tasks the manipulation never touched, which halves the
+realized shift and is simply a diluted experiment.
+
+**(2) The delta grid is `(0.0, 0.5, 1.0, 2.0)`**, chosen so the largest value
+produces a target shift (~0.07) an order of magnitude above the baseline error,
+giving the registered gate a chance to fire. `delta = 0` remains in the grid as
+the exact-reduction control.
+
+## What is NOT changed
+
+The gate itself is untouched: the `P -> CEILING` gap must still grow with `delta`
+and exceed 0.5 at the largest `delta` in >= 2 of 3 worlds, and the rung is
+UNSCOREABLE otherwise. Choosing a grid that CAN clear a threshold is not the same
+as lowering the threshold, and the pilot measured only target shift -- a property
+of the generator -- never any arm's performance.
+
+If the gate still fails at `delta = 2.0`, the honest reading is that this
+perturbation cannot create partial coverage in this substrate, and E9 is reported
+as UNSCOREABLE rather than pushed to larger deltas until something moves.
