@@ -386,3 +386,45 @@ it means committing to a new world blind -- the shape that produced E9 and, befo
 it, two dormancy designs. That is not an argument against doing it; it is an
 argument for deciding it deliberately, with the missing gate acknowledged, rather
 than drifting into it as the next rung.
+
+
+================================================================================
+13. CORRECTION TO SECTION 12 (2026-08-31): CATEGORY ERROR
+================================================================================
+
+Section 12 concluded "loops are answered, and the answer is NO". That is an
+overclaim and is corrected here.
+
+The census asked whether a loop AMORTIZES in this testbed. It was read as
+answering whether iteration is NEEDED for program synthesis. Macros, loops and
+branching are constitutive of a programming language, not optional economies --
+if the goal is a substrate that writes programs, they are what "program" means.
+
+The census negative is a fact about the GENERATOR, which has no iterative and no
+conditional structure. It composes a fixed number of primitives in sequence, so
+there is nothing for a loop to iterate over and the census measured the absence
+of iteration in the world rather than the uselessness of loops.
+
+CORRECTED READING OF ALL FOUR CENSUSES (near-miss families, coverage, decomposition
+gap, loops): the development testbed cannot evaluate this class of question. That
+was already the conclusion of section 11 and it should have been applied here.
+
+CONSEQUENCE. The successor is a generator whose tasks REQUIRE what a fixed-length
+program cannot express. Two candidate constructions:
+
+  * ITERATION-NECESSARY. The target applies an operator a number of times that
+    depends on the input, so no fixed-depth composition can be correct on all
+    inputs. Verify by construction: exhibit two inputs requiring different depths.
+
+  * BRANCH-NECESSARY. The target applies one of two operators according to a
+    predicate on the state. Verify by construction: no single fixed program
+    matches the target on both branches better than chance.
+
+THE GATE MOVES INTO THE GENERATOR. The necessity above must be verified BEFORE any
+learner is trained -- a fixed-length program provably cannot win -- which is a gate
+we CAN build, unlike the ones the current testbed refused to supply, because the
+world is being constructed rather than inherited.
+
+This is also what review 82 reserved the graph-rewrite substrate for: branching,
+recursion, loops, macros, structural rewriting and language growth, tested on a
+world that needs them.

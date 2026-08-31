@@ -4086,3 +4086,46 @@ CAPABILITY rather than economy -- every program here is a fixed pipeline, so the
 program computes nothing -- but it cannot be censused, because the generator never
 produces input-dependent programs. Building it is a deliberate blind commitment,
 not a next rung.
+
+# CORRECTION (2026-08-31): "loops are answered, no" was a category error
+
+The loop census entry above, and the framing of the E6 macro line as closing the
+question of language growth, conflate two different questions. Corrected here
+rather than edited, per the append-only rule.
+
+WHAT THE CENSUSES MEASURED: does this construct AMORTIZE under MDL in a testbed
+of depth-3-to-10 compositions over 6 primitives?
+
+WHAT THEY WERE READ AS ANSWERING: is this construct NEEDED for program synthesis?
+
+Those are not the same question. Macros, loops and branching are CONSTITUTIVE of
+program synthesis -- a language with none of them is a fixed-length pipeline
+notation, not a programming language. They are not adopted because they amortize;
+they are what "program" means.
+
+THE NEGATIVES ARE DIAGNOSABLE AS TESTBED ARTIFACTS. The teacher generator has NO
+iterative and NO conditional structure: it composes a fixed number of primitives
+in sequence. So the loop census measured THE ABSENCE OF ITERATION IN THE WORLD,
+not the value of loops. Asking whether a loop pays in a straight-line depth-6
+program answers nothing about loops. The same reading applies to E6's macros --
+the generator has no recurring SUBROUTINE structure, only the shallow repetition
+route inference happens to emit -- and to branching, which has no census at all
+precisely because no task's solution depends on its input.
+
+WE ALREADY HAD THIS CONCLUSION AND DID NOT APPLY IT. `notes/e7-sketch.txt`
+section 11 records that "the development testbed has been exhausted for THIS
+class of question". Four subsequent census negatives were then read as
+substantive answers about the constructs rather than as further evidence for
+exactly that.
+
+WHAT STANDS. The censuses remain valid as what they are: these constructs cannot
+be obtained for free from the current testbed, and any new world must be built
+deliberately with the structure in it rather than hoping it emerges.
+
+WHAT CHANGES. The recommendation to consolidate rather than build is withdrawn as
+the primary. The next move is a generator whose tasks REQUIRE what a fixed-length
+program cannot express -- input-dependent iteration count, or a conditional -- and
+the opportunity gate moves INTO the generator design: that necessity must be
+verified (a fixed-length program provably cannot win) before any learner is
+trained on it. That gate is buildable precisely because the world is being
+constructed rather than inherited.
