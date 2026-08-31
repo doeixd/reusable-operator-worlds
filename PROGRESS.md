@@ -4129,3 +4129,35 @@ the opportunity gate moves INTO the generator design: that necessity must be
 verified (a fixed-length program provably cannot win) before any learner is
 trained on it. That gate is buildable precisely because the world is being
 constructed rather than inherited.
+
+# Iteration world spec withdrawn before freezing: the operators contract (2026-08-31)
+
+Drafted `ITERATION_WORLD_SPEC.md` -- a world whose targets apply an operator a
+number of times that depends on the input, so no fixed-length program can be
+correct. The spec named its own most likely failure (if `P^k` converges the
+iteration gap collapses) and said to check it first. Checked first; it fails.
+
+Best achievable NMSE by ANY fixed depth, given the true primitive, against a
+registered necessity threshold of 0.25:
+
+    k in [2,6]:  0.031 / 0.032 / 0.026     k in [1,11]: 0.119 / 0.123 / 0.093
+    operator cycles (preserving the library): 0.084 / 0.105 / 0.092
+
+All fail. The cause is structural: every operator here has the form
+`tanh(z + small)` and contracts toward a fixed point, so iterates converge
+(`P^5` differs from `P^6` by 1.1%) and one fixed repeat count approximates any
+distribution of counts. **Iteration count is nearly unidentifiable in this
+operator family** -- which is why loops do not pay here at a level below the
+generator.
+
+Explicitly NOT concluded: that iteration is useless for program synthesis. That is
+the category error corrected earlier the same day, and it is not repeated.
+
+Consequence: an iteration-necessary world needs a NON-CONTRACTIVE primitive family
+-- a new library, new lifetimes, and the abandonment or rebuilding of the banked
+export vocabulary. That is a new SUBSTRATE rather than a new generator, and a
+deliberate decision rather than a next step.
+
+Process: E9 took four amendments to find its root unbuildable. This spec named its
+own most likely failure and it was checked BEFORE any freeze hash was recorded,
+for about ten minutes of work.
