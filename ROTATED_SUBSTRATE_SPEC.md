@@ -133,3 +133,40 @@ requiring lifetimes and is separately authorized.
 
 Branching, which needs a conditional generator and has its own necessity gate to
 design. Any learner rung. Any change to an existing artifact or sealed verdict.
+
+# Amendment 1 (2026-08-31, before any code): G3 is degenerate and is withdrawn
+
+Found by reading the gates before implementing them.
+
+## The defect
+
+G3 is registered as
+
+    gap = log NMSE(best fixed depth) - log NMSE(loop oracle) >= 2.0
+
+But the loop oracle executes the TRUE primitive the TRUE `k(x)` times, and the
+target IS `P^{k(x)}(x)`. Targets are noiseless, so `NMSE(loop oracle) = 0`
+EXACTLY, `log 0 = -inf`, and the gap is `+inf` for any world whatsoever. **G3
+cannot fail.**
+
+This is the same defect as E9's Amendment 1 -- a denominator that is exactly zero
+by construction -- and it is the sixth unable-to-fail estimand in this branch. The
+rule was already recorded after E9: *whenever a denominator is a performance gap,
+check whether either endpoint is exactly zero by construction before freezing the
+ratio.* It was written down and then not applied to the next thing written.
+
+## Registered correction
+
+**G3 is WITHDRAWN, not repaired.** G1 already states what G3 was meant to state.
+G3's purpose was "the room a loop construct would have to earn", and G1's absolute
+threshold -- the best fixed-length program, given the true operator and the best
+depth, scores `NMSE >= 0.25` -- says exactly that without a ratio. At the pilot's
+measured 1.67-1.73 the room is total.
+
+Adding noise to the targets to give the loop oracle nonzero error was considered
+and rejected: it would change the world's noiseless convention, which every
+existing artifact and every scorer in this project assumes.
+
+The surviving gates are G1 (necessity, absolute), G2 (achievability,
+implementation check), G4 (balance) and G5 (learnability, lifetimes, separately
+authorized).
