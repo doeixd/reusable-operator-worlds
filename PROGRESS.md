@@ -4188,3 +4188,40 @@ point is.
 This makes a new substrate viable. It does NOT make it free: the rotated family
 needs its own trained libraries, so the first rung on it requires lifetimes and is
 a separate go/no-go from speccing the world.
+
+# The rotation supplies branching too, and the negatives unify (2026-08-31)
+
+Branch-necessity gate, teacher-side, no lifetimes. Target `y = P_a(x) if w.x > 0
+else P_b(x)`; can any FIXED program (1-step or 2-step, any operators) match both
+branches?
+
+    current  0.0069  0.0071  0.0074   0/3   fails
+    rotated  0.9292  1.0390  0.9832   3/3   PASSES
+
+With the iteration gate measured the same day:
+
+              iteration necessity      branch necessity
+    current      0.024 - 0.032            0.007
+    rotated      1.08  - 1.58             0.93 - 1.04
+
+ONE substrate change supplies BOTH constructs, so the vocabulary would not be
+spent for loops alone but for control flow generally.
+
+THE UNIFIED DIAGNOSIS. A single fixed operator approximates a CHOICE BETWEEN TWO
+DIFFERENT OPERATORS to 0.7% error, which is only possible if the operators are
+nearly identical in effect -- and they are, because `tanh(z + a . small)` at
+`a = 0.35` is a weak perturbation of the identity.
+
+    THE EXISTING SUBSTRATE'S OPERATORS ARE TOO WEAK FOR CONTROL FLOW OF ANY KIND
+    TO CARRY INFORMATION.
+
+Repeating them converges, so a loop cannot be identified; choosing between them
+barely changes the output, so a branch is not needed. Not two problems -- one
+property seen twice. It also re-reads E6: a macro abbreviates operators whose
+individual effects are small, so its description saving was always going to be
+marginal.
+
+An intuition of ours was wrong and is recorded: we expected branching to be
+ORTHOGONAL to the contraction problem and possibly buildable on the existing
+substrate for free. It is not; it fails there for a closely related reason. The
+check cost two minutes and would have misdirected the next rung if skipped.

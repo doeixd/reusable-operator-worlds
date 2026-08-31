@@ -4602,3 +4602,26 @@ than as a one-off miss.
   overfitting before it buys reach. Define improvement against a MEASURED
   REFERENCE POINT -- an unperturbed control, an earlier checkpoint -- and never
   against something you fit on the same support.
+
+- OPERATOR STRENGTH IS THE PRECONDITION FOR CONTROL FLOW (2026-08-31,
+  `reports/rotated_gates.json`). In the ROW substrate every operator has the form
+  `tanh(z + a . U tanh(Vz+b))` at `a = 0.35` -- a weak perturbation of the
+  identity. Two consequences, measured: iterates CONVERGE, so one fixed repeat
+  count approximates any distribution of counts (best-fixed NMSE 0.024-0.032 at
+  k in [2,6]); and operators barely DIFFER, so one fixed operator approximates a
+  choice between two others to 0.7% error. Loops are unidentifiable and branches
+  are unnecessary, for the same underlying reason. Adding an orthogonal map,
+  `P(z) = Q(z + a U tanh(Vz+b))`, fixes both at once: iteration necessity rises
+  to 1.08-1.58 and branch necessity to 0.93-1.04, with norms bounded (x1.03) and
+  balance gates tighter than the original family's. BEFORE building any control-flow
+  construct, measure whether the substrate's operators are strong enough for the
+  choice or the count to carry information -- if a fixed program can imitate the
+  construct, no learner needs to discover it.
+
+- WE PREDICTED BRANCHING WAS ORTHOGONAL TO THE CONTRACTION PROBLEM AND WERE WRONG
+  (2026-08-31). The reasoning was that contraction concerns REPEATED application
+  while branching concerns CHOICE, so branching might be buildable on the existing
+  substrate for free. Measured: branch necessity 0.007 there, a decisive failure,
+  because near-identity operators are near-identical to each other. Both
+  properties trace to the same operator weakness. The check cost two minutes;
+  skipping it would have sent the next rung to a substrate that cannot host it.
