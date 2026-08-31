@@ -107,7 +107,11 @@ def load_model(config, path: Path, kind: str):
         legacy_pickle = False
     state = state["model_state_dict"] if "model_state_dict" in state else state
     learnable = any(key.endswith(".alpha") for key in state)
-    section = "discrete_model" if kind == "discrete" else "continuous_model"
+    section = (
+        "discrete_model"
+        if kind in {"discrete", "rotated_discrete"}
+        else "continuous_model"
+    )
     current = getattr(config, section)
     if bool(current.learnable_alpha) != learnable:
         config = replace(config, **{section: replace(current, learnable_alpha=learnable)})

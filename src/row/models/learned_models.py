@@ -7,7 +7,7 @@ from collections.abc import Sequence
 import torch
 from torch import Tensor, nn
 
-from row.models.torch_oracle import LearnedOperator
+from row.models.torch_oracle import LearnedOperator, RotatedLearnedOperator
 
 
 class ResidualStateBlock(nn.Module):
@@ -968,6 +968,47 @@ class DiscreteLibraryLearner(nn.Module):
             "position_usage": position_usage.cpu().tolist(),
             "final_temperature": self.temperature,
         }
+
+
+class RotatedDiscreteLibraryLearner(DiscreteLibraryLearner):
+    """Discrete library whose slots match ``RotatedPrimitive`` exactly in form."""
+
+    def __init__(
+        self,
+        d: int,
+        operator_slots: int,
+        operator_rank: int,
+        task_steps: int,
+        alpha: float,
+        initial_temperature: float,
+        final_temperature: float,
+        seed: int,
+        learnable_alpha: bool = True,
+        activation: str = "tanh",
+    ) -> None:
+        super().__init__(
+            d=d,
+            operator_slots=operator_slots,
+            operator_rank=operator_rank,
+            task_steps=task_steps,
+            alpha=alpha,
+            initial_temperature=initial_temperature,
+            final_temperature=final_temperature,
+            seed=seed,
+            learnable_alpha=learnable_alpha,
+            activation=activation,
+        )
+        self.library = nn.ModuleList(
+            RotatedLearnedOperator(
+                d,
+                operator_rank,
+                alpha,
+                seed + 997 * index,
+                learnable_alpha=learnable_alpha,
+                activation=activation,
+            )
+            for index in range(operator_slots)
+        )
 
 
 class PresenceGatedDiscreteLibraryLearner(DiscreteLibraryLearner):

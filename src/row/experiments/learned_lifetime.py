@@ -27,6 +27,7 @@ from row.models import (
     DiscreteLibraryLearner,
     HypernetworkLearner,
     PresenceGatedDiscreteLibraryLearner,
+    RotatedDiscreteLibraryLearner,
     GatedInnovationLearner,
     LifecycleLibraryLearner,
     PromotingSharedResidualLearner,
@@ -83,6 +84,7 @@ ModelKind = Literal[
     "pslot_factorized",
     "multihead",
     "discrete",
+    "rotated_discrete",
     "mdl",
 ]
 Learner = (
@@ -95,6 +97,7 @@ Learner = (
     | PromotingSharedResidualLearner
     | LifecycleLibraryLearner
     | DiscreteLibraryLearner
+    | RotatedDiscreteLibraryLearner
     | PresenceGatedDiscreteLibraryLearner
 )
 
@@ -389,11 +392,10 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
             activation=model_config.operator_activation,
         )
     model_config = config.mdl_model if kind == "mdl" else config.discrete_model
-    model_class = (
-        PresenceGatedDiscreteLibraryLearner
-        if kind == "mdl"
-        else DiscreteLibraryLearner
-    )
+    model_class = {
+        "mdl": PresenceGatedDiscreteLibraryLearner,
+        "rotated_discrete": RotatedDiscreteLibraryLearner,
+    }.get(kind, DiscreteLibraryLearner)
     extra = (
         {
             "presence_logit_init": model_config.presence_logit_init,
@@ -435,6 +437,7 @@ def _training_values(
         "pslot_factorized": config.shared_residual_model,
         "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
+        "rotated_discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
     return (
@@ -1575,6 +1578,7 @@ def resolved_learned_config(
         "pslot_factorized": config.shared_residual_model,
         "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
+        "rotated_discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
     resolved: dict[str, object] = {
@@ -1620,6 +1624,7 @@ def _write_artifacts(
         "pslot_factorized": config.shared_residual_model,
         "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
+        "rotated_discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
     resolved = resolved_learned_config(
@@ -1700,6 +1705,7 @@ def main() -> None:
             "promoting",
             "lifecycle",
             "discrete",
+            "rotated_discrete",
             "mdl",
         ),
         required=True,
@@ -1765,6 +1771,7 @@ def main() -> None:
         "pslot_factorized": config.shared_residual_model,
         "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
+        "rotated_discrete": config.discrete_model,
         "mdl": config.mdl_model,
     }[args.model]
     selected = replace(
