@@ -4225,3 +4225,46 @@ An intuition of ours was wrong and is recorded: we expected branching to be
 ORTHOGONAL to the contraction problem and possibly buildable on the existing
 substrate for free. It is not; it fails there for a closely related reason. The
 check cost two minutes and would have misdirected the next rung if skipped.
+
+# G5 complete: FAILS 0/3, but it measured a mismatch rather than learnability (2026-08-31)
+
+Ran `src/row/experiments/audit_rotated_g5.py`, six lifetimes over development
+worlds 0-2 against `ROTATED_SUBSTRATE_SPEC.md`. Report `reports/rotated_g5.json`;
+artifacts `artifacts/g5_rotated/`.
+
+    world   rotated final   standard final   held-out trained   scratch   margin
+      0        1.131          0.0167 (x68)        1.258          1.488     +0.17
+      1        1.112          0.0116 (x96)        1.215          1.471     +0.19
+      2        1.160          0.0130 (x89)        1.239          1.523     +0.21
+
+Registered verdict FAILS, 0/3, against a required margin of 0.75. Reported
+unrewritten.
+
+**But it does not answer the spec's question**, and Amendment 4 records why. BOTH
+arms exceed NMSE 1.0 -- worse than predicting zero -- including FROM-SCRATCH. That
+is not a learning failure; the target is not in the hypothesis class. The learner's
+operators are the CONTRACTING family while the teacher's are rotations, and a
+near-identity map cannot approximate a rotation. So G5 measured "can a contracting
+learner fit a rotated world" (no) rather than "is the rotated substrate learnable".
+
+The spec never required the learner's operator family to match the teacher's --
+an omission, since a changed operator family is the whole point of the substrate.
+The registered prediction that a failure would show "control flow and learnability
+trade off" is WITHDRAWN as unsupported. What is established is narrower: a rotated
+teacher cannot be paired with a contracting learner.
+
+Superseded by G5R, which gives the learner the same operator family, with G5's
+numbers as its floor: any G5R result must beat 1.13/1.11/1.16 or the matched
+learner is no better than the mismatched one.
+
+Also noted: the report's "comparability" field printed "learnable but harder" when
+clause (b) passed in 0 of 3 worlds. That string is only meaningful when clause (a)
+passes, and is misleading here. A reporting defect, not a measurement one.
+
+Process note: the PI observed an apparent memory leak and, separately, two
+terminal crashes during this rung. Neither was the experiment. Memory is FLAT
+across lifetimes (325 / 330 / 332 MB at 8 / 16 / 32 tasks); the growth was
+duplicate interpreters left behind when a `timeout` command exceeded the harness
+tool limit and was backgrounded rather than killed. The final run completed
+normally -- six artifacts, three worlds, verdict written -- while the monitor
+watching it exited 254.
