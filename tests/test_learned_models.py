@@ -15,6 +15,7 @@ from row.models import (
     DiscreteLibraryLearner,
     HypernetworkLearner,
     PresenceGatedDiscreteLibraryLearner,
+    RotatedDiscreteLibraryLearner,
     SharedParentResidualLearner,
 )
 from row.world import World
@@ -113,6 +114,28 @@ class LearnedModelTests(unittest.TestCase):
         hard = model._coefficients("task_a")
         self.assertTrue(torch.all((hard == 0.0) | (hard == 1.0)))
         self.assertEqual(model.hard_routes()["task_a"], [1, 2])
+
+    def test_rotated_library_maps_are_orthogonal_trainable_and_cover_both_components(self) -> None:
+        model = RotatedDiscreteLibraryLearner(
+            4, 4, 2, 2, 0.2, 1.0, 0.1, seed=2
+        )
+        determinants = []
+        for operator in model.library:
+            q = operator.rotation.matrix()
+            torch.testing.assert_close(q.T @ q, torch.eye(4), atol=2e-6, rtol=2e-6)
+            determinants.append(float(torch.linalg.det(q).detach()))
+        self.assertTrue(any(value > 0 for value in determinants))
+        self.assertTrue(any(value < 0 for value in determinants))
+
+        code = model.begin_task("task_a")
+        prediction = model(torch.randn(5, 4), "task_a")
+        prediction.square().mean().backward()
+        self.assertIsNotNone(code.grad)
+        self.assertIsNotNone(model.library[0].rotation.vectors.grad)
+        self.assertGreater(
+            float(torch.linalg.vector_norm(model.library[0].rotation.vectors.grad)),
+            0.0,
+        )
 
     def test_presence_gated_library_penalizes_and_excludes_inactive_slots(self) -> None:
         model = PresenceGatedDiscreteLibraryLearner(
