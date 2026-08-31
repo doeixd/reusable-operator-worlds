@@ -1,5 +1,11 @@
 
-# WITHDRAWN BEFORE FREEZING (2026-08-31) -- gate checked first, no hash recorded
+# WITHDRAWN BEFORE FREEZING (2026-08-31), SUPERSEDED BY ROTATED_SUBSTRATE_SPEC.md
+# gate checked first, no hash was ever recorded
+#
+# The WORLD in this spec was sound; its PRIMITIVE FAMILY was not. The successor
+# keeps the construction, the knob, the exact reduction and all four gates, and
+# replaces the contracting family with a rotated one that passes the necessity
+# gate at 1.67-1.73 against a required 0.25.
 
 This spec was never frozen. Its own registered most-likely-failure -- "if `P^k`
 converges the iteration gap collapses ... it should be checked FIRST" -- was
