@@ -4060,3 +4060,29 @@ The successor, if pursued, generates tasks from the LEARNER's own library with a
 perturbed slot, making "novelty is a coordinate in the basis" true by
 construction in the right coordinate system. It measures self-adaptation rather
 than adaptation to the world, and needs its own plan.
+
+# Loop opportunity census: loops do not pay where they would mean anything (2026-08-31)
+
+Census only, no compute, arithmetic over 1,152 cached E6 routes. A loop encodes a
+run of `k` identical adjacent operators as `(LOOP, op, count)` -- 2 symbols plus a
+count -- so a run only pays at `k >= 3`.
+
+    depth 6:  91 paying runs, gross 182 bits, alphabet tax 266  ->  NET  -84
+    depth 8: 199 paying runs, gross 512 bits, alphabet tax 355  ->  NET +157
+    depth 10:271 paying runs, gross 635 bits, alphabet tax 443  ->  NET +192
+
+At depth 6 -- the only regime where E6A found macro meaning intact -- a loop
+construct is NET NEGATIVE. It pays only where motif survival is 13% and 7% and the
+routes have collapsed onto attractor slots, i.e. where the program has stopped
+describing the computation.
+
+Recorded with a correction to our own first pass, which counted every `k >= 2` run
+as saving a symbol and omitted the alphabet tax, reporting ~9,073 bits of
+opportunity. 1,028 of 1,589 runs are `k = 2` and cannot pay. The gross figure
+would have justified building the construct; the corrected one kills it.
+
+Branching is recorded in `notes/e7-sketch.txt` section 12 as the one missing
+CAPABILITY rather than economy -- every program here is a fixed pipeline, so the
+program computes nothing -- but it cannot be censused, because the generator never
+produces input-dependent programs. Building it is a deliberate blind commitment,
+not a next rung.

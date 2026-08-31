@@ -336,3 +336,53 @@ a family), E8D's gate (no gap on covered tasks), and this one (no gap at any
 coverage). None of them cost more than half an hour. That rate is not bad luck --
 it is a signal that the development testbed has been exhausted for THIS class of
 question, and that the next real move is either a new generator or consolidation.
+
+
+================================================================================
+12. LOOP OPPORTUNITY CENSUS (2026-08-31): LOOPS DO NOT PAY WHERE THEY WOULD MEAN
+    ANYTHING
+================================================================================
+
+Review 82 places branching/loops after macro invention. Loops are censusable on
+existing data, so they were checked before any plan was drafted. CENSUS ONLY, no
+verdict, no compute: arithmetic over 1,152 cached E6 routes.
+
+A loop encodes a run of `k` identical adjacent operators as `(LOOP, op, count)`:
+2 symbols plus a count, `~10.7` bits against `k * 3.70` bits plain. **A run only
+pays at `k >= 3`.**
+
+    depth  routes  runs k>=2  runs that PAY  gross  alphabet tax    NET
+      6      384      340          91         182       266        -84
+      8      384      527         199         512       355       +157
+     10      384      722         271         635       443       +192
+
+**At depth 6 -- the only regime where E6A found macro meaning intact (53% motif
+survival) -- a loop construct is NET NEGATIVE.** It pays only at depths 8 and 10,
+where motif survival is 13% and 7% and the routes have collapsed onto per-library
+attractor slots. The repetition there is the attractor artifact, not structure a
+loop deserves credit for.
+
+CONCLUSION: loops are answered, and the answer is NO, for the same reason macros
+barely paid. The programs are too short and the repetition too shallow for
+control flow to amortize.
+
+A CORRECTION TO OUR OWN FIRST PASS. The first census counted every run of `k >= 2`
+as saving `k - 1` symbols and reported ~9,073 bits of opportunity. That is wrong
+twice: a `k = 2` run CANNOT pay (the loop encoding costs more than writing the
+pair), and the alphabet tax was omitted. 1,028 of the 1,589 runs are `k = 2`. The
+gross figure would have justified building a loop construct; the corrected one
+kills it.
+
+BRANCHING IS DIFFERENT AND CANNOT BE CENSUSED. It is the one missing CAPABILITY
+rather than a missing economy: every program here is a fixed pipeline, the route
+is per-task and not per-input, so the program performs no computation -- it is a
+constant that gets executed. Branching would be the first construct whose
+execution depends on the data, and that is where this substrate would start
+computing rather than composing.
+
+But the generator never produces input-dependent programs, so NOTHING IN EXISTING
+DATA CAN REVEAL A NEED FOR IT. There is no opportunity gate available. Building
+it means committing to a new world blind -- the shape that produced E9 and, before
+it, two dormancy designs. That is not an argument against doing it; it is an
+argument for deciding it deliberately, with the missing gate acknowledged, rather
+than drifting into it as the next rung.
