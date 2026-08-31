@@ -170,3 +170,54 @@ existing artifact and every scorer in this project assumes.
 The surviving gates are G1 (necessity, absolute), G2 (achievability,
 implementation check), G4 (balance) and G5 (learnability, lifetimes, separately
 authorized).
+
+# Amendment 2 (2026-08-31, gates measured): the rotation also makes BRANCHING necessary
+
+The spec justified the rotated family by ITERATION alone, and listed branching as
+out of scope pending "its own necessity gate to design". That gate was designed
+and run, and the result broadens the justification.
+
+## Measured
+
+    target  y = P_a(x) if w.x > 0 else P_b(x)
+    gate    best fixed program (1-step or 2-step, any operators) NMSE >= 0.25
+
+    current  0.0069  0.0071  0.0074   ->  0/3   fails
+    rotated  0.9292  1.0390  0.9832   ->  3/3   PASSES
+
+Alongside the iteration gate measured the same day:
+
+              iteration necessity      branch necessity
+    current      0.024 - 0.032            0.007
+    rotated      1.08  - 1.58             0.93 - 1.04
+
+**One substrate change supplies both constructs.** The spec's cost-benefit changes
+accordingly: the vocabulary is not being spent for loops alone but for control
+flow generally.
+
+## The unified diagnosis, which is the substantive finding
+
+A single FIXED operator approximates a CHOICE BETWEEN TWO DIFFERENT OPERATORS to
+0.7% error. That is only possible if the operators are nearly identical in effect
+-- and they are, because `tanh(z + a . small)` at `a = 0.35` is a weak
+perturbation of the identity.
+
+    THE EXISTING SUBSTRATE'S OPERATORS ARE TOO WEAK FOR CONTROL FLOW OF ANY KIND
+    TO CARRY INFORMATION.
+
+Repeating them converges, so a loop cannot be identified. Choosing between them
+barely changes the output, so a branch is not needed. These are not two problems;
+they are one property seen twice. It also re-reads E6's macro results: a macro
+abbreviates a sequence of operators whose individual effects are small, so the
+description saving was always going to be marginal.
+
+## What this changes in the spec
+
+Branching moves from OUT OF SCOPE to a registered second application of the same
+substrate, with the gate above as its necessity criterion. No other clause
+changes: G1, G2, G4 stand as written, G3 stays withdrawn, and G5 -- learnability,
+requiring lifetimes -- remains the single go/no-go this spec does not authorize.
+
+The registered prediction for G5 is unchanged and if anything sharpened: the same
+operator strength that makes control flow informative is what makes the family
+harder to fit, so G5 remains genuinely uncertain and near even.
