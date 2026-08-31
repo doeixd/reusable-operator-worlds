@@ -262,3 +262,53 @@ the project, which the standing rule forbids.
 
 The rotated primitive must reduce to the standard one when `Q = I`, and that
 reduction is asserted as a unit test rather than assumed.
+
+# Amendment 4 (2026-08-31, after G5 ran): G5 measured a MISMATCH, not learnability
+
+G5 returned FAILS 0/3 and the result is reported unrewritten. But it does not
+answer the question the spec asked, and the reason is a defect in this spec.
+
+## What was measured
+
+    world   rotated final   standard final   held-out trained   scratch   margin
+      0        1.131          0.0167 (x68)        1.258          1.488     +0.17
+      1        1.112          0.0116 (x96)        1.215          1.471     +0.19
+      2        1.160          0.0130 (x89)        1.239          1.523     +0.21
+
+## Why it does not answer the spec's question
+
+**BOTH arms exceed NMSE 1.0** -- worse than predicting zero -- including the
+FROM-SCRATCH learner. That is not a learning failure; it says the target is not in
+the hypothesis class. And it plainly is not: the learner's operators are the
+CONTRACTING family `tanh(z + a U tanh(Vz+b))`, a near-identity map, while the
+teacher's are rotations. A near-identity operator cannot approximate a rotation,
+so there was never anything for training to find.
+
+G5 as built therefore measures **"can a contracting learner fit a rotated world"**
+and answers no. The spec asked whether the ROTATED SUBSTRATE is learnable, and
+never specified that the learner's operator family should match the teacher's --
+an omission, since a changed operator family is the entire point of the substrate.
+
+## Registered correction
+
+The registered prediction attached to G5 -- "if G5 fails, the finding is that
+control flow and learnability trade off in this operator class" -- is WITHDRAWN as
+unsupported. What is established is narrower and more actionable: a rotated
+teacher cannot be paired with a contracting learner.
+
+**G5 is superseded by G5R**, which gives the learner the SAME operator family as
+the teacher: a rotated variant of the library operator, with `Q` learned or fixed
+per slot. Its criterion is unchanged -- clause (a) at `>= 0.75` log units over
+from-scratch, clause (b) within a factor of 2 -- so the substrate is still held to
+the bar the existing one clears.
+
+G5's result is retained in the record as what it is: a matched-family requirement,
+demonstrated by its violation. It also supplies G5R's floor -- any G5R number must
+beat 1.13/1.11/1.16, or the rotated learner is no better than the mismatched one.
+
+## What G5R can still fail at, and why it is worth running
+
+If a MATCHED rotated learner also cannot fit, then the trade-off hypothesis
+survives and becomes well-supported rather than assumed. If it fits, the substrate
+is viable and the control-flow rungs open. Either outcome is informative, which
+was not true of G5 as built.

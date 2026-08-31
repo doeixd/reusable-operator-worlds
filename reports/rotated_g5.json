@@ -1,0 +1,49 @@
+{
+ "frozen_spec": "ROTATED_SUBSTRATE_SPEC.md (Amendment 3)",
+ "git_commit": "ef7c2e0",
+ "protocol": {
+  "held_out": 12,
+  "margin": 0.75,
+  "comparability": 2.0,
+  "adapt_steps": 2000,
+  "note": "identical config to the existing artifacts; Q is the only difference between substrates"
+ },
+ "worlds": {
+  "0": {
+   "rotated_final_nmse": 1.131372472867434,
+   "standard_final_nmse": 0.016733499225669496,
+   "comparability_ratio": 67.6112304790314,
+   "held_out_trained_nmse": 1.2581152098977093,
+   "held_out_scratch_nmse": 1.4877090828839266,
+   "learnability_margin": 0.16762267260242122,
+   "clause_a_passes": false,
+   "clause_b_passes": false
+  },
+  "1": {
+   "rotated_final_nmse": 1.1117110987250762,
+   "standard_final_nmse": 0.011587268817448357,
+   "comparability_ratio": 95.94246204515753,
+   "held_out_trained_nmse": 1.2154893969548455,
+   "held_out_scratch_nmse": 1.4710181959406754,
+   "learnability_margin": 0.19080801977926637,
+   "clause_a_passes": false,
+   "clause_b_passes": false
+  },
+  "2": {
+   "rotated_final_nmse": 1.1595628182923918,
+   "standard_final_nmse": 0.01301585853073352,
+   "comparability_ratio": 89.08846201381107,
+   "held_out_trained_nmse": 1.239354517973407,
+   "held_out_scratch_nmse": 1.5226956475132096,
+   "learnability_margin": 0.20589152239743483,
+   "clause_a_passes": false,
+   "clause_b_passes": false
+  }
+ },
+ "verdict": {
+  "clause_a_worlds": 0,
+  "clause_b_worlds": 0,
+  "G5": "FAILS",
+  "comparability": "learnable but harder"
+ }
+}

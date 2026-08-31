@@ -1,0 +1,5 @@
+[w0] rotated final NMSE 1.13137 vs standard 0.01673 (x67.61) | held-out trained 1.25812 scratch 1.48771 -> margin +0.17 FAILS (need 0.75)
+[w1] rotated final NMSE 1.11171 vs standard 0.01159 (x95.94) | held-out trained 1.21549 scratch 1.47102 -> margin +0.19 FAILS (need 0.75)
+[w2] rotated final NMSE 1.15956 vs standard 0.01302 (x89.09) | held-out trained 1.23935 scratch 1.52270 -> margin +0.21 FAILS (need 0.75)
+
+G5 learnability 0/3, comparability 0/3 -> FAILS (learnable but harder)
