@@ -4161,3 +4161,30 @@ deliberate decision rather than a next step.
 Process: E9 took four amendments to find its root unbuildable. This spec named its
 own most likely failure and it was checked BEFORE any freeze hash was recorded,
 for about ten minutes of work.
+
+# A rotated primitive family makes iteration necessary (2026-08-31)
+
+Teacher-side arithmetic, minutes, no lifetimes. The withdrawn iteration spec's
+consequence was "an iteration-necessary world needs a NON-CONTRACTIVE primitive
+family". Three candidates were checked against the same necessity gate (best
+achievable NMSE by ANY fixed depth, given the true primitive, required >= 0.25):
+
+    current   tanh(z + a U tanh(Vz+b))   0.024 / 0.032 / 0.027   x0.58   fails
+    no-squash      z + a U tanh(Vz+b)    0.009 / 0.014 / 0.011   x1.35   fails worse
+    rotated   Q(z + a U tanh(Vz+b))      1.667 / 1.721 / 1.728   x1.03   PASSES
+
+`Q` orthogonal. The rotation is the whole ingredient: it keeps the residual
+structure and prevents convergence to a fixed point, so `P^k` traverses distinct
+states and no fixed depth approximates the family. Best fixed depth scores NMSE
+ABOVE 1 -- worse than predicting zero -- so iteration is essential rather than
+merely useful, and norms stay bounded (x1.03) so tasks are not degenerate.
+
+Worth recording that the obvious first guess FAILED WORSE: removing the outer
+squashing function lets the norm grow while the iterates still converge in
+DIRECTION, so a fixed depth approximates them better than in the current family.
+Non-contraction of the norm is not the property that matters; absence of a fixed
+point is.
+
+This makes a new substrate viable. It does NOT make it free: the rotated family
+needs its own trained libraries, so the first rung on it requires lifetimes and is
+a separate go/no-go from speccing the world.
