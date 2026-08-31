@@ -47,6 +47,7 @@ FROZEN = {
     "E6_MACRO_PLAN.md": "ab81b01",
     "E6_2_COMPILED_MACRO_PLAN.md": "ebec48e",
     "E9_PARTIAL_COVERAGE_PLAN.md": "bc121b0",
+    "ROTATED_SUBSTRATE_SPEC.md": "643e1c4",
     "EXPORT_CONFIRMATION_PLAN.md": "4b1f8cd",
     "E3_PROGRAM_ECONOMY_PLAN.md": "97f2413",
     "E8_LENGTH_PLAN.md": "473d34b",
