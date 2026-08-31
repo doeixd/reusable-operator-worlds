@@ -221,3 +221,44 @@ requiring lifetimes -- remains the single go/no-go this spec does not authorize.
 The registered prediction for G5 is unchanged and if anything sharpened: the same
 operator strength that makes control flow informative is what makes the family
 harder to fit, so G5 remains genuinely uncertain and near even.
+
+# Amendment 3 (2026-08-31, before G5 code): G5's threshold, made numeric
+
+G5 is registered as "trainable ... to a lifetime cost COMPARABLE to the existing
+substrate's". That is not a number and cannot be scored. Made precise here,
+before any lifetime is spent.
+
+## Registered criterion
+
+G5 passes iff BOTH, in >= 2 of 3 worlds:
+
+**(a) LEARNABILITY, the substantive clause.** A library trained on the rotated
+`sigma = 0` world beats a FROM-SCRATCH learner on held-out programs, by
+`>= 0.75` log units of query NMSE under support-only route inference. This is
+E1's export margin and E5.1's eligibility margin, unchanged, so the rotated
+substrate is being held to the bar the existing one already cleared.
+
+**(b) COMPARABILITY.** The rotated library's final training NMSE is within a
+factor of 2 of the standard library's on its own world. This asks whether the
+rotation has made the family harder to fit, not whether it is fittable at all.
+
+Clause (a) decides G5. Clause (b) is reported alongside and a failure of (b)
+alone is recorded as "learnable but harder", not as a failed gate.
+
+## Matching
+
+The rotated lifetimes use the IDENTICAL config to the existing artifacts -- same
+seeds, slots, ranks, learning rates, schedule, task count -- so `Q` is the only
+difference between the two substrates. The comparison is against the EXISTING
+standard artifacts; no standard lifetime is re-run, and none is modified.
+
+## Implementation constraint
+
+The rotated generator is a NEW MODULE (`src/row/rotated_world.py`), mirroring
+`world.py` the way `mixed_world.py` and `task_group_world.py` already mirror it.
+`world.py`, `WorldConfig` and every existing fingerprint are untouched -- adding a
+field to the shared config would invalidate every resolved-config fingerprint in
+the project, which the standing rule forbids.
+
+The rotated primitive must reduce to the standard one when `Q = I`, and that
+reduction is asserted as a unit test rather than assumed.
