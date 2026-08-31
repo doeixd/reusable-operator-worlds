@@ -4625,3 +4625,22 @@ than as a one-off miss.
   because near-identity operators are near-identical to each other. Both
   properties trace to the same operator weakness. The check cost two minutes;
   skipping it would have sent the next rung to a substrate that cannot host it.
+
+- A TIMED-OUT FOREGROUND COMMAND BECOMES AN ORPHAN, AND ORPHANS LOOK LIKE A
+  MEMORY LEAK (2026-08-31). The PI reported a memory leak during the G5 run.
+  Measured: the lifetime loop does not leak at all -- resident memory is FLAT at
+  325 / 330 / 332 MB across 8, 16 and 32 tasks, and repeated `run()` calls add
+  nothing after the first (which is torch warmup, ~92 MB). The actual cause was
+  process hygiene: when a `timeout N python ...` exceeds the harness's own
+  two-minute tool limit the command is MOVED TO THE BACKGROUND rather than
+  killed, so the process keeps running; relaunching the same script with `nohup`
+  then leaves TWO live interpreters. Confirmed directly -- two processes, same
+  command line, 335 MB each, started three minutes apart. Several probes this
+  session (`dry9`, `dry62`, `dryg5`, `memscale`) were launched that way.
+
+  RULE: after any tool-timeout on a long command, LIST PROCESSES before
+  relaunching, and prefer `nohup ... &` from the start for anything that may run
+  past the tool limit. This is the same family as "background shell jobs die
+  silently with the session" -- the mirror image: foreground jobs SURVIVE a
+  timeout and accumulate. Check `Get-CimInstance Win32_Process -Filter
+  "Name='python.exe'"` with CommandLine to see duplicates.
