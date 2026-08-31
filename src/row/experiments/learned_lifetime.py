@@ -477,11 +477,16 @@ def run(
     snapshot_history: bool = False,
     route_policy_hook=None,
     head_policy_hook=None,
+    world=None,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
     torch.set_num_threads(1)
-    world = World.generate(config.world)
+    # `world` defaults to None, so every pre-existing caller is unchanged. It
+    # exists so a generator VARIANT (e.g. `rotated_world`) can be run through the
+    # identical lifetime loop rather than through a duplicated one -- the E5
+    # lesson that an arm is a construction, not a name.
+    world = World.generate(config.world) if world is None else world
     if task_id_scramble_seed is not None:
         world = world.with_scrambled_task_ids(task_id_scramble_seed)
     model = _build_model(config, kind)
