@@ -4268,3 +4268,58 @@ duplicate interpreters left behind when a `timeout` command exceeded the harness
 tool limit and was backgrounded rather than killed. The final run completed
 normally -- six artifacts, three worlds, verdict written -- while the monitor
 watching it exited 254.
+
+# G5R complete: a matched rotated learner also FAILS 0/3 (2026-08-31; validated 2026-09-01)
+
+Ran `src/row/experiments/audit_rotated_g5r.py` from clean committed code
+`f3db91a` against `ROTATED_SUBSTRATE_SPEC.md` Amendment 4. The learner now has
+the SAME operator family as the teacher:
+
+    P(z) = Q (z + a U tanh(Vz+b))
+
+Each of the 12 learner slots has an independent trainable exact orthogonal map,
+represented by `d` or `d-1` Householder reflections. Slots alternate the two
+components of O(d), initialization uses the MODEL seed only, and no teacher
+primitive identity or rotation is exposed. The ordinary shared lifetime loop,
+optimizer, replay, persistence, reload, and support-only adaptation scorer are
+unchanged. Report `reports/rotated_g5r.json`; artifacts
+`artifacts/g5r_rotated/`.
+
+    world  matched final  G5 mismatch floor  standard final  ratio   held-out trained  scratch  margin
+      0       1.7633          1.1314             0.01673      105.4       2.0992        2.5721   +0.20
+      1       1.6133          1.1117             0.01159      139.2       1.9277        2.1714   +0.12
+      2       1.6965          1.1596             0.01302      130.3       2.0180        2.6910   +0.29
+
+Registered learnability required a `>= 0.75` log-NMSE margin in at least 2/3
+worlds. **G5R FAILS 0/3.** Comparability required final lifetime NMSE within 2x
+the standard substrate; it also fails 0/3. The matched learner fails even G5's
+weaker floor in 0/3: it is 45-56% WORSE than the contracting mismatch.
+
+This is not route collapse. All 12 slots are active, mean maximum route
+coefficient is 0.79-0.80, and the exact orthogonal maps survive serialization
+with worst `||Q^T Q-I||_max = 5.96e-7`. What fails is acquisition: one-to-one
+operator recovery is poor, exact explained-route recovery is zero on world 0,
+and final error grows over the lifetime there. The matched family is
+representationally eligible but not learnable under the registered online
+optimizer and budget.
+
+Licensed conclusion: **the substrate change that makes control flow identifiable
+is not learnable by the current ROW library-learning protocol, even after the
+learner family is matched.** This supports an empirical control-flow-versus-
+learnability frontier for THIS parameterization, optimizer, and budget. It does
+not prove that orthogonal operators are globally unlearnable: a different
+orthogonal parameterization, optimizer, initialization, or training budget was
+not tested. No iteration or branching learner rung opens from this gate.
+
+Validation passed: exit code 0; three expected cells; 8,832 rows and 8,192
+score-before-update records per world; 64 task summaries/programs; finite JSON
+and all 125 checkpoint tensors; fresh artifacts; correct world/model seeds and
+`rotated_discrete` fingerprints at `f3db91a`; restricted checkpoint reload;
+orthogonality after reload; and `check_prereg.py`. The full 198-test suite passed
+before launch. A reporting-only correction replaced the inherited phrase
+"learnable but harder" with "not learnable; comparability also fails"; no number
+or verdict changed, and a regression test now guards all four clause outcomes.
+
+The control-flow branch is CLOSED at G5R. A successor would require a newly
+registered strong-but-learnable substrate or a distinct orthogonal-learning
+protocol; neither is inferred or authorized by this negative result.

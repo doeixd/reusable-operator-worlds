@@ -866,6 +866,17 @@ are recovered.
   decline overall). Amortization is therefore a demonstrated
   early-lifetime component of the crossover, not its whole mechanism,
   and we do not claim a confirmed lifetime-length law.
+- A later development-only control-flow substrate audit sharpens the
+  family-alignment limitation. Adding an orthogonal state rotation makes
+  iteration and branching genuinely necessary, but a learner with the same
+  rotated operator family fails the registered learnability gate in all three
+  development worlds (final NMSE 1.61-1.76 versus 0.012-0.017 on the ordinary
+  substrate). The exact maps remain orthogonal and routing does not collapse;
+  the current online protocol fails to acquire them. Thus matching the
+  representational family is necessary but not sufficient for learnability, and
+  this paper makes no claim that its library-learning result extends to the
+  stronger operator substrates required for control flow. This is a
+  development boundary, not an additional sealed claim.
 
 
 On promotion specifically (section 7.5): the world is constructed to

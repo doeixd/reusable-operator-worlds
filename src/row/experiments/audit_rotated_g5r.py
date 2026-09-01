@@ -51,6 +51,17 @@ def _final_nmse(summary: dict) -> float:
     return float(value["median"] if isinstance(value, dict) else value)
 
 
+def _comparability_label(learnability_worlds: int, comparability_worlds: int) -> str:
+    """Keep the secondary clause from implying that failed G5R was learnable."""
+    if learnability_worlds < 2:
+        return (
+            "not learnable despite comparability"
+            if comparability_worlds >= 2
+            else "not learnable; comparability also fails"
+        )
+    return "comparable" if comparability_worlds >= 2 else "learnable but harder"
+
+
 def _validate_standard(config, world_seed: int) -> float:
     """Load G5's standard control only after its full provenance validates."""
     path = STANDARD_ARTIFACTS / f"world_{world_seed}_standard"
@@ -228,7 +239,7 @@ def main() -> None:
         "clause_b_worlds": b,
         "beats_mismatched_floor_worlds": floor,
         "G5R": "PASSES" if a >= 2 else "FAILS",
-        "comparability": "comparable" if b >= 2 else "learnable but harder",
+        "comparability": _comparability_label(a, b),
     }
     write(out, args.output)
     print(

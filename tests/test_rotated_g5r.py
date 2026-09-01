@@ -5,11 +5,23 @@ import tempfile
 import unittest
 
 from row.config import load_config
-from row.experiments.audit_rotated_g5r import _load_or_run
+from row.experiments.audit_rotated_g5r import _comparability_label, _load_or_run
 from row.rotated_world import generate_rotated_world
 
 
 class TestRotatedG5R(unittest.TestCase):
+    def test_comparability_label_never_calls_a_failed_gate_learnable(self):
+        self.assertEqual(
+            _comparability_label(0, 0),
+            "not learnable; comparability also fails",
+        )
+        self.assertEqual(
+            _comparability_label(0, 3),
+            "not learnable despite comparability",
+        )
+        self.assertEqual(_comparability_label(3, 0), "learnable but harder")
+        self.assertEqual(_comparability_label(3, 3), "comparable")
+
     def test_tiny_lifetime_persists_reloads_and_resumes_matched_learner(self):
         base = load_config("configs/v1.yaml")
         with tempfile.TemporaryDirectory() as directory:

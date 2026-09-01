@@ -4644,3 +4644,24 @@ than as a one-off miss.
   silently with the session" -- the mirror image: foreground jobs SURVIVE a
   timeout and accumulate. Check `Get-CimInstance Win32_Process -Filter
   "Name='python.exe'"` with CommandLine to see duplicates.
+
+- MATCHING A HYPOTHESIS CLASS DOES NOT MAKE IT LEARNABLE (G5R, 2026-08-31;
+  `reports/rotated_g5r.json`). G5 first failed because a contracting learner was
+  asked to fit a rotated teacher. G5R repaired that construct exactly: every slot
+  learned `Q(z + a U tanh(Vz+b))`, with `Q` an exact trainable Householder product
+  covering both components of O(d), model-seed initialization, all 12 slots
+  active, and post-reload orthogonality error below `6e-7`. It did WORSE:
+  final NMSE 1.61-1.76 versus G5's 1.11-1.16 and ordinary-substrate 0.012-0.017;
+  held-out library-over-scratch margins 0.12-0.29 against a 0.75 bar. Exact
+  representational eligibility and online findability are different gates. A
+  strong substrate can make control flow necessary while making its reusable
+  objects too difficult for the current lifetime optimizer to acquire. State the
+  frontier at the measured parameterization and budget; do not promote an
+  optimizer failure into a theorem about orthogonal computation.
+
+- A SECONDARY STATUS LABEL MUST BE CONDITIONED ON THE PRIMARY GATE (G5 and
+  G5R). The inherited scorer printed "learnable but harder" whenever
+  comparability failed, even when learnability itself failed 0/3. The numbers and
+  verdict were right; the phrase was logically impossible. Decision labels need
+  a truth table, not a one-clause ternary. G5R now reports "not learnable;
+  comparability also fails" and tests all four primary/secondary outcomes.

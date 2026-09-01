@@ -1,0 +1,68 @@
+{
+ "frozen_spec": "ROTATED_SUBSTRATE_SPEC.md (Amendment 4)",
+ "git_commit": "f3db91a",
+ "protocol": {
+  "id": "G5R-Amendment4-householder-v1",
+  "held_out": 12,
+  "margin": 0.75,
+  "comparability": 2.0,
+  "adapt_steps": 2000,
+  "learner_rotation": "trainable exact Householder map per slot",
+  "initialization": "model seed only; alternating O(d) determinant components",
+  "standard_source": "artifacts\\g5_rotated",
+  "mismatched_floor_source": "reports\\rotated_g5.json"
+ },
+ "worlds": {
+  "0": {
+   "matched_rotated_final_nmse": 1.7633042113950168,
+   "mismatched_g5_final_nmse": 1.131372472867434,
+   "beats_mismatched_floor": false,
+   "standard_final_nmse": 0.016733499225669496,
+   "comparability_ratio": 105.37570101835459,
+   "held_out_trained_nmse": 2.099224320740512,
+   "held_out_scratch_nmse": 2.5721363877350316,
+   "learnability_margin": 0.20316892744107118,
+   "clause_a_passes": false,
+   "clause_b_passes": false
+  },
+  "1": {
+   "matched_rotated_final_nmse": 1.613279168228695,
+   "mismatched_g5_final_nmse": 1.1117110987250762,
+   "beats_mismatched_floor": false,
+   "standard_final_nmse": 0.011587268817448357,
+   "comparability_ratio": 139.2285959396562,
+   "held_out_trained_nmse": 1.9276880260830271,
+   "held_out_scratch_nmse": 2.1713798863640874,
+   "learnability_margin": 0.11904148689443994,
+   "clause_a_passes": false,
+   "clause_b_passes": false
+  },
+  "2": {
+   "matched_rotated_final_nmse": 1.6964806556833039,
+   "mismatched_g5_final_nmse": 1.1595628182923918,
+   "beats_mismatched_floor": false,
+   "standard_final_nmse": 0.01301585853073352,
+   "comparability_ratio": 130.33951250142368,
+   "held_out_trained_nmse": 2.0179728913074646,
+   "held_out_scratch_nmse": 2.6909755317837303,
+   "learnability_margin": 0.2878102906964779,
+   "clause_a_passes": false,
+   "clause_b_passes": false
+  }
+ },
+ "verdict": {
+  "clause_a_worlds": 0,
+  "clause_b_worlds": 0,
+  "beats_mismatched_floor_worlds": 0,
+  "G5R": "FAILS",
+  "comparability": "not learnable; comparability also fails"
+ },
+ "reporting_correction": {
+  "date": "2026-09-01",
+  "field": "verdict.comparability",
+  "original": "learnable but harder",
+  "corrected": "not learnable; comparability also fails",
+  "reason": "the secondary comparability label must not imply learnability when clause (a) fails",
+  "numbers_or_gate_verdict_changed": false
+ }
+}

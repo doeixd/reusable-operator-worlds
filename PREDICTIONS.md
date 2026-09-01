@@ -7342,3 +7342,36 @@ than an order of magnitude.*
 NOT licensed: "the learner invented a primitive". The fragment was supplied by
 E6's economics, the compilation is a fitting step we performed, and at the one
 budget where the substrate's own objects live, it does not work.
+
+# Rotated-substrate G5R: matched-family learnability result (2026-08-31)
+
+REGISTERED in `ROTATED_SUBSTRATE_SPEC.md` Amendment 4 after G5 exposed a
+teacher/learner family mismatch. G5R gave every learner slot the rotated
+teacher's operator form, with an independently learned exact orthogonal `Q` and
+no hidden primitive identity. The original rule was retained: in at least 2/3
+development worlds, the trained library must beat a matched from-scratch learner
+on held-out programs by `>= 0.75` log units of query NMSE; final lifetime NMSE
+within 2x the ordinary substrate was reported separately. G5's mismatched final
+errors, 1.13/1.11/1.16, were registered as a floor.
+
+RESULT: **G5R FAILS 0/3.** Held-out margins are `+0.20`, `+0.12`, and `+0.29`,
+all far below `0.75`. Final lifetime NMSE is `1.763`, `1.613`, and `1.696`, or
+`105x`, `139x`, and `130x` the ordinary substrate; the matched learner also
+beats G5's mismatched floor in 0/3 worlds. Comparability therefore fails 0/3.
+
+Scorekeeping:
+
+- "A matched rotated learner clears the ordinary export learnability bar":
+  **WRONG, 0/3.**
+- "Matching the family at least improves on G5's contracting mismatch":
+  **WRONG, 0/3.**
+- "If a matched learner also cannot fit, the empirical control-flow-versus-
+  learnability trade-off survives": **SUPPORTED under the registered
+  parameterization, optimizer, and budget.** It is not a global impossibility
+  claim about orthogonal operators.
+- "The control-flow rungs open after G5R": **WRONG.** They remain closed.
+
+The negative is not explained by collapsed routing: all 12 slots are used and
+the learned maps remain orthogonal after reload. It is an acquisition failure in
+a representationally matched class. Report `reports/rotated_g5r.json`, committed
+instrument `f3db91a`.
