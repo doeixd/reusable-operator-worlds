@@ -7375,3 +7375,32 @@ The negative is not explained by collapsed routing: all 12 slots are used and
 the learned maps remain orthogonal after reload. It is an acquisition failure in
 a representationally matched class. Report `reports/rotated_g5r.json`, committed
 instrument `f3db91a`.
+
+# Rotated-substrate G5R: frozen failure-localization result (2026-09-01)
+
+REGISTERED in `G5R_DIAGNOSIS_PLAN.md` before the diagnostic scorer or endpoints
+existed. The decision ladder tested exact representability, three isolated
+single-operator optimization arms, and conditionally a joint shared library with
+true routes fixed. It used development worlds 0-2 only and cannot revise G5R's
+failed 0/3 online verdict.
+
+RESULT:
+
+- Constructive matched-family representation: **PASS, 18/18 primitives.**
+- Isolated H-Adam: **PASS, 18/18 primitives and 3/3 worlds.**
+- Original isolated H-LBFGS: **INVALID PROTOCOL ARM.** Its 18/18 numerical pass
+  used an unregistered L2 penalty and is preserved but not cited as evidence; a
+  frozen unregularized correction is pending.
+- Isolated projected-Q Adam: **PASS, 18/18 primitives and 3/3 worlds.**
+- Oracle-route joint library: **PASS by the registered 2/3-world rule.** Final
+  median task query NMSE was `0.72207`, `0.00625`, and `0.00538`; world 0 failed
+  and worlds 1-2 passed.
+
+Frozen classification:
+**`ROUTE_INFERENCE_OR_ONLINE_INTERFERENCE_FAILURE`**. This rules out the tested
+forms of exact representability and isolated operator findability as the primary
+explanation. It does not distinguish route inference from online interference,
+prove either one necessary, justify post-hoc retuning, or establish robustness
+beyond the 2/3 development gate. Report
+`reports/rotated_g5r_diagnosis.json`, instrument `3b3820a`; H-LBFGS correction
+plan `G5R_DIAGNOSIS_CORRECTION.md` frozen at `c4e557d`.

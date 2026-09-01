@@ -1,0 +1,1096 @@
+{
+ "frozen_plan": "G5R_DIAGNOSIS_PLAN.md",
+ "git_commit": "3b3820a",
+ "protocol": {
+  "worlds": [
+   0,
+   1,
+   2
+  ],
+  "primitives": 6,
+  "train_examples": 512,
+  "query_examples": 2048,
+  "adam_steps": 2000,
+  "adam_lr": 0.001,
+  "weight_decay": 0.0001,
+  "lbfgs_steps": 500,
+  "lbfgs_lr": 1.0,
+  "cell_threshold": 0.02,
+  "cells_per_world": 5,
+  "worlds_required": 2,
+  "stage_c_steps": 4096,
+  "stage_c_batch": 64,
+  "stage_c_checkpoints": [
+   0,
+   256,
+   1024,
+   4096
+  ],
+  "stage_c_threshold": 0.05,
+  "arms": [
+   "H-Adam",
+   "H-LBFGS",
+   "Q-Adam"
+  ]
+ },
+ "stage_a": {
+  "cells": {
+   "w0_p0": {
+    "query_nmse": 3.090378701640223e-14,
+    "rotation_max_abs_error": 1.2786641176605607e-07,
+    "orthogonality_max_abs_error": 1.8715634109156554e-07,
+    "passes": true,
+    "world": 0,
+    "primitive": 0,
+    "slot": 1
+   },
+   "w0_p1": {
+    "query_nmse": 3.7410961779621096e-14,
+    "rotation_max_abs_error": 2.036560128870768e-07,
+    "orthogonality_max_abs_error": 3.262985863727863e-07,
+    "passes": true,
+    "world": 0,
+    "primitive": 1,
+    "slot": 3
+   },
+   "w0_p2": {
+    "query_nmse": 3.365232083881592e-14,
+    "rotation_max_abs_error": 1.921925338981001e-07,
+    "orthogonality_max_abs_error": 2.885527934370913e-07,
+    "passes": true,
+    "world": 0,
+    "primitive": 2,
+    "slot": 0
+   },
+   "w0_p3": {
+    "query_nmse": 3.465561781231148e-14,
+    "rotation_max_abs_error": 1.5375624906610597e-07,
+    "orthogonality_max_abs_error": 3.5176482882093296e-07,
+    "passes": true,
+    "world": 0,
+    "primitive": 3,
+    "slot": 2
+   },
+   "w0_p4": {
+    "query_nmse": 3.393720851216364e-14,
+    "rotation_max_abs_error": 1.4318772949273306e-07,
+    "orthogonality_max_abs_error": 2.5314646490137704e-07,
+    "passes": true,
+    "world": 0,
+    "primitive": 4,
+    "slot": 4
+   },
+   "w0_p5": {
+    "query_nmse": 3.472784600578975e-14,
+    "rotation_max_abs_error": 1.2895003193014176e-07,
+    "orthogonality_max_abs_error": 2.4528701914050544e-07,
+    "passes": true,
+    "world": 0,
+    "primitive": 5,
+    "slot": 5
+   },
+   "w1_p0": {
+    "query_nmse": 3.531984410888936e-14,
+    "rotation_max_abs_error": 1.951686108836448e-07,
+    "orthogonality_max_abs_error": 3.1276299683469233e-07,
+    "passes": true,
+    "world": 1,
+    "primitive": 0,
+    "slot": 0
+   },
+   "w1_p1": {
+    "query_nmse": 3.536692558822954e-14,
+    "rotation_max_abs_error": 1.4678304387227836e-07,
+    "orthogonality_max_abs_error": 2.3444413055351276e-07,
+    "passes": true,
+    "world": 1,
+    "primitive": 1,
+    "slot": 2
+   },
+   "w1_p2": {
+    "query_nmse": 4.371683069259551e-14,
+    "rotation_max_abs_error": 1.8505936871804352e-07,
+    "orthogonality_max_abs_error": 3.672397814735717e-07,
+    "passes": true,
+    "world": 1,
+    "primitive": 2,
+    "slot": 1
+   },
+   "w1_p3": {
+    "query_nmse": 3.3809848638214485e-14,
+    "rotation_max_abs_error": 2.557088817356501e-07,
+    "orthogonality_max_abs_error": 5.333624908399059e-07,
+    "passes": true,
+    "world": 1,
+    "primitive": 3,
+    "slot": 4
+   },
+   "w1_p4": {
+    "query_nmse": 3.9903874611080595e-14,
+    "rotation_max_abs_error": 2.441302068278972e-07,
+    "orthogonality_max_abs_error": 7.314230971999791e-07,
+    "passes": true,
+    "world": 1,
+    "primitive": 4,
+    "slot": 6
+   },
+   "w1_p5": {
+    "query_nmse": 2.73328502707745e-14,
+    "rotation_max_abs_error": 2.3382548541839299e-07,
+    "orthogonality_max_abs_error": 2.3280346272969155e-07,
+    "passes": true,
+    "world": 1,
+    "primitive": 5,
+    "slot": 8
+   },
+   "w2_p0": {
+    "query_nmse": 3.863323371064084e-14,
+    "rotation_max_abs_error": 1.6335582220250444e-07,
+    "orthogonality_max_abs_error": 3.0461773214973675e-07,
+    "passes": true,
+    "world": 2,
+    "primitive": 0,
+    "slot": 1
+   },
+   "w2_p1": {
+    "query_nmse": 3.346280229906545e-14,
+    "rotation_max_abs_error": 1.683909535143968e-07,
+    "orthogonality_max_abs_error": 3.536278521121261e-07,
+    "passes": true,
+    "world": 2,
+    "primitive": 1,
+    "slot": 0
+   },
+   "w2_p2": {
+    "query_nmse": 3.70689027704655e-14,
+    "rotation_max_abs_error": 1.8257548800582057e-07,
+    "orthogonality_max_abs_error": 3.982719507522603e-07,
+    "passes": true,
+    "world": 2,
+    "primitive": 2,
+    "slot": 2
+   },
+   "w2_p3": {
+    "query_nmse": 4.027175796073208e-14,
+    "rotation_max_abs_error": 2.0346403850624029e-07,
+    "orthogonality_max_abs_error": 3.093936957743182e-07,
+    "passes": true,
+    "world": 2,
+    "primitive": 3,
+    "slot": 3
+   },
+   "w2_p4": {
+    "query_nmse": 3.466462685473848e-14,
+    "rotation_max_abs_error": 2.035815441780997e-07,
+    "orthogonality_max_abs_error": 3.0192933775374797e-07,
+    "passes": true,
+    "world": 2,
+    "primitive": 4,
+    "slot": 4
+   },
+   "w2_p5": {
+    "query_nmse": 3.820196857961221e-14,
+    "rotation_max_abs_error": 2.560016952868338e-07,
+    "orthogonality_max_abs_error": 3.6023289706754724e-07,
+    "passes": true,
+    "world": 2,
+    "primitive": 5,
+    "slot": 5
+   }
+  },
+  "passes": true
+ },
+ "stage_b": {
+  "cells": {
+   "w0_p0_H-Adam": {
+    "initial_train_nmse": 1.9906538724899292,
+    "initial_query_nmse": 2.038050413131714,
+    "final_train_nmse": 0.0017250161617994308,
+    "final_query_nmse": 0.004010665696114302,
+    "orthogonality_max_abs_error": 2.4081938931885816e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 0,
+    "slot": 1,
+    "arm": "H-Adam"
+   },
+   "w0_p0_H-LBFGS": {
+    "initial_train_nmse": 1.9906538724899292,
+    "initial_query_nmse": 2.038050413131714,
+    "final_train_nmse": 0.00021120790916029364,
+    "final_query_nmse": 0.00022922926291357726,
+    "orthogonality_max_abs_error": 2.980232238769531e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 0,
+    "slot": 1,
+    "arm": "H-LBFGS"
+   },
+   "w0_p0_Q-Adam": {
+    "initial_train_nmse": 1.9906538724899292,
+    "initial_query_nmse": 2.038050413131714,
+    "final_train_nmse": 0.006180664524435997,
+    "final_query_nmse": 0.0099330497905612,
+    "orthogonality_max_abs_error": 1.0728836059570312e-06,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 0,
+    "slot": 1,
+    "arm": "Q-Adam"
+   },
+   "w0_p1_H-Adam": {
+    "initial_train_nmse": 2.0998950004577637,
+    "initial_query_nmse": 2.05387282371521,
+    "final_train_nmse": 0.0006192193832248449,
+    "final_query_nmse": 0.0007110444130375981,
+    "orthogonality_max_abs_error": 2.384185791015625e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 1,
+    "slot": 3,
+    "arm": "H-Adam"
+   },
+   "w0_p1_H-LBFGS": {
+    "initial_train_nmse": 2.0998950004577637,
+    "initial_query_nmse": 2.05387282371521,
+    "final_train_nmse": 0.0001880624913610518,
+    "final_query_nmse": 0.00018580998585093766,
+    "orthogonality_max_abs_error": 3.019185328412277e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 1,
+    "slot": 3,
+    "arm": "H-LBFGS"
+   },
+   "w0_p1_Q-Adam": {
+    "initial_train_nmse": 2.0998950004577637,
+    "initial_query_nmse": 2.05387282371521,
+    "final_train_nmse": 0.005915439687669277,
+    "final_query_nmse": 0.008712305687367916,
+    "orthogonality_max_abs_error": 7.152557373046875e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 1,
+    "slot": 3,
+    "arm": "Q-Adam"
+   },
+   "w0_p2_H-Adam": {
+    "initial_train_nmse": 2.020505428314209,
+    "initial_query_nmse": 2.0330049991607666,
+    "final_train_nmse": 0.00044542961404658854,
+    "final_query_nmse": 0.0005034687928855419,
+    "orthogonality_max_abs_error": 4.76837158203125e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 2,
+    "slot": 0,
+    "arm": "H-Adam"
+   },
+   "w0_p2_H-LBFGS": {
+    "initial_train_nmse": 2.020505428314209,
+    "initial_query_nmse": 2.0330049991607666,
+    "final_train_nmse": 0.00020044959092047065,
+    "final_query_nmse": 0.00021203748474363238,
+    "orthogonality_max_abs_error": 2.980232238769531e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 2,
+    "slot": 0,
+    "arm": "H-LBFGS"
+   },
+   "w0_p2_Q-Adam": {
+    "initial_train_nmse": 2.020505428314209,
+    "initial_query_nmse": 2.0330049991607666,
+    "final_train_nmse": 0.005486031528562307,
+    "final_query_nmse": 0.007632596418261528,
+    "orthogonality_max_abs_error": 1.5497207641601562e-06,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 2,
+    "slot": 0,
+    "arm": "Q-Adam"
+   },
+   "w0_p3_H-Adam": {
+    "initial_train_nmse": 2.0248634815216064,
+    "initial_query_nmse": 2.084690570831299,
+    "final_train_nmse": 0.0005003773840144277,
+    "final_query_nmse": 0.000546889437828213,
+    "orthogonality_max_abs_error": 2.384185791015625e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 3,
+    "slot": 2,
+    "arm": "H-Adam"
+   },
+   "w0_p3_H-LBFGS": {
+    "initial_train_nmse": 2.0248634815216064,
+    "initial_query_nmse": 2.084690570831299,
+    "final_train_nmse": 0.00025266961893066764,
+    "final_query_nmse": 0.0002737104950938374,
+    "orthogonality_max_abs_error": 3.5762786865234375e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 3,
+    "slot": 2,
+    "arm": "H-LBFGS"
+   },
+   "w0_p3_Q-Adam": {
+    "initial_train_nmse": 2.0248634815216064,
+    "initial_query_nmse": 2.084690809249878,
+    "final_train_nmse": 0.0056970370933413506,
+    "final_query_nmse": 0.008881045505404472,
+    "orthogonality_max_abs_error": 7.748603820800781e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 3,
+    "slot": 2,
+    "arm": "Q-Adam"
+   },
+   "w0_p4_H-Adam": {
+    "initial_train_nmse": 2.0812482833862305,
+    "initial_query_nmse": 2.0735526084899902,
+    "final_train_nmse": 0.0005831081653013825,
+    "final_query_nmse": 0.0008334870799444616,
+    "orthogonality_max_abs_error": 2.4554975652790745e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 4,
+    "slot": 4,
+    "arm": "H-Adam"
+   },
+   "w0_p4_H-LBFGS": {
+    "initial_train_nmse": 2.0812482833862305,
+    "initial_query_nmse": 2.0735526084899902,
+    "final_train_nmse": 0.00024169626703951508,
+    "final_query_nmse": 0.00028051785193383694,
+    "orthogonality_max_abs_error": 2.727123273871257e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 4,
+    "slot": 4,
+    "arm": "H-LBFGS"
+   },
+   "w0_p4_Q-Adam": {
+    "initial_train_nmse": 2.0812482833862305,
+    "initial_query_nmse": 2.0735526084899902,
+    "final_train_nmse": 0.005309028085321188,
+    "final_query_nmse": 0.007914072833955288,
+    "orthogonality_max_abs_error": 5.960464477539062e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 4,
+    "slot": 4,
+    "arm": "Q-Adam"
+   },
+   "w0_p5_H-Adam": {
+    "initial_train_nmse": 1.9627070426940918,
+    "initial_query_nmse": 1.9806026220321655,
+    "final_train_nmse": 0.0005364217213355005,
+    "final_query_nmse": 0.0006591002456843853,
+    "orthogonality_max_abs_error": 2.1601870514587063e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 5,
+    "slot": 5,
+    "arm": "H-Adam"
+   },
+   "w0_p5_H-LBFGS": {
+    "initial_train_nmse": 1.9627070426940918,
+    "initial_query_nmse": 1.9806026220321655,
+    "final_train_nmse": 0.00022346063633449376,
+    "final_query_nmse": 0.00024056530673988163,
+    "orthogonality_max_abs_error": 3.5762786865234375e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 5,
+    "slot": 5,
+    "arm": "H-LBFGS"
+   },
+   "w0_p5_Q-Adam": {
+    "initial_train_nmse": 1.9627069234848022,
+    "initial_query_nmse": 1.9806028604507446,
+    "final_train_nmse": 0.003949102945625782,
+    "final_query_nmse": 0.006422924809157848,
+    "orthogonality_max_abs_error": 7.152557373046875e-07,
+    "finite": true,
+    "passes": true,
+    "world": 0,
+    "primitive": 5,
+    "slot": 5,
+    "arm": "Q-Adam"
+   },
+   "w1_p0_H-Adam": {
+    "initial_train_nmse": 2.117175579071045,
+    "initial_query_nmse": 2.1223270893096924,
+    "final_train_nmse": 0.0004674223600886762,
+    "final_query_nmse": 0.0005580336437560618,
+    "orthogonality_max_abs_error": 3.5762786865234375e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 0,
+    "slot": 0,
+    "arm": "H-Adam"
+   },
+   "w1_p0_H-LBFGS": {
+    "initial_train_nmse": 2.117175579071045,
+    "initial_query_nmse": 2.1223270893096924,
+    "final_train_nmse": 0.00014751926937606186,
+    "final_query_nmse": 0.00015089193766470999,
+    "orthogonality_max_abs_error": 3.393941483409435e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 0,
+    "slot": 0,
+    "arm": "H-LBFGS"
+   },
+   "w1_p0_Q-Adam": {
+    "initial_train_nmse": 2.117175340652466,
+    "initial_query_nmse": 2.1223270893096924,
+    "final_train_nmse": 0.0050329407677054405,
+    "final_query_nmse": 0.0063569750636816025,
+    "orthogonality_max_abs_error": 4.76837158203125e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 0,
+    "slot": 0,
+    "arm": "Q-Adam"
+   },
+   "w1_p1_H-Adam": {
+    "initial_train_nmse": 2.1778457164764404,
+    "initial_query_nmse": 2.1856651306152344,
+    "final_train_nmse": 0.0005406943964771926,
+    "final_query_nmse": 0.0006961286999285221,
+    "orthogonality_max_abs_error": 2.384185791015625e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 1,
+    "slot": 2,
+    "arm": "H-Adam"
+   },
+   "w1_p1_H-LBFGS": {
+    "initial_train_nmse": 2.1778457164764404,
+    "initial_query_nmse": 2.1856651306152344,
+    "final_train_nmse": 0.0002072426286758855,
+    "final_query_nmse": 0.0002436701615806669,
+    "orthogonality_max_abs_error": 3.5762786865234375e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 1,
+    "slot": 2,
+    "arm": "H-LBFGS"
+   },
+   "w1_p1_Q-Adam": {
+    "initial_train_nmse": 2.1778457164764404,
+    "initial_query_nmse": 2.1856651306152344,
+    "final_train_nmse": 0.0053877863101661205,
+    "final_query_nmse": 0.007517593912780285,
+    "orthogonality_max_abs_error": 5.960464477539062e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 1,
+    "slot": 2,
+    "arm": "Q-Adam"
+   },
+   "w1_p2_H-Adam": {
+    "initial_train_nmse": 1.908167839050293,
+    "initial_query_nmse": 1.8851332664489746,
+    "final_train_nmse": 0.00047799182357266545,
+    "final_query_nmse": 0.0006258096545934677,
+    "orthogonality_max_abs_error": 2.980232238769531e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 2,
+    "slot": 1,
+    "arm": "H-Adam"
+   },
+   "w1_p2_H-LBFGS": {
+    "initial_train_nmse": 1.908167839050293,
+    "initial_query_nmse": 1.8851332664489746,
+    "final_train_nmse": 0.00013926072278991342,
+    "final_query_nmse": 0.00016246260202024132,
+    "orthogonality_max_abs_error": 3.5762786865234375e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 2,
+    "slot": 1,
+    "arm": "H-LBFGS"
+   },
+   "w1_p2_Q-Adam": {
+    "initial_train_nmse": 1.908167839050293,
+    "initial_query_nmse": 1.8851333856582642,
+    "final_train_nmse": 0.0037648018915206194,
+    "final_query_nmse": 0.004666476044803858,
+    "orthogonality_max_abs_error": 8.344650268554688e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 2,
+    "slot": 1,
+    "arm": "Q-Adam"
+   },
+   "w1_p3_H-Adam": {
+    "initial_train_nmse": 1.8948687314987183,
+    "initial_query_nmse": 1.8689028024673462,
+    "final_train_nmse": 0.0005670941318385303,
+    "final_query_nmse": 0.0009347643353976309,
+    "orthogonality_max_abs_error": 2.980232238769531e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 3,
+    "slot": 4,
+    "arm": "H-Adam"
+   },
+   "w1_p3_H-LBFGS": {
+    "initial_train_nmse": 1.8948687314987183,
+    "initial_query_nmse": 1.8689028024673462,
+    "final_train_nmse": 0.00015195165178738534,
+    "final_query_nmse": 0.00017616827972233295,
+    "orthogonality_max_abs_error": 3.5762786865234375e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 3,
+    "slot": 4,
+    "arm": "H-LBFGS"
+   },
+   "w1_p3_Q-Adam": {
+    "initial_train_nmse": 1.8948688507080078,
+    "initial_query_nmse": 1.8689028024673462,
+    "final_train_nmse": 0.00602011289447546,
+    "final_query_nmse": 0.008220596238970757,
+    "orthogonality_max_abs_error": 7.152557373046875e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 3,
+    "slot": 4,
+    "arm": "Q-Adam"
+   },
+   "w1_p4_H-Adam": {
+    "initial_train_nmse": 1.8796234130859375,
+    "initial_query_nmse": 1.876639485359192,
+    "final_train_nmse": 0.00040709771565161645,
+    "final_query_nmse": 0.0005828514113090932,
+    "orthogonality_max_abs_error": 4.76837158203125e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 4,
+    "slot": 6,
+    "arm": "H-Adam"
+   },
+   "w1_p4_H-LBFGS": {
+    "initial_train_nmse": 1.8796234130859375,
+    "initial_query_nmse": 1.876639485359192,
+    "final_train_nmse": 0.00015214011364150792,
+    "final_query_nmse": 0.00016990055155474693,
+    "orthogonality_max_abs_error": 3.5762786865234375e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 4,
+    "slot": 6,
+    "arm": "H-LBFGS"
+   },
+   "w1_p4_Q-Adam": {
+    "initial_train_nmse": 1.879623532295227,
+    "initial_query_nmse": 1.876639485359192,
+    "final_train_nmse": 0.005025891121476889,
+    "final_query_nmse": 0.0061992742121219635,
+    "orthogonality_max_abs_error": 9.5367431640625e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 4,
+    "slot": 6,
+    "arm": "Q-Adam"
+   },
+   "w1_p5_H-Adam": {
+    "initial_train_nmse": 1.9053806066513062,
+    "initial_query_nmse": 1.9125398397445679,
+    "final_train_nmse": 0.00048799451906234026,
+    "final_query_nmse": 0.0006339250830933452,
+    "orthogonality_max_abs_error": 1.9333698730861215e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 5,
+    "slot": 8,
+    "arm": "H-Adam"
+   },
+   "w1_p5_H-LBFGS": {
+    "initial_train_nmse": 1.9053806066513062,
+    "initial_query_nmse": 1.9125398397445679,
+    "final_train_nmse": 0.00016730230709072202,
+    "final_query_nmse": 0.0001933839375851676,
+    "orthogonality_max_abs_error": 4.76837158203125e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 5,
+    "slot": 8,
+    "arm": "H-LBFGS"
+   },
+   "w1_p5_Q-Adam": {
+    "initial_train_nmse": 1.905380368232727,
+    "initial_query_nmse": 1.9125398397445679,
+    "final_train_nmse": 0.005382447969168425,
+    "final_query_nmse": 0.007777482271194458,
+    "orthogonality_max_abs_error": 7.152557373046875e-07,
+    "finite": true,
+    "passes": true,
+    "world": 1,
+    "primitive": 5,
+    "slot": 8,
+    "arm": "Q-Adam"
+   },
+   "w2_p0_H-Adam": {
+    "initial_train_nmse": 1.9620146751403809,
+    "initial_query_nmse": 1.9625574350357056,
+    "final_train_nmse": 0.0008734463481232524,
+    "final_query_nmse": 0.0014036877546459436,
+    "orthogonality_max_abs_error": 3.5762786865234375e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 0,
+    "slot": 1,
+    "arm": "H-Adam"
+   },
+   "w2_p0_H-LBFGS": {
+    "initial_train_nmse": 1.9620146751403809,
+    "initial_query_nmse": 1.9625574350357056,
+    "final_train_nmse": 0.00019235326908528805,
+    "final_query_nmse": 0.0002053214848274365,
+    "orthogonality_max_abs_error": 3.5762786865234375e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 0,
+    "slot": 1,
+    "arm": "H-LBFGS"
+   },
+   "w2_p0_Q-Adam": {
+    "initial_train_nmse": 1.9620150327682495,
+    "initial_query_nmse": 1.9625574350357056,
+    "final_train_nmse": 0.004644145257771015,
+    "final_query_nmse": 0.00592262065038085,
+    "orthogonality_max_abs_error": 7.152557373046875e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 0,
+    "slot": 1,
+    "arm": "Q-Adam"
+   },
+   "w2_p1_H-Adam": {
+    "initial_train_nmse": 2.199445962905884,
+    "initial_query_nmse": 2.2040977478027344,
+    "final_train_nmse": 0.0005083305295556784,
+    "final_query_nmse": 0.0006038770661689341,
+    "orthogonality_max_abs_error": 3.5762786865234375e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 1,
+    "slot": 0,
+    "arm": "H-Adam"
+   },
+   "w2_p1_H-LBFGS": {
+    "initial_train_nmse": 2.199445962905884,
+    "initial_query_nmse": 2.2040977478027344,
+    "final_train_nmse": 0.00018148843082599342,
+    "final_query_nmse": 0.0002013189223362133,
+    "orthogonality_max_abs_error": 2.384185791015625e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 1,
+    "slot": 0,
+    "arm": "H-LBFGS"
+   },
+   "w2_p1_Q-Adam": {
+    "initial_train_nmse": 2.199445962905884,
+    "initial_query_nmse": 2.2040977478027344,
+    "final_train_nmse": 0.005450369790196419,
+    "final_query_nmse": 0.007242873311042786,
+    "orthogonality_max_abs_error": 8.344650268554688e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 1,
+    "slot": 0,
+    "arm": "Q-Adam"
+   },
+   "w2_p2_H-Adam": {
+    "initial_train_nmse": 2.097752809524536,
+    "initial_query_nmse": 2.069892168045044,
+    "final_train_nmse": 0.0007531060837209225,
+    "final_query_nmse": 0.0010756802512332797,
+    "orthogonality_max_abs_error": 4.172325134277344e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 2,
+    "slot": 2,
+    "arm": "H-Adam"
+   },
+   "w2_p2_H-LBFGS": {
+    "initial_train_nmse": 2.097752809524536,
+    "initial_query_nmse": 2.069892168045044,
+    "final_train_nmse": 0.00015152501873672009,
+    "final_query_nmse": 0.00017020702944137156,
+    "orthogonality_max_abs_error": 1.924979500245172e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 2,
+    "slot": 2,
+    "arm": "H-LBFGS"
+   },
+   "w2_p2_Q-Adam": {
+    "initial_train_nmse": 2.0977530479431152,
+    "initial_query_nmse": 2.069892168045044,
+    "final_train_nmse": 0.0055162617936730385,
+    "final_query_nmse": 0.008457564748823643,
+    "orthogonality_max_abs_error": 8.344650268554688e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 2,
+    "slot": 2,
+    "arm": "Q-Adam"
+   },
+   "w2_p3_H-Adam": {
+    "initial_train_nmse": 1.7952264547348022,
+    "initial_query_nmse": 1.8013688325881958,
+    "final_train_nmse": 0.0003781126579269767,
+    "final_query_nmse": 0.0005268271779641509,
+    "orthogonality_max_abs_error": 2.456997663102811e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 3,
+    "slot": 3,
+    "arm": "H-Adam"
+   },
+   "w2_p3_H-LBFGS": {
+    "initial_train_nmse": 1.7952264547348022,
+    "initial_query_nmse": 1.8013688325881958,
+    "final_train_nmse": 0.00010615342034725472,
+    "final_query_nmse": 0.00012360585969872773,
+    "orthogonality_max_abs_error": 4.127704471557081e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 3,
+    "slot": 3,
+    "arm": "H-LBFGS"
+   },
+   "w2_p3_Q-Adam": {
+    "initial_train_nmse": 1.7952264547348022,
+    "initial_query_nmse": 1.8013688325881958,
+    "final_train_nmse": 0.0034962447825819254,
+    "final_query_nmse": 0.0052155484445393085,
+    "orthogonality_max_abs_error": 1.0728836059570312e-06,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 3,
+    "slot": 3,
+    "arm": "Q-Adam"
+   },
+   "w2_p4_H-Adam": {
+    "initial_train_nmse": 2.0179226398468018,
+    "initial_query_nmse": 2.0306403636932373,
+    "final_train_nmse": 0.0005943887517787516,
+    "final_query_nmse": 0.0008060440304689109,
+    "orthogonality_max_abs_error": 2.384185791015625e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 4,
+    "slot": 4,
+    "arm": "H-Adam"
+   },
+   "w2_p4_H-LBFGS": {
+    "initial_train_nmse": 2.0179226398468018,
+    "initial_query_nmse": 2.0306403636932373,
+    "final_train_nmse": 0.00020908762235194445,
+    "final_query_nmse": 0.000251018995186314,
+    "orthogonality_max_abs_error": 2.384185791015625e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 4,
+    "slot": 4,
+    "arm": "H-LBFGS"
+   },
+   "w2_p4_Q-Adam": {
+    "initial_train_nmse": 2.0179226398468018,
+    "initial_query_nmse": 2.0306403636932373,
+    "final_train_nmse": 0.005192932672798634,
+    "final_query_nmse": 0.007455924525856972,
+    "orthogonality_max_abs_error": 7.152557373046875e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 4,
+    "slot": 4,
+    "arm": "Q-Adam"
+   },
+   "w2_p5_H-Adam": {
+    "initial_train_nmse": 1.8610929250717163,
+    "initial_query_nmse": 1.887903094291687,
+    "final_train_nmse": 0.0006269037257879972,
+    "final_query_nmse": 0.0007566568092443049,
+    "orthogonality_max_abs_error": 2.384185791015625e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 5,
+    "slot": 5,
+    "arm": "H-Adam"
+   },
+   "w2_p5_H-LBFGS": {
+    "initial_train_nmse": 1.8610929250717163,
+    "initial_query_nmse": 1.887903094291687,
+    "final_train_nmse": 0.0002885638386942446,
+    "final_query_nmse": 0.00029266130877658725,
+    "orthogonality_max_abs_error": 3.5762786865234375e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 5,
+    "slot": 5,
+    "arm": "H-LBFGS"
+   },
+   "w2_p5_Q-Adam": {
+    "initial_train_nmse": 1.8610931634902954,
+    "initial_query_nmse": 1.887903094291687,
+    "final_train_nmse": 0.004644352942705154,
+    "final_query_nmse": 0.006417547352612019,
+    "orthogonality_max_abs_error": 5.960464477539062e-07,
+    "finite": true,
+    "passes": true,
+    "world": 2,
+    "primitive": 5,
+    "slot": 5,
+    "arm": "Q-Adam"
+   }
+  },
+  "arms": {
+   "H-Adam": {
+    "passing_cells_by_world": {
+     "0": 6,
+     "1": 6,
+     "2": 6
+    },
+    "passing_worlds": 3,
+    "passes": true
+   },
+   "H-LBFGS": {
+    "passing_cells_by_world": {
+     "0": 6,
+     "1": 6,
+     "2": 6
+    },
+    "passing_worlds": 3,
+    "passes": true
+   },
+   "Q-Adam": {
+    "passing_cells_by_world": {
+     "0": 6,
+     "1": 6,
+     "2": 6
+    },
+    "passing_worlds": 3,
+    "passes": true
+   }
+  }
+ },
+ "stage_c": {
+  "worlds": {
+   "0": {
+    "assignment": {
+     "0": 1,
+     "1": 3,
+     "2": 0,
+     "3": 2,
+     "4": 4,
+     "5": 5
+    },
+    "checkpoints": {
+     "0": {
+      "mean": 1.947317186743021,
+      "median": 1.931388795375824,
+      "minimum": 1.6160879135131836,
+      "maximum": 2.238523483276367,
+      "below_0.02": 0,
+      "below_0.05": 0,
+      "below_0.1": 0
+     },
+     "256": {
+      "mean": 1.235272603109479,
+      "median": 1.2337929606437683,
+      "minimum": 1.0818095207214355,
+      "maximum": 1.4598013162612915,
+      "below_0.02": 0,
+      "below_0.05": 0,
+      "below_0.1": 0
+     },
+     "1024": {
+      "mean": 0.9133060881868005,
+      "median": 0.916603684425354,
+      "minimum": 0.8006086945533752,
+      "maximum": 1.022286057472229,
+      "below_0.02": 0,
+      "below_0.05": 0,
+      "below_0.1": 0
+     },
+     "4096": {
+      "mean": 0.7263981197029352,
+      "median": 0.7220673859119415,
+      "minimum": 0.5919358134269714,
+      "maximum": 0.899868369102478,
+      "below_0.02": 0,
+      "below_0.05": 0,
+      "below_0.1": 0
+     }
+    },
+    "finite": true,
+    "passes": false
+   },
+   "1": {
+    "assignment": {
+     "0": 0,
+     "1": 2,
+     "2": 1,
+     "3": 4,
+     "4": 6,
+     "5": 8
+    },
+    "checkpoints": {
+     "0": {
+      "mean": 1.9472955204546452,
+      "median": 1.945858120918274,
+      "minimum": 1.5209987163543701,
+      "maximum": 2.1958818435668945,
+      "below_0.02": 0,
+      "below_0.05": 0,
+      "below_0.1": 0
+     },
+     "256": {
+      "mean": 1.2249996401369572,
+      "median": 1.2168496251106262,
+      "minimum": 0.9800152778625488,
+      "maximum": 1.3992421627044678,
+      "below_0.02": 0,
+      "below_0.05": 0,
+      "below_0.1": 0
+     },
+     "1024": {
+      "mean": 0.8841603873297572,
+      "median": 0.8871963918209076,
+      "minimum": 0.7986915111541748,
+      "maximum": 0.9827170372009277,
+      "below_0.02": 0,
+      "below_0.05": 0,
+      "below_0.1": 0
+     },
+     "4096": {
+      "mean": 0.006366347704897635,
+      "median": 0.006254104431718588,
+      "minimum": 0.004738337825983763,
+      "maximum": 0.00871422328054905,
+      "below_0.02": 64,
+      "below_0.05": 64,
+      "below_0.1": 64
+     }
+    },
+    "finite": true,
+    "passes": true
+   },
+   "2": {
+    "assignment": {
+     "0": 1,
+     "1": 0,
+     "2": 2,
+     "3": 3,
+     "4": 4,
+     "5": 5
+    },
+    "checkpoints": {
+     "0": {
+      "mean": 2.0343158300966024,
+      "median": 2.0584328174591064,
+      "minimum": 1.6906095743179321,
+      "maximum": 2.509887218475342,
+      "below_0.02": 0,
+      "below_0.05": 0,
+      "below_0.1": 0
+     },
+     "256": {
+      "mean": 1.2418454475700855,
+      "median": 1.2429550886154175,
+      "minimum": 0.9913911819458008,
+      "maximum": 1.4618240594863892,
+      "below_0.02": 0,
+      "below_0.05": 0,
+      "below_0.1": 0
+     },
+     "1024": {
+      "mean": 0.8718815837055445,
+      "median": 0.8712043762207031,
+      "minimum": 0.7821347713470459,
+      "maximum": 0.9964603185653687,
+      "below_0.02": 0,
+      "below_0.05": 0,
+      "below_0.1": 0
+     },
+     "4096": {
+      "mean": 0.005518511803529691,
+      "median": 0.005381411639973521,
+      "minimum": 0.003748084418475628,
+      "maximum": 0.009569693356752396,
+      "below_0.02": 64,
+      "below_0.05": 64,
+      "below_0.1": 64
+     }
+    },
+    "finite": true,
+    "passes": true
+   }
+  },
+  "passing_worlds": 2,
+  "passes": true
+ },
+ "classification": "ROUTE_INFERENCE_OR_ONLINE_INTERFERENCE_FAILURE",
+ "complete": true
+}

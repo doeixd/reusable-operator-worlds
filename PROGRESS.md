@@ -4323,3 +4323,55 @@ or verdict changed, and a regression test now guards all four clause outcomes.
 The control-flow branch is CLOSED at G5R. A successor would require a newly
 registered strong-but-learnable substrate or a distinct orthogonal-learning
 protocol; neither is inferred or authorized by this negative result.
+
+# G5R diagnosis localizes the registered failure downstream of isolated operator fitting (2026-09-01)
+
+Froze `G5R_DIAGNOSIS_PLAN.md` at `7c9fd8f`, protected its hash at
+`ee98bd8`, then ran the committed diagnostic instrument at `3b3820a` on
+development worlds 0-2 only. This is an oracle localization audit; it neither
+changes G5R's 0/3 verdict nor opens a control-flow rung.
+
+Stage A constructively represented every teacher primitive with the matched
+Householder learner. All 18/18 cells passed: worst query NMSE was `4.37e-14`,
+worst rotation reconstruction error `2.56e-7`, and worst orthogonality error
+`7.31e-7`. The implemented family therefore contains the teacher maps.
+
+Stage B fit every primitive independently from the canonical model-seed
+initialization. H-Adam and Q-Adam validly passed all 18/18 cells. The original
+H-LBFGS endpoints also numerically passed 18/18, but the scorer added an
+unregistered L2 penalty to that arm; those endpoints are invalid as protocol
+evidence and retained only for history:
+
+    arm          median query NMSE       range               status
+    H-Adam             0.000678       0.000503-0.004011       VALID PASS
+    H-LBFGS            0.000203       0.000124-0.000293       INVALID ARM
+    Q-Adam             0.007487       0.004666-0.009933       VALID PASS
+
+Thus the failure is not licensed as a Householder representability or isolated
+Adam findability failure. The valid projected-Q arm also supports general
+single-operator findability. No claim from the original H-LBFGS arm is licensed.
+
+Because H-Adam passed, Stage C trained the 12-slot shared library with true
+routes fixed and route parameters frozen. Median task query NMSE was:
+
+    world       update 0       256       1024       4096      gate
+      0           1.931       1.234      0.917      0.7221      FAIL
+      1           1.946       1.217      0.887      0.00625     PASS
+      2           2.058       1.243      0.871      0.00538     PASS
+
+Stage C therefore passes its frozen `>=2/3` world rule and yields the registered
+classification **`ROUTE_INFERENCE_OR_ONLINE_INTERFERENCE_FAILURE`**. This is a
+localization, not a complete mechanism claim: the audit deliberately cannot
+separate route inference from sequential training/replay interference. World 0
+also remains a large negative, while worlds 1 and 2 undergo a late transition
+between updates 1,024 and 4,096; that heterogeneity is preserved rather than
+hidden by a pooled mean.
+
+Artifact `reports/rotated_g5r_diagnosis.json` passed independent checks for the
+expected 18 Stage-A cells, 54 Stage-B cells, three Stage-C worlds and all four
+checkpoints, all-finite report values and terminal model tensors, frozen code
+commit, and atomic completion. The scorer exited 0; all 205 tests passed in
+131.97 seconds. A pre-commit protocol review then found the H-LBFGS-only penalty
+deviation. `G5R_DIAGNOSIS_CORRECTION.md` freezes the narrow unregularized rerun
+at `c4e557d`; it does not rerun or reinterpret the valid H-Adam or Stage-C
+evidence. `tools/check_prereg.py` protects 37 frozen files.

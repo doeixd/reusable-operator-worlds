@@ -877,6 +877,17 @@ are recovered.
   this paper makes no claim that its library-learning result extends to the
   stronger operator substrates required for control flow. This is a
   development boundary, not an additional sealed claim.
+- A subsequent frozen, development-only localization audit narrows that boundary
+  without removing it. Exact constructive representation, Householder-Adam, and
+  projected-rotation Adam fits passed all 18 primitives. The original ancillary
+  LBFGS arm used an unregistered penalty and is excluded from this inference.
+  With true routes fixed, joint library training passed its registered rule in
+  two of three worlds (final median task NMSE `0.00625` and `0.00538`) but
+  remained poor in world 0 (`0.72207`). The licensed classification is therefore
+  route inference or online interference under this protocol, not a defect in
+  representability or isolated Adam findability. The audit does not separate
+  those two causes, and its one large world-level failure precludes a stability
+  claim.
 
 
 On promotion specifically (section 7.5): the world is constructed to

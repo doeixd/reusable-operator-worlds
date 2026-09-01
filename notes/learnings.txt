@@ -4665,3 +4665,25 @@ than as a one-off miss.
   verdict were right; the phrase was logically impossible. Decision labels need
   a truth table, not a one-clause ternary. G5R now reports "not learnable;
   comparability also fails" and tests all four primary/secondary outcomes.
+
+- LOCALIZE A FAILED LIFETIME WITH A REPRESENTABILITY-OPTIMIZATION-COMPOSITION
+  LADDER BEFORE CHANGING THE MODEL (G5R diagnosis, 2026-09-01;
+  `reports/rotated_g5r_diagnosis.json`). The rotated learner looked wholly
+  untrainable online (final NMSE 1.61-1.76), but constructive decomposition fit
+  all 18 teacher primitives to `<=4.4e-14` query NMSE and isolated Householder
+  Adam fit all 18 to `<=0.0041`. A 12-slot library with TRUE routes fixed then
+  passed the frozen joint-learning gate in 2/3 worlds (`0.00625`, `0.00538`) but
+  failed badly in world 0 (`0.72207`). The registered localization is therefore
+  route inference OR online interference, not representability or isolated
+  operator findability. Preserve the dissenting world and the late transition:
+  both passing worlds were still near `0.88` median NMSE at update 1,024 and only
+  became accurate by 4,096. A gate can license the next diagnostic without
+  making the optimization stable.
+
+- AN ANCILLARY ARM CAN BE INVALID WITHOUT INVALIDATING AN INDEPENDENT DECISION
+  PATH (G5R diagnosis correction, 2026-09-01). The original H-LBFGS closure
+  included an unregistered L2 penalty. Mark its 18/18 numerical pass invalid and
+  rerun it under a frozen correction; do not discard the valid H-Adam result or
+  Stage C, because the registered ladder conditioned Stage C only on H-Adam.
+  Audit each arm against the prose protocol before converting cell counts into
+  evidence, even when the overall classification does not depend on that arm.
