@@ -237,6 +237,11 @@ def _endpoint(model: nn.Module, data: tuple[Tensor, ...]) -> tuple[float, float]
         return nmse(model(train_x), train_y), nmse(model(query_x), query_y)
 
 
+def lbfgs_data_loss(model: nn.Module, train_x: Tensor, train_y: Tensor) -> Tensor:
+    """The frozen H-LBFGS objective: data MSE with no penalty term."""
+    return torch.mean((model(train_x) - train_y) ** 2)
+
+
 def stage_b_cell(
     teacher,
     seed: int,
@@ -279,15 +284,9 @@ def stage_b_cell(
 
         def closure():
             optimizer.zero_grad()
-            loss = torch.mean((model(train_x) - train_y) ** 2)
-            penalty = sum(
-                torch.sum(parameter.square())
-                for name, parameter in model.named_parameters()
-                if name != "alpha" and not name.endswith(".alpha")
-            )
-            objective = loss + 0.5 * WEIGHT_DECAY * penalty
-            objective.backward()
-            return objective
+            loss = lbfgs_data_loss(model, train_x, train_y)
+            loss.backward()
+            return loss
 
         optimizer.step(closure)
     else:

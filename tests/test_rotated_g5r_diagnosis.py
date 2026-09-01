@@ -11,10 +11,14 @@ from row.experiments.audit_rotated_g5r_diagnosis import (
     assign_slots,
     examples,
     householder_decompose,
+    lbfgs_data_loss,
     oracle_forward,
     stage_a_cell,
     stage_b_cell,
     stage_c_world,
+)
+from row.experiments.audit_rotated_g5r_diagnosis_lbfgs_correction import (
+    correction_protocol,
 )
 from row.models import HouseholderOrthogonal, RotatedDiscreteLibraryLearner
 from row.models import RotatedLearnedOperator
@@ -22,6 +26,14 @@ from row.rotated_world import generate_rotated_world
 
 
 class G5RDiagnosisTests(unittest.TestCase):
+    def test_lbfgs_objective_has_no_unregistered_penalty(self):
+        model = RotatedLearnedOperator(4, 2, 0.2, 19, learnable_alpha=True)
+        x = torch.randn(8, 4)
+        with torch.no_grad():
+            target = model(x).clone()
+        self.assertEqual(float(lbfgs_data_loss(model, x, target).detach()), 0.0)
+        self.assertEqual(correction_protocol()["weight_penalty"], 0.0)
+
     def test_constructive_householder_decomposition_covers_both_components(self):
         for reflections in (3, 4):
             generator = torch.Generator().manual_seed(100 + reflections)
