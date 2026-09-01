@@ -4375,3 +4375,29 @@ commit, and atomic completion. The scorer exited 0; all 205 tests passed in
 deviation. `G5R_DIAGNOSIS_CORRECTION.md` freezes the narrow unregularized rerun
 at `c4e557d`; it does not rerun or reinterpret the valid H-Adam or Stage-C
 evidence. `tools/check_prereg.py` protects 37 frozen files.
+
+# G5R H-LBFGS protocol correction complete (2026-09-01)
+
+Ran the correction frozen in `G5R_DIAGNOSIS_CORRECTION.md` from clean committed
+code `e31ba05`. The corrected closure uses data MSE only, with no L2 penalty;
+all worlds, primitives, examples, initializations, LBFGS settings, and gates are
+otherwise identical to the original plan. Report
+`reports/rotated_g5r_diagnosis_lbfgs_correction.json` is separate from the
+preserved original diagnosis report.
+
+The corrected H-LBFGS arm **PASSES 18/18 cells and 3/3 worlds**. Final query NMSE
+has mean `8.99e-5`, median `7.93e-5`, and range `2.33e-5`-`1.66e-4`; every world
+passes 6/6 primitives against the `<=0.02` cell threshold. Classification:
+**`H_LBFGS_CORRECTED_PASS`**.
+
+This restores the ancillary evidence that a different optimizer can fit the
+individual Householder operators, but it does not rehabilitate the invalid
+penalized endpoints or change the primary diagnosis. H-Adam had already passed
+independently and authorized Stage C; Stage C's 2/3 pass still yields
+`ROUTE_INFERENCE_OR_ONLINE_INTERFERENCE_FAILURE`.
+
+Validation passed: scorer exit code 0; exact 18-cell key set; 6/6 passing cells
+in each world; all-finite metrics and terminal tensors; frozen plan and code
+commit; atomic fresh report; 206 tests passed in 25.91 seconds before launch;
+`check_prereg.py` validates 37 frozen files; and `check_invalid.py` reports no
+withdrawn artifact present.

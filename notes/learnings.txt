@@ -4687,3 +4687,12 @@ than as a one-off miss.
   Stage C, because the registered ladder conditioned Stage C only on H-Adam.
   Audit each arm against the prose protocol before converting cell counts into
   evidence, even when the overall classification does not depend on that arm.
+
+- A CORRECTION RESTORES EVIDENCE; IT DOES NOT MAKE THE INVALID RUN VALID (G5R
+  H-LBFGS correction, 2026-09-01;
+  `reports/rotated_g5r_diagnosis_lbfgs_correction.json`). After freezing the
+  discrepancy, the unregularized data-MSE closure passed all 18 isolated fits
+  with median query NMSE `7.93e-5`. Cite this corrected artifact for H-LBFGS and
+  continue to label the original penalized cells invalid. Because H-Adam alone
+  authorized Stage C, the correction adds optimizer evidence without changing
+  `ROUTE_INFERENCE_OR_ONLINE_INTERFERENCE_FAILURE`.

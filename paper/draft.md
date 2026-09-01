@@ -888,6 +888,11 @@ are recovered.
   representability or isolated Adam findability. The audit does not separate
   those two causes, and its one large world-level failure precludes a stability
   claim.
+- A frozen correction subsequently reran the ancillary H-LBFGS arm without the
+  unregistered penalty. It passed all 18 isolated primitives (median query NMSE
+  `7.93e-5`). This corrected artifact, not the original penalized endpoints,
+  supports the LBFGS findability result; it does not change the primary
+  route-inference-or-online-interference classification.
 
 
 On promotion specifically (section 7.5): the world is constructed to

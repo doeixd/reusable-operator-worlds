@@ -7404,3 +7404,20 @@ prove either one necessary, justify post-hoc retuning, or establish robustness
 beyond the 2/3 development gate. Report
 `reports/rotated_g5r_diagnosis.json`, instrument `3b3820a`; H-LBFGS correction
 plan `G5R_DIAGNOSIS_CORRECTION.md` frozen at `c4e557d`.
+
+# Rotated-substrate G5R: H-LBFGS correction result (2026-09-01)
+
+REGISTERED after the original H-LBFGS penalty discrepancy was found and before
+any corrected endpoint existed. The correction reran only the 18 affected cells
+with the originally specified unregularized data-MSE closure.
+
+RESULT: **`H_LBFGS_CORRECTED_PASS`**, 18/18 primitives and 3/3 worlds. Mean,
+median, and range of final query NMSE are `8.99e-5`, `7.93e-5`, and
+`2.33e-5`-`1.66e-4`. The original penalized endpoints remain invalid protocol
+evidence; they are not retroactively relabelled.
+
+Scorekeeping: the corrected result restores H-LBFGS as supporting evidence for
+isolated operator findability. It does not alter the already licensed primary
+classification, which depends on H-Adam and Stage C rather than H-LBFGS. Report
+`reports/rotated_g5r_diagnosis_lbfgs_correction.json`, correction instrument
+`e31ba05`.
