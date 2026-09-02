@@ -165,3 +165,25 @@ It cannot rescue G5R, rank optimizers, or show that a different online protocol
 would learn the rotated family. If `BUDGET_LIMITED` is returned, it does not
 say what budget would suffice. It localizes the failure one level further so a
 successor protocol, if any is ever registered, is chosen from evidence.
+
+# Amendment 1 (2026-09-02, before any Stage D code): the anchor quantity
+
+Found while inspecting the G5R artifacts to build the anchor check. The
+lifetime's per-task `final_nmse`, and therefore G5R's headline medians
+(1.763 / 1.613 / 1.696), are measured at the END OF EACH TASK'S OWN TRAINING
+(the `n_seen = 128` evaluation record), not on the terminal model. Only the
+LAST task's value is a terminal-model quantity. The anchor clause as written
+("reproduce each artifact's own per-task `final_nmse`") is therefore
+unsatisfiable for 63 of 64 tasks and would have failed for the wrong reason.
+
+Registered replacement, unchanged in intent:
+
+- ANCHOR: the shared scorer applied to the reloaded G5R terminal model must
+  reproduce the LAST task's `task_summary.final_nmse` to 1e-6 in each world.
+- The registered estimand for every cell remains the TERMINAL-MODEL median. For
+  the two online cells (O_or, O_lr) the END-OF-TASK median is reported beside
+  it, labelled as such, because that is the quantity G5R's verdict used and
+  because their difference (terminal minus end-of-task) is a direct
+  interference measurement: how much a task's fit degrades after its own
+  training ends. No threshold is attached to that difference; it is
+  descriptive.
