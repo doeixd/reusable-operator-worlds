@@ -7657,3 +7657,29 @@ depth 8 and 0.289 at depth 10. The prospective prediction is therefore
 least two worlds at depth 8, but depth 10 will fail one of those gates in at
 least two worlds. The protocol freezes role-only and 200-draw permuted-decoder
 controls before any joint score exists.
+
+# RF0b outcome (2026-09-02): heterogeneous rebound, registered unresolved
+
+RF0b launched from committed audit code `86ab475` and returned **RF0B
+UNRESOLVED**, rejecting the predicted clean depth-8 horizon. Exact semantic
+motif recovery `C_exact` versus literal E6 survival was:
+
+    world       depth 8 canonical/literal      depth 10 canonical/literal
+      0                 0.297 / 0.031                   0.094 / 0.172
+      1                 0.547 / 0.250                   0.328 / 0.047
+      2                 0.422 / 0.109                   0.156 / 0.000
+    mean                0.422 / 0.130                   0.193 / 0.073
+
+The numeric rebound is real but did not replicate under the frozen complete
+gate. At depth 8, world 0 missed the 0.30 absolute bar by one recovered task and
+failed its permutation null; world 1 cleared both primary numeric margins but
+its 0.547 recovery did not strictly exceed the conservative null p99 of 0.563;
+only world 2 passed. At depth 10, only world 1 cleared the absolute, gain, role,
+and null gates. Thus neither a two-world depth-8 horizon nor a two-world
+both-depth ceiling is licensed.
+
+The negative extreme was also not supported: mean recovery improved
+substantially at depth 8, and multiple cells exceeded the registered failure
+region. Preserve the result as heterogeneous opportunity evidence only. It does
+not authorize the planned label-free canonicalizer, semantic macro economics,
+or a claim that local decodability generally restores reusable motifs.

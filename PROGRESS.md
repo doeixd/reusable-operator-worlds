@@ -4537,3 +4537,36 @@ and a stop rule before label-free canonicalization. This remains a read-only
 development-world oracle audit. It launches no lifetime, changes no cached
 route, exposes no mapping to a learner, and leaves the in-flight G5R Stage D
 artifact untouched.
+
+# RF0b semantic-motif audit complete (2026-09-02)
+
+Implemented `audit_rf0b_semantic_motif.py`, its independent scorer, and seven
+unit tests; launched from committed audit code `86ab475`; and wrote
+`reports/rf0b_semantic_motif.json` atomically. The audit reproduced RF0a's `Z`
+and `R` probes exactly, reproduced every E6 cell and displayed survival mean,
+used 200 registered permutation draws per world, and generated no model update,
+route fit, or query-data access.
+
+Registered classification: **RF0B UNRESOLVED**. Canonical exact motif recovery
+was 0.297/0.094, 0.547/0.328, and 0.422/0.156 across worlds at depths 8/10,
+versus literal E6 survival 0.031/0.172, 0.250/0.047, and 0.109/0.000. Mean
+recovery rose from 0.130 to 0.422 at depth 8 and from 0.073 to 0.193 at depth
+10, but only world 2 passed the complete depth-8 gate and only world 1 passed
+the complete depth-10 gate. World 1's 0.547 depth-8 recovery fell below its
+registered permutation-null p99 of 0.563; this control failure prevents the
+visually strong cell from carrying a positive classification.
+
+The first scorer run correctly refused acceptance because its direct Python-
+dict comparison treated integer depth keys as different from their mandatory
+JSON string representation. Commit `71a4411` normalized only that
+representation before comparison; no audit code, output, estimand, threshold,
+or classification changed. The corrected independent scorer exits 0 and
+recomputes the registered `RF0B UNRESOLVED` decision.
+
+All 228 tests passed in 26.99 seconds after the scorer correction;
+`check_prereg.py`, `check_invalid.py`, and `git diff --check` pass. The result
+does not open the label-free canonicalizer successor. The next decision should
+either replicate this heterogeneous ceiling on newly generated development
+routes under a separately frozen protocol or leave local semantic macros and
+return to whole-program/search-level work; it should not weaken the null or
+round 0.297 upward after seeing the result.

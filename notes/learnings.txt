@@ -4709,3 +4709,14 @@ than as a one-off miss.
   substring loss. First test whether the raw vocabulary admits a stable
   many-to-one semantic canonicalization; use role–filler machinery only when
   role adds information. RF0 remains NOT RUN under its frozen gate.
+
+- POSITION-WISE DECODABILITY DOES NOT AUTOMATICALLY PRODUCE A REPLICATED JOINT
+  MOTIF (RF0b, 2026-09-02; `reports/rf0b_semantic_motif.json`). Applying the
+  shallow oracle slot decoder raised mean exact planted-trigram recovery from
+  0.130 to 0.422 at depth 8 and from 0.073 to 0.193 at depth 10, but the six
+  cells were heterogeneous and only one world per depth passed the full frozen
+  absolute/gain/role/null gate. A visually strong 0.547 depth-8 cell failed its
+  conservative permutation p99 of 0.563. Preserve `RF0B UNRESOLVED`: marginal
+  semantic identity is an opportunity signal, not yet a reusable semantic
+  macro. Do not build the label-free canonicalizer until joint recovery
+  replicates under an independently frozen extension.
