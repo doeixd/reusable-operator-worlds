@@ -152,7 +152,12 @@ def validate_report(path: Path = DEFAULT_OUTPUT) -> dict:
             require(cell["permutation_pass"]
                     == (cell["Z"]["exact_recovery"] > null["p99"]),
                     "permutation verdict mismatch")
-    require(payload["decision"] == classify(payload["worlds"], controls),
+    # JSON object keys are strings; the in-memory ladder uses integer depth
+    # keys for ``passing_by_depth``. Compare their serialized forms so this
+    # representation-only distinction cannot invalidate an otherwise identical
+    # decision.
+    recomputed = json.loads(json.dumps(classify(payload["worlds"], controls)))
+    require(payload["decision"] == recomputed,
             "decision ladder mismatch")
     require(all_finite(payload), "nonfinite report value")
     started = datetime.fromisoformat(payload["started_at_utc"])
