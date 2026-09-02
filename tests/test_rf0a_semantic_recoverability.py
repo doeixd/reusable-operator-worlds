@@ -14,6 +14,7 @@ from row.experiments.audit_rf0a_semantic_recoverability import (
     select_probe,
     synthetic_controls,
 )
+from row.experiments.score_rf0a import all_finite, score_confusion
 
 
 def toy_data(labels=None) -> OccurrenceData:
@@ -123,6 +124,22 @@ class RF0aSemanticRecoverabilityTests(unittest.TestCase):
         decision = classify(worlds, controls)
         self.assertEqual(decision["classification"],
                          "ROLE-CONDITIONED LOCAL SEMANTICS")
+
+    def test_independent_scorer_recomputes_confusion(self):
+        confusion = np.eye(6, dtype=int) * 3
+        record = {
+            "confusion": confusion.tolist(),
+            "per_class_recall": [1.0] * 6,
+            "balanced_accuracy": 1.0,
+        }
+        score_confusion(record, 18)
+        record["balanced_accuracy"] = 0.9
+        with self.assertRaises(ValueError):
+            score_confusion(record, 18)
+
+    def test_recursive_finite_check_rejects_nan(self):
+        self.assertTrue(all_finite({"a": [1.0, {"b": 2}]}))
+        self.assertFalse(all_finite({"a": [float("nan")]}))
 
 
 if __name__ == "__main__":
