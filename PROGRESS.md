@@ -4435,8 +4435,8 @@ strong-operator acquisition protocol; require RF1 before calling fillers
 recombinable and an online non-oracle SO2 gate before opening control flow; then
 test typed structural combinators.
 
-The plan records five separate horizons (`D_execute`, `D_semantic`, `D_search`,
-`D_form`, `H_amortize`), explicit convergence and stop rules, conditional
+The plan records separate horizons (`D_execute`, `D_semantic`, `D_search`,
+`D_form`, `D_meta`, `H_amortize`), explicit convergence and stop rules, conditional
 successors for every Stage-D classification, the ordinary-versus-strong
 substrate split for `CHAIN` versus `IF`/`REPEAT`, a common metrics/accounting
 contract, and a milestone-by-milestone commit sequence.
@@ -4448,3 +4448,23 @@ not change the frozen Stage-D protocol or accept an incomplete classification.
 No experiments were launched, no artifact was modified, no sealed world was
 allocated or opened, and `reports/rotated_g5r_interference.json` remains an
 uncommitted in-flight artifact owned by its existing run.
+
+# Self-hosted synthesis added to the post-E6 program (2026-09-02)
+
+Extended `POST_E6_RESEARCH_PROGRAM.md` with Track D, testing whether programs in
+the computational language can also express and improve program search. The
+ordered ladder is SH0 fixed-search representation, SH1 meta-level systematicity,
+SH2 learned synthesis-program selection, SH3 prospective promotion of recurring
+search fragments, and SH4 immutable multi-generation self-hosted optimization.
+
+The plan grounds recursion in the existing fixed search fallback, separates
+object-value types from program/search-state types, limits atomic meta-operations
+to inspectable bounded edits and control operations, charges all hidden search
+work, forbids query-label proposal and live-weight self-modification, and
+requires parent/child artifact fingerprints. It reserves “recursive
+self-improvement” for at least two prospective held-out generations whose
+cumulative savings repay cumulative creation costs.
+
+No self-hosting code or artifact exists, no experiment was launched, and no
+current threshold or result was changed. The in-flight Stage-D artifact remains
+untouched.

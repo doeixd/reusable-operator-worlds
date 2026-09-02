@@ -1,4 +1,4 @@
-# Post-E6 research program: semantic structure and learnable computation
+# Post-E6 research program: semantic structure, learnable computation, and self-hosted synthesis
 
 Status: DRAFT PROGRAM-LEVEL DECISION TREE. This document orders existing and
 future subplans; it is not itself an executable preregistration. Every new rung
@@ -22,8 +22,9 @@ remaining bottleneck is the acquisition and organization of reusable
 computation:
 
 > Can an online learner form stable computational fillers, preserve their
-> identity across structural contexts, bind them into explicit schemas, and do
-> so at a lifetime cost that remains competitive?
+> identity across structural contexts, bind them into explicit schemas, and use
+> programs in that same language to improve how later programs are found—all at
+> a lifetime cost that remains competitive?
 
 The candidate architecture separates five responsibilities:
 
@@ -31,9 +32,17 @@ The candidate architecture separates five responsibilities:
     semantic factorization    stabilizes identity across contexts
     typed combinators         store program structure
     program writer            selects fillers, roles, and schemas
+    synthesis programs        search over and revise program descriptions
     economic lifecycle        decides what to retain or create
 
-No rung is allowed to make all five claims at once.
+No rung is allowed to make all six claims at once.
+
+The long-run hypothesis is SELF-HOSTED SYNTHESIS: object programs solve tasks,
+while meta-programs built from the same typed combinator language manipulate,
+execute, score, and revise object programs. Successful recurring search traces
+may then become new meta-level primitives. The recursion is grounded by a fixed
+general-search fallback; learned synthesis accelerates its own teacher rather
+than being required for its own creation.
 
 # Evidentiary starting point
 
@@ -81,6 +90,8 @@ boundary:
   an adequate program;
 - `D_form`: greatest operator strength/complexity learnable under the registered
   online lifetime budget;
+- `D_meta`: greatest meta-program depth or generation at which a frozen
+  synthesis program still improves held-out search under matched total compute;
 - `H_amortize`: reuse horizon at which a representation or schema repays its
   description cost.
 
@@ -103,19 +114,23 @@ cell, not named a horizon.
                     v
               Convergence gate
                     |
-           +--------+---------+
-           |                  |
-           v                  v
-       C1 CHAIN/COMPOSE    C2 IF/REPEAT
-       ordinary substrate strong substrate only
-           |                  |
-           +--------+---------+
-                    v
-              role discovery
+          C0 typed IR / interpreter
+             |                     |
+      +------+-------+             v
+      |              |       SH0 fixed search in IR
+      v              v             |
+  C1 CHAIN/       C2 IF/REPEAT     SH1 -> SH2 -> SH3 -> SH4
+  COMPOSE         strong only       ^
+      |              |              |
+      +------+-------+--------------+
+             |
+             v
+      C3 role/schema discovery
 
 Track A and Track B answer independent questions. They may share analysis code
-but never share adaptive thresholds. Only one compute-heavy writer runs at a
-time on the local Windows host.
+but never share adaptive thresholds. SH0 needs only C0; later SH rungs inherit
+the relevant C1/C2 systematicity gates stated below. Only one compute-heavy
+writer runs at a time on the local Windows host.
 
 # Phase 0 — close the in-flight G5R Stage D diagnostic
 
@@ -361,6 +376,223 @@ correct, role-permuted, collapsed-role, and matched unstructured controls.
 Discovery is scored by held-out execution and economics, not agreement with
 teacher names or attractive clusters.
 
+# Track D — self-hosted program synthesis
+
+Track D tests whether the language learned for computation can also express and
+improve the procedure that searches that language. It is the proposed recursive
+endpoint, not a prerequisite silently assumed by earlier rungs.
+
+## Object level and meta level
+
+The same typed IR and interpreter serve two levels with different types:
+
+    object program
+        input:   Value
+        output:  Value
+        purpose: solve a task
+
+    meta-program
+        input:   SearchState, SupportSet, Budget
+        output:  ObjectProgram
+        purpose: find or revise a task-solving program
+
+Define the observable interfaces:
+
+    EXECUTE(p, x) -> y
+    SCORE_SUPPORT(p, support) -> scalar loss
+    EDIT(p, location, production) -> p'
+    RUN_SEARCH(q, support, budget) -> p_best, trace
+
+where `p` is an object program and `q` is a meta-program. A search trace records
+every proposed program, edit, support score, decision, resource use, and RNG
+state. Query labels never enter `SCORE_SUPPORT`, proposal, selection, or
+promotion.
+
+The type boundary is load-bearing. Object-level fillers transform values;
+meta-level fillers transform program descriptions or search state. Reusing the
+same language means shared typed combinators and interpreter semantics, not
+pretending that a value-transforming neural operator can be applied directly to
+an abstract syntax tree.
+
+## Grounding and the end of the regress
+
+Self-hosting is grounded by a fixed, non-learned fallback search such as the
+existing E5.1 optimizer, enumeration, or seeded mutation. That procedure can
+produce the first successful object programs and search traces. A learned
+meta-program is an amortized accelerator; failure returns to the fixed fallback
+rather than making future learning impossible.
+
+Atomic meta-operations must have bounded, inspectable semantics:
+
+- enumerate or sample one typed production;
+- insert, delete, replace, or rebind one AST node;
+- execute one candidate on support examples;
+- compare scalar support scores;
+- select, branch, repeat, backtrack, or update a bounded queue;
+- memoize a program and its support score.
+
+An opaque `PROPOSE(support) -> complete_program` network is not accepted as a
+primitive explanation. It may appear only as a matched control whose internal
+compute and parameters are fully charged. Learned components may parameterize
+the distribution over transparent edits or compose them into strategies.
+
+Live weights are never self-modified. A meta-program may emit a typed candidate
+description; the current generation remains immutable, the candidate is
+validated and evaluated separately, and parent/child fingerprints preserve the
+lineage. This keeps “self-use” reproducible and prevents an unlogged mutation
+from changing the instrument that scores it.
+
+## SH0 — express a known search procedure in the language
+
+Prerequisite: C0's typed IR and interpreter.
+
+Encode at least two existing fixed searches as meta-programs, initially the
+E5.1 route optimizer's discrete control skeleton and one enumerative or seeded
+mutation baseline. Run the encoded and native procedures with identical
+candidates, RNG streams, budgets, and support data.
+
+Required equivalence checks:
+
+- identical candidate sequence where the procedures are deterministic;
+- otherwise identical proposal distribution under fixed draws;
+- identical support-score calls and budget termination;
+- identical selected program and query evaluation.
+
+Passing SH0 establishes representational sufficiency of the typed meta-language
+and correct runtime implementation. It is true by construction once the
+interpreter is correct and provides no evidence of learned synthesis or
+self-improvement.
+
+## SH1 — meta-level compositional systematicity
+
+Prerequisite: SH0 and C1 for the relevant supplied schemas.
+
+Construct search strategies from typed fillers such as `EDIT`, `EXECUTE`,
+`COMPARE`, `SELECT`, `BACKTRACK`, and `REPEAT`. Every filler and role appears in
+training, while complete filler-role pairs, search-strategy compositions, and
+task-program families are held out.
+
+The primary question is whether a frozen meta-program library executes useful
+unseen search combinations. Compare:
+
+- supplied oracle meta-program;
+- inferred meta-program over a frozen meta-library;
+- fixed native OPT/enumerative/mutation baselines;
+- wrong-role, shuffled-edit, no-backtrack, and random-meta-program controls;
+- an opaque recognizer/search network matched separately on parameters and
+  total compute.
+
+Primary endpoints at a fixed total search budget are final object-program query
+loss and support-only program evaluations. Exact agreement with one reference
+search trace is diagnostic only: many search traces may find functionally
+equivalent programs.
+
+SH1 passes only if inferred held-out meta-programs beat the negative controls
+and match or improve the fixed search baseline's object-program quality under
+the same charged budget in the registered replication rule. A later subplan
+must freeze the numeric margin before cells exist.
+
+## SH2 — learn which synthesis program to use
+
+Prerequisite: SH1.
+
+Use the grounded fixed search to generate successful meta-programs or traces on
+meta-training task families. Train a writer to select or assemble a synthesis
+program from task SUPPORT data, then freeze it and evaluate on held-out task
+families and held-out object-program structures.
+
+Targets should be functional search quality or a posterior over low-loss
+programs, not one exact route. E0/E2 gauge freedom and E5's recognizer failure
+make exact trace imitation the wrong primary target.
+
+Controls:
+
+- one fixed best search strategy for every task;
+- task-conditional selection among supplied strategies;
+- composition of strategies from meta-fillers;
+- random strategy selection;
+- direct object-program recognizer;
+- fixed OPT as the non-amortized teacher/fallback;
+- oracle strategy choice as an upper reference.
+
+The headline estimand is the paired reduction in charged total synthesis compute
+needed to reach a fixed object-program quality on held-out tasks. Query labels
+are used only after selection for scoring. A meta-writer that is faster only
+because it produces worse programs does not pass.
+
+## SH3 — promote recurring search fragments
+
+Prerequisite: SH2 and a prospective opportunity census.
+
+Mine candidate meta-fragments from successful TRAINING traces, but decide birth
+using the same prospective economic discipline as E6F:
+
+    benefit: future reduction in meta-program length and/or search work
+    charge:  definition bits, retained parameters, invocation bits, and creation work
+
+These currencies are reported separately. A scalar birth rule requires a
+frozen exchange rate; otherwise use a Pareto decision. The candidate cannot be
+selected from held-out/query performance.
+
+Test whether the promoted fragment reduces future object-program synthesis cost
+on held-out task families relative to:
+
+- its uncompressed expansion;
+- an equally frequent historical fragment with no prospective recurrence;
+- a wrong grouping;
+- a sham alias that adds a symbol without shortening search;
+- a matched opaque heuristic with the same stored bits and compute.
+
+Definitional equivalence between a meta-macro and its expansion is an
+implementation check. Evidence comes from prospective reuse, reduced charged
+search cost, and preserved object-program quality.
+
+## SH4 — synthesis programs propose better synthesis programs
+
+Prerequisites: SH2, and SH3 if promotion is part of the mechanism.
+
+Allow a frozen generation `q_g` to propose typed edits to synthesis programs.
+A fixed outer evaluator—not `q_g` itself—validates candidates on meta-training
+tasks, freezes the selected `q_{g+1}`, and evaluates it once on held-out future
+task families. The outer evaluator, task split, resource budget, and selection
+rule are immutable across generations.
+
+Required arms:
+
+- no-self-edit `q_0`;
+- fixed handcrafted improvement schedule;
+- random typed edits at matched proposal count;
+- `q_g`-proposed edits;
+- oracle candidate selection as a labelled upper reference.
+
+Required accounting includes the cost of generating, evaluating, rejecting, and
+storing meta-program candidates. Report gross downstream search saving, creation
+cost, cumulative net saving, and the realized amortization crossing. A later
+generation cannot hide the cost paid by earlier generations.
+
+The phrase RECURSIVE SELF-IMPROVEMENT is licensed only after at least two
+successive immutable generations each produce a prospectively evaluated,
+replicated reduction in matched total synthesis cost at fixed object-program
+quality, and cumulative savings repay cumulative creation cost. One successful
+self-edit is SELF-HOSTED OPTIMIZATION, not recursive improvement. Improvement on
+the meta-training tasks alone is overfitting, not self-improvement.
+
+## Track-D stop rules
+
+- SH0 fails: the typed IR is not sufficient to host the search procedure; repair
+  the language before learning anything.
+- SH1 fails: the meta-language executes supplied searches but does not compose
+  systematically; retain fixed general search.
+- SH2 fails: meta-composition exists, but learned strategy selection does not
+  beat the grounded fallback at matched cost.
+- SH3 fails: search fragments recur historically but do not amortize
+  prospectively; refuse their birth.
+- SH4 improves only the selection set, one generation, or uncharged compute:
+  do not use “recursive self-improvement.”
+
+Track D may stop at any level while leaving the object-level ROW results intact.
+The fixed fallback remains available in every branch.
+
 # Metrics and accounting contract
 
 Every executable subplan reports, as applicable:
@@ -376,6 +608,10 @@ Every executable subplan reports, as applicable:
 - shared parameters, task-local parameters, retained quantized bits, schema
   bits, and program bits;
 - end-of-task and terminal metrics where interference is possible.
+- meta-program length, candidate proposals, support-score calls, rejected
+  candidates, queue/memory operations, and meta-interpreter execution cost;
+- gross future synthesis saving, meta-program creation cost, cumulative net
+  saving, and immutable generation lineage for self-hosted experiments.
 
 Description, search, execution, and predictive accuracy are separate currencies.
 A scalar objective is permitted only when its exchange rates are frozen before
@@ -401,6 +637,9 @@ range.
    pairing checks, and the full test suite.
 8. Completed milestones are committed. Negative, invalid, withdrawn, and
    unresolved outcomes are appended rather than rewritten.
+9. Self-hosted runs use immutable parent/child meta-program artifacts. The
+   evaluator and held-out task families are fixed outside the program being
+   evaluated, and every candidate proposal and rejection is reproducible.
 
 # Prediction ledger and contamination statement
 
@@ -428,6 +667,15 @@ Program-level expectations, not executable verdicts:
 4. The full architecture is unlikely to succeed through one end-to-end loss
    without staged formation, binding, and writing. This remains a design prior,
    not a registered result.
+5. A typed encoding of a known search procedure should pass SH0, but that is an
+   implementation expectation. The first substantive self-hosting rung is SH1.
+6. Direct exact-trace recognition is unlikely to beat OPT, following E5. A
+   writer trained toward functional search quality or a posterior over low-loss
+   programs is more plausible, but SH2 is genuinely uncertain.
+7. If successful search strategies recur across task families, prospective
+   meta-fragment promotion should reduce future synthesis cost for the same
+   reason E6B's object-program shortening did. The required recurrence and
+   amortization horizon are unknown.
 
 # Deliverables and commit sequence
 
@@ -441,6 +689,12 @@ Program-level expectations, not executable verdicts:
 6. **RF1/RF2 commits:** only along Track A's gates.
 7. **Typed-IR commit:** implementation checks only, no scientific claim.
 8. **C1/C2 protocol and result commits:** only after their prerequisites.
+9. **SH0/SH1 commits:** encode fixed search, then freeze the separate meta-level
+   systematicity test.
+10. **SH2/SH3 commits:** learned search-program selection and prospective trace
+    promotion, each with its own plan/result boundary.
+11. **SH4 commits:** immutable generations, outer evaluator, and cumulative
+    amortization record; never combine a proposed generation with its score.
 
 No commit combines a frozen plan with the result it governs.
 
@@ -453,6 +707,8 @@ No commit combines a frozen plan with the result it governs.
    resource/interference/routing protocol.
 5. Do not implement RF2, a new strong learner, or typed control flow until the
    corresponding existence gates pass.
+6. Keep SH0 as a design until C0's typed IR exists; do not train a meta-writer
+   before a native search can be represented and reproduced through that IR.
 
 # Explicitly out of scope
 
@@ -462,4 +718,8 @@ matching as semantic evidence; no same-sized compiled-macro retry; no claim that
 a definitional schema learned its own execution rule; no loop or branch learner
 without a fresh opportunity check on a learnable strong artifact; no unpriced
 capacity or compute; and no single “compositionality” score that hides which
-horizon failed.
+horizon failed. Also out of scope: unrestricted live-weight self-modification;
+an opaque task-solving network hidden behind `PROPOSE`; scoring candidates on
+query labels; calling one successful edit recursive improvement; or reporting
+meta-level speedups without charging proposal, evaluation, rejection, storage,
+and earlier-generation costs.

@@ -7525,8 +7525,64 @@ with oracle routes precedes learned-route discovery, and a final non-oracle
 online SO2 gate precedes any branch/loop learner.
 
 The plan also registers a horizon vector—`D_execute`, `D_semantic`, `D_search`,
-`D_form`, and `H_amortize`—instead of one generic compositionality boundary.
+`D_form`, `D_meta`, and `H_amortize`—instead of one generic compositionality boundary.
 Each requires persistent failure or a monotone fit; a single crossing is not a
 horizon. Typed combinator equivalence remains an implementation check, and bits,
 errors, operations, and seconds remain separate currencies unless an exchange
 rate is frozen in advance.
+
+# Self-hosted synthesis extension (2026-09-02): programs may improve how programs are found
+
+Updated `POST_E6_RESEARCH_PROGRAM.md` before any typed-IR or self-hosting code
+exists. The long-run hypothesis is now explicit:
+
+> Object programs solve tasks; typed meta-programs manipulate, execute, score,
+> and revise object programs; recurring successful search fragments may become
+> new meta-level primitives that reduce future synthesis cost.
+
+The recursion is grounded, not infinite. Existing fixed optimization,
+enumeration, or seeded mutation produces the first programs and traces and
+remains a fallback. Learned synthesis is an amortized accelerator of that
+general search, not a prerequisite for its own birth. The same LANGUAGE and
+interpreter are reused across levels, but types remain distinct: object fillers
+transform values, while meta-fillers transform program descriptions and search
+state.
+
+Registered claim ladder:
+
+    SH0  encode/reproduce known fixed search in the typed IR       implementation
+    SH1  compose meta-level search operations in held-out forms    systematicity
+    SH2  learn which synthesis program to use on held-out tasks    amortization
+    SH3  promote recurring search fragments prospectively          language growth
+    SH4  use frozen q_g to propose and select q_{g+1}               self-hosting
+
+SH0 equivalence is true by construction and cannot evidence learned synthesis.
+Exact trace identity is not the SH1/SH2 target because multiple programs and
+search paths can be functionally equivalent. The primary comparison is
+object-program quality at matched TOTAL search cost, including proposal,
+execution, scoring, rejection, memory, and storage. Query labels remain scoring
+only.
+
+Anti-homunculus rule: atomic meta-operations are bounded, inspectable edits,
+support scoring, comparison, selection, branching, repetition, backtracking,
+and queue/memory operations. An opaque `PROPOSE(support) -> complete_program`
+network may be a charged baseline but cannot carry the explanatory claim. Live
+weights are never self-modified; each proposed meta-program is a separate typed,
+validated, immutable artifact with parent/child fingerprints.
+
+**PI hypothesis:** reusable computation can recursively reduce the cost of
+finding reusable computation—“program synthesis all the way down,” grounded by
+general search and a typed interpreter.
+
+**Project expectations before SH code:** SH0 should pass but is only an
+implementation check. Direct exact-trace recognition is unlikely to beat OPT,
+following E5; functional-quality or posterior targets are more plausible for
+SH2. If search strategies recur across task families, prospective meta-fragment
+promotion should reduce future `C_find`, extending E6B's length law to the
+meta-level, but the recurrence and amortization horizon are unknown.
+
+The phrase RECURSIVE SELF-IMPROVEMENT is reserved for at least two successive
+immutable generations, each prospectively improving matched total synthesis
+cost at fixed object-program quality on held-out future task families, with
+cumulative savings repaying all cumulative creation costs. One successful edit,
+training-set improvement, or uncharged speedup does not qualify.
