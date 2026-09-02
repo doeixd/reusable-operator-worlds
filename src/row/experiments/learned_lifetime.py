@@ -481,6 +481,7 @@ def run(
     route_policy_hook=None,
     head_policy_hook=None,
     world=None,
+    task_code_hook=None,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -572,6 +573,11 @@ def run(
             task_parameter = model.begin_task(task.task_id, schema_index=schema_index)
         else:
             task_parameter = model.begin_task(task.task_id)
+        if task_code_hook is not None:
+            # G5R Stage D (G5R_INTERFERENCE_PLAN.md): an explicitly labelled
+            # oracle arm may pin a task's freshly created code before any
+            # update. Every pre-existing caller passes None and is unchanged.
+            task_code_hook(model, task, world_task_index)
         if isinstance(model, ARGUMENT_LEARNERS):
             route_parameter, residual_parameter, alpha_parameter = task_parameter
             optimizer.add_param_group(

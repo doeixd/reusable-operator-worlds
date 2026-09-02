@@ -187,3 +187,15 @@ Registered replacement, unchanged in intent:
   interference measurement: how much a task's fit degrades after its own
   training ends. No threshold is attached to that difference; it is
   descriptive.
+
+# Amendment 2 (2026-09-02, found by the unit test before any cell ran): pin logit
+
+The plan states pinned codes use logits +50 / -50 and that their float32
+softmax is "exactly one-hot" at every temperature in [0.1, 1.0]. At temperature
+1.0 the off-route weight is exp(-100) ~ 3.7e-44, a float32 DENORMAL, not zero:
+the argmax route is unaffected and the mixture contribution is far below any
+observable effect, but the registered exactness claim is false as written. The
+pin is therefore +100 / -100, for which exp(-200) underflows to exactly zero and
+the one-hot check holds literally at all temperatures in the range. Nothing else
+changes; Stage C's +/-50 routes were only ever consumed through argmax and its
+evidence is unaffected.
