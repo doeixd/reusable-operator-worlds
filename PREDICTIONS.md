@@ -7487,3 +7487,46 @@ check, never evidence of learned systematicity.
 Finally, description bits and `C_find` remain separate currencies. RF4 reports a
 Pareto frontier unless an exchange rate is frozen in advance; it does not add
 bits to seconds and let an implicit coefficient carry the verdict.
+
+# Post-E6 integrated program ordering (2026-09-02): semantics and learnability are separate tracks
+
+Created `POST_E6_RESEARCH_PROGRAM.md`, a draft program-level decision tree. It
+does not freeze an executable experiment or supersede `G5R_INTERFERENCE_PLAN.md`
+or `RF_ROLE_FILLER_PLAN.md`.
+
+The program orders the work as follows:
+
+    Phase 0  complete and validate G5R Stage D
+    Track A  RF0 diagnosis -> RF1 unseen binding -> RF2 causal learner
+    Track B  SO0 acquisition census -> classification-specific SO1 -> online SO2
+    Merge    typed CHAIN/COMPOSE; IF/REPEAT only after a strong online gate
+
+This ordering registers that two independent unknowns must not be repaired by
+one compound architecture: whether deep semantic identity is recoverable, and
+whether operators strong enough for control flow can be acquired within a
+declared resource envelope. Track A may proceed on the ordinary substrate even
+if Track B closes. Control flow cannot proceed from an offline or oracle-only
+strong-operator result.
+
+**Contamination disclosure:** this program was written after all three `C_lo`
+cells already existed in the incomplete
+`reports/rotated_g5r_interference.json` and had been inspected. Their terminal
+medians, approximately 0.900/0.790/0.897, are observed design inputs, not a new
+prediction or accepted result. The frozen Stage-D decision ladder and thresholds
+remain unchanged; the report must complete and validate before classification.
+No blind prediction is made here about the strong-operator budget crossing.
+
+The future Track-B protocol is conditional on the frozen Stage-D result:
+budget-limited -> bracket updates, batch task diversity, and total
+example-gradients with isolating pairs; interference -> hold budget/routes fixed
+and manipulate schedule; routing -> hold budget/schedule fixed and manipulate
+route learning; both/interaction -> minimal factorial intervention. Existence
+with oracle routes precedes learned-route discovery, and a final non-oracle
+online SO2 gate precedes any branch/loop learner.
+
+The plan also registers a horizon vector—`D_execute`, `D_semantic`, `D_search`,
+`D_form`, and `H_amortize`—instead of one generic compositionality boundary.
+Each requires persistent failure or a monotone fit; a single crossing is not a
+horizon. Typed combinator equivalence remains an implementation check, and bits,
+errors, operations, and seconds remain separate currencies unless an exchange
+rate is frozen in advance.

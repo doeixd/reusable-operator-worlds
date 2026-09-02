@@ -4424,3 +4424,27 @@ same-sized compiled operator, does not compare functions in parameter space, and
 does not open `IF`/`REPEAT` until the rotated substrate clears its opportunity
 and learning gates. No RF code was written, no factorization was fit, no result
 was inspected, and no sealed worlds were allocated or opened in this milestone.
+
+# Post-E6 integrated research program drafted (2026-09-02)
+
+Created `POST_E6_RESEARCH_PROGRAM.md` to coordinate the semantic-factorization
+and strong-operator lines without merging their claims. The order is: finish and
+validate the already-frozen G5R Stage D diagnostic; run RF0 as the cheap
+existing-artifact semantic census; derive a classification-specific
+strong-operator acquisition protocol; require RF1 before calling fillers
+recombinable and an online non-oracle SO2 gate before opening control flow; then
+test typed structural combinators.
+
+The plan records five separate horizons (`D_execute`, `D_semantic`, `D_search`,
+`D_form`, `H_amortize`), explicit convergence and stop rules, conditional
+successors for every Stage-D classification, the ordinary-versus-strong
+substrate split for `CHAIN` versus `IF`/`REPEAT`, a common metrics/accounting
+contract, and a milestone-by-milestone commit sequence.
+
+Integrity disclosure: the incomplete Stage-D report already contained and
+exposed all three `C_lo` endpoints when this program was drafted. They are
+labelled observed design inputs, not prospective evidence, and the program does
+not change the frozen Stage-D protocol or accept an incomplete classification.
+No experiments were launched, no artifact was modified, no sealed world was
+allocated or opened, and `reports/rotated_g5r_interference.json` remains an
+uncommitted in-flight artifact owned by its existing run.
