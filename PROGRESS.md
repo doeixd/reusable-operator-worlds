@@ -4468,3 +4468,20 @@ cumulative savings repay cumulative creation costs.
 No self-hosting code or artifact exists, no experiment was launched, and no
 current threshold or result was changed. The in-flight Stage-D artifact remains
 untouched.
+
+# RF0a and downstream RF0 protocols frozen (2026-09-02)
+
+Froze `RF0A_SEMANTIC_RECOVERABILITY_PLAN.md`, the cheap oracle census selected
+as the next experiment, and `RF0_ROLE_FILLER_PROTOCOL.md`, the exact downstream
+unsupervised test that must not be redesigned after seeing the census. The
+former asks whether local teacher identity remains recoverable across depths;
+the latter fixes common-state observations, FLAT/ADDITIVE/TPR factor families,
+the model grid, cross-depth split, label-free BIC selection, collapse-safe
+semantic scorer, nulls, and decision rules.
+
+The PI explicitly authorized the single-threaded, read-only RF0a audit to run
+alongside the already-running G5R Stage D process. This does not authorize a
+second full lifetime. RF0a may read E1/E6 artifacts only and must not inspect,
+modify, commit, or otherwise contend for Stage D's in-flight report. At this
+freeze milestone no RF0a/RF0 code, fit, derived semantic score, or output
+exists, and no sealed seed was allocated or opened.

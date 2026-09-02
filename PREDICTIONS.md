@@ -7586,3 +7586,30 @@ immutable generations, each prospectively improving matched total synthesis
 cost at fixed object-program quality on held-out future task families, with
 cumulative savings repaying all cumulative creation costs. One successful edit,
 training-set improvement, or uncharged speedup does not qualify.
+
+# RF0a semantic-recoverability census and RF0 factorization (2026-09-02)
+
+Before RF0a code or output existed, froze the oracle information census in
+`RF0A_SEMANTIC_RECOVERABILITY_PLAN.md` and the downstream label-free
+factorization in `RF0_ROLE_FILLER_PROTOCOL.md`. RF0a fits only at depths 4–6
+and scores depths 8 and 10. Its ordered arms distinguish raw-symbol,
+role-conditioned, function-geometric, local-dynamic, and trajectory-distributed
+recoverability. Its teacher labels are probe targets only, so any positive is
+an information/opportunity result rather than an unsupervised discovery claim.
+
+**Reviewer hypothesis:** `ZR` will recover role-conditioned local semantics:
+at least 0.60 balanced teacher-primitive accuracy and at least a 0.20 gain over
+raw symbol at both deep depths in at least two worlds.
+
+**Project prediction:** role will help at depth 8 but will not clear both of
+those margins at depths 8 and 10 in the same at least two worlds. The modal
+classification is DYNAMIC LOCAL SEMANTICS or TEACHER-LOCAL IDENTITY NOT
+RECOVERABLE. A TRACE-only pass would be the most informative contrary result.
+
+RF0 is frozen before the oracle census can influence it. It uses only a common-
+state slot-function fingerprint and the declared structural role, selects hard
+FLAT/ADDITIVE/TPR factors by depth-6 learner-side BIC, and opens teacher labels
+only for a collapse-safe cross-role recurrence score. It runs only if RF0a
+returns ROLE-CONDITIONED LOCAL SEMANTICS. The project prediction is that, if
+run, RF0 will not improve adjusted semantic recurrence by 0.20 at both deep
+depths in at least two worlds.
