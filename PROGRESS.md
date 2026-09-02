@@ -4485,3 +4485,39 @@ second full lifetime. RF0a may read E1/E6 artifacts only and must not inspect,
 modify, commit, or otherwise contend for Stage D's in-flight report. At this
 freeze milestone no RF0a/RF0 code, fit, derived semantic score, or output
 exists, and no sealed seed was allocated or opened.
+
+# RF0a semantic-recoverability audit complete (2026-09-02)
+
+Implemented RF0a in
+`src/row/experiments/audit_rf0a_semantic_recoverability.py`, added its synthetic
+and leakage tests, and launched the read-only audit from committed code
+`f4a26ee`. The run consumed the exact 1,536 E6A cache cells, reproduced all
+world/depth macro and planted-site counts plus the published 91.15%/52.60%/
+13.02%/7.29% survival means, and wrote
+`reports/rf0a_semantic_recoverability.json` atomically. It did not modify a
+model, optimize a route, use a query target, or touch the concurrent Stage-D
+artifact.
+
+Registered classification: **RAW LOCAL SEMANTICS SURVIVE**, passing at depths 8
+and 10 in 3/3 development worlds. Raw-symbol balanced accuracy was
+0.697/0.626, 0.817/0.690, and 0.780/0.668 at depths 8/10. The three-world means
+were 0.764 and 0.661. The role-only arm remained near chance; adding role to raw
+symbol changed accuracy by 0.0000/0.0000, 0.0000/0.0009, and
+-0.0012/0.0000. Functional fingerprints and the broader local/trajectory arms
+were effectively tied with raw symbols rather than revealing a hidden deeper
+code.
+
+Added an independent scorer in `src/row/experiments/score_rf0a.py`. It
+recomputed balanced accuracies from all confusion matrices and verified report
+completion/freshness, launch commit, plan/checkpoint/E6 hashes, exact world/depth/
+arm/row counts, finite values, feature dimensions, 200 null draws per cell,
+synthetic controls, and the decision ladder. The scorer exited 0. All 221 tests
+passed in 27.55 seconds; `check_prereg.py` protects 40 frozen files;
+`check_invalid.py` found no withdrawn artifact; and `git diff --check` passed.
+
+The frozen downstream RF0 factorization is recorded **NOT RUN**: its opportunity
+gate required ROLE-CONDITIONED LOCAL SEMANTICS, which RF0a rejected. The
+scientific update is that E6 measured loss of literal joint syntax, not loss of
+position-wise semantic identity. Any successor should test label-free semantic
+canonicalization or semantic macro discovery, rather than assume roles are
+needed to recover the local computation.

@@ -4696,3 +4696,16 @@ than as a one-off miss.
   continue to label the original penalized cells invalid. Because H-Adam alone
   authorized Stage C, the correction adds optimizer evidence without changing
   `ROUTE_INFERENCE_OR_ONLINE_INTERFERENCE_FAILURE`.
+
+- JOINT MOTIF SURVIVAL CAN COLLAPSE WHILE POSITION-WISE SEMANTIC IDENTITY
+  REMAINS RECOVERABLE (RF0a, 2026-09-02;
+  `reports/rf0a_semantic_recoverability.json`). E6's exact learner-trigram
+  survival fell to 13.02%/7.29% at depths 8/10, but a linear oracle probe fitted
+  only at depths 4/6 decoded teacher primitive from the raw learner slot at
+  mean balanced accuracies 0.764/0.661. All three worlds cleared 0.60 at both
+  depths. Adding the registered structural role changed accuracy by at most
+  0.0012 in magnitude, and function, local-dynamic, and trajectory features did
+  not materially improve it. Therefore do not infer semantic loss from exact
+  substring loss. First test whether the raw vocabulary admits a stable
+  many-to-one semantic canonicalization; use role–filler machinery only when
+  role adds information. RF0 remains NOT RUN under its frozen gate.

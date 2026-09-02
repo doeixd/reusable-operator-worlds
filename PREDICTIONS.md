@@ -7613,3 +7613,31 @@ only for a collapse-safe cross-role recurrence score. It runs only if RF0a
 returns ROLE-CONDITIONED LOCAL SEMANTICS. The project prediction is that, if
 run, RF0 will not improve adjusted semantic recurrence by 0.20 at both deep
 depths in at least two worlds.
+
+# RF0a outcome (2026-09-02): raw local semantics survive
+
+RF0a was launched from committed code `f4a26ee` after both protocols were
+frozen. Its registered classification is **RAW LOCAL SEMANTICS SURVIVE**, in all
+3/3 development worlds at both held-out depths. Balanced teacher-primitive
+accuracy from the raw learner symbol was:
+
+    world       depth 8       depth 10
+      0          0.6968         0.6258
+      1          0.8166         0.6897
+      2          0.7801         0.6682
+    mean         0.7645         0.6612
+
+The reviewer prediction was not supported. `ZR - Z` was 0.0000/0.0000,
+0.0000/0.0009, and -0.0012/0.0000 across worlds at depths 8/10—nowhere near the
+registered 0.20 role materiality margin. Function geometry, native local
+dynamics, and the full trajectory also added essentially nothing over raw slot
+identity in the declared linear-probe arms.
+
+This revises the interpretation of E6, not its measurements. Exact trigram
+survival still falls from 91.15% to 7.29%, but local teacher identity remains
+recoverable from a shallow-trained many-to-one decoding of individual learner
+symbols. Syntactic recurrence disappeared much faster than position-wise
+semantic recoverability. The exact unsupervised RF0 protocol is **NOT RUN**
+because its frozen gate required ROLE-CONDITIONED LOCAL SEMANTICS. The result is
+an oracle development census and does not establish a non-oracle canonicalizer,
+causal architectural benefit, or unique semantic ontology.
