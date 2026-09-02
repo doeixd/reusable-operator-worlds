@@ -4401,3 +4401,26 @@ in each world; all-finite metrics and terminal tensors; frozen plan and code
 commit; atomic fresh report; 206 tests passed in 25.91 seconds before launch;
 `check_prereg.py` validates 37 frozen files; and `check_invalid.py` reports no
 withdrawn artifact present.
+
+# Review 84 recorded; role–filler successor research plan drafted (2026-09-02)
+
+Recorded the review verbatim as `reviews/reviewer-feedback-84.txt`, added its
+summary to `reviews/review-index.md`, and created `RF_ROLE_FILLER_PLAN.md`. The
+plan turns the proposed connection into a gated RF0→RF4 program: existing-
+artifact diagnosis, held-out binding recombination, a matched-budget causal
+learner, higher-order structural schemas, and only then latent role discovery.
+
+RF0 is the immediate cheap census. It reconstructs the existing E6 routes and
+state traces, fits without teacher labels, compares functions on common
+on-trajectory states, and scores a collapse-safe filler-versus-raw semantic
+recurrence contrast. The plan fixes a materiality rule at both depths 8 and 10,
+requires same-author and role-shuffled nulls plus non-collapse, and stops the
+branch if factorization does not explain E6. RF1 is explicitly required before
+clustering can be called systematic recombination; RF2 is required before any
+causal architectural claim.
+
+The plan also carries forward the completed negatives: it does not retry E6.2's
+same-sized compiled operator, does not compare functions in parameter space, and
+does not open `IF`/`REPEAT` until the rotated substrate clears its opportunity
+and learning gates. No RF code was written, no factorization was fit, no result
+was inspected, and no sealed worlds were allocated or opened in this milestone.

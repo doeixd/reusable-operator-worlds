@@ -1,0 +1,860 @@
+Yes. I think this gives us a **very concrete next architectural hypothesis**, and it targets exactly the failure E6 exposed.
+
+The useful idea is not “use Tensor Product Representations because they are symbolic.” It is:
+
+$$
+\boxed{
+\textbf{factor what computation is being performed from the role/context in which it is being used}
+}
+$$
+
+That is almost perfectly aligned with the problem we just discovered.
+
+Your uploaded note describes McCoy et al.'s central result as neural representations being approximately decomposable into reusable **fillers** bound to reusable **roles**, with systematic recombination even for combinations not seen during training.
+
+Our current ROW representation is much cruder:
+
+$$
+p=(z_1,z_2,\ldots,z_D)
+$$
+
+where each $z_i$ is basically an opaque symbol.
+
+E6 tells us that this works extremely well for execution, but at greater depth the symbol sequence ceases to be a stable local description of the computation. The same teacher motif may be realized as different learner trigrams, and eventually routes collapse toward attractor symbols.
+
+So I think the next hypothesis should be:
+
+$$
+\boxed{
+\textbf{the representation is entangling computational identity with structural role}
+}
+$$
+
+and role–filler factorization might disentangle them.
+
+---
+
+# The direct analogy
+
+McCoy-style:
+
+$$
+\text{DOG}\otimes\text{SUBJECT}
+$$
+
+means approximately:
+
+> DOG, used in the SUBJECT role.
+
+For us, something like:
+
+$$
+\boxed{
+P_i\otimes R_j
+}
+$$
+
+could mean:
+
+> primitive $P_i$, used in structural role $R_j$.
+
+Where roles might initially be:
+
+$$
+R_{\rm first},
+R_{\rm middle},
+R_{\rm last}
+$$
+
+but eventually much richer:
+
+$$
+R_{\rm predicate},
+R_{\rm true-branch},
+R_{\rm false-branch},
+R_{\rm loop-body},
+R_{\rm argument-1},
+R_{\rm continuation},
+\dots
+$$
+
+Then a program isn't merely:
+
+$$
+(z_1,z_2,z_3)
+$$
+
+but something closer to:
+
+$$
+\boxed{
+P_a\otimes R_1
++
+P_b\otimes R_2
++
+P_c\otimes R_3.
+}
+$$
+
+That is basically a parameterized combinator language realized geometrically.
+
+---
+
+# Why this could solve the E6 semantic problem
+
+E6 observed:
+
+$$
+\text{same teacher computation}
+\not\Rightarrow
+\text{same learner substring}.
+$$
+
+There are at least two possible explanations.
+
+### Bad explanation
+
+The learner simply isn't representing reusable local computation anymore.
+
+### More interesting explanation
+
+The learner is representing the computation, but its identity is **distributed across symbol + context/role**.
+
+For example, perhaps teacher operation $A$ becomes:
+
+$$
+z_3 \text{ in role 1}
+$$
+
+but:
+
+$$
+z_8 \text{ in role 4}.
+$$
+
+Our current analysis says:
+
+> different symbol ⇒ different operation.
+
+A role–filler analysis might instead reveal:
+
+$$
+(z_3,R_1)
+\sim
+(z_8,R_4)
+$$
+
+as manifestations of the same underlying filler.
+
+That could explain why:
+
+* whole programs remain excellent;
+* composition generalizes;
+* depth generalizes;
+* but literal motif recurrence collapses.
+
+In other words:
+
+$$
+\boxed{
+\textbf{semantic recurrence may survive after syntactic recurrence disappears.}
+}
+$$
+
+That is a major testable hypothesis.
+
+---
+
+# This gives us a cheap diagnostic before changing the architecture
+
+I would not immediately build a TPR learner.
+
+First ask whether our existing trained programs admit a **post-hoc role–filler factorization**.
+
+Take the learned operation at each program position and try to explain it as:
+
+$$
+h_{t,j}
+\approx
+F_{\phi(t,j)}\otimes R_j
+$$
+
+or, more generally,
+
+$$
+h_{t,j}
+\approx
+B(F_{k},R_j)
+$$
+
+for some learnable binding map $B$.
+
+Then ask:
+
+> Do the hidden “filler” identities become more stable across depth than the raw route symbols?
+
+This is exactly the kind of cheap causal census we like.
+
+---
+
+# New experiment: RF1 — Does role–filler factorization recover semantic recurrence?
+
+Use existing E6 artifacts.
+
+For each planted teacher primitive occurrence, record:
+
+* raw learner symbol;
+* position;
+* neighboring symbols;
+* activation/operator contribution;
+* teacher operation.
+
+Fit a factorization:
+
+$$
+x_{t,j}
+\approx
+B(f_{k},r_j)
+$$
+
+without using teacher labels for fitting.
+
+Then evaluate leave-one-context-out.
+
+The primary metric should be:
+
+$$
+\boxed{
+\text{same-computation filler consistency across roles}
+}
+$$
+
+versus:
+
+$$
+\text{raw-symbol consistency}.
+$$
+
+E6 gives us a very strong baseline:
+
+raw motif survival goes roughly:
+
+$$
+91\%\to53\%\to13\%\to7\%
+$$
+
+as depth rises.
+
+The question is whether filler identity stays high while raw symbols collapse.
+
+If yes, that's a huge result.
+
+---
+
+# The strongest test would be recombination
+
+Don't stop at clustering.
+
+McCoy's result matters because the components can be recombined systematically, not merely because vectors cluster nicely.
+
+So after fitting:
+
+$$
+F_i,\quad R_j,
+$$
+
+construct an unseen binding:
+
+$$
+B(F_i,R_{j^*})
+$$
+
+where filler $i$ never occurred in role $j^*$.
+
+Then substitute it into the executor.
+
+This is basically our E2 H3 test, but at the **factorized representation level**.
+
+We want:
+
+$$
+\boxed{
+\text{known filler}
++
+\text{new role}
+\Rightarrow
+\text{correct computation}.
+}
+$$
+
+If that works, we have something much stronger than a post-hoc decomposition.
+
+---
+
+# It could also give us parameterized primitives
+
+This is where your “it rhymes with lambda calculus” intuition becomes useful.
+
+Rather than twelve unrelated operations:
+
+$$
+P_1,\ldots,P_{12},
+$$
+
+perhaps some should be represented as:
+
+$$
+\boxed{
+P(\alpha)
+}
+$$
+
+where the filler is the function family and the role/argument carries variation.
+
+For example:
+
+$$
+\texttt{ADD}\otimes\texttt{ARGUMENT}(3)
+$$
+
+rather than creating:
+
+$$
+\texttt{ADD1},\texttt{ADD2},\texttt{ADD3},\dots
+$$
+
+This connects directly to H39:
+
+$$
+\text{shared schema}
++
+\text{fast argument}.
+$$
+
+McCoy's role–filler framework gives us another mathematical language for the same idea.
+
+---
+
+# I think it also changes how we should think about macros
+
+Right now a macro is:
+
+$$
+M=[A,B,C].
+$$
+
+But E6.2 showed that trying to squeeze:
+
+$$
+A\circ B\circ C
+$$
+
+into one same-sized neural slot usually fails.
+
+Maybe the right macro is not a new opaque filler.
+
+Maybe it's a **higher-order structural role**.
+
+For example:
+
+$$
+M(x)=
+A(B(C(x)))
+$$
+
+could be represented as a reusable structural frame:
+
+$$
+\boxed{
+\texttt{CHAIN}_3
+(
+A,
+B,
+C
+)
+}
+$$
+
+Here:
+
+* `CHAIN3` is the role/schema;
+* $A,B,C$ are fillers.
+
+That is much closer to a combinator.
+
+Instead of learning a new dense operator, we learn:
+
+$$
+\lambda f\,g\,h\,x.\;h(g(f(x))).
+$$
+
+Then bind:
+
+$$
+f=A,\quad g=B,\quad h=C.
+$$
+
+That solves E6.2's capacity problem completely because we no longer require the macro to contain the computation itself.
+
+The macro stores the **structure**.
+
+---
+
+# This suggests a different notion of abstraction
+
+We have mostly been asking whether repeated computation becomes a new primitive:
+
+$$
+A\circ B\circ C
+\rightarrow
+M.
+$$
+
+But perhaps the more scalable transformation is:
+
+$$
+\boxed{
+A\circ B\circ C
+\rightarrow
+\operatorname{COMPOSE}_3(A,B,C).
+}
+$$
+
+Then repeated structural motifs can become combinators:
+
+$$
+\operatorname{CHAIN}
+$$
+
+$$
+\operatorname{IF}
+$$
+
+$$
+\operatorname{MAP}
+$$
+
+$$
+\operatorname{FOLD}
+$$
+
+$$
+\operatorname{REPEAT}
+$$
+
+and learned operations fill their argument roles.
+
+That is much closer to lambda calculus / combinatory logic.
+
+And it avoids forcing every abstraction into a same-sized neural vector.
+
+---
+
+# This could be the path to loops and branching
+
+This is where I think the McCoy result becomes architecturally powerful.
+
+Instead of treating:
+
+```text
+IF
+LOOP
+MACRO
+```
+
+as arbitrary new node types, treat them as **roles / structural combinators**.
+
+For branching:
+
+$$
+\operatorname{IF}
+(
+\underbrace{p}_{\text{predicate role}},
+\underbrace{a}_{\text{true role}},
+\underbrace{b}_{\text{false role}}
+)
+$$
+
+For loops:
+
+$$
+\operatorname{REPEAT}
+(
+\underbrace{n}_{\text{count}},
+\underbrace{f}_{\text{body}}
+)
+$$
+
+For map:
+
+$$
+\operatorname{MAP}
+(
+\underbrace{f}_{\text{function}},
+\underbrace{x}_{\text{collection}}
+).
+$$
+
+That is role–filler structure almost literally.
+
+---
+
+# And this makes the interaction-net idea cleaner
+
+Earlier we were debating whether ports were necessary.
+
+Role–filler structure gives a nice answer:
+
+**raw ports probably aren't the learned representation; semantic roles are.**
+
+An `IF` node might have:
+
+$$
+\{
+\text{condition},
+\text{true},
+\text{false}
+\}
+$$
+
+roles.
+
+An interaction-net/compiler layer can internally map these onto ports.
+
+So:
+
+$$
+\boxed{
+\text{role–filler language}
+\rightarrow
+\text{typed graph IR}
+\rightarrow
+\text{local rewrite execution}.
+}
+$$
+
+The learner reasons in roles and fillers.
+
+The runtime deals with ports/wiring.
+
+That is much cleaner than asking synthesis to manipulate raw ports.
+
+---
+
+# There is another important lesson from McCoy
+
+Your uploaded note already identifies it:
+
+$$
+\boxed{
+\text{learning mechanism}
+\neq
+\text{representational structure}.
+}
+$$
+
+Gradient descent can produce structured representations.
+
+That matters for us because we have occasionally drifted toward:
+
+> If we want programs/symbols/combinators, perhaps we need a discrete symbolic training algorithm.
+
+Not necessarily.
+
+We can continue using continuous differentiable learning for the **formation** of the computational vocabulary, while asking whether the resulting representation factorizes into reusable structural pieces.
+
+So the architecture could be:
+
+$$
+\boxed{
+\text{continuous neural learning}
+\rightarrow
+\text{factorized role/filler representation}
+\rightarrow
+\text{discrete/hierarchical program manipulation}.
+}
+$$
+
+This matches a lot of our empirical history:
+
+* continuous representation formation often works;
+* discrete structure can be difficult early;
+* later compilation/discretization can be almost free;
+* semantic structure may emerge before explicit symbols.
+
+---
+
+# A concrete research sequence
+
+I would add a new branch after the current E6 line.
+
+### RF0 — Existing-artifact census
+
+No new training.
+
+Ask:
+
+> Can E2/E6 representations be decomposed into reusable fillers and roles?
+
+Compare:
+
+$$
+\text{raw route symbol}
+$$
+
+vs
+
+$$
+\text{factorized filler identity}.
+$$
+
+Primary prediction:
+
+$$
+\boxed{
+\text{filler recurrence degrades much less with depth than literal syntax recurrence}.
+}
+$$
+
+If no:
+
+Stop. TPR-like factorization isn't explaining our failure.
+
+---
+
+### RF1 — Unseen role recombination
+
+Train factorization on selected filler-role combinations.
+
+Hold out:
+
+$$
+(F_i,R_j).
+$$
+
+Then construct/test them.
+
+This is McCoy-style systematicity plus our H3 standard.
+
+Pass:
+
+$$
+\boxed{
+F_i \text{ has stable semantics independent of }R_j.
+}
+$$
+
+---
+
+### RF2 — Matched-budget learner
+
+Train two substrates:
+
+Flat:
+
+$$
+z_1,z_2,\ldots,z_D
+$$
+
+Factorized:
+
+$$
+(F_1,R_1),\ldots,(F_D,R_D).
+$$
+
+Match:
+
+* parameters;
+* retained bits;
+* compute;
+* task-code budget.
+
+Test:
+
+* lifetime loss;
+* E2 composition;
+* E8 length;
+* E6 motif survival;
+* search cost.
+
+The headline question:
+
+$$
+\boxed{
+\text{Does factorization preserve semantic locality deeper into programs?}
+}
+$$
+
+That gives us a new possible horizon:
+
+$$
+D_{\rm semantic}.
+$$
+
+---
+
+### RF3 — Higher-order roles
+
+Add:
+
+$$
+\operatorname{COMPOSE}
+$$
+
+$$
+\operatorname{IF}
+$$
+
+$$
+\operatorname{REPEAT}.
+$$
+
+Now fillers can themselves be programs/operators.
+
+This becomes genuinely lambda-calculus-ish:
+
+$$
+\operatorname{REPEAT}(n,f)
+$$
+
+$$
+\operatorname{IF}(p,a,b).
+$$
+
+Test held-out structural combinations.
+
+---
+
+### RF4 — Discover roles
+
+Only after fixed-role existence works.
+
+Don't tell the learner:
+
+$$
+\text{subject/object}
+$$
+
+or:
+
+$$
+\text{predicate/body}.
+$$
+
+Ask whether it discovers reusable relational roles because doing so reduces:
+
+$$
+D^*
++
+C_{\rm find}.
+$$
+
+This reconnects directly to MDL.
+
+---
+
+# One particularly good falsifiable hypothesis
+
+I think this is worth registering:
+
+$$
+\boxed{
+\textbf{E6's deep attractor collapse occurs because the flat route code lacks explicit role/filler factorization.}
+}
+$$
+
+Prediction:
+
+At depth 8–10:
+
+$$
+\text{raw motif survival}\downarrow
+$$
+
+but in a role-factorized learner:
+
+$$
+\text{filler identity survival}
+$$
+
+remains substantially higher.
+
+And ideally:
+
+$$
+D_{\rm semantic}^{\rm role/filler}
+>
+D_{\rm semantic}^{\rm flat}.
+$$
+
+If that doesn't happen, then the McCoy connection is intellectually interesting but not solving our actual bottleneck.
+
+That's exactly the kind of experiment we want.
+
+---
+
+# The grand architecture gets cleaner too
+
+Instead of:
+
+$$
+\text{flat primitive sequence}
+$$
+
+I now imagine:
+
+$$
+\boxed{
+\text{Program}
+=
+\text{structural combinators}
++
+\text{bound learned fillers}
+}
+$$
+
+with learned operations such as:
+
+$$
+P_i(\alpha)
+$$
+
+and structural forms such as:
+
+$$
+\operatorname{COMPOSE}(f,g)
+$$
+
+$$
+\operatorname{IF}(p,a,b)
+$$
+
+$$
+\operatorname{REPEAT}(n,f).
+$$
+
+Then higher-level abstractions are themselves parameterized structures:
+
+$$
+M(f,g)=\operatorname{COMPOSE}(f,g).
+$$
+
+This is very close to what you were gesturing at with:
+
+> parameterized function → combinator → lambda calculus.
+
+I think that's the valuable insight.
+
+The next leap may not be **more primitives**.
+
+It may be:
+
+$$
+\boxed{
+\textbf{learn reusable computational roles and bind learned operations into them.}
+}
+$$
+
+That would turn our current language from a bag of reusable words into something closer to a **grammar / combinator calculus**.
+
+And experimentally, the first cheap question is very clear: **does role–filler factorization recover the semantic recurrence that E6's flat symbol sequences lose at depth?** If yes, I think that should become a major successor branch.

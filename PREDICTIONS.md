@@ -7421,3 +7421,69 @@ isolated operator findability. It does not alter the already licensed primary
 classification, which depends on H-Adam and Stage C rather than H-LBFGS. Report
 `reports/rotated_g5r_diagnosis_lbfgs_correction.json`, correction instrument
 `e31ba05`.
+
+# Review 84 and RF branch registration (2026-09-02): semantic recurrence may outlive literal syntax
+
+Filed `reviews/reviewer-feedback-84.txt` verbatim and indexed it. Draft research
+program: `RF_ROLE_FILLER_PLAN.md`. No RF factorization, code, or result exists at
+the time of this entry; development worlds 0–2 only, and no sealed seed band is
+allocated.
+
+E6's published mean planted-motif survival is 91.15%, 52.60%, 13.02%, and
+7.29% at depths 4, 6, 8, and 10. That is a literal-syntax result. Review 84
+registers the stronger explanation that computational identity may be
+distributed across a reusable FILLER and its structural ROLE, so a label-free
+post-hoc factorization could recover stable semantic identity even where raw
+trigrams collapse.
+
+The ordered claim ladder is registered before RF code or outputs:
+
+    RF0  post-hoc diagnosis on existing E2/E6 artifacts
+    RF1  execution of a held-out filler-role binding
+    RF2  matched-budget flat-versus-factorized causal learner
+    RF3  higher-order structural schemas (CHAIN/COMPOSE, then gated IF/REPEAT)
+    RF4  discovery of roles after supplied roles have passed
+
+The load-bearing RF0 score is collapse-safe:
+
+    S_adj    = P(code agrees | same teacher operation, different contexts)
+             - P(code agrees | different teacher operations, matched contexts)
+    Delta_RF = S_adj(filler) - S_adj(raw)
+
+Teacher identities and planted-site flags are scoring-only fields. They cannot
+enter fitting, factor-count selection, stopping, or arm choice. Functions are
+compared on common on-trajectory states; direct parameter matching is rejected
+because E9 showed that functionally corresponding operators need not share a
+coordinate system. A one-filler collapse cannot pass because it also raises the
+different-operation agreement term.
+
+RF0's registered materiality gate is `Delta_RF >= 0.20` at both depths 8 and 10
+in at least 2 of 3 worlds, with synthetic positive/negative controls,
+same-author unplanted nulls, held-out reconstruction, non-collapse, and
+three-initialization agreement all required. `Delta_RF < 0.10` at both deep
+depths in at least 2 of 3 worlds yields `RF0 DOES NOT EXPLAIN E6`; intermediate
+outcomes are unresolved. RF1 is required before a descriptive decomposition can
+be called recombinable, and RF2 is required before factorization can be called a
+cause.
+
+**Review 84's prediction:** filler recurrence degrades much less with depth than
+literal syntax, and an explicitly factorized learner has
+`D_semantic(role/filler) > D_semantic(flat)`.
+
+**Project prediction:** RF0 is uncertain and we lean against its strong depth-10
+gate. We predict a positive `Delta_RF` at depth 8 but not `>=0.20` at both depths
+8 and 10 in 2 of 3 worlds. The reason is diagnostic: current slots already have
+context-invariant functions and the deepest E6 routes are dominated by
+attractors, so role structure may not contain the missing local information.
+
+RF3 is constrained by two completed negatives. `CHAIN_3(A,B,C)` stores structure
+and keeps `A,B,C` as fillers rather than retrying E6.2's failed same-sized neural
+compilation. `IF` and `REPEAT` remain closed until a substrate passes the
+operator-strength and learning gates; the canonical residual operators made
+choice and count unnecessary, and the rotated learner remains under
+interference diagnosis. A schema's definitional execution is an implementation
+check, never evidence of learned systematicity.
+
+Finally, description bits and `C_find` remain separate currencies. RF4 reports a
+Pareto frontier unless an exchange rate is frozen in advance; it does not add
+bits to seconds and let an implicit coefficient carry the verdict.

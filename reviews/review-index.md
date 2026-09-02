@@ -3147,3 +3147,31 @@ compiled call may accumulate less error than three approximate ones.
 Closes by noting that two planned positive experiments have now been removed for
 being identities, and that this is the program becoming better at distinguishing
 facts about the world from facts about its own implementation.
+
+### [reviewer-feedback-84.txt](reviewer-feedback-84.txt)
+
+Read after the E6 line exposed a depth-dependent collapse of literal motif
+recurrence and E6.2 showed that a three-operation composition does not fit in one
+same-sized neural slot. Proposes the concrete successor hypothesis that the flat
+route code entangles computational identity (FILLER) with structural context
+(ROLE), so semantic recurrence may survive after syntactic recurrence
+disappears. The first test is deliberately post-hoc and cheap: fit a label-free
+role–filler decomposition to existing E2/E6 artifacts, then compare
+same-computation filler consistency across roles against raw-symbol consistency
+and the published 91%→53%→13%→7% motif-survival curve.
+
+Insists that clustering is insufficient. The stronger test holds out a complete
+filler-role pair, constructs the unseen binding, and substitutes it into the
+executor, extending E2 H3 systematicity to the factorized representation. If
+that passes, proposes a matched-budget flat-versus-factorized lifetime learner
+and a semantic-depth horizon `D_semantic`, followed only later by higher-order
+roles and learned role discovery.
+
+Recasts macros as structural schemas such as `CHAIN_3(A,B,C)` rather than one
+opaque operator containing `A∘B∘C`, directly addressing E6.2's capacity failure.
+Extends the idea prospectively to typed `COMPOSE`, `IF`, `REPEAT`, `MAP`, and
+`FOLD` combinators, with learned operators as fillers and a graph/compiler layer
+handling ports. The resulting program is continuous neural vocabulary
+formation, factorized role/filler representation, then discrete hierarchical
+manipulation—not an assumption that symbolic structure requires a discrete
+learning algorithm.
