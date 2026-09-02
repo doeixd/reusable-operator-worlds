@@ -7641,3 +7641,19 @@ semantic recoverability. The exact unsupervised RF0 protocol is **NOT RUN**
 because its frozen gate required ROLE-CONDITIONED LOCAL SEMANTICS. The result is
 an oracle development census and does not establish a non-oracle canonicalizer,
 causal architectural benefit, or unique semantic ontology.
+
+# RF0b semantic-motif ceiling (2026-09-02)
+
+After RF0a was complete and validated, froze
+`RF0B_SEMANTIC_MOTIF_PLAN.md`. This oracle follow-up asks whether the shallow
+raw-slot decoder restores the entire planted teacher trigram at depths 8 and
+10, rather than merely decoding positions independently. It cannot confirm
+RF0a and does not test label-free discovery.
+
+The observed RF0a means give independence heuristics of approximately 0.447 at
+depth 8 and 0.289 at depth 10. The prospective prediction is therefore
+**SEMANTIC MOTIF HORIZON BETWEEN 8 AND 10**: joint canonical recovery will clear
+`C_exact >= 0.30` and improve on E6 literal survival by at least 0.20 in at
+least two worlds at depth 8, but depth 10 will fail one of those gates in at
+least two worlds. The protocol freezes role-only and 200-draw permuted-decoder
+controls before any joint score exists.

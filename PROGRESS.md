@@ -4521,3 +4521,19 @@ scientific update is that E6 measured loss of literal joint syntax, not loss of
 position-wise semantic identity. Any successor should test label-free semantic
 canonicalization or semantic macro discovery, rather than assume roles are
 needed to recover the local computation.
+
+# RF0b semantic-motif protocol frozen (2026-09-02)
+
+Froze `RF0B_SEMANTIC_MOTIF_PLAN.md` after the RF0a result was fully observed
+but before RF0b code, decoded routes, null fits, or output existed. RF0b is the
+registered bridge between position-wise semantic decodability and reusable
+joint motifs: it refits the exact shallow `Z` decoder, applies it at the E6
+planted sites, and scores exact three-position recovery against literal E6
+survival.
+
+The protocol fixes an absolute 0.30 joint-recovery bar, a 0.20 improvement bar,
+role-only and 200-draw label-permutation controls, an ordered horizon decision,
+and a stop rule before label-free canonicalization. This remains a read-only
+development-world oracle audit. It launches no lifetime, changes no cached
+route, exposes no mapping to a learner, and leaves the in-flight G5R Stage D
+artifact untouched.
