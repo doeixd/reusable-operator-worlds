@@ -7683,3 +7683,61 @@ substantially at depth 8, and multiple cells exceeded the registered failure
 region. Preserve the result as heterogeneous opportunity evidence only. It does
 not authorize the planned label-free canonicalizer, semantic macro economics,
 or a claim that local decodability generally restores reusable motifs.
+
+# G5R Stage D: separating route inference from online interference (2026-09-02)
+
+Backfilling this entry: `G5R_INTERFERENCE_PLAN.md` was frozen before any Stage D
+code or endpoint existed (hash recorded in `tools/check_prereg.py` at commit
+`16bd2e1`), as the registered successor to `G5R_DIAGNOSIS_PLAN.md`'s
+`ROUTE_INFERENCE_OR_ONLINE_INTERFERENCE_FAILURE` classification, but its
+predictions and decision ladder were never mirrored here at freeze time. They
+are recorded now, unmodified, before any cell of
+`reports/rotated_g5r_interference.json` is scored against them.
+
+The plan runs a 2x2 (oracle/learned routes x offline-IID/online-lifetime
+schedule) plus a budget axis on the rotated `sigma=0` worlds 0-2, holding the
+`RotatedDiscreteLibraryLearner` architecture fixed throughout. Six cells:
+`C_lo`, `C_hi` (reused Stage C), `L_lo`, `L_hi`, `O_or`, `O_lr` (reused G5R). The
+registered decision ladder:
+
+1. If `C_lo` FAILS (median query NMSE > 0.05 in fewer than 2/3 worlds with true
+   routes and no sequential structure at the lifetime's own budget):
+   classification `BUDGET_LIMITED` — the prior stage's route/interference
+   dichotomy was not the binding constraint at that budget.
+2. Else, conditional on `O_or` and `L_lo`:
+   - `O_or` fails, `L_lo` passes -> `ONLINE_INTERFERENCE`.
+   - `O_or` passes, `L_lo` fails -> `ROUTE_INFERENCE`.
+   - both fail -> `BOTH_INDEPENDENTLY_SUFFICIENT`.
+   - both pass -> `INTERACTION_ONLY`.
+
+`L_hi` is secondary in every branch.
+
+**Registered predictions:** `C_lo` is genuinely uncertain, near even, because
+Stage C was still at median 0.87-0.92 after 1,024 of its 4,096 updates
+(65,536 example-gradients) while the lifetime budget is 8,192 updates but only
+~16,000 example-gradients — if step count dominates it passes, if example count
+dominates it fails. Conditional on `C_lo` passing, the modal prediction is
+`O_or` fails (0.6) and `L_lo` fails (0.65), giving `BOTH_INDEPENDENTLY_SUFFICIENT`
+as modal outcome, `ONLINE_INTERFERENCE` second. `L_hi` is predicted to fail more
+often than not (0.6): the G5R learner used all 12 slots with confident routes
+(mean max coefficient 0.79-0.80) yet recovered zero explained routes on world 0,
+reading as confident wrong routing rather than diffuse routing. World 0 is
+predicted to remain the worst world in every cell.
+
+Amendment 1 (before any Stage D code) corrected the anchor-check quantity: the
+existing G5R artifacts' per-task `final_nmse` is an end-of-task, not
+terminal-model, quantity for 63 of 64 tasks, so the anchor now reproduces only
+the last task's value, and both the end-of-task and terminal-model medians are
+reported for the two online cells, their difference read descriptively as an
+interference measurement. Amendment 2 (found by a unit test before any cell
+ran) corrected the oracle pin logits from +/-50 to +/-100 so the one-hot claim
+holds exactly in float32 at every registered temperature.
+
+As of this entry, `reports/rotated_g5r_interference.json` contains all cells
+(git commit `0ff055a`) but is uncommitted and has not yet been scored against
+this ladder and its non-vacuity/equivalence checks (anchor, pinning, learning,
+reload, `check_prereg.py`, `check_invalid.py`). No classification is recorded
+here. `POST_E6_RESEARCH_PROGRAM.md`'s contamination disclosure already notes
+that its three `C_lo` terminal medians (~0.900/0.790/0.897) were inspected
+before that program was written and are an observed design input, not a blind
+prediction; that disclosure stands and this entry does not revise it.
