@@ -1,0 +1,127 @@
+# Interaction-net / graph-rewrite substrate — design sketch (NOT a plan)
+
+Status: SKETCH ONLY. Nothing here is frozen, registered, or licensed. No
+experiment is proposed and no compute will be spent on it. Staging authority
+lives in `POST_E6_RESEARCH_PROGRAM.md` Tracks C/D, `RF_ROLE_FILLER_PLAN.md`
+RF3/RF4, and the cited reviews — this note is a dependency map and reading
+guide, and it retires the day a rung's gates are met and a real plan freezes.
+
+## 1. The idea, as registered across four reviews
+
+The stack (review 84's box):
+
+    role-filler language -> typed graph IR -> local rewrite execution
+
+- Review 80: do NOT build it to prove "programs are possible" — that is
+  banked (E1/E2/E8). Test it on what the flat pipeline does not naturally
+  expose: branching, recursion, loops, macros, structural rewriting,
+  language growth. Arc: synthesize -> invent primitives -> typed
+  graph/rewrite -> branching -> iteration/recursion -> macro extraction ->
+  refactoring -> learned search over a self-improving language.
+- Review 81: longer roadmap ends in graph-rewrite/editable IR, then
+  amortized synthesis revisited ONLY when search becomes expensive
+  (branching expands search; loops add latent control; programs lengthen).
+  Key update: the learned language makes direct optimization cheap, so a
+  writer is currently irrational — do not ask new vocabulary to rescue
+  unbroken search.
+- Review 82: entry condition is macro invention SUCCEEDING; the payoff is
+  abstractions over branches, repeats, loops, reusable subgraphs. Sharpened
+  hypothesis: abstraction helps synthesis by reducing EFFECTIVE PROGRAM
+  LENGTH, not nominal search-space cardinality.
+- Review 84: raw ports are probably not the learned representation;
+  semantic roles are (IF = {condition, true, false}); the compiler layer
+  maps roles onto ports internally. Formation split: continuous neural
+  learning -> factorized role/filler representation -> discrete program
+  manipulation ("learning mechanism != representational structure").
+- E6 plans (E5/E6/E6.2): all three explicitly defer it — E5 until search
+  is expensive, E6.2 until after macro invention, E6 until the question is
+  subgraphs rather than contiguous subsequences.
+
+## 2. Authoritative staging (this note defers to it)
+
+Track C — typed structural combinators ("combinators store structure;
+learned fillers store computation"):
+C0 typed IR + executor equivalence (APPLY, CHAIN_3) — equivalence is
+  definitional, an implementation check only (review 83's rule).
+C1 CHAIN/COMPOSE on the ordinary substrate — may run after RF1; needs no
+  rotated substrate. Held-out filler tuples/positions/depths/schemas;
+  flat-vs-schema-aware writers at matched budgets; D*/C_find/loss
+  reported separately, never summed without an exchange rate.
+C2 IF/REPEAT on the strong substrate — requires SO2, then opportunity
+  re-gates on the EXACT SO2 artifact (no fixed branch/count may
+  approximate), then supplied schemas first (fillers in multiple roles,
+  full combinations held out; wrong-predicate/swapped/wrong-count/flat/
+  schema-free controls). Discovery, nesting, recursion, MAP/FOLD need
+  later plans.
+C3 role/schema discovery — only after supplied schemas succeed; scored by
+  held-out execution and economics, never teacher-name agreement.
+Track D SH0 needs C0's IR; RF3B (IF/REPEAT) waits for the rotated line;
+RF plan: graph IR is a runtime candidate AFTER a higher-order schema
+passes, never introduced to make the runtime convenient.
+
+## 3. Gate inventory — every entry condition is currently UNMET
+
+G1. Non-degenerate vocabulary growth (review 82's actual condition, not
+    "macros pay"). E6A pays 3/3 but sometimes for slot-repetition, not
+    computation; E6D shows retrospective economics blind to dying macros;
+    E6.2 shows same-sized compilation cannot hold a 3-op composition
+    (0/3 at matched budget) and larger operators do not amortize; E7
+    refutes the parameterized-collection rationale. Effective-length
+    reduction by invented vocabulary is undemonstrated.
+G2. Strong-substrate acquisition (Track B). G5R failed 0/3 matched; Stage D
+    in flight with C_lo failing 0/3 interim -> BUDGET_LIMITED branch
+    nearly certain -> SO0 census, then SO1 dose-response bracket. C2 waits
+    for SO2, which waits for that line. Nothing about IF/REPEAT is
+    interpretable until then.
+G3. Role-filler as more than description (Track A). RF0a: raw local
+    semantics survive (means 0.764/0.661), role adds ~0. RF0b UNRESOLVED
+    (heterogeneous rebound; null failure in the strongest cell).
+    Label-free canonicalizer NOT opened; C1 waits for RF1.
+G4. Opportunity gates on the exact artifact (Track C's standing rule, from
+    the iteration/branch episodes). Fixed straight-line approximability
+    must be re-measured wherever IF/REPEAT is claimed — the two-minute
+    teacher-side gates that killed fixed-length iteration (contraction)
+    and branching (weak operators). No learner trains before G4 passes.
+
+## 4. The economic motive is conditional, not missing
+
+Review 81 locates when this substrate pays: programs structurally richer,
+branching expanding search, loops adding latent control, thousands of
+queries. E5.1 measured C_find linear in length / logarithmic in space —
+cheap NOW. So the motive arrives with C2-class worlds, and any proposal
+must name which cost (C_find, description, or both per E6's H-law
+`H s_desc + beta H s_search > D*(A)`) the graph structure reduces, with
+OPT-as-teacher distillation (review 81) as the writer baseline rather
+than learning from scratch against a single exact route (E0/E3 gauge
+warning: symbolic identity is underdetermined).
+
+## 5. Measurement frame when rungs run
+
+Report the horizons vector, not one "compositionality" boundary:
+D_execute / D_semantic / D_search / D_form / D_meta (program section 81ff).
+Review 83's rules bind every rung: definitional equivalence is an
+implementation check; arms carry provenance fingerprints; horizons need
+persistence or a fitted trend, never a first crossing.
+
+## 6. What may be done before the gates (no lifetimes, no learned runs)
+
+- Teacher-side necessity arithmetic (G4 pattern) on any candidate
+  substrate or generator.
+- Censuses over cached routes with the alphabet tax charged (loop-census
+  pattern) — remembering the category discipline: amortization censuses
+  do NOT retire constitutive constructs (macros/loops/branches are what
+  "program" means); a negative redirects to generator design, never to
+  dropping the construct.
+- Design writing (this note). No frozen plan for any rung until its Track
+  C/D/RF gates are recorded as passed in PROGRESS.md.
+
+## 7. Open questions (not tasks)
+
+- Which substrate is both control-flow-identifiable and learnable?
+  Canonical = learnable but unnecessary; rotated = necessary but
+  unacquired. The conjunction is unlocated; SO1 may bound it via D_form.
+- Supplied or discovered roles? RF4 decides whether roles are learned
+  before any IR uses them (review 84's cleaner mapping depends on it).
+- Does invented vocabulary shorten effective length (review 82) anywhere
+  above linear subsequences? The E6 margin (~3-7x crossing) is the number
+  to beat, on non-degenerate structure.
