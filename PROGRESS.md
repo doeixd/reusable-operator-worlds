@@ -4570,3 +4570,37 @@ either replicate this heterogeneous ceiling on newly generated development
 routes under a separately frozen protocol or leave local semantic macros and
 return to whole-program/search-level work; it should not weaken the null or
 round 0.297 upward after seeing the result.
+
+# G5R Stage D complete: `BUDGET_LIMITED` (2026-09-05)
+
+The Stage D interference audit left by the previous session was incomplete
+(`complete=false`; `L_hi` on world 0 only; no `O_or` artifacts) and stamped at
+commit `0ff055a`, one commit behind HEAD, so the audit's own cross-commit resume
+guard refused it. Rather than weaken the guard, the partial report was set aside
+and the full grid relaunched from clean committed code at `af5fa18` after
+re-reading `audit_rotated_g5r_interference.py` end to end against the frozen
+plan and re-running its six unit tests. Every previously completed cell
+reproduced to four decimals.
+
+Result: `C_lo` 0/3 (0.9001 / 0.7901 / 0.8968), `L_lo` 0/3 (1.3476 / 1.3826 /
+1.3859), `L_hi` 0/3 (1.1307 / 1.1393 / 1.1756), `O_or` 0/3 (1.1024 / 1.1201 /
+1.1264), against reused `C_hi` 2/3 and rescored `O_lr` 0/3 whose anchors
+reproduced the last task's `final_nmse` exactly on all three worlds. Registered
+classification **`BUDGET_LIMITED`**; secondary `L_hi`: learned routing fails
+offline even at Stage C budget. Oracle-route sufficiency is bracketed between
+~16k (`C_lo`) and 262k (`C_hi`) example-gradients. `O_or`
+terminal-minus-end-of-task interference: +0.504 / +0.519 / +0.529. The
+registered "world 0 worst in every cell" prediction failed (worst in 2 of 5
+post-registration cells, best in the other 3).
+
+Acceptance: no error in the run log and the report's `complete` flag written
+last; all cells on three worlds; anchor, pinning, learning, reload, and
+finiteness checks; an independent scratch checker recomputed `cell_passes` and
+the classification from the ladder; 228 tests passed in 20.15 s;
+`check_prereg.py`, `check_invalid.py`, and `git diff --check` pass. The
+`PREDICTIONS.md` entry records the verdict and corrects the 2026-09-02
+backfill's statement that the earlier report contained all cells.
+
+Wall clock: 8,192 x 2 offline cells took ~34 min each and the 4,096 x 64 `L_hi`
+cells 3.5-5.5 h each, serially, on one core; the three O_or lifetimes ran as a
+pool of three in ~30 min. See `notes/performance_audit.txt`.

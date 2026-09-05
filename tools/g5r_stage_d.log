@@ -1,0 +1,23 @@
+prereg check OK: 41 frozen files unchanged; all STATUS-cited paths exist
+invalid-artifact check OK: 6 withdrawn paths, none present
+[O_lr w0] terminal median 1.9289 end-of-task median 1.7633 anchor OK
+[O_lr w1] terminal median 1.8940 end-of-task median 1.6133 anchor OK
+[O_lr w2] terminal median 1.9580 end-of-task median 1.6965 anchor OK
+[C_lo w0] terminal median 0.9001 FAIL
+[C_lo w1] terminal median 0.7901 FAIL
+[C_lo w2] terminal median 0.8968 FAIL
+[L_lo w0] terminal median 1.3476 FAIL
+[L_lo w1] terminal median 1.3826 FAIL
+[L_lo w2] terminal median 1.3859 FAIL
+[L_hi w0] terminal median 1.1307 FAIL
+[L_hi w1] terminal median 1.1393 FAIL
+[L_hi w2] terminal median 1.1756 FAIL
+[O_or w0] launched lifetime, log artifacts\g5r_interference\oracle_online\world_0.log
+[O_or w1] launched lifetime, log artifacts\g5r_interference\oracle_online\world_1.log
+[O_or w2] launched lifetime, log artifacts\g5r_interference\oracle_online\world_2.log
+[O_or w0] terminal median 1.1024 end-of-task median 0.5983 FAIL
+[O_or w1] terminal median 1.1201 end-of-task median 0.6010 FAIL
+[O_or w2] terminal median 1.1264 end-of-task median 0.5977 FAIL
+cell passes: {'C_hi': True, 'O_lr': False, 'O_or': False, 'C_lo': False, 'L_lo': False, 'L_hi': False}
+classification: BUDGET_LIMITED
+L_hi: learned routing fails offline even at Stage C budget

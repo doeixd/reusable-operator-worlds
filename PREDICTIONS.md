@@ -7741,3 +7741,89 @@ here. `POST_E6_RESEARCH_PROGRAM.md`'s contamination disclosure already notes
 that its three `C_lo` terminal medians (~0.900/0.790/0.897) were inspected
 before that program was written and are an observed design input, not a blind
 prediction; that disclosure stands and this entry does not revise it.
+
+# G5R Stage D verdict: `BUDGET_LIMITED` (2026-09-05)
+
+Scored against the ladder recorded in the 2026-09-02 entry above, from
+`reports/rotated_g5r_interference.json` produced by the committed audit code at
+`af5fa18` (protocol `G5R-StageD-interference-v1`), and accepted only after:
+`complete=true`; three worlds in every new cell; the anchor (all three worlds
+at 0.0 error against a 1e-6 tolerance), pinning, learning, and reload checks;
+all-finite metrics; report freshness against the O_or artifacts; 228 unit
+tests; `check_prereg.py` (41 frozen files); `check_invalid.py`;
+`git diff --check`; and an independent scratch checker that recomputed
+`cell_passes` and the classification from the ladder rather than reading the
+stored values.
+
+Terminal-model median query NMSE per world (threshold 0.05, pass rule >= 2/3):
+
+    cell   routes   schedule   budget       w0       w1       w2     result
+    C_hi   oracle   offline    4096 x 64    0.7221   0.0063   0.0054   2/3 PASS (Stage C, reused)
+    C_lo   oracle   offline    8192 x 2     0.9001   0.7901   0.8968   0/3 FAIL
+    L_lo   learned  offline    8192 x 2     1.3476   1.3826   1.3859   0/3 FAIL
+    L_hi   learned  offline    4096 x 64    1.1307   1.1393   1.1756   0/3 FAIL
+    O_or   oracle   online     8192 x <=2   1.1024   1.1201   1.1264   0/3 FAIL
+    O_lr   learned  online     8192 x <=2   1.9289   1.8940   1.9580   0/3 FAIL (G5R, rescored)
+
+**Classification: `BUDGET_LIMITED`** (ladder step 1: `C_lo` fails). With true
+routes pinned, no sequential structure, no replay, and IID presentation at the
+lifetime's own budget (~16,000 example-gradients), the rotated 12-slot learner
+sits an order of magnitude above threshold. The previous stage's
+`ROUTE_INFERENCE_OR_ONLINE_INTERFERENCE` dichotomy was not the binding
+constraint at that budget. The registered `C_lo` prediction was near even; the
+example-count reading, not the step-count reading, was right. The conditional
+branch of the ladder (`O_or` x `L_lo`) is therefore not consulted; both cells
+fail 0/3 and are reported descriptively.
+
+**Bracket.** Oracle routes pass at 262,144 example-gradients (`C_hi`) and fail
+at ~16,000 (`C_lo`) on the same architecture, optimizer, and worlds. The
+sufficient oracle-route budget lies inside that 16x window; Stage D does not
+locate it, and no cell may be added post hoc to do so. `C_lo` was still
+improving at its last checkpoint (0.966/0.950/0.963 at 4,096 updates ->
+0.900/0.790/0.897 at 8,192), so the failure is unconverged acquisition, not a
+plateau.
+
+**`L_hi` (secondary): learned routing fails offline even at Stage C budget**,
+0/3. The registered prediction (fails, 0.6) held. The cell that carries the
+contrast is world 1 (and 2), where oracle routes reach 0.0063 (0.0054) at the
+identical budget and learned routes reach 1.139 (1.176): learned routing is the
+obstacle even when gradient is not. World 0 is uninformative for this contrast
+because `C_hi` also fails there. Descriptively, every `L_hi` trajectory is
+NON-MONOTONE: 1.68-1.72 at update 256, back to 2.04-2.22 at 1,024, then
+1.13-1.18 at 4,096 -- consistent with soft mixtures fitting early and the
+temperature anneal then committing to wrong hard routes. This is an observation,
+not a registered estimand.
+
+**`O_or` interference measurement (descriptive, no threshold).** End-of-task
+medians 0.598 / 0.601 / 0.598 against terminal medians 1.102 / 1.120 / 1.126:
+terminal-minus-end-of-task **+0.504 / +0.519 / +0.529**. With routes pinned, a
+task's query error roughly doubles after its own training ends. Two further
+descriptive contrasts: oracle routes help online (O_or end-of-task 0.60 versus
+O_lr end-of-task 1.76 / 1.61 / 1.70), and sequential presentation costs beyond
+offline IID at the same budget and routes (O_or terminal 1.10-1.13 versus C_lo
+0.79-0.90). Neither carries a threshold and neither can revise G5R.
+
+**World 0 prediction: FAILED.** World 0 was the worst world in `C_hi` and
+`C_lo` only. It was the BEST world in `L_lo` (1.348 vs 1.383/1.386), `L_hi`
+(1.131 vs 1.139/1.176), and `O_or` (1.102 vs 1.120/1.126). The registered claim
+"world 0 remains the worst world in every cell" is refuted in 3 of the 5 cells
+observed after registration; world 0's difficulty is specific to oracle-route
+offline acquisition, not general.
+
+**Correction to the 2026-09-02 entry.** That entry stated the report "contains
+all cells" at commit `0ff055a`. It did not: the file left by the earlier
+session held `C_lo` and `L_lo` on all three worlds, `L_hi` on world 0 only, and
+no `O_or` cell; that session had died mid-`L_hi`. Because the audit refuses a
+cross-commit resume, the whole grid was rerun from clean code at `af5fa18`;
+every previously completed cell reproduced to four decimals (C_lo 0.9001 /
+0.7901 / 0.8968, L_lo 1.3476 / 1.3826 / 1.3859, L_hi w0 1.1307), so the earlier
+partial was correct but incomplete. The contamination disclosure in
+`POST_E6_RESEARCH_PROGRAM.md` stands unchanged.
+
+**Track B consequence** (`POST_E6_RESEARCH_PROGRAM.md` B0/B1): SO0 census over
+Stages B-D, then the `BUDGET_LIMITED` branch of SO1 -- oracle-route offline
+cells bracketing a persistent acquisition crossing while separately varying
+update count, batch diversity, and total example-gradients with matched pairs
+isolating at least two axes; learned routes only after an oracle cell passes.
+`L_hi` 0/3 is now a registered prior that the learned-route step is where SO1
+will bind. Nothing in Stage D licenses control-flow work.

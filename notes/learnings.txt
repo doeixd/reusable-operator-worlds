@@ -4720,3 +4720,29 @@ than as a one-off miss.
   semantic identity is an opportunity signal, not yet a reusable semantic
   macro. Do not build the label-free canonicalizer until joint recovery
   replicates under an independently frozen extension.
+
+- G5R STAGE D (2026-09-05): `BUDGET_LIMITED`. With oracle routes pinned and
+  IID offline presentation at the lifetime's own budget (~16k example-
+  gradients) the rotated 12-slot learner fails 0/3 (median 0.79-0.90 vs 0.05),
+  so the previous stage's route-inference/interference dichotomy was not the
+  binding constraint. Oracle-route sufficiency is bracketed 16k-262k example-
+  gradients. Learned routes fail 0/3 even at the 262k budget where oracle
+  routes pass on worlds 1-2 (L_hi 1.13-1.18 vs C_hi 0.005-0.006): the writer
+  cannot acquire a substrate that exists. With routes pinned, online query
+  error roughly doubles after a task's own training ends (+0.50-0.53).
+- A DESCRIPTIVE "WORST WORLD" CLAIM MUST NAME ITS CELLS. "World 0 remains the
+  worst world in every cell" was registered from two oracle-route offline
+  cells and failed in three of the five cells observed afterwards, where world
+  0 was the BEST. A world's difficulty is a property of a (world, arm) pair.
+- A SESSION-LAUNCHED BACKGROUND RUN DIES WITH THE SESSION, and the resumable
+  report it leaves may be stamped one commit behind HEAD if any commit landed
+  after launch. Do not commit while a resumable run is in flight from this
+  session, and do not weaken the cross-commit guard to recover; rerun from
+  clean code and require the completed cells to reproduce (they did, to four
+  decimals).
+- THE ROTATED LEARNER IS ~29x THE PLAIN ONE and `forward_tasks` runs one
+  forward per DISTINCT task in the batch, so a batch-64 cell drawn from 64
+  tasks (~39 distinct) costs ~26x a batch-2 cell, not ~1.2x. Cost a cell from
+  its distinct-task count and its per-forward dispatch count before
+  scheduling; extrapolating from the batch-2 cells put the Stage D ETA off by
+  a day. See notes/performance_audit.txt.
