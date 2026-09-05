@@ -1,0 +1,155 @@
+# Performance audit of the ROW experiment runtime (2026-09-04)
+
+Status: MEASUREMENT NOTE. No experiment code is changed by this note and no
+result is affected. Every number below was measured on this host while the G5R
+Stage D audit was running, so absolute milliseconds are noisy; all comparisons
+are paired and back-to-back, and the end-to-end check reproduces the direction
+of the microbenchmark. Benchmark scripts are scratch, not committed; the note
+records what they measured so the work does not have to be repeated.
+
+Motivation: research throughput, not tidiness. The binding cost of this project
+is wall-clock time on full lifetimes, and two levers were checked -- how fast one
+lifetime runs, and how many run at once.
+
+# Where the time goes
+
+`cProfile` over one real 8-task discrete lifetime (`configs/v1.yaml`, seed 0,
+`kind="discrete"`, 38.3 s total, `torch.set_num_threads(1)`):
+
+    12.55 s  torch autograd run_backward            (1,184 calls)
+     3.81 s  torch._C._nn.linear                  (232,464 calls)
+     8.28 s  LearnedOperator.forward (cumulative) (116,232 calls)
+     4.82 s  AdamW _single_tensor_adam              (4,128 calls)
+     1.93 s  world.__call__ (teacher generation)      (864 calls)
+
+232,464 linear dispatches against 1,184 optimizer steps. The cause is
+structural: `DiscreteLibraryLearner.forward` evaluates the library as twelve
+separate `nn.Module`s at each of three steps, and each `LearnedOperator.forward`
+issues two `F.linear` calls -- 72 kernel dispatches per prediction, on tensors of
+shape (2, 16). At this size the runtime is dispatch overhead, not arithmetic.
+The same shape appears in every mixture-over-slots learner (continuous,
+discrete, rotated, presence-gated), so the finding is not specific to one model.
+
+# Lever 1: batch the slot library (2x, but it moves the numerics)
+
+Prototype: stack `U`, `V`, `b`, `alpha` across slots once per forward and
+evaluate all twelve slots with two `einsum` contractions per step
+(`bd,srd->bsr` then `bsr,sdr->bsd`), then mix with the route coefficients.
+
+    fwd+bwd microbenchmark, batch 2    6.29 ms -> 2.20 ms   (2.86x)
+    fwd+bwd microbenchmark, batch 64   7.75 ms -> 3.25 ms   (2.38x)
+    real 8-task lifetime, end to end   26.3 s  -> 13.5 s    (1.95x)
+
+EXACTNESS, and this is the reason it cannot simply be adopted. At batch 2 the
+batched form is BITWISE identical to the current loop. At batch 64 -- the
+evaluation set -- it differs by 1.19e-7 because the matmul kernel blocks the
+reduction differently, and from there the two lifetimes diverge. Comparing every
+float field of `metrics.jsonl` between the two full runs:
+
+    prequential nll          max relative difference 2.31e-3 (on one 0.00197 value)
+    evaluation nmse          max relative difference 9.04e-7
+    task_summary final_nmse  max relative difference 9.04e-7
+    cumulative nll           max relative difference 2.19e-8
+
+That is float noise, not a construct change, and no verdict in this project
+turns on 1e-7. But bitwise artifact reproduction IS a standing property here
+(the opaque-ID invariance result, resume fingerprints, paired-arm equality
+checks), and a 2x speedup does not buy the right to quietly retire it.
+
+If this is ever adopted it should be as a VERSIONED learner implementation with:
+a flag defaulting to the current path; a bitwise-equality test at the update
+batch sizes actually used; a paired study across development worlds showing the
+endpoint distribution is unchanged; and a note in every artifact fingerprint
+recording which path produced it. It must not land in the middle of a branch
+whose earlier cells were produced by the current path.
+
+# Lever 1b: the rotated family is 29x the plain one, and it is the active line
+
+Found while explaining why a Stage D offline cell takes 34 minutes when its
+8,192-update loop should take about one. Measured, batch 2, one thread:
+
+    plain DiscreteLibraryLearner       fwd+bwd    4.8 ms
+    RotatedDiscreteLibraryLearner      fwd+bwd  138.1 ms   (29x)
+
+`RotatedLearnedOperator` applies its orthogonal map through
+`HouseholderOrthogonal.forward`, a PYTHON LOOP over ~16 reflections, executed
+once per slot per step: 12 slots x 3 steps x 16 = ~190 sequential reflection
+applications, each several tiny tensor ops, for ONE prediction. Projected over
+an 8,192-update cell that is 18.9 minutes of update loop, which together with
+checkpoint scoring accounts for the observed 34 minutes.
+
+The rotation is a fixed linear map for a given parameter state, so it can be
+materialized once as an explicit (d, d) matrix and applied as a single
+contraction, and the twelve slots' reflection loops can be batched together
+(16 batched steps instead of 192 scalar ones):
+
+    Q materialized per slot            fwd+bwd   54.0 ms   ( 2.6x)   7.4 min/cell
+    Q batched across slots             fwd+bwd   12.0 ms   (11.5x)   1.6 min/cell
+
+Agreement with the current implementation is 7.5e-8 -- float noise, the same
+function -- and therefore NOT bitwise, so it inherits the versioned-rollout
+requirement in full. This matters more than lever 1 because the rotated family
+IS the active line (Track B, G5R, the strong substrate), and because Stage D's
+offline grid alone spends ~5 hours where the arithmetic needs minutes.
+
+A warning that belongs with the number: the first attempt at this transposed
+the contraction indices and produced a max difference of 2.8e-1 -- a DIFFERENT
+FUNCTION that ran fast and would have passed any wall-clock check. It was caught
+only by comparing outputs. No performance change to a learner is admissible on
+timing evidence alone.
+
+# Lever 2: concurrency is set far below what this host supports (free)
+
+Measured while the Stage D audit ran: one lifetime process at 364 MB resident,
+9.8 GB physical memory free, 16 cores, one thread pinned per lifetime.
+
+The standing pool rule (3-4 concurrent for `slots=12`, up to 6 for lighter
+models) was derived from a memory failure in a lifecycle batch, i.e. from an
+observed crash rather than from a measured resident size. At 364 MB the memory
+argument does not bind anywhere near 3-4; the correct cap is free memory divided
+by the MEASURED resident size of the family being run, with headroom, computed
+per batch rather than carried as a constant.
+
+Separately, the Stage D audit itself uses one core of sixteen for its entire
+offline phase: nine independent one-writer cells (C_lo, L_lo, L_hi x three
+worlds) run strictly serially in one process, and only the three O_or lifetimes
+fan out. Offline cells are already resumable, already keyed by an explicit
+sampling stream, and already one-writer -- they are pool-shaped and are simply
+not pooled.
+
+This lever is worth more than lever 1 and carries no numerical risk at all,
+PROVIDED the cells are genuinely independent: single-threaded, disjoint output
+paths, seeds derived from explicit `SeedSequence` components rather than
+scheduling order. That is a testable property, and any move on this should be
+gated on a parallel batch reproducing a serial batch bitwise, not on the
+argument that it ought to.
+
+Gate result: the serial-versus-pooled equivalence test in CONCURRENCY_PLAN.md
+PASSED 9/9 bitwise on the real Stage D cell constructions (663 s serial,
+251 s pooled on 3 workers). Parallel dispatch of independent one-writer
+cells is invisible in the output, as required.
+
+# Non-wins, measured so they need not be revisited
+
+- AdamW `foreach=True` on CPU is SLOWER: 11.53 ms/step against 7.97 ms for the
+  default single-tensor path. The lifetime builds many single-parameter groups
+  (one per task code), which is exactly the shape `foreach` cannot batch across,
+  and it pays the grouping overhead for nothing.
+- Merging the 64 per-task-code parameter groups into one group gives bitwise
+  identical parameters after 20 steps (Adam state is per-parameter, and the
+  groups share lr and weight decay) but no reliable time saving: -34% to +8%
+  across 1/16/64 tasks, inside the noise of a loaded machine. Correct, and not
+  worth doing for speed.
+- Teacher generation (1.93 s per process) and interpreter startup are real but
+  are a rounding error against a two-hour lifetime; caching worlds to disk would
+  buy nothing that matters.
+
+# What this note does not claim
+
+It does not claim a 2x speedup is available today: lever 1 changes recorded
+numbers at the 1e-7 level and needs a versioned rollout to be admissible. It
+does not establish the new concurrency cap, only that the current one is not
+derived from a measurement of the current models. And it measures the discrete
+family on one host; the promoting and lifecycle learners allocate
+`(tasks, centres, features)` tensors during clustering and must have their own
+resident size measured before any cap is raised for them.

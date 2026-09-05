@@ -4604,3 +4604,18 @@ backfill's statement that the earlier report contained all cells.
 Wall clock: 8,192 x 2 offline cells took ~34 min each and the 4,096 x 64 `L_hi`
 cells 3.5-5.5 h each, serially, on one core; the three O_or lifetimes ran as a
 pool of three in ~30 min. See `notes/performance_audit.txt`.
+
+# Performance audit and concurrency calibration plan (2026-09-05)
+
+Added `notes/performance_audit.txt` and `CONCURRENCY_PLAN.md`. Measured, not
+proposed: the mixture-over-slots learners are dispatch-bound (72 kernel calls
+per prediction on (2, 16) tensors), a batched-slot forward gives 1.95x end to
+end but is not bitwise (1e-7 divergence at the evaluation batch size); the
+rotated family is 29x the plain one because its Householder rotation is a
+Python loop run once per slot per step, and materializing the rotation with
+the slots batched gives 11.5x at 7.5e-8 agreement — also not bitwise, so both
+are recorded as versioned-rollout candidates for a future plan boundary, never
+for a branch in flight. AdamW `foreach` and parameter-group merging were
+measured as non-wins. The concurrency cap is replaced by a measured rule
+(364 MB per discrete lifetime against 9.8 GB free) with a bitwise
+serial-versus-pooled equivalence gate: PASSED 9/9 bitwise on the real Stage D cell constructions, 663 s serial versus 251 s pooled on 3 workers. The pooled driver is not yet in the repository; the plan authorizes it for the next batch, applied at dispatch against live free memory.
