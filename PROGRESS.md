@@ -4660,3 +4660,9 @@ under paging; see `CONCURRENCY_PLAN.md` Amendment 1), which produced three
 run-ops rules: a host precondition on free memory and page-file growth, detach
 long runs from the harness's memory guard, and log the other tenants. The SO1
 bracket plan is drafted for PI review and is not frozen.
+
+# Fast rotated kind timed end to end (2026-09-07)
+
+On a real 8-task rotated lifetime, `rotated_discrete_fast` ran in 24.3 s
+against 234.5 s for the sequential kind (9.65x), with per-task NMSE agreeing to
+1e-4 or better; recorded in `notes/performance_audit.txt`.

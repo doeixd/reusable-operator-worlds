@@ -153,3 +153,19 @@ derived from a measurement of the current models. And it measures the discrete
 family on one host; the promoting and lifecycle learners allocate
 `(tasks, centres, features)` tensors during clustering and must have their own
 resident size measured before any cap is raised for them.
+
+# Lever 1b, end to end (2026-09-07, commit 07fdb59)
+
+The versioned `rotated_discrete_fast` kind on a real 8-task rotated lifetime
+(seed 0, canonical config, one thread, detached run, host paging as in
+CONCURRENCY_PLAN.md Amendment 1 so both arms share the same handicap):
+
+    rotated_discrete        234.5 s
+    rotated_discrete_fast    24.3 s     (9.65x)
+
+Per-task end-of-task NMSE agrees to 1e-4 or better on all eight tasks
+(largest difference 8e-5 on a value of 1.082); the two kinds diverge by
+float rounding order over 1,024 updates, as registered. This is the number
+to cost SO1 against, and it is a lifetime-scale confirmation of the 11.5x
+microbenchmark rather than a replacement for the ~1e-7 single-step agreement
+tests, which remain the exactness evidence.
