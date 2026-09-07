@@ -1011,6 +1011,69 @@ class RotatedDiscreteLibraryLearner(DiscreteLibraryLearner):
         )
 
 
+def batched_householder(vectors: Sequence[Tensor]) -> Tensor:
+    """All slots' orthogonal maps at once, as an (S, d, d) tensor.
+
+    Each slot's map is the same product of reflections `HouseholderOrthogonal`
+    applies sequentially, here applied to the identity so the map is
+    materialized as a matrix. Slots with `d - 1` reflections are padded with a
+    masked no-op so the twelve loops become one loop of `d` batched steps.
+    """
+    count = len(vectors)
+    d = vectors[0].shape[1]
+    max_reflections = max(v.shape[0] for v in vectors)
+    padded = torch.zeros(count, max_reflections, d, dtype=vectors[0].dtype)
+    mask = torch.zeros(count, max_reflections, 1, 1, dtype=vectors[0].dtype)
+    for index, v in enumerate(vectors):
+        padded[index, : v.shape[0]] = v
+        mask[index, : v.shape[0]] = 1.0
+    Q = torch.eye(d, dtype=vectors[0].dtype).expand(count, d, d).clone()
+    for r in range(max_reflections):
+        v = padded[:, r, :]
+        denominator = torch.sum(v * v, dim=-1).clamp_min(1e-12).view(count, 1, 1)
+        projection = torch.einsum("sed,sd->se", Q, v).unsqueeze(-1) / denominator
+        Q = Q - mask[:, r] * 2.0 * projection * v.view(count, 1, d)
+    return Q
+
+
+class FastRotatedDiscreteLibraryLearner(RotatedDiscreteLibraryLearner):
+    """`RotatedDiscreteLibraryLearner` with the slot library evaluated batched.
+
+    IMPLEMENTATION VERSION `batched_rotation_v1` (notes/performance_audit.txt).
+    Same parameters, same state_dict keys, same function: the twelve slots'
+    `V`, `U`, `b`, `alpha` are stacked once per forward and every slot's
+    rotation is materialized by `batched_householder`, replacing ~190
+    sequential reflection applications per prediction with two contractions
+    per step. Agreement with the sequential class is ~1e-7 (float rounding
+    order), NOT bitwise, so this class is a separate model kind
+    (`rotated_discrete_fast`) with its own resolved-config key and fingerprint
+    `model_family`; it may only be used for cells whose plan registers it, and
+    never mixed with sequential-kind cells inside one comparison.
+    """
+
+    implementation = "batched_rotation_v1"
+
+    def forward(self, x: Tensor, task_id: str) -> Tensor:
+        library = list(self.library)
+        V = torch.stack([op.V for op in library])
+        U = torch.stack([op.U for op in library])
+        b = torch.stack([op.b for op in library])
+        alpha = torch.stack(
+            [op.alpha if torch.is_tensor(op.alpha) else torch.tensor(float(op.alpha)) for op in library]
+        )
+        Q = batched_householder([op.rotation.vectors for op in library])
+        gelu = library[0].activation == "gelu"
+        coefficients = self._coefficients(task_id)
+        z = x
+        for step in range(self.task_steps):
+            hidden = torch.einsum("bd,srd->bsr", z, V) + b
+            hidden = torch.nn.functional.gelu(hidden) if gelu else torch.tanh(hidden)
+            residual = z.unsqueeze(1) + alpha.view(1, -1, 1) * torch.einsum("bsr,sdr->bsd", hidden, U)
+            candidates = torch.einsum("bsd,sde->bse", residual, Q)
+            z = torch.sum(coefficients[step].view(1, -1, 1) * candidates, dim=1)
+        return z
+
+
 class PresenceGatedDiscreteLibraryLearner(DiscreteLibraryLearner):
     """Discrete library with explicit learnable global slot-presence gates."""
 

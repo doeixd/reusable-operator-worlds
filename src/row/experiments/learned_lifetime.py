@@ -27,6 +27,7 @@ from row.models import (
     DiscreteLibraryLearner,
     HypernetworkLearner,
     PresenceGatedDiscreteLibraryLearner,
+    FastRotatedDiscreteLibraryLearner,
     RotatedDiscreteLibraryLearner,
     GatedInnovationLearner,
     LifecycleLibraryLearner,
@@ -85,6 +86,7 @@ ModelKind = Literal[
     "multihead",
     "discrete",
     "rotated_discrete",
+    "rotated_discrete_fast",
     "mdl",
 ]
 Learner = (
@@ -98,6 +100,7 @@ Learner = (
     | LifecycleLibraryLearner
     | DiscreteLibraryLearner
     | RotatedDiscreteLibraryLearner
+    | FastRotatedDiscreteLibraryLearner
     | PresenceGatedDiscreteLibraryLearner
 )
 
@@ -395,6 +398,7 @@ def _build_model(config: ExperimentConfig, kind: ModelKind) -> Learner:
     model_class = {
         "mdl": PresenceGatedDiscreteLibraryLearner,
         "rotated_discrete": RotatedDiscreteLibraryLearner,
+        "rotated_discrete_fast": FastRotatedDiscreteLibraryLearner,
     }.get(kind, DiscreteLibraryLearner)
     extra = (
         {
@@ -438,6 +442,7 @@ def _training_values(
         "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
         "rotated_discrete": config.discrete_model,
+        "rotated_discrete_fast": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
     return (
@@ -1585,6 +1590,7 @@ def resolved_learned_config(
         "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
         "rotated_discrete": config.discrete_model,
+        "rotated_discrete_fast": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
     resolved: dict[str, object] = {
@@ -1631,6 +1637,7 @@ def _write_artifacts(
         "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
         "rotated_discrete": config.discrete_model,
+        "rotated_discrete_fast": config.discrete_model,
         "mdl": config.mdl_model,
     }[kind]
     resolved = resolved_learned_config(
@@ -1712,6 +1719,7 @@ def main() -> None:
             "lifecycle",
             "discrete",
             "rotated_discrete",
+            "rotated_discrete_fast",
             "mdl",
         ),
         required=True,
@@ -1778,6 +1786,7 @@ def main() -> None:
         "multihead": config.shared_residual_model,
         "discrete": config.discrete_model,
         "rotated_discrete": config.discrete_model,
+        "rotated_discrete_fast": config.discrete_model,
         "mdl": config.mdl_model,
     }[args.model]
     selected = replace(

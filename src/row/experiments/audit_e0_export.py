@@ -109,7 +109,7 @@ def load_model(config, path: Path, kind: str):
     learnable = any(key.endswith(".alpha") for key in state)
     section = (
         "discrete_model"
-        if kind in {"discrete", "rotated_discrete"}
+        if kind in {"discrete", "rotated_discrete", "rotated_discrete_fast"}
         else "continuous_model"
     )
     current = getattr(config, section)
