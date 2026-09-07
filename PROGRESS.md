@@ -4647,3 +4647,16 @@ is 16,384-262,144 example-gradients; no persistent crossing exists yet.
 Acceptance: checker exit 0 with every copied number reproduced and every
 computed quantity recomputed; 232 tests; `check_prereg.py`;
 `check_invalid.py`; `git diff --check`.
+
+# Pool module, fast rotated learner, in-repo gate (2026-09-07)
+
+Added `row/pool.py` (dispatch-time bounded pool, `b592963`) and the versioned
+`rotated_discrete_fast` model kind (`FastRotatedDiscreteLibraryLearner`,
+`batched_rotation_v1`, `07fdb59`; ~1e-7 agreement with the sequential kind,
+not bitwise, separate resolved-config key and fingerprint family, ten new
+tests; 242 tests pass). `tools/pool_equivalence_gate.py` through the pool
+module: 9/9 bitwise PASS at `07fdb59`. Its timing is uninterpretable (cap 1
+under paging; see `CONCURRENCY_PLAN.md` Amendment 1), which produced three
+run-ops rules: a host precondition on free memory and page-file growth, detach
+long runs from the harness's memory guard, and log the other tenants. The SO1
+bracket plan is drafted for PI review and is not frozen.

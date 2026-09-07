@@ -1,0 +1,17 @@
+{
+ "git_commit": "07fdb59",
+ "jobs": 9,
+ "updates_per_cell": 48,
+ "checkpoints": [
+  0,
+  16,
+  48
+ ],
+ "cap_at_launch": 0,
+ "measured_rss_bytes": 943718400,
+ "serial_seconds": 759.4,
+ "pooled_seconds": 4654.1,
+ "bitwise_identical_cells": 9,
+ "mismatches": [],
+ "gate": "PASS"
+}

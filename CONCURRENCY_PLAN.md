@@ -104,3 +104,36 @@ authorized here. It does not raise the cap for any family whose resident size
 has not been measured. It does not apply to remote workers, which already own
 disjoint cells. And it may not be applied to a batch that is already in flight:
 a run's concurrency is fixed at its launch.
+
+# Amendment 1 (2026-09-07): in-repo gate result, and a timing caveat that is itself a finding
+
+`tools/pool_equivalence_gate.py` run through `row.pool.run_pool` at commit
+`07fdb59` (`reports/pool_equivalence_gate.json`): **9/9 cells bitwise
+identical, gate PASS.** The pool module is invisible in the output, as the
+scratch gate on 2026-09-05 was.
+
+Its wall-clock numbers are NOT a parallelism measurement and must not be read
+as one: serial 759 s, "pooled" 4,654 s. The dispatch rule computed cap = 1
+(5.74 GiB free minus the 4 GiB reserve, over a 900 MiB measured cell), so the
+pooled phase ran one worker at a time; and the host was paging (page file
+1.8 GB in use, 1.9 GB peak) because non-research processes held ~5.7 GB (two
+`node` instances 4.5 GB, the WSL VM 1.2 GB). A single worker under paging ran
+6x slower than the same cells had run in-process minutes earlier. The
+2.64x-on-3-workers figure from 2026-09-05 (7 GB free, no paging) stands as the
+only parallelism measurement.
+
+Three rules follow, all run-ops rather than cap arithmetic:
+
+1. HOST PRECONDITION. Before any pooled scientific batch, free memory must
+   exceed `reserve + 2 x measured_RSS` with NO page-file growth over the
+   preceding minute; otherwise the batch is not launched, because a pool of
+   one under paging is slower than serial and proves nothing.
+2. THE LAUNCHER'S OWN GUARD. The interactive harness kills tracked background
+   tasks below a free-memory level the OS is still fine at (~6 GB here); it
+   killed the gate twice and a timing run once, while a detached `nohup`
+   process (Stage D) survived all three. Long runs are launched detached and
+   watched by log; a tracked background task is for minutes, not hours.
+3. MEASURE, DO NOT ASSUME, THE OTHER TENANTS. The cap is only as good as the
+   free-memory reading at dispatch, and on this host that reading is set by
+   processes outside the project. Record free memory and page-file usage in
+   every batch's launch log.
