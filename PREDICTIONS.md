@@ -7827,3 +7827,50 @@ update count, batch diversity, and total example-gradients with matched pairs
 isolating at least two axes; learned routes only after an oracle cell passes.
 `L_hi` 0/3 is now a registered prior that the learned-route step is where SO1
 will bind. Nothing in Stage D licenses control-flow work.
+
+# SO0 acquisition census: expectations resolved (2026-09-07)
+
+`SO0_CENSUS_PLAN.md` was frozen at `1c04ebf` (protected `86adfd8`) before any
+census code existed. `reports/so0_census.json` was produced by
+`audit_so0_census.py` at commit `5c56350`, from unmodified inputs whose SHA-256
+hashes are recorded in the report, and accepted after `score_so0_census.py`
+independently re-read every source and recomputed every table, 232 tests,
+`check_prereg.py`, `check_invalid.py`, and `git diff --check`. The census
+carries no verdict; it resolves five descriptive expectations:
+
+- **E1 TRUE.** No existing pair of oracle-route offline cells controls any
+  budget axis: C_hi (4,096 x 64; expected 40.6 distinct tasks per batch;
+  262,144 example-gradients) and C_lo (8,192 x 2; 1.98; 16,384) differ on all
+  three. SO1 must add pairs controlling `updates`, `diversity`, and
+  `example_gradients`; because the three axes have two degrees of freedom, a
+  pair controls an axis by holding it fixed while the other two move together,
+  and at least two distinct controlled axes are required (program B1).
+- **E2 TRUE.** C_hi worlds 1 and 2 are `crossed, persistence unobservable`
+  (only the terminal 4,096 checkpoint is below 0.05); C_hi world 0 and every
+  C_lo, L_lo, and L_hi cell are `not crossed`. No persistent crossing exists
+  anywhere in Stages C-D, so SO1 must be designed to observe persistence, not
+  a first crossing.
+- **E3 TRUE.** All three L_hi trajectories are non-monotone; all nine C_lo,
+  C_hi, and L_lo trajectories are monotone.
+- **E4 FALSE.** The ">90% of tasks worse at terminal" expectation held for
+  O_or (0.984 / 0.984 / 0.984; median terminal/end-of-task ratio 1.83-1.89)
+  but NOT for O_lr (0.656 / 0.781 / 0.734; median ratio 1.09-1.16). With
+  learned routes, a quarter to a third of tasks END BETTER than when their own
+  training stopped: the learned-route lifetime's later shared learning helps
+  some earlier tasks, while the pinned-route lifetime degrades almost every
+  task. Interference is therefore not a uniform decay; it interacts with
+  routing, and the two online arms are not merely offset copies.
+- **E5 TRUE.** Stage B isolated operators pass on all worlds and arms; the
+  acquisition wall is in the joint problem.
+
+Two further descriptive observations, unregistered: (i) every learned-route
+cell uses all 12 slots (usage 10-22 per slot online; mean max coefficient
+0.75-0.84 offline) against a 6-primitive teacher and 6-7 oracle-assigned slots,
+so the learned library fragments each operation across roughly two slots rather
+than consolidating; (ii) Stage A/B orthogonality errors are <= 1.5e-6,
+confirming the implementation check only. The plan's prose figure "40.5" for
+batch-64 diversity was a rounding of the registered formula's 40.64; the
+formula is the registered quantity and the code and tests pin it.
+
+SO1 inputs recorded in the report: oracle-budget bracket [16,384, 262,144]
+example-gradients; axes to control: all three.

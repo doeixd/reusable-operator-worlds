@@ -4626,3 +4626,24 @@ Added `notes/stage_d_synthesis.txt`: the interpretation of the Stage D verdict
 for Track B and the thesis (substrate exists; a lifetime cannot afford it;
 routing fails independently even when budget is solved; replay does not hold
 the rotated operators). Interpretation only; no estimand or verdict changes.
+
+# SO0 acquisition census complete (2026-09-07)
+
+Froze `SO0_CENSUS_PLAN.md` (`1c04ebf`, protected `86adfd8`), implemented
+`audit_so0_census.py` with four unit tests and an independent checker
+`score_so0_census.py`, and wrote `reports/so0_census.json` from committed code
+`5c56350` over unmodified, hashed inputs. One process slip is on record: the
+first census commit (`267869e`) landed with a failing unit test because a piped
+`tail` masked the unittest exit status; the test (a rounding of the plan's
+illustrative "40.5" against the registered formula's 40.64, plus a float
+underflow at batch 10,000) was corrected in `5c56350` and the census rerun from
+that commit before acceptance. Chain test commands on the test process's own
+exit status, never on the pipe's.
+
+Expectations E1, E2, E3, E5 held; E4 failed on the learned-route online arm
+(65-78% of tasks worse at terminal, not >90%), see `PREDICTIONS.md`. Decision
+output for SO1: no existing pair controls any budget axis; the oracle bracket
+is 16,384-262,144 example-gradients; no persistent crossing exists yet.
+Acceptance: checker exit 0 with every copied number reproduced and every
+computed quantity recomputed; 232 tests; `check_prereg.py`;
+`check_invalid.py`; `git diff --check`.
