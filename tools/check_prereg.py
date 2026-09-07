@@ -65,6 +65,7 @@ FROZEN = {
     "RF0_ROLE_FILLER_PROTOCOL.md": "0a787d2",
     "RF0B_SEMANTIC_MOTIF_PLAN.md": "ded346e",
     "SO0_CENSUS_PLAN.md": "1c04ebf",
+    "SO1_BUDGET_BRACKET_PLAN.md": "d19b422",
 }
 
 STATUS_PATH_PATTERN = re.compile(
