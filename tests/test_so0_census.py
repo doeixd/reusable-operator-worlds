@@ -13,8 +13,11 @@ class SO0CensusTests(unittest.TestCase):
     def test_expected_distinct_tasks_matches_plan_constants(self):
         self.assertAlmostEqual(expected_distinct_tasks(1), 1.0)
         self.assertAlmostEqual(expected_distinct_tasks(2), 1.984375)
-        self.assertAlmostEqual(expected_distinct_tasks(64), 40.5, places=1)
-        self.assertLess(expected_distinct_tasks(10_000), 64.0)
+        # The plan's prose rounds this to "40.5"; the registered formula gives
+        # 64 * (1 - (63/64)^64) = 40.64. The formula is the registered quantity.
+        self.assertAlmostEqual(expected_distinct_tasks(64), 40.6409, places=3)
+        self.assertLess(expected_distinct_tasks(512), 64.0)
+        self.assertLessEqual(expected_distinct_tasks(10_000), 64.0)
 
     def test_persistence_rule_needs_two_later_checkpoints(self):
         # Terminal-only crossing: unobservable.
