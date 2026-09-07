@@ -4619,3 +4619,10 @@ for a branch in flight. AdamW `foreach` and parameter-group merging were
 measured as non-wins. The concurrency cap is replaced by a measured rule
 (364 MB per discrete lifetime against 9.8 GB free) with a bitwise
 serial-versus-pooled equivalence gate: PASSED 9/9 bitwise on the real Stage D cell constructions, 663 s serial versus 251 s pooled on 3 workers. The pooled driver is not yet in the repository; the plan authorizes it for the next batch, applied at dispatch against live free memory.
+
+# Stage D synthesis note (2026-09-07)
+
+Added `notes/stage_d_synthesis.txt`: the interpretation of the Stage D verdict
+for Track B and the thesis (substrate exists; a lifetime cannot afford it;
+routing fails independently even when budget is solved; replay does not hold
+the rotated operators). Interpretation only; no estimand or verdict changes.

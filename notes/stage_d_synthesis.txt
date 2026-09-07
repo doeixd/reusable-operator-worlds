@@ -1,0 +1,81 @@
+# What G5R Stage D means — synthesis note (2026-09-07)
+
+Status: INTERPRETATION, written after the verdict was recorded (PREDICTIONS.md
+2026-09-05, commit 8b9b802). It adds no estimand and revises no verdict. Where
+it goes beyond the registered ladder it says so.
+
+# The question Track B is asking
+
+Everything ROW has confirmed — reuse lowers lifetime cost (V1-V2), the
+amortization law (V4R-V5), export and composition on sealed seeds 800-829 — was
+on the ORDINARY substrate, whose operators are simple low-rank residuals.
+Control flow (branching, iteration, the graph-rewrite stack in
+`notes/interaction_net_sketch.txt`) needs a STRONGER substrate: operators with a
+learned orthogonal map, the rotated family of `ROTATED_SUBSTRATE_SPEC.md`. G5R
+asked whether a lifetime learner forms that stronger vocabulary the way it forms
+the ordinary one. It failed 0/3, and Stages A-D have been asking why.
+
+# Three facts, each isolated by a different cell
+
+1. THE SUBSTRATE EXISTS. Given true routes and 262,144 example-gradients the
+   learner recovers it on 2 of 3 worlds (Stage C / C_hi). This is not a
+   representational impossibility.
+2. A LIFETIME CANNOT AFFORD IT. With true routes handed over and every other
+   difficulty removed — no sequence, no replay, no interference — the
+   lifetime's own budget (~16,000 example-gradients) reaches median 0.79-0.90
+   against 0.05 (C_lo, 0/3) and is still descending at its last checkpoint.
+   The failure is ACQUISITION COST, not routing or forgetting. This retires
+   the previous stage's route-inference/interference dichotomy.
+3. EVEN WHEN BUDGET IS SOLVED, ROUTING IS NOT. At the budget where oracle
+   routes succeed, learned routes fail on every world (L_hi 1.13-1.18) —
+   confidently wrong rather than undecided, with a trajectory that WORSENS as
+   the temperature anneal hardens the routes (1.7 at update 256, 2.0-2.2 at
+   1,024, 1.13-1.18 at 4,096). Two walls, not one, and they are independent.
+
+And a fourth, descriptive: with routes fixed, a task loses about half its fit
+after its own training ends (O_or terminal-minus-end-of-task +0.50 to +0.53).
+Replay is not holding the rotated operators in place. That is a third obstacle
+waiting on the online path, unmeasured as a cause.
+
+# What it means for the thesis
+
+It sharpens rather than threatens it. The thesis has converged on "intelligence
+MAKES its coordinate system while learning" (the H39 lesson: made, not mined).
+Stage D says the cost of making a coordinate system scales steeply with how
+much structure it carries: the ordinary vocabulary forms for free inside a
+lifetime; the strong one costs at least 16x more gradient AND a route-discovery
+capability the learner does not have. The gap between "a vocabulary exists" and
+"a learner forms it unaided" is now a LOCATED, MEASURABLE frontier — and it is
+the same frontier the formation line (H47-H53) reached from the other side,
+where the structureless sham beat every structural hypothesis because the
+objective never valued the structure.
+
+# What it means practically
+
+- Control flow stays closed. No IF/REPEAT work is licensed (C2 waits on SO2);
+  the interaction-net sketch stays a sketch.
+- SO1 becomes a quantitative question: HOW MUCH budget, and WHICH of update
+  count / batch diversity / total example-gradients actually matters —
+  bracketed by Stage D (16k-262k) rather than guessed. Its design must contain
+  matched pairs that isolate at least two axes; `4096x64` vs `8192x2` moves all
+  three.
+- The most likely end state is Track B's second stop rule: "the substrate
+  exists but the writer cannot acquire it." L_hi 0/3 is a registered prior for
+  exactly that. If it lands, the rotated parameterization closes as not
+  lifetime-learnable — an informative negative: ROW's learner can REUSE strong
+  computation it is given, but cannot SELF-ORGANIZE it. The successor question
+  is then about the acquisition MECHANISM (curriculum; teacher-assisted routes
+  as a labelled crutch that can never become the non-oracle claim), not about
+  more compute.
+- The non-monotone L_hi trajectory is a mechanism HYPOTHESIS for the routing
+  wall — soft mixtures fit, hardening commits to wrong routes — and belongs in
+  a future ROUTE_INFERENCE-branch plan, not in SO1. It is not registered
+  anywhere and must not be treated as a finding.
+
+# What it does not mean
+
+Not that the substrate is unlearnable in principle — only within this budget
+and this parameterization. Not that the thesis is wrong. World 0 dissents
+wherever the oracle is involved (C_hi 0.72, C_lo worst) and is the BEST world
+in the learned-route and online cells, so "2 of 3" is doing real work in every
+sentence above, and a world's difficulty is a property of a (world, arm) pair.
