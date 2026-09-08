@@ -153,11 +153,14 @@ def offline_cell(
     batch: int,
     cell_index: int,
     checkpoints_requested: tuple[int, ...] = CHECKPOINTS,
+    build=None,
 ) -> dict:
+    """One offline IID cell. `build(config)` defaults to the Stage D learner;
+    SO1 passes the versioned fast kind's constructor. Nothing else varies."""
     global_lr, task_lr, weight_decay, _, _, _, _ = _training_values(
         config, "rotated_discrete"
     )
-    model = build_model(config)
+    model = (build or build_model)(config)
     routes = oracle_routes(world, assignment)
     codes = []
     for task in world.tasks:
