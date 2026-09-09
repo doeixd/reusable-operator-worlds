@@ -66,6 +66,7 @@ FROZEN = {
     "RF0B_SEMANTIC_MOTIF_PLAN.md": "ded346e",
     "SO0_CENSUS_PLAN.md": "1c04ebf",
     "SO1_BUDGET_BRACKET_PLAN.md": "d19b422",
+    "SO1_RESTART_AMENDMENT.md": "c56e7f6",
 }
 
 STATUS_PATH_PATTERN = re.compile(
