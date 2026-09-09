@@ -1421,3 +1421,16 @@ MDL gating grids; batch, initialization, and lifetime-length tables;
 mixed-effects sensitivity; gate designs and re-derivation record; both
 confirmatory analyses exactly as pre-specified; sealed artifacts at
 release v2.0-confirmation.*
+
+# Development provenance addendum: SO1 restart (2026-09-09)
+
+The SO1 rotated-substrate acquisition dose-response experiment has no accepted
+result. Its September 8 launch failed during a six-worker batch; four successful
+worker returns were lost when two other workers failed memory allocation.
+The preserved launch evidence and separately frozen SO1_RESTART_AMENDMENT.md
+document the failure and instrument repairs. No scientific threshold or
+prediction was changed. The corrected conditional learned-route arm shares its
+oracle counterpart's minibatch draws. The original oracle anchor streams remain
+independent of Stage D, making their gate a joint implementation/resampling
+check. Neither a failed launch nor a failed anchor licenses an acquisition
+verdict or changes the earlier accepted findings.

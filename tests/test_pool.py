@@ -1,4 +1,6 @@
 import unittest
+from concurrent.futures import ThreadPoolExecutor
+from unittest.mock import patch
 
 from row.pool import BatchFailed, PoolBudget, run_pool
 
@@ -43,8 +45,13 @@ class PoolBudgetTests(unittest.TestCase):
             seen.append(value)
             return value
 
-        results = run_pool(square, [1, 2, 3, 4], budget, free_probe=probe,
-                           poll_seconds=0.01, sleep=lambda s: None, log=lambda m: None)
+        # Test dispatch arithmetic with in-process workers. Actual torch process
+        # concurrency is covered by the real scientific equivalence/memory gate;
+        # this synthetic free-memory probe must not launch four real interpreters
+        # on a host whose actual commitment may be much lower than the fixture.
+        with patch("row.pool.ProcessPoolExecutor", ThreadPoolExecutor):
+            results = run_pool(square, [1, 2, 3, 4], budget, free_probe=probe,
+                               poll_seconds=0.01, sleep=lambda s: None, log=lambda m: None)
         self.assertEqual(results, [1, 4, 9, 16])
         # The probe was consulted more than once per job: dispatch-time checks.
         self.assertGreater(len(seen), 4)
@@ -60,6 +67,28 @@ class PoolBudgetTests(unittest.TestCase):
         budget = PoolBudget(measured_rss_bytes=1 * GIB, reserve_bytes=4 * GIB, cores=16)
         with self.assertRaises(BatchFailed):
             run_pool(square, [1], budget, free_probe=lambda: 4 * GIB, log=lambda m: None)
+
+    def test_success_is_delivered_before_later_failure(self):
+        received = []
+        budget = PoolBudget(measured_rss_bytes=MIB, reserve_bytes=0, hard_cap=1)
+        with self.assertRaises(BatchFailed):
+            run_pool(fail_on_three, [1, 3, 5], budget, free_probe=lambda: 8 * GIB,
+                     on_result=lambda job, result: received.append((job, result)),
+                     poll_seconds=0.01, log=lambda m: None)
+        self.assertEqual(received, [(1, 1)])
+
+    def test_empty_resume_has_no_workers_and_no_memory_requirement(self):
+        self.assertEqual(run_pool(square, [], PoolBudget(MIB), free_probe=lambda: 0), [])
+
+    def test_callback_failure_stops_dispatch(self):
+        received = []
+        def persist(job, result):
+            received.append(job)
+            raise OSError("disk full")
+        with self.assertRaisesRegex(BatchFailed, "disk full"):
+            run_pool(square, [1, 2], PoolBudget(MIB, reserve_bytes=0, hard_cap=1),
+                     free_probe=lambda: 8 * GIB, on_result=persist, log=lambda m: None)
+        self.assertEqual(received, [1])
 
 
 if __name__ == "__main__":

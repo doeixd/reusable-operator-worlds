@@ -4684,3 +4684,20 @@ the restart contract before repaired code or new cells, retains all scientific
 thresholds and predictions, and discloses the earlier timing-probe observation.
 The root cause of the memory exhaustion remains unresolved; free physical
 memory and flat page-file usage did not establish safe six-worker commitment.
+
+# SO1 restart implementation verified (2026-09-09)
+
+Implemented the separately frozen restart amendment: durable atomic cells,
+exclusive writers, immediate parent persistence, complete configuration/input
+fingerprints, reconstructible tensor-only terminal models, exact reload checks,
+six anchors before the rest of the grid, paired Stage-2 minibatch streams,
+and an independent scorer. The launcher measures physical and committed memory,
+enforces a conservative two-worker cap, records run/exit state, and invokes the
+scorer automatically after completion or an anchor-gate failure.
+
+All 261 tests passed in 42.428 seconds; preregistration (44 frozen files),
+invalid-artifact and whitespace checks pass. This is a verified implementation
+milestone, not a passed fast-family process/memory gate or scientific result.
+See notes/so1_restart_audit.md for the defect-to-check mapping and the current
+memory evidence. Next is guarded calibration from this clean committed code;
+no scientific cells may start unless the host and fast-family gates pass.

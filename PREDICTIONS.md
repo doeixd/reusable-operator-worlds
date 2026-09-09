@@ -7874,3 +7874,20 @@ formula is the registered quantity and the code and tests pin it.
 
 SO1 inputs recorded in the report: oracle-budget bracket [16,384, 262,144]
 example-gradients; axes to control: all three.
+
+# SO1 launch correction and restart status (2026-09-09)
+
+SO1_BUDGET_BRACKET_PLAN.md was frozen at d19b422 before the runner at 7cea49e.
+Its P1-P5 and conditional learned-route prediction remain unresolved. The
+September 8 six-worker attempt exited 1: two memory failures, four completed
+jobs with no saved scores, and 24 never started. Recovered evidence is in
+reports/so1_launch_failure_20260908. No result is inferred from that attempt.
+
+SO1_RESTART_AMENDMENT.md (c56e7f6, protected e253614) fixes operational and
+instrument defects before new cells, including exact Stage-2 sampling pairing.
+It changes no scientific threshold or registered prediction. The earlier
+world-0 batch-64 timing-probe score (1.2166 at 256 updates) is disclosed there
+as pre-amendment exposure, not accepted SO1 evidence. The original independent
+oracle streams remain unchanged; their Stage-D anchor is a joint implementation
+and resampling gate. A failure would stop SO1 as an instrument failure, with
+P1-P5 unresolved, rather than trigger either scientific Track B stop rule.

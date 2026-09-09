@@ -9,8 +9,8 @@ Rules implemented here, all from the plan:
 - every worker pins one torch thread;
 - a failing cell fails the batch with a nonzero exit rather than leaving a
   silently missing cell;
-- nothing here writes results: the job function is the single writer for its
-  own cell, and the driver only collects return values.
+- the job function can own a durable cell artifact; an optional parent callback
+  persists each returned success immediately, including during batch failure.
 
 The bitwise serial-versus-pooled equivalence gate lives in
 `tools/pool_equivalence_gate.py` and must pass before this pool is used for a
@@ -77,12 +77,18 @@ def run_pool(
     poll_seconds: float = 5.0,
     sleep: Callable[[float], None] = time.sleep,
     log: Callable[[str], None] = print,
+    on_result: Callable[[Any, Any], None] | None = None,
 ) -> list[Any]:
     """Run `job_function(job)` for every job, at most `cap` at once.
 
     Returns results in job order. Raises BatchFailed on the first failing
     job after the running jobs finish, so no cell can be silently missing.
     """
+    # The parent callback persists a success before another completion can fail.
+    # Callers can also write a per-cell artifact inside the worker to survive
+    # parent interruption between worker completion and callback delivery.
+    if not jobs:
+        return []
     results: list[Any] = [None] * len(jobs)
     pending = list(enumerate(jobs))
     running: dict[Future, int] = {}
@@ -98,7 +104,7 @@ def run_pool(
         f"{budget.measured_rss_bytes / 2**20:.0f} MiB, free {free_probe() / 2**30:.2f} GiB)")
     with ProcessPoolExecutor(max_workers=max(1, min(initial_cap, len(jobs)))) as executor:
         while pending or running:
-            while pending and budget.can_dispatch(len(running), free_probe()) and not failures:
+            while pending and len(running) < initial_cap and budget.can_dispatch(len(running), free_probe()) and not failures:
                 index, job = pending.pop(0)
                 running[executor.submit(_worker, job_function, job)] = index
                 log(f"[pool] dispatched job {index} ({len(running)} running)")
@@ -112,6 +118,8 @@ def run_pool(
                 index = running.pop(future)
                 try:
                     results[index] = future.result()
+                    if on_result is not None:
+                        on_result(jobs[index], results[index])
                     log(f"[pool] job {index} done")
                 except BaseException as error:  # noqa: BLE001 - reported, then raised
                     failures.append((index, error))

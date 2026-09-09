@@ -154,6 +154,8 @@ def offline_cell(
     cell_index: int,
     checkpoints_requested: tuple[int, ...] = CHECKPOINTS,
     build=None,
+    on_complete=None,
+    retain_per_task=False,
 ) -> dict:
     """One offline IID cell. `build(config)` defaults to the Stage D learner;
     SO1 passes the versioned fast kind's constructor. Nothing else varies."""
@@ -220,12 +222,14 @@ def offline_cell(
         )
         and all(bool(torch.isfinite(p).all()) for p in model.parameters())
     )
+    if on_complete is not None:
+        on_complete(model)
     return {
         "oracle_routes": oracle,
         "updates": updates,
         "batch": batch,
         "checkpoints": {
-            k: {kk: vv for kk, vv in v.items() if kk != "per_task"}
+            k: {kk: vv for kk, vv in v.items() if retain_per_task or kk != "per_task"}
             for k, v in checkpoints.items()
         },
         "final_per_task": final["per_task"],

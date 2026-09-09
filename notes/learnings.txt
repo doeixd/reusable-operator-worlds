@@ -4746,3 +4746,14 @@ than as a one-off miss.
   its distinct-task count and its per-forward dispatch count before
   scheduling; extrapolating from the batch-2 cells put the Stage D ETA off by
   a day. See notes/performance_audit.txt.
+
+- SAVE SUCCESSES BEFORE REPORTING A BATCH FAILURE (SO1 restart, 2026-09-09).
+  The September 8 pool finished four jobs, but two failed and run_pool raised
+  before returning any values. Parent-only post-batch writes left cells={}.
+  Each worker now owns a durable cell record; the parent saves each completion
+  immediately; independent checks reject corrupt or mismatched recovered state.
+- FREE RAM IS NOT COMMIT HEADROOM (SO1 repair, 2026-09-09). A probe found
+  7.04 GB physical available but only 2.73 GB commitment available, while one
+  torch interpreter had 735 MB private allocation against 211 MB resident.
+  Measure commitment and startup/private peaks as well as RSS before pooling.
+  The historical SO1 log did not measure these, so its exact limit is unresolved.
