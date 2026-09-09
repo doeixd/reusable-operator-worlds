@@ -4701,3 +4701,21 @@ milestone, not a passed fast-family process/memory gate or scientific result.
 See notes/so1_restart_audit.md for the defect-to-check mapping and the current
 memory evidence. Next is guarded calibration from this clean committed code;
 no scientific cells may start unless the host and fast-family gates pass.
+
+# SO1 restart held by measured commitment precondition (2026-09-09)
+
+From clean commit 8b7dceb, launched tools/run_so1_restart.py --calibrate-only
+in a detached hidden process. Its first host check refused calibration before
+any serial/pool gate or scientific cell ran. Seven samples over a minute showed
+9.37-9.44 GiB available physical memory but only 4.72-4.83 GiB commit headroom,
+below the initial 5.5 GiB minimum (4 GiB reserve plus two 768 MiB provisional
+workers). Page-file usage did not grow. The initial threshold may rise after
+actual startup/private-memory calibration; it is not a promised final budget.
+
+Preserved the complete samples, other-tenant snapshot, launcher error and stderr
+under reports/so1_restart_preflight_20260909. The process has exited; no gate,
+scientific report or cell was generated. The repaired implementation remains
+verified, while its real process/memory gate and scientific restart remain
+pending host resources. Requested that the PI close unused applications or
+development sessions; no unrelated process was terminated and no reserve was
+lowered. Once headroom is available, run the guarded launcher from clean HEAD.

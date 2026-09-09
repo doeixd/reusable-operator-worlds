@@ -62,3 +62,13 @@ The restart's two-worker cap does not override its physical AND commitment
 reserve checks. A failed host precondition means no gate/scientific cells are
 launched; free resources and rerun the same command. Do not lower a threshold
 or reinterpret a failed gate to keep the research narrative moving.
+
+# First repaired preflight outcome
+
+At clean commit 8b7dceb, --calibrate-only refused its initial one-minute host
+check: available physical memory 9.37-9.44 GiB, commitment 4.72-4.83 GiB versus
+5.5 GiB required. No gate or scientific cells ran. Evidence is preserved in
+reports/so1_restart_preflight_20260909. The process has ended; real calibration
+and the scientific restart are pending enough host commitment. No numerical
+threshold or reserve was relaxed. This operational failure does not resolve
+P1-P5 or identify the historical September 8 memory limit retrospectively.

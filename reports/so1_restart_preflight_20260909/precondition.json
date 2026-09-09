@@ -1,0 +1,176 @@
+{
+ "utc": "2026-09-09T12:03:46.327578+00:00",
+ "budget_mib": 768,
+ "samples": [
+  {
+   "utc": "2026-09-09T12:02:41.531311+00:00",
+   "physical_available": 10065379328,
+   "commit_limit": 47013195776,
+   "commit_available": 5064433664,
+   "pagefile_used": 1823346688,
+   "rss": 246321152,
+   "private": 1268224000,
+   "peak_rss": 246321152,
+   "peak_private": 1268224000
+  },
+  {
+   "utc": "2026-09-09T12:02:51.975462+00:00",
+   "physical_available": 10065707008,
+   "commit_limit": 47013195776,
+   "commit_available": 5080694784,
+   "pagefile_used": 1823346688,
+   "rss": 253485056,
+   "private": 1275486208,
+   "peak_rss": 253485056,
+   "peak_private": 1275486208
+  },
+  {
+   "utc": "2026-09-09T12:03:02.015345+00:00",
+   "physical_available": 10069037056,
+   "commit_limit": 47013195776,
+   "commit_available": 5105082368,
+   "pagefile_used": 1823346688,
+   "rss": 253485056,
+   "private": 1275486208,
+   "peak_rss": 253485056,
+   "peak_private": 1275486208
+  },
+  {
+   "utc": "2026-09-09T12:03:12.055981+00:00",
+   "physical_available": 10099269632,
+   "commit_limit": 47013195776,
+   "commit_available": 5067554816,
+   "pagefile_used": 1823346688,
+   "rss": 253526016,
+   "private": 1275547648,
+   "peak_rss": 253526016,
+   "peak_private": 1275555840
+  },
+  {
+   "utc": "2026-09-09T12:03:22.097950+00:00",
+   "physical_available": 10130784256,
+   "commit_limit": 47013195776,
+   "commit_available": 5182586880,
+   "pagefile_used": 1823346688,
+   "rss": 253526016,
+   "private": 1275547648,
+   "peak_rss": 253526016,
+   "peak_private": 1275555840
+  },
+  {
+   "utc": "2026-09-09T12:03:32.138122+00:00",
+   "physical_available": 10136559616,
+   "commit_limit": 47013195776,
+   "commit_available": 5185445888,
+   "pagefile_used": 1823346688,
+   "rss": 253526016,
+   "private": 1275547648,
+   "peak_rss": 253526016,
+   "peak_private": 1275555840
+  },
+  {
+   "utc": "2026-09-09T12:03:42.180472+00:00",
+   "physical_available": 10137493504,
+   "commit_limit": 47013195776,
+   "commit_available": 5186588672,
+   "pagefile_used": 1823346688,
+   "rss": 253526016,
+   "private": 1275547648,
+   "peak_rss": 253526016,
+   "peak_private": 1275555840
+  }
+ ],
+ "tenants": [
+  {
+   "pid": 2344,
+   "name": "msedge.exe",
+   "rss": 461770752,
+   "private": 237379584
+  },
+  {
+   "pid": 4000,
+   "name": "ekrn.exe",
+   "rss": 358244352,
+   "private": 230117376
+  },
+  {
+   "pid": 4616,
+   "name": "MemCompression",
+   "rss": 1529868288,
+   "private": 9224192
+  },
+  {
+   "pid": 12980,
+   "name": "explorer.exe",
+   "rss": 247410688,
+   "private": 460230656
+  },
+  {
+   "pid": 23416,
+   "name": "vmmemWSL",
+   "rss": 438120448,
+   "private": 1902653440
+  },
+  {
+   "pid": 27664,
+   "name": "Dropbox.exe",
+   "rss": 253665280,
+   "private": 476205056
+  },
+  {
+   "pid": 34572,
+   "name": "msedge.exe",
+   "rss": 405012480,
+   "private": 777183232
+  },
+  {
+   "pid": 35496,
+   "name": "msedge.exe",
+   "rss": 218738688,
+   "private": 168407040
+  },
+  {
+   "pid": 36548,
+   "name": "claude.exe",
+   "rss": 416473088,
+   "private": 862130176
+  },
+  {
+   "pid": 38624,
+   "name": "claude.exe",
+   "rss": 221376512,
+   "private": 626585600
+  },
+  {
+   "pid": 38788,
+   "name": "node.exe",
+   "rss": 2609328128,
+   "private": 2810695680
+  },
+  {
+   "pid": 43764,
+   "name": "node.exe",
+   "rss": 1539121152,
+   "private": 1629024256
+  },
+  {
+   "pid": 50388,
+   "name": "msedge.exe",
+   "rss": 260923392,
+   "private": 188190720
+  },
+  {
+   "pid": 54252,
+   "name": "msedge.exe",
+   "rss": 343269376,
+   "private": 272285696
+  },
+  {
+   "pid": 55208,
+   "name": "python.exe",
+   "rss": 254103552,
+   "private": 1275547648
+  }
+ ],
+ "passes": false
+}
