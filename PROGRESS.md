@@ -4666,3 +4666,21 @@ bracket plan is drafted for PI review and is not frozen.
 On a real 8-task rotated lifetime, `rotated_discrete_fast` ran in 24.3 s
 against 234.5 s for the sequential kind (9.65x), with per-task NMSE agreeing to
 1e-4 or better; recorded in `notes/performance_audit.txt`.
+
+# SO1 failed launch recovered and restart correction frozen (2026-09-09)
+
+The lab record lagged the commits: SO1 was frozen at d19b422, protected at
+65e071a, and its runner committed at 7cea49e on September 8. Claude's session
+records show 251 tests passing before launch. Recovered the original scratch
+launcher and log into reports/so1_launch_failure_20260908, with the unchanged
+empty report. The six-worker launch passed its host precondition, then two
+workers raised MemoryError, four finished without saved results, and 24 never
+started. SO1_EXIT=1. No SO1 result is accepted and no Python run remains alive.
+
+Audit found batch-wide result loss on failure, incomplete protocol fingerprints,
+an anchor gate delayed until all 30 oracle cells, absent independent SO1 scorer,
+and unpaired conditional-stage minibatch streams. SO1_RESTART_AMENDMENT.md fixes
+the restart contract before repaired code or new cells, retains all scientific
+thresholds and predictions, and discloses the earlier timing-probe observation.
+The root cause of the memory exhaustion remains unresolved; free physical
+memory and flat page-file usage did not establish safe six-worker commitment.

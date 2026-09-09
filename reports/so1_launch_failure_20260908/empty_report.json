@@ -1,0 +1,47 @@
+{
+ "frozen_plan": "SO1_BUDGET_BRACKET_PLAN.md",
+ "git_commit": "7cea49e",
+ "protocol": {
+  "id": "SO1-budget-bracket-v1",
+  "frozen_plan": "SO1_BUDGET_BRACKET_PLAN.md",
+  "implementation": "batched_rotation_v1",
+  "worlds": [
+   0,
+   1,
+   2
+  ],
+  "worlds_required": 2,
+  "batches": [
+   2,
+   64
+  ],
+  "gradient_levels": [
+   16384,
+   32768,
+   65536,
+   131072,
+   262144
+  ],
+  "threshold": 0.05,
+  "anchor_tolerance": 0.02,
+  "persistence_later_checkpoints": 2,
+  "checkpoints": "U/8, U/4, U/2, 3U/4, U",
+  "sampling_stream": "SeedSequence([1702, world, cell_index]); oracle 100-109, stage 2 110-111",
+  "global_lr": 0.001,
+  "task_lr": 0.05,
+  "weight_decay": 0.0001,
+  "model_seed": 5000,
+  "slots": 12,
+  "temperature": [
+   1.0,
+   0.1
+  ]
+ },
+ "launch": {
+  "free_memory_bytes_at_launch": 7784726528,
+  "measured_rss_bytes": 407896064,
+  "pool_gate_commit": "07fdb59"
+ },
+ "cells": {},
+ "complete": false
+}

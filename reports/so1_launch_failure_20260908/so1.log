@@ -1,0 +1,33 @@
+precondition sample 1: {"free_mib": 7978, "pagefile_mib": 1256, "time": 1788872439.028355}
+precondition sample 2: {"free_mib": 7798, "pagefile_mib": 1256, "time": 1788872499.3912036}
+PRECONDITION OK: free >= 7798 MiB, page file stable at 1256 MiB, cap<= 6
+prereg check OK: 43 frozen files unchanged; all STATUS-cited paths exist
+invalid-artifact check OK: 6 withdrawn paths, none present
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_so1_budget_bracket.py", line 314, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_so1_budget_bracket.py", line 286, in main
+    run_and_record(pending_jobs(True, ORACLE_CELL_INDEX.items()))
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_so1_budget_bracket.py", line 279, in run_and_record
+    results = run_pool(run_job, jobs, budget)
+  File "C:\Users\Patrick\Downloads\llm\src\row\pool.py", line 123, in run_pool
+    raise BatchFailed(f"{len(failures)} job(s) failed, {len(pending)} never started: {detail}")
+row.pool.BatchFailed: 2 job(s) failed, 24 never started: job 2: MemoryError((8192, 16), dtype('float64')); job 5: MemoryError((8192, 16), dtype('float64'))
+[pool] cap 6 (cores 16, rss 389 MiB, free 7.25 GiB)
+[pool] dispatched job 0 (1 running)
+[pool] dispatched job 1 (2 running)
+[pool] dispatched job 2 (3 running)
+[pool] dispatched job 3 (4 running)
+[pool] dispatched job 4 (5 running)
+[pool] dispatched job 5 (6 running)
+[pool] job 2 FAILED: MemoryError((8192, 16), dtype('float64'))
+[pool] job 5 FAILED: MemoryError((8192, 16), dtype('float64'))
+[pool] job 4 done
+[pool] job 3 done
+[pool] job 1 done
+[pool] job 0 done
+SO1_EXIT=1
