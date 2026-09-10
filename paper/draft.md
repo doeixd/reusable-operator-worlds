@@ -1434,3 +1434,13 @@ oracle counterpart's minibatch draws. The original oracle anchor streams remain
 independent of Stage D, making their gate a joint implementation/resampling
 check. Neither a failed launch nor a failed anchor licenses an acquisition
 verdict or changes the earlier accepted findings.
+
+# Development provenance addendum: SO1 anchor gate (2026-09-09)
+
+The restarted SO1 run passed its host and bitwise pool gates, then failed its
+registered anchor: the corner cell at Stage D's low budget reproduced world 0
+but differed by 0.094 and 0.160 median NMSE on worlds 1 and 2 (tolerance 0.02),
+while the high-budget corner agreed within 0.0033 on all worlds. SO1 therefore
+stopped before its dose-response grid, as preregistered. The gate cannot say
+whether the difference is numerical or due to the independent sampling streams;
+no acquisition verdict is drawn and the Stage D findings are unchanged.

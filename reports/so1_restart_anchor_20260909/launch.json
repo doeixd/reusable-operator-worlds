@@ -1,0 +1,163 @@
+{
+ "git_commit": "c433f61",
+ "started_utc": "2026-09-09T12:17:51.568543+00:00",
+ "host": {
+  "utc": "2026-09-09T12:17:51.524835+00:00",
+  "budget_mib": 2052,
+  "samples": [
+   {
+    "utc": "2026-09-09T12:16:50.273916+00:00",
+    "physical_available": 12802383872,
+    "commit_limit": 47013195776,
+    "commit_available": 25049919488,
+    "pagefile_used": 0,
+    "rss": 358096896,
+    "private": 1384013824,
+    "peak_rss": 411742208,
+    "peak_private": 1434247168
+   },
+   {
+    "utc": "2026-09-09T12:17:00.299072+00:00",
+    "physical_available": 12743073792,
+    "commit_limit": 47013195776,
+    "commit_available": 24980668416,
+    "pagefile_used": 0,
+    "rss": 358096896,
+    "private": 1384013824,
+    "peak_rss": 411742208,
+    "peak_private": 1434247168
+   },
+   {
+    "utc": "2026-09-09T12:17:10.325162+00:00",
+    "physical_available": 12233633792,
+    "commit_limit": 47013195776,
+    "commit_available": 24517992448,
+    "pagefile_used": 0,
+    "rss": 358096896,
+    "private": 1384013824,
+    "peak_rss": 411742208,
+    "peak_private": 1434247168
+   },
+   {
+    "utc": "2026-09-09T12:17:20.352526+00:00",
+    "physical_available": 11353923584,
+    "commit_limit": 47013195776,
+    "commit_available": 23606165504,
+    "pagefile_used": 0,
+    "rss": 358096896,
+    "private": 1384013824,
+    "peak_rss": 411742208,
+    "peak_private": 1434247168
+   },
+   {
+    "utc": "2026-09-09T12:17:30.380374+00:00",
+    "physical_available": 10856996864,
+    "commit_limit": 47013195776,
+    "commit_available": 22958444544,
+    "pagefile_used": 0,
+    "rss": 358096896,
+    "private": 1384013824,
+    "peak_rss": 411742208,
+    "peak_private": 1434247168
+   },
+   {
+    "utc": "2026-09-09T12:17:40.405666+00:00",
+    "physical_available": 12721823744,
+    "commit_limit": 47013195776,
+    "commit_available": 24866693120,
+    "pagefile_used": 0,
+    "rss": 358129664,
+    "private": 1384050688,
+    "peak_rss": 411742208,
+    "peak_private": 1434247168
+   },
+   {
+    "utc": "2026-09-09T12:17:50.429314+00:00",
+    "physical_available": 12787396608,
+    "commit_limit": 47013195776,
+    "commit_available": 24923906048,
+    "pagefile_used": 0,
+    "rss": 358129664,
+    "private": 1384050688,
+    "peak_rss": 411742208,
+    "peak_private": 1434247168
+   }
+  ],
+  "tenants": [
+   {
+    "pid": 3132,
+    "name": "msedge.exe",
+    "rss": 613916672,
+    "private": 186970112
+   },
+   {
+    "pid": 4044,
+    "name": "ekrn.exe",
+    "rss": 412008448,
+    "private": 185188352
+   },
+   {
+    "pid": 5200,
+    "name": "claude.exe",
+    "rss": 475607040,
+    "private": 780632064
+   },
+   {
+    "pid": 9404,
+    "name": "Malwarebytes.exe",
+    "rss": 276787200,
+    "private": 139431936
+   },
+   {
+    "pid": 10484,
+    "name": "python.exe",
+    "rss": 358129664,
+    "private": 1384050688
+   },
+   {
+    "pid": 11092,
+    "name": "msedge.exe",
+    "rss": 312037376,
+    "private": 599556096
+   },
+   {
+    "pid": 11512,
+    "name": "Dropbox.exe",
+    "rss": 520159232,
+    "private": 448204800
+   },
+   {
+    "pid": 12688,
+    "name": "explorer.exe",
+    "rss": 238858240,
+    "private": 145391616
+   },
+   {
+    "pid": 14104,
+    "name": "SearchHost.exe",
+    "rss": 210468864,
+    "private": 113524736
+   },
+   {
+    "pid": 20680,
+    "name": "vmmemWSL",
+    "rss": 2358308864,
+    "private": 2778992640
+   },
+   {
+    "pid": 21668,
+    "name": "msedge.exe",
+    "rss": 529571840,
+    "private": 453066752
+   },
+   {
+    "pid": 23040,
+    "name": "warp.exe",
+    "rss": 414085120,
+    "private": 553902080
+   }
+  ],
+  "passes": true
+ },
+ "gate": "PASS"
+}

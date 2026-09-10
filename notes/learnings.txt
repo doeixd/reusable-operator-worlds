@@ -4757,3 +4757,13 @@ than as a one-off miss.
   torch interpreter had 735 MB private allocation against 211 MB resident.
   Measure commitment and startup/private peaks as well as RSS before pooling.
   The historical SO1 log did not measure these, so its exact limit is unresolved.
+
+- AN ANCHOR AT AN UNCONVERGED POINT TESTS THE TRAJECTORY, NOT THE FUNCTION
+  (SO1 anchor, 2026-09-09). The fast implementation matched Stage D within
+  0.0033 at the converged C_hi corner on every world, yet missed 0.02 by
+  0.094 and 0.160 at C_lo, a cell still descending steeply and, by design,
+  sampled from different streams. A reproduction tolerance set once for both
+  corners implicitly assumed resampling variance is small everywhere; at a
+  mid-trajectory budget it need not be. Before registering an anchor, measure
+  (or bound) same-implementation, different-stream spread at each anchor cell,
+  and anchor implementation equivalence on matched streams separately.

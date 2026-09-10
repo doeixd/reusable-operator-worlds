@@ -7891,3 +7891,22 @@ as pre-amendment exposure, not accepted SO1 evidence. The original independent
 oracle streams remain unchanged; their Stage-D anchor is a joint implementation
 and resampling gate. A failure would stop SO1 as an instrument failure, with
 P1-P5 unresolved, rather than trigger either scientific Track B stop rule.
+
+# SO1 anchor gate outcome (2026-09-09)
+
+The restarted SO1 run (c433f61) failed its registered anchor, so SO1 stopped
+before any dose-curve cell. Anchor cells (fast kind, streams 100/109) versus Stage D terminal medians:
+C_lo (B=2, 16,384 example-gradients) world 0 0.8957 vs 0.9001 (|d| 0.0044),
+world 1 0.8844 vs 0.7901 (0.0943), world 2 0.7367 vs 0.8968 (0.1602); C_hi
+(B=64, 262,144) world 0 0.7188 vs 0.7221 (0.0033), world 1 0.0087 vs 0.0063
+(0.0025), world 2 0.0078 vs 0.0054 (0.0024). Per-world pass/fail agreed in all
+six, but C_lo misses the 0.02 tolerance on worlds 1 and 2.
+
+No SO1 prediction is scored: P1-P5 and the conditional Stage-2 prediction remain
+UNRESOLVED, and neither Track B scientific stop rule fires. Descriptively, the
+misses are confined to the unconverged, still-descending C_lo cell, move in
+opposite directions on worlds 1 and 2, and C_hi agrees within 0.0033 everywhere;
+that pattern is consistent with resampling sensitivity, but the registered gate
+cannot separate resampling from implementation and this note is not a verdict.
+Any successor that isolates the two causes must be frozen as a new amendment
+before it runs; the tolerance is not relaxed after the fact.

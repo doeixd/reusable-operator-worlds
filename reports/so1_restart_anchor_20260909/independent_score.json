@@ -1,0 +1,62 @@
+{
+ "status": "VERIFIED_INSTRUMENT_GATE_FAILURE",
+ "scientific_result_accepted": false,
+ "verified_cells": 6,
+ "anchor": {
+  "O_b2_g16384": {
+   "stage_d_cell": "C_lo",
+   "worlds": {
+    "0": {
+     "so1": 0.8956975841499764,
+     "stage_d": 0.9001399247925657,
+     "abs_error": 0.004442340642589304,
+     "same_verdict": true,
+     "passes": true
+    },
+    "1": {
+     "so1": 0.8843973397641315,
+     "stage_d": 0.79005007906666,
+     "abs_error": 0.09434726069747146,
+     "same_verdict": true,
+     "passes": false
+    },
+    "2": {
+     "so1": 0.736681832804724,
+     "stage_d": 0.896832985711444,
+     "abs_error": 0.16015115290672,
+     "same_verdict": true,
+     "passes": false
+    }
+   },
+   "passes": false
+  },
+  "O_b64_g262144": {
+   "stage_d_cell": "C_hi",
+   "worlds": {
+    "0": {
+     "so1": 0.7188103428711731,
+     "stage_d": 0.7220673859119415,
+     "abs_error": 0.003257043040768459,
+     "same_verdict": true,
+     "passes": true
+    },
+    "1": {
+     "so1": 0.008741199308902072,
+     "stage_d": 0.006254104431718588,
+     "abs_error": 0.0024870948771834843,
+     "same_verdict": true,
+     "passes": true
+    },
+    "2": {
+     "so1": 0.007762586389101965,
+     "stage_d": 0.005381411639973521,
+     "abs_error": 0.002381174749128444,
+     "same_verdict": true,
+     "passes": true
+    }
+   },
+   "passes": true
+  }
+ },
+ "report_sha256": "a5cefaa7b8eaa503c1043efe392b0327cb1b65ea37a8ebf5a7ec90c5d4456cf0"
+}

@@ -4719,3 +4719,30 @@ verified, while its real process/memory gate and scientific restart remain
 pending host resources. Requested that the PI close unused applications or
 development sessions; no unrelated process was terminated and no reserve was
 lowered. Once headroom is available, run the guarded launcher from clean HEAD.
+
+# SO1 restart: anchor gate FAILED, SO1 stopped with nothing read (2026-09-09)
+
+After host commitment was freed, tools/run_so1_restart.py ran from clean
+c433f61. Host precondition passed (12.2-12.8 GB physical, 22.9-25.0 GB commit
+headroom, page file unused); the fast-family serial-versus-pooled gate passed
+bitwise 9/9 at a 2,052 MiB two-worker budget. The six anchor cells ran first
+(12:18-13:09 UTC) and all saved durable, reload-exact, finite records.
+
+Anchor cells (fast kind, streams 100/109) versus Stage D terminal medians:
+C_lo (B=2, 16,384 example-gradients) world 0 0.8957 vs 0.9001 (|d| 0.0044),
+world 1 0.8844 vs 0.7901 (0.0943), world 2 0.7367 vs 0.8968 (0.1602); C_hi
+(B=64, 262,144) world 0 0.7188 vs 0.7221 (0.0033), world 1 0.0087 vs 0.0063
+(0.0025), world 2 0.0078 vs 0.0054 (0.0024). Per-world pass/fail agreed in all
+six, but C_lo misses the 0.02 tolerance on worlds 1 and 2.
+
+The runner therefore wrote classification ANCHOR_FAILED_NOTHING_READ and exited
+1 by design before any of the other 24 oracle cells; the independent scorer
+exited 0 with VERIFIED_INSTRUMENT_GATE_FAILURE over 6 verified cells and the
+report hash a5cefaa7. check_prereg, check_invalid and the SO1/pool tests pass.
+Per the restart amendment this is an instrument-gate failure: it cannot say
+whether the C_lo drift is numerical implementation or resampling (Stage D used
+different streams), and it triggers neither Track B stop rule. P1-P5 and the
+conditional learned-route prediction stay unresolved. Report committed at
+reports/so1_budget_bracket.json; run records copied to
+reports/so1_restart_anchor_20260909 (artifacts/ is untracked). Measured cell
+cost: 3.5-4.6 min for C_lo, 22-24.5 min for C_hi, two workers.
