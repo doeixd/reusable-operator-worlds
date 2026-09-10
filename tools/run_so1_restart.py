@@ -95,7 +95,7 @@ def calibrate(config):
         logs.append(message)
         print(message, flush=True)
     with MemorySampler() as sampler:
-        pooled = run_pool(run_job, jobs, PoolBudget(budget_mib * MIB, hard_cap=2),
+        pooled = run_pool(run_job, jobs, PoolBudget(budget_mib * MIB, hard_cap=2, reserve_bytes=OPS["reserve_bytes"]),
                           free_probe=available, log=log)
     pooled_memory = sampler.summary()
     identical = [canonical(scientific(a)) == canonical(scientific(b)) for a, b in zip(serial, pooled)]
