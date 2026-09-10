@@ -11,10 +11,10 @@ synthetic on purpose: the hidden operator library, the programs composing
 it, and a continuous reuse knob `rho` are all known to the experimenter and
 hidden from the learner, so every claim can be checked against ground truth.
 
-**Status: six sealed blocks closed.** Each was run against a protocol frozen
+**Status: seven sealed blocks closed.** Each was run against a protocol frozen
 and hashed before those worlds existed. Development used seeds 0–9;
 confirmatory bands were never inspected before the corresponding freeze.
-`python tools/check_prereg.py` verifies the trail (21 frozen plans);
+`python tools/check_prereg.py` verifies the trail (45 frozen plans and amendments);
 `python tools/check_invalid.py` verifies that no withdrawn artifact path has
 been resurrected.
 
@@ -27,6 +27,20 @@ been resurrected.
 | **V5** | 600–629 | Is the amortization law quantitative under causal change? | Closed. `V5_CLOSURE.md` records what held (quantitative amortization; the rate–distortion currency) **and the withdrawal of finding V5-D** after code review 55: two audits had compared functions across unaligned coordinates and one loader dropped retirement state. Corrected, the learner *does* encode the family structure — what fails is PROMOTE's extraction of it. |
 | **H39** | 700–729 | Are useful abstractions *made* during learning, or *mined* afterwards? | Confirmed, 5/5 estimands. An abstraction parameterized in the basis — \(P(\alpha)\), argument-plus-patch — makes an unseen family member cheap to acquire online (E1 0.886, CI [0.717, 1.054]; E3 −1,545 nats, CI [−1,649, −1,435]; E4 0.815, CI [0.765, 0.866]). |
 | **Export** | 800–829 | Do the learned objects behave as an exportable, composable program language? | Confirmed on every clause. A frozen vocabulary executes unseen programs (`G_export` 1.005); composes on unseen triples, unseen adjacent pairs and in **positions its operators never occupied** (2.41 / 2.46 / 2.41 log units over scratch); stays executable at unseen program lengths including a fourth execution position (2.29); and each task's solution *is* the discrete sequence, bitwise in 30/30 worlds, 14–15× cheaper than private coding and amortizing after **4.0 tasks**. Symbol names are arbitrary (a consistent library+route permutation is bitwise identical) while wrong codes at identical bit cost collapse by 2.2–2.5. |
+
+**Development since the export block (worlds 0–2, not sealed).** Every row
+below was run against a plan frozen before its code existed, but none is a
+confirmatory result.
+
+| Rung | Question | Status |
+| --- | --- | --- |
+| **E5 / E5.1** | Can a learned recognizer *write* the programs? How does finding them scale? | Amortization without quality: the writer misses the registered oracle gap (+0.31–0.32 vs ≤0.15) and costs more to train than search. Search cost grows with program *length*, logarithmically in program count. |
+| **E6 / E6.2** | Can the language grow new symbols? | Macros pay by the alphabet-taxed code (3/3) and causally cut search cost by the predicted amount; retrospective economics cannot time creation, a gated criterion can; compiling a macro into one operator works only at ~4× slot capacity and never pays. |
+| **RF0a / RF0b** | Does semantic recurrence outlive literal syntax? | Raw local semantics survive (RF0a); the semantic-motif ceiling is **unresolved** (RF0b: one world's strong cell failed its permutation null). |
+| **G5R** | Can a stronger, rotated operator family be learned online? | Fails 0/3 (held-out margins +0.12–0.29 vs 0.75). Diagnosis: each operator is findable in isolation and the joint library is learnable with oracle routes (2/3); the wall is route inference or online interference. |
+| **G5R Stage D** | Which of those two? | `BUDGET_LIMITED`: at the lifetime's own budget even oracle routes fail 0/3; sufficiency lies between 16k and 262k example-gradients; learned routes fail even where oracle routes pass. |
+| **SO0** | Do existing cells separate the budget axes? | Census: no pair controls updates, task diversity or example-gradients; no persistent threshold crossing exists anywhere. |
+| **SO1** | Which resource buys acquisition: updates, diversity or gradients? | **Stopped at its anchor gate, nothing read.** The fast implementation reproduced the high-budget corner everywhere (≤0.0033) but the low-budget corner on world 0 only (misses 0.094 / 0.160 vs 0.02). A frozen diagnostic separating implementation, resampling and float-level trajectory sensitivity is running. |
 
 The original V4 premise — that successful abstraction birth implies a
 maintenance problem — failed in development and is preserved unrevised in
@@ -407,9 +421,9 @@ draft: `paper/draft.md`.
 - `PROGRESS.md` — running lab record. `AGENTS.md` — working conventions and
   accumulated implementation learnings. `CLAUDE.md` — front-door safety summary.
 - `notes/` — research thinking records. `reviews/` — the full reviewer dialogue
-  (74 numbered rounds, 73 filed plus the founding assessment), indexed in `reviews/review-index.md`.
+  (84 numbered rounds, 83 filed plus the founding assessment), indexed in `reviews/review-index.md`.
 - `src/row/` — world generators, models, experiments. `tests/` — unittest
-  suite (184 tests). `reports/` — analysis JSON and figures. `artifacts/` —
+  suite (267 test methods). `reports/` — analysis JSON and figures. `artifacts/` —
   per-run outputs with provenance (untracked; regenerable from committed seeds
   and configs).
 
@@ -450,7 +464,7 @@ Seed partitions:
   500–509 as a contaminated development band; those worlds are not
   confirmatory.
 - **V1** 100–129, **V2** 200–229, **V3** 300–329, **V4R** 400–429,
-  **V5** 600–629, **H39** 700–729 — all closed.
+  **V5** 600–629, **H39** 700–729, **Export** 800–829 — all closed.
 
 ## How this project treats results
 

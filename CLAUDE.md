@@ -19,6 +19,25 @@ expected artifacts, exit codes, paired results, `check_prereg.py`,
 `check_invalid.py`, and the registered scorer pass. Preserve invalid results and
 withdrawals in the append-only scientific record rather than rewriting history.
 
+# Compute economy (small host)
+
+This machine is small and memory-bound; see "Compute economy" in `AGENTS.md`.
+Work in tiers: Tier 0 (minutes: dry runs, censuses and audits on existing
+artifacts) first, Tier 1 (under about an hour, one development world, reduced
+budget, EXPLORATORY only) to decide whether a question is live, and Tier 2
+(frozen preregistered run) only when it is. Small runs choose what to run; they
+never produce verdicts. Put decisive and cheap cells first with registered
+early-stop rules, use gated versioned fast implementations, send work beyond
+one overnight batch to remote workers, and ask the PI to free memory rather
+than lowering a reserve. During a run: no commits, no `.py` edits, no installs.
+
+Before EVERY launch, also do a performance pass: time a few real updates and
+look for easy wins (unneeded scoring/checkpoints, rebuilt objects in loops,
+Python loops a tensor op can replace, redundant cells, longest-first
+scheduling). Apply only wins that keep results bitwise identical, verified on
+a short run; anything that changes floating-point results is a new versioned
+implementation for the next plan boundary.
+
 # Quick pointers
 
 - `PROGRESS.md` — running lab record; append an entry for every completed,

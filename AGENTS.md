@@ -41,6 +41,81 @@ appending corrections to `PREDICTIONS.md`, learnings, progress, and the paper
 rather than rewriting history. A launched job or plausible number is not a
 scientific result.
 
+# Compute economy (small host)
+
+The PI's machine is small and memory-bound. Spend compute in proportion to how
+settled a question is, and never trade rigor for speed: every tier below obeys
+the integrity standard, and only Tier 2 produces verdicts.
+
+- **Tier 0, minutes (default first step).** Structural dry runs (a few updates,
+  one or two tasks), offline censuses and audits over EXISTING frozen artifacts,
+  and opportunity gates (is there any counterfactual value to measure?). Ask
+  "could this comparison come out any other way?" here, before any lifetime.
+- **Tier 1, under about an hour, exploratory only.** One development world,
+  reduced budget or fewer tasks, clearly labelled exploratory in PROGRESS. Its
+  job is to decide whether a question is live and to size a registered
+  prediction and its thresholds against a measured baseline. It never becomes
+  a verdict, and never touches sealed or confirmatory seeds. Known limit: small
+  versions can give DIFFERENT answers, not just noisier ones (variational task
+  codes refuse to encode at 16 examples/task; several effects only appear at
+  full budget), so a Tier 1 null does not close a question.
+- **Tier 2, hours, preregistered.** Frozen plan, hashed in `check_prereg.py`,
+  run from clean committed code. Launch only when Tiers 0-1 say the question is
+  live and the instrument works.
+
+PERFORMANCE PASS BEFORE EVERY LAUNCH (PI directive, 2026-09-10). Alongside the
+correctness re-read, check the code about to run for easy wins, and time a few
+real updates rather than guessing. Typical free or cheap wins:
+
+- work that does not affect the result: scoring or checkpointing more often
+  than the plan needs, rebuilding worlds/models/optimizers inside loops,
+  redundant deep copies, logging or JSON writes in the hot loop, unused
+  diagnostics computed every step;
+- redundant cells: a cell that duplicates an existing committed result under
+  the same construction, or a reference arm that is not needed once an
+  equivalence gate has passed;
+- Python loops over slots, tasks or examples that a tensor op can replace;
+  per-distinct-task forwards; `torch.set_num_threads(1)` set in every worker;
+- scheduling: longest cells first in the pool so the tail is short, the pool
+  at the memory-bounded cap, and cheap decisive cells before expensive ones.
+
+Split the findings by what they change. Wins that leave every number BITWISE
+identical (skipping unneeded work, scheduling, caching) may be applied before
+launch, verified bitwise on a short run. Wins that change floating-point
+results even slightly are a new versioned implementation and wait for a plan
+boundary and an equivalence gate. Record the measured before/after timing in
+PROGRESS or `notes/performance_audit.txt`, and disclose any win found too late
+to apply.
+
+Make each Tier 2 run as cheap as its question allows:
+
+- Order cells cheapest- and most-decisive-first, and REGISTER early-stop rules
+  (anchor/instrument gates first; stop once the registered outcome is
+  determined; world 0 first when a single world can already make an outcome
+  impossible). SO1's anchor-first design stopped after 6 of 30 cells.
+- Drop curve-refinement cells before causal-sample cells (review 71's scoring
+  economy rule).
+- Use the fastest VERSIONED implementation that has passed an equivalence gate
+  (`rotated_discrete_fast` is ~9.65x the sequential kind). Keep a slow reference
+  implementation only as the reference inside an equivalence check. New
+  non-bitwise speedups (batching `forward_tasks` across distinct tasks, batched
+  slots ~1.95x) are admitted only at a new plan boundary, versioned, and gated;
+  never mid-branch.
+- Profile before scheduling: cost scales with distinct tasks per batch and
+  per-forward dispatch, not with example count alone (batch-64 rotated cells
+  cost ~26x batch-2 cells on the sequential kind).
+- Memory, not cores, bounds local concurrency. Before a multi-hour local run,
+  ask the PI to close large unrelated applications (node, WSL, browsers); the
+  launcher's host precondition fails closed and its reserve is never lowered to
+  make a run fit.
+- Work beyond one overnight local batch goes to isolated remote workers
+  (Kaggle kernels, see the learnings: parallel sessions, one writer per cell,
+  credentials only as invocation-time environment variables), not to a larger
+  local pool.
+- Leave the machine alone during a run: no commits, no edits to `.py` files
+  that pool workers import, no installs or other experiment batches. Markdown
+  edits are safe; commit them after the run exits.
+
 # Commands
 
 ```powershell
