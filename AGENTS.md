@@ -112,9 +112,49 @@ Make each Tier 2 run as cheap as its question allows:
   (Kaggle kernels, see the learnings: parallel sessions, one writer per cell,
   credentials only as invocation-time environment variables), not to a larger
   local pool.
-- Leave the machine alone during a run: no commits, no edits to `.py` files
-  that pool workers import, no installs or other experiment batches. Markdown
-  edits are safe; commit them after the run exits.
+- Leave the machine alone during a run: no edits to `.py` files that pool
+  workers import, no installs or other experiment batches. Markdown edits are
+  safe. Commits are safe only when they touch no code and the runner is known
+  not to re-read git after launch (its stamps are fixed at start); a run that
+  may RESUME later must resume at its launch commit, so otherwise wait.
+
+RESTARTABLE BY DESIGN, WITH CHECKABLE LOGS (PI directive, 2026-09-10). This
+host reboots, sessions die, and memory spikes kill workers; every run longer
+than a few minutes must survive that without losing finished work or silently
+changing protocol.
+
+- **Relaunch = resume.** Re-running the exact launch command must skip every
+  completed cell and redo only unfinished ones. Never refuse to start merely
+  because a partial report exists; refuse only on a protocol, commit or
+  configuration MISMATCH, and say which.
+- **Durable per-cell records.** Each worker atomically writes its own cell
+  (result, tensor-only model, resolved config, fingerprint, hashes) the moment
+  it completes; the parent's aggregate report is rebuilt from those records.
+  Never resume a partial optimizer: an unfinished cell restarts from
+  initialization. Validate every reused cell (stamp, hashes, complete flag).
+- **Protocol fingerprint.** Hash everything that defines a cell (plan, config,
+  seeds, streams, budgets, implementation, launch commit) into the stamp and
+  fail closed on mismatch.
+- **Logs anyone can check mid-run, without touching the process:**
+  - `run.log`: append-only, flushed, one timestamped line per event (launch,
+    gate, each cell start and finish with its key, seconds and headline
+    number, failures with tracebacks, exit);
+  - `status.json`: rewritten atomically after every cell with commit, pid,
+    started time, cells done/total, currently running cells, last update time
+    and a naive ETA, so "is it alive and how far along?" is one file read;
+  - `run.pid`, `exit.json` (exit code, finish time) and a durable error record
+    for any launcher exception.
+- **Launch detached** (a hidden process with redirected stdout/stderr, not a
+  session-bound background shell) so the run outlives the session, and give
+  the PI the one-line command to check `status.json`.
+- **Check logs in.** The run directory under `artifacts/` is untracked, so when
+  a run ends, successfully or not, copy its small operational records
+  (`run.log`, `status.json`, `exit.json`, gate and precondition records,
+  launch manifest) into `reports/<run>_<date>/` and commit them with the
+  result. Large model files stay regenerable from committed code and seeds.
+- **Test the restart path** before any Tier 2 launch: interrupt the dry run
+  after one cell, relaunch, and verify the completed cell is reused bitwise
+  and the rest run.
 
 # Commands
 

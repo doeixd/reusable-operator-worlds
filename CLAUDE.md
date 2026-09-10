@@ -29,7 +29,17 @@ budget, EXPLORATORY only) to decide whether a question is live, and Tier 2
 never produce verdicts. Put decisive and cheap cells first with registered
 early-stop rules, use gated versioned fast implementations, send work beyond
 one overnight batch to remote workers, and ask the PI to free memory rather
-than lowering a reserve. During a run: no commits, no `.py` edits, no installs.
+than lowering a reserve. During a run: no `.py` edits, no installs; commit
+only non-code files, and only if the runner does not re-read git after launch.
+
+Every run must be RESTARTABLE and CHECKABLE: relaunching the same command
+resumes (skips validated completed cells, restarts unfinished ones from
+initialization, fails closed only on a protocol/commit mismatch); each cell is
+written durably as it finishes; the run keeps a timestamped `run.log` and an
+atomically updated `status.json` (done/total, running cells, last update,
+ETA); it launches detached; and its operational logs are copied to
+`reports/<run>_<date>/` and committed with the result. Test the restart path
+on the dry run before launch.
 
 Before EVERY launch, also do a performance pass: time a few real updates and
 look for easy wins (unneeded scoring/checkpoints, rebuilt objects in loops,
