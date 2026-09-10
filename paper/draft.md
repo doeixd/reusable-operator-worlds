@@ -1444,3 +1444,14 @@ while the high-budget corner agreed within 0.0033 on all worlds. SO1 therefore
 stopped before its dose-response grid, as preregistered. The gate cannot say
 whether the difference is numerical or due to the independent sampling streams;
 no acquisition verdict is drawn and the Stage D findings are unchanged.
+
+# Development provenance addendum: SO1 anchor diagnostic (2026-09-10)
+
+A frozen diagnostic separated the causes of the SO1 anchor failure. The
+original implementation reproduced Stage D exactly; the faster implementation
+matched it on identical sampling streams to within 6e-7 after 8,192 updates,
+and a 1e-7 perturbation of initial parameters did not grow. The anchor failure
+was therefore due to resampling: at Stage D's low budget, five independent
+minibatch streams produced terminal medians spanning up to 0.68 on one world.
+SO1 is licensed to relaunch once with a matched-stream anchor; the resampling
+spread is disclosed beside its low-budget comparisons.

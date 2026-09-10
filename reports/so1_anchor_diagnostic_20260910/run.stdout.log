@@ -1,0 +1,93 @@
+prereg check OK: 45 frozen files unchanged; all STATUS-cited paths exist
+invalid-artifact check OK: 6 withdrawn paths, none present
+[pool] cap 2 (cores 16, rss 2014 MiB, free 12.51 GiB)
+[pool] dispatched job 0 (1 running)
+[pool] dispatched job 1 (2 running)
+[pool] job 0 done
+[pool] dispatched job 2 (2 running)
+[pool] job 1 done
+[pool] dispatched job 3 (2 running)
+[pool] job 3 done
+[pool] dispatched job 4 (2 running)
+[pool] job 2 done
+[pool] dispatched job 5 (2 running)
+[pool] job 4 done
+[pool] job 5 done
+GATE PASS: 6/6 bitwise; P moves True; budget 2014 MiB
+[pool] cap 2 (cores 16, rss 2014 MiB, free 12.10 GiB)
+[pool] dispatched job 0 (1 running)
+[pool] dispatched job 1 (2 running)
+[P w0] median 0.9001 (2514.4s)
+[pool] job 0 done
+[pool] dispatched job 2 (2 running)
+[P w1] median 0.7901 (2516.3s)
+[pool] job 1 done
+[pool] dispatched job 3 (2 running)
+[R w0] median 0.9001 (2548.2s)
+[pool] job 3 done
+[P w2] median 0.8968 (2556.1s)
+[pool] job 2 done
+[pool] dispatched job 4 (1 running)
+[pool] dispatched job 5 (2 running)
+[R w1] median 0.7901 (2303.6s)
+[pool] job 4 done
+[pool] dispatched job 6 (2 running)
+[R w2] median 0.8968 (2297.1s)
+[pool] job 5 done
+[pool] dispatched job 7 (2 running)
+[S100 w1] median 0.8844 (2097.8s)
+[pool] job 7 done
+[S100 w0] median 0.8957 (2126.5s)
+[pool] job 6 done
+[pool] dispatched job 8 (1 running)
+[pool] dispatched job 9 (2 running)
+[F0 w0] median 0.9001 (163.6s)
+[pool] job 9 done
+[pool] dispatched job 10 (2 running)
+[F0 w1] median 0.7901 (159.2s)
+[pool] job 10 done
+[pool] dispatched job 11 (2 running)
+[F0 w2] median 0.8968 (195.3s)
+[pool] job 11 done
+[pool] dispatched job 12 (2 running)
+[F100 w0] median 0.8957 (201.9s)
+[pool] job 12 done
+[pool] dispatched job 13 (2 running)
+[F100 w1] median 0.8844 (222.8s)
+[pool] job 13 done
+[pool] dispatched job 14 (2 running)
+[F100 w2] median 0.7367 (196.5s)
+[pool] job 14 done
+[S100 w2] median 0.7367 (2140.7s)
+[pool] job 8 done
+[pool] dispatched job 15 (1 running)
+[F120 w0] median 0.8951 (193.0s)
+[pool] job 15 done
+[pool] dispatched job 16 (1 running)
+[pool] dispatched job 17 (2 running)
+[F120 w1] median 0.6334 (178.3s)
+[pool] job 16 done
+[pool] dispatched job 18 (2 running)
+[F120 w2] median 0.8062 (213.6s)
+[pool] job 17 done
+[pool] dispatched job 19 (2 running)
+[F121 w0] median 0.9050 (201.0s)
+[pool] job 18 done
+[pool] dispatched job 20 (2 running)
+[F121 w1] median 0.6848 (164.5s)
+[pool] job 19 done
+[pool] dispatched job 21 (2 running)
+[F121 w2] median 0.9044 (181.1s)
+[pool] job 20 done
+[pool] dispatched job 22 (2 running)
+[F122 w0] median 0.9120 (219.9s)
+[pool] job 21 done
+[pool] dispatched job 23 (2 running)
+[F122 w1] median 0.8967 (199.7s)
+[pool] job 22 done
+[F122 w2] median 0.2266 (158.1s)
+[pool] job 23 done
+classification: IMPLEMENTATION_EQUIVALENT
+w0: repro 0.00e+00 impl0 0.0000 impl100 0.0000 chaos 0.0000 spread 0.0170 miss 0.0044
+w1: repro 0.00e+00 impl0 0.0000 impl100 0.0000 chaos 0.0000 spread 0.2632 miss 0.0943
+w2: repro 0.00e+00 impl0 0.0000 impl100 0.0000 chaos 0.0000 spread 0.6778 miss 0.1602

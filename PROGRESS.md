@@ -4746,3 +4746,35 @@ conditional learned-route prediction stay unresolved. Report committed at
 reports/so1_budget_bracket.json; run records copied to
 reports/so1_restart_anchor_20260909 (artifacts/ is untracked). Measured cell
 cost: 3.5-4.6 min for C_lo, 22-24.5 min for C_hi, two workers.
+
+# SO1 anchor diagnostic: IMPLEMENTATION_EQUIVALENT (2026-09-10)
+
+SO1_ANCHOR_DIAGNOSTIC_AMENDMENT.md frozen at 7587a5a (protected b247704);
+runner, independent scorer and tests at 228c488. The first launch refused its
+host precondition (physical headroom 5.57-5.92 GiB against 5.5 GiB and a 1 MB
+page-file rise); nothing ran. After the PI freed memory the relaunch passed the
+host check and a 6/6 bitwise serial-vs-pooled gate (2,014 MiB budget), then ran
+24 C_lo cells (sequential ~36-43 min, fast ~3-4 min, two workers), exit 0.
+
+| world | d_repro | d_impl0 | d_impl100 | d_chaos | fast 5-stream range | original miss |
+|---|---|---|---|---|---|---|
+| 0 | 0 | 2.1e-7 | 2.5e-7 | 1.7e-7 | 0.017 | 0.0044 |
+| 1 | 0 | 1.4e-7 | 7.2e-8 | 5.0e-7 | 0.263 | 0.0943 |
+| 2 | 0 | 1.9e-8 | 5.5e-7 | 7.1e-8 | 0.678 | 0.1602 |
+
+Classification IMPLEMENTATION_EQUIVALENT (independent scorer exit 0, no
+problems). R reproduces Stage D C_lo exactly on every world, the fast kind
+agrees with the sequential kind on matched streams to <= 5.5e-7, and an
+eps = 1e-7 init perturbation stays at <= 5.0e-7, so the trajectory is not
+float-sensitive. The failed SO1 anchor is attributed to resampling: at this
+budget different minibatch streams move the terminal median by up to 0.68
+(world 2 fast streams span 0.227-0.904). F100 rerun equals the SO1 report's
+F100 cells to every digit. The registered prediction (TRAJECTORY_SENSITIVE
+0.50) was wrong. check_prereg, check_invalid, full test suite pass; 24/24 cells
+finite, pinned and reload-exact. Report reports/so1_anchor_diagnostic.json;
+operational logs in reports/so1_anchor_diagnostic_20260910.
+
+Per the amendment, SO1 may now be relaunched ONCE in fresh paths with the
+anchor satisfied by these matched-stream checks. Before that launch: retrofit
+the SO1 runner to the new restartability/logging guidance and do the
+pre-launch performance pass.

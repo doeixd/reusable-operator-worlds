@@ -7910,3 +7910,30 @@ that pattern is consistent with resampling sensitivity, but the registered gate
 cannot separate resampling from implementation and this note is not a verdict.
 Any successor that isolates the two causes must be frozen as a new amendment
 before it runs; the tolerance is not relaxed after the fact.
+
+# SO1 anchor diagnostic outcome (2026-09-10): IMPLEMENTATION_EQUIVALENT
+
+Registered in SO1_ANCHOR_DIAGNOSTIC_AMENDMENT.md (7587a5a) before any cell.
+
+| world | d_repro | d_impl0 | d_impl100 | d_chaos | fast 5-stream range | original miss |
+|---|---|---|---|---|---|---|
+| 0 | 0 | 2.1e-7 | 2.5e-7 | 1.7e-7 | 0.017 | 0.0044 |
+| 1 | 0 | 1.4e-7 | 7.2e-8 | 5.0e-7 | 0.263 | 0.0943 |
+| 2 | 0 | 1.9e-8 | 5.5e-7 | 7.1e-8 | 0.678 | 0.1602 |
+
+Scorekeeping: TRAJECTORY_SENSITIVE (0.50) WRONG; IMPLEMENTATION_EQUIVALENT
+(0.40) is the outcome; IMPLEMENTATION_DIVERGES (0.10) did not occur. The
+reasoning that SGD-noise-dominated training decorrelates float noise within a
+few thousand steps was wrong here: a 1e-7 relative init perturbation and the
+fast kind's per-forward disagreement both stay at the 1e-7 scale through 8,192
+updates. The original anchor miss is resampling: miss <= five-stream range on
+all three worlds (descriptive clause). Consequence as registered: SO1 may be
+relaunched once in fresh paths (artifacts/so1_restart2/,
+reports/so1_budget_bracket_r2.json), P1-P5 and Stage 2 unchanged, with this
+C_lo fast-stream spread disclosed beside each equal-G paired difference. No
+Track B stop rule fires.
+
+Disclosed caveat for SO1 interpretation (not a scoring change): with one
+sampling stream per cell, per-world terminal medians at unconverged budgets
+carry resampling spread of order 0.02-0.68, so SO1's per-world P3 signs near
+zero should be read with that spread beside them.

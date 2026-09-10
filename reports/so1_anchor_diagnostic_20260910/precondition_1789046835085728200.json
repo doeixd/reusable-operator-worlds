@@ -1,0 +1,85 @@
+{
+ "utc": "2026-09-10T13:27:15.085703+00:00",
+ "budget_mib": 2014,
+ "samples": [
+  {
+   "utc": "2026-09-10T13:26:14.924581+00:00",
+   "physical_available": 13485232128,
+   "commit_limit": 47013195776,
+   "commit_available": 20126371840,
+   "pagefile_used": 171372544,
+   "rss": 367263744,
+   "private": 1384828928,
+   "peak_rss": 377810944,
+   "peak_private": 1407303680
+  },
+  {
+   "utc": "2026-09-10T13:26:24.963298+00:00",
+   "physical_available": 13466271744,
+   "commit_limit": 47013195776,
+   "commit_available": 20112977920,
+   "pagefile_used": 171372544,
+   "rss": 367263744,
+   "private": 1384828928,
+   "peak_rss": 377810944,
+   "peak_private": 1407303680
+  },
+  {
+   "utc": "2026-09-10T13:26:34.988693+00:00",
+   "physical_available": 13456912384,
+   "commit_limit": 47013195776,
+   "commit_available": 20071264256,
+   "pagefile_used": 171372544,
+   "rss": 367267840,
+   "private": 1384828928,
+   "peak_rss": 377810944,
+   "peak_private": 1407303680
+  },
+  {
+   "utc": "2026-09-10T13:26:45.012383+00:00",
+   "physical_available": 13471535104,
+   "commit_limit": 47013195776,
+   "commit_available": 20079874048,
+   "pagefile_used": 171372544,
+   "rss": 367267840,
+   "private": 1384828928,
+   "peak_rss": 377810944,
+   "peak_private": 1407303680
+  },
+  {
+   "utc": "2026-09-10T13:26:55.034382+00:00",
+   "physical_available": 13454979072,
+   "commit_limit": 47013195776,
+   "commit_available": 20064915456,
+   "pagefile_used": 171372544,
+   "rss": 367239168,
+   "private": 1384763392,
+   "peak_rss": 377810944,
+   "peak_private": 1407303680
+  },
+  {
+   "utc": "2026-09-10T13:27:05.056966+00:00",
+   "physical_available": 13367185408,
+   "commit_limit": 47013195776,
+   "commit_available": 19977424896,
+   "pagefile_used": 171372544,
+   "rss": 367239168,
+   "private": 1384763392,
+   "peak_rss": 377810944,
+   "peak_private": 1407303680
+  },
+  {
+   "utc": "2026-09-10T13:27:15.079059+00:00",
+   "physical_available": 13431144448,
+   "commit_limit": 47013195776,
+   "commit_available": 20071256064,
+   "pagefile_used": 171372544,
+   "rss": 367239168,
+   "private": 1384763392,
+   "peak_rss": 377810944,
+   "peak_private": 1407303680
+  }
+ ],
+ "need": 8518631424,
+ "passes": true
+}

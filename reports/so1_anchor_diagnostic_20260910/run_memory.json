@@ -1,0 +1,14 @@
+{
+ "summary": {
+  "samples": 49779,
+  "errors": [],
+  "min_physical_available": 3928424448,
+  "min_commit_available": 4781146112,
+  "max_pagefile_used": 196902912,
+  "pagefile_growth": 25530368,
+  "max_worker_rss": 372912128,
+  "max_worker_private": 1404772352,
+  "max_parent_rss": 378236928,
+  "max_parent_private": 1476263936
+ }
+}

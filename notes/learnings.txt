@@ -4767,3 +4767,21 @@ than as a one-off miss.
   mid-trajectory budget it need not be. Before registering an anchor, measure
   (or bound) same-implementation, different-stream spread at each anchor cell,
   and anchor implementation equivalence on matched streams separately.
+
+- MEASURE RESAMPLING SPREAD BEFORE REGISTERING A CROSS-STREAM ANCHOR
+  (SO1 anchor diagnostic, 2026-09-10). The fast kind was functionally
+  identical to the sequential kind (<= 5.5e-7 on matched streams through 8,192
+  updates, and float perturbations did not amplify), yet the cross-stream
+  anchor failed because five minibatch streams at the same unconverged budget
+  span 0.017, 0.263 and 0.678 in terminal median across worlds 0-2. A 0.02
+  tolerance was two orders of magnitude tighter than the process noise it was
+  implicitly testing against. The generalization: an anchor must compare like
+  with like (matched streams for implementation equivalence), and any
+  single-stream cell at an unconverged budget is one draw from a wide
+  distribution, not a point estimate.
+- FLOAT NOISE DID NOT DECORRELATE THIS TRAINING (same diagnostic). We
+  predicted 0.50 that 1e-7 perturbations would grow into macroscopically
+  different trajectories over 8,192 Adam updates; they stayed at 1e-7. The
+  chaos intuition from deep networks does not transfer automatically to this
+  small pinned-route problem. Measure it with an eps-perturbation control
+  rather than assuming either way.

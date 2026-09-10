@@ -1,0 +1,90 @@
+{
+ "git_commit": "228c488",
+ "protocol_sha256": "f50c79eadf7eda6910ea77f707ad50b0821a34440fda73271da67a2d67fdef95",
+ "jobs": [
+  {
+   "key": "R",
+   "config": "configs/v1.yaml",
+   "world": 0,
+   "kind": "sequential",
+   "stream": 0,
+   "eps": 0.0,
+   "updates": 16
+  },
+  {
+   "key": "R",
+   "config": "configs/v1.yaml",
+   "world": 1,
+   "kind": "sequential",
+   "stream": 0,
+   "eps": 0.0,
+   "updates": 16
+  },
+  {
+   "key": "P",
+   "config": "configs/v1.yaml",
+   "world": 0,
+   "kind": "sequential",
+   "stream": 0,
+   "eps": 1e-07,
+   "updates": 16
+  },
+  {
+   "key": "P",
+   "config": "configs/v1.yaml",
+   "world": 1,
+   "kind": "sequential",
+   "stream": 0,
+   "eps": 1e-07,
+   "updates": 16
+  },
+  {
+   "key": "F0",
+   "config": "configs/v1.yaml",
+   "world": 0,
+   "kind": "fast",
+   "stream": 0,
+   "eps": 0.0,
+   "updates": 16
+  },
+  {
+   "key": "F0",
+   "config": "configs/v1.yaml",
+   "world": 1,
+   "kind": "fast",
+   "stream": 0,
+   "eps": 0.0,
+   "updates": 16
+  }
+ ],
+ "bitwise_identical_cells": 6,
+ "expected_cells": 6,
+ "perturbation_changes_result": true,
+ "budget_mib": 2014,
+ "serial_memory": {
+  "samples": 139,
+  "errors": [],
+  "min_physical_available": 13455638528,
+  "min_commit_available": 19908648960,
+  "max_pagefile_used": 171372544,
+  "pagefile_growth": 0,
+  "max_worker_rss": 9441280,
+  "max_worker_private": 1781760,
+  "max_parent_rss": 377810944,
+  "max_parent_private": 1407303680
+ },
+ "pooled_memory": {
+  "samples": 83,
+  "errors": [],
+  "min_physical_available": 12282916864,
+  "min_commit_available": 16488230912,
+  "max_pagefile_used": 171372544,
+  "pagefile_growth": 0,
+  "max_worker_rss": 372764672,
+  "max_worker_private": 1404866560,
+  "max_parent_rss": 377810944,
+  "max_parent_private": 1407303680
+ },
+ "gate": "PASS",
+ "finished_utc": "2026-09-10T13:27:37.295376+00:00"
+}
