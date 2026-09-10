@@ -4778,3 +4778,33 @@ Per the amendment, SO1 may now be relaunched ONCE in fresh paths with the
 anchor satisfied by these matched-stream checks. Before that launch: retrofit
 the SO1 runner to the new restartability/logging guidance and do the
 pre-launch performance pass.
+
+# SO1 relaunch code ready; real-model restart test held by host memory (2026-09-10)
+
+Read BUDGETED_EXECUTION_ECONOMY_PLAN.md (merged PR #1): an explicit DRAFT, not
+to be frozen yet; its B0/B1 rungs are cheap and follow SO1. Decided to keep SO1
+single-stream as registered: the diagnostic amendment already fixed the spread
+as disclosure-only with P3 scored as registered, and changing that after seeing
+the spread would be a post-hoc rule change (and triple the cost).
+
+Commit 1120207 implements the licensed relaunch (protocol
+SO1-budget-bracket-v3-relaunch; artifacts/so1_restart2,
+reports/so1_budget_bracket_r2.json): the committed diagnostic is the anchor,
+the v2 cross-stream corner comparison is descriptive, the C_lo resampling
+spread is disclosed beside paired differences, and grid/streams/thresholds/
+P1-P5/Stage 2 pairing are unchanged. Per the new AGENTS.md rules it resumes on
+relaunch from validated durable cells, reuses a current-commit gate, writes a
+timestamped run.log and atomic status.json with ETA, and schedules longest
+cells first (the only bitwise-safe performance win found; the worker cap stays
+2 per the restart amendment). The scorer verifies v3, still verifies the v2
+report, and records whether rerun corners reproduce the first attempt bitwise.
+268 tests pass, including a mocked interrupt-then-resume test in which no cell
+runs twice and a relaunch at another commit refuses with the mismatch named.
+
+The real-model restart test (--smoke-divisor 256, kill after the first cell,
+relaunch) could not start: min(physical, commit) free memory was 4.00 GiB
+against the 4 GiB reserve, so the pool refused its first worker, logged the
+failure with traceback and marked status.json failed. No scientific cell ran.
+Next: when about 8 GB is free, run the smoke restart test, then
+`python tools/run_so1_restart.py` detached (estimated ~4-5 h pooled for 30
+oracle cells plus conditional Stage 2).
