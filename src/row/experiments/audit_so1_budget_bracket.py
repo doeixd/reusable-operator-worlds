@@ -16,9 +16,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import subprocess
 import time
 import sys
+import traceback
 from dataclasses import replace
 from pathlib import Path
 
@@ -38,7 +40,7 @@ from row.models import FastRotatedDiscreteLibraryLearner
 from row.pool import PoolBudget, free_memory_bytes, measure_rss_bytes, run_pool
 from row.rotated_world import generate_rotated_world
 from row.experiments.so1_storage import (
-    atomic_json, cell_stamp, digest, environment, fingerprint, load_cell,
+    atomic_json, cell_stamp, digest, environment, fingerprint, load_cell, log_line,
     memory_snapshot, now, resolved, restore_model, save_model, world_digest, writer_lock,
 )
 
@@ -47,9 +49,17 @@ WORLDS_REQUIRED = 2
 BATCHES = (2, 64)
 GRADIENT_LEVELS = (16384, 32768, 65536, 131072, 262144)
 STAGE_D_REPORT = Path("reports/rotated_g5r_interference.json")
+DIAGNOSTIC_PLAN = Path("SO1_ANCHOR_DIAGNOSTIC_AMENDMENT.md")
+DIAGNOSTIC_REPORT = Path("reports/so1_anchor_diagnostic.json")
+FIRST_ATTEMPT_REPORT = Path("reports/so1_budget_bracket.json")
 ANCHOR_TOLERANCE = 0.02
 PERSISTENCE_LATER = 2
-PROTOCOL_ID = "SO1-budget-bracket-v2-restart"
+# v2 (c433f61) stopped at its cross-stream anchor; the diagnostic amendment
+# licensed exactly one relaunch in fresh paths with the matched-stream anchor.
+PROTOCOL_ID = "SO1-budget-bracket-v3-relaunch"
+SMOKE_ROOT = Path("artifacts/so1_r2_smoke")
+# Measured fast-kind seconds per update in the v2 corner cells (scheduling/ETA only).
+SECONDS_PER_UPDATE = {2: 0.0305, 64: 0.342}
 IMPLEMENTATION = FastRotatedDiscreteLibraryLearner.implementation
 # Sampling-stream cell indices: 100-109 oracle grid, 110-111 stage 2.
 ORACLE_CELL_INDEX = {(b, g): 100 + i * len(GRADIENT_LEVELS) + j
@@ -239,9 +249,35 @@ def classify(oracle_any: bool, learned_any: bool | None) -> str:
     return "ORACLE_AND_LEARNED_PASS"  # SO2 licensed at this envelope
 
 
-def protocol(config) -> dict:
+def diagnostic_anchor() -> dict:
+    """The relaunch anchor: the frozen matched-stream diagnostic must have
+    classified the fast kind IMPLEMENTATION_EQUIVALENT (amendment 7587a5a)."""
+    report = json.loads(DIAGNOSTIC_REPORT.read_text(encoding="utf-8"))
+    if (report.get("complete") is not True or report.get("frozen_plan") != DIAGNOSTIC_PLAN.as_posix()
+            or report.get("classification") != "IMPLEMENTATION_EQUIVALENT"):
+        raise SystemExit("relaunch requires a complete IMPLEMENTATION_EQUIVALENT anchor diagnostic")
+    per_world = report["per_world"]
+    return {
+        "source": DIAGNOSTIC_REPORT.as_posix(), "sha256": digest(DIAGNOSTIC_REPORT),
+        "diagnostic_commit": report["git_commit"], "classification": report["classification"],
+        "matched_stream_abs_error": {w: max(r["d_impl0"], r["d_impl100"]) for w, r in per_world.items()},
+        "passes": True,
+    }
+
+
+def spread_disclosure() -> dict:
+    """Disclosure only (amendment: P3 is scored exactly as registered)."""
+    report = json.loads(DIAGNOSTIC_REPORT.read_text(encoding="utf-8"))
+    return {"budget": "C_lo (B=2, 16,384 example-gradients), five fast streams",
+            "per_world": {w: {"range": r["spread"], "sd": r["fast_sd"]} for w, r in report["per_world"].items()}}
+
+
+def protocol(config, updates_divisor: int = 1) -> dict:
     return {
         "id": PROTOCOL_ID, "frozen_plan": "SO1_BUDGET_BRACKET_PLAN.md",
+        "relaunch_of": FIRST_ATTEMPT_REPORT.as_posix(),
+        "anchor": "matched-stream diagnostic IMPLEMENTATION_EQUIVALENT; cross-stream corners descriptive",
+        "updates_divisor": updates_divisor,
         "implementation": IMPLEMENTATION, "worlds": list(WORLDS),
         "worlds_required": WORLDS_REQUIRED, "batches": list(BATCHES),
         "gradient_levels": list(GRADIENT_LEVELS), "threshold": THRESHOLD,
@@ -250,7 +286,8 @@ def protocol(config) -> dict:
         "sampling_stream": "SeedSequence([1702, world, oracle_cell_index]); stage 2 paired to oracle",
         "resolved_configs": {str(w): resolved(world_config(config, w)) for w in WORLDS},
         "input_sha256": {p.as_posix(): digest(p) for p in (
-            Path("SO1_BUDGET_BRACKET_PLAN.md"), Path("SO1_RESTART_AMENDMENT.md"), STAGE_D_REPORT)},
+            Path("SO1_BUDGET_BRACKET_PLAN.md"), Path("SO1_RESTART_AMENDMENT.md"), STAGE_D_REPORT,
+            DIAGNOSTIC_PLAN, DIAGNOSTIC_REPORT, FIRST_ATTEMPT_REPORT)},
         "environment": environment(),
         "global_lr": config.discrete_model.global_learning_rate,
         "task_lr": config.discrete_model.task_learning_rate,
@@ -263,12 +300,15 @@ def protocol(config) -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=Path("configs/v1.yaml"))
-    parser.add_argument("--output", type=Path, default=Path("reports/so1_budget_bracket.json"))
+    parser.add_argument("--output", type=Path, default=Path("reports/so1_budget_bracket_r2.json"))
     parser.add_argument("--measured-rss-mib", type=int, required=True,
-                        help="resident size of one batch-64 fast cell, measured before launch")
+                        help="calibrated per-worker budget for the fast SO1 family")
     parser.add_argument("--hard-cap", type=int, default=None)
-    parser.add_argument("--gate", type=Path, default=Path("artifacts/so1_restart/gate.json"))
-    parser.add_argument("--artifact-root", type=Path, default=Path("artifacts/so1_restart/cells"))
+    parser.add_argument("--gate", type=Path, default=Path("artifacts/so1_restart2/gate.json"))
+    parser.add_argument("--artifact-root", type=Path, default=Path("artifacts/so1_restart2/cells"))
+    parser.add_argument("--smoke-divisor", type=int, default=1,
+                        help="restart-path test only: divide every budget, write under "
+                             f"{SMOKE_ROOT}; never a scientific cell")
     parser.add_argument("--dry-run", action="store_true",
                         help="structural check: 16 updates per corner cell, world 0, no report")
     args = parser.parse_args()
@@ -289,34 +329,51 @@ def main() -> None:
         print(f"dry-run learned: code_change {r['code_relative_change']:.3e} finite {r['finite']}")
         return
 
+    if args.smoke_divisor != 1:
+        args.hard_cap = 2
+        args.output = SMOKE_ROOT / "report.json"
+        args.artifact_root = SMOKE_ROOT / "cells"
     output_lock = Path("artifacts/so1_report_locks") / (fingerprint(str(args.output.resolve())) + ".lock")
     with writer_lock(output_lock), writer_lock(args.artifact_root.parent / "report.lock"):
         run_grid(args, base)
 
 
 def run_grid(args, base):
-    if subprocess.run([sys.executable, "tools/check_prereg.py"]).returncode != 0:
-        raise SystemExit("preregistration check failed")
-    if subprocess.run([sys.executable, "tools/check_invalid.py"]).returncode != 0:
-        raise SystemExit("invalid-artifact check failed")
-    require_clean_code(args.output)
-    gate = json.loads(args.gate.read_text(encoding="utf-8"))
-    if (gate.get("gate") != "PASS" or gate.get("git_commit") != git_commit()
-            or gate.get("implementation") != IMPLEMENTATION
-            or gate.get("protocol_sha256") != fingerprint(protocol(base))):
-        raise SystemExit("current-commit fast SO1 pool gate required")
-    if args.hard_cap != 2 or args.measured_rss_mib < gate["budget_mib"]:
-        raise SystemExit("restart requires the calibrated two-worker budget")
+    smoke = args.smoke_divisor != 1
+    run_dir = args.artifact_root.parent
+    run_log = run_dir / "run.log"
+    status_path = run_dir / "status.json"
 
-    stage_d = json.loads(STAGE_D_REPORT.read_text(encoding="utf-8"))
-    expected = protocol(base)
-    manifest_path = args.artifact_root.parent / "run_manifest.json"
+    def log(message: str) -> None:
+        log_line(run_log, message)
+        print(message, flush=True)
+
+    if not smoke:
+        if subprocess.run([sys.executable, "tools/check_prereg.py"]).returncode != 0:
+            raise SystemExit("preregistration check failed")
+        if subprocess.run([sys.executable, "tools/check_invalid.py"]).returncode != 0:
+            raise SystemExit("invalid-artifact check failed")
+        require_clean_code(args.output)
+    expected = protocol(base, args.smoke_divisor)
+    if not smoke:
+        gate = json.loads(args.gate.read_text(encoding="utf-8"))
+        if (gate.get("gate") != "PASS" or gate.get("git_commit") != git_commit()
+                or gate.get("implementation") != IMPLEMENTATION
+                or gate.get("protocol_sha256") != fingerprint(expected)):
+            raise SystemExit("current-commit fast SO1 pool gate required")
+        if args.hard_cap != 2 or args.measured_rss_mib < gate["budget_mib"]:
+            raise SystemExit("restart requires the calibrated two-worker budget")
+    anchor = diagnostic_anchor()
+
+    manifest_path = run_dir / "run_manifest.json"
     manifest_identity = {"git_commit": git_commit(), "protocol_sha256": fingerprint(expected),
                          "output": str(args.output.resolve()), "artifact_root": str(args.artifact_root.resolve())}
     if manifest_path.exists():
         manifest = json.loads(manifest_path.read_text())
-        if {k: manifest.get(k) for k in manifest_identity} != manifest_identity:
-            raise ValueError("run manifest mismatch; preserve the old batch before restarting")
+        mismatch = [k for k in manifest_identity if manifest.get(k) != manifest_identity[k]]
+        if mismatch:
+            raise SystemExit(f"run manifest mismatch on {mismatch}; this run must resume at its launch "
+                             "commit and protocol, or be preserved before a new run")
     else:
         manifest = manifest_identity | {"started_utc": now()}
         atomic_json(manifest_path, manifest)
@@ -326,23 +383,45 @@ def run_grid(args, base):
             raise SystemExit("existing report has a different protocol fingerprint")
         if out.get("git_commit") != git_commit():
             raise SystemExit("existing report came from a different git commit")
+        if out.get("complete"):
+            log("report already complete; nothing to do")
+            return
+        log(f"RESUME: {sum(len(v) for v in out['cells'].values())} cells already recorded")
     else:
         out = {"frozen_plan": "SO1_BUDGET_BRACKET_PLAN.md", "git_commit": git_commit(),
                "protocol": expected, "protocol_sha256": fingerprint(expected),
                "launch": {}, "cells": {}, "complete": False, "started_utc": manifest["started_utc"]}
+        log(f"LAUNCH {PROTOCOL_ID} at {git_commit()}{' (SMOKE, divisor %d)' % args.smoke_divisor if smoke else ''}")
     if out.get("protocol_sha256") != fingerprint(expected):
         raise SystemExit("report protocol hash mismatch")
     if out["started_utc"] != manifest["started_utc"]:
         raise ValueError("report/run-manifest start time mismatch")
+    out["anchor"] = anchor
     out["complete"] = False
     out.setdefault("launch_history", []).append(out["launch"])
     out["launch"] = {"free_memory_bytes_at_launch": free_memory_bytes(),
                      "measured_rss_bytes": args.measured_rss_mib * 2**20,
-                     "pool_gate_commit": gate.get("git_commit"),
-                     "gate_path": str(args.gate), "gate_sha256": digest(args.gate),
+                     "pool_gate_commit": None if smoke else gate.get("git_commit"),
+                     "gate_path": None if smoke else str(args.gate),
+                     "gate_sha256": None if smoke else digest(args.gate),
                      "manifest_path": str(manifest_path), "manifest_sha256": digest(manifest_path),
                      "artifact_root": str(args.artifact_root)}
     atomic_json(args.output, out)
+
+    progress = {"done": 0, "total": 0, "seconds_per_update": {}}
+
+    def write_status(state: str, pending: list[dict]) -> None:
+        rates = progress["seconds_per_update"]
+        per = {b: (sum(r) / len(r) if r else SECONDS_PER_UPDATE[b]) for b, r in
+               ((b, rates.get(b, [])) for b in BATCHES)}
+        eta = sum(j["updates"] * per[j["batch"]] for j in pending) / max(1, args.hard_cap or 1) / 3600
+        atomic_json(status_path, {
+            "state": state, "protocol": PROTOCOL_ID, "git_commit": git_commit(), "pid": os.getpid(),
+            "started_utc": out["started_utc"], "updated_utc": now(),
+            "cells_done": sum(len(v) for v in out["cells"].values()), "cells_this_phase": progress["total"],
+            "pending": [f"{j['key']} w{j['world']}" for j in pending],
+            "eta_hours_naive": round(eta, 2),
+        })
 
     def pending_jobs(oracle: bool, grid) -> list[dict]:
         jobs = []
@@ -350,8 +429,8 @@ def run_grid(args, base):
             key = cell_key(batch, g, oracle)
             for w in WORLDS:
                 job = {"key": key, "config": str(args.config), "world": w, "oracle": oracle,
-                       "batch": batch, "updates": g // batch, "cell_index": cell_index,
-                       "sampling_index": ORACLE_CELL_INDEX[(batch, g)],
+                       "batch": batch, "updates": max(1, (g // batch) // args.smoke_divisor),
+                       "cell_index": cell_index, "sampling_index": ORACLE_CELL_INDEX[(batch, g)],
                        "git_commit": git_commit(), "protocol_sha256": out["protocol_sha256"],
                        "resolved_sha256": fingerprint(expected["resolved_configs"][str(w)]),
                        "artifact": str(args.artifact_root / key / f"world_{w}")}
@@ -361,6 +440,8 @@ def run_grid(args, base):
                     old = out["cells"].get(key, {}).get(str(w))
                     if old is not None and old != result:
                         raise ValueError("report and durable cell disagree")
+                    if old is None:
+                        log(f"[{key} w{w}] reused validated durable cell")
                     out["cells"].setdefault(key, {})[str(w)] = result
                     atomic_json(args.output, out)
                 elif str(w) in out["cells"].get(key, {}):
@@ -371,50 +452,63 @@ def run_grid(args, base):
 
     budget = PoolBudget(measured_rss_bytes=args.measured_rss_mib * 2**20, hard_cap=args.hard_cap)
 
-    def run_and_record(jobs: list[dict]) -> None:
-        # Smallest budgets first so the anchor corners and cheap cells land early.
-        jobs.sort(key=lambda j: (j["updates"] * j["batch"], j["batch"], j["world"]))
+    def run_and_record(jobs: list[dict], phase: str) -> None:
+        # Longest first: with a two-worker cap this shortens the tail. Order
+        # cannot change any number (the pool gate proves serial == pooled).
+        jobs.sort(key=lambda j: (-j["updates"] * SECONDS_PER_UPDATE[j["batch"]], j["key"], j["world"]))
+        progress["total"] = len(jobs)
+        pending = list(jobs)
+        log(f"PHASE {phase}: {len(jobs)} cells to run")
+        write_status(f"running {phase}", pending)
+
         def record(job, result):
             out["cells"].setdefault(job["key"], {})[str(job["world"])] = result
             atomic_json(args.output, out)
-            print(f"[{job['key']} w{job['world']}] durable cell saved ({result['seconds']}s)", flush=True)
+            progress["seconds_per_update"].setdefault(job["batch"], []).append(result["seconds"] / job["updates"])
+            pending.remove(job)
+            log(f"[{job['key']} w{job['world']}] saved: median {result['terminal_median']:.4f} "
+                f"passes {result['passes']} {result['persistence']} ({result['seconds']}s)")
+            write_status(f"running {phase}", pending)
+
         def available():
             sample = memory_snapshot()
             return min(sample["physical_available"], sample["commit_available"])
-        run_pool(run_job, jobs, budget, free_probe=available, on_result=record)
+        run_pool(run_job, jobs, budget, free_probe=available, on_result=record,
+                 log=lambda m: log_line(run_log, m))
 
-    run_and_record(pending_jobs(True, [(pair, ORACLE_CELL_INDEX[pair]) for pair in ANCHORS]))
+    try:
+        run_and_record(pending_jobs(True, ORACLE_CELL_INDEX.items()), "oracle grid")
+        # Descriptive only: the cross-stream corner comparison that failed as v2's gate.
+        stage_d = json.loads(STAGE_D_REPORT.read_text(encoding="utf-8"))
+        out["cross_stream_corner_comparison"] = anchor_check(out["cells"], stage_d)
+        out["resampling_spread_disclosure"] = spread_disclosure()
 
-    out["anchor"] = anchor_check(out["cells"], stage_d)
-    if not all(a["passes"] for a in out["anchor"].values()):
-        out["classification"] = "ANCHOR_FAILED_NOTHING_READ"
+        out["envelope"] = {str(b): envelope(out["cells"], b) for b in BATCHES}
+        out["paired_differences_b2_minus_b64"] = paired_differences(out["cells"])
+        out["dose_monotonicity"] = {str(b): {str(w): monotone({str(g): out["cells"][cell_key(b, g, True)][str(w)]["terminal_median"]
+                                                               for g in GRADIENT_LEVELS}) for w in WORLDS} for b in BATCHES}
+        out["cell_passes"] = {k: cell_passes(out["cells"], k) for k in out["cells"]}
+        oracle_any = any(out["envelope"][str(b)]["lowest_passing"] is not None for b in BATCHES)
+        atomic_json(args.output, out)
+        log(f"oracle grid complete; envelope {out['envelope']}")
+
+        learned_any = None
+        if oracle_any:
+            grid = [((b, out["envelope"][str(b)]["lowest_passing"]), STAGE2_CELL_INDEX[b])
+                    for b in BATCHES if out["envelope"][str(b)]["lowest_passing"] is not None]
+            run_and_record(pending_jobs(False, grid), "stage 2 learned routes")
+            out["cell_passes"] = {k: cell_passes(out["cells"], k) for k in out["cells"]}
+            learned_any = any(out["cell_passes"][cell_key(b, g, False)] for (b, g), _ in grid)
+        out["classification"] = classify(oracle_any, learned_any)
+        out["complete"] = True
         out["finished_utc"] = now()
         atomic_json(args.output, out)
-        raise SystemExit("ANCHOR FAILED: SO1 stopped; no dose curve or scientific verdict licensed")
-
-    atomic_json(args.output, out)
-    run_and_record(pending_jobs(True, ORACLE_CELL_INDEX.items()))
-
-    out["envelope"] = {str(b): envelope(out["cells"], b) for b in BATCHES}
-    out["paired_differences_b2_minus_b64"] = paired_differences(out["cells"])
-    out["dose_monotonicity"] = {str(b): {str(w): monotone({str(g): out["cells"][cell_key(b, g, True)][str(w)]["terminal_median"]
-                                                           for g in GRADIENT_LEVELS}) for w in WORLDS} for b in BATCHES}
-    out["cell_passes"] = {k: cell_passes(out["cells"], k) for k in out["cells"]}
-    oracle_any = any(out["envelope"][str(b)]["lowest_passing"] is not None for b in BATCHES)
-
-    learned_any = None
-    if oracle_any:
-        grid = [((b, out["envelope"][str(b)]["lowest_passing"]), STAGE2_CELL_INDEX[b])
-                for b in BATCHES if out["envelope"][str(b)]["lowest_passing"] is not None]
-        run_and_record(pending_jobs(False, grid))
-        out["cell_passes"] = {k: cell_passes(out["cells"], k) for k in out["cells"]}
-        learned_any = any(out["cell_passes"][cell_key(b, g, False)] for (b, g), _ in grid)
-    out["classification"] = classify(oracle_any, learned_any)
-    out["complete"] = True
-    out["finished_utc"] = now()
-    atomic_json(args.output, out)
-    print("envelope:", out["envelope"])
-    print("classification:", out["classification"])
+        write_status("complete", [])
+        log(f"COMPLETE classification {out['classification']}")
+    except BaseException as error:
+        log(f"FAILED: {error!r}\n{traceback.format_exc()}")
+        write_status(f"failed: {error!r}", [])
+        raise
 
 
 if __name__ == "__main__":

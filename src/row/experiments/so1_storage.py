@@ -45,6 +45,16 @@ def atomic_json(path, value):
     os.replace(tmp, path)
 
 
+def log_line(path, message):
+    """Append one timestamped, flushed line to a human-checkable run log."""
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8", newline="\n") as stream:
+        stream.write(f"{now()} {message}\n")
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
 @contextmanager
 def writer_lock(path):
     """OS lock released on process death; the lock file may safely remain."""

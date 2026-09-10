@@ -1,3 +1,4 @@
+import contextlib
 import copy
 import json
 import tempfile
@@ -13,7 +14,7 @@ from row.config import load_config
 from row.experiments.audit_so1_budget_bracket import protocol, run_job, run_grid
 from row.experiments.audit_so1_budget_bracket import anchor_check
 from row.experiments.score_so1_budget_bracket import (
-    LEVELS, persistence_from_scores, summarize_cells, validate_cell,
+    LEVELS, V2, V2_INPUTS, persistence_from_scores, summarize_cells, validate_cell,
     validate_report,
 )
 from row.experiments.so1_storage import atomic_json, cell_stamp, digest, fingerprint, load_cell, resolved, writer_lock
@@ -94,7 +95,9 @@ class SO1RestartTests(unittest.TestCase):
         # The real model/artifact check is exercised above. This fixture isolates
         # report completeness, freshness, anchor arithmetic and stop semantics.
         base = load_config("configs/v1.yaml")
-        p = protocol(base)
+        # The terminal v2 report must stay verifiable after the v3 relaunch code.
+        p = dict(protocol(base), id=V2)
+        p["input_sha256"] = {k: v for k, v in p["input_sha256"].items() if k in V2_INPUTS}
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
             gate_path = root / "gate.json"
@@ -132,53 +135,94 @@ class SO1RestartTests(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, "incomplete cell"):
                     validate_report(report_path, Path("configs/v1.yaml"), exit_path)
 
-    def test_grid_stops_at_anchors_and_pairs_conditional_streams(self):
-        base = load_config("configs/v1.yaml")
-        stage_d = json.loads(Path("reports/rotated_g5r_interference.json").read_text())
-        for anchor_failure in (True, False):
-            with self.subTest(anchor_failure=anchor_failure), tempfile.TemporaryDirectory() as temp:
-                root = Path(temp)
-                args = SimpleNamespace(config=Path("configs/v1.yaml"), output=root / "report.json",
-                                       gate=root / "gate.json", hard_cap=2, measured_rss_mib=768,
-                                       artifact_root=root / "cells")
-                atomic_json(args.gate, {"git_commit": "test", "gate": "PASS", "implementation": "batched_rotation_v1",
-                                       "protocol_sha256": fingerprint(protocol(base)), "budget_mib": 768})
-                dispatched, saved = [], {}
-                def pool(function, jobs, budget, **kwargs):
-                    for job in jobs:
-                        dispatched.append(job)
-                        median = .04
-                        name = {"O_b2_g16384": "C_lo", "O_b64_g262144": "C_hi"}.get(job["key"])
-                        if name:
-                            median = 3. if anchor_failure else stage_d["cells"][name][str(job["world"])]["terminal_median"]
-                        result = {"terminal_median": median, "passes": median <= .05,
-                                  "persistence": "not crossed", "seconds": 0.}
-                        path = Path(job["artifact"])
-                        atomic_json(path / "result.json", {})
-                        saved[str(path)] = result
-                        kwargs["on_result"](job, result)
-                    return []
-                with patch("row.experiments.audit_so1_budget_bracket.require_clean_code"), \
-                     patch("row.experiments.audit_so1_budget_bracket.subprocess.run", return_value=SimpleNamespace(returncode=0)), \
-                     patch("row.experiments.audit_so1_budget_bracket.git_commit", return_value="test"), \
-                     patch("row.experiments.audit_so1_budget_bracket.run_pool", side_effect=pool), \
-                     patch("row.experiments.audit_so1_budget_bracket.load_cell", side_effect=lambda path, stamp: saved[str(path)]):
-                    if anchor_failure:
-                        with self.assertRaisesRegex(SystemExit, "ANCHOR FAILED"):
-                            run_grid(args, base)
-                        self.assertEqual(len(dispatched), 6)
-                        self.assertFalse(json.loads(args.output.read_text())["complete"])
-                    else:
-                        run_grid(args, base)
-                        self.assertEqual(len(dispatched), 36)
-                        learned = [j for j in dispatched if not j["oracle"]]
-                        self.assertEqual(len(learned), 6)
-                        for job in learned:
-                            paired = next(j for j in dispatched if j["oracle"] and j["world"] == job["world"]
-                                          and j["batch"] == job["batch"] and j["updates"] == job["updates"])
-                            self.assertEqual(job["sampling_index"], paired["sampling_index"])
-                            self.assertEqual(job["resolved_sha256"], paired["resolved_sha256"])
+    def _grid_harness(self, root, base, interrupt_after=None):
+        args = SimpleNamespace(config=Path("configs/v1.yaml"), output=root / "report.json",
+                               gate=root / "gate.json", hard_cap=2, measured_rss_mib=768,
+                               artifact_root=root / "cells", smoke_divisor=1)
+        atomic_json(args.gate, {"git_commit": "test", "gate": "PASS", "implementation": "batched_rotation_v1",
+                               "protocol_sha256": fingerprint(protocol(base)), "budget_mib": 768})
+        state = {"dispatched": [], "saved": {}}
 
+        def pool(function, jobs, budget, **kwargs):
+            for job in jobs:
+                if interrupt_after is not None and len(state["dispatched"]) == interrupt_after:
+                    raise RuntimeError("simulated interruption")
+                state["dispatched"].append(job)
+                result = {"terminal_median": .04, "passes": True, "persistence": "not crossed", "seconds": 1.}
+                path = Path(job["artifact"])
+                atomic_json(path / "result.json", {})
+                state["saved"][str(path)] = result
+                kwargs["on_result"](job, result)
+            return []
+        patches = [
+            patch("row.experiments.audit_so1_budget_bracket.require_clean_code"),
+            patch("row.experiments.audit_so1_budget_bracket.subprocess.run", return_value=SimpleNamespace(returncode=0)),
+            patch("row.experiments.audit_so1_budget_bracket.git_commit", return_value="test"),
+            patch("row.experiments.audit_so1_budget_bracket.run_pool", side_effect=pool),
+            patch("row.experiments.audit_so1_budget_bracket.load_cell",
+                  side_effect=lambda path, stamp: state["saved"][str(path)]),
+        ]
+        return args, state, patches
+
+    def test_relaunch_runs_whole_grid_longest_first_and_pairs_conditional_streams(self):
+        base = load_config("configs/v1.yaml")
+        with tempfile.TemporaryDirectory() as temp:
+            args, state, patches = self._grid_harness(Path(temp), base)
+            with contextlib.ExitStack() as stack:
+                for p in patches:
+                    stack.enter_context(p)
+                run_grid(args, base)
+            dispatched = state["dispatched"]
+            self.assertEqual(len(dispatched), 36)  # no anchor stop in v3
+            self.assertEqual((dispatched[0]["batch"], dispatched[0]["updates"]), (2, 131072))
+            report = json.loads(args.output.read_text())
+            self.assertTrue(report["complete"])
+            self.assertEqual(report["anchor"]["classification"], "IMPLEMENTATION_EQUIVALENT")
+            self.assertIn("resampling_spread_disclosure", report)
+            self.assertIn("cross_stream_corner_comparison", report)
+            learned = [j for j in dispatched if not j["oracle"]]
+            self.assertEqual(len(learned), 6)
+            for job in learned:
+                paired = next(j for j in dispatched if j["oracle"] and j["world"] == job["world"]
+                              and j["batch"] == job["batch"] and j["updates"] == job["updates"])
+                self.assertEqual(job["sampling_index"], paired["sampling_index"])
+                self.assertEqual(job["resolved_sha256"], paired["resolved_sha256"])
+            status = json.loads((Path(temp) / "status.json").read_text())
+            self.assertEqual(status["state"], "complete")
+            self.assertIn("COMPLETE", (Path(temp) / "run.log").read_text())
+
+    def test_interrupted_relaunch_resumes_without_rerunning_a_cell(self):
+        base = load_config("configs/v1.yaml")
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            args, state, patches = self._grid_harness(root, base, interrupt_after=5)
+            with contextlib.ExitStack() as stack:
+                for p in patches:
+                    stack.enter_context(p)
+                with self.assertRaisesRegex(RuntimeError, "simulated interruption"):
+                    run_grid(args, base)
+            first = [(j["key"], j["world"]) for j in state["dispatched"]]
+            self.assertEqual(len(first), 5)
+            self.assertIn("failed", json.loads((root / "status.json").read_text())["state"])
+            # Relaunch the same command: completed cells are reused, never rerun.
+            args2, state2, patches2 = self._grid_harness(root, base)
+            state2["saved"].update(state["saved"])
+            with contextlib.ExitStack() as stack:
+                for p in patches2:
+                    stack.enter_context(p)
+                run_grid(args2, base)
+            second = [(j["key"], j["world"]) for j in state2["dispatched"]]
+            self.assertFalse(set(first) & set(second))
+            self.assertEqual(len(first) + len(second), 36)
+            log = (root / "run.log").read_text()
+            self.assertIn("RESUME: 5 cells already recorded", log)
+            self.assertTrue(json.loads(args2.output.read_text())["complete"])
+            # A relaunch at a different commit must refuse, naming the mismatch.
+            with patch("row.experiments.audit_so1_budget_bracket.git_commit", return_value="other"),                  patch("row.experiments.audit_so1_budget_bracket.require_clean_code"),                  patch("row.experiments.audit_so1_budget_bracket.subprocess.run", return_value=SimpleNamespace(returncode=0)):
+                atomic_json(args2.gate, {"git_commit": "other", "gate": "PASS", "implementation": "batched_rotation_v1",
+                                         "protocol_sha256": fingerprint(protocol(base)), "budget_mib": 768})
+                with self.assertRaisesRegex(SystemExit, "git_commit"):
+                    run_grid(args2, base)
 
 if __name__ == "__main__":
     unittest.main()

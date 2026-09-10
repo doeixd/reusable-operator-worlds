@@ -24,6 +24,11 @@ from row.experiments.so1_storage import (
 LEVELS = (16384, 32768, 65536, 131072, 262144)
 WORLDS = ("0", "1", "2")
 THRESHOLD = 0.05
+V2, V3 = "SO1-budget-bracket-v2-restart", "SO1-budget-bracket-v3-relaunch"
+V2_INPUTS = {"SO1_BUDGET_BRACKET_PLAN.md", "SO1_RESTART_AMENDMENT.md", "reports/rotated_g5r_interference.json"}
+V3_INPUTS = V2_INPUTS | {"SO1_ANCHOR_DIAGNOSTIC_AMENDMENT.md", "reports/so1_anchor_diagnostic.json",
+                         "reports/so1_budget_bracket.json"}
+CORNERS = ("O_b2_g16384", "O_b64_g262144")
 
 
 def require(condition, message):
@@ -177,14 +182,17 @@ def validate_report(report_path, config_path, exit_path):
     report = json.loads(report_path.read_text())
     finite_tree(report)
     p = report["protocol"]
-    require(p["id"] == "SO1-budget-bracket-v2-restart", "wrong protocol")
+    require(p["id"] in (V2, V3), "wrong protocol")
+    v3 = p["id"] == V3
+    if v3:
+        require(p["updates_divisor"] == 1, "smoke protocol is never scientific")
     require(p["worlds"] == [0, 1, 2] and p["batches"] == [2, 64] and p["gradient_levels"] == list(LEVELS), "registered grid changed")
     require(p["threshold"] == THRESHOLD and p["anchor_tolerance"] == 0.02 and p["worlds_required"] == 2
             and p["persistence_later_checkpoints"] == 2, "registered thresholds changed")
     require(report["protocol_sha256"] == fingerprint(p), "protocol digest mismatch")
     for path, sha in p["input_sha256"].items():
         require(digest(path) == sha, f"input changed: {path}")
-    require(set(p["input_sha256"]) == {"SO1_BUDGET_BRACKET_PLAN.md", "SO1_RESTART_AMENDMENT.md", "reports/rotated_g5r_interference.json"}, "missing protocol inputs")
+    require(set(p["input_sha256"]) == (V3_INPUTS if v3 else V2_INPUTS), "missing protocol inputs")
     base = load_config(config_path)
     configs = {w: replace(base, world=replace(base.world, seed=int(w))) for w in WORLDS}
     require(p["resolved_configs"] == {w: resolved(c) for w, c in configs.items()}, "full resolved configuration changed")
@@ -203,7 +211,7 @@ def validate_report(report_path, config_path, exit_path):
     require(exit_record["git_commit"] == report["git_commit"], "wrong exit record")
     started, finished = map(datetime.fromisoformat, (report["started_utc"], report["finished_utc"]))
     require(finished >= started and datetime.fromisoformat(exit_record["finished_utc"]) >= finished, "stale exit/report")
-    anchor_only = report.get("classification") == "ANCHOR_FAILED_NOTHING_READ"
+    anchor_only = not v3 and report.get("classification") == "ANCHOR_FAILED_NOTHING_READ"
     cells = report["cells"]
     oracle_keys = {f"O_b{b}_g{g}" for b in (2, 64) for g in LEVELS}
     anchors = {"O_b2_g16384": "C_lo", "O_b64_g262144": "C_hi"}
@@ -237,7 +245,28 @@ def validate_report(report_path, config_path, exit_path):
             rows[w] = {"so1": a, "stage_d": b, "abs_error": abs(a-b), "same_verdict": same,
                        "passes": abs(a-b) <= 0.02 and same}
         computed_anchors[key] = {"stage_d_cell": name, "worlds": rows, "passes": all(r["passes"] for r in rows.values())}
-    require(report["anchor"] == computed_anchors, "anchor arithmetic mismatch")
+    extra = {}
+    if v3:
+        # Relaunch anchor: the matched-stream diagnostic, re-read independently.
+        diag = json.loads(Path("reports/so1_anchor_diagnostic.json").read_text())
+        require(diag["complete"] is True and diag["classification"] == "IMPLEMENTATION_EQUIVALENT"
+                and diag["frozen_plan"] == "SO1_ANCHOR_DIAGNOSTIC_AMENDMENT.md", "diagnostic anchor not satisfied")
+        errors = {w: max(r["d_impl0"], r["d_impl100"]) for w, r in diag["per_world"].items()}
+        require(all(e <= 0.02 for e in errors.values()) and max(r["d_repro"] for r in diag["per_world"].values()) <= 1e-6,
+                "diagnostic numbers do not support its classification")
+        require(report["anchor"] == {"source": "reports/so1_anchor_diagnostic.json",
+                                     "sha256": digest("reports/so1_anchor_diagnostic.json"),
+                                     "diagnostic_commit": diag["git_commit"], "classification": diag["classification"],
+                                     "matched_stream_abs_error": errors, "passes": True}, "anchor record mismatch")
+        require(report["cross_stream_corner_comparison"] == computed_anchors, "corner comparison arithmetic mismatch")
+        require(report["resampling_spread_disclosure"]["per_world"] ==
+                {w: {"range": r["spread"], "sd": r["fast_sd"]} for w, r in diag["per_world"].items()}, "spread disclosure mismatch")
+        first = json.loads(Path("reports/so1_budget_bracket.json").read_text())["cells"]
+        extra["corner_reproduction_of_first_attempt"] = {
+            key: {w: cells[key][w]["final_per_task"] == first[key][w]["final_per_task"] for w in WORLDS}
+            for key in CORNERS}
+    else:
+        require(report["anchor"] == computed_anchors, "anchor arithmetic mismatch")
     if anchor_only:
         require(not all(a["passes"] for a in computed_anchors.values()), "false anchor failure")
         require(report["complete"] is False and exit_record["exit_code"] != 0, "failed anchor must not look complete")
@@ -245,7 +274,8 @@ def validate_report(report_path, config_path, exit_path):
         return {"status": "VERIFIED_INSTRUMENT_GATE_FAILURE", "scientific_result_accepted": False,
                 "verified_cells": count, "anchor": computed_anchors}
     require(report["complete"] is True and exit_record["exit_code"] == 0, "run not successfully complete")
-    require(all(a["passes"] for a in computed_anchors.values()), "anchor gate failed")
+    if not v3:
+        require(all(a["passes"] for a in computed_anchors.values()), "anchor gate failed")
     estimates = summarize_cells(cells)
     expected_learned = {f"L_b{b}_g{estimates['envelope'][str(b)]['lowest_passing']}" for b in (2, 64)
                         if estimates["envelope"][str(b)]["lowest_passing"] is not None}
@@ -253,7 +283,7 @@ def validate_report(report_path, config_path, exit_path):
     for key in estimates.keys() - {"predictions"}:
         require(report[key] == estimates[key], f"independent {key} mismatch")
     return {"status": "VERIFIED_COMPLETE", "scientific_result_accepted": True,
-            "verified_cells": count, **estimates}
+            "verified_cells": count, **estimates, **extra}
 
 
 def main():

@@ -1,4 +1,9 @@
-"""Calibrate the repaired SO1 family, then launch its anchor-first grid.
+"""Calibrate the fast SO1 family, then launch (or resume) the licensed SO1 relaunch.
+
+Relaunching the same command resumes: validated durable cells are reused, a
+current-commit PASS gate is reused, and unfinished cells restart from
+initialization. The first attempt's paths (artifacts/so1_restart,
+reports/so1_budget_bracket.json) are never written.
 
 Run from clean committed code. All operational files live under artifacts/;
 the aggregate scientific report is the sole allowed untracked report.
@@ -25,9 +30,15 @@ from row.experiments.so1_storage import (
 )
 from row.pool import PoolBudget, run_pool
 
-ROOT = Path("artifacts/so1_restart")
+ROOT = Path("artifacts/so1_restart2")
+REPORT = Path("reports/so1_budget_bracket_r2.json")
 MIB = 2**20
 RESERVE = 4 * 2**30
+
+
+SCORER = [sys.executable, "-u", "-m", "row.experiments.score_so1_budget_bracket",
+          "--report", str(REPORT), "--exit-record", str(ROOT / "exit.json"),
+          "--output", str(ROOT / "independent_score.json")]
 
 
 def scientific(result):
@@ -114,15 +125,18 @@ def main():
     args = parser.parse_args()
     ROOT.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(1)
-    require_clean_code(Path("reports/so1_budget_bracket.json"))
+    require_clean_code(REPORT)
     with writer_lock(ROOT / "launcher.lock"):
         try:
-            existing_path = Path("reports/so1_budget_bracket.json")
-            if existing_path.exists():
-                existing = json.loads(existing_path.read_text())
-                if existing.get("complete") or existing.get("classification") == "ANCHOR_FAILED_NOTHING_READ":
-                    # Do not overwrite the original gate/exit of a terminal run.
-                    return subprocess.run([sys.executable, "-u", "-m", "row.experiments.score_so1_budget_bracket"]).returncode
+            if REPORT.exists() and json.loads(REPORT.read_text()).get("complete"):
+                # Do not overwrite the original gate/exit of a terminal run.
+                return subprocess.run(SCORER).returncode
+            gate_path = ROOT / "gate.json"
+            if gate_path.exists() and not args.reuse_gate:
+                old = json.loads(gate_path.read_text())
+                args.reuse_gate = (old.get("gate") == "PASS" and old.get("git_commit") == git_commit()
+                                   and old.get("protocol_sha256") == fingerprint(protocol(load_config(args.config))))
+                print(f"existing gate {'reused' if args.reuse_gate else 'stale; recalibrating'}", flush=True)
             if args.reuse_gate:
                 gate = json.loads((ROOT / "gate.json").read_text())
                 if (gate["git_commit"] != git_commit() or gate["gate"] != "PASS"
@@ -133,8 +147,9 @@ def main():
             if args.calibrate_only:
                 return 0
             host = host_precondition(gate["budget_mib"])
-            atomic_json(ROOT / "launch.json", {"git_commit": git_commit(), "started_utc": now(),
-                                               "host": host, "gate": gate["gate"]})
+            # One record per launch, so a resumed run keeps every launch's host evidence.
+            atomic_json(ROOT / f"launch_{time.time_ns()}.json", {"git_commit": git_commit(), "started_utc": now(),
+                                                                "host": host, "gate": gate["gate"]})
             with MemorySampler() as sampler:
                 process = subprocess.run([
                     sys.executable, "-u", "-m", "row.experiments.audit_so1_budget_bracket",
@@ -144,11 +159,10 @@ def main():
             atomic_json(ROOT / "exit.json", {"git_commit": git_commit(), "exit_code": process.returncode,
                                              "finished_utc": now()})
             print(f"SO1_EXIT={process.returncode}", flush=True)
-            report_path = Path("reports/so1_budget_bracket.json")
-            if report_path.exists():
-                report = json.loads(report_path.read_text())
-                if report.get("complete") or report.get("classification") == "ANCHOR_FAILED_NOTHING_READ":
-                    checked = subprocess.run([sys.executable, "-u", "-m", "row.experiments.score_so1_budget_bracket"])
+            if REPORT.exists():
+                report = json.loads(REPORT.read_text())
+                if report.get("complete"):
+                    checked = subprocess.run(SCORER)
                     atomic_json(ROOT / "scorer_exit.json", {"exit_code": checked.returncode, "finished_utc": now()})
                     if checked.returncode:
                         return checked.returncode
