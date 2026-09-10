@@ -33,7 +33,10 @@ from row.pool import PoolBudget, run_pool
 ROOT = Path("artifacts/so1_restart2")
 REPORT = Path("reports/so1_budget_bracket_r2.json")
 MIB = 2**20
-RESERVE = 4 * 2**30
+# Operational memory settings (PI-authorized 2026-09-10 to be lowered on this
+# host); recorded in every gate/launch/precondition record. They cannot change
+# any number: the bitwise serial-vs-pooled gate must still pass.
+OPS = {"reserve_bytes": 4 * 2**30, "budget_factor": 1.5, "pagefile_tolerance_bytes": 0}
 
 
 SCORER = [sys.executable, "-u", "-m", "row.experiments.score_so1_budget_bracket",
@@ -50,7 +53,7 @@ def host_precondition(budget_mib):
     for _ in range(6):
         time.sleep(10)
         samples.append(memory_snapshot())
-    need = RESERVE + 2 * budget_mib * MIB
+    need = OPS["reserve_bytes"] + 2 * budget_mib * MIB
     tenants = []
     for proc in psutil.process_iter(["pid", "name", "memory_info"]):
         try:
@@ -60,9 +63,9 @@ def host_precondition(budget_mib):
                                 "rss": info.rss, "private": info.private})
         except psutil.NoSuchProcess:
             pass
-    record = {"utc": now(), "budget_mib": budget_mib, "samples": samples, "tenants": tenants}
+    record = {"utc": now(), "budget_mib": budget_mib, "ops": dict(OPS), "samples": samples, "tenants": tenants}
     record["passes"] = (min(min(s["physical_available"], s["commit_available"]) for s in samples) > need
-                         and max(s["pagefile_used"] for s in samples) <= samples[0]["pagefile_used"])
+                         and max(s["pagefile_used"] for s in samples) <= samples[0]["pagefile_used"] + OPS["pagefile_tolerance_bytes"])
     atomic_json(ROOT / f"precondition_{time.time_ns()}.json", record)
     if not record["passes"]:
         raise RuntimeError("host precondition failed; see durable precondition record")
@@ -81,7 +84,7 @@ def calibrate(config):
         serial = [run_job(job) for job in jobs]
     serial_memory = sampler.summary()
     # Conservative floor plus 50% over observed interpreter/model peak.
-    budget_mib = max(768, math.ceil(1.5 * max(serial_memory["max_parent_rss"],
+    budget_mib = max(768, math.ceil(OPS["budget_factor"] * max(serial_memory["max_parent_rss"],
                                              serial_memory["max_parent_private"]) / MIB))
     host_precondition(budget_mib)
     def available():
@@ -97,9 +100,9 @@ def calibrate(config):
     pooled_memory = sampler.summary()
     identical = [canonical(scientific(a)) == canonical(scientific(b)) for a, b in zip(serial, pooled)]
     memory_ok = (not serial_memory["errors"] and not pooled_memory["errors"]
-                 and pooled_memory["min_physical_available"] > RESERVE
-                 and pooled_memory["min_commit_available"] > RESERVE
-                 and pooled_memory["pagefile_growth"] <= 0
+                 and pooled_memory["min_physical_available"] > OPS["reserve_bytes"]
+                 and pooled_memory["min_commit_available"] > OPS["reserve_bytes"]
+                 and pooled_memory["pagefile_growth"] <= OPS["pagefile_tolerance_bytes"]
                  and max(pooled_memory["max_worker_rss"], pooled_memory["max_worker_private"]) <= budget_mib * MIB
                  and any("(2 running)" in line for line in logs))
     gate = {"git_commit": git_commit(), "implementation": IMPLEMENTATION,
@@ -107,7 +110,7 @@ def calibrate(config):
             "jobs": jobs, "serial": list(map(scientific, serial)), "pooled": list(map(scientific, pooled)),
             "bitwise_identical_cells": sum(identical), "expected_cells": len(jobs),
             "serial_memory": serial_memory, "pooled_memory": pooled_memory,
-            "budget_mib": budget_mib, "hard_cap": 2, "memory_passes": memory_ok,
+            "budget_mib": budget_mib, "hard_cap": 2, "ops": dict(OPS), "memory_passes": memory_ok,
             "gate": "PASS" if all(identical) and memory_ok else "FAIL", "finished_utc": now()}
     atomic_json(ROOT / "gate_memory_samples.json", sampler.samples)
     atomic_json(ROOT / "gate.json", gate)
@@ -122,7 +125,12 @@ def main():
     parser.add_argument("--config", default="configs/v1.yaml")
     parser.add_argument("--calibrate-only", action="store_true")
     parser.add_argument("--reuse-gate", action="store_true")
+    parser.add_argument("--reserve-mib", type=int, default=4096)
+    parser.add_argument("--budget-factor", type=float, default=1.5)
+    parser.add_argument("--pagefile-tolerance-mib", type=int, default=0)
     args = parser.parse_args()
+    OPS.update(reserve_bytes=args.reserve_mib * MIB, budget_factor=args.budget_factor,
+               pagefile_tolerance_bytes=args.pagefile_tolerance_mib * MIB)
     ROOT.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(1)
     require_clean_code(REPORT)
@@ -154,6 +162,7 @@ def main():
                 process = subprocess.run([
                     sys.executable, "-u", "-m", "row.experiments.audit_so1_budget_bracket",
                     "--config", args.config, "--hard-cap", "2", "--measured-rss-mib", str(gate["budget_mib"]),
+                    "--reserve-mib", str(args.reserve_mib),
                 ])
             atomic_json(ROOT / "run_memory.json", {"summary": sampler.summary(), "samples": sampler.samples})
             atomic_json(ROOT / "exit.json", {"git_commit": git_commit(), "exit_code": process.returncode,

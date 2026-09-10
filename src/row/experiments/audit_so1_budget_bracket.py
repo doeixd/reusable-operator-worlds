@@ -304,6 +304,8 @@ def main() -> None:
     parser.add_argument("--measured-rss-mib", type=int, required=True,
                         help="calibrated per-worker budget for the fast SO1 family")
     parser.add_argument("--hard-cap", type=int, default=None)
+    parser.add_argument("--reserve-mib", type=int, default=4096,
+                        help="free-memory reserve the pool keeps (operational; recorded in the report)")
     parser.add_argument("--gate", type=Path, default=Path("artifacts/so1_restart2/gate.json"))
     parser.add_argument("--artifact-root", type=Path, default=Path("artifacts/so1_restart2/cells"))
     parser.add_argument("--smoke-divisor", type=int, default=1,
@@ -401,6 +403,7 @@ def run_grid(args, base):
     out.setdefault("launch_history", []).append(out["launch"])
     out["launch"] = {"free_memory_bytes_at_launch": free_memory_bytes(),
                      "measured_rss_bytes": args.measured_rss_mib * 2**20,
+                     "reserve_bytes": getattr(args, "reserve_mib", 4096) * 2**20,
                      "pool_gate_commit": None if smoke else gate.get("git_commit"),
                      "gate_path": None if smoke else str(args.gate),
                      "gate_sha256": None if smoke else digest(args.gate),
@@ -450,7 +453,8 @@ def run_grid(args, base):
                     jobs.append(job)
         return jobs
 
-    budget = PoolBudget(measured_rss_bytes=args.measured_rss_mib * 2**20, hard_cap=args.hard_cap)
+    budget = PoolBudget(measured_rss_bytes=args.measured_rss_mib * 2**20, hard_cap=args.hard_cap,
+                        reserve_bytes=getattr(args, "reserve_mib", 4096) * 2**20)
 
     def run_and_record(jobs: list[dict], phase: str) -> None:
         # Longest first: with a two-worker cap this shortens the tail. Order
