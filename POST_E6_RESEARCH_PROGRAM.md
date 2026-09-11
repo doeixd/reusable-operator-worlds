@@ -398,6 +398,8 @@ Rules for any staged rung:
 
 J0 result (2026-09-11, appended): `CF2_SUPPORTED` narrowly (pooled rho 0.521, p 0.002; world 0 within-world rho -0.55). The shape is a threshold: gradient route inference equals search on every library at or below 0.47 median NMSE and fails above about 0.6. J1 is therefore the preferred next mechanism, and any staged plan (J1c, J2) should treat 'library below ~0.5 before gradient routing' as a design input, registered as its own threshold.
 
+J1 result (2026-09-11, appended): `J1_FAILS`. Search-in-the-loop locks into the arbitrary assignment its first search makes on a random library (0% route change after round 3-5; ARI ~0), plateauing at 0.76. CF4 is refuted as registered. J1c and the Tier-1 single-operator probe are now primary; any J1 variant that delays or softens early commitment needs its own frozen plan.
+
 Revised ordering for B1b: J0 (census, minutes) -> a Tier-1 exploratory
 single-operator co-formation probe (one world, reduced budget; can co-formation
 succeed at all when routing is only clustering?) -> J1 and J1c as competing,

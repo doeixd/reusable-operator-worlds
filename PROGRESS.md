@@ -4945,3 +4945,38 @@ library at or above 0.62; within the poor regime the gap shrinks toward
 near-random libraries, where every route is bad. World 0's libraries all sit
 in the poor regime, which is why its within-world rho is negative. Report
 reports/j0_library_quality.json; logs reports/j0_library_quality_20260911.
+
+# J1 search-in-the-loop: J1_FAILS by early lock-in (2026-09-11)
+
+J1_SEARCH_IN_THE_LOOP_PLAN.md frozen at 7e7ff1b (protected 3e222e7); runner
+and tests at 33cda39; run 17:05-21:40 UTC in one process, exit 0; a real-run
+restart test passed (killed after the first cell, resumed byte-identically).
+The equivalence gate passed BITWISE on all three worlds (the J1 loop with the
+search hook off reproduces SO1's oracle cell at update 8,192). The independent
+scorer (score_j1_search_loop.py, written after the run because no code was
+committed during it; it re-scores every saved model) agrees: J1_FAILS, gate
+true, no problems. check_prereg and check_invalid pass.
+
+| world | J1 (search in loop) | SHAM (permuted search) | SO1 learned routes | SO1 oracle routes |
+|---|---|---|---|---|
+| 0 | 0.758 (not interpreted; world-0 check pending) | 0.978 | 0.961 | 0.624 |
+| 1 | 0.757 | 0.982 | 0.954 | 0.0046 |
+| 2 | 0.774 | 0.975 | 0.919 | 0.0051 |
+
+(terminal median query NMSE, B = 2, 65,536 updates, stream 103; threshold 0.05)
+
+Route-change fraction per re-search round (J1): after the first round at most
+8% of tasks changed route, and from rounds 3-5 onward 0% on every world for
+the remaining ~60 rounds. Per-position ARI between J1's slots and the teacher's
+primitives (analysis only) stayed at -0.01 to 0.04. SHAM re-assigned 97-100%
+of routes every round, as designed. Search cost 291-352 s per cell against
+2,266-2,739 s of training.
+
+Search-in-the-loop beats both SHAM and SO1's learned routes by about 0.2 on
+every world, so a hard commitment helps, but it locks in almost immediately:
+the first search runs on a random library, makes an arbitrary task-to-slot
+assignment, the library then fits that assignment, and the same assignment is
+again the best fit, a self-consistent fixed point. Tasks sharing a hidden
+operation never come to share a slot (ARI ~ 0), so the library can only fit
+64 arbitrary compositions and plateaus near 0.76. Report
+reports/j1_search_loop.json; logs reports/j1_search_loop_20260911.

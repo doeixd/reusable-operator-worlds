@@ -1493,3 +1493,15 @@ passed narrowly; the underlying pattern is a threshold in library quality.
 Early in joint training every library is on the poor side of that threshold,
 which is consistent with the hypothesis that joint acquisition fails because
 gradient routing cannot work until the library is already good.
+
+# Development provenance addendum: J1 search-in-the-loop (2026-09-11)
+
+Replacing gradient routing with periodic exhaustive route search on the
+current library (hard routes, 64 re-search rounds) did not form the rotated
+library at SO1's budget: median query NMSE 0.76-0.77, against 0.005 with
+oracle routes, 0.92-0.96 with learned soft routes and 0.97-0.98 for a sham
+that permutes the searched routes across tasks. The route assignment froze
+after three to five rounds on every world: the first search, on a random
+library, made an arbitrary commitment that the library then fitted and that
+remained optimal thereafter. Search removes the gradient weakness identified
+in J0 but not the need for an informed first commitment.

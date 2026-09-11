@@ -1,0 +1,4845 @@
+{
+ "frozen_plan": "J1_SEARCH_IN_THE_LOOP_PLAN.md",
+ "git_commit": "33cda39",
+ "protocol": {
+  "id": "J1-search-in-the-loop-v1",
+  "frozen_plan": "J1_SEARCH_IN_THE_LOOP_PLAN.md",
+  "worlds": [
+   0,
+   1,
+   2
+  ],
+  "batch": 2,
+  "updates": 65536,
+  "stream": 103,
+  "research_every": 1024,
+  "eq_stop": 8192,
+  "sham_seed": 1706,
+  "threshold": 0.05,
+  "implementation": "batched_rotation_v1",
+  "input_sha256": {
+   "J1_SEARCH_IN_THE_LOOP_PLAN.md": "7d0bc5fd2b31072f51637eb08179074692789c4d4beca201d768eff27baa7daa",
+   "reports/so1_budget_bracket_r2.json": "a771c215ffb9ce2e2c69830a7fd02f5583a25630c346e810e2662d93a3382fdc"
+  },
+  "environment": {
+   "python": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+   "torch": "2.13.0+cpu",
+   "numpy": "2.3.5",
+   "psutil": "7.2.1",
+   "platform": "Windows-11-10.0.26100-SP0",
+   "torch_threads": 8
+  }
+ },
+ "protocol_sha256": "1968acd4378ee6afba13b6c9fc22d9d1a33fbe3ae979f89fa0eb8b529b09d1ab",
+ "started_utc": "2026-09-11T17:05:31.877787+00:00",
+ "cells": {
+  "J1_w1": {
+   "mode": "j1",
+   "world": 1,
+   "updates": 65536,
+   "trajectory": {
+    "0": 1.5640377264399836,
+    "8192": 0.8336939247396647,
+    "16384": 0.8015821869896345,
+    "32768": 0.7842309505796744,
+    "49152": 0.7748261143095312,
+    "65536": 0.7566712052736215
+   },
+   "terminal_median": 0.7566712052736215,
+   "final_per_task": {
+    "task_458ad49c761df9ce": 0.7800004021371539,
+    "task_b38398cee3eff76f": 0.8010564394157541,
+    "task_d9a9e03198d222df": 0.7033281312624365,
+    "task_0078218c72b8396c": 0.7073211784022154,
+    "task_4ff7512856533160": 0.7512093715969916,
+    "task_ececf8b3f63e3d2d": 0.7532415072067079,
+    "task_0b591f8dc11ddf50": 0.6877410093511673,
+    "task_5b9de99b1c91cea6": 0.7695918415414001,
+    "task_134ad3fd74fe72d8": 0.8560756261647036,
+    "task_b60f12edd51bfc22": 0.8899441804333592,
+    "task_52c3f35f035d596d": 0.7703592576821329,
+    "task_a0e99b027d80bf4d": 0.8082475384992216,
+    "task_08e1cff4774af96a": 0.8204333894348246,
+    "task_c6e4a43596da5fdc": 0.8305291246580018,
+    "task_fe90ea7b829afbaa": 0.7394754819431778,
+    "task_3cdc8b83ab119eae": 0.8016235925511853,
+    "task_9ce5931c8b374684": 0.7611509469105714,
+    "task_2510c76443bf86a8": 0.8059638703714623,
+    "task_0bd488d7a92dfccf": 0.733529040298482,
+    "task_4fa0d880cca8ab57": 0.7511452848602083,
+    "task_cdd81ba39b429cae": 0.7305177438225083,
+    "task_60741c214cfe4fa5": 0.6242707940776397,
+    "task_a361d885e1243b6d": 0.8335277474279783,
+    "task_d4ac8cdf8c858712": 0.7305290102971024,
+    "task_fa0bb3ab83e47907": 0.7355820878493563,
+    "task_bbb6f81d21beb919": 0.7500683329142102,
+    "task_7413018a14746067": 0.7111145274315729,
+    "task_115e6d7a4e64dacc": 0.7659827720903488,
+    "task_8a7e37b33768c066": 0.878690132013945,
+    "task_cab1ef8ca433adb0": 0.730141865491518,
+    "task_239b608e5aaf575d": 0.7123388992322637,
+    "task_d588647a8f34f216": 0.7577064838680587,
+    "task_f70ab4d104e2476c": 0.8089509313218424,
+    "task_96ca8bcabdafc369": 0.8221213059343999,
+    "task_08b61b44c3a06ecd": 0.7462961747520652,
+    "task_e9023e100d3d30ca": 0.7053743099020275,
+    "task_6ab375e61358dd0e": 0.7343794167056072,
+    "task_da46f8a98ac30e28": 0.7339370362893181,
+    "task_fed69c403c3e5d2f": 0.758648961234202,
+    "task_6c5ae154bceb126e": 0.7145939334882793,
+    "task_2fb5dc11c713b303": 0.6723227492780474,
+    "task_4578cc7494b53e31": 0.793795219660667,
+    "task_98dc14eb4dde186c": 0.8381211312623692,
+    "task_b363f915dd490a0c": 0.7608352581796807,
+    "task_ee15ce946d1e7a0c": 0.6799732843215353,
+    "task_c872b51da8e4091c": 0.7556359266791844,
+    "task_2f0b4537fb035a2a": 0.7140323472899401,
+    "task_18887523ce85c1b3": 0.6918731694097467,
+    "task_c1290fbcc444e301": 0.7827478875426546,
+    "task_62d9d38b033dae1e": 0.7095462681272527,
+    "task_dd3adb34eb213dea": 0.8057226143299488,
+    "task_f85fc00fd3f7f4f8": 0.7389263592068044,
+    "task_f27914e23c19d5e9": 0.8642555831705133,
+    "task_03d5bdd0eb8a8ce5": 0.7896738040301987,
+    "task_177c5ec7b470551d": 0.645302429540461,
+    "task_349569ee60c72667": 0.7269561835957382,
+    "task_c01664fbb41cfc86": 0.7422902641329071,
+    "task_6498c4416ea9d174": 0.7813942900532712,
+    "task_94222e3266bd597f": 0.8332872340365741,
+    "task_d1d039a8ec147b5b": 0.7995157245462471,
+    "task_796454f23e797316": 0.9364360859629287,
+    "task_7124f45d23589f79": 0.7212556941834485,
+    "task_d5fbc5d757a0d16e": 0.8067298564092881,
+    "task_d410ccd96e478544": 0.810698808435243
+   },
+   "shared_relative_change": 1.0585441589355469,
+   "pinned_one_hot": true,
+   "finite": true,
+   "routes": {
+    "task_458ad49c761df9ce": [
+     4,
+     5,
+     0
+    ],
+    "task_b38398cee3eff76f": [
+     4,
+     9,
+     10
+    ],
+    "task_d9a9e03198d222df": [
+     8,
+     10,
+     4
+    ],
+    "task_0078218c72b8396c": [
+     10,
+     3,
+     11
+    ],
+    "task_4ff7512856533160": [
+     7,
+     1,
+     3
+    ],
+    "task_ececf8b3f63e3d2d": [
+     0,
+     7,
+     11
+    ],
+    "task_0b591f8dc11ddf50": [
+     3,
+     6,
+     5
+    ],
+    "task_5b9de99b1c91cea6": [
+     6,
+     7,
+     1
+    ],
+    "task_134ad3fd74fe72d8": [
+     9,
+     8,
+     7
+    ],
+    "task_b60f12edd51bfc22": [
+     8,
+     9,
+     8
+    ],
+    "task_52c3f35f035d596d": [
+     8,
+     6,
+     2
+    ],
+    "task_a0e99b027d80bf4d": [
+     7,
+     11,
+     0
+    ],
+    "task_08e1cff4774af96a": [
+     1,
+     11,
+     8
+    ],
+    "task_c6e4a43596da5fdc": [
+     4,
+     6,
+     0
+    ],
+    "task_fe90ea7b829afbaa": [
+     2,
+     8,
+     9
+    ],
+    "task_3cdc8b83ab119eae": [
+     2,
+     4,
+     2
+    ],
+    "task_9ce5931c8b374684": [
+     9,
+     3,
+     3
+    ],
+    "task_2510c76443bf86a8": [
+     9,
+     9,
+     8
+    ],
+    "task_0bd488d7a92dfccf": [
+     10,
+     11,
+     10
+    ],
+    "task_4fa0d880cca8ab57": [
+     1,
+     6,
+     9
+    ],
+    "task_cdd81ba39b429cae": [
+     3,
+     9,
+     10
+    ],
+    "task_60741c214cfe4fa5": [
+     3,
+     7,
+     7
+    ],
+    "task_a361d885e1243b6d": [
+     11,
+     8,
+     9
+    ],
+    "task_d4ac8cdf8c858712": [
+     6,
+     4,
+     2
+    ],
+    "task_fa0bb3ab83e47907": [
+     11,
+     9,
+     1
+    ],
+    "task_bbb6f81d21beb919": [
+     4,
+     5,
+     10
+    ],
+    "task_7413018a14746067": [
+     3,
+     2,
+     1
+    ],
+    "task_115e6d7a4e64dacc": [
+     11,
+     8,
+     8
+    ],
+    "task_8a7e37b33768c066": [
+     4,
+     11,
+     8
+    ],
+    "task_cab1ef8ca433adb0": [
+     8,
+     2,
+     1
+    ],
+    "task_239b608e5aaf575d": [
+     11,
+     7,
+     0
+    ],
+    "task_d588647a8f34f216": [
+     0,
+     4,
+     11
+    ],
+    "task_f70ab4d104e2476c": [
+     4,
+     4,
+     2
+    ],
+    "task_96ca8bcabdafc369": [
+     1,
+     4,
+     7
+    ],
+    "task_08b61b44c3a06ecd": [
+     8,
+     1,
+     7
+    ],
+    "task_e9023e100d3d30ca": [
+     2,
+     7,
+     11
+    ],
+    "task_6ab375e61358dd0e": [
+     11,
+     4,
+     1
+    ],
+    "task_da46f8a98ac30e28": [
+     4,
+     8,
+     6
+    ],
+    "task_fed69c403c3e5d2f": [
+     2,
+     0,
+     2
+    ],
+    "task_6c5ae154bceb126e": [
+     11,
+     3,
+     0
+    ],
+    "task_2fb5dc11c713b303": [
+     5,
+     1,
+     3
+    ],
+    "task_4578cc7494b53e31": [
+     5,
+     7,
+     8
+    ],
+    "task_98dc14eb4dde186c": [
+     2,
+     6,
+     7
+    ],
+    "task_b363f915dd490a0c": [
+     8,
+     2,
+     3
+    ],
+    "task_ee15ce946d1e7a0c": [
+     10,
+     5,
+     8
+    ],
+    "task_c872b51da8e4091c": [
+     1,
+     5,
+     0
+    ],
+    "task_2f0b4537fb035a2a": [
+     1,
+     6,
+     6
+    ],
+    "task_18887523ce85c1b3": [
+     4,
+     10,
+     6
+    ],
+    "task_c1290fbcc444e301": [
+     0,
+     11,
+     11
+    ],
+    "task_62d9d38b033dae1e": [
+     10,
+     9,
+     9
+    ],
+    "task_dd3adb34eb213dea": [
+     0,
+     8,
+     0
+    ],
+    "task_f85fc00fd3f7f4f8": [
+     4,
+     4,
+     9
+    ],
+    "task_f27914e23c19d5e9": [
+     9,
+     1,
+     5
+    ],
+    "task_03d5bdd0eb8a8ce5": [
+     9,
+     0,
+     10
+    ],
+    "task_177c5ec7b470551d": [
+     0,
+     6,
+     0
+    ],
+    "task_349569ee60c72667": [
+     5,
+     2,
+     8
+    ],
+    "task_c01664fbb41cfc86": [
+     5,
+     11,
+     8
+    ],
+    "task_6498c4416ea9d174": [
+     11,
+     0,
+     9
+    ],
+    "task_94222e3266bd597f": [
+     11,
+     5,
+     4
+    ],
+    "task_d1d039a8ec147b5b": [
+     6,
+     3,
+     8
+    ],
+    "task_796454f23e797316": [
+     1,
+     4,
+     7
+    ],
+    "task_7124f45d23589f79": [
+     5,
+     7,
+     7
+    ],
+    "task_d5fbc5d757a0d16e": [
+     5,
+     11,
+     11
+    ],
+    "task_d410ccd96e478544": [
+     6,
+     5,
+     4
+    ]
+   },
+   "rounds": [
+    {
+     "round": 0,
+     "argmin_ok": true,
+     "slots_used": 12
+    },
+    {
+     "round": 1,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.015625
+    },
+    {
+     "round": 2,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.015625
+    },
+    {
+     "round": 3,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 4,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 5,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 6,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 7,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 8,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 9,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 10,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 11,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 12,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 13,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 14,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 15,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 16,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 17,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 18,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 19,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 20,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 21,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 22,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 23,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 24,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 25,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 26,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 27,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 28,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 29,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 30,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 31,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 32,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 33,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 34,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 35,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 36,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 37,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 38,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 39,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 40,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 41,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 42,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 43,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 44,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 45,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 46,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 47,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 48,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 49,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 50,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 51,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 52,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 53,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 54,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 55,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 56,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 57,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 58,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 59,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 60,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 61,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 62,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 63,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    }
+   ],
+   "search_seconds": 337.9,
+   "train_seconds": 2737.0,
+   "ari_by_position": [
+    0.028947036952373842,
+    0.029802301563883152,
+    0.004216955067616693
+   ],
+   "reload_exact": true
+  },
+  "J1_w2": {
+   "mode": "j1",
+   "world": 2,
+   "updates": 65536,
+   "trajectory": {
+    "0": 1.6112413835123915,
+    "8192": 0.8501580903679982,
+    "16384": 0.8129667282674312,
+    "32768": 0.7979942579825088,
+    "49152": 0.7904727507432928,
+    "65536": 0.7737338141057997
+   },
+   "terminal_median": 0.7737338141057997,
+   "final_per_task": {
+    "task_b377a42d3ba364a8": 0.8327850149842754,
+    "task_b4db5a821817bfbd": 0.7740993522475845,
+    "task_8ffe85e246d10fe2": 0.738390049633629,
+    "task_c2c3861bc84bc175": 0.670049999749774,
+    "task_3d63fbaf46674a3c": 0.7773569878629203,
+    "task_3e200cd03fc524e8": 0.953127972852117,
+    "task_16e43bd6e0c03f68": 0.780634672590765,
+    "task_65f6d5319aaaa631": 0.8458641197325127,
+    "task_a76aae47357d1c5d": 0.8670673570149876,
+    "task_4f0e5f43d3665dfd": 0.7796814445461783,
+    "task_b140de3e84c87006": 0.784360219124922,
+    "task_d06c496dd130dab5": 0.7356210220625353,
+    "task_75467ae5dd62c719": 0.8622558987088365,
+    "task_71c1b8e2def9aa2d": 0.6558779742481033,
+    "task_35c1a569694f201c": 0.6935885888192028,
+    "task_e35271df1c0d74a6": 0.8560255152390479,
+    "task_4332ebca9d571cff": 0.735667389088771,
+    "task_56fcbeb572d447f3": 0.8828650724462402,
+    "task_945298043d968a8e": 0.8297231366294259,
+    "task_80ff6d1a50350b4e": 0.8008794538556392,
+    "task_2b3309af17b3202a": 0.8036880466006856,
+    "task_fc4884bda6b48a9a": 0.9026952953003246,
+    "task_ba56345a51099795": 0.7897103874410859,
+    "task_24b86b3649e681c2": 0.7292480064209654,
+    "task_db68aba8d581ffb9": 0.7484938560597627,
+    "task_f714bd90143e077b": 0.7947022864871798,
+    "task_7b065b162d7b4871": 0.6866964354099563,
+    "task_31012da00a2fac67": 0.7290251029525585,
+    "task_8d89bb04ee897180": 0.9265058456944312,
+    "task_a327389a514430d4": 0.7417395447321323,
+    "task_95809cc394c6ffe3": 0.7105519636744602,
+    "task_cf2644b2aefc5b43": 0.6118014003625754,
+    "task_9df6da60173ebae6": 0.8337370752144593,
+    "task_0b14dc85f12a3b0c": 0.7915318659241947,
+    "task_b5e065fc842e5301": 0.664808441718819,
+    "task_d2d101c23b85ea26": 0.7973216499979446,
+    "task_b58687c4e37775df": 0.7160543636104415,
+    "task_da70e3306da96e1b": 0.755295492744662,
+    "task_a8bcedd5ff2e32a2": 0.751463043438897,
+    "task_55a956db107157e9": 0.7511957800386487,
+    "task_8c8f684ad2192c9e": 0.7309677096512921,
+    "task_0facdbc871a7cccb": 0.7524388140259505,
+    "task_eed36a9afa39b31a": 0.7566268227375229,
+    "task_c3d657051b43963d": 0.7659911822547537,
+    "task_e4c5f8f63c689677": 0.7327939188645928,
+    "task_d5504fab1498e06b": 0.8734419043674583,
+    "task_e6076db6452e39c1": 0.672900482204381,
+    "task_022971af1960e131": 0.7289980868692035,
+    "task_59e49ac89f258adf": 0.7217515193020992,
+    "task_f048c68254c82c50": 0.6721770528146052,
+    "task_623ece30bbc1ffd4": 0.7851465927046678,
+    "task_a55fb699712fc959": 0.8291154553908433,
+    "task_207d903235e529f4": 0.7733682759640148,
+    "task_735d1ca0850e7171": 0.80368887655903,
+    "task_abebd96bffeb045b": 0.8608863984304483,
+    "task_955357bcf5e3e220": 0.821341979018976,
+    "task_11ed0f7af0b514df": 0.7214442679240344,
+    "task_61a849c0f93770ba": 0.8707597828834526,
+    "task_bef2da348c509138": 0.8373200758716608,
+    "task_53cba0be2cb76965": 0.7326857441153207,
+    "task_074954bc9abf25a5": 0.764799607047063,
+    "task_be3fa78c4d3fad3e": 0.8342690633337404,
+    "task_e29b43e0a72937aa": 0.9258243152554135,
+    "task_d4e18aabf6670176": 0.715017457111316
+   },
+   "shared_relative_change": 1.0660632848739624,
+   "pinned_one_hot": true,
+   "finite": true,
+   "routes": {
+    "task_b377a42d3ba364a8": [
+     9,
+     1,
+     4
+    ],
+    "task_b4db5a821817bfbd": [
+     10,
+     2,
+     8
+    ],
+    "task_8ffe85e246d10fe2": [
+     4,
+     11,
+     0
+    ],
+    "task_c2c3861bc84bc175": [
+     4,
+     6,
+     7
+    ],
+    "task_3d63fbaf46674a3c": [
+     7,
+     3,
+     6
+    ],
+    "task_3e200cd03fc524e8": [
+     10,
+     1,
+     10
+    ],
+    "task_16e43bd6e0c03f68": [
+     8,
+     1,
+     2
+    ],
+    "task_65f6d5319aaaa631": [
+     1,
+     7,
+     8
+    ],
+    "task_a76aae47357d1c5d": [
+     1,
+     10,
+     1
+    ],
+    "task_4f0e5f43d3665dfd": [
+     7,
+     11,
+     3
+    ],
+    "task_b140de3e84c87006": [
+     10,
+     6,
+     8
+    ],
+    "task_d06c496dd130dab5": [
+     4,
+     4,
+     8
+    ],
+    "task_75467ae5dd62c719": [
+     1,
+     4,
+     1
+    ],
+    "task_71c1b8e2def9aa2d": [
+     6,
+     8,
+     6
+    ],
+    "task_35c1a569694f201c": [
+     4,
+     5,
+     8
+    ],
+    "task_e35271df1c0d74a6": [
+     8,
+     7,
+     1
+    ],
+    "task_4332ebca9d571cff": [
+     6,
+     2,
+     1
+    ],
+    "task_56fcbeb572d447f3": [
+     10,
+     6,
+     1
+    ],
+    "task_945298043d968a8e": [
+     10,
+     3,
+     8
+    ],
+    "task_80ff6d1a50350b4e": [
+     1,
+     4,
+     4
+    ],
+    "task_2b3309af17b3202a": [
+     9,
+     10,
+     4
+    ],
+    "task_fc4884bda6b48a9a": [
+     4,
+     8,
+     4
+    ],
+    "task_ba56345a51099795": [
+     10,
+     4,
+     4
+    ],
+    "task_24b86b3649e681c2": [
+     2,
+     1,
+     5
+    ],
+    "task_db68aba8d581ffb9": [
+     2,
+     8,
+     4
+    ],
+    "task_f714bd90143e077b": [
+     11,
+     4,
+     10
+    ],
+    "task_7b065b162d7b4871": [
+     5,
+     0,
+     4
+    ],
+    "task_31012da00a2fac67": [
+     1,
+     6,
+     3
+    ],
+    "task_8d89bb04ee897180": [
+     8,
+     10,
+     1
+    ],
+    "task_a327389a514430d4": [
+     3,
+     0,
+     11
+    ],
+    "task_95809cc394c6ffe3": [
+     8,
+     11,
+     8
+    ],
+    "task_cf2644b2aefc5b43": [
+     5,
+     6,
+     8
+    ],
+    "task_9df6da60173ebae6": [
+     10,
+     3,
+     1
+    ],
+    "task_0b14dc85f12a3b0c": [
+     7,
+     3,
+     6
+    ],
+    "task_b5e065fc842e5301": [
+     11,
+     11,
+     6
+    ],
+    "task_d2d101c23b85ea26": [
+     10,
+     6,
+     3
+    ],
+    "task_b58687c4e37775df": [
+     2,
+     2,
+     2
+    ],
+    "task_da70e3306da96e1b": [
+     1,
+     0,
+     8
+    ],
+    "task_a8bcedd5ff2e32a2": [
+     8,
+     1,
+     3
+    ],
+    "task_55a956db107157e9": [
+     9,
+     3,
+     3
+    ],
+    "task_8c8f684ad2192c9e": [
+     9,
+     2,
+     8
+    ],
+    "task_0facdbc871a7cccb": [
+     8,
+     7,
+     7
+    ],
+    "task_eed36a9afa39b31a": [
+     9,
+     3,
+     11
+    ],
+    "task_c3d657051b43963d": [
+     10,
+     9,
+     7
+    ],
+    "task_e4c5f8f63c689677": [
+     9,
+     8,
+     7
+    ],
+    "task_d5504fab1498e06b": [
+     10,
+     8,
+     10
+    ],
+    "task_e6076db6452e39c1": [
+     4,
+     7,
+     2
+    ],
+    "task_022971af1960e131": [
+     8,
+     0,
+     10
+    ],
+    "task_59e49ac89f258adf": [
+     0,
+     0,
+     6
+    ],
+    "task_f048c68254c82c50": [
+     5,
+     7,
+     9
+    ],
+    "task_623ece30bbc1ffd4": [
+     8,
+     8,
+     9
+    ],
+    "task_a55fb699712fc959": [
+     2,
+     11,
+     1
+    ],
+    "task_207d903235e529f4": [
+     0,
+     10,
+     10
+    ],
+    "task_735d1ca0850e7171": [
+     6,
+     3,
+     6
+    ],
+    "task_abebd96bffeb045b": [
+     10,
+     4,
+     1
+    ],
+    "task_955357bcf5e3e220": [
+     11,
+     3,
+     1
+    ],
+    "task_11ed0f7af0b514df": [
+     11,
+     8,
+     9
+    ],
+    "task_61a849c0f93770ba": [
+     10,
+     10,
+     6
+    ],
+    "task_bef2da348c509138": [
+     9,
+     10,
+     7
+    ],
+    "task_53cba0be2cb76965": [
+     9,
+     9,
+     5
+    ],
+    "task_074954bc9abf25a5": [
+     4,
+     11,
+     1
+    ],
+    "task_be3fa78c4d3fad3e": [
+     3,
+     6,
+     11
+    ],
+    "task_e29b43e0a72937aa": [
+     10,
+     8,
+     10
+    ],
+    "task_d4e18aabf6670176": [
+     3,
+     0,
+     7
+    ]
+   },
+   "rounds": [
+    {
+     "round": 0,
+     "argmin_ok": true,
+     "slots_used": 12
+    },
+    {
+     "round": 1,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.015625
+    },
+    {
+     "round": 2,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 3,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 4,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 5,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 6,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 7,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 8,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 9,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 10,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 11,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 12,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 13,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 14,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 15,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 16,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 17,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 18,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 19,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 20,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 21,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 22,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 23,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 24,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 25,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 26,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 27,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 28,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 29,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 30,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 31,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 32,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 33,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 34,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 35,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 36,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 37,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 38,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 39,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 40,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 41,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 42,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 43,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 44,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 45,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 46,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 47,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 48,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 49,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 50,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 51,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 52,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 53,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 54,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 55,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 56,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 57,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 58,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 59,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 60,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 61,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 62,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 63,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    }
+   ],
+   "search_seconds": 351.9,
+   "train_seconds": 2739.3,
+   "ari_by_position": [
+    0.044712709186052545,
+    0.03718116531644674,
+    -0.010576414595452137
+   ],
+   "reload_exact": true
+  },
+  "J1_w0": {
+   "mode": "j1",
+   "world": 0,
+   "updates": 65536,
+   "trajectory": {
+    "0": 1.6020479775580414,
+    "8192": 0.8451783450898989,
+    "16384": 0.7968331620761305,
+    "32768": 0.7792416045824083,
+    "49152": 0.7632053132043395,
+    "65536": 0.7579211194421381
+   },
+   "terminal_median": 0.7579211194421381,
+   "final_per_task": {
+    "task_e2ee5cd124a06968": 0.7695837712501591,
+    "task_9a47a012838cf2f1": 0.7974467621549387,
+    "task_176fb672e6372024": 0.7598681903783535,
+    "task_16fcfa528d9347a5": 0.7843220796821363,
+    "task_2325a410e1e7c49f": 0.7365743128998044,
+    "task_a75284ab166991a7": 0.7391059988637663,
+    "task_d4a1a50f91e6c134": 0.6527898370068806,
+    "task_72e3ce4d2e828944": 0.6721522582563084,
+    "task_fa8bc00936b49ea0": 0.7726015819464227,
+    "task_a880e9509f0eb15d": 0.7784622134572963,
+    "task_249296b8fbf0621e": 0.8103816893359571,
+    "task_db56ae0ebd4c0fe9": 0.6621608075964781,
+    "task_58dbb957e39ceda1": 0.6733413850075309,
+    "task_b564f659534e0b5a": 0.766572543234874,
+    "task_9a8081f179645836": 0.7334227290243094,
+    "task_6fa9e5d406ea62ee": 0.7142345566918461,
+    "task_ba8e41a884a4f082": 0.7081115316866049,
+    "task_d1e7323efd6cba35": 0.658987521302694,
+    "task_60df934df0cb29b1": 0.788600591808889,
+    "task_5324f9206b0d8247": 0.7192919263073806,
+    "task_eeb0eb3aab7f10e1": 0.782347058954151,
+    "task_50ad0529effe9500": 0.7123888690060676,
+    "task_4bcfc3f6eb86ee2e": 0.7719909007251983,
+    "task_eb91e23653b1e85b": 0.9674048721975159,
+    "task_60fdd00a5f06dbda": 0.7864125992414889,
+    "task_4865aced9d00a9cd": 0.730223011234803,
+    "task_bcbd5778a52301c7": 0.8252791544091981,
+    "task_f01ac352136afae5": 0.7275017294515999,
+    "task_103f2e5a036d0548": 0.8727962782865459,
+    "task_fb38c762b7d7d77c": 0.756844248064234,
+    "task_7ccffa4550c7d483": 0.7493639220246432,
+    "task_115968ac11c93881": 0.8385183624793928,
+    "task_fe9f04ca7ab58319": 0.815897529086836,
+    "task_8327f80e56f8f0c9": 0.6839232413459843,
+    "task_2091492dc273814b": 0.751778673936795,
+    "task_01f8792930576431": 0.7864995525571719,
+    "task_11d602d3b18ec9bc": 0.7465588774432437,
+    "task_b781f0defa3def59": 0.7589979908200423,
+    "task_5260e94bc4b1c019": 0.7600785925329695,
+    "task_022a9cc20d7ef633": 0.7099177072378036,
+    "task_58083b0a5c05d3de": 0.7082834252593873,
+    "task_b922e653c60384d7": 0.7775807115134065,
+    "task_a1c38c1f3514d031": 0.7005476665926336,
+    "task_93122ec314e27241": 0.742024457141738,
+    "task_31c9f2c9a8e2e1e1": 0.6922018385147864,
+    "task_7b4843f6cb971da4": 0.8634689977223249,
+    "task_038da715a275ff62": 0.880601189801613,
+    "task_38e0da1b4c64631d": 0.7457953895912046,
+    "task_fbf23fda368c5cbf": 0.7196472651518245,
+    "task_61673fcfcee97378": 0.7744552642337719,
+    "task_6955ce31c9758a49": 0.6812003573333199,
+    "task_b63da5272897c877": 0.7756512990163134,
+    "task_6f60dae460e4a4b2": 0.7275389047950592,
+    "task_bf33ff1099079901": 0.7182504062771989,
+    "task_40a4d11e3749b1f2": 0.8427947579144465,
+    "task_867e8770a3093031": 0.7287262010133145,
+    "task_8f0f26ac798e3933": 0.9751738613288214,
+    "task_8180a1aff2547746": 0.8133773087640027,
+    "task_2492ac5ce5d94f5c": 0.7894572285466536,
+    "task_3dcfe293848c9dee": 0.751870890036399,
+    "task_dc3c7f5fc8695c5b": 0.8437429877943213,
+    "task_11660bee65347aa1": 0.7376171319734334,
+    "task_50c55e51b8c8eda7": 0.8225074063121263,
+    "task_c5d3a8a1092598c8": 0.8121348494825021
+   },
+   "shared_relative_change": 1.0691438913345337,
+   "pinned_one_hot": true,
+   "finite": true,
+   "routes": {
+    "task_e2ee5cd124a06968": [
+     4,
+     1,
+     7
+    ],
+    "task_9a47a012838cf2f1": [
+     4,
+     3,
+     7
+    ],
+    "task_176fb672e6372024": [
+     8,
+     7,
+     10
+    ],
+    "task_16fcfa528d9347a5": [
+     3,
+     10,
+     7
+    ],
+    "task_2325a410e1e7c49f": [
+     11,
+     4,
+     3
+    ],
+    "task_a75284ab166991a7": [
+     1,
+     1,
+     2
+    ],
+    "task_d4a1a50f91e6c134": [
+     7,
+     3,
+     8
+    ],
+    "task_72e3ce4d2e828944": [
+     11,
+     3,
+     6
+    ],
+    "task_fa8bc00936b49ea0": [
+     3,
+     4,
+     7
+    ],
+    "task_a880e9509f0eb15d": [
+     1,
+     5,
+     2
+    ],
+    "task_249296b8fbf0621e": [
+     11,
+     5,
+     11
+    ],
+    "task_db56ae0ebd4c0fe9": [
+     7,
+     8,
+     2
+    ],
+    "task_58dbb957e39ceda1": [
+     0,
+     11,
+     11
+    ],
+    "task_b564f659534e0b5a": [
+     8,
+     9,
+     10
+    ],
+    "task_9a8081f179645836": [
+     1,
+     2,
+     5
+    ],
+    "task_6fa9e5d406ea62ee": [
+     7,
+     3,
+     0
+    ],
+    "task_ba8e41a884a4f082": [
+     1,
+     8,
+     10
+    ],
+    "task_d1e7323efd6cba35": [
+     4,
+     11,
+     0
+    ],
+    "task_60df934df0cb29b1": [
+     3,
+     7,
+     1
+    ],
+    "task_5324f9206b0d8247": [
+     0,
+     6,
+     10
+    ],
+    "task_eeb0eb3aab7f10e1": [
+     6,
+     2,
+     2
+    ],
+    "task_50ad0529effe9500": [
+     11,
+     11,
+     8
+    ],
+    "task_4bcfc3f6eb86ee2e": [
+     9,
+     5,
+     1
+    ],
+    "task_eb91e23653b1e85b": [
+     1,
+     1,
+     4
+    ],
+    "task_60fdd00a5f06dbda": [
+     7,
+     11,
+     9
+    ],
+    "task_4865aced9d00a9cd": [
+     10,
+     0,
+     2
+    ],
+    "task_bcbd5778a52301c7": [
+     1,
+     11,
+     1
+    ],
+    "task_f01ac352136afae5": [
+     1,
+     11,
+     7
+    ],
+    "task_103f2e5a036d0548": [
+     4,
+     11,
+     7
+    ],
+    "task_fb38c762b7d7d77c": [
+     11,
+     2,
+     4
+    ],
+    "task_7ccffa4550c7d483": [
+     1,
+     10,
+     0
+    ],
+    "task_115968ac11c93881": [
+     6,
+     8,
+     1
+    ],
+    "task_fe9f04ca7ab58319": [
+     4,
+     2,
+     1
+    ],
+    "task_8327f80e56f8f0c9": [
+     10,
+     4,
+     10
+    ],
+    "task_2091492dc273814b": [
+     7,
+     10,
+     3
+    ],
+    "task_01f8792930576431": [
+     11,
+     9,
+     3
+    ],
+    "task_11d602d3b18ec9bc": [
+     5,
+     1,
+     9
+    ],
+    "task_b781f0defa3def59": [
+     2,
+     1,
+     8
+    ],
+    "task_5260e94bc4b1c019": [
+     10,
+     9,
+     4
+    ],
+    "task_022a9cc20d7ef633": [
+     5,
+     6,
+     6
+    ],
+    "task_58083b0a5c05d3de": [
+     7,
+     10,
+     0
+    ],
+    "task_b922e653c60384d7": [
+     3,
+     7,
+     11
+    ],
+    "task_a1c38c1f3514d031": [
+     6,
+     8,
+     11
+    ],
+    "task_93122ec314e27241": [
+     7,
+     6,
+     8
+    ],
+    "task_31c9f2c9a8e2e1e1": [
+     5,
+     2,
+     11
+    ],
+    "task_7b4843f6cb971da4": [
+     5,
+     4,
+     7
+    ],
+    "task_038da715a275ff62": [
+     11,
+     11,
+     1
+    ],
+    "task_38e0da1b4c64631d": [
+     6,
+     7,
+     0
+    ],
+    "task_fbf23fda368c5cbf": [
+     6,
+     4,
+     10
+    ],
+    "task_61673fcfcee97378": [
+     4,
+     9,
+     11
+    ],
+    "task_6955ce31c9758a49": [
+     9,
+     7,
+     11
+    ],
+    "task_b63da5272897c877": [
+     0,
+     4,
+     1
+    ],
+    "task_6f60dae460e4a4b2": [
+     4,
+     0,
+     10
+    ],
+    "task_bf33ff1099079901": [
+     5,
+     4,
+     6
+    ],
+    "task_40a4d11e3749b1f2": [
+     5,
+     11,
+     5
+    ],
+    "task_867e8770a3093031": [
+     9,
+     3,
+     5
+    ],
+    "task_8f0f26ac798e3933": [
+     1,
+     1,
+     4
+    ],
+    "task_8180a1aff2547746": [
+     10,
+     8,
+     11
+    ],
+    "task_2492ac5ce5d94f5c": [
+     2,
+     4,
+     8
+    ],
+    "task_3dcfe293848c9dee": [
+     4,
+     7,
+     9
+    ],
+    "task_dc3c7f5fc8695c5b": [
+     9,
+     5,
+     11
+    ],
+    "task_11660bee65347aa1": [
+     8,
+     6,
+     2
+    ],
+    "task_50c55e51b8c8eda7": [
+     10,
+     10,
+     10
+    ],
+    "task_c5d3a8a1092598c8": [
+     11,
+     1,
+     10
+    ]
+   },
+   "rounds": [
+    {
+     "round": 0,
+     "argmin_ok": true,
+     "slots_used": 12
+    },
+    {
+     "round": 1,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.078125
+    },
+    {
+     "round": 2,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.015625
+    },
+    {
+     "round": 3,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 4,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.015625
+    },
+    {
+     "round": 5,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 6,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 7,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 8,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 9,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 10,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 11,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 12,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 13,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 14,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 15,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 16,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 17,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 18,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 19,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 20,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 21,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 22,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 23,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 24,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 25,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 26,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 27,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 28,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 29,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 30,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 31,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 32,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 33,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 34,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 35,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 36,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 37,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 38,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 39,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 40,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 41,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 42,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 43,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 44,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 45,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 46,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 47,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 48,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 49,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 50,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 51,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 52,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 53,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 54,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 55,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 56,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 57,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 58,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 59,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 60,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 61,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 62,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    },
+    {
+     "round": 63,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.0
+    }
+   ],
+   "search_seconds": 290.7,
+   "train_seconds": 2266.1,
+   "ari_by_position": [
+    0.0066252949916965264,
+    -0.003375468194666882,
+    0.01311242778028621
+   ],
+   "reload_exact": true
+  },
+  "SHAM_w1": {
+   "mode": "sham",
+   "world": 1,
+   "updates": 65536,
+   "trajectory": {
+    "0": 1.996911894713016,
+    "8192": 1.0031059560435165,
+    "16384": 1.002657705057123,
+    "32768": 0.9791526436050197,
+    "49152": 0.9696822901808795,
+    "65536": 0.9820888000274572
+   },
+   "terminal_median": 0.9820888000274572,
+   "final_per_task": {
+    "task_458ad49c761df9ce": 0.9601407605048394,
+    "task_b38398cee3eff76f": 0.9620608043372308,
+    "task_d9a9e03198d222df": 0.9606895144134198,
+    "task_0078218c72b8396c": 1.0078224043127706,
+    "task_4ff7512856533160": 0.975091988399489,
+    "task_ececf8b3f63e3d2d": 0.9859583896183302,
+    "task_0b591f8dc11ddf50": 0.9680649862209123,
+    "task_5b9de99b1c91cea6": 0.9976383943711273,
+    "task_134ad3fd74fe72d8": 0.9764450447821608,
+    "task_b60f12edd51bfc22": 1.0638536699796297,
+    "task_52c3f35f035d596d": 1.0034093101931667,
+    "task_a0e99b027d80bf4d": 0.9997874486545741,
+    "task_08e1cff4774af96a": 0.9799411273344651,
+    "task_c6e4a43596da5fdc": 1.0125358329330496,
+    "task_fe90ea7b829afbaa": 0.9585693303358139,
+    "task_3cdc8b83ab119eae": 0.9607351713982469,
+    "task_9ce5931c8b374684": 0.9026156319125603,
+    "task_2510c76443bf86a8": 1.0236853702960116,
+    "task_0bd488d7a92dfccf": 1.0424716348493408,
+    "task_4fa0d880cca8ab57": 1.0616971306033185,
+    "task_cdd81ba39b429cae": 0.9193982195162677,
+    "task_60741c214cfe4fa5": 0.9589903896979592,
+    "task_a361d885e1243b6d": 0.9104597374648539,
+    "task_d4ac8cdf8c858712": 0.9718967649999443,
+    "task_fa0bb3ab83e47907": 0.9574896915445344,
+    "task_bbb6f81d21beb919": 0.9984031675416863,
+    "task_7413018a14746067": 1.0211733992118812,
+    "task_115e6d7a4e64dacc": 1.0022047373428582,
+    "task_8a7e37b33768c066": 0.988527328567105,
+    "task_cab1ef8ca433adb0": 1.0167028510119902,
+    "task_239b608e5aaf575d": 1.0398311784285028,
+    "task_d588647a8f34f216": 0.9005593020348739,
+    "task_f70ab4d104e2476c": 0.9189790256995604,
+    "task_96ca8bcabdafc369": 0.963572965547411,
+    "task_08b61b44c3a06ecd": 0.9654106759066885,
+    "task_e9023e100d3d30ca": 0.9600684309772616,
+    "task_6ab375e61358dd0e": 0.9403128887378039,
+    "task_da46f8a98ac30e28": 0.8934970730172961,
+    "task_fed69c403c3e5d2f": 1.0956116699907412,
+    "task_6c5ae154bceb126e": 0.9663700008228501,
+    "task_2fb5dc11c713b303": 1.0203298176533386,
+    "task_4578cc7494b53e31": 1.0298850987531198,
+    "task_98dc14eb4dde186c": 0.998456928641056,
+    "task_b363f915dd490a0c": 1.0161064553236265,
+    "task_ee15ce946d1e7a0c": 1.0039847973028628,
+    "task_c872b51da8e4091c": 1.0041379688323016,
+    "task_2f0b4537fb035a2a": 0.9394584312847094,
+    "task_18887523ce85c1b3": 0.9637114227700202,
+    "task_c1290fbcc444e301": 0.9359667049396558,
+    "task_62d9d38b033dae1e": 0.9842364727204495,
+    "task_dd3adb34eb213dea": 1.0026742610185706,
+    "task_f85fc00fd3f7f4f8": 0.9539153869762429,
+    "task_f27914e23c19d5e9": 0.9431772630382881,
+    "task_03d5bdd0eb8a8ce5": 1.0016677569610561,
+    "task_177c5ec7b470551d": 0.9038834908662071,
+    "task_349569ee60c72667": 1.0042590678919818,
+    "task_c01664fbb41cfc86": 0.8995091467575702,
+    "task_6498c4416ea9d174": 1.0234535124923243,
+    "task_94222e3266bd597f": 1.009983392163317,
+    "task_d1d039a8ec147b5b": 1.0226791734753184,
+    "task_796454f23e797316": 0.9633514691126576,
+    "task_7124f45d23589f79": 0.9552164668499661,
+    "task_d5fbc5d757a0d16e": 0.9942888189505131,
+    "task_d410ccd96e478544": 1.033947850284996
+   },
+   "shared_relative_change": 1.2216179370880127,
+   "pinned_one_hot": true,
+   "finite": true,
+   "routes": {
+    "task_458ad49c761df9ce": [
+     3,
+     9,
+     10
+    ],
+    "task_b38398cee3eff76f": [
+     7,
+     11,
+     2
+    ],
+    "task_d9a9e03198d222df": [
+     8,
+     1,
+     6
+    ],
+    "task_0078218c72b8396c": [
+     8,
+     6,
+     7
+    ],
+    "task_4ff7512856533160": [
+     11,
+     8,
+     4
+    ],
+    "task_ececf8b3f63e3d2d": [
+     3,
+     0,
+     10
+    ],
+    "task_0b591f8dc11ddf50": [
+     10,
+     4,
+     4
+    ],
+    "task_5b9de99b1c91cea6": [
+     3,
+     8,
+     4
+    ],
+    "task_134ad3fd74fe72d8": [
+     10,
+     7,
+     4
+    ],
+    "task_b60f12edd51bfc22": [
+     6,
+     11,
+     4
+    ],
+    "task_52c3f35f035d596d": [
+     7,
+     9,
+     3
+    ],
+    "task_a0e99b027d80bf4d": [
+     4,
+     8,
+     8
+    ],
+    "task_08e1cff4774af96a": [
+     9,
+     1,
+     7
+    ],
+    "task_c6e4a43596da5fdc": [
+     3,
+     7,
+     3
+    ],
+    "task_fe90ea7b829afbaa": [
+     8,
+     5,
+     6
+    ],
+    "task_3cdc8b83ab119eae": [
+     11,
+     1,
+     0
+    ],
+    "task_9ce5931c8b374684": [
+     2,
+     2,
+     11
+    ],
+    "task_2510c76443bf86a8": [
+     6,
+     8,
+     5
+    ],
+    "task_0bd488d7a92dfccf": [
+     4,
+     2,
+     9
+    ],
+    "task_4fa0d880cca8ab57": [
+     7,
+     2,
+     4
+    ],
+    "task_cdd81ba39b429cae": [
+     9,
+     9,
+     1
+    ],
+    "task_60741c214cfe4fa5": [
+     10,
+     4,
+     4
+    ],
+    "task_a361d885e1243b6d": [
+     4,
+     10,
+     10
+    ],
+    "task_d4ac8cdf8c858712": [
+     4,
+     10,
+     10
+    ],
+    "task_fa0bb3ab83e47907": [
+     6,
+     4,
+     9
+    ],
+    "task_bbb6f81d21beb919": [
+     5,
+     2,
+     5
+    ],
+    "task_7413018a14746067": [
+     10,
+     11,
+     7
+    ],
+    "task_115e6d7a4e64dacc": [
+     11,
+     10,
+     4
+    ],
+    "task_8a7e37b33768c066": [
+     9,
+     11,
+     9
+    ],
+    "task_cab1ef8ca433adb0": [
+     2,
+     5,
+     10
+    ],
+    "task_239b608e5aaf575d": [
+     7,
+     9,
+     10
+    ],
+    "task_d588647a8f34f216": [
+     10,
+     0,
+     0
+    ],
+    "task_f70ab4d104e2476c": [
+     9,
+     4,
+     5
+    ],
+    "task_96ca8bcabdafc369": [
+     11,
+     0,
+     7
+    ],
+    "task_08b61b44c3a06ecd": [
+     2,
+     5,
+     2
+    ],
+    "task_e9023e100d3d30ca": [
+     8,
+     3,
+     1
+    ],
+    "task_6ab375e61358dd0e": [
+     8,
+     3,
+     8
+    ],
+    "task_da46f8a98ac30e28": [
+     4,
+     6,
+     7
+    ],
+    "task_fed69c403c3e5d2f": [
+     9,
+     5,
+     7
+    ],
+    "task_6c5ae154bceb126e": [
+     5,
+     7,
+     2
+    ],
+    "task_2fb5dc11c713b303": [
+     6,
+     1,
+     7
+    ],
+    "task_4578cc7494b53e31": [
+     6,
+     9,
+     5
+    ],
+    "task_98dc14eb4dde186c": [
+     10,
+     3,
+     8
+    ],
+    "task_b363f915dd490a0c": [
+     2,
+     6,
+     11
+    ],
+    "task_ee15ce946d1e7a0c": [
+     9,
+     2,
+     5
+    ],
+    "task_c872b51da8e4091c": [
+     7,
+     6,
+     5
+    ],
+    "task_2f0b4537fb035a2a": [
+     5,
+     4,
+     7
+    ],
+    "task_18887523ce85c1b3": [
+     9,
+     1,
+     5
+    ],
+    "task_c1290fbcc444e301": [
+     9,
+     1,
+     11
+    ],
+    "task_62d9d38b033dae1e": [
+     5,
+     6,
+     4
+    ],
+    "task_dd3adb34eb213dea": [
+     2,
+     4,
+     6
+    ],
+    "task_f85fc00fd3f7f4f8": [
+     7,
+     11,
+     0
+    ],
+    "task_f27914e23c19d5e9": [
+     0,
+     7,
+     0
+    ],
+    "task_03d5bdd0eb8a8ce5": [
+     11,
+     3,
+     8
+    ],
+    "task_177c5ec7b470551d": [
+     10,
+     6,
+     8
+    ],
+    "task_349569ee60c72667": [
+     11,
+     9,
+     7
+    ],
+    "task_c01664fbb41cfc86": [
+     1,
+     1,
+     1
+    ],
+    "task_6498c4416ea9d174": [
+     2,
+     8,
+     10
+    ],
+    "task_94222e3266bd597f": [
+     7,
+     6,
+     0
+    ],
+    "task_d1d039a8ec147b5b": [
+     1,
+     4,
+     5
+    ],
+    "task_796454f23e797316": [
+     9,
+     6,
+     10
+    ],
+    "task_7124f45d23589f79": [
+     5,
+     0,
+     7
+    ],
+    "task_d5fbc5d757a0d16e": [
+     2,
+     8,
+     7
+    ],
+    "task_d410ccd96e478544": [
+     5,
+     1,
+     1
+    ]
+   },
+   "rounds": [
+    {
+     "round": 0,
+     "argmin_ok": true,
+     "slots_used": 12
+    },
+    {
+     "round": 1,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 2,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 3,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 4,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 5,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 6,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 7,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 8,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 9,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 10,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 11,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 12,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 13,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 14,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 15,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 16,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 17,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 18,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 19,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 20,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.953125
+    },
+    {
+     "round": 21,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 22,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 23,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 24,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 25,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 26,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 27,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 28,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 29,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 30,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 31,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 32,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 33,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 34,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 35,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 36,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 37,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 38,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 39,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 40,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 41,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 42,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 43,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 44,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 45,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 46,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 47,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 48,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 49,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 50,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 51,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 52,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 53,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 54,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 55,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 56,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 57,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 58,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 59,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 60,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 61,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 62,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 63,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    }
+   ],
+   "search_seconds": 280.8,
+   "train_seconds": 2310.5,
+   "ari_by_position": [
+    0.07844934391422294,
+    -0.014553014553014554,
+    -0.013830087496471917
+   ],
+   "reload_exact": true
+  },
+  "SHAM_w2": {
+   "mode": "sham",
+   "world": 2,
+   "updates": 65536,
+   "trajectory": {
+    "0": 1.9947187468457708,
+    "8192": 1.0012171410396196,
+    "16384": 0.9988507286821098,
+    "32768": 0.9876597312183146,
+    "49152": 0.9778762537705712,
+    "65536": 0.9747658000071812
+   },
+   "terminal_median": 0.9747658000071812,
+   "final_per_task": {
+    "task_b377a42d3ba364a8": 0.9851867655341315,
+    "task_b4db5a821817bfbd": 1.0259253224797642,
+    "task_8ffe85e246d10fe2": 0.9438024152606111,
+    "task_c2c3861bc84bc175": 1.0393905235696193,
+    "task_3d63fbaf46674a3c": 0.9277950127000462,
+    "task_3e200cd03fc524e8": 0.951674874782473,
+    "task_16e43bd6e0c03f68": 0.8931066292715205,
+    "task_65f6d5319aaaa631": 0.9713924659895361,
+    "task_a76aae47357d1c5d": 0.9583497787516758,
+    "task_4f0e5f43d3665dfd": 0.9334047902787392,
+    "task_b140de3e84c87006": 0.9638102705652539,
+    "task_d06c496dd130dab5": 0.9838296486428953,
+    "task_75467ae5dd62c719": 1.0180536432627398,
+    "task_71c1b8e2def9aa2d": 0.9861433385015107,
+    "task_35c1a569694f201c": 0.9878716692232978,
+    "task_e35271df1c0d74a6": 0.9711810582988711,
+    "task_4332ebca9d571cff": 0.9344660479955995,
+    "task_56fcbeb572d447f3": 0.9785895240792166,
+    "task_945298043d968a8e": 0.9155317515420939,
+    "task_80ff6d1a50350b4e": 0.991255899101502,
+    "task_2b3309af17b3202a": 0.9097729829524813,
+    "task_fc4884bda6b48a9a": 0.9834018516976344,
+    "task_ba56345a51099795": 0.9446181132425191,
+    "task_24b86b3649e681c2": 1.0302406981598902,
+    "task_db68aba8d581ffb9": 0.9914745735115152,
+    "task_f714bd90143e077b": 1.0503544395098512,
+    "task_7b065b162d7b4871": 1.0485047601759463,
+    "task_31012da00a2fac67": 0.9691941424334346,
+    "task_8d89bb04ee897180": 0.9999093732332089,
+    "task_a327389a514430d4": 0.9523309074369081,
+    "task_95809cc394c6ffe3": 0.9732912540225435,
+    "task_cf2644b2aefc5b43": 1.0018465000361694,
+    "task_9df6da60173ebae6": 0.9412371486125556,
+    "task_0b14dc85f12a3b0c": 0.9801018640218456,
+    "task_b5e065fc842e5301": 1.004442556926138,
+    "task_d2d101c23b85ea26": 0.9754541635573524,
+    "task_b58687c4e37775df": 1.00956426335977,
+    "task_da70e3306da96e1b": 0.9676074765625359,
+    "task_a8bcedd5ff2e32a2": 1.0327118007673082,
+    "task_55a956db107157e9": 1.030955955334957,
+    "task_8c8f684ad2192c9e": 0.9492486135783221,
+    "task_0facdbc871a7cccb": 0.8830356545706883,
+    "task_eed36a9afa39b31a": 0.9716140330954995,
+    "task_c3d657051b43963d": 0.958829433296585,
+    "task_e4c5f8f63c689677": 1.0319085083681365,
+    "task_d5504fab1498e06b": 1.0266156771499861,
+    "task_e6076db6452e39c1": 0.9453097158250907,
+    "task_022971af1960e131": 0.9655495323572435,
+    "task_59e49ac89f258adf": 0.9600692742459935,
+    "task_f048c68254c82c50": 0.9741729610130349,
+    "task_623ece30bbc1ffd4": 0.9655896378248919,
+    "task_a55fb699712fc959": 0.9648394317446612,
+    "task_207d903235e529f4": 1.0132820213015363,
+    "task_735d1ca0850e7171": 0.9878920215262025,
+    "task_abebd96bffeb045b": 0.9970444787241423,
+    "task_955357bcf5e3e220": 0.9898441823915078,
+    "task_11ed0f7af0b514df": 1.0185756054299946,
+    "task_61a849c0f93770ba": 1.018470788557967,
+    "task_bef2da348c509138": 0.9753586390013275,
+    "task_53cba0be2cb76965": 0.8494158341682586,
+    "task_074954bc9abf25a5": 0.9325461605531755,
+    "task_be3fa78c4d3fad3e": 0.9207961143030949,
+    "task_e29b43e0a72937aa": 1.0119044764585954,
+    "task_d4e18aabf6670176": 0.9645466299203572
+   },
+   "shared_relative_change": 1.2127478122711182,
+   "pinned_one_hot": true,
+   "finite": true,
+   "routes": {
+    "task_b377a42d3ba364a8": [
+     6,
+     6,
+     5
+    ],
+    "task_b4db5a821817bfbd": [
+     11,
+     5,
+     11
+    ],
+    "task_8ffe85e246d10fe2": [
+     9,
+     0,
+     8
+    ],
+    "task_c2c3861bc84bc175": [
+     3,
+     6,
+     9
+    ],
+    "task_3d63fbaf46674a3c": [
+     0,
+     9,
+     4
+    ],
+    "task_3e200cd03fc524e8": [
+     3,
+     9,
+     1
+    ],
+    "task_16e43bd6e0c03f68": [
+     9,
+     2,
+     10
+    ],
+    "task_65f6d5319aaaa631": [
+     2,
+     5,
+     11
+    ],
+    "task_a76aae47357d1c5d": [
+     10,
+     5,
+     4
+    ],
+    "task_4f0e5f43d3665dfd": [
+     0,
+     0,
+     10
+    ],
+    "task_b140de3e84c87006": [
+     4,
+     0,
+     6
+    ],
+    "task_d06c496dd130dab5": [
+     8,
+     5,
+     1
+    ],
+    "task_75467ae5dd62c719": [
+     6,
+     6,
+     1
+    ],
+    "task_71c1b8e2def9aa2d": [
+     6,
+     7,
+     0
+    ],
+    "task_35c1a569694f201c": [
+     7,
+     7,
+     8
+    ],
+    "task_e35271df1c0d74a6": [
+     0,
+     0,
+     1
+    ],
+    "task_4332ebca9d571cff": [
+     10,
+     0,
+     6
+    ],
+    "task_56fcbeb572d447f3": [
+     1,
+     7,
+     11
+    ],
+    "task_945298043d968a8e": [
+     8,
+     8,
+     4
+    ],
+    "task_80ff6d1a50350b4e": [
+     9,
+     4,
+     5
+    ],
+    "task_2b3309af17b3202a": [
+     2,
+     8,
+     11
+    ],
+    "task_fc4884bda6b48a9a": [
+     0,
+     11,
+     7
+    ],
+    "task_ba56345a51099795": [
+     2,
+     3,
+     8
+    ],
+    "task_24b86b3649e681c2": [
+     9,
+     5,
+     9
+    ],
+    "task_db68aba8d581ffb9": [
+     7,
+     10,
+     7
+    ],
+    "task_f714bd90143e077b": [
+     6,
+     6,
+     5
+    ],
+    "task_7b065b162d7b4871": [
+     11,
+     1,
+     6
+    ],
+    "task_31012da00a2fac67": [
+     6,
+     5,
+     7
+    ],
+    "task_8d89bb04ee897180": [
+     8,
+     7,
+     11
+    ],
+    "task_a327389a514430d4": [
+     8,
+     7,
+     6
+    ],
+    "task_95809cc394c6ffe3": [
+     10,
+     6,
+     4
+    ],
+    "task_cf2644b2aefc5b43": [
+     6,
+     5,
+     4
+    ],
+    "task_9df6da60173ebae6": [
+     5,
+     2,
+     3
+    ],
+    "task_0b14dc85f12a3b0c": [
+     0,
+     8,
+     9
+    ],
+    "task_b5e065fc842e5301": [
+     11,
+     11,
+     9
+    ],
+    "task_d2d101c23b85ea26": [
+     8,
+     5,
+     3
+    ],
+    "task_b58687c4e37775df": [
+     11,
+     5,
+     11
+    ],
+    "task_da70e3306da96e1b": [
+     7,
+     5,
+     8
+    ],
+    "task_a8bcedd5ff2e32a2": [
+     8,
+     8,
+     0
+    ],
+    "task_55a956db107157e9": [
+     5,
+     5,
+     6
+    ],
+    "task_8c8f684ad2192c9e": [
+     11,
+     5,
+     0
+    ],
+    "task_0facdbc871a7cccb": [
+     10,
+     7,
+     6
+    ],
+    "task_eed36a9afa39b31a": [
+     11,
+     10,
+     0
+    ],
+    "task_c3d657051b43963d": [
+     11,
+     8,
+     5
+    ],
+    "task_e4c5f8f63c689677": [
+     6,
+     5,
+     8
+    ],
+    "task_d5504fab1498e06b": [
+     9,
+     8,
+     5
+    ],
+    "task_e6076db6452e39c1": [
+     4,
+     11,
+     6
+    ],
+    "task_022971af1960e131": [
+     2,
+     5,
+     1
+    ],
+    "task_59e49ac89f258adf": [
+     2,
+     11,
+     6
+    ],
+    "task_f048c68254c82c50": [
+     10,
+     4,
+     5
+    ],
+    "task_623ece30bbc1ffd4": [
+     6,
+     11,
+     7
+    ],
+    "task_a55fb699712fc959": [
+     6,
+     4,
+     11
+    ],
+    "task_207d903235e529f4": [
+     2,
+     4,
+     11
+    ],
+    "task_735d1ca0850e7171": [
+     9,
+     3,
+     3
+    ],
+    "task_abebd96bffeb045b": [
+     6,
+     6,
+     8
+    ],
+    "task_955357bcf5e3e220": [
+     10,
+     0,
+     0
+    ],
+    "task_11ed0f7af0b514df": [
+     9,
+     2,
+     8
+    ],
+    "task_61a849c0f93770ba": [
+     6,
+     11,
+     5
+    ],
+    "task_bef2da348c509138": [
+     1,
+     4,
+     5
+    ],
+    "task_53cba0be2cb76965": [
+     1,
+     1,
+     10
+    ],
+    "task_074954bc9abf25a5": [
+     6,
+     5,
+     0
+    ],
+    "task_be3fa78c4d3fad3e": [
+     7,
+     1,
+     10
+    ],
+    "task_e29b43e0a72937aa": [
+     0,
+     7,
+     5
+    ],
+    "task_d4e18aabf6670176": [
+     5,
+     9,
+     3
+    ]
+   },
+   "rounds": [
+    {
+     "round": 0,
+     "argmin_ok": true,
+     "slots_used": 12
+    },
+    {
+     "round": 1,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 2,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 3,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 4,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 5,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 6,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 7,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 8,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.953125
+    },
+    {
+     "round": 9,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 10,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 11,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 12,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 13,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 14,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 15,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 16,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 17,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 18,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 19,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 20,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 21,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 22,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 23,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 24,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 25,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 26,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 27,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 28,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 29,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 30,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 31,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 32,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 33,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 34,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 35,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 36,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 37,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 38,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 39,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 40,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 41,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 42,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 43,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 44,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 45,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 46,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 47,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 48,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 49,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 50,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 51,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 52,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 53,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 54,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 55,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 56,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 57,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 58,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 59,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 60,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 61,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 62,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 63,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    }
+   ],
+   "search_seconds": 324.9,
+   "train_seconds": 2819.0,
+   "ari_by_position": [
+    -0.002711363076164652,
+    0.0003742234862660023,
+    0.008171612961868835
+   ],
+   "reload_exact": true
+  },
+  "SHAM_w0": {
+   "mode": "sham",
+   "world": 0,
+   "updates": 65536,
+   "trajectory": {
+    "0": 1.9608024991114017,
+    "8192": 1.0091666044079035,
+    "16384": 0.9893347207631101,
+    "32768": 0.9945314562957126,
+    "49152": 0.9791175231162699,
+    "65536": 0.9784246163112227
+   },
+   "terminal_median": 0.9784246163112227,
+   "final_per_task": {
+    "task_e2ee5cd124a06968": 0.9639922384097546,
+    "task_9a47a012838cf2f1": 0.8994125135483493,
+    "task_176fb672e6372024": 0.9637907181740283,
+    "task_16fcfa528d9347a5": 0.9606978018765794,
+    "task_2325a410e1e7c49f": 0.9176214430354458,
+    "task_a75284ab166991a7": 1.0100275123533609,
+    "task_d4a1a50f91e6c134": 0.9761781092896329,
+    "task_72e3ce4d2e828944": 0.934278877750544,
+    "task_fa8bc00936b49ea0": 0.9654762084490408,
+    "task_a880e9509f0eb15d": 0.9758630991483935,
+    "task_249296b8fbf0621e": 1.0384862571429085,
+    "task_db56ae0ebd4c0fe9": 0.9214222588652676,
+    "task_58dbb957e39ceda1": 0.9918559082790387,
+    "task_b564f659534e0b5a": 0.9668694283814963,
+    "task_9a8081f179645836": 0.944498446040684,
+    "task_6fa9e5d406ea62ee": 1.0386644750710796,
+    "task_ba8e41a884a4f082": 0.9609548767463034,
+    "task_d1e7323efd6cba35": 0.9870793902314368,
+    "task_60df934df0cb29b1": 0.9651985272659095,
+    "task_5324f9206b0d8247": 1.0094415178007412,
+    "task_eeb0eb3aab7f10e1": 1.0046676106943442,
+    "task_50ad0529effe9500": 0.9216636065995488,
+    "task_4bcfc3f6eb86ee2e": 1.0382003155387363,
+    "task_eb91e23653b1e85b": 0.9782673397729033,
+    "task_60fdd00a5f06dbda": 1.0520264380205793,
+    "task_4865aced9d00a9cd": 0.9741817602906794,
+    "task_bcbd5778a52301c7": 1.0114065021459062,
+    "task_f01ac352136afae5": 0.9864431146581933,
+    "task_103f2e5a036d0548": 0.94347499431428,
+    "task_fb38c762b7d7d77c": 1.0361056756268676,
+    "task_7ccffa4550c7d483": 1.0036136176832242,
+    "task_115968ac11c93881": 0.9656349794376818,
+    "task_fe9f04ca7ab58319": 0.9792778983429213,
+    "task_8327f80e56f8f0c9": 0.9785818928495421,
+    "task_2091492dc273814b": 0.8547019108416253,
+    "task_01f8792930576431": 0.9820535464384003,
+    "task_11d602d3b18ec9bc": 0.8981446076081063,
+    "task_b781f0defa3def59": 0.9536927595226082,
+    "task_5260e94bc4b1c019": 0.9748522607748765,
+    "task_022a9cc20d7ef633": 0.9981320734526969,
+    "task_58083b0a5c05d3de": 1.0174538313122834,
+    "task_b922e653c60384d7": 0.9582544130381712,
+    "task_a1c38c1f3514d031": 0.9788545153273361,
+    "task_93122ec314e27241": 1.038972173541262,
+    "task_31c9f2c9a8e2e1e1": 0.9405825038785001,
+    "task_7b4843f6cb971da4": 1.0382512371649966,
+    "task_038da715a275ff62": 1.0392241483832165,
+    "task_38e0da1b4c64631d": 1.0353567188461774,
+    "task_fbf23fda368c5cbf": 0.934924570888112,
+    "task_61673fcfcee97378": 0.9628439598942182,
+    "task_6955ce31c9758a49": 0.9834860797849638,
+    "task_b63da5272897c877": 0.9858483087267771,
+    "task_6f60dae460e4a4b2": 1.0202228855545925,
+    "task_bf33ff1099079901": 0.9999332638383184,
+    "task_40a4d11e3749b1f2": 0.9686550542901659,
+    "task_867e8770a3093031": 0.9525591151325661,
+    "task_8f0f26ac798e3933": 0.9884199115338554,
+    "task_8180a1aff2547746": 0.9672189450726645,
+    "task_2492ac5ce5d94f5c": 0.9830955372947521,
+    "task_3dcfe293848c9dee": 0.963177175282294,
+    "task_dc3c7f5fc8695c5b": 1.0193528340774347,
+    "task_11660bee65347aa1": 0.9499270417417044,
+    "task_50c55e51b8c8eda7": 1.0218747929104073,
+    "task_c5d3a8a1092598c8": 1.0642945314621042
+   },
+   "shared_relative_change": 1.2432007789611816,
+   "pinned_one_hot": true,
+   "finite": true,
+   "routes": {
+    "task_e2ee5cd124a06968": [
+     2,
+     9,
+     5
+    ],
+    "task_9a47a012838cf2f1": [
+     7,
+     2,
+     2
+    ],
+    "task_176fb672e6372024": [
+     11,
+     10,
+     2
+    ],
+    "task_16fcfa528d9347a5": [
+     6,
+     11,
+     9
+    ],
+    "task_2325a410e1e7c49f": [
+     4,
+     0,
+     10
+    ],
+    "task_a75284ab166991a7": [
+     7,
+     2,
+     10
+    ],
+    "task_d4a1a50f91e6c134": [
+     0,
+     7,
+     9
+    ],
+    "task_72e3ce4d2e828944": [
+     0,
+     7,
+     1
+    ],
+    "task_fa8bc00936b49ea0": [
+     2,
+     9,
+     8
+    ],
+    "task_a880e9509f0eb15d": [
+     5,
+     1,
+     11
+    ],
+    "task_249296b8fbf0621e": [
+     1,
+     1,
+     5
+    ],
+    "task_db56ae0ebd4c0fe9": [
+     2,
+     5,
+     4
+    ],
+    "task_58dbb957e39ceda1": [
+     1,
+     10,
+     9
+    ],
+    "task_b564f659534e0b5a": [
+     2,
+     4,
+     4
+    ],
+    "task_9a8081f179645836": [
+     0,
+     6,
+     0
+    ],
+    "task_6fa9e5d406ea62ee": [
+     1,
+     1,
+     5
+    ],
+    "task_ba8e41a884a4f082": [
+     11,
+     2,
+     8
+    ],
+    "task_d1e7323efd6cba35": [
+     2,
+     11,
+     6
+    ],
+    "task_60df934df0cb29b1": [
+     4,
+     1,
+     9
+    ],
+    "task_5324f9206b0d8247": [
+     10,
+     11,
+     10
+    ],
+    "task_eeb0eb3aab7f10e1": [
+     4,
+     2,
+     11
+    ],
+    "task_50ad0529effe9500": [
+     5,
+     8,
+     0
+    ],
+    "task_4bcfc3f6eb86ee2e": [
+     10,
+     3,
+     0
+    ],
+    "task_eb91e23653b1e85b": [
+     7,
+     7,
+     9
+    ],
+    "task_60fdd00a5f06dbda": [
+     4,
+     6,
+     10
+    ],
+    "task_4865aced9d00a9cd": [
+     10,
+     9,
+     3
+    ],
+    "task_bcbd5778a52301c7": [
+     1,
+     4,
+     6
+    ],
+    "task_f01ac352136afae5": [
+     3,
+     7,
+     0
+    ],
+    "task_103f2e5a036d0548": [
+     11,
+     6,
+     9
+    ],
+    "task_fb38c762b7d7d77c": [
+     6,
+     11,
+     9
+    ],
+    "task_7ccffa4550c7d483": [
+     3,
+     6,
+     10
+    ],
+    "task_115968ac11c93881": [
+     3,
+     5,
+     4
+    ],
+    "task_fe9f04ca7ab58319": [
+     3,
+     9,
+     1
+    ],
+    "task_8327f80e56f8f0c9": [
+     7,
+     1,
+     5
+    ],
+    "task_2091492dc273814b": [
+     4,
+     5,
+     3
+    ],
+    "task_01f8792930576431": [
+     11,
+     6,
+     2
+    ],
+    "task_11d602d3b18ec9bc": [
+     10,
+     6,
+     4
+    ],
+    "task_b781f0defa3def59": [
+     10,
+     3,
+     8
+    ],
+    "task_5260e94bc4b1c019": [
+     8,
+     0,
+     9
+    ],
+    "task_022a9cc20d7ef633": [
+     3,
+     2,
+     7
+    ],
+    "task_58083b0a5c05d3de": [
+     1,
+     1,
+     6
+    ],
+    "task_b922e653c60384d7": [
+     0,
+     1,
+     1
+    ],
+    "task_a1c38c1f3514d031": [
+     9,
+     11,
+     7
+    ],
+    "task_93122ec314e27241": [
+     3,
+     11,
+     0
+    ],
+    "task_31c9f2c9a8e2e1e1": [
+     7,
+     1,
+     5
+    ],
+    "task_7b4843f6cb971da4": [
+     11,
+     3,
+     8
+    ],
+    "task_038da715a275ff62": [
+     11,
+     6,
+     2
+    ],
+    "task_38e0da1b4c64631d": [
+     5,
+     2,
+     10
+    ],
+    "task_fbf23fda368c5cbf": [
+     10,
+     10,
+     5
+    ],
+    "task_61673fcfcee97378": [
+     11,
+     4,
+     10
+    ],
+    "task_6955ce31c9758a49": [
+     6,
+     8,
+     11
+    ],
+    "task_b63da5272897c877": [
+     5,
+     7,
+     2
+    ],
+    "task_6f60dae460e4a4b2": [
+     5,
+     9,
+     9
+    ],
+    "task_bf33ff1099079901": [
+     7,
+     1,
+     11
+    ],
+    "task_40a4d11e3749b1f2": [
+     3,
+     7,
+     0
+    ],
+    "task_867e8770a3093031": [
+     1,
+     4,
+     6
+    ],
+    "task_8f0f26ac798e3933": [
+     3,
+     6,
+     5
+    ],
+    "task_8180a1aff2547746": [
+     7,
+     4,
+     11
+    ],
+    "task_2492ac5ce5d94f5c": [
+     0,
+     5,
+     11
+    ],
+    "task_3dcfe293848c9dee": [
+     10,
+     9,
+     3
+    ],
+    "task_dc3c7f5fc8695c5b": [
+     7,
+     0,
+     9
+    ],
+    "task_11660bee65347aa1": [
+     8,
+     1,
+     1
+    ],
+    "task_50c55e51b8c8eda7": [
+     0,
+     1,
+     2
+    ],
+    "task_c5d3a8a1092598c8": [
+     5,
+     5,
+     11
+    ]
+   },
+   "rounds": [
+    {
+     "round": 0,
+     "argmin_ok": true,
+     "slots_used": 12
+    },
+    {
+     "round": 1,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.9375
+    },
+    {
+     "round": 2,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 3,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 4,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 5,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 6,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 7,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 8,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 9,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 10,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 11,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 12,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 13,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 14,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 15,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 16,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 17,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 18,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 19,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 20,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 21,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 22,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 23,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 24,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.953125
+    },
+    {
+     "round": 25,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 26,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 27,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 28,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 29,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 30,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 31,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 32,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 33,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 34,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 35,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 36,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 37,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 38,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 39,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 40,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 41,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 42,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 43,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 44,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 45,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 46,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 47,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 48,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 49,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.953125
+    },
+    {
+     "round": 50,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 51,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 52,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 53,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.953125
+    },
+    {
+     "round": 54,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 55,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 56,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.96875
+    },
+    {
+     "round": 57,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 58,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 59,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 60,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 61,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 0.984375
+    },
+    {
+     "round": 62,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    },
+    {
+     "round": 63,
+     "argmin_ok": true,
+     "slots_used": 12,
+     "changed": 1.0
+    }
+   ],
+   "search_seconds": 346.6,
+   "train_seconds": 2857.0,
+   "ari_by_position": [
+    -0.006590333012848532,
+    0.007060286877633514,
+    0.004559298569450858
+   ],
+   "reload_exact": true
+  }
+ },
+ "equivalence": {
+  "0": true,
+  "1": true,
+  "2": true
+ },
+ "complete": true,
+ "references": {
+  "O_b2_g131072": {
+   "0": 0.6243322438008752,
+   "1": 0.004623170973353442,
+   "2": 0.005084436594005006
+  },
+  "L_b2_g131072": {
+   "0": 0.9608443343636486,
+   "1": 0.9542188262227542,
+   "2": 0.9186814910037783
+  }
+ },
+ "classification": "J1_FAILS",
+ "finished_utc": "2026-09-11T21:40:22.392590+00:00"
+}

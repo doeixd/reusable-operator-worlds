@@ -1608,3 +1608,12 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   learned search component is not a formation mechanism while enumeration is
   cheap (E5, E5.1). Working hypotheses CF1-CF7 live in PREDICTIONS.md and are
   not preregistered.
+- COMMIT THE INDEPENDENT SCORER WITH THE RUNNER, BEFORE LAUNCH (J1,
+  2026-09-11). No code may be committed while a run is in flight, so a scorer
+  written afterwards is written knowing the headline. Treat the independent
+  scorer as part of the pre-launch acceptance set.
+- AN EARLY HARD COMMITMENT ON AN UNINFORMED STATE LOCKS IN (J1). Search in the
+  loop found the true minimum every round, but its first search ran on a
+  random library and the assignment never changed again (0% after round 3-5).
+  Any commitment mechanism must report its per-round change rate and justify
+  the state at the first commitment.

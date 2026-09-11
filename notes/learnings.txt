@@ -4843,3 +4843,19 @@ than as a one-off miss.
   reading the imported SO1R code before implementing, fixed by an amendment
   before any number existed. When a plan reuses an instrument, diff its seeds
   and indices against the original, not only its logic.
+
+- SEARCH BREAKS A SYMMETRY, BUT A COMMITMENT MADE ON AN UNINFORMED STATE IS
+  ARBITRARY AND SELF-REINFORCING (J1, 2026-09-11). Exhaustive route search in
+  the training loop found the true support-MSE minimum every round, yet the
+  first search ran on a random library, the library fit that arbitrary
+  assignment, and the assignment never changed again (0% route change from
+  round 3-5 on every world; ARI with the teacher ~0). The result, 0.76
+  against the oracle's 0.005, beat soft learned routing and a permuted sham by
+  ~0.2 but formed nothing. Hard-EM needs informed first commitments; when a
+  plan adds a commitment step, record its change rate per round and ask what
+  the state looks like at the FIRST commitment.
+- WRITE THE INDEPENDENT SCORER BEFORE LAUNCH (J1). The J1 scorer was written
+  after the run because no code may be committed while a run is in flight;
+  it re-scores every saved model and agreed, but it was written knowing the
+  headline. Freeze-time acceptance should include the scorer so it is
+  committed with the runner.

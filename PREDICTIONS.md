@@ -8110,3 +8110,49 @@ preferred next mechanism and the Tier-1 single-operator probe follows. The
 threshold adds a quantitative design input for J1c and J2: a formation phase
 needs to bring libraries below about 0.5 before gradient routing can take
 over. SO2 and control flow stay closed.
+
+# J1 outcome (2026-09-11): J1_FAILS - search breaks the symmetry, but wrongly, and locks in
+
+Registered in J1_SEARCH_IN_THE_LOOP_PLAN.md (7e7ff1b) before any code.
+
+| world | J1 (search in loop) | SHAM (permuted search) | SO1 learned routes | SO1 oracle routes |
+|---|---|---|---|---|
+| 0 | 0.758 (not interpreted; world-0 check pending) | 0.978 | 0.961 | 0.624 |
+| 1 | 0.757 | 0.982 | 0.954 | 0.0046 |
+| 2 | 0.774 | 0.975 | 0.919 | 0.0051 |
+
+(terminal median query NMSE, B = 2, 65,536 updates, stream 103; threshold 0.05)
+
+Route-change fraction per re-search round (J1): after the first round at most
+8% of tasks changed route, and from rounds 3-5 onward 0% on every world for
+the remaining ~60 rounds. Per-position ARI between J1's slots and the teacher's
+primitives (analysis only) stayed at -0.01 to 0.04. SHAM re-assigned 97-100%
+of routes every round, as designed. Search cost 291-352 s per cell against
+2,266-2,739 s of training.
+
+Scorekeeping:
+
+- J1_ACQUIRES (0.35): **WRONG.**
+- J1_IMPROVES or better (0.6): **WRONG.** J1 beats min(SHAM, LEARNED) by
+  about 0.2 (0.76 against 0.92-0.98) but nowhere near the registered factor
+  of two.
+- SHAM fails in all three worlds (0.9): **CORRECT** (0.975-0.982).
+- World 0 J1 fails (0.9): **CORRECT** numerically; not interpreted until the
+  read-only world-0 check is committed, as the plan requires.
+- The registered risk ("hard-EM from a random library can lock into an early
+  bad assignment") is what happened, on every world, within 3-5 rounds.
+
+Working hypothesis CF4 (search in the loop enables co-formation) is REFUTED
+as registered: at SO1's envelope with 1,024-update re-search, exhaustive
+search does not break the symmetry correctly. Registered consequence: J1c
+(task-length curriculum) and the Tier-1 single-operator co-formation probe
+become primary. Stop rule 2 stands; SO2 and control flow stay closed.
+
+Unregistered interpretation: the failure is not in search (it finds the true
+minimum every round) but in WHEN it commits. A commitment made on an
+uninformed library is arbitrary and self-reinforcing. This sharpens CF6
+(extend, do not undo): the first commitment must already be informed. It is
+the specific reason a curriculum whose first stage makes routing trivial
+(single-operator tasks, where tasks sharing an operation look alike in
+input-output) is the natural next test, and it suggests a J1 variant that
+delays or softens early commitment would need its own frozen plan.
