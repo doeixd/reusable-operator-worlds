@@ -71,6 +71,7 @@ FROZEN = {
     "SO1R_ROUTE_ONLY_PLAN.md": "cf32b61",
     "J0_LIBRARY_QUALITY_CENSUS_PLAN.md": "967ca78",
     "J0_AMENDMENT_1.md": "0e37ec8",
+    "J1_SEARCH_IN_THE_LOOP_PLAN.md": "7e7ff1b",
 }
 
 STATUS_PATH_PATTERN = re.compile(
