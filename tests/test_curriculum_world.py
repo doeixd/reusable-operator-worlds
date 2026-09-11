@@ -44,3 +44,14 @@ class CurriculumWorldTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class TaskIdIsolationTests(unittest.TestCase):
+    def test_ids_never_collide_with_canonical_or_other_stages(self):
+        from row.rotated_world import generate_rotated_world
+        base = load_config("configs/v1.yaml")
+        canonical = {t.task_id for t in generate_rotated_world(replace(base.world, seed=1)).tasks}
+        stage1 = {t.task_id for t in generate_curriculum_world(config(length=1, tasks=60)).tasks}
+        stage2 = {t.task_id for t in generate_curriculum_world(config(length=2, tasks=64)).tasks}
+        self.assertFalse(canonical & stage1)
+        self.assertFalse(canonical & stage2)
+        self.assertFalse(stage1 & stage2)

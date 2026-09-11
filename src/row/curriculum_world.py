@@ -75,7 +75,10 @@ def generate_curriculum_world(config: CurriculumWorldConfig) -> World:
     library = rotated_library(config)
     draws = _rng(config.seed, 40).integers(0, config.teacher_primitives,
                                            size=(config.tasks, config.program_length))
-    task_ids = _draw_opaque_task_ids(_rng(config.seed, 21), config.tasks)
+    # Stream 41, keyed by length: the canonical generator draws ids from stream
+    # 21, so sharing it would let a stage-1 task and a stage-3 task collide on a
+    # task id and silently share a learner task code across stages.
+    task_ids = _draw_opaque_task_ids(_rng(config.seed, 41, config.program_length), config.tasks)
     tasks = []
     for index, task_id in enumerate(task_ids):
         program = Program(tuple(int(p) for p in draws[index]))
