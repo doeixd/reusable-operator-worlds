@@ -4900,3 +4900,17 @@ on B2 co-formation risk and a search-router baseline to the budgeted-execution
 draft, and a "Where Track B stands" paragraph to the README. Fixed SO1
 status.json to report ETA for one worker and at the worker cap (it previously
 assumed the cap was always reached). SO1 tests pass; check_prereg passes.
+
+# Staged-formation hypotheses recorded (2026-09-11)
+
+No new result. After SO1R and discussion with the PI, recorded that the
+rotated architecture likely needs staged formation, and distinguished three
+kinds of staging by the claim each licenses (teacher-assisted, task-length
+curriculum, search-in-the-loop). POST_E6_RESEARCH_PROGRAM.md B1b gains rung
+J1c (length curriculum: single-operator, then length-2, then length-3 tasks,
+no routes revealed), staging rules (survival checks, all stages priced,
+learned search only beyond the enumeration horizon) and a revised order:
+J0 -> Tier-1 single-operator co-formation probe -> J1 and J1c as competing
+mechanisms -> J2 diagnostic only. PREDICTIONS.md gains working hypotheses
+CF1-CF7, explicitly NOT preregistered, each with its refutation condition;
+learnings and AGENTS.md gain the staged-formation rules.

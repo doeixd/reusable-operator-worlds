@@ -4814,3 +4814,16 @@ than as a one-off miss.
   1.30-1.37 while exhaustive search reached 0.62-0.72. Early in joint training
   every library is poor, so this is plausibly the mechanism of the joint
   failure; it is an observation, not yet a tested claim.
+
+- CO-FORMATION FAILURES CALL FOR STAGING, AND THE KIND OF STAGING DECIDES THE
+  CLAIM (2026-09-11, after SO1R and PI discussion). When each half of a
+  system forms given the other and neither forms from nothing, some early
+  commitment must break the symmetry. Oracle staging (teacher routes first)
+  proves only that commitment helps; a task-distribution curriculum (easy
+  programs first, no routes revealed) supports "learnable under a curriculum";
+  search-in-the-loop supports "learnable with a discrete commitment step".
+  Keep the three apart, price every stage in the final claim, require each
+  stage's structure to survive the next (H50-H53: formed structure is not
+  reorganizable), and do not reach for a learned search while enumeration is
+  cheap (E5). Working hypotheses CF1-CF7 are in PREDICTIONS.md, explicitly
+  not preregistered.

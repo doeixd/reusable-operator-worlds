@@ -1599,3 +1599,12 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   the problem; every Track B positive rests on worlds 1-2. Its cause is
   unexplained and must be checked before any joint-acquisition result is read
   on world 0.
+- STAGED FORMATION RULES (2026-09-11). When a joint learner fails but each half
+  forms given the other, stage it, but label the staging: teacher-assisted
+  (diagnostic only), task-distribution curriculum (no routes revealed), or
+  search-in-the-loop. Every staged plan registers a survival check that each
+  stage's structure is extended, not undone, by the next, and charges all
+  stages' compute to the final claim against a matched non-staged baseline. A
+  learned search component is not a formation mechanism while enumeration is
+  cheap (E5, E5.1). Working hypotheses CF1-CF7 live in PREDICTIONS.md and are
+  not preregistered.

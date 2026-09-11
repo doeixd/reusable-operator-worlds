@@ -8030,3 +8030,46 @@ Unregistered observation: on world 0's poor libraries the relaxation is much
 weaker than exhaustive search (1.30-1.37 against 0.62-0.72), so gradient route
 inference degrades with library quality, which is exactly the condition early
 in joint acquisition.
+
+# Working hypotheses after SO1R (2026-09-11): staged formation. NOT PREREGISTERED
+
+Recorded after SO1 and SO1R, from discussion with the PI. These are working
+hypotheses, not registered predictions: each must be restated with a
+direction, threshold and confidence in its own frozen plan BEFORE the data that
+tests it exists, and none may later be cited as having been preregistered here.
+
+- **CF1 (rigidity / relaxation).** Soft route mixtures are a poor relaxation
+  for rigid primitives: a convex mixture of orthogonal maps is not orthogonal,
+  so the relaxed machine trained early differs from the hard machine evaluated
+  late. This is why the ordinary substrate co-forms and the rotated one does
+  not. Refuted if the rotated learner's soft-versus-hard gap does not exceed
+  the ordinary substrate's at matched library quality, or if J0's gap is flat.
+- **CF2 (route inference depends on library quality).** Gradient route
+  inference falls behind exhaustive search as library quality falls, making
+  the joint failure self-reinforcing early in training. Motivated by one world
+  (world 0 in SO1R); tested by J0 across the 30 SO1 oracle libraries. Refuted
+  by a flat or non-monotone OPT-minus-ENUM gap across library quality.
+- **CF3 (length curriculum enables co-formation).** Ordering tasks from
+  single-operator to canonical length-3 programs, with no route supervision,
+  lets library and routes form together where joint training from scratch
+  fails. Tested by J1c against matched-compute non-staged training. Refuted if
+  the staged learner fails its offline gate, or passes only at a total compute
+  the non-staged learner also passes at.
+- **CF4 (search in the loop enables co-formation).** Alternating exhaustive
+  support-only route search with library updates breaks the symmetry without
+  a curriculum. Tested by J1 against a sham and the SO1 learned-route cell.
+  Refuted if J1 does not beat both, or locks into an early bad assignment on
+  most worlds.
+- **CF5 (no learned search below the enumeration horizon).** A trained route
+  writer does not improve formation or economy while exhaustive search is
+  cheap; it can pay only beyond the E5.1 horizon (depth 4-5). Carried from E5
+  and E5.1; any search-training round must be judged by E5's amortization
+  rule.
+- **CF6 (extend, do not undo).** A staged pipeline succeeds only if each stage
+  forms structure the next stage extends; where a later stage must reorganize
+  earlier structure, it fails (the H50-H53 path-dependence result). Tested by
+  registered survival checks in every staged plan.
+- **CF7 (general form, speculative).** The stronger and more rigid a
+  substrate's primitives, the more its formation needs discrete commitments or
+  staging. Supported only by the ordinary-versus-rotated contrast so far; it
+  needs at least one further substrate before it can be tested.

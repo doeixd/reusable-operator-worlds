@@ -360,6 +360,48 @@ Each rung gets its own frozen plan before code. Existence-before-discovery and
 SO2 is reachable only through a J1-style non-oracle mechanism that passes its
 own offline gate; its online test then follows B2 above unchanged.
 
+### Staged formation (added 2026-09-11 after PI discussion; working hypotheses CF1-CF7 in PREDICTIONS.md)
+
+The SO1/SO1R signature (each half forms given the other; neither forms from
+nothing) is the signature of a symmetry that must be broken by an early
+commitment. Staging is one way to make it. Three kinds of staging are
+distinguished because they license different claims:
+
+1. **Teacher-assisted staging** (J2): oracle routes first. Diagnostic only;
+   never a non-oracle claim.
+2. **Task-distribution curriculum** (new rung J1c): order the TASKS, never
+   reveal routes. Stage 1 trains on single-operator tasks (routing reduces to
+   clustering tasks onto slots), stage 2 on length-2 programs, stage 3 on the
+   canonical length-3 programs. Requires an additive world-generator variant
+   (program length per stage) with teacher programs hidden as usual. The
+   licensed claim is "learnable under a length curriculum", with every stage's
+   compute charged to it.
+3. **Search-in-the-loop** (J1): the operators themselves define the search
+   space; hard route commitments by exhaustive support-only search alternate
+   with library updates (hard-EM / expert-iteration shape). No curriculum, no
+   oracle.
+
+Rules for any staged rung:
+
+- **Extend, do not undo.** H50-H53 showed that wrongly formed structure is not
+  reorganizable. Each stage's plan must register a survival check: the
+  structure a stage forms (for example its slot-to-task clustering and
+  per-slot function) is still present and used after the next stage, measured
+  functionally on common states.
+- **Price every stage.** The final claim carries the total compute of all
+  stages, and the plan states the matched-compute non-staged comparison.
+- **Learned search waits for its horizon.** A trained route writer or
+  recognizer is not a formation mechanism here: E5 showed it loses to search
+  on quality and never amortizes, and E5.1 placed the enumeration horizon
+  between depths 4 and 5. A search-training round is admissible only for
+  programs beyond that horizon and is judged by E5's amortization rule.
+
+Revised ordering for B1b: J0 (census, minutes) -> a Tier-1 exploratory
+single-operator co-formation probe (one world, reduced budget; can co-formation
+succeed at all when routing is only clustering?) -> J1 and J1c as competing,
+separately frozen mechanisms with shams and compute accounting -> J2 only as a
+diagnostic if both fail -> SO2 only through a passing non-oracle mechanism.
+
 # Convergence gate
 
 The two tracks do not need to pass simultaneously for their own findings to be
