@@ -4914,3 +4914,34 @@ J0 -> Tier-1 single-operator co-formation probe -> J1 and J1c as competing
 mechanisms -> J2 diagnostic only. PREDICTIONS.md gains working hypotheses
 CF1-CF7, explicitly NOT preregistered, each with its refutation condition;
 learnings and AGENTS.md gain the staged-formation rules.
+
+# J0 library-quality census: CF2_SUPPORTED, as a threshold (2026-09-11)
+
+J0_LIBRARY_QUALITY_CENSUS_PLAN.md frozen at 967ca78 (protected a2c2c40);
+Amendment 1 (0e37ec8, protected eaedd16) fixed, before any code, a frozen
+contradiction: the SO1R bitwise check could not include RANDOM, whose stream
+index differs by construction. Runner, scorer and tests at a83e71f. The
+unchanged SO1R instrument ran on all 30 SO1 oracle libraries (no training),
+12:02-14:36 UTC, one process, exit 0; a real-run restart test passed.
+
+Registered statistic: pooled Spearman rho(q, g) = 0.521
+(threshold 0.5), permutation p = 0.0020; within-world rho
+-0.552 / 0.765 /
+0.692 (worlds 0/1/2). Classification CF2_SUPPORTED
+(independent numpy-only scorer agrees; harness OK; ORACLE bitwise vs SO1 on
+all 30; the six SO1R libraries reproduce bitwise; check_prereg and
+check_invalid pass).
+
+| library regime (median ORACLE query NMSE) | n | g = median log(OPT/ENUM) | OPT picks oracle route | ENUM picks oracle route | OPT support-loss drop |
+|---|---|---|---|---|---|
+| good (<= 0.47) | 11 | 0.000 (all) | 81-94% | 100% | 54-100% |
+| poor (0.62-0.92) | 13 | 0.00-0.66 (12 of 13 at 0.36-0.66) | 9-56% | >= 58% | 10-33% |
+| near random (1.01-1.26) | 6 | 0.17-0.35 | 5-14% | >= 58% | 10-11% |
+
+The registered rule passes narrowly, and the shape is a THRESHOLD, not a
+monotone slope: gradient route inference is exactly as good as exhaustive
+search on every library at or below 0.47 median NMSE and fails on almost every
+library at or above 0.62; within the poor regime the gap shrinks toward
+near-random libraries, where every route is bad. World 0's libraries all sit
+in the poor regime, which is why its within-world rho is negative. Report
+reports/j0_library_quality.json; logs reports/j0_library_quality_20260911.

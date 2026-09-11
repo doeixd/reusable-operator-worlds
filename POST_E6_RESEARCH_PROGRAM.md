@@ -396,6 +396,8 @@ Rules for any staged rung:
   between depths 4 and 5. A search-training round is admissible only for
   programs beyond that horizon and is judged by E5's amortization rule.
 
+J0 result (2026-09-11, appended): `CF2_SUPPORTED` narrowly (pooled rho 0.521, p 0.002; world 0 within-world rho -0.55). The shape is a threshold: gradient route inference equals search on every library at or below 0.47 median NMSE and fails above about 0.6. J1 is therefore the preferred next mechanism, and any staged plan (J1c, J2) should treat 'library below ~0.5 before gradient routing' as a design input, registered as its own threshold.
+
 Revised ordering for B1b: J0 (census, minutes) -> a Tier-1 exploratory
 single-operator co-formation probe (one world, reduced budget; can co-formation
 succeed at all when routing is only clustering?) -> J1 and J1c as competing,

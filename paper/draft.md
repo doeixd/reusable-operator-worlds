@@ -1480,3 +1480,16 @@ recoverable on a correct library; the failure is in acquiring library and
 routes together. On the one world whose libraries fail even with oracle
 routes, search still recovered the oracle route, while gradient route
 inference was markedly weaker.
+
+# Development provenance addendum: J0 library-quality census (2026-09-11)
+
+The route-only instrument was applied to all 30 libraries SO1 formed with
+oracle routes, spanning median query NMSE from 1.26 to 0.003. The learner's
+gradient route inference matched exhaustive search exactly on every library
+at or below 0.47 and fell well behind it on nearly every library at or above
+0.62, recovering the oracle route for as few as 5% of tasks, whereas search
+still recovered it for at least 58%. The registered rank-correlation test
+passed narrowly; the underlying pattern is a threshold in library quality.
+Early in joint training every library is on the poor side of that threshold,
+which is consistent with the hypothesis that joint acquisition fails because
+gradient routing cannot work until the library is already good.

@@ -1,0 +1,577 @@
+{
+ "frozen_plan": "J0_LIBRARY_QUALITY_CENSUS_PLAN.md",
+ "git_commit": "a83e71f",
+ "protocol": {
+  "id": "J0-library-quality-v1",
+  "frozen_plan": "J0_LIBRARY_QUALITY_CENSUS_PLAN.md",
+  "amendment": "J0_AMENDMENT_1.md",
+  "libraries": [
+   "O_b2_g16384",
+   "O_b2_g32768",
+   "O_b2_g65536",
+   "O_b2_g131072",
+   "O_b2_g262144",
+   "O_b64_g16384",
+   "O_b64_g32768",
+   "O_b64_g65536",
+   "O_b64_g131072",
+   "O_b64_g262144"
+  ],
+  "worlds": [
+   0,
+   1,
+   2
+  ],
+  "permutations": 10000,
+  "perm_seed": 1705,
+  "instrument": "audit_so1r_route_only.run_library (559580d)",
+  "input_sha256": {
+   "J0_LIBRARY_QUALITY_CENSUS_PLAN.md": "62bfdaf4291598da67e9c1e7e64a109582c9e2887196b17f9c7966d0777d515d",
+   "J0_AMENDMENT_1.md": "820e08507302da71ad58ed0c79e42f552ad205eaab0ccf22f6d7a6cacbbffd8e",
+   "reports/so1_budget_bracket_r2.json": "a771c215ffb9ce2e2c69830a7fd02f5583a25630c346e810e2662d93a3382fdc"
+  },
+  "environment": {
+   "python": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+   "torch": "2.13.0+cpu",
+   "numpy": "2.3.5",
+   "psutil": "7.2.1",
+   "platform": "Windows-11-10.0.26100-SP0",
+   "torch_threads": 8
+  }
+ },
+ "protocol_sha256": "64999ddbf3bd5ef3c6d04a20cd0aeb5d98368fd410ac109ad4270e317e43064b",
+ "started_utc": "2026-09-11T12:02:59.557611+00:00",
+ "cells": {
+  "O_b2_g16384_w0": {
+   "medians": {
+    "oracle": 0.8956975841499764,
+    "enum": 0.8956975841499764,
+    "opt": 1.3542073182826444,
+    "random": 1.5358647388272013,
+    "k0": 1.2670245409781669
+   },
+   "q": -0.11015244066888027,
+   "g": 0.41003824671798705,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.171875,
+   "opt_median_support_drop": 0.10081023721498784,
+   "seconds": 244.7
+  },
+  "O_b2_g16384_w1": {
+   "medians": {
+    "oracle": 0.8843973397641315,
+    "enum": 0.8843973397641315,
+    "opt": 1.2623521107443265,
+    "random": 1.4860864668373885,
+    "k0": 1.2255128370841688
+   },
+   "q": -0.12284883795889723,
+   "g": 0.35645735630554204,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.375,
+   "opt_median_support_drop": 0.11155321413267785,
+   "seconds": 261.6
+  },
+  "O_b2_g16384_w2": {
+   "medians": {
+    "oracle": 0.736681832804724,
+    "enum": 0.736681832804724,
+    "opt": 1.4141500694791627,
+    "random": 1.5795586525918357,
+    "k0": 1.354762482364177
+   },
+   "q": -0.3055991858326434,
+   "g": 0.6264785554009371,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.15625,
+   "opt_median_support_drop": 0.10164031251577742,
+   "seconds": 238.6
+  },
+  "O_b2_g32768_w0": {
+   "medians": {
+    "oracle": 0.8266021511814581,
+    "enum": 0.8266021511814581,
+    "opt": 1.3703183399520014,
+    "random": 1.5723988721325537,
+    "k0": 1.2561382794752238
+   },
+   "q": -0.19043177446238202,
+   "g": 0.4579053805642831,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.296875,
+   "opt_median_support_drop": 0.11606564165716154,
+   "seconds": 264.5
+  },
+  "O_b2_g32768_w1": {
+   "medians": {
+    "oracle": 0.10255871381571058,
+    "enum": 0.10255871381571058,
+    "opt": 0.10721267276135782,
+    "random": 1.9272214508462109,
+    "k0": 1.879472454194132
+   },
+   "q": -2.2773198266868673,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.90625,
+   "opt_median_support_drop": 0.8991383101636361,
+   "seconds": 234.7
+  },
+  "O_b2_g32768_w2": {
+   "medians": {
+    "oracle": 0.043784551824248966,
+    "enum": 0.043784551824248966,
+    "opt": 0.04472865636846124,
+    "random": 1.997911248043907,
+    "k0": 1.954577437608254
+   },
+   "q": -3.1284742218888395,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.859375,
+   "opt_median_support_drop": 0.9574712118987951,
+   "seconds": 281.6
+  },
+  "O_b2_g65536_w0": {
+   "medians": {
+    "oracle": 0.721315539940348,
+    "enum": 0.721315539940348,
+    "opt": 1.3233849841033392,
+    "random": 1.6247729358440128,
+    "k0": 1.3426867357791195
+   },
+   "q": -0.3266785953536255,
+   "g": 0.6214129935533523,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.359375,
+   "opt_median_support_drop": 0.11331063524284546,
+   "seconds": 340.8
+  },
+  "O_b2_g65536_w1": {
+   "medians": {
+    "oracle": 0.014080965165483914,
+    "enum": 0.014080965165483914,
+    "opt": 0.014238533542431054,
+    "random": 2.004595062723008,
+    "k0": 2.006610696858382
+   },
+   "q": -4.262931381916657,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.921875,
+   "opt_median_support_drop": 0.9859589187545689,
+   "seconds": 293.4
+  },
+  "O_b2_g65536_w2": {
+   "medians": {
+    "oracle": 0.7347742287559149,
+    "enum": 0.7347742287559149,
+    "opt": 1.3399250145958808,
+    "random": 1.5234336861773252,
+    "k0": 1.4011732629275766
+   },
+   "q": -0.30819199871686886,
+   "g": 0.579326175961272,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.34375,
+   "opt_median_support_drop": 0.11115541813420265,
+   "seconds": 295.2
+  },
+  "O_b2_g131072_w0": {
+   "medians": {
+    "oracle": 0.6243322438008752,
+    "enum": 0.6243322438008752,
+    "opt": 1.3006031266455302,
+    "random": 1.6451713974280469,
+    "k0": 1.414269088708192
+   },
+   "q": -0.4710726103210683,
+   "g": 0.6576275629111001,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.4375,
+   "opt_median_support_drop": 0.12756546568140065,
+   "seconds": 344.9
+  },
+  "O_b2_g131072_w1": {
+   "medians": {
+    "oracle": 0.004623170973353442,
+    "enum": 0.004623170973353442,
+    "opt": 0.004889933720902849,
+    "random": 2.030460848345876,
+    "k0": 2.027348385162301
+   },
+   "q": -5.376674451455618,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.9375,
+   "opt_median_support_drop": 0.995214489649118,
+   "seconds": 380.4
+  },
+  "O_b2_g131072_w2": {
+   "medians": {
+    "oracle": 0.005084436594005006,
+    "enum": 0.005084436594005006,
+    "opt": 0.005602259629392547,
+    "random": 2.0246173243577577,
+    "k0": 1.9918481526464218
+   },
+   "q": -5.281571053259259,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.84375,
+   "opt_median_support_drop": 0.9945307730447198,
+   "seconds": 291.3
+  },
+  "O_b2_g262144_w0": {
+   "medians": {
+    "oracle": 0.6336850600095298,
+    "enum": 0.6336850600095298,
+    "opt": 0.7457636244616015,
+    "random": 1.6396771993742534,
+    "k0": 1.4297863893766227
+   },
+   "q": -0.45620319874006376,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.5625,
+   "opt_median_support_drop": 0.3324806254685039,
+   "seconds": 253.0
+  },
+  "O_b2_g262144_w1": {
+   "medians": {
+    "oracle": 0.0026475185877859373,
+    "enum": 0.0026475185877859373,
+    "opt": 0.002736892702355212,
+    "random": 1.9904452749720831,
+    "k0": 2.0295399106872987
+   },
+   "q": -5.934132459631041,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.921875,
+   "opt_median_support_drop": 0.9973648523086845,
+   "seconds": 269.2
+  },
+  "O_b2_g262144_w2": {
+   "medians": {
+    "oracle": 0.002930145339450842,
+    "enum": 0.002930145339450842,
+    "opt": 0.0030608523356197084,
+    "random": 2.0028771545057005,
+    "k0": 1.980702913831558
+   },
+   "q": -5.832703253275257,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.875,
+   "opt_median_support_drop": 0.997014712033275,
+   "seconds": 322.4
+  },
+  "O_b64_g16384_w0": {
+   "medians": {
+    "oracle": 1.2166460640485097,
+    "enum": 1.2119882686683674,
+    "opt": 1.4432494545405006,
+    "random": 1.756219771208809,
+    "k0": 1.5595942649291505
+   },
+   "q": 0.1960979451241553,
+   "g": 0.173777717542085,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 0.640625,
+   "opt_equals_oracle_route": 0.078125,
+   "opt_median_support_drop": 0.10966601530554326,
+   "seconds": 293.5
+  },
+  "O_b64_g16384_w1": {
+   "medians": {
+    "oracle": 1.2523523518393875,
+    "enum": 1.2284460406153668,
+    "opt": 1.489401684983146,
+    "random": 1.7394381956411875,
+    "k0": 1.5399816151976904
+   },
+   "q": 0.22502366426519976,
+   "g": 0.19366966851870265,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 0.578125,
+   "opt_equals_oracle_route": 0.046875,
+   "opt_median_support_drop": 0.11035975134645742,
+   "seconds": 364.0
+  },
+  "O_b64_g16384_w2": {
+   "medians": {
+    "oracle": 1.2572858697783298,
+    "enum": 1.2531908241192915,
+    "opt": 1.4772502459020576,
+    "random": 1.7253978553223148,
+    "k0": 1.5310630058209158
+   },
+   "q": 0.22895532600960775,
+   "g": 0.17303384113899462,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 0.65625,
+   "opt_equals_oracle_route": 0.109375,
+   "opt_median_support_drop": 0.10402896368887149,
+   "seconds": 342.3
+  },
+  "O_b64_g32768_w0": {
+   "medians": {
+    "oracle": 1.0060021512223494,
+    "enum": 1.0060021512223494,
+    "opt": 1.4278941366207363,
+    "random": 1.587783212045741,
+    "k0": 1.286393346914271
+   },
+   "q": 0.005984210067258495,
+   "g": 0.3497299071485501,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 0.9375,
+   "opt_equals_oracle_route": 0.046875,
+   "opt_median_support_drop": 0.10169476854165639,
+   "seconds": 299.3
+  },
+  "O_b64_g32768_w1": {
+   "medians": {
+    "oracle": 1.006605705625703,
+    "enum": 1.006605705625703,
+    "opt": 1.3878100342918844,
+    "random": 1.5484537424551852,
+    "k0": 1.263253944537885
+   },
+   "q": 0.006583983559539072,
+   "g": 0.3257072459165149,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.0625,
+   "opt_median_support_drop": 0.09729977705627846,
+   "seconds": 364.2
+  },
+  "O_b64_g32768_w2": {
+   "medians": {
+    "oracle": 1.0059501345619564,
+    "enum": 1.0059501345619564,
+    "opt": 1.4232882160277087,
+    "random": 1.5513885538386263,
+    "k0": 1.2779523386341716
+   },
+   "q": 0.005932502419147626,
+   "g": 0.34311338017039483,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 0.953125,
+   "opt_equals_oracle_route": 0.140625,
+   "opt_median_support_drop": 0.0993258087996367,
+   "seconds": 325.4
+  },
+  "O_b64_g65536_w0": {
+   "medians": {
+    "oracle": 0.9206942058846245,
+    "enum": 0.9206942058846245,
+    "opt": 1.3756174191795472,
+    "random": 1.5541814041253286,
+    "k0": 1.234807522758324
+   },
+   "q": -0.08262732187135768,
+   "g": 0.41865470424899204,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 0.984375,
+   "opt_equals_oracle_route": 0.109375,
+   "opt_median_support_drop": 0.1032669955863301,
+   "seconds": 271.0
+  },
+  "O_b64_g65536_w1": {
+   "medians": {
+    "oracle": 0.8987419022584795,
+    "enum": 0.8987419022584795,
+    "opt": 1.2817420384883627,
+    "random": 1.5254411729426987,
+    "k0": 1.2210775356141683
+   },
+   "q": -0.10675937999194438,
+   "g": 0.3794929517726454,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.21875,
+   "opt_median_support_drop": 0.10404207283585556,
+   "seconds": 223.5
+  },
+  "O_b64_g65536_w2": {
+   "medians": {
+    "oracle": 0.9123178536461327,
+    "enum": 0.9123178536461327,
+    "opt": 1.362707581055663,
+    "random": 1.4952106498725486,
+    "k0": 1.2458316703009036
+   },
+   "q": -0.09176682589329997,
+   "g": 0.38608244413160514,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.09375,
+   "opt_median_support_drop": 0.10011362697506279,
+   "seconds": 270.3
+  },
+  "O_b64_g131072_w0": {
+   "medians": {
+    "oracle": 0.8412169276235704,
+    "enum": 0.8412169276235704,
+    "opt": 1.3444273585808015,
+    "random": 1.4809149418132472,
+    "k0": 1.2793197262854328
+   },
+   "q": -0.1729057121706468,
+   "g": 0.4548394381937917,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.25,
+   "opt_median_support_drop": 0.10748570287143686,
+   "seconds": 289.9
+  },
+  "O_b64_g131072_w1": {
+   "medians": {
+    "oracle": 0.4707281569165357,
+    "enum": 0.4707281569165357,
+    "opt": 0.48290558036170694,
+    "random": 1.7067461695885355,
+    "k0": 1.4565936097945595
+   },
+   "q": -0.7534745131235712,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.828125,
+   "opt_median_support_drop": 0.5396345898943582,
+   "seconds": 291.3
+  },
+  "O_b64_g131072_w2": {
+   "medians": {
+    "oracle": 0.09353658305991143,
+    "enum": 0.09353658305991143,
+    "opt": 0.09591633443781081,
+    "random": 1.9842713096259748,
+    "k0": 1.9217097464323096
+   },
+   "q": -2.369402656537926,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.8125,
+   "opt_median_support_drop": 0.91038264098195,
+   "seconds": 297.9
+  },
+  "O_b64_g262144_w0": {
+   "medians": {
+    "oracle": 0.7188103428711731,
+    "enum": 0.7188103428711731,
+    "opt": 1.365247949272736,
+    "random": 1.6183331963142704,
+    "k0": 1.383577493737933
+   },
+   "q": -0.3301577350956023,
+   "g": 0.6425518980917297,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.296875,
+   "opt_median_support_drop": 0.1144059821319958,
+   "seconds": 280.1
+  },
+  "O_b64_g262144_w1": {
+   "medians": {
+    "oracle": 0.008741199308902072,
+    "enum": 0.008741199308902072,
+    "opt": 0.008817085717631165,
+    "random": 1.9548690147732812,
+    "k0": 2.0078097750994894
+   },
+   "q": -4.739707878030414,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.9375,
+   "opt_median_support_drop": 0.9915845902608427,
+   "seconds": 254.6
+  },
+  "O_b64_g262144_w2": {
+   "medians": {
+    "oracle": 0.007762586389101965,
+    "enum": 0.007762586389101965,
+    "opt": 0.007845111373076369,
+    "random": 2.0052598066859337,
+    "k0": 1.9997035272619277
+   },
+   "q": -4.858439702753618,
+   "g": 0.0,
+   "oracle_bitwise": true,
+   "finite": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.859375,
+   "opt_median_support_drop": 0.9927392842943932,
+   "seconds": 261.2
+  }
+ },
+ "so1r_reproduction": {
+  "O_b2_g131072_w0": true,
+  "O_b2_g131072_w1": true,
+  "O_b2_g131072_w2": true,
+  "O_b64_g262144_w0": true,
+  "O_b64_g262144_w1": true,
+  "O_b64_g262144_w2": true
+ },
+ "complete": true,
+ "statistics": {
+  "pooled_rho": 0.5214212654678979,
+  "permutation_p": 0.001999800019998,
+  "within_world_rho": {
+   "0": -0.5515151515151515,
+   "1": 0.7647233910387892,
+   "2": 0.6917637567037023
+  }
+ },
+ "harness_ok": true,
+ "classification": "CF2_SUPPORTED",
+ "finished_utc": "2026-09-11T14:29:13.746447+00:00"
+}

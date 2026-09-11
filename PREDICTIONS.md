@@ -8073,3 +8073,40 @@ tests it exists, and none may later be cited as having been preregistered here.
   substrate's primitives, the more its formation needs discrete commitments or
   staging. Supported only by the ordinary-versus-rotated contrast so far; it
   needs at least one further substrate before it can be tested.
+
+# J0 outcome (2026-09-11): CF2_SUPPORTED (narrowly), with a threshold shape
+
+Registered in J0_LIBRARY_QUALITY_CENSUS_PLAN.md (967ca78) and Amendment 1
+(0e37ec8) before any code. Pooled Spearman rho(q, g) = 0.521,
+permutation p = 0.0020, within-world rho
+-0.552 / 0.765 /
+0.692.
+
+| library regime (median ORACLE query NMSE) | n | g = median log(OPT/ENUM) | OPT picks oracle route | ENUM picks oracle route | OPT support-loss drop |
+|---|---|---|---|---|---|
+| good (<= 0.47) | 11 | 0.000 (all) | 81-94% | 100% | 54-100% |
+| poor (0.62-0.92) | 13 | 0.00-0.66 (12 of 13 at 0.36-0.66) | 9-56% | >= 58% | 10-33% |
+| near random (1.01-1.26) | 6 | 0.17-0.35 | 5-14% | >= 58% | 10-11% |
+
+Scorekeeping:
+
+- CF2_SUPPORTED (0.55): **CORRECT, narrowly** (0.521 against 0.5).
+- Within-world rho > 0 in all three worlds (0.4): **WRONG.** World 0 is
+  negative (-0.55): all its libraries are poor, and inside the poor regime the
+  gap falls toward near-random libraries.
+- ENUM median <= OPT median on every library (0.8): **CORRECT** (30/30).
+
+Interpretation, beyond the registered rule: the data are better described as
+a transition than a correlation. Gradient route inference works once a
+library is below roughly 0.5 median NMSE (it recovers the oracle route for
+81-94% of tasks and matches search exactly) and fails above roughly 0.6
+(9-56% oracle routes, support loss barely reduced), while exhaustive search
+keeps recovering the oracle route for at least 58% of tasks even on
+near-random libraries. The transition was not registered, lies between two
+observed points (0.47 and 0.62), and is descriptive.
+
+Registered consequence: CF2 has support, so J1 (search-in-the-loop) is the
+preferred next mechanism and the Tier-1 single-operator probe follows. The
+threshold adds a quantitative design input for J1c and J2: a formation phase
+needs to bring libraries below about 0.5 before gradient routing can take
+over. SO2 and control flow stay closed.

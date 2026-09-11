@@ -4827,3 +4827,19 @@ than as a one-off miss.
   reorganizable), and do not reach for a learned search while enumeration is
   cheap (E5). Working hypotheses CF1-CF7 are in PREDICTIONS.md, explicitly
   not preregistered.
+
+- READ THE SHAPE, NOT ONLY THE REGISTERED STATISTIC (J0, 2026-09-11). J0's
+  registered Spearman passed narrowly (0.521 against 0.5), but the per-library
+  table shows a threshold: gradient route inference equals exhaustive search
+  on every library at or below 0.47 median NMSE and fails above about 0.6,
+  with a smaller gap near random. A rank correlation summarises that as
+  "moderately monotone", which understates the transition and explains the
+  negative rho inside world 0 (all its libraries are on the poor side). Report
+  the verdict exactly as registered and the shape beside it; a future plan
+  that depends on the threshold must register it as one.
+- CATCH FROZEN-PLAN CONTRADICTIONS BY READING THE REUSED CODE (J0
+  Amendment 1). The plan redefined RANDOM's stream index and also required
+  bitwise agreement with SO1R in every arm; the two cannot both hold. Found by
+  reading the imported SO1R code before implementing, fixed by an amendment
+  before any number existed. When a plan reuses an instrument, diff its seeds
+  and indices against the original, not only its logic.
