@@ -417,13 +417,15 @@ def run_grid(args, base):
         rates = progress["seconds_per_update"]
         per = {b: (sum(r) / len(r) if r else SECONDS_PER_UPDATE[b]) for b, r in
                ((b, rates.get(b, [])) for b in BATCHES)}
-        eta = sum(j["updates"] * per[j["batch"]] for j in pending) / max(1, args.hard_cap or 1) / 3600
+        # The pool may run fewer workers than its cap when memory is short, so report both.
+        serial_hours = sum(j["updates"] * per[j["batch"]] for j in pending) / 3600
         atomic_json(status_path, {
             "state": state, "protocol": PROTOCOL_ID, "git_commit": git_commit(), "pid": os.getpid(),
             "started_utc": out["started_utc"], "updated_utc": now(),
             "cells_done": sum(len(v) for v in out["cells"].values()), "cells_this_phase": progress["total"],
             "pending": [f"{j['key']} w{j['world']}" for j in pending],
-            "eta_hours_naive": round(eta, 2),
+            "eta_hours_one_worker": round(serial_hours, 2),
+            "eta_hours_at_worker_cap": round(serial_hours / max(1, args.hard_cap or 1), 2),
         })
 
     def pending_jobs(oracle: bool, grid) -> list[dict]:

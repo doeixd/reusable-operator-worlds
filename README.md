@@ -43,6 +43,15 @@ confirmatory result.
 | **SO1** | Which resource buys acquisition: updates, diversity or gradients? | `ORACLE_PASSES_LEARNED_FAILS`, all five registered predictions correct. With oracle routes the library is acquired at 131k example-gradients (batch 2) and 262k (batch 64); batch 2 is better at every equal budget (15/15 world-levels). Learned routes fail 0/3 at both envelopes (0.92-1.16). World 0 never passes. The wall is the route writer, not compute. One stream per cell; after a first launch stopped at an anchor gate that a frozen diagnostic traced to resampling. |
 | **SO1R** | Is the route writer's failure route inference or joint acquisition? | `ROUTES_RECOVERABLE`. On SO1's frozen oracle-acquired libraries, exhaustive search picks the exact oracle route for 100% of tasks and the learner's own relaxation matches oracle quality (0.005-0.009). The wall is forming library and routes together, not finding routes. |
 
+**Where Track B stands.** The stronger (rotated) operator language is
+representable, its library is acquirable when routes are supplied, and its
+routes are recoverable when the library is supplied, yet the learner cannot
+form library and routes together from scratch at any tested budget. The open
+problem is co-formation, not representation, compute, or search. The next
+rungs (`POST_E6_RESEARCH_PROGRAM.md`, B1b) first test, on existing artifacts,
+whether gradient route inference degrades as library quality falls, and then
+whether putting cheap exhaustive route search in the training loop lets the two
+halves form together. Control flow stays closed until then.
 The original V4 premise — that successful abstraction birth implies a
 maintenance problem — failed in development and is preserved unrevised in
 `row_v4_experimental_spec.md`. V4R is the question that was actually sealed.

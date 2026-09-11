@@ -1567,3 +1567,35 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   was itself the evidence and went unread until the fifth problem. Ask at the
   SECOND amendment whether the construct can work at all, not whether this defect
   is fixable.
+
+- FREEZE ONE HALF AT ITS ORACLE VALUE AND TEST THE OTHER (SO1R, 2026-09-11).
+  A joint learner that fails can fail because either half is unfindable or
+  because the halves cannot form together, and the fixes differ. SO1's learned
+  routes failed everywhere; freezing the libraries SO1 acquired with oracle
+  routes and inferring only routes (support data only) showed exhaustive search
+  recovering the exact oracle route for 100% of tasks and the learner's own
+  relaxation reaching oracle quality. The wall was co-formation, found in 23
+  minutes on existing artifacts. Do this census before designing any fix for a
+  joint failure.
+- USABLE, FINDABLE AND CO-FORMABLE ARE THREE DIFFERENT PROPERTIES. The rotated
+  substrate is representable, its library is acquirable given routes, and its
+  routes are recoverable given a library, yet library and routes do not form
+  together from scratch. Never read "each part works in isolation" as "the
+  system is learnable"; the same distinction as H39's made-not-mined, seen from
+  the formation side.
+- AN ANCHOR AT AN UNCONVERGED BUDGET TESTS THE SAMPLING STREAM, NOT THE
+  IMPLEMENTATION (SO1 anchor diagnostic). Five minibatch streams at Stage D's
+  low budget spanned up to 0.68 in terminal median while two implementations
+  agreed to 6e-7 on a matched stream. Compare implementations on matched
+  streams; measure resampling spread before choosing any cross-stream
+  tolerance.
+- ONE STREAM PER CELL MEANS READING THE PATTERN, NOT THE CELL. SO1's B = 2
+  dose curve was non-monotone on two worlds (world 2 passed at 32k and failed
+  at 65k), yet all 15 equal-gradient differences had the same sign. Near a
+  threshold, a single-stream cell's pass/fail is fragile; the sign pattern
+  across cells is the evidence.
+- STANDING DOUBT (Track B): world 0 fails every SO1 budget even with oracle
+  routes, and its routes are recovered exactly by search, so its LIBRARIES are
+  the problem; every Track B positive rests on worlds 1-2. Its cause is
+  unexplained and must be checked before any joint-acquisition result is read
+  on world 0.

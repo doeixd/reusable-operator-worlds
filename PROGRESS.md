@@ -4886,3 +4886,17 @@ oracle route 100% and still scores 0.62-0.72), and on those poor libraries the
 relaxation is also much weaker (support drop 11-13%, just above the 10%
 non-vacuity floor). check_prereg and check_invalid pass. Report
 reports/so1r_route_only.json; logs reports/so1r_route_only_20260911.
+
+# Program and doc updates after SO1/SO1R (2026-09-11)
+
+No new result. Appended a dated Track B status update and a new B1b
+joint-acquisition branch to POST_E6_RESEARCH_PROGRAM.md (J0: Tier-0 census of
+whether gradient route inference degrades with library quality across the 30
+SO1 oracle libraries; J1: search-in-the-loop hard-EM acquisition with a sham
+and C_find accounting; J2: teacher-assisted curriculum, diagnostic only; a
+world-0 check before reading any J-rung on world 0). SO2 and control flow stay
+closed. Added four learnings and a world-0 standing doubt to AGENTS.md, a note
+on B2 co-formation risk and a search-router baseline to the budgeted-execution
+draft, and a "Where Track B stands" paragraph to the README. Fixed SO1
+status.json to report ETA for one worker and at the worker cap (it previously
+assumed the cap was always reached). SO1 tests pass; check_prereg passes.

@@ -302,6 +302,64 @@ substrate” unless the original comparability gate also passes.
 - A protocol exceeding its frozen compute ceiling is not a pass. Learnability
   is always stated with its resource envelope.
 
+## Track B status update (2026-09-11, appended; nothing above is revised)
+
+Results since this section was written, all on development worlds 0-2:
+
+| step | result | commit |
+|---|---|---|
+| Stage D | `BUDGET_LIMITED` | 8b9b802 |
+| SO0 | no existing pair controls any budget axis; no persistent crossing | 1042878 |
+| SO1 (relaunch) | `ORACLE_PASSES_LEARNED_FAILS`; oracle envelope 131k (B = 2) / 262k (B = 64); B = 2 better at every equal budget (15/15); learned routes 0/3 (0.92-1.16) | dd57e24 |
+| SO1R | `ROUTES_RECOVERABLE`: on the frozen oracle-acquired libraries, exhaustive search picks the exact oracle route for 100% of tasks and the learner's own relaxation reaches oracle quality (0.005-0.009) | 9c8d058 |
+
+Stop rule 2 has fired and stands: SO2 and every control-flow rung remain
+closed. SO1R changes WHERE the wall is. Representation (Stage B), isolated
+operator findability (Stage B), library acquisition given routes (SO1), route
+identifiability and route inference given a library (SO1R) all pass. What
+fails is CO-FORMATION: routes are meaningful only once slots specialize, and
+slots specialize only once routes send them consistent tasks. World 0 is a
+separate, unexplained failure: its libraries fail even with oracle routes at
+every SO1 budget.
+
+One unregistered observation shapes the next branch: on world 0's poor
+libraries the learner's gradient route relaxation cut support loss by only
+11-13% and scored 1.30-1.37, while exhaustive search still found the oracle
+route (0.62-0.72). If gradient route inference generally degrades with library
+quality, the joint failure is self-reinforcing early in training, when every
+library is poor, and a discrete search step would not share the weakness.
+
+## B1b — joint-acquisition branch (added 2026-09-11; replaces nothing)
+
+Each rung gets its own frozen plan before code. Existence-before-discovery and
+"teacher routes only in labelled oracle arms" still hold.
+
+- **J0, Tier 0 census (existing artifacts only).** Run the SO1R instrument
+  (ORACLE / ENUM / OPT / RANDOM, support-only selection) on all 30 SO1 oracle
+  libraries, which span library quality from 1.26 down to 0.003 median NMSE.
+  Question: does the OPT-minus-ENUM gap grow as library quality falls? Register
+  the direction and a monotone-trend test before running; a flat gap kills the
+  mechanism hypothesis above.
+- **J1, search-in-the-loop acquisition (offline IID, SO1 envelope).**
+  Alternate exhaustive route search per task (1,728 routes, support-only) with
+  library updates under hard routes, i.e. hard-EM, at the SO1 oracle envelope
+  and budget. Required arms: the SO1 learned-route cell (reused, same stream),
+  J1, a SHAM that re-searches routes but assigns them at random with the same
+  update schedule, and the oracle-route cell as ceiling. J1 must beat SHAM and
+  the learned cell and report the search's own compute (`C_find`) beside the
+  gradient budget. Registered prior risk: hard-EM can lock into a bad
+  assignment early; record the route-change rate per round.
+- **J2, teacher-assisted curriculum (diagnostic only).** Oracle routes for a
+  frozen prefix of the budget, then learned routes. It can locate how much
+  formation must precede learned routing; it is labelled teacher-assisted and
+  can never be the non-oracle claim that opens SO2.
+- **World 0.** Before any J-rung result is read on world 0, a separate
+  read-only check of why its oracle libraries fail (per-task and per-slot
+  error at the SO1 cells) is recorded; world 0 stays a named dissenting world.
+
+SO2 is reachable only through a J1-style non-oracle mechanism that passes its
+own offline gate; its online test then follows B2 above unchanged.
+
 # Convergence gate
 
 The two tracks do not need to pass simultaneously for their own findings to be
@@ -709,6 +767,14 @@ No commit combines a frozen plan with the result it governs.
    corresponding existence gates pass.
 6. Keep SH0 as a design until C0's typed IR exists; do not train a meta-writer
    before a native search can be represented and reproduced through that IR.
+
+Update 2026-09-11 (items 1, 2 and 4 are complete; see the Track B status
+update): the next Track B actions are (a) freeze and run J0, which needs no
+training; (b) only if J0 supports the library-quality mechanism or is
+inconclusive, freeze J1 with its sham and compute accounting; (c) keep SO2 and
+all control-flow work closed. Track A (RF0b unresolved, RF1 not run) and
+`BUDGETED_EXECUTION_ECONOMY_PLAN.md` (a draft; its B0/B1 are Tier 0/1) remain
+available in parallel because they do not depend on Track B.
 
 # Explicitly out of scope
 

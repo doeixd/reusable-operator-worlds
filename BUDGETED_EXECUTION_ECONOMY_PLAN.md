@@ -548,3 +548,28 @@ This document is intentionally a research plan, not yet a preregistration. Befor
 - audit experiment code against the frozen plan before long runs.
 
 The project should preserve its existing rule: **the embarrassing number is part of the result.**
+
+# Note from Track B results (appended 2026-09-11; the draft above is unchanged)
+
+SO1 and SO1R (`reports/so1_budget_bracket_r2.json`, `reports/so1r_route_only.json`)
+bear directly on B2 and on any later rung that learns the vocabulary and the
+controller together:
+
+- **Routing over a frozen, correct vocabulary is the easy half.** On frozen
+  libraries, support-only route inference (exhaustive search, and the learner's
+  own softmax relaxation) recovered the oracle route for 84-100% of tasks. B2's
+  "freeze the vocabulary, learn only the controller" design is therefore well
+  founded, provided the vocabulary is a good one.
+- **Co-formation is the hard half.** The same learner could not form library
+  and routes together from scratch at any tested budget. A budgeted controller
+  trained jointly with its operator vocabulary should expect the same failure;
+  keep vocabulary formation and controller learning in separate, separately
+  gated rungs, and report which one a failure belongs to.
+- **Gradient routing may degrade on poor vocabularies.** On one world's weak
+  libraries the relaxation fell far behind exhaustive search. B2 should
+  include a search-based router baseline, and charge its `C_route`, rather
+  than assuming a learned router is the natural reference.
+- **Search is cheap at ROW's current program sizes** (12^3 = 1,728 routes
+  enumerated per task in seconds), which makes B4's "charge the router"
+  comparison sharper: an amortized router must beat a search whose cost is
+  small and exactly known.
