@@ -1,0 +1,90 @@
+{
+ "status": "VERIFIED_COMPLETE",
+ "scientific_result_accepted": true,
+ "verified_cells": 36,
+ "envelope": {
+  "2": {
+   "lowest_passing": 131072,
+   "lowest_passing_excluding_unobservable": 131072
+  },
+  "64": {
+   "lowest_passing": 262144,
+   "lowest_passing_excluding_unobservable": null
+  }
+ },
+ "paired_differences_b2_minus_b64": {
+  "16384": {
+   "0": -0.32094847989853337,
+   "1": -0.36795501207525605,
+   "2": -0.5206040369736058
+  },
+  "32768": {
+   "0": -0.1794000000408913,
+   "1": -0.9040469918099924,
+   "2": -0.9621655827377074
+  },
+  "65536": {
+   "0": -0.19937866594427645,
+   "1": -0.8846609370929955,
+   "2": -0.1775436248902178
+  },
+  "131072": {
+   "0": -0.2168846838226952,
+   "1": -0.4661049859431822,
+   "2": -0.08845214646590642
+  },
+  "262144": {
+   "0": -0.08512528286164323,
+   "1": -0.0060936807211161344,
+   "2": -0.004832441049651123
+  }
+ },
+ "dose_monotonicity": {
+  "2": {
+   "0": false,
+   "1": true,
+   "2": false
+  },
+  "64": {
+   "0": true,
+   "1": true,
+   "2": true
+  }
+ },
+ "cell_passes": {
+  "O_b2_g262144": true,
+  "O_b2_g131072": true,
+  "O_b64_g262144": true,
+  "O_b2_g65536": false,
+  "O_b64_g131072": false,
+  "O_b2_g32768": false,
+  "O_b64_g65536": false,
+  "O_b2_g16384": false,
+  "O_b64_g32768": false,
+  "O_b64_g16384": false,
+  "L_b2_g131072": false,
+  "L_b64_g262144": false
+ },
+ "classification": "ORACLE_PASSES_LEARNED_FAILS",
+ "predictions": {
+  "P1": true,
+  "P2": true,
+  "P3": true,
+  "P4": true,
+  "P5": true,
+  "stage2_fails_all_worlds": true
+ },
+ "corner_reproduction_of_first_attempt": {
+  "O_b2_g16384": {
+   "0": true,
+   "1": true,
+   "2": true
+  },
+  "O_b64_g262144": {
+   "0": true,
+   "1": true,
+   "2": true
+  }
+ },
+ "report_sha256": "a771c215ffb9ce2e2c69830a7fd02f5583a25630c346e810e2662d93a3382fdc"
+}

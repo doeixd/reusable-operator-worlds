@@ -1,0 +1,12 @@
+{
+ "state": "complete",
+ "protocol": "SO1-budget-bracket-v3-relaunch",
+ "git_commit": "a8dd8c4",
+ "pid": 33764,
+ "started_utc": "2026-09-10T18:43:34.869556+00:00",
+ "updated_utc": "2026-09-11T02:35:45.130834+00:00",
+ "cells_done": 36,
+ "cells_this_phase": 6,
+ "pending": [],
+ "eta_hours_naive": 0.0
+}

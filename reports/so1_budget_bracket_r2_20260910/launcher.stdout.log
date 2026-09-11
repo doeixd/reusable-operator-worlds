@@ -1,0 +1,158 @@
+existing gate stale; recalibrating
+HOST PASS: physical and commit headroom > 2048 MiB; page file stable
+HOST PASS: physical and commit headroom > 3522 MiB; page file stable
+[pool] cap 2 (cores 16, rss 1505 MiB, free 5.54 GiB)
+[pool] dispatched job 0 (1 running)
+[pool] dispatched job 1 (2 running)
+[pool] job 0 done
+[pool] dispatched job 2 (2 running)
+[pool] job 1 done
+[pool] dispatched job 3 (2 running)
+[pool] job 2 done
+[pool] dispatched job 4 (2 running)
+[pool] job 3 done
+[pool] job 4 done
+[pool] dispatched job 5 (1 running)
+[pool] job 5 done
+[pool] dispatched job 6 (1 running)
+[pool] job 6 done
+[pool] dispatched job 7 (1 running)
+[pool] job 7 done
+[pool] dispatched job 8 (1 running)
+[pool] job 8 done
+GATE PASS: 9/9 bitwise; budget 1505 MiB
+HOST PASS: physical and commit headroom > 3522 MiB; page file stable
+prereg check OK: 45 frozen files unchanged; all STATUS-cited paths exist
+invalid-artifact check OK: 6 withdrawn paths, none present
+LAUNCH SO1-budget-bracket-v3-relaunch at a8dd8c4
+PHASE oracle grid: 30 cells to run
+[O_b2_g262144 w0] saved: median 0.6337 passes False not crossed (2958.7s)
+[O_b2_g262144 w1] saved: median 0.0026 passes True persistent (2941.3s)
+[O_b2_g262144 w2] saved: median 0.0029 passes True persistent (2736.1s)
+[O_b2_g131072 w0] saved: median 0.6243 passes False not crossed (1333.8s)
+[O_b2_g131072 w1] saved: median 0.0046 passes True persistent (1230.6s)
+[O_b2_g131072 w2] saved: median 0.0051 passes True persistent (1229.3s)
+[O_b64_g262144 w0] saved: median 0.7188 passes False not crossed (1405.6s)
+[O_b64_g262144 w1] saved: median 0.0087 passes True crossed, persistence unobservable (1452.9s)
+[O_b64_g262144 w2] saved: median 0.0078 passes True crossed, persistence unobservable (1461.4s)
+[O_b2_g65536 w0] saved: median 0.7213 passes False not crossed (653.7s)
+[O_b2_g65536 w1] saved: median 0.0141 passes True crossed, persistence unobservable (610.7s)
+[O_b2_g65536 w2] saved: median 0.7348 passes False not crossed (718.7s)
+[O_b64_g131072 w0] saved: median 0.8412 passes False not crossed (709.4s)
+[O_b64_g131072 w1] saved: median 0.4707 passes False not crossed (676.3s)
+[O_b64_g131072 w2] saved: median 0.0935 passes False not crossed (765.0s)
+[O_b2_g32768 w0] saved: median 0.8266 passes False not crossed (285.9s)
+[O_b2_g32768 w1] saved: median 0.1026 passes False not crossed (286.6s)
+[O_b2_g32768 w2] saved: median 0.0438 passes True crossed, persistence unobservable (298.3s)
+[O_b64_g65536 w0] saved: median 0.9207 passes False not crossed (335.9s)
+[O_b64_g65536 w1] saved: median 0.8987 passes False not crossed (335.4s)
+[O_b64_g65536 w2] saved: median 0.9123 passes False not crossed (341.1s)
+[O_b2_g16384 w0] saved: median 0.8957 passes False not crossed (147.7s)
+[O_b2_g16384 w1] saved: median 0.8844 passes False not crossed (144.7s)
+[O_b2_g16384 w2] saved: median 0.7367 passes False not crossed (142.3s)
+[O_b64_g32768 w0] saved: median 1.0060 passes False not crossed (167.1s)
+[O_b64_g32768 w1] saved: median 1.0066 passes False not crossed (165.3s)
+[O_b64_g32768 w2] saved: median 1.0060 passes False not crossed (163.6s)
+[O_b64_g16384 w0] saved: median 1.2166 passes False not crossed (82.4s)
+[O_b64_g16384 w1] saved: median 1.2524 passes False not crossed (81.7s)
+[O_b64_g16384 w2] saved: median 1.2573 passes False not crossed (80.4s)
+oracle grid complete; envelope {'2': {'lowest_passing': 131072, 'lowest_passing_excluding_unobservable': 131072}, '64': {'lowest_passing': 262144, 'lowest_passing_excluding_unobservable': None}}
+PHASE stage 2 learned routes: 6 cells to run
+[L_b2_g131072 w0] saved: median 0.9608 passes False not crossed (1215.1s)
+[L_b2_g131072 w1] saved: median 0.9542 passes False not crossed (1230.2s)
+[L_b2_g131072 w2] saved: median 0.9187 passes False not crossed (1176.7s)
+[L_b64_g262144 w0] saved: median 1.1356 passes False not crossed (1368.3s)
+[L_b64_g262144 w1] saved: median 1.1540 passes False not crossed (1356.1s)
+[L_b64_g262144 w2] saved: median 1.1591 passes False not crossed (1331.0s)
+COMPLETE classification ORACLE_PASSES_LEARNED_FAILS
+SO1_EXIT=0
+{
+ "status": "VERIFIED_COMPLETE",
+ "scientific_result_accepted": true,
+ "verified_cells": 36,
+ "envelope": {
+  "2": {
+   "lowest_passing": 131072,
+   "lowest_passing_excluding_unobservable": 131072
+  },
+  "64": {
+   "lowest_passing": 262144,
+   "lowest_passing_excluding_unobservable": null
+  }
+ },
+ "paired_differences_b2_minus_b64": {
+  "16384": {
+   "0": -0.32094847989853337,
+   "1": -0.36795501207525605,
+   "2": -0.5206040369736058
+  },
+  "32768": {
+   "0": -0.1794000000408913,
+   "1": -0.9040469918099924,
+   "2": -0.9621655827377074
+  },
+  "65536": {
+   "0": -0.19937866594427645,
+   "1": -0.8846609370929955,
+   "2": -0.1775436248902178
+  },
+  "131072": {
+   "0": -0.2168846838226952,
+   "1": -0.4661049859431822,
+   "2": -0.08845214646590642
+  },
+  "262144": {
+   "0": -0.08512528286164323,
+   "1": -0.0060936807211161344,
+   "2": -0.004832441049651123
+  }
+ },
+ "dose_monotonicity": {
+  "2": {
+   "0": false,
+   "1": true,
+   "2": false
+  },
+  "64": {
+   "0": true,
+   "1": true,
+   "2": true
+  }
+ },
+ "cell_passes": {
+  "O_b2_g262144": true,
+  "O_b2_g131072": true,
+  "O_b64_g262144": true,
+  "O_b2_g65536": false,
+  "O_b64_g131072": false,
+  "O_b2_g32768": false,
+  "O_b64_g65536": false,
+  "O_b2_g16384": false,
+  "O_b64_g32768": false,
+  "O_b64_g16384": false,
+  "L_b2_g131072": false,
+  "L_b64_g262144": false
+ },
+ "classification": "ORACLE_PASSES_LEARNED_FAILS",
+ "predictions": {
+  "P1": true,
+  "P2": true,
+  "P3": true,
+  "P4": true,
+  "P5": true,
+  "stage2_fails_all_worlds": true
+ },
+ "corner_reproduction_of_first_attempt": {
+  "O_b2_g16384": {
+   "0": true,
+   "1": true,
+   "2": true
+  },
+  "O_b64_g262144": {
+   "0": true,
+   "1": true,
+   "2": true
+  }
+ },
+ "report_sha256": "a771c215ffb9ce2e2c69830a7fd02f5583a25630c346e810e2662d93a3382fdc"
+}

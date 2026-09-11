@@ -1,0 +1,115 @@
+2026-09-10T18:43:35.114917+00:00 LAUNCH SO1-budget-bracket-v3-relaunch at a8dd8c4
+2026-09-10T18:43:38.859760+00:00 PHASE oracle grid: 30 cells to run
+2026-09-10T18:43:39.497342+00:00 [pool] cap 1 (cores 16, rss 1505 MiB, free 2.83 GiB)
+2026-09-10T18:43:39.856580+00:00 [pool] dispatched job 0 (1 running)
+2026-09-10T19:33:03.061420+00:00 [O_b2_g262144 w0] saved: median 0.6337 passes False not crossed (2958.7s)
+2026-09-10T19:33:03.323669+00:00 [pool] job 0 done
+2026-09-10T19:33:03.396966+00:00 [pool] dispatched job 1 (1 running)
+2026-09-10T20:22:05.039993+00:00 [O_b2_g262144 w1] saved: median 0.0026 passes True persistent (2941.3s)
+2026-09-10T20:22:05.246022+00:00 [pool] job 1 done
+2026-09-10T20:22:05.309438+00:00 [pool] dispatched job 2 (1 running)
+2026-09-10T21:07:41.765197+00:00 [O_b2_g262144 w2] saved: median 0.0029 passes True persistent (2736.1s)
+2026-09-10T21:07:41.947995+00:00 [pool] job 2 done
+2026-09-10T21:07:41.996638+00:00 [pool] dispatched job 3 (1 running)
+2026-09-10T21:29:56.044349+00:00 [O_b2_g131072 w0] saved: median 0.6243 passes False not crossed (1333.8s)
+2026-09-10T21:29:56.211660+00:00 [pool] job 3 done
+2026-09-10T21:29:56.242587+00:00 [pool] dispatched job 4 (1 running)
+2026-09-10T21:50:27.197350+00:00 [O_b2_g131072 w1] saved: median 0.0046 passes True persistent (1230.6s)
+2026-09-10T21:50:27.374048+00:00 [pool] job 4 done
+2026-09-10T21:50:27.428425+00:00 [pool] dispatched job 5 (1 running)
+2026-09-10T22:10:57.020986+00:00 [O_b2_g131072 w2] saved: median 0.0051 passes True persistent (1229.3s)
+2026-09-10T22:10:57.187243+00:00 [pool] job 5 done
+2026-09-10T22:10:57.223574+00:00 [pool] dispatched job 6 (1 running)
+2026-09-10T22:34:23.168270+00:00 [O_b64_g262144 w0] saved: median 0.7188 passes False not crossed (1405.6s)
+2026-09-10T22:34:23.326373+00:00 [pool] job 6 done
+2026-09-10T22:34:23.388761+00:00 [pool] dispatched job 7 (1 running)
+2026-09-10T22:58:36.626893+00:00 [O_b64_g262144 w1] saved: median 0.0087 passes True crossed, persistence unobservable (1452.9s)
+2026-09-10T22:58:36.793054+00:00 [pool] job 7 done
+2026-09-10T22:58:36.833116+00:00 [pool] dispatched job 8 (1 running)
+2026-09-10T23:22:58.724687+00:00 [O_b64_g262144 w2] saved: median 0.0078 passes True crossed, persistence unobservable (1461.4s)
+2026-09-10T23:22:58.929398+00:00 [pool] job 8 done
+2026-09-10T23:22:58.985754+00:00 [pool] dispatched job 9 (1 running)
+2026-09-10T23:33:52.976137+00:00 [O_b2_g65536 w0] saved: median 0.7213 passes False not crossed (653.7s)
+2026-09-10T23:33:53.130744+00:00 [pool] job 9 done
+2026-09-10T23:33:53.165759+00:00 [pool] dispatched job 10 (1 running)
+2026-09-10T23:44:04.170936+00:00 [O_b2_g65536 w1] saved: median 0.0141 passes True crossed, persistence unobservable (610.7s)
+2026-09-10T23:44:04.343313+00:00 [pool] job 10 done
+2026-09-10T23:44:04.382420+00:00 [pool] dispatched job 11 (1 running)
+2026-09-10T23:56:03.393705+00:00 [O_b2_g65536 w2] saved: median 0.7348 passes False not crossed (718.7s)
+2026-09-10T23:56:03.556765+00:00 [pool] job 11 done
+2026-09-10T23:56:03.604839+00:00 [pool] dispatched job 12 (1 running)
+2026-09-11T00:07:53.244504+00:00 [O_b64_g131072 w0] saved: median 0.8412 passes False not crossed (709.4s)
+2026-09-11T00:07:53.403752+00:00 [pool] job 12 done
+2026-09-11T00:07:53.433854+00:00 [pool] dispatched job 13 (1 running)
+2026-09-11T00:19:10.021867+00:00 [O_b64_g131072 w1] saved: median 0.4707 passes False not crossed (676.3s)
+2026-09-11T00:19:10.267976+00:00 [pool] job 13 done
+2026-09-11T00:19:10.316003+00:00 [pool] dispatched job 14 (1 running)
+2026-09-11T00:31:55.634998+00:00 [O_b64_g131072 w2] saved: median 0.0935 passes False not crossed (765.0s)
+2026-09-11T00:31:55.828811+00:00 [pool] job 14 done
+2026-09-11T00:31:55.871878+00:00 [pool] dispatched job 15 (1 running)
+2026-09-11T00:36:42.001762+00:00 [O_b2_g32768 w0] saved: median 0.8266 passes False not crossed (285.9s)
+2026-09-11T00:36:42.187615+00:00 [pool] job 15 done
+2026-09-11T00:36:42.225439+00:00 [pool] dispatched job 16 (1 running)
+2026-09-11T00:41:29.050771+00:00 [O_b2_g32768 w1] saved: median 0.1026 passes False not crossed (286.6s)
+2026-09-11T00:41:29.290833+00:00 [pool] job 16 done
+2026-09-11T00:41:29.323518+00:00 [pool] dispatched job 17 (1 running)
+2026-09-11T00:46:27.888438+00:00 [O_b2_g32768 w2] saved: median 0.0438 passes True crossed, persistence unobservable (298.3s)
+2026-09-11T00:46:28.054202+00:00 [pool] job 17 done
+2026-09-11T00:46:28.084869+00:00 [pool] dispatched job 18 (1 running)
+2026-09-11T00:52:04.265143+00:00 [O_b64_g65536 w0] saved: median 0.9207 passes False not crossed (335.9s)
+2026-09-11T00:52:04.474459+00:00 [pool] job 18 done
+2026-09-11T00:52:04.504801+00:00 [pool] dispatched job 19 (1 running)
+2026-09-11T00:57:40.175331+00:00 [O_b64_g65536 w1] saved: median 0.8987 passes False not crossed (335.4s)
+2026-09-11T00:57:40.338548+00:00 [pool] job 19 done
+2026-09-11T00:57:40.374193+00:00 [pool] dispatched job 20 (1 running)
+2026-09-11T01:03:21.755304+00:00 [O_b64_g65536 w2] saved: median 0.9123 passes False not crossed (341.1s)
+2026-09-11T01:03:22.007194+00:00 [pool] job 20 done
+2026-09-11T01:03:22.048327+00:00 [pool] dispatched job 21 (1 running)
+2026-09-11T01:05:50.031833+00:00 [O_b2_g16384 w0] saved: median 0.8957 passes False not crossed (147.7s)
+2026-09-11T01:05:50.260739+00:00 [pool] job 21 done
+2026-09-11T01:05:50.292620+00:00 [pool] dispatched job 22 (1 running)
+2026-09-11T01:08:15.254606+00:00 [O_b2_g16384 w1] saved: median 0.8844 passes False not crossed (144.7s)
+2026-09-11T01:08:15.470882+00:00 [pool] job 22 done
+2026-09-11T01:08:15.503652+00:00 [pool] dispatched job 23 (1 running)
+2026-09-11T01:10:38.104603+00:00 [O_b2_g16384 w2] saved: median 0.7367 passes False not crossed (142.3s)
+2026-09-11T01:10:38.285908+00:00 [pool] job 23 done
+2026-09-11T01:10:38.317088+00:00 [pool] dispatched job 24 (1 running)
+2026-09-11T01:13:25.640314+00:00 [O_b64_g32768 w0] saved: median 1.0060 passes False not crossed (167.1s)
+2026-09-11T01:13:25.802985+00:00 [pool] job 24 done
+2026-09-11T01:13:25.835126+00:00 [pool] dispatched job 25 (1 running)
+2026-09-11T01:16:11.412353+00:00 [O_b64_g32768 w1] saved: median 1.0066 passes False not crossed (165.3s)
+2026-09-11T01:16:11.627171+00:00 [pool] job 25 done
+2026-09-11T01:16:11.656136+00:00 [pool] dispatched job 26 (1 running)
+2026-09-11T01:18:55.552632+00:00 [O_b64_g32768 w2] saved: median 1.0060 passes False not crossed (163.6s)
+2026-09-11T01:18:55.744271+00:00 [pool] job 26 done
+2026-09-11T01:18:55.773591+00:00 [pool] dispatched job 27 (1 running)
+2026-09-11T01:20:18.477328+00:00 [O_b64_g16384 w0] saved: median 1.2166 passes False not crossed (82.4s)
+2026-09-11T01:20:18.674408+00:00 [pool] job 27 done
+2026-09-11T01:20:18.709662+00:00 [pool] dispatched job 28 (1 running)
+2026-09-11T01:21:40.632769+00:00 [O_b64_g16384 w1] saved: median 1.2524 passes False not crossed (81.7s)
+2026-09-11T01:21:40.835875+00:00 [pool] job 28 done
+2026-09-11T01:21:40.878185+00:00 [pool] dispatched job 29 (1 running)
+2026-09-11T01:23:01.519943+00:00 [O_b64_g16384 w2] saved: median 1.2573 passes False not crossed (80.4s)
+2026-09-11T01:23:01.753318+00:00 [pool] job 29 done
+2026-09-11T01:23:02.743001+00:00 oracle grid complete; envelope {'2': {'lowest_passing': 131072, 'lowest_passing_excluding_unobservable': 131072}, '64': {'lowest_passing': 262144, 'lowest_passing_excluding_unobservable': None}}
+2026-09-11T01:23:04.529736+00:00 PHASE stage 2 learned routes: 6 cells to run
+2026-09-11T01:23:04.762330+00:00 [pool] cap 2 (cores 16, rss 1505 MiB, free 5.95 GiB)
+2026-09-11T01:23:05.102725+00:00 [pool] dispatched job 0 (1 running)
+2026-09-11T01:23:05.591546+00:00 [pool] dispatched job 1 (2 running)
+2026-09-11T01:43:28.589407+00:00 [L_b2_g131072 w0] saved: median 0.9608 passes False not crossed (1215.1s)
+2026-09-11T01:43:28.879526+00:00 [pool] job 0 done
+2026-09-11T01:43:43.574354+00:00 [L_b2_g131072 w1] saved: median 0.9542 passes False not crossed (1230.2s)
+2026-09-11T01:43:43.801123+00:00 [pool] job 1 done
+2026-09-11T01:43:43.839368+00:00 [pool] dispatched job 2 (1 running)
+2026-09-11T01:50:41.711143+00:00 [pool] dispatched job 3 (2 running)
+2026-09-11T02:03:20.812328+00:00 [L_b2_g131072 w2] saved: median 0.9187 passes False not crossed (1176.7s)
+2026-09-11T02:03:21.114801+00:00 [pool] job 2 done
+2026-09-11T02:03:21.154438+00:00 [pool] dispatched job 4 (2 running)
+2026-09-11T02:13:30.360519+00:00 [L_b64_g262144 w0] saved: median 1.1356 passes False not crossed (1368.3s)
+2026-09-11T02:13:30.636219+00:00 [pool] job 3 done
+2026-09-11T02:13:30.686120+00:00 [pool] dispatched job 5 (2 running)
+2026-09-11T02:25:57.501556+00:00 [L_b64_g262144 w1] saved: median 1.1540 passes False not crossed (1356.1s)
+2026-09-11T02:25:57.734790+00:00 [pool] job 4 done
+2026-09-11T02:35:41.972289+00:00 [L_b64_g262144 w2] saved: median 1.1591 passes False not crossed (1331.0s)
+2026-09-11T02:35:42.170887+00:00 [pool] job 5 done
+2026-09-11T02:35:45.135325+00:00 COMPLETE classification ORACLE_PASSES_LEARNED_FAILS

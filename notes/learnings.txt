@@ -4785,3 +4785,17 @@ than as a one-off miss.
   chaos intuition from deep networks does not transfer automatically to this
   small pinned-route problem. Measure it with an eps-perturbation control
   rather than assuming either way.
+
+- A UNIFORM SIGN ACROSS CELLS CAN CARRY WHAT NO SINGLE CELL CAN (SO1,
+  2026-09-11). With one stream per cell and a measured resampling range up to
+  0.68, several per-world B=2-minus-B=64 differences were individually inside
+  the noise, and the B=2 dose curve was non-monotone on two worlds (world 2
+  passed at 32k and failed at 65k). Yet all 15 equal-gradient differences were
+  negative. When a design has one draw per cell, read the pattern across cells
+  (a sign test) as the evidence and treat any single cell's pass/fail near a
+  threshold as fragile.
+- UNDER HOST MEMORY PRESSURE, SESSION-BOUND WATCHERS DIE BEFORE DETACHED
+  RUNS (SO1 relaunch). Two lightweight exit watchers were killed by the
+  harness while the detached run finished normally. Never rely on a watcher
+  for completion: the run itself must write exit/status/scorer records, and
+  the next session reads them.

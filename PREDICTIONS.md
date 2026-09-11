@@ -7937,3 +7937,58 @@ Disclosed caveat for SO1 interpretation (not a scoring change): with one
 sampling stream per cell, per-world terminal medians at unconverged budgets
 carry resampling spread of order 0.02-0.68, so SO1's per-world P3 signs near
 zero should be read with that spread beside them.
+
+# SO1 verdict (2026-09-11): ORACLE_PASSES_LEARNED_FAILS; P1-P5 and Stage 2 all as registered
+
+SO1_BUDGET_BRACKET_PLAN.md (d19b422), SO1_RESTART_AMENDMENT.md (c56e7f6) and
+SO1_ANCHOR_DIAGNOSTIC_AMENDMENT.md (7587a5a); relaunch at a8dd8c4; report
+reports/so1_budget_bracket_r2.json, independent scorer VERIFIED_COMPLETE.
+
+Terminal median query NMSE (threshold 0.05; one sampling stream per cell):
+
+| cell | world 0 | world 1 | world 2 | passes |
+|---|---|---|---|---|
+| B=2,  16k  | 0.896 | 0.884 | 0.737 | no |
+| B=2,  32k  | 0.827 | 0.103 | 0.044 (terminal only) | no (1/3) |
+| B=2,  65k  | 0.721 | 0.014 (terminal only) | 0.735 | no (1/3) |
+| B=2,  131k | 0.624 | 0.0046 persistent | 0.0051 persistent | YES |
+| B=2,  262k | 0.634 | 0.0026 persistent | 0.0029 persistent | yes |
+| B=64, 16k  | 1.217 | 1.252 | 1.257 | no |
+| B=64, 32k  | 1.006 | 1.007 | 1.006 | no |
+| B=64, 65k  | 0.921 | 0.899 | 0.912 | no |
+| B=64, 131k | 0.841 | 0.471 | 0.094 | no |
+| B=64, 262k | 0.719 | 0.0087 (terminal only) | 0.0078 (terminal only) | YES |
+| learned B=2, 131k  | 0.961 | 0.954 | 0.919 | no |
+| learned B=64, 262k | 1.136 | 1.154 | 1.159 | no |
+
+Scorekeeping:
+
+- P1 (G*(64) = 262k, 131k fails; 0.7): **CORRECT.**
+- P2 (G*(2) <= 131k; 0.55): **CORRECT** (131k).
+- P3 (B=2 better at equal G <= 65k in >= 2/3 worlds; 0.6): **CORRECT**, 9/9
+  world-levels negative (and 15/15 including 131k and 262k, where no sign was
+  registered). Disclosure required by the diagnostic amendment: the C_lo
+  fast-stream resampling range is 0.017 / 0.263 / 0.678 on worlds 0-2, so
+  several individual per-world differences (e.g. world 2 at 16k, -0.52;
+  world 0 at 32k-65k, -0.18 to -0.20) lie inside one world's single-stream
+  spread; the uniform sign across all 15 is the stronger evidence.
+- P4 (world 0 fails every B=64 budget; 0.6): **CORRECT** (0.72-1.22). World
+  0 also fails every B=2 budget (no prediction registered).
+- P5 (no persistent crossing at G <= 65k): **CORRECT.** First persistent
+  crossings anywhere in Stages B-D/SO1 appear at B=2, 131k, worlds 1-2.
+- Stage 2 (learned routes fail 0/3 at the lowest passing envelope; 0.75):
+  **CORRECT** at both envelopes (0.92-0.96 at B=2/131k; 1.14-1.16 at
+  B=64/262k), far from 0.05 even where oracle routes reach 0.003-0.009.
+
+Registered consequence: Track B stop rule 2. The rotated substrate is
+acquirable with oracle routes at 131k example-gradients (batch 2) and 262k
+(batch 64), and more updates at lower diversity acquire at a lower gradient
+budget; the learned-route writer does not acquire it at those envelopes.
+Nothing here licenses control flow or more compute; successors concern the
+routing mechanism.
+
+Interpretive limits: one sampling stream per cell (the B=2 curve is
+non-monotone on worlds 0 and 2); world 0 never passes in any SO1 cell, so
+every envelope rests on worlds 1-2; the axis claim is "more updates at lower
+diversity at fixed gradients", which the plan says cannot be separated into
+"more updates" versus "smaller batch".

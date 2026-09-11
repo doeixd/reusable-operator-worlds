@@ -4808,3 +4808,47 @@ failure with traceback and marked status.json failed. No scientific cell ran.
 Next: when about 8 GB is free, run the smoke restart test, then
 `python tools/run_so1_restart.py` detached (estimated ~4-5 h pooled for 30
 oracle cells plus conditional Stage 2).
+
+# SO1 relaunch complete: ORACLE_PASSES_LEARNED_FAILS (2026-09-11)
+
+Launched 2026-09-10 18:43 UTC from clean a8dd8c4 via tools/run_so1_restart.py
+with PI-authorized lowered operational memory settings (reserve 512 MiB,
+budget x1.1 = 1,505 MiB/worker, page-file tolerance 256 MiB; recorded in every
+precondition/gate/launch record). Gate PASS 9/9 bitwise. Before launch the
+real-model restart path was tested (smoke divisor 256, killed after 2 cells,
+relaunch resumed, reused cells byte-identical). Host memory kept the pool at
+ONE worker throughout; the runner finished 02:35 UTC (7.9 h), exit 0, and the
+independent scorer returned VERIFIED_COMPLETE over 36 cells (exit 0, report
+hash matches). check_prereg and check_invalid pass. Two session-bound exit
+watchers were killed by host memory pressure; the run itself was unaffected.
+
+Terminal median query NMSE (threshold 0.05; one sampling stream per cell):
+
+| cell | world 0 | world 1 | world 2 | passes |
+|---|---|---|---|---|
+| B=2,  16k  | 0.896 | 0.884 | 0.737 | no |
+| B=2,  32k  | 0.827 | 0.103 | 0.044 (terminal only) | no (1/3) |
+| B=2,  65k  | 0.721 | 0.014 (terminal only) | 0.735 | no (1/3) |
+| B=2,  131k | 0.624 | 0.0046 persistent | 0.0051 persistent | YES |
+| B=2,  262k | 0.634 | 0.0026 persistent | 0.0029 persistent | yes |
+| B=64, 16k  | 1.217 | 1.252 | 1.257 | no |
+| B=64, 32k  | 1.006 | 1.007 | 1.006 | no |
+| B=64, 65k  | 0.921 | 0.899 | 0.912 | no |
+| B=64, 131k | 0.841 | 0.471 | 0.094 | no |
+| B=64, 262k | 0.719 | 0.0087 (terminal only) | 0.0078 (terminal only) | YES |
+| learned B=2, 131k  | 0.961 | 0.954 | 0.919 | no |
+| learned B=64, 262k | 1.136 | 1.154 | 1.159 | no |
+
+Envelopes: G*(2) = 131,072 (also 131,072 counting only persistent cells);
+G*(64) = 262,144 (none persistent). Equal-gradient paired differences
+(B=2 minus B=64) are negative in all 15 world-levels. Rerun corners reproduce
+the first attempt's cells bitwise on all 3 worlds. Classification
+ORACLE_PASSES_LEARNED_FAILS: Track B stop rule 2 (the substrate exists, the
+writer cannot acquire it). Per the plan's decision ladder, successor plans
+concern the acquisition MECHANISM (routing), never more compute.
+
+Disclosed: the B=2 dose curve is non-monotone on worlds 0 and 2 (world 2
+passes at 32k, fails at 65k), consistent with the anchor diagnostic's C_lo
+resampling spread (0.017 / 0.263 / 0.678) and a reminder that each cell is
+one stream. Report reports/so1_budget_bracket_r2.json; logs and records in
+reports/so1_budget_bracket_r2_20260910.

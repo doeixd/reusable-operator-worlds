@@ -1455,3 +1455,16 @@ was therefore due to resampling: at Stage D's low budget, five independent
 minibatch streams produced terminal medians spanning up to 0.68 on one world.
 SO1 is licensed to relaunch once with a matched-stream anchor; the resampling
 spread is disclosed beside its low-budget comparisons.
+
+# Development provenance addendum: SO1 acquisition dose-response (2026-09-11)
+
+With routes supplied by an oracle, the rotated 12-slot learner acquired its
+joint library (median query NMSE <= 0.05 in 2 of 3 development worlds) at
+131,072 example-gradients with batch 2 and at 262,144 with batch 64. At every
+equal-gradient budget the batch-2 learner (more updates, fewer distinct tasks
+per batch) did better in all three worlds. With learned routes at those same
+budgets the learner failed in all worlds (0.92-1.16). One world failed every
+budget with either routing. Each cell is a single sampling stream, and the
+batch-2 dose curve is non-monotone in two worlds; the registered
+classification is that the substrate is acquirable but the route writer does
+not acquire it, so the next question is the routing mechanism, not budget.

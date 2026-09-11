@@ -1,0 +1,235 @@
+{
+ "utc": "2026-09-10T18:33:07.387827+00:00",
+ "budget_mib": 768,
+ "ops": {
+  "reserve_bytes": 536870912,
+  "budget_factor": 1.1,
+  "pagefile_tolerance_bytes": 268435456
+ },
+ "samples": [
+  {
+   "utc": "2026-09-10T18:32:03.548117+00:00",
+   "physical_available": 7453990912,
+   "commit_limit": 47013195776,
+   "commit_available": 8060317696,
+   "pagefile_used": 206696448,
+   "rss": 245616640,
+   "private": 1267671040,
+   "peak_rss": 245616640,
+   "peak_private": 1267671040
+  },
+  {
+   "utc": "2026-09-10T18:32:13.904418+00:00",
+   "physical_available": 7412244480,
+   "commit_limit": 47013195776,
+   "commit_available": 8152096768,
+   "pagefile_used": 206696448,
+   "rss": 251723776,
+   "private": 1273147392,
+   "peak_rss": 251723776,
+   "peak_private": 1273147392
+  },
+  {
+   "utc": "2026-09-10T18:32:23.935789+00:00",
+   "physical_available": 7399419904,
+   "commit_limit": 47013195776,
+   "commit_available": 8096526336,
+   "pagefile_used": 206696448,
+   "rss": 251723776,
+   "private": 1273147392,
+   "peak_rss": 251723776,
+   "peak_private": 1273147392
+  },
+  {
+   "utc": "2026-09-10T18:32:33.965735+00:00",
+   "physical_available": 7287169024,
+   "commit_limit": 47013195776,
+   "commit_available": 8045051904,
+   "pagefile_used": 206696448,
+   "rss": 251764736,
+   "private": 1273212928,
+   "peak_rss": 251764736,
+   "peak_private": 1273221120
+  },
+  {
+   "utc": "2026-09-10T18:32:43.993913+00:00",
+   "physical_available": 7562276864,
+   "commit_limit": 47013195776,
+   "commit_available": 8297533440,
+   "pagefile_used": 206696448,
+   "rss": 251764736,
+   "private": 1273212928,
+   "peak_rss": 251764736,
+   "peak_private": 1273221120
+  },
+  {
+   "utc": "2026-09-10T18:32:54.024065+00:00",
+   "physical_available": 7582834688,
+   "commit_limit": 47013195776,
+   "commit_available": 8312557568,
+   "pagefile_used": 206696448,
+   "rss": 251764736,
+   "private": 1273212928,
+   "peak_rss": 251764736,
+   "peak_private": 1273221120
+  },
+  {
+   "utc": "2026-09-10T18:33:04.055041+00:00",
+   "physical_available": 7615995904,
+   "commit_limit": 47013195776,
+   "commit_available": 8341491712,
+   "pagefile_used": 206598144,
+   "rss": 251764736,
+   "private": 1273212928,
+   "peak_rss": 251764736,
+   "peak_private": 1273221120
+  }
+ ],
+ "tenants": [
+  {
+   "pid": 3448,
+   "name": "msedge.exe",
+   "rss": 302702592,
+   "private": 715472896
+  },
+  {
+   "pid": 4080,
+   "name": "ekrn.exe",
+   "rss": 374632448,
+   "private": 219312128
+  },
+  {
+   "pid": 4668,
+   "name": "MemCompression",
+   "rss": 3393400832,
+   "private": 7213056
+  },
+  {
+   "pid": 6744,
+   "name": "opencode2.exe",
+   "rss": 336699392,
+   "private": 752156672
+  },
+  {
+   "pid": 6988,
+   "name": "msedge.exe",
+   "rss": 409849856,
+   "private": 357175296
+  },
+  {
+   "pid": 7324,
+   "name": "svchost.exe",
+   "rss": 362344448,
+   "private": 65724416
+  },
+  {
+   "pid": 7552,
+   "name": "Malwarebytes.exe",
+   "rss": 227758080,
+   "private": 109023232
+  },
+  {
+   "pid": 8916,
+   "name": "node.exe",
+   "rss": 1445482496,
+   "private": 1588121600
+  },
+  {
+   "pid": 12952,
+   "name": "explorer.exe",
+   "rss": 277356544,
+   "private": 312987648
+  },
+  {
+   "pid": 13796,
+   "name": "msedge.exe",
+   "rss": 736325632,
+   "private": 375468032
+  },
+  {
+   "pid": 15676,
+   "name": "msedge.exe",
+   "rss": 387207168,
+   "private": 2085404672
+  },
+  {
+   "pid": 17752,
+   "name": "msedge.exe",
+   "rss": 433291264,
+   "private": 421507072
+  },
+  {
+   "pid": 17772,
+   "name": "msedge.exe",
+   "rss": 233201664,
+   "private": 195399680
+  },
+  {
+   "pid": 17880,
+   "name": "opencode2.exe",
+   "rss": 359366656,
+   "private": 929591296
+  },
+  {
+   "pid": 21928,
+   "name": "vmmemWSL",
+   "rss": 435056640,
+   "private": 1836748800
+  },
+  {
+   "pid": 23724,
+   "name": "claude.exe",
+   "rss": 406429696,
+   "private": 734441472
+  },
+  {
+   "pid": 24040,
+   "name": "msedge.exe",
+   "rss": 227028992,
+   "private": 184532992
+  },
+  {
+   "pid": 24716,
+   "name": "msedge.exe",
+   "rss": 223117312,
+   "private": 165892096
+  },
+  {
+   "pid": 26088,
+   "name": "opencode2.exe",
+   "rss": 235581440,
+   "private": 594169856
+  },
+  {
+   "pid": 27672,
+   "name": "Dropbox.exe",
+   "rss": 342945792,
+   "private": 470548480
+  },
+  {
+   "pid": 28076,
+   "name": "claude.exe",
+   "rss": 578375680,
+   "private": 930988032
+  },
+  {
+   "pid": 32148,
+   "name": "claude.exe",
+   "rss": 342609920,
+   "private": 696954880
+  },
+  {
+   "pid": 36920,
+   "name": "python.exe",
+   "rss": 252305408,
+   "private": 1273212928
+  },
+  {
+   "pid": 37104,
+   "name": "msedge.exe",
+   "rss": 437338112,
+   "private": 412549120
+  }
+ ],
+ "passes": true
+}
