@@ -4980,3 +4980,27 @@ again the best fit, a self-consistent fixed point. Tasks sharing a hidden
 operation never come to share a slot (ARI ~ 0), so the library can only fit
 64 arbitrary compositions and plateaus near 0.76. Report
 reports/j1_search_loop.json; logs reports/j1_search_loop_20260911.
+
+# EXPLORATORY single-operator co-formation probe (2026-09-11)
+
+Tier-1, NOT preregistered, never a verdict. New additive generator
+`curriculum_world` samples programs with replacement (its own config type; the
+WorldConfig distinct-program cap is untouched) so a stage can hold many tasks
+per operation. One world (seed 1), 60 length-1 tasks, 16,384 updates, batch 2,
+three arms; code a2488f2; report reports/probe_single_operator.json.
+
+| arm | median | below 0.05 | ARI(slot, primitive) | slots |
+|---|---|---|---|---|
+| oracle (pinned true assignment) | 0.0035 | 60/60 | 1.00 | 6 |
+| learned (ordinary soft task codes) | 0.0055 | 58/60 | 0.96 | 7 |
+| search-in-the-loop (as J1) | 0.0069 | 36/60 | 0.75 | 5 |
+
+Two readings, both exploratory. (1) At length 1 ordinary gradient routing
+CO-FORMS from a random start: it recovers which tasks share an operation
+(ARI 0.96) and solves 58/60, so the length-3 co-formation failure is not a
+general property of gradient routing; it depends on program length, i.e. on
+credit assignment through three composed steps. (2) J1's lock-in appears even
+here: search changed 18% of routes after round 1 and 0% thereafter, merged two
+primitives into one slot, and left 24 tasks unfittable; soft routes can undo
+an early mistake, hard commitments cannot. This is one world and one seed and
+supports freezing J1c (length curriculum) next; it establishes nothing.

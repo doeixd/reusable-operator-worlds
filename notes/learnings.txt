@@ -4859,3 +4859,13 @@ than as a one-off miss.
   it re-scores every saved model and agreed, but it was written knowing the
   headline. Freeze-time acceptance should include the scorer so it is
   committed with the runner.
+
+- CO-FORMATION DIFFICULTY SCALES WITH PROGRAM LENGTH, NOT WITH ROUTING PER SE
+  (exploratory probe, 2026-09-11). Ordinary gradient routing, which never
+  co-forms the rotated library at length 3, co-forms it at length 1 from a
+  random start (ARI 0.96 with the teacher, 58/60 tasks solved). The same
+  search-in-the-loop mechanism that locked in at length 3 also locked in here
+  (0% route change after round 1, two primitives merged). Soft routes can undo
+  an early mistake; hard commitments cannot. Before blaming a mechanism,
+  reduce the structural parameter (here composition depth) and see whether the
+  mechanism suddenly works.
