@@ -4852,3 +4852,37 @@ passes at 32k, fails at 65k), consistent with the anchor diagnostic's C_lo
 resampling spread (0.017 / 0.263 / 0.678) and a reminder that each cell is
 one stream. Report reports/so1_budget_bracket_r2.json; logs and records in
 reports/so1_budget_bracket_r2_20260910.
+
+# SO1R route-only check: ROUTES_RECOVERABLE (2026-09-11)
+
+SO1R_ROUTE_ONLY_PLAN.md frozen at cf32b61 (protected a3c1556) before code;
+runner, independent scorer and 3 tests at 559580d. Tier 0: no library
+training; the six frozen terminal libraries of SO1 cells O_b2_g131072 and
+O_b64_g262144 were reloaded (hashes checked against the SO1 report) and only
+routes were inferred, from support data only. Dry run and a real-run restart
+test passed (killed after the first library, relaunch logged RESUME and reused
+the record byte-identically). Run 10:09-10:32 UTC, one process, exit 0.
+
+| library (SO1 cell, world) | eligible | ORACLE | ENUM | OPT | RANDOM | ENUM = oracle route | OPT = oracle route |
+|---|---|---|---|---|---|---|---|
+| B=2 131k, w0  | no  | 0.624 | 0.624 | 1.301 | 1.640 | 100% | 44% |
+| B=2 131k, w1  | yes | 0.0046 | 0.0046 | 0.0049 | 1.999 | 100% | 94% |
+| B=2 131k, w2  | yes | 0.0051 | 0.0051 | 0.0056 | 2.018 | 100% | 84% |
+| B=64 262k, w0 | no  | 0.719 | 0.719 | 1.365 | 1.660 | 100% | 30% |
+| B=64 262k, w1 | yes | 0.0087 | 0.0087 | 0.0088 | 2.010 | 100% | 94% |
+| B=64 262k, w2 | yes | 0.0078 | 0.0078 | 0.0078 | 2.035 | 100% | 86% |
+
+(median query NMSE over 64 tasks; threshold 0.05; routes chosen from support data only)
+
+Classification ROUTES_RECOVERABLE (independent scorer exit 0, no problems):
+ORACLE reproduces SO1 bitwise on all six; RANDOM fails everywhere; OPT cuts
+support loss by 99.2-99.5% on eligible libraries. On a correct frozen library
+exhaustive search recovers the exact oracle route for every task, and the
+learner's own softmax relaxation recovers it for 84-94% of tasks at the same
+query quality. The SO1 learned-route failure is therefore a JOINT-ACQUISITION
+failure: routes are easy once the library exists, but library and routes do
+not form together. World 0's libraries are the problem there (ENUM picks the
+oracle route 100% and still scores 0.62-0.72), and on those poor libraries the
+relaxation is also much weaker (support drop 11-13%, just above the 10%
+non-vacuity floor). check_prereg and check_invalid pass. Report
+reports/so1r_route_only.json; logs reports/so1r_route_only_20260911.

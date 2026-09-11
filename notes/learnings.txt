@@ -4799,3 +4799,18 @@ than as a one-off miss.
   harness while the detached run finished normally. Never rely on a watcher
   for completion: the run itself must write exit/status/scorer records, and
   the next session reads them.
+
+- SEPARATE "CAN THE PIECE BE FOUND" FROM "CAN THE PIECES FORM TOGETHER"
+  (SO1R, 2026-09-11). SO1's learned routes failed everywhere, which read like
+  a route-inference failure. Freezing the libraries SO1 acquired with oracle
+  routes and inferring only routes showed the opposite: exhaustive search
+  recovered the exact oracle route for 100% of tasks and the learner's own
+  relaxation for 84-94%, at oracle quality. The failure is joint acquisition,
+  a chicken-and-egg dynamic, and it was identified for 23 minutes of compute
+  on artifacts that already existed. Before designing a fix for a joint
+  failure, freeze each half at its oracle value and test the other half.
+- GRADIENT ROUTE INFERENCE DEGRADES WITH LIBRARY QUALITY (same run). On world
+  0's poor libraries the relaxation cut support loss only 11-13% and landed at
+  1.30-1.37 while exhaustive search reached 0.62-0.72. Early in joint training
+  every library is poor, so this is plausibly the mechanism of the joint
+  failure; it is an observation, not yet a tested claim.

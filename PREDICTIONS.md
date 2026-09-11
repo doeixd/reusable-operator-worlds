@@ -7992,3 +7992,41 @@ non-monotone on worlds 0 and 2); world 0 never passes in any SO1 cell, so
 every envelope rests on worlds 1-2; the axis claim is "more updates at lower
 diversity at fixed gradients", which the plan says cannot be separated into
 "more updates" versus "smaller batch".
+
+# SO1R outcome (2026-09-11): ROUTES_RECOVERABLE
+
+Registered in SO1R_ROUTE_ONLY_PLAN.md (cf32b61) before any code.
+
+| library (SO1 cell, world) | eligible | ORACLE | ENUM | OPT | RANDOM | ENUM = oracle route | OPT = oracle route |
+|---|---|---|---|---|---|---|---|
+| B=2 131k, w0  | no  | 0.624 | 0.624 | 1.301 | 1.640 | 100% | 44% |
+| B=2 131k, w1  | yes | 0.0046 | 0.0046 | 0.0049 | 1.999 | 100% | 94% |
+| B=2 131k, w2  | yes | 0.0051 | 0.0051 | 0.0056 | 2.018 | 100% | 84% |
+| B=64 262k, w0 | no  | 0.719 | 0.719 | 1.365 | 1.660 | 100% | 30% |
+| B=64 262k, w1 | yes | 0.0087 | 0.0087 | 0.0088 | 2.010 | 100% | 94% |
+| B=64 262k, w2 | yes | 0.0078 | 0.0078 | 0.0078 | 2.035 | 100% | 86% |
+
+(median query NMSE over 64 tasks; threshold 0.05; routes chosen from support data only)
+
+Scorekeeping:
+
+- ENUM passes on every eligible library (0.85): **CORRECT**, and more
+  strongly than predicted: it chose the exact oracle route on 100% of tasks
+  on all six libraries, including world 0's.
+- OPT passes on every eligible library (0.45): **WRONG in the favourable
+  direction** - it passed on all four (0.0049-0.0088). The worry that a soft
+  mixture of orthogonal maps presents a bad landscape does not hold on a
+  correct library.
+- Modal SEARCH_ONLY (~0.45): **WRONG**; the outcome is ROUTES_RECOVERABLE
+  (registered ~0.40).
+- World 0 ENUM within 0.1 of its ORACLE (0.6): **CORRECT** (identical).
+
+Registered consequence: the next Track B plan concerns JOINT ACQUISITION
+(forming library and routes together, e.g. warm starts or alternating
+phases), priced by its compute. Stop rule 2 stands; SO2 and control flow stay
+closed until a successor passes its own gates.
+
+Unregistered observation: on world 0's poor libraries the relaxation is much
+weaker than exhaustive search (1.30-1.37 against 0.62-0.72), so gradient route
+inference degrades with library quality, which is exactly the condition early
+in joint acquisition.

@@ -1468,3 +1468,15 @@ budget with either routing. Each cell is a single sampling stream, and the
 batch-2 dose curve is non-monotone in two worlds; the registered
 classification is that the substrate is acquirable but the route writer does
 not acquire it, so the next question is the routing mechanism, not budget.
+
+# Development provenance addendum: SO1R route-only inference (2026-09-11)
+
+To localize SO1's learned-route failure, the libraries acquired with oracle
+routes were frozen and only routes were inferred from each task's support
+data. On the four libraries that met the threshold, exhaustive search chose
+the exact oracle route for every task, and the learner's own gradient
+relaxation reached the same query quality (0.005-0.009). Routes are therefore
+recoverable on a correct library; the failure is in acquiring library and
+routes together. On the one world whose libraries fail even with oracle
+routes, search still recovered the oracle route, while gradient route
+inference was markedly weaker.

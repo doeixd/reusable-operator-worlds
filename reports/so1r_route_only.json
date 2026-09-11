@@ -1,0 +1,191 @@
+{
+ "frozen_plan": "SO1R_ROUTE_ONLY_PLAN.md",
+ "git_commit": "559580d",
+ "protocol": {
+  "id": "SO1R-route-only-v1",
+  "frozen_plan": "SO1R_ROUTE_ONLY_PLAN.md",
+  "libraries": [
+   "O_b2_g131072",
+   "O_b64_g262144"
+  ],
+  "worlds": [
+   0,
+   1,
+   2
+  ],
+  "threshold": 0.05,
+  "opt_steps": 2000,
+  "opt_lr": 0.05,
+  "temperature": [
+   1.0,
+   0.1
+  ],
+  "random_seed": 1704,
+  "min_support_drop": 0.1,
+  "enum_routes": 1728,
+  "selection": "support (train) MSE only; query (eval) NMSE for scoring",
+  "input_sha256": {
+   "SO1R_ROUTE_ONLY_PLAN.md": "1cae63b733e451c1f53420f68f248c48c0fc3b93f93705dfd3ec24e6edcdb31b",
+   "reports/so1_budget_bracket_r2.json": "a771c215ffb9ce2e2c69830a7fd02f5583a25630c346e810e2662d93a3382fdc"
+  },
+  "environment": {
+   "python": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+   "torch": "2.13.0+cpu",
+   "numpy": "2.3.5",
+   "psutil": "7.2.1",
+   "platform": "Windows-11-10.0.26100-SP0",
+   "torch_threads": 1
+  }
+ },
+ "protocol_sha256": "48293abb482785035e9f2697cad0947824d8f86938833995f60c715754ab6712",
+ "started_utc": "2026-09-11T10:09:58.981907+00:00",
+ "cells": {
+  "O_b2_g131072_w0": {
+   "medians": {
+    "oracle": 0.6243322438008752,
+    "enum": 0.6243322438008752,
+    "opt": 1.3006031266455302,
+    "random": 1.6403040835195701,
+    "k0": 1.414269088708192
+   },
+   "passes": {
+    "oracle": false,
+    "enum": false,
+    "opt": false,
+    "random": false,
+    "k0": false
+   },
+   "eligible": false,
+   "oracle_bitwise": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.4375,
+   "enum_support_le_oracle": true,
+   "opt_median_support_drop": 0.12756546568140065,
+   "opt_codes_moved": true,
+   "k0_differs_from_opt": true
+  },
+  "O_b2_g131072_w1": {
+   "medians": {
+    "oracle": 0.004623170973353442,
+    "enum": 0.004623170973353442,
+    "opt": 0.004889933720902849,
+    "random": 1.9993320885649577,
+    "k0": 2.027348385162301
+   },
+   "passes": {
+    "oracle": true,
+    "enum": true,
+    "opt": true,
+    "random": false,
+    "k0": false
+   },
+   "eligible": true,
+   "oracle_bitwise": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.9375,
+   "enum_support_le_oracle": true,
+   "opt_median_support_drop": 0.995214489649118,
+   "opt_codes_moved": true,
+   "k0_differs_from_opt": true
+  },
+  "O_b2_g131072_w2": {
+   "medians": {
+    "oracle": 0.005084436594005006,
+    "enum": 0.005084436594005006,
+    "opt": 0.005602259629392547,
+    "random": 2.01832197619967,
+    "k0": 1.9918481526464218
+   },
+   "passes": {
+    "oracle": true,
+    "enum": true,
+    "opt": true,
+    "random": false,
+    "k0": false
+   },
+   "eligible": true,
+   "oracle_bitwise": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.84375,
+   "enum_support_le_oracle": true,
+   "opt_median_support_drop": 0.9945307730447198,
+   "opt_codes_moved": true,
+   "k0_differs_from_opt": true
+  },
+  "O_b64_g262144_w0": {
+   "medians": {
+    "oracle": 0.7188103428711731,
+    "enum": 0.7188103428711731,
+    "opt": 1.365247949272736,
+    "random": 1.6599909042968428,
+    "k0": 1.383577493737933
+   },
+   "passes": {
+    "oracle": false,
+    "enum": false,
+    "opt": false,
+    "random": false,
+    "k0": false
+   },
+   "eligible": false,
+   "oracle_bitwise": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.296875,
+   "enum_support_le_oracle": true,
+   "opt_median_support_drop": 0.1144059821319958,
+   "opt_codes_moved": true,
+   "k0_differs_from_opt": true
+  },
+  "O_b64_g262144_w1": {
+   "medians": {
+    "oracle": 0.008741199308902072,
+    "enum": 0.008741199308902072,
+    "opt": 0.008817085717631165,
+    "random": 2.0097881158520554,
+    "k0": 2.0078097750994894
+   },
+   "passes": {
+    "oracle": true,
+    "enum": true,
+    "opt": true,
+    "random": false,
+    "k0": false
+   },
+   "eligible": true,
+   "oracle_bitwise": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.9375,
+   "enum_support_le_oracle": true,
+   "opt_median_support_drop": 0.9915845902608427,
+   "opt_codes_moved": true,
+   "k0_differs_from_opt": true
+  },
+  "O_b64_g262144_w2": {
+   "medians": {
+    "oracle": 0.007762586389101965,
+    "enum": 0.007762586389101965,
+    "opt": 0.007845111373076369,
+    "random": 2.0352493403884555,
+    "k0": 1.9997035272619277
+   },
+   "passes": {
+    "oracle": true,
+    "enum": true,
+    "opt": true,
+    "random": false,
+    "k0": false
+   },
+   "eligible": true,
+   "oracle_bitwise": true,
+   "enum_equals_oracle_route": 1.0,
+   "opt_equals_oracle_route": 0.859375,
+   "enum_support_le_oracle": true,
+   "opt_median_support_drop": 0.9927392842943932,
+   "opt_codes_moved": true,
+   "k0_differs_from_opt": true
+  }
+ },
+ "complete": true,
+ "classification": "ROUTES_RECOVERABLE",
+ "finished_utc": "2026-09-11T10:32:44.707181+00:00"
+}

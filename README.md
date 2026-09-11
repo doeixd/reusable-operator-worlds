@@ -41,6 +41,7 @@ confirmatory result.
 | **G5R Stage D** | Which of those two? | `BUDGET_LIMITED`: at the lifetime's own budget even oracle routes fail 0/3; sufficiency lies between 16k and 262k example-gradients; learned routes fail even where oracle routes pass. |
 | **SO0** | Do existing cells separate the budget axes? | Census: no pair controls updates, task diversity or example-gradients; no persistent threshold crossing exists anywhere. |
 | **SO1** | Which resource buys acquisition: updates, diversity or gradients? | `ORACLE_PASSES_LEARNED_FAILS`, all five registered predictions correct. With oracle routes the library is acquired at 131k example-gradients (batch 2) and 262k (batch 64); batch 2 is better at every equal budget (15/15 world-levels). Learned routes fail 0/3 at both envelopes (0.92-1.16). World 0 never passes. The wall is the route writer, not compute. One stream per cell; after a first launch stopped at an anchor gate that a frozen diagnostic traced to resampling. |
+| **SO1R** | Is the route writer's failure route inference or joint acquisition? | `ROUTES_RECOVERABLE`. On SO1's frozen oracle-acquired libraries, exhaustive search picks the exact oracle route for 100% of tasks and the learner's own relaxation matches oracle quality (0.005-0.009). The wall is forming library and routes together, not finding routes. |
 
 The original V4 premise — that successful abstraction birth implies a
 maintenance problem — failed in development and is preserved unrevised in
