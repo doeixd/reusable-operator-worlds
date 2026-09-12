@@ -73,6 +73,7 @@ FROZEN = {
     "J0_AMENDMENT_1.md": "0e37ec8",
     "J1_SEARCH_IN_THE_LOOP_PLAN.md": "7e7ff1b",
     "J1C_LENGTH_CURRICULUM_PLAN.md": "77984dd",
+    "J1CR_REPLICATION_PLAN.md": "9d62cc7",
 }
 
 STATUS_PATH_PATTERN = re.compile(
