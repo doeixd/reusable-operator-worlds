@@ -8156,3 +8156,55 @@ the specific reason a curriculum whose first stage makes routing trivial
 (single-operator tasks, where tasks sharing an operation look alike in
 input-output) is the natural next test, and it suggests a J1 variant that
 delays or softens early commitment would need its own frozen plan.
+
+# J1c outcome (2026-09-12): J1C_ACQUIRES - staged formation acquires the rotated substrate
+
+Registered in J1C_LENGTH_CURRICULUM_PLAN.md (77984dd) before any code.
+
+| world | STAGED stage 1 | stage 2 | stage 3 (canonical, the estimand) | tasks < 0.05 | RESET | NON-STAGED (SO1) | SO1 oracle routes |
+|---|---|---|---|---|---|---|---|
+| 0 | 0.0093 | 0.0079 | **0.0062** | 62/64 | 0.998 | 0.961 | 0.624 |
+| 1 | 0.0068 | 0.0053 | **0.0051** | 64/64 | 1.060 | 0.954 | 0.0046 |
+| 2 | 0.0068 | 0.0046 | **0.0072** | 62/64 | 1.006 | 0.919 | 0.0051 |
+
+(median query NMSE; threshold 0.05; learned soft routes in every STAGED/RESET
+stage, no oracle anywhere in those arms)
+
+CF6 survival (stage-1 operation-to-slot pairings still carrying stage-3
+traffic): 6/6, 5/6, 5/6 on worlds 1, 2, 0. Functional distance between each
+such slot's stage-1 and stage-3 function on a common probe: 0.06-0.21 for the
+persisting pairings (one non-persisting slot at 0.89), against 1.24-1.40 for
+every RESET slot. Slot-operation ARI at stage 3: 0.95-1.00 per position for
+STAGED, -0.03 to 0.01 for RESET.
+
+Scorekeeping (all six as registered):
+
+- Stage 1 passes on its own tasks in 3/3 worlds (0.85): **CORRECT**
+  (0.0068-0.0093).
+- Stage 2 passes in >= 2/3 (0.5): **CORRECT**, 3/3 (0.0046-0.0079).
+- J1C_ACQUIRES (0.4): **CORRECT.** STAGED passes 3/3 and beats both RESET and
+  the non-staged SO1 baseline in every world.
+- J1C_IMPROVES or better (0.65): **CORRECT.**
+- RESET fails 3/3 (0.85): **CORRECT** (0.998-1.060, 0/64 tasks).
+- >= 4/6 stage-1 pairings still carry stage-3 traffic (0.6): **CORRECT**
+  (6/6, 5/6, 5/6), and the persisting slots' functions barely move
+  (0.06-0.21) while RESET's differ entirely (1.24-1.40). CF6's "extend, do
+  not undo" condition is satisfied here.
+
+Working hypothesis CF3 is SUPPORTED at this envelope and split. CF1/CF2 keep
+their J0 status; CF4 stays refuted (J1).
+
+What this licenses: "the rotated 12-slot substrate is acquirable offline, with
+the learner's own soft routing and no teacher routes, under a length
+curriculum at 131,072 example-gradients split 1/4-1/4-1/2". What it does not:
+any online claim (SO2 is unrun), any claim that this split or schedule is
+necessary or optimal, or control flow. Track B stop rule 2 said the substrate
+exists but the writer could not acquire it; that statement held for the
+non-staged writer and does not hold for the staged one at this envelope, which
+is exactly what the stop rule's successors were meant to test.
+
+Unregistered observation, important for interpretation: world 0 passes under
+the curriculum (0.0062) while failing with oracle routes (0.624). A fixed
+oracle assignment is not an upper bound on what formation can reach, because
+the assignment itself can be a handicap. Any future use of an oracle-route arm
+as a ceiling must say so.

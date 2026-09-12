@@ -5004,3 +5004,47 @@ here: search changed 18% of routes after round 1 and 0% thereafter, merged two
 primitives into one slot, and left 24 tasks unfittable; soft routes can undo
 an early mistake, hard commitments cannot. This is one world and one seed and
 supports freezing J1c (length curriculum) next; it establishes nothing.
+
+# J1c length curriculum: J1C_ACQUIRES - the strong substrate forms without oracle routes (2026-09-12)
+
+J1C_LENGTH_CURRICULUM_PLAN.md frozen at 77984dd (protected 323ba3b); runner,
+independent scorer and tests committed together BEFORE launch at 72c44c7 (the
+J1 lesson); run 23:08-01:2x UTC in one process, exit 0; restart test passed
+(killed after the first cell, resumed byte-identically). Independent scorer
+re-scored every saved stage-3 model, rebuilt the library-transfer chain from
+the saved stage models, and agrees: J1C_ACQUIRES, harness true, no problems.
+check_prereg and check_invalid pass.
+
+| world | STAGED stage 1 | stage 2 | stage 3 (canonical, the estimand) | tasks < 0.05 | RESET | NON-STAGED (SO1) | SO1 oracle routes |
+|---|---|---|---|---|---|---|---|
+| 0 | 0.0093 | 0.0079 | **0.0062** | 62/64 | 0.998 | 0.961 | 0.624 |
+| 1 | 0.0068 | 0.0053 | **0.0051** | 64/64 | 1.060 | 0.954 | 0.0046 |
+| 2 | 0.0068 | 0.0046 | **0.0072** | 62/64 | 1.006 | 0.919 | 0.0051 |
+
+(median query NMSE; threshold 0.05; learned soft routes in every STAGED/RESET
+stage, no oracle anywhere in those arms)
+
+CF6 survival (stage-1 operation-to-slot pairings still carrying stage-3
+traffic): 6/6, 5/6, 5/6 on worlds 1, 2, 0. Functional distance between each
+such slot's stage-1 and stage-3 function on a common probe: 0.06-0.21 for the
+persisting pairings (one non-persisting slot at 0.89), against 1.24-1.40 for
+every RESET slot. Slot-operation ARI at stage 3: 0.95-1.00 per position for
+STAGED, -0.03 to 0.01 for RESET.
+
+All six registered predictions came out as registered (stage 1 passes 3/3;
+stage 2 passes 3/3; J1C_ACQUIRES; improves-or-better; RESET fails 3/3; >= 4/6
+pairings persist).
+
+Two results beyond the verdict. (1) World 0, which had never passed anything
+and fails at 0.624 even with ORACLE routes, passes at 0.0062 under the
+curriculum: its anomaly was a formation-path artifact, not a property of the
+world, and the oracle's fixed primitive-to-slot assignment was itself a
+handicap there. Oracle-route formation is therefore NOT an upper bound on
+formation. (2) RESET, which trains the same stages and then discards the
+library before stage 3, lands at ~1.0 with 0/64 tasks and ~0 ARI, so the
+STAGED result is transfer, not compute.
+
+Report reports/j1c_curriculum.json; logs reports/j1c_curriculum_20260912.
+Per the plan's registered consequence, an SO2 online protocol built around
+staged formation may now be PLANNED under a new frozen plan; SO2 is not run
+here and control flow stays closed.

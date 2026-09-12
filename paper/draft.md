@@ -1505,3 +1505,22 @@ after three to five rounds on every world: the first search, on a random
 library, made an arbitrary commitment that the library then fitted and that
 remained optimal thereafter. Search removes the gradient weakness identified
 in J0 but not the need for an informed first commitment.
+
+# Development result: staged formation of the strong substrate (J1c, 2026-09-12)
+
+A length curriculum acquires the rotated operator library that joint training
+cannot. Three stages - 60 single-operator tasks, 64 length-2 tasks, then the
+canonical 64-task length-3 world - sharing only the learned library and never
+revealing a teacher route, reach median query NMSE 0.0062 / 0.0051 / 0.0072 on
+development worlds 0 / 1 / 2, against 0.961 / 0.954 / 0.919 for the same
+learner trained on the length-3 world alone at the same total budget, and
+against the 0.05 threshold that oracle-supplied routes reach. A control that
+runs the same stages and then re-initializes the library before the final
+stage reaches only ~1.0, so the effect is transfer rather than compute. Five
+to six of the six operation-to-slot pairings formed in stage 1 still carry the
+final stage's traffic, with their functions moving by 0.06-0.21 on a common
+probe while a freshly initialized library's differ by about 1.3: the structure
+is extended, not rebuilt. Notably the one world that fails even with oracle
+routes (0.624) passes under the curriculum, so a fixed oracle assignment
+bounds only formation under that assignment. The claim is offline and
+development-only; the online protocol remains untested.

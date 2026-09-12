@@ -400,6 +400,8 @@ J0 result (2026-09-11, appended): `CF2_SUPPORTED` narrowly (pooled rho 0.521, p 
 
 J1 result (2026-09-11, appended): `J1_FAILS`. Search-in-the-loop locks into the arbitrary assignment its first search makes on a random library (0% route change after round 3-5; ARI ~0), plateauing at 0.76. CF4 is refuted as registered. J1c and the Tier-1 single-operator probe are now primary; any J1 variant that delays or softens early commitment needs its own frozen plan.
 
+J1c result (2026-09-12, appended): **`J1C_ACQUIRES`**. The length curriculum (1 -> 2 -> 3, library-only transfer, learned soft routes, no oracle) acquires the rotated substrate in 3/3 worlds (0.0062 / 0.0051 / 0.0072) against 0.92-0.96 non-staged at matched budget and ~1.0 for a library-reset control; 5-6 of 6 stage-1 pairings persist. World 0 passes here while failing with oracle routes (0.624), so an oracle arm bounds only formation under its own assignment. Next, under a NEW frozen plan only: audit the staged libraries with the SO1R/J0 instruments, charge the curriculum's full cost, and design the B2 SO2 online protocol around staged formation. SO2 and control flow remain closed until that plan passes.
+
 Revised ordering for B1b: J0 (census, minutes) -> a Tier-1 exploratory
 single-operator co-formation probe (one world, reduced budget; can co-formation
 succeed at all when routing is only clustering?) -> J1 and J1c as competing,

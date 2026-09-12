@@ -44,16 +44,17 @@ confirmatory result.
 | **SO1R** | Is the route writer's failure route inference or joint acquisition? | `ROUTES_RECOVERABLE`. On SO1's frozen oracle-acquired libraries, exhaustive search picks the exact oracle route for 100% of tasks and the learner's own relaxation matches oracle quality (0.005-0.009). The wall is forming library and routes together, not finding routes. |
 | **J0** | Does gradient route inference degrade as the library gets worse? | `CF2_SUPPORTED` (narrowly; rho 0.52). The pattern is a threshold: gradient routing equals exhaustive search on every library at or below 0.47 median NMSE and fails above about 0.6, while search keeps finding the oracle route. Early in joint training every library is on the failing side. |
 | **J1** | Does exhaustive route search in the training loop let library and routes form together? | `J1_FAILS`. It beats learned soft routes and a sham by ~0.2 (0.76 vs 0.92-0.98) but forms nothing: the first search, on a random library, makes an arbitrary assignment that the library then fits and that never changes again (0% route change after round 3-5). The first commitment has to be informed. |
+| **J1c** | Does a length curriculum let library and routes co-form? | **`J1C_ACQUIRES`**, all six registered predictions correct. Staging tasks by program length (1 -> 2 -> 3), carrying only the library and never revealing a route, reaches 0.0062 / 0.0051 / 0.0072 where the same learner on length-3 alone at the same budget reaches 0.92-0.96; a library-reset control lands at ~1.0. 5-6 of 6 stage-1 operation-slot pairings survive. The world that fails even with oracle routes (0.624) passes at 0.0062. |
 
 **Where Track B stands.** The stronger (rotated) operator language is
 representable, its library is acquirable when routes are supplied, and its
 routes are recoverable when the library is supplied, yet the learner cannot
-form library and routes together from scratch at any tested budget. The open
-problem is co-formation, not representation, compute, or search. The next
-rungs (`POST_E6_RESEARCH_PROGRAM.md`, B1b) first test, on existing artifacts,
-whether gradient route inference degrades as library quality falls, and then
-whether putting cheap exhaustive route search in the training loop lets the two
-halves form together. Control flow stays closed until then.
+form library and routes together from scratch at any tested budget. Co-formation was the open
+problem, and a length curriculum solves it (J1c): staged by program length, the learner forms the library and its own routes to 0.005-0.007, where joint
+training at the same budget reaches 0.92-0.96. The mechanism is transfer, not
+compute, and the structure formed early is extended rather than rebuilt. This
+is offline and development-only: the online protocol (SO2) is unrun, and
+control flow stays closed until it passes its own frozen plan.
 The original V4 premise — that successful abstraction birth implies a
 maintenance problem — failed in development and is preserved unrevised in
 `row_v4_experimental_spec.md`. V4R is the question that was actually sealed.

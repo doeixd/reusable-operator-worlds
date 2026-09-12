@@ -4869,3 +4869,21 @@ than as a one-off miss.
   an early mistake; hard commitments cannot. Before blaming a mechanism,
   reduce the structural parameter (here composition depth) and see whether the
   mechanism suddenly works.
+
+- STAGED FORMATION ACQUIRES WHAT JOINT FORMATION CANNOT (J1c, 2026-09-12).
+  Ordering tasks by program length (60 length-1, then 64 length-2, then the
+  canonical length-3 world), carrying only the shared library across stages
+  and never revealing a route, took the rotated substrate from 0.92-0.96
+  (non-staged, same learner, same total budget) to 0.005-0.007 in all three
+  development worlds, at the threshold oracle routes reach. A RESET control
+  that trains the same stages and discards the library before the last stage
+  lands at ~1.0, so the gain is transfer, not compute. The first commitment
+  must be informed: at length 1 it is, and the structure then EXTENDS (5-6 of
+  6 operation-to-slot pairings keep their traffic, their functions moving
+  0.06-0.21 while a fresh library's differ by 1.3).
+- AN ORACLE ARM IS NOT AUTOMATICALLY A CEILING (J1c). World 0 fails at 0.624
+  with oracle-pinned routes and passes at 0.0062 under the curriculum: the
+  oracle's fixed primitive-to-slot assignment was itself a handicap in that
+  world. A long-standing "dissenting world" anomaly dissolved the moment the
+  learner chose its own assignment. When an oracle arm is used as an upper
+  bound, state that it bounds only formation UNDER THAT ASSIGNMENT.
