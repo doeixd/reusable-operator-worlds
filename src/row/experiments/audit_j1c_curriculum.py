@@ -64,7 +64,7 @@ def protocol() -> dict:
             "input_sha256": {p.as_posix(): digest(p) for p in (PLAN, SO1_REPORT)}, "environment": environment()}
 
 
-def stage_setup(world_seed: int, stage: int):
+def stage_setup(world_seed: int, stage: int, model_seed: int = 5000):
     """Resolved config and world for one stage; stage 3 is the canonical world."""
     base = load_config("configs/v1.yaml")
     length, tasks, updates, root, tail = STAGES[stage - 1]
@@ -75,7 +75,7 @@ def stage_setup(world_seed: int, stage: int):
         cfg = replace(base, world=CurriculumWorldConfig.from_world(
             replace(base.world, seed=world_seed), program_length=length, tasks=tasks, stage=f"length-{length}"))
         world = generate_curriculum_world(cfg.world)
-    cfg = replace(cfg, discrete_model=replace(cfg.discrete_model, task_steps=length))
+    cfg = replace(cfg, discrete_model=replace(cfg.discrete_model, task_steps=length, seed=model_seed))
     return cfg, world, updates, np.random.SeedSequence([root, world_seed, tail])
 
 
@@ -142,13 +142,14 @@ def train_stage(cfg, world, updates: int, seed_sequence, model=None) -> tuple:
     return model, result
 
 
-def run_arm(arm: str, world_seed: int, artifact: Path | None = None, scale: int = 1) -> dict:
+def run_arm(arm: str, world_seed: int, artifact: Path | None = None, scale: int = 1,
+            model_seed: int = 5000) -> dict:
     torch.set_num_threads(1)
-    probe_cfg, probe_world, _, _ = stage_setup(world_seed, 3)
+    probe_cfg, probe_world, _, _ = stage_setup(world_seed, 3, model_seed)
     probe = torch.tensor(probe_world.tasks[0].eval_x, dtype=torch.float32)
     stages, model, transfers, stage1_functions = {}, None, [], None
     for stage in (1, 2, 3):
-        cfg, world, updates, stream = stage_setup(world_seed, stage)
+        cfg, world, updates, stream = stage_setup(world_seed, stage, model_seed)
         carried = None
         if model is not None and not (arm == "RESET" and stage == 3):
             fresh = build_fast(cfg)
@@ -179,7 +180,7 @@ def run_arm(arm: str, world_seed: int, artifact: Path | None = None, scale: int 
             "still_used": stages["3"]["slot_by_operation"].get(operation) == slot,
             "functional_distance": float(torch.norm(final_functions[slot] - reference) / torch.norm(reference)),
         })
-    return {"arm": arm, "world": world_seed, "stages": stages, "transfers": transfers,
+    return {"arm": arm, "world": world_seed, "model_seed": model_seed, "stages": stages, "transfers": transfers,
             "survival": survival, "terminal_median": stages["3"]["terminal_median"],
             "persisting_pairings": sum(s["still_used"] for s in survival)}
 
