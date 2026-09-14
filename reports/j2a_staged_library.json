@@ -1,0 +1,275 @@
+{
+ "frozen_plan": "J2A_STAGED_LIBRARY_AUDIT_PLAN.md",
+ "git_commit": "985dfb5",
+ "protocol": {
+  "id": "J2A-staged-library-audit-v1",
+  "frozen_plan": "J2A_STAGED_LIBRARY_AUDIT_PLAN.md",
+  "worlds": [
+   0,
+   1,
+   2
+  ],
+  "sources": {
+   "STAGED5000": {
+    "cells": "artifacts/j1c_curriculum/cells/STAGED_w{w}",
+    "model_seed": 5000,
+    "report": "reports/j1c_curriculum.json"
+   },
+   "STAGED3001": {
+    "cells": "artifacts/j1cr_replication/cells/STAGED-R_w{w}",
+    "model_seed": 3001,
+    "report": "reports/j1cr_replication.json"
+   },
+   "NONSTAGED3001": {
+    "cells": "artifacts/j1cr_replication/cells/NON-STAGED-R_w{w}",
+    "model_seed": 3001,
+    "report": "reports/j1cr_replication.json"
+   },
+   "RESET5000": {
+    "cells": "artifacts/j1c_curriculum/cells/RESET_w{w}",
+    "model_seed": 5000,
+    "report": "reports/j1c_curriculum.json"
+   }
+  },
+  "held_out_programs": 64,
+  "seed": 1709,
+  "threshold": 0.05,
+  "export_ratio": 4.0,
+  "input_sha256": {
+   "J2A_STAGED_LIBRARY_AUDIT_PLAN.md": "55060ad5272384e51cd9061c9b85e1a5da09c6ee9ad74b472df198a09f015802",
+   "reports/j1c_curriculum.json": "b20e0162022d1923313aff09370cfadb76bae0919df33f81995f9c4eb9820c1c",
+   "reports/j1cr_replication.json": "e8414701920a29bbc4122f56beb2832e146f8082800330e9d16c0eabfc80d5d5"
+  },
+  "environment": {
+   "python": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+   "torch": "2.13.0+cpu",
+   "numpy": "2.3.5",
+   "psutil": "7.2.1",
+   "platform": "Windows-11-10.0.26100-SP0",
+   "torch_threads": 8
+  }
+ },
+ "protocol_sha256": "d610b017c2ce48ed6b2f45a0ceff21ee2674857a6072ee60c95932fd6ab756f3",
+ "started_utc": "2026-09-14T11:46:36.287604+00:00",
+ "cells": {
+  "STAGED5000_w0": {
+   "trained": {
+    "as_trained": 0.006227206610830397,
+    "enum": 0.006227206610830397,
+    "opt": 0.006227206610830397,
+    "random": 2.070022130332273
+   },
+   "held_out": {
+    "enum": 0.00650346453283915,
+    "random": 2.135986985735313
+   },
+   "held_out_below_threshold": 64,
+   "export_ratio": 1.0443630570291798,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.96875,
+   "finite": true
+  },
+  "STAGED5000_w1": {
+   "trained": {
+    "as_trained": 0.00513739878294522,
+    "enum": 0.00513739878294522,
+    "opt": 0.005161135530351454,
+    "random": 2.587790731879673
+   },
+   "held_out": {
+    "enum": 0.005425497852882809,
+    "random": 2.555006737153901
+   },
+   "held_out_below_threshold": 64,
+   "export_ratio": 1.0560787826894031,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.953125,
+   "finite": true
+  },
+  "STAGED5000_w2": {
+   "trained": {
+    "as_trained": 0.007249458000355779,
+    "enum": 0.007079143846352025,
+    "opt": 0.007249458000355779,
+    "random": 2.295135723147851
+   },
+   "held_out": {
+    "enum": 0.006902623647569464,
+    "random": 2.251448412744207
+   },
+   "held_out_below_threshold": 64,
+   "export_ratio": 0.9521572022668049,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.96875,
+   "finite": true
+  },
+  "STAGED3001_w0": {
+   "trained": {
+    "as_trained": 0.004717765428814202,
+    "enum": 0.00469370261451141,
+    "opt": 0.004717765428814202,
+    "random": 2.164073313453639
+   },
+   "held_out": {
+    "enum": 0.005261168915498743,
+    "random": 2.1574282133720524
+   },
+   "held_out_below_threshold": 64,
+   "export_ratio": 1.1151823876968645,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.953125,
+   "finite": true
+  },
+  "STAGED3001_w1": {
+   "trained": {
+    "as_trained": 0.005965604956894915,
+    "enum": 0.005965604956894915,
+    "opt": 0.005965604956894915,
+    "random": 2.242668811073555
+   },
+   "held_out": {
+    "enum": 0.006340503977344052,
+    "random": 2.3650656451956014
+   },
+   "held_out_below_threshold": 64,
+   "export_ratio": 1.0628434204339723,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.984375,
+   "finite": true
+  },
+  "STAGED3001_w2": {
+   "trained": {
+    "as_trained": 0.004899964879521925,
+    "enum": 0.004899964879521925,
+    "opt": 0.00502570590371864,
+    "random": 2.441955319876027
+   },
+   "held_out": {
+    "enum": 0.004763941507128461,
+    "random": 2.3367640358297086
+   },
+   "held_out_below_threshold": 64,
+   "export_ratio": 0.972239929114199,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.984375,
+   "finite": true
+  },
+  "NONSTAGED3001_w0": {
+   "trained": {
+    "as_trained": 0.9159912590586579,
+    "enum": 0.9112988934442587,
+    "opt": 0.9112988934442587,
+    "random": 1.578830026914855
+   },
+   "held_out": {
+    "enum": 1.2614225895213573,
+    "random": 1.5561572042664698
+   },
+   "held_out_below_threshold": 0,
+   "export_ratio": 1.377112037966051,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.75,
+   "finite": true
+  },
+  "NONSTAGED3001_w1": {
+   "trained": {
+    "as_trained": 0.9438908325459414,
+    "enum": 0.940315162650444,
+    "opt": 0.940315162650444,
+    "random": 1.578405275038537
+   },
+   "held_out": {
+    "enum": 1.2719082507834565,
+    "random": 1.5613684440213271
+   },
+   "held_out_below_threshold": 0,
+   "export_ratio": 1.3475162666351563,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.8125,
+   "finite": true
+  },
+  "NONSTAGED3001_w2": {
+   "trained": {
+    "as_trained": 0.9735364271213149,
+    "enum": 0.9582646670128969,
+    "opt": 0.9582646670128969,
+    "random": 1.563089124866225
+   },
+   "held_out": {
+    "enum": 1.296053519431128,
+    "random": 1.5968417362171832
+   },
+   "held_out_below_threshold": 0,
+   "export_ratio": 1.331284051962468,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.6875,
+   "finite": true
+  },
+  "RESET5000_w0": {
+   "trained": {
+    "as_trained": 0.9984303516156519,
+    "enum": 0.9802501242790906,
+    "opt": 0.9802501242790906,
+    "random": 1.6142057261021
+   },
+   "held_out": {
+    "enum": 1.2886486552669376,
+    "random": 1.5867746851548286
+   },
+   "held_out_below_threshold": 0,
+   "export_ratio": 1.2906745605055545,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.703125,
+   "finite": true
+  },
+  "RESET5000_w1": {
+   "trained": {
+    "as_trained": 1.059847655894456,
+    "enum": 0.964713529991962,
+    "opt": 0.964713529991962,
+    "random": 1.6207700758264005
+   },
+   "held_out": {
+    "enum": 1.2952749983247196,
+    "random": 1.6266678643766541
+   },
+   "held_out_below_threshold": 0,
+   "export_ratio": 1.2221331916157092,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.59375,
+   "finite": true
+  },
+  "RESET5000_w2": {
+   "trained": {
+    "as_trained": 1.005783667263903,
+    "enum": 0.988073477569666,
+    "opt": 0.9790717857211553,
+    "random": 1.6257391685956781
+   },
+   "held_out": {
+    "enum": 1.2723572817825461,
+    "random": 1.5977913932257726
+   },
+   "held_out_below_threshold": 0,
+   "export_ratio": 1.2650407072564822,
+   "g": 0.0,
+   "as_trained_bitwise": true,
+   "enum_equals_as_trained_route": 0.671875,
+   "finite": true
+  }
+ },
+ "complete": true,
+ "classification": "EXPORTS",
+ "finished_utc": "2026-09-14T12:37:26.827481+00:00"
+}

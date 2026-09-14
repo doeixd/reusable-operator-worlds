@@ -8239,3 +8239,40 @@ registered consequence applies: the successor plans (auditing the staged
 libraries with the SO1R/J0 instruments, charging the curriculum's full cost,
 and designing the B2/SO2 online protocol) may proceed, each under its own
 frozen plan. SO2 and control flow remain closed.
+
+# J2A outcome (2026-09-14): EXPORTS - staged libraries execute unseen programs
+
+Registered in J2A_STAGED_LIBRARY_AUDIT_PLAN.md (8913ed4) before any code.
+
+| library | trained tasks | 64 UNSEEN programs | unseen below 0.05 | export ratio | random routes |
+|---|---|---|---|---|---|
+| STAGED seed 5000, w0/w1/w2 | 0.0062 / 0.0051 / 0.0072 | 0.0065 / 0.0054 / 0.0069 | 64/64 each | 1.04 / 1.06 / 0.95 | 2.14-2.56 |
+| STAGED seed 3001, w0/w1/w2 | 0.0047 / 0.0060 / 0.0049 | 0.0053 / 0.0063 / 0.0048 | 64/64 each | 1.12 / 1.06 / 0.97 | 2.16-2.37 |
+| NON-STAGED seed 3001 (control) | 0.916-0.974 | 1.261-1.296 | 0/64 each | 1.33-1.38 | 1.56-1.60 |
+| RESET seed 5000 (control) | 0.998-1.060 | 1.272-1.295 | 0/64 each | 1.22-1.29 | 1.59-1.63 |
+
+(median query NMSE; unseen-program routes chosen by exhaustive support-only
+search; the staged libraries' own trained-task routes reproduce J1c/J1c-R
+bitwise)
+
+Scorekeeping (all five as registered):
+
+- EXPORTS (0.6): **CORRECT**, and at the strongest setting: 6 of 6 staged
+  libraries, 64 of 64 unseen programs each.
+- `R_export` <= 2 on >= 4 of 6 (0.45): **CORRECT**, all six are 0.95-1.12.
+- `g` <= 0.05 on every staged library (0.8): **CORRECT**, all 0.000.
+- NON-STAGED and RESET fail the held-out threshold 3/3 each (0.9): **CORRECT**
+  (0/64 everywhere).
+- RANDOM routes fail on every library (0.95): **CORRECT** (1.56-2.56).
+
+Registered consequence: the staged library is a reusable vocabulary rather
+than a fit to its training tasks, so the SO2 design proceeds on that basis and
+this export measurement becomes part of SO2's acceptance. SO2 and control flow
+remain closed until that plan is frozen and passes.
+
+What this licenses: "a library formed by the length curriculum executes unseen
+length-3 compositions under support-only exhaustive route search, at its own
+trained-task loss". What it does not: composition in unseen POSITIONS (E2's
+stratified claim), any online claim, any program length other than 3, control
+flow, or synthesis. The route inference here is offline search over a frozen
+library, exactly as in E1.

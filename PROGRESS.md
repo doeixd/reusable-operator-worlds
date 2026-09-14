@@ -5079,3 +5079,40 @@ Staged formation is therefore not an artifact of one initialization: at two
 seeds, in three development worlds, the curriculum reaches 0.005-0.007 where
 the same learner on length-3 tasks alone at the same budget reaches 0.92-0.97.
 Report reports/j1cr_replication.json; logs reports/j1cr_replication_20260912.
+
+# J2A: the staged library is a reusable vocabulary - EXPORTS (2026-09-14)
+
+J2A_STAGED_LIBRARY_AUDIT_PLAN.md frozen at 8913ed4 (protected 808d8f0);
+runner, independent scorer and tests committed together before launch at
+985dfb5. Tier 0, no training: the twelve existing stage-3 libraries were
+reloaded frozen (hash-checked, parameters verified unchanged) and asked to
+execute 64 UNSEEN length-3 teacher programs - drawn from the 152 the world
+never trained on, verified disjoint - with routes chosen by exhaustive
+support-only search. Run 11:46-12:37 UTC, one process, exit 0; independent
+scorer agrees (EXPORTS, harness true, no problems); check_prereg and
+check_invalid pass.
+
+| library | trained tasks | 64 UNSEEN programs | unseen below 0.05 | export ratio | random routes |
+|---|---|---|---|---|---|
+| STAGED seed 5000, w0/w1/w2 | 0.0062 / 0.0051 / 0.0072 | 0.0065 / 0.0054 / 0.0069 | 64/64 each | 1.04 / 1.06 / 0.95 | 2.14-2.56 |
+| STAGED seed 3001, w0/w1/w2 | 0.0047 / 0.0060 / 0.0049 | 0.0053 / 0.0063 / 0.0048 | 64/64 each | 1.12 / 1.06 / 0.97 | 2.16-2.37 |
+| NON-STAGED seed 3001 (control) | 0.916-0.974 | 1.261-1.296 | 0/64 each | 1.33-1.38 | 1.56-1.60 |
+| RESET seed 5000 (control) | 0.998-1.060 | 1.272-1.295 | 0/64 each | 1.22-1.29 | 1.59-1.63 |
+
+(median query NMSE; unseen-program routes chosen by exhaustive support-only
+search; the staged libraries' own trained-task routes reproduce J1c/J1c-R
+bitwise)
+
+Every staged library executes every unseen program below the 0.05 threshold,
+at essentially its own trained-task loss (ratios 0.95-1.12). The J0 gap `g`
+is exactly 0.000 on all twelve libraries: the learner's own gradient
+relaxation finds routes as good as exhaustive search, as J0's threshold
+predicted for libraries this far below 0.47. Both failure controls behave as
+controls should: they neither solve their own tasks nor any unseen program,
+and their unseen loss is worse than their trained loss.
+
+So what the curriculum forms is not a fit to 64 tasks: it is a vocabulary
+whose operators compose correctly in programs that never appeared in training.
+Under the terminology contract this is the EXPORT rung, on the strong
+substrate, offline. Report reports/j2a_staged_library.json; logs
+reports/j2a_staged_library_20260914.

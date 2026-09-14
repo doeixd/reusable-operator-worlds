@@ -404,6 +404,8 @@ J1c result (2026-09-12, appended): **`J1C_ACQUIRES`**. The length curriculum (1 
 
 J1c-R result (2026-09-12, appended): `REPLICATES` at learner seed 3001 (0.0047 / 0.0060 / 0.0049 staged against 0.916 / 0.944 / 0.974 non-staged at the same seed). Staged formation is initialization-robust on development worlds, so the successor plans may proceed under their own frozen plans.
 
+J2A result (2026-09-14, appended): `EXPORTS`. The curriculum-formed libraries execute 64/64 unseen length-3 programs at their own trained-task loss (ratios 0.95-1.12) in 6/6 staged libraries; non-staged and reset controls 0/64; route-finding gap 0.000 everywhere. The staged library is a vocabulary, not a fit, so the SO2 design proceeds with the export measurement as part of its acceptance. Still owed before SO2 is frozen: the curriculum's full cost accounting.
+
 Revised ordering for B1b: J0 (census, minutes) -> a Tier-1 exploratory
 single-operator co-formation probe (one world, reduced budget; can co-formation
 succeed at all when routing is only clustering?) -> J1 and J1c as competing,

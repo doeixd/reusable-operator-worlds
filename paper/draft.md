@@ -1536,3 +1536,17 @@ threshold. Five to six of the six operation-to-slot pairings formed in the
 first stage again carried the final stage's traffic. The effect is therefore
 not an artifact of one initialization, though it remains offline and
 development-scale.
+
+# Development result: the curriculum-formed library exports (J2A, 2026-09-14)
+
+The libraries formed by the length curriculum were frozen and asked to execute
+64 length-3 teacher programs drawn from the 152 compositions never used in
+training, with routes chosen from each task's support examples by exhaustive
+search. All six staged libraries (two initializations x three worlds) executed
+every unseen program below the 0.05 threshold, at 0.95-1.12 times their own
+trained-task loss. The two failure controls - the non-staged learner and a
+library-reset arm - solved none of the 64. On every audited library the
+learner's own gradient route inference matched exhaustive search exactly,
+consistent with the earlier finding that routing difficulty tracks library
+quality. The curriculum therefore forms a reusable vocabulary rather than a
+fit to its training tasks, offline and at development scale.

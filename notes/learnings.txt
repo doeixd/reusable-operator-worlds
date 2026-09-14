@@ -4895,3 +4895,17 @@ than as a one-off miss.
   initializations is tiny next to the effect, so the two-seed development
   result is a reasonable basis for designing the online rung - which is what
   this project's standard asks for before a positive becomes load-bearing.
+
+- A CURRICULUM-FORMED LIBRARY EXPORTS (J2A, 2026-09-14). The libraries the
+  length curriculum forms execute 64 of 64 unseen length-3 teacher programs at
+  their own trained-task loss (export ratios 0.95-1.12) in all six
+  staged libraries, while both failure controls manage 0 of 64. Fitting 64
+  tasks and owning a vocabulary are different claims, and the export test -
+  unseen compositions, support-only route choice, frozen library - is the
+  cheap way to tell them apart. Run it on any newly formed library before
+  building a successor rung on it.
+- A LIBRARY GOOD ENOUGH TO SOLVE ITS TASKS MAKES ROUTING TRIVIAL (J2A, with
+  J0). The gradient-versus-search route gap was exactly 0.000 on all twelve
+  audited libraries, staged and failed alike, which is J0's threshold result
+  seen from the other side: routing difficulty is a property of library
+  quality, not of the routing mechanism.
