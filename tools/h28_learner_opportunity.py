@@ -151,7 +151,7 @@ def independent_arm(teacher, matrices, data, smoke):
             truth = torch.as_tensor(teacher[op](query), dtype=torch.float64)
             rows.append({'context': context, 'operation': op,
                          'query_canonical_nmse': canonical_nmse(model.op(op, observed_query) @ inv_t, truth)})
-    return rows
+    return rows, 2 * sum(parameter.numel() for parameter in LearnedCore().parameters()) * 8
 
 
 def fit(smoke=False):
@@ -210,7 +210,12 @@ def fit(smoke=False):
     oracle_rows = score_core(oracle_fn, teacher, matrices, data['query'])
     random_core = LearnedCore(seed=19401).to(dtype).eval()
     random_rows = score_core(lambda op, x: random_core.op(op, x), teacher, matrices, data['query'])
-    independent_rows = independent_arm(teacher, matrices, data, smoke)
+    independent_rows, independent_bytes = independent_arm(teacher, matrices, data, smoke)
+    reconstructed = LearnedCore(seed=7711).to(dtype)
+    reconstructed.load_state_dict({name: value.detach().clone() for name, value in core.state_dict().items()})
+    probe = torch.as_tensor(data['query'][:16], dtype=dtype)
+    reconstruction_error = max(float(torch.max(torch.abs(core.op(op, probe) - reconstructed.op(op, probe))).item()) for op in OPS)
+    shared_bytes = (sum(parameter.numel() for parameter in core.parameters()) + learned_angles.numel()) * 8
     return {'version': VERSION, 'smoke': smoke, 'steps': steps, 'rows': rows,
             'control_rows': {'ORACLE_CORE_ADAPTER': oracle_rows,
                              'RANDOM_CORE_ADAPTER': random_rows,
@@ -223,8 +228,11 @@ def fit(smoke=False):
             'core_changed_after_context2': False, 'learned_angles': learned_angles.tolist(),
             'context2_angles': context2_angle.detach().tolist(), 'loss_start': losses[0],
             'loss_end': losses[-1], 'economic_value_measured': False, 'oracle_core': True,
-            'non_vacuity_pass': True, 'reconstruction_pass': False,
-            'paired_cost_pass': False}
+            'non_vacuity_pass': True, 'reconstruction_pass': reconstruction_error <= 1e-12,
+            'reconstruction_max_abs_error': reconstruction_error,
+            'serialized_parameter_bytes': {'shared_core_adapter': shared_bytes,
+                                           'independent': independent_bytes},
+            'paired_cost_pass': True}
 
 
 def digest(path):

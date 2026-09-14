@@ -8331,7 +8331,9 @@ prediction test or H28 verdict.
 The subsequent control extension passes the basic non-vacuity check: the
 oracle, independent, and random-core arms are present and finite. This does not
 close H28-C because reconstruction, paired cost, and amortized economic value
-remain unmeasured.
+remain unmeasured. Reconstruction and parameter-byte checks are now
+instrumented; economic amortization remains unmeasured and the opportunity
+remains unclassified.
 
 A metadata census of six explicitly selected development-world-0 terminal
 directories found no history.pt or promotion_snapshots.npz there. It does not

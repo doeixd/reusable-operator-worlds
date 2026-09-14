@@ -5299,4 +5299,6 @@ The control extension now includes oracle-core, independent observed-frame, and
 random-core arms. A smoke check gives oracle mean NMSE below `1e-8`, finite
 independent error, and random-core error well above oracle error. Reconstruction,
 paired parameter-cost, and economic endpoints remain unimplemented, so this is
-still an instrument check and not an H28 classification.
+still an instrument check and not an H28 classification. The next check adds
+state round-trip reconstruction and serialized parameter bytes for shared
+versus independent arms; amortized future-learning value remains unmeasured.

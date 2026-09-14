@@ -4991,3 +4991,9 @@ than as a one-off miss.
   and much larger for the random core, so the basic non-vacuity control is
   live. Independent reconstruction, paired parameter cost, and amortized
   economic value are still absent; no H28 classification is licensed.
+
+- H28-C RECONSTRUCTION CHECK (provisional, 2026-09-14). The learner harness
+  now round-trips the shared core state and records maximum output error plus
+  serialized parameter bytes for shared and independent arms. These checks
+  validate the instrument and cost accounting; future-learning amortization is
+  still unmeasured.
