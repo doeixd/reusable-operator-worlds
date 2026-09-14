@@ -5142,3 +5142,130 @@ That is a constraint on SO2, not a free pass: in an online lifetime, a
 curriculum is an assumption about the arrival order of tasks. SO2's plan must
 either show that the lifetime provides simple tasks, or register the
 curriculum as a supplied intervention and price it as such.
+
+# H28 closure research extension (planning only, 2026-09-14)
+
+Added [H28_CLOSURE_RESEARCH_PLAN.md](H28_CLOSURE_RESEARCH_PLAN.md) in response
+to the PI's synthesis of the NeurIPS 2024 emergence-learning paper and Rosas
+et al.'s closure framework. Checked the primary papers and retained the
+distinction between their results and our proposed operationalization. The
+plan adds prospective working hypotheses CL1-CL8, an artifact-eligibility gate,
+analytic and injected-leakage controls, a tiered diagnostic/learning sequence,
+and complete adapter/discovery/future-cost accounting.
+
+The central design correction separates H28-C (learnable coordinate reuse and
+economics) from H28-Q (nontrivial coarse-graining and predictive autonomy).
+Invertible encoders and constant outputs can both have zero micro leakage;
+neither establishes useful coarse-graining. Probe loss differences need
+calibrated power, equivalence bounds, common targets/support, and non-vacuity
+tests. They are not finite-sample proofs of conditional independence. Added
+micro/world/joint probes, held-out realization tests, causal-scope limitations,
+and a Gaussian rotation control for parts-relative Psi sensitivity.
+
+Appended the branch to POST_E6_RESEARCH_PROGRAM.md, CL1-CL8 to PREDICTIONS.md,
+and planning-only entries to notes/learnings.txt and paper/draft.md. Existing
+history remains intact. No closure experiment was run, no new artifact metrics
+were read, no sealed data were opened, and no frozen protocol or Python file
+was changed for this task. Margins and sample sizes explicitly await development
+calibration and separate preregistration; these hypotheses are not scoreable
+confirmatory predictions yet.
+
+Validation: `python tools/check_prereg.py` passed (55 frozen files unchanged,
+status paths present); `python tools/check_invalid.py` passed (6 withdrawn paths
+absent). Document checks verified append-only preservation of the roadmap,
+prediction ledger, learnings and paper, new relative links, CL1-CL8 mapping,
+and the analytic rotation formula at four correlation values. No model-training
+tests are needed for this documentation-only change.
+
+The PI directed all work to remain in the main checkout and prohibited future
+worktrees; AGENTS.md now records that rule. An initially created empty worktree
+and its unused branch were removed before editing documents. All changes are
+in main. Commit deferred under AGENTS.md's active-run rule: the running SO2
+launcher rereads HEAD for each cell stamp and on exit, so a documentation
+commit during the run would mix provenance. Commit these verified documentation
+changes after that run's completion/resume obligations are settled; do not
+stage its unrelated output as part of this planning milestone.
+
+# H28 Tier 0 started: exact controls and bounded inventory (2026-09-14)
+
+Development preparation only, not an accepted scientific result. Added
+H28_T0_INSTRUMENT_PLAN.md, the standard-library-only tools/h28_t0.py, and 14
+passing tests. The control suite checks ideal conditional-entropy gaps, joint
+leakage missed by individual probes, weak-detector failure, logical non-vacuity,
+Gaussian coordinate sensitivity, and wrong-world/tampered-artifact guards.
+It does not calibrate trained probes or establish learned closure.
+
+Inventoried six explicitly selected world-0 terminal directories without model
+loading or metric analysis. Four J1c/J1c-R model binaries match their existing
+durable hashes; lifecycle files received fresh hashes only. None of these six
+directories contains history.pt or promotion_snapshots.npz. The direct causal
+before/after PROMOTE closure audit therefore remains unready on this selection;
+no claim is made about all repository artifacts or all possible coarse states.
+Source inspection leaves internal residual bottlenecks as possible candidates,
+but an interface and transition law must be specified and validated first.
+
+Records: reports/h28_t0_development_20260914.md and the explicitly provisional
+JSON r2 record; r1 retained before three inventory integrity tests were added.
+Performance pass: 100 exact-control repetitions 0.03395 s; final controls
+0.00098 s, census/provenance 0.22603 s. No speedup applied, no model updates,
+no training or lifetime, no shared imported Python files changed.
+
+HEAD was a31a397; preparation ran with uncommitted new files and is marked
+PROVISIONAL_DEVELOPMENT_CHECK / accepted_scientific_result=false. SO2 was
+stopped with a partial report, and resume coordination was requested. Its
+source, report and commit remain untouched by this task. Commit and any
+accepted experimental launch remain deferred until its provenance is safe.
+
+# H28-C coordinate fixture validated in development (2026-09-14)
+
+Added H28_C_COORDINATE_GATE_PLAN.md, tools/h28_coordinate_gate.py and eleven
+passing tests, without changing any existing Python module. The NumPy oracle
+fixture reuses the canonical Primitive implementation at development seed 0;
+it generates no full World, loads no artifacts, and imports no torch. Correct
+whole-operator conjugacy works in identity, permutation, orthogonal and bounded
+dense coordinates, while missing adapters and weight-only transformations fail
+the intended general-mixing controls. Every operation audit uses common
+on-trajectory states; separately reported rollout discrepancies stay numerical.
+
+The tied-inverse identity-core sham cannot hide a non-identity computation in
+adapters. A trace-of-Jacobian witness excludes a scaled operator from linear
+conjugacy, with an independent finite-difference derivative check. Neither
+control establishes adapter/core learnability or replaces a difficulty-matched
+negative world. Payload sizes are disclosed as array bytes, not MDL savings.
+
+Record: reports/h28_coordinate_gate_development_20260914.md and its JSON.
+Status remains PROVISIONAL_DEVELOPMENT_CHECK from uncommitted new code at
+HEAD a31a397; no scientific verdict. Timing pass: ten full fixtures 0.18123 s;
+recorded check 0.05769 s, excluding startup. No speedups or training updates.
+
+Prepared H28_C_ADAPTER_PILOT_PLAN.md for a support-only four-angle adapter
+search with a supplied oracle core and withheld-operation queries. It is not
+launched or frozen. SO2 remains stopped with a partial report and unresolved
+resume coordination; this task has not moved HEAD or modified that run.
+
+# H28-C adapter pilot: restricted interface transfers (2026-09-14)
+
+The first development pilot used a supplied ORACLE-CORE and inferred one shared
+four-angle Givens adapter per context from support examples of operations 0–3.
+It tested operations 4–5 without using their query labels for fitting. The first
+r2 output was withdrawn when the oracle control caught a coordinate-frame bug:
+canonical inputs had been passed to an observed-coordinate function. The fixed
+r3 run maps both support and query inputs correctly and is the only run reported.
+
+| context | fitted withheld query NMSE | no-adapter | oracle |
+|---|---:|---:|---:|
+| identity | 0 | 0 | 0 |
+| context 1 | 1.04e-8 | 0.01594 | <5.8e-33 |
+| context 2 | 8.82e-9 | 0.01230 | <5.7e-33 |
+
+Both contexts meet the pilot's exploratory 10x / <=0.01 triage rule. This is
+restricted adapter identifiability with an oracle core at one development seed;
+it does not establish joint core discovery, arbitrary-coordinate transfer,
+closure, or economics. Runtime 0.408 s; no training or speedup. The r3 JSON and
+the withdrawn-r2 note are in reports/. Three pilot tests pass; the broader H28
+suite has 28 checks passing.
+
+The result supports designing a next learner/core opportunity pilot under a new
+frozen plan. It does not authorize that launch: matched independent/random-core
+arms, held-out coordinate families, full cost accounting, clean commit, and SO2
+resume/HEAD coordination remain prerequisites.

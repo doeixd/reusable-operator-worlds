@@ -1550,3 +1550,66 @@ learner's own gradient route inference matched exhaustive search exactly,
 consistent with the earlier finding that routing difficulty tracks library
 quality. The curriculum therefore forms a reusable vocabulary rather than a
 fit to its training tasks, offline and at development scale.
+
+# Prospective research: coordinate reuse and predictive autonomy (2026-09-14)
+
+The next conceptual extension separates learning a reusable representation,
+testing the autonomy of its transition law, and measuring its economic value.
+The starting points are the learned coarse-grainings of
+[McSharry et al. (NeurIPS 2024)](https://papers.nips.cc/paper_files/paper/2024/file/d8398f4da88975e2a9c62ecaa5ba267b-Paper-Conference.pdf)
+and the distinct closure notions of
+[Rosas et al. (arXiv:2402.09090v2)](https://arxiv.org/html/2402.09090v2).
+Our proposed operationalization, not a result from either source, is recorded
+in [the H28 successor research plan](../H28_CLOSURE_RESEARCH_PLAN.md).
+
+H28's shared computation with cheap context adapters first requires a
+coordinate-transfer and amortization test. Invertible coordinate changes alone
+cannot establish nontrivial coarse-graining: the full state remains recoverable.
+A separate nuisance-state construction would test whether a learned interface
+discards distinctions while retaining task fidelity and an invariant transition
+law. Calibrated macro-only versus augmented predictive probes would measure
+residual dependence on microstate and realization, with functional interventions
+where supported. Finite probe gaps are predictive diagnostics, not exact mutual
+information or proofs of general computational closure.
+
+The branch also proposes a parts-sensitivity control for componentwise emergence
+and later tests of closure regularization and nested abstractions. Each needs
+independent non-vacuity, transfer, and cost gates. A constant representation or
+an expansion-only macro cannot establish autonomous computation through a
+trivial closure check. A useful cached computation can still have legitimate
+economic value without meeting this stronger claim. All of these proposals
+remain untested in ROW; existing sealed findings, development statuses, and the
+frozen SO2 protocol retain their original scope.
+
+# H28 instrument development note (2026-09-14)
+
+A preliminary implementation checks exact finite-state leakage examples and
+the proposed analytic rotation control, with no learned encoder or probe.
+A bounded metadata inventory identifies missing history/snapshot files in six
+selected development terminal directories. This limits the immediate causal
+promotion audit on those artifacts; it does not refute learned closure or
+coordinate reuse. The record is provisional development work from uncommitted
+instrument code, not additional experimental evidence. See
+[the development checkpoint](../reports/h28_t0_development_20260914.md).
+
+# H28 coordinate construction development note (2026-09-14)
+
+An oracle-only fixture now checks exact coordinate conjugacy and its failure
+controls using the existing primitive implementation. It distinguishes transport
+of the whole nonlinear operator from transforming weights alone and constrains
+adapters to tied linear inverses. These are provisional software/construction
+checks, not evidence that a learner discovers invariant computations. No future
+learning or economic endpoint was measured. A support-only adapter-discovery
+pilot with a supplied oracle core is drafted but unrun. Details:
+[coordinate development checkpoint](../reports/h28_coordinate_gate_development_20260914.md).
+
+# H28 adapter pilot note (2026-09-14)
+
+With the canonical core supplied, a restricted four-angle interface inferred
+from support examples transferred to two withheld operations in two nontrivial
+coordinate contexts, reaching roughly 1e-8 canonical query error versus
+0.012–0.016 without an adapter. This is a provisional oracle-core opportunity
+result. It does not establish that a learner discovers the core, that adapters
+are economical, or that the resulting representation is closed. An initial
+coordinate-frame bug was caught by the oracle control and withdrawn before the
+corrected run was interpreted.

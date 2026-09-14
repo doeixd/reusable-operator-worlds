@@ -1,0 +1,123 @@
+{
+  "status": "PROVISIONAL_DEVELOPMENT_CHECK",
+  "accepted_scientific_result": false,
+  "git_commit": "a31a3973f286dc286b14ea9cb6d1e97935378a9e",
+  "dirty_status": [
+    " M AGENTS.md",
+    " M POST_E6_RESEARCH_PROGRAM.md",
+    " M PREDICTIONS.md",
+    " M PROGRESS.md",
+    " M notes/learnings.txt",
+    " M paper/draft.md",
+    "?? H28_CLOSURE_RESEARCH_PLAN.md",
+    "?? H28_C_ADAPTER_PILOT_PLAN.md",
+    "?? H28_C_COORDINATE_GATE_PLAN.md",
+    "?? H28_T0_INSTRUMENT_PLAN.md",
+    "?? reports/h28_coordinate_gate_development_20260914.json",
+    "?? reports/h28_coordinate_gate_development_20260914.md",
+    "?? reports/h28_t0_development_20260914.json",
+    "?? reports/h28_t0_development_20260914.md",
+    "?? reports/h28_t0_development_20260914_r2.json",
+    "?? reports/so2_online_gate.json",
+    "?? tests/test_h28_coordinate_gate.py",
+    "?? tests/test_h28_t0.py",
+    "?? tools/h28_adapter_pilot.py",
+    "?? tools/h28_coordinate_gate.py",
+    "?? tools/h28_t0.py"
+  ],
+  "input_sha256": {
+    "H28_C_ADAPTER_PILOT_PLAN.md": "9493c207bc6e9948e7ef980d67e79696d3915b2af6b491595963f7d698cef734",
+    "tools/h28_adapter_pilot.py": "c613aa56a7d4123f3ff30a1f8a32faba0f3a5255af2392c4204e9c23f1b345fa",
+    "src/row/world.py": "971601d343afeb3ca9143a380b25ad9bc9097ae03355d7bf4abe51c05ab09573"
+  },
+  "result": {
+    "version": "h28-c-adapter-pilot-v0",
+    "smoke": true,
+    "contexts": [
+      "identity"
+    ],
+    "true_angles_not_exposed_to_fit": true,
+    "true_angles_sha256": "de907d873d194a428d022dc1ea221b95bffa9f52401bf306c1a40e6adf4aa0c2",
+    "records": [
+      {
+        "context": "identity",
+        "operation": 0,
+        "support_operation": true,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      },
+      {
+        "context": "identity",
+        "operation": 1,
+        "support_operation": true,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      },
+      {
+        "context": "identity",
+        "operation": 2,
+        "support_operation": true,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      },
+      {
+        "context": "identity",
+        "operation": 3,
+        "support_operation": true,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      },
+      {
+        "context": "identity",
+        "operation": 4,
+        "support_operation": false,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      },
+      {
+        "context": "identity",
+        "operation": 5,
+        "support_operation": false,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      }
+    ],
+    "fitting": {
+      "identity": {
+        "chosen": {
+          "angles": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "support_mse": 0.0,
+          "start": 0
+        },
+        "traces": [],
+        "objective_evaluations": 0
+      }
+    },
+    "data_shapes": {
+      "support": [
+        16,
+        16
+      ],
+      "query": [
+        32,
+        16
+      ]
+    },
+    "core_changed": false,
+    "query_used_for_fit": false,
+    "economic_value_measured": false,
+    "learned_core": false,
+    "seconds": 0.05027560004964471
+  }
+}

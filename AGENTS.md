@@ -13,6 +13,9 @@ the checks below.
 
 # Working conventions
 
+- Work in the main checkout only. Never create or use worktrees (PI directive,
+  2026-09-14). During an active experiment, make only safe documentation edits
+  and defer commits when moving HEAD would break its launch/resume contract.
 - Treat `neural_library_learning_v1_experimental_spec.md` as the research source
   of truth.
 - Preserve paired comparisons: models in a comparison must receive identical

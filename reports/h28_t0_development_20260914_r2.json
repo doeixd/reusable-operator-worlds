@@ -1,0 +1,354 @@
+{
+  "status": "PROVISIONAL_DEVELOPMENT_CHECK",
+  "accepted_scientific_result": false,
+  "git_commit": "a31a3973f286dc286b14ea9cb6d1e97935378a9e",
+  "dirty_status": [
+    " M AGENTS.md",
+    " M POST_E6_RESEARCH_PROGRAM.md",
+    " M PREDICTIONS.md",
+    " M PROGRESS.md",
+    " M notes/learnings.txt",
+    " M paper/draft.md",
+    "?? H28_CLOSURE_RESEARCH_PLAN.md",
+    "?? H28_T0_INSTRUMENT_PLAN.md",
+    "?? reports/h28_t0_development_20260914.json",
+    "?? reports/so2_online_gate.json",
+    "?? tests/test_h28_t0.py",
+    "?? tools/h28_t0.py"
+  ],
+  "input_sha256": {
+    "H28_T0_INSTRUMENT_PLAN.md": "f9226d2db140d2292d14f54270f5e954a480839e66012710e8d0106ddf446190",
+    "H28_CLOSURE_RESEARCH_PLAN.md": "61aa731ea124ab3c5042f4bed76e2af38aba9e4f0382e7d5497d4e2333a160c5",
+    "tools/h28_t0.py": "8f4eda5cc7fc7ea5cd6f9171e8b014cb104786329058d650868e48f3f79bf4cf",
+    "tests/test_h28_t0.py": "a1776649358d0290b6ada69856ecc835d7c7636956f833e43751bcde366580ac"
+  },
+  "controls": {
+    "finite": {
+      "closed": {
+        "macro_entropy": 0.3250829733914482,
+        "target_entropy": 0.6931471805599453,
+        "predictive_gain": 0.3680642071684971,
+        "gaps": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "micro": {
+        "macro_entropy": 0.6931471805599453,
+        "target_entropy": 0.6931471805599453,
+        "predictive_gain": 0.0,
+        "gaps": [
+          0.6931471805599453,
+          0.0,
+          0.6931471805599453
+        ]
+      },
+      "world": {
+        "macro_entropy": 0.6931471805599453,
+        "target_entropy": 0.6931471805599453,
+        "predictive_gain": 0.0,
+        "gaps": [
+          0.0,
+          0.6931471805599453,
+          0.6931471805599453
+        ]
+      },
+      "joint": {
+        "macro_entropy": 0.6931471805599453,
+        "target_entropy": 0.6931471805599453,
+        "predictive_gain": 0.0,
+        "gaps": [
+          0.0,
+          0.0,
+          0.6931471805599453
+        ]
+      },
+      "constant": {
+        "macro_entropy": -0.0,
+        "target_entropy": -0.0,
+        "predictive_gain": 0.0,
+        "gaps": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "weak_joint": {
+      "macro_entropy": 0.6931471805599453,
+      "target_entropy": 0.6931471805599453,
+      "predictive_gain": 0.0,
+      "gaps": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "gaussian": [
+      {
+        "r": 0.1,
+        "identity": 0.0,
+        "rotated": 1.2626103206438144e-05,
+        "permutation": 0.0
+      },
+      {
+        "r": 0.5,
+        "identity": 0.0,
+        "rotated": 0.010309643601367796,
+        "permutation": 0.0
+      },
+      {
+        "r": 0.8,
+        "identity": 0.0,
+        "rotated": 0.125163142954006,
+        "permutation": 0.0
+      },
+      {
+        "r": 0.99,
+        "identity": 0.0,
+        "rotated": 1.2850751763402344,
+        "permutation": 0.0
+      }
+    ],
+    "controls_ok": true,
+    "learned_probe_calibrated": false
+  },
+  "inventory": [
+    {
+      "path": "artifacts/j1c_curriculum/cells/STAGED_w0/stage3",
+      "status": "METADATA_ONLY",
+      "world_seed": 0,
+      "file_names": [
+        "config.yaml",
+        "model.pt",
+        "model_state.json"
+      ],
+      "files": {
+        "config.yaml": {
+          "bytes": 4421,
+          "sha256": "1004ea1f5110cb74082b2219f577f6eb6ecefdf2022c5fd2d4edb1716f165e2d"
+        },
+        "model.pt": {
+          "bytes": 70857,
+          "sha256": "9ba200d7ee840254b7b7d1df5a1227698d43c14656758435b3479da1d1a2db1e"
+        },
+        "model_state.json": {
+          "bytes": 4501,
+          "sha256": "c166ab138f37a7e9ffabff32296552a82ae4407eea7a3b0d17eaa731184fe064"
+        }
+      },
+      "prior_manifest": {
+        "path": "artifacts/j1c_curriculum/cells/STAGED_w0/result.json",
+        "sha256": "967df4ad145ba0b786cebd123d4917097cd743e475d05452de7ab8d9e11b8eaa",
+        "model_hash_matches": true,
+        "sidecars_covered_by_prior_hash": false
+      },
+      "historical_state_present": false,
+      "promotion_snapshots_present": false,
+      "model_reconstructed": false,
+      "score_reproduced": false,
+      "declared_coarse_interface_validated": false
+    },
+    {
+      "path": "artifacts/j1c_curriculum/cells/RESET_w0/stage3",
+      "status": "METADATA_ONLY",
+      "world_seed": 0,
+      "file_names": [
+        "config.yaml",
+        "model.pt",
+        "model_state.json"
+      ],
+      "files": {
+        "config.yaml": {
+          "bytes": 4421,
+          "sha256": "1004ea1f5110cb74082b2219f577f6eb6ecefdf2022c5fd2d4edb1716f165e2d"
+        },
+        "model.pt": {
+          "bytes": 70857,
+          "sha256": "280922c7382c0c310cab8ddc9b6eb53fbe27de4eb9b6a99a346ca3a5216a5872"
+        },
+        "model_state.json": {
+          "bytes": 4501,
+          "sha256": "c166ab138f37a7e9ffabff32296552a82ae4407eea7a3b0d17eaa731184fe064"
+        }
+      },
+      "prior_manifest": {
+        "path": "artifacts/j1c_curriculum/cells/RESET_w0/result.json",
+        "sha256": "0f9f9b107cc010eb86870fbb76290c4bc540e8c30bd3458d847663594c132d14",
+        "model_hash_matches": true,
+        "sidecars_covered_by_prior_hash": false
+      },
+      "historical_state_present": false,
+      "promotion_snapshots_present": false,
+      "model_reconstructed": false,
+      "score_reproduced": false,
+      "declared_coarse_interface_validated": false
+    },
+    {
+      "path": "artifacts/j1cr_replication/cells/STAGED-R_w0/stage3",
+      "status": "METADATA_ONLY",
+      "world_seed": 0,
+      "file_names": [
+        "config.yaml",
+        "model.pt",
+        "model_state.json"
+      ],
+      "files": {
+        "config.yaml": {
+          "bytes": 4421,
+          "sha256": "446e4dafcccc9b07d1674d5d6e6a08d830700f9e604599f6779dd4d8deceef64"
+        },
+        "model.pt": {
+          "bytes": 70857,
+          "sha256": "756103221c489fa4eeb6ab39729c7a900cbb473e89b88bf90671599c14c1ef5f"
+        },
+        "model_state.json": {
+          "bytes": 4501,
+          "sha256": "c166ab138f37a7e9ffabff32296552a82ae4407eea7a3b0d17eaa731184fe064"
+        }
+      },
+      "prior_manifest": {
+        "path": "artifacts/j1cr_replication/cells/STAGED-R_w0/result.json",
+        "sha256": "85c347a9eb2ab4c217ebb7be7a66e0a7269e58fda2ce271de564d9948a408847",
+        "model_hash_matches": true,
+        "sidecars_covered_by_prior_hash": false
+      },
+      "historical_state_present": false,
+      "promotion_snapshots_present": false,
+      "model_reconstructed": false,
+      "score_reproduced": false,
+      "declared_coarse_interface_validated": false
+    },
+    {
+      "path": "artifacts/j1cr_replication/cells/NON-STAGED-R_w0/stage3",
+      "status": "METADATA_ONLY",
+      "world_seed": 0,
+      "file_names": [
+        "config.yaml",
+        "model.pt",
+        "model_state.json"
+      ],
+      "files": {
+        "config.yaml": {
+          "bytes": 4421,
+          "sha256": "446e4dafcccc9b07d1674d5d6e6a08d830700f9e604599f6779dd4d8deceef64"
+        },
+        "model.pt": {
+          "bytes": 70857,
+          "sha256": "ca5db6f3a37fc97c8e3b17029b25fb1f7bff961b02a94525e4dd025da838102b"
+        },
+        "model_state.json": {
+          "bytes": 4501,
+          "sha256": "c166ab138f37a7e9ffabff32296552a82ae4407eea7a3b0d17eaa731184fe064"
+        }
+      },
+      "prior_manifest": {
+        "path": "artifacts/j1cr_replication/cells/NON-STAGED-R_w0/result.json",
+        "sha256": "9f86c155dc75bdb86c8a17293087ea8a086cf17fcfc63049664667787831896e",
+        "model_hash_matches": true,
+        "sidecars_covered_by_prior_hash": false
+      },
+      "historical_state_present": false,
+      "promotion_snapshots_present": false,
+      "model_reconstructed": false,
+      "score_reproduced": false,
+      "declared_coarse_interface_validated": false
+    },
+    {
+      "path": "artifacts/v4_dev/structured/world_0/lifecycle",
+      "status": "METADATA_ONLY",
+      "world_seed": 0,
+      "file_names": [
+        "config.yaml",
+        "environment.txt",
+        "fingerprint.json",
+        "git_commit.txt",
+        "metrics.jsonl",
+        "model.pt",
+        "model_seed.txt",
+        "rho_profile.json",
+        "summary.json",
+        "world_functional_reuse.json",
+        "world_programs.json",
+        "world_seed.txt"
+      ],
+      "files": {
+        "config.yaml": {
+          "bytes": 1020,
+          "sha256": "7e04fc798416befaac0282cce484b80942bb46e57d847d8c024bd2b88d14023f"
+        },
+        "model.pt": {
+          "bytes": 111735,
+          "sha256": "3838d1635846bc2aa0f73503384ba129f14d3929dbfcd69078d3b521edfe7fc6"
+        },
+        "fingerprint.json": {
+          "bytes": 673,
+          "sha256": "b96526a34e328293beb2b8b7108dacea53a943087c62a39f6ed7e9a2405e211a"
+        },
+        "git_commit.txt": {
+          "bytes": 42,
+          "sha256": "c49275fe3c4ebb886891190b03954db2aede3af3fe3e2cfb2238331740aa9b20"
+        }
+      },
+      "prior_manifest": null,
+      "historical_state_present": false,
+      "promotion_snapshots_present": false,
+      "model_reconstructed": false,
+      "score_reproduced": false,
+      "declared_coarse_interface_validated": false
+    },
+    {
+      "path": "artifacts/v5_h20b/r100/world_0/lifecycle",
+      "status": "METADATA_ONLY",
+      "world_seed": 0,
+      "file_names": [
+        "config.yaml",
+        "environment.txt",
+        "fingerprint.json",
+        "git_commit.txt",
+        "metrics.jsonl",
+        "model.pt",
+        "model_seed.txt",
+        "rho_profile.json",
+        "summary.json",
+        "world_functional_reuse.json",
+        "world_programs.json",
+        "world_seed.txt"
+      ],
+      "files": {
+        "config.yaml": {
+          "bytes": 985,
+          "sha256": "72a5b36a34fbe5423608a98a948d199a439ef6cdf1e4097345aa239eb192f00a"
+        },
+        "model.pt": {
+          "bytes": 143307,
+          "sha256": "f78e17937b4f5a48abe962075a59925ee9c7ea0dd325c102d8d705d28aae37a5"
+        },
+        "fingerprint.json": {
+          "bytes": 674,
+          "sha256": "050521cd0f118930a835888079583bf0083afc4d165200660a8bb14663b689b1"
+        },
+        "git_commit.txt": {
+          "bytes": 42,
+          "sha256": "1986987ad5c4c318a74adda8ec1ae81374dd39c5bc2eb898125c20381d62e552"
+        }
+      },
+      "prior_manifest": null,
+      "historical_state_present": false,
+      "promotion_snapshots_present": false,
+      "model_reconstructed": false,
+      "score_reproduced": false,
+      "declared_coarse_interface_validated": false
+    }
+  ],
+  "timing_seconds": {
+    "controls": 0.0009788000024855137,
+    "inventory": 0.2260275000007823
+  },
+  "limitations": [
+    "No model loads, forward passes, or learned probes.",
+    "Metadata availability is not artifact validity or learned closure.",
+    "No causal PROMOTE contrast or H28 economics is scored."
+  ]
+}

@@ -4918,3 +4918,59 @@ than as a one-off miss.
   What it really consumes is 124 extra TASKS and their 47,616 examples. A
   mechanism can be compute-free and data-expensive; say which, because the
   online rung is gated on task supply, not on FLOPs.
+
+- CLOSURE IS A NEW QUESTION, NOT A RETROACTIVE RESULT (planning, 2026-09-14).
+  H28_CLOSURE_RESEARCH_PLAN.md adds working hypotheses CL1-CL8 and separates
+  discovery, coordinate transfer, predictive autonomy, and economic value.
+  These are proposed diagnostics and experiments, not observations from ROW.
+  The NeurIPS emergence objective is relative to a decomposition into parts;
+  a transported encoder under coordinate mixing can preserve its macro law
+  while changing componentwise Psi. The plan gives an exact Gaussian control.
+- DO NOT LET CLOSURE PASS BY DEFINITION (planning, 2026-09-14). Invertible
+  encoders retain all micro information; constants discard everything. Both
+  can have zero micro leakage. H28-C therefore tests learned coordinate reuse
+  and cost, while H28-Q tests a nontrivial task-preserving coarse-graining.
+  A promoted weight tensor or discrete slot ID is not itself a macrostate.
+- PROBE EQUIVALENCE NEEDS A WORKING DETECTOR (planning, 2026-09-14). A finite
+  held-out log-loss gap includes approximation/optimization differences, not
+  just conditional information. Require calibrated injected-leakage controls,
+  upper confidence bounds below frozen material tolerances, non-vacuity,
+  common support, and independent audit probes. A zero world gap is vacuous
+  when the representation already encodes world identity. One-step activation
+  prediction does not establish all-history computational closure.
+- HIERARCHY MUST ADD A TESTABLE LEVEL (planning, 2026-09-14). Diverse features
+  learned in parallel and layers of an MLP are not nested coarse-grainings.
+  Each proposed level needs preserved task behavior, a declared action/time
+  interface, nontrivial closure, transfer, and incremental economic value.
+  Existing E6 naming/caching results retain their original interpretation.
+
+- H28 T0 DEVELOPMENT CHECK (2026-09-14, provisional). Exact finite and
+  Gaussian controls pass 14 implementation tests without any model loading.
+  Individual micro/world probes both miss an XOR dependence that their joint
+  augmentation detects. This is a calibration example, not a learned ROW
+  result. Six selected world-0 terminal directories contain no history.pt or
+  promotion_snapshots.npz; four J1c model binaries match their prior hashes.
+  A promoted residual's internal bottleneck might define a future coarse
+  state, but it needs an explicit transition interface first. The causal
+  before/after promotion audit is not ready on this selection. Details and
+  provisional provenance: reports/h28_t0_development_20260914.md.
+
+- H28-C COORDINATE FIXTURE (development, 2026-09-14). Whole-operator
+  conjugation preserves the canonical neural function numerically; rotating
+  only residual weights leaves the outer tanh in the wrong coordinates.
+  Identity/permutation anchors and general-mixing failure controls distinguish
+  that implementation error. Tying decoder/encoder as linear inverses also
+  prevents an identity core from hiding the task in a free decoder. Eleven
+  tests pass; no learned adapter or economic result follows. Report:
+  reports/h28_coordinate_gate_development_20260914.md. The next drafted pilot
+  infers a restricted adapter from support pairs with an explicitly supplied
+  oracle core; it is not launched pending freeze/commit coordination.
+
+- H28-C ORACLE-CORE ADAPTER PILOT (provisional, 2026-09-14). A restricted
+  four-angle Givens adapter inferred from 16 support examples per operation
+  transferred from operations 0-3 to withheld operations 4-5: canonical query
+  NMSE 1.04e-8 and 8.82e-9 versus 0.01594 and 0.01230 with no adapter.
+  Oracle error was <6e-33. This is interface identifiability with the core
+  supplied, not joint discovery, closure, or economics. The first output had
+  a coordinate-frame bug and is withdrawn; the oracle control caught it before
+  interpretation. The corrected r3 record is in reports/.

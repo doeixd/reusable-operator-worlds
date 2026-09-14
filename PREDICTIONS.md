@@ -8276,3 +8276,80 @@ trained-task loss". What it does not: composition in unseen POSITIONS (E2's
 stratified claim), any online claim, any program length other than 3, control
 flow, or synthesis. The route inference here is offline search over a frozen
 library, exactly as in E1.
+
+# H28 closure branch: working hypotheses CL1-CL8 (2026-09-14)
+
+Status: PROSPECTIVE, UNTESTED, NOT FROZEN FOR SCORING. Proposed following the
+PI's synthesis of McSharry et al. (NeurIPS 2024) and Rosas et al.
+(arXiv:2402.09090v2). Operational definitions, sources, controls, falsifiers,
+and staged entry gates are in
+[H28_CLOSURE_RESEARCH_PLAN.md](H28_CLOSURE_RESEARCH_PLAN.md). H28's original
+coordinate-reuse hypothesis and adapter-complexity constraint remain in the V5
+specification; these IDs add questions without renumbering that history.
+
+| ID | Prospective expectation | Current evidentiary status |
+|---|---|---|
+| CL1 | Calibrated predictive probes detect materially leaky quotients while the combined gate rejects constant and full-state encoders. | Instrument requirement; no ROW audit performed. |
+| CL2 | Some invertible coordinate mixtures change componentwise Psi while transported macro dynamics and closure stay fixed. | Analytic control specified in the plan; an empirical ROW effect is unmeasured. |
+| CL3 | Cheap learned adapters plus a shared core can repay acquisition/storage cost under sufficient recurrence and transfer to unseen realizations. | H28 economic extension; no numerical phase boundaries registered. |
+| CL4 | Eligible promoted interfaces reduce micro leakage at matched task fidelity. | Tentative; existing checkpoints may not permit the causal comparison. |
+| CL5 | A learned finite-capacity coarse-graining recovers nontrivial autonomy across realizations and nuisance interventions. | Oracle existence and learner discovery remain separate tests. |
+| CL6 | Closure and amortization dissociate when recurrence changes but the transition law stays fixed. | Constructive controls planned; trained-method outcomes unmeasured. |
+| CL7 | Calibrated closure regularization improves transfer and future learning cost at matched total resources. | Deferred until diagnostics work; independent audit probes required. |
+| CL8 | A second nested coarse-graining adds transferable computation and net value beyond a matched flat latent and definitional caching. | Deferred; no recursive hierarchy or success assumed. |
+
+CL1/CL2 are instrument or mathematical expectations, not neural-learning
+verdicts. CL3-CL8 require measured development calibration followed by separate
+frozen protocols with numerical margins, replication units, and decision rules.
+Do not treat a nonsignificant loss gap as equivalence or a finite probe gap as
+exact conditional MI. A one-step observational test cannot certify general
+computational or interventional closure. Zero leakage through an invertible
+encoder is a harness identity, not a nontrivial abstraction result.
+
+Contamination statement: the supplied literature summary and existing J1c/J2A
+and earlier ROW results motivate these hypotheses. No new artifact metrics,
+closure probes, coordinate-learning runs, or sealed-world observations were
+obtained in preparing this entry. Nothing here rescues prior invalid/withdrawn
+claims, reopens spent seeds, or changes SO2 and its amendments.
+
+# CL1/CL2 development instrument check (2026-09-14)
+
+The finite exact-entropy and Gaussian rotation controls specified in
+H28_T0_INSTRUMENT_PLAN.md pass their development implementation checks.
+This tests mathematical examples and toy non-vacuity logic; it is neither
+learned-probe calibration nor a scored neural-learning prediction. CL1's
+trained-probe requirement remains untested; CL2's empirical ROW sensitivity
+remains unmeasured. CL3-CL8 retain their untested/deferred statuses.
+
+A metadata census of six explicitly selected development-world-0 terminal
+directories found no history.pt or promotion_snapshots.npz there. It does not
+establish the absence of all historical checkpoints or all coarse interfaces.
+The proposed causal PROMOTE closure comparison is not ready on that selection.
+See reports/h28_t0_development_20260914.md; output is explicitly provisional
+because the new instrument was run as an uncommitted development check.
+
+# H28-C construction development check (2026-09-14)
+
+The oracle-only coordinate fixture passes its numerical conjugacy, inverse,
+common-state, outer-nonlinearity, identity-core, and linear-conjugacy negative
+controls; eleven implementation tests pass. Record:
+reports/h28_coordinate_gate_development_20260914.md. This is an uncommitted,
+provisional development check, not a learned-adapter/core result. CL3's economic
+claim and CL4-CL8 remain untested/deferred. A first adapter-discovery pilot is
+specified in H28_C_ADAPTER_PILOT_PLAN.md but not frozen or launched. Its supplied
+core must remain labeled oracle; success would not establish joint discovery.
+
+# CL3 adapter identifiability pilot (2026-09-14)
+
+PROVISIONAL DEVELOPMENT CHECK, not a CL3 verdict. With a supplied canonical
+core, a four-angle orthogonal adapter inferred from support examples of four
+operations transferred to two withheld operations in both nontrivial contexts:
+1.04e-8 and 8.82e-9 canonical query NMSE versus 0.01594 and 0.01230 for no
+adapter; oracle error was below 6e-33. The exploratory triage rule passed.
+
+The first implementation output is withdrawn because its coordinate-frame bug
+caused canonical inputs to reach observed-coordinate functions; the oracle
+control caught this before interpretation. The corrected r3 record and
+withdrawal note are in reports/h28_adapter_pilot_development_20260914*. This
+supports only the restricted oracle-core interface opportunity. Joint discovery,
+arbitrary coordinate families, closure, and economic value remain untested.

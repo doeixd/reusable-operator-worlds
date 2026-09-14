@@ -1,0 +1,968 @@
+{
+  "status": "PROVISIONAL_DEVELOPMENT_CHECK",
+  "accepted_scientific_result": false,
+  "git_commit": "a31a3973f286dc286b14ea9cb6d1e97935378a9e",
+  "dirty_status": [
+    " M AGENTS.md",
+    " M POST_E6_RESEARCH_PROGRAM.md",
+    " M PREDICTIONS.md",
+    " M PROGRESS.md",
+    " M notes/learnings.txt",
+    " M paper/draft.md",
+    "?? H28_CLOSURE_RESEARCH_PLAN.md",
+    "?? H28_C_COORDINATE_GATE_PLAN.md",
+    "?? H28_T0_INSTRUMENT_PLAN.md",
+    "?? reports/h28_t0_development_20260914.json",
+    "?? reports/h28_t0_development_20260914.md",
+    "?? reports/h28_t0_development_20260914_r2.json",
+    "?? reports/so2_online_gate.json",
+    "?? tests/test_h28_coordinate_gate.py",
+    "?? tests/test_h28_t0.py",
+    "?? tools/h28_coordinate_gate.py",
+    "?? tools/h28_t0.py"
+  ],
+  "input_sha256": {
+    "H28_C_COORDINATE_GATE_PLAN.md": "15ade91bcf2daccae7907c297d3ba59804ce655cb7189945d203321b0fb203f6",
+    "tools/h28_coordinate_gate.py": "3f58d3f2b23aaf7c3d76b11b5bb560dac72e0aad3faac8dc37eeebb6f53fcb52",
+    "tests/test_h28_coordinate_gate.py": "26307212af3aca6a0abf6b981965dbc5b619850b2c6d7b968a013b57981e30c4",
+    "src/row/world.py": "971601d343afeb3ca9143a380b25ad9bc9097ae03355d7bf4abe51c05ab09573"
+  },
+  "python": "3.14.0",
+  "numpy": "2.3.5",
+  "seconds": 0.05768739996710792,
+  "result": {
+    "version": "h28-c-conjugacy-fixture-v0",
+    "controls_ok": true,
+    "rows": [
+      {
+        "split": "support",
+        "context": "identity",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 0,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.41591143183660473,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "identity",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 1,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.05784870465912743,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "identity",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 2,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.02701143170004912,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "identity",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 0,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.41385597890909276,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "identity",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 1,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.05142283663193377,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "identity",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 2,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.03462735336900127,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "permutation",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 0,
+        "oracle": 0.0,
+        "weight_only": 9.371336277952705e-34,
+        "missing_adapter": 0.01749942402536041,
+        "identity_core": 0.41591143183660473,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "permutation",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 1,
+        "oracle": 0.0,
+        "weight_only": 1.4219658723068275e-33,
+        "missing_adapter": 0.02114356948386746,
+        "identity_core": 0.05784870465912743,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "permutation",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 2,
+        "oracle": 0.0,
+        "weight_only": 1.0459894184857063e-33,
+        "missing_adapter": 0.0140805152259828,
+        "identity_core": 0.02701143170004912,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "permutation",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 0,
+        "oracle": 0.0,
+        "weight_only": 6.557322525625946e-34,
+        "missing_adapter": 0.013585370827928798,
+        "identity_core": 0.41385597890909276,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "permutation",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 1,
+        "oracle": 0.0,
+        "weight_only": 1.7469434311133398e-33,
+        "missing_adapter": 0.016124849803773628,
+        "identity_core": 0.05142283663193377,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "permutation",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 2,
+        "oracle": 0.0,
+        "weight_only": 1.6596010192844014e-33,
+        "missing_adapter": 0.024796343928280114,
+        "identity_core": 0.03462735336900127,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "support",
+        "context": "orthogonal",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 0,
+        "oracle": 5.0550385335283445e-31,
+        "weight_only": 0.10912436661754985,
+        "missing_adapter": 0.12834992920394991,
+        "identity_core": 0.41591143183660473,
+        "identity_invariance": 5.855712376385922e-31,
+        "round_trip": 1.7030800132561355e-31,
+        "oracle_rollout": 5.0550385335283445e-31
+      },
+      {
+        "split": "support",
+        "context": "orthogonal",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 1,
+        "oracle": 4.577265464409332e-31,
+        "weight_only": 0.033963124286337944,
+        "missing_adapter": 0.056892368875527996,
+        "identity_core": 0.05784870465912743,
+        "identity_invariance": 5.693231612835734e-31,
+        "round_trip": 1.6011455229009484e-31,
+        "oracle_rollout": 1.0000253733547169e-30
+      },
+      {
+        "split": "support",
+        "context": "orthogonal",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 2,
+        "oracle": 5.025035106561468e-31,
+        "weight_only": 0.02324019229307317,
+        "missing_adapter": 0.04037718734747039,
+        "identity_core": 0.027011431700049108,
+        "identity_invariance": 5.751395463285203e-31,
+        "round_trip": 1.7146170349216595e-31,
+        "oracle_rollout": 1.6455174689642547e-30
+      },
+      {
+        "split": "support",
+        "context": "orthogonal",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 0,
+        "oracle": 5.01062769448913e-31,
+        "weight_only": 0.10938756380861284,
+        "missing_adapter": 0.11612967731745591,
+        "identity_core": 0.41385597890909276,
+        "identity_invariance": 5.855712376385922e-31,
+        "round_trip": 1.7030800132561355e-31,
+        "oracle_rollout": 5.01062769448913e-31
+      },
+      {
+        "split": "support",
+        "context": "orthogonal",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 1,
+        "oracle": 4.4369876282547115e-31,
+        "weight_only": 0.035399913745614714,
+        "missing_adapter": 0.052088383854457125,
+        "identity_core": 0.05142283663193373,
+        "identity_invariance": 5.564335412926464e-31,
+        "round_trip": 1.5125875571156157e-31,
+        "oracle_rollout": 9.845903374442684e-31
+      },
+      {
+        "split": "support",
+        "context": "orthogonal",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 2,
+        "oracle": 4.724373672476504e-31,
+        "weight_only": 0.023682260922378278,
+        "missing_adapter": 0.05237886430451932,
+        "identity_core": 0.034627353369001246,
+        "identity_invariance": 5.055157397762675e-31,
+        "round_trip": 1.4036877272028672e-31,
+        "oracle_rollout": 1.5825451507645238e-30
+      },
+      {
+        "split": "support",
+        "context": "dense",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 0,
+        "oracle": 4.571912632719531e-31,
+        "weight_only": 0.17682933005349877,
+        "missing_adapter": 0.18503571593586188,
+        "identity_core": 0.4159114318366049,
+        "identity_invariance": 5.170974378432715e-31,
+        "round_trip": 1.4516858423270384e-31,
+        "oracle_rollout": 4.571912632719531e-31
+      },
+      {
+        "split": "support",
+        "context": "dense",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 1,
+        "oracle": 4.611620586471917e-31,
+        "weight_only": 0.08890536792641218,
+        "missing_adapter": 0.09704868479592908,
+        "identity_core": 0.057848704659127476,
+        "identity_invariance": 5.483208504645823e-31,
+        "round_trip": 1.4690629068738193e-31,
+        "oracle_rollout": 9.154477170176332e-31
+      },
+      {
+        "split": "support",
+        "context": "dense",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 2,
+        "oracle": 4.7061189765063e-31,
+        "weight_only": 0.0611963493280891,
+        "missing_adapter": 0.07397779212701935,
+        "identity_core": 0.02701143170004909,
+        "identity_invariance": 5.587723791921674e-31,
+        "round_trip": 1.51285388727583e-31,
+        "oracle_rollout": 1.5379931473722233e-30
+      },
+      {
+        "split": "support",
+        "context": "dense",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 0,
+        "oracle": 4.775280210669292e-31,
+        "weight_only": 0.1682728871454792,
+        "missing_adapter": 0.1732888342751164,
+        "identity_core": 0.41385597890909287,
+        "identity_invariance": 5.170974378432715e-31,
+        "round_trip": 1.4516858423270384e-31,
+        "oracle_rollout": 4.775280210669292e-31
+      },
+      {
+        "split": "support",
+        "context": "dense",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 1,
+        "oracle": 4.026620421699141e-31,
+        "weight_only": 0.08470655476390532,
+        "missing_adapter": 0.0965633286203768,
+        "identity_core": 0.05142283663193376,
+        "identity_invariance": 4.999262508409004e-31,
+        "round_trip": 1.268359218538787e-31,
+        "oracle_rollout": 8.933944056188137e-31
+      },
+      {
+        "split": "support",
+        "context": "dense",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 2,
+        "oracle": 4.55842583079685e-31,
+        "weight_only": 0.06383012377844083,
+        "missing_adapter": 0.07649849816127816,
+        "identity_core": 0.0346273533690013,
+        "identity_invariance": 5.304181442554314e-31,
+        "round_trip": 1.5290861739684926e-31,
+        "oracle_rollout": 1.4206494321548626e-30
+      },
+      {
+        "split": "query",
+        "context": "identity",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 0,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.47058676614340583,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "identity",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 1,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.04992177208025453,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "identity",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 2,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.026672959481460073,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "identity",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 0,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.4659834191091397,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "identity",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 1,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.05831451961141212,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "identity",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 2,
+        "oracle": 0.0,
+        "weight_only": 0.0,
+        "missing_adapter": 0.0,
+        "identity_core": 0.02858254009197484,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "permutation",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 0,
+        "oracle": 0.0,
+        "weight_only": 1.0132397093624304e-33,
+        "missing_adapter": 0.019520002949378626,
+        "identity_core": 0.47058676614340583,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "permutation",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 1,
+        "oracle": 0.0,
+        "weight_only": 1.2429047789028365e-33,
+        "missing_adapter": 0.021499181019046125,
+        "identity_core": 0.04992177208025453,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "permutation",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 2,
+        "oracle": 0.0,
+        "weight_only": 2.0814793577375517e-33,
+        "missing_adapter": 0.014581937137715753,
+        "identity_core": 0.026672959481460073,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "permutation",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 0,
+        "oracle": 0.0,
+        "weight_only": 1.3005578615282318e-33,
+        "missing_adapter": 0.016253456489954014,
+        "identity_core": 0.4659834191091397,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "permutation",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 1,
+        "oracle": 0.0,
+        "weight_only": 9.509420175316993e-34,
+        "missing_adapter": 0.021389395609292414,
+        "identity_core": 0.05831451961141212,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "permutation",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 2,
+        "oracle": 0.0,
+        "weight_only": 1.595117218997235e-33,
+        "missing_adapter": 0.025251633982479847,
+        "identity_core": 0.02858254009197484,
+        "identity_invariance": 0.0,
+        "round_trip": 0.0,
+        "oracle_rollout": 0.0
+      },
+      {
+        "split": "query",
+        "context": "orthogonal",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 0,
+        "oracle": 5.0557945700729985e-31,
+        "weight_only": 0.12147633478052418,
+        "missing_adapter": 0.14511530128959862,
+        "identity_core": 0.47058676614340583,
+        "identity_invariance": 5.155555650382397e-31,
+        "round_trip": 1.4688941291086858e-31,
+        "oracle_rollout": 5.0557945700729985e-31
+      },
+      {
+        "split": "query",
+        "context": "orthogonal",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 1,
+        "oracle": 4.455091204951421e-31,
+        "weight_only": 0.029117463853803822,
+        "missing_adapter": 0.04790518450908839,
+        "identity_core": 0.0499217720802545,
+        "identity_invariance": 5.558098735926472e-31,
+        "round_trip": 1.491008806237834e-31,
+        "oracle_rollout": 9.676709816137183e-31
+      },
+      {
+        "split": "query",
+        "context": "orthogonal",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 2,
+        "oracle": 4.680249440346699e-31,
+        "weight_only": 0.018754048942090238,
+        "missing_adapter": 0.03454064701605223,
+        "identity_core": 0.026672959481460083,
+        "identity_invariance": 5.625846471175357e-31,
+        "round_trip": 1.5613971507486315e-31,
+        "oracle_rollout": 1.626367566691204e-30
+      },
+      {
+        "split": "query",
+        "context": "orthogonal",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 0,
+        "oracle": 4.977624933980845e-31,
+        "weight_only": 0.12530644002944485,
+        "missing_adapter": 0.14185129047491382,
+        "identity_core": 0.46598341910913976,
+        "identity_invariance": 5.155555650382397e-31,
+        "round_trip": 1.4688941291086858e-31,
+        "oracle_rollout": 4.977624933980845e-31
+      },
+      {
+        "split": "query",
+        "context": "orthogonal",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 1,
+        "oracle": 4.770304727855548e-31,
+        "weight_only": 0.02779923464931333,
+        "missing_adapter": 0.04911415810206127,
+        "identity_core": 0.0583145196114121,
+        "identity_invariance": 5.784670693354062e-31,
+        "round_trip": 1.7191535942811468e-31,
+        "oracle_rollout": 9.841090528515502e-31
+      },
+      {
+        "split": "query",
+        "context": "orthogonal",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 2,
+        "oracle": 4.280341455595127e-31,
+        "weight_only": 0.018919775963449494,
+        "missing_adapter": 0.04175937551654829,
+        "identity_core": 0.028582540091974834,
+        "identity_invariance": 5.386936892381323e-31,
+        "round_trip": 1.4249907662281034e-31,
+        "oracle_rollout": 1.5434813250259016e-30
+      },
+      {
+        "split": "query",
+        "context": "dense",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 0,
+        "oracle": 4.730945836223842e-31,
+        "weight_only": 0.19099135775542997,
+        "missing_adapter": 0.21039886802142377,
+        "identity_core": 0.4705867661434059,
+        "identity_invariance": 5.179240780692671e-31,
+        "round_trip": 1.4032776323593906e-31,
+        "oracle_rollout": 4.730945836223842e-31
+      },
+      {
+        "split": "query",
+        "context": "dense",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 1,
+        "oracle": 3.969710683628108e-31,
+        "weight_only": 0.09820925385900896,
+        "missing_adapter": 0.11435044560617792,
+        "identity_core": 0.049921772080254535,
+        "identity_invariance": 4.992572250599478e-31,
+        "round_trip": 1.4419874369680033e-31,
+        "oracle_rollout": 9.157889860291589e-31
+      },
+      {
+        "split": "query",
+        "context": "dense",
+        "program": [
+          0,
+          1,
+          2
+        ],
+        "step": 2,
+        "oracle": 4.220228837813761e-31,
+        "weight_only": 0.07286123859529156,
+        "missing_adapter": 0.08598251039082301,
+        "identity_core": 0.026672959481460062,
+        "identity_invariance": 4.833458141223191e-31,
+        "round_trip": 1.3100169123432313e-31,
+        "oracle_rollout": 1.514847707861412e-30
+      },
+      {
+        "split": "query",
+        "context": "dense",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 0,
+        "oracle": 4.9104383177532045e-31,
+        "weight_only": 0.1952226287165423,
+        "missing_adapter": 0.20334601648485637,
+        "identity_core": 0.4659834191091398,
+        "identity_invariance": 5.179240780692671e-31,
+        "round_trip": 1.4032776323593906e-31,
+        "oracle_rollout": 4.9104383177532045e-31
+      },
+      {
+        "split": "query",
+        "context": "dense",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 1,
+        "oracle": 4.21986995091177e-31,
+        "weight_only": 0.09938250625369807,
+        "missing_adapter": 0.11375352196442394,
+        "identity_core": 0.05831451961141213,
+        "identity_invariance": 4.8877369261280605e-31,
+        "round_trip": 1.368923350832813e-31,
+        "oracle_rollout": 9.465806979838774e-31
+      },
+      {
+        "split": "query",
+        "context": "dense",
+        "program": [
+          5,
+          3,
+          1
+        ],
+        "step": 2,
+        "oracle": 4.054047702904498e-31,
+        "weight_only": 0.07637992783688557,
+        "missing_adapter": 0.09635001849409612,
+        "identity_core": 0.02858254009197486,
+        "identity_invariance": 4.72067609564696e-31,
+        "round_trip": 1.3634399636370356e-31,
+        "oracle_rollout": 1.4834577779262209e-30
+      }
+    ],
+    "contexts": {
+      "identity": {
+        "oracle_max": 0.0,
+        "weight_only_max": 0.0,
+        "missing_adapter_max": 0.0,
+        "identity_core_max": 0.47058676614340583,
+        "identity_invariance_max": 0.0,
+        "round_trip_max": 0.0,
+        "oracle_rollout_max": 0.0,
+        "condition_number": 1.0
+      },
+      "permutation": {
+        "oracle_max": 0.0,
+        "weight_only_max": 2.0814793577375517e-33,
+        "missing_adapter_max": 0.025251633982479847,
+        "identity_core_max": 0.47058676614340583,
+        "identity_invariance_max": 0.0,
+        "round_trip_max": 0.0,
+        "oracle_rollout_max": 0.0,
+        "condition_number": 1.0
+      },
+      "orthogonal": {
+        "oracle_max": 5.0557945700729985e-31,
+        "weight_only_max": 0.12530644002944485,
+        "missing_adapter_max": 0.14511530128959862,
+        "identity_core_max": 0.47058676614340583,
+        "identity_invariance_max": 5.855712376385922e-31,
+        "round_trip_max": 1.7191535942811468e-31,
+        "oracle_rollout_max": 1.6455174689642547e-30,
+        "condition_number": 1.000000000000001
+      },
+      "dense": {
+        "oracle_max": 4.9104383177532045e-31,
+        "weight_only_max": 0.1952226287165423,
+        "missing_adapter_max": 0.21039886802142377,
+        "identity_core_max": 0.4705867661434059,
+        "identity_invariance_max": 5.587723791921674e-31,
+        "round_trip_max": 1.5290861739684926e-31,
+        "oracle_rollout_max": 1.5379931473722233e-30,
+        "condition_number": 2.0
+      }
+    },
+    "fixture_sha256": {
+      "support": "967ac3b79da99f2f8141558d031dbc41726c76f6b1db38d1246e567129545250",
+      "identity": "f3384a51ac2ef5c062303ac41b6096400effa04a9fc6042ec908cef966262185",
+      "permutation": "3e44284b3a86144c87d1dc54f0d2af70004887736cb609cbbe273a715e4431b0",
+      "orthogonal": "de22763d998ae28419cdc7e43f754d0addae44a025574ea67ca395aa15f07189",
+      "dense": "55cbbd68ec6b7655ffb951fe870c186746d2c872f36458383c334c8a43f329df",
+      "query": "b80498439c2b3c65d664b149d0b323def7615ae607525e75a0173ad47f03991a",
+      "primitive_0": {
+        "U": "3af7438430394b5e4a21f3fab226a6390f91fda03d8cc4d3c2efd137d0b15436",
+        "V": "8450814dab23db1ec8771939d1ad4b54857f78ce921838215719a0ace897ed1b",
+        "b": "9222443f3ef2c4aa2c979ec38f1c324d139b6056480c9dc2e6fec5010cd65fa9",
+        "alpha": "24bd042536ed49d2f145bd9988e4451bd5269623b80fce60e23df411aac6f1f9"
+      },
+      "primitive_1": {
+        "U": "87ccbe015d0ec5e7ac3a6aee8b7a0a310a7b497ab26caac099863241e3c2e17f",
+        "V": "1a76c5ce52b9a858873eab0f0f8c7966e742fa9117ef0710e7d6cd6e5772fba9",
+        "b": "1e1ce5f827457bdf33dfd08795403b940c3ee6761443df5a84cfe43e14623bfb",
+        "alpha": "24bd042536ed49d2f145bd9988e4451bd5269623b80fce60e23df411aac6f1f9"
+      },
+      "primitive_2": {
+        "U": "7a907c431434f171367a9916e6f0c8949f527e161b5082ee8ff53871bc872a83",
+        "V": "81d0f99f184c9d0c9eccf71f57f56169283e8d073a7fdd3410d7538a31e23bfc",
+        "b": "3c4d6ca8c38423752302553e22cd075517884a12f6a994883f38b8e873993194",
+        "alpha": "24bd042536ed49d2f145bd9988e4451bd5269623b80fce60e23df411aac6f1f9"
+      },
+      "primitive_3": {
+        "U": "3ef46f88be057ac0671c9f857a7a879c6a1cf023656c7bad3323b485b56bd4a8",
+        "V": "fb7afa566adb66b2622464b451795cf254dc1dc4c4997f7eaf0d44d90ee09f76",
+        "b": "508939d5a3d9d73c2437122201d2faae9174640e4b145cde62a321768e5b4566",
+        "alpha": "24bd042536ed49d2f145bd9988e4451bd5269623b80fce60e23df411aac6f1f9"
+      },
+      "primitive_4": {
+        "U": "521e2425126dee42e671fadfb8d8f941fda335b29c0f733795e233a7da0479f0",
+        "V": "41b138d17b310065ef6f6c9d88d6ff0e178c0856f7a1c15bed3fab26a0774e5b",
+        "b": "2835fa1188eeec8890706afc662717c86550fa59855527cd8c13786e18f1e783",
+        "alpha": "24bd042536ed49d2f145bd9988e4451bd5269623b80fce60e23df411aac6f1f9"
+      },
+      "primitive_5": {
+        "U": "d892a57b2cfd0d13058af280f784f1005bbdf97d4f4e8c7301189fac737bbc01",
+        "V": "be3b250f624c3101485a54b28323a40c5d4e6001fc8f01252398ce8ad7771711",
+        "b": "98b0594e86226ad9cb0658f806adf57eaa05bb92cc484e9c958fc852d2d47988",
+        "alpha": "24bd042536ed49d2f145bd9988e4451bd5269623b80fce60e23df411aac6f1f9"
+      }
+    },
+    "negative_witness": {
+      "trace": 15.897413047342575,
+      "scaled_trace": 17.487154352076832,
+      "derivative_max_abs_error": 3.860001207556252e-11,
+      "conjugacy_trace_errors": {
+        "identity": 0.0,
+        "permutation": 0.0,
+        "orthogonal": 0.0,
+        "dense": 0.0
+      },
+      "scope": "linear adapter impossibility for 1.1*A only"
+    },
+    "payload": {
+      "core_float64_bytes": 12720,
+      "adapter_float64_bytes": {
+        "identity": 2048,
+        "permutation": 2048,
+        "orthogonal": 2048,
+        "dense": 2048
+      },
+      "inverse_retained": false,
+      "includes_code_and_metadata": false,
+      "total_description_length_measured": false
+    },
+    "learned_adapters": false,
+    "learned_core": false,
+    "economic_value_measured": false
+  }
+}

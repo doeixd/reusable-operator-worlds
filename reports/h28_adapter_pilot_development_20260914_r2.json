@@ -1,0 +1,324 @@
+{
+  "status": "PROVISIONAL_DEVELOPMENT_CHECK",
+  "accepted_scientific_result": false,
+  "git_commit": "a31a3973f286dc286b14ea9cb6d1e97935378a9e",
+  "dirty_status": [
+    " M AGENTS.md",
+    " M POST_E6_RESEARCH_PROGRAM.md",
+    " M PREDICTIONS.md",
+    " M PROGRESS.md",
+    " M notes/learnings.txt",
+    " M paper/draft.md",
+    "?? H28_CLOSURE_RESEARCH_PLAN.md",
+    "?? H28_C_ADAPTER_PILOT_PLAN.md",
+    "?? H28_C_COORDINATE_GATE_PLAN.md",
+    "?? H28_T0_INSTRUMENT_PLAN.md",
+    "?? reports/h28_adapter_pilot_smoke_20260914.json",
+    "?? reports/h28_coordinate_gate_development_20260914.json",
+    "?? reports/h28_coordinate_gate_development_20260914.md",
+    "?? reports/h28_t0_development_20260914.json",
+    "?? reports/h28_t0_development_20260914.md",
+    "?? reports/h28_t0_development_20260914_r2.json",
+    "?? reports/so2_online_gate.json",
+    "?? tests/test_h28_coordinate_gate.py",
+    "?? tests/test_h28_t0.py",
+    "?? tools/h28_adapter_pilot.py",
+    "?? tools/h28_coordinate_gate.py",
+    "?? tools/h28_t0.py"
+  ],
+  "input_sha256": {
+    "H28_C_ADAPTER_PILOT_PLAN.md": "9493c207bc6e9948e7ef980d67e79696d3915b2af6b491595963f7d698cef734",
+    "tools/h28_adapter_pilot.py": "955fcb414773dd30b6a0fcaefc2e8e7824389eaa30808247a6ebbafc5e748669",
+    "src/row/world.py": "971601d343afeb3ca9143a380b25ad9bc9097ae03355d7bf4abe51c05ab09573"
+  },
+  "result": {
+    "version": "h28-c-adapter-pilot-v0",
+    "smoke": false,
+    "contexts": [
+      "identity",
+      "context_1",
+      "context_2"
+    ],
+    "true_angles_not_exposed_to_fit": true,
+    "true_angles_sha256": "de907d873d194a428d022dc1ea221b95bffa9f52401bf306c1a40e6adf4aa0c2",
+    "records": [
+      {
+        "context": "identity",
+        "operation": 0,
+        "support_operation": true,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      },
+      {
+        "context": "identity",
+        "operation": 1,
+        "support_operation": true,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      },
+      {
+        "context": "identity",
+        "operation": 2,
+        "support_operation": true,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      },
+      {
+        "context": "identity",
+        "operation": 3,
+        "support_operation": true,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      },
+      {
+        "context": "identity",
+        "operation": 4,
+        "support_operation": false,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      },
+      {
+        "context": "identity",
+        "operation": 5,
+        "support_operation": false,
+        "query_canonical_nmse": 0.0,
+        "oracle_canonical_nmse": 0.0,
+        "no_adapter_canonical_nmse": 0.0
+      },
+      {
+        "context": "context_1",
+        "operation": 0,
+        "support_operation": true,
+        "query_canonical_nmse": 0.05589601082007318,
+        "oracle_canonical_nmse": 0.05630451099346059,
+        "no_adapter_canonical_nmse": 0.05522864463479578
+      },
+      {
+        "context": "context_1",
+        "operation": 1,
+        "support_operation": true,
+        "query_canonical_nmse": 0.055945242134121,
+        "oracle_canonical_nmse": 0.05647987541779297,
+        "no_adapter_canonical_nmse": 0.054386787137101295
+      },
+      {
+        "context": "context_1",
+        "operation": 2,
+        "support_operation": true,
+        "query_canonical_nmse": 0.05682238716225007,
+        "oracle_canonical_nmse": 0.05808163501257484,
+        "no_adapter_canonical_nmse": 0.05542636387468313
+      },
+      {
+        "context": "context_1",
+        "operation": 3,
+        "support_operation": true,
+        "query_canonical_nmse": 0.05717717823228641,
+        "oracle_canonical_nmse": 0.05827934211813483,
+        "no_adapter_canonical_nmse": 0.05491938354054752
+      },
+      {
+        "context": "context_1",
+        "operation": 4,
+        "support_operation": false,
+        "query_canonical_nmse": 0.056772838565997207,
+        "oracle_canonical_nmse": 0.05764746759456765,
+        "no_adapter_canonical_nmse": 0.05445955223339827
+      },
+      {
+        "context": "context_1",
+        "operation": 5,
+        "support_operation": false,
+        "query_canonical_nmse": 0.0577125105856233,
+        "oracle_canonical_nmse": 0.05762499038352876,
+        "no_adapter_canonical_nmse": 0.05576324601854463
+      },
+      {
+        "context": "context_2",
+        "operation": 0,
+        "support_operation": true,
+        "query_canonical_nmse": 0.04981212833946399,
+        "oracle_canonical_nmse": 0.05286408184822052,
+        "no_adapter_canonical_nmse": 0.05201480441255129
+      },
+      {
+        "context": "context_2",
+        "operation": 1,
+        "support_operation": true,
+        "query_canonical_nmse": 0.050804456712881634,
+        "oracle_canonical_nmse": 0.054810945099663944,
+        "no_adapter_canonical_nmse": 0.05064119769554971
+      },
+      {
+        "context": "context_2",
+        "operation": 2,
+        "support_operation": true,
+        "query_canonical_nmse": 0.05241524680298726,
+        "oracle_canonical_nmse": 0.056392519104765684,
+        "no_adapter_canonical_nmse": 0.0522690235191905
+      },
+      {
+        "context": "context_2",
+        "operation": 3,
+        "support_operation": true,
+        "query_canonical_nmse": 0.05214092202892713,
+        "oracle_canonical_nmse": 0.05844468307690051,
+        "no_adapter_canonical_nmse": 0.051599971122769685
+      },
+      {
+        "context": "context_2",
+        "operation": 4,
+        "support_operation": false,
+        "query_canonical_nmse": 0.05164307249851218,
+        "oracle_canonical_nmse": 0.05742333586799233,
+        "no_adapter_canonical_nmse": 0.050694952891651913
+      },
+      {
+        "context": "context_2",
+        "operation": 5,
+        "support_operation": false,
+        "query_canonical_nmse": 0.05145271531983901,
+        "oracle_canonical_nmse": 0.05601501547732482,
+        "no_adapter_canonical_nmse": 0.0514989526526083
+      }
+    ],
+    "fitting": {
+      "identity": {
+        "chosen": {
+          "angles": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "support_mse": 0.0,
+          "start": 0
+        },
+        "traces": [],
+        "objective_evaluations": 0
+      },
+      "context_1": {
+        "chosen": {
+          "angles": [
+            -0.0023437500000000003,
+            0.34296875,
+            0.15156250000000002,
+            0.07578125000000001
+          ],
+          "support_mse": 0.020159338460246194,
+          "start": 0
+        },
+        "traces": [
+          {
+            "start": 0,
+            "angles": [
+              -0.0023437500000000003,
+              0.34296875,
+              0.15156250000000002,
+              0.07578125000000001
+            ],
+            "support_mse": 0.020159338460246194,
+            "accepted_moves": 16,
+            "objective_evaluations": 481
+          },
+          {
+            "start": 1,
+            "angles": [
+              -0.0023437500000000003,
+              0.34296875,
+              0.15156250000000002,
+              0.07578125000000001
+            ],
+            "support_mse": 0.020159338460246194,
+            "accepted_moves": 18,
+            "objective_evaluations": 962
+          },
+          {
+            "start": 2,
+            "angles": [
+              -0.0023437500000000003,
+              0.34296875,
+              0.15156250000000002,
+              0.07578125000000001
+            ],
+            "support_mse": 0.020159338460246194,
+            "accepted_moves": 20,
+            "objective_evaluations": 1443
+          }
+        ],
+        "objective_evaluations": 1443
+      },
+      "context_2": {
+        "chosen": {
+          "angles": [
+            -0.02421875,
+            -0.3046875,
+            -0.13828125000000002,
+            0.016406250000000004
+          ],
+          "support_mse": 0.019801840840302065,
+          "start": 0
+        },
+        "traces": [
+          {
+            "start": 0,
+            "angles": [
+              -0.02421875,
+              -0.3046875,
+              -0.13828125000000002,
+              0.016406250000000004
+            ],
+            "support_mse": 0.019801840840302065,
+            "accepted_moves": 17,
+            "objective_evaluations": 481
+          },
+          {
+            "start": 1,
+            "angles": [
+              -0.02421875,
+              -0.3046875,
+              -0.13828125000000002,
+              0.016406250000000004
+            ],
+            "support_mse": 0.019801840840302065,
+            "accepted_moves": 21,
+            "objective_evaluations": 962
+          },
+          {
+            "start": 2,
+            "angles": [
+              -0.02421875,
+              -0.3046875,
+              -0.13828125000000002,
+              0.016406250000000004
+            ],
+            "support_mse": 0.019801840840302065,
+            "accepted_moves": 19,
+            "objective_evaluations": 1443
+          }
+        ],
+        "objective_evaluations": 1443
+      }
+    },
+    "data_shapes": {
+      "support": [
+        16,
+        16
+      ],
+      "query": [
+        32,
+        16
+      ]
+    },
+    "core_changed": false,
+    "query_used_for_fit": false,
+    "economic_value_measured": false,
+    "learned_core": false,
+    "seconds": 0.4212726000114344
+  }
+}

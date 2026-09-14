@@ -841,3 +841,46 @@ an opaque task-solving network hidden behind `PROPOSE`; scoring candidates on
 query labels; calling one successful edit recursive improvement; or reporting
 meta-level speedups without charging proposal, evaluation, rejection, storage,
 and earlier-generation costs.
+
+# H28 and closure extension (2026-09-14, prospective)
+
+The PI's emergence/closure synthesis is developed in
+[H28_CLOSURE_RESEARCH_PLAN.md](H28_CLOSURE_RESEARCH_PLAN.md). It adds a separate
+diagnostic branch and working hypotheses CL1-CL8; it is not an executable
+preregistration. It neither changes SO2's frozen acceptance nor reinterprets
+earlier export, macro, or V6 results as autonomy evidence.
+
+The research question now has three separately scored parts: can a learner
+discover the reusable representation; does its transition law survive the
+discarding of micro detail and changes of realization; and does acquiring and
+retaining it reduce future learning cost? These properties need not coincide.
+
+    T0 artifact eligibility + analytic/probe controls
+       |
+       +--> eligible frozen-artifact leakage audit (exploratory)
+       |
+       +--> H28-C: learned coordinate adapters + shared-core economics
+                  |
+                  +--> H28-Q: nontrivial coarse-graining + autonomy
+                              |
+                              +--> independently validated regularization
+                                   -> nested coarse-grainings, if justified
+
+H28-C can establish reusable computation across coordinate systems, but an
+invertible adapter makes closure trivial. H28-Q therefore supplies a separate
+many-to-one, task-preserving test, with micro/world/joint leakage probes,
+common-support interventions, and constant/full-state failure controls. Existing
+promoted tensors are not assumed to supply eligible dynamical macrovariables.
+
+The first action on this branch is a small development-artifact eligibility and
+instrument plan, not a new lifetime or a critic-heavy learner. The current
+SO2 plan and amendments retain priority and their own contract. No competing
+local lifetime, sealed-data access, or new seed allocation is introduced here.
+
+For Track C and later hierarchy claims, an expansion-only macro still establishes
+naming/coding economy; it cannot acquire autonomy evidence through a tautological
+equivalence test. A new claim of autonomous hierarchical computation additionally
+needs the relevant coordinate-transfer and nontrivial-closure gates. Track A/B
+convergence and the existing execution/control-flow/synthesis gates remain
+necessary. This extension changes future claim requirements, not historical
+verdicts or frozen protocols.
