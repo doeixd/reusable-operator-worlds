@@ -487,6 +487,8 @@ def run(
     head_policy_hook=None,
     world=None,
     task_code_hook=None,
+    model=None,
+    return_model: bool = False,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -498,7 +500,10 @@ def run(
     world = World.generate(config.world) if world is None else world
     if task_id_scramble_seed is not None:
         world = world.with_scrambled_task_ids(task_id_scramble_seed)
-    model = _build_model(config, kind)
+    # `model` defaults to None, so every pre-existing caller is unchanged. It
+    # exists so a curriculum STAGE can continue from the previous stage's library
+    # (SO2) instead of a fresh one, the same additive route as `world=`.
+    model = _build_model(config, kind) if model is None else model
     global_lr, task_lr, weight_decay, update_count, replay_per_task, replay_ratio, seed = (
         _training_values(config, kind)
     )
@@ -1054,6 +1059,8 @@ def run(
             if snapshot_history else None
         ),
     )
+    if return_model:
+        summary["terminal_model"] = model
     return summary
 
 
@@ -1347,6 +1354,21 @@ def _novel_data(
     )
 
 
+def _novel_composition_available(world: World, config: ExperimentConfig) -> bool:
+    """False when the world's tasks already use every program of its length.
+
+    A curriculum stage can hold more tasks than there are distinct programs
+    (60 length-1 tasks over 6 primitives), leaving no unseen composition to
+    probe. Previously `_novel_data` divided by zero there; the probe is a
+    diagnostic, so it reports itself unavailable instead.
+    """
+    used = {task.program.primitive_ids for task in world.tasks}
+    return any(
+        tuple(route) not in used
+        for route in product(range(config.world.teacher_primitives), repeat=config.world.program_length)
+    )
+
+
 def _adapt_novel_composition(
     model: Learner,
     world: World,
@@ -1354,6 +1376,8 @@ def _adapt_novel_composition(
     task_lr: float,
     novel_index: int = 0,
 ) -> dict[str, object]:
+    if not _novel_composition_available(world, config):
+        return {"available": False, "reason": "every program of this length is used by a task"}
     route, train_x, train_y, eval_x, eval_y = _novel_data(world, config, novel_index)
     for parameter in model.shared_parameters():
         parameter.requires_grad_(False)
@@ -1476,6 +1500,12 @@ def _novel_checkpoint(
         )
         for index in range(novel_tasks)
     ]
+    if not individuals or individuals[0].get("available") is False:
+        # No unseen composition exists in this world (see
+        # `_novel_composition_available`); the checkpoint probe reports itself
+        # unavailable rather than averaging curves that were never computed.
+        return {"tasks_completed": tasks_completed, "available": False,
+                "reason": individuals[0]["reason"] if individuals else "no novel tasks requested"}
     support_points = individuals[0]["nmse_by_support"].keys()
     mean_curve = {
         support: float(
