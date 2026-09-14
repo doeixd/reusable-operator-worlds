@@ -1617,3 +1617,26 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   random library and the assignment never changed again (0% after round 3-5).
   Any commitment mechanism must report its per-round change rate and justify
   the state at the first commitment.
+- STAGED FORMATION ACQUIRES WHAT JOINT FORMATION CANNOT (J1c/J1c-R,
+  2026-09-12; verdicts d4e6808, 3bf6a59). Ordering tasks by program length
+  (60 length-1, 64 length-2, then the canonical length-3 world), carrying only
+  the shared library between stages and never revealing a route, takes the
+  rotated substrate from 0.92-0.97 (same learner, length-3 only, same total
+  budget) to 0.005-0.007 in 3/3 development worlds at TWO initializations. A
+  control that runs the same stages and re-initializes the library before the
+  last stage lands at ~1.0, so the gain is transfer, not compute; 5-6 of 6
+  stage-1 operation-to-slot pairings keep their traffic and their functions
+  move 0.06-0.21 while a fresh library differs by ~1.3. The first commitment
+  must be made where it is INFORMED: at length 1 tasks sharing an operation
+  look alike, so routing is clustering; the structure then extends (CF6).
+- AN ORACLE ARM IS NOT AUTOMATICALLY A CEILING (J1c). World 0 fails at 0.624
+  with oracle-pinned routes and passes at 0.0047-0.0062 under the curriculum:
+  the oracle assignment was itself the handicap. When an oracle arm is used as
+  an upper bound, state that it bounds only performance UNDER THAT ASSIGNMENT,
+  and never treat a world that fails it as intrinsically hard.
+- CORRECTION (2026-09-12) to the Track B world-0 standing doubt above: world 0
+  is NOT intrinsically the hard world. It fails every oracle-route SO1 budget
+  and passes the length curriculum in both initializations. Its earlier
+  dissent was a formation-path artifact of the fixed oracle assignment. Keep
+  reporting it by name, but do not carry the doubt as evidence about the
+  world.
