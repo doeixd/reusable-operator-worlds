@@ -877,6 +877,13 @@ instrument plan, not a new lifetime or a critic-heavy learner. The current
 SO2 plan and amendments retain priority and their own contract. No competing
 local lifetime, sealed-data access, or new seed allocation is introduced here.
 
+The corrected oracle-core adapter pilot supports a next opportunity gate,
+`H28_C_LEARNER_OPPORTUNITY_PLAN.md`: remove the supplied core while retaining a
+restricted context-shared adapter, crossed held-out operations and contexts,
+and independent/random-core controls. This plan is drafted only; no learner
+result or economic claim is licensed until its protocol is frozen and its
+oracle, non-vacuity, reconstruction, and paired-cost gates pass.
+
 For Track C and later hierarchy claims, an expansion-only macro still establishes
 naming/coding economy; it cannot acquire autonomy evidence through a tautological
 equivalence test. A new claim of autonomous hierarchical computation additionally

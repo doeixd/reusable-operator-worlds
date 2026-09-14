@@ -5269,3 +5269,14 @@ The result supports designing a next learner/core opportunity pilot under a new
 frozen plan. It does not authorize that launch: matched independent/random-core
 arms, held-out coordinate families, full cost accounting, clean commit, and SO2
 resume/HEAD coordination remain prerequisites.
+
+# H28-C next gate drafted (2026-09-14)
+
+Pushed commit bce26b4 to `origin/master`. The incomplete SO2 report remains
+untracked because it is a failed partial run stamped to an older commit; it was
+not included in the push. Drafted H28_C_LEARNER_OPPORTUNITY_PLAN.md as the next
+Tier 1 gate: remove the oracle core, retain a restricted context-shared adapter,
+cross held-out operations with a held-out context, and include independent,
+shared-no-adapter, random-core, and oracle-core controls. No learner run has
+started. It requires its own frozen plan, clean commit, scorer, restart test,
+and SO2 resume/HEAD coordination.
