@@ -4984,3 +4984,10 @@ than as a one-off miss.
   A coordinate-frame bug was caught and fixed before the corrected run was
   interpreted. Do not call this an H28 learner result until the missing arms,
   reconstruction, non-vacuity, paired-cost, and restart gates pass.
+
+- H28-C CONTROL EXTENSION (provisional, 2026-09-14). The learner harness now
+  runs oracle-core, independent observed-frame, and fixed random-core controls.
+  Smoke means were below 1e-8 for the oracle, finite for independent fitting,
+  and much larger for the random core, so the basic non-vacuity control is
+  live. Independent reconstruction, paired parameter cost, and amortized
+  economic value are still absent; no H28 classification is licensed.

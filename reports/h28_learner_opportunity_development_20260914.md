@@ -11,18 +11,19 @@ identity, `3.06e-5` on context 1, and `3.09e-5` on context 2. The paired
 shared-no-adapter means were approximately `3.05e-5`, `1.57e-2`, and
 `1.19e-2`, respectively. Per-operation rows are in the JSON artifact.
 
-The result is deliberately incomplete. Only `SHARED_CORE_ADAPTER` and
-`SHARED_NO_ADAPTER` arms are present. The oracle anchor, independent arm, and
-random-core control are absent; no economic value or parameter-byte comparison
-was measured. Therefore the opportunity cannot be classified under the drafted
-plan. The result only shows that this small implementation can fit the
-restricted shared-adapter construction under a development seed.
+The result is deliberately incomplete despite the controls now being present.
+The oracle anchor, independent arm, and random-core control all run in the
+same development harness and provide finite, non-vacuous comparisons. However,
+no independent saved-state reconstruction, parameter-byte accounting, or
+economic value was measured, so the opportunity still cannot be classified
+under the drafted plan. The result shows only that this small implementation
+can fit the restricted shared-adapter construction under a development seed.
 
 An earlier implementation passed canonical inputs to an observed-coordinate
 function and was withdrawn before interpretation. The current harness maps
 both support and query inputs through the observed frame and records the
 correction in its input hashes. The JSON record is the canonical corrected run:
-`h28_learner_opportunity_development_20260914_r3.json`.
+`h28_learner_opportunity_development_20260914_r5.json`.
 
 The next action is to add and validate the missing oracle, independent, and
 random-core arms, then run the registered non-vacuity, reconstruction, paired

@@ -10,14 +10,29 @@ spec.loader.exec_module(pilot)
 
 
 class LearnerOpportunityTests(unittest.TestCase):
-    def test_smoke_is_explicitly_incomplete(self):
+    def test_smoke_has_registered_controls_but_is_not_a_verdict(self):
         result = pilot.fit(smoke=True)
-        self.assertEqual(result['arms_present'], ['SHARED_CORE_ADAPTER', 'SHARED_NO_ADAPTER'])
-        self.assertFalse(result['oracle_anchor_present'])
-        self.assertFalse(result['independent_control_present'])
-        self.assertFalse(result['random_core_control_present'])
+        self.assertEqual(len(result['arms_present']), 5)
+        self.assertTrue(result['oracle_anchor_present'])
+        self.assertTrue(result['independent_control_present'])
+        self.assertTrue(result['random_core_control_present'])
+        self.assertTrue(result['non_vacuity_pass'])
+        self.assertFalse(result['reconstruction_pass'])
+        self.assertFalse(result['paired_cost_pass'])
+        self.assertFalse(result['economic_value_measured'])
         self.assertFalse(result['query_used_for_fit'])
         self.assertFalse(result['core_changed_after_context2'])
+
+    def test_controls_are_non_vacuous_and_finite(self):
+        result = pilot.fit(smoke=True)
+        oracle = result['control_rows']['ORACLE_CORE_ADAPTER']
+        random = result['control_rows']['RANDOM_CORE_ADAPTER']
+        independent = result['control_rows']['INDEPENDENT']
+        oracle_mean = sum(r['query_canonical_nmse'] for r in oracle) / len(oracle)
+        random_mean = sum(r['query_canonical_nmse'] for r in random) / len(random)
+        self.assertLess(oracle_mean, 1e-8)
+        self.assertGreater(random_mean, oracle_mean * 100)
+        self.assertTrue(all(r['query_canonical_nmse'] >= 0 for r in independent))
 
     def test_shared_adapter_beats_no_adapter_in_smoke(self):
         result = pilot.fit(smoke=True)

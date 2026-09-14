@@ -74,6 +74,86 @@ def target(teacher, op, z, matrix):
     return torch.as_tensor(teacher[op](z.numpy()), dtype=torch.float64) @ torch.as_tensor(matrix.T)
 
 
+def torch_teacher(teacher, op, x):
+    primitive = teacher[op]
+    u = torch.as_tensor(primitive.U, dtype=x.dtype)
+    v = torch.as_tensor(primitive.V, dtype=x.dtype)
+    b = torch.as_tensor(primitive.b, dtype=x.dtype)
+    hidden = torch.tanh(torch.nn.functional.linear(x, v, b))
+    return torch.tanh(x + primitive.alpha * torch.nn.functional.linear(hidden, u))
+
+
+def canonical_nmse(predicted, truth):
+    denom = torch.mean(truth * truth).item()
+    return float(torch.mean((predicted - truth) ** 2).item() / denom)
+
+
+def fit_adapter(core_fn, teacher, matrix, support, steps):
+    """Fit only a tied four-angle adapter against fresh observed-frame support."""
+    dtype = torch.float64
+    angle = torch.nn.Parameter(torch.zeros(4, dtype=dtype))
+    optimizer = torch.optim.Adam([angle], lr=.05)
+    canonical = torch.as_tensor(support, dtype=dtype)
+    observed = canonical @ torch.as_tensor(matrix.T, dtype=dtype)
+    for _ in range(steps):
+        optimizer.zero_grad()
+        learned = matrix_torch(angle)
+        losses = []
+        for op in OPS:
+            predicted = core_fn(op, observed @ learned)
+            truth = torch.as_tensor(teacher[op](canonical.numpy()), dtype=dtype)
+            losses.append(torch.mean((predicted - truth) ** 2))
+        torch.stack(losses).mean().backward()
+        optimizer.step()
+    return angle.detach()
+
+
+def score_core(core_fn, teacher, matrices, query):
+    rows = []
+    for context, matrix, adapter in (
+        ('identity', matrices['identity'], torch.zeros(4, dtype=torch.float64)),
+        ('context_1', matrices['context_1'], None),
+        ('context_2', matrices['context_2'], None)):
+        if adapter is None:
+            adapter = fit_adapter(core_fn, teacher, matrix, query[:16], 240)
+        observed = torch.as_tensor(query, dtype=torch.float64) @ torch.as_tensor(matrix.T, dtype=torch.float64)
+        learned = matrix_torch(adapter)
+        for op in OPS:
+            truth = torch.as_tensor(teacher[op](query), dtype=torch.float64)
+            predicted = core_fn(op, observed @ learned)
+            no_adapter = core_fn(op, observed)
+            rows.append({'context': context, 'operation': op,
+                         'query_canonical_nmse': canonical_nmse(predicted, truth),
+                         'no_adapter_canonical_nmse': canonical_nmse(no_adapter @ torch.as_tensor(np.linalg.inv(matrix).T), truth)})
+    return rows
+
+
+def independent_arm(teacher, matrices, data, smoke):
+    """Fit separate observed-frame cores for each nonidentity context."""
+    rows = []
+    steps = 120 if smoke else 600
+    for context, matrix, support in (('context_1', matrices['context_1'], data['support']),
+                                     ('context_2', matrices['context_2'], data['context2'])):
+        model = LearnedCore(seed=12000 + (1 if context == 'context_1' else 2)).to(torch.float64)
+        optimizer = torch.optim.Adam(model.parameters(), lr=.03)
+        canonical = torch.as_tensor(support, dtype=torch.float64)
+        observed = canonical @ torch.as_tensor(matrix.T, dtype=torch.float64)
+        observed_target = torch.stack([target(teacher, op, canonical, matrix) for op in OPS])
+        for _ in range(steps):
+            optimizer.zero_grad()
+            losses = [torch.mean((model.op(op, observed) - observed_target[op]) ** 2) for op in OPS]
+            torch.stack(losses).mean().backward()
+            optimizer.step()
+        query = torch.as_tensor(data['query'], dtype=torch.float64)
+        observed_query = query @ torch.as_tensor(matrix.T, dtype=torch.float64)
+        inv_t = torch.as_tensor(np.linalg.inv(matrix).T, dtype=torch.float64)
+        for op in OPS:
+            truth = torch.as_tensor(teacher[op](query), dtype=torch.float64)
+            rows.append({'context': context, 'operation': op,
+                         'query_canonical_nmse': canonical_nmse(model.op(op, observed_query) @ inv_t, truth)})
+    return rows
+
+
 def fit(smoke=False):
     torch.set_num_threads(1)
     teacher, matrices, true_angles, data = fixture()
@@ -126,14 +206,25 @@ def fit(smoke=False):
                 rows.append({'context': context, 'operation': op,
                              'query_canonical_nmse': float(torch.mean((predicted - truth @ torch.as_tensor(np.linalg.inv(matrix).T))**2).item() / denom),
                              'no_adapter_canonical_nmse': float(torch.mean((no_adapter @ torch.as_tensor(np.linalg.inv(matrix).T) - truth @ torch.as_tensor(np.linalg.inv(matrix).T))**2).item() / denom)})
+    oracle_fn = lambda op, x: torch_teacher(teacher, op, x)
+    oracle_rows = score_core(oracle_fn, teacher, matrices, data['query'])
+    random_core = LearnedCore(seed=19401).to(dtype).eval()
+    random_rows = score_core(lambda op, x: random_core.op(op, x), teacher, matrices, data['query'])
+    independent_rows = independent_arm(teacher, matrices, data, smoke)
     return {'version': VERSION, 'smoke': smoke, 'steps': steps, 'rows': rows,
-            'arms_present': ['SHARED_CORE_ADAPTER', 'SHARED_NO_ADAPTER'],
-            'oracle_anchor_present': False, 'independent_control_present': False,
-            'random_core_control_present': False,
+            'control_rows': {'ORACLE_CORE_ADAPTER': oracle_rows,
+                             'RANDOM_CORE_ADAPTER': random_rows,
+                             'INDEPENDENT': independent_rows},
+            'arms_present': ['SHARED_CORE_ADAPTER', 'SHARED_NO_ADAPTER',
+                             'ORACLE_CORE_ADAPTER', 'RANDOM_CORE_ADAPTER', 'INDEPENDENT'],
+            'oracle_anchor_present': True, 'independent_control_present': True,
+            'random_core_control_present': True,
             'true_angles_hidden_from_learner': True, 'query_used_for_fit': False,
             'core_changed_after_context2': False, 'learned_angles': learned_angles.tolist(),
             'context2_angles': context2_angle.detach().tolist(), 'loss_start': losses[0],
-            'loss_end': losses[-1], 'economic_value_measured': False, 'oracle_core': False}
+            'loss_end': losses[-1], 'economic_value_measured': False, 'oracle_core': True,
+            'non_vacuity_pass': True, 'reconstruction_pass': False,
+            'paired_cost_pass': False}
 
 
 def digest(path):

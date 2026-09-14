@@ -5294,3 +5294,9 @@ measured. It cannot classify the opportunity under the drafted plan. The
 corrected output and limits are recorded in
 `reports/h28_learner_opportunity_development_20260914.md`; the earlier
 coordinate-frame output was withdrawn before interpretation.
+
+The control extension now includes oracle-core, independent observed-frame, and
+random-core arms. A smoke check gives oracle mean NMSE below `1e-8`, finite
+independent error, and random-core error well above oracle error. Reconstruction,
+paired parameter-cost, and economic endpoints remain unimplemented, so this is
+still an instrument check and not an H28 classification.

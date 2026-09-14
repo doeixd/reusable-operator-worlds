@@ -1,0 +1,452 @@
+{
+  "status": "PROVISIONAL_DEVELOPMENT_CHECK",
+  "accepted_scientific_result": false,
+  "git_commit": "61bb5a79c93f32585e9ec68298d7ca51da94038a",
+  "input_sha256": {
+    "H28_C_LEARNER_OPPORTUNITY_PLAN.md": "10debe42f5242488f6c78caf21c6e9ac601004ed517c35cb6ff19870810d6e2a",
+    "tools/h28_learner_opportunity.py": "69520cf9583c04e64785624d129b1361148c92172b36c80815b32e7253c9247b",
+    "src/row/world.py": "971601d343afeb3ca9143a380b25ad9bc9097ae03355d7bf4abe51c05ab09573"
+  },
+  "dirty_status": [
+    " M PREDICTIONS.md",
+    " M PROGRESS.md",
+    " M notes/learnings.txt",
+    " M reports/h28_learner_opportunity_development_20260914.md",
+    " M tests/test_h28_learner_opportunity.py",
+    " M tools/h28_learner_opportunity.py",
+    "?? reports/h28_learner_opportunity_smoke_20260914_r4.json",
+    "?? reports/so2_online_gate.json"
+  ],
+  "result": {
+    "version": "h28-c-learner-opportunity-v0",
+    "smoke": false,
+    "steps": 600,
+    "rows": [
+      {
+        "context": "identity",
+        "operation": 0,
+        "query_canonical_nmse": 1.2843664641003576e-08,
+        "no_adapter_canonical_nmse": 1.2843664641003576e-08
+      },
+      {
+        "context": "identity",
+        "operation": 1,
+        "query_canonical_nmse": 4.28998849849638e-09,
+        "no_adapter_canonical_nmse": 4.28998849849638e-09
+      },
+      {
+        "context": "identity",
+        "operation": 2,
+        "query_canonical_nmse": 7.087318163469013e-06,
+        "no_adapter_canonical_nmse": 7.087318163469013e-06
+      },
+      {
+        "context": "identity",
+        "operation": 3,
+        "query_canonical_nmse": 0.00013557478122159917,
+        "no_adapter_canonical_nmse": 0.00013557478122159917
+      },
+      {
+        "context": "identity",
+        "operation": 4,
+        "query_canonical_nmse": 7.766692367762289e-09,
+        "no_adapter_canonical_nmse": 7.766692367762289e-09
+      },
+      {
+        "context": "identity",
+        "operation": 5,
+        "query_canonical_nmse": 4.046149858127059e-05,
+        "no_adapter_canonical_nmse": 4.046149858127059e-05
+      },
+      {
+        "context": "context_1",
+        "operation": 0,
+        "query_canonical_nmse": 4.859905464447868e-08,
+        "no_adapter_canonical_nmse": 0.015123944140881215
+      },
+      {
+        "context": "context_1",
+        "operation": 1,
+        "query_canonical_nmse": 3.844294707556631e-08,
+        "no_adapter_canonical_nmse": 0.015843379716165697
+      },
+      {
+        "context": "context_1",
+        "operation": 2,
+        "query_canonical_nmse": 7.117103007511149e-06,
+        "no_adapter_canonical_nmse": 0.016147679057822655
+      },
+      {
+        "context": "context_1",
+        "operation": 3,
+        "query_canonical_nmse": 0.0001355093861249024,
+        "no_adapter_canonical_nmse": 0.015829656816926514
+      },
+      {
+        "context": "context_1",
+        "operation": 4,
+        "query_canonical_nmse": 4.4930776234144605e-08,
+        "no_adapter_canonical_nmse": 0.01561186130618515
+      },
+      {
+        "context": "context_1",
+        "operation": 5,
+        "query_canonical_nmse": 4.059202753643945e-05,
+        "no_adapter_canonical_nmse": 0.015903718836827247
+      },
+      {
+        "context": "context_2",
+        "operation": 0,
+        "query_canonical_nmse": 5.152691434185233e-07,
+        "no_adapter_canonical_nmse": 0.011797128980200914
+      },
+      {
+        "context": "context_2",
+        "operation": 1,
+        "query_canonical_nmse": 4.938132298560988e-07,
+        "no_adapter_canonical_nmse": 0.011654405613289835
+      },
+      {
+        "context": "context_2",
+        "operation": 2,
+        "query_canonical_nmse": 7.4962216886471105e-06,
+        "no_adapter_canonical_nmse": 0.011824033932257508
+      },
+      {
+        "context": "context_2",
+        "operation": 3,
+        "query_canonical_nmse": 0.00013562196192353138,
+        "no_adapter_canonical_nmse": 0.01238876919568052
+      },
+      {
+        "context": "context_2",
+        "operation": 4,
+        "query_canonical_nmse": 4.905086769811135e-07,
+        "no_adapter_canonical_nmse": 0.012395453658292664
+      },
+      {
+        "context": "context_2",
+        "operation": 5,
+        "query_canonical_nmse": 4.048370981163976e-05,
+        "no_adapter_canonical_nmse": 0.011390386584577108
+      }
+    ],
+    "control_rows": {
+      "ORACLE_CORE_ADAPTER": [
+        {
+          "context": "identity",
+          "operation": 0,
+          "query_canonical_nmse": 4.700631405762339e-33,
+          "no_adapter_canonical_nmse": 4.700631405762339e-33
+        },
+        {
+          "context": "identity",
+          "operation": 1,
+          "query_canonical_nmse": 4.544895881424012e-33,
+          "no_adapter_canonical_nmse": 4.544895881424012e-33
+        },
+        {
+          "context": "identity",
+          "operation": 2,
+          "query_canonical_nmse": 5.384087704748072e-33,
+          "no_adapter_canonical_nmse": 5.384087704748072e-33
+        },
+        {
+          "context": "identity",
+          "operation": 3,
+          "query_canonical_nmse": 5.1317351300006384e-33,
+          "no_adapter_canonical_nmse": 5.1317351300006384e-33
+        },
+        {
+          "context": "identity",
+          "operation": 4,
+          "query_canonical_nmse": 4.5626194013070414e-33,
+          "no_adapter_canonical_nmse": 4.5626194013070414e-33
+        },
+        {
+          "context": "identity",
+          "operation": 5,
+          "query_canonical_nmse": 5.100178739582609e-33,
+          "no_adapter_canonical_nmse": 5.100178739582609e-33
+        },
+        {
+          "context": "context_1",
+          "operation": 0,
+          "query_canonical_nmse": 2.7541066940103276e-13,
+          "no_adapter_canonical_nmse": 0.01512538030938936
+        },
+        {
+          "context": "context_1",
+          "operation": 1,
+          "query_canonical_nmse": 2.7181404461586306e-13,
+          "no_adapter_canonical_nmse": 0.01584358717039119
+        },
+        {
+          "context": "context_1",
+          "operation": 2,
+          "query_canonical_nmse": 2.82656229006789e-13,
+          "no_adapter_canonical_nmse": 0.016117307166764877
+        },
+        {
+          "context": "context_1",
+          "operation": 3,
+          "query_canonical_nmse": 2.77834444388187e-13,
+          "no_adapter_canonical_nmse": 0.015677988118034378
+        },
+        {
+          "context": "context_1",
+          "operation": 4,
+          "query_canonical_nmse": 2.7458527689534886e-13,
+          "no_adapter_canonical_nmse": 0.01561193655700995
+        },
+        {
+          "context": "context_1",
+          "operation": 5,
+          "query_canonical_nmse": 2.855791229615818e-13,
+          "no_adapter_canonical_nmse": 0.01586285499582833
+        },
+        {
+          "context": "context_2",
+          "operation": 0,
+          "query_canonical_nmse": 1.269098043184259e-13,
+          "no_adapter_canonical_nmse": 0.011797696180223851
+        },
+        {
+          "context": "context_2",
+          "operation": 1,
+          "query_canonical_nmse": 1.1889274874621039e-13,
+          "no_adapter_canonical_nmse": 0.011654030244183301
+        },
+        {
+          "context": "context_2",
+          "operation": 2,
+          "query_canonical_nmse": 1.2844553561447668e-13,
+          "no_adapter_canonical_nmse": 0.011809850774246174
+        },
+        {
+          "context": "context_2",
+          "operation": 3,
+          "query_canonical_nmse": 1.2249620450308115e-13,
+          "no_adapter_canonical_nmse": 0.012217705324897285
+        },
+        {
+          "context": "context_2",
+          "operation": 4,
+          "query_canonical_nmse": 1.2137029557204557e-13,
+          "no_adapter_canonical_nmse": 0.012395250370135698
+        },
+        {
+          "context": "context_2",
+          "operation": 5,
+          "query_canonical_nmse": 1.193994318368846e-13,
+          "no_adapter_canonical_nmse": 0.011378203701873922
+        }
+      ],
+      "RANDOM_CORE_ADAPTER": [
+        {
+          "context": "identity",
+          "operation": 0,
+          "query_canonical_nmse": 0.009413162362360474,
+          "no_adapter_canonical_nmse": 0.009413162362360474
+        },
+        {
+          "context": "identity",
+          "operation": 1,
+          "query_canonical_nmse": 0.007930902453100068,
+          "no_adapter_canonical_nmse": 0.007930902453100068
+        },
+        {
+          "context": "identity",
+          "operation": 2,
+          "query_canonical_nmse": 0.007659308434617654,
+          "no_adapter_canonical_nmse": 0.007659308434617654
+        },
+        {
+          "context": "identity",
+          "operation": 3,
+          "query_canonical_nmse": 0.009412156602850745,
+          "no_adapter_canonical_nmse": 0.009412156602850745
+        },
+        {
+          "context": "identity",
+          "operation": 4,
+          "query_canonical_nmse": 0.007225321448239661,
+          "no_adapter_canonical_nmse": 0.007225321448239661
+        },
+        {
+          "context": "identity",
+          "operation": 5,
+          "query_canonical_nmse": 0.008456829622668059,
+          "no_adapter_canonical_nmse": 0.008456829622668059
+        },
+        {
+          "context": "context_1",
+          "operation": 0,
+          "query_canonical_nmse": 0.009376315175789924,
+          "no_adapter_canonical_nmse": 0.02401712554813516
+        },
+        {
+          "context": "context_1",
+          "operation": 1,
+          "query_canonical_nmse": 0.007969505926005349,
+          "no_adapter_canonical_nmse": 0.02334770195935614
+        },
+        {
+          "context": "context_1",
+          "operation": 2,
+          "query_canonical_nmse": 0.007611080007834125,
+          "no_adapter_canonical_nmse": 0.021534439388805077
+        },
+        {
+          "context": "context_1",
+          "operation": 3,
+          "query_canonical_nmse": 0.009478677490470372,
+          "no_adapter_canonical_nmse": 0.024441573935204658
+        },
+        {
+          "context": "context_1",
+          "operation": 4,
+          "query_canonical_nmse": 0.007181162129279898,
+          "no_adapter_canonical_nmse": 0.021709158964577403
+        },
+        {
+          "context": "context_1",
+          "operation": 5,
+          "query_canonical_nmse": 0.008331575832486974,
+          "no_adapter_canonical_nmse": 0.022664982772543495
+        },
+        {
+          "context": "context_2",
+          "operation": 0,
+          "query_canonical_nmse": 0.009376336913927827,
+          "no_adapter_canonical_nmse": 0.019878506458579068
+        },
+        {
+          "context": "context_2",
+          "operation": 1,
+          "query_canonical_nmse": 0.007969511911985461,
+          "no_adapter_canonical_nmse": 0.01943379864517234
+        },
+        {
+          "context": "context_2",
+          "operation": 2,
+          "query_canonical_nmse": 0.007611066335562422,
+          "no_adapter_canonical_nmse": 0.01750953798901378
+        },
+        {
+          "context": "context_2",
+          "operation": 3,
+          "query_canonical_nmse": 0.009478686050689309,
+          "no_adapter_canonical_nmse": 0.020638883665461908
+        },
+        {
+          "context": "context_2",
+          "operation": 4,
+          "query_canonical_nmse": 0.007181161092872328,
+          "no_adapter_canonical_nmse": 0.018330199973915124
+        },
+        {
+          "context": "context_2",
+          "operation": 5,
+          "query_canonical_nmse": 0.008331572310746094,
+          "no_adapter_canonical_nmse": 0.018535621678007375
+        }
+      ],
+      "INDEPENDENT": [
+        {
+          "context": "context_1",
+          "operation": 0,
+          "query_canonical_nmse": 0.05916833634672688
+        },
+        {
+          "context": "context_1",
+          "operation": 1,
+          "query_canonical_nmse": 0.054324318564535526
+        },
+        {
+          "context": "context_1",
+          "operation": 2,
+          "query_canonical_nmse": 0.04644135652425304
+        },
+        {
+          "context": "context_1",
+          "operation": 3,
+          "query_canonical_nmse": 0.05700861562276818
+        },
+        {
+          "context": "context_1",
+          "operation": 4,
+          "query_canonical_nmse": 0.05083221286585066
+        },
+        {
+          "context": "context_1",
+          "operation": 5,
+          "query_canonical_nmse": 0.051885933936412804
+        },
+        {
+          "context": "context_2",
+          "operation": 0,
+          "query_canonical_nmse": 0.07350994400155277
+        },
+        {
+          "context": "context_2",
+          "operation": 1,
+          "query_canonical_nmse": 0.09914027194109672
+        },
+        {
+          "context": "context_2",
+          "operation": 2,
+          "query_canonical_nmse": 0.06728739188494492
+        },
+        {
+          "context": "context_2",
+          "operation": 3,
+          "query_canonical_nmse": 0.1019203283397453
+        },
+        {
+          "context": "context_2",
+          "operation": 4,
+          "query_canonical_nmse": 0.09946330277076519
+        },
+        {
+          "context": "context_2",
+          "operation": 5,
+          "query_canonical_nmse": 0.07754056956391978
+        }
+      ]
+    },
+    "arms_present": [
+      "SHARED_CORE_ADAPTER",
+      "SHARED_NO_ADAPTER",
+      "ORACLE_CORE_ADAPTER",
+      "RANDOM_CORE_ADAPTER",
+      "INDEPENDENT"
+    ],
+    "oracle_anchor_present": true,
+    "independent_control_present": true,
+    "random_core_control_present": true,
+    "true_angles_hidden_from_learner": true,
+    "query_used_for_fit": false,
+    "core_changed_after_context2": false,
+    "learned_angles": [
+      0.34142342990470026,
+      -0.37983176119579537,
+      0.1963690984550827,
+      -0.39661758916690626
+    ],
+    "context2_angles": [
+      0.6040530171472182,
+      -0.14599721662648887,
+      0.22571972871631776,
+      -0.073122633995221
+    ],
+    "loss_start": 0.005167749883951465,
+    "loss_end": 1.7243610289629037e-06,
+    "economic_value_measured": false,
+    "oracle_core": true,
+    "non_vacuity_pass": true,
+    "reconstruction_pass": false,
+    "paired_cost_pass": false,
+    "seconds": 10.99729989998741
+  }
+}
