@@ -4974,3 +4974,13 @@ than as a one-off miss.
   supplied, not joint discovery, closure, or economics. The first output had
   a coordinate-frame bug and is withdrawn; the oracle control caught it before
   interpretation. The corrected r3 record is in reports/.
+
+- H28-C LEARNER OPPORTUNITY CHECK (provisional, 2026-09-14). Removing the
+  supplied core and fitting six canonical operators plus a tied four-angle
+  adapter produced mean query NMSE about 3.05e-5 on identity, 3.06e-5 on
+  context 1, and 3.09e-5 on held-out context 2; no-adapter means were about
+  3.05e-5, 1.57e-2, and 1.19e-2. This is only a harness check: oracle,
+  independent, and random-core controls and all economic endpoints are absent.
+  A coordinate-frame bug was caught and fixed before the corrected run was
+  interpreted. Do not call this an H28 learner result until the missing arms,
+  reconstruction, non-vacuity, paired-cost, and restart gates pass.

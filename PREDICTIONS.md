@@ -8321,6 +8321,13 @@ learned-probe calibration nor a scored neural-learning prediction. CL1's
 trained-probe requirement remains untested; CL2's empirical ROW sensitivity
 remains unmeasured. CL3-CL8 retain their untested/deferred statuses.
 
+H28-C learner opportunity remains unclassified. A development-only harness
+showed that a learned six-operator core plus a restricted context-shared
+adapter can fit the current fixture, but it omitted the registered oracle,
+independent, and random-core controls and measured no economic value. The
+observed improvement over no adapter is therefore an instrument check, not a
+prediction test or H28 verdict.
+
 A metadata census of six explicitly selected development-world-0 terminal
 directories found no history.pt or promotion_snapshots.npz there. It does not
 establish the absence of all historical checkpoints or all coarse interfaces.

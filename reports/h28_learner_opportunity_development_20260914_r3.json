@@ -1,0 +1,166 @@
+{
+  "status": "PROVISIONAL_DEVELOPMENT_CHECK",
+  "accepted_scientific_result": false,
+  "git_commit": "bbf4d21be94747bfb27fd016061712f0c1632ed3",
+  "input_sha256": {
+    "H28_C_LEARNER_OPPORTUNITY_PLAN.md": "10debe42f5242488f6c78caf21c6e9ac601004ed517c35cb6ff19870810d6e2a",
+    "tools/h28_learner_opportunity.py": "b5e8d04bc7c65bbe75ad9300c60e092b575d29f28a344ce5608c3867a752f60b",
+    "src/row/world.py": "971601d343afeb3ca9143a380b25ad9bc9097ae03355d7bf4abe51c05ab09573"
+  },
+  "dirty_status": [
+    " M H28_C_LEARNER_OPPORTUNITY_PLAN.md",
+    " M PREDICTIONS.md",
+    " M PROGRESS.md",
+    " M notes/learnings.txt",
+    "?? reports/h28_learner_opportunity_development_20260914.json",
+    "?? reports/h28_learner_opportunity_development_20260914.md",
+    "?? reports/h28_learner_opportunity_development_20260914_r2.json",
+    "?? reports/h28_learner_opportunity_smoke_20260914.json",
+    "?? reports/h28_learner_opportunity_smoke_20260914_r2.json",
+    "?? reports/so2_online_gate.json",
+    "?? tests/test_h28_learner_opportunity.py",
+    "?? tools/h28_learner_opportunity.py"
+  ],
+  "result": {
+    "version": "h28-c-learner-opportunity-v0",
+    "smoke": false,
+    "steps": 600,
+    "rows": [
+      {
+        "context": "identity",
+        "operation": 0,
+        "query_canonical_nmse": 1.2843664641003576e-08,
+        "no_adapter_canonical_nmse": 1.2843664641003576e-08
+      },
+      {
+        "context": "identity",
+        "operation": 1,
+        "query_canonical_nmse": 4.28998849849638e-09,
+        "no_adapter_canonical_nmse": 4.28998849849638e-09
+      },
+      {
+        "context": "identity",
+        "operation": 2,
+        "query_canonical_nmse": 7.087318163469013e-06,
+        "no_adapter_canonical_nmse": 7.087318163469013e-06
+      },
+      {
+        "context": "identity",
+        "operation": 3,
+        "query_canonical_nmse": 0.00013557478122159917,
+        "no_adapter_canonical_nmse": 0.00013557478122159917
+      },
+      {
+        "context": "identity",
+        "operation": 4,
+        "query_canonical_nmse": 7.766692367762289e-09,
+        "no_adapter_canonical_nmse": 7.766692367762289e-09
+      },
+      {
+        "context": "identity",
+        "operation": 5,
+        "query_canonical_nmse": 4.046149858127059e-05,
+        "no_adapter_canonical_nmse": 4.046149858127059e-05
+      },
+      {
+        "context": "context_1",
+        "operation": 0,
+        "query_canonical_nmse": 4.859905464447868e-08,
+        "no_adapter_canonical_nmse": 0.015123944140881215
+      },
+      {
+        "context": "context_1",
+        "operation": 1,
+        "query_canonical_nmse": 3.844294707556631e-08,
+        "no_adapter_canonical_nmse": 0.015843379716165697
+      },
+      {
+        "context": "context_1",
+        "operation": 2,
+        "query_canonical_nmse": 7.117103007511149e-06,
+        "no_adapter_canonical_nmse": 0.016147679057822655
+      },
+      {
+        "context": "context_1",
+        "operation": 3,
+        "query_canonical_nmse": 0.0001355093861249024,
+        "no_adapter_canonical_nmse": 0.015829656816926514
+      },
+      {
+        "context": "context_1",
+        "operation": 4,
+        "query_canonical_nmse": 4.4930776234144605e-08,
+        "no_adapter_canonical_nmse": 0.01561186130618515
+      },
+      {
+        "context": "context_1",
+        "operation": 5,
+        "query_canonical_nmse": 4.059202753643945e-05,
+        "no_adapter_canonical_nmse": 0.015903718836827247
+      },
+      {
+        "context": "context_2",
+        "operation": 0,
+        "query_canonical_nmse": 5.152691434185233e-07,
+        "no_adapter_canonical_nmse": 0.011797128980200914
+      },
+      {
+        "context": "context_2",
+        "operation": 1,
+        "query_canonical_nmse": 4.938132298560988e-07,
+        "no_adapter_canonical_nmse": 0.011654405613289835
+      },
+      {
+        "context": "context_2",
+        "operation": 2,
+        "query_canonical_nmse": 7.4962216886471105e-06,
+        "no_adapter_canonical_nmse": 0.011824033932257508
+      },
+      {
+        "context": "context_2",
+        "operation": 3,
+        "query_canonical_nmse": 0.00013562196192353138,
+        "no_adapter_canonical_nmse": 0.01238876919568052
+      },
+      {
+        "context": "context_2",
+        "operation": 4,
+        "query_canonical_nmse": 4.905086769811135e-07,
+        "no_adapter_canonical_nmse": 0.012395453658292664
+      },
+      {
+        "context": "context_2",
+        "operation": 5,
+        "query_canonical_nmse": 4.048370981163976e-05,
+        "no_adapter_canonical_nmse": 0.011390386584577108
+      }
+    ],
+    "arms_present": [
+      "SHARED_CORE_ADAPTER",
+      "SHARED_NO_ADAPTER"
+    ],
+    "oracle_anchor_present": false,
+    "independent_control_present": false,
+    "random_core_control_present": false,
+    "true_angles_hidden_from_learner": true,
+    "query_used_for_fit": false,
+    "core_changed_after_context2": false,
+    "learned_angles": [
+      0.34142342990470026,
+      -0.37983176119579537,
+      0.1963690984550827,
+      -0.39661758916690626
+    ],
+    "context2_angles": [
+      0.6040530171472182,
+      -0.14599721662648887,
+      0.22571972871631776,
+      -0.073122633995221
+    ],
+    "loss_start": 0.005167749883951465,
+    "loss_end": 1.7243610289629037e-06,
+    "economic_value_measured": false,
+    "oracle_core": false,
+    "seconds": 7.467872700013686
+  }
+}

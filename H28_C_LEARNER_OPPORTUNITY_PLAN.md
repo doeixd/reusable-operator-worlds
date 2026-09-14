@@ -1,6 +1,6 @@
 # H28-C learner/core opportunity gate
 
-Status: DRAFT, NOT LAUNCHED, 2026-09-14. This follows the provisional oracle-core
+Status: DRAFT, DEVELOPMENT CHECK RUN, NOT FROZEN, 2026-09-14. This follows the provisional oracle-core
 adapter result but is not frozen. It asks whether a shared core and coordinate
 interface can be learned together. It is a Tier 1 development study, not a
 confirmatory H28 result, and uses no sealed seeds.
@@ -23,12 +23,13 @@ support/query arrays. Context angles remain hidden from learned arms. The
 operation identity is supplied; primitive weights and routes are not.
 
 Each context has 64 support examples and 128 query examples per operation. Train
-on identity and context 1, operations 0–3. Fit context 1 jointly with the shared
-core. Hold context 2 out of core fitting; freeze the learned core and infer only
-its adapter from 16 fresh support examples per operation, then score all six
-operations on 128 fresh queries. Operations 4–5 are withheld from core fitting
-in contexts 0/1. Query labels never select initialization, optimizer, stopping,
-or adapter family.
+the six core operators on identity-context examples for operations 0–5. Fit the
+context-1 adapter jointly with that core using operations 0–3 only; operations
+4–5 are withheld from adapter fitting but their core operators were learned in
+identity coordinates. Hold context 2 out of core and context-1 adapter fitting;
+freeze the learned core and infer only its adapter from 16 fresh support
+examples per operation, then score all six operations on 128 fresh queries.
+Query labels never select initialization, optimizer, stopping, or adapter family.
 
 Identity's adapter is fixed. Context adapters are tied across all operations and
 restricted to four-angle Givens matrices. The identity-context core is the fixed

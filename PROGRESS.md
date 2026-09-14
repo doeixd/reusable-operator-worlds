@@ -5280,3 +5280,17 @@ cross held-out operations with a held-out context, and include independent,
 shared-no-adapter, random-core, and oracle-core controls. No learner run has
 started. It requires its own frozen plan, clean commit, scorer, restart test,
 and SO2 resume/HEAD coordination.
+
+# H28-C learner opportunity development check (2026-09-14)
+
+The corrected learner harness was run once on the development fixture. It
+learned six identity-context cores, fitted a restricted shared adapter for
+context 1, froze the core, and fitted a context-2 adapter from fresh support.
+Mean query NMSE was about `3.05e-5`, `3.06e-5`, and `3.09e-5` for identity,
+context 1, and context 2, versus `3.05e-5`, `1.57e-2`, and `1.19e-2` with no
+adapter. This is only a provisional implementation check: oracle,
+independent, and random-core controls are absent, and no economic endpoint was
+measured. It cannot classify the opportunity under the drafted plan. The
+corrected output and limits are recorded in
+`reports/h28_learner_opportunity_development_20260914.md`; the earlier
+coordinate-frame output was withdrawn before interpretation.
