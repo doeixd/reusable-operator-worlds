@@ -402,6 +402,8 @@ J1 result (2026-09-11, appended): `J1_FAILS`. Search-in-the-loop locks into the 
 
 J1c result (2026-09-12, appended): **`J1C_ACQUIRES`**. The length curriculum (1 -> 2 -> 3, library-only transfer, learned soft routes, no oracle) acquires the rotated substrate in 3/3 worlds (0.0062 / 0.0051 / 0.0072) against 0.92-0.96 non-staged at matched budget and ~1.0 for a library-reset control; 5-6 of 6 stage-1 pairings persist. World 0 passes here while failing with oracle routes (0.624), so an oracle arm bounds only formation under its own assignment. Next, under a NEW frozen plan only: audit the staged libraries with the SO1R/J0 instruments, charge the curriculum's full cost, and design the B2 SO2 online protocol around staged formation. SO2 and control flow remain closed until that plan passes.
 
+J1c-R result (2026-09-12, appended): `REPLICATES` at learner seed 3001 (0.0047 / 0.0060 / 0.0049 staged against 0.916 / 0.944 / 0.974 non-staged at the same seed). Staged formation is initialization-robust on development worlds, so the successor plans may proceed under their own frozen plans.
+
 Revised ordering for B1b: J0 (census, minutes) -> a Tier-1 exploratory
 single-operator co-formation probe (one world, reduced budget; can co-formation
 succeed at all when routing is only clustering?) -> J1 and J1c as competing,

@@ -5048,3 +5048,34 @@ Report reports/j1c_curriculum.json; logs reports/j1c_curriculum_20260912.
 Per the plan's registered consequence, an SO2 online protocol built around
 staged formation may now be PLANNED under a new frozen plan; SO2 is not run
 here and control flow stays closed.
+
+# J1c-R: staged formation REPLICATES at a second initialization (2026-09-12)
+
+J1CR_REPLICATION_PLAN.md frozen at 9d62cc7 (protected 45b62c8); runner,
+independent scorer and tests committed together before launch at 765ac06; run
+12:19-14:0x UTC in one process, exit 0; restart test passed. The J1c module was
+reused unchanged apart from an optional `model_seed` (default 5000, so J1c's
+completed path and its bitwise `offline_cell` test are untouched). Independent
+scorer re-scored every saved model, rebuilt the library-transfer chain and
+verified the seed: REPLICATES, harness true, no problems. check_prereg and
+check_invalid pass.
+
+| world | STAGED-R (seed 3001) | tasks < 0.05 | NON-STAGED-R (seed 3001) | STAGED (seed 5000, J1c) | ratio to J1c |
+|---|---|---|---|---|---|
+| 0 | 0.0047 | 61/64 | 0.916 | 0.0062 | 0.76 |
+| 1 | 0.0060 | 63/64 | 0.944 | 0.0051 | 1.16 |
+| 2 | 0.0049 | 63/64 | 0.974 | 0.0072 | 0.68 |
+
+(median query NMSE on the canonical length-3 world; threshold 0.05)
+
+Per-world CF6 survival at seed 3001: 6/6, 5/6, 5/6 stage-1 operation-to-slot
+pairings still carry stage-3 traffic; stage-3 slot-operation ARI 0.93-0.99 per
+position, against 0.00-0.05 for the non-staged control. All five registered
+predictions came out as registered, including the deliberately uncertain one
+(every staged median within a factor of 4 of its J1c counterpart: observed
+0.68-1.16).
+
+Staged formation is therefore not an artifact of one initialization: at two
+seeds, in three development worlds, the curriculum reaches 0.005-0.007 where
+the same learner on length-3 tasks alone at the same budget reaches 0.92-0.97.
+Report reports/j1cr_replication.json; logs reports/j1cr_replication_20260912.

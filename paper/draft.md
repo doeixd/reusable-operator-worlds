@@ -1524,3 +1524,15 @@ is extended, not rebuilt. Notably the one world that fails even with oracle
 routes (0.624) passes under the curriculum, so a fixed oracle assignment
 bounds only formation under that assignment. The claim is offline and
 development-only; the online protocol remains untested.
+
+# Development result: staged formation replicates (J1c-R, 2026-09-12)
+
+The length-curriculum result was repeated at a second learner initialization
+(seed 3001) with a matched non-staged control at the same seed. Staged
+formation reached median query NMSE 0.0047 / 0.0060 / 0.0049 on development
+worlds 0 / 1 / 2, within a factor of 1.2 of the first initialization, while
+the non-staged control reached 0.916 / 0.944 / 0.974 and solved no task below
+threshold. Five to six of the six operation-to-slot pairings formed in the
+first stage again carried the final stage's traffic. The effect is therefore
+not an artifact of one initialization, though it remains offline and
+development-scale.

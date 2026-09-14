@@ -8208,3 +8208,34 @@ the curriculum (0.0062) while failing with oracle routes (0.624). A fixed
 oracle assignment is not an upper bound on what formation can reach, because
 the assignment itself can be a handicap. Any future use of an oracle-route arm
 as a ceiling must say so.
+
+# J1c-R outcome (2026-09-12): REPLICATES at seed 3001
+
+Registered in J1CR_REPLICATION_PLAN.md (9d62cc7) before any code.
+
+| world | STAGED-R (seed 3001) | tasks < 0.05 | NON-STAGED-R (seed 3001) | STAGED (seed 5000, J1c) | ratio to J1c |
+|---|---|---|---|---|---|
+| 0 | 0.0047 | 61/64 | 0.916 | 0.0062 | 0.76 |
+| 1 | 0.0060 | 63/64 | 0.944 | 0.0051 | 1.16 |
+| 2 | 0.0049 | 63/64 | 0.974 | 0.0072 | 0.68 |
+
+(median query NMSE on the canonical length-3 world; threshold 0.05)
+
+Scorekeeping (all five as registered):
+
+- REPLICATES (0.8): **CORRECT.**
+- STAGED-R passes 3/3 worlds (0.65): **CORRECT.**
+- NON-STAGED-R fails 3/3 (0.85): **CORRECT** (0.916-0.974, 0/64 tasks each).
+- >= 4/6 stage-1 pairings persist in >= 2/3 worlds (0.6): **CORRECT** (6/6,
+  5/6, 5/6).
+- Every staged median within a factor of 4 of its J1c counterpart (0.5):
+  **CORRECT** (0.68-1.16). This is the first measurement of the spread across
+  initializations for this effect, and it is small relative to the effect
+  (two orders of magnitude).
+
+J1c's `J1C_ACQUIRES` is therefore initialization-robust on development worlds.
+CF3 keeps its supported status with a second initialization behind it. The
+registered consequence applies: the successor plans (auditing the staged
+libraries with the SO1R/J0 instruments, charging the curriculum's full cost,
+and designing the B2/SO2 online protocol) may proceed, each under its own
+frozen plan. SO2 and control flow remain closed.

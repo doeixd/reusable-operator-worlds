@@ -4887,3 +4887,11 @@ than as a one-off miss.
   world. A long-standing "dissenting world" anomaly dissolved the moment the
   learner chose its own assignment. When an oracle arm is used as an upper
   bound, state that it bounds only formation UNDER THAT ASSIGNMENT.
+
+- STAGED FORMATION SURVIVES A SECOND INITIALIZATION (J1c-R, 2026-09-12). The
+  curriculum result reproduced at learner seed 3001 in all three development
+  worlds (0.0047-0.0060, ratios 0.68-1.16 against seed 5000), with its matched
+  non-staged control failing at 0.92-0.97 both times. The spread across
+  initializations is tiny next to the effect, so the two-seed development
+  result is a reasonable basis for designing the online rung - which is what
+  this project's standard asks for before a positive becomes load-bearing.
