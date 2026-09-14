@@ -4563,6 +4563,54 @@ representation before comparison; no audit code, output, estimand, threshold,
 or classification changed. The corrected independent scorer exits 0 and
 recomputes the registered `RF0B UNRESOLVED` decision.
 
+# SO2 pre-relaunch audit: terminal estimand fixed, pool and restart verified (2026-09-14)
+
+The first SO2 launch (`84b1e6c`) failed before writing any cell
+(`KeyError('nmse')`, fixed in `a31a397`). A relaunch was then refused because
+the tree was dirty. Its records are preserved in
+`reports/so2_failed_launch_20260914/`; the stage models are in
+`artifacts/so2_online_gate_failed_84b1e6c/`. Re-reading the code against the
+plan and Amendments 1-2 before relaunch found:
+
+- **Construct error (fixed).**
+  - The runner classified `M_terminal` on END-OF-TASK error (the summary's
+    per-task `curve[max(curve)]`). The plan, B2, J1c and the committed scorer
+    all mean the TERMINAL model.
+  - The runner now uses G5R Stage D's `score` and reports end-of-task error
+    beside it. Stage D's last-task anchor (1e-6) is now a HARNESS_FAILED guard
+    in runner and scorer; it reads 0.0 on all three saved stages.
+  - Disclosed: failed-launch STAGED_w1 showed terminal 0.1264 versus
+    end-of-task 0.0770 before this fix. The fix follows the frozen wording and
+    was not chosen by comparing against the threshold.
+- **Scorer defect (fixed).** Stage 2 and 3 models carry the lifetime's terminal
+  novel-probe code, so the scorer's strict reload raised. The scorer now
+  registers that code. The probe freezes the library, so no result changes.
+- **Margin confirmed as G5R's construction.** Both arms adapt through
+  `VariableDepthDiscrete`'s sequential rotated executor, at 146.5 s per
+  trained-arm adaptation.
+- **Performance pass.**
+  - Cells now run in a 3-worker process pool, longest first. Each worker writes
+    only its own cell, and `status.json` carries running cells and an ETA.
+  - Bitwise check: a pooled scale-16 PLAIN_w1 equals the same cell run in
+    process (seconds excluded).
+  - Measured per held-out program: 146.5 s trained arm, 390.7 s scratch arm
+    (the sequential executor trains the whole library). The 64-program export
+    diagnostic takes 3.0 s. That is about 107 min of margin per cell and about
+    11.5 h sequential, falling to about 4 h with 3 workers.
+  - Disclosed: that timing ran on the failed launch's STAGED_w1 model, which
+    the relaunch will probably rebuild exactly. One program's adaptation NMSE
+    (trained 0.152, scratch 1.591) and the diagnostic (5/64 below 0.05) were
+    therefore seen before launch. No construction, threshold or decision
+    depends on them.
+- **Restart path.**
+  - The new `--smoke` mode was interrupted after PLAIN_w1 saved, then
+    relaunched.
+  - The relaunch logged RESUME, reused PLAIN_w1 byte-identically (same file
+    hash), and restarted STAGED_w1 from initialization.
+- Tests: 5 SO2 tests pass, including a new anchor-failure case.
+
+No SO2 result exists yet.
+
 All 228 tests passed in 26.99 seconds after the scorer correction;
 `check_prereg.py`, `check_invalid.py`, and `git diff --check` pass. The result
 does not open the label-free canonicalizer successor. The next decision should

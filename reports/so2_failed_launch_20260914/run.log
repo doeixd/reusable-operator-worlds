@@ -1,0 +1,14 @@
+2026-09-14T15:13:54.828909+00:00 LAUNCH SO2-online-gate-v1 at 84b1e6c pid 50584
+2026-09-14T15:13:54.935101+00:00 [STAGED_w1] start
+2026-09-14T15:27:44.251063+00:00 FAILED: KeyError('nmse')
+Traceback (most recent call last):
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_so2_online_gate.py", line 249, in main
+    result = run_arm(arm, w, artifact=cell_dir)
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_so2_online_gate.py", line 170, in run_arm
+    result["margin"] = export_margin(cfg, world, model, world_seed)
+                       ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_so2_online_gate.py", line 117, in export_margin
+    trained_values.append(trained["nmse"])
+                          ~~~~~~~^^^^^^^^
+KeyError: 'nmse'
+

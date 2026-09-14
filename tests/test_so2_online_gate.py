@@ -10,10 +10,11 @@ from row.rotated_world import generate_rotated_world
 
 
 def cell(arm, median, margin, carry=("sha1", "sha2")):
-    stages = {"3": {"library_sha256": "sha3", "library_sha256_at_start": carry[1] if arm == "STAGED" else None}}
+    stages = {"3": {"library_sha256": "sha3", "library_sha256_at_start": carry[1] if arm == "STAGED" else None,
+                    "anchor_abs_error": 0.0}}
     if arm == "STAGED":
-        stages |= {"1": {"library_sha256": "sha1", "library_sha256_at_start": None},
-                   "2": {"library_sha256": "sha2", "library_sha256_at_start": carry[0]}}
+        stages |= {"1": {"library_sha256": "sha1", "library_sha256_at_start": None, "anchor_abs_error": 0.0},
+                   "2": {"library_sha256": "sha2", "library_sha256_at_start": carry[0], "anchor_abs_error": 0.0}}
     return {"arm": arm, "model_seed": so2.MODEL_SEED, "terminal_median": median,
             "stages": stages, "margin": {"margin": margin}}
 
@@ -53,6 +54,10 @@ class SO2Tests(unittest.TestCase):
         leaky = cells((0.01, 0.01, 0.01), (1.0, 1.0, 1.0))
         leaky["PLAIN_w1"]["stages"]["3"]["library_sha256_at_start"] = "sha2"
         self.assertEqual(so2.classify(leaky), "HARNESS_FAILED")
+        # Terminal and end-of-task error must agree on the last task, which nothing trains after.
+        drifted = cells((0.01, 0.01, 0.01), (1.0, 1.0, 1.0))
+        drifted["STAGED_w2"]["stages"]["2"]["anchor_abs_error"] = 1e-3
+        self.assertEqual(so2.classify(drifted), "HARNESS_FAILED")
 
     def test_stage_worlds_are_the_registered_ones(self):
         lengths, counts = [], []

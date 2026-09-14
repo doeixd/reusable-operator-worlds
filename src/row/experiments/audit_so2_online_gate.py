@@ -24,8 +24,10 @@ import subprocess
 import sys
 import time
 import traceback
+from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, wait
 from dataclasses import replace
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import torch
@@ -37,6 +39,7 @@ from row.experiments.audit_j1c_curriculum import library_sha, stage_setup
 from row.experiments.audit_j2a_staged_library import enum_route, held_out_tasks, query_error
 from row.experiments.audit_rotated_g5 import held_out_programs
 from row.experiments.audit_rotated_g5r import _final_nmse
+from row.experiments.audit_rotated_g5r_interference import ANCHOR_TOLERANCE, _last_task_end_of_task, score
 from row.experiments.audit_rotated_g5r_diagnosis import require_clean_code
 from row.experiments.audit_so1_budget_bracket import build_fast
 from row.experiments.audit_so1r_route_only import FrozenLibrary
@@ -60,6 +63,9 @@ MARGIN = 0.75
 HELD_OUT = 12  # G5R's count, with G5R's draw
 MARGIN_SEED = 1500
 STAGES = (1, 2, 3)
+# Memory-bounded pool (AGENTS.md: 3-4 for slots=12 lifetimes). Cells are independent
+# single-threaded computations from fixed seeds, so the pool changes scheduling only.
+WORKERS = 3
 
 
 def protocol() -> dict:
@@ -70,6 +76,8 @@ def protocol() -> dict:
                                    "adapt_cell(ADAPT_STEPS), scratch_model(cfg, 'rotated_discrete', 7717), "
                                    "log(geo scratch) - log(geo trained)",
             "stages": "60 length-1, 64 length-2, 64 canonical length-3; library-only transfer",
+            "terminal": "M_terminal is the TERMINAL model's median query NMSE (G5R Stage D `score`), with "
+                        "end-of-task median reported beside it and a last-task anchor at ANCHOR_TOLERANCE",
             "input_sha256": {p.as_posix(): digest(p) for p in (PLAN, AMENDMENT)},
             "environment": environment()}
 
@@ -151,10 +159,22 @@ def run_arm(arm: str, world_seed: int, artifact: Path | None = None, scale: int 
             carried = library_sha(model)
         output = (artifact or ROOT / "scratch") / f"stage{stage}"
         summary, model, ran = lifetime(cfg, world, output, model=model, scale=scale)
+        # The plan's M_terminal is the TERMINAL model on every task the stage trained
+        # (research program B2, "terminal versus end-of-task error for online arms"),
+        # scored as G5R Stage D scores it. The summary's final_nmse is END-OF-TASK
+        # error, measured while the library was still moving; it is reported beside.
+        # Anchor: nothing trains after the last task, so its terminal and end-of-task
+        # errors must agree (the terminal probe only fits its own code).
+        trained = SimpleNamespace(tasks=[t for t in world.tasks if t.task_id in model.task_codes])
+        terminal = score(model, trained)
+        last_id, last_end, end_of_task_median = _last_task_end_of_task(output)
         records[str(stage)] = {
             "length": ran.discrete_model.task_steps, "tasks": ran.world.tasks,
             "novel_probe_available": summary.get("novel_composition", {}).get("available", True),
-            "final_nmse_median": _final_nmse(summary),
+            "terminal_median": terminal["median"], "terminal_below_threshold": terminal["below_0.05"],
+            "terminal_per_task": terminal["per_task"],
+            "final_nmse_median": _final_nmse(summary), "end_of_task_median": end_of_task_median,
+            "anchor_task_id": last_id, "anchor_abs_error": abs(terminal["per_task"][last_id] - last_end),
             "cumulative_prequential_gaussian_log_loss": summary.get("cumulative_prequential_gaussian_log_loss"),
             "online_examples": ran.world.tasks * ran.world.examples_per_task,
             "library_sha256": library_sha(model), "library_sha256_at_start": carried,
@@ -163,7 +183,8 @@ def run_arm(arm: str, world_seed: int, artifact: Path | None = None, scale: int 
             save_model(output, model, ran)
     cfg, world, _, _ = stage_setup(world_seed, 3, MODEL_SEED)
     result = {"arm": arm, "world": world_seed, "model_seed": MODEL_SEED, "stages": records,
-              "terminal_median": records["3"]["final_nmse_median"],
+              "terminal_median": records["3"]["terminal_median"],
+              "end_of_task_median": records["3"]["end_of_task_median"],
               "prequential_total": sum(r["cumulative_prequential_gaussian_log_loss"] or 0.0
                                        for r in records.values()),
               "online_examples_total": sum(r["online_examples"] for r in records.values()),
@@ -174,12 +195,23 @@ def run_arm(arm: str, world_seed: int, artifact: Path | None = None, scale: int 
     return result
 
 
+def run_cell(arm: str, world_seed: int, stamp: dict, root: Path = ROOT, scale: int = 1) -> dict:
+    """Pool worker: one cell, written durably by this worker alone, then returned."""
+    cell_dir = root / "cells" / f"{arm}_w{world_seed}"
+    result = run_arm(arm, world_seed, artifact=cell_dir, scale=scale)
+    atomic_json(cell_dir / "result.json", {"stamp": stamp, "result": result, "result_sha256": fingerprint(result),
+                                           "finished_utc": now()})
+    return result
+
+
 def classify(cells: dict) -> str:
     expected = {f"{a}_w{w}" for a in ("STAGED", "PLAIN") for w in WORLDS}
     if not expected <= set(cells):
         return "HARNESS_FAILED"
     for name, cell in cells.items():
         if cell["model_seed"] != MODEL_SEED or not math.isfinite(cell["terminal_median"]):
+            return "HARNESS_FAILED"
+        if any(not s["anchor_abs_error"] <= ANCHOR_TOLERANCE for s in cell["stages"].values()):
             return "HARNESS_FAILED"
         if name.startswith("STAGED"):
             for stage in ("2", "3"):
@@ -200,6 +232,9 @@ def classify(cells: dict) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--dry-run", action="store_true", help="world 1, reduced tasks/examples, no margin")
+    parser.add_argument("--smoke", action="store_true",
+                        help="restart-path test of this launcher: world 1, both arms, scale 16, no margin, "
+                             "separate root, no classification; never a result")
     args = parser.parse_args()
     if args.dry_run:
         for arm in ("STAGED", "PLAIN"):
@@ -210,17 +245,24 @@ def main() -> int:
                   f"{time.perf_counter() - started:.1f}s")
         return 0
 
-    for tool in ("tools/check_prereg.py", "tools/check_invalid.py"):
-        if subprocess.run([sys.executable, tool]).returncode != 0:
-            raise SystemExit(f"{tool} failed")
-    require_clean_code(OUTPUT)
-    expected = protocol()
+    root, output, scale, workers = ROOT, OUTPUT, 1, WORKERS
+    jobs = [(arm, w) for arm in ("STAGED", "PLAIN") for w in (1, 2, 0)]  # longest (STAGED) first
+    if args.smoke:
+        root, scale, workers = Path("artifacts/so2_online_gate_smoke"), 16, 2
+        output, jobs = root / "report.json", [("STAGED", 1), ("PLAIN", 1)]
+    else:
+        for tool in ("tools/check_prereg.py", "tools/check_invalid.py"):
+            if subprocess.run([sys.executable, tool]).returncode != 0:
+                raise SystemExit(f"{tool} failed")
+        require_clean_code(OUTPUT)
+    expected = protocol() | ({"smoke": {"scale": scale, "jobs": jobs}} if args.smoke else {})
     sha = fingerprint(expected)
-    run_log, status_path = ROOT / "run.log", ROOT / "status.json"
-    ROOT.mkdir(parents=True, exist_ok=True)
-    with writer_lock(ROOT / "launcher.lock"):
-        if OUTPUT.exists():
-            out = json.loads(OUTPUT.read_text())
+    run_log, status_path = root / "run.log", root / "status.json"
+    root.mkdir(parents=True, exist_ok=True)
+    atomic_json(root / "run.pid", {"pid": os.getpid(), "started_utc": now()})
+    with writer_lock(root / "launcher.lock"):
+        if output.exists():
+            out = json.loads(output.read_text())
             if out.get("protocol_sha256") != sha or out.get("git_commit") != git_commit():
                 raise SystemExit("existing report has a different protocol or commit; preserve it first")
             if out.get("complete"):
@@ -229,46 +271,72 @@ def main() -> int:
         else:
             out = {"frozen_plan": PLAN.as_posix(), "git_commit": git_commit(), "protocol": expected,
                    "protocol_sha256": sha, "started_utc": now(), "cells": {}, "complete": False}
-            log_line(run_log, f"LAUNCH {PROTOCOL_ID} at {git_commit()} pid {os.getpid()}")
-        atomic_json(OUTPUT, out)
-        jobs = [(arm, w) for arm in ("STAGED", "PLAIN") for w in (1, 2, 0)]
+            log_line(run_log, f"LAUNCH {PROTOCOL_ID}{' SMOKE' if args.smoke else ''} at {git_commit()} "
+                              f"pid {os.getpid()} workers {workers}")
+        atomic_json(output, out)
+        commit = git_commit()
         try:
-            for done, (arm, w) in enumerate(jobs):
+            pending, started_at = {}, time.time()
+            for arm, w in jobs:
                 name = f"{arm}_w{w}"
-                cell_dir = ROOT / "cells" / name
-                path = cell_dir / "result.json"
-                stamp = {"arm": arm, "world": w, "git_commit": git_commit(), "protocol_sha256": sha}
-                atomic_json(status_path, {"state": "running", "pid": os.getpid(), "cells_done": done,
-                                          "cells_total": len(jobs), "current": name, "updated_utc": now()})
+                path = root / "cells" / name / "result.json"
+                stamp = {"arm": arm, "world": w, "git_commit": commit, "protocol_sha256": sha}
                 if path.exists():
                     stored = json.loads(path.read_text())
                     if stored["stamp"] != stamp or stored["result_sha256"] != fingerprint(stored["result"]):
                         raise SystemExit(f"durable cell mismatch: {path}")
-                    result = stored["result"]
+                    out["cells"][name] = stored["result"]
                     log_line(run_log, f"[{name}] reused validated durable cell")
                 else:
+                    pending[name] = (arm, w, stamp)
+            atomic_json(output, out)
+            fresh_total = len(pending)
+
+            def write_status() -> None:
+                finished = fresh_total - len(pending) - len(running)  # cells finished in this launch
+                elapsed = time.time() - started_at
+                eta = elapsed / finished * (len(pending) + len(running)) if finished else None
+                atomic_json(status_path, {"state": "running", "pid": os.getpid(), "git_commit": commit,
+                                          "started_utc": out["started_utc"], "cells_done": len(out["cells"]),
+                                          "cells_total": len(jobs), "running": sorted(running.values()),
+                                          "eta_seconds": None if eta is None else round(eta), "updated_utc": now()})
+
+            # One writer per cell: each worker writes only its own cell directory and
+            # result.json; this parent alone writes the report, status and log.
+            running = {}
+            with ProcessPoolExecutor(max_workers=workers) as pool:
+                for name, (arm, w, stamp) in list(pending.items()):
+                    running[pool.submit(run_cell, arm, w, stamp, root, scale)] = name
                     log_line(run_log, f"[{name}] start")
-                    result = run_arm(arm, w, artifact=cell_dir)
-                    atomic_json(path, {"stamp": stamp, "result": result, "result_sha256": fingerprint(result),
-                                       "finished_utc": now()})
-                out["cells"][name] = result
-                atomic_json(OUTPUT, out)
-                log_line(run_log, f"[{name}] saved: terminal {result['terminal_median']:.4f} margin "
-                                  f"{result['margin']['margin']:+.2f} export "
-                                  f"{result['export_diagnostic']['below_threshold']}/64 prequential "
-                                  f"{result['prequential_total']:.0f} ({result['seconds']}s)")
-            out["classification"] = classify(out["cells"])
+                pending.clear()
+                write_status()
+                remaining = set(running)
+                while remaining:
+                    done_now, remaining = wait(remaining, return_when=FIRST_COMPLETED)
+                    for future in done_now:
+                        name = running.pop(future)
+                        result = future.result()  # a failed cell raises here and fails the launch
+                        out["cells"][name] = result
+                        atomic_json(output, out)
+                        margin = (f"margin {result['margin']['margin']:+.2f} export "
+                                  f"{result['export_diagnostic']['below_threshold']}/64 "
+                                  if "margin" in result else "")
+                        log_line(run_log, f"[{name}] saved: terminal {result['terminal_median']:.4f} end-of-task "
+                                          f"{result['end_of_task_median']:.4f} {margin}prequential "
+                                          f"{result['prequential_total']:.0f} ({result['seconds']}s)")
+                        write_status()
+            out["classification"] = "SMOKE (not a result)" if args.smoke else classify(out["cells"])
             out["complete"] = True
             out["finished_utc"] = now()
-            atomic_json(OUTPUT, out)
+            atomic_json(output, out)
             atomic_json(status_path, {"state": "complete", "classification": out["classification"],
                                       "cells_done": len(jobs), "cells_total": len(jobs), "updated_utc": now()})
             log_line(run_log, f"COMPLETE classification {out['classification']}")
-            atomic_json(ROOT / "exit.json", {"git_commit": git_commit(), "exit_code": 0, "finished_utc": now()})
+            atomic_json(root / "exit.json", {"git_commit": git_commit(), "exit_code": 0, "finished_utc": now()})
         except BaseException as error:
             log_line(run_log, f"FAILED: {error!r}\n{traceback.format_exc()}")
             atomic_json(status_path, {"state": f"failed: {error!r}", "updated_utc": now()})
-            atomic_json(ROOT / "exit.json", {"git_commit": git_commit(), "exit_code": 1, "finished_utc": now()})
+            atomic_json(root / "exit.json", {"git_commit": git_commit(), "exit_code": 1, "finished_utc": now()})
             raise
     return 0
 

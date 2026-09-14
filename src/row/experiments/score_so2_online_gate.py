@@ -19,8 +19,6 @@ import torch
 
 from row.experiments.audit_j1c_curriculum import stage_setup
 from row.experiments.audit_so1_budget_bracket import build_fast
-from row.experiments.so1_storage import restore_model
-
 REPORT = Path("reports/so2_online_gate.json")
 CELLS = Path("artifacts/so2_online_gate/cells")
 WORLDS = (0, 1, 2)
@@ -39,6 +37,28 @@ def geo(values) -> float:
     return math.exp(sum(math.log(max(v, 1e-12)) for v in values) / len(values))
 
 
+def restore_stage(path: Path, cfg, world, probe_available: bool):
+    """Rebuild a saved stage model with ALL of its state.
+
+    The lifetime's terminal novel-composition probe (a diagnostic run after the
+    terminal metrics, training only its own code) leaves
+    `task_novel_composition_0` in the model wherever an unseen program exists.
+    A strict load must register that code too, or the saved stage-3 model
+    cannot be reconstructed.
+    """
+    model = build_fast(cfg)
+    for task in world.tasks:
+        model.begin_task(task.task_id)
+    if probe_available:
+        model.begin_task("task_novel_composition_0")
+    model.load_state_dict(torch.load(path / "model.pt", weights_only=True), strict=True)
+    state = json.loads((path / "model_state.json").read_text())
+    if set(state["requires_grad"]) != set(dict(model.named_parameters())):
+        raise ValueError(f"{path}: incomplete requires_grad state")
+    model.temperature = state["temperature"]
+    return model
+
+
 def main() -> int:
     torch.set_num_threads(1)
     report = json.loads(REPORT.read_text())
@@ -51,10 +71,12 @@ def main() -> int:
             if sha_json(result) != stored["result_sha256"] or stored["stamp"]["git_commit"] != report["git_commit"]:
                 problems.append(f"{arm}_w{w}: record hash/commit mismatch")
             harness &= result["model_seed"] == MODEL_SEED
+            harness &= all(s["anchor_abs_error"] <= 1e-6 for s in result["stages"].values())
             shas = {}
             for stage in sorted(int(s) for s in result["stages"]):
                 cfg, world, _, _ = stage_setup(w, stage, MODEL_SEED)
-                model = restore_model(directory / f"stage{stage}", cfg, world, build_fast)
+                model = restore_stage(directory / f"stage{stage}", cfg, world,
+                                      result["stages"][str(stage)]["novel_probe_available"])
                 shas[stage] = library_sha(model)
                 if shas[stage] != result["stages"][str(stage)]["library_sha256"]:
                     problems.append(f"{arm}_w{w}: stage {stage} saved model differs from record")

@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_so2_online_gate.py", line 275, in <module>
+    raise SystemExit(main())
+                     ~~~~^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_so2_online_gate.py", line 249, in main
+    result = run_arm(arm, w, artifact=cell_dir)
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_so2_online_gate.py", line 170, in run_arm
+    result["margin"] = export_margin(cfg, world, model, world_seed)
+                       ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\audit_so2_online_gate.py", line 117, in export_margin
+    trained_values.append(trained["nmse"])
+                          ~~~~~~~^^^^^^^^
+KeyError: 'nmse'
