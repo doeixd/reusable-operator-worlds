@@ -4909,3 +4909,12 @@ than as a one-off miss.
   audited libraries, staged and failed alike, which is J0's threshold result
   seen from the other side: routing difficulty is a property of library
   quality, not of the routing mechanism.
+
+- PRICE A MECHANISM IN THE CURRENCY IT ACTUALLY SPENDS (curriculum cost,
+  2026-09-14). Staged formation looked like it should cost extra: two stages
+  of training on tasks nobody asked about. Priced, it spends the SAME
+  example-gradients as its matched control and 25% FEWER operator
+  applications (shorter programs early), and its wall clock is within 15%.
+  What it really consumes is 124 extra TASKS and their 47,616 examples. A
+  mechanism can be compute-free and data-expensive; say which, because the
+  online rung is gated on task supply, not on FLOPs.

@@ -5116,3 +5116,29 @@ whose operators compose correctly in programs that never appeared in training.
 Under the terminology contract this is the EXPORT rung, on the strong
 substrate, offline. Report reports/j2a_staged_library.json; logs
 reports/j2a_staged_library_20260914.
+
+# Curriculum cost accounting (descriptive, 2026-09-14)
+
+No verdict; arithmetic over the committed J1c/J1c-R reports
+(reports/curriculum_cost.json, summarize_curriculum_cost.py). Staged formation
+against its matched non-staged control, per world and both seeds:
+
+| currency | staged / control |
+|---|---|
+| example-gradients | 1.00 (65,536 updates x batch 2 both, matched by the plan) |
+| operator applications (updates x batch x program length) | 0.75 |
+| wall-clock seconds (seed 3001, measured both arms) | 0.94-1.15 |
+| additional TASKS the target distribution never provides | +124 |
+| additional examples | +47,616 |
+
+The curriculum is therefore not more expensive in compute: it spends the same
+example-gradients and 25% FEWER operator applications, because its early
+stages execute shorter programs. Its price is DATA: 124 extra tasks (60
+single-operator, 64 two-operator) and their examples. The amortization
+question ("does the mechanism repay what it costs to build?") resolves in its
+favour on compute and is entirely a question about task supply.
+
+That is a constraint on SO2, not a free pass: in an online lifetime, a
+curriculum is an assumption about the arrival order of tasks. SO2's plan must
+either show that the lifetime provides simple tasks, or register the
+curriculum as a supplied intervention and price it as such.
