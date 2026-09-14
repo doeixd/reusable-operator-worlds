@@ -77,6 +77,7 @@ FROZEN = {
     "J2A_STAGED_LIBRARY_AUDIT_PLAN.md": "8913ed4",
     "SO2_ONLINE_GATE_PLAN.md": "6347243",
     "SO2_AMENDMENT_1.md": "77412e8",
+    "SO2_AMENDMENT_2.md": "14a71b4",
 }
 
 STATUS_PATH_PATTERN = re.compile(
