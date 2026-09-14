@@ -64,5 +64,23 @@ class SO2Tests(unittest.TestCase):
         self.assertEqual(counts, [60, 64, 64])
 
 
+class AdaptCellContractTests(unittest.TestCase):
+    def test_adapt_cell_reports_query_nmse(self):
+        """The margin reads `query_nmse`; a renamed key must fail here, not mid-run."""
+        import numpy as np
+        from row.experiments.audit_e1_export import scratch_model
+        from row.experiments.audit_e8_length import adapt_cell
+        from row.experiments.audit_rotated_g5 import held_out_programs
+        from row.rotated_world import rotated_library
+        from row.support_split_world import _build_tasks
+        cfg, world, _, _ = so2.stage_setup(1, 3, so2.MODEL_SEED)
+        program = held_out_programs(cfg, world, np.random.default_rng(np.random.SeedSequence([so2.MARGIN_SEED, 1])), 1)[0]
+        library = rotated_library(cfg.world)
+        task = _build_tasks(cfg.world, library, [program], ["so2_contract"], index_offset=99000)[0]
+        result = adapt_cell(scratch_model(cfg, "rotated_discrete", 7717), task, "so2_contract",
+                            cfg.world.program_length, True, library, program, steps=2)
+        self.assertIn("query_nmse", result)
+        self.assertTrue(math.isfinite(result["query_nmse"]))
+
 if __name__ == "__main__":
     unittest.main()

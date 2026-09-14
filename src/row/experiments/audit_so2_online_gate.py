@@ -114,9 +114,11 @@ def export_margin(cfg, world, model, world_seed: int) -> dict:
                             False, library, program, steps=ADAPT_STEPS)
         fresh = adapt_cell(scratch, task, f"so2S_{world_seed}_{index}", cfg.world.program_length,
                            True, library, program, steps=ADAPT_STEPS)
-        trained_values.append(trained["nmse"])
-        scratch_values.append(fresh["nmse"])
-        rows.append({"program": list(program), "trained": trained["nmse"], "scratch": fresh["nmse"]})
+        # `adapt_cell` reports `query_nmse`; G5R reads exactly this key.
+        trained_values.append(trained["query_nmse"])
+        scratch_values.append(fresh["query_nmse"])
+        rows.append({"program": list(program), "trained": trained["query_nmse"],
+                     "scratch": fresh["query_nmse"]})
     trained_geo, scratch_geo = geo(trained_values), geo(scratch_values)
     return {"held_out": HELD_OUT, "trained_geo_nmse": trained_geo, "scratch_geo_nmse": scratch_geo,
             "margin": math.log(scratch_geo) - math.log(trained_geo), "rows": rows,
