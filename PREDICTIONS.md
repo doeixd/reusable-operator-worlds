@@ -8412,3 +8412,32 @@ shared-library plasticity, where per-task fits bend shared operators and later
 tasks undo them. It is supported by stage-3 library drift of 0.52/0.58 in the
 failing worlds versus 0.25 in world 0. Loss of the curriculum's formed
 structure is disfavoured. Any test needs its own frozen plan.
+
+
+# SO2-P plasticity Tier 1 (2026-09-15): EXPLORATORY triage LIVE, with the plasticity hypothesis refined
+
+Not a verdict, and `SO2_FAILS` is unchanged. The frozen Tier 1 plan
+(`SO2P_PLASTICITY_TIER1_PLAN.md`, 0ee6806) ran from b815713 on development
+world 1, stage 3 only, from SO2's saved stage-2 library. The independent scorer
+recomputed triage LIVE with all gates passing.
+- LR_1/2 reached terminal 0.0175 with 33/64 tasks at or below 0.05 (the
+  registered cutoff is 32).
+- REPLAY_2x reached 0.0275 with 53/64, versus BASE 0.1264 with 6/64.
+
+The census-era hypothesis ("excess shared-library plasticity; less drift should
+help") is REFINED, not confirmed:
+- Drift fell monotonically with learning rate and every LR arm lost 0 tasks.
+- But LR_1/4 and LR_1/10 also gained 0 tasks and stayed at terminal 0.09-0.11.
+- The best arm, REPLAY_2x, had higher drift (0.350) than any LR arm, and
+  REPLAY_4x at BASE-level drift failed.
+
+Working hypothesis from here: the stage-3 failure is a balance between
+destructive and consolidating library movement after each task is learned, not
+the magnitude of movement. This is supported by acquisition (end-of-task
+0.073-0.091) being nearly unchanged across arms.
+
+Fragility disclosed: one world, one stream per arm, non-monotone doses in both
+knobs, and LR_1/2 one task over the cutoff. The replay gain is not
+gradient-matched. Any Tier 2 plan must register replication streams, a
+gradient-matched control, unused development worlds, a fresh model seed and
+all three stages, with thresholds sized from these measurements.

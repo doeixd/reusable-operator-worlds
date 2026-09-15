@@ -1,0 +1,14 @@
+2026-09-15T02:42:08.793574+00:00 LAUNCH SO2P-plasticity-tier1-v1 at b815713 pid 14220
+2026-09-15T02:42:08.974403+00:00 [BASE] submitted
+2026-09-15T02:42:09.200377+00:00 [LR_1/2] submitted
+2026-09-15T02:42:09.487855+00:00 [LR_1/4] submitted
+2026-09-15T02:42:09.499775+00:00 [LR_1/10] submitted
+2026-09-15T02:42:09.507932+00:00 [REPLAY_2x] submitted
+2026-09-15T02:42:09.516144+00:00 [REPLAY_4x] submitted
+2026-09-15T02:45:19.484544+00:00 [BASE] saved: terminal 0.1264 (6/64) end-of-task 0.0770 lost 21 drift 0.524 (187.4s)
+2026-09-15T02:45:19.640999+00:00 [LR_1/4] saved: terminal 0.1126 (16/64) end-of-task 0.0914 lost 0 drift 0.234 (187.3s)
+2026-09-15T02:45:20.087159+00:00 [LR_1/2] saved: terminal 0.0175 (33/64) end-of-task 0.0883 lost 0 drift 0.277 (188.0s)
+2026-09-15T02:48:24.045144+00:00 [LR_1/10] saved: terminal 0.0903 (15/64) end-of-task 0.0789 lost 0 drift 0.172 (184.5s)
+2026-09-15T02:48:24.911254+00:00 [REPLAY_2x] saved: terminal 0.0275 (53/64) end-of-task 0.0839 lost 1 drift 0.350 (185.2s)
+2026-09-15T02:48:26.183755+00:00 [REPLAY_4x] saved: terminal 0.0898 (18/64) end-of-task 0.0728 lost 17 drift 0.541 (186.1s)
+2026-09-15T02:48:27.144067+00:00 COMPLETE gates {'G0_reproduction': True, 'G1_non_vacuity': True, 'G2_anchor': True} triage LIVE

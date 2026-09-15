@@ -4730,6 +4730,75 @@ there are three worlds with one initialization. A Tier 1 exploratory check
 could vary only stage-3 shared learning rate or replay on one development world
 under its own plan. It would not revisit SO2.
 
+# SO2-P plasticity Tier 1 (EXPLORATORY): triage LIVE, but drift is not the lever (2026-09-15)
+
+Plan `SO2P_PLASTICITY_TIER1_PLAN.md`, frozen at `0ee6806` before any code.
+Runner and independent scorer committed together at `b815713`.
+- Dry run: BASE reproduced SO2 stage 3 exactly (same library SHA, per-task
+  difference 0, anchor 0, 178.5 s).
+- Smoke restart test: reused a completed cell byte-identically and reran an
+  unfinished one bitwise-identically.
+- Run: 02:42-02:48 UTC, 6/6 arms, exit 0.
+- Acceptance: independent scorer exit 0 and recomputes LIVE with no problems;
+  G0/G1/G2 pass; `check_prereg.py` and `check_invalid.py` pass.
+- Records: `reports/so2p_plasticity.json` and `reports/so2p_plasticity_20260915/`.
+
+TIER 1 EXPLORATORY: one development world (1), one stream per arm, stage 3 only
+from SO2's saved stage-2 library. No verdict; `SO2_FAILS` is unchanged.
+
+| arm | terminal (<=0.05) | end-of-task (<=0.05) | lost / gained | drift median | export 64 | stage-3 prequential |
+|---|---:|---:|---:|---:|---:|---:|
+| BASE | 0.1264 (6) | 0.0770 (24) | 21 / 3 | 0.524 | 5 | 5.71M |
+| LR_1/2 (0.0005) | **0.0175 (33)** | 0.0883 (21) | 0 / 12 | 0.277 | 36 | 4.35M |
+| LR_1/4 (0.00025) | 0.1126 (16) | 0.0914 (16) | 0 / 0 | 0.234 | 17 | 4.50M |
+| LR_1/10 (0.0001) | 0.0903 (15) | 0.0789 (15) | 0 / 0 | 0.172 | 17 | 4.32M |
+| REPLAY_2x (8) | **0.0275 (53)** | 0.0839 (24) | 1 / 30 | 0.350 | 59 | 4.58M |
+| REPLAY_4x (16) | 0.0898 (18) | 0.0728 (27) | 17 / 8 | 0.541 | 38 | 4.35M |
+
+Registered triage, as computed: **LIVE**.
+- LR_1/2 qualifies with 33/64 tasks at or below 0.05, one above the
+  registered 32.
+- REPLAY_2x qualifies clearly: 53/64.
+- Both lower drift and keep end-of-task error within 2x BASE's.
+- The plan's consequence is to write a Tier 2 plan on development worlds not
+  used by SO2, at a fresh model seed, rerunning all three stages.
+
+Observations that qualify the label (descriptive):
+- **Less drift is not better.**
+  - Drift falls monotonically with learning rate (0.524 -> 0.277 -> 0.234 ->
+    0.172), and every LR arm loses 0 tasks.
+  - But LR_1/4 and LR_1/10 also GAIN 0 tasks and end at terminal 0.09-0.11.
+    Their terminal error sits at end-of-task level: the positive backward
+    transfer seen in every non-failing stage is gone.
+  - LR_1/2 keeps 12 gains while stopping all losses.
+  - REPLAY_2x, the best arm, has higher drift (0.350) than every LR arm.
+    REPLAY_4x, with drift equal to BASE's, fails.
+  - The frozen plan's framing (interference as drift) is therefore too coarse.
+    The data fit a trade-off between destructive and consolidating library
+    movement better than a plasticity-magnitude account.
+- **The dose responses are non-monotone** in both knobs, with one headline arm
+  at the cutoff. Under the single-stream rule (SO1: near a threshold, read the
+  pattern, not the cell), LR_1/2's pass is fragile. REPLAY_2x's margin (53 vs
+  32, 59/64 export) is much larger.
+- **Acquisition is essentially unchanged across arms** (end-of-task medians
+  0.073-0.091), so the arms differ in what happens to a task AFTER it is
+  learned.
+- **Every intervention lowered stage-3 prequential cost** relative to BASE.
+- **Replay arms spend more gradients per online example.** The resolved
+  `replay_examples_per_task` (8 and 16, ratio 1.0, 1 update per example) is
+  recorded per arm. REPLAY_2x's gain is therefore not budget-neutral, and a
+  Tier 2 plan needs a matched-gradient control.
+
+Tier 2 design constraints this implies, to settle with the PI before any plan
+is frozen:
+- register both LR_1/2 and REPLAY_2x;
+- include more than one sampling stream per arm;
+- add a gradient-matched no-replay control for the replay arm;
+- use development worlds and a model seed not used by SO2;
+- rerun all three stages;
+- set the terminal-count threshold against this measured baseline rather than
+  treating 32 as a comfortable margin.
+
 All 228 tests passed in 26.99 seconds after the scorer correction;
 `check_prereg.py`, `check_invalid.py`, and `git diff --check` pass. The result
 does not open the label-free canonicalizer successor. The next decision should
