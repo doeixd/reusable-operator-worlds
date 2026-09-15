@@ -80,6 +80,7 @@ FROZEN = {
     "SO2_AMENDMENT_2.md": "14a71b4",
     "SO3_STAGE3_CONSOLIDATION_PLAN.md": "462e5cd",
     "SO4_B2_RETEST_PLAN.md": "eba13b0",
+    "SO4_AMENDMENT_1.md": "4968698",
 }
 
 STATUS_PATH_PATTERN = re.compile(
