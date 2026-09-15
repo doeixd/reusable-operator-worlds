@@ -489,6 +489,7 @@ def run(
     task_code_hook=None,
     model=None,
     return_model: bool = False,
+    replay_seed: int | None = None,
 ) -> dict[str, object]:
     if order not in {"forward", "reverse"}:
         raise ValueError("order must be 'forward' or 'reverse'")
@@ -521,7 +522,10 @@ def run(
         ),
     )
     if update_batch_size is None:
-        replay = TaskReplayBuffer(seed + 1)
+        # `replay_seed` defaults to None, so every pre-existing caller keeps
+        # `seed + 1`. SO3 (SO3_STAGE3_CONSOLIDATION_PLAN.md) passes it to vary
+        # the replay stream alone; its G0 gate checks the omitted path bitwise.
+        replay = TaskReplayBuffer(seed + 1 if replay_seed is None else replay_seed)
     else:
         replay_seed = int(
             np.random.SeedSequence([config.world.seed, 96]).generate_state(1)[0]
