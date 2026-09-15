@@ -8395,3 +8395,20 @@ and 2, terminal error exceeds end-of-task error (0.126 vs 0.077, 0.085 vs
 0.035), which points to online interference during the length-3 stage.
 Pre-relaunch construct fixes and pre-launch disclosures are in PROGRESS and
 `reports/so2_failed_launch_20260914/`.
+
+
+# SO2 interference hypothesis refined by the Tier 0 census (2026-09-15)
+
+Append-only refinement of the unregistered observation recorded with the SO2
+verdict. It is not a registered prediction or a verdict. The census
+(`SO2_INTERFERENCE_CENSUS_PLAN.md`, b2d25f4) finds the terminal-over-end-of-task
+degradation only in STAGED stage 3 of worlds 1 and 2. There it is concentrated
+on the LATEST-arriving tasks (Spearman of log ratio with position +0.56/+0.64),
+not the oldest. Earlier stages everywhere show positive backward transfer, and
+transplanted length-1 codes stay at or below 0.05 under the final library for
+51-54 of 60 tasks. The earlier phrasing "online interference during the
+length-3 stage" is therefore refined to a working hypothesis: excess
+shared-library plasticity, where per-task fits bend shared operators and later
+tasks undo them. It is supported by stage-3 library drift of 0.52/0.58 in the
+failing worlds versus 0.25 in world 0. Loss of the curriculum's formed
+structure is disfavoured. Any test needs its own frozen plan.

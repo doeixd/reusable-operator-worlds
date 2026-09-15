@@ -4676,6 +4676,60 @@ Disclosures:
   cell was about 1 h 52 min.
 - Cosmetic `start`/`running` log wording, as noted at launch.
 
+# SO2 interference census (Tier 0, descriptive; 2026-09-15)
+
+Plan `SO2_INTERFERENCE_CENSUS_PLAN.md`, code and tests were committed at
+`b2d25f4` before any number existed. The census ran from that clean commit over
+the frozen SO2 artifacts, with no training. All guards passed: terminal
+recompute within 1e-6, end-of-task source reproduced, and exact self-transplant.
+Report: `reports/so2_interference_census.json`. Not a verdict; `SO2_FAILS`
+stands.
+
+- **Degradation is confined to STAGED stage 3 in worlds 1 and 2.**
+  - Everywhere else (all world-0 stages, and stages 1-2 in every world) terminal
+    error is BELOW end-of-task error: 50-66% of tasks improve more than 2x,
+    none degrade more than 2x, 0 lose the 0.05 threshold and 6-34 gain it.
+  - World 1 stage 3: 39% of tasks degrade more than 2x; 21 lose the threshold,
+    3 gain it.
+  - World 2 stage 3: 52% degrade more than 2x; 25 lose, 1 gains.
+- **It falls on the LATEST tasks.**
+  - In worlds 1 and 2 stage 3, the quartile means of
+    `log10(terminal/end_of_task)` by arrival position are
+    -0.14/+0.09/+0.45/+0.65 and +0.03/+0.27/+0.50/+0.73 (Spearman +0.56,
+    +0.64).
+  - End-of-task medians fall with position (0.192 -> 0.023; 0.087 -> 0.015),
+    while terminal medians stay flat around 0.08-0.16.
+  - The last task's anchor is exact, so each task's end-of-task fit is lost to
+    the tasks that follow it. The pattern resembles a library transiently bent
+    toward the current task, not accumulated forgetting of old structure.
+- **Earlier-stage computation largely survives, measured by code transplant
+  into the later library.**
+  - Length-1 tasks under the stage-3 library: 51/60 (w1) and 52/60 (w2) are at
+    or below 0.05, against 40 and 43 under their own terminal models. World 0:
+    54 vs 19.
+  - Length-2 tasks under the stage-3 library: 26 vs 22 (w1), 31 vs 45 (w2),
+    59 vs 33 (w0).
+  - A transplanted code never co-formed with the later library, so these
+    bound retention; they do not measure it purely.
+- **Failing worlds move the library about twice as far in stage 3.**
+  - Median slot functional drift from stage 2 to stage 3 is 0.52 (w1) and 0.58
+    (w2), against 0.25 (w0). Stage 1 to 2 is similar across worlds
+    (0.30-0.35).
+  - Their stage-3 tasks also arrive with higher zero-shot NMSE (quartile
+    medians about 4.5-5.4 against about 2.0-2.3). World 1's arrival zero-shot
+    rose across stages (about 2.2 -> 3.9 -> 5.1).
+- **PLAIN** degrades slightly, and most on its EARLIEST tasks (Spearman -0.41 to
+  -0.51), with nothing learned (about 1.9).
+
+Reading, as a hypothesis only: the online failure is not loss of the
+curriculum's formed primitives. It is excess shared-library plasticity during
+the length-3 stage: each task is fit partly by moving shared operators, and
+those moves are undone by later tasks. Limits: only stage-end models exist, so
+the within-stage time course is unobserved; the transplant confound applies; and
+there are three worlds with one initialization. A Tier 1 exploratory check
+could vary only stage-3 shared learning rate or replay on one development world
+under its own plan. It would not revisit SO2.
+
 All 228 tests passed in 26.99 seconds after the scorer correction;
 `check_prereg.py`, `check_invalid.py`, and `git diff --check` pass. The result
 does not open the label-free canonicalizer successor. The next decision should
