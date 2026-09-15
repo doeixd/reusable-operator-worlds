@@ -1,10 +1,22 @@
-# SO4: the B2 online gate, re-tested with measured stream variance (Tier 2 DRAFT)
+# SO4: the B2 online gate, re-tested with measured stream variance (Tier 2)
 
-Status: DRAFT for PI review, 2026-09-15. Not frozen, not hashed, and no code
-exists. It consumes the last unused rotated-protocol development worlds (6-9),
-so it needs explicit PI approval of decisions D1-D4 below before it is frozen.
-On approval it is frozen and hashed in its own commit, before any code; the
-runner and independent scorer are committed together before launch.
+Status: FROZEN at this commit (hash recorded in `tools/check_prereg.py` in the
+following commit), before any SO4 code or cell exists. On 2026-09-15 the PI
+directed "Continue with the research program" after this draft listed D1-D4,
+without selecting alternatives. The drafted defaults are therefore adopted as
+registered:
+- D1: development worlds 6-9;
+- D2: margin on each world's pre-specified stream-0 library;
+- D3: the thresholds below;
+- D4: about 4 h of local compute.
+
+This consumes the last unused rotated-protocol development worlds. The runner
+and independent scorer are committed together before launch.
+
+Terminology note, fixed before freezing: "the online-failure stop rule" below
+means the THIRD Track-B stop rule in `POST_E6_RESEARCH_PROGRAM.md` ("Online SO2
+fails: do not run branching or iteration"). Rule 2 there is "oracle routes
+pass but learned routes do not".
 
 # Why this rung, and why now
 
@@ -20,7 +32,7 @@ runner and independent scorer are committed together before launch.
   replay streams, straddling the threshold. SO3 registered no BASE gate and no
   margin, so it licenses nothing about B2.
 - **The consequence:** the online gate has never been run with its variance
-  measured. SO4 is that run. Its result decides whether Track-B stop rule 2
+  measured. SO4 is that run. Its result decides whether the online-failure stop rule
   lifts, and with it the learner rungs of `PROGRAM_LADDER_PLAN.md` and Track
   C's C2.
 - **Rule this plan inherits:** register the region the data support. The
@@ -118,7 +130,7 @@ runner and independent scorer are committed together before launch.
     registered online protocol and cost". It is stated with the supplied stage
     schedule, its measured stream variance, and SO2's single-stream failures
     disclosed beside it.
-  - Track-B stop rule 2 lifts.
+  - the online-failure stop rule lifts.
   - C2 and the program ladder's learner rungs may be planned. C2 must first
     re-run the IF/REPEAT opportunity gates on SO4's artifacts.
 - **SO4_ACQUIRES_ONLY:** online acquisition is licensed; the vocabulary claim is
@@ -127,8 +139,8 @@ runner and independent scorer are committed together before launch.
   stays closed. The successor question is what makes a stream fail (SO3's
   collapsed STORE_8 cell and SO2's worlds are candidate cases). A reliability
   intervention needs its own plan.
-- **SO4_FAILS:** SO3's baseline pass does not replicate on worlds 6-9. Stop
-  rule 2 stands with three blocks of evidence.
+- **SO4_FAILS:** SO3's baseline pass does not replicate on worlds 6-9. The
+  online-failure stop rule stands with three blocks of evidence.
 
 # Cost and run discipline [D4]
 
