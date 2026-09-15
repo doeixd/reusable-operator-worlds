@@ -893,6 +893,24 @@ are recovered.
   `7.93e-5`). This corrected artifact, not the original penalized endpoints,
   supports the LBFGS findability result; it does not change the primary
   route-inference-or-online-interference classification.
+- Later development work separated those causes, still without a sealed claim.
+  - **Offline:** a supplied length curriculum (length-1, then length-2, then
+    length-3 tasks, carrying only the shared library) forms the rotated
+    library without oracle routes at two initializations. That library
+    executes unseen programs.
+  - **Online:** under the full online protocol, the same staged schedule
+    reaches the registered export margin in every development world. It misses
+    the terminal-error threshold in two of three (registered label
+    `SO2_FAILS`). The non-staged online learner fails everywhere.
+  - **Where the loss lives:** a descriptive census places it after acquisition,
+    in the final stage. Recently learned tasks lose accuracy while earlier-stage
+    computation largely survives.
+  - **Candidate rescue:** one exploratory development world recovers with a
+    halved stage-3 shared learning rate or more diverse replay storage.
+  - The online learnability of this substrate therefore remains an open
+    development question, now localized to post-acquisition consolidation in the
+    final stage. It is not a claim of this paper. See the dated development
+    addenda.
 
 
 On promotion specifically (section 7.5): the world is constructed to
@@ -1613,3 +1631,126 @@ result. It does not establish that a learner discovers the core, that adapters
 are economical, or that the resulting representation is closed. An initial
 coordinate-frame bug was caught by the oracle control and withdrawn before the
 corrected run was interpreted.
+
+# Development result: what the curriculum costs (2026-09-14)
+
+Descriptive arithmetic over the J1c and J1c-R reports, with no new training.
+Against its matched non-staged control, staged formation uses the same
+example-gradients (ratio 1.00; the plan matched them), 0.75 of the operator
+applications (early stages execute shorter programs), and 0.94-1.15 of the
+wall-clock time. Its price is data: 124 tasks (60 single-operator and 64
+two-operator) and 47,616 examples that the target task distribution never
+provides. On compute, the curriculum repays what it costs to build; whether it
+pays at all is a question about task supply. In an online lifetime the
+curriculum is an assumption about the arrival order of tasks. SO2 therefore
+registered it as a supplied intervention rather than something the learner
+discovers.
+
+# H28 learner opportunity development note (2026-09-14)
+
+The oracle-core adapter pilot was extended to a learner that fits its own
+identity-context cores and a restricted context-shared adapter, with oracle-core,
+independent observed-frame, and random-core control arms. The controls are
+finite and non-vacuous: the oracle arm is near exact and the random core is far
+worse. The learned state round-trips with a recorded maximum output error, and
+serialized parameter bytes are reported for the shared and independent arms.
+Amortized future-learning value was not measured, so the opportunity remains
+unclassified. These are provisional implementation checks from development
+code, not a coordinate-reuse or economic result. Details:
+[learner opportunity checkpoint](../reports/h28_learner_opportunity_development_20260914.md).
+
+# Development result: staged formation online misses the terminal criterion (SO2, 2026-09-14)
+
+SO2 asked whether the staged formation that works offline also works under
+ROW's online protocol. In that protocol tasks arrive in sequence, each example
+is scored before it is trained on, and replay replaces i.i.d. resampling. It
+was frozen with two amendments before any code existed. Amendment 1 made its
+export margin G5R's statistic verbatim, after the first draft's log10 version
+proved not comparable to G5R's threshold. Amendment 2 let the novel-composition
+diagnostic report "unavailable" in a stage whose tasks use every program of
+their length.
+
+The first launch failed on a key-name error before writing any cell. A full
+re-read before relaunch found a more consequential construct error. The runner
+classified on END-OF-TASK error (each task's error measured right after that
+task trained, while the shared library was still changing), but the plan, the
+research program, and the committed independent scorer all specified the
+TERMINAL model. The corrected runner scores the terminal model and adds an
+exact last-task anchor: nothing trains after the last task, so its terminal and
+end-of-task errors must agree. That anchor passed at every stage of every cell.
+Two numbers from the failed launch had been seen before this fix, and the record
+discloses them.
+
+| world | staged terminal | staged end-of-task | G5R margin | unseen programs <= 0.05 | plain terminal |
+|---|---:|---:|---:|---:|---:|
+| 0 | **0.019** | 0.065 | +4.97 | 63/64 | 1.96 |
+| 1 | 0.126 | 0.077 | +2.74 | 5/64 | 1.97 |
+| 2 | 0.085 | 0.035 | +3.06 | 12/64 | 1.91 |
+
+The terminal clause (median NMSE <= 0.05 in two of three worlds) held in one
+world. The export clause (margin >= 0.75) held in all three, against G5R's
++0.12 to +0.29. The registered label is therefore `SO2_FAILS`, not "acquires
+only". The non-staged online learner failed everywhere. One registered
+prediction was wrong: the staged stream was expected to cost more prequentially,
+but it cost about half as much (6.7-9.9M versus 13.9-14.2M nats) despite scoring
+nearly three times the examples. The margin passing where terminal quality
+failed also shows how weak G5R's scratch comparator is (geometric-mean NMSE
+2.2-2.7). The 64-program export diagnostic tracks terminal quality more closely.
+
+# Development localization: the online loss is post-acquisition and recency-weighted (2026-09-15)
+
+A descriptive census over the frozen SO2 artifacts, with no training, localized
+the failure. Its plan and code were committed before any number existed, and its
+consistency guards passed.
+- **Only one stage degrades.** Terminal error exceeds end-of-task error only in
+  the final (length-3) stage of the two failing worlds. Every other stage in
+  every world shows the opposite: tasks keep improving after they are learned.
+- **The newest tasks lose most.** Within that stage the loss grows with arrival
+  position (Spearman +0.56 and +0.64). Recently learned tasks reach their lowest
+  error and then lose it, while terminal error is flat across positions.
+- **Earlier computation survives.** Length-1 task codes run through the final
+  library solve 51-54 of 60 tasks.
+- **The failing worlds' libraries move twice as far** in the final stage (median
+  per-slot functional drift 0.52-0.58 versus 0.25).
+
+# Development exploration: a stage-3 consolidation setting rescues one world (SO2-P, Tier 1, 2026-09-15)
+
+An exploratory, one-world check (world 1, one replay stream per arm) continued
+stage 3 from SO2's saved stage-2 library and changed one setting per arm. It
+first reproduced SO2's stage 3 bit for bit. It is not a verdict.
+
+| stage-3 arm | terminal (tasks <= 0.05) | lost / gained after learning | drift |
+|---|---:|---:|---:|
+| baseline | 0.126 (6) | 21 / 3 | 0.52 |
+| shared LR x1/2 | 0.018 (33) | 0 / 12 | 0.28 |
+| shared LR x1/4 | 0.113 (16) | 0 / 0 | 0.23 |
+| shared LR x1/10 | 0.090 (15) | 0 / 0 | 0.17 |
+| 8 stored replay examples per task | 0.028 (53) | 1 / 30 | 0.35 |
+| 16 stored per task | 0.090 (18) | 17 / 8 | 0.54 |
+
+The registered triage returned LIVE, but the pattern rules out the simple
+account that motivated it. Lower learning rates cut drift and eliminated the
+losses, but the two lowest also eliminated the gains. The best arm has more
+drift than any learning-rate arm, and the 16-example arm fails at baseline-level
+drift. Acquisition is nearly identical across arms. The working hypothesis is
+now a balance between destructive and consolidating library movement after
+learning, not the magnitude of that movement.
+
+A correction was appended after the result was committed.
+`replay_examples_per_task` sets how many examples of each finished task the
+buffer STORES; every update in every arm replays one example. The replay arms
+were therefore gradient-matched, contrary to the first write-up. But the
+buffer's storage and sampling share one random generator, so those arms also ran
+a different replay stream. Their gain is confounded with stream luck.
+
+# Frozen, not yet run: SO3 stage-3 consolidation (2026-09-15)
+
+SO3 is a preregistered test of the two candidate settings. It runs on
+development worlds unused by SO2 (3-5), at a fresh model seed, through all three
+stages, with three replay streams per arm. The baseline's extra streams serve as
+a stream-only control, and the replay setting counts only if it beats the best
+baseline stream in two of three worlds. A default-off `replay_seed` option was
+added to the lifetime runner, gated on reproducing SO2's stage 3 exactly.
+Stages 1-2 are shared across arms, gated on matching a full recomputation. SO3
+does not compute G5R's margin, so a pass would not be an SO2 pass. The plan is
+frozen and hashed; no SO3 result exists at the time of writing.
