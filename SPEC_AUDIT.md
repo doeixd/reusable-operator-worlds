@@ -507,3 +507,101 @@ only new code between E3 and the sealed block.
 Outstanding, unchanged: the object-to-primitive assignment margin remains small
 (0.001-0.019), so every claim is phrased as substitutability and use rather than
 recovery; SYNTHESIS is unclaimed pending E5.
+
+# Track B partial re-audit (2026-09-15): rotated substrate through SO3 - RECORD-CONSISTENCY LEVEL ONLY
+
+Status: PARTIAL. This is not the full spec-to-implementation re-audit that
+CLAUDE.md requires after major milestones; that audit is still owed and is
+tracked in `RESEARCH_STATUS.md`.
+- **How it was produced:** a read-only background subagent drafted a first pass
+  over the fourteen frozen plans from the rotated substrate through SO3. Claude
+  reviewed that draft against the program document, the reports and the code.
+- **What changed in review:** the draft's blanket "verified consistent" labels
+  were downgraded, two of its statements were corrected, and one finding it
+  missed was added.
+- **What this section does not do:** it reruns no scorer and recomputes no
+  artifact.
+
+## Verified directly in code
+
+- **SO2 terminal estimand.** `src/row/experiments/audit_so2_online_gate.py`
+  computes `M_terminal` with `score` (G5R Stage D) on the terminal model and
+  reports `end_of_task_median` beside it, with a last-task anchor. This matches
+  the plan wording and the disclosed pre-relaunch fix.
+- **SO2-P replay confound.** `src/row/experiments/learned_lifetime.py` builds
+  `TaskReplayBuffer(seed + 1 if replay_seed is None else replay_seed)`, one
+  generator for storage and sampling when `update_batch_size` is `None`. This
+  confirms correction b250973: the replay arms were gradient-matched but
+  stream-confounded.
+- **J2A route gap `g`, a NEW FINDING in this review.**
+  - `audit_j2a_staged_library.py` defines `g` as the median over trained tasks
+    of `log(opt query error / enum query error)`, identically to
+    `audit_j0_library_quality.py`. It is not clipped and can be nonzero (J0
+    measured nonzero values on poor libraries).
+  - In J2A, `g` = 0.0 on all twelve libraries, including the six failure
+    controls (NON-STAGED and RESET, trained median NMSE 0.92-1.06). On those
+    controls, exhaustive search picks the as-trained route for only 59-81% of
+    tasks (95-98% on staged libraries).
+  - The J2A PROGRESS entry's sentence "as J0's threshold predicted for libraries
+    this far below 0.47" is therefore true only of the six staged libraries. On
+    the controls, gradient routing matched exhaustive search on a majority of
+    tasks despite library quality beyond J0's 0.62 failure point. That is not
+    what J0's threshold predicts, though these controls are a different library
+    kind from J0's oracle-acquired SO1 libraries.
+  - The median also hides any minority of tasks on which the routes differ.
+  - The EXPORTS verdict is unaffected: it uses exhaustive-search routes.
+    Correction appended to PROGRESS.md and PREDICTIONS.md.
+
+## Record-consistent, not code-verified
+
+For G5/G5R, the G5R diagnosis and its LBFGS correction, G5R Stage D, SO0, SO1
+(with its restart and anchor-diagnostic amendments), SO1R, J0 (with Amendment
+1), J1, J1c, J1c-R, the SO2 interference census, and SO3, this pass checked
+only that:
+- each plan's registered arms, gates, thresholds and labels match what its
+  PROGRESS/PREDICTIONS entries report;
+- each disclosed deviation is recorded with its fix.
+
+It did not read each runner and scorer line by line against its plan, and did
+not recompute report cells. No inconsistency was found at that level.
+
+Disclosed deviations confirmed present in the record: SO2's end-of-task
+construct error (fixed); SO2's strict-reload probe code (fixed); SO2-P's replay
+description (corrected); the G5R diagnosis's unregistered H-LBFGS penalty
+(quarantined and rerun); SO0's masked unit-test exit code (fixed); SO1's
+original launch defects (fixed by amendment before relaunch); G5R's
+comparability label wording (fixed, regression-tested).
+
+## Corrections to the first-pass draft
+
+- **Stop rule.** The draft named the binding rule "stop rule 2 (substrate
+  exists; the online writer does not reliably acquire it)". In
+  `POST_E6_RESEARCH_PROGRAM.md`, Track-B stop rule 2 is "oracle routes pass but
+  learned routes do not" (fired after SO1). The rule binding the online result
+  is the third: "Online SO2 fails: do not run branching or iteration". Other
+  documents written the same day, including this project's status index and
+  plans, say "stop rule 2" for that online rule. The intended rule is the
+  online-failure rule, and the program document's numbering is authoritative.
+- **SO3.** The draft's verdict grouped SO3 with SO2 as programs that "FAIL". SO3's
+  registered label is `SO3_FAILS` for its two candidate changes, but its
+  unchanged protocol passed the terminal criterion in 3/3 fresh worlds, with
+  stream spread 0.009-0.066. It does not license B2 (no BASE gate, no margin),
+  and it does show SO2's negative is not a stable property of the protocol.
+
+## Deviations and open items
+
+- **Open:** the full code-level re-audit of the fourteen milestones listed above
+  (runner and scorer against plan, at least one recomputed cell per milestone).
+- **Open:** the stop-rule numbering in documents written 2026-09-15 refers to the
+  online-failure rule as "stop rule 2". A clarifying appendix, not a rewrite, is
+  owed where it matters for decisions. Correction recorded here and in
+  `RESEARCH_STATUS.md`.
+- **Recorded:** the J2A `g` attribution (above).
+
+## Verdict
+
+PARTIAL. No undisclosed plan-to-report inconsistency was found at record level.
+One finding was verified in code: J2A's zero route gap on its failure controls
+is not the J0-threshold prediction the record attributes it to. The full
+spec-to-implementation audit remains owed. No verdict, threshold or artifact
+changes.

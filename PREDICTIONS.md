@@ -8721,3 +8721,21 @@ terminal quality sits near the threshold with a wide stream spread. It was not
 a systematic online consolidation failure. Testing this needs its own frozen
 plan: the unchanged protocol, several streams, unused development worlds
 6-9, and the G5R margin clause.
+
+# NOTE (2026-09-15) on CF2 / J0's library-quality threshold: J2A's controls are contrary evidence of a different kind
+
+Append-only.
+- **J0's claim.** J0 supported CF2 as a threshold: gradient route inference
+  matches exhaustive search on libraries at or below 0.47 median NMSE and fails
+  at or above 0.62.
+- **J2A's controls.** J2A's six failure-control libraries (NON-STAGED and RESET,
+  0.92-1.06) show a median route gap of exactly 0 (`g = 0.0`, same definition as
+  J0), even though exhaustive search disagreed with their as-trained routes on
+  19-41% of tasks. On them, gradient routing matched exhaustive search on a
+  majority of tasks far beyond J0's failure point.
+- **Scope.** These are never-specialized or reset libraries, unlike J0's
+  oracle-acquired SO1 libraries. The observation limits the threshold's
+  generality to libraries formed under the SO1 oracle protocol; it does not
+  refute J0 on its own library population.
+- **Correction.** J2A's PROGRESS attribution ("as J0's threshold predicted") is
+  corrected for the controls.

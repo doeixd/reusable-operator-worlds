@@ -181,10 +181,20 @@ and the review index (latest review: 84).
 
 # Housekeeping owed
 
-- **`SPEC_AUDIT.md` re-audit is overdue.** The last section is from 2026-08-27.
-  Since then: the rotated substrate, G5/G5R, Stage D, SO1/SO1R,
-  J0/J1/J1c/J1c-R/J2A, SO2 and SO3. CLAUDE.md requires a re-audit after major
-  milestones.
+- **`SPEC_AUDIT.md` full re-audit still owed.** A PARTIAL record-consistency
+  re-audit (rotated substrate through SO3) was appended 2026-09-15.
+  - Two items were verified in code: the SO2 terminal estimand and the replay
+    RNG.
+  - It found that J2A's zero route gap on its failure controls is not J0's
+    threshold prediction; corrected in PROGRESS and PREDICTIONS.
+  - Still owed: a code-level audit of runner and scorer against plan, with at
+    least one recomputed cell per milestone.
+- **Stop-rule numbering.** Documents written 2026-09-15 (this file,
+  `PROGRAM_LADDER_PLAN.md`, `SO4_B2_RETEST_PLAN.md`) call the online-failure
+  rule "stop rule 2". In `POST_E6_RESEARCH_PROGRAM.md` it is the THIRD Track-B
+  stop rule ("Online SO2 fails: do not run branching or iteration"); rule 2 is
+  "oracle routes pass but learned routes do not". The intended rule is the
+  online-failure rule everywhere.
 - **`PROGRESS.md` is not strictly chronological.** The 2026-09-14/15 SO2-line
   entries sit before the 2026-09-14 H28 entries; see the placement note.
 - **Paper draft** is current through SO3. The copy in

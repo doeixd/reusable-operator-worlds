@@ -5647,3 +5647,28 @@ is not lifted by this run.
 **Next, pending a PI decision** (see `RESEARCH_STATUS.md`): register a re-test
 of the unchanged online staged protocol on unused development worlds 6-9, with
 several streams and the G5R margin, as the B2 gate SO2 was meant to be.
+
+# CORRECTION (2026-09-15) to the J2A entry: the zero route gap on the controls is not J0's threshold prediction
+
+Append-only; the J2A entry above stands as written and is corrected here. Found
+during the partial SPEC_AUDIT re-audit.
+
+J2A reported the route gap `g` as "exactly 0.000 on all twelve libraries ... as
+J0's threshold predicted for libraries this far below 0.47".
+- **Definition.** `g` is the median over trained tasks of
+  `log(opt query error / enum query error)`, the same as J0's, unclipped. It
+  was 0.0 on all twelve.
+- **Staged libraries.** For the six staged libraries (trained median NMSE about
+  0.005), the attribution to J0's threshold is correct.
+- **Control libraries.** The six failure controls (NON-STAGED and RESET, trained
+  median NMSE 0.92-1.06) are not below 0.47. They are beyond J0's 0.62 point,
+  where J0 found gradient routing fails. On them, exhaustive search matched the
+  as-trained route for only 59-81% of tasks, yet the gradient relaxation matched
+  exhaustive search on a majority of tasks (median gap 0).
+- **What this means.** That is contrary to, not predicted by, J0's threshold.
+  But the controls are a different library kind: never-specialized or reset,
+  not J0's oracle-acquired SO1 libraries. The median can also hide a minority
+  of tasks where the routes differ.
+
+Unchanged: the EXPORTS verdict, which uses exhaustive-search routes, and every
+J2A number.
