@@ -1,0 +1,225 @@
+{
+ "stamp": {
+  "arm": "PLAIN",
+  "world": 1,
+  "git_commit": "071fdaf",
+  "protocol_sha256": "13b6ebd941568753221f92e850ed0a6e95135419872cca537b7c3d44291d93e2"
+ },
+ "result": {
+  "arm": "PLAIN",
+  "world": 1,
+  "model_seed": 5000,
+  "stages": {
+   "3": {
+    "length": 3,
+    "tasks": 64,
+    "novel_probe_available": true,
+    "terminal_median": 1.9674082114366,
+    "terminal_below_threshold": 0,
+    "terminal_per_task": {
+     "task_458ad49c761df9ce": 1.9823604091529852,
+     "task_b38398cee3eff76f": 1.8709689277197654,
+     "task_d9a9e03198d222df": 1.9403390232807758,
+     "task_0078218c72b8396c": 2.1021978253569418,
+     "task_4ff7512856533160": 1.6066939039549106,
+     "task_ececf8b3f63e3d2d": 1.717488549736197,
+     "task_0b591f8dc11ddf50": 2.2020465567024905,
+     "task_5b9de99b1c91cea6": 2.071951174304216,
+     "task_134ad3fd74fe72d8": 1.8711048809932067,
+     "task_b60f12edd51bfc22": 1.7989080693259674,
+     "task_52c3f35f035d596d": 1.9673932901118762,
+     "task_a0e99b027d80bf4d": 2.055474472583606,
+     "task_08e1cff4774af96a": 2.441436323659469,
+     "task_c6e4a43596da5fdc": 1.902165879939764,
+     "task_fe90ea7b829afbaa": 1.6620333439949813,
+     "task_3cdc8b83ab119eae": 2.1012147194090676,
+     "task_9ce5931c8b374684": 2.2108788086040354,
+     "task_2510c76443bf86a8": 2.151396082423424,
+     "task_0bd488d7a92dfccf": 2.0962213802517184,
+     "task_4fa0d880cca8ab57": 2.0709137900164256,
+     "task_cdd81ba39b429cae": 2.045179250451159,
+     "task_60741c214cfe4fa5": 2.0552336215576554,
+     "task_a361d885e1243b6d": 2.0155588311918895,
+     "task_d4ac8cdf8c858712": 2.0547113590486066,
+     "task_fa0bb3ab83e47907": 2.0646462318553023,
+     "task_bbb6f81d21beb919": 2.0402278822179576,
+     "task_7413018a14746067": 2.1008208319933996,
+     "task_115e6d7a4e64dacc": 1.9031967274289692,
+     "task_8a7e37b33768c066": 1.832593916035363,
+     "task_cab1ef8ca433adb0": 1.907594201241298,
+     "task_239b608e5aaf575d": 1.7231074285527408,
+     "task_d588647a8f34f216": 2.154740899837219,
+     "task_f70ab4d104e2476c": 1.9659686899512179,
+     "task_96ca8bcabdafc369": 2.097701650124236,
+     "task_08b61b44c3a06ecd": 1.5921409455159161,
+     "task_e9023e100d3d30ca": 1.9627653182283358,
+     "task_6ab375e61358dd0e": 2.102988380986026,
+     "task_da46f8a98ac30e28": 2.136135417537359,
+     "task_fed69c403c3e5d2f": 1.813411732859069,
+     "task_6c5ae154bceb126e": 1.9565658223074496,
+     "task_2fb5dc11c713b303": 1.9220136506000398,
+     "task_4578cc7494b53e31": 2.030531092099498,
+     "task_98dc14eb4dde186c": 2.249925419766151,
+     "task_b363f915dd490a0c": 1.9855727413086386,
+     "task_ee15ce946d1e7a0c": 2.082874619213292,
+     "task_c872b51da8e4091c": 2.0218647150708358,
+     "task_2f0b4537fb035a2a": 1.874744456974751,
+     "task_18887523ce85c1b3": 1.7685054120875796,
+     "task_c1290fbcc444e301": 1.87987824963709,
+     "task_62d9d38b033dae1e": 1.9674231327613239,
+     "task_dd3adb34eb213dea": 1.5922504761354874,
+     "task_f85fc00fd3f7f4f8": 2.5003116005377573,
+     "task_f27914e23c19d5e9": 1.8145199651486352,
+     "task_03d5bdd0eb8a8ce5": 2.080753873175265,
+     "task_177c5ec7b470551d": 1.4997765976627726,
+     "task_349569ee60c72667": 1.9609468319298742,
+     "task_c01664fbb41cfc86": 1.9342205667974137,
+     "task_6498c4416ea9d174": 1.8826776285410742,
+     "task_94222e3266bd597f": 1.9056977752756372,
+     "task_d1d039a8ec147b5b": 2.082660150738697,
+     "task_796454f23e797316": 2.0093559915783583,
+     "task_7124f45d23589f79": 1.0312282833913333,
+     "task_d5fbc5d757a0d16e": 1.6872773243789652,
+     "task_d410ccd96e478544": 1.3194290172482388
+    },
+    "final_nmse_median": 1.6365409100674189,
+    "end_of_task_median": 1.6365409100674189,
+    "anchor_task_id": "task_d410ccd96e478544",
+    "anchor_abs_error": 0.0,
+    "cumulative_prequential_gaussian_log_loss": 14061138.01945227,
+    "online_examples": 8192,
+    "library_sha256": "7bb9d4a5e5c52eb8f3a2a352709c17df0a3102da5ecb1d20f95e0c3019c0ee85",
+    "library_sha256_at_start": null
+   }
+  },
+  "terminal_median": 1.9674082114366,
+  "end_of_task_median": 1.6365409100674189,
+  "prequential_total": 14061138.01945227,
+  "online_examples_total": 8192,
+  "seconds": 178.2,
+  "margin": {
+   "held_out": 12,
+   "trained_geo_nmse": 2.082769485296291,
+   "scratch_geo_nmse": 2.1713798863640874,
+   "margin": 0.04166436640129212,
+   "rows": [
+    {
+     "program": [
+      5,
+      4,
+      0
+     ],
+     "trained": 2.2997653484344482,
+     "scratch": 1.5914695262908936
+    },
+    {
+     "program": [
+      3,
+      0,
+      2
+     ],
+     "trained": 1.9920417070388794,
+     "scratch": 3.80147385597229
+    },
+    {
+     "program": [
+      2,
+      5,
+      5
+     ],
+     "trained": 1.8331751823425293,
+     "scratch": 1.919142246246338
+    },
+    {
+     "program": [
+      3,
+      5,
+      0
+     ],
+     "trained": 1.9784204959869385,
+     "scratch": 3.7715988159179688
+    },
+    {
+     "program": [
+      3,
+      1,
+      2
+     ],
+     "trained": 2.357353925704956,
+     "scratch": 1.6488810777664185
+    },
+    {
+     "program": [
+      5,
+      1,
+      2
+     ],
+     "trained": 2.0057239532470703,
+     "scratch": 2.7803633213043213
+    },
+    {
+     "program": [
+      5,
+      2,
+      1
+     ],
+     "trained": 2.050403118133545,
+     "scratch": 3.014371871948242
+    },
+    {
+     "program": [
+      0,
+      5,
+      2
+     ],
+     "trained": 2.071561813354492,
+     "scratch": 1.1874383687973022
+    },
+    {
+     "program": [
+      4,
+      0,
+      0
+     ],
+     "trained": 2.2584176063537598,
+     "scratch": 2.8518571853637695
+    },
+    {
+     "program": [
+      1,
+      3,
+      5
+     ],
+     "trained": 1.9173401594161987,
+     "scratch": 1.638051986694336
+    },
+    {
+     "program": [
+      2,
+      5,
+      3
+     ],
+     "trained": 2.229713201522827,
+     "scratch": 2.066859722137451
+    },
+    {
+     "program": [
+      2,
+      4,
+      1
+     ],
+     "trained": 2.0682566165924072,
+     "scratch": 1.5833666324615479
+    }
+   ],
+   "scratch_kind": "rotated_discrete (G5R's construction; the trained arm is the fast kind, which agrees with it to ~1e-7)"
+  },
+  "export_diagnostic": {
+   "programs": 64,
+   "median_nmse": 1.885418174206747,
+   "below_threshold": 0
+  }
+ },
+ "result_sha256": "a47e59fc828894c139aa357ccee35c6c86e2b3d2ad17e381acf9b0005d9d4cc1",
+ "finished_utc": "2026-09-14T21:16:03.535845+00:00"
+}

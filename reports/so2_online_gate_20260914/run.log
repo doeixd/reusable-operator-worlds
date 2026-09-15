@@ -1,0 +1,14 @@
+2026-09-14T18:12:56.326491+00:00 LAUNCH SO2-online-gate-v1 at 071fdaf pid 7436 workers 3
+2026-09-14T18:12:56.646235+00:00 [STAGED_w1] start
+2026-09-14T18:12:56.913998+00:00 [STAGED_w2] start
+2026-09-14T18:12:57.229852+00:00 [STAGED_w0] start
+2026-09-14T18:12:57.239018+00:00 [PLAIN_w1] start
+2026-09-14T18:12:57.248237+00:00 [PLAIN_w2] start
+2026-09-14T18:12:57.257417+00:00 [PLAIN_w0] start
+2026-09-14T20:05:15.687988+00:00 [STAGED_w1] saved: terminal 0.1264 end-of-task 0.0770 margin +2.74 export 5/64 prequential 9927435 (867.6s)
+2026-09-14T20:05:40.021950+00:00 [STAGED_w0] saved: terminal 0.0192 end-of-task 0.0649 margin +4.97 export 63/64 prequential 6717326 (865.8s)
+2026-09-14T20:05:45.289899+00:00 [STAGED_w2] saved: terminal 0.0851 end-of-task 0.0350 margin +3.06 export 12/64 prequential 9438805 (875.8s)
+2026-09-14T21:16:03.553403+00:00 [PLAIN_w1] saved: terminal 1.9674 end-of-task 1.6365 margin +0.04 export 0/64 prequential 14061138 (178.2s)
+2026-09-14T21:16:41.866772+00:00 [PLAIN_w2] saved: terminal 1.9101 end-of-task 1.7370 margin +0.25 export 0/64 prequential 13934612 (179.3s)
+2026-09-14T21:16:43.594524+00:00 [PLAIN_w0] saved: terminal 1.9572 end-of-task 1.7358 margin +0.19 export 0/64 prequential 14157414 (177.6s)
+2026-09-14T21:16:44.612969+00:00 COMPLETE classification SO2_FAILS

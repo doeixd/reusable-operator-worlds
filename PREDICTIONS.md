@@ -8367,3 +8367,31 @@ control caught this before interpretation. The corrected r3 record and
 withdrawal note are in reports/h28_adapter_pilot_development_20260914*. This
 supports only the restricted oracle-core interface opportunity. Joint discovery,
 arbitrary coordinate families, closure, and economic value remain untested.
+
+
+# SO2 verdict (2026-09-14): SO2_FAILS
+
+Scored against `SO2_ONLINE_GATE_PLAN.md` (6347243) with Amendments 1-2, from
+run `071fdaf`. The independent scorer, `check_prereg.py` and `check_invalid.py`
+all pass. Staged terminal median NMSE is 0.0192 / 0.1264 / 0.0851 in worlds
+0/1/2, so the <=0.05 clause holds in 1/3 and misses the 2/3 requirement. The
+G5R export margin is +4.97 / +2.74 / +3.06, so >=0.75 holds in 3/3. Because
+the terminal clause fails, the registered label is SO2_FAILS, not
+SO2_ACQUIRES_ONLY. PLAIN terminal is 1.957 / 1.967 / 1.910.
+
+Registered predictions scored:
+- SO2_PASSES (0.55): NOT MET.
+- Terminal threshold met in 3/3 worlds (0.5): NOT MET.
+- PLAIN fails the terminal threshold 3/3 (0.85): MET.
+- Staged whole-stream prequential cost exceeds plain's (0.7): FAILED. Staged
+  6.7-9.9M against plain 13.9-14.2M.
+- Export given the terminal threshold (0.75): UNSCORED, because its condition
+  is unmet.
+
+Registered consequence: staged formation is an offline result at this protocol;
+Track B stop rule 2 stands; the successor question is what the online protocol
+removes. Unregistered observation, recorded as a hypothesis only: in worlds 1
+and 2, terminal error exceeds end-of-task error (0.126 vs 0.077, 0.085 vs
+0.035), which points to online interference during the length-3 stage.
+Pre-relaunch construct fixes and pre-launch disclosures are in PROGRESS and
+`reports/so2_failed_launch_20260914/`.

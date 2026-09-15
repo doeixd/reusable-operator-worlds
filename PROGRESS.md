@@ -4611,6 +4611,71 @@ plan and Amendments 1-2 before relaunch found:
 
 No SO2 result exists yet.
 
+Launched detached at `071fdaf` (pid 7436, 3 workers, 18:12 UTC; prereg and
+invalid checks OK). Known cosmetic defect, not fixable mid-run: `run.log`
+writes `start` and `status.json` lists `running` for all six cells when they
+are SUBMITTED to the pool. Only three compute at once; the rest are queued.
+Cell timings in the `saved` lines are per-cell compute seconds and are
+unaffected. This entry is deliberately uncommitted until the run ends, because
+the runner reads HEAD again when it writes `exit.json`.
+
+# SO2 verdict: SO2_FAILS - staged formation exports online but does not hold the terminal threshold (2026-09-14)
+
+Run `071fdaf`: 6/6 cells, exit 0, 18:12-21:16 UTC. Independent scorer: exit 0,
+recomputes `SO2_FAILS`, harness true, no problems. `check_prereg.py` and
+`check_invalid.py` pass. The last-task anchor is 0 in every stage of every
+cell, and library transfer is verified for stages 2 and 3. Records are in
+`reports/so2_online_gate.json` and `reports/so2_online_gate_20260914/`.
+
+| world | STAGED terminal | STAGED end-of-task | margin | 64-prog export | PLAIN terminal | PLAIN margin |
+|---|---:|---:|---:|---:|---:|---:|
+| 0 | **0.0192** | 0.0649 | +4.97 | 63/64 | 1.957 | +0.19 |
+| 1 | 0.1264 | 0.0770 | +2.74 | 5/64 | 1.967 | +0.04 |
+| 2 | 0.0851 | 0.0350 | +3.06 | 12/64 | 1.910 | +0.25 |
+
+Registered ladder:
+- `M_terminal <= 0.05` holds in 1/3 worlds, which misses the 2/3 requirement.
+- `G_export >= 0.75` holds in 3/3 worlds; G5R's online margins were
+  +0.20/+0.12/+0.29.
+- The terminal clause fails, so the registered label is `SO2_FAILS`, not
+  `SO2_ACQUIRES_ONLY`. The registered consequence stands: staged formation is
+  an offline result at this protocol, and Track B stop rule 2 stands.
+
+Descriptive observations (not registered; they do not change the label):
+- **Staging does real work online.** PLAIN fails everywhere at about 1.9,
+  while STAGED's library beats scratch by 2.7-5.0 log units on G5R's held-out
+  programs.
+- **Error in worlds 1 and 2 rises after tasks finish.** Their terminal error
+  exceeds end-of-task error (0.126 vs 0.077, 0.085 vs 0.035). World 0 falls
+  (0.019 vs 0.065).
+  - In world 1, terminal error rises with every stage (0.012 -> 0.064 ->
+    0.126), with stage-3 tasks below 0.05 falling to 6/64.
+  - The failure therefore looks like online interference during the
+    length-3 stage rather than failed acquisition. That is a hypothesis for
+    the successor question ("what the online protocol removes"), not a
+    finding.
+- **The 64-program export diagnostic tracks terminal quality**: 63/64 in
+  world 0 against 5/64 and 12/64. So the margin passing 3/3 reflects a weak
+  scratch arm (geometric-mean NMSE 2.2-2.7) as much as a strong library.
+
+Predictions:
+- SO2_PASSES (0.55): not met.
+- Terminal threshold in 3/3 worlds (0.5): not met.
+- PLAIN fails 3/3 (0.85): met.
+- Staged whole-stream prequential cost exceeds plain's (0.7): FAILED. Staged
+  costs 6.7-9.9M against plain's 13.9-14.2M, despite scoring 124 more tasks
+  and nearly 3x the online examples.
+- The export prediction was conditional on the terminal threshold being met,
+  so it is unscored, although the margin itself passed 3/3.
+
+Disclosures:
+- World 1's terminal value (0.1264) matches the pre-launch peek recorded
+  above, as expected: identical lifetime code rebuilt the same model.
+- The `seconds` field in each cell counts lifetimes only (about 866 s staged,
+  about 178 s plain) and excludes the margin step. Wall-clock time per staged
+  cell was about 1 h 52 min.
+- Cosmetic `start`/`running` log wording, as noted at launch.
+
 All 228 tests passed in 26.99 seconds after the scorer correction;
 `check_prereg.py`, `check_invalid.py`, and `git diff --check` pass. The result
 does not open the label-free canonicalizer successor. The next decision should
