@@ -8441,3 +8441,23 @@ knobs, and LR_1/2 one task over the cutoff. The replay gain is not
 gradient-matched. Any Tier 2 plan must register replication streams, a
 gradient-matched control, unused development worlds, a fresh model seed and
 all three stages, with thresholds sized from these measurements.
+
+
+# CORRECTION (2026-09-15) to the SO2-P Tier 1 entry: replay arms were gradient-matched but stream-confounded
+
+Append-only; the entry above stands as written and is corrected here.
+`replay_examples_per_task` sets how many of a completed task's examples are
+STORED in the replay buffer, not how many are replayed per update. Every update
+in every SO2-P arm used one current example plus one replayed example, with one
+update per example. The statement "the replay gain is not gradient-matched" is
+WITHDRAWN: all arms had equal example-gradient budgets, and the replay arms
+varied rehearsal diversity.
+
+Newly disclosed confound: the buffer's storage and replay sampling share one
+random generator, so changing the stored count reshuffles every later replay
+draw. The LR arms replayed BASE's exact stream; the replay arms did not.
+REPLAY_2x's 53/64 is therefore confounded with a different replay stream. Any
+Tier 2 plan must include a stream-only control (4 stored per task, different
+buffer seed) and several streams per arm. Stage-3 buffers also contain only
+stage-3 tasks. The triage label, numbers, gates and scorer agreement are
+unchanged.

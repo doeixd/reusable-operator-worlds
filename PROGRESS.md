@@ -4799,6 +4799,40 @@ is frozen:
 - set the terminal-count threshold against this measured baseline rather than
   treating 32 as a comfortable margin.
 
+# CORRECTION to the SO2-P entry above: the replay arms were gradient-matched; they changed buffer contents and the replay stream (2026-09-15)
+
+Found by reading `learned_lifetime.run` while designing Tier 2, after the entry
+above was committed (afb1ac6). That entry is left as written; this correction
+supersedes two statements in it.
+
+- **Wrong:** "Replay arms spend more gradients per online example ... not
+  budget-neutral, and a Tier 2 plan needs a matched-gradient control."
+  - **Correct:** `replay_examples_per_task` is the number of a completed task's
+    128 examples STORED in the replay buffer (`TaskReplayBuffer.add_task`,
+    drawn without replacement).
+  - Each update uses exactly one current example plus `round(replay_ratio)` = 1
+    replayed example, with `updates_per_example` = 1, in EVERY arm.
+  - All six arms therefore have the same example-gradient budget. REPLAY_2x and
+    REPLAY_4x changed rehearsal DIVERSITY (8 or 16 stored examples per past
+    task instead of 4), not rehearsal volume.
+- **Newly identified confound, not disclosed above.**
+  - Without `update_batch_size`, the buffer's storage draws and its replay
+    draws share one generator (`TaskReplayBuffer(seed + 1)`). Storing a
+    different count per task therefore changes EVERY subsequent replay sample.
+  - The LR arms store 4 per task and replay the identical stream BASE replays.
+    The REPLAY arms do not.
+  - REPLAY_2x's gain (53/64) is therefore confounded with a different replay
+    sampling stream, and one stream per arm cannot separate diversity from
+    stream luck. A Tier 2 plan needs a STREAM-ONLY control: 4 stored per task,
+    different buffer seed.
+- **Also noted:** each stage is a separate `run` call with a fresh buffer, so
+  stage-3 replay rehearses only stage-3 tasks, never length-1 or length-2
+  tasks.
+
+The triage label (LIVE), all numbers, gates and scorer agreement are unchanged.
+The interpretation "REPLAY_2x's gain is not budget-neutral" is withdrawn and
+replaced by "REPLAY_2x's gain is budget-neutral but stream-confounded".
+
 All 228 tests passed in 26.99 seconds after the scorer correction;
 `check_prereg.py`, `check_invalid.py`, and `git diff --check` pass. The result
 does not open the label-free canonicalizer successor. The next decision should
