@@ -5584,3 +5584,66 @@ in that order: failed launch and audit, SO2 verdict, interference census, SO2-P,
 SO2-P correction. Later entries are appended at the true end of the file. A
 rewritten-in-place index of every line's live status is now in
 `RESEARCH_STATUS.md`.
+
+# SO3 verdict: SO3_FAILS; the unmodified online staged protocol passes 3/3 fresh worlds (2026-09-15)
+
+**Provenance.** Plan `SO3_STAGE3_CONSOLIDATION_PLAN.md`, frozen at `462e5cd`,
+hashed at `eaf2bd6`. Code `a185df1` (additive default-off `replay_seed`;
+runner and independent scorer committed together). Launched detached
+11:28-12:39 UTC; 39/39 jobs (2 G0 gates, 9 prefixes, G1, 27 cells); exit 0.
+
+**Acceptance.** The independent scorer (exit 0, no problems) recomputes
+`SO3_FAILS` from every saved model. `check_prereg.py` (56 frozen files) and
+`check_invalid.py` pass. The waiting documents were committed at `fbb547a`
+after exit and before scoring, so every SO3 lifetime folder carries
+`a185df1`. Records: `reports/so3_consolidation.json` and
+`reports/so3_consolidation_20260915/` (logs and every gate, prefix and cell
+record).
+
+**Gates, all passed:**
+- G0: `replay_seed` omitted or explicit reproduces SO2 stage 3 exactly
+  (difference 0).
+- G1: shared prefix equals recomputation.
+- G2: non-vacuity.
+- G3: anchors.
+- G4: transfer.
+
+| world | BASE (stream medians) | LR_HALF | STORE_8 |
+|---|---|---|---|
+| 3 | 0.0285 / 0.0400 / 0.0150 -> **0.0285** | 0.0200 / 0.0569 / 0.0257 -> 0.0257 | 0.0336 / 0.0270 / 0.0320 -> 0.0320 |
+| 4 | 0.0521 / 0.0143 / 0.0089 -> **0.0143** | 0.0185 / 0.0411 / 0.0095 -> 0.0185 | 0.0471 / 0.1221 / 0.0333 -> 0.0471 |
+| 5 | 0.0655 / 0.0122 / 0.0088 -> **0.0122** | 0.0499 / 0.0065 / 0.0210 -> 0.0210 | 0.0130 / 0.0108 / 0.0074 -> 0.0108 |
+
+**Labels.** `LR_HALF_FAILS`, `STORE_8_FAILS` (not stream-robust), program
+`SO3_FAILS`.
+
+**Reported prominently, per the plan:** BASE passes 3/3 fresh worlds. Its
+median tasks at or below 0.05 are 52, 54 and 58 of 64, and 7 of 9 BASE cells
+pass. SO2's failure does not generalize to worlds 3-5 at seed 6000.
+
+**Descriptive observations:**
+- **Stream variation is large.** Within one world, BASE ranges 0.009-0.066
+  across replay streams, straddling the threshold. SO2 and SO2-P used one
+  stream.
+- **Post-learning loss is rare on fresh worlds.** The median lost count is 0
+  for every arm in every world. STORE_8 world 4 stream 1 is the exception: 27
+  lost, 0/64, a collapse.
+- **LR_HALF** has the lowest drift (median 0.267 against BASE 0.427) and passes
+  8/9 cells, but its end-of-task error is slightly worse (world medians
+  0.043-0.054 against BASE 0.034-0.042). It is not better than BASE.
+- **Export diagnostic** (64 unseen programs) tracks terminal quality: BASE
+  64/64 in 4 of 9 cells.
+- **Stage-2 prefixes** end at terminal 0.010-0.052: the length-2 stage is
+  already near threshold before stage 3.
+
+**Predictions:** BASE-fails (0.6) wrong; both candidate passes and SO3_PASSES
+not met; the lost-count prediction (0.75) wrong; stream robustness unscored.
+Details in PREDICTIONS.md.
+
+**Registered consequence.** The Tier 1 rescue does not replicate. SO3 does not
+license the B2 statement: it has no BASE gate and no G5R margin. Stop rule 2
+is not lifted by this run.
+
+**Next, pending a PI decision** (see `RESEARCH_STATUS.md`): register a re-test
+of the unchanged online staged protocol on unused development worlds 6-9, with
+several streams and the G5R margin, as the B2 gate SO2 was meant to be.

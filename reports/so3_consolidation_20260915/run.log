@@ -1,0 +1,80 @@
+2026-09-15T11:28:36.036864+00:00 LAUNCH SO3-stage3-consolidation-v1 at a185df1 pid 29964
+2026-09-15T11:28:36.193921+00:00 [gate/G0_omitted] start
+2026-09-15T11:28:36.386420+00:00 [gate/G0_explicit] start
+2026-09-15T11:28:36.637148+00:00 [prefix/w3_s0] start
+2026-09-15T11:33:36.693049+00:00 [gate/G0_omitted] saved: {"worst_per_task_abs_diff": 0.0, "passes": true}
+2026-09-15T11:33:36.713419+00:00 [prefix/w3_s1] start
+2026-09-15T11:33:37.798668+00:00 [gate/G0_explicit] saved: {"worst_per_task_abs_diff": 0.0, "passes": true}
+2026-09-15T11:33:37.818858+00:00 [prefix/w3_s2] start
+2026-09-15T11:37:11.977107+00:00 [prefix/w3_s0] saved: stage2 terminal 0.0195
+2026-09-15T11:37:12.006895+00:00 [prefix/w4_s0] start
+2026-09-15T11:40:52.437367+00:00 [prefix/w3_s2] saved: stage2 terminal 0.0299
+2026-09-15T11:40:52.454253+00:00 [prefix/w4_s1] start
+2026-09-15T11:40:56.617750+00:00 [prefix/w3_s1] saved: stage2 terminal 0.0419
+2026-09-15T11:40:56.635293+00:00 [prefix/w4_s2] start
+2026-09-15T11:43:44.115571+00:00 [prefix/w4_s0] saved: stage2 terminal 0.0230
+2026-09-15T11:43:44.131861+00:00 [prefix/w5_s0] start
+2026-09-15T11:48:12.163216+00:00 [prefix/w4_s1] saved: stage2 terminal 0.0173
+2026-09-15T11:48:12.178876+00:00 [prefix/w5_s1] start
+2026-09-15T11:48:25.343619+00:00 [prefix/w4_s2] saved: stage2 terminal 0.0245
+2026-09-15T11:48:25.364334+00:00 [prefix/w5_s2] start
+2026-09-15T11:52:26.874851+00:00 [prefix/w5_s0] saved: stage2 terminal 0.0523
+2026-09-15T11:56:10.305085+00:00 [prefix/w5_s1] saved: stage2 terminal 0.0099
+2026-09-15T11:56:21.364451+00:00 [prefix/w5_s2] saved: stage2 terminal 0.0402
+2026-09-15T11:56:21.373990+00:00 [gate/G1] start
+2026-09-15T11:56:21.375720+00:00 [cell/w3_s0_BASE] start
+2026-09-15T11:56:21.377526+00:00 [cell/w3_s0_LR_HALF] start
+2026-09-15T11:59:50.578965+00:00 [cell/w3_s0_BASE] saved: terminal 0.0285 (52/64) lost 3 drift 0.494 (209.1s)
+2026-09-15T11:59:50.584341+00:00 [cell/w3_s0_STORE_8] start
+2026-09-15T11:59:54.259738+00:00 [cell/w3_s0_LR_HALF] saved: terminal 0.0200 (38/64) lost 0 drift 0.326 (212.8s)
+2026-09-15T11:59:54.274962+00:00 [cell/w3_s1_BASE] start
+2026-09-15T12:04:07.720333+00:00 [cell/w3_s0_STORE_8] saved: terminal 0.0336 (50/64) lost 1 drift 0.445 (257.1s)
+2026-09-15T12:04:07.727448+00:00 [cell/w3_s1_LR_HALF] start
+2026-09-15T12:04:22.094969+00:00 [cell/w3_s1_BASE] saved: terminal 0.0400 (36/64) lost 0 drift 0.404 (267.7s)
+2026-09-15T12:04:22.102457+00:00 [cell/w3_s1_STORE_8] start
+2026-09-15T12:07:51.077180+00:00 [gate/G1] saved: {}
+2026-09-15T12:07:51.093845+00:00 [cell/w3_s2_BASE] start
+2026-09-15T12:09:01.991170+00:00 [cell/w3_s1_LR_HALF] saved: terminal 0.0569 (26/64) lost 1 drift 0.244 (294.2s)
+2026-09-15T12:09:02.053998+00:00 [cell/w3_s2_LR_HALF] start
+2026-09-15T12:09:18.314983+00:00 [cell/w3_s1_STORE_8] saved: terminal 0.0270 (36/64) lost 0 drift 0.416 (296.1s)
+2026-09-15T12:09:18.333639+00:00 [cell/w3_s2_STORE_8] start
+2026-09-15T12:12:59.198531+00:00 [cell/w3_s2_BASE] saved: terminal 0.0150 (57/64) lost 0 drift 0.542 (308.0s)
+2026-09-15T12:12:59.224561+00:00 [cell/w4_s0_BASE] start
+2026-09-15T12:14:16.981111+00:00 [cell/w3_s2_LR_HALF] saved: terminal 0.0257 (45/64) lost 0 drift 0.332 (314.8s)
+2026-09-15T12:14:17.003947+00:00 [cell/w4_s0_LR_HALF] start
+2026-09-15T12:14:35.338096+00:00 [cell/w3_s2_STORE_8] saved: terminal 0.0320 (55/64) lost 0 drift 0.531 (316.9s)
+2026-09-15T12:14:35.355911+00:00 [cell/w4_s0_STORE_8] start
+2026-09-15T12:18:16.375379+00:00 [cell/w4_s0_BASE] saved: terminal 0.0521 (30/64) lost 9 drift 0.628 (317.0s)
+2026-09-15T12:18:16.393565+00:00 [cell/w4_s1_BASE] start
+2026-09-15T12:19:29.593006+00:00 [cell/w4_s0_LR_HALF] saved: terminal 0.0185 (53/64) lost 0 drift 0.426 (312.5s)
+2026-09-15T12:19:29.610180+00:00 [cell/w4_s1_LR_HALF] start
+2026-09-15T12:19:51.656800+00:00 [cell/w4_s0_STORE_8] saved: terminal 0.0471 (36/64) lost 5 drift 0.652 (316.2s)
+2026-09-15T12:19:51.673573+00:00 [cell/w4_s1_STORE_8] start
+2026-09-15T12:23:18.463669+00:00 [cell/w4_s1_BASE] saved: terminal 0.0143 (59/64) lost 0 drift 0.411 (302.0s)
+2026-09-15T12:23:18.495703+00:00 [cell/w4_s2_BASE] start
+2026-09-15T12:24:20.919934+00:00 [cell/w4_s1_LR_HALF] saved: terminal 0.0411 (46/64) lost 5 drift 0.264 (291.2s)
+2026-09-15T12:24:20.938248+00:00 [cell/w4_s2_LR_HALF] start
+2026-09-15T12:24:40.070610+00:00 [cell/w4_s1_STORE_8] saved: terminal 0.1221 (0/64) lost 27 drift 0.468 (288.3s)
+2026-09-15T12:24:40.089228+00:00 [cell/w4_s2_STORE_8] start
+2026-09-15T12:28:10.716126+00:00 [cell/w4_s2_BASE] saved: terminal 0.0089 (54/64) lost 0 drift 0.411 (292.1s)
+2026-09-15T12:28:10.731074+00:00 [cell/w5_s0_BASE] start
+2026-09-15T12:28:57.440988+00:00 [cell/w4_s2_LR_HALF] saved: terminal 0.0095 (57/64) lost 0 drift 0.308 (276.4s)
+2026-09-15T12:28:57.456673+00:00 [cell/w5_s0_LR_HALF] start
+2026-09-15T12:29:11.519704+00:00 [cell/w4_s2_STORE_8] saved: terminal 0.0333 (47/64) lost 3 drift 0.569 (271.3s)
+2026-09-15T12:29:11.536008+00:00 [cell/w5_s0_STORE_8] start
+2026-09-15T12:31:43.165188+00:00 [cell/w5_s0_BASE] saved: terminal 0.0655 (30/64) lost 5 drift 0.310 (212.4s)
+2026-09-15T12:31:43.189433+00:00 [cell/w5_s1_BASE] start
+2026-09-15T12:32:30.701671+00:00 [cell/w5_s0_LR_HALF] saved: terminal 0.0499 (32/64) lost 0 drift 0.244 (213.2s)
+2026-09-15T12:32:30.708086+00:00 [cell/w5_s1_LR_HALF] start
+2026-09-15T12:32:45.606760+00:00 [cell/w5_s0_STORE_8] saved: terminal 0.0130 (63/64) lost 0 drift 0.334 (214.0s)
+2026-09-15T12:32:45.612985+00:00 [cell/w5_s1_STORE_8] start
+2026-09-15T12:35:00.238129+00:00 [cell/w5_s1_BASE] saved: terminal 0.0122 (61/64) lost 0 drift 0.557 (197.0s)
+2026-09-15T12:35:00.243252+00:00 [cell/w5_s2_BASE] start
+2026-09-15T12:35:43.049190+00:00 [cell/w5_s1_LR_HALF] saved: terminal 0.0065 (57/64) lost 0 drift 0.267 (192.3s)
+2026-09-15T12:35:43.054588+00:00 [cell/w5_s2_LR_HALF] start
+2026-09-15T12:35:58.359985+00:00 [cell/w5_s1_STORE_8] saved: terminal 0.0108 (63/64) lost 0 drift 0.363 (192.7s)
+2026-09-15T12:35:58.376311+00:00 [cell/w5_s2_STORE_8] start
+2026-09-15T12:38:15.019903+00:00 [cell/w5_s2_BASE] saved: terminal 0.0088 (58/64) lost 0 drift 0.427 (194.7s)
+2026-09-15T12:38:56.234776+00:00 [cell/w5_s2_LR_HALF] saved: terminal 0.0210 (60/64) lost 0 drift 0.219 (193.1s)
+2026-09-15T12:39:09.473962+00:00 [cell/w5_s2_STORE_8] saved: terminal 0.0074 (59/64) lost 0 drift 0.395 (191.0s)
+2026-09-15T12:39:10.709814+00:00 COMPLETE gates {'G0_replay_seed_neutral': True, 'G1_prefix_sharing': True, 'G2_non_vacuity': True, 'G3_anchor': True, 'G4_transfer': True} classification {'LR_HALF': 'LR_HALF_FAILS', 'STORE_8_STREAM_ROBUST': False, 'STORE_8': 'STORE_8_FAILS', 'program': 'SO3_FAILS', 'world_medians': {'BASE': {3: 0.028473389619659107, 4: 0.01432432242931008, 5: 0.012156432719363622}, 'LR_HALF': {3: 0.025654326452979964, 4: 0.018515230606851948, 5: 0.020956547176642797}, 'STORE_8': {3: 0.03200850804924161, 4: 0.047145679190145146, 5: 0.010807628989034847}}, 'base_world_passes': 3}

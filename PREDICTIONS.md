@@ -8657,3 +8657,67 @@ First PX1, then PX2, then PX4. PX1-PX5 learner rungs are gated on online
 strong-substrate learnability (SO3 or successor) and on their teacher-side
 opportunity gates. The plan identifies what can run before that gate without
 breaking stop rule 2.
+
+
+# SO3 verdict (2026-09-15): SO3_FAILS - and the unmodified protocol passes on fresh worlds
+
+Scored against `SO3_STAGE3_CONSOLIDATION_PLAN.md` (frozen 462e5cd, protected
+eaf2bd6), from run a185df1: 39/39 jobs, exit 0. The independent scorer
+(exit 0, no problems) recomputes the label; `check_prereg.py` and
+`check_invalid.py` pass. All five gates passed:
+- G0: `replay_seed` is bitwise-neutral, reproducing SO2's world-1 stage 3
+  exactly.
+- G1: shared prefixes equal recomputation.
+- G2: non-vacuity.
+- G3: last-task anchors.
+- G4: library transfer.
+
+World-level medians of terminal NMSE over three replay streams:
+
+| world | BASE | LR_HALF | STORE_8 |
+|---|---:|---:|---:|
+| 3 | 0.0285 | 0.0257 | 0.0320 |
+| 4 | 0.0143 | 0.0185 | 0.0471 |
+| 5 | 0.0122 | 0.0210 | 0.0108 |
+
+- **LR_HALF_FAILS.** It is below 0.05 in 3/3 worlds, but below BASE only in
+  world 3, and no world is at or below half of BASE.
+- **STORE_8_FAILS.** It is below 0.05 in 3/3 worlds, but below BASE only in
+  world 5. It is not stream-robust (it beats BASE's best stream in 0/3
+  worlds). World 4 stream 1 collapsed to terminal 0.122 with 0/64 tasks and
+  27 lost after learning.
+- **Program label: SO3_FAILS.**
+
+REPORTED PROMINENTLY, as the plan registered: BASE, SO2's online staged
+protocol with no change at all, passes the terminal criterion in 3/3 fresh
+worlds (median tasks <= 0.05: 52, 54, 58 of 64). SO2's world-level failure
+(worlds 1-2, one stream, model seed 5000) therefore does NOT generalize to
+worlds 3-5 at model seed 6000. BASE's stream-to-stream range within a world
+is 0.009-0.066 and straddles the threshold. A single stream per world cannot
+settle this protocol's terminal clause either way.
+
+Registered predictions scored:
+- BASE fails the world-level terminal criterion in at least 2/3 worlds (0.6):
+  WRONG, it passes 3/3.
+- LR_HALF_PASSES (0.35): NOT MET.
+- STORE_8_PASSES (0.5): NOT MET.
+- STORE_8_STREAM_ROBUST given STORE_8_PASSES (0.6): UNSCORED, condition unmet.
+- SO3_PASSES (0.55): NOT MET.
+- Candidate stage-3 lost counts fall relative to BASE in at least 2/3 worlds
+  (0.75): WRONG. BASE's median lost count is 0 in every world, and neither
+  candidate is lower in any world.
+
+Registered consequence, stated unrelabelled: "the Tier 1 rescue does not
+replicate." Neither candidate improves on BASE on fresh worlds. SO3 registered
+no BASE gate and computed no G5R margin, so it does not license the B2
+statement, and Track-B stop rule 2 is not lifted by this result. The
+destructive-versus-consolidating movement hypothesis (SO2-P) is weakened:
+on fresh worlds there was little post-learning loss to rescue, and SO2-P's
+world-1 rescue looks like a single-stream, single-world effect.
+
+Working hypothesis replacing it, recorded as a hypothesis only: SO2's online
+failure was a world-, seed- and stream-dependent outcome of a protocol whose
+terminal quality sits near the threshold with a wide stream spread. It was not
+a systematic online consolidation failure. Testing this needs its own frozen
+plan: the unchanged protocol, several streams, unused development worlds
+6-9, and the G5R margin clause.

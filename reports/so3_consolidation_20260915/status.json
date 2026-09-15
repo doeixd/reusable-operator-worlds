@@ -1,0 +1,12 @@
+{
+ "state": "complete",
+ "classification": "SO3_FAILS",
+ "gates": {
+  "G0_replay_seed_neutral": true,
+  "G1_prefix_sharing": true,
+  "G2_non_vacuity": true,
+  "G3_anchor": true,
+  "G4_transfer": true
+ },
+ "updated_utc": "2026-09-15T12:39:10.699468+00:00"
+}

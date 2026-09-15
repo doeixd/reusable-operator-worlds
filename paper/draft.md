@@ -1754,3 +1754,37 @@ added to the lifetime runner, gated on reproducing SO2's stage 3 exactly.
 Stages 1-2 are shared across arms, gated on matching a full recomputation. SO3
 does not compute G5R's margin, so a pass would not be an SO2 pass. The plan is
 frozen and hashed; no SO3 result exists at the time of writing.
+
+# Development result: the online staged protocol passes on fresh worlds; the stage-3 rescue does not replicate (SO3, 2026-09-15)
+
+SO3 was a preregistered test of the two stage-3 settings suggested by the
+one-world exploration. It ran on development worlds unused by SO2 (3-5), at a
+fresh learner seed, through all three stages, with three replay streams per
+arm. The baseline's extra streams served as a stream-only control. Every
+registered gate passed, including exact reproduction of SO2's stage 3 when the
+new stream option is omitted. The independent scorer reproduced the label.
+
+| world | unchanged protocol | halved stage-3 shared LR | 8 stored replay examples |
+|---|---:|---:|---:|
+| 3 | 0.028 | 0.026 | 0.032 |
+| 4 | 0.014 | 0.019 | 0.047 |
+| 5 | 0.012 | 0.021 | 0.011 |
+
+Entries are world medians of terminal NMSE over three replay streams.
+
+Neither candidate improved on the unchanged protocol in two of three worlds,
+so the registered label is `SO3_FAILS`: the rescue did not replicate. The
+larger finding is the baseline. SO2's unchanged online staged protocol passed
+the terminal criterion in all three fresh worlds, with median 52-58 of 64
+tasks below 0.05. Its terminal error varied by up to a factor of seven across
+replay streams within a single world (0.009-0.066). SO2's two failing worlds
+were single-stream measurements on a quantity with that spread.
+
+Two registered predictions were wrong. The baseline was expected to fail
+again, and the candidates were expected to lose fewer tasks after learning;
+on fresh worlds almost no task was lost after learning in any arm. SO3 did not
+compute G5R's held-out margin and did not register the baseline as a gate, so
+it does not establish online learnability of the rotated substrate. It does
+show that SO2's negative is not a stable property of the protocol. A registered
+multi-stream re-test of the unchanged protocol, including the margin, is the
+appropriate next gate and has not been run.

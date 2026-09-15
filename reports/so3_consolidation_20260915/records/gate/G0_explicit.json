@@ -1,0 +1,18 @@
+{
+ "stamp": {
+  "kind": "gate",
+  "name": "G0_explicit",
+  "git_commit": "a185df1",
+  "protocol_sha256": "8f7b7ec8aebf950a0f5c9a38a0bbff222b74e616022699dffaef32354d8d7eeb"
+ },
+ "result": {
+  "variant": "explicit",
+  "replay_seed": 5001,
+  "library_sha256": "46928d323af6051a5a7e8c3d95e8a5d76a775f8651f3185d1007fc3722468f67",
+  "sha_matches_so2": true,
+  "worst_per_task_abs_diff": 0.0,
+  "passes": true
+ },
+ "result_sha256": "092dc5994dac80eede39e0059e292881115306765b3922c802ddde6fbaeb399b",
+ "finished_utc": "2026-09-15T11:33:37.780344+00:00"
+}
