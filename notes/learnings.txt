@@ -4997,3 +4997,45 @@ than as a one-off miss.
   serialized parameter bytes for shared and independent arms. These checks
   validate the instrument and cost accounting; future-learning amortization is
   still unmeasured.
+
+- SO2 PRE-LAUNCH AUDIT LESSON: TERMINAL IS NOT END-OF-TASK (2026-09-14). A plan
+  saying "terminal median query NMSE" means the FINAL model scored on every
+  task. The lifetime summary's per-task final_nmse is curve[max(curve)], each
+  task's error right after its own training, while the shared library is still
+  moving. SO2's runner classified on the latter; the plan, the research
+  program and the committed scorer meant the former (0.126 vs 0.077 on one
+  world). Guard any terminal estimand with a last-task anchor: nothing trains
+  after the last task, so its terminal and end-of-task errors must agree. Diff
+  each registered estimand against the code that computes it before launch.
+
+- A DIAGNOSTIC PROBE CAN LEAVE STATE IN A SAVED MODEL (2026-09-14). The
+  lifetime's terminal novel-composition probe adds task_novel_composition_0 to
+  the live model wherever an unseen program exists (curriculum stages 2-3, not
+  stage 1). A strict state_dict reload fails unless that code is registered.
+  The probe trains only its own code with the library frozen, so results are
+  unaffected, but every reconstruction must include it.
+
+- REPLAY COUNT IS STORAGE, AND IT SHARES THE SAMPLING RNG (2026-09-15).
+  replay_examples_per_task is how many of a finished task's examples are
+  STORED; every update replays round(replay_ratio) (= 1) of them. Arms that
+  change the stored count are gradient-matched, contrary to SO2-P's first
+  write-up. But TaskReplayBuffer(seed + 1) uses ONE generator for storage and
+  sampling (without update_batch_size), so a different count reshuffles every
+  later replay draw: a stream confound, not a dose. Separate the two with a
+  stream-only control (SO3 adds a default-off replay_seed). Each curriculum
+  stage starts a fresh buffer, so later stages never rehearse earlier ones.
+
+- NEVER COMMIT DURING A LIFETIME RUN, EVEN MARKDOWN (2026-09-15).
+  learned_lifetime._write_artifacts calls git rev-parse HEAD when each lifetime
+  finishes and writes it into that folder's git_commit.txt and
+  fingerprint.json. A commit while a run is in flight splits one run's
+  artifacts across two commits even if no code changed. The launcher's own
+  stamp being fixed at start is not enough; wait for exit, then commit.
+
+- LESS PLASTICITY IS NOT THE SAME AS LESS INTERFERENCE (SO2-P, 2026-09-15). On
+  world 1, lowering stage-3 shared LR cut library drift monotonically and
+  removed all post-learning losses. But the two lowest rates also removed the
+  post-learning GAINS (positive backward transfer), leaving terminal error
+  high. The best arm had more drift than any LR arm. Do not use a movement
+  magnitude as a proxy for harmful interference; measure lost and gained tasks
+  separately.

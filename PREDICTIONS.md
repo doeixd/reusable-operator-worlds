@@ -8461,3 +8461,199 @@ Tier 2 plan must include a stream-only control (4 stored per task, different
 buffer seed) and several streams per arm. Stage-3 buffers also contain only
 stage-3 tasks. The triage label, numbers, gates and scorer agreement are
 unchanged.
+
+
+# Program ladder hypotheses PX1-PX9 (2026-09-15): compositional operators -> control flow -> higher-order programs
+
+Recorded from the PI's proposal (2026-09-15) as WORKING HYPOTHESES. Not
+preregistered: each becomes a registered prediction only inside its own frozen
+plan, which may revise the statement, the threshold and the probability after
+its opportunity gate. Probabilities are Claude's priors at recording time,
+conditioned on the stated prerequisites. The program is
+`PROGRAM_LADDER_PLAN.md`. Nothing here changes any sealed result, development
+status, or the Track-B stop rules. Stop rule 2 ("online SO2 fails: do not run
+branching or iteration") binds every learner rung below that needs control flow
+until SO3 or a successor clears it.
+
+Terminology contract applies. "Loop", "branch", "combinator" and "language" are
+earned operationally by the triple test below, never by matching a teacher
+symbol.
+
+## Cross-cutting acceptance rule (methodological; recorded, not a prediction)
+
+A claimed program abstraction counts only if it passes three tests at once:
+- **ECONOMICS:** retaining it lowers lifetime prediction, search, or storage
+  cost against the cheapest simpler alternative, including COMPRESS and a
+  matched-budget non-sharing arm.
+- **CAUSAL SEMANTICS:** intervening on exactly one purported argument (count,
+  predicate, branch body, function argument, binding) produces the predicted
+  local effect and leaves unrelated behaviour unchanged.
+- **EXTRAPOLATION:** it executes outside the finite structures seen in training
+  (longer counts, novel branch triples, new function arguments, deeper nesting).
+
+Usefulness alone is not evidence of structure (H51).
+
+## PX1 - control skeletons have their own amortization curve
+
+**Statement.** On a substrate where control flow is NECESSARY (the rotated
+family, whose iteration and branch necessity gates pass), recurrence of control
+skeletons (`r_ctrl`) and recurrence of operators (`r_op`) are separately
+manipulable. A learner with reusable control structure gains from `r_ctrl` at
+fixed `r_op`.
+
+**Descriptive form, to be registered as intervals only after an opportunity
+census.** `Delta ~ a*r_op + b*r_ctrl + c*r_op*r_ctrl - C`, fitted in measured
+recurrence coordinates (the V1 lesson: configured knobs can be nonlinear).
+
+**Arms.** Task-specific; reusable operators only; reusable control only; both;
+all matched on parameters and task-code budget.
+
+**Probabilities.**
+- (a) `b > 0` with a sign-consistent paired effect in at least 2/3 worlds,
+  given the learner acquires the substrate online: 0.55.
+- (b) `c > 0` and distinguishable from 0: 0.35.
+- (c) An additive-plus-interaction fit in measured coordinates reaches R^2 >= 0.9
+  on the mean curve: 0.40.
+- (d) The `r_ctrl` knob fails its balance gates at first construction, and
+  varying skeleton recurrence also changes per-task difficulty (the V5.1
+  confound): 0.5.
+
+## PX2 - ITERATE with count as a cheap argument
+
+**Statement.** Tasks are `f^n(x)`, trained on n in {1..4} with bodies f varied
+independently and (f, n>2) combinations withheld. A learner able to represent
+ITERATE(f, n) comes, after enough recurrence of the schema, to represent the
+repeated body once, with the count as a cheap argument.
+
+**Evidence required, jointly:**
+- extrapolation to unseen counts (5, 7, 10, 20);
+- substitution of a body never trained under iteration;
+- a lower description length than the unrolled alternative;
+- causal sensitivity to changing only n.
+
+**Probabilities.**
+- (a) A fixed-depth or compositional learner fails beyond trained counts: 0.9.
+- (b) The ITERATE-capable learner meets the terminal threshold at n = 10,
+  within the ORACLE-EXECUTOR error horizon: 0.45.
+- (c) It also executes a new body at an unseen count without retraining the
+  schema: 0.30.
+- (d) Oracle-executor numeric drift, not missing structure, is what binds first
+  at n = 20 (E5.1's compounding drift, b = 0.581, q = 0.785): 0.5.
+
+## PX3 - a conditional schema with factored predicate and branches
+
+**Statement.** Tasks are `IF p(x) THEN f(x) ELSE g(x)`, with p, f and g
+recombined independently and whole (p, f, g) triples held out. Enough recurrence
+produces a reusable conditional schema whose arguments are a predicate and two
+computations.
+
+**Decisive interventions.** Swap f and g with p fixed; replace p with f and g
+fixed; evaluate densely near the decision boundary; clamp the inferred predicate
+output. Each must have the predicted LOCAL effect.
+
+**Probabilities.**
+- (a) With a SUPPLIED schema (C2's first claim), all four interventions behave
+  locally in at least 2/3 worlds: 0.35.
+- (b) Without a supplied schema, a learner's representation passes the same
+  interventions: 0.10.
+- (c) A learner with competitive task loss shows GLOBAL intervention effects,
+  a useful but opaque function: 0.55.
+
+## PX4 - LOOP promoted from private traces, not supplied
+
+**Statement.** Tasks are first solved privately as straight-line traces (`f,f,f`,
+`g,g,g`, ...). A consolidation mechanism that can propose a small parameterized
+computational graph (callable body plus a recurrence operation) crosses the same
+`N x s > C` boundary as operator promotion and creates an ITERATE-like
+abstraction because its reuse pays.
+
+**Discriminator.** Execution at a count never seen as a trace. A compressed macro
+passes the trained counts and fails the unseen count; a loop passes both.
+
+**Probabilities.**
+- (a) Something macro-like forms and pays at the trained counts (consistent with
+  E6: macros pay): 0.6.
+- (b) The formed object executes an unseen count at the threshold: 0.15.
+- (c) Given (b), its creation time is predicted by the amortization law with no
+  fitted threshold (the V5 retention precedent): 0.4.
+
+## PX5 - function-valued arguments (higher order)
+
+**Statement.** Once ITERATE or IF exists, learned operators can be ARGUMENTS to
+learned combinators (`MAP`, `FOLD`, `COMPOSE`, `ITERATE`).
+
+**Decisive holdout.** A new function argument: train MAP with operators A-D,
+learn E elsewhere, then run MAP(E, .) without ever training that pair.
+
+**Probabilities.**
+- (a) Given PX2 or PX3 passing, MAP(E) transfers without retraining the
+  combinator in at least 2/3 worlds: 0.30.
+- (b) Transfer degrades with E's functional distance from A-D, measured in the
+  learner's functional coordinates, not by teacher identity: 0.6.
+
+## PX6 - role/binding equivariance
+
+**Statement.** Good program abstractions are equivariant to consistent renaming:
+a program over registers or argument handles survives a permutation of names
+when its structure is transformed correspondingly. Its causal tests are:
+rename registers, permute function handles, change operator position, compare
+execution.
+
+**Probabilities.**
+- (a) Equivariance emerges without an architectural symmetry built in: 0.20.
+- (b) With an explicitly role-factorized architecture it holds under held-out
+  renamings: 0.50.
+- (c) Sealed position-transfer results (operators retain semantics in unseen
+  positions) predict success on role renaming for straight-line programs: 0.45.
+
+## PX7 - representation versus program inference, at depth and branching
+
+**Statement.** With the SAME frozen vocabulary, the cost of structural commitment
+grows with branching and depth, while uncertainty-preserving inference stays
+competitive. Mechanisms compared: hard MAP search, posterior averaging, beam,
+amortized proposal, continuous codes, hybrids.
+
+**Probabilities.**
+- (a) Premature hard commitment's excess inference cost (search plus error)
+  grows monotonically with ambiguity and depth on straight-line programs: 0.5.
+- (b) Exhaustive or near-exhaustive enumeration stays cheapest wherever feasible
+  (E5, E5.1: cost linear in length, logarithmic in space): 0.7.
+- (c) A quantitative law `C_infer(ambiguity, depth, evidence)` fits held-out
+  cells within 20%: 0.3.
+
+## PX8 - formation-time editability ("reorganizability") as a measurable third axis
+
+**Statement.** Learners matched on current loss and description length but
+trained with generic, label-free edit probes (substitute, call from another
+context, parameterize, duplicate, nest, locally refit) later discover loops or
+branches more cheaply.
+
+**Probabilities.**
+- (a) An edit-probe pressure can be built that passes matched-loss,
+  matched-`D*` and matched-parameter gates: 0.5.
+- (b) Given (a), later control-flow acquisition cost falls by at least 2x
+  against a matched sham-probe arm: 0.25. H50 and H51 recovered about 0%
+  post hoc; this tests FORMATION-time pressure, which neither did.
+
+## PX9 - endogenous DSL growth (north star)
+
+**Statement.** On an impoverished but universal substrate with no supplied LOOP,
+IF or MAP, a lifetime of increasingly structured tasks produces a hierarchically
+growing learned language: operators, then parameterized families, then repeated
+sequences, then looping and branching schemas, then schemas taking learned
+objects as arguments. Each level is created when expected reusable savings
+exceed representation plus inference cost, and passes the triple test. Teacher
+DSL identity is not required.
+
+**Probabilities.**
+- (a) At least two levels beyond parameterized operators form and pass the
+  triple test within this program's horizon: 0.10.
+- (b) The creation rule at each level that does form matches the amortization
+  inequality with no fitted threshold: 0.35 conditional on (a).
+
+## Ordering, as proposed by the PI and reconciled with prerequisites in the plan
+
+First PX1, then PX2, then PX4. PX1-PX5 learner rungs are gated on online
+strong-substrate learnability (SO3 or successor) and on their teacher-side
+opportunity gates. The plan identifies what can run before that gate without
+breaking stop rule 2.

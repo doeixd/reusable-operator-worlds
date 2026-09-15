@@ -5572,3 +5572,15 @@ paired parameter-cost, and economic endpoints remain unimplemented, so this is
 still an instrument check and not an H28 classification. The next check adds
 state round-trip reconstruction and serialized parameter bytes for shared
 versus independent arms; amortized future-learning value remains unmeasured.
+
+# Record placement note (2026-09-15)
+
+Append-only housekeeping; no content changes. The entries from "SO2 pre-relaunch
+audit" (2026-09-14) through "CORRECTION to the SO2-P entry" (2026-09-15) were
+inserted after the RF0B entry rather than at the end of this file. They
+therefore appear BEFORE the 2026-09-14 H28 entries (curriculum cost accounting,
+H28 closure extension, H28-C checks) that precede them in time. Read the SO2 line
+in that order: failed launch and audit, SO2 verdict, interference census, SO2-P,
+SO2-P correction. Later entries are appended at the true end of the file. A
+rewritten-in-place index of every line's live status is now in
+`RESEARCH_STATUS.md`.

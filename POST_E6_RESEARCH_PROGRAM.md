@@ -891,3 +891,33 @@ needs the relevant coordinate-transfer and nontrivial-closure gates. Track A/B
 convergence and the existing execution/control-flow/synthesis gates remain
 necessary. This extension changes future claim requirements, not historical
 verdicts or frozen protocols.
+
+
+# Track B, C and D status update (2026-09-15, appended; nothing above is revised)
+
+Results since the J2A appendix, all on development worlds:
+
+| step | result | commit |
+|---|---|---|
+| curriculum cost accounting | same example-gradients, 0.75 operator applications; price is +124 tasks | aa79aa3 |
+| SO2 (B2 gate), after a pre-relaunch construct fix | `SO2_FAILS`: terminal <= 0.05 in 1/3, G5R margin >= 0.75 in 3/3 | 6a4f707 |
+| SO2 interference census (Tier 0) | loss is post-acquisition, stage-3-only, recency-weighted; earlier stages retained | 3d87a0f |
+| SO2-P (Tier 1, world 1) | triage LIVE: LR/2 33/64, STORE_8 53/64; drift magnitude is not the lever | afb1ac6 |
+| SO2-P correction | replay arms gradient-matched but stream-confounded | b250973 |
+| SO3 plan frozen / protected | worlds 3-5, seed 6000, 3 streams, BASE / LR_HALF / STORE_8 | 462e5cd / eaf2bd6 |
+
+Stop rule 2 has fired again (SO2 failed online) and stands. SO3 is the
+registered successor: if it passes, the B2 statement is licensed pending a
+targeted G5R-margin rung. C2 remains closed until then.
+
+The PI's control-flow proposal is recorded as working hypotheses PX1-PX9 in
+`PREDICTIONS.md` and developed in `PROGRAM_LADDER_PLAN.md`, a draft program plan
+extending Tracks C and D. It adds a cross-cutting acceptance rule (economics,
+causal semantics and extrapolation together). It also separates what can run
+before online learnability is established (teacher-side and oracle-executor
+gates, and program inference on existing straight-line libraries) from the
+learner rungs that stop rule 2 still gates.
+
+Live status for every line of research, including H28, Track A, and the
+budgeted-execution draft, is kept in `RESEARCH_STATUS.md`, rewritten in place;
+this file's appendices remain the append-only program record.
