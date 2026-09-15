@@ -49,12 +49,17 @@ and the review index (latest review: 84).
 
 - **Development-world use** under the rotated staged protocol: worlds 0-2 (SO1
   through SO2-P), worlds 3-5 (SO3); worlds 6-9 unused.
-- **Proposed next (PI decision 6):** a registered B2 re-test of the UNCHANGED
-  online staged protocol on worlds 6-9. It would use several replay streams per
-  world, a world-level criterion defined over streams, the G5R margin clause,
-  a fresh model seed, and thresholds sized from SO3's measured stream spread.
-  This is the online gate SO2 was meant to be, now with the stream variance
-  measured.
+- **Proposed next (PI decision 6):** `SO4_B2_RETEST_PLAN.md`, a DRAFT that is
+  not frozen and has no code. It re-tests the UNCHANGED online staged protocol:
+  - worlds 6-9, model seed 7000, 3 replay streams per world, a PLAIN control;
+  - a world-level criterion over streams, with a sub-clause that at least 2 of
+    3 streams must pass in each passing world;
+  - the G5R margin on each world's pre-specified stream-0 library;
+  - labels PASSES / ACQUIRES_ONLY / STREAM_FRAGILE / FAILS;
+  - about 4 h local.
+
+  It needs PI answers to D1-D4 (worlds, margin coverage, thresholds, compute)
+  before it is frozen.
 
 # Drafted, awaiting PI decisions
 
