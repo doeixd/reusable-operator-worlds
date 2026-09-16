@@ -1841,3 +1841,39 @@ the first of these three runs - cannot settle it. Development worlds 0-9 are now
 spent for this protocol. The open question is what distinguishes an acquiring
 world from a failing one, and it is answerable on the existing artifacts before
 any further training.
+
+# Development result: three candidate mechanisms for the world-dependence, all withdrawn (2026-09-16)
+
+The online result above is world-dependent. Three descriptive censuses then asked
+what distinguishes a world or a replay stream that acquires the substrate from one
+that does not. All three ran on the twenty-four staged cells the three online runs
+had already produced: no training, no new world, and each plan with its code and
+tests committed before any number existed.
+
+- **Prefix error.** Error at the end of the second curriculum stage correlates with
+  the third stage's outcome across cells (Spearman +0.67), but separates failing
+  from passing cells by only 1.66x, below the 2x the plan registered. Asked the
+  sharper question - within a single world, does the worst-prefix stream fail? - it
+  scores one of seven, worse than chance.
+- **Slot duplication.** The hypothesis that a low-error library can still be a poor
+  vocabulary because its slots do nearly the same thing. The measure is flat
+  (+0.10, separation 1.01).
+- **Route identifiability.** How sharply the second stage's support data picks out
+  one route. This is the only measure that tracked the outcome (-0.51), and it
+  ordered the one cell the other measures could not explain. But it mixes the
+  library with its task set, and spans nearly three hundredfold across worlds. Made
+  comparable - by generating targets from the library's own routes, with a gate
+  confirming the generating route is always recovered - it is null and points the
+  other way (+0.14). Within-world normalization drops the original correlation from
+  -0.51 to -0.22, which is what one expects if most of it was scale.
+
+Two cells refuse any monotone account on these measures: the library with the
+highest intrinsic identifiability fails completely, and one of the lowest passes.
+
+We therefore report the online result as world- and stream-dependent with no
+identified mechanism, and we say so rather than offering the one surviving
+correlation as an explanation. The measures that looked explanatory pooled across
+worlds did not survive being made comparable, and the sequence is recorded here
+because the failure mode - a statistic that carries scale rather than signal - is
+the same one this project has met before, and the cheap tests that exposed it cost
+minutes on artifacts that already existed.
