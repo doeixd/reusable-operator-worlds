@@ -5039,3 +5039,22 @@ than as a one-off miss.
   high. The best arm had more drift than any LR arm. Do not use a movement
   magnitude as a proxy for harmful interference; measure lost and gained tasks
   separately.
+
+- ARGSORT-OF-ARGSORT MANUFACTURES A RANK ORDER FOR TIES (2026-09-16). The
+  project's `spearman` helper (`census_so2_interference.spearman`, reused by the
+  SO2-P/SO3/SO4 runners) computed ranks as `argsort(argsort(x))`. That assigns a
+  STRICT increasing order to tied values, so a CONSTANT predictor returned
+  +1.0 (a perfect correlation from a variable carrying no information) and a
+  single tie in [1,1,2,3] returned 1.0 instead of 0.9487. It is the
+  can't-come-out-any-other-way failure in a statistic rather than an
+  experiment. `census_world_quality.spearman` now uses AVERAGE ranks and
+  returns nan when either side has zero variance, with regression tests for
+  the constant and tied cases.
+  VERIFIED LATENT, not a correction: the affected series are per-task
+  `log10(terminal/end_of_task)` values, and the real ones contain no ties at
+  all. Recomputing three committed cells (SO4 w6_s0, SO4 w8_s1, SO3 w4_s1
+  BASE; n = 64 each, 0 tied values) reproduced the stored correlations exactly
+  (delta 0.00e+00), so no published number moved. The lesson is to check a
+  rank statistic against ties and against a constant input BEFORE trusting it,
+  especially when a new use can produce near-constant predictors - as a
+  prefix-quality census can.

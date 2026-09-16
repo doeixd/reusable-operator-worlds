@@ -1806,3 +1806,11 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
 - MOVEMENT MAGNITUDE IS NOT INTERFERENCE (SO2-P). Lower stage-3 shared LR cut
   drift and all post-learning losses, but also all post-learning gains. The
   best arm drifted more. Count lost and gained tasks separately.
+- RANK STATISTICS MUST HANDLE TIES, AND BE CHECKED ON A CONSTANT INPUT
+  (2026-09-16). `argsort(argsort(x))` gives tied values a strict order, so the
+  old `spearman` helper returned +1.0 for a CONSTANT predictor and 1.0 for a
+  single tie. Use average ranks and return nan on zero variance
+  (`census_world_quality.spearman`). Verified latent for every committed
+  number: the per-task log-ratio series have no ties, and three recomputed
+  cells reproduced their stored values exactly. Test any new rank statistic on
+  a constant and a tied input before reading it.
