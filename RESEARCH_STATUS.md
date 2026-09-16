@@ -6,7 +6,8 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-16, after the SO4 verdict. Nothing is running.
+Last rewritten: 2026-09-16, after the SO4 verdict and the world-quality census.
+Nothing is running.
 
 # Awaiting a PI decision (nothing running)
 
@@ -38,18 +39,37 @@ Last rewritten: 2026-09-16, after the SO4 verdict. Nothing is running.
 | SO3 | `SO3_FAILS`; unchanged protocol passed 3/3 fresh worlds; stream spread 0.009-0.066 | 0e0bd67 |
 | SO4 | `SO4_FAILS`: terminal 2/4, margin 3/4; world 6 negative margin | (this commit) |
 
-- **Proposed next, and the cheapest (PI DECISION 7):** a Tier 0 cross-run world
-  census over EXISTING artifacts - 10 worlds, 22 staged cells from SO2, SO3 and
-  SO4 - asking whether stage-1/stage-2 prefix quality (and measurable world
-  properties) predict stage-3 success. World 6 supplies three failed streams with
-  saved prefixes; its stage-2 terminals (0.042-0.111) were already poor where
-  passing worlds sat at 0.010-0.067. Minutes of compute, no new lifetime, no new
-  worlds. If prefix quality predicts the outcome, the successor intervention acts
-  on the early stages; if it does not, the failure is in stage 3 and the
-  successor is a reliability intervention.
-- **Not proposed without that census:** any further online lifetime. There are no
-  unused development worlds left for this protocol, so a new band would have to
-  be allocated (decision 5).
+- **World-quality census: DONE** (plan, module and tests `8f0369a`; report
+  `reports/world_quality_census.json`; PROGRESS 2026-09-16). Tier 0, committed
+  reports only, no new world. Registered triage: **MIXED**.
+  - Pooled over 24 cells: stage-2 terminal error predicts stage-3 outcome
+    (Spearman +0.669, permutation 0.0010; stage-2 end-of-task +0.698) but the
+    fail/pass median separation is 1.66x, short of the registered 2x.
+  - **Within the four worlds whose streams disagree** (SO3 w4, w5; SO4 w7, w8),
+    with world identity constant, separation CLEARS the bar: 3.07x (stage-1),
+    2.73x (stage-2), 2.41x (stage-2 end-of-task). In 3 of the 4, the failing
+    stream is the worst-prefix stream, and in all three it is stream 0.
+  - **SO4 w8 inverts it:** best prefix -> worst stage 3 (0.173, 33 tasks lost);
+    worst prefix -> pass (0.016). Any prefix-based account must explain this.
+  - **World 6's collapse is visible in its prefix:** the worst stage-2 values in
+    the census (end-of-task 0.175-0.309) and all three streams then failed.
+  - The stage-1-to-stage-2 improvement ratio carries nothing (rho -0.043).
+- **Successor options (PI DECISION 7, now informed):**
+  1. **Prefix-screen intervention** (registered, needs a new world band): act on
+     stages 1-2 - budget, stopping criterion, or stream selection - with the
+     stage-2 statistic as a pre-stage-3 eligibility screen. Its weakness is SO4
+     w8.
+  2. **Explain SO4 w8 first, Tier 0:** the one cell where a good prefix failed.
+     Its saved prefix and stage-3 model exist, so the question "what did stage 3
+     do to a good library" is answerable with no new lifetime.
+  3. **Stage-3 reliability intervention** (the SO2-P line, now weakly supported:
+     the census says the entering library matters, not only stage 3).
+  4. **Stop the online line** and report it as world-dependent, which is what the
+     paper now says.
+  - Claude's recommendation: option 2 first (minutes, no new world, targets the
+    one counterexample), then option 1 only if it survives.
+- **Any further online lifetime needs a new development band** (decision 5):
+  worlds 0-9 are spent.
 
 # Drafted, awaiting PI decisions
 
@@ -153,6 +173,12 @@ Last rewritten: 2026-09-16, after the SO4 verdict. Nothing is running.
 
 # Housekeeping owed
 
+- **Statistic fix, verified latent (`8f0369a`).** The old `spearman` helper used
+  `argsort(argsort(x))`, which gives tied values a strict order: it returned
+  +1.0 for a CONSTANT predictor. `census_world_quality.spearman` uses average
+  ranks and returns nan on zero variance. No committed number moved (the
+  per-task log-ratio series have no ties; three recomputed cells reproduce their
+  stored values exactly). Recorded in `AGENTS.md` and `notes/learnings.txt`.
 - **`SPEC_AUDIT.md` full re-audit still owed.** A PARTIAL record-consistency
   re-audit (rotated substrate through SO3) was appended 2026-09-15; SO4 is not
   yet covered. Still owed: code-level audit of runner and scorer against plan,

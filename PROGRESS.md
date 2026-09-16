@@ -5741,3 +5741,62 @@ distinguishes an acquiring world from a failing one. World 6 supplies three
 failed streams with saved prefixes, so a Tier 0 census over SO2, SO3 and SO4
 artifacts - 10 worlds, 22 staged cells - can ask whether stage-1/stage-2
 prefix quality predicts stage-3 success before any new lifetime is run.
+
+# World-quality census: MIXED, but the prefix separates outcomes WITHIN a world (Tier 0, 2026-09-16)
+
+Plan `WORLD_QUALITY_CENSUS_PLAN.md`, module and tests committed at `8f0369a`
+before any census number existed. Tier 0, descriptive: it reads only the three
+committed report JSONs (no torch, no artifacts, no new world), trains nothing and
+produces no verdict. `check_prereg.py` and `check_invalid.py` pass; all guards
+pass (cell counts 3/9/12, run labels, finiteness). Report:
+`reports/world_quality_census.json`. 24 unchanged-protocol cells; 14 passed.
+
+**Registered triage: MIXED.** Stage-2 terminal error correlates strongly with
+stage-3 outcome (Spearman +0.669, permutation fraction 0.0010) but the
+failing-versus-passing median separation is 1.66x, short of the registered 2x.
+
+| predictor | pooled rho | perm | fail/pass medians | ratio | by run (SO2/SO3/SO4) |
+|---|---:|---:|---|---:|---|
+| stage-1 terminal | +0.370 | 0.048 | 0.0883 / 0.0657 | 1.34 | -1.0 / +0.53 / +0.67 |
+| stage-2 terminal | +0.669 | 0.001 | 0.0498 / 0.0299 | 1.66 | +0.50 / +0.33 / +0.71 |
+| stage-2 end-of-task | +0.698 | 0.001 | 0.1330 / 0.0913 | 1.46 | +0.50 / +0.82 / +0.80 |
+| stage-1-to-2 ratio | -0.043 | 0.570 | 0.6238 / 0.6308 | 0.99 | +1.0 / -0.48 / -0.14 |
+
+**The informative half: the four MIXED-OUTCOME worlds** (SO3 w4, SO3 w5, SO4 w7,
+SO4 w8; 12 cells), where world identity is held constant and only the replay
+stream differs:
+
+| predictor | rho | fail/pass medians | ratio |
+|---|---:|---|---:|
+| stage-1 terminal | +0.490 | 0.0869 / 0.0283 | **3.07** |
+| stage-2 terminal | +0.594 | 0.0474 / 0.0173 | **2.73** |
+| stage-2 end-of-task | +0.601 | 0.1221 / 0.0506 | **2.41** |
+
+So within a world the prefix DOES separate the streams that go on to pass from
+those that fail, by 2.4-3.1x, clearing the 2x bar that the pooled sample misses.
+In 3 of those 4 worlds the failing stream is exactly the one with the worst
+stage-1 and stage-2 prefix (SO3 w4 s0, SO3 w5 s0, SO4 w7 s0 - all stream 0, the
+canonical replay seed). SO4 w8 is the exception and inverts: its best-prefix
+stream (s1, stage-2 0.0449 after the best stage-1 at 0.0156) produced the WORST
+stage-3 (0.1731, 33 tasks lost), while its worst-prefix stream (s0, stage-2
+0.0626) passed at 0.0161.
+
+**Other observations:**
+- **World 6's collapse is visible in its prefix.** Its three stage-2 terminals
+  (0.1114 / 0.0418 / 0.0794) and end-of-task values (0.3088 / 0.1748 / 0.2060)
+  are the worst in the census, and all three streams then failed stage 3
+  (0.2030-2.2385). No other world has a stage-2 end-of-task above 0.20.
+- **The improvement ratio carries nothing** (rho -0.043, permutation 0.57). How
+  much stage 2 improves on stage 1 does not predict the outcome; the LEVEL does.
+- **End-of-task error at stage 2 is the single best predictor** pooled (+0.698),
+  slightly ahead of terminal error.
+- **SO2's stage-1 correlation is -1.0** on three cells, which is one run of three
+  points and should not be read as an effect.
+
+**What this licenses.** Not a mechanism and not an intervention: the relation is
+observational across three runs at three seeds, and MIXED is the registered
+outcome, so no successor decision follows automatically from the pooled
+statistic. What it does establish is a cheap, measurable PRE-STAGE-3 screen
+whose value is known before stage 3 runs, and a concrete anomaly (SO4 w8) that
+any prefix-based account must explain. Both are recorded for the PI's successor
+choice in `RESEARCH_STATUS.md`.

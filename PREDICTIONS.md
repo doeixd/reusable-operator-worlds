@@ -8801,3 +8801,35 @@ distinguishes an acquiring world from a failing one - measurable on these
 artifacts before any new lifetime, since world 6 now provides three failed
 streams with saved prefixes whose own stage-2 terminals (0.042-0.111) were
 already poor.
+
+
+# NOTE (2026-09-16) on the SO4 working hypothesis: the prefix separates streams within a world
+
+Append-only, not a registered prediction and not a verdict. The world-quality
+census (`WORLD_QUALITY_CENSUS_PLAN.md`, plan and code committed `8f0369a` before
+any number; triage MIXED) sharpens the hypothesis recorded with the SO4 verdict
+that "world identity dominates".
+
+- **Pooled over 24 unchanged-protocol cells** (SO2 3, SO3 BASE 9, SO4 12),
+  stage-2 terminal error correlates with stage-3 outcome at Spearman +0.669
+  (permutation fraction 0.0010) and stage-2 end-of-task at +0.698, but the
+  failing-versus-passing median separation is only 1.66x, short of the
+  registered 2x. Hence MIXED.
+- **Within the four worlds whose streams disagree** (SO3 w4, w5; SO4 w7, w8),
+  where world identity is constant, the separation clears the bar: 3.07x on
+  stage-1 terminal, 2.73x on stage-2 terminal, 2.41x on stage-2 end-of-task.
+- In 3 of those 4 worlds the failing stream is the one with the worst prefix,
+  and in all three it is stream 0 (the canonical replay seed).
+- **SO4 w8 inverts it:** its best-prefix stream produced the worst stage-3
+  (0.1731, 33 tasks lost) and its worst-prefix stream passed (0.0161).
+- **The improvement ratio between stages carries nothing** (rho -0.043,
+  permutation 0.570): the LEVEL the prefix reaches predicts, not how much it
+  improved.
+
+Refined working hypothesis: what varies between an acquiring and a failing run
+is the QUALITY OF THE LIBRARY ENTERING STAGE 3, which the replay stream affects
+within a world and which world identity affects across worlds. It is not a
+stage-3-only phenomenon, and it is not fully explained by the prefix either -
+SO4 w8 is a counterexample that any purely prefix-based account must explain.
+Testing this needs its own frozen plan; the census is observational and cannot
+show that improving a prefix would improve stage 3.
