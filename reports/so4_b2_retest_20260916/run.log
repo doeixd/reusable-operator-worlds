@@ -1,0 +1,160 @@
+2026-09-15T22:03:53.521984+00:00 LAUNCH SO4-b2-retest-v1 at 69b0692 pid 30984
+2026-09-15T22:03:53.783650+00:00 [gate/G0_omitted] start
+2026-09-15T22:03:54.092942+00:00 [gate/G0_explicit] start
+2026-09-15T22:03:54.483628+00:00 [prefix/w6_s0] start
+2026-09-15T22:06:55.019009+00:00 [gate/G0_explicit] saved: {"worst_per_task_abs_diff": 0.0, "passes": true}
+2026-09-15T22:06:55.025637+00:00 [prefix/w6_s1] start
+2026-09-15T22:06:58.912145+00:00 [gate/G0_omitted] saved: {"worst_per_task_abs_diff": 0.0, "passes": true}
+2026-09-15T22:06:58.918980+00:00 [prefix/w6_s2] start
+2026-09-15T22:09:08.367331+00:00 [prefix/w6_s0] saved: stage2 terminal 0.1114
+2026-09-15T22:09:08.373675+00:00 [prefix/w7_s0] start
+2026-09-15T22:12:06.534296+00:00 [prefix/w6_s1] saved: stage2 terminal 0.0418
+2026-09-15T22:12:06.550188+00:00 [prefix/w7_s1] start
+2026-09-15T22:12:18.743063+00:00 [prefix/w6_s2] saved: stage2 terminal 0.0794
+2026-09-15T22:12:18.757917+00:00 [prefix/w7_s2] start
+2026-09-15T22:14:21.023076+00:00 [prefix/w7_s0] saved: stage2 terminal 0.0474
+2026-09-15T22:14:21.066108+00:00 [prefix/w8_s0] start
+2026-09-15T22:17:18.712957+00:00 [prefix/w7_s1] saved: stage2 terminal 0.0096
+2026-09-15T22:17:18.727435+00:00 [prefix/w8_s1] start
+2026-09-15T22:17:37.571560+00:00 [prefix/w7_s2] saved: stage2 terminal 0.0096
+2026-09-15T22:17:37.586131+00:00 [prefix/w8_s2] start
+2026-09-15T22:19:32.337617+00:00 [prefix/w8_s0] saved: stage2 terminal 0.0626
+2026-09-15T22:19:32.352093+00:00 [prefix/w9_s0] start
+2026-09-15T22:22:31.623288+00:00 [prefix/w8_s1] saved: stage2 terminal 0.0449
+2026-09-15T22:22:31.634520+00:00 [prefix/w9_s1] start
+2026-09-15T22:22:57.946093+00:00 [prefix/w8_s2] saved: stage2 terminal 0.0671
+2026-09-15T22:22:57.986336+00:00 [prefix/w9_s2] start
+2026-09-15T22:24:45.645026+00:00 [prefix/w9_s0] saved: stage2 terminal 0.0632
+2026-09-15T22:27:36.734461+00:00 [prefix/w9_s1] saved: stage2 terminal 0.0346
+2026-09-15T22:28:06.593940+00:00 [prefix/w9_s2] saved: stage2 terminal 0.0299
+2026-09-15T22:28:06.616470+00:00 [gate/G1] start
+2026-09-15T22:28:06.621215+00:00 [cell/w6_s0] start
+2026-09-15T22:28:06.626419+00:00 [cell/w6_s1] start
+2026-09-15T22:31:06.287289+00:00 [cell/w6_s0] saved: terminal 2.2385 (0/64)
+2026-09-15T22:31:06.302430+00:00 [cell/w6_s2] start
+2026-09-15T22:31:11.022859+00:00 [cell/w6_s1] saved: terminal 2.1705 (0/64)
+2026-09-15T22:31:11.038265+00:00 [cell/w7_s0] start
+2026-09-15T22:34:08.185871+00:00 [cell/w6_s2] saved: terminal 0.2030 (0/64)
+2026-09-15T22:34:08.201926+00:00 [cell/w7_s1] start
+2026-09-15T22:34:17.467853+00:00 [cell/w7_s0] saved: terminal 0.0639 (10/64)
+2026-09-15T22:34:17.481812+00:00 [cell/w7_s2] start
+2026-09-15T22:36:20.168600+00:00 [gate/G1] saved: {}
+2026-09-15T22:36:20.185702+00:00 [cell/w8_s0] start
+2026-09-15T22:37:09.722879+00:00 [cell/w7_s1] saved: terminal 0.0101 (57/64)
+2026-09-15T22:37:09.738352+00:00 [cell/w8_s1] start
+2026-09-15T22:37:23.249271+00:00 [cell/w7_s2] saved: terminal 0.0125 (61/64)
+2026-09-15T22:37:23.264927+00:00 [cell/w8_s2] start
+2026-09-15T22:39:21.510541+00:00 [cell/w8_s0] saved: terminal 0.0161 (55/64)
+2026-09-15T22:39:21.525236+00:00 [cell/w9_s0] start
+2026-09-15T22:40:12.510904+00:00 [cell/w8_s1] saved: terminal 0.1731 (5/64)
+2026-09-15T22:40:12.525947+00:00 [cell/w9_s1] start
+2026-09-15T22:40:30.478311+00:00 [cell/w8_s2] saved: terminal 0.0908 (20/64)
+2026-09-15T22:40:30.494140+00:00 [cell/w9_s2] start
+2026-09-15T22:42:24.857196+00:00 [cell/w9_s0] saved: terminal 0.0197 (61/64)
+2026-09-15T22:42:24.872470+00:00 [plain/w6] start
+2026-09-15T22:43:15.006936+00:00 [cell/w9_s1] saved: terminal 0.0140 (41/64)
+2026-09-15T22:43:15.021994+00:00 [plain/w7] start
+2026-09-15T22:43:37.185705+00:00 [cell/w9_s2] saved: terminal 0.0162 (60/64)
+2026-09-15T22:43:37.202006+00:00 [plain/w8] start
+2026-09-15T22:45:25.484899+00:00 [plain/w6] saved: terminal 1.8941 (0/64)
+2026-09-15T22:45:25.524133+00:00 [plain/w9] start
+2026-09-15T22:46:15.848298+00:00 [plain/w7] saved: terminal 1.9927 (0/64)
+2026-09-15T22:46:41.232339+00:00 [plain/w8] saved: terminal 1.8797 (0/64)
+2026-09-15T22:48:17.473343+00:00 [plain/w9] saved: terminal 2.0454 (0/64)
+2026-09-15T22:48:17.507169+00:00 [margin/w6_p0] start
+2026-09-15T22:48:17.517849+00:00 [margin/w6_p1] start
+2026-09-15T22:48:17.528657+00:00 [margin/w6_p2] start
+2026-09-15T22:53:52.188661+00:00 [margin/w6_p2] saved: trained 2.7361 scratch 1.3613 (334.6s)
+2026-09-15T22:53:52.203225+00:00 [margin/w6_p3] start
+2026-09-15T22:53:53.660589+00:00 [margin/w6_p0] saved: trained 2.4871 scratch 1.2355 (336.1s)
+2026-09-15T22:53:53.675601+00:00 [margin/w6_p4] start
+2026-09-15T22:53:57.887038+00:00 [margin/w6_p1] saved: trained 2.2432 scratch 2.7150 (340.3s)
+2026-09-15T22:53:57.926808+00:00 [margin/w6_p5] start
+2026-09-15T22:59:26.742412+00:00 [margin/w6_p3] saved: trained 1.7045 scratch 1.2251 (334.5s)
+2026-09-15T22:59:26.759119+00:00 [margin/w6_p6] start
+2026-09-15T22:59:29.978161+00:00 [margin/w6_p4] saved: trained 2.2021 scratch 2.2544 (336.3s)
+2026-09-15T22:59:30.020259+00:00 [margin/w6_p7] start
+2026-09-15T22:59:37.902740+00:00 [margin/w6_p5] saved: trained 2.2596 scratch 3.0921 (339.9s)
+2026-09-15T22:59:37.919189+00:00 [margin/w6_p8] start
+2026-09-15T23:05:00.760486+00:00 [margin/w6_p6] saved: trained 2.2336 scratch 3.3913 (334.0s)
+2026-09-15T23:05:00.775517+00:00 [margin/w6_p9] start
+2026-09-15T23:05:05.419172+00:00 [margin/w6_p7] saved: trained 2.7804 scratch 1.4403 (335.4s)
+2026-09-15T23:05:05.434793+00:00 [margin/w6_p10] start
+2026-09-15T23:05:18.122782+00:00 [margin/w6_p8] saved: trained 2.3158 scratch 3.2352 (340.2s)
+2026-09-15T23:05:18.167057+00:00 [margin/w6_p11] start
+2026-09-15T23:10:34.988645+00:00 [margin/w6_p9] saved: trained 2.0735 scratch 1.1125 (334.2s)
+2026-09-15T23:10:35.003276+00:00 [margin/w7_p0] start
+2026-09-15T23:10:41.503710+00:00 [margin/w6_p10] saved: trained 2.1689 scratch 2.9571 (336.0s)
+2026-09-15T23:10:41.518449+00:00 [margin/w7_p1] start
+2026-09-15T23:10:58.267819+00:00 [margin/w6_p11] saved: trained 1.9720 scratch 3.2744 (340.0s)
+2026-09-15T23:10:58.308114+00:00 [margin/w7_p2] start
+2026-09-15T23:16:09.946931+00:00 [margin/w7_p0] saved: trained 0.0545 scratch 2.5126 (334.9s)
+2026-09-15T23:16:09.960890+00:00 [margin/w7_p3] start
+2026-09-15T23:16:18.155795+00:00 [margin/w7_p1] saved: trained 0.1115 scratch 8.0608 (336.6s)
+2026-09-15T23:16:18.170805+00:00 [margin/w7_p4] start
+2026-09-15T23:16:40.022134+00:00 [margin/w7_p2] saved: trained 0.0507 scratch 2.0127 (341.7s)
+2026-09-15T23:16:40.035994+00:00 [margin/w7_p5] start
+2026-09-15T23:21:46.010908+00:00 [margin/w7_p3] saved: trained 0.1059 scratch 1.9577 (336.0s)
+2026-09-15T23:21:46.026024+00:00 [margin/w7_p6] start
+2026-09-15T23:21:55.377661+00:00 [margin/w7_p4] saved: trained 0.0517 scratch 3.4585 (337.2s)
+2026-09-15T23:21:55.392837+00:00 [margin/w7_p7] start
+2026-09-15T23:22:21.330453+00:00 [margin/w7_p5] saved: trained 0.0495 scratch 1.2115 (341.3s)
+2026-09-15T23:22:21.345157+00:00 [margin/w7_p8] start
+2026-09-15T23:27:22.958557+00:00 [margin/w7_p6] saved: trained 0.0559 scratch 3.5265 (336.9s)
+2026-09-15T23:27:22.973624+00:00 [margin/w7_p9] start
+2026-09-15T23:27:33.625170+00:00 [margin/w7_p7] saved: trained 0.0477 scratch 1.4376 (338.2s)
+2026-09-15T23:27:33.642403+00:00 [margin/w7_p10] start
+2026-09-15T23:28:02.614054+00:00 [margin/w7_p8] saved: trained 0.0447 scratch 3.8830 (341.2s)
+2026-09-15T23:28:02.629381+00:00 [margin/w7_p11] start
+2026-09-15T23:32:58.118988+00:00 [margin/w7_p9] saved: trained 0.0517 scratch 3.1530 (335.1s)
+2026-09-15T23:32:58.135531+00:00 [margin/w8_p0] start
+2026-09-15T23:33:10.145022+00:00 [margin/w7_p10] saved: trained 0.1730 scratch 4.9295 (336.5s)
+2026-09-15T23:33:10.160102+00:00 [margin/w8_p1] start
+2026-09-15T23:33:43.443866+00:00 [margin/w7_p11] saved: trained 0.0530 scratch 2.3255 (340.8s)
+2026-09-15T23:33:43.458649+00:00 [margin/w8_p2] start
+2026-09-15T23:38:33.034623+00:00 [margin/w8_p0] saved: trained 0.0169 scratch 1.4677 (334.9s)
+2026-09-15T23:38:33.049318+00:00 [margin/w8_p3] start
+2026-09-15T23:38:46.678554+00:00 [margin/w8_p1] saved: trained 0.0118 scratch 3.0151 (336.5s)
+2026-09-15T23:38:46.693646+00:00 [margin/w8_p4] start
+2026-09-15T23:39:23.754399+00:00 [margin/w8_p2] saved: trained 0.0127 scratch 3.5247 (340.3s)
+2026-09-15T23:39:23.769301+00:00 [margin/w8_p5] start
+2026-09-15T23:44:08.752099+00:00 [margin/w8_p3] saved: trained 0.0145 scratch 2.6731 (335.7s)
+2026-09-15T23:44:08.767474+00:00 [margin/w8_p6] start
+2026-09-15T23:44:23.807488+00:00 [margin/w8_p4] saved: trained 0.0220 scratch 5.4051 (337.1s)
+2026-09-15T23:44:23.822371+00:00 [margin/w8_p7] start
+2026-09-15T23:45:05.270260+00:00 [margin/w8_p5] saved: trained 0.0118 scratch 0.9151 (341.5s)
+2026-09-15T23:45:05.285295+00:00 [margin/w8_p8] start
+2026-09-15T23:49:44.051572+00:00 [margin/w8_p6] saved: trained 0.0122 scratch 3.0785 (335.2s)
+2026-09-15T23:49:44.066905+00:00 [margin/w8_p9] start
+2026-09-15T23:50:00.476580+00:00 [margin/w8_p7] saved: trained 0.0150 scratch 2.3536 (336.6s)
+2026-09-15T23:50:00.491647+00:00 [margin/w8_p10] start
+2026-09-15T23:50:47.111551+00:00 [margin/w8_p8] saved: trained 0.0101 scratch 1.1637 (341.8s)
+2026-09-15T23:50:47.152926+00:00 [margin/w8_p11] start
+2026-09-15T23:55:25.774599+00:00 [margin/w8_p9] saved: trained 0.0081 scratch 2.6169 (341.7s)
+2026-09-15T23:55:25.789333+00:00 [margin/w9_p0] start
+2026-09-15T23:55:44.239276+00:00 [margin/w8_p10] saved: trained 0.0204 scratch 3.0530 (343.7s)
+2026-09-15T23:55:44.279391+00:00 [margin/w9_p1] start
+2026-09-15T23:56:35.439194+00:00 [margin/w8_p11] saved: trained 0.0167 scratch 2.9868 (348.3s)
+2026-09-15T23:56:35.453899+00:00 [margin/w9_p2] start
+2026-09-16T00:01:02.305708+00:00 [margin/w9_p0] saved: trained 0.0229 scratch 3.4808 (336.5s)
+2026-09-16T00:01:02.321182+00:00 [margin/w9_p3] start
+2026-09-16T00:01:21.823951+00:00 [margin/w9_p1] saved: trained 0.0115 scratch 2.5249 (337.5s)
+2026-09-16T00:01:21.838631+00:00 [margin/w9_p4] start
+2026-09-16T00:02:17.238911+00:00 [margin/w9_p2] saved: trained 0.0118 scratch 2.4421 (341.8s)
+2026-09-16T00:02:17.253821+00:00 [margin/w9_p5] start
+2026-09-16T00:06:37.478145+00:00 [margin/w9_p3] saved: trained 0.0160 scratch 4.4723 (335.1s)
+2026-09-16T00:06:37.492871+00:00 [margin/w9_p6] start
+2026-09-16T00:06:58.867996+00:00 [margin/w9_p4] saved: trained 0.0155 scratch 2.6617 (337.0s)
+2026-09-16T00:06:58.907826+00:00 [margin/w9_p7] start
+2026-09-16T00:07:58.180855+00:00 [margin/w9_p5] saved: trained 0.0239 scratch 2.5098 (340.9s)
+2026-09-16T00:07:58.195714+00:00 [margin/w9_p8] start
+2026-09-16T00:12:12.891346+00:00 [margin/w9_p6] saved: trained 0.0100 scratch 1.1205 (335.4s)
+2026-09-16T00:12:12.906016+00:00 [margin/w9_p9] start
+2026-09-16T00:12:35.543876+00:00 [margin/w9_p7] saved: trained 0.0112 scratch 4.0859 (336.6s)
+2026-09-16T00:12:35.559106+00:00 [margin/w9_p10] start
+2026-09-16T00:13:38.985277+00:00 [margin/w9_p8] saved: trained 0.0142 scratch 1.2518 (340.8s)
+2026-09-16T00:13:39.000428+00:00 [margin/w9_p11] start
+2026-09-16T00:17:48.109734+00:00 [margin/w9_p9] saved: trained 0.0118 scratch 1.5019 (335.2s)
+2026-09-16T00:18:11.651296+00:00 [margin/w9_p10] saved: trained 0.0163 scratch 2.7726 (336.1s)
+2026-09-16T00:19:12.733732+00:00 [margin/w9_p11] saved: trained 0.0224 scratch 3.0185 (333.7s)
+2026-09-16T00:19:13.636991+00:00 COMPLETE gates {'G0_replay_seed_neutral': True, 'G1_prefix_sharing': True, 'G2_streams_distinct': True, 'G3_anchor': True, 'G4_transfer': True} classification {'program': 'SO4_FAILS', 'world_medians': {6: 2.170460158971521, 7: 0.012511863614598741, 8: 0.0908278775262461, 9: 0.016151305204046687}, 'terminal_worlds': [7, 9], 'stream_robust': {7: True, 9: True}, 'margins': {6: -0.07593941019978778, 7: 3.7805666206110224, 8: 5.167760269853185, 9: 5.0968781122054745}, 'margin_worlds': 3}

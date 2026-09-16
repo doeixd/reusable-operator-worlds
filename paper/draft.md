@@ -899,9 +899,14 @@ are recovered.
     library without oracle routes at two initializations. That library
     executes unseen programs.
   - **Online:** under the full online protocol, the same staged schedule
-    reaches the registered export margin in every development world. It misses
-    the terminal-error threshold in two of three (registered label
-    `SO2_FAILS`). The non-staged online learner fails everywhere.
+    reaches the registered export margin in nearly every development world but
+    the terminal-error threshold only in some. Three preregistered runs across
+    ten development worlds and three learner seeds reached it in six worlds
+    (1/3, then 3/3, then 2/4; labels `SO2_FAILS`, `SO3_FAILS`, `SO4_FAILS`).
+    Within one world the replay stream alone moves terminal error by up to an
+    order of magnitude, so online learnability here is world-dependent rather
+    than established or refuted. The non-staged online learner fails
+    everywhere.
   - **Where the loss lives:** a descriptive census places it after acquisition,
     in the final stage. Recently learned tasks lose accuracy while earlier-stage
     computation largely survives.
@@ -1788,3 +1793,51 @@ it does not establish online learnability of the rotated substrate. It does
 show that SO2's negative is not a stable property of the protocol. A registered
 multi-stream re-test of the unchanged protocol, including the margin, is the
 appropriate next gate and has not been run.
+
+# Development result: online staged formation is world-dependent (SO4, 2026-09-16)
+
+SO4 was the preregistered online gate for the strong (rotated) substrate, run
+with its stream variance measured for the first time. It used the staged
+protocol unchanged, on the four development worlds no earlier rung had touched,
+at a fresh learner seed, with three replay streams per world and a non-staged
+control. Its held-out margin used the earlier construction verbatim on each
+world's pre-specified first stream. Every registered gate passed, including
+exact reproduction of the earlier run's third stage when the new stream option
+is omitted, and an independent scorer reproduced the label from the saved
+models.
+
+| world | stream terminals | world median | held-out margin | non-staged |
+|---|---|---:|---:|---:|
+| 6 | 2.24 / 2.17 / 0.20 | 2.17 | **-0.08** | 1.89 |
+| 7 | 0.064 / 0.010 / 0.013 | **0.013** | +3.78 | 1.99 |
+| 8 | 0.016 / 0.173 / 0.091 | 0.091 | +5.17 | 1.88 |
+| 9 | 0.020 / 0.014 / 0.016 | **0.016** | +5.10 | 2.05 |
+
+The registered criterion needed three of four worlds below 0.05; two passed, so
+the label is `SO4_FAILS`. The margin clause passed in three of four.
+
+Read with the two earlier runs, the picture is not a protocol that fails but one
+whose success depends on the world. Across ten development worlds at three
+learner seeds, the same online staged protocol reached the terminal criterion in
+six: one of three, then three of three, then two of four. Within a single world,
+changing only the replay sampling stream moved terminal error by up to an order
+of magnitude (world 6: 0.20 to 2.24), and the stage-3 consolidation settings that
+rescued one world in an exploratory check did not improve on the unchanged
+protocol anywhere. World 6 is the clearest failure: its earlier stages were
+already poor, its library ends no better than a from-scratch learner on held-out
+programs, and it executes none of the 64 unseen programs.
+
+Where a stream fails it does so after learning rather than during it: one world-8
+stream reached 0.037 at the end of each task but 0.173 on the final model, losing
+33 of 64 tasks. Where a stream succeeds, tasks keep improving after their own
+training ends. The non-staged control fails in all four worlds, so staging
+remains responsible for whatever is learned.
+
+This paper therefore makes no claim that the rotated substrate is learnable
+online. What the three runs establish is narrower and, we think, more useful: the
+quantity such a claim depends on has a within-world spread comparable to the
+threshold itself, so any single-stream, single-world measurement of it - including
+the first of these three runs - cannot settle it. Development worlds 0-9 are now
+spent for this protocol. The open question is what distinguishes an acquiring
+world from a failing one, and it is answerable on the existing artifacts before
+any further training.

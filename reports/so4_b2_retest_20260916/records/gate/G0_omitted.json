@@ -1,0 +1,18 @@
+{
+ "stamp": {
+  "kind": "gate",
+  "name": "G0_omitted",
+  "git_commit": "69b0692",
+  "protocol_sha256": "2f314bf5f49dc214641c11e6ab0a9cd338355823cb1b9b15a46f627aed86e457"
+ },
+ "result": {
+  "variant": "omitted",
+  "replay_seed": null,
+  "library_sha256": "46928d323af6051a5a7e8c3d95e8a5d76a775f8651f3185d1007fc3722468f67",
+  "sha_matches_so2": true,
+  "worst_per_task_abs_diff": 0.0,
+  "passes": true
+ },
+ "result_sha256": "b9b846a78b2d1e49fee3b8e8e9d2fd90e86933b22309b6244b437361d5349674",
+ "finished_utc": "2026-09-15T22:06:58.894783+00:00"
+}

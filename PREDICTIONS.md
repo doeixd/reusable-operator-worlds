@@ -8739,3 +8739,65 @@ Append-only.
   refute J0 on its own library population.
 - **Correction.** J2A's PROGRESS attribution ("as J0's threshold predicted") is
   corrected for the controls.
+
+
+# SO4 verdict (2026-09-16): SO4_FAILS - the online protocol is world-dependent, not reliably learnable
+
+Scored against `SO4_B2_RETEST_PLAN.md` (frozen eba13b0, protected) with
+`SO4_AMENDMENT_1.md` (frozen 4968698, protected e9e8424), from run 69b0692:
+79/79 jobs, exit 0, 22:04-00:19 UTC. The independent scorer (exit 0, harness
+true, no problems) recomputes the label from every saved model;
+`check_prereg.py` (58 frozen files) and `check_invalid.py` pass. All five gates
+passed: G0 (`replay_seed` bitwise-neutral, reproducing SO2 stage 3 exactly),
+G1 (shared prefixes equal recomputation), G2 (streams distinct), G3 (last-task
+anchors), G4 (library transfer).
+
+Terminal median NMSE per stream, and the world median:
+
+| world | s0 | s1 | s2 | W | margin |
+|---|---:|---:|---:|---:|---:|
+| 6 | 2.2385 | 2.1705 | 0.2030 | 2.1705 | -0.076 |
+| 7 | 0.0639 | 0.0101 | 0.0125 | **0.0125** | +3.781 |
+| 8 | 0.0161 | 0.1731 | 0.0908 | 0.0908 | +5.168 |
+| 9 | 0.0197 | 0.0140 | 0.0162 | **0.0162** | +5.097 |
+
+- **Terminal clause: 2 of 4 worlds** (7 and 9), against the registered 3 of 4.
+  World 8's median misses at 0.0908; world 6 fails on every stream.
+- **Margin clause: 3 of 4** (worlds 7-9 at +3.78 to +5.17), which passes. World
+  6's margin is NEGATIVE (-0.076): its trained library is no better than a
+  from-scratch learner on held-out programs.
+- **Stream sub-clause (Amendment 1):** both terminal-passing worlds are
+  stream-robust (no stream above 0.10), so the amended clause did not decide
+  this run.
+- **Program label: SO4_FAILS.**
+
+Registered predictions scored:
+- STAGED `W <= 0.05` in at least 3/4 worlds (0.70): WRONG. It held in 2/4.
+- Stream sub-clause holds in every terminal-passing world, given the terminal
+  clause (0.60): MET where observable (2/2), but the terminal clause failed, so
+  it did not gate the label.
+- Margin `>= 0.75` in at least 3/4 worlds (0.85): MET, 3/4.
+- SO4_PASSES (0.45): NOT MET.
+- PLAIN fails the terminal threshold in 4/4 worlds (0.9): MET. PLAIN terminals
+  are 1.894 / 1.993 / 1.880 / 2.045, with 0/64 tasks below threshold and 0/64
+  export in every world.
+- Median stage-3 lost count is 0 in at least 3/4 worlds (0.7): MET, 3/4 (world
+  8's median is 9).
+
+Registered consequence, stated unrelabelled: SO3's baseline pass does not
+replicate on worlds 6-9, and the online-failure stop rule (the third Track-B
+stop rule) stands with three blocks of evidence: SO2 (1/3 worlds), SO3's
+candidates, and SO4 (2/4 worlds). The B2 statement is NOT licensed. C2 and the
+program ladder's learner rungs stay closed.
+
+What the three blocks now say jointly, as a working hypothesis rather than a
+verdict: the online staged protocol acquires the rotated substrate in SOME
+development worlds and not others, at every seed tried (SO2 1/3 at seed 5000,
+SO3 3/3 at 6000, SO4 2/4 at 7000: 6 of 10 worlds across the three runs), and
+within a world the replay stream moves terminal error by up to two orders of
+magnitude (world 6: 0.203 to 2.239). World identity, not the consolidation
+setting SO2-P proposed, is the dominant factor. The successor question is what
+distinguishes an acquiring world from a failing one - measurable on these
+artifacts before any new lifetime, since world 6 now provides three failed
+streams with saved prefixes whose own stage-2 terminals (0.042-0.111) were
+already poor.

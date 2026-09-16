@@ -5672,3 +5672,72 @@ J0's threshold predicted for libraries this far below 0.47".
 
 Unchanged: the EXPORTS verdict, which uses exhaustive-search routes, and every
 J2A number.
+
+# SO4 verdict: SO4_FAILS - online staged formation is world-dependent (2026-09-16)
+
+**Provenance.** Plan `SO4_B2_RETEST_PLAN.md` frozen `eba13b0`, Amendment 1
+`4968698` (protected `e9e8424`); code `69b0692` (runner, independent scorer and
+tests committed together before launch). Launched detached 22:04 UTC, finished
+00:19 UTC; 79/79 jobs (2 G0 gates, 12 prefixes, G1, 12 staged cells, 4 PLAIN
+lifetimes, 48 margin program pairs); exit 0. Records:
+`reports/so4_b2_retest.json`, `reports/so4_b2_retest_20260916/`.
+
+**Pre-launch checks.** Dry run: G0 exact with `replay_seed` omitted and explicit
+(per-task difference 0); the per-pair margin jobs are BITWISE equal to
+`so2.export_margin` at 3 steps; scaled path ok. Smoke: all gates. Restart test:
+every validated record reused, removed cell and margin pair reran bitwise. 17
+unit tests. A first attempt died on host paging exhaustion with no SO4 cell
+written; the PI freed memory and the run was relaunched from the same commit.
+
+**Acceptance.** Independent scorer exit 0, harness true, no problems, recomputed
+from every saved model. `check_prereg.py` (58 frozen files) and
+`check_invalid.py` pass. All five gates passed.
+
+| world | stream terminals | W | margin | PLAIN | median lost |
+|---|---|---:|---:|---:|---:|
+| 6 | 2.2385 / 2.1705 / 0.2030 | 2.1705 | **-0.076** | 1.894 | 0 |
+| 7 | 0.0639 / 0.0101 / 0.0125 | **0.0125** | +3.781 | 1.993 | 0 |
+| 8 | 0.0161 / 0.1731 / 0.0908 | 0.0908 | +5.168 | 1.880 | 9 |
+| 9 | 0.0197 / 0.0140 / 0.0162 | **0.0162** | +5.097 | 2.045 | 0 |
+
+**Label:** terminal clause 2/4 (registered 3/4), margin clause 3/4,
+Amendment 1's stream cap satisfied in both passing worlds -> `SO4_FAILS`.
+
+**Descriptive observations:**
+- **World 6 never acquired.** Its stage-1 prefixes end at 0.12-0.25 and its
+  stage-2 prefixes at 0.042-0.111 (worlds 7-9: stage 2 at 0.010-0.067). Its
+  stage-3 cells are 0.203-2.239 with 0/64 export in all three streams, and its
+  margin is negative, so the library it formed is no better than scratch on
+  held-out programs. Its prequential cost (9.6M-19.9M) is 2-6x the other
+  worlds'.
+- **Stream spread is enormous in a failing world**: world 6 spans 0.203 to
+  2.239, and world 8 spans 0.016 to 0.173. In passing worlds it is tight
+  (world 9: 0.014-0.020).
+- **Where a stream fails, it fails by losing tasks after learning**: world 8
+  stream 1 has end-of-task 0.037 but terminal 0.173 with 33 tasks lost and 1/64
+  export; world 7 stream 0 has 25 lost. Where a stream passes, tasks are gained
+  (6-30 per cell).
+- **The export diagnostic tracks terminal quality exactly**: 64/64 in the best
+  cells, 0-1/64 in the worst.
+- **PLAIN fails everywhere** (1.88-2.05, 0/64 export), so staging still does the
+  work wherever anything is learned at all.
+- **Margins are large but uninformative about quality**: worlds 7-9 clear 0.75
+  by 3.8-5.2 because the scratch comparator is weak (geometric-mean NMSE
+  1.1-4.5). Only world 6, which learned nothing, produces a negative margin.
+
+**Predictions:** the terminal prediction (0.70) was WRONG; margin (0.85), PLAIN
+(0.9) and lost-count (0.7) were MET; SO4_PASSES (0.45) not met; the stream
+sub-clause held where observable but did not gate the label. Details in
+PREDICTIONS.md.
+
+**Registered consequence.** SO3's baseline pass does not replicate on worlds
+6-9. The online-failure stop rule stands, now with three blocks of evidence
+(SO2 1/3, SO3's candidates, SO4 2/4). No B2 statement; C2 and the ladder's
+learner rungs stay closed. Development worlds 0-9 are now all spent for this
+protocol.
+
+**Next, for the PI** (`RESEARCH_STATUS.md`): the successor question is what
+distinguishes an acquiring world from a failing one. World 6 supplies three
+failed streams with saved prefixes, so a Tier 0 census over SO2, SO3 and SO4
+artifacts - 10 worlds, 22 staged cells - can ask whether stage-1/stage-2
+prefix quality predicts stage-3 success before any new lifetime is run.

@@ -1,0 +1,23 @@
+{
+ "stamp": {
+  "kind": "margin",
+  "name": "w7_p10",
+  "git_commit": "69b0692",
+  "protocol_sha256": "2f314bf5f49dc214641c11e6ab0a9cd338355823cb1b9b15a46f627aed86e457"
+ },
+ "result": {
+  "index": 10,
+  "program": [
+   4,
+   0,
+   4
+  ],
+  "trained": 0.17303307354450226,
+  "scratch": 4.929507732391357,
+  "world": 7,
+  "steps": 2000,
+  "seconds": 336.5
+ },
+ "result_sha256": "be8c540fb931b5371ae041c40f9c5ac4274baed43427b70aba9f551b8768ba42",
+ "finished_utc": "2026-09-15T23:33:10.124716+00:00"
+}

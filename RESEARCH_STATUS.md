@@ -6,197 +6,161 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-15, after the SO3 verdict. Completeness was checked
-against every top-level plan/spec status line, every `PROGRESS.md` H1 heading,
-and the review index (latest review: 84).
+Last rewritten: 2026-09-16, after the SO4 verdict. Nothing is running.
 
 # Awaiting a PI decision (nothing running)
 
 ## Track B: online learnability of the strong (rotated) substrate
 
-- **State:** SO3 CLOSED as `SO3_FAILS`, but the unchanged protocol passed on
-  fresh worlds. No run is active.
-- **SO3 result:**
-  - Neither stage-3 candidate (LR_HALF, STORE_8) improved on the unchanged
-    protocol in 2/3 worlds, so the one-world Tier 1 rescue does not replicate.
-  - BASE, SO2's protocol with no change, passed the terminal criterion in 3/3
-    fresh worlds (world medians 0.028 / 0.014 / 0.012; median 52-58 of 64 tasks
-    at or below 0.05).
-  - Terminal error varies 0.009-0.066 across replay streams within one world.
-  - SO2's failure is therefore not a stable property of the protocol. SO3
-    registered no BASE gate and no G5R margin, so the B2 statement is NOT
-    licensed and stop rule 2 is not lifted by SO3.
-- **Path:**
+- **State:** SO4 CLOSED as `SO4_FAILS`. The online-failure stop rule (the THIRD
+  Track-B stop rule in `POST_E6_RESEARCH_PROGRAM.md`) stands with three blocks of
+  evidence. No B2 statement. C2 and the program ladder's learner rungs stay
+  closed.
+- **What the three online runs jointly show** (working hypothesis, not a
+  verdict): the protocol acquires the substrate in SOME worlds at every seed
+  tried - 6 of 10 development worlds across SO2 (1/3, seed 5000), SO3 (3/3, seed
+  6000) and SO4 (2/4, seed 7000) - and within one world the replay stream alone
+  moves terminal error by up to an order of magnitude. World identity dominates;
+  the SO2-P consolidation settings did not improve on the unchanged protocol
+  anywhere.
+- **Development worlds 0-9 are now ALL spent** for this protocol.
 
 | step | result | commit |
 |---|---|---|
-| rotated substrate spec | rotation makes iteration AND branching necessary | (ROTATED_SUBSTRATE_SPEC, Amendments 1-2) |
-| G5 / G5R | learnability fails 0/3 online (mismatched, then matched family) | 2026-08-31 / 09-01 |
-| G5R diagnosis + LBFGS correction | failure is downstream of isolated operator fitting | 2026-09-01 |
-| G5R Stage D | `BUDGET_LIMITED` | 8b9b802 |
-| SO0 | no existing pair controls any budget axis | 1042878 |
-| SO1 | oracle routes pass, learned routes fail | dd57e24 |
-| SO1R | routes recoverable, so the wall is co-formation | 9c8d058 |
+| rotated substrate spec | rotation makes iteration AND branching necessary | (spec + Amendments 1-2) |
+| G5 / G5R / diagnosis / Stage D | not learnable online; localized downstream of operator fitting; `BUDGET_LIMITED` | 8b9b802 |
+| SO0 / SO1 / SO1R | no budget axis; oracle passes, learned fails; routes recoverable, so the wall is co-formation | 1042878 / dd57e24 / 9c8d058 |
 | J0 / J1 | routing tracks library quality; search in the loop locks in | f9bcc30 / 01305d4 |
-| J1c / J1c-R | length curriculum acquires the substrate offline, at 2 seeds | d4e6808 / 3bf6a59 |
-| J2A | offline staged library exports 64/64 unseen programs | 686e4d3 |
+| J1c / J1c-R / J2A | length curriculum acquires OFFLINE at 2 seeds; exports 64/64 unseen programs | d4e6808 / 3bf6a59 / 686e4d3 |
 | curriculum cost | same compute, +124 tasks of data | aa79aa3 |
-| SO2 | `SO2_FAILS`: export 3/3, terminal 1/3 (one stream, worlds 0-2, seed 5000) | 6a4f707 |
-| interference census | post-acquisition, recency-weighted loss in stage 3 | 3d87a0f |
-| SO2-P (Tier 1) | LIVE on world 1 (one stream); drift is not the lever | afb1ac6 |
-| SO2-P correction | replay arms gradient-matched but stream-confounded | b250973 |
-| SO3 | `SO3_FAILS`; BASE passes 3/3 fresh worlds; stream spread straddles threshold | (this commit) |
+| SO2 | `SO2_FAILS`: terminal 1/3, margin 3/3 (one stream per world) | 6a4f707 |
+| census / SO2-P / correction | loss is post-acquisition and recency-weighted; one-world rescue; replay arms stream-confounded | 3d87a0f / afb1ac6 / b250973 |
+| SO3 | `SO3_FAILS`; unchanged protocol passed 3/3 fresh worlds; stream spread 0.009-0.066 | 0e0bd67 |
+| SO4 | `SO4_FAILS`: terminal 2/4, margin 3/4; world 6 negative margin | (this commit) |
 
-- **Development-world use** under the rotated staged protocol: worlds 0-2 (SO1
-  through SO2-P), worlds 3-5 (SO3); worlds 6-9 unused.
-- **Proposed next (PI decision 6):** `SO4_B2_RETEST_PLAN.md`, a DRAFT that is
-  not frozen and has no code. It re-tests the UNCHANGED online staged protocol:
-  - worlds 6-9, model seed 7000, 3 replay streams per world, a PLAIN control;
-  - a world-level criterion over streams, with a sub-clause that at least 2 of
-    3 streams must pass in each passing world;
-  - the G5R margin on each world's pre-specified stream-0 library;
-  - labels PASSES / ACQUIRES_ONLY / STREAM_FRAGILE / FAILS;
-  - about 4 h local.
-
-  It needs PI answers to D1-D4 (worlds, margin coverage, thresholds, compute)
-  before it is frozen.
+- **Proposed next, and the cheapest (PI DECISION 7):** a Tier 0 cross-run world
+  census over EXISTING artifacts - 10 worlds, 22 staged cells from SO2, SO3 and
+  SO4 - asking whether stage-1/stage-2 prefix quality (and measurable world
+  properties) predict stage-3 success. World 6 supplies three failed streams with
+  saved prefixes; its stage-2 terminals (0.042-0.111) were already poor where
+  passing worlds sat at 0.010-0.067. Minutes of compute, no new lifetime, no new
+  worlds. If prefix quality predicts the outcome, the successor intervention acts
+  on the early stages; if it does not, the failure is in stage 3 and the
+  successor is a reliability intervention.
+- **Not proposed without that census:** any further online lifetime. There are no
+  unused development worlds left for this protocol, so a new band would have to
+  be allocated (decision 5).
 
 # Drafted, awaiting PI decisions
 
 ## Program ladder: compositional operators -> control flow -> higher-order programs
 
-- **State:** DRAFT plan `PROGRAM_LADDER_PLAN.md` with hypotheses PX1-PX9 in
+- **State:** DRAFT `PROGRAM_LADDER_PLAN.md`, hypotheses PX1-PX9 in
   `PREDICTIONS.md` (committed `fbb547a`).
-- **Extends:** Track C (C0 typed IR, C1 CHAIN/COMPOSE, C2 IF/REPEAT, C3
-  discovery) and Track D of `POST_E6_RESEARCH_PROGRAM.md`. None of C0-C3 has
-  started.
-- **Prior evidence it must respect:**
-  - The 2026-08-31 loop opportunity census: on straight-line E6 routes a loop
-    construct is net negative at depth 6 and pays only where routes have
-    collapsed.
-  - Its same-day CORRECTION: that census measured the absence of iteration in a
-    generator with no iteration, so the necessity gate moved into generator
-    design.
-  - The E6 line: macros pay but cannot be timed or compiled.
-  - The E7 census: a parameterized-macro family was not real against the
-    learner's own grams.
-- **Can run now without breaking stop rule 2:** L0d, the program-inference
-  census on J2A's frozen straight-line libraries (PX7).
-- **Needs a PI answer first:** L0a-L0c (teacher-side and oracle-executor gates).
-- **Gated:** learner rungs L1-L3 wait on online learnability being established,
-  now expected from the proposed B2 re-test rather than from SO3.
+- **Learner rungs (L1-L3) remain gated** by the online-failure stop rule, which
+  SO4 did not lift.
+- **Runnable now, no learner and no new world:** L0d, the program-inference
+  census (PX7). Plan drafted: `L0D_INFERENCE_CENSUS_PLAN.md`.
+  - Twelve frozen J2A libraries; depths 3-5; support sizes 128/32/8.
+  - Mechanisms: exhaustive enumeration, gradient route optimization, beam
+    {1,4,16}, posterior averaging, a commit-late hybrid, plus random and teacher
+    controls.
+  - Registered additions: a variable-depth forward gated bitwise at depth 3, and
+    an eligibility gate separating search failure from execution drift.
+  - Its decisions: run now or after the world census; include depth 5 or cap at
+    4; any mechanism to add or drop.
+- **Prior evidence the ladder must respect:** the 2026-08-31 loop census and its
+  correction (a straight-line generator cannot price loops); the E6 macro line
+  (macros pay but cannot be timed or compiled); the E7 census (no real
+  parameterized-macro family against the learner's own null).
 
 # Paused
 
 ## H28 closure / coordinate reuse (H28-C, then H28-Q)
 
-- **State:** provisional development checks only; no scientific verdict.
-  - T0 instrument checks and a bounded artifact inventory.
-  - Oracle coordinate fixture validated.
-  - Oracle-core adapter pilot transfers.
-  - The learner harness has oracle, independent and random-core controls,
-    reconstruction, and parameter-byte accounting (`11c9471`).
-- **Missing:** amortized economic endpoint; frozen
-  `H28_C_LEARNER_OPPORTUNITY_PLAN.md`; independent scorer; restart test. H28-Q not
-  started.
-- **Plans:** `H28_CLOSURE_RESEARCH_PLAN.md` (CL1-CL8), `H28_T0_INSTRUMENT_PLAN.md`,
-  `H28_C_COORDINATE_GATE_PLAN.md`, `H28_C_ADAPTER_PILOT_PLAN.md`,
-  `H28_C_LEARNER_OPPORTUNITY_PLAN.md`.
-- **Next:** add the economic endpoint and freeze the learner plan. It can resume
-  now: no run holds HEAD.
+- **State:** provisional development checks only; no verdict. Oracle coordinate
+  fixture validated; oracle-core adapter pilot transfers; learner harness has
+  oracle, independent and random-core controls, reconstruction and
+  parameter-byte accounting (`11c9471`).
+- **Missing:** the amortized economic endpoint; a frozen
+  `H28_C_LEARNER_OPPORTUNITY_PLAN.md`; independent scorer; restart test.
+- **Next:** add the economic endpoint and freeze the plan. Free to resume: no run
+  holds HEAD.
 
-# Available in parallel (no dependency on Track B)
+# Available in parallel
 
 ## Track A: role-filler semantics (review 84)
 
-- **State:** RF0a done (raw semantics survive; role adds about 0). RF0b
-  UNRESOLVED (`71a4411`). RF1 not planned in detail; RF2 not started.
-- **Plans:** `RF_ROLE_FILLER_PLAN.md` (draft program),
-  `RF0_ROLE_FILLER_PROTOCOL.md`, and the RF0a/RF0b plans (frozen, run).
-- **Next:** an RF1 plan, if prioritized. The convergence gate (Track A RF1 plus
-  Track B) is required before typed higher-order combinators; PX6 depends on
-  it.
+- RF0a done; RF0b UNRESOLVED (`71a4411`); RF1 not planned in detail; RF2 not
+  started. The convergence gate (Track A RF1 plus Track B) is required before
+  typed higher-order combinators, and the ladder's PX6 depends on RF1.
 
 ## Budgeted execution economy
 
-- **State:** `BUDGETED_EXECUTION_ECONOMY_PLAN.md`, a PI-merged DRAFT marked
-  do-not-freeze. B0/B1 are Tier 0/1 and queued; not started.
+- `BUDGETED_EXECUTION_ECONOMY_PLAN.md`, a PI-merged DRAFT marked do-not-freeze.
+  B0/B1 are Tier 0/1 and queued; not started.
 
 ## Infrastructure backlog
 
-- `CONCURRENCY_PLAN.md` is still marked DRAFT (with Amendment 1). The pool module
-  and bounded-pool practice are in use.
-- Non-bitwise speedups (batched `forward_tasks`, batched slots, about 1.95x) are
-  versioned candidates in `notes/performance_audit.txt`, admissible only at a
-  new plan boundary with an equivalence gate.
+- `CONCURRENCY_PLAN.md` still marked DRAFT (with Amendment 1); the pool practice
+  it describes is in use.
+- Non-bitwise speedups (batched `forward_tasks`, batched slots) remain versioned
+  candidates in `notes/performance_audit.txt`, admissible only at a plan boundary
+  with an equivalence gate.
+- **Host memory is a real constraint:** SO4's first attempt died on paging
+  exhaustion at about 5 GB free. Ask the PI to close large applications before
+  any multi-hour launch, and run one heavy job at a time.
 
 # Design only
 
 ## Track D: self-hosted program synthesis (SH0-SH4)
 
-- **State:** design in `POST_E6_RESEARCH_PROGRAM.md`. SH0 waits on C0's typed
-  IR.
+- Design in `POST_E6_RESEARCH_PROGRAM.md`; SH0 waits on C0's typed IR.
 
 # Closed (do not reopen without a new plan)
 
-- **V1-V5 sealed programs:** V5 closure includes review-55 withdrawals.
-- **V6 / V6R:** adaptation geometry (development).
-- **H39:** sealed (seeds 700-729). The formation line H47-H53 closed negative.
-- **Export branch:** E0-E3 and E8 development; the sealed export block is
-  confirmed (seeds 800-829). E5's writer failed on quality. E5.1: search cost is
-  logarithmic in space size. The E6 macro line closed: macros pay but cannot be
-  timed or compiled. The E7 census refuted the parameterized-macro rationale.
-  E8D and E9 were withdrawn before freezing.
-- **Iteration world spec:** withdrawn; superseded by the rotated substrate.
-- **SO2:** `SO2_FAILS` (6a4f707). SO3 shows it does not generalize to fresh
-  worlds.
-- **SO2-P and SO3 stage-3 consolidation candidates:** SO3_FAILS; the rescue does
-  not replicate.
+- **V1-V5 sealed programs**; V5 closure includes review-55 withdrawals.
+- **V6 / V6R** adaptation geometry (development).
+- **H39** sealed; the formation line H47-H53 closed negative.
+- **Export branch:** sealed export block confirmed (seeds 800-829); E5's writer
+  failed on quality; E5.1 cost scaling; the E6 macro line; the E7 census; E8D and
+  E9 withdrawn before freezing.
+- **Iteration world spec** withdrawn; superseded by the rotated substrate.
+- **SO2, SO3, SO4** as programs, and the SO2-P/SO3 consolidation candidates.
 
-# Hypothesis families and where they live (all in `PREDICTIONS.md`)
+# Hypothesis families (all in `PREDICTIONS.md`)
 
 | family | line | status |
 |---|---|---|
-| CF1-CF7 | staged formation (Track B) | working hypotheses; J1c supported staging; CF4 refuted by J1 |
-| CL1-CL8 | H28 closure / coordinate reuse | working hypotheses, untested |
-| PX1-PX9 | program ladder | working hypotheses, recorded 2026-09-15 |
+| CF1-CF7 | staged formation (Track B) | working; J1c supported staging, CF4 refuted by J1 |
+| CL1-CL8 | H28 closure / coordinate reuse | working, untested |
+| PX1-PX9 | program ladder | working, recorded 2026-09-15 |
 | B0-B3 | H47 membership / opportunity | closed |
-| SO0-SO3, J-rungs | Track B plans | registered inside each frozen plan |
+| SO0-SO4, J-rungs | Track B plans | registered inside each frozen plan |
 
 # Decisions pending from the PI
 
-1. Program ladder: may teacher-side and oracle-executor gates (L0a-L0c) run
-   before online learnability is established? The plan reads "yes".
-2. Program ladder: run L0d (inference census on existing libraries) first?
-3. (Superseded by SO3's outcome; now folded into 6.) If online learnability
-   fails again: close the ladder's learner rungs, or authorize an
-   offline-scoped variant?
-4. Should L1-L3 target remote workers from the start?
-5. Development-world budget for later rotated Tier 2 rungs: worlds 6-9, or a new
-   development band?
-6. NEW: register the B2 re-test of the unchanged online staged protocol on
-   worlds 6-9, with several streams and the G5R margin? If it passes, the B2
-   statement and the ladder's learner rungs open. It would use up 6-9, which
-   bears on decision 5.
+1. Ladder: may teacher-side and oracle-executor gates (L0a-L0c) run before online
+   learnability is established? The plan reads "yes".
+2. Ladder: run L0d first, or after the world census?
+3. (Folded into 7.)
+4. Should ladder rungs L1-L3 target remote workers when they open?
+5. Development-world budget: worlds 0-9 are spent for the rotated staged
+   protocol. Allocate a new development band, or stop opening worlds for it?
+6. (Answered by SO4: the re-test ran and failed.)
+7. NEW, recommended first: run the Tier 0 cross-run world census (10 worlds, 22
+   staged cells, existing artifacts) before any further Track B intervention?
 
 # Housekeeping owed
 
 - **`SPEC_AUDIT.md` full re-audit still owed.** A PARTIAL record-consistency
-  re-audit (rotated substrate through SO3) was appended 2026-09-15.
-  - Two items were verified in code: the SO2 terminal estimand and the replay
-    RNG.
-  - It found that J2A's zero route gap on its failure controls is not J0's
-    threshold prediction; corrected in PROGRESS and PREDICTIONS.
-  - Still owed: a code-level audit of runner and scorer against plan, with at
-    least one recomputed cell per milestone.
-- **Stop-rule numbering.** Documents written 2026-09-15 (this file,
-  `PROGRAM_LADDER_PLAN.md`, `SO4_B2_RETEST_PLAN.md`) call the online-failure
-  rule "stop rule 2". In `POST_E6_RESEARCH_PROGRAM.md` it is the THIRD Track-B
-  stop rule ("Online SO2 fails: do not run branching or iteration"); rule 2 is
-  "oracle routes pass but learned routes do not". The intended rule is the
-  online-failure rule everywhere.
-- **`PROGRESS.md` is not strictly chronological.** The 2026-09-14/15 SO2-line
-  entries sit before the 2026-09-14 H28 entries; see the placement note.
-- **Paper draft** is current through SO3. The copy in
-  `~/Downloads/ROW_paper_draft_2026-09-15.md` predates the SO3 addendum and
-  does not auto-update.
+  re-audit (rotated substrate through SO3) was appended 2026-09-15; SO4 is not
+  yet covered. Still owed: code-level audit of runner and scorer against plan,
+  with at least one recomputed cell per milestone.
+- **Stop-rule numbering:** documents written 2026-09-15 call the online-failure
+  rule "stop rule 2"; in `POST_E6_RESEARCH_PROGRAM.md` it is the third Track-B
+  rule. `SO4_B2_RETEST_PLAN.md` and this file name it correctly.
+- **`PROGRESS.md` is not strictly chronological:** the 2026-09-14/15 SO2-line
+  entries sit before that day's H28 entries; see the placement note.
+- **Paper draft** is current through SO4. The copy in
+  `~/Downloads/ROW_paper_draft_2026-09-15.md` predates the SO4 addendum.
