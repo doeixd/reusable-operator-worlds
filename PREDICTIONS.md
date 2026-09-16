@@ -8872,3 +8872,44 @@ Recorded fragilities, which make this weaker than the label's name suggests:
 This does not license spending a new development world band. The next test should
 make the measure comparable (normalize within world, or recompute it on a common
 task set) on the cells already in hand, under its own plan.
+
+
+# NOTE (2026-09-16): no mechanism identified for the online world-dependence; route identifiability withdrawn as a screen
+
+Append-only; not a registered prediction and not a verdict. This closes the
+mechanism-hunting sequence that followed SO4, all of it Tier 0 on the 24 cells
+already in hand.
+
+Three censuses asked what distinguishes an acquiring run from a failing one:
+
+| census | registered label | what it found |
+|---|---|---|
+| world-quality (`7cbb323`) | MIXED | stage-2 ERROR correlates pooled (rho +0.669) but separates only 1.66x; 2.4-3.1x within mixed-outcome worlds |
+| library-geometry (`62301db`) | GEOMETRY-EXPLAINS | fired by `route_margin` alone (rho -0.514); the PRIMARY slot-duplication measure carried nothing (+0.095) |
+| route-margin normalization (`0d01702`) | SURVIVES | Test A k=5/7 (tail 0.0453) only; the comparable `self_margin` is null and sign-flipped (+0.143, perm 0.264) |
+
+**Every candidate mechanism fails its own strongest test:**
+- **Slot duplication:** flat (+0.095, separation 1.01). Withdrawn.
+- **Route identifiability:** survives only in the task-set-dependent form.
+  Made comparable (`self_margin`, library-intrinsic, recovery gate 16/16
+  everywhere), it is null with the opposite sign. Within-world z-scoring drops
+  `route_margin` from -0.514 to -0.221, so most of the pooled effect was
+  cross-world scale. **Withdrawn as a candidate screen.**
+- **Prefix error:** scores 1/7 on the per-world test of which stream fails, i.e.
+  worse than chance, despite its pooled within-mixed-world separation. Both
+  numbers are correct and answer different questions; the separation must not be
+  read as "prefix error identifies the failing stream".
+- **Test A's own survival** plausibly re-detects that stream 0 (the canonical
+  replay seed) is usually the failing stream, which the world-quality census had
+  already established.
+
+Refined working hypothesis, and the honest stopping point: online staged
+formation of the rotated substrate is WORLD- AND STREAM-DEPENDENT WITH NO
+IDENTIFIED MECHANISM. Two cells rule out any monotone account on the measures
+tried (SO4 w6 s1: highest `self_margin` 0.441, fails at 2.17; SO4 w9 s2: nearly
+lowest 0.225, passes at 0.016).
+
+Consequence for planning: no development world band is justified for a prefix,
+geometry or identifiability screen. Any successor must either find a
+qualitatively different observable, or accept the world-dependence as the
+result - which is what `paper/draft.md` now states.

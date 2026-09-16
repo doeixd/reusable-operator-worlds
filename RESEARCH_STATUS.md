@@ -71,7 +71,28 @@ Nothing is running.
     1.01): the "near-duplicate slots" hypothesis is not what fired.
   - Among the 12 lowest-error cells the ordering inverts (`route_margin` +0.014;
     `effective_rank` +0.483; `mean_pair` +0.448).
-- **Successor options (PI DECISION 7, now informed by BOTH censuses):**
+- **Route-margin normalization census: DONE** (plan, module and tests `0d01702`;
+  report `reports/route_margin_normalization.json`; PROGRESS 2026-09-16). Tier 0,
+  all guards including a clean recovery gate (16/16 in every library). Registered
+  triage: **SURVIVES**, on ONE marginal test.
+  - Test A (within-world concordance, `route_margin`): k = 5/7, exact
+    Binomial(7,1/3) tail 0.0453.
+  - Test B (`self_margin`, library-intrinsic and comparable across worlds): rho
+    **+0.143**, permutation 0.264, separation 1.11 - null, and SIGN-FLIPPED
+    against `route_margin`'s pooled -0.514.
+  - Within-world z-scoring drops `route_margin` from -0.514 to -0.221: most of the
+    pooled effect was cross-world scale.
+  - `self_margin` concordance 3/7 (chance); stage-2 ERROR reference 1/7 (worse
+    than chance at picking the failing stream).
+  - Test A's survival plausibly re-detects that stream 0 is usually the failing
+    stream, which the world-quality census already established.
+- **MECHANISM HUNT CLOSED.** All three candidates are withdrawn: slot duplication
+  (flat), route identifiability (null once comparable), prefix error (1/7 per
+  world). Two cells rule out any monotone account (w6 s1 highest `self_margin`
+  fails at 2.17; w9 s2 nearly lowest passes at 0.016). The defensible position is
+  that online staged formation is world- AND stream-dependent with NO IDENTIFIED
+  MECHANISM, which is what `paper/draft.md` states.
+- **Successor options (PI DECISION 7, now informed by ALL THREE censuses):**
   1. **Prefix-screen intervention** (registered, needs a new world band): act on
      stages 1-2 - budget, stopping criterion, or stream selection - with the
      stage-2 statistic as a pre-stage-3 eligibility screen. Its weakness is SO4
@@ -89,10 +110,16 @@ Nothing is running.
      registered clause turned on a 2.6% gap in a single cell. Recompute it
      normalized within world, or on a common task set, over the 24 cells already
      in hand, and see whether the relation survives. Minutes, no new world.
-  - Claude's recommendation: option 5 first. Option 1 (a prefix- or
-    geometry-based screen costing a new world band) is NOT justified by a
-    single-cell clause with a sign flip. Options 3 and 4 remain open if option 5
-    dissolves the effect.
+  - **Option 5 is now DONE** (the normalization census above) and it did not
+    rescue the screen: the comparable measure is null.
+  - **Claude's recommendation: option 4 for Track B - stop the mechanism hunt and
+    report the online result as world-dependent**, which the paper already does.
+    No world band is justified for options 1 or 3 on the present evidence: every
+    observable tried is either null when made comparable, or worse than chance
+    per world.
+  - **Next research step instead: L0d**, the program-inference census
+    (`L0D_INFERENCE_CENSUS_PLAN.md`), which is runnable now, needs no world, and
+    belongs to the program ladder rather than to Track B.
 - **Any further online lifetime needs a new development band** (decision 5):
   worlds 0-9 are spent.
 
