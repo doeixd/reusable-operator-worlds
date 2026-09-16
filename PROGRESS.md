@@ -5800,3 +5800,57 @@ statistic. What it does establish is a cheap, measurable PRE-STAGE-3 screen
 whose value is known before stage 3 runs, and a concrete anomaly (SO4 w8) that
 any prefix-based account must explain. Both are recorded for the PI's successor
 choice in `RESEARCH_STATUS.md`.
+
+# Library-geometry census: GEOMETRY-EXPLAINS as computed, but it rests on one cell (Tier 0, 2026-09-16)
+
+Plan `LIBRARY_GEOMETRY_CENSUS_PLAN.md`, module and tests committed `79b1b74`
+before any number existed. Tier 0: 24 frozen stage-2 libraries, one fixed
+512-state probe each, no training, no new world. All guards passed (24 cells,
+library hashes equal to each run's own record, finiteness, min<=mean,
+non-vacuity, and the plan's bitwise anchor reproducing a recorded stage-2
+terminal median to 1e-6). `check_prereg.py` and `check_invalid.py` pass. Report:
+`reports/library_geometry_census.json`.
+
+| measure | pooled rho | perm | sep | mixed rho | low-error rho | orders w8 |
+|---|---:|---:|---:|---:|---:|---|
+| min_pair (PRIMARY) | +0.095 | 0.329 | 1.01 | -0.098 | +0.364 | no |
+| mean_pair | +0.317 | 0.071 | 1.02 | +0.210 | +0.448 | no |
+| **route_margin** | **-0.514** | **0.0045** | **0.32** | **-0.510** | +0.014 | **yes** |
+| effective_rank | -0.028 | 0.441 | 0.99 | -0.112 | +0.483 | no |
+| slot_norm_spread | +0.357 | 0.044 | 1.03 | -0.007 | -0.049 | no |
+
+**Registered triage: GEOMETRY-EXPLAINS**, fired by `route_margin` alone (the
+median support-MSE gap between a stage-2 task's best and second-best hard route,
+as a fraction of the best). Its direction is coherent: sharper route
+identification at stage 2 goes with lower stage-3 error. Failing cells' median
+margin is 1.35 against 4.20 for passing cells (0.32x), and 1.20 against 14.76
+(0.08x) within the mixed-outcome worlds.
+
+**Four fragilities, which the label's name overstates away:**
+1. **The w8 clause passes by 2.6%.** Its three margins are s0 1.605 (passed),
+   s2 1.201 (failed), s1 1.170 (failed worst). The worst-outcome stream is lowest
+   by 0.031. One cell decides the registered label, on that gap.
+2. **The measure is not comparable across task sets**, as the plan states, and
+   spans 0.23 to 67.48 (nearly 300x). Per run the correlation is -0.50 (SO2, 3
+   cells), **+0.12 (SO3, WRONG SIGN)** and -0.64 (SO4).
+3. **It neither guarantees nor is necessary for success.** World 6 stream 1 has
+   margin 2.55 and stage-3 2.17 (total failure); SO2 w2 has 39.24 and fails at
+   0.085; SO4 w9 s0 passes at 0.87.
+4. **The census's own PRIMARY measure carries nothing.** `min_pair` is +0.095
+   with separation 1.01, so the motivating "near-duplicate slots" hypothesis is
+   NOT what fired. A secondary measure did, and the plan's disjunctive
+   ADDS-NOTHING rule means one cell's ordering carried the label.
+
+**Also observed:** among the 12 cells whose stage-2 error is at or below the
+median, `route_margin` carries nothing (+0.014) while `effective_rank` (+0.483)
+and `mean_pair` (+0.448) rise - the opposite ordering to the pooled result. With
+12 cells and no permutation test on that subset, this is a pointer, not a
+finding.
+
+**What this licenses.** Reported as computed, the label says stage-2 ROUTE
+IDENTIFIABILITY is the geometric quantity worth attention, not slot duplication.
+It does NOT justify a new world band on its own: a single-cell clause, a sign
+flip in one of three runs, and a scale-incomparable measure are too weak to spend
+worlds on. The defensible successor is another Tier 0 step that makes
+`route_margin` comparable (normalize within world, or recompute it on a common
+task set) and tests it on the cells already in hand.

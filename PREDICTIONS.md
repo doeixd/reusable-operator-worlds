@@ -8833,3 +8833,42 @@ stage-3-only phenomenon, and it is not fully explained by the prefix either -
 SO4 w8 is a counterexample that any purely prefix-based account must explain.
 Testing this needs its own frozen plan; the census is observational and cannot
 show that improving a prefix would improve stage 3.
+
+
+# NOTE (2026-09-16) on the library-quality hypothesis: route identifiability, not slot duplication
+
+Append-only; not a registered prediction and not a verdict. The library-geometry
+census (`LIBRARY_GEOMETRY_CENSUS_PLAN.md`; plan, module and tests committed
+`79b1b74` before any number) returned the registered label **GEOMETRY-EXPLAINS**,
+fired by ONE of its five measures.
+
+- **What fired:** `route_margin`, the median support-MSE gap between a stage-2
+  task's best and second-best hard route as a fraction of the best. Pooled
+  Spearman -0.514 against stage-3 terminal error (permutation 0.0045); failing
+  cells' median 1.35 versus 4.20 passing (0.32x), and 1.20 versus 14.76 within
+  the mixed-outcome worlds. Sharper route identification at stage 2 goes with
+  lower stage-3 error.
+- **What did NOT fire:** `min_pair`, the census's registered PRIMARY measure and
+  the "near-duplicate slots" hypothesis that motivated it (+0.095, permutation
+  0.329, separation 1.01). Also flat: `effective_rank` (-0.028) and
+  `slot_norm_spread` pooled (+0.357 but mixed-world -0.007).
+
+So the earlier hypothesis - that a low-error library can still be a poor
+vocabulary because its slots are indistinguishable - is NOT supported in the form
+stated. The surviving form is narrower: what predicts stage-3 success is how
+sharply the stage-2 SUPPORT DATA identifies a route, which is a property of the
+library-plus-task-set pair rather than of slot geometry alone.
+
+Recorded fragilities, which make this weaker than the label's name suggests:
+- the registered w8 clause passes by 2.6% (margins s0 1.605 passed, s2 1.201
+  failed, s1 1.170 failed worst), so one cell carries the label;
+- `route_margin` is not comparable across task sets (the plan says so) and spans
+  0.23-67.48; per run it is -0.50 / **+0.12 (wrong sign)** / -0.64;
+- high margin neither guarantees success (world 6 stream 1: margin 2.55,
+  stage-3 2.17) nor is necessary for it (world 9 stream 0: margin 0.87, passed);
+- among the 12 lowest-error cells the ordering inverts: `route_margin` carries
+  nothing (+0.014) while `effective_rank` (+0.483) and `mean_pair` (+0.448) rise.
+
+This does not license spending a new development world band. The next test should
+make the measure comparable (normalize within world, or recompute it on a common
+task set) on the cells already in hand, under its own plan.

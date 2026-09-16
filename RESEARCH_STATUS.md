@@ -54,7 +54,24 @@ Nothing is running.
   - **World 6's collapse is visible in its prefix:** the worst stage-2 values in
     the census (end-of-task 0.175-0.309) and all three streams then failed.
   - The stage-1-to-stage-2 improvement ratio carries nothing (rho -0.043).
-- **Successor options (PI DECISION 7, now informed):**
+- **Library-geometry census: DONE** (plan, module and tests `79b1b74`; report
+  `reports/library_geometry_census.json`; PROGRESS 2026-09-16). Tier 0, 24 frozen
+  stage-2 libraries, all guards including the bitwise anchor. Registered triage:
+  **GEOMETRY-EXPLAINS**, but fired by ONE measure and resting on ONE cell.
+  - `route_margin` (how sharply stage-2 support data identifies a route): pooled
+    rho -0.514, permutation 0.0045; failing/passing medians 1.35 vs 4.20 (0.32x),
+    and 1.20 vs 14.76 within mixed-outcome worlds.
+  - The w8 clause passes by 2.6% (s0 1.605 passed, s2 1.201 failed, s1 1.170
+    failed worst), so one cell carries the label.
+  - Per run: -0.50 (SO2) / **+0.12 WRONG SIGN (SO3)** / -0.64 (SO4); the measure
+    spans 0.23-67.48 and the plan states it is not comparable across task sets.
+  - High margin neither guarantees success (w6 s1: 2.55 -> 2.17) nor is necessary
+    (w9 s0: 0.87 -> passed).
+  - The registered PRIMARY measure `min_pair` carries NOTHING (+0.095, separation
+    1.01): the "near-duplicate slots" hypothesis is not what fired.
+  - Among the 12 lowest-error cells the ordering inverts (`route_margin` +0.014;
+    `effective_rank` +0.483; `mean_pair` +0.448).
+- **Successor options (PI DECISION 7, now informed by BOTH censuses):**
   1. **Prefix-screen intervention** (registered, needs a new world band): act on
      stages 1-2 - budget, stopping criterion, or stream selection - with the
      stage-2 statistic as a pre-stage-3 eligibility screen. Its weakness is SO4
@@ -66,8 +83,16 @@ Nothing is running.
      the census says the entering library matters, not only stage 3).
   4. **Stop the online line** and report it as world-dependent, which is what the
      paper now says.
-  - Claude's recommendation: option 2 first (minutes, no new world, targets the
-    one counterexample), then option 1 only if it survives.
+  5. **NEW, and now Claude's recommendation: a Tier 0 normalization step.**
+     `route_margin` is the only geometric quantity that tracked the outcome, but
+     it is scale-incomparable across task sets, flips sign in one run, and its
+     registered clause turned on a 2.6% gap in a single cell. Recompute it
+     normalized within world, or on a common task set, over the 24 cells already
+     in hand, and see whether the relation survives. Minutes, no new world.
+  - Claude's recommendation: option 5 first. Option 1 (a prefix- or
+    geometry-based screen costing a new world band) is NOT justified by a
+    single-cell clause with a sign flip. Options 3 and 4 remain open if option 5
+    dissolves the effect.
 - **Any further online lifetime needs a new development band** (decision 5):
   worlds 0-9 are spent.
 
