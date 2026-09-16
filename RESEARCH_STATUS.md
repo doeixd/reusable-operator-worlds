@@ -37,7 +37,7 @@ Nothing is running.
 | SO2 | `SO2_FAILS`: terminal 1/3, margin 3/3 (one stream per world) | 6a4f707 |
 | census / SO2-P / correction | loss is post-acquisition and recency-weighted; one-world rescue; replay arms stream-confounded | 3d87a0f / afb1ac6 / b250973 |
 | SO3 | `SO3_FAILS`; unchanged protocol passed 3/3 fresh worlds; stream spread 0.009-0.066 | 0e0bd67 |
-| SO4 | `SO4_FAILS`: terminal 2/4, margin 3/4; world 6 negative margin | (this commit) |
+| SO4 | `SO4_FAILS`: terminal 2/4, margin 3/4; world 6 negative margin | acf8af9 |
 
 - **World-quality census: DONE** (plan, module and tests `8f0369a`; report
   `reports/world_quality_census.json`; PROGRESS 2026-09-16). Tier 0, committed
