@@ -1892,3 +1892,11 @@ this evidence range. It is not a comparison of beam, posterior or full-budget
 gradient inference and does not resolve PX7. The larger inference census stays
 unfrozen pending a bounded opportunity check. Raw measurements, derivation and
 validation are in reports/l0d_preflight.json and reports/l0d_preflight_2026-09-17/.
+
+# Depth-four frozen-vocabulary execution gate (2026-09-17)
+
+On one frozen STAGED5000/world-0 vocabulary, support-only exhaustive route
+search over 16 deterministic length-four programs reached query NMSE <= 0.05
+on all 16 (median 0.00872). This is a scoped frozen-vocabulary usability check;
+it does not establish a learned inference mechanism or a PX7 result. Beam,
+posterior, commit-late and depth-five measurements remain unrun.

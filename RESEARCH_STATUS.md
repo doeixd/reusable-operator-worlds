@@ -156,6 +156,14 @@ Nothing is running.
   - The earlier proposed depths 3-5 and ENUM/OPT/beam/posterior/commit-late grid
     stays deferred. The preflight's depth-three executor equivalence passes;
     deeper execution, uncertainty semantics and eligibility need new gates.
+  - **Depth-four execution gate COMPLETE:** commit `1faf77d`, report
+    `reports/l0d_depth4_execution_gate.json`, archived logs under
+    `reports/l0d_depth4_execution_gate_2026-09-17/`. On STAGED5000/world 0,
+    16 deterministic length-four programs all pass support-only exhaustive
+    ENUM at query NMSE 0.05 (median 0.00872); diagnostic mapped routes agree.
+    This is scoped frozen-vocabulary usability evidence, not a PX7 verdict.
+    Depth-five, beam, posterior and commit-late remain untested and require
+    their own frozen protocol.
 - **Prior evidence the ladder must respect:** the 2026-08-31 loop census and its
   correction (a straight-line generator cannot price loops); the E6 macro line
   (macros pay but cannot be timed or compiled); the E7 census (no real

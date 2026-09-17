@@ -5080,3 +5080,9 @@ PX7 remains untested. Next: bounded one-library 1/2/4-support opportunity gate.
 depth-three tasks retained identical ENUM routes and query errors at support
 128/4/2/1. The usable staged library supplies no evidence-size commitment
 opportunity here; stop this sweep and keep PX7 untested.
+
+2026-09-17 L0d depth-four execution gate: one frozen STAGED5000/world-0
+vocabulary executed 16 deterministic length-four programs. Support-only ENUM
+over 20,736 routes passed NMSE 0.05 on all 16 (median 0.00872), agreeing with
+the diagnostic mapped route. This supports scoped depth-four usability only;
+it is not evidence about beam/posterior/commit-late, depth five, or PX7.

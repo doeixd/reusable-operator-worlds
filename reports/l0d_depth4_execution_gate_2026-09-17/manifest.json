@@ -1,0 +1,22 @@
+{
+ "protocol": {
+  "id": "l0d-depth4-execution-gate-v1",
+  "git_commit": "1faf77d",
+  "name": "STAGED5000",
+  "world": 0,
+  "model_seed": 5000,
+  "tasks": 16,
+  "depth": 4,
+  "seed": 2704,
+  "slots": 12,
+  "support": 128,
+  "selection": "support-only exhaustive ENUM",
+  "input_sha256": {
+   "L0D_DEPTH4_EXECUTION_GATE_PLAN.md": "b338ba697845881b9a5e1f43be68334b21b4145cb5e689e2cc91ed818dbe19a7",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/j2a_staged_library.json": "9f823a9119047726b541d2be07ddad8c4b84291359e8c9a1e37526ed5870acdd"
+  },
+  "implementation_sha256": "1f2b08eddd843eb5dec660b78409026a14078969b3ae542258f6c9068e115ca9"
+ },
+ "protocol_sha256": "2d929f0a39bf39e22f88e70785772a4241ba08ff579df2ef9849651a71ded2ee"
+}

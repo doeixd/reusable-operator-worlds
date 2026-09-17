@@ -1,0 +1,9 @@
+{
+  "valid": true,
+  "tasks": 16,
+  "enum_passes_0_05": 16,
+  "enum_median_query_nmse": 0.00871711926412759,
+  "diagnostic_median_query_nmse": 0.00871711926412759,
+  "classification": "SEARCH_USABLE",
+  "interpretation": "depth-four execution gate only; no PX7 verdict"
+}

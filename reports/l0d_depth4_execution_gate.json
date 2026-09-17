@@ -1,0 +1,443 @@
+{
+ "protocol": {
+  "id": "l0d-depth4-execution-gate-v1",
+  "git_commit": "1faf77d",
+  "name": "STAGED5000",
+  "world": 0,
+  "model_seed": 5000,
+  "tasks": 16,
+  "depth": 4,
+  "seed": 2704,
+  "slots": 12,
+  "support": 128,
+  "selection": "support-only exhaustive ENUM",
+  "input_sha256": {
+   "L0D_DEPTH4_EXECUTION_GATE_PLAN.md": "b338ba697845881b9a5e1f43be68334b21b4145cb5e689e2cc91ed818dbe19a7",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/j2a_staged_library.json": "9f823a9119047726b541d2be07ddad8c4b84291359e8c9a1e37526ed5870acdd"
+  },
+  "implementation_sha256": "1f2b08eddd843eb5dec660b78409026a14078969b3ae542258f6c9068e115ca9"
+ },
+ "protocol_sha256": "2d929f0a39bf39e22f88e70785772a4241ba08ff579df2ef9849651a71ded2ee",
+ "complete": true,
+ "cell": {
+  "name": "STAGED5000",
+  "world": 0,
+  "model_seed": 5000,
+  "depth": 4,
+  "library_sha256": "87530e9799d5b81dbe3e2ed4ec8d426142388006d5dfecb81ef809fbeea5373e",
+  "rows": [
+   {
+    "task": 0,
+    "program": [
+     0,
+     4,
+     5,
+     2
+    ],
+    "enum_route": [
+     11,
+     10,
+     3,
+     9
+    ],
+    "enum_support_mse": 0.007642049342393875,
+    "enum_query_nmse": 0.00853150181541458,
+    "diagnostic_route": [
+     11,
+     10,
+     3,
+     9
+    ],
+    "diagnostic_query_nmse": 0.00853150181541458,
+    "seconds": 0.5801224000024376
+   },
+   {
+    "task": 1,
+    "program": [
+     5,
+     5,
+     5,
+     2
+    ],
+    "enum_route": [
+     3,
+     3,
+     3,
+     9
+    ],
+    "enum_support_mse": 0.010103771463036537,
+    "enum_query_nmse": 0.010336043369800431,
+    "diagnostic_route": [
+     3,
+     3,
+     3,
+     9
+    ],
+    "diagnostic_query_nmse": 0.010336043369800431,
+    "seconds": 0.5840566999977455
+   },
+   {
+    "task": 2,
+    "program": [
+     1,
+     4,
+     5,
+     4
+    ],
+    "enum_route": [
+     6,
+     10,
+     3,
+     10
+    ],
+    "enum_support_mse": 0.008873824030160904,
+    "enum_query_nmse": 0.008257950423645731,
+    "diagnostic_route": [
+     6,
+     10,
+     3,
+     10
+    ],
+    "diagnostic_query_nmse": 0.008257950423645731,
+    "seconds": 0.6047701000061352
+   },
+   {
+    "task": 3,
+    "program": [
+     1,
+     4,
+     2,
+     3
+    ],
+    "enum_route": [
+     6,
+     10,
+     9,
+     0
+    ],
+    "enum_support_mse": 0.009631957858800888,
+    "enum_query_nmse": 0.008981362328088424,
+    "diagnostic_route": [
+     6,
+     10,
+     9,
+     0
+    ],
+    "diagnostic_query_nmse": 0.008981362328088424,
+    "seconds": 0.636097399998107
+   },
+   {
+    "task": 4,
+    "program": [
+     1,
+     4,
+     2,
+     4
+    ],
+    "enum_route": [
+     6,
+     10,
+     9,
+     10
+    ],
+    "enum_support_mse": 0.009670753963291645,
+    "enum_query_nmse": 0.008388765221631338,
+    "diagnostic_route": [
+     6,
+     10,
+     9,
+     10
+    ],
+    "diagnostic_query_nmse": 0.008388765221631338,
+    "seconds": 0.6047139000002062
+   },
+   {
+    "task": 5,
+    "program": [
+     3,
+     3,
+     0,
+     2
+    ],
+    "enum_route": [
+     0,
+     0,
+     11,
+     9
+    ],
+    "enum_support_mse": 0.009869861416518688,
+    "enum_query_nmse": 0.01032833812921858,
+    "diagnostic_route": [
+     0,
+     0,
+     11,
+     9
+    ],
+    "diagnostic_query_nmse": 0.01032833812921858,
+    "seconds": 0.6422484000067925
+   },
+   {
+    "task": 6,
+    "program": [
+     5,
+     4,
+     1,
+     5
+    ],
+    "enum_route": [
+     3,
+     10,
+     6,
+     3
+    ],
+    "enum_support_mse": 0.009847071953117847,
+    "enum_query_nmse": 0.009740619977433309,
+    "diagnostic_route": [
+     3,
+     10,
+     6,
+     3
+    ],
+    "diagnostic_query_nmse": 0.009740619977433309,
+    "seconds": 0.605001900010393
+   },
+   {
+    "task": 7,
+    "program": [
+     3,
+     1,
+     3,
+     5
+    ],
+    "enum_route": [
+     0,
+     6,
+     0,
+     3
+    ],
+    "enum_support_mse": 0.009227066300809383,
+    "enum_query_nmse": 0.009292173657892656,
+    "diagnostic_route": [
+     0,
+     6,
+     0,
+     3
+    ],
+    "diagnostic_query_nmse": 0.009292173657892656,
+    "seconds": 0.6020797999954084
+   },
+   {
+    "task": 8,
+    "program": [
+     0,
+     1,
+     4,
+     5
+    ],
+    "enum_route": [
+     11,
+     6,
+     10,
+     3
+    ],
+    "enum_support_mse": 0.009911644272506237,
+    "enum_query_nmse": 0.008614498503267067,
+    "diagnostic_route": [
+     11,
+     6,
+     10,
+     3
+    ],
+    "diagnostic_query_nmse": 0.008614498503267067,
+    "seconds": 0.6551973000023281
+   },
+   {
+    "task": 9,
+    "program": [
+     0,
+     1,
+     5,
+     3
+    ],
+    "enum_route": [
+     11,
+     6,
+     3,
+     0
+    ],
+    "enum_support_mse": 0.009135862812399864,
+    "enum_query_nmse": 0.009229724175213899,
+    "diagnostic_route": [
+     11,
+     6,
+     3,
+     0
+    ],
+    "diagnostic_query_nmse": 0.009229724175213899,
+    "seconds": 0.6224621000001207
+   },
+   {
+    "task": 10,
+    "program": [
+     4,
+     2,
+     5,
+     1
+    ],
+    "enum_route": [
+     10,
+     9,
+     3,
+     6
+    ],
+    "enum_support_mse": 0.01063772477209568,
+    "enum_query_nmse": 0.008819740024988112,
+    "diagnostic_route": [
+     10,
+     9,
+     3,
+     6
+    ],
+    "diagnostic_query_nmse": 0.008819740024988112,
+    "seconds": 0.6412331999890739
+   },
+   {
+    "task": 11,
+    "program": [
+     0,
+     0,
+     1,
+     5
+    ],
+    "enum_route": [
+     11,
+     11,
+     6,
+     3
+    ],
+    "enum_support_mse": 0.00805575866252184,
+    "enum_query_nmse": 0.007763160353345575,
+    "diagnostic_route": [
+     11,
+     11,
+     6,
+     3
+    ],
+    "diagnostic_query_nmse": 0.007763160353345575,
+    "seconds": 0.5798405000095954
+   },
+   {
+    "task": 12,
+    "program": [
+     2,
+     4,
+     3,
+     1
+    ],
+    "enum_route": [
+     9,
+     10,
+     0,
+     6
+    ],
+    "enum_support_mse": 0.009884987026453018,
+    "enum_query_nmse": 0.008535813106921484,
+    "diagnostic_route": [
+     9,
+     10,
+     0,
+     6
+    ],
+    "diagnostic_query_nmse": 0.008535813106921484,
+    "seconds": 0.6240346999984467
+   },
+   {
+    "task": 13,
+    "program": [
+     5,
+     5,
+     4,
+     3
+    ],
+    "enum_route": [
+     3,
+     3,
+     10,
+     0
+    ],
+    "enum_support_mse": 0.010638447478413582,
+    "enum_query_nmse": 0.010162323947026809,
+    "diagnostic_route": [
+     3,
+     3,
+     10,
+     0
+    ],
+    "diagnostic_query_nmse": 0.010162323947026809,
+    "seconds": 0.6133043000008911
+   },
+   {
+    "task": 14,
+    "program": [
+     5,
+     4,
+     2,
+     1
+    ],
+    "enum_route": [
+     3,
+     10,
+     9,
+     6
+    ],
+    "enum_support_mse": 0.008850411511957645,
+    "enum_query_nmse": 0.008316378585975396,
+    "diagnostic_route": [
+     3,
+     10,
+     9,
+     6
+    ],
+    "diagnostic_query_nmse": 0.008316378585975396,
+    "seconds": 0.583954800007632
+   },
+   {
+    "task": 15,
+    "program": [
+     2,
+     5,
+     3,
+     0
+    ],
+    "enum_route": [
+     9,
+     3,
+     0,
+     11
+    ],
+    "enum_support_mse": 0.009249478578567505,
+    "enum_query_nmse": 0.008567185659074196,
+    "diagnostic_route": [
+     9,
+     3,
+     0,
+     11
+    ],
+    "diagnostic_query_nmse": 0.008567185659074196,
+    "seconds": 0.5884078000090085
+   }
+  ],
+  "seconds": 10.039624500001082,
+  "terminal_tensor_bytes_lower_bound": 169869312
+ },
+ "summary": {
+  "tasks": 16,
+  "enum_passes_0_05": 16,
+  "enum_median_query_nmse": 0.00871711926412759,
+  "diagnostic_median_query_nmse": 0.00871711926412759,
+  "classification": "SEARCH_USABLE",
+  "interpretation": "depth-four execution gate only; no PX7 verdict"
+ },
+ "finished_utc": "2026-09-17T14:55:52.381737+00:00"
+}

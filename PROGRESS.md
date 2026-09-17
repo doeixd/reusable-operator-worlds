@@ -6041,3 +6041,23 @@ are archived under `reports/l0d_ambiguity_gate_2026-09-17/`.
 NEXT: keep the full PX7 census unfrozen. Any successor needs a distinct,
 pre-specified source of ambiguity or a separately gated deeper executor; do not
 repeat support-size sweeps on this same usable library.
+
+# 2026-09-17 - Depth-four execution gate passes
+
+Committed gate code and plan at `1faf77d`, then ran the single frozen
+STAGED5000/world-0 cell. Sixteen deterministic length-four programs were
+searched with support-only exhaustive ENUM over 20,736 routes each. The cell
+completed in 10.04 seconds with exit 0; its one-task depth-four terminal tensor
+lower bound is 169,869,312 bytes. Independent validation passes source hashes,
+library immutability, operational records and finite metrics. All 16 ENUM query
+NMSE values pass 0.05, median 0.00871712; diagnostic traffic-map routes have
+the same median and agree on every task.
+
+This is a scoped SEARCH_USABLE execution gate for one frozen vocabulary and
+depth. It does not compare beam, posterior, commit-late or full-budget OPT,
+and does not license depth five or a PX7 verdict. Archived report and logs:
+`reports/l0d_depth4_execution_gate_2026-09-17/`.
+
+NEXT: freeze a precise full PX7 mechanism protocol, or draft a separately
+bounded depth-five memory gate. Do not infer a general compositional horizon
+from this one library/world.

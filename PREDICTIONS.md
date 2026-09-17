@@ -8948,3 +8948,12 @@ tasks. Exhaustive support-only ENUM selected the same route at supports 128,
 for an evidence-size commitment opportunity on this fixed depth-three library,
 not evidence that all inference mechanisms are cheap and not a PX7 result.
 The larger depth/mechanism census remains unfrozen.
+
+# 2026-09-17 - Depth-four frozen-vocabulary execution gate passes, no PX7 verdict
+
+On STAGED5000/world 0, sixteen deterministic length-four programs were scored
+with support-only exhaustive ENUM over 20,736 routes. All sixteen reached query
+NMSE at most 0.05, with median 0.00872; the diagnostic mapped routes agreed on
+this cell. This supports usability of the frozen vocabulary at this depth and
+does not establish a learned inference mechanism, a depth-five horizon, or any
+PX7(a-c) result. The full mechanism census remains unfrozen.
