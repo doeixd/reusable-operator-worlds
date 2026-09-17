@@ -19,8 +19,10 @@ of the largest block's terminal output, runtime and selected-route query NMSE.
 # Equivalence gates
 
 On a small depth-three input, compare the chunked evaluator's complete route
-loss vector to the existing all-route evaluator, including route-index order.
-On depth five, compare selected-route support loss to direct hard execution,
+loss vector to the existing all-route evaluator within `1e-6` absolute/relative
+tolerance (batching changes reduction order), including identical argmin route
+index. On depth five, compare selected-route support loss to direct hard
+execution within `1e-5`,
 require finite metrics, unchanged library hashes and exactly 243 blocks. The
 report is classified `MEMORY_SAFE_SEARCH` only when all checks pass; it is a
 feasibility result, not a claim about depth-five generalization or PX7.

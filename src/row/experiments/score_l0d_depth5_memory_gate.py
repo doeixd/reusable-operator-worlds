@@ -1,7 +1,7 @@
 import argparse,json,math
 from pathlib import Path
 from row.experiments.so1_storage import digest,fingerprint
-def score(root=Path('artifacts/l0d_depth5_memory_gate'),output=Path('reports/l0d_depth5_memory_gate.json')):
+def score(root=Path('artifacts/l0d_depth5_memory_gate_v2'),output=Path('reports/l0d_depth5_memory_gate_v2.json')):
     root,output=Path(root),Path(output); m=json.loads((root/'manifest.json').read_text()); o=json.loads(output.read_text()); p,s=m['protocol'],m['protocol_sha256']
     if fingerprint(p)!=s or o['protocol']!=p or o['protocol_sha256']!=s: raise ValueError('protocol mismatch')
     for path,e in p['input_sha256'].items():

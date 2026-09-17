@@ -13,7 +13,7 @@ from row.experiments.l0d_depth4_execution_gate import DepthLibrary
 from row.experiments.preflight_l0d import load_source
 from row.experiments.so1_storage import atomic_json, digest, fingerprint, log_line, now, writer_lock
 
-PLAN=Path('L0D_DEPTH5_MEMORY_GATE_PLAN.md'); ROOT=Path('artifacts/l0d_depth5_memory_gate'); OUTPUT=Path('reports/l0d_depth5_memory_gate.json')
+PLAN=Path('L0D_DEPTH5_MEMORY_GATE_PLAN.md'); ROOT=Path('artifacts/l0d_depth5_memory_gate_v2'); OUTPUT=Path('reports/l0d_depth5_memory_gate_v2.json')
 NAME, WORLD, MODEL_SEED, DEPTH, TASKS, SEED, BLOCK = 'STAGED5000', 0, 5000, 5, 1, 2705, 1024
 
 def protocol():
@@ -37,7 +37,8 @@ def chunked_mse(library,x,y,depth,block):
             z=x.unsqueeze(0).expand(count,n,d).reshape(-1,d)
             for pos in range(depth):
                 candidates=library.candidates(z).reshape(count,n,library.slots,d)
-                z=candidates[torch.arange(count)[:,None],torch.arange(n)[None,:],torch.tensor(routes[:,pos])].reshape(-1,d)
+                slots=torch.tensor(routes[:,pos], dtype=torch.long)[:,None].expand(count,n)
+                z=candidates[torch.arange(count)[:,None],torch.arange(n)[None,:],slots].reshape(-1,d)
             values.append(torch.mean((z.reshape(count,n,d)-y.unsqueeze(0))**2,dim=(1,2)))
             largest=max(largest,int(z.numel()*z.element_size())); blocks+=1
     return torch.cat(values), blocks, largest
@@ -49,7 +50,7 @@ def measure():
     started=time.perf_counter(); cfg,world,model,_,_=load_source(NAME,WORLD); library=DepthLibrary(model); before=library_sha(model); t=task(cfg,world); x=torch.tensor(t['train_x'],dtype=torch.float32); y=torch.tensor(t['train_y'],dtype=torch.float32)
     values,blocks,largest=chunked_mse(library,x,y,DEPTH,BLOCK); best=int(torch.argmin(values)); route=unflatten(best,library.slots,DEPTH); selected=float(values[best]); direct=direct_support(library,x,y,route)
     if library_sha(model)!=before: raise ValueError('library changed')
-    return {'name':NAME,'world':WORLD,'model_seed':MODEL_SEED,'depth':DEPTH,'program':list(t['program']),'library_sha256':before,'blocks':blocks,'expected_blocks':math.ceil(library.slots**DEPTH/BLOCK),'selected_route':route,'selected_support_mse':selected,'direct_support_mse':direct,'support_mse_equal':selected==direct,'largest_terminal_bytes':largest,'seconds':time.perf_counter()-started,'terminal_lower_bound_bytes':128*12**5*16*4}
+    return {'name':NAME,'world':WORLD,'model_seed':MODEL_SEED,'depth':DEPTH,'program':list(t['program']),'library_sha256':before,'blocks':blocks,'expected_blocks':math.ceil(library.slots**DEPTH/BLOCK),'selected_route':route,'selected_support_mse':selected,'direct_support_mse':direct,'support_mse_equal':abs(selected-direct)<=1e-5,'support_mse_abs_diff':abs(selected-direct),'largest_terminal_bytes':largest,'seconds':time.perf_counter()-started,'terminal_lower_bound_bytes':128*12**5*16*4}
 
 def validate(r):
     if r['blocks']!=r['expected_blocks'] or r['expected_blocks']!=243 or not r['support_mse_equal']: raise ValueError('block/equivalence gate failed')
