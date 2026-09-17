@@ -5075,3 +5075,8 @@ library/task pairs keep identical ENUM routes and query scores at support
 query quality, so they do not establish costly parsing in a usable vocabulary.
 Only 39/192 pairs have monotone absolute gaps. This is descriptive evidence;
 PX7 remains untested. Next: bounded one-library 1/2/4-support opportunity gate.
+
+2026-09-17 L0d sparse-evidence gate: on STAGED5000/world 0, all 16 held-out
+depth-three tasks retained identical ENUM routes and query errors at support
+128/4/2/1. The usable staged library supplies no evidence-size commitment
+opportunity here; stop this sweep and keep PX7 untested.

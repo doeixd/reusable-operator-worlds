@@ -1,0 +1,26 @@
+{
+  "valid": true,
+  "tasks": 16,
+  "support_cells": 64,
+  "route_changes": {
+    "4": 0,
+    "2": 0,
+    "1": 0
+  },
+  "query_worsens": {
+    "4": 0,
+    "2": 0,
+    "1": 0
+  },
+  "query_improves": {
+    "4": 0,
+    "2": 0,
+    "1": 0
+  },
+  "median_query_delta": {
+    "4": 0.0,
+    "2": 0.0,
+    "1": 0.0
+  },
+  "interpretation": "opportunity gate only; no PX7 verdict"
+}

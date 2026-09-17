@@ -6022,3 +6022,22 @@ L0D_AMBIGUITY_GATE_PLAN.md now drafts the bounded next measurement: one existing
 staged library, support 1/2/4 versus the existing 128 anchor, stopping this
 sweep if it again yields no route-choice opportunity. No new run launched;
 next is implement/check that gate, not reopen Track B or a sealed world band.
+
+# 2026-09-17 - Bounded sparse-evidence gate closed
+
+Implemented `l0d_ambiguity_gate` and its independent scorer after the validated
+preflight found no route changes at support 8. The gate reloaded the same
+STAGED5000/world-0 library and first sixteen held-out programs, then enumerated
+support-only routes at 128, 4, 2 and 1 examples. It completed in about 1.3 s;
+exit 0, scorer valid, source/library hashes and 128 anchors pass. Every one of
+the 16 tasks retained the 128 route at all sparse supports, with identical query
+NMSE; route changes, query worsenings and improvements were all 0/16.
+
+This closes the evidence-size opportunity on this fixed depth-three library.
+It is a negative Tier 0 gate, not a PX7 verdict: beam, posterior, full-budget
+OPT and deeper execution remain untested. The report and operational records
+are archived under `reports/l0d_ambiguity_gate_2026-09-17/`.
+
+NEXT: keep the full PX7 census unfrozen. Any successor needs a distinct,
+pre-specified source of ambiguity or a separately gated deeper executor; do not
+repeat support-size sweeps on this same usable library.

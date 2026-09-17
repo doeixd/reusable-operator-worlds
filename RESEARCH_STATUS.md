@@ -145,8 +145,10 @@ Nothing is running.
     on the usable staged libraries.
   - **Next: implement the bounded ambiguity gate** drafted in
     `L0D_AMBIGUITY_GATE_PLAN.md`: one existing library, support 1/2/4 against its
-    saved 128-example anchor. Not yet frozen, implemented or run. No larger
-    inference comparison is justified by the current preflight alone.
+    saved 128-example anchor. **DONE:** all 16 tasks retain the exact 128 route
+    and query error at supports 4/2/1; independent scorer passes. This closes
+    the evidence-size opportunity on this fixed depth-three library. No larger
+    inference comparison is justified by these negative gates alone.
   - The full census draft needs defined posterior/commit-late semantics,
     assignment-independent eligibility, measured ambiguity, exhaustive triage,
     and memory/cost sizing before freezing. Its old teacher-route and monotone-

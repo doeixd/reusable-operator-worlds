@@ -8939,3 +8939,12 @@ three. It does not show that all inference methods are cheap or equivalent:
 beam, posterior methods and full-budget OPT were not compared. The full census
 remains unfrozen. Next bounded opportunity check is drafted in
 L0D_AMBIGUITY_GATE_PLAN.md; no successor computation has started.
+
+# 2026-09-17 - Sparse-evidence opportunity gate closed, no PX7 verdict
+
+The bounded gate used STAGED5000/world 0 and the first 16 existing held-out
+tasks. Exhaustive support-only ENUM selected the same route at supports 128,
+4, 2 and 1 for every task, with identical query NMSE. This is a negative gate
+for an evidence-size commitment opportunity on this fixed depth-three library,
+not evidence that all inference mechanisms are cheap and not a PX7 result.
+The larger depth/mechanism census remains unfrozen.

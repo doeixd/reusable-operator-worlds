@@ -1,0 +1,24 @@
+{
+ "protocol": {
+  "id": "l0d-ambiguity-gate-v1",
+  "git_commit": "9693d39",
+  "name": "STAGED5000",
+  "world": 0,
+  "model_seed": 5000,
+  "tasks": 16,
+  "supports": [
+   128,
+   4,
+   2,
+   1
+  ],
+  "selection": "support-only exhaustive ENUM; query labels never used",
+  "input_sha256": {
+   "L0D_AMBIGUITY_GATE_PLAN.md": "b47ccf70eb4d605d465f6cac78a78cf582fa8a377d14e63b0cad3e27c5938572",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/j2a_staged_library.json": "9f823a9119047726b541d2be07ddad8c4b84291359e8c9a1e37526ed5870acdd"
+  },
+  "implementation_sha256": "61ed62738dcb269ffdd959826634dfafce92f60dfdbf426d93f60bde5393f039"
+ },
+ "protocol_sha256": "5060597f6b44ae4de7a6ade155baf08e2efcfc3ff2f970570df0f841527395fe"
+}
