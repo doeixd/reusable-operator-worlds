@@ -1,5 +1,13 @@
 # L0d: program inference on a fixed vocabulary (PX7; Tier 0-1 DRAFT)
 
+**2026-09-17 preflight completed:** all twelve libraries and 576 support
+measurements validate. On the six staged libraries all 96 library/task pairs
+choose identical routes at supports 128, 32 and 8, with identical query NMSE.
+The proposed evidence reduction has no observed hard-route commitment cost at
+those settings. `L0D_AMBIGUITY_GATE_PLAN.md` drafts a bounded 1/2/4-example check
+on one existing library before this larger census. PX7 remains untested; this
+original full census remains unfrozen and unlaunched.
+
 **2026-09-17 implementation audit:** this original draft remains unfrozen.
 `L0D_PREFLIGHT_PLAN.md` now defines the prerequisite artifact/ambiguity checks
 and lists the design issues to resolve before a full census. Its runner is

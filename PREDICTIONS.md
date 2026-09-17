@@ -8923,3 +8923,19 @@ A two-library/four-task structural smoke reproduces J2A exactly but has 0/4
 monotone absolute gaps; this is an instrument observation, not a PX7 test.
 PX7(a-c) remain working hypotheses, untested. Full preflight awaits PI execution;
 see PROGRESS and reports/l0d_preflight_smoke_2026-09-17/ for bounded evidence.
+
+# 2026-09-17 - PX7 preflight complete; inference hypotheses remain untested
+
+L0d preflight at 4a6aa47 passes its instrument checks (12 libraries,
+192 library/task pairs, 576 support measurements; independent validation and
+operational logs in reports/l0d_preflight_2026-09-17/). All 96 staged pairs
+select identical routes with 128, 32 and 8 examples and keep identical query
+errors, all below NMSE 0.05. The 96 poor-control pairs fail at every support.
+Only 39/192 pairs have the draft's proposed monotone absolute-MSE gap pattern.
+
+This is descriptive, not a verdict on PX7(a-c). The proposed evidence reduction
+has no observed hard-route commitment cost on these usable libraries at depth
+three. It does not show that all inference methods are cheap or equivalent:
+beam, posterior methods and full-budget OPT were not compared. The full census
+remains unfrozen. Next bounded opportunity check is drafted in
+L0D_AMBIGUITY_GATE_PLAN.md; no successor computation has started.

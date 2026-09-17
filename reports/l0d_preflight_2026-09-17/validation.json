@@ -1,0 +1,10 @@
+{
+ "valid": true,
+ "libraries": 12,
+ "tasks": 192,
+ "support_cells": 576,
+ "gap_monotone_tasks": 39,
+ "mapped_fails_enum_passes": 0,
+ "random_worse_than_enum_128": 191,
+ "interpretation": "preflight only; no PX7 verdict"
+}

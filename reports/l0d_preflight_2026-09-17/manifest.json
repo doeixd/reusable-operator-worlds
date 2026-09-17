@@ -1,0 +1,159 @@
+{
+ "protocol": {
+  "id": "l0d-preflight-v1",
+  "git_commit": "4a6aa47",
+  "dry_run": false,
+  "jobs": [
+   [
+    "STAGED5000",
+    0
+   ],
+   [
+    "STAGED5000",
+    1
+   ],
+   [
+    "STAGED5000",
+    2
+   ],
+   [
+    "STAGED3001",
+    0
+   ],
+   [
+    "STAGED3001",
+    1
+   ],
+   [
+    "STAGED3001",
+    2
+   ],
+   [
+    "NONSTAGED3001",
+    0
+   ],
+   [
+    "NONSTAGED3001",
+    1
+   ],
+   [
+    "NONSTAGED3001",
+    2
+   ],
+   [
+    "RESET5000",
+    0
+   ],
+   [
+    "RESET5000",
+    1
+   ],
+   [
+    "RESET5000",
+    2
+   ]
+  ],
+  "tasks": 16,
+  "supports": [
+   128,
+   32,
+   8
+  ],
+  "opt_steps": 20,
+  "environment": {
+   "python": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+   "torch": "2.13.0+cpu",
+   "numpy": "2.3.5",
+   "psutil": "7.2.1",
+   "platform": "Windows-11-10.0.26100-SP0",
+   "torch_threads": 1
+  },
+  "input_sha256": {
+   "artifacts/j1c_curriculum/cells/RESET_w0/result.json": "0f9f9b107cc010eb86870fbb76290c4bc540e8c30bd3458d847663594c132d14",
+   "artifacts/j1c_curriculum/cells/RESET_w0/stage1/model.pt": "2f39097012c9b0b227f1a45712d1fd45e444dd45439b60d5592824113d72625b",
+   "artifacts/j1c_curriculum/cells/RESET_w0/stage2/model.pt": "b74d7d1eb8f4f7aded4d3b4035848edce6732f70dffb0c10b3637ded67422c7a",
+   "artifacts/j1c_curriculum/cells/RESET_w0/stage3/config.yaml": "1004ea1f5110cb74082b2219f577f6eb6ecefdf2022c5fd2d4edb1716f165e2d",
+   "artifacts/j1c_curriculum/cells/RESET_w0/stage3/model.pt": "280922c7382c0c310cab8ddc9b6eb53fbe27de4eb9b6a99a346ca3a5216a5872",
+   "artifacts/j1c_curriculum/cells/RESET_w0/stage3/model_state.json": "c166ab138f37a7e9ffabff32296552a82ae4407eea7a3b0d17eaa731184fe064",
+   "artifacts/j1c_curriculum/cells/RESET_w1/result.json": "530fa9c147139d72ca71ac3ef2ee002071d93c7a2a27f7354e4276dc33482143",
+   "artifacts/j1c_curriculum/cells/RESET_w1/stage1/model.pt": "ba39de3ba0b4b82ac8639fbbb99394b6a362cd940cd58a3c4f240873509497ba",
+   "artifacts/j1c_curriculum/cells/RESET_w1/stage2/model.pt": "1b4a13430d48cfb75662fd4011fc591509327b55f9f0d3a8af100d5c7d34df1a",
+   "artifacts/j1c_curriculum/cells/RESET_w1/stage3/config.yaml": "3959cb3b42ea3a0e56876c8e71a0ad07e9bbb8f7340c7b722d1388faf117b2d9",
+   "artifacts/j1c_curriculum/cells/RESET_w1/stage3/model.pt": "690bc002380c8a9a12fd60648fefa83e49a25dab0464b04001938a9dcfe3ac27",
+   "artifacts/j1c_curriculum/cells/RESET_w1/stage3/model_state.json": "b2fdfe46dc2fc5219b6712644ec774e9caf22addd37913ffbaa8430f2fe417b9",
+   "artifacts/j1c_curriculum/cells/RESET_w2/result.json": "d11b13f22a38315c55812298e3113445f7a210f1c6ceaed920b1986e8bfd19f1",
+   "artifacts/j1c_curriculum/cells/RESET_w2/stage1/model.pt": "497fc6b1bb63bee06b6322ada8ad8f4df47263e9514d65755c073fe2607fabb2",
+   "artifacts/j1c_curriculum/cells/RESET_w2/stage2/model.pt": "8cd7461f560aed2e395e2a47851afe6aa00898ebcf94af07ef35578f277a3689",
+   "artifacts/j1c_curriculum/cells/RESET_w2/stage3/config.yaml": "482d44c9cb4f7dad2ffbe4256e7152e1374e5a45e922a16060e00cdc728745c6",
+   "artifacts/j1c_curriculum/cells/RESET_w2/stage3/model.pt": "4a6f31596a371bfa14b9bf6eea7c4c975c49850cb8bcc98fbf74f03192d4ea5e",
+   "artifacts/j1c_curriculum/cells/RESET_w2/stage3/model_state.json": "9706dd641dbe720dd2bae6f5192e2652c1a169ae046d8274c1dec35a68d7285d",
+   "artifacts/j1c_curriculum/cells/STAGED_w0/result.json": "967df4ad145ba0b786cebd123d4917097cd743e475d05452de7ab8d9e11b8eaa",
+   "artifacts/j1c_curriculum/cells/STAGED_w0/stage1/model.pt": "2f39097012c9b0b227f1a45712d1fd45e444dd45439b60d5592824113d72625b",
+   "artifacts/j1c_curriculum/cells/STAGED_w0/stage2/model.pt": "b74d7d1eb8f4f7aded4d3b4035848edce6732f70dffb0c10b3637ded67422c7a",
+   "artifacts/j1c_curriculum/cells/STAGED_w0/stage3/config.yaml": "1004ea1f5110cb74082b2219f577f6eb6ecefdf2022c5fd2d4edb1716f165e2d",
+   "artifacts/j1c_curriculum/cells/STAGED_w0/stage3/model.pt": "9ba200d7ee840254b7b7d1df5a1227698d43c14656758435b3479da1d1a2db1e",
+   "artifacts/j1c_curriculum/cells/STAGED_w0/stage3/model_state.json": "c166ab138f37a7e9ffabff32296552a82ae4407eea7a3b0d17eaa731184fe064",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/result.json": "f8366b64eeb89cf172de5136c116e245ac6b754fb5223e291691846bd4caa210",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/stage1/model.pt": "ba39de3ba0b4b82ac8639fbbb99394b6a362cd940cd58a3c4f240873509497ba",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/stage2/model.pt": "1b4a13430d48cfb75662fd4011fc591509327b55f9f0d3a8af100d5c7d34df1a",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/stage3/config.yaml": "3959cb3b42ea3a0e56876c8e71a0ad07e9bbb8f7340c7b722d1388faf117b2d9",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/stage3/model.pt": "80d50024e7a47367d04ff60d56421b58b091e6063ecb5e44f57f04a4a365dc1f",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/stage3/model_state.json": "b2fdfe46dc2fc5219b6712644ec774e9caf22addd37913ffbaa8430f2fe417b9",
+   "artifacts/j1c_curriculum/cells/STAGED_w2/result.json": "11b47f1103b286b06dc46dd9387bebf762dcdea88c54a62f4926ebcd69ed3a43",
+   "artifacts/j1c_curriculum/cells/STAGED_w2/stage1/model.pt": "497fc6b1bb63bee06b6322ada8ad8f4df47263e9514d65755c073fe2607fabb2",
+   "artifacts/j1c_curriculum/cells/STAGED_w2/stage2/model.pt": "8cd7461f560aed2e395e2a47851afe6aa00898ebcf94af07ef35578f277a3689",
+   "artifacts/j1c_curriculum/cells/STAGED_w2/stage3/config.yaml": "482d44c9cb4f7dad2ffbe4256e7152e1374e5a45e922a16060e00cdc728745c6",
+   "artifacts/j1c_curriculum/cells/STAGED_w2/stage3/model.pt": "52c28d5df746b12069a3d8156ae232c51e0bc9729579b7b66bea0ee4e2f762c2",
+   "artifacts/j1c_curriculum/cells/STAGED_w2/stage3/model_state.json": "9706dd641dbe720dd2bae6f5192e2652c1a169ae046d8274c1dec35a68d7285d",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w0/result.json": "9f86c155dc75bdb86c8a17293087ea8a086cf17fcfc63049664667787831896e",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w0/stage3/config.yaml": "446e4dafcccc9b07d1674d5d6e6a08d830700f9e604599f6779dd4d8deceef64",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w0/stage3/model.pt": "ca5db6f3a37fc97c8e3b17029b25fb1f7bff961b02a94525e4dd025da838102b",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w0/stage3/model_state.json": "c166ab138f37a7e9ffabff32296552a82ae4407eea7a3b0d17eaa731184fe064",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w1/result.json": "c610a9f5b9279aa0adac65a2743d68dcc157d254cb85a84ad526e0a8c92e3ccf",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w1/stage3/config.yaml": "426c2ff9c4d90ddb1d25c8f3447a70a96d590b08e1b7f62cf28b211295e5f236",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w1/stage3/model.pt": "acfef890e933dbbf395a2f1d00b1d405dabe22132945b41a462961f5cef05091",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w1/stage3/model_state.json": "b2fdfe46dc2fc5219b6712644ec774e9caf22addd37913ffbaa8430f2fe417b9",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w2/result.json": "ef63faab367d7bd6e8fe634a0e0483a0c3b9da7e8bf47be8c806f3ef413f5910",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w2/stage3/config.yaml": "a18d83d01c1df8c8093f4ebe87a0a19c90ca75783853d927ba3a631e5dcac599",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w2/stage3/model.pt": "58755658f56233d77ca6e16098923c7b32641b52b45e3ae345e6f17d05ab2ed4",
+   "artifacts/j1cr_replication/cells/NON-STAGED-R_w2/stage3/model_state.json": "9706dd641dbe720dd2bae6f5192e2652c1a169ae046d8274c1dec35a68d7285d",
+   "artifacts/j1cr_replication/cells/STAGED-R_w0/result.json": "85c347a9eb2ab4c217ebb7be7a66e0a7269e58fda2ce271de564d9948a408847",
+   "artifacts/j1cr_replication/cells/STAGED-R_w0/stage1/model.pt": "c533a178de097427e8078b9349c888a949a79d95fb7e62d77e645d52c16138b7",
+   "artifacts/j1cr_replication/cells/STAGED-R_w0/stage2/model.pt": "2477a00bede566702c9b566ee1e711e907121d8f676afc5fa22cdf3b1fce6ee6",
+   "artifacts/j1cr_replication/cells/STAGED-R_w0/stage3/config.yaml": "446e4dafcccc9b07d1674d5d6e6a08d830700f9e604599f6779dd4d8deceef64",
+   "artifacts/j1cr_replication/cells/STAGED-R_w0/stage3/model.pt": "756103221c489fa4eeb6ab39729c7a900cbb473e89b88bf90671599c14c1ef5f",
+   "artifacts/j1cr_replication/cells/STAGED-R_w0/stage3/model_state.json": "c166ab138f37a7e9ffabff32296552a82ae4407eea7a3b0d17eaa731184fe064",
+   "artifacts/j1cr_replication/cells/STAGED-R_w1/result.json": "ae8e4d5d4fcf6372efa8188c1e9046eb71c71dbb306e4c2e5bb28c728d342af1",
+   "artifacts/j1cr_replication/cells/STAGED-R_w1/stage1/model.pt": "e3b695edd9921e576a971dbede2f79532f4f6c5fea808a5e1739260655f062d4",
+   "artifacts/j1cr_replication/cells/STAGED-R_w1/stage2/model.pt": "d34f3bd17d2c90ea7ca5b5611221b93581708f8b4ed8e3751f97241846883ad8",
+   "artifacts/j1cr_replication/cells/STAGED-R_w1/stage3/config.yaml": "426c2ff9c4d90ddb1d25c8f3447a70a96d590b08e1b7f62cf28b211295e5f236",
+   "artifacts/j1cr_replication/cells/STAGED-R_w1/stage3/model.pt": "34c6cf2e6fa4e3ac6c7bbce3278bcd77be7c290c26184e66fb5eca49968e04ec",
+   "artifacts/j1cr_replication/cells/STAGED-R_w1/stage3/model_state.json": "b2fdfe46dc2fc5219b6712644ec774e9caf22addd37913ffbaa8430f2fe417b9",
+   "artifacts/j1cr_replication/cells/STAGED-R_w2/result.json": "923ff4b260d43728110f44d85ac9882fe7785dc857c930d7798916424c65fadc",
+   "artifacts/j1cr_replication/cells/STAGED-R_w2/stage1/model.pt": "e3bc653308b339f8378a08b6d24443bb96fb142101ae3beff316a947fdd03fbd",
+   "artifacts/j1cr_replication/cells/STAGED-R_w2/stage2/model.pt": "28847555a68a5e283e8867d5afaa776993d3ac5bc0302d4f1dd81504b6a9853c",
+   "artifacts/j1cr_replication/cells/STAGED-R_w2/stage3/config.yaml": "a18d83d01c1df8c8093f4ebe87a0a19c90ca75783853d927ba3a631e5dcac599",
+   "artifacts/j1cr_replication/cells/STAGED-R_w2/stage3/model.pt": "a6a6a5e46d4c85af3b755cf2654ba345f42fce1f65dd20d22bb1e5ec3bff949f",
+   "artifacts/j1cr_replication/cells/STAGED-R_w2/stage3/model_state.json": "9706dd641dbe720dd2bae6f5192e2652c1a169ae046d8274c1dec35a68d7285d",
+   "artifacts/j2a_staged_library/cells/NONSTAGED3001_w0/result.json": "73b6c20c9b2e0234f70f0562fa1b9f41416d26be9c6de4c6c335ce22a47e512b",
+   "artifacts/j2a_staged_library/cells/NONSTAGED3001_w1/result.json": "b40275dd830b9f299a1a874fdcd327271c08c3d7a732c6adb1b6df66939b0751",
+   "artifacts/j2a_staged_library/cells/NONSTAGED3001_w2/result.json": "5f7a51e4cc21a935c08e91b96e2ef56e074d7b68baf4fe93752ee5c27ea7b130",
+   "artifacts/j2a_staged_library/cells/RESET5000_w0/result.json": "df936d394ba85d71419408552aa3cce6c2d2547644497616ace0e6a407c90deb",
+   "artifacts/j2a_staged_library/cells/RESET5000_w1/result.json": "84dcc4baf417abcd3b5bb48d53883ec9559f3a7171eee1d2bf38eb43c0ac5854",
+   "artifacts/j2a_staged_library/cells/RESET5000_w2/result.json": "dfee3d3f0b9e46165f5117253df1502d8118f7bc46553cd57dc6ae9e2cec3a75",
+   "artifacts/j2a_staged_library/cells/STAGED3001_w0/result.json": "32e52e46c38b2011bf65d181889ceca94868d8e61c6c08ecdde8be93caa96a7e",
+   "artifacts/j2a_staged_library/cells/STAGED3001_w1/result.json": "7e672e6a4e1410eecb228cb2c22d2e6a44818fcd39e0e888906e31acd410e00f",
+   "artifacts/j2a_staged_library/cells/STAGED3001_w2/result.json": "cc4647dbf312a23ccd5cfaa5f66da549ca9af4ead914d0b6eea2fc5953e66f46",
+   "artifacts/j2a_staged_library/cells/STAGED5000_w0/result.json": "0c65f49565e47f6479d63a4ac7403b15220bade73576c542f6d46dd3ef81d9ef",
+   "artifacts/j2a_staged_library/cells/STAGED5000_w1/result.json": "6818c9ad1bebeb100bd65642c1b5e31784da75822d6e5d95dadca0ca10947075",
+   "artifacts/j2a_staged_library/cells/STAGED5000_w2/result.json": "862bd19c72c87c7b4bf92fd00964bda62b8672c317fd101fb32564f758a9a7c8",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "L0D_PREFLIGHT_PLAN.md": "d9f387e4058ac413ed54c3d34a0a5ea623a36ac560b08ae341ae3346bd7ac884",
+   "reports/j1c_curriculum.json": "b20e0162022d1923313aff09370cfadb76bae0919df33f81995f9c4eb9820c1c",
+   "reports/j1cr_replication.json": "e8414701920a29bbc4122f56beb2832e146f8082800330e9d16c0eabfc80d5d5",
+   "reports/j2a_staged_library.json": "9f823a9119047726b541d2be07ddad8c4b84291359e8c9a1e37526ed5870acdd"
+  },
+  "implementation_sha256": "cbd9bc0e7adf62d39a136bdddb70704254d74befdaf20d414e70c88feb4701f3"
+ },
+ "protocol_sha256": "7858a4d35e03e3eae18dae281e92581333224e565642e17e02f9eb6393d3a7de"
+}

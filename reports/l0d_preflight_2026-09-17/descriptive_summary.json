@@ -1,0 +1,414 @@
+{
+  "status": "descriptive preflight; PX7 untested",
+  "launch_commit": "4a6aa47",
+  "groups": {
+    "staged": {
+      "tasks": 96,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 96,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.005719609303536514,
+          "median_enum_seconds": 0.052590799998142757
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 96,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.005719609303536514,
+          "median_enum_seconds": 0.009921899996697903
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 96,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.005719609303536514,
+          "median_enum_seconds": 0.002173149994632695
+        }
+      },
+      "monotone_absolute_gap": 31,
+      "mapped_fails_enum_passes": 0
+    },
+    "controls": {
+      "tasks": 96,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 1.2799013675128865,
+          "median_enum_seconds": 0.05509339999844087
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 65,
+          "query_nmse_changes_from_128": 65,
+          "median_query_nmse": 1.3200152814151815,
+          "median_enum_seconds": 0.010910349999903701
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 93,
+          "query_nmse_changes_from_128": 93,
+          "median_query_nmse": 1.4038189619447492,
+          "median_enum_seconds": 0.0024512000018148683
+        }
+      },
+      "monotone_absolute_gap": 8,
+      "mapped_fails_enum_passes": 0
+    }
+  },
+  "cells": {
+    "STAGED5000_w0": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.006348221770393557,
+          "median_enum_seconds": 0.049067900006775744
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.006348221770393557,
+          "median_enum_seconds": 0.009340949996840209
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.006348221770393557,
+          "median_enum_seconds": 0.002084699990518857
+        }
+      },
+      "monotone_absolute_gap": 4,
+      "mapped_fails_enum_passes": 0
+    },
+    "STAGED5000_w1": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.005440640294754905,
+          "median_enum_seconds": 0.0590719000028912
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.005440640294754905,
+          "median_enum_seconds": 0.010126150002179202
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.005440640294754905,
+          "median_enum_seconds": 0.0020914499982609414
+        }
+      },
+      "monotone_absolute_gap": 5,
+      "mapped_fails_enum_passes": 0
+    },
+    "STAGED5000_w2": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.007094048076411402,
+          "median_enum_seconds": 0.054826899999170564
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.007094048076411402,
+          "median_enum_seconds": 0.009698800000478514
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.007094048076411402,
+          "median_enum_seconds": 0.00223500000720378
+        }
+      },
+      "monotone_absolute_gap": 5,
+      "mapped_fails_enum_passes": 0
+    },
+    "STAGED3001_w0": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.005254996067759097,
+          "median_enum_seconds": 0.05454645000281744
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.005254996067759097,
+          "median_enum_seconds": 0.009556199998769443
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.005254996067759097,
+          "median_enum_seconds": 0.0021580000029643998
+        }
+      },
+      "monotone_absolute_gap": 6,
+      "mapped_fails_enum_passes": 0
+    },
+    "STAGED3001_w1": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.00634866462107875,
+          "median_enum_seconds": 0.048269200007780455
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.00634866462107875,
+          "median_enum_seconds": 0.009418999994522892
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.00634866462107875,
+          "median_enum_seconds": 0.0021343499975046143
+        }
+      },
+      "monotone_absolute_gap": 5,
+      "mapped_fails_enum_passes": 0
+    },
+    "STAGED3001_w2": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.004449288629418535,
+          "median_enum_seconds": 0.05908340000314638
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.004449288629418535,
+          "median_enum_seconds": 0.01168234999931883
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 16,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 0.004449288629418535,
+          "median_enum_seconds": 0.0024722999951336533
+        }
+      },
+      "monotone_absolute_gap": 6,
+      "mapped_fails_enum_passes": 0
+    },
+    "NONSTAGED3001_w0": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 1.2429299079944132,
+          "median_enum_seconds": 0.06278674999339273
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 12,
+          "query_nmse_changes_from_128": 12,
+          "median_query_nmse": 1.291180516410479,
+          "median_enum_seconds": 0.011187549993337598
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 16,
+          "query_nmse_changes_from_128": 16,
+          "median_query_nmse": 1.395037928750276,
+          "median_enum_seconds": 0.002257850006571971
+        }
+      },
+      "monotone_absolute_gap": 0,
+      "mapped_fails_enum_passes": 0
+    },
+    "NONSTAGED3001_w1": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 1.2580497326670332,
+          "median_enum_seconds": 0.05208095000125468
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 11,
+          "query_nmse_changes_from_128": 11,
+          "median_query_nmse": 1.3000884977356437,
+          "median_enum_seconds": 0.01061015000595944
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 16,
+          "query_nmse_changes_from_128": 16,
+          "median_query_nmse": 1.4288351202098943,
+          "median_enum_seconds": 0.002380049991188571
+        }
+      },
+      "monotone_absolute_gap": 1,
+      "mapped_fails_enum_passes": 0
+    },
+    "NONSTAGED3001_w2": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 1.3095848922694242,
+          "median_enum_seconds": 0.0707232999993721
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 12,
+          "query_nmse_changes_from_128": 12,
+          "median_query_nmse": 1.3191154607983506,
+          "median_enum_seconds": 0.016593699998338707
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 14,
+          "query_nmse_changes_from_128": 14,
+          "median_query_nmse": 1.3280215577586318,
+          "median_enum_seconds": 0.003482399995846208
+        }
+      },
+      "monotone_absolute_gap": 0,
+      "mapped_fails_enum_passes": 0
+    },
+    "RESET5000_w0": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 1.2811498088422133,
+          "median_enum_seconds": 0.05468680000194581
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 13,
+          "query_nmse_changes_from_128": 13,
+          "median_query_nmse": 1.3399067039981922,
+          "median_enum_seconds": 0.011841450002975762
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 16,
+          "query_nmse_changes_from_128": 16,
+          "median_query_nmse": 1.4587397319540385,
+          "median_enum_seconds": 0.002382650003710296
+        }
+      },
+      "monotone_absolute_gap": 3,
+      "mapped_fails_enum_passes": 0
+    },
+    "RESET5000_w1": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 1.257708914789787,
+          "median_enum_seconds": 0.05416790000163019
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 7,
+          "query_nmse_changes_from_128": 7,
+          "median_query_nmse": 1.313551099194366,
+          "median_enum_seconds": 0.010086499998578802
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 15,
+          "query_nmse_changes_from_128": 15,
+          "median_query_nmse": 1.4011767473080012,
+          "median_enum_seconds": 0.002267600008053705
+        }
+      },
+      "monotone_absolute_gap": 3,
+      "mapped_fails_enum_passes": 0
+    },
+    "RESET5000_w2": {
+      "tasks": 16,
+      "supports": {
+        "128": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 0,
+          "query_nmse_changes_from_128": 0,
+          "median_query_nmse": 1.3000690655034712,
+          "median_enum_seconds": 0.05146359999343986
+        },
+        "32": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 10,
+          "query_nmse_changes_from_128": 10,
+          "median_query_nmse": 1.3333938921775044,
+          "median_enum_seconds": 0.010214849993644748
+        },
+        "8": {
+          "below_or_equal_nmse_0_05": 0,
+          "route_changes_from_128": 16,
+          "query_nmse_changes_from_128": 16,
+          "median_query_nmse": 1.4146264724502342,
+          "median_enum_seconds": 0.0024422999922535382
+        }
+      },
+      "monotone_absolute_gap": 1,
+      "mapped_fails_enum_passes": 0
+    }
+  },
+  "random_not_worse_than_enum": [
+    {
+      "cell": "NONSTAGED3001_w2",
+      "task": 9,
+      "random_nmse": 1.3413896776749525,
+      "enum_nmse": 1.3479314882309543
+    }
+  ],
+  "terminal_tensor_bytes_at_support128": {
+    "3": 14155776,
+    "4": 169869312,
+    "5": 2038431744
+  },
+  "input_sha256": "b0e63dfe671d2015df5f5f6b933db6ac0f08974540021d02653b3634559fb818"
+}

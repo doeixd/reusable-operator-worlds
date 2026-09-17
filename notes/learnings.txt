@@ -5068,3 +5068,10 @@ See L0D_PREFLIGHT_PLAN.md and PROGRESS's structural smoke record; no PX7 verdict
 2026-09-17 L0d launcher: Get-Command python returned three applications; .Source
 was an array and Start-Process rejected it. Select the first match explicitly.
 Validate process launch using --version, not only PowerShell syntax parsing.
+
+2026-09-17 L0d preflight completed (reports/l0d_preflight.json): 96 staged
+library/task pairs keep identical ENUM routes and query scores at support
+128/32/8; all pass 0.05. Control route changes coexist with uniformly failed
+query quality, so they do not establish costly parsing in a usable vocabulary.
+Only 39/192 pairs have monotone absolute gaps. This is descriptive evidence;
+PX7 remains untested. Next: bounded one-library 1/2/4-support opportunity gate.

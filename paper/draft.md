@@ -1877,3 +1877,18 @@ worlds did not survive being made comparable, and the sequence is recorded here
 because the failure mode - a statistic that carries scale rather than signal - is
 the same one this project has met before, and the cheap tests that exposed it cost
 minutes on artifacts that already existed.
+
+# Development instrument check: fixed-library route inference (2026-09-17)
+
+A descriptive preflight on the twelve existing J2A libraries checked whether
+reducing support from 128 to 32 or 8 examples changed exhaustive support-only
+program inference at depth three. All 96 staged-library/task pairs retained
+exactly the same hard route and query error (pooled median NMSE 0.00572;
+all below 0.05). These reuse 48 programs across three development worlds at
+two model initializations. The 96 non-staged/reset control pairs stayed above
+0.05 at every support size. The result validates the artifact anchors but
+provides no observed hard-route commitment cost on the staged libraries over
+this evidence range. It is not a comparison of beam, posterior or full-budget
+gradient inference and does not resolve PX7. The larger inference census stays
+unfrozen pending a bounded opportunity check. Raw measurements, derivation and
+validation are in reports/l0d_preflight.json and reports/l0d_preflight_2026-09-17/.

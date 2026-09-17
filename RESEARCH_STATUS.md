@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-17, after implementing and smoke-testing L0d preflight.
+Last rewritten: 2026-09-17, after validating the completed L0d preflight.
 Nothing is running.
 
 # Awaiting a PI decision (nothing running)
@@ -131,30 +131,29 @@ Nothing is running.
   `PREDICTIONS.md` (committed `fbb547a`).
 - **Learner rungs (L1-L3) remain gated** by the online-failure stop rule, which
   SO4 did not lift.
-- **Runnable now, no learner and no new world:** L0d, the program-inference
-  census (PX7). Plan drafted: `L0D_INFERENCE_CENSUS_PLAN.md`.
-  - **Next action: PI runs the prepared preflight** with
-    `powershell -ExecutionPolicy Bypass -File tools/start_l0d_preflight.ps1`.
-    Protocol: `L0D_PREFLIGHT_PLAN.md`; progress:
-    `artifacts/l0d_preflight/status.json`; output: `reports/l0d_preflight.json`.
-    Runner and independent checker are implemented. Seven focused tests,
-    two-library real-artifact smoke, exact J2A anchors and byte-identical
-    restart reuse pass. Full twelve-library preflight has NOT run.
-    The first launcher attempts failed before Python started; executable
-    selection is fixed and a profiled PowerShell process-launch smoke passes.
-    Rerun the same command.
+- **L0d preflight COMPLETE, no PX7 verdict.** Full census still drafted in
+  `L0D_INFERENCE_CENSUS_PLAN.md`.
+  - PI-run preflight at 4a6aa47 exited 0 in about 21 seconds: twelve libraries,
+    192 library/task pairs, 576 support measurements. Independent scorer,
+    provenance/finite/anchor checks and preregistration/invalid checks pass.
+    Report: `reports/l0d_preflight.json`; logs and reproducible descriptive
+    counts: `reports/l0d_preflight_2026-09-17/`.
+  - All 96 staged-library/task pairs select identical routes with support
+    128/32/8 and retain identical query NMSE (pooled median 0.00572); all pass
+    0.05. The 96 control pairs all fail at every support, despite route changes.
+    The present evidence reduction has no observed hard-route commitment cost
+    on the usable staged libraries.
+  - **Next: implement the bounded ambiguity gate** drafted in
+    `L0D_AMBIGUITY_GATE_PLAN.md`: one existing library, support 1/2/4 against its
+    saved 128-example anchor. Not yet frozen, implemented or run. No larger
+    inference comparison is justified by the current preflight alone.
   - The full census draft needs defined posterior/commit-late semantics,
     assignment-independent eligibility, measured ambiguity, exhaustive triage,
     and memory/cost sizing before freezing. Its old teacher-route and monotone-
     gap gates are not accepted; see the preflight plan's design audit.
-  - Twelve frozen J2A libraries; depths 3-5; support sizes 128/32/8.
-  - Mechanisms: exhaustive enumeration, gradient route optimization, beam
-    {1,4,16}, posterior averaging, a commit-late hybrid, plus random and teacher
-    controls.
-  - Registered additions: a variable-depth forward gated bitwise at depth 3, and
-    an eligibility gate separating search failure from execution drift.
-  - Its decisions: run now or after the world census; include depth 5 or cap at
-    4; any mechanism to add or drop.
+  - The earlier proposed depths 3-5 and ENUM/OPT/beam/posterior/commit-late grid
+    stays deferred. The preflight's depth-three executor equivalence passes;
+    deeper execution, uncertainty semantics and eligibility need new gates.
 - **Prior evidence the ladder must respect:** the 2026-08-31 loop census and its
   correction (a straight-line generator cannot price loops); the E6 macro line
   (macros pay but cannot be timed or compiled); the E7 census (no real
@@ -229,7 +228,8 @@ Nothing is running.
 1. Ladder: may teacher-side and oracle-executor gates (L0a-L0c) run before online
    learnability is established? The plan reads "yes".
 2. Ladder ordering resolved by continuing after the completed world censuses:
-   L0d preflight is next. The full depth/mechanism protocol stays unfrozen.
+   L0d preflight is complete. The sparse-evidence gate is next; the full
+   depth/mechanism protocol stays unfrozen.
 3. (Folded into 7.)
 4. Should ladder rungs L1-L3 target remote workers when they open?
 5. Development-world budget: worlds 0-9 are spent for the rotated staged

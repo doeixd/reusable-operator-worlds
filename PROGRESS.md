@@ -5976,3 +5976,49 @@ Python314 executable started hidden with redirected output and exited 0
 (Python 3.14.0). Checked that the intended experiment arguments and Hidden flag
 were supplied. No experiment launched, no full-preflight manifest or cells exist.
 NEXT: PI reruns the same tools/start_l0d_preflight.ps1 command.
+
+# 2026-09-17 - L0d preflight complete: sparse support down to eight leaves staged routes unchanged
+
+PI launched 4a6aa47 as PID 36272. Run events span 14:39:18.598 to
+14:39:39.893 UTC (about 21.3 seconds, excluding interpreter/check startup).
+All twelve libraries completed; exit 0, empty stderr. The independent scorer
+validates 192 library/task pairs and 576 support measurements, with all
+128-example J2A anchors, frozen-library checks and source hashes passing.
+check_prereg: 58 frozen files unchanged; check_invalid: six withdrawn paths
+absent. No process remains running. This is Tier 0 descriptive evidence only.
+
+Evidence: reports/l0d_preflight.json; operational records and validation in
+reports/l0d_preflight_2026-09-17/. derive_summary.py there regenerates
+its descriptive_summary.json from the raw report and records the input hash.
+
+At each support 128/32/8, all 96 staged-library/task pairs pass NMSE 0.05.
+Every route and query error is identical across the three support sizes;
+pooled median NMSE is 0.00571961. These are 48 programs across three worlds,
+reused at two model initializations, not 96 independent programs/worlds.
+The 96 control pairs all fail at each support. Their chosen routes change in
+65/96 pairs at support 32 and 93/96 at support 8; pooled median error rises
+from 1.27990 to 1.32002 to 1.40382. Poor-library route changes do not establish
+a parsing problem in a usable vocabulary.
+
+The proposed monotone absolute-gap pattern holds in only 39/192 pairs
+(31 staged, 8 controls). Historical random error is worse than 128-example
+ENUM in 191/192: NONSTAGED3001 world 2 task 9 is the exception
+(random 1.34138968, ENUM 1.34793149). Random is a historical query control,
+not a reconstruction of its unsaved route or a guaranteed query ordering.
+There are no mapped-teacher-fail/ENUM-pass discrepancies in this grid;
+that does not promote the chosen traffic mapping into a general ceiling.
+
+Enumeration median times over staged pairs are 0.05259/0.00992/0.00217 seconds
+at support 128/32/8. Compare these only at the observed equal quality here;
+do not extrapolate depth-five time or reinterpret cold Adam timing as a
+steady-state rate. Single terminal tensor lower bound at depth five is still
+1.90 GiB, so deeper execution requires a separately gated memory strategy.
+
+Consequence: preflight instrumentation passes, but evidence reduction from
+128 to 8 has no observed hard-route commitment cost on the staged libraries.
+PX7 remains UNTESTED; no multi-mechanism or multi-depth conclusion follows.
+Do not launch the original larger grid on the strength of this manipulation.
+L0D_AMBIGUITY_GATE_PLAN.md now drafts the bounded next measurement: one existing
+staged library, support 1/2/4 versus the existing 128 anchor, stopping this
+sweep if it again yields no route-choice opportunity. No new run launched;
+next is implement/check that gate, not reopen Track B or a sealed world band.
