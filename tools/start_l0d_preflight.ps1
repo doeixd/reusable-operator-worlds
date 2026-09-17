@@ -3,7 +3,7 @@ $repoPath = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 Set-Location -LiteralPath $repoPath
 $runPath = Join-Path $repoPath 'artifacts\l0d_preflight'
 New-Item -ItemType Directory -Path $runPath -Force | Out-Null
-$pythonPath = (Get-Command python -CommandType Application).Source
+$pythonPath = (Get-Command python -CommandType Application | Select-Object -First 1).Source
 $logSuffix = Get-Date -Format 'yyyyMMdd_HHmmss_fff'
 $process = Start-Process -FilePath $pythonPath `
     -ArgumentList '-m', 'row.experiments.preflight_l0d' `

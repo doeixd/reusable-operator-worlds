@@ -5064,3 +5064,7 @@ failed mapped teacher routes cannot exclude support-only ENUM successes.
 Reduced support need not monotonically reduce best/second-best mean-MSE gaps.
 Measure the manipulation rather than treating that pattern as an invariant.
 See L0D_PREFLIGHT_PLAN.md and PROGRESS's structural smoke record; no PX7 verdict.
+
+2026-09-17 L0d launcher: Get-Command python returned three applications; .Source
+was an array and Start-Process rejected it. Select the first match explicitly.
+Validate process launch using --version, not only PowerShell syntax parsing.

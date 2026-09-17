@@ -1820,3 +1820,8 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   not as an executor invariant. A teacher-to-slot assignment is diagnostic,
   not a usability ceiling: a support-only route success must stay visible even
   if that assignment fails. See L0D_PREFLIGHT_PLAN.md for the design audit.
+
+- PowerShell launchers: Get-Command python -CommandType Application can return
+  multiple executables. Select the first match before reading .Source for
+  Start-Process -FilePath. Test actual process binding with a harmless command;
+  syntax parsing alone missed the L0d launcher failure (2026-09-17).

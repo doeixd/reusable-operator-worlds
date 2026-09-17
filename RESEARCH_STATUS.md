@@ -140,6 +140,9 @@ Nothing is running.
     Runner and independent checker are implemented. Seven focused tests,
     two-library real-artifact smoke, exact J2A anchors and byte-identical
     restart reuse pass. Full twelve-library preflight has NOT run.
+    The first launcher attempts failed before Python started; executable
+    selection is fixed and a profiled PowerShell process-launch smoke passes.
+    Rerun the same command.
   - The full census draft needs defined posterior/commit-late semantics,
     assignment-independent eligibility, measured ambiguity, exhaustive triage,
     and memory/cost sizing before freezing. Its old teacher-route and monotone-

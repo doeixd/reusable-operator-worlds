@@ -5961,3 +5961,18 @@ run `python -m row.experiments.score_l0d_preflight`, inspect all paired cells,
 archive logs and record descriptive findings. Then revise the full census
 protocol and size a Tier 1 pilot. The full preflight has NOT been launched;
 no full PX7 census has been frozen or launched. No processes are left running.
+
+# 2026-09-17 - Correct L0d PowerShell launcher executable selection
+
+PI's first two launch attempts failed before Python started: Get-Command python
+returned three Application matches, and .Source became an Object[] rejected by
+Start-Process -FilePath. The earlier syntax-only launcher check did not exercise
+parameter binding. Select-Object -First 1 now preserves PATH precedence and
+passes one executable path. No protocol, runner, model, or numerical code changed.
+
+Verified the actual launcher in profiled Windows PowerShell, intercepting only
+its process arguments to run --version instead of the experiment. The resolved
+Python314 executable started hidden with redirected output and exited 0
+(Python 3.14.0). Checked that the intended experiment arguments and Hidden flag
+were supplied. No experiment launched, no full-preflight manifest or cells exist.
+NEXT: PI reruns the same tools/start_l0d_preflight.ps1 command.
