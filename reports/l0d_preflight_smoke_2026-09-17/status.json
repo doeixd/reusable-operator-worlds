@@ -1,0 +1,11 @@
+{
+ "state": "complete",
+ "pid": 13156,
+ "git_commit": "29057b0",
+ "started_utc": "2026-09-17T14:03:19.998554+00:00",
+ "updated_utc": "2026-09-17T14:03:22.787170+00:00",
+ "cells_done": 2,
+ "cells_total": 2,
+ "current": null,
+ "eta_seconds": 0.0
+}

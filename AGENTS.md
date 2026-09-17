@@ -1814,3 +1814,9 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   number: the per-task log-ratio series have no ties, and three recomputed
   cells reproduced their stored values exactly. Test any new rank statistic on
   a constant and a tied input before reading it.
+
+- L0d preflight (2026-09-17): reduced support does not guarantee a monotone
+  best/second-best mean-MSE gap. Treat the ambiguity manipulation as measured,
+  not as an executor invariant. A teacher-to-slot assignment is diagnostic,
+  not a usability ceiling: a support-only route success must stay visible even
+  if that assignment fails. See L0D_PREFLIGHT_PLAN.md for the design audit.

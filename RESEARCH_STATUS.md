@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-16, after the SO4 verdict and the world-quality census.
+Last rewritten: 2026-09-17, after implementing and smoke-testing L0d preflight.
 Nothing is running.
 
 # Awaiting a PI decision (nothing running)
@@ -133,6 +133,17 @@ Nothing is running.
   SO4 did not lift.
 - **Runnable now, no learner and no new world:** L0d, the program-inference
   census (PX7). Plan drafted: `L0D_INFERENCE_CENSUS_PLAN.md`.
+  - **Next action: PI runs the prepared preflight** with
+    `powershell -ExecutionPolicy Bypass -File tools/start_l0d_preflight.ps1`.
+    Protocol: `L0D_PREFLIGHT_PLAN.md`; progress:
+    `artifacts/l0d_preflight/status.json`; output: `reports/l0d_preflight.json`.
+    Runner and independent checker are implemented. Seven focused tests,
+    two-library real-artifact smoke, exact J2A anchors and byte-identical
+    restart reuse pass. Full twelve-library preflight has NOT run.
+  - The full census draft needs defined posterior/commit-late semantics,
+    assignment-independent eligibility, measured ambiguity, exhaustive triage,
+    and memory/cost sizing before freezing. Its old teacher-route and monotone-
+    gap gates are not accepted; see the preflight plan's design audit.
   - Twelve frozen J2A libraries; depths 3-5; support sizes 128/32/8.
   - Mechanisms: exhaustive enumeration, gradient route optimization, beam
     {1,4,16}, posterior averaging, a commit-late hybrid, plus random and teacher
@@ -214,7 +225,8 @@ Nothing is running.
 
 1. Ladder: may teacher-side and oracle-executor gates (L0a-L0c) run before online
    learnability is established? The plan reads "yes".
-2. Ladder: run L0d first, or after the world census?
+2. Ladder ordering resolved by continuing after the completed world censuses:
+   L0d preflight is next. The full depth/mechanism protocol stays unfrozen.
 3. (Folded into 7.)
 4. Should ladder rungs L1-L3 target remote workers when they open?
 5. Development-world budget: worlds 0-9 are spent for the rotated staged

@@ -1,0 +1,54 @@
+{
+ "protocol": {
+  "id": "l0d-preflight-v1",
+  "git_commit": "29057b0",
+  "dry_run": true,
+  "jobs": [
+   [
+    "STAGED5000",
+    0
+   ],
+   [
+    "STAGED5000",
+    1
+   ]
+  ],
+  "tasks": 2,
+  "supports": [
+   128,
+   32,
+   8
+  ],
+  "opt_steps": 20,
+  "environment": {
+   "python": "3.14.0 (tags/v3.14.0:ebf955d, Oct  7 2025, 10:15:03) [MSC v.1944 64 bit (AMD64)]",
+   "torch": "2.13.0+cpu",
+   "numpy": "2.3.5",
+   "psutil": "7.2.1",
+   "platform": "Windows-11-10.0.26100-SP0",
+   "torch_threads": 1
+  },
+  "input_sha256": {
+   "artifacts/j1c_curriculum/cells/STAGED_w0/result.json": "967df4ad145ba0b786cebd123d4917097cd743e475d05452de7ab8d9e11b8eaa",
+   "artifacts/j1c_curriculum/cells/STAGED_w0/stage1/model.pt": "2f39097012c9b0b227f1a45712d1fd45e444dd45439b60d5592824113d72625b",
+   "artifacts/j1c_curriculum/cells/STAGED_w0/stage2/model.pt": "b74d7d1eb8f4f7aded4d3b4035848edce6732f70dffb0c10b3637ded67422c7a",
+   "artifacts/j1c_curriculum/cells/STAGED_w0/stage3/config.yaml": "1004ea1f5110cb74082b2219f577f6eb6ecefdf2022c5fd2d4edb1716f165e2d",
+   "artifacts/j1c_curriculum/cells/STAGED_w0/stage3/model.pt": "9ba200d7ee840254b7b7d1df5a1227698d43c14656758435b3479da1d1a2db1e",
+   "artifacts/j1c_curriculum/cells/STAGED_w0/stage3/model_state.json": "c166ab138f37a7e9ffabff32296552a82ae4407eea7a3b0d17eaa731184fe064",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/result.json": "f8366b64eeb89cf172de5136c116e245ac6b754fb5223e291691846bd4caa210",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/stage1/model.pt": "ba39de3ba0b4b82ac8639fbbb99394b6a362cd940cd58a3c4f240873509497ba",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/stage2/model.pt": "1b4a13430d48cfb75662fd4011fc591509327b55f9f0d3a8af100d5c7d34df1a",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/stage3/config.yaml": "3959cb3b42ea3a0e56876c8e71a0ad07e9bbb8f7340c7b722d1388faf117b2d9",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/stage3/model.pt": "80d50024e7a47367d04ff60d56421b58b091e6063ecb5e44f57f04a4a365dc1f",
+   "artifacts/j1c_curriculum/cells/STAGED_w1/stage3/model_state.json": "b2fdfe46dc2fc5219b6712644ec774e9caf22addd37913ffbaa8430f2fe417b9",
+   "artifacts/j2a_staged_library/cells/STAGED5000_w0/result.json": "0c65f49565e47f6479d63a4ac7403b15220bade73576c542f6d46dd3ef81d9ef",
+   "artifacts/j2a_staged_library/cells/STAGED5000_w1/result.json": "6818c9ad1bebeb100bd65642c1b5e31784da75822d6e5d95dadca0ca10947075",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "L0D_PREFLIGHT_PLAN.md": "d9f387e4058ac413ed54c3d34a0a5ea623a36ac560b08ae341ae3346bd7ac884",
+   "reports/j1c_curriculum.json": "b20e0162022d1923313aff09370cfadb76bae0919df33f81995f9c4eb9820c1c",
+   "reports/j2a_staged_library.json": "9f823a9119047726b541d2be07ddad8c4b84291359e8c9a1e37526ed5870acdd"
+  },
+  "implementation_sha256": "cbd9bc0e7adf62d39a136bdddb70704254d74befdaf20d414e70c88feb4701f3"
+ },
+ "protocol_sha256": "fc437baa2ce03ef6186d7ec12105b8da18949fab04122b371a590aa14563ebb1"
+}

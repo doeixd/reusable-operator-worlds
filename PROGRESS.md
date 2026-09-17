@@ -5911,3 +5911,53 @@ duplication carries nothing, and route identifiability survives only in the
 task-set-dependent form whose comparable counterpart is null. The defensible
 position is that online staged formation is world- and stream-dependent with NO
 identified mechanism. No world band is justified for a prefix or geometry screen.
+
+# 2026-09-17 - L0d preflight implemented; full census remains unfrozen
+
+Continued from 29057b0 after the Track B mechanism hunt closed. Auditing the
+L0d draft found missing posterior temperature and commit-late semantics, an
+unspecified teacher-to-slot assignment used as an eligibility ceiling, a
+non-guaranteed monotone support-gap gate, non-exhaustive triage, and an
+understated enumeration memory budget. The original draft is preserved with
+an audit banner; L0D_PREFLIGHT_PLAN.md defines the smaller prerequisite.
+
+Implemented preflight_l0d, score_l0d_preflight, seven tests, and a detached
+PowerShell launcher. The full preflight uses all twelve frozen J2A libraries,
+first sixteen existing held-out tasks, and nested 128/32/8 support prefixes:
+192 tasks and 576 support measurements, all at depth three. No new world or
+lifetime is opened. The mapped teacher route is diagnostic only; its failure
+cannot exclude an ENUM success. J2A's random error is retained as historical
+because its random route was not saved.
+
+Validation: seven preflight tests and four J2A regression tests pass; the
+PowerShell launcher parses; check_prereg reports 58 unchanged frozen files;
+check_invalid reports six absent withdrawn paths. The real-artifact dry run
+uses STAGED5000 worlds 0-1, two tasks each. All four J2A route/error anchors and
+hard/soft executor equivalence checks passed. Stopping after world 0 and
+relaunching the identical command reused its record without changing its hash
+(fc99f69c8c04c2b3a4ae99c2d1df1ba73e0ac266152a707ed7e3e29e5e1a1360).
+The independent checker validates 2 libraries, 4 tasks, 12 support measurements.
+This is an uncommitted-code structural smoke stamped at base 29057b0, with an
+explicit implementation hash, not a research verdict. Evidence and operational
+logs: reports/l0d_preflight_smoke_2026-09-17/.
+
+The four smoke tasks give 0/4 monotone absolute gaps, 4/4 historical random
+errors worse than canonical ENUM, and 0 mapped-fail/ENUM-pass discrepancies.
+These are instrument observations only; PX7 is untested. They show why the
+draft's per-task monotonicity requirement cannot be a correctness invariant.
+
+Performance pass: reference/new variable-depth forward, twenty calls on
+128 examples, took 0.01238/0.01165 s (world 0) and 0.01221/0.01212 s (world 1),
+with bitwise predictions. No speedup claim; timings are too small for that.
+Twenty route-code Adam updates took 2.20/2.31 s including cold optimizer
+construction; do not extrapolate linearly. Each two-task cell took 2.57/2.69 s.
+No result-changing optimization was introduced. At depth five one terminal
+float32 tensor alone is 2,038,431,744 bytes (1.90 GiB), excluding temporaries;
+deep enumeration needs a separately gated bounded-memory implementation.
+
+NEXT: PI runs `powershell -ExecutionPolicy Bypass -File tools/start_l0d_preflight.ps1`
+from this checkout. Monitor artifacts/l0d_preflight/status.json. After exit,
+run `python -m row.experiments.score_l0d_preflight`, inspect all paired cells,
+archive logs and record descriptive findings. Then revise the full census
+protocol and size a Tier 1 pilot. The full preflight has NOT been launched;
+no full PX7 census has been frozen or launched. No processes are left running.

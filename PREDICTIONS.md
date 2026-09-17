@@ -8913,3 +8913,13 @@ Consequence for planning: no development world band is justified for a prefix,
 geometry or identifiability screen. Any successor must either find a
 qualitatively different observable, or accept the world-dependence as the
 result - which is what `paper/draft.md` now states.
+
+# 2026-09-17 - PX7 instrument preparation, no hypothesis verdict
+
+L0D_PREFLIGHT_PLAN.md separates artifact/ambiguity checks from the still-DRAFT
+full L0d census. The original draft's monotone support-gap requirement and
+teacher-assignment eligibility ceiling are not accepted as correctness gates.
+A two-library/four-task structural smoke reproduces J2A exactly but has 0/4
+monotone absolute gaps; this is an instrument observation, not a PX7 test.
+PX7(a-c) remain working hypotheses, untested. Full preflight awaits PI execution;
+see PROGRESS and reports/l0d_preflight_smoke_2026-09-17/ for bounded evidence.

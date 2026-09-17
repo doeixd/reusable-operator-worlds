@@ -5058,3 +5058,9 @@ than as a one-off miss.
   rank statistic against ties and against a constant input BEFORE trusting it,
   especially when a new use can produce near-constant predictors - as a
   prefix-quality census can.
+
+2026-09-17 L0d instrument audit: preserve assignment-independent usability;
+failed mapped teacher routes cannot exclude support-only ENUM successes.
+Reduced support need not monotonically reduce best/second-best mean-MSE gaps.
+Measure the manipulation rather than treating that pattern as an invariant.
+See L0D_PREFLIGHT_PLAN.md and PROGRESS's structural smoke record; no PX7 verdict.

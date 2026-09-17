@@ -1,5 +1,12 @@
 # L0d: program inference on a fixed vocabulary (PX7; Tier 0-1 DRAFT)
 
+**2026-09-17 implementation audit:** this original draft remains unfrozen.
+`L0D_PREFLIGHT_PLAN.md` now defines the prerequisite artifact/ambiguity checks
+and lists the design issues to resolve before a full census. Its runner is
+`preflight_l0d`; no full PX7 comparison has been launched. In particular, the
+teacher-route eligibility and monotone-gap assumptions below are not accepted
+as instrument gates. The original proposal is preserved for traceability.
+
 Status: DRAFT, 2026-09-15. Not frozen, no code. It runs entirely on EXISTING
 frozen artifacts, trains nothing, touches no new world, and needs no outcome
 from SO4. It is the one program-ladder item already clear of the online-failure
