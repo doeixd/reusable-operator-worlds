@@ -1868,3 +1868,42 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   written two hours earlier, including a missing denominator of exactly the
   sealed-C2 kind and a violation of a lesson committed that morning. A check
   that finds nothing is not being run.
+
+- ANCHOR EVERY ARM OF A GRID AGAINST SOMETHING ALREADY COMMITTED, NOT ONLY THE
+  ARM THAT HAPPENS TO HAVE AN ANCHOR (SG0, 2026-09-22). SG0's first full grid
+  drew its programs from `j2a.held_out_tasks`, which returns the canonical
+  DEPTH-THREE held-out programs, at every depth; its depth-four cells therefore
+  searched 12**4 four-step routes against THREE-step targets, for which no exact
+  route exists. Every route is then near-tied in badness, selection is noise, and
+  the cells produced an apparent depth-four "headroom" (k = 4 of 36) that
+  measured nothing. The error was visible with NO new measurement: the selected
+  route's median query NMSE was 1.72 where the committed depth-four execution
+  gate reported 0.00871712 on the same library - a 200x discrepancy. What let it
+  through is that the plan required an anchor at depth THREE only, so the
+  depth-four arm was the unanchored one, and an unanchored arm is exactly where a
+  construct error sits undetected. Retired as
+  `INVALID_SG0_DEPTH4_WRONG_TARGET_LENGTH`. The plan, not only the code, carried
+  the defect: "programs per cell | the 16 held-out programs" is coherent at one
+  depth only.
+- "MARKDOWN EDITS ARE SAFE DURING A RUN" IS FALSE WHEN THE RUN FINGERPRINTS A
+  MARKDOWN FILE (2026-09-22). The no-commits-during-a-run rule was written for
+  runners that stamp `git rev-parse HEAD`, and it exempts documentation. But a
+  protocol whose `input_sha256` covers its own PLAN file is broken by a docs-only
+  commit: a parallel session committed `d5db30b` touching
+  `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` while SG0's full grid was in flight, and
+  the scorer then correctly refused the finished run with "input changed since the
+  run". The numbers were unaffected - the plan is a provenance stamp, not an
+  input to the computation - but the run had to be redone to restore a verifiable
+  chain. Before committing anything during a run, check whether a live protocol
+  hashes the file, not merely whether it is code.
+- THE INVALIDATION MANIFEST WAS NEVER TRACKED, AND ITS CHECKER PASSED WITHOUT IT
+  (2026-09-22). `.gitignore` ignored `artifacts/` wholesale, so
+  `artifacts/INVALID_MANIFEST.md` - which `AGENTS.md` and `CLAUDE.md` both cite as
+  the machine-checkable quarantine record - had never been committed and existed
+  only on the machine that wrote it. `tools/check_invalid.py` returned 0 with
+  "no invalid manifest; nothing to check", so on any fresh clone the guard passed
+  vacuously over an empty record. This is the same failure the file's own comment
+  already documents for the empty-PARSE case (the missing `re.MULTILINE`), left
+  open one level up in the MISSING-FILE case. Fixed by a `.gitignore` exception
+  plus failing closed on a missing manifest. A guard must fail when its input is
+  absent, not only when its input is empty.

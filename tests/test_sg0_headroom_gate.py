@@ -126,3 +126,31 @@ class SG0LabelTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+class SG0ProgramLengthTests(unittest.TestCase):
+    """Regression for INVALID_SG0_DEPTH4_WRONG_TARGET_LENGTH.
+
+    The retired run searched depth-four routes against depth-three targets
+    because the program source ignored the depth being searched.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from row.config import load_config
+        from row.experiments.audit_rotated_g5r_interference import world_config
+        from row.experiments.audit_j1c_curriculum import stage_setup
+        cls.cfg = world_config(load_config('configs/v1.yaml'), 0)
+        _, cls.world, _, _ = stage_setup(0, 3, 5000)
+
+    def test_program_length_equals_the_depth_being_searched(self):
+        for depth in (3, 4):
+            tasks = sg0.tasks_for_depth(self.cfg, self.world, depth)
+            self.assertEqual(len(tasks), sg0.TASKS)
+            for task in tasks:
+                self.assertEqual(len(task['program']), depth,
+                                 f'depth {depth} task has a length-{len(task["program"])} program')
+
+    def test_unregistered_depth_is_refused(self):
+        with self.assertRaises(ValueError):
+            sg0.tasks_for_depth(self.cfg, self.world, 5)

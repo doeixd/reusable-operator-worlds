@@ -137,7 +137,17 @@ at worlds 0, 1 and 2, each with the same 16 held-out programs.
 | world | 0, 1, 2 | 3 |
 | depth | 3, 4 (5 only if 3-4 show nonzero regret) | 2 |
 | support | 128, 8, 2 | 3 |
-| programs per cell | the 16 held-out programs | 16 |
+| programs per cell | 16 programs WHOSE LENGTH EQUALS THE CELL DEPTH | 16 |
+
+**Program source, per depth (Revision 4).** Depth three uses the canonical J2A
+held-out programs, which is what makes the J2A ENUM anchor available. Depth four
+uses the committed depth-four execution gate's own generator
+(`l0d_depth4_execution_gate.depth4_tasks`), which yields genuine length-four
+programs and makes that gate's stored routes and errors a second anchor at world
+0. **A program's length must equal the depth being searched**; the runner refuses
+otherwise. Revision 1-3 said only "the 16 held-out programs", which is coherent
+only at depth three and produced the retired
+`INVALID_SG0_DEPTH4_WRONG_TARGET_LENGTH` run.
 
 **A CELL is one (library kind, world, depth, support) combination, scored over
 its 16 programs.** That gives **36 staged cells** and **36 control cells**
@@ -356,6 +366,20 @@ available at no cost and are required to pass:
   reproduce `all_route_support_mse` bitwise, and the selected route's query NMSE
   must equal `hard()` evaluated directly.
 
+At depth 4, world 0, support 128 the cells reuse the committed depth-four
+execution gate's programs, so a third anchor is required and is checked in the
+runner: the selected route and its query NMSE must equal that gate's stored
+`enum_route` and `enum_query_nmse` for every task.
+
+**Cross-check against a committed result, required at every depth (Revision 4).**
+Before any cell is read, the staged median query NMSE of the selected route must
+be compared against the committed gate for that depth - 0.00571961 (preflight,
+depth 3) and 0.00871712 (execution gate, depth 4). The retired depth-four run
+sat at 1.72, a roughly 200x discrepancy that no registered check would have
+caught, because the plan required an anchor at depth three only. A cell whose
+staged median is orders of magnitude from its committed counterpart is an
+instrument failure and is not read as a result.
+
 Both are written as TESTS before launch, per the depth-five lesson. A subset-mean
 implementation that changes reduction order is admissible only if these anchors
 hold.
@@ -466,3 +490,53 @@ is not being run, and these are exactly the class - a threshold with no baseline
 and a statistic compared against a floor built for something else - that this
 project has paid for repeatedly (the S0 `p_reuse` bound, the route-margin
 scale-incomparability).
+
+# Revision 4 (2026-09-22): the depth-four cells were ill-posed, and why
+
+The first full-grid run was retired before it was scored. Its depth-four cells
+searched `12**4` four-step routes against THREE-step targets, because the plan
+specified "the 16 held-out programs" at every depth and those programs are
+depth three. No exact route exists for such a cell, so every route is near-tied
+in badness and selection is noise; the run's apparent depth-four headroom
+(`k = 4` of 36, max regret 1.32) measured nothing. Full record:
+`artifacts/INVALID_MANIFEST.md`, `INVALID_SG0_DEPTH4_WRONG_TARGET_LENGTH`.
+
+Three things are changed, and one is a general lesson rather than a repair.
+
+1. **Program source is now per depth**, and the runner refuses any task whose
+   program length differs from the depth being searched.
+2. **A third anchor** at depth 4, world 0 against the committed execution gate,
+   so the depth-four side is checked the way the depth-three side already was.
+3. **A cross-check against a committed result at EVERY depth**, which is the
+   general lesson. The error was visible without any new measurement: the
+   selected route's median query NMSE was 1.72 where a committed gate on the
+   same library and depth reported 0.00871712. The plan had an anchor at depth
+   three and nothing at depth four, and an unanchored arm of a grid is where a
+   construct error will sit undetected. Anchor EVERY arm against something
+   already committed, not just the arm that happens to have an anchor available.
+
+What survives untouched: the depth-three cells, anchored against J2A and
+independently archived at `366be81`, and the dry run. Those numbers stand and
+are unaffected by this revision.
+
+# Provenance note (2026-09-22): Revision 3 is post-hoc with respect to depth three
+
+Recorded because nothing else in this plan records it. Revision 3's NO-HEADROOM
+sub-triage was written and committed (`d5db30b`) AFTER the depth-three staged
+result - regret identically zero in 288 of 288 tasks - had been computed and
+committed at `366be81`, and while the first full-grid run was in flight. The
+sub-triage is therefore POST-HOC with respect to the depth-three data, which is
+consistent with its own "secondary and diagnostic, produces no verdict" status
+but must be stated rather than left for a reader to reconstruct from commit
+timestamps.
+
+The PRIMARY triage is unaffected and was registered before any data existed:
+its clauses at `366be81` and at `d5db30b` are byte-identical, verified by diff.
+
+One factual correction to Revision 3: it states that the near-tie tolerance
+"has been referred to as registered since Revision 1 but no value is written
+anywhere in this plan". A value IS written - `eps = 0.01`, in the Estimands
+section since Revision 2 - and it is `NEAR_TIE_EPS` in the runner and
+`near_tie_eps` in the protocol fingerprint. What is true, and what that gap
+should have said, is that `eps = 0.01` has never been CALIBRATED against the
+control cells or a shuffled-label null. That calibration is still owed.

@@ -6299,3 +6299,80 @@ NEXT: run the registered full grid (depths 3 and 4, supports 128/8/2, worlds
 0-2; 36 staged and 36 control cells), which is the first run entitled to a
 triage. The depth-3 cells recomputed there are also a free reproducibility check
 against this archive.
+
+
+# 2026-09-22 - SG0 full grid retired before scoring; three defects found
+
+Nothing is running. The first SG0 full-grid run was RETIRED, not scored. Three
+separate problems, recorded in the order they were found.
+
+**1. A parallel session committed mid-run and broke the provenance chain.**
+Session `@c4c3` committed `d5db30b` at 12:05 UTC while this session's full grid
+was in flight (12:01-12:31 UTC), touching
+`SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` - a file in the run's `input_sha256`. The
+scorer then correctly refused the finished run with "input changed since the
+run". The numbers were unaffected, because the plan is a provenance stamp and
+not an input to the computation, but the chain could not be verified. The
+existing rule ("markdown edits are safe during a run") was written for runners
+that stamp `git rev-parse HEAD` and does not cover a protocol that FINGERPRINTS
+a markdown file. Recorded in `AGENTS.md` and `notes/learnings.txt`.
+
+The primary triage was NOT altered: its clauses at `366be81` and at `d5db30b`
+are byte-identical, verified by diff. Revision 3 appended a secondary
+`NO-HEADROOM` sub-triage. A provenance note now records in the plan itself that
+Revision 3 is POST-HOC with respect to the depth-three result, which was already
+computed and committed when it was written. One factual claim in Revision 3 is
+corrected there too: the near-tie tolerance IS written in the plan
+(`eps = 0.01`, Estimands, since Revision 2) and is in the runner and the protocol
+fingerprint; what is true is that it has never been CALIBRATED, which is still
+owed.
+
+**2. The depth-four cells were ill-posed, and the run is invalid.** Reading the
+computed numbers before re-scoring showed staged depth-4 routes differing in
+256/288 tasks with max regret 1.32 - an apparent headroom result. It is an
+artifact. `j2a.held_out_tasks` returns the canonical DEPTH-THREE held-out
+programs, and the runner used them at every depth, so the depth-four cells
+searched `12**4` four-step routes against THREE-step targets. No exact route
+exists, every route near-ties in badness, and selection is noise. The selected
+route's staged median query NMSE was 1.72 against 0.00871712 for the committed
+depth-four execution gate on the same library, a roughly 200x discrepancy.
+
+Retired as `INVALID_SG0_DEPTH4_WRONG_TARGET_LENGTH` with both paths deleted.
+The defect originated in the PLAN - "programs per cell | the 16 held-out
+programs" is coherent at one depth only - and survived because the plan required
+an anchor at depth THREE only, leaving the depth-four arm unanchored. Plan
+Revision 4 fixes the program source per depth, adds a depth-4 world-0 anchor
+against the committed execution gate, and adds a cross-check against a committed
+result at EVERY depth. The runner now refuses any task whose program length
+differs from the depth being searched, with two regression tests.
+
+Lesson, recorded in `AGENTS.md`: anchor every arm of a grid against something
+already committed, not only the arm that happens to have an anchor available.
+The unanchored arm is where a construct error sits undetected.
+
+**3. The invalidation manifest had never been tracked, and its checker passed
+without it.** Writing the entry above revealed that `.gitignore` excluded
+`artifacts/` wholesale, so `artifacts/INVALID_MANIFEST.md` - cited by both
+`AGENTS.md` and `CLAUDE.md` as the machine-checkable quarantine record - had
+NEVER been committed and existed only on this machine. `tools/check_invalid.py`
+returned 0 when the manifest was absent, so on any fresh clone the guard passed
+vacuously over an empty record. This is the same failure the file's own comment
+documents for the empty-PARSE case, left open one level up in the MISSING-FILE
+case.
+
+Fixed: `.gitignore` now excludes `artifacts/*` with an explicit exception for the
+manifest (a negation under an excluded DIRECTORY silently fails - git cannot
+re-include a file whose parent directory is excluded), and `check_invalid.py`
+fails closed on a missing manifest. All seven entries, including V6's, are now in
+version control for the first time.
+
+**What survives.** The depth-three evidence is unaffected and stands: the dry run
+(`reports/sg0_dry_run_2026-09-22/`) and the depth-three grid
+(`reports/sg0_depth3_2026-09-22/`), both committed at `366be81`, both anchored
+against the J2A stored `enum_route` and `enum` values. Staged regret is
+identically zero in all 288 task/cell combinations; controls show 238/288 routes
+differing with regret up to 0.228. The instrument discriminates, and no
+depth-three number is touched by any of the above.
+
+NEXT: re-run the corrected full grid. `k` from the retired run is meaningless and
+the registered triage has NOT been reached.

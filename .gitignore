@@ -3,6 +3,12 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .venv/
-artifacts/
+# Ignore artifact CONTENTS, not the directory itself: git cannot re-include a
+# file whose parent directory is excluded, so `artifacts/` plus a negation
+# silently fails to track the manifest.
+artifacts/*
+# ...except the invalidation record, which is part of the scientific record
+# and must survive a fresh clone (see tools/check_invalid.py).
+!artifacts/INVALID_MANIFEST.md
 
 .env

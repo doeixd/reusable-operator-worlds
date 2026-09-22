@@ -28,7 +28,7 @@ from row.experiments.audit_e0_export import git_commit
 from row.experiments.audit_j1c_curriculum import library_sha
 from row.experiments.audit_rotated_g5r_diagnosis import require_clean_code
 from row.experiments.audit_so1r_route_only import FrozenLibrary, unflatten
-from row.experiments.l0d_depth4_execution_gate import DepthLibrary
+from row.experiments.l0d_depth4_execution_gate import DepthLibrary, depth4_tasks
 from row.experiments.preflight_l0d import load_source
 from row.experiments.so1_storage import atomic_json, digest, fingerprint, log_line, now, writer_lock
 
@@ -113,12 +113,37 @@ def half_nmse(errors_q, route, columns, denominator):
     return float(errors_q[route, columns].mean()) / denominator
 
 
+def tasks_for_depth(cfg, world_obj, depth):
+    """Programs whose LENGTH equals the depth being searched.
+
+    `j2a.held_out_tasks` returns the canonical DEPTH-THREE held-out programs.
+    Using them at depth four searched four-step routes against three-step
+    targets, for which no exact route exists; that run is retired in
+    `artifacts/INVALID_MANIFEST.md`. Depth four reuses the committed depth-four
+    execution gate's own generator, which also gives a free anchor at world 0.
+    """
+    if depth == 3:
+        tasks = j2a.held_out_tasks(cfg, world_obj)[:TASKS]
+    elif depth == 4:
+        tasks = depth4_tasks(cfg, world_obj)
+    else:
+        raise ValueError(f'no registered program source for depth {depth}')
+    if len(tasks) != TASKS:
+        raise ValueError('task count mismatch')
+    for task in tasks:
+        if len(task['program']) != depth:
+            raise ValueError(
+                f'program length {len(task["program"])} does not match depth {depth}; '
+                'this is the retired INVALID_SG0_DEPTH4_WRONG_TARGET_LENGTH error')
+    return tasks
+
+
 def measure_cell(name, world, depth, support):
     started = time.perf_counter()
     cfg, world_obj, model, stage, anchor = load_source(name, world)
     library = DepthLibrary(model)
     before = library_sha(model)
-    tasks = j2a.held_out_tasks(cfg, world_obj)[:TASKS]
+    tasks = tasks_for_depth(cfg, world_obj, depth)
 
     split_rng = np.random.default_rng(np.random.SeedSequence([SPLIT_SEED, world, depth]))
     boot_rng = np.random.default_rng(np.random.SeedSequence([BOOTSTRAP_SEED, world, depth, support]))
@@ -186,6 +211,15 @@ def measure_cell(name, world, depth, support):
                'near_tie_disagreement': near_tie_disagreement,
                'enum_seconds': seconds}
 
+        if depth == 4 and support == 128 and world == 0:
+            gate = json.loads(Path('reports/l0d_depth4_execution_gate.json').read_text())
+            if gate['cell']['name'] == name:
+                expected = gate['cell']['rows'][index]
+                row['gate_route_matches'] = row['r_hat'] == expected['enum_route']
+                row['gate_nmse'] = nmse_of_route(library, task, row['r_hat'])
+                row['gate_nmse_matches'] = row['gate_nmse'] == expected['enum_query_nmse']
+                if not (row['gate_route_matches'] and row['gate_nmse_matches']):
+                    raise ValueError(f'depth-four execution-gate anchor failed: {name} task {index}')
         if depth == 3 and support == 128:
             original = anchor['held_out'][str(index)]
             row['anchor_route_matches'] = row['r_hat'] == original['enum_route']

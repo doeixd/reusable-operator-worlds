@@ -5126,3 +5126,23 @@ written down when the offending document was drafted. First application (SG0,
 same day) found five gaps in a two-hour-old plan, including an ambiguous triage
 denominator of the sealed-C2 kind and a violation of a lesson committed that
 morning. A check that finds nothing is not being run.
+
+2026-09-22 SG0 depth-four construct error: the first full grid searched 12**4
+four-step routes against the canonical DEPTH-THREE held-out targets, because the
+plan said "the 16 held-out programs" at every depth. No exact route exists, all
+routes near-tie in badness, and the apparent depth-four headroom (k=4 of 36)
+measured nothing. Visible with no new measurement: selected-route median query
+NMSE 1.72 against the committed depth-four execution gate's 0.00871712 on the
+same library. Retired as INVALID_SG0_DEPTH4_WRONG_TARGET_LENGTH. Lesson: anchor
+EVERY arm of a grid against something already committed; the unanchored arm is
+where a construct error sits. Depth-three cells unaffected (J2A-anchored).
+
+2026-09-22 Two infrastructure defects found the same day. (1) "Markdown edits are
+safe during a run" is false when the run fingerprints a markdown file: a parallel
+session committed d5db30b touching SYNTHESIS_OPPORTUNITY_GATE_PLAN.md mid-run and
+the scorer correctly refused the finished grid ("input changed since the run").
+Numbers unaffected, provenance chain broken, run redone. (2) .gitignore ignored
+artifacts/ wholesale, so artifacts/INVALID_MANIFEST.md had NEVER been committed,
+and tools/check_invalid.py returned 0 when the manifest was missing - so on a
+fresh clone the quarantine guard passed vacuously over an empty record. Both
+fixed. A guard must fail when its input is ABSENT, not only when it is empty.
