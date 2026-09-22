@@ -1,0 +1,14 @@
+{
+  "valid": true,
+  "problems": [],
+  "label": "dry-run",
+  "staged_cells": 1,
+  "control_cells": 0,
+  "k": 0,
+  "triage": "NOT APPLICABLE",
+  "staged_median_regret": 0.0,
+  "staged_median_floor": 0.0,
+  "control_median_regret": null,
+  "routes_differ": 0,
+  "route_comparisons": 16
+}

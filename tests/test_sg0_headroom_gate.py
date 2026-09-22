@@ -108,5 +108,21 @@ class SG0QuantityTests(unittest.TestCase):
         self.assertIn('library_sha256', inspect.getsource(sg0.measure_cell))
 
 
+
+class SG0LabelTests(unittest.TestCase):
+    """A partial grid must never be labelled as the registered full grid."""
+
+    def test_only_the_registered_grid_is_full(self):
+        self.assertTrue(sg0.is_full_grid((3, 4), (128, 8, 2), (0, 1, 2)))
+        self.assertFalse(sg0.is_full_grid((3,), (128, 8, 2), (0, 1, 2)))
+        self.assertFalse(sg0.is_full_grid((3, 4), (128,), (0, 1, 2)))
+        self.assertFalse(sg0.is_full_grid((3, 4), (128, 8, 2), (0, 1)))
+
+    def test_depth_three_only_grid_is_not_the_full_denominator(self):
+        cells = sg0.grid(depths=(3,), supports=(128, 8, 2), worlds=(0, 1, 2))
+        staged = [c for c in cells if c[0] in sg0.STAGED]
+        self.assertEqual(len(staged), 18)
+        self.assertNotEqual(len(staged), 36)
+
 if __name__ == '__main__':
     unittest.main()

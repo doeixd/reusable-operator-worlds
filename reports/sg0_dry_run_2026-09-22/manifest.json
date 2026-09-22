@@ -1,0 +1,29 @@
+{
+ "protocol": {
+  "id": "sg0-headroom-gate-v1",
+  "git_commit": "d20f6a9",
+  "label": "dry-run",
+  "cells": [
+   [
+    "STAGED5000",
+    0,
+    3,
+    128
+   ]
+  ],
+  "tasks": 16,
+  "slots": 12,
+  "split_seed": 3101,
+  "bootstrap_seed": 3102,
+  "bootstrap_draws": 200,
+  "near_tie_eps": 0.01,
+  "tie_rule": "lowest flattened route index",
+  "input_sha256": {
+   "SYNTHESIS_OPPORTUNITY_GATE_PLAN.md": "7024b39bb0e6a3579d429a1973f5138f77ca51c46734f6378da19da515cdaa32",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/j2a_staged_library.json": "9f823a9119047726b541d2be07ddad8c4b84291359e8c9a1e37526ed5870acdd"
+  },
+  "implementation_sha256": "283c18e0aa95c9a70a60d0c8262ce7862c24839e8396b4c1d841e920dd2d041f"
+ },
+ "protocol_sha256": "3fb69a1f62c2e7af810caf8eb886e8572c425541572c0cf45ff5f7057648fb2f"
+}

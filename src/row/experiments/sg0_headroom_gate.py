@@ -50,6 +50,17 @@ CONTROL = ('NONSTAGED3001', 'RESET5000')
 DRY_RUN_CELL = ('STAGED5000', 0, 3, 128)
 
 
+FULL_DEPTHS = (3, 4)
+FULL_SUPPORTS = (128, 8, 2)
+FULL_WORLDS = (0, 1, 2)
+
+
+def is_full_grid(depths, supports, worlds):
+    """Only the registered grid may be labelled 'full'; everything else is partial."""
+    return (tuple(sorted(depths)) == FULL_DEPTHS and tuple(sorted(supports)) == tuple(sorted(FULL_SUPPORTS))
+            and tuple(sorted(worlds)) == FULL_WORLDS)
+
+
 def grid(depths=(3,), supports=(128, 8, 2), worlds=(0, 1, 2)):
     cells = []
     for name in STAGED + CONTROL:
@@ -226,55 +237,56 @@ def cell_key(cell):
     return f'{name}_w{world}_d{depth}_s{support}'
 
 
-def run(cells, label):
-    ROOT.mkdir(parents=True, exist_ok=True)
-    (ROOT / 'cells').mkdir(exist_ok=True)
+def run(cells, label, root=ROOT, output=OUTPUT):
+    ROOT_, OUTPUT_ = Path(root), Path(output)
+    ROOT_.mkdir(parents=True, exist_ok=True)
+    (ROOT_ / 'cells').mkdir(exist_ok=True)
     expected = protocol(cells, label)
     sha = fingerprint(expected)
     manifest = {'protocol': expected, 'protocol_sha256': sha}
-    with writer_lock(ROOT / 'launcher.lock'):
-        if (ROOT / 'manifest.json').exists() and json.loads((ROOT / 'manifest.json').read_text()) != manifest:
+    with writer_lock(ROOT_ / 'launcher.lock'):
+        if (ROOT_ / 'manifest.json').exists() and json.loads((ROOT_ / 'manifest.json').read_text()) != manifest:
             raise ValueError('protocol mismatch; preserve the prior run or retire the path')
-        atomic_json(ROOT / 'manifest.json', manifest)
-        atomic_json(ROOT / 'run.pid', {'pid': __import__('os').getpid(), 'started_utc': now()})
+        atomic_json(ROOT_ / 'manifest.json', manifest)
+        atomic_json(ROOT_ / 'run.pid', {'pid': __import__('os').getpid(), 'started_utc': now()})
         records = {}
         try:
-            log_line(ROOT / 'run.log', f'LAUNCH {sha} label={label} cells={len(cells)}')
+            log_line(ROOT_ / 'run.log', f'LAUNCH {sha} label={label} cells={len(cells)}')
             for position, cell in enumerate(cells):
                 key = cell_key(cell)
-                path = ROOT / 'cells' / f'{key}.json'
+                path = ROOT_ / 'cells' / f'{key}.json'
                 if path.exists():
                     saved = json.loads(path.read_text())
                     if (saved.get('stamp') != {'protocol_sha256': sha} or not saved.get('complete')
                             or fingerprint(saved['record']) != saved['record_sha256']):
                         raise ValueError(f'cell integrity failure: {key}')
                     records[key] = saved['record']
-                    log_line(ROOT / 'run.log', f'reused validated cell {key}')
+                    log_line(ROOT_ / 'run.log', f'reused validated cell {key}')
                 else:
-                    log_line(ROOT / 'run.log', f'cell start {key}')
+                    log_line(ROOT_ / 'run.log', f'cell start {key}')
                     record = measure_cell(*cell)
                     validate_cell(record)
                     atomic_json(path, {'stamp': {'protocol_sha256': sha}, 'complete': True,
                                        'record': record, 'record_sha256': fingerprint(record),
                                        'finished_utc': now()})
                     records[key] = record
-                    log_line(ROOT / 'run.log',
+                    log_line(ROOT_ / 'run.log',
                              f'cell finished {key} {record["seconds"]:.3f}s '
                              f'median_regret={record["median_regret"]:.6g} '
                              f'floor={record["median_floor"]:.6g}')
-                atomic_json(ROOT / 'status.json',
+                atomic_json(ROOT_ / 'status.json',
                             {'state': 'running', 'cells_done': position + 1, 'cells_total': len(cells),
                              'running': [], 'updated_utc': now()})
-            atomic_json(OUTPUT, {**manifest, 'complete': True, 'cells': records,
+            atomic_json(OUTPUT_, {**manifest, 'complete': True, 'cells': records,
                                  'summary': summarize(records, label), 'finished_utc': now()})
-            atomic_json(ROOT / 'status.json', {'state': 'complete', 'cells_done': len(cells),
+            atomic_json(ROOT_ / 'status.json', {'state': 'complete', 'cells_done': len(cells),
                                                'cells_total': len(cells), 'updated_utc': now()})
-            atomic_json(ROOT / 'exit.json', {'exit_code': 0, 'complete': True, 'finished_utc': now()})
+            atomic_json(ROOT_ / 'exit.json', {'exit_code': 0, 'complete': True, 'finished_utc': now()})
         except BaseException:
-            atomic_json(ROOT / 'status.json', {'state': 'failed', 'cells_done': len(records),
+            atomic_json(ROOT_ / 'status.json', {'state': 'failed', 'cells_done': len(records),
                                                'cells_total': len(cells), 'updated_utc': now()})
-            atomic_json(ROOT / 'exit.json', {'exit_code': 1, 'complete': False, 'finished_utc': now()})
-            atomic_json(ROOT / 'error.json', {'traceback': traceback.format_exc(), 'finished_utc': now()})
+            atomic_json(ROOT_ / 'exit.json', {'exit_code': 1, 'complete': False, 'finished_utc': now()})
+            atomic_json(ROOT_ / 'error.json', {'traceback': traceback.format_exc(), 'finished_utc': now()})
             raise
 
 
@@ -302,17 +314,26 @@ def main():
                         help='run only the single decisive cell (the structural dry run)')
     parser.add_argument('--depths', type=int, nargs='+', default=[3])
     parser.add_argument('--supports', type=int, nargs='+', default=[128, 8, 2])
+    parser.add_argument('--worlds', type=int, nargs='+', default=[0, 1, 2])
+    parser.add_argument('--root', type=Path, default=ROOT)
+    parser.add_argument('--report', type=Path, default=OUTPUT)
     args = parser.parse_args()
     torch.set_num_threads(1)
-    require_clean_code(OUTPUT)
+    require_clean_code(args.report)
     for check in ('tools/check_prereg.py', 'tools/check_invalid.py'):
         subprocess.run([sys.executable, check], check=True)
     if args.dry_run:
         cells, label = [DRY_RUN_CELL], 'dry-run'
     else:
-        cells, label = grid(tuple(args.depths), tuple(args.supports)), 'full'
-    run(cells, label)
-    print(f'SG0 report: {OUTPUT}')
+        depths, supports, worlds = tuple(args.depths), tuple(args.supports), tuple(args.worlds)
+        cells = grid(depths, supports, worlds)
+        # A partial grid must never present itself as the registered triage.
+        label = 'full' if is_full_grid(depths, supports, worlds) else (
+            'partial-d' + ''.join(map(str, sorted(depths)))
+            + '-s' + '_'.join(map(str, sorted(supports)))
+            + '-w' + ''.join(map(str, sorted(worlds))))
+    run(cells, label, args.root, args.report)
+    print(f'SG0 report: {args.report}')
 
 
 if __name__ == '__main__':
