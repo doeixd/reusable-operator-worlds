@@ -6545,3 +6545,42 @@ what decides whether a plan gets written, not a step inside one.
 NEXT: unchanged - PI decisions 6 (bank, or build the identifiability generator
 against the evidence) and 7 (amend stop rule 2 for offline scope, or close
 L1-L8).
+
+# 2026-09-22 Design-adequacy protocol: the discrimination gate
+
+`DESIGN_ADEQUACY.md` (standing protocol); `src/row/design_adequacy.py`;
+`tools/check_adequacy.py`; `tests/test_design_adequacy.py` (16 tests) and
+`tests/test_check_adequacy.py` (8 tests). No experiment, no artifact.
+
+SG6 exposed a gap the project had been papering over: OPPORTUNITY (could the
+effect exist? asked of the generator) and DISCRIMINATION (could this
+measurement come out either way? asked of the instrument and the sample) are
+different gates with different fixes, and ten rungs failing the first had
+trained everyone to call every absence the same thing. SG6 passed the first and
+failed the second.
+
+Six checks, each returning the figure it turned on rather than an adjective.
+The central one runs the REGISTERED DECISION RULE against null and effect
+samplers and requires false-fire <= 5% and detection >= 80%.
+
+The test suite is the point: each historical defect is reconstructed and the
+check must FIRE on it - E5.1's first crossing (42.5% false-fire on pure noise),
+E6's `H* = 1.5` (>50%, while its alphabet-tax replacement passes), SG6's bimodal
+axis (gap 30.2x the wider cluster's spread, effective n 2), the route-margin
+within-cluster sign reversal, sealed C2's non-partitioning triage, SG0's
+borrowed floor. A separate test asserts SG0's own triage would have PASSED, so
+the checks are not simply pessimistic.
+
+Two things were deliberately made weaker than they could have been. The
+protocol records what the checks do NOT catch - S0's unreachable threshold
+(`baseline_registered` catches a MISSING baseline, not an unreachable one),
+wrong constructs, coordinate comparability, registration order - because a
+checker that claims too much is the error it exists to prevent. And
+`check_adequacy.py` starts with an EMPTY scope and prints `INACTIVE` rather
+than `OK`: a first draft special-cased the protocol document so the checker
+always passed, which is the `check_invalid.py` defect that printed a clean pass
+over a manifest of six. Historical plans are not retrofitted; new plans join
+`IN_SCOPE` at freeze time.
+
+NEXT: unchanged - PI decisions 6 and 7. The first plan written under this
+protocol adds itself to `IN_SCOPE`.

@@ -1969,3 +1969,23 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   calibrated on the control arm alone. State the registration order first, then
   the invariance argument, then the result - in that order, so the reader
   cannot mistake which it is.
+
+- OPPORTUNITY AND DISCRIMINATION ARE TWO GATES, NOT ONE (2026-09-22, after SG6;
+  protocol `DESIGN_ADEQUACY.md`, checks `row.design_adequacy`, enforcement
+  `tools/check_adequacy.py`). OPPORTUNITY asks the GENERATOR - could the effect
+  exist? Ten rungs failed it. DISCRIMINATION asks the INSTRUMENT AND THE SAMPLE
+  - could this measurement come out either way? SG6 passed the first and failed
+  the second: the question was sensible and the effect could exist, but the
+  twelve held libraries had no graded quality axis, so nothing computed on them
+  could answer it. Calling both "no opportunity" hides that they have different
+  fixes - a new generator for the first, a new sample or statistic for the
+  second. The central discrimination check runs the REGISTERED DECISION RULE
+  against null and effect samplers and requires false-fire <= 5% and detection
+  >= 80%; reconstructions of E5.1's first crossing (42.5% false-fire on pure
+  noise) and E6's `H* = 1.5` (>50%) both fire, and E6's replacement
+  alphabet-tax threshold passes, which is why it was adopted. Every plan from
+  here carries a `# Discriminating power` section with those numbers. The
+  checks are deliberately narrow and the protocol records what they do NOT
+  catch - S0's unreachable threshold, wrong constructs, coordinate
+  comparability, registration order - because a checker that claims too much is
+  the error it exists to prevent.

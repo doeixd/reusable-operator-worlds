@@ -5163,3 +5163,18 @@ fixed. A guard must fail when its input is ABSENT, not only when it is empty.
     in a new file. A triage written mid-run is a diagnostic, not a registration.
   - Full detail in AGENTS.md "Implementation learnings"; verdicts in
     PREDICTIONS.md; lab record in PROGRESS.md.
+
+2026-09-22  Design adequacy: the second gate
+  - OPPORTUNITY (could the effect exist? ask the generator) and DISCRIMINATION
+    (could the data come out either way? ask the instrument and sample) are
+    different gates. SG6 passed the first and failed the second.
+  - `row.design_adequacy`: discriminating_power (run the registered rule against
+    null and effect samplers; <=5% false-fire, >=80% detection), graded_axis,
+    survives_within_cluster, partitions_outcomes, baseline_registered,
+    floor_matches_statistic.
+  - Historical defects are encoded as regression tests and must FIRE: E5.1's
+    first crossing (42.5% false-fire on noise), E6's H*=1.5 (>50%), SG6's
+    bimodal axis (gap 30.2x spread), the route-margin within-cluster reversal,
+    sealed C2's non-partitioning triage, SG0's borrowed floor.
+  - `tools/check_adequacy.py` prints INACTIVE, not OK, while its scope is empty.
+  - Protocol and its stated blind spots: DESIGN_ADEQUACY.md.

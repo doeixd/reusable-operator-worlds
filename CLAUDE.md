@@ -262,6 +262,12 @@ checked for:
 
 - an OPPORTUNITY GATE: could this comparison come out any other way, given how
   the objects are constructed? If not, it is an implementation check;
+- a DISCRIMINATION GATE, which is a different question and now has its own
+  protocol (`DESIGN_ADEQUACY.md`, `row.design_adequacy`): could the DATA come
+  out either way? Run the registered rule against null and effect samplers and
+  report the false-fire and detection rates. Opportunity asks the generator,
+  discrimination asks the instrument and the sample, and SG6 passed the first
+  while failing the second;
 - every registered THRESHOLD checked against its own BASELINE, computed first;
 - every fraction-of-cells clause carrying an explicit DENOMINATOR, and a triage
   that cannot resolve to neither pass nor fail;
