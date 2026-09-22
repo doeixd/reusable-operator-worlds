@@ -438,3 +438,86 @@ This measures it, on the uninformed state that matters, and it holds. It is
 still a statement about the TASK STREAM against a random library, not about any
 learner's trajectory, and it licenses nothing about whether anchors suffice
 WITHOUT ordering - which is the question N1 exists to answer.
+
+# Amendment 3 (2026-09-22): "matched positions" is vacuous here, and the cells are sized
+
+Two findings from writing the runner and running the performance pass, both
+before any cell exists.
+
+## 1. There are no stream POSITIONS in this trainer
+
+Amendment 1 and the original arms table describe `SHAM` as having "matched
+anchor COUNT and matched positions". `audit_j1c_curriculum.train_stage` pools
+every task's examples and draws each minibatch uniformly at random
+(`rng.integers(0, len(all_x), size=BATCH)`, `BATCH = 2`). **There is no
+sequential position for a task to occupy.** The positional language was carried
+over from an online framing and is not implementable in the offline trainer N1
+actually uses.
+
+The correct restatement, and it makes the contrast CLEANER rather than weaker:
+
+- **matched POOL COMPOSITION** - `INTERLEAVED` and `SHAM` both hold 188 tasks at
+  128 examples each, 24,064 examples, identical in size;
+- **identical sampling stream** - the same seed sequence drives the minibatch
+  RNG in both arms, so the draw order is the same and only the CONTENTS of the
+  124 non-canonical tasks differ;
+- `NONE` is 64 tasks and 8,192 examples, and is the published reference rather
+  than a pool-matched arm, exactly as Amendment 1 registered.
+
+So the three contrast arms differ as follows, and each differs from its
+neighbour in one respect only:
+
+| arm | trainer calls | pool | the 124 non-canonical tasks are |
+|---|---|---|---|
+| `STAGED` | three sequential stages, model carried | 60 + 64 + 64 | length-1 and length-2, seen FIRST |
+| `INTERLEAVED` | one pooled call | 188 | length-1 and length-2, pooled |
+| `SHAM` | one pooled call | 188 | distinct length-3 programs, pooled |
+
+`STAGED` vs `INTERLEAVED` isolates ORDER - three sequential stages against one
+pooled stream over the same 188 tasks. `INTERLEAVED` vs `SHAM` isolates ANCHOR
+EASINESS at identical pool size and identical sampling. Neither contrast rests
+on positions.
+
+**Mandatory pre-launch check, restated.** The original plan required verifying
+that `SHAM` and `INTERLEAVED` draw identical replay sequences. In this trainer
+the equivalent and checkable statement is that both arms consume the SAME
+minibatch index stream from the same seed sequence, which is verified by
+recording the first N drawn indices per arm and requiring equality. The replay
+RNG concern recorded in `AGENTS.md` (storage and sampling share one generator)
+still applies to any arm that uses the replay buffer and must be checked there.
+
+## 2. Cell cost, measured
+
+Timed on this host, one thread, no other load, using the real trainer
+(`reports/n1_design/performance_pass.json`; regenerate with
+`reports/n1_design/derive_performance.py`):
+
+| stream | measured | per update |
+|---|---|---|
+| length-3, 64 tasks | 512 updates in 12.57 s | 24.56 ms |
+| length-1, 60 tasks | 512 updates in 8.52 s | 16.63 ms |
+
+Extrapolating linearly at the registered 65,536-update budget:
+
+- a `STAGED`-shaped cell (16,384 + 16,384 + 32,768) ~ **24.7 min**;
+- a flat length-3 cell ~ **26.8 min**;
+- **12 cells ~ 5.26 h serial**, ~1.75 h at a pool of 3, ~1.31 h at a pool of 4.
+
+This is comfortably inside one overnight local batch and does not need remote
+workers. The extrapolation is linear in updates and excludes any scoring
+checkpoint beyond those `train_stage` already performs.
+
+## 3. HOST PRECONDITION: not currently satisfied
+
+Free memory at the time of the performance pass was **4.3 GiB of 27.8 GiB**.
+`AGENTS.md` records that SO4's first attempt died on paging exhaustion at about
+5 GB free, and that memory rather than cores is the binding constraint. **4.3
+GiB is below the level at which a multi-hour run has already failed once on this
+host.**
+
+Registered launch precondition, to be enforced by the runner and not merely
+noted: a pool of 3 is admissible only with at least **8 GiB free**, and the
+launcher fails closed below that rather than lowering its own reserve. The PI is
+asked to close large applications before launch, per the standing rule. Until
+then N1 is freeze-ready but NOT launch-ready, and the blocker is the host, not
+the plan.

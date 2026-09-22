@@ -7039,3 +7039,44 @@ hash the frozen plan in `check_prereg`, commit runner and independent scorer
 together, performance pass, structural dry run, restart test.
 
 NEXT: size the 12 cells with a performance pass, then freeze. Nothing is running.
+
+# 2026-09-22 N1 Amendment 3: positions are vacuous, cells sized, host precondition unmet
+
+No cell run. Two findings from writing the runner and running the mandatory
+performance pass, plus one blocking host condition.
+
+**1. "Matched positions" cannot be implemented in this trainer, and does not
+need to be.** `audit_j1c_curriculum.train_stage` pools every task's examples and
+draws each minibatch uniformly at random (`BATCH = 2`); there is no sequential
+position for a task to occupy. The positional language came from an online
+framing. Restated as matched POOL COMPOSITION - `INTERLEAVED` and `SHAM` both
+hold 188 tasks at 128 examples each, 24,064 examples - plus an identical
+minibatch index stream from the same seed sequence. The contrast gets cleaner:
+`STAGED` vs `INTERLEAVED` isolates ORDER (three sequential stages, model
+carried, against one pooled call over the same 188 tasks) and `INTERLEAVED` vs
+`SHAM` isolates ANCHOR EASINESS at identical pool size and sampling. The
+pre-launch equality check is restated accordingly: record the first N drawn
+minibatch indices per arm and require equality.
+
+**2. Cells are sized, by measurement.** Timed with the real trainer on this
+host, one thread: length-3 (64 tasks) 512 updates in 12.57 s = 24.56 ms/update;
+length-1 (60 tasks) 512 updates in 8.52 s = 16.63 ms/update. At the registered
+65,536-update budget a `STAGED`-shaped cell is ~24.7 min and a flat length-3
+cell ~26.8 min, so **12 cells are ~5.26 h serial, ~1.75 h at a pool of 3 and
+~1.31 h at a pool of 4.** One local batch; remote workers are not needed.
+`reports/n1_design/performance_pass.json`.
+
+**3. The host precondition is NOT satisfied.** Free memory measured **4.3 GiB of
+27.8 GiB**. `AGENTS.md` records that SO4's first attempt died on paging
+exhaustion at about 5 GiB free and that memory, not cores, is the binding
+constraint here. 4.3 GiB is below the level at which a multi-hour run has
+already failed once. A launch precondition is therefore registered in the plan:
+a pool of 3 requires at least 8 GiB free and the launcher fails closed below it
+rather than lowering its own reserve, per the standing rule that a reserve is
+never lowered to make a run fit.
+
+**N1 is freeze-ready but NOT launch-ready, and the blocker is the host rather
+than the plan.** The PI is asked to close large applications before launch.
+
+NEXT: on a freed host, freeze and hash the plan, commit runner and independent
+scorer together, dry run, restart test, then launch. Nothing is running.

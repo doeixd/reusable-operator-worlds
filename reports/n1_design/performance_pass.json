@@ -1,0 +1,33 @@
+{
+ "probe_updates": 512,
+ "registered_cell_updates": 65536,
+ "cells": 12,
+ "measured": [
+  {
+   "stage": 3,
+   "label": "length-3 (64 tasks)",
+   "tasks": 64,
+   "registered_stage_updates": 32768,
+   "probe_updates": 512,
+   "probe_seconds": 12.572050399961881,
+   "seconds_per_update": 0.02455478593742555,
+   "batch": 2
+  },
+  {
+   "stage": 1,
+   "label": "length-1 (60 tasks)",
+   "tasks": 60,
+   "registered_stage_updates": 16384,
+   "probe_updates": 512,
+   "probe_seconds": 8.515323599916883,
+   "seconds_per_update": 0.016631491406087662,
+   "batch": 2
+  }
+ ],
+ "estimate_seconds": {
+  "staged_shaped_cell": 1479.4071935936809,
+  "flat_length3_cell": 1609.2224511951208,
+  "twelve_cells_serial": 18921.22364153713
+ },
+ "note": "timed on this host, one thread, no other load; extrapolation is linear in updates and does not include per-cell scoring checkpoints beyond those train_stage already performs"
+}

@@ -163,6 +163,21 @@ sections with MEASURED numbers.
   mechanism that has explained J1c since it was run and had only ever been
   argued. `reports/n1_anchor_difficulty_gate.json`, 6 tests.
   **N1 is now freeze-ready pending PI approval**, with both audits answered.
+  **Amendment 3 (2026-09-22)** adds two pre-launch findings. (a) "Matched
+  positions" is VACUOUS in this trainer: `train_stage` pools every task's
+  examples and draws minibatches uniformly, so there are no stream positions.
+  Restated as matched POOL COMPOSITION (188 tasks, 24,064 examples for both
+  `INTERLEAVED` and `SHAM`) plus an identical minibatch index stream, which
+  makes the contrast cleaner - `STAGED` vs `INTERLEAVED` isolates ORDER (three
+  sequential stages against one pooled call over the same 188 tasks),
+  `INTERLEAVED` vs `SHAM` isolates ANCHOR EASINESS. (b) Cells are SIZED by a
+  measured performance pass: 24.56 ms/update at length 3 and 16.63 ms at length
+  1, so a cell is ~25-27 min and **12 cells are ~5.26 h serial, ~1.75 h at pool
+  3** - one local batch, no remote workers.
+  **HOST PRECONDITION NOT MET:** free memory measured 4.3 GiB of 27.8, and SO4's
+  first attempt died on paging exhaustion at about 5 GiB free. A registered
+  launch precondition of 8 GiB free for a pool of 3 is added, failing closed.
+  N1 is freeze-ready but **NOT launch-ready, and the blocker is the host**.
 - **N2, `N2_FORMATION_IDENTIFIABILITY_PLAN.md` — is identifiability graded ALONG
   FORMATION?** SG6 died because the twelve held libraries are bimodal: good or
   broken, nothing between, effective n = 2. A formation run passes through the
