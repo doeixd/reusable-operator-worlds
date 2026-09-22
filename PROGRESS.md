@@ -6704,3 +6704,61 @@ k = 0 under both readings.
 
 NEXT: unchanged - PI decisions 6 and 7.
 
+# 2026-09-22 Review 85 assessed; two candidate rungs, one plan clause, one correction
+
+`reviews/reviewer-feedback-85.txt`, indexed in `reviews/review-index.md`.
+External suggestions from another AI working from the README alone, filed as an
+assessment rather than as raw feedback, because checking them against the plan
+files is most of the content. No experiment, no artifact.
+
+Their organizing observation is endorsed and worth keeping: the central open
+problem is online co-formation, J1 showed the first route assignment is made on
+a random library and never changes, J1c works because staging keeps early
+commitments INFORMED, and so "what makes a learner commit only when its
+commitments are informed?" is a good statement of the open question.
+
+Outcome: two candidates (C1 confidence-gated commitment, C2 depth recurrence),
+one vote on PI decision 7, one proposal largely already run and negative, one
+deprioritized. Recorded in RESEARCH_STATUS; PX2 gains one clause
+(`PROGRAM_LADDER_PLAN.md` Revision 3).
+
+Three things the assessment contributed that the suggestions could not have
+contained, all of them from plan files the reviewer had not read:
+
+1. **C1 has a deadlock objection.** J0 measured that gradient routing fails
+   above about 0.6 median NMSE and that early in joint training every library is
+   on the failing side. A confidence gate on a random initial library defers
+   everything, so the library never receives the updates that would make any
+   route confident. J1c avoids this structurally, not by confidence: at length 1
+   tasks sharing an operation look alike, so routing is CLUSTERING. Any plan must
+   register what trains the library while tasks are deferred.
+2. **C2 is vacuous on the canonical family.** `ITERATION_WORLD_SPEC.md` was
+   withdrawn before freezing because every operator has the form
+   `tanh(z + small)` and is therefore a CONTRACTION: its necessity gate returned
+   0.026-0.123 against a required 0.25. The rotated family passes at 1.67-1.73,
+   so the rung is admissible only there. Separately, an opportunity-gate problem
+   the proposal did not address: at high positional recurrence a weight-tied
+   learner wins BY CONSTRUCTION, so only the CROSSOVER LOCATION and linearity in
+   MEASURED recurrence are registrable.
+3. **C4 is SO2-P and has already come back negative** in the direction proposed.
+   The slow-library half was swept 2x/4x/10x and did not improve on the
+   unchanged protocol anywhere; MOVEMENT MAGNITUDE IS NOT INTERFERENCE. What
+   remains untested is the RATIO to the route rate, both directions, across the
+   whole run.
+
+The reviewer's own recommendation to drop the amortized writer is agreed and
+already executed by SG0, and their observation that C1 would pass through the
+immature-library regime by construction - the setting SG6 could not obtain on
+held artifacts - is why C1 ranks first rather than C2.
+
+**A destructive mistake, recorded because the rule exists.** The assessment was
+first written to `reviews/reviewer-feedback-84.txt`, which is a TRACKED file
+already holding the role-filler/TPR review, overwriting it. It was restored
+immediately with `git checkout` from HEAD (commit b607292) and verified byte-for
+-byte, and the assessment was refiled as 85. Nothing was lost and nothing
+incorrect was committed, but the correct procedure is to look at the target
+before writing to it; a `ls` of the directory would have shown the file. Note
+also that `reviews/` numbering has gaps (54 and 55 are absent), so counting
+files is not a way to find the next free number.
+
+NEXT: unchanged - PI decisions 5 (new development band, which C1 needs), 6 and 7.

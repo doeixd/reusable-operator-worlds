@@ -3175,3 +3175,55 @@ handling ports. The resulting program is continuous neural vocabulary
 formation, factorized role/filler representation, then discrete hierarchical
 manipulation—not an assumption that symbolic structure requires a discrete
 learning algorithm.
+
+### [reviewer-feedback-85.txt](reviewer-feedback-85.txt)
+
+External suggestions from another AI working from the README alone, filed with a
+point-by-point assessment rather than as raw feedback, because checking the
+suggestions against the plan files is most of what the entry contains. The
+organizing observation is endorsed: ROW's central open problem is online
+co-formation, J1 showed the first route assignment is made on a random library
+and never changes, and J1c works because staging keeps early commitments
+INFORMED, so "what makes a learner commit only when its commitments are
+informed?" is a good statement of the open question.
+
+Five proposals, reordered by the assessment. CONFIDENCE-GATED COMMITMENT (commit
+a route only when its margin clears a per-world-normalized threshold) is the
+most valuable and is promoted to first, but carries a deadlock objection the
+README could not have revealed: J0 measured that gradient routing fails above
+about 0.6 median NMSE and that early in joint training every library is on the
+failing side, so a gate on a random initial library defers everything and the
+library never becomes confident. The plan must register what trains the library
+while tasks are deferred; withholding only the HARD commitment while soft routes
+still update the library is the most promising of three candidates.
+
+TWO-TIMESCALE PLASTICITY drops from first to fourth: it is SO2-P, which swept
+the shared learning rate down 2x/4x/10x and did not improve on the unchanged
+protocol anywhere, and whose committed learning is that MOVEMENT MAGNITUDE IS
+NOT INTERFERENCE — the best arm drifted more. What remains genuinely untested is
+the ratio to the route rate, in both directions and across the whole run rather
+than stage 3, and any such sweep now needs a stream-only control.
+
+LOOPING AS SHARING ACROSS DEPTH is judged the most valuable NEW idea, and the
+entry supplies the constraint the proposal lacked: `ITERATION_WORLD_SPEC.md` was
+withdrawn before freezing because repeated application in the canonical family
+is a CONTRACTION and its necessity gate returned 0.026–0.123 against a required
+0.25. The rotated family passes the same gate at 1.67–1.73, so the rung is
+admissible only there, and what may be registered is the CROSSOVER LOCATION and
+linearity in MEASURED positional recurrence — "tied beats untied at high
+recurrence" is true by construction and would be an implementation check.
+
+CONTROL FLOW OFFLINE is already PX2/PX3 of the program ladder with L0a/L0b as
+their necessity gates; the suggestion is therefore a vote on PI decision 7, and
+contributes one registrable clause the ladder lacks (search cost scaling with
+loop-body rather than unrolled length, from E5.1). MACRO CREATE/REFUSE/WAIT is
+deprioritized below everything else as a refinement of a closed line with a
+40–55 bit prize against a null E7 already showed is hard to beat. The
+recommendation to drop the amortized writer is agreed and already executed by
+SG0, and the reviewer's observation that a confidence-gated online learner would
+pass through the immature-library regime by construction — supplying for free
+the setting SG6 could not obtain — is the most useful connection in the review.
+
+Standing caveat recorded with all five: development worlds 0–9 are spent for the
+online staged protocol, so the two online proposals need a new development band,
+which is PI decision 5 and is not granted.

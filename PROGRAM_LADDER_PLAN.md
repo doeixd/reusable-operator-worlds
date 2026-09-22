@@ -443,6 +443,28 @@ belong on remote workers if they exceed one overnight local batch.
   proposer. Registered in advance so a negative cannot be softened into another
   deferral.
 
+# Revision 3 (2026-09-22): one registrable clause added to PX2
+
+From review 85 (`reviews/reviewer-feedback-85.txt`), which reached PX2 and PX3
+independently from the README alone.
+
+**PX2 gains a search-cost clause it did not have.** E5.1 established that search
+cost scales with program LENGTH, not program-space size - the space grew
+3.58e7-fold while route-optimization seconds grew 3.30-fold, a scaling exponent
+of 0.068. If a learner represents `ITERATE(op, k)` rather than an unrolled
+sequence, the registrable prediction is that finding the program costs in
+proportion to the LOOP BODY length rather than the UNROLLED length, and the two
+diverge as `k` grows. That is a sharp, falsifiable consequence of an existing
+confirmed estimand, applied to an untested condition - the same shape as E5's
+depth-6 forecast, and like it, it must be registered with an ELIGIBILITY GATE so
+a failed forecast labels the setting UNINTERPRETABLE rather than leaving a
+degraded executor indistinguishable from a bad arm.
+
+Nothing else in the ladder changes. The reviewer's control-flow proposals are
+PX2 and PX3 as already written, with L0a and L0b as their necessity gates, and
+the plan's existing requirements that they omit - a matched NON-STAGED baseline,
+and the curriculum's compute charged to the claim - stand.
+
 # Decisions requested from the PI
 
 Revised 2026-09-22. Decision 2 is superseded and decision 3 is resolved by

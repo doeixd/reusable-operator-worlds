@@ -1,0 +1,239 @@
+External suggestions (another AI, README only), received 2026-09-22, with
+point-by-point assessment. The reviewer stated up front that they had read only
+the README and not the plan files, and flagged possible overlap with
+SO2P_PLASTICITY_TIER1_PLAN.md and ITERATION_WORLD_SPEC.md. Both flags were
+correct, and checking them is what most of this assessment consists of.
+
+The organizing observation is right and worth keeping: ROW's central open
+problem is ONLINE CO-FORMATION, J1 showed the first route assignment is made on
+a random library and never changes (0% change after round 3-5), and J1c works
+because staging keeps early commitments INFORMED. "What makes a learner commit
+only when its commitments are informed?" is a good framing of the open question.
+
+
+=====================================================================
+1. CONFIDENCE-GATED COMMITMENT AS AN ONLINE CURRICULUM
+   Reviewer priority: highest.  Assessment: PROMISING, with one design
+   objection that must be answered before a plan is written.
+=====================================================================
+
+The idea: commit a route only when its margin clears a threshold; otherwise
+buffer the task, use a soft or default route, and keep it out of library
+updates. Prediction: this reproduces J1c's staging online without being told
+program length, because short programs become confidently explainable first.
+
+What is right. The controls proposed are the ones this repository would ask for
+(sham gate deferring at the same rate at random, oracle-length ordering as
+ceiling, ungated online as floor), and the prediction that the deferred set is
+enriched for long programs is falsifiable. The reviewer also anticipated the
+route-margin warning without having read the census: `route_margin` survived
+pooled at rho -0.514 and went null once made comparable across worlds (+0.143,
+permutation 0.264), so any threshold must be normalized per world.
+
+THE OBJECTION, which the README does not contain and the reviewer could not
+have known. J0 measured exactly the regime this gate would operate in:
+gradient route inference equals exhaustive search on every library at or below
+0.47 median NMSE and FAILS above about 0.6, and "early in joint training every
+library is on the failing side." A confidence gate on a random initial library
+therefore has nothing that clears its threshold, defers everything, and the
+library never receives the updates that would make any route confident. That is
+a DEADLOCK, and it is the precise reason J1c supplies length-1 tasks: at length
+1 tasks sharing an operation look alike, so routing is CLUSTERING rather than
+search, and the first commitment is informed for a structural reason rather
+than a confidence reason.
+
+So the plan needs an explicit answer to "what trains the library while
+everything is deferred?" Three candidates, none obviously right:
+ (a) a warmup on soft routes before the gate activates - but that is J1's
+     failure mode, which forms an arbitrary assignment the library then fits;
+ (b) let deferred tasks still update the library through a soft route while
+     withholding only the HARD commitment - this is the most promising, and
+     makes the gate about commitment rather than about learning;
+ (c) admit an explicit easy-task source, which is the curriculum again, and
+     would make the claim "the gate discovers the curriculum" rather than
+     "the gate replaces it".
+Without one of these registered, the arm is likely to produce a null that means
+"the gate deadlocked", not "informed commitment does not help".
+
+Gate status: NECESSITY is satisfied (J1c shows informed commitment has large
+value offline: 0.005-0.007 against 0.92-0.96). OPPORTUNITY is satisfied.
+DISCRIMINATION is the open one, exactly as the reviewer says, and needs the
+sham-versus-real separation checked at the intended sample size before freezing.
+
+
+=====================================================================
+2. TWO-TIMESCALE PLASTICITY (library slow, routes fast, or the reverse)
+   Reviewer priority: run first, cheapest.  Assessment: LARGELY ALREADY RUN
+   AND NEGATIVE. One direction remains untested.
+=====================================================================
+
+This is SO2-P, which the reviewer suspected. `SO2P_PLASTICITY_TIER1_PLAN.md`
+swept `discrete_model.global_learning_rate` from 0.001 down to 0.0005, 0.00025
+and 0.0001 - a 1x / 2x / 4x / 10x slow-library dose - and the recorded outcome
+is that the consolidation settings did not improve on the unchanged protocol
+anywhere. The learning committed from it is directly on point:
+
+    MOVEMENT MAGNITUDE IS NOT INTERFERENCE. Lower stage-3 shared LR cut drift
+    and all post-learning losses, but also all post-learning gains. The best arm
+    drifted more. Count lost and gained tasks separately.
+
+So the reviewer's hypothesis that early updates to a shared structure overwrite
+each other has been tested in the slow-library direction and is not supported.
+The inference from stream sensitivity was reasonable but the mechanism hunt
+that followed closed with ALL THREE candidates withdrawn, and the defensible
+position on record is that online staged formation is world- and
+stream-dependent with no identified mechanism.
+
+WHAT IS GENUINELY UNTESTED, and the reviewer deserves credit for it: SO2-P
+moved only the LIBRARY rate, only in STAGE 3, and only DOWNWARD. The RATIO to
+the route/task rate was never the independent variable, and the
+fast-library/slow-route direction was never run. The reviewer's observation
+that this direction would be "the J1 failure mode inverted" is the interesting
+part - J1 locked in an early assignment, and slowing routes relative to the
+library would make that worse in a measurable way. A ratio sweep in both
+directions across the whole run, not just stage 3, is a legitimate small rung.
+
+But its priority should DROP, not lead. The single-direction version already
+failed, and the replay-stream confound found afterwards (storage and sampling
+share one RNG, so changing the stored count reshuffles the whole replay stream)
+means any new sweep needs a stream-only control arm. Cheap is not the same as
+decisive once the obvious half has already come back negative.
+
+
+=====================================================================
+3. LOOPING AS SHARING ACROSS DEPTH
+   Reviewer priority: best external payoff.  Assessment: THE MOST VALUABLE
+   NEW IDEA HERE, and it must use the ROTATED family or it is vacuous.
+=====================================================================
+
+The idea: build worlds where the hidden program reuses the same operator across
+POSITIONS at a controlled rate, compare a weight-tied looped learner against an
+untied one at matched compute, and predict the advantage is linear in depth
+recurrence with a crossover analogous to rho*. The motivation is the looped-
+transformer literature, where N x parameters has usually beaten N x loops under
+matched compute at scale.
+
+Why this is worth taking seriously. V1's law is about recurrence ACROSS TASKS.
+Positional recurrence WITHIN a program is a genuinely different axis, it has
+never been manipulated in this project, and if the same linear-in-recurrence
+law with a crossover reappears on it, that is a real result with an external
+audience. The reviewer is also right that it is the cleanest bridge ROW has to
+a live debate outside the project.
+
+THE DECISIVE CONSTRAINT, from `ITERATION_WORLD_SPEC.md`, which was WITHDRAWN
+BEFORE FREEZING for exactly this reason. Repeating an operator across positions
+in the canonical family is VACUOUS, because every operator has the form
+`tanh(z + small)` and is therefore a CONTRACTION toward a fixed point. Its
+necessity gate - best achievable NMSE by any fixed depth given the true
+primitive, required >= 0.25 - returned:
+
+    k in [2,6]    0.031  0.032  0.026    FAILS
+    k in [1,8]    0.083  0.082  0.066    FAILS
+    k in [1,11]   0.119  0.123  0.093    FAILS
+    cycle variant 0.084  0.105  0.092    FAILS
+
+The rotated family was built to fix precisely this and passes the same gate at
+1.67-1.73. So proposal 3 is admissible ONLY on the rotated substrate, and its
+first step is that necessity gate on the depth-recurrence knob, not the learner
+comparison. The reviewer asked for a necessity check on this item; the check
+already exists, has already killed one version of the world, and its threshold
+is on record.
+
+SECOND CONSTRAINT, an opportunity-gate question the proposal does not address.
+At high depth recurrence a weight-tied learner wins BY CONSTRUCTION - the
+generator reuses one operator and the tied learner has exactly that inductive
+bias. Registering "tied beats untied at high recurrence" would be an
+implementation check, not a result. The non-trivial, registrable quantity is
+the CROSSOVER LOCATION and the linearity of the effect in MEASURED positional
+recurrence, in the same form V1 reported (`R^2` in measured recurrence, not in
+the configured knob, since V1 found the configured knob gives a coordinate
+artifact: `R^2` 0.646 configured against 0.974 measured).
+
+The extension to estimating cross-depth recurrence in a real looped model is a
+different kind of claim on a different evidence standard, and should not be
+attached to a ROW rung. Record it as a separate speculative direction.
+
+
+=====================================================================
+4. CONTROL FLOW UNDER AN EXPLICITLY OFFLINE SCOPE
+   Assessment: ALREADY SPECIFIED. This is a vote for an open PI decision.
+=====================================================================
+
+The two rungs proposed - iteration with a per-task count, and branching with a
+learned predicate selecting between sub-routes - are PX2 and PX3 of
+`PROGRAM_LADDER_PLAN.md`, with L0b and L0a as their necessity gates. The
+reviewer arrived at the same decomposition independently from the README alone,
+which is mild evidence the decomposition is natural.
+
+The substantive content is therefore a vote on PI decision 7: take the offline
+scope rather than close L1-L8. The reviewer's framing is the correct one and
+matches the plan's own wording - it does not bend the stop rule, it scopes the
+claim as "offline, supplied curriculum". Two things the plan already requires
+and the suggestion omits: a matched NON-STAGED baseline, and the curriculum's
+compute charged to the claim.
+
+E5.1's prediction that search cost should scale with loop-body length rather
+than unrolled length is a good registrable clause and is not currently in PX2.
+Worth adding if decision 7 goes that way.
+
+
+=====================================================================
+5. MACRO CREATION WITH A "WAIT" OPTION
+   Assessment: DEPRIORITIZE FURTHER THAN THE REVIEWER SUGGESTS.
+=====================================================================
+
+The real-option framing is sound and the "rank with a statistic you can
+estimate well, test with the one you cannot" fit is real. But the E6 line is
+CLOSED, and E7 refuted the parameterized-macro rationale against the harder
+null (the learner's own unplanted structure), which is the null any successor
+would have to beat. The quantity at stake is 40-55 bits on dead patterns, which
+is small against everything else on the table, and a three-way create/refuse/
+wait decision needs a calibrated continuation probability that the E6 line
+already found cannot be estimated retrospectively.
+
+Not wrong, but it is a refinement of a closed line with a small prize. It
+should sit below everything else here.
+
+
+=====================================================================
+6. DEPRIORITIZING THE AMORTIZED WRITER
+   Assessment: AGREED, and already done.
+=====================================================================
+
+SG0 returned NO-HEADROOM at k = 0 of 36 with a registered bound of k <= 2, the
+branch is closed, and PX7 is retired as unmeasurable here. The reviewer's
+further point - that if the writer question returns it belongs during
+FORMATION, on immature libraries - is exactly the working hypothesis on record,
+and SG6 established that it cannot be tested on held artifacts because library
+quality is bimodal (gap 30.2x the wider cluster's spread; within-cluster
+correlations null and wrong-signed). Their observation that proposal 1 would
+supply that setting "for free" is the most useful connection in the review: a
+confidence-gated online learner passes through the immature-library regime by
+construction, so it could carry the instrumentation that SG6 could not.
+
+
+=====================================================================
+ORDERING, REVISED
+=====================================================================
+
+The reviewer suggested 2, then 1, then 3, with 4 and 5 alongside.
+
+Revised, given what the plan files say:
+
+  1. Proposal 1 (confidence-gated commitment), AFTER the deadlock objection is
+     answered in the plan. Highest value, attacks the central open problem,
+     and can carry proposal 6's instrumentation.
+  2. Proposal 3 (depth recurrence), on the ROTATED family, starting with the
+     necessity gate and registering the CROSSOVER, not the sign.
+  3. Proposal 4 only if PI decision 7 opens the offline scope; it is already
+     specified as PX2/PX3.
+  4. Proposal 2 reduced to the untested direction (ratio sweep both ways,
+     whole run, with a stream-only control), at low priority.
+  5. Proposal 5 last, on a closed line.
+
+Proposal 2 moving from first to fourth is the single largest change, and it is
+entirely because the slow-library half has already been run and failed.
+
+Standing caveat that applies to all five: development worlds 0-9 are SPENT for
+the online staged protocol. Proposals 1 and 2 are online rungs and need a new
+development band, which is PI decision 5 and is not granted.

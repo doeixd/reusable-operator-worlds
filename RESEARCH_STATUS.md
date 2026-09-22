@@ -98,6 +98,60 @@ decisions (6 and 7), not measurements.
   Recorded in AGENTS.md: the opportunity gate is what decides whether a plan
   gets written, not a step inside one.
 
+# Candidate rungs from review 85 (2026-09-22, external suggestions)
+
+Assessment in `reviews/reviewer-feedback-85.txt`. An external reviewer working
+from the README alone proposed five directions. Two survive as candidates, one
+is a vote on an open decision, one is largely already run and negative, and one
+is a refinement of a closed line. None is a plan; none is approved.
+
+- **C1, confidence-gated commitment (online).** Commit a route only when its
+  margin clears a per-world-normalized threshold; otherwise defer. Predicts J1c's
+  staging emerges online without being told program length. NECESSITY and
+  OPPORTUNITY are satisfied by J1c (0.005-0.007 against 0.92-0.96 offline);
+  DISCRIMINATION needs the sham-versus-real separation checked at the intended
+  sample size. **Blocking design objection, to be answered IN the plan:** J0
+  measured that gradient routing fails above about 0.6 median NMSE and that
+  early in joint training every library is on the failing side, so a gate on a
+  random library defers everything and nothing ever becomes confident - a
+  DEADLOCK. The candidate fix is to withhold only the HARD commitment while soft
+  routes still update the library. Also **blocked on PI decision 5**: this is an
+  online rung and worlds 0-9 are spent.
+- **C2, depth recurrence / looping as sharing across position.** Manipulate how
+  often the hidden program reuses the SAME operator across positions, and
+  compare a weight-tied learner against an untied one at matched compute. This
+  is a genuinely new axis - V1's `rho` is recurrence ACROSS TASKS, not within a
+  program - and it is the cleanest bridge ROW has to an outside debate (looped
+  transformers). **Admissible only on the ROTATED family:**
+  `ITERATION_WORLD_SPEC.md` was withdrawn before freezing because repeated
+  application in the canonical family is a CONTRACTION, failing its necessity
+  gate at 0.026-0.123 against a required 0.25; the rotated family passes at
+  1.67-1.73. **What may be registered is the CROSSOVER LOCATION and linearity in
+  MEASURED positional recurrence**, never the sign: "tied beats untied at high
+  recurrence" is true by construction and would be an implementation check.
+  First step is the necessity gate on the new knob, not the learner comparison.
+- **C3 = PI decision 7.** The reviewer's control-flow proposals (per-task
+  iteration count; learned predicate selecting sub-routes) are PX2 and PX3 of
+  the program ladder, reached independently from the README. Treat as a vote for
+  the offline scope. It contributed one registrable clause the ladder lacked;
+  see `PROGRAM_LADDER_PLAN.md` Revision 3.
+- **C4, two-timescale plasticity: LARGELY ANSWERED.** This is SO2-P, which swept
+  the shared learning rate down 2x/4x/10x and did not improve on the unchanged
+  protocol anywhere; the committed learning is that MOVEMENT MAGNITUDE IS NOT
+  INTERFERENCE - the best arm drifted more. Genuinely untested: the RATIO to the
+  route rate, in both directions and across the whole run rather than stage 3.
+  Low priority, and needs a stream-only control arm.
+- **C5, macro create/refuse/wait: deprioritized** below everything else. The E6
+  line is closed and E7 refuted the parameterized-macro rationale against the
+  learner's own unplanted-structure null, which any successor must beat; the
+  prize is 40-55 bits on dead patterns.
+
+The reviewer's recommendation to drop the amortized writer is agreed and already
+executed by SG0. Their observation that C1 would pass through the
+immature-library regime by construction - supplying for free the setting SG6
+could not obtain on held artifacts - is the most useful connection in the review
+and is the main reason C1 ranks first.
+
 # Queued for another agent: five Tier 0 follow-ups (2026-09-22)
 
 Full specification in `FOLLOWUP_AUDITS.md`. Written after the three gates were
