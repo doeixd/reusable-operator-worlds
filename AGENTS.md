@@ -1853,3 +1853,18 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   the `argparse` defaults did not, so the documented no-argument scoring command
   pointed at the failed run. Same family as the H35 step-count defect: whenever
   a run path, budget or argument moves, re-read every entry point that names it.
+
+- DOUBLE-CHECK AFTER WRITING, NOT ONLY BEFORE LAUNCHING (PI directive,
+  2026-09-22). The 2026-08-24 directive covers the moment before compute is
+  committed. This one covers the moment a plan, hypothesis registration,
+  runner, scorer or test is written or revised, and it fires before approval,
+  freezing or commit. Re-read the new text against these learnings item by
+  item and report what the check found. The evidence that this is needed is
+  that nearly every entry above records a rule that was already written down
+  when the document violating it was drafted: V4.1's tolerance, H50's seeds,
+  the sealed C2 denominator, the route-margin comparability failure, the
+  first-crossing statistic, the alpha fit pinned at a stationary point. The
+  first application of this rule (SG0, same day) found five gaps in a plan
+  written two hours earlier, including a missing denominator of exactly the
+  sealed-C2 kind and a violation of a lesson committed that morning. A check
+  that finds nothing is not being run.

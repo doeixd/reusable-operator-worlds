@@ -6184,3 +6184,54 @@ development status or stop rule was altered.
 NEXT: PI decision 8 - approve SG0, or not. Nothing is implemented; SG0 needs a
 committed runner, an independent scorer, tests including the equivalence check
 named in its plan, a dry run and a restart test before it runs, as for any rung.
+
+
+# 2026-09-22 - Double-check-after-writing rule added, and applied immediately
+
+No experiment, no run, no code. Documents only. Nothing is running.
+
+PI directive, 2026-09-22: after writing or revising a research plan, a
+hypothesis registration, a runner, a scorer or a test - and BEFORE approval,
+freezing or commit - re-read the new text against the `AGENTS.md`
+implementation learnings item by item, and report what the check found. This
+extends the 2026-08-24 double-check directive, which covers the moment before
+compute is committed, to the moment of writing. Recorded in `CLAUDE.md` (new
+front-door section), `AGENTS.md` and `notes/learnings.txt`.
+
+Justification recorded with it: most failures on record violated a rule that was
+ALREADY WRITTEN DOWN when the offending document was drafted - V4.1's tolerance,
+H50's seeds, the sealed C2 denominator, the route-margin comparability failure,
+the first-crossing statistic, the alpha fit pinned at a stationary point. The
+failure mode is not ignorance of a rule; it is not re-reading against rules
+already known.
+
+First application, on `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` written about two
+hours earlier, found five real gaps. SG0 Revision 1 fixes all five and lists
+them in the plan itself:
+
+1. No denominators. "Every staged cell" and "some cells" had no counts and the
+   triage could resolve to neither pass nor fail - the sealed-C2 error exactly.
+   Now: a cell is one (library kind, world, depth, support) over 16 programs,
+   giving 36 staged and 36 control cells, with the three outcomes partitioning
+   every possible k.
+2. Thresholds not checked against their own baseline. The ordering test had no
+   numbers; the ones now written in are explicitly PROVISIONAL pending a
+   control-cell and shuffled-label null, per the S0 rule.
+3. No list of quantities to record - breaking a lesson committed THAT MORNING
+   from the depth-five runner. Now listed so the runner output can be diffed
+   against the plan before launch.
+4. No operational-record contract (`run.log`, `status.json`, `run.pid`,
+   `exit.json`, durable error record), omitted because the job is short. The
+   restartable-and-checkable directive has no Tier 0 exemption.
+5. No stale-report guard (H29) and no performance pass, which the directive
+   requires for EVERY launch, not every long one.
+
+Also normalized the em dashes SG0 introduced to the hyphen style used elsewhere
+in the repo, and restored the Cost section after a section-level replacement
+clobbered it - caught by re-reading the rendered file rather than trusting the
+patch, which is the same check in miniature.
+
+`check_prereg.py` and `check_invalid.py` pass. No frozen plan, sealed verdict,
+development status or stop rule altered. SG0 remains DRAFT and unimplemented.
+
+NEXT: unchanged - PI decision 8, approve SG0 or not.

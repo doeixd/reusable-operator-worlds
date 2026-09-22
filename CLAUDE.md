@@ -246,6 +246,37 @@ implementation for the next plan boundary.
 - `neural_library_learning_v1_experimental_spec.md`, `EXPERIMENT_PLAN.md`,
   `CONFIRMATION_PLAN.md` — frozen; never edit.
 
+# After writing any plan or experiment file
+
+DOUBLE-CHECK WHAT YOU JUST WROTE AGAINST THESE RULES (PI directive,
+2026-09-22). The existing double-check is about LAUNCHING. This one is about
+WRITING, and it fires earlier: immediately after drafting or revising a
+research plan, a hypothesis registration, a runner, a scorer, or a test - and
+before asking for approval, freezing, or committing.
+
+Re-read the new text against `AGENTS.md` "Implementation learnings" and the
+integrity rules below, item by item, and write down what you checked. The
+recurring failure is not ignorance of a rule; it is writing a document that
+silently violates a rule recorded weeks earlier. At minimum, every plan is
+checked for:
+
+- an OPPORTUNITY GATE: could this comparison come out any other way, given how
+  the objects are constructed? If not, it is an implementation check;
+- every registered THRESHOLD checked against its own BASELINE, computed first;
+- every fraction-of-cells clause carrying an explicit DENOMINATOR, and a triage
+  that cannot resolve to neither pass nor fail;
+- ESTIMANDS diffed against the code that computes them, and the plan's list of
+  quantities to RECORD diffed against the runner's actual output;
+- fit and score never on the same objects; comparisons only at common inputs;
+- arms described as CONSTRUCTIONS, not names;
+- non-vacuity checks that can actually fail;
+- restartability, protocol fingerprint, stale-report refusal, and an
+  independent scorer committed BEFORE launch.
+
+State the result of this check in the same message that delivers the work,
+including anything it found. A check that never finds anything is not being
+run.
+
 # Before any long-running run
 
 ALWAYS re-read and double-check experiment code for correctness BEFORE

@@ -5115,3 +5115,14 @@ edited into the report, which would break its fingerprint chain. Diff the plan's
 when the run path moved to _v2 the scorer's score() defaults moved but its argparse
 defaults did not, so the documented scoring command pointed at the failed run:
 a scorer's CLI defaults, including paths, are part of the protocol.
+
+2026-09-22 PI directive, double-check after WRITING: immediately after drafting
+or revising a plan, hypothesis registration, runner, scorer or test - and before
+approval, freezing or commit - re-read it against AGENTS.md implementation
+learnings item by item, and report what the check found. The 2026-08-24
+directive covers the moment before launch; this one covers the moment of
+writing. Justification: most recorded failures violated a rule that was already
+written down when the offending document was drafted. First application (SG0,
+same day) found five gaps in a two-hour-old plan, including an ambiguous triage
+denominator of the sealed-C2 kind and a violation of a lesson committed that
+morning. A check that finds nothing is not being run.
