@@ -1,9 +1,10 @@
 # N1: is it the ORDER, or the supply of anchors?
 
-Status: DRAFT, 2026-09-22, **NOT FREEZE-READY** - see "Audit 1" at the end,
-which supersedes the earlier freeze-ready claim. Offline, development worlds
-0-2, Tier 1. The world-budget ruling is GIVEN (see "World budget"); what blocks
-freezing now is a construct inconsistency in the arms, not the ruling.
+Status: DRAFT, 2026-09-22, **AMENDMENT 1 answers Audit 1's four registrations;
+freeze-ready pending PI approval.** Offline, development worlds 0-2, Tier 1.
+The world-budget ruling is GIVEN (see "World budget"). Read Audit 1 and then
+Amendment 1 at the end: the arms table in the body is SUPERSEDED by Amendment 1
+and is kept only so the correction is legible.
 
 First plan written under `DESIGN_ADEQUACY.md`, so it carries `# Necessity` and
 `# Discriminating power` sections with measured numbers rather than assertions,
@@ -286,3 +287,106 @@ cross-world predictor, in a new place. Either define the statistic so the two
 depths are comparable, or replace it with a direct measure of the premise - for
 example that length-1 tasks reach the usability threshold in materially fewer
 updates than length-3 tasks - which is what "easier" is supposed to mean here.
+
+# Amendment 1 (2026-09-22): the corrected arms, and the four registrations
+
+Answers the four items Audit 1 requires before freezing. It supersedes the arms
+table and the "Discriminating power" rates in the body. Written before any cell
+was run; no N1 cell exists.
+
+## 1. The matching invariant, stated once
+
+**UPDATE BUDGET: 65,536 updates for every arm.** This is the invariant J1c
+itself used - its three stages are 16,384 + 16,384 + 32,768 - and it is the one
+under which the published floor was measured, so the published floor stays
+applicable. Task count, update budget and example-gradients are DIFFERENT
+invariants and cannot all be held at once; this plan holds updates.
+
+**TASK SLOTS: 188 for `STAGED`, `INTERLEAVED` and `SHAM`.** These three carry the
+contrast and are slot-matched to one another as well as budget-matched.
+`NONE` is NOT slot-matched, and that is deliberate - see registration 2.
+
+The superseded rule ("anchors REPLACE length-3 tasks", task count "matched
+exactly") is arithmetically impossible: J1c has 124 anchors and 64 final-stage
+tasks, and 124 cannot replace tasks inside a 64-task stream.
+
+## 2. `NONE`: construction and non-vacuity referent
+
+`NONE` is the **published 64-slot length-3 baseline at 65,536 updates**,
+unchanged from J1c-R. Its non-vacuity referent is therefore its OWN published
+value, 0.92-0.97, rather than a value borrowed from a differently-built arm.
+
+It is explicitly a REFERENCE and a non-vacuity check, not a slot-matched arm.
+Making it 188 slots would have produced a new construction with no published
+value - which is precisely how Audit 1 found the original design borrowing a
+floor it had not measured.
+
+## 3. How `SHAM` stays distinct from `NONE`
+
+`SHAM` is **188 slots: the 64 canonical length-3 tasks plus 124 DISTINCT
+ADDITIONAL length-3 programs**, placed at exactly `INTERLEAVED`'s anchor
+positions. The pool supports it: the world admits `6**3 = 216` distinct length-3
+programs and the canonical set uses 64, leaving 152 unused against the 124
+needed.
+
+This makes the three contrast arms differ in exactly one respect each:
+
+| arm | 188 slots | the 124 non-canonical slots hold | varies |
+|---|---|---|---|
+| `STAGED` | yes | length-1 and length-2 anchors, presented FIRST in length order | order + easiness |
+| `INTERLEAVED` | yes | the same anchors, at random positions | easiness only |
+| `SHAM` | yes | distinct length-3 programs, at `INTERLEAVED`'s positions | neither |
+
+`STAGED` vs `INTERLEAVED` isolates ORDER. `INTERLEAVED` vs `SHAM` isolates
+ANCHOR EASINESS at matched slots, matched positions and matched budget. `SHAM`
+is no longer a near-duplicate of `NONE`: it has 188 slots against `NONE`'s 64.
+
+Evaluation is unchanged and is always on the canonical 64 length-3 tasks, so the
+extra programs are training stream only and never enter the estimand.
+
+## 4. Samplers re-derived, and the location `SHAM` is NOT known to occupy
+
+The original rates drew `SHAM` at `U(0.92, 0.97)`, the published 64-slot floor.
+Under the corrected construction `SHAM` is 188 length-3 slots at the same budget
+and its level is **unmeasured**. Rather than borrow a value, the rates are swept
+across every plausible `SHAM` location. Regenerate with
+`reports/n1_design/derive_rates.py`; output `reports/n1_design/corrected_rates.json`.
+
+Decision rule unchanged: `SUFFICE` if `INTERLEAVED`'s terminal median NMSE `m`
+is `< 0.05` in at least 2 of 3 worlds; else `PARTIAL` if
+`median(s) / median(m) >= 5.0`; else `INSUFFICIENT`. Outcomes partition 0..3
+worlds (verified).
+
+| `SHAM` band | false-fire | detection (full) | detection (half) |
+|---|---|---|---|
+| 0.20-0.25 | 0.0000 | 1.0000 | **0.0000** |
+| 0.30-0.35 | 0.0000 | 1.0000 | **0.3125** |
+| 0.45-0.50 | 0.0000 | 1.0000 | 1.0000 |
+| 0.60-0.65 | 0.0000 | 1.0000 | 1.0000 |
+| 0.75-0.80 | 0.0000 | 1.0000 | 1.0000 |
+| 0.92-0.97 | 0.0000 | 1.0000 | 1.0000 |
+
+**False-fire is 0.0000 and full-effect detection 1.0000 at every location**, so
+the `SUFFICE` clause is robust to where `SHAM` lands. **The `PARTIAL` clause is
+not:** it depends on a ratio whose denominator is `SHAM`, and below about 0.45 it
+cannot see a half-sized effect at all.
+
+**Registered guard, in force before the data is read.** If measured `SHAM` falls
+below **0.45** in a world, the `PARTIAL` clause is **UNINTERPRETABLE** in that
+world and is reported as such - never as `INSUFFICIENT`. A ratio test whose
+denominator collapses produces a false negative, not a negative, and the
+distinction is registered here rather than discovered afterwards.
+
+Expected, but explicitly NOT assumed: 188 length-3 slots at a fixed update
+budget give each task fewer updates than `NONE`'s 64 slots do, so `SHAM` should
+land at or above the published floor. That is an argument, not a measurement,
+which is why the guard is registered instead of the argument being relied on.
+
+## What Amendment 1 does not change
+
+The NECESSITY section stands unaltered: its 150-200x refusal cost is measured
+from published J1c/J1c-R values, and `NONE` - the arm that refuses - is
+unchanged by this amendment. Audit 2's comparability objection to the
+anchor-difficulty check is still OPEN and must be answered before freezing:
+replace the cross-depth route-margin comparison with a directly comparable
+measure, such as updates-to-threshold on length-1 against length-3 tasks.

@@ -137,6 +137,23 @@ sections with MEASURED numbers.
   cost is measured from published values and stands. A second, non-blocking audit
   notes the anchor-difficulty check compares a margin over 12 routes against one
   over 1,728 - the route-margin comparability failure in a new place.
+  **AMENDMENT 1 (2026-09-22) answers all four and the plan is now freeze-ready
+  pending PI approval.** Invariant: 65,536 updates for every arm, 188 task slots
+  for the three contrast arms. `NONE` stays the published 64-slot floor, so its
+  non-vacuity referent is its own published 0.92-0.97 rather than a borrowed
+  value. `SHAM` becomes 188 slots - the canonical 64 plus 124 DISTINCT additional
+  length-3 programs (216 exist, 64 used, 152 available) at `INTERLEAVED`'s anchor
+  positions - so it is no longer a near-duplicate of the floor, and the three
+  arms differ in exactly one respect each: `STAGED` vs `INTERLEAVED` isolates
+  ORDER, `INTERLEAVED` vs `SHAM` isolates ANCHOR EASINESS.
+  Samplers re-derived by SWEEPING `SHAM`'s unmeasured location
+  (`reports/n1_design/`): false-fire 0.0000 and full detection 1.0000 at every
+  location, but **half-effect detection collapses below `SHAM` ~ 0.45** (0.0000
+  at 0.20-0.25, 0.3125 at 0.30-0.35). Registered guard: if measured `SHAM` falls
+  under 0.45 in a world, `PARTIAL` is UNINTERPRETABLE there, never
+  `INSUFFICIENT` - a ratio test whose denominator collapses gives a false
+  negative, not a negative. Audit 2 remains OPEN: the anchor-difficulty check
+  still needs a depth-comparable statistic, such as updates-to-threshold.
 - **N2, `N2_FORMATION_IDENTIFIABILITY_PLAN.md` — is identifiability graded ALONG
   FORMATION?** SG6 died because the twelve held libraries are bimodal: good or
   broken, nothing between, effective n = 2. A formation run passes through the

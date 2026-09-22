@@ -6926,3 +6926,67 @@ what did.
 
 NEXT: N1 needs the four registrations above before it can be frozen. Nothing is
 running.
+
+# 2026-09-22 N1 Amendment 1: corrected arms, and a sampler sweep that found a blind spot
+
+No experiment, no cell. Answers the four registrations Audit 1 required. Rates
+regenerate with `reports/n1_design/derive_rates.py` into
+`reports/n1_design/corrected_rates.json`.
+
+**1. Matching invariant: 65,536 updates for every arm**, which is what J1c used
+(16,384 + 16,384 + 32,768) and the invariant under which the published floor was
+measured. Task slots: 188 for `STAGED`, `INTERLEAVED` and `SHAM`. Task count,
+update budget and example-gradients are different invariants and cannot all hold
+at once; this plan holds updates.
+
+**2. `NONE` stays the published 64-slot length-3 baseline**, so its non-vacuity
+referent is its own published 0.92-0.97 rather than a value borrowed from a
+differently-built arm. It is a REFERENCE, not a slot-matched arm - making it 188
+slots is exactly how the original design ended up borrowing a floor it had never
+measured.
+
+**3. `SHAM` becomes 188 slots**: the canonical 64 length-3 tasks plus 124
+DISTINCT ADDITIONAL length-3 programs at `INTERLEAVED`'s anchor positions. The
+pool supports it - the world admits `6**3 = 216` distinct length-3 programs, 64
+are canonical, 152 remain against the 124 needed. `SHAM` now has 188 slots
+against `NONE`'s 64, so it is no longer a near-duplicate of the floor, and the
+three contrast arms differ in exactly one respect each: `STAGED` vs
+`INTERLEAVED` isolates ORDER, `INTERLEAVED` vs `SHAM` isolates ANCHOR EASINESS
+at matched slots, positions and budget. Evaluation stays on the canonical 64
+tasks, so the extra programs are training stream only and never enter the
+estimand.
+
+**4. Samplers re-derived by sweeping what is not known.** The original drew
+`SHAM` at `U(0.92, 0.97)`, the published 64-slot floor; under the corrected
+construction `SHAM` is 188 length-3 slots and its level is UNMEASURED. Rather
+than borrow, the rates were swept across every plausible location:
+
+| `SHAM` band | false-fire | detection (full) | detection (half) |
+|---|---|---|---|
+| 0.20-0.25 | 0.0000 | 1.0000 | **0.0000** |
+| 0.30-0.35 | 0.0000 | 1.0000 | **0.3125** |
+| 0.45-0.50 | 0.0000 | 1.0000 | 1.0000 |
+| 0.60-0.65 | 0.0000 | 1.0000 | 1.0000 |
+| 0.75-0.80 | 0.0000 | 1.0000 | 1.0000 |
+| 0.92-0.97 | 0.0000 | 1.0000 | 1.0000 |
+
+**The sweep found a blind spot the single-point calculation could not.**
+False-fire is 0.0000 and full detection 1.0000 everywhere, so `SUFFICE` is
+robust. But `PARTIAL` is a ratio whose DENOMINATOR is `SHAM`, and below about
+0.45 it cannot see a half-sized effect at all. Registered guard, in force before
+any data: if measured `SHAM` falls below 0.45 in a world, `PARTIAL` is
+UNINTERPRETABLE there and is reported as such, never as `INSUFFICIENT`. A ratio
+test whose denominator collapses yields a false negative, not a negative.
+
+There is a good argument that `SHAM` will land at or above the published floor -
+188 slots at a fixed budget give each task fewer updates than `NONE`'s 64 do -
+but that is an argument, not a measurement, which is why the guard is registered
+instead of the argument being relied on.
+
+**Still open before freezing:** Audit 2. The anchor-difficulty non-vacuity check
+compares a route margin over 12 competitors against one over 1,728, and
+"single-step" is undefined at length 3. It needs a depth-comparable statistic,
+such as updates-to-threshold on length-1 against length-3 tasks.
+
+NEXT: answer Audit 2, then the plan is ready to freeze and hash. Nothing is
+running.

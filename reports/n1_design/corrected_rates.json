@@ -1,0 +1,175 @@
+{
+ "rule": {
+  "suffice_threshold": 0.05,
+  "ratio_threshold": 5.0,
+  "worlds": 3,
+  "draws": 2000,
+  "seed": 11
+ },
+ "partition": {
+  "passes": true,
+  "detail": {
+   "uncovered": [],
+   "overlapping": [],
+   "reason": "partitions"
+  }
+ },
+ "sweep": [
+  {
+   "sham_band": [
+    0.2,
+    0.25
+   ],
+   "null": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 1.0
+   },
+   "full": {
+    "SUFFICE": 1.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 0.0
+   },
+   "half": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 1.0
+   },
+   "false_fire": 0.0,
+   "detection_full": 1.0,
+   "detection_half": 0.0,
+   "passes_full": true,
+   "passes_half": false
+  },
+  {
+   "sham_band": [
+    0.3,
+    0.35
+   ],
+   "null": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 1.0
+   },
+   "full": {
+    "SUFFICE": 1.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 0.0
+   },
+   "half": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 0.3125,
+    "INSUFFICIENT": 0.6875
+   },
+   "false_fire": 0.0,
+   "detection_full": 1.0,
+   "detection_half": 0.3125,
+   "passes_full": true,
+   "passes_half": false
+  },
+  {
+   "sham_band": [
+    0.45,
+    0.5
+   ],
+   "null": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 1.0
+   },
+   "full": {
+    "SUFFICE": 1.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 0.0
+   },
+   "half": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 1.0,
+    "INSUFFICIENT": 0.0
+   },
+   "false_fire": 0.0,
+   "detection_full": 1.0,
+   "detection_half": 1.0,
+   "passes_full": true,
+   "passes_half": true
+  },
+  {
+   "sham_band": [
+    0.6,
+    0.65
+   ],
+   "null": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 1.0
+   },
+   "full": {
+    "SUFFICE": 1.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 0.0
+   },
+   "half": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 1.0,
+    "INSUFFICIENT": 0.0
+   },
+   "false_fire": 0.0,
+   "detection_full": 1.0,
+   "detection_half": 1.0,
+   "passes_full": true,
+   "passes_half": true
+  },
+  {
+   "sham_band": [
+    0.75,
+    0.8
+   ],
+   "null": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 1.0
+   },
+   "full": {
+    "SUFFICE": 1.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 0.0
+   },
+   "half": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 1.0,
+    "INSUFFICIENT": 0.0
+   },
+   "false_fire": 0.0,
+   "detection_full": 1.0,
+   "detection_half": 1.0,
+   "passes_full": true,
+   "passes_half": true
+  },
+  {
+   "sham_band": [
+    0.92,
+    0.97
+   ],
+   "null": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 1.0
+   },
+   "full": {
+    "SUFFICE": 1.0,
+    "PARTIAL": 0.0,
+    "INSUFFICIENT": 0.0
+   },
+   "half": {
+    "SUFFICE": 0.0,
+    "PARTIAL": 1.0,
+    "INSUFFICIENT": 0.0
+   },
+   "false_fire": 0.0,
+   "detection_full": 1.0,
+   "detection_half": 1.0,
+   "passes_full": true,
+   "passes_half": true
+  }
+ ]
+}
