@@ -6,11 +6,12 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-22, after SG0 returned NO-HEADROOM on its registered
-grid, its amended sub-triage returned SATURATED, and the successor census (SG6)
-was closed by its own opportunity gate before a plan was written. Nothing is
-running. The substrate has no live rung: both remaining questions are PI
-decisions (6 and 7), not measurements.
+Last rewritten: 2026-09-22, after N1 and N2 were drafted under the
+design-adequacy protocol. Nothing is running. No rung is APPROVED: SG0 closed
+`NO-HEADROOM`, its amended sub-triage closed `SATURATED`, SG6 was refused by its
+own gate before a plan existed, and the two drafted plans (N1 freeze-ready, N2
+not) both wait on the world-budget ruling. Every open question is a PI decision -
+items 5, 9 and 10 below - not a measurement.
 
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
@@ -64,8 +65,6 @@ decisions (6 and 7), not measurements.
   depth-3 targets. Depth-3 evidence unaffected; plan Revision 4 fixes the program
   source per depth and requires a cross-check against a committed result at every
   depth.
-
-# Awaiting a PI decision (nothing running)
 
 # SG6 CLOSED BEFORE OPENING: no graded vocabulary-quality axis (2026-09-22)
 
