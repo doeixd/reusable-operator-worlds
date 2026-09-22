@@ -6,59 +6,49 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-22, after a program-level review of what the plans
-leave reachable: SG0 Revision 3 (a registered NO-HEADROOM sub-triage that
-pre-decides its own successor) and PROGRAM_LADDER_PLAN Revision 2 (the
-learner-rung gate is unreachable; ladder decision 7). Nothing is running.
+Last rewritten: 2026-09-22, after SG0 ran and returned NO-HEADROOM on its
+registered grid. Nothing is running.
 
-# Recommended next action: SG0, the synthesis headroom gate
+# SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
-- **State:** DRAFT `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` (2026-09-22), working
-  hypotheses SG1-SG4 in `PREDICTIONS.md`, generator reasoning in
-  `notes/identifiability-sketch.txt`. Tier 0, artifacts already held, minutes of
-  compute, no world, no learner, no lifetime. Needs PI approval
-  (ladder decision 5) before implementation.
-- **Why it exists.** Counting by cause, eight rungs have failed for absence of
-  opportunity rather than learner failure: the 2026-08-31 loop census, E6.2, E7,
-  H47, H48b, H49, E9 and L0d's four gates. E5 (writer costlier than search and
-  short of oracle quality) and E5.1 (space 3.58e7x, search seconds 3.30x, at
-  oracle parity) plausibly belong to the same list.
-- **The hypothesis it tests.** Support data here OVERDETERMINES the route, so
-  the incumbent search is already at the ceiling and no proposer can pay. If
-  true, "search is easy" (E5/E5.1) and "there is no ambiguity" (L0d) are one
-  fact about the GENERATOR, and every proposer, discovery and uncertainty rung
-  on this substrate is unmeasurable.
-- **What it measures.** COMMITMENT REGRET, the query cost of choosing the
-  support-optimal route rather than the query-optimal one, against a registered
-  sampling-noise floor, with a selection-split guard so the hindsight-best route
-  is not fit and scored on the same query examples. None of the four L0d gates
-  measured this: they asked whether the selected route CHANGES, not whether it
-  is RIGHT, which is why all four are consistent with regret 0 AND with regret
-  large.
-- **Registered triage and its consequences, fixed in advance:**
-  - `NO-HEADROOM` - the amortized-proposer branch on this substrate is CLOSED,
-    PX7 is retired as UNMEASURABLE HERE (not refuted), and the L0d census is
-    WITHDRAWN rather than left unfrozen. **A registered SUB-TRIAGE (Revision 3)
-    then splits it, from quantities the same run already records:
-    `NO-HEADROOM-EVIDENTIAL` (near-ties are non-trivial and disagree on query,
-    so restricting the support distribution is a live intervention and SG3 is
-    licensed) versus `NO-HEADROOM-SATURATED` (the route space is functionally
-    separated, SG3 prerequisite (a) fails here, and the recommendation is to
-    bank). Secondary and diagnostic: it decides a program question, not a
-    scientific one. Working hypothesis SG5 in `PREDICTIONS.md`.**
-  - `HEADROOM-LOCALIZED` - the localizing statistic is the measured ambiguity
-    source the census has lacked; freeze the census around identifiability, not
-    support size.
-  - `HEADROOM-UNEXPLAINED` - freeze nothing; this is the route-margin hunt
-    repeating, and that cost three withdrawn candidates.
-- **Contingent successor** (ladder decision 6, now PRE-DECIDED BY MEASUREMENT
-  rather than left as an either/or): under `NO-HEADROOM`, the sub-triage above
-  says which. `EVIDENTIAL` -> pursue the identifiability generator (restrict the
-  SUPPORT input distribution while leaving query untouched, so
-  evidence-equivalent routes diverge on query). `SATURATED` -> bank the
-  economics and negative-results papers and stop opening rungs on this
-  substrate. The PI still decides; what changed is that the decision now arrives
-  with its measurement attached instead of after the cheap answer has landed.
+- **Verdict:** `NO-HEADROOM`, `k = 0` of 36 staged cells against a registered
+  `k <= 2` fixed before any data existed. Run `229fb97`, 72 cells, exit 0,
+  independent scorer `valid: true`, prereg and invalid checks pass. Report
+  `reports/sg0_full_v2.json`; archive `reports/sg0_full_2026-09-22/`; PROGRESS
+  and PREDICTIONS 2026-09-22.
+- **574 of 576 staged tasks have EXACTLY zero commitment regret**; the two
+  exceptions are depth-4 tasks at 0.0099 and 0.0043 and neither cell clears its
+  floor. No staged task has any route within 1% of the winner on support, at
+  either depth or any support size. The bootstrap floor is exactly zero in every
+  staged cell: 200 resamples never changed the selected route.
+- **Non-vacuity passes decisively:** the same code path gives 500/576 control
+  routes differing, regret to 0.663, 142/576 non-trivial near-ties, and 11 of 36
+  control cells clearing their own floor.
+- **Anchors pass:** J2A `enum_route`/`enum` at depth 3, and the committed
+  depth-four execution gate at depth 4 world 0. Staged median query NMSE 0.00580
+  and 0.00772 sit on the committed gates' 0.00571961 and 0.00871712.
+- **In force, as registered in advance:** the amortized-proposer branch on this
+  substrate is CLOSED; **PX7 is retired as UNMEASURABLE HERE**, not refuted; the
+  full **L0d census is WITHDRAWN** rather than left indefinitely unfrozen.
+- **Reading:** on the usable staged vocabulary the route space is not merely
+  well-evidenced but FUNCTIONALLY SEPARATED, and every inference mechanism
+  competes for a quantity measured here at zero. Consistent with the working
+  reading that E5, E5.1 and L0d's four gates share one cause in the generator.
+  A statement about THIS substrate at depths 3-4, not about program synthesis.
+- **Sub-triage direction is SATURATED** (staged `j = 0` of 36 under all three
+  readings of the Revision 3 rule), so SG3's first prerequisite FAILS and the
+  identifiability generator is not licensed by these artifacts. The rule is
+  AMBIGUOUS about aggregation, and under the median reading controls also give
+  `j = 0`, tripping its own withdrawal clause. Diagnostic, not a registered
+  result, until aggregation, the uncalibrated `eps = 0.01` and the borrowed
+  floor are amended.
+- **One run was retired before scoring**
+  (`INVALID_SG0_DEPTH4_WRONG_TARGET_LENGTH`): it searched depth-4 routes against
+  depth-3 targets. Depth-3 evidence unaffected; plan Revision 4 fixes the program
+  source per depth and requires a cross-check against a committed result at every
+  depth.
+
+# Awaiting a PI decision (nothing running)
 
 # Awaiting a PI decision (nothing running)
 
@@ -343,13 +333,19 @@ learner-rung gate is unreachable; ladder decision 7). Nothing is running.
 7. ANSWERED: the cross-run world census ran, along with the library-geometry and
    route-margin normalization censuses. The Track B mechanism hunt is closed
    with all three candidates withdrawn.
-8. **NEW, recommended first: approve SG0**, the Tier 0 headroom gate
-   (`SYNTHESIS_OPPORTUNITY_GATE_PLAN.md`). Minutes, no world, and each of its
-   three registered outcomes determines a different successor, including
-   closing a branch.
-9. **NEW, contingent on SG0 returning NO-HEADROOM:** pursue the identifiability
-   generator (`notes/identifiability-sketch.txt`), or bank the economics and
-   negative-results papers and stop opening rungs on this substrate?
+8. ANSWERED: SG0 was approved, implemented, run and scored. Verdict
+   `NO-HEADROOM`; see the top section.
+9. **LIVE, and now with a measurement attached (ladder decision 6):** SG0
+   returned NO-HEADROOM and its sub-triage points SATURATED, under which SG3's
+   first prerequisite fails and the identifiability generator is NOT licensed by
+   these artifacts. Pursue it anyway, or bank the economics and negative-results
+   papers and stop opening rungs on this substrate? Claude's recommendation is to
+   bank, after amending the sub-triage so SATURATED is registered rather than
+   diagnostic.
+10. **LIVE (ladder decision 7):** the L1-L8 learner gate is unreachable - SO2,
+    SO3 and SO4 all failed and worlds 0-9 are spent. Amend stop rule 2 for
+    offline scope on frozen J2A libraries, or close L1-L8. They cannot remain
+    pending.
 
 # Housekeeping owed
 

@@ -9112,3 +9112,53 @@ an intervention on a mechanism shown to be present).
 bank the economics and negative-results papers rather than build the generator.
 Registering it now means a negative cannot later be softened into "build it and
 see", which is the deferral pattern eight failed rungs have already established.
+
+
+# SG0 verdict (2026-09-22): NO-HEADROOM on the staged substrate at depths 3-4
+
+Scored against `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` from run `229fb97`:
+72 cells, exit 0, independent scorer `valid: true`, `check_prereg` and
+`check_invalid` pass. Report `reports/sg0_full_v2.json`; archive
+`reports/sg0_full_2026-09-22/`.
+
+**Registered primary triage: `NO-HEADROOM`,** `k = 0` of 36 staged cells against
+the registered `k <= 2`. The triage clauses were fixed before any data existed
+and are byte-identical across commit `d5db30b`, verified by diff.
+
+**SG1 outcome.** SG1(a) - "median regret within the null floor in every staged
+cell (`NO-HEADROOM`)" - is SUPPORTED, at probability 0.6 as registered. The
+result is stronger than the hypothesis stated: regret is not merely within the
+floor but EXACTLY ZERO in 574 of 576 staged tasks, the floor is itself exactly
+zero in every staged cell, and no staged task has any route within 1% of the
+winner on support. SG1(b) and SG1(c) are not realised. SG1(d) - the instrument
+discriminates - PASSES: control libraries give 500/576 routes differing, regret
+to 0.663, and 11 of 36 cells clearing their own floor.
+
+**SG2 is not evaluable.** It was conditional on SG1(b) or SG1(c), and neither
+occurred. Near-tie disagreement orders nothing because staged near-tie sets are
+all singletons.
+
+**SG5 / sub-triage: DIRECTION is SATURATED, but the statistic needs amendment.**
+Staged `j = 0` of 36 under all three readings of the Revision 3 aggregation rule,
+so the direction is robust. The rule is ambiguous between them, and under the
+median reading control `j` is also 0, which trips the plan's own clause that the
+sub-triage is then WITHDRAWN rather than read. SG5(b) (controls read EVIDENTIAL
+strongly, 0.8) therefore holds under readings B and C and fails under A. The
+sub-triage is reported as a diagnostic and is NOT a registered result until its
+aggregation, its uncalibrated `eps = 0.01` and its borrowed floor are amended.
+
+**SG3 status.** Its first prerequisite gate - some routes evidence-equivalent and
+query-different - FAILS on these artifacts under every reading. The
+identifiability generator is NOT LICENSED by this evidence. Recorded per the
+consequence registered in advance, so that a negative is not softened into
+"build it and see".
+
+**PX7 is hereby RETIRED AS UNMEASURABLE ON THIS SUBSTRATE**, not refuted.
+PX7(a) prices premature hard commitment under ambiguity; commitment is never
+wrong here, so the quantity it is about does not exist to be measured. PX7(b)
+and PX7(c) are untested and remain so. The full L0d census is WITHDRAWN.
+
+**Scope.** Depths 3 and 4, twelve frozen J2A libraries, worlds 0-2, supports
+128/8/2, 16 held-out programs per cell. No learner, no lifetime, no new world.
+Nothing here is a statement about program synthesis in general, and nothing here
+reopens or closes a sealed result.

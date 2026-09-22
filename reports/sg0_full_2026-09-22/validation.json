@@ -1,0 +1,14 @@
+{
+  "valid": true,
+  "problems": [],
+  "label": "full",
+  "staged_cells": 36,
+  "control_cells": 36,
+  "k": 0,
+  "triage": "NO-HEADROOM",
+  "staged_median_regret": 0.0,
+  "staged_median_floor": 0.0,
+  "control_median_regret": 0.12116422131534993,
+  "routes_differ": 502,
+  "route_comparisons": 1152
+}

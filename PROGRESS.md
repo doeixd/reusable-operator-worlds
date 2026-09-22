@@ -6376,3 +6376,84 @@ depth-three number is touched by any of the above.
 
 NEXT: re-run the corrected full grid. `k` from the retired run is meaningless and
 the registered triage has NOT been reached.
+
+
+# 2026-09-22 - SG0 VERDICT: NO-HEADROOM, k = 0 of 36
+
+The registered full grid completed at `229fb97`: 72 cells, exit 0, independent
+scorer `valid: true`, `check_prereg` and `check_invalid` pass, 14 tests pass.
+Report `reports/sg0_full_v2.json`; operational records, all 72 durable cells and
+the validation in `reports/sg0_full_2026-09-22/`. Nothing is running.
+
+**Registered triage: `NO-HEADROOM`.** `k = 0` of 36 staged cells, against a
+registered rule of `k <= 2` written before any data existed and verified
+byte-identical across the intervening mid-run commit.
+
+| arm | cells | routes differ | nonzero regret | max regret | non-trivial near-ties | median query NMSE |
+|---|---|---|---|---|---|---|
+| staged depth 3 | 18 | 0/288 | 0/288 | 0.0000 | 0/288 | 0.00580 |
+| staged depth 4 | 18 | 2/288 | 2/288 | 0.0099 | 0/288 | 0.00772 |
+| control depth 3 | 18 | 238/288 | 238/288 | 0.5318 | 67/288 | 1.37373 |
+| control depth 4 | 18 | 262/288 | 262/288 | 0.6630 | 75/288 | 1.26405 |
+
+- **574 of 576 staged tasks have EXACTLY zero commitment regret.** The two
+  exceptions are depth-4 tasks with regret 0.0099 and 0.0043; neither cell
+  clears its own floor, so neither counts toward `k`.
+- **Not one staged task has a second route within 1% of the winner on support**,
+  at either depth or any support size. The near-tie set is `{r_hat}` in all 576.
+- The null floor is exactly 0 in every staged cell: 200 bootstrap resamples never
+  once changed the selected route.
+- Non-vacuity PASSES decisively: the same code path gives 500/576 control routes
+  differing, regret to 0.663, 142/576 non-trivial near-ties, and 11 of 36 control
+  cells clearing their own floor.
+- Anchors all pass: the J2A stored `enum_route` and `enum` at depth 3, and the
+  committed depth-four execution gate's stored route and error at depth 4,
+  world 0. Staged median query NMSE 0.00580 and 0.00772 sit on the committed
+  gates' 0.00571961 and 0.00871712, which is the cross-check Revision 4 added
+  after the retired run missed a 200x discrepancy.
+
+**Registered consequences, written before the measurement and now in force:**
+- the amortized-proposer branch on this substrate is **CLOSED**;
+- **PX7 is retired as UNMEASURABLE HERE**, not refuted - premature hard
+  commitment cannot be priced where commitment is never wrong;
+- the full **L0d census is WITHDRAWN** rather than left indefinitely unfrozen.
+
+**What this establishes, stated no more strongly than the evidence allows.** On
+the usable staged vocabulary, the support-optimal route is the query-optimal
+route essentially everywhere, and the route space is not merely well-evidenced
+but FUNCTIONALLY SEPARATED - no competitor is even close on support. Every
+inference mechanism (beam, posterior, commit-late, amortized proposal) competes
+for a quantity measured here at zero. This is the first direct test of the
+working reading that E5's writer failing to pay, E5.1's search matching an oracle
+across a 3.58e7-fold space, and L0d's four null gates are ONE fact about the
+generator rather than three findings about learners, and it is consistent with
+that reading. It is a statement about THIS substrate at depths 3-4, not about
+program synthesis.
+
+**Sub-triage (SG0 Revision 3), reported separately and NOT as a registered
+result.** Staged `j = 0` of 36 under every reading of its aggregation rule, so
+the SATURATED reading is robust: there are no evidence-equivalent-but-query-
+different routes to be found. But the rule is AMBIGUOUS about aggregation and
+that ambiguity decides its own non-vacuity check:
+
+| reading | staged j | control j | non-vacuity |
+|---|---|---|---|
+| A: median task in the cell | 0/36 | 0/36 | **FAILS** |
+| B: any task, spread vs cell floor | 0/36 | 20/36 | passes |
+| C: any non-trivial near-tie | 0/36 | 34/36 | passes |
+
+Under reading A the statistic cannot fire at all and the plan's own clause
+("if they do not, the statistic is broken and the sub-triage is withdrawn rather
+than read") applies. The sub-triage therefore needs an amendment fixing its
+aggregation, alongside the two gaps it already disclosed - an uncalibrated
+`eps = 0.01` and a borrowed floor - before it may be read as registered. Its
+DIRECTION is nonetheless unambiguous, because staged `j` is 0 under all three.
+
+If that amendment lands and confirms SATURATED, ladder decision 6 resolves
+toward banking the economics and negative-results papers: SG3's first
+prerequisite - that some routes are evidence-equivalent and query-different -
+FAILS on these artifacts, so restricting the support input distribution cannot
+manufacture commitment regret, because evidence was never what prevented it.
+
+NEXT: PI decisions 6 (successor, now with a measurement attached) and 7 (amend
+stop rule 2 for offline scope, or close L1-L8). Neither is Claude's to make.
