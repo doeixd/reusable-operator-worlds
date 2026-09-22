@@ -6123,3 +6123,64 @@ still lacks a measured ambiguity source - four consecutive L0d opportunity
 gates have now failed to produce route ambiguity on a usable vocabulary. Do not
 launch the original depth/mechanism grid on the strength of these feasibility
 and execution gates.
+
+
+# 2026-09-22 - Program plans revised around a headroom gate (planning only)
+
+No experiment, no run, no code. Documents only. Nothing is running.
+
+After the depth-five gate closed the fourth L0d opportunity gate, counted the
+recent rungs by CAUSE rather than by name: eight failed for absence of
+opportunity rather than learner failure (2026-08-31 loop census, E6.2, E7, H47,
+H48b, H49, E9, L0d x4). E5 (writer costlier than enumeration and short of oracle
+quality) and E5.1 (space 3.58e7x, route-optimization seconds 3.30x, at oracle
+parity) plausibly belong to the same list.
+
+Working reading, recorded as a hypothesis and NOT as a conclusion: support data
+in this substrate overdetermines the route, so the incumbent search is already
+at the ceiling. That one property would explain oracle-parity route
+optimization, logarithmic search cost, the writer that could not pay, the null
+support-size sweeps and the missing route ambiguity together - meaning "search
+is easy" (E5/E5.1) and "there is no ambiguity" (L0d) are the same statement
+about the GENERATOR.
+
+What the four L0d gates did not measure, and what decides this: whether the
+support-optimal route IS the query-optimal route, and what choosing it costs.
+That commitment regret is the headroom every inference mechanism competes for.
+All four negatives are consistent both with regret 0 and with regret large.
+
+Written and committed:
+- `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` (SG0, DRAFT): Tier 0 on artifacts already
+  held; primary estimand commitment regret; registered sampling-noise floor and
+  a selection-split guard so the hindsight-best route is not fit and scored on
+  the same query examples; three-way triage fixed in advance; non-vacuity check
+  that the NONSTAGED control libraries must show LARGE regret; explicit
+  withdrawal clause if a dry run shows regret is zero by construction.
+- `notes/identifiability-sketch.txt`: the one-cause argument, and the smallest
+  generator change that could create ambiguity - restrict the SUPPORT input
+  distribution while leaving query untouched, so evidence-equivalent routes
+  diverge on query. Sketch only, with its own prerequisite gates
+  (achievability, non-vacuity, balance, not-too-strong, measured coordinate,
+  pairing). Not a plan and not preregistered.
+- `PREDICTIONS.md`: working hypotheses SG1-SG4, with the NO-HEADROOM consequence
+  registered IN ADVANCE so a negative cannot be softened into another deferral.
+- `PROGRAM_LADDER_PLAN.md` Revision 1: SG0 inserted as a prerequisite for the
+  L0d census and any proposer rung; recommended order rebuilt; PI decision 2
+  superseded, decision 3 resolved by events, decisions 5-6 added.
+- `POST_E6_RESEARCH_PROGRAM.md`: appendix (append-only; nothing above revised).
+- `RESEARCH_STATUS.md`: rewritten in place with SG0 as the recommended next
+  action and pending decisions 8-9.
+
+Methodological rule added at PROGRAM level: every future rung states at design
+time, in one sentence, what would have to be true of the GENERATOR for its
+comparison to come out any other way, and cites the measurement that establishes
+it rather than an argument that it should hold. The opportunity-gate rule
+(review 68) already says this at rung level; the eight-rung pattern is evidence
+it has been applied after building each rung instead of before.
+
+`check_prereg.py` and `check_invalid.py` pass. No frozen plan, sealed verdict,
+development status or stop rule was altered.
+
+NEXT: PI decision 8 - approve SG0, or not. Nothing is implemented; SG0 needs a
+committed runner, an independent scorer, tests including the equivalence check
+named in its plan, a dry run and a restart test before it runs, as for any rung.

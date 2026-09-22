@@ -1,6 +1,8 @@
 # Program ladder: compositional operators -> control flow -> higher-order programs
 
-Status: RESEARCH PROGRAM PLAN, drafted 2026-09-15 from the PI's proposal. This is
+Status: RESEARCH PROGRAM PLAN, drafted 2026-09-15 from the PI's proposal,
+REVISED 2026-09-22 (Revision 1, below) after four L0d gates closed without
+finding the opportunity L0d was built to measure. This is
 not a frozen experiment. Every rung below becomes runnable only through its OWN
 frozen plan (hashed in `tools/check_prereg.py` if Tier 2), with a committed
 scorer, a dry run and a restart test, as for any rung. The hypotheses are PX1-PX9
@@ -10,6 +12,64 @@ predictions.
 This plan extends, and does not replace, Tracks C and D of
 `POST_E6_RESEARCH_PROGRAM.md`. Nothing here revises a sealed verdict, a
 development status, or a stop rule.
+
+# Revision 1 (2026-09-22): a headroom gate now precedes the inference rungs
+
+Nothing below is deleted; the ordering and the prerequisites change.
+
+**What forced the revision.** L0d was the one rung runnable without the online
+learnability gate, and it has now run four times - preflight (support 128/32/8),
+the sparse-evidence gate (4/2/1), the depth-four execution gate and the
+depth-five memory gate. All four passed as instruments and none produced route
+ambiguity on a usable frozen vocabulary. PX7(a) is a claim about the cost of
+premature commitment UNDER AMBIGUITY, so the census cannot be frozen: it has no
+measured independent variable. Repeating evidence-size sweeps on this library is
+closed.
+
+**What the four gates did not measure.** Each asked whether the support-selected
+route CHANGES under an intervention. None asked whether the support-optimal
+route IS the query-optimal route, or what choosing it costs. That quantity -
+commitment regret - is the headroom any proposer, posterior, beam or prior
+competes for. All four negatives are consistent both with regret 0 and with
+regret large, which is why they settled nothing.
+
+**Working reading, now testable rather than assumed.** E5's writer failure
+(costlier than search, and short of oracle quality), E5.1's logarithmic search
+scaling at oracle parity, and L0d's four negatives may be one fact: support data
+here OVERDETERMINES the route, so the incumbent is already at the ceiling. If
+so, every proposer, discovery and uncertainty rung on this substrate is dead on
+arrival, and no amount of rung-by-rung work will show it. See
+`notes/identifiability-sketch.txt`.
+
+**The change.** A new Tier 0 gate, **SG0**
+(`SYNTHESIS_OPPORTUNITY_GATE_PLAN.md`, hypotheses SG1-SG4 in `PREDICTIONS.md`),
+measures commitment regret on artifacts already held, with a registered
+null-calibration floor and a three-way triage fixed in advance. It becomes a
+PREREQUISITE for the full L0d census and for any later proposer or
+amortized-inference rung.
+
+- `NO-HEADROOM`: the amortized-proposer branch on this substrate is CLOSED, PX7
+  is retired as UNMEASURABLE HERE, and the L0d census is withdrawn rather than
+  left unfrozen. The successor question becomes a generator question.
+- `HEADROOM-LOCALIZED`: the statistic that localizes it is the measured
+  ambiguity source L0d has been missing, and the census is frozen around IT -
+  identifiability as the independent variable, never support size again.
+- `HEADROOM-UNEXPLAINED`: freeze nothing. This is the route-margin failure
+  repeating, and that hunt already cost three withdrawn candidates.
+
+**Scope of the revision.** SG0 touches no control flow, no learner, no world and
+no lifetime, so it does not interact with the online-learnability stop rule.
+L0a-L0c (teacher-side and oracle-executor gates) are unaffected and still await
+PI decision 1. The learner rungs L1-L8 are unchanged and still gated.
+
+**Standing methodological note, recorded because the pattern is now the
+finding.** Eight rungs have failed for absence of opportunity rather than
+learner failure: the 2026-08-31 loop census, E6.2, E7, H47, H48b, H49, E9, and
+L0d four gates. The opportunity-gate rule exists (review 68) and has been
+applied after building each rung rather than before. Every future rung in this
+plan states, at design time and in one sentence, what would have to be true of
+the GENERATOR for its comparison to come out any other way - and cites the
+measurement that establishes it, not an argument that it should hold.
 
 # Where the program stands (what the ladder is built on)
 
@@ -340,18 +400,22 @@ test.
 
 The PI's scientific order is preserved; prerequisites decide timing.
 
+Revised 2026-09-22. Step 1 is replaced by the headroom gate that now precedes
+it; step 4 is resolved (SO2, SO3 and SO4 all failed, and worlds 0-9 are spent).
+
 | step | what | tier | can run now? |
 |---|---|---|---|
-| 1 | L0d inference census on J2A libraries (PX7) | 0-1 | yes, no control flow |
-| 2 | L0a PX1 world census | 0 | after PI confirms the stop-rule reading |
-| 3 | L0b + L0c count-world gates and oracle horizon | 0 | same |
-| 4 | SO3 outcome | 2 | running |
-| 5 | L1 PX1 economics | 2 | after 2 and 4 |
-| 6 | L2 supplied ITERATE | 2 | after 3 and 4 |
-| 7 | L3 promoted ITERATE | 2 | after 6 |
-| 8 | L4, L5, L6, L7, L8 | 1-2 | per prerequisites |
+| 1 | **SG0 synthesis headroom gate** on held J2A artifacts | 0 | yes, no control flow, no learner |
+| 2 | L0d full census, frozen around the SG0 statistic | 0-1 | only if SG0 returns HEADROOM-LOCALIZED |
+| 3 | L0a PX1 world census | 0 | after PI confirms the stop-rule reading |
+| 4 | L0b + L0c count-world gates and oracle horizon | 0 | same |
+| 5 | identifiability generator gates (`notes/identifiability-sketch.txt`) | 0-1 | only if SG0 returns NO-HEADROOM and the PI opens the question |
+| 6 | L1 PX1 economics | 2 | after 3 and an online-learnability decision |
+| 7 | L2 supplied ITERATE | 2 | after 4 and the same decision |
+| 8 | L3 promoted ITERATE | 2 | after 7 |
+| 9 | L4, L5, L6, L7, L8 | 1-2 | per prerequisites |
 
-Steps 1-3 cost minutes to an hour on this host. L1-L3 each need their compute
+Step 1 costs minutes; steps 3-4 cost minutes to an hour on this host. L1-L3 each need their compute
 sized at freeze. Several are likely multi-world, multi-stream lifetimes that
 belong on remote workers if they exceed one overnight local batch.
 
@@ -369,13 +433,32 @@ belong on remote workers if they exceed one overnight local batch.
 - **Search baselines may be strong.** Exhaustive search scaled gracefully in E5
   and E5.1. PX7 and any amortized-inference claim must beat it where it is
   feasible, and state feasibility.
+- **The substrate may have no headroom at all** (added Revision 1). If SG0
+  returns NO-HEADROOM, the risk above is not a difficulty to be engineered
+  around; it is a statement that the proposer branch cannot be measured here,
+  and the correct response is to close it rather than to build a better
+  proposer. Registered in advance so a negative cannot be softened into another
+  deferral.
 
 # Decisions requested from the PI
 
-1. Stop rule 2's scope: may teacher-side and oracle-executor gates (L0a-L0c) run
-   before online learnability is established? This plan reads "yes".
-2. Whether L0d, the inference census on existing straight-line libraries, should
-   go first, as proposed here, or wait for PX1's census.
-3. If SO3 fails: close the learner rungs, or authorize an offline-scoped variant
-   by amendment.
-4. Whether L1-L3 should target remote workers from the start.
+Revised 2026-09-22. Decision 2 is superseded and decision 3 is resolved by
+events; decisions 5-6 are new.
+
+1. Stop rule 2 scope: may teacher-side and oracle-executor gates (L0a-L0c) run
+   before online learnability is established? This plan reads "yes". STILL OPEN.
+2. SUPERSEDED. L0d did go first, and its four gates found no opportunity. The
+   live question is now decision 5.
+3. RESOLVED BY EVENTS: SO3 failed, and so did SO4. Worlds 0-9 are spent for the
+   online staged protocol. The learner rungs remain closed; an offline-scoped
+   variant still needs an explicit PI decision and is not pre-authorized here.
+4. Whether L1-L3 should target remote workers from the start. STILL OPEN.
+5. **NEW, and the recommended next action: approve SG0**, the Tier 0 headroom
+   gate on artifacts already held. It is minutes of compute, opens no world, and
+   its three registered outcomes each determine a different successor -
+   including closing a branch.
+6. **NEW, contingent:** if SG0 returns NO-HEADROOM, does the program pursue the
+   identifiability generator (`notes/identifiability-sketch.txt`), or bank the
+   economics and negative-results papers and stop opening rungs on this
+   substrate? Recording the question now so the answer is a decision rather than
+   a drift.

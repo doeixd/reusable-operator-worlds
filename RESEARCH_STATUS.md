@@ -6,8 +6,48 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-22, after scoring and recording the completed L0d
-depth-five memory gate. Nothing is running.
+Last rewritten: 2026-09-22, after scoring the depth-five memory gate and
+revising the program plans around the SG0 headroom gate. Nothing is running.
+
+# Recommended next action: SG0, the synthesis headroom gate
+
+- **State:** DRAFT `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` (2026-09-22), working
+  hypotheses SG1-SG4 in `PREDICTIONS.md`, generator reasoning in
+  `notes/identifiability-sketch.txt`. Tier 0, artifacts already held, minutes of
+  compute, no world, no learner, no lifetime. Needs PI approval
+  (ladder decision 5) before implementation.
+- **Why it exists.** Counting by cause, eight rungs have failed for absence of
+  opportunity rather than learner failure: the 2026-08-31 loop census, E6.2, E7,
+  H47, H48b, H49, E9 and L0d's four gates. E5 (writer costlier than search and
+  short of oracle quality) and E5.1 (space 3.58e7x, search seconds 3.30x, at
+  oracle parity) plausibly belong to the same list.
+- **The hypothesis it tests.** Support data here OVERDETERMINES the route, so
+  the incumbent search is already at the ceiling and no proposer can pay. If
+  true, "search is easy" (E5/E5.1) and "there is no ambiguity" (L0d) are one
+  fact about the GENERATOR, and every proposer, discovery and uncertainty rung
+  on this substrate is unmeasurable.
+- **What it measures.** COMMITMENT REGRET, the query cost of choosing the
+  support-optimal route rather than the query-optimal one, against a registered
+  sampling-noise floor, with a selection-split guard so the hindsight-best route
+  is not fit and scored on the same query examples. None of the four L0d gates
+  measured this: they asked whether the selected route CHANGES, not whether it
+  is RIGHT, which is why all four are consistent with regret 0 AND with regret
+  large.
+- **Registered triage and its consequences, fixed in advance:**
+  - `NO-HEADROOM` - the amortized-proposer branch on this substrate is CLOSED,
+    PX7 is retired as UNMEASURABLE HERE (not refuted), and the L0d census is
+    WITHDRAWN rather than left unfrozen.
+  - `HEADROOM-LOCALIZED` - the localizing statistic is the measured ambiguity
+    source the census has lacked; freeze the census around identifiability, not
+    support size.
+  - `HEADROOM-UNEXPLAINED` - freeze nothing; this is the route-margin hunt
+    repeating, and that cost three withdrawn candidates.
+- **Contingent successor** (ladder decision 6, recorded now so the answer is a
+  decision rather than a drift): under `NO-HEADROOM`, either pursue the
+  identifiability generator - restrict the SUPPORT input distribution while
+  leaving query untouched, so evidence-equivalent routes diverge on query - or
+  bank the economics and negative-results papers and stop opening rungs on this
+  substrate.
 
 # Awaiting a PI decision (nothing running)
 
@@ -127,8 +167,10 @@ depth-five memory gate. Nothing is running.
 
 ## Program ladder: compositional operators -> control flow -> higher-order programs
 
-- **State:** DRAFT `PROGRAM_LADDER_PLAN.md`, hypotheses PX1-PX9 in
-  `PREDICTIONS.md` (committed `fbb547a`).
+- **State:** DRAFT `PROGRAM_LADDER_PLAN.md`, REVISED 2026-09-22 (Revision 1:
+  SG0 now precedes the inference rungs; recommended order and PI decisions
+  updated). Hypotheses PX1-PX9 in `PREDICTIONS.md` (committed `fbb547a`);
+  SG1-SG4 added 2026-09-22.
 - **Learner rungs (L1-L3) remain gated** by the online-failure stop rule, which
   SO4 did not lift.
 - **L0d preflight COMPLETE, no PX7 verdict.** Full census still drafted in
@@ -192,10 +234,12 @@ depth-five memory gate. Nothing is running.
     could measure. Per the opportunity-gate rule, the census cannot be frozen
     until a pre-specified, MEASURED ambiguity source exists; repeating
     evidence-size sweeps on this library is closed.
-  - **NEXT for L0d (PI decision):** freeze a distinct, pre-specified and
-    measured ambiguity source, or stop the L0d line and report the four gates
-    as scoped usability/feasibility evidence. Do not launch the original
-    depth/mechanism grid on the strength of these negative gates.
+  - **NEXT for L0d: gated on SG0** (see the top section and
+    `PROGRAM_LADDER_PLAN.md` Revision 1). The full census stays unfrozen and is
+    WITHDRAWN outright if SG0 returns NO-HEADROOM; it is frozen around SG0's
+    statistic only under HEADROOM-LOCALIZED. Do not launch the original
+    depth/mechanism grid on the strength of these negative gates, and do not
+    repeat evidence-size sweeps on this library.
 - **Prior evidence the ladder must respect:** the 2026-08-31 loop census and its
   correction (a straight-line generator cannot price loops); the E6 macro line
   (macros pay but cannot be timed or compiled); the E7 census (no real
@@ -277,8 +321,16 @@ depth-five memory gate. Nothing is running.
 5. Development-world budget: worlds 0-9 are spent for the rotated staged
    protocol. Allocate a new development band, or stop opening worlds for it?
 6. (Answered by SO4: the re-test ran and failed.)
-7. NEW, recommended first: run the Tier 0 cross-run world census (10 worlds, 22
-   staged cells, existing artifacts) before any further Track B intervention?
+7. ANSWERED: the cross-run world census ran, along with the library-geometry and
+   route-margin normalization censuses. The Track B mechanism hunt is closed
+   with all three candidates withdrawn.
+8. **NEW, recommended first: approve SG0**, the Tier 0 headroom gate
+   (`SYNTHESIS_OPPORTUNITY_GATE_PLAN.md`). Minutes, no world, and each of its
+   three registered outcomes determines a different successor, including
+   closing a branch.
+9. **NEW, contingent on SG0 returning NO-HEADROOM:** pursue the identifiability
+   generator (`notes/identifiability-sketch.txt`), or bank the economics and
+   negative-results papers and stop opening rungs on this substrate?
 
 # Housekeeping owed
 

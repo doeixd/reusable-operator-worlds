@@ -8984,3 +8984,97 @@ excess cost grows with ambiguity and depth; this substrate has not yet yielded
 the ambiguity whose effect PX7(a) is about. Per the opportunity-gate rule
 (review 68), the census cannot be frozen until a pre-specified, MEASURED source
 of ambiguity exists. Repeating evidence-size sweeps on this library is closed.
+
+# Synthesis-headroom hypotheses SG1-SG4 (2026-09-22)
+
+Recorded as WORKING HYPOTHESES, not preregistered. Each becomes a registered
+prediction only inside its own frozen plan, which may revise the statement and
+the threshold after its opportunity gate. Probabilities are Claude's priors at
+recording time. The plan is `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` (SG0); the
+reasoning behind SG3-SG4 is `notes/identifiability-sketch.txt`. Nothing here
+changes any sealed result or any stop rule.
+
+The terminology contract applies: "synthesis", "proposer" and "prior" are
+earned operationally, and headroom for a proposer is not a proposer.
+
+## SG1 - the four L0d negatives and E5's writer failure share one cause
+
+**Statement.** Support data in this substrate overdetermines the route, so the
+support-optimal route is also the query-optimal route. Commitment regret,
+`NMSE_Q(r_hat(S)) - NMSE_Q(r_star(Q))`, is at the sampling-noise floor on
+usable staged libraries at depths 3-4 and supports 128/8/2.
+
+**Why it is worth registering.** If true it explains, with one fact, why
+gradient route optimization matched an oracle in a 2,985,984-program space
+(E5.1), why the learned writer could not pay (E5), and why four L0d gates found
+no route change. If false, headroom exists and has simply never been measured.
+
+**Probabilities.**
+- (a) Median regret is within the null floor in every staged cell
+  (`NO-HEADROOM`): 0.6.
+- (b) Regret clears the floor somewhere and is ordered by a comparable
+  identifiability statistic (`HEADROOM-LOCALIZED`): 0.2.
+- (c) Regret clears the floor but tracks no measured statistic
+  (`HEADROOM-UNEXPLAINED`): 0.2.
+- (d) The NONSTAGED control libraries show large regret, i.e. the instrument
+  discriminates at all: 0.85. If this fails the gate is uninformative.
+
+## SG2 - near-tie disagreement is the mechanism, not support size
+
+**Statement.** Where regret is nonzero it is carried by routes that are
+evidence-equivalent on support and materially different on query, and not by
+support size. Support size was already shown irrelevant (identical routes at
+128/32/8 and at 4/2/1); this says the right independent variable is the
+disagreement among near-ties, which no L0d gate measured.
+
+**Probabilities.**
+- (a) Conditional on SG1(b) or SG1(c), near-tie disagreement orders the cells
+  better than support size does: 0.7.
+- (b) It is comparable across libraries and worlds without within-cell
+  normalization: 0.25. The route-margin precedent says scale-incomparability is
+  the default failure, so the plan registers the normalized form as primary.
+
+## SG3 - identifiability, not space size or depth, is the missing knob
+
+**Statement.** Drawing support inputs from a restricted region while leaving
+query inputs untouched produces evidence-equivalent routes that diverge on
+query, creating measurable commitment regret where none exists today, WITHOUT
+changing operators, library, depth, loss or pairing.
+
+**Prerequisite gates before any registration** (all in the sketch): the true
+route stays query-optimal; at least some routes are evidence-equivalent and
+query-different; per-task difficulty, operator-usage marginals and program
+description length stay within 10% across the sweep; the strong end does not
+degenerate to universal ties.
+
+**Probabilities.**
+- (a) A support-restriction knob produces regret clearly above the noise floor
+  at some setting: 0.65.
+- (b) It does so while passing all four balance gates at first construction:
+  0.3. The V5.1 confound is the expected failure mode, and it makes the sweep
+  unscoreable rather than negative.
+- (c) Measured identifiability, not the configured subspace dimension, is the
+  coordinate in which the effect is near-linear: 0.6.
+
+## SG4 - headroom is necessary, not sufficient, for a proposer to pay
+
+**Statement.** Even where commitment regret is large, an amortized proposer
+must still beat enumeration CHARGED OVER THE TASKS IT SERVES, per E5's
+amortization rule. Headroom licenses building a proposer rung; it does not
+predict that one pays.
+
+**Probabilities.**
+- (a) Conditional on regret being large somewhere, a learned proposer recovers
+  at least half of it against enumeration at matched total compute: 0.25.
+- (b) Exhaustive enumeration remains the cheapest way to CLOSE the headroom
+  wherever it is feasible, because a proposer must be trained and enumeration
+  need not be: 0.55.
+
+## Consequence recorded in advance
+
+Under `NO-HEADROOM` the amortized-proposer branch on this substrate is CLOSED
+and PX7 is retired as UNMEASURABLE HERE - not refuted, and not deferred. The
+full L0d census is then withdrawn rather than left indefinitely unfrozen. This
+consequence is registered now so that a negative outcome cannot later be
+softened into another deferral; eight rungs have already failed for absence of
+opportunity, and the pattern is the finding.

@@ -1,0 +1,160 @@
+identifiability-sketch.txt
+2026-09-22. Working sketch, NOT a plan and NOT preregistered. Written after
+the depth-five gate closed the fourth L0d opportunity gate with no ambiguity
+found. Its job is to name the mechanism behind a long run of negatives and to
+propose the smallest generator change that could create the phenomenon the
+program has been trying to measure. Everything here is conjecture until SG0
+(SYNTHESIS_OPPORTUNITY_GATE_PLAN.md) measures the headroom it assumes.
+
+
+ONE CAUSE, NOT EIGHT
+
+Rungs that failed for absence of opportunity rather than learner failure:
+
+  loop census 8-31   straight-line generator has no iteration to price
+  E6.2               same-sized neural compilation is the wrong macro
+  E7                 no real parameterized-macro family exists to find
+  H47                learner rationally ignores true groups; the
+                     told-membership oracle is WORSE on present cost
+  H48b               identity has no present value to detect
+  H49                discriminating signal exists only on a representation
+                     already organized around the true structure
+  E9                 construct unbuildable after five amendments
+  L0d x4             no route ambiguity exists to measure
+
+Two more that are usually read as learner failures but belong here:
+
+  E5                 the writer lost to enumeration on COST and to the oracle
+                     on QUALITY; search at 0.30 s/task against 7.6-36.7 s/task
+                     of amortized training
+  E5.1               space grew 3.58e7-fold, route-optimization seconds grew
+                     3.30-fold, quality held at oracle parity
+
+Conjecture: these are one fact. ROW scores regression with a smooth loss on
+support and query examples drawn from the SAME distribution, with 128 examples
+in d=16 against a composition of 3-5 operators chosen from 12 slots. The
+support data massively OVERDETERMINES the route. Everything follows:
+
+  - gradient route optimization matches an oracle, because the objective is
+    smooth and the optimum is isolated;
+  - search cost is logarithmic in program count, because length, not count, is
+    the structural parameter;
+  - an amortized proposer cannot pay, because the incumbent is already at the
+    ceiling;
+  - reducing support changes nothing, because even one example gives 16
+    equations;
+  - there is no route ambiguity, because there is nothing left underdetermined.
+
+"Search is easy" and "there is no ambiguity" are the same statement seen from
+E5 and from L0d. That is the sharpest thing the last year of negatives says,
+and it is a property of the GENERATOR, not of any learner.
+
+
+WHAT MAKES PROGRAM INDUCTION HARD, AND WHAT ROW IS MISSING
+
+Real synthesis is hard because the examples do not pin the program. The
+learner must supply a PRIOR over programs to choose among hypotheses that all
+fit the evidence. That is precisely what an amortized proposer is for, and
+precisely the situation ROW has never created.
+
+ROW has instead been made hard along axes that do not produce this:
+
+  program-space SIZE        E5.1 grew it 3.58e7-fold: no effect
+  support SIZE              L0d cut it 128 -> 1: no effect
+  operator STRENGTH         the rotated substrate: created an acquisition
+                            problem (co-formation fails) without creating an
+                            inference problem
+  DEPTH                     depths 3-10 executed and searched fine
+
+Size, evidence count, strength and depth are all the wrong knob. The missing
+one is IDENTIFIABILITY.
+
+
+THE SMALLEST CHANGE THAT COULD CREATE IT
+
+Draw support and query inputs from DIFFERENT regions of the state space.
+
+Today `train_x` and `eval_x` are independent draws from the same standard
+normal, so agreeing on support implies agreeing on query. If support inputs are
+restricted — to a low-dimensional subspace, a cone, a shell, a sign orthant —
+then several routes can fit the support exactly and diverge on query. The
+learner must then choose among evidence-equivalent programs, which is the
+decision a prior exists to make.
+
+Why this knob and not another:
+
+  - it changes NO operator, library, depth, slot count or loss; only the input
+    distribution of the support set, which keeps every existing artifact,
+    evaluator and scorer usable and every comparison paired;
+  - it is continuous and therefore sweepable, giving a measured coordinate
+    (support-subspace dimension, or measured near-tie disagreement) rather than
+    a configured one — the V1 lesson about measured versus configured knobs;
+  - it makes search QUALITY-limited instead of COST-limited, which is the only
+    regime where a learned prior can beat enumeration. Enumeration can still
+    find every route that fits the support; it cannot say which one is right.
+    That is a gap a proposer can close and a bigger search cannot.
+  - it is the same mechanism as held-out generalization in real program
+    induction, so a positive result would transfer rather than being an artifact
+    of the knob.
+
+Alternatives considered and ranked below it:
+
+  target noise on support      creates uncertainty but not structured
+                               ambiguity; near-ties would be random, so a
+                               prior over programs has nothing to exploit
+  operators agreeing on a      equivalent to the above in effect but requires
+  subregion                    changing the library, breaking artifact reuse
+  discrete/thresholded loss    would remove the smooth gradient that makes OPT
+                               work, but also removes the paired continuous
+                               estimands the whole program is built on; a much
+                               larger change, and it attacks the SOLVER rather
+                               than the PROBLEM
+  fewer support examples       already tried and dead (L0d x2)
+
+
+WHAT WOULD HAVE TO BE GATED BEFORE ANY OF THIS IS A PLAN
+
+This is a generator change, so the V5 Revision-3 rule binds: everything
+downstream of the generator must be re-read, not only the definition edited.
+At minimum:
+
+  ACHIEVABILITY   the TRUE route must remain query-optimal. If restricting
+                  support makes the true program no longer the best answer,
+                  the world is broken, not ambiguous.
+  NON-VACUITY     at least some routes must be evidence-equivalent on support
+                  and materially different on query — measured, not assumed.
+                  This is exactly SG0's near-tie disagreement statistic.
+  BALANCE         per-task difficulty, operator-usage marginals and
+                  per-program description length within 10% across the sweep,
+                  or the knob is confounded (the V5.1 rule).
+  NOT-TOO-STRONG  if the support determines nothing, every route ties and the
+                  setting is uninterpretable rather than hard. Register the
+                  upper end of the sweep against a measured floor.
+  LINEARITY       report effects against MEASURED identifiability, not against
+                  the configured subspace dimension.
+  PAIRING         support restriction must be applied identically to every arm
+                  in a comparison, and the query set must be untouched.
+
+And the honest prior: this could fail the way r_ctrl is expected to fail — by
+moving task difficulty along with ambiguity. That is what the balance gate is
+for, and a failure there makes the sweep unscoreable rather than negative.
+
+
+ORDER
+
+SG0 first, on artifacts we already hold. It measures whether headroom exists
+TODAY. Only a NO-HEADROOM or HEADROOM-LOCALIZED result makes this sketch worth
+turning into a plan, and the two outcomes point at different plans:
+
+  NO-HEADROOM            the substrate cannot host the phenomenon; this sketch
+                         becomes the successor generator's opportunity census,
+                         and the proposer branch on the current substrate is
+                         closed rather than deferred.
+  HEADROOM-LOCALIZED     headroom already exists somewhere; freeze the L0d
+                         census around the statistic that localizes it, and
+                         hold this sketch in reserve for widening the regime.
+  HEADROOM-UNEXPLAINED   do not build on either; that is the route-margin
+                         failure repeating.
+
+Nothing here licenses opening a world band, and nothing here is a prediction
+until it is registered inside a frozen plan.

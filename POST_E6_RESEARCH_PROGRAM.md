@@ -921,3 +921,87 @@ learner rungs that stop rule 2 still gates.
 Live status for every line of research, including H28, Track A, and the
 budgeted-execution draft, is kept in `RESEARCH_STATUS.md`, rewritten in place;
 this file's appendices remain the append-only program record.
+
+
+# Program status update (2026-09-22, appended; nothing above is revised)
+
+This appendix records a redirection at the PROGRAM level rather than a result.
+No sealed verdict, development status or stop rule changes.
+
+## What closed since the 2026-09-15 update
+
+- SO4 closed `SO4_FAILS`; worlds 0-9 are spent for the online staged protocol.
+- Three Tier 0 censuses (world quality, library geometry, route-margin
+  normalization) closed the Track B mechanism hunt with all three candidates
+  withdrawn. The defensible statement is that online staged formation is world-
+  and stream-dependent with NO IDENTIFIED MECHANISM.
+- L0d ran four times and closed four times: preflight (support 128/32/8), the
+  sparse-evidence gate (4/2/1), the depth-four execution gate and the depth-five
+  memory gate (`c72b02b`). All four passed as instruments; none produced route
+  ambiguity on a usable frozen vocabulary.
+
+## The observation that forces the redirection
+
+Counting by CAUSE rather than by name, eight rungs have now failed for absence
+of opportunity rather than learner failure: the 2026-08-31 loop census, E6.2,
+E7, H47, H48b, H49, E9, and L0d four gates. Two more usually read as learner
+failures belong to the same list: E5, whose writer lost to enumeration on cost
+and to the oracle on quality, and E5.1, where the program space grew 3.58e7-fold
+while route-optimization seconds grew 3.30-fold at oracle parity.
+
+Working reading, recorded as a hypothesis and not as a conclusion: these are one
+fact. Support data in this substrate overdetermines the route. That single
+property would explain why gradient route optimization matches an oracle, why
+search cost is logarithmic in program count, why an amortized proposer cannot
+pay, why reducing support changes nothing, and why there is no route ambiguity
+to measure. "Search is easy" (E5, E5.1) and "there is no ambiguity" (L0d) would
+then be the same statement seen from two branches - and it is a property of the
+GENERATOR, not of any learner.
+
+If that reading is right, the proposer, discovery and uncertainty rungs of
+Tracks C and D cannot be measured on this substrate at all, and continuing to
+build them one at a time cannot reveal it.
+
+## The redirection
+
+A new Tier 0 gate, SG0, is inserted ABOVE the rung structure rather than inside
+it: `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md`, with working hypotheses SG1-SG4 in
+`PREDICTIONS.md` and the generator reasoning in
+`notes/identifiability-sketch.txt`.
+
+SG0 measures COMMITMENT REGRET - the query cost of choosing the support-optimal
+route rather than the query-optimal one - on artifacts already held, against a
+registered sampling-noise floor, with a three-way triage fixed in advance. This
+is the quantity every inference mechanism competes for, and the quantity none of
+the four L0d gates measured: they asked whether the selected route CHANGES, not
+whether it is RIGHT.
+
+Registered consequences, recorded in advance so a negative cannot later be
+softened into another deferral:
+
+- `NO-HEADROOM` closes the amortized-proposer branch on this substrate, retires
+  PX7 as UNMEASURABLE HERE rather than refuted, and WITHDRAWS the L0d census
+  rather than leaving it indefinitely unfrozen.
+- `HEADROOM-LOCALIZED` supplies the measured ambiguity source the census has
+  lacked, and the census is then frozen with identifiability, not support size,
+  as its independent variable.
+- `HEADROOM-UNEXPLAINED` freezes nothing, by direct analogy to the route-margin
+  hunt that produced three withdrawn candidates.
+
+## Methodological rule added to this program
+
+Every future rung states at DESIGN time, in one sentence, what would have to be
+true of the GENERATOR for its comparison to come out any other way, and cites
+the measurement that establishes it rather than an argument that it should hold.
+The opportunity-gate rule (review 68) already says this; the eight-rung pattern
+above is evidence that it has been applied after building each rung instead of
+before. This appendix raises it from a rung-level check to a program-level one.
+
+## What is NOT claimed here
+
+That the program has failed, that the substrate is worthless, or that synthesis
+is impossible. The economics results remain sealed and replicated, the export
+block remains confirmed, and the negatives remain real knowledge. What is
+claimed is narrower: the branch aimed at a learned program WRITER may have no
+measurable target on this generator, and one cheap measurement can decide that
+before any further rung is built.
