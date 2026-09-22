@@ -9162,3 +9162,75 @@ and PX7(c) are untested and remain so. The full L0d census is WITHDRAWN.
 128/8/2, 16 held-out programs per cell. No learner, no lifetime, no new world.
 Nothing here is a statement about program synthesis in general, and nothing here
 reopens or closes a sealed result.
+
+
+# SG0 sub-triage verdict (2026-09-22): NO-HEADROOM-SATURATED
+
+Scored from `reports/sg0_subtriage.json` against `SG0_SUBTRIAGE_AMENDMENT.md`,
+read-only over the committed `reports/sg0_full_v2.json`. Module
+`row.experiments.sg0_subtriage`, 9 tests passing. Nothing re-run.
+
+**STATUS: DIAGNOSTIC, NOT A REGISTERED RESULT.** SG0 Revision 3 was written
+while the first full grid was already running, so the sub-triage is not
+preregistered for this run; Amendment 1 is later still. It supports no
+scientific claim and decides one research-program question, ladder decision 6.
+Recorded in this ledger because it is a verdict the program will act on, not
+because it has registered standing.
+
+**Verdict: `NO-HEADROOM-SATURATED`.** Staged `j = 0` of 36 cells and 0 of 576
+programs. **Not one staged program has any route within 1% of its winner on
+support**, at either depth or any support size. Non-vacuity PASSES: controls
+read `EVIDENTIAL` at `j = 10` of 36 cells, with 142 of 576 tie-carrying programs
+and near-tie disagreement to 0.389.
+
+Independently recomputed from the committed grid before recording: staged 0/576
+non-trivial near-ties, 0 cells; control 142/576 programs, 34 cells carrying ties
+and `j = 10`; staged median identifiability 53.84 against control 0.0251; `eps`
+bound on staged `j` of 0, 2, 2, 4, 6, 15 of 36 at `eps` 0.01, 0.05, 0.10, 0.25,
+0.50, 1.00. Every figure reproduces the module's output.
+
+**Two precision points, recorded because they bound the reading.**
+- `j = 10` is the control count under BOTH conjuncts. The 34 figure is the
+  first conjunct alone (cells carrying any non-trivial near-tie) and is not `j`;
+  the amendment's Result prose is corrected accordingly.
+- The tightest staged case is `min identifiability = 0.0128`, so the closest
+  rival anywhere in the staged arm is 1.28% worse against a 1% tolerance - a
+  margin of 0.28 percentage points. The reading rests on the `eps` CURVE, not
+  that point value, and the curve holds the `j <= 2` band to `eps = 0.10`, where
+  the count is exactly 2 of 36 - at the edge of the band, not comfortably inside
+  it. Beyond `eps = 0.10` the reading is not claimed.
+
+**Admissibility, required because the amendment is post hoc.** The staged answer
+is invariant to every part of it: 576 of 576 singleton near-tie sets leave
+nothing for any aggregation rule, tolerance or floor to move, and `j = 0` under
+median, per-program, or any count threshold. The only clause that could move a
+count - the aggregation rule - was calibrated on the CONTROL arm alone.
+
+**SG5 outcome.** SG5(a) (`EVIDENTIAL` conditional on `NO-HEADROOM`, registered
+at 0.45) is NOT realised; the reading is `SATURATED`. SG5(b) (controls read
+`EVIDENTIAL`, 0.8) HOLDS under the amended per-program rule, and failed only
+under Revision 3's median aggregation - which is what the amendment repairs.
+SG5(c) is untested and becomes relevant only if the generator is built anyway.
+
+**SG3 status: first prerequisite FAILS.** There are no
+evidence-equivalent-but-query-different routes on these artifacts, so
+restricting the support input distribution cannot manufacture commitment
+regret - evidence was never what prevented it. The identifiability generator is
+NOT LICENSED by this evidence.
+
+**Recommendation on ladder decision 6: BANK** the economics and negative-results
+papers rather than build the generator. The PI decides.
+
+**Scope.** The usable staged vocabulary at depths 3-4, twelve frozen J2A
+libraries, worlds 0-2, supports 128/8/2. This is NOT a claim that no substrate
+has ambiguity: the control libraries in the same grid have plenty. A substrate
+built to have evidence-equivalence is a different construction, and SG3's
+remaining prerequisite gates would still have to pass on it.
+
+**Carried forward, unresolved.** The spread floor remains undefined: the
+bootstrap floor is derived for regret under support resampling and was borrowed
+as the scale for query-NMSE spread across near-tie members. It is DEFERRED, not
+dropped, because staged near-tie sets are empty and the first conjunct fails on
+its own. The scorer refuses to read the sub-triage on any future run with
+non-empty staged near-tie sets until a proper floor - a bootstrap over `Q_b`
+examples, matching how the regret floor is built - exists.

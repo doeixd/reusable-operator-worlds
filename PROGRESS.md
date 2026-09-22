@@ -6457,3 +6457,62 @@ manufacture commitment regret, because evidence was never what prevented it.
 
 NEXT: PI decisions 6 (successor, now with a measurement attached) and 7 (amend
 stop rule 2 for offline scope, or close L1-L8). Neither is Claude's to make.
+
+# 2026-09-22 SG0 sub-triage Amendment 1: NO-HEADROOM-SATURATED, scored
+
+`SG0_SUBTRIAGE_AMENDMENT.md`; module `row.experiments.sg0_subtriage`; report
+`reports/sg0_subtriage.json`; `tests/test_sg0_subtriage.py` (9 tests, all
+passing). Read-only over the committed `reports/sg0_full_v2.json`; nothing
+re-run, no artifact regenerated.
+
+**The amendment lives in its own file for a hard reason.**
+`SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` is hashed into the SG0 run protocol
+(`input_sha256`), and `score_sg0_headroom_gate.score()` raises `input changed
+since the run` if that digest moves. Editing the plan to fix its own sub-triage
+would have permanently destroyed the re-scorability of the verdict the
+sub-triage interprets. All three input digests were verified to MATCH the
+`sg0_full_v2` manifest before anything was written. Recorded as a general rule:
+**a plan hashed into a completed run is frozen by that run, and its amendments
+go in a new file.**
+
+**What Amendment 1 fixes**, against the three defects the previous entry logged:
+aggregation is per program with both denominators stated (36 cells, 576
+programs); `eps` becomes a sensitivity curve whose baseline is the control arm,
+replacing a bare uncalibrated `0.01`; and the borrowed spread floor is deferred
+rather than dropped, with a refusal clause in the scorer that fires if staged
+near-tie sets are ever non-empty.
+
+**Result.** Staged `j = 0` of 36 cells and **0 of 576 programs have any route
+within 1% of their winner** at either depth or any support size. Staged median
+identifiability 53.9 against 0.025 for controls, a ~2,000x separation. The
+`eps` bound on staged `j` is 0 / 2 / 2 of 36 at 0.01 / 0.05 / 0.10, inside the
+`j <= 2` band across a tenfold widening; 4/36 at 0.25 and 15/36 at 1.00, where
+the word near-tie no longer means anything, so the reading is scoped
+`eps <= 0.10`. Non-vacuity passes: controls read EVIDENTIAL, `j = 10` of 36,
+142 of 576 tie-carrying programs, disagreement to 0.389.
+
+Note on the previous entry's table: its reading B gave control `j = 20` against
+this module's 10. Not a disagreement about the verdict - B compared each
+program's spread against the CELL median floor, and the amendment compares it
+against THAT PROGRAM's floor, which is stricter. Staged `j` is 0 either way.
+
+**Status is unchanged: DIAGNOSTIC, not a registered result.** Revision 3 was
+written while the first grid was already running, so the sub-triage is not
+preregistered for this run and supports no scientific claim; it decides ladder
+decision 6 only. It is admissible post hoc because the staged answer is
+invariant to every part of the amendment - 576/576 singleton near-tie sets leave
+nothing for any aggregation rule, tolerance or floor to move - and the only
+clause that could move a count was calibrated on the control arm alone.
+
+**Consequence.** SG3's first prerequisite gate fails on these artifacts: there
+are no evidence-equivalent-but-query-different routes, so restricting the
+support input distribution cannot manufacture commitment regret, because
+evidence was never what prevented it. The identifiability generator is not
+licensed by this evidence. Recommendation on ladder decision 6 is to BANK the
+economics and negative-results papers. Scope: this is the usable staged
+vocabulary at depths 3-4, not a claim that no substrate has ambiguity - the
+controls in the same grid have plenty.
+
+NEXT: PI decisions 6 (bank, or build the generator anyway) and 7 (amend stop
+rule 2 for offline scope, or close L1-L8). Neither is Claude's to make.
+

@@ -1,0 +1,67 @@
+{
+ "source_report": "reports/sg0_full_v2.json",
+ "source_protocol_sha256": "e70d0a72454c07d40f22acebe51732e71a4b9c327999748f4a48a86f32d990c0",
+ "amendment": "SG0_SUBTRIAGE_AMENDMENT.md",
+ "status": "DIAGNOSTIC; not preregistered for this run; decides ladder decision 6 only",
+ "registered_eps": 0.01,
+ "eps_scope": 0.1,
+ "j_band": 2,
+ "valid": true,
+ "problems": [],
+ "non_vacuity_passes": true,
+ "verdict": "NO-HEADROOM-SATURATED",
+ "staged": {
+  "cells": 36,
+  "programs": 576,
+  "j": 0,
+  "reading": "SATURATED",
+  "programs_with_nontrivial_near_tie": 0,
+  "cells_with_any_nontrivial_near_tie": 0,
+  "max_near_tie_disagreement": null,
+  "median_identifiability": 53.914484617325925,
+  "min_identifiability": 0.012804657137210988,
+  "j_upper_bound_by_eps": {
+   "0.01": 0,
+   "0.05": 2,
+   "0.1": 2,
+   "0.25": 4,
+   "0.5": 6,
+   "1": 15
+  },
+  "programs_with_rival_by_eps": {
+   "0.01": 0,
+   "0.05": 2,
+   "0.1": 4,
+   "0.25": 8,
+   "0.5": 16,
+   "1": 47
+  }
+ },
+ "control": {
+  "cells": 36,
+  "programs": 576,
+  "j": 10,
+  "reading": "EVIDENTIAL",
+  "programs_with_nontrivial_near_tie": 142,
+  "cells_with_any_nontrivial_near_tie": 34,
+  "max_near_tie_disagreement": 0.3890814752256222,
+  "median_identifiability": 0.025135468609165195,
+  "min_identifiability": 0.0001272553382113474,
+  "j_upper_bound_by_eps": {
+   "0.01": 34,
+   "0.05": 36,
+   "0.1": 36,
+   "0.25": 36,
+   "0.5": 36,
+   "1": 36
+  },
+  "programs_with_rival_by_eps": {
+   "0.01": 142,
+   "0.05": 402,
+   "0.1": 509,
+   "0.25": 565,
+   "0.5": 576,
+   "1": 576
+  }
+ }
+}

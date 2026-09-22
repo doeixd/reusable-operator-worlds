@@ -35,13 +35,27 @@ registered grid. Nothing is running.
   competes for a quantity measured here at zero. Consistent with the working
   reading that E5, E5.1 and L0d's four gates share one cause in the generator.
   A statement about THIS substrate at depths 3-4, not about program synthesis.
-- **Sub-triage direction is SATURATED** (staged `j = 0` of 36 under all three
-  readings of the Revision 3 rule), so SG3's first prerequisite FAILS and the
-  identifiability generator is not licensed by these artifacts. The rule is
-  AMBIGUOUS about aggregation, and under the median reading controls also give
-  `j = 0`, tripping its own withdrawal clause. Diagnostic, not a registered
-  result, until aggregation, the uncalibrated `eps = 0.01` and the borrowed
-  floor are amended.
+- **Sub-triage AMENDED AND SCORED: `NO-HEADROOM-SATURATED`**
+  (`SG0_SUBTRIAGE_AMENDMENT.md`, module `row.experiments.sg0_subtriage`,
+  report `reports/sg0_subtriage.json`, 9 tests). Amendment 1 fixes all three
+  Revision 3 defects: aggregation is per program with both denominators (36
+  cells, 576 programs); `eps` becomes a sensitivity curve calibrated on the
+  control arm instead of a bare constant; the borrowed spread floor is deferred
+  with a refusal clause that fires if staged near-ties are ever non-empty.
+  Staged `j = 0` of 36 cells and **0 of 576 programs have ANY route within 1%
+  of their winner**; staged median identifiability 53.9 against the controls'
+  0.025, a ~2,000x separation. The reading holds across a tenfold widening of
+  the tolerance (bound 0/2/2 of 36 at eps 0.01/0.05/0.10) and is not claimed
+  beyond eps 0.10. Non-vacuity passes: controls read EVIDENTIAL with `j = 10`,
+  142 of 576 tie-carrying programs and disagreement to 0.389.
+  **It lives in a separate file because the plan is hashed into the run's
+  protocol** - editing `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` would make
+  `score_sg0_headroom_gate` refuse the report as `input changed since the run`.
+  Still a DIAGNOSTIC: Revision 3 was written while the grid was running, so it
+  is not preregistered for this run and decides only ladder decision 6. It is
+  admissible post hoc because the staged answer is invariant to every part of
+  it - 576/576 singleton near-tie sets leave nothing for any aggregation rule
+  or floor to move.
 - **One run was retired before scoring**
   (`INVALID_SG0_DEPTH4_WRONG_TARGET_LENGTH`): it searched depth-4 routes against
   depth-3 targets. Depth-3 evidence unaffected; plan Revision 4 fixes the program
@@ -335,13 +349,18 @@ registered grid. Nothing is running.
    with all three candidates withdrawn.
 8. ANSWERED: SG0 was approved, implemented, run and scored. Verdict
    `NO-HEADROOM`; see the top section.
-9. **LIVE, and now with a measurement attached (ladder decision 6):** SG0
-   returned NO-HEADROOM and its sub-triage points SATURATED, under which SG3's
-   first prerequisite fails and the identifiability generator is NOT licensed by
-   these artifacts. Pursue it anyway, or bank the economics and negative-results
-   papers and stop opening rungs on this substrate? Claude's recommendation is to
-   bank, after amending the sub-triage so SATURATED is registered rather than
-   diagnostic.
+9. **LIVE, and the measurement is now IN (ladder decision 6):** SG0 returned
+   NO-HEADROOM and the amended, scored sub-triage returns
+   `NO-HEADROOM-SATURATED` with staged `j = 0` of 36 and 0 of 576 programs
+   carrying any near-tie, robust across a tenfold tolerance widening, with
+   non-vacuity passing on the control arm. SG3's first prerequisite gate FAILS
+   on these artifacts. Pursue the identifiability generator anyway, or bank the
+   economics and negative-results papers and stop opening rungs on this
+   substrate? **Claude's recommendation: BANK.** The amendment asked for in the
+   previous wording is done; what remains is the PI's call, not more
+   measurement. Note the scope: this says the usable staged vocabulary is
+   functionally separated at depths 3-4, not that no substrate has ambiguity -
+   the controls in the same grid have plenty.
 10. **LIVE (ladder decision 7):** the L1-L8 learner gate is unreachable - SO2,
     SO3 and SO4 all failed and worlds 0-9 are spent. Amend stop rule 2 for
     offline scope on frozen J2A libraries, or close L1-L8. They cannot remain
