@@ -1,0 +1,14 @@
+{
+  "valid": true,
+  "problems": [],
+  "label": "partial-d3-s2_8_128-w012",
+  "staged_cells": 18,
+  "control_cells": 18,
+  "k": 0,
+  "triage": "NOT APPLICABLE",
+  "staged_median_regret": 0.0,
+  "staged_median_floor": 0.0,
+  "control_median_regret": 0.12079517869845674,
+  "routes_differ": 238,
+  "route_comparisons": 576
+}

@@ -6235,3 +6235,67 @@ patch, which is the same check in miniature.
 development status or stop rule altered. SG0 remains DRAFT and unimplemented.
 
 NEXT: unchanged - PI decision 8, approve SG0 or not.
+
+
+# 2026-09-22 - SG0 dry run and depth-three grid: the instrument discriminates
+
+PI approved ladder decision 8. Implementation at `d20f6a9`, label fix at
+`0d01acc`. Two runs, both complete, exit 0, independent scorer `valid: true`,
+`check_prereg` and `check_invalid` pass. Nothing is running.
+
+**Structural dry run** (the single registered decisive cell: STAGED5000,
+world 0, depth 3, support 128). 5.67 s. All 16 J2A ENUM anchors pass - the
+selected route and its query NMSE equal the stored `enum_route` and `enum`
+values exactly. Median regret 0.0, routes differ 0/16, median near-tie set size
+1, median identifiability 2.65. Archived: `reports/sg0_dry_run_2026-09-22/`.
+
+The plan's withdrawal clause was NOT triggered. Regret is zero here by
+MEASUREMENT, not by construction: `Q` is an independent draw from `S`, and the
+same code path reports large regret on the control libraries below.
+
+**Depth-three grid**, 36 cells (4 library kinds x 3 worlds x 3 supports), 16
+programs each, about 2 minutes. Archived: `reports/sg0_depth3_2026-09-22/`.
+Registered label `partial-d3-s2_8_128-w012`; the scorer refuses to name a triage
+for it, because the registered triage is defined over the 36 STAGED cells of the
+depth-3-and-4 grid and this run has 18.
+
+| arm | cells | routes differ | median regret |
+|---|---|---|---|
+| staged (STAGED5000, STAGED3001) | 18 | **0 / 288** | **exactly 0.0 in all 288 tasks** |
+| control (NONSTAGED3001, RESET5000) | 18 | 238 / 288 | up to 0.2279 |
+
+- Staged regret is not small, it is IDENTICALLY ZERO: `r_hat(S) == r_star(Q_a)`
+  in every one of the 288 task/cell combinations, at support 128, 8 AND 2.
+- Staged median identifiability spans 1.20 to 152.62, so the runner-up route is
+  120% to about 15,000% worse on support; control identifiability spans
+  0.009 to 0.094. Median near-tie size is 1 almost everywhere.
+- The null floor is exactly 0 in every staged cell - the bootstrap never changed
+  the selected route in 200 draws - and 0.076 to 0.261 in control cells.
+- 5 of 18 control cells clear their own floor, all but one at support 2. This is
+  the NON-VACUITY check and it passes: the same instrument that reports zero on
+  usable libraries reports large regret and route instability on poor ones.
+
+Reading, stated no more strongly than the evidence allows: on the usable staged
+vocabulary at depth 3 there is NO HEADROOM for any inference mechanism, because
+the support-optimal route is already the query-optimal route everywhere tested.
+This is consistent with SG1(a) and with the working reading that E5's writer
+failure, E5.1's oracle-parity search scaling and L0d's four negatives share one
+cause. It is NOT yet the registered triage: that needs depth 4, which is the
+next run.
+
+One instrument caveat recorded honestly: control median regret is 0.0 at support
+128 despite routes differing in 7-11 of 16 tasks, because tasks whose routes
+agree contribute exactly zero and the median is coarse. The median is the
+registered statistic and is reported as such; per-task distributions are in the
+archived cells.
+
+The dry run also exposed a defect in the runner, fixed in `0d01acc` and covered
+by two new tests: `main()` labelled any non-dry-run as `full`, so a depth-3-only
+grid of 18 staged cells would have claimed the registered 36-cell denominator.
+Separately, `require_clean_code` correctly refused a launch after a committed
+report was deleted; the gate worked as designed.
+
+NEXT: run the registered full grid (depths 3 and 4, supports 128/8/2, worlds
+0-2; 36 staged and 36 control cells), which is the first run entitled to a
+triage. The depth-3 cells recomputed there are also a free reproducibility check
+against this archive.
