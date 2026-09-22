@@ -1,0 +1,157 @@
+{
+ "source": "reports/j1_search_loop.json",
+ "source_sha256": "b8aa49ebc6cc2053aa038ef863373090409fff5f34a59db89cedc0a6e39a9685",
+ "status": "READ-ONLY CENSUS over a committed report; no experiment, no verdict",
+ "cells": {
+  "J1_w0": {
+   "mode": "j1",
+   "world": 0,
+   "tasks": 64,
+   "rounds": 64,
+   "changed_counts_first_five": [
+    5,
+    1,
+    0,
+    1,
+    0
+   ],
+   "total_changes_after_round_one": 2,
+   "first_frozen_round": 3,
+   "terminal_median": 0.7579211194421381,
+   "pinned_one_hot": true
+  },
+  "J1_w1": {
+   "mode": "j1",
+   "world": 1,
+   "tasks": 64,
+   "rounds": 64,
+   "changed_counts_first_five": [
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "total_changes_after_round_one": 1,
+   "first_frozen_round": 3,
+   "terminal_median": 0.7566712052736215,
+   "pinned_one_hot": true
+  },
+  "J1_w2": {
+   "mode": "j1",
+   "world": 2,
+   "tasks": 64,
+   "rounds": 64,
+   "changed_counts_first_five": [
+    1,
+    0,
+    0,
+    0,
+    0
+   ],
+   "total_changes_after_round_one": 0,
+   "first_frozen_round": 2,
+   "terminal_median": 0.7737338141057997,
+   "pinned_one_hot": true
+  },
+  "SHAM_w0": {
+   "mode": "sham",
+   "world": 0,
+   "tasks": 64,
+   "rounds": 64,
+   "changed_counts_first_five": [
+    60,
+    63,
+    63,
+    64,
+    63
+   ],
+   "total_changes_after_round_one": 3918,
+   "first_frozen_round": null,
+   "terminal_median": 0.9784246163112227,
+   "pinned_one_hot": true
+  },
+  "SHAM_w1": {
+   "mode": "sham",
+   "world": 1,
+   "tasks": 64,
+   "rounds": 64,
+   "changed_counts_first_five": [
+    63,
+    63,
+    63,
+    63,
+    64
+   ],
+   "total_changes_after_round_one": 3930,
+   "first_frozen_round": null,
+   "terminal_median": 0.9820888000274572,
+   "pinned_one_hot": true
+  },
+  "SHAM_w2": {
+   "mode": "sham",
+   "world": 2,
+   "tasks": 64,
+   "rounds": 64,
+   "changed_counts_first_five": [
+    63,
+    64,
+    64,
+    64,
+    64
+   ],
+   "total_changes_after_round_one": 3928,
+   "first_frozen_round": null,
+   "terminal_median": 0.9747658000071812,
+   "pinned_one_hot": true
+  }
+ },
+ "round_record_fields": [
+  "argmin_ok",
+  "changed",
+  "round",
+  "slots_used"
+ ],
+ "confidence_fields_present": [],
+ "confidence_signal_recorded": false,
+ "summary": {
+  "j1_changed_in_round_one": [
+   1,
+   1,
+   5
+  ],
+  "j1_total_changes_after_round_one": [
+   0,
+   1,
+   2
+  ],
+  "j1_first_frozen_round": [
+   2,
+   3,
+   3
+  ],
+  "j1_terminal_median": [
+   0.7567,
+   0.7579,
+   0.7737
+  ],
+  "sham_changed_in_round_one": [
+   60,
+   63,
+   63
+  ],
+  "sham_first_frozen_round": [
+   -1,
+   -1,
+   -1
+  ],
+  "sham_terminal_median": [
+   0.9748,
+   0.9784,
+   0.9821
+  ],
+  "tasks_per_cell": [
+   64
+  ]
+ }
+}

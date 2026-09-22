@@ -1761,6 +1761,21 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   random library and the assignment never changed again (0% after round 3-5).
   Any commitment mechanism must report its per-round change rate and justify
   the state at the first commitment.
+  SHARPENED 2026-09-22 by a read-only census
+  (`reports/j1_commitment_census_2026-09-22/`): of 64 tasks only 1, 1 and 5
+  changed in round 1 across the three worlds, and 0, 1 and 2 in ALL later rounds
+  combined, frozen by round 2-3, terminal 0.757-0.774. And the axis has no good
+  point on it. SHAM, the opposite extreme, reassigns 60-63 of 64 every round,
+  never freezes, and is WORSE (0.975-0.982). The ordinary online protocol is a
+  THIRD point - `DiscreteLibraryLearner` is "relaxed training and hard
+  evaluation routes", so SO2/SO3/SO4 never hard-commit during training at all -
+  and it also fails. Only J1 pins one-hot (`pinned_one_hot: True`), which is why
+  J1 and the ordinary protocol are different failures. What works is J1c's
+  length curriculum (0.005-0.007), which changes WHAT TASKS ARRIVE WHEN rather
+  than how or when the learner commits. Any proposal to fix formation by tuning
+  commitment timing or firmness must first show it is not interpolating among
+  three known failures - and must check that its "fix" is not simply the
+  baseline described in different words.
 - STAGED FORMATION ACQUIRES WHAT JOINT FORMATION CANNOT (J1c/J1c-R,
   2026-09-12; verdicts d4e6808, 3bf6a59). Ordering tasks by program length
   (60 length-1, 64 length-2, then the canonical length-3 world), carrying only

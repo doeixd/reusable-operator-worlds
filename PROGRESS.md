@@ -6762,3 +6762,50 @@ also that `reviews/` numbering has gaps (54 and 55 are absent), so counting
 files is not a way to find the next free number.
 
 NEXT: unchanged - PI decisions 5 (new development band, which C1 needs), 6 and 7.
+
+# 2026-09-22 J1 commitment census: three findings for candidate rung C1
+
+Read-only over the committed `reports/j1_search_loop.json` plus a source read of
+`src/row/models/learned_models.py`; no experiment, no learner run, no artifact
+regenerated. Regenerate the numbers with
+`reports/j1_commitment_census_2026-09-22/derive_census.py`, which records the
+source digest. Written after checking the review-85 assessment (`b019f78`)
+against the artifacts and code it cites. Nothing in that assessment is revised;
+all three findings are ADDITIONS to C1's open objections, alongside the deadlock
+objection it already recorded.
+
+**1. The candidate deadlock fix is the failing baseline.** The assessment
+records the fix as "withhold only the HARD commitment while soft routes still
+update the library". That is what the online protocol already does:
+`DiscreteLibraryLearner` is documented as "Overcomplete operator library with
+relaxed training and hard evaluation routes", and
+`RotatedDiscreteLibraryLearner` inherits it unchanged, so SO2, SO3 and SO4
+trained through a temperature-annealed softmax and hardened only to score. The
+fix as stated escapes nothing; it names the arm that failed three times. J1 is
+the exception - its cells carry `pinned_one_hot: True` - which is why J1 and the
+ordinary online protocol are DIFFERENT failures rather than the same one.
+
+**2. The J1 lock-in is sharper than the recorded lesson, and the axis has no
+good point.** `AGENTS.md` said "0% after round 3-5". Measured: of 64 tasks,
+**1, 1 and 5 changed in round 1** across worlds 0-2 and **0, 1 and 2 in every
+later round combined**, frozen by round 2-3, terminal 0.757-0.774. SHAM, the
+opposite extreme, reassigns 60-63 of 64 every round, never freezes, and is
+WORSE at 0.975-0.982. With the ordinary soft protocol as a third point, all
+three fail. The arm that works, J1c's length curriculum at 0.005-0.007, is not
+on that axis: it changes WHAT TASKS ARRIVE WHEN. The lesson is sharpened in
+place rather than restated.
+
+**3. C1's gating signal is not recorded anywhere.** J1 round records carry only
+`round`, `argmin_ok`, `changed` and `slots_used`; no margin, gap, posterior or
+entropy field exists in any cell. So "is margin at commitment time informative
+about whether that commitment is RIGHT?" cannot be answered on held artifacts.
+C1's DISCRIMINATION gate needs new instrumentation, not a census, and
+`DESIGN_ADEQUACY.md` requires that check before freezing.
+
+Recorded in `RESEARCH_STATUS.md` under C1, in `AGENTS.md` as a sharpening of the
+J1 lesson, and in `notes/learnings.txt`.
+
+Repository state verified while writing: 481 tests pass; `check_prereg`,
+`check_invalid` and `check_adequacy` pass; tree clean; nothing running.
+
+NEXT: unchanged - PI decisions 5, 6 and 7.

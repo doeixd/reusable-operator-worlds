@@ -5193,3 +5193,23 @@ fixed. A guard must fail when its input is ABSENT, not only when it is empty.
   - "Hard enough" is two-sided: too easy elicits nothing, too hard is
     UNINTERPRETABLE not negative. Register a band, never a floor.
   - Every plan now carries `# Necessity` and `# Discriminating power`.
+
+2026-09-22 J1 commitment census (read-only over reports/j1_search_loop.json;
+regenerate with reports/j1_commitment_census_2026-09-22/derive_census.py).
+Three findings, all bearing on confidence-gated commitment proposals.
+(1) The J1 lock-in is sharper than the recorded "0% after round 3-5": of 64
+tasks, 1, 1 and 5 changed in round 1 across worlds and 0, 1 and 2 in all later
+rounds combined, frozen by round 2-3, terminal 0.757-0.774.
+(2) The commitment axis has three failing points and no good one. SHAM reassigns
+60-63 of 64 every round, never freezes, and is WORSE at 0.975-0.982. The
+ordinary online protocol never hard-commits during training at all -
+DiscreteLibraryLearner is documented "relaxed training and hard evaluation
+routes" and RotatedDiscreteLibraryLearner inherits it - so SO2/SO3/SO4 are a
+third point on the axis, and they fail too. Only J1 pins one-hot. What works,
+J1c at 0.005-0.007, changes what tasks arrive when, not how the learner commits.
+Consequence: a proposed fix of the form "withhold the hard commitment and let
+soft routes update the library" IS the failing baseline restated. Check that a
+proposed mechanism is not already the control before planning around it.
+(3) No margin, gap, posterior or entropy field is recorded in any J1 round, so a
+confidence-gated rung cannot pre-check its gating signal on held artifacts and
+needs instrumentation before it can pass a discrimination gate.

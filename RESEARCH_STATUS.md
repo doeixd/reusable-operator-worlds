@@ -117,6 +117,33 @@ is a refinement of a closed line. None is a plan; none is approved.
   DEADLOCK. The candidate fix is to withhold only the HARD commitment while soft
   routes still update the library. Also **blocked on PI decision 5**: this is an
   online rung and worlds 0-9 are spent.
+  - **THE CANDIDATE FIX IS THE FAILING BASELINE** (2026-09-22). "Withhold only
+    the HARD commitment while soft routes still update the library" is what the
+    online protocol ALREADY does: `DiscreteLibraryLearner` is
+    "Overcomplete operator library with relaxed training and hard evaluation
+    routes", and `RotatedDiscreteLibraryLearner` inherits it unchanged, so
+    SO2/SO3/SO4 trained through a temperature-annealed softmax and hardened only
+    to score. The deadlock fix as stated therefore escapes nothing; it names the
+    arm that failed three times. J1 is the exception that proves it - its cells
+    carry `pinned_one_hot: True`, which is why J1 and the ordinary online
+    protocol are different failures, not the same one.
+  - **Three points on the commitment axis now fail, and the one that works is
+    not on it** (J1 commitment census, 2026-09-22, read-only over
+    `reports/j1_search_loop.json`; regenerate with
+    `reports/j1_commitment_census_2026-09-22/derive_census.py`):
+    soft throughout (ordinary online) fails in SO2/SO3/SO4; hard commitment (J1)
+    freezes after round 2-3 - of 64 tasks only 1, 1 and 5 change in round 1 and
+    0, 1 and 2 in all later rounds combined - at terminal 0.757-0.774; random
+    hard reassignment (SHAM) churns 60-63 of 64 every round and is WORSE at
+    0.975-0.982. J1c's length curriculum works at 0.005-0.007 and changes WHAT
+    TASKS ARRIVE WHEN, not how or when the learner commits. C1 must show its
+    gate is not interpolating among known failures.
+  - **C1's gating signal is not recorded anywhere.** J1 round records carry only
+    `round`, `argmin_ok`, `changed` and `slots_used` - no margin, gap, posterior
+    or entropy - so whether margin at commitment time is informative about
+    whether that commitment is RIGHT cannot be answered on held artifacts. C1's
+    DISCRIMINATION gate needs instrumentation before it can be checked, which
+    the three-gate protocol requires before freezing.
 - **C2, depth recurrence / looping as sharing across position.** Manipulate how
   often the hidden program reuses the SAME operator across positions, and
   compare a weight-tied learner against an untied one at matched compute. This
