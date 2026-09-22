@@ -1989,3 +1989,31 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   catch - S0's unreachable threshold, wrong constructs, coordinate
   comparability, registration order - because a checker that claims too much is
   the error it exists to prevent.
+
+- NECESSITY IS A THIRD GATE, AND THE EXPENSIVE ONE (2026-09-22; protocol
+  `DESIGN_ADEQUACY.md`, checks `row.necessity_gate`). The repository had one
+  name, OPPORTUNITY, doing three jobs, and they have different fixes.
+  NECESSITY asks the TASK: does it REQUIRE the behaviour - is the behaviour the
+  cheapest way for the learner to succeed? Fix by changing the TASK.
+  OPPORTUNITY asks the GENERATOR: could the effect exist at all? Fix the
+  GENERATOR. DISCRIMINATION asks the INSTRUMENT AND SAMPLE: could this
+  measurement come out either way? Fix the SAMPLE or the STATISTIC. Most failed
+  rungs - the loop census, the E6 line, E7, V4, H47, H48b, H49, L0d's four
+  gates, SG0 - failed NECESSITY, and it is the hardest to see from inside a
+  plan because a task that does not require a behaviour still looks like a task
+  that studies it. Five checks, each with its historical fixture in
+  `tests/test_necessity_gate.py`: `refusal_cost` (H48b's label-free learner beat
+  the told-membership oracle by ~500 nats, so the cost was NEGATIVE);
+  `no_cheaper_impostor` (a trace-compressing MACRO is the expected impostor for
+  a LOOP); `incumbent_degrades`, which reports the SCALING EXPONENT and not the
+  ratio (E5.1: 3.30x cost against a 3.58e7x axis is exponent 0.068, flat);
+  `difficulty_band`, two-sided and direction-aware (SG0's identifiability 53.9
+  is TOO_EASY, and identifiability is higher-is-EASIER); and
+  `capacity_forces_structure` (one 64-direction channel absorbs two rank-2
+  subspaces, so WIDEN-versus-SPLIT is decided by capacity per slot).
+  "Hard enough" is TWO-SIDED: past the easy end nothing is elicited, past the
+  hard end the result is UNINTERPRETABLE rather than negative, so register a
+  BAND and never a floor. Writing these checks produced two defects of exactly
+  the kind they catch - reading a 3.3x ratio as degradation, and inverting a
+  higher-is-easier statistic - both caught by their own fixtures, which is the
+  argument for the fixtures.

@@ -5178,3 +5178,18 @@ fixed. A guard must fail when its input is ABSENT, not only when it is empty.
     sealed C2's non-partitioning triage, SG0's borrowed floor.
   - `tools/check_adequacy.py` prints INACTIVE, not OK, while its scope is empty.
   - Protocol and its stated blind spots: DESIGN_ADEQUACY.md.
+
+2026-09-22  Necessity: the third gate
+  - NECESSITY (does the task REQUIRE the behaviour? fix the TASK) is distinct
+    from OPPORTUNITY (could the effect exist? fix the GENERATOR) and
+    DISCRIMINATION (could the data distinguish? fix the SAMPLE/STATISTIC).
+    Most failed rungs failed necessity.
+  - `row.necessity_gate`: refusal_cost, no_cheaper_impostor, incumbent_degrades
+    (scaling EXPONENT, not ratio), difficulty_band (two-sided, direction-aware),
+    capacity_forces_structure.
+  - Fixtures that must fire: H48b (-500 nats, refusal is BETTER), E6 macro
+    impostor, E5.1 exponent 0.068, SG0 identifiability 53.9 TOO_EASY, review 68
+    1x64 absorbing 2x32.
+  - "Hard enough" is two-sided: too easy elicits nothing, too hard is
+    UNINTERPRETABLE not negative. Register a band, never a floor.
+  - Every plan now carries `# Necessity` and `# Discriminating power`.

@@ -18,6 +18,15 @@ COMPLETE = """# A plan
 
 Preamble.
 
+# Necessity
+
+The target behaviour is a promoted ITERATE. The arm that refuses it is the
+matched straight-line learner at equal budget; measured refusal cost 1.8 nats
+against a per-task contribution scale of 6.0.
+Impostors scored: MACRO (trace-compressing) at 0.4 behind the target.
+Difficulty band (0.1, 0.9), higher-is-harder; the arm's median is 0.52.
+Incumbent scaling exponent 0.71.
+
 # Discriminating power
 
 The decision rule is `k >= 3 of 36 cells above their own floor`.
@@ -43,26 +52,38 @@ def written(text, name='PLAN.md'):
 
 class TestSectionExtraction(unittest.TestCase):
     def test_section_stops_at_the_next_heading(self):
-        body = ca.section_of(COMPLETE)
+        body = ca.section_of(COMPLETE, '# Discriminating power')
         self.assertIn('false-fire rate', body)
         self.assertNotIn('Next section', body)
 
+    def test_each_section_is_extracted_separately(self):
+        necessity = ca.section_of(COMPLETE, '# Necessity')
+        self.assertIn('refuses it', necessity)
+        self.assertNotIn('false-fire', necessity)
+
     def test_absent_section_is_none(self):
-        self.assertIsNone(ca.section_of('# A plan\n\nNo such section.\n'))
+        self.assertIsNone(ca.section_of('# A plan\n\nNo such section.\n', '# Necessity'))
 
 
 class TestCheck(unittest.TestCase):
     def test_complete_section_passes(self):
         self.assertEqual(ca.check([written(COMPLETE)]), [])
 
-    def test_missing_section_fails(self):
+    def test_missing_sections_fail(self):
         problems = ca.check([written('# A plan\n\nNothing here.\n')])
-        self.assertEqual(len(problems), 1)
-        self.assertIn('no "# Discriminating power" section', problems[0])
+        self.assertEqual(len(problems), 2)
+        self.assertTrue(any('no "# Necessity" section' in p for p in problems))
+        self.assertTrue(any('no "# Discriminating power" section' in p for p in problems))
+
+    def test_a_plan_with_only_one_section_still_fails(self):
+        text = '# A plan\n\n' + COMPLETE[COMPLETE.index('# Discriminating power'):]
+        problems = ca.check([written(text)])
+        self.assertTrue(any('no "# Necessity" section' in p for p in problems))
 
     def test_empty_section_fails(self):
-        problems = ca.check([written('# A plan\n\n# Discriminating power\n\n# Next\n\nx\n')])
-        self.assertTrue(any('is empty' in p for p in problems))
+        text = '# A plan\n\n# Necessity\n\n# Discriminating power\n\n# Next\n\nx\n'
+        problems = ca.check([written(text)])
+        self.assertTrue(any('"# Necessity" section is empty' in p for p in problems))
 
     def test_each_required_item_is_detected_when_missing(self):
         """Drop one required item at a time; each omission must be named."""
@@ -70,6 +91,8 @@ class TestCheck(unittest.TestCase):
             'a measured false-fire rate': 'false-fire rate 0.02; ',
             'a measured detection rate': 'detection rate 0.91.',
             'what the checks do not cover': 'What the checks do not cover here: whether the two arms share a coordinate\nsystem, which is argued in the construction section.',
+            'the impostors scored': 'Impostors scored: MACRO (trace-compressing) at 0.4 behind the target.',
+            'the difficulty band and its direction': "Difficulty band (0.1, 0.9), higher-is-harder; the arm's median is 0.52.",
         }
         for label, fragment in cases.items():
             text = COMPLETE.replace(fragment, '')

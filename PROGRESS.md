@@ -6584,3 +6584,44 @@ over a manifest of six. Historical plans are not retrofitted; new plans join
 
 NEXT: unchanged - PI decisions 6 and 7. The first plan written under this
 protocol adds itself to `IN_SCOPE`.
+
+# 2026-09-22 Necessity gate: will the task elicit the behaviour?
+
+`src/row/necessity_gate.py`; `tests/test_necessity_gate.py` (23 tests);
+`DESIGN_ADEQUACY.md` extended to three gates; `tools/check_adequacy.py` now
+requires a `# Necessity` section as well. No experiment, no artifact.
+
+The PI asked whether the problems we build will actually elicit the behaviour
+we want to study - whether they are hard enough. That is a third question, and
+the repository had been folding it into "opportunity":
+
+- NECESSITY asks the TASK: is the behaviour the cheapest way to succeed? Fix by
+  changing the TASK.
+- OPPORTUNITY asks the GENERATOR: could the effect exist? Fix the GENERATOR.
+- DISCRIMINATION asks the INSTRUMENT AND SAMPLE: could this come out either
+  way? Fix the SAMPLE or STATISTIC.
+
+Most of the failed rungs failed necessity, and it is the hardest to see from
+inside a plan because a task that does not require a behaviour still looks like
+a task that studies it.
+
+Five checks, each with a historical fixture that must FIRE. Two of them
+recorded defects I introduced while writing them, both of exactly the kind the
+checks exist to catch, and both caught by the fixtures rather than by review:
+
+1. `incumbent_degrades` first read E5.1's 3.30x cost growth as degradation. It
+   is 3.30x against a 3.58e7x axis - scaling exponent 0.068, flat. The check now
+   reports the EXPONENT, and a test asserts the same 3.3x PASSES when the axis
+   grows only 10x, so the ratio alone is demonstrably not the statistic.
+2. `difficulty_band` first assumed higher-is-harder, which inverts SG0:
+   identifiability is higher-is-EASIER, so 53.9 is TOO_EASY, not unreachable. A
+   test now asserts the same score and band read oppositely under the two
+   directions, so the flag cannot be cosmetic.
+
+The protocol also gained two more entries under what the checks do NOT catch:
+whether the oracle arm is a real ceiling (J1c's oracle-pinned world 0 failed at
+0.624 and passed at 0.0047 under the curriculum - the oracle WAS the handicap),
+and whether the impostor list is complete (nothing mechanical suggests the
+impostor nobody thought of).
+
+NEXT: unchanged - PI decisions 6 and 7.

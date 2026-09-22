@@ -5,25 +5,89 @@ constrains every experiment written from here on. Implemented in
 `src/row/design_adequacy.py`, tested in `tests/test_design_adequacy.py`,
 enforced by `tools/check_adequacy.py`.
 
-# Two different gates, previously sharing one name
+# Three different gates, previously sharing one name
 
-ROW already had an OPPORTUNITY gate (review 68). Ten rungs have failed it. SG6
-then failed something else, and calling both "no opportunity" hides the fact
-that they need different fixes.
+ROW had one gate called OPPORTUNITY (review 68) doing three jobs. Separating
+them matters because they have different fixes.
 
-| gate | asks | of what | ROW failures |
-|---|---|---|---|
-| **OPPORTUNITY** | could the effect EXIST? | the GENERATOR | loop census, E6.2, E7, H47, H48b, H49, E9, L0d x4, SG0 |
-| **DISCRIMINATION** | could this measurement come out EITHER WAY? | the INSTRUMENT and the SAMPLE | SG6, E5.1, E6's `H*`, sealed C2, S0 |
+| gate | asks | of what | fix when it fails | ROW failures |
+|---|---|---|---|---|
+| **NECESSITY** | does the task REQUIRE the behaviour? is it hard enough? | the TASK, against the cheapest refusal | change the TASK | loop census, E6/E6.2, E7, V4, H47, H48b, H49, L0d x4, SG0 |
+| **OPPORTUNITY** | could the effect EXIST at all? | the GENERATOR | change the GENERATOR | E9, the 2026-08-31 census premise |
+| **DISCRIMINATION** | could this measurement come out EITHER WAY? | the INSTRUMENT and the SAMPLE | change the SAMPLE or the STATISTIC | SG6, E5.1, E6's `H*`, sealed C2, S0 |
 
-An experiment can pass the first and fail the second: SG6's question was
-sensible and the effect could exist, but the twelve held libraries had no
-graded quality axis, so no statistic computed on them could have answered it.
-The reverse also happens: L0d's instruments all worked; there was nothing to
-measure.
+An experiment can pass one and fail another. SG6's question was sensible and the
+effect could exist, but the twelve held libraries had no graded quality axis, so
+no statistic computed on them could have answered it - discrimination, not
+necessity. L0d's instruments all worked and its sample was fine; the task simply
+did not require the behaviour - necessity, not discrimination.
 
-**Both gates are now required before any plan is frozen**, and each plan states
+**NECESSITY IS THE ONE THAT HAS COST THE MOST.** Most rungs on the list above
+failed it, and it is the hardest to see from inside a plan, because a task that
+does not require a behaviour still looks like a task that studies it. Review 68
+states the principle: truth of a latent decomposition is not utility of
+representing it; abstraction tracks computational necessity, not ground-truth
+labels. A learner that ignores a structure it does not need is behaving
+correctly, and an experiment that reads this as a learning failure has measured
+its own design.
+
+**"Hard enough" is TWO-SIDED.** Below the band the task is solved without the
+behaviour and elicits nothing; above it the arm is degraded and its result is
+UNINTERPRETABLE, not negative. Register a BAND, never a floor.
+
+**All three gates are required before any plan is frozen**, and each plan states
 the number that turned each one, not the adjective.
+
+# The necessity checks (`row.necessity_gate`)
+
+## `refusal_cost(oracle_loss, denied_loss, scale)`
+
+The core. What does it cost to REFUSE the structure - an arm told it against a
+matched arm that ignores it? If the gap is ~0 the behaviour will not be
+elicited, and a NEGATIVE gap is louder still.
+
+- **H48b / review 68:** on a world with two orthogonal family subspaces and
+  teacher-level classification of 1.000, the label-free learner ignored the
+  groups and was **~500 nats BETTER** than the told-membership oracle.
+- `scale` must be the contribution the tolerance licenses, not the total.
+  **V4.1** divided by total output variance while the object contributed ~0.2%,
+  and every abstraction then substituted for every other.
+
+## `no_cheaper_impostor(target_score, impostors)`
+
+Does a SIMPLER construct reach the same score? If so the task elicits the
+impostor. The edit vocabulary is ordered KEEP < COMPRESS < SHARE/FACTORIZE <
+CREATE/FORK precisely because structural edits kept losing to local
+compression, and a trace-compressing MACRO is the expected impostor for a LOOP
+(the E6 line). Scores must be one currency at matched budget.
+
+## `incumbent_degrades(costs, axis)`
+
+Does the dumb baseline get worse *at the rate the axis grows*? Reports the
+SCALING EXPONENT, `log(cost growth)/log(axis growth)`, not the ratio.
+
+- **E5.1:** space grew 3.58e7-fold, route-optimization seconds 3.30-fold -
+  exponent **0.068**, effectively flat. Growing the space bought no difficulty,
+  so no learned proposer could sell anything. Reading the 3.3x as degradation
+  was this check's own first defect, caught by its test.
+
+## `difficulty_band(scores, band, higher_is_harder)`
+
+The two-sided "hard enough" check. `higher_is_harder` is not cosmetic: route
+identifiability is higher-is-EASIER, and getting it backwards inverts the
+reading - this check's second defect, also caught by its test.
+
+- **SG0:** staged median identifiability 53.9 against a band of (0.001, 5.0)
+  reads `TOO_EASY`; the control arm at 0.025 is `IN_BAND`.
+
+## `capacity_forces_structure(monolithic_score, structured_score)`
+
+Does one undifferentiated channel absorb the structure you want discovered?
+Review 68: a single 64-direction channel absorbed the union of two rank-2
+subspaces. Schema count and within-schema width trade off under one `D*`, so
+"how many abstractions" is a WIDEN-versus-SPLIT decision, and capacity per slot
+is the knob that can make discrete identity necessary. Run the monolithic arm at
+matched total capacity before predicting that a learner will split.
 
 # The checks
 
@@ -110,11 +174,28 @@ and because every entry here is a place a human still has to think.
   function) is not mechanizable here.
 - **Registration order.** Whether a rule was written before its data is a fact
   about the repository's history, not about the rule.
+- **Whether the oracle arm is a real ceiling.** `refusal_cost` compares two
+  numbers you supply. An oracle arm bounds performance only UNDER ITS OWN
+  ASSIGNMENT: J1c's world 0 failed at 0.624 with oracle-pinned routes and passed
+  at 0.0047 under the curriculum, so the oracle was the handicap. Choosing a
+  defensible oracle remains a human judgement.
+- **Whether the impostor list is complete.** `no_cheaper_impostor` scores the
+  impostors named. Nothing mechanical suggests the one nobody thought of, and
+  the macro-as-loop impostor was found by argument, not by search.
 
 # Required section in every plan
 
-From 2026-09-22, every plan that registers a threshold, a triage or a decision
-rule carries a section headed `# Discriminating power`, containing:
+From 2026-09-22, every plan carries a section headed `# Necessity`, containing:
+
+1. the target behaviour, in one line;
+2. the cheapest arm that REFUSES it, described as a construction;
+3. the measured refusal cost and the scale it is taken against;
+4. the impostors scored, and by how much the target beats the best of them;
+5. the difficulty band, its direction, and where the arm's median falls;
+6. the incumbent's scaling exponent, where an incumbent exists.
+
+And every plan that registers a threshold, a triage or a decision rule also
+carries a section headed `# Discriminating power`, containing:
 
 1. the decision rule as it will be applied, in one line;
 2. the null and effect samplers used, and where they come from;
