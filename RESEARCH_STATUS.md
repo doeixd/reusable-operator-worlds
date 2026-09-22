@@ -6,8 +6,11 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-22, after SG0 ran and returned NO-HEADROOM on its
-registered grid. Nothing is running.
+Last rewritten: 2026-09-22, after SG0 returned NO-HEADROOM on its registered
+grid, its amended sub-triage returned SATURATED, and the successor census (SG6)
+was closed by its own opportunity gate before a plan was written. Nothing is
+running. The substrate has no live rung: both remaining questions are PI
+decisions (6 and 7), not measurements.
 
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
@@ -63,6 +66,37 @@ registered grid. Nothing is running.
   depth.
 
 # Awaiting a PI decision (nothing running)
+
+# SG6 CLOSED BEFORE OPENING: no graded vocabulary-quality axis (2026-09-22)
+
+- **The proposal.** SG0's reading is that a well-formed vocabulary dissolves the
+  inference problem: staged median identifiability 53.9 against the controls'
+  0.025, and 576 of 576 staged programs with no route within 1% of their winner.
+  The natural successor was a Tier 0 census asking whether inference difficulty
+  TRACKS vocabulary quality across the twelve held libraries - which would have
+  turned ten negatives into one positive claim about when program inference is a
+  real problem at all.
+- **The gate was run FIRST, before any plan was written**
+  (`row.experiments.sg6_quality_gate`, `reports/sg6_quality_gate.json`,
+  `tests/test_sg6_quality_gate.py`, 9 tests), and it refused the rung. Verdict
+  `NOT-MEASURABLE-HERE`.
+  - Quality is BIMODAL with nothing between the clusters: staged
+    0.00465-0.00725, control 1.26012-1.30157, a gap 30.2x the wider cluster's
+    own spread.
+  - Pooled Spearman against identifiability is **-0.692** and looks like a
+    finding; within staged it is **+0.086** and within control **+0.429** -
+    null, and the WRONG SIGN in both.
+  - The pooled number re-detects cluster membership. Effective n is 2, not 12.
+    Identical in form to the route-margin candidate that survived pooled and
+    died once made comparable, except caught before the plan rather than after
+    three withdrawals.
+- **Not refuted, unmeasurable here.** Testing the hypothesis needs a generator
+  with a graded vocabulary-maturity knob, its own balance gates and a
+  non-vacuity check - a new substrate, not a census over these artifacts.
+- **Tenth rung to fail for absence of opportunity, and the FIRST to fail before
+  a plan existed.** The other nine cost a branch each; this cost one command.
+  Recorded in AGENTS.md: the opportunity gate is what decides whether a plan
+  gets written, not a step inside one.
 
 # Awaiting a PI decision (nothing running)
 

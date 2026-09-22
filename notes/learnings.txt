@@ -5146,3 +5146,20 @@ artifacts/ wholesale, so artifacts/INVALID_MANIFEST.md had NEVER been committed,
 and tools/check_invalid.py returned 0 when the manifest was missing - so on a
 fresh clone the quarantine guard passed vacuously over an empty record. Both
 fixed. A guard must fail when its input is ABSENT, not only when it is empty.
+
+2026-09-22  SG0 and the SG6 opportunity gate
+  - SG0: NO-HEADROOM, k = 0 of 36. Staged libraries are functionally SEPARATED:
+    576/576 programs have no route within 1% of the winner, median
+    identifiability 53.9 vs 0.025 for controls. Sub-triage (amended, scored)
+    returns NO-HEADROOM-SATURATED, so SG3's first prerequisite fails and the
+    identifiability generator is not licensed by these artifacts.
+  - Reading: a good vocabulary dissolves the inference problem. E5, E5.1 and
+    L0d's four gates plausibly share one generator-side cause.
+  - SG6 (does difficulty track vocabulary quality?) was gated BEFORE a plan was
+    written and failed: quality is bimodal (gap 30.2x the within-cluster
+    spread), pooled rho -0.692 but within-cluster +0.086 / +0.429, wrong sign.
+    Effective n is 2, not 12. Closed before opening.
+  - Process: a plan hashed into a completed run is frozen by it; amendments go
+    in a new file. A triage written mid-run is a diagnostic, not a registration.
+  - Full detail in AGENTS.md "Implementation learnings"; verdicts in
+    PREDICTIONS.md; lab record in PROGRESS.md.

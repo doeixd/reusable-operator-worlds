@@ -1,0 +1,109 @@
+{
+ "source_report": "reports/sg0_full_v2.json",
+ "source_protocol_sha256": "e70d0a72454c07d40f22acebe51732e71a4b9c327999748f4a48a86f32d990c0",
+ "status": "OPPORTUNITY GATE, run before any SG6 plan was written; not a scientific result",
+ "verdict": "NOT-MEASURABLE-HERE",
+ "reason": "quality is bimodal (gap/spread = 30.2) and the pooled relation does not survive within either cluster, so it re-detects cluster membership, not a relation; this is the route-margin failure prospectively avoided",
+ "bimodal": true,
+ "gap_over_spread": 30.221296656328033,
+ "staged_quality_range": [
+  0.004648972811429189,
+  0.007247617783547372
+ ],
+ "control_quality_range": [
+  1.2601167836202802,
+  1.301573282991706
+ ],
+ "pooled_rho": -0.6923076923076923,
+ "within_rho": {
+  "staged": 0.08571428571428572,
+  "control": 0.42857142857142855
+ },
+ "n_libraries": 12,
+ "libraries": [
+  {
+   "library": "STAGED3001",
+   "world": 2,
+   "staged": true,
+   "quality_nmse": 0.004648972811429189,
+   "identifiability": 121.6976050388135
+  },
+  {
+   "library": "STAGED3001",
+   "world": 0,
+   "staged": true,
+   "quality_nmse": 0.0051632396083950115,
+   "identifiability": 117.67996889632909
+  },
+  {
+   "library": "STAGED5000",
+   "world": 1,
+   "staged": true,
+   "quality_nmse": 0.0053125062820637515,
+   "identifiability": 1.7855017922898355
+  },
+  {
+   "library": "STAGED5000",
+   "world": 0,
+   "staged": true,
+   "quality_nmse": 0.006393243155121861,
+   "identifiability": 2.6528685352047834
+  },
+  {
+   "library": "STAGED3001",
+   "world": 1,
+   "staged": true,
+   "quality_nmse": 0.006476792324599982,
+   "identifiability": 22.148754498237277
+  },
+  {
+   "library": "STAGED5000",
+   "world": 2,
+   "staged": true,
+   "quality_nmse": 0.007247617783547372,
+   "identifiability": 141.06506543562023
+  },
+  {
+   "library": "NONSTAGED3001",
+   "world": 0,
+   "staged": false,
+   "quality_nmse": 1.2601167836202802,
+   "identifiability": 0.011090163296510198
+  },
+  {
+   "library": "NONSTAGED3001",
+   "world": 1,
+   "staged": false,
+   "quality_nmse": 1.265886406640478,
+   "identifiability": 0.008884299663985806
+  },
+  {
+   "library": "RESET5000",
+   "world": 1,
+   "staged": false,
+   "quality_nmse": 1.2668115013944425,
+   "identifiability": 0.027939301071441575
+  },
+  {
+   "library": "RESET5000",
+   "world": 0,
+   "staged": false,
+   "quality_nmse": 1.2766076860257907,
+   "identifiability": 0.01652779511291962
+  },
+  {
+   "library": "RESET5000",
+   "world": 2,
+   "staged": false,
+   "quality_nmse": 1.2802322018141967,
+   "identifiability": 0.024315443687715658
+  },
+  {
+   "library": "NONSTAGED3001",
+   "world": 2,
+   "staged": false,
+   "quality_nmse": 1.301573282991706,
+   "identifiability": 0.012535341915846192
+  }
+ ]
+}

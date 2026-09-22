@@ -9234,3 +9234,40 @@ dropped, because staged near-tie sets are empty and the first conjunct fails on
 its own. The scorer refuses to read the sub-triage on any future run with
 non-empty staged near-tie sets until a proper floor - a bootstrap over `Q_b`
 examples, matching how the regret floor is built - exists.
+
+# SG6, closed before opening (2026-09-22): no graded vocabulary-quality axis
+
+Appended per the append-only rule. This is the record of a rung that was
+PROPOSED AND NOT OPENED, kept because a proposal killed by its own gate is
+evidence about the substrate and belongs in the ledger beside the ones that ran.
+
+**The proposal.** SG0 showed staged libraries functionally separated (median
+identifiability 53.9) and controls ambiguous (0.025). The successor hypothesis
+was that inference difficulty TRACKS vocabulary quality - that route ambiguity
+is a symptom of immature abstraction rather than an independent problem - and
+that it could be measured on artifacts already held, at Tier 0.
+
+**The gate, run before any plan was written**
+(`row.experiments.sg6_quality_gate`, `reports/sg6_quality_gate.json`,
+`tests/test_sg6_quality_gate.py`): is there a graded quality axis at all?
+
+**Result: NOT-MEASURABLE-HERE.**
+- Quality is bimodal with nothing between the clusters: staged
+  0.00465-0.00725, control 1.26012-1.30157. The gap is 30.2x the wider
+  cluster's own spread.
+- Pooled Spearman(quality, identifiability) = -0.692, which looks supportive.
+- Within staged it is +0.086 and within control +0.429 - null, and the WRONG
+  SIGN in both.
+
+The pooled correlation re-detects cluster membership. With two clusters and no
+gradation the effective n is 2, not 12, and a "tracks" claim is unsupportable
+on these artifacts however the statistic is dressed. Identical in form to the
+route-margin candidate that survived pooled and died once made comparable -
+except caught before the plan, not after three withdrawals.
+
+**Consequence.** No SG6 plan is written. The hypothesis is NOT refuted: it is
+unmeasurable on the held evidence, and testing it would require a generator
+with a graded vocabulary-maturity knob and its own balance gates - which is a
+new substrate, not a census. Recorded so that a later reader finds the
+measurement rather than the intuition, and so the hypothesis is not
+re-proposed as if it were untested.

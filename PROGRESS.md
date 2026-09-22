@@ -6516,3 +6516,32 @@ controls in the same grid have plenty.
 NEXT: PI decisions 6 (bank, or build the generator anyway) and 7 (amend stop
 rule 2 for offline scope, or close L1-L8). Neither is Claude's to make.
 
+# 2026-09-22 SG6 opportunity gate: closed before opening
+
+`row.experiments.sg6_quality_gate`; `reports/sg6_quality_gate.json`;
+`tests/test_sg6_quality_gate.py` (9 tests). Read-only over the committed SG0
+grid; nothing re-run.
+
+Having recorded SG0's reading - that a well-formed vocabulary dissolves the
+inference problem - the natural next rung was a census asking whether inference
+difficulty tracks vocabulary quality across the twelve held libraries. The
+opportunity gate was run first, in one command, and refused it.
+
+Library quality is BIMODAL: staged 0.00465-0.00725, control 1.26012-1.30157,
+with nothing in between and a gap 30.2x the wider cluster's own spread. Pooled
+Spearman against identifiability is -0.692 and looks like a finding; within
+staged it is +0.086 and within control +0.429, null and wrong-signed in both.
+The pooled number is cluster membership, and the effective n is 2.
+
+The hypothesis is not refuted, it is unmeasurable here. Testing it needs a
+generator with a graded vocabulary-maturity knob, its own balance gates, and a
+non-vacuity check - a new substrate, not a census over these artifacts.
+
+This is the tenth rung to fail for absence of opportunity and the FIRST to fail
+before a plan existed. The others cost a branch each; this cost one command.
+Recorded in AGENTS.md "Implementation learnings" as the rule that the gate is
+what decides whether a plan gets written, not a step inside one.
+
+NEXT: unchanged - PI decisions 6 (bank, or build the identifiability generator
+against the evidence) and 7 (amend stop rule 2 for offline scope, or close
+L1-L8).

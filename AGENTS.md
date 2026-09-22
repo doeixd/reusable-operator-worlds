@@ -1907,3 +1907,65 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   open one level up in the MISSING-FILE case. Fixed by a `.gitignore` exception
   plus failing closed on a missing manifest. A guard must fail when its input is
   absent, not only when its input is empty.
+
+- A WELL-FORMED VOCABULARY DISSOLVES THE INFERENCE PROBLEM (SG0, 2026-09-22;
+  `reports/sg0_full_v2.json`, `SG0_SUBTRIAGE_AMENDMENT.md`). On the usable
+  staged libraries, 576 of 576 held-out programs have NO route within 1% of
+  their winner: median identifiability 53.9, meaning the runner-up is ~54x
+  worse on support. Commitment regret is exactly zero in every staged cell and
+  the bootstrap floor is exactly zero - 200 support resamples never changed the
+  selected route. The same code path on control libraries gives 142 of 576
+  tie-carrying programs, regret to 0.663, median identifiability 0.025. So
+  route inference is trivial when the library is good and hard when it is bad,
+  and E5's writer failure, E5.1's logarithmic search scaling and L0d's four
+  negatives are all consistent with ONE cause in the generator rather than four
+  facts about learners. Working reading, NOT established: inference difficulty
+  may be a symptom of immature abstraction rather than an independent problem,
+  which would make "learned program inference" a phenomenon of libraries that
+  have not finished forming. Scope: depths 3-4, 12 slots, one substrate family.
+
+- A BIMODAL INDEPENDENT VARIABLE IS A TWO-POINT COMPARISON WEARING n=12
+  (SG6 opportunity gate, 2026-09-22; `row.experiments.sg6_quality_gate`,
+  `reports/sg6_quality_gate.json`). The obvious successor to the entry above -
+  does inference difficulty TRACK vocabulary quality? - was gated before any
+  plan was written, and failed. Library quality is bimodal with nothing between
+  the clusters (staged 0.00465-0.00725, control 1.26012-1.30157; the gap is
+  30.2x the wider cluster's own spread). Pooled Spearman is a supportive
+  -0.692, but within staged it is +0.086 and within control +0.429 - null, and
+  the WRONG SIGN in both. The pooled number re-detects cluster membership, not
+  a relation. This is the route-margin failure caught prospectively instead of
+  after three withdrawn candidates. Rule: before correlating anything across a
+  set of artifacts, check that the independent variable is GRADED and that the
+  relation survives within cluster with the predicted sign; a gap far larger
+  than the within-cluster spread means the effective n is the number of
+  clusters.
+
+- A PLAN HASHED INTO A COMPLETED RUN IS FROZEN BY THAT RUN (SG0, 2026-09-22).
+  `sg0_headroom_gate.protocol()` puts a digest of
+  `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` into `input_sha256`, and
+  `score_sg0_headroom_gate.score()` raises `input changed since the run` if it
+  moves. Editing the plan to fix a defect in its own sub-triage would therefore
+  have permanently destroyed the re-scorability of the verdict the fix was
+  written to interpret. Amendments to a plan a completed run has hashed go in a
+  NEW FILE (`SG0_SUBTRIAGE_AMENDMENT.md`), and the digests are verified against
+  the run manifest before anything is written. Same family as the no-commits-
+  during-a-run rule, one level up: a run freezes its inputs, not just its code.
+
+- APPLY THE OPPORTUNITY GATE TO YOUR OWN PROPOSAL, IN THE SAME BREATH AS
+  PROPOSING IT (SG6, 2026-09-22). The vocabulary-quality census was recommended
+  as a cheap positive rung and killed by a single command minutes later,
+  because the artifacts it would use have no graded axis. Ten rungs have now
+  failed for absence of opportunity; this is the first that failed BEFORE a
+  plan existed, and it cost one command instead of a branch. The gate is not a
+  step in a plan - it is what decides whether the plan gets written.
+
+- A TRIAGE WRITTEN WHILE ITS RUN IS IN FLIGHT IS NOT PREREGISTERED (SG0
+  Revision 3 and Amendment 1, 2026-09-22). The NO-HEADROOM sub-triage was
+  drafted after the grid launched, so it is a post-hoc DIAGNOSTIC that decides
+  a research-program question and supports no scientific claim. A post-hoc rule
+  is admissible only if shown INVARIANT to the data it was written after: here
+  576/576 singleton near-tie sets leave nothing for any aggregation rule,
+  tolerance or floor to move, and the one clause that could move a count was
+  calibrated on the control arm alone. State the registration order first, then
+  the invariance argument, then the result - in that order, so the reader
+  cannot mistake which it is.
