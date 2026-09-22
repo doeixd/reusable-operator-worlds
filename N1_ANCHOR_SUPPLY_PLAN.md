@@ -1,8 +1,9 @@
 # N1: is it the ORDER, or the supply of anchors?
 
-Status: DRAFT, 2026-09-22. Not frozen. Offline, development worlds 0–2, Tier 1.
-Requires PI approval, including a ruling on reusing worlds 0–9 for a question
-that is not the online staged protocol (see "World budget" below).
+Status: DRAFT, 2026-09-22, **NOT FREEZE-READY** - see "Audit 1" at the end,
+which supersedes the earlier freeze-ready claim. Offline, development worlds
+0-2, Tier 1. The world-budget ruling is GIVEN (see "World budget"); what blocks
+freezing now is a construct inconsistency in the arms, not the ruling.
 
 First plan written under `DESIGN_ADEQUACY.md`, so it carries `# Necessity` and
 `# Discriminating power` sections with measured numbers rather than assertions,
@@ -36,9 +37,13 @@ can commit to informedly from the first round. **Inject, do not defer.**
 
 All arms share the world, the task contents, the budget in example-gradients,
 the replay policy, and the learner seed. Only the composition and presentation
-of the task stream differ. Total task count and total budget are matched
-exactly; anchors REPLACE length-3 tasks rather than being added, so no arm sees
-more data than another.
+of the task stream differ.
+
+**SUPERSEDED BY AUDIT 1.** This paragraph previously said "Total task count and
+total budget are matched exactly; anchors REPLACE length-3 tasks rather than
+being added". That is arithmetically impossible and inconsistent with a verbatim
+`STAGED` arm; see Audit 1. The matching rule must be restated before freezing,
+and the arms below are written against the superseded rule.
 
 | arm | construction |
 |---|---|
@@ -165,8 +170,29 @@ Development worlds 0–9 are recorded as SPENT for the ONLINE staged protocol
 0–2 are the same worlds J1c itself used, so reusing them is reusing a
 development band for a development question. **But "spent for protocol X" and
 "spent for all purposes" are not the same thing, and getting that wrong
-contaminates a band.** The PI rules before this plan is frozen. If the ruling is
-that 0–2 are unavailable, the rung needs a new band and is blocked on decision 5.
+contaminates a band.**
+
+**RULING (2026-09-22, Claude under delegated judgement; the PI may reverse).
+Worlds 0-2 MAY be reused for N1 and N2, under three binding conditions.**
+
+1. **DEVELOPMENT ONLY, permanently.** Nothing measured on worlds 0-2 by N1 or
+   N2 may be reported as confirmatory, now or later. A confirmatory version of
+   either question needs a fresh band, and the fact that these worlds carry a
+   known J1c outcome is precisely why they cannot be upgraded afterwards.
+2. **The reason the ruling is "yes".** `AGENTS.md` defines seeds 0-9 as the
+   DEVELOPMENT partition, "used for architecture, tuning, testbed design" - that
+   is repeated use by construction. "Spent" was recorded about the ONLINE staged
+   protocol, where each world's pass or fail is now known, so a further online
+   run there is not independent evidence. N1 and N2 are offline, ask a different
+   estimand, and their new arms (`INTERLEAVED`, `SHAM`, `NONE`) have never been
+   run on any world. Knowing J1c's `STAGED` outcome does not reveal theirs.
+3. **`STAGED` is not blind, and is therefore an ANCHOR, not evidence.** Its
+   published value is known, so it is registered as a reproduction check whose
+   failure voids the run. The registered estimand is the CONTRAST between arms,
+   never `STAGED`'s level.
+
+If the PI reverses this, both rungs need a new band and are blocked on
+decision 5.
 
 # Acceptance
 
@@ -185,3 +211,78 @@ Four arms × 3 worlds = 12 lifetimes at the J1c stage-3 budget. J1c's own cells
 are the reference for sizing. Memory-bounded pool at 3–4 concurrent for
 `slots=12`, longest cells first. Performance pass before launch, timing a few
 real updates rather than guessing.
+
+# Audit 1 (2026-09-22): the arms are arithmetically inconsistent
+
+Independent audit of this plan against the committed J1c protocol, run under the
+double-check-after-writing rule before approving it for freezing. It finds one
+BLOCKING defect and one consequence. The plan is **not freeze-ready**; the
+earlier status line claiming otherwise is corrected above.
+
+**The committed J1c construction** (`reports/j1c_curriculum.json`, protocol
+`stages`): 60 length-1 tasks at 16,384 updates, 64 length-2 at 16,384, 64
+length-3 at 32,768. **124 anchor tasks, 64 final-stage tasks, 188 tasks total,
+65,536 updates total.** The published floor is length-3 only at the same UPDATE
+budget, i.e. budget-matched, not task-count-matched.
+
+**Defect: task-count matching and a verbatim `STAGED` arm cannot both hold.**
+
+- The plan says anchors "REPLACE length-3 tasks rather than being added" and
+  that total task count is "matched exactly". Replacing **124 anchors inside a
+  64-task stream is impossible** - there are not enough slots. The replacement
+  rule is unsatisfiable as written.
+- The only self-consistent alternative is to match every arm at **188 tasks**.
+  That keeps `STAGED` verbatim and preserves its bitwise J1c anchor, but it
+  breaks two other things the plan relies on:
+  - **`NONE` at 188 length-3 tasks is a NEW construction.** Its floor value is
+    NOT the published 0.92-0.97, which was measured on the 64-task length-3
+    baseline at matched budget. The non-vacuity check "`NONE` must fail, at
+    0.92-0.97" therefore has no published referent, and the null sampler built
+    from `U(0.92, 0.97)` is borrowed from a different construction.
+  - **`SHAM` collapses toward `NONE`.** If the 124 anchor slots are filled with
+    length-3 tasks and the remaining 64 are also length-3, then `SHAM` is 188
+    length-3 tasks and differs from `NONE` only in which length-3 tasks occupy
+    which positions. The arm that the plan calls "the arm that makes this a test
+    of ANCHORS rather than of stream statistics" would then be a near-duplicate
+    of the floor, and the design loses its key control.
+
+**What must be decided before freezing**, and registered explicitly:
+
+1. the matching invariant - task count, update budget, or example-gradients -
+   stated once and applied to all four arms, since they are not simultaneously
+   satisfiable;
+2. `NONE`'s exact construction, and whether its non-vacuity referent is the
+   published 64-task floor or a newly measured one;
+3. how `SHAM` is kept distinct from `NONE` under whichever matching rule is
+   chosen - the pool has up to `6**3 = 216` distinct length-3 programs, so
+   distinctness is achievable, but it has to be constructed rather than assumed;
+4. the samplers re-derived from whatever `NONE` and `SHAM` actually become, since
+   the measured false-fire and detection rates were computed against published
+   values for constructions the plan may no longer use.
+
+**Consequence for the discriminating-power section.** Its measured rates
+(false-fire 0.0000, detection 1.0000 and 1.0000) are not wrong arithmetic - they
+are correct for the samplers as stated - but those samplers describe arms whose
+construction is now in question. The rates must be recomputed once the arms are
+fixed. This does not touch the NECESSITY section, whose 150-200x refusal cost is
+measured from published J1c/J1c-R values and stands.
+
+**Not a criticism of the check that was run.** The plan's own discrimination
+check caught its two-way rule missing the half-effect entirely, which is the
+check working. What it could not catch is an inconsistency between the arms and
+the committed protocol they are matched against, because that lives in the
+construction rather than in the statistic - the same class as E5's `S` arm,
+where the label hid how the baseline was BUILT.
+
+# Audit 2 (2026-09-22): a comparability question in the anchor-difficulty check
+
+Not blocking, but register an answer before freezing. The non-vacuity check
+requires "median single-step route margin on length-1 tasks must exceed that on
+length-3 tasks in every world". A length-1 task chooses among `12` routes and a
+length-3 task among `12**3 = 1,728`; a margin over 12 competitors and a margin
+over 1,728 are not the same quantity, and "single-step" is undefined for a
+length-3 task. This is the comparability failure that killed `route_margin` as a
+cross-world predictor, in a new place. Either define the statistic so the two
+depths are comparable, or replace it with a direct measure of the premise - for
+example that length-1 tasks reach the usability threshold in materially fewer
+updates than length-3 tasks - which is what "easier" is supposed to mean here.

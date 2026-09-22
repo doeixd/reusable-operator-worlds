@@ -2032,3 +2032,18 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   the kind they catch - reading a 3.3x ratio as degradation, and inverting a
   higher-is-easier statistic - both caught by their own fixtures, which is the
   argument for the fixtures.
+
+- MATCHING INVARIANTS ARE NOT SIMULTANEOUSLY SATISFIABLE, AND A PLAN MUST PICK
+  ONE (N1 Audit 1, 2026-09-22). N1 required that anchors "REPLACE length-3 tasks"
+  AND that total task count be "matched exactly" AND that `STAGED` be the J1c
+  curriculum verbatim. The committed J1c protocol is 124 anchor tasks plus 64
+  final-stage tasks, so replacing 124 inside a 64-task stream is arithmetically
+  impossible, and the only consistent alternative - matching all arms at 188
+  tasks - turns the floor into a new construction whose published value no longer
+  applies and collapses the SHAM arm toward that floor. Task count, update budget
+  and example-gradients are DIFFERENT invariants; a design that silently assumes
+  all three can hold at once has not been checked against the protocol it reuses.
+  State the one invariant, apply it to every arm, and re-derive any sampler or
+  non-vacuity referent that was borrowed from a differently-constructed arm. Same
+  family as E5's `S` arm: the defect is in how the construction is BUILT, so
+  checking the statistic over it can never find it.

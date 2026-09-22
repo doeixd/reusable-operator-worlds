@@ -119,8 +119,24 @@ sections with MEASURED numbers.
   published); the registered triage has false-fire **0.0000** and detection
   **1.0000** against the null and full-effect samplers built from those
   published values, and the three outcomes partition 0..3 worlds.
-  **`check_adequacy` now covers this plan.** STATUS: freeze-ready pending the
-  world ruling.
+  **`check_adequacy` now covers this plan.** STATUS: **NOT freeze-ready**, and
+  the blocker is no longer the world ruling, which is now GIVEN (below).
+  **Audit 1 (2026-09-22) found the arms arithmetically inconsistent.** The plan
+  says anchors "REPLACE length-3 tasks" with task count "matched exactly", but
+  the committed J1c protocol is 60 + 64 anchors and 64 final-stage tasks:
+  **124 anchors cannot replace tasks inside a 64-task stream.** Matching all
+  arms at 188 tasks instead keeps `STAGED` verbatim but then (a) `NONE` at 188
+  length-3 tasks is a NEW construction whose floor is not the published
+  0.92-0.97, so the non-vacuity referent and the null sampler are borrowed from
+  a different arm, and (b) `SHAM` collapses toward `NONE`, since both become 188
+  length-3 tasks differing only in which task sits where - losing the control the
+  design turns on. Four things must be registered before freezing: the single
+  matching invariant, `NONE`'s construction and its non-vacuity referent, how
+  `SHAM` stays distinct (the pool has up to 216 distinct length-3 programs), and
+  re-derived samplers. The NECESSITY section is unaffected: its 150-200x refusal
+  cost is measured from published values and stands. A second, non-blocking audit
+  notes the anchor-difficulty check compares a margin over 12 routes against one
+  over 1,728 - the route-margin comparability failure in a new place.
 - **N2, `N2_FORMATION_IDENTIFIABILITY_PLAN.md` — is identifiability graded ALONG
   FORMATION?** SG6 died because the twelve held libraries are bimodal: good or
   broken, nothing between, effective n = 2. A formation run passes through the
@@ -138,12 +154,18 @@ sections with MEASURED numbers.
   checkpointing rather than closing the question, so a sampling artifact cannot
   be read as a substantive negative.
 
-**World budget, and the ruling both need.** Worlds 0-9 are recorded as SPENT for
-the ONLINE staged protocol. N1 and N2 are OFFLINE and ask different questions on
-the same worlds J1c itself used. "Spent for protocol X" and "spent for all
-purposes" are not the same thing, and getting it wrong contaminates a band, so
-the PI rules before either is frozen. If 0-2 are unavailable, both are blocked
-on decision 5.
+**World budget: RULED (2026-09-22, Claude under delegated judgement; the PI may
+reverse).** Worlds 0-2 MAY be reused for N1 and N2, under three binding
+conditions: (1) DEVELOPMENT ONLY, permanently - nothing measured there may ever
+be reported as confirmatory, and a confirmatory version needs a fresh band;
+(2) the reason is that `AGENTS.md` defines seeds 0-9 as the development
+partition, which is repeated use by construction, and "spent" was recorded about
+the ONLINE staged protocol where each world's outcome is now known - N1 and N2
+are offline, ask a different estimand, and their new arms have never been run;
+(3) `STAGED` is not blind, so it is an ANCHOR whose failure voids the run, never
+evidence - the registered estimand is the CONTRAST between arms. Decision 5 is
+answered for these two rungs and remains open for any ONLINE rung, which still
+needs a fresh band.
 
 # Candidate rungs from review 85 (2026-09-22, external suggestions)
 
@@ -537,8 +559,12 @@ sealed band, and all are implementation audits rather than experiments.
    depth/mechanism protocol stays unfrozen.
 3. (Folded into 7.)
 4. Should ladder rungs L1-L3 target remote workers when they open?
-5. Development-world budget: worlds 0-9 are spent for the rotated staged
-   protocol. Allocate a new development band, or stop opening worlds for it?
+5. Development-world budget. **PARTLY ANSWERED 2026-09-22 (Claude, delegated;
+   reversible):** worlds 0-2 may be reused by the OFFLINE rungs N1 and N2 as
+   DEVELOPMENT evidence only, never upgradable to confirmatory - see the N1 plan
+   for the reasoning and its three conditions. **Still open for any ONLINE
+   rung**, including review 85's C1: worlds 0-9 are spent for the online staged
+   protocol and a new band would have to be allocated, or that line stopped.
 6. (Answered by SO4: the re-test ran and failed.)
 7. ANSWERED: the cross-run world census ran, along with the library-geometry and
    route-margin normalization censuses. The Track B mechanism hunt is closed

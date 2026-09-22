@@ -5213,3 +5213,15 @@ proposed mechanism is not already the control before planning around it.
 (3) No margin, gap, posterior or entropy field is recorded in any J1 round, so a
 confidence-gated rung cannot pre-check its gating signal on held artifacts and
 needs instrumentation before it can pass a discrimination gate.
+
+2026-09-22 N1 audit before freezing. The plan demanded three matching rules at
+once - anchors REPLACE length-3 tasks, task count matched exactly, STAGED
+verbatim J1c - and the committed J1c protocol (124 anchors, 64 final-stage
+tasks, 188 total, 65,536 updates) makes them jointly unsatisfiable: 124 anchors
+cannot replace tasks in a 64-task stream. Matching all arms at 188 instead makes
+NONE a new construction whose published 0.92-0.97 floor no longer applies, and
+collapses SHAM toward NONE. Lesson: task count, update budget and
+example-gradients are different invariants; pick one, apply it to every arm, and
+re-derive any borrowed sampler or non-vacuity referent. Also ruled: worlds 0-2
+may be reused by the OFFLINE N1/N2 as development-only evidence, never
+upgradable; decision 5 stays open for online rungs.

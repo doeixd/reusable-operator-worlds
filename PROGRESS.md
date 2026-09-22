@@ -6861,3 +6861,68 @@ explicit sentinel that must carry a reason, so N/A cannot be reached by
 omission; both branches are tested.
 
 NEXT: PI rulings - the world budget for N1/N2, and decisions 5, 6 and 7.
+
+# 2026-09-22 N1 audited before freezing: the arms are arithmetically inconsistent
+
+No experiment, no run. An audit of `N1_ANCHOR_SUPPLY_PLAN.md` against the
+committed J1c protocol, run under the double-check-after-writing rule before
+approving the plan for freezing, plus a ruling on the world budget it was
+blocked on. Both recorded in the plan itself.
+
+**The world-budget ruling: worlds 0-2 MAY be reused by N1 and N2.** Given under
+delegated judgement and reversible by the PI. Three binding conditions:
+development only and never upgradable to confirmatory; the justification is that
+`AGENTS.md` defines seeds 0-9 as the development partition - repeated use by
+construction - while "spent" was recorded about the ONLINE protocol whose
+per-world outcomes are now known, and N1/N2 are offline with new arms that have
+never been run anywhere; and `STAGED` is an ANCHOR rather than evidence, since
+its value is already published. Decision 5 stays OPEN for any online rung.
+
+**Audit 1, BLOCKING.** The committed J1c protocol
+(`reports/j1c_curriculum.json`) is 60 length-1 tasks at 16,384 updates, 64
+length-2 at 16,384, 64 length-3 at 32,768: **124 anchors, 64 final-stage tasks,
+188 total, 65,536 updates.** The plan requires anchors to "REPLACE length-3
+tasks" with task count "matched exactly". **124 anchors cannot replace tasks
+inside a 64-task stream**, so the matching rule is unsatisfiable as written.
+
+The only self-consistent alternative, matching every arm at 188 tasks, keeps
+`STAGED` verbatim and preserves its bitwise J1c anchor but breaks two things the
+plan leans on:
+- `NONE` at 188 length-3 tasks is a NEW construction. The published floor
+  0.92-0.97 was measured on the 64-task length-3 baseline at matched budget, so
+  the non-vacuity referent AND the `U(0.92, 0.97)` null sampler are borrowed
+  from a different arm.
+- `SHAM` collapses toward `NONE`: both become 188 length-3 tasks differing only
+  in which task occupies which position, so the arm the plan calls the one that
+  makes this a test of anchors rather than stream statistics becomes a
+  near-duplicate of the floor.
+
+Four items must be registered before freezing: the single matching invariant
+(task count, updates, or example-gradients - they are not simultaneously
+satisfiable); `NONE`'s construction and its non-vacuity referent; how `SHAM` is
+kept distinct (the pool holds up to `6**3 = 216` distinct length-3 programs, so
+distinctness is constructible but must be constructed); and samplers re-derived
+from whatever those arms become.
+
+**What is NOT affected.** The NECESSITY section stands: its 150-200x refusal
+cost is measured from published J1c/J1c-R values. The discriminating-power
+arithmetic is correct for the samplers as stated - and that section already did
+its job by catching its own two-way rule missing the half-effect entirely - but
+the samplers describe arms whose construction is now in question, so the rates
+must be recomputed once the arms are fixed.
+
+**Audit 2, non-blocking.** The anchor-difficulty non-vacuity check compares
+"median single-step route margin" on length-1 against length-3 tasks. A length-1
+task chooses among 12 routes and a length-3 task among 1,728, and "single-step"
+is undefined at length 3, so this is the route-margin comparability failure in a
+new place. Either make the statistic comparable across depths or replace it with
+a direct measure of the premise, such as updates-to-threshold.
+
+**On the class of error.** This is the same family as E5's `S` arm: the defect
+lives in how a construction is BUILT, not in the statistic computed over it, so
+no amount of checking the statistic finds it. The plan's own gates could not have
+caught it; reading the arms against the committed protocol they match against is
+what did.
+
+NEXT: N1 needs the four registrations above before it can be frozen. Nothing is
+running.
