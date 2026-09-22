@@ -188,6 +188,90 @@ and on a shuffled-label null first and registering thresholds relative to what
 those produce. A threshold not checked against its own baseline is the S0
 `p_reuse >= 0.5` error, where the unmodified control already violated the bound.
 
+# NO-HEADROOM sub-triage (Revision 3): which successor a negative licenses
+
+Computed ONLY when the triage above returns `NO-HEADROOM`, from quantities the
+runner already records, at no additional compute: the `(routes, examples)`
+squared-error matrix is already built, and this is a further reduction over its
+columns.
+
+**Status: SECONDARY AND DIAGNOSTIC.** It produces no verdict, supports no
+scientific claim, and is reported separately from the primary triage. Its one
+job is to make ladder decision 6 a DECISION rather than a deliberation held
+after the cheap answer has already arrived.
+
+**Why it is needed.** `NO-HEADROOM` closes the amortized-proposer branch and
+hands the program two successors - pursue the identifiability generator (SG3),
+or bank the economics and negative-results papers - with, as written, no
+criterion for choosing between them. But SG3's own first prerequisite gate is
+"at least some routes are evidence-equivalent and query-different", and THIS
+plan's cells measure exactly that. A `NO-HEADROOM` result that does not read its
+own near-tie numbers throws away the evidence that decides its own successor.
+
+**The discriminator.** Regret is zero either because there is nothing to be
+wrong about, or because the support evidence is doing the work of being right.
+Those are different substrates and they license different successors:
+
+- **`NO-HEADROOM-SATURATED`** - the near-tie sets are trivial, or the routes in
+  them agree on query. The route space is functionally separated: no restriction
+  of the SUPPORT input distribution can create commitment regret, because the
+  evidence is not what is preventing it. SG3's prerequisite (a) fails on this
+  substrate, the identifiability generator is not licensed by these artifacts,
+  and the recommended successor is to bank and stop opening rungs here.
+- **`NO-HEADROOM-EVIDENTIAL`** - near-tie sets are non-trivial AND their query
+  spread exceeds the cell's own floor, yet `r_hat` still selects a query-good
+  route. Support evidence is carrying the selection, so restricting it is a LIVE
+  intervention on a mechanism shown to be present rather than a hoped-for one.
+  SG3's prerequisite (a) is satisfied here and the identifiability generator
+  gate is warranted.
+
+**Denominator and rule.** Over the same **36 staged cells** as the primary
+triage, let **j** = the number whose near-tie set at the registered tolerance
+contains at least one route functionally distinct from `r_hat` AND whose
+16-program median within-near-tie query-NMSE spread exceeds that cell's own
+bootstrap floor. The two outcomes partition every possible j, so the sub-triage
+cannot resolve to neither:
+
+- `j <= 2` of 36 -> `NO-HEADROOM-SATURATED`;
+- `j >= 3` of 36 -> `NO-HEADROOM-EVIDENTIAL`.
+
+The allowance of two matches the primary triage for the same reason: one noisy
+cell must not manufacture a branch.
+
+**Thresholds are PROVISIONAL, exactly as the ordering test's are.** The
+near-tie tolerance and the `j` cut must be set before freezing by running this
+same statistic on the 36 CONTROL cells and on a shuffled-label null, and
+registered relative to what those produce. The control libraries change routes
+constantly under support reduction, so they should read `EVIDENTIAL` strongly;
+if they do not, the statistic is broken and the sub-triage is withdrawn rather
+than read. A threshold not checked against its own baseline is the S0
+`p_reuse >= 0.5` error.
+
+**Two gaps this sub-triage inherits, disclosed rather than glossed.** Both must
+be closed before the plan is frozen, and neither is closed by this revision.
+(1) The bootstrap floor was derived for REGRET - how far `NMSE_Qb(r_hat)` moves
+under support resampling - and the sub-triage reuses it as the scale for a
+different quantity, the spread of query NMSE ACROSS near-tie members. That reuse
+is provisional and not calibrated; the spread needs its own floor, derived the
+same way but over the near-tie set, before `j` can be counted. (2) The near-tie
+TOLERANCE has been referred to as "registered" since Revision 1 but no value is
+written anywhere in this plan. It must be set against the control cells with the
+other provisional thresholds, and the sub-triage is unreadable until it is.
+
+**Could it come out any other way?** Yes, and that is checked rather than
+asserted. Nothing in the construction of the J2A libraries fixes whether their
+near-ties agree or disagree on query: the libraries were formed by a staged
+curriculum with no term that separates or merges routes in query-relevant
+directions, and the four L0d gates measured only whether the SELECTED route
+moves, never the spread among unselected near-ties. Both outcomes are
+attainable. This is not the defining-invariant error.
+
+**What it does not do.** It does not measure regret under a restricted support
+distribution - that is SG3's experiment, on a generator that does not exist yet.
+It establishes only whether SG3's first prerequisite is satisfied on artifacts
+already held, which is the cheapest thing that can distinguish the two
+successors.
+
 # Non-vacuity checks
 
 - The NONSTAGED control libraries must show LARGE regret. A poor library whose
@@ -214,7 +298,11 @@ all. Per cell, per program:
   and for the registered null-calibration selection;
 - `regret`, and the null-calibration floor it is compared against;
 - `identifiability` and `near_tie_disagreement`, normalized and raw;
-- the near-tie set size at the registered tolerance;
+- the near-tie set size at the registered tolerance, the number of its
+  members functionally distinct from `r_hat`, and the within-near-tie query
+  NMSE spread, all per cell and per program - these are the sub-triage
+  inputs and must be present in the report even when the primary triage is
+  not `NO-HEADROOM`, so that a later reading needs no rerun;
 - `C_enum` seconds and, where computed, `C_opt` seconds, reported separately
   from quality per the E5 rule;
 - library hash, program, seeds, split assignment, and the support and query
@@ -333,3 +421,48 @@ code that was about to be written, found three things underdetermined:
 Also registered the expected SIGN of regret under the null, which the first two
 revisions left implicit: it is `<= 0` in expectation if `r_hat` is truly best, so
 a positive median is already evidence before the floor is applied.
+
+# Revision 3 (2026-09-22): a negative must name its own successor
+
+Third application of the double-check-after-writing rule, prompted by reading
+the plan against the PROGRAM as a whole rather than against its own internals.
+Revisions 1 and 2 checked whether SG0 measures its estimand correctly; this one
+asks what SG0's most likely outcome leaves the program able to do.
+
+**What it found.** On the accumulated evidence - four L0d negatives, search
+logarithmic in program-space size at oracle parity, support overdetermining the
+route at every size from 128 down to 2 - `NO-HEADROOM` is the most likely
+outcome of this plan. Yet `NO-HEADROOM` as written discharged into ladder
+decision 6, an open either/or with no criterion. The plan would therefore have
+bought a cheap, decisive answer and then stalled on what to do with it, which is
+the deferral pattern the plan's own consequence clause was written to prevent.
+
+**What changed.** A registered sub-triage, above, computed only under
+`NO-HEADROOM`, from quantities already recorded, partitioning that outcome into
+the one that licenses the identifiability generator and the one that does not.
+It is explicitly secondary and diagnostic: it decides a research-program
+question, not a scientific one.
+
+**What did not change.** No estimand, threshold, cell, denominator, anchor or
+acceptance condition of the primary triage. The sub-triage cannot alter the
+primary outcome, only what follows it.
+
+**Checked against the rules, item by item.** Denominator stated (36 staged
+cells) and the two outcomes partition every j; thresholds flagged PROVISIONAL
+pending a control-cell and shuffled-label baseline, per the S0 rule; the
+opportunity-gate question ("could it come out any other way?") answered from the
+construction rather than asserted; the new quantities added to the record list
+in the same pass, per the depth-five lesson; a non-vacuity condition attached
+(controls must read `EVIDENTIAL`, or the statistic is withdrawn); and the whole
+thing labelled diagnostic so it cannot be read as a verdict.
+
+**Two gaps the check FOUND and did not close**, both written into the sub-triage
+above rather than left implicit. The bootstrap floor is defined for regret and is
+reused for a different quantity (near-tie query spread) without being
+recalibrated for it; and the near-tie tolerance has been called "registered"
+since Revision 1 while no value appears anywhere in this plan. Both block
+freezing. Disclosing them is the point of the rule: a check that finds nothing
+is not being run, and these are exactly the class - a threshold with no baseline,
+and a statistic compared against a floor built for something else - that this
+project has paid for repeatedly (the S0 `p_reuse` bound, the route-margin
+scale-incomparability).

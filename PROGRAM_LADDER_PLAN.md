@@ -145,7 +145,8 @@ These project rules are inherited by every rung plan:
 # Gate structure
 
 ```
-                        SO3 (running) or successor clears online learnability
+            UNREACHABLE AS WRITTEN - see Revision 2; needs ladder decision 7
+                        (SO2, SO3 and SO4 all failed; worlds 0-9 are spent)
                                             |
   Tier 0 now (no learner control flow)      |      learner rungs (need the gate)
   -------------------------------------     |      ------------------------------
@@ -409,7 +410,7 @@ it; step 4 is resolved (SO2, SO3 and SO4 all failed, and worlds 0-9 are spent).
 | 2 | L0d full census, frozen around the SG0 statistic | 0-1 | only if SG0 returns HEADROOM-LOCALIZED |
 | 3 | L0a PX1 world census | 0 | after PI confirms the stop-rule reading |
 | 4 | L0b + L0c count-world gates and oracle horizon | 0 | same |
-| 5 | identifiability generator gates (`notes/identifiability-sketch.txt`) | 0-1 | only if SG0 returns NO-HEADROOM and the PI opens the question |
+| 5 | identifiability generator gates (`notes/identifiability-sketch.txt`) | 0-1 | only if SG0 returns NO-HEADROOM-EVIDENTIAL (SG0 Revision 3 sub-triage) |
 | 6 | L1 PX1 economics | 2 | after 3 and an online-learnability decision |
 | 7 | L2 supplied ITERATE | 2 | after 4 and the same decision |
 | 8 | L3 promoted ITERATE | 2 | after 7 |
@@ -428,8 +429,10 @@ belong on remote workers if they exceed one overnight local batch.
   beyond them are uninterpretable, not negative.
 - **The macro impostor** (E6) is the most likely false positive for L3. The
   unseen-count test is mandatory, not a diagnostic.
-- **SO3 may fail.** Learner rungs then need an explicit PI decision on offline
-  scope; this plan does not pre-authorize it.
+- **SO3 DID fail, and so did SO4** (updated Revision 2). This is no longer a
+  risk but a fact, and it has removed the ladder's only route to a learner
+  rung. The offline-scope decision the original bullet deferred is now
+  ladder decision 7 and blocks L1-L8 entirely.
 - **Search baselines may be strong.** Exhaustive search scaled gracefully in E5
   and E5.1. PX7 and any amortized-inference claim must beat it where it is
   feasible, and state feasibility.
@@ -457,8 +460,74 @@ events; decisions 5-6 are new.
    gate on artifacts already held. It is minutes of compute, opens no world, and
    its three registered outcomes each determine a different successor -
    including closing a branch.
-6. **NEW, contingent:** if SG0 returns NO-HEADROOM, does the program pursue the
-   identifiability generator (`notes/identifiability-sketch.txt`), or bank the
-   economics and negative-results papers and stop opening rungs on this
-   substrate? Recording the question now so the answer is a decision rather than
-   a drift.
+6. **NEW, contingent, and now PRE-DECIDED BY MEASUREMENT** (revised Revision 2):
+   if SG0 returns NO-HEADROOM, its registered sub-triage (SG0 Revision 3)
+   answers this from quantities SG0 already records.
+   `NO-HEADROOM-EVIDENTIAL` -> pursue the identifiability generator
+   (`notes/identifiability-sketch.txt`), whose first prerequisite gate is then
+   already satisfied on held artifacts. `NO-HEADROOM-SATURATED` -> that
+   prerequisite FAILS here, the generator is not licensed by this evidence,
+   and the recommendation is to bank the economics and negative-results papers.
+   The PI retains the decision; what changes is that it now arrives with the
+   measurement attached instead of as an open either/or.
+7. **NEW (Revision 2), and blocking every learner rung: ladder decision 7.** The
+   online-learnability gate on L1-L8 is UNREACHABLE - SO2, SO3 and SO4 all
+   failed and worlds 0-9 are spent. Either amend stop rule 2 for OFFLINE
+   scope on frozen J2A libraries, with every claim scoped accordingly, or
+   close L1-L8. They cannot remain pending; nothing is pending. See
+   Revision 2.
+
+# Revision 2 (2026-09-22): the learner-rung gate is unreachable, and the fork is now explicit
+
+Nothing below is deleted. Two things are corrected and one decision is added.
+
+**What forced the revision.** Reading this plan against the program's current
+state rather than against its own internals shows that the gate structure's top
+condition - "SO3 (running) or successor clears online learnability" - can no
+longer be satisfied by any event. SO2, SO3 and SO4 are all closed as failures;
+development worlds 0-9 are spent for the online staged protocol; and
+`RESEARCH_STATUS.md` records Claude's recommendation, informed by three Tier 0
+censuses, to stop the Track B mechanism hunt rather than open a new world band.
+**L1 through L8 are therefore gated on an event that cannot occur.** The ladder
+as written has no reachable learner rung, and the plan did not say so.
+
+This is worth stating plainly because the failure mode is familiar: a
+prerequisite quietly became unsatisfiable through events, and the document kept
+describing it as pending. The V4R spec hit the same class of error when its
+registered `N = 256` turned out unreachable because the world caps tasks at
+`primitives ** program_depth`.
+
+**Correction 1: the gate diagram.** Its top line now says UNREACHABLE and names
+this revision, instead of describing SO3 as running.
+
+**Correction 2: the risk list.** "SO3 may fail" is replaced by what happened.
+
+**The fork, stated as ladder decision 7.** Exactly one of these is true, and the
+program should say which:
+
+- **(i) Offline scope.** Stop rule 2 is amended, by explicit PI decision, so
+  that learner rungs may run under the OFFLINE staged protocol on frozen J2A
+  libraries, with every resulting claim scoped "offline, supplied curriculum"
+  in its plan, its report, `PREDICTIONS.md` and the paper. This is the only
+  route by which the ladder reaches a learner rung, and it is not
+  pre-authorized here - it needs its own matched non-staged baseline and the
+  curriculum's compute charged to the claim, per the staged-formation rules.
+- **(ii) Closed.** The learner rungs L1-L8 are CLOSED, not deferred, and the
+  ladder's live content is its Tier 0 gates (L0a-L0d) plus SG0. The program's
+  remaining output on this substrate is economics and negative results.
+
+There is no third option in which they stay "gated pending online
+learnability", because nothing is pending. Recording this as a decision rather
+than leaving it in the risk list is the same discipline SG0 Revision 3 applies
+to its own negative outcome: a branch that cannot be taken must be closed
+explicitly, so that a dead prerequisite is never mistaken for a queue.
+
+**Note on scope.** L0a-L0d and SG0 are unaffected: none trains a learner, so
+none is gated by stop rule 2 under any reading. The Tier 0 half of this ladder
+remains fully live whichever way ladder decision 7 goes.
+
+**Checked against the rules.** This revision registers no threshold, estimand or
+comparison, so the design checks do not apply to it; what it does is remove an
+unsatisfiable prerequisite and replace it with a stated fork, which is the
+"denominator that cannot resolve to neither" discipline applied to a research
+plan rather than to a triage.

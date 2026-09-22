@@ -9078,3 +9078,37 @@ full L0d census is then withdrawn rather than left indefinitely unfrozen. This
 consequence is registered now so that a negative outcome cannot later be
 softened into another deferral; eight rungs have already failed for absence of
 opportunity, and the pattern is the finding.
+
+# SG5 (2026-09-22, appended): a zero-regret substrate has two distinguishable causes
+
+Appended to the SG1-SG4 block rather than editing it, per the append-only rule.
+Working hypothesis, not a registered prediction. It exists because SG3's first
+prerequisite gate - "at least some routes are evidence-equivalent and
+query-different" - is measurable on the artifacts SG0 already touches, and SG0
+Revision 3 now registers the sub-triage that reads it.
+
+**Statement.** Commitment regret can be zero for two structurally different
+reasons, and they license different successors. Either the near-tie sets are
+trivial or their members agree on query (`SATURATED`: the route space is
+functionally separated, so restricting the support input distribution cannot
+create regret and SG3 is not licensed by these artifacts), or the near-tie sets
+are non-trivial and disagree on query while `r_hat` still selects well
+(`EVIDENTIAL`: support evidence is carrying the selection, so restricting it is
+an intervention on a mechanism shown to be present).
+
+**Probabilities.**
+- (a) Conditional on `NO-HEADROOM`, the sub-triage returns `EVIDENTIAL`: 0.45.
+  The J2A libraries hold 12 slots against depth-3 routes, so some functional
+  near-duplication is likely; but the library-geometry census found `min_pair`
+  near-duplication carried nothing, which cuts the other way.
+- (b) The control libraries read `EVIDENTIAL` strongly, as the non-vacuity
+  condition requires: 0.8. Their routes change constantly under support
+  reduction, which is close to a definition of evidence-carried selection. If
+  they do not, the statistic is broken and the sub-triage is withdrawn.
+- (c) Conditional on `SATURATED`, a later identifiability generator built anyway
+  would fail SG3's prerequisite gates at first construction: 0.7.
+
+**Recorded consequence.** Under `SATURATED` the recommendation to the PI is to
+bank the economics and negative-results papers rather than build the generator.
+Registering it now means a negative cannot later be softened into "build it and
+see", which is the deferral pattern eight failed rungs have already established.

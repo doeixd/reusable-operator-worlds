@@ -6,8 +6,10 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-22, after scoring the depth-five memory gate and
-revising the program plans around the SG0 headroom gate. Nothing is running.
+Last rewritten: 2026-09-22, after a program-level review of what the plans
+leave reachable: SG0 Revision 3 (a registered NO-HEADROOM sub-triage that
+pre-decides its own successor) and PROGRAM_LADDER_PLAN Revision 2 (the
+learner-rung gate is unreachable; ladder decision 7). Nothing is running.
 
 # Recommended next action: SG0, the synthesis headroom gate
 
@@ -36,18 +38,27 @@ revising the program plans around the SG0 headroom gate. Nothing is running.
 - **Registered triage and its consequences, fixed in advance:**
   - `NO-HEADROOM` - the amortized-proposer branch on this substrate is CLOSED,
     PX7 is retired as UNMEASURABLE HERE (not refuted), and the L0d census is
-    WITHDRAWN rather than left unfrozen.
+    WITHDRAWN rather than left unfrozen. **A registered SUB-TRIAGE (Revision 3)
+    then splits it, from quantities the same run already records:
+    `NO-HEADROOM-EVIDENTIAL` (near-ties are non-trivial and disagree on query,
+    so restricting the support distribution is a live intervention and SG3 is
+    licensed) versus `NO-HEADROOM-SATURATED` (the route space is functionally
+    separated, SG3 prerequisite (a) fails here, and the recommendation is to
+    bank). Secondary and diagnostic: it decides a program question, not a
+    scientific one. Working hypothesis SG5 in `PREDICTIONS.md`.**
   - `HEADROOM-LOCALIZED` - the localizing statistic is the measured ambiguity
     source the census has lacked; freeze the census around identifiability, not
     support size.
   - `HEADROOM-UNEXPLAINED` - freeze nothing; this is the route-margin hunt
     repeating, and that cost three withdrawn candidates.
-- **Contingent successor** (ladder decision 6, recorded now so the answer is a
-  decision rather than a drift): under `NO-HEADROOM`, either pursue the
-  identifiability generator - restrict the SUPPORT input distribution while
-  leaving query untouched, so evidence-equivalent routes diverge on query - or
-  bank the economics and negative-results papers and stop opening rungs on this
-  substrate.
+- **Contingent successor** (ladder decision 6, now PRE-DECIDED BY MEASUREMENT
+  rather than left as an either/or): under `NO-HEADROOM`, the sub-triage above
+  says which. `EVIDENTIAL` -> pursue the identifiability generator (restrict the
+  SUPPORT input distribution while leaving query untouched, so
+  evidence-equivalent routes diverge on query). `SATURATED` -> bank the
+  economics and negative-results papers and stop opening rungs on this
+  substrate. The PI still decides; what changed is that the decision now arrives
+  with its measurement attached instead of after the cheap answer has landed.
 
 # Awaiting a PI decision (nothing running)
 
@@ -171,8 +182,16 @@ revising the program plans around the SG0 headroom gate. Nothing is running.
   SG0 now precedes the inference rungs; recommended order and PI decisions
   updated). Hypotheses PX1-PX9 in `PREDICTIONS.md` (committed `fbb547a`);
   SG1-SG4 added 2026-09-22.
-- **Learner rungs (L1-L3) remain gated** by the online-failure stop rule, which
-  SO4 did not lift.
+- **Learner rungs L1-L8 are gated on an UNREACHABLE condition** (Revision 2,
+  2026-09-22). The gate was "SO3 or a successor clears online learnability";
+  SO2, SO3 and SO4 all failed, worlds 0-9 are spent, and Track B's recommended
+  disposition is to stop. Nothing can clear it, so the rungs are not pending -
+  they are undecided. **Ladder decision 7** puts the fork to the PI: either
+  amend stop rule 2 for OFFLINE scope on frozen J2A libraries (every claim
+  scoped "offline, supplied curriculum", with a matched non-staged baseline and
+  the curriculum compute charged to the claim), or CLOSE L1-L8 and let the
+  ladder's live content be its Tier 0 gates plus SG0. L0a-L0d and SG0 train no
+  learner and are unaffected either way.
 - **L0d preflight COMPLETE, no PX7 verdict.** Full census still drafted in
   `L0D_INFERENCE_CENSUS_PLAN.md`.
   - PI-run preflight at 4a6aa47 exited 0 in about 21 seconds: twelve libraries,
