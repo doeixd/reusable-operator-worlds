@@ -1,7 +1,8 @@
 # N1: is it the ORDER, or the supply of anchors?
 
-Status: DRAFT, 2026-09-22, **AMENDMENT 1 answers Audit 1's four registrations;
-freeze-ready pending PI approval.** Offline, development worlds 0-2, Tier 1.
+Status: DRAFT, 2026-09-22, **AMENDMENT 1 answers Audit 1's four registrations
+and AMENDMENT 2 answers Audit 2 with a MEASURED gate; freeze-ready pending PI
+approval.** Offline, development worlds 0-2, Tier 1.
 The world-budget ruling is GIVEN (see "World budget"). Read Audit 1 and then
 Amendment 1 at the end: the arms table in the body is SUPERSEDED by Amendment 1
 and is kept only so the correction is legible.
@@ -159,10 +160,9 @@ development evidence — it is not, and this rung produces no verdict.
 - `SHAM` must differ from `INTERLEAVED` in anchor CONTENT only: identical task
   count, identical stream positions, identical replay draws, verified before
   launch.
-- Anchor tasks must actually be easier: median single-step route margin on
-  length-1 tasks must exceed that on length-3 tasks in every world, or the
-  premise of the manipulation is false and the rung is unscoreable rather than
-  negative.
+- Anchor tasks must actually be easier. **SUPERSEDED BY AMENDMENT 2**: the
+  route-margin form of this check is not comparable across depths. The
+  replacement is measured, and it PASSES.
 
 # World budget, and the ruling this plan needs
 
@@ -390,3 +390,51 @@ unchanged by this amendment. Audit 2's comparability objection to the
 anchor-difficulty check is still OPEN and must be answered before freezing:
 replace the cross-depth route-margin comparison with a directly comparable
 measure, such as updates-to-threshold on length-1 against length-3 tasks.
+
+# Amendment 2 (2026-09-22): the anchor-difficulty gate, replaced and MEASURED
+
+Answers Audit 2. Module `row.experiments.n1_anchor_difficulty_gate`, report
+`reports/n1_anchor_difficulty_gate.json`, tests
+`tests/test_n1_anchor_difficulty_gate.py`. Read-only: an untrained library and
+the existing task streams, no training and no lifetime.
+
+**Why the old check could not be read.** It compared "median single-step route
+margin" on length-1 against length-3 tasks. A length-1 task chooses among 12
+routes and a length-3 task among `12**3 = 1,728`, and "single-step" is undefined
+at length 3. Two margins over different numbers of competitors are not the same
+quantity - the comparability failure that killed `route_margin` as a cross-world
+predictor, in a new place.
+
+**The replacement measures the premise itself.** `AGENTS.md` states the
+mechanism as "at length 1 tasks sharing an operation look alike, so routing is
+CLUSTERING". Operationally: **on an UNTRAINED library - the uninformed state at
+which J1's first commitment is actually made - do tasks sharing a teacher
+primitive receive the same slot more often than chance?** The statistic is the
+adjusted Rand index between teacher primitive labels and support-argmin slot
+labels. ARI is chance-corrected and scale-free, so depth 1 and depth 3 are the
+SAME quantity despite a 144x difference in route-space size. A raw agreement
+rate would have scored `1/12` against `1/1728` and manufactured the result.
+
+**Rule:** the premise holds when depth-1 ARI exceeds mean depth-3 ARI in EVERY
+world. Failure makes N1 unscoreable rather than negative.
+
+**Measured, worlds 0-2:**
+
+| world | depth-1 ARI | depth-3 mean ARI | slots used at depth 1 |
+|---|---|---|---|
+| 0 | **+0.7677** | +0.0055 | 8 of 12 |
+| 1 | **+0.5850** | +0.0240 | 9 of 12 |
+| 2 | **+0.4595** | +0.0216 | 10 of 12 |
+
+**Verdict `PREMISE_HOLDS`, 3 of 3.** Depth-3 routing on a random library sits at
+chance (ARI 0.006-0.024, where 0 is chance); depth-1 routing is strongly
+clustered (0.46-0.77). The teacher libraries are verified identical across the
+two stages, so this is one world measured at two depths rather than two worlds.
+
+**What this adds beyond unblocking the plan.** The clustering mechanism has been
+the project's explanation for why the length curriculum works since J1c, and it
+has been an ARGUMENT the whole time - stated in `AGENTS.md`, never measured.
+This measures it, on the uninformed state that matters, and it holds. It is
+still a statement about the TASK STREAM against a random library, not about any
+learner's trajectory, and it licenses nothing about whether anchors suffice
+WITHOUT ordering - which is the question N1 exists to answer.

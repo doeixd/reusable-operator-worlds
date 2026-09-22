@@ -1,0 +1,119 @@
+{
+ "id": "n1-anchor-difficulty-gate-v1",
+ "statistic": "adjusted Rand index between teacher primitive labels and support-argmin slot labels, on an UNTRAINED library",
+ "why_ari": "chance-corrected and scale-free, so depth 1 (12 routes) and depth 3 (1,728 routes) are the same quantity",
+ "rule": "the premise holds when depth-1 ARI exceeds mean depth-3 ARI in EVERY world; otherwise N1 is unscoreable rather than negative",
+ "worlds": [
+  {
+   "world": 0,
+   "library_sha256": "2794e0a7aefacf5e399f210eaedb9b71dbef45ad4a7c51f310812be7eccef837",
+   "same_teacher_library": true,
+   "depth1": {
+    "tasks": 60,
+    "routes": 12,
+    "ari": 0.7677495025881483,
+    "nmi": 0.8694315127795436,
+    "distinct_slots_used": 8
+   },
+   "depth3": {
+    "tasks": 64,
+    "routes": 1728,
+    "per_position": [
+     {
+      "position": 0,
+      "ari": 0.0007146467727597503,
+      "nmi": 0.2575157893185972
+     },
+     {
+      "position": 1,
+      "ari": -0.0203238694485727,
+      "nmi": 0.21457664584369038
+     },
+     {
+      "position": 2,
+      "ari": 0.03619381730395392,
+      "nmi": 0.300890500268117
+     }
+    ],
+    "mean_ari": 0.005528198209380324,
+    "distinct_routes_used": 63
+   },
+   "depth1_more_clustered": true
+  },
+  {
+   "world": 1,
+   "library_sha256": "2794e0a7aefacf5e399f210eaedb9b71dbef45ad4a7c51f310812be7eccef837",
+   "same_teacher_library": true,
+   "depth1": {
+    "tasks": 60,
+    "routes": 12,
+    "ari": 0.5849791305524512,
+    "nmi": 0.7845780703188988,
+    "distinct_slots_used": 9
+   },
+   "depth3": {
+    "tasks": 64,
+    "routes": 1728,
+    "per_position": [
+     {
+      "position": 0,
+      "ari": 0.019464490964933762,
+      "nmi": 0.2750027135085245
+     },
+     {
+      "position": 1,
+      "ari": 0.02823529411764706,
+      "nmi": 0.3039956452779935
+     },
+     {
+      "position": 2,
+      "ari": 0.02436177972283005,
+      "nmi": 0.2777103716971423
+     }
+    ],
+    "mean_ari": 0.024020521601803624,
+    "distinct_routes_used": 63
+   },
+   "depth1_more_clustered": true
+  },
+  {
+   "world": 2,
+   "library_sha256": "2794e0a7aefacf5e399f210eaedb9b71dbef45ad4a7c51f310812be7eccef837",
+   "same_teacher_library": true,
+   "depth1": {
+    "tasks": 60,
+    "routes": 12,
+    "ari": 0.4594768352955358,
+    "nmi": 0.6774834320422723,
+    "distinct_slots_used": 10
+   },
+   "depth3": {
+    "tasks": 64,
+    "routes": 1728,
+    "per_position": [
+     {
+      "position": 0,
+      "ari": 0.04344804822542258,
+      "nmi": 0.2968301303755452
+     },
+     {
+      "position": 1,
+      "ari": 0.033069798154658867,
+      "nmi": 0.3006022230047766
+     },
+     {
+      "position": 2,
+      "ari": -0.011616363921350068,
+      "nmi": 0.22891842934567158
+     }
+    ],
+    "mean_ari": 0.02163382748624379,
+    "distinct_routes_used": 62
+   },
+   "depth1_more_clustered": true
+  }
+ ],
+ "passes": true,
+ "verdict": "PREMISE_HOLDS",
+ "interpretation": "non-vacuity gate for N1 only; no verdict about anchors"
+}

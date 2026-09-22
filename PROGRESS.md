@@ -6990,3 +6990,52 @@ such as updates-to-threshold on length-1 against length-3 tasks.
 
 NEXT: answer Audit 2, then the plan is ready to freeze and hash. Nothing is
 running.
+
+# 2026-09-22 N1 Amendment 2: the clustering mechanism, measured at last
+
+Answers Audit 2, the last blocker on N1. Module
+`row.experiments.n1_anchor_difficulty_gate`, report
+`reports/n1_anchor_difficulty_gate.json`, `tests/test_n1_anchor_difficulty_gate.py`
+(6 tests). Read-only: an untrained library and the existing task streams. No
+training, no lifetime, no world generated.
+
+**The old check was not comparable.** It compared "median single-step route
+margin" on length-1 against length-3 tasks. Length 1 chooses among 12 routes,
+length 3 among 1,728, and "single-step" is undefined at depth 3.
+
+**The replacement measures the premise directly**, with a chance-corrected
+statistic: the adjusted Rand index between teacher primitive labels and
+support-argmin slot labels, on an UNTRAINED library - the uninformed state at
+which J1's first commitment is actually made. ARI is scale-free, so depth 1 and
+depth 3 are the same quantity despite the 144x difference in route-space size. A
+raw agreement rate would have compared 1/12 against 1/1728 and manufactured the
+result; a test asserts exactly that, checking ARI stays near zero for random
+assignment at BOTH depths.
+
+**Measured, worlds 0-2, verdict `PREMISE_HOLDS` 3/3:**
+
+| world | depth-1 ARI | depth-3 mean ARI | slots used at depth 1 |
+|---|---|---|---|
+| 0 | +0.7677 | +0.0055 | 8 of 12 |
+| 1 | +0.5850 | +0.0240 | 9 of 12 |
+| 2 | +0.4595 | +0.0216 | 10 of 12 |
+
+Depth-3 routing on a random library is at CHANCE. Depth-1 routing is strongly
+clustered. Teacher libraries are verified identical across the two stages, so
+this is one world measured at two depths.
+
+**Beyond unblocking N1.** The clustering mechanism has been the project's
+explanation for why the length curriculum works since J1c ran, recorded in
+`AGENTS.md`, and it had never been measured - only argued. It is now measured,
+on the state that matters, and it holds. It remains a statement about the TASK
+STREAM against a random library, not about any learner trajectory, and it
+licenses nothing about whether anchors suffice WITHOUT ordering, which is
+exactly what N1 exists to answer.
+
+**N1 status: freeze-ready.** Both audits answered - Amendment 1 fixed the arms
+and re-derived the samplers with a sweep, Amendment 2 replaced and measured the
+non-vacuity gate. What remains before launch is the ordinary pre-launch set:
+hash the frozen plan in `check_prereg`, commit runner and independent scorer
+together, performance pass, structural dry run, restart test.
+
+NEXT: size the 12 cells with a performance pass, then freeze. Nothing is running.

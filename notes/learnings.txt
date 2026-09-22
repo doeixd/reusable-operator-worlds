@@ -5225,3 +5225,16 @@ example-gradients are different invariants; pick one, apply it to every arm, and
 re-derive any borrowed sampler or non-vacuity referent. Also ruled: worlds 0-2
 may be reused by the OFFLINE N1/N2 as development-only evidence, never
 upgradable; decision 5 stays open for online rungs.
+
+2026-09-22 N1 Amendment 2, anchor-difficulty gate. Replaced a non-comparable
+route-margin check (12 routes vs 1,728, "single-step" undefined at depth 3) with
+the adjusted Rand index between teacher primitive labels and support-argmin slot
+labels on an UNTRAINED library. ARI is chance-corrected and scale-free, so the
+two depths are the same quantity; a raw agreement rate would have scored 1/12
+against 1/1728 and manufactured the answer. Measured worlds 0-2: depth-1 ARI
++0.7677/+0.5850/+0.4595 against depth-3 mean +0.0055/+0.0240/+0.0216.
+PREMISE_HOLDS 3/3 - depth-3 routing is at chance on a random library, depth-1 is
+not. This is the first measurement of the clustering mechanism that has
+explained J1c since it ran; it had only ever been argued. General rule: when a
+statistic must span structures of different size, choose a chance-corrected one
+rather than normalising a raw one afterwards.

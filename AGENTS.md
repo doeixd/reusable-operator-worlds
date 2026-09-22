@@ -2047,3 +2047,18 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   non-vacuity referent that was borrowed from a differently-constructed arm. Same
   family as E5's `S` arm: the defect is in how the construction is BUILT, so
   checking the statistic over it can never find it.
+
+- THE CLUSTERING MECHANISM IS REAL, AND IS NOW MEASURED RATHER THAN ARGUED
+  (N1 Amendment 2, 2026-09-22). Since J1c the project has explained the length
+  curriculum by saying that at length 1 tasks sharing an operation look alike, so
+  routing is clustering rather than search. That was an argument for as long as
+  it stood. Measured on an UNTRAINED library - the uninformed state where J1's
+  first commitment is made - the adjusted Rand index between teacher primitive
+  labels and support-argmin slot labels is +0.7677 / +0.5850 / +0.4595 at depth 1
+  against +0.0055 / +0.0240 / +0.0216 at depth 3, across worlds 0-2. Depth-3
+  routing on a random library is at CHANCE; depth-1 routing is not. Use ARI and
+  not a raw agreement rate whenever two depths are compared: agreement at chance
+  is 1/12 against 1/1728, which would manufacture the result from the route-space
+  sizes alone. This is the general repair for the route-margin comparability
+  failure - when a statistic must span two structures of different size, pick a
+  CHANCE-CORRECTED one rather than trying to normalise a raw one afterwards.

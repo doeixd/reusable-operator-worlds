@@ -152,8 +152,17 @@ sections with MEASURED numbers.
   at 0.20-0.25, 0.3125 at 0.30-0.35). Registered guard: if measured `SHAM` falls
   under 0.45 in a world, `PARTIAL` is UNINTERPRETABLE there, never
   `INSUFFICIENT` - a ratio test whose denominator collapses gives a false
-  negative, not a negative. Audit 2 remains OPEN: the anchor-difficulty check
-  still needs a depth-comparable statistic, such as updates-to-threshold.
+  negative, not a negative. **AUDIT 2 IS NOW ANSWERED AND MEASURED (Amendment 2):**
+  the route-margin form is replaced by the adjusted Rand index between teacher
+  primitive labels and support-argmin slot labels on an UNTRAINED library - a
+  chance-corrected, scale-free statistic, so depth 1 (12 routes) and depth 3
+  (1,728) are the same quantity. Verdict `PREMISE_HOLDS` 3/3: depth-1 ARI
+  +0.7677 / +0.5850 / +0.4595 against depth-3 mean ARI +0.0055 / +0.0240 /
+  +0.0216, i.e. depth-3 routing is at CHANCE on a random library while depth-1
+  clusters strongly. This also supplies the first MEASUREMENT of the clustering
+  mechanism that has explained J1c since it was run and had only ever been
+  argued. `reports/n1_anchor_difficulty_gate.json`, 6 tests.
+  **N1 is now freeze-ready pending PI approval**, with both audits answered.
 - **N2, `N2_FORMATION_IDENTIFIABILITY_PLAN.md` — is identifiability graded ALONG
   FORMATION?** SG6 died because the twelve held libraries are bimodal: good or
   broken, nothing between, effective n = 2. A formation run passes through the
