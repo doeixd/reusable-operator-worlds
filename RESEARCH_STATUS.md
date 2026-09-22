@@ -98,6 +98,54 @@ decisions (6 and 7), not measurements.
   Recorded in AGENTS.md: the opportunity gate is what decides whether a plan
   gets written, not a step inside one.
 
+# Two new plans drafted (2026-09-22): N1 and N2
+
+Both are DRAFTS needing PI approval, both are offline, and both need the same
+world-budget ruling (see below). They are the first plans written under
+`DESIGN_ADEQUACY.md` and carry `# Necessity` and `# Discriminating power`
+sections with MEASURED numbers.
+
+- **N1, `N1_ANCHOR_SUPPLY_PLAN.md` — is it the ORDER, or the supply of anchors?**
+  J1c confounds a monotone short-to-long ORDERING with the mere PRESENCE of
+  length-1 tasks on which routing is clustering rather than search. Four arms at
+  matched task count and budget: `STAGED` (the curriculum, and a bitwise anchor
+  against the committed J1c cell), `INTERLEAVED` (same anchors, random positions,
+  no ordering, length never revealed), `SHAM` (matched anchor count and
+  positions, filled with length-3 tasks), `NONE` (the matched non-staged floor).
+  **If anchors suffice without ordering the online problem changes shape:** a
+  curriculum needs program length, which an online learner does not have, while
+  an anchor supply needs only that easy tasks be present. It is also a different
+  fix to the deadlock blocking C1 - inject, do not defer.
+  Gates, measured: refusal cost is 150-200x (0.0047-0.0072 against 0.92-0.97,
+  published); the registered triage has false-fire **0.0000** and detection
+  **1.0000** against the null and full-effect samplers built from those
+  published values, and the three outcomes partition 0..3 worlds.
+  **`check_adequacy` now covers this plan.** STATUS: freeze-ready pending the
+  world ruling.
+- **N2, `N2_FORMATION_IDENTIFIABILITY_PLAN.md` — is identifiability graded ALONG
+  FORMATION?** SG6 died because the twelve held libraries are bimodal: good or
+  broken, nothing between, effective n = 2. A formation run passes through the
+  whole range BY CONSTRUCTION, so the trajectory is the graded axis SG6 lacked,
+  and it would make SG0's "inference is hard only on immature libraries" reading
+  testable with the instrument SG0 already validated. Preflight verified two
+  things: the per-stage checkpoints EXIST (`stage1/2/3` under every staged J1c
+  cell, up to 18 trajectory points), and the naive load FAILS - stage-1 and
+  stage-2 models carry their own task codes and the strict loader rightly
+  refuses them. Step 0 is therefore a LIBRARY-ONLY loader with an argued partial
+  reconstruction, and a kill condition if it cannot reproduce stage 3 bitwise.
+  STATUS: **not freeze-ready and deliberately NOT in `check_adequacy`'s scope** -
+  its sampler rates are not yet measured and the plan says so. Registered in
+  advance: a BIMODAL result at three coarse points escalates to finer
+  checkpointing rather than closing the question, so a sampling artifact cannot
+  be read as a substantive negative.
+
+**World budget, and the ruling both need.** Worlds 0-9 are recorded as SPENT for
+the ONLINE staged protocol. N1 and N2 are OFFLINE and ask different questions on
+the same worlds J1c itself used. "Spent for protocol X" and "spent for all
+purposes" are not the same thing, and getting it wrong contaminates a band, so
+the PI rules before either is frozen. If 0-2 are unavailable, both are blocked
+on decision 5.
+
 # Candidate rungs from review 85 (2026-09-22, external suggestions)
 
 Assessment in `reviews/reviewer-feedback-85.txt`. An external reviewer working

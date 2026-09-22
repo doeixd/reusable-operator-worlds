@@ -6809,3 +6809,55 @@ Repository state verified while writing: 481 tests pass; `check_prereg`,
 `check_invalid` and `check_adequacy` pass; tree clean; nothing running.
 
 NEXT: unchanged - PI decisions 5, 6 and 7.
+
+# 2026-09-22 N1 and N2 drafted; the adequacy checker caught a bug in itself
+
+`N1_ANCHOR_SUPPLY_PLAN.md`, `N2_FORMATION_IDENTIFIABILITY_PLAN.md`. Both DRAFT,
+both offline, both needing a world-budget ruling. No experiment run.
+
+**N1** separates two things J1c confounded: the monotone short-to-long ORDERING,
+and the mere SUPPLY of length-1 anchors on which routing is clustering rather
+than search. The mechanism recorded in AGENTS.md names the second; the
+experiment only ever tested the first. If anchors suffice without ordering, the
+online problem changes shape - a curriculum needs program length, an anchor
+supply needs only that easy tasks be present - and it is a different fix to the
+deadlock blocking review 85's C1.
+
+**N2** rescues SG6's question by changing the axis. SG6 failed because the held
+libraries are bimodal; a formation TRAJECTORY spans the range by construction.
+Its preflight was run and returned two facts: the per-stage checkpoints exist
+(stage1/2/3 under every staged J1c cell), and the naive load FAILS because
+stage-1 and stage-2 models carry their own task codes and the strict loader
+rightly refuses them. Step 0 is a library-only loader with an argued partial
+reconstruction - admissible only because identifiability on held-out programs
+never reads a task code - and a bitwise kill condition against stage 3.
+
+**Gate numbers were measured, not asserted, and the measurement changed N1.**
+The first decision rule was "INTERLEAVED's terminal median clears 0.05 in >= 2
+of 3 worlds". Against samplers built from published J1c values it scored
+false-fire 0.0000 and detection 1.0000 - and detection **0.0000** against a
+half-effect at 0.05-0.09. A 0.05 cliff cannot see a partial effect, so a
+real-but-insufficient anchor effect would have been reported as a flat negative.
+The rule is now a three-way triage (SUFFICE / PARTIAL / INSUFFICIENT) which
+classifies null, full and half regimes at 2000/2000 each. That is the
+discrimination gate doing useful work on a plan written under it.
+
+**The checker found a bug in itself.** Activating `IN_SCOPE` made
+`check_adequacy.py` report 15 problems against two plans that satisfy the rule.
+Cause: `section_of` used `text.find(heading)`, which matched the heading NAME
+mentioned in prose - both plans say "carries `# Necessity` and
+`# Discriminating power` sections" in their preamble - and returned the few
+preamble lines before the first real heading. Same class as the
+`check_invalid.py` missing-`re.MULTILINE` defect that printed a clean pass over
+a manifest of six. Fixed to a line-anchored regex, with a test that asserts a
+backticked mention in prose is not the section.
+
+Two further corrections while wiring it up. `IN_SCOPE` now means FROZEN OR
+FREEZE-READY rather than merely existing: N2 says its own rates are unmeasured,
+the checker correctly refuses it, and admitting it would create pressure to
+weaken the checker rather than finish the plan. And an observational plan with
+no behaviour to elicit may declare the necessity gate NOT APPLICABLE through an
+explicit sentinel that must carry a reason, so N/A cannot be reached by
+omission; both branches are tested.
+
+NEXT: PI rulings - the world budget for N1/N2, and decisions 5, 6 and 7.

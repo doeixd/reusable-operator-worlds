@@ -26,11 +26,20 @@ from pathlib import Path
 
 SECTIONS = ('# Necessity', '# Discriminating power')
 
-#: Plans written under the protocol. New plans are added here at freeze time.
+#: Plans that are FROZEN OR FREEZE-READY under the protocol. A draft that still
+#: says its own rates are unmeasured does not belong here; the checker would
+#: correctly refuse it, and adding it would create pressure to weaken the
+#: checker rather than finish the plan.
 #: `DESIGN_ADEQUACY.md` is deliberately NOT here: it is the protocol, not a plan,
 #: and special-casing it to pass would leave a checker that can never fail - the
 #: `check_invalid.py` defect that printed a clean pass over a manifest of six.
-IN_SCOPE = ()
+IN_SCOPE = (
+    'N1_ANCHOR_SUPPLY_PLAN.md',
+)
+
+#: Explicit sentinel for a plan with no behaviour to elicit (an observational
+#: census). Must be accompanied by a stated reason; see `check`.
+NOT_APPLICABLE = re.compile(r'necessity gate does not apply', re.I)
 
 #: Each numbered item a section must address, and a pattern that evidences it.
 REQUIRED = {
@@ -51,11 +60,20 @@ REQUIRED = {
 
 
 def section_of(text, heading):
-    """A plan's named section, up to the next top-level heading, or None."""
-    start = text.find(heading)
-    if start < 0:
+    """A plan's named section, up to the next top-level heading, or None.
+
+    The heading must be matched AT THE START OF A LINE. A plain `find` also
+    matches the heading's name mentioned in prose - both plans in IN_SCOPE say
+    "carries `# Necessity` and `# Discriminating power` sections" in their
+    preamble - and then returns the few lines before the first real heading,
+    which contain none of the required items. That defect made the checker
+    report 15 problems against two plans that satisfy it, and is exactly the
+    class of bug the `check_invalid.py` missing-`re.MULTILINE` failure was.
+    """
+    match = re.search(r'^%s\s*$' % re.escape(heading), text, re.MULTILINE)
+    if match is None:
         return None
-    rest = text[start + len(heading):]
+    rest = text[match.end():]
     end = re.search(r'^# ', rest, re.MULTILINE)
     return rest[:end.start()] if end else rest
 
@@ -75,6 +93,14 @@ def check(paths=IN_SCOPE):
                 continue
             if not body.strip():
                 problems.append(f'{name}: "{heading}" section is empty')
+                continue
+            if heading == '# Necessity' and NOT_APPLICABLE.search(body):
+                # An observational census over frozen artifacts trains nothing
+                # and has no behaviour to elicit, so the gate genuinely does not
+                # apply. The sentinel must be explicit and must carry a reason,
+                # so that "N/A" cannot be reached by omission.
+                if not re.search(r'because|since|no learner|frozen artifacts', body, re.I):
+                    problems.append(f'{name}: "{heading}" claims NOT APPLICABLE without a reason')
                 continue
             for label, pattern in REQUIRED[heading]:
                 if not pattern.search(body):

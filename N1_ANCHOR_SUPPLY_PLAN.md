@@ -1,0 +1,187 @@
+# N1: is it the ORDER, or the supply of anchors?
+
+Status: DRAFT, 2026-09-22. Not frozen. Offline, development worlds 0–2, Tier 1.
+Requires PI approval, including a ruling on reusing worlds 0–9 for a question
+that is not the online staged protocol (see "World budget" below).
+
+First plan written under `DESIGN_ADEQUACY.md`, so it carries `# Necessity` and
+`# Discriminating power` sections with measured numbers rather than assertions,
+and adds itself to `IN_SCOPE` in `tools/check_adequacy.py` at freeze time.
+
+# The question
+
+J1c stages tasks by program length (60 length-1, 64 length-2, then the canonical
+length-3 world) and takes the rotated substrate from 0.92–0.97 to 0.0047–0.0072
+in 3/3 worlds at two initializations. That intervention confounds two things
+that have never been separated:
+
+- **ORDER** — the monotone progression short → long, so that every commitment is
+  made on a library shaped by strictly simpler tasks;
+- **ANCHOR SUPPLY** — the mere PRESENCE of length-1 tasks, on which routing is
+  clustering rather than search, because tasks sharing an operation look alike.
+
+The mechanism recorded in `AGENTS.md` names the second ("the first commitment
+must be made where it is INFORMED: at length 1 tasks sharing an operation look
+alike, so routing is clustering") but the experiment only ever tested the first.
+
+**Why the answer matters beyond bookkeeping.** If anchors suffice without
+ordering, the online problem changes shape. A curriculum needs program length,
+which an online learner does not have; an anchor SUPPLY needs only that easy
+tasks be present, which is implementable online. It is also a different fix to
+the deadlock that blocks review 85's confidence-gated proposal (C1): a gate on a
+random library defers everything, whereas anchors give the library something it
+can commit to informedly from the first round. **Inject, do not defer.**
+
+# Arms, described as constructions
+
+All arms share the world, the task contents, the budget in example-gradients,
+the replay policy, and the learner seed. Only the composition and presentation
+of the task stream differ. Total task count and total budget are matched
+exactly; anchors REPLACE length-3 tasks rather than being added, so no arm sees
+more data than another.
+
+| arm | construction |
+|---|---|
+| `STAGED` | the J1c curriculum verbatim: all anchors first, in length order, library carried across stages. The reference, and a bitwise-reproduction check against the committed J1c cell. |
+| `INTERLEAVED` | the same anchor tasks, drawn uniformly at random positions throughout a single undifferentiated stream. No stages, no ordering, no length revealed. |
+| `SHAM` | matched anchor COUNT and matched positions, but the anchor slots are filled with length-3 tasks drawn from the same pool. Same task count, same budget, same stream positions; the only difference is whether the anchor is easy. |
+| `NONE` | the matched non-staged control from J1c-R: length-3 only, same total budget. |
+
+`SHAM` is the arm that makes this a test of ANCHORS rather than of stream
+statistics: it perturbs the stream identically and supplies no easy tasks.
+`STAGED` is the ceiling and `NONE` the floor, both with published values.
+
+Every arm is described with `row.arm_provenance.describe_arm` and checked with
+`assert_arm`, per the E5 lesson that an arm is a construction and not a name.
+
+# Necessity
+
+**Target behaviour.** Informed early commitment: the learner forms a library and
+its own routes together, rather than fitting whatever arbitrary assignment its
+first uninformed commitment produced (J1's failure, 0% route change after round
+3–5).
+
+**The arm that refuses it.** `NONE` — length-3 only at matched budget. It is a
+genuine refusal rather than a weakened version: no task in it admits clustering-
+style routing, because every task is a three-step composition.
+
+**Measured refusal cost, and its scale.** Published J1c/J1c-R values: refusing
+costs the difference between 0.0047–0.0072 and 0.92–0.97 terminal median NMSE, a
+factor of roughly 150–200×, against a 0.05 usability threshold that the refusing
+arm misses by more than an order of magnitude. The scale is the threshold the
+claim is about, not total output variance (the V4.1 error). This is among the
+largest refusal costs in the project and is measured, not projected.
+
+**Impostors scored.** The cheapest simpler construct that could produce the same
+result is a stream perturbation with no easy tasks — that is `SHAM`, and it is
+an arm rather than an afterthought. The second impostor is "more compute": ruled
+out by matched budget, and already ruled out once by J1c's library-reset control
+landing at ~1.0 on the same compute.
+
+**Difficulty band, and its direction.** Terminal median NMSE, higher-is-harder.
+Band `(0.0005, 0.50)`. Below 0.0005 the substrate would be solved without
+anchors and the comparison elicits nothing; above 0.50 every arm including the
+ceiling is degraded and a null is UNINTERPRETABLE rather than evidence. The
+published arms sit at 0.0047–0.0072 (ceiling) and 0.92–0.97 (floor), so the
+FLOOR is deliberately outside the band on the hard side — which is correct and
+expected for a floor, and is why the band is registered on the ARM UNDER TEST
+(`INTERLEAVED`) and on `STAGED`, not on `NONE`.
+
+**Incumbent scaling exponent.** Not applicable: there is no search incumbent
+here. The comparison is between task-stream constructions at matched budget.
+
+# Discriminating power
+
+**The decision rule, as it will be applied.** Let `m` be `INTERLEAVED`'s terminal
+median NMSE per world across worlds 0–2, and `s` the same for `SHAM`.
+
+- `ANCHORS_SUFFICE` — `m < 0.05` in at least **2 of 3** worlds;
+- `ANCHORS_PARTIAL` — not that, but median(`s`) / median(`m`) ≥ **5.0**;
+- `ANCHORS_INSUFFICIENT` — otherwise.
+
+Denominator: 3 worlds. The three outcomes partition every case; verified with
+`design_adequacy.partitions_outcomes` over `(0, 3)`.
+
+**Null and effect samplers.** Both are built from PUBLISHED values, not from
+intuition about noise. Null: anchors do nothing, so `INTERLEAVED` behaves like
+the matched non-staged control, `U(0.92, 0.97)` per world (J1c-R measured
+0.92–0.97). Full effect: anchors reproduce staged formation, `U(0.0047, 0.0072)`
+(J1c measured 0.0047–0.0072). Half effect: anchors help but do not reach
+usability, `U(0.05, 0.09)`. `SHAM` is drawn at the null in every case. 2,000
+draws each, seed 11.
+
+**Measured rates.** With the two-way rule the plan originally carried:
+
+| rule | false-fire (null) | detection (full) | detection (half) |
+|---|---|---|---|
+| `m < 0.05` in ≥2/3 only | 0.0000 | 1.0000 | **0.0000** |
+
+That is the check doing its job on this plan: a 0.05 cliff cannot see a partial
+effect at all, so a real-but-insufficient anchor effect would have been reported
+as a flat negative. The three-way triage was added because of it:
+
+| rule | false-fire (null) | detection (full) | detection (half) |
+|---|---|---|---|
+| `SUFFICE` | 0.0000 | 1.0000 | 0.0000 |
+| `PARTIAL` or better | 0.0000 | 1.0000 | **1.0000** |
+
+Classification by regime: null → `INSUFFICIENT` 2000/2000; full → `SUFFICE`
+2000/2000; half → `PARTIAL` 2000/2000. Both bounds are met with room
+(`false-fire ≤ 0.05`, `detection ≥ 0.80`).
+
+**Graded axis.** Not applicable: the independent variable is a four-level
+construction, not a continuous quantity to be correlated. No pooled correlation
+is computed anywhere in this plan, so the SG6 failure mode cannot arise.
+
+**What the checks do not cover here.** Three things, named because a check that
+claims too much is the error it exists to prevent. (1) Whether `SHAM`'s stream
+perturbation is genuinely matched — the replay buffer's storage and sampling
+share one RNG, so changing what is stored reshuffles the replay stream, and the
+arms must be verified to draw identical replay sequences or the difference is a
+stream confound rather than an anchor effect. This is a MANDATORY pre-launch
+check, not a registered estimand. (2) Whether `STAGED` reproduces its committed
+J1c value; if it does not, the harness has drifted and nothing else is readable.
+(3) Whether three worlds is enough to call a 2-of-3 result anything but
+development evidence — it is not, and this rung produces no verdict.
+
+# Non-vacuity checks that can fail
+
+- `STAGED` must reproduce the committed J1c terminal medians for worlds 0–2
+  within the published range; otherwise the run is void.
+- `NONE` must fail, at 0.92–0.97. A floor that suddenly passes means the
+  substrate or budget changed.
+- `SHAM` must differ from `INTERLEAVED` in anchor CONTENT only: identical task
+  count, identical stream positions, identical replay draws, verified before
+  launch.
+- Anchor tasks must actually be easier: median single-step route margin on
+  length-1 tasks must exceed that on length-3 tasks in every world, or the
+  premise of the manipulation is false and the rung is unscoreable rather than
+  negative.
+
+# World budget, and the ruling this plan needs
+
+Development worlds 0–9 are recorded as SPENT for the ONLINE staged protocol
+(SO2/SO3/SO4). This rung is OFFLINE and asks a different question, and worlds
+0–2 are the same worlds J1c itself used, so reusing them is reusing a
+development band for a development question. **But "spent for protocol X" and
+"spent for all purposes" are not the same thing, and getting that wrong
+contaminates a band.** The PI rules before this plan is frozen. If the ruling is
+that 0–2 are unavailable, the rung needs a new band and is blocked on decision 5.
+
+# Acceptance
+
+Frozen plan hashed in `tools/check_prereg.py`; committed independent scorer
+recomputing the triage from per-cell records; protocol fingerprint over plan,
+config, seeds, stream construction and launch commit; restart reuses completed
+cells bitwise, tested by interrupting the dry run; `check_prereg`,
+`check_invalid` and `check_adequacy` pass; operational records archived to
+`reports/` and committed with the result. Structural dry run (a few updates, two
+tasks per arm) proves every path executes and the `STAGED` bitwise anchor holds
+before any full cell runs.
+
+# Cost
+
+Four arms × 3 worlds = 12 lifetimes at the J1c stage-3 budget. J1c's own cells
+are the reference for sizing. Memory-bounded pool at 3–4 concurrent for
+`slots=12`, longest cells first. Performance pass before launch, timing a few
+real updates rather than guessing.

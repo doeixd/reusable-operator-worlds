@@ -105,17 +105,46 @@ class TestCheck(unittest.TestCase):
         problems = ca.check(['NO_SUCH_PLAN.md'])
         self.assertTrue(any('missing from the repository' in p for p in problems))
 
-    def test_inactive_scope_does_not_report_a_pass(self):
-        """An empty scope must not print a reassuring OK."""
-        self.assertEqual(ca.IN_SCOPE, (), 'add plans to IN_SCOPE, and update this test')
+    def test_every_plan_in_scope_carries_both_sections(self):
+        """The real scope, checked against the real files."""
+        self.assertTrue(ca.IN_SCOPE, 'scope is empty; restore the INACTIVE test')
+        self.assertEqual(ca.check(ca.IN_SCOPE), [])
+
+    def test_heading_must_be_at_the_start_of_a_line(self):
+        """A backticked mention in prose is not the section.
+
+        Both plans say "carries `# Necessity` and `# Discriminating power`
+        sections" in their preamble. A plain `find` matched that, returned the
+        preamble, and reported 15 problems against plans that satisfy the rule.
+        """
+        text = 'Preamble mentioning `# Necessity` in prose.\n\n# Real\n\nbody\n'
+        self.assertIsNone(ca.section_of(text, '# Necessity'))
+
+    def test_observational_plan_may_declare_necessity_not_applicable(self):
+        text = COMPLETE.replace(
+            'The target behaviour is a promoted ITERATE.',
+            'The necessity gate does not apply because this is an observational '
+            'census over frozen artifacts and no learner is trained.')
+        self.assertEqual(ca.check([written(text)]), [])
+
+    def test_not_applicable_without_a_reason_is_refused(self):
+        start = COMPLETE.index('# Necessity')
+        end = COMPLETE.index('# Discriminating power')
+        text = (COMPLETE[:start]
+                + '# Necessity\n\nThe necessity gate does not apply.\n\n'
+                + COMPLETE[end:])
+        problems = ca.check([written(text)])
+        self.assertTrue(any('without a reason' in p for p in problems), problems)
+
+    def test_main_reports_a_pass_only_when_scope_is_non_empty(self):
         import io
         import contextlib
         out = io.StringIO()
         with contextlib.redirect_stdout(out):
             code = ca.main()
         self.assertEqual(code, 0)
-        self.assertIn('INACTIVE', out.getvalue())
-        self.assertNotIn('OK', out.getvalue())
+        self.assertIn('OK', out.getvalue())
+        self.assertNotIn('INACTIVE', out.getvalue())
 
 
 if __name__ == '__main__':
