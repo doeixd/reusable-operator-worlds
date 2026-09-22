@@ -6671,3 +6671,36 @@ rather than dressed as a result. Each carries the standing requirement that an
 audit finding nothing must report what it checked, item by item.
 
 NEXT: unchanged - PI decisions 6 and 7. The follow-ups need neither.
+
+# 2026-09-22 README brought current, and one transcription slip corrected
+
+README.md updated to the state of the program: the Track B table now carries
+SO2/SO3/SO4 and the three closed censuses; a new section covers the
+program-inference line (L0d x4, SG0 NO-HEADROOM, the SATURATED sub-triage, SG6
+closed before opening); the three gates are described with the fact that each
+historical defect is a regression fixture the check must FIRE on; and a
+"where the program stands" paragraph states plainly that there is no live
+experimental rung and that everything confirmed so far is ECONOMICS, not a
+computational LANGUAGE. Stale counts fixed (58 frozen plans, 481 tests, 83
+filed reviews) and the sentence claiming the online protocol was unrun is
+replaced by what happened.
+
+Applying the double-check-after-writing rule to the README itself, every
+quoted figure was recomputed from `reports/sg0_full_v2.json` rather than
+copied from a commit message. All verified: 574 of 576 staged programs at
+exactly zero regret, k = 0 of 36, every staged cell floor exactly zero, 500 of
+576 control routes differing, maximum control regret 0.663, 0 of 576 staged
+programs with a near-tie, staged median identifiability 53.9 against the
+controls 0.025.
+
+One slip found and corrected in `RESEARCH_STATUS.md`: the two nonzero staged
+regrets were recorded as 0.0099 and 0.0043; the measured values are 0.00994 and
+0.00469. The second was a transcription error, not a different quantity.
+RESEARCH_STATUS is rewritten in place so it was corrected directly; the same
+figure appears in the 2026-09-22 SG0 verdict entry ABOVE in this append-only
+record and is left as written, with this entry as its correction. No verdict,
+threshold or clause depends on either value: neither cell clears its floor and
+k = 0 under both readings.
+
+NEXT: unchanged - PI decisions 6 and 7.
+

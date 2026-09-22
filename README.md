@@ -14,7 +14,7 @@ hidden from the learner, so every claim can be checked against ground truth.
 **Status: seven sealed blocks closed.** Each was run against a protocol frozen
 and hashed before those worlds existed. Development used seeds 0–9;
 confirmatory bands were never inspected before the corresponding freeze.
-`python tools/check_prereg.py` verifies the trail (45 frozen plans and amendments);
+`python tools/check_prereg.py` verifies the trail (58 frozen plans and amendments);
 `python tools/check_invalid.py` verifies that no withdrawn artifact path has
 been resurrected.
 
@@ -47,6 +47,59 @@ confirmatory result.
 | **J1c** | Does a length curriculum let library and routes co-form? | **`J1C_ACQUIRES`**, all six registered predictions correct. Staging tasks by program length (1 -> 2 -> 3), carrying only the library and never revealing a route, reaches 0.0062 / 0.0051 / 0.0072 where the same learner on length-3 alone at the same budget reaches 0.92-0.96; a library-reset control lands at ~1.0. 5-6 of 6 stage-1 operation-slot pairings survive. The world that fails even with oracle routes (0.624) passes at 0.0062. |
 | **J1c-R** | Does staged formation survive a different initialization? | `REPLICATES`. At learner seed 3001: 0.0047 / 0.0060 / 0.0049 (61-63 of 64 tasks), within a factor of 1.2 of the first seed, while the matched non-staged control reaches 0.92-0.97 with no task below threshold. |
 | **J2A** | Is the curriculum-formed library a vocabulary or just a good fit? | `EXPORTS`. All six staged libraries execute 64/64 UNSEEN length-3 programs under support-only search, at 0.95-1.12x their trained-task loss; both failure controls manage 0/64. Gradient routing matches exhaustive search exactly on every audited library. |
+| **SO2 / SO3 / SO4** | Does staged formation work ONLINE? | `FAILS` in all three, at three seeds. The protocol acquires the substrate in *some* worlds at every seed tried — 6 of 10 development worlds — and within one world the replay stream alone moves terminal error by up to an order of magnitude. Development worlds 0–9 are now spent for this protocol. |
+| **Three Tier 0 censuses** | Why is it world- and stream-dependent? | **Mechanism hunt CLOSED, all three candidates withdrawn.** Slot duplication is flat; prefix error picks the failing stream worse than chance per world; `route_margin` looked strong pooled (rho −0.514) and went null once made comparable across worlds (+0.143, permutation 0.264) — the same failure as the pooled correlations below. The defensible position is that online staged formation is world- and stream-dependent with **no identified mechanism**. |
+
+**The program-inference line (2026-09, development worlds 0–2, not sealed).**
+Having a usable frozen vocabulary, the next question was whether a learner
+could be taught to *find* programs in it better than search can.
+
+| Rung | Question | Status |
+| --- | --- | --- |
+| **L0d ×4** | Is route inference ever ambiguous on a usable vocabulary? | Four consecutive negatives: support 128/32/8, support 4/2/1, depth four, depth five (248,832 routes in 243 memory-bounded blocks). No intervention changed the selected route. |
+| **SG0** | Is there any HEADROOM for a learned proposer — what does committing to the support-optimal route cost? | **`NO-HEADROOM`, k = 0 of 36 staged cells** against a `k ≤ 2` registered before any data existed. 574/576 staged tasks have *exactly* zero commitment regret; the bootstrap floor is exactly zero in every staged cell (200 resamples never changed the route). Non-vacuity passes decisively: the same code path gives 500/576 control routes differing and regret to 0.663. **In force as registered:** the amortized-proposer branch is CLOSED, PX7 retired as *unmeasurable here* (not refuted), the L0d census WITHDRAWN. |
+| **SG0 sub-triage** | Does that negative license the successor generator? | `NO-HEADROOM-SATURATED`. **0 of 576 staged programs have any route within 1% of their winner**; staged median identifiability 53.9 against the controls' 0.025. The route space is not merely well-evidenced but *functionally separated*, so restricting the support distribution cannot manufacture regret — evidence was never what prevented it. Diagnostic, not preregistered: it decides a program question and is admissible only because the staged answer is invariant to every part of it. |
+| **SG6** | Does inference difficulty TRACK vocabulary quality? | **Closed before opening.** Its own gate refused it: quality is bimodal with nothing between the clusters (gap 30.2× the wider cluster's spread), pooled Spearman −0.692 but within-cluster +0.086 / +0.429 — null and wrong-signed. The pooled number re-detects cluster membership; effective n is 2, not 12. Not refuted — *unmeasurable here*. |
+
+**The reading.** A well-formed vocabulary appears to dissolve the inference
+problem: route identification is trivial when the library is good and hard when
+it is bad. That would make E5's writer failure, E5.1's logarithmic search
+scaling and L0d's four negatives one fact about the generator rather than four
+facts about learners — and it suggests program inference may be a phenomenon of
+*immature* libraries. Working hypothesis, explicitly not established, and now
+known **not** to be testable on held artifacts (SG6).
+
+**Three gates, separated (2026-09-22).** Ten-plus rungs failed for "absence of
+opportunity", and the post-mortem found one name doing three jobs with three
+different fixes. `DESIGN_ADEQUACY.md` now separates them, with executable checks
+in `row.necessity_gate` and `row.design_adequacy`:
+
+| gate | asks | of what | fix |
+| --- | --- | --- | --- |
+| **Necessity** | does the task *require* the behaviour? is it hard enough? | the task, against the cheapest refusal | change the **task** |
+| **Opportunity** | could the effect exist at all? | the generator | change the **generator** |
+| **Discrimination** | could the measurement come out either way? | the instrument and sample | change the **sample** |
+
+Each historical defect is encoded as a regression fixture the check must *fire*
+on — E5.1's first-crossing statistic (42.5% false-fire on pure noise), E6's
+`H* = 1.5` (>50%), SG6's bimodal axis, the route-margin sign reversal, sealed
+C2's non-partitioning triage — and a further test asserts SG0's own triage
+would have **passed**, so the checks are not merely pessimistic. "Hard enough"
+is two-sided: past the easy end nothing is elicited, past the hard end the
+result is *uninterpretable* rather than negative, so plans register a band and
+never a floor. What the checks do **not** catch is written down beside them.
+
+**Where the program stands.** There is currently **no live experimental rung**.
+Everything ROW has confirmed is **economics** — reuse lowers lifetime cost, the
+amortization law is quantitative, coordinates are made during learning, and a
+frozen vocabulary composes in unseen programs. None of it yet demonstrates a
+computational **language**: program writing and primitive invention remain
+untouched, and the ladder's learner rungs are gated on an online-learnability
+condition that SO2/SO3/SO4 can no longer satisfy. Two decisions are open and
+both are judgement calls rather than measurements: whether to bank the
+economics and negative-results papers, and whether to reopen the learner rungs
+under an explicitly offline scope. `RESEARCH_STATUS.md` is the live index;
+`FOLLOWUP_AUDITS.md` holds five queued Tier 0 follow-ups.
 
 **Where Track B stands.** The stronger (rotated) operator language is
 representable, its library is acquirable when routes are supplied, and its
@@ -55,7 +108,8 @@ form library and routes together from scratch at any tested budget. Co-formation
 problem, and a length curriculum solves it (J1c): staged by program length, the learner forms the library and its own routes to 0.005-0.007, where joint
 training at the same budget reaches 0.92-0.96. The mechanism is transfer, not
 compute, and the structure formed early is extended rather than rebuilt. This
-is offline and development-only: the online protocol (SO2) is unrun, and
+is offline and development-only. The ONLINE protocol has since been run three
+times and failed three times (SO2, SO3, SO4), spending development worlds 0–9;
 control flow stays closed until it passes its own frozen plan.
 The original V4 premise — that successful abstraction birth implies a
 maintenance problem — failed in development and is preserved unrevised in
@@ -432,13 +486,24 @@ draft: `paper/draft.md`.
   that went against us.
 - `artifacts/INVALID_MANIFEST.md` + `tools/check_invalid.py` — machine-checkable
   quarantine of withdrawn artifacts.
+- `RESEARCH_STATUS.md` — the live index of every research line and open PI
+  decision, rewritten in place; `PREDICTIONS.md`, `PROGRESS.md` and `reports/`
+  win on any disagreement.
+- `DESIGN_ADEQUACY.md` + `tools/check_adequacy.py` — the three gates every plan
+  must pass, their executable checks, and an explicit list of what they do not
+  catch.
+- `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` + `SG0_SUBTRIAGE_AMENDMENT.md` — the
+  headroom gate and its amendment. The amendment is a separate file because the
+  plan is hashed into the run's protocol: editing it would make the scorer
+  refuse the report it interprets.
+- `FOLLOWUP_AUDITS.md` — five queued Tier 0 follow-ups, specified for handoff.
 - `SPEC_AUDIT.md` — spec-to-implementation audit, re-run after each milestone.
 - `PROGRESS.md` — running lab record. `AGENTS.md` — working conventions and
   accumulated implementation learnings. `CLAUDE.md` — front-door safety summary.
 - `notes/` — research thinking records. `reviews/` — the full reviewer dialogue
-  (84 numbered rounds, 83 filed plus the founding assessment), indexed in `reviews/review-index.md`.
+  (83 filed rounds plus the founding assessment), indexed in `reviews/review-index.md`.
 - `src/row/` — world generators, models, experiments. `tests/` — unittest
-  suite (267 test methods). `reports/` — analysis JSON and figures. `artifacts/` —
+  suite (481 test methods). `reports/` — analysis JSON and figures. `artifacts/` —
   per-run outputs with provenance (untracked; regenerable from committed seeds
   and configs).
 
@@ -486,11 +551,20 @@ Seed partitions:
 Negative and invalid results are first-class. Verdicts are read from a frozen
 table and recorded even when the threshold turns out to have been the wrong
 one — annotated, never re-judged. Corrections are appended rather than
-rewritten, so the ledger shows what was believed when. Two standing rules earned
+rewritten, so the ledger shows what was believed when. Four standing rules earned
 the hard way: every structural claim needs a **matched-budget** and a
-**wrong-structure** control, and experiment code is **double-checked against
-its frozen plan before any long run** — a practice that has caught five
-construct errors that would otherwise have produced plausible numbers.
+**wrong-structure** control; experiment code is **double-checked against its
+frozen plan before any long run** — a practice that has caught five construct
+errors that would otherwise have produced plausible numbers; that double-check
+also fires **immediately after a plan is written**, before approval or freezing,
+because the recurring failure is not ignorance of a rule but writing a document
+that violates one recorded weeks earlier; and every plan must now pass the
+**three gates** above, stating the number that turned each rather than the
+adjective.
+
+A negative is labelled by which gate it failed. "This task did not require the
+behaviour" and "the behaviour does not help" are different claims, and only the
+second is a result. Several rungs on this page are the first kind and say so.
 
 The public history is part of the verifiability claim:
 https://github.com/doeixd/reusable-operator-worlds

@@ -20,7 +20,7 @@ decisions (6 and 7), not measurements.
   `reports/sg0_full_v2.json`; archive `reports/sg0_full_2026-09-22/`; PROGRESS
   and PREDICTIONS 2026-09-22.
 - **574 of 576 staged tasks have EXACTLY zero commitment regret**; the two
-  exceptions are depth-4 tasks at 0.0099 and 0.0043 and neither cell clears its
+  exceptions are depth-4 tasks at 0.00994 and 0.00469 and neither cell clears its
   floor. No staged task has any route within 1% of the winner on support, at
   either depth or any support size. The bootstrap floor is exactly zero in every
   staged cell: 200 resamples never changed the selected route.
