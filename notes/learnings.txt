@@ -5086,3 +5086,32 @@ vocabulary executed 16 deterministic length-four programs. Support-only ENUM
 over 20,736 routes passed NMSE 0.05 on all 16 (median 0.00872), agreeing with
 the diagnostic mapped route. This supports scoped depth-four usability only;
 it is not evidence about beam/posterior/commit-late, depth five, or PX7.
+
+2026-09-17 L0d depth-five memory gate (recorded 2026-09-22): all 248,832 routes
+searched in 243 blocks of 1,024 on one frozen STAGED5000/world-0 library, in
+245.77 s. Largest block terminal 8,388,608 bytes against a 2,038,431,744-byte
+unchunked lower bound; selected support MSE bitwise equal to direct hard
+execution; post-hoc query NMSE 0.01339981 passes 0.05. MEMORY_SAFE_SEARCH is a
+feasibility result for one program on one library, not a depth-five horizon and
+not a PX7 verdict.
+
+2026-09-17 lesson, bounded gates: the depth-five gate's committed tests checked
+only constants (243 blocks, the 1.90 GiB bound), so a per-block advanced-indexing
+bug shipped and the first launch died in chunked_mse with no cell. The plan had
+already named the right test - chunked vs all-route depth-three loss vector with
+identical argmin - and it was only written after the failure. Write the plan's
+equivalence check as a test before launching, even for a gate that costs minutes.
+The fix also replaced exact float equality with the plan's 1e-5 tolerance (block
+reduction order differs) and retired the failed path to _v2 rather than rebuilding
+into it.
+
+2026-09-17 lesson, recorded quantities: the depth-five runner built evaluation
+arrays and never used them, so the plan-required selected-route query NMSE was
+absent from the stamped report and peak RSS was never captured at all. Query NMSE
+was recoverable post hoc only because library, program and route are frozen and
+deterministic, and was archived as a separate read-only addendum rather than
+edited into the report, which would break its fingerprint chain. Diff the plan's
+"record" list against the runner's output dict alongside its estimands. Relatedly,
+when the run path moved to _v2 the scorer's score() defaults moved but its argparse
+defaults did not, so the documented scoring command pointed at the failed run:
+a scorer's CLI defaults, including paths, are part of the protocol.

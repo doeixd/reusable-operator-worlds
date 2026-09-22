@@ -1825,3 +1825,31 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   multiple executables. Select the first match before reading .Source for
   Start-Process -FilePath. Test actual process binding with a harmless command;
   syntax parsing alone missed the L0d launcher failure (2026-09-17).
+
+- A BOUNDED GATE'S TEST SUITE MUST EXERCISE ITS EVALUATOR, NOT ITS ARITHMETIC
+  (L0d depth five, 2026-09-17). The committed tests for the depth-five gate
+  checked only two constants (block count 243 and the 1.90 GiB terminal lower
+  bound), so a per-block advanced-indexing bug shipped and the launch died in
+  `chunked_mse` with a shape mismatch, producing no cell. The fix added the
+  test the plan had already required - the chunked evaluator's complete
+  depth-three route-loss vector against the existing all-route evaluator, with
+  an identical argmin - and that test would have caught it before launch. A gate
+  that is cheap to run is not thereby cheap to get wrong: the equivalence check
+  named in the plan is the test to write first. The same commit also replaced an
+  exact `selected == direct` float equality with the plan's 1e-5 tolerance
+  (block reduction order is not the sequential order) and RETIRED the failed run
+  path to `_v2` instead of rebuilding into it, per the invalid-path rule.
+- RECORD EVERY QUANTITY THE PLAN SAYS TO RECORD, AND CHECK THAT BEFORE LAUNCH.
+  The depth-five runner computed evaluation arrays and never used them, so the
+  plan-required selected-route query NMSE was missing from the stamped report,
+  and peak RSS was never recorded and is unrecoverable. Query NMSE was
+  recoverable post hoc only because the library, program and route are frozen
+  and deterministic; it was recorded as a separate read-only addendum beside the
+  report rather than written into it, since editing a protocol-stamped report
+  breaks its fingerprint chain. Diff the plan's "record" list against the
+  runner's output dict in the same pass that diffs its estimands.
+- A SCORER'S CLI DEFAULTS ARE PART OF THE PROTOCOL, INCLUDING ITS PATHS. When
+  the depth-five run path was retired to `_v2`, `score()`'s defaults moved but
+  the `argparse` defaults did not, so the documented no-argument scoring command
+  pointed at the failed run. Same family as the H35 step-count defect: whenever
+  a run path, budget or argument moves, re-read every entry point that names it.

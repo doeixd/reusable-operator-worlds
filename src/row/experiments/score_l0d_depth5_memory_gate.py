@@ -14,5 +14,5 @@ def score(root=Path('artifacts/l0d_depth5_memory_gate_v2'),output=Path('reports/
     if json.loads((root/'status.json').read_text())['state']!='complete' or json.loads((root/'exit.json').read_text())['exit_code']!=0: raise ValueError('operational failure')
     return {'valid':True,'blocks':r['blocks'],'largest_terminal_bytes':r['largest_terminal_bytes'],'selected_route':r['selected_route'],'selected_support_mse':r['selected_support_mse'],'seconds':r['seconds'],'interpretation':o['summary']['interpretation']}
 def main():
-    a=argparse.ArgumentParser();a.add_argument('--root',type=Path,default=Path('artifacts/l0d_depth5_memory_gate'));a.add_argument('--report',type=Path,default=Path('reports/l0d_depth5_memory_gate.json'));x=a.parse_args();print(json.dumps(score(x.root,x.report),indent=2))
+    a=argparse.ArgumentParser();a.add_argument('--root',type=Path,default=Path('artifacts/l0d_depth5_memory_gate_v2'));a.add_argument('--report',type=Path,default=Path('reports/l0d_depth5_memory_gate_v2.json'));x=a.parse_args();print(json.dumps(score(x.root,x.report),indent=2))
 if __name__=='__main__':main()

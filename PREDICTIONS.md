@@ -8957,3 +8957,30 @@ NMSE at most 0.05, with median 0.00872; the diagnostic mapped routes agreed on
 this cell. This supports usability of the frozen vocabulary at this depth and
 does not establish a learned inference mechanism, a depth-five horizon, or any
 PX7(a-c) result. The full mechanism census remains unfrozen.
+
+# 2026-09-22 - Depth-five memory gate passes; PX7 still untested
+
+The chunked depth-five gate (run 2026-09-17 at `2db0254`, recorded 2026-09-22)
+returns `MEMORY_SAFE_SEARCH`: 248,832 routes searched in 243 blocks, largest
+block terminal 8,388,608 bytes against a 2,038,431,744-byte unchunked lower
+bound, selected support MSE bitwise equal to direct hard execution, and a
+post-hoc query NMSE of 0.01339981 passing 0.05 on the one program tested.
+
+This is a FEASIBILITY result about an evaluator, not a hypothesis test. It
+licenses no statement about PX7(a), PX7(b) or PX7(c), all of which remain
+working hypotheses and untested. In particular it is not evidence for PX7(b)
+("exhaustive or near-exhaustive enumeration stays cheapest wherever feasible"):
+the gate measures only that enumeration FITS IN MEMORY at depth five on one
+library, and compares no alternative mechanism. Nothing here is a depth-five
+execution or search horizon; a horizon needs persistence or a fitted trend
+(review 82), and this is a single cell.
+
+Standing observation across the four L0d gates, recorded as a design constraint
+rather than a verdict: the preflight (support 128/32/8), the sparse-evidence
+gate (support 4/2/1), the depth-four execution gate and now the depth-five
+memory gate have all failed to produce route ambiguity or commitment cost on a
+usable frozen vocabulary. PX7(a) predicts that premature hard commitment's
+excess cost grows with ambiguity and depth; this substrate has not yet yielded
+the ambiguity whose effect PX7(a) is about. Per the opportunity-gate rule
+(review 68), the census cannot be frozen until a pre-specified, MEASURED source
+of ambiguity exists. Repeating evidence-size sweeps on this library is closed.

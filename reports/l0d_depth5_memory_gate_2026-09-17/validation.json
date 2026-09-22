@@ -1,0 +1,15 @@
+{
+  "valid": true,
+  "blocks": 243,
+  "largest_terminal_bytes": 8388608,
+  "selected_route": [
+    0,
+    10,
+    3,
+    9,
+    0
+  ],
+  "selected_support_mse": 0.013233025558292866,
+  "seconds": 245.77014999999665,
+  "interpretation": "depth-five memory gate only; no PX7 verdict"
+}

@@ -1,0 +1,23 @@
+{
+  "source_report_sha256": "794b5f84f21f18d0b9437e6408af2aa0d6f8055acaa1a0d3a17fd410a0939463",
+  "library_sha256": "87530e9799d5b81dbe3e2ed4ec8d426142388006d5dfecb81ef809fbeea5373e",
+  "program": [
+    3,
+    4,
+    5,
+    2,
+    3
+  ],
+  "selected_route": [
+    0,
+    10,
+    3,
+    9,
+    0
+  ],
+  "query_examples": 256,
+  "selected_query_mse": 0.014133596792817116,
+  "selected_query_nmse": 0.013399810660087686,
+  "passes_0_05": true,
+  "note": "post-hoc read-only diagnostic recovering the plan-required query NMSE; not part of the stamped gate record and not a PX7 result"
+}

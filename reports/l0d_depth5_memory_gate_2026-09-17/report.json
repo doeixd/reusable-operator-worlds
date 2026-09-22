@@ -1,0 +1,58 @@
+{
+ "protocol": {
+  "id": "l0d-depth5-memory-gate-v1",
+  "git_commit": "2db0254",
+  "name": "STAGED5000",
+  "world": 0,
+  "model_seed": 5000,
+  "depth": 5,
+  "tasks": 1,
+  "seed": 2705,
+  "block": 1024,
+  "slots": 12,
+  "support": 128,
+  "input_sha256": {
+   "L0D_DEPTH5_MEMORY_GATE_PLAN.md": "eeef71d6b31c877242c5b585d3fa66b53f4e591a59e70c06ce62c9cb2deed2b6",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/j2a_staged_library.json": "9f823a9119047726b541d2be07ddad8c4b84291359e8c9a1e37526ed5870acdd"
+  },
+  "implementation_sha256": "079446a77b16bb62df589ad90a687620e4bc7bbd9d06344e09b9f67f8659ba4d"
+ },
+ "protocol_sha256": "4af3d07d7d43447da6d48596b874c5f84c092457326a3e9381c642aa1adaeb76",
+ "complete": true,
+ "cell": {
+  "name": "STAGED5000",
+  "world": 0,
+  "model_seed": 5000,
+  "depth": 5,
+  "program": [
+   3,
+   4,
+   5,
+   2,
+   3
+  ],
+  "library_sha256": "87530e9799d5b81dbe3e2ed4ec8d426142388006d5dfecb81ef809fbeea5373e",
+  "blocks": 243,
+  "expected_blocks": 243,
+  "selected_route": [
+   0,
+   10,
+   3,
+   9,
+   0
+  ],
+  "selected_support_mse": 0.013233025558292866,
+  "direct_support_mse": 0.013233025558292866,
+  "support_mse_equal": true,
+  "support_mse_abs_diff": 0.0,
+  "largest_terminal_bytes": 8388608,
+  "seconds": 245.77014999999665,
+  "terminal_lower_bound_bytes": 2038431744
+ },
+ "summary": {
+  "classification": "MEMORY_SAFE_SEARCH",
+  "interpretation": "depth-five memory gate only; no PX7 verdict"
+ },
+ "finished_utc": "2026-09-17T15:08:49.534262+00:00"
+}

@@ -6,8 +6,8 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-17, after validating the completed L0d preflight.
-Nothing is running.
+Last rewritten: 2026-09-22, after scoring and recording the completed L0d
+depth-five memory gate. Nothing is running.
 
 # Awaiting a PI decision (nothing running)
 
@@ -143,9 +143,9 @@ Nothing is running.
     0.05. The 96 control pairs all fail at every support, despite route changes.
     The present evidence reduction has no observed hard-route commitment cost
     on the usable staged libraries.
-  - **Next: implement the bounded ambiguity gate** drafted in
-    `L0D_AMBIGUITY_GATE_PLAN.md`: one existing library, support 1/2/4 against its
-    saved 128-example anchor. **DONE:** all 16 tasks retain the exact 128 route
+  - **Bounded ambiguity gate COMPLETE** (`L0D_AMBIGUITY_GATE_PLAN.md`: one
+    existing library, support 1/2/4 against its
+    saved 128-example anchor): all 16 tasks retain the exact 128 route
     and query error at supports 4/2/1; independent scorer passes. This closes
     the evidence-size opportunity on this fixed depth-three library. No larger
     inference comparison is justified by these negative gates alone.
@@ -162,8 +162,40 @@ Nothing is running.
     16 deterministic length-four programs all pass support-only exhaustive
     ENUM at query NMSE 0.05 (median 0.00872); diagnostic mapped routes agree.
     This is scoped frozen-vocabulary usability evidence, not a PX7 verdict.
-    Depth-five, beam, posterior and commit-late remain untested and require
-    their own frozen protocol.
+    Beam, posterior and commit-late remain untested and require their own
+    frozen protocol.
+  - **Depth-five memory gate COMPLETE:** run 2026-09-17 at `2db0254`, scored,
+    archived and recorded 2026-09-22 (report
+    `reports/l0d_depth5_memory_gate_v2.json`; operational records, validation
+    and query addendum in `reports/l0d_depth5_memory_gate_2026-09-17/`;
+    PROGRESS 2026-09-22). Classification `MEMORY_SAFE_SEARCH`.
+    All 12^5 = 248,832 routes searched in 243 blocks of 1,024 for one
+    deterministic length-five program on the frozen STAGED5000/world-0 library,
+    in 245.77 s. Largest block terminal 8,388,608 bytes against a
+    2,038,431,744-byte (1.90 GiB) unchunked single-terminal lower bound;
+    selected support MSE bitwise equal to direct hard execution of the same
+    route. Independent scorer, `check_prereg.py` and `check_invalid.py` all
+    pass; the plan's depth-three equivalence gate (chunked vs all-route loss
+    vector within 1e-6, identical argmin) passes in the test suite.
+    Two disclosed deviations: the plan-required selected-route query NMSE was
+    never recorded by the runner and was recovered post hoc (0.01339981,
+    passes 0.05, one program only - NOT comparable to the depth-four 16-program
+    median as a depth trend); peak RSS was never recorded and is unrecoverable.
+    This is a memory-feasibility result for one library, world, program and
+    depth. It is not a depth-five execution or search horizon and not a PX7
+    verdict.
+  - **Four consecutive L0d opportunity gates have now failed to produce route
+    ambiguity** on a usable frozen vocabulary: support 128/32/8 (preflight),
+    support 4/2/1 (sparse-evidence gate), depth four (execution gate) and depth
+    five (memory gate). PX7(a) is about the cost of premature commitment under
+    ambiguity, and this substrate has not yet yielded ambiguity whose effect it
+    could measure. Per the opportunity-gate rule, the census cannot be frozen
+    until a pre-specified, MEASURED ambiguity source exists; repeating
+    evidence-size sweeps on this library is closed.
+  - **NEXT for L0d (PI decision):** freeze a distinct, pre-specified and
+    measured ambiguity source, or stop the L0d line and report the four gates
+    as scoped usability/feasibility evidence. Do not launch the original
+    depth/mechanism grid on the strength of these negative gates.
 - **Prior evidence the ladder must respect:** the 2026-08-31 loop census and its
   correction (a straight-line generator cannot price loops); the E6 macro line
   (macros pay but cannot be timed or compiled); the E7 census (no real

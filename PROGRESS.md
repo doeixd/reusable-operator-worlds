@@ -6061,3 +6061,65 @@ and does not license depth five or a PX7 verdict. Archived report and logs:
 NEXT: freeze a precise full PX7 mechanism protocol, or draft a separately
 bounded depth-five memory gate. Do not infer a general compositional horizon
 from this one library/world.
+
+# 2026-09-22 - Depth-five memory gate passes; recorded after the fact
+
+The chunked depth-five gate was RUN on 2026-09-17 at commit `2db0254` but was
+never scored, archived or recorded; its report sat untracked in the working
+tree until this entry. Nothing was re-run: the stamped cell, scorer, checks and
+archive below all validate the 2026-09-17 execution.
+
+The cell searched all 12^5 = 248,832 routes for one deterministic length-five
+program on the frozen STAGED5000/world-0 stage-three library, in 243 blocks of
+1,024, keeping only the best route and loss per block. It completed in 245.77 s
+with exit 0. The largest block terminal tensor was 8,388,608 bytes against an
+unchunked single-terminal lower bound of 2,038,431,744 bytes (1.90 GiB), so the
+bounded implementation makes depth-five exhaustive search feasible on this host
+at about 0.4% of the naive terminal footprint. Selected route [0, 10, 3, 9, 0]
+for program [3, 4, 5, 2, 3]; selected support MSE 0.013233025558292866 against
+direct hard execution of the same route, absolute difference 0.0 - bitwise
+equal, well inside the plan's 1e-5 tolerance. Blocks 243 = expected 243; library
+hash unchanged across the search. Classification `MEMORY_SAFE_SEARCH`.
+
+Validation run 2026-09-22: `score_l0d_depth5_memory_gate` returns `valid: true`
+after checking the protocol fingerprint, all three input hashes, the runner
+implementation hash, cell stamp/record integrity, the 243-block and equivalence
+gates, and the operational records. `check_prereg.py` passes (58 frozen files
+unchanged); `check_invalid.py` passes (6 withdrawn paths absent). The plan's
+depth-three equivalence gate lives in the test suite rather than in the run
+record: `tests.test_l0d_depth5_memory_gate` compares the chunked evaluator's
+complete 1,728-route loss vector to the existing all-route evaluator within
+1e-6 and requires an identical argmin; both tests pass.
+
+Two deviations from the plan, disclosed rather than repaired in place:
+- The runner never recorded the plan's "selected-route query NMSE", though
+  `task()` builds the evaluation arrays. Recovered post hoc, read-only, from
+  the frozen library and the stamped route: query NMSE 0.01339981 over 256
+  evaluation examples, passing 0.05. Recorded as
+  `reports/l0d_depth5_memory_gate_2026-09-17/query_addendum.json` with the
+  script that regenerates it, and deliberately NOT written into the
+  protocol-stamped report, which would break its fingerprint chain. This is ONE
+  program on ONE library; it is not comparable to the depth-four median
+  (0.00871712 over 16 programs) as a depth trend, and no drift claim follows.
+- Process peak RSS was not recorded at all. The plan asked for it "when
+  available"; it is simply absent and cannot be recovered after the fact.
+
+The first launch (`641dfce`, `artifacts/l0d_depth5_memory_gate/`) died inside
+`chunked_mse` with `IndexError: shape mismatch ... [1024, 1], [1, 128], [1024]`
+and produced no cell. Its traceback and log are archived beside the successful
+run. The fix (`2db0254`) expanded the per-block slot index to `(count, n)`,
+replaced an exact `selected == direct` equality with the 1e-5 tolerance, and
+retired the run path to `_v2` rather than rebuilding into the failed directory.
+
+Scope, stated as narrowly as the evidence allows: this is a MEMORY FEASIBILITY
+result for one library, one world, one program and one depth. It does not
+compare beam, posterior, commit-late or full-budget OPT, does not establish a
+depth-five execution or search horizon, and is not a PX7 verdict. Evidence:
+`reports/l0d_depth5_memory_gate_v2.json`; operational records, validation and
+the query addendum in `reports/l0d_depth5_memory_gate_2026-09-17/`.
+
+NEXT: unchanged by this gate. The full PX7 mechanism census stays unfrozen and
+still lacks a measured ambiguity source - four consecutive L0d opportunity
+gates have now failed to produce route ambiguity on a usable vocabulary. Do not
+launch the original depth/mechanism grid on the strength of these feasibility
+and execution gates.

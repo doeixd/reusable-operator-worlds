@@ -1,0 +1,22 @@
+{
+ "protocol": {
+  "id": "l0d-depth5-memory-gate-v1",
+  "git_commit": "2db0254",
+  "name": "STAGED5000",
+  "world": 0,
+  "model_seed": 5000,
+  "depth": 5,
+  "tasks": 1,
+  "seed": 2705,
+  "block": 1024,
+  "slots": 12,
+  "support": 128,
+  "input_sha256": {
+   "L0D_DEPTH5_MEMORY_GATE_PLAN.md": "eeef71d6b31c877242c5b585d3fa66b53f4e591a59e70c06ce62c9cb2deed2b6",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/j2a_staged_library.json": "9f823a9119047726b541d2be07ddad8c4b84291359e8c9a1e37526ed5870acdd"
+  },
+  "implementation_sha256": "079446a77b16bb62df589ad90a687620e4bc7bbd9d06344e09b9f67f8659ba4d"
+ },
+ "protocol_sha256": "4af3d07d7d43447da6d48596b874c5f84c092457326a3e9381c642aa1adaeb76"
+}

@@ -1,0 +1,38 @@
+{
+ "stamp": {
+  "protocol_sha256": "4af3d07d7d43447da6d48596b874c5f84c092457326a3e9381c642aa1adaeb76"
+ },
+ "complete": true,
+ "record": {
+  "name": "STAGED5000",
+  "world": 0,
+  "model_seed": 5000,
+  "depth": 5,
+  "program": [
+   3,
+   4,
+   5,
+   2,
+   3
+  ],
+  "library_sha256": "87530e9799d5b81dbe3e2ed4ec8d426142388006d5dfecb81ef809fbeea5373e",
+  "blocks": 243,
+  "expected_blocks": 243,
+  "selected_route": [
+   0,
+   10,
+   3,
+   9,
+   0
+  ],
+  "selected_support_mse": 0.013233025558292866,
+  "direct_support_mse": 0.013233025558292866,
+  "support_mse_equal": true,
+  "support_mse_abs_diff": 0.0,
+  "largest_terminal_bytes": 8388608,
+  "seconds": 245.77014999999665,
+  "terminal_lower_bound_bytes": 2038431744
+ },
+ "record_sha256": "11f0d6f7af27ed14af642ad5e526feeb451e440ec244537b086ccec6e1a414e3",
+ "finished_utc": "2026-09-17T15:08:49.516741+00:00"
+}
