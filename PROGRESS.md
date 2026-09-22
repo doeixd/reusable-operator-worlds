@@ -6625,3 +6625,49 @@ and whether the impostor list is complete (nothing mechanical suggests the
 impostor nobody thought of).
 
 NEXT: unchanged - PI decisions 6 and 7.
+
+# 2026-09-22 Retrospective pass under the three gates: five follow-ups queued
+
+`FOLLOWUP_AUDITS.md`. No experiment, no artifact, no compute.
+
+With NECESSITY, OPPORTUNITY and DISCRIMINATION separated, the obvious question
+is what the existing record looks like under them. The answer is that **nothing
+needs re-running**. The positives that carry the program's weight pass necessity
+by construction - V1 has `rho` as a measured necessity knob and the effect
+REVERSES at `rho = 0`; J1c's re-initialized-library control lands at ~1.0
+against 0.005-0.007; V5's law survived because cost and utility were measured
+independently. The negatives do not need re-running either; they need their
+LABELS checked, because a necessity failure is "this task did not require the
+behaviour", not "the behaviour does not help".
+
+Five follow-ups are queued for another agent, specified in full in
+`FOLLOWUP_AUDITS.md`. One of them is a genuine finding:
+
+**A1, the arm-provenance retrofit.** `arm_provenance.py` was built after E5's
+defect and never retrofitted. 26 experiment modules build a scratch, fresh or
+deep-copied arm; 2 use the harness; 24 do not. Every one of those is a refusal
+arm in the new vocabulary, and `refusal_cost` is only as good as the
+construction of the arm that refuses - which is exactly the thing E5 got wrong
+and found by accident. The audit classifies each site as a legitimate probe copy
+(required practice, and the expected majority), a correctly built refusal arm,
+or a mislabelled one, and for mislabelled arms corrects the LABEL rather than
+the code wherever a committed report depends on it. `audit_e5_synthesizer.py:254`
+still builds `scratch_lib = copy.deepcopy(model)` and that is CORRECT to leave:
+the E5 report was produced by that code, and rewriting it would destroy the
+number's provenance. What is worth fixing there is whether the module still
+calls that arm scratch.
+
+The other four: a claims audit sorting every negative into necessity /
+discrimination / opportunity failure versus genuine refutation (A2); recording
+that SG3 would MANUFACTURE the ambiguity it measures and so needs its own
+necessity gate (P1); re-reading H39's two-slot claim against the matched-
+capacity monolithic arm (A3, optional); and re-specifying ladder gates L0a-L0c
+under the new protocol (P2, moot if PI decision 7 closes L1-L8).
+
+All five are implementation audits, not experiments. They register no estimand
+about the world, so the `# Necessity` and `# Discriminating power` sections do
+not apply and are deliberately absent - labelled as an implementation check
+rather than dressed as a result. Each carries the standing requirement that an
+audit finding nothing must report what it checked, item by item.
+
+NEXT: unchanged - PI decisions 6 and 7. The follow-ups need neither.

@@ -235,6 +235,13 @@ implementation for the next plan boundary.
   paths must not be reused for corrected runs.
 - `EXPORT_BRANCH_SESSION_REPORT.md` — readable synthesis of the export
   branch's development rungs (E5 → E6.2), with its corrections ledger.
+- `DESIGN_ADEQUACY.md` — the THREE GATES every plan must pass: NECESSITY (does
+  the task require the behaviour? fix the TASK), OPPORTUNITY (could the effect
+  exist? fix the GENERATOR), DISCRIMINATION (could the data distinguish? fix the
+  SAMPLE). Checks in `row.necessity_gate` and `row.design_adequacy`, enforced by
+  `tools/check_adequacy.py`.
+- `FOLLOWUP_AUDITS.md` — five queued Tier 0 follow-ups for another agent; A1
+  (arm-provenance retrofit) is the only one that could surface a real defect.
 - `SPEC_AUDIT.md` — spec-to-implementation audit; re-audit after major
   milestones (gate closures, confirmations, new spec versions).
 - `row_v2_experimental_spec.md` — the V2 spec (closed), with live STATUS

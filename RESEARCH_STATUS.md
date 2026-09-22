@@ -98,6 +98,40 @@ decisions (6 and 7), not measurements.
   Recorded in AGENTS.md: the opportunity gate is what decides whether a plan
   gets written, not a step inside one.
 
+# Queued for another agent: five Tier 0 follow-ups (2026-09-22)
+
+Full specification in `FOLLOWUP_AUDITS.md`. Written after the three gates were
+separated (`DESIGN_ADEQUACY.md`) and applied retrospectively to what the
+repository already holds. **No experiment needs re-running**: the retrospective
+pass found no wrong numbers, only labels, unverified constructions, and plans
+not yet written. None of the five opens a world, starts a run, or touches a
+sealed band, and all are implementation audits rather than experiments.
+
+| item | priority | blocked on |
+|---|---|---|
+| **A1 arm-provenance retrofit** - the only item that could surface a real defect | highest | nothing |
+| **A2 claims audit** - necessity failure vs genuine refutation | high | nothing |
+| **P1** record SG3's necessity problem in `notes/identifiability-sketch.txt` | high | nothing |
+| **A3** re-read H39's two-slot claim against `capacity_forces_structure` | optional | nothing |
+| **P2** re-specify ladder gates L0a-L0c under the new protocol | deferred | PI decision 7 |
+
+- **A1 is the finding.** `src/row/arm_provenance.py` was built after E5's defect
+  - three modules with an arm called `S`, one of which built it from the TRAINED
+  library, making a fine-tuning arm mislabelled as scratch (0.23-0.44 log units;
+  no verdict flipped). Every such arm is a REFUSAL ARM under the new vocabulary,
+  and `refusal_cost` is only as good as the arm that refuses. **26** experiment
+  modules build a scratch, fresh or deep-copied arm; **2** use the harness;
+  **24** do not. Most sites will be legitimate probe copies, which are required
+  practice - the value is in the few that are not, and in leaving the 24
+  checked rather than assumed. Where a committed report depends on the code, the
+  LABEL is corrected and the code stays as it was run.
+- **A2 matters now** because the negative-results paper is becoming a primary
+  output, and "reuse did not pay" versus "our task never required reuse" is the
+  difference between a finding and a mistake.
+- **P1** records that SG3 would MANUFACTURE the ambiguity it measures, so it
+  would need to pass its own necessity gate. Worth recording whichever way
+  decision 6 goes.
+
 # Awaiting a PI decision (nothing running)
 
 ## Track B: online learnability of the strong (rotated) substrate
