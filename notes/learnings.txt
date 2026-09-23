@@ -5256,3 +5256,13 @@ in length-1 tasks. Depth-2 clustering ARI 0.07-0.12 was 5-10x above chance and
 still useless: above-chance is not the operative quantity. Post hoc: every
 passing cell's length-1 anchors covered all 6 operations, every failing cell's
 covered <=5 (DOSE_8_w2 at 5/6 failed at 1.04). Confounded with count; NB4.
+
+2026-09-23 N1c verdict K6_INSUFFICIENT, COUNT_COMPENSATES (development). Six
+length-1 anchors fail with or without full coverage (1.04-1.09). Eighteen
+covering 5 of 6 operations: 0.199 / 0.0129 / 0.0259, suffices 2/3. Registered
+split: in worlds 1 and 2 the tasks that use the uncovered operation pass too
+(0.0115, 0.0305) - the library formed the missing operation from compositions.
+World 0 failed LOCALLY (not-using 0.025, using 1.135). World 2 excluded the same
+op as world 0 and passed, so it is not operation-specific. NB4 (coverage, from
+N1b's post-hoc 6/6 vs 0/6 table) REFUTED - it was a count effect. Online
+requirement: a quota of single-operation tasks, between 6 and ~16-18.

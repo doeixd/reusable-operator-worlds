@@ -1,0 +1,36 @@
+{
+ "protocol": {
+  "id": "n1c-anchor-coverage-v1",
+  "git_commit": "6251a17",
+  "plan": "N1C_ANCHOR_COVERAGE_PLAN.md",
+  "worlds": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "COVER6_K6",
+   "COVER5_K6",
+   "COVER5_K18"
+  ],
+  "updates": 65536,
+  "pool_stream": 1911,
+  "cover_stream": 1914,
+  "fillers": 124,
+  "threshold": 0.05,
+  "near_threshold": [
+   0.03,
+   0.08
+  ],
+  "jobs": 3,
+  "pool_order": "anchors + canonical + fillers(124-K)",
+  "input_sha256": {
+   "N1C_ANCHOR_COVERAGE_PLAN.md": "1bca7f5b96fd2d4914f6b17d43f68541d3ae1206499bf9f93a2ff006b50a3538",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/n1_anchor_supply.json": "7b3dc410ed6cbb5612ddcbf7af538fe5a16a2d083e8c2a7939f5073ca73a50f8"
+  },
+  "implementation_sha256": "64d12f75acc058b7fca930497f2beaf061af8f86a619346f37dc6061e128249d",
+  "n1_implementation_sha256": "11c154137e299635739ceff70e6a50477657308002ebb099d651983f18ed37c3"
+ },
+ "protocol_sha256": "d535772d8ebc335db005bd0b5bc85e1a101dce2f98bd0deccbb85373c96e5a95"
+}

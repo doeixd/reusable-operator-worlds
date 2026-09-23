@@ -7279,3 +7279,71 @@ launch; restart reuse and tamper refusal tested; the K = 0 pool is N1's SHAM
 element for element. Found one thing: the seeds exclude operation 4 in two of
 the three worlds, so only two distinct operations are tested. Written into the
 plan before launch, so the finding cannot later be generalised past them.
+
+
+# 2026-09-23 N1c VERDICT: K6_INSUFFICIENT, COUNT_COMPENSATES - and the coverage pattern was wrong
+
+Run `6251a17`, 9 cells as a pool of 3, exit 0, about 1.4 h. Independent scorer
+`valid: true`, no problems; `check_prereg`, `check_invalid`, `check_adequacy`
+pass. Report `reports/n1c_anchor_coverage.json`; records and validation in
+`reports/n1c_anchor_coverage_2026-09-23/`. Development evidence on worlds 0-2,
+never confirmatory.
+
+| arm | world 0 | world 1 | world 2 | suffices |
+|---|---|---|---|---|
+| `COVER6_K6` (6 length-1 anchors, all 6 operations) | 1.0446 | 1.0948 | 1.0508 | no |
+| `COVER5_K6` (6 length-1 anchors, 5 operations) | 1.0792 | 1.0664 | 1.0808 | no |
+| `COVER5_K18` (18 length-1 anchors, 5 operations) | 0.1991 | **0.0129** | **0.0259** | **yes** |
+
+**Registered outcomes.** PRIMARY `K6_INSUFFICIENT`: six length-1 anchors fail
+whether or not they cover every operation, all six cells at 1.04-1.09, no better
+than no anchors. SECONDARY `COUNT_COMPENSATES`: eighteen anchors covering only
+five operations suffice in 2 of 3 worlds. No near-threshold cell.
+
+**The registered split decides the reading.**
+
+| `COVER5_K18` | excluded operation | tasks using it (n) | median, using | median, not using |
+|---|---|---|---|---|
+| world 0 | 4 | 35 | 1.1346 | 0.0252 |
+| world 1 | 3 | 27 | **0.0115** | 0.0129 |
+| world 2 | 4 | 23 | **0.0305** | 0.0249 |
+
+In worlds 1 and 2 the tasks that NEED the uncovered operation also pass: once
+eighteen anchors pin the other five operations, the library forms the sixth from
+length-3 tasks alone. World 2 excludes the same operation as world 0 and
+succeeds, so world 0's failure is not specific to operation 4. Where it does
+fail, the damage is LOCAL: tasks that never use the missing operation sit at
+0.025 while the tasks that do are at 1.13. Below the count threshold (six
+anchors) the failure is GLOBAL in all three worlds, regardless of coverage.
+
+**NB4 is refuted.** N1b's post-hoc table - every passing cell covered all six
+operations, every failing one covered five or fewer - was entirely a count
+effect. Coverage is not necessary. This is the reason post-hoc patterns go into
+the hypothesis ledger rather than the results: the cleanest-looking pattern in
+N1b, 6/6 against 0/6, did not survive the one experiment built to separate its
+confound.
+
+**Reading, no stronger than the evidence.** What formation needs is a QUOTA of
+single-operation tasks, somewhere between 6 and roughly 16-18 on this substrate
+at this budget, not one per operation. Given enough of them, a partially
+anchored library bootstraps the operations it was never shown in isolation - in
+2 of 3 worlds here - and when it does not, only the tasks that need the missing
+operation fail. For an online stream this is the more permissive requirement:
+enough easy tasks, not an easy task for everything.
+
+**Predictions.** NC1 (`COVER6_K6` suffices, 0.40): NOT SUPPORTED. NC2
+(`COVER5_K6` fails, 0.80): SUPPORTED. NC3 (`COVER5_K18` fails - count does not
+compensate, 0.60): NOT SUPPORTED. NC4 (failing `COVER5` cells are GLOBAL, 0.60):
+MIXED - GLOBAL in all three six-anchor cells, LOCAL in the one failing
+eighteen-anchor cell; the two are different regimes, below and above the count
+threshold.
+
+**Scope.** Two excluded operations only (4 in worlds 0 and 2, 3 in world 1).
+The count threshold is bracketed, not located: 6 fails everywhere, 18 with five
+operations passes in 2 of 3, and N1b's 16-19 with six passes in 3 of 3.
+
+NEXT: record in PREDICTIONS and RESEARCH_STATUS. The offline anchor line has now
+answered what an online design needs to know: a quota of single-operation tasks,
+roughly 16-18 over 188 tasks at this budget, not their order, their coverage, or
+length-2 tasks. The successor is an ONLINE anchor-supply rung, which needs a new
+world band (decision 5).

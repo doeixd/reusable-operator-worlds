@@ -6,9 +6,10 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-23, after N1b returned L1_SUFFICES_ONLY with k* = 32.
-Nothing is running. The formation effect N1 found lives entirely in length-1
-(single-operation) tasks.
+Last rewritten: 2026-09-23, after N1c refuted the coverage hypothesis. Nothing
+is running. The offline anchor line (N1, N1b, N1c) is complete: formation needs a
+quota of single-operation tasks, not their order, their coverage, or length-2
+tasks. The next rung is online and is blocked on decision 5 (a world band).
 
 
 # N1 CLOSED: ANCHORS_SUFFICE, 3 of 3 worlds (2026-09-22)
@@ -48,10 +49,19 @@ Nothing is running. The formation effect N1 found lives entirely in length-1
   all 6 operations, every failing cell's covered <=5 - including one at 5 of 6
   that failed completely. Successor N1c holds anchor count fixed and varies
   coverage.
-- **N1c LAUNCHED (2026-09-23)**: `N1C_ANCHOR_COVERAGE_PLAN.md`. Six length-1
-  anchors covering all 6 operations against six covering 5, plus 18 covering 5.
-  Excluded operation 4, 3, 4 across worlds, so two operations tested. NC1-NC4 in
-  PREDICTIONS. Check `artifacts/n1c_anchor_coverage/status.json`.
+- **N1c CLOSED (2026-09-23): `K6_INSUFFICIENT`, `COUNT_COMPENSATES` - NB4
+  REFUTED.** Six length-1 anchors fail with or without full coverage (1.04-1.09);
+  eighteen covering only 5 of 6 operations suffice in 2 of 3 worlds (0.0129,
+  0.0259; world 0 at 0.199). The registered split shows that in worlds 1 and 2
+  the tasks USING the uncovered operation pass too - the library formed it from
+  compositions - and world 0's failure is LOCAL (not-using 0.025, using 1.13).
+  N1b's coverage pattern was a count effect. Run `6251a17`, report
+  `reports/n1c_anchor_coverage.json`.
+- **What the offline anchor line now says an online design needs:** a QUOTA of
+  single-operation tasks - bracketed between 6 and roughly 16-18 over a 188-task
+  stream at this budget - not their order (N1), not length-2 tasks (N1b), and not
+  one for every operation (N1c). The successor is an ONLINE anchor-supply rung,
+  which needs a new world band: **decision 5 is the blocker**.
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
 - **Verdict:** `NO-HEADROOM`, `k = 0` of 36 staged cells against a registered

@@ -1,0 +1,79 @@
+{
+  "valid": true,
+  "problems": [],
+  "primary": "K6_INSUFFICIENT",
+  "secondary": "COUNT_COMPENSATES",
+  "descriptive_split": {
+    "COVER5_K6_w0": "GLOBAL",
+    "COVER5_K6_w1": "GLOBAL",
+    "COVER5_K6_w2": "GLOBAL",
+    "COVER5_K18_w0": "LOCAL"
+  },
+  "suffices": {
+    "COVER6_K6": false,
+    "COVER5_K6": false,
+    "COVER5_K18": true
+  },
+  "by_arm": {
+    "COVER6_K6": {
+      "0": 1.0445729929087535,
+      "1": 1.0947982155693947,
+      "2": 1.0507696997064722
+    },
+    "COVER5_K6": {
+      "0": 1.0791578248125182,
+      "1": 1.066390739385134,
+      "2": 1.0808157422823883
+    },
+    "COVER5_K18": {
+      "0": 0.19912603607027562,
+      "1": 0.012876316522742843,
+      "2": 0.025933995367205268
+    }
+  },
+  "split": {
+    "COVER5_K6_w0": {
+      "tasks_using_excluded": 35,
+      "tasks_not_using_excluded": 29,
+      "median_using_excluded": 1.0635850011270294,
+      "median_not_using_excluded": 1.123300744377675
+    },
+    "COVER5_K6_w1": {
+      "tasks_using_excluded": 27,
+      "tasks_not_using_excluded": 37,
+      "median_using_excluded": 1.0703083899190509,
+      "median_not_using_excluded": 1.0616469106191346
+    },
+    "COVER5_K6_w2": {
+      "tasks_using_excluded": 23,
+      "tasks_not_using_excluded": 41,
+      "median_using_excluded": 1.1059302548705325,
+      "median_not_using_excluded": 1.0571657841730087
+    },
+    "COVER5_K18_w0": {
+      "tasks_using_excluded": 35,
+      "tasks_not_using_excluded": 29,
+      "median_using_excluded": 1.1346391438646137,
+      "median_not_using_excluded": 0.025179414302429856
+    },
+    "COVER5_K18_w1": {
+      "tasks_using_excluded": 27,
+      "tasks_not_using_excluded": 37,
+      "median_using_excluded": 0.011545972754788582,
+      "median_not_using_excluded": 0.012878709696624224
+    },
+    "COVER5_K18_w2": {
+      "tasks_using_excluded": 23,
+      "tasks_not_using_excluded": 41,
+      "median_using_excluded": 0.030478931581747554,
+      "median_not_using_excluded": 0.024934429075869208
+    }
+  },
+  "excluded_by_world": {
+    "0": 4,
+    "1": 3,
+    "2": 4
+  },
+  "near_threshold_cells": [],
+  "interpretation": "N1c development evidence on worlds 0-2; never confirmatory"
+}

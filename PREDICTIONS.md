@@ -9395,3 +9395,40 @@ tested and any finding is about them.
 - **NC4** failing `COVER5` cells are `GLOBAL` (tasks NOT using the excluded
   operation also fail): **0.60**, on the strength of `DOSE_8_w2` failing at 1.04
   with 5 of 6 operations covered.
+
+
+# N1c verdict (2026-09-23): K6_INSUFFICIENT, COUNT_COMPENSATES - NB4 refuted
+
+Scored against `N1C_ANCHOR_COVERAGE_PLAN.md`, run `6251a17`, 9 cells, exit 0,
+independent scorer `valid: true`, prereg/invalid/adequacy pass. Report
+`reports/n1c_anchor_coverage.json`. Development evidence on worlds 0-2, never
+confirmatory.
+
+| arm | world 0 | world 1 | world 2 | suffices |
+|---|---|---|---|---|
+| `COVER6_K6` (6 length-1 anchors, all 6 operations) | 1.0446 | 1.0948 | 1.0508 | no |
+| `COVER5_K6` (6 length-1 anchors, 5 operations) | 1.0792 | 1.0664 | 1.0808 | no |
+| `COVER5_K18` (18 length-1 anchors, 5 operations) | 0.1991 | **0.0129** | **0.0259** | **yes** |
+
+**Registered outcomes:** PRIMARY `K6_INSUFFICIENT`; SECONDARY
+`COUNT_COMPENSATES`; descriptive split GLOBAL in all three failing six-anchor
+cells, LOCAL in the one failing eighteen-anchor cell.
+
+| `COVER5_K18` | excluded operation | tasks using it (n) | median, using | median, not using |
+|---|---|---|---|---|
+| world 0 | 4 | 35 | 1.1346 | 0.0252 |
+| world 1 | 3 | 27 | **0.0115** | 0.0129 |
+| world 2 | 4 | 23 | **0.0305** | 0.0249 |
+
+**NB4 (post hoc, from N1b) is REFUTED.** Coverage of every operation is not
+necessary: eighteen length-1 anchors covering five operations suffice in 2 of 3
+worlds, and in those worlds the tasks that use the uncovered operation pass too.
+N1b's 6/6-against-0/6 coverage pattern was a count effect.
+
+**NC1** (0.40) NOT SUPPORTED. **NC2** (0.80) SUPPORTED. **NC3** (0.60) NOT
+SUPPORTED. **NC4** (0.60) MIXED, split by regime: below the count threshold
+failure is global; above it, the one failure is confined to tasks that need the
+missing operation.
+
+**Scope.** Two excluded operations. The count threshold is bracketed between 6
+and roughly 16-18 length-1 anchors, not located.

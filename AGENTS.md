@@ -2090,3 +2090,24 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   length-1 anchors covered all 6 operations and every failing cell's covered 5 or
   fewer, including one at 5 of 6 that failed completely; that is confounded with
   count and is a hypothesis (NB4), not a result.
+
+- A CLEAN-LOOKING POST-HOC PATTERN DID NOT SURVIVE THE EXPERIMENT BUILT TO TEST IT
+  (N1c, 2026-09-23; `reports/n1c_anchor_coverage.json`). N1b's post-hoc table was
+  as tidy as a table gets: every cell whose length-1 anchors covered all six
+  operations passed (6/6) and every cell covering five or fewer failed (0/6). It
+  was recorded as a hypothesis (NB4), not a result, because coverage and count
+  moved together - and the experiment that held count fixed refuted it. Six
+  anchors fail whether or not they cover everything; eighteen covering only five
+  pass in 2 of 3 worlds, and in those worlds the library learns the uncovered
+  operation from length-3 tasks alone. The pattern was a count effect. Keep
+  post-hoc patterns in the hypothesis ledger until a design separates their
+  confound, however perfect the split looks.
+- A PARTIALLY ANCHORED LIBRARY BOOTSTRAPS THE REST, AND WHEN IT DOES NOT THE
+  DAMAGE IS LOCAL (N1c). Above the count threshold, pinning five operations with
+  length-1 anchors let the sixth form from compositions in 2 of 3 worlds; in the
+  third, tasks that never use the missing operation reached 0.025 while tasks
+  that do stayed at 1.13. Below the threshold, failure is global regardless of
+  coverage. Formation therefore has a threshold regime, not a per-operation one:
+  enough informed commitments make the remaining assignments inferable. What an
+  online stream needs is a quota of single-operation tasks, not one for every
+  operation.
