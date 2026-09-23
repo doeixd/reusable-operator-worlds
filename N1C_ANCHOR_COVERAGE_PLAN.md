@@ -123,8 +123,10 @@ that need it or the whole library, which `DOSE_8_w2`'s 1.04 median suggests.
 Endpoints are N1's committed cells, as in N1b. Tests assert every arm's pool
 size, examples, count and coverage; that both incomplete arms exclude the same
 `x`; that the pool at `K = 0` is N1's `SHAM` pool element for element; and that
-every arm draws the same minibatch indices. `n1_anchor_supply` and
-`n1b_anchor_dose` are imported, never edited, since their protocols hash them.
+every arm draws the same minibatch indices. `n1_anchor_supply` is imported,
+never edited, since N1's protocol hashes it; N1c does not import
+`n1b_anchor_dose` at all (corrected before launch - an earlier draft of this
+section said it did).
 
 # Cost and execution
 
@@ -134,6 +136,6 @@ Launch precondition 8 GiB free, failing closed. `status.json` written at launch.
 # Acceptance
 
 Runner and independent scorer committed together before launch; protocol
-fingerprint over this plan, config, the N1 report, seeds and both imported
-modules; restart reuses completed cells; `check_prereg`, `check_invalid`,
+fingerprint over this plan, config, the N1 report, seeds, the runner and the
+imported N1 module; restart reuses completed cells; `check_prereg`, `check_invalid`,
 `check_adequacy` pass; records archived and committed with the result.
