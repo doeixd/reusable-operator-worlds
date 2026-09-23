@@ -61,7 +61,9 @@ tasks. The next rung is online and is blocked on decision 5 (a world band).
   single-operation tasks - bracketed between 6 and roughly 16-18 over a 188-task
   stream at this budget - not their order (N1), not length-2 tasks (N1b), and not
   one for every operation (N1c). The successor is an ONLINE anchor-supply rung,
-  which needs a new world band: **decision 5 is the blocker**.
+  which needs a new world band. **Worlds 10-19 were allocated by the PI on
+  2026-09-23**; the first step is a Tier 0 feasibility gate on whether one
+  online lifetime can consume a mixed-length task stream at all.
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
 - **Verdict:** `NO-HEADROOM`, `k = 0` of 36 staged cells against a registered
@@ -649,12 +651,11 @@ sealed band, and all are implementation audits rather than experiments.
    depth/mechanism protocol stays unfrozen.
 3. (Folded into 7.)
 4. Should ladder rungs L1-L3 target remote workers when they open?
-5. Development-world budget. **PARTLY ANSWERED 2026-09-22 (Claude, delegated;
-   reversible):** worlds 0-2 may be reused by the OFFLINE rungs N1 and N2 as
-   DEVELOPMENT evidence only, never upgradable to confirmatory - see the N1 plan
-   for the reasoning and its three conditions. **Still open for any ONLINE
-   rung**, including review 85's C1: worlds 0-9 are spent for the online staged
-   protocol and a new band would have to be allocated, or that line stopped.
+5. Development-world budget. **ANSWERED.** Worlds 0-2 reusable by the OFFLINE
+   rungs N1/N1b/N1c as development evidence only (Claude, delegated, 2026-09-22).
+   **Worlds 10-19 allocated by the PI on 2026-09-23** as development band 2 for
+   the ONLINE anchor-supply line; recorded in `AGENTS.md`'s partition list and
+   verified unused beforehand.
 6. (Answered by SO4: the re-test ran and failed.)
 7. ANSWERED: the cross-run world census ran, along with the library-geometry and
    route-margin normalization censuses. The Track B mechanism hunt is closed

@@ -7347,3 +7347,19 @@ answered what an online design needs to know: a quota of single-operation tasks,
 roughly 16-18 over 188 tasks at this budget, not their order, their coverage, or
 length-2 tasks. The successor is an ONLINE anchor-supply rung, which needs a new
 world band (decision 5).
+
+# 2026-09-23 Worlds 10-19 allocated for the online anchor-supply line
+
+PI decision 5 answered: seeds 10-19 become development band 2, for the ONLINE
+successor to N1-N1c. Development evidence only. Verified unused before
+recording: no runner defaults to them (SO3 used 3-5, SO4 6-9, the rest 0-9).
+Recorded in `AGENTS.md`'s partition list and `RESEARCH_STATUS.md`.
+
+The online protocol (`audit_so2_online_gate`, `audit_so3_consolidation`) runs
+each stage as a separate `learned_lifetime.run` over a world of same-length
+tasks and carries only the library across stages. An online stream with
+length-1 tasks mixed among length-3 tasks therefore needs one lifetime to
+consume tasks of different lengths, which `learned_lifetime` was not written
+for: it reads `world.program_length`, the world library, a novel-composition
+probe and functional-reuse diagnostics, and calls `begin_task` without a depth.
+NEXT: a Tier 0 feasibility gate on exactly that, before any plan is written.

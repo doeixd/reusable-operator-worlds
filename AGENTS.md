@@ -519,6 +519,11 @@ report JSON. `figures/` — generated figures.
 ## World seed partitions
 
 - **Development:** seeds 0–9 (used for architecture, tuning, testbed design).
+- **Development band 2:** seeds 10-19, allocated 2026-09-23 by the PI (decision 5)
+  for the ONLINE anchor-supply line after worlds 0-9 were spent for the online
+  staged protocol. Development evidence only; a confirmatory version needs a
+  sealed band frozen and hashed first. Verified unused before allocation: no
+  runner defaults to them (SO3 used 3-5, SO4 6-9, everything else 0-9).
 - **V1 confirmatory:** seeds 100–129 (frozen, scored against
   `CONFIRMATION_PLAN.md`).
 - **V2 confirmatory:** seeds 200–229 (frozen, scored against
