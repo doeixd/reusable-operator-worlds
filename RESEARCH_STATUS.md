@@ -6,9 +6,9 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-22, after N1 returned ANCHORS_SUFFICE 3/3. Nothing is
-running. The first positive formation result since J1c: the curriculum's
-ordering is not its active ingredient, the presence of easy tasks is.
+Last rewritten: 2026-09-23, after N1b returned L1_SUFFICES_ONLY with k* = 32.
+Nothing is running. The formation effect N1 found lives entirely in length-1
+(single-operation) tasks.
 
 
 # N1 CLOSED: ANCHORS_SUFFICE, 3 of 3 worlds (2026-09-22)
@@ -39,10 +39,15 @@ ordering is not its active ingredient, the presence of easy tasks is.
 - **Natural successors:** a Tier 0/1 dose census (how few anchors, of which
   length) on the same harness, then an ONLINE anchor-supply rung - which needs a
   new world band, so decision 5 is live again with a concrete purpose.
-- **N1b LAUNCHED (2026-09-22)**: `N1B_ANCHOR_DOSE_PLAN.md`, arms `L1_ONLY`,
-  `L2_ONLY`, `DOSE_8`, `DOSE_32` on the N1 harness, endpoints taken from the
-  committed N1 cells by verified construction identity. Hypotheses NB1-NB3 in
-  PREDICTIONS. Check `artifacts/n1b_anchor_dose/status.json`.
+- **N1b CLOSED (2026-09-23): `L1_SUFFICES_ONLY`, `k* = 32`.** Length-1 anchors
+  alone reach 0.0067-0.0175 (as good as all 124); 64 length-2 anchors do nothing
+  (1.12-1.16, no better than none) despite above-chance clustering; 8 mixed
+  anchors fail, 32 pass, monotone, no near-threshold cell. Run `fc8a742`, report
+  `reports/n1b_anchor_dose.json`. NB1 and NB3 supported, NB2 not.
+  **Post hoc (NB4, confounded):** every passing cell's length-1 anchors covered
+  all 6 operations, every failing cell's covered <=5 - including one at 5 of 6
+  that failed completely. Successor N1c holds anchor count fixed and varies
+  coverage.
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
 - **Verdict:** `NO-HEADROOM`, `k = 0` of 36 staged cells against a registered

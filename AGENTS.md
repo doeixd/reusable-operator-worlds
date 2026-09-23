@@ -2077,3 +2077,16 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   a curriculum confounds WHAT is presented with WHEN, and the matched-pool
   interleaved arm is the cheap control that separates them - run it before
   building an online mechanism around the order.
+
+- ABOVE-CHANCE CLUSTERING IS NOT THE OPERATIVE QUANTITY, AND THE ANCHORS THAT
+  MATTER ARE LENGTH-1 (N1b, 2026-09-23; `reports/n1b_anchor_dose.json`). Of N1's
+  124 anchors, the 64 length-2 tasks do nothing on their own (terminal 1.12-1.16,
+  no better than none), while the 60 length-1 tasks alone reach 0.0067-0.0175,
+  as good as the full supply. The Tier 0 clustering gate had measured depth-2
+  ARI at 0.07-0.12 - 5-10x above chance - and that was read as possibly useful;
+  it was useless. A proxy that clears chance by a wide margin can still be on the
+  wrong side of whatever threshold the mechanism needs, so a gate that measures a
+  proxy licenses the PREMISE, not a dose-response. Post hoc, every passing cell's
+  length-1 anchors covered all 6 operations and every failing cell's covered 5 or
+  fewer, including one at 5 of 6 that failed completely; that is confounded with
+  count and is a hypothesis (NB4), not a result.

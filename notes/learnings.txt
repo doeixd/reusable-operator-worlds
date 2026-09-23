@@ -5248,3 +5248,11 @@ is not data volume. The length ORDER is not required; the PRESENCE of easy tasks
 is sufficient. Ordering needs program length, presence does not, so this is the
 mechanism an online learner could actually use. Reboot killed the run at 10/12;
 the relaunch reused all 9 finished cells - first real test of the restart path.
+
+2026-09-23 N1b verdict L1_SUFFICES_ONLY, k*=32 (development). L2_ONLY 1.163/
+1.116/1.144 (no better than no anchors), DOSE_8 1.085/1.114/1.040, DOSE_32
+0.0141/0.0076/0.0212, L1_ONLY 0.0175/0.0112/0.0067. The N1 effect lives entirely
+in length-1 tasks. Depth-2 clustering ARI 0.07-0.12 was 5-10x above chance and
+still useless: above-chance is not the operative quantity. Post hoc: every
+passing cell's length-1 anchors covered all 6 operations, every failing cell's
+covered <=5 (DOSE_8_w2 at 5/6 failed at 1.04). Confounded with count; NB4.

@@ -9341,3 +9341,37 @@ The triage, denominators, persistence rule and NEAR_THRESHOLD band
 N1's committed SHAM and INTERLEAVED cells, admitted because a test shows the
 pools are element-for-element identical and a 32-update prefix trains to a
 bitwise-identical library.
+
+
+# N1b verdict (2026-09-23): L1_SUFFICES_ONLY, k* = 32 - the anchors that matter are length-1
+
+Scored against `N1B_ANCHOR_DOSE_PLAN.md`, run `fc8a742`, 12 cells, exit 0,
+independent scorer `valid: true`, prereg/invalid/adequacy pass. Report
+`reports/n1b_anchor_dose.json`. Development evidence on worlds 0-2, never
+confirmatory.
+
+| arm | world 0 | world 1 | world 2 | suffices |
+|---|---|---|---|---|
+| `L2_ONLY` (64 length-2) | 1.1632 | 1.1161 | 1.1436 | no |
+| `DOSE_8` | 1.0854 | 1.1141 | 1.0398 | no |
+| `DOSE_32` | 0.0141 | 0.0076 | 0.0212 | **yes** |
+| `L1_ONLY` (60 length-1) | 0.0175 | 0.0112 | 0.0067 | **yes** |
+| endpoint `k=0` (N1 SHAM) | 1.0367 | 1.0624 | 1.0868 | no |
+| endpoint `k=124` (N1 INTERLEAVED) | 0.0093 | 0.0101 | 0.0066 | yes |
+
+**Registered outcomes:** LENGTH `L1_SUFFICES_ONLY`; DOSE `k* = 32`, monotone, no
+near-threshold cell. Endpoints are the committed N1 cells, admitted by verified
+construction identity and a bitwise-identical training prefix.
+
+**NB1** (`L1_ONLY` suffices, 0.75): SUPPORTED, 3/3 worlds.
+**NB2** (`L2_ONLY` suffices, 0.35): NOT SUPPORTED, 0/3; 1.12-1.16, no better than
+no anchors, despite depth-2 clustering 5-10x above chance.
+**NB3** (`k* <= 32`, 0.5): SUPPORTED, `k* = 32` exactly.
+
+**NB4 (2026-09-23, POST-HOC, working hypothesis only).** Formation requires
+length-1 anchors covering EVERY operation; roughly one per operation may
+suffice. Evidence is post-hoc and confounded: every cell whose length-1 anchors
+covered all 6 operations passed (6/6) and every cell covering 5 or fewer failed
+(0/6), including `DOSE_8_w2` at 5 of 6; but coverage and length-1 count moved
+together. Prior 0.55. To be tested by a successor that holds count fixed and
+varies coverage.

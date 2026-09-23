@@ -1,0 +1,37 @@
+{
+  "valid": true,
+  "problems": [],
+  "length_verdict": "L1_SUFFICES_ONLY",
+  "dose_k_star": 32,
+  "dose_non_monotone": false,
+  "by_arm": {
+    "L2_ONLY": {
+      "0": 1.1631501090829943,
+      "1": 1.1161165491295335,
+      "2": 1.143637220717784
+    },
+    "DOSE_8": {
+      "0": 1.0854364698590677,
+      "1": 1.114069872556753,
+      "2": 1.0398292789030106
+    },
+    "L1_ONLY": {
+      "0": 0.0174746138516265,
+      "1": 0.011195789890906766,
+      "2": 0.006722176578980813
+    },
+    "DOSE_32": {
+      "0": 0.014087929527049483,
+      "1": 0.0076279469188458085,
+      "2": 0.02123311247937497
+    }
+  },
+  "dose_pass": {
+    "0": false,
+    "8": false,
+    "32": true,
+    "124": true
+  },
+  "near_threshold_cells": [],
+  "interpretation": "N1b development evidence on worlds 0-2; never confirmatory"
+}

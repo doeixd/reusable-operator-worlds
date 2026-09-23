@@ -1,0 +1,168 @@
+{
+ "status": "POST-HOC DESCRIPTIVE",
+ "rows": [
+  {
+   "cell": "L2_ONLY_w0",
+   "length1_anchors": 0,
+   "length2_anchors": 64,
+   "ops_covered": [],
+   "coverage": 0,
+   "terminal_median": 1.1631501090829943,
+   "passes": false
+  },
+  {
+   "cell": "L2_ONLY_w1",
+   "length1_anchors": 0,
+   "length2_anchors": 64,
+   "ops_covered": [],
+   "coverage": 0,
+   "terminal_median": 1.1161165491295335,
+   "passes": false
+  },
+  {
+   "cell": "L2_ONLY_w2",
+   "length1_anchors": 0,
+   "length2_anchors": 64,
+   "ops_covered": [],
+   "coverage": 0,
+   "terminal_median": 1.143637220717784,
+   "passes": false
+  },
+  {
+   "cell": "DOSE_8_w0",
+   "length1_anchors": 4,
+   "length2_anchors": 4,
+   "ops_covered": [
+    2,
+    4,
+    5
+   ],
+   "coverage": 3,
+   "terminal_median": 1.0854364698590677,
+   "passes": false
+  },
+  {
+   "cell": "DOSE_8_w1",
+   "length1_anchors": 4,
+   "length2_anchors": 4,
+   "ops_covered": [
+    1,
+    3
+   ],
+   "coverage": 2,
+   "terminal_median": 1.114069872556753,
+   "passes": false
+  },
+  {
+   "cell": "DOSE_8_w2",
+   "length1_anchors": 5,
+   "length2_anchors": 3,
+   "ops_covered": [
+    0,
+    2,
+    3,
+    4,
+    5
+   ],
+   "coverage": 5,
+   "terminal_median": 1.0398292789030106,
+   "passes": false
+  },
+  {
+   "cell": "L1_ONLY_w0",
+   "length1_anchors": 60,
+   "length2_anchors": 0,
+   "ops_covered": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "coverage": 6,
+   "terminal_median": 0.0174746138516265,
+   "passes": true
+  },
+  {
+   "cell": "L1_ONLY_w1",
+   "length1_anchors": 60,
+   "length2_anchors": 0,
+   "ops_covered": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "coverage": 6,
+   "terminal_median": 0.011195789890906766,
+   "passes": true
+  },
+  {
+   "cell": "L1_ONLY_w2",
+   "length1_anchors": 60,
+   "length2_anchors": 0,
+   "ops_covered": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "coverage": 6,
+   "terminal_median": 0.006722176578980813,
+   "passes": true
+  },
+  {
+   "cell": "DOSE_32_w0",
+   "length1_anchors": 19,
+   "length2_anchors": 13,
+   "ops_covered": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "coverage": 6,
+   "terminal_median": 0.014087929527049483,
+   "passes": true
+  },
+  {
+   "cell": "DOSE_32_w1",
+   "length1_anchors": 17,
+   "length2_anchors": 15,
+   "ops_covered": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "coverage": 6,
+   "terminal_median": 0.0076279469188458085,
+   "passes": true
+  },
+  {
+   "cell": "DOSE_32_w2",
+   "length1_anchors": 16,
+   "length2_anchors": 16,
+   "ops_covered": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "coverage": 6,
+   "terminal_median": 0.02123311247937497,
+   "passes": true
+  }
+ ]
+}

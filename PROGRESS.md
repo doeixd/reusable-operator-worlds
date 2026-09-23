@@ -7188,3 +7188,70 @@ intermediate 0.0000.
 
 Execution: a bounded pool of 3 workers with the parent as the single writer of
 every cell, ~1.7 h, precondition 8 GiB free.
+
+
+# 2026-09-23 N1b VERDICT: L1_SUFFICES_ONLY, k* = 32
+
+Run `fc8a742`, 12 cells as a bounded pool of 3, exit 0, about 2.1 h. Independent
+scorer `valid: true`, no problems; `check_prereg`, `check_invalid`,
+`check_adequacy` pass. Report `reports/n1b_anchor_dose.json`; records, cells,
+validation and a post-hoc coverage table in `reports/n1b_anchor_dose_2026-09-23/`.
+Development evidence on worlds 0-2, never confirmatory.
+
+Terminal median NMSE on the canonical 64 length-3 tasks:
+
+| arm | world 0 | world 1 | world 2 | suffices |
+|---|---|---|---|---|
+| `L2_ONLY` (64 length-2) | 1.1632 | 1.1161 | 1.1436 | no |
+| `DOSE_8` | 1.0854 | 1.1141 | 1.0398 | no |
+| `DOSE_32` | 0.0141 | 0.0076 | 0.0212 | **yes** |
+| `L1_ONLY` (60 length-1) | 0.0175 | 0.0112 | 0.0067 | **yes** |
+| endpoint `k=0` (N1 SHAM) | 1.0367 | 1.0624 | 1.0868 | no |
+| endpoint `k=124` (N1 INTERLEAVED) | 0.0093 | 0.0101 | 0.0066 | yes |
+
+**Registered triage.** LENGTH: `L1_SUFFICES_ONLY`. DOSE: `k* = 32` by the
+persistence rule over `{0, 8, 32, 124}`, monotone, and no cell in the
+`[0.03, 0.08]` near-threshold band, so no single-cell fragility caveat applies.
+
+**Length-2 anchors do NOTHING.** 64 of them land at 1.12-1.16, slightly worse
+than no anchors at all, although their clustering on an untrained library is
+5-10x above chance (ARI 0.07-0.12). Length-1 anchors alone reach 0.0067-0.0175,
+the same level as the full 124-anchor supply. The entire N1 effect lives in
+single-operation tasks.
+
+**POST-HOC, NOT A REGISTERED RESULT: operation coverage.** Reading which
+length-1 anchors each dose subset happened to draw
+(`reports/n1b_anchor_dose_2026-09-23/derive_coverage.py`):
+
+| cell | length-1 anchors | operations they cover | terminal |
+|---|---|---|---|
+| `DOSE_8_w0` | 4 | 3 of 6 | 1.0854 |
+| `DOSE_8_w1` | 4 | 2 of 6 | 1.1141 |
+| `DOSE_8_w2` | 5 | **5 of 6** | 1.0398 |
+| `DOSE_32_w0-2` | 16-19 | 6 of 6 | 0.0076-0.0212 |
+| `L1_ONLY_w0-2` | 60 | 6 of 6 | 0.0067-0.0175 |
+| `L2_ONLY_w0-2` | 0 | 0 of 6 | 1.1161-1.1632 |
+
+Every passing cell has length-1 anchors covering all 6 operations; every failing
+cell covers 5 or fewer (6/6 against 0/6). `DOSE_8_w2` covers 5 of 6 and still
+fails at 1.04 - the same as no anchors - which suggests a single uncovered
+operation is enough to lose the whole effect. This is CONFOUNDED: coverage and
+length-1 count rise together here (at most 5 against at least 16), so the table
+cannot separate "cover every operation" from "have enough length-1 anchors". It
+is recorded as working hypothesis NB4 and is the design of the successor.
+
+**Reading, no stronger than the evidence.** What N1 called anchors are, in fact,
+length-1 tasks: only single-operation tasks, whose routing on an untrained
+library is clustering rather than search, supply what formation needs. 32 mixed
+anchors (16-19 of them length-1) suffice; 8 do not.
+
+**Predictions.** NB1 (`L1_ONLY` suffices, 0.75) SUPPORTED. NB2 (`L2_ONLY`
+suffices, 0.35) NOT SUPPORTED. NB3 (`k* <= 32`, 0.5) SUPPORTED at the boundary.
+
+**What the clustering gate got wrong.** Depth-2 ARI of 0.07-0.12 was 5-10x
+above chance and was read as possibly useful. It was useless. Above-chance
+clustering is not the operative quantity; whatever threshold or property
+matters, depth 2 is on the wrong side of it.
+
+NEXT: N1c, a coverage test that breaks the confound - a handful of length-1
+anchors covering all 6 operations against the same number covering only 5.

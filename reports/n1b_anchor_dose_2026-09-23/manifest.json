@@ -1,0 +1,37 @@
+{
+ "protocol": {
+  "id": "n1b-anchor-dose-v1",
+  "git_commit": "fc8a742",
+  "plan": "N1B_ANCHOR_DOSE_PLAN.md",
+  "worlds": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "L2_ONLY",
+   "DOSE_8",
+   "L1_ONLY",
+   "DOSE_32"
+  ],
+  "updates": 65536,
+  "pool_stream": 1911,
+  "dose_stream": 1913,
+  "fillers": 124,
+  "threshold": 0.05,
+  "near_threshold": [
+   0.03,
+   0.08
+  ],
+  "jobs": 3,
+  "pool_order": "anchors(k) + canonical + fillers(124-k)",
+  "input_sha256": {
+   "N1B_ANCHOR_DOSE_PLAN.md": "5017c4c3cc363807a073235c1612d6b42e9662bec12006709e675f80d825eecc",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/n1_anchor_supply.json": "7b3dc410ed6cbb5612ddcbf7af538fe5a16a2d083e8c2a7939f5073ca73a50f8"
+  },
+  "implementation_sha256": "8febeddd044c6c6a91cd3030e2ac8792dce6f52225a0ce97d45a01b5d1af450f",
+  "n1_implementation_sha256": "11c154137e299635739ceff70e6a50477657308002ebb099d651983f18ed37c3"
+ },
+ "protocol_sha256": "16f775bae9f474a53f9ec3e326f4d0c142a6f77f672b0f5fc8a24649d44ccf1a"
+}
