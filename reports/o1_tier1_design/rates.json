@@ -1,0 +1,21 @@
+{
+ "false_fire": 0.0,
+ "detection": 1.0,
+ "intermediate": 0.0,
+ "passes": true,
+ "partitions": true,
+ "samplers": {
+  "null": [
+   1.91,
+   1.967
+  ],
+  "effect": [
+   0.0088,
+   0.04
+  ],
+  "intermediate": [
+   0.05,
+   0.13
+  ]
+ }
+}

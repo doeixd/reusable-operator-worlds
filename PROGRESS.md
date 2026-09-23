@@ -7363,3 +7363,34 @@ consume tasks of different lengths, which `learned_lifetime` was not written
 for: it reads `world.program_length`, the world library, a novel-composition
 probe and functional-reuse diagnostics, and calls `begin_task` without a depth.
 NEXT: a Tier 0 feasibility gate on exactly that, before any plan is written.
+
+
+# 2026-09-23 O1 Tier 1 built and launching: order-free anchors, online
+
+`O1_ONLINE_ANCHOR_TIER1_PLAN.md`, runner `row.experiments.o1_online_anchor`,
+independent scorer `score_o1_online_anchor`, learner
+`row.models.online_variable_depth.PlannedDepthRotatedLearner`, 11 tests.
+EXPLORATORY: decides whether the online anchor question is live, no verdict.
+Worlds 10-12; arms `STAGED` and `PLAIN` (SO2's `run_arm` verbatim),
+`SHUFFLED` (the same 188 tasks in one random-order lifetime) and `MIXED_L1` (60
+length-1 plus the 64 canonical length-3, one lifetime).
+
+Tier 0 feasibility, before the plan: at uniform depth the planned-depth learner
+reproduces the committed online lifetime BITWISE through `learned_lifetime.run`
+(initial library, terminal library, prequential loss); a mixed-length stream runs
+end to end with every diagnostic intact. The extra task code in a mixed run is
+the novel-composition probe, excluded by the scorer.
+
+Double-check after writing, per the PI directive. Found two things. (1) The plan
+cited SO3's passing `BASE` streams as 0.013-0.028 from memory; the committed
+report says 0.0088-0.0400, and the upper end near the threshold is exactly what a
+detection rate has to survive. Corrected, and the rates recomputed from the
+corrected sampler: false-fire 0.0000, detection 1.0000. (2) SO2's `run_arm`
+writes into SO2's own artifact directory unless given a path; the runner passes
+an O1-owned one, and a scaled dry run confirmed SO2's directory is untouched.
+Checked beside those: scoring on exactly the canonical 64 tasks, stream sizes and
+depth mixes, that the shuffled streams genuinely interleave rather than stage,
+that `SHUFFLED` is the staged multiset in another order, restart reuse and tamper
+refusal. SO2's `PLAIN` values cited in the plan were verified.
+
+Execution: 12 cells, pool of 3, about 55 min, precondition 8 GiB free.

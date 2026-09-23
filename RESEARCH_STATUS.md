@@ -62,8 +62,12 @@ tasks. The next rung is online and is blocked on decision 5 (a world band).
   stream at this budget - not their order (N1), not length-2 tasks (N1b), and not
   one for every operation (N1c). The successor is an ONLINE anchor-supply rung,
   which needs a new world band. **Worlds 10-19 were allocated by the PI on
-  2026-09-23**; the first step is a Tier 0 feasibility gate on whether one
-  online lifetime can consume a mixed-length task stream at all.
+  2026-09-23**. Tier 0 feasibility PASSED (bitwise equivalence at uniform depth
+  through the real online lifetime; a mixed-length stream runs end to end).
+- **O1 Tier 1 LAUNCHED (2026-09-23)**: `O1_ONLINE_ANCHOR_TIER1_PLAN.md`, worlds
+  10-12, exploratory. `STAGED` and `PLAIN` verbatim from SO2 against `SHUFFLED`
+  (same 188 tasks, one random-order lifetime) and `MIXED_L1` (length-1 quota plus
+  length-3, one lifetime). Check `artifacts/o1_online_anchor/status.json`.
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
 - **Verdict:** `NO-HEADROOM`, `k = 0` of 36 staged cells against a registered

@@ -9432,3 +9432,19 @@ missing operation.
 
 **Scope.** Two excluded operations. The count threshold is bracketed between 6
 and roughly 16-18 length-1 anchors, not located.
+
+
+# O1 Tier 1 expectation (2026-09-23, recorded BEFORE any O1 cell ran; exploratory, not a registered prediction)
+
+Plan `O1_ONLINE_ANCHOR_TIER1_PLAN.md`, worlds 10-12 of development band 2. Tier 1
+produces no verdict; this records Claude's expectation so the reading cannot be
+retrofitted.
+
+- **O1a** at least one order-free arm (`SHUFFLED` or `MIXED_L1`) passes in 2 of 3
+  worlds, i.e. the question is LIVE: **0.5**. Offline, order did not matter
+  (N1); online, early length-3 tasks arrive before any anchor has shaped the
+  library, and J1 showed early uninformed commitments can lock in - though
+  replay keeps training earlier tasks' codes, which pure J1 search did not.
+- **O1b** `STAGED` passes in 2 of 3 of these fresh worlds: **0.55**, from its
+  6-of-10 record on worlds 0-9.
+- **O1c** `PLAIN` fails in every world: **0.95**.
