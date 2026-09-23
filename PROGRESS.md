@@ -7080,3 +7080,81 @@ than the plan.** The PI is asked to close large applications before launch.
 
 NEXT: on a freed host, freeze and hash the plan, commit runner and independent
 scorer together, dry run, restart test, then launch. Nothing is running.
+
+
+# 2026-09-22 N1 VERDICT: ANCHORS_SUFFICE, 3 of 3 worlds
+
+Run `3d2f5c6`, 12 cells, exit 0. Independent scorer `valid: true` with no
+problems; `check_prereg`, `check_invalid` and `check_adequacy` pass. Report
+`reports/n1_anchor_supply.json`; operational records, all 12 durable cells,
+both launch logs and the validation in `reports/n1_anchor_supply_2026-09-22/`.
+DEVELOPMENT evidence on worlds 0-2, never upgradable to confirmatory, under the
+world-budget ruling recorded in the plan.
+
+Terminal median NMSE on the canonical 64 length-3 tasks:
+
+| world | STAGED | INTERLEAVED | SHAM | NONE |
+|---|---|---|---|---|
+| 0 | 0.00623 | **0.00925** | 1.03669 | 0.95749 |
+| 1 | 0.00514 | **0.01011** | 1.06240 | 0.90375 |
+| 2 | 0.00725 | **0.00658** | 1.08676 | 0.90367 |
+
+**Registered triage: `ANCHORS_SUFFICE`.** `INTERLEAVED` is under 0.05 in all 3
+worlds against a registered 2 of 3. `SHAM` ratio 114.8; no world trips the
+`SHAM < 0.45` guard, so the `PARTIAL` clause was interpretable, but it is not
+reached.
+
+**What each check shows.**
+- **Harness anchor holds exactly.** All three `STAGED` cells reproduce their
+  committed J1c terminal medians bitwise (0.006227206610830397,
+  0.00513739878294522, 0.007249458000355779). Nothing downstream is suspect of
+  drift.
+- **The contrast is clean.** `INTERLEAVED` and `SHAM` both pool 188 tasks and
+  24,064 examples and drew IDENTICAL minibatch indices from the same seed
+  sequence (verified by the scorer in every world). The one difference is
+  whether the 124 non-canonical tasks are length-1/2 or length-3.
+- **Non-vacuity holds.** `NONE` fails in every world (0.904-0.957), matching the
+  published 0.92-0.97 floor to within its spread.
+- **More data of the hard kind HURTS.** `SHAM` (1.037-1.087) is worse than
+  `NONE` in every world. Adding 124 length-3 tasks at a fixed update budget
+  thins each task's updates, so `INTERLEAVED`'s win cannot be explained by pool
+  size or data volume; the same pool size with hard fillers is the worst arm.
+
+**Reading, no stronger than the evidence.** On the rotated substrate, offline,
+at this budget, the supply of EASY TASKS is sufficient for formation, and the
+monotone short-to-long ORDERING is not required: anchors at random positions
+with program length never revealed reach 0.0066-0.0101, within about 1.5x of
+the full curriculum, against ~1.05 for the pool-matched sham. Ordering may help
+modestly - `STAGED` beats `INTERLEAVED` in worlds 0 and 1 by ~1.5-2x - but it
+LOSES in world 2 (0.00725 against 0.00658), so no ordering effect is claimed.
+
+**Why this matters beyond N1.** J1c's curriculum needs PROGRAM LENGTH, which an
+online learner does not have. An anchor supply needs only that easy tasks are
+PRESENT in the stream. This reframes the online failures SO2-SO4, which all ran
+the length-ordered protocol online: the mechanism they tried to carry online was
+the ordering, and N1 says the ordering was never the active ingredient. It also
+answers review 85's C1 deadlock from a different direction - INJECT easy tasks,
+do not DEFER commitment - and it does so without any confidence signal, which
+the J1 census showed is not recorded anywhere to gate on.
+
+**What it does NOT establish.** Nothing online was run. Nothing about how FEW
+anchors suffice, what proportion is needed, or whether length-2 tasks alone
+would do. Nothing about worlds outside 0-2, and nothing confirmatory.
+
+**Disclosed deviations.**
+- The launch precondition was set to 6.0 GiB free, not the 8 GiB Amendment 3
+  registered. The 8 GiB figure was for a POOL OF 3; the run was SERIAL, one
+  process at ~340 MB, and the lower bar reflects that. Stated rather than
+  silently changed.
+- `status.json` is first written after the first cell completes, not at launch,
+  so for the first ~25 minutes "how far along?" needed `run.log`. The
+  restartable-and-checkable contract asks for it from the start. Not fixed
+  mid-run because editing the runner would have changed its hash.
+- A host reboot killed the run at cell 10 of 12 (`INTERLEAVED_w2`). The relaunch
+  reused all 9 completed cells from their durable records and restarted the
+  interrupted cell from initialization, per the contract - the first real
+  exercise of the restart path outside a test, and it held.
+
+NEXT: record in PREDICTIONS and RESEARCH_STATUS. The natural successor is a
+Tier 0/1 dose question - how few anchors, and of which length, suffice - and
+then an ONLINE anchor-supply rung, which needs a world band (decision 5).

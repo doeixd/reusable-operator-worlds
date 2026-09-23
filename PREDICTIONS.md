@@ -9271,3 +9271,51 @@ with a graded vocabulary-maturity knob and its own balance gates - which is a
 new substrate, not a census. Recorded so that a later reader finds the
 measurement rather than the intuition, and so the hypothesis is not
 re-proposed as if it were untested.
+
+
+# N1 verdict (2026-09-22): ANCHORS_SUFFICE - the curriculum's ordering is not its active ingredient
+
+Scored against `N1_ANCHOR_SUPPLY_PLAN.md` with Amendments 1-3, run `3d2f5c6`,
+12 cells, exit 0, independent scorer `valid: true`, `check_prereg`,
+`check_invalid` and `check_adequacy` pass. Report
+`reports/n1_anchor_supply.json`; archive `reports/n1_anchor_supply_2026-09-22/`.
+**DEVELOPMENT evidence on worlds 0-2. Never confirmatory**, by the ruling that
+admitted these worlds.
+
+| world | STAGED | INTERLEAVED | SHAM | NONE |
+|---|---|---|---|---|
+| 0 | 0.00623 | **0.00925** | 1.03669 | 0.95749 |
+| 1 | 0.00514 | **0.01011** | 1.06240 | 0.90375 |
+| 2 | 0.00725 | **0.00658** | 1.08676 | 0.90367 |
+
+**Registered triage: `ANCHORS_SUFFICE`**, `INTERLEAVED < 0.05` in 3 of 3 worlds
+against a registered 2 of 3. `SHAM` ratio 114.8; no world under the 0.45 guard.
+
+The triage, its denominators, the `SHAM` sweep and its uninterpretability guard
+were all registered before any cell ran, and the discrimination check measured
+false-fire 0.0000 and full-effect detection 1.0000 at every `SHAM` location
+swept. `SHAM` in fact landed at 1.037-1.087, inside the region where the sweep
+showed the rule is sound.
+
+**Controls, each of which could have failed:** all three `STAGED` cells
+reproduce their committed J1c values bitwise; `INTERLEAVED` and `SHAM` share
+pool size (24,064 examples) and minibatch draw sequence in every world; `NONE`
+fails at 0.904-0.957; and the anchor-difficulty premise was measured in advance
+(Amendment 2, depth-1 ARI 0.46-0.77 against depth-3 at chance).
+
+**Finding.** The supply of easy tasks is sufficient for formation of the rotated
+substrate offline at this budget, and the length ORDERING is not required. The
+pool-matched sham with hard fillers is the WORST arm, worse than the 64-task
+floor, so the effect is not data volume. No ordering effect is claimed:
+`STAGED` beats `INTERLEAVED` in 2 worlds and loses in 1.
+
+**Consequence for the working hypotheses.** CF6 (the first commitment must be
+made where it is informed) is supported in a sharper form: informedness comes
+from the PRESENCE of tasks on which routing is clustering, not from being shown
+them first. The J1c mechanism statement in `AGENTS.md` - "at length 1 tasks
+sharing an operation look alike, so routing is clustering" - was always about
+anchors; J1c only ever tested it confounded with order, and N1 separates them.
+
+**Scope.** Offline pooled training; worlds 0-2; one budget; the full 124-anchor
+supply. Not tested: online presentation, anchor dose or proportion, length-2
+anchors alone, other substrates.

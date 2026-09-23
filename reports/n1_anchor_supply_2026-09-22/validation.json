@@ -1,0 +1,29 @@
+{
+  "valid": true,
+  "problems": [],
+  "verdict": "ANCHORS_SUFFICE",
+  "interleaved_by_world": {
+    "0": 0.009254023173000126,
+    "1": 0.01010594716471369,
+    "2": 0.0065774430991015495
+  },
+  "sham_by_world": {
+    "0": 1.0366882965428492,
+    "1": 1.0624036409190163,
+    "2": 1.0867633040551685
+  },
+  "staged_by_world": {
+    "0": 0.006227206610830397,
+    "1": 0.00513739878294522,
+    "2": 0.007249458000355779
+  },
+  "none_by_world": {
+    "0": 0.9574948508457306,
+    "1": 0.9037483292194014,
+    "2": 0.903673215496255
+  },
+  "worlds_under_threshold": 3,
+  "sham_ratio": 114.80451486427262,
+  "uninterpretable_worlds": [],
+  "interpretation": "N1 development evidence on worlds 0-2; never confirmatory"
+}

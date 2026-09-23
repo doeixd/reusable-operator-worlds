@@ -6,13 +6,39 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-22, after N1 and N2 were drafted under the
-design-adequacy protocol. Nothing is running. No rung is APPROVED: SG0 closed
-`NO-HEADROOM`, its amended sub-triage closed `SATURATED`, SG6 was refused by its
-own gate before a plan existed, and the two drafted plans (N1 freeze-ready, N2
-not) both wait on the world-budget ruling. Every open question is a PI decision -
-items 5, 9 and 10 below - not a measurement.
+Last rewritten: 2026-09-22, after N1 returned ANCHORS_SUFFICE 3/3. Nothing is
+running. The first positive formation result since J1c: the curriculum's
+ordering is not its active ingredient, the presence of easy tasks is.
 
+
+# N1 CLOSED: ANCHORS_SUFFICE, 3 of 3 worlds (2026-09-22)
+
+- **Verdict:** `ANCHORS_SUFFICE`. Run `3d2f5c6`, 12 cells, exit 0, independent
+  scorer valid, prereg/invalid/adequacy pass. Report
+  `reports/n1_anchor_supply.json`; archive `reports/n1_anchor_supply_2026-09-22/`.
+  DEVELOPMENT evidence on worlds 0-2, never confirmatory.
+
+| world | STAGED | INTERLEAVED | SHAM | NONE |
+|---|---|---|---|---|
+| 0 | 0.00623 | **0.00925** | 1.03669 | 0.95749 |
+| 1 | 0.00514 | **0.01011** | 1.06240 | 0.90375 |
+| 2 | 0.00725 | **0.00658** | 1.08676 | 0.90367 |
+
+- **Anchors, not order, not volume.** `INTERLEAVED` (anchors at random
+  positions, length never revealed) passes 0.05 in all 3 worlds. `SHAM` has the
+  same pool, the same examples and verifiably identical minibatch draws, with
+  length-3 fillers instead of anchors, and is the WORST arm - worse than the
+  64-task floor. All three `STAGED` cells reproduce J1c bitwise.
+- **Why it matters:** ordering needs program length, which an online learner
+  lacks; an anchor supply needs only that easy tasks be present. SO2-SO4 carried
+  the ORDER online. N1 says the order was never the active ingredient, and
+  offers review 85's C1 an alternative that needs no confidence signal: inject,
+  do not defer.
+- **Not established:** anything online; anchor dose, proportion or length; other
+  worlds; anything confirmatory.
+- **Natural successors:** a Tier 0/1 dose census (how few anchors, of which
+  length) on the same harness, then an ONLINE anchor-supply rung - which needs a
+  new world band, so decision 5 is live again with a concrete purpose.
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
 - **Verdict:** `NO-HEADROOM`, `k = 0` of 36 staged cells against a registered

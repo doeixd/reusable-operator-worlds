@@ -1,0 +1,49 @@
+{
+ "protocol": {
+  "id": "n1-anchor-supply-v1",
+  "git_commit": "3d2f5c6",
+  "plan": "N1_ANCHOR_SUPPLY_PLAN.md",
+  "worlds": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "STAGED",
+   "INTERLEAVED",
+   "SHAM",
+   "NONE"
+  ],
+  "updates": 65536,
+  "batch": 2,
+  "model_seed": 5000,
+  "threshold": 0.05,
+  "stages": [
+   {
+    "length": 1,
+    "tasks": 60,
+    "updates": 16384
+   },
+   {
+    "length": 2,
+    "tasks": 64,
+    "updates": 16384
+   },
+   {
+    "length": 3,
+    "tasks": 64,
+    "updates": 32768
+   }
+  ],
+  "pool_stream": 1911,
+  "sham_stream": 1912,
+  "implementation": "variable_depth_rotation_v1",
+  "scored_on": "canonical 64 length-3 tasks only",
+  "input_sha256": {
+   "N1_ANCHOR_SUPPLY_PLAN.md": "731d94d6c367dd221242816fc8d3115f686d1b3c256f646708310129f7bc6697",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "11c154137e299635739ceff70e6a50477657308002ebb099d651983f18ed37c3"
+ },
+ "protocol_sha256": "2082ae3b92b41cbe01ce65e1e9807ca67959d5dbd6411ee12049a314669743ca"
+}

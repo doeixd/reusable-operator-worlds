@@ -5238,3 +5238,13 @@ not. This is the first measurement of the clustering mechanism that has
 explained J1c since it ran; it had only ever been argued. General rule: when a
 statistic must span structures of different size, choose a chance-corrected one
 rather than normalising a raw one afterwards.
+
+2026-09-22 N1 verdict ANCHORS_SUFFICE, 3/3 worlds (development, never
+confirmatory). At 65,536 updates on the rotated substrate: STAGED 0.0062/0.0051/
+0.0072 (bitwise J1c), INTERLEAVED 0.0093/0.0101/0.0066, SHAM 1.037/1.062/1.087,
+NONE 0.957/0.904/0.904. INTERLEAVED and SHAM share pool size and minibatch draws;
+the only difference is easy versus hard fillers. SHAM is worse than NONE, so it
+is not data volume. The length ORDER is not required; the PRESENCE of easy tasks
+is sufficient. Ordering needs program length, presence does not, so this is the
+mechanism an online learner could actually use. Reboot killed the run at 10/12;
+the relaunch reused all 9 finished cells - first real test of the restart path.

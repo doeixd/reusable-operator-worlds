@@ -2062,3 +2062,18 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   sizes alone. This is the general repair for the route-margin comparability
   failure - when a statistic must span two structures of different size, pick a
   CHANCE-CORRECTED one rather than trying to normalise a raw one afterwards.
+
+- THE CURRICULUM'S ORDER WAS NEVER ITS ACTIVE INGREDIENT (N1, 2026-09-22;
+  `reports/n1_anchor_supply.json`). J1c confounded a short-to-long ORDERING with
+  the mere PRESENCE of length-1 and length-2 tasks. Separated at a matched
+  65,536-update budget: anchors at RANDOM positions with length never revealed
+  reach 0.0066-0.0101 in 3/3 worlds, against 0.0051-0.0072 for the full
+  curriculum and ~1.05 for a pool-matched sham whose 124 extra tasks are
+  length-3. The sham - same pool size, same examples, identical minibatch draws
+  - is WORSE than the 64-task floor, so the effect is not data volume. What made
+  J1c work is that easy tasks are present, not that they come first. This
+  matters because ordering needs program length, which an online learner does
+  not have, while presence does not. Lesson for any staged or curriculum claim:
+  a curriculum confounds WHAT is presented with WHEN, and the matched-pool
+  interleaved arm is the cheap control that separates them - run it before
+  building an online mechanism around the order.
