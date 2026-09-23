@@ -7158,3 +7158,33 @@ would do. Nothing about worlds outside 0-2, and nothing confirmatory.
 NEXT: record in PREDICTIONS and RESEARCH_STATUS. The natural successor is a
 Tier 0/1 dose question - how few anchors, and of which length, suffice - and
 then an ONLINE anchor-supply rung, which needs a world band (decision 5).
+
+
+# 2026-09-22 N1b built and launching: anchor dose and length
+
+`N1B_ANCHOR_DOSE_PLAN.md`, runner `row.experiments.n1b_anchor_dose`, independent
+scorer `score_n1b_anchor_dose`, 11 tests. Imports N1's module and never edits it,
+because N1's protocol hashes it.
+
+Tier 0 before the plan: clustering ARI at depth 2 on an untrained library is
++0.1163 / +0.1082 / +0.0665, between depth 1 (0.46-0.77) and depth 3 (chance).
+
+Design: same N1 harness (65,536 updates, 188-task pool, 24,064 examples, same
+draw sequence, scored on the canonical 64). Arms `L1_ONLY`, `L2_ONLY`, `DOSE_8`,
+`DOSE_32`; pool order `anchors(k) + canonical + fillers(124 - k)` makes `k = 124`
+N1's INTERLEAVED and `k = 0` N1's SHAM element for element, verified by test,
+with a 32-update prefix bitwise identical to N1 - so the committed N1 cells serve
+as both dose endpoints without re-running.
+
+Double-check after writing, per the PI directive, found three things before
+launch: (1) no independent scorer yet - written and committed with the runner;
+(2) `check_adequacy` rejected the plan, correctly, because its necessity section
+gave a refusal cost without its scale and its discrimination section tabulated
+"fires" without naming the null sampler, false-fire or detection rates -
+rewritten with the substance, not just the keywords; (3) N1's `status.json` was
+first written after cell 1, so this runner writes it at launch. The rates table
+was also recomputed rather than asserted: false-fire 0.0000, detection 1.0000,
+intermediate 0.0000.
+
+Execution: a bounded pool of 3 workers with the parent as the single writer of
+every cell, ~1.7 h, precondition 8 GiB free.

@@ -35,6 +35,7 @@ SECTIONS = ('# Necessity', '# Discriminating power')
 #: `check_invalid.py` defect that printed a clean pass over a manifest of six.
 IN_SCOPE = (
     'N1_ANCHOR_SUPPLY_PLAN.md',
+    'N1B_ANCHOR_DOSE_PLAN.md',
 )
 
 #: Explicit sentinel for a plan with no behaviour to elicit (an observational

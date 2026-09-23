@@ -9319,3 +9319,25 @@ anchors; J1c only ever tested it confounded with order, and N1 separates them.
 **Scope.** Offline pooled training; worlds 0-2; one budget; the full 124-anchor
 supply. Not tested: online presentation, anchor dose or proportion, length-2
 anchors alone, other substrates.
+
+
+# N1b working hypotheses NB1-NB3 (2026-09-22, recorded BEFORE any N1b cell ran)
+
+Plan `N1B_ANCHOR_DOSE_PLAN.md`. Development evidence on worlds 0-2, never
+confirmatory. Probabilities are Claude's priors, informed by one measurement
+taken before this entry: clustering ARI on an UNTRAINED library is 0.46-0.77 at
+depth 1, 0.07-0.12 at depth 2, and at chance (0.006-0.024) at depth 3.
+
+- **NB1** `L1_ONLY` (all 60 length-1 anchors, 64 length-3 fillers) suffices,
+  terminal median < 0.05 in at least 2 of 3 worlds: **0.75**.
+- **NB2** `L2_ONLY` (all 64 length-2 anchors, 60 fillers) suffices: **0.35**.
+  Its depth-2 clustering is 5-10x above chance but 5-10x below depth 1, so this
+  is the informative cell.
+- **NB3** the persistence dose threshold `k*` over `{0, 8, 32, 124}` is at most
+  32: **0.5**.
+
+The triage, denominators, persistence rule and NEAR_THRESHOLD band
+`[0.03, 0.08]` are registered in the plan. Endpoints `k = 0` and `k = 124` are
+N1's committed SHAM and INTERLEAVED cells, admitted because a test shows the
+pools are element-for-element identical and a 32-update prefix trains to a
+bitwise-identical library.

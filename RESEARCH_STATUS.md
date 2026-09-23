@@ -39,6 +39,10 @@ ordering is not its active ingredient, the presence of easy tasks is.
 - **Natural successors:** a Tier 0/1 dose census (how few anchors, of which
   length) on the same harness, then an ONLINE anchor-supply rung - which needs a
   new world band, so decision 5 is live again with a concrete purpose.
+- **N1b LAUNCHED (2026-09-22)**: `N1B_ANCHOR_DOSE_PLAN.md`, arms `L1_ONLY`,
+  `L2_ONLY`, `DOSE_8`, `DOSE_32` on the N1 harness, endpoints taken from the
+  committed N1 cells by verified construction identity. Hypotheses NB1-NB3 in
+  PREDICTIONS. Check `artifacts/n1b_anchor_dose/status.json`.
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
 - **Verdict:** `NO-HEADROOM`, `k = 0` of 36 staged cells against a registered
