@@ -1,0 +1,7 @@
+{
+ "false_fire": 0.0,
+ "detection": 1.0,
+ "intermediate": 0.0,
+ "passes": true,
+ "partitions": true
+}

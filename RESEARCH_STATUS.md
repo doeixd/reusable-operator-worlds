@@ -48,6 +48,10 @@ Nothing is running. The formation effect N1 found lives entirely in length-1
   all 6 operations, every failing cell's covered <=5 - including one at 5 of 6
   that failed completely. Successor N1c holds anchor count fixed and varies
   coverage.
+- **N1c LAUNCHED (2026-09-23)**: `N1C_ANCHOR_COVERAGE_PLAN.md`. Six length-1
+  anchors covering all 6 operations against six covering 5, plus 18 covering 5.
+  Excluded operation 4, 3, 4 across worlds, so two operations tested. NC1-NC4 in
+  PREDICTIONS. Check `artifacts/n1c_anchor_coverage/status.json`.
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
 - **Verdict:** `NO-HEADROOM`, `k = 0` of 36 staged cells against a registered

@@ -7255,3 +7255,27 @@ matters, depth 2 is on the wrong side of it.
 
 NEXT: N1c, a coverage test that breaks the confound - a handful of length-1
 anchors covering all 6 operations against the same number covering only 5.
+
+
+# 2026-09-23 N1c built and launching: coverage against count
+
+`N1C_ANCHOR_COVERAGE_PLAN.md`, runner `row.experiments.n1c_anchor_coverage`,
+independent scorer `score_n1c_anchor_coverage`, 11 tests, discrimination rates
+regenerable from `reports/n1c_design/derive_rates.py` (false-fire 0.0000,
+detection 1.0000, intermediate 0.0000). Hypotheses NC1-NC4 in PREDICTIONS.
+
+Design: N1 harness, 188-task pool, 24,064 examples, identical draws across arms
+(tested). `COVER6_K6` against `COVER5_K6` is the primary contrast - same count,
+five of six anchors shared, one slot differs in whether the excluded operation
+is covered. `COVER5_K18` tests whether count compensates. A registered
+descriptive split asks whether a missing operation damages only the tasks that
+use it (`LOCAL`) or the whole library (`GLOBAL`).
+
+Double-check after writing, per the PI directive. Checked: denominators and a
+four-way primary triage whose every outcome a test reaches; rates computed, not
+asserted; arms as constructions validated per cell; the recorded split present
+in the runner output; scorer committed with the runner; `status.json` at
+launch; restart reuse and tamper refusal tested; the K = 0 pool is N1's SHAM
+element for element. Found one thing: the seeds exclude operation 4 in two of
+the three worlds, so only two distinct operations are tested. Written into the
+plan before launch, so the finding cannot later be generalised past them.

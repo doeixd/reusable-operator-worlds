@@ -9375,3 +9375,23 @@ covered all 6 operations passed (6/6) and every cell covering 5 or fewer failed
 (0/6), including `DOSE_8_w2` at 5 of 6; but coverage and length-1 count moved
 together. Prior 0.55. To be tested by a successor that holds count fixed and
 varies coverage.
+
+
+# N1c working hypotheses NC1-NC4 (2026-09-23, recorded BEFORE any N1c cell ran)
+
+Plan `N1C_ANCHOR_COVERAGE_PLAN.md`. Development evidence on worlds 0-2, never
+confirmatory. Tests NB4, which was post hoc and confounded: holds length-1
+anchor COUNT at 6 and varies operation COVERAGE (6 of 6 against 5 of 6), plus
+one arm at 18 anchors covering 5 of 6. The excluded operation is 4 in worlds 0
+and 2 and 3 in world 1, measured before launch - so at most two operations are
+tested and any finding is about them.
+
+- **NC1** `COVER6_K6` (one length-1 anchor per operation) suffices: **0.40**.
+  Six anchors is fewer than N1b's failing `DOSE_8` held in total, but that arm
+  never covered all six operations.
+- **NC2** `COVER5_K6` fails: **0.80**.
+- **NC3** `COVER5_K18` fails - count does not compensate a missing operation:
+  **0.60**.
+- **NC4** failing `COVER5` cells are `GLOBAL` (tasks NOT using the excluded
+  operation also fail): **0.60**, on the strength of `DOSE_8_w2` failing at 1.04
+  with 5 of 6 operations covered.
