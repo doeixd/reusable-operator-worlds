@@ -1,0 +1,38 @@
+{
+ "protocol": {
+  "id": "o1-online-anchor-tier1-v1",
+  "git_commit": "2e99765",
+  "plan": "O1_ONLINE_ANCHOR_TIER1_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "worlds": [
+   10,
+   11,
+   12
+  ],
+  "arms": [
+   "STAGED",
+   "SHUFFLED",
+   "MIXED_L1",
+   "PLAIN"
+  ],
+  "model_seed": 5000,
+  "replay_stream": 0,
+  "shuffle_seeds": {
+   "SHUFFLED": 1920,
+   "MIXED_L1": 1921
+  },
+  "threshold": 0.05,
+  "jobs": 3,
+  "kind": "rotated_discrete_fast",
+  "scored_on": "terminal model, canonical 64 length-3 tasks only",
+  "input_sha256": {
+   "O1_ONLINE_ANCHOR_TIER1_PLAN.md": "e79a10504fc7f48c38765a47485c3b170d441e6d37a3eae9fd1c11209428403d",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "950dc44685ebd018eed7f90072114302258aa28495f3844760b70ca2ad25f766",
+  "so2_implementation_sha256": "cfb470894205bdc003d0509c0b3620778dc63542b525e4398bbc74ccc1db6b9a",
+  "learner_sha256": "8fef85343e25dad51b31112beac849e993a3d581b48ff5a4b8e2b86fcd0cedc7"
+ },
+ "protocol_sha256": "b3eef46b115fdaf850991ce8f7def7717bbcbe996298412f93ca655b201f3335"
+}

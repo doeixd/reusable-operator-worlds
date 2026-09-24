@@ -1,0 +1,733 @@
+{
+  "audit": "A1 arm-provenance retrofit (FOLLOWUP_AUDITS.md)",
+  "date": "2026-09-24",
+  "kind": "IMPLEMENTATION AUDIT, read-only; no experiment, no re-run",
+  "method": "grep scratch_model|deepcopy(model|deepcopy(learner|from_scratch|fresh_model over src/row/experiments; every hit traced to its arm name, init source and report use. Site-level reading by a read-only subagent; parent verified the (c) site, the shared scratch_model definition (audit_e1_export.py:183, fresh _build_model at seed+offset), G5R:171, SO2:116, SO4:186, and the E5 correction arithmetic.",
+  "result": "ONE mislabelled arm, the already-known E5 S arm. No new instance of the E5 defect.",
+  "counts_all_lines": {
+    "a": 24,
+    "b": 39,
+    "c": 1,
+    "total": 64
+  },
+  "counts_construction_sites": {
+    "a": 24,
+    "b": 13,
+    "c": 1
+  },
+  "disposition_policy": [
+    "No code change to any module that produced a committed report: code stays as RUN (FOLLOWUP A1 rule).",
+    "describe_arm/assert_arm are NOT retrofitted into the 24 modules. audit_so2_online_gate.py is digest-checked by score_o1_online_anchor.py (so2_implementation_sha256) and imports scratch_model from audit_e1_export.py; editing either would break re-scoring of committed O1/SO2-line results. Legacy modules will not run again, so a retrofit buys no protection and costs provenance.",
+    "Rule going forward (already in AGENTS.md): NEW scorers describe and assert every arm."
+  ],
+  "c_sites": [
+    {
+      "module": "audit_e5_synthesizer.py",
+      "line": 254,
+      "code": "scratch_lib = copy.deepcopy(model)",
+      "reported_as": "S (docstring: scratch)",
+      "actual": "trained library, unfrozen = E1 fine-tune arm F",
+      "report_dependency": "reports/e5_synthesizer.json, reports/e5_cache/*.json",
+      "disposition": "code left as run; correction of record PREDICTIONS.md \"CORRECTION to E5 (2026-08-27)\": margins ~1.79/1.93/1.81 vs reported 2.02/2.16/2.04, verdict unchanged. EXPORT_BRANCH_SESSION_REPORT.md ledger row 1 said 1.74; corrected to 1.79 (log(0.1268/0.1009)=0.229; 2.02-0.23=1.79)."
+    }
+  ],
+  "cross_module_name_conflicts": [
+    {
+      "name": "S",
+      "modules": [
+        "audit_e1_export.py",
+        "audit_e1r_recurrence.py",
+        "audit_e2_composition.py",
+        "audit_e8_length.py",
+        "audit_e5_1_search_scaling.py",
+        "score_export_confirmation.py",
+        "audit_e5_synthesizer.py"
+      ],
+      "finding": "CONFLICT (known, the E5 defect): six modules build S as scratch_model(config, 'discrete', 7717) = fresh DiscreteLibraryLearner seed 12717, library and route trained from scratch; audit_e5_synthesizer.py builds S as copy.deepcopy(trained library) + train_library=True, i.e. E1's F construction. Only instance of same-name-different-construction found among 'S' arms."
+    },
+    {
+      "name": "scratch / held_out_scratch_nmse",
+      "modules": [
+        "audit_rotated_g5.py",
+        "audit_rotated_g5r.py"
+      ],
+      "finding": "Same report key, different learner class: G5 scratch is kind 'discrete', G5R scratch is kind 'rotated_discrete'. Each matches its OWN trained arm's class (G5 trained kind 'discrete'; G5R trained kind 'rotated_discrete'), and G5R's docstring calls it 'a matched from-scratch learner'. Intentional and documented; both fresh. Not a mislabel, but the two held_out_scratch_nmse columns are not interchangeable."
+    },
+    {
+      "name": "scratch",
+      "modules": [
+        "audit_so2_online_gate.py",
+        "audit_so4_b2_retest.py"
+      ],
+      "finding": "Same construction call (scratch_model(cfg, 'rotated_discrete', 7717)) but different fresh seeds because the offset is relative to the module's model seed: SO2 5000 -> 12717, SO4 7000 -> 14717. SO4's seed is registered in SO4_B2_RETEST_PLAN.md:54/69-70, and SO2/SO4 use different worlds, so the arms are never paired. Also both use the slow rotated_discrete class for scratch while the trained arm is rotated_discrete_fast (documented in SO2's scratch_kind, ~1e-7 agreement). Not a mislabel."
+    },
+    {
+      "name": "scratch",
+      "modules": [
+        "scratch_difficulty.py vs the E-line/rotated-line modules"
+      ],
+      "finding": "Name overlap only: V1's 'scratch' is a per-task NumPy ScratchResidualMLP (no shared library), the E/G5/SO line's scratch is a fresh operator library adapted on support. Different research lines and estimands; no report compares them. Not flagged as (c)."
+    },
+    {
+      "name": "SHAM (outside the grep; noted for completeness)",
+      "modules": [
+        "audit_h50_reorganization.py",
+        "audit_h51_reorganizability.py",
+        "audit_h53_parallel_formation.py",
+        "mixed_lifetime.py",
+        "audit_j1_search_loop.py"
+      ],
+      "finding": "H50/H51/H53 SHAM = same trained start, same optimizer/data, no structure (the review-71 sham rule; copy.deepcopy(base) at h50:162 / h51:258). J1's SHAM is a different construction (per-round route reassignment, per the J1 census). Different lines with differently-registered shams; not a scratch/fresh mislabel, but the name does not denote one construction repository-wide."
+    }
+  ],
+  "list_matches_followup": true,
+  "list_differences": [
+    "None in module identity: 26 modules match the site grep; removing audit_e6b_search_savings.py and audit_e9_partial_coverage.py (which import arm_provenance) leaves exactly the 24 listed.",
+    "Wording nuance: FOLLOWUP says '2 of them use arm_provenance (audit_e6_corpus.py, audit_e6b_search_savings.py)'. audit_e6_corpus.py does not match the site grep at all, so the 26 = 24 + e6b + e9. And e9 only imports describe_arm without calling it, so it is not actually checked either.",
+    "The grep includes 13 hits in scratch_difficulty.py that are references to the CONFIG FIELD `config.scratch_model` (the V1 NumPy scratch control's dataclass), not the `scratch_model()` function in audit_e1_export.py. Plus imports, docstrings, a comment and protocol strings. Only 13 of the 64 matching lines are actual arm constructions or definitions (see counts)."
+  ],
+  "e5_reporting_check": "The module's reporting STILL calls the arm scratch. (1) Docstring line 8-10: 'S (scratch)'. (2) Local variable `scratch_lib` at line 254. (3) Output keys are the bare 'S' in geomean_nmse, cost and oracle_gap for every world/setting, and the printed summary line 300 prints 'S ...' beside OPT. (4) decisions: the D6 gate (lines 311-314) computes log(S) - log(O) as the scratch-eligibility margin and labels failure 'UNINTERPRETABLE (oracle gate failed)', i.e. it treats S as the scratch reference. (5) The frozen plan E5_SYNTHESIZER_PLAN.md:39 defines S as 'fresh library and route'. The committed report reports/e5_synthesizer.json contains no 'scratch' string (keys are only 'S'), and neither the module nor the report carries any pointer to the PREDICTIONS.md:6377 correction. So the label is corrected only in PREDICTIONS.md / AGENTS.md / EXPORT_BRANCH_SESSION_REPORT.md, not in the module's reporting. Side observation: EXPORT_BRANCH_SESSION_REPORT.md:168 quotes the corrected world-0 D=6 gate margin as '2.02 -> 1.74', while PREDICTIONS.md:6396-6398 gives ~1.79 (2.02 - 0.23); the two documents disagree by 0.05.",
+  "uncertain_sites": [],
+  "sites": [
+    {
+      "module": "audit_e0_residual.py",
+      "line": 84,
+      "code": "local = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "L_refit (refit column in R_residual accounting)",
+      "init_source": "copy of trained h39c w_m4 lifecycle learner",
+      "evidence": "refit_residual(): 'Re-fit the task's private residual under the frozen library and route'; result -> \"L_refit\": float(np.mean(refits)). Probe copy, not a scratch arm.",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e1r_recurrence.py",
+      "line": 37,
+      "code": "from row.experiments.audit_e1_export import adapt, geo, nmse, scratch_model",
+      "class": "b",
+      "arm_name_reported": "S",
+      "init_source": "import of the fresh-construction helper",
+      "evidence": "non-construction reference; see line 182",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e1r_recurrence.py",
+      "line": 120,
+      "code": "local = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "O",
+      "init_source": "copy of trained DISC artifact (e1_disc / e1r_disc)",
+      "evidence": "oracle_route(): writes +/-50 logits into the copy's task code; reported as arm \"O\" (oracle), not scratch",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e1r_recurrence.py",
+      "line": 182,
+      "code": "\"S\": adapt(scratch_model(config, \"discrete\", 7717), as_tensors(task), f\"e1rS_{tag}\", train_library=True)",
+      "class": "b",
+      "arm_name_reported": "S",
+      "init_source": "fresh DiscreteLibraryLearner, seed = artifact discrete_model.seed (5000) + 7717 = 12717",
+      "evidence": "config built from the artifact's config.yaml (lines 158-164; e1r_disc/e1_disc seeds all 5000); scratch_model() calls _build_model on a replaced seed; no trained state",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e1_export.py",
+      "line": 125,
+      "code": "local = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "O / O-W",
+      "init_source": "copy of trained DISC library (own world or donor world)",
+      "evidence": "oracle_route(): pins route logits on the copy; called for \"O\" and \"O-W\" only",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e1_export.py",
+      "line": 140,
+      "code": "local = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "R / R-W / S / F (whatever model is passed)",
+      "init_source": "copy of the passed model: trained (R, R-W, F) or the fresh scratch_model (S)",
+      "evidence": "adapt(): 'Fit the route (and optionally the library) on SUPPORT only'. The copy protects the passed model; the arm's provenance is decided by the caller. F (trained + train_library=True) is labelled F (fine-tune), not scratch.",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e1_export.py",
+      "line": 183,
+      "code": "def scratch_model(config, kind: str, seed_offset: int):",
+      "class": "b",
+      "arm_name_reported": "S (definition used by E1, E1R, E2, E5.1, E8, G5, G5R, SO2, SO4, export confirmation)",
+      "init_source": "fresh _build_model(config with discrete_model.seed + seed_offset, kind); model.eval()",
+      "evidence": "local = replace(config, discrete_model=replace(config.discrete_model, seed=config.discrete_model.seed + seed_offset)); model = _build_model(local, kind). _build_model reads discrete_model.seed for both 'discrete' and 'rotated_discrete' (learned_lifetime.py:397-419).",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e1_export.py",
+      "line": 252,
+      "code": "\"S\": adapt(scratch_model(configs[w], \"discrete\", 7717), task, f\"e1S_{tag}\", train_library=True)",
+      "class": "b",
+      "arm_name_reported": "S",
+      "init_source": "fresh discrete, seed 5000 + 7717 = 12717",
+      "evidence": "configs[w] from e1_disc config.yaml (seed 5000); margin_O_vs_S / margin_R_vs_S / G_export use it as scratch",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e2_composition.py",
+      "line": 33,
+      "code": "from row.experiments.audit_e1_export import ADAPT_LR, ADAPT_STEPS, adapt, geo, nmse, scratch_model",
+      "class": "b",
+      "arm_name_reported": "S",
+      "init_source": "import",
+      "evidence": "non-construction reference; see line 145",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e2_composition.py",
+      "line": 145,
+      "code": "\"S\": adapt(scratch_model(cell[\"config\"], \"discrete\", 7717), as_tensors(task), f\"e2S_{tag}\", train_library=True)",
+      "class": "b",
+      "arm_name_reported": "S",
+      "init_source": "fresh discrete, seed 12717",
+      "evidence": "load_cell() builds config from artifacts/e2_support_split/world_*/config.yaml (seed 5000)",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e3_program_economy.py",
+      "line": 212,
+      "code": "quantized = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "library_rate (behavioural rate of continuous library)",
+      "init_source": "copy of trained continuous artifact, basis quantized",
+      "evidence": "library_ratio(bits): quantizes quantized.basis and measures NMSE ratio; feeds D_library_bits",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e3_program_economy.py",
+      "line": 234,
+      "code": "local = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "route_rates / D_routes_bits",
+      "init_source": "copy of trained continuous artifact, one task code quantized",
+      "evidence": "route_ratio(): target.copy_(torch.round(code / step) * step) on the copy",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e3_program_economy.py",
+      "line": 316,
+      "code": "quantized = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "shared_rate / D_library (E3b)",
+      "init_source": "copy of trained e1_disc library, quantized",
+      "evidence": "shared_ratio(bits): quantized.library[index] = quantize_operator(op, bits)",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e5_1_search_scaling.py",
+      "line": 15,
+      "code": "(scratch: a FRESH library and route, per `scratch_model`, matching E1 and E8).",
+      "class": "b",
+      "arm_name_reported": "S",
+      "init_source": "docstring",
+      "evidence": "non-construction reference; consistent with line 168",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e5_1_search_scaling.py",
+      "line": 36,
+      "code": "from row.experiments.audit_e1_export import ADAPT_LR, ADAPT_STEPS, geo, nmse, scratch_model",
+      "class": "b",
+      "arm_name_reported": "S",
+      "init_source": "import",
+      "evidence": "non-construction reference",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e5_1_search_scaling.py",
+      "line": 94,
+      "code": "\"scratch\": \"scratch_model(config, 'discrete', 7717), as in E1/E8\",",
+      "class": "b",
+      "arm_name_reported": "S (protocol record)",
+      "init_source": "protocol string written into the report",
+      "evidence": "records the construction in reports/e5_1_search_scaling.json protocol block",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e5_1_search_scaling.py",
+      "line": 168,
+      "code": "s = adapt_cell(scratch_model(config, \"discrete\", 7717), task, f\"e51S_{tag}\", depth, True, teacher_library, program, steps=ANCHOR_K)",
+      "class": "b",
+      "arm_name_reported": "S",
+      "init_source": "fresh discrete, seed 12717 (config from audit_e5_synthesizer.load_cell -> e1_disc config.yaml)",
+      "evidence": "comment: 'A FRESH library, as in E1 and E8 -- never a copy of the trained one'; S feeds 'eligible' and 'scratch_over_oracle'",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e5_synthesizer.py",
+      "line": 254,
+      "code": "scratch_lib = copy.deepcopy(model)",
+      "class": "c",
+      "arm_name_reported": "S (docstring line 10: 'S (scratch)'; variable scratch_lib; printed 'S'; report keys geomean_nmse.S, cost.S, oracle_gap.S; D6 eligibility gate log(S)-log(O))",
+      "init_source": "copy of the TRAINED e1_disc library (cell['model'], VariableDepthDiscrete) with train_library=True -> fine-tuning construction identical to E1's F arm",
+      "evidence": "line 254-256: scratch_lib = copy.deepcopy(model); s = adapt_cell(scratch_lib, task, f\"e5S_{tag}\", depth, True, ...); res[\"S\"] = {...}. E5_SYNTHESIZER_PLAN.md:39 registered '**S** scratch | fresh library and route'. Known defect; corrected in PREDICTIONS.md:6377-6414 ('CORRECTION to E5 ... the S arm was mislabeled'). Code must stay (it produced the committed report).",
+      "report_dependency": "yes: reports/e5_synthesizer.json (settings.*.worlds.*.geomean_nmse.S, cost.S, oracle_gap.S; decisions.D6.gate_ok is computed from S vs O) and the per-cell cache reports/e5_cache/*.json (res['S']). Correction of record already in PREDICTIONS.md:6377; also referenced in EXPORT_BRANCH_SESSION_REPORT.md:168, PROGRESS.md:3616, AGENTS.md learnings."
+    },
+    {
+      "module": "audit_e6b_search_savings.py",
+      "line": 101,
+      "code": "wide = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "M (macro-extended) / dummy-extended arm",
+      "init_source": "copy of trained e1_disc library plus one appended slot",
+      "evidence": "extend(): 'A copy of `model` whose library gains one slot'; recorded via describe_arm(\"M\", wide_macro, init_source=\"copy:trained\") and arms_differ vs P. Outside the 24 (already uses arm_provenance).",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e8_length.py",
+      "line": 38,
+      "code": "from row.experiments.audit_e1_export import ADAPT_LR, ADAPT_STEPS, geo, nmse, scratch_model",
+      "class": "b",
+      "arm_name_reported": "S",
+      "init_source": "import",
+      "evidence": "non-construction reference",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e8_length.py",
+      "line": 132,
+      "code": "local = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "O / O-W",
+      "init_source": "copy of trained library (VariableDepthDiscrete)",
+      "evidence": "oracle_cell(): pins oracle route on the copy and traces per-step error",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e8_length.py",
+      "line": 157,
+      "code": "local = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "whatever model is passed (R, R-W, S here; OPT/S/OPTk/etc. in importers)",
+      "init_source": "copy of the passed model",
+      "evidence": "adapt_cell(): protects the passed model; comment 'the scratch arm gets the same executor'. Provenance of the arm is decided by the caller (this is also the function E5 misused by passing a trained copy).",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e8_length.py",
+      "line": 289,
+      "code": "\"S\": adapt_cell(scratch_model(cell[\"config\"], \"discrete\", 7717), task, f\"e8S_{tag}\", depth, True, ...)",
+      "class": "b",
+      "arm_name_reported": "S",
+      "init_source": "fresh discrete, seed 12717",
+      "evidence": "load_cell() config from e1_disc config.yaml (seed 5000)",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_e9_partial_coverage.py",
+      "line": 164,
+      "code": "local = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "P / P+A / A-RAND / P+A+E / CEILING",
+      "init_source": "copy of trained library, with arm-specific channels added",
+      "evidence": "fit(): 'Fit the arm's channels on SUPPORT only'; no arm is named scratch/fresh. Note: describe_arm is imported (line 45) but never called. Outside the 24.",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_future_block.py",
+      "line": 69,
+      "code": "probe = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "per-learner future-task acquisition curve",
+      "init_source": "copy of trained learner, shared library frozen",
+      "evidence": "adapt(): 'Acquire one future task with the shared library frozen'; probe copy so lifetime state is untouched",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_h39_confirmation_followups.py",
+      "line": 67,
+      "code": "base = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "census_M / census_O (keys M_rank_8, M_rank_max, O_rank_*)",
+      "init_source": "copy of trained M (m2k32 pslot) or O (ordinary prospective) learner",
+      "evidence": "census_fit(): post-hoc extraction census on the realized population; labelled by the learner it copies (M, O), never scratch",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_h50_reorganization.py",
+      "line": 170,
+      "code": "snapshots[m] = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "per-arm migration snapshot at budget m (TRUE/WRONG-*/RANDOM-*/SHAM)",
+      "init_source": "copy of the arm's migrating model after m budgets",
+      "evidence": "snapshots used for family_nmse, drift, score_loo; stripped before write. (The arm model itself is copy.deepcopy(base) at line 162 - same trained start for every arm incl. SHAM, which is the registered sham construction; not a grep hit.)",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_h51_reorganizability.py",
+      "line": 261,
+      "code": "reference = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "m0 reference for the arm",
+      "init_source": "copy of the arm's pre-migration model (trained base or R_1a/R_1b rebuild)",
+      "evidence": "used for drift reference, family_nmse_m0 and measured m0 C_LOO",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_h51_reorganizability.py",
+      "line": 266,
+      "code": "snapshots[m] = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "per-arm migration snapshot",
+      "init_source": "copy of migrating model",
+      "evidence": "same pattern as H50:170",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_implicit_promotion.py",
+      "line": 96,
+      "code": "clone = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "equalized / own_group / other_group substitutions",
+      "init_source": "copy of trained model with task codes substituted",
+      "evidence": "_substitute(codes_for): copies and overwrites task codes; reported as substitution conditions",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_implicit_promotion.py",
+      "line": 113,
+      "code": "clone = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "ablations[slot]",
+      "init_source": "copy of trained model with one slot ablated",
+      "evidence": "view[:, slot] = -1e9 on the copy; reports damage per group",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_promotion_oracle.py",
+      "line": 113,
+      "code": "clone = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "points[residual_rank in (2,1,0)]",
+      "init_source": "copy of trained model with residual rank reduced",
+      "evidence": "_reduce_rank(clone, rank); rate-distortion frontier point",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_rank2_oracle.py",
+      "line": 97,
+      "code": "promoted = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "promoted (oracle family-mean abstraction)",
+      "init_source": "copy of trained model with residuals replaced by family means",
+      "evidence": "promoted.task_residuals[...].copy_(abstractions[family])",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_rotated_g5.py",
+      "line": 37,
+      "code": "from row.experiments.audit_e1_export import ADAPT_STEPS, nmse, scratch_model",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "import",
+      "evidence": "non-construction reference",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_rotated_g5.py",
+      "line": 123,
+      "code": "# The SAME scratch construction E1 and E8 use -- `scratch_model(...)`, a",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "comment",
+      "evidence": "non-construction reference",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_rotated_g5.py",
+      "line": 126,
+      "code": "scratch = scratch_model(cfg, \"discrete\", 7717)",
+      "class": "b",
+      "arm_name_reported": "held_out_scratch_nmse (g5S_ probe ids)",
+      "init_source": "fresh DiscreteLibraryLearner (standard family), seed 5000 + 7717 = 12717",
+      "evidence": "cfg = v1.yaml with world seed replaced; trained arm is run(kind=\"discrete\") on the rotated world, so scratch matches the trained arm's class; adapt_cell deep-copies it per program",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_rotated_g5r.py",
+      "line": 31,
+      "code": "from row.experiments.audit_e1_export import ADAPT_STEPS, scratch_model",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "import",
+      "evidence": "non-construction reference",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_rotated_g5r.py",
+      "line": 171,
+      "code": "scratch = scratch_model(cfg, \"rotated_discrete\", 7717)",
+      "class": "b",
+      "arm_name_reported": "held_out_scratch_nmse (g5rS_ probe ids)",
+      "init_source": "fresh RotatedDiscreteLibraryLearner, seed 12717",
+      "evidence": "docstring: 'the trained library beats a matched from-scratch learner'; trained arm is kind rotated_discrete",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_so2_online_gate.py",
+      "line": 9,
+      "code": "world])`, `adapt_cell` at `ADAPT_STEPS`, `scratch_model(cfg,",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "docstring",
+      "evidence": "non-construction reference",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_so2_online_gate.py",
+      "line": 36,
+      "code": "from row.experiments.audit_e1_export import ADAPT_STEPS, scratch_model",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "import",
+      "evidence": "non-construction reference",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_so2_online_gate.py",
+      "line": 76,
+      "code": "\"adapt_cell(ADAPT_STEPS), scratch_model(cfg, 'rotated_discrete', 7717), \"",
+      "class": "b",
+      "arm_name_reported": "scratch (protocol record)",
+      "init_source": "protocol string",
+      "evidence": "margin_construction recorded in the fingerprinted protocol",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_so2_online_gate.py",
+      "line": 116,
+      "code": "scratch = scratch_model(cfg, \"rotated_discrete\", 7717)",
+      "class": "b",
+      "arm_name_reported": "scratch_geo_nmse / rows[].scratch (so2S_ probe ids)",
+      "init_source": "fresh RotatedDiscreteLibraryLearner, seed MODEL_SEED 5000 + 7717 = 12717 (cfg from stage_setup(world, 3, 5000))",
+      "evidence": "scratch_kind note: 'rotated_discrete (G5R's construction; the trained arm is the fast kind, which agrees with it to ~1e-7)'",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_so4_b2_retest.py",
+      "line": 37,
+      "code": "from row.experiments.audit_e1_export import ADAPT_STEPS, scratch_model",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "import",
+      "evidence": "non-construction reference",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_so4_b2_retest.py",
+      "line": 186,
+      "code": "scratch = scratch_model(cfg, \"rotated_discrete\", 7717)",
+      "class": "b",
+      "arm_name_reported": "pairs[].scratch (so2S_ probe ids)",
+      "init_source": "fresh RotatedDiscreteLibraryLearner, seed MODEL_SEED 7000 + 7717 = 14717 (cfg from stage_setup(world, 3, 7000))",
+      "evidence": "SO4_B2_RETEST_PLAN.md:54 registers model seed 7000 and :69-70 registers scratch_model(cfg, 'rotated_discrete', 7717); fresh, matches plan",
+      "report_dependency": null
+    },
+    {
+      "module": "audit_substitutability.py",
+      "line": 159,
+      "code": "clone = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "family / global / zero residual substitutions",
+      "init_source": "copy of trained model with one task residual replaced or zeroed",
+      "evidence": "for label in (\"family\", \"global\", \"zero\"): clone.task_residuals[...].copy_(value) / zero_()",
+      "report_dependency": null
+    },
+    {
+      "module": "learned_lifetime.py",
+      "line": 1192,
+      "code": "pruned = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "diagnostics.sparse_two_part",
+      "init_source": "copy of the lifetime's final model, information-pruned",
+      "evidence": "comment: 'Sparse two-part probe: prune uninformative coordinates on a deep copy'",
+      "report_dependency": null
+    },
+    {
+      "module": "learned_lifetime.py",
+      "line": 1496,
+      "code": "checkpoint_model = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "novel-composition checkpoint probe",
+      "init_source": "copy of the in-lifetime model at a checkpoint",
+      "evidence": "_novel_checkpoint(): the required 'checkpoint probes must operate on deep-copied models' pattern",
+      "report_dependency": null
+    },
+    {
+      "module": "score_export_confirmation.py",
+      "line": 33,
+      "code": "from row.experiments.audit_e1_export import ADAPT_LR, ADAPT_STEPS, geo, nmse, scratch_model",
+      "class": "b",
+      "arm_name_reported": "S",
+      "init_source": "import",
+      "evidence": "non-construction reference",
+      "report_dependency": null
+    },
+    {
+      "module": "score_export_confirmation.py",
+      "line": 309,
+      "code": "\"S\": adapt_cell(scratch_model(config, \"discrete\", 7717), task, f\"cS_{tag}\", len(program), True, library, program)",
+      "class": "b",
+      "arm_name_reported": "S (C2/C3 strata)",
+      "init_source": "fresh discrete, seed 12717",
+      "evidence": "config from artifacts/export_confirmation/world_*/config.yaml (all 30 have discrete seed 5000)",
+      "report_dependency": null
+    },
+    {
+      "module": "score_export_confirmation.py",
+      "line": 349,
+      "code": "\"S\": adapt_cell(scratch_model(config, \"discrete\", 7717), task, f\"dS_{tag}\", dep, True, library, program)",
+      "class": "b",
+      "arm_name_reported": "S (C4/C5 depths)",
+      "init_source": "fresh discrete, seed 12717",
+      "evidence": "same config path as line 309",
+      "report_dependency": null
+    },
+    {
+      "module": "score_variational.py",
+      "line": 91,
+      "code": "pruned = copy.deepcopy(model)",
+      "class": "a",
+      "arm_name_reported": "frontier points[threshold_bits]",
+      "init_source": "copy of rebuilt trained variational model, pruned",
+      "evidence": "_frontier(): report = pruned.apply_information_prune(threshold)",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 31,
+      "code": "hidden_dim=config.scratch_model.hidden_dim,",
+      "class": "b",
+      "arm_name_reported": "scratch (V1 per-task scratch control)",
+      "init_source": "fresh ScratchResidualMLP per task, seed = config.scratch_model.seed + task_index",
+      "evidence": "lines 29-35: model = ScratchResidualMLP(..., seed=config.scratch_model.seed + task_index, ...); config-field reference, not the scratch_model() helper",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 32,
+      "code": "seed=config.scratch_model.seed + task_index,",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "fresh per task",
+      "evidence": "same construction as line 31",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 33,
+      "code": "learning_rate=config.scratch_model.learning_rate,",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "fresh per task",
+      "evidence": "same construction",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 34,
+      "code": "weight_decay=config.scratch_model.weight_decay,",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "fresh per task",
+      "evidence": "same construction",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 36,
+      "code": "batch_rng = np.random.default_rng(config.scratch_model.seed + 100_000 + task_index)",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "fresh per task (minibatch RNG)",
+      "evidence": "config-field reference",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 58,
+      "code": "batch_size = min(config.scratch_model.batch_size, pool_size)",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "n/a (training hyperparameter)",
+      "evidence": "config-field reference",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 59,
+      "code": "for _ in range(config.scratch_model.updates_per_example):",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "n/a",
+      "evidence": "config-field reference",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 132,
+      "code": "\"scratch_model\": asdict(config.scratch_model),",
+      "class": "b",
+      "arm_name_reported": "scratch (resolved config.yaml)",
+      "init_source": "provenance record",
+      "evidence": "written to config.yaml and fingerprinted (write_fingerprint(output, resolved, \"scratch\", commit))",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 148,
+      "code": "(output / \"model_seed.txt\").write_text(f\"{config.scratch_model.seed}\\n\", ...)",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "provenance record",
+      "evidence": "records base seed",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 178,
+      "code": "config.scratch_model,",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "CLI override of config",
+      "evidence": "replace(config.scratch_model, learning_rate=..., updates_per_example=...)",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 180,
+      "code": "config.scratch_model.learning_rate",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "CLI override",
+      "evidence": "config-field reference",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 185,
+      "code": "config.scratch_model.updates_per_example",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "CLI override",
+      "evidence": "config-field reference",
+      "report_dependency": null
+    },
+    {
+      "module": "scratch_difficulty.py",
+      "line": 193,
+      "code": "scratch_model=model,",
+      "class": "b",
+      "arm_name_reported": "scratch",
+      "init_source": "CLI override",
+      "evidence": "config-field reference",
+      "report_dependency": null
+    }
+  ]
+}

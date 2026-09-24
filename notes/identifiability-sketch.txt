@@ -158,3 +158,28 @@ turning into a plan, and the two outcomes point at different plans:
 
 Nothing here licenses opening a world band, and nothing here is a prediction
 until it is registered inside a frozen plan.
+
+
+RISK OF RECORD: THIS GENERATOR MAY FAIL ITS OWN NECESSITY GATE
+(added 2026-09-24, FOLLOWUP_AUDITS.md item P1; recorded regardless of how PI
+decision 9 - bank versus SG3 - is answered)
+
+The generator above restricts the SUPPORT input distribution precisely so that
+evidence-equivalent routes diverge on query. That MANUFACTURES the difficulty
+it then measures, which is close to the defining-invariant failure recorded in
+AGENTS.md: could the comparison come out any other way, given how the world
+was constructed? A world engineered to be ambiguous can show that a proposer
+helps UNDER ambiguity while saying nothing about whether ambiguity ARISES.
+
+Before SG3 could be registered it must pass the NECESSITY gate of
+DESIGN_ADEQUACY.md (row.necessity_gate): does any TASK in the world REQUIRE
+program inference, or has the world only stipulated that inference is hard?
+Concretely, `refusal_cost` must be measured for a learner that commits to the
+support-optimal route with no proposer, on tasks whose support distribution
+is the NATURAL one of the world rather than the restricted one, and
+`difficulty_band` must place the restricted world inside a registered band.
+
+SG0 already returned NO-HEADROOM-SATURATED on the held staged libraries
+(0 of 576 programs with any near-tie), so the prerequisite fails on the
+artifacts that exist. This is an argument for banking; it belongs on the
+record either way.

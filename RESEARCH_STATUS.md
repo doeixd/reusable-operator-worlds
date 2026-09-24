@@ -6,10 +6,11 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-23, after N1c refuted the coverage hypothesis. Nothing
-is running. The offline anchor line (N1, N1b, N1c) is complete: formation needs a
-quota of single-operation tasks, not their order, their coverage, or length-2
-tasks. The next rung is online and is blocked on decision 5 (a world band).
+Last rewritten: 2026-09-24, after O1 Tier 1 returned LIVE. Nothing is running.
+Order-free anchors form the library ONLINE as often as the staged curriculum
+(2 of 3 worlds each), but in different worlds, so reliability is the open
+question. `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md` asks it and is DRAFTED,
+awaiting PI decision 11. Follow-up audits A1, A2 and P1 are done.
 
 
 # N1 CLOSED: ANCHORS_SUFFICE, 3 of 3 worlds (2026-09-22)
@@ -64,10 +65,25 @@ tasks. The next rung is online and is blocked on decision 5 (a world band).
   which needs a new world band. **Worlds 10-19 were allocated by the PI on
   2026-09-23**. Tier 0 feasibility PASSED (bitwise equivalence at uniform depth
   through the real online lifetime; a mixed-length stream runs end to end).
-- **O1 Tier 1 LAUNCHED (2026-09-23)**: `O1_ONLINE_ANCHOR_TIER1_PLAN.md`, worlds
-  10-12, exploratory. `STAGED` and `PLAIN` verbatim from SO2 against `SHUFFLED`
-  (same 188 tasks, one random-order lifetime) and `MIXED_L1` (length-1 quota plus
-  length-3, one lifetime). Check `artifacts/o1_online_anchor/status.json`.
+- **O1 Tier 1 COMPLETE (2026-09-24): LIVE, exploratory.** Run `2e99765`, which
+  launched 2026-09-24 after a first attempt failed closed on memory. Scorer valid.
+  Report `reports/o1_online_anchor.json`, archive
+  `reports/o1_online_anchor_20260924/`. Terminal medians, worlds 10/11/12:
+  - `STAGED`: 0.272 / **0.0269** / **0.0188**
+  - `SHUFFLED`: **0.0366** / 0.473 / **0.0184**
+  - `MIXED_L1`: 0.191 / 0.149 / **0.0358**
+  - `PLAIN`: 2.00 / 1.92 / 1.91
+  Order is not needed online, and not sufficient for reliability either: the
+  two 2-of-3 arms fail in different worlds. Without length-2 tasks, `MIXED_L1`
+  passes only 1 of 3 (offline N1b: 3/3). One stream per world, so these are
+  indications only.
+- **O2 DRAFTED (2026-09-24), not frozen:** `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md`.
+  Worlds 13-19, three replay streams, arms `SHUFFLED` / `STAGED` (lifetimes only,
+  behind a bitwise gate against O1's cells) / `MIXED_L1` / `PLAIN`. Registered
+  rule k-of-21: `>= 19` RELIABLE, `<= 16` UNRELIABLE. Measured false-fire
+  <= 0.043 and detection >= 0.86 at three heterogeneity levels. About 3.6 h.
+  Awaiting PI decision 11.
+
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
 - **Verdict:** `NO-HEADROOM`, `k = 0` of 36 staged cells against a registered
@@ -147,10 +163,11 @@ tasks. The next rung is online and is blocked on decision 5 (a world band).
 - **Not refuted, unmeasurable here.** Testing the hypothesis needs a generator
   with a graded vocabulary-maturity knob, its own balance gates and a
   non-vacuity check - a new substrate, not a census over these artifacts.
-- **Tenth rung to fail for absence of opportunity, and the FIRST to fail before
-  a plan existed.** The other nine cost a branch each; this cost one command.
-  Recorded in AGENTS.md: the opportunity gate is what decides whether a plan
-  gets written, not a step inside one.
+- **Tenth rung to fail an adequacy gate, and the FIRST to fail before a plan
+  existed. Its gate was DISCRIMINATION (the sample has no graded axis), not
+  opportunity or necessity** (relabelled 2026-09-24, A2 claims audit). The other
+  nine cost a branch each; this cost one command. Recorded in AGENTS.md: the
+  adequacy gates decide whether a plan gets written, not a step inside one.
 
 # Two new plans drafted (2026-09-22): N1 and N2
 
@@ -334,8 +351,8 @@ is a refinement of a closed line. None is a plan; none is approved.
   route rate, in both directions and across the whole run rather than stage 3.
   Low priority, and needs a stream-only control arm.
 - **C5, macro create/refuse/wait: deprioritized** below everything else. The E6
-  line is closed and E7 refuted the parameterized-macro rationale against the
-  learner's own unplanted-structure null, which any successor must beat; the
+  line is closed and E7 refuted the parameterized-macro rationale (for this
+  testbed's corpus) against the learner's own unplanted-structure null, which any successor must beat; the
   prize is 40-55 bits on dead patterns.
 
 The reviewer's recommendation to drop the amortized writer is agreed and already
@@ -563,7 +580,8 @@ sealed band, and all are implementation audits rather than experiments.
     This is a memory-feasibility result for one library, world, program and
     depth. It is not a depth-five execution or search horizon and not a PX7
     verdict.
-  - **Four consecutive L0d opportunity gates have now failed to produce route
+  - **Four consecutive L0d gates (called opportunity gates in their plans;
+    NECESSITY failures under `DESIGN_ADEQUACY.md`) have now failed to produce route
     ambiguity** on a usable frozen vocabulary: support 128/32/8 (preflight),
     support 4/2/1 (sparse-evidence gate), depth four (execution gate) and depth
     five (memory gate). PX7(a) is about the cost of premature commitment under
@@ -579,7 +597,9 @@ sealed band, and all are implementation audits rather than experiments.
     repeat evidence-size sweeps on this library.
 - **Prior evidence the ladder must respect:** the 2026-08-31 loop census and its
   correction (a straight-line generator cannot price loops); the E6 macro line
-  (macros pay but cannot be timed or compiled); the E7 census (no real
+  (on this testbed macros pay; retrospective accounting alone cannot time
+  creation but a gated criterion can (E6F); compilation works only at ~4x slot
+  capacity and does not pay there); the E7 census (no real
   parameterized-macro family against the learner's own null).
 
 # Paused
@@ -682,6 +702,10 @@ sealed band, and all are implementation audits rather than experiments.
     SO3 and SO4 all failed and worlds 0-9 are spent. Amend stop rule 2 for
     offline scope on frozen J2A libraries, or close L1-L8. They cannot remain
     pending.
+11. **LIVE (2026-09-24): freeze O2?** `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md`
+    (Tier 2, worlds 13-19, ~3.6 h, one evening). Sub-question: keep `MIXED_L1`
+    (+0.7 h)? Claude's recommendation: freeze with `MIXED_L1`, because it is the
+    cheapest direct test of the offline/online discrepancy.
 
 # Housekeeping owed
 

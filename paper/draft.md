@@ -1178,9 +1178,9 @@ reacquisition cost, a two-part description proxy, own-versus-other slot
 substitutability) found that all three discriminate the true grouping on
 a representation that was ORGANIZED around it during its lifetime, and
 none discriminate it on the representation ordinary learning actually
-produces (`reports/h49_discoverability.json`). The value of a structure
-is a property of the representation that holds it, not of the task
-population. The obvious repair — propose a grouping, reorganize the
+produces (`reports/h49_discoverability.json`). Here, the detectable value
+of a structure was a property of the representation that holds it, not of
+the task population alone. The obvious repair — propose a grouping, reorganize the
 finished representation under it, then score — failed as well: 4,096
 budget-matched migration steps under the true partition, with every
 task-local variable and both argument matrices free, recovered

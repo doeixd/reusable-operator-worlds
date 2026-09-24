@@ -7394,3 +7394,90 @@ that `SHUFFLED` is the staged multiset in another order, restart reuse and tampe
 refusal. SO2's `PLAIN` values cited in the plan were verified.
 
 Execution: 12 cells, pool of 3, about 55 min, precondition 8 GiB free.
+
+
+# 2026-09-24 O1 Tier 1 complete: LIVE - order-free anchors work online as often as the curriculum, and no more reliably
+
+Run `2e99765`. It was launched 2026-09-24 19:45Z, after the 2026-09-23 launch
+failed closed on the 8 GiB host precondition. The PI authorized freeing memory,
+and stale TypeScript language servers were closed. 12 cells, pool of 3, exit 0,
+finished 22:44Z. The independent scorer `score_o1_online_anchor` returns
+`valid: true`, no problems, decision **LIVE**. `check_prereg`, `check_invalid`
+and `check_adequacy` pass. Report `reports/o1_online_anchor.json`; logs and
+durable cells archived at `reports/o1_online_anchor_20260924/`. EXPLORATORY,
+Tier 1: an indication that sizes a Tier 2, never a verdict.
+
+Terminal median NMSE on the canonical 64 length-3 tasks (threshold 0.05):
+
+| arm | w10 | w11 | w12 | passing |
+|---|---|---|---|---|
+| `STAGED` | 0.272 | **0.0269** | **0.0188** | 2/3 |
+| `SHUFFLED` | **0.0366** | 0.473 | **0.0184** | 2/3 |
+| `MIXED_L1` | 0.191 | 0.149 | **0.0358** | 1/3 |
+| `PLAIN` | 2.005 | 1.923 | 1.913 | 0/3 |
+
+- **Order is not needed online either.** One random-order lifetime over the
+  staged task multiset passes as often as the three-stage curriculum. It needs
+  no knowledge of program length.
+- **But the two arms fail in DIFFERENT worlds** (`STAGED` in 10, `SHUFFLED`
+  in 11). With one stream per world this cannot separate world difficulty from
+  stream luck. It is the same unreliability SO2-SO4 showed, and the reliability
+  question is the Tier 2's.
+- **Length-2 tasks matter online.** `MIXED_L1` passes only 1 of 3, where
+  offline N1b's length-1-only arm passed 3/3. That is one stream per world, so
+  it is an indication, not a finding. Its end-of-task medians (0.31-0.52) sit
+  far above its terminal ones: the library keeps forming after the tasks have
+  been seen.
+- **`PLAIN` fails everywhere**, so the floor holds.
+
+Against the expectations recorded before any cell ran (`PREDICTIONS.md`, O1):
+O1a (an order-free arm LIVE, p = 0.5) happened; O1b (`STAGED` 2 of 3,
+p = 0.55) happened; O1c (`PLAIN` fails everywhere, p = 0.95) happened.
+
+**Performance-pass miss, disclosed.** The plan's ~55 min estimate read SO2's
+logged per-cell "seconds" (867 s for `STAGED`). That field stops before
+`so2.run_arm`'s `export_margin` and `export_diagnostic`, which O1 calls
+verbatim and never reads. Measured cell wall times:
+- `STAGED` ~85 min
+- `PLAIN` ~77 min
+- `SHUFFLED` ~9 min
+- `MIXED_L1` ~6 min
+
+Roughly 2.4 h of the 3.0 h wall time bought nothing: the STAGED and PLAIN waves, less their ~15 and ~3 min of lifetimes. No number is affected: the registered
+terminal median is computed before the margin. Lesson in `AGENTS.md` and
+`notes/learnings.txt`. The O2 draft re-implements `STAGED` as lifetimes only,
+behind a bitwise gate against these committed cells.
+
+NEXT: `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md`, DRAFTED (not frozen). It covers
+worlds 13-19 with three streams and a registered k-of-21 reliability rule whose
+false-fire and detection rates were measured
+(`reports/o2_design/rates_output.txt`). Awaiting PI approval.
+
+
+# 2026-09-24 Follow-up audits A1, A2 and P1 (no compute)
+
+- **A1 arm provenance** (`reports/arm_provenance_audit.json`). 64 grep lines
+  across 26 modules, 13 of them arm constructions. The only mislabelled arm is
+  the already-corrected E5 `S`. No new instance of the E5 defect exists; every
+  other scratch `S` is `scratch_model(cfg, kind, 7717)`. `describe_arm` was
+  deliberately NOT retrofitted. `audit_so2_online_gate.py` is digest-checked
+  by O1's scorer and imports `audit_e1_export.scratch_model`, so editing
+  modules that produced committed numbers would break re-scoring. The audit
+  also found and fixed a typo in `EXPORT_BRANCH_SESSION_REPORT.md`: the
+  corrected E5 margin is 1.79, not 1.74 (`PREDICTIONS.md` is the record).
+- **A2 claims audit** (`reports/claims_audit_a2_2026-09-24.md`). 53 negative
+  results classified:
+  - 22 genuine refutations
+  - 14 necessity failures
+  - 8 opportunity failures
+  - 7 discrimination failures
+
+  13 wordings generalized a construction-bound negative or used the old
+  "opportunity" label. Changes:
+  - README, paper and RESEARCH_STATUS: rescoped in place.
+  - `PREDICTIONS.md`: an appended correction, since it is append-only.
+
+  No genuine refutation had been hedged.
+- **P1**: SG3's necessity risk (a generator that restricts support to
+  manufacture ambiguity) recorded in `notes/identifiability-sketch.txt`.
+- A3 (optional) and P2 (blocked on PI decision 10) not done.

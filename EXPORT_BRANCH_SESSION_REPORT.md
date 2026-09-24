@@ -165,7 +165,7 @@ verdict. Each is recorded in `PREDICTIONS.md` with its measured impact.
 
 | # | defect | found by | impact |
 |---|---|---|---|
-| 1 | **An arm was a name, not a construction.** E5 built its scratch arm with `copy.deepcopy(trained_model)` where E1/E8 use `scratch_model(...)` — a fine-tuning arm wearing the scratch label. | diffing how a baseline is BUILT before reusing it | ~0.23 log units; D=6 gate margin 2.02 -> 1.74 against a 0.75 threshold; no verdict flips |
+| 1 | **An arm was a name, not a construction.** E5 built its scratch arm with `copy.deepcopy(trained_model)` where E1/E8 use `scratch_model(...)` — a fine-tuning arm wearing the scratch label. | diffing how a baseline is BUILT before reusing it | ~0.23 log units; D=6 gate margin 2.02 -> 1.79 (corrected 2026-09-24 from a mistyped 1.74; `PREDICTIONS.md` is the record) against a 0.75 threshold; no verdict flips |
 | 2 | **A null estimated from data containing the effect.** The recurrence gate resampled slot marginals from the full corpus, half of which carried the planted motif. | disbelieving a verdict that contradicted its own numbers | world 1's 14/32 signal scored as chance; p99 16.0 -> 10.0 on correction; verdict flipped |
 | 3 | **A registered estimand that could not fail.** E6A's primary derives `H*` from the same coding scheme the measurement re-computes — an algebraic identity. | a structural dry run before compute was spent | would have made the rung vacuous; Amendment 1 replaced it |
 | 4 | **A threshold vacuous before it was frozen.** The natural accounting gives `H* = L/(L-1)` = 1.5 uses at L=3. | computing a threshold's value under the null at design time | all four refusal controls would have been unable to fire |

@@ -1,5 +1,15 @@
 # Queued follow-up work, for another agent to execute
 
+**Status 2026-09-24:** A1, A2 and P1 are DONE.
+- A1: `reports/arm_provenance_audit.json`. Only the known E5 `S` arm is (c). No
+  retrofit, because modules digest-checked by committed scorers must stay as
+  run.
+- A2: `reports/claims_audit_a2_2026-09-24.md`. 13 wordings scoped;
+  `PREDICTIONS.md` correction appended.
+- P1: `notes/identifiability-sketch.txt`.
+
+A3 is optional and not done. P2 is still blocked on PI decision 10.
+
 Written 2026-09-22 after the three gates were separated
 (`DESIGN_ADEQUACY.md`: NECESSITY, OPPORTUNITY, DISCRIMINATION) and applied
 retrospectively to what the repository already holds. Nothing here is an

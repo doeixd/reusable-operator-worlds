@@ -5266,3 +5266,5 @@ World 0 failed LOCALLY (not-using 0.025, using 1.135). World 2 excluded the same
 op as world 0 and passed, so it is not operation-specific. NB4 (coverage, from
 N1b's post-hoc 6/6 vs 0/6 table) REFUTED - it was a count effect. Online
 requirement: a quota of single-operation tasks, between 6 and ~16-18.
+
+2026-09-24 O1: a reused cell function's logged 'seconds' excluded its post-lifetime diagnostics (so2.run_arm export_margin, ~1.6-2.8 h/cell at scale 1, unused by O1). Time reused calls end to end from log timestamps and diff what they compute against what the plan reads. Full entry in AGENTS.md.

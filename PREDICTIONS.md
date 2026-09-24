@@ -9448,3 +9448,49 @@ retrofitted.
 - **O1b** `STAGED` passes in 2 of 3 of these fresh worlds: **0.55**, from its
   6-of-10 record on worlds 0-9.
 - **O1c** `PLAIN` fails in every world: **0.95**.
+
+
+# CORRECTION (2026-09-24, A2 claims audit): two wordings scoped, one label renamed
+
+Audit record: `reports/claims_audit_a2_2026-09-24.md`. It classifies every
+negative claim in this file, `paper/draft.md`, `README.md` and
+`RESEARCH_STATUS.md` as a NECESSITY, OPPORTUNITY or DISCRIMINATION failure or a
+GENUINE REFUTATION (`DESIGN_ADEQUACY.md`). No number, verdict or threshold
+changes. The earlier wordings stay in place above, and this entry corrects
+them.
+
+**E6.2's headline sentence.** The entry states, in bold, "The capacity that
+makes compilation correct is the capacity that makes it uneconomic." E6.2 is a
+NECESSITY failure. The task never required compilation, because a definitional
+macro, which pays after 7.44 uses, is a cheaper stand-in. The testbed also has
+no recurring subroutine structure (PROGRESS correction of 2026-08-31). So the
+sentence describes this construction and is not a law of compilation. The
+licensed reading is: *on this testbed, the capacity that made compilation
+correct (about 4x a library slot) made it uneconomic.*
+
+**"Rungs failed for absence of opportunity."** This is a relabelling, not a new
+result. The SG1-SG4 consequence (2026-09-22) counts rungs that "failed for
+absence of opportunity". That count predates `DESIGN_ADEQUACY.md`. Under its
+three gates, most of those rungs failed NECESSITY (the task did not require the
+behaviour), SG6 failed DISCRIMINATION, and E9 and the premise of the
+2026-08-31 loop census failed OPPORTUNITY. None of them refutes the behaviour it
+studied.
+
+
+# O1 Tier 1 OUTCOME (2026-09-24): LIVE. Exploratory, no verdict
+
+Run `2e99765`, scorer valid. Report `reports/o1_online_anchor.json`. Against the
+expectations recorded above before any cell ran:
+
+- **O1a** (an order-free arm passes 2 of 3; p = 0.5): **OCCURRED**, via
+  `SHUFFLED` (0.0366 / 0.473 / 0.0184). `MIXED_L1` passed 1 of 3
+  (0.191 / 0.149 / 0.0358).
+- **O1b** (`STAGED` passes 2 of 3; p = 0.55): **OCCURRED**
+  (0.272 / 0.0269 / 0.0188).
+- **O1c** (`PLAIN` fails in every world; p = 0.95): **OCCURRED**
+  (2.005 / 1.923 / 1.913).
+
+Reading, bounded by one stream per world: order is not needed online, and it is
+not SUFFICIENT for reliability either. The two arms fail in different worlds.
+The successor, `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md`, is DRAFTED, not
+registered. None of its thresholds is a prediction until the PI freezes it.

@@ -2116,3 +2116,15 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   enough informed commitments make the remaining assignments inferable. What an
   online stream needs is a quota of single-operation tasks, not one for every
   operation.
+
+- A REUSED CELL FUNCTION'S "SECONDS" IS NOT ITS WALL TIME (O1, 2026-09-24). O1
+  sized itself at ~55 min from SO2's logged 867 s per STAGED cell, but
+  `audit_so2_online_gate.run_arm` stops its timer before `export_margin` and
+  `export_diagnostic`, which at scale 1 took SO2 ~1.6 h more per STAGED cell and
+  ~2.8 h per PLAIN cell (log timestamps: start 18:12, saved 20:05 / 21:16). O1
+  calls `run_arm` verbatim for STAGED and PLAIN and discards both diagnostics, so
+  most of its runtime bought nothing. No number is affected: the registered
+  terminal median is computed before the margin. The performance pass read a
+  field instead of timing the call. Time a reused function END TO END from log
+  timestamps, and diff what it computes against what the new plan reads, before
+  quoting a cost.

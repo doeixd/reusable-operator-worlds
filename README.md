@@ -35,12 +35,12 @@ confirmatory result.
 | Rung | Question | Status |
 | --- | --- | --- |
 | **E5 / E5.1** | Can a learned recognizer *write* the programs? How does finding them scale? | Amortization without quality: the writer misses the registered oracle gap (+0.31–0.32 vs ≤0.15) and costs more to train than search. Search cost grows with program *length*, logarithmically in program count. |
-| **E6 / E6.2** | Can the language grow new symbols? | Macros pay by the alphabet-taxed code (3/3) and causally cut search cost by the predicted amount; retrospective economics cannot time creation, a gated criterion can; compiling a macro into one operator works only at ~4× slot capacity and never pays. |
+| **E6 / E6.2** | Can the language grow new symbols? | Macros pay by the alphabet-taxed code (3/3) and causally cut search cost by the predicted amount; retrospective economics cannot time creation, a gated criterion can; compiling a macro into one operator works only at ~4× slot capacity and pays at no tested capacity (0/3 worlds) on this testbed, where a definitional macro already supplies the abbreviation. |
 | **RF0a / RF0b** | Does semantic recurrence outlive literal syntax? | Raw local semantics survive (RF0a); the semantic-motif ceiling is **unresolved** (RF0b: one world's strong cell failed its permutation null). |
 | **G5R** | Can a stronger, rotated operator family be learned online? | Fails 0/3 (held-out margins +0.12–0.29 vs 0.75). Diagnosis: each operator is findable in isolation and the joint library is learnable with oracle routes (2/3); the wall is route inference or online interference. |
 | **G5R Stage D** | Which of those two? | `BUDGET_LIMITED`: at the lifetime's own budget even oracle routes fail 0/3; sufficiency lies between 16k and 262k example-gradients; learned routes fail even where oracle routes pass. |
 | **SO0** | Do existing cells separate the budget axes? | Census: no pair controls updates, task diversity or example-gradients; no persistent threshold crossing exists anywhere. |
-| **SO1** | Which resource buys acquisition: updates, diversity or gradients? | `ORACLE_PASSES_LEARNED_FAILS`, all five registered predictions correct. With oracle routes the library is acquired at 131k example-gradients (batch 2) and 262k (batch 64); batch 2 is better at every equal budget (15/15 world-levels). Learned routes fail 0/3 at both envelopes (0.92-1.16). World 0 never passes. The wall is the route writer, not compute. One stream per cell; after a first launch stopped at an anchor gate that a frozen diagnostic traced to resampling. |
+| **SO1** | Which resource buys acquisition: updates, diversity or gradients? | `ORACLE_PASSES_LEARNED_FAILS`, all five registered predictions correct. With oracle routes the library is acquired at 131k example-gradients (batch 2) and 262k (batch 64); batch 2 is better at every equal budget (15/15 world-levels). Learned routes fail 0/3 at both envelopes (0.92-1.16). World 0 never passes. The wall is the route writer, not compute (relocated by SO1R, next row). One stream per cell; after a first launch stopped at an anchor gate that a frozen diagnostic traced to resampling. |
 | **SO1R** | Is the route writer's failure route inference or joint acquisition? | `ROUTES_RECOVERABLE`. On SO1's frozen oracle-acquired libraries, exhaustive search picks the exact oracle route for 100% of tasks and the learner's own relaxation matches oracle quality (0.005-0.009). The wall is forming library and routes together, not finding routes. |
 | **J0** | Does gradient route inference degrade as the library gets worse? | `CF2_SUPPORTED` (narrowly; rho 0.52). The pattern is a threshold: gradient routing equals exhaustive search on every library at or below 0.47 median NMSE and fails above about 0.6, while search keeps finding the oracle route. Early in joint training every library is on the failing side. |
 | **J1** | Does exhaustive route search in the training loop let library and routes form together? | `J1_FAILS`. It beats learned soft routes and a sham by ~0.2 (0.76 vs 0.92-0.98) but forms nothing: the first search, on a random library, makes an arbitrary assignment that the library then fits and that never changes again (0% route change after round 3-5). The first commitment has to be informed. |
@@ -57,7 +57,7 @@ could be taught to *find* programs in it better than search can.
 | Rung | Question | Status |
 | --- | --- | --- |
 | **L0d ×4** | Is route inference ever ambiguous on a usable vocabulary? | Four consecutive negatives: support 128/32/8, support 4/2/1, depth four, depth five (248,832 routes in 243 memory-bounded blocks). No intervention changed the selected route. |
-| **SG0** | Is there any HEADROOM for a learned proposer — what does committing to the support-optimal route cost? | **`NO-HEADROOM`, k = 0 of 36 staged cells** against a `k ≤ 2` registered before any data existed. 574/576 staged tasks have *exactly* zero commitment regret; the bootstrap floor is exactly zero in every staged cell (200 resamples never changed the route). Non-vacuity passes decisively: the same code path gives 500/576 control routes differing and regret to 0.663. **In force as registered:** the amortized-proposer branch is CLOSED, PX7 retired as *unmeasurable here* (not refuted), the L0d census WITHDRAWN. |
+| **SG0** | Is there any HEADROOM for a learned proposer — what does committing to the support-optimal route cost? | **`NO-HEADROOM`, k = 0 of 36 staged cells** against a `k ≤ 2` registered before any data existed. 574/576 staged tasks have *exactly* zero commitment regret; the bootstrap floor is exactly zero in every staged cell (200 resamples never changed the route). Non-vacuity passes decisively: the same code path gives 500/576 control routes differing and regret to 0.663. **In force as registered:** the amortized-proposer branch *on this substrate* is CLOSED, PX7 retired as *unmeasurable here* (not refuted), the L0d census WITHDRAWN. |
 | **SG0 sub-triage** | Does that negative license the successor generator? | `NO-HEADROOM-SATURATED`. **0 of 576 staged programs have any route within 1% of their winner**; staged median identifiability 53.9 against the controls' 0.025. The route space is not merely well-evidenced but *functionally separated*, so restricting the support distribution cannot manufacture regret — evidence was never what prevented it. Diagnostic, not preregistered: it decides a program question and is admissible only because the staged answer is invariant to every part of it. |
 | **SG6** | Does inference difficulty TRACK vocabulary quality? | **Closed before opening.** Its own gate refused it: quality is bimodal with nothing between the clusters (gap 30.2× the wider cluster's spread), pooled Spearman −0.692 but within-cluster +0.086 / +0.429 — null and wrong-signed. The pooled number re-detects cluster membership; effective n is 2, not 12. Not refuted — *unmeasurable here*. |
 
@@ -129,15 +129,18 @@ learner's own realized population costs 2.59×.
 Five development rungs then asked whether such structure can be *discovered*,
 and all five returned negatives that are themselves the result:
 
-- **H47** — imposing discrete membership on a continuous manifold is a cost,
-  not a gain; on a world with two genuinely orthogonal family subspaces the
-  learner rationally absorbs both into one channel and beats the
-  told-membership oracle on present cost.
+- **H47** — on this substrate, imposing discrete membership on a continuous
+  manifold was a cost, not a gain; on a world with two genuinely orthogonal
+  family subspaces, at two slots of K = 32 argument directions, the learner
+  rationally absorbs both into one channel and beats the told-membership oracle
+  on present cost. At that capacity the task did not require the split.
 - **H48b** — identity pays for *future* acquisition only below a channel-width
-  threshold; never for present cost. Current utility, future fertility, and
+  threshold (K ≤ 8 per slot here), and for present cost at no tested width
+  (K = 2-32) on this world. Current utility, future fertility, and
   description cost must be priced separately.
-- **H49** — discriminating retrospective signals exist **only** on a
-  representation already organized around the true structure.
+- **H49** — on the two-subspace world, the retrospective signals we tested
+  discriminate the true structure **only** on a representation already organized
+  around it; the label-free objective never rewarded that organization.
 - **H50** — 4,096 steps of budget-matched reorganization recover ≈ 0% of that
   separation, and migration under *any* hypothesis manufactures the surface
   signature (substitutability) without the substance.
@@ -301,15 +304,17 @@ residual matches a law fitted on entirely different data. This is the first E6
 result that is not an identity: it was forecast out of sample and could have
 failed.
 
-**The economics picks the right macro and cannot refuse a dead one (E6D).**
+**The economics picks the right macro, and cannot refuse one that stops without warning (E6D).**
 Given an open field of rivals — nested prefix and suffix, both permutations, a
 non-adjacent pair, three random trigrams — the code selects the true macro in
 3/3 worlds. The shorter, *more frequent* `A B` loses, because the extra symbol
 saved per use outweighs its higher count. But on a pattern that stops recurring,
 the same code creates and loses 40–55 bits, in 3/3 worlds, while correctly
-creating on continuing patterns 3/3. It is specifically blind to
-**non-continuation**: \(H_{\text{eff}}\) counts uses that *have* happened,
-and the decision needs uses that *will*.
+creating on continuing patterns 3/3. A same-day correction narrowed what this shows: the planted pattern was uniform
+until it stopped, so the observed corpus held no signal of non-continuation and
+*no* past-only rule could have refused. The control could not separate "the rule
+lacks a criterion" from "the task is impossible", which is why E6E and E6F used a
+pattern that decays inside the observed window.
 
 Structure identification and creation *timing* are different problems, and one
 retrospective accounting solves only the first.
@@ -388,7 +393,7 @@ distribution shift better than we predicted.
 **And that is exactly what makes it uneconomic:**
 
 \[
-\boxed{\text{the capacity that makes compilation correct is the capacity that makes it not worth doing}}
+\boxed{\text{on this substrate, the capacity that made compilation correct made it not worth doing}}
 \]
 
 A *definitional* macro pays after 7.44 uses. A *compiled* one needs ~200 at
