@@ -7481,3 +7481,21 @@ false-fire and detection rates were measured
 - **P1**: SG3's necessity risk (a generator that restricts support to
   manufacture ambiguity) recorded in `notes/identifiability-sketch.txt`.
 - A3 (optional) and P2 (blocked on PI decision 10) not done.
+
+
+# 2026-09-24 Follow-up A3: H39's two-slot claim against capacity_forces_structure (no compute)
+
+Applied `row.necessity_gate.capacity_forces_structure` to the committed H39d
+alpha-only k=128 ratios. Monolithic P64 against structured M2K32, worlds 0/1/2:
+
+| world | P64 | M2K32 | margin |
+|---|---|---|---|
+| 0 | 1.71 | 1.27 | +25.7%, passes |
+| 1 | 1.54 | 1.74 | -13.0% |
+| 2 | 1.45 | 1.36 | +6.2%, below the minimum margin |
+| mean | 1.57 | 1.46 | +7.0%, below the minimum margin |
+
+This agrees with the H39d registered `SLOT_STRUCTURE` NOT SUPPORTED. The
+existing wording (the two slots form ONE distributed argument channel, and
+there is no cluster language) is now confirmed by measurement, not only by
+argument. Development artifacts only; no sealed verdict changes.

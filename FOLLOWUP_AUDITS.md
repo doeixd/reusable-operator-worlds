@@ -8,7 +8,7 @@
   `PREDICTIONS.md` correction appended.
 - P1: `notes/identifiability-sketch.txt`.
 
-A3 is optional and not done. P2 is still blocked on PI decision 10.
+A3 is done by reading, with no compute. It applies `row.necessity_gate.capacity_forces_structure` to the committed H39d alpha-only ratios (`PREDICTIONS.md`, H39d table), comparing M2K32 (two slots x 32) with P64 (one slot x 64) at matched total capacity. Structure wins by 25.7% in world 0, loses by 13.0% in world 1, and falls below the minimum margin in world 2 (+6.2%) and on the mean (+7.0%, 1.46 vs 1.57). This agrees with the registered `SLOT_STRUCTURE` NOT SUPPORTED, so the "one distributed argument channel" wording is confirmed by measurement. No sealed verdict changes. P2 is still blocked on PI decision 10.
 
 Written 2026-09-22 after the three gates were separated
 (`DESIGN_ADEQUACY.md`: NECESSITY, OPPORTUNITY, DISCRIMINATION) and applied
