@@ -1,0 +1,149 @@
+{
+ "SHUFFLED_w10": {
+  "order_matches_registered_stream": true,
+  "prequential_rows_per_task": [
+   128
+  ],
+  "routes_present": 188,
+  "routes_expected": 188,
+  "routes_wrong_length": 0,
+  "extra_state_task_codes": [
+   "task_novel_composition_0"
+  ],
+  "terminal_median_recomputed": 0.03656058822044286,
+  "terminal_median_recorded": 0.03656058822044286,
+  "anchor_last_task_depth": 1,
+  "anchor_end_of_task": 0.003381230278723737,
+  "anchor_terminal": 0.003381230278723737,
+  "anchor_abs_error": 0.0,
+  "end_of_task_median_recorded_all_tasks": 0.06585685143566009,
+  "end_of_task_median_canonical64": 0.6327371628474252,
+  "end_of_task_median_by_depth": {
+   "1": 0.014920659400766183,
+   "2": 0.047321501362981785,
+   "3": 0.6327371628474252
+  }
+ },
+ "SHUFFLED_w11": {
+  "order_matches_registered_stream": true,
+  "prequential_rows_per_task": [
+   128
+  ],
+  "routes_present": 188,
+  "routes_expected": 188,
+  "routes_wrong_length": 0,
+  "extra_state_task_codes": [
+   "task_novel_composition_0"
+  ],
+  "terminal_median_recomputed": 0.47342454976495973,
+  "terminal_median_recorded": 0.47342454976495973,
+  "anchor_last_task_depth": 3,
+  "anchor_end_of_task": 0.5883314545467365,
+  "anchor_terminal": 0.5883314545467365,
+  "anchor_abs_error": 0.0,
+  "end_of_task_median_recorded_all_tasks": 0.07968467467271975,
+  "end_of_task_median_canonical64": 0.2444088448836694,
+  "end_of_task_median_by_depth": {
+   "1": 0.061493676034922735,
+   "2": 0.05639424837431661,
+   "3": 0.2444088448836694
+  }
+ },
+ "SHUFFLED_w12": {
+  "order_matches_registered_stream": true,
+  "prequential_rows_per_task": [
+   128
+  ],
+  "routes_present": 188,
+  "routes_expected": 188,
+  "routes_wrong_length": 0,
+  "extra_state_task_codes": [
+   "task_novel_composition_0"
+  ],
+  "terminal_median_recomputed": 0.018378471478304764,
+  "terminal_median_recorded": 0.018378471478304764,
+  "anchor_last_task_depth": 2,
+  "anchor_end_of_task": 0.0063060939100873055,
+  "anchor_terminal": 0.0063060939100873055,
+  "anchor_abs_error": 0.0,
+  "end_of_task_median_recorded_all_tasks": 0.1689729907630784,
+  "end_of_task_median_canonical64": 0.7125405023649847,
+  "end_of_task_median_by_depth": {
+   "1": 0.026208157830442298,
+   "2": 0.29550214717634815,
+   "3": 0.7125405023649847
+  }
+ },
+ "MIXED_L1_w10": {
+  "order_matches_registered_stream": true,
+  "prequential_rows_per_task": [
+   128
+  ],
+  "routes_present": 124,
+  "routes_expected": 124,
+  "routes_wrong_length": 0,
+  "extra_state_task_codes": [
+   "task_novel_composition_0"
+  ],
+  "terminal_median_recomputed": 0.1913658938548305,
+  "terminal_median_recorded": 0.1913658938548305,
+  "anchor_last_task_depth": 3,
+  "anchor_end_of_task": 0.08895727913992521,
+  "anchor_terminal": 0.08895727913992521,
+  "anchor_abs_error": 0.0,
+  "end_of_task_median_recorded_all_tasks": 0.5188603550761789,
+  "end_of_task_median_canonical64": 1.3193808121274535,
+  "end_of_task_median_by_depth": {
+   "1": 0.2569108704066182,
+   "3": 1.3193808121274535
+  }
+ },
+ "MIXED_L1_w11": {
+  "order_matches_registered_stream": true,
+  "prequential_rows_per_task": [
+   128
+  ],
+  "routes_present": 124,
+  "routes_expected": 124,
+  "routes_wrong_length": 0,
+  "extra_state_task_codes": [
+   "task_novel_composition_0"
+  ],
+  "terminal_median_recomputed": 0.14874005626214132,
+  "terminal_median_recorded": 0.14874005626214132,
+  "anchor_last_task_depth": 1,
+  "anchor_end_of_task": 0.056259922995902614,
+  "anchor_terminal": 0.056259922995902614,
+  "anchor_abs_error": 0.0,
+  "end_of_task_median_recorded_all_tasks": 0.45640689503253684,
+  "end_of_task_median_canonical64": 1.2425118595895195,
+  "end_of_task_median_by_depth": {
+   "1": 0.16539398549408066,
+   "3": 1.2425118595895195
+  }
+ },
+ "MIXED_L1_w12": {
+  "order_matches_registered_stream": true,
+  "prequential_rows_per_task": [
+   128
+  ],
+  "routes_present": 124,
+  "routes_expected": 124,
+  "routes_wrong_length": 0,
+  "extra_state_task_codes": [
+   "task_novel_composition_0"
+  ],
+  "terminal_median_recomputed": 0.03582049855039997,
+  "terminal_median_recorded": 0.03582049855039997,
+  "anchor_last_task_depth": 3,
+  "anchor_end_of_task": 0.024213455820167065,
+  "anchor_terminal": 0.024213455820167065,
+  "anchor_abs_error": 0.0,
+  "end_of_task_median_recorded_all_tasks": 0.31325587081559625,
+  "end_of_task_median_canonical64": 0.6270770895201254,
+  "end_of_task_median_by_depth": {
+   "1": 0.12763107631688986,
+   "3": 0.6270770895201254
+  }
+ }
+}

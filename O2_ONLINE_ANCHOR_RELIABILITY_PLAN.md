@@ -164,8 +164,15 @@ frozen and hashed first.
 # Quantities to RECORD (diffed against the runner before launch)
 
 Per cell: arm, world, stream, replay seed, order seed; `terminal_median`,
-`terminal_per_task` (64), `terminal_below`, `end_of_task_median`, last-task
-anchor (terminal equals end-of-task on the last task); stage-3 `library_sha256`;
+`terminal_per_task` (64), `terminal_below`; `end_of_task_median` over the
+**canonical 64 tasks only**, with per-depth end-of-task medians recorded
+separately (O1's single-lifetime cells took this median over ALL stream tasks,
+so their recorded value covered a different task set from the terminal median
+and from `STAGED`'s; see `reports/o1_online_anchor_20260924/stream_audit.json`);
+the last-task anchor for EVERY arm, with the terminal error of the last stream
+task equal to its end-of-task error, whatever that task's depth (O1 checked this
+only for `STAGED`, and the audit above found it exact in all six O1
+single-lifetime cells); stage-3 `library_sha256`;
 prequential total; `stream_tasks`; depth histogram;
 `route_lengths_match_plan`; the stream positions of the length-1 tasks (for
 single-lifetime arms); seconds. Per run: gate records E1-E5, precondition,

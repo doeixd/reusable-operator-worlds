@@ -7499,3 +7499,40 @@ This agrees with the H39d registered `SLOT_STRUCTURE` NOT SUPPORTED. The
 existing wording (the two slots form ONE distributed argument channel, and
 there is no cluster language) is now confirmed by measurement, not only by
 argument. Development artifacts only; no sealed verdict changes.
+
+
+# 2026-09-24 CORRECTION to the O1 entry: end-of-task medians of the single-lifetime arms covered the wrong task set
+
+Found by a read-only stream audit run after the result was committed
+(`reports/o1_online_anchor_20260924/stream_audit.py`, output `stream_audit.json`).
+For `SHUFFLED` and `MIXED_L1`, `end_of_task_median` comes from
+`_last_task_end_of_task`, which takes the median over EVERY task in the lifetime:
+188 or 124 stream tasks, anchors included. For `STAGED` it covers the 64
+canonical stage-3 tasks. The recorded values, which are also in the stamped
+report's `end_of_task_by_arm`, therefore compare different task sets. The
+decision is unaffected, because it reads terminal medians only.
+
+Recomputed on the canonical 64 tasks, worlds 10/11/12:
+- `SHUFFLED`: 0.633 / 0.244 / 0.713 (recorded 0.066 / 0.080 / 0.169)
+- `MIXED_L1`: 1.319 / 1.243 / 0.627 (recorded 0.519 / 0.456 / 0.313)
+
+The O1 entry's sentence "Its end-of-task medians (0.31-0.52) sit far above its
+terminal ones" used the mixed-set values. The corrected reading is STRONGER and
+not specific to `MIXED_L1`. In both single-lifetime arms the canonical tasks
+are fitted poorly when first seen: end-of-task is 17-39x the terminal value in
+the passing cells. They become usable only after the library forms later in the
+stream. Terminal scoring is what an order-free stream needs.
+
+Everything else the audit checked holds in all six cells:
+- the consumed order equals the registered shuffle;
+- every task received 128 examples;
+- all routes are present at their planned length;
+- the terminal model reloads strictly and reproduces the recorded terminal
+  median exactly;
+- the last-task anchor (terminal equals end-of-task on the last stream task,
+  of any depth) holds with error 0.0;
+- the global temperature schedule anneals once over the whole stream, as the
+  plan disclosed.
+
+The O2 draft now records end-of-task on the canonical 64 tasks, and the anchor
+for every arm.

@@ -2128,3 +2128,13 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   field instead of timing the call. Time a reused function END TO END from log
   timestamps, and diff what it computes against what the new plan reads, before
   quoting a cost.
+
+- A HELPER REUSED ACROSS STREAM SHAPES CAN SILENTLY CHANGE ITS POPULATION (O1
+  stream audit, 2026-09-24). `_last_task_end_of_task` returns the median over
+  every task in a lifetime. Over a staged lifetime that is the 64 canonical
+  tasks. Over a mixed stream it includes the anchors, so O1 reported
+  `end_of_task_median` over 188 tasks for one arm and 64 for another, beside a
+  terminal median over the canonical 64. Nothing flagged it, because the numbers
+  were plausible: 0.07 recorded against 0.63 on the canonical set. When a lifetime's
+  task list changes shape, re-derive the population of EVERY reported statistic,
+  not only the registered one, and record per-depth values separately.

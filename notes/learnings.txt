@@ -5268,3 +5268,5 @@ N1b's post-hoc 6/6 vs 0/6 table) REFUTED - it was a count effect. Online
 requirement: a quota of single-operation tasks, between 6 and ~16-18.
 
 2026-09-24 O1: a reused cell function's logged 'seconds' excluded its post-lifetime diagnostics (so2.run_arm export_margin, ~1.6-2.8 h/cell at scale 1, unused by O1). Time reused calls end to end from log timestamps and diff what they compute against what the plan reads. Full entry in AGENTS.md.
+
+2026-09-24 O1 stream audit: _last_task_end_of_task medians over ALL lifetime tasks, so on a mixed stream it silently included anchors (0.07 recorded vs 0.63 canonical). Re-derive every statistic's population when a stream changes shape. Full entry in AGENTS.md.
