@@ -98,11 +98,21 @@ with no decision attached: the per-world difference in passing streams
 7 worlds, a world-level sign test cannot detect a plausible difference (see
 below), so none is registered.
 
-**Baseline, checked before the threshold.** The incumbent's online record gives
-a cell-level pass rate of about 0.67: `STAGED` passed 6 of 10 worlds at stream 0
-in SO2-SO4 and 2 of 3 in O1, and O1's `SHUFFLED` passed 2 of 3. The
-`RELIABLE` threshold of 19/21 (0.90) is well above that baseline. At the
-baseline itself, the expected label is `UNRELIABLE`.
+**Baseline, checked before the threshold, counted in the rule's own unit (a
+cell).** Across every committed online `STAGED` cell, `STAGED` passes 14 of 24
+cells, a rate of **0.583**:
+- SO2 worlds 0-2, stream 0: 1 of 3.
+- SO3 `BASE` worlds 3-5, three streams each: 7 of 9.
+- SO4 worlds 6-9, three streams each: 6 of 12.
+
+Adding O1 gives 16 of 27. At stream 0 alone it is 4 of 10. The often-quoted
+"6 of 10 worlds" is a world-level count after the median over streams, which is
+a different unit. (An earlier version of this draft called it "6 of 10 at
+stream 0" and used 0.667 as the null. That was corrected on 2026-09-25, before
+freezing.) Per-world pass fractions in SO3/SO4 (3, 2, 2, 0, 2, 1, 3 of 3) imply
+a between-world concentration of `c ~ 3.9` by the method of moments. The
+`RELIABLE` threshold of 19/21 (0.90) is far above the baseline, and at the
+baseline itself the expected label is `UNRELIABLE`.
 
 # Necessity
 
@@ -111,9 +121,8 @@ worlds and replay streams, without knowledge of program length.
 
 **The arm that refuses it.** `PLAIN`: no single-operation task anywhere. Its
 committed values are 1.957 / 1.967 / 1.910 (SO2, worlds 0-2). O1's `PLAIN`
-cells on worlds 10-12 were still running when this draft was written. **If any
-of them passes 0.05, this plan is withdrawn**, because the floor would not be a
-floor. The refusal cost is ~40x the 0.05 threshold, and the scale is that
+cells on worlds 10-12 then failed too (2.005 / 1.923 / 1.913), so the withdrawal
+clause written while they ran (withdraw if any passes 0.05) did not fire. The refusal cost is ~40x the 0.05 threshold, and the scale is that
 threshold, not output variance. `PLAIN` runs on stream 0 only, as the floor
 check. Its failure is established on six worlds, and three more streams per
 world would buy no information about the question.
@@ -135,21 +144,25 @@ RELIABLE and `<= 16` UNRELIABLE, out of 21.
 **Null and effect samplers.** Cells within a world are correlated (SO3 and SO4:
 world effects plus stream spread), so each world draws its own pass probability
 `p_w ~ Beta(m c, (1 - m) c)` and its three streams are Bernoulli(`p_w`). The
-concentrations are `c = inf` (independent cells), 4 and 2, so the heterogeneity
-is bracketed rather than assumed. The **null** is the incumbent's measured rate,
-`m = 0.667`. The **effect** is `m = 0.95`, a mechanism that fails about one
+concentrations are `c = inf` (independent cells), 4, 2 and 1. The data imply
+`c ~ 3.9`, so the heterogeneity is bracketed rather than assumed. The **null**
+is the incumbent's measured cell rate, `m = 0.583`. `m = 0.667` is kept as a
+harder null. The **effect** is `m = 0.95`, a mechanism that fails about one
 stream in twenty. 20,000 draws, seed 11. Script:
-`reports/o2_design/rates.py`, whose output is recorded there.
+`reports/o2_design/rates.py`, output `reports/o2_design/rates_output.txt`.
 
 | regime | `RELIABLE` fires (`k >= 19`) | `UNRELIABLE` fires (`k <= 16`) |
 |---|---|---|
-| null `m = 0.667` | **false-fire 0.013 / 0.030 / 0.043** | detection 0.878 / 0.834 / 0.811 |
-| effect `m = 0.95` | **detection 0.914 / 0.880 / 0.860** | false-fire 0.003 / 0.013 / 0.019 |
-| intermediate `m = 0.80` | 0.174 / 0.229 / 0.255 | 0.415 / 0.413 / 0.416 |
-| `m = 0.90` | 0.647 / 0.642 / 0.637 | 0.053 / 0.085 / 0.098 |
+| null `m = 0.583` (measured) | **false-fire 0.001 / 0.007 / 0.011 / 0.021** | detection 0.975 / 0.947 / 0.934 / 0.910 |
+| harder null `m = 0.667` | false-fire 0.013 / 0.032 / 0.047 / 0.065 | detection 0.879 / 0.832 / 0.805 / 0.779 |
+| effect `m = 0.95` | **detection 0.913 / 0.884 / 0.859 / 0.838** | false-fire 0.004 / 0.013 / 0.020 / 0.028 |
+| intermediate `m = 0.80` | 0.177 / 0.229 / 0.257 / 0.277 | 0.415 / 0.414 / 0.413 / 0.417 |
+| `m = 0.90` | 0.644 / 0.646 / 0.637 / 0.622 | 0.052 / 0.082 / 0.100 / 0.121 |
 
-(Columns are `c = inf / 4 / 2`.) Both labels meet false-fire `<= 5%` and
-detection `>= 80%` at every concentration. A mechanism with a true rate near 0.8
+(Columns are `c = inf / 4 / 2 / 1`.) At the measured null, both labels meet
+false-fire `<= 5%` and detection `>= 80%` at every concentration. Against the
+harder 0.667 null, `RELIABLE`'s false-fire exceeds 5% only at `c = 1`, a
+heterogeneity stronger than the data imply. A mechanism with a true rate near 0.8
 or 0.9 is split across labels. That is the honest reading of 21 cells, and it is
 why the middle label exists.
 
@@ -198,6 +211,18 @@ to be re-timed in the performance pass), `SHUFFLED` ~9.2 min, `MIXED_L1`
 cell-minutes, **about 3.6 h as a pool of 3**. There is no early stop: every arm
 contributes a registered label, and the whole run fits one evening.
 
+**Performance-pass candidates, to be decided by measurement before launch.**
+- `learned_lifetime` runs deep-copied novel-task checkpoint probes at 8, 16, 32
+  and 64 tasks in every lifetime (and stage), plus the terminal
+  novel-composition probe and teacher-matching diagnostics. O2 reads none of
+  them. Training draws no global torch randomness (task codes start at zero;
+  replay uses its own seeded generators), so switching them off should leave
+  every scored number bitwise identical. It is admissible only if E1 and E2
+  still pass bitwise with them off. Time it against the ~9 min `SHUFFLED` cell.
+- O1 hard-coded `route_lengths_match_plan = True` for `STAGED`. O2 computes it
+  from each stage model's hard routes, as it already does for the single-lifetime
+  arms, so the check is not vacuous for any arm.
+
 # What it decides
 
 - `ORDER_FREE_RELIABLE`: an online learner needs no program length and no
@@ -225,8 +250,13 @@ Checked against the `AGENTS.md` learnings, item by item:
 - **Discrimination.** The registered rule was run against null and effect
   samplers at three heterogeneity levels (the table above). An effect at
   0.8-0.9 splits across labels, and the draft says so.
-- **Threshold against baseline.** The baseline (~0.67) was computed first, and
-  19/21 sits above it.
+- **Threshold against baseline.** The baseline was computed first, and 19/21
+  sits above it. The first version of this draft got the baseline WRONG, and a
+  second check caught it (2026-09-25). It quoted "6 of 10 worlds at stream 0"
+  (really 4 of 10 at stream 0, and 6 of 10 only as a world-median count) and
+  used 0.667 as the null. Recounted in the rule's own unit, cells, the baseline
+  is 14/24 = 0.583, and the rates were recomputed at it. This is the
+  wrong-unit variant of the checked-baseline rule.
 - **Denominator.** 21, all cells, crashes rerun. The three labels partition
   0-21.
 - **Estimands against code.** NOT YET POSSIBLE: the runner is not written. The

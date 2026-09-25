@@ -80,8 +80,9 @@ awaiting PI decision 11. Follow-up audits A1, A2 and P1 are done.
 - **O2 DRAFTED (2026-09-24), not frozen:** `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md`.
   Worlds 13-19, three replay streams, arms `SHUFFLED` / `STAGED` (lifetimes only,
   behind a bitwise gate against O1's cells) / `MIXED_L1` / `PLAIN`. Registered
-  rule k-of-21: `>= 19` RELIABLE, `<= 16` UNRELIABLE. Measured false-fire
-  <= 0.043 and detection >= 0.86 at three heterogeneity levels. About 3.6 h.
+  rule k-of-21: `>= 19` RELIABLE, `<= 16` UNRELIABLE. At the measured
+  null (STAGED cell rate 14/24 = 0.583), false-fire is <= 0.021 and detection
+  >= 0.838 at four heterogeneity levels. About 3.6 h.
   Awaiting PI decision 11.
 
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
