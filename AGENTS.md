@@ -2138,3 +2138,12 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   were plausible: 0.07 recorded against 0.63 on the canonical set. When a lifetime's
   task list changes shape, re-derive the population of EVERY reported statistic,
   not only the registered one, and record per-depth values separately.
+
+- A BASELINE MUST BE COUNTED IN THE DECISION RULE'S OWN UNIT (O2 draft,
+  2026-09-25). The draft sized its null from "STAGED passed 6 of 10 worlds at
+  stream 0". That count is WORLDS after a median over streams, and the stream-0
+  count is really 4 of 10. The draft's rule counts CELLS, where the committed
+  rate is 14/24 = 0.583, not the 0.667 used. The rates survived the correction
+  only because the true baseline was LOWER. Recount every baseline in exactly
+  the unit the registered rule counts (cell, stream, world, median-of-streams),
+  from the reports rather than from a summary sentence.
