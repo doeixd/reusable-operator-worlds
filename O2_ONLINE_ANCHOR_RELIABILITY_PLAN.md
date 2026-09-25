@@ -1,11 +1,11 @@
 # O2: is order-free ONLINE formation RELIABLE across worlds and replay streams?
 
-Status: **DRAFT, 2026-09-24. NOT FROZEN.** Freezing a Tier 2 plan is a PI
-decision. Development band 2, worlds **13-19** (allocated 2026-09-23 for the
+Status: **FROZEN 2026-09-25** by PI decision 11 ("freeze with MIXED_L1"),
+drafted 2026-09-24. Development band 2, worlds **13-19** (allocated 2026-09-23 for the
 online anchor-supply line; O1 used 10-12). Development evidence only, never
-confirmatory. Written while O1's last three `PLAIN` cells were still running;
-if `PLAIN` does not fail in all of worlds 10-12, this draft is withdrawn before
-freezing (see `# Necessity`).
+confirmatory. Drafted while O1's last three `PLAIN` cells were still running;
+they failed in all of worlds 10-12, so the withdrawal clause did not fire (see
+`# Necessity`).
 
 # Why
 
@@ -62,8 +62,9 @@ Gate E1 below proves that this changes no number.
   reproduces O1's `SHUFFLED_w12` bitwise, likewise.
 - **E3, stream seed neutrality.** Passing the canonical replay seed explicitly
   reproduces the `None` path bitwise (SO3/SO4's G0, on one scaled cell).
-- **E4, streams distinct.** For every world, the three streams' terminal library
-  hashes differ for each arm (non-vacuity: a stream that changes nothing would
+- **E4, streams distinct.** For every world and every THREE-STREAM arm
+  (`SHUFFLED`, `STAGED`, `MIXED_L1`), the three streams' terminal library
+  hashes differ (non-vacuity: a stream that changes nothing would
   make "three streams" one).
 - **E4b, interleaving.** For every single-lifetime cell the first 20 stream tasks
   contain at least two depths (O1's scorer check). Otherwise a shuffle has
@@ -78,7 +79,13 @@ E1 and E2 reuse worlds already spent by O1, and a mismatch there stops the run.
 For each arm, `k_arm` = the number of its (world, stream) cells whose terminal
 median is `< 0.05`. **Denominator: all 21 cells (7 worlds x 3 streams), always.**
 A cell that crashes is rerun. It is never dropped, and the run is not scored
-until all 21 exist.
+until all 21 exist. A cell that completes with a non-finite terminal median
+counts as NOT passing (it is a failure of formation, not a missing cell), and
+is flagged in the report.
+
+**Floor clause.** If any `PLAIN` cell passes 0.05, the floor is not a floor.
+The report is still produced, but every label is marked `FLOOR_FAILED` and none
+is interpreted.
 
 Primary, `SHUFFLED`:
 
@@ -235,11 +242,12 @@ contributes a registered label, and the whole run fits one evening.
   (world, stream, anchor positions, which are recorded). If `STAGED` is reliable
   and `SHUFFLED` is not, order matters online even though it did not offline.
 
-# Pending before freeze (PI)
+# Freeze record
 
-1. Approve O2 as a Tier 2 run on worlds 13-19, ~3.6 h.
-2. Keep `MIXED_L1` (cheap, and it asks the offline/online discrepancy directly)
-   or drop it (~0.7 h saved).
+PI decision 11 (2026-09-25): approve O2 as a Tier 2 run on worlds 13-19 and keep
+`MIXED_L1`. The pre-freeze re-read added the non-finite-cell rule and the floor
+clause, restricted E4 to the three-stream arms, and corrected "three" to "four"
+heterogeneity levels below. No threshold, arm or seed changed.
 
 # Double-check after writing (CLAUDE.md, 2026-09-22 directive), done on this draft
 
@@ -248,7 +256,7 @@ Checked against the `AGENTS.md` learnings, item by item:
 - **Opportunity.** O1 already shows passes and failures for both arms, so `k`
   can land anywhere in 0-21. The comparison is not an implementation check.
 - **Discrimination.** The registered rule was run against null and effect
-  samplers at three heterogeneity levels (the table above). An effect at
+  samplers at four heterogeneity levels (the table above). An effect at
   0.8-0.9 splits across labels, and the draft says so.
 - **Threshold against baseline.** The baseline was computed first, and 19/21
   sits above it. The first version of this draft got the baseline WRONG, and a
