@@ -605,3 +605,374 @@ One finding was verified in code: J2A's zero route gap on its failure controls
 is not the J0-threshold prediction the record attributes it to. The full
 spec-to-implementation audit remains owed. No verdict, threshold or artifact
 changes.
+
+
+# Re-audit (2026-09-25): SO4, N1, N1b, N1c, O1 - record consistency and estimand-to-code
+
+Status: PARTIAL, but deeper than the 2026-09-15 pass. For each of the five
+milestones, every runner and scorer was read line by line against its frozen
+plan and amendments. Headline numbers were then recomputed from the committed
+report JSON with stdlib and numpy only:
+- per-cell medians from the stored per-task values;
+- world medians, clause counts and labels;
+- SO4 margins from the 48 recorded program pairs;
+- the N1c registered split, recomputed independently from per-task values plus
+  the canonical programs in `artifacts/so2_online_gate/cells/STAGED_w{0,1,2}/stage3/world_programs.json`;
+- the O1 STAGED/PLAIN last-task anchors, from `artifacts/o1_online_anchor/work/*/stage3/metrics.jsonl`.
+
+**Method limits.**
+- Written read-only while O2 runs, so it did not import `torch` or `row.*`,
+  rerun any scorer, or reload any model. Scorer results are taken from the
+  archived validation records and PROGRESS.
+- `PREDICTIONS.md`, `PROGRESS.md`, `RESEARCH_STATUS.md`, `README.md` and
+  `paper/draft.md` have uncommitted edits in the working tree (git status
+  2026-09-25). This audit read the working copies.
+
+## SO4 (`SO4_B2_RETEST_PLAN.md` eba13b0, `SO4_AMENDMENT_1.md` 4968698; run 69b0692)
+
+**(1) Estimands vs code.**
+- `M` is `stage_record`'s terminal median over `world.tasks` whose ids are in
+  `model.task_codes`, which is the 64 canonical stage-3 tasks, using G5R Stage D
+  `score`. It is not the lifetime's `final_nmse`: `end_of_task_median` is
+  reported beside it, with a last-task anchor at `ANCHOR_TOLERANCE = 1e-6`, as
+  the plan requires. Recomputed from `terminal_per_task`: all 12 cells and 4
+  PLAIN medians match, each with 64 tasks.
+- `W` is `np.median` over the 3 streams (`audit_so4_b2_retest.py:248`).
+- The margin matches G5R verbatim (`margin_task`/`margin_pair`,
+  `audit_so4_b2_retest.py:173-192`, against `audit_so2_online_gate.export_margin`,
+  `audit_so2_online_gate.py:111-134`):
+  - seed `SeedSequence([1500, world])`;
+  - 12 programs;
+  - `index_offset = 95000 + i`;
+  - scratch `scratch_model(cfg, "rotated_discrete", 7717)`;
+  - `ADAPT_STEPS = 2000`;
+  - the natural log of the scratch geometric mean minus the natural log of the
+    trained geometric mean;
+  - computed on the stream-0 terminal library.
+
+  All 48 recorded pairs have `steps = 2000`. Recomputed margins from the pairs:
+  -0.075939 / +3.780567 / +5.167760 / +5.096878, exactly equal to the report.
+
+**(2) Record list vs output.**
+- Present:
+  - per-cell end-of-task median, lost and gained counts, recency Spearman,
+    stage-3 drift and the J2A 64-program export;
+  - per-stage prequential cost (prefix stages and cells);
+  - per-cell wall seconds;
+  - PLAIN terminal and export.
+- "example-gradients" is not recorded. `online_examples` is tasks x
+  examples_per_task, a count of online examples and not of example-gradients
+  (`audit_so4_b2_retest.py:133`). PLAIN records neither this count nor seconds
+  (`:161-170`). Cosmetic.
+
+**(3) Decision rule vs scorer.**
+- Runner `classify` (`:242-266`) and scorer (`score_so4_b2_retest.py:119-129`):
+  - both use `W <= 0.05` in 3 or more of 4 worlds;
+  - both implement Amendment 1's cap: no stream above 0.10 in a
+    terminal-passing world (`<=` 0.10 passes);
+  - both require margin `>= 0.75` in 3 or more of 4 worlds.
+- `SO4_ACQUIRES_ONLY`'s "the margin misses in 2 or more worlds" is equivalent
+  to "not 3 of 4" when there are four worlds.
+- The labels partition every case, and `HARNESS_FAILED` takes precedence.
+- Recomputed:
+  - `W` = 2.1705 / 0.0125 / 0.0908 / 0.0162, so the terminal worlds are {7, 9},
+    2 of 4;
+  - the maximum stream is 0.0639 in world 7 and 0.0197 in world 9, so the cap
+    holds;
+  - margins pass in 3 of 4;
+  - label `SO4_FAILS`, matching the report and run.log.
+- G0 omitted and explicit both give `worst_per_task_abs_diff` 0.0 and pass.
+  All last-task anchors are 0.0.
+
+**(4) Record consistency.**
+- These match the JSON: the PREDICTIONS / PROGRESS / RESEARCH_STATUS / paper
+  tables (stream terminals, W, margins, PLAIN 1.894 / 1.993 / 1.880 / 2.045, the
+  median lost count of 9 in world 8, and 0/64 PLAIN export).
+- These descriptive claims were checked and hold:
+  - world-6 stage-1 prefixes 0.12-0.25 and stage-2 0.042-0.111;
+  - worlds 7-9 stage 2 at 0.0096-0.067;
+  - gained counts of 6-30 in passing cells;
+  - export 64/64 in the best cells and 0-1 in the worst;
+  - world 8 stream 1: end-of-task 0.037, terminal 0.173, 33 lost.
+- Two defects are listed below: D1 and D2.
+- Imprecise but not wrong: world 6's prequential cost is 9.6M-19.9M, which the
+  record calls "2-6x the other worlds'". Cell-to-cell it is 1.6x-6.9x
+  (others 2.89M-6.06M).
+
+**(5) Arms as constructions.**
+- Model seed 7000.
+- Stream 0 is `None` (seed+1). Streams 1-2 use `SeedSequence([7400, w, s])`.
+- STAGED carries the library through `carry_library` with no task codes.
+- PLAIN is a fresh model on the stage-3 world at stream 0.
+- G1 recomputes the world-6 stream-0 prefix in memory.
+
+All of this matches the plan. Running the per-pair margin jobs as a pool (a
+scheduling change) was verified bitwise against `export_margin` in the dry run
+(PROGRESS).
+
+## N1 (`N1_ANCHOR_SUPPLY_PLAN.md` with Amendments 1-3; run 3d2f5c6)
+
+**(1) Estimands vs code.**
+- Every arm is scored by `score` on the canonical 64 length-3 tasks only
+  (`n1_anchor_supply.py:230`). STAGED is scored through J1c's `run_arm`
+  stage-3 `final_per_task`.
+- Recomputed: every cell has 64 per-task values, and its median equals
+  `terminal_median`.
+
+**(2) Record list.**
+- Recorded: pool size and examples, the depth histogram and the first-N draw
+  indices, as Amendment 3 requires.
+- `first_64_draws` actually holds 128 indices (64 updates x batch 2). The name
+  is cosmetic.
+
+**(3) Decision rule vs scorer.**
+- Both runner `triage` (`:266-287`) and scorer (`score_n1_anchor_supply.py:87-99`)
+  implement:
+  - `m < 0.05` (strict) in 2 or more of 3 worlds;
+  - otherwise the guard;
+  - otherwise `median(s)/median(m) >= 5.0`.
+- Latent divergence from the plan's wording, which could not affect this run:
+  - Amendment 1 makes `PARTIAL` uninterpretable "in that world". The code
+    instead emits a global label, `PARTIAL_UNINTERPRETABLE`, which is not in the
+    registered label set, whenever any world's SHAM is below 0.45.
+  - The ratio is a cross-world median ratio, not a per-world one.
+
+  Not triggered: SUFFICE fired and SHAM is at least 1.037 everywhere.
+- Recomputed:
+  - INTERLEAVED is below 0.05 in 3 of 3 (0.00925 / 0.01011 / 0.00658);
+  - the SHAM ratio is 114.80;
+  - verdict `ANCHORS_SUFFICE`, matching the report.
+- INTERLEAVED and SHAM draw identical indices in all 3 worlds (recomputed).
+- All three STAGED cells equal the J1c `terminal_median` exactly.
+
+**(4) Record consistency.**
+- The PROGRESS / PREDICTIONS / RESEARCH_STATUS / README / paper numbers all
+  match the JSON.
+- Defects D3 and D4 are listed below.
+
+**(5) Arms as constructions.** Defects D3, D5 and D6 are listed below.
+- SHAM fillers: 124 distinct, unused length-3 programs, seeded
+  `[1912, w, ...]`. They use `world.tasks[0].teacher_library`. This is correct
+  only because `reuse_rho = 1.0` in `configs/v1.yaml`, so `_task_library`
+  returns the shared library (`world.py:251-252`). They are executed in the
+  same primitive order as `Program.execute`.
+- INTERLEAVED and SHAM share pool size, seed `[1911, w]` and draws. This
+  matches Amendment 3.
+
+## N1b (`N1B_ANCHOR_DOSE_PLAN.md`; run fc8a742)
+
+**(1)-(3) Estimands and rules vs code.**
+- The pool is `anchors(k) + canonical + fillers[:124-k]`.
+- DOSE subsets: permutation `[1913, w]`, take the first k, re-sorted to N1
+  order.
+- LENGTH triage: four labels, strict `< 0.05`, 2 of 3.
+- `k*` uses the persistence rule over {0, 8, 32, 124}, with endpoints read from
+  the committed N1 cells, plus a NON_MONOTONE flag.
+- The NEAR_THRESHOLD band [0.03, 0.08] is inclusive.
+
+Runner and scorer agree, and both match the plan. The scorer also fails if the
+N1 endpoints do not bracket the curve.
+
+**Recomputed.**
+- Every per-task median matches `terminal_median`.
+- LENGTH: L1_ONLY passes 3 of 3 (0.0175 / 0.0112 / 0.0067). L2_ONLY fails 3 of
+  3 (1.163 / 1.116 / 1.144). Label `L1_SUFFICES_ONLY`.
+- DOSE: 0 F, 8 F, 32 T, 124 T, so `k* = 32` and the curve is monotone. No
+  near-threshold cell.
+
+All of this matches the report.
+
+**(4) Records.**
+- The PROGRESS / PREDICTIONS / RESEARCH_STATUS / README / paper / AGENTS numbers
+  match.
+- The post-hoc coverage table matches `coverage.json` (passing cells 6 of 6 and
+  failing cells 0 of 6, with DOSE_8_w2 at 5 of 6).
+- DOSE_32 carries 16-19 length-1 anchors.
+
+**(5) Arms.** They match the plan. The endpoint-identity and 32-update prefix
+tests were checked in the record, not rerun. There is no finding beyond D5's
+inherited N1 items.
+
+## N1c (`N1C_ANCHOR_COVERAGE_PLAN.md`; run 6251a17)
+
+**(1)-(3) Estimands and rules vs code.**
+- The excluded operation `x` is the first draw of `[1914, w]`, shared by all
+  arms.
+- The arms match the plan:
+  - COVER6_K6 has one anchor per operation;
+  - COVER5_K6 has five firsts plus one extra from a seeded doubled operation;
+  - COVER5_K18 has 18 anchors from the five-operation pool.
+- The PRIMARY 2x2 map and the SECONDARY rule match the plan.
+- The descriptive LOCAL/GLOBAL split is applied to failing (`>= 0.05`) COVER5
+  cells.
+
+**Recomputed.**
+- The excluded operations are 4 / 3 / 4, matching the plan's pre-launch
+  statement.
+- PRIMARY `K6_INSUFFICIENT`: all six K6 cells are between 1.04 and 1.09.
+- SECONDARY `COUNT_COMPENSATES`: 0.199 / 0.0129 / 0.0259.
+- The split was recomputed independently from per-task values and canonical
+  programs, and all 9 cells match exactly. For COVER5_K18_w0: using-x 35 tasks
+  at median 1.1346, not-using 29 at 0.0252, so LOCAL. The other failing COVER5
+  cells are GLOBAL.
+
+**(4) Records.** The PROGRESS / PREDICTIONS / RESEARCH_STATUS / README / paper /
+AGENTS numbers all match.
+
+**Scorer independence (cosmetic).** `score_n1c_anchor_coverage.py:62-65` is
+commented "Recompute the registered split from per-task values rather than
+trusting it". It checks only that the two counts sum to 64, and classifies
+LOCAL/GLOBAL from the runner's stored medians. This audit's independent
+recomputation found them correct.
+
+## O1 Tier 1 (`O1_ONLINE_ANCHOR_TIER1_PLAN.md`; run 2e99765)
+
+**(1) Estimands vs code.**
+- Terminal medians are over the canonical 64 only:
+  - the single-lifetime arms score `canonical ∩ model.task_codes`, which
+    excludes anchors and the novel probe;
+  - STAGED/PLAIN use SO2's stage-3 `terminal_per_task`.
+- Recomputed: all 12 medians match per-task values, and every cell has 64 tasks.
+- KNOWN, confirmed: in the single-lifetime arms `end_of_task_median` was the
+  median over all 188/124 stream tasks (`o1_online_anchor.py:106`). STAGED's
+  covers the stage-3 64. This was corrected in PROGRESS 2026-09-24 using
+  `stream_audit.json`. The canonical-64 values (0.633 / 0.244 / 0.713 and
+  1.319 / 1.243 / 0.627) and the "17-39x" claim recompute exactly (17.3x, 38.8x,
+  17.5x in the three passing cells).
+- The stale values remain in the stamped report. That is correct under the
+  append-only rule.
+
+**(2) Record list.**
+- KNOWN, confirmed:
+  - STAGED/PLAIN hard-code `route_lengths_match_plan: True` (`:130`);
+  - `so2.run_arm` computes `export_margin` and `export_diagnostic` at scale 1
+    (`audit_so2_online_gate.py:192-194`), and O1 discards both
+    (`o1_online_anchor.py:124-132`).
+- Additional, a minor record gap: O1's record also drops SO2's
+  `anchor_abs_error` for STAGED/PLAIN. The stream audit covered only the six
+  single-lifetime cells.
+  - This audit closed the gap from the work-directory `metrics.jsonl`. All six
+    STAGED/PLAIN last-task anchors are 0.0, the last task ids match the record,
+    and the stage-3 end-of-task medians equal the recorded ones.
+  - The O2 draft already records the anchor for every arm.
+
+**(3) Decision rule vs scorer.** Runner `summarize` and the independent scorer
+agree:
+- LIVE if SHUFFLED or MIXED_L1 has `< 0.05` in 2 or more of 3 worlds;
+- denominator 3;
+- PLAIN floor check;
+- interleaving check on the first 20 depths.
+
+Recomputed: STAGED 2, SHUFFLED 2, MIXED_L1 1, PLAIN 0, so LIVE, matching the
+report.
+
+**(4) Records.**
+- The PROGRESS / PREDICTIONS / RESEARCH_STATUS / README / paper tables match the
+  JSON: 0.272 / 0.0269 / 0.0188; 0.0366 / 0.473 / 0.0184; 0.191 / 0.149 /
+  0.0358; 2.005 / 1.923 / 1.913.
+- These also match:
+  - cell wall times (STAGED about 85 min, PLAIN about 76 min, SHUFFLED about
+    9 min, MIXED_L1 about 6 min);
+  - the effect sampler U(0.0088, 0.0400), which equals SO3's seven passing BASE
+    streams (min 0.008756, max 0.040012);
+  - the null sampler, SO2 PLAIN 1.910-1.967.
+- Defect D7 is listed below.
+
+**(5) Arms.**
+- Model seed 5000 (`stage_setup(..., 5000)`; SO2 `MODEL_SEED`).
+- Replay stream 0 (no `replay_seed`).
+- Shuffle seeds `[1920, w]` and `[1921, w]`.
+- SHUFFLED is the STAGED multiset. MIXED_L1 is 60 length-1 tasks plus the 64
+  canonical ones.
+
+The stream audit confirms the consumed order, 128 examples per task, and routes
+at their planned length. Everything matches the plan. The once-over-the-stream
+temperature anneal and single replay buffer are disclosed in the plan.
+
+## DEFECTS
+
+| id | milestone | severity | defect and evidence |
+|---|---|---|---|
+| D1 | SO4 | affects a reported number (descriptive; no verdict) | `PROGRESS.md:5725-5726` says the scratch comparator's "geometric-mean NMSE" is "1.1-4.5". The per-world scratch geometric means recomputed from the 48 pairs are 2.082 / 2.806 / 2.426 / 2.447, a range of **2.08-2.81**. 1.1-4.5 is roughly the range of individual program scratch NMSEs (actual 0.915-8.06), not of geometric means. |
+| D2 | SO4 | affects a reported number (wording; no verdict) | `PREDICTIONS.md:8797-8798` says "the replay stream moves terminal error by up to two orders of magnitude (world 6: 0.203 to 2.239)". That is a factor of 11.0; the largest within-world spread is 11.0x (world 6), and world 8 is 10.75x. That is one order of magnitude, which is how PROGRESS, RESEARCH_STATUS, README and the paper state it. A correction appendix is owed, since PREDICTIONS is append-only. |
+| D3 | N1 | affects a reported number's provenance (no verdict; NONE is not in the triage) | Amendment 1 section 2 registers `NONE` as "the published 64-slot length-3 baseline... unchanged", with non-vacuity referent 0.92-0.97 (`N1_ANCHOR_SUPPLY_PLAN.md:156-158, 315-317`). Commit 3d2f5c6 says "NONE is the published 64-task floor". The code instead re-trains NONE with `train_pooled` on N1's pool stream `SeedSequence([1911, w])` (`n1_anchor_supply.py:136-137, 227-229`), not J1c's baseline stream. It is a fresh realization, not the published cell: published J1c baseline 0.9608 / 0.9542 / 0.9187 against N1 NONE 0.9575 / 0.9037 / 0.9037. Two of three worlds fall outside the registered 0.92-0.97 referent. The scorer checks only `NONE > 0.05` (`score_n1_anchor_supply.py:81-85`). The records say "matching the published 0.92-0.97 floor to within its spread" (`PROGRESS.md:7116`, `PREDICTIONS.md:9303`) without saying that NONE was re-run under a different stream or that the registered range check was implemented as `> 0.05`. |
+| D4 | N1 | cosmetic (construction wording) | Amendment 3 establishes that the offline trainer has no stream positions: it samples minibatches uniformly from a pooled set. Yet the records describe INTERLEAVED as "anchors at random positions": `README.md:52`, `paper/draft.md:1968`, `PROGRESS.md:7125`, `AGENTS.md:2074` and `RESEARCH_STATUS.md:184`. The construction is pooled uniform sampling over 188 tasks. |
+| D5 | N1 | cosmetic / process (registered but not implemented) | (a) The plan registers "Every arm is described with `row.arm_provenance.describe_arm` and checked with `assert_arm`" (`N1_ANCHOR_SUPPLY_PLAN.md:61-62`). None of n1/n1b/n1c/o1 imports `arm_provenance`, and N1's disclosed deviations do not mention this. Arm constructions are instead enforced by `validate_cell` and the scorer. The A1 audit's general no-retrofit decision does not cover a plan that registered it. (b) `n1_anchor_supply.py:355-356` declares `--dry-run`, and `main()` never reads it, so the flag would launch the full 12-cell run. The dry run in commit 3d2f5c6 must have been done by other means; this cannot be verified from the repo. (c) The archived `precondition.json` records only the relaunch (14.7 GiB). The original launch at 6.1 GiB, against the registered 8 GiB and the code's 6.0 GiB (disclosed), is visible only in `run.log`. |
+| D6 | N1 | latent, no effect | `triage` emits a global `PARTIAL_UNINTERPRETABLE` label, which is not among the registered labels, and uses a cross-world median ratio. Amendment 1 says the guard applies "in that world" (`N1_ANCHOR_SUPPLY_PLAN.md:374-378`, `n1_anchor_supply.py:274-281`). It was not reachable in this run. |
+| D7 | O1 / status | cosmetic (index staleness, working copy) | The `RESEARCH_STATUS.md` header (line 9, "Nothing is running", "O2... is DRAFTED, awaiting PI decision 11") and lines 80-86 ("O2 DRAFTED ... not frozen ... Awaiting PI decision 11") contradict the same file's decision 11, "ANSWERED 2026-09-25 ... Frozen `b3c1c85`", and the fact that O2 is now running. Lines 724-727 still say SPEC_AUDIT does not cover SO4. That becomes stale once this section is appended. |
+| D8 | SO4 | cosmetic (record list) | The plan's "example-gradients" is not recorded. `online_examples` counts online examples. PLAIN records no seconds (`audit_so4_b2_retest.py:133, 161-170`). |
+| D9 | N1c | cosmetic (scorer independence) | The scorer's split "recomputation" does not recompute (`score_n1c_anchor_coverage.py:62-65`). The values are correct by this audit's independent recomputation. |
+
+The known items were confirmed, not re-reported:
+- O1's single-lifetime end-of-task population (corrected 2026-09-24/25);
+- O1's hard-coded STAGED `route_lengths_match_plan`;
+- O1's unused `export_margin`, which also covers the discarded `export_diagnostic`;
+- the O2 baseline unit error. The fixed value, 14/24 = 0.583 over SO2 3 + SO3
+  BASE 9 + SO4 12 unchanged-protocol cells, recounts correctly from the
+  committed reports.
+
+## Checked with no finding
+
+- All five decision rules. Runner and scorer implementations are equivalent to
+  the frozen rules for these properties:
+  - thresholds, and strict `<` for the N1-line and O1 rules (as registered);
+  - `<=` for SO4 W and the cap (as registered);
+  - denominators (3 worlds; 4 worlds for SO4);
+  - label partitions.
+
+  The labels recompute from the JSON for every milestone.
+- Every cell median in all five reports equals the median of its stored
+  per-task values, and every scored set has exactly 64 canonical tasks.
+- SO4:
+  - G0 is 0.0 for both variants;
+  - all anchors are 0.0;
+  - G1 to G4 are true;
+  - the margin construction is identical to G5R/SO2 and all 48 pairs are at
+    2000 steps.
+- N1: the STAGED bitwise anchor and the identical INTERLEAVED/SHAM draws.
+- The N1b/N1c pools are 188 tasks and 24,064 examples, anchor counts and depths
+  are as registered, and N1b's endpoints are the committed N1 cells.
+- The sampler values cited in the O1 and SO4 plans were verified against the
+  committed reports:
+  - SO3 BASE and STORE_8, including 0.122;
+  - SO2 PLAIN;
+  - SO2 STAGED 0.126 and 0.085.
+- The disclosed deviations are present:
+  - N1's 6 GiB precondition, its late `status.json` and its reboot/resume;
+  - O1's 8 GiB fail-closed first launch and its performance-pass miss.
+
+## Not checked
+
+- No scorer was rerun and no model was reloaded (torch was off-limits while O2
+  runs).
+- The unit-test counts and the dry-run and restart-test outputs cited in
+  PROGRESS were not verified.
+- `check_prereg`, `check_invalid` and `check_adequacy` were not rerun.
+- The N1 Amendment 2 ARI gate and the N1b endpoint-identity and prefix tests
+  were taken from the record.
+
+## Verdict
+
+PARTIAL at code level. No registered verdict or label changes: SO4_FAILS,
+ANCHORS_SUFFICE, L1_SUFFICES_ONLY with `k* = 32`, K6_INSUFFICIENT with
+COUNT_COMPENSATES, and O1 LIVE all recompute from the committed JSON.
+
+Two reported numbers are wrong in the record: D1 (a PROGRESS range) and D2 (a
+PREDICTIONS magnitude). One arm's construction is misdescribed against its
+registration: D3, N1 `NONE` is a re-run, not the published cell, and its
+registered non-vacuity range was implemented as `> 0.05`. The rest are
+cosmetic or process gaps.
+
+**Parent verification (2026-09-25).** The site-level reading was done read-only
+by a subagent. The parent independently confirmed three defects:
+- D1: SO4 scratch geometric means recomputed from the 48 margin pairs are
+  2.08 / 2.81 / 2.43 / 2.45 for worlds 6-9.
+- D2: 2.239 / 0.203 = 11x.
+- D3: N1 `NONE` = 0.9575 / 0.9037 / 0.9037, against J1c 0.9608 / 0.9542 / ...
+
+Corrections are appended in `PREDICTIONS.md` (D2, D3) and `PROGRESS.md` (D1,
+D3). The D4 wording was fixed in `README.md`, `paper/draft.md` and
+`RESEARCH_STATUS.md`. D5(b), the unused `--dry-run` flag in
+`n1_anchor_supply.py`, is recorded as a hazard and NOT fixed in code. The N1
+scorer digests that runner, so editing it would break re-scoring N1. Never run
+that module with `--dry-run` expecting a dry run.

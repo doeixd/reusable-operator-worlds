@@ -1,0 +1,3 @@
+prereg check OK: 59 frozen files unchanged; all STATUS-cited paths exist
+invalid-artifact check OK: 7 withdrawn paths, none present
+O2 report: reports\o2_online_reliability.json

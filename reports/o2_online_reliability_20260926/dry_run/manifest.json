@@ -1,0 +1,62 @@
+{
+ "protocol": {
+  "id": "o2-online-reliability-v1",
+  "git_commit": "053da52",
+  "plan": "O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md",
+  "tier": 2,
+  "worlds": [
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19
+  ],
+  "arms": [
+   "SHUFFLED",
+   "STAGED",
+   "MIXED_L1",
+   "PLAIN"
+  ],
+  "arm_streams": {
+   "SHUFFLED": [
+    0,
+    1,
+    2
+   ],
+   "STAGED": [
+    0,
+    1,
+    2
+   ],
+   "MIXED_L1": [
+    0,
+    1,
+    2
+   ],
+   "PLAIN": [
+    0
+   ]
+  },
+  "order_seeds": "SeedSequence([base, w]) at s=0, [base, w, s] after; base {\"SHUFFLED\": 1920, \"MIXED_L1\": 1921}",
+  "replay_seeds": "None at s=0 (model seed + 1); SeedSequence([7500, w, s]).generate_state(1)[0]",
+  "model_seed": 5000,
+  "threshold": 0.05,
+  "jobs": 3,
+  "kind": "rotated_discrete_fast",
+  "lean": true,
+  "root": "artifacts/o2_online_reliability_dry",
+  "scored_on": "terminal model, canonical 64 length-3 tasks only",
+  "input_sha256": {
+   "O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md": "60f597a3dd126f252430fd22ac34811ba1618bde710ecf40249dd11e96e50385",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "so2_implementation_sha256": "cfb470894205bdc003d0509c0b3620778dc63542b525e4398bbc74ccc1db6b9a",
+  "learner_sha256": "8fef85343e25dad51b31112beac849e993a3d581b48ff5a4b8e2b86fcd0cedc7",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f",
+  "scale": 16
+ },
+ "protocol_sha256": "d14f63150f6a1135585f778ee556ba17e4317da006a6366211e8fcfe403d8a5d"
+}

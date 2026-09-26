@@ -1,0 +1,2 @@
+2026-09-25T20:14:20.019302+00:00 E1 {'passes': True, 'library_match': True, 'terminal_median': 0.018849937850336784, 'o1_terminal_median': 0.018849937850336784, 'worst_abs_diff': 0.0, 'seconds': 1131.6942585999786}
+2026-09-25T20:32:27.972610+00:00 E2 {'passes': True, 'library_match': True, 'terminal_median': 0.018378471478304764, 'o1_terminal_median': 0.018378471478304764, 'worst_abs_diff': 0.0, 'seconds': 1087.9312466999982}

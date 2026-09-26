@@ -9494,3 +9494,104 @@ Reading, bounded by one stream per world: order is not needed online, and it is
 not SUFFICIENT for reliability either. The two arms fail in different worlds.
 The successor, `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md`, is DRAFTED, not
 registered. None of its thresholds is a prediction until the PI freezes it.
+
+
+# DECISIONS 9 AND 10 (2026-09-25), delegated by the PI to Claude, registered before any O2 cell ran
+
+The PI delegated both decisions ("use your best judgment"). They are recorded
+here, with reasons, before O2 produced any scored cell. At the time of writing
+only the gates E1-E4b and a scale-16 dry run were in flight.
+
+**Decision 9: BANK. The SG3 identifiability generator is not built.** SG0 and
+its scored sub-triage found the usable staged vocabulary functionally separated,
+with 0 of 576 programs carrying a near-tie, so route inference on it is never
+ambiguous. A generator engineered to restrict the support distribution would
+create the ambiguity it then measures. That risks failing its own NECESSITY gate
+(P1, `notes/identifiability-sketch.txt`). The proposer / program-inference line
+on this substrate is CLOSED, and its output is the SG0 negative, scoped as
+recorded above. The online-formation line is unaffected.
+
+**Decision 10: a conditional resolution of ladder decision 7, fixed now.**
+- If O2's frozen rule labels `SHUFFLED` or `STAGED` `RELIABLE` (`k >= 19` of
+  21), stop rule 2's online-learnability gate counts as MET for that protocol,
+  and L1-L8 reopen with claims scoped to it.
+- If neither is `RELIABLE` (INTERMEDIATE, UNRELIABLE or FLOOR_FAILED), L1-L8
+  are CLOSED.
+
+Offline scope was considered and rejected, because it could only support
+supplied-curriculum claims. Neither branch may be rewritten after O2's labels
+are known.
+
+
+# CORRECTIONS (2026-09-25, SPEC_AUDIT re-audit of SO4-O1): two record errors, no verdict changes
+
+**SO4 stream spread was one order of magnitude, not two.** The SO4 entry says
+the replay stream "moves terminal error by up to two orders of magnitude
+(world 6: 0.203 to 2.239)". The cited values differ by 11x, one order of
+magnitude, which is how PROGRESS, RESEARCH_STATUS, README and the paper already
+state it. The earlier wording stays above, and this entry corrects it.
+
+**N1's `NONE` arm was a fresh run, not the published baseline.** N1 Amendment 1
+registered `NONE` as the published J1c non-staged baseline, "unchanged", with a
+non-vacuity referent of 0.92-0.97. The runner instead re-trained it on N1's own
+stream, and it scored 0.9575 / 0.9037 / 0.9037 against J1c's published
+0.9608 / 0.9542 / 0.9187. Two of three worlds fall below the registered
+referent's 0.92 lower end. The scorer checked only `NONE > 0.05`, and the N1
+records called it "matching the published floor". The `ANCHORS_SUFFICE` verdict
+is unaffected: `NONE` fails the 0.05 threshold by ~18x in every world, and the
+verdict rests on `INTERLEAVED` against `SHAM`. What changes is the description:
+`NONE` is a same-construction re-run whose values sit near, not on, the
+published ones.
+
+
+# O2 VERDICT (2026-09-26): ORDER_FREE_UNRELIABLE. STAGED and MIXED_L1 are also UNRELIABLE
+
+Plan `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md`, frozen `b3c1c85`. Run `053da52`,
+70 cells, exit 0, finished 2026-09-26 03:04Z. Independent scorer
+`score_o2_online_reliability` returns `valid: true` with no problems.
+`check_prereg`, `check_invalid` and `check_adequacy` pass. Gates E1-E5 passed
+before launch, and E1/E2 reproduce O1's world-12 cells bitwise. Report
+`reports/o2_online_reliability.json`; archive
+`reports/o2_online_reliability_20260926/`. Development band 2, worlds 13-19.
+DEVELOPMENT evidence, never confirmatory.
+
+Passing cells out of 21 (terminal median < 0.05):
+- `SHUFFLED`: **9**, labelled `UNRELIABLE`. This is the primary label,
+  `ORDER_FREE_UNRELIABLE`.
+- `STAGED`: **12**, `UNRELIABLE`.
+- `MIXED_L1`: **4**, `UNRELIABLE`.
+- `PLAIN`: 0 of 7, so the floor holds.
+
+No cell was non-finite. The per-world difference d_w (`SHUFFLED` minus
+`STAGED` passing streams) sums to -3 (descriptive).
+
+| world | `SHUFFLED` s0 / s1 / s2 | `STAGED` s0 / s1 / s2 | `MIXED_L1` s0 / s1 / s2 | `PLAIN` s0 |
+|---|---|---|---|---:|
+| 13 | **0.049** / **0.026** / 0.172 | 0.163 / **0.025** / **0.020** | **0.048** / 0.073 / 0.891 | 1.95 |
+| 14 | 2.00 / **0.027** / 0.306 | 0.183 / 2.39 / 2.03 | 1.31 / 0.857 / 0.702 | 1.96 |
+| 15 | **0.026** / 0.076 / 0.118 | **0.036** / 0.143 / **0.028** | **0.044** / 0.353 / 0.116 | 1.88 |
+| 16 | 0.061 / **0.040** / **0.045** | 0.077 / 2.25 / 0.136 | 0.056 / 1.81 / **0.034** | 1.98 |
+| 17 | 0.227 / **0.022** / **0.042** | **0.027** / **0.041** / **0.012** | 0.093 / 0.064 / 1.06 | 1.85 |
+| 18 | 0.151 / 0.069 / 0.149 | **0.023** / **0.025** / **0.016** | 0.184 / 2.04 / 1.02 | 1.93 |
+| 19 | 0.185 / 0.449 / **0.036** | 0.059 / **0.038** / **0.027** | **0.027** / 1.65 / 0.481 | 1.92 |
+
+**Reading.** Neither order-free supply nor the staged curriculum forms the
+rotated substrate reliably online at this budget. `STAGED`'s 12/21 (0.57)
+reproduces its historical cell rate (14/24 = 0.583) on fresh worlds almost
+exactly. So O1's LIVE result reflected a one-stream draw from the same
+unreliable regime, not an order-free advantage. The two arms fail differently,
+which is descriptive only:
+- `SHUFFLED` rarely collapses (one cell above 1.0) and mostly misses narrowly
+  (8 of its 12 failures lie in 0.05-0.2). Its canonical tasks are fitted
+  late: canonical end-of-task medians are 0.06-2.0, against terminal
+  0.02-0.45.
+- `STAGED` collapses three times (world 14 streams 1-2, world 16 stream 1) and
+  otherwise passes.
+- `MIXED_L1` is clearly worse (6 collapses). Online, unlike offline (N1b),
+  length-2 tasks matter.
+
+**Decision 10 applied, as registered before O2 ran:** neither `SHUFFLED` nor
+`STAGED` is `RELIABLE`, so the ladder's learner rungs L1-L8 are CLOSED.
+**Next, as registered:** the O2F anchor-timing census (plan registered
+2026-09-25 20:58Z at 0/70 cells, sha256 2a85c6f4...d347) runs because the
+primary label is not `ORDER_FREE_RELIABLE`.

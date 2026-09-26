@@ -1,0 +1,36 @@
+{
+ "E1": {
+  "passes": true,
+  "library_match": true,
+  "terminal_median": 0.018849937850336784,
+  "o1_terminal_median": 0.018849937850336784,
+  "worst_abs_diff": 0.0,
+  "seconds": 1131.6942585999786
+ },
+ "E2": {
+  "passes": true,
+  "library_match": true,
+  "terminal_median": 0.018378471478304764,
+  "o1_terminal_median": 0.018378471478304764,
+  "worst_abs_diff": 0.0,
+  "seconds": 1087.9312466999982
+ },
+ "E3": {
+  "passes": true,
+  "explicit_seed": 5001
+ },
+ "E4": {
+  "passes": true,
+  "by_arm": {
+   "SHUFFLED": true,
+   "STAGED": true,
+   "MIXED_L1": true
+  }
+ },
+ "E4b": {
+  "passes": true,
+  "failing": []
+ },
+ "all_pass": true,
+ "protocol_sha256": "55dd37f39eafa5149a6867005cd36100d00638e2556e0ee479b88c9ded80f7c5"
+}

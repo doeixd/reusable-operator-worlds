@@ -7536,3 +7536,68 @@ Everything else the audit checked holds in all six cells:
 
 The O2 draft now records end-of-task on the canonical 64 tasks, and the anchor
 for every arm.
+
+
+# 2026-09-25 CORRECTIONS from the SO4-O1 re-audit (SPEC_AUDIT.md)
+
+- **SO4 entry.** It says the scratch comparator is weak, with "geometric-mean
+  NMSE 1.1-4.5". Recomputed from the 48 committed margin pairs, the per-world
+  geometric means are 2.08 / 2.81 / 2.43 / 2.45 (worlds 6-9). The quoted range
+  was roughly the spread of individual programs (0.915-8.06). The reading, a
+  weak comparator, stands.
+- **N1 entry.** "`NONE` matching the published floor" overstates it. `NONE` was
+  re-trained (0.9575 / 0.9037 / 0.9037, against the published J1c
+  0.9608 / 0.9542 / 0.9187), and two worlds sit below the registered 0.92-0.97
+  referent. There is no verdict impact (`PREDICTIONS.md`, same date).
+- **N1 wording.** `INTERLEAVED` was repeatedly described as "anchors at random
+  positions". N1 Amendment 3 established that the offline trainer pools
+  examples and has no task order. The anchors are pooled with the length-3
+  tasks. README, paper and status index are fixed. Older PROGRESS entries stay
+  as written, and this entry corrects them.
+- Other findings, all cosmetic or process-level, are in `SPEC_AUDIT.md`:
+  - the arm-provenance harness was not used in the N1 line or O1;
+  - N1's unused `--dry-run` flag is a hazard, left in code because the N1
+    scorer digests the runner;
+  - N1's precondition record covers only the relaunch;
+  - SO4 records online examples, not example-gradients;
+  - the N1c scorer comment overstates what it checks.
+
+
+# 2026-09-26 O2 complete: online formation is unreliable with or without order (ORDER_FREE_UNRELIABLE)
+
+Run `053da52`, launched 2026-09-25 20:46Z, 70 cells in a pool of 3, exit 0 at
+03:04Z (~6.3 h). Before launch:
+- The frozen plan (`b3c1c85`) was protected in `check_prereg` and added to
+  `check_adequacy`'s scope.
+- The runner, independent scorer and 15 tests were committed (560 tests pass).
+- Gates: E1 (lifetimes-only `STAGED`) and E2 (`SHUFFLED`) reproduced O1's
+  committed world-12 cells BITWISE with the LEAN switch on (checkpoint probes
+  and extended diagnostics off; worst difference 0.0), which is what admitted
+  that speedup. E3 (seed neutrality), E4 (streams distinct) and E4b
+  (interleaving) passed.
+- E5: a scale-16 dry run interrupted after one cell and relaunched reused that
+  cell byte-identically and ran the other nine.
+
+Two operational lessons came out of this, both recorded in `AGENTS.md`:
+- The restart test left three orphaned pool workers, which were killed before
+  the relaunch.
+- A 3.2 GB TypeScript language server had to be closed to restore memory
+  headroom.
+
+Result, from the independent scorer:
+- `SHUFFLED`: 9/21.
+- `STAGED`: 12/21.
+- `MIXED_L1`: 4/21.
+- `PLAIN`: 0/7.
+
+All three arms are `UNRELIABLE`. Per-cell values and the reading are in
+`PREDICTIONS.md` (O2 VERDICT).
+
+Timing, disclosed: cells took ~19.5 min each, not the ~9-15 min the plan
+estimated from O1/SO2. Solo gate cells were equally slow, so this is host speed,
+not the LEAN switch, which E1/E2 show changes no number.
+
+Consequences, all registered before any O2 cell ran:
+- L1-L8 are CLOSED (decision 10).
+- The O2F anchor-timing census runs next.
+- The SG3 identifiability generator is not built (decision 9, BANK).

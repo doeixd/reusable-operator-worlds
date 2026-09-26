@@ -1900,3 +1900,168 @@ search over 16 deterministic length-four programs reached query NMSE <= 0.05
 on all 16 (median 0.00872). This is a scoped frozen-vocabulary usability check;
 it does not establish a learned inference mechanism or a PX7 result. Beam,
 posterior, commit-late and depth-five measurements remain unrun.
+
+# Development result: on a formed vocabulary, program inference is not ambiguous (SG0, SG6, 2026-09-22)
+
+A depth-five gate first confirmed that exhaustive support-only route search over
+the frozen vocabulary is feasible and exact there too. It covers 248,832 routes
+in 243 memory-bounded blocks, gives support MSE bitwise equal to the direct
+evaluator, and reaches query NMSE 0.0134 on its registered task. SG0 then asked
+the question a learned program proposer needs answered first: does committing
+to the support-optimal route ever cost anything on the usable staged libraries?
+The criterion, registered before any data existed, allowed at most two headroom
+cells among 36. The result was zero:
+- 574 of 576 staged tasks carry exactly zero commitment regret.
+- No staged program at depths three or four has any rival route within 1% of
+  its winner on support. Median identifiability is 53.9: the runner-up is about
+  54 times worse.
+- A 200-resample bootstrap never changed a selected route.
+
+The same code path on control libraries, which failed to form, finds 500 of 576
+routes differing, regret up to 0.663, and 142 non-trivial near-ties. So the
+instrument can detect ambiguity, and it found none where the vocabulary is good.
+
+On this substrate, then, the difficulty of inferring a program is a property of a
+library that has not finished forming, not an independent problem that a
+proposer could be trained to solve. A follow-up that would have correlated
+inference difficulty with vocabulary quality was stopped before a plan existed.
+Quality across the twelve held libraries is bimodal: staged 0.0047-0.0073,
+control 1.26-1.30, a gap 30 times the wider cluster's spread. The pooled rank
+correlation (-0.69) therefore re-detects cluster membership, and within each
+cluster it is null and of the wrong sign. We report the amortized-proposer
+branch on this substrate as closed. We make no claim about substrates whose
+formed vocabularies do carry ambiguity, which these data cannot sample.
+
+# Methods note: three adequacy gates (2026-09-22)
+
+Many rungs in this programme failed for reasons that had one name but three
+different fixes. Every plan now passes three separately checked gates before it
+is frozen:
+- NECESSITY: does the task require the behaviour under study? The fix is to
+  change the task.
+- OPPORTUNITY: could the generator produce the effect at all? The fix is to
+  change the generator.
+- DISCRIMINATION: could this instrument, on this sample, come out either way?
+  The fix is to change the sample or the statistic.
+
+The discrimination check runs the registered decision rule on simulated null and
+effect data and requires a false-fire rate at most 5% and a detection rate at
+least 80%. Reconstructions of two earlier defects fail it:
+- a first-crossing "horizon" statistic, which fires on 42.5% of pure-noise
+  series;
+- a macro threshold of 1.5 uses, which nearly every pattern clears.
+
+Most earlier negatives in this paper are necessity failures: the task did not
+require the behaviour. They are worded as statements about the construction,
+not about the behaviour (claims audit, `reports/claims_audit_a2_2026-09-24.md`).
+
+# Development result: what makes staged formation work is the presence of single-operation tasks, not their order (N1, N1b, N1c, 2026-09-22/23)
+
+The length curriculum (J1c) confounded two things: presenting short programs
+FIRST, and presenting short programs AT ALL. Three offline rungs on development
+worlds 0-2 separated them. All ran at a matched 65,536-update budget with no
+route ever revealed.
+
+| rung | arm | terminal median NMSE, worlds 0/1/2 |
+|---|---|---|
+| N1 | curriculum (short first) | 0.0062 / 0.0051 / 0.0073 |
+| N1 | 124 anchors pooled with the length-3 tasks, no order, length never revealed | **0.0093 / 0.0101 / 0.0066** |
+| N1 | pool-matched sham (same count, length-3 fillers) | 1.04 / 1.06 / 1.09 |
+| N1b | 60 length-1 anchors only | **0.0175 / 0.0112 / 0.0067** |
+| N1b | 64 length-2 anchors only | 1.16 / 1.12 / 1.14 |
+| N1b | 8 mixed anchors | 1.09 / 1.11 / 1.04 |
+| N1b | 32 mixed anchors | **0.0141 / 0.0076 / 0.0212** |
+| N1c | 6 length-1 anchors covering all 6 operations | 1.04 / 1.09 / 1.05 |
+| N1c | 18 length-1 anchors covering 5 of 6 operations | 0.199 / **0.0129 / 0.0259** |
+
+Three conclusions follow for this substrate and budget.
+- **Order is not the active ingredient; presence is.** Anchors pooled with the
+  length-3 tasks, with no stage order at all, work as well as the curriculum. The sham, with the same pool and verifiably
+  identical minibatch draws, is worse than no anchors at all.
+- **Only single-operation tasks matter.** Length-2 tasks do nothing on their
+  own, even though an untrained library already clusters them above chance.
+  Clearing chance was the wrong threshold.
+- **What counts is how many anchors, not coverage.** A post-hoc pattern in
+  N1b, that passing cells covered every operation, did not survive a design
+  that held count fixed. Six anchors fail with full coverage. Eighteen
+  covering five operations pass in two worlds, where the library forms the
+  sixth operation from compositions. In the third world the failure is local
+  to tasks using the missing operation (0.025 on the other tasks, 1.13 on
+  those).
+
+An online learner needs a quota of single-operation tasks, somewhere between 6
+and about 18 in a 188-task stream here. It does not need a curriculum, which
+would require knowing program length.
+
+# Development exploration: order-free anchors online (O1, Tier 1, 2026-09-24)
+
+O1 carried the offline finding online on fresh worlds 10-12, with one replay
+stream per world. It is exploratory, and its job was to decide whether the
+question is live. The arms:
+- one random-order online lifetime over the same 188 tasks the staged protocol
+  uses (`SHUFFLED`);
+- the length-1 quota plus the canonical tasks, with no length-2 tasks
+  (`MIXED_L1`);
+- the staged protocol itself;
+- a no-anchor control.
+
+| arm | w10 | w11 | w12 |
+|---|---:|---:|---:|
+| staged protocol | 0.272 | **0.0269** | **0.0188** |
+| `SHUFFLED` | **0.0366** | 0.473 | **0.0184** |
+| `MIXED_L1` | 0.191 | 0.149 | **0.0358** |
+| no anchors | 2.01 | 1.92 | 1.91 |
+
+The order-free stream passed as often as the curriculum, two of three, but in a
+different pair of worlds. Order is not needed online, and it did not make
+formation reliable either.
+
+Without length-2 tasks, the online learner passed only one world, where offline
+it passed all three. We read that as an indication, not a finding, because it
+rests on one stream.
+
+In the single-lifetime arms the canonical tasks are fitted poorly when first
+seen: end-of-task error on those 64 tasks is 17-39 times the terminal error in
+passing cells. They become usable only after the library forms later in the
+stream. This corrects a first reading that took the end-of-task median over all
+stream tasks, including the anchors (`reports/o1_online_anchor_20260924/stream_audit.json`).
+
+The reliability question is registered as O2: worlds 13-19, three streams each,
+a k-of-21 rule, and its result reported below when it exists.
+
+# Development result: online formation is unreliable with or without a curriculum (O2, 2026-09-26)
+
+O2 asked the reliability question directly. It ran on seven fresh worlds (13-19)
+with three replay streams each and a registered rule: an arm is reliable only if
+at least 19 of its 21 cells reach terminal NMSE below 0.05. At the measured
+incumbent rate the rule fires by mistake at most 2%, and it detects a 95%-reliable
+mechanism at least 84% of the time. Before launch, equivalence gates reproduced
+O1's committed cells bitwise.
+
+| world | `SHUFFLED` s0 / s1 / s2 | `STAGED` s0 / s1 / s2 | `MIXED_L1` s0 / s1 / s2 | `PLAIN` s0 |
+|---|---|---|---|---:|
+| 13 | **0.049** / **0.026** / 0.172 | 0.163 / **0.025** / **0.020** | **0.048** / 0.073 / 0.891 | 1.95 |
+| 14 | 2.00 / **0.027** / 0.306 | 0.183 / 2.39 / 2.03 | 1.31 / 0.857 / 0.702 | 1.96 |
+| 15 | **0.026** / 0.076 / 0.118 | **0.036** / 0.143 / **0.028** | **0.044** / 0.353 / 0.116 | 1.88 |
+| 16 | 0.061 / **0.040** / **0.045** | 0.077 / 2.25 / 0.136 | 0.056 / 1.81 / **0.034** | 1.98 |
+| 17 | 0.227 / **0.022** / **0.042** | **0.027** / **0.041** / **0.012** | 0.093 / 0.064 / 1.06 | 1.85 |
+| 18 | 0.151 / 0.069 / 0.149 | **0.023** / **0.025** / **0.016** | 0.184 / 2.04 / 1.02 | 1.93 |
+| 19 | 0.185 / 0.449 / **0.036** | 0.059 / **0.038** / **0.027** | **0.027** / 1.65 / 0.481 | 1.92 |
+
+Passing cells: 9 of 21 for the order-free stream, 12 for the curriculum, 4 for
+the stream without length-2 tasks, and 0 of 7 for the no-anchor control. None of
+the three is reliable. The curriculum's 12/21 matches its historical cell rate
+(0.58) on fresh worlds, so O1's apparent order-free success was one draw from the
+same unreliable regime. The two main arms fail differently:
+- The order-free stream almost never collapses, but often lands just above the
+  threshold. Its canonical tasks are fitted late in the stream.
+- The curriculum either succeeds or collapses completely.
+
+Without length-2 tasks, online formation is worse still. Offline it was not
+(N1b), so the online learner uses those tasks in a way the offline one did not.
+
+We therefore make no claim that the rotated substrate is learnable online by any
+protocol tested here. What the offline and online results together establish is
+narrower. The library forms from single-operation anchors in any order. That is
+reliable offline and only about 50% reliable online at this budget, so the
+online deficit is one of reliability, not of possibility.

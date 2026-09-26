@@ -2147,3 +2147,14 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   only because the true baseline was LOWER. Recount every baseline in exactly
   the unit the registered rule counts (cell, stream, world, median-of-streams),
   from the reports rather than from a summary sentence.
+
+- A DEAD POOL PARENT LEAVES LIVE WORKERS (O2 restart test, 2026-09-25). When
+  the parent of a `ProcessPoolExecutor` dies (here the deliberate `os._exit` of
+  the restart test; equally a killed launcher), its spawned workers keep
+  computing their current cell as orphans. They cannot write a durable cell,
+  because only the parent writes, but they still write that cell's lifetime
+  work directory. A relaunch reruns the same cell into the same directory while
+  the orphan is still writing there. Before ANY relaunch, kill the workers whose
+  command line carries `parent_pid=<dead parent pid>`, and only then relaunch.
+  `metrics.jsonl` is written once, in overwrite mode, at the end of a lifetime,
+  so a rerun never mixes two attempts' rows once the orphan is gone.

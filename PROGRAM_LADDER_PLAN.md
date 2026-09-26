@@ -553,3 +553,23 @@ comparison, so the design checks do not apply to it; what it does is remove an
 unsatisfiable prerequisite and replace it with a stated fork, which is the
 "denominator that cannot resolve to neither" discipline applied to a research
 plan rather than to a triage.
+
+
+# Revision 3 (2026-09-25): ladder decision 7 resolved, conditionally, before O2 ran
+
+Decision delegated by the PI. Revision 2 stated that nothing was pending on
+online learnability. That stopped being true when the online anchor-supply line
+reopened it on development band 2: O1 returned LIVE, and O2 was frozen at
+`b3c1c85`. Resolution, registered before any O2 cell existed (full text in
+`PREDICTIONS.md`, 2026-09-25):
+- If O2 labels `SHUFFLED` or `STAGED` `RELIABLE` (`>= 19/21`), stop rule 2's
+  gate is MET for that online protocol, and L1-L8 reopen with claims scoped to
+  it. The anchor supply must be named in every plan as a task-distribution
+  assumption.
+- Otherwise L1-L8 are CLOSED (option ii).
+
+Option (i), offline scope, is rejected. The Tier 0 half of the ladder is
+unaffected either way.
+
+**Applied 2026-09-26.** O2 returned `SHUFFLED` 9/21 and `STAGED` 12/21, both
+`UNRELIABLE`. Under the rule above, L1-L8 are CLOSED.

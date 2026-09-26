@@ -6,11 +6,34 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-24, after O1 Tier 1 returned LIVE. Nothing is running.
-Order-free anchors form the library ONLINE as often as the staged curriculum
-(2 of 3 worlds each), but in different worlds, so reliability is the open
-question. `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md` asks it and is DRAFTED,
-awaiting PI decision 11. Follow-up audits A1, A2 and P1 are done.
+Last rewritten: 2026-09-26, after O2 closed. **O2 returned
+`ORDER_FREE_UNRELIABLE`:** `SHUFFLED` 9/21, `STAGED` 12/21, `MIXED_L1` 4/21,
+`PLAIN` 0/7, on worlds 13-19 with three streams each. Neither order-free supply
+nor the staged curriculum forms the rotated substrate reliably online at this
+budget. `STAGED` reproduces its historical ~0.58 cell rate. As registered before
+O2 ran:
+- L1-L8 are CLOSED (decision 10).
+- The O2F anchor-timing census is next.
+
+Decision 9 is BANK. Nothing is running.
+
+
+# O2 CLOSED: ORDER_FREE_UNRELIABLE (2026-09-26)
+
+- Run `053da52`, 70 cells, exit 0, independent scorer valid, all checkers pass.
+  Report `reports/o2_online_reliability.json`; archive
+  `reports/o2_online_reliability_20260926/`. Development band 2, worlds 13-19.
+- Passing cells out of 21: `SHUFFLED` 9, `STAGED` 12, `MIXED_L1` 4, `PLAIN` 0/7.
+- The arms fail differently:
+  - `SHUFFLED` mostly misses narrowly (8 of 12 failures in 0.05-0.2, one
+    collapse), and its canonical tasks are fitted late.
+  - `STAGED` either passes or collapses (3 cells above 2.0).
+  - `MIXED_L1` collapses in 6 cells, so length-2 tasks matter online.
+- **Consequences, registered before the data:**
+  - L1-L8 are CLOSED (ladder decision 7 / status decision 10).
+  - O2F (`O2F_ANCHOR_TIMING_CENSUS_PLAN.md`, registered at 0/70 cells) now runs.
+    It asks whether early anchor dose predicts which streams form, within
+    worlds.
 
 
 # N1 CLOSED: ANCHORS_SUFFICE, 3 of 3 worlds (2026-09-22)
@@ -77,13 +100,13 @@ awaiting PI decision 11. Follow-up audits A1, A2 and P1 are done.
   two 2-of-3 arms fail in different worlds. Without length-2 tasks, `MIXED_L1`
   passes only 1 of 3 (offline N1b: 3/3). One stream per world, so these are
   indications only.
-- **O2 DRAFTED (2026-09-24), not frozen:** `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md`.
+- **O2 CLOSED (2026-09-26), `ORDER_FREE_UNRELIABLE`, see the O2 section above.** Plan as run: `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md`.
   Worlds 13-19, three replay streams, arms `SHUFFLED` / `STAGED` (lifetimes only,
   behind a bitwise gate against O1's cells) / `MIXED_L1` / `PLAIN`. Registered
   rule k-of-21: `>= 19` RELIABLE, `<= 16` UNRELIABLE. At the measured
   null (STAGED cell rate 14/24 = 0.583), false-fire is <= 0.021 and detection
   >= 0.838 at four heterogeneity levels. About 3.6 h.
-  Awaiting PI decision 11.
+  Gates E1-E5 passed before launch. E1/E2 reproduce O1's world-12 cells bitwise.
 
 # SG0 CLOSED: NO-HEADROOM (2026-09-22)
 
@@ -181,7 +204,7 @@ sections with MEASURED numbers.
   J1c confounds a monotone short-to-long ORDERING with the mere PRESENCE of
   length-1 tasks on which routing is clustering rather than search. Four arms at
   matched task count and budget: `STAGED` (the curriculum, and a bitwise anchor
-  against the committed J1c cell), `INTERLEAVED` (same anchors, random positions,
+  against the committed J1c cell), `INTERLEAVED` (same anchors pooled with the length-3 tasks, no order,
   no ordering, length never revealed), `SHAM` (matched anchor count and
   positions, filled with length-3 tasks), `NONE` (the matched non-staged floor).
   **If anchors suffice without ordering the online problem changes shape:** a
@@ -687,26 +710,34 @@ sealed band, and all are implementation audits rather than experiments.
    with all three candidates withdrawn.
 8. ANSWERED: SG0 was approved, implemented, run and scored. Verdict
    `NO-HEADROOM`; see the top section.
-9. **LIVE, and the measurement is now IN (ladder decision 6):** SG0 returned
-   NO-HEADROOM and the amended, scored sub-triage returns
-   `NO-HEADROOM-SATURATED` with staged `j = 0` of 36 and 0 of 576 programs
-   carrying any near-tie, robust across a tenfold tolerance widening, with
-   non-vacuity passing on the control arm. SG3's first prerequisite gate FAILS
-   on these artifacts. Pursue the identifiability generator anyway, or bank the
-   economics and negative-results papers and stop opening rungs on this
-   substrate? **Claude's recommendation: BANK.** The amendment asked for in the
-   previous wording is done; what remains is the PI's call, not more
-   measurement. Note the scope: this says the usable staged vocabulary is
-   functionally separated at depths 3-4, not that no substrate has ambiguity -
-   the controls in the same grid have plenty.
-10. **LIVE (ladder decision 7):** the L1-L8 learner gate is unreachable - SO2,
-    SO3 and SO4 all failed and worlds 0-9 are spent. Amend stop rule 2 for
-    offline scope on frozen J2A libraries, or close L1-L8. They cannot remain
-    pending.
-11. **LIVE (2026-09-24): freeze O2?** `O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md`
-    (Tier 2, worlds 13-19, ~3.6 h, one evening). Sub-question: keep `MIXED_L1`
-    (+0.7 h)? Claude's recommendation: freeze with `MIXED_L1`, because it is the
-    cheapest direct test of the offline/online discrepancy.
+9. **ANSWERED 2026-09-25 (PI delegated to Claude): BANK.** No SG3
+   identifiability generator. SG0's sub-triage returned
+   `NO-HEADROOM-SATURATED` (staged `j = 0` of 36; 0 of 576 programs with any
+   near-tie). A generator that restricts the support distribution to create
+   ambiguity would manufacture the difficulty it measures (P1,
+   `notes/identifiability-sketch.txt`). The amortized-proposer /
+   program-inference line on this substrate is CLOSED. The online-formation
+   line (O1/O2) is a different question and stays open. Recorded in
+   `PREDICTIONS.md` 2026-09-25.
+10. **ANSWERED 2026-09-25 (PI delegated to Claude), as a rule registered BEFORE
+    any O2 cell existed.** The fork's premise, "nothing is pending", stopped
+    being true when O1 reopened online learnability on fresh worlds. Resolution:
+    - If O2 labels `SHUFFLED` or `STAGED` `RELIABLE` (>= 19/21), the online
+      learnability gate of stop rule 2 is MET for that protocol, and L1-L8
+      reopen. Every claim is scoped to that online protocol (an order-free
+      anchor supply, or the staged curriculum), and the anchor supply is named
+      as a task-distribution assumption.
+    - Otherwise L1-L8 are CLOSED (option ii). The ladder's live content becomes
+      its Tier 0 gates plus economics and negative results.
+
+    Option (i), offline scope, is rejected: it would license only
+    supplied-curriculum claims, which is the weaker result the online line
+    exists to beat. Recorded in `PREDICTIONS.md` and `PROGRAM_LADDER_PLAN.md`
+    (Revision 3), 2026-09-25.
+    **APPLIED 2026-09-26:** O2 labelled both `SHUFFLED` (9/21) and `STAGED`
+    (12/21) `UNRELIABLE`, so L1-L8 are CLOSED.
+11. **ANSWERED 2026-09-25 (PI): freeze O2 with `MIXED_L1`.** Frozen `b3c1c85`,
+    protected `e777851`, runner/scorer `053da52`.
 
 # Housekeeping owed
 
