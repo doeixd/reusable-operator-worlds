@@ -2158,3 +2158,76 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   command line carries `parent_pid=<dead parent pid>`, and only then relaunch.
   `metrics.jsonl` is written once, in overwrite mode, at the end of a lifetime,
   so a rerun never mixes two attempts' rows once the orphan is gone.
+
+- ONE STREAM PER WORLD CAN MANUFACTURE A "LIVE" RESULT (O1 -> O2, 2026-09-26).
+  O1 found the order-free arm passing 2 of 3 worlds, as often as the curriculum,
+  and in different worlds. O2, with 3 streams on 7 fresh worlds, found both
+  unreliable (9/21 and 12/21). The curriculum reproduced its historical cell
+  rate exactly, so O1 was one draw from a ~0.5-rate regime. A Tier 1 at one
+  stream per world can say an effect is POSSIBLE, never that it is COMMON. Plan
+  the reliability test before reading a Tier 1 pass as progress.
+- SPLIT FAILURES BY MODE BEFORE DESIGNING A FIX (O2C-O2G). O2's pass counts hid
+  two failure modes with different remedies:
+  - near-misses (terminal 0.05-0.2): a library still converging, which a sleep
+    phase repairs;
+  - collapses (>= 1.0): a catastrophic transition, which sleep almost never
+    repairs (1 of 10).
+
+  Averaged together, they would have made sleep look like a modest general
+  improvement. Separated, sleep repairs every near-miss at 64 retained per task
+  and misses nearly every collapse. Before any intervention, tabulate the
+  failures by magnitude and by trajectory. A bimodal failure distribution is
+  two problems.
+- DESIGN THE RULE ON THE CELLS THE EFFECT CAN REACH (O2C). "The arm reaches
+  19/21 after consolidation" was UNDETECTABLE on O2's cells: at best 0.8%
+  detection, even under a four-fold effect, because the collapsed and high cells
+  would need 9-40x reductions. The informative rule counted rescues among the
+  8 near-misses and breakages among the 9 passing cells, with false-fire
+  <= 0.001 and detection 0.94-1.00. The same happened at O2D's threshold, where
+  T = 19 lost detection to two ceiling cells sitting just under 0.05 and T = 18
+  was chosen. Simulate the rule on the ACTUAL starting values, not an
+  idealised population.
+- A CEILING ARM FIRST, THE DEPLOYABLE ARM SECOND (O2C). Consolidating on ALL
+  seen data, which no online learner retains, fixed 20 of 21. That licensed the
+  deployable question: how much must be retained (O2D: 64 per task reaches the
+  ceiling). Without the ceiling, the replay-only result (15/21) could not have
+  been read as "retention-limited" rather than "the wrong mechanism".
+- SAVED TERMINAL MODELS ARE A PAIRED SUBSTRATE FOR CHEAP TIER 1 RUNGS
+  (O2C-O2G). Five exploratory rungs ran in ~8 h on O2's saved models, with no
+  new world and no new stream lifetime, each behind a bitwise reload gate (G0:
+  the reloaded model reproduces the recorded per-task terminal exactly). Save
+  every terminal and stage model of a Tier 2 run. The next questions are often
+  answerable from them, and the gate makes the reuse trustworthy. Guard against
+  the cost: every such rung re-uses the same worlds, so its numbers are sizings
+  and must be confirmed on fresh worlds.
+- A SHARED-RNG REPLAY BUFFER CAN BE RECONSTRUCTED, BUT ONLY BY REPLAYING THE
+  EXACT CALL SEQUENCE, AND ONLY TRUSTED AFTER A SPY CHECK (O2C). The lifetime's
+  `TaskReplayBuffer` draws storage and sampling from one generator. It is
+  rebuilt by replaying one `sample(1)` per arriving example and `add_task` after
+  each task. Gate G1 compared that reconstruction against a spy subclass
+  capturing the real buffer of a scaled lifetime: identical, item for item.
+- REGISTERING WHILE COMMITS ARE BLOCKED (O2F). A plan written during a run that
+  hashes the repo cannot be committed. It was registered by recording its sha256
+  in the timestamped working log at 0/70 cells, and committed after the run.
+  State the hash CONVENTION. The predictor file was written with CRLF, so its
+  raw-byte hash (the registered one) differs from the CRLF-normalised hash a
+  scorer prints and from git's LF blob. All three were reconciled in the record.
+- GATES THAT STAMP `git_commit` FREEZE HEAD FROM GATE TO LAUNCH (O2). O2's gate
+  record carries the protocol fingerprint, which includes the commit, so any
+  commit between the gates and the launch, docs included, would have
+  invalidated them. Uncommitted docs were stashed around the launch, because
+  `require_clean_code` refuses any dirty file, and restored after. Write
+  documents during that window; commit them after the run.
+- POWERSHELL DOUBLE-QUOTED STRINGS EAT MARKDOWN BACKTICKS (2026-09-24). In
+  `"..."` or `-f` format strings, a backtick is an escape: `` `r `` became a
+  carriage return (git then classed `RESEARCH_STATUS.md` as binary), and other
+  backticks vanished. Bash heredocs likewise turned a Python `\r\n` into
+  literal newlines. Write file edits through a scratch Python file (UTF-8, LF),
+  or through PowerShell SINGLE-quoted here-strings, and scan for control bytes
+  afterwards.
+- REGISTER A CONDITIONAL DECISION BEFORE THE DATA THAT RESOLVES IT (decision
+  10). "L1-L8 reopen iff O2 labels SHUFFLED or STAGED RELIABLE" was written and
+  timestamped before any O2 cell ran, and applied mechanically when O2 returned
+  UNRELIABLE. A delegated programme decision that depends on a pending result
+  should be written as a rule, with every branch stated, before the result
+  exists.

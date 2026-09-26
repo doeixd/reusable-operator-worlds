@@ -5272,3 +5272,15 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
 2026-09-24 O1 stream audit: _last_task_end_of_task medians over ALL lifetime tasks, so on a mixed stream it silently included anchors (0.07 recorded vs 0.63 canonical). Re-derive every statistic's population when a stream changes shape. Full entry in AGENTS.md.
 
 2026-09-25 O2 draft: baseline quoted in the wrong unit (world-median 6/10 read as stream-0; the rule counts cells: 14/24=0.583). Count baselines in the rule's own unit, from reports. Full entry in AGENTS.md.
+
+2026-09-26 online-formation line (full entries in AGENTS.md; synthesis in ONLINE_FORMATION_SYNTHESIS.md):
+- One stream per world manufactured a LIVE result (O1); 3 streams x 7 worlds showed both protocols unreliable (O2).
+- Split failures by mode before designing a fix: near-misses (sleep repairs) vs collapses (sleep does not).
+- Design a rule on the cells the effect can reach, simulated on the actual starting values (O2C, O2D).
+- Run a ceiling arm before the deployable arm (O2C).
+- Saved terminal models plus a bitwise reload gate make cheap paired Tier 1 rungs; they are sizings on re-used worlds.
+- Shared-RNG replay buffers: rebuild by replaying the call sequence, then verify against a spy.
+- Registering while commits are blocked: timestamped sha256, and state the hash convention (raw vs CRLF-normalised vs git LF).
+- Gates stamping git_commit freeze HEAD until launch; stash docs around require_clean_code.
+- PowerShell double quotes eat backticks (`r -> CR) and heredocs mangle backslashes: edit via scratch Python.
+- Register conditional programme decisions before the data that resolves them.

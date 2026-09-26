@@ -227,6 +227,8 @@ implementation for the next plan boundary.
   research (running, pending PI decision, paused, parallel, closed) and the
   pending PI decisions; update it in the same commit as any state change. It is
   an index only; PREDICTIONS/PROGRESS/reports win on any disagreement.
+- `ONLINE_FORMATION_SYNTHESIS.md` — synthesis of the anchor-supply and online-formation
+  line (N1-O2G, 2026-09-22 to 26): what is established, indicated and open.
 - `PROGRESS.md` — running lab record; append an entry for every completed,
   verified step and commit it with the work.
 - `PREDICTIONS.md` — append-only hypothesis, verdict, withdrawal, and correction

@@ -6,7 +6,9 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-26, after O2C. Nothing is running.
+Last rewritten: 2026-09-26, after O2G. Nothing is running. **Read
+`ONLINE_FORMATION_SYNTHESIS.md` first** for the whole anchor-supply and online
+line (N1-O2G): results, claim status, implications and caveats.
 - **O2 returned `ORDER_FREE_UNRELIABLE`** (`SHUFFLED` 9/21, `STAGED` 12/21,
   `MIXED_L1` 4/21), so L1-L8 are CLOSED.
 - **O2F (anchor timing) is INCONCLUSIVE.**
