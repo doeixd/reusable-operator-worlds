@@ -1,0 +1,2 @@
+T=18 null(REPLAY) sd0.2:0.0000 sd0.4:0.0000 | effect(ORACLE) sd0.2:0.9927 sd0.4:0.7509
+T=19 null(REPLAY) sd0.2:0.0000 sd0.4:0.0000 | effect(ORACLE) sd0.2:0.7942 sd0.4:0.4285
