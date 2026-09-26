@@ -6,16 +6,31 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-26, after O2 closed. **O2 returned
-`ORDER_FREE_UNRELIABLE`:** `SHUFFLED` 9/21, `STAGED` 12/21, `MIXED_L1` 4/21,
-`PLAIN` 0/7, on worlds 13-19 with three streams each. Neither order-free supply
-nor the staged curriculum forms the rotated substrate reliably online at this
-budget. `STAGED` reproduces its historical ~0.58 cell rate. As registered before
-O2 ran:
-- L1-L8 are CLOSED (decision 10).
-- The O2F anchor-timing census is next.
+Last rewritten: 2026-09-26, after O2C. Nothing is running.
+- **O2 returned `ORDER_FREE_UNRELIABLE`** (`SHUFFLED` 9/21, `STAGED` 12/21,
+  `MIXED_L1` 4/21), so L1-L8 are CLOSED.
+- **O2F (anchor timing) is INCONCLUSIVE.**
+- **O2C (Tier 1) found the order-free deficit is mostly CONVERGENCE.** 8,192
+  further updates on seen data bring `SHUFFLED` to 20/21. A deployable
+  replay-only "sleep" phase brings it to 15/21 and breaks nothing.
 
-Decision 9 is BANK. Nothing is running.
+The next step is O2D (exploratory, same artifacts), a sleep-memory and budget
+dose. A confirmatory rung needs a fresh world band (PI decision 12).
+
+
+# O2C (Tier 1, 2026-09-26): consolidation rescues order-free online formation
+
+- Plan `cee05a3`, code `1fd930d`, scorer valid, gates exact. Report
+  `reports/o2c_consolidation.json`; archive `reports/o2c_consolidation_20260926/`.
+- Starting from O2's 21 `SHUFFLED` terminals, 8,192 more updates:
+  - on ALL stream data (ceiling): **20/21** pass, 8 of 8 near-misses rescued,
+    0 broken;
+  - on the 4-per-task REPLAY BUFFER only (deployable): **15/21**, 5 of 8
+    rescued, 0 broken.
+- The one collapsed cell (w14 s0) is not rescued by either arm. Collapse is a
+  separate failure mode.
+- **Next:** O2D, the retention and budget dose for the sleep phase, on the same
+  artifacts. Exploratory.
 
 
 # O2 CLOSED: ORDER_FREE_UNRELIABLE (2026-09-26)
@@ -738,6 +753,13 @@ sealed band, and all are implementation audits rather than experiments.
     (12/21) `UNRELIABLE`, so L1-L8 are CLOSED.
 11. **ANSWERED 2026-09-25 (PI): freeze O2 with `MIXED_L1`.** Frozen `b3c1c85`,
     protected `e777851`, runner/scorer `053da52`.
+12. **LIVE (2026-09-26): a fresh world band for a confirmatory online rung.**
+    Development band 2 (worlds 10-19) is spent: O1 used 10-12, O2 13-19. O2C
+    indicates that online anchor supply plus a replay-only sleep phase may form
+    the substrate reliably. Confirming that needs worlds no rung has touched.
+    Claude's recommendation: allocate development band 3 (seeds 20-29) after
+    O2D sizes the sleep phase, and never a sealed band before a Tier 2
+    development pass.
 
 # Housekeeping owed
 

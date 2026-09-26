@@ -9622,3 +9622,65 @@ Reading, bounded by the registered power: a STRONG timing effect (+1 log-odds
 per early anchor, detected 86% of the time) is unlikely. A moderate one is not
 excluded. Early anchor dose is not the lever that would make order-free
 formation reliable.
+
+
+# O2C OUTCOME (2026-09-26): consolidation RESCUES the order-free online learner (Tier 1, exploratory, no verdict)
+
+Plan `O2C_CONSOLIDATION_OPPORTUNITY_PLAN.md`, frozen `cee05a3`. Runner and
+scorer `1fd930d`. 42 cells, exit 0. The independent scorer returns
+`valid: true`. `check_prereg` and `check_invalid` pass. Report
+`reports/o2c_consolidation.json`; archive `reports/o2c_consolidation_20260926/`.
+Gates:
+- G0: reloading all 21 O2 `SHUFFLED` terminals reproduced their per-task
+  terminals exactly.
+- G1: the reconstructed replay buffer equalled a spy on a real lifetime
+  item-for-item (752 items, streams 0 and 1).
+- G2: every consolidated library changed.
+
+Each consolidation arm starts from O2's `SHUFFLED` terminal and applies 8,192
+further updates (a third of the stream's budget):
+- `ORACLE_DATA` draws them from ALL stream training data. It is the ceiling,
+  and an online learner does not retain this data.
+- `REPLAY_ONLY` draws them from the end-of-stream replay buffer only, 4
+  examples per task, which IS retained.
+
+| arm | near-misses rescued (of 8) | passing broken (of 9) | pass of 21 | label |
+|---|---|---|---|---|
+| `ORACLE_DATA` | **8** | 0 | **20** | `RESCUES` |
+| `REPLAY_ONLY` | **5** | 0 | **15** | `RESCUES` |
+
+| cell | O2 terminal | + ORACLE_DATA | + REPLAY_ONLY |
+|---|---:|---:|---:|
+| w13 s0 | 0.049 | 0.023 | 0.034 |
+| w13 s1 | 0.026 | 0.029 | 0.015 |
+| w13 s2 | 0.172 | 0.021 | 0.043 |
+| w14 s0 | 2.003 | 1.456 | 2.156 |
+| w14 s1 | 0.027 | 0.029 | 0.029 |
+| w14 s2 | 0.306 | 0.029 | 0.043 |
+| w15 s0 | 0.026 | 0.021 | 0.018 |
+| w15 s1 | 0.076 | 0.026 | 0.039 |
+| w15 s2 | 0.118 | 0.030 | 0.128 |
+| w16 s0 | 0.061 | 0.026 | 0.036 |
+| w16 s1 | 0.040 | 0.026 | 0.023 |
+| w16 s2 | 0.045 | 0.022 | 0.024 |
+| w17 s0 | 0.227 | 0.050 | 0.064 |
+| w17 s1 | 0.022 | 0.017 | 0.018 |
+| w17 s2 | 0.042 | 0.029 | 0.024 |
+| w18 s0 | 0.151 | 0.017 | 0.169 |
+| w18 s1 | 0.069 | 0.020 | 0.032 |
+| w18 s2 | 0.149 | 0.021 | 0.016 |
+| w19 s0 | 0.185 | 0.033 | 0.259 |
+| w19 s1 | 0.449 | 0.047 | 0.405 |
+| w19 s2 | 0.036 | 0.015 | 0.017 |
+
+**Reading, exploratory.** The order-free online deficit is mostly CONVERGENCE,
+not structure. With enough further training on data the learner has seen,
+20 of 21 cells pass, and the only survivor is the one collapsed cell (w14 s0).
+A deployable "sleep" phase, using only the 4-per-task replay buffer, recovers
+most of that (9 -> 15 of 21) and breaks nothing. The ORACLE-REPLAY gap
+(20 vs 15) points at RETENTION: the next lever is how much the learner keeps
+for consolidation, not how the stream is ordered. The collapse is not rescued
+by either arm and is a separate failure mode. Development worlds 13-19 are
+re-used from O2, so this is not an independent sample. A confirmatory test of
+online anchor supply + sleep consolidation needs a fresh world band, which is
+a PI decision.

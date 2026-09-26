@@ -2065,3 +2065,48 @@ protocol tested here. What the offline and online results together establish is
 narrower. The library forms from single-operation anchors in any order. That is
 reliable offline and only about 50% reliable online at this budget, so the
 online deficit is one of reliability, not of possibility.
+
+# Development exploration: the online deficit is convergence, and a replay-only sleep phase recovers much of it (O2C, 2026-09-26)
+
+O2's order-free failures were mostly near-misses, with canonical tasks still
+improving when the stream ended. O2C took the 21 saved terminal models and
+added 8,192 further updates (a third of the stream's budget), under two regimes:
+- updates on all of the data the learner had seen, an opportunity ceiling that
+  no online learner has;
+- updates on only its end-of-stream replay buffer of four examples per task,
+  which an online learner does keep.
+
+A gate reproduced every saved terminal exactly. The buffer was rebuilt from the
+learner's own call sequence and matched a spy on a real lifetime item for item.
+
+| cell | O2 terminal | + ORACLE_DATA | + REPLAY_ONLY |
+|---|---:|---:|---:|
+| w13 s0 | 0.049 | 0.023 | 0.034 |
+| w13 s1 | 0.026 | 0.029 | 0.015 |
+| w13 s2 | 0.172 | 0.021 | 0.043 |
+| w14 s0 | 2.003 | 1.456 | 2.156 |
+| w14 s1 | 0.027 | 0.029 | 0.029 |
+| w14 s2 | 0.306 | 0.029 | 0.043 |
+| w15 s0 | 0.026 | 0.021 | 0.018 |
+| w15 s1 | 0.076 | 0.026 | 0.039 |
+| w15 s2 | 0.118 | 0.030 | 0.128 |
+| w16 s0 | 0.061 | 0.026 | 0.036 |
+| w16 s1 | 0.040 | 0.026 | 0.023 |
+| w16 s2 | 0.045 | 0.022 | 0.024 |
+| w17 s0 | 0.227 | 0.050 | 0.064 |
+| w17 s1 | 0.022 | 0.017 | 0.018 |
+| w17 s2 | 0.042 | 0.029 | 0.024 |
+| w18 s0 | 0.151 | 0.017 | 0.169 |
+| w18 s1 | 0.069 | 0.020 | 0.032 |
+| w18 s2 | 0.149 | 0.021 | 0.016 |
+| w19 s0 | 0.185 | 0.033 | 0.259 |
+| w19 s1 | 0.449 | 0.047 | 0.405 |
+| w19 s2 | 0.036 | 0.015 | 0.017 |
+
+With full data, 20 of 21 cells pass, and none of the nine that already passed
+breaks. The one survivor had collapsed during the stream. With only the replay
+buffer, 15 of 21 pass, again breaking none. So in this construction the online
+deficit is mostly one of convergence: the library the stream forms is nearly
+right. Much of the remaining gap is what the learner retains, not how its tasks
+were ordered. These are exploratory results on development worlds already used
+by O2, and a confirmatory test needs fresh worlds.

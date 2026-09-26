@@ -1,0 +1,20 @@
+{
+ "G0": {
+  "passes": true,
+  "mismatched": []
+ },
+ "G1": {
+  "passes": true,
+  "by_stream": {
+   "s0": {
+    "items": 752,
+    "identical": true
+   },
+   "s1": {
+    "items": 752,
+    "identical": true
+   }
+  }
+ },
+ "protocol_sha256": "82bd7e58fccf85fbf09bf59a2a08fe842abde84201aec8de7a07e77273e37041"
+}

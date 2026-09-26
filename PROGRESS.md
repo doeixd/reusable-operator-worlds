@@ -7615,3 +7615,23 @@ models. `SHUFFLED`'s failures are mostly near-misses whose canonical tasks were
 still improving when the stream ended, so it asks whether a post-stream
 consolidation phase rescues them. It uses an oracle-data ceiling first,
 REPLAY_ONLY (the online-deployable version) second, and no new world.
+
+
+# 2026-09-26 O2C consolidation census: the online deficit is convergence; replay-only sleep rescues 5 of 8 near-misses
+
+Tier 1, exploratory, on O2's saved `SHUFFLED` terminal models. Runner and
+scorer committed (`1fd930d`) before launch. The plan (`cee05a3`) dropped a
+"reaches 19/21" rule at design time as undetectable (<1% detection), in favour
+of a near-miss rescue rule measured at false-fire <= 0.001 and detection
+0.94-1.00 for a four-fold effect. Gates G0-G2 passed exactly. 42 cells in
+~75 min (~5.3 min each).
+
+Pass counts of 21: `ORACLE_DATA` 20 (8 of 8 near-misses rescued, 0 broken),
+`REPLAY_ONLY` 15 (5 of 8 rescued, 0 broken), from O2's 9. Both arms are
+labelled `RESCUES`. Details and per-cell table in `PREDICTIONS.md` (O2C
+OUTCOME).
+
+NEXT (exploratory, same artifacts): O2D, a retention and budget dose for the
+sleep phase. How many retained examples per task, and how many sleep updates,
+close the gap from 15 to the ORACLE ceiling of 20? It needs no new world. A
+confirmatory rung needs a fresh world band: PI decision 12.
