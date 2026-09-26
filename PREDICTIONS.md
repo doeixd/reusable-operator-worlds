@@ -9777,3 +9777,25 @@ mechanism an online learner could exploit: monitor its own early stage-3 error,
 and on disruption roll back to the stage-2 library and retry. Here the trigger
 never missed a collapse, and a retry succeeds about half the time. This is a
 candidate for its own registered test on fresh worlds, not a result.
+
+
+# O3 expectation (2026-09-26, recorded while O3 stood at 0 of 70 cells; exploratory forecast, not a registered prediction)
+
+O3 was launched at `480b8ac`, and these forecasts were written before any cell
+finished. This text's sha256 was timestamped in the OptMem working log, because
+no commit is possible mid-run. It is committed after the run.
+
+- **O3a** The primary is `WAKE_SLEEP_RELIABLE` (`k_SLEEP >= 19` of 21): **0.55**.
+  O2D reached 20/21 on O2's worlds, but the setting was chosen there, so I
+  expect shrinkage. Collapses (~1 in 21 for this protocol) and one or two
+  near-misses that sleep does not fully close could each cost the bar.
+- **O3b** `k_SLEEP >= 17`: **0.85**.
+- **O3c** The contrast is `PHASE_MATTERS`: **0.30**. `EQUIVALENT` or
+  `INDETERMINATE`: **0.55**. `INTERLEAVED_BETTER`: **0.15**. My prior is that
+  consolidation during the stream also converges the library, so it is
+  unclear that the timing matters at a 3x effect size.
+- **O3d** `k_SHUFFLED` (no sleep) lies in 6-12 of 21, consistent with O2's
+  9/21: **0.8**.
+- **O3e** `PLAIN` fails in every world: **0.97**.
+
+(Committed after the v1 launch failed with 0 of 70 cells written, so still before any O3 data; the text above is byte-identical to the hashed version, sha256 6f42fcef...1b55.)
