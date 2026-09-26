@@ -9716,3 +9716,32 @@ applied to O2's 21 `SHUFFLED` terminals:
 Exploratory on re-used development worlds. It sizes, not confirms: a
 confirmatory rung (online order-free anchors + a sleep phase at M = 16-64)
 needs a fresh world band (PI decision 12).
+
+
+# O2E OUTCOME (2026-09-26): sleep repairs every protocol's near-misses and almost never a collapse (Tier 1, exploratory)
+
+Plan `O2E_SLEEP_OTHER_PROTOCOLS_PLAN.md` frozen `d0e771d`; code `6a01c42`. 42
+cells, exit 0, independent scorer `valid: true`, G0 exact, prereg/invalid pass.
+Report `reports/o2e_sleep_protocols.json`; archive
+`reports/o2e_sleep_protocols_20260926/`. Sleep is O2D's `RES64` (64 retained
+per task, 8,192 updates).
+
+| arm | near rescued | passing broken | collapses rescued | k of 21 (from O2) | label |
+|---|---|---|---|---|---|
+| `STAGED_SLEEP` | 6/6 | 0/12 | 0/3 | 12 -> **18** | `RESCUES` |
+| `MIXED_SLEEP` | 6/6 | 0/4 | 1/6 | 4 -> **13** | `RESCUES` |
+
+**Reading across O2C-O2E, exploratory.** Online formation on this substrate
+has two distinct failure modes:
+- NEAR-MISSES: a library that is nearly formed but under-converged. A sleep
+  phase on retained examples repairs these in every protocol, and it broke no
+  passing cell in any arm.
+- COLLAPSES (terminal >= 1.0). Sleep rescued 1 of 10 across the three
+  protocols (`SHUFFLED` 0/1, `STAGED` 0/3, `MIXED_L1` 1/6), though it lowered
+  several.
+
+After sleep, every protocol's remaining failures are its collapses. So the
+protocols differ essentially in collapse rate: `SHUFFLED` 1/21, `STAGED` 3/21,
+`MIXED_L1` 6/21. Order-free anchors plus sleep is the strongest candidate for a
+confirmatory online rung. What causes a collapse is now the open mechanistic
+question.

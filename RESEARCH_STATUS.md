@@ -18,6 +18,11 @@ Last rewritten: 2026-09-26, after O2C. Nothing is running.
 all-data ceiling (20/21); 4-16 per task reach 18/21; nothing breaks.** The one
 collapsed cell is never rescued. A confirmatory rung (O3) is being drafted and
 needs a fresh world band (PI decision 12).
+**O2E (Tier 1): sleep also repairs `STAGED` (12 -> 18/21) and `MIXED_L1`
+(4 -> 13/21) near-misses, breaking nothing.** It rescued 1 of 10 collapses in
+total. After sleep, every protocol fails only by COLLAPSE (`SHUFFLED` 1/21,
+`STAGED` 3/21, `MIXED_L1` 6/21). The O3 draft is written. Next is a Tier 0
+collapse census on O2's saved artifacts.
 
 
 # O2C (Tier 1, 2026-09-26): consolidation rescues order-free online formation

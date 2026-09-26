@@ -7651,3 +7651,25 @@ NEXT:
 - While that decision is pending, exploratory sleep on O2's `STAGED` and
   `MIXED_L1` terminals (same artifacts), to see whether sleep helps the other
   protocols and whether it can touch their collapses.
+
+
+# 2026-09-26 O2E: sleep repairs near-misses in every protocol; collapses are the residual failure
+
+42 cells, ~80 min, scorer valid, G0 exact.
+- `STAGED` + sleep: 12 -> 18 of 21. All 6 near-misses rescued, none broken,
+  and 0 of 3 collapses rescued.
+- `MIXED_L1` + sleep: 4 -> 13. All 6 near-misses rescued, and 1 of 6
+  collapses.
+
+Across O2C-O2E, 1 of 10 collapses rescued. Details in `PREDICTIONS.md` (O2E
+OUTCOME).
+
+The O3 draft (`O3_ONLINE_SLEEP_CONFIRMATION_PLAN.md`) is written, DRAFT: a
+confirmatory online order-free + sleep rung on a fresh band. It needs PI
+decision 12, and a matched-compute arm before freezing.
+
+NEXT (Tier 0, no training): a collapse census on O2's saved artifacts. When in
+the stream does a collapse happen, and what does the collapsed library look
+like (slot usage, route diversity)? The candidate registered as its
+opportunity check: collapse is visible early in the lifetime, so it could be
+detected and restarted online.

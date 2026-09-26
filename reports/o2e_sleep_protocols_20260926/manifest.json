@@ -1,0 +1,25 @@
+{
+ "protocol": {
+  "id": "o2e-sleep-protocols-v1",
+  "git_commit": "6a01c42",
+  "plan": "O2E_SLEEP_OTHER_PROTOCOLS_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "arms": {
+   "STAGED_SLEEP": "STAGED",
+   "MIXED_SLEEP": "MIXED_L1"
+  },
+  "memory": 64,
+  "updates": 8192,
+  "input_sha256": {
+   "O2E_SLEEP_OTHER_PROTOCOLS_PLAN.md": "437f71e67d3b805383456473093fe4b9f111d833c582752cbc52d73f5a7e5415",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/o2_online_reliability.json": "ebc5506d3ab1e1a3bcf0053f6d5443fe94cd3eae99031c1fedac8dc93fd47e53"
+  },
+  "implementation_sha256": "a18e4d6ee9cf9d9bcc85526f6b3c594941989b6bdf170cae57accd47c79c424d",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f"
+ },
+ "protocol_sha256": "65a786491d8615f69ac6716cb34fcd22ac48a378154cc9160079c0635a63043c"
+}
