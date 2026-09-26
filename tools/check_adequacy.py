@@ -39,6 +39,7 @@ IN_SCOPE = (
     'N1C_ANCHOR_COVERAGE_PLAN.md',
     'O1_ONLINE_ANCHOR_TIER1_PLAN.md',
     'O2_ONLINE_ANCHOR_RELIABILITY_PLAN.md',
+    'O3_ONLINE_SLEEP_CONFIRMATION_PLAN.md',
 )
 
 #: Explicit sentinel for a plan with no behaviour to elicit (an observational
