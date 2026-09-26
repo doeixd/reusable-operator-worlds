@@ -5284,3 +5284,5 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
 - Gates stamping git_commit freeze HEAD until launch; stash docs around require_clean_code.
 - PowerShell double quotes eat backticks (`r -> CR) and heredocs mangle backslashes: edit via scratch Python.
 - Register conditional programme decisions before the data that resolves them.
+
+2026-09-26 O3: run check_adequacy on the working copy BEFORE committing a freeze (first O3 freeze had to be re-frozen pre-data).

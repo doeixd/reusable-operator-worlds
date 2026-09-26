@@ -1,0 +1,63 @@
+{
+ "protocol": {
+  "id": "o3-online-sleep-v1",
+  "git_commit": "480b8ac",
+  "plan": "O3_ONLINE_SLEEP_CONFIRMATION_PLAN.md",
+  "tier": 2,
+  "worlds": [
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26
+  ],
+  "arm_streams": {
+   "INTERLEAVED": [
+    0,
+    1,
+    2
+   ],
+   "SHUFFLED": [
+    0,
+    1,
+    2
+   ],
+   "SLEEP": [
+    0,
+    1,
+    2
+   ],
+   "PLAIN": [
+    0
+   ]
+  },
+  "extra_updates": 8192,
+  "memory_per_task": 64,
+  "threshold": 0.05,
+  "jobs": 3,
+  "root": "artifacts/o3_online_sleep",
+  "seeds": {
+   "order": "[1920, w] / [1920, w, s]",
+   "replay": "None / [7500, w, s]",
+   "reservoir": "[1940, w, s, i]",
+   "sleep_sampling": "[1941, w, s, 64]",
+   "interleaved_sampling": "[1950, w, s]"
+  },
+  "input_sha256": {
+   "O3_ONLINE_SLEEP_CONFIRMATION_PLAN.md": "f6ade50d8145af1f9bbf06f1d64dbdc2344ef93ab65320a4fdc147e6c2602e0f",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/o2_online_reliability.json": "ebc5506d3ab1e1a3bcf0053f6d5443fe94cd3eae99031c1fedac8dc93fd47e53",
+   "reports/o2d_sleep_memory.json": "2396f35343b09c9381d61fe6be1c2d9563bb2aa90f5a60988cd57fc0d2abd7c2"
+  },
+  "implementation_sha256": "1a0fa90635af9f530143b1fd1f132ca720b00c0e159f7adb1c2e25812d2f97c7",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f",
+  "learner_sha256": "8fef85343e25dad51b31112beac849e993a3d581b48ff5a4b8e2b86fcd0cedc7",
+  "scale": 1
+ },
+ "protocol_sha256": "ee451639a939f42aa21982b17dda44300c49726b7b9667b4e84a1f9797f57244"
+}

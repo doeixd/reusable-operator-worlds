@@ -51,7 +51,7 @@ def contrast(rw):
     return 'INDETERMINATE'
 
 
-def score(root=Path('artifacts/o3_online_sleep'), output=Path('reports/o3_online_sleep.json')):
+def score(root=Path('artifacts/o3_online_sleep_v2'), output=Path('reports/o3_online_sleep_v2.json')):
     manifest = json.loads((root / 'manifest.json').read_text())
     report = json.loads(output.read_text())
     protocol, sha = manifest['protocol'], manifest['protocol_sha256']
@@ -91,9 +91,10 @@ def score(root=Path('artifacts/o3_online_sleep'), output=Path('reports/o3_online
                     problems.append(f'{key}: extra updates {rec["extra_updates"]}')
                 if arm == 'SLEEP' and (rec['pool_size'] != 188 * 64 or rec['library_sha256'] == rec['library_sha256_before']):
                     problems.append(f'{key}: sleep pool or non-vacuity')
-                if arm in ('SHUFFLED', 'INTERLEAVED') and (rec['anchor_abs_error'] > 1e-6
-                                                           or not rec['route_lengths_match_plan']):
-                    problems.append(f'{key}: anchor or routes')
+                if arm in ('SHUFFLED', 'INTERLEAVED') and not rec['route_lengths_match_plan']:
+                    problems.append(f'{key}: routes')
+                if arm == 'SHUFFLED' and rec['anchor_abs_error'] > 1e-6:
+                    problems.append(f'{key}: last-task anchor')
                 cells[key] = rec
     for arm in ('SHUFFLED', 'INTERLEAVED', 'SLEEP'):
         for w in worlds:

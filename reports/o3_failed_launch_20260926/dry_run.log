@@ -1,0 +1,8 @@
+2026-09-26T12:26:00.509301+00:00 LAUNCH d358bd151556193790b31aa7d2abb008477e1bb1e5fabfae8bbbe8ca09d92b73 todo=4 reused=0 jobs=3 scale=16 free=9.9GiB
+2026-09-26T12:26:34.105871+00:00 cell finished PLAIN_w20_s0 27.8s terminal=1.87677
+2026-09-26T12:26:34.161575+00:00 STOP after 1 cells (restart test)
+2026-09-26T12:26:54.519525+00:00 reused validated cell PLAIN_w20_s0
+2026-09-26T12:26:54.528063+00:00 LAUNCH d358bd151556193790b31aa7d2abb008477e1bb1e5fabfae8bbbe8ca09d92b73 todo=3 reused=1 jobs=3 scale=16 free=9.7GiB
+2026-09-26T12:28:12.586786+00:00 cell finished SHUFFLED_w20_s1 73.6s terminal=1.91451
+2026-09-26T12:28:13.694496+00:00 cell finished SHUFFLED_w20_s0 75.2s terminal=1.9204
+2026-09-26T12:33:26.168616+00:00 cell finished SLEEP_w20_s0 312.5s terminal=1.44201

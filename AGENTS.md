@@ -2235,3 +2235,29 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   UNRELIABLE. A delegated programme decision that depends on a pending result
   should be written as a rule, with every branch stated, before the result
   exists.
+
+- RUN THE ADEQUACY CHECKER BEFORE COMMITTING A FREEZE, NOT AFTER (O3,
+  2026-09-26). O3's first freeze (`0707e95`) was committed, and only then was
+  `check_adequacy` run. It found two omissions: no measured refusal cost with
+  its scale, and no restatement of the decision rule in `# Discriminating
+  power`. The plan was corrected and re-frozen (`5120482`) before any cell ran,
+  and the record says so. Nothing was lost, only because the error surfaced
+  before data. Order at freeze: write, double-check, run `check_adequacy` and
+  `check_prereg` on the working copy, THEN commit the freeze and protect its
+  hash.
+
+- A DRY RUN MUST EXERCISE EVERY ARM THROUGH THE SAME VALIDATION AS THE REAL RUN
+  (O3 v1, 2026-09-26). O3's dry run skipped the new `INTERLEAVED` arm, and
+  `validate` only ran at full scale. So the first `INTERLEAVED` record, after
+  5.7 h, met a check that could never pass for that construction: a last-task
+  anchor on an arm that trains after its last task. Two rules follow. Every
+  invariant copied from an older arm must be re-derived for the new
+  construction (same family as "reuse is construction, not name"). And the
+  dry run includes one cell of EVERY arm, validated exactly as in the real run.
+- THE 8 GiB PRECONDITION IS CHECKED ONCE, BUT THE HOST IS SHARED FOR HOURS (O3
+  v1). Memory was fine at launch (8.5 GiB). Four hours later the PI's
+  development tools held ~7.8 GB, Windows logged low virtual memory, and the
+  run crawled ~14x slower. A restartable run survives this, but its timing does
+  not. Before a multi-hour launch on a shared host, look at what else is
+  running, and read `Resource-Exhaustion-Detector` events when a run is
+  unexpectedly slow.

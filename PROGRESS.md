@@ -7694,3 +7694,40 @@ has two failure modes:
 
 The confirmatory O3 draft needs PI decision 12. Further mining of worlds 13-19
 would over-fit a spent development band.
+
+
+# 2026-09-26 O3 first launch FAILED before any cell was written: invalid anchor check on INTERLEAVED; host memory thrash
+
+O3 launched at `480b8ac` (12:59Z) after gates E1-E4b and the E5 restart test
+passed. It exited 1 at 18:43Z with 0 of 70 cells written. The parent's
+`validate` refused the first finished record, `INTERLEAVED_w20_s2`, because
+its last-task anchor error was 0.0031. The check itself was wrong: the anchor
+(terminal equals end-of-task on the last stream task) holds only when nothing
+trains after the last task. `INTERLEAVED` consolidates after every task,
+including the last, so a nonzero anchor error is the construction working as
+registered. The check was the runner's own addition; the plan does not require
+it for `INTERLEAVED`.
+
+The dry run missed it for two reasons: it contained no `INTERLEAVED` cell,
+and `validate` only ran at full scale.
+
+The cell also took ~5.7 h instead of ~25 min. A full-scale timing diagnostic
+on 12 tasks measured the hook at ~1.5 s per task and the lifetime at ~5.5 s per
+task either way, so the code is not slow. Windows logged a low-virtual-memory
+condition at 13:52 local: three `node.exe` processes held ~7.8 GB (the
+`foldkit-agent` TypeScript server, a pnpm/tsx process and another), and the
+host was paging.
+
+**Fixes (`o3_online_sleep` v2 paths):**
+- the anchor check is enforced only for `SHUFFLED`, and recorded for
+  `INTERLEAVED`;
+- `validate` runs at every scale;
+- the dry run includes `INTERLEAVED`;
+- regression tests encode the v1 failure;
+- the run moves to `artifacts/o3_online_sleep_v2` and
+  `reports/o3_online_sleep_v2.json`, so the failed v1 directory is never
+  reused. Its logs are archived at `reports/o3_failed_launch_20260926/`.
+
+No plan change: the frozen plan (`5120482`) never registered an
+`INTERLEAVED` anchor. Gates and the restart test are re-run for the new
+implementation hash.

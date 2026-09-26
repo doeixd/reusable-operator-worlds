@@ -1,0 +1,19 @@
+{
+ "E1": {
+  "passes": true
+ },
+ "E2": {
+  "passes": true
+ },
+ "E3": {
+  "passes": true,
+  "zero_matches_base": true,
+  "full_updates": 8192
+ },
+ "E4b": {
+  "passes": true,
+  "failing": []
+ },
+ "all_pass": true,
+ "protocol_sha256": "36f501dc0a4f45c2330e72f5ebeafb3f6d141393ca3d1999eb774337bf52084f"
+}

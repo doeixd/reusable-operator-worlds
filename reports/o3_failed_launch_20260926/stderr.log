@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\o3_online_sleep.py", line 430, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\o3_online_sleep.py", line 425, in main
+    run(cells())
+    ~~~^^^^^^^^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\o3_online_sleep.py", line 375, in run
+    validate(record)
+    ~~~~~~~~^^^^^^^^
+  File "C:\Users\Patrick\Downloads\llm\src\row\experiments\o3_online_sleep.py", line 212, in validate
+    raise ValueError(f'{key}: last-task anchor {rec["anchor_abs_error"]}')
+ValueError: INTERLEAVED_w20_s2: last-task anchor 0.003132016919603301

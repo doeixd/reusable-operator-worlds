@@ -45,9 +45,11 @@ from row.experiments.so1_storage import atomic_json, digest, fingerprint, log_li
 PLAN = Path('O3_ONLINE_SLEEP_CONFIRMATION_PLAN.md')
 O2_REPORT = Path('reports/o2_online_reliability.json')
 O2D_REPORT = Path('reports/o2d_sleep_memory.json')
-ROOT = Path('artifacts/o3_online_sleep')
-DRY_ROOT = Path('artifacts/o3_online_sleep_dry')
-OUTPUT = Path('reports/o3_online_sleep.json')
+# v2 paths: the first launch (v1, 2026-09-26) failed on an invalid anchor check before writing any cell;
+# its directory is kept, archived to reports/o3_failed_launch_20260926/, and never reused.
+ROOT = Path('artifacts/o3_online_sleep_v2')
+DRY_ROOT = Path('artifacts/o3_online_sleep_v2_dry')
+OUTPUT = Path('reports/o3_online_sleep_v2.json')
 WORLDS = (20, 21, 22, 23, 24, 25, 26)
 STREAMS = (0, 1, 2)
 ARM_STREAMS = {'INTERLEAVED': STREAMS, 'SHUFFLED': STREAMS, 'SLEEP': STREAMS, 'PLAIN': (0,)}
@@ -208,8 +210,11 @@ def validate(rec):
     if rec['arm'] in ('SHUFFLED', 'INTERLEAVED'):
         if rec['stream_tasks'] != 188 or rec['trained_tasks'] != 188 or not rec['route_lengths_match_plan']:
             raise ValueError(f'{key}: stream/route check')
-        if rec['anchor_abs_error'] > ANCHOR_TOLERANCE:
-            raise ValueError(f'{key}: last-task anchor {rec["anchor_abs_error"]}')
+    # The last-task anchor (terminal == end-of-task on the last stream task) holds only when nothing trains
+    # after the last task. INTERLEAVED consolidates after every task, including the last, so its anchor
+    # error is recorded but not required to vanish (the v1 launch failed on exactly this).
+    if rec['arm'] == 'SHUFFLED' and rec['anchor_abs_error'] > ANCHOR_TOLERANCE:
+        raise ValueError(f'{key}: last-task anchor {rec["anchor_abs_error"]}')
     if rec['arm'] in ('SLEEP', 'INTERLEAVED') and rec['extra_updates'] != EXTRA_UPDATES:
         raise ValueError(f'{key}: extra updates {rec["extra_updates"]} != {EXTRA_UPDATES}')
     if rec['arm'] == 'SLEEP' and rec['library_sha256'] == rec['library_sha256_before']:
@@ -371,8 +376,7 @@ def run(todo_cells, root=ROOT, output=OUTPUT, jobs=JOBS, scale=1, stop_after=Non
                     a, w, s = futures.pop(done_future)
                     key = f'{a}_w{w}_s{s}'
                     record = done_future.result()
-                    if scale == 1:
-                        validate(record)
+                    validate(record)   # at every scale, so the dry run exercises it (v1 lesson)
                     atomic_json(root / 'cells' / f'{key}.json',
                                 {'stamp': {'protocol_sha256': sha}, 'complete': True, 'record': record,
                                  'record_sha256': fingerprint(record), 'finished_utc': now()})
@@ -412,7 +416,7 @@ def main():
         print(json.dumps(gates(), indent=1))
         return
     if args.dry_run:
-        dry = [('SHUFFLED', 20, 0), ('SHUFFLED', 20, 1), ('PLAIN', 20, 0), ('SLEEP', 20, 0)]
+        dry = [('INTERLEAVED', 20, 0), ('SHUFFLED', 20, 0), ('SHUFFLED', 20, 1), ('PLAIN', 20, 0), ('SLEEP', 20, 0)]
         run(dry, root=DRY_ROOT, output=DRY_ROOT / 'report.json', scale=DRY_SCALE, stop_after=args.stop_after,
             require_gates=False, worlds=(20,))
         print('O3 dry run complete')

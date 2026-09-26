@@ -1,0 +1,4 @@
+{
+ "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\Patrick\\Downloads\\llm\\src\\row\\experiments\\o3_online_sleep.py\", line 375, in run\n    validate(record)\n    ~~~~~~~~^^^^^^^^\n  File \"C:\\Users\\Patrick\\Downloads\\llm\\src\\row\\experiments\\o3_online_sleep.py\", line 212, in validate\n    raise ValueError(f'{key}: last-task anchor {rec[\"anchor_abs_error\"]}')\nValueError: INTERLEAVED_w20_s2: last-task anchor 0.003132016919603301\n",
+ "finished_utc": "2026-09-26T18:43:45.192871+00:00"
+}

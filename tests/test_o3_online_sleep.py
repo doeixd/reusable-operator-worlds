@@ -49,5 +49,27 @@ class O3Tests(unittest.TestCase):
         self.assertEqual((s['primary'], s['contrast']), ('WAKE_SLEEP_RELIABLE', 'INDETERMINATE'))
 
 
+class ValidateTests(unittest.TestCase):
+    def _rec(self, arm, **kw):
+        r = {'arm': arm, 'world': 20, 'stream': 0, 'scored_tasks': 64,
+             'terminal_per_task': {str(i): 0.01 for i in range(64)}, 'stream_tasks': 188, 'trained_tasks': 188,
+             'route_lengths_match_plan': True, 'anchor_abs_error': 0.0, 'extra_updates': 8192,
+             'library_sha256': 'a', 'library_sha256_before': 'b'}
+        r.update(kw)
+        return r
+
+    def test_v1_failure_is_now_valid_for_interleaved(self):
+        # the exact v1 failure: INTERLEAVED consolidates after its last task, so its anchor is nonzero
+        o3.validate(self._rec('INTERLEAVED', anchor_abs_error=0.003132016919603301))
+
+    def test_shuffled_anchor_still_enforced(self):
+        with self.assertRaises(ValueError):
+            o3.validate(self._rec('SHUFFLED', anchor_abs_error=0.003))
+
+    def test_extra_updates_enforced(self):
+        with self.assertRaises(ValueError):
+            o3.validate(self._rec('INTERLEAVED', extra_updates=8191))
+
+
 if __name__ == '__main__':
     unittest.main()
