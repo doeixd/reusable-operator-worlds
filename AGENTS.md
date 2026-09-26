@@ -524,6 +524,10 @@ report JSON. `figures/` — generated figures.
   staged protocol. Development evidence only; a confirmatory version needs a
   sealed band frozen and hashed first. Verified unused before allocation: no
   runner defaults to them (SO3 used 3-5, SO4 6-9, everything else 0-9).
+- **Development band 3:** seeds 20-29, allocated 2026-09-26 by the PI (decision
+  12) after band 2 was spent (O1 10-12, O2 13-19). O3 uses 20-26; 27-29 are
+  held back for follow-ups. Development evidence only. Verified unused
+  beforehand: no runner, report or artifact directory references them.
 - **V1 confirmatory:** seeds 100–129 (frozen, scored against
   `CONFIRMATION_PLAN.md`).
 - **V2 confirmatory:** seeds 200–229 (frozen, scored against
