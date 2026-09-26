@@ -1,0 +1,25 @@
+{
+ "protocol": {
+  "id": "o2g-stage3-collapse-v1",
+  "git_commit": "94caf08",
+  "plan": "O2G_STAGE3_COLLAPSE_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "seed_root": 7600,
+  "reruns": [
+   1,
+   2
+  ],
+  "collapse": 1.0,
+  "input_sha256": {
+   "O2G_STAGE3_COLLAPSE_PLAN.md": "03000557c9ba766237877b036cb2a3b5a2008401e8fdefc52d4f75a78ab9f834",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/o2_online_reliability.json": "ebc5506d3ab1e1a3bcf0053f6d5443fe94cd3eae99031c1fedac8dc93fd47e53"
+  },
+  "implementation_sha256": "b25f3757004aaabd76b6a05d2a4dbb89882ee9aa3f5e75e91a01d6697bc589ad",
+  "o2_runner_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "so2_sha256": "cfb470894205bdc003d0509c0b3620778dc63542b525e4398bbc74ccc1db6b9a",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f"
+ },
+ "protocol_sha256": "5cb24e710d50f562d6ae61c6d5259342e46893d8ffd1957740302cb8a0d99167"
+}

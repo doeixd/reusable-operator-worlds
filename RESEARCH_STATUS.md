@@ -23,6 +23,13 @@ needs a fresh world band (PI decision 12).
 total. After sleep, every protocol fails only by COLLAPSE (`SHUFFLED` 1/21,
 `STAGED` 3/21, `MIXED_L1` 6/21). The O3 draft is written. Next is a Tier 0
 collapse census on O2's saved artifacts.
+**O2G (Tier 1): MIXED.** From the same stage-2 library, a stage-3 collapse
+recurs in 3 of 6 re-runs. The early onset disruption recurs in 6 of 6, but in
+only 3 of 36 re-runs from healthy libraries. Collapse is therefore a
+library-linked risk with a ~50% stochastic outcome and an early warning, and an
+onset monitor with rollback is a candidate mechanism.
+**Every rung needing no new world is done. The research is now gated on PI
+decision 12.**
 
 
 # O2C (Tier 1, 2026-09-26): consolidation rescues order-free online formation

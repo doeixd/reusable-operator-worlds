@@ -1,0 +1,11 @@
+{
+ "G0": {
+  "passes": true,
+  "by_cell": {
+   "w14_s1": true,
+   "w14_s2": true,
+   "w16_s1": true
+  }
+ },
+ "protocol_sha256": "5cb24e710d50f562d6ae61c6d5259342e46893d8ffd1957740302cb8a0d99167"
+}

@@ -9745,3 +9745,35 @@ protocols differ essentially in collapse rate: `SHUFFLED` 1/21, `STAGED` 3/21,
 `MIXED_L1` 6/21. Order-free anchors plus sleep is the strongest candidate for a
 confirmatory online rung. What causes a collapse is now the open mechanistic
 question.
+
+
+# O2G OUTCOME (2026-09-26): MIXED. The stage-3 onset disruption is library-determined; whether it collapses is stochastic (Tier 1, exploratory)
+
+Plan `O2G_STAGE3_COLLAPSE_PLAN.md` frozen `9a60528`; code `94caf08`. 42
+stage-3 re-runs, exit 0, independent scorer `valid: true`, prereg/invalid pass.
+G0 reproduced all three O2 `STAGED` collapses BITWISE (library sha and per-task
+terminal) from the saved stage-2 libraries. Report
+`reports/o2g_stage3_collapse.json`; archive
+`reports/o2g_stage3_collapse_20260926/`.
+
+Re-running stage 3 from the same stage-2 library with two fresh replay seeds:
+- The 3 libraries that collapsed in O2: **3 of 6** re-runs collapse again, 3
+  recover.
+  - w14 s1: 2.20, 0.11
+  - w14 s2: 0.67, 0.25
+  - w16 s1: 1.72, 2.02
+- The 18 that did not collapse: **1 of 36** re-runs collapses (w13 s0).
+
+The registered rule (`SYSTEMATIC` needs >= 5/6, `STOCHASTIC` <= 2/6) gives
+`MIXED`.
+
+**What the early signature says** (descriptive, in-sample). The stage-3
+first-16 end-of-task median exceeds 1.0 in ALL 6 re-runs from the collapse
+libraries, and in only 3 of 36 from the others (both w13 s0 seeds and one
+w16 s2). All 4 collapses among the 42 re-runs carry it. So the ONSET
+DISRUPTION is a property of the library entering stage 3; about half of
+disrupted onsets then collapse, and the rest recover. That is the profile of a
+mechanism an online learner could exploit: monitor its own early stage-3 error,
+and on disruption roll back to the stage-2 library and retry. Here the trigger
+never missed a collapse, and a retry succeeds about half the time. This is a
+candidate for its own registered test on fresh worlds, not a result.

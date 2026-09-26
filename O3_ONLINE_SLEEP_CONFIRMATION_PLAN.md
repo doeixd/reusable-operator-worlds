@@ -79,6 +79,17 @@ The primary is `SHUFFLED_SLEEP`. The secondary is the paired difference against
 (~6 min), plus optionally 21 `STAGED` (~19 min) + 21 sleeps. Without `STAGED`:
 ~3 h with a pool of 3. With it: ~5.5 h.
 
+# Candidate addition from O2G (for the PI)
+
+O2G found that collapses are preceded by an early onset disruption
+(first-16 end-of-task > 1.0), and that about half of disrupted onsets recover
+on a retry. An `*_RETRY` variant could monitor that signal and roll back and
+retry the affected segment, up to a registered number of retries. For `STAGED`
+the segment is stage 3 from the stage-2 library. For the single-lifetime arms
+there is no clean segment, and a checkpoint policy would be needed. Recommended
+as its own Tier 1 on the fresh band BEFORE it is folded into O3, not bolted onto
+O3 unmeasured.
+
 # Pending (PI)
 
 - Decision 12: allocate band 3 (seeds 20-29), verified unused, and record it in

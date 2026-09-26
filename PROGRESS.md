@@ -7673,3 +7673,24 @@ the stream does a collapse happen, and what does the collapsed library look
 like (slot usage, route diversity)? The candidate registered as its
 opportunity check: collapse is visible early in the lifetime, so it could be
 detected and restarted online.
+
+
+# 2026-09-26 O2G stage-3 collapse census: MIXED - onset disruption is library-determined, collapse is ~50% stochastic
+
+42 stage-3 re-runs from O2's saved stage-2 libraries, ~95 min, scorer valid,
+and G0 reproduced all three O2 collapses bitwise.
+- Collapse libraries: 3 of 6 re-runs collapse, and all 6 show an early onset
+  disruption (first-16 end-of-task > 1.0).
+- Other libraries: 1 of 36 collapses, and 3 of 36 show the disruption.
+
+Candidate mechanism: an onset monitor with rollback-and-retry. Details in
+`PREDICTIONS.md` (O2G OUTCOME).
+
+Situation: every rung that needed no new world is now done. Online formation
+has two failure modes:
+- under-convergence, which a sleep phase repairs (O2C-O2E);
+- collapse, which is library-linked, has an early warning, and is ~50%
+  avoidable by retry (O2G).
+
+The confirmatory O3 draft needs PI decision 12. Further mining of worlds 13-19
+would over-fit a spent development band.
