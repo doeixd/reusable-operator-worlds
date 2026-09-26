@@ -9595,3 +9595,30 @@ which is descriptive only:
 **Next, as registered:** the O2F anchor-timing census (plan registered
 2026-09-25 20:58Z at 0/70 cells, sha256 2a85c6f4...d347) runs because the
 primary label is not `ORDER_FREE_RELIABLE`.
+
+
+# O2F RESULT (2026-09-26): INCONCLUSIVE (6 of 9 informative groups favor early dose)
+
+Plan `O2F_ANCHOR_TIMING_CENSUS_PLAN.md`, registered 2026-09-25 20:58Z while O2
+stood at 0 of 70 cells; plan sha256 `2a85c6f4...d347`, which verifies. Scorer
+`score_o2f_anchor_timing` (committed `8f495c1` before it ran). Report
+`reports/o2f_anchor_timing.json`.
+- The predictor file's RAW-byte sha256 still equals the registered
+  `3a2f1a0f...1b18`. Its mtime is 20:58:44Z, before O2's first cell finished
+  (~22:04Z).
+- The scorer prints a CRLF-normalised hash (`8b4771ff...`) of the same content.
+  The file was written with CRLF, so the two conventions differ. The recorded
+  numbers are unaffected.
+- The predictors re-derive from the registered order seeds exactly.
+
+Result: 9 informative (arm, world) groups, 6 with the passing streams having
+more early length-1 anchors (fraction 0.67). That lies between `NO_TIMING_EFFECT`
+(<= 0.60) and `EARLY_DOSE_PREDICTS` (>= 0.85), so the label is `INCONCLUSIVE`.
+Five groups were uninformative because all three streams failed: four
+`MIXED_L1` worlds and `SHUFFLED` world 18. There, the world, not the stream,
+decided the outcome.
+
+Reading, bounded by the registered power: a STRONG timing effect (+1 log-odds
+per early anchor, detected 86% of the time) is unlikely. A moderate one is not
+excluded. Early anchor dose is not the lever that would make order-free
+formation reliable.

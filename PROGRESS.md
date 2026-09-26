@@ -7601,3 +7601,17 @@ Consequences, all registered before any O2 cell ran:
 - L1-L8 are CLOSED (decision 10).
 - The O2F anchor-timing census runs next.
 - The SG3 identifiability generator is not built (decision 9, BANK).
+
+
+# 2026-09-26 O2F anchor-timing census: INCONCLUSIVE
+
+The registered census ran on O2's committed results. 9 informative groups,
+6 of 9 favor early dose (0.67), so the label is `INCONCLUSIVE`. Five groups
+failed in every stream. Hash provenance is checked in `PREDICTIONS.md` (O2F
+RESULT). A strong timing effect is unlikely, so timing is not the lever.
+
+NEXT: O2C, a Tier 1 consolidation-opportunity census on O2's saved terminal
+models. `SHUFFLED`'s failures are mostly near-misses whose canonical tasks were
+still improving when the stream ended, so it asks whether a post-stream
+consolidation phase rescues them. It uses an oracle-data ceiling first,
+REPLAY_ONLY (the online-deployable version) second, and no new world.

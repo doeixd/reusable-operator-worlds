@@ -1,0 +1,376 @@
+{
+ "label": "INCONCLUSIVE",
+ "informative_groups": 9,
+ "agreeing": 6,
+ "fraction": 0.6666666666666666,
+ "groups": [
+  {
+   "arm": "SHUFFLED",
+   "world": 13,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 12,
+     "pass": true,
+     "terminal": 0.049429031799957376
+    },
+    {
+     "stream": 1,
+     "E": 17,
+     "pass": true,
+     "terminal": 0.026490846422424195
+    },
+    {
+     "stream": 2,
+     "E": 15,
+     "pass": false,
+     "terminal": 0.1723406746113822
+    }
+   ],
+   "informative": true,
+   "direction": "passing_lower"
+  },
+  {
+   "arm": "SHUFFLED",
+   "world": 14,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 6,
+     "pass": false,
+     "terminal": 2.002572261945397
+    },
+    {
+     "stream": 1,
+     "E": 13,
+     "pass": true,
+     "terminal": 0.026619193709134417
+    },
+    {
+     "stream": 2,
+     "E": 12,
+     "pass": false,
+     "terminal": 0.3055666551047954
+    }
+   ],
+   "informative": true,
+   "direction": "passing_higher"
+  },
+  {
+   "arm": "SHUFFLED",
+   "world": 15,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 9,
+     "pass": true,
+     "terminal": 0.02642755320474356
+    },
+    {
+     "stream": 1,
+     "E": 7,
+     "pass": false,
+     "terminal": 0.07573989211353956
+    },
+    {
+     "stream": 2,
+     "E": 9,
+     "pass": false,
+     "terminal": 0.11783362047597172
+    }
+   ],
+   "informative": true,
+   "direction": "passing_higher"
+  },
+  {
+   "arm": "SHUFFLED",
+   "world": 16,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 13,
+     "pass": false,
+     "terminal": 0.06067356122609316
+    },
+    {
+     "stream": 1,
+     "E": 13,
+     "pass": true,
+     "terminal": 0.03960300764356335
+    },
+    {
+     "stream": 2,
+     "E": 10,
+     "pass": true,
+     "terminal": 0.0454340110923139
+    }
+   ],
+   "informative": true,
+   "direction": "passing_lower"
+  },
+  {
+   "arm": "SHUFFLED",
+   "world": 17,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 12,
+     "pass": false,
+     "terminal": 0.22714813534914272
+    },
+    {
+     "stream": 1,
+     "E": 10,
+     "pass": true,
+     "terminal": 0.022113028853729996
+    },
+    {
+     "stream": 2,
+     "E": 12,
+     "pass": true,
+     "terminal": 0.04212343280065459
+    }
+   ],
+   "informative": true,
+   "direction": "passing_lower"
+  },
+  {
+   "arm": "SHUFFLED",
+   "world": 18,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 10,
+     "pass": false,
+     "terminal": 0.15078116766904728
+    },
+    {
+     "stream": 1,
+     "E": 10,
+     "pass": false,
+     "terminal": 0.06911961724140045
+    },
+    {
+     "stream": 2,
+     "E": 12,
+     "pass": false,
+     "terminal": 0.14926754131097586
+    }
+   ],
+   "informative": false,
+   "direction": null
+  },
+  {
+   "arm": "SHUFFLED",
+   "world": 19,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 9,
+     "pass": false,
+     "terminal": 0.18454759958663242
+    },
+    {
+     "stream": 1,
+     "E": 10,
+     "pass": false,
+     "terminal": 0.4489998659980553
+    },
+    {
+     "stream": 2,
+     "E": 14,
+     "pass": true,
+     "terminal": 0.03629062944939746
+    }
+   ],
+   "informative": true,
+   "direction": "passing_higher"
+  },
+  {
+   "arm": "MIXED_L1",
+   "world": 13,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 17,
+     "pass": true,
+     "terminal": 0.04808339040941591
+    },
+    {
+     "stream": 1,
+     "E": 17,
+     "pass": false,
+     "terminal": 0.07282069387095985
+    },
+    {
+     "stream": 2,
+     "E": 14,
+     "pass": false,
+     "terminal": 0.8908961983866317
+    }
+   ],
+   "informative": true,
+   "direction": "passing_higher"
+  },
+  {
+   "arm": "MIXED_L1",
+   "world": 14,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 17,
+     "pass": false,
+     "terminal": 1.309952846165611
+    },
+    {
+     "stream": 1,
+     "E": 15,
+     "pass": false,
+     "terminal": 0.8569427142442237
+    },
+    {
+     "stream": 2,
+     "E": 16,
+     "pass": false,
+     "terminal": 0.7019806024646328
+    }
+   ],
+   "informative": false,
+   "direction": null
+  },
+  {
+   "arm": "MIXED_L1",
+   "world": 15,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 18,
+     "pass": true,
+     "terminal": 0.04408894170997308
+    },
+    {
+     "stream": 1,
+     "E": 15,
+     "pass": false,
+     "terminal": 0.3530815394899174
+    },
+    {
+     "stream": 2,
+     "E": 16,
+     "pass": false,
+     "terminal": 0.11641041999431653
+    }
+   ],
+   "informative": true,
+   "direction": "passing_higher"
+  },
+  {
+   "arm": "MIXED_L1",
+   "world": 16,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 19,
+     "pass": false,
+     "terminal": 0.05642892471864283
+    },
+    {
+     "stream": 1,
+     "E": 15,
+     "pass": false,
+     "terminal": 1.804830150909702
+    },
+    {
+     "stream": 2,
+     "E": 17,
+     "pass": true,
+     "terminal": 0.034410601172821985
+    }
+   ],
+   "informative": false,
+   "direction": null
+  },
+  {
+   "arm": "MIXED_L1",
+   "world": 17,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 16,
+     "pass": false,
+     "terminal": 0.09271355231459971
+    },
+    {
+     "stream": 1,
+     "E": 16,
+     "pass": false,
+     "terminal": 0.06392565227284522
+    },
+    {
+     "stream": 2,
+     "E": 13,
+     "pass": false,
+     "terminal": 1.061252832228623
+    }
+   ],
+   "informative": false,
+   "direction": null
+  },
+  {
+   "arm": "MIXED_L1",
+   "world": 18,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 14,
+     "pass": false,
+     "terminal": 0.18400216501186467
+    },
+    {
+     "stream": 1,
+     "E": 11,
+     "pass": false,
+     "terminal": 2.044009162758682
+    },
+    {
+     "stream": 2,
+     "E": 14,
+     "pass": false,
+     "terminal": 1.018011965995649
+    }
+   ],
+   "informative": false,
+   "direction": null
+  },
+  {
+   "arm": "MIXED_L1",
+   "world": 19,
+   "streams": [
+    {
+     "stream": 0,
+     "E": 17,
+     "pass": true,
+     "terminal": 0.02691216501017257
+    },
+    {
+     "stream": 1,
+     "E": 13,
+     "pass": false,
+     "terminal": 1.6502781314910644
+    },
+    {
+     "stream": 2,
+     "E": 13,
+     "pass": false,
+     "terminal": 0.4813259581480668
+    }
+   ],
+   "informative": true,
+   "direction": "passing_higher"
+  }
+ ],
+ "plan_sha256": "2a85c6f4a038da1e1303eb0c3a84de207890badbec17eac59dc128595460d347",
+ "predictors_sha256": "8b4771ff9cac27927f9d71932048b4718861501789c7e89bb186e5bcb8c5b099",
+ "o2_report_sha256": "ebc5506d3ab1e1a3bcf0053f6d5443fe94cd3eae99031c1fedac8dc93fd47e53",
+ "o2_primary": "ORDER_FREE_UNRELIABLE"
+}
