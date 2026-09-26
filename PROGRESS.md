@@ -7635,3 +7635,19 @@ NEXT (exploratory, same artifacts): O2D, a retention and budget dose for the
 sleep phase. How many retained examples per task, and how many sleep updates,
 close the gap from 15 to the ORACLE ceiling of 20? It needs no new world. A
 confirmatory rung needs a fresh world band: PI decision 12.
+
+
+# 2026-09-26 O2D sleep-memory dose: M* = 4; 64 per task matches the all-data ceiling
+
+63 cells, ~95 min, scorer valid. Pass counts of 21: reservoir 4 -> 18,
+16 -> 18, 64 -> 20 (the all-data ceiling). None of the 9 O2-passing cells broke
+in any arm. The lifetime buffer at 4 had given 15, so at small memory the
+near-threshold cells are draw-sensitive. The collapsed cell is never rescued.
+Details in `PREDICTIONS.md` (O2D OUTCOME).
+
+NEXT:
+- Draft O3, the confirmatory online rung (order-free anchors plus sleep) on a
+  fresh band. It needs PI decision 12 before it can be frozen on new worlds.
+- While that decision is pending, exploratory sleep on O2's `STAGED` and
+  `MIXED_L1` terminals (same artifacts), to see whether sleep helps the other
+  protocols and whether it can touch their collapses.

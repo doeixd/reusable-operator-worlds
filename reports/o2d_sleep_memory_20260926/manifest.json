@@ -1,0 +1,26 @@
+{
+ "protocol": {
+  "id": "o2d-sleep-memory-v1",
+  "git_commit": "1912275",
+  "plan": "O2D_SLEEP_MEMORY_DOSE_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "arms": {
+   "RES4": 4,
+   "RES16": 16,
+   "RES64": 64
+  },
+  "updates": 8192,
+  "reservoir_seed": "SeedSequence([1940, w, s, i]) per task i; sampling [1941, w, s, M]",
+  "input_sha256": {
+   "O2D_SLEEP_MEMORY_DOSE_PLAN.md": "bc5be0d97ce14c084298de113698ec8cad601a38a3e0864c92b7cc8e495a27e6",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/o2_online_reliability.json": "ebc5506d3ab1e1a3bcf0053f6d5443fe94cd3eae99031c1fedac8dc93fd47e53",
+   "reports/o2c_consolidation.json": "c2033caa35dc071140db439a9c1831f9fff2304a2746801b3ae7d2956e570e7c"
+  },
+  "implementation_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f"
+ },
+ "protocol_sha256": "8a9f04c158d1d21023247df45c7bccf206d0592122c758fd3d5321897728e9db"
+}

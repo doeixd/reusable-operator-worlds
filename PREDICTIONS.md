@@ -9684,3 +9684,35 @@ by either arm and is a separate failure mode. Development worlds 13-19 are
 re-used from O2, so this is not an independent sample. A confirmatory test of
 online anchor supply + sleep consolidation needs a fresh world band, which is
 a PI decision.
+
+
+# O2D OUTCOME (2026-09-26): modest retention suffices; 64 examples per task reaches the all-data ceiling (Tier 1, exploratory)
+
+Plan `O2D_SLEEP_MEMORY_DOSE_PLAN.md` frozen `7902346`; code `1912275`. 63 cells,
+exit 0, independent scorer `valid: true`, G0 exact, prereg/invalid pass. Report
+`reports/o2d_sleep_memory.json`; archive `reports/o2d_sleep_memory_20260926/`.
+
+A sleep phase of 8,192 updates on a per-task reservoir of M retained examples,
+applied to O2's 21 `SHUFFLED` terminals:
+
+| retained per task | k of 21 | broken of 9 | label |
+|---|---|---|---|
+| 4 (lifetime replay buffer, O2C) | 15 | 0 | (O2C `RESCUES`) |
+| 4 (`RES4` reservoir) | 18 | 0 | `SLEEP_MEMORY_SUFFICES` |
+| 16 (`RES16`) | 18 | 0 | `SLEEP_MEMORY_SUFFICES` |
+| 64 (`RES64`) | **20** | 0 | `SLEEP_MEMORY_SUFFICES` |
+| 128 (all data, O2C ceiling) | 20 | 0 | - |
+
+`M* = 4`. Reading:
+- Retention closes the convergence gap: at 64 per task the sleep phase matches
+  the all-data ceiling.
+- At 4 per task the outcome near the threshold depends on WHICH examples are
+  kept and on the sampling draw (buffer 15 vs reservoir 18; the three cells
+  that differ sit at 0.04-0.17). That is variance at small memory, not evidence
+  that one selection rule beats another.
+- The collapsed cell (w14 s0) survives every arm (1.37-2.16). Collapse is the
+  failure mode sleep does not address, and it sets the ceiling at 20/21 here.
+
+Exploratory on re-used development worlds. It sizes, not confirms: a
+confirmatory rung (online order-free anchors + a sleep phase at M = 16-64)
+needs a fresh world band (PI decision 12).

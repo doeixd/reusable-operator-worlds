@@ -14,8 +14,10 @@ Last rewritten: 2026-09-26, after O2C. Nothing is running.
   further updates on seen data bring `SHUFFLED` to 20/21. A deployable
   replay-only "sleep" phase brings it to 15/21 and breaks nothing.
 
-The next step is O2D (exploratory, same artifacts), a sleep-memory and budget
-dose. A confirmatory rung needs a fresh world band (PI decision 12).
+**O2D (Tier 1): a sleep reservoir of 64 examples per task reaches the
+all-data ceiling (20/21); 4-16 per task reach 18/21; nothing breaks.** The one
+collapsed cell is never rescued. A confirmatory rung (O3) is being drafted and
+needs a fresh world band (PI decision 12).
 
 
 # O2C (Tier 1, 2026-09-26): consolidation rescues order-free online formation
