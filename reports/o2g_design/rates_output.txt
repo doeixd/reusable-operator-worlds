@@ -1,0 +1,7 @@
+stochastic h=0.1: SYSTEMATIC fires 0.00003; STOCHASTIC fires 0.9842
+stochastic h=0.143: SYSTEMATIC fires 0.00007; STOCHASTIC fires 0.9583
+stochastic h=0.25: SYSTEMATIC fires 0.00005; STOCHASTIC fires 0.8306
+systematic q=0.9 h0=0.03: SYSTEMATIC fires 0.8661; STOCHASTIC fires 0.00127
+systematic q=0.8 h0=0.03: SYSTEMATIC fires 0.6408; STOCHASTIC fires 0.01696
+systematic q=0.9 h0=0.06: SYSTEMATIC fires 0.7372; STOCHASTIC fires 0.00127
+systematic q=0.8 h0=0.06: SYSTEMATIC fires 0.5455; STOCHASTIC fires 0.01696
