@@ -2110,3 +2110,36 @@ deficit is mostly one of convergence: the library the stream forms is nearly
 right. Much of the remaining gap is what the learner retains, not how its tasks
 were ordered. These are exploratory results on development worlds already used
 by O2, and a confirmatory test needs fresh worlds.
+
+# Development exploration: how much to retain, which protocols sleep helps, and what a collapse is (O2D, O2E, O2G, 2026-09-26)
+
+Three follow-ups on the same saved O2 models asked what a practical sleep phase
+needs and what it cannot fix. All three are exploratory on development worlds
+already used by O2.
+
+**Retention (O2D).** Keeping a reservoir of 4, 16 or 64 training examples per
+task for the sleep phase gave 18, 18 and 20 of 21 passing cells. At 64 per task
+it matched the ceiling set by consolidating on all the data. At 4 per task the
+lifetime's own replay buffer had given 15, so near-threshold cells depend on
+which few examples are kept. No arm broke a cell that was already passing.
+
+**Other protocols (O2E).** The same sleep phase repaired every near-miss of the
+curriculum, which went from 12 to 18 of 21. It also repaired every near-miss of
+the stream without length-2 tasks, which went from 4 to 13. It broke none, and
+it rescued only one of ten collapsed runs across the three protocols. After
+sleep, each protocol fails only by collapse. The protocols then differ mainly in
+how often they collapse: 1, 3 and 6 of 21.
+
+**Collapse (O2G).** The curriculum's collapses happen at a single moment: the
+first length-3 tasks after a healthy length-2 stage. Re-running that last stage
+from the saved stage-2 library reproduced the original collapse bitwise under
+its original seed. Under two fresh seeds:
+- The early disruption recurred every time from a collapse-prone library (6 of
+  6), and only 3 times in 36 from the others.
+- It led to collapse in 3 of those 6. Healthy libraries collapsed once in 36.
+
+A collapse is therefore a risk carried by the library, realised about half the
+time, and preceded by a disruption visible within the first few tasks. The
+online learner's two failure modes thus have different remedies. A sleep phase
+over retained examples repairs under-convergence. A collapse needs detection
+and retry, which remains to be tested on fresh worlds.
