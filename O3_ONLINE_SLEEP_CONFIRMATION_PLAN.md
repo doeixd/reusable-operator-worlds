@@ -1,6 +1,10 @@
 # O3: does online order-free anchor supply plus a sleep phase form the substrate reliably on unseen worlds, and is the phase structure what matters? (Tier 2, development)
 
-Status: FROZEN 2026-09-26 (PI decision 12 allocated development band 3, seeds
+Status: FROZEN 2026-09-26, re-frozen the same day BEFORE ANY CELL RAN. The
+first freeze `0707e95` omitted two items `tools/check_adequacy.py` requires: the
+measured refusal cost and its scale, and a restatement of the decision rule in
+`# Discriminating power`. Both were added. No threshold, arm or seed changed.
+(PI decision 12 allocated development band 3, seeds
 20-29; the PI directed Claude to continue with its judgement). Worlds **20-26**;
 27-29 are held back. Development evidence, never confirmatory. Drafted earlier
 the same day; this version supersedes that draft. Its candidate rollback-and-
@@ -100,6 +104,11 @@ label. Descriptive only, with no rule attached:
 - **Target behaviour:** online formation made reliable by consolidation.
 - **Refusal arm:** `SHUFFLED`, the same lifetimes without sleep. Its expected
   rate from O2 is 9/21, about 0.43.
+- **Measured refusal cost and its scale:** on O2's worlds, going without sleep
+  cost 11 of 21 cells: 9/21 without sleep against 20/21 with `RES64` (O2D).
+  In terminal error, the 8 near-misses sat at 1-4x the 0.05 threshold before
+  sleep and at 0.45-0.93x it after. The scale is the registered 0.05 threshold,
+  not output variance.
 - **Impostors:**
   - extra compute and retained memory: `INTERLEAVED` matches both;
   - world luck: 7 fresh worlds x 3 streams;
@@ -110,6 +119,11 @@ label. Descriptive only, with no rule attached:
   `PLAIN` sits above it.
 
 # Discriminating power
+
+**The decision rules, as they will be applied:**
+- primary: `k_SLEEP >= 19` of 21 is `RELIABLE` (with `17-18` and `<= 16` as
+  above);
+- contrast: the four-way rule on `r` above.
 
 **Primary** (`reports/o3_design/rates.py`, output `rates_output.txt`). Each
 world draws a logit offset `N(0, sd)`, and the three streams pass independently
