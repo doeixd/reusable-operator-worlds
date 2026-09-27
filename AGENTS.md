@@ -528,6 +528,11 @@ report JSON. `figures/` — generated figures.
   12) after band 2 was spent (O1 10-12, O2 13-19). O3 uses 20-26; 27-29 are
   held back for follow-ups. Development evidence only. Verified unused
   beforehand: no runner, report or artifact directory references them.
+- **O4 sealed band:** seeds 900-929, allocated 2026-09-27 by Claude on the PI's
+  explicit delegation (decision 13: "use your best judgement to continue"). O4
+  uses 900-914; 915-929 stay sealed and unused. No sealed world may be
+  generated before `O4_SEALED_CONFIRMATION_PLAN.md` is frozen and hashed in
+  `tools/check_prereg.py`. Verified unused before allocation.
 - **V1 confirmatory:** seeds 100–129 (frozen, scored against
   `CONFIRMATION_PLAN.md`).
 - **V2 confirmatory:** seeds 200–229 (frozen, scored against
