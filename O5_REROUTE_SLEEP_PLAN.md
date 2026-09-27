@@ -1,6 +1,6 @@
 # O5: is collapse a stale-route failure that re-routing plus consolidation repairs? (Tier 1, exploratory)
 
-Status: FROZEN 2026-09-27 before any O5 cell ran. **Tier 1, EXPLORATORY: it
+Status: FROZEN 2026-09-27 before any O5 cell ran; re-frozen the same day, before any cell, because the first freeze (`2ac1601`) had a malformed `# Discriminating power` heading that `check_adequacy` rejected. Only the heading and the rule restatement changed. **Tier 1, EXPLORATORY: it
 produces no verdict.** It runs on the saved order-free (`SHUFFLED`) terminal
 models of O2 (worlds 13-19), O3 (20-26) and O4 (sealed 900-914). There is no
 new world and no new stream lifetime. The sealed O4 cells enter as design
@@ -84,7 +84,10 @@ The labels partition every outcome. Also reported:
 - **Band:** collapsed cells sit at 20-40x the threshold, and their re-routed
   error at 1-10x, inside the band where sleep acts.
 
-# Discriminating power (`reports/o5_design/rates.py`, exact binomials)
+# Discriminating power
+
+Source: `reports/o5_design/rates.py`, exact binomials. **The decision rule, as it will be applied:** `COLLAPSE_REPAIRED` if `r_C >= 6` of 8 and `b <= 1`, with the other labels as in the table above.
+
 
 - **Null:** re-routing adds nothing; a collapse passes with `p0` = 0.125
   (sleep's observed rate) or 0.25.
