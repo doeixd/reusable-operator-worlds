@@ -6,16 +6,27 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-27, after O4. Nothing is running. **Read
-`ONLINE_FORMATION_SYNTHESIS.md` first.**
+Last rewritten: 2026-09-27, after O5. **Read `ONLINE_FORMATION_SYNTHESIS.md` first.**
 
-**O4 (SEALED, worlds 900-914) returned `NOT_CONFIRMED`: 38 of 45 with
-consolidation against the registered 41; 16/45 without it; floor 0/15.**
-Consolidation's gain is large and harmless (it repairs 21 of 23 non-collapse
-failures and breaks nothing), but on sealed worlds COLLAPSE was more frequent
-(6/45 without consolidation) and consolidation rescues only 1 of 6. Collapse,
-not convergence, is now the binding constraint. The development-level claims
-stand and are not upgraded.
+**Collapse is diagnosed and repaired, at exploratory level.** A collapse is
+mostly stale routes on a usable library (Tier 0 census). Re-inferring every
+task's route by search on its retained examples and then consolidating (O5)
+passes **87 of 87** saved order-free terminals, including all 8 collapses and
+all 45 sealed-O4 cells, and harms nothing.
+
+**Next: O6, a sealed confirmation of wake + re-route + sleep on the untouched
+seeds 915-929.**
+
+
+# O5 (Tier 1, 2026-09-27): COLLAPSE_REPAIRED, 87/87
+
+- Plan `7ec7a28`, code `40d6416`, scorer valid. Report
+  `reports/o5_reroute_sleep.json`.
+- Collapses 8/8 rescued (terminals 1.06-2.04 -> 0.008-0.016), 0 of 78
+  harmed. Pass counts per band: O2 21, O3 21, O4 45 (sleep alone: 20, 20, 38).
+- Routes were stale in every learner (14-93 of 188 changed).
+- G1 was vacuous (0 cells covered), and this is disclosed.
+- Exploratory. Worlds 900-914 are contaminated for this protocol.
 
 
 # O4 CLOSED (SEALED): NOT_CONFIRMED (2026-09-27)

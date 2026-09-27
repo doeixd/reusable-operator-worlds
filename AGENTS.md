@@ -2266,3 +2266,16 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   not. Before a multi-hour launch on a shared host, look at what else is
   running, and read `Resource-Exhaustion-Detector` events when a run is
   unexpectedly slow.
+
+- A CHECK MUST FAIL THE COMMAND, NOT JUST PRINT (2026-09-27). Twice in one day a
+  plan freeze was committed right after the adequacy checker PRINTED a failure:
+  the check ran inside a `&&` chain but exited 0, so the chain continued (O3's
+  first freeze, then O5's). Both were re-frozen before any data, so nothing was
+  lost. But a gate that cannot stop the pipeline is decoration. Wrap every
+  pre-commit check so that a non-empty problem list exits non-zero
+  (`sys.exit(1 if problems else 0)`), and read its output before committing.
+- A VACUOUS EQUIVALENCE GATE IS STILL VACUOUS WHEN IT PASSES (O5). "Cells with
+  unchanged routes must reproduce the committed reference bitwise" never
+  applied, because route search changed routes in every cell. A conditional
+  gate must be checked for whether its condition EVER held, and the report must
+  count the cells it covered (here 0).

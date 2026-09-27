@@ -5286,3 +5286,5 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
 - Register conditional programme decisions before the data that resolves them.
 
 2026-09-26 O3: run check_adequacy on the working copy BEFORE committing a freeze (first O3 freeze had to be re-frozen pre-data).
+
+2026-09-27: a pre-commit check must exit non-zero on problems (two freezes slipped past a printing checker). A conditional equivalence gate must report how many cells it actually covered (O5's G1 covered 0).

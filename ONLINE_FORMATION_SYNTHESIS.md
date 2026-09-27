@@ -140,6 +140,20 @@ statements are corrected: "reliable" in section 2.5 and item 7 below is
 DEVELOPMENT-level only, and it did not survive the sealed test at the >= 90%
 bar.
 
+## 2.7 Collapse diagnosed and repaired (Tier 0 census + O5; exploratory) - ADDED 2026-09-27
+
+A collapse is mostly STALE ROUTES on a library that is still usable.
+Re-inferring routes by exhaustive search on retained examples cuts collapsed
+error from ~1.8 to 0.14. Doing that at the end of the stream and then
+consolidating (wake + re-route + sleep) passes all 87 saved order-free
+terminals: every collapse, every sealed-O4 cell, nothing harmed. Routes are
+stale in every online learner (14-93 of 188), not only collapsed ones. The
+online learner's residual failure was never the library. It was the
+bookkeeping of which route each task uses, which drifts as the library keeps
+learning, and which gradient refitting cannot correct at a sharp temperature
+(J1's lock-in). EXPLORATORY: designed after O4. Confirmation needs untouched
+sealed seeds.
+
 **Update to section 3 below:** item 7, "whether online order-free anchors plus
 sleep is reliable on unseen worlds", is now ESTABLISHED at development level. It
 is reliable (20/21). Item 8 is answered: at matched compute, post-stream and

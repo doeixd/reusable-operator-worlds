@@ -7788,3 +7788,27 @@ not fix. Two leads are already on record, both development-level:
 A successor needs a development plan (worlds 27-29 remain in band 3, or a new
 development band) before any further sealed test. Sealed seeds 915-929 stay
 unused.
+
+
+# 2026-09-27 Collapse diagnosed and repaired: re-route + sleep passes 87 of 87 saved terminals (Tier 0 census + O5 Tier 1)
+
+- **Tier 0 census:** a collapse is mostly stale routes on a usable library.
+  Re-inferring routes by search on retained examples takes collapsed error
+  from ~1.8 to 0.14.
+- **O5 (Tier 1, plan `7ec7a28`, code `40d6416`):** re-route then sleep rescues
+  8 of 8 collapses, breaks 0 of 78, and passes 87 of 87 cells (sleep alone:
+  78). Routes were stale in every learner (14-93 changed).
+- **G1 was vacuous,** since no cell was unchanged. It is disclosed, and the
+  next rung needs a gate that can fail.
+
+Details in `PREDICTIONS.md` (TIER 0 CENSUS, O5 OUTCOME).
+
+Process slip, twice today: a plan freeze was committed after the adequacy
+checker had printed a failure (O5 and earlier O3), because the check printed
+its result without failing the shell command. Both re-frozen before any cell.
+Lesson in `AGENTS.md`.
+
+NEXT: O6, the sealed confirmation of wake + re-route + sleep on the UNTOUCHED
+sealed seeds 915-929 (inside the band allocated under decision 13). Sealed
+worlds 900-914 are contaminated for this protocol, because it was designed
+after seeing their failures.

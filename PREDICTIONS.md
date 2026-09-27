@@ -9922,3 +9922,62 @@ claim and is recorded to direct the successor.
 The plan's discrimination table had already disclosed this outcome: a protocol
 whose true per-cell rate is ~0.85 is confirmed only 8-18% of the time. The
 result sits exactly there.
+
+
+# TIER 0 CENSUS (2026-09-27, descriptive): a collapse is mostly STALE ROUTES on a usable library
+
+After O4, the 87 saved order-free terminals (O2 13-19, O3 20-26, O4 sealed
+900-914) were examined read-only. In collapsed lifetimes, the library fits
+tasks as they arrive: late canonical end-of-task 0.07-1.2, single-operation
+about 0.01. Yet the terminal is near the no-anchor floor. With each terminal
+library FROZEN, every canonical task's route was re-inferred by exhaustive
+search (1,728 routes) on its 64 retained examples. Collapsed cells went from a
+median terminal of ~1.8 to a re-routed median of **0.14** (0 of 8 passing).
+Near-misses went to a median of 0.059 (16 of 46 passing), and passing cells
+stayed passing (33 of 33, median 0.027). Sleep alone cannot repair this,
+because it refits routes by gradient from the stale assignment at the final,
+sharp routing temperature, which is J1's lock-in.
+
+# O5 OUTCOME (2026-09-27): COLLAPSE_REPAIRED (8 of 8); every one of 87 cells passes (Tier 1, exploratory)
+
+Plan `O5_REROUTE_SLEEP_PLAN.md`, frozen `7ec7a28` (re-frozen before any cell
+after a heading fix). Code `40d6416`. 87 cells on the saved terminals, exit 0.
+Independent scorer `valid: true`; prereg and invalid checks pass. G0 reloads
+were exact in all three bands. Report `reports/o5_reroute_sleep.json`; archive
+`reports/o5_reroute_sleep_20260927/`.
+
+REROUTE_SLEEP proceeds in two steps:
+- at the end of the stream, each stream task's route is re-inferred by
+  exhaustive search on its 64 retained examples (minimal logit swap);
+- then O3's sleep runs verbatim.
+
+Results:
+- **Collapses:** **8 of 8** pass (`r_C = 8`).
+- **Harm:** **0** of the 78 sleep-passing cells broken.
+- **Per band:** O2 21/21 (sleep 20), O3 21/21 (sleep 20), O4 45/45 (sleep 38).
+
+| collapsed cell | terminal | + sleep | + re-route + sleep | routes changed |
+|---|---:|---:|---:|---:|
+| O2 w14 s0 | 2.003 | 1.386 | **0.014** | 65 |
+| O3 w22 s1 | 2.040 | 1.417 | **0.014** | 93 |
+| O4 907 s2 | 1.813 | 0.047 | **0.015** | 55 |
+| O4 908 s1 | 1.889 | 0.275 | **0.008** | 71 |
+| O4 909 s2 | 1.824 | 0.996 | **0.010** | 47 |
+| O4 911 s0 | 1.732 | 0.428 | **0.016** | 48 |
+| O4 911 s2 | 1.059 | 0.062 | **0.014** | 59 |
+| O4 914 s2 | 1.674 | 0.244 | **0.014** | 45 |
+
+**Search changed routes in EVERY learner.** The median was 32 of 188 routes
+changed, the range 14-93. Stale routes are not specific to collapse, and they
+are pervasive in online lifetimes.
+
+**Limitation, disclosed.** The built-in equivalence check G1 (unchanged routes
+must reproduce the committed SLEEP cell bitwise) never applied, because no
+cell had zero route changes. The construction is O3's verified sleep step
+preceded by the swap, but that bitwise check was VACUOUS here. The next rung
+needs a gate that can fail.
+
+**Status of the evidence.** EXPLORATORY. It uses re-used worlds, including the
+sealed O4 worlds, and the protocol was designed AFTER seeing O4's sealed
+failures. Worlds 900-914 are therefore contaminated for this protocol. A
+confirmation must use untouched sealed seeds (915-929).

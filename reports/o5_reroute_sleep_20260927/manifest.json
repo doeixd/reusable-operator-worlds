@@ -1,0 +1,37 @@
+{
+ "protocol": {
+  "id": "o5-reroute-sleep-v1",
+  "git_commit": "40d6416",
+  "plan": "O5_REROUTE_SLEEP_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "bands": {
+   "O2": [
+    13,
+    19
+   ],
+   "O3": [
+    20,
+    26
+   ],
+   "O4": [
+    900,
+    914
+   ]
+  },
+  "input_sha256": {
+   "O5_REROUTE_SLEEP_PLAN.md": "a09283bebb794b994553d8c8629c2eb705ea8fd264d0255ab268d4de654c00af",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports\\o2_online_reliability.json": "ebc5506d3ab1e1a3bcf0053f6d5443fe94cd3eae99031c1fedac8dc93fd47e53",
+   "reports\\o2d_sleep_memory.json": "2396f35343b09c9381d61fe6be1c2d9563bb2aa90f5a60988cd57fc0d2abd7c2",
+   "reports\\o3_online_sleep_v2.json": "50a36bc8ab4c8e680089e57639d875a39abdfef04462952bdb0cbc990da93d07",
+   "reports\\o4_sealed_confirmation.json": "8cfd86aa3452bdd3839b186224d10f41f032db0b1939df72b67e7a4bb2fc842a"
+  },
+  "implementation_sha256": "a2788b483abb3f6432702d36dc704ef3be49bec3d5acaa9bf9dd948aac75ff49",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f"
+ },
+ "protocol_sha256": "1d689f7f09989534fd414104e55b0bd0e205f4fa15a7fc0244bd456e20e733ef"
+}
