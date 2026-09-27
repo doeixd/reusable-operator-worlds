@@ -6,47 +6,33 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-26, after O2G. Nothing is running. **Read
-`ONLINE_FORMATION_SYNTHESIS.md` first** for the whole anchor-supply and online
-line (N1-O2G): results, claim status, implications and caveats.
-- **O2 returned `ORDER_FREE_UNRELIABLE`** (`SHUFFLED` 9/21, `STAGED` 12/21,
-  `MIXED_L1` 4/21), so L1-L8 are CLOSED.
-- **O2F (anchor timing) is INCONCLUSIVE.**
-- **O2C (Tier 1) found the order-free deficit is mostly CONVERGENCE.** 8,192
-  further updates on seen data bring `SHUFFLED` to 20/21. A deployable
-  replay-only "sleep" phase brings it to 15/21 and breaks nothing.
+Last rewritten: 2026-09-27, after O3. Nothing is running. **Read
+`ONLINE_FORMATION_SYNTHESIS.md` first.**
 
-**O2D (Tier 1): a sleep reservoir of 64 examples per task reaches the
-all-data ceiling (20/21); 4-16 per task reach 18/21; nothing breaks.** The one
-collapsed cell is never rescued. A confirmatory rung (O3) is being drafted and
-needs a fresh world band (PI decision 12).
-**O2E (Tier 1): sleep also repairs `STAGED` (12 -> 18/21) and `MIXED_L1`
-(4 -> 13/21) near-misses, breaking nothing.** It rescued 1 of 10 collapses in
-total. After sleep, every protocol fails only by COLLAPSE (`SHUFFLED` 1/21,
-`STAGED` 3/21, `MIXED_L1` 6/21). The O3 draft is written. Next is a Tier 0
-collapse census on O2's saved artifacts.
-**O2G (Tier 1): MIXED.** From the same stage-2 library, a stage-3 collapse
-recurs in 3 of 6 re-runs. The early onset disruption recurs in 6 of 6, but in
-only 3 of 36 re-runs from healthy libraries. Collapse is therefore a
-library-linked risk with a ~50% stochastic outcome and an early warning, and an
-onset monitor with rollback is a candidate mechanism.
-**Every rung needing no new world is done. The research is now gated on PI
-decision 12.**
+**O3 returned `WAKE_SLEEP_RELIABLE` (20/21) with the phase contrast
+`EQUIVALENT`**, on unseen development worlds 20-26. Order-free anchors, retained
+memory (64 per task) and a consolidation budget (+34% updates) make online
+formation reliable. Spending the same budget during the stream is statistically
+equivalent (17/21, same error distribution). Without consolidation the rate is
+8/21.
+
+Next: a SEALED confirmation. The draft is `O4_SEALED_CONFIRMATION_DRAFT.md`;
+it needs PI decision 13, a sealed band.
 
 
-# O2C (Tier 1, 2026-09-26): consolidation rescues order-free online formation
+# O3 CLOSED: WAKE_SLEEP_RELIABLE, phase EQUIVALENT (2026-09-27)
 
-- Plan `cee05a3`, code `1fd930d`, scorer valid, gates exact. Report
-  `reports/o2c_consolidation.json`; archive `reports/o2c_consolidation_20260926/`.
-- Starting from O2's 21 `SHUFFLED` terminals, 8,192 more updates:
-  - on ALL stream data (ceiling): **20/21** pass, 8 of 8 near-misses rescued,
-    0 broken;
-  - on the 4-per-task REPLAY BUFFER only (deployable): **15/21**, 5 of 8
-    rescued, 0 broken.
-- The one collapsed cell (w14 s0) is not rescued by either arm. Collapse is a
-  separate failure mode.
-- **Next:** O2D, the retention and budget dose for the sleep phase, on the same
-  artifacts. Exploratory.
+- Run `f4811a1` (v2), 70 cells, scorer valid, all checkers pass. Report
+  `reports/o3_online_sleep_v2.json`; archive
+  `reports/o3_online_sleep_v2_20260927/`.
+- Passing cells of 21:
+  - `SLEEP` 20: the one failure is a collapse;
+  - `INTERLEAVED` 17: 3 near-misses plus the same hard cell, no collapse;
+  - `SHUFFLED` 8;
+  - `PLAIN` 0/7.
+- The phase contrast is `EQUIVALENT`: 13/21 cells favour sleep, median ratio
+  1.12x. The claim is "retained memory plus consolidation compute", not "sleep".
+- All five pre-registered expectations were realised.
 
 
 # O2 CLOSED: ORDER_FREE_UNRELIABLE (2026-09-26)

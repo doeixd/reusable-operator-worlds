@@ -9799,3 +9799,59 @@ no commit is possible mid-run. It is committed after the run.
 - **O3e** `PLAIN` fails in every world: **0.97**.
 
 (Committed after the v1 launch failed with 0 of 70 cells written, so still before any O3 data; the text above is byte-identical to the hashed version, sha256 6f42fcef...1b55.)
+
+
+# O3 VERDICT (2026-09-27): WAKE_SLEEP_RELIABLE (20/21); phase contrast EQUIVALENT
+
+Plan `O3_ONLINE_SLEEP_CONFIRMATION_PLAN.md`, frozen `5120482` (re-frozen before
+any cell). Run `f4811a1` (v2 paths, after the v1 launch failed before writing a
+cell; see PROGRESS 2026-09-26). 70 cells, exit 0, finished 2026-09-27 01:44Z.
+Independent scorer `valid: true`, no problems. `check_prereg`,
+`check_invalid` and `check_adequacy` pass. Gates E1-E4b passed, and E5 passed
+with every arm. Report `reports/o3_online_sleep_v2.json`; archive
+`reports/o3_online_sleep_v2_20260927/`. Development band 3, worlds 20-26.
+DEVELOPMENT evidence, never confirmatory.
+
+| arm | pass of 21 | collapses (>= 1.0) | median terminal | label |
+|---|---|---|---|---|
+| `SLEEP` (post-stream, 64 per task, 8,192 updates) | **20** | 1 | 0.025 | **`WAKE_SLEEP_RELIABLE`** |
+| `INTERLEAVED` (same memory and updates, during the stream) | 17 | 0 | 0.030 | `INTERMEDIATE` |
+| `SHUFFLED` (no consolidation) | 8 | 1 | 0.074 | - |
+| `PLAIN` (no anchors) | 0 of 7 | 7 | - | floor holds |
+
+| world | `SHUFFLED` s0/s1/s2 | `SLEEP` s0/s1/s2 | `INTERLEAVED` s0/s1/s2 | `PLAIN` |
+|---|---|---|---|---:|
+| 20 | 0.103 / **0.039** / 0.248 | **0.024 / 0.025 / 0.042** | **0.017 / 0.030 / 0.013** | 1.86 |
+| 21 | **0.044** / 0.378 / 0.074 | **0.013 / 0.033 / 0.031** | **0.017 / 0.039** / 0.055 | 1.99 |
+| 22 | **0.024** / 2.04 / 0.069 | **0.018** / 1.42 / **0.036** | 0.058 / 0.841 / **0.029** | 1.89 |
+| 23 | 0.097 / 0.088 / **0.041** | **0.034 / 0.034 / 0.030** | **0.035 / 0.035 / 0.017** | 1.80 |
+| 24 | 0.400 / **0.026 / 0.029** | **0.023 / 0.017 / 0.023** | 0.090 / **0.037 / 0.034** | 1.95 |
+| 25 | **0.026** / 0.131 / 0.073 | **0.031 / 0.019 / 0.015** | **0.014 / 0.021 / 0.027** | 1.89 |
+| 26 | 0.100 / 0.178 / **0.030** | **0.023 / 0.033 / 0.023** | **0.022 / 0.018 / 0.041** | 2.00 |
+
+**Phase contrast: `EQUIVALENT`.** `r = log10(M_SLEEP / M_INTERLEAVED)` is
+negative in 13 of 21 cells (the registered band is 7-14), with a median of
+-0.049 (|median| <= 0.10). The median sleep effect against no consolidation is
+log10 -0.416, a 2.6x lower terminal error.
+
+**What it decides, per the plan's table (RELIABLE + EQUIVALENT).** With
+order-free anchors, retained memory and a consolidation budget, online formation
+of the rotated substrate is RELIABLE on worlds its setting was never tuned on:
+20 of 21 cells. The only failure is a collapse (w22 s1, 1.42). The evidence
+does NOT separate post-stream "sleep" from spending the same updates on the same
+retained memory during the stream. The claim is "retained memory plus
+consolidation compute", not "sleep". Interleaved consolidation's four failures
+are three near-misses (0.055-0.090) and the same hard cell (0.84), with no
+collapse. Its terminal errors are distributed like sleep's.
+
+Against the expectations recorded before any cell (sha256 6f42fcef...1b55),
+every one happened:
+- O3a, `RELIABLE` at p = 0.55;
+- O3b, `k >= 17` at 0.85;
+- O3c, `EQUIVALENT` or `INDETERMINATE` at 0.55;
+- O3d, `k_SHUFFLED` in 6-12 at 0.8 (8);
+- O3e, `PLAIN` fails everywhere at 0.97.
+
+Also recorded: the no-consolidation arm's first-16 canonical end-of-task median
+is 0.93-2.27. The canonical tasks are again fitted late, which is what
+consolidation repairs.

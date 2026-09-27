@@ -112,6 +112,26 @@ Collapse is a RISK carried by the library, REALISED about half the time, and
 preceded by a warning within the first few tasks. Every collapse among the 42
 re-runs showed the warning, but only 4 of the 9 warned runs collapsed.
 
+## 2.5 Unseen worlds (O3; worlds 20-26 x 3 streams; registered, Tier 2) - ADDED 2026-09-27
+
+| arm | pass of 21 | label |
+|---|---|---|
+| order-free + post-stream consolidation (64 per task, 8,192 updates) | **20** | `WAKE_SLEEP_RELIABLE` |
+| order-free + the same updates interleaved through the stream | 17 | `INTERMEDIATE` |
+| order-free, no consolidation | 8 | - |
+| no anchors | 0 of 7 | floor |
+
+The phase contrast is `EQUIVALENT` (13/21 paired cells favour post-stream,
+median factor 1.12). The O2C-O2E indication REPLICATED on unseen worlds, but
+"sleep as a phase" did not separate from "consolidation compute on retained
+memory". All five pre-registered expectations were realised.
+
+**Update to section 3 below:** item 7, "whether online order-free anchors plus
+sleep is reliable on unseen worlds", is now ESTABLISHED at development level. It
+is reliable (20/21). Item 8 is answered: at matched compute, post-stream and
+interleaved consolidation are equivalent. The open question is a SEALED
+confirmation.
+
 # 3. What is established, what is indicated, what is open
 
 **Established (registered verdicts, development worlds):**

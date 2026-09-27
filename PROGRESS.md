@@ -7731,3 +7731,32 @@ host was paging.
 No plan change: the frozen plan (`5120482`) never registered an
 `INTERLEAVED` anchor. Gates and the restart test are re-run for the new
 implementation hash.
+
+
+# 2026-09-27 O3 complete: online formation is RELIABLE with retained memory plus consolidation (20/21); sleep and interleaved are equivalent
+
+O3 v2 ran at `f4811a1`, from 2026-09-26 19:22Z to 2026-09-27 01:44Z (~6.4 h,
+70 cells, exit 0). The independent scorer is valid and all checkers pass. The
+host stayed healthy this time (5-8 GiB free). A background watcher was reaped
+by Claude Code's low-memory guard while Windows Update ran, and a session cron
+check replaced it.
+
+Passing cells of 21:
+- `SLEEP` 20 (`WAKE_SLEEP_RELIABLE`);
+- `INTERLEAVED` 17;
+- `SHUFFLED` 8;
+- `PLAIN` 0/7.
+
+The phase contrast is `EQUIVALENT` (13 of 21 negative, median r -0.05). All
+five pre-registered expectations were realised. Details in `PREDICTIONS.md`
+(O3 VERDICT).
+
+Reading: the O2C-O2E indication replicated on unseen worlds. Consolidation on
+retained examples (+34% updates) turns an unreliable online learner (8/21)
+into a reliable one (20/21). Whether the consolidation happens after the stream
+or interleaved through it does not matter at the resolution registered.
+
+NEXT: a sealed confirmation of the order-free + retained-memory +
+consolidation protocol. It needs a sealed band, which is a PI decision, and a
+plan frozen and hashed before the band is opened. Drafted as
+`O4_SEALED_CONFIRMATION_DRAFT.md`.

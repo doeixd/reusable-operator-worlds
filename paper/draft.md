@@ -2143,3 +2143,37 @@ time, and preceded by a disruption visible within the first few tasks. The
 online learner's two failure modes thus have different remedies. A sleep phase
 over retained examples repairs under-convergence. A collapse needs detection
 and retry, which remains to be tested on fresh worlds.
+
+# Development result: retained memory plus consolidation makes online formation reliable on unseen worlds (O3, 2026-09-27)
+
+O3 tested the O2C-O2E indication on seven worlds the settings were never tuned
+on (20-26), with three replay streams each and a rule registered in advance: an
+arm is reliable if at least 19 of 21 cells reach terminal NMSE below 0.05. It
+also asked whether the TIMING of consolidation matters, against a matched
+control. That control spends the same 8,192 extra updates on the same retained
+examples, interleaved through the stream instead of after it. Gates reproduced
+the earlier cells bitwise before launch.
+
+| world | `SHUFFLED` s0/s1/s2 | `SLEEP` s0/s1/s2 | `INTERLEAVED` s0/s1/s2 | `PLAIN` |
+|---|---|---|---|---:|
+| 20 | 0.103 / **0.039** / 0.248 | **0.024 / 0.025 / 0.042** | **0.017 / 0.030 / 0.013** | 1.86 |
+| 21 | **0.044** / 0.378 / 0.074 | **0.013 / 0.033 / 0.031** | **0.017 / 0.039** / 0.055 | 1.99 |
+| 22 | **0.024** / 2.04 / 0.069 | **0.018** / 1.42 / **0.036** | 0.058 / 0.841 / **0.029** | 1.89 |
+| 23 | 0.097 / 0.088 / **0.041** | **0.034 / 0.034 / 0.030** | **0.035 / 0.035 / 0.017** | 1.80 |
+| 24 | 0.400 / **0.026 / 0.029** | **0.023 / 0.017 / 0.023** | 0.090 / **0.037 / 0.034** | 1.95 |
+| 25 | **0.026** / 0.131 / 0.073 | **0.031 / 0.019 / 0.015** | **0.014 / 0.021 / 0.027** | 1.89 |
+| 26 | 0.100 / 0.178 / **0.030** | **0.023 / 0.033 / 0.023** | **0.022 / 0.018 / 0.041** | 2.00 |
+
+With consolidation after the stream, 20 of 21 cells pass; the one failure is a
+collapse. Without it, 8 pass, reproducing O2's rate. The interleaved control
+passes 17, with no collapse and three near-misses. Its terminal errors are
+distributed like the post-stream arm's: sleep is lower in 13 of 21 paired cells,
+by a median factor of 1.12, and the registered contrast returns `EQUIVALENT`.
+
+So in this construction an online learner that retains 64 examples per task and
+spends about a third more updates consolidating them forms the vocabulary
+reliably. Whether those updates come in a separate phase or are interleaved
+with the stream does not matter at the resolution tested. We therefore do not
+claim that sleep, as a phase, is special. The claim is about retained memory
+and consolidation compute. It is development evidence on one substrate family
+and one learner, and a sealed confirmation is the next step.
