@@ -126,6 +126,20 @@ median factor 1.12). The O2C-O2E indication REPLICATED on unseen worlds, but
 "sleep as a phase" did not separate from "consolidation compute on retained
 memory". All five pre-registered expectations were realised.
 
+## 2.6 SEALED confirmation (O4; worlds 900-914 x 3 streams) - ADDED 2026-09-27: NOT_CONFIRMED
+
+The first confirmatory result of the line. With consolidation, 38 of 45 sealed
+cells pass (0.84, CI 0.71-0.94) against the registered 41. Without
+consolidation, 16/45. The >= 90% reliability claim is NOT confirmed.
+
+Descriptively, consolidation repaired 21 of 23 non-collapse failures and harmed
+none. Sealed worlds collapsed three times as often (6/45 without consolidation),
+consolidation rescued only 1 of those 6, and they account for 5 of the 7
+residual failures. **Collapse is the binding constraint.** The earlier
+statements are corrected: "reliable" in section 2.5 and item 7 below is
+DEVELOPMENT-level only, and it did not survive the sealed test at the >= 90%
+bar.
+
 **Update to section 3 below:** item 7, "whether online order-free anchors plus
 sleep is reliable on unseen worlds", is now ESTABLISHED at development level. It
 is reliable (20/21). Item 8 is answered: at matched compute, post-stream and

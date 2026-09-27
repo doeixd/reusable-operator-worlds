@@ -6,18 +6,31 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-27, after O3. Nothing is running. **Read
+Last rewritten: 2026-09-27, after O4. Nothing is running. **Read
 `ONLINE_FORMATION_SYNTHESIS.md` first.**
 
-**O3 returned `WAKE_SLEEP_RELIABLE` (20/21) with the phase contrast
-`EQUIVALENT`**, on unseen development worlds 20-26. Order-free anchors, retained
-memory (64 per task) and a consolidation budget (+34% updates) make online
-formation reliable. Spending the same budget during the stream is statistically
-equivalent (17/21, same error distribution). Without consolidation the rate is
-8/21.
+**O4 (SEALED, worlds 900-914) returned `NOT_CONFIRMED`: 38 of 45 with
+consolidation against the registered 41; 16/45 without it; floor 0/15.**
+Consolidation's gain is large and harmless (it repairs 21 of 23 non-collapse
+failures and breaks nothing), but on sealed worlds COLLAPSE was more frequent
+(6/45 without consolidation) and consolidation rescues only 1 of 6. Collapse,
+not convergence, is now the binding constraint. The development-level claims
+stand and are not upgraded.
 
-Next: a SEALED confirmation. The draft is `O4_SEALED_CONFIRMATION_DRAFT.md`;
-it needs PI decision 13, a sealed band.
+
+# O4 CLOSED (SEALED): NOT_CONFIRMED (2026-09-27)
+
+- Run `b3b02b8`, 105 cells, scorer valid, all checkers pass. Report
+  `reports/o4_sealed_confirmation.json`; archive
+  `reports/o4_sealed_confirmation_20260927/`.
+- `k_SLEEP` = 38/45 (0.84, CI 0.71-0.94) against 41 needed. Without
+  consolidation: 16/45 (0.36).
+- Descriptive: 21/23 near-miss repair, 0 harmed, 1/6 collapses rescued, and
+  5 of 7 residual failures are collapses.
+- **Successor direction (development first):** collapse prevention. Leads:
+  interleaved consolidation (0 collapses in O3) and early detection with
+  retry (O2G).
+- Sealed seeds 915-929 remain unused.
 
 
 # O3 CLOSED: WAKE_SLEEP_RELIABLE, phase EQUIVALENT (2026-09-27)

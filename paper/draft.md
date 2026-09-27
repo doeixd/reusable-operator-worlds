@@ -2177,3 +2177,49 @@ with the stream does not matter at the resolution tested. We therefore do not
 claim that sleep, as a phase, is special. The claim is about retained memory
 and consolidation compute. It is development evidence on one substrate family
 and one learner, and a sealed confirmation is the next step.
+
+# Confirmatory result: the reliability claim is not confirmed on sealed worlds (O4, 2026-09-27)
+
+O4 tested O3's protocol, unchanged, on fifteen sealed worlds (three replay
+streams each). The protocol is order-free anchors, 64 retained examples per
+task, and 8,192 consolidation updates. The rule, frozen and hashed before any
+sealed world existed, required at least 41 of 45 passing cells. Gates
+reproduced O3's development cells bitwise first.
+
+| sealed world | no consolidation s0/s1/s2 | with consolidation s0/s1/s2 | `PLAIN` |
+|---|---|---|---:|
+| 900 | 0.496 / **0.032** / 0.090 | **0.019 / 0.027 / 0.029** | 1.93 |
+| 901 | 0.804 / 0.348 / **0.031** | 0.064 / **0.018 / 0.024** | 1.96 |
+| 902 | 0.492 / **0.034 / 0.022** | **0.037 / 0.028 / 0.013** | 1.97 |
+| 903 | 0.141 / 0.263 / **0.027** | **0.016 / 0.023 / 0.030** | 1.91 |
+| 904 | 0.202 / **0.017 / 0.049** | **0.038 / 0.015 / 0.033** | 1.93 |
+| 905 | **0.012** / 0.108 / **0.038** | **0.028 / 0.018 / 0.013** | 1.92 |
+| 906 | 0.218 / **0.041** / 0.060 | **0.032 / 0.030 / 0.031** | 1.93 |
+| 907 | **0.017 / 0.036** / 1.81 | **0.015 / 0.019 / 0.047** | 1.87 |
+| 908 | 0.254 / 1.89 / 0.076 | **0.019** / 0.275 / **0.031** | 1.97 |
+| 909 | 0.088 / **0.041** / 1.82 | **0.027 / 0.026** / 0.996 | 1.93 |
+| 910 | 0.204 / 0.115 / 0.243 | **0.034 / 0.049 / 0.044** | 2.00 |
+| 911 | 1.73 / **0.050** / 1.06 | 0.428 / **0.034** / 0.062 | 1.96 |
+| 912 | 0.077 / 0.088 / 0.055 | **0.033 / 0.030 / 0.018** | 1.86 |
+| 913 | 0.059 / **0.026** / 0.194 | **0.030 / 0.024 / 0.040** | 1.99 |
+| 914 | **0.036** / 0.572 / 1.67 | **0.024** / 0.226 / 0.244 | 1.93 |
+
+With consolidation, 38 of 45 cells passed (0.84, 95% interval 0.71-0.94); the
+claim of at least 90% reliability is not confirmed. Without consolidation, 16 of
+45 passed, and no-anchor streams passed none.
+
+Consolidation's effect was large, and it never harmed a cell. In a descriptive
+analysis, not registered, it repaired 21 of the 23 non-collapse failures. What
+it did not repair was collapse. Without consolidation, six of the forty-five
+sealed cells collapsed, three times the development rate. Consolidation softened
+all six but rescued only one, and five of its seven remaining failures are those
+collapses.
+
+We report this as a failed confirmation. The development results stand as
+development evidence, and none is upgraded. The mechanism that consolidation
+addresses, under-convergence, behaved on sealed worlds as it did in
+development. The limit on online reliability is a second mechanism: a
+catastrophic transition that retained memory and extra updates soften but do
+not undo. Development runs offer two leads, both unconfirmed. Interleaved
+consolidation produced no collapses in its 21 cells. Collapse onsets are
+preceded by an early warning and recover about half the time when retried.

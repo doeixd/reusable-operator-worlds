@@ -1,0 +1,59 @@
+{
+ "protocol": {
+  "id": "o4-sealed-confirmation-v1",
+  "git_commit": "b3b02b8",
+  "plan": "O4_SEALED_CONFIRMATION_PLAN.md",
+  "tier": 2,
+  "sealed": true,
+  "worlds": [
+   900,
+   901,
+   902,
+   903,
+   904,
+   905,
+   906,
+   907,
+   908,
+   909,
+   910,
+   911,
+   912,
+   913,
+   914
+  ],
+  "arm_streams": {
+   "SHUFFLED": [
+    0,
+    1,
+    2
+   ],
+   "SLEEP": [
+    0,
+    1,
+    2
+   ],
+   "PLAIN": [
+    0
+   ]
+  },
+  "threshold": 0.05,
+  "confirm_at": 41,
+  "jobs": 3,
+  "root": "artifacts/o4_sealed_confirmation_dry",
+  "input_sha256": {
+   "O4_SEALED_CONFIRMATION_PLAN.md": "f894edd57c9575274c61b2bfcb44735250156c46d2e8f0a134f67691c88fc011",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/o3_online_sleep_v2.json": "50a36bc8ab4c8e680089e57639d875a39abdfef04462952bdb0cbc990da93d07"
+  },
+  "implementation_sha256": "c70139e823a46c4e673996c7cb9c09bb6d72cfd5283341dde1daa8a535bedb37",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f",
+  "learner_sha256": "8fef85343e25dad51b31112beac849e993a3d581b48ff5a4b8e2b86fcd0cedc7",
+  "scale": 16
+ },
+ "protocol_sha256": "ac9bf47fa4fcec39e02b65f4010181cefe7ec4ebacf0a5f6316c3c34b2700166"
+}

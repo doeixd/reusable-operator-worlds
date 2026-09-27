@@ -9855,3 +9855,70 @@ every one happened:
 Also recorded: the no-consolidation arm's first-16 canonical end-of-task median
 is 0.93-2.27. The canonical tasks are again fitted late, which is what
 consolidation repairs.
+
+
+# O4 SEALED VERDICT (2026-09-27): NOT_CONFIRMED (38 of 45; the registered bar was 41). FIRST CONFIRMATORY RESULT OF THE ONLINE LINE
+
+Plan `O4_SEALED_CONFIRMATION_PLAN.md`, frozen `397aa88` before any sealed world
+was generated. Sealed band 900-929 (decision 13, delegated), worlds 900-914.
+Run `b3b02b8`, 105 cells, exit 0, finished 2026-09-27 09:29Z. Independent scorer
+`valid: true`, no problems. `check_prereg`, `check_invalid` and
+`check_adequacy` pass. Gates E1/E2 reproduced O3's committed cells bitwise,
+E4b passed, and E5 (restart) passed. Report
+`reports/o4_sealed_confirmation.json`; archive
+`reports/o4_sealed_confirmation_20260927/`.
+
+**Registered result:** `k_SLEEP` = **38 of 45** (rate 0.844, Clopper-Pearson
+95% interval 0.705-0.935). The rule `CONFIRMED` needs >= 41, so the label is
+**`NOT_CONFIRMED`**. The claim "retained memory plus consolidation compute
+makes online order-free formation reliable (>= 90% of cells)" is NOT confirmed
+on sealed worlds. `PLAIN` 0/15, so the floor holds. Without consolidation
+(`SHUFFLED`): 16/45 (0.356, 0.219-0.512).
+
+| sealed world | no consolidation s0/s1/s2 | with consolidation s0/s1/s2 | `PLAIN` |
+|---|---|---|---:|
+| 900 | 0.496 / **0.032** / 0.090 | **0.019 / 0.027 / 0.029** | 1.93 |
+| 901 | 0.804 / 0.348 / **0.031** | 0.064 / **0.018 / 0.024** | 1.96 |
+| 902 | 0.492 / **0.034 / 0.022** | **0.037 / 0.028 / 0.013** | 1.97 |
+| 903 | 0.141 / 0.263 / **0.027** | **0.016 / 0.023 / 0.030** | 1.91 |
+| 904 | 0.202 / **0.017 / 0.049** | **0.038 / 0.015 / 0.033** | 1.93 |
+| 905 | **0.012** / 0.108 / **0.038** | **0.028 / 0.018 / 0.013** | 1.92 |
+| 906 | 0.218 / **0.041** / 0.060 | **0.032 / 0.030 / 0.031** | 1.93 |
+| 907 | **0.017 / 0.036** / 1.81 | **0.015 / 0.019 / 0.047** | 1.87 |
+| 908 | 0.254 / 1.89 / 0.076 | **0.019** / 0.275 / **0.031** | 1.97 |
+| 909 | 0.088 / **0.041** / 1.82 | **0.027 / 0.026** / 0.996 | 1.93 |
+| 910 | 0.204 / 0.115 / 0.243 | **0.034 / 0.049 / 0.044** | 2.00 |
+| 911 | 1.73 / **0.050** / 1.06 | 0.428 / **0.034** / 0.062 | 1.96 |
+| 912 | 0.077 / 0.088 / 0.055 | **0.033 / 0.030 / 0.018** | 1.86 |
+| 913 | 0.059 / **0.026** / 0.194 | **0.030 / 0.024 / 0.040** | 1.99 |
+| 914 | **0.036** / 0.572 / 1.67 | **0.024** / 0.226 / 0.244 | 1.93 |
+
+**Descriptive anatomy.** This is post hoc and not registered. It supports no
+claim and is recorded to direct the successor.
+- **Non-collapse failures:** consolidation rescued 21 of the 23 cells where
+  no-consolidation failed without collapsing (terminal 0.05-1.0), a
+  near-miss repair rate of 91%. It broke 0 of the 16 cells that passed without
+  it. The convergence mechanism seen in O2C-O3 replicated on sealed worlds.
+- **Collapses:** without consolidation, 6 of 45 sealed cells collapsed
+  (>= 1.0), 13%, against 1 of 21 in O3's development worlds. Consolidation
+  reduced every collapse (to 0.05-1.0) but rescued only 1 of 6. **Five of the
+  seven consolidated failures are collapse cells.** The other two are
+  near-misses at 0.064 and 0.226.
+
+**Reading.**
+- Consolidation's effect is large and consistent: 0.36 -> 0.84, and no cell
+  was ever harmed.
+- The confirmatory target, >= 90% reliability, fails because of COLLAPSE: a
+  catastrophic transition that consolidation does not repair.
+- On sealed worlds collapse was markedly more frequent than development
+  suggested. Development worlds 13-26 gave 2 collapses in 42 `SHUFFLED`
+  cells; sealed gave 6 in 45.
+- O3's 20/21 was, in hindsight, a favourable draw. Pooling O3 and O4 gives
+  58/66 = 0.88, still below the bar.
+- The development-level claims (O3 and earlier) stand as development evidence
+  and are not upgraded. Collapse, not convergence, is now the binding
+  constraint on online reliability.
+
+The plan's discrimination table had already disclosed this outcome: a protocol
+whose true per-cell rate is ~0.85 is confirmed only 8-18% of the time. The
+result sits exactly there.

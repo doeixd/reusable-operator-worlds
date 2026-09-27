@@ -7760,3 +7760,31 @@ NEXT: a sealed confirmation of the order-free + retained-memory +
 consolidation protocol. It needs a sealed band, which is a PI decision, and a
 plan frozen and hashed before the band is opened. Drafted as
 `O4_SEALED_CONFIRMATION_DRAFT.md`.
+
+
+# 2026-09-27 O4 SEALED confirmation: NOT_CONFIRMED (38/45 against 41 needed); collapse is the binding constraint
+
+O4 ran at `b3b02b8` on sealed worlds 900-914, 105 cells, from 02:59Z to
+09:29Z (~6.5 h). The launch waited ~15 min for memory while the PI's dev tools
+were active; no user process was killed and the reserve was not lowered.
+Scorer valid, all checkers pass, and gates and the restart test pass.
+
+- Consolidation: 38/45 (0.84, CI 0.71-0.94).
+- No consolidation: 16/45.
+- `PLAIN`: 0/15.
+- Registered label: `NOT_CONFIRMED`.
+
+Descriptive anatomy, from `PREDICTIONS.md` (O4 SEALED VERDICT):
+- consolidation repairs 21 of 23 non-collapse failures and harms nothing;
+- 6 of 45 sealed cells collapse without it, and it rescues 1 of 6;
+- 5 of the 7 remaining failures are collapses.
+
+NEXT: the successor targets COLLAPSE, the one failure mode consolidation does
+not fix. Two leads are already on record, both development-level:
+- O3's interleaved arm had 0 collapses in 21 cells;
+- O2G found collapse onsets early-warned and ~50% stochastic, which suggests
+  detect-and-retry.
+
+A successor needs a development plan (worlds 27-29 remain in band 3, or a new
+development band) before any further sealed test. Sealed seeds 915-929 stay
+unused.

@@ -1,0 +1,14 @@
+{
+ "E1": {
+  "passes": true
+ },
+ "E2": {
+  "passes": true
+ },
+ "E4b": {
+  "passes": true,
+  "failing": []
+ },
+ "all_pass": true,
+ "protocol_sha256": "e2837aa8de6acf5ddfea90f93ac8785e9743843b77265d80d55a29a1e17196e2"
+}
