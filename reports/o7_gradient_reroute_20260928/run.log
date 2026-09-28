@@ -1,0 +1,25 @@
+2026-09-28T02:04:29.222979+00:00 GATE G0={'passes': True, 'by_band': {'O2': True, 'O3': True, 'O4': True}}
+2026-09-28T02:07:15.872560+00:00 GATE E1={'passes': True}
+2026-09-28T02:07:15.882360+00:00 LAUNCH 77e5990ac3ffaf8be8366db9b48323d0a1f6d1aabdd93134d6c780014317f958 todo=22 reused=0 free=7.5GiB
+2026-09-28T02:11:59.812893+00:00 cell finished O2_w14_s0 changed=62 accepted=62 280.8s terminal=0.0190185
+2026-09-28T02:12:03.263102+00:00 cell finished O4_w901_s0 changed=36 accepted=35 284.2s terminal=0.0177376
+2026-09-28T02:12:06.042862+00:00 cell finished O3_w22_s1 changed=76 accepted=69 287.0s terminal=0.0248413
+2026-09-28T02:16:49.640379+00:00 cell finished O4_w907_s2 changed=55 accepted=54 289.8s terminal=0.0145592
+2026-09-28T02:16:50.127659+00:00 cell finished O4_w908_s1 changed=69 accepted=68 286.8s terminal=0.0122055
+2026-09-28T02:16:55.588745+00:00 cell finished O4_w909_s2 changed=45 accepted=45 289.5s terminal=0.0120209
+2026-09-28T02:21:04.506120+00:00 cell finished O4_w911_s2 changed=58 accepted=58 254.4s terminal=0.0146124
+2026-09-28T02:21:06.577526+00:00 cell finished O4_w911_s0 changed=46 accepted=46 256.9s terminal=0.0187231
+2026-09-28T02:21:11.379817+00:00 cell finished O4_w914_s1 changed=42 accepted=41 255.8s terminal=0.0126373
+2026-09-28T02:25:26.403752+00:00 cell finished O4_w914_s2 changed=36 accepted=36 261.9s terminal=0.0142254
+2026-09-28T02:25:30.011782+00:00 cell finished O2_w13_s1 changed=16 accepted=16 263.4s terminal=0.0107632
+2026-09-28T02:25:33.409228+00:00 cell finished O2_w15_s1 changed=30 accepted=30 262.0s terminal=0.0112996
+2026-09-28T02:29:40.022170+00:00 cell finished O2_w16_s1 changed=22 accepted=22 253.6s terminal=0.00878363
+2026-09-28T02:29:44.890317+00:00 cell finished O2_w17_s1 changed=17 accepted=17 254.9s terminal=0.0132739
+2026-09-28T02:29:48.832812+00:00 cell finished O2_w18_s1 changed=32 accepted=32 255.4s terminal=0.00912863
+2026-09-28T02:33:52.686203+00:00 cell finished O2_w19_s1 changed=40 accepted=40 252.7s terminal=0.0108627
+2026-09-28T02:34:00.996129+00:00 cell finished O3_w20_s0 changed=28 accepted=28 256.1s terminal=0.0109181
+2026-09-28T02:34:02.578404+00:00 cell finished O3_w21_s0 changed=19 accepted=19 253.7s terminal=0.00910283
+2026-09-28T02:38:05.148146+00:00 cell finished O3_w23_s0 changed=38 accepted=37 252.4s terminal=0.0119244
+2026-09-28T02:38:13.127245+00:00 cell finished O3_w24_s0 changed=58 accepted=48 252.1s terminal=0.00991689
+2026-09-28T02:38:16.329926+00:00 cell finished O3_w25_s0 changed=13 accepted=13 253.7s terminal=0.0144089
+2026-09-28T02:41:55.424598+00:00 cell finished O3_w26_s0 changed=25 accepted=25 230.3s terminal=0.0122526

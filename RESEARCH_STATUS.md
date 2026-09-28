@@ -17,9 +17,29 @@ consolidates. Sleep alone: 36/45. Collapses rescued: 6/6, against 0/6 for
 sleep alone. This is the online-formation line's first confirmatory positive.
 The sealed band 900-929 is exhausted.
 
-**Open constraint:** exhaustive re-routing works at depth 3 only. Scaling
-re-routing, or doing it during the stream, is the natural next rung. It is
-unplanned, and pending the PI's direction.
+**Scaling step, exploratory:**
+- Tier 0 censuses: local search and slot maps cannot replace exhaustive
+  re-routing, while a fresh-relaxation gradient re-route recovers 76% of stale
+  routes.
+- O7 (Tier 1): gradient re-route + sleep matches exhaustive re-route + sleep on
+  every hard saved cell (10/10 rescued, 0/12 harmed), because sleep tolerates
+  imperfect routes.
+
+**Next, needs the PI:** a depth-4+ world where exhaustive search is
+infeasible. That needs a new generator configuration and a new development
+band (band 3 has only 27-29 left), then a new sealed band.
+
+
+# O7 (Tier 1, 2026-09-28): MATCHES_EXHAUSTIVE
+
+- Plan `f3ec82e`, code `724e967`, scorer valid. Report
+  `reports/o7_gradient_reroute.json`.
+- Target set r = 10/10 (sleep alone 1/10); harm set b = 0/12. The gradient
+  terminal is a median 1.08x exhaustive.
+- Its depth-3 cost is ~55x exhaustive. The scaling advantage is argued, not
+  yet measured.
+- Tier 0 censuses: `reports/o7_coordinate_reroute_census.json` and
+  `reports/o7b_gradient_reroute_census.json`.
 
 
 # O6 CLOSED (SEALED): CONFIRMED + ATTRIBUTED (2026-09-28)

@@ -1,0 +1,136 @@
+{
+ "protocol": {
+  "id": "o7-gradient-reroute-v1",
+  "git_commit": "724e967",
+  "plan": "O7_GRADIENT_REROUTE_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "target": [
+   [
+    "O2",
+    14,
+    0
+   ],
+   [
+    "O3",
+    22,
+    1
+   ],
+   [
+    "O4",
+    901,
+    0
+   ],
+   [
+    "O4",
+    907,
+    2
+   ],
+   [
+    "O4",
+    908,
+    1
+   ],
+   [
+    "O4",
+    909,
+    2
+   ],
+   [
+    "O4",
+    911,
+    0
+   ],
+   [
+    "O4",
+    911,
+    2
+   ],
+   [
+    "O4",
+    914,
+    1
+   ],
+   [
+    "O4",
+    914,
+    2
+   ]
+  ],
+  "harm": [
+   [
+    "O2",
+    13,
+    1
+   ],
+   [
+    "O2",
+    15,
+    1
+   ],
+   [
+    "O2",
+    16,
+    1
+   ],
+   [
+    "O2",
+    17,
+    1
+   ],
+   [
+    "O2",
+    18,
+    1
+   ],
+   [
+    "O2",
+    19,
+    1
+   ],
+   [
+    "O3",
+    20,
+    0
+   ],
+   [
+    "O3",
+    21,
+    0
+   ],
+   [
+    "O3",
+    23,
+    0
+   ],
+   [
+    "O3",
+    24,
+    0
+   ],
+   [
+    "O3",
+    25,
+    0
+   ],
+   [
+    "O3",
+    26,
+    0
+   ]
+  ],
+  "opt_steps": 500,
+  "input_sha256": {
+   "O7_GRADIENT_REROUTE_PLAN.md": "4d41150d850eff357b3261433e48ab13ad004e6e543ba0b68369098e4df77beb",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/o5_reroute_sleep.json": "89a4b44af467ec08ea1c2bc166ec89a73aa20f947070b714e525f419459a23d1"
+  },
+  "implementation_sha256": "4d71e24b2ae2f86aee3fff13e62f22e1fc56900829d777e698ae6a45f218091f",
+  "o5_sha256": "a2788b483abb3f6432702d36dc704ef3be49bec3d5acaa9bf9dd948aac75ff49",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f"
+ },
+ "protocol_sha256": "77e5990ac3ffaf8be8366db9b48323d0a1f6d1aabdd93134d6c780014317f958"
+}

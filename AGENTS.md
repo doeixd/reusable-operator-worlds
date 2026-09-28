@@ -2319,3 +2319,19 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   used, and the override was disclosed with the verdict. The reserve was lowered
   in steps as free memory fell (8 -> 6.5 -> 5.5 -> 4.5), with a stated floor at
   which to stop and ask rather than keep lowering it.
+
+- A REPAIR STEP NEED NOT BE EXACT WHEN A CONSOLIDATION STEP FOLLOWS IT (O7,
+  2026-09-28). A gradient re-router that disagreed with exhaustive search on up
+  to 37 of 188 routes reached, after sleep, 1.08x the exhaustive terminal (median;
+  worst 1.77x) and rescued 10/10 hard cells. Judged on routes alone it looked
+  like a lag (0.54 against 0.38 on the hardest collapse). Score a component by
+  the endpoint of the pipeline it feeds, not by agreement with an exact
+  reference. That is also why the cheaper approximate component can be the
+  right one.
+- LOCAL SEARCH FROM A STALE ASSIGNMENT IS THE WRONG REPAIR FOR COUPLED
+  STALENESS (O7 Tier 0). Single-position coordinate descent recovered 17% of
+  stale routes, because 2-3 positions had to change together, and an
+  anchor-derived slot relabelling was worse than no change (the drift is
+  many-to-one and position-specific). A re-heated relaxation, in which every
+  position moves at once, recovered 76%. Before building a local repair,
+  measure how many coordinates a typical fix must change jointly.

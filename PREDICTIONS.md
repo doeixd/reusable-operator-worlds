@@ -10097,3 +10097,61 @@ Reading: stale routes sit in basins that single-slot moves cannot leave. A
 re-heated relaxation escapes them, because at high temperature every position
 moves at once. Routes only, no sleep; whether sleep closes the remaining gap is
 the Tier 1 question.
+
+
+# O7 OUTCOME (2026-09-28): MATCHES_EXHAUSTIVE - gradient re-route + sleep rescues 10/10 target cells and harms 0/12 (Tier 1, exploratory)
+
+Plan `O7_GRADIENT_REROUTE_PLAN.md`, frozen `f3ec82e`. Code `724e967`. 22
+cells on saved terminals, exit 0. Gates passed:
+- G0: the reloads are exact in all three bands;
+- E1: with the exhaustive chooser, the pipeline reproduced O5's committed
+  `O3_w20_s0` bitwise.
+
+Independent scorer `valid: true`. `check_prereg`, `check_invalid` and
+`check_adequacy` pass. Report `reports/o7_gradient_reroute.json`; archive
+`reports/o7_gradient_reroute_20260928/`.
+
+GRS construction:
+- depth 1: exhaustive (12 evaluations);
+- depth >= 2: SO1R's fresh-relaxation `optimize_route` (500 steps), kept only if
+  it beats the current route on support;
+- then O3's sleep verbatim.
+
+Results:
+- **Target set:** `r` = **10 of 10**, i.e. all 8 collapses and both sleep-failed
+  near-misses. Sleep alone rescued 1 of these 10.
+- **Harm set:** `b` = **0 of 12**.
+- Label **`MATCHES_EXHAUSTIVE`**.
+
+| target cell | exhaustive re-route + sleep | gradient re-route + sleep | routes differing from exhaustive |
+|---|---:|---:|---:|
+| O2 w14 s0 (collapse) | 0.014 | **0.019** | 10 |
+| O3 w22 s1 (collapse) | 0.014 | **0.025** | 37 |
+| O4 901 s0 | 0.010 | **0.018** | 9 |
+| O4 907 s2 (collapse) | 0.015 | **0.015** | 0 |
+| O4 908 s1 (collapse) | 0.008 | **0.012** | 9 |
+| O4 909 s2 (collapse) | 0.010 | **0.012** | 9 |
+| O4 911 s0 (collapse) | 0.016 | **0.019** | 7 |
+| O4 911 s2 (collapse) | 0.014 | **0.015** | 1 |
+| O4 914 s1 | 0.013 | **0.013** | 12 |
+| O4 914 s2 (collapse) | 0.014 | **0.014** | 11 |
+
+Harm set: every GRS terminal is 0.009-0.014, with exhaustive at 0.008-0.012.
+
+**Key observation: sleep tolerates imperfect routing.** The gradient chooser
+disagreed with exhaustive search on a median of 5 routes per cell and up to 37
+(O3 w22 s1, where the routes-only census had left the median at 0.54). Yet
+after sleep every cell passes, at a median of 1.08x the exhaustive terminal and
+a worst case of 1.77x. Re-routing needs to move enough routes out of their
+stale basins for consolidation to finish the job. It does not need to find the
+exact optimum.
+
+**Cost, disclosed.** At depth 3 the gradient chooser is ~55x SLOWER than
+exhaustive search: a median of 91 s against 1.7 s of route evaluation per cell.
+Its only advantage is scaling: d x 12 evaluations per step against 12^d. The
+advantage is argued from construction and from E5.1's measured length-linear
+scaling of gradient route search. It is NOT measured here, since no depth >= 4
+stream exists yet.
+
+**Status.** EXPLORATORY, Tier 1, and design evidence only. It re-uses
+development and contaminated sealed-band worlds, and depth 3 only.

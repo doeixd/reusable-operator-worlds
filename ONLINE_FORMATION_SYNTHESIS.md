@@ -169,6 +169,20 @@ repairs convergence, and re-inference repairs stale routes. Open: scaling
 re-inference beyond enumerable depth, and whether re-routing during the stream
 would prevent collapse rather than repair it.
 
+## 2.9 Scalable re-routing (O7 Tier 0 + Tier 1; exploratory) - ADDED 2026-09-28
+
+Exhaustive re-routing costs 12^d. Two cheap local re-routers failed:
+- coordinate descent from the stale route recovers 17% of stale routes;
+- an anchor-derived slot map does not help at all.
+
+Stale routes need 2-3 coupled, position-specific changes. A fresh
+gradient relaxation (cost linear in depth) recovers 76% of them, and with sleep
+afterwards it matches exhaustive re-routing on every hard saved cell (10/10
+rescued, 0/12 harmed, median 1.08x). The mechanism has two parts: re-routing
+only needs to move routes out of stale basins, and consolidation completes the
+repair. Depth 3 only, where gradient re-routing is ~55x slower than exhaustive.
+Its value appears only at depth >= 4, which needs new worlds.
+
 **Update to section 3 below:** item 7, "whether online order-free anchors plus
 sleep is reliable on unseen worlds", is now ESTABLISHED at development level. It
 is reliable (20/21). Item 8 is answered: at matched compute, post-stream and
