@@ -5288,3 +5288,5 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
 2026-09-26 O3: run check_adequacy on the working copy BEFORE committing a freeze (first O3 freeze had to be re-frozen pre-data).
 
 2026-09-27: a pre-commit check must exit non-zero on problems (two freezes slipped past a printing checker). A conditional equivalence gate must report how many cells it actually covered (O5's G1 covered 0).
+
+2026-09-28 O6 sealed CONFIRMED 45/45: online collapse was stale routes on a usable library; re-infer assignments before blaming parts. Spawn pools need a __main__ guard in wrapper scripts too. PI-authorized precondition overrides go in an archived external launcher, not the fingerprinted runner.

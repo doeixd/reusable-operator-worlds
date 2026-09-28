@@ -2279,3 +2279,43 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   applied, because route search changed routes in every cell. A conditional
   gate must be checked for whether its condition EVER held, and the report must
   count the cells it covered (here 0).
+
+- STALE BOOKKEEPING, NOT A BROKEN LIBRARY (O5 -> O6 SEALED, 2026-09-28;
+  `reports/o6_sealed_reroute.json`). Online formation's residual failure was
+  never what it looked like. Collapsed lifetimes sat at ~1.8, the no-anchor
+  floor, which reads as "the library never formed". But their libraries fit
+  tasks as they arrived. What had gone wrong was each task's RECORDED ROUTE,
+  which drifts out of date as the shared library keeps learning. At the final,
+  sharp routing temperature, gradient refitting cannot move a route to a
+  different slot (J1's lock-in). Re-inferring every route by search on
+  retained examples, then consolidating, passed 45/45 sealed cells against
+  36/45 for consolidation alone, and rescued 6/6 collapses against 0/6. Search
+  changed 8-73 of 188 routes in EVERY learner, so staleness is the normal
+  state of an online learner, not a pathology of the failed ones. Rule: when a
+  learner that composes shared parts fails, re-derive its task-to-part
+  assignments against its current parts before concluding that the parts are
+  bad. That is cheap Tier 0 on saved artifacts: freeze the library, search the
+  routes, and score.
+- A FAILURE SPLIT INTO MODES IS A SEQUENCE OF RUNGS, NOT A DEAD END (O2 -> O6).
+  Order-free online formation went 0.43 -> 0.84 (sleep) -> 1.00 (re-route +
+  sleep) because each rung took the dominant REMAINING failure mode and asked
+  what it was: near-misses (under-convergence; a sleep phase fixes it), then
+  collapses (stale routes; re-inference fixes it). Each answer came from a
+  read-only census on saved models before any new lifetime was run. Save every
+  terminal.
+- A SPAWN-BASED POOL NEEDS A `__main__` GUARD IN EVERY ENTRY SCRIPT, INCLUDING
+  WRAPPERS (O6, 2026-09-27). On Windows, `ProcessPoolExecutor` spawns workers
+  that re-import the launching script. A small launcher that set a module
+  constant and then called `main()` at top level made every worker re-run the
+  whole launcher, and the pool broke ("terminated abruptly"). The runner
+  modules had the guard; the wrapper did not. Caught on the dry run, before any
+  sealed cell.
+- A PI-AUTHORIZED PRECONDITION OVERRIDE BELONGS OUTSIDE THE RUNNER AND IN THE
+  RECORD (O6). The PI said to start with less than the 8 GiB reserve free.
+  Editing the runner would have changed its implementation hash and voided the
+  passed gates. Instead, an external launcher set the reserve constant, which
+  the protocol does not fingerprint, and called the unchanged runner. The
+  launcher was archived, `precondition.json` recorded the reserve actually
+  used, and the override was disclosed with the verdict. The reserve was lowered
+  in steps as free memory fell (8 -> 6.5 -> 5.5 -> 4.5), with a stated floor at
+  which to stop and ask rather than keep lowering it.
