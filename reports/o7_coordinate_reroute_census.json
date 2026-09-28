@@ -1,0 +1,1936 @@
+{
+ "tier": 0,
+ "descriptive": true,
+ "worlds": "development O2 13-19, O3 20-26; no sealed world",
+ "max_sweeps": 20,
+ "overall": {
+  "2": {
+   "tasks": 2688,
+   "stale": 354,
+   "cd_agrees": 2497,
+   "cd_agrees_on_stale": 163,
+   "map_agrees": 2366,
+   "map_cd_agrees": 2492,
+   "map_cd_agrees_on_stale": 159,
+   "map_cd_worse_by_10pct": 194,
+   "map_cd_evaluations_median": 23.0,
+   "ratio_median": 1.0,
+   "ratio_max": 319.6666550495453,
+   "worse_by_10pct": 190,
+   "evaluations_median": 23.0,
+   "exhaustive_evaluations": 144,
+   "sweeps_max": 4
+  },
+  "3": {
+   "tasks": 2688,
+   "stale": 1002,
+   "cd_agrees": 1854,
+   "cd_agrees_on_stale": 168,
+   "map_agrees": 1713,
+   "map_cd_agrees": 1853,
+   "map_cd_agrees_on_stale": 168,
+   "map_cd_worse_by_10pct": 833,
+   "map_cd_evaluations_median": 34.0,
+   "ratio_median": 1.0,
+   "ratio_max": 227.54016095044005,
+   "worse_by_10pct": 831,
+   "evaluations_median": 34.0,
+   "exhaustive_evaluations": 1728,
+   "sweeps_max": 5
+  }
+ },
+ "cells": {
+  "O2_w13_s0": {
+   "query_median": {
+    "current": 0.049429031799957376,
+    "exhaustive": 0.03363194202417229,
+    "cd": 0.04762855201756437,
+    "map": 0.049429031799957376,
+    "map_cd": 0.04762855201756437
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 6,
+     "cd_agrees": 58,
+     "cd_agrees_on_stale": 0,
+     "map_agrees": 58,
+     "map_cd_agrees": 58,
+     "map_cd_agrees_on_stale": 0,
+     "map_cd_worse_by_10pct": 6,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 79.22705067854805,
+     "worse_by_10pct": 6,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 2
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 25,
+     "cd_agrees": 41,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 39,
+     "map_cd_agrees": 41,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 23,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 83.21836497170607,
+     "worse_by_10pct": 23,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 5
+    }
+   }
+  },
+  "O2_w13_s1": {
+   "query_median": {
+    "current": 0.026490846422424195,
+    "exhaustive": 0.022088344036580203,
+    "cd": 0.026490846422424195,
+    "map": 0.026490846422424195,
+    "map_cd": 0.026490846422424195
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 2,
+     "cd_agrees": 62,
+     "cd_agrees_on_stale": 0,
+     "map_agrees": 62,
+     "map_cd_agrees": 62,
+     "map_cd_agrees_on_stale": 0,
+     "map_cd_worse_by_10pct": 2,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 319.6666550495453,
+     "worse_by_10pct": 2,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 2
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 17,
+     "cd_agrees": 47,
+     "cd_agrees_on_stale": 0,
+     "map_agrees": 47,
+     "map_cd_agrees": 47,
+     "map_cd_agrees_on_stale": 0,
+     "map_cd_worse_by_10pct": 17,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 202.77633530311996,
+     "worse_by_10pct": 17,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O2_w13_s2": {
+   "query_median": {
+    "current": 0.1723406746113822,
+    "exhaustive": 0.15720142826927053,
+    "cd": 0.16838216487936647,
+    "map": 0.1723406746113822,
+    "map_cd": 0.16838216487936647
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 10,
+     "cd_agrees": 60,
+     "cd_agrees_on_stale": 6,
+     "map_agrees": 54,
+     "map_cd_agrees": 60,
+     "map_cd_agrees_on_stale": 6,
+     "map_cd_worse_by_10pct": 4,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 35.02250699713073,
+     "worse_by_10pct": 4,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 14,
+     "cd_agrees": 52,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 50,
+     "map_cd_agrees": 52,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 12,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 52.88672849757784,
+     "worse_by_10pct": 12,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O2_w14_s0": {
+   "query_median": {
+    "current": 2.002572261945397,
+    "exhaustive": 0.08531468142013768,
+    "cd": 1.6333670334630077,
+    "map": 2.002572261945397,
+    "map_cd": 1.6333670334630077
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 18,
+     "cd_agrees": 48,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 46,
+     "map_cd_agrees": 48,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 16,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 62.897430335263536,
+     "worse_by_10pct": 16,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 47,
+     "cd_agrees": 21,
+     "cd_agrees_on_stale": 4,
+     "map_agrees": 17,
+     "map_cd_agrees": 21,
+     "map_cd_agrees_on_stale": 4,
+     "map_cd_worse_by_10pct": 43,
+     "map_cd_evaluations_median": 68.0,
+     "ratio_median": 17.16438231497989,
+     "ratio_max": 51.27875111700831,
+     "worse_by_10pct": 43,
+     "evaluations_median": 68.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O2_w14_s1": {
+   "query_median": {
+    "current": 0.026619193709134417,
+    "exhaustive": 0.022863536829404223,
+    "cd": 0.025351864801878617,
+    "map": 0.026619193709134417,
+    "map_cd": 0.025351864801878617
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 8,
+     "cd_agrees": 56,
+     "cd_agrees_on_stale": 0,
+     "map_agrees": 56,
+     "map_cd_agrees": 56,
+     "map_cd_agrees_on_stale": 0,
+     "map_cd_worse_by_10pct": 8,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 172.2059478230584,
+     "worse_by_10pct": 8,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 24,
+     "cd_agrees": 41,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 40,
+     "map_cd_agrees": 41,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 23,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 105.25663734477796,
+     "worse_by_10pct": 23,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O2_w14_s2": {
+   "query_median": {
+    "current": 0.3055666551047954,
+    "exhaustive": 0.19061513931731133,
+    "cd": 0.3055666551047954,
+    "map": 0.3055666551047954,
+    "map_cd": 0.3055666551047954
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 7,
+     "cd_agrees": 59,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 57,
+     "map_cd_agrees": 59,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 5,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 19.55936866870119,
+     "worse_by_10pct": 5,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 27,
+     "cd_agrees": 37,
+     "cd_agrees_on_stale": 0,
+     "map_agrees": 37,
+     "map_cd_agrees": 37,
+     "map_cd_agrees_on_stale": 0,
+     "map_cd_worse_by_10pct": 27,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 18.66049784063424,
+     "worse_by_10pct": 27,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O2_w15_s0": {
+   "query_median": {
+    "current": 0.02642755320474356,
+    "exhaustive": 0.024941924456206174,
+    "cd": 0.02588019699636763,
+    "map": 0.02642755320474356,
+    "map_cd": 0.02588019699636763
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 5,
+     "cd_agrees": 63,
+     "cd_agrees_on_stale": 4,
+     "map_agrees": 59,
+     "map_cd_agrees": 63,
+     "map_cd_agrees_on_stale": 4,
+     "map_cd_worse_by_10pct": 1,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 133.60361090081668,
+     "worse_by_10pct": 1,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 19,
+     "cd_agrees": 49,
+     "cd_agrees_on_stale": 4,
+     "map_agrees": 45,
+     "map_cd_agrees": 49,
+     "map_cd_agrees_on_stale": 4,
+     "map_cd_worse_by_10pct": 15,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 79.37168081381634,
+     "worse_by_10pct": 15,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O2_w15_s1": {
+   "query_median": {
+    "current": 0.07573989211353956,
+    "exhaustive": 0.03471600904405581,
+    "cd": 0.0746019223363894,
+    "map": 0.07573989211353956,
+    "map_cd": 0.0746019223363894
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 10,
+     "cd_agrees": 55,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 54,
+     "map_cd_agrees": 55,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 9,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 124.77699705717725,
+     "worse_by_10pct": 9,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 23,
+     "cd_agrees": 45,
+     "cd_agrees_on_stale": 4,
+     "map_agrees": 41,
+     "map_cd_agrees": 45,
+     "map_cd_agrees_on_stale": 4,
+     "map_cd_worse_by_10pct": 19,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 87.74648053484982,
+     "worse_by_10pct": 19,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O2_w15_s2": {
+   "query_median": {
+    "current": 0.11783362047597172,
+    "exhaustive": 0.044313004376371826,
+    "cd": 0.10969369216547126,
+    "map": 0.11783362047597172,
+    "map_cd": 0.10969369216547126
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 6,
+     "cd_agrees": 59,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 58,
+     "map_cd_agrees": 59,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 5,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 122.1358947321153,
+     "worse_by_10pct": 5,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 24,
+     "cd_agrees": 46,
+     "cd_agrees_on_stale": 6,
+     "map_agrees": 40,
+     "map_cd_agrees": 46,
+     "map_cd_agrees_on_stale": 6,
+     "map_cd_worse_by_10pct": 18,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 81.91095305695626,
+     "worse_by_10pct": 18,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 5
+    }
+   }
+  },
+  "O2_w16_s0": {
+   "query_median": {
+    "current": 0.06067356122609316,
+    "exhaustive": 0.03246356423738998,
+    "cd": 0.058908363420208165,
+    "map": 0.06067356122609316,
+    "map_cd": 0.058908363420208165
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 9,
+     "cd_agrees": 55,
+     "cd_agrees_on_stale": 0,
+     "map_agrees": 55,
+     "map_cd_agrees": 55,
+     "map_cd_agrees_on_stale": 0,
+     "map_cd_worse_by_10pct": 9,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 105.57923708215218,
+     "worse_by_10pct": 9,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 26,
+     "cd_agrees": 40,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 38,
+     "map_cd_agrees": 40,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 24,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 69.73665260552117,
+     "worse_by_10pct": 24,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O2_w16_s1": {
+   "query_median": {
+    "current": 0.03960300764356335,
+    "exhaustive": 0.02775043709629264,
+    "cd": 0.039090014494882384,
+    "map": 0.03960300764356335,
+    "map_cd": 0.039090014494882384
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 3,
+     "cd_agrees": 62,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 61,
+     "map_cd_agrees": 62,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 2,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 63.528470097527354,
+     "worse_by_10pct": 2,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 23,
+     "cd_agrees": 43,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 41,
+     "map_cd_agrees": 43,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 21,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 128.83990837464003,
+     "worse_by_10pct": 21,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O2_w16_s2": {
+   "query_median": {
+    "current": 0.0454340110923139,
+    "exhaustive": 0.03892610202907581,
+    "cd": 0.0454340110923139,
+    "map": 0.0454340110923139,
+    "map_cd": 0.0454340110923139
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 10,
+     "cd_agrees": 55,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 54,
+     "map_cd_agrees": 55,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 9,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 170.40130670657206,
+     "worse_by_10pct": 9,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 18,
+     "cd_agrees": 46,
+     "cd_agrees_on_stale": 0,
+     "map_agrees": 46,
+     "map_cd_agrees": 46,
+     "map_cd_agrees_on_stale": 0,
+     "map_cd_worse_by_10pct": 18,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 87.87493739664562,
+     "worse_by_10pct": 18,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O2_w17_s0": {
+   "query_median": {
+    "current": 0.22714813534914272,
+    "exhaustive": 0.0979088921934374,
+    "cd": 0.15534477905342198,
+    "map": 0.22714813534914272,
+    "map_cd": 0.15534477905342198
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 6,
+     "cd_agrees": 63,
+     "cd_agrees_on_stale": 5,
+     "map_agrees": 58,
+     "map_cd_agrees": 63,
+     "map_cd_agrees_on_stale": 5,
+     "map_cd_worse_by_10pct": 1,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 26.593001672751278,
+     "worse_by_10pct": 1,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 4
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 32,
+     "cd_agrees": 42,
+     "cd_agrees_on_stale": 10,
+     "map_agrees": 32,
+     "map_cd_agrees": 42,
+     "map_cd_agrees_on_stale": 10,
+     "map_cd_worse_by_10pct": 22,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 48.72096879293872,
+     "worse_by_10pct": 22,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O2_w17_s1": {
+   "query_median": {
+    "current": 0.022113028853729996,
+    "exhaustive": 0.02152913365639557,
+    "cd": 0.022113028853729996,
+    "map": 0.022113028853729996,
+    "map_cd": 0.022113028853729996
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 7,
+     "cd_agrees": 60,
+     "cd_agrees_on_stale": 3,
+     "map_agrees": 57,
+     "map_cd_agrees": 60,
+     "map_cd_agrees_on_stale": 3,
+     "map_cd_worse_by_10pct": 4,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 142.6343163422302,
+     "worse_by_10pct": 4,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 11,
+     "cd_agrees": 57,
+     "cd_agrees_on_stale": 4,
+     "map_agrees": 53,
+     "map_cd_agrees": 57,
+     "map_cd_agrees_on_stale": 4,
+     "map_cd_worse_by_10pct": 7,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 113.39820848229782,
+     "worse_by_10pct": 7,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O2_w17_s2": {
+   "query_median": {
+    "current": 0.04212343280065459,
+    "exhaustive": 0.03481956719411533,
+    "cd": 0.03948438290534205,
+    "map": 0.04212343280065459,
+    "map_cd": 0.03948438290534205
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 4,
+     "cd_agrees": 64,
+     "cd_agrees_on_stale": 4,
+     "map_agrees": 60,
+     "map_cd_agrees": 62,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 2,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 1.0,
+     "worse_by_10pct": 0,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 2
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 24,
+     "cd_agrees": 49,
+     "cd_agrees_on_stale": 9,
+     "map_agrees": 40,
+     "map_cd_agrees": 47,
+     "map_cd_agrees_on_stale": 7,
+     "map_cd_worse_by_10pct": 17,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 86.53773238822144,
+     "worse_by_10pct": 15,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O2_w18_s0": {
+   "query_median": {
+    "current": 0.15078116766904728,
+    "exhaustive": 0.03993419822083541,
+    "cd": 0.10383113151473089,
+    "map": 0.15078116766904728,
+    "map_cd": 0.10383113151473089
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 8,
+     "cd_agrees": 61,
+     "cd_agrees_on_stale": 5,
+     "map_agrees": 56,
+     "map_cd_agrees": 61,
+     "map_cd_agrees_on_stale": 5,
+     "map_cd_worse_by_10pct": 3,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 101.93091313932761,
+     "worse_by_10pct": 3,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 28,
+     "cd_agrees": 41,
+     "cd_agrees_on_stale": 5,
+     "map_agrees": 36,
+     "map_cd_agrees": 41,
+     "map_cd_agrees_on_stale": 5,
+     "map_cd_worse_by_10pct": 23,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 95.78438124798615,
+     "worse_by_10pct": 23,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O2_w18_s1": {
+   "query_median": {
+    "current": 0.06911961724140045,
+    "exhaustive": 0.05193165379844039,
+    "cd": 0.06635219669668457,
+    "map": 0.06911961724140045,
+    "map_cd": 0.06635219669668457
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 6,
+     "cd_agrees": 61,
+     "cd_agrees_on_stale": 3,
+     "map_agrees": 58,
+     "map_cd_agrees": 61,
+     "map_cd_agrees_on_stale": 3,
+     "map_cd_worse_by_10pct": 3,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 70.93559964143657,
+     "worse_by_10pct": 3,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 2
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 30,
+     "cd_agrees": 35,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 34,
+     "map_cd_agrees": 35,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 29,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 113.32290748481144,
+     "worse_by_10pct": 29,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O2_w18_s2": {
+   "query_median": {
+    "current": 0.14926754131097586,
+    "exhaustive": 0.13173435903794473,
+    "cd": 0.14551575819137536,
+    "map": 0.14926754131097586,
+    "map_cd": 0.14551575819137536
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 9,
+     "cd_agrees": 57,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 55,
+     "map_cd_agrees": 57,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 7,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 36.536194901972024,
+     "worse_by_10pct": 7,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 16,
+     "cd_agrees": 49,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 48,
+     "map_cd_agrees": 49,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 15,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 34.13236837844066,
+     "worse_by_10pct": 15,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O2_w19_s0": {
+   "query_median": {
+    "current": 0.18454759958663242,
+    "exhaustive": 0.11794601255995893,
+    "cd": 0.1662182001719222,
+    "map": 0.17646496744033646,
+    "map_cd": 0.1662182001719222
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 9,
+     "cd_agrees": 64,
+     "cd_agrees_on_stale": 9,
+     "map_agrees": 59,
+     "map_cd_agrees": 64,
+     "map_cd_agrees_on_stale": 9,
+     "map_cd_worse_by_10pct": 0,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 1.0,
+     "worse_by_10pct": 0,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 2
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 30,
+     "cd_agrees": 45,
+     "cd_agrees_on_stale": 11,
+     "map_agrees": 39,
+     "map_cd_agrees": 46,
+     "map_cd_agrees_on_stale": 12,
+     "map_cd_worse_by_10pct": 18,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 65.57280823022472,
+     "worse_by_10pct": 19,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O2_w19_s1": {
+   "query_median": {
+    "current": 0.4489998659980553,
+    "exhaustive": 0.1514180794433082,
+    "cd": 0.44042545288978885,
+    "map": 0.4489998659980553,
+    "map_cd": 0.44042545288978885
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 16,
+     "cd_agrees": 52,
+     "cd_agrees_on_stale": 4,
+     "map_agrees": 48,
+     "map_cd_agrees": 52,
+     "map_cd_agrees_on_stale": 4,
+     "map_cd_worse_by_10pct": 12,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 37.318709036819925,
+     "worse_by_10pct": 12,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 25,
+     "cd_agrees": 45,
+     "cd_agrees_on_stale": 6,
+     "map_agrees": 39,
+     "map_cd_agrees": 45,
+     "map_cd_agrees_on_stale": 6,
+     "map_cd_worse_by_10pct": 19,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 37.17683064937698,
+     "worse_by_10pct": 19,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O2_w19_s2": {
+   "query_median": {
+    "current": 0.03629062944939746,
+    "exhaustive": 0.03391181583212562,
+    "cd": 0.03583002714356563,
+    "map": 0.03629062944939746,
+    "map_cd": 0.03583002714356563
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 6,
+     "cd_agrees": 61,
+     "cd_agrees_on_stale": 3,
+     "map_agrees": 58,
+     "map_cd_agrees": 61,
+     "map_cd_agrees_on_stale": 3,
+     "map_cd_worse_by_10pct": 3,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 75.65365782723126,
+     "worse_by_10pct": 3,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 13,
+     "cd_agrees": 52,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 51,
+     "map_cd_agrees": 52,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 12,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 87.34265518226543,
+     "worse_by_10pct": 12,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O3_w20_s0": {
+   "query_median": {
+    "current": 0.10257450986632227,
+    "exhaustive": 0.03220644895436772,
+    "cd": 0.10257450986632227,
+    "map": 0.10257450986632227,
+    "map_cd": 0.10257450986632227
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 15,
+     "cd_agrees": 58,
+     "cd_agrees_on_stale": 9,
+     "map_agrees": 49,
+     "map_cd_agrees": 58,
+     "map_cd_agrees_on_stale": 9,
+     "map_cd_worse_by_10pct": 6,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 105.90144653156766,
+     "worse_by_10pct": 6,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 15,
+     "cd_agrees": 51,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 49,
+     "map_cd_agrees": 51,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 13,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 91.45334155694215,
+     "worse_by_10pct": 13,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 5
+    }
+   }
+  },
+  "O3_w20_s1": {
+   "query_median": {
+    "current": 0.03867526702674633,
+    "exhaustive": 0.03621858992615312,
+    "cd": 0.03842809986750964,
+    "map": 0.03867526702674633,
+    "map_cd": 0.03842809986750964
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 3,
+     "cd_agrees": 62,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 61,
+     "map_cd_agrees": 62,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 2,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 105.99541580321532,
+     "worse_by_10pct": 2,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 15,
+     "cd_agrees": 50,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 49,
+     "map_cd_agrees": 50,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 14,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 60.30271711812437,
+     "worse_by_10pct": 14,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O3_w20_s2": {
+   "query_median": {
+    "current": 0.24784196910714412,
+    "exhaustive": 0.05646008892398066,
+    "cd": 0.23543681887878967,
+    "map": 0.2422481536736289,
+    "map_cd": 0.23718713751306364
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 17,
+     "cd_agrees": 58,
+     "cd_agrees_on_stale": 11,
+     "map_agrees": 50,
+     "map_cd_agrees": 56,
+     "map_cd_agrees_on_stale": 9,
+     "map_cd_worse_by_10pct": 8,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 82.41843770371132,
+     "worse_by_10pct": 6,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 33,
+     "cd_agrees": 46,
+     "cd_agrees_on_stale": 15,
+     "map_agrees": 36,
+     "map_cd_agrees": 45,
+     "map_cd_agrees_on_stale": 15,
+     "map_cd_worse_by_10pct": 18,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 77.22288294076355,
+     "worse_by_10pct": 17,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O3_w21_s0": {
+   "query_median": {
+    "current": 0.043729308386656646,
+    "exhaustive": 0.015303929843452864,
+    "cd": 0.042240551406189084,
+    "map": 0.043729308386656646,
+    "map_cd": 0.042240551406189084
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 7,
+     "cd_agrees": 64,
+     "cd_agrees_on_stale": 7,
+     "map_agrees": 57,
+     "map_cd_agrees": 64,
+     "map_cd_agrees_on_stale": 7,
+     "map_cd_worse_by_10pct": 0,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 1.0,
+     "worse_by_10pct": 0,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 12,
+     "cd_agrees": 56,
+     "cd_agrees_on_stale": 4,
+     "map_agrees": 52,
+     "map_cd_agrees": 56,
+     "map_cd_agrees_on_stale": 4,
+     "map_cd_worse_by_10pct": 8,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 227.54016095044005,
+     "worse_by_10pct": 8,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O3_w21_s1": {
+   "query_median": {
+    "current": 0.37822711158505723,
+    "exhaustive": 0.03793264848483941,
+    "cd": 0.11280339529364963,
+    "map": 0.37822711158505723,
+    "map_cd": 0.11280339529364963
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 17,
+     "cd_agrees": 56,
+     "cd_agrees_on_stale": 9,
+     "map_agrees": 47,
+     "map_cd_agrees": 56,
+     "map_cd_agrees_on_stale": 9,
+     "map_cd_worse_by_10pct": 8,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 159.71367314390866,
+     "worse_by_10pct": 8,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 33,
+     "cd_agrees": 34,
+     "cd_agrees_on_stale": 3,
+     "map_agrees": 31,
+     "map_cd_agrees": 34,
+     "map_cd_agrees_on_stale": 3,
+     "map_cd_worse_by_10pct": 30,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 82.22553457842008,
+     "worse_by_10pct": 30,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O3_w21_s2": {
+   "query_median": {
+    "current": 0.07416956480583015,
+    "exhaustive": 0.038411698104977535,
+    "cd": 0.07085234200670108,
+    "map": 0.07416956480583015,
+    "map_cd": 0.07085234200670108
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 8,
+     "cd_agrees": 61,
+     "cd_agrees_on_stale": 5,
+     "map_agrees": 56,
+     "map_cd_agrees": 61,
+     "map_cd_agrees_on_stale": 5,
+     "map_cd_worse_by_10pct": 3,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 67.94712211525459,
+     "worse_by_10pct": 3,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 18,
+     "cd_agrees": 52,
+     "cd_agrees_on_stale": 6,
+     "map_agrees": 46,
+     "map_cd_agrees": 52,
+     "map_cd_agrees_on_stale": 6,
+     "map_cd_worse_by_10pct": 12,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 83.49788988413573,
+     "worse_by_10pct": 12,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O3_w22_s0": {
+   "query_median": {
+    "current": 0.024436565270781294,
+    "exhaustive": 0.022176194148357968,
+    "cd": 0.024436565270781294,
+    "map": 0.024436565270781294,
+    "map_cd": 0.024436565270781294
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 1,
+     "cd_agrees": 63,
+     "cd_agrees_on_stale": 0,
+     "map_agrees": 63,
+     "map_cd_agrees": 63,
+     "map_cd_agrees_on_stale": 0,
+     "map_cd_worse_by_10pct": 1,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 95.4587273679089,
+     "worse_by_10pct": 1,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 1
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 17,
+     "cd_agrees": 47,
+     "cd_agrees_on_stale": 0,
+     "map_agrees": 47,
+     "map_cd_agrees": 47,
+     "map_cd_agrees_on_stale": 0,
+     "map_cd_worse_by_10pct": 17,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 103.8857288538126,
+     "worse_by_10pct": 17,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 2
+    }
+   }
+  },
+  "O3_w22_s1": {
+   "query_median": {
+    "current": 2.0401983705993993,
+    "exhaustive": 0.3833201393208537,
+    "cd": 1.7957097507709574,
+    "map": 2.1535638794747687,
+    "map_cd": 1.7957097507709574
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 31,
+     "cd_agrees": 53,
+     "cd_agrees_on_stale": 20,
+     "map_agrees": 44,
+     "map_cd_agrees": 52,
+     "map_cd_agrees_on_stale": 20,
+     "map_cd_worse_by_10pct": 10,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 48.63989267356362,
+     "worse_by_10pct": 10,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 55,
+     "cd_agrees": 23,
+     "cd_agrees_on_stale": 14,
+     "map_agrees": 15,
+     "map_cd_agrees": 24,
+     "map_cd_agrees_on_stale": 15,
+     "map_cd_worse_by_10pct": 39,
+     "map_cd_evaluations_median": 67.0,
+     "ratio_median": 3.1709476490830855,
+     "ratio_max": 31.683674166050064,
+     "worse_by_10pct": 39,
+     "evaluations_median": 68.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O3_w22_s2": {
+   "query_median": {
+    "current": 0.06860834468072385,
+    "exhaustive": 0.05735657228953278,
+    "cd": 0.06860834468072385,
+    "map": 0.06860834468072385,
+    "map_cd": 0.06860834468072385
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 6,
+     "cd_agrees": 62,
+     "cd_agrees_on_stale": 4,
+     "map_agrees": 58,
+     "map_cd_agrees": 62,
+     "map_cd_agrees_on_stale": 4,
+     "map_cd_worse_by_10pct": 2,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 35.146060697198266,
+     "worse_by_10pct": 2,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 27,
+     "cd_agrees": 38,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 37,
+     "map_cd_agrees": 38,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 26,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 67.3728119935932,
+     "worse_by_10pct": 26,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O3_w23_s0": {
+   "query_median": {
+    "current": 0.09647173738984349,
+    "exhaustive": 0.07180945358041121,
+    "cd": 0.08550114496014642,
+    "map": 0.09647173738984349,
+    "map_cd": 0.08550114496014642
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 10,
+     "cd_agrees": 57,
+     "cd_agrees_on_stale": 3,
+     "map_agrees": 54,
+     "map_cd_agrees": 57,
+     "map_cd_agrees_on_stale": 3,
+     "map_cd_worse_by_10pct": 7,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 73.23507920155951,
+     "worse_by_10pct": 7,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 28,
+     "cd_agrees": 44,
+     "cd_agrees_on_stale": 8,
+     "map_agrees": 36,
+     "map_cd_agrees": 44,
+     "map_cd_agrees_on_stale": 8,
+     "map_cd_worse_by_10pct": 20,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 41.73481408223491,
+     "worse_by_10pct": 20,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O3_w23_s1": {
+   "query_median": {
+    "current": 0.08778726942364809,
+    "exhaustive": 0.05482517221885355,
+    "cd": 0.08144289752380326,
+    "map": 0.08778726942364809,
+    "map_cd": 0.08144289752380326
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 8,
+     "cd_agrees": 59,
+     "cd_agrees_on_stale": 3,
+     "map_agrees": 56,
+     "map_cd_agrees": 59,
+     "map_cd_agrees_on_stale": 3,
+     "map_cd_worse_by_10pct": 5,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 72.71720720851788,
+     "worse_by_10pct": 5,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 2
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 28,
+     "cd_agrees": 38,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 36,
+     "map_cd_agrees": 38,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 26,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 69.5904312982116,
+     "worse_by_10pct": 26,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O3_w23_s2": {
+   "query_median": {
+    "current": 0.04143662737318646,
+    "exhaustive": 0.0330924691730136,
+    "cd": 0.03904969276081035,
+    "map": 0.04143662737318646,
+    "map_cd": 0.03904969276081035
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 3,
+     "cd_agrees": 62,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 61,
+     "map_cd_agrees": 62,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 2,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 94.96616482208803,
+     "worse_by_10pct": 2,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 26,
+     "cd_agrees": 43,
+     "cd_agrees_on_stale": 5,
+     "map_agrees": 38,
+     "map_cd_agrees": 43,
+     "map_cd_agrees_on_stale": 5,
+     "map_cd_worse_by_10pct": 21,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 80.71965666588585,
+     "worse_by_10pct": 21,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 5
+    }
+   }
+  },
+  "O3_w24_s0": {
+   "query_median": {
+    "current": 0.39950252456818275,
+    "exhaustive": 0.20223041032088537,
+    "cd": 0.32569494375145314,
+    "map": 0.32569494375145314,
+    "map_cd": 0.32569494375145314
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 19,
+     "cd_agrees": 60,
+     "cd_agrees_on_stale": 15,
+     "map_agrees": 59,
+     "map_cd_agrees": 60,
+     "map_cd_agrees_on_stale": 15,
+     "map_cd_worse_by_10pct": 4,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 31.027793257824868,
+     "worse_by_10pct": 4,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 31,
+     "cd_agrees": 46,
+     "cd_agrees_on_stale": 13,
+     "map_agrees": 44,
+     "map_cd_agrees": 46,
+     "map_cd_agrees_on_stale": 13,
+     "map_cd_worse_by_10pct": 18,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 24.177719780499856,
+     "worse_by_10pct": 18,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O3_w24_s1": {
+   "query_median": {
+    "current": 0.026339869330154232,
+    "exhaustive": 0.024663584182747278,
+    "cd": 0.025772298751716202,
+    "map": 0.026339869330154232,
+    "map_cd": 0.025772298751716202
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 2,
+     "cd_agrees": 63,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 62,
+     "map_cd_agrees": 63,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 1,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 135.84200436008692,
+     "worse_by_10pct": 1,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 2
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 18,
+     "cd_agrees": 47,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 46,
+     "map_cd_agrees": 47,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 17,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 92.30229614186557,
+     "worse_by_10pct": 17,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O3_w24_s2": {
+   "query_median": {
+    "current": 0.028973030251052377,
+    "exhaustive": 0.01994833251052755,
+    "cd": 0.02776211039092464,
+    "map": 0.028973030251052377,
+    "map_cd": 0.02776211039092464
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 6,
+     "cd_agrees": 61,
+     "cd_agrees_on_stale": 3,
+     "map_agrees": 58,
+     "map_cd_agrees": 61,
+     "map_cd_agrees_on_stale": 3,
+     "map_cd_worse_by_10pct": 3,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 291.4009281765453,
+     "worse_by_10pct": 3,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 21,
+     "cd_agrees": 45,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 43,
+     "map_cd_agrees": 45,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 19,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 202.2339842296135,
+     "worse_by_10pct": 19,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O3_w25_s0": {
+   "query_median": {
+    "current": 0.026369775354788166,
+    "exhaustive": 0.022711004117036457,
+    "cd": 0.025641711621194586,
+    "map": 0.026369775354788166,
+    "map_cd": 0.025641711621194586
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 1,
+     "cd_agrees": 64,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 63,
+     "map_cd_agrees": 64,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 0,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 1.0,
+     "worse_by_10pct": 0,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 2
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 16,
+     "cd_agrees": 50,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 48,
+     "map_cd_agrees": 50,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 14,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 116.00607675590031,
+     "worse_by_10pct": 14,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O3_w25_s1": {
+   "query_median": {
+    "current": 0.13116284501336684,
+    "exhaustive": 0.03423304949769254,
+    "cd": 0.11994708924097411,
+    "map": 0.13116284501336684,
+    "map_cd": 0.11994708924097411
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 2,
+     "cd_agrees": 64,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 62,
+     "map_cd_agrees": 64,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 0,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 1.0,
+     "worse_by_10pct": 0,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 2
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 19,
+     "cd_agrees": 48,
+     "cd_agrees_on_stale": 3,
+     "map_agrees": 45,
+     "map_cd_agrees": 48,
+     "map_cd_agrees_on_stale": 3,
+     "map_cd_worse_by_10pct": 16,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 77.29559393400955,
+     "worse_by_10pct": 16,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O3_w25_s2": {
+   "query_median": {
+    "current": 0.07339653911335836,
+    "exhaustive": 0.05045832673460525,
+    "cd": 0.07039493158593951,
+    "map": 0.07339653911335836,
+    "map_cd": 0.07039493158593951
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 7,
+     "cd_agrees": 58,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 57,
+     "map_cd_agrees": 58,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 6,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 81.69952484062512,
+     "worse_by_10pct": 6,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 25,
+     "cd_agrees": 41,
+     "cd_agrees_on_stale": 2,
+     "map_agrees": 39,
+     "map_cd_agrees": 41,
+     "map_cd_agrees_on_stale": 2,
+     "map_cd_worse_by_10pct": 23,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 84.81644165425904,
+     "worse_by_10pct": 23,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O3_w26_s0": {
+   "query_median": {
+    "current": 0.0995514479801291,
+    "exhaustive": 0.08236316588933443,
+    "cd": 0.09620341910783269,
+    "map": 0.0995514479801291,
+    "map_cd": 0.09620341910783269
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 6,
+     "cd_agrees": 62,
+     "cd_agrees_on_stale": 4,
+     "map_agrees": 58,
+     "map_cd_agrees": 62,
+     "map_cd_agrees_on_stale": 4,
+     "map_cd_worse_by_10pct": 2,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 34.70776391903917,
+     "worse_by_10pct": 2,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 23,
+     "cd_agrees": 46,
+     "cd_agrees_on_stale": 5,
+     "map_agrees": 41,
+     "map_cd_agrees": 46,
+     "map_cd_agrees_on_stale": 5,
+     "map_cd_worse_by_10pct": 18,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 37.39647982581555,
+     "worse_by_10pct": 18,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 3
+    }
+   }
+  },
+  "O3_w26_s1": {
+   "query_median": {
+    "current": 0.17761178832565389,
+    "exhaustive": 0.040037578203978505,
+    "cd": 0.16719472822624049,
+    "map": 0.17761178832565389,
+    "map_cd": 0.16719472822624049
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 12,
+     "cd_agrees": 58,
+     "cd_agrees_on_stale": 6,
+     "map_agrees": 52,
+     "map_cd_agrees": 58,
+     "map_cd_agrees_on_stale": 6,
+     "map_cd_worse_by_10pct": 6,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 101.694480349592,
+     "worse_by_10pct": 6,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 2
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 23,
+     "cd_agrees": 45,
+     "cd_agrees_on_stale": 4,
+     "map_agrees": 41,
+     "map_cd_agrees": 45,
+     "map_cd_agrees_on_stale": 4,
+     "map_cd_worse_by_10pct": 19,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 122.79533289128415,
+     "worse_by_10pct": 19,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  },
+  "O3_w26_s2": {
+   "query_median": {
+    "current": 0.03010042429452562,
+    "exhaustive": 0.022834876028869605,
+    "cd": 0.03010042429452562,
+    "map": 0.03010042429452562,
+    "map_cd": 0.03010042429452562
+   },
+   "depth_summary": {
+    "2": {
+     "tasks": 64,
+     "stale": 8,
+     "cd_agrees": 57,
+     "cd_agrees_on_stale": 1,
+     "map_agrees": 56,
+     "map_cd_agrees": 57,
+     "map_cd_agrees_on_stale": 1,
+     "map_cd_worse_by_10pct": 7,
+     "map_cd_evaluations_median": 23.0,
+     "ratio_median": 1.0,
+     "ratio_max": 193.16642073984437,
+     "worse_by_10pct": 7,
+     "evaluations_median": 23.0,
+     "exhaustive_evaluations": 144,
+     "sweeps_max": 3
+    },
+    "3": {
+     "tasks": 64,
+     "stale": 23,
+     "cd_agrees": 41,
+     "cd_agrees_on_stale": 0,
+     "map_agrees": 41,
+     "map_cd_agrees": 41,
+     "map_cd_agrees_on_stale": 0,
+     "map_cd_worse_by_10pct": 23,
+     "map_cd_evaluations_median": 34.0,
+     "ratio_median": 1.0,
+     "ratio_max": 150.59701101308153,
+     "worse_by_10pct": 23,
+     "evaluations_median": 34.0,
+     "exhaustive_evaluations": 1728,
+     "sweeps_max": 4
+    }
+   }
+  }
+ },
+ "seconds": 289.8342978954315,
+ "finished_utc": "2026-09-28T01:43:35.510367+00:00"
+}

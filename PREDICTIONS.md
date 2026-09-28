@@ -10056,3 +10056,44 @@ constraint, not a result here.
   re-ran `main()`. It was fixed before any real cell ran, and the dry run and
   its restart test then passed. That test relaunched, reused the completed cell,
   and ran all 5 arms, including REROUTE_SLEEP.
+
+
+# O7 TIER 0 CENSUS (2026-09-28, descriptive): scalable re-routing - local search fails, a re-heated relaxation mostly works
+
+Read-only censuses (Tier 0, descriptive) on the saved DEVELOPMENT order-free
+terminals (O2 worlds 13-19, O3 20-26; no sealed world). The library is frozen,
+and each task uses only its 64 retained examples. Exhaustive search is the
+reference. The question: can a re-router whose cost is linear in program length
+replace exhaustive re-routing, which costs 12^d and is infeasible past depth ~4?
+
+1. **Coordinate descent (CD) from the current, stale route: FAILS.** Run on 42
+   cells, depth 2 and 3 tasks; `reports/o7_coordinate_reroute_census.json`.
+   CD recovers only 168 of 1,002 stale depth-3 routes (17%) and 163 of 354
+   depth-2 ones. Canonical query median across cells is 0.071, against 0.074
+   for no re-route and 0.038 exhaustive. Both collapses stay at ~1.6-1.8.
+   Reason: of the stale routes, 2-3 positions must change TOGETHER (O2 w14 s0:
+   64 of 65 stale routes need >= 2 changes). A one-slot move out of the stale
+   route never improves support loss.
+2. **Anchor slot map, then CD: FAILS.** The map comes from re-routing the
+   depth-1 anchors exhaustively (12 evaluations each), taking the majority
+   current-slot -> new-slot, and applying it position-wise. It agrees with
+   exhaustive LESS often than the stale route itself (depth 3: 1,713 against
+   1,854). Staleness is not a relabeling of slots. The majority maps are
+   many-to-one (redundant slots, 12 slots for 6 operations) and
+   position-specific.
+3. **Fresh-relaxation gradient re-route: WORKS in most cells.** This is SO1R's
+   `optimize_route` verbatim: the code is reset to uniform, Adam 0.05,
+   T 1.0 -> 0.1, 500 steps; cost per step is d x 12 evaluations, linear in
+   depth. On 14 cells (both collapses, plus one stream per other world), 896
+   canonical tasks; `reports/o7b_gradient_reroute_census.json`.
+   - It recovers **271 of 356 stale routes (76%)**.
+   - "Safe" variant, which keeps the gradient route only if it beats the current
+     one on support: within ~10% of exhaustive query quality in 12 of 14 cells.
+   - Collapse O2 w14 s0: 2.00 -> 0.092 (exhaustive 0.085).
+   - Collapse O3 w22 s1: 2.04 -> 0.54 (exhaustive 0.38). This is the weak spot:
+     28 of 55 stale routes recovered.
+
+Reading: stale routes sit in basins that single-slot moves cannot leave. A
+re-heated relaxation escapes them, because at high temperature every position
+moves at once. Routes only, no sleep; whether sleep closes the remaining gap is
+the Tier 1 question.
