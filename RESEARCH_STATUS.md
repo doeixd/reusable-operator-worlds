@@ -6,7 +6,8 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-28, after O6. Nothing is running. **Read
+Last rewritten: 2026-09-28, after O7. Nothing is running. **Open PI decision: 14
+(see "Decisions pending from the PI").** **Read
 `ONLINE_FORMATION_SYNTHESIS.md` first.**
 
 **O6 (SEALED, worlds 915-929) is CONFIRMED (45 of 45) and ATTRIBUTED (44 of
@@ -814,13 +815,41 @@ sealed band, and all are implementation audits rather than experiments.
     (12/21) `UNRELIABLE`, so L1-L8 are CLOSED.
 11. **ANSWERED 2026-09-25 (PI): freeze O2 with `MIXED_L1`.** Frozen `b3c1c85`,
     protected `e777851`, runner/scorer `053da52`.
-12. **LIVE (2026-09-26): a fresh world band for a confirmatory online rung.**
-    Development band 2 (worlds 10-19) is spent: O1 used 10-12, O2 13-19. O2C
-    indicates that online anchor supply plus a replay-only sleep phase may form
-    the substrate reliably. Confirming that needs worlds no rung has touched.
-    Claude's recommendation: allocate development band 3 (seeds 20-29) after
-    O2D sizes the sleep phase, and never a sealed band before a Tier 2
-    development pass.
+12. **ANSWERED 2026-09-26 (PI): development band 3 = seeds 20-29.** O3 used 20-26;
+    27 is the held-back dry-run world; 28-29 are unused. Recorded in `AGENTS.md`.
+13. **ANSWERED 2026-09-27 (PI delegated to Claude): sealed band 900-929.** O4 used
+    900-914 (`NOT_CONFIRMED`, 38/45); O6 used 915-929 (`CONFIRMED` 45/45,
+    `ATTRIBUTED` 44/45). The band is now EXHAUSTED. Worlds 900-914 are also
+    contaminated as design evidence for the re-route protocol (O5, O7).
+14. **LIVE (2026-09-28): open the depth-4+ scaling rung?** O6 confirmed
+    wake + exhaustive re-route + sleep at depth 3. O7 (exploratory) showed a
+    gradient re-router, whose cost is linear in depth, plus sleep matches it
+    (10/10, b = 0). At depth 3, though, the gradient re-router is ~55x slower
+    than exhaustive search. Its value exists only where exhaustive search is
+    infeasible, and no such world exists yet. Three questions for the PI:
+    - (a) **World design.** May a depth-4+ generator configuration be built?
+      The canonical config caps tasks at 6^3 = 216 depth-3 programs
+      (`AGENTS.md` learning), so this needs `program_depth` >= 4 and a new
+      stream plan (anchors plus length-2/3/4 tasks). It breaks comparability
+      with every existing artifact, so it is a new testbed.
+    - (b) **Development band.** Which seeds? Band 3 has only 28-29 unused.
+      Claude's recommendation: allocate 30-49, after verifying that no runner,
+      report or artifact references them.
+    - (c) **Sealed band.** Which seeds, for a later confirmation? 900-929 is
+      exhausted. This is only needed after a development pass.
+
+    Claude's proposed sequence once (a) and (b) are approved:
+    1. Tier 0: does wake + sleep form a library at all at depth 4?
+    2. Tier 1: gradient re-route + sleep against sleep alone, with exhaustive
+       search as a reference at depth 4 (20,736 routes, still feasible), so the
+       chooser can be checked.
+    3. Registered Tier 2 at depth 5+, where exhaustive search is infeasible and
+       only the linear re-router can run.
+
+    Alternatives if the PI prefers not to build a new world:
+    - re-routing DURING the stream, to prevent collapse rather than repair it,
+      testable on the existing testbed and bands;
+    - write-up of the online-formation line (O1-O7) for the paper.
 
 # Housekeeping owed
 
