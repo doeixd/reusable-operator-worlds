@@ -1,0 +1,21 @@
+{
+ "E1": {
+  "passes": true
+ },
+ "E2": {
+  "passes": true
+ },
+ "E3": {
+  "passes": true,
+  "routes_changed": 30
+ },
+ "E3b": {
+  "passes": true
+ },
+ "E4b": {
+  "passes": true,
+  "failing": []
+ },
+ "all_pass": true,
+ "protocol_sha256": "f6b906c49adca7502d7968bdd931379c0b924a2e5f2375bf16ddcd75a296fb80"
+}

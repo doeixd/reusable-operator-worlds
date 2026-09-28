@@ -1,0 +1,71 @@
+{
+ "protocol": {
+  "id": "o6-sealed-reroute-v1",
+  "git_commit": "9140f90",
+  "plan": "O6_SEALED_REROUTE_CONFIRMATION_PLAN.md",
+  "tier": 2,
+  "sealed": true,
+  "worlds": [
+   915,
+   916,
+   917,
+   918,
+   919,
+   920,
+   921,
+   922,
+   923,
+   924,
+   925,
+   926,
+   927,
+   928,
+   929
+  ],
+  "arm_streams": {
+   "SHUFFLED": [
+    0,
+    1,
+    2
+   ],
+   "REROUTE_SLEEP": [
+    0,
+    1,
+    2
+   ],
+   "SLEEP": [
+    0,
+    1,
+    2
+   ],
+   "PLAIN": [
+    0
+   ]
+  },
+  "threshold": 0.05,
+  "confirm_at": 41,
+  "attribute_at": 30,
+  "jobs": 3,
+  "root": "artifacts/o6_sealed_reroute",
+  "input_sha256": {
+   "O6_SEALED_REROUTE_CONFIRMATION_PLAN.md": "4f57dc9b04af29733cf5275149dec76e7f2c065fa7b4cbbdcac61cfef51dd080",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/o3_online_sleep_v2.json": "50a36bc8ab4c8e680089e57639d875a39abdfef04462952bdb0cbc990da93d07",
+   "reports/o5_reroute_sleep.json": "89a4b44af467ec08ea1c2bc166ec89a73aa20f947070b714e525f419459a23d1"
+  },
+  "implementation_sha256": "8182704557bfaf7817874a4b26d95aab6c60f8e033ec04d14d22eca58affc0a2",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o5_sha256": "a2788b483abb3f6432702d36dc704ef3be49bec3d5acaa9bf9dd948aac75ff49",
+  "search_sha256": {
+   "row.experiments.audit_j2a_staged_library": "0f67fa06c8f4a6a55e6bc3eae1bc307d32698bc66d03453387ad1d92c4ae05ec",
+   "row.experiments.audit_so1r_route_only": "ab1ca0fcfcea50e3fc29e156f8d907f269f505a4acad13cecc510b0ee1477e70"
+  },
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f",
+  "learner_sha256": "8fef85343e25dad51b31112beac849e993a3d581b48ff5a4b8e2b86fcd0cedc7",
+  "scale": 1
+ },
+ "protocol_sha256": "c8ea481ad94e54700132564d62510cc89e23a43d2698aba233c89f4ac620942f"
+}

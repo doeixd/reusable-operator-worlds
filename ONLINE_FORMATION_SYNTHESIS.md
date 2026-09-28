@@ -154,6 +154,21 @@ learning, and which gradient refitting cannot correct at a sharp temperature
 (J1's lock-in). EXPLORATORY: designed after O4. Confirmation needs untouched
 sealed seeds.
 
+## 2.8 SEALED confirmation of wake + re-route + sleep (O6; worlds 915-929 x 3 streams) - ADDED 2026-09-28: CONFIRMED + ATTRIBUTED
+
+The line's first confirmatory positive. Re-route + sleep passes 45 of 45 sealed
+cells (41 needed), and beats sleep alone in 44 of 45 paired cells (30 needed).
+Sleep alone 36/45, wake alone 13/45, no anchors 0/15. All 6 collapses were
+rescued, against 0 for sleep alone.
+
+What is now established, under named assumptions: online, order-free formation
+of the rotated substrate is reliable. The assumptions are single-operation
+tasks in the stream, 64 retained examples per task, and depth-3 routes that
+exhaustive search can enumerate. Both residual failures are repaired: sleep
+repairs convergence, and re-inference repairs stale routes. Open: scaling
+re-inference beyond enumerable depth, and whether re-routing during the stream
+would prevent collapse rather than repair it.
+
 **Update to section 3 below:** item 7, "whether online order-free anchors plus
 sleep is reliable on unseen worlds", is now ESTABLISHED at development level. It
 is reliable (20/21). Item 8 is answered: at matched compute, post-stream and

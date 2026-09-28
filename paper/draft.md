@@ -2223,3 +2223,43 @@ catastrophic transition that retained memory and extra updates soften but do
 not undo. Development runs offer two leads, both unconfirmed. Interleaved
 consolidation produced no collapses in its 21 cells. Collapse onsets are
 preceded by an early warning and recover about half the time when retried.
+
+# Confirmatory result: re-inferring routes before consolidation makes online formation reliable (O6, 2026-09-28)
+
+O4 failed because a few lifetimes collapsed, and consolidation could not undo
+the collapses. A read-only census then found what a collapse is. The library
+is still usable, but tasks' recorded routes have gone stale as the library
+kept learning, and a sharp routing temperature stops gradient refitting from
+correcting them. An exploratory rung on the saved terminals (O5) showed that
+re-inferring each task's route by exhaustive search on its retained examples,
+before consolidating, repaired every collapse.
+
+O6 tested that protocol on fifteen sealed worlds nobody had seen (three
+streams each), under rules frozen and hashed before those worlds existed. The
+primary rule required at least 41 of 45 passing cells; the attribution rule
+required re-routing to beat consolidation alone in at least 30 of 45 paired
+cells. Gates reproduced the development cells bitwise first. Another gate
+showed the two arms differ only in the route swap: with the swap disabled,
+they are bitwise identical.
+
+| sealed cell | wake terminal | + sleep | + re-route + sleep |
+|---|---:|---:|---:|
+| 918 s0 | 1.926 | 0.318 | **0.016** |
+| 919 s1 | 1.630 | 0.369 | **0.010** |
+| 920 s1 | 1.782 | 0.128 | **0.011** |
+| 920 s2 | 1.824 | 1.462 | **0.012** |
+| 921 s2 | 2.006 | 0.073 | **0.008** |
+| 923 s1 | 1.625 | 0.116 | **0.008** |
+
+Every one of the 45 cells passed (terminal medians 0.005-0.017), against 36
+for consolidation alone and 13 without either. Re-routing beat consolidation
+alone in 44 of 45 paired cells, and the one exception passed under both. All
+six collapses were rescued; consolidation alone rescued none. No-anchor
+streams passed none.
+
+The protocol is wake, then re-route, then sleep. The claim holds under named
+assumptions: single-operation tasks are present in the stream, 64 examples
+per task are retained, and programs are short enough (depth 3) for exhaustive
+route search. The online learner's residual failure was never its library; it
+was the bookkeeping of which route each task uses. Making that step scale to
+long programs is the open problem this result exposes.

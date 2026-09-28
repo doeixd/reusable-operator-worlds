@@ -1,0 +1,4 @@
+prereg check OK: 62 frozen files unchanged; all STATUS-cited paths exist
+invalid-artifact check OK: 7 withdrawn paths, none present
+adequacy check OK: 9 plan(s) in scope carry a discriminating-power section
+O6 report: reports\o6_sealed_reroute.json

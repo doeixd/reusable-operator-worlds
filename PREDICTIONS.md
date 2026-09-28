@@ -9981,3 +9981,78 @@ needs a gate that can fail.
 sealed O4 worlds, and the protocol was designed AFTER seeing O4's sealed
 failures. Worlds 900-914 are therefore contaminated for this protocol. A
 confirmation must use untouched sealed seeds (915-929).
+
+
+# O6 SEALED VERDICT (2026-09-28): CONFIRMED (45 of 45) and ATTRIBUTED (44 of 45). THE ONLINE-FORMATION LINE'S FIRST CONFIRMATORY POSITIVE
+
+Plan `O6_SEALED_REROUTE_CONFIRMATION_PLAN.md`, frozen `666f961` before any
+world in 915-929 was generated. Code `9140f90`. Sealed worlds 915-929, the
+untouched half of the band allocated under decision 13. 150 cells, exit 0,
+19:27Z-01:16Z.
+
+Gates, all run before any sealed cell, all passed:
+- E1: `SHUFFLED` reproduced O3 bitwise;
+- E2: `SLEEP` reproduced O3 bitwise;
+- E3: `REROUTE_SLEEP` reproduced O5's cell bitwise (30 routes changed);
+- E3b: with the swap disabled, `REROUTE_SLEEP` equals `SLEEP` bitwise and
+  differs from the swapped result;
+- E4b: every sealed stream interleaves depths within its first 20 tasks.
+
+Independent scorer `valid: true`, no problems. `check_prereg`, `check_invalid`
+and `check_adequacy` pass. Report `reports/o6_sealed_reroute.json`; archive
+`reports/o6_sealed_reroute_20260928/`.
+
+**Registered results:**
+- **Primary:** `k_RS` = **45 of 45** (needed 41), giving **`CONFIRMED`**.
+  Terminal medians 0.0052-0.0166. `PLAIN` 0/15, so the floor holds.
+- **Attribution:** `n_better` = **44 of 45** (needed 30), giving
+  **`ATTRIBUTED`**. The one exception, 924 s1, has both arms passing: 0.0160
+  against 0.0150. Median paired `log10(RS/SLEEP)` = -0.375, i.e. 2.4x lower.
+
+**Descriptive:**
+- `k_SLEEP` 36/45 and `k_SHUFFLED` 13/45.
+- 6 of 45 wake lifetimes collapsed. Sleep alone rescued 0 of those 6.
+  Re-route + sleep rescued **6 of 6**:
+
+| sealed cell | wake terminal | + sleep | + re-route + sleep |
+|---|---:|---:|---:|
+| 918 s0 | 1.926 | 0.318 | **0.016** |
+| 919 s1 | 1.630 | 0.369 | **0.010** |
+| 920 s1 | 1.782 | 0.128 | **0.011** |
+| 920 s2 | 1.824 | 1.462 | **0.012** |
+| 921 s2 | 2.006 | 0.073 | **0.008** |
+| 923 s1 | 1.625 | 0.116 | **0.008** |
+
+- Routes changed per cell: median 31 of 188, range 8-73. Stale routes are
+  present in every online learner, as in O5.
+
+**Reading.** On worlds nobody had seen, an online learner reaches the rotated
+substrate in every one of 45 cells. It receives an order-free stream with
+single-operation anchors, retains 64 examples per task, re-infers each task's
+route by exhaustive search on them at the end of the stream, then
+consolidates. Collapse, which bound O4 (38/45), is repaired: it was stale
+route bookkeeping on a usable library.
+
+Named assumptions, and limits of the claim:
+- single-operation tasks are present in the stream;
+- 64 examples per task are retained;
+- depth <= 3, so routes can be enumerated (1,728 at most);
+- one substrate family, one learner, one model seed, one budget.
+
+Exhaustive search does not scale to long programs. That is the next
+constraint, not a result here.
+
+**Operational disclosures.**
+- **Memory reserve.** The committed runner's 8 GiB memory precondition was
+  lowered to 4.5 GiB on the PI's instruction ("Is ok. Just start", 2026-09-27),
+  after free memory stayed at 6.5-7.9 GiB for hours because of the PI's own
+  development processes. This was done through an external launcher,
+  `o6_launch.py` (archived), which sets `MIN_FREE_GIB` and then calls the
+  unchanged runner. The protocol fingerprint does not hash the reserve, so the
+  runner, the protocol and the gates are unaffected. `precondition.json`
+  records `required_gib` 4.5, with 6.34 GiB free at launch. No cell failed.
+- **Launcher bug.** The first dry-run attempt with that launcher broke its
+  process pool: the launcher lacked a `__main__` guard, so every spawned worker
+  re-ran `main()`. It was fixed before any real cell ran, and the dry run and
+  its restart test then passed. That test relaunched, reused the completed cell,
+  and ran all 5 arms, including REROUTE_SLEEP.

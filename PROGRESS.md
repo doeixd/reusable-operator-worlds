@@ -7812,3 +7812,44 @@ NEXT: O6, the sealed confirmation of wake + re-route + sleep on the UNTOUCHED
 sealed seeds 915-929 (inside the band allocated under decision 13). Sealed
 worlds 900-914 are contaminated for this protocol, because it was designed
 after seeing their failures.
+
+
+# 2026-09-28 O6 SEALED: CONFIRMED (45/45) and ATTRIBUTED (44/45): wake + re-route + sleep forms the rotated substrate reliably online
+
+O6 ran on sealed worlds 915-929 at `9140f90` (plan `666f961`): 150 cells, pool
+of 3, ~5.8 h. Gates E1, E2, E3, E3b and E4b passed; the dry run and restart
+test passed; the scorer is valid and all three checkers pass.
+
+| arm | cells passing, of 45 |
+|---|---:|
+| re-route + sleep | 45 |
+| sleep alone | 36 |
+| wake alone | 13 |
+
+`PLAIN` passed 0/15. Re-route + sleep beat sleep alone in 44 of 45 cells, and
+rescued all 6 collapses, where sleep alone rescued 0. Details in
+`PREDICTIONS.md` (O6 SEALED VERDICT).
+
+**Operational disclosures.**
+- **Memory reserve.** The committed runner's 8 GiB memory precondition was
+  lowered to 4.5 GiB on the PI's instruction ("Is ok. Just start", 2026-09-27),
+  after free memory stayed at 6.5-7.9 GiB for hours because of the PI's own
+  development processes. This was done through an external launcher,
+  `o6_launch.py` (archived), which sets `MIN_FREE_GIB` and then calls the
+  unchanged runner. The protocol fingerprint does not hash the reserve, so the
+  runner, the protocol and the gates are unaffected. `precondition.json`
+  records `required_gib` 4.5, with 6.34 GiB free at launch. No cell failed.
+- **Launcher bug.** The first dry-run attempt with that launcher broke its
+  process pool: the launcher lacked a `__main__` guard, so every spawned worker
+  re-ran `main()`. It was fixed before any real cell ran, and the dry run and
+  its restart test then passed. That test relaunched, reused the completed cell,
+  and ran all 5 arms, including REROUTE_SLEEP.
+
+NEXT: the line's open constraint is SCALE. Exhaustive re-routing is feasible
+at depth 3 only. The obvious successors are:
+- re-routing by gradient from a re-heated temperature, or by beam search, with
+  the exhaustive result as the reference;
+- re-routing during the stream (periodic) instead of only at its end.
+
+Neither has been planned yet. The sealed band 900-929 is now exhausted, so any
+further sealed test needs a new band from the PI.

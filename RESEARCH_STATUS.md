@@ -6,16 +6,31 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-27, after O5. **Read `ONLINE_FORMATION_SYNTHESIS.md` first.**
+Last rewritten: 2026-09-28, after O6. Nothing is running. **Read
+`ONLINE_FORMATION_SYNTHESIS.md` first.**
 
-**Collapse is diagnosed and repaired, at exploratory level.** A collapse is
-mostly stale routes on a usable library (Tier 0 census). Re-inferring every
-task's route by search on its retained examples and then consolidating (O5)
-passes **87 of 87** saved order-free terminals, including all 8 collapses and
-all 45 sealed-O4 cells, and harms nothing.
+**O6 (SEALED, worlds 915-929) is CONFIRMED (45 of 45) and ATTRIBUTED (44 of
+45).** An online learner fed an order-free stream with single-operation anchors
+forms the rotated substrate in every sealed cell. It retains 64 examples per
+task, re-infers each task's route by search at the end of the stream, then
+consolidates. Sleep alone: 36/45. Collapses rescued: 6/6, against 0/6 for
+sleep alone. This is the online-formation line's first confirmatory positive.
+The sealed band 900-929 is exhausted.
 
-**Next: O6, a sealed confirmation of wake + re-route + sleep on the untouched
-seeds 915-929.**
+**Open constraint:** exhaustive re-routing works at depth 3 only. Scaling
+re-routing, or doing it during the stream, is the natural next rung. It is
+unplanned, and pending the PI's direction.
+
+
+# O6 CLOSED (SEALED): CONFIRMED + ATTRIBUTED (2026-09-28)
+
+- Plan `666f961`, code `9140f90`, 150 cells, scorer valid, all checkers pass.
+  Report `reports/o6_sealed_reroute.json`.
+- `k_RS` 45/45 (needed 41); `n_better` 44/45 (needed 30). `k_SLEEP` 36,
+  `k_SHUFFLED` 13, `PLAIN` 0/15.
+- The reserve was lowered to 4.5 GiB on the PI's instruction via an external
+  launcher. The runner is unchanged, and this is disclosed in PREDICTIONS and
+  PROGRESS.
 
 
 # O5 (Tier 1, 2026-09-27): COLLAPSE_REPAIRED, 87/87
