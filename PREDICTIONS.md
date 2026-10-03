@@ -10155,3 +10155,35 @@ stream exists yet.
 
 **Status.** EXPLORATORY, Tier 1, and design evidence only. It re-uses
 development and contaminated sealed-band worlds, and depth 3 only.
+
+
+# O8 TIER 0 CENSUS (2026-10-03, descriptive): staleness is an EARLY-COMMITMENT phenomenon; exhaustive re-routing binds near depth 6-7, not 4
+
+`reports/o8_staleness_position_census.json`; 63 saved development terminals
+(O2 13-19 SHUFFLED, O3 20-26 SHUFFLED and INTERLEAVED). Descriptive, no rule.
+
+- Stale fraction by arrival tercile (SHUFFLED, pooled): 33.0% / 9.2% / 10.3%.
+  Same shape in every cell. By depth: 1.1% / 13.2% / 37.3%.
+- INTERLEAVED: 26.2% / 5.7% / 8.0%; median 24 stale per cell against 30.5.
+- Measured all-route evaluation on 64 examples: 0.021 s (depth 3), 0.33 s
+  (depth 4; 15.9x). One 188-task pass: 1.1 s at depth 3; projected ~47 s, ~9
+  min, ~2 h, ~1 day at depths 4-7 (12x per depth compounding).
+
+**Correction to the O7 NEXT and to decision 14 (recorded, not rewritten):**
+"its value appears only at depth >= 4" compared route COUNTS. In wall time,
+end-of-stream exhaustive re-routing is feasible through depth 5 and binds near
+depth 6-7. The regime that needs a linear re-router one depth earlier is
+IN-STREAM re-routing, which multiplies the cost by the number of arrivals.
+
+**Working hypotheses for O8 (not preregistered; the O8 plan registers its rule):**
+- **OB1.** In-stream exhaustive re-routing of earlier tasks after each arrival,
+  with no consolidation, raises SHUFFLED's pass rate on O3's 21 cells above
+  8 of 21, and leaves fewer than 10 stale routes per cell at the terminal.
+- **OB2.** It does not reach the end-of-stream re-route + sleep level
+  (21 of 21 on these cells, O5) without consolidation: convergence is the
+  other failure mode and routing alone does not repair it (O2C).
+- **OB3.** Inside INTERLEAVED, in-stream re-routing reaches the re-route + sleep
+  level with no terminal batch step, i.e. 20-21 of 21.
+- **OB4 (risk).** Re-routing on an immature library early in the stream could
+  thrash and HARM formation (J1's early commitment); if so the harm shows as
+  cells that SHUFFLED passes and the re-routed arm fails.

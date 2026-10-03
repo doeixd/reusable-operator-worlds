@@ -7972,3 +7972,61 @@ slow, and 12^5 is not. It needs:
 
 A Tier 0 feasibility check of formation at depth 4 (does the wake + sleep
 pipeline form a library at all when programs are longer?) should come first.
+
+
+# 2026-10-03 O8 Tier 0 census: routes go stale EARLY, and exhaustive re-routing binds later than assumed (descriptive, development terminals)
+
+Read-only census (Tier 0, descriptive) on every saved development order-free
+terminal: O2 `SHUFFLED` (worlds 13-19), O3 `SHUFFLED` and O3 `INTERLEAVED`
+(worlds 20-26), three streams each, 63 cells. For each of the 188 stream tasks:
+arrival position, depth, whether its recorded hard route differs from the
+exhaustive-search route on its 64 reservoir examples (stale), and how many
+positions differ. `row.experiments.census_o8_staleness_position`, report
+`reports/o8_staleness_position_census.json`. Nothing trained or written back.
+
+Why: decision 14 proposed a depth-4+ world "where exhaustive search is
+infeasible". Before building a testbed, two things had to be measured rather
+than argued: where exhaustive re-routing actually binds, and whether staleness
+is a property of WHEN a route was committed, which would make an in-stream
+re-router the natural next rung on the existing testbed.
+
+1. **Staleness is concentrated in the first third of the stream.** Pooled over
+   the 42 `SHUFFLED` cells, 33.0% of tasks that arrived at positions 0-62 are
+   stale (872 of 2,646), against 9.2% at 63-125 and 10.3% at 126-187. The
+   shape holds in every cell. Median 30.5 stale routes per cell; 1,384 of 7,896.
+2. **Anchors are essentially never stale; depth-3 tasks are.** Stale fractions
+   by depth: 1.1% (depth 1), 13.2% (depth 2), 37.3% (depth 3). Of stale routes,
+   711 of 1,384 differ in all three positions and 472 in two (O7's coupled
+   change, restated over the whole population).
+3. **In-stream consolidation reduces staleness only modestly.** O3
+   `INTERLEAVED` (8,192 consolidation updates spread over the stream): median
+   24 stale per cell against 30.5, first-tercile fraction 26.2% against 33.0%,
+   same shape. Consolidation does not re-derive routes; it trains through them.
+4. **Exhaustive re-routing cost, measured.** One pass over 188 tasks at depth 3
+   is a median 1.09 s per cell (all-route evaluation 0.021 s per depth-3 task
+   on 64 examples). At depth 4 it is 0.33 s per task, 15.9x, against the 12x
+   route-count ratio. Compounding at 12x per depth, one 188-task pass is ~47 s
+   at depth 4, ~9 min at depth 5, ~2 h at depth 6 and ~1 day at depth 7
+   (depth >= 5 needs the chunked evaluator; unchunked it is 1.0 GiB per task).
+
+Reading, and a correction to decision 14's premise. END-OF-STREAM exhaustive
+re-routing (O6's protocol, one pass) is cheap through depth 5 and only binds
+near depth 6-7, not at depth 4. O7's "value appears at depth >= 4" was the
+route-count ratio read as a wall-time claim. What would make a linear
+re-router necessary one depth earlier is re-routing DURING the stream, where
+every earlier task is re-derived after each arrival (about 188 x 94 route
+searches per cell: ~1.6 h at depth 4 against a 26-minute wake, ~20 h at
+depth 5). And finding 1 says in-stream re-routing has a specific target: the
+routes committed while the library was immature. This is the J1 lock-in result
+seen from the population side - early commitments on an uninformed library are
+the ones that go wrong - and the N1 clustering measurement says why anchors
+escape it (depth-1 routing is informative on an untrained library; depth-3
+routing is at chance).
+
+NEXT: O8 (Tier 1, exploratory, plan frozen first): on O3's 21 development
+cells, `SHUFFLED` plus in-stream exhaustive re-routing of all EARLIER tasks
+after each arrival, no consolidation, against the committed `SHUFFLED` (8 of 21)
+and `INTERLEAVED` (17 of 21) cells; and the same hook inside `INTERLEAVED`. The
+question is whether prevention replaces repair: a wake-only learner that keeps
+its assignments current. The depth rung is deferred until O8 says which
+protocol the scaling claim is about.
