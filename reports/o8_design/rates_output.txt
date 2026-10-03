@@ -1,0 +1,27 @@
+Rule A pass-count clause k >= K
+  K=13: null p=0.381 -> 0.0232; p=0.6 -> 0.5237; p=0.7 -> 0.8523; p=0.86 (sleep level 18/21) -> 0.9988
+  K=14: null p=0.381 -> 0.0075; p=0.6 -> 0.3495; p=0.7 -> 0.7230; p=0.86 (sleep level 18/21) -> 0.9945
+  K=15: null p=0.381 -> 0.0020; p=0.6 -> 0.2002; p=0.7 -> 0.5505; p=0.86 (sleep level 18/21) -> 0.9797
+Paired sign clause n_better >= U (both rules)
+  U=15: null p=0.5 -> 0.0392; p=0.8 -> 0.8915; p=0.9 -> 0.9967
+  U=16: null p=0.5 -> 0.0133; p=0.8 -> 0.7693; p=0.9 -> 0.9856
+  U=17: null p=0.5 -> 0.0036; p=0.8 -> 0.5860; p=0.9 -> 0.9478
+Harm clause: h = cells SHUFFLED passes (8) that the re-routed arm fails; h >= H fires
+  H=2 q=0.05: 0.0572
+  H=2 q=0.1: 0.1869
+  H=2 q=0.25: 0.6329
+  H=2 q=0.5: 0.9648
+  H=3 q=0.05: 0.0058
+  H=3 q=0.1: 0.0381
+  H=3 q=0.25: 0.3215
+  H=3 q=0.5: 0.8555
+Rule B fail clause f <= 1 of 21 at per-cell fail rate
+  q=0.02: P(f<=1)=0.9347
+  q=0.05: P(f<=1)=0.7170
+  q=0.1: P(f<=1)=0.3647
+  q=0.19: P(f<=1)=0.0709
+Rule B harm clause: h = cells INTERLEAVED passes (17) that REROUTE_INTERLEAVED fails; h >= 3 fires
+  q=0.05: 0.0503
+  q=0.1: 0.2382
+  q=0.25: 0.8363
+  q=0.5: 0.9988
