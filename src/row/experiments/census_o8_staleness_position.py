@@ -52,11 +52,11 @@ def mse(library, x, y, route):
         return float(torch.mean((library.hard(x, list(route)) - y) ** 2))
 
 
-def cell(arm, band, w, s):
-    _, model, stream_tasks, canonical = o3.load_shuffled_terminal(terminal_path(arm, band, w, s), w, s)
-    from row.experiments import o2_online_reliability as o2
-    _, _, _, plan, _ = o2.build_stream('SHUFFLED', w, s)
-    pool = o2d.reservoir(stream_tasks, w, s, o3.MEMORY)
+def staleness(model, stream_tasks, plan, pool):
+    """Per stream task: is the recorded hard route the exhaustive-search route on its reservoir examples?
+
+    Shared with the O8 runner, which calls it on the finished in-memory model; `cell` below calls it on
+    a reloaded terminal. The model is read only."""
     by = {}
     for x, y, t in pool:
         by.setdefault(t, []).append((x, y))
@@ -87,11 +87,19 @@ def cell(arm, band, w, s):
     by_depth = {str(d): {'tasks': sum(r['depth'] == d for r in rows), 'stale': sum(r['depth'] == d and r['stale'] for r in rows)}
                 for d in (1, 2, 3)}
     stale_rows = [r for r in rows if r['stale']]
-    return {'arm': arm, 'band': band, 'world': w, 'stream': s, 'tasks': len(rows), 'stale': len(stale_rows),
+    return {'tasks': len(rows), 'stale': len(stale_rows),
             'by_tercile': by_tercile, 'by_depth': by_depth,
             'positions_changed_hist': {str(k): sum(r['positions_changed'] == k for r in stale_rows) for k in (1, 2, 3)},
             'median_support_ratio_stale': float(np.median([r['support_ratio'] for r in stale_rows])) if stale_rows else None,
             'exhaustive_seconds': seconds, 'rows': rows}
+
+
+def cell(arm, band, w, s):
+    _, model, stream_tasks, canonical = o3.load_shuffled_terminal(terminal_path(arm, band, w, s), w, s)
+    from row.experiments import o2_online_reliability as o2
+    _, _, _, plan, _ = o2.build_stream('SHUFFLED', w, s)
+    pool = o2d.reservoir(stream_tasks, w, s, o3.MEMORY)
+    return {'arm': arm, 'band': band, 'world': w, 'stream': s, **staleness(model, stream_tasks, plan, pool)}
 
 
 def timing(band='O3', w=20, s=0, n_tasks=5):
