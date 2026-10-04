@@ -8071,3 +8071,34 @@ fully online protocol (`REROUTE_WAKE`) on a NEW band, which needs the PI
 (decision 15 in `RESEARCH_STATUS.md`). The scaling rung is then about
 IN-STREAM cost: exhaustive in-stream re-routing is ~2 min per cell at depth 3
 and a projected ~1.6 h at depth 4, so a linear re-router is needed from depth 4.
+
+
+# 2026-10-04 O9 SEALED: NOT_CONFIRMED (37/45 vs 41) and ATTRIBUTED (38/45) - in-stream re-routing removes collapse, near-misses remain without sleep
+
+Decision 15 answered by the PI ("Ok continue", 2026-10-04): band 930-959
+allocated, O9 frozen `0b9df24`, code `0d8d05b`. One detached orchestrator
+(`o9_launch.py`, archived) ran the dry run with its restart test, the gates and
+the sealed run; nothing was killed by the memory reaper. 150 cells,
+00:46-07:17Z, exit 0. Full verdict entry in `PREDICTIONS.md` ("O9 SEALED
+VERDICT").
+
+| arm (construction) | cells passing (`< 0.05`) of 45 | median terminal | collapses (`>= 1.0`) |
+|---|---:|---:|---:|
+| `REROUTE_WAKE`: wake + in-stream re-route of earlier tasks, no sleep (primary) | **37** | 0.0143 | 0 |
+| `SHUFFLED`: wake alone (refusal arm) | 21 | 0.0623 | 5 |
+| `REROUTE_SLEEP`: O6's end-of-stream re-route + sleep (descriptive) | 45 | 0.0105 | 0 |
+| `PLAIN`: no anchors (floor, 15 cells) | 0 of 15 | ~1.9 | 15 |
+
+All 8 failing primary cells are near-misses (0.051-0.232, no collapse), and
+end-of-stream re-route + sleep, applied to the same stream's wake-alone
+terminal, ends at 0.009-0.014 in every one.
+
+Also this session: `check_prereg` gained an explicit acknowledged-absent entry
+for the untracked `artifacts/v2_gelu_crossover/` (`66ca78e`), which was found
+missing before the 2026-10-03 cleanup and would otherwise have blocked every
+sealed launch.
+
+NEXT (the plan's registered branch): consolidation is required alongside
+in-stream re-routing. Cheapest next test is exploratory on O9's saved
+`REROUTE_WAKE` terminals: sleep only, no end-of-stream re-route. A sealed test
+of the combined fully online protocol would use 945-959 under a new plan.

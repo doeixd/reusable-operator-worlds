@@ -1,0 +1,75 @@
+{
+ "protocol": {
+  "id": "o9-sealed-online-v1",
+  "git_commit": "0d8d05b",
+  "plan": "O9_SEALED_ONLINE_PLAN.md",
+  "tier": 2,
+  "sealed": true,
+  "worlds": [
+   930,
+   931,
+   932,
+   933,
+   934,
+   935,
+   936,
+   937,
+   938,
+   939,
+   940,
+   941,
+   942,
+   943,
+   944
+  ],
+  "arm_streams": {
+   "REROUTE_WAKE": [
+    0,
+    1,
+    2
+   ],
+   "SHUFFLED": [
+    0,
+    1,
+    2
+   ],
+   "PLAIN": [
+    0
+   ],
+   "REROUTE_SLEEP": [
+    0,
+    1,
+    2
+   ]
+  },
+  "threshold": 0.05,
+  "confirm_at": 41,
+  "attribute_at": 30,
+  "jobs": 3,
+  "root": "artifacts/o9_sealed_online",
+  "input_sha256": {
+   "O9_SEALED_ONLINE_PLAN.md": "3f87a16ee203305bc706f17c63d7a6d11e5ee0c2de13a5e3a580d125be257035",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/o3_online_sleep_v2.json": "50a36bc8ab4c8e680089e57639d875a39abdfef04462952bdb0cbc990da93d07",
+   "reports/o5_reroute_sleep.json": "89a4b44af467ec08ea1c2bc166ec89a73aa20f947070b714e525f419459a23d1",
+   "reports/o8_instream_reroute.json": "58ea6613d33e13cdc6175223400583be997678f981796b5dcbed7718577197f1"
+  },
+  "implementation_sha256": "d708b703f8ee32955181208a9366736b61aba878f129d0c86c2c7102aa0e0547",
+  "o8_sha256": "a5ea33f3a41ad023137a4a8cca10f63bc8e5e699d6f33615338cba5f969b26a5",
+  "o6_sha256": "8182704557bfaf7817874a4b26d95aab6c60f8e033ec04d14d22eca58affc0a2",
+  "o5_sha256": "a2788b483abb3f6432702d36dc704ef3be49bec3d5acaa9bf9dd948aac75ff49",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "census_sha256": "e090671e006012b44d88787346ba5d108414674e88dbf8806053bca8b7867bd1",
+  "search_sha256": {
+   "row.experiments.audit_j2a_staged_library": "0f67fa06c8f4a6a55e6bc3eae1bc307d32698bc66d03453387ad1d92c4ae05ec",
+   "row.experiments.audit_so1r_route_only": "ab1ca0fcfcea50e3fc29e156f8d907f269f505a4acad13cecc510b0ee1477e70"
+  },
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f",
+  "learner_sha256": "8fef85343e25dad51b31112beac849e993a3d581b48ff5a4b8e2b86fcd0cedc7",
+  "scale": 1
+ },
+ "protocol_sha256": "af05722faab611fde206c03ef225fb89a12ba1c27f015b663a6504af0045e746"
+}

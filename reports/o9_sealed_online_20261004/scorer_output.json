@@ -1,0 +1,12 @@
+{
+ "valid": true,
+ "problems": [],
+ "denominator": 45,
+ "k_REROUTE_WAKE": 37,
+ "k_SHUFFLED": 21,
+ "k_REROUTE_SLEEP": 45,
+ "plain_passes": 0,
+ "label": "NOT_CONFIRMED",
+ "n_better": 38,
+ "attribution": "ATTRIBUTED"
+}

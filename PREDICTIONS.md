@@ -10260,3 +10260,82 @@ end-of-task median 0.124 against 0.623, better in 17 of 21 cells.
 carried by O3, O5 and O7. Depth 3, exhaustive re-routing after every arrival,
 64 retained examples per task. The fully online protocol is not confirmed
 until a sealed block on a new band runs it.
+
+
+# O9 SEALED VERDICT (2026-10-04): NOT_CONFIRMED (37 of 45; the registered bar was 41) and ATTRIBUTED (38 of 45). In-stream re-routing removes collapse but leaves near-misses without consolidation
+
+Plan `O9_SEALED_ONLINE_PLAN.md`, frozen `0b9df24` before any world in 930-959
+was generated; hash protected `ecab2e5`. Code `0d8d05b`. Sealed worlds
+930-944, three streams; 945-959 stay sealed and unused. 150 cells, exit 0
+(00:46-07:17Z). Before the band was opened:
+- E5: dry run of every arm on development world 27, interrupted after one cell
+  and relaunched; the cell was reused, the rest ran, exit 0;
+- E1: `SHUFFLED` reproduced O3's `SHUFFLED_w20_s0` bitwise;
+- E2: `REROUTE_WAKE` reproduced O8's `REROUTE_WAKE_w20_s0` bitwise (239
+  routes changed);
+- E3: `REROUTE_SLEEP` reproduced O5's `O3_w20_s0` bitwise (30 routes changed);
+- E4b: every sealed stream interleaves depths in its first 20 tasks.
+
+Independent scorer `valid: true`, labels agree with the runner, E4 (distinct
+`SHUFFLED` libraries per world) holds. `check_prereg` (with the one
+acknowledged-absent V2 path, `66ca78e`), `check_invalid` and `check_adequacy`
+pass. Reserve 2.0 GiB under the PI's 2026-10-03 instruction; 9.2 GiB free at
+launch. Report `reports/o9_sealed_online.json`; archive
+`reports/o9_sealed_online_20261004/`.
+
+| arm (construction) | cells passing (`< 0.05`) of 45 | median terminal | collapses (`>= 1.0`) |
+|---|---:|---:|---:|
+| `REROUTE_WAKE`: wake + in-stream re-route of earlier tasks, no sleep (primary) | **37** | 0.0143 | 0 |
+| `SHUFFLED`: wake alone (refusal arm) | 21 | 0.0623 | 5 |
+| `REROUTE_SLEEP`: O6's end-of-stream re-route + sleep (descriptive) | 45 | 0.0105 | 0 |
+| `PLAIN`: no anchors (floor, 15 cells) | 0 of 15 | ~1.9 | 15 |
+
+**Primary: `NOT_CONFIRMED`.** `k_RW` = 37 of 45 (0.82) against 41. The floor
+held (`PLAIN` 0 of 15).
+
+**Attribution: `ATTRIBUTED`.** `REROUTE_WAKE` ended strictly below the same
+stream's wake-alone terminal in 38 of 45 paired cells (30 needed). It rescued
+18 of the 24 cells wake alone failed, and failed 2 cells wake alone passed.
+
+**Every failure is a near-miss, and the end-of-stream protocol passes all of
+those streams.** The 8 failing cells lie at 0.051-0.232, with at most one task
+of 64 at or above 1.0. On the same streams, `REROUTE_SLEEP` (applied to the
+wake-alone terminal) lies at 0.009-0.014:
+
+| cell | `REROUTE_WAKE` | `SHUFFLED` | `REROUTE_SLEEP` | tasks `>= 0.05` / `>= 1.0` of 64 | routes changed |
+|---|---:|---:|---:|---:|---:|
+| 931 s0 | 0.088 | 0.573 | 0.014 | 58 / 0 | 498 |
+| 931 s2 | 0.127 | 0.034 | 0.009 | 56 / 1 | 605 |
+| 932 s2 | 0.232 | 0.178 | 0.012 | 63 / 0 | 1,884 |
+| 937 s1 | 0.117 | 0.073 | 0.009 | 61 / 1 | 249 |
+| 937 s2 | 0.094 | 0.350 | 0.009 | 63 / 0 | 464 |
+| 938 s1 | 0.051 | 0.022 | 0.012 | 33 / 0 | 727 |
+| 938 s2 | 0.211 | 0.089 | 0.011 | 64 / 1 | 227 |
+| 944 s2 | 0.079 | 0.071 | 0.013 | 56 / 1 | 598 |
+
+Descriptive: `REROUTE_WAKE` ends below `REROUTE_SLEEP` in 13 of 45 cells, at a
+median per-cell ratio of 1.26x (O8 development: 5 of 21, 1.15x). Terminal
+stale routes: 6 in total across 45 cells. In-stream re-routing cost a median
+132 s of a 725 s cell.
+
+**Reading.**
+1. Stale early commitments are confirmed as a CAUSE of online-formation
+   failure: re-deriving them during the stream improves on wake alone in 38 of
+   45 sealed cells and removes every collapse (0 against 5).
+2. Prevention alone is not reliable at the registered bar. With no
+   consolidation, 8 of 45 cells end as under-converged near-misses. Sleep
+   repairs exactly that mode (O2C, O4), and the end-of-stream protocol on the
+   same streams' wake-alone terminals reached 45 of 45, replicating O6's 45 of 45 on a second
+   fresh band (descriptive here, not a registered clause).
+3. The development estimate was optimistic, as the plan disclosed: 20 of 21
+   (0.95) on O8's worlds against 0.82 sealed. The plan's rate table gave
+   detection 0.78-0.94 at 0.952 and showed what a lower true rate would do;
+   37 lies well below 41, so this is not a near-miss of the rule.
+
+**What it decides (registered branch, `NOT_CONFIRMED`):** the per-cell values
+decide for residual NEAR-MISSES, not collapse, so the remedy is consolidation.
+The fully online protocol needs both parts: in-stream re-routing for stale
+assignments, and consolidation for convergence. O9's terminals give a cheap
+next test (exploratory, on now-opened worlds): `REROUTE_WAKE` terminal +
+O3's sleep without any end-of-stream re-route. A confirmatory version needs
+the 15 still-sealed worlds 945-959 under a new frozen plan.

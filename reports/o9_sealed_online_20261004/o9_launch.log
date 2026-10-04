@@ -1,0 +1,7 @@
+2026-10-04T00:21:14.160382+00:00 START
+2026-10-04T00:21:42.856413+00:00 dry leg stop_after=1 exit=3 orphans_killed=3
+2026-10-04T00:25:23.945943+00:00 dry leg stop_after=None exit=0 orphans_killed=0
+2026-10-04T00:25:24.096456+00:00 E5 dry run + restart PASSED
+2026-10-04T00:46:51.560713+00:00 GATES {"E1": {"passes": true}, "E2": {"passes": true, "routes_changed_total": 239}, "E3": {"passes": true, "routes_changed": 30}, "E4b": {"passes": true, "failing": []}, "all_pass": true}
+2026-10-04T00:46:54.826593+00:00 LAUNCH sealed run
+2026-10-04T07:17:47.388712+00:00 DONE report reports\o9_sealed_online.json

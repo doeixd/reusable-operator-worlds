@@ -291,3 +291,16 @@ consolidation: 19 of 21. Every collapse is gone; the three failures are
 near-misses. Staleness is a cause of online-formation failure, not only a
 symptom, and prevention replaces repair for most of it. Depth 3, development
 worlds; a sealed confirmation needs a new band (decision 15).
+
+## 2.11 Sealed test of prevention without sleep (O9; SEALED) - ADDED 2026-10-04
+
+On 15 fresh sealed worlds (930-944), wake + in-stream re-routing of earlier
+tasks with NO consolidation passed 37 of 45 cells (`NOT_CONFIRMED`; 41
+needed) and beat wake alone in 38 of 45 (`ATTRIBUTED`). It removed every
+collapse (0 against 5). The 8 failures are near-misses, and end-of-stream
+re-route + sleep on the same streams' wake-alone terminals passed 45 of 45,
+replicating O6.
+Established: stale early commitments cause collapse, and re-deriving them
+during the stream prevents it. Also established: prevention does not replace
+consolidation; convergence remains a separate failure mode at this budget.
+The development estimate (O8, 20/21) was optimistic against the sealed 0.82.
