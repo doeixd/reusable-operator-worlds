@@ -47,6 +47,7 @@ IN_SCOPE = (
     'O8_INSTREAM_REROUTE_PLAN.md',
     'O9_SEALED_ONLINE_PLAN.md',
     'O10_REROUTE_WAKE_SLEEP_PLAN.md',
+    'O11_SEALED_INSTREAM_SLEEP_PLAN.md',
 )
 
 #: Explicit sentinel for a plan with no behaviour to elicit (an observational

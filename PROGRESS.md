@@ -8152,3 +8152,19 @@ evidence. A confirmatory test of the combined protocol needs the still-sealed
 worlds 945-959 under a new frozen plan (O11, drafted).
 
 NEXT: O11 sealed, drafted in `O11_SEALED_INSTREAM_SLEEP_PLAN.md` (DRAFT, not frozen): wake + in-stream re-routing + sleep on worlds 945-959. Opening the last 15 worlds of the band waits for the PI's go.
+
+
+# O11 ATTRIBUTION SIZING (2026-10-04, Tier 0, descriptive): in-stream re-routing + sleep beats sleep alone in 45/45 cells; sleep alone reaches 41/45
+
+`row.experiments.census_o11_attribution_sizing`, report
+`reports/o11_attribution_sizing.json`. `o3.run_sleep` verbatim on O9's 45 saved
+`SHUFFLED` terminals (worlds 930-944, opened by O9), against O10's committed
+`RW_SLEEP` cells on the same streams. No world in 945-959 touched.
+- `RW_SLEEP` strictly below `SLEEP` in **45 of 45** cells (41 of 41 among cells
+  sleep alone passes); median per-cell ratio **0.41x**.
+- Sleep alone passes **41 of 45**; `RW_SLEEP` rescues all 4 it fails.
+
+Consequences for O11, written into the plan before freezing: the paired
+attribution clause has room on every cell and is kept; and because sleep alone
+reached the primary bar on these worlds, `CONFIRMED` is read only together with
+`ATTRIBUTED`.

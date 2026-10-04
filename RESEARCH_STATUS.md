@@ -6,8 +6,9 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-04, after O10. Nothing is running. **Open PI decision:
-16 (see "Decisions pending from the PI").** **Read
+Last rewritten: 2026-10-04, at the O11 freeze. **O11 (SEALED, 945-959) is
+being launched**; check `artifacts/o11_sealed_instream_sleep/status.json`. No
+PI decision is open. **Read
 `ONLINE_FORMATION_SYNTHESIS.md` first.**
 
 **O10 (Tier 1, exploratory, O9's opened worlds): `REPAIRS`.** Sleep alone on
@@ -22,9 +23,9 @@ search.
 near-misses. **O6 (SEALED, 915-929) stands: CONFIRMED 45/45** for the
 end-of-stream protocol.
 
-**Next, needs the PI (decision 16):** run O11, the sealed test of wake +
-in-stream re-routing + sleep on the last 15 sealed worlds, 945-959. The plan
-is drafted (`O11_SEALED_INSTREAM_SLEEP_PLAN.md`), not frozen.
+**Running:** O11, the sealed test of wake + in-stream re-routing + sleep on
+the last 15 sealed worlds, 945-959 (`O11_SEALED_INSTREAM_SLEEP_PLAN.md`,
+frozen). Decision 16 answered.
 
 
 # O10 (Tier 1, 2026-10-04): REPAIRS
@@ -866,14 +867,11 @@ sealed band, and all are implementation audits rather than experiments.
     Result: `NOT_CONFIRMED` (37/45) and `ATTRIBUTED` (38/45). 945-959 remain
     sealed and unused.
 
-16. **LIVE (2026-10-04): open the last 15 sealed worlds (945-959) for O11?**
-    O11 tests the combined fully online protocol: wake + in-stream re-routing
-    of earlier tasks + O3's sleep, registered like O6/O9 (pass count >= 41 of
-    45, and attribution against wake + sleep without re-routing). Design
-    evidence: O10 passes 45 of 45 on O9's opened worlds
-    (the same protocol, assembled from O9's terminals). About 8 hours.
-    This uses the band's last sealed worlds; a later sealed test would need a
-    new band. Claude's recommendation: run it. The plan is drafted, not frozen.
+16. **ANSWERED (2026-10-04, PI: "Ok continue"): open worlds 945-959 for O11.**
+    Plan frozen after a Tier 0 attribution sizing (in-stream re-routing + sleep
+    below sleep alone in 45/45 cells on O9's worlds; sleep alone 41/45, so the
+    two labels are read together). Band 930-959 is exhausted after O11; nothing
+    new allocated.
 
 # Housekeeping owed
 

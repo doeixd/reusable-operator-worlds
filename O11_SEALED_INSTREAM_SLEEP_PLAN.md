@@ -1,8 +1,10 @@
 # O11: sealed confirmation that wake + in-stream re-routing + consolidation forms the rotated substrate reliably online
 
-Status: **DRAFT, NOT FROZEN (2026-10-04).** Opening worlds 945-959, the last
-15 sealed worlds of band 930-959, waits for the PI (decision 16). Before
-freezing: run the Tier 0 attribution sizing below and fill in its numbers.
+Status: FROZEN 2026-10-04, before any world in 945-959 was generated. The PI
+approved decision 16 ("Ok continue", 2026-10-04). **SEALED: worlds
+945-959**, the last 15 sealed worlds of band 930-959; after O11 the band is
+exhausted. The Tier 0 attribution sizing (`reports/o11_attribution_sizing.json`,
+on O9's opened worlds) was run before freezing; its numbers are below.
 
 O9 (sealed, 930-944) showed in-stream re-routing alone removes every collapse
 but leaves near-misses (37/45, `NOT_CONFIRMED`; `ATTRIBUTED` 38/45 against
@@ -39,13 +41,23 @@ whether routes were kept current during the stream.
 
 # Gates (development worlds, before any sealed cell)
 
-- E1 `SHUFFLED` = O3 `SHUFFLED_w20_s0` bitwise; E2 `REROUTE_WAKE` = O8
-  `REROUTE_WAKE_w20_s0` bitwise; E3 `SLEEP` = O3 `SLEEP_w20_s0` bitwise;
-  E3b `RW_SLEEP` on E2's terminal = the same call made directly (bitwise);
-  E4b sealed streams interleave depths in their first 20 tasks (after the
-  freeze); E5 scale-16 dry run of every arm on world 27 with a restart test.
+- **E1:** `SHUFFLED` reproduces O3's `SHUFFLED_w20_s0` bitwise.
+- **E2:** `REROUTE_WAKE` reproduces O8's `REROUTE_WAKE_w20_s0` bitwise (and
+  its total routes changed).
+- **E3:** `SLEEP` on the E1 terminal reproduces O3's `SLEEP_w20_s0` bitwise.
+- **E3b:** `RW_SLEEP` applied to O9's saved `REROUTE_WAKE_w930_s0` terminal
+  (an opened world, not one of 945-959) reproduces O10's committed `w930_s0`
+  cell bitwise. A gate comparing the sleep call with itself would be vacuous;
+  this one compares against a committed result and can fail.
+- **E4b:** after the freeze, every sealed stream interleaves depths in its
+  first 20 tasks.
+- **E5:** a scale-16 dry run of every arm on development world 27, interrupted
+  after one cell and relaunched; the cell must be reused.
+- **E4 (scorer):** per sealed world, the three `SHUFFLED` libraries differ;
+  each `RW_SLEEP` and `SLEEP` cell starts from this run's own parent terminal
+  (library hash before sleep equals the parent's terminal hash).
 
-# Rules (to register)
+# Rules (registered)
 
 **Primary.** `k` = `RW_SLEEP` cells `< 0.05`, denominator 45; a non-finite
 value never passes. `FLOOR_FAILED` if any `PLAIN` cell passes; else
@@ -53,19 +65,28 @@ value never passes. `FLOOR_FAILED` if any `PLAIN` cell passes; else
 
 **Secondary.** `n_better` = cells where `RW_SLEEP` is strictly below
 `SLEEP`, denominator 45; ties and non-finite count as not better.
-`ATTRIBUTED` if `n_better >= 30`, else `NOT_ATTRIBUTED`. **Open design point:**
-`SLEEP` passes 36-38 of 45 on sealed bands, so this clause has room only if
-in-stream re-routing also lowers the terminal of cells sleep already passes.
-Composition suggests it does (end-of-stream re-route + sleep beat sleep in
-44/45 on O6; `RW_SLEEP` is at 0.90x of that protocol on O9's worlds), but that
-is an argument, not a measurement. **Tier 0 sizing before freezing:** run
-`o3.run_sleep` on O9's 45 saved `SHUFFLED` terminals and count cells where
-O10's `RW_SLEEP` is below it. If that rate is under ~0.8, re-design the clause
-on the cells the effect can reach (rescues among `SLEEP` failures), per the
-O2C learning.
+`ATTRIBUTED` if `n_better >= 30`, else `NOT_ATTRIBUTED`.
 
-Descriptive: `k` for every arm; collapses per arm; `RW_SLEEP` against
-`REROUTE_WAKE`; stale routes after sleep; cost of in-stream re-routing.
+**Sizing (Tier 0, measured before freezing, O9's opened worlds 930-944):**
+`o3.run_sleep` on O9's 45 saved `SHUFFLED` terminals against O10's committed
+`RW_SLEEP` cells on the same streams. `RW_SLEEP` was strictly below `SLEEP`
+in **45 of 45** cells (41 of 41 among cells sleep alone passes), at a median
+per-cell ratio of **0.41x**; it rescued 4 of the 4 cells sleep alone failed.
+The per-cell rate is far above 0.8, so the clause has room on all 45 cells and
+is kept as drafted.
+
+**The sizing also shows why the attribution clause is necessary.** Sleep
+alone passed **41 of 45** on those worlds, exactly the primary bar. So
+`CONFIRMED` alone cannot separate the combined protocol from sleep alone; the
+paired clause can (sizing 45/45 against a 0.5 null). Read the two labels
+together: `CONFIRMED` without `ATTRIBUTED` is not evidence for in-stream
+re-routing.
+
+Descriptive (computed in the summary or stored per cell): `k` for every arm;
+collapses per arm; `RW_SLEEP` rescues among cells `SLEEP` fails; the median
+per-cell `RW_SLEEP / SLEEP` ratio; per `REROUTE_WAKE` cell, routes changed,
+terminal stale routes and re-route seconds. Staleness after sleep is not
+recorded (O10 measured it: 14 routes over 45 cells).
 
 # Necessity
 
@@ -95,9 +116,11 @@ effect 0.98 detection 0.985-0.998. Secondary:
 `reports/o11_design/attribution.py`: null 0.5 false-fire 0.017-0.037;
 effect 0.8 detection 0.92-0.99.
 
-**What the checks do not cover:** the attribution effect size is unmeasured
-(see the open design point); the O10 design evidence is optimistic (45/45 on
-worlds the protocol was assembled on); depth 3 only; this exhausts band
+**What the checks do not cover:** the primary bar does not discriminate the
+combined protocol from sleep alone on bands where sleep alone does well (41/45
+on O9's worlds; 36-38/45 on O4/O6), which is why the labels are read together;
+the attribution sizing and the O10 design evidence come from worlds the
+protocol was assembled on and are optimistic; depth 3 only; this exhausts band
 930-959.
 
 # What it decides
@@ -106,6 +129,11 @@ worlds the protocol was assembled on); depth 3 only; this exhausts band
   prevention (in-stream re-routing) + consolidation, no batch route search.
   Next: the depth rung, where in-stream re-routing needs the length-linear
   re-router (O7) from depth 4, on a new development band.
+  With `ATTRIBUTED`, in-stream re-routing is confirmed to contribute beyond
+  consolidation.
+- **`CONFIRMED` with `NOT_ATTRIBUTED`:** reliability holds, but the band does
+  not show in-stream re-routing adding to sleep; the claim reduces to
+  consolidation.
 - **`NOT_CONFIRMED`:** the per-cell values say which mode remains.
 - **`FLOOR_FAILED`:** uninterpretable.
 
@@ -114,6 +142,7 @@ worlds the protocol was assembled on); depth 3 only; this exhausts band
 195 cells (45 `REROUTE_WAKE` ~13 min, 45 `RW_SLEEP` ~2.5 min, 45 `SHUFFLED`
 ~12 min, 45 `SLEEP` ~2.5 min, 15 `PLAIN` ~3 min) on a pool of 3: about 8
 hours. One detached orchestrator (dry run, gates, checks, run); durable
-stamped cells; fingerprint over this plan, the O3/O5/O8/O9/O10 reports and
-modules; reserve 2.0 GiB (PI 2026-10-03); scorer committed before the band is
+stamped cells; fingerprint over this plan, `configs/v1.yaml`, the O3, O8
+and O10 reports, the runner and the O2/O3/O8/O2C/O2D/census/lifetime/learner
+modules, plus the commit; reserve 2.0 GiB (PI 2026-10-03); scorer committed before the band is
 opened; no commits mid-run; logs archived to `reports/o11_*`.
