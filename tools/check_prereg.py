@@ -89,6 +89,17 @@ FROZEN = {
     "O9_SEALED_ONLINE_PLAN.md": "0b9df24",
 }
 
+#: STATUS-cited paths acknowledged ABSENT from this disk, each with its reason. The module
+#: docstring has always allowed "explicitly marked as external"; this is that mark. Every entry is
+#: printed on every run, so an absence can never pass silently, and a path listed here that DOES
+#: exist is reported too (the entry is stale and should be removed).
+ACKNOWLEDGED_ABSENT = {
+    "artifacts/v2_gelu_crossover/": (
+        "untracked V2 H6 GELU sweep (runs 2026-08-18); found missing from disk 2026-10-03, before "
+        "that day's cleanup; results recorded in row_v2_experimental_spec.md H6 STATUS and SPEC_AUDIT.md; "
+        "produced by CLI lifetime runs whose arguments are not in the repo, so not regenerated"),
+}
+
 STATUS_PATH_PATTERN = re.compile(
     r"(?:artifacts|reports)/[A-Za-z0-9_./-]+"
 )
@@ -119,6 +130,10 @@ def status_paths_exist() -> list[str]:
         for match in STATUS_PATH_PATTERN.findall(block):
             cited.add(match.rstrip(".,;:)"))
     for path in sorted(cited):
+        if path in ACKNOWLEDGED_ABSENT:
+            note = "now EXISTS (stale entry)" if Path(path.rstrip("/")).exists() else "absent"
+            print(f"acknowledged {note}: {path} - {ACKNOWLEDGED_ABSENT[path]}")
+            continue
         candidate = Path(path.rstrip("/"))
         if candidate.suffix in ("", "/"):
             if not candidate.exists():
@@ -139,7 +154,7 @@ def main() -> int:
         return 1
     print(
         f"prereg check OK: {len(FROZEN)} frozen files unchanged; "
-        "all STATUS-cited paths exist"
+        f"all STATUS-cited paths exist except {len(ACKNOWLEDGED_ABSENT)} acknowledged absent"
     )
     return 0
 
