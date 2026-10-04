@@ -533,6 +533,12 @@ report JSON. `figures/` — generated figures.
   uses 900-914; 915-929 stay sealed and unused. No sealed world may be
   generated before `O4_SEALED_CONFIRMATION_PLAN.md` is frozen and hashed in
   `tools/check_prereg.py`. Verified unused before allocation.
+- **O9 sealed band:** seeds 930-959, allocated 2026-10-04 (decision 15; the PI
+  answered "Ok continue" to Claude's recommendation). O9 uses 930-944;
+  945-959 stay sealed and unused. No sealed world may be generated before
+  `O9_SEALED_ONLINE_PLAN.md` is frozen and hashed in `tools/check_prereg.py`.
+  Verified unused before allocation (the only textual hit, 951, is an
+  internal seed component of an E5.1 census, not a world).
 - **V1 confirmatory:** seeds 100–129 (frozen, scored against
   `CONFIRMATION_PLAN.md`).
 - **V2 confirmatory:** seeds 200–229 (frozen, scored against
