@@ -87,6 +87,7 @@ FROZEN = {
     "O6_SEALED_REROUTE_CONFIRMATION_PLAN.md": "666f961",
     "O8_INSTREAM_REROUTE_PLAN.md": "b693ea2",
     "O9_SEALED_ONLINE_PLAN.md": "0b9df24",
+    "O10_REROUTE_WAKE_SLEEP_PLAN.md": "264abd1",
 }
 
 #: STATUS-cited paths acknowledged ABSENT from this disk, each with its reason. The module
