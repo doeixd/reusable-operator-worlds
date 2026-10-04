@@ -10187,3 +10187,76 @@ IN-STREAM re-routing, which multiplies the cost by the number of arrivals.
 - **OB4 (risk).** Re-routing on an immature library early in the stream could
   thrash and HARM formation (J1's early commitment); if so the harm shows as
   cells that SHUFFLED passes and the re-routed arm fails.
+
+
+# O8 OUTCOME (2026-10-03): rule A PREVENTS (20 of 21), rule B IMPROVES (19 of 21) - re-deriving earlier routes during the stream replaces end-of-stream repair (Tier 1, exploratory)
+
+Plan `O8_INSTREAM_REROUTE_PLAN.md`, frozen `b693ea2`. Code `608c4c9`. 42 new
+lifetimes on development worlds 20-26 (band 3), three streams each, exit 0.
+Gates passed before any cell:
+- E1: `REROUTE_WAKE` with re-routing disabled reproduced O3's committed
+  `SHUFFLED_w20_s0` bitwise at full scale;
+- E2: `REROUTE_INTERLEAVED` disabled matched `run_interleaved` bitwise at dry
+  scale, and enabled changed 566 routes and the library;
+- E3: `REROUTE_WAKE` enabled changed 1,740 routes at dry scale with last-task
+  anchor error 0.
+
+The dry run of both arms and the restart test passed (the completed cell was
+reused, the other ran). Independent scorer `valid: true` and agrees with the
+runner. `check_invalid` and `check_adequacy` pass. `check_prereg` fails only on
+the PRE-EXISTING missing `artifacts/v2_gelu_crossover/`, which no O8 input
+touches (disclosed 2026-10-03, before launch). Memory reserve 2.0 GiB under the
+PI's 2026-10-03 instruction ("it's ok to be low on memory"); 9.6 GiB were free
+at launch (`precondition.json`). Report `reports/o8_instream_reroute.json`;
+archive `reports/o8_instream_reroute_20261003/`.
+
+| | `REROUTE_WAKE` (rule A) | `REROUTE_INTERLEAVED` (rule B) |
+|---|---:|---:|
+| reference arm (committed O3) | `SHUFFLED`, passes 8 of 21 | `INTERLEAVED`, passes 17 of 21 |
+| cells passing (`< 0.05`) | **20 of 21** (`k`) | **19 of 21** (`f` = 2) |
+| cells better than the reference | **20 of 21** | **19 of 21** |
+| cells the reference passed and this arm failed | 1 of 8 (`h`) | 1 of 17 (`h_B`) |
+| median terminal (reference) | 0.0112 (0.0742) | 0.0104 (0.0296) |
+| median end-of-task over canonical tasks (reference) | 0.124 (0.623) | 0.082 (0.316) |
+| stale routes at the terminal, all 21 cells | 1 | 5 |
+| routes changed over the stream, median (max) | 239 (1,373) | 170 (532) |
+| re-route seconds per cell, median | 129 of 756 | 114 of 783 |
+| against O5's end-of-stream re-route + sleep on the same cells | median ratio 1.15x, better in 5 of 21 | median ratio 0.90x, better in 12 of 21 |
+| registered label | **`PREVENTS`** | **`IMPROVES`** |
+
+**The three failing cells are near-misses, not collapses.** Each has at most
+one stale route. Per-task error is moderate and uniform:
+- `REROUTE_WAKE` w22 s0: median 0.151, 56 of 64 tasks at or above 0.05, one at
+  or above 1.0;
+- `REROUTE_INTERLEAVED` w24 s0: median 0.091, no task at or above 1.0;
+- `REROUTE_INTERLEAVED` w26 s0: median 0.067, no task at or above 1.0.
+
+Their references had collapsed tails instead (90th percentiles 1.7-2.0).
+In-stream re-routing removed every collapse in all 42 cells. What remains is
+O2C's under-converged library, the mode sleep repairs.
+
+**Against the working hypotheses (2026-10-03, recorded before the run):**
+- **OB1 REALISED.** `REROUTE_WAKE` passes 20 of 21 against 8; terminal staleness
+  is 1 route in total across 21 cells, against a median 30.5 per cell.
+- **OB2 NOT REALISED.** Prediction: without consolidation the arm would fall
+  short of the re-route + sleep level. It reached 20 of 21 at a median 1.15x
+  O5's re-route + sleep terminal, with no sleep step at all. Convergence was
+  not the binding failure on these cells; stale routes were.
+- **OB3 NOT REALISED.** Prediction: 20-21 of 21 inside `INTERLEAVED`. It reached
+  19 (`IMPROVES`, not `REACHES_CEILING`). Adding interleaved consolidation to
+  in-stream re-routing did not beat re-routing alone (19 against 20).
+- **OB4 NOT REALISED.** No thrashing harm: `h` = 1 and `h_B` = 1, under the
+  registered 3. The heaviest re-routing cell (w21 s1, 1,373 route changes, a
+  WORSE end-of-task median than its reference, 1.84 against 1.45) still ended
+  at 0.009 against 0.378.
+
+**Reading.** Staleness is a CAUSE of online-formation failure, not only a
+symptom. A wake-only learner that keeps every earlier task's assignment
+current against its current parts forms the rotated substrate in 20 of 21
+development cells with no batch phase. It also tracks better during the stream:
+end-of-task median 0.124 against 0.623, better in 17 of 21 cells.
+
+**Status.** EXPLORATORY, Tier 1, design evidence only, on worlds already
+carried by O3, O5 and O7. Depth 3, exhaustive re-routing after every arrival,
+64 retained examples per task. The fully online protocol is not confirmed
+until a sealed block on a new band runs it.

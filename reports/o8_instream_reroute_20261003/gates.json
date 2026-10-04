@@ -1,0 +1,17 @@
+{
+ "E1": {
+  "passes": true
+ },
+ "E2": {
+  "passes": true,
+  "off_matches_interleaved": true,
+  "on_routes_changed": 566
+ },
+ "E3": {
+  "passes": true,
+  "routes_changed": 1740,
+  "anchor_abs_error": 0.0
+ },
+ "all_pass": true,
+ "protocol_sha256": "0ac80a915bc38c50e0cc1b5eb8977255a1f3199a2f1d24370ff65897b0963705"
+}

@@ -1,0 +1,21 @@
+{
+ "valid": true,
+ "problems": [],
+ "denominator": 21,
+ "REROUTE_WAKE": {
+  "reference": "SHUFFLED",
+  "k": 20,
+  "f": 1,
+  "n_better": 20,
+  "h": 1,
+  "label": "PREVENTS"
+ },
+ "REROUTE_INTERLEAVED": {
+  "reference": "INTERLEAVED",
+  "k": 19,
+  "f": 2,
+  "n_better": 19,
+  "h": 1,
+  "label": "IMPROVES"
+ }
+}

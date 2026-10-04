@@ -1,0 +1,4 @@
+2026-10-03T19:33:57.707871+00:00 E1 {'passes': True}
+2026-10-03T20:08:39.708783+00:00 E1 {'passes': True}
+2026-10-03T20:22:34.539865+00:00 E2 {'passes': True, 'off_matches_interleaved': True, 'on_routes_changed': 566}
+2026-10-03T20:26:06.888051+00:00 E3 {'passes': True, 'routes_changed': 1740, 'anchor_abs_error': 0.0}

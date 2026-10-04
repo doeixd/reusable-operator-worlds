@@ -6,29 +6,44 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-09-28, after O7. Nothing is running. **Open PI decision: 14
-(see "Decisions pending from the PI").** **Read
+Last rewritten: 2026-10-03, after O8. Nothing is running. **Open PI decision:
+15 (see "Decisions pending from the PI").** **Read
 `ONLINE_FORMATION_SYNTHESIS.md` first.**
 
+**O8 (Tier 1, exploratory): in-stream re-routing PREVENTS (20 of 21).** A
+wake-only learner that re-derives every EARLIER task's route against its
+current library after each arrival forms the rotated substrate in 20 of 21
+development cells, with no sleep or batch repair step. The committed wake-only
+arm passes 8 of 21. Every collapse is gone; the one failure is a near-miss.
+Inside interleaved consolidation the same hook gives 19 of 21 (`IMPROVES`).
+
 **O6 (SEALED, worlds 915-929) is CONFIRMED (45 of 45) and ATTRIBUTED (44 of
-45).** An online learner fed an order-free stream with single-operation anchors
-forms the rotated substrate in every sealed cell. It retains 64 examples per
-task, re-infers each task's route by search at the end of the stream, then
-consolidates. Sleep alone: 36/45. Collapses rescued: 6/6, against 0/6 for
-sleep alone. This is the online-formation line's first confirmatory positive.
-The sealed band 900-929 is exhausted.
+45)** for wake, then exhaustive re-route at the END of the stream, then
+consolidate. The sealed band 900-929 is exhausted.
 
-**Scaling step, exploratory:**
-- Tier 0 censuses: local search and slot maps cannot replace exhaustive
-  re-routing, while a fresh-relaxation gradient re-route recovers 76% of stale
-  routes.
-- O7 (Tier 1): gradient re-route + sleep matches exhaustive re-route + sleep on
-  every hard saved cell (10/10 rescued, 0/12 harmed), because sleep tolerates
-  imperfect routes.
+**Decision 14 is answered (delegated, 2026-10-03).** Its premise was wrong.
+One end-of-stream exhaustive re-route pass costs ~1 s per cell at depth 3 and
+~16x per depth (measured), so it binds only near depth 6-7, not at depth 4.
+No depth-4 world was built; the O8 Tier 0 census and O8 ran on the existing
+testbed instead.
 
-**Next, needs the PI:** a depth-4+ world where exhaustive search is
-infeasible. That needs a new generator configuration and a new development
-band (band 3 has only 27-29 left), then a new sealed band.
+**Next, needs the PI (decision 15):** a new SEALED band to confirm the fully
+online protocol (`REROUTE_WAKE`). The scaling rung follows: in-stream
+re-routing makes a linear re-router necessary from depth 4.
+
+
+# O8 (Tier 1, 2026-10-03): PREVENTS (rule A), IMPROVES (rule B)
+
+- Plan `b693ea2`, code `608c4c9`, scorer valid. Report
+  `reports/o8_instream_reroute.json`; archive
+  `reports/o8_instream_reroute_20261003/`.
+- `REROUTE_WAKE`: 20 of 21 pass, 20 better than `SHUFFLED`, 1 harmed;
+  median terminal 0.0112, 1.15x O5's end-of-stream re-route + sleep.
+- `REROUTE_INTERLEAVED`: 19 of 21, 19 better than `INTERLEAVED`, 1 harmed.
+- All 3 failures are uniform near-misses (no collapse, at most 1 stale route).
+- Tier 0 census before it (`15e120f`): stale routes are early commitments,
+  33% in the first third of the stream against 9-10% later.
+- Exploratory, design evidence only (worlds 20-26 already carried O3/O5/O7).
 
 
 # O7 (Tier 1, 2026-09-28): MATCHES_EXHAUSTIVE
@@ -821,35 +836,31 @@ sealed band, and all are implementation audits rather than experiments.
     900-914 (`NOT_CONFIRMED`, 38/45); O6 used 915-929 (`CONFIRMED` 45/45,
     `ATTRIBUTED` 44/45). The band is now EXHAUSTED. Worlds 900-914 are also
     contaminated as design evidence for the re-route protocol (O5, O7).
-14. **LIVE (2026-09-28): open the depth-4+ scaling rung?** O6 confirmed
-    wake + exhaustive re-route + sleep at depth 3. O7 (exploratory) showed a
-    gradient re-router, whose cost is linear in depth, plus sleep matches it
-    (10/10, b = 0). At depth 3, though, the gradient re-router is ~55x slower
-    than exhaustive search. Its value exists only where exhaustive search is
-    infeasible, and no such world exists yet. Three questions for the PI:
-    - (a) **World design.** May a depth-4+ generator configuration be built?
-      The canonical config caps tasks at 6^3 = 216 depth-3 programs
-      (`AGENTS.md` learning), so this needs `program_depth` >= 4 and a new
-      stream plan (anchors plus length-2/3/4 tasks). It breaks comparability
-      with every existing artifact, so it is a new testbed.
-    - (b) **Development band.** Which seeds? Band 3 has only 28-29 unused.
-      Claude's recommendation: allocate 30-49, after verifying that no runner,
-      report or artifact references them.
-    - (c) **Sealed band.** Which seeds, for a later confirmation? 900-929 is
-      exhausted. This is only needed after a development pass.
+14. **ANSWERED (2026-10-03, delegated to Claude): open the depth-4+ scaling
+    rung?** Not yet, and not for the reason given. The premise compared route
+    COUNTS: in wall time one end-of-stream exhaustive pass is ~1 s at depth 3
+    and ~47 s at depth 4 (projected from a measured 15.9x step), so O6's
+    protocol is feasible through depth 5. The O8 Tier 0 census then showed
+    staleness is an early-commitment phenomenon, and O8 tested in-stream
+    re-routing on the existing testbed with no new band. No seed band was
+    allocated; 30-49 remain unused.
 
-    Claude's proposed sequence once (a) and (b) are approved:
-    1. Tier 0: does wake + sleep form a library at all at depth 4?
-    2. Tier 1: gradient re-route + sleep against sleep alone, with exhaustive
-       search as a reference at depth 4 (20,736 routes, still feasible), so the
-       chooser can be checked.
-    3. Registered Tier 2 at depth 5+, where exhaustive search is infeasible and
-       only the linear re-router can run.
-
-    Alternatives if the PI prefers not to build a new world:
-    - re-routing DURING the stream, to prevent collapse rather than repair it,
-      testable on the existing testbed and bands;
-    - write-up of the online-formation line (O1-O7) for the paper.
+15. **LIVE (2026-10-03): seal the fully online protocol?** O8 (exploratory)
+    found that wake plus in-stream exhaustive re-routing of earlier tasks,
+    with NO sleep, passes 20 of 21 development cells (`PREVENTS`). The
+    natural next rung is a sealed confirmation of `REROUTE_WAKE`, registered
+    like O6 (pass count and paired attribution against the plain wake arm),
+    on a band nobody has opened. Questions for the PI:
+    - (a) **Sealed band.** 900-929 is exhausted. Claude's recommendation:
+      allocate 930-959 (verify unused first), 15 worlds x 3 streams as O6.
+    - (b) **Arms.** Recommendation: `REROUTE_WAKE` (tested), `SHUFFLED`
+      (refusal arm), and O6's `REROUTE_SLEEP` as the end-of-stream
+      comparator, so the sealed block also says whether prevention matches
+      repair. About 135 lifetimes, roughly 10 h on a pool of 3.
+    - (c) **Afterwards, scaling.** In-stream re-routing costs ~2 min per cell
+      at depth 3 and a projected ~1.6 h at depth 4, so the depth rung becomes
+      a test of the length-linear gradient re-router (O7) inside the stream,
+      on a depth-4 world and a new development band (30-49 recommended).
 
 # Housekeeping owed
 

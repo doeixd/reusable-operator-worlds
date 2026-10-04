@@ -1,0 +1,46 @@
+{
+ "protocol": {
+  "id": "o8-instream-reroute-v1",
+  "git_commit": "608c4c9",
+  "plan": "O8_INSTREAM_REROUTE_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "root": "artifacts/o8_instream_reroute",
+  "worlds": [
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26
+  ],
+  "streams": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "REROUTE_WAKE",
+   "REROUTE_INTERLEAVED"
+  ],
+  "memory": 64,
+  "extra_updates": 8192,
+  "threshold": 0.05,
+  "kind": "rotated_discrete_fast",
+  "lean": true,
+  "input_sha256": {
+   "O8_INSTREAM_REROUTE_PLAN.md": "8286d00c2eb3ffaf953431eb316864442f9d30afab6a6ed9c7021b9a55255ed9",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/o3_online_sleep_v2.json": "50a36bc8ab4c8e680089e57639d875a39abdfef04462952bdb0cbc990da93d07"
+  },
+  "implementation_sha256": "a5ea33f3a41ad023137a4a8cca10f63bc8e5e699d6f33615338cba5f969b26a5",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "census_sha256": "e090671e006012b44d88787346ba5d108414674e88dbf8806053bca8b7867bd1",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f",
+  "scale": 1
+ },
+ "protocol_sha256": "028f685ef6a8e7f80cd0477e434a61fd551dba764c4f086ff31f2476988ec8f5"
+}

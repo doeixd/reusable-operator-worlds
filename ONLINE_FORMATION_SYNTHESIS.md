@@ -279,3 +279,15 @@ routing onto an already-formed library.
 Methodological lessons from this line are recorded in `AGENTS.md`
 ("Implementation learnings", 2026-09-24 to 2026-09-26) and mirrored in
 `notes/learnings.txt`.
+
+## 2.10 In-stream re-routing (O8 Tier 0 + Tier 1; exploratory) - ADDED 2026-10-03
+
+Stale routes are early commitments: 33% of tasks arriving in the first third
+of the stream end stale, against 9-10% later, and anchors almost never.
+Re-deriving every earlier task's route by exhaustive search after each arrival
+(no sleep) passes 20 of 21 development cells against 8 for wake alone, at a
+median 1.15x the end-of-stream re-route + sleep terminal. Inside interleaved
+consolidation: 19 of 21. Every collapse is gone; the three failures are
+near-misses. Staleness is a cause of online-formation failure, not only a
+symptom, and prevention replaces repair for most of it. Depth 3, development
+worlds; a sealed confirmation needs a new band (decision 15).

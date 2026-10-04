@@ -2335,3 +2335,18 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   many-to-one and position-specific). A re-heated relaxation, in which every
   position moves at once, recovered 76%. Before building a local repair,
   measure how many coordinates a typical fix must change jointly.
+
+- ASK WHEN A COMMITMENT WENT WRONG, NOT ONLY WHETHER IT DID, AND REPAIR IT AT
+  THAT TIME (O8, 2026-10-03). O6 repaired stale routes once, after the stream.
+  A census of WHEN stale routes had been committed showed they were mostly the
+  first third of the stream (33% against 9-10%) - assignments made while the
+  library was immature. Re-deriving earlier tasks' routes during the stream
+  then made a wake-only learner pass 20 of 21 cells with no sleep phase, where
+  it had passed 8. The same census also showed decision 14's premise compared
+  route COUNTS, not seconds: one exhaustive pass binds near depth 6-7, not 4.
+  Measure the cost in the unit the decision is about before building a world
+  to escape it.
+- LONG GATES GO DETACHED TOO (O8). A full-scale gate run in a session
+  background shell was killed by the harness's low-memory reaper, leaving no
+  record. Run gates and launch as ONE detached process that writes its own
+  logs.

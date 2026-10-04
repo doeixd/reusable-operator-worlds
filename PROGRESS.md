@@ -8030,3 +8030,44 @@ and `INTERLEAVED` (17 of 21) cells; and the same hook inside `INTERLEAVED`. The
 question is whether prevention replaces repair: a wake-only learner that keeps
 its assignments current. The depth rung is deferred until O8 says which
 protocol the scaling claim is about.
+
+
+# 2026-10-03 O8 Tier 1: in-stream re-routing prevents collapse; a wake-only learner reaches 20/21 with no sleep (PREVENTS; exploratory)
+
+Plan `b693ea2`, code `608c4c9`, launched detached at 20:26Z after gates E1-E3
+passed, exit 0 at 23:29Z. 42 lifetimes, 12-16 min each, pool of 3. Scorer
+valid. The verdict entry and the hypothesis check are in `PREDICTIONS.md`
+("O8 OUTCOME"). Archive `reports/o8_instream_reroute_20261003/`.
+
+| | `REROUTE_WAKE` (rule A) | `REROUTE_INTERLEAVED` (rule B) |
+|---|---:|---:|
+| reference arm (committed O3) | `SHUFFLED`, passes 8 of 21 | `INTERLEAVED`, passes 17 of 21 |
+| cells passing (`< 0.05`) | **20 of 21** (`k`) | **19 of 21** (`f` = 2) |
+| cells better than the reference | **20 of 21** | **19 of 21** |
+| cells the reference passed and this arm failed | 1 of 8 (`h`) | 1 of 17 (`h_B`) |
+| median terminal (reference) | 0.0112 (0.0742) | 0.0104 (0.0296) |
+| median end-of-task over canonical tasks (reference) | 0.124 (0.623) | 0.082 (0.316) |
+| stale routes at the terminal, all 21 cells | 1 | 5 |
+| routes changed over the stream, median (max) | 239 (1,373) | 170 (532) |
+| re-route seconds per cell, median | 129 of 756 | 114 of 783 |
+| against O5's end-of-stream re-route + sleep on the same cells | median ratio 1.15x, better in 5 of 21 | median ratio 0.90x, better in 12 of 21 |
+| registered label | **`PREVENTS`** | **`IMPROVES`** |
+
+Operational notes:
+- The first gates attempt (session background shell) was killed by Claude
+  Code's low-memory reaper at 3.1 GiB free; no gate record was written. The PI
+  closed Edge and said low memory is acceptable. Gates and run were relaunched
+  as ONE detached process (`o8_launch.py`, archived), which the reaper does not
+  touch. Lesson: long gates go detached too, not only the run.
+- Reserve 2.0 GiB (PI instruction), recorded in `precondition.json`; the
+  constant is outside the protocol fingerprint.
+- The PI asked for unused files to be deleted during the run. 98 untracked
+  artifact directories were removed after 367 affected tests passed with them
+  moved aside; the online-line terminals (O2, O3 v2, O4, O6), O8 and the
+  V2-cited directories were kept. No O8 input was touched.
+
+NEXT (the plan's "What it decides", `PREVENTS`): a sealed confirmation of the
+fully online protocol (`REROUTE_WAKE`) on a NEW band, which needs the PI
+(decision 15 in `RESEARCH_STATUS.md`). The scaling rung is then about
+IN-STREAM cost: exhaustive in-stream re-routing is ~2 min per cell at depth 3
+and a projected ~1.6 h at depth 4, so a linear re-router is needed from depth 4.
