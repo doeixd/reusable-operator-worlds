@@ -8168,3 +8168,59 @@ Consequences for O11, written into the plan before freezing: the paired
 attribution clause has room on every cell and is kept; and because sleep alone
 reached the primary bar on these worlds, `CONFIRMED` is read only together with
 `ATTRIBUTED`.
+
+
+# 2026-10-04 O11 SEALED: CONFIRMED 45/45 and ATTRIBUTED 45/45 - the fully online protocol (in-stream re-routing + sleep) is confirmed
+
+Plan `O11_SEALED_INSTREAM_SLEEP_PLAN.md`, frozen `a517af7` before any world in
+945-959 was generated (decision 16, PI "Ok continue"); hash protected
+`4235e9c`. Code in `a517af7`. 195 cells, 14:42-21:22Z, exit 0. Before the band
+was opened: E5 dry run of every arm on development world 27 with restart test
+(cell reused, exit 0); E1 `SHUFFLED` = O3 `SHUFFLED_w20_s0`; E2
+`REROUTE_WAKE` = O8 `REROUTE_WAKE_w20_s0`; E3 `SLEEP` = O3 `SLEEP_w20_s0`;
+E3b `RW_SLEEP` on O9's saved `REROUTE_WAKE_w930_s0` terminal = O10's committed
+`w930_s0` (all bitwise); E4b depth interleaving on every sealed stream.
+Independent scorer `valid: true` (including E4 and the parent-terminal hash
+checks), labels agree with the runner; `check_prereg`, `check_invalid`,
+`check_adequacy` pass. Reserve 2.0 GiB (PI 2026-10-03), 8.2 GiB free at launch.
+Report `reports/o11_sealed_instream_sleep.json`; archive
+`reports/o11_sealed_instream_sleep_20261004/`.
+
+| arm (construction) | cells passing of 45 | median terminal | max | collapses |
+|---|---:|---:|---:|---:|
+| `RW_SLEEP`: wake + in-stream re-route + O3 sleep (primary) | **45** | 0.0100 | 0.019 | 0 |
+| `SLEEP`: wake + O3 sleep, no re-routing (attribution reference) | 38 | 0.0251 | 1.404 | 2 |
+| `REROUTE_WAKE`: wake + in-stream re-route, no sleep | 40 | 0.0132 | 0.199 | 0 |
+| `SHUFFLED`: wake alone | 14 | 0.1297 | 1.894 | 3 |
+| `PLAIN`: no anchors (15 cells) | 0 of 15 | ~1.9 | | 15 |
+
+**Primary: `CONFIRMED`.** `k` = **45 of 45** (41 needed); floor held (`PLAIN`
+0 of 15).
+
+**Attribution: `ATTRIBUTED`.** `RW_SLEEP` ended strictly below `SLEEP` in
+**45 of 45** paired cells (30 needed), at a median per-cell ratio of 0.39x, and
+passed all 7 cells sleep alone failed (2 of them collapses). The plan
+registered that the two labels are read together, because the sizing showed
+sleep alone could reach the primary bar; here sleep alone passed 38 of 45, and
+both labels hold.
+
+Descriptive: in-stream re-routing alone (`REROUTE_WAKE`) passed 40 of 45 with
+0 collapses, close to O9's 37 of 45, and left 5 stale routes in total across
+45 terminals.
+
+**Reading.** Online, order-free formation of the rotated substrate is reliable
+with no batch route search: a learner that re-derives earlier tasks' routes as
+it learns and consolidates on 64 retained examples per task passed every
+sealed cell, and in-stream re-routing contributed beyond consolidation in
+every paired cell. Together with O6 (end-of-stream re-route + sleep, 45/45) and
+O9 (in-stream re-routing alone removes collapse), the online-formation line
+has a confirmed fully online protocol. Named assumptions: single-operation
+anchors in the stream, 64 retained examples per task, depth 3 (exhaustive
+search after every arrival), one substrate family, one learner. Band 930-959
+is exhausted.
+
+NEXT (the plan's `CONFIRMED` branch): the depth rung. In-stream re-routing
+repeats the route search after every arrival, ~2 min per cell at depth 3 and a
+projected ~1.6 h at depth 4, so it needs the length-linear gradient re-router
+(O7) from depth 4, on a depth-4 world and a new development band (30-49
+recommended). That is a new PI decision (17).

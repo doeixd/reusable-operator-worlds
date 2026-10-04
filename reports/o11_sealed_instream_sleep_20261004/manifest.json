@@ -1,0 +1,74 @@
+{
+ "protocol": {
+  "id": "o11-sealed-instream-sleep-v1",
+  "git_commit": "4235e9c",
+  "plan": "O11_SEALED_INSTREAM_SLEEP_PLAN.md",
+  "tier": 2,
+  "sealed": true,
+  "worlds": [
+   945,
+   946,
+   947,
+   948,
+   949,
+   950,
+   951,
+   952,
+   953,
+   954,
+   955,
+   956,
+   957,
+   958,
+   959
+  ],
+  "arm_streams": {
+   "REROUTE_WAKE": [
+    0,
+    1,
+    2
+   ],
+   "SHUFFLED": [
+    0,
+    1,
+    2
+   ],
+   "PLAIN": [
+    0
+   ],
+   "RW_SLEEP": [
+    0,
+    1,
+    2
+   ],
+   "SLEEP": [
+    0,
+    1,
+    2
+   ]
+  },
+  "threshold": 0.05,
+  "confirm_at": 41,
+  "attribute_at": 30,
+  "jobs": 3,
+  "root": "artifacts/o11_sealed_instream_sleep",
+  "input_sha256": {
+   "O11_SEALED_INSTREAM_SLEEP_PLAN.md": "7a64c323b067a8b327cf9f1aace647a46e08045c9276abf315690c27428de6b6",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/o3_online_sleep_v2.json": "50a36bc8ab4c8e680089e57639d875a39abdfef04462952bdb0cbc990da93d07",
+   "reports/o8_instream_reroute.json": "58ea6613d33e13cdc6175223400583be997678f981796b5dcbed7718577197f1",
+   "reports/o10_rw_sleep.json": "0e0ecb8155705fdd4b89aa98d5d770cbdef40e79bd8a769b2acb6002c063f490"
+  },
+  "implementation_sha256": "faff953f15804b8962a21035d1bba738e171c30cf4287c0c9f51a4fed9078cdb",
+  "o8_sha256": "a5ea33f3a41ad023137a4a8cca10f63bc8e5e699d6f33615338cba5f969b26a5",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "census_sha256": "e090671e006012b44d88787346ba5d108414674e88dbf8806053bca8b7867bd1",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f",
+  "learner_sha256": "8fef85343e25dad51b31112beac849e993a3d581b48ff5a4b8e2b86fcd0cedc7",
+  "scale": 1
+ },
+ "protocol_sha256": "94672e4799603f97b4a40e5ff9fbe21b1f5d96343cf2daa6af5892133cfd7e62"
+}

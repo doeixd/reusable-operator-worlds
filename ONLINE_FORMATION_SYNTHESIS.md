@@ -314,3 +314,15 @@ consolidation finishes convergence. Together they need no end-of-stream route
 search and end slightly below the end-of-stream protocol (31 of 45 cells,
 median 0.90x). Design evidence on O9's opened worlds; the sealed test is O11
 (drafted, worlds 945-959).
+
+## 2.13 The fully online protocol, confirmed (O11; SEALED) - ADDED 2026-10-04
+
+On the last 15 sealed worlds of band 930-959 (945-959), wake + in-stream
+re-routing of earlier tasks + O3's sleep passed 45 of 45 cells (median 0.0100)
+and beat wake + sleep without re-routing in 45 of 45 paired cells (median
+0.39x), rescuing all 7 cells sleep alone failed. Established, under the named
+assumptions (single-operation anchors, 64 retained examples per task, depth 3,
+one substrate family, one learner): online, order-free formation is reliable
+with NO batch route search, and keeping assignments current while learning
+contributes beyond consolidation. Open: depth >= 4, where in-stream exhaustive
+re-routing becomes expensive and the length-linear re-router (O7) is needed.

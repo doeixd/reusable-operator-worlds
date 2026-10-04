@@ -1,0 +1,7 @@
+2026-10-04T14:16:42.659104+00:00 START
+2026-10-04T14:17:08.067724+00:00 dry leg stop_after=1 exit=3 orphans_killed=3
+2026-10-04T14:22:06.465392+00:00 dry leg stop_after=None exit=0 orphans_killed=0
+2026-10-04T14:22:06.476325+00:00 E5 dry run + restart PASSED
+2026-10-04T14:42:13.360792+00:00 GATES {"E1": {"passes": true}, "E2": {"passes": true}, "E3": {"passes": true}, "E3b": {"passes": true}, "E4b": {"passes": true, "failing": []}, "all_pass": true}
+2026-10-04T14:42:16.337101+00:00 LAUNCH sealed run
+2026-10-04T21:22:18.297501+00:00 DONE report reports\o11_sealed_instream_sleep.json

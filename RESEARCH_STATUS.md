@@ -6,26 +6,32 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-04, at the O11 freeze. **O11 (SEALED, 945-959) is
-being launched**; check `artifacts/o11_sealed_instream_sleep/status.json`. No
-PI decision is open. **Read
+Last rewritten: 2026-10-04, after O11. Nothing is running. **Open PI decision:
+17 (see "Decisions pending from the PI").** **Read
 `ONLINE_FORMATION_SYNTHESIS.md` first.**
 
-**O10 (Tier 1, exploratory, O9's opened worlds): `REPAIRS`.** Sleep alone on
-O9's in-stream re-routing terminals rescued all 8 near-misses and broke none of
-the 37 passing cells: 45 of 45 pass, median 0.0099, below the end-of-stream
-re-route + sleep protocol in 31 of 45 cells. So the fully online protocol is
-wake + in-stream re-routing + consolidation, with no end-of-stream route
-search.
+**O11 (SEALED, worlds 945-959): `CONFIRMED` (45 of 45) and `ATTRIBUTED` (45 of
+45).** Wake + in-stream re-routing of earlier tasks + O3's sleep, with no
+end-of-stream route search, passed every sealed cell (median 0.0100, max
+0.019) and beat sleep alone in every paired cell (median 0.39x). Sleep alone
+38/45, in-stream re-routing alone 40/45, wake alone 14/45, no anchors 0/15.
+This is the online-formation line's fully online confirmed result. Band
+930-959 is exhausted.
 
-**O9 (SEALED, worlds 930-944): `NOT_CONFIRMED` (37/45) and `ATTRIBUTED`
-(38/45).** In-stream re-routing alone removed every collapse but left 8
-near-misses. **O6 (SEALED, 915-929) stands: CONFIRMED 45/45** for the
-end-of-stream protocol.
+**Also confirmed:** O6 (915-929), wake + end-of-stream re-route + sleep, 45/45.
+**O9 (930-944)** showed in-stream re-routing alone removes collapse but is not
+reliable without consolidation (37/45).
 
-**Running:** O11, the sealed test of wake + in-stream re-routing + sleep on
-the last 15 sealed worlds, 945-959 (`O11_SEALED_INSTREAM_SLEEP_PLAN.md`,
-frozen). Decision 16 answered.
+**Next, needs the PI (decision 17):** the depth rung. In-stream re-routing
+needs the length-linear gradient re-router (O7) from depth 4; that needs a
+depth-4 world configuration and a new development band (30-49 recommended).
+
+
+# O11 SEALED (2026-10-04): CONFIRMED + ATTRIBUTED
+
+- Plan `a517af7`, scorer valid. Report `reports/o11_sealed_instream_sleep.json`;
+  archive `reports/o11_sealed_instream_sleep_20261004/`.
+- `RW_SLEEP` 45/45; beats `SLEEP` 45/45 paired; rescues all 7 sleep failures.
 
 
 # O10 (Tier 1, 2026-10-04): REPAIRS
@@ -872,6 +878,19 @@ sealed band, and all are implementation audits rather than experiments.
     below sleep alone in 45/45 cells on O9's worlds; sleep alone 41/45, so the
     two labels are read together). Band 930-959 is exhausted after O11; nothing
     new allocated.
+
+17. **LIVE (2026-10-04): open the depth rung?** The fully online protocol is
+    confirmed at depth 3 (O11). In-stream re-routing searches all `12^d`
+    routes for every earlier task after each arrival: ~2 min per cell at depth
+    3, projected ~1.6 h at depth 4 and ~20 h at depth 5. The length-linear
+    gradient re-router (O7, matched exhaustive + sleep at depth 3) is the
+    candidate. Questions for the PI: (a) may a depth-4 generator configuration
+    be built (`program_depth` 4; a new testbed, not comparable with existing
+    artifacts)? (b) development band: Claude recommends 30-49 (verify unused
+    first). (c) a new sealed band later. Claude's proposed order: Tier 0 (does
+    wake + sleep form a library at depth 4 at all?), Tier 1 (in-stream gradient
+    re-routing against in-stream exhaustive at depth 4, where both are
+    feasible), then a registered test at depth 5.
 
 # Housekeeping owed
 
