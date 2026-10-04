@@ -10339,3 +10339,51 @@ assignments, and consolidation for convergence. O9's terminals give a cheap
 next test (exploratory, on now-opened worlds): `REROUTE_WAKE` terminal +
 O3's sleep without any end-of-stream re-route. A confirmatory version needs
 the 15 still-sealed worlds 945-959 under a new frozen plan.
+
+
+# O10 OUTCOME (2026-10-04): REPAIRS - sleep alone on the in-stream re-routing terminals rescues 8/8 near-misses and breaks 0/37 (Tier 1, exploratory)
+
+Plan `O10_REROUTE_WAKE_SLEEP_PLAN.md`, frozen `264abd1`; code `81bb7c2`. O3's
+sleep, verbatim (`o3.run_sleep`: 64 retained examples per task, 8,192
+consolidation updates), on O9's 45 saved in-stream re-routing terminals, with
+NO route search. 45 cells, exit 0. Gates: G0 (11 reloads reproduce O9's
+recorded per-task terminals) and E2 (`run_sleep` on O3's `SHUFFLED_w20_s0`
+terminal reproduces O3's `SLEEP_w20_s0` bitwise) passed. Independent scorer
+`valid: true`, label agrees. `check_prereg`, `check_invalid`, `check_adequacy`
+pass. Report `reports/o10_rw_sleep.json`; archive
+`reports/o10_rw_sleep_20261004/`.
+
+**Disclosure:** the pre-launch structural dry cell was a TARGET cell (931 s0),
+so its value (0.0119) was seen before launch. The computation is
+deterministic; the run recomputed it from scratch and got the same number.
+
+- **Target set:** `r` = **8 of 8** rescued (7 needed).
+- **Harm set:** `b` = **0 of 37** broken.
+- Label **`REPAIRS`**. All 45 cells pass: median 0.0099, maximum 0.0137.
+- Sleep improved on the in-stream terminal in 41 of 45 cells (median ratio
+  0.75x).
+- Against O9's end-of-stream re-route + sleep on the same streams: below it in
+  31 of 45 cells, median ratio 0.90x.
+- Stale routes after sleep: 14 in total across 45 cells (7 cells, at most 8 in
+  one), against 6 before sleep. Consolidation trains through routes and
+  re-creates a little staleness; it does not move any cell over the threshold.
+
+| target cell (O9 near-miss) | wake + in-stream re-route (O9) | + sleep (O10) | end-of-stream re-route + sleep (O9 comparator) |
+|---|---:|---:|---:|
+| 931 s0 | 0.088 | 0.0119 | 0.0144 |
+| 931 s2 | 0.127 | 0.0076 | 0.0089 |
+| 932 s2 | 0.232 | 0.0088 | 0.0119 |
+| 937 s1 | 0.117 | 0.0108 | 0.0090 |
+| 937 s2 | 0.094 | 0.0098 | 0.0091 |
+| 938 s1 | 0.051 | 0.0114 | 0.0115 |
+| 938 s2 | 0.211 | 0.0099 | 0.0113 |
+| 944 s2 | 0.079 | 0.0099 | 0.0130 |
+
+**Reading.** In-stream re-routing and consolidation fix different failure
+modes, and together they do what each alone does not: in-stream re-routing
+removes collapse (O9: 0 against 5), and consolidation finishes the
+under-converged near-misses it leaves. The combined protocol needs NO
+end-of-stream route search and ends slightly better than the protocol that
+uses one. Exploratory: worlds 930-944 were opened by O9, so this is design
+evidence. A confirmatory test of the combined protocol needs the still-sealed
+worlds 945-959 under a new frozen plan (O11, drafted).

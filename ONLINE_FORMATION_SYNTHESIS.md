@@ -304,3 +304,13 @@ Established: stale early commitments cause collapse, and re-deriving them
 during the stream prevents it. Also established: prevention does not replace
 consolidation; convergence remains a separate failure mode at this budget.
 The development estimate (O8, 20/21) was optimistic against the sealed 0.82.
+
+## 2.12 Prevention plus consolidation (O10; exploratory) - ADDED 2026-10-04
+
+O3's sleep, applied without any route search to O9's in-stream re-routing
+terminals, rescued all 8 near-misses and broke none of the 37 passing cells
+(45 of 45, median 0.0099). In-stream re-routing removes collapse;
+consolidation finishes convergence. Together they need no end-of-stream route
+search and end slightly below the end-of-stream protocol (31 of 45 cells,
+median 0.90x). Design evidence on O9's opened worlds; the sealed test is O11
+(drafted, worlds 945-959).

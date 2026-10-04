@@ -1,0 +1,60 @@
+{
+ "protocol": {
+  "id": "o10-rw-sleep-v1",
+  "git_commit": "81bb7c2",
+  "plan": "O10_REROUTE_WAKE_SLEEP_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "target": [
+   [
+    931,
+    0
+   ],
+   [
+    931,
+    2
+   ],
+   [
+    932,
+    2
+   ],
+   [
+    937,
+    1
+   ],
+   [
+    937,
+    2
+   ],
+   [
+    938,
+    1
+   ],
+   [
+    938,
+    2
+   ],
+   [
+    944,
+    2
+   ]
+  ],
+  "threshold": 0.05,
+  "memory": 64,
+  "extra_updates": 8192,
+  "input_sha256": {
+   "O10_REROUTE_WAKE_SLEEP_PLAN.md": "a30aaf24e9b2fc2f9345c1d5ced4e3433b11f87fb78f92b209e3e14f2c2580f1",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/o9_sealed_online.json": "108d94fe86815b080d409920a88e47686501bb8d46a0b16573fb6229aeaf9212",
+   "reports/o3_online_sleep_v2.json": "50a36bc8ab4c8e680089e57639d875a39abdfef04462952bdb0cbc990da93d07"
+  },
+  "implementation_sha256": "7416e9d9ec244ef5d117d926e506248d15fe63189a231c91604cb76990eeee0a",
+  "o9_sha256": "d708b703f8ee32955181208a9366736b61aba878f129d0c86c2c7102aa0e0547",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "census_sha256": "e090671e006012b44d88787346ba5d108414674e88dbf8806053bca8b7867bd1",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f"
+ },
+ "protocol_sha256": "d6e272073ba47deae30f9ceb159517091d0ebfa75a17595de7ed9dad50ef74ff"
+}

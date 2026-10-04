@@ -6,26 +6,34 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-04, after O9. Nothing is running. No PI decision is
-open; the next rung (O10, exploratory) is Claude's to run. **Read
+Last rewritten: 2026-10-04, after O10. Nothing is running. **Open PI decision:
+16 (see "Decisions pending from the PI").** **Read
 `ONLINE_FORMATION_SYNTHESIS.md` first.**
 
-**O9 (SEALED, worlds 930-944): `NOT_CONFIRMED` (37 of 45; 41 needed) and
-`ATTRIBUTED` (38 of 45).** A wake-only learner that re-derives earlier routes
-during the stream, with NO consolidation, removes every collapse (0 against 5
-for wake alone) and beats wake alone in 38 of 45 paired cells. But 8 cells end
-as near-misses (0.05-0.23). End-of-stream re-route + sleep, applied to the
-same streams' wake-alone terminals, passes 45 of 45, again. So in-stream re-routing fixes STALE ROUTES,
-and consolidation is still needed for CONVERGENCE.
+**O10 (Tier 1, exploratory, O9's opened worlds): `REPAIRS`.** Sleep alone on
+O9's in-stream re-routing terminals rescued all 8 near-misses and broke none of
+the 37 passing cells: 45 of 45 pass, median 0.0099, below the end-of-stream
+re-route + sleep protocol in 31 of 45 cells. So the fully online protocol is
+wake + in-stream re-routing + consolidation, with no end-of-stream route
+search.
 
-**O6 (SEALED, worlds 915-929) stands: CONFIRMED 45/45** for wake, then
-end-of-stream exhaustive re-route, then sleep.
+**O9 (SEALED, worlds 930-944): `NOT_CONFIRMED` (37/45) and `ATTRIBUTED`
+(38/45).** In-stream re-routing alone removed every collapse but left 8
+near-misses. **O6 (SEALED, 915-929) stands: CONFIRMED 45/45** for the
+end-of-stream protocol.
 
-**Next (Claude, exploratory):** O10 on O9's saved `REROUTE_WAKE` terminals:
-sleep only, no end-of-stream re-route. If it repairs the 8 near-misses, the
-fully online protocol is in-stream re-routing + consolidation, and its sealed
-test would use the 15 still-sealed worlds 945-959 under a new plan. The depth
-scaling rung (decision 14's successor) waits for that protocol.
+**Next, needs the PI (decision 16):** run O11, the sealed test of wake +
+in-stream re-routing + sleep on the last 15 sealed worlds, 945-959. The plan
+is drafted (`O11_SEALED_INSTREAM_SLEEP_PLAN.md`), not frozen.
+
+
+# O10 (Tier 1, 2026-10-04): REPAIRS
+
+- Plan `264abd1`, code `81bb7c2`, scorer valid. Report
+  `reports/o10_rw_sleep.json`; archive `reports/o10_rw_sleep_20261004/`.
+- `r` 8/8, `b` 0/37; all 45 pass; median 0.0099; 31/45 below O9's
+  end-of-stream re-route + sleep.
+- Pre-launch dry cell was a target cell (931 s0, 0.0119), disclosed.
 
 
 # O9 SEALED (2026-10-04): NOT_CONFIRMED + ATTRIBUTED
@@ -857,6 +865,15 @@ sealed band, and all are implementation audits rather than experiments.
     930-944 with `REROUTE_WAKE`, `SHUFFLED`, `REROUTE_SLEEP` and `PLAIN`.
     Result: `NOT_CONFIRMED` (37/45) and `ATTRIBUTED` (38/45). 945-959 remain
     sealed and unused.
+
+16. **LIVE (2026-10-04): open the last 15 sealed worlds (945-959) for O11?**
+    O11 tests the combined fully online protocol: wake + in-stream re-routing
+    of earlier tasks + O3's sleep, registered like O6/O9 (pass count >= 41 of
+    45, and attribution against wake + sleep without re-routing). Design
+    evidence: O10 passes 45 of 45 on O9's opened worlds
+    (the same protocol, assembled from O9's terminals). About 8 hours.
+    This uses the band's last sealed worlds; a later sealed test would need a
+    new band. Claude's recommendation: run it. The plan is drafted, not frozen.
 
 # Housekeeping owed
 

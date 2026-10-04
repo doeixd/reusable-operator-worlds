@@ -1,0 +1,23 @@
+{
+ "G0": {
+  "passes": true,
+  "cells": {
+   "w931_s0": true,
+   "w931_s2": true,
+   "w932_s2": true,
+   "w937_s1": true,
+   "w937_s2": true,
+   "w938_s1": true,
+   "w938_s2": true,
+   "w944_s2": true,
+   "w930_s0": true,
+   "w930_s1": true,
+   "w930_s2": true
+  }
+ },
+ "E2": {
+  "passes": true
+ },
+ "all_pass": true,
+ "protocol_sha256": "d6e272073ba47deae30f9ceb159517091d0ebfa75a17595de7ed9dad50ef74ff"
+}
