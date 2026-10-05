@@ -326,3 +326,14 @@ one substrate family, one learner): online, order-free formation is reliable
 with NO batch route search, and keeping assignments current while learning
 contributes beyond consolidation. Open: depth >= 4, where in-stream exhaustive
 re-routing becomes expensive and the length-linear re-router (O7) is needed.
+
+## 2.14 Depth 4 (D1; exploratory) - ADDED 2026-10-05
+
+On a depth-4 testbed (development worlds 30-36), the protocol confirmed at
+depth 3 (wake + in-stream re-routing + sleep) passed 21 of 21 cells at median
+0.013. Sleep alone and wake alone collapsed in all 21. Re-routing therefore
+changes role with program length: a margin at depth 3, a necessity at depth 4,
+consistent with stale early commitments being the failure mode (longer routes
+give more positions to commit wrongly). In-stream exhaustive re-routing cost
+about 50 minutes per cell at depth 4; depth 5 needs a cheaper re-router or
+schedule.

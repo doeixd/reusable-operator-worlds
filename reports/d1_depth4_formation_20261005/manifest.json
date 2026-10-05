@@ -1,0 +1,48 @@
+{
+ "protocol": {
+  "id": "d1-depth4-formation-v1",
+  "git_commit": "93fd9bd",
+  "plan": "D1_DEPTH4_FORMATION_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "root": "artifacts/d1_depth4_formation",
+  "worlds": [
+   30,
+   31,
+   32,
+   33,
+   34,
+   35,
+   36
+  ],
+  "streams": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "RW4",
+   "SHUFFLED4",
+   "RW_SLEEP4",
+   "SLEEP4"
+  ],
+  "threshold": 0.05,
+  "memory": 64,
+  "extra_updates": 8192,
+  "input_sha256": {
+   "D1_DEPTH4_FORMATION_PLAN.md": "6f71cdded9bae64fbebe2a95de849ecefb203f7f5fdafba00af0943346754164",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "17dcfa977c1854fe8d069bb140c8ca880941d9a5a13e6596beb86c033bd6ff55",
+  "d4_sha256": "4482bd09e1dcc1020a987af1e191c37e763eeeaf8415c5a3734dc62f6d133b3c",
+  "o8_sha256": "a5ea33f3a41ad023137a4a8cca10f63bc8e5e699d6f33615338cba5f969b26a5",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "census_sha256": "e090671e006012b44d88787346ba5d108414674e88dbf8806053bca8b7867bd1",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f",
+  "scale": 1
+ },
+ "protocol_sha256": "c0ce94a4cdfda267f8f22c1cb0a24d0717a84a0ee5fc814de3a943c91b1f5014"
+}

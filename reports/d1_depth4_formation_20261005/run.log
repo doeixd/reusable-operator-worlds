@@ -1,0 +1,85 @@
+2026-10-05T01:25:18.748685+00:00 LAUNCH c0ce94a4cdfda267f8f22c1cb0a24d0717a84a0ee5fc814de3a943c91b1f5014 todo=84 reused=0 scale=1 free=8.6GiB
+2026-10-05T02:27:49.904416+00:00 cell finished RW4_w30_s2 3748.5s terminal=0.0148274 changed=2724 stale=0 reroute=2893s
+2026-10-05T02:28:08.134651+00:00 cell finished RW4_w30_s0 3766.8s terminal=0.143024 changed=552 stale=1 reroute=2925s
+2026-10-05T02:31:53.382012+00:00 cell finished RW4_w30_s1 3992.0s terminal=0.00999317 changed=872 stale=0 reroute=3145s
+2026-10-05T03:40:01.938875+00:00 cell finished RW4_w31_s1 4313.7s terminal=0.00858868 changed=904 stale=0 reroute=3406s
+2026-10-05T03:40:39.120124+00:00 cell finished RW4_w31_s0 4369.1s terminal=0.0220072 changed=894 stale=0 reroute=3455s
+2026-10-05T03:49:12.818991+00:00 cell finished RW4_w31_s2 4639.3s terminal=0.0716355 changed=1165 stale=1 reroute=3720s
+2026-10-05T04:45:31.999622+00:00 cell finished RW4_w32_s0 3930.0s terminal=0.0163238 changed=557 stale=0 reroute=3071s
+2026-10-05T04:46:11.488062+00:00 cell finished RW4_w32_s1 3932.3s terminal=0.111626 changed=7354 stale=1 reroute=3059s
+2026-10-05T04:58:46.659801+00:00 cell finished RW4_w32_s2 4173.8s terminal=0.0904064 changed=1629 stale=1 reroute=3294s
+2026-10-05T05:49:21.248690+00:00 cell finished RW4_w33_s1 3789.7s terminal=0.113598 changed=2815 stale=1 reroute=2899s
+2026-10-05T05:49:50.531505+00:00 cell finished RW4_w33_s0 3858.5s terminal=0.0121622 changed=989 stale=0 reroute=2981s
+2026-10-05T06:05:39.308354+00:00 cell finished RW4_w33_s2 4012.6s terminal=0.0210718 changed=1800 stale=0 reroute=3085s
+2026-10-05T07:00:05.471553+00:00 cell finished RW4_w34_s1 4214.9s terminal=0.132747 changed=1037 stale=1 reroute=3229s
+2026-10-05T07:02:19.291642+00:00 cell finished RW4_w34_s0 4378.0s terminal=0.00981377 changed=1299 stale=0 reroute=3383s
+2026-10-05T07:14:12.172128+00:00 cell finished RW4_w34_s2 4112.8s terminal=0.0202956 changed=301 stale=0 reroute=3191s
+2026-10-05T08:08:37.501148+00:00 cell finished RW4_w35_s1 3978.2s terminal=0.0102522 changed=652 stale=0 reroute=3073s
+2026-10-05T08:11:41.396462+00:00 cell finished RW4_w35_s0 4295.9s terminal=0.0126738 changed=3676 stale=0 reroute=3398s
+2026-10-05T08:24:55.959775+00:00 cell finished RW4_w35_s2 4243.7s terminal=0.059493 changed=2717 stale=0 reroute=3331s
+2026-10-05T09:13:07.531393+00:00 cell finished RW4_w36_s0 3870.0s terminal=0.0116776 changed=467 stale=0 reroute=3001s
+2026-10-05T09:17:31.675976+00:00 cell finished RW4_w36_s1 3950.2s terminal=0.0504514 changed=3671 stale=0 reroute=3093s
+2026-10-05T09:26:50.896647+00:00 cell finished SHUFFLED4_w30_s0 823.4s terminal=1.97369
+2026-10-05T09:28:39.926453+00:00 cell finished RW4_w36_s2 3823.9s terminal=0.0367048 changed=4999 stale=0 reroute=2970s
+2026-10-05T09:30:37.837829+00:00 cell finished SHUFFLED4_w30_s1 786.2s terminal=1.88099
+2026-10-05T09:39:00.754874+00:00 cell finished SHUFFLED4_w30_s2 729.8s terminal=2.03129
+2026-10-05T09:40:36.248302+00:00 cell finished SHUFFLED4_w31_s0 716.3s terminal=1.95497
+2026-10-05T09:42:20.182110+00:00 cell finished SHUFFLED4_w31_s1 702.3s terminal=2.00557
+2026-10-05T09:50:51.548002+00:00 cell finished SHUFFLED4_w31_s2 710.8s terminal=1.87818
+2026-10-05T09:52:25.438521+00:00 cell finished SHUFFLED4_w32_s0 709.2s terminal=1.92248
+2026-10-05T09:54:06.223833+00:00 cell finished SHUFFLED4_w32_s1 706.0s terminal=1.83685
+2026-10-05T10:02:42.643454+00:00 cell finished SHUFFLED4_w32_s2 711.1s terminal=1.97042
+2026-10-05T10:04:14.547851+00:00 cell finished SHUFFLED4_w33_s0 709.1s terminal=2.08974
+2026-10-05T10:05:54.557257+00:00 cell finished SHUFFLED4_w33_s1 708.3s terminal=1.96074
+2026-10-05T10:14:38.786644+00:00 cell finished SHUFFLED4_w33_s2 716.1s terminal=1.88842
+2026-10-05T10:16:11.937131+00:00 cell finished SHUFFLED4_w34_s0 717.4s terminal=1.98696
+2026-10-05T10:17:41.296436+00:00 cell finished SHUFFLED4_w34_s1 706.7s terminal=1.89183
+2026-10-05T10:26:30.399759+00:00 cell finished SHUFFLED4_w34_s2 711.7s terminal=1.98615
+2026-10-05T10:28:09.173166+00:00 cell finished SHUFFLED4_w35_s0 717.2s terminal=1.88085
+2026-10-05T10:29:29.793080+00:00 cell finished SHUFFLED4_w35_s1 708.5s terminal=2.00607
+2026-10-05T10:38:17.581451+00:00 cell finished SHUFFLED4_w35_s2 707.2s terminal=1.77824
+2026-10-05T10:39:54.636188+00:00 cell finished SHUFFLED4_w36_s0 705.5s terminal=1.98521
+2026-10-05T10:41:12.786880+00:00 cell finished SHUFFLED4_w36_s1 703.0s terminal=1.95404
+2026-10-05T10:42:23.904146+00:00 cell finished RW_SLEEP4_w30_s2 149.3s terminal=0.0147949
+2026-10-05T10:43:38.378357+00:00 cell finished RW_SLEEP4_w30_s0 145.6s terminal=0.0129946
+2026-10-05T10:44:51.307123+00:00 cell finished RW_SLEEP4_w30_s1 147.4s terminal=0.0114006
+2026-10-05T10:46:03.926684+00:00 cell finished RW_SLEEP4_w31_s1 145.6s terminal=0.0096909
+2026-10-05T10:47:17.573609+00:00 cell finished RW_SLEEP4_w31_s0 146.3s terminal=0.0117049
+2026-10-05T10:48:28.605285+00:00 cell finished RW_SLEEP4_w31_s2 144.7s terminal=0.0114885
+2026-10-05T10:49:43.886510+00:00 cell finished RW_SLEEP4_w32_s0 146.3s terminal=0.0146025
+2026-10-05T10:50:06.295791+00:00 cell finished SHUFFLED4_w36_s2 708.7s terminal=1.79581
+2026-10-05T10:50:55.400221+00:00 cell finished RW_SLEEP4_w32_s1 146.8s terminal=0.0136747
+2026-10-05T10:52:12.138605+00:00 cell finished RW_SLEEP4_w32_s2 148.3s terminal=0.011544
+2026-10-05T10:52:32.677080+00:00 cell finished RW_SLEEP4_w33_s1 146.4s terminal=0.0132916
+2026-10-05T10:53:22.487415+00:00 cell finished RW_SLEEP4_w33_s0 147.1s terminal=0.0136275
+2026-10-05T10:54:38.284156+00:00 cell finished RW_SLEEP4_w33_s2 146.1s terminal=0.0115057
+2026-10-05T10:54:59.079307+00:00 cell finished RW_SLEEP4_w34_s1 146.4s terminal=0.0126712
+2026-10-05T10:55:47.540092+00:00 cell finished RW_SLEEP4_w34_s0 145.0s terminal=0.0114723
+2026-10-05T10:57:05.016883+00:00 cell finished RW_SLEEP4_w34_s2 146.7s terminal=0.0155486
+2026-10-05T10:57:25.977549+00:00 cell finished RW_SLEEP4_w35_s1 146.9s terminal=0.0112156
+2026-10-05T10:58:12.318590+00:00 cell finished RW_SLEEP4_w35_s0 144.8s terminal=0.0110347
+2026-10-05T10:59:31.394539+00:00 cell finished RW_SLEEP4_w35_s2 146.4s terminal=0.0133593
+2026-10-05T10:59:52.119048+00:00 cell finished RW_SLEEP4_w36_s0 146.1s terminal=0.0157234
+2026-10-05T11:00:36.789428+00:00 cell finished RW_SLEEP4_w36_s1 144.5s terminal=0.0130265
+2026-10-05T11:01:56.903367+00:00 cell finished SLEEP4_w30_s0 145.5s terminal=1.49857
+2026-10-05T11:02:17.713521+00:00 cell finished RW_SLEEP4_w36_s2 145.7s terminal=0.0150985
+2026-10-05T11:03:02.026688+00:00 cell finished SLEEP4_w30_s1 145.2s terminal=1.46256
+2026-10-05T11:04:23.926840+00:00 cell finished SLEEP4_w30_s2 147.0s terminal=1.51448
+2026-10-05T11:04:44.716801+00:00 cell finished SLEEP4_w31_s0 147.0s terminal=1.52357
+2026-10-05T11:05:27.093663+00:00 cell finished SLEEP4_w31_s1 145.1s terminal=1.51652
+2026-10-05T11:07:08.154779+00:00 cell finished SLEEP4_w31_s2 164.2s terminal=1.4599
+2026-10-05T11:07:38.567074+00:00 cell finished SLEEP4_w32_s0 173.8s terminal=1.45778
+2026-10-05T11:08:41.320514+00:00 cell finished SLEEP4_w32_s1 194.2s terminal=1.3945
+2026-10-05T11:10:37.793135+00:00 cell finished SLEEP4_w32_s2 209.6s terminal=1.4402
+2026-10-05T11:11:09.630672+00:00 cell finished SLEEP4_w33_s0 211.1s terminal=1.52036
+2026-10-05T11:11:57.658920+00:00 cell finished SLEEP4_w33_s1 196.3s terminal=1.49746
+2026-10-05T11:13:31.397173+00:00 cell finished SLEEP4_w33_s2 173.6s terminal=1.44388
+2026-10-05T11:14:08.921178+00:00 cell finished SLEEP4_w34_s0 179.3s terminal=1.47269
+2026-10-05T11:15:12.954173+00:00 cell finished SLEEP4_w34_s1 195.3s terminal=1.42339
+2026-10-05T11:16:48.399820+00:00 cell finished SLEEP4_w34_s2 197.0s terminal=1.51877
+2026-10-05T11:17:23.213664+00:00 cell finished SLEEP4_w35_s0 194.3s terminal=1.4153
+2026-10-05T11:18:27.810291+00:00 cell finished SLEEP4_w35_s1 194.9s terminal=1.42939
+2026-10-05T11:20:49.179072+00:00 cell finished SLEEP4_w35_s2 240.8s terminal=1.32049
+2026-10-05T11:21:39.817337+00:00 cell finished SLEEP4_w36_s0 256.6s terminal=1.48614
+2026-10-05T11:22:48.287491+00:00 cell finished SLEEP4_w36_s1 260.5s terminal=1.50038
+2026-10-05T11:24:16.052124+00:00 cell finished SLEEP4_w36_s2 206.9s terminal=1.37934

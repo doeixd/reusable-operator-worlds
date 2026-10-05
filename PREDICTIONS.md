@@ -10494,3 +10494,56 @@ computed in the wrong unit (decision 14 compared route counts, not seconds).
 
 The world-48 cell is one world and one stream, seen before D1 was frozen and
 disclosed in its plan. NEXT: D1 (Tier 1, worlds 30-36).
+
+
+# D1 OUTCOME (2026-10-05): TRANSFERS - the confirmed online protocol forms the substrate at depth 4 in 21/21 cells, where sleep alone collapses in 21/21 (Tier 1, exploratory)
+
+Plan `D1_DEPTH4_FORMATION_PLAN.md`, frozen `f930710`, hash protected
+`93fd9bd`. Development worlds 30-36 (band 30-49, decision 17), three streams,
+84 cells, 01:25-11:24Z, exit 0. Dry run of every arm on world 49 with restart
+test passed before launch. `check_prereg`, `check_invalid`, `check_adequacy`
+pass. Report `reports/d1_depth4_formation.json`; archive
+`reports/d1_depth4_formation_20261005/`.
+
+**Scoring disclosure:** D1 is Tier 1 and its plan did not register an
+independent scorer. The summary was recomputed independently from the 84
+durable per-cell records before recording, and matches the runner exactly
+(`k` = 21, `h` = 0, `TRANSFERS`). The staleness census function reports
+by-depth counts for depths 1-3 only, so depth-4 stale routes are in each
+cell's total but absent from its by-depth field; no rule reads that field.
+
+| arm (construction) | cells passing of 21 | median | range | collapses |
+|---|---:|---:|---:|---:|
+| `RW_SLEEP4`: wake + in-stream re-route + O3 sleep (primary) | **21** | 0.0130 | 0.0097-0.0157 | 0 |
+| `RW4`: wake + in-stream re-route, no sleep | 13 | 0.0211 | 0.0086-0.143 | 0 |
+| `SLEEP4`: wake + O3 sleep, no re-routing | 0 | 1.46 | 1.32-1.52 | 21 |
+| `SHUFFLED4`: wake alone | 0 | 1.95 | 1.78-2.09 | 21 |
+
+- `k` = **21 of 21**; `h` = 0; label **`TRANSFERS`**.
+- In-stream re-route + sleep beat sleep alone in 21 of 21 paired cells.
+- Terminal stale routes after in-stream re-routing: 6 in total across 21
+  cells (wake alone: median 89 per cell).
+- In-stream re-routing changed a median 1,165 routes per cell and took a
+  median 3,093 s of a ~70-minute cell.
+- During the stream the re-routed learner is NOT better: end-of-task median
+  over the canonical tasks 2.76, against 2.38 for wake alone. The repair works
+  at the terminal, not along the way.
+
+**Reading.** The confirmed depth-3 protocol forms the depth-4 substrate in
+every development cell, at the same quality as at depth 3 (median 0.013
+against 0.010 sealed). What changes with depth is the ROLE of re-routing. At
+depth 3, sleep alone already passed 36-41 of 45 cells and re-routing added a
+margin (O11: 45/45 paired, 0.39x). At depth 4, sleep alone passes NONE: every
+sleep-only and wake-only cell collapses (1.3-2.1). In-stream re-routing goes
+from helpful to necessary as programs lengthen, which is what the
+stale-commitment account predicts: longer routes have more positions to commit
+wrongly on an immature library.
+
+**Status.** EXPLORATORY, Tier 1, development worlds; one rung of decision 17.
+The world-48 timing cell (seen before freezing) agreed with all 21 cells.
+
+NEXT (the plan's `TRANSFERS` branch): depth 5. In-stream exhaustive search
+costs ~3 s per depth-5 task (projected 12x depth 4), so either the length-linear
+gradient re-router or a sparser re-route schedule is needed; measure both at
+Tier 0 before planning. A sealed test of the depth-4 result needs a new sealed
+band (PI decision).

@@ -6,16 +6,19 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-04, at the D1 launch. **D1 (Tier 1, depth 4, worlds
-30-36) is running**; check `artifacts/d1_depth4_formation/status.json`. No PI
-decision is open. **Read `ONLINE_FORMATION_SYNTHESIS.md` first.**
+Last rewritten: 2026-10-05, after D1. Nothing is running. No PI decision is
+open; the next step (Tier 0 at depth 5) is Claude's. **Read
+`ONLINE_FORMATION_SYNTHESIS.md` first.**
 
-**Depth rung (decision 17, answered):** development band 30-49 allocated for a
-depth-4 testbed (`row.experiments.d4_stream`). Tier 0 found in-stream
-exhaustive re-routing affordable at depth 4 (47 min per cell; exhaustive 0.27
-s per depth-4 task against 1.06 s for O7's gradient re-router), so D1 tests the
-confirmed depth-3 protocol unchanged at depth 4. One timing cell on world 48:
-re-route + sleep 0.0149, sleep alone 1.50, wake alone 2.06.
+**D1 (Tier 1, depth 4, development worlds 30-36): `TRANSFERS`, 21 of 21.**
+Wake + in-stream re-routing + sleep formed the depth-4 substrate in every cell
+(median 0.013). Sleep alone and wake alone collapsed in ALL 21 cells (1.3-2.1).
+At depth 3 sleep alone passed most cells; at depth 4 it passes none, so
+in-stream re-routing goes from helpful to necessary as programs lengthen.
+
+**Next (Claude):** Tier 0 at depth 5: time exhaustive against gradient in-stream
+re-routing and sparser re-route schedules, then plan D2. A sealed depth-4 test
+needs a new sealed band (PI decision, not yet opened).
 
 **O11 (SEALED, worlds 945-959): `CONFIRMED` (45 of 45) and `ATTRIBUTED` (45 of
 45).** Wake + in-stream re-routing of earlier tasks + O3's sleep, with no
