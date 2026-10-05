@@ -1,0 +1,47 @@
+{
+ "protocol": {
+  "id": "d2-depth5-formation-v1",
+  "git_commit": "61e4220",
+  "plan": "D2_DEPTH5_FORMATION_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "depth": 5,
+  "root": "artifacts/d2_depth5_formation",
+  "worlds": [
+   37,
+   38,
+   39,
+   40,
+   41,
+   42,
+   43
+  ],
+  "streams": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "SHUFFLED5",
+   "RS5",
+   "SLEEP5"
+  ],
+  "threshold": 0.05,
+  "memory": 64,
+  "extra_updates": 8192,
+  "input_sha256": {
+   "D2_DEPTH5_FORMATION_PLAN.md": "84eb69c97f4c2937140c04b8e7594cd6d8cac0da53f27e5662722d661cc27b04",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "2401d3f7ed65373014c71e4f0b16ef3f7498ba500d939ecb840085a362247e45",
+  "dn_sha256": "75a0c7fe3045f2113b0bcaed29aa3037e332ea95db44dbb68210a2c0d1c286ef",
+  "deep_reroute_sha256": "6528c8683cb33a5b90d51d6f8e42c6234142a206a4f567c7d307e487e5eea3e6",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "lifetime_sha256": "7c87d94545a95795d78b732bc510254ee0b9713b988ca5bfbbef0f72eb4c6f5f",
+  "scale": 1
+ },
+ "protocol_sha256": "edeb05a285edb1c9129c956b1d4a0dc5d5d54349d5a54555b384f34fc28023b5"
+}

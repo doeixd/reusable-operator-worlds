@@ -8370,3 +8370,55 @@ depth 4: consolidation remains necessary.
 The re-route + sleep value is closer to the 0.05 threshold than any depth-4
 cell (maximum 0.0187), a single-cell hint that depth 5 is harder. NEXT: D2 (Tier
 1, worlds 37-43).
+
+
+# 2026-10-05 D2 Tier 1: depth 5 TRANSFERS (21/21) with one end-of-stream re-route pass + sleep
+
+Plan `D2_DEPTH5_FORMATION_PLAN.md`, frozen `89f72bc`, hash protected
+`61e4220`. Development worlds 37-43, three streams, 63 cells, 14:02-18:37Z,
+exit 0. Dry run of every arm on world 49 with restart test passed (the only
+stderr entry is a worker of the deliberately killed leg-1 parent failing to
+attach, harmless). `check_prereg`, `check_invalid`, `check_adequacy` pass.
+Report `reports/d2_depth5_formation.json`; archive
+`reports/d2_depth5_formation_20261005/`. Summary recomputed independently from
+the 63 durable cell records: matches the runner exactly (`k` = 21, `h` = 0,
+`n_better` = 21, `TRANSFERS`).
+
+| arm (construction), depth 5 | cells passing of 21 | median | range | collapses |
+|---|---:|---:|---:|---:|
+| `RS5`: one end-of-stream exhaustive re-route + O3 sleep (primary) | **21** | 0.0208 | 0.0126-0.0289 | 0 |
+| `SLEEP5`: O3 sleep, no re-routing | 0 | 1.37 | 1.30-1.45 | 21 |
+| `SHUFFLED5`: wake alone | 0 | 1.75 | 1.65-1.97 | 21 |
+
+- `k` = **21 of 21**, `h` = 0, label **`TRANSFERS`**; re-route + sleep below
+  sleep alone in 21 of 21 paired cells.
+- After the re-route pass and before sleep: median 0.26. Sleep remains
+  necessary at depth 5, as at depths 3 and 4.
+- The single end-of-stream pass took a median 409 s of search per cell (prefix-
+  split exhaustive search), changing a median 163 routes.
+
+Across depth (end-of-stream protocol; depths 4-5 are development evidence):
+
+| depth | protocol | cells passing | median terminal | sleep alone passing |
+|---:|---|---:|---:|---:|
+| 3 | end-of-stream re-route + sleep (O6, sealed) | 45 / 45 | ~0.010 | 36 / 45 |
+| 4 | end-of-stream re-route + sleep (Tier 0 census on D1) | 21 / 21 | 0.0145 | 0 / 21 |
+| 5 | end-of-stream re-route + sleep (D2) | 21 / 21 | 0.0208 | 0 / 21 |
+
+**Reading.** One exhaustive re-route pass at the end of the stream plus
+consolidation forms the rotated substrate at depth 5 in every development
+cell, while sleep alone and wake alone collapse in every cell, as at depth 4.
+Quality degrades gently with depth (median about 1.4x per added step,
+0.010 -> 0.0145 -> 0.0208); a naive extrapolation reaches the 0.05 threshold
+near depth 7, which is descriptive, not a prediction. Search cost per pass grows
+about 13x per step (31 s at depth 4, 409 s at depth 5), so depth 6 would be
+about 1.5 h per pass with this search.
+
+**Status.** EXPLORATORY, Tier 1, development worlds. The world-47 timing cell
+(seen before freezing, 0.0204) agreed with the 21 cells.
+
+NEXT: the depth line has development evidence at depths 4 and 5 for both the
+end-of-stream protocol and, at depth 4, the in-stream one. A confirmatory claim
+needs a sealed test across depths, which needs a new sealed band (PI decision
+18). Without a new band, the next development questions are the sleep budget at
+larger streams (quality drifts up with depth) and a sparse in-stream schedule.

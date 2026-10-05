@@ -1,0 +1,6 @@
+2026-10-05T13:48:51.939013+00:00 START
+2026-10-05T13:50:46.619821+00:00 dry leg stop_after=1 exit=3 orphans_killed=1
+2026-10-05T14:02:13.447109+00:00 dry leg stop_after=None exit=0 orphans_killed=0
+2026-10-05T14:02:13.457688+00:00 dry run + restart PASSED
+2026-10-05T14:02:17.050011+00:00 LAUNCH run
+2026-10-05T18:37:39.123117+00:00 DONE report reports\d2_depth5_formation.json

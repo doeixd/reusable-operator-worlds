@@ -1,0 +1,7 @@
+2026-10-05T13:48:55.117214+00:00 LAUNCH 5b1ce692db628a3fa1919c880120bac0971eae1823df03dd1b26f9f0d026aa22 todo=3 reused=0 scale=16 free=3.8GiB
+2026-10-05T13:50:40.871550+00:00 cell finished SHUFFLED5_w49_s0 102.5s terminal=2.15804
+2026-10-05T13:50:40.895793+00:00 STOP after 1 cells (restart test)
+2026-10-05T13:50:56.033259+00:00 reused validated cell SHUFFLED5_w49_s0
+2026-10-05T13:50:56.044046+00:00 LAUNCH 5b1ce692db628a3fa1919c880120bac0971eae1823df03dd1b26f9f0d026aa22 todo=2 reused=1 scale=16 free=4.7GiB
+2026-10-05T13:55:36.961812+00:00 cell finished SLEEP5_w49_s0 275.9s terminal=1.461
+2026-10-05T14:02:06.922479+00:00 cell finished RS5_w49_s0 665.9s terminal=1.41609 changed=275 reroute=440s rerouted_only=1.617

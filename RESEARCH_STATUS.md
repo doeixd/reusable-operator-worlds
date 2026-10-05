@@ -6,14 +6,15 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-05, at the D2 launch. **D2 (Tier 1, depth 5, worlds
-37-43) is running**; check `artifacts/d2_depth5_formation/status.json`. No PI
-decision is open. **Read `ONLINE_FORMATION_SYNTHESIS.md` first.**
+Last rewritten: 2026-10-05, after D2. Nothing is running. **Open PI decision:
+18 (see "Decisions pending from the PI").** **Read
+`ONLINE_FORMATION_SYNTHESIS.md` first.**
 
-**D2** tests the end-of-stream protocol (one exhaustive re-route pass + sleep)
-at depth 5, with a new exact prefix-split search (`deep_reroute`, under 3 s per
-depth-5 task). Timing cell on world 47: re-route + sleep 0.0204, sleep alone
-1.43, wake alone 1.86.
+**D2 (Tier 1, depth 5, development worlds 37-43): `TRANSFERS`, 21 of 21.** One
+end-of-stream exhaustive re-route pass + sleep formed the depth-5 substrate in
+every cell (median 0.0208); sleep alone and wake alone collapsed in all 21. With
+D1 and its census, the end-of-stream protocol has passed every development cell
+at depths 4 and 5; quality drifts up about 1.4x per added step.
 
 **D1 (Tier 1, depth 4, development worlds 30-36): `TRANSFERS`, 21 of 21.**
 Wake + in-stream re-routing + sleep formed the depth-4 substrate in every cell
@@ -898,6 +899,17 @@ sealed band, and all are implementation audits rather than experiments.
     Development band 30-49 allocated (D1 30-36, timing 48, dry run 49, 37-47
     unused). Premise corrected by measurement: the gradient re-router is not
     needed at depth 4. D1 (Tier 1) is the first rung.
+
+18. **LIVE (2026-10-05): a sealed test of the depth result?** Development
+    evidence: the end-of-stream protocol (one exhaustive re-route pass + sleep)
+    passed 21/21 at depth 4 and 21/21 at depth 5; in-stream re-routing + sleep
+    passed 21/21 at depth 4; sleep alone collapsed in every depth-4 and depth-5
+    cell. A confirmatory claim needs a new sealed band (930-959 is exhausted).
+    Claude's recommendation: allocate 960-989 (verify unused first) and run one
+    sealed block of the end-of-stream protocol at depths 4 and 5 (15 worlds x 3
+    streams per depth, arms re-route + sleep and sleep alone), about 9 hours.
+    Alternatives without a new band: the sleep budget at larger streams, or a
+    sparse in-stream re-route schedule.
 
 # Housekeeping owed
 

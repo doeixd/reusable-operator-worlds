@@ -1,0 +1,64 @@
+2026-10-05T14:02:17.173306+00:00 LAUNCH edeb05a285edb1c9129c956b1d4a0dc5d5d54349d5a54555b384f34fc28023b5 todo=63 reused=0 scale=1 free=5.9GiB
+2026-10-05T14:26:22.308128+00:00 cell finished SHUFFLED5_w37_s0 1438.3s terminal=1.77149
+2026-10-05T14:26:40.216014+00:00 cell finished SHUFFLED5_w37_s1 1456.2s terminal=1.69529
+2026-10-05T14:26:42.169387+00:00 cell finished SHUFFLED5_w37_s2 1458.2s terminal=1.74708
+2026-10-05T14:54:44.808608+00:00 cell finished SHUFFLED5_w38_s0 1702.5s terminal=1.69451
+2026-10-05T14:55:10.770426+00:00 cell finished SHUFFLED5_w38_s1 1710.5s terminal=1.80373
+2026-10-05T14:55:14.144772+00:00 cell finished SHUFFLED5_w38_s2 1711.9s terminal=1.97229
+2026-10-05T15:18:46.623001+00:00 cell finished SHUFFLED5_w39_s0 1441.8s terminal=1.77428
+2026-10-05T15:19:08.191877+00:00 cell finished SHUFFLED5_w39_s1 1437.4s terminal=1.69044
+2026-10-05T15:19:21.047141+00:00 cell finished SHUFFLED5_w39_s2 1446.9s terminal=1.75404
+2026-10-05T15:42:15.250301+00:00 cell finished SHUFFLED5_w40_s0 1408.6s terminal=1.82125
+2026-10-05T15:42:45.994724+00:00 cell finished SHUFFLED5_w40_s1 1417.8s terminal=1.65195
+2026-10-05T15:43:12.354902+00:00 cell finished SHUFFLED5_w40_s2 1431.3s terminal=1.68615
+2026-10-05T16:08:02.458671+00:00 cell finished SHUFFLED5_w41_s0 1547.2s terminal=1.75598
+2026-10-05T16:08:47.563992+00:00 cell finished SHUFFLED5_w41_s1 1561.5s terminal=1.92272
+2026-10-05T16:09:26.811425+00:00 cell finished SHUFFLED5_w41_s2 1574.4s terminal=1.64576
+2026-10-05T16:29:41.066380+00:00 cell finished SHUFFLED5_w42_s0 1298.6s terminal=1.76544
+2026-10-05T16:30:12.653199+00:00 cell finished SHUFFLED5_w42_s1 1285.1s terminal=1.6987
+2026-10-05T16:30:50.627258+00:00 cell finished SHUFFLED5_w42_s2 1283.8s terminal=1.71523
+2026-10-05T16:48:47.787142+00:00 cell finished SHUFFLED5_w43_s0 1146.7s terminal=1.77772
+2026-10-05T16:49:28.381520+00:00 cell finished SHUFFLED5_w43_s1 1155.7s terminal=1.8034
+2026-10-05T16:50:16.046443+00:00 cell finished SHUFFLED5_w43_s2 1165.4s terminal=1.73051
+2026-10-05T16:52:58.939795+00:00 cell finished SLEEP5_w37_s0 210.5s terminal=1.34441
+2026-10-05T16:57:12.527769+00:00 cell finished SLEEP5_w37_s1 253.6s terminal=1.34614
+2026-10-05T16:59:58.091734+00:00 cell finished RS5_w37_s0 670.3s terminal=0.0212914 changed=159 reroute=385s rerouted_only=0.2373
+2026-10-05T17:01:43.663000+00:00 cell finished RS5_w37_s1 687.6s terminal=0.0175805 changed=153 reroute=411s rerouted_only=0.2596
+2026-10-05T17:04:15.714430+00:00 cell finished SLEEP5_w37_s2 257.6s terminal=1.30778
+2026-10-05T17:08:19.324267+00:00 cell finished RS5_w37_s2 666.8s terminal=0.021925 changed=167 reroute=421s rerouted_only=0.3232
+2026-10-05T17:08:23.132804+00:00 cell finished SLEEP5_w38_s0 247.4s terminal=1.41829
+2026-10-05T17:12:55.725154+00:00 cell finished SLEEP5_w38_s1 272.6s terminal=1.37314
+2026-10-05T17:13:03.756163+00:00 cell finished RS5_w38_s0 680.1s terminal=0.0154724 changed=153 reroute=403s rerouted_only=0.1734
+2026-10-05T17:16:53.682885+00:00 cell finished SLEEP5_w38_s2 229.9s terminal=1.44549
+2026-10-05T17:18:41.684504+00:00 cell finished RS5_w38_s1 622.3s terminal=0.0178482 changed=163 reroute=406s rerouted_only=0.2
+2026-10-05T17:22:11.108712+00:00 cell finished SLEEP5_w39_s0 209.4s terminal=1.37776
+2026-10-05T17:22:40.801159+00:00 cell finished RS5_w38_s2 585.1s terminal=0.0127406 changed=137 reroute=376s rerouted_only=0.2896
+2026-10-05T17:26:14.018429+00:00 cell finished SLEEP5_w39_s1 213.2s terminal=1.39573
+2026-10-05T17:26:48.154083+00:00 cell finished RS5_w39_s0 594.5s terminal=0.0279279 changed=157 reroute=369s rerouted_only=0.1418
+2026-10-05T17:31:25.670461+00:00 cell finished SLEEP5_w39_s2 277.5s terminal=1.36096
+2026-10-05T17:33:08.787147+00:00 cell finished RS5_w39_s1 657.7s terminal=0.0132163 changed=171 reroute=409s rerouted_only=0.2827
+2026-10-05T17:37:12.198789+00:00 cell finished SLEEP5_w40_s0 243.4s terminal=1.41137
+2026-10-05T17:37:21.298713+00:00 cell finished RS5_w39_s2 667.3s terminal=0.0207717 changed=156 reroute=427s rerouted_only=0.2842
+2026-10-05T17:41:22.191657+00:00 cell finished SLEEP5_w40_s1 240.9s terminal=1.31045
+2026-10-05T17:42:04.085506+00:00 cell finished RS5_w40_s0 638.4s terminal=0.0243625 changed=166 reroute=395s rerouted_only=0.2316
+2026-10-05T17:45:29.115894+00:00 cell finished SLEEP5_w40_s2 205.0s terminal=1.32777
+2026-10-05T17:47:29.403730+00:00 cell finished RS5_w40_s1 617.2s terminal=0.0181037 changed=170 reroute=386s rerouted_only=0.2409
+2026-10-05T17:51:27.815386+00:00 cell finished SLEEP5_w41_s0 238.4s terminal=1.38632
+2026-10-05T17:51:57.601934+00:00 cell finished RS5_w40_s2 635.4s terminal=0.0289291 changed=173 reroute=397s rerouted_only=0.1956
+2026-10-05T17:56:17.429070+00:00 cell finished SLEEP5_w41_s1 259.8s terminal=1.40231
+2026-10-05T17:56:54.535950+00:00 cell finished RS5_w41_s0 685.4s terminal=0.0196405 changed=160 reroute=411s rerouted_only=0.2827
+2026-10-05T18:01:49.831509+00:00 cell finished SLEEP5_w41_s2 295.3s terminal=1.30197
+2026-10-05T18:03:25.484519+00:00 cell finished RS5_w41_s1 717.7s terminal=0.0139897 changed=149 reroute=444s rerouted_only=0.1362
+2026-10-05T18:07:18.940600+00:00 cell finished SLEEP5_w42_s0 233.5s terminal=1.31449
+2026-10-05T18:07:45.550501+00:00 cell finished RS5_w41_s2 688.1s terminal=0.0264321 changed=207 reroute=458s rerouted_only=0.4751
+2026-10-05T18:12:40.918555+00:00 cell finished SLEEP5_w42_s1 295.4s terminal=1.36611
+2026-10-05T18:13:32.844118+00:00 cell finished RS5_w42_s0 703.0s terminal=0.0223307 changed=180 reroute=410s rerouted_only=0.293
+2026-10-05T18:16:41.110887+00:00 cell finished SLEEP5_w42_s2 188.3s terminal=1.37362
+2026-10-05T18:17:42.820767+00:00 cell finished RS5_w42_s1 623.9s terminal=0.026947 changed=173 reroute=440s rerouted_only=0.3541
+2026-10-05T18:21:22.666731+00:00 cell finished SLEEP5_w43_s0 219.8s terminal=1.43117
+2026-10-05T18:22:39.728115+00:00 cell finished RS5_w42_s2 598.8s terminal=0.0249163 changed=149 reroute=360s rerouted_only=0.3118
+2026-10-05T18:26:36.715613+00:00 cell finished SLEEP5_w43_s1 237.0s terminal=1.40899
+2026-10-05T18:27:18.708482+00:00 cell finished RS5_w43_s0 637.6s terminal=0.0168556 changed=168 reroute=395s rerouted_only=0.2235
+2026-10-05T18:31:48.385050+00:00 cell finished SLEEP5_w43_s2 269.7s terminal=1.35136
+2026-10-05T18:32:43.932685+00:00 cell finished RS5_w43_s1 681.3s terminal=0.023813 changed=194 reroute=410s rerouted_only=0.694
+2026-10-05T18:37:37.545970+00:00 cell finished RS5_w43_s2 660.8s terminal=0.0126082 changed=155 reroute=427s rerouted_only=0.1879

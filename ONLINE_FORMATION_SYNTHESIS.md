@@ -337,3 +337,12 @@ consistent with stale early commitments being the failure mode (longer routes
 give more positions to commit wrongly). In-stream exhaustive re-routing cost
 about 50 minutes per cell at depth 4; depth 5 needs a cheaper re-router or
 schedule.
+
+## 2.15 Depth 5 (D2; exploratory) - ADDED 2026-10-05
+
+One exhaustive end-of-stream re-route pass + sleep formed the depth-5
+substrate in 21 of 21 development cells (median 0.0208), while sleep alone and
+wake alone collapsed in all 21. An exact prefix-split search keeps the pass at
+about 7 minutes per cell. The end-of-stream protocol has now passed every
+development cell at depths 4 and 5; quality drifts up about 1.4x per added
+step and search cost about 13x per step. Confirmation needs a new sealed band.
