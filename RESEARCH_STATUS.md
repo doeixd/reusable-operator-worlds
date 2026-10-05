@@ -922,13 +922,13 @@ sealed band, and all are implementation audits rather than experiments.
   O11's gate E3b and the O11 sizing census read O9's terminals successfully at
   about 10:40 and 10:12 local that morning. Not Storage Sense (its Downloads
   cleanup is set to Never), the Recycle Bin is empty, and no session's memory
-  records the deletion; the cause is unknown. Tracked files are intact (git
+  records the deletion. **Resolved 2026-10-05: the PI deleted them to free disk space.** Tracked files are intact (git
   clean), so every report, verdict and archived log stands; the lost files are
   regenerable from committed code and seeds at hours of compute. Consequences:
   `check_prereg` now fails on the V2-cited paths (not papered over), and the
   O-line terminal censuses and the O7/O8/O10 tests that load saved terminals
-  cannot run until the terminals are regenerated or restored. Waiting on the PI:
-  restore from a backup, regenerate, or acknowledge the paths as absent.
+  cannot run until the terminals are regenerated or restored. The four V2 paths the checker
+  verifies are now acknowledged-absent in `tools/check_prereg.py` with that reason.
 
 - **Statistic fix, verified latent (`8f0369a`).** The old `spearman` helper used
   `argsort(argsort(x))`, which gives tied values a strict order: it returned

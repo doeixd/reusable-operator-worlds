@@ -98,6 +98,14 @@ FROZEN = {
 #: printed on every run, so an absence can never pass silently, and a path listed here that DOES
 #: exist is reported too (the entry is stale and should be removed).
 ACKNOWLEDGED_ABSENT = {
+    "artifacts/v2_compiler/": (
+        "untracked V2 directory deleted by the PI on 2026-10-04 to free disk space (confirmed by the PI 2026-10-05); results stand in row_v2_experimental_spec.md STATUS and the tracked reports; regenerable from committed code and seeds"),
+    "artifacts/v2_consolidation/": (
+        "untracked V2 directory deleted by the PI on 2026-10-04 to free disk space (confirmed by the PI 2026-10-05); results stand in row_v2_experimental_spec.md STATUS and the tracked reports; regenerable from committed code and seeds"),
+    "artifacts/v2_consolidation_gate2/": (
+        "untracked V2 directory deleted by the PI on 2026-10-04 to free disk space (confirmed by the PI 2026-10-05); results stand in row_v2_experimental_spec.md STATUS and the tracked reports; regenerable from committed code and seeds"),
+    "artifacts/v2_hyper_rho09/": (
+        "untracked V2 directory deleted by the PI on 2026-10-04 to free disk space (confirmed by the PI 2026-10-05); results stand in row_v2_experimental_spec.md STATUS and the tracked reports; regenerable from committed code and seeds"),
     "artifacts/v2_gelu_crossover/": (
         "untracked V2 H6 GELU sweep (runs 2026-08-18); found missing from disk 2026-10-03, before "
         "that day's cleanup; results recorded in row_v2_experimental_spec.md H6 STATUS and SPEC_AUDIT.md; "
