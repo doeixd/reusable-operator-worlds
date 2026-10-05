@@ -10657,3 +10657,82 @@ end-of-stream protocol and, at depth 4, the in-stream one. A confirmatory claim
 needs a sealed test across depths, which needs a new sealed band (PI decision
 18). Without a new band, the next development questions are the sleep budget at
 larger streams (quality drifts up with depth) and a sparse in-stream schedule.
+
+
+# C0 + A1 TIER 0 CENSUSES (2026-10-05, descriptive): repeated execution drifts linearly; sleep absorbs random route error but not stale routes
+
+First measurements of the successor ladder (`SUCCESSOR_LADDER.md`, from issues
+#2-#5), on libraries and terminals that survived the 2026-10-04 cleanup.
+
+**C0, repeated-circuit execution** (`row.experiments.census_c0_repeated_circuit`,
+`reports/c0_repeated_circuit_census.json`). Libraries rebuilt deterministically
+from D1 (depth 4, worlds 30-32) and D2 (depth 5, worlds 37-39) wake terminals
+with the end-of-stream re-route + sleep construction. Each teacher operation is
+mapped to its learned slot from the single-operation anchors only (median
+purity 1.0, minimum 0.71). With the correct route given, one learned operator
+is applied n times against the teacher operator applied n times, 256 fresh
+inputs per (cell, operation):
+
+| applications n | repeated operator NMSE (median / q90 / max) | mixed routes NMSE | random-library control | teacher output variance |
+|---:|---|---:|---:|---:|
+| 1 | 0.0039 / 0.0056 / 0.0081 | 0.0033 | 1.90 | 1.01 |
+| 2 | 0.0073 / 0.0127 / 0.0170 | 0.0075 | 1.98 | 1.01 |
+| 4 | 0.0155 / 0.0256 / 0.0442 | 0.0137 | 1.96 | 1.03 |
+| 8 | 0.0302 / 0.0537 / 0.101 | 0.0283 | 1.91 | 1.06 |
+| 16 | 0.0705 / 0.137 / 0.258 | 0.0560 | 1.97 | 1.14 |
+| 32 | 0.192 / 0.350 / 0.949 | 0.115 | 1.81 | 1.58 |
+
+Registered reading (stated in the module before it ran): LIVE needed median
+< 0.05 at n = 16 and < 0.1 at n = 32; BINDS needed >= 0.1 at n <= 8. Result:
+**READ_SHAPE**. Error roughly doubles each time n doubles (about linear in n),
+crosses 0.05 between n = 8 and 16, and reaches 0.19 at n = 32. Through n = 8 a
+repeated operator behaves like generic composition (0.030 against 0.028 for
+mixed routes); beyond that it drifts faster (0.19 against 0.115 at n = 32),
+consistent with a per-operator bias that accumulates in one direction when the
+same map is iterated. The teacher's own output variance grows from 1.0 to 1.6
+by n = 32, so repeated application is also intrinsically harder. The random-
+library control sits at ~1.9 throughout: the instrument is not saturated.
+
+**A1, route adequacy** (`row.experiments.census_a1_route_adequacy`,
+`reports/a1_route_adequacy_census.json`). On D1's depth-4 wake terminals (worlds
+30-32, stream 0): exact routes computed once, then controlled corruptions
+installed with O5's logit swap and O3's sleep run identically. Equivalence
+checks, both bitwise: EXACT reproduces `reports/d1_end_reroute_census.json`
+(w30/w31/w32 s0) and STALE reproduces D1's `SLEEP4` cells.
+
+| routes given to sleep (depth 4, worlds 30-32) | tasks with exact route | mean wrong positions | terminal after sleep, per world |
+|---|---:|---:|---|
+| EXACT | 100% | 0 | 0.0145 / 0.0120 / 0.0135 |
+| 25% of tasks, 1 position wrong | 75% | 0.25 | 0.0195 / 0.0214 / 0.0324 |
+| 25% of tasks, all positions wrong | 75% | 0.60 | 0.0254 / 0.0215 / 0.0264 |
+| 50% of tasks, 1 position wrong | 50% | 0.50 | 0.0335 / 0.0239 / 0.0334 |
+| 50% of tasks, all positions wrong | 50% | 1.23 | **1.18** / 0.0391 / 0.0426 |
+| 100% of tasks, 1 position wrong | 0% | 1.00 | 0.733 / 0.272 / 0.233 |
+| 100% of tasks, all positions wrong | 0% | 2.52 | 1.40 / 1.39 / 1.33 |
+| STALE (as committed at the end of the stream) | 65% | 1.08 | 1.50 / 1.52 / 1.46 |
+
+Registered reading: the threshold is the largest corruption passing in all three
+worlds: **half of all tasks wrong in one position, or a quarter of tasks wrong in
+every position.**
+
+**The finding that matters: stale routes are not random errors.** STALE has
+MORE exact routes (65%) than a corruption that passes (50% of tasks one position
+wrong), and a similar mean Hamming distance, yet it fails as badly as total
+corruption. Even 100% of tasks one position wrong ends at 0.23-0.73 against
+STALE's 1.5. Sleep absorbs incoherent route error (consolidation also trains
+task codes, and the corrupted 50%-one-position set goes from 1.73 before sleep
+to 0.03 after) but cannot undo coherent staleness, where many tasks agree on the
+same wrong slot and consolidation reinforces it.
+
+**What it means.**
+- **Scaling:** a re-router does not need to be exact. It must leave errors
+  incoherent and get roughly half the tasks exactly right. O7's gradient
+  re-router (76% of stale routes recovered, errors scattered) fits inside this
+  margin, which explains why it matched exhaustive search after sleep. Cheap
+  approximate re-routing is enough beyond depth 5.
+- **Track C:** execution of a repeated circuit is clean to about 8 applications
+  and drifts linearly after. Control-flow rungs can test route inference and
+  positional recurrence at lengths <= 8 without the vocabulary confounding them;
+  any length-extrapolation claim beyond about 8 must separate execution drift
+  from inference (#3 section 2's distinction), and should report the drift as a
+  measured baseline, not a failure.

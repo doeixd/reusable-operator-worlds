@@ -2361,3 +2361,12 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   background shell was killed by the harness's low-memory reaper, leaving no
   record. Run gates and launch as ONE detached process that writes its own
   logs.
+
+- STALE ROUTES ARE COHERENT ERROR, AND THAT IS WHY SLEEP CANNOT FIX THEM (A1,
+  2026-10-05). Given routes with MORE exact entries (65%) than a randomly
+  corrupted set that sleep repairs (50% exact), consolidation still collapsed on
+  the stale set (1.5 against 0.03). Random route error is absorbed because
+  consolidation also trains task codes and the errors pull in different
+  directions; staleness is many tasks agreeing on the same wrong slot, which
+  consolidation reinforces. Measure the STRUCTURE of an error, not only its
+  rate: a Hamming distance or an exact-route fraction cannot tell these apart.

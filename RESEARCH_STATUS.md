@@ -6,9 +6,21 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-05, after D2. Nothing is running. **Open PI decision:
-18 (see "Decisions pending from the PI").** **Read
+Last rewritten: 2026-10-05, after C0/A1. Nothing is running. Open PI decision:
+18 (sealed depth test, deferred). **Read `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md` first.**
+
+**Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
+Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow
+(#3) first, self-curriculum (#4), procedural memory (#5). Two Tier 0 censuses:
+- **C0:** a repeated learned operator drifts about linearly (0.030 at 8
+  applications, 0.19 at 32); execution is clean to about 8.
+- **A1:** sleep absorbs random route error up to about half the tasks one
+  position off, but not stale routes (coherent error): approximate re-routing is
+  enough.
+
+**Next (Claude):** C1, the positional-recurrence sweep at lengths <= 8, starting
+with a Tier 0 opportunity census for its generator.
 
 **D2 (Tier 1, depth 5, development worlds 37-43): `TRANSFERS`, 21 of 21.** One
 end-of-stream exhaustive re-route pass + sleep formed the depth-5 substrate in
