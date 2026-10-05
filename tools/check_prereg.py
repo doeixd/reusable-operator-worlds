@@ -92,6 +92,7 @@ FROZEN = {
     "D1_DEPTH4_FORMATION_PLAN.md": "f930710",
     "D2_DEPTH5_FORMATION_PLAN.md": "89f72bc",
     "B1_BRANCH_2X2_PLAN.md": "0e61c5e",
+    "B1G_GRADIENT_BRANCH_PLAN.md": "d511b7c",
 }
 
 #: STATUS-cited paths acknowledged ABSENT from this disk, each with its reason. The module
