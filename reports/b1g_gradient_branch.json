@@ -1,0 +1,2767 @@
+{
+ "protocol": {
+  "id": "b1g-gradient-branch-v1",
+  "tier": 1,
+  "exploratory": true,
+  "steps": 600,
+  "restarts": 4,
+  "lr": 0.05,
+  "T": [
+   1.0,
+   0.1
+  ],
+  "threshold": 0.05,
+  "input_sha256": {
+   "B1G_GRADIENT_BRANCH_PLAN.md": "80bda1bf4855a16ed6613d3b9783968bd623bb721bbd75c227aa336885f9f520",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/b1_branch_2x2.json": "c6457c6e1d26f972b5cd56ff67523a735990da735d1a4ae364ea6c4b837dfdbb"
+  },
+  "implementation_sha256": "6ba8eb9ca6d163473d3269dfdbeef0ede5054eb4b8382a667e18c1b16e3c8e8a",
+  "b1_sha256": "1f5b4c6e94a932fcd10ccb6d8a530a02ac470b0f891faa14e1cb98802ec792a0"
+ },
+ "protocol_sha256": "0c7ba4f2edb7fd562aeacf22d94d943611c9ba1388f0b581c2f14c9b4fba79ca",
+ "complete": true,
+ "summary": {
+  "ALL": {
+   "tasks": 192,
+   "GRAD_passes": 173,
+   "GRAD_median": 0.022642427838903034,
+   "B1_passes": 178,
+   "both_pass": 169,
+   "grad_only": 4,
+   "search_only": 9,
+   "routes_match_oracle": 149,
+   "routes_distinct": 192
+  },
+  "INPUT": {
+   "tasks": 96,
+   "GRAD_passes": 95,
+   "GRAD_median": 0.014804502207085117,
+   "B1_passes": 95,
+   "both_pass": 94,
+   "grad_only": 1,
+   "search_only": 1,
+   "routes_match_oracle": 77,
+   "routes_distinct": 96
+  },
+  "MID": {
+   "tasks": 96,
+   "GRAD_passes": 78,
+   "GRAD_median": 0.029500090935596423,
+   "B1_passes": 83,
+   "both_pass": 75,
+   "grad_only": 3,
+   "search_only": 8,
+   "routes_match_oracle": 72,
+   "routes_distinct": 96
+  },
+  "label": "GRADIENT_FINDS"
+ },
+ "worlds": {
+  "30": {
+   "tasks": [
+    {
+     "variant": "INPUT",
+     "GRAD": 0.01692714595499416,
+     "B1_LS_LP": 0.01692714595499416,
+     "restart_support_losses": [
+      0.012333273887634277,
+      0.012333273887634277,
+      0.012333273887634277,
+      0.012333273887634277
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.020527185813393054,
+     "B1_LS_LP": 0.017013953861315205,
+     "restart_support_losses": [
+      0.010238850489258766,
+      0.010238850489258766,
+      0.010238850489258766,
+      0.010900174267590046
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.0078620742677939,
+     "B1_LS_LP": 0.0078620742677939,
+     "restart_support_losses": [
+      0.01211367454379797,
+      0.01211367454379797,
+      0.01211367454379797,
+      0.01211367454379797
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.008829224493256488,
+     "B1_LS_LP": 0.016254581127536697,
+     "restart_support_losses": [
+      0.01182341855019331,
+      0.01182341855019331,
+      0.01182341855019331,
+      0.01182341855019331
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.06728012800808625,
+     "B1_LS_LP": 0.044892093260053584,
+     "restart_support_losses": [
+      0.013743555173277855,
+      0.013743555173277855,
+      0.013743555173277855,
+      0.013743555173277855
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.01767167155696473,
+     "B1_LS_LP": 0.01767167155696473,
+     "restart_support_losses": [
+      0.015829049050807953,
+      0.015829049050807953,
+      0.015074311755597591,
+      0.014975674450397491
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.03322695381763808,
+     "B1_LS_LP": 0.02238965576144714,
+     "restart_support_losses": [
+      0.012069092132151127,
+      0.012069092132151127,
+      0.012069092132151127,
+      0.012069092132151127
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.03092792749040796,
+     "B1_LS_LP": 0.013905898205490015,
+     "restart_support_losses": [
+      0.014047447592020035,
+      0.01262152660638094,
+      0.011434245854616165,
+      0.011434245854616165
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.01110135322984886,
+     "B1_LS_LP": 0.007203940066087151,
+     "restart_support_losses": [
+      0.009928332641720772,
+      0.009928332641720772,
+      0.009928332641720772,
+      0.009928332641720772
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.02612455781441036,
+     "B1_LS_LP": 0.02612455781441036,
+     "restart_support_losses": [
+      0.010491426102817059,
+      0.010491426102817059,
+      0.010491426102817059,
+      0.009796899743378162
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.03177487742876005,
+     "B1_LS_LP": 0.03971485253249489,
+     "restart_support_losses": [
+      0.014344725757837296,
+      0.014344725757837296,
+      0.014344725757837296,
+      0.014344725757837296
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.014748527640006165,
+     "B1_LS_LP": 0.02522520808123595,
+     "restart_support_losses": [
+      0.015074989758431911,
+      0.015074989758431911,
+      0.015074989758431911,
+      0.015074989758431911
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.004328260629149847,
+     "B1_LS_LP": 0.004328260629149847,
+     "restart_support_losses": [
+      0.008807401172816753,
+      0.008807401172816753,
+      0.012098703533411026,
+      0.008807401172816753
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.014767035504110649,
+     "B1_LS_LP": 0.01797168463697913,
+     "restart_support_losses": [
+      0.01364162378013134,
+      0.01364162378013134,
+      0.01364162378013134,
+      0.01364162378013134
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.03621650912911212,
+     "B1_LS_LP": 0.045173182728030885,
+     "restart_support_losses": [
+      0.011269092559814453,
+      0.008682702668011189,
+      0.008682702668011189,
+      0.009557035751640797
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.043652216619445246,
+     "B1_LS_LP": 0.038733867769223905,
+     "restart_support_losses": [
+      0.0173732191324234,
+      0.0173732191324234,
+      0.0173732191324234,
+      0.0173732191324234
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.011415478351395425,
+     "B1_LS_LP": 0.0230247317306996,
+     "restart_support_losses": [
+      0.012174025177955627,
+      0.012174025177955627,
+      0.012174025177955627,
+      0.012174025177955627
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.00611727646948468,
+     "B1_LS_LP": 0.00611727646948468,
+     "restart_support_losses": [
+      0.011782697401940823,
+      0.011782697401940823,
+      0.011782697401940823,
+      0.011782697401940823
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.014884703707615837,
+     "B1_LS_LP": 0.009361894231005446,
+     "restart_support_losses": [
+      0.013566034846007824,
+      0.013566034846007824,
+      0.013566034846007824,
+      0.013566034846007824
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.011951105315710541,
+     "B1_LS_LP": 0.011951105315710541,
+     "restart_support_losses": [
+      0.011722056195139885,
+      0.011722056195139885,
+      0.011722056195139885,
+      0.011722056195139885
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.016035410607878515,
+     "B1_LS_LP": 0.016035410607878515,
+     "restart_support_losses": [
+      0.015551715157926083,
+      0.015551715157926083,
+      0.014928128570318222,
+      0.015551715157926083
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.025752721239871375,
+     "B1_LS_LP": 0.006613416449407944,
+     "restart_support_losses": [
+      0.009089268743991852,
+      0.009089268743991852,
+      0.009089268743991852,
+      0.009089268743991852
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.007993637511271629,
+     "B1_LS_LP": 0.007993637511271629,
+     "restart_support_losses": [
+      0.013236254453659058,
+      0.012314206920564175,
+      0.012314206920564175,
+      0.012314206920564175
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.021963556963694054,
+     "B1_LS_LP": 0.021963556963694054,
+     "restart_support_losses": [
+      0.015820059925317764,
+      0.01916373521089554,
+      0.015820059925317764,
+      0.015820059925317764
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.009340112293494731,
+     "B1_LS_LP": 0.016428938214798454,
+     "restart_support_losses": [
+      0.010447029955685139,
+      0.010447029955685139,
+      0.010447029955685139,
+      0.010447029955685139
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.013162831100184133,
+     "B1_LS_LP": 0.006098037105688747,
+     "restart_support_losses": [
+      0.012674466706812382,
+      0.011976856738328934,
+      0.011381622403860092,
+      0.011381622403860092
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.015264938313751277,
+     "B1_LS_LP": 0.032000312947093414,
+     "restart_support_losses": [
+      0.01729924976825714,
+      0.019647877663373947,
+      0.01811894401907921,
+      0.01811894401907921
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.047240073469527584,
+     "B1_LS_LP": 0.047240073469527584,
+     "restart_support_losses": [
+      0.012898028828203678,
+      0.012898028828203678,
+      0.012898028828203678,
+      0.012898028828203678
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.022203519115169337,
+     "B1_LS_LP": 0.010186433739794337,
+     "restart_support_losses": [
+      0.014353600330650806,
+      0.01453489065170288,
+      0.013522435910999775,
+      0.01453489065170288
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.007270575339579519,
+     "B1_LS_LP": 0.007270575339579519,
+     "restart_support_losses": [
+      0.011749343015253544,
+      0.011749343015253544,
+      0.011749343015253544,
+      0.011749343015253544
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.0076632494928213,
+     "B1_LS_LP": 0.011975085438733879,
+     "restart_support_losses": [
+      0.007990192621946335,
+      0.008673862554132938,
+      0.007990192621946335,
+      0.007990192621946335
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.026246573692561906,
+     "B1_LS_LP": 0.026246573692561906,
+     "restart_support_losses": [
+      0.008975079283118248,
+      0.008975079283118248,
+      0.008975079283118248,
+      0.009561262093484402
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.025481834706141467,
+     "B1_LS_LP": 0.025481834706141467,
+     "restart_support_losses": [
+      0.02422625757753849,
+      0.02422625757753849,
+      0.918889045715332,
+      0.025693494826555252
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.051840149226466826,
+     "B1_LS_LP": 0.043207156846443516,
+     "restart_support_losses": [
+      0.02938036248087883,
+      0.02938036248087883,
+      0.030327096581459045,
+      0.030394040048122406
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.05225504917603227,
+     "B1_LS_LP": 0.06995800396147844,
+     "restart_support_losses": [
+      0.029266217723488808,
+      0.03238402307033539,
+      0.029266217723488808,
+      0.029266217723488808
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.05707500802396539,
+     "B1_LS_LP": 0.0286243108693929,
+     "restart_support_losses": [
+      0.04279483109712601,
+      0.04365281015634537,
+      0.04279483109712601,
+      0.04304727539420128
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.022367432864483252,
+     "B1_LS_LP": 0.01667158654097404,
+     "restart_support_losses": [
+      0.026434998959302902,
+      0.03049490973353386,
+      0.027572156861424446,
+      0.026434998959302902
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.055728670817734416,
+     "B1_LS_LP": 0.0461986193004408,
+     "restart_support_losses": [
+      0.037337034940719604,
+      0.8662697076797485,
+      0.03864302486181259,
+      0.03864302486181259
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03525244128890685,
+     "B1_LS_LP": 0.03320680742415999,
+     "restart_support_losses": [
+      0.03547028452157974,
+      0.03960328549146652,
+      0.03960328549146652,
+      0.03235204890370369
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.011957684574764295,
+     "B1_LS_LP": 0.011957684574764295,
+     "restart_support_losses": [
+      0.01803501881659031,
+      0.019078779965639114,
+      0.01918295957148075,
+      0.01803501881659031
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.035230006035310325,
+     "B1_LS_LP": 0.04935973843407193,
+     "restart_support_losses": [
+      1.0457717180252075,
+      0.989200234413147,
+      0.03420629724860191,
+      1.0948002338409424
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.06851582144496907,
+     "B1_LS_LP": 0.04726816315710356,
+     "restart_support_losses": [
+      0.03133939206600189,
+      0.030883492901921272,
+      0.03133939206600189,
+      0.030883492901921272
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.026304790259239545,
+     "B1_LS_LP": 0.0276640231268105,
+     "restart_support_losses": [
+      0.01756259612739086,
+      0.01660064607858658,
+      0.01571587845683098,
+      0.01756259612739086
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03069931761496832,
+     "B1_LS_LP": 0.013978709375141027,
+     "restart_support_losses": [
+      0.0433511957526207,
+      0.0436696857213974,
+      0.046230170875787735,
+      0.04813256859779358
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.04991294278222987,
+     "B1_LS_LP": 0.047594870650800515,
+     "restart_support_losses": [
+      0.022825030609965324,
+      0.025375835597515106,
+      0.027429834008216858,
+      0.026959339156746864
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.02343270718018969,
+     "B1_LS_LP": 0.02343270718018969,
+     "restart_support_losses": [
+      0.024729490280151367,
+      0.021059852093458176,
+      0.02245989628136158,
+      0.024729490280151367
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.045558377909112414,
+     "B1_LS_LP": 0.04872537572723239,
+     "restart_support_losses": [
+      0.020141150802373886,
+      0.01881597191095352,
+      0.01881597191095352,
+      0.015615788288414478
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.02220929542389875,
+     "B1_LS_LP": 0.030181930608952797,
+     "restart_support_losses": [
+      0.028696082532405853,
+      0.033576108515262604,
+      0.033576108515262604,
+      0.029766961932182312
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.015937477519427284,
+     "B1_LS_LP": 0.013489975960520031,
+     "restart_support_losses": [
+      0.016941150650382042,
+      0.01708400808274746,
+      0.016941150650382042,
+      0.01708400808274746
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.047929116394802296,
+     "B1_LS_LP": 0.047929116394802296,
+     "restart_support_losses": [
+      0.020687799900770187,
+      0.020687799900770187,
+      0.020687799900770187,
+      1.4352078437805176
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.0645154939426514,
+     "B1_LS_LP": 0.03651417316334234,
+     "restart_support_losses": [
+      0.046594198793172836,
+      0.047899942845106125,
+      0.047354280948638916,
+      0.04486420750617981
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.023665612647305996,
+     "B1_LS_LP": 0.014537044889694612,
+     "restart_support_losses": [
+      0.02239134907722473,
+      0.024715730920433998,
+      0.02278132550418377,
+      0.024715730920433998
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.009706613958272917,
+     "B1_LS_LP": 0.009706613958272917,
+     "restart_support_losses": [
+      0.015721596777439117,
+      0.014727601781487465,
+      0.017437929287552834,
+      0.01564537174999714
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.055297148568778466,
+     "B1_LS_LP": 0.07631727699129026,
+     "restart_support_losses": [
+      0.0375993475317955,
+      0.0375993475317955,
+      0.0375993475317955,
+      0.0375993475317955
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03190518388479735,
+     "B1_LS_LP": 0.023188302214659045,
+     "restart_support_losses": [
+      0.8499091863632202,
+      0.01892208866775036,
+      0.01892208866775036,
+      0.01892208866775036
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.02393640927170046,
+     "B1_LS_LP": 0.02393640927170046,
+     "restart_support_losses": [
+      0.020306004211306572,
+      0.020306004211306572,
+      0.020306004211306572,
+      0.020306004211306572
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.029906500549549218,
+     "B1_LS_LP": 0.029906500549549218,
+     "restart_support_losses": [
+      1.2361228466033936,
+      0.0216279998421669,
+      0.9482186436653137,
+      0.9118947982788086
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.06355770631738981,
+     "B1_LS_LP": 0.05129970889040327,
+     "restart_support_losses": [
+      0.039846234023571014,
+      0.04279118403792381,
+      0.03715262934565544,
+      0.041394054889678955
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.040073573232129706,
+     "B1_LS_LP": 0.054372882150498854,
+     "restart_support_losses": [
+      0.031654540449380875,
+      0.031654540449380875,
+      0.032882168889045715,
+      0.031654540449380875
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.026805131103209267,
+     "B1_LS_LP": 0.026805131103209267,
+     "restart_support_losses": [
+      1.0082621574401855,
+      0.018468942493200302,
+      0.017501387745141983,
+      0.020124191418290138
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.043188228505015094,
+     "B1_LS_LP": 0.047987371477415344,
+     "restart_support_losses": [
+      0.038093943148851395,
+      0.036492057144641876,
+      0.03397063910961151,
+      0.03557252511382103
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.015274185243274252,
+     "B1_LS_LP": 0.015274185243274252,
+     "restart_support_losses": [
+      0.017510229721665382,
+      0.017510229721665382,
+      0.017510229721665382,
+      0.017510229721665382
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.007427781275519058,
+     "B1_LS_LP": 0.007427781275519058,
+     "restart_support_losses": [
+      0.02049124240875244,
+      0.02049124240875244,
+      0.02049124240875244,
+      0.02049124240875244
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.020808030909401615,
+     "B1_LS_LP": 0.020808030909401615,
+     "restart_support_losses": [
+      0.02438943088054657,
+      0.02438943088054657,
+      0.02438943088054657,
+      0.02438943088054657
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    }
+   ],
+   "seconds": 4617.791626499966
+  },
+  "31": {
+   "tasks": [
+    {
+     "variant": "INPUT",
+     "GRAD": 0.013290832135558806,
+     "B1_LS_LP": 0.013290832135558806,
+     "restart_support_losses": [
+      0.007879427634179592,
+      0.006492329761385918,
+      0.006492329761385918,
+      0.008547297678887844
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.024112520032638446,
+     "B1_LS_LP": 0.02196581609704436,
+     "restart_support_losses": [
+      0.012196988798677921,
+      0.012196988798677921,
+      0.012196988798677921,
+      0.012196988798677921
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.0070728411624680345,
+     "B1_LS_LP": 0.02038522211193815,
+     "restart_support_losses": [
+      0.012250326573848724,
+      0.010498298332095146,
+      0.010498298332095146,
+      0.011146106757223606
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.025322570497727934,
+     "B1_LS_LP": 0.020663595913983566,
+     "restart_support_losses": [
+      0.013819819316267967,
+      0.013819819316267967,
+      0.013819819316267967,
+      0.013184573501348495
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.005980300603503535,
+     "B1_LS_LP": 0.005980300603503535,
+     "restart_support_losses": [
+      0.014836754649877548,
+      0.013315792195498943,
+      0.013315792195498943,
+      0.014313412830233574
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.02700079911226869,
+     "B1_LS_LP": 0.013601109765935263,
+     "restart_support_losses": [
+      0.013712623156607151,
+      0.012838995084166527,
+      0.014554603956639767,
+      0.012838995084166527
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.0262447938147528,
+     "B1_LS_LP": 0.0262447938147528,
+     "restart_support_losses": [
+      0.009927129372954369,
+      0.010177652351558208,
+      0.009927129372954369,
+      0.011267177760601044
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.012651904422946506,
+     "B1_LS_LP": 0.006494232037054445,
+     "restart_support_losses": [
+      0.011448628269135952,
+      0.011448628269135952,
+      0.011448628269135952,
+      0.011448628269135952
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.020570621541059673,
+     "B1_LS_LP": 0.020570621541059673,
+     "restart_support_losses": [
+      0.010316667146980762,
+      0.009332424961030483,
+      0.012254921719431877,
+      0.010316667146980762
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.004083249427258541,
+     "B1_LS_LP": 0.004083249427258541,
+     "restart_support_losses": [
+      0.011290961876511574,
+      0.011785615235567093,
+      0.009774113073945045,
+      0.011290961876511574
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.006657401549225281,
+     "B1_LS_LP": 0.006657401549225281,
+     "restart_support_losses": [
+      0.012432431802153587,
+      0.009879335761070251,
+      0.010842741467058659,
+      0.013395839370787144
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.014841968910059587,
+     "B1_LS_LP": 0.015209263485606798,
+     "restart_support_losses": [
+      0.010557370260357857,
+      0.010557370260357857,
+      0.010557370260357857,
+      0.010557370260357857
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.026519601138653214,
+     "B1_LS_LP": 0.02127748155505268,
+     "restart_support_losses": [
+      0.012030010111629963,
+      0.012030010111629963,
+      0.012030010111629963,
+      0.012030010111629963
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.0071154428949289205,
+     "B1_LS_LP": 0.0071154428949289205,
+     "restart_support_losses": [
+      0.011318341828882694,
+      0.013175992295145988,
+      0.012792058289051056,
+      0.011318341828882694
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.007825587758759392,
+     "B1_LS_LP": 0.017803655784089625,
+     "restart_support_losses": [
+      0.012354426085948944,
+      0.012451560236513615,
+      0.012354426085948944,
+      0.011501915752887726
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.006121922719543163,
+     "B1_LS_LP": 0.006121922719543163,
+     "restart_support_losses": [
+      0.012565325945615768,
+      0.012565325945615768,
+      0.012565325945615768,
+      0.012565325945615768
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.006161070533876506,
+     "B1_LS_LP": 0.013500410311321773,
+     "restart_support_losses": [
+      0.007728458382189274,
+      0.006559558678418398,
+      0.008410262875258923,
+      0.007241363171488047
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.008631840479540095,
+     "B1_LS_LP": 0.020075239277600774,
+     "restart_support_losses": [
+      0.011544416658580303,
+      0.011544416658580303,
+      0.011544416658580303,
+      0.011544416658580303
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.03337446066694829,
+     "B1_LS_LP": 0.03754576953002045,
+     "restart_support_losses": [
+      0.01417643204331398,
+      0.011939195916056633,
+      0.014009075239300728,
+      0.011939195916056633
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.04678127937901782,
+     "B1_LS_LP": 0.04678127937901782,
+     "restart_support_losses": [
+      0.013509601354598999,
+      0.013936609029769897,
+      0.013509601354598999,
+      0.013509601354598999
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.0060981400952891665,
+     "B1_LS_LP": 0.0090893792903134,
+     "restart_support_losses": [
+      0.010501825250685215,
+      0.010501825250685215,
+      0.00973466970026493,
+      0.00973466970026493
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.005614618981201161,
+     "B1_LS_LP": 0.005614618981201161,
+     "restart_support_losses": [
+      0.013223383575677872,
+      0.012309967540204525,
+      0.012309967540204525,
+      0.012309967540204525
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.015015104242477468,
+     "B1_LS_LP": 0.015015104242477468,
+     "restart_support_losses": [
+      0.008174212649464607,
+      0.00727115897461772,
+      0.00727115897461772,
+      0.00727115897461772
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.011501959445832701,
+     "B1_LS_LP": 0.011501959445832701,
+     "restart_support_losses": [
+      0.008149492554366589,
+      0.008724488317966461,
+      0.008837717585265636,
+      0.008149492554366589
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.022690411465880436,
+     "B1_LS_LP": 0.022690411465880436,
+     "restart_support_losses": [
+      0.013917909935116768,
+      0.013917909935116768,
+      0.013917909935116768,
+      0.013917909935116768
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.008011327683053586,
+     "B1_LS_LP": 0.010238387838724088,
+     "restart_support_losses": [
+      0.009273625910282135,
+      0.009273625910282135,
+      0.008673237636685371,
+      0.008673237636685371
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.013862921735329622,
+     "B1_LS_LP": 0.02248861338667264,
+     "restart_support_losses": [
+      0.014095856808125973,
+      0.01464503351598978,
+      0.014095856808125973,
+      0.014449824579060078
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.03256006437150517,
+     "B1_LS_LP": 0.04598231954471883,
+     "restart_support_losses": [
+      0.016734832897782326,
+      0.010983018204569817,
+      0.01512383483350277,
+      0.012595711275935173
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.019138222197502358,
+     "B1_LS_LP": 0.024666952463412665,
+     "restart_support_losses": [
+      0.009831143543124199,
+      0.009831143543124199,
+      0.009213623590767384,
+      0.009831143543124199
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.006435052668257177,
+     "B1_LS_LP": 0.006435052668257177,
+     "restart_support_losses": [
+      0.01216210424900055,
+      0.01216210424900055,
+      0.01216210424900055,
+      0.01216210424900055
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.008746119179930583,
+     "B1_LS_LP": 0.008746119179930583,
+     "restart_support_losses": [
+      0.0112453019246459,
+      0.0112453019246459,
+      0.0112453019246459,
+      0.0112453019246459
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.03696805347043007,
+     "B1_LS_LP": 0.03696805347043007,
+     "restart_support_losses": [
+      0.012215716764330864,
+      0.012215716764330864,
+      0.01221306249499321,
+      0.015199901536107063
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03343125898149277,
+     "B1_LS_LP": 0.03343125898149277,
+     "restart_support_losses": [
+      0.015840180218219757,
+      0.015840180218219757,
+      0.015840180218219757,
+      0.015840180218219757
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.008402158728236415,
+     "B1_LS_LP": 0.008402158728236415,
+     "restart_support_losses": [
+      0.01608218252658844,
+      0.01608218252658844,
+      0.016689322888851166,
+      0.01608218252658844
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.06862296963661012,
+     "B1_LS_LP": 0.06299947772564389,
+     "restart_support_losses": [
+      0.02690141648054123,
+      0.027821309864521027,
+      0.026790253818035126,
+      0.02575460821390152
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.025409255772419252,
+     "B1_LS_LP": 0.031382709628888075,
+     "restart_support_losses": [
+      0.027392737567424774,
+      0.027931498363614082,
+      0.026668736711144447,
+      0.027931498363614082
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03506965356697108,
+     "B1_LS_LP": 0.044691212195760666,
+     "restart_support_losses": [
+      0.018285829573869705,
+      0.018160050734877586,
+      0.019144831225275993,
+      0.019144831225275993
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03175581700513607,
+     "B1_LS_LP": 0.03175581700513607,
+     "restart_support_losses": [
+      1.1949169635772705,
+      1.2456140518188477,
+      0.02679639309644699,
+      1.1767951250076294
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03414358819704606,
+     "B1_LS_LP": 0.03855649036492049,
+     "restart_support_losses": [
+      0.01820407807826996,
+      0.01820407807826996,
+      0.01820407807826996,
+      0.01820407807826996
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.010099697384141995,
+     "B1_LS_LP": 0.02677024786246286,
+     "restart_support_losses": [
+      0.016511624678969383,
+      0.016511624678969383,
+      0.017160439863801003,
+      0.018211955204606056
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03022951509372359,
+     "B1_LS_LP": 0.03022951509372359,
+     "restart_support_losses": [
+      0.02587808482348919,
+      1.1735706329345703,
+      0.02587808482348919,
+      0.02587808482348919
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.021435450679331162,
+     "B1_LS_LP": 0.028460979737389185,
+     "restart_support_losses": [
+      0.013147029094398022,
+      0.013147029094398022,
+      0.013147029094398022,
+      0.013147029094398022
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.05039383318955726,
+     "B1_LS_LP": 0.05039383318955726,
+     "restart_support_losses": [
+      0.024419432505965233,
+      0.024419432505965233,
+      0.024419432505965233,
+      0.022429803386330605
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.02259444421192563,
+     "B1_LS_LP": 0.01542493631751548,
+     "restart_support_losses": [
+      0.020188836380839348,
+      0.020188836380839348,
+      0.020188836380839348,
+      0.018715864047408104
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.017005552602129863,
+     "B1_LS_LP": 0.017005552602129863,
+     "restart_support_losses": [
+      0.024798225611448288,
+      0.024798225611448288,
+      0.024798225611448288,
+      0.024798225611448288
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.018989079712992418,
+     "B1_LS_LP": 0.018989079712992418,
+     "restart_support_losses": [
+      0.01894567161798477,
+      0.01894567161798477,
+      0.01894567161798477,
+      0.01894567161798477
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.02826586131542151,
+     "B1_LS_LP": 0.016937344320274515,
+     "restart_support_losses": [
+      0.021940039470791817,
+      0.023877037689089775,
+      0.023877037689089775,
+      0.021940039470791817
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.05702068638217036,
+     "B1_LS_LP": 0.05702068638217036,
+     "restart_support_losses": [
+      0.03984415531158447,
+      0.03984415531158447,
+      0.03984415531158447,
+      0.03984415531158447
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 1.0019626901031549,
+     "B1_LS_LP": 0.01721408876275838,
+     "restart_support_losses": [
+      1.1410307884216309,
+      1.1539831161499023,
+      1.041994333267212,
+      1.8619835376739502
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": false,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.039852722119847424,
+     "B1_LS_LP": 0.04646457403404489,
+     "restart_support_losses": [
+      0.0259829331189394,
+      0.0259829331189394,
+      0.027510501444339752,
+      0.02380446344614029
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.0326423578922628,
+     "B1_LS_LP": 0.0326423578922628,
+     "restart_support_losses": [
+      0.017295371741056442,
+      0.01571183279156685,
+      0.01904871314764023,
+      0.01703605242073536
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.06282765832920088,
+     "B1_LS_LP": 0.050497859336138144,
+     "restart_support_losses": [
+      0.02345103770494461,
+      0.021327286958694458,
+      0.02345103770494461,
+      0.02223655954003334
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.020622437385927818,
+     "B1_LS_LP": 0.020622437385927818,
+     "restart_support_losses": [
+      0.01564658433198929,
+      0.01651402749121189,
+      0.014931741170585155,
+      0.01564658433198929
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.01668263323214433,
+     "B1_LS_LP": 0.01668263323214433,
+     "restart_support_losses": [
+      0.023414254188537598,
+      0.025363046675920486,
+      0.025363046675920486,
+      0.025912567973136902
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.08480386609116354,
+     "B1_LS_LP": 0.0828036104286767,
+     "restart_support_losses": [
+      0.03096078336238861,
+      0.03166221082210541,
+      0.032665614038705826,
+      0.032667651772499084
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.030677309064301408,
+     "B1_LS_LP": 0.030677309064301408,
+     "restart_support_losses": [
+      0.02287016622722149,
+      0.023247934877872467,
+      0.023708663880825043,
+      0.02230256050825119
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.04396752420233858,
+     "B1_LS_LP": 0.029397964362750426,
+     "restart_support_losses": [
+      0.025952160358428955,
+      0.02626260370016098,
+      0.02597997710108757,
+      0.025952160358428955
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.023330285015352947,
+     "B1_LS_LP": 0.039239845074821915,
+     "restart_support_losses": [
+      0.021138079464435577,
+      0.01934651844203472,
+      1.0566834211349487,
+      0.021138079464435577
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.052857080255149354,
+     "B1_LS_LP": 0.03819767931032745,
+     "restart_support_losses": [
+      0.025494204834103584,
+      0.024277426302433014,
+      0.024277426302433014,
+      0.023004062473773956
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03977921253760228,
+     "B1_LS_LP": 0.050549742955867755,
+     "restart_support_losses": [
+      0.019215676933526993,
+      0.019215676933526993,
+      0.019215676933526993,
+      0.02100514993071556
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.06429320702630141,
+     "B1_LS_LP": 0.05146838638857369,
+     "restart_support_losses": [
+      0.0337812639772892,
+      0.0337812639772892,
+      0.0337812639772892,
+      0.0337812639772892
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.05380107721955055,
+     "B1_LS_LP": 0.06589440952203474,
+     "restart_support_losses": [
+      0.03251298889517784,
+      0.03251298889517784,
+      0.03251298889517784,
+      0.03251298889517784
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.017657571901581785,
+     "B1_LS_LP": 0.009289606979663577,
+     "restart_support_losses": [
+      0.02134636417031288,
+      0.02245858870446682,
+      0.02134636417031288,
+      0.02134636417031288
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.00941454466359772,
+     "B1_LS_LP": 0.00941454466359772,
+     "restart_support_losses": [
+      0.021995656192302704,
+      1.2116711139678955,
+      0.023194490000605583,
+      0.9577571153640747
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    }
+   ],
+   "seconds": 4717.839915899967
+  },
+  "32": {
+   "tasks": [
+    {
+     "variant": "INPUT",
+     "GRAD": 0.019246895842926548,
+     "B1_LS_LP": 0.011470113048830884,
+     "restart_support_losses": [
+      0.0071958014741539955,
+      0.0071958014741539955,
+      0.0071958014741539955,
+      0.008800201117992401
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.023866154696567998,
+     "B1_LS_LP": 0.023866154696567998,
+     "restart_support_losses": [
+      0.01336060930043459,
+      0.01336060930043459,
+      0.01336060930043459,
+      0.012637102976441383
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.037148347719381344,
+     "B1_LS_LP": 0.01842642064568154,
+     "restart_support_losses": [
+      0.01142305601388216,
+      0.01142305601388216,
+      0.01142305601388216,
+      0.01142305601388216
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.005982800071148449,
+     "B1_LS_LP": 0.005982800071148449,
+     "restart_support_losses": [
+      0.009876653552055359,
+      0.009876653552055359,
+      0.009876653552055359,
+      0.009876653552055359
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.01968327604663477,
+     "B1_LS_LP": 0.01968327604663477,
+     "restart_support_losses": [
+      0.006976265925914049,
+      0.006976265925914049,
+      0.006976265925914049,
+      0.006976265925914049
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.023315619147423774,
+     "B1_LS_LP": 0.033170172588232426,
+     "restart_support_losses": [
+      0.016125909984111786,
+      0.013968226499855518,
+      0.013968226499855518,
+      0.013968226499855518
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.047244766446660695,
+     "B1_LS_LP": 0.030377023100232912,
+     "restart_support_losses": [
+      0.013145418837666512,
+      0.012432511895895004,
+      0.013145418837666512,
+      0.013145418837666512
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.02097022224125549,
+     "B1_LS_LP": 0.026858435556177042,
+     "restart_support_losses": [
+      0.01087352354079485,
+      0.01087352354079485,
+      0.01087352354079485,
+      0.015212648548185825
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.004436683879566895,
+     "B1_LS_LP": 0.004436683879566895,
+     "restart_support_losses": [
+      0.008589688688516617,
+      0.008589688688516617,
+      0.008589688688516617,
+      0.008589688688516617
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.0067602994559838965,
+     "B1_LS_LP": 0.026895109162764604,
+     "restart_support_losses": [
+      0.01266162097454071,
+      0.01266162097454071,
+      0.012110359035432339,
+      0.01266162097454071
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.01401299696507145,
+     "B1_LS_LP": 0.021172726847111255,
+     "restart_support_losses": [
+      0.016246888786554337,
+      0.01699378900229931,
+      0.016246888786554337,
+      0.016246888786554337
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.011889048818150708,
+     "B1_LS_LP": 0.011889048818150708,
+     "restart_support_losses": [
+      0.0063420068472623825,
+      0.0063420068472623825,
+      0.0063420068472623825,
+      0.0063420068472623825
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.00888874407266693,
+     "B1_LS_LP": 0.00888874407266693,
+     "restart_support_losses": [
+      0.013725914061069489,
+      0.013725914061069489,
+      0.013725914061069489,
+      0.013725914061069489
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.029653295132067756,
+     "B1_LS_LP": 0.03817513900556237,
+     "restart_support_losses": [
+      0.008672002702951431,
+      0.00994439609348774,
+      0.00994439609348774,
+      0.00994439609348774
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.014233703951825265,
+     "B1_LS_LP": 0.014233703951825265,
+     "restart_support_losses": [
+      0.009410008788108826,
+      0.010281243361532688,
+      0.009410008788108826,
+      0.009410008788108826
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.013619769607570763,
+     "B1_LS_LP": 0.013619769607570763,
+     "restart_support_losses": [
+      0.008185042068362236,
+      0.008185042068362236,
+      0.008185042068362236,
+      0.008185042068362236
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.016048060963624166,
+     "B1_LS_LP": 0.016048060963624166,
+     "restart_support_losses": [
+      0.013534593395888805,
+      0.013534593395888805,
+      0.013534593395888805,
+      0.013534593395888805
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.008666989336118524,
+     "B1_LS_LP": 0.008666989336118524,
+     "restart_support_losses": [
+      0.01293640024960041,
+      0.01293640024960041,
+      0.01293640024960041,
+      0.01293640024960041
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.009206165031510156,
+     "B1_LS_LP": 0.007679824306550179,
+     "restart_support_losses": [
+      0.013457759283483028,
+      0.014322392642498016,
+      0.014322392642498016,
+      0.014322392642498016
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.006622701106119921,
+     "B1_LS_LP": 0.006622701106119921,
+     "restart_support_losses": [
+      0.010739477351307869,
+      0.010399628430604935,
+      0.010399628430604935,
+      0.010399628430604935
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.008178797752202677,
+     "B1_LS_LP": 0.01839132948403436,
+     "restart_support_losses": [
+      0.018152035772800446,
+      0.018152035772800446,
+      0.018152035772800446,
+      0.016949806362390518
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.006138432991728976,
+     "B1_LS_LP": 0.0191952703546495,
+     "restart_support_losses": [
+      0.011009581387043,
+      0.010322057642042637,
+      0.011009581387043,
+      0.010322057642042637
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.03499519512585503,
+     "B1_LS_LP": 0.06529942581038824,
+     "restart_support_losses": [
+      0.012898337095975876,
+      0.013242170214653015,
+      0.012898337095975876,
+      0.013830200769007206
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.020599042587460027,
+     "B1_LS_LP": 0.020599042587460027,
+     "restart_support_losses": [
+      0.013624808751046658,
+      0.014781218953430653,
+      0.012598037719726562,
+      0.012624380178749561
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.0069267013385728516,
+     "B1_LS_LP": 0.010967164697787272,
+     "restart_support_losses": [
+      0.01257640402764082,
+      0.01257640402764082,
+      0.01257640402764082,
+      0.01257640402764082
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.029755740787451825,
+     "B1_LS_LP": 0.016282155589603862,
+     "restart_support_losses": [
+      0.01569514535367489,
+      0.01569514535367489,
+      0.014303930103778839,
+      0.01569514535367489
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.020856820158701418,
+     "B1_LS_LP": 0.020856820158701418,
+     "restart_support_losses": [
+      0.009561940096318722,
+      0.009561940096318722,
+      0.009561940096318722,
+      0.009561940096318722
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.024303887485067673,
+     "B1_LS_LP": 0.024303887485067673,
+     "restart_support_losses": [
+      0.007815513759851456,
+      0.007815513759851456,
+      0.009834411554038525,
+      0.007815513759851456
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.017287692969438606,
+     "B1_LS_LP": 0.03125231302953538,
+     "restart_support_losses": [
+      0.010567059740424156,
+      0.008766804821789265,
+      0.010988403111696243,
+      0.008766804821789265
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.023541726204530676,
+     "B1_LS_LP": 0.023541726204530676,
+     "restart_support_losses": [
+      0.010878728702664375,
+      0.0108477883040905,
+      0.010878728702664375,
+      0.010878728702664375
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.008490803527469322,
+     "B1_LS_LP": 0.015452825738049266,
+     "restart_support_losses": [
+      0.011913719587028027,
+      0.012730656191706657,
+      0.011913719587028027,
+      0.011913719587028027
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "INPUT",
+     "GRAD": 0.005238792688780959,
+     "B1_LS_LP": 0.010339107228145971,
+     "restart_support_losses": [
+      0.010918691754341125,
+      0.010918691754341125,
+      0.010918691754341125,
+      0.010918691754341125
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03177657373376684,
+     "B1_LS_LP": 0.03177657373376684,
+     "restart_support_losses": [
+      0.03692203760147095,
+      0.03617400676012039,
+      0.037495680153369904,
+      0.037495680153369904
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.0427863630546489,
+     "B1_LS_LP": 0.05427831766027755,
+     "restart_support_losses": [
+      0.022471314296126366,
+      0.022471314296126366,
+      0.022471314296126366,
+      0.023504652082920074
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.02284970384792687,
+     "B1_LS_LP": 0.02284970384792687,
+     "restart_support_losses": [
+      0.9877802729606628,
+      0.01955004408955574,
+      0.01955004408955574,
+      0.9876896739006042
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.02175489578210836,
+     "B1_LS_LP": 0.01804956112797834,
+     "restart_support_losses": [
+      0.015665404498577118,
+      0.016369221732020378,
+      0.015665404498577118,
+      0.016369221732020378
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.046527636128849414,
+     "B1_LS_LP": 0.046527636128849414,
+     "restart_support_losses": [
+      0.016409344971179962,
+      1.5448720455169678,
+      0.9066901803016663,
+      0.9066901803016663
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.026438128529415364,
+     "B1_LS_LP": 0.026438128529415364,
+     "restart_support_losses": [
+      0.05170444771647453,
+      0.0449494831264019,
+      0.05284195393323898,
+      0.05170444771647453
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.022404849273209362,
+     "B1_LS_LP": 0.017329701229239537,
+     "restart_support_losses": [
+      0.0210306104272604,
+      0.019544919952750206,
+      0.018865885213017464,
+      1.1042027473449707
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.026184743606052285,
+     "B1_LS_LP": 0.01638908392570792,
+     "restart_support_losses": [
+      0.965060293674469,
+      0.01526766549795866,
+      0.017228109762072563,
+      1.2865781784057617
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03513462256977989,
+     "B1_LS_LP": 0.028295477397345996,
+     "restart_support_losses": [
+      0.9650945663452148,
+      0.014978349208831787,
+      1.0062570571899414,
+      0.014978349208831787
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.019780769519773426,
+     "B1_LS_LP": 0.03108432317421298,
+     "restart_support_losses": [
+      0.019058957695961,
+      0.02284327708184719,
+      0.019058957695961,
+      0.020084496587514877
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.02049505207717317,
+     "B1_LS_LP": 0.030041795833806766,
+     "restart_support_losses": [
+      0.027366140857338905,
+      0.027366140857338905,
+      0.026733707636594772,
+      0.026733707636594772
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03656649261795767,
+     "B1_LS_LP": 0.027585282436347745,
+     "restart_support_losses": [
+      0.03896680474281311,
+      0.04094761982560158,
+      0.04094761982560158,
+      0.04228048399090767
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.027072818794934,
+     "B1_LS_LP": 0.019180923304295834,
+     "restart_support_losses": [
+      1.0976437330245972,
+      0.018916510045528412,
+      1.004982352256775,
+      1.291109323501587
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.01615433123957854,
+     "B1_LS_LP": 0.01615433123957854,
+     "restart_support_losses": [
+      0.02567485347390175,
+      0.02567485347390175,
+      0.025052828714251518,
+      0.025233866646885872
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.026891302515969166,
+     "B1_LS_LP": 0.026891302515969166,
+     "restart_support_losses": [
+      0.02713015116751194,
+      0.02713015116751194,
+      0.02713015116751194,
+      0.02713015116751194
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.02991771998312802,
+     "B1_LS_LP": 0.02520201380688247,
+     "restart_support_losses": [
+      0.02698880061507225,
+      0.02698880061507225,
+      0.02752223238348961,
+      0.025908099487423897
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.05397168924700311,
+     "B1_LS_LP": 0.0404567733299081,
+     "restart_support_losses": [
+      0.018866322934627533,
+      0.019570741802453995,
+      0.01890079490840435,
+      0.02092735841870308
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.02534741233644805,
+     "B1_LS_LP": 0.02179168455175312,
+     "restart_support_losses": [
+      0.017399048432707787,
+      0.0166475847363472,
+      0.0166475847363472,
+      0.01869695447385311
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.02633281274417061,
+     "B1_LS_LP": 0.020210356499298525,
+     "restart_support_losses": [
+      0.01639883778989315,
+      0.01639883778989315,
+      0.01639883778989315,
+      0.018809521570801735
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.013788199103805032,
+     "B1_LS_LP": 0.010908435528986741,
+     "restart_support_losses": [
+      0.017221536487340927,
+      0.016334066167473793,
+      0.016334066167473793,
+      0.015632040798664093
+     ],
+     "chosen_restart": 3,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.022330498199973698,
+     "B1_LS_LP": 0.02763685875197637,
+     "restart_support_losses": [
+      0.02617519348859787,
+      0.02617519348859787,
+      0.02617519348859787,
+      0.02617519348859787
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.04144791259159135,
+     "B1_LS_LP": 0.047386627047711,
+     "restart_support_losses": [
+      0.033186156302690506,
+      0.03666112944483757,
+      0.03548567742109299,
+      0.038351673632860184
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.023715133761999182,
+     "B1_LS_LP": 0.027135383013295267,
+     "restart_support_losses": [
+      0.03212994709610939,
+      0.0333130918443203,
+      0.0333130918443203,
+      0.0333130918443203
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.019106189821951402,
+     "B1_LS_LP": 0.025801187057295383,
+     "restart_support_losses": [
+      0.025483163073658943,
+      0.02474985271692276,
+      0.02474985271692276,
+      0.02474985271692276
+     ],
+     "chosen_restart": 1,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.028302208803199676,
+     "B1_LS_LP": 0.028302208803199676,
+     "restart_support_losses": [
+      0.0262981615960598,
+      0.0262981615960598,
+      0.0262981615960598,
+      0.0262981615960598
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.029093681321643628,
+     "B1_LS_LP": 0.029093681321643628,
+     "restart_support_losses": [
+      0.03553606569766998,
+      0.03553606569766998,
+      0.03553606569766998,
+      0.03618862107396126
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.013008753299934481,
+     "B1_LS_LP": 0.013008753299934481,
+     "restart_support_losses": [
+      0.015896465629339218,
+      0.01742430031299591,
+      0.019436419010162354,
+      0.015896465629339218
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03414321376025984,
+     "B1_LS_LP": 0.03414321376025984,
+     "restart_support_losses": [
+      0.014802747406065464,
+      0.014802747406065464,
+      0.015381925739347935,
+      0.015331406146287918
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.011145876720920296,
+     "B1_LS_LP": 0.011145876720920296,
+     "restart_support_losses": [
+      0.021596919745206833,
+      0.021596919745206833,
+      0.021596919745206833,
+      0.021596919745206833
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.03415489694857456,
+     "B1_LS_LP": 0.02367764741015576,
+     "restart_support_losses": [
+      0.0221834946423769,
+      0.9487095475196838,
+      0.020039444789290428,
+      1.015643835067749
+     ],
+     "chosen_restart": 2,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.030679472876325723,
+     "B1_LS_LP": 0.01671154280331582,
+     "restart_support_losses": [
+      0.02981160208582878,
+      0.03013474866747856,
+      0.031319212168455124,
+      0.031319212168455124
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    },
+    {
+     "variant": "MID",
+     "GRAD": 0.015394692578726084,
+     "B1_LS_LP": 0.025970108832605095,
+     "restart_support_losses": [
+      0.02161961980164051,
+      0.022721515968441963,
+      0.022721515968441963,
+      0.022721515968441963
+     ],
+     "chosen_restart": 0,
+     "routes_match_oracle": true,
+     "routes_distinct": true
+    }
+   ],
+   "seconds": 4573.26320700004
+  }
+ },
+ "seconds": 4722.443932533264,
+ "finished_utc": "2026-10-05T23:45:54.922771+00:00"
+}

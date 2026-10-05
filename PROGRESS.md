@@ -8597,3 +8597,33 @@ cheap to extract. **Caveats:** offline and searched, not learned online; program
 length given; two branches; linear predicates; 3 worlds (the plan's detection at
 heavy world heterogeneity is 0.61). This is a sizing that licenses the next rung,
 not a verdict.
+
+
+# 2026-10-05 B1g Tier 1: gradient finds branches (173/192 against search's 178); mid-program decisions need restarts
+
+Plan `B1G_GRADIENT_BRANCH_PLAN.md`, frozen `d511b7c`, hash protected `1ef2b66`.
+B1's 192 tasks on the same frozen depth-4 vocabularies, gradient (Adam 0.05,
+temperature 1.0 -> 0.1, 600 updates, 4 restarts chosen on support) in place of
+B1's search. Report `reports/b1g_gradient_branch.json`; `k` recomputed
+independently from the per-task records: 173.
+
+| | gradient passes (median) | B1 search passes | both | gradient only | search only |
+|---|---|---:|---:|---:|---:|
+| ALL (192) | **173** (0.0226) | 178 | 169 | 4 | 9 |
+| INPUT (96) | 95 (0.0148) | 95 | 94 | 1 | 1 |
+| MID (96) | 78 (0.0295) | 83 | 75 | 3 | 8 |
+
+Per world 55 / 55 / 63 of 64. Label **`GRADIENT_FINDS`** (154 needed). Both
+routes distinct in every task; routes equal the oracle mapping in 149 of 192
+(search: 151), the rest functionally equivalent.
+
+**Restarts.** A single restart succeeds (hardened support loss below 0.5) 95% of
+the time. INPUT tasks never needed one (0 of 96 first restarts failed). MID tasks
+did: the first restart failed on 10 of 96, and all 4 failed on 1. Symmetry
+breaking across restarts is what carries the mid-program decisions.
+
+**Reading.** The optimizer wake uses discovers branch structure and decision on a
+formed vocabulary almost as well as exhaustive search (173 against 178), with the
+same residual (decisions on intermediate states). An online branch learner is
+therefore not blocked by the optimizer; it needs a symmetry-breaking mechanism
+(restarts or an equivalent) for decisions made after a first step.
