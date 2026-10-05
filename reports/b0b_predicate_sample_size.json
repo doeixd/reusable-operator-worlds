@@ -1,0 +1,534 @@
+{
+ "tier": 0,
+ "post_hoc": true,
+ "world": 30,
+ "n128_reproduces_b0": true,
+ "summary": {
+  "128": {
+   "INPUT": {
+    "learned_predicate_median": 0.10758906406606158,
+    "predicate_accuracy_median": 0.9453125,
+    "below_0.05": 0
+   },
+   "MID": {
+    "learned_predicate_median": 0.12138389694196369,
+    "predicate_accuracy_median": 0.9453125,
+    "below_0.05": 0
+   }
+  },
+  "512": {
+   "INPUT": {
+    "learned_predicate_median": 0.038207198798436856,
+    "predicate_accuracy_median": 0.982421875,
+    "below_0.05": 11
+   },
+   "MID": {
+    "learned_predicate_median": 0.046783419240671226,
+    "predicate_accuracy_median": 0.98046875,
+    "below_0.05": 9
+   }
+  },
+  "2048": {
+   "INPUT": {
+    "learned_predicate_median": 0.02305112089231499,
+    "predicate_accuracy_median": 0.9921875,
+    "below_0.05": 16
+   },
+   "MID": {
+    "learned_predicate_median": 0.037413755150960126,
+    "predicate_accuracy_median": 0.984375,
+    "below_0.05": 12
+   }
+  }
+ },
+ "tasks": {
+  "128": [
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.05023472702334428,
+    "predicate_accuracy": 0.97265625
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.10573961694103466,
+    "predicate_accuracy": 0.94140625
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.19031097574272776,
+    "predicate_accuracy": 0.92578125
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.13723651050603378,
+    "predicate_accuracy": 0.93359375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.11348762977172742,
+    "predicate_accuracy": 0.9375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.14073956619615677,
+    "predicate_accuracy": 0.9296875
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.07207114475695509,
+    "predicate_accuracy": 0.96484375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.09070722717484273,
+    "predicate_accuracy": 0.9609375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.12200941764958874,
+    "predicate_accuracy": 0.9375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.1094303352492106,
+    "predicate_accuracy": 0.9609375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.05500407132440334,
+    "predicate_accuracy": 0.97265625
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.21713994651532162,
+    "predicate_accuracy": 0.9140625
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.19394219916973668,
+    "predicate_accuracy": 0.9140625
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.10574779288291257,
+    "predicate_accuracy": 0.94921875
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.07049864730465981,
+    "predicate_accuracy": 0.95703125
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.07504465522218613,
+    "predicate_accuracy": 0.96484375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.08028522783537605,
+    "predicate_accuracy": 0.9609375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.11899597179036771,
+    "predicate_accuracy": 0.9453125
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.12684888823953722,
+    "predicate_accuracy": 0.94921875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.2257967528792625,
+    "predicate_accuracy": 0.89453125
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.10614697525101692,
+    "predicate_accuracy": 0.9453125
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.06703025954290115,
+    "predicate_accuracy": 0.97265625
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.08098425210686579,
+    "predicate_accuracy": 0.96484375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.12377182209355968,
+    "predicate_accuracy": 0.94140625
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.14286221314892766,
+    "predicate_accuracy": 0.93359375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.1508459937875912,
+    "predicate_accuracy": 0.921875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.09763361817555143,
+    "predicate_accuracy": 0.95703125
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.17714112186379927,
+    "predicate_accuracy": 0.91796875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.10719455301052874,
+    "predicate_accuracy": 0.94921875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.11865896394774948,
+    "predicate_accuracy": 0.94921875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.15308257019991597,
+    "predicate_accuracy": 0.9296875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.16516212893875445,
+    "predicate_accuracy": 0.9140625
+   }
+  ],
+  "512": [
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.023668284915685726,
+    "predicate_accuracy": 0.9921875
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.03455988017015666,
+    "predicate_accuracy": 0.9765625
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.09988117109434354,
+    "predicate_accuracy": 0.95703125
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.016389903746912293,
+    "predicate_accuracy": 0.9921875
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.04592731881818227,
+    "predicate_accuracy": 0.9765625
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.028996907352821646,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.03352639606462849,
+    "predicate_accuracy": 0.98046875
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.07638546986647192,
+    "predicate_accuracy": 0.96484375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.028283947535567427,
+    "predicate_accuracy": 0.98828125
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.020641894193179935,
+    "predicate_accuracy": 0.99609375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.05630253912322458,
+    "predicate_accuracy": 0.9765625
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.08467755854709731,
+    "predicate_accuracy": 0.96875
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.05571039009719108,
+    "predicate_accuracy": 0.9765625
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.04731985394385883,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.04185451742671706,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.01679168178033721,
+    "predicate_accuracy": 0.99609375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.03066026156603351,
+    "predicate_accuracy": 0.98828125
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.03113386454446546,
+    "predicate_accuracy": 0.98828125
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.04651237651893811,
+    "predicate_accuracy": 0.98046875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.04705446196240435,
+    "predicate_accuracy": 0.98828125
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.033825261275353076,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.06230145422049121,
+    "predicate_accuracy": 0.97265625
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.03764128415762221,
+    "predicate_accuracy": 0.98046875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.040329854858315986,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.10366010021163921,
+    "predicate_accuracy": 0.9609375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.07405482999406969,
+    "predicate_accuracy": 0.96484375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.08027791372311369,
+    "predicate_accuracy": 0.98046875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.09243051305452406,
+    "predicate_accuracy": 0.96484375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.030307001156852215,
+    "predicate_accuracy": 0.98828125
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.03789150229320059,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.0627417776939801,
+    "predicate_accuracy": 0.97265625
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.07649347215501387,
+    "predicate_accuracy": 0.97265625
+   }
+  ],
+  "2048": [
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.014997343969022697,
+    "predicate_accuracy": 0.99609375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.020160834547555417,
+    "predicate_accuracy": 0.98828125
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.028509667593545892,
+    "predicate_accuracy": 0.9921875
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.007762832752988167,
+    "predicate_accuracy": 1.0
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.030046599945638613,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.04679026705810729,
+    "predicate_accuracy": 0.9765625
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.023869672463653485,
+    "predicate_accuracy": 0.99609375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.02151271798942565,
+    "predicate_accuracy": 0.9921875
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.009352170985612548,
+    "predicate_accuracy": 0.99609375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.03332702780001161,
+    "predicate_accuracy": 0.9921875
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.013506706550729436,
+    "predicate_accuracy": 0.99609375
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.026203334551551175,
+    "predicate_accuracy": 0.9921875
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.02153382156366188,
+    "predicate_accuracy": 0.98828125
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.045271631184990745,
+    "predicate_accuracy": 0.98828125
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.022232569320976496,
+    "predicate_accuracy": 0.9921875
+   },
+   {
+    "variant": "INPUT",
+    "learned_predicate_nmse": 0.024989102328361903,
+    "predicate_accuracy": 0.98828125
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.02588087633028194,
+    "predicate_accuracy": 0.9921875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.03260300372263493,
+    "predicate_accuracy": 0.9921875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.035842262450334915,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.05083067170127902,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.03648219441698367,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.03843554978375761,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.008746335394747203,
+    "predicate_accuracy": 1.0
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.050805104481110794,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.032507718075387104,
+    "predicate_accuracy": 0.9921875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.04736968372209349,
+    "predicate_accuracy": 0.98046875
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.05097117550481661,
+    "predicate_accuracy": 0.98828125
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.03834531588493657,
+    "predicate_accuracy": 0.984375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.030307001156852215,
+    "predicate_accuracy": 0.98828125
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.01641801237579861,
+    "predicate_accuracy": 0.99609375
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.06468368926051433,
+    "predicate_accuracy": 0.9765625
+   },
+   {
+    "variant": "MID",
+    "learned_predicate_nmse": 0.04321783441214809,
+    "predicate_accuracy": 0.984375
+   }
+  ]
+ },
+ "seconds": 193.70975589752197,
+ "finished_utc": "2026-10-05T21:05:02.797999+00:00"
+}

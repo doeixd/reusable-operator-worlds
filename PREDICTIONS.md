@@ -10736,3 +10736,58 @@ same wrong slot and consolidation reinforces it.
   any length-extrapolation claim beyond about 8 must separate execution drift
   from inference (#3 section 2's distinction), and should report the drift as a
   measured baseline, not a failure.
+
+
+# B0 TIER 0 CENSUS + B0b POST-HOC DIAGNOSTIC (2026-10-05, descriptive): branch tasks REQUIRE state-conditional routing; the branch decision is learnable from support data with ~512 examples
+
+**Terminology correction first (PI question, 2026-10-05: "Routing is control
+flow?").** No. A route here is a fixed slot sequence chosen once per task and
+applied identically to every input: a straight-line program, and choosing it is
+program SELECTION. Control flow begins when the next operation depends on the
+intermediate state. Earlier messages in this session called the positional-
+recurrence sweep (C1) "the first control-flow rung"; that was wrong.
+`SUCCESSOR_LADDER.md` now separates straight-line rungs (C0-C3) from
+control-flow rungs (B0-B3).
+
+**B0** (`row.experiments.census_b0_branch_necessity`,
+`reports/b0_branch_necessity_census.json`). 96 tasks `IF(p(state), A, B)` on
+the rebuilt depth-4 libraries of D1 worlds 30-32 (C0's construction): p a
+random hyperplane, A and B different length-2 teacher programs; INPUT tasks
+branch on x, MID tasks on the state after a shared first operation. 128 support,
+256 query examples.
+
+| | best single straight-line route (lengths 1-4, exhaustive) | oracle branch | learned predicate (structure given) | predicate accuracy |
+|---|---:|---:|---:|---:|
+| INPUT (48 tasks) | 1.01 (0/48 below 0.05) | 0.0065 | 0.110 | 94.7% |
+| MID (48 tasks) | 0.98 (0/48 below 0.05) | 0.0107 | 0.120 | 94.5% |
+
+Registered reading: **NECESSITY holds** for both variants: no single straight-
+line route solves any branch task, while the formed vocabulary executes either
+branch when told which. **OPPORTUNITY fails at the registered 0.05**: the
+learned-predicate arm sits at 0.11-0.12. The labels it learned from (which
+branch fits each support example better) were 100% correct; the miss is the
+linear classifier's generalization (~95%), and each misrouted example costs
+about a whole branch error.
+
+**B0b, POST HOC** (written after B0's result; changes no B0 reading;
+`row.experiments.census_b0b_predicate_sample_size`,
+`reports/b0b_predicate_sample_size.json`). World 30's 32 tasks, learned-predicate
+arm only, support size varied; n = 128 reproduces B0's world-30 values exactly.
+
+| support examples | INPUT learned predicate | MID learned predicate | predicate accuracy |
+|---:|---:|---:|---:|
+| 128 | 0.108 | 0.121 | 94.5% |
+| 512 | 0.038 | 0.047 | ~98% |
+| 2,048 | 0.023 | 0.037 | 98.4-99.2% |
+
+The opportunity miss was sample size, not learnability: with ~512 support
+examples the branch decision is recovered from support data alone well enough
+to clear 0.05 at the median.
+
+**What it means for B1.** State-conditional routing is necessary for these
+tasks and, given the branch structure, learnable. B1's open question is the
+rest of issue #2 section 4's 2x2: can the learner find the branch STRUCTURE
+(which two programs) without being told, and both together? B1 should register
+~512 support examples per branch task (128 is too few by B0b), treat the
+learned-predicate arm as the "oracle structure, learned predicate" cell, and add
+"learned structure, oracle predicate" and "both learned" cells.

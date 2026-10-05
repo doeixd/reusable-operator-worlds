@@ -38,24 +38,37 @@ is only needed from about depth 6.
 
 # Track C: control flow (issue #3), first
 
-Order, each rung gated by the one before:
-1. **C0 repeated-circuit execution (Tier 0).** With the correct route given,
-   does one learned operator keep its meaning applied 1..32 times? Separates
-   execution from route inference (#3 section 2.1). If execution degrades fast,
-   the bottleneck is the vocabulary and no loop rung can be read.
-2. **C1 positional-recurrence sweep (#3 section 1).** A `rho_depth` knob from
-   independent per-position computation to one operator reused across
-   positions; tied vs untied learner at matched budget. Prediction: a
-   crossover, the depth-wise analogue of the V1 reuse law.
-3. **C2 route-inference length extrapolation (#3 section 2.2).** Can the router
-   infer an unseen repeat count from support data?
-4. **C3 variable-length routing (#3 section 3).** Learned route length; the
-   current depth-4/5 streams already mix lengths, so this starts from a known
-   construction.
-5. **C4 state-conditional routing (#3 section 4).** The router chooses the next
-   operator from the intermediate state, with STOP. The first rung that is
-   control flow rather than composition.
-6. **C5 emergent loop compression (#3 section 5).** Only after C4.
+**Terminology (PI question, 2026-10-05: "Routing is control flow?").** No. In
+this project a task's route is a fixed slot sequence chosen once per task from
+support data and applied identically to every input: a straight-line program.
+Choosing it is program SELECTION. Control flow starts when the next operation
+depends on data available during execution (the intermediate state). Issue #3
+section 4 draws the same line. The rungs below are split accordingly.
+
+**Straight-line rungs (preconditions, not control flow):**
+- **C0 repeated-circuit execution (Tier 0, done 2026-10-05):** a learned
+  operator applied n times with the correct route drifts about linearly in n,
+  clean to about 8 applications. A loop that iterates further inherits this
+  drift.
+- **C1 positional-recurrence sweep:** reuse economics WITHIN a program (tied vs
+  untied computation across positions), the depth-wise analogue of the V1 reuse
+  law. Not control flow.
+- **C2 route-inference length extrapolation** and **C3 variable-length
+  routing:** still program selection, with the length as part of the program.
+
+**Control-flow rungs:**
+- **B0 branch necessity census (Tier 0, next).** Tasks `IF(p(state), A, B)`
+  with a hidden predicate. Measures, on a formed library: the best any single
+  straight-line route can do (the refusal cost of the current learner, which
+  must use one route per task), the oracle-branch ceiling, and whether the
+  predicate can be recovered from support data alone. Issue #2 section 4's 2x2
+  (branch structure x predicate, oracle or learned) is the frame.
+- **B1 state-conditional routing:** a learner whose router chooses the next
+  operator (or STOP) from the current state; the first registered control-flow
+  rung, only if B0 shows necessity and opportunity.
+- **B2 data-dependent iteration (`while p(state)`),** reading C0's drift as a
+  measured baseline.
+- **B3 emergent control-flow compression** (issue #3 section 5), only after B1-B2.
 
 # Track S: self-curriculum (issue #4), second
 
@@ -116,11 +129,16 @@ one position wrong, or a quarter are wrong everywhere, but not on stale routes,
 which are coherent error. Approximate re-routing suffices if its errors are
 incoherent.
 
-**First registered rung: C1, the positional-recurrence sweep, at program
-lengths <= 8.** Reasons: Track C is first in this ladder; C0 shows execution is
-clean in that range, so a tied-versus-untied comparison is not confounded by
-drift; it is the depth-wise analogue of the V1 reuse law and has a registered
-crossover prediction; it needs a new generator knob (`rho_depth`) and an untied
-learner, so its plan must pass the NECESSITY and OPPORTUNITY gates with a Tier 0
-opportunity census before any lifetime. Scaling (A2, sparse in-stream schedules)
-is lower priority now that A1 shows approximate re-routing is enough.
+**B0 (2026-10-05): NECESSITY holds, OPPORTUNITY missed at 128 support
+examples.** No single straight-line route solves any of 96 branch tasks
+(median 1.0); the oracle branch reaches 0.006-0.011. The learned predicate
+(branch structure given) reaches 0.11-0.12 at 128 support examples with
+perfectly identified labels; B0b (post hoc) shows 0.038-0.047 at 512 and
+0.023-0.037 at 2,048. The decision is learnable; it needs about 512 examples.
+
+**Next registered rung: B1, the branch 2x2 (issue #2 section 4) at ~512
+support examples per task:** oracle structure + learned predicate (B0b's
+construction), learned structure + oracle predicate, both learned, against the
+single-route refusal arm. Its plan registers a learner that chooses the next
+route per example from the state. C1 stays a straight-line reuse rung. Scaling
+(A2) is lower priority now that A1 shows approximate re-routing is enough.

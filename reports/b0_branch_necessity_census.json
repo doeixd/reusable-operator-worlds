@@ -1,0 +1,2305 @@
+{
+ "tier": 0,
+ "descriptive": true,
+ "summary": {
+  "INPUT": {
+   "best_single_nmse": 1.0099092973359256,
+   "oracle_branch_nmse": 0.006475698070511831,
+   "learned_predicate_nmse": 0.11000631186634982,
+   "predicate_accuracy": 0.947265625,
+   "support_label_agreement": 1.0,
+   "tasks": 48,
+   "NECESSITY": true,
+   "OPPORTUNITY": false,
+   "best_single_below_0.05": 0,
+   "learned_predicate_below_0.05": 1
+  },
+  "MID": {
+   "best_single_nmse": 0.982060484508219,
+   "oracle_branch_nmse": 0.010672088626851478,
+   "learned_predicate_nmse": 0.1204475231421376,
+   "predicate_accuracy": 0.9453125,
+   "support_label_agreement": 1.0,
+   "tasks": 48,
+   "NECESSITY": true,
+   "OPPORTUNITY": false,
+   "best_single_below_0.05": 0,
+   "learned_predicate_below_0.05": 0
+  }
+ },
+ "worlds": {
+  "30": {
+   "tasks": [
+    {
+     "variant": "INPUT",
+     "A": [
+      4,
+      5
+     ],
+     "B": [
+      4,
+      4
+     ],
+     "C": [],
+     "best_single_route": [
+      10,
+      10
+     ],
+     "best_single_nmse": 1.0429014455321521,
+     "oracle_branch_nmse": 0.009583134625461977,
+     "learned_predicate_nmse": 0.05023472702334428,
+     "predicate_accuracy": 0.97265625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      4,
+      1
+     ],
+     "B": [
+      3,
+      0
+     ],
+     "C": [],
+     "best_single_route": [
+      10,
+      7
+     ],
+     "best_single_nmse": 0.9571008620029444,
+     "oracle_branch_nmse": 0.00493350468496844,
+     "learned_predicate_nmse": 0.10573961694103466,
+     "predicate_accuracy": 0.94140625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      3
+     ],
+     "B": [
+      3,
+      4
+     ],
+     "C": [],
+     "best_single_route": [
+      5,
+      11
+     ],
+     "best_single_nmse": 1.0424037979897893,
+     "oracle_branch_nmse": 0.006261235519039652,
+     "learned_predicate_nmse": 0.19031097574272776,
+     "predicate_accuracy": 0.92578125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      2,
+      0
+     ],
+     "B": [
+      4,
+      0
+     ],
+     "C": [],
+     "best_single_route": [
+      4,
+      0
+     ],
+     "best_single_nmse": 1.0117268125946381,
+     "oracle_branch_nmse": 0.007762832752988167,
+     "learned_predicate_nmse": 0.13723651050603378,
+     "predicate_accuracy": 0.93359375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      2,
+      3
+     ],
+     "B": [
+      0,
+      5
+     ],
+     "C": [],
+     "best_single_route": [
+      0,
+      5
+     ],
+     "best_single_nmse": 0.7344285337190383,
+     "oracle_branch_nmse": 0.008200025338747748,
+     "learned_predicate_nmse": 0.11348762977172742,
+     "predicate_accuracy": 0.9375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      0,
+      0
+     ],
+     "B": [
+      4,
+      0
+     ],
+     "C": [],
+     "best_single_route": [
+      0,
+      0
+     ],
+     "best_single_nmse": 1.0238053310350261,
+     "oracle_branch_nmse": 0.006234538262865149,
+     "learned_predicate_nmse": 0.14073956619615677,
+     "predicate_accuracy": 0.9296875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      3,
+      0
+     ],
+     "B": [
+      5,
+      2
+     ],
+     "C": [],
+     "best_single_route": [
+      11,
+      0
+     ],
+     "best_single_nmse": 1.0262153465480501,
+     "oracle_branch_nmse": 0.007368321217184023,
+     "learned_predicate_nmse": 0.07207114475695509,
+     "predicate_accuracy": 0.96484375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      3,
+      2
+     ],
+     "B": [
+      1,
+      0
+     ],
+     "C": [],
+     "best_single_route": [
+      7,
+      0
+     ],
+     "best_single_nmse": 1.0886130614166485,
+     "oracle_branch_nmse": 0.006460618905386521,
+     "learned_predicate_nmse": 0.09070722717484273,
+     "predicate_accuracy": 0.9609375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      0
+     ],
+     "B": [
+      3,
+      3
+     ],
+     "C": [],
+     "best_single_route": [
+      5,
+      0
+     ],
+     "best_single_nmse": 0.8704552588468693,
+     "oracle_branch_nmse": 0.005554234475813093,
+     "learned_predicate_nmse": 0.12200941764958874,
+     "predicate_accuracy": 0.9375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      1,
+      2
+     ],
+     "B": [
+      0,
+      4
+     ],
+     "C": [],
+     "best_single_route": [
+      7,
+      4
+     ],
+     "best_single_nmse": 1.1435342097426147,
+     "oracle_branch_nmse": 0.011770047471038962,
+     "learned_predicate_nmse": 0.1094303352492106,
+     "predicate_accuracy": 0.9609375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      4
+     ],
+     "B": [
+      3,
+      2
+     ],
+     "C": [],
+     "best_single_route": [
+      5,
+      10
+     ],
+     "best_single_nmse": 0.9638586062044799,
+     "oracle_branch_nmse": 0.009226200335927524,
+     "learned_predicate_nmse": 0.05500407132440334,
+     "predicate_accuracy": 0.97265625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      0,
+      3
+     ],
+     "B": [
+      5,
+      4
+     ],
+     "C": [],
+     "best_single_route": [
+      0,
+      11
+     ],
+     "best_single_nmse": 1.0080917820772133,
+     "oracle_branch_nmse": 0.006212246834942637,
+     "learned_predicate_nmse": 0.21713994651532162,
+     "predicate_accuracy": 0.9140625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      1,
+      4
+     ],
+     "B": [
+      4,
+      3
+     ],
+     "C": [],
+     "best_single_route": [
+      7,
+      10
+     ],
+     "best_single_nmse": 0.9554001597543358,
+     "oracle_branch_nmse": 0.006476826719038666,
+     "learned_predicate_nmse": 0.19394219916973668,
+     "predicate_accuracy": 0.9140625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      2,
+      2
+     ],
+     "B": [
+      2,
+      1
+     ],
+     "C": [],
+     "best_single_route": [
+      4,
+      7
+     ],
+     "best_single_nmse": 1.0535231408159385,
+     "oracle_branch_nmse": 0.011680352438023964,
+     "learned_predicate_nmse": 0.10574779288291257,
+     "predicate_accuracy": 0.94921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      4,
+      3
+     ],
+     "B": [
+      0,
+      5
+     ],
+     "C": [],
+     "best_single_route": [
+      0,
+      5
+     ],
+     "best_single_nmse": 0.8855750805518644,
+     "oracle_branch_nmse": 0.006578633758008604,
+     "learned_predicate_nmse": 0.07049864730465981,
+     "predicate_accuracy": 0.95703125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      4,
+      5
+     ],
+     "B": [
+      2,
+      2
+     ],
+     "C": [],
+     "best_single_route": [
+      4,
+      1
+     ],
+     "best_single_nmse": 0.8992745320123123,
+     "oracle_branch_nmse": 0.010402399414361262,
+     "learned_predicate_nmse": 0.07504465522218613,
+     "predicate_accuracy": 0.96484375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      0
+     ],
+     "B": [
+      1,
+      4
+     ],
+     "C": [
+      5
+     ],
+     "best_single_route": [
+      5,
+      4,
+      0
+     ],
+     "best_single_nmse": 0.9273890160903293,
+     "oracle_branch_nmse": 0.011521445920999069,
+     "learned_predicate_nmse": 0.08028522783537605,
+     "predicate_accuracy": 0.9609375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      4,
+      4
+     ],
+     "B": [
+      2,
+      0
+     ],
+     "C": [
+      5
+     ],
+     "best_single_route": [
+      5,
+      4,
+      0
+     ],
+     "best_single_nmse": 0.942631928036723,
+     "oracle_branch_nmse": 0.011755054465979917,
+     "learned_predicate_nmse": 0.11899597179036771,
+     "predicate_accuracy": 0.9453125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      3,
+      0
+     ],
+     "B": [
+      5,
+      0
+     ],
+     "C": [
+      2
+     ],
+     "best_single_route": [
+      4,
+      5,
+      0
+     ],
+     "best_single_nmse": 0.9262977830478866,
+     "oracle_branch_nmse": 0.01364862381090167,
+     "learned_predicate_nmse": 0.12684888823953722,
+     "predicate_accuracy": 0.94921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      4,
+      2
+     ],
+     "B": [
+      2,
+      5
+     ],
+     "C": [
+      5
+     ],
+     "best_single_route": [
+      5,
+      10,
+      4
+     ],
+     "best_single_nmse": 1.0599462561230149,
+     "oracle_branch_nmse": 0.014596007862366837,
+     "learned_predicate_nmse": 0.2257967528792625,
+     "predicate_accuracy": 0.89453125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      0,
+      4
+     ],
+     "B": [
+      3,
+      5
+     ],
+     "C": [
+      0
+     ],
+     "best_single_route": [
+      0,
+      0,
+      10
+     ],
+     "best_single_nmse": 1.0197391318876259,
+     "oracle_branch_nmse": 0.009779854302808831,
+     "learned_predicate_nmse": 0.10614697525101692,
+     "predicate_accuracy": 0.9453125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      3,
+      2
+     ],
+     "B": [
+      4,
+      0
+     ],
+     "C": [
+      0
+     ],
+     "best_single_route": [
+      0,
+      10,
+      0
+     ],
+     "best_single_nmse": 1.031296371915565,
+     "oracle_branch_nmse": 0.01022002415059871,
+     "learned_predicate_nmse": 0.06703025954290115,
+     "predicate_accuracy": 0.97265625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      5,
+      1
+     ],
+     "B": [
+      0,
+      3
+     ],
+     "C": [
+      4
+     ],
+     "best_single_route": [
+      10,
+      0,
+      11
+     ],
+     "best_single_nmse": 0.975095665183114,
+     "oracle_branch_nmse": 0.008746335394747203,
+     "learned_predicate_nmse": 0.08098425210686579,
+     "predicate_accuracy": 0.96484375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      0,
+      1
+     ],
+     "B": [
+      3,
+      3
+     ],
+     "C": [
+      2
+     ],
+     "best_single_route": [
+      1,
+      0,
+      7
+     ],
+     "best_single_nmse": 0.9606979392270681,
+     "oracle_branch_nmse": 0.011025460576111524,
+     "learned_predicate_nmse": 0.12377182209355968,
+     "predicate_accuracy": 0.94140625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      0,
+      5
+     ],
+     "B": [
+      2,
+      4
+     ],
+     "C": [
+      3
+     ],
+     "best_single_route": [
+      11,
+      0,
+      5
+     ],
+     "best_single_nmse": 1.1714739058378956,
+     "oracle_branch_nmse": 0.011158148468666442,
+     "learned_predicate_nmse": 0.14286221314892766,
+     "predicate_accuracy": 0.93359375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      0
+     ],
+     "B": [
+      5,
+      1
+     ],
+     "C": [
+      1
+     ],
+     "best_single_route": [
+      7,
+      5,
+      7
+     ],
+     "best_single_nmse": 0.8145450598319984,
+     "oracle_branch_nmse": 0.009798897950396507,
+     "learned_predicate_nmse": 0.1508459937875912,
+     "predicate_accuracy": 0.921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      0
+     ],
+     "B": [
+      0,
+      4
+     ],
+     "C": [
+      5
+     ],
+     "best_single_route": [
+      5,
+      0,
+      10
+     ],
+     "best_single_nmse": 0.9430206325210491,
+     "oracle_branch_nmse": 0.01367691202543243,
+     "learned_predicate_nmse": 0.09763361817555143,
+     "predicate_accuracy": 0.95703125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      0,
+      5
+     ],
+     "B": [
+      4,
+      0
+     ],
+     "C": [
+      3
+     ],
+     "best_single_route": [
+      11,
+      0,
+      5
+     ],
+     "best_single_nmse": 0.978874123171951,
+     "oracle_branch_nmse": 0.009037484738847528,
+     "learned_predicate_nmse": 0.17714112186379927,
+     "predicate_accuracy": 0.91796875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      0
+     ],
+     "B": [
+      2,
+      5
+     ],
+     "C": [
+      3
+     ],
+     "best_single_route": [
+      11,
+      4,
+      0
+     ],
+     "best_single_nmse": 0.9770624232474003,
+     "oracle_branch_nmse": 0.012431435186496344,
+     "learned_predicate_nmse": 0.10719455301052874,
+     "predicate_accuracy": 0.94921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      4,
+      3
+     ],
+     "B": [
+      1,
+      0
+     ],
+     "C": [
+      3
+     ],
+     "best_single_route": [
+      11,
+      7,
+      0
+     ],
+     "best_single_nmse": 1.027485996433792,
+     "oracle_branch_nmse": 0.009599589770500277,
+     "learned_predicate_nmse": 0.11865896394774948,
+     "predicate_accuracy": 0.94921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      5,
+      5
+     ],
+     "B": [
+      1,
+      0
+     ],
+     "C": [
+      2
+     ],
+     "best_single_route": [
+      4,
+      5,
+      5
+     ],
+     "best_single_nmse": 1.1016820795463165,
+     "oracle_branch_nmse": 0.01592480605939118,
+     "learned_predicate_nmse": 0.15308257019991597,
+     "predicate_accuracy": 0.9296875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      1,
+      1
+     ],
+     "B": [
+      3,
+      2
+     ],
+     "C": [
+      2
+     ],
+     "best_single_route": [
+      4,
+      7,
+      7
+     ],
+     "best_single_nmse": 0.8941685219008432,
+     "oracle_branch_nmse": 0.013203420071945941,
+     "learned_predicate_nmse": 0.16516212893875445,
+     "predicate_accuracy": 0.9140625,
+     "support_label_agreement": 1.0
+    }
+   ],
+   "slot_map": {
+    "5": {
+     "slot": 5,
+     "purity": 1.0,
+     "anchors": 15
+    },
+    "0": {
+     "slot": 0,
+     "purity": 1.0,
+     "anchors": 11
+    },
+    "1": {
+     "slot": 7,
+     "purity": 1.0,
+     "anchors": 12
+    },
+    "2": {
+     "slot": 4,
+     "purity": 0.7142857142857143,
+     "anchors": 7
+    },
+    "4": {
+     "slot": 10,
+     "purity": 1.0,
+     "anchors": 6
+    },
+    "3": {
+     "slot": 11,
+     "purity": 1.0,
+     "anchors": 9
+    }
+   },
+   "seconds": 240.8619324999745
+  },
+  "31": {
+   "tasks": [
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      0
+     ],
+     "B": [
+      4,
+      3
+     ],
+     "C": [],
+     "best_single_route": [
+      4,
+      8
+     ],
+     "best_single_nmse": 1.0803590406846872,
+     "oracle_branch_nmse": 0.005791082091026795,
+     "learned_predicate_nmse": 0.1045505732880152,
+     "predicate_accuracy": 0.953125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      2,
+      2
+     ],
+     "B": [
+      2,
+      0
+     ],
+     "C": [],
+     "best_single_route": [
+      2,
+      8
+     ],
+     "best_single_nmse": 1.022926351151657,
+     "oracle_branch_nmse": 0.004446321452093029,
+     "learned_predicate_nmse": 0.0758940459050326,
+     "predicate_accuracy": 0.9609375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      0,
+      1
+     ],
+     "B": [
+      2,
+      3
+     ],
+     "C": [],
+     "best_single_route": [
+      8,
+      11
+     ],
+     "best_single_nmse": 1.0280282324676253,
+     "oracle_branch_nmse": 0.005511274105494133,
+     "learned_predicate_nmse": 0.10960633685128579,
+     "predicate_accuracy": 0.9453125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      3,
+      4
+     ],
+     "B": [
+      4,
+      4
+     ],
+     "C": [],
+     "best_single_route": [
+      0,
+      0
+     ],
+     "best_single_nmse": 0.8774864162711297,
+     "oracle_branch_nmse": 0.00518818272284616,
+     "learned_predicate_nmse": 0.09467314952274056,
+     "predicate_accuracy": 0.953125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      1
+     ],
+     "B": [
+      3,
+      5
+     ],
+     "C": [],
+     "best_single_route": [
+      4,
+      11
+     ],
+     "best_single_nmse": 0.9163347784123996,
+     "oracle_branch_nmse": 0.010246960373579733,
+     "learned_predicate_nmse": 0.23763555477227427,
+     "predicate_accuracy": 0.875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      4,
+      1
+     ],
+     "B": [
+      3,
+      0
+     ],
+     "C": [],
+     "best_single_route": [
+      9,
+      8
+     ],
+     "best_single_nmse": 1.0614843625892612,
+     "oracle_branch_nmse": 0.005585141602920699,
+     "learned_predicate_nmse": 0.04745699392451888,
+     "predicate_accuracy": 0.98046875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      3,
+      3
+     ],
+     "B": [
+      4,
+      3
+     ],
+     "C": [],
+     "best_single_route": [
+      0,
+      9
+     ],
+     "best_single_nmse": 1.0785314067983098,
+     "oracle_branch_nmse": 0.005656578328119509,
+     "learned_predicate_nmse": 0.12435906706812115,
+     "predicate_accuracy": 0.94921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      3,
+      5
+     ],
+     "B": [
+      4,
+      5
+     ],
+     "C": [],
+     "best_single_route": [
+      0,
+      4
+     ],
+     "best_single_nmse": 1.0739283896072143,
+     "oracle_branch_nmse": 0.008264198970825686,
+     "learned_predicate_nmse": 0.1389387973803345,
+     "predicate_accuracy": 0.94140625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      4
+     ],
+     "B": [
+      2,
+      3
+     ],
+     "C": [],
+     "best_single_route": [
+      4,
+      0
+     ],
+     "best_single_nmse": 0.9848237050437418,
+     "oracle_branch_nmse": 0.006400468447708504,
+     "learned_predicate_nmse": 0.1239030428705591,
+     "predicate_accuracy": 0.94921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      4,
+      5
+     ],
+     "B": [
+      0,
+      3
+     ],
+     "C": [],
+     "best_single_route": [
+      8,
+      9
+     ],
+     "best_single_nmse": 0.9286396161186212,
+     "oracle_branch_nmse": 0.006329016876034706,
+     "learned_predicate_nmse": 0.11607680959931688,
+     "predicate_accuracy": 0.9375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      4,
+      0
+     ],
+     "B": [
+      3,
+      2
+     ],
+     "C": [],
+     "best_single_route": [
+      0,
+      8
+     ],
+     "best_single_nmse": 0.8372760750532864,
+     "oracle_branch_nmse": 0.005001005033978571,
+     "learned_predicate_nmse": 0.07699929414021268,
+     "predicate_accuracy": 0.95703125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      3,
+      0
+     ],
+     "B": [
+      2,
+      4
+     ],
+     "C": [],
+     "best_single_route": [
+      2,
+      0
+     ],
+     "best_single_nmse": 0.900970069653699,
+     "oracle_branch_nmse": 0.004955705228817153,
+     "learned_predicate_nmse": 0.07984479796895862,
+     "predicate_accuracy": 0.95703125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      0,
+      2
+     ],
+     "B": [
+      4,
+      5
+     ],
+     "C": [],
+     "best_single_route": [
+      8,
+      2
+     ],
+     "best_single_nmse": 1.04996429353917,
+     "oracle_branch_nmse": 0.006672151329661176,
+     "learned_predicate_nmse": 0.09577802175579694,
+     "predicate_accuracy": 0.9453125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      2,
+      5
+     ],
+     "B": [
+      2,
+      4
+     ],
+     "C": [],
+     "best_single_route": [
+      2,
+      0
+     ],
+     "best_single_nmse": 0.9393777180586527,
+     "oracle_branch_nmse": 0.006633106463072449,
+     "learned_predicate_nmse": 0.11040628688141384,
+     "predicate_accuracy": 0.9375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      0
+     ],
+     "B": [
+      5,
+      4
+     ],
+     "C": [],
+     "best_single_route": [
+      4,
+      0
+     ],
+     "best_single_nmse": 0.8577129150809025,
+     "oracle_branch_nmse": 0.007823403239525354,
+     "learned_predicate_nmse": 0.08448413124623934,
+     "predicate_accuracy": 0.95703125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      0,
+      3
+     ],
+     "B": [
+      2,
+      0
+     ],
+     "C": [],
+     "best_single_route": [
+      2,
+      8
+     ],
+     "best_single_nmse": 1.1472140830388269,
+     "oracle_branch_nmse": 0.005019796219625323,
+     "learned_predicate_nmse": 0.12982319241180215,
+     "predicate_accuracy": 0.9296875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      4,
+      2
+     ],
+     "B": [
+      1,
+      5
+     ],
+     "C": [
+      2
+     ],
+     "best_single_route": [
+      2,
+      11,
+      4
+     ],
+     "best_single_nmse": 0.8837359236548258,
+     "oracle_branch_nmse": 0.010711237243698837,
+     "learned_predicate_nmse": 0.13428586024373604,
+     "predicate_accuracy": 0.92578125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      5,
+      5
+     ],
+     "B": [
+      0,
+      5
+     ],
+     "C": [
+      1
+     ],
+     "best_single_route": [
+      11,
+      8,
+      4
+     ],
+     "best_single_nmse": 0.9845773129675489,
+     "oracle_branch_nmse": 0.0133444690392486,
+     "learned_predicate_nmse": 0.12658989444112811,
+     "predicate_accuracy": 0.95703125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      2
+     ],
+     "B": [
+      4,
+      0
+     ],
+     "C": [
+      0
+     ],
+     "best_single_route": [
+      8,
+      0,
+      8
+     ],
+     "best_single_nmse": 0.976008641137478,
+     "oracle_branch_nmse": 0.006577780107229981,
+     "learned_predicate_nmse": 0.11563937723193342,
+     "predicate_accuracy": 0.92578125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      0
+     ],
+     "B": [
+      3,
+      1
+     ],
+     "C": [
+      5
+     ],
+     "best_single_route": [
+      4,
+      9,
+      11
+     ],
+     "best_single_nmse": 0.9083653013173819,
+     "oracle_branch_nmse": 0.011977442592845292,
+     "learned_predicate_nmse": 0.07534889303795997,
+     "predicate_accuracy": 0.97265625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      5,
+      2
+     ],
+     "B": [
+      5,
+      4
+     ],
+     "C": [
+      3
+     ],
+     "best_single_route": [
+      9,
+      4,
+      0
+     ],
+     "best_single_nmse": 0.8918072931251055,
+     "oracle_branch_nmse": 0.01040523045348202,
+     "learned_predicate_nmse": 0.12318366997604853,
+     "predicate_accuracy": 0.94921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      5,
+      1
+     ],
+     "B": [
+      1,
+      0
+     ],
+     "C": [
+      1
+     ],
+     "best_single_route": [
+      11,
+      11,
+      8
+     ],
+     "best_single_nmse": 1.040871823345459,
+     "oracle_branch_nmse": 0.011548871271610589,
+     "learned_predicate_nmse": 0.07454312625956984,
+     "predicate_accuracy": 0.97265625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      1,
+      2
+     ],
+     "B": [
+      4,
+      2
+     ],
+     "C": [
+      4
+     ],
+     "best_single_route": [
+      0,
+      11,
+      2
+     ],
+     "best_single_nmse": 1.0305531184964638,
+     "oracle_branch_nmse": 0.00713442398583901,
+     "learned_predicate_nmse": 0.05425767510558915,
+     "predicate_accuracy": 0.96875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      0
+     ],
+     "B": [
+      5,
+      4
+     ],
+     "C": [
+      4
+     ],
+     "best_single_route": [
+      0,
+      2,
+      8
+     ],
+     "best_single_nmse": 1.0570278834553926,
+     "oracle_branch_nmse": 0.008916685472249287,
+     "learned_predicate_nmse": 0.12189907449390748,
+     "predicate_accuracy": 0.9375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      3
+     ],
+     "B": [
+      0,
+      0
+     ],
+     "C": [
+      3
+     ],
+     "best_single_route": [
+      9,
+      2,
+      9
+     ],
+     "best_single_nmse": 1.2013543026032645,
+     "oracle_branch_nmse": 0.007854443797142447,
+     "learned_predicate_nmse": 0.06497283399898103,
+     "predicate_accuracy": 0.96875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      5,
+      3
+     ],
+     "B": [
+      1,
+      5
+     ],
+     "C": [
+      4
+     ],
+     "best_single_route": [
+      0,
+      11,
+      4
+     ],
+     "best_single_nmse": 1.126125567847797,
+     "oracle_branch_nmse": 0.011128530204538719,
+     "learned_predicate_nmse": 0.1547942294328442,
+     "predicate_accuracy": 0.9296875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      0,
+      2
+     ],
+     "B": [
+      1,
+      2
+     ],
+     "C": [
+      0
+     ],
+     "best_single_route": [
+      8,
+      8,
+      2
+     ],
+     "best_single_nmse": 0.9652594548903158,
+     "oracle_branch_nmse": 0.006600451500740242,
+     "learned_predicate_nmse": 0.0938085615623571,
+     "predicate_accuracy": 0.95703125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      1,
+      0
+     ],
+     "B": [
+      3,
+      2
+     ],
+     "C": [
+      5
+     ],
+     "best_single_route": [
+      4,
+      11,
+      8
+     ],
+     "best_single_nmse": 0.9971703275697901,
+     "oracle_branch_nmse": 0.011589343465424182,
+     "learned_predicate_nmse": 0.09112481352787878,
+     "predicate_accuracy": 0.9609375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      4,
+      4
+     ],
+     "B": [
+      0,
+      3
+     ],
+     "C": [
+      0
+     ],
+     "best_single_route": [
+      8,
+      8,
+      9
+     ],
+     "best_single_nmse": 1.0241816475585668,
+     "oracle_branch_nmse": 0.007353191090724473,
+     "learned_predicate_nmse": 0.1171911082590542,
+     "predicate_accuracy": 0.9453125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      0,
+      0
+     ],
+     "B": [
+      5,
+      2
+     ],
+     "C": [
+      0
+     ],
+     "best_single_route": [
+      8,
+      4,
+      2
+     ],
+     "best_single_nmse": 0.9357024160592522,
+     "oracle_branch_nmse": 0.006900491823096061,
+     "learned_predicate_nmse": 0.178267491779967,
+     "predicate_accuracy": 0.91796875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      0,
+      3
+     ],
+     "B": [
+      2,
+      5
+     ],
+     "C": [
+      0
+     ],
+     "best_single_route": [
+      8,
+      8,
+      9
+     ],
+     "best_single_nmse": 0.9812141755105604,
+     "oracle_branch_nmse": 0.008594855604227937,
+     "learned_predicate_nmse": 0.12665673985157352,
+     "predicate_accuracy": 0.94140625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      1,
+      2
+     ],
+     "B": [
+      1,
+      0
+     ],
+     "C": [
+      1
+     ],
+     "best_single_route": [
+      11,
+      11,
+      8
+     ],
+     "best_single_nmse": 1.130569947517572,
+     "oracle_branch_nmse": 0.008222569700755146,
+     "learned_predicate_nmse": 0.06670177289109103,
+     "predicate_accuracy": 0.96875,
+     "support_label_agreement": 1.0
+    }
+   ],
+   "slot_map": {
+    "1": {
+     "slot": 11,
+     "purity": 1.0,
+     "anchors": 9
+    },
+    "4": {
+     "slot": 0,
+     "purity": 1.0,
+     "anchors": 13
+    },
+    "2": {
+     "slot": 2,
+     "purity": 1.0,
+     "anchors": 11
+    },
+    "3": {
+     "slot": 9,
+     "purity": 1.0,
+     "anchors": 8
+    },
+    "0": {
+     "slot": 8,
+     "purity": 1.0,
+     "anchors": 10
+    },
+    "5": {
+     "slot": 4,
+     "purity": 1.0,
+     "anchors": 9
+    }
+   },
+   "seconds": 244.60121930000605
+  },
+  "32": {
+   "tasks": [
+    {
+     "variant": "INPUT",
+     "A": [
+      4,
+      5
+     ],
+     "B": [
+      2,
+      2
+     ],
+     "C": [],
+     "best_single_route": [
+      11,
+      9
+     ],
+     "best_single_nmse": 0.8359626802917034,
+     "oracle_branch_nmse": 0.007414053492713941,
+     "learned_predicate_nmse": 0.0777315206455799,
+     "predicate_accuracy": 0.95703125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      1,
+      3
+     ],
+     "B": [
+      5,
+      2
+     ],
+     "C": [],
+     "best_single_route": [
+      4,
+      5
+     ],
+     "best_single_nmse": 1.0246603063027862,
+     "oracle_branch_nmse": 0.005961737647752159,
+     "learned_predicate_nmse": 0.1673392071246654,
+     "predicate_accuracy": 0.9140625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      4,
+      0
+     ],
+     "B": [
+      3,
+      5
+     ],
+     "C": [],
+     "best_single_route": [
+      5,
+      9
+     ],
+     "best_single_nmse": 0.936727568645707,
+     "oracle_branch_nmse": 0.0074918803437019725,
+     "learned_predicate_nmse": 0.09096991981609578,
+     "predicate_accuracy": 0.95703125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      1,
+      1
+     ],
+     "B": [
+      2,
+      4
+     ],
+     "C": [],
+     "best_single_route": [
+      1,
+      11
+     ],
+     "best_single_nmse": 1.0167834953639006,
+     "oracle_branch_nmse": 0.005661898900533647,
+     "learned_predicate_nmse": 0.1322037251390604,
+     "predicate_accuracy": 0.93359375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      5
+     ],
+     "B": [
+      1,
+      5
+     ],
+     "C": [],
+     "best_single_route": [
+      9,
+      9
+     ],
+     "best_single_nmse": 1.0614959094583647,
+     "oracle_branch_nmse": 0.007769414594420331,
+     "learned_predicate_nmse": 0.1420566726238982,
+     "predicate_accuracy": 0.93359375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      0,
+      3
+     ],
+     "B": [
+      4,
+      2
+     ],
+     "C": [],
+     "best_single_route": [
+      11,
+      1
+     ],
+     "best_single_nmse": 0.9947219625254426,
+     "oracle_branch_nmse": 0.006492915738195081,
+     "learned_predicate_nmse": 0.12047167370822034,
+     "predicate_accuracy": 0.9375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      0,
+      0
+     ],
+     "B": [
+      2,
+      3
+     ],
+     "C": [],
+     "best_single_route": [
+      8,
+      8
+     ],
+     "best_single_nmse": 0.9657364530966164,
+     "oracle_branch_nmse": 0.007645043660445817,
+     "learned_predicate_nmse": 0.14195319893739858,
+     "predicate_accuracy": 0.93359375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      4,
+      0
+     ],
+     "B": [
+      5,
+      4
+     ],
+     "C": [],
+     "best_single_route": [
+      9,
+      11
+     ],
+     "best_single_nmse": 0.8002882524863941,
+     "oracle_branch_nmse": 0.007284427450200078,
+     "learned_predicate_nmse": 0.08278498271977769,
+     "predicate_accuracy": 0.95703125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      2
+     ],
+     "B": [
+      3,
+      1
+     ],
+     "C": [],
+     "best_single_route": [
+      9,
+      1
+     ],
+     "best_single_nmse": 1.0576002952470298,
+     "oracle_branch_nmse": 0.005885903474018295,
+     "learned_predicate_nmse": 0.0846762759602945,
+     "predicate_accuracy": 0.953125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      3
+     ],
+     "B": [
+      5,
+      1
+     ],
+     "C": [],
+     "best_single_route": [
+      9,
+      5
+     ],
+     "best_single_nmse": 1.0217856441008248,
+     "oracle_branch_nmse": 0.006474569421984997,
+     "learned_predicate_nmse": 0.14613687236326758,
+     "predicate_accuracy": 0.93359375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      4,
+      5
+     ],
+     "B": [
+      4,
+      4
+     ],
+     "C": [],
+     "best_single_route": [
+      11,
+      9
+     ],
+     "best_single_nmse": 1.14590022190342,
+     "oracle_branch_nmse": 0.006612787765840775,
+     "learned_predicate_nmse": 0.11176705428913299,
+     "predicate_accuracy": 0.94921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      3,
+      5
+     ],
+     "B": [
+      5,
+      1
+     ],
+     "C": [],
+     "best_single_route": [
+      9,
+      4
+     ],
+     "best_single_nmse": 1.0391234836838035,
+     "oracle_branch_nmse": 0.007144722724426258,
+     "learned_predicate_nmse": 0.1874511596587087,
+     "predicate_accuracy": 0.9140625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      3,
+      3
+     ],
+     "B": [
+      1,
+      1
+     ],
+     "C": [],
+     "best_single_route": [
+      4,
+      4
+     ],
+     "best_single_nmse": 1.0670546033280601,
+     "oracle_branch_nmse": 0.004845996927511106,
+     "learned_predicate_nmse": 0.09967474302162535,
+     "predicate_accuracy": 0.9609375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      3,
+      2
+     ],
+     "B": [
+      3,
+      3
+     ],
+     "C": [],
+     "best_single_route": [
+      5,
+      5
+     ],
+     "best_single_nmse": 0.891739400493594,
+     "oracle_branch_nmse": 0.005913142613378629,
+     "learned_predicate_nmse": 0.13269372565632087,
+     "predicate_accuracy": 0.921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      3
+     ],
+     "B": [
+      1,
+      2
+     ],
+     "C": [],
+     "best_single_route": [
+      9,
+      5
+     ],
+     "best_single_nmse": 0.9582408632283301,
+     "oracle_branch_nmse": 0.006017020218852041,
+     "learned_predicate_nmse": 0.14696785505124832,
+     "predicate_accuracy": 0.9140625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "INPUT",
+     "A": [
+      5,
+      2
+     ],
+     "B": [
+      5,
+      0
+     ],
+     "C": [],
+     "best_single_route": [
+      9,
+      1
+     ],
+     "best_single_nmse": 0.9631987898194542,
+     "oracle_branch_nmse": 0.008553139971292022,
+     "learned_predicate_nmse": 0.08554237062821005,
+     "predicate_accuracy": 0.9609375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      2
+     ],
+     "B": [
+      2,
+      0
+     ],
+     "C": [
+      3
+     ],
+     "best_single_route": [
+      5,
+      1,
+      8
+     ],
+     "best_single_nmse": 0.8620172380632176,
+     "oracle_branch_nmse": 0.009023275588162809,
+     "learned_predicate_nmse": 0.09517866958993734,
+     "predicate_accuracy": 0.94921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      5
+     ],
+     "B": [
+      0,
+      4
+     ],
+     "C": [
+      2
+     ],
+     "best_single_route": [
+      1,
+      1,
+      9
+     ],
+     "best_single_nmse": 0.8791601697342288,
+     "oracle_branch_nmse": 0.011603993949444218,
+     "learned_predicate_nmse": 0.09854299564571373,
+     "predicate_accuracy": 0.95703125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      3,
+      4
+     ],
+     "B": [
+      4,
+      3
+     ],
+     "C": [
+      1
+     ],
+     "best_single_route": [
+      4,
+      11,
+      5
+     ],
+     "best_single_nmse": 0.8579875552389831,
+     "oracle_branch_nmse": 0.006637512374979136,
+     "learned_predicate_nmse": 0.15127936416143511,
+     "predicate_accuracy": 0.921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      0,
+      1
+     ],
+     "B": [
+      0,
+      4
+     ],
+     "C": [
+      3
+     ],
+     "best_single_route": [
+      5,
+      8,
+      4
+     ],
+     "best_single_nmse": 1.1854786415486536,
+     "oracle_branch_nmse": 0.008397792558676028,
+     "learned_predicate_nmse": 0.12496306892324618,
+     "predicate_accuracy": 0.953125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      4
+     ],
+     "B": [
+      0,
+      3
+     ],
+     "C": [
+      1
+     ],
+     "best_single_route": [
+      4,
+      1,
+      11
+     ],
+     "best_single_nmse": 1.03887924434278,
+     "oracle_branch_nmse": 0.00889127075904015,
+     "learned_predicate_nmse": 0.15823746833260446,
+     "predicate_accuracy": 0.921875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      0,
+      2
+     ],
+     "B": [
+      4,
+      0
+     ],
+     "C": [
+      1
+     ],
+     "best_single_route": [
+      4,
+      8,
+      1
+     ],
+     "best_single_nmse": 1.0207294850720794,
+     "oracle_branch_nmse": 0.00996455609708001,
+     "learned_predicate_nmse": 0.05894733443010141,
+     "predicate_accuracy": 0.97265625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      3,
+      3
+     ],
+     "B": [
+      0,
+      3
+     ],
+     "C": [
+      5
+     ],
+     "best_single_route": [
+      9,
+      8,
+      5
+     ],
+     "best_single_nmse": 0.8447529088172717,
+     "oracle_branch_nmse": 0.011002844736755293,
+     "learned_predicate_nmse": 0.06702153923679724,
+     "predicate_accuracy": 0.9765625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      1,
+      0
+     ],
+     "B": [
+      3,
+      2
+     ],
+     "C": [
+      5
+     ],
+     "best_single_route": [
+      9,
+      5,
+      1
+     ],
+     "best_single_nmse": 0.9701250820561106,
+     "oracle_branch_nmse": 0.011819088077001829,
+     "learned_predicate_nmse": 0.11826670986224212,
+     "predicate_accuracy": 0.94140625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      3,
+      3
+     ],
+     "B": [
+      5,
+      5
+     ],
+     "C": [
+      5
+     ],
+     "best_single_route": [
+      9,
+      9,
+      9
+     ],
+     "best_single_nmse": 1.0016084969821246,
+     "oracle_branch_nmse": 0.012672755996236903,
+     "learned_predicate_nmse": 0.12743404621603813,
+     "predicate_accuracy": 0.9453125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      3,
+      2
+     ],
+     "B": [
+      3,
+      0
+     ],
+     "C": [
+      1
+     ],
+     "best_single_route": [
+      4,
+      5,
+      1
+     ],
+     "best_single_nmse": 0.9574900375885307,
+     "oracle_branch_nmse": 0.011178845572269178,
+     "learned_predicate_nmse": 0.11298493964053355,
+     "predicate_accuracy": 0.953125,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      4,
+      5
+     ],
+     "B": [
+      3,
+      3
+     ],
+     "C": [
+      4
+     ],
+     "best_single_route": [
+      11,
+      11,
+      9
+     ],
+     "best_single_nmse": 1.0743668795241166,
+     "oracle_branch_nmse": 0.008392168644364196,
+     "learned_predicate_nmse": 0.1495539895951584,
+     "predicate_accuracy": 0.9296875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      5,
+      3
+     ],
+     "B": [
+      4,
+      1
+     ],
+     "C": [
+      0
+     ],
+     "best_single_route": [
+      8,
+      9,
+      5
+     ],
+     "best_single_nmse": 1.09567538153655,
+     "oracle_branch_nmse": 0.009495062867945048,
+     "learned_predicate_nmse": 0.0866430326386519,
+     "predicate_accuracy": 0.97265625,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      5,
+      0
+     ],
+     "B": [
+      3,
+      0
+     ],
+     "C": [
+      1
+     ],
+     "best_single_route": [
+      4,
+      5,
+      8
+     ],
+     "best_single_nmse": 0.9829067935058775,
+     "oracle_branch_nmse": 0.011108726217902421,
+     "learned_predicate_nmse": 0.1725441997322011,
+     "predicate_accuracy": 0.91796875,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      0,
+      2
+     ],
+     "B": [
+      1,
+      5
+     ],
+     "C": [
+      5
+     ],
+     "best_single_route": [
+      9,
+      4,
+      9
+     ],
+     "best_single_nmse": 0.9334220712400986,
+     "oracle_branch_nmse": 0.014681682088839658,
+     "learned_predicate_nmse": 0.12746658332411218,
+     "predicate_accuracy": 0.93359375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      2,
+      5
+     ],
+     "B": [
+      4,
+      5
+     ],
+     "C": [
+      1
+     ],
+     "best_single_route": [
+      4,
+      11,
+      9
+     ],
+     "best_single_nmse": 1.0052651752620734,
+     "oracle_branch_nmse": 0.01063294001000412,
+     "learned_predicate_nmse": 0.1429623388821182,
+     "predicate_accuracy": 0.93359375,
+     "support_label_agreement": 1.0
+    },
+    {
+     "variant": "MID",
+     "A": [
+      4,
+      5
+     ],
+     "B": [
+      1,
+      4
+     ],
+     "C": [
+      5
+     ],
+     "best_single_route": [
+      9,
+      11,
+      9
+     ],
+     "best_single_nmse": 1.1380105086725467,
+     "oracle_branch_nmse": 0.011279552432174725,
+     "learned_predicate_nmse": 0.1292171818802526,
+     "predicate_accuracy": 0.9453125,
+     "support_label_agreement": 1.0
+    }
+   ],
+   "slot_map": {
+    "2": {
+     "slot": 1,
+     "purity": 1.0,
+     "anchors": 8
+    },
+    "5": {
+     "slot": 9,
+     "purity": 1.0,
+     "anchors": 10
+    },
+    "1": {
+     "slot": 4,
+     "purity": 1.0,
+     "anchors": 12
+    },
+    "3": {
+     "slot": 5,
+     "purity": 1.0,
+     "anchors": 10
+    },
+    "4": {
+     "slot": 11,
+     "purity": 1.0,
+     "anchors": 11
+    },
+    "0": {
+     "slot": 8,
+     "purity": 1.0,
+     "anchors": 9
+    }
+   },
+   "seconds": 242.8832835999783
+  }
+ },
+ "seconds": 248.92524099349976,
+ "finished_utc": "2026-10-05T21:00:28.852591+00:00"
+}
