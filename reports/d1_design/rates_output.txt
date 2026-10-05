@@ -1,0 +1,15 @@
+p_pass=0.43: P(k>=18)=0.0001 P(12<=k<=17)=0.1383 P(k<=11)=0.8616
+p_pass=0.6: P(k>=18)=0.0110 P(12<=k<=17)=0.6804 P(k<=11)=0.3086
+p_pass=0.7: P(k>=18)=0.0856 P(12<=k<=17)=0.8468 P(k<=11)=0.0676
+p_pass=0.8: P(k>=18)=0.3704 P(12<=k<=17)=0.6256 P(k<=11)=0.0041
+p_pass=0.9: P(k>=18)=0.8480 P(12<=k<=17)=0.1520 P(k<=11)=0.0000
+p_pass=0.95: P(k>=18)=0.9811 P(12<=k<=17)=0.0189 P(k<=11)=0.0000
+p_pass=1.0: P(k>=18)=1.0000 P(12<=k<=17)=0.0000 P(k<=11)=0.0000
+p_break=0.02 over n=10 SLEEP4 passes: P(h>=3)=0.0009
+p_break=0.02 over n=21 SLEEP4 passes: P(h>=3)=0.0081
+p_break=0.05 over n=10 SLEEP4 passes: P(h>=3)=0.0115
+p_break=0.05 over n=21 SLEEP4 passes: P(h>=3)=0.0849
+p_break=0.1 over n=10 SLEEP4 passes: P(h>=3)=0.0702
+p_break=0.1 over n=21 SLEEP4 passes: P(h>=3)=0.3516
+p_break=0.2 over n=10 SLEEP4 passes: P(h>=3)=0.3222
+p_break=0.2 over n=21 SLEEP4 passes: P(h>=3)=0.8213

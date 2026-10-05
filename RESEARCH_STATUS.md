@@ -6,9 +6,16 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-04, after O11. Nothing is running. **Open PI decision:
-17 (see "Decisions pending from the PI").** **Read
-`ONLINE_FORMATION_SYNTHESIS.md` first.**
+Last rewritten: 2026-10-04, at the D1 launch. **D1 (Tier 1, depth 4, worlds
+30-36) is running**; check `artifacts/d1_depth4_formation/status.json`. No PI
+decision is open. **Read `ONLINE_FORMATION_SYNTHESIS.md` first.**
+
+**Depth rung (decision 17, answered):** development band 30-49 allocated for a
+depth-4 testbed (`row.experiments.d4_stream`). Tier 0 found in-stream
+exhaustive re-routing affordable at depth 4 (47 min per cell; exhaustive 0.27
+s per depth-4 task against 1.06 s for O7's gradient re-router), so D1 tests the
+confirmed depth-3 protocol unchanged at depth 4. One timing cell on world 48:
+re-route + sleep 0.0149, sleep alone 1.50, wake alone 2.06.
 
 **O11 (SEALED, worlds 945-959): `CONFIRMED` (45 of 45) and `ATTRIBUTED` (45 of
 45).** Wake + in-stream re-routing of earlier tasks + O3's sleep, with no
@@ -879,18 +886,10 @@ sealed band, and all are implementation audits rather than experiments.
     two labels are read together). Band 930-959 is exhausted after O11; nothing
     new allocated.
 
-17. **LIVE (2026-10-04): open the depth rung?** The fully online protocol is
-    confirmed at depth 3 (O11). In-stream re-routing searches all `12^d`
-    routes for every earlier task after each arrival: ~2 min per cell at depth
-    3, projected ~1.6 h at depth 4 and ~20 h at depth 5. The length-linear
-    gradient re-router (O7, matched exhaustive + sleep at depth 3) is the
-    candidate. Questions for the PI: (a) may a depth-4 generator configuration
-    be built (`program_depth` 4; a new testbed, not comparable with existing
-    artifacts)? (b) development band: Claude recommends 30-49 (verify unused
-    first). (c) a new sealed band later. Claude's proposed order: Tier 0 (does
-    wake + sleep form a library at depth 4 at all?), Tier 1 (in-stream gradient
-    re-routing against in-stream exhaustive at depth 4, where both are
-    feasible), then a registered test at depth 5.
+17. **ANSWERED (2026-10-04, PI: "Ok continue"): open the depth rung.**
+    Development band 30-49 allocated (D1 30-36, timing 48, dry run 49, 37-47
+    unused). Premise corrected by measurement: the gradient re-router is not
+    needed at depth 4. D1 (Tier 1) is the first rung.
 
 # Housekeeping owed
 

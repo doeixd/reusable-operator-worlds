@@ -533,6 +533,11 @@ report JSON. `figures/` — generated figures.
   uses 900-914; 915-929 stay sealed and unused. No sealed world may be
   generated before `O4_SEALED_CONFIRMATION_PLAN.md` is frozen and hashed in
   `tools/check_prereg.py`. Verified unused before allocation.
+- **Development band 4:** seeds 30-49, allocated 2026-10-04 (decision 17; the PI
+  answered "Ok continue" to Claude's recommendation) for the depth-4 testbed
+  (`row.experiments.d4_stream`). D1 uses 30-36; world 48 ran the pre-plan
+  timing cell; world 49 is the dry-run world; 37-47 are unused. Verified unused
+  before allocation: no runner, report or artifact references them.
 - **O9 sealed band:** seeds 930-959, allocated 2026-10-04 (decision 15; the PI
   answered "Ok continue" to Claude's recommendation). O9 uses 930-944;
   945-959 stay sealed and unused. No sealed world may be generated before

@@ -8224,3 +8224,38 @@ repeats the route search after every arrival, ~2 min per cell at depth 3 and a
 projected ~1.6 h at depth 4, so it needs the length-linear gradient re-router
 (O7) from depth 4, on a depth-4 world and a new development band (30-49
 recommended). That is a new PI decision (17).
+
+
+# DEPTH-4 TESTBED, TIER 0 (2026-10-04, descriptive): the decision-17 premise was wrong again; exhaustive in-stream re-routing is affordable at depth 4
+
+Decision 17 (the depth rung) was approved by the PI ("Ok continue",
+2026-10-04) with Claude's defaults: a depth-4 world configuration and
+development band 30-49. New module `row.experiments.d4_stream`: the O2
+order-free stream one level deeper (60 length-1, 64 length-2, 64 length-3 and
+64 canonical length-4 tasks, 252 in all), learner `PlannedDepthRotatedLearner`
+with `task_steps=4`.
+
+- **Structural probe (world 30, scale 16):** stream composition, unique task
+  ids, depth interleaving and per-task route lengths all check; the lifetime
+  runs end to end.
+- **Search cost per depth-4 task (64 examples):** exhaustive **0.27 s**; O7's
+  500-step gradient re-router **1.06 s** (0.76 s at depth 3).
+- **Full-scale timing cell (world 48, stream 0; held back from D1):**
+
+| arm | seconds | terminal |
+|---|---:|---:|
+| wake + in-stream exhaustive re-route | 3,820 (2,833 re-routing) | 0.091 |
+| wake alone | 1,133 | 2.06 (collapsed; 128 stale routes) |
+| in-stream re-route + sleep | 148 | 0.0149 |
+| sleep alone | 148 | 1.50 (collapsed) |
+
+**Correction to decision 17 (recorded, not rewritten):** it assumed in-stream
+exhaustive re-routing at depth 4 would take ~1.6 h per cell and need O7's
+gradient re-router. That projection treated every stream task as depth 4; only
+64 of 252 are. Measured, it is 47 minutes per cell, and the gradient re-router
+is 4x SLOWER than exhaustive search at depth 4. It is not needed until depth 5.
+This is the second time a projected cost in this line was off because it was
+computed in the wrong unit (decision 14 compared route counts, not seconds).
+
+The world-48 cell is one world and one stream, seen before D1 was frozen and
+disclosed in its plan. NEXT: D1 (Tier 1, worlds 30-36).
