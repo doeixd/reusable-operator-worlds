@@ -913,6 +913,23 @@ sealed band, and all are implementation audits rather than experiments.
 
 # Housekeeping owed
 
+- **Untracked artifacts deleted outside the session (found 2026-10-05).** Every
+  `artifacts/` directory created before about 10:40 local time on 2026-10-04 is
+  gone: the O2, O3 v2, O4, O6, O8 and O9 saved terminals and the five
+  V2-cited directories (`high_priority_controls`, `v2_hyper_rho09`,
+  `v2_compiler`, `v2_consolidation`, `v2_consolidation_gate2`). Directories
+  created later (O10, O11, D1, D2) are intact. The cutoff is bounded by logs:
+  O11's gate E3b and the O11 sizing census read O9's terminals successfully at
+  about 10:40 and 10:12 local that morning. Not Storage Sense (its Downloads
+  cleanup is set to Never), the Recycle Bin is empty, and no session's memory
+  records the deletion; the cause is unknown. Tracked files are intact (git
+  clean), so every report, verdict and archived log stands; the lost files are
+  regenerable from committed code and seeds at hours of compute. Consequences:
+  `check_prereg` now fails on the V2-cited paths (not papered over), and the
+  O-line terminal censuses and the O7/O8/O10 tests that load saved terminals
+  cannot run until the terminals are regenerated or restored. Waiting on the PI:
+  restore from a backup, regenerate, or acknowledge the paths as absent.
+
 - **Statistic fix, verified latent (`8f0369a`).** The old `spearman` helper used
   `argsort(argsort(x))`, which gives tied values a strict order: it returned
   +1.0 for a CONSTANT predictor. `census_world_quality.spearman` uses average
