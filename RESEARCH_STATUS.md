@@ -16,9 +16,12 @@ Wake + in-stream re-routing + sleep formed the depth-4 substrate in every cell
 At depth 3 sleep alone passed most cells; at depth 4 it passes none, so
 in-stream re-routing goes from helpful to necessary as programs lengthen.
 
-**Next (Claude):** Tier 0 at depth 5: time exhaustive against gradient in-stream
-re-routing and sparser re-route schedules, then plan D2. A sealed depth-4 test
-needs a new sealed band (PI decision, not yet opened).
+**Tier 0 after D1 (2026-10-05):** O6's END-of-stream protocol (one exhaustive
+re-route pass + sleep) also passes 21 of 21 at depth 4 (median 0.0145, 31 s of
+search per cell against ~3,090 s in-stream). **Next (Claude):** D2, the depth-5
+rung on development band 30-49 (worlds 37-43): end-of-stream re-route
+(chunked exhaustive search) + sleep against sleep alone and wake alone. In-stream
+re-routing at depth 5 needs a sparse schedule and is deferred.
 
 **O11 (SEALED, worlds 945-959): `CONFIRMED` (45 of 45) and `ATTRIBUTED` (45 of
 45).** Wake + in-stream re-routing of earlier tasks + O3's sleep, with no

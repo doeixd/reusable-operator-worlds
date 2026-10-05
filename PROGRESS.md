@@ -8312,3 +8312,34 @@ costs ~3 s per depth-5 task (projected 12x depth 4), so either the length-linear
 gradient re-router or a sparser re-route schedule is needed; measure both at
 Tier 0 before planning. A sealed test of the depth-4 result needs a new sealed
 band (PI decision).
+
+
+# DEPTH-4 END-OF-STREAM CENSUS (2026-10-05, Tier 0, descriptive): one re-route pass at the end + sleep passes 21/21 at depth 4, at ~1/100 the search of in-stream re-routing
+
+`row.experiments.census_d1_end_reroute`, report
+`reports/d1_end_reroute_census.json`. O6's end-of-stream construction
+(`o5.reroute`: one exhaustive re-route of all 252 stream tasks on their 64
+retained examples, then `o2c.consolidate`, 8,192 updates, sampling
+`[1941, w, s, 64]`) applied to D1's 21 saved `SHUFFLED4` (wake-alone) terminals.
+Development worlds 30-36, opened by D1.
+
+| depth 4, D1's 21 streams | passes | median | max | re-route search per cell |
+|---|---:|---:|---:|---:|
+| end-of-stream re-route + sleep (this census) | **21 / 21** | 0.0145 | 0.0187 | **31 s** |
+| in-stream re-route + sleep (D1 `RW_SLEEP4`) | 21 / 21 | 0.0130 | 0.0157 | ~3,090 s |
+| end-of-stream re-route, before sleep | | 0.115 | | |
+| sleep alone (D1 `SLEEP4`) | 0 / 21 | 1.46 | | 0 |
+
+The in-stream protocol ends below the end-of-stream one in 18 of 21 cells
+(median 0.0130 against 0.0145), at about 100 times the search.
+
+**What it means for depth 5.** Both confirmed protocols form the depth-4
+substrate; what separates them is cost and the online property. In-stream
+re-routing repeats the search after every arrival (about n/2 passes) and has no
+batch step. End-of-stream re-routing is one pass. At depth 5 one pass is about
+64 x 3 s plus the shallower tasks, a few minutes, so the depth-5 rung can use
+it with no new re-router; exhaustive depth-5 search needs the chunked
+evaluator (`l0d_depth5_memory_gate`: unchunked it is 1.0 GiB per task).
+In-stream re-routing at depth 5 would need a sparse schedule and is a separate,
+later question. Re-routing alone (before sleep, 0.115) is still not enough at
+depth 4: consolidation remains necessary.
