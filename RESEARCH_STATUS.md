@@ -23,8 +23,12 @@ Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow
 flow; the ladder now separates straight-line rungs (C0-C3) from control-flow
 rungs (B0-B3). **B0:** branch tasks need state-conditional routing (no single
 route below 1.0 median, oracle branch 0.006-0.011); the branch decision is
-learnable from ~512 support examples (B0b, post hoc). **Next (Claude):** B1,
-the branch 2x2 (structure x predicate, oracle or learned), a registered Tier 1.
+learnable from ~512 support examples (B0b, post hoc). **B1 (Tier 1, offline): LEARNABLE, 178/192.** Branch structure and decision are
+both recoverable from support data on a formed vocabulary; the residual is
+decisions on intermediate states (MID 83/96). **Next (Claude):** B1-online, a
+learner whose router chooses each example's route from the state, forming the
+vocabulary while branch tasks are in the stream; first a Tier 0 expressiveness
+and switch-recovers-baseline check of the gate.
 
 **D2 (Tier 1, depth 5, development worlds 37-43): `TRANSFERS`, 21 of 21.** One
 end-of-stream exhaustive re-route pass + sleep formed the depth-5 substrate in

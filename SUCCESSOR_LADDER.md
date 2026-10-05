@@ -136,9 +136,18 @@ examples.** No single straight-line route solves any of 96 branch tasks
 perfectly identified labels; B0b (post hoc) shows 0.038-0.047 at 512 and
 0.023-0.037 at 2,048. The decision is learnable; it needs about 512 examples.
 
-**Next registered rung: B1, the branch 2x2 (issue #2 section 4) at ~512
-support examples per task:** oracle structure + learned predicate (B0b's
-construction), learned structure + oracle predicate, both learned, against the
-single-route refusal arm. Its plan registers a learner that chooses the next
-route per example from the state. C1 stays a straight-line reuse rung. Scaling
-(A2) is lower priority now that A1 shows approximate re-routing is enough.
+**B1 (2026-10-05): LEARNABLE, 178 of 192.** On frozen formed vocabularies the
+branch structure is free (192/192 given the split) and the decision is learned
+from support (INPUT 95/96; MID 83/96, the residual). Joint learning loses
+nothing against predicate-only learning.
+
+**Next: B1-online, the first control-flow rung with a learner rather than a
+search.** Branch tasks enter the order-free formation stream alongside the
+straight-line tasks; the learner's router chooses each example's route from the
+current state (a per-task learned gate over candidate routes), formed by
+gradient during wake and re-derived during re-routing. Its question: does the
+vocabulary still form, and does the router learn the decision online, as the
+offline search says the data allows? Before a plan: a Tier 0 check that the
+gate parameterization can express B1's solutions on the frozen libraries
+(switch-recovers-baseline: with the gate fixed to one route it must reproduce the
+straight-line learner bitwise).

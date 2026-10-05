@@ -10791,3 +10791,44 @@ rest of issue #2 section 4's 2x2: can the learner find the branch STRUCTURE
 ~512 support examples per branch task (128 is too few by B0b), treat the
 learned-predicate arm as the "oracle structure, learned predicate" cell, and add
 "learned structure, oracle predicate" and "both learned" cells.
+
+
+# B1 OUTCOME (2026-10-05): LEARNABLE (178/192) - branch structure and decision are both recoverable from support on a formed vocabulary; the residual is decisions on intermediate states (Tier 1, exploratory)
+
+Plan `B1_BRANCH_2X2_PLAN.md`, frozen `0e61c5e`, hash protected `8f4a9a0`.
+Offline on the frozen rebuilt depth-4 vocabularies of D1 worlds 30-32; 192
+branch tasks (96 INPUT, 96 MID), 2,048 support and 256 query examples, seeds
+`[5400, w, i]`. Report `reports/b1_branch_2x2.json`. `k` recomputed
+independently from the 192 per-task records: 178, matching the summary.
+
+| arm (passes of 192 below 0.05; median) | ALL | INPUT (96) | MID (96) |
+|---|---|---|---|
+| REFUSAL: best single straight-line route | 0; 0.98 | 0; 0.99 | 0; 0.98 |
+| OS_OP: structure given, predicate given | 192; 0.0087 | 96; 0.0069 | 96; 0.0109 |
+| OS_LP: structure given, predicate learned | 176; 0.0224 | 95; 0.0167 | 81; 0.0283 |
+| LS_OP: structure learned, predicate given | **192**; 0.0086 | 96; 0.0069 | 96; 0.0109 |
+| LS_LP: both learned (registered) | **178**; 0.0220 | 95; 0.0167 | 83; 0.0283 |
+
+Per world, `LS_LP` passes 60 / 56 / 62 of 64. Label **`LEARNABLE`** (154 needed).
+
+**Reading the 2x2.**
+- **Structure is not a bottleneck.** Given the split, the learned structure
+  passes every task (192/192) and matches the ceiling. It equals the teacher's
+  two programs exactly in only 151 of 192 tasks; in the other 41 it picks
+  different routes that work as well (redundant slots: 12 slots for 6
+  operations), the operational-not-referential lesson of review 77 again.
+- **The residual is the decision on intermediate states.** 13 of the 14 failing
+  `LS_LP` tasks are MID tasks, and 13 of those 14 also fail with the structure
+  GIVEN. INPUT tasks pass 95 of 96 in both predicate-learned arms. A boundary
+  that is linear in the teacher's intermediate state is learned from the learned
+  first step's output, which carries that step's execution error.
+- Joint learning costs nothing over learning the predicate alone (178 against
+  176): no co-formation problem in this setting.
+
+**What it means.** On a formed vocabulary, both the branch structure and the
+branch decision are recoverable from support data by search plus a linear
+classifier: the information needed for state-conditional routing is present and
+cheap to extract. **Caveats:** offline and searched, not learned online; program
+length given; two branches; linear predicates; 3 worlds (the plan's detection at
+heavy world heterogeneity is 0.61). This is a sizing that licenses the next rung,
+not a verdict.
