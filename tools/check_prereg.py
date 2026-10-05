@@ -90,6 +90,7 @@ FROZEN = {
     "O10_REROUTE_WAKE_SLEEP_PLAN.md": "264abd1",
     "O11_SEALED_INSTREAM_SLEEP_PLAN.md": "a517af7",
     "D1_DEPTH4_FORMATION_PLAN.md": "f930710",
+    "D2_DEPTH5_FORMATION_PLAN.md": "89f72bc",
 }
 
 #: STATUS-cited paths acknowledged ABSENT from this disk, each with its reason. The module
