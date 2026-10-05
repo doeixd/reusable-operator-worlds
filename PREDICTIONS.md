@@ -10578,3 +10578,30 @@ evaluator (`l0d_depth5_memory_gate`: unchunked it is 1.0 GiB per task).
 In-stream re-routing at depth 5 would need a sparse schedule and is a separate,
 later question. Re-routing alone (before sleep, 0.115) is still not enough at
 depth 4: consolidation remains necessary.
+
+
+# DEPTH-5 TESTBED, TIER 0 (2026-10-05, descriptive): an exact exhaustive search that fits depth 5, and a timing cell
+
+- **`row.experiments.deep_reroute`, prefix-split exhaustive search.** The states
+  of all `12^(d-1)` route prefixes are computed once; the last step runs in
+  chunks. Tests (`tests/test_deep_reroute.py`): its values match
+  `FrozenLibrary.all_route_support_mse` within 1e-5 and its argmin equals
+  `enum_route`'s at depths 2, 3 and 4, for chunk sizes 7 and 1024; at depth 5
+  its minimum equals a direct forward pass of the chosen route. Below depth 5
+  `exhaustive_route` calls `enum_route` verbatim. Cost at depth 5 with 64
+  examples: under 3 s per task, against 245 s for the L0d chunked evaluator
+  (`reports/l0d_depth5_memory_gate_v2.json`, 128 examples), which recomputed
+  every prefix inside each block.
+- **`row.experiments.dn_stream`**, a depth-general version of `d4_stream`; at
+  depth 4 it reproduces `d4_stream` exactly (task order, depth plan, config).
+- **Timing cell, held-back world 47, stream 0 (seen before D2 was frozen):**
+
+| arm | seconds | terminal |
+|---|---:|---:|
+| wake alone | 1,092 | 1.86 (collapsed) |
+| one end-of-stream re-route pass + sleep | 615 (381 re-routing) | 0.182 after re-routing, **0.0204** after sleep |
+| sleep alone | 248 | 1.43 (collapsed) |
+
+The re-route + sleep value is closer to the 0.05 threshold than any depth-4
+cell (maximum 0.0187), a single-cell hint that depth 5 is harder. NEXT: D2 (Tier
+1, worlds 37-43).

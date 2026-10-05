@@ -6,9 +6,14 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-05, after D1. Nothing is running. No PI decision is
-open; the next step (Tier 0 at depth 5) is Claude's. **Read
-`ONLINE_FORMATION_SYNTHESIS.md` first.**
+Last rewritten: 2026-10-05, at the D2 launch. **D2 (Tier 1, depth 5, worlds
+37-43) is running**; check `artifacts/d2_depth5_formation/status.json`. No PI
+decision is open. **Read `ONLINE_FORMATION_SYNTHESIS.md` first.**
+
+**D2** tests the end-of-stream protocol (one exhaustive re-route pass + sleep)
+at depth 5, with a new exact prefix-split search (`deep_reroute`, under 3 s per
+depth-5 task). Timing cell on world 47: re-route + sleep 0.0204, sleep alone
+1.43, wake alone 1.86.
 
 **D1 (Tier 1, depth 4, development worlds 30-36): `TRANSFERS`, 21 of 21.**
 Wake + in-stream re-routing + sleep formed the depth-4 substrate in every cell
@@ -18,10 +23,7 @@ in-stream re-routing goes from helpful to necessary as programs lengthen.
 
 **Tier 0 after D1 (2026-10-05):** O6's END-of-stream protocol (one exhaustive
 re-route pass + sleep) also passes 21 of 21 at depth 4 (median 0.0145, 31 s of
-search per cell against ~3,090 s in-stream). **Next (Claude):** D2, the depth-5
-rung on development band 30-49 (worlds 37-43): end-of-stream re-route
-(chunked exhaustive search) + sleep against sleep alone and wake alone. In-stream
-re-routing at depth 5 needs a sparse schedule and is deferred.
+search per cell against ~3,090 s in-stream).
 
 **O11 (SEALED, worlds 945-959): `CONFIRMED` (45 of 45) and `ATTRIBUTED` (45 of
 45).** Wake + in-stream re-routing of earlier tasks + O3's sleep, with no
