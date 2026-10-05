@@ -91,6 +91,7 @@ FROZEN = {
     "O11_SEALED_INSTREAM_SLEEP_PLAN.md": "a517af7",
     "D1_DEPTH4_FORMATION_PLAN.md": "f930710",
     "D2_DEPTH5_FORMATION_PLAN.md": "89f72bc",
+    "B1_BRANCH_2X2_PLAN.md": "0e61c5e",
 }
 
 #: STATUS-cited paths acknowledged ABSENT from this disk, each with its reason. The module
