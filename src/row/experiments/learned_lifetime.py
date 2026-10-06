@@ -653,6 +653,14 @@ def run(
                     "weight_decay": 0.0,
                 }
             )
+        elif isinstance(task_parameter, list):
+            # B1-online (`row.models.branch_gated`): a branch task returns its
+            # route code, second route code and gate parameters; all join the
+            # task learning-rate group. Only a list return reaches here, so
+            # every existing learner keeps its path above or below unchanged.
+            optimizer.add_param_group(
+                {"params": list(task_parameter), "lr": task_lr, "weight_decay": 0.0}
+            )
         else:
             optimizer.add_param_group(
                 {"params": [task_parameter], "lr": task_lr, "weight_decay": 0.0}

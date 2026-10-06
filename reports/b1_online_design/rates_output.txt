@@ -1,0 +1,10 @@
+n_better: p=0.5: P(>=8/9)=0.0195
+n_better: p=0.7: P(>=8/9)=0.1960
+n_better: p=0.8: P(>=8/9)=0.4362
+n_better: p=0.9: P(>=8/9)=0.7748
+n_better: p=0.95: P(>=8/9)=0.9288
+formation: per-cell pass 0.5: P(k>=7/9)=0.0898  P(FORMATION_BROKEN)=0.9102
+formation: per-cell pass 0.7: P(k>=7/9)=0.4628  P(FORMATION_BROKEN)=0.5372
+formation: per-cell pass 0.85: P(k>=7/9)=0.8591  P(FORMATION_BROKEN)=0.1409
+formation: per-cell pass 0.95: P(k>=7/9)=0.9916  P(FORMATION_BROKEN)=0.0084
+formation: per-cell pass 0.98: P(k>=7/9)=0.9994  P(FORMATION_BROKEN)=0.0006
