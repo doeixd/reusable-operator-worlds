@@ -145,13 +145,20 @@ nothing against predicate-only learning.
 codes and a linear gate finds branches on a frozen vocabulary; INPUT decisions
 need no restarts, MID decisions need them (first restart fails on 10 of 96).
 
-**Next: B1-online, the first control-flow rung with a learner rather than a
-search.** Branch tasks enter the order-free formation stream alongside the
-straight-line tasks; the learner gives each branch task two route codes and a
-linear gate on the decision state (B1g's parameterization, now trained by wake
-while the vocabulary forms), with restarts or an equivalent symmetry-breaking
-mechanism for mid-program decisions, and end-of-stream re-routing extended to
-re-derive both routes of a branch task by search. Its question: does the
-vocabulary still form, and does the router learn the decision online? Before a
-plan: a Tier 0 switch-recovers-baseline check (with no branch tasks in the
-stream, the branch learner equals the straight-line learner bitwise).
+**B1-online (2026-10-06): ONLINE_BRANCHES, 9 of 9.** A learner with a second
+route and a linear gate per branch task forms the straight-line vocabulary
+(canonical 0.0111, same as without branches) and learns branches online (0.23
+against 1.02 under refusal). Forcing branch tasks into one route triples the
+straight-line error; gating protects formation. Branch tasks do not reach 0.05
+at 128 examples (expected; the predicate needs ~512).
+
+**Next, in order:**
+1. **Gate-accuracy check (post hoc):** a deterministic re-run of one GATED cell
+   measuring orientation-free gate accuracy (the registered field was
+   orientation-dependent and uninterpretable).
+2. **B1-online at 512 examples per branch task** (or branch tasks sampled more
+   often), to see whether the online branch error reaches the threshold when the
+   predicate is not under-sampled.
+3. **Mid-program decisions online** (B1's MID variant), the harder case.
+4. **B2, data-dependent iteration:** `while p(state)` as a branch whose decision
+   is continue or stop, reading C0's execution drift as a baseline.

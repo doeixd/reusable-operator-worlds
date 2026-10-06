@@ -1,0 +1,28 @@
+2026-10-06T00:32:56.210916+00:00 LAUNCH 3e9f214f43de478e524c453a452ef384aa303846643bceed681c55627061595e todo=27 reused=0 scale=1 free=4.4GiB
+2026-10-06T00:55:18.949786+00:00 cell finished GATED_w44_s1 1339.3s canonical=0.007765 branch=0.2327
+2026-10-06T00:55:29.194621+00:00 cell finished GATED_w44_s0 1349.6s canonical=0.01074 branch=0.2474
+2026-10-06T00:55:35.724983+00:00 cell finished GATED_w44_s2 1356.0s canonical=0.01644 branch=0.2444
+2026-10-06T01:17:52.778799+00:00 cell finished GATED_w45_s0 1353.8s canonical=0.01106 branch=0.2401
+2026-10-06T01:18:24.184878+00:00 cell finished GATED_w45_s1 1375.0s canonical=0.01335 branch=0.2629
+2026-10-06T01:18:30.495926+00:00 cell finished GATED_w45_s2 1374.7s canonical=0.01127 branch=0.2263
+2026-10-06T01:40:32.371646+00:00 cell finished GATED_w46_s0 1359.6s canonical=0.009853 branch=0.2271
+2026-10-06T01:41:10.351351+00:00 cell finished GATED_w46_s2 1359.8s canonical=0.01866 branch=0.2321
+2026-10-06T01:41:14.743944+00:00 cell finished GATED_w46_s1 1370.5s canonical=0.01095 branch=0.2174
+2026-10-06T01:54:48.599969+00:00 cell finished REFUSAL_w44_s0 856.2s canonical=0.02925 branch=1.032
+2026-10-06T01:55:42.792426+00:00 cell finished REFUSAL_w44_s1 872.4s canonical=0.02788 branch=1.017
+2026-10-06T01:56:00.457267+00:00 cell finished REFUSAL_w44_s2 885.7s canonical=0.03467 branch=1.033
+2026-10-06T02:10:13.840008+00:00 cell finished REFUSAL_w45_s0 925.2s canonical=0.03057 branch=1.037
+2026-10-06T02:11:16.778621+00:00 cell finished REFUSAL_w45_s1 934.0s canonical=0.02488 branch=1.069
+2026-10-06T02:11:31.307314+00:00 cell finished REFUSAL_w45_s2 930.8s canonical=0.03646 branch=1.018
+2026-10-06T02:26:59.519121+00:00 cell finished REFUSAL_w46_s0 1005.7s canonical=0.02758 branch=0.9988
+2026-10-06T02:28:09.493537+00:00 cell finished REFUSAL_w46_s1 1012.7s canonical=0.04643 branch=0.9966
+2026-10-06T02:28:29.504663+00:00 cell finished REFUSAL_w46_s2 1018.2s canonical=0.0314 branch=1.024
+2026-10-06T02:40:24.493335+00:00 cell finished NOBRANCH_w44_s0 805.0s canonical=0.007619
+2026-10-06T02:41:36.843382+00:00 cell finished NOBRANCH_w44_s1 807.3s canonical=0.01488
+2026-10-06T02:41:58.675270+00:00 cell finished NOBRANCH_w44_s2 809.2s canonical=0.01138
+2026-10-06T02:54:51.631081+00:00 cell finished NOBRANCH_w45_s0 867.1s canonical=0.01056
+2026-10-06T02:56:07.959819+00:00 cell finished NOBRANCH_w45_s1 871.1s canonical=0.01043
+2026-10-06T02:56:30.728352+00:00 cell finished NOBRANCH_w45_s2 872.0s canonical=0.01199
+2026-10-06T03:07:17.257313+00:00 cell finished NOBRANCH_w46_s0 745.6s canonical=0.01477
+2026-10-06T03:08:09.160181+00:00 cell finished NOBRANCH_w46_s1 721.2s canonical=0.01042
+2026-10-06T03:08:24.497937+00:00 cell finished NOBRANCH_w46_s2 713.8s canonical=0.006999

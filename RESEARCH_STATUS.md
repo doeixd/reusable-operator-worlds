@@ -25,11 +25,13 @@ rungs (B0-B3). **B0:** branch tasks need state-conditional routing (no single
 route below 1.0 median, oracle branch 0.006-0.011); the branch decision is
 learnable from ~512 support examples (B0b, post hoc). **B1 (Tier 1, offline): LEARNABLE, 178/192.** Branch structure and decision are
 both recoverable from support data on a formed vocabulary; the residual is
-decisions on intermediate states (MID 83/96). **B1g (Tier 1, offline): GRADIENT_FINDS, 173/192** (search 178): wake's
-optimizer finds branches on a formed vocabulary; mid-program decisions need
-restarts. **Next (Claude):** B1-online, branch tasks in the formation stream
-with B1g's two-code-plus-gate parameterization trained by wake; first a Tier 0
-switch-recovers-baseline check.
+decisions on intermediate states (MID 83/96). **B1g (Tier 1, offline): GRADIENT_FINDS, 173/192.** **B1-online (Tier 1,
+worlds 44-46): ONLINE_BRANCHES, 9/9 paired, formation 9/9.** A learner forms the
+vocabulary and learns branch decisions online (branch 0.23 against 1.02 under
+refusal; canonical 0.0111, as without branches); forcing branches into one route
+triples straight-line error. Gate-accuracy field defective (orientation),
+checked post hoc. **Next (Claude):** that check, then branches at 512 examples,
+mid-program decisions online, then B2 (iteration).
 
 **D2 (Tier 1, depth 5, development worlds 37-43): `TRANSFERS`, 21 of 21.** One
 end-of-stream exhaustive re-route pass + sleep formed the depth-5 substrate in

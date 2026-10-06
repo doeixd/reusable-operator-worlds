@@ -10862,3 +10862,48 @@ formed vocabulary almost as well as exhaustive search (173 against 178), with th
 same residual (decisions on intermediate states). An online branch learner is
 therefore not blocked by the optimizer; it needs a symmetry-breaking mechanism
 (restarts or an equivalent) for decisions made after a first step.
+
+
+# B1-ONLINE OUTCOME (2026-10-06): ONLINE_BRANCHES (9/9 paired, formation 9/9) - a learner forms the vocabulary and learns branch decisions online; gating protects formation (Tier 1, exploratory)
+
+Plan `B1_ONLINE_PLAN.md`, frozen `721f185`, hash protected `4e1e586`.
+Development worlds 44-46, streams 0-2, 27 cells, 00:32-03:08Z, exit 0. Dry run
+of every arm on world 49 with restart test passed before launch. Report
+`reports/b1_online.json`; archive `reports/b1_online_20261006/`. `n_better` and
+`k_formation` recomputed independently from the 27 durable cell records: 9 and
+9, matching the runner.
+
+| arm | canonical straight-line tasks: passes of 9 (median, range) | branch tasks: median (range) | wake-only canonical / branch |
+|---|---|---|---|
+| GATED (branch learner) | **9** (0.0111, 0.0078-0.0187) | **0.233** (0.217-0.263) | 0.070 / 0.386 |
+| REFUSAL (one route per task) | 9 (0.0306, 0.0249-0.0464) | 1.024 (0.997-1.069) | 0.167 / 1.131 |
+| NOBRANCH (no branch tasks) | 9 (0.0106, 0.0070-0.0149) | n/a | 0.100 / n/a |
+
+Label **`ONLINE_BRANCHES`**: GATED below REFUSAL on branch tasks in **9 of 9**
+paired cells (8 needed); GATED canonical below 0.05 in **9 of 9** (7 needed).
+
+**Reading.**
+- **A learner forms the vocabulary and learns branches online.** With branch
+  tasks in the stream, the gated learner's straight-line vocabulary is as good as
+  without them (0.0111 against 0.0106), and its branch tasks sit at 0.23 against
+  1.02 when each task must use one route.
+- **Gating protects formation.** Forcing branch tasks into single routes
+  (REFUSAL) still passes the canonical threshold but triples its error (0.0306
+  against 0.0106): a task that no single route can fit pulls the shared library
+  in incoherent directions. Giving it two routes and a gate removes that damage.
+- **The end-of-stream steps help branches too:** branch median 0.386 after wake,
+  0.233 after branch re-fit and sleep; the re-fit was installed for 431 of 432
+  branch tasks.
+- **No branch task reaches 0.05** (0 of 432; p10/p50/p90 0.153 / 0.236 / 0.329).
+  This was expected and registered: at 128 examples per task the predicate is
+  under-sampled (B0: 0.11 offline with the structure given; B0b: ~512 needed).
+  The online value is about twice the offline one at the same sample size.
+
+**Measurement defect, disclosed.** The registered descriptive "gate accuracy
+against the true predicate" (median 0.158) is not interpretable as written: it
+scores the gate as if route 1 were the teacher's branch A, but which learned
+route plays A is arbitrary, so a gate that is right in the opposite orientation
+scores near 0. The orientation-free accuracy (the better of the two orientations
+per task) was not recorded, and the final models were not saved. It is checked
+post hoc by a deterministic re-run of one cell (addendum below when complete). No
+registered clause uses this field.

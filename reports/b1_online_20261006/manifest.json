@@ -1,0 +1,44 @@
+{
+ "protocol": {
+  "id": "b1-online-v1",
+  "git_commit": "4e1e586",
+  "plan": "B1_ONLINE_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "root": "artifacts/b1_online",
+  "worlds": [
+   44,
+   45,
+   46
+  ],
+  "streams": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "GATED",
+   "REFUSAL",
+   "NOBRANCH"
+  ],
+  "n_branch": 48,
+  "memory": 64,
+  "sleep_updates": 8192,
+  "branch_seed": 5700,
+  "threshold": 0.05,
+  "input_sha256": {
+   "B1_ONLINE_PLAN.md": "631e1c72d2819efd76d5fb4d579e0b789f2a91770d7afb0ca0c4ce5baf2e7818",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "ed8233717676f632d0717872223d720feae9f894a5658780cff3ad83184c1cd0",
+  "branch_stream_sha256": "1396652300808c4ae0f9b517facd5a35569308e60e0d22eb3c441aca57c262c0",
+  "branch_learner_sha256": "13efb2c1e3e25a9546c3b70e724874738a3fd5e75540bcbcd14b14a1753ad9fa",
+  "b1g_sha256": "6ba8eb9ca6d163473d3269dfdbeef0ede5054eb4b8382a667e18c1b16e3c8e8a",
+  "deep_reroute_sha256": "6528c8683cb33a5b90d51d6f8e42c6234142a206a4f567c7d307e487e5eea3e6",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "lifetime_sha256": "ac5d795e555ade919690f87772ea2d618ddb0f9c96690f1ac9768d4aaa9b92b0",
+  "scale": 1
+ },
+ "protocol_sha256": "3e9f214f43de478e524c453a452ef384aa303846643bceed681c55627061595e"
+}
