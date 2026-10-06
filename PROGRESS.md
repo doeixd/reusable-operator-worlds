@@ -8672,3 +8672,28 @@ scores near 0. The orientation-free accuracy (the better of the two orientations
 per task) was not recorded, and the final models were not saved. It is checked
 post hoc by a deterministic re-run of one cell (addendum below when complete). No
 registered clause uses this field.
+
+
+# B1-ONLINE POST-HOC ADDENDUM (2026-10-06): the gate is right ~89% of the time; the 0.23 branch error is the decision boundary
+
+`row.experiments.census_b1o_gate_check`, `reports/b1o_gate_check.json`. A
+deterministic re-run of `GATED_w44_s0` reproduced the committed cell's canonical
+and branch per-task scores exactly (same model). On its 48 branch tasks:
+orientation-free gate accuracy median **0.891**; function-matched accuracy
+(route 1 called A when its outputs are closer to the teacher's A) median
+**0.891**, 10th percentile 0.831. The two agree, so learned routes map onto
+the teacher's branches consistently; the registered field read 0.158 because the
+learner nearly always placed branch A on route 2, which that field scored as
+wrong. About 11% misrouted examples, each costing about a full branch error,
+account for the 0.23 branch median: the residual is the learned decision
+boundary under 128 examples, not the routes.
+
+**Design critique recorded the same day (PI question, "Too easy?").** B1-online's
+paired clause (GATED below REFUSAL) was close to guaranteed: GATED has strictly
+more capacity and REFUSAL cannot fit a branch task at all. The learner was also
+told WHICH tasks branch, the linear gate on the input contains the true
+predicate, and the number and length of branches were given; there was no
+capacity-matched control (two routes mixed by a constant, state-independent
+weight). What stands: the formation finding (forcing branches into one route
+triples straight-line error; gating removes it) and the absolute branch result
+(0/432 below 0.05 at 128 examples). The next rung removes the gifts.

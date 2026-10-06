@@ -29,9 +29,10 @@ decisions on intermediate states (MID 83/96). **B1g (Tier 1, offline): GRADIENT_
 worlds 44-46): ONLINE_BRANCHES, 9/9 paired, formation 9/9.** A learner forms the
 vocabulary and learns branch decisions online (branch 0.23 against 1.02 under
 refusal; canonical 0.0111, as without branches); forcing branches into one route
-triples straight-line error. Gate-accuracy field defective (orientation),
-checked post hoc. **Next (Claude):** that check, then branches at 512 examples,
-mid-program decisions online, then B2 (iteration).
+triples straight-line error. Post-hoc gate check: ~89% correct. **Design critique
+(PI, "Too easy?"):** the paired clause was near-guaranteed and branch identity was
+given. **Next (Claude):** B1-hard: gates on every task with a usage cost, a
+constant-mix capacity control, ~512 examples, an absolute bar; then B2.
 
 **D2 (Tier 1, depth 5, development worlds 37-43): `TRANSFERS`, 21 of 21.** One
 end-of-stream exhaustive re-route pass + sleep formed the depth-5 substrate in

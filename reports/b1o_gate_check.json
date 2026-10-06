@@ -1,0 +1,204 @@
+{
+ "tier": 0,
+ "post_hoc": true,
+ "cell": "GATED_w44_s0",
+ "reproduces_committed_cell": true,
+ "orientation_free_accuracy_median": 0.890625,
+ "function_matched_accuracy_median": 0.890625,
+ "function_matched_accuracy_p10": 0.830859375,
+ "per_task": [
+  {
+   "orientation_free": 0.921875,
+   "function_matched": 0.921875
+  },
+  {
+   "orientation_free": 0.890625,
+   "function_matched": 0.890625
+  },
+  {
+   "orientation_free": 0.88671875,
+   "function_matched": 0.88671875
+  },
+  {
+   "orientation_free": 0.8828125,
+   "function_matched": 0.8828125
+  },
+  {
+   "orientation_free": 0.8515625,
+   "function_matched": 0.8515625
+  },
+  {
+   "orientation_free": 0.83203125,
+   "function_matched": 0.83203125
+  },
+  {
+   "orientation_free": 0.94140625,
+   "function_matched": 0.94140625
+  },
+  {
+   "orientation_free": 0.94140625,
+   "function_matched": 0.94140625
+  },
+  {
+   "orientation_free": 0.90625,
+   "function_matched": 0.90625
+  },
+  {
+   "orientation_free": 0.92578125,
+   "function_matched": 0.92578125
+  },
+  {
+   "orientation_free": 0.8671875,
+   "function_matched": 0.8671875
+  },
+  {
+   "orientation_free": 0.8671875,
+   "function_matched": 0.8671875
+  },
+  {
+   "orientation_free": 0.859375,
+   "function_matched": 0.859375
+  },
+  {
+   "orientation_free": 0.83203125,
+   "function_matched": 0.83203125
+  },
+  {
+   "orientation_free": 0.9140625,
+   "function_matched": 0.9140625
+  },
+  {
+   "orientation_free": 0.9375,
+   "function_matched": 0.9375
+  },
+  {
+   "orientation_free": 0.8125,
+   "function_matched": 0.8125
+  },
+  {
+   "orientation_free": 0.82421875,
+   "function_matched": 0.82421875
+  },
+  {
+   "orientation_free": 0.87109375,
+   "function_matched": 0.87109375
+  },
+  {
+   "orientation_free": 0.87890625,
+   "function_matched": 0.87890625
+  },
+  {
+   "orientation_free": 0.9140625,
+   "function_matched": 0.9140625
+  },
+  {
+   "orientation_free": 0.8671875,
+   "function_matched": 0.8671875
+  },
+  {
+   "orientation_free": 0.9296875,
+   "function_matched": 0.9296875
+  },
+  {
+   "orientation_free": 0.9140625,
+   "function_matched": 0.9140625
+  },
+  {
+   "orientation_free": 0.9375,
+   "function_matched": 0.9375
+  },
+  {
+   "orientation_free": 0.90234375,
+   "function_matched": 0.90234375
+  },
+  {
+   "orientation_free": 0.890625,
+   "function_matched": 0.890625
+  },
+  {
+   "orientation_free": 0.890625,
+   "function_matched": 0.890625
+  },
+  {
+   "orientation_free": 0.87109375,
+   "function_matched": 0.87109375
+  },
+  {
+   "orientation_free": 0.88671875,
+   "function_matched": 0.88671875
+  },
+  {
+   "orientation_free": 0.921875,
+   "function_matched": 0.921875
+  },
+  {
+   "orientation_free": 0.828125,
+   "function_matched": 0.828125
+  },
+  {
+   "orientation_free": 0.8984375,
+   "function_matched": 0.8984375
+  },
+  {
+   "orientation_free": 0.875,
+   "function_matched": 0.875
+  },
+  {
+   "orientation_free": 0.9140625,
+   "function_matched": 0.9140625
+  },
+  {
+   "orientation_free": 0.86328125,
+   "function_matched": 0.86328125
+  },
+  {
+   "orientation_free": 0.90234375,
+   "function_matched": 0.90234375
+  },
+  {
+   "orientation_free": 0.890625,
+   "function_matched": 0.890625
+  },
+  {
+   "orientation_free": 0.91015625,
+   "function_matched": 0.91015625
+  },
+  {
+   "orientation_free": 0.87890625,
+   "function_matched": 0.87890625
+  },
+  {
+   "orientation_free": 0.90234375,
+   "function_matched": 0.90234375
+  },
+  {
+   "orientation_free": 0.87109375,
+   "function_matched": 0.87109375
+  },
+  {
+   "orientation_free": 0.796875,
+   "function_matched": 0.796875
+  },
+  {
+   "orientation_free": 0.9140625,
+   "function_matched": 0.9140625
+  },
+  {
+   "orientation_free": 0.890625,
+   "function_matched": 0.890625
+  },
+  {
+   "orientation_free": 0.9296875,
+   "function_matched": 0.9296875
+  },
+  {
+   "orientation_free": 0.85546875,
+   "function_matched": 0.85546875
+  },
+  {
+   "orientation_free": 0.828125,
+   "function_matched": 0.828125
+  }
+ ],
+ "finished_utc": "2026-10-06T03:48:26.621005+00:00"
+}

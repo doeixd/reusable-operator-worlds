@@ -152,13 +152,21 @@ against 1.02 under refusal). Forcing branch tasks into one route triples the
 straight-line error; gating protects formation. Branch tasks do not reach 0.05
 at 128 examples (expected; the predicate needs ~512).
 
-**Next, in order:**
-1. **Gate-accuracy check (post hoc):** a deterministic re-run of one GATED cell
-   measuring orientation-free gate accuracy (the registered field was
-   orientation-dependent and uninterpretable).
-2. **B1-online at 512 examples per branch task** (or branch tasks sampled more
-   often), to see whether the online branch error reaches the threshold when the
-   predicate is not under-sampled.
-3. **Mid-program decisions online** (B1's MID variant), the harder case.
-4. **B2, data-dependent iteration:** `while p(state)` as a branch whose decision
-   is continue or stop, reading C0's execution drift as a baseline.
+**Post-hoc gate check (2026-10-06):** the gate is right ~89% of the time
+(orientation-free and function-matched agree); the 0.23 branch error is the
+decision boundary at 128 examples.
+
+**Design critique (PI, "Too easy?"):** B1-online's paired clause was close to
+guaranteed, branch identity was given, the gate family contained the truth, and
+there was no capacity-matched control. **Next: B1-hard**, which removes the
+gifts:
+1. every task gets a gate with a cost for using it, so the learner must discover
+   WHICH tasks branch (success: state-dependent gates on branch tasks, constant
+   gates on straight-line tasks, formation intact);
+2. a capacity-matched control: the same two routes mixed by a constant learned
+   weight (no state dependence); the registered gain is over THAT control, not
+   over refusal;
+3. ~512 examples per branch task and an absolute bar (branch tasks below 0.05);
+4. later variants: decisions on an intermediate state or nonlinear predicates;
+   two or three branches with the arity learned.
+Then B2 (iteration).
