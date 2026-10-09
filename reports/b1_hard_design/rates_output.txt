@@ -1,0 +1,15 @@
+gate separation d'=0.0: median AUC ~0.500; P(median >= 0.9)=0.000
+gate separation d'=1.0: median AUC ~0.761; P(median >= 0.9)=0.000
+gate separation d'=1.5: median AUC ~0.857; P(median >= 0.9)=0.000
+gate separation d'=2.0: median AUC ~0.923; P(median >= 0.9)=0.993
+gate separation d'=3.0: median AUC ~0.984; P(median >= 0.9)=1.000
+recall: per-task 0.6: P(pooled >= 0.8 of 432)=0.0000
+recall: per-task 0.75: P(pooled >= 0.8 of 432)=0.0074
+recall: per-task 0.8: P(pooled >= 0.8 of 432)=0.5096
+recall: per-task 0.85: P(pooled >= 0.8 of 432)=0.9976
+recall: per-task 0.9: P(pooled >= 0.8 of 432)=1.0000
+specificity: per-task 0.9: P(pooled >= 0.95 of 1692)=0.0000
+specificity: per-task 0.93: P(pooled >= 0.95 of 1692)=0.0004
+specificity: per-task 0.95: P(pooled >= 0.95 of 1692)=0.5022
+specificity: per-task 0.97: P(pooled >= 0.95 of 1692)=1.0000
+specificity: per-task 0.99: P(pooled >= 0.95 of 1692)=1.0000

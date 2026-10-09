@@ -658,9 +658,16 @@ def run(
             # route code, second route code and gate parameters; all join the
             # task learning-rate group. Only a list return reaches here, so
             # every existing learner keeps its path above or below unchanged.
+            # B1-hard: an item may be a dict naming its own group (e.g. a gate's
+            # state weights with a weight-decay usage cost); a list of plain
+            # parameters is grouped exactly as before.
+            plain = [item for item in task_parameter if not isinstance(item, dict)]
             optimizer.add_param_group(
-                {"params": list(task_parameter), "lr": task_lr, "weight_decay": 0.0}
+                {"params": plain, "lr": task_lr, "weight_decay": 0.0}
             )
+            for item in task_parameter:
+                if isinstance(item, dict):
+                    optimizer.add_param_group({"lr": task_lr, "weight_decay": 0.0, **item})
         else:
             optimizer.add_param_group(
                 {"params": [task_parameter], "lr": task_lr, "weight_decay": 0.0}

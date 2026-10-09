@@ -26,10 +26,16 @@ from row.models.online_variable_depth import PlannedDepthRotatedLearner
 class BranchGatedLearner(PlannedDepthRotatedLearner):
     implementation = 'branch_gated_v1'
 
-    def __init__(self, *args, branch_plan: dict[str, str] | None = None, branch_seed: int = 0, **kwargs) -> None:
+    def __init__(self, *args, branch_plan: dict[str, str] | None = None, branch_seed: int = 0,
+                 state_gate: bool = True, gate_decay: float | None = None, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.branch_plan: dict[str, str] = dict(branch_plan or {})
         self.branch_seed = int(branch_seed)
+        # B1-hard options; the defaults are B1-online's construction exactly.
+        # state_gate=False: the gate has a bias only (constant, state-independent mix: the capacity control).
+        # gate_decay: the gate's state weights form their own optimizer group with this weight decay (usage cost).
+        self.state_gate = bool(state_gate)
+        self.gate_decay = gate_decay
         self.branch_codes = nn.ParameterDict()
         self.gate_w = nn.ParameterDict()
         self.gate_b = nn.ParameterDict()
@@ -42,15 +48,20 @@ class BranchGatedLearner(PlannedDepthRotatedLearner):
         g = torch.Generator().manual_seed(int(seed))
         self.branch_codes[task_id] = nn.Parameter(0.1 * torch.randn(code.shape, generator=g))
         d = self.library[0].V.shape[1]
-        self.gate_w[task_id] = nn.Parameter(torch.zeros(d))
         self.gate_b[task_id] = nn.Parameter(torch.zeros(1))
-        return [code, self.branch_codes[task_id], self.gate_w[task_id], self.gate_b[task_id]]
+        if not self.state_gate:
+            return [code, self.branch_codes[task_id], self.gate_b[task_id]]
+        self.gate_w[task_id] = nn.Parameter(torch.zeros(d))
+        if self.gate_decay is None:
+            return [code, self.branch_codes[task_id], self.gate_w[task_id], self.gate_b[task_id]]
+        return [code, self.branch_codes[task_id], self.gate_b[task_id],
+                {'params': [self.gate_w[task_id]], 'weight_decay': float(self.gate_decay)}]
 
     def branch_parameters(self, task_ids) -> list[nn.Parameter]:
         out = []
         for t in task_ids:
             if t in self.branch_codes:
-                out += [self.branch_codes[t], self.gate_w[t], self.gate_b[t]]
+                out += [self.branch_codes[t], self.gate_b[t]] + ([self.gate_w[t]] if t in self.gate_w else [])
         return out
 
     def _route_coefficients(self, logits: Tensor) -> Tensor:
@@ -77,7 +88,10 @@ class BranchGatedLearner(PlannedDepthRotatedLearner):
         return z
 
     def gate(self, x: Tensor, task_id: str) -> Tensor:
-        logit = x @ self.gate_w[task_id] + self.gate_b[task_id]
+        if task_id in self.gate_w:
+            logit = x @ self.gate_w[task_id] + self.gate_b[task_id]
+        else:   # state-independent gate (capacity control)
+            logit = self.gate_b[task_id].expand(x.shape[0])
         return torch.sigmoid(logit) if self.training else (logit > 0).to(x.dtype)
 
     def forward(self, x: Tensor, task_id: str) -> Tensor:
