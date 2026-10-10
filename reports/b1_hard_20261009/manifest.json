@@ -1,0 +1,40 @@
+{
+ "protocol": {
+  "id": "b1-hard-v1",
+  "git_commit": "fe92e47",
+  "plan": "B1_HARD_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "root": "artifacts/b1_hard",
+  "worlds": [
+   44,
+   45,
+   46
+  ],
+  "streams": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "ALLGATE",
+   "CONSTMIX"
+  ],
+  "gate_decay": 0.1,
+  "branch_ratio": 0.5,
+  "threshold": 0.05,
+  "input_sha256": {
+   "B1_HARD_PLAN.md": "0d64277e423ca2b3190c44c38a6b1fe82fc0bb7c60c21d217a82c4908c50b3a0",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "53b02cdd27e9a9220aae1d01b17b7d2552cd19b5129816f18b8c901779937306",
+  "b1_online_sha256": "ed8233717676f632d0717872223d720feae9f894a5658780cff3ad83184c1cd0",
+  "branch_learner_sha256": "e6efc810cfcb9e937f59b73b452cc8b6d013e367ce1ba223376c36bbebb57fdb",
+  "b1g_sha256": "6ba8eb9ca6d163473d3269dfdbeef0ede5054eb4b8382a667e18c1b16e3c8e8a",
+  "branch_stream_sha256": "1396652300808c4ae0f9b517facd5a35569308e60e0d22eb3c441aca57c262c0",
+  "deep_reroute_sha256": "6528c8683cb33a5b90d51d6f8e42c6234142a206a4f567c7d307e487e5eea3e6",
+  "lifetime_sha256": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+  "scale": 1
+ },
+ "protocol_sha256": "812779d11542b0d62e48b08c72c83f539d29311eb5a7cace9aac9bf1a423259f"
+}

@@ -8697,3 +8697,58 @@ capacity-matched control (two routes mixed by a constant, state-independent
 weight). What stands: the formation finding (forcing branches into one route
 triples straight-line error; gating removes it) and the absolute branch result
 (0/432 below 0.05 at 128 examples). The next rung removes the gifts.
+
+
+# B1-HARD OUTCOME (2026-10-10): DISCOVERS - without being told which tasks branch, wake puts state-dependent gates on the branch tasks (AUC 0.973); capacity alone gives nothing (Tier 1, exploratory)
+
+Plan `B1_HARD_PLAN.md`, frozen `f896445` (revised before any scale-1 cell after
+the pre-launch data-test census), hash protected in `tools/check_prereg.py`.
+Development worlds 44-46, streams 0-2 (opened by B1-online; design evidence
+only), 18 cells, 2026-10-09 20:25 - 2026-10-10 00:23Z, exit 0. Dry run of both
+arms on world 49 with restart test passed first. Report `reports/b1_hard.json`;
+archive `reports/b1_hard_20261009/`. Independent scorer
+`row.experiments.score_b1_hard` recomputed every clause from the per-task cell
+records and agrees with the runner; `check_prereg`, `check_invalid` pass.
+
+| arm | canonical: passes of 9 (median) | branch median | wake-only canonical median / branch median |
+|---|---|---|---|
+| ALLGATE (gate on every task, usage cost) | **9** (0.0133) | **0.235** | 0.056 / 0.45 |
+| CONSTMIX (two routes, constant mix) | 9 (0.0334) | 1.011 | 0.186 / 1.10 |
+| B1-online GATED (identity given), reference | 9 (0.0111) | 0.233 | |
+| B1-online REFUSAL (one route), reference | 9 (0.0306) | 1.024 | |
+
+Registered clauses: `k_formation` **9/9** (7 needed); wake gate-norm `AUC_med`
+**0.973** (per cell 0.953-0.984; bar 0.9); recall **0.998** (431/432; bar 0.8);
+specificity **1.000** (1,692/1,692; bar 0.95); ALLGATE branch below CONSTMIX
+**9/9** (8 needed). Label **`DISCOVERS`**.
+
+**Which clauses carry it (registered before data, see the plan's pre-launch
+section).** On a formed library the end-of-stream data test separates branch
+from straight tasks perfectly, so recall and specificity were near-guaranteed,
+and `n_control` is a construction check. The question rests on formation (9/9)
+and on the wake AUC, which sits well clear of its bar in every cell: wake gate
+norms p10/p50/p90 are 1.65/2.14/2.52 on branch tasks against 0.38/0.61/1.37 on
+straight tasks; 5.1% of straight tasks exceed the branch 10th percentile. The
+usage cost does not zero the straight-task gates; it ranks them.
+
+**Reading.**
+- **Branch identity was not needed.** Not telling the learner which tasks branch
+  costs nothing measurable: ALLGATE matches B1-online's identity-given arm on
+  branch tasks (0.235 against 0.233) and nearly on straight-line tasks (0.0133
+  against 0.0111).
+- **The gain is state-conditioning, not capacity.** Two routes mixed by a learned
+  constant (CONSTMIX) is indistinguishable from one route per task (branch 1.01
+  against 1.02; canonical 0.033 against 0.031). The capacity-matched control has
+  the second route and gains nothing from it.
+- **State-dependent gates also protect formation**, as in B1-online: ALLGATE's
+  canonical error is below CONSTMIX's in 9/9 cells (0.013 against 0.033).
+- **Wake alone collapsed in 2 of 9 ALLGATE cells** (w45 s1/s2, canonical 1.83
+  and 1.72) and the end-of-stream re-route + sleep rescued both (0.0145, 0.0156):
+  the known stale-route pattern (O6), now with gates on every task.
+- **Absolute bar still unmet:** 0 of 432 branch tasks below 0.05 (p10/p50/p90
+  0.159/0.239/0.345), the same as with identity given. The limit is the decision
+  boundary at 128 examples per task (B1-online addendum), not discovery.
+
+**Not shown:** decisions on intermediate states or nonlinear predicates (input,
+linear only); adequate sample size; fresh worlds; sensitivity to `GATE_DECAY`
+and `BRANCH_RATIO` (single registered values).

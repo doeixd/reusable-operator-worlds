@@ -1,0 +1,19 @@
+2026-10-09T20:25:21.241160+00:00 LAUNCH 812779d11542b0d62e48b08c72c83f539d29311eb5a7cace9aac9bf1a423259f todo=18 reused=0 scale=1 free=3.4GiB
+2026-10-09T21:24:11.471314+00:00 cell finished ALLGATE_w44_s1 3522.2s canonical=0.006333 branch=0.2265 recall=48 single=188 auc=0.984
+2026-10-09T21:24:22.357324+00:00 cell finished ALLGATE_w44_s0 3533.2s canonical=0.01335 branch=0.2492 recall=48 single=188 auc=0.979
+2026-10-09T21:24:47.239648+00:00 cell finished ALLGATE_w44_s2 3553.9s canonical=0.008639 branch=0.2281 recall=48 single=188 auc=0.970
+2026-10-09T22:17:47.244965+00:00 cell finished ALLGATE_w45_s0 3215.8s canonical=0.01266 branch=0.2402 recall=48 single=188 auc=0.980
+2026-10-09T22:17:56.797991+00:00 cell finished ALLGATE_w45_s1 3214.4s canonical=0.01453 branch=0.2528 recall=47 single=188 auc=0.961
+2026-10-09T22:18:06.908046+00:00 cell finished ALLGATE_w45_s2 3203.8s canonical=0.01558 branch=0.2377 recall=48 single=188 auc=0.959
+2026-10-09T23:02:42.746672+00:00 cell finished ALLGATE_w46_s0 2695.5s canonical=0.008323 branch=0.2348 recall=48 single=188 auc=0.984
+2026-10-09T23:02:57.452218+00:00 cell finished ALLGATE_w46_s1 2700.6s canonical=0.01554 branch=0.2282 recall=48 single=188 auc=0.953
+2026-10-09T23:03:12.273121+00:00 cell finished ALLGATE_w46_s2 2705.3s canonical=0.01748 branch=0.2338 recall=48 single=188 auc=0.973
+2026-10-09T23:27:29.633309+00:00 cell finished CONSTMIX_w44_s0 1486.9s canonical=0.03648 branch=1.009 recall=0 single=188
+2026-10-09T23:27:51.701978+00:00 cell finished CONSTMIX_w44_s1 1494.2s canonical=0.02792 branch=1.022 recall=0 single=188
+2026-10-09T23:28:02.293929+00:00 cell finished CONSTMIX_w44_s2 1490.0s canonical=0.04273 branch=1.026 recall=0 single=188
+2026-10-09T23:56:19.178087+00:00 cell finished CONSTMIX_w45_s0 1729.5s canonical=0.03337 branch=1.015 recall=0 single=188
+2026-10-09T23:56:56.081937+00:00 cell finished CONSTMIX_w45_s1 1744.4s canonical=0.02712 branch=1.031 recall=0 single=188
+2026-10-09T23:57:02.616189+00:00 cell finished CONSTMIX_w45_s2 1740.3s canonical=0.03537 branch=1.011 recall=0 single=188
+2026-10-10T00:22:27.589731+00:00 cell finished CONSTMIX_w46_s0 1568.4s canonical=0.02535 branch=0.9823 recall=0 single=188
+2026-10-10T00:23:09.931292+00:00 cell finished CONSTMIX_w46_s1 1573.8s canonical=0.03927 branch=0.9965 recall=0 single=188
+2026-10-10T00:23:11.591071+00:00 cell finished CONSTMIX_w46_s2 1568.9s canonical=0.03108 branch=1.004 recall=0 single=188

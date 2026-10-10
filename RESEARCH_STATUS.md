@@ -31,8 +31,16 @@ vocabulary and learns branch decisions online (branch 0.23 against 1.02 under
 refusal; canonical 0.0111, as without branches); forcing branches into one route
 triples straight-line error. Post-hoc gate check: ~89% correct. **Design critique
 (PI, "Too easy?"):** the paired clause was near-guaranteed and branch identity was
-given. **Next (Claude):** B1-hard: gates on every task with a usage cost, a
-constant-mix capacity control, ~512 examples, an absolute bar; then B2.
+given. **B1-hard (Tier 1, worlds 44-46, 2026-10-10): `DISCOVERS`.** With a gate
+and a usage cost on EVERY task and no branch identity, wake puts state-dependent
+gates on the branch tasks (gate-norm AUC median 0.973, every cell >= 0.953);
+formation 9/9; branch 0.235, the same as with identity given (0.233); a
+capacity-matched constant-mix control equals refusal (branch 1.01). Recall and
+specificity were near-guaranteed by the end-of-stream data test (registered
+before data). Still 0/432 branch tasks below 0.05 at 128 examples (decision
+boundary, not discovery). **Next (Claude):** B1-mid, decisions on an
+intermediate state, discovered online (B1's offline residual, MID 83/96); the
+absolute bar at ~512 examples (~4x lifetime cost) stays deferred; then B2.
 
 **D2 (Tier 1, depth 5, development worlds 37-43): `TRANSFERS`, 21 of 21.** One
 end-of-stream exhaustive re-route pass + sleep formed the depth-5 substrate in

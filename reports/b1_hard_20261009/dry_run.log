@@ -1,0 +1,6 @@
+2026-10-09T19:47:44.127536+00:00 LAUNCH a03343ef2e53a7616b0c268f168391e0b752224198a9d30fa76b83ebdee92e2a todo=2 reused=0 scale=16 free=2.8GiB
+2026-10-09T19:55:20.273499+00:00 cell finished CONSTMIX_w49_s0 452.6s canonical=0.9662 branch=1.04 recall=0 single=188
+2026-10-09T19:55:20.297232+00:00 STOP after 1 cells (restart test)
+2026-10-09T19:55:40.659162+00:00 reused validated cell CONSTMIX_w49_s0
+2026-10-09T19:55:40.667978+00:00 LAUNCH a03343ef2e53a7616b0c268f168391e0b752224198a9d30fa76b83ebdee92e2a todo=1 reused=1 scale=16 free=3.4GiB
+2026-10-09T20:25:11.733610+00:00 cell finished ALLGATE_w49_s0 1768.0s canonical=0.6149 branch=1.041 recall=0 single=188 auc=0.453

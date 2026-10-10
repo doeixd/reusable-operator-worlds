@@ -170,3 +170,15 @@ gifts:
 4. later variants: decisions on an intermediate state or nonlinear predicates;
    two or three branches with the arity learned.
 Then B2 (iteration).
+
+**B1-hard (2026-10-10): DISCOVERS.** Removing the gifts: a gate with a usage cost
+on every task, no branch identity, and a capacity-matched constant-mix control.
+Wake ranks branch tasks' gates above straight tasks' (AUC 0.973; norms median 2.14
+against 0.61); formation 9/9; branch 0.235, equal to the identity-given arm; the
+constant mix equals refusal (1.01), so the gain is state-conditioning, not
+capacity. The end-of-stream data test separated perfectly (recall 0.998,
+specificity 1.000), as its pre-launch census predicted. Not yet: the absolute bar
+(0/432 below 0.05 at 128 examples), intermediate-state and nonlinear decisions,
+fresh worlds. **Next: B1-mid** (decision on the state after a shared prefix
+step, discovered online), then the absolute bar at adequate sample size, then B2.
+
