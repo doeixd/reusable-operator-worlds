@@ -1,0 +1,475 @@
+{
+ "tier": 0,
+ "descriptive": true,
+ "summary": {
+  "tasks": 48,
+  "gradient_median": 0.1304638221509285,
+  "search_median": 0.12864529735767463,
+  "gradient_p10_p90": [
+   0.08910191636869332,
+   0.16927640385674556
+  ],
+  "search_p10_p90": [
+   0.08319613866830902,
+   0.16338678809021728
+  ],
+  "same_body": 48,
+  "gradient_within_1.5x_search": 46,
+  "gradient_below_0.05": 0,
+  "search_below_0.05": 0,
+  "first_restart_kept": 46
+ },
+ "worlds": [
+  {
+   "world": 44,
+   "G1_final_reproduces": true,
+   "rows": [
+    {
+     "task": "task_da390fc5fa5d43ab",
+     "P": 4,
+     "gradient_query": 0.24689299640055504,
+     "gradient_body": 0,
+     "gradient_restart": 0,
+     "search_query": 0.23513183567011764,
+     "search_body": 0
+    },
+    {
+     "task": "task_171c92cf4886a495",
+     "P": 5,
+     "gradient_query": 0.1570690700357447,
+     "gradient_body": 8,
+     "gradient_restart": 0,
+     "search_query": 0.16711158141854854,
+     "search_body": 8
+    },
+    {
+     "task": "task_9023045f5794dbba",
+     "P": 1,
+     "gradient_query": 0.14964457532213213,
+     "gradient_body": 2,
+     "gradient_restart": 0,
+     "search_query": 0.12232129213735748,
+     "search_body": 2
+    },
+    {
+     "task": "task_2de3f4ad05d1e4ad",
+     "P": 2,
+     "gradient_query": 0.1563098954107804,
+     "gradient_body": 7,
+     "gradient_restart": 0,
+     "search_query": 0.14149594447900835,
+     "search_body": 7
+    },
+    {
+     "task": "task_6952f20b1f20f752",
+     "P": 5,
+     "gradient_query": 0.10174435424524898,
+     "gradient_body": 8,
+     "gradient_restart": 0,
+     "search_query": 0.1051853737496013,
+     "search_body": 8
+    },
+    {
+     "task": "task_634a04ff02f99851",
+     "P": 4,
+     "gradient_query": 0.12654648929595036,
+     "gradient_body": 0,
+     "gradient_restart": 0,
+     "search_query": 0.1554384394710817,
+     "search_body": 0
+    },
+    {
+     "task": "task_26efa699600911e8",
+     "P": 4,
+     "gradient_query": 0.20359317631622648,
+     "gradient_body": 0,
+     "gradient_restart": 0,
+     "search_query": 0.15687205953963307,
+     "search_body": 0
+    },
+    {
+     "task": "task_65fa35a1198cc36d",
+     "P": 2,
+     "gradient_query": 0.11775228751824947,
+     "gradient_body": 7,
+     "gradient_restart": 0,
+     "search_query": 0.09876553665580422,
+     "search_body": 7
+    },
+    {
+     "task": "task_cfcb4121e6f4e95d",
+     "P": 5,
+     "gradient_query": 0.14130010217355427,
+     "gradient_body": 8,
+     "gradient_restart": 0,
+     "search_query": 0.15234679869162004,
+     "search_body": 8
+    },
+    {
+     "task": "task_a040d20cb238a423",
+     "P": 2,
+     "gradient_query": 0.13482446869625433,
+     "gradient_body": 7,
+     "gradient_restart": 0,
+     "search_query": 0.1348244688080068,
+     "search_body": 7
+    },
+    {
+     "task": "task_4128cb0a0b8671d5",
+     "P": 5,
+     "gradient_query": 0.17098657748249224,
+     "gradient_body": 8,
+     "gradient_restart": 0,
+     "search_query": 0.12911594010729208,
+     "search_body": 8
+    },
+    {
+     "task": "task_4a0c046bd2565d3e",
+     "P": 3,
+     "gradient_query": 0.15034644073121337,
+     "gradient_body": 4,
+     "gradient_restart": 0,
+     "search_query": 0.18335321324703058,
+     "search_body": 4
+    },
+    {
+     "task": "task_edd80e1e9df5473d",
+     "P": 1,
+     "gradient_query": 0.2197781431731173,
+     "gradient_body": 2,
+     "gradient_restart": 0,
+     "search_query": 0.15909216998117834,
+     "search_body": 2
+    },
+    {
+     "task": "task_b12f380e20516fd8",
+     "P": 2,
+     "gradient_query": 0.08942434782165197,
+     "gradient_body": 7,
+     "gradient_restart": 0,
+     "search_query": 0.05592017882188512,
+     "search_body": 7
+    },
+    {
+     "task": "task_445638a73934fef0",
+     "P": 0,
+     "gradient_query": 0.13698485352556306,
+     "gradient_body": 9,
+     "gradient_restart": 0,
+     "search_query": 0.1419437064504951,
+     "search_body": 9
+    },
+    {
+     "task": "task_d2d7d27e0e6fe149",
+     "P": 5,
+     "gradient_query": 0.1384570671593192,
+     "gradient_body": 8,
+     "gradient_restart": 0,
+     "search_query": 0.15086358169392944,
+     "search_body": 8
+    }
+   ]
+  },
+  {
+   "world": 45,
+   "G1_final_reproduces": true,
+   "rows": [
+    {
+     "task": "task_daa49bc593c5e60a",
+     "P": 4,
+     "gradient_query": 0.13211744582122653,
+     "gradient_body": 9,
+     "gradient_restart": 0,
+     "search_query": 0.1325503008288442,
+     "search_body": 9
+    },
+    {
+     "task": "task_7991f16e8a16c5e7",
+     "P": 5,
+     "gradient_query": 0.13202728041224418,
+     "gradient_body": 2,
+     "gradient_restart": 0,
+     "search_query": 0.1289172077432108,
+     "search_body": 2
+    },
+    {
+     "task": "task_230378783c9f896c",
+     "P": 3,
+     "gradient_query": 0.14539910906817954,
+     "gradient_body": 10,
+     "gradient_restart": 0,
+     "search_query": 0.161790448092361,
+     "search_body": 10
+    },
+    {
+     "task": "task_f10195cff7f24f14",
+     "P": 4,
+     "gradient_query": 0.11306175579254156,
+     "gradient_body": 9,
+     "gradient_restart": 0,
+     "search_query": 0.12314864427549002,
+     "search_body": 9
+    },
+    {
+     "task": "task_49c97b145def7f99",
+     "P": 3,
+     "gradient_query": 0.09735696157648119,
+     "gradient_body": 10,
+     "gradient_restart": 0,
+     "search_query": 0.08248747283794661,
+     "search_body": 10
+    },
+    {
+     "task": "task_fa745c02030bd647",
+     "P": 5,
+     "gradient_query": 0.11555063364156543,
+     "gradient_body": 2,
+     "gradient_restart": 0,
+     "search_query": 0.11572850719021367,
+     "search_body": 2
+    },
+    {
+     "task": "task_40152bf665741631",
+     "P": 3,
+     "gradient_query": 0.08963393222617617,
+     "gradient_body": 10,
+     "gradient_restart": 2,
+     "search_query": 0.060907516606459676,
+     "search_body": 10
+    },
+    {
+     "task": "task_eecd39582343bbc6",
+     "P": 4,
+     "gradient_query": 0.11530345703244145,
+     "gradient_body": 9,
+     "gradient_restart": 0,
+     "search_query": 0.08586072058592278,
+     "search_body": 9
+    },
+    {
+     "task": "task_47347dda8a30f99d",
+     "P": 0,
+     "gradient_query": 0.11578623929570171,
+     "gradient_body": 3,
+     "gradient_restart": 0,
+     "search_query": 0.12647895360138536,
+     "search_body": 3
+    },
+    {
+     "task": "task_e2f5748760f6c325",
+     "P": 2,
+     "gradient_query": 0.17101414228546485,
+     "gradient_body": 6,
+     "gradient_restart": 0,
+     "search_query": 0.18328433876922035,
+     "search_body": 6
+    },
+    {
+     "task": "task_da247a3b77f4f385",
+     "P": 4,
+     "gradient_query": 0.0864127357772884,
+     "gradient_body": 9,
+     "gradient_restart": 0,
+     "search_query": 0.08789950706006315,
+     "search_body": 9
+    },
+    {
+     "task": "task_d58d2e609c36bab6",
+     "P": 1,
+     "gradient_query": 0.0883495763117898,
+     "gradient_body": 4,
+     "gradient_restart": 0,
+     "search_query": 0.09431291134526326,
+     "search_body": 4
+    },
+    {
+     "task": "task_c6438e93f5f865e0",
+     "P": 1,
+     "gradient_query": 0.15296448892291487,
+     "gradient_body": 4,
+     "gradient_restart": 1,
+     "search_query": 0.1262896054675232,
+     "search_body": 4
+    },
+    {
+     "task": "task_c9ead3bd552d01e7",
+     "P": 0,
+     "gradient_query": 0.12531235173461377,
+     "gradient_body": 3,
+     "gradient_restart": 0,
+     "search_query": 0.13859076992742653,
+     "search_body": 3
+    },
+    {
+     "task": "task_7d8869c7da4f62a2",
+     "P": 5,
+     "gradient_query": 0.1685434723028541,
+     "gradient_body": 2,
+     "gradient_restart": 0,
+     "search_query": 0.13426149716928457,
+     "search_body": 2
+    },
+    {
+     "task": "task_e9193856e14df047",
+     "P": 1,
+     "gradient_query": 0.11745151368870817,
+     "gradient_body": 4,
+     "gradient_restart": 0,
+     "search_query": 0.09951147062666398,
+     "search_body": 4
+    }
+   ]
+  },
+  {
+   "world": 46,
+   "G1_final_reproduces": true,
+   "rows": [
+    {
+     "task": "task_1812de687822ae90",
+     "P": 3,
+     "gradient_query": 0.10449926248833218,
+     "gradient_body": 11,
+     "gradient_restart": 0,
+     "search_query": 0.09063817745871539,
+     "search_body": 11
+    },
+    {
+     "task": "task_699bc1cfefec86ce",
+     "P": 1,
+     "gradient_query": 0.1562413446354096,
+     "gradient_body": 8,
+     "gradient_restart": 0,
+     "search_query": 0.12033558781002074,
+     "search_body": 8
+    },
+    {
+     "task": "task_f5381408f51795e4",
+     "P": 3,
+     "gradient_query": 0.11317394487865061,
+     "gradient_body": 11,
+     "gradient_restart": 0,
+     "search_query": 0.11053718341568551,
+     "search_body": 11
+    },
+    {
+     "task": "task_e203ce5e781425fa",
+     "P": 3,
+     "gradient_query": 0.15525874553877608,
+     "gradient_body": 11,
+     "gradient_restart": 0,
+     "search_query": 0.16969276673527475,
+     "search_body": 11
+    },
+    {
+     "task": "task_fee6f61b07c4d1c8",
+     "P": 1,
+     "gradient_query": 0.14621436479460548,
+     "gradient_body": 8,
+     "gradient_restart": 0,
+     "search_query": 0.15337186999500318,
+     "search_body": 8
+    },
+    {
+     "task": "task_77d974fa7a255f0b",
+     "P": 4,
+     "gradient_query": 0.16065582656512328,
+     "gradient_body": 9,
+     "gradient_restart": 0,
+     "search_query": 0.14091855774085954,
+     "search_body": 9
+    },
+    {
+     "task": "task_ec343e3dfa59150f",
+     "P": 1,
+     "gradient_query": 0.07840038119370162,
+     "gradient_body": 8,
+     "gradient_restart": 0,
+     "search_query": 0.0834998525956072,
+     "search_body": 8
+    },
+    {
+     "task": "task_85b28448a686f1e2",
+     "P": 1,
+     "gradient_query": 0.09555923235016006,
+     "gradient_body": 8,
+     "gradient_restart": 0,
+     "search_query": 0.05721268725322558,
+     "search_body": 8
+    },
+    {
+     "task": "task_abb7a6fabf3515fe",
+     "P": 1,
+     "gradient_query": 0.14939769040772927,
+     "gradient_body": 8,
+     "gradient_restart": 0,
+     "search_query": 0.14425394005617725,
+     "search_body": 8
+    },
+    {
+     "task": "task_31adc9ea012533a1",
+     "P": 2,
+     "gradient_query": 0.14883563962854568,
+     "gradient_body": 4,
+     "gradient_restart": 0,
+     "search_query": 0.14753593253156855,
+     "search_body": 4
+    },
+    {
+     "task": "task_2374c02b272fc48d",
+     "P": 2,
+     "gradient_query": 0.11521451049718004,
+     "gradient_body": 4,
+     "gradient_restart": 0,
+     "search_query": 0.12894891825651347,
+     "search_body": 4
+    },
+    {
+     "task": "task_29e48bad233436df",
+     "P": 4,
+     "gradient_query": 0.08802958258041732,
+     "gradient_body": 9,
+     "gradient_restart": 0,
+     "search_query": 0.09632943689255072,
+     "search_body": 9
+    },
+    {
+     "task": "task_e84820d4d81c5794",
+     "P": 0,
+     "gradient_query": 0.12840689953187845,
+     "gradient_body": 3,
+     "gradient_restart": 0,
+     "search_query": 0.1273685964531745,
+     "search_body": 3
+    },
+    {
+     "task": "task_3b2294403ecd49cb",
+     "P": 2,
+     "gradient_query": 0.11224191121829963,
+     "gradient_body": 4,
+     "gradient_restart": 0,
+     "search_query": 0.10659497737897768,
+     "search_body": 4
+    },
+    {
+     "task": "task_098c373fea0ef2aa",
+     "P": 0,
+     "gradient_query": 0.1289003638896128,
+     "gradient_body": 3,
+     "gradient_restart": 0,
+     "search_query": 0.12837338697213846,
+     "search_body": 3
+    },
+    {
+     "task": "task_e146b484c701e389",
+     "P": 1,
+     "gradient_query": 0.05479276794644464,
+     "gradient_body": 8,
+     "gradient_restart": 0,
+     "search_query": 0.06291407668068466,
+     "search_body": 8
+    }
+   ]
+  }
+ ],
+ "finished_utc": "2026-10-10T13:45:06.125199+00:00"
+}

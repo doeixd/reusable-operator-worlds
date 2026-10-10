@@ -1,0 +1,7 @@
+per-cell clause probability 0.5: P(>= 8 of 9) = 0.0195
+per-cell clause probability 0.7: P(>= 8 of 9) = 0.1960
+per-cell clause probability 0.9: P(>= 8 of 9) = 0.7748
+per-cell clause probability 0.95: P(>= 8 of 9) = 0.9288
+per-cell formation probability 0.98: P(>= 7 of 9) = 0.9994
+per-cell formation probability 0.85: P(>= 7 of 9) = 0.8591
+per-cell formation probability 0.5: P(>= 7 of 9) = 0.0898

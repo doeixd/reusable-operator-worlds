@@ -8844,3 +8844,17 @@ tasks (length 1-3) no loop beats the straight route (0/24). Body and loop form a
 identifiable from support on a formed vocabulary, so an offline B2 rung would be
 near-guaranteed (an implementation check). It is skipped; the next rung is
 B2-online (loop tasks in the formation stream, halting learned by wake).
+
+
+# B2 TIER 0 GRADIENT CHECK (2026-10-10, descriptive): gradient on the soft stopping mixture learns a loop as well as search on a formed vocabulary
+
+`row.experiments.census_b2_gradient_loop`, `reports/b2_gradient_loop_census.json`.
+On the exactly rebuilt final B1-online libraries (G1 3/3), 48 loop tasks from
+`loop_stream` (B2-online's construction, 128 support): `LoopLearner`'s training
+objective (expected stopping state), library frozen, body code and halting from
+wake's zero init, Adam lr 0.05, 600 full-batch steps, 4 restarts chosen on support.
+Query median **0.130** (p10-p90 0.089-0.169) against **0.129** (0.083-0.163) for the
+support search; same body slot 48/48; within 1.5x of search 46/48; first restart
+kept 46/48; none below 0.05 (128 examples). Wake's objective can learn a loop from
+zero-init halting when the vocabulary is formed; whether it does so ONLINE, while the
+vocabulary forms, is B2-online's question.
