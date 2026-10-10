@@ -1,0 +1,6 @@
+2026-10-10T13:45:56.954613+00:00 START
+2026-10-10T13:49:20.748271+00:00 dry leg stop_after=1 exit=3 orphans_killed=3
+2026-10-10T13:56:01.173431+00:00 dry leg stop_after=None exit=0 orphans_killed=0
+2026-10-10T13:56:01.218128+00:00 dry run + restart PASSED
+2026-10-10T13:56:03.595231+00:00 LAUNCH run
+2026-10-10T17:25:36.036604+00:00 DONE report reports\b2_online.json

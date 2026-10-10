@@ -196,3 +196,9 @@ one predicate to successive states, which no single linear decision on the input
 expresses. Body and loop form are identifiable from support (12/12; 0/24 false loops), so an
 offline B2 rung is skipped as near-guaranteed. **Next: B2-online.**
 
+**B2-online (2026-10-10): `FORMATION_BROKEN`, 4 of 9 formed.** Wake learns
+state-dependent halting online (n_wake 9/9), but the end-of-stream loop re-fit +
+sleep degrades the vocabulary (0.065 against 0.013-0.016 in the controls) and
+leaves loops at 0.33. **Next: Tier 0 localization on the saved wake models**
+(re-fit, sleep's loop objective, or shared-library interference), before any
+B2-hard or B2-online v2.

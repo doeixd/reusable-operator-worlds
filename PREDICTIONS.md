@@ -11093,3 +11093,49 @@ support search; same body slot 48/48; within 1.5x of search 46/48; first restart
 kept 46/48; none below 0.05 (128 examples). Wake's objective can learn a loop from
 zero-init halting when the vocabulary is formed; whether it does so ONLINE, while the
 vocabulary forms, is B2-online's question.
+
+
+# B2-ONLINE (Tier 1, worlds 44-46, 2026-10-10): `FORMATION_BROKEN` (k_formation 4 of 9); wake learns state-dependent halting (n_wake 9/9), but the end-of-stream loop re-fit + sleep degrades the vocabulary
+
+Plan `B2_ONLINE_PLAN.md` (frozen 3eb82d6, protected 8d721dc); runner
+`row.experiments.b2_online`; report `reports/b2_online.json`; logs
+`reports/b2_online_20261010/`. 27/27 cells, exit 0. Independent scorer
+`row.experiments.score_b2_online` agrees (k_formation 4, n_wake 9, n_terminal 0,
+n_control 9); `check_prereg` and `check_invalid` pass. EXPLORATORY: 9 cells on 3
+reused development worlds; a sizing, not a verdict.
+
+| arm | terminal canonical median (passes < 0.05) | terminal loop median | wake loop median | wake canonical median |
+|---|---|---|---|---|
+| `LOOP` | 0.065 (4/9) | 0.327 | 0.515 | 0.084 |
+| `CONSTCOUNT` | 0.016 (9/9) | 1.079 | 1.444 | 0.110 |
+| `REFUSAL` | 0.013 (9/9) | 0.901 | 1.680 | 0.235 |
+
+Registered label: `FORMATION_BROKEN` (`k_formation <= 6`). Per cell, `LOOP`'s
+terminal canonical medians are 0.036-0.095; no loop task reaches 0.05 in any arm.
+
+**The clause stated before data to carry the question passed:** `n_wake` 9/9. Wake's
+loop median under `LOOP` is 0.34-0.39x `CONSTCOUNT`'s in every paired cell, the
+halting norms are non-zero (median ~3.2), and count accuracy after wake is
+0.73-0.77 (terminal 0.85). Wake learns state-dependent halting online. Because the
+formation guard failed first, the registered label does not report it.
+
+**Where the damage enters (post hoc, from the recorded wake and terminal medians).**
+`LOOP`'s vocabulary is not worse after wake: its wake canonical median (0.084) is
+lower than both controls' (0.110, 0.235), and three cells sit at 0.020-0.026 after
+wake. The end-of-stream steps (re-route, loop re-fit, sleep) then take every
+control cell to 0.008-0.021 (including wake collapses at 1.4-1.8), but leave
+`LOOP` at 0.036-0.095 and make it WORSE in several cells (w44 s1 0.020 -> 0.078,
+w46 s1 0.026 -> 0.065, w44 s0 0.026 -> 0.046). The loop re-fit installed on 48/48
+tasks in every `LOOP` cell (`CONSTCOUNT` 33-42). The terminal loop median (0.28-0.37)
+is also well above the census's 0.126 on final B1-online libraries. Working
+hypothesis, NOT tested: sleep on the loop tasks' soft stopping mixture, with
+re-fitted halting, sends compounding multi-application gradients through the body
+slots and pulls the shared library away from the straight-line tasks. Re-fit and
+sleep are confounded here.
+
+**Next (Claude):** a Tier 0 localization on the saved wake models
+(`artifacts/b2_online/work/LOOP_*/lifetime/model.pt`), behind a reload gate that
+reproduces the recorded terminals: rebuild the end-of-stream steps with (a) the
+loop re-fit skipped, (b) halting frozen during sleep, (c) loop tasks excluded from
+sleep, and score canonical and loop medians. It decides whether the failure is in
+the re-fit, in sleep's loop objective, or in sleep sharing the library with loops.
