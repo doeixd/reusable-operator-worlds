@@ -1,0 +1,1 @@
+44 body found 12 /12; loop chosen on loop tasks 12 /12; loop beats straight on straight tasks 0 /24

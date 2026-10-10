@@ -193,6 +193,6 @@ loop (apply P while w.z > 0, at most 6 times) on final formed vocabularies: lear
 loop 0.126 / 0.071 at 128 / 512 support, input-gated unrolled impostor 0.49 / 0.26,
 one route 1.02; loop wins 108/108; with the true predicate 0.041. A loop applies
 one predicate to successive states, which no single linear decision on the input
-expresses. **Next: B2 offline** (find the body slot and the loop form from
-support, no teacher map), **then B2-online.**
+expresses. Body and loop form are identifiable from support (12/12; 0/24 false loops), so an
+offline B2 rung is skipped as near-guaranteed. **Next: B2-online.**
 

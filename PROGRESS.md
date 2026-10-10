@@ -8835,3 +8835,12 @@ distribution 0.50 / 0.25 / 0.12 / 0.06 / 0.03 / 0.015 / 0.024 for k = 0..6.
 - Scope: one body operator, linear halting on the state, K = 6, counts mostly
   small (half the inputs do zero iterations), structure (body slot, loop form)
   given; worlds opened by B1-online.
+
+**Addendum (same day, Tier 0 scratch check, `reports/b2_body_check/`, world 44,
+final library rebuilt under gate G1):** choosing the loop body by support error
+over all 12 slots recovers the function-matched slot on 12/12 loop tasks; a loop
+beats the best straight route on 12/12 loop tasks; on 24 random straight-line
+tasks (length 1-3) no loop beats the straight route (0/24). Body and loop form are
+identifiable from support on a formed vocabulary, so an offline B2 rung would be
+near-guaranteed (an implementation check). It is skipped; the next rung is
+B2-online (loop tasks in the formation stream, halting learned by wake).
