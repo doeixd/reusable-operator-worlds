@@ -8786,3 +8786,52 @@ input, e.g. on a feature the prefix creates) or the GENERATOR (stronger operator
 nonlinearity, which breaks comparability with every existing artifact). Also
 noted: even with the decision given its best gate, 512 examples leave depth-3
 branch tasks at ~0.09, against B0b's 0.038-0.047 for depth-2 input branches.
+
+
+# B2 TIER 0 NECESSITY CENSUS (2026-10-10, descriptive): data-dependent iteration IS necessary and has opportunity - a learned loop beats an input-gated unrolled impostor 108/108; the loop form's ceiling is below 0.05
+
+Written before any B2 plan. `row.experiments.census_b2_iteration_necessity`.
+Task: `z = x; repeat at most K = 6 times: stop if w.z <= 0, else z = P(z)`, P one
+teacher primitive, w a random unit hyperplane; 108 tasks (36 per world, draws
+[5680, w, i]); query 1,024. Libraries: B1-online's GATED libraries, worlds 44-46,
+stream 0, in two versions:
+- `reports/b2_iteration_necessity_census.json` (FINAL, the reading): rebuilt from
+  the saved wake terminal with B1-online's exact end-of-stream steps (re-route,
+  branch re-fit, sleep); gate G1 reproduces the committed GATED canonical AND
+  branch per-task scores exactly in 3/3 worlds. Slot-to-primitive match NMSE
+  <= 0.0076.
+- `reports/b2_iteration_necessity_census_wake.json` (wake terminal as saved, run
+  first): same ordering, higher floor (loop given the true predicate 0.12; one
+  world's matched slot at 0.22).
+
+Teacher primitive -> learned slot by functional matching (the teacher builds the
+oracle structure only, as in B0). Counts are never shown to the learned arms:
+each support example's count is inferred as argmin_L ||[s]^L x - y|| (accuracy
+1.000 median).
+
+| arm (FINAL libraries), query NMSE median (p10-p90) | 128 support | 512 support |
+|---|---|---|
+| REFUSAL: best single route (depth <= 3 exhaustive, or [s]^L) | 1.024 | 1.024 |
+| KWAY_INPUT impostor: unrolled [s]^L, L picked by a linear classifier on x | 0.494 (0.391-0.609) | 0.262 (0.201-0.311) |
+| LOOP_LEARNED: the loop, linear halting predicate learned on learned states | **0.126** (0.088-0.170) | **0.071** (0.046-0.104) |
+| LOOP_ORACLE: the loop with the true w on learned states | 0.041 (0.027-0.076) | |
+
+LOOP_LEARNED below KWAY_INPUT: **108/108** at both sizes; below 0.05: 0 and 15
+of 108 (impostor 0 and 0); LOOP_ORACLE below 0.05: 74/108. True count
+distribution 0.50 / 0.25 / 0.12 / 0.06 / 0.03 / 0.015 / 0.024 for k = 0..6.
+
+**Reading.**
+- **Necessity holds** (unlike B1-mid): one route cannot fit (1.02), and deciding
+  the count from the input with a linear rule is 3.7-3.9x worse than the loop at
+  both sizes. A while-loop applies ONE predicate to each successive state;
+  representing it as a decision on the input needs the intersection of K
+  near-hyperplanes, which one linear classifier over counts does not express.
+- **Opportunity holds:** the loop form with the right predicate reaches 0.041 on
+  the learned vocabulary, inside C0's clean range at K = 6.
+- **The gap is the halting predicate's sample efficiency** (0.126 at 128, 0.071 at
+  512, against 0.041), the same shape as the branch decision boundary in B1.
+- **Library maturity matters:** on wake terminals every loop arm was worse (oracle
+  0.12); post-sleep vocabularies are the ones to build on.
+- Scope: one body operator, linear halting on the state, K = 6, counts mostly
+  small (half the inputs do zero iterations), structure (body slot, loop form)
+  given; worlds opened by B1-online.

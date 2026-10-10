@@ -188,3 +188,11 @@ input, and an input gate ties a mid-state gate. Intermediate-state decisions nee
 predicate the input does not linearly expose, or a more nonlinear generator.
 **Next: B2 (iteration) necessity census.**
 
+**B2 Tier 0 (2026-10-10): NECESSITY and OPPORTUNITY hold.** A data-dependent
+loop (apply P while w.z > 0, at most 6 times) on final formed vocabularies: learned
+loop 0.126 / 0.071 at 128 / 512 support, input-gated unrolled impostor 0.49 / 0.26,
+one route 1.02; loop wins 108/108; with the true predicate 0.041. A loop applies
+one predicate to successive states, which no single linear decision on the input
+expresses. **Next: B2 offline** (find the body slot and the loop form from
+support, no teacher map), **then B2-online.**
+

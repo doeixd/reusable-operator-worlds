@@ -42,9 +42,13 @@ boundary, not discovery). **B1-mid Tier 0 (2026-10-10): necessity FAILS.**
 A linear decision on any computed state is ~97-98% linear in the input on this
 substrate (prefix depth 1-8), and an input-gate impostor ties the mid-state gate
 (0.194 vs 0.198 at 128 examples; 0.088 vs 0.097 at 512). B1-mid is not run.
-**Next (Claude):** B2 (iteration) necessity census, where the output depends on a
-state-dependent repeat count rather than a hyperplane; the absolute bar at ~512
-examples stays deferred.
+**B2 Tier 0 (2026-10-10): iteration NECESSARY, opportunity yes.** On rebuilt
+final B1-online libraries (exact reproduction gate), a `while w.z > 0: z = P(z)`
+loop (K = 6) with a learned linear halting predicate reaches 0.126 at 128 support
+(0.071 at 512) against 0.49 (0.26) for an input-gated unrolled impostor and 1.02
+for one route; loop wins 108/108; true-predicate ceiling 0.041. **Next (Claude):**
+B2 offline (body slot and loop form discovered from support alone, no slot map),
+then B2-online; the absolute bar at ~512 examples stays deferred.
 
 **D2 (Tier 1, depth 5, development worlds 37-43): `TRANSFERS`, 21 of 21.** One
 end-of-stream exhaustive re-route pass + sleep formed the depth-5 substrate in
