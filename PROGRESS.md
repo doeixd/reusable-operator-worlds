@@ -8904,3 +8904,46 @@ reproduces the recorded terminals: rebuild the end-of-stream steps with (a) the
 loop re-fit skipped, (b) halting frozen during sleep, (c) loop tasks excluded from
 sleep, and score canonical and loop medians. It decides whether the failure is in
 the re-fit, in sleep's loop objective, or in sleep sharing the library with loops.
+
+
+# B2-ONLINE LOCALIZATION (Tier 0, descriptive, 2026-10-10): the vocabulary is broken by GRADIENT THROUGH THE STATE-READING HALTING PREDICATE into the shared library during sleep; detaching it restores formation 9/9
+
+`row.experiments.census_b2o_localize` (committed 54057ff before it ran, readings
+written in its docstring first); `reports/b2o_localize_census.json`; log
+`reports/b2o_localize_20261010/`. On the 9 saved B2-online LOOP wake models, gate
+G0 (reload reproduces the recorded wake medians) 9/9 and G1 (FULL reproduces the
+recorded terminal per-task values exactly) 9/9. Re-route once, then five
+end-of-stream constructions:
+
+| variant | canonical < 0.05 | canonical median (range) | loop median (range) |
+|---|---|---|---|
+| FULL (B2-online) | 4/9 | 0.065 (0.036-0.095) | 0.327 (0.28-0.37) |
+| NO_REFIT | 8/9 | 0.037 (0.023-0.087) | 0.420 (0.38-0.45) |
+| FROZEN_HALT (halting out of the optimizer) | 4/9 | 0.076 (0.035-0.115) | 0.331 (0.28-0.37) |
+| **DETACH_HALT** (halting reads the state detached in sleep) | **9/9** | **0.014 (0.005-0.018)** | **0.264 (0.23-0.28)** |
+| NO_LOOP_SLEEP (loop tasks out of sleep) | 9/9 | 0.012 (0.008-0.017) | 0.260 (0.25-0.30) |
+
+Before sleep (after re-route and re-fit): canonical 0.072, loop 0.300.
+
+**Reading (the first of the four registered readings).** DETACH_HALT restores
+formation in every cell, to the controls' level (B2-online CONSTCOUNT 0.016,
+REFUSAL 0.013), while FROZEN_HALT does not: what damages the library is not the
+halting parameters learning but the gradient that flows THROUGH the
+state-dependent predicate into the states and therefore the shared operators.
+That is exactly the path CONSTCOUNT lacks. Detaching also improves the loops
+(0.264 against 0.327): the path was harmful to both. NO_REFIT helps the vocabulary
+partially (the re-fit installs sharper predicates, whose sigmoid slopes make that
+gradient larger) but costs the loops (0.42).
+
+**Still open.** Loops stay above the 0.25 bar (DETACH_HALT 1-2 of 9 cells below
+0.25, none below 0.05), against 0.126 for the same construction on final B1-online
+libraries in the census. One difference is the support size: the end-of-stream
+re-fit sees the 64 retained examples per task, the census 128. NO_LOOP_SLEEP
+reaching the same loop median as DETACH_HALT says sleep's training on loop tasks
+adds nothing to the loops beyond the re-fit.
+
+**Next (Claude):** B2-online v2, a new plan: `LoopLearner` with the halting
+predicate reading the detached state (wake and sleep), otherwise unchanged, on
+fresh development worlds if any remain unallocated (band 30-49 is spent; needs a
+band decision) or the same worlds as an explicitly reused sizing. Size the loop
+bar first against the 64-example support limit (census rerun at 64 support).

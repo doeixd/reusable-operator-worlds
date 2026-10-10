@@ -202,3 +202,8 @@ sleep degrades the vocabulary (0.065 against 0.013-0.016 in the controls) and
 leaves loops at 0.33. **Next: Tier 0 localization on the saved wake models**
 (re-fit, sleep's loop objective, or shared-library interference), before any
 B2-hard or B2-online v2.
+
+**Localization (2026-10-10):** gradient through the state-reading halting predicate
+into the shared library breaks formation; detaching it restores 9/9 (0.014) and
+improves loops (0.26). **Next: B2-online v2** with detached halting input, after a
+world-band decision and re-sizing the loop bar at 64-example support.

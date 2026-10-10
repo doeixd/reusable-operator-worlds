@@ -2380,3 +2380,12 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   from the cheaper state (here the input) with the same predicate family; if it is
   near-perfect, the rung has no necessity whatever the learner does.
 
+- A GATE THAT READS A SHARED STATE SENDS GRADIENT INTO WHAT PRODUCED THAT STATE
+  (B2-online localization, 2026-10-10; `reports/b2o_localize_census.json`). LoopLearner's
+  halting predicate `sigmoid(h.z + b)` reads the state the shared operators compute, so its
+  gradient pushes the vocabulary to move states across each loop task's hyperplane. In
+  sleep this broke formation (4/9 cells, canonical 0.065 against 0.013-0.016 in controls
+  without state-reading halting); evaluating the predicate on the DETACHED state restored
+  9/9 (0.014) and also improved the loops, while freezing the predicate's parameters did
+  nothing. When adding control (a gate, a halt, a branch decision) that reads a computed
+  state, decide explicitly whether its gradient may reach the producer, and test both.

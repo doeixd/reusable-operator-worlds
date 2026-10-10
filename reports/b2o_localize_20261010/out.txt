@@ -1,0 +1,72 @@
+{
+ "cells": 9,
+ "G0": true,
+ "G1": true,
+ "pre_sleep_canonical_median": 0.07199073403981313,
+ "pre_sleep_loop_median": 0.30034102089342696,
+ "FULL": {
+  "canonical_passes": 4,
+  "canonical_median": 0.06483508563870322,
+  "canonical_range": [
+   0.035690020663906946,
+   0.09466163327332582
+  ],
+  "loop_median": 0.32733660969605705,
+  "loop_range": [
+   0.2847108801660892,
+   0.3693003983140096
+  ]
+ },
+ "NO_REFIT": {
+  "canonical_passes": 8,
+  "canonical_median": 0.037163119571335654,
+  "canonical_range": [
+   0.022927044813466926,
+   0.08654475523800675
+  ],
+  "loop_median": 0.4200804257367533,
+  "loop_range": [
+   0.38198329139745935,
+   0.4478653389290399
+  ]
+ },
+ "FROZEN_HALT": {
+  "canonical_passes": 4,
+  "canonical_median": 0.07564127983717761,
+  "canonical_range": [
+   0.034544451727128625,
+   0.11530238241455776
+  ],
+  "loop_median": 0.33057601694932126,
+  "loop_range": [
+   0.2791536983065576,
+   0.3709628159295742
+  ]
+ },
+ "DETACH_HALT": {
+  "canonical_passes": 9,
+  "canonical_median": 0.014201109478281196,
+  "canonical_range": [
+   0.005244240275251218,
+   0.01831518362962802
+  ],
+  "loop_median": 0.26447250430330826,
+  "loop_range": [
+   0.23219548877379886,
+   0.2834725217565167
+  ]
+ },
+ "NO_LOOP_SLEEP": {
+  "canonical_passes": 9,
+  "canonical_median": 0.011791886315799516,
+  "canonical_range": [
+   0.008454391751604413,
+   0.01666244339880412
+  ],
+  "loop_median": 0.26021904174599214,
+  "loop_range": [
+   0.24765311815007338,
+   0.30360129089125154
+  ]
+ }
+}
