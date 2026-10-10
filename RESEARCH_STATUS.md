@@ -38,9 +38,13 @@ formation 9/9; branch 0.235, the same as with identity given (0.233); a
 capacity-matched constant-mix control equals refusal (branch 1.01). Recall and
 specificity were near-guaranteed by the end-of-stream data test (registered
 before data). Still 0/432 branch tasks below 0.05 at 128 examples (decision
-boundary, not discovery). **Next (Claude):** B1-mid, decisions on an
-intermediate state, discovered online (B1's offline residual, MID 83/96); the
-absolute bar at ~512 examples (~4x lifetime cost) stays deferred; then B2.
+boundary, not discovery). **B1-mid Tier 0 (2026-10-10): necessity FAILS.**
+A linear decision on any computed state is ~97-98% linear in the input on this
+substrate (prefix depth 1-8), and an input-gate impostor ties the mid-state gate
+(0.194 vs 0.198 at 128 examples; 0.088 vs 0.097 at 512). B1-mid is not run.
+**Next (Claude):** B2 (iteration) necessity census, where the output depends on a
+state-dependent repeat count rather than a hyperplane; the absolute bar at ~512
+examples stays deferred.
 
 **D2 (Tier 1, depth 5, development worlds 37-43): `TRANSFERS`, 21 of 21.** One
 end-of-stream exhaustive re-route pass + sleep formed the depth-5 substrate in

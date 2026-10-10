@@ -8752,3 +8752,37 @@ usage cost does not zero the straight-task gates; it ranks them.
 **Not shown:** decisions on intermediate states or nonlinear predicates (input,
 linear only); adequate sample size; fresh worlds; sensitivity to `GATE_DECAY`
 and `BRANCH_RATIO` (single registered values).
+
+
+# B1-MID TIER 0 NECESSITY CENSUS (2026-10-10, descriptive): intermediate-state decisions are not necessary on this substrate - a linear decision on any computed state is ~97-98% linear in the input, and an input gate ties the mid-state gate
+
+Written before any B1-mid plan, as the necessity gate for the ladder's next rung
+(decisions on an intermediate state). `row.experiments.census_b1mid_necessity`,
+`reports/b1mid_necessity_census.json`. On B1-online's saved GATED wake
+vocabularies (worlds 44-46, stream 0; reload gate G0 reproduces the committed wake
+medians 3/3), 72 new tasks `y = IF(w.C(x) > 0, A(C(x)), B(C(x)))`, C one teacher
+primitive, A != B length-2 programs; B1g fits (4 restarts, chosen on support),
+query 512.
+
+| support | SINGLE route | INPUT gate (impostor) | MID gate (state after step 1) | MID below INPUT | below 0.05 (INPUT / MID) |
+|---|---|---|---|---|---|
+| 128 | 1.051 | **0.194** | 0.198 | 27 / 72 | 0 / 0 |
+| 512 | 1.049 | **0.088** | 0.097 | 14 / 72 | 1 / 1 |
+
+The true intermediate-state label is linearly separable on the RAW INPUT with
+median accuracy 0.972 (min 0.949, query fit). A teacher-only follow-up (40 tasks
+per world per prefix length, 4,096 inputs) found the same at every prefix length:
+median 0.986 at one step, 0.982-0.983 at eight steps, minimum 0.973. Each operator
+is a near-identity residual (alpha ~0.2-0.35) followed by a rotation, so any
+computed state is close to an orthogonal map of the input, and a hyperplane on it
+is close to a hyperplane on the input.
+
+**Consequence (necessity failure, generator-wide):** on this substrate a decision
+on an intermediate state with a linear predicate cannot be distinguished from a
+decision on the input, so a B1-mid rung would be uninterpretable whatever the
+learner does. B1-mid as planned is not run. Making intermediate decisions
+necessary requires changing the TASK (a predicate that is not linear in the
+input, e.g. on a feature the prefix creates) or the GENERATOR (stronger operator
+nonlinearity, which breaks comparability with every existing artifact). Also
+noted: even with the decision given its best gate, 512 examples leave depth-3
+branch tasks at ~0.09, against B0b's 0.038-0.047 for depth-2 input branches.

@@ -182,3 +182,9 @@ specificity 1.000), as its pre-launch census predicted. Not yet: the absolute ba
 fresh worlds. **Next: B1-mid** (decision on the state after a shared prefix
 step, discovered online), then the absolute bar at adequate sample size, then B2.
 
+**B1-mid Tier 0 (2026-10-10): necessity FAILS, rung not run.** On this substrate a
+hyperplane on any computed state (prefix depth 1-8) is ~97-98% a hyperplane on the
+input, and an input gate ties a mid-state gate. Intermediate-state decisions need a
+predicate the input does not linearly expose, or a more nonlinear generator.
+**Next: B2 (iteration) necessity census.**
+

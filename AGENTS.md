@@ -2370,3 +2370,13 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   directions; staleness is many tasks agreeing on the same wrong slot, which
   consolidation reinforces. Measure the STRUCTURE of an error, not only its
   rate: a Hamming distance or an exact-route fraction cannot tell these apart.
+
+- A NEAR-LINEAR SUBSTRATE CANNOT MAKE "WHERE A DECISION HAPPENS" NECESSARY
+  (B1-mid Tier 0, 2026-10-10). Each rotated-residual operator is a near-identity
+  residual plus a rotation, so any computed state is close to an orthogonal map of
+  the input: a hyperplane on the state after 1-8 steps is 97-98% a hyperplane on
+  the input, and an input gate tied a mid-state gate. Before registering a rung
+  about WHICH state a decision reads, measure how well the decision is predicted
+  from the cheaper state (here the input) with the same predicate family; if it is
+  near-perfect, the rung has no necessity whatever the learner does.
+

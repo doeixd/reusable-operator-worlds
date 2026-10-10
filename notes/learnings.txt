@@ -5316,3 +5316,4 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
   directions; staleness is many tasks agreeing on the same wrong slot, which
   consolidation reinforces. Measure the STRUCTURE of an error, not only its
   rate: a Hamming distance or an exact-route fraction cannot tell these apart.
+- 2026-10-10 B1-mid Tier 0: on the rotated substrate a linear decision on any computed state (prefix 1-8) is 97-98% linear in the input; an input gate ties a mid-state gate, so intermediate-state decisions are not necessary. Measure the impostor state's predictive power before a which-state rung.
