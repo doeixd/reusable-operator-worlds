@@ -214,3 +214,10 @@ where v1's construction fails again (2/9), and wake still learns state-dependent
 halting (0.54 vs 1.47). Loops reach the 64-example re-fit's level (0.255), not
 the true predicate's (0.041). **Next: B2-hard** (loop discovery without identity),
 then longer bodies.
+
+**B2-hard (2026-10-11): `FORMATION_BROKEN`, 6 of 9 formed** (band 5 worlds 53-55).
+Discovery itself would have passed (wake AUC 0.983, recall 0.905, specificity
+1.000), but iteration machinery on every depth-1 candidate breaks the wake
+vocabulary with or without state access (ALLCOUNT also 6/9; GIVEN 9/9). **Next:**
+localize the wake damage on saved models, then start candidates at the count-1
+form; longer bodies wait.

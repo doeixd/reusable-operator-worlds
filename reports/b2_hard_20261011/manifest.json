@@ -1,0 +1,50 @@
+{
+ "protocol": {
+  "id": "b2-hard-v1",
+  "git_commit": "ebb658c",
+  "plan": "B2_HARD_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "root": "artifacts/b2_hard",
+  "worlds": [
+   53,
+   54,
+   55
+  ],
+  "streams": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "ALLLOOP",
+   "ALLCOUNT",
+   "GIVEN"
+  ],
+  "n_loop": 48,
+  "n_candidates": 108,
+  "k": 6,
+  "memory": 64,
+  "sleep_updates": 8192,
+  "halt_decay": 0.1,
+  "loop_ratio": 0.5,
+  "threshold": 0.05,
+  "loop_bar": 0.38,
+  "input_sha256": {
+   "B2_HARD_PLAN.md": "79f1e453ed011144c92181327ee81ed86016f82d883fc4612e01664e89c08a08",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "f6d893a71589e8e5bc349e580b5eeed63fd9be29414e7865c530061106728c51",
+  "b2_online_v1_sha256": "8c2b219b715c6eae5b1293abae6c05229d01cedb02cd61854d9836dbd8746eb0",
+  "loop_stream_sha256": "1914003049c9def33296422f578738b1d5b3c00b8eaf2c31017031cde31fefc8",
+  "loop_learner_sha256": "3701fceb6fad3e5ee3a796f5a2ffe953e62fc2aeb2b738d297fc1bd06f7e28b9",
+  "b2_census_sha256": "d49fdf909cdc2643731411baa0ba99aee5b062fae7e3ae9261f176128460dbb2",
+  "b1_online_sha256": "ed8233717676f632d0717872223d720feae9f894a5658780cff3ad83184c1cd0",
+  "deep_reroute_sha256": "6528c8683cb33a5b90d51d6f8e42c6234142a206a4f567c7d307e487e5eea3e6",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "lifetime_sha256": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+  "scale": 1
+ },
+ "protocol_sha256": "389f60337ce15948165dff4e893327e39130428114c5d90e1d685d200403f994"
+}

@@ -9033,3 +9033,59 @@ plan's question is carried by formation and by wake, not by this test. And a lin
 depth-1 task without identity would cost a straight task ~100x unless the halting rule can also count. A B2-hard
 learner therefore needs halting that nests the count form: a per-step bias plus the state term. These libraries
 were formed WITH loop identity; B2-hard's own may differ (the plan keeps the test as a check, as B1-hard did).
+
+
+# B2-HARD (Tier 1, band 5 worlds 53-55, 2026-10-11): `FORMATION_BROKEN` (k_formation 6 of 9); every discovery clause would have passed
+
+`B2_HARD_PLAN.md` (frozen 1f50c1a, hash protected ebb658c), runner `row.experiments.b2_hard`, report
+`reports/b2_hard.json`, logs `reports/b2_hard_20261011/` (dry run and restart test in `dry/`). 27 cells, exit 0,
+finished 2026-10-11T23:30Z. The independent scorer `row.experiments.score_b2_hard` agrees with the runner on every
+clause; `check_prereg` and `check_invalid` pass. Exploratory: no verdict.
+
+**Registered clauses.** `k_formation` **6/9** (ALLLOOP terminal canonical median `< 0.05`), so the first matching row
+is `FORMATION_BROKEN`. The discovery clauses, reported as recorded and not as a pass: wake state-weight AUC median
+**0.983** (bar 0.9; 0.945-1.000 in every cell); recall **0.905** (391/432; bar 0.8); specificity **1.000** (540/540;
+bar 0.95); `n_control` **9/9**.
+
+**Per-cell formation (terminal canonical median; `*` = fails 0.05):**
+
+| cell | ALLLOOP | ALLCOUNT | GIVEN |
+|---|---|---|---|
+| w53 s0 | 0.0128 | 0.0102 | 0.0092 |
+| w53 s1 | 0.0123 | 0.777* | 0.0073 |
+| w53 s2 | 0.0128 | 0.0129 | 0.0139 |
+| w54 s0 | 0.0520* | 1.457* | 0.0087 |
+| w54 s1 | 0.0246 | 0.0143 | 0.0121 |
+| w54 s2 | 0.244* | 0.180* | 0.0147 |
+| w55 s0 | 0.0211 | 0.0114 | 0.0228 |
+| w55 s1 | 0.0597* | 0.0146 | 0.0309 |
+| w55 s2 | 0.0117 | 0.0128 | 0.0147 |
+| passes | 6/9 | 6/9 | 9/9 |
+
+ALLLOOP and ALLCOUNT fail in three cells each, two of them shared (w54 s0, w54 s2). After WAKE the vocabulary is
+broken in both candidate arms: wake canonical median 1.91 (ALLLOOP) and 1.87 (ALLCOUNT) against 0.046 for GIVEN;
+ALLLOOP's wake canonical is below 0.1 in only 2 of 9 cells, ALLCOUNT's in 3. The end-of-stream re-route and sleep
+then rescue 6 of 9 in each. Wake anchor medians (the 60 straight length-1 tasks): ALLLOOP 0.052, ALLCOUNT 0.025,
+GIVEN 0.011.
+
+**Reported, not registered.** Terminal loop median: ALLLOOP 0.305, GIVEN 0.259, ALLCOUNT 1.074; ALLLOOP at or
+below GIVEN in 1/9 cells; `n_terminal` (below 0.38) 9/9. Count accuracy terminal: ALLLOOP 0.844, GIVEN 0.873. Wake
+state-weight norm medians: loop tasks 1.97, straight 0.38.
+
+**Reading (per the plan's branch: compare ALLCOUNT and the wake anchor medians first).** The formation damage is
+NOT state-reading halting: ALLCOUNT, which has the same per-step-bias iteration machinery on all 108 candidates but
+no state access, breaks formation as often (6/9) and its wake vocabulary is as broken (1.87). The common factor is
+iteration machinery on the 60 anchors, which starts every candidate as a 50/50 continue mixture at every step (the
+plan's disclosed new condition; v2 and GIVEN give anchors none). Where the damage sits (anchors fit nearly as well,
+0.025-0.052, while the depth-3 vocabulary does not) is unmeasured. Discovery itself looks easy where the library
+forms: wake already concentrates state-reading on loop tasks (AUC 0.98) and the end-of-stream test keeps no loop on
+any straight task. ALLLOOP's ALLCOUNT-like formation failures also mean `n_control` 9/9 says nothing about formation.
+
+**What this does not show.** Tier 1, 9 cells on 3 development worlds; a sizing, not a verdict. The discovery
+clauses are read only descriptively because the registered rule stops at formation. The mechanism of the wake
+damage is a hypothesis.
+
+**Next (Claude):** first a Tier 0 localization on the saved wake models (`artifacts/b2_hard/work`): is the wake
+failure stale routes (re-route alone on the wake library) or the library itself? Then a candidate fix, which needs
+new lifetimes and so a new plan: start the candidates at the count-1 form (biases `+/-10`, so an anchor begins
+exactly as a straight task does in GIVEN). Longer bodies wait.

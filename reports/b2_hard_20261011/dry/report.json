@@ -1,0 +1,2325 @@
+{
+ "protocol": {
+  "id": "b2-hard-v1",
+  "git_commit": "ebb658c",
+  "plan": "B2_HARD_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "root": "artifacts/b2_hard_dry",
+  "worlds": [
+   53,
+   54,
+   55
+  ],
+  "streams": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "ALLLOOP",
+   "ALLCOUNT",
+   "GIVEN"
+  ],
+  "n_loop": 48,
+  "n_candidates": 108,
+  "k": 6,
+  "memory": 64,
+  "sleep_updates": 8192,
+  "halt_decay": 0.1,
+  "loop_ratio": 0.5,
+  "threshold": 0.05,
+  "loop_bar": 0.38,
+  "input_sha256": {
+   "B2_HARD_PLAN.md": "79f1e453ed011144c92181327ee81ed86016f82d883fc4612e01664e89c08a08",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "f6d893a71589e8e5bc349e580b5eeed63fd9be29414e7865c530061106728c51",
+  "b2_online_v1_sha256": "8c2b219b715c6eae5b1293abae6c05229d01cedb02cd61854d9836dbd8746eb0",
+  "loop_stream_sha256": "1914003049c9def33296422f578738b1d5b3c00b8eaf2c31017031cde31fefc8",
+  "loop_learner_sha256": "3701fceb6fad3e5ee3a796f5a2ffe953e62fc2aeb2b738d297fc1bd06f7e28b9",
+  "b2_census_sha256": "d49fdf909cdc2643731411baa0ba99aee5b062fae7e3ae9261f176128460dbb2",
+  "b1_online_sha256": "ed8233717676f632d0717872223d720feae9f894a5658780cff3ad83184c1cd0",
+  "deep_reroute_sha256": "6528c8683cb33a5b90d51d6f8e42c6234142a206a4f567c7d307e487e5eea3e6",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "lifetime_sha256": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+  "scale": 16
+ },
+ "protocol_sha256": "3e78a0cdf8c89c787bf685ff2a882834bc66546d04256355a7613aa164d6bb22",
+ "complete": true,
+ "cells": {
+  "GIVEN_w68_s0": {
+   "arm": "GIVEN",
+   "world": 68,
+   "stream": 0,
+   "scale": 16,
+   "stream_tasks": 236,
+   "candidates": 108,
+   "loop_task_ids": [
+    "task_06f852b2f4a59fa6",
+    "task_0e2002f43953b3ea",
+    "task_135003eaa193ecb4",
+    "task_196f40268905d4af",
+    "task_1b7e27ae85602bc8",
+    "task_1c3573591a5686fc",
+    "task_2518d6f435c63cc2",
+    "task_29c27722e5ecbccc",
+    "task_2bdd576f7616ff0b",
+    "task_2bea0ca5c62bad87",
+    "task_2e41e15c2d01870a",
+    "task_4078119dd8793620",
+    "task_4214578579775606",
+    "task_43e3f41e319547ec",
+    "task_5c358eadd3516d8b",
+    "task_6004e7a9384c1b5f",
+    "task_65fb859a602351f6",
+    "task_676127bf17ac3a9a",
+    "task_6cbf23a46c527b8b",
+    "task_706edabd81502cc2",
+    "task_7253bf8edb9252d9",
+    "task_726df96b30de3f6e",
+    "task_7883e2bf195e2b98",
+    "task_7b6388d8d8d7453f",
+    "task_7fbc1c7cfeeadc8d",
+    "task_86b33259b54c3f42",
+    "task_8b60d5b58032fcf4",
+    "task_8c2c95d323ab7b51",
+    "task_8fb5975e9993634a",
+    "task_96b5f4d0211c3d88",
+    "task_9c93fa7838809a84",
+    "task_9de5ec4711486a80",
+    "task_af53b1aed9a0cead",
+    "task_b36c95748efa701b",
+    "task_b7f16c29bfe83b06",
+    "task_b8514aa56c9162f8",
+    "task_b9b969ad5d3049a5",
+    "task_bb1c7e0b8c8babc0",
+    "task_bcfb2ae6be635d16",
+    "task_c3543a5437dc74f5",
+    "task_c6f0072b758f4043",
+    "task_c79ba8cc676afa33",
+    "task_dd7ef1ac06b1d73b",
+    "task_e6352d4ff9e41632",
+    "task_e7f62c895cb4b131",
+    "task_ead20d3269167afa",
+    "task_efd7625b517e6feb",
+    "task_ff7f5bdb37e80986"
+   ],
+   "wake_canonical_median": 1.969569420822987,
+   "wake_loop_median": 1.4445913042253413,
+   "wake_anchor_median": 1.4347647200348934,
+   "wake_halt_norm_median": 0.8349912166595459,
+   "wake_count_accuracy_median": 0.4375,
+   "routes_changed": 147,
+   "loop_refits_installed": 48,
+   "library_sha256_before_sleep": "457cd99812c7e8b1796ea4f7256447135d84b6af293b13482246d9376232f241",
+   "library_sha256": "413c4a95d973c79e9d27261eb98389adf01b7a2e260c3695c42294a6d1b15232",
+   "canonical_median": 1.4000202355446958,
+   "canonical_per_task": {
+    "task_b689d1570456a616": 1.4179393204033932,
+    "task_8a8d291f95ace419": 1.7706810381234597,
+    "task_2eeeb6f2008d7059": 0.3536437142604261,
+    "task_0fa9117d0c5abc38": 0.060697614079630695,
+    "task_8fb3f181dfa3e8fd": 1.6133206786580847,
+    "task_47a42fb1c14a7d61": 1.7464192589207355,
+    "task_8af7cdae55e6f92b": 0.06459201846889544,
+    "task_d6a26121eb70a027": 1.6202717783301528,
+    "task_81d62735cd195af1": 1.6463199160183242,
+    "task_d8ccfc390ece92d8": 1.761547200577383,
+    "task_070a726f38dbefa8": 1.3603985172398605,
+    "task_ec37e33912febbb2": 1.0435368416446584,
+    "task_9190aa8ffb9fc1a3": 1.854613147284838,
+    "task_a9c6abe078b2043b": 1.4600932185647697,
+    "task_c9ce24f708688c0a": 1.9983164389652832,
+    "task_d1e9d876df7a3d04": 0.08651282544403534,
+    "task_b5c415f995a01e02": 0.08219773846429818,
+    "task_8a02f0a5e2b35063": 1.5805394672357773,
+    "task_0b4a7e90dc9a4010": 0.07543575872082471,
+    "task_57bf1ee9a72a9758": 1.6951671009087645,
+    "task_74e6e1fd9c6bd522": 0.06436572361907963,
+    "task_a55a4cb257334bd5": 0.06418382767011328,
+    "task_c42563c52a9ed8ea": 0.03366535667594669,
+    "task_c48d2ef0a47c0642": 0.07496635204045748,
+    "task_3138554f5d46cafe": 0.06573497284531306,
+    "task_73a75b09e557ccec": 1.745145763819744,
+    "task_79899b1df15f5d5f": 0.04895172003574632,
+    "task_ecf8cf9924d3f23f": 0.6566612385069343,
+    "task_ff12a292ff3a699a": 1.824182446819555,
+    "task_da158f00b2fe9b38": 1.69140221172005,
+    "task_81f514ac8126f793": 1.5388536165147482,
+    "task_2ebcac3806ef9576": 1.6641495686929262,
+    "task_afa7a24ec2bb183c": 1.3821011506859981,
+    "task_8710ac0244592939": 1.8154598783380824,
+    "task_df873702e332e6ff": 1.4709357661431208,
+    "task_bc3409d92d49c1db": 1.2202521339954948,
+    "task_f131a2d7746aad81": 0.07672558283070956,
+    "task_48f288fea71ed666": 0.2897572564560942,
+    "task_2ee8cc79f84234b7": 1.4852487763890652,
+    "task_fcc1ec6ac7cc109e": 0.06089593759224679,
+    "task_4777cf9b17d87c70": 0.054871437670922354,
+    "task_ed3ccb6a520b71e9": 0.06135200760315592,
+    "task_11fa0ba806b1c077": 0.08590486673771991,
+    "task_073adb1fecb77781": 0.08438432682093362,
+    "task_5122680488e391f0": 0.08653216100202307,
+    "task_d30edcdbf9c886b8": 1.7400562149484458,
+    "task_3a285b391534aa18": 1.2803433874362145,
+    "task_bb4acf5dc96b3c1a": 1.327234982302503,
+    "task_4f1f2853e9734233": 1.758397532261659,
+    "task_8ee7f97461b73355": 0.862188516633225,
+    "task_f2c68335978bb916": 1.7293841133655437,
+    "task_08921807c814301e": 1.012959097501739,
+    "task_c06969906912ec42": 0.05816664524107459,
+    "task_76b3c3de223be234": 0.28964990921035827,
+    "task_11fecc5766001c92": 1.5210159140797708,
+    "task_be769cfc02600fe5": 1.787700214139703,
+    "task_465b4a330c1a46a0": 1.852256414534303,
+    "task_f0cd77eac8501e32": 1.5996322511089092,
+    "task_781d7cdd6467fd1c": 0.060135734385624494,
+    "task_4e41352713c2148c": 1.4261539194598924,
+    "task_60d4bec2f587c97e": 1.8597212020842595,
+    "task_1b714e4d010a1530": 1.4276225446534683,
+    "task_9f75b8020e2f46ee": 1.421726235823948,
+    "task_5697a3086992ae84": 1.8050008210769928
+   },
+   "scored_canonical": 64,
+   "loop_median": 0.5500570305355678,
+   "loop_per_task": {
+    "task_efd7625b517e6feb": 0.5540483073052932,
+    "task_06f852b2f4a59fa6": 0.7624585300510393,
+    "task_706edabd81502cc2": 0.6367036962208248,
+    "task_86b33259b54c3f42": 0.7071132882256865,
+    "task_4214578579775606": 0.5241989442740345,
+    "task_2e41e15c2d01870a": 0.47228498654584594,
+    "task_726df96b30de3f6e": 0.6461935746330528,
+    "task_7fbc1c7cfeeadc8d": 0.5351878430936173,
+    "task_8fb5975e9993634a": 0.563108052195684,
+    "task_af53b1aed9a0cead": 0.6550293407037066,
+    "task_196f40268905d4af": 0.5828918360131848,
+    "task_2bdd576f7616ff0b": 0.5999092269468118,
+    "task_c6f0072b758f4043": 0.41654910584120497,
+    "task_96b5f4d0211c3d88": 0.5074835043868204,
+    "task_c3543a5437dc74f5": 0.3674662908511869,
+    "task_29c27722e5ecbccc": 0.24095657771097648,
+    "task_b36c95748efa701b": 0.3960959556396356,
+    "task_65fb859a602351f6": 0.4010031448349356,
+    "task_135003eaa193ecb4": 0.42613833302521004,
+    "task_7253bf8edb9252d9": 1.225735766855687,
+    "task_1c3573591a5686fc": 0.34820908055893524,
+    "task_676127bf17ac3a9a": 0.5460657537658423,
+    "task_7b6388d8d8d7453f": 0.6526534271966353,
+    "task_43e3f41e319547ec": 0.7004668869286343,
+    "task_9de5ec4711486a80": 0.5072775671838665,
+    "task_ff7f5bdb37e80986": 0.5433471307186901,
+    "task_8b60d5b58032fcf4": 0.5071598544881771,
+    "task_ead20d3269167afa": 0.6235118028234645,
+    "task_0e2002f43953b3ea": 0.5213056120210808,
+    "task_1b7e27ae85602bc8": 0.6687974410453417,
+    "task_e6352d4ff9e41632": 0.5258481427507159,
+    "task_b9b969ad5d3049a5": 0.8950193457229176,
+    "task_e7f62c895cb4b131": 0.9965528656162606,
+    "task_9c93fa7838809a84": 0.5012839107316859,
+    "task_bcfb2ae6be635d16": 0.6672501448140892,
+    "task_b8514aa56c9162f8": 1.0991643555137227,
+    "task_c79ba8cc676afa33": 0.6341670098194558,
+    "task_5c358eadd3516d8b": 0.6117009121889748,
+    "task_7883e2bf195e2b98": 0.41274436319706764,
+    "task_8c2c95d323ab7b51": 0.5092844578058395,
+    "task_2bea0ca5c62bad87": 0.5741174046059513,
+    "task_dd7ef1ac06b1d73b": 0.3095633441250534,
+    "task_4078119dd8793620": 0.3765794789749026,
+    "task_6004e7a9384c1b5f": 0.4192993221476885,
+    "task_bb1c7e0b8c8babc0": 0.5903489658480022,
+    "task_6cbf23a46c527b8b": 0.7358267851689374,
+    "task_b7f16c29bfe83b06": 0.6032614318971213,
+    "task_2518d6f435c63cc2": 0.5320868338930732
+   },
+   "loop_below_threshold": 0,
+   "anchor_median": 0.02358257062359613,
+   "anchor_per_task": {
+    "task_dc580e8e7d40d7ff": 0.02410776202998857,
+    "task_92c4e5490b54357a": 0.02667066601410446,
+    "task_3b64b5e829c72da6": 0.031940229862784206,
+    "task_36ce7e49535fc5d8": 0.023025216239465195,
+    "task_512e455735a4c150": 0.020094126970817923,
+    "task_8c058d5f8e58c74e": 0.010997832410963367,
+    "task_1d328000072960e6": 0.02066622074023459,
+    "task_fb4d9b0d6a0d4b16": 0.03152169175345474,
+    "task_039ddba5a99ff583": 0.0108659320645369,
+    "task_f2d4ea4fd53f79f0": 0.022399266391034546,
+    "task_19bc96ff82a0b518": 0.01062375573445927,
+    "task_6e800716a9efc21c": 0.010966653451782504,
+    "task_fcd520416ba4ba64": 0.02494194099060022,
+    "task_a6e58906ddb6138f": 0.02075942080351616,
+    "task_90941bb4affd138c": 0.011011634093386735,
+    "task_2937c5484c5efc35": 0.020279744021614816,
+    "task_eb9b03f6b4c9c2ba": 0.02398798519614383,
+    "task_6795aedc5e2c7885": 0.011246194708600409,
+    "task_4bc281110ea7b4be": 0.01076695646550259,
+    "task_cfbb6b6649504b8f": 0.024782966797515574,
+    "task_7f56e0568e505cb4": 0.030165642128766858,
+    "task_0f398aa63eae687b": 0.02282678053720751,
+    "task_2fafffa90e13ff95": 0.03165128729126878,
+    "task_3c46e02468f6739a": 0.027698820079302033,
+    "task_07072df3d5ed21e1": 0.02135051985766824,
+    "task_24fca34ac252808d": 0.03203067476641565,
+    "task_95ff25350af2a48e": 0.02053699613137029,
+    "task_356e547f9e2fe2b3": 0.031523394117537,
+    "task_2df5804c9a87f60e": 0.02317715605104843,
+    "task_e7e866b2b8ae739c": 0.02418202943356326,
+    "task_46a9c0eadc755815": 0.023150709668517667,
+    "task_f2efe465ecb95a3f": 0.02872978719736333,
+    "task_3c633988cfcff6c1": 0.027095353159057103,
+    "task_c5dbce276b7d6cb3": 0.025490353864456423,
+    "task_81a8c2258c85bdb3": 0.03160045665971981,
+    "task_5f579b595ef4e507": 0.021060925879081375,
+    "task_5a1ef098ae79ae42": 0.010447933165017588,
+    "task_76de3927b018ed4d": 0.010941342688030696,
+    "task_5812182dfcd4fbe5": 0.027238679603218265,
+    "task_8d8018eb26fcb097": 0.02525634017415412,
+    "task_58b9a9b857f4317a": 0.0297478056252963,
+    "task_1f71460b9809809d": 0.011723825458000766,
+    "task_1f4cc4b571688ccd": 0.025766946104470743,
+    "task_8442948e1526d1ad": 0.022867855846653865,
+    "task_ae35924ddb99466a": 0.03219397555269962,
+    "task_eb201708c751e508": 0.0282959978272406,
+    "task_5b6ca610ea302cfd": 0.025526495463562685,
+    "task_3252c105ffa11012": 0.030776379293482314,
+    "task_7941edf3c14296bf": 0.011442391108392751,
+    "task_32046c29ab680deb": 0.011257011174133818,
+    "task_d0f843bb70c1de2f": 0.03071806496022006,
+    "task_b724397496efff27": 0.029353328621946388,
+    "task_fd1eafad6e88e9ab": 0.020442607715604206,
+    "task_2a8453bbf6370be3": 0.010739320699797826,
+    "task_78a39ac7e0568e63": 0.02684956570300304,
+    "task_b1c8c44f9f5a394f": 0.011066576729847783,
+    "task_eaa0117d5ccd3ef2": 0.010415674487166378,
+    "task_6fda9dafb5bb4b93": 0.020284027007421872,
+    "task_4ac075974c8b81bd": 0.02835627237302738,
+    "task_68c4d7ae6cb20f95": 0.030305025026328602
+   },
+   "count_accuracy_median": 0.734375,
+   "count_accuracy_per_task": {
+    "task_efd7625b517e6feb": 0.76171875,
+    "task_06f852b2f4a59fa6": 0.609375,
+    "task_706edabd81502cc2": 0.6796875,
+    "task_86b33259b54c3f42": 0.66015625,
+    "task_4214578579775606": 0.75390625,
+    "task_2e41e15c2d01870a": 0.78125,
+    "task_726df96b30de3f6e": 0.69921875,
+    "task_7fbc1c7cfeeadc8d": 0.75390625,
+    "task_8fb5975e9993634a": 0.734375,
+    "task_af53b1aed9a0cead": 0.671875,
+    "task_196f40268905d4af": 0.71484375,
+    "task_2bdd576f7616ff0b": 0.73046875,
+    "task_c6f0072b758f4043": 0.796875,
+    "task_96b5f4d0211c3d88": 0.72265625,
+    "task_c3543a5437dc74f5": 0.828125,
+    "task_29c27722e5ecbccc": 0.87109375,
+    "task_b36c95748efa701b": 0.796875,
+    "task_65fb859a602351f6": 0.828125,
+    "task_135003eaa193ecb4": 0.78125,
+    "task_7253bf8edb9252d9": 0.44921875,
+    "task_1c3573591a5686fc": 0.82421875,
+    "task_676127bf17ac3a9a": 0.71875,
+    "task_7b6388d8d8d7453f": 0.71484375,
+    "task_43e3f41e319547ec": 0.65625,
+    "task_9de5ec4711486a80": 0.75390625,
+    "task_ff7f5bdb37e80986": 0.75390625,
+    "task_8b60d5b58032fcf4": 0.77734375,
+    "task_ead20d3269167afa": 0.69140625,
+    "task_0e2002f43953b3ea": 0.72265625,
+    "task_1b7e27ae85602bc8": 0.70703125,
+    "task_e6352d4ff9e41632": 0.75,
+    "task_b9b969ad5d3049a5": 0.62890625,
+    "task_e7f62c895cb4b131": 0.60546875,
+    "task_9c93fa7838809a84": 0.74609375,
+    "task_bcfb2ae6be635d16": 0.6640625,
+    "task_b8514aa56c9162f8": 0.50390625,
+    "task_c79ba8cc676afa33": 0.72265625,
+    "task_5c358eadd3516d8b": 0.69921875,
+    "task_7883e2bf195e2b98": 0.80078125,
+    "task_8c2c95d323ab7b51": 0.73828125,
+    "task_2bea0ca5c62bad87": 0.74609375,
+    "task_dd7ef1ac06b1d73b": 0.83203125,
+    "task_4078119dd8793620": 0.8125,
+    "task_6004e7a9384c1b5f": 0.82421875,
+    "task_bb1c7e0b8c8babc0": 0.7421875,
+    "task_6cbf23a46c527b8b": 0.6640625,
+    "task_b7f16c29bfe83b06": 0.69921875,
+    "task_2518d6f435c63cc2": 0.734375
+   },
+   "seconds": 492.8475157999201
+  },
+  "ALLCOUNT_w68_s0": {
+   "arm": "ALLCOUNT",
+   "world": 68,
+   "stream": 0,
+   "scale": 16,
+   "stream_tasks": 236,
+   "candidates": 108,
+   "loop_task_ids": [
+    "task_06f852b2f4a59fa6",
+    "task_0e2002f43953b3ea",
+    "task_135003eaa193ecb4",
+    "task_196f40268905d4af",
+    "task_1b7e27ae85602bc8",
+    "task_1c3573591a5686fc",
+    "task_2518d6f435c63cc2",
+    "task_29c27722e5ecbccc",
+    "task_2bdd576f7616ff0b",
+    "task_2bea0ca5c62bad87",
+    "task_2e41e15c2d01870a",
+    "task_4078119dd8793620",
+    "task_4214578579775606",
+    "task_43e3f41e319547ec",
+    "task_5c358eadd3516d8b",
+    "task_6004e7a9384c1b5f",
+    "task_65fb859a602351f6",
+    "task_676127bf17ac3a9a",
+    "task_6cbf23a46c527b8b",
+    "task_706edabd81502cc2",
+    "task_7253bf8edb9252d9",
+    "task_726df96b30de3f6e",
+    "task_7883e2bf195e2b98",
+    "task_7b6388d8d8d7453f",
+    "task_7fbc1c7cfeeadc8d",
+    "task_86b33259b54c3f42",
+    "task_8b60d5b58032fcf4",
+    "task_8c2c95d323ab7b51",
+    "task_8fb5975e9993634a",
+    "task_96b5f4d0211c3d88",
+    "task_9c93fa7838809a84",
+    "task_9de5ec4711486a80",
+    "task_af53b1aed9a0cead",
+    "task_b36c95748efa701b",
+    "task_b7f16c29bfe83b06",
+    "task_b8514aa56c9162f8",
+    "task_b9b969ad5d3049a5",
+    "task_bb1c7e0b8c8babc0",
+    "task_bcfb2ae6be635d16",
+    "task_c3543a5437dc74f5",
+    "task_c6f0072b758f4043",
+    "task_c79ba8cc676afa33",
+    "task_dd7ef1ac06b1d73b",
+    "task_e6352d4ff9e41632",
+    "task_e7f62c895cb4b131",
+    "task_ead20d3269167afa",
+    "task_efd7625b517e6feb",
+    "task_ff7f5bdb37e80986"
+   ],
+   "wake_canonical_median": 2.0717302368520034,
+   "wake_loop_median": 1.2082910181979765,
+   "wake_anchor_median": 1.752090413666357,
+   "wake_halt_norm_median": 0.6717004776000977,
+   "routes_changed": 120,
+   "decisions": {
+    "task_2518d6f435c63cc2": {
+     "loop": false,
+     "count_support": 0.9174613517621892,
+     "count_L": 0,
+     "loop_support": 0.8653189302499784
+    },
+    "task_af53b1aed9a0cead": {
+     "loop": false,
+     "count_support": 0.7964888977377508,
+     "count_L": 0,
+     "loop_support": 0.808161227445457
+    },
+    "task_dc580e8e7d40d7ff": {
+     "loop": false,
+     "count_support": 1.5738365083006864,
+     "count_L": 1,
+     "loop_support": 1.9166758941950084
+    },
+    "task_92c4e5490b54357a": {
+     "loop": false,
+     "count_support": 1.7907512271235488,
+     "count_L": 1,
+     "loop_support": 2.0230682957595074
+    },
+    "task_3b64b5e829c72da6": {
+     "loop": false,
+     "count_support": 1.4916554619189952,
+     "count_L": 1,
+     "loop_support": 1.6434182845749645
+    },
+    "task_36ce7e49535fc5d8": {
+     "loop": false,
+     "count_support": 1.4721927928863177,
+     "count_L": 1,
+     "loop_support": 1.8732611535854313
+    },
+    "task_512e455735a4c150": {
+     "loop": false,
+     "count_support": 1.7166259774825665,
+     "count_L": 1,
+     "loop_support": 2.144692940717025
+    },
+    "task_8c058d5f8e58c74e": {
+     "loop": false,
+     "count_support": 1.442433042817783,
+     "count_L": 1,
+     "loop_support": 1.748523227247083
+    },
+    "task_1d328000072960e6": {
+     "loop": false,
+     "count_support": 1.6906154043926334,
+     "count_L": 1,
+     "loop_support": 1.9378000077211672
+    },
+    "task_fb4d9b0d6a0d4b16": {
+     "loop": false,
+     "count_support": 1.6670333092911331,
+     "count_L": 1,
+     "loop_support": 1.8588250513178446
+    },
+    "task_039ddba5a99ff583": {
+     "loop": false,
+     "count_support": 1.3015885628082051,
+     "count_L": 1,
+     "loop_support": 1.8445317623421076
+    },
+    "task_f2d4ea4fd53f79f0": {
+     "loop": false,
+     "count_support": 1.5396228611334364,
+     "count_L": 1,
+     "loop_support": 1.8367147948063072
+    },
+    "task_2e41e15c2d01870a": {
+     "loop": false,
+     "count_support": 0.921692905205542,
+     "count_L": 0,
+     "loop_support": 0.923274664065413
+    },
+    "task_b36c95748efa701b": {
+     "loop": false,
+     "count_support": 0.8701378179549095,
+     "count_L": 0,
+     "loop_support": 0.8520347728486954
+    },
+    "task_706edabd81502cc2": {
+     "loop": false,
+     "count_support": 0.8683656550801214,
+     "count_L": 0,
+     "loop_support": 0.778833382219388
+    },
+    "task_9c93fa7838809a84": {
+     "loop": false,
+     "count_support": 1.2003937479284799,
+     "count_L": 0,
+     "loop_support": 1.1752597586295286
+    },
+    "task_19bc96ff82a0b518": {
+     "loop": false,
+     "count_support": 1.3140634107352323,
+     "count_L": 1,
+     "loop_support": 1.8027392201610997
+    },
+    "task_6e800716a9efc21c": {
+     "loop": false,
+     "count_support": 1.3503354543580448,
+     "count_L": 1,
+     "loop_support": 1.7662198644453204
+    },
+    "task_fcd520416ba4ba64": {
+     "loop": false,
+     "count_support": 1.4391956919807054,
+     "count_L": 1,
+     "loop_support": 1.6566631086698307
+    },
+    "task_a6e58906ddb6138f": {
+     "loop": false,
+     "count_support": 1.5666200773310737,
+     "count_L": 1,
+     "loop_support": 1.8290076279914482
+    },
+    "task_90941bb4affd138c": {
+     "loop": false,
+     "count_support": 1.2139411465760412,
+     "count_L": 1,
+     "loop_support": 1.8274553745956192
+    },
+    "task_196f40268905d4af": {
+     "loop": false,
+     "count_support": 1.1357363414474007,
+     "count_L": 0,
+     "loop_support": 1.0869417158366423
+    },
+    "task_2937c5484c5efc35": {
+     "loop": false,
+     "count_support": 1.643961507628243,
+     "count_L": 1,
+     "loop_support": 1.9016037269700659
+    },
+    "task_b9b969ad5d3049a5": {
+     "loop": false,
+     "count_support": 1.2139985674443836,
+     "count_L": 0,
+     "loop_support": 0.9766741322784811
+    },
+    "task_eb9b03f6b4c9c2ba": {
+     "loop": false,
+     "count_support": 1.488012878213408,
+     "count_L": 1,
+     "loop_support": 1.8905917804059926
+    },
+    "task_6795aedc5e2c7885": {
+     "loop": false,
+     "count_support": 1.2471719195113133,
+     "count_L": 1,
+     "loop_support": 1.7045957848182298
+    },
+    "task_65fb859a602351f6": {
+     "loop": false,
+     "count_support": 1.0035894877936786,
+     "count_L": 0,
+     "loop_support": 0.9328955068108321
+    },
+    "task_4bc281110ea7b4be": {
+     "loop": false,
+     "count_support": 1.370728076422795,
+     "count_L": 1,
+     "loop_support": 1.7749815265379725
+    },
+    "task_cfbb6b6649504b8f": {
+     "loop": false,
+     "count_support": 1.428662285082179,
+     "count_L": 1,
+     "loop_support": 1.7407856490228348
+    },
+    "task_7f56e0568e505cb4": {
+     "loop": false,
+     "count_support": 1.5942600991515965,
+     "count_L": 1,
+     "loop_support": 1.8715032285224793
+    },
+    "task_0f398aa63eae687b": {
+     "loop": false,
+     "count_support": 1.4668884460429594,
+     "count_L": 1,
+     "loop_support": 1.8026693425042863
+    },
+    "task_2fafffa90e13ff95": {
+     "loop": false,
+     "count_support": 1.4921052421583796,
+     "count_L": 1,
+     "loop_support": 1.7770204830315117
+    },
+    "task_3c46e02468f6739a": {
+     "loop": false,
+     "count_support": 1.4882100878146811,
+     "count_L": 1,
+     "loop_support": 1.7978629513380038
+    },
+    "task_0e2002f43953b3ea": {
+     "loop": false,
+     "count_support": 0.8292843242927894,
+     "count_L": 0,
+     "loop_support": 0.8187319824036872
+    },
+    "task_07072df3d5ed21e1": {
+     "loop": false,
+     "count_support": 1.4459849806147522,
+     "count_L": 1,
+     "loop_support": 1.803905399200995
+    },
+    "task_24fca34ac252808d": {
+     "loop": false,
+     "count_support": 1.5956033914463863,
+     "count_L": 1,
+     "loop_support": 1.9164044853909408
+    },
+    "task_1b7e27ae85602bc8": {
+     "loop": false,
+     "count_support": 1.2145578987771817,
+     "count_L": 0,
+     "loop_support": 1.1906695007723223
+    },
+    "task_bb1c7e0b8c8babc0": {
+     "loop": false,
+     "count_support": 0.8309158893668533,
+     "count_L": 0,
+     "loop_support": 0.7932671355189569
+    },
+    "task_95ff25350af2a48e": {
+     "loop": false,
+     "count_support": 1.6016268091540746,
+     "count_L": 1,
+     "loop_support": 2.092230236293349
+    },
+    "task_2bea0ca5c62bad87": {
+     "loop": false,
+     "count_support": 1.1270082417815108,
+     "count_L": 0,
+     "loop_support": 1.010722345520189
+    },
+    "task_96b5f4d0211c3d88": {
+     "loop": false,
+     "count_support": 0.699153440367525,
+     "count_L": 0,
+     "loop_support": 0.7844442510469876
+    },
+    "task_43e3f41e319547ec": {
+     "loop": false,
+     "count_support": 0.8213512471280011,
+     "count_L": 0,
+     "loop_support": 0.7690540046914373
+    },
+    "task_c79ba8cc676afa33": {
+     "loop": false,
+     "count_support": 0.9574205863336166,
+     "count_L": 0,
+     "loop_support": 0.9871155695982698
+    },
+    "task_356e547f9e2fe2b3": {
+     "loop": false,
+     "count_support": 1.7263481300157322,
+     "count_L": 1,
+     "loop_support": 1.8608788473598565
+    },
+    "task_2df5804c9a87f60e": {
+     "loop": false,
+     "count_support": 1.5006504731577262,
+     "count_L": 1,
+     "loop_support": 1.8363783017785469
+    },
+    "task_7253bf8edb9252d9": {
+     "loop": false,
+     "count_support": 1.063152615407668,
+     "count_L": 0,
+     "loop_support": 0.9374809105226379
+    },
+    "task_e7e866b2b8ae739c": {
+     "loop": false,
+     "count_support": 1.6612084022530655,
+     "count_L": 1,
+     "loop_support": 2.018532976787257
+    },
+    "task_46a9c0eadc755815": {
+     "loop": false,
+     "count_support": 1.614602154444874,
+     "count_L": 1,
+     "loop_support": 1.9351011275441115
+    },
+    "task_f2efe465ecb95a3f": {
+     "loop": false,
+     "count_support": 1.7122756467753926,
+     "count_L": 1,
+     "loop_support": 2.06677701100932
+    },
+    "task_dd7ef1ac06b1d73b": {
+     "loop": false,
+     "count_support": 1.0367926857877832,
+     "count_L": 0,
+     "loop_support": 1.0869185943441297
+    },
+    "task_3c633988cfcff6c1": {
+     "loop": false,
+     "count_support": 1.5597960208704253,
+     "count_L": 1,
+     "loop_support": 1.8791850445735012
+    },
+    "task_c5dbce276b7d6cb3": {
+     "loop": false,
+     "count_support": 1.5358364965928573,
+     "count_L": 1,
+     "loop_support": 1.7591081478042705
+    },
+    "task_81a8c2258c85bdb3": {
+     "loop": false,
+     "count_support": 1.6195742973946232,
+     "count_L": 1,
+     "loop_support": 2.033103830946102
+    },
+    "task_4078119dd8793620": {
+     "loop": false,
+     "count_support": 0.9252782430036031,
+     "count_L": 0,
+     "loop_support": 0.8512840128050183
+    },
+    "task_06f852b2f4a59fa6": {
+     "loop": false,
+     "count_support": 1.3647738629484012,
+     "count_L": 0,
+     "loop_support": 1.2827577513851145
+    },
+    "task_5f579b595ef4e507": {
+     "loop": false,
+     "count_support": 1.6820565689209213,
+     "count_L": 1,
+     "loop_support": 2.0339480696878605
+    },
+    "task_5a1ef098ae79ae42": {
+     "loop": false,
+     "count_support": 1.217021207652025,
+     "count_L": 1,
+     "loop_support": 1.66257962563403
+    },
+    "task_2bdd576f7616ff0b": {
+     "loop": false,
+     "count_support": 1.297034592935417,
+     "count_L": 0,
+     "loop_support": 1.1249535697765896
+    },
+    "task_76de3927b018ed4d": {
+     "loop": false,
+     "count_support": 1.4579102688182881,
+     "count_L": 1,
+     "loop_support": 1.970641907939898
+    },
+    "task_5812182dfcd4fbe5": {
+     "loop": false,
+     "count_support": 1.6800724937399716,
+     "count_L": 1,
+     "loop_support": 2.0881485350807565
+    },
+    "task_8d8018eb26fcb097": {
+     "loop": false,
+     "count_support": 1.7105310950964663,
+     "count_L": 1,
+     "loop_support": 1.9463811157960862
+    },
+    "task_7b6388d8d8d7453f": {
+     "loop": false,
+     "count_support": 1.0229021243093455,
+     "count_L": 0,
+     "loop_support": 0.8769953471746377
+    },
+    "task_86b33259b54c3f42": {
+     "loop": false,
+     "count_support": 1.1676384740040504,
+     "count_L": 0,
+     "loop_support": 1.1528381754444887
+    },
+    "task_9de5ec4711486a80": {
+     "loop": false,
+     "count_support": 1.0544659447154952,
+     "count_L": 0,
+     "loop_support": 1.1173899293183442
+    },
+    "task_bcfb2ae6be635d16": {
+     "loop": false,
+     "count_support": 1.0629791841364948,
+     "count_L": 0,
+     "loop_support": 1.091102696695921
+    },
+    "task_58b9a9b857f4317a": {
+     "loop": false,
+     "count_support": 1.685830105483118,
+     "count_L": 1,
+     "loop_support": 1.909229909356492
+    },
+    "task_1f71460b9809809d": {
+     "loop": false,
+     "count_support": 1.3324780432065753,
+     "count_L": 1,
+     "loop_support": 1.7911556513198335
+    },
+    "task_e6352d4ff9e41632": {
+     "loop": false,
+     "count_support": 0.9285950503661821,
+     "count_L": 0,
+     "loop_support": 0.7801516594328515
+    },
+    "task_c6f0072b758f4043": {
+     "loop": false,
+     "count_support": 1.242233106919027,
+     "count_L": 0,
+     "loop_support": 1.2738265943304021
+    },
+    "task_1f4cc4b571688ccd": {
+     "loop": false,
+     "count_support": 1.4973918315355623,
+     "count_L": 1,
+     "loop_support": 1.774419054732121
+    },
+    "task_8442948e1526d1ad": {
+     "loop": false,
+     "count_support": 1.4965752584565026,
+     "count_L": 1,
+     "loop_support": 1.7837669726465166
+    },
+    "task_6004e7a9384c1b5f": {
+     "loop": false,
+     "count_support": 1.2385472626274157,
+     "count_L": 0,
+     "loop_support": 1.1276482257815448
+    },
+    "task_29c27722e5ecbccc": {
+     "loop": false,
+     "count_support": 0.943397139540807,
+     "count_L": 0,
+     "loop_support": 0.8321030270895368
+    },
+    "task_ae35924ddb99466a": {
+     "loop": false,
+     "count_support": 1.4260372642089965,
+     "count_L": 1,
+     "loop_support": 1.669022073210869
+    },
+    "task_eb201708c751e508": {
+     "loop": false,
+     "count_support": 1.6389863594029652,
+     "count_L": 1,
+     "loop_support": 1.7157527222661493
+    },
+    "task_5b6ca610ea302cfd": {
+     "loop": false,
+     "count_support": 1.6375527882210703,
+     "count_L": 1,
+     "loop_support": 2.1176666345380717
+    },
+    "task_8fb5975e9993634a": {
+     "loop": false,
+     "count_support": 1.1414783354823022,
+     "count_L": 0,
+     "loop_support": 1.0806479512981955
+    },
+    "task_8c2c95d323ab7b51": {
+     "loop": false,
+     "count_support": 0.981003176346689,
+     "count_L": 0,
+     "loop_support": 0.9389743955207994
+    },
+    "task_5c358eadd3516d8b": {
+     "loop": false,
+     "count_support": 1.0010717077692954,
+     "count_L": 0,
+     "loop_support": 0.9426650158655125
+    },
+    "task_3252c105ffa11012": {
+     "loop": false,
+     "count_support": 1.6408160455249186,
+     "count_L": 1,
+     "loop_support": 1.9807029655793214
+    },
+    "task_7941edf3c14296bf": {
+     "loop": false,
+     "count_support": 1.3355300496924776,
+     "count_L": 1,
+     "loop_support": 1.8378386789462713
+    },
+    "task_c3543a5437dc74f5": {
+     "loop": false,
+     "count_support": 1.0256111074001781,
+     "count_L": 0,
+     "loop_support": 0.9975618194951129
+    },
+    "task_7883e2bf195e2b98": {
+     "loop": false,
+     "count_support": 1.1643685322821324,
+     "count_L": 0,
+     "loop_support": 1.0885470274468418
+    },
+    "task_32046c29ab680deb": {
+     "loop": false,
+     "count_support": 1.2386688425268817,
+     "count_L": 1,
+     "loop_support": 1.606126186615585
+    },
+    "task_d0f843bb70c1de2f": {
+     "loop": false,
+     "count_support": 1.5994256081708211,
+     "count_L": 1,
+     "loop_support": 1.886153919009376
+    },
+    "task_e7f62c895cb4b131": {
+     "loop": false,
+     "count_support": 1.0079934206947898,
+     "count_L": 0,
+     "loop_support": 0.9499922970296153
+    },
+    "task_726df96b30de3f6e": {
+     "loop": false,
+     "count_support": 0.8991937095498025,
+     "count_L": 0,
+     "loop_support": 0.9823675820866626
+    },
+    "task_b724397496efff27": {
+     "loop": false,
+     "count_support": 1.7498942369620654,
+     "count_L": 1,
+     "loop_support": 2.027650037166592
+    },
+    "task_ead20d3269167afa": {
+     "loop": false,
+     "count_support": 1.1978905546993959,
+     "count_L": 0,
+     "loop_support": 1.190879099510392
+    },
+    "task_fd1eafad6e88e9ab": {
+     "loop": false,
+     "count_support": 1.5705676103346846,
+     "count_L": 1,
+     "loop_support": 2.0911740839777773
+    },
+    "task_b8514aa56c9162f8": {
+     "loop": false,
+     "count_support": 1.0163047637984026,
+     "count_L": 0,
+     "loop_support": 0.9322966701588054
+    },
+    "task_8b60d5b58032fcf4": {
+     "loop": false,
+     "count_support": 0.8520344415998113,
+     "count_L": 0,
+     "loop_support": 0.7116286276721557
+    },
+    "task_1c3573591a5686fc": {
+     "loop": false,
+     "count_support": 0.9327392769001424,
+     "count_L": 0,
+     "loop_support": 0.8616612100088203
+    },
+    "task_b7f16c29bfe83b06": {
+     "loop": false,
+     "count_support": 0.918829526992633,
+     "count_L": 0,
+     "loop_support": 0.8036403266037653
+    },
+    "task_2a8453bbf6370be3": {
+     "loop": false,
+     "count_support": 1.2808535527210856,
+     "count_L": 1,
+     "loop_support": 1.5403749365819859
+    },
+    "task_7fbc1c7cfeeadc8d": {
+     "loop": false,
+     "count_support": 0.9565470494325551,
+     "count_L": 0,
+     "loop_support": 0.8314014786628041
+    },
+    "task_efd7625b517e6feb": {
+     "loop": false,
+     "count_support": 0.9622451516677161,
+     "count_L": 0,
+     "loop_support": 0.912901943012286
+    },
+    "task_78a39ac7e0568e63": {
+     "loop": false,
+     "count_support": 1.571241632667025,
+     "count_L": 1,
+     "loop_support": 1.811856917011971
+    },
+    "task_b1c8c44f9f5a394f": {
+     "loop": false,
+     "count_support": 1.3407433208661121,
+     "count_L": 1,
+     "loop_support": 1.6382231066180153
+    },
+    "task_eaa0117d5ccd3ef2": {
+     "loop": false,
+     "count_support": 1.2559194778164795,
+     "count_L": 1,
+     "loop_support": 1.8123987618020203
+    },
+    "task_135003eaa193ecb4": {
+     "loop": false,
+     "count_support": 0.89388801139535,
+     "count_L": 0,
+     "loop_support": 0.7886302611410927
+    },
+    "task_6fda9dafb5bb4b93": {
+     "loop": false,
+     "count_support": 1.4787149071672516,
+     "count_L": 1,
+     "loop_support": 1.94180386849593
+    },
+    "task_4ac075974c8b81bd": {
+     "loop": false,
+     "count_support": 1.440374396744299,
+     "count_L": 1,
+     "loop_support": 1.8159035069120284
+    },
+    "task_4214578579775606": {
+     "loop": false,
+     "count_support": 0.9666707936555448,
+     "count_L": 0,
+     "loop_support": 0.9284220951966256
+    },
+    "task_676127bf17ac3a9a": {
+     "loop": false,
+     "count_support": 0.9092269303499114,
+     "count_L": 0,
+     "loop_support": 0.8262305008009966
+    },
+    "task_68c4d7ae6cb20f95": {
+     "loop": false,
+     "count_support": 1.482939330272204,
+     "count_L": 1,
+     "loop_support": 1.8972724949161386
+    },
+    "task_ff7f5bdb37e80986": {
+     "loop": false,
+     "count_support": 0.8598324877267728,
+     "count_L": 0,
+     "loop_support": 0.7998823480807201
+    },
+    "task_6cbf23a46c527b8b": {
+     "loop": false,
+     "count_support": 0.8277170239796218,
+     "count_L": 0,
+     "loop_support": 0.8873052742936753
+    }
+   },
+   "loops_kept": 0,
+   "straight_kept_count": 60,
+   "library_sha256_before_sleep": "67f27684b03c5c0a4ebaae86e805c1759b3d832d831debd7ed925816b6fef406",
+   "library_sha256": "baf030e0513746e19862066869f7e2b6753a2a1c518961dac8e3d95495d69ec1",
+   "canonical_median": 1.449347478926593,
+   "canonical_per_task": {
+    "task_b689d1570456a616": 1.8656164352450648,
+    "task_8a8d291f95ace419": 1.5558402461880356,
+    "task_2eeeb6f2008d7059": 1.506438080778126,
+    "task_0fa9117d0c5abc38": 0.1425646060656396,
+    "task_8fb3f181dfa3e8fd": 2.0662698763174343,
+    "task_47a42fb1c14a7d61": 1.4522116145843313,
+    "task_8af7cdae55e6f92b": 1.785327844117405,
+    "task_d6a26121eb70a027": 1.3745762868635727,
+    "task_81d62735cd195af1": 0.09966811168727252,
+    "task_d8ccfc390ece92d8": 0.09511133386743532,
+    "task_070a726f38dbefa8": 1.867933605001363,
+    "task_ec37e33912febbb2": 1.5298179172268238,
+    "task_9190aa8ffb9fc1a3": 1.8138560796891678,
+    "task_a9c6abe078b2043b": 0.08325669473211031,
+    "task_c9ce24f708688c0a": 1.3372252848236497,
+    "task_d1e9d876df7a3d04": 1.9388893687513382,
+    "task_b5c415f995a01e02": 1.3376982680742446,
+    "task_8a02f0a5e2b35063": 1.7796405273820493,
+    "task_0b4a7e90dc9a4010": 0.11770389040598128,
+    "task_57bf1ee9a72a9758": 1.4464833432688549,
+    "task_74e6e1fd9c6bd522": 0.7551283328564916,
+    "task_a55a4cb257334bd5": 1.7184923438390924,
+    "task_c42563c52a9ed8ea": 1.834251078365285,
+    "task_c48d2ef0a47c0642": 1.7750176908488462,
+    "task_3138554f5d46cafe": 0.9605119483508727,
+    "task_73a75b09e557ccec": 0.8106255138502769,
+    "task_79899b1df15f5d5f": 0.08922229198935498,
+    "task_ecf8cf9924d3f23f": 0.8631712835551977,
+    "task_ff12a292ff3a699a": 1.5354801350157212,
+    "task_da158f00b2fe9b38": 1.5086354397881871,
+    "task_81f514ac8126f793": 1.5334990700413216,
+    "task_2ebcac3806ef9576": 1.1534969504621897,
+    "task_afa7a24ec2bb183c": 1.159648504944547,
+    "task_8710ac0244592939": 1.4744420559411031,
+    "task_df873702e332e6ff": 0.6469969256232452,
+    "task_bc3409d92d49c1db": 1.5064752410703453,
+    "task_f131a2d7746aad81": 0.15521170433457868,
+    "task_48f288fea71ed666": 1.5833338244118211,
+    "task_2ee8cc79f84234b7": 1.3162787427663165,
+    "task_fcc1ec6ac7cc109e": 0.10253094804083766,
+    "task_4777cf9b17d87c70": 0.09532068796649461,
+    "task_ed3ccb6a520b71e9": 1.7103193138538035,
+    "task_11fa0ba806b1c077": 0.09849331907673226,
+    "task_073adb1fecb77781": 2.016618060598516,
+    "task_5122680488e391f0": 0.10601061857934639,
+    "task_d30edcdbf9c886b8": 1.8514581030165151,
+    "task_3a285b391534aa18": 1.6052283497441768,
+    "task_bb4acf5dc96b3c1a": 1.6052920239715855,
+    "task_4f1f2853e9734233": 1.561155031531995,
+    "task_8ee7f97461b73355": 1.6428231539104765,
+    "task_f2c68335978bb916": 1.5336074636691317,
+    "task_08921807c814301e": 1.058381670816131,
+    "task_c06969906912ec42": 0.921895399069016,
+    "task_76b3c3de223be234": 0.09346364434441547,
+    "task_11fecc5766001c92": 0.08582089737236341,
+    "task_be769cfc02600fe5": 1.952816317317618,
+    "task_465b4a330c1a46a0": 0.11314492501371518,
+    "task_f0cd77eac8501e32": 1.7025480570127485,
+    "task_781d7cdd6467fd1c": 0.7368460450233776,
+    "task_4e41352713c2148c": 1.8750737943986662,
+    "task_60d4bec2f587c97e": 0.9007372559734702,
+    "task_1b714e4d010a1530": 0.10481379136235522,
+    "task_9f75b8020e2f46ee": 0.09681283401720628,
+    "task_5697a3086992ae84": 1.9368252788537363
+   },
+   "scored_canonical": 64,
+   "loop_median": 1.097698023306442,
+   "loop_per_task": {
+    "task_efd7625b517e6feb": 1.0750866247845166,
+    "task_06f852b2f4a59fa6": 1.1630005184391932,
+    "task_706edabd81502cc2": 0.9787421714972904,
+    "task_86b33259b54c3f42": 1.1379570477563767,
+    "task_4214578579775606": 1.1199025732166104,
+    "task_2e41e15c2d01870a": 0.9850206632975977,
+    "task_726df96b30de3f6e": 1.213107564759634,
+    "task_7fbc1c7cfeeadc8d": 1.0835897721979468,
+    "task_8fb5975e9993634a": 1.1110325444466553,
+    "task_af53b1aed9a0cead": 1.0842974181970322,
+    "task_196f40268905d4af": 0.9931092627555406,
+    "task_2bdd576f7616ff0b": 1.196581883108848,
+    "task_c6f0072b758f4043": 1.029879349864225,
+    "task_96b5f4d0211c3d88": 1.0328861133664753,
+    "task_c3543a5437dc74f5": 1.2972692568753135,
+    "task_29c27722e5ecbccc": 0.8967260628377091,
+    "task_b36c95748efa701b": 0.9124949118899754,
+    "task_65fb859a602351f6": 1.1095043551168002,
+    "task_135003eaa193ecb4": 1.0710684089127311,
+    "task_7253bf8edb9252d9": 1.0967621296137848,
+    "task_1c3573591a5686fc": 1.0986339169990988,
+    "task_676127bf17ac3a9a": 1.0884490613383235,
+    "task_7b6388d8d8d7453f": 1.108171238544854,
+    "task_43e3f41e319547ec": 1.1126156632354585,
+    "task_9de5ec4711486a80": 1.2473955653819484,
+    "task_ff7f5bdb37e80986": 0.995515664215487,
+    "task_8b60d5b58032fcf4": 1.100453045292766,
+    "task_ead20d3269167afa": 0.9968927606639417,
+    "task_0e2002f43953b3ea": 1.0001074600045927,
+    "task_1b7e27ae85602bc8": 1.2034744716363188,
+    "task_e6352d4ff9e41632": 1.1401253013962054,
+    "task_b9b969ad5d3049a5": 1.0154063654786727,
+    "task_e7f62c895cb4b131": 1.2089583143431988,
+    "task_9c93fa7838809a84": 1.1667731919456579,
+    "task_bcfb2ae6be635d16": 1.0278546811543212,
+    "task_b8514aa56c9162f8": 1.271864975091411,
+    "task_c79ba8cc676afa33": 1.2863592701328037,
+    "task_5c358eadd3516d8b": 1.2290170876041837,
+    "task_7883e2bf195e2b98": 1.1377242979904023,
+    "task_8c2c95d323ab7b51": 0.9917146109544726,
+    "task_2bea0ca5c62bad87": 1.2569723565026818,
+    "task_dd7ef1ac06b1d73b": 0.9614096212225962,
+    "task_4078119dd8793620": 1.1099503131337323,
+    "task_6004e7a9384c1b5f": 1.0688985711716577,
+    "task_bb1c7e0b8c8babc0": 1.0497025488713931,
+    "task_6cbf23a46c527b8b": 1.0820960353726312,
+    "task_b7f16c29bfe83b06": 1.092864364792803,
+    "task_2518d6f435c63cc2": 1.1267346905802549
+   },
+   "loop_below_threshold": 0,
+   "anchor_median": 0.037004186809156986,
+   "anchor_per_task": {
+    "task_dc580e8e7d40d7ff": 0.03791987144032838,
+    "task_92c4e5490b54357a": 0.04390208126945197,
+    "task_3b64b5e829c72da6": 0.03897339715092614,
+    "task_36ce7e49535fc5d8": 0.03568304204386581,
+    "task_512e455735a4c150": 0.0385768055292333,
+    "task_8c058d5f8e58c74e": 0.020996112128515942,
+    "task_1d328000072960e6": 0.037973345798950474,
+    "task_fb4d9b0d6a0d4b16": 0.03499852727016304,
+    "task_039ddba5a99ff583": 0.02194052346122916,
+    "task_f2d4ea4fd53f79f0": 0.03767804343263686,
+    "task_19bc96ff82a0b518": 0.026184878986840788,
+    "task_6e800716a9efc21c": 0.022924669516539264,
+    "task_fcd520416ba4ba64": 0.03795118598342997,
+    "task_a6e58906ddb6138f": 0.03956782278008349,
+    "task_90941bb4affd138c": 0.022434026382506623,
+    "task_2937c5484c5efc35": 0.04160893720676421,
+    "task_eb9b03f6b4c9c2ba": 0.034748356681642854,
+    "task_6795aedc5e2c7885": 0.02408099838156972,
+    "task_4bc281110ea7b4be": 0.02450028983863501,
+    "task_cfbb6b6649504b8f": 0.037081236421614684,
+    "task_7f56e0568e505cb4": 0.04052003869932654,
+    "task_0f398aa63eae687b": 0.03613777807353266,
+    "task_2fafffa90e13ff95": 0.036856221875144785,
+    "task_3c46e02468f6739a": 0.03786600213472597,
+    "task_07072df3d5ed21e1": 0.03831921209843076,
+    "task_24fca34ac252808d": 0.03729421111371497,
+    "task_95ff25350af2a48e": 0.03720906765507829,
+    "task_356e547f9e2fe2b3": 0.039489717891036814,
+    "task_2df5804c9a87f60e": 0.03692713719669929,
+    "task_e7e866b2b8ae739c": 0.03760336101037971,
+    "task_46a9c0eadc755815": 0.03504366322400082,
+    "task_f2efe465ecb95a3f": 0.040467953588899624,
+    "task_3c633988cfcff6c1": 0.04046846874017127,
+    "task_c5dbce276b7d6cb3": 0.03672838310472959,
+    "task_81a8c2258c85bdb3": 0.03452522781614766,
+    "task_5f579b595ef4e507": 0.045735062995778356,
+    "task_5a1ef098ae79ae42": 0.025553364970559416,
+    "task_76de3927b018ed4d": 0.027515137867469345,
+    "task_5812182dfcd4fbe5": 0.04428330133363257,
+    "task_8d8018eb26fcb097": 0.044558160023921975,
+    "task_58b9a9b857f4317a": 0.03834330800075629,
+    "task_1f71460b9809809d": 0.021905851323248952,
+    "task_1f4cc4b571688ccd": 0.032547063978805676,
+    "task_8442948e1526d1ad": 0.034237421160034226,
+    "task_ae35924ddb99466a": 0.03734580789992614,
+    "task_eb201708c751e508": 0.04342720144201011,
+    "task_5b6ca610ea302cfd": 0.04218642672249662,
+    "task_3252c105ffa11012": 0.03719710157060625,
+    "task_7941edf3c14296bf": 0.02642789534187173,
+    "task_32046c29ab680deb": 0.02206165353810544,
+    "task_d0f843bb70c1de2f": 0.036481571042954235,
+    "task_b724397496efff27": 0.04149738284197586,
+    "task_fd1eafad6e88e9ab": 0.035438797350333215,
+    "task_2a8453bbf6370be3": 0.025164782313791306,
+    "task_78a39ac7e0568e63": 0.03491840810808815,
+    "task_b1c8c44f9f5a394f": 0.022359881283785438,
+    "task_eaa0117d5ccd3ef2": 0.023345034390335216,
+    "task_6fda9dafb5bb4b93": 0.037555247231499694,
+    "task_4ac075974c8b81bd": 0.044634402566267425,
+    "task_68c4d7ae6cb20f95": 0.035690078312651766
+   },
+   "seconds": 742.5578209999949
+  },
+  "ALLLOOP_w68_s0": {
+   "arm": "ALLLOOP",
+   "world": 68,
+   "stream": 0,
+   "scale": 16,
+   "stream_tasks": 236,
+   "candidates": 108,
+   "loop_task_ids": [
+    "task_06f852b2f4a59fa6",
+    "task_0e2002f43953b3ea",
+    "task_135003eaa193ecb4",
+    "task_196f40268905d4af",
+    "task_1b7e27ae85602bc8",
+    "task_1c3573591a5686fc",
+    "task_2518d6f435c63cc2",
+    "task_29c27722e5ecbccc",
+    "task_2bdd576f7616ff0b",
+    "task_2bea0ca5c62bad87",
+    "task_2e41e15c2d01870a",
+    "task_4078119dd8793620",
+    "task_4214578579775606",
+    "task_43e3f41e319547ec",
+    "task_5c358eadd3516d8b",
+    "task_6004e7a9384c1b5f",
+    "task_65fb859a602351f6",
+    "task_676127bf17ac3a9a",
+    "task_6cbf23a46c527b8b",
+    "task_706edabd81502cc2",
+    "task_7253bf8edb9252d9",
+    "task_726df96b30de3f6e",
+    "task_7883e2bf195e2b98",
+    "task_7b6388d8d8d7453f",
+    "task_7fbc1c7cfeeadc8d",
+    "task_86b33259b54c3f42",
+    "task_8b60d5b58032fcf4",
+    "task_8c2c95d323ab7b51",
+    "task_8fb5975e9993634a",
+    "task_96b5f4d0211c3d88",
+    "task_9c93fa7838809a84",
+    "task_9de5ec4711486a80",
+    "task_af53b1aed9a0cead",
+    "task_b36c95748efa701b",
+    "task_b7f16c29bfe83b06",
+    "task_b8514aa56c9162f8",
+    "task_b9b969ad5d3049a5",
+    "task_bb1c7e0b8c8babc0",
+    "task_bcfb2ae6be635d16",
+    "task_c3543a5437dc74f5",
+    "task_c6f0072b758f4043",
+    "task_c79ba8cc676afa33",
+    "task_dd7ef1ac06b1d73b",
+    "task_e6352d4ff9e41632",
+    "task_e7f62c895cb4b131",
+    "task_ead20d3269167afa",
+    "task_efd7625b517e6feb",
+    "task_ff7f5bdb37e80986"
+   ],
+   "wake_canonical_median": 2.1106879866803574,
+   "wake_loop_median": 1.4609393727047801,
+   "wake_anchor_median": 1.9187703841372907,
+   "wake_halt_norm_median": 1.0609882473945618,
+   "wake_state_norms": {
+    "task_76de3927b018ed4d": 0.6805713176727295,
+    "task_b7f16c29bfe83b06": 0.7026374340057373,
+    "task_fd1eafad6e88e9ab": 0.656359076499939,
+    "task_95ff25350af2a48e": 1.2411653995513916,
+    "task_58b9a9b857f4317a": 1.0139816999435425,
+    "task_fcd520416ba4ba64": 1.1072261333465576,
+    "task_eaa0117d5ccd3ef2": 0.5832500457763672,
+    "task_2937c5484c5efc35": 0.8776549696922302,
+    "task_b1c8c44f9f5a394f": 0.6111693382263184,
+    "task_dd7ef1ac06b1d73b": 0.8158199191093445,
+    "task_68c4d7ae6cb20f95": 0.6937945485115051,
+    "task_bcfb2ae6be635d16": 0.6361275911331177,
+    "task_039ddba5a99ff583": 0.9355217814445496,
+    "task_b36c95748efa701b": 1.0751054286956787,
+    "task_06f852b2f4a59fa6": 0.7196081876754761,
+    "task_4ac075974c8b81bd": 0.6642760038375854,
+    "task_6cbf23a46c527b8b": 0.8019487857818604,
+    "task_1f71460b9809809d": 0.6867520213127136,
+    "task_7883e2bf195e2b98": 0.5898145437240601,
+    "task_90941bb4affd138c": 1.239781379699707,
+    "task_1c3573591a5686fc": 0.8020389676094055,
+    "task_a6e58906ddb6138f": 0.8999430537223816,
+    "task_2fafffa90e13ff95": 1.0080379247665405,
+    "task_2bea0ca5c62bad87": 1.023885726928711,
+    "task_d0f843bb70c1de2f": 0.660439133644104,
+    "task_36ce7e49535fc5d8": 1.2172436714172363,
+    "task_4bc281110ea7b4be": 1.2970610857009888,
+    "task_7f56e0568e505cb4": 0.933803379535675,
+    "task_7253bf8edb9252d9": 1.1628705263137817,
+    "task_3b64b5e829c72da6": 1.3453710079193115,
+    "task_f2d4ea4fd53f79f0": 1.1456568241119385,
+    "task_ff7f5bdb37e80986": 0.6843951940536499,
+    "task_1b7e27ae85602bc8": 1.1511704921722412,
+    "task_ae35924ddb99466a": 0.5007134675979614,
+    "task_3c46e02468f6739a": 0.9083890914916992,
+    "task_196f40268905d4af": 1.3673776388168335,
+    "task_4214578579775606": 0.7502272129058838,
+    "task_6e800716a9efc21c": 0.9797092080116272,
+    "task_e7f62c895cb4b131": 0.7770273685455322,
+    "task_8d8018eb26fcb097": 0.5532718896865845,
+    "task_96b5f4d0211c3d88": 0.9183263778686523,
+    "task_eb9b03f6b4c9c2ba": 1.0559797286987305,
+    "task_7b6388d8d8d7453f": 0.7212041616439819,
+    "task_ead20d3269167afa": 0.5737152695655823,
+    "task_4078119dd8793620": 0.7342304587364197,
+    "task_0e2002f43953b3ea": 0.767476499080658,
+    "task_5b6ca610ea302cfd": 0.6543871760368347,
+    "task_676127bf17ac3a9a": 0.5900756120681763,
+    "task_5f579b595ef4e507": 0.7344940304756165,
+    "task_3c633988cfcff6c1": 0.7916651964187622,
+    "task_8c2c95d323ab7b51": 0.7009232640266418,
+    "task_dc580e8e7d40d7ff": 1.4690186977386475,
+    "task_eb201708c751e508": 0.647538423538208,
+    "task_e6352d4ff9e41632": 0.8503313660621643,
+    "task_9c93fa7838809a84": 1.0257058143615723,
+    "task_6004e7a9384c1b5f": 0.8109502792358398,
+    "task_5a1ef098ae79ae42": 0.8670068383216858,
+    "task_2518d6f435c63cc2": 1.6539865732192993,
+    "task_7fbc1c7cfeeadc8d": 0.751102089881897,
+    "task_43e3f41e319547ec": 0.8517801761627197,
+    "task_8fb5975e9993634a": 0.8950324654579163,
+    "task_135003eaa193ecb4": 0.7311393618583679,
+    "task_bb1c7e0b8c8babc0": 0.8346187472343445,
+    "task_fb4d9b0d6a0d4b16": 0.7357443571090698,
+    "task_706edabd81502cc2": 1.2154045104980469,
+    "task_8442948e1526d1ad": 0.5455012321472168,
+    "task_f2efe465ecb95a3f": 0.8995963931083679,
+    "task_5812182dfcd4fbe5": 0.7496286630630493,
+    "task_7941edf3c14296bf": 0.6347435116767883,
+    "task_726df96b30de3f6e": 0.6980620622634888,
+    "task_cfbb6b6649504b8f": 0.8908466100692749,
+    "task_c79ba8cc676afa33": 1.2416598796844482,
+    "task_e7e866b2b8ae739c": 0.9016608595848083,
+    "task_07072df3d5ed21e1": 0.7239511013031006,
+    "task_2bdd576f7616ff0b": 0.6473521590232849,
+    "task_512e455735a4c150": 1.0581187009811401,
+    "task_9de5ec4711486a80": 0.6237404346466064,
+    "task_af53b1aed9a0cead": 1.7413280010223389,
+    "task_b8514aa56c9162f8": 0.7593483328819275,
+    "task_92c4e5490b54357a": 1.4373455047607422,
+    "task_8b60d5b58032fcf4": 0.5909604430198669,
+    "task_2a8453bbf6370be3": 0.48918333649635315,
+    "task_efd7625b517e6feb": 0.6977987289428711,
+    "task_c3543a5437dc74f5": 0.8473939299583435,
+    "task_6795aedc5e2c7885": 1.1563080549240112,
+    "task_2e41e15c2d01870a": 1.0774664878845215,
+    "task_1d328000072960e6": 1.17160964012146,
+    "task_78a39ac7e0568e63": 0.6369199156761169,
+    "task_65fb859a602351f6": 1.2266228199005127,
+    "task_2df5804c9a87f60e": 0.820887565612793,
+    "task_356e547f9e2fe2b3": 0.8675061464309692,
+    "task_1f4cc4b571688ccd": 0.6692134737968445,
+    "task_32046c29ab680deb": 0.6754555702209473,
+    "task_b9b969ad5d3049a5": 1.2784340381622314,
+    "task_5c358eadd3516d8b": 0.9567196369171143,
+    "task_c5dbce276b7d6cb3": 0.818949818611145,
+    "task_8c058d5f8e58c74e": 0.8685936331748962,
+    "task_86b33259b54c3f42": 0.7838057279586792,
+    "task_0f398aa63eae687b": 0.7266058325767517,
+    "task_3252c105ffa11012": 0.5152364373207092,
+    "task_81a8c2258c85bdb3": 0.8680499196052551,
+    "task_c6f0072b758f4043": 0.7192248702049255,
+    "task_6fda9dafb5bb4b93": 0.6043983101844788,
+    "task_19bc96ff82a0b518": 0.701737642288208,
+    "task_46a9c0eadc755815": 0.6794381141662598,
+    "task_24fca34ac252808d": 0.9686290621757507,
+    "task_b724397496efff27": 0.572449266910553,
+    "task_29c27722e5ecbccc": 0.8286608457565308
+   },
+   "wake_state_auc": 0.5336805555555556,
+   "wake_state_norm_median": {
+    "loop": 0.8019938766956329,
+    "straight": 0.819918692111969
+   },
+   "wake_count_accuracy_median": 0.416015625,
+   "routes_changed": 123,
+   "decisions": {
+    "task_2518d6f435c63cc2": {
+     "loop": false,
+     "count_support": 0.9174613517621892,
+     "count_L": 0,
+     "loop_support": 0.8246403190465001
+    },
+    "task_af53b1aed9a0cead": {
+     "loop": false,
+     "count_support": 0.7964888977377508,
+     "count_L": 0,
+     "loop_support": 0.7177172880918442
+    },
+    "task_dc580e8e7d40d7ff": {
+     "loop": false,
+     "count_support": 1.6187334598123488,
+     "count_L": 1,
+     "loop_support": 1.834779352578772
+    },
+    "task_92c4e5490b54357a": {
+     "loop": false,
+     "count_support": 1.7042626649201709,
+     "count_L": 1,
+     "loop_support": 1.889575249340486
+    },
+    "task_3b64b5e829c72da6": {
+     "loop": false,
+     "count_support": 1.4873008244327037,
+     "count_L": 1,
+     "loop_support": 1.7595669115510777
+    },
+    "task_36ce7e49535fc5d8": {
+     "loop": false,
+     "count_support": 1.507862696544406,
+     "count_L": 1,
+     "loop_support": 1.7290717081629121
+    },
+    "task_512e455735a4c150": {
+     "loop": false,
+     "count_support": 1.697188930521903,
+     "count_L": 1,
+     "loop_support": 2.2802656639166714
+    },
+    "task_8c058d5f8e58c74e": {
+     "loop": false,
+     "count_support": 1.482547146917039,
+     "count_L": 1,
+     "loop_support": 1.9252964154262768
+    },
+    "task_1d328000072960e6": {
+     "loop": false,
+     "count_support": 1.63229825669589,
+     "count_L": 1,
+     "loop_support": 2.0004994015453983
+    },
+    "task_fb4d9b0d6a0d4b16": {
+     "loop": false,
+     "count_support": 1.6754685174025419,
+     "count_L": 1,
+     "loop_support": 2.245524659713755
+    },
+    "task_039ddba5a99ff583": {
+     "loop": false,
+     "count_support": 1.3565007534973983,
+     "count_L": 1,
+     "loop_support": 1.90395029148793
+    },
+    "task_f2d4ea4fd53f79f0": {
+     "loop": false,
+     "count_support": 1.61372742618072,
+     "count_L": 1,
+     "loop_support": 1.8779943814099134
+    },
+    "task_2e41e15c2d01870a": {
+     "loop": false,
+     "count_support": 0.921692905205542,
+     "count_L": 0,
+     "loop_support": 0.8728261016171922
+    },
+    "task_b36c95748efa701b": {
+     "loop": false,
+     "count_support": 0.8701378179549095,
+     "count_L": 0,
+     "loop_support": 0.8102315843523824
+    },
+    "task_706edabd81502cc2": {
+     "loop": false,
+     "count_support": 0.8683656550801214,
+     "count_L": 0,
+     "loop_support": 0.8642083295781567
+    },
+    "task_9c93fa7838809a84": {
+     "loop": false,
+     "count_support": 1.2003937479284799,
+     "count_L": 0,
+     "loop_support": 1.1013515745810571
+    },
+    "task_19bc96ff82a0b518": {
+     "loop": false,
+     "count_support": 1.3485826830637004,
+     "count_L": 1,
+     "loop_support": 1.8344073613010536
+    },
+    "task_6e800716a9efc21c": {
+     "loop": false,
+     "count_support": 1.3907731321831815,
+     "count_L": 1,
+     "loop_support": 1.8407438375686245
+    },
+    "task_fcd520416ba4ba64": {
+     "loop": false,
+     "count_support": 1.4458711635863644,
+     "count_L": 1,
+     "loop_support": 1.6911342836222443
+    },
+    "task_a6e58906ddb6138f": {
+     "loop": false,
+     "count_support": 1.489400412603445,
+     "count_L": 1,
+     "loop_support": 1.6103732544655112
+    },
+    "task_90941bb4affd138c": {
+     "loop": false,
+     "count_support": 1.2713961998541277,
+     "count_L": 1,
+     "loop_support": 1.792394277387002
+    },
+    "task_196f40268905d4af": {
+     "loop": false,
+     "count_support": 1.1357363414474007,
+     "count_L": 0,
+     "loop_support": 0.9833225397760044
+    },
+    "task_2937c5484c5efc35": {
+     "loop": false,
+     "count_support": 1.626669819033852,
+     "count_L": 1,
+     "loop_support": 1.8100048501821844
+    },
+    "task_b9b969ad5d3049a5": {
+     "loop": false,
+     "count_support": 1.2139985674443836,
+     "count_L": 0,
+     "loop_support": 1.0215979279445948
+    },
+    "task_eb9b03f6b4c9c2ba": {
+     "loop": false,
+     "count_support": 1.6258561140266148,
+     "count_L": 1,
+     "loop_support": 1.7166223198598178
+    },
+    "task_6795aedc5e2c7885": {
+     "loop": false,
+     "count_support": 1.2542408254968236,
+     "count_L": 1,
+     "loop_support": 1.8609183985065951
+    },
+    "task_65fb859a602351f6": {
+     "loop": false,
+     "count_support": 1.0035894877936786,
+     "count_L": 0,
+     "loop_support": 0.8783913481054875
+    },
+    "task_4bc281110ea7b4be": {
+     "loop": false,
+     "count_support": 1.3815766012552342,
+     "count_L": 1,
+     "loop_support": 1.8746764816646797
+    },
+    "task_cfbb6b6649504b8f": {
+     "loop": false,
+     "count_support": 1.481200371831771,
+     "count_L": 1,
+     "loop_support": 1.7474877623982499
+    },
+    "task_7f56e0568e505cb4": {
+     "loop": false,
+     "count_support": 1.648630375535143,
+     "count_L": 1,
+     "loop_support": 1.9236925019137754
+    },
+    "task_0f398aa63eae687b": {
+     "loop": false,
+     "count_support": 1.4943460789362986,
+     "count_L": 1,
+     "loop_support": 1.7550059717443642
+    },
+    "task_2fafffa90e13ff95": {
+     "loop": false,
+     "count_support": 1.4963781222624495,
+     "count_L": 1,
+     "loop_support": 1.927819469871277
+    },
+    "task_3c46e02468f6739a": {
+     "loop": false,
+     "count_support": 1.4236622180244975,
+     "count_L": 1,
+     "loop_support": 1.6990717993485172
+    },
+    "task_0e2002f43953b3ea": {
+     "loop": false,
+     "count_support": 0.8292843242927894,
+     "count_L": 0,
+     "loop_support": 0.8265605065010706
+    },
+    "task_07072df3d5ed21e1": {
+     "loop": false,
+     "count_support": 1.5204616305279517,
+     "count_L": 1,
+     "loop_support": 1.8431157302208199
+    },
+    "task_24fca34ac252808d": {
+     "loop": false,
+     "count_support": 1.5366029495625788,
+     "count_L": 1,
+     "loop_support": 1.9106426119688786
+    },
+    "task_1b7e27ae85602bc8": {
+     "loop": false,
+     "count_support": 1.2145578987771817,
+     "count_L": 0,
+     "loop_support": 1.0900256372232202
+    },
+    "task_bb1c7e0b8c8babc0": {
+     "loop": false,
+     "count_support": 0.8309158893668533,
+     "count_L": 0,
+     "loop_support": 0.7288988435114614
+    },
+    "task_95ff25350af2a48e": {
+     "loop": false,
+     "count_support": 1.5183024729145387,
+     "count_L": 1,
+     "loop_support": 2.0048606366783304
+    },
+    "task_2bea0ca5c62bad87": {
+     "loop": false,
+     "count_support": 1.1270082417815108,
+     "count_L": 0,
+     "loop_support": 0.9474785750457544
+    },
+    "task_96b5f4d0211c3d88": {
+     "loop": false,
+     "count_support": 0.699153440367525,
+     "count_L": 0,
+     "loop_support": 0.7768316733525404
+    },
+    "task_43e3f41e319547ec": {
+     "loop": false,
+     "count_support": 0.8213512471280011,
+     "count_L": 0,
+     "loop_support": 0.7757324307242393
+    },
+    "task_c79ba8cc676afa33": {
+     "loop": false,
+     "count_support": 0.9574205863336166,
+     "count_L": 0,
+     "loop_support": 1.0047438494659338
+    },
+    "task_356e547f9e2fe2b3": {
+     "loop": false,
+     "count_support": 1.684610984063732,
+     "count_L": 1,
+     "loop_support": 2.028498376864987
+    },
+    "task_2df5804c9a87f60e": {
+     "loop": false,
+     "count_support": 1.5528109398294832,
+     "count_L": 1,
+     "loop_support": 1.7468130211328798
+    },
+    "task_7253bf8edb9252d9": {
+     "loop": false,
+     "count_support": 1.063152615407668,
+     "count_L": 0,
+     "loop_support": 0.9460880071039899
+    },
+    "task_e7e866b2b8ae739c": {
+     "loop": false,
+     "count_support": 1.6691630833806101,
+     "count_L": 1,
+     "loop_support": 1.9422664275269965
+    },
+    "task_46a9c0eadc755815": {
+     "loop": false,
+     "count_support": 1.6912850531885302,
+     "count_L": 2,
+     "loop_support": 1.9277944125499944
+    },
+    "task_f2efe465ecb95a3f": {
+     "loop": false,
+     "count_support": 1.708900909620151,
+     "count_L": 1,
+     "loop_support": 2.0528418397614705
+    },
+    "task_dd7ef1ac06b1d73b": {
+     "loop": false,
+     "count_support": 1.0367926857877832,
+     "count_L": 0,
+     "loop_support": 1.1474726119223984
+    },
+    "task_3c633988cfcff6c1": {
+     "loop": false,
+     "count_support": 1.5910531090923967,
+     "count_L": 1,
+     "loop_support": 1.8931530819543
+    },
+    "task_c5dbce276b7d6cb3": {
+     "loop": false,
+     "count_support": 1.4760123972576134,
+     "count_L": 1,
+     "loop_support": 1.885567413088904
+    },
+    "task_81a8c2258c85bdb3": {
+     "loop": false,
+     "count_support": 1.6172001784181482,
+     "count_L": 1,
+     "loop_support": 2.0603196617793196
+    },
+    "task_4078119dd8793620": {
+     "loop": false,
+     "count_support": 0.9252782430036031,
+     "count_L": 0,
+     "loop_support": 0.8991492701024568
+    },
+    "task_06f852b2f4a59fa6": {
+     "loop": false,
+     "count_support": 1.3647738629484012,
+     "count_L": 0,
+     "loop_support": 1.175658658792239
+    },
+    "task_5f579b595ef4e507": {
+     "loop": false,
+     "count_support": 1.6724888279865835,
+     "count_L": 1,
+     "loop_support": 2.042240466711727
+    },
+    "task_5a1ef098ae79ae42": {
+     "loop": false,
+     "count_support": 1.2759047846783207,
+     "count_L": 1,
+     "loop_support": 1.6450927054815794
+    },
+    "task_2bdd576f7616ff0b": {
+     "loop": false,
+     "count_support": 1.297034592935417,
+     "count_L": 0,
+     "loop_support": 1.1420909797727514
+    },
+    "task_76de3927b018ed4d": {
+     "loop": false,
+     "count_support": 1.531943807649039,
+     "count_L": 1,
+     "loop_support": 1.8513873253066184
+    },
+    "task_5812182dfcd4fbe5": {
+     "loop": false,
+     "count_support": 1.6352917571777943,
+     "count_L": 1,
+     "loop_support": 1.8101596914428753
+    },
+    "task_8d8018eb26fcb097": {
+     "loop": false,
+     "count_support": 1.6515990393870494,
+     "count_L": 1,
+     "loop_support": 1.9374827936445562
+    },
+    "task_7b6388d8d8d7453f": {
+     "loop": false,
+     "count_support": 1.0229021243093455,
+     "count_L": 0,
+     "loop_support": 0.8658909112853443
+    },
+    "task_86b33259b54c3f42": {
+     "loop": false,
+     "count_support": 1.1676384740040504,
+     "count_L": 0,
+     "loop_support": 1.1332279292372345
+    },
+    "task_9de5ec4711486a80": {
+     "loop": false,
+     "count_support": 1.0544659447154952,
+     "count_L": 0,
+     "loop_support": 1.016665055913107
+    },
+    "task_bcfb2ae6be635d16": {
+     "loop": false,
+     "count_support": 1.0629791841364948,
+     "count_L": 0,
+     "loop_support": 1.0061700999345646
+    },
+    "task_58b9a9b857f4317a": {
+     "loop": false,
+     "count_support": 1.6591533933173737,
+     "count_L": 1,
+     "loop_support": 1.9356928424023652
+    },
+    "task_1f71460b9809809d": {
+     "loop": false,
+     "count_support": 1.4035867103159783,
+     "count_L": 1,
+     "loop_support": 1.8690738240057174
+    },
+    "task_e6352d4ff9e41632": {
+     "loop": false,
+     "count_support": 0.9285950503661821,
+     "count_L": 0,
+     "loop_support": 0.7558796014422597
+    },
+    "task_c6f0072b758f4043": {
+     "loop": false,
+     "count_support": 1.242233106919027,
+     "count_L": 0,
+     "loop_support": 1.2284169075760039
+    },
+    "task_1f4cc4b571688ccd": {
+     "loop": false,
+     "count_support": 1.5674124732219172,
+     "count_L": 1,
+     "loop_support": 1.8547152928163977
+    },
+    "task_8442948e1526d1ad": {
+     "loop": false,
+     "count_support": 1.5541329699130637,
+     "count_L": 1,
+     "loop_support": 1.8290777902831543
+    },
+    "task_6004e7a9384c1b5f": {
+     "loop": false,
+     "count_support": 1.2385472626274157,
+     "count_L": 0,
+     "loop_support": 1.2172922855871118
+    },
+    "task_29c27722e5ecbccc": {
+     "loop": false,
+     "count_support": 0.943397139540807,
+     "count_L": 0,
+     "loop_support": 0.9296789886587269
+    },
+    "task_ae35924ddb99466a": {
+     "loop": false,
+     "count_support": 1.437819998031718,
+     "count_L": 1,
+     "loop_support": 1.794015689609074
+    },
+    "task_eb201708c751e508": {
+     "loop": false,
+     "count_support": 1.6171776454750248,
+     "count_L": 1,
+     "loop_support": 1.8714887261313673
+    },
+    "task_5b6ca610ea302cfd": {
+     "loop": false,
+     "count_support": 1.6959143196966355,
+     "count_L": 1,
+     "loop_support": 2.0256790634423303
+    },
+    "task_8fb5975e9993634a": {
+     "loop": false,
+     "count_support": 1.1414783354823022,
+     "count_L": 0,
+     "loop_support": 0.9363108306583858
+    },
+    "task_8c2c95d323ab7b51": {
+     "loop": false,
+     "count_support": 0.981003176346689,
+     "count_L": 0,
+     "loop_support": 0.929733805567753
+    },
+    "task_5c358eadd3516d8b": {
+     "loop": false,
+     "count_support": 1.0010717077692954,
+     "count_L": 0,
+     "loop_support": 0.9691456081481753
+    },
+    "task_3252c105ffa11012": {
+     "loop": false,
+     "count_support": 1.5350773601299794,
+     "count_L": 1,
+     "loop_support": 1.84574652042663
+    },
+    "task_7941edf3c14296bf": {
+     "loop": false,
+     "count_support": 1.4406517104865368,
+     "count_L": 1,
+     "loop_support": 1.9148300142936392
+    },
+    "task_c3543a5437dc74f5": {
+     "loop": false,
+     "count_support": 1.0256111074001781,
+     "count_L": 0,
+     "loop_support": 1.02642256501947
+    },
+    "task_7883e2bf195e2b98": {
+     "loop": false,
+     "count_support": 1.1643685322821324,
+     "count_L": 0,
+     "loop_support": 1.1367469588816597
+    },
+    "task_32046c29ab680deb": {
+     "loop": false,
+     "count_support": 1.3059591895439515,
+     "count_L": 1,
+     "loop_support": 1.7268016087658737
+    },
+    "task_d0f843bb70c1de2f": {
+     "loop": false,
+     "count_support": 1.6037795342604724,
+     "count_L": 1,
+     "loop_support": 1.839369264734201
+    },
+    "task_e7f62c895cb4b131": {
+     "loop": false,
+     "count_support": 1.0079934206947898,
+     "count_L": 0,
+     "loop_support": 0.9878254378622171
+    },
+    "task_726df96b30de3f6e": {
+     "loop": false,
+     "count_support": 0.8991937095498025,
+     "count_L": 0,
+     "loop_support": 0.9724761852833645
+    },
+    "task_b724397496efff27": {
+     "loop": false,
+     "count_support": 1.7116526340738822,
+     "count_L": 1,
+     "loop_support": 1.9865540229723977
+    },
+    "task_ead20d3269167afa": {
+     "loop": false,
+     "count_support": 1.1978905546993959,
+     "count_L": 0,
+     "loop_support": 1.1873053072562767
+    },
+    "task_fd1eafad6e88e9ab": {
+     "loop": false,
+     "count_support": 1.5309551258597094,
+     "count_L": 1,
+     "loop_support": 2.082344823723539
+    },
+    "task_b8514aa56c9162f8": {
+     "loop": false,
+     "count_support": 1.0163047637984026,
+     "count_L": 0,
+     "loop_support": 0.8573372608871426
+    },
+    "task_8b60d5b58032fcf4": {
+     "loop": false,
+     "count_support": 0.8520344415998113,
+     "count_L": 0,
+     "loop_support": 0.8221120480076209
+    },
+    "task_1c3573591a5686fc": {
+     "loop": false,
+     "count_support": 0.9327392769001424,
+     "count_L": 0,
+     "loop_support": 0.8164362313079061
+    },
+    "task_b7f16c29bfe83b06": {
+     "loop": false,
+     "count_support": 0.918829526992633,
+     "count_L": 0,
+     "loop_support": 0.7552786209748495
+    },
+    "task_2a8453bbf6370be3": {
+     "loop": false,
+     "count_support": 1.2772784405501216,
+     "count_L": 1,
+     "loop_support": 1.6102202519244064
+    },
+    "task_7fbc1c7cfeeadc8d": {
+     "loop": false,
+     "count_support": 0.9565470494325551,
+     "count_L": 0,
+     "loop_support": 0.847113125881615
+    },
+    "task_efd7625b517e6feb": {
+     "loop": false,
+     "count_support": 0.9622451516677161,
+     "count_L": 0,
+     "loop_support": 0.910611626861213
+    },
+    "task_78a39ac7e0568e63": {
+     "loop": false,
+     "count_support": 1.4785043206918762,
+     "count_L": 1,
+     "loop_support": 1.8092953036859813
+    },
+    "task_b1c8c44f9f5a394f": {
+     "loop": false,
+     "count_support": 1.371855021110283,
+     "count_L": 1,
+     "loop_support": 1.8245892513837676
+    },
+    "task_eaa0117d5ccd3ef2": {
+     "loop": false,
+     "count_support": 1.2626402293966645,
+     "count_L": 1,
+     "loop_support": 1.8212199610892246
+    },
+    "task_135003eaa193ecb4": {
+     "loop": false,
+     "count_support": 0.89388801139535,
+     "count_L": 0,
+     "loop_support": 0.8071268589261076
+    },
+    "task_6fda9dafb5bb4b93": {
+     "loop": false,
+     "count_support": 1.4120628718072132,
+     "count_L": 1,
+     "loop_support": 1.9909073033291291
+    },
+    "task_4ac075974c8b81bd": {
+     "loop": false,
+     "count_support": 1.456869724665487,
+     "count_L": 1,
+     "loop_support": 1.7785698495989921
+    },
+    "task_4214578579775606": {
+     "loop": false,
+     "count_support": 0.9666707936555448,
+     "count_L": 0,
+     "loop_support": 0.8101655753608041
+    },
+    "task_676127bf17ac3a9a": {
+     "loop": false,
+     "count_support": 0.9092269303499114,
+     "count_L": 0,
+     "loop_support": 0.8946722653550961
+    },
+    "task_68c4d7ae6cb20f95": {
+     "loop": false,
+     "count_support": 1.4109207249300921,
+     "count_L": 1,
+     "loop_support": 1.7328210043880883
+    },
+    "task_ff7f5bdb37e80986": {
+     "loop": false,
+     "count_support": 0.8598324877267728,
+     "count_L": 0,
+     "loop_support": 0.7354499355364814
+    },
+    "task_6cbf23a46c527b8b": {
+     "loop": false,
+     "count_support": 0.8277170239796218,
+     "count_L": 0,
+     "loop_support": 0.7868932942568709
+    }
+   },
+   "loops_kept": 0,
+   "straight_kept_count": 60,
+   "library_sha256_before_sleep": "6597c789033908d861969ba21ff450196eb9a38b69b74f289212e015453bfca6",
+   "library_sha256": "c8ecaea02908e31b8d4ad1b17635069f62481834cf5bbfb268b8381aebac918f",
+   "canonical_median": 1.6756097492368747,
+   "canonical_per_task": {
+    "task_b689d1570456a616": 1.6655002643010004,
+    "task_8a8d291f95ace419": 1.6310147283187402,
+    "task_2eeeb6f2008d7059": 1.6371097780851878,
+    "task_0fa9117d0c5abc38": 1.8131786227807458,
+    "task_8fb3f181dfa3e8fd": 1.5506936448396182,
+    "task_47a42fb1c14a7d61": 1.7019095841203093,
+    "task_8af7cdae55e6f92b": 1.3780194767432945,
+    "task_d6a26121eb70a027": 1.3016869650954548,
+    "task_81d62735cd195af1": 0.5422987819881091,
+    "task_d8ccfc390ece92d8": 1.3581642868523631,
+    "task_070a726f38dbefa8": 1.6742058975759455,
+    "task_ec37e33912febbb2": 1.6024040817471454,
+    "task_9190aa8ffb9fc1a3": 1.7690257318538445,
+    "task_a9c6abe078b2043b": 0.3919314302036204,
+    "task_c9ce24f708688c0a": 1.7752958821008393,
+    "task_d1e9d876df7a3d04": 1.6779631956032932,
+    "task_b5c415f995a01e02": 1.7840918229068554,
+    "task_8a02f0a5e2b35063": 1.4755551838013061,
+    "task_0b4a7e90dc9a4010": 1.6770136008978038,
+    "task_57bf1ee9a72a9758": 1.6913170426844009,
+    "task_74e6e1fd9c6bd522": 1.7387457159287816,
+    "task_a55a4cb257334bd5": 1.4381621963880125,
+    "task_c42563c52a9ed8ea": 0.3808344303283413,
+    "task_c48d2ef0a47c0642": 1.8114678220798786,
+    "task_3138554f5d46cafe": 0.4954902285204833,
+    "task_73a75b09e557ccec": 0.22910370556332305,
+    "task_79899b1df15f5d5f": 0.1573169325727223,
+    "task_ecf8cf9924d3f23f": 1.9349656869873744,
+    "task_ff12a292ff3a699a": 1.6837486951253422,
+    "task_da158f00b2fe9b38": 1.76504536789116,
+    "task_81f514ac8126f793": 0.6565642664142384,
+    "task_2ebcac3806ef9576": 1.8576507478739783,
+    "task_afa7a24ec2bb183c": 2.1294535111957367,
+    "task_8710ac0244592939": 2.055092558365766,
+    "task_df873702e332e6ff": 1.3435843830190566,
+    "task_bc3409d92d49c1db": 1.783833078025623,
+    "task_f131a2d7746aad81": 1.7035029922219802,
+    "task_48f288fea71ed666": 1.741373081958452,
+    "task_2ee8cc79f84234b7": 1.7565494203434515,
+    "task_fcc1ec6ac7cc109e": 1.2734341597196486,
+    "task_4777cf9b17d87c70": 0.4516267401673667,
+    "task_ed3ccb6a520b71e9": 1.9465993910524317,
+    "task_11fa0ba806b1c077": 0.38363328537437236,
+    "task_073adb1fecb77781": 1.8446762596527613,
+    "task_5122680488e391f0": 1.6505557104007365,
+    "task_d30edcdbf9c886b8": 1.6640072359487372,
+    "task_3a285b391534aa18": 0.6033792446223608,
+    "task_bb4acf5dc96b3c1a": 2.119707798580005,
+    "task_4f1f2853e9734233": 1.704956767968097,
+    "task_8ee7f97461b73355": 1.7609966782452549,
+    "task_f2c68335978bb916": 1.4658223801364365,
+    "task_08921807c814301e": 1.8758035280588752,
+    "task_c06969906912ec42": 0.8610133891256103,
+    "task_76b3c3de223be234": 1.6150475080891384,
+    "task_11fecc5766001c92": 0.16641893448805853,
+    "task_be769cfc02600fe5": 1.8451015644243662,
+    "task_465b4a330c1a46a0": 1.7134468181542726,
+    "task_f0cd77eac8501e32": 1.3343595449427346,
+    "task_781d7cdd6467fd1c": 1.509140635867166,
+    "task_4e41352713c2148c": 1.4818046255693396,
+    "task_60d4bec2f587c97e": 1.7652650962006793,
+    "task_1b714e4d010a1530": 1.8525544905132592,
+    "task_9f75b8020e2f46ee": 1.713705101174589,
+    "task_5697a3086992ae84": 1.726905611171879
+   },
+   "scored_canonical": 64,
+   "loop_median": 1.0840448679188928,
+   "loop_per_task": {
+    "task_efd7625b517e6feb": 1.0837923176407533,
+    "task_06f852b2f4a59fa6": 1.1712514632206943,
+    "task_706edabd81502cc2": 0.9833151328633887,
+    "task_86b33259b54c3f42": 1.1389450347785925,
+    "task_4214578579775606": 1.11419724223512,
+    "task_2e41e15c2d01870a": 0.9504936406707892,
+    "task_726df96b30de3f6e": 1.213107564759634,
+    "task_7fbc1c7cfeeadc8d": 1.0765882156573392,
+    "task_8fb5975e9993634a": 1.0959274959716934,
+    "task_af53b1aed9a0cead": 1.0842974181970322,
+    "task_196f40268905d4af": 0.9689432695109859,
+    "task_2bdd576f7616ff0b": 1.196581883108848,
+    "task_c6f0072b758f4043": 0.9761733807363477,
+    "task_96b5f4d0211c3d88": 1.037234310922158,
+    "task_c3543a5437dc74f5": 1.2808845168759937,
+    "task_29c27722e5ecbccc": 0.8967260628377091,
+    "task_b36c95748efa701b": 0.9218240070739574,
+    "task_65fb859a602351f6": 1.0419435444154506,
+    "task_135003eaa193ecb4": 1.0710684089127311,
+    "task_7253bf8edb9252d9": 1.0814330068742073,
+    "task_1c3573591a5686fc": 1.0986339169990988,
+    "task_676127bf17ac3a9a": 1.0488485914527712,
+    "task_7b6388d8d8d7453f": 1.094629921978493,
+    "task_43e3f41e319547ec": 1.1126156632354585,
+    "task_9de5ec4711486a80": 1.2402536346958133,
+    "task_ff7f5bdb37e80986": 0.9044551215620829,
+    "task_8b60d5b58032fcf4": 1.100453045292766,
+    "task_ead20d3269167afa": 0.9920017359735316,
+    "task_0e2002f43953b3ea": 1.0001074600045927,
+    "task_1b7e27ae85602bc8": 1.2034744716363188,
+    "task_e6352d4ff9e41632": 1.1401253013962054,
+    "task_b9b969ad5d3049a5": 1.0133525505878243,
+    "task_e7f62c895cb4b131": 1.1910361218285548,
+    "task_9c93fa7838809a84": 1.0457183407340853,
+    "task_bcfb2ae6be635d16": 1.0055068978506816,
+    "task_b8514aa56c9162f8": 1.2626484041690678,
+    "task_c79ba8cc676afa33": 1.2832267501589767,
+    "task_5c358eadd3516d8b": 1.23655574344533,
+    "task_7883e2bf195e2b98": 1.1110051417017277,
+    "task_8c2c95d323ab7b51": 0.9917146109544726,
+    "task_2bea0ca5c62bad87": 1.2569723565026818,
+    "task_dd7ef1ac06b1d73b": 0.9614096212225962,
+    "task_4078119dd8793620": 1.1153933379441539,
+    "task_6004e7a9384c1b5f": 1.0688985711716577,
+    "task_bb1c7e0b8c8babc0": 1.036075098782995,
+    "task_6cbf23a46c527b8b": 1.0820960353726312,
+    "task_b7f16c29bfe83b06": 1.092864364792803,
+    "task_2518d6f435c63cc2": 1.1267346905802549
+   },
+   "loop_below_threshold": 0,
+   "anchor_median": 0.10475396330951345,
+   "anchor_per_task": {
+    "task_dc580e8e7d40d7ff": 0.04912409284499481,
+    "task_92c4e5490b54357a": 0.12239723132006558,
+    "task_3b64b5e829c72da6": 0.12378229586991857,
+    "task_36ce7e49535fc5d8": 0.046439113395151374,
+    "task_512e455735a4c150": 0.10411750078401,
+    "task_8c058d5f8e58c74e": 0.026794989553352164,
+    "task_1d328000072960e6": 0.10718651966069244,
+    "task_fb4d9b0d6a0d4b16": 0.1286419935426438,
+    "task_039ddba5a99ff583": 0.027004694126740843,
+    "task_f2d4ea4fd53f79f0": 0.048265658221601844,
+    "task_19bc96ff82a0b518": 0.028987004456216253,
+    "task_6e800716a9efc21c": 0.02797847326784755,
+    "task_fcd520416ba4ba64": 0.047837487286718564,
+    "task_a6e58906ddb6138f": 0.10539042583501688,
+    "task_90941bb4affd138c": 0.026842948855803284,
+    "task_2937c5484c5efc35": 0.11140930902696715,
+    "task_eb9b03f6b4c9c2ba": 0.04580426525477099,
+    "task_6795aedc5e2c7885": 0.029893081915430164,
+    "task_4bc281110ea7b4be": 0.028931336413853433,
+    "task_cfbb6b6649504b8f": 0.05019895164456038,
+    "task_7f56e0568e505cb4": 0.1892550816309954,
+    "task_0f398aa63eae687b": 0.048764907453086634,
+    "task_2fafffa90e13ff95": 0.13711274404465618,
+    "task_3c46e02468f6739a": 0.12322002721214204,
+    "task_07072df3d5ed21e1": 0.04804993916999929,
+    "task_24fca34ac252808d": 0.12572325753984798,
+    "task_95ff25350af2a48e": 0.09579936456084072,
+    "task_356e547f9e2fe2b3": 0.13483518854668852,
+    "task_2df5804c9a87f60e": 0.049570592715197655,
+    "task_e7e866b2b8ae739c": 0.12179098006253834,
+    "task_46a9c0eadc755815": 1.6930164176477203,
+    "task_f2efe465ecb95a3f": 0.1236798901427422,
+    "task_3c633988cfcff6c1": 0.11947721380279896,
+    "task_c5dbce276b7d6cb3": 0.11695817047519644,
+    "task_81a8c2258c85bdb3": 0.12676876976130427,
+    "task_5f579b595ef4e507": 0.09817266598545124,
+    "task_5a1ef098ae79ae42": 0.03152020464480515,
+    "task_76de3927b018ed4d": 0.03342301626288064,
+    "task_5812182dfcd4fbe5": 0.12054765666015654,
+    "task_8d8018eb26fcb097": 0.12613951969011467,
+    "task_58b9a9b857f4317a": 0.127457649890837,
+    "task_1f71460b9809809d": 0.02816970250634813,
+    "task_1f4cc4b571688ccd": 0.042372596379541216,
+    "task_8442948e1526d1ad": 0.04853862717650093,
+    "task_ae35924ddb99466a": 0.1307278114504794,
+    "task_eb201708c751e508": 0.1186986214590552,
+    "task_5b6ca610ea302cfd": 0.1285249860363048,
+    "task_3252c105ffa11012": 0.12219279842055286,
+    "task_7941edf3c14296bf": 0.03225499760654813,
+    "task_32046c29ab680deb": 0.027923915277015637,
+    "task_d0f843bb70c1de2f": 0.12469814691501373,
+    "task_b724397496efff27": 0.19064751091935764,
+    "task_fd1eafad6e88e9ab": 0.09475014914374816,
+    "task_2a8453bbf6370be3": 0.03051578034166134,
+    "task_78a39ac7e0568e63": 0.11995683903435188,
+    "task_b1c8c44f9f5a394f": 0.027155207485677072,
+    "task_eaa0117d5ccd3ef2": 0.027819628392870856,
+    "task_6fda9dafb5bb4b93": 0.10730646267689245,
+    "task_4ac075974c8b81bd": 0.18883565701132074,
+    "task_68c4d7ae6cb20f95": 0.126679851510887
+   },
+   "count_accuracy_median": 0.498046875,
+   "count_accuracy_per_task": {
+    "task_efd7625b517e6feb": 0.515625,
+    "task_06f852b2f4a59fa6": 0.44921875,
+    "task_706edabd81502cc2": 0.5078125,
+    "task_86b33259b54c3f42": 0.44921875,
+    "task_4214578579775606": 0.515625,
+    "task_2e41e15c2d01870a": 0.5078125,
+    "task_726df96b30de3f6e": 0.4375,
+    "task_7fbc1c7cfeeadc8d": 0.49609375,
+    "task_8fb5975e9993634a": 0.484375,
+    "task_af53b1aed9a0cead": 0.44921875,
+    "task_196f40268905d4af": 0.546875,
+    "task_2bdd576f7616ff0b": 0.4921875,
+    "task_c6f0072b758f4043": 0.51953125,
+    "task_96b5f4d0211c3d88": 0.4765625,
+    "task_c3543a5437dc74f5": 0.4453125,
+    "task_29c27722e5ecbccc": 0.5703125,
+    "task_b36c95748efa701b": 0.55078125,
+    "task_65fb859a602351f6": 0.5,
+    "task_135003eaa193ecb4": 0.515625,
+    "task_7253bf8edb9252d9": 0.51953125,
+    "task_1c3573591a5686fc": 0.484375,
+    "task_676127bf17ac3a9a": 0.49609375,
+    "task_7b6388d8d8d7453f": 0.53515625,
+    "task_43e3f41e319547ec": 0.50390625,
+    "task_9de5ec4711486a80": 0.453125,
+    "task_ff7f5bdb37e80986": 0.57421875,
+    "task_8b60d5b58032fcf4": 0.5078125,
+    "task_ead20d3269167afa": 0.515625,
+    "task_0e2002f43953b3ea": 0.4765625,
+    "task_1b7e27ae85602bc8": 0.4765625,
+    "task_e6352d4ff9e41632": 0.5078125,
+    "task_b9b969ad5d3049a5": 0.5390625,
+    "task_e7f62c895cb4b131": 0.45703125,
+    "task_9c93fa7838809a84": 0.5703125,
+    "task_bcfb2ae6be635d16": 0.5,
+    "task_b8514aa56c9162f8": 0.4609375,
+    "task_c79ba8cc676afa33": 0.44921875,
+    "task_5c358eadd3516d8b": 0.4453125,
+    "task_7883e2bf195e2b98": 0.49609375,
+    "task_8c2c95d323ab7b51": 0.50390625,
+    "task_2bea0ca5c62bad87": 0.46875,
+    "task_dd7ef1ac06b1d73b": 0.484375,
+    "task_4078119dd8793620": 0.48828125,
+    "task_6004e7a9384c1b5f": 0.53515625,
+    "task_bb1c7e0b8c8babc0": 0.50390625,
+    "task_6cbf23a46c527b8b": 0.51171875,
+    "task_b7f16c29bfe83b06": 0.46875,
+    "task_2518d6f435c63cc2": 0.484375
+   },
+   "seconds": 750.4632135999855
+  }
+ },
+ "finished_utc": "2026-10-11T17:24:17.417055+00:00"
+}
