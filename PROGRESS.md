@@ -8947,3 +8947,27 @@ predicate reading the detached state (wake and sleep), otherwise unchanged, on
 fresh development worlds if any remain unallocated (band 30-49 is spent; needs a
 band decision) or the same worlds as an explicitly reused sizing. Size the loop
 bar first against the 64-example support limit (census rerun at 64 support).
+
+
+# B2 CENSUS AT 64 SUPPORT (Tier 0, descriptive, 2026-10-10) and a CORRECTION to the B2-online v1 plan's loop baseline
+
+`row.experiments.census_b2_support64` (committed 1f6c6e1 before it ran),
+`reports/b2_support64_census.json`, logs `reports/b2_support64/`. The B2 census
+unchanged (same rebuilt final B1-online libraries, G0 and G1 3/3), support 64 added;
+the 128 and 512 rows reproduce the committed census exactly. At 64 support: loop
+form with a support-learned predicate **0.214** (p10-p90 0.137-0.323), input-gated
+impostor 0.675, one route 1.026, true predicate 0.041; inferred-count accuracy 1.0.
+
+**Correction (v1 plan, `B2_ONLINE_PLAN.md`).** The v1 plan compared LOOP's
+terminal loops with the census's 0.126, a 128-support number, but the end-of-stream
+re-fit fits on the 64 RETAINED examples per task. In the right unit the ceiling is
+0.214, and the localization's DETACH_HALT (0.264) sits near it. v1's registered
+`LOOP_BAR = 0.25` was therefore set against the wrong baseline (same family as "a
+baseline must be counted in the decision rule's own unit"). v1's label is unaffected
+(`FORMATION_BROKEN` fires first). Found by the write-time double-check of the v2 plan.
+
+**B2-online v2 frozen** (`B2_ONLINE_V2_PLAN.md`): `LoopLearner(detach_halt_input=True)`
+in wake and sleep, v1's construction as the paired `LOOP_ATTACHED` arm, `CONSTCOUNT`;
+development band 5 worlds 50-52 (allocated 46c55bf); `LOOP_BAR = 0.38` by v1's rule
+at 64 support (near-guaranteed given formation; formation, mechanism and wake
+clauses carry the question).

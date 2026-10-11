@@ -99,5 +99,34 @@ class LoopLearnerTests(unittest.TestCase):
             torch.testing.assert_close(m(x, t), m._route(m._route(m._route(x, coeff, 1), coeff, 1), coeff, 1))
 
 
+    def test_detach_halt_input(self):
+        """Detached predicate input: same evaluation; in training the halting still learns but the library gradient
+        loses exactly the path through the predicate."""
+        t = self.ltasks[0].task_id
+        torch.manual_seed(3)
+        m = self.build(LoopLearner, loop_plan={t: 'state'})
+        m.begin_task(t)
+        with torch.no_grad():
+            m.halt_w[t].normal_()
+            m.task_codes[t].normal_()
+        x = torch.randn(9, self.cfg.world.state_dim)
+
+        def run():
+            m.eval()
+            with torch.no_grad():
+                e = m(x, t).clone()
+            m.train()
+            m.zero_grad()
+            m(x, t).pow(2).sum().backward()
+            return e, torch.cat([p.grad.flatten() for p in m.library.parameters()]).clone(), m.halt_w[t].grad.clone()
+
+        e0, g0, h0 = run()
+        m.detach_halt_input = True
+        e1, g1, h1 = run()
+        self.assertTrue(torch.equal(e0, e1))
+        self.assertFalse(torch.equal(g0, g1))
+        self.assertGreater(float(h1.norm()), 0.0)
+        self.assertTrue(torch.allclose(h0, h1))   # the halting parameters' own gradient is unchanged
+
 if __name__ == '__main__':
     unittest.main()

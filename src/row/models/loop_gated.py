@@ -13,6 +13,10 @@ g_j = sigmoid(h.z_j + b) and otherwise stops with output z_j; after K applicatio
 output: the expected stopping state, sum_j P(stop at j) z_j (differentiable in the body, the predicate and the
 library). Evaluation: hard (continue iff h.z_j + b > 0) and the argmax body route.
 
+`detach_halt_input=True` (B2-online v2): the predicate reads the state DETACHED, so its gradient trains the halting
+parameters but never reaches the library or the body through the states (`reports/b2o_localize_census.json`: that
+path broke formation in sleep). Evaluation is unchanged; default False keeps v1 bitwise.
+
 SWITCH (tested): with an empty `loop_plan` the class adds no parameters, consumes no RNG and every forward is the
 parent's, so a lifetime with no loop tasks is BITWISE the parent learner's.
 """
@@ -28,11 +32,12 @@ class LoopLearner(BranchGatedLearner):
     implementation = 'loop_gated_v1'
 
     def __init__(self, *args, loop_plan: dict[str, str] | None = None, max_iterations: int = 6,
-                 state_halt: bool = True, **kwargs) -> None:
+                 state_halt: bool = True, detach_halt_input: bool = False, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.loop_plan: dict[str, str] = dict(loop_plan or {})
         self.max_iterations = int(max_iterations)
         self.state_halt = bool(state_halt)
+        self.detach_halt_input = bool(detach_halt_input)
         self.halt_w = nn.ParameterDict()
         self.halt_b = nn.ParameterDict()
 
@@ -59,6 +64,8 @@ class LoopLearner(BranchGatedLearner):
 
     def halt_logit(self, z: Tensor, task_id: str, step: int) -> Tensor:
         if task_id in self.halt_w:
+            if self.detach_halt_input:
+                z = z.detach()
             return z @ self.halt_w[task_id] + self.halt_b[task_id]
         return self.halt_b[task_id][step].expand(z.shape[0])
 

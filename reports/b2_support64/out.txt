@@ -1,0 +1,44 @@
+{
+ "G0": [
+  true,
+  true,
+  true
+ ],
+ "G1": [
+  true,
+  true,
+  true
+ ],
+ "anchor_128_512_reproduce": true,
+ "LOOP_ORACLE_median": 0.04130323890950384,
+ "n64": {
+  "REFUSAL": 1.0264013999218546,
+  "KWAY_INPUT": 0.6748261178575493,
+  "LOOP_LEARNED": 0.2136117548889298,
+  "LOOP_p10_p90": [
+   0.13725388017877732,
+   0.3227038727417687
+  ],
+  "inferred_count_accuracy_median": 1.0
+ },
+ "n128": {
+  "REFUSAL": 1.0239894972799202,
+  "KWAY_INPUT": 0.49366323786542377,
+  "LOOP_LEARNED": 0.12628341010865063,
+  "LOOP_p10_p90": [
+   0.08796529974252443,
+   0.1697444199842461
+  ],
+  "inferred_count_accuracy_median": 1.0
+ },
+ "n512": {
+  "REFUSAL": 1.0239894972799202,
+  "KWAY_INPUT": 0.2620797916265555,
+  "LOOP_LEARNED": 0.07086414574718278,
+  "LOOP_p10_p90": [
+   0.04647983376003034,
+   0.10448206872236054
+  ],
+  "inferred_count_accuracy_median": 1.0
+ }
+}
