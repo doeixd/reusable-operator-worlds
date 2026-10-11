@@ -128,5 +128,37 @@ class LoopLearnerTests(unittest.TestCase):
         self.assertGreater(float(h1.norm()), 0.0)
         self.assertTrue(torch.allclose(h0, h1))   # the halting parameters' own gradient is unchanged
 
+    def test_step_bias_nests_count_and_decay_group(self):
+        """step_bias: h = 0 with biases [+, -, ...] is the single route (count 1) in evaluation and nearly so in
+        training; the predicate is h.z_j + b_j; halt_decay puts h alone in a weight-decay group."""
+        m = self.build(LoopLearner, loop_plan={t.task_id: 'state' for t in self.ltasks}, step_bias=True,
+                       halt_decay=0.1, detach_halt_input=True)
+        t = self.ltasks[0].task_id
+        params = m.begin_task(t)
+        self.assertEqual(tuple(m.halt_b[t].shape), (m.max_iterations,))
+        self.assertIs(params[1], m.halt_b[t])
+        self.assertEqual(params[2], {'params': [m.halt_w[t]], 'weight_decay': 0.1})
+        d = self.cfg.world.state_dim
+        x = torch.randn(32, d)
+        coeff = torch.nn.functional.one_hot(torch.argmax(m.task_codes[t], -1), m.operator_slots).float()
+        with torch.no_grad():
+            m.halt_b[t].copy_(torch.tensor([60.0] + [-60.0] * (m.max_iterations - 1)))
+            m.eval()
+            torch.testing.assert_close(m(x, t), m._route(x, coeff, 1))
+            self.assertEqual(set(m.iteration_counts(x, t).tolist()), {1})
+            m.train()
+            soft = m._route(x, m._route_coefficients(m.task_codes[t]), 1)
+            torch.testing.assert_close(m(x, t), soft)
+            w = torch.randn(d)
+            m.halt_w[t].copy_(w)
+            z = torch.randn(5, d)
+            torch.testing.assert_close(m.halt_logit(z, t, 2), z @ w + m.halt_b[t][2])
+        # defaults unchanged: one bias, h in the plain list
+        m0 = self.build(LoopLearner, loop_plan={t: 'state'})
+        p0 = m0.begin_task(t)
+        self.assertEqual(tuple(m0.halt_b[t].shape), (1,))
+        self.assertEqual(len(p0), 3)
+        self.assertIs(p0[1], m0.halt_w[t])
+
 if __name__ == '__main__':
     unittest.main()

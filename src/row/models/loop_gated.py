@@ -17,6 +17,12 @@ library). Evaluation: hard (continue iff h.z_j + b > 0) and the argmax body rout
 parameters but never reaches the library or the body through the states (`reports/b2o_localize_census.json`: that
 path broke formation in sleep). Evaluation is unchanged; default False keeps v1 bitwise.
 
+`step_bias=True` (B2-hard): with `state_halt=True` the predicate is h.z_j + b_j, one bias PER STEP, so the halting rule
+NESTS the count form (h = 0 gives any fixed count L, in particular L = 1, the single route): a task the learner is
+not told is a loop can still be a plain one-step task (`reports/b2h_data_test_census.json`: a linear state predicate
+alone cannot express "apply once and stop"). `halt_decay` puts h in its own optimizer group with that weight decay (a
+usage cost on reading the state, as B1-hard's gate decay). Defaults False / None keep the construction bitwise.
+
 SWITCH (tested): with an empty `loop_plan` the class adds no parameters, consumes no RNG and every forward is the
 parent's, so a lifetime with no loop tasks is BITWISE the parent learner's.
 """
@@ -32,12 +38,15 @@ class LoopLearner(BranchGatedLearner):
     implementation = 'loop_gated_v1'
 
     def __init__(self, *args, loop_plan: dict[str, str] | None = None, max_iterations: int = 6,
-                 state_halt: bool = True, detach_halt_input: bool = False, **kwargs) -> None:
+                 state_halt: bool = True, detach_halt_input: bool = False, step_bias: bool = False,
+                 halt_decay: float | None = None, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.loop_plan: dict[str, str] = dict(loop_plan or {})
         self.max_iterations = int(max_iterations)
         self.state_halt = bool(state_halt)
         self.detach_halt_input = bool(detach_halt_input)
+        self.step_bias = bool(step_bias)
+        self.halt_decay = halt_decay
         self.halt_w = nn.ParameterDict()
         self.halt_b = nn.ParameterDict()
 
@@ -50,10 +59,12 @@ class LoopLearner(BranchGatedLearner):
         if not self.state_halt:
             self.halt_b[task_id] = nn.Parameter(torch.zeros(self.max_iterations))
             return [code, self.halt_b[task_id]]
-        self.halt_b[task_id] = nn.Parameter(torch.zeros(1))
+        self.halt_b[task_id] = nn.Parameter(torch.zeros(self.max_iterations if self.step_bias else 1))
         d = self.library[0].V.shape[1]
         self.halt_w[task_id] = nn.Parameter(torch.zeros(d))
-        return [code, self.halt_w[task_id], self.halt_b[task_id]]
+        if self.halt_decay is None:
+            return [code, self.halt_w[task_id], self.halt_b[task_id]]
+        return [code, self.halt_b[task_id], {'params': [self.halt_w[task_id]], 'weight_decay': float(self.halt_decay)}]
 
     def loop_parameters(self, task_ids) -> list[nn.Parameter]:
         out = []
@@ -66,7 +77,8 @@ class LoopLearner(BranchGatedLearner):
         if task_id in self.halt_w:
             if self.detach_halt_input:
                 z = z.detach()
-            return z @ self.halt_w[task_id] + self.halt_b[task_id]
+            b = self.halt_b[task_id][step] if self.step_bias else self.halt_b[task_id]
+            return z @ self.halt_w[task_id] + b
         return self.halt_b[task_id][step].expand(z.shape[0])
 
     def forward(self, x: Tensor, task_id: str) -> Tensor:

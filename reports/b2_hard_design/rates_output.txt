@@ -1,0 +1,15 @@
+state-weight separation d'=0.0: median AUC ~0.501; P(median >= 0.9)=0.000
+state-weight separation d'=1.0: median AUC ~0.762; P(median >= 0.9)=0.000
+state-weight separation d'=1.5: median AUC ~0.857; P(median >= 0.9)=0.001
+state-weight separation d'=2.0: median AUC ~0.924; P(median >= 0.9)=0.986
+state-weight separation d'=3.0: median AUC ~0.985; P(median >= 0.9)=1.000
+recall: per-task 0.6: P(pooled >= 0.8 of 432)=0.0000
+recall: per-task 0.75: P(pooled >= 0.8 of 432)=0.0074
+recall: per-task 0.8: P(pooled >= 0.8 of 432)=0.5096
+recall: per-task 0.85: P(pooled >= 0.8 of 432)=0.9976
+recall: per-task 0.9: P(pooled >= 0.8 of 432)=1.0000
+specificity: per-task 0.9: P(pooled >= 0.95 of 540)=0.0000
+specificity: per-task 0.93: P(pooled >= 0.95 of 540)=0.0364
+specificity: per-task 0.95: P(pooled >= 0.95 of 540)=0.5510
+specificity: per-task 0.97: P(pooled >= 0.95 of 540)=0.9958
+specificity: per-task 0.99: P(pooled >= 0.95 of 540)=1.0000
