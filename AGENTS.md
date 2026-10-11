@@ -538,6 +538,10 @@ report JSON. `figures/` — generated figures.
   (`row.experiments.d4_stream`). D1 uses 30-36; world 48 ran the pre-plan
   timing cell; world 49 is the dry-run world; 37-47 are unused. Verified unused
   before allocation: no runner, report or artifact references them.
+- **Development band 5:** seeds 50-69, allocated 2026-10-10 for the control-flow
+  track (B2-online v2 onward); Claude recommended it and the PI answered
+  "Continue". Development evidence only. Verified unused before allocation: no
+  runner, report or artifact references them.
 - **O9 sealed band:** seeds 930-959, allocated 2026-10-04 (decision 15; the PI
   answered "Ok continue" to Claude's recommendation). O9 uses 930-944;
   945-959 stay sealed and unused. No sealed world may be generated before
