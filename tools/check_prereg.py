@@ -96,6 +96,7 @@ FROZEN = {
     "B1_ONLINE_PLAN.md": "721f185",
     "B2_ONLINE_PLAN.md": "3eb82d6",
     "B2_ONLINE_V2_PLAN.md": "50aea61",
+    "B2_HARD_PLAN.md": "1f50c1a",
     "B1_HARD_PLAN.md": "f896445",
 }
 
