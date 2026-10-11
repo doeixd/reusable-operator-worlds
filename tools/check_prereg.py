@@ -95,6 +95,7 @@ FROZEN = {
     "B1G_GRADIENT_BRANCH_PLAN.md": "d511b7c",
     "B1_ONLINE_PLAN.md": "721f185",
     "B2_ONLINE_PLAN.md": "3eb82d6",
+    "B2_ONLINE_V2_PLAN.md": "50aea61",
     "B1_HARD_PLAN.md": "f896445",
 }
 
