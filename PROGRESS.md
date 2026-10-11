@@ -8971,3 +8971,44 @@ in wake and sleep, v1's construction as the paired `LOOP_ATTACHED` arm, `CONSTCO
 development band 5 worlds 50-52 (allocated 46c55bf); `LOOP_BAR = 0.38` by v1's rule
 at 64 support (near-guaranteed given formation; formation, mechanism and wake
 clauses carry the question).
+
+
+# B2-ONLINE V2 (Tier 1, band 5 worlds 50-52, 2026-10-11): `LOOPS_ONLINE` with `DETACH_PROTECTS` (k_formation 9, n_wake 9, n_terminal 9, n_mechanism 9 of 9)
+
+`B2_ONLINE_V2_PLAN.md` (frozen 50aea61, hash protected 242ecbc), runner
+`row.experiments.b2_online_v2`, launched from 242ecbc on 2026-10-11 00:36Z, exit 0 at
+04:38Z, 27/27 cells; report `reports/b2_online_v2.json`; logs and the dry run with
+its restart test in `reports/b2_online_v2_20261011/`. Independent scorer
+`score_b2_online_v2` agrees with the runner on every clause; `check_prereg` and
+`check_invalid` pass. **Exploratory, no verdict** (Tier 1, 9 cells on 3 fresh
+development worlds).
+
+| arm (construction) | canonical < 0.05 | canonical median (cell range) | loop median (range) | wake loop median (range) | wake canonical |
+|---|---|---|---|---|---|
+| `LOOP` (state halting, predicate reads `z.detach()`) | **9/9** | **0.0112** (0.0089-0.0143) | **0.255** (0.229-0.299) | 0.540 (0.483-0.611) | 0.053 |
+| `LOOP_ATTACHED` (v1's LOOP exactly) | 2/9 | 0.0676 (0.040-0.099) | 0.321 (0.291-0.370) | 0.538 (0.496-0.592) | 0.086 |
+| `CONSTCOUNT` (no state access) | 9/9 | 0.0143 (0.0117-0.0184) | 1.071 (1.047-1.077) | 1.466 (1.23-1.66) | 0.090 |
+
+Clauses: `k_formation` 9/9; `n_wake` 9/9 (LOOP's wake loop median is at most 0.43x
+CONSTCOUNT's in every pair); `n_terminal` 9/9 (bar 0.38); `n_mechanism` 9/9 (LOOP's
+canonical below LOOP_ATTACHED's in every pair; the ranges do not overlap);
+`n_control` 9/9. Count accuracy (fraction of query inputs given the teacher's
+iteration count): LOOP 0.75 after wake, 0.88 terminal; LOOP_ATTACHED 0.75, 0.85.
+
+**Reading.** The localization census's mechanism, found post hoc on reused cells,
+holds prospectively on fresh worlds with the fix built into wake and sleep: v1's
+construction failed formation again (2/9), the detached construction formed 9/9 at
+the controls' level, and detaching cost wake nothing (wake loops 0.540 against
+0.538) while helping the wake vocabulary (0.053 against 0.086). So a learner can
+form the vocabulary and learn data-dependent iteration online in the same stream,
+with loop identity given.
+
+**What this does not show.** `n_terminal` was registered as near-guaranteed given
+formation and is not evidence by itself. Loops are learned to the 64-example re-fit's
+level (0.255 against the census's 0.214 loop form at 64 support), not well: no loop
+task in any arm is below 0.05, and the true predicate reaches 0.041. Loop identity is
+GIVEN; one body operator, linear halting, K = 6.
+
+**Next (Claude), per the plan's registered branch:** loop discovery without identity
+(B2-hard), then longer bodies; the support limit (the re-fit sees 64 retained
+examples) is a separate, known cap on loop quality.

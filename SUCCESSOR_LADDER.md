@@ -207,3 +207,10 @@ B2-hard or B2-online v2.
 into the shared library breaks formation; detaching it restores 9/9 (0.014) and
 improves loops (0.26). **Next: B2-online v2** with detached halting input, after a
 world-band decision and re-sizing the loop bar at 64-example support.
+
+**B2-online v2 (2026-10-11): `LOOPS_ONLINE`, `DETACH_PROTECTS`, 9/9 on every
+clause** (band 5 worlds 50-52). Detached halting forms the vocabulary (0.011)
+where v1's construction fails again (2/9), and wake still learns state-dependent
+halting (0.54 vs 1.47). Loops reach the 64-example re-fit's level (0.255), not
+the true predicate's (0.041). **Next: B2-hard** (loop discovery without identity),
+then longer bodies.

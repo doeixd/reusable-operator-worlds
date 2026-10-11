@@ -1,0 +1,7 @@
+2026-10-11T00:23:37.146158+00:00 LAUNCH ee1e75cae47b552b3748ef0c8ecbe03632ff1c3c780a2ff2776c3adfc2da863d todo=3 reused=0 scale=16 free=4.8GiB
+2026-10-11T00:29:50.411063+00:00 cell finished CONSTCOUNT_w69_s0 370.5s canonical=1.408 loop=1.097 wake_loop=1.758
+2026-10-11T00:29:50.494584+00:00 STOP after 1 cells (restart test)
+2026-10-11T00:30:02.401259+00:00 reused validated cell CONSTCOUNT_w69_s0
+2026-10-11T00:30:02.410912+00:00 LAUNCH ee1e75cae47b552b3748ef0c8ecbe03632ff1c3c780a2ff2776c3adfc2da863d todo=2 reused=1 scale=16 free=4.8GiB
+2026-10-11T00:36:34.844363+00:00 cell finished LOOP_w69_s0 389.8s canonical=1.006 loop=0.5731 wake_loop=1.411
+2026-10-11T00:36:39.700282+00:00 cell finished LOOP_ATTACHED_w69_s0 394.6s canonical=1.415 loop=0.6059 wake_loop=1.411
