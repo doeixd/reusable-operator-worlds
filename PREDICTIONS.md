@@ -11247,3 +11247,24 @@ GIVEN; one body operator, linear halting, K = 6.
 **Next (Claude), per the plan's registered branch:** loop discovery without identity
 (B2-hard), then longer bodies; the support limit (the re-fit sees 64 retained
 examples) is a separate, known cap on loop quality.
+
+
+# B2-HARD DATA-TEST CENSUS (Tier 0, descriptive, 2026-10-11): on a formed library an end-of-stream test separates loop tasks from straight ones perfectly; a loop form forced on a straight task is catastrophic
+
+`row.experiments.census_b2h_data_test` (committed 076f6bd before it ran), `reports/b2h_data_test_census.json`, log
+`reports/b2h_data_test/`. On B2-online v2's 9 LOOP wake models (worlds 50-52, reload gate G0 9/9), every depth-1
+task (48 loop, 60 straight length-1 per cell; 432 and 540 pooled), on its 64 retained examples with the library
+frozen: best COUNT form (body slot, fixed count 0..6; contains the single route) against best LOOP form (body slot,
+state predicate fitted as `refit_loops` does).
+
+- support ratio LOOP/COUNT, median: loop tasks 0.014, straight tasks 90.4; AUC 1.000 in every cell;
+- keep-a-loop at ratio 0.5: recall 0.998 (431/432), specificity 1.000; at 0.75 and 0.9 both 1.000;
+- held-out query: loop tasks 0.260 under the LOOP form against 1.015 under COUNT (best count is 0 iterations for
+  418/432); straight tasks 0.011 under COUNT (always L = 1) against **1.364** under the LOOP form.
+
+**Reading.** As in B1-hard, the end-of-stream data test is near-guaranteed on a formed library, so a B2-hard
+plan's question is carried by formation and by wake, not by this test. And a linear state predicate cannot express
+"apply once and stop" (it would have to separate x from P(x) for every x), so loop machinery attached to every
+depth-1 task without identity would cost a straight task ~100x unless the halting rule can also count. A B2-hard
+learner therefore needs halting that nests the count form: a per-step bias plus the state term. These libraries
+were formed WITH loop identity; B2-hard's own may differ (the plan keeps the test as a check, as B1-hard did).
