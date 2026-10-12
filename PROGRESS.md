@@ -9243,3 +9243,37 @@ was chosen from one sizing cell. `n_terminal`, recall and specificity were near-
 
 **Next (Claude), per the plan's branch:** longer loop bodies (depth 2), and carrying the lesson (start a new freedom
 at the plain form) to the branch line's gates; the absolute loop bar at adequate sample size stays deferred.
+
+# B2-DEPTH2 NECESSITY CENSUS (Tier 0, descriptive, 2026-10-12): loops with a two-step body need iteration and the two-step body, the body is trivially findable, and execution drift sets a high ceiling
+
+`src/row/experiments/census_b2d2_necessity.py`, `reports/b2d2_necessity_census.json`, log
+`reports/b2d2_census_20261012/`. Written before any plan. Task: `while w.z > 0 (at most K = 6): z = P2(P1(z))`, P1 != P2
+teacher primitives, 36 tasks per world. Vocabularies: B2-hard v2's ONESTEP final libraries (worlds 57-59, stream 0),
+rebuilt from the saved wake terminal with the run's exact end of stream. Gates: G0 (wake medians reproduce) and G1
+(rebuilt library sha256 equals the recorded final one) pass 3/3; final canonical medians reproduce exactly (0.0107,
+0.0274, 0.0190). Teacher -> slot matching injective in 3/3 worlds, worst one-application match 0.036.
+
+| query NMSE median (108 tasks) | n = 128 | n = 512 |
+|---|---|---|
+| REFUSAL (one straight route) | 1.017 | 1.017 |
+| KWAY_INPUT (input picks the unrolled count) | 0.508 | 0.267 |
+| LOOP1_BEST (best one-slot loop, up to 12 steps) | 1.691 | 1.736 |
+| LOOP2_LEARNED (matched two-step body) | 0.164 | 0.108 |
+| LOOP2_SEARCH (body searched over 144) | 0.164 | 0.108 |
+| LOOP2_ORACLE (true hyperplane) | 0.083 | 0.083 |
+
+- **Necessity passes.** LOOP2 beats one route, the input-picked count and the best one-slot loop in 108/108 tasks
+  at n = 128 (107/108 against KWAY at 512). A one-step body is no impostor here (worse than refusal).
+- **Findability is trivial** (TOO_EASY in `difficulty_band` terms): search picks the matched body in 108/108 with
+  runner-up margin ~52x; inferred counts are exact (median accuracy 1.0). A discovery rung on the body would be
+  near-guaranteed on a formed vocabulary, as B2's was.
+- **Execution drift binds.** The oracle loop error grows with the true count: 0.069 at one body application, 0.165 at
+  2, 0.26 at 3, 0.42 at 4. No learned loop is below 0.05 at either size; only 8/108 oracle loops are (10-90%:
+  0.051-0.149). At depth 1 the corresponding ceiling was 0.041 (B2 census, on B1-online's libraries, so not paired). Counts: 50% zero, 25% one, 12% two,
+  13% three or more.
+
+**Reading.** The depth-2 body rung has necessity and opportunity, but its natural discovery question (which body) is
+too easy, and its quality is limited by compounding execution error of two learned operators, not by learning the
+loop: the learned loop sits at ~1.3-2x the oracle, and the oracle itself is about 2x the (unpaired) depth-1 ceiling. An online rung
+would therefore mostly measure whether the vocabulary forms with depth-2 loop tasks in the stream (the B2-hard
+question at a new depth), with an absolute loop bar that must be set against this ceiling, not B2's.
