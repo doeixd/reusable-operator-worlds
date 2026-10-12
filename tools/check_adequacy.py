@@ -58,6 +58,7 @@ IN_SCOPE = (
     'B2_ONLINE_V2_PLAN.md',
     'B2_HARD_PLAN.md',
     'B2_HARD_V2_PLAN.md',
+    'B2_DEPTH2_PLAN.md',
 )
 
 #: Explicit sentinel for a plan with no behaviour to elicit (an observational
