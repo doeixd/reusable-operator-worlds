@@ -226,3 +226,10 @@ form; longer bodies wait.
 Q^2 or Q^3 ~ P from the anchors); enforcing one step at end of stream repairs 3 of
 6 failing cells, not deep or multiple roots. **Next: B2-hard v2** with the one-step
 form as the wake starting point.
+
+**B2-hard v2 (2026-10-12): `DISCOVERS`, `ROOTS_PREVENTED`** (band 5 worlds 57-59).
+Starting every candidate as a plain step, the learner finds which tasks iterate
+without being told while forming the vocabulary: 9/9 formed, wake AUC 1.000, recall
+0.986, specificity 1.000; roots 0/9 against 7/9 for the zero start (5/9 formed, every
+failure rooted). Discovery costs ~6% on loops against being told. **Next: longer
+loop bodies (depth 2).**

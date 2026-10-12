@@ -9191,3 +9191,55 @@ across cells.
 **Choice for the plan: c = 4.** Its wake vocabulary is the closer to GIVEN's (0.036 against 0.162) with fewer stale
 routes, at no cost in discovery; c = 2's terminal is marginally better in this one cell, a difference one cell
 cannot resolve. Single registered value, not tuned further.
+
+
+# B2-HARD V2 (Tier 1, band 5 worlds 57-59, 2026-10-12): `DISCOVERS` with `ROOTS_PREVENTED`; starting every candidate at the one-step form lets the learner find which tasks iterate, without being told, while forming the vocabulary
+
+`B2_HARD_V2_PLAN.md` (frozen ee18fa5, hash protected 6cc6b62), runner `row.experiments.b2_hard_v2`, report
+`reports/b2_hard_v2.json`, logs `reports/b2_hard_v2_20261012/` (dry run and restart test in `dry/`). 27 cells, exit 0,
+finished 2026-10-12T08:26Z. The independent scorer `row.experiments.score_b2_hard_v2` agrees with the runner on every
+clause; `check_prereg` and `check_invalid` pass. Exploratory: no verdict.
+
+**Primary label `DISCOVERS`** (ONESTEP): `k_formation` **9/9**; wake state-weight AUC median **1.000** (1.000 in every
+cell); recall **0.986** (426/432); specificity **1.000** (540/540); `n_terminal` **9/9** (loop medians 0.249-0.311,
+bar 0.38). **Secondary label `ROOTS_PREVENTED`:** rooted cells at the end of wake ONESTEP **0/9**, ZERO **7/9**, GIVEN
+0/9. **Prospective wake-census check:** every ZERO formation failure was rooted (**4 of 4**); 3 rooted ZERO cells
+still formed (w57 s1, w59 s0, w59 s1, each with one rooted operation), so a root is necessary for failure here but
+not sufficient.
+
+**Per cell (terminal canonical median; `*` = fails 0.05; rooted operations at end of wake):**
+
+| cell | ONESTEP | ZERO | GIVEN |
+|---|---|---|---|
+| w57 s0 | 0.0107 | 0.0192 | 0.0125 |
+| w57 s1 | 0.0138 | 0.0164 [5] | 0.0151 |
+| w57 s2 | 0.0097 | 0.793* [0,2,3,5] | 0.0147 |
+| w58 s0 | 0.0274 | 0.0566* [0,2,3] | 0.0198 |
+| w58 s1 | 0.0188 | 0.0707* [2] | 0.0153 |
+| w58 s2 | 0.0158 | 1.448* [0,1,4] | 0.0149 |
+| w59 s0 | 0.0190 | 0.0322 [1] | 0.0089 |
+| w59 s1 | 0.0187 | 0.0418 [4] | 0.0108 |
+| w59 s2 | 0.0136 | 0.0135 | 0.0091 |
+| passes | 9/9 | 5/9 | 9/9 |
+
+Medians: canonical ONESTEP 0.0158, ZERO 0.0418, GIVEN 0.0147; wake canonical 0.072, 1.960, 0.040; canonical after
+re-route only 0.048, 0.660, 0.033; routes changed at re-route 21-46, 54-94, 15-45. ZERO's wake AUC was also high
+(median 0.986) but its recall 0.688: on a rooted library the end-of-stream data test loses loops.
+
+**Cost of discovery (ONESTEP against GIVEN, paired; reported):** terminal loop median 0.293 against 0.276 (ONESTEP at
+or below GIVEN in 1/9 cells), canonical 0.0158 against 0.0147 (3/9), count accuracy 0.863 against 0.873. Not being
+told which tasks loop costs about 6% on the loops and nothing material on the vocabulary.
+
+**Reading.** The rung asked whether a learner can find which tasks need data-dependent iteration, without being told,
+while it forms the vocabulary. With loop machinery on all 108 depth-1 candidates and every candidate starting as a
+plain single step, it can, on 9 of 9 fresh cells, at a small cost against being told. The mechanism located post hoc
+in B2-hard held prospectively: the zero start formed roots in 7 of 9 cells and failed in 4, each failure rooted; the
+one-step start formed none. ZERO and ONESTEP share every other part of the construction, including the end of stream.
+
+**What this does not show.** Tier 1, 9 cells on 3 development worlds. The planned depth is given and narrows the
+search to the 108 depth-1 tasks (and fixes one step for a straight count form). One body operator, linear halting,
+K = 6, 64 retained examples; loops reach the 64-example re-fit's level, not the true predicate's. `halt_init = 4`
+was chosen from one sizing cell. `n_terminal`, recall and specificity were near-guaranteed on a formed library.
+
+**Next (Claude), per the plan's branch:** longer loop bodies (depth 2), and carrying the lesson (start a new freedom
+at the plain form) to the branch line's gates; the absolute loop bar at adequate sample size stays deferred.

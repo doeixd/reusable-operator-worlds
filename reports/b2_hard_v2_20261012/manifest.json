@@ -1,0 +1,58 @@
+{
+ "protocol": {
+  "id": "b2-hard-v2",
+  "git_commit": "6cc6b62",
+  "plan": "B2_HARD_V2_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "root": "artifacts/b2_hard_v2",
+  "worlds": [
+   57,
+   58,
+   59
+  ],
+  "streams": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "ONESTEP",
+   "ZERO",
+   "GIVEN"
+  ],
+  "n_loop": 48,
+  "n_candidates": 108,
+  "k": 6,
+  "memory": 64,
+  "sleep_updates": 8192,
+  "halt_init": 4.0,
+  "halt_decay": 0.1,
+  "loop_ratio": 0.5,
+  "one_step": [
+   0,
+   1
+  ],
+  "threshold": 0.05,
+  "loop_bar": 0.38,
+  "input_sha256": {
+   "B2_HARD_V2_PLAN.md": "245ea2de13d1d1a7753e243d364223198e57ec2b12a4ad8b59fb8c1a9ff5e9d4",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "48fbc633857d60c93e560669927365e614676f394b2b9a7b3b5aa115c326cc0d",
+  "loop_learner_sha256": "1ca2f080a4dc85151b444dae13923150005c0f9d639e5d8a823d4a130d20e0d2",
+  "b2_hard_sha256": "f6d893a71589e8e5bc349e580b5eeed63fd9be29414e7865c530061106728c51",
+  "b2_online_v1_sha256": "8c2b219b715c6eae5b1293abae6c05229d01cedb02cd61854d9836dbd8746eb0",
+  "b1_online_sha256": "ed8233717676f632d0717872223d720feae9f894a5658780cff3ad83184c1cd0",
+  "b2_census_sha256": "d49fdf909cdc2643731411baa0ba99aee5b062fae7e3ae9261f176128460dbb2",
+  "root_census_sha256": "96d8263ec0b255d533667d34e9286688b4bfd9411a4b2bc5cd5491c366188f41",
+  "wake_census_sha256": "5978e80b14ee34c58a918a617d7225ed7ba8e0f3d490a82e105aa16afa321507",
+  "deep_reroute_sha256": "6528c8683cb33a5b90d51d6f8e42c6234142a206a4f567c7d307e487e5eea3e6",
+  "lifetime_sha256": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+  "loop_stream_sha256": "1914003049c9def33296422f578738b1d5b3c00b8eaf2c31017031cde31fefc8",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "scale": 1
+ },
+ "protocol_sha256": "811a44655c1311271fea867ba65237fb8dac6fbc75750f417fdf4fe90d4d5f33"
+}

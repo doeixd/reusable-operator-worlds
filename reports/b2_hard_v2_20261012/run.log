@@ -1,0 +1,28 @@
+2026-10-12T03:05:59.794791+00:00 LAUNCH 811a44655c1311271fea867ba65237fb8dac6fbc75750f417fdf4fe90d4d5f33 todo=27 reused=0 scale=1 free=7.7GiB
+2026-10-12T03:52:58.980365+00:00 cell finished ONESTEP_w57_s2 2815.9s canonical=0.009682 loop=0.2493 anchor=0.003521 wake=0.05233 rooted=[] auc=1.000 kept=48 count=60
+2026-10-12T03:54:30.693075+00:00 cell finished ONESTEP_w57_s1 2907.7s canonical=0.01383 loop=0.2752 anchor=0.004629 wake=0.04208 rooted=[] auc=1.000 kept=48 count=60
+2026-10-12T03:54:51.014031+00:00 cell finished ONESTEP_w57_s0 2928.0s canonical=0.01069 loop=0.2645 anchor=0.003219 wake=0.0324 rooted=[] auc=1.000 kept=48 count=60
+2026-10-12T04:31:57.578295+00:00 cell finished ONESTEP_w58_s0 2338.6s canonical=0.02739 loop=0.2934 anchor=0.007274 wake=0.07036 rooted=[] auc=1.000 kept=48 count=60
+2026-10-12T04:32:57.841237+00:00 cell finished ONESTEP_w58_s1 2307.1s canonical=0.01877 loop=0.3024 anchor=0.006303 wake=0.9877 rooted=[] auc=1.000 kept=48 count=60
+2026-10-12T04:33:03.124791+00:00 cell finished ONESTEP_w58_s2 2292.1s canonical=0.01583 loop=0.2829 anchor=0.004982 wake=0.1155 rooted=[] auc=1.000 kept=48 count=60
+2026-10-12T05:10:57.853524+00:00 cell finished ONESTEP_w59_s0 2340.2s canonical=0.019 loop=0.2966 anchor=0.004607 wake=0.07246 rooted=[] auc=1.000 kept=48 count=60
+2026-10-12T05:11:51.950447+00:00 cell finished ONESTEP_w59_s2 2328.8s canonical=0.01365 loop=0.3071 anchor=0.003958 wake=0.1639 rooted=[] auc=1.000 kept=48 count=60
+2026-10-12T05:12:03.654661+00:00 cell finished ONESTEP_w59_s1 2345.8s canonical=0.01873 loop=0.3108 anchor=0.005446 wake=0.4285 rooted=[] auc=1.000 kept=42 count=60
+2026-10-12T05:50:27.298377+00:00 cell finished ZERO_w57_s2 2303.6s canonical=0.7928 loop=1.01 anchor=0.02675 wake=1.871 rooted=[0, 2, 3, 5] auc=0.986 kept=17 count=60
+2026-10-12T05:50:44.279920+00:00 cell finished ZERO_w57_s0 2386.4s canonical=0.01923 loop=0.3066 anchor=0.006369 wake=1.825 rooted=[] auc=0.928 kept=48 count=60
+2026-10-12T05:50:51.397742+00:00 cell finished ZERO_w57_s1 2339.4s canonical=0.01643 loop=0.3756 anchor=0.00547 wake=2.005 rooted=[5] auc=0.978 kept=30 count=60
+2026-10-12T06:31:12.759101+00:00 cell finished ZERO_w58_s1 2428.5s canonical=0.07071 loop=0.3628 anchor=0.01603 wake=1.843 rooted=[2] auc=0.991 kept=40 count=60
+2026-10-12T06:31:14.209333+00:00 cell finished ZERO_w58_s2 2422.8s canonical=1.448 loop=0.9809 anchor=0.02109 wake=1.96 rooted=[0, 1, 4] auc=0.998 kept=19 count=60
+2026-10-12T06:31:47.639732+00:00 cell finished ZERO_w58_s0 2480.3s canonical=0.0566 loop=1.033 anchor=0.01423 wake=2.056 rooted=[0, 2, 3] auc=0.986 kept=15 count=60
+2026-10-12T07:10:32.263190+00:00 cell finished ZERO_w59_s1 2358.0s canonical=0.04181 loop=0.37 anchor=0.00897 wake=1.995 rooted=[4] auc=0.996 kept=37 count=60
+2026-10-12T07:10:51.880627+00:00 cell finished ZERO_w59_s0 2379.1s canonical=0.0322 loop=0.3238 anchor=0.008274 wake=1.984 rooted=[1] auc=0.979 kept=43 count=60
+2026-10-12T07:11:35.343738+00:00 cell finished ZERO_w59_s2 2387.7s canonical=0.0135 loop=0.3168 anchor=0.003691 wake=0.2436 rooted=[] auc=0.960 kept=48 count=60
+2026-10-12T07:37:20.447304+00:00 cell finished GIVEN_w57_s0 1608.1s canonical=0.01254 loop=0.2498 anchor=0.003927 wake=0.03873 rooted=[]
+2026-10-12T07:38:07.449336+00:00 cell finished GIVEN_w57_s1 1635.5s canonical=0.01512 loop=0.269 anchor=0.004734 wake=0.03885 rooted=[]
+2026-10-12T07:38:07.742511+00:00 cell finished GIVEN_w57_s2 1592.3s canonical=0.01466 loop=0.2595 anchor=0.004992 wake=0.0678 rooted=[]
+2026-10-12T08:01:14.670921+00:00 cell finished GIVEN_w58_s0 1434.2s canonical=0.01975 loop=0.2818 anchor=0.003994 wake=0.02127 rooted=[]
+2026-10-12T08:02:33.038624+00:00 cell finished GIVEN_w58_s1 1465.5s canonical=0.01529 loop=0.2857 anchor=0.00583 wake=0.2629 rooted=[]
+2026-10-12T08:02:33.576140+00:00 cell finished GIVEN_w58_s2 1465.8s canonical=0.01487 loop=0.2626 anchor=0.002809 wake=0.04002 rooted=[]
+2026-10-12T08:24:48.523703+00:00 cell finished GIVEN_w59_s0 1413.8s canonical=0.008889 loop=0.2813 anchor=0.001983 wake=0.0494 rooted=[]
+2026-10-12T08:25:45.012543+00:00 cell finished GIVEN_w59_s1 1391.9s canonical=0.01076 loop=0.2757 anchor=0.003601 wake=0.1623 rooted=[]
+2026-10-12T08:26:20.720845+00:00 cell finished GIVEN_w59_s2 1427.1s canonical=0.009124 loop=0.2764 anchor=0.002802 wake=0.03511 rooted=[]
