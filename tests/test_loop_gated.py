@@ -160,5 +160,27 @@ class LoopLearnerTests(unittest.TestCase):
         self.assertEqual(len(p0), 3)
         self.assertIs(p0[1], m0.halt_w[t])
 
+    def test_halt_init_starts_at_one_step(self):
+        """halt_init=c: per-step biases start at [+c, -c, ...]; at c = 60 a fresh candidate is the single route in
+        evaluation and in training; the default (None) keeps zeros."""
+        t = self.ltasks[0].task_id
+        d = self.cfg.world.state_dim
+        x = torch.randn(16, d)
+        for kw in ({'state_halt': True, 'step_bias': True, 'detach_halt_input': True}, {'state_halt': False}):
+            m = self.build(LoopLearner, loop_plan={t: 'state'}, halt_init=60.0, **kw)
+            m.begin_task(t)
+            K = m.max_iterations
+            torch.testing.assert_close(m.halt_b[t].detach(), torch.tensor([60.0] + [-60.0] * (K - 1)))
+            with torch.no_grad():
+                m.eval()
+                coeff = torch.nn.functional.one_hot(torch.argmax(m.task_codes[t], -1), m.operator_slots).float()
+                torch.testing.assert_close(m(x, t), m._route(x, coeff, 1))
+                m.train()
+                torch.testing.assert_close(m(x, t), m._route(x, m._route_coefficients(m.task_codes[t]), 1))
+            m0 = self.build(LoopLearner, loop_plan={t: 'state'}, **kw)
+            m0.begin_task(t)
+            self.assertEqual(float(m0.halt_b[t].detach().abs().sum()), 0.0)
+            self.assertEqual(tuple(m0.halt_b[t].shape), (K,))
+
 if __name__ == '__main__':
     unittest.main()

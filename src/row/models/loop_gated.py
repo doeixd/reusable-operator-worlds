@@ -23,6 +23,12 @@ not told is a loop can still be a plain one-step task (`reports/b2h_data_test_ce
 alone cannot express "apply once and stop"). `halt_decay` puts h in its own optimizer group with that weight decay (a
 usage cost on reading the state, as B1-hard's gate decay). Defaults False / None keep the construction bitwise.
 
+`halt_init=c` (B2-hard v2): per-step biases start at the ONE-STEP form `[+c, -c, ..., -c]` instead of zero (with
+`state_halt=False`, or with `step_bias=True`), so a candidate begins as a plain single application rather than a
+50/50 continue mixture whose dominant terms are the identity and repeated steps; at moderate c the gradients stay
+alive. B2-hard's census (`reports/b2h_wake_census.json`) found that the zero start lets wake form ROOT slots
+(Q^L ~ P). Default None keeps zeros, bitwise.
+
 SWITCH (tested): with an empty `loop_plan` the class adds no parameters, consumes no RNG and every forward is the
 parent's, so a lifetime with no loop tasks is BITWISE the parent learner's.
 """
@@ -39,7 +45,7 @@ class LoopLearner(BranchGatedLearner):
 
     def __init__(self, *args, loop_plan: dict[str, str] | None = None, max_iterations: int = 6,
                  state_halt: bool = True, detach_halt_input: bool = False, step_bias: bool = False,
-                 halt_decay: float | None = None, **kwargs) -> None:
+                 halt_decay: float | None = None, halt_init: float | None = None, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.loop_plan: dict[str, str] = dict(loop_plan or {})
         self.max_iterations = int(max_iterations)
@@ -47,6 +53,7 @@ class LoopLearner(BranchGatedLearner):
         self.detach_halt_input = bool(detach_halt_input)
         self.step_bias = bool(step_bias)
         self.halt_decay = halt_decay
+        self.halt_init = halt_init
         self.halt_w = nn.ParameterDict()
         self.halt_b = nn.ParameterDict()
 
@@ -57,14 +64,20 @@ class LoopLearner(BranchGatedLearner):
         if self.depth_of(task_id) != 1:
             raise ValueError(f'{task_id}: a loop body has planned depth 1')
         if not self.state_halt:
-            self.halt_b[task_id] = nn.Parameter(torch.zeros(self.max_iterations))
+            self.halt_b[task_id] = nn.Parameter(self._initial_biases())
             return [code, self.halt_b[task_id]]
-        self.halt_b[task_id] = nn.Parameter(torch.zeros(self.max_iterations if self.step_bias else 1))
+        self.halt_b[task_id] = nn.Parameter(self._initial_biases() if self.step_bias else torch.zeros(1))
         d = self.library[0].V.shape[1]
         self.halt_w[task_id] = nn.Parameter(torch.zeros(d))
         if self.halt_decay is None:
             return [code, self.halt_w[task_id], self.halt_b[task_id]]
         return [code, self.halt_b[task_id], {'params': [self.halt_w[task_id]], 'weight_decay': float(self.halt_decay)}]
+
+    def _initial_biases(self) -> Tensor:
+        if self.halt_init is None:
+            return torch.zeros(self.max_iterations)
+        c = float(self.halt_init)
+        return torch.tensor([c] + [-c] * (self.max_iterations - 1))
 
     def loop_parameters(self, task_ids) -> list[nn.Parameter]:
         out = []
