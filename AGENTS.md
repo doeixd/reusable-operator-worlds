@@ -2393,3 +2393,12 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   9/9 (0.014) and also improved the loops, while freezing the predicate's parameters did
   nothing. When adding control (a gate, a halt, a branch decision) that reads a computed
   state, decide explicitly whether its gradient may reach the producer, and test both.
+
+- AN ITERATION KNOB ON TASKS THAT DO NOT NEED IT INVITES A ROOT IMPOSTOR (B2-hard and its root census, 2026-10-12;
+  `reports/b2_hard.json`, `reports/b2h_root_census.json`). Attaching loop machinery to every depth-1 task let wake fit
+  some primitives as a slot Q iterated 2-3 times (Q^L ~ P) instead of P itself; the anchors were fit, and every
+  depth-3 task that needed P in one step failed. It happened with and without state-reading halting (both candidate
+  arms 6/9, GIVEN 9/9), and enforcing one step after wake repaired only mild single roots (3 of 6), because many
+  tasks agree on the wrong slot (A1's coherent error). Whenever a learner gets a new degree of freedom (iteration,
+  depth, a gate) on tasks that do not require it, ask what cheaper impostor that freedom makes representable, and
+  make the plain form the starting point rather than repairing afterwards.
