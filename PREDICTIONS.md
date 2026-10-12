@@ -11395,3 +11395,34 @@ prevent roots in wake; stale routes are already handled.
 
 **What this does not show.** Post hoc, same cells. Why the candidate arms' routes go so stale (1.9) is not
 measured; a plausible reading is that anchor fits move slots under depth-3 routes, but it is untested.
+
+
+# B2-HARD V2 SIZING (Tier 1, EXPLORATORY, world 56 stream 0, 2026-10-12): starting candidates at the one-step form removes the wake roots and keeps discovery
+
+`row.experiments.b2h_init_sizing` (committed 34ec3d2 before it ran), `reports/b2h_init_sizing.json`, logs
+`reports/b2h_init_sizing/` (scale-16 dry run, and a relaunch that reused all three stamped cells). B2-hard's ALLLOOP
+construction on fresh band-5 world 56, stream 0, with `LoopLearner(halt_init=c)` (per-step biases start at
+`[+c, -c, ...]`; c = None is B2-hard's zero start) and the root census's ONE_STEP end of stream, then B2-hard's sleep.
+
+| | c = None (zero start) | c = 2 | c = 4 |
+|---|---|---|---|
+| rooted operations at end of wake | **3** (ops 1, 2, 5; L = 2) | 0 | 0 |
+| wake canonical median | 1.93 | 0.162 | **0.036** |
+| routes changed at re-route | 91 | 28 | 22 |
+| canonical after re-route only | 1.66 | 0.058 | 0.033 |
+| wake state-weight AUC | 0.980 | 1.000 | 1.000 |
+| wake loop median / count accuracy | 1.23 / 0.48 | 0.76 / 0.66 | 0.81 / 0.62 |
+| loops kept (of 48) / straight kept as count (of 60) | 5 / 60 | 47 / 60 | 48 / 60 |
+| terminal canonical median | **1.30** | 0.0091 | 0.0106 |
+| terminal loop median / anchors | 1.08 / 0.029 | 0.292 / 0.0032 | 0.306 / 0.0031 |
+| terminal count accuracy | 0.51 | 0.87 | 0.86 |
+
+**Reading.** One cell per setting: no rate, no verdict. In this world the zero start reproduced B2-hard's failure in
+its worst form (three roots, collapse that ONE_STEP cannot repair), and either one-step start removed the roots,
+brought the wake vocabulary near GIVEN's level (B2-hard GIVEN wake median 0.046), and left wake discovery intact
+(AUC 1.0) and the end-of-stream test nearly perfect. The question for a registered plan is live: whether this holds
+across cells.
+
+**Choice for the plan: c = 4.** Its wake vocabulary is the closer to GIVEN's (0.036 against 0.162) with fewer stale
+routes, at no cost in discovery; c = 2's terminal is marginally better in this one cell, a difference one cell
+cannot resolve. Single registered value, not tuned further.
