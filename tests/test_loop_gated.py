@@ -182,5 +182,37 @@ class LoopLearnerTests(unittest.TestCase):
             self.assertEqual(float(m0.halt_b[t].detach().abs().sum()), 0.0)
             self.assertEqual(tuple(m0.halt_b[t].shape), (K,))
 
+    def test_depth2_body(self):
+        """body_depth=2: a depth-2 loop task's body is its whole two-step route; evaluation equals iterating the
+        hard route under the hard predicate; the default refuses a depth-2 loop task; the depth-2 stream's targets are
+        the teacher loop of P2(P1(z))."""
+        cfg, world, st, plan, canonical, ltasks, meta = ls.stream(60, 0, 3, body_depth=2)
+        t = ltasks[0]
+        self.assertEqual(plan[t.task_id], 2)
+        y, _ = ls.teacher_loop(ls.body_fn(world.library, meta[t.task_id]['P']), np.array(meta[t.task_id]['w']),
+                               t.eval_x)
+        np.testing.assert_array_equal(y, t.eval_y)
+        self.assertEqual(len(set(meta[t.task_id]['P'])), 2)
+        with self.assertRaises(ValueError):
+            b1o.build(LoopLearner, cfg, plan, loop_plan={t.task_id: 'state'}).begin_task(t.task_id)
+        m = b1o.build(LoopLearner, cfg, plan, loop_plan={t.task_id: 'state'}, body_depth=2, step_bias=True,
+                      detach_halt_input=True)
+        m.begin_task(t.task_id)
+        with torch.no_grad():
+            m.halt_w[t.task_id].normal_()
+            m.halt_b[t.task_id].normal_()
+            m.eval()
+            x = torch.randn(32, cfg.world.state_dim)
+            coeff = torch.nn.functional.one_hot(torch.argmax(m.task_codes[t.task_id], -1), m.operator_slots).float()
+            z, done = x, torch.zeros(32, dtype=torch.bool)
+            k = torch.zeros(32, dtype=torch.long)
+            for j in range(m.max_iterations):
+                done = done | ~(z @ m.halt_w[t.task_id] + m.halt_b[t.task_id][j] > 0)
+                k += (~done).long()
+                z = torch.where(done.unsqueeze(1), z, m._route(z, coeff, 2))
+            torch.testing.assert_close(m(x, t.task_id), z)
+            torch.testing.assert_close(m.iteration_counts(x, t.task_id), k)
+
+
 if __name__ == '__main__':
     unittest.main()
