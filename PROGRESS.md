@@ -9089,3 +9089,49 @@ damage is a hypothesis.
 failure stale routes (re-route alone on the wake library) or the library itself? Then a candidate fix, which needs
 new lifetimes and so a new plan: start the candidates at the count-1 form (biases `+/-10`, so an anchor begins
 exactly as a straight task does in GIVEN). Longer bodies wait.
+
+
+# B2-HARD ROOT CENSUS (Tier 0, descriptive, post hoc, 2026-10-12): B2-hard's formation failures are ROOT slots; a one-step count form at end of stream repairs half of them
+
+`row.experiments.census_b2h_root` (committed 019016c before it ran), `reports/b2h_root_census.json`, log
+`reports/b2h_root/`. Found post hoc in `reports/b2_hard.json`: in all 6 failing B2-hard cells (3 ALLLOOP, 3
+ALLCOUNT) every straight anchor of one to three teacher operations is best fit at end of stream by L = 2 or 3
+iterations of one slot, so the library holds a ROOT Q (Q^L ~ P) instead of the primitive P. Depth-3 tasks that use
+a rooted operation fail (canonical median 0.94-1.55 in five of the six cells; 0.086 in ALLLOOP w54 s0) while the
+others pass (0.031-0.055). Of the 12 passing cells, 11 have every anchor at L = 1; ALLLOOP w54 s1 passed (0.025)
+with 4 anchors at L = 2. GIVEN puts no iteration machinery on anchors and forms 9/9. Teacher programs entered only
+this analysis.
+
+The census reloads each saved wake model (G0: reproduces the recorded wake medians, **11/11 per arm**), replays the
+registered end of stream on two gate cells per arm (G1: terminal per-task errors bitwise, **2/2 per arm**; the
+recorded terminals are the baseline elsewhere), and reruns it with every COUNT form restricted to L in {0, 1}
+(ONE_STEP; loop form and data test unchanged).
+
+| cell (failing in B2-hard) | recorded | ONE_STEP |
+|---|---|---|
+| ALLLOOP w54 s0 (one rooted op, L = 3) | 0.0520 | **0.0244** |
+| ALLLOOP w54 s2 (one, L = 2) | 0.244 | 0.165 |
+| ALLLOOP w55 s1 (one, L = 2) | 0.0597 | **0.0424** |
+| ALLCOUNT w53 s1 (three) | 0.777 | 0.106 |
+| ALLCOUNT w54 s0 (three; 9 anchors fall to L = 0) | 1.457 | 1.446 |
+| ALLCOUNT w54 s2 (one, L = 2) | 0.180 | **0.0422** |
+
+Formation under ONE_STEP: ALLLOOP 8/9 (recorded 6), ALLCOUNT 7/9 (recorded 6); 3 repaired, 0 broken. Passing
+cells are unchanged (where every anchor was at L = 1 the rerun reproduces the record). Loop medians barely move
+(ALLLOOP 0.305 -> 0.309).
+
+**Reading.** The formation failure is a ROOT IMPOSTOR: iteration machinery on the anchors lets wake fit a primitive
+as a repeated smaller step, which is cheaper or easier to reach than the primitive itself, and the depth-3 tasks
+that need the primitive in one step pay for it. The planned depth (one application for a length-1 task) excludes
+the impostor, and enforcing it at end of stream lets sleep pull the slot back toward P where one operation is
+rooted mildly, but not where the root is deep or several operations are rooted (ALLCOUNT w54 s0 has no slot that
+fits its rooted operations in one step at all). So the fix belongs in WAKE, not after it. Same family as A1's
+coherent error: an error many tasks agree on is reinforced, not averaged out.
+
+**What this does not show.** Post hoc, on the same cells where the pattern was found; a sizing. Root identification
+uses the best fixed count, so "root" means "fit by L >= 2", not a measured functional root.
+
+**Next (Claude):** B2-hard v2 (Tier 1, fresh band-5 worlds), a new plan: keep the candidates' iteration machinery
+but make the one-step form the starting point and the cheap one in wake (per-step biases initialized at the
+count-1 form with gradients still alive), with this census's ONE_STEP end of stream; registered against the same
+clauses, GIVEN as the paired reference.

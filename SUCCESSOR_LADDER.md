@@ -221,3 +221,8 @@ Discovery itself would have passed (wake AUC 0.983, recall 0.905, specificity
 vocabulary with or without state access (ALLCOUNT also 6/9; GIVEN 9/9). **Next:**
 localize the wake damage on saved models, then start candidates at the count-1
 form; longer bodies wait.
+
+**Root census (2026-10-12):** the damage is a ROOT impostor (a slot learns Q with
+Q^2 or Q^3 ~ P from the anchors); enforcing one step at end of stream repairs 3 of
+6 failing cells, not deep or multiple roots. **Next: B2-hard v2** with the one-step
+form as the wake starting point.
