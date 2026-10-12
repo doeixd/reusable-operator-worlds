@@ -1,0 +1,56 @@
+2026-10-12T01:27:38.201379+00:00 ALLLOOP 53 0 G0=True wake=1.89 reroute=0.09718 terminal=0.01284 rooted=[] 7s
+2026-10-12T01:27:38.212645+00:00 ALLLOOP 53 1 G0=True wake=1.833 reroute=0.08537 terminal=0.01233 rooted=[] 7s
+2026-10-12T01:27:38.233719+00:00 ALLLOOP 53 2 G0=True wake=0.03706 reroute=0.03474 terminal=0.01282 rooted=[] 7s
+2026-10-12T01:27:44.821768+00:00 ALLLOOP 54 0 G0=True wake=1.91 reroute=0.6879 terminal=0.05201 rooted=[4] 7s
+2026-10-12T01:27:44.969834+00:00 ALLLOOP 54 1 G0=True wake=1.909 reroute=0.7058 terminal=0.02463 rooted=[] 7s
+2026-10-12T01:27:44.981817+00:00 ALLLOOP 54 2 G0=True wake=1.985 reroute=0.9166 terminal=0.2444 rooted=[5] 7s
+2026-10-12T01:27:51.747134+00:00 ALLLOOP 55 0 G0=True wake=0.08954 reroute=0.05981 terminal=0.02107 rooted=[] 7s
+2026-10-12T01:27:51.955724+00:00 ALLLOOP 55 1 G0=True wake=1.914 reroute=0.2879 terminal=0.05966 rooted=[0] 7s
+2026-10-12T01:27:51.956178+00:00 ALLLOOP 55 2 G0=True wake=1.911 reroute=0.04468 terminal=0.01173 rooted=[] 7s
+2026-10-12T01:28:02.900992+00:00 ALLCOUNT 53 0 G0=True wake=0.07041 reroute=0.05335 terminal=0.01025 rooted=[] 11s
+2026-10-12T01:28:03.138366+00:00 ALLCOUNT 53 1 G0=True wake=2.025 reroute=1.578 terminal=0.7769 rooted=[0, 1, 5] 11s
+2026-10-12T01:28:03.493369+00:00 ALLCOUNT 53 2 G0=True wake=0.06567 reroute=0.05414 terminal=0.01293 rooted=[] 12s
+2026-10-12T01:28:14.455246+00:00 ALLCOUNT 54 0 G0=True wake=2.025 reroute=1.708 terminal=1.457 rooted=[0, 3, 4] 12s
+2026-10-12T01:28:14.688861+00:00 ALLCOUNT 54 1 G0=True wake=1.871 reroute=0.07126 terminal=0.01429 rooted=[] 12s
+2026-10-12T01:28:14.930330+00:00 ALLCOUNT 54 2 G0=True wake=1.966 reroute=0.9811 terminal=0.1798 rooted=[5] 11s
+2026-10-12T01:28:28.817373+00:00 ALLCOUNT 55 0 G0=True wake=1.451 reroute=0.07555 terminal=0.01141 rooted=[] 14s
+2026-10-12T01:28:29.362236+00:00 ALLCOUNT 55 1 G0=True wake=1.933 reroute=0.304 terminal=0.0146 rooted=[] 15s
+2026-10-12T01:28:29.773712+00:00 ALLCOUNT 55 2 G0=True wake=0.05172 reroute=0.04237 terminal=0.01285 rooted=[] 15s
+2026-10-12T01:28:37.597691+00:00 GIVEN 53 0 G0=True wake=0.02988 reroute=0.02733 terminal=0.009164 rooted=[] 9s
+2026-10-12T01:28:38.448656+00:00 GIVEN 53 1 G0=True wake=0.2271 reroute=0.03637 terminal=0.007285 rooted=[] 9s
+2026-10-12T01:28:38.544649+00:00 GIVEN 53 2 G0=True wake=0.04593 reroute=0.04388 terminal=0.01387 rooted=[] 9s
+2026-10-12T01:28:49.833269+00:00 GIVEN 54 0 G0=True wake=0.08378 reroute=0.07904 terminal=0.008733 rooted=[] 12s
+2026-10-12T01:28:50.939697+00:00 GIVEN 54 1 G0=True wake=0.04029 reroute=0.03251 terminal=0.0121 rooted=[] 12s
+2026-10-12T01:28:50.951613+00:00 GIVEN 54 2 G0=True wake=0.02099 reroute=0.01778 terminal=0.01469 rooted=[] 12s
+2026-10-12T01:28:58.411055+00:00 GIVEN 55 0 G0=True wake=0.04138 reroute=0.03422 terminal=0.02281 rooted=[] 9s
+2026-10-12T01:28:59.635427+00:00 GIVEN 55 1 G0=True wake=0.0828 reroute=0.05271 terminal=0.0309 rooted=[] 9s
+2026-10-12T01:28:59.636947+00:00 GIVEN 55 2 G0=True wake=0.08214 reroute=0.03146 terminal=0.01474 rooted=[] 9s
+{
+ "ALLLOOP": {
+  "G0": "9/9",
+  "wake_canonical_median": 1.908622596585682,
+  "reroute_canonical_median": 0.09717825281453987,
+  "reroute_below_0.05": 2,
+  "cells_with_rooted_op": 3,
+  "terminal_fail_and_rooted": 3,
+  "terminal_fail": 3
+ },
+ "ALLCOUNT": {
+  "G0": "9/9",
+  "wake_canonical_median": 1.8714244381080207,
+  "reroute_canonical_median": 0.07554930410727947,
+  "reroute_below_0.05": 1,
+  "cells_with_rooted_op": 3,
+  "terminal_fail_and_rooted": 3,
+  "terminal_fail": 3
+ },
+ "GIVEN": {
+  "G0": "9/9",
+  "wake_canonical_median": 0.04593172215643847,
+  "reroute_canonical_median": 0.034221245867296135,
+  "reroute_below_0.05": 7,
+  "cells_with_rooted_op": 0,
+  "terminal_fail_and_rooted": 0,
+  "terminal_fail": 0
+ }
+}

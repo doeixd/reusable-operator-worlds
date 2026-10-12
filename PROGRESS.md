@@ -9135,3 +9135,28 @@ uses the best fixed count, so "root" means "fit by L >= 2", not a measured funct
 but make the one-step form the starting point and the cheap one in wake (per-step biases initialized at the
 count-1 form with gradients still alive), with this census's ONE_STEP end of stream; registered against the same
 clauses, GIVEN as the paired reference.
+
+
+# B2-HARD WAKE CENSUS (Tier 0, descriptive, post hoc, 2026-10-12): the roots form in wake and predict every formation failure; the rest of the broken wake vocabulary is stale routes
+
+`row.experiments.census_b2h_wake` (committed 81781e1 before it ran), `reports/b2h_wake_census.json`, log
+`reports/b2h_wake/`. All 27 saved B2-hard wake models, gate G0 (reload reproduces the recorded wake medians)
+**27/27**; re-route counts reproduce the recorded ones 27/27.
+
+- **Roots at the end of wake.** A rooted operation (every anchor of one teacher operation best fit at L >= 2 on the
+  wake library) appears in 3/9 ALLLOOP, 3/9 ALLCOUNT and 0/9 GIVEN cells, and the rooted cells are EXACTLY the
+  terminal formation failures: 6 of 6 failing cells rooted, 0 of 12 passing candidate cells rooted. Roots are L = 2
+  or L = 3, uniform within an operation. ALLLOOP w54 s1, which passed, had half of one operation's anchors at L = 2.
+- **Re-route alone (no sleep).** Wake canonical median ALLLOOP 1.91, ALLCOUNT 1.87, GIVEN 0.046. Re-routing only:
+  unrooted candidate cells fall to median 0.073 (ALLLOOP, range 0.035-0.706; the 0.706 is w54 s1's partial root)
+  and 0.063 (ALLCOUNT, 0.042-0.304); rooted cells stay at 0.29-0.92 (ALLLOOP) and 0.98-1.71 (ALLCOUNT). GIVEN goes
+  to 0.034.
+
+**Reading.** Two separable wake effects of putting iteration machinery on the anchors: (1) the routes of depth-2/3
+tasks go far staler than in GIVEN (wake 1.9 against 0.046), which the registered end-of-stream re-route repairs;
+(2) in a third of cells a primitive forms as a ROOT, which nothing at the end of stream repairs reliably (root census:
+one-step enforcement fixes 3 of 6). Roots are present before any end-of-stream step, so the cause is wake. For a v2:
+prevent roots in wake; stale routes are already handled.
+
+**What this does not show.** Post hoc, same cells. Why the candidate arms' routes go so stale (1.9) is not
+measured; a plausible reading is that anchor fits move slots under depth-3 routes, but it is untested.
