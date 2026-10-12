@@ -1,0 +1,16 @@
+AUC clause d'=0.0: P(median >= 0.9)=0.000
+AUC clause d'=1.5: P(median >= 0.9)=0.001
+AUC clause d'=2.0: P(median >= 0.9)=0.990
+recall per-task 0.75 / 0.85: 0.0074 / 0.9976
+specificity per-task 0.93 / 0.97: 0.0364 / 0.9958
+n_terminal / formation guard, per-cell pass 0.5: P(>= 8 of 9)=0.0195  P(>= 7 of 9)=0.0898
+n_terminal / formation guard, per-cell pass 0.7: P(>= 8 of 9)=0.1960  P(>= 7 of 9)=0.4628
+n_terminal / formation guard, per-cell pass 0.9: P(>= 8 of 9)=0.7748  P(>= 7 of 9)=0.9470
+n_terminal / formation guard, per-cell pass 0.98: P(>= 8 of 9)=0.9869  P(>= 7 of 9)=0.9994
+zero-start base rate 0.368: P(r_zero >= 2)=0.900 (informative control)
+ROOTS_PREVENTED, one-step per-cell root rate 0.368: P(r_one == 0 and r_zero >= 2)=0.0144
+ROOTS_PREVENTED, one-step per-cell root rate 0.200: P(r_one == 0 and r_zero >= 2)=0.1208
+ROOTS_PREVENTED, one-step per-cell root rate 0.100: P(r_one == 0 and r_zero >= 2)=0.3487
+ROOTS_PREVENTED, one-step per-cell root rate 0.050: P(r_one == 0 and r_zero >= 2)=0.5673
+ROOTS_PREVENTED, one-step per-cell root rate 0.020: P(r_one == 0 and r_zero >= 2)=0.7504
+ROOTS_PREVENTED, one-step per-cell root rate 0.000: P(r_one == 0 and r_zero >= 2)=0.9001
