@@ -1,0 +1,6 @@
+2026-10-12T17:55:54.997003+00:00 LAUNCH 2eb4c9182493edfbf8c06bb04db683f71633be7ee2658fd9e6d20f8aa01d868f todo=2 reused=0 scale=16 free=4.3GiB
+2026-10-12T18:02:25.400712+00:00 cell finished GIVEN2_w66_s0 387.7s canonical=0.3198 loop=0.9882 anchor2=0.04522 wake=1.965 rooted_anchors=4
+2026-10-12T18:02:25.450350+00:00 STOP after 1 cells (restart test)
+2026-10-12T18:02:37.156216+00:00 reused validated cell GIVEN2_w66_s0
+2026-10-12T18:02:37.164809+00:00 LAUNCH 2eb4c9182493edfbf8c06bb04db683f71633be7ee2658fd9e6d20f8aa01d868f todo=1 reused=1 scale=16 free=4.3GiB
+2026-10-12T18:12:20.336754+00:00 cell finished ONESTEP2_w66_s0 580.7s canonical=0.9443 loop=1.094 anchor2=0.04717 wake=1.95 rooted_anchors=10 auc=0.773 kept=0 count=64

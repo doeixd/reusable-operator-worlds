@@ -11478,3 +11478,50 @@ was chosen from one sizing cell. `n_terminal`, recall and specificity were near-
 
 **Next (Claude), per the plan's branch:** longer loop bodies (depth 2), and carrying the lesson (start a new freedom
 at the plain form) to the branch line's gates; the absolute loop bar at adequate sample size stays deferred.
+
+# B2-DEPTH2 (Tier 1, band 5 worlds 61-63, 2026-10-12): `DISCOVERS`; with two-step loop bodies the one-step-start learner finds which tasks iterate, without being told, while forming the vocabulary, at almost no cost; the registered cost prediction FAILED (1.02, registered [1.1, 1.6])
+
+Plan `B2_DEPTH2_PLAN.md`, frozen `223b1d1` before any cell ran, hash protected in `tools/check_prereg.py` (`609e622`).
+Worlds 61-63, streams 0-2, 18 cells, 2026-10-12 18:12-21:59Z, exit 0, after a scale-16 dry run of both arms on world
+66 with a restart test (leg 1 stopped after one cell, leg 2 reused it). Report `reports/b2_depth2.json`; logs
+`reports/b2_depth2_20261012/`. The independent scorer `row.experiments.score_b2_depth2` recomputed every clause from the
+per-task records and agrees with the runner; `check_prereg` and `check_invalid` pass.
+
+**Registered clauses (`ONESTEP2`):** `k_formation` **9/9** (7 needed); wake state-weight `AUC_med` **0.990** (per cell
+0.976-1.000; bar 0.9); recall **0.970** (419/432; bar 0.8; the 13 lost loops are all in w62 s2, which kept 35/48);
+specificity **1.000** (576/576; bar 0.95); `n_terminal` **9/9** below the 0.5 bar (8 needed). Label **`DISCOVERS`**.
+
+**Registered prediction, FAILED:** the median paired ratio of `ONESTEP2` to `GIVEN2` terminal loop medians was
+**1.021**, outside the registered `[1.1, 1.6]`. The prediction rested on one sizing cell (world 60: 1.29) whose wake
+vocabulary was unusually broken (0.24); on fresh worlds the cost of discovery at depth 2 is about what it was at
+depth 1 (B2-hard v2: 1.06).
+
+**Per cell (terminal canonical median, terminal loop median, wake canonical median; `ONESTEP2` / `GIVEN2`):**
+
+| cell | canonical | loop | wake AUC | loops kept | wake canonical |
+|---|---|---|---|---|---|
+| w61 s0 | 0.0134 / 0.0096 | 0.301 / 0.294 | 0.987 | 48 | 0.054 / 0.048 |
+| w61 s1 | 0.0273 / 0.0143 | 0.327 / 0.290 | 1.000 | 48 | 0.032 / 0.022 |
+| w61 s2 | 0.0206 / 0.0234 | 0.338 / 0.307 | 1.000 | 48 | 0.084 / 0.077 |
+| w62 s0 | 0.0183 / 0.0153 | 0.321 / 0.338 | 0.985 | 48 | 0.057 / 0.082 |
+| w62 s1 | 0.0285 / 0.0473 | 0.390 / 0.372 | 0.976 | 48 | 1.797 / 1.847 |
+| w62 s2 | 0.0076 / 0.0181 | 0.353 / 0.359 | 0.995 | 35 | 1.911 / 1.592 |
+| w63 s0 | 0.0095 / 0.0144 | 0.312 / 0.309 | 0.990 | 48 | 0.071 / 0.136 |
+| w63 s1 | 0.0124 / 0.0121 | 0.299 / 0.287 | 0.999 | 48 | 0.057 / 0.036 |
+| w63 s2 | 0.0143 / 0.0131 | 0.313 / 0.311 | 0.988 | 48 | 0.063 / 0.087 |
+
+Medians: canonical 0.0143 / 0.0144 (`GIVEN2` also 9/9); loops 0.321 / 0.309 (`ONESTEP2` at or below `GIVEN2` in 2/9
+cells); length-2 anchors 0.0089 / 0.0092; count accuracy 0.848 / 0.850; wake loop 1.00 / 0.64. Wake state-weight
+norms 2.37 on loop candidates against 0.53 on straight ones. No length-2 anchor in either arm was best fit as an
+iterated body (0 cells). Two streams of world 62 collapsed in wake in BOTH arms (1.6-1.9) and were rescued by the
+end of stream in both: a stream property shared by the arms, the known stale-route pattern, not a discovery cost.
+
+**Reading.** The B2-hard v2 construction (every candidate a plain single step to start, state-reading halting that
+must earn its place, a one-step data test at the end of the stream) carries from one-operator to two-operator loop
+bodies on fresh worlds: the vocabulary forms 9/9 and the learner tells loop from straight two-step tasks with no
+identity, at a cost against being told of about 2% on loops and none on the vocabulary.
+
+**What this does not show.** Tier 1, 9 cells on 3 development worlds. The planned depth is given (it narrows the
+search to the 112 depth-2 tasks); the census found the body itself trivially findable on a formed library, so this
+run mainly tested formation and wake localization. Loops sit at ~0.31-0.32, about 4x the true-predicate ceiling
+(0.083): the 64-example re-fit and drift bind, not discovery. Linear halting, K = 6.

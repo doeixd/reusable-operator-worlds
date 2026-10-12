@@ -1,0 +1,57 @@
+{
+ "protocol": {
+  "id": "b2-depth2",
+  "git_commit": "609e622",
+  "plan": "B2_DEPTH2_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "root": "artifacts/b2_depth2",
+  "worlds": [
+   61,
+   62,
+   63
+  ],
+  "streams": [
+   0,
+   1,
+   2
+  ],
+  "arms": [
+   "ONESTEP2",
+   "GIVEN2"
+  ],
+  "n_loop": 48,
+  "n_candidates": 112,
+  "k": 6,
+  "body_depth": 2,
+  "memory": 64,
+  "sleep_updates": 8192,
+  "halt_init": 4.0,
+  "halt_decay": 0.1,
+  "loop_ratio": 0.5,
+  "one_step": [
+   0,
+   1
+  ],
+  "threshold": 0.05,
+  "loop_bar": 0.5,
+  "input_sha256": {
+   "B2_DEPTH2_PLAN.md": "898d79e2ee23501142f170ba24ae4430245aae69dd587e33f4eae74042167b32",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "847f2957b779280ccd5ed80c5fcd46e971ad0a7d835162914da54119e95f0f32",
+  "loop_learner_sha256": "d9400f27b9db368878f36b37589390f5174a0abdaaa07e732c0442a4a0639824",
+  "b2d2_sizing_sha256": "613406e2919470a0e2177606845684a01f0ada1c8aeb6cbfef0655e5d0db7458",
+  "b2_hard_sha256": "f6d893a71589e8e5bc349e580b5eeed63fd9be29414e7865c530061106728c51",
+  "b1_online_sha256": "ed8233717676f632d0717872223d720feae9f894a5658780cff3ad83184c1cd0",
+  "b2_census_sha256": "d49fdf909cdc2643731411baa0ba99aee5b062fae7e3ae9261f176128460dbb2",
+  "b2d2_census_sha256": "d80dac3f1a9be7290f2f4df794100678227d4acbc1dfdd35300b7d12fc6dc350",
+  "deep_reroute_sha256": "6528c8683cb33a5b90d51d6f8e42c6234142a206a4f567c7d307e487e5eea3e6",
+  "lifetime_sha256": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+  "loop_stream_sha256": "ff3788ec3192675825aaa9509d7738fbf74ccadf4ef30f70c02dbaec865215ba",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "scale": 1
+ },
+ "protocol_sha256": "9d06863c2ac94836cf1e4279e8c0e6ff4cda901e799d54c7a372c73ce151a9a4"
+}

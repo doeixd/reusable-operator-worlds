@@ -1,0 +1,19 @@
+2026-10-12T18:12:28.979338+00:00 LAUNCH 9d06863c2ac94836cf1e4279e8c0e6ff4cda901e799d54c7a372c73ce151a9a4 todo=18 reused=0 scale=1 free=4.3GiB
+2026-10-12T18:51:48.945207+00:00 cell finished ONESTEP2_w61_s2 2357.2s canonical=0.02065 loop=0.3384 anchor2=0.01257 wake=0.08437 rooted_anchors=0 auc=1.000 kept=48 count=64
+2026-10-12T18:52:39.462231+00:00 cell finished ONESTEP2_w61_s1 2407.7s canonical=0.02729 loop=0.3266 anchor2=0.01469 wake=0.0316 rooted_anchors=0 auc=1.000 kept=48 count=64
+2026-10-12T18:53:15.559778+00:00 cell finished ONESTEP2_w61_s0 2443.8s canonical=0.01344 loop=0.3005 anchor2=0.00808 wake=0.05371 rooted_anchors=0 auc=0.987 kept=48 count=64
+2026-10-12T19:42:15.899316+00:00 cell finished ONESTEP2_w62_s1 2976.4s canonical=0.02852 loop=0.3898 anchor2=0.02063 wake=1.797 rooted_anchors=0 auc=0.976 kept=48 count=64
+2026-10-12T19:42:49.359809+00:00 cell finished ONESTEP2_w62_s0 3060.4s canonical=0.01829 loop=0.3211 anchor2=0.01159 wake=0.05729 rooted_anchors=0 auc=0.985 kept=48 count=64
+2026-10-12T19:43:51.133825+00:00 cell finished ONESTEP2_w62_s2 3035.5s canonical=0.007615 loop=0.3528 anchor2=0.005373 wake=1.911 rooted_anchors=0 auc=0.995 kept=35 count=64
+2026-10-12T20:33:26.102343+00:00 cell finished ONESTEP2_w63_s0 3070.2s canonical=0.009536 loop=0.3124 anchor2=0.005685 wake=0.07128 rooted_anchors=0 auc=0.990 kept=48 count=64
+2026-10-12T20:34:23.242163+00:00 cell finished ONESTEP2_w63_s1 3093.8s canonical=0.01244 loop=0.2986 anchor2=0.007533 wake=0.05663 rooted_anchors=0 auc=0.999 kept=48 count=64
+2026-10-12T20:35:32.714269+00:00 cell finished ONESTEP2_w63_s2 3101.5s canonical=0.0143 loop=0.3132 anchor2=0.008926 wake=0.06257 rooted_anchors=0 auc=0.988 kept=48 count=64
+2026-10-12T21:03:10.932343+00:00 cell finished GIVEN2_w61_s0 1784.8s canonical=0.009582 loop=0.2943 anchor2=0.006109 wake=0.04808 rooted_anchors=0
+2026-10-12T21:05:10.137648+00:00 cell finished GIVEN2_w61_s1 1846.9s canonical=0.01434 loop=0.2903 anchor2=0.009236 wake=0.02236 rooted_anchors=0
+2026-10-12T21:05:13.785942+00:00 cell finished GIVEN2_w61_s2 1781.1s canonical=0.02338 loop=0.3074 anchor2=0.01418 wake=0.07657 rooted_anchors=0
+2026-10-12T21:34:10.897087+00:00 cell finished GIVEN2_w62_s0 1860.0s canonical=0.01527 loop=0.3383 anchor2=0.009254 wake=0.08249 rooted_anchors=0
+2026-10-12T21:35:10.303297+00:00 cell finished GIVEN2_w62_s2 1796.5s canonical=0.01808 loop=0.3594 anchor2=0.01195 wake=1.592 rooted_anchors=0
+2026-10-12T21:35:12.400705+00:00 cell finished GIVEN2_w62_s1 1802.2s canonical=0.04727 loop=0.3715 anchor2=0.0315 wake=1.847 rooted_anchors=0
+2026-10-12T21:59:13.436638+00:00 cell finished GIVEN2_w63_s2 1441.0s canonical=0.01307 loop=0.3107 anchor2=0.008468 wake=0.08749 rooted_anchors=0
+2026-10-12T21:59:18.106233+00:00 cell finished GIVEN2_w63_s0 1507.2s canonical=0.01438 loop=0.309 anchor2=0.00807 wake=0.1364 rooted_anchors=0
+2026-10-12T21:59:43.167825+00:00 cell finished GIVEN2_w63_s1 1472.8s canonical=0.01211 loop=0.2868 anchor2=0.007803 wake=0.03606 rooted_anchors=0

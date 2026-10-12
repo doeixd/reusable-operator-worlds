@@ -233,3 +233,10 @@ without being told while forming the vocabulary: 9/9 formed, wake AUC 1.000, rec
 0.986, specificity 1.000; roots 0/9 against 7/9 for the zero start (5/9 formed, every
 failure rooted). Discovery costs ~6% on loops against being told. **Next: longer
 loop bodies (depth 2).**
+
+**B2-depth2 (2026-10-12): `DISCOVERS`** (band 5 worlds 61-63). Loops whose body is two operators: the one-step start
+carries over; formation 9/9, wake AUC 0.990, recall 0.970, specificity 1.000; cost against being told ~2% on loops
+(registered prediction of a larger cost failed). The census had found the body trivially findable and drift setting
+the ceiling (0.083), so loop quality (~0.32) is limited by the re-fit's sample size and drift, not discovery.
+**Next:** the plain-start lesson needs no branch rung (B1-hard formed 9/9 with no measurable cost); next is a Tier 0
+opportunity check for B3 (emergent control-flow compression) or Track S's SC0 census.
