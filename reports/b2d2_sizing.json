@@ -1,0 +1,85 @@
+{
+ "tier": 1,
+ "exploratory": true,
+ "stamp": {
+  "commit": "622e784dd983082b826b0ca859d7562fdfc6519e",
+  "scale": 1,
+  "world": 60,
+  "stream": 0
+ },
+ "cells": [
+  {
+   "arm": "ONESTEP2",
+   "world": 60,
+   "stream": 0,
+   "scale": 1,
+   "stream_tasks": 236,
+   "candidates": 112,
+   "wake_canonical_median": 0.24095096794990786,
+   "wake_loop_median": 1.114568126476168,
+   "wake_anchor2_median": 0.03453920403774398,
+   "wake_anchor1_median": 0.014779335631429335,
+   "wake_count_accuracy_median": 0.578125,
+   "wake_state_auc": 0.9791666666666666,
+   "wake_state_norm_median": {
+    "loop": 2.599889874458313,
+    "straight": 0.48832017183303833
+   },
+   "wake_anchor2_best_L_hist": [
+    0,
+    64,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "wake_anchor2_rooted": 0,
+   "routes_changed": 32,
+   "reroute_canonical_median": 0.04704896070461735,
+   "loops_kept": 43,
+   "straight_kept_count": 64,
+   "library_changed_in_sleep": true,
+   "canonical_median": 0.017764094089929194,
+   "loop_median": 0.36821999812026096,
+   "anchor2_median": 0.013242401096008006,
+   "anchor1_median": 0.0067066493403415495,
+   "count_accuracy_median": 0.8203125,
+   "seconds": 2843.450168399955
+  },
+  {
+   "arm": "GIVEN2",
+   "world": 60,
+   "stream": 0,
+   "scale": 1,
+   "stream_tasks": 236,
+   "candidates": 112,
+   "wake_canonical_median": 0.02667485908662428,
+   "wake_loop_median": 0.5699750789851226,
+   "wake_anchor2_median": 0.016420800792177104,
+   "wake_anchor1_median": 0.007343430088994999,
+   "wake_count_accuracy_median": 0.740234375,
+   "wake_anchor2_best_L_hist": [
+    0,
+    64,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "wake_anchor2_rooted": 0,
+   "routes_changed": 24,
+   "reroute_canonical_median": 0.022682393337115716,
+   "loop_refits_installed": 48,
+   "library_changed_in_sleep": true,
+   "canonical_median": 0.011467614362815914,
+   "loop_median": 0.285605094798117,
+   "anchor2_median": 0.007042361462961961,
+   "anchor1_median": 0.003575206694058636,
+   "count_accuracy_median": 0.86328125,
+   "seconds": 1758.7783708999632
+  }
+ ],
+ "finished_utc": "2026-10-12T17:39:39.400427+00:00"
+}

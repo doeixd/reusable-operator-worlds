@@ -9277,3 +9277,33 @@ too easy, and its quality is limited by compounding execution error of two learn
 loop: the learned loop sits at ~1.3-2x the oracle, and the oracle itself is about 2x the (unpaired) depth-1 ceiling. An online rung
 would therefore mostly measure whether the vocabulary forms with depth-2 loop tasks in the stream (the B2-hard
 question at a new depth), with an absolute loop bar that must be set against this ceiling, not B2's.
+
+# B2-DEPTH2 SIZING (Tier 1, EXPLORATORY, band 5 world 60 stream 0, 2026-10-12): with two-step-body loops in the stream the vocabulary forms and the one-step-start learner still finds the loops, at a larger cost than at depth 1
+
+`src/row/experiments/b2d2_sizing.py` (code `622e784`: `LoopLearner(body_depth=2)` and `loop_stream.stream(...,
+body_depth=2)`, both bitwise at the default, tested), `reports/b2d2_sizing.json`, logs `reports/b2d2_sizing_20261012/`.
+Dry run (scale 16) exited 0 and the restart check reused both cells. One cell per arm, so nothing here is a verdict.
+Stream: O2's SHUFFLED stream plus 48 loops with body P2(P1(z)) (236 tasks); candidates = the 112 depth-2 tasks.
+
+| | ONESTEP2 (not told, one-step start) | GIVEN2 (loop identity given) |
+|---|---|---|
+| wake canonical / loop / length-2 anchor median | 0.241 / 1.115 / 0.035 | 0.027 / 0.570 / 0.016 |
+| wake state-weight AUC (loop vs straight) | 0.979 (norms 2.60 vs 0.49) | - |
+| length-2 anchors best fit at count L >= 2 (root analogue) | 0 / 64 | 0 / 64 |
+| canonical after re-route only | 0.047 | 0.023 |
+| decisions | 43/48 loops kept, 64/64 straight kept straight | 48/48 re-fits installed |
+| terminal canonical median | 0.0178 | 0.0115 |
+| terminal loop median | 0.368 | 0.286 |
+| count accuracy | 0.820 | 0.863 |
+| seconds | 2,843 | 1,759 |
+
+**Reading.** The question is live and the construction transfers: the vocabulary forms in both arms (bar 0.05), wake
+separates loop from straight candidates (AUC 0.979), and no length-2 anchor is fit as an iterated body. But not being
+told costs more than at depth 1 (B2-hard v2: loops 0.293 vs 0.276, canonical 0.0158 vs 0.0147): here loops 0.368 vs
+0.286, canonical 0.018 vs 0.011, 5 of 48 loops lost at the data test, and the wake vocabulary is far worse (0.241 vs
+0.027), though re-routing alone repairs most of it (0.047), the stale-route pattern rather than roots. The loop median
+sits at depth 1's level although the census ceiling is twice as high; the 64-example re-fit, not drift, still dominates.
+
+**Next (Claude):** a registered Tier 1 on fresh band-5 worlds (ONESTEP2 against GIVEN2, 3 worlds x 3 streams), with
+the formation clause, the wake AUC and the cost of discovery as the registered quantities; thresholds sized from this
+cell and B2-hard v2.
