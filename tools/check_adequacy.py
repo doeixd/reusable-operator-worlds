@@ -61,6 +61,7 @@ IN_SCOPE = (
     'B2_DEPTH2_PLAN.md',
     'SC0_ANCHOR_DOSE_PLAN.md',
     'SC0B_ANCHOR_THRESHOLD_PLAN.md',
+    'B2_SEALED_CONFIRMATION_PLAN.md',
 )
 
 #: Explicit sentinel for a plan with no behaviour to elicit (an observational

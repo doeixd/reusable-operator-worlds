@@ -1,0 +1,22 @@
+AUC clause, 30 cells, d'=0.0: P(median >= 0.9)=0.000
+AUC clause, 30 cells, d'=1.5: P(median >= 0.9)=0.000
+AUC clause, 30 cells, d'=2.0: P(median >= 0.9)=0.999
+recall of 1440, per-task 0.75 / 0.85: 0.0000 / 1.0000
+specificity of 1800, per-task 0.93 / 0.97: 0.0003 / 1.0000
+formation / n_terminal, per-cell 0.67: P(>= 27 of 30)=0.0037
+formation / n_terminal, per-cell 0.75: P(>= 27 of 30)=0.0374
+formation / n_terminal, per-cell 0.8: P(>= 27 of 30)=0.1227
+formation / n_terminal, per-cell 0.85: P(>= 27 of 30)=0.3217
+formation / n_terminal, per-cell 0.95: P(>= 27 of 30)=0.9392
+formation / n_terminal, per-cell 0.98: P(>= 27 of 30)=0.9971
+GIVEN gate, per-cell 0.5: P(>= 12 of 15)=0.0176
+GIVEN gate, per-cell 0.67: P(>= 12 of 15)=0.2171
+GIVEN gate, per-cell 0.9: P(>= 12 of 15)=0.9444
+GIVEN gate, per-cell 0.98: P(>= 12 of 15)=0.9998
+zero-start base rate 0.368: P(r_zero >= 2 of 15)=0.9901
+ROOTS_PREVENTED, one-step root rate 0.368: P(r_one <= 1 of 30 and r_zero >= 2)=0.0000
+ROOTS_PREVENTED, one-step root rate 0.200: P(r_one <= 1 of 30 and r_zero >= 2)=0.0104
+ROOTS_PREVENTED, one-step root rate 0.100: P(r_one <= 1 of 30 and r_zero >= 2)=0.1819
+ROOTS_PREVENTED, one-step root rate 0.050: P(r_one <= 1 of 30 and r_zero >= 2)=0.5481
+ROOTS_PREVENTED, one-step root rate 0.020: P(r_one <= 1 of 30 and r_zero >= 2)=0.8708
+ROOTS_PREVENTED, one-step root rate 0.000: P(r_one <= 1 of 30 and r_zero >= 2)=0.9901
