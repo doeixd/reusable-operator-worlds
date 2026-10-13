@@ -5321,3 +5321,5 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
 2026-10-10 B2-online localization: a gate reading a computed state sends gradient into the shared operators that produced it; LoopLearner halting did this in sleep (formation 4/9); detaching its input restored 9/9. Decide whether a control gate's gradient may reach the producer, and test both.
 
 2026-10-12 B2-hard root census: loop machinery on depth-1 anchors let wake learn ROOT slots (Q^2 or Q^3 ~ P); depth-3 tasks needing P failed in both candidate arms (6/9). One-step enforcement after wake repairs only mild single roots (3/6). New freedom on tasks that do not need it invites a cheaper impostor; start from the plain form. Full entry: AGENTS.md.
+
+2026-10-13 G3a inference census: on formed m=4 vocabularies the runner-up was within 2-5% NMSE yet 2 support examples identified the route (identifiability flat from 128 to 2; 1/192 programs bind). Noiseless targets exclude any non-tied wrong route from a few inputs, so a small margin is not data-limited ambiguity. Full entry: AGENTS.md.

@@ -129,6 +129,14 @@ best wrong program comes within 2-5% NMSE (current generator 74-153%) but exhaus
 generalize. Next on this axis: a Tier 0 inference-necessity census on the formed `m = 4` libraries, then reliability
 across streams before any Tier 2. The mid-state-decision axis still needs decision 20 (a).
 
+### G3a inference census (2026-10-13, Tier 0): `NO_HEADROOM`
+
+`G3A_INFERENCE_CENSUS_PLAN.md` (frozen `92e1b68`), `reports/g3a_inference_census.json`. On G1's formed `m = 4`
+vocabularies, choosing the route from 2 support examples is as reliable as from 128 (1 of 192 programs binds at either;
+identifiability flat). Noiseless targets make any non-tied wrong route excludable from a few inputs, so `m` cannot
+create data-limited inference. Decision 21 (RESEARCH_STATUS.md): Claude recommends observation noise as the next knob,
+starting with a support-noise census on the existing vocabularies.
+
 # Track S, Track M (unchanged, lower priority)
 
 - **Track S (self-curriculum): paused.** SC0 `GRADED`, SC0b `LENGTHS_SUFFICE` (quota 16-24 anchors; uniform over

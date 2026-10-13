@@ -11670,3 +11670,41 @@ not that it is RELIABLE (O1 -> O2). One value of `m`. The reading was written af
 No necessity for learned inference is shown: search still succeeds. The run took 82 minutes against the 50 planned
 (wake cells 1,270-1,450 s against O11's 655 s; PLAIN 370 s against 177 s) while free memory sat at 1.5 GiB until the
 PI closed Edge at ~21:03Z; cells are deterministic given their construction, so timing does not touch the numbers.
+
+# G3a INFERENCE CENSUS (Tier 0, formed vocabularies of worlds 70-72, 2026-10-13): `NO_HEADROOM`; on the formed `m = 4` vocabularies route choice is not data-limited, even from 2 examples
+
+Plan `G3A_INFERENCE_CENSUS_PLAN.md`, frozen `92e1b68`, hash protected `ac7090e` (the run commit). 6 jobs, exit 0; report
+`reports/g3a_inference_census.json`, logs and scorer output `reports/g3a_inference_census_20261013/`. Every rebuilt
+vocabulary reproduced G1's recorded per-task terminal bitwise (anchor A1) and G1's formed-vocabulary diagnostics
+exactly (A2). The independent scorer `row.experiments.score_g3a_inference_census` recomputes both rules from the
+per-program rows and agrees; `check_prereg` and `check_invalid` pass.
+
+**Label `NO_HEADROOM`.** Rule A (SG0's cell rule): `k_4 = 0` of 9, `k_0 = 0` of 9. Rule B: the pooled `m = 4` bind
+fraction is 1/192 at support 128, 0/192 at 8, 1/192 at 2 (bar 0.10); `m = 0` is 0/192 everywhere. One inference failure
+(selected route >= 0.05 while a route < 0.05 exists) among 576 `m = 4` program-supports, at support 2.
+
+| | `m = 0` (w70 / w71 / w72) | `m = 4` |
+|---|---|---|
+| median identifiability, support 128 | 148 / 79 / 85 | 0.85 / 0.72 / 3.88 |
+| median identifiability, support 2 | 98 / 69 / 85 | 0.79 / 0.73 / 4.31 |
+| programs whose support choice differs from the hindsight choice, s = 128 / 8 / 2 (of 192) | 0 / 0 / 0 | 5 / 11 / 17 |
+| programs with regret > 0, s = 128 / 8 / 2; largest regret | 0 / 0 / 0; 0 | 1 / 8 / 13; 0.020 |
+
+**Reading.**
+- The closeness G1 measured is a per-example property, not ambiguity under scarce data. Identifiability does not fall
+  as support shrinks from 128 examples to 2 (`m = 4`: 0.85 -> 0.79, 0.72 -> 0.73, 3.88 -> 4.31): the best wrong program
+  is wrong by a similar factor on every input, so two inputs (32 output numbers) already separate it. Where the
+  support choice differs from the hindsight one, the two routes are near-equivalent on query (regret <= 0.020, within
+  the bootstrap floor for all but 2 programs).
+- The reason is structural and worth stating once: the world's targets are NOISELESS. With exact targets, a wrong route
+  is excluded by any input on which it differs, whatever the margin, so scarce support can only bind when routes are
+  near-functionally identical (near ties at 1%, here 0-1 of 64 per cell). Making operators more similar shrinks the
+  margin, not the information an example carries. Learned inference on these worlds can only pay through search COST
+  (route-space size; E5/E5.1 found search cost linear in depth), not through identifiability.
+- So `m` moves the teacher-side runner-up NMSE (G0) and the formed vocabulary's margin (G1), but not the property that
+  would make learned inference necessary. Raising `m` to 8 or 16 (step 2 of the recommendation) would shrink the margin
+  further but is not expected to create data-limited ambiguity unless it produces near ties; that expectation is a
+  reading, not a measurement.
+
+**What this does not show.** Six vocabularies from a Tier 1 run (one stream per world); depth 3 only; supports 128, 8,
+2; no observation noise anywhere. It says nothing about worlds with noisy targets or about search cost at depth.

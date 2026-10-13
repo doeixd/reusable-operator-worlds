@@ -2412,3 +2412,12 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   tasks agree on the wrong slot (A1's coherent error). Whenever a learner gets a new degree of freedom (iteration,
   depth, a gate) on tasks that do not require it, ask what cheaper impostor that freedom makes representable, and
   make the plain form the starting point rather than repairing afterwards.
+
+- IN A NOISELESS WORLD, SCARCE DATA CANNOT MAKE ROUTE CHOICE HARD; ONLY NEAR TIES OR SEARCH COST CAN (G3a, 2026-10-13;
+  `reports/g3a_inference_census.json`). The shared-rotation knob brought the best wrong program to within 2-5% NMSE of
+  a formed vocabulary's winner (identifiability 0.7-3.9 against 79-148), which read like hard inference. It was not:
+  identifiability did not fall from 128 support examples to 2, and 191 of 192 programs had no regret above the bootstrap
+  floor at any support. With exact targets, any input on which a wrong route differs excludes it, so the MARGIN of the
+  runner-up says nothing about how many examples inference needs. Before building a world to make inference
+  data-limited, ask whether its targets carry noise or its route set carries near-functional ties; if neither, the
+  only lever left is search cost (depth), which E5/E5.1 already measured.

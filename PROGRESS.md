@@ -9547,3 +9547,17 @@ Write-time checks before freezing found: identifiability first scored the 64 TRA
 SG0's held-out sample), and the scorer read a field the runner no longer wrote (its tests missed it; fixed and
 checked against a real dry-run record). Restart path tested twice on world 99. Verdict-free reading and limits in
 PREDICTIONS.md. Next: decision 20 (b) answered; see RESEARCH_STATUS.md.
+
+# G3a inference census (Tier 0, 2026-10-13, formed vocabularies of worlds 70-72): `NO_HEADROOM`
+
+Plan `G3A_INFERENCE_CENSUS_PLAN.md` (frozen `92e1b68`, protected `ac7090e`); runner `row.experiments.g3a_inference_census`
+(rebuilds G1's six slept vocabularies, anchors A1 and A2 exact; SG0's estimands verbatim, per-program seeding
+disclosed); independent scorer agrees; report `reports/g3a_inference_census.json`, logs
+`reports/g3a_inference_census_20261013/`. 13 minutes.
+
+`k_4 = k_0 = 0` of 9 cells; `m = 4` bind fraction 1/192, 0/192, 1/192 at supports 128, 8, 2 (rule B bar 0.10); one
+inference failure in 576 `m = 4` program-supports. Identifiability does not fall with support (`m = 4` medians
+0.72-3.88 at 128, 0.73-4.31 at 2): targets are noiseless, so a few examples exclude every wrong route that is not a near
+tie. Rates (`reports/g3a_inference_census_design/`): rule A false-fire 0, detection 0.85 at 75% bad programs; rule B
+false-fire 0, detection 0.975 at a 15% binding share. The dry run (4 real programs on world 70, run after the rules
+were written) is disclosed in the plan. Verdict-free reading in PREDICTIONS.md; lesson in AGENTS.md.

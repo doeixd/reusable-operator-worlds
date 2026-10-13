@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-13, after the G1 formation probe (`FORMS`, exploratory). Nothing is running. Open PI decisions: 20 (a) (operator family for Track G), 18 (sealed depth test, deferred).
+Last rewritten: 2026-10-13, after G3a (`NO_HEADROOM`). Nothing is running. Open PI decisions: 21 (direction of the inference axis), 20 (a) (operator family for Track G), 18 (sealed depth test, deferred).
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -38,10 +38,11 @@ inference on the FORMED vocabulary stays close: the best wrong program is within
 margin 0.7-3.9x against 79-148x, yet exhaustive search on 128 examples still picks programs that generalize (61-64
 of 64). One stream per world. `PREDICTIONS.md`, `reports/g1_formation_probe.json`.
 
-**Next (Claude's recommendation, needs no new decision):** a Tier 0 inference-necessity census on these formed `m = 4`
-vocabularies, rebuilt deterministically from the saved wake terminals: SG0's headroom measures (commitment regret,
-support-size sweep, near ties) to find whether search binds at reduced support, which is what would make learned
-inference necessary. Before any Tier 2: a reliability run (more streams) on `m = 4`.
+**G3a inference census (Tier 0, 2026-10-13): `NO_HEADROOM`.** On the six formed vocabularies (G1's, rebuilt bitwise),
+SG0's regret is above its bootstrap floor for 1 of 192 `m = 4` programs at support 128, 0 at 8 and 1 at 2 (`m = 0`: 0
+everywhere); identifiability does not fall from 128 examples to 2. Targets are noiseless, so a small runner-up margin
+is not data-limited ambiguity: two examples exclude every wrong route that is not a near tie. Learned inference has no
+opportunity on `m = 4`. `PREDICTIONS.md`, `reports/g3a_inference_census.json`. Decision 21 is open.
 
 **Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
 Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow
@@ -999,6 +1000,16 @@ sealed band, and all are implementation audits rather than experiments.
     `GENERALITY_PROGRAM.md`. Bands: development 70-99 (Track G), sealed 1100-1129 (C-seal); 960-989 stays
     reserved for decision 18. Both verified unused as world seeds (1100-1102 appear only as SeedSequence
     components in `audit_e7_census.py`).
+
+21. **OPEN (2026-10-13): direction of the inference axis.** G3a (`NO_HEADROOM`) showed that operator similarity
+    shrinks the runner-up margin but cannot make route choice data-limited, because targets are noiseless. Claude's
+    plan step 2 (G1 probes at `m = 8, 16`) is therefore not expected to help and Claude no longer recommends it.
+    Options: (i) OBSERVATION NOISE, a generator knob inside the rotated family: first a Tier 0 census adding target
+    noise to the SUPPORT of the six existing formed vocabularies (no training) to find the noise level at which
+    route choice binds at small support, then, if it binds at a level formation could tolerate, a G1 probe forming
+    under that noise; (ii) SEARCH COST at depth, which E5/E5.1 and decision 18 already cover; (iii) close the
+    learned-inference line in this program and put effort into 20 (a). Claude recommends (i): it is the only one
+    of the three that could create data-limited inference, and its first step is a census on existing artifacts.
 
 20. **(b) ANSWERED, (a) OPEN (2026-10-13): operator family for Track G.** (b) was taken up when the PI answered
     "Continue autonomously": the G1 probe returned `FORMS` (above), so the inference axis is open INSIDE the rotated

@@ -1,0 +1,8 @@
+2026-10-13T23:23:58.388746+00:00 LAUNCH a28820b258e1baf93a683e0e0e53529a3fbd1183d19cfb853a288dda2bd82548 todo=6 reused=0 programs=64 free=7.1GiB
+2026-10-13T23:30:20.431517+00:00 cell finished m0_w71 379.2s s128:regret=0/floor=0/binds=0/fail=0 s8:regret=0/floor=0/binds=0/fail=0 s2:regret=0/floor=0/binds=0/fail=0
+2026-10-13T23:30:21.382286+00:00 cell finished m0_w70 380.2s s128:regret=0/floor=0/binds=0/fail=0 s8:regret=0/floor=0/binds=0/fail=0 s2:regret=0/floor=0/binds=0/fail=0
+2026-10-13T23:30:22.321337+00:00 cell finished m0_w72 381.1s s128:regret=0/floor=0/binds=0/fail=0 s8:regret=0/floor=0/binds=0/fail=0 s2:regret=0/floor=0/binds=0/fail=0
+2026-10-13T23:36:35.782527+00:00 cell finished m4_w71 374.4s s128:regret=0/floor=0/binds=0/fail=0 s8:regret=0/floor=0/binds=0/fail=0 s2:regret=0/floor=0/binds=1/fail=1
+2026-10-13T23:36:36.866428+00:00 cell finished m4_w70 376.5s s128:regret=0/floor=0/binds=1/fail=0 s8:regret=0/floor=0/binds=0/fail=0 s2:regret=0/floor=0/binds=0/fail=0
+2026-10-13T23:36:39.373676+00:00 cell finished m4_w72 377.0s s128:regret=0/floor=0/binds=0/fail=0 s8:regret=0/floor=0/binds=0/fail=0 s2:regret=0/floor=0/binds=0/fail=0
+2026-10-13T23:36:40.659456+00:00 EXIT 0 NO_HEADROOM
