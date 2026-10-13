@@ -240,3 +240,10 @@ carries over; formation 9/9, wake AUC 0.990, recall 0.970, specificity 1.000; co
 the ceiling (0.083), so loop quality (~0.32) is limited by the re-fit's sample size and drift, not discovery.
 **Next:** the plain-start lesson needs no branch rung (B1-hard formed 9/9 with no measurable cost); next is a Tier 0
 opportunity check for B3 (emergent control-flow compression) or Track S's SC0 census.
+
+**B3 opportunity census (Tier 0, 2026-10-12, `reports/b3_opportunity/census.json`): not run.** No repeated pattern in
+the B2-depth2 streams recurs enough to repay a loop abstraction under E6's alphabet tax (best `A A` 6-8 uses against
+H* 16.8; loop bodies 4-6 against 16.8), and a fixed-count REPEAT executes exactly what the tied unrolled route executes,
+so only its bit price is open, which E6 already measured. Data-dependent counts are B2 (done); unseen counts are
+C2/C3. **Next: Track S, SC0 census.**
+

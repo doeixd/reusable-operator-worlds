@@ -1,0 +1,217 @@
+{
+ "cells": {
+  "w61_s0": {
+   "n_tasks": 236,
+   "straight_by_length": {
+    "2": 64,
+    "3": 64,
+    "1": 60
+   },
+   "programs_with_adjacent_repeat": {
+    "2": 6,
+    "3": 16
+   },
+   "all_same_programs": {
+    "2": 6
+   },
+   "max_uses_of_one_AA": 6,
+   "loop_body_max_recurrence": 4,
+   "distinct_loop_bodies": 26,
+   "mean_length": 2.021276595744681,
+   "H_star_L2": 16.823680269029804,
+   "H_star_L3": 8.896236959457918
+  },
+  "w61_s1": {
+   "n_tasks": 236,
+   "straight_by_length": {
+    "1": 60,
+    "2": 64,
+    "3": 64
+   },
+   "programs_with_adjacent_repeat": {
+    "2": 6,
+    "3": 16
+   },
+   "all_same_programs": {
+    "2": 6
+   },
+   "max_uses_of_one_AA": 6,
+   "loop_body_max_recurrence": 4,
+   "distinct_loop_bodies": 26,
+   "mean_length": 2.021276595744681,
+   "H_star_L2": 16.823680269029804,
+   "H_star_L3": 8.896236959457918
+  },
+  "w61_s2": {
+   "n_tasks": 236,
+   "straight_by_length": {
+    "1": 60,
+    "3": 64,
+    "2": 64
+   },
+   "programs_with_adjacent_repeat": {
+    "3": 16,
+    "2": 6
+   },
+   "all_same_programs": {
+    "2": 6
+   },
+   "max_uses_of_one_AA": 6,
+   "loop_body_max_recurrence": 4,
+   "distinct_loop_bodies": 26,
+   "mean_length": 2.021276595744681,
+   "H_star_L2": 16.823680269029804,
+   "H_star_L3": 8.896236959457918
+  },
+  "w62_s0": {
+   "n_tasks": 236,
+   "straight_by_length": {
+    "3": 64,
+    "2": 64,
+    "1": 60
+   },
+   "programs_with_adjacent_repeat": {
+    "2": 17,
+    "3": 22
+   },
+   "all_same_programs": {
+    "2": 17,
+    "3": 2
+   },
+   "max_uses_of_one_AA": 8,
+   "loop_body_max_recurrence": 5,
+   "distinct_loop_bodies": 23,
+   "mean_length": 2.021276595744681,
+   "H_star_L2": 16.823680269029804,
+   "H_star_L3": 8.896236959457918
+  },
+  "w62_s1": {
+   "n_tasks": 236,
+   "straight_by_length": {
+    "2": 64,
+    "3": 64,
+    "1": 60
+   },
+   "programs_with_adjacent_repeat": {
+    "2": 17,
+    "3": 22
+   },
+   "all_same_programs": {
+    "2": 17,
+    "3": 2
+   },
+   "max_uses_of_one_AA": 8,
+   "loop_body_max_recurrence": 5,
+   "distinct_loop_bodies": 23,
+   "mean_length": 2.021276595744681,
+   "H_star_L2": 16.823680269029804,
+   "H_star_L3": 8.896236959457918
+  },
+  "w62_s2": {
+   "n_tasks": 236,
+   "straight_by_length": {
+    "2": 64,
+    "3": 64,
+    "1": 60
+   },
+   "programs_with_adjacent_repeat": {
+    "2": 17,
+    "3": 22
+   },
+   "all_same_programs": {
+    "2": 17,
+    "3": 2
+   },
+   "max_uses_of_one_AA": 8,
+   "loop_body_max_recurrence": 5,
+   "distinct_loop_bodies": 23,
+   "mean_length": 2.021276595744681,
+   "H_star_L2": 16.823680269029804,
+   "H_star_L3": 8.896236959457918
+  },
+  "w63_s0": {
+   "n_tasks": 236,
+   "straight_by_length": {
+    "3": 64,
+    "1": 60,
+    "2": 64
+   },
+   "programs_with_adjacent_repeat": {
+    "3": 19,
+    "2": 8
+   },
+   "all_same_programs": {
+    "2": 8,
+    "3": 1
+   },
+   "max_uses_of_one_AA": 6,
+   "loop_body_max_recurrence": 6,
+   "distinct_loop_bodies": 24,
+   "mean_length": 2.021276595744681,
+   "H_star_L2": 16.823680269029804,
+   "H_star_L3": 8.896236959457918
+  },
+  "w63_s1": {
+   "n_tasks": 236,
+   "straight_by_length": {
+    "1": 60,
+    "2": 64,
+    "3": 64
+   },
+   "programs_with_adjacent_repeat": {
+    "2": 8,
+    "3": 19
+   },
+   "all_same_programs": {
+    "2": 8,
+    "3": 1
+   },
+   "max_uses_of_one_AA": 6,
+   "loop_body_max_recurrence": 6,
+   "distinct_loop_bodies": 24,
+   "mean_length": 2.021276595744681,
+   "H_star_L2": 16.823680269029804,
+   "H_star_L3": 8.896236959457918
+  },
+  "w63_s2": {
+   "n_tasks": 236,
+   "straight_by_length": {
+    "2": 64,
+    "1": 60,
+    "3": 64
+   },
+   "programs_with_adjacent_repeat": {
+    "3": 19,
+    "2": 8
+   },
+   "all_same_programs": {
+    "2": 8,
+    "3": 1
+   },
+   "max_uses_of_one_AA": 6,
+   "loop_body_max_recurrence": 6,
+   "distinct_loop_bodies": 24,
+   "mean_length": 2.021276595744681,
+   "H_star_L2": 16.823680269029804,
+   "H_star_L3": 8.896236959457918
+  }
+ },
+ "summary": {
+  "max_uses_of_one_AA": [
+   6,
+   8
+  ],
+  "loop_body_max_recurrence": [
+   4,
+   6
+  ],
+  "H_star_L2": [
+   16.823680269029804,
+   16.823680269029804
+  ],
+  "H_star_L3": [
+   8.896236959457918,
+   8.896236959457918
+  ]
+ }
+}

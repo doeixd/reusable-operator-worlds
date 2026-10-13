@@ -9354,3 +9354,34 @@ identity, at a cost against being told of about 2% on loops and none on the voca
 search to the 112 depth-2 tasks); the census found the body itself trivially findable on a formed library, so this
 run mainly tested formation and wake localization. Loops sit at ~0.31-0.32, about 4x the true-predicate ceiling
 (0.083): the 64-example re-fit and drift bind, not discovery. Linear halting, K = 6.
+
+# B3 opportunity census (Tier 0, 2026-10-12): emergent loop compression has no opportunity on this generator
+
+Script `reports/b3_opportunity/census.py`, output `reports/b3_opportunity/census.json`. Teacher programs only, no
+learner. Question: does the B2-depth2 stream (worlds 61-63, streams 0-2; 236 tasks, 188 straight plus 48 two-step
+loops) contain recurring repeated structure that a loop abstraction could amortize? Priced with E6's registered
+alphabet-tax threshold `H* = [L log2 K + N D log2((K+1)/K)] / [(L-1) log2(K+1)]` at K = 12 slots, N = 236,
+mean length D = 2.02.
+
+| pattern | most uses of any one pattern, per stream | H* |
+|---|---|---|
+| repeated pair `A A` (a `REPEAT(A, 2)`) | 6-8 | 16.8 (L = 2) |
+| repeated triple `A A A` | 0-2 | 8.9 (L = 3) |
+| one loop body recurring over loop tasks | 4-6 (23-26 distinct bodies of 30) | 16.8 (a body is L = 2; each task's predicate is unique) |
+
+**Reading.** No repeated structure recurs often enough to repay a loop abstraction under the accounting E6 confirmed,
+by a factor of 2-4 for the best pattern. Two further points make B3 a poor rung on this testbed regardless of the
+generator:
+- The learner already ties weights: a route `[A, A, A]` through one shared slot executes exactly `A(A(A(z)))`, which is
+  what `REPEAT(A, 3)` would execute. A fixed-count REPEAT therefore differs from the unrolled route only in its
+  description, so "the learner uses REPEAT and it works" holds by construction (the defining-invariant rule); only its
+  BIT price is open, and E6 already measured macro economics (macros pay above H*, the gated criterion times creation,
+  compilation does not pay).
+- A REPEAT whose count depends on the data is B2, which is done (B2-hard v2, B2-depth2). A REPEAT whose count is an
+  argument that generalizes to unseen counts is length extrapolation (C2/C3), straight-line program selection.
+
+A generator with planted, frequently recurring long repeats would make a REPEAT symbol pay, but that is E6 with a
+different macro shape and would test the accounting, not a new capability. **Decision (Claude, delegated
+"continue"):** B3 is not run on this testbed; recorded as no opportunity (generator) plus definitional (construct).
+Next: Track S's SC0 census.
+
