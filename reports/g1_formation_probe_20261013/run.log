@@ -1,0 +1,21 @@
+2026-10-13T21:00:43.202866+00:00 GATES E1=True E2=True
+2026-10-13T21:00:43.212235+00:00 LAUNCH 169f62c946a75f7e821d99b441a6e7afb0679f3f3570d6e8cf1c1c89dd12be97 todo=18 reused=0 jobs=3 scale=1 free=4.0GiB
+2026-10-13T21:24:44.731331+00:00 cell finished REROUTE_WAKE_m0_w70 1436.2s terminal=0.0128218 d1_ari_wake=1.000 changed=271
+2026-10-13T21:24:51.679681+00:00 cell finished REROUTE_WAKE_m0_w72 1443.1s terminal=0.010197 d1_ari_wake=1.000 changed=969
+2026-10-13T21:24:56.153765+00:00 cell finished REROUTE_WAKE_m0_w71 1447.6s terminal=0.0124063 d1_ari_wake=1.000 changed=207
+2026-10-13T21:45:57.355735+00:00 cell finished REROUTE_WAKE_m4_w70 1272.6s terminal=0.0741435 d1_ari_wake=1.000 changed=5135
+2026-10-13T21:46:10.947538+00:00 cell finished REROUTE_WAKE_m4_w72 1274.8s terminal=0.0501573 d1_ari_wake=1.000 changed=4327
+2026-10-13T21:46:12.769086+00:00 cell finished REROUTE_WAKE_m4_w71 1281.1s terminal=0.309787 d1_ari_wake=0.573 changed=6722
+2026-10-13T21:52:10.573391+00:00 cell finished PLAIN_m0_w70 373.2s terminal=1.94978
+2026-10-13T21:52:18.714386+00:00 cell finished PLAIN_m0_w71 367.8s terminal=1.91626
+2026-10-13T21:52:21.801419+00:00 cell finished PLAIN_m0_w72 369.0s terminal=1.91535
+2026-10-13T21:58:25.178618+00:00 cell finished PLAIN_m4_w70 374.6s terminal=0.557944
+2026-10-13T21:58:26.947714+00:00 cell finished PLAIN_m4_w71 368.2s terminal=0.538058
+2026-10-13T21:58:32.720628+00:00 cell finished PLAIN_m4_w72 370.9s terminal=0.569205
+2026-10-13T22:10:16.819522+00:00 cell finished RW_SLEEP_m0_w72 709.8s terminal=0.0093847 d1_ari=1.000 ident=85 ties=0 runner=0.741
+2026-10-13T22:10:23.115911+00:00 cell finished RW_SLEEP_m0_w70 717.9s terminal=0.00914721 d1_ari=1.000 ident=148 ties=0 runner=1.53
+2026-10-13T22:10:31.138976+00:00 cell finished RW_SLEEP_m0_w71 718.4s terminal=0.0122189 d1_ari=1.000 ident=78.7 ties=0 runner=1.27
+2026-10-13T22:22:11.336218+00:00 cell finished RW_SLEEP_m4_w70 714.4s terminal=0.0132301 d1_ari=0.969 ident=0.848 ties=1 runner=0.0208
+2026-10-13T22:22:24.892658+00:00 cell finished RW_SLEEP_m4_w72 721.8s terminal=0.0101932 d1_ari=0.981 ident=3.88 ties=0 runner=0.0536
+2026-10-13T22:22:25.688446+00:00 cell finished RW_SLEEP_m4_w71 714.5s terminal=0.0298947 d1_ari=0.970 ident=0.715 ties=0 runner=0.0507
+2026-10-13T22:22:27.188283+00:00 EXIT 0 FORMS

@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-13, after G0 (`NO_CANDIDATE`). Nothing is running. Open PI decisions: 20 (operator family for Track G), 18 (sealed depth test, deferred).
+Last rewritten: 2026-10-13, after the G1 formation probe (`FORMS`, exploratory). Nothing is running. Open PI decisions: 20 (a) (operator family for Track G), 18 (sealed depth test, deferred).
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -28,7 +28,20 @@ only. `PREDICTIONS.md`, `reports/b2_sealed.json`.
 (alpha to 1.5, hidden gain to 4, 6-12 primitives, a shared rotation component `m`). Linear predictability of a computed
 state from the input never drops below 0.958 (bar 0.90): the family itself is near-orthogonal. Route inference becomes
 non-trivial only with shared rotations (`m >= 4`), which also destroy depth-1 clustering on an untrained library (ARI
-0.03-0.04, bar 0.30). Track G is blocked on decision 20.
+0.03-0.04, bar 0.30).
+
+**G1 formation probe (Tier 1, EXPLORATORY, worlds 70-72, 2026-10-13): `FORMS`.** The confirmed fully online pipeline
+(O11) passes on the `m = 4` worlds G0 refused, in 3 of 3 worlds (terminal 0.010-0.030; `m = 0` anchor 0.009-0.012),
+and the formed vocabulary recovers operation identity (ARI 0.97-0.98) although an untrained library clusters at
+0.03-0.04. Anchors stay necessary (no-anchor 0.54-0.57) and sleep matters more (wake alone fails 2 of 3). Route
+inference on the FORMED vocabulary stays close: the best wrong program is within 2-5% NMSE (`m = 0`: 74-153%),
+margin 0.7-3.9x against 79-148x, yet exhaustive search on 128 examples still picks programs that generalize (61-64
+of 64). One stream per world. `PREDICTIONS.md`, `reports/g1_formation_probe.json`.
+
+**Next (Claude's recommendation, needs no new decision):** a Tier 0 inference-necessity census on these formed `m = 4`
+vocabularies, rebuilt deterministically from the saved wake terminals: SG0's headroom measures (commitment regret,
+support-size sweep, near ties) to find whether search binds at reduced support, which is what would make learned
+inference necessary. Before any Tier 2: a reliability run (more streams) on `m = 4`.
 
 **Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
 Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow
@@ -987,7 +1000,9 @@ sealed band, and all are implementation audits rather than experiments.
     reserved for decision 18. Both verified unused as world seeds (1100-1102 appear only as SeedSequence
     components in `audit_e7_census.py`).
 
-20. **OPEN (2026-10-13): operator family for Track G.** G0 (`NO_CANDIDATE`) showed the two saturations have different
+20. **(b) ANSWERED, (a) OPEN (2026-10-13): operator family for Track G.** (b) was taken up when the PI answered
+    "Continue autonomously": the G1 probe returned `FORMS` (above), so the inference axis is open INSIDE the rotated
+    family at `m = 4` and G0's S3 bar is withdrawn as a requirement. (a) remains the PI's. Original text: G0 (`NO_CANDIDATE`) showed the two saturations have different
     causes. (a) Near-linearity belongs to the operator family that teacher and learner share, so a world where
     mid-state decisions matter needs a new family for BOTH, which `GENERALITY_PROGRAM.md` currently excludes ("the
     learner does not change"). (b) Inference difficulty and depth-1 clustering are coupled through operator

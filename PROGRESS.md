@@ -9526,3 +9526,24 @@ About 15 minutes.
 The write-time check before freezing found the census had no durable records (fixed; restart tested) and that an
 unbalanced hyperplane would inflate S1 (disclosed; labels turned out balanced). Verdict, reading and limits in
 PREDICTIONS.md. Next: a PI decision on the operator family (decision 20, RESEARCH_STATUS.md).
+
+# G1 formation probe (Tier 1, EXPLORATORY, 2026-10-13, worlds 70-72): `FORMS`
+
+Plan `G1_FORMATION_PROBE_PLAN.md` (frozen `c51b967`, protected `a742d88`); runner `row.experiments.g1_formation_probe`
+rebinds only `o2.stage_setup` to the g1 generators (gates E1 bitwise at `m = 0`, E2 differs at `m = 4`); independent
+scorer agrees; report `reports/g1_formation_probe.json`, logs `reports/g1_formation_probe_20261013/`. 82 minutes.
+
+| arm | `m = 0` terminal (w70/71/72) | `m = 4` terminal |
+|---|---|---|
+| RW_SLEEP (O11 pipeline) | 0.0091 / 0.0122 / 0.0094 | 0.0132 / 0.0299 / 0.0102 |
+| REROUTE_WAKE | 0.0128 / 0.0124 / 0.0102 | 0.0741 / 0.3098 / 0.0502 |
+| PLAIN (no anchors) | 1.950 / 1.916 / 1.915 | 0.558 / 0.538 / 0.569 |
+
+Formed `m = 4` vocabularies: depth-1 identity ARI 0.97-0.98 (untrained 0.03-0.04); identifiability on 64 unseen
+programs 0.72-3.88 (`m = 0`: 79-148); runner-up support NMSE 0.021-0.054 (`m = 0`: 0.74-1.53); search winner still
+generalizes (61-64 of 64 below 0.05).
+
+Write-time checks before freezing found: identifiability first scored the 64 TRAINED tasks (in-sample; switched to
+SG0's held-out sample), and the scorer read a field the runner no longer wrote (its tests missed it; fixed and
+checked against a real dry-run record). Restart path tested twice on world 99. Verdict-free reading and limits in
+PREDICTIONS.md. Next: decision 20 (b) answered; see RESEARCH_STATUS.md.

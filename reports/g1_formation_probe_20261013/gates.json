@@ -1,0 +1,14 @@
+{
+ "E1": {
+  "passes": true,
+  "worlds": {
+   "70": true,
+   "20": true
+  }
+ },
+ "E2": {
+  "passes": true
+ },
+ "all_pass": true,
+ "protocol_sha256": "169f62c946a75f7e821d99b441a6e7afb0679f3f3570d6e8cf1c1c89dd12be97"
+}

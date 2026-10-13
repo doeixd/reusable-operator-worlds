@@ -120,6 +120,15 @@ The two saturations therefore need different moves, and the first conflicts with
 below. Decision 20 (RESEARCH_STATUS.md) is pending: Claude recommends an exploratory Tier 1 formation probe at
 `m = 4` first (does formation need depth-1 clustering?), and a separate program decision on a new operator family.
 
+### G1 formation probe (2026-10-13, Tier 1, exploratory): `FORMS`
+
+`G1_FORMATION_PROBE_PLAN.md` (frozen `c51b967`), `reports/g1_formation_probe.json`. The O11 pipeline passes on `m = 4`
+worlds 70-72 (0.010-0.030) with operation identity recovered (formed ARI 0.97-0.98 against untrained 0.03-0.04), so
+G0's depth-1 clustering bar was too strict and `m = 4` is the inference-axis candidate. On the formed vocabulary the
+best wrong program comes within 2-5% NMSE (current generator 74-153%) but exhaustive search still finds programs that
+generalize. Next on this axis: a Tier 0 inference-necessity census on the formed `m = 4` libraries, then reliability
+across streams before any Tier 2. The mid-state-decision axis still needs decision 20 (a).
+
 # Track S, Track M (unchanged, lower priority)
 
 - **Track S (self-curriculum): paused.** SC0 `GRADED`, SC0b `LENGTHS_SUFFICE` (quota 16-24 anchors; uniform over

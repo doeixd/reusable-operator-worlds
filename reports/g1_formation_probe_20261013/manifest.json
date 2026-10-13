@@ -1,0 +1,141 @@
+{
+ "protocol": {
+  "id": "g1-formation-probe-v1",
+  "git_commit": "a742d88",
+  "plan": "G1_FORMATION_PROBE_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "worlds": [
+   70,
+   71,
+   72
+  ],
+  "shared": [
+   0.0,
+   4.0
+  ],
+  "gain": 1.0,
+  "stream": 0,
+  "arms": [
+   "REROUTE_WAKE",
+   "PLAIN",
+   "RW_SLEEP"
+  ],
+  "threshold": 0.05,
+  "near_tie": 0.01,
+  "jobs": 3,
+  "root": "artifacts/g1_formation_probe",
+  "generator": "g1",
+  "input_sha256": {
+   "G1_FORMATION_PROBE_PLAN.md": "5b325cd0ccd7755ae699a769491d449503b6136a91772bf860bffb9c59b68bf1",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/g0_generator_census.json": "809a101823c0d507d5612a6093aeb7976210524b69b26dae06882599363e2a29"
+  },
+  "implementation_sha256": "5e6c17e3e23ee7f052c52a0e9193bd3385f65cfbfad549c59590e1cb736b23fb",
+  "general_world_sha256": "4e50e329d6bb9b953ec3675c0573958d8065866733a318f5832027a1ced52fd2",
+  "o8_sha256": "a5ea33f3a41ad023137a4a8cca10f63bc8e5e699d6f33615338cba5f969b26a5",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "j1c_sha256": "65e76d586b661ccf57ba34902381bea86e575d6209ecdc6dd6c1767e0590e134",
+  "census_sha256": "e090671e006012b44d88787346ba5d108414674e88dbf8806053bca8b7867bd1",
+  "j2a_sha256": "0f67fa06c8f4a6a55e6bc3eae1bc307d32698bc66d03453387ad1d92c4ae05ec",
+  "lifetime_sha256": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+  "learner_sha256": "8fef85343e25dad51b31112beac849e993a3d581b48ff5a4b8e2b86fcd0cedc7",
+  "scale": 1,
+  "cells": [
+   [
+    "REROUTE_WAKE",
+    0.0,
+    70
+   ],
+   [
+    "REROUTE_WAKE",
+    0.0,
+    71
+   ],
+   [
+    "REROUTE_WAKE",
+    0.0,
+    72
+   ],
+   [
+    "REROUTE_WAKE",
+    4.0,
+    70
+   ],
+   [
+    "REROUTE_WAKE",
+    4.0,
+    71
+   ],
+   [
+    "REROUTE_WAKE",
+    4.0,
+    72
+   ],
+   [
+    "PLAIN",
+    0.0,
+    70
+   ],
+   [
+    "PLAIN",
+    0.0,
+    71
+   ],
+   [
+    "PLAIN",
+    0.0,
+    72
+   ],
+   [
+    "PLAIN",
+    4.0,
+    70
+   ],
+   [
+    "PLAIN",
+    4.0,
+    71
+   ],
+   [
+    "PLAIN",
+    4.0,
+    72
+   ],
+   [
+    "RW_SLEEP",
+    0.0,
+    70
+   ],
+   [
+    "RW_SLEEP",
+    0.0,
+    71
+   ],
+   [
+    "RW_SLEEP",
+    0.0,
+    72
+   ],
+   [
+    "RW_SLEEP",
+    4.0,
+    70
+   ],
+   [
+    "RW_SLEEP",
+    4.0,
+    71
+   ],
+   [
+    "RW_SLEEP",
+    4.0,
+    72
+   ]
+  ]
+ },
+ "protocol_sha256": "169f62c946a75f7e821d99b441a6e7afb0679f3f3570d6e8cf1c1c89dd12be97"
+}

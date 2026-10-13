@@ -11618,3 +11618,55 @@ Per-world minima 0.11-0.14 at `m = 2`, 0.03-0.04 at `m = 4`, about 0 at `m >= 8`
 
 **What this does not show.** Teacher worlds and an untrained library only; no formation was measured. The grid and
 the polar-factor construction of `m` are design choices. Three development worlds.
+
+# G1 FORMATION PROBE (Tier 1, EXPLORATORY, worlds 70-72, 2026-10-13): `FORMS`; online formation survives the shared-rotation world that G0 refused, and route inference on the formed vocabulary stays non-trivial
+
+Plan `G1_FORMATION_PROBE_PLAN.md`, frozen `c51b967`, hash protected `a742d88` (the run commit). 18 cells, exit 0;
+report `reports/g1_formation_probe.json`, logs and scorer output `reports/g1_formation_probe_20261013/`. Gates E1 (at
+`m = 0` the rebound stream construction reproduces the committed SHUFFLED streams bitwise, worlds 70 and 20) and E2
+(at `m = 4` it differs) passed; the independent scorer `row.experiments.score_g1_formation_probe` recomputes the
+reading from the durable cells and agrees; `check_prereg` and `check_invalid` pass. EXPLORATORY: one stream per world,
+no verdict.
+
+**Reading `FORMS` (3 of 3 anchored worlds).** The confirmed fully online pipeline (O11: wake with in-stream re-routing,
+then sleep), terminal median on the 64 canonical tasks:
+
+| | world 70 | world 71 | world 72 |
+|---|---|---|---|
+| `RW_SLEEP`, `m = 0` (anchor) | 0.0091 | 0.0122 | 0.0094 |
+| `RW_SLEEP`, `m = 4` | 0.0132 | 0.0299 | 0.0102 |
+| `REROUTE_WAKE` (no sleep), `m = 0` / `m = 4` | 0.0128 / 0.0741 | 0.0124 / 0.3098 | 0.0102 / 0.0502 |
+| `PLAIN` (no anchors), `m = 0` / `m = 4` | 1.950 / 0.558 | 1.916 / 0.538 | 1.915 / 0.569 |
+
+**Formed vocabularies (`RW_SLEEP`; identifiability on SG0's sample, 64 unseen depth-3 programs, all `12^3` routes on
+128 support examples):**
+
+| | `m = 0` | `m = 4` |
+|---|---|---|
+| depth-1 identity ARI of formed routes | 1.000 / 1.000 / 1.000 | 0.969 / 0.970 / 0.981 |
+| median identifiability `(second - best) / best` | 148 / 79 / 85 | 0.85 / 0.72 / 3.88 |
+| near ties (< 0.01) of 64 | 0 / 0 / 0 | 1 / 0 / 0 |
+| median runner-up support NMSE | 1.53 / 1.27 / 0.74 | 0.021 / 0.051 / 0.054 |
+| search winner: median query NMSE; count < 0.05 of 64 | 0.010 / 0.013 / 0.009; 64 / 64 / 64 | 0.013 / 0.030 / 0.010; 64 / 61 / 64 |
+
+**Reading.**
+- G0's S3 bar is not a requirement. On an untrained library depth-1 tasks at `m = 4` cluster at ARI 0.03-0.04
+  (G0), yet the formed vocabulary recovers operation identity at ARI 0.97-0.98 and the pipeline passes in every world.
+  N1's clustering premise describes how formation STARTS on the current generator; it is not a precondition the
+  pipeline needs at this point.
+- Anchors are still necessary at `m = 4`. PLAIN fails in every world, though at 0.54-0.57 rather than 1.9: similar
+  primitives make joint formation less hopeless, not sufficient.
+- Sleep carries more of the load at `m = 4`. Wake alone fails 2 of 3 worlds (0.074, 0.31; 0.050 sits on the
+  threshold), and in-stream re-routing changed 4,327-6,722 routes against 207-969 at `m = 0`: with similar operators,
+  route assignments churn far more while the library forms.
+- Inference on the formed vocabulary stays non-trivial. The best wrong program now comes within 2-5% NMSE
+  (median 0.021-0.054) where it was 74-153% at `m = 0`, and the margin over it falls from 79-148x to 0.7-3.9x. So `m`
+  does not only move G0's teacher-side statistic; the formed vocabulary inherits it. But exhaustive search on 128
+  examples still finds a program that generalizes (61-64 of 64 below 0.05), with 0-1 near ties. Inference is closer,
+  not yet failing: whether it binds is the question for the next census (reduced support, regret), not this probe.
+
+**What this does not show.** One stream per world and three worlds: `FORMS` says formation is POSSIBLE on `m = 4`,
+not that it is RELIABLE (O1 -> O2). One value of `m`. The reading was written after G0 and with its numbers known.
+No necessity for learned inference is shown: search still succeeds. The run took 82 minutes against the 50 planned
+(wake cells 1,270-1,450 s against O11's 655 s; PLAIN 370 s against 177 s) while free memory sat at 1.5 GiB until the
+PI closed Edge at ~21:03Z; cells are deterministic given their construction, so timing does not touch the numbers.
