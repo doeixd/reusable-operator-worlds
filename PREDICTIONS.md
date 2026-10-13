@@ -11525,3 +11525,53 @@ identity, at a cost against being told of about 2% on loops and none on the voca
 search to the 112 depth-2 tasks); the census found the body itself trivially findable on a formed library, so this
 run mainly tested formation and wake localization. Loops sit at ~0.31-0.32, about 4x the true-predicate ceiling
 (0.083): the 64-example re-fit and drift bind, not discovery. Linear halting, K = 6.
+
+# C-SEAL (Tier 2, CONFIRMATORY, sealed worlds 1100-1114, 2026-10-13): `CONFIRMED` with `ROOTS_PREVENTED`; on sealed worlds, a learner whose every candidate starts as a plain step forms the vocabulary and discovers which tasks iterate without being told
+
+Plan `B2_SEALED_CONFIRMATION_PLAN.md`, frozen `3efb101`, hash protected `3bda467` (the launch commit) before any
+sealed world was generated. Run `artifacts/b2_sealed` (protocol `08c090a4`), 61 cells, pool 4, launched
+2026-10-13T04:46Z, exit 0 at 16:50Z, no early stop; logs `reports/b2_sealed_20261013/`, report
+`reports/b2_sealed.json`. The independent scorer `row.experiments.score_b2_sealed` recomputes every clause from the
+per-task records and agrees with the runner; `check_prereg` and `check_invalid` pass.
+
+**Gates.** The anchor rerun (`ONESTEP` on development world 57, stream 0) reproduced its committed B2-hard v2 record
+exactly in all six registered fields (library hash, per-task canonical, loop and anchor NMSE, 108 decisions, rooted
+operations). `GIVEN` (loop identity given) formed in **15/15** sealed cells (12 needed).
+
+**Primary clauses (`ONESTEP`, 30 cells = 15 worlds x 2 streams):** `k_formation` **30/30** (27 needed; canonical
+medians 0.0077-0.0247); wake state-weight `AUC_med` **1.000** (every cell >= 0.999; bar 0.9); recall **0.995**
+(1,433/1,440; bar 0.8; every cell kept 46-48 of 48); specificity **1.000** (1,800/1,800; bar 0.95); `n_terminal`
+**30/30** below 0.38 (loop medians 0.246-0.331; 27 needed). Label **`CONFIRMED`**.
+
+**Secondary (mechanism):** rooted cells `ONESTEP` **0/30**, `ZERO` **3/15** (worlds 1100, 1109, 1110). Label
+**`ROOTS_PREVENTED`** (needs `r_zero >= 2` and `r_one <= 1`).
+
+**Reported, not registered.**
+- Cost of discovery: paired `ONESTEP` stream 0 / `GIVEN` loop-median ratio, median **1.040** (development 1.06);
+  `ONESTEP` at or below `GIVEN` in 7/15 cells. Arm medians, canonical 0.0131 / 0.0170 / 0.0131 and loops 0.275 / 0.304
+  / 0.265 (`ONESTEP` / `ZERO` / `GIVEN`); count accuracy 0.863 / 0.854 / 0.869.
+- `ZERO` formed 14/15; its one failure (world 1110, canonical 1.44, operations 1-5 of 6 rooted, 0 loops
+  kept) is rooted, as the B2-hard wake census predicts (1/1; development 4/4).
+- The zero start broke the WAKE vocabulary in 10/15 cells (wake canonical > 1; median 1.76), against 1/30 for the
+  one-step start (median 0.114) and `GIVEN` 0.121; re-routing and sleep repaired all but the rooted collapse.
+- Development predicted roots in `ZERO` far more often than the sealed worlds show them: 7/9 there, 3/15 here. The
+  mechanism clause still fires (the design's null assumed both arms at 0.368), but the impostor is a minority
+  outcome of the zero start on fresh worlds, not its typical one. What the zero start does typically is damage the
+  wake vocabulary.
+
+**Operational disclosure.** Wall time 12.1 h against the planned ~9.5 h: `ZERO` cells from 11:00Z took 3,300-4,270 s
+(earlier cells ~2,400 s) and `GIVEN` cells 2,575-3,520 s (development 1,400-1,600 s); free memory stayed above
+7 GiB at the 11:43Z check. Cells are deterministic (the anchor reproduced bitwise), so timing affects no number.
+
+**Reading.** This is the project's first sealed confirmation of online CONTROL FLOW. On fresh worlds, starting
+every depth-1 candidate at the plain one-step form, with state-reading halting that must earn its place and a
+one-step data test at the end of the stream, lets the learner form the vocabulary in every cell and find which of
+108 candidates need data-dependent iteration without being told, at about 4% cost on loops against being told and
+none on the vocabulary. The plain start also prevents the iterated-slot impostor that the zero start produces.
+
+**What this does not show.** One generator family (rotated residual, six operators, d = 16, K = 6), so the
+generality threat stands (Track G). Planned depth is given (it narrows the search to 108 candidates); loop bodies are
+one operator; halting is linear; 64 retained examples. The 30 `ONESTEP` cells are 15 worlds with two streams each.
+`CONFIRMED` says formation is reliable at roughly the 0.9 level or better (the clause passes with probability 0.12 at
+a true rate of 0.80), not that it never fails. Loops sit near 0.27, well above the true-predicate ceiling: the
+64-example re-fit binds, not discovery.

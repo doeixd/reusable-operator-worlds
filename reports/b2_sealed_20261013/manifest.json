@@ -1,0 +1,97 @@
+{
+ "protocol": {
+  "id": "b2-sealed",
+  "git_commit": "3bda467",
+  "plan": "B2_SEALED_CONFIRMATION_PLAN.md",
+  "tier": 2,
+  "exploratory": false,
+  "root": "artifacts/b2_sealed",
+  "worlds": [
+   1100,
+   1101,
+   1102,
+   1103,
+   1104,
+   1105,
+   1106,
+   1107,
+   1108,
+   1109,
+   1110,
+   1111,
+   1112,
+   1113,
+   1114
+  ],
+  "onestep_streams": [
+   0,
+   1
+  ],
+  "paired_stream": 0,
+  "anchor": [
+   "ONESTEP",
+   57,
+   0
+  ],
+  "repro_fields": [
+   "library_sha256",
+   "canonical_per_task",
+   "loop_per_task",
+   "anchor_per_task",
+   "decisions",
+   "wake_rooted_ops"
+  ],
+  "k_formation_min": 27,
+  "n_terminal_min": 27,
+  "given_gate_min": 12,
+  "failures_to_stop": 4,
+  "jobs": 4,
+  "v2_protocol": {
+   "streams": [
+    0,
+    1,
+    2
+   ],
+   "arms": [
+    "ONESTEP",
+    "ZERO",
+    "GIVEN"
+   ],
+   "n_loop": 48,
+   "n_candidates": 108,
+   "k": 6,
+   "memory": 64,
+   "sleep_updates": 8192,
+   "halt_init": 4.0,
+   "halt_decay": 0.1,
+   "loop_ratio": 0.5,
+   "one_step": [
+    0,
+    1
+   ],
+   "threshold": 0.05,
+   "loop_bar": 0.38,
+   "implementation_sha256": "48fbc633857d60c93e560669927365e614676f394b2b9a7b3b5aa115c326cc0d",
+   "loop_learner_sha256": "d9400f27b9db368878f36b37589390f5174a0abdaaa07e732c0442a4a0639824",
+   "b2_hard_sha256": "f6d893a71589e8e5bc349e580b5eeed63fd9be29414e7865c530061106728c51",
+   "b2_online_v1_sha256": "8c2b219b715c6eae5b1293abae6c05229d01cedb02cd61854d9836dbd8746eb0",
+   "b1_online_sha256": "ed8233717676f632d0717872223d720feae9f894a5658780cff3ad83184c1cd0",
+   "b2_census_sha256": "d49fdf909cdc2643731411baa0ba99aee5b062fae7e3ae9261f176128460dbb2",
+   "root_census_sha256": "96d8263ec0b255d533667d34e9286688b4bfd9411a4b2bc5cd5491c366188f41",
+   "wake_census_sha256": "5978e80b14ee34c58a918a617d7225ed7ba8e0f3d490a82e105aa16afa321507",
+   "deep_reroute_sha256": "6528c8683cb33a5b90d51d6f8e42c6234142a206a4f567c7d307e487e5eea3e6",
+   "lifetime_sha256": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+   "loop_stream_sha256": "ff3788ec3192675825aaa9509d7738fbf74ccadf4ef30f70c02dbaec865215ba",
+   "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+   "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc"
+  },
+  "input_sha256": {
+   "B2_SEALED_CONFIRMATION_PLAN.md": "1d6d14b8ee79a9d591ca4c0132ed3f400ac6725f0fda41d95d7c70c0affcb6df",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/b2_hard_v2.json": "01faeaa874b429a3d8944c11452c2a0cbe55d572519eef7616b5ea9a4a3d96b2"
+  },
+  "implementation_sha256": "7d53fab174349d307e3d5784de31fd463ef8f2fefceb14054248414f13cfaade",
+  "scale": 1
+ },
+ "protocol_sha256": "08c090a4ff3d5a9ce024d7513561faea5b6665bddc5d956026b801c86483a9f6"
+}

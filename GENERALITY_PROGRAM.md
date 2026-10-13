@@ -33,7 +33,7 @@ changes the weight of every existing result at once.
      assignments + consolidation repairs it (O5-O11, sealed);
   2. a quota of single-operation tasks is what makes a vocabulary form, presence not order (N1-N1c, SC0, SC0b);
   3. control flow forms online when every candidate starts at the plain form and must earn its iteration (B2-hard
-     v2, B2-depth2; exploratory);
+     v2, B2-depth2; sealed by C-seal, 2026-10-13);
   4. a well-formed vocabulary makes program inference easy (SG0).
 - **If they break,** we learn which results were artefacts of a near-linear, easy-inference world, before building
   further on them. Either outcome is a result; neither is a dead end.
@@ -57,6 +57,10 @@ worlds; it is the most novel unconfirmed claim in the project.
   rules registered; must fit one overnight batch or go remote.
 - **Scope stated in advance:** a confirmation on THIS generator. It does not address the generality threat; that is
   Track G.
+- **Result (2026-10-13): `CONFIRMED` with `ROOTS_PREVENTED`** (plan `B2_SEALED_CONFIRMATION_PLAN.md`, frozen `3efb101`;
+  `reports/b2_sealed.json`). Anchor reproduced bitwise, `GIVEN` 15/15; `ONESTEP` formation 30/30, wake AUC 1.000,
+  recall 0.995, specificity 1.000, loops below 0.38 in 30/30; rooted 0/30 against `ZERO` 3/15. The control-flow
+  construction joins the list of results for G2 to carry (item 3 below is now sealed on this generator).
 
 ## Track G: a harder generator
 
@@ -121,7 +125,7 @@ A rung reopens only if its census now passes.
 # Order of work
 
 1. Record SC0b (done: `LENGTHS_SUFFICE`).
-2. Freeze and launch the C-seal plan (Tier 2, sealed 1100-1129) after its dry run and restart test.
+2. Freeze and launch the C-seal plan (done: `CONFIRMED` with `ROOTS_PREVENTED`, 2026-10-13).
 3. While it runs: write the G0 plan, build the generator module with its bitwise switch, run the G0 census.
 4. G1 when G0 picks a candidate.
 

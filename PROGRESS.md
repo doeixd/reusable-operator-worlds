@@ -9486,3 +9486,25 @@ cumulative-cost or time-to-formation endpoint would need its own opportunity che
 
 **What this does not show.** One world, five streams; O2's depth-3 frame (64 length-2 tasks kept); terminal endpoint
 only. Carrying the quota to a depth-5 uniform-over-lengths stream assumes it transfers (the plan's stated limit).
+
+# C-seal sealed control-flow confirmation (Tier 2, 2026-10-13, sealed worlds 1100-1114): `CONFIRMED` with `ROOTS_PREVENTED`
+
+Plan `B2_SEALED_CONFIRMATION_PLAN.md` (frozen `3efb101`, protected `3bda467`); runner `row.experiments.b2_sealed`;
+61 cells, pool 4, 12.1 h, exit 0, no early stop; report `reports/b2_sealed.json`, logs
+`reports/b2_sealed_20261013/`. Independent scorer agrees; `check_prereg`, `check_invalid` pass. Anchor (w57 s0)
+reproduced bitwise; `GIVEN` formed 15/15.
+
+| clause (`ONESTEP`, 30 cells) | result | bar |
+|---|---|---|
+| formation | 30/30 | >= 27 |
+| wake AUC median | 1.000 (min 0.999) | >= 0.9 |
+| recall | 0.995 (1,433/1,440) | >= 0.8 |
+| specificity | 1.000 (1,800/1,800) | >= 0.95 |
+| loops below 0.38 | 30/30 | >= 27 |
+| rooted cells | 0/30 (`ZERO` 3/15) | `ROOTS_PREVENTED` |
+
+Discovery costs ~4% on loops against being told (paired ratio 1.040), none on the vocabulary. `ZERO` formed 14/15;
+its one failure is rooted. Disclosed: the zero start roots far less often on sealed worlds (3/15) than in
+development (7/9); its typical effect is a broken wake vocabulary (10/15 cells, against 1/30 for the one-step start),
+which re-routing and sleep repair. Cells slowed to ~3,300-4,300 s in the afternoon (planned 9.5 h, took 12.1 h);
+results are deterministic. Verdict and limits in PREDICTIONS.md. Next: Track G, G0 plan and generator module.
