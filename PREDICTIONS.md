@@ -11575,3 +11575,46 @@ one operator; halting is linear; 64 retained examples. The 30 `ONESTEP` cells ar
 `CONFIRMED` says formation is reliable at roughly the 0.9 level or better (the clause passes with probability 0.12 at
 a true rate of 0.80), not that it never fails. Loops sit near 0.27, well above the true-predicate ceiling: the
 64-example re-fit binds, not discovery.
+
+# G0 GENERATOR CENSUS (Tier 0, worlds 70-72, 2026-10-13): `NO_CANDIDATE`; within the rotated family, the state stays nearly linear in the input under every knob, and making primitives similar enough to make inference non-trivial also removes the depth-1 clustering formation relies on
+
+Plan `G0_GENERATOR_CENSUS_PLAN.md`, frozen `56e0d78`, hash protected `5195eac` (the run commit). 117 records (39
+candidates x 3 worlds), exit 0; report `reports/g0_generator_census.json`, logs `reports/g0_generator_census_20261013/`.
+The independent scorer `row.experiments.score_g0_generator_census` recomputes every statistic from the per-world
+records and agrees with the runner's summary; the base candidate reproduces the baseline pre-measurement exactly
+(gate); `check_prereg` and `check_invalid` pass. Generator `row.general_world` g1 reproduces the current worlds
+bitwise at `g = 1, m = 0` (tests on worlds 57, 70-72).
+
+**Registered label `NO_CANDIDATE`:** no candidate passes (`moves >= 1` with depth-1 clustering and scale usable).
+
+**S1 (held-out linear predictability of a state hyperplane from the input, k = 1; bar `<= 0.90`):** never moves.
+Range 0.958-0.979 across all 39 candidates (base 0.978); the most nonlinear cells are `a = 0.7, g = 4` (0.958-0.959
+at K = 6, 8, 12) and `a = 1.0, g = 2` (0.962-0.966). At k = 3 the strongest reach 0.936 (base 0.980). Labels are
+balanced (minority fraction 0.47-0.49), so this is not a majority-class artefact. Scale stays sane everywhere (output
+variance 1.02-1.37, norm ratio at most 1.45).
+
+**S2 (teacher runner-up NMSE; band `[0.01, 0.5]`):** moves only with the shared rotation `m`. At `m = 0` it stays at
+1.56-1.67 for every alpha, gain and K (K = 12: 1.56): with independent rotations no wrong program comes near a right
+one. With `m`: 0.60-0.65 at `m = 2`, 0.20-0.27 at `m = 4`, 0.06-0.14 at `m = 8`, 0.02-0.10 at `m = 16` (in band from
+`m = 4`).
+
+**S3 (depth-1 ARI on an untrained library; bar `>= 0.30` in every world):** the same `m` that moves S2 removes it.
+Per-world minima 0.11-0.14 at `m = 2`, 0.03-0.04 at `m = 4`, about 0 at `m >= 8`, against 0.38-0.47 at `m = 0` (base
+0.41). K = 8 and 12 lower the best world (0.96 to 0.65-0.74) but keep every world above 0.37.
+
+**Reading.**
+- The near-linearity that closed B1-mid is a property of the operator FAMILY, not of its parameters: an identity skip
+  plus a bounded residual followed by an orthogonal map stays close to an orthogonal map for residual scale up to 1.5
+  and hidden gain up to 4. Since the learner's operators are the same family, a world in which mid-state decisions are
+  necessary needs a different operator family for teacher AND learner, which the program's "the learner does not
+  change" rule excludes.
+- Route-inference difficulty and depth-1 clustering are COUPLED through operator similarity in this family: the
+  similarity that lets a wrong program nearly fit a depth-3 task also makes single-operation tasks indistinguishable
+  to an untrained library. A world harder for inference is, by N1's premise, a world harder to form a vocabulary in.
+  Whether formation actually needs that premise above 0.30 has never been tested: the 0.30 bar was a judgement (the
+  plan says so), and the formation results so far all sat at 0.41-0.96.
+- More primitives (K = 12) change almost nothing that matters here and cost 2.5x per update (19.5 s against 7.8 s per
+  200 updates).
+
+**What this does not show.** Teacher worlds and an untrained library only; no formation was measured. The grid and
+the polar-factor construction of `m` are design choices. Three development worlds.

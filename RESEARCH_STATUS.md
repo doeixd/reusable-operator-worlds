@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-13, after C-seal (`CONFIRMED` with `ROOTS_PREVENTED`). Nothing is running. Open PI decision: 18 (sealed depth test, deferred). Next: Track G0.
+Last rewritten: 2026-10-13, after G0 (`NO_CANDIDATE`). Nothing is running. Open PI decisions: 20 (operator family for Track G), 18 (sealed depth test, deferred).
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -23,6 +23,12 @@ construction on sealed worlds: anchor reproduced bitwise, `GIVEN` 15/15; `ONESTE
 recall 0.995, specificity 1.000, loops below 0.38 in 30/30; rooted cells 0/30 against `ZERO` 3/15 (development 7/9).
 Discovery costs ~4% on loops against being told. First sealed confirmation of online control flow, on this generator
 only. `PREDICTIONS.md`, `reports/b2_sealed.json`.
+
+**G0 generator census (Tier 0, worlds 70-72, 2026-10-13): `NO_CANDIDATE`.** 39 variants of the rotated generator
+(alpha to 1.5, hidden gain to 4, 6-12 primitives, a shared rotation component `m`). Linear predictability of a computed
+state from the input never drops below 0.958 (bar 0.90): the family itself is near-orthogonal. Route inference becomes
+non-trivial only with shared rotations (`m >= 4`), which also destroy depth-1 clustering on an untrained library (ARI
+0.03-0.04, bar 0.30). Track G is blocked on decision 20.
 
 **Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
 Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow
@@ -980,6 +986,16 @@ sealed band, and all are implementation audits rather than experiments.
     `GENERALITY_PROGRAM.md`. Bands: development 70-99 (Track G), sealed 1100-1129 (C-seal); 960-989 stays
     reserved for decision 18. Both verified unused as world seeds (1100-1102 appear only as SeedSequence
     components in `audit_e7_census.py`).
+
+20. **OPEN (2026-10-13): operator family for Track G.** G0 (`NO_CANDIDATE`) showed the two saturations have different
+    causes. (a) Near-linearity belongs to the operator family that teacher and learner share, so a world where
+    mid-state decisions matter needs a new family for BOTH, which `GENERALITY_PROGRAM.md` currently excludes ("the
+    learner does not change"). (b) Inference difficulty and depth-1 clustering are coupled through operator
+    similarity; whether formation needs clustering above G0's 0.30 bar is untested. Claude recommends (b) first: an
+    exploratory Tier 1 formation probe with the confirmed pipeline on `m = 4` (inference in band, ARI 0.03-0.04),
+    which needs no learner change and tests the coupling directly; and treating (a) as a separate program decision
+    (a new teacher+learner family, e.g. a residual without the identity skip), with every existing result scoped to
+    the rotated family meanwhile.
 
 # Housekeeping owed
 

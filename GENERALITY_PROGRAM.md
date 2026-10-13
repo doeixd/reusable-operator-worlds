@@ -106,6 +106,20 @@ anchor quota (a dose check), and the control-flow construction. Each survivor go
 Only after G1-G2: re-run the necessity censuses that closed B1-mid, B3 and the inference rungs, on the new generator.
 A rung reopens only if its census now passes.
 
+### G0 result (2026-10-13): `NO_CANDIDATE`
+
+`G0_GENERATOR_CENSUS_PLAN.md` (frozen `56e0d78`), `reports/g0_generator_census.json`. 39 variants of the rotated
+generator (`row.general_world` g1: alpha 0.35-1.5, hidden gain 1-4, K 6-12, shared rotation `m` 0-16):
+- linear predictability of a computed state from the input never drops below 0.958 (bar 0.90; base 0.978): the
+  near-linearity is a property of the operator family (identity skip + bounded residual + orthogonal map), which the
+  learner shares;
+- route inference becomes non-trivial only through shared rotations (runner-up NMSE 0.20-0.27 at `m = 4`, base 1.65),
+  and the same similarity removes depth-1 clustering on an untrained library (ARI 0.03-0.04 at `m = 4`, bar 0.30).
+
+The two saturations therefore need different moves, and the first conflicts with "it does not change the learner"
+below. Decision 20 (RESEARCH_STATUS.md) is pending: Claude recommends an exploratory Tier 1 formation probe at
+`m = 4` first (does formation need depth-1 clustering?), and a separate program decision on a new operator family.
+
 # Track S, Track M (unchanged, lower priority)
 
 - **Track S (self-curriculum): paused.** SC0 `GRADED`, SC0b `LENGTHS_SUFFICE` (quota 16-24 anchors; uniform over
@@ -126,7 +140,7 @@ A rung reopens only if its census now passes.
 
 1. Record SC0b (done: `LENGTHS_SUFFICE`).
 2. Freeze and launch the C-seal plan (done: `CONFIRMED` with `ROOTS_PREVENTED`, 2026-10-13).
-3. While it runs: write the G0 plan, build the generator module with its bitwise switch, run the G0 census.
+3. While it runs: write the G0 plan, build the generator module with its bitwise switch, run the G0 census. (done 2026-10-13: `NO_CANDIDATE`, below.)
 4. G1 when G0 picks a candidate.
 
 # What this program does not do

@@ -9508,3 +9508,21 @@ its one failure is rooted. Disclosed: the zero start roots far less often on sea
 development (7/9); its typical effect is a broken wake vocabulary (10/15 cells, against 1/30 for the one-step start),
 which re-routing and sleep repair. Cells slowed to ~3,300-4,300 s in the afternoon (planned 9.5 h, took 12.1 h);
 results are deterministic. Verdict and limits in PREDICTIONS.md. Next: Track G, G0 plan and generator module.
+
+# G0 generator census (Tier 0, 2026-10-13, worlds 70-72): `NO_CANDIDATE`
+
+Plan `G0_GENERATOR_CENSUS_PLAN.md` (frozen `56e0d78`, protected `5195eac`); new generator `row.general_world` g1 (hidden
+gain `g`, shared rotation `m`; bitwise switch to the current worlds, tested); runner `row.experiments.g0_generator_census`
+(117 durable records, restart tested on the baseline), independent scorer agrees, base candidate reproduces the
+baseline pre-measurement; report `reports/g0_generator_census.json`, logs `reports/g0_generator_census_20261013/`.
+About 15 minutes.
+
+| axis | knob that moves it | best reached | bar | cost |
+|---|---|---|---|---|
+| S1 linear predictability (k = 1) | none (alpha to 1.5, gain to 4, K to 12) | 0.958 | <= 0.90 | - |
+| S2 teacher runner-up NMSE | shared rotation `m` only | 0.20-0.27 at `m = 4` | [0.01, 0.5] | S3 falls to 0.03-0.04 |
+| S3 depth-1 ARI (untrained) | falls with `m`; K lowers the best world | 0.38-0.47 at `m = 0` | >= 0.30 every world | - |
+
+The write-time check before freezing found the census had no durable records (fixed; restart tested) and that an
+unbalanced hyperplane would inflate S1 (disclosed; labels turned out balanced). Verdict, reading and limits in
+PREDICTIONS.md. Next: a PI decision on the operator family (decision 20, RESEARCH_STATUS.md).
