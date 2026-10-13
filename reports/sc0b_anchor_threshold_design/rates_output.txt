@@ -1,0 +1,14 @@
+LENGTHS_SUFFICE (k_32 == 5 and k_40 >= 4)
+  null: dose 32 unreliable (p_32 <= 0.5); false-fire <= P(k_32 == 5) under ANY correlation:
+    p_32=0.3: bound=0.0024  independent (p_40=0.98)=0.0024
+    p_32=0.5: bound=0.0312  independent (p_40=0.98)=0.0311
+  effect: both doses reliable; detection independent / fully correlated (= P(k_32 == 5)):
+    p_32=0.98, p_40=0.98: 0.9004 / 0.9039
+    p_32=0.96, p_40=0.98: 0.8122 / 0.8154
+    p_32=0.95, p_40=0.95: 0.7563 / 0.7738
+LENGTHS_INSUFFICIENT (k_40 <= 1), one dose so correlation does not enter
+  null p_40=0.7: false-fire=0.0308
+  null p_40=0.8: false-fire=0.0067
+  null p_40=0.9: false-fire=0.0005
+  effect p_40=0.1: detection=0.9185
+  effect p_40=0.2: detection=0.7373
