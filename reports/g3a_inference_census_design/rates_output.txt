@@ -1,0 +1,16 @@
+f (fraction of programs drawn from SG0 control libraries) -> P(HEADROOM: k >= 2 of 9); mean k; P(k>=1 at s=2)
+f=0.00  P(fire)=0.0000  mean k=0.00  P(any s=2 cell)=0.000
+f=0.25  P(fire)=0.0000  mean k=0.00  P(any s=2 cell)=0.000
+f=0.50  P(fire)=0.0222  mean k=0.26  P(any s=2 cell)=0.235
+f=0.60  P(fire)=0.2732  mean k=1.02  P(any s=2 cell)=0.711
+f=0.75  P(fire)=0.8535  mean k=2.28  P(any s=2 cell)=0.985
+f=1.00  P(fire)=0.9940  mean k=2.88  P(any s=2 cell)=1.000
+
+Rule B: true per-program bind rate q at one support -> P(fire), 192 programs, control 0
+null (q=0, both arms from the formed pool): P(fire) = 0.0000 (no formed SG0 program binds at any support)
+q=0.02  P(fire)=0.0000
+q=0.05  P(fire)=0.0016
+q=0.08  P(fire)=0.1365
+q=0.10  P(fire)=0.4585
+q=0.15  P(fire)=0.9745
+q=0.20  P(fire)=0.9999

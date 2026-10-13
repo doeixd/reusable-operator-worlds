@@ -64,6 +64,7 @@ IN_SCOPE = (
     'B2_SEALED_CONFIRMATION_PLAN.md',
     'G0_GENERATOR_CENSUS_PLAN.md',
     'G1_FORMATION_PROBE_PLAN.md',
+    'G3A_INFERENCE_CENSUS_PLAN.md',
 )
 
 #: Explicit sentinel for a plan with no behaviour to elicit (an observational
