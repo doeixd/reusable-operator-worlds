@@ -1,0 +1,47 @@
+{
+ "protocol": {
+  "id": "sc0b-anchor-threshold",
+  "git_commit": "d612e37",
+  "plan": "SC0B_ANCHOR_THRESHOLD_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "root": "artifacts/sc0b_anchor_threshold",
+  "world": 64,
+  "streams": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "doses": [
+   24,
+   32,
+   40
+  ],
+  "anchor_cell": [
+   16,
+   64,
+   0
+  ],
+  "anchor_seed": 6100,
+  "memory": 64,
+  "sleep_updates": 8192,
+  "threshold": 0.05,
+  "input_sha256": {
+   "SC0B_ANCHOR_THRESHOLD_PLAN.md": "6f098e6b642156b732bd1304c3f4594402e84a6c7fff2d055b23b61b6c917fbd",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/sc0_anchor_dose.json": "5347758d4d22f4f9c39982284a2e0e2ea6f167491a0892cad337a502be4ebdbe"
+  },
+  "implementation_sha256": "499860869c3eac3c3796d1bfe90895b25ec4a5b05f8f3713902cb4a5501baae5",
+  "lifetime_sha256": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o5_sha256": "a2788b483abb3f6432702d36dc704ef3be49bec3d5acaa9bf9dd948aac75ff49",
+  "sc0_sha256": "fc84816a270fccd584aedf23029c0db44f7bb37004ed2ecf5294014c70eebebc",
+  "scale": 1
+ },
+ "protocol_sha256": "0a7f56fd71a46809c6d5f24a866fd7a44100b6e177a92068db1ea7ad2409f0e9"
+}

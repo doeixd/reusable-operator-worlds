@@ -542,6 +542,16 @@ report JSON. `figures/` — generated figures.
   track (B2-online v2 onward); Claude recommended it and the PI answered
   "Continue". Development evidence only. Verified unused before allocation: no
   runner, report or artifact references them.
+- **Development band 6:** seeds 70-99, allocated 2026-10-13 (decision 19; the PI
+  answered "Ok write all this down. New plan" to Claude's recommendation) for the
+  generality program's Track G (`GENERALITY_PROGRAM.md`). Development evidence only.
+  Verified unused before allocation: no runner, report or artifact uses 70-99 as a
+  world seed.
+- **C-seal sealed band:** seeds 1100-1129, allocated 2026-10-13 (decision 19) for the
+  sealed confirmation of online control flow. No world in it may be generated before
+  its plan is frozen and hashed in `tools/check_prereg.py`. Verified unused as world
+  seeds; 1100-1102 occur only as SeedSequence components in `audit_e7_census.py`.
+  960-989 stays reserved for decision 18 (sealed depth test).
 - **O9 sealed band:** seeds 930-959, allocated 2026-10-04 (decision 15; the PI
   answered "Ok continue" to Claude's recommendation). O9 uses 930-944;
   945-959 stay sealed and unused. No sealed world may be generated before

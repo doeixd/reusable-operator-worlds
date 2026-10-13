@@ -9433,3 +9433,56 @@ sharing its canonical tasks; 64 length-2 tasks kept at every dose; depth 3; term
 
 **Next:** locate the threshold before any SC1 plan, as the label requires: a nested-dose follow-up at 24, 32 and 40
 (the uniform-over-lengths supply at depth 5 is 37.6) on the same world and streams, Tier 1, ~1 h.
+
+# Decision 19 (2026-10-13): generality program
+
+After SC0, the PI asked for an assessment of the recent research and what moves it forward most. Claude's assessment:
+the online-formation line is the strongest result (sealed, and found by cheap censuses on saved models); everything
+since O6 is Tier 1 exploratory, including the control-flow positives; and the single world family (six rotated-residual
+operators, d = 16) increasingly answers "no opportunity" (B1-mid, SG0, B3, E6/E7, L0d, H47-H49, likely Track S).
+Recommendation: a harder generator, the one move that changes the weight of every existing result, run concurrently
+with a sealed confirmation of online control flow. The PI answered "Ok write all this down. New plan".
+
+Recorded in `GENERALITY_PROGRAM.md` (draft program; registers no experiment), RESEARCH_STATUS decision 19, AGENTS.md
+seed partitions (development band 6: 70-99; sealed 1100-1129; 960-989 kept for decision 18), and a priority note in
+`SUCCESSOR_LADDER.md`. Order: record SC0b; freeze and launch C-seal; write G0 and build the generator module with a
+bitwise switch to the current world; G1 formation when G0 picks a candidate.
+
+# SC0b anchor threshold (Tier 1, 2026-10-13, band 5 world 64): `LENGTHS_SUFFICE`
+
+Plan `SC0B_ANCHOR_THRESHOLD_PLAN.md` (frozen `8402b2b`, hash protected `d612e37`), runner
+`row.experiments.sc0b_anchor_threshold`, report `reports/sc0b_anchor_threshold.json`, operational logs
+`reports/sc0b_anchor_threshold_20261013/`. 16 cells on a pool of 3, launched 2026-10-13T02:20:50Z, finished 03:36:15Z
+(75 min; 10-14 min per cell). Exit 0; the anchor cell (SC0's D16_w64_s0, rerun) reproduced SC0's record BITWISE
+(library and all 64 per-task terminal NMSE); the independent scorer agrees with the runner (`k_24 = k_32 = k_40 = 5`,
+`LENGTHS_SUFFICE`); `check_prereg` and `check_invalid` pass. **Exploratory: no verdict.**
+
+| dose | s0 | s1 | s2 | s3 | s4 | passing |
+|---|---|---|---|---|---|---|
+| 24 | 0.0128 | 0.0488 | 0.0092 | 0.0118 | 0.0472 | 5/5 |
+| 32 | 0.0092 | 0.0234 | 0.0154 | 0.0107 | 0.0179 | 5/5 |
+| 40 | 0.0097 | 0.0120 | 0.0095 | 0.0131 | 0.0098 | 5/5 |
+
+With SC0 (4, 8: 0/5; 16: 2/5), the per-stream persistent thresholds are 16, 24, 16, 24, 24: every stream fails at 8
+and passes at every dose from 24 up, and all 5 streams are monotone in pass/fail over the six doses.
+
+**Registered label `LENGTHS_SUFFICE`** (`k_32 = 5` and `k_40 >= 4`). Per the plan: the quota is at most 32 with
+margin (here at most 24), so a uniform-over-lengths sampler (188 / D anchors: 62.7, 47.0, 37.6 at D = 3, 4, 5) clears it
+through depth 5 in this frame. An adaptive sampler's terminal-endpoint contest would be against uniform-over-programs
+only, which fails (SC0) and is not a competitive baseline. **Track S pauses** on the terminal endpoint; a
+cumulative-cost or time-to-formation endpoint would need its own opportunity check first.
+
+**Reading.**
+- The online quota under the confirmed construction is 16-24 single-operation anchors in O2's frame (152 tasks at 24),
+  close to the offline N1b/N1c region (18 passed 2 of 3). Re-routing and sleep do not lower it.
+- Near the threshold the repair is carried increasingly by SLEEP, not re-routing. At dose 40 re-routing alone takes
+  every stream to 0.08 or below (wake up to 1.75). At dose 24 in streams 1 and 4, the re-routed library is still at
+  1.47 and 1.08 and sleep brings it to 0.049 and 0.047, just under the bar; at dose 16 the same pattern fails. So the
+  quota is a margin on how much damaged structure sleep can still recover, not a cliff in whether wake forms anything.
+  This does not contradict O2C-O6 (sleep rarely rescues a COLLAPSE): those collapses were stale routes that re-routing
+  removes first.
+- The wake fit of the anchors again tracks the outcome (wake anchor median 0.017-0.032 where re-routing alone nearly
+  finishes the job; 0.19-0.39 where sleep must carry it); anchor timing remains a post hoc hypothesis.
+
+**What this does not show.** One world, five streams; O2's depth-3 frame (64 length-2 tasks kept); terminal endpoint
+only. Carrying the quota to a depth-5 uniform-over-lengths stream assumes it transfers (the plan's stated limit).

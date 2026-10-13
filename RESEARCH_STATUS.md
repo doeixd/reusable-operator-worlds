@@ -6,9 +6,17 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-12, after SC0 (Track S). Nothing is running. Open PI decision:
-18 (sealed depth test, deferred). **Read `SUCCESSOR_LADDER.md` and
-`ONLINE_FORMATION_SYNTHESIS.md` first.**
+Last rewritten: 2026-10-13, after decision 19 (generality program). Nothing is running. Open PI decision: 18 (sealed depth test, deferred).
+**Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
+`ONLINE_FORMATION_SYNTHESIS.md`.**
+
+**Decision 19 (2026-10-13): generality program.** Every result so far comes from one world family
+(six rotated-residual operators, d = 16); recent rungs mostly return "no opportunity on this generator".
+Two concurrent tracks (`GENERALITY_PROGRAM.md`): **C-seal**, a sealed confirmation of online control
+flow (B2-hard v2 construction, sealed band 1100-1129); **Track G**, a harder generator (G0 design +
+Tier 0 census with a bitwise switch to the current world, G1 formation with the confirmed pipeline,
+G2 carry the confirmed mechanisms, G3 re-run the necessity censuses that closed rungs). Development
+band 6: seeds 70-99. Tracks S and M continue at lower priority.
 
 **Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
 Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow
@@ -53,8 +61,10 @@ straight tasks), so B2 offline is skipped as near-guaranteed. **B2-online (Tier 
 Under the confirmed online construction (wake + exhaustive re-route + sleep) inside O2's stream, 4 and 8 length-1
 anchors fail 5/5 at the floor (~1.4), 16 passes 2/5 (one near-miss 0.090), 60 passes; floor 0 fails. The online quota
 is about the offline one (~16-18); uniform-over-programs sampling (~4.4 anchors at depth 3) is not a competitive
-baseline. Exploratory. **Next (Claude):** locate the threshold (doses 24/32/40, same world and streams) before any
-SC1 plan; see PROGRESS 2026-10-12.
+baseline. Exploratory. **SC0b (Tier 1, plan `8402b2b`, 2026-10-13): `LENGTHS_SUFFICE`:** 24, 32 and 40 anchors pass 5/5 (anchor
+cell bitwise); per-stream thresholds 16-24. Uniform-over-lengths sampling clears the quota through depth 5 in
+this frame, so an adaptive sampler has no terminal-endpoint opportunity. **Track S pauses** (decision 19 puts the
+generality program first).
 
 **D2 (Tier 1, depth 5, development worlds 37-43): `TRANSFERS`, 21 of 21.** One
 end-of-stream exhaustive re-route pass + sleep formed the depth-5 substrate in
@@ -956,6 +966,14 @@ sealed band, and all are implementation audits rather than experiments.
     streams per depth, arms re-route + sleep and sleep alone), about 9 hours.
     Alternatives without a new band: the sleep budget at larger streams, or a
     sparse in-stream re-route schedule.
+
+19. **DECIDED (2026-10-13): generality program.** Claude recommended, after an assessment of the
+    recent record (all control-flow positives exploratory; the testbed increasingly fails necessity),
+    a harder generator as the step that moves every result at once, run concurrently with a sealed
+    control-flow confirmation. The PI answered "Ok write all this down. New plan". Program:
+    `GENERALITY_PROGRAM.md`. Bands: development 70-99 (Track G), sealed 1100-1129 (C-seal); 960-989 stays
+    reserved for decision 18. Both verified unused as world seeds (1100-1102 appear only as SeedSequence
+    components in `audit_e7_census.py`).
 
 # Housekeeping owed
 

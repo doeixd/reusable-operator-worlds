@@ -1,0 +1,17 @@
+2026-10-13T02:20:49.907291+00:00 LAUNCH 0a7f56fd71a46809c6d5f24a866fd7a44100b6e177a92068db1ea7ad2409f0e9 todo=16 reused=0 scale=1 free=5.0GiB
+2026-10-13T02:32:59.380399+00:00 cell finished D16_w64_s0 726.5s canonical=0.01671 wake=1.727 reroute=0.2993 changed=69
+2026-10-13T02:34:07.383563+00:00 cell finished D40_w64_s1 794.5s canonical=0.012 wake=1.686 reroute=0.08131 changed=63
+2026-10-13T02:34:08.053002+00:00 cell finished D40_w64_s0 795.2s canonical=0.009683 wake=0.1242 reroute=0.02667 changed=31
+2026-10-13T02:44:15.071349+00:00 cell finished D40_w64_s2 675.7s canonical=0.009485 wake=0.03753 reroute=0.03044 changed=36
+2026-10-13T02:45:05.761915+00:00 cell finished D40_w64_s3 658.4s canonical=0.01305 wake=1.751 reroute=0.08677 changed=49
+2026-10-13T02:45:15.402449+00:00 cell finished D40_w64_s4 667.3s canonical=0.009801 wake=0.928 reroute=0.05134 changed=45
+2026-10-13T02:58:09.518449+00:00 cell finished D32_w64_s0 834.4s canonical=0.009203 wake=0.07025 reroute=0.04669 changed=29
+2026-10-13T02:59:02.531126+00:00 cell finished D32_w64_s1 836.8s canonical=0.02339 wake=1.989 reroute=1.198 changed=97
+2026-10-13T02:59:15.962679+00:00 cell finished D32_w64_s2 840.5s canonical=0.01543 wake=0.1074 reroute=0.04269 changed=37
+2026-10-13T03:12:02.890364+00:00 cell finished D32_w64_s3 833.4s canonical=0.0107 wake=1.682 reroute=0.139 changed=55
+2026-10-13T03:12:41.265546+00:00 cell finished D24_w64_s0 805.3s canonical=0.01279 wake=0.06734 reroute=0.05637 changed=36
+2026-10-13T03:12:59.158141+00:00 cell finished D32_w64_s4 836.6s canonical=0.01793 wake=1.945 reroute=0.2313 changed=76
+2026-10-13T03:25:50.242277+00:00 cell finished D24_w64_s1 827.3s canonical=0.04876 wake=1.917 reroute=1.473 changed=103
+2026-10-13T03:26:04.336455+00:00 cell finished D24_w64_s2 803.1s canonical=0.009193 wake=0.05292 reroute=0.04602 changed=41
+2026-10-13T03:26:30.074594+00:00 cell finished D24_w64_s3 810.9s canonical=0.0118 wake=1.899 reroute=0.119 changed=57
+2026-10-13T03:36:13.553338+00:00 cell finished D24_w64_s4 623.3s canonical=0.04716 wake=1.902 reroute=1.076 changed=100

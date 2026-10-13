@@ -1,5 +1,8 @@
 # Successor ladder: from a confirmed online vocabulary to control flow, curriculum and procedural memory
 
+**Superseded in priority (2026-10-13, decision 19):** `GENERALITY_PROGRAM.md` (sealed control-flow
+confirmation + a harder generator) now comes first; the tracks below continue at lower priority.
+
 Status: DRAFT program document (2026-10-05). It registers no experiment; each
 rung below gets its own frozen plan before any cell runs. It implements issue
 #2 section 14: a NEW ladder whose baseline is the confirmed learner, instead of
@@ -252,4 +255,8 @@ census was impossible (O-line lifetimes deleted), so SC0 measured the anchor dos
 4 and 8 fail 5/5, 16 passes 2/5, 60 passes. The quota is about the offline one; uniform-over-programs (~4.4 anchors at
 depth 3) fails, uniform-over-lengths (37.6-62.7) is untested in the 16-60 gap. **Next: locate the threshold (24/32/40)
 before SC1.**
+
+**SC0b (Tier 1, 2026-10-13): `LENGTHS_SUFFICE`** (`reports/sc0b_anchor_threshold.json`): 24, 32 and 40 pass 5/5;
+per-stream thresholds 16-24. Uniform-over-lengths clears the quota through depth 5, so SC1 has no terminal
+opportunity. **Track S pauses** (decision 19).
 
