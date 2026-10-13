@@ -247,3 +247,9 @@ H* 16.8; loop bodies 4-6 against 16.8), and a fixed-count REPEAT executes exactl
 so only its bit price is open, which E6 already measured. Data-dependent counts are B2 (done); unseen counts are
 C2/C3. **Next: Track S, SC0 census.**
 
+**SC0 anchor dose (Tier 1, 2026-10-12, band 5 world 64): `GRADED`** (`reports/sc0_anchor_dose.json`). The read-only
+census was impossible (O-line lifetimes deleted), so SC0 measured the anchor dose the confirmed online baseline needs:
+4 and 8 fail 5/5, 16 passes 2/5, 60 passes. The quota is about the offline one; uniform-over-programs (~4.4 anchors at
+depth 3) fails, uniform-over-lengths (37.6-62.7) is untested in the 16-60 gap. **Next: locate the threshold (24/32/40)
+before SC1.**
+

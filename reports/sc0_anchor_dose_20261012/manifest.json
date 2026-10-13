@@ -1,0 +1,50 @@
+{
+ "protocol": {
+  "id": "sc0-anchor-dose",
+  "git_commit": "2da8962",
+  "plan": "SC0_ANCHOR_DOSE_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "root": "artifacts/sc0_anchor_dose",
+  "world": 64,
+  "streams": [
+   0,
+   1,
+   2,
+   3,
+   4
+  ],
+  "doses": [
+   4,
+   8,
+   16
+  ],
+  "controls": [
+   [
+    60,
+    0
+   ],
+   [
+    0,
+    0
+   ]
+  ],
+  "anchor_seed": 6100,
+  "memory": 64,
+  "sleep_updates": 8192,
+  "threshold": 0.05,
+  "input_sha256": {
+   "SC0_ANCHOR_DOSE_PLAN.md": "89d1a1badb116bc98cc98d135ea5913b3f1907ef3f71221b6906647aa8f3f01f",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": "fc84816a270fccd584aedf23029c0db44f7bb37004ed2ecf5294014c70eebebc",
+  "lifetime_sha256": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+  "o2_sha256": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+  "o2c_sha256": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+  "o2d_sha256": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+  "o3_sha256": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+  "o5_sha256": "a2788b483abb3f6432702d36dc704ef3be49bec3d5acaa9bf9dd948aac75ff49",
+  "scale": 1
+ },
+ "protocol_sha256": "21c36bd00a49aecdb79235f1077cf6f9e5816878ef13d68ed04ae838e83b157e"
+}

@@ -9385,3 +9385,51 @@ different macro shape and would test the accounting, not a new capability. **Dec
 "continue"):** B3 is not run on this testbed; recorded as no opportunity (generator) plus definitional (construct).
 Next: Track S's SC0 census.
 
+# SC0 anchor dose (Tier 1, 2026-10-12, band 5 world 64): `GRADED`
+
+Plan `SC0_ANCHOR_DOSE_PLAN.md` (frozen `68f994d`, hash protected `2da8962`), runner
+`row.experiments.sc0_anchor_dose`, report `reports/sc0_anchor_dose.json`, operational logs
+`reports/sc0_anchor_dose_20261012/`. 17 cells on a pool of 3, launched 2026-10-13T00:22:55Z, finished 01:18:14Z
+(55 min; 8-12 min per cell, against the plan's ~25 min estimate). Exit 0, 17/17 cells; the independent scorer
+`score_sc0_anchor_dose` agrees with the runner (`k_4 = 0, k_8 = 0, k_16 = 2`, both controls behave, `GRADED`);
+`check_prereg` and `check_invalid` pass. **Exploratory: no verdict.**
+
+Question: how many length-1 anchors does the confirmed online construction (wake + end-of-stream exhaustive re-route
++ sleep, O6) need, inside O2's SHUFFLED stream with the other 128 tasks unchanged?
+
+| dose | s0 | s1 | s2 | s3 | s4 | passing |
+|---|---|---|---|---|---|---|
+| 4 | 1.376 | 1.349 | 1.400 | 1.392 | 1.384 | 0/5 |
+| 8 | 1.472 | 1.395 | 1.401 | 1.505 | 1.424 | 0/5 |
+| 16 | **0.0167** | 1.417 | **0.0134** | 0.0901 | 1.395 | 2/5 |
+| 60 (control) | **0.0106** | | | | | passes |
+| 0 (floor) | 1.393 | | | | | fails |
+
+Terminal canonical median query NMSE; passing is `< 0.05`.
+
+**Registered label `GRADED`:** `k_4 <= 1` held (0/5), `k_16 >= 4` did not (2/5), so neither `NO_OPPORTUNITY` nor
+`OPPORTUNITY` fired. Per the plan: read the per-stream curve; no SC1 plan until the threshold is located.
+
+**Reading.**
+- Below 16 anchors the confirmed construction collapses to the no-anchor floor (~1.4) in every stream; 16 sits on the
+  threshold (2 pass, s3 a near-miss at 0.090 that re-route + sleep brought down from wake 1.95); 60 passes. The online
+  threshold is therefore about where N1b/N1c put the OFFLINE one (6 fail, 18 pass 2 of 3): re-routing and sleep, which
+  repair a formed-but-stale library, do not lower the anchor quota a library needs to form.
+- For SC1 this settles one baseline: uniform-over-programs at depth 3 supplies ~4.4 anchors per 188 tasks and fails
+  5/5 here, so it is not a competitive baseline at any depth. Uniform-over-lengths supplies 37.6-62.7; whether that is
+  enough is open between 16 (2/5) and 60 (1/1).
+- Coverage of operations is again not the variable (N1c): D16 s0 covered 5 of 6 operations and passed, s1 and s4
+  covered 6 and failed.
+
+**Post hoc, not registered (hypothesis only, n = 5):** at dose 16 the passing streams' anchors arrived earlier (median
+stream positions 45 and 40.5) than the near-miss (90.5) and the failing streams (86.5, 105.5), and the wake fit of the
+anchors separates them the same way (wake anchor median 0.067 / 0.018 passing, 0.42 near-miss, 1.17 / 1.39 failing).
+Consistent with O8 (commitments made early on an immature library go stale), but confounded with stream identity.
+
+**Disclosure.** The reported `monotone_streams = 0` uses a strict ordering of terminal medians across doses 4 >= 8 >=
+16; among collapsed cells (all 1.35-1.50) that ordering is noise, so the statistic is uninformative here. In pass/fail
+terms every stream is monotone (none passes at a lower dose and fails at a higher one). Scope: one world, five streams
+sharing its canonical tasks; 64 length-2 tasks kept at every dose; depth 3; terminal endpoint only.
+
+**Next:** locate the threshold before any SC1 plan, as the label requires: a nested-dose follow-up at 24, 32 and 40
+(the uniform-over-lengths supply at depth 5 is 37.6) on the same world and streams, Tier 1, ~1 h.

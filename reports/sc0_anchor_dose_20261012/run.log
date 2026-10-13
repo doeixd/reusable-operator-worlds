@@ -1,0 +1,18 @@
+2026-10-13T00:22:55.566731+00:00 LAUNCH 21c36bd00a49aecdb79235f1077cf6f9e5816878ef13d68ed04ae838e83b157e todo=17 reused=0 scale=1 free=6.5GiB
+2026-10-13T00:32:49.115162+00:00 cell finished D16_w64_s0 590.8s canonical=0.01671 wake=1.727 reroute=0.2993 changed=69
+2026-10-13T00:32:54.952847+00:00 cell finished D16_w64_s1 596.6s canonical=1.417 wake=2.02 reroute=1.761 changed=103
+2026-10-13T00:35:07.467910+00:00 cell finished D60_w64_s0 729.1s canonical=0.01056 wake=0.02015 reroute=0.01847 changed=19
+2026-10-13T00:43:43.884744+00:00 cell finished D16_w64_s2 654.8s canonical=0.01343 wake=0.3707 reroute=0.2412 changed=52
+2026-10-13T00:43:53.919865+00:00 cell finished D16_w64_s3 659.0s canonical=0.09014 wake=1.949 reroute=1.578 changed=101
+2026-10-13T00:45:38.537447+00:00 cell finished D16_w64_s4 631.1s canonical=1.395 wake=1.888 reroute=1.722 changed=93
+2026-10-13T00:52:24.343301+00:00 cell finished D8_w64_s0 520.5s canonical=1.472 wake=1.904 reroute=1.668 changed=87
+2026-10-13T00:52:40.012126+00:00 cell finished D8_w64_s1 526.1s canonical=1.395 wake=1.941 reroute=1.717 changed=90
+2026-10-13T00:54:17.145580+00:00 cell finished D8_w64_s2 518.6s canonical=1.401 wake=1.847 reroute=1.639 changed=74
+2026-10-13T01:01:22.490864+00:00 cell finished D8_w64_s3 538.1s canonical=1.505 wake=1.926 reroute=1.675 changed=85
+2026-10-13T01:01:43.836481+00:00 cell finished D8_w64_s4 543.8s canonical=1.424 wake=1.954 reroute=1.785 changed=96
+2026-10-13T01:03:06.352124+00:00 cell finished D4_w64_s0 529.2s canonical=1.376 wake=1.929 reroute=1.702 changed=89
+2026-10-13T01:09:55.224025+00:00 cell finished D4_w64_s1 512.7s canonical=1.349 wake=1.958 reroute=1.758 changed=87
+2026-10-13T01:10:19.466291+00:00 cell finished D4_w64_s2 515.6s canonical=1.4 wake=1.988 reroute=1.728 changed=84
+2026-10-13T01:11:41.384248+00:00 cell finished D4_w64_s3 515.0s canonical=1.392 wake=2.035 reroute=1.676 changed=94
+2026-10-13T01:17:56.364709+00:00 cell finished D4_w64_s4 481.1s canonical=1.384 wake=2.008 reroute=1.818 changed=91
+2026-10-13T01:18:12.950477+00:00 cell finished D0_w64_s0 473.5s canonical=1.393 wake=1.943 reroute=1.761 changed=83
