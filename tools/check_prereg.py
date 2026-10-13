@@ -101,6 +101,7 @@ FROZEN = {
     "B1_HARD_PLAN.md": "f896445",
     "B2_DEPTH2_PLAN.md": "223b1d1",
     "SC0_ANCHOR_DOSE_PLAN.md": "68f994d",
+    "SC0B_ANCHOR_THRESHOLD_PLAN.md": "8402b2b",
 }
 
 #: STATUS-cited paths acknowledged ABSENT from this disk, each with its reason. The module
