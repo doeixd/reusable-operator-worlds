@@ -1,0 +1,13 @@
+NO_OPPORTUNITY (k_4 == 5):
+  p_4=0.5: P(fire)=0.0312
+  p_4=0.7: P(fire)=0.1681
+  p_4=0.8: P(fire)=0.3277
+  p_4=0.9: P(fire)=0.5905
+  p_4=0.98: P(fire)=0.9039
+OPPORTUNITY (k_4 <= 1 and k_16 >= 4), null = no dose effect (p_4 = p_16 = p):
+  worst-case false-fire over p: 0.0352 at p=0.50
+  effect p_4=0.1, p_16=0.95: detection=0.8978
+  effect p_4=0.2, p_16=0.9: detection=0.6772
+  effect p_4=0.3, p_16=0.8: detection=0.3894
+controls both as expected at per-cell 0.9: 0.8100
+controls both as expected at per-cell 0.98: 0.9604
