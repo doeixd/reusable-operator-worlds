@@ -1,0 +1,20 @@
+{
+ "baseline_s1_median": 0.978271484375,
+ "baseline_s2_median": 1.6540184067110817,
+ "s1_null_false_fire": 0.0,
+ "s1_rate_at_true_median_0.92": 0.0,
+ "s1_rate_at_true_median_0.91": 0.0,
+ "s1_rate_at_true_median_0.89": 1.0,
+ "s1_rate_at_true_median_0.88": 1.0,
+ "s1_rate_at_true_median_0.85": 1.0,
+ "s2_null_false_fire": 0.0,
+ "s2_rate_at_true_median_0.6": 0.0,
+ "s2_rate_at_true_median_0.55": 0.0,
+ "s2_rate_at_true_median_0.45": 1.0,
+ "s2_rate_at_true_median_0.4": 1.0,
+ "s2_rate_at_true_median_0.2": 1.0,
+ "s2_rate_at_true_median_0.02": 1.0,
+ "s2_rate_at_true_median_0.008": 0.0,
+ "s1_bootstrap_sd": 0.0005699762894902337,
+ "s2_bootstrap_sd": 0.00675364760929603
+}
