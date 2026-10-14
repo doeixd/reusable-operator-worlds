@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-14, after G3b (`HIGH_NOISE_ONLY`). Nothing is running. Open PI decisions: 20 (a) (operator family for Track G), 18 (sealed depth test, deferred).
+Last rewritten: 2026-10-13, after G0F (`SELECTED` `tanh2`). Nothing is running. Open PI decisions: 20 (a) (adopt the `tanh` form for teacher and learner, and build its learner), 18 (sealed depth test, deferred).
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -49,6 +49,11 @@ vocabularies makes route choice bind on `m = 4` only with 2 examples and noise a
 fraction 0.130 at `v = 0.3`, 0.385 at 1.0; `m = 0` 0.057 at 1.0 only); with 8 examples it stays below 0.021 at every
 level. Decision 21 closed: the learned-inference line is closed in this program as unmeasurable on this family, not
 refuted. `PREDICTIONS.md`, `reports/g3b_noise_census.json`.
+
+**G0F operator-form census (Tier 0, 2026-10-13): `SELECTED` `tanh2`.** Dropping the identity skip (`tanh` form) or
+gating multiplicatively moves linear predictability of a computed state from 0.978 to 0.80-0.89 while keeping
+untrained same-form clustering and single-operator learnability; folds barely move it. Modest: `tanh2` is 0.023 below
+the 0.90 bar. No form makes inference harder (S2 1.7-2.1). `PREDICTIONS.md`, `reports/g0f_form_census.json`.
 
 **Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
 Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow
@@ -1019,7 +1024,11 @@ sealed band, and all are implementation audits rather than experiments.
     learned-inference line in this program and put effort into 20 (a). Claude recommends (i): it is the only one
     of the three that could create data-limited inference, and its first step is a census on existing artifacts.
 
-20. **(b) ANSWERED, (a) OPEN (2026-10-13): operator family for Track G.** (b) was taken up when the PI answered
+20. **(b) ANSWERED, (a) OPEN (2026-10-13): operator family for Track G.** UPDATE (2026-10-13): the PI answered
+    "Sure" to a Tier 0 operator-form survey; G0F returned `SELECTED` `tanh2` (`P(z) = c Q tanh(2 R z + b)`, no identity
+    skip): S1 0.877 (anchor 0.978), clustering premise and single-operator fit kept; `tanh4` and `gate1` also pass.
+    Pending: whether to adopt it, which means building a same-form learner and re-earning the online pipeline on it
+    (G1 on the new form first). Earlier text: (b) was taken up when the PI answered
     "Continue autonomously": the G1 probe returned `FORMS` (above), so the inference axis is open INSIDE the rotated
     family at `m = 4` and G0's S3 bar is withdrawn as a requirement. (a) remains the PI's. Original text: G0 (`NO_CANDIDATE`) showed the two saturations have different
     causes. (a) Near-linearity belongs to the operator family that teacher and learner share, so a world where

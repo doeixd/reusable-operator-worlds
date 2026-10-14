@@ -11746,3 +11746,50 @@ support 2: 1, 3, 4, 16, 68, 150 of 192 across the six levels; support 8: 0, 1, 2
 larger margins. Six vocabularies, one stream each, depth 3, supports 128, 8, 2. The 10% bar and `PLAUSIBLE_V = 0.1` are
 judgements. The bootstrap floor resamples the noisy support, so at high noise it is wide and the registered fraction
 is conservative relative to the failure count.
+
+# G0F OPERATOR-FORM CENSUS (Tier 0, worlds 70-72, 2026-10-13): `SELECTED` `tanh2`; a tanh map without identity skip breaks near-linearity while keeping the clustering premise and single-operator learnability
+
+Plan `G0F_FORM_CENSUS_PLAN.md`, frozen `ff33942`, hash protected `6fcf3bb` (the run commit); decision 20 (a), the PI
+answered "Sure" to the survey. 33 jobs, exit 0; report `reports/g0f_form_census.json`, logs and scorer output
+`reports/g0f_form_census_20261013/`. Gate A0 held (the rotated anchor reproduces G0's S1, S2, S4 and this census's own
+pre-measurement exactly); the independent scorer `row.experiments.score_g0f_form_census` recomputes every row from the
+per-world records; `check_prereg` and `check_invalid` pass.
+
+| form | S1 (k = 1) | S1 (k = 3) | depth-1 ARI per world | S4 var / norm max | S6 | passes |
+|---|---|---|---|---|---|---|
+| `rot0.35` (anchor) | 0.978 | 0.980 | 0.47 / 0.87 / 0.53 | 1.02 / 1.04 | 0.0005 | no (S1) |
+| `tanh0.5` | 0.959 | 0.930 | 0.54 / 0.52 / 0.45 | 1.16 / 1.30 | <0.0001 | no (S1) |
+| `tanh1` | 0.925 | 0.869 | 0.44 / 0.54 / 0.40 | 1.05 / 1.11 | <0.0001 | no (S1) |
+| **`tanh2`** | **0.877** | 0.794 | 0.43 / 0.47 / 0.42 | 1.02 / 1.07 | <0.0001 | **yes, chosen** |
+| `tanh4` | 0.842 | 0.742 | 0.40 / 0.44 / 0.39 | 1.00 / 1.06 | <0.0001 | yes |
+| `gate1` | 0.888 | 0.808 | 0.50 / 0.36 / 0.62 | 1.90 / 1.70 | <0.0001 | yes |
+| `gate2` | 0.840 | 0.729 | 0.49 / 0.27 / 0.42 | 3.42 / 2.86 | <0.0001 | no (S3) |
+| `gate4` | 0.802 | 0.682 | 0.40 / 0.27 / 0.35 | 5.23 / 4.08 | 0.0001 | no (S3, S4) |
+| `fold1` | 0.959 | 0.927 | 0.55 / 0.42 / 0.61 | 0.99 / 1.00 | <0.0001 | no (S1) |
+| `fold2` | 0.942 | 0.901 | 0.31 / 0.27 / 0.58 | 0.99 / 1.00 | <0.0001 | no (S1, S3) |
+| `fold4` | 0.915 | 0.880 | 0.52 / 0.47 / 0.39 | 0.98 / 1.00 | 0.0074 | no (S1) |
+
+**Label `SELECTED`, chosen `tanh2`** (`P(z) = c_2 Q tanh(2 R z + b)`): passing `tanh2`, `tanh4`, `gate1`, ordered by
+minimum depth-1 ARI (0.42, 0.39, 0.36). S2 (teacher runner-up NMSE) is 1.7-2.1 for every form, outside G0's band: none
+of these forms makes inference less trivial.
+
+**Reading.**
+- Near-linearity came from the identity skip. Removing it (`tanh`) or making the step multiplicative (`gate`) moves S1
+  from 0.978 to 0.80-0.89 at one step and to 0.68-0.81 at three; piecewise-linear folds, which keep a linear map on
+  each cone, barely move it (0.915 at four folds).
+- The move is modest. `tanh2` at 0.877 sits 0.023 below the bar; at three steps 0.794. A hyperplane on a computed state
+  is still about 88% a hyperplane on the input. Whether that leaves a mid-state gate a COST worth paying is not
+  measured here (G3, on a formed vocabulary).
+- `tanh` keeps scale (variance 1.00-1.02, norms <= 1.07) where `gate` inflates it with gain; that is why the stronger
+  gates fail S4.
+- S6 did not discriminate: every form fits a single operator to <= 0.0074, so single-operator learnability says
+  nothing about formation. S3's 0.30 bar was carried over from G0 although G1 had already shown formation without it
+  (ARI 0.03-0.04 at `m = 4`), so the S3 failures (`gate2`, `gate4`, `fold2`) are not evidence those forms cannot form.
+
+**What this does not show.** That a vocabulary of the `tanh` form forms online (G1 on it), that mid-state decisions pay
+on it (G3), or that any confirmed rotated-family result carries over. One untrained draw per world for S3; three
+worlds; the form set and strengths were design choices.
+
+**Disclosure.** One `run.log` line (the finish of `rot0.35` world 70) is missing: three pool workers appended to the
+log within one second and one write was lost. The durable cell exists, is stamped, and passes gate A0 bitwise, so no
+number is affected.

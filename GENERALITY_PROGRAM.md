@@ -144,6 +144,15 @@ formed `m = 4` vocabularies bind only with 2 examples and noise >= 30% of the si
 closed by near-linearity), G3a and G3b, both necessity axes Track G set out to open are now closed INSIDE the rotated
 family. The remaining move is decision 20 (a): a new operator family for teacher and learner.
 
+### G0F operator-form census (2026-10-13, Tier 0): `SELECTED` `tanh2`
+
+`G0F_FORM_CENSUS_PLAN.md` (frozen `ff33942`), `reports/g0f_form_census.json`. Under decision 20 (a) (the PI answered
+"Sure" to the survey), three non-rotated forms were measured. The `tanh` map without identity skip and the
+multiplicative gate break near-linearity (S1 0.80-0.89 at one step, 0.68-0.81 at three) while keeping the depth-1
+clustering premise and single-operator learnability; piecewise-linear folds do not (S1 >= 0.915). Chosen: `tanh2`.
+Adopting it changes "the learner does not change": the next step, if the PI agrees, is a same-form learner and the
+G1 formation probe on it.
+
 # Track S, Track M (unchanged, lower priority)
 
 - **Track S (self-curriculum): paused.** SC0 `GRADED`, SC0b `LENGTHS_SUFFICE` (quota 16-24 anchors; uniform over

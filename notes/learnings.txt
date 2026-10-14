@@ -5323,3 +5323,6 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
 2026-10-12 B2-hard root census: loop machinery on depth-1 anchors let wake learn ROOT slots (Q^2 or Q^3 ~ P); depth-3 tasks needing P failed in both candidate arms (6/9). One-step enforcement after wake repairs only mild single roots (3/6). New freedom on tasks that do not need it invites a cheaper impostor; start from the plain form. Full entry: AGENTS.md.
 
 2026-10-13 G3a inference census: on formed m=4 vocabularies the runner-up was within 2-5% NMSE yet 2 support examples identified the route (identifiability flat from 128 to 2; 1/192 programs bind). Noiseless targets exclude any non-tied wrong route from a few inputs, so a small margin is not data-limited ambiguity. Full entry: AGENTS.md.
+
+- 2026-10-13 G0F: pool workers appending to one run.log on Windows can lose a line; cells are the evidence, the parent should log.
+- 2026-10-13 G0F: near-linearity came from the identity skip; tanh/gate forms without it reach S1 0.80-0.89, folds do not.

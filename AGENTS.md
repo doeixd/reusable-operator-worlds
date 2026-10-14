@@ -2421,3 +2421,12 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   runner-up says nothing about how many examples inference needs. Before building a world to make inference
   data-limited, ask whether its targets carry noise or its route set carries near-functional ties; if neither, the
   only lever left is search cost (depth), which E5/E5.1 already measured.
+
+- POOL WORKERS APPENDING TO ONE LOG CAN LOSE LINES ON WINDOWS (G0F, 2026-10-13). Three workers finished within one
+  second and one `run.log` line vanished; the durable cell was intact. Treat `run.log` as a convenience and the cell
+  records as the evidence; in new runners, have the PARENT write per-cell log lines as results return.
+- THE IDENTITY SKIP, NOT NONLINEARITY STRENGTH, WAS THE SOURCE OF NEAR-LINEARITY (G0F, 2026-10-13;
+  `reports/g0f_form_census.json`). G0 could not move linear predictability below 0.958 with any rotated-form knob;
+  dropping the skip (`c Q tanh(g R z + b)`) or gating multiplicatively reached 0.80-0.89 at one step, while
+  piecewise-linear folds (linear on each cone) stayed at 0.915-0.959. When a property will not move across a family's
+  knobs, look for the structural term every member shares.

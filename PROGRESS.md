@@ -9574,3 +9574,13 @@ and arms; anchors A1 and A3 bitwise); independent scorer agrees; report `reports
 writing the discrimination section (equal binding false-fired 0.147 per cell at 0.05); the adequacy checker then
 refused the first freeze because the section stated no detection rate in words, fixed before freezing. Decision 21
 closed by the plan's stated consequence; see RESEARCH_STATUS.md.
+
+# G0F operator-form census (Tier 0, 2026-10-13, worlds 70-72): `SELECTED` `tanh2`
+
+Plan `G0F_FORM_CENSUS_PLAN.md` (frozen `ff33942`, protected `6fcf3bb`); new form module `row.form_world` (f1: `tanh`,
+`gate`, `fold`), runner `row.experiments.g0f_form_census` (G0's S1, S2, S4 verbatim; same-form untrained S3; S6
+single-operator fits), independent scorer agrees; report `reports/g0f_form_census.json`, logs
+`reports/g0f_form_census_20261013/`. 10 minutes. Passing: `tanh2` (S1 0.877), `tanh4` (0.842), `gate1` (0.888); folds
+barely move S1. The write-time check found two gaps before freezing (the runner did not hash the G0F baseline its gate
+reads; the scorer lacked the per-form best S1 the plan promised). One run.log line lost to concurrent appends
+(disclosed in PREDICTIONS). The watcher shell was reaped for low memory; the detached run was unaffected.
