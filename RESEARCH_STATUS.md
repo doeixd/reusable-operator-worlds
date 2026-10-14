@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-14, G1T frozen (decision 20 (a) answered: the PI said "sure" to adopting the `tanh` form and building its learner). RUNNING: G1T, `artifacts/g1t_tanh_formation/status.json`. Open PI decisions: 18 (sealed depth test, deferred).
+Last rewritten: 2026-10-14, after G1T (`FAILS`: the `tanh2` vocabulary forms its identity but its operations do not fit at the rotated form's hyperparameters). Nothing is running. Next: the plan's pre-stated sizing rung (learning rate, initial gain) on one world. Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -54,6 +54,14 @@ refuted. `PREDICTIONS.md`, `reports/g3b_noise_census.json`.
 gating multiplicatively moves linear predictability of a computed state from 0.978 to 0.80-0.89 while keeping
 untrained same-form clustering and single-operator learnability; folds barely move it. Modest: `tanh2` is 0.023 below
 the 0.90 bar. No form makes inference harder (S2 1.7-2.1). `PREDICTIONS.md`, `reports/g0f_form_census.json`.
+
+**G1T tanh-form formation probe (Tier 1, EXPLORATORY, worlds 70-72, 2026-10-14): `FAILS`.** Teacher and a same-form
+learner (`c Q tanh(A z + b)`), O11's four mechanism arms plus the curriculum and no-anchor arms, at the rotated form's
+hyperparameters: 0/3 in every arm (confirmed pipeline 0.39-0.42; curriculum 0.49-0.58; rotated on the same worlds
+0.009-0.012). Identity forms (`d1_ari` 0.98-1.00); fit does not: depth-1 tasks sit at 0.13-0.16 after sleep and the
+error compounds with depth. Interventions keep their rotated ordering; sleep alone matches the full pipeline here.
+Next, by the plan's FAILS branch: learner-side sizing (learning rate, initial gain) on one world. `PREDICTIONS.md`,
+`reports/g1t_tanh_formation.json`.
 
 **Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
 Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow

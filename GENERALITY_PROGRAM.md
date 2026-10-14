@@ -153,6 +153,14 @@ clustering premise and single-operator learnability; piecewise-linear folds do n
 Adopting it changes "the learner does not change": the next step, if the PI agrees, is a same-form learner and the
 G1 formation probe on it.
 
+### G1T tanh-form formation probe (2026-10-14, Tier 1): `FAILS`
+
+`G1T_TANH_FORMATION_PLAN.md` (frozen `536be74`), `reports/g1t_tanh_formation.json`. The PI answered "sure" to
+adopting `tanh2`. With a same-form learner at the rotated form's hyperparameters, nothing formed in 3 worlds under any
+arm, the length curriculum included. The vocabulary's identity forms (depth-1 ARI ~1) but no slot fits its operation
+(depth-1 error 0.13-0.16 after sleep), so the failure is fit, not formation. Next rung, pre-stated: learner-side
+sizing (learning rate, initial gain) on one world, then the probe again on the remaining worlds if a setting fits.
+
 # Track S, Track M (unchanged, lower priority)
 
 - **Track S (self-curriculum): paused.** SC0 `GRADED`, SC0b `LENGTHS_SUFFICE` (quota 16-24 anchors; uniform over

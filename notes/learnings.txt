@@ -5326,3 +5326,5 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
 
 - 2026-10-13 G0F: pool workers appending to one run.log on Windows can lose a line; cells are the evidence, the parent should log.
 - 2026-10-13 G0F: near-linearity came from the identity skip; tanh/gate forms without it reach S1 0.80-0.89, folds do not.
+
+- 2026-10-14 G1T: a single-operator fit at lr 0.01 / 2,000 full-batch steps (G0F S6) did not predict fit inside a lifetime at lr 0.001; tanh2 slots routed perfectly (ARI ~1) yet sat at 0.13-0.27 on depth-1 tasks. Check learnability under the lifetime's own optimizer. Full entry: AGENTS.md.

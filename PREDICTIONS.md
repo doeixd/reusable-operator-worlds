@@ -11793,3 +11793,56 @@ worlds; the form set and strengths were design choices.
 **Disclosure.** One `run.log` line (the finish of `rot0.35` world 70) is missing: three pool workers appended to the
 log within one second and one write was lost. The durable cell exists, is stamped, and passes gate A0 bitwise, so no
 number is affected.
+
+# G1T TANH-FORM FORMATION PROBE (Tier 1, EXPLORATORY, worlds 70-72, 2026-10-14): `FAILS`; the vocabulary's identity forms but its operations do not fit, and the length curriculum fails too
+
+Plan `G1T_TANH_FORMATION_PLAN.md`, frozen `536be74`, hash protected `e167c28` (the run commit); decision 20 (a), the PI
+answered "sure" to adopting the `tanh2` form and building a same-form learner. 18 cells, exit 0, 58 minutes; report
+`reports/g1t_tanh_formation.json`, logs, scorer output and a read-only depth diagnostic in
+`reports/g1t_tanh_formation_20261014/`. Gates E1, E2, F1, L1, L2 passed; the independent scorer
+`row.experiments.score_g1t_tanh_formation` recomputes the label and every reported quantity from the cell records and
+agrees (`runner_agrees: true`); `check_prereg` and `check_invalid` pass. All three worlds were anchored (G1's rotated
+`m = 0` `RW_SLEEP` passed in each), so the denominator is 3.
+
+| arm (construction) | terminal median, worlds 70 / 71 / 72 | passes | seconds per cell |
+|---|---|---|---|
+| `RW_SLEEP` (re-routing wake, then sleep; the confirmed pipeline) | 0.422 / 0.393 / 0.388 | 0/3 | 435-438 (sleep run twice + diagnostics) |
+| `SLEEP` (wake alone, then sleep) | 0.405 / 0.459 / 0.435 | 0/3 | 205-207 |
+| `REROUTE_WAKE` (in-stream re-routing, no sleep) | 0.655 / 0.515 / 0.501 | 0/3 | 1,008-1,027 |
+| `STAGED` (J1c length curriculum) | 0.577 / 0.491 / 0.510 | 0/3 | 747-750 |
+| `SHUFFLED` (wake alone) | 0.510 / 0.726 / 0.584 | 0/3 | 787-789 |
+| `PLAIN` (no anchors) | 1.672 / 1.694 / 1.666 | 0/3 | 284-285 |
+| rotated `RW_SLEEP` on the same worlds (G1, paired) | 0.009 / 0.012 / 0.009 | 3/3 | |
+
+**Label `FAILS`** (no anchored world below 0.05 with `d1_ari >= 0.8`), read with `STAGED`, which fails too: by the
+plan's pre-stated branch, this learner at the rotated form's hyperparameters cannot form the `tanh` form, and the next
+rung is a learner-side sizing (initial gain, learning rate) on one world, not abandonment of the form.
+
+**Reading.**
+- Identity forms; fit does not. The formed vocabulary maps the six operations to six distinct slots (`d1_ari` 1.00 /
+  1.00 / 0.98; at the re-routing wake terminals 1.00 in all three, `SHUFFLED` 1.00 / 0.84 / 0.97), against 0.42-0.47
+  for an untrained library. No impostor and no collapse: what fails is accuracy.
+- The error is per operation and compounds with depth. Read-only diagnostic on the saved terminals
+  (`depth_diagnostic.py`; its slept depth-3 medians reproduce the cell terminals exactly; five of six models, see
+  PROGRESS): after sleep the median depth-1 task error is 0.13-0.16, depth 2 0.27-0.30, depth 3 0.39-0.46; at the wake
+  terminals 0.19-0.27, 0.35-0.49, 0.51-0.73. The best single slot on each depth-1 task is the slot it routes to (median
+  within 0.013), so routing is not the problem: no slot fits its operation. G0F's S6 fitted one same-form operator to
+  <= 0.0074, but with Adam at lr 0.01 for 2,000 full-batch steps on 128 examples; the lifetime uses lr 0.001 on
+  minibatches. S6 measured learnability in a regime the lifetime does not run in.
+- Route choice on the formed vocabulary is no longer decisive: identifiability median 0.23-0.48 (rotated formed
+  vocabularies 79-148, G3a), runner-up query NMSE 0.45-0.65, winners below 0.05 on 0 of 64 programs. With operations
+  this inaccurate that is expected and says nothing yet about inference on a well-formed `tanh` vocabulary.
+- The interventions keep their rotated ordering but none is enough. No anchors ~1.7; wake alone 0.51-0.73; re-routing
+  or the curriculum ~0.50; sleep after either wake 0.39-0.46. On this form sleep alone is about as good as the full
+  pipeline: re-routing changed 3,223-6,578 routes in-stream, and `RW_SLEEP` minus `SLEEP` is +0.017 / -0.066 / -0.047, the
+  size of the world-to-world spread. Anchors are still necessary (`PLAIN` 1.67-1.69).
+- Formed S1 0.924-0.932 at one step, 0.883-0.897 at three, against the `tanh2` teacher's 0.875-0.878: on THIS
+  vocabulary a computed state is slightly more input-predictable than on the teacher. The vocabulary has not fitted,
+  so this is not yet a reading of the form.
+- Cost of each intervention (reviewer 86, priority 3; reported, not registered): in-stream re-routing adds ~29% to a
+  wake lifetime (1,008-1,027 s against 787-789 s); sleep costs ~205 s, about a quarter of a wake lifetime; the length
+  curriculum costs about the same as wake alone.
+
+**What this does not show.** That the `tanh` form cannot be formed online: every arm, including the curriculum, ran at
+hyperparameters tuned for the rotated form, and the failure is located in per-operation fit, which those settings
+govern. One stream per world, three worlds; a formation rate is not estimated.

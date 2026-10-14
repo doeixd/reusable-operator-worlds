@@ -1,0 +1,15 @@
+{
+ "E1": {
+  "70": true,
+  "99": true
+ },
+ "E2": {
+  "70": true,
+  "99": true
+ },
+ "F1": true,
+ "L1": true,
+ "L2": true,
+ "all_pass": true,
+ "protocol_sha256": "e273f4f6ab6d298b64771cafe4c3986ec8bb2602dd3fd0a29284c74ad2dedd46"
+}

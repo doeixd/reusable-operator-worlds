@@ -2430,3 +2430,9 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   dropping the skip (`c Q tanh(g R z + b)`) or gating multiplicatively reached 0.80-0.89 at one step, while
   piecewise-linear folds (linear on each cone) stayed at 0.915-0.959. When a property will not move across a family's
   knobs, look for the structural term every member shares.
+- CHECK LEARNABILITY UNDER THE OPTIMIZER THE LIFETIME ACTUALLY RUNS (G1T, 2026-10-14; `reports/g1t_tanh_formation.json`).
+  G0F's S6 fitted one `tanh2` operator to <= 0.0074 with Adam at lr 0.01, 2,000 full-batch steps on 128 examples, and
+  that was read as "single-operator learnability holds". Inside the lifetime (lr 0.001, minibatches, twelve slots
+  sharing gradient) the same form left depth-1 tasks at 0.13-0.27 while routing them perfectly, and the error
+  compounded with depth to 0.4-0.7. A learnability check is a statement about a regime; run it with the lifetime's
+  learning rate, batch and budget, or it licenses nothing about formation.

@@ -1,0 +1,133 @@
+{
+ "protocol": {
+  "id": "g1t-tanh-formation-v1",
+  "git_commit": "e167c28",
+  "plan": "G1T_TANH_FORMATION_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "worlds": [
+   70,
+   71,
+   72
+  ],
+  "form": "tanh",
+  "knob": 2.0,
+  "stream": 0,
+  "arms": [
+   "REROUTE_WAKE",
+   "SHUFFLED",
+   "STAGED",
+   "PLAIN",
+   "RW_SLEEP",
+   "SLEEP"
+  ],
+  "threshold": 0.05,
+  "identity_ari": 0.8,
+  "jobs": 3,
+  "root": "artifacts/g1t_tanh_formation",
+  "generator": "f1",
+  "learner_implementation": "tanh_form_planned_depth_v1",
+  "init_gain": 1.0,
+  "input_sha256": {
+   "G1T_TANH_FORMATION_PLAN.md": "32a4cc246e2f75916e77492f1de81ee38e3e9db2353122c72279132d2ec09588",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/g0f_form_census.json": "5515ea96b1af2ddb0682301706c20562ccad564a552899618b67eb03234e4b83",
+   "reports/g1_formation_probe.json": "4a2ff3d601950bfc1079ed95ca4344ca3ad500fe02331aa18f4096a034c734a4"
+  },
+  "implementation_sha256": "28e020b42181ff92656d7d74d9417d8a2ff0e5561458adc56b79594509077ac8",
+  "module_sha256": {
+   "row.experiments.o8_instream_reroute": "a5ea33f3a41ad023137a4a8cca10f63bc8e5e699d6f33615338cba5f969b26a5",
+   "row.experiments.o3_online_sleep": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+   "row.experiments.o2_online_reliability": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+   "row.experiments.o2c_consolidation": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+   "row.experiments.o2d_sleep_memory": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+   "row.experiments.audit_j1c_curriculum": "65e76d586b661ccf57ba34902381bea86e575d6209ecdc6dd6c1767e0590e134",
+   "row.experiments.audit_j2a_staged_library": "0f67fa06c8f4a6a55e6bc3eae1bc307d32698bc66d03453387ad1d92c4ae05ec",
+   "row.experiments.census_o8_staleness_position": "e090671e006012b44d88787346ba5d108414674e88dbf8806053bca8b7867bd1",
+   "row.experiments.audit_so2_online_gate": "cfb470894205bdc003d0509c0b3620778dc63542b525e4398bbc74ccc1db6b9a",
+   "row.experiments.g0_generator_census": "23edc1d7a791dd103b54811625aa166c820daf7050362360d0dc1df36695ff10",
+   "row.experiments.g1_formation_probe": "5e6c17e3e23ee7f052c52a0e9193bd3385f65cfbfad549c59590e1cb736b23fb",
+   "row.experiments.learned_lifetime": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+   "row.form_world": "3fcdb4ccaed8de1c8e80a11f955ae1ac71e3acb8597961a61c1032a78d4fda15",
+   "row.models.tanh_form": "c61a2c1ab5c390652585f6da18593517669c96dd5aa9c409d85f48c6dc68fdd3",
+   "row.models.online_variable_depth": "8fef85343e25dad51b31112beac849e993a3d581b48ff5a4b8e2b86fcd0cedc7",
+   "row.experiments.audit_so1r_route_only": "ab1ca0fcfcea50e3fc29e156f8d907f269f505a4acad13cecc510b0ee1477e70"
+  },
+  "scale": 1,
+  "cells": [
+   [
+    "REROUTE_WAKE",
+    70
+   ],
+   [
+    "REROUTE_WAKE",
+    71
+   ],
+   [
+    "REROUTE_WAKE",
+    72
+   ],
+   [
+    "SHUFFLED",
+    70
+   ],
+   [
+    "SHUFFLED",
+    71
+   ],
+   [
+    "SHUFFLED",
+    72
+   ],
+   [
+    "STAGED",
+    70
+   ],
+   [
+    "STAGED",
+    71
+   ],
+   [
+    "STAGED",
+    72
+   ],
+   [
+    "PLAIN",
+    70
+   ],
+   [
+    "PLAIN",
+    71
+   ],
+   [
+    "PLAIN",
+    72
+   ],
+   [
+    "RW_SLEEP",
+    70
+   ],
+   [
+    "RW_SLEEP",
+    71
+   ],
+   [
+    "RW_SLEEP",
+    72
+   ],
+   [
+    "SLEEP",
+    70
+   ],
+   [
+    "SLEEP",
+    71
+   ],
+   [
+    "SLEEP",
+    72
+   ]
+  ]
+ },
+ "protocol_sha256": "e273f4f6ab6d298b64771cafe4c3986ec8bb2602dd3fd0a29284c74ad2dedd46"
+}

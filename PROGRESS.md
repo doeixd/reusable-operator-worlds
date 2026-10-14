@@ -9584,3 +9584,16 @@ single-operator fits), independent scorer agrees; report `reports/g0f_form_censu
 barely move S1. The write-time check found two gaps before freezing (the runner did not hash the G0F baseline its gate
 reads; the scorer lacked the per-form best S1 the plan promised). One run.log line lost to concurrent appends
 (disclosed in PREDICTIONS). The watcher shell was reaped for low memory; the detached run was unaffected.
+
+# G1T tanh-form formation probe (Tier 1, EXPLORATORY, 2026-10-14, worlds 70-72): `FAILS`
+
+Plan `G1T_TANH_FORMATION_PLAN.md` (frozen `536be74`, protected `e167c28`); new learner `row.models.tanh_form`
+(`c Q tanh(A z + b)` slots on `PlannedDepthRotatedLearner`), runner `row.experiments.g1t_tanh_formation` (name
+rebinding only; O11's four mechanism arms plus `STAGED` and `PLAIN`), independent scorer agrees; report
+`reports/g1t_tanh_formation.json`, logs `reports/g1t_tanh_formation_20261014/`. 58 minutes, pool 3. 0/3 in every arm,
+including the length curriculum; formed `d1_ari` 0.98-1.00 but terminal 0.39-0.42 after the confirmed pipeline. A
+read-only diagnostic on the saved terminals (archived with the logs) located the failure in per-operation fit:
+depth-1 tasks sit at 0.13-0.16 after sleep, and the error compounds with depth. Next, by the plan's FAILS branch: a
+learner-side sizing rung (learning rate, initial gain) on one world. Disclosure: the diagnostic ran with 4 torch
+threads and crawled; it was killed after five of six models had printed (the sixth, `REROUTE_WAKE` world 72, is
+missing), and those five rows are the recorded output. The archived script is the one that ran.
