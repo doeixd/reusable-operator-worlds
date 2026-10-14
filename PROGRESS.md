@@ -9561,3 +9561,16 @@ inference failure in 576 `m = 4` program-supports. Identifiability does not fall
 tie. Rates (`reports/g3a_inference_census_design/`): rule A false-fire 0, detection 0.85 at 75% bad programs; rule B
 false-fire 0, detection 0.975 at a 15% binding share. The dry run (4 real programs on world 70, run after the rules
 were written) is disclosed in the plan. Verdict-free reading in PREDICTIONS.md; lesson in AGENTS.md.
+
+# G3b noise census (Tier 0, 2026-10-14, formed vocabularies of worlds 70-72): `HIGH_NOISE_ONLY`
+
+Plan `G3B_NOISE_CENSUS_PLAN.md` (frozen `3fd6a92`, protected `8c9f9f0`); runner `row.experiments.g3b_noise_census`
+(support-only Gaussian noise at `v` in {0, 0.01, 0.03, 0.1, 0.3, 1} of the signal, common random numbers across levels
+and arms; anchors A1 and A3 bitwise); independent scorer agrees; report `reports/g3b_noise_census.json`, logs
+`reports/g3b_noise_census_20261013/`. 18 minutes.
+
+`m = 4` bind fraction at support 2: 0.005, 0.021, 0.026, 0.057, 0.130, 0.385 across the six levels (`m = 0`: 0 until
+0.057 at `v = 1`); at support 8 at most 0.021; at 128 zero. The window margin was raised from 0.05 to 0.10 while
+writing the discrimination section (equal binding false-fired 0.147 per cell at 0.05); the adequacy checker then
+refused the first freeze because the section stated no detection rate in words, fixed before freezing. Decision 21
+closed by the plan's stated consequence; see RESEARCH_STATUS.md.

@@ -11708,3 +11708,41 @@ fraction is 1/192 at support 128, 0/192 at 8, 1/192 at 2 (bar 0.10); `m = 0` is 
 
 **What this does not show.** Six vocabularies from a Tier 1 run (one stream per world); depth 3 only; supports 128, 8,
 2; no observation noise anywhere. It says nothing about worlds with noisy targets or about search cost at depth.
+
+# G3b NOISE CENSUS (Tier 0, formed vocabularies of worlds 70-72, 2026-10-14): `HIGH_NOISE_ONLY`; observation noise makes route choice bind on the `m = 4` vocabularies only with 2 examples and noise at least 30% of the signal
+
+Plan `G3B_NOISE_CENSUS_PLAN.md`, frozen `3fd6a92`, hash protected `8c9f9f0` (the run commit). 6 jobs, exit 0; report
+`reports/g3b_noise_census.json`, logs and scorer output `reports/g3b_noise_census_20261013/`. Anchors A1 (rebuilt
+vocabularies reproduce G1 bitwise) and A3 (zero noise reproduces G3a's committed rows bitwise) held in every job; the
+independent scorer `row.experiments.score_g3b_noise_census` recomputes every fraction and agrees; `check_prereg` and
+`check_invalid` pass.
+
+**Label `HIGH_NOISE_ONLY`.** No WINDOW and no BOTH cell at plausible noise (`v <= 0.1`). HIGH cells: (`v` 0.3, support 2)
+and (1.0, 2). Pooled bind fraction (regret above its own bootstrap floor; 192 programs per arm):
+
+| support 2, noise `v` | 0 | 0.01 | 0.03 | 0.1 | 0.3 | 1.0 |
+|---|---|---|---|---|---|---|
+| `m = 4` | 0.005 | 0.021 | 0.026 | 0.057 | **0.130** | **0.385** |
+| `m = 0` | 0 | 0 | 0 | 0 | 0 | 0.057 |
+
+At support 8 the `m = 4` fraction never exceeds 0.021 (at `v = 0.3`); at support 128 it is 0 at every noise level.
+Inference failures (selected route >= 0.05 on query while one below 0.05 exists; not registered, reported): `m = 4`,
+support 2: 1, 3, 4, 16, 68, 150 of 192 across the six levels; support 8: 0, 1, 2, 8, 12, 41; `m = 0`: none until
+`v = 1` (14 at support 2).
+
+**Reading.**
+- Noise does expose the `m = 4` vocabularies' small margins: at every level they bind more than the `m = 0` ones, and
+  with 2 examples and noise equal to the signal, 39% of programs bind (`m = 0`: 6%). The direction G1 and G3a pointed
+  at is real.
+- But it appears only in an extreme corner. With 8 examples, route choice stays essentially free up to noise 30% of
+  the signal; with 2 examples it crosses the 10% bar only at `v = 0.3`. At `v = 0.1` the registered fraction is 0.057
+  (the unregistered failure count, 16 of 192, is the strongest sign below the bar, and is noted, not read).
+- Per the plan's stated consequence, Claude's reading is to CLOSE the learned-inference line in this program (decision
+  21 (iii)): in this operator family, on these worlds, route choice from a formed vocabulary becomes data-limited only
+  when tasks give 2 examples under noise a third the size of the signal, a world in which formation itself has never
+  been shown to work. The line is not refuted elsewhere; it is unmeasurable here.
+
+**What this does not show.** Vocabularies formed WITHOUT noise; a vocabulary formed under noise might have smaller or
+larger margins. Six vocabularies, one stream each, depth 3, supports 128, 8, 2. The 10% bar and `PLAUSIBLE_V = 0.1` are
+judgements. The bootstrap floor resamples the noisy support, so at high noise it is wide and the registered fraction
+is conservative relative to the failure count.

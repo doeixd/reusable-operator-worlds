@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-13, after G3a (`NO_HEADROOM`). Nothing is running. Open PI decisions: 21 (direction of the inference axis), 20 (a) (operator family for Track G), 18 (sealed depth test, deferred).
+Last rewritten: 2026-10-14, after G3b (`HIGH_NOISE_ONLY`). Nothing is running. Open PI decisions: 20 (a) (operator family for Track G), 18 (sealed depth test, deferred).
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -42,7 +42,13 @@ of 64). One stream per world. `PREDICTIONS.md`, `reports/g1_formation_probe.json
 SG0's regret is above its bootstrap floor for 1 of 192 `m = 4` programs at support 128, 0 at 8 and 1 at 2 (`m = 0`: 0
 everywhere); identifiability does not fall from 128 examples to 2. Targets are noiseless, so a small runner-up margin
 is not data-limited ambiguity: two examples exclude every wrong route that is not a near tie. Learned inference has no
-opportunity on `m = 4`. `PREDICTIONS.md`, `reports/g3a_inference_census.json`. Decision 21 is open.
+opportunity on `m = 4`. `PREDICTIONS.md`, `reports/g3a_inference_census.json`.
+
+**G3b noise census (Tier 0, 2026-10-14): `HIGH_NOISE_ONLY`.** Adding observation noise to the support of the same six
+vocabularies makes route choice bind on `m = 4` only with 2 examples and noise at least 30% of the signal (bind
+fraction 0.130 at `v = 0.3`, 0.385 at 1.0; `m = 0` 0.057 at 1.0 only); with 8 examples it stays below 0.021 at every
+level. Decision 21 closed: the learned-inference line is closed in this program as unmeasurable on this family, not
+refuted. `PREDICTIONS.md`, `reports/g3b_noise_census.json`.
 
 **Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
 Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow
@@ -1001,7 +1007,9 @@ sealed band, and all are implementation audits rather than experiments.
     reserved for decision 18. Both verified unused as world seeds (1100-1102 appear only as SeedSequence
     components in `audit_e7_census.py`).
 
-21. **OPEN (2026-10-13): direction of the inference axis.** G3a (`NO_HEADROOM`) showed that operator similarity
+21. **CLOSED (2026-10-14): direction of the inference axis.** Option (i) was taken under the PI's "Continue. Use your
+    best judgement"; G3b returned `HIGH_NOISE_ONLY`, whose consequence the plan stated in advance: close the
+    learned-inference line in this program (option (iii)). Effort moves to decision 20 (a). Original text: G3a (`NO_HEADROOM`) showed that operator similarity
     shrinks the runner-up margin but cannot make route choice data-limited, because targets are noiseless. Claude's
     plan step 2 (G1 probes at `m = 8, 16`) is therefore not expected to help and Claude no longer recommends it.
     Options: (i) OBSERVATION NOISE, a generator knob inside the rotated family: first a Tier 0 census adding target

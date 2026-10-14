@@ -137,6 +137,13 @@ identifiability flat). Noiseless targets make any non-tied wrong route excludabl
 create data-limited inference. Decision 21 (RESEARCH_STATUS.md): Claude recommends observation noise as the next knob,
 starting with a support-noise census on the existing vocabularies.
 
+### G3b noise census (2026-10-14, Tier 0): `HIGH_NOISE_ONLY`; the inference axis closes in the rotated family
+
+`G3B_NOISE_CENSUS_PLAN.md` (frozen `3fd6a92`), `reports/g3b_noise_census.json`. Support noise makes route choice on the
+formed `m = 4` vocabularies bind only with 2 examples and noise >= 30% of the signal. With G0 (the mid-state axis is
+closed by near-linearity), G3a and G3b, both necessity axes Track G set out to open are now closed INSIDE the rotated
+family. The remaining move is decision 20 (a): a new operator family for teacher and learner.
+
 # Track S, Track M (unchanged, lower priority)
 
 - **Track S (self-curriculum): paused.** SC0 `GRADED`, SC0b `LENGTHS_SUFFICE` (quota 16-24 anchors; uniform over

@@ -1,0 +1,84 @@
+{
+ "protocol": {
+  "id": "g3b-noise-census-v1",
+  "git_commit": "8c9f9f0",
+  "plan": "G3B_NOISE_CENSUS_PLAN.md",
+  "tier": 0,
+  "worlds": [
+   70,
+   71,
+   72
+  ],
+  "shared": [
+   0.0,
+   4.0
+  ],
+  "supports": [
+   128,
+   8,
+   2
+  ],
+  "noise": [
+   0.0,
+   0.01,
+   0.03,
+   0.1,
+   0.3,
+   1.0
+  ],
+  "noise_seed": 3201,
+  "plausible_v": 0.1,
+  "bind": [
+   0.1,
+   0.1
+  ],
+  "depth": 3,
+  "programs": 64,
+  "root": "artifacts/g3b_noise_census",
+  "terminals_sha256": {
+   "m0_w70": "5c6ad3f2af5a58a3ba9dc1a1f9983a88016cf1efac838dbe6e3ab6dfa2302135",
+   "m0_w71": "a844a7446b2baa312149b07f0aecc212b5ffef0bfd3008585bf8c4d526cd7f0e",
+   "m0_w72": "5ef43daa47a730833d9737cbef3b2766cde1545f2cd79c8d3029daae98859d05",
+   "m4_w70": "7377e3533799d6f53033c976c2041b2d196617c8c19b433dbca3459ad291362a",
+   "m4_w71": "694e9f8084f1d6cd4403f51526ec110b84898726113f0fb175e403dff912c21a",
+   "m4_w72": "eb0d14997ca8899aaa61fc443b459d48fed9e553dd520f8ad7b7a673cb07d9d8"
+  },
+  "input_sha256": {
+   "G3B_NOISE_CENSUS_PLAN.md": "897dd2194287ece0ee264202b5331011554f00c736404dc3d29ef81a5b8e02b3",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/g1_formation_probe.json": "4a2ff3d601950bfc1079ed95ca4344ca3ad500fe02331aa18f4096a034c734a4",
+   "reports/g3a_inference_census.json": "aee86eb2550a698bdcb84cba7d51959d75281e6d6b589d155a12b3c1d442e027"
+  },
+  "implementation_sha256": "f17627b2272678ee20039999059d374637aa657d9c0da035b53fb7add7d5ef31",
+  "g3a_sha256": "ecfcc90b5142f8be6471b4910eb4ad7630804777cf011f5d59af3e405c2aa70f",
+  "sg0_sha256": "94fd90b148f4a3797f99018f3799a5693524968efe32ed3de236af451342c47b",
+  "g1_sha256": "5e6c17e3e23ee7f052c52a0e9193bd3385f65cfbfad549c59590e1cb736b23fb",
+  "jobs": [
+   [
+    0.0,
+    70
+   ],
+   [
+    0.0,
+    71
+   ],
+   [
+    0.0,
+    72
+   ],
+   [
+    4.0,
+    70
+   ],
+   [
+    4.0,
+    71
+   ],
+   [
+    4.0,
+    72
+   ]
+  ]
+ },
+ "protocol_sha256": "98c52fc031a5e0e209b094267ff0a96525a7274b362a902ad20b7b5489965698"
+}
