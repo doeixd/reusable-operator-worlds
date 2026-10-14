@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-14, after G1T (`FAILS`: the `tanh2` vocabulary forms its identity but its operations do not fit at the rotated form's hyperparameters). Nothing is running. Next: the plan's pre-stated sizing rung (learning rate, initial gain) on one world. Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
+Last rewritten: 2026-10-14, after G1T (`FAILS`: the `tanh2` vocabulary forms its identity but its operations do not fit at the rotated form's hyperparameters). RUNNING: G1S (`G1S_TANH_SIZING_PLAN.md`), the pre-stated sizing rung: learning rate {0.001, 0.003, 0.01} x initial gain {1, 2} on world 70, wake then sleep; check `artifacts/g1s_tanh_sizing/status.json`. Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
