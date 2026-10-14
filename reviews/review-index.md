@@ -3227,3 +3227,35 @@ the setting SG6 could not obtain — is the most useful connection in the review
 Standing caveat recorded with all five: development worlds 0–9 are spent for the
 online staged protocol, so the two online proposals need a new development band,
 which is PI decision 5 and is not granted.
+
+### [reviewer-feedback-86.txt](reviewer-feedback-86.txt)
+
+Received 2026-10-14 (relayed by the PI while G1T was being built). An assessment of the recorded experiments through
+2026-10-14, not a reproduction. Two parts.
+
+**Synthesis framing.** ROW has learned how a vocabulary forms (primitives need not be handed over), restricted
+support-driven program search, compositional export, and placement of SUPPLIED control flow; it has not shown a learned
+efficient program generator or an autonomous growing language. Main concern: vocabulary formation could be optimized
+indefinitely without meeting the synthesis bottleneck. It separates STATISTICAL inference (which program, given few
+examples; saturated on formed vocabularies by SG0/G3a/G3b) from COMPUTATIONAL search (how cheaply a program is found in a
+huge space), and says the "no headroom" results close only the first. Proposes a bounded library-learning cycle: solve
+new tasks under a fixed search budget, extract recurring subprograms, add them while charging their storage and
+learning cost, show harder held-out tasks get cheaper, and repeat for a second generation; endpoint new tasks solved
+per total compute, against the original library, ordinary search, and a library grown without selection.
+
+**Prioritized next steps.** (1) Transfer the formation mechanism to `tanh2` and ask whether the same interventions
+(wake, sleep, re-route, both) explain success; (2) test the input-only shortcut for intermediate-state decisions on that
+form before a large learner run; (3) reconnect to the economics: what memory, search, re-routing and consolidation
+cost before the library pays; (4) world-level uncertainty, not streams as worlds.
+
+**Assessment (Claude).** (1) Adopted before G1T was frozen: `SHUFFLED` (wake alone) and `SLEEP` (sleep alone) were
+added, so G1T runs O11's four mechanism arms on the `tanh` form, plus `STAGED` and `PLAIN`. (2) Partly in G1T already:
+G0F measured the shortcut on the `tanh2` TEACHER (S1 0.877), and G1T measures it on the FORMED vocabulary (formed S1);
+the necessity census for a mid-state decision (G3) is the rung after a `FORMS`. (3) G1T records wall seconds per cell and
+re-routing seconds; an accounting rung is not yet planned. (4) Agreed; every Track G read is per world, one stream.
+The synthesis cycle is the strongest point and is not answered by anything running: E5/E5.1 measured search cost
+growing with program LENGTH and only logarithmically with space size, and E6/E7 found macros pay but compilation
+does not on this testbed, so the cycle needs a regime where search cost binds (depth beyond exhaustive search, where
+E5.1 put the crossover between depths 4 and 5) before abstraction can be shown to buy tasks per compute. Recorded as a
+candidate track for the PI after G1T; it is a program-level decision.
+

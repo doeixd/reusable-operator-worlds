@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-13, after G0F (`SELECTED` `tanh2`). Nothing is running. Open PI decisions: 20 (a) (adopt the `tanh` form for teacher and learner, and build its learner), 18 (sealed depth test, deferred).
+Last rewritten: 2026-10-14, G1T frozen (decision 20 (a) answered: the PI said "sure" to adopting the `tanh` form and building its learner). RUNNING: G1T, `artifacts/g1t_tanh_formation/status.json`. Open PI decisions: 18 (sealed depth test, deferred).
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -1024,7 +1024,7 @@ sealed band, and all are implementation audits rather than experiments.
     learned-inference line in this program and put effort into 20 (a). Claude recommends (i): it is the only one
     of the three that could create data-limited inference, and its first step is a census on existing artifacts.
 
-20. **(b) ANSWERED, (a) OPEN (2026-10-13): operator family for Track G.** UPDATE (2026-10-13): the PI answered
+20. **(a) and (b) ANSWERED (2026-10-14): operator family for Track G.** (a): the PI answered "sure" to adopting the `tanh` form and building a same-form learner; G1T (`G1T_TANH_FORMATION_PLAN.md`) runs the confirmed online pipeline and O11's mechanism arms on it. Earlier status: UPDATE (2026-10-13): the PI answered
     "Sure" to a Tier 0 operator-form survey; G0F returned `SELECTED` `tanh2` (`P(z) = c Q tanh(2 R z + b)`, no identity
     skip): S1 0.877 (anchor 0.978), clustering premise and single-operator fit kept; `tanh4` and `gate1` also pass.
     Pending: whether to adopt it, which means building a same-form learner and re-earning the online pipeline on it

@@ -67,6 +67,7 @@ IN_SCOPE = (
     'G3A_INFERENCE_CENSUS_PLAN.md',
     'G3B_NOISE_CENSUS_PLAN.md',
     'G0F_FORM_CENSUS_PLAN.md',
+    'G1T_TANH_FORMATION_PLAN.md',
 )
 
 #: Explicit sentinel for a plan with no behaviour to elicit (an observational

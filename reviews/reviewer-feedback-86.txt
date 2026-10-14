@@ -1,0 +1,119 @@
+Reviewer feedback 86, relayed by the PI on 2026-10-14 while G1T (tanh-form formation probe) was being built.
+The reviewer states it checked commits through 2026-10-14, the research record and the sealed control-flow protocol,
+and that it is an assessment of the recorded experiments, not an independent reproduction. Verbatim:
+
+**The recent progress advances the program-synthesis goal substantially—but mostly by establishing how the learner acquires and maintains the language it will synthesize programs in.** It has made less progress on generating increasingly complex programs efficiently.
+
+There are several distinct capabilities involved:
+
+| Capability | What ROW currently supports |
+|---|---|
+| **Learn reusable computational primitives** | Strong evidence within the existing world family, including sealed online formation results. |
+| **Find programs using those primitives** | Support-example-driven search can select compositions that generalize to unseen examples. That is a restricted form of program synthesis. |
+| **Generalize compositionally** | The export results support unseen combinations, adjacent pairs, positions, and lengths within the tested settings. |
+| **Infer control flow** | The new sealed result discovers which candidates need data-dependent iteration, using supplied loop machinery. |
+| **Learn an efficient program generator** | Still unresolved. The learned writer missed its quality target, and later experiments found little inference headroom on the formed vocabulary. |
+| **Grow an increasingly powerful programming language autonomously** | Partial ingredients: macro economics and compilation experiments. No demonstrated open-ended cycle yet. |
+
+**The crucial advance is that the primitives no longer have to be handed to the synthesizer fully formed.**
+
+A conventional setup might give the system operations and ask it to find their composition. ROW is tackling the harder coupled problem:
+
+> Learn what the operations should do while learning which programs explain the tasks.
+
+The stale-route results show why that coupling is difficult. A program selected early can become wrong as its component operators develop. Reconsidering old programs helps the vocabulary itself become learnable.
+
+For your goal, that suggests a promising architecture: **program synthesis participates throughout learning, repeatedly revising explanations of experience—not just producing programs after training ends.** That is my interpretation of the formation results, rather than a separately established general claim.
+
+**The loop result also crosses a real boundary.** Selecting a fixed sequence and executing a state-dependent loop are different capabilities. ROW now has evidence for learning when to use the latter while forming the underlying operators. But the distinction is:
+
+- **Supported:** discovering a program within a supplied grammar that includes loops.
+- **Not yet supported:** inventing the loop construct, discovering arbitrary nested control flow, or synthesizing large algorithms.
+
+Supplying a grammar is perfectly legitimate for program synthesis. The limitation is its breadth and how much task structure the experiment reveals.
+
+**My main concern is that the current research could optimize vocabulary formation indefinitely without confronting the central synthesis bottleneck.**
+
+The latest "no headroom" findings concern whether choosing the best-fitting route from the available examples leaves avoidable generalization error. **That is different from whether finding that route becomes computationally prohibitive.** An answer can be uniquely determined by two examples and still be expensive to discover in a huge program space.
+
+So I would distinguish two research questions:
+
+1. **Statistical inference:** Given limited examples, which program should you choose?
+2. **Computational search:** How cheaply can you find a good program among an enormous number of possibilities?
+
+The current generator largely saturates the first once the library forms. That does **not** close the second, or the case for a learned search policy.
+
+**For the synthesis goal, the decisive next experiment would be a bounded version of this cycle:**
+
+1. Acquire a reusable library.
+2. Solve new tasks by synthesizing programs under a fixed search budget.
+3. Extract useful recurring subprograms from successful solutions.
+4. Add those abstractions to the language, charging their storage and learning costs.
+5. Show that they enable harder held-out tasks to be solved more cheaply.
+6. Repeat, demonstrating an additional gain from a second generation of abstractions.
+
+The important endpoint would be **new tasks solved per total compute budget**, with comparisons against the original library, ordinary search, and a library that grows without meaningful abstraction selection. Shorter program descriptions alone would not establish the benefit.
+
+**That is the missing bridge to your larger ambition:** evidence that learned programs become reusable computational resources that improve subsequent synthesis, repeatedly. ROW now has credible pieces on both sides—learned composable operators and abstraction economics—but it has not yet demonstrated that cumulative cycle. **I think this is substantial progress. The strongest advance is that ROW now has a more convincing account of how a reusable computational vocabulary forms—and how learning control flow can interfere with that formation.** The main remaining question is how much of that account survives outside this particular synthetic world.
+
+I checked the recent commits through October 14, the research record, and the sealed control-flow protocol. This is an assessment of the recorded experiments, not an independent reproduction.
+
+**1. The online-formation result is still the foundation.**
+
+The sequence of failures and repairs is unusually informative:
+
+- **Consolidation fixes incomplete learning:** replaying retained examples improves a library that hasn't finished converging.
+- **Re-routing fixes stale commitments:** earlier tasks remain assigned to programs chosen when the operators were immature. As those operators change, those assignments become wrong.
+- **Both together work reliably in the sealed tests:** O6 and O11 each passed 45/45 cells. In O11, sleep alone passed 38/45, re-routing alone 40/45, and wake alone 14/45. [Research record](https://github.com/doeixd/reusable-operator-worlds/blob/master/PROGRESS.md)
+
+My interpretation is that **learning reusable components also requires revising your explanations of earlier tasks**. Retaining examples and refining weights isn't always enough; you must reconsider which computations those examples instantiate.
+
+That is a useful mechanism-level finding. It gives you something more transferable than "this architecture scored well."
+
+**2. The new sealed control-flow result is a meaningful additional step.**
+
+C-seal tested whether the learner could form its vocabulary while discovering which candidate tasks require data-dependent iteration, without receiving their loop identities.
+
+| Measure | Sealed result |
+|---|---:|
+| Vocabulary formation | 30/30 cells |
+| Loop-discovery recall | 99.5% |
+| Specificity | 100% |
+| Cells meeting the loop-error criterion | 30/30 |
+| Rooted-library failures with the one-step initialization | 0/30 |
+
+These are 15 worlds with two streams each, rather than 30 independent worlds. Discovery added roughly 4% to loop error relative to being told the identities. [Results and scope](https://github.com/doeixd/reusable-operator-worlds/blob/master/RESEARCH_STATUS.md)
+
+**The interesting part is how you got there.** When iteration was available too freely from initialization, a slot could learn a computational "root": repeatedly applying that slot fitted a supposedly single-operation task. That representation then caused problems in compositions. Starting candidates as single steps prevented this failure in the sealed block.
+
+My broader hypothesis from that result: **additional expressive power can make primitives harder to identify, so introducing complexity conservatively may help a reusable vocabulary form.**
+
+There's an important boundary: the learner is supplied with iteration machinery, a restricted candidate set, linear halting predicates, and a maximum iteration count. It discovers **where to use a provided control-flow form**; it hasn't invented the concept of looping. Also, passing the registered loop-error bar of 0.38 is distinct from executing loops with near-zero error. [Frozen protocol](https://github.com/doeixd/reusable-operator-worlds/blob/master/B2_SEALED_CONFIRMATION_PLAN.md)
+
+**3. G1 challenges one of the project's own assumptions—in a good way.**
+
+The shared-rotation worlds looked unsuitable because an untrained library barely clustered operation identities: ARI approximately **0.03–0.04**. Yet the existing formation pipeline succeeded in all three tested worlds, and the learned library reached **0.97–0.98 ARI**.
+
+That suggests the initial clustering gate was too restrictive. **The learner can develop distinctions that its initial representation barely exposes.** It's only three exploratory worlds, but this is a more interesting result than another success in a comfortably separable setting. [G1 record](https://github.com/doeixd/reusable-operator-worlds/blob/master/PROGRESS.md)
+
+**4. The latest negatives expose the current testbed's limits.**
+
+Two findings matter particularly:
+
+- **Intermediate-state branching is too easy to imitate:** on the existing operator family, decisions made on computed states remain highly predictable from the original input. Some apparent reasoning tests therefore don't require the intended computation.
+- **Program inference remains easy once the vocabulary is formed:** making operators more similar did not create meaningful inference headroom. Even with just two noiseless examples, wrong routes were usually excluded. Noise created substantial ambiguity only in the sparse, high-noise corner tested. [Latest censuses](https://github.com/doeixd/reusable-operator-worlds/blob/master/RESEARCH_STATUS.md)
+
+These findings justify closing specific experiments **on this substrate**. They don't establish that learned program inference is generally unnecessary.
+
+The `tanh2` selection is therefore a sensible next direction: removing the identity skip reduces the measured input-based shortcut from about **97.8% to 87.7%**, while retaining single-operator learnability. But it is currently a **generator-screening result**, not evidence that the complete online learner works there. Nor did it make program inference harder. [Operator-form census](https://github.com/doeixd/reusable-operator-worlds/blob/master/reports/g0f_form_census.json)
+
+**What I would prioritize now**
+
+1. **Transfer the formation mechanism to `tanh2`:** compare wake, wake plus consolidation, and re-routing plus consolidation. Ask whether the same interventions explain success.
+2. **Verify that intermediate-state control flow is actually necessary there:** directly test the input-only shortcut before investing in a large learner experiment.
+3. **Reconnect the results to ROW's original economic question:** terminal success is now strong, but how much do memory, search, re-routing, and consolidation cost before the library makes future tasks cheaper?
+4. **Use world-level uncertainty estimates:** repeated streams and tasks within a world are valuable, but should not be treated as independent worlds when quantifying generality.
+
+**My overall judgment:** the project now supports a credible, bounded story: reusable operators can form online; stale program assignments obstruct that process; revising assignments and consolidating repairs it; and a conservative initialization lets supplied control-flow machinery coexist with vocabulary formation.
+
+The next major gain would be showing that this explanation survives a substantially different operator family. That would move these results much closer to a general account of learning reusable computation.
