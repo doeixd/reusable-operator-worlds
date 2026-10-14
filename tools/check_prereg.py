@@ -107,6 +107,7 @@ FROZEN = {
     "G1_FORMATION_PROBE_PLAN.md": "c51b967",
     "G3A_INFERENCE_CENSUS_PLAN.md": "92e1b68",
     "G3B_NOISE_CENSUS_PLAN.md": "3fd6a92",
+    "G0F_FORM_CENSUS_PLAN.md": "ff33942",
 }
 
 #: STATUS-cited paths acknowledged ABSENT from this disk, each with its reason. The module
