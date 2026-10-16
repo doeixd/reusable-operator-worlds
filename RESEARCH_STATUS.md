@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-14, after G1T (`FAILS`: the `tanh2` vocabulary forms its identity but its operations do not fit at the rotated form's hyperparameters). RUNNING: G1S (`G1S_TANH_SIZING_PLAN.md`), the pre-stated sizing rung: learning rate {0.001, 0.003, 0.01} x initial gain {1, 2} on world 70, wake then sleep; check `artifacts/g1s_tanh_sizing/status.json`. Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
+Last rewritten: 2026-10-16, after G1S (`IMPROVES`: at lr 0.003, gain 1 the `tanh2` operations fit, depth 1 0.025, but error compounds to 0.18 at depth 3). Nothing is running. Next, by the G1S plan: a second sizing axis on world 70 at the chosen setting (sleep length first, then wake updates). Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -62,6 +62,12 @@ hyperparameters: 0/3 in every arm (confirmed pipeline 0.39-0.42; curriculum 0.49
 error compounds with depth. Interventions keep their rotated ordering; sleep alone matches the full pipeline here.
 Next, by the plan's FAILS branch: learner-side sizing (learning rate, initial gain) on one world. `PREDICTIONS.md`,
 `reports/g1t_tanh_formation.json`.
+
+**G1S tanh sizing (Tier 1, EXPLORATORY, world 70, 2026-10-15): `IMPROVES`.** Learning rate x initial gain, wake then
+sleep. At lr 0.003, gain 1 slept depth-1 error falls from 0.131 to 0.025 (identity intact) and depth 3 from 0.405 to
+0.184; lr 0.01 collapses (~1.0); gain 2 is worse everywhere. The gain came from sleep, not wake. Error still compounds
+(x2.7 per step). Next: sleep length, then wake updates, at the chosen setting. The run directory was deleted before
+recording; scored from the report's embedded records (disclosed). `PREDICTIONS.md`, `reports/g1s_tanh_sizing.json`.
 
 **Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
 Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow

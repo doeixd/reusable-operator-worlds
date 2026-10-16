@@ -161,6 +161,12 @@ arm, the length curriculum included. The vocabulary's identity forms (depth-1 AR
 (depth-1 error 0.13-0.16 after sleep), so the failure is fit, not formation. Next rung, pre-stated: learner-side
 sizing (learning rate, initial gain) on one world, then the probe again on the remaining worlds if a setting fits.
 
+### G1S tanh sizing (2026-10-15, Tier 1): `IMPROVES`
+
+`G1S_TANH_SIZING_PLAN.md` (frozen `7069f26`), `reports/g1s_tanh_sizing.json`. Learning rate was the lever: at 0.003
+(gain 1) the operations fit (depth-1 error 0.025 after sleep), but error compounds to 0.184 at depth 3. Next: sleep
+length and wake updates at that setting, on world 70; a formation probe on other worlds only once a setting fits.
+
 # Track S, Track M (unchanged, lower priority)
 
 - **Track S (self-curriculum): paused.** SC0 `GRADED`, SC0b `LENGTHS_SUFFICE` (quota 16-24 anchors; uniform over

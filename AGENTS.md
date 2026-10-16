@@ -2436,3 +2436,9 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   sharing gradient) the same form left depth-1 tasks at 0.13-0.27 while routing them perfectly, and the error
   compounded with depth to 0.4-0.7. A learnability check is a statement about a regime; run it with the lifetime's
   learning rate, batch and budget, or it licenses nothing about formation.
+- `artifacts/` IS UNTRACKED AND CAN VANISH BETWEEN A RUN'S EXIT AND ITS RECORD (G1S, 2026-10-16). The directory was
+  emptied outside any session after G1S finished and before it was scored, taking the durable cells, models and
+  operational logs; only the report in `reports/` survived, and the independent scorer had to run on records embedded
+  in it, with its durable-cell checks reduced to tautologies. Score and archive as soon as a run exits, and have new
+  runners write their operational logs and cell records into `reports/<run>_<date>/` themselves at exit, so the
+  record never depends on an untracked directory surviving.

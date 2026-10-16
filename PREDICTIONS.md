@@ -11846,3 +11846,54 @@ rung is a learner-side sizing (initial gain, learning rate) on one world, not ab
 **What this does not show.** That the `tanh` form cannot be formed online: every arm, including the curriculum, ran at
 hyperparameters tuned for the rotated form, and the failure is located in per-operation fit, which those settings
 govern. One stream per world, three worlds; a formation rate is not estimated.
+
+# G1S TANH SIZING (Tier 1, EXPLORATORY, world 70, 2026-10-15): `IMPROVES`, chosen lr 0.003 at gain 1; operations now fit (depth 1 0.025) but error still compounds with depth (depth 3 0.18)
+
+Plan `G1S_TANH_SIZING_PLAN.md`, frozen `7069f26`, hash protected `59558e5` (the run commit); G1T's pre-stated `FAILS`
+branch. 12 cells, gates S1 and S2 passed, anchor A0 passed bitwise (the baseline's wake and slept per-task terminals
+equal G1T's `SHUFFLED_w70` and `SLEEP_w70`); report `reports/g1s_tanh_sizing.json`; scorer output
+`reports/g1s_tanh_sizing_20261014/scorer_output.json` agrees. Every wake lifetime and every sleep ran at its set
+learning rate (checked per cell). Exploratory: chooses a setting, no verdict.
+
+| setting (lr, gain) | wake terminal | slept terminal | slept depth 1 / 2 / 3 | slept `d1_ari` |
+|---|---|---|---|---|
+| 0.001, 1 (G1T) | 0.510 | 0.405 | 0.131 / 0.267 / 0.405 | 1.00 |
+| **0.003, 1 (chosen)** | 0.497 | **0.184** | **0.025** / 0.068 / 0.184 | 1.00 |
+| 0.01, 1 | 1.049 | 1.013 | 0.199 / 0.519 / 1.013 | 0.95 |
+| 0.001, 2 | 1.097 | 0.712 | 0.229 / 0.455 / 0.712 | 0.94 |
+| 0.003, 2 | 0.668 | 0.294 | 0.047 / 0.130 / 0.294 | 1.00 |
+| 0.01, 2 | 1.041 | 1.011 | 0.204 / 0.456 / 1.011 | 1.00 |
+
+**Label `IMPROVES`** (chosen 0.184, in `[0.05, 0.2)`). By the plan: next is a second sizing axis on world 70 at the
+chosen setting, wake updates per example and sleep length.
+
+**Reading.**
+- The learning rate was the lever for per-operation fit, with an interior optimum: at 0.003 the slept depth-1 error
+  falls from 0.131 to 0.025, under the formation bar, with identity intact; at 0.01 every arm sits at ~1.0 (no better
+  than no anchors) at either gain.
+- Starting at the teacher's gain 2 is worse at every learning rate (0.294 against 0.184 at 0.003; 0.712 against 0.405
+  at 0.001). The learner's gain-1 start, chosen by analogy with the rotated learner, was the better one.
+- The gain came from SLEEP, not wake. The chosen setting's wake terminal is 0.497, essentially G1T's 0.510; sleep at the
+  higher rate then takes it to 0.184 where G1T's sleep reached 0.405. So the next axis should lengthen sleep before it
+  lengthens wake.
+- Error still compounds: 0.025 -> 0.068 -> 0.184, about x2.7 per added step, against x2.0 then x1.5 at G1T's
+  setting. A vocabulary whose operations each fit to 0.025 still misses at depth 3. Whether composition error falls
+  with per-operation error (more sleep) or is a separate property of the `tanh` form (no identity skip, so each step's
+  error is not damped) is what the next axis separates.
+- Cost: wake ~1,000-1,120 s per cell with three in parallel; sleep ~275 s.
+
+**What this does not show.** That the `tanh` form forms: no setting reached 0.05. One world (70, which chose the
+setting and is excluded from any later probe), one stream; settings 0.003/1 and 0.003/2 are 0.11 apart, about twice
+single-stream noise.
+
+**Disclosure: the run directory was deleted before the result was recorded.** The run finished 2026-10-15 00:21Z
+(exit recorded in the report, `complete: true`). By 2026-10-16 the whole untracked `artifacts/` directory had been
+emptied outside these sessions (no working-log entry records it; the tracked `artifacts/INVALID_MANIFEST.md` went with
+it and was restored from git). Lost: the twelve durable cell records, the saved models, and the operational logs
+(`run.log`, `status.json`, `exit.json`, `gates.json`, `precondition.json`), so nothing could be archived to
+`reports/g1s_tanh_sizing_20261014/` except what was rebuilt. The report itself survived in `reports/` and carries the
+protocol, the gate record and every cell record. The independent scorer was therefore run on the records embedded in
+the report (`reports/g1s_tanh_sizing_20261014/score_from_report.py`): its stamp and record-hash checks against
+durable cells are satisfied by construction and prove nothing, while its input-hash, threshold, settings, ran-at-lr,
+A0 and label checks ran unchanged and agree with the runner. A0 holding bitwise on both baseline cells is the main
+evidence that the records are the run's own. The models are regenerable from committed code and seeds.

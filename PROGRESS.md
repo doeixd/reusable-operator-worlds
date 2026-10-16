@@ -9597,3 +9597,13 @@ depth-1 tasks sit at 0.13-0.16 after sleep, and the error compounds with depth. 
 learner-side sizing rung (learning rate, initial gain) on one world. Disclosure: the diagnostic ran with 4 torch
 threads and crawled; it was killed after five of six models had printed (the sixth, `REROUTE_WAKE` world 72, is
 missing), and those five rows are the recorded output. The archived script is the one that ran.
+
+# G1S tanh sizing (Tier 1, EXPLORATORY, 2026-10-15, world 70): `IMPROVES`
+
+Plan `G1S_TANH_SIZING_PLAN.md` (frozen `7069f26`, protected `59558e5`); runner `row.experiments.g1s_tanh_sizing`,
+scorer `row.experiments.score_g1s_tanh_sizing`; report `reports/g1s_tanh_sizing.json`. 45 minutes, pool 3. The first
+launch (2026-10-14 ~19:30Z) was refused by the host precondition (1.6 GiB free against the 2 GiB reserve); relaunched
+at 23:36Z with 4.2 GiB free. The session's watcher shell was reaped for low memory; the detached run was
+unaffected. Chosen lr 0.003 at gain 1: slept depth-1 error 0.025 (G1T 0.131), depth 3 0.184. Anchor A0 bitwise.
+Disclosure: the untracked `artifacts/` directory was emptied before recording (details in PREDICTIONS); cells, models
+and operational logs are lost; scored from the report's embedded records; `INVALID_MANIFEST.md` restored from git.

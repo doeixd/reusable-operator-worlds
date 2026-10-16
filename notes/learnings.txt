@@ -5328,3 +5328,6 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
 - 2026-10-13 G0F: near-linearity came from the identity skip; tanh/gate forms without it reach S1 0.80-0.89, folds do not.
 
 - 2026-10-14 G1T: a single-operator fit at lr 0.01 / 2,000 full-batch steps (G0F S6) did not predict fit inside a lifetime at lr 0.001; tanh2 slots routed perfectly (ARI ~1) yet sat at 0.13-0.27 on depth-1 tasks. Check learnability under the lifetime's own optimizer. Full entry: AGENTS.md.
+
+- 2026-10-16 G1S: artifacts/ was emptied between G1S exit and scoring; only the report survived. New runners should copy logs and cell records into reports/ at exit. Full entry: AGENTS.md.
+- 2026-10-15 G1S: tanh2 learner fit is learning-rate-limited with an interior optimum (0.003; 0.01 collapses); the gain came from sleep, and composition error still compounds ~x2.7 per step.
