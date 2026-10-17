@@ -71,6 +71,7 @@ IN_SCOPE = (
     'G1S_TANH_SIZING_PLAN.md',
     'G1S2_TANH_BUDGET_PLAN.md',
     'G1R_TANH_REROUTE_PLAN.md',
+    'G1V_TANH_PROBE_PLAN.md',
 )
 
 #: Explicit sentinel for a plan with no behaviour to elicit (an observational

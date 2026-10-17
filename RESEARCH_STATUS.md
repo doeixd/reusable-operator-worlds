@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-16, after G1S (`IMPROVES`: at lr 0.003, gain 1 the `tanh2` operations fit, depth 1 0.025, but error compounds to 0.18 at depth 3). G1S2 `IMPROVES` (0.092; the depth-3 failure is bimodal, a block of collapsed tasks with the stale-route signature). G1R `STALE_ONLY` (2026-10-17): every collapsed task was a stale route (54/54 rescued); with re-routing the `tanh` learner reaches 0.054-0.066 on world 70, just above 0.05. PENDING PI DECISION 22: the frozen plan's branch stops the `tanh` line; Claude's stated stop rule would continue to a fresh-world formation probe; then a one-page proposal for a depth-6 search-budget census (reviewer 86's library-growth cycle). Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
+Last rewritten: 2026-10-16, after G1S (`IMPROVES`: at lr 0.003, gain 1 the `tanh2` operations fit, depth 1 0.025, but error compounds to 0.18 at depth 3). G1S2 `IMPROVES` (0.092; the depth-3 failure is bimodal, a block of collapsed tasks with the stale-route signature). G1R `STALE_ONLY` (2026-10-17): every collapsed task was a stale route (54/54 rescued); with re-routing the `tanh` learner reaches 0.054-0.066 on world 70, just above 0.05. Decision 22 answered (the PI: "Use your best judgement to continue"; Claude chose the probe). RUNNING: G1V (`G1V_TANH_PROBE_PLAN.md`), the full `tanh` pipeline on worlds 71-75 at the world-70 settings; check `artifacts/g1v_tanh_probe/status.json`; then the synthesis-cycle census; then a one-page proposal for a depth-6 search-budget census (reviewer 86's library-growth cycle). Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -1048,7 +1048,7 @@ sealed band, and all are implementation audits rather than experiments.
     learned-inference line in this program and put effort into 20 (a). Claude recommends (i): it is the only one
     of the three that could create data-limited inference, and its first step is a census on existing artifacts.
 
-22. **OPEN (2026-10-17): does the `tanh` line run a fresh-world formation probe after G1R `STALE_ONLY`?** G1R's
+22. **ANSWERED (2026-10-17): (a), the probe.** The PI answered "Use your best judgement to continue"; Claude chose (a), G1V (`G1V_TANH_PROBE_PLAN.md`), with the synthesis census after it either way. Original question: does the `tanh` line run a fresh-world formation probe after G1R `STALE_ONLY`? G1R's
     frozen branch stops the line (0.054-0.066 on world 70, just above 0.05). Claude's stop rule as stated to the PI
     would continue to the probe, since re-routing rescued 54/54. Options: (a) run the probe (full pipeline, lr 0.003,
     gain 1, wake u = 2, re-route then 65k sleep; worlds 71-72 paired with G1T plus fresh band-6 worlds; about 1.5-2 h);
