@@ -1,0 +1,70 @@
+{
+ "protocol": {
+  "id": "g1r-tanh-reroute-v1",
+  "git_commit": "15d086c",
+  "plan": "G1R_TANH_REROUTE_PLAN.md",
+  "tier": 0,
+  "world": 70,
+  "stream": 0,
+  "wakes": [
+   1,
+   2
+  ],
+  "arms": [
+   "RR_SLEEP",
+   "SLEEP_RR"
+  ],
+  "checkpoints": [
+   8192,
+   16384,
+   32768,
+   65536
+  ],
+  "collapsed": 0.5,
+  "rescued": 0.2,
+  "fits": 0.05,
+  "identity_ari": 0.8,
+  "jobs": 4,
+  "root": "artifacts/g1r_tanh_reroute",
+  "input_sha256": {
+   "G1R_TANH_REROUTE_PLAN.md": "4674fbb7dc2691b58e93dd249f8ed83500d580df4f76034fd4a43f908b9f5f14",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/g1s2_tanh_budget.json": "eff5080f1863e452e1445ce7d9c547ab2e4482a7b7c10d400741d1ed839d5ee7",
+   "artifacts/g1s2_tanh_budget/work/u1/lifetime/model.pt": "e2f716375dead5953dd19823b823bb4dd52854868826ab112c4bce8308eabdb5",
+   "artifacts/g1s2_tanh_budget/work/u2/lifetime/model.pt": "e1d13ab30cf2ec5f31632e981c4dd4ce45ed3b9569932c2202788a26654ce3af"
+  },
+  "implementation_sha256": "66fa997ff75bdafa564f35927ac0ea4e75045c27f53a57838565b679120b2496",
+  "module_sha256": {
+   "row.experiments.g1s2_tanh_budget": "1f446a55fa4ee750a0cad9e52533c615202aec1c7bb98ae0b4d7fe12f8569448",
+   "row.experiments.g1s_tanh_sizing": "0b6fbede3e11b283dc44e5a0941bbe40d3fc7470a4b1ca9a047dd41588e807fe",
+   "row.experiments.o2_online_reliability": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+   "row.experiments.o2c_consolidation": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+   "row.experiments.o2d_sleep_memory": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+   "row.experiments.o3_online_sleep": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+   "row.experiments.o5_reroute_sleep": "a2788b483abb3f6432702d36dc704ef3be49bec3d5acaa9bf9dd948aac75ff49",
+   "row.experiments.learned_lifetime": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+   "row.models.tanh_form": "c61a2c1ab5c390652585f6da18593517669c96dd5aa9c409d85f48c6dc68fdd3",
+   "row.experiments.audit_rotated_g5r_interference": "d2cc0801a1c585b3baab2151ed977f775fe3ee5d0e6348f3411c8f0457575de3"
+  },
+  "full": true,
+  "cells": [
+   [
+    "RR_SLEEP",
+    1
+   ],
+   [
+    "RR_SLEEP",
+    2
+   ],
+   [
+    "SLEEP_RR",
+    1
+   ],
+   [
+    "SLEEP_RR",
+    2
+   ]
+  ]
+ },
+ "protocol_sha256": "ce0cad9bfff7791b240c36698b401ac1a5a0b14066de28caf5231ae4b55edf75"
+}

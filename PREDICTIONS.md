@@ -11942,3 +11942,46 @@ agreed to that order on 2026-10-17 ("Ok continue" to Claude's recommendation), w
 rescue the collapsed tasks, or a later formation probe fails on fresh worlds, the `tanh` tuning line stops.
 
 **What this does not show.** One world, one stream. The bimodality read is post hoc.
+
+# G1R TANH RE-ROUTE CENSUS (Tier 0, world 70, 2026-10-17): `STALE_ONLY`; every collapsed depth-3 task was a stale route (54 of 54 rescued), and with re-routing before sleep the `tanh` learner reaches 0.054-0.066, just above the 0.05 bar
+
+Plan `G1R_TANH_REROUTE_PLAN.md`, frozen `fcf64a4`, hash protected `15d086c` (the run commit). 4 cells on G1S2's two
+saved wake terminals, exit 0, 46 minutes; gates R1-R3 passed; anchor A0 passed bitwise (every reload reproduces G1S2's
+wake terminal, and the no-re-route sleep reproduces G1S2's curve at all four checkpoints); the runner archived its logs
+and cells to `reports/g1r_tanh_reroute_20261017/`, where the independent scorer agrees.
+
+| cell | wake | after re-route | sleep 8k | 16k | 32k | 65k | re-route after sleep | + 8k sleep |
+|---|---|---|---|---|---|---|---|---|
+| `RR_SLEEP_u1` (re-route, then sleep) | 0.497 | 0.298 | 0.096 | 0.090 | 0.069 | **0.066** | | |
+| `RR_SLEEP_u2` | 1.075 | 0.341 | 0.075 | 0.059 | 0.065 | 0.054 | | |
+| `SLEEP_RR_u1` (sleep, then re-route) | 0.497 | | 0.184 | 0.113 | 0.099 | 0.092 | 0.086 | 0.069 |
+| `SLEEP_RR_u2` | 1.075 | | 0.985 | 0.967 | 0.964 | 0.976 | 0.084 | 0.053 |
+
+Collapsed depth-3 tasks (> 0.5): 20 (u1) and 34 (u2) after sleep alone; 0 at every checkpoint once routes are
+re-derived, in either order. Routes changed: 35 / 61 when re-routing the wake terminal, 28 / 47 when re-routing the
+slept model. Depth profile at the best point (`RR_SLEEP_u2`, 65k): 0.010 / 0.027 / 0.054; `d1_ari` 1.00 throughout.
+
+**Label `STALE_ONLY`**: stale fraction 54 / 54 = 1.00 (rule `>= 0.5`), primary `RR_SLEEP_u1` best 0.0658 (not `< 0.05`).
+The plan's branch for this label: "By the stop rule the `tanh` tuning line stops here, recorded as 'forms with the full
+pipeline to about X, not to 0.05'". X = 0.054-0.066 on world 70.
+
+**Reading.**
+- The whole collapsed mode was stale routes, as on the rotated form (O6). With routes re-derived, no depth-3 task is
+  above 0.5 at any checkpoint in any cell.
+- Re-routing BEFORE sleep also improves the working mode, as O6 found: at 8k sleep, 0.096 against 0.184 for sleep alone
+  (u1). The full pipeline (re-route then sleep) at G1S's own 8k sleep is already at G1S2's best 65k sleep-alone value.
+- The order u1 < u2 from G1S2 reverses once routes are repaired: the u2 wake was broken by stale routes, not by its
+  library, and its vocabulary is the better one (0.054). G1S2's choice of u1 was a choice among stale-route artifacts.
+- The remaining gap to 0.05 is accuracy, shared by all four cells: 0.053-0.069 at the last scored point, still falling
+  slowly (u1: 0.069 -> 0.066 over the last doubling).
+- Lesson for the record: G1S and G1S2 SIZED A SUBSET OF THE PIPELINE (wake and sleep without re-routing), so two
+  sizing rungs partly measured staleness. Size with the full confirmed pipeline.
+
+**Discrepancy to disclose, for the PI to resolve.** The stop rule as Claude stated it to the PI on 2026-10-17 was: stop
+"if re-routing doesn't rescue the collapsed tasks, or the formation test fails on fresh worlds". By that wording the
+line continues to a formation test (re-routing rescued 54/54). The frozen plan's `STALE_ONLY` branch says the line
+stops. The frozen plan governs the label; whether the program runs the fresh-world formation probe anyway is a program
+decision put to the PI, not taken here.
+
+**What this does not show.** One world, which has chosen every setting so far; two vocabularies; end-of-stream
+re-routing only.

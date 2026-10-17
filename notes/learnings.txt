@@ -5333,3 +5333,5 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
 - 2026-10-15 G1S: tanh2 learner fit is learning-rate-limited with an interior optimum (0.003; 0.01 collapses); the gain came from sleep, and composition error still compounds ~x2.7 per step.
 
 - 2026-10-17 G1S2: a registered median-based "compounding ratio" hid a bimodal failure (20/64 depth-3 tasks at 0.71-1.06, the rest 0.06-0.11). Look at the per-task distribution before reading a median-based mechanism statistic; this is the O2 split-by-mode lesson again.
+
+- 2026-10-17 G1R: sizing the tanh learner without re-routing confounded fit with stale routes; re-routing rescued 54/54 collapsed tasks and reversed the chosen wake budget. Size with the full confirmed pipeline. Full entry: AGENTS.md.

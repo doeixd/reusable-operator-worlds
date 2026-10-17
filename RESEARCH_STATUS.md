@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-16, after G1S (`IMPROVES`: at lr 0.003, gain 1 the `tanh2` operations fit, depth 1 0.025, but error compounds to 0.18 at depth 3). G1S2 `IMPROVES` (0.092; the depth-3 failure is bimodal, a block of collapsed tasks with the stale-route signature). RUNNING (PI agreed 2026-10-17): G1R (`G1R_TANH_REROUTE_PLAN.md`), a Tier 0 re-route census on G1S2's saved wake terminals, under a stop rule for the `tanh` line; check `artifacts/g1r_tanh_reroute/status.json`; then a one-page proposal for a depth-6 search-budget census (reviewer 86's library-growth cycle). Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
+Last rewritten: 2026-10-16, after G1S (`IMPROVES`: at lr 0.003, gain 1 the `tanh2` operations fit, depth 1 0.025, but error compounds to 0.18 at depth 3). G1S2 `IMPROVES` (0.092; the depth-3 failure is bimodal, a block of collapsed tasks with the stale-route signature). G1R `STALE_ONLY` (2026-10-17): every collapsed task was a stale route (54/54 rescued); with re-routing the `tanh` learner reaches 0.054-0.066 on world 70, just above 0.05. PENDING PI DECISION 22: the frozen plan's branch stops the `tanh` line; Claude's stated stop rule would continue to a fresh-world formation probe; then a one-page proposal for a depth-6 search-budget census (reviewer 86's library-growth cycle). Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -73,6 +73,11 @@ recording; scored from the report's embedded records (disclosed). `PREDICTIONS.m
 slept terminal 0.184 -> 0.092 with diminishing returns; two wake updates per example breaks wake (1.075). Post hoc the
 depth-3 failure is bimodal: 20 of 64 tasks at 0.71-1.06, the rest 0.06-0.11, depth 1 / 2 at 0.017 / 0.045. The collapsed
 block looks like stale routes, which neither sizing rung re-routed. `PREDICTIONS.md`, `reports/g1s2_tanh_budget.json`.
+
+**G1R tanh re-route census (Tier 0, world 70, 2026-10-17): `STALE_ONLY`.** On G1S2's saved wake terminals, re-routing
+rescues all 54 collapsed depth-3 tasks, and re-route-then-sleep reaches 0.066 (u1) / 0.054 (u2) at 65k sleep updates,
+depth 1 / 2 / 3 at 0.010 / 0.027 / 0.054 at best. The collapse was stale routes, as on the rotated form; the remaining
+gap to 0.05 is accuracy. Decision 22 pending. `PREDICTIONS.md`, `reports/g1r_tanh_reroute.json`.
 
 **Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
 Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow
@@ -1043,6 +1048,11 @@ sealed band, and all are implementation audits rather than experiments.
     learned-inference line in this program and put effort into 20 (a). Claude recommends (i): it is the only one
     of the three that could create data-limited inference, and its first step is a census on existing artifacts.
 
+22. **OPEN (2026-10-17): does the `tanh` line run a fresh-world formation probe after G1R `STALE_ONLY`?** G1R's
+    frozen branch stops the line (0.054-0.066 on world 70, just above 0.05). Claude's stop rule as stated to the PI
+    would continue to the probe, since re-routing rescued 54/54. Options: (a) run the probe (full pipeline, lr 0.003,
+    gain 1, wake u = 2, re-route then 65k sleep; worlds 71-72 paired with G1T plus fresh band-6 worlds; about 1.5-2 h);
+    (b) stop the `tanh` line here and move to the synthesis-cycle census (`SYNTHESIS_CYCLE_PROPOSAL.md`).
 20. **(a) and (b) ANSWERED (2026-10-14): operator family for Track G.** (a): the PI answered "sure" to adopting the `tanh` form and building a same-form learner; G1T (`G1T_TANH_FORMATION_PLAN.md`) runs the confirmed online pipeline and O11's mechanism arms on it. Earlier status: UPDATE (2026-10-13): the PI answered
     "Sure" to a Tier 0 operator-form survey; G0F returned `SELECTED` `tanh2` (`P(z) = c Q tanh(2 R z + b)`, no identity
     skip): S1 0.877 (anchor 0.978), clustering premise and single-operator fit kept; `tanh4` and `gate1` also pass.

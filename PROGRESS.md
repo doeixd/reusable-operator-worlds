@@ -9616,3 +9616,12 @@ cells `reports/g1s2_tanh_budget_20261017/`. 70 minutes, pool 2. Best: wake u = 1
 wake breaks (1.075). Post hoc: the depth-3 failure is bimodal (u1: 20 of 64 tasks at 0.71-1.06, the rest 0.06-0.11), which
 looks like stale routes; next (agreed with the PI): a Tier 0 re-route census on the saved wake terminals. The session's
 watcher shell was reaped for low memory; the detached run was unaffected.
+
+# G1R tanh re-route census (Tier 0, 2026-10-17, world 70): `STALE_ONLY`
+
+Plan `G1R_TANH_REROUTE_PLAN.md` (frozen `fcf64a4`, protected `15d086c`); runner `row.experiments.g1r_tanh_reroute`
+(rebinds `o5`'s search view, gate R1), scorer agrees on the archived cells; report `reports/g1r_tanh_reroute.json`, logs
+and cells `reports/g1r_tanh_reroute_20261017/`. 46 minutes, pool 4. Re-routing rescued all 54 collapsed depth-3 tasks;
+re-route-then-sleep reached 0.066 (u1) and 0.054 (u2), just above 0.05. The write-time check found that `o5` held its
+own rotated `FrozenLibrary` reference (fixed and gated before launch). The watcher shell was reaped for low memory
+(free fell to 1.2 GiB mid-run); the detached run was unaffected. Decision pending with the PI (see PREDICTIONS).

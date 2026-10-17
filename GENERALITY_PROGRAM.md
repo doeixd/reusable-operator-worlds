@@ -173,6 +173,12 @@ length and wake updates at that setting, on world 70; a formation probe on other
 flattens. The depth-3 failure is bimodal, with a collapsed block that looks like stale routes. Stop rule agreed with
 the PI: the `tanh` line continues only if re-routing rescues that block (G1R) and a later probe forms on fresh worlds.
 
+### G1R tanh re-route census (2026-10-17, Tier 0): `STALE_ONLY`
+
+`G1R_TANH_REROUTE_PLAN.md` (frozen `fcf64a4`), `reports/g1r_tanh_reroute.json`. Re-routing rescued 54/54 collapsed
+tasks; the full pipeline reaches 0.054-0.066 on world 70. The frozen plan's branch stops the line; a fresh-world
+formation probe is decision 22 for the PI.
+
 # Track S, Track M (unchanged, lower priority)
 
 - **Track S (self-curriculum): paused.** SC0 `GRADED`, SC0b `LENGTHS_SUFFICE` (quota 16-24 anchors; uniform over

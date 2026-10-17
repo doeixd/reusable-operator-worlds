@@ -2442,3 +2442,8 @@ relevant confirmation plan is frozen with its hash in `tools/check_prereg.py`.
   in it, with its durable-cell checks reduced to tautologies. Score and archive as soon as a run exits, and have new
   runners write their operational logs and cell records into `reports/<run>_<date>/` themselves at exit, so the
   record never depends on an untracked directory surviving.
+- SIZE WITH THE FULL CONFIRMED PIPELINE, NOT A SUBSET OF IT (G1R, 2026-10-17; `reports/g1r_tanh_reroute.json`). G1S
+  and G1S2 sized the `tanh` learner with wake and sleep but no re-routing, to save time. Their failures were then
+  partly staleness: re-routing rescued every one of 54 collapsed depth-3 tasks, reversed G1S2's choice of wake budget
+  (u = 2, "broken" at 1.075, became the better vocabulary at 0.054), and halved the error at G1S's own sleep length.
+  A sizing rung that drops a component of the pipeline it is sizing for measures that component's absence too.
