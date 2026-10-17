@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-16, after G1S (`IMPROVES`: at lr 0.003, gain 1 the `tanh2` operations fit, depth 1 0.025, but error compounds to 0.18 at depth 3). G1S2 `IMPROVES` (0.092; the depth-3 failure is bimodal, a block of collapsed tasks with the stale-route signature). Next (PI agreed 2026-10-17): G1R, a Tier 0 re-route census on G1S2's saved wake terminals, under a stop rule for the `tanh` line; then a one-page proposal for a depth-6 search-budget census (reviewer 86's library-growth cycle). Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
+Last rewritten: 2026-10-16, after G1S (`IMPROVES`: at lr 0.003, gain 1 the `tanh2` operations fit, depth 1 0.025, but error compounds to 0.18 at depth 3). G1S2 `IMPROVES` (0.092; the depth-3 failure is bimodal, a block of collapsed tasks with the stale-route signature). RUNNING (PI agreed 2026-10-17): G1R (`G1R_TANH_REROUTE_PLAN.md`), a Tier 0 re-route census on G1S2's saved wake terminals, under a stop rule for the `tanh` line; check `artifacts/g1r_tanh_reroute/status.json`; then a one-page proposal for a depth-6 search-budget census (reviewer 86's library-growth cycle). Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
