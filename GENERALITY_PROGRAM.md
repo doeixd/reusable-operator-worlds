@@ -167,6 +167,12 @@ sizing (learning rate, initial gain) on one world, then the probe again on the r
 (gain 1) the operations fit (depth-1 error 0.025 after sleep), but error compounds to 0.184 at depth 3. Next: sleep
 length and wake updates at that setting, on world 70; a formation probe on other worlds only once a setting fits.
 
+### G1S2 tanh budget (2026-10-17, Tier 1): `IMPROVES`
+
+`G1S2_TANH_BUDGET_PLAN.md` (frozen `914c3c9`), `reports/g1s2_tanh_budget.json`. Longer sleep reaches 0.092; the curve
+flattens. The depth-3 failure is bimodal, with a collapsed block that looks like stale routes. Stop rule agreed with
+the PI: the `tanh` line continues only if re-routing rescues that block (G1R) and a later probe forms on fresh worlds.
+
 # Track S, Track M (unchanged, lower priority)
 
 - **Track S (self-curriculum): paused.** SC0 `GRADED`, SC0b `LENGTHS_SUFFICE` (quota 16-24 anchors; uniform over

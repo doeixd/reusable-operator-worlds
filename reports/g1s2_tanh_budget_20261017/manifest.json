@@ -1,0 +1,68 @@
+{
+ "protocol": {
+  "id": "g1s2-tanh-budget-v1",
+  "git_commit": "11e8e1f",
+  "plan": "G1S2_TANH_BUDGET_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "world": 70,
+  "stream": 0,
+  "setting": [
+   0.003,
+   1.0
+  ],
+  "wake_updates": [
+   1,
+   2
+  ],
+  "checkpoints": [
+   8192,
+   16384,
+   32768,
+   65536
+  ],
+  "fits": 0.05,
+  "improves": 0.1,
+  "identity_ari": 0.8,
+  "jobs": 2,
+  "root": "artifacts/g1s2_tanh_budget",
+  "input_sha256": {
+   "G1S2_TANH_BUDGET_PLAN.md": "6c525b104865d070f28aa0e5a0d1712f36442e195bc62d5f2fc09edda1d7a00e",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/g1s_tanh_sizing.json": "926cdbc1fa4c943ba6a580d56d92ae6d82b8ac870358d008c163286c05f18dc1"
+  },
+  "implementation_sha256": "1f446a55fa4ee750a0cad9e52533c615202aec1c7bb98ae0b4d7fe12f8569448",
+  "module_sha256": {
+   "row.experiments.g1s_tanh_sizing": "0b6fbede3e11b283dc44e5a0941bbe40d3fc7470a4b1ca9a047dd41588e807fe",
+   "row.experiments.g1t_tanh_formation": "28e020b42181ff92656d7d74d9417d8a2ff0e5561458adc56b79594509077ac8",
+   "row.experiments.g1_formation_probe": "5e6c17e3e23ee7f052c52a0e9193bd3385f65cfbfad549c59590e1cb736b23fb",
+   "row.experiments.o2_online_reliability": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+   "row.experiments.o2c_consolidation": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+   "row.experiments.o2d_sleep_memory": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+   "row.experiments.o3_online_sleep": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+   "row.experiments.learned_lifetime": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+   "row.models.tanh_form": "c61a2c1ab5c390652585f6da18593517669c96dd5aa9c409d85f48c6dc68fdd3",
+   "row.experiments.audit_rotated_g5r_interference": "d2cc0801a1c585b3baab2151ed977f775fe3ee5d0e6348f3411c8f0457575de3"
+  },
+  "scale": 1,
+  "cells": [
+   [
+    "WAKE",
+    1
+   ],
+   [
+    "WAKE",
+    2
+   ],
+   [
+    "SLEEP",
+    1
+   ],
+   [
+    "SLEEP",
+    2
+   ]
+  ]
+ },
+ "protocol_sha256": "bf8ef36c0cebe690f025aeff16752a72a8d2fa2b9bdd367bb3b65cfe2c9a92b6"
+}

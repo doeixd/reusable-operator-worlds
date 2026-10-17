@@ -1,0 +1,10 @@
+{
+ "B1": {
+  "u1": true,
+  "u2": true
+ },
+ "B3": true,
+ "B2": true,
+ "all_pass": true,
+ "protocol_sha256": "bf8ef36c0cebe690f025aeff16752a72a8d2fa2b9bdd367bb3b65cfe2c9a92b6"
+}

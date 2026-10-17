@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-16, after G1S (`IMPROVES`: at lr 0.003, gain 1 the `tanh2` operations fit, depth 1 0.025, but error compounds to 0.18 at depth 3). RUNNING: G1S2 (`G1S2_TANH_BUDGET_PLAN.md`): wake updates {1, 2} x sleep length 8k-65k at lr 0.003, gain 1, world 70; check `artifacts/g1s2_tanh_budget/status.json`. Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
+Last rewritten: 2026-10-16, after G1S (`IMPROVES`: at lr 0.003, gain 1 the `tanh2` operations fit, depth 1 0.025, but error compounds to 0.18 at depth 3). G1S2 `IMPROVES` (0.092; the depth-3 failure is bimodal, a block of collapsed tasks with the stale-route signature). Next (PI agreed 2026-10-17): G1R, a Tier 0 re-route census on G1S2's saved wake terminals, under a stop rule for the `tanh` line; then a one-page proposal for a depth-6 search-budget census (reviewer 86's library-growth cycle). Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -68,6 +68,11 @@ sleep. At lr 0.003, gain 1 slept depth-1 error falls from 0.131 to 0.025 (identi
 0.184; lr 0.01 collapses (~1.0); gain 2 is worse everywhere. The gain came from sleep, not wake. Error still compounds
 (x2.7 per step). Next: sleep length, then wake updates, at the chosen setting. The run directory was deleted before
 recording; scored from the report's embedded records (disclosed). `PREDICTIONS.md`, `reports/g1s_tanh_sizing.json`.
+
+**G1S2 tanh budget (Tier 1, EXPLORATORY, world 70, 2026-10-17): `IMPROVES`.** Sleep 8k -> 65k at wake u = 1 takes the
+slept terminal 0.184 -> 0.092 with diminishing returns; two wake updates per example breaks wake (1.075). Post hoc the
+depth-3 failure is bimodal: 20 of 64 tasks at 0.71-1.06, the rest 0.06-0.11, depth 1 / 2 at 0.017 / 0.045. The collapsed
+block looks like stale routes, which neither sizing rung re-routed. `PREDICTIONS.md`, `reports/g1s2_tanh_budget.json`.
 
 **Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
 Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow

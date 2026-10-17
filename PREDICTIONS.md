@@ -11900,3 +11900,45 @@ evidence that the records are the run's own. The models are regenerable from com
 
 **Addendum to G1S (2026-10-17).** The PI confirmed that the `artifacts/` directory was emptied deliberately to free disk
 space ("I was low on space I had to"). The disclosure above stands; no other cause is implicated.
+
+# G1S2 TANH BUDGET (Tier 1, EXPLORATORY, world 70, 2026-10-17): `IMPROVES` (0.092 at wake u = 1, sleep 65,536); the curve flattens, and the depth-3 failure is BIMODAL: a block of tasks collapses to ~1.0 while the rest sit at 0.06-0.10
+
+Plan `G1S2_TANH_BUDGET_PLAN.md`, frozen `914c3c9`, hash protected `11e8e1f` (the run commit); G1S's `IMPROVES` branch.
+4 cells, exit 0, 70 minutes, pool 2; gates B1-B3 passed; anchor A0 passed bitwise (`WAKE_u1` equals G1S's
+`WAKE_lr0.003_g1`, `SLEEP_u1` at 8,192 equals G1S's `SLEEP_lr0.003_g1`); the runner archived its own logs and cell
+records to `reports/g1s2_tanh_budget_20261017/`, and the independent scorer, run on those archived cells, agrees.
+
+| point (wake updates, sleep) | slept terminal | depth 1 / 2 / 3 | compounding (d3/d1) |
+|---|---|---|---|
+| u1, 8,192 (= G1S) | 0.184 | 0.025 / 0.068 / 0.184 | 7.5 |
+| u1, 16,384 | 0.113 | 0.020 / 0.055 / 0.113 | 5.7 |
+| u1, 32,768 | 0.099 | 0.019 / 0.049 / 0.099 | 5.2 |
+| **u1, 65,536 (chosen)** | **0.092** | 0.017 / 0.045 / 0.092 | 5.6 |
+| u2, 8,192-65,536 | 0.96-0.99 | 0.016-0.024 / 0.044-0.065 / 0.96-0.99 | 41-61 |
+
+Wake terminals: u1 0.497, u2 1.075. `d1_ari` 1.00 at every slept point.
+
+**Label `IMPROVES`** (chosen 0.092 in `[0.05, 0.1)`); `last_doubling_ratio` 0.926 (u1) and 1.013 (u2), so the curve is
+NOT still falling by the plan's 10% criterion, and the plan's next step is the compounding census.
+
+**Reading.**
+- Longer sleep helps with diminishing returns: 0.184 -> 0.113 -> 0.099 -> 0.092. Doubling wake updates HURTS: the u2
+  wake terminal is 1.075 and no amount of sleep repairs it.
+- The median hides two modes (post hoc, from the archived per-task terminals at 65,536). u1: 44 of 64 depth-3 tasks at
+  0.062-0.107, 20 at 0.71-1.06; u2: 30 at 0.058-0.103, 34 at 0.91-1.31. Depth 1 and 2 stay low in both (0.017 / 0.045). So the
+  "compounding ratio" registered in the plan mixes a modest real compounding on the working tasks (0.017 -> 0.045 ->
+  ~0.08) with a block of collapsed tasks. That block looks like the STALE-ROUTE collapse the rotated line found (O6:
+  collapsed tasks sit at the no-anchor floor and sleep cannot repair them, A1: coherent error), and neither G1S nor
+  G1S2 re-routes. This is the O2 lesson (split failures by mode before designing a fix) applied late: the registered
+  compounding read was written for a unimodal error and would have sent the next rung to the wrong question.
+- Even if the collapsed block were rescued, the working tasks' depth-3 error (median ~0.08) is above 0.05, so
+  re-routing alone may not reach the bar; whether re-routing BEFORE sleep (O6's order) lets consolidation fit better
+  is the open question.
+
+**Deviation from the plan's stated next step, and why.** The plan's next step for this label is a "compounding census"
+with teacher routes given. Because the failure is bimodal and the collapsed mode has the stale-route signature, the
+cheaper and prior question is whether re-routing rescues it (the confirmed pipeline's own step, not a new knob). The PI
+agreed to that order on 2026-10-17 ("Ok continue" to Claude's recommendation), with a stop rule: if re-routing does not
+rescue the collapsed tasks, or a later formation probe fails on fresh worlds, the `tanh` tuning line stops.
+
+**What this does not show.** One world, one stream. The bimodality read is post hoc.

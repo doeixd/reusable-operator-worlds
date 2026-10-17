@@ -9607,3 +9607,12 @@ at 23:36Z with 4.2 GiB free. The session's watcher shell was reaped for low memo
 unaffected. Chosen lr 0.003 at gain 1: slept depth-1 error 0.025 (G1T 0.131), depth 3 0.184. Anchor A0 bitwise.
 Disclosure: the untracked `artifacts/` directory was emptied before recording (details in PREDICTIONS); cells, models
 and operational logs are lost; scored from the report's embedded records; `INVALID_MANIFEST.md` restored from git.
+
+# G1S2 tanh budget (Tier 1, EXPLORATORY, 2026-10-17, world 70): `IMPROVES`
+
+Plan `G1S2_TANH_BUDGET_PLAN.md` (frozen `914c3c9`, protected `11e8e1f`); runner `row.experiments.g1s2_tanh_budget`
+(first self-archiving runner), scorer agrees on the archived cells; report `reports/g1s2_tanh_budget.json`, logs and
+cells `reports/g1s2_tanh_budget_20261017/`. 70 minutes, pool 2. Best: wake u = 1, sleep 65,536, terminal 0.092; u = 2
+wake breaks (1.075). Post hoc: the depth-3 failure is bimodal (u1: 20 of 64 tasks at 0.71-1.06, the rest 0.06-0.11), which
+looks like stale routes; next (agreed with the PI): a Tier 0 re-route census on the saved wake terminals. The session's
+watcher shell was reaped for low memory; the detached run was unaffected.
