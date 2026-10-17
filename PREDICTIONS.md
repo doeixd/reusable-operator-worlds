@@ -11897,3 +11897,6 @@ the report (`reports/g1s_tanh_sizing_20261014/score_from_report.py`): its stamp 
 durable cells are satisfied by construction and prove nothing, while its input-hash, threshold, settings, ran-at-lr,
 A0 and label checks ran unchanged and agree with the runner. A0 holding bitwise on both baseline cells is the main
 evidence that the records are the run's own. The models are regenerable from committed code and seeds.
+
+**Addendum to G1S (2026-10-17).** The PI confirmed that the `artifacts/` directory was emptied deliberately to free disk
+space ("I was low on space I had to"). The disclosure above stands; no other cause is implicated.
