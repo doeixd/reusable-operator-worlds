@@ -6,7 +6,7 @@ elsewhere and is append-only: verdicts, hypotheses and corrections in
 `PREDICTIONS.md`; completed steps in `PROGRESS.md`; results in `reports/`. If
 this file disagrees with those, they win and this file is stale.
 
-Last rewritten: 2026-10-16, after G1S (`IMPROVES`: at lr 0.003, gain 1 the `tanh2` operations fit, depth 1 0.025, but error compounds to 0.18 at depth 3). G1S2 `IMPROVES` (0.092; the depth-3 failure is bimodal, a block of collapsed tasks with the stale-route signature). G1R `STALE_ONLY` (2026-10-17): every collapsed task was a stale route (54/54 rescued); with re-routing the `tanh` learner reaches 0.054-0.066 on world 70, just above 0.05. Decision 22 answered (the PI: "Use your best judgement to continue"; Claude chose the probe). RUNNING: G1V (`G1V_TANH_PROBE_PLAN.md`), the full `tanh` pipeline on worlds 71-75 at the world-70 settings; check `artifacts/g1v_tanh_probe/status.json`; then the synthesis-cycle census; then a one-page proposal for a depth-6 search-budget census (reviewer 86's library-growth cycle). Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
+Last rewritten: 2026-10-16, after G1S (`IMPROVES`: at lr 0.003, gain 1 the `tanh2` operations fit, depth 1 0.025, but error compounds to 0.18 at depth 3). G1S2 `IMPROVES` (0.092; the depth-3 failure is bimodal, a block of collapsed tasks with the stale-route signature). G1R `STALE_ONLY` (2026-10-17): every collapsed task was a stale route (54/54 rescued); with re-routing the `tanh` learner reaches 0.054-0.066 on world 70, just above 0.05. Decision 22 answered (the PI: "Use your best judgement to continue"; Claude chose the probe). G1V `FAILS` (2026-10-18): on worlds 71-75 the full `tanh` pipeline reaches 0.054-0.067, 0 of 5 below 0.05, with ARI 1.00 and no collapsed task. It is a consistent accuracy floor just above the bar, and the `tanh` line stops. NEXT: the synthesis-cycle Tier 0 census (`SYNTHESIS_CYCLE_PROPOSAL.md`); then a one-page proposal for a depth-6 search-budget census (reviewer 86's library-growth cycle). Open PI decisions: 18 (sealed depth test, deferred); the library-growth synthesis cycle from reviewer 86 is a candidate track for the PI.
 **Read `GENERALITY_PROGRAM.md` (current direction), then `SUCCESSOR_LADDER.md` and
 `ONLINE_FORMATION_SYNTHESIS.md`.**
 
@@ -78,6 +78,10 @@ block looks like stale routes, which neither sizing rung re-routed. `PREDICTIONS
 rescues all 54 collapsed depth-3 tasks, and re-route-then-sleep reaches 0.066 (u1) / 0.054 (u2) at 65k sleep updates,
 depth 1 / 2 / 3 at 0.010 / 0.027 / 0.054 at best. The collapse was stale routes, as on the rotated form; the remaining
 gap to 0.05 is accuracy. Decision 22 pending. `PREDICTIONS.md`, `reports/g1r_tanh_reroute.json`.
+
+**G1V tanh formation probe (Tier 1, worlds 71-75, 2026-10-18): `FAILS`, and the `tanh` line stops.** The full pipeline
+lands all five fresh worlds at 0.054-0.067 (depth 1 / 2 / 3 about 0.012 / 0.029 / 0.058), with ARI 1.00 and no
+collapsed task. Structurally formed, but just short on accuracy, consistently. `PREDICTIONS.md`, `reports/g1v_tanh_probe.json`.
 
 **Successor ladder opened (2026-10-05, issues #2-#5):** `SUCCESSOR_LADDER.md`.
 Baseline learner = anchors + wake + re-routing + sleep. Tracks: control flow

@@ -11985,3 +11985,36 @@ decision put to the PI, not taken here.
 
 **What this does not show.** One world, which has chosen every setting so far; two vocabularies; end-of-stream
 re-routing only.
+
+# G1V TANH FORMATION PROBE (Tier 1, EXPLORATORY, worlds 71-75, 2026-10-18): `FAILS` (0 of 5 below 0.05); the full pipeline lands every fresh world at 0.054-0.067, with no collapsed task and depth-1 identity 1.00 everywhere
+
+Plan `G1V_TANH_PROBE_PLAN.md`, frozen `4ed1d3a`, hash protected `a98ef64` (the run commit). 10 cells, exit 0, about
+2 h 20 min; gates V1-V3 passed; the runner archived its logs and cells to `reports/g1v_tanh_probe_20261017/`, where
+the independent scorer reproduces the label (`runner_agrees: true`); `check_prereg` and `check_invalid` pass.
+
+| world | wake terminal | routes changed | sleep 8k | 16k | 32k | **65k (registered)** | depth 1 / 2 / 3 at 65k | collapsed |
+|---|---|---|---|---|---|---|---|---|
+| 71 | 0.865 | 72 | 0.196 | 0.084 | 0.077 | **0.0673** | 0.014 / 0.033 / 0.067 | 0 |
+| 72 | 0.710 | 41 | 0.092 | 0.061 | 0.069 | **0.0543** | 0.010 / 0.026 / 0.054 | 0 |
+| 73 | 1.044 | 54 | 0.075 | 0.061 | 0.060 | **0.0576** | 0.011 / 0.030 / 0.058 | 0 |
+| 74 | 1.188 | 57 | 0.091 | 0.067 | 0.058 | **0.0582** | 0.013 / 0.029 / 0.058 | 0 |
+| 75 | 0.676 | 42 | 0.115 | 0.069 | 0.067 | **0.0566** | 0.012 / 0.029 / 0.057 | 0 |
+
+**Label `FAILS`**: forming worlds 0 / 5 (rule `>= 4` FORMS, `<= 1` FAILS). `d1_ari` 1.00 in every world; `below_loose`
+(< 0.1) 5 / 5. Formed S1 at depth 1 0.872-0.876, against the teacher's 0.875-0.878 (G0F).
+
+**Reading.**
+- The label is FAILS, and the plan's branch applies: the `tanh` line stops, recorded as "on fresh worlds the full
+  pipeline reaches 0.054-0.067". It is a consistent near miss, not a scatter: the five worlds span 0.013, world 70's
+  0.054-0.066 is inside that span, and no world is below 0.05 or above 0.07.
+- The plan expected MIXED from near-threshold scatter. That did not happen: the result is a systematic accuracy
+  floor just above the bar, not stream noise around it.
+- Formation in the structural sense held on every fresh world. Every operation was separated (identity 1.00),
+  re-routing left no collapsed task, and the vocabulary composes. What misses is accuracy: error roughly doubles per
+  composition step (about 0.012 -> 0.029 -> 0.058), against the rotated pipeline's 0.009-0.03 at depth 3.
+- Against G1T's construction on the paired worlds 71-72 (0.393 / 0.388), the full pipeline at these settings is about
+  6-7x better.
+
+**What this does not show.** One stream per world. Settings chosen on world 70 and not re-tuned. End-of-stream
+re-routing only. Whether a longer sleep or another setting crosses 0.05 is not tested, and by the stop rule it is not
+pursued.

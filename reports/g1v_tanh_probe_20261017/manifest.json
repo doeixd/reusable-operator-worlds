@@ -1,0 +1,103 @@
+{
+ "protocol": {
+  "id": "g1v-tanh-probe-v1",
+  "git_commit": "a98ef64",
+  "plan": "G1V_TANH_PROBE_PLAN.md",
+  "tier": 1,
+  "exploratory": true,
+  "worlds": [
+   71,
+   72,
+   73,
+   74,
+   75
+  ],
+  "stream": 0,
+  "setting": [
+   0.003,
+   1.0
+  ],
+  "wake_updates": 2,
+  "checkpoints": [
+   8192,
+   16384,
+   32768,
+   65536
+  ],
+  "registered": 65536,
+  "threshold": 0.05,
+  "loose": 0.1,
+  "identity_ari": 0.8,
+  "forms_k": 4,
+  "fails_k": 1,
+  "jobs": 3,
+  "root": "artifacts/g1v_tanh_probe",
+  "input_sha256": {
+   "G1V_TANH_PROBE_PLAN.md": "dc1d5a1918753618cc1d256818772238f604aed86d043772bf579e1ebb862ae9",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659",
+   "reports/g1t_tanh_formation.json": "71b4ee9b5aaef5e45feb8c9bf602344f220479aee8615100bb08c2a2b36e7ea3",
+   "reports/g1r_tanh_reroute.json": "c3143a12e39c27c73896330bf8085832ee2dd3f193281f32d77a06c896903942"
+  },
+  "implementation_sha256": "b7423cf8a4ac969ac9e3b11336a482ae4c4502ad4101274e097d91ba2e7ca836",
+  "module_sha256": {
+   "row.experiments.g1r_tanh_reroute": "66fa997ff75bdafa564f35927ac0ea4e75045c27f53a57838565b679120b2496",
+   "row.experiments.g1s2_tanh_budget": "1f446a55fa4ee750a0cad9e52533c615202aec1c7bb98ae0b4d7fe12f8569448",
+   "row.experiments.g1s_tanh_sizing": "0b6fbede3e11b283dc44e5a0941bbe40d3fc7470a4b1ca9a047dd41588e807fe",
+   "row.experiments.g1t_tanh_formation": "28e020b42181ff92656d7d74d9417d8a2ff0e5561458adc56b79594509077ac8",
+   "row.experiments.g1_formation_probe": "5e6c17e3e23ee7f052c52a0e9193bd3385f65cfbfad549c59590e1cb736b23fb",
+   "row.experiments.g0_generator_census": "23edc1d7a791dd103b54811625aa166c820daf7050362360d0dc1df36695ff10",
+   "row.experiments.o2_online_reliability": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+   "row.experiments.o2c_consolidation": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+   "row.experiments.o2d_sleep_memory": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+   "row.experiments.o3_online_sleep": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+   "row.experiments.o5_reroute_sleep": "a2788b483abb3f6432702d36dc704ef3be49bec3d5acaa9bf9dd948aac75ff49",
+   "row.experiments.learned_lifetime": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+   "row.models.tanh_form": "c61a2c1ab5c390652585f6da18593517669c96dd5aa9c409d85f48c6dc68fdd3",
+   "row.experiments.audit_rotated_g5r_interference": "d2cc0801a1c585b3baab2151ed977f775fe3ee5d0e6348f3411c8f0457575de3"
+  },
+  "scale": 1,
+  "cells": [
+   [
+    "WAKE",
+    71
+   ],
+   [
+    "WAKE",
+    72
+   ],
+   [
+    "WAKE",
+    73
+   ],
+   [
+    "WAKE",
+    74
+   ],
+   [
+    "WAKE",
+    75
+   ],
+   [
+    "RR_SLEEP",
+    71
+   ],
+   [
+    "RR_SLEEP",
+    72
+   ],
+   [
+    "RR_SLEEP",
+    73
+   ],
+   [
+    "RR_SLEEP",
+    74
+   ],
+   [
+    "RR_SLEEP",
+    75
+   ]
+  ]
+ },
+ "protocol_sha256": "0393d2ccfcf059db8802658eb98c95a8078fbec31e31af4726963f27b17a5a25"
+}

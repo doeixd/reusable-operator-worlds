@@ -9625,3 +9625,12 @@ and cells `reports/g1r_tanh_reroute_20261017/`. 46 minutes, pool 4. Re-routing r
 re-route-then-sleep reached 0.066 (u1) and 0.054 (u2), just above 0.05. The write-time check found that `o5` held its
 own rotated `FrozenLibrary` reference (fixed and gated before launch). The watcher shell was reaped for low memory
 (free fell to 1.2 GiB mid-run); the detached run was unaffected. Decision pending with the PI (see PREDICTIONS).
+
+# G1V tanh formation probe (Tier 1, exploratory, 2026-10-18, worlds 71-75): `FAILS`
+
+Plan `G1V_TANH_PROBE_PLAN.md` (frozen `4ed1d3a`, protected `a98ef64`). Runner `row.experiments.g1v_tanh_probe`;
+independent scorer agrees on the archived cells. Report `reports/g1v_tanh_probe.json`; logs, cells and scorer output
+in `reports/g1v_tanh_probe_20261017/`. 10 cells, pool 3, 22:11Z to 00:33Z. 0 / 5 worlds below 0.05; all five at
+0.054-0.067, depth-1 ARI 1.00, no collapsed tasks. The `tanh` line stops per the plan's branch. The watcher shell was
+reaped for low memory mid-run; the detached run was unaffected. Next: the synthesis-cycle Tier 0 census
+(`SYNTHESIS_CYCLE_PROPOSAL.md`).

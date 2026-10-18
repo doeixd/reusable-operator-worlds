@@ -179,6 +179,13 @@ the PI: the `tanh` line continues only if re-routing rescues that block (G1R) an
 tasks; the full pipeline reaches 0.054-0.066 on world 70. The frozen plan's branch stops the line; a fresh-world
 formation probe is decision 22 for the PI.
 
+### G1V tanh formation probe (2026-10-18, Tier 1): `FAILS`; the `tanh` line stops
+
+`G1V_TANH_PROBE_PLAN.md` (frozen `4ed1d3a`), `reports/g1v_tanh_probe.json`. On worlds 71-75 the full pipeline at the
+world-70 settings reaches 0.054-0.067 (0 of 5 below 0.05), with depth-1 ARI 1.00 and no collapsed task. Answer to
+Track G's first question for this form: online formation transfers STRUCTURALLY (operations separate, routes repair,
+the vocabulary composes) but not to the program's accuracy bar, since error roughly doubles per composition step.
+
 # Track S, Track M (unchanged, lower priority)
 
 - **Track S (self-curriculum): paused.** SC0 `GRADED`, SC0b `LENGTHS_SUFFICE` (quota 16-24 anchors; uniform over
