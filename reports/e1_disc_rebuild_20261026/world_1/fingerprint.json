@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "resolved_config_sha256": "5759f3907c660d749ffd8a4f0745f552482564ead79b448a8d2247aa5f7cd872",
+  "git_commit": "755ab7550523cca646599a3794eb5145247c5890",
+  "model_family": "discrete",
+  "world_seed": 1,
+  "model_seed": 5000,
+  "configured_rho": 1.0,
+  "program_length": 3,
+  "hidden_width": null,
+  "task_embedding_dim": null,
+  "operator_rank": 8,
+  "operator_slots": 12,
+  "step_code_dim": null,
+  "hypernetwork_hidden_dim": null,
+  "global_learning_rate": 0.001,
+  "task_learning_rate": 0.05,
+  "replay_ratio": 1.0,
+  "learnable_alpha": true,
+  "operator_activation": "tanh",
+  "backfilled_from_resolved_config": false
+}

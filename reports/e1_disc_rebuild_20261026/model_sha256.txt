@@ -1,0 +1,3 @@
+cd5fd5871689e91f129bf6086597bac2ce1fdad317967dabd88bd9276af81d28 *artifacts/e1_disc_rebuild/world_0/model.pt
+28e0f21a9d3142f9c95ed6ed90430ab128ede2246d0e4e1b266ded1b1856242f *artifacts/e1_disc_rebuild/world_1/model.pt
+58f4813503e79d1a62cfa0e2a3eb1e41d665e062d59b2e5248a770e0cf386b00 *artifacts/e1_disc_rebuild/world_2/model.pt

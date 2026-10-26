@@ -12049,3 +12049,35 @@ needed for 75% solved grows at exponent >= 1.73 in depth (censored at 2000), not
 **What this does not show.** One library family (E1 discrete, canonical world, d = 16), 8 programs per (world, depth),
 gradient search at one learning rate, budgets up to 2000; nothing was rerun. The oracle reference is the E0.1
 assignment route, which search often beats, so "hard" means worse than a known route, not worse than optimal.
+
+# SY1 route diagnosis (Tier 0, 2026-10-26): `SEARCH_FAILURE_NOT_LOCALLY_REPAIRABLE` (65% repairable, bar 75%)
+
+Plan `SY1_ROUTE_DIAGNOSIS_PLAN.md`; `reports/sy1_route_diagnosis.json`. Libraries: E1 discrete lifetimes rebuilt from
+committed code; gate R0 reproduced all 192 cached E5.1 routes and NMSEs.
+
+| depth | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|
+| hard (SY0) | 2 | 5 | 5 | 11 | 10 | 10 | 9 |
+| of which search failures | 2 | 5 | 5 | 11 | 10 | 10 | 9 |
+| hard solved by polish | 2 | 4 | 2 | 9 | 4 | 5 | 8 |
+| all tasks solved after polish (of 24) | 23 | 23 | 21 | 22 | 18 | 19 | 23 |
+| median polish evaluations | 44 | 55 | 133 | 155 | 178 | 200 | 222 |
+
+**Reading.**
+- No selection failure anywhere: every hard task is one where a better route under the search's OWN objective existed
+  (the oracle route) and the single relaxed descent did not find it. SY0's macro reasoning assumed this; it holds.
+- The incumbent is not one descent. A deterministic single-position polish (tens to hundreds of hard-route
+  evaluations, against OPT2000's 4,000 forward-backward executions) takes depth 7-10 from 55/96 to 82/96 solved. Any
+  macro or synthesis-cycle arm must now beat OPT + polish at matched compute, not OPT alone.
+- 14/96 depth-7-10 tasks remain hard after polish: the residual opportunity is ~15%, roughly a third of what SY0 implied.
+  The label (`NOT_LOCALLY_REPAIRABLE`) is registered and stands; it sits 10 points under its bar.
+- Next (plan's branch): a Tier 1 at matched compute on these tasks, arms OPT + polish, random-restart OPT + polish, and
+  an oracle-macro arm (three consecutive positions given) as the ceiling for macros.
+
+Registration order (disclosed): the plan, module and tests were written at 11:52-11:53 local, before the rebuilt
+libraries finished (11:55) and before the run (11:55:44); they were not committed first, because the lifetimes stamp
+HEAD at completion and no commit is allowed mid-run, and the working-log entry (#236) recorded that they existed but
+not their hash. They are committed unchanged with the result. The rule is a deterministic classification fixed in code.
+
+**What this does not show.** Same 8 programs per (world, depth) as E5.1; one library family; the oracle route is a
+known route, not the optimum, so "search failure" is a lower bound on missed better routes.

@@ -9647,3 +9647,18 @@ depth 3 to 0.38-0.46 at depths 7-10 (slope 0.062 per depth, z 4.39, U_deep 0.40)
 median NMSE ~0.03 against an oracle ~0.011 (gaps 0.5-0.9 log units), while other tasks beat the E0.1 oracle route by
 ~2x. Next: rebuild the E1 discrete libraries (the artifacts were deleted) with a reproduction gate on the cached oracle
 NMSEs, then a Tier 1 that separates local-minimum failure (restarts at matched compute) from what a macro could buy.
+
+# E1 discrete library rebuild and SY1 route diagnosis (Tier 0, 2026-10-26): `SEARCH_FAILURE_NOT_LOCALLY_REPAIRABLE`
+
+The three E1 discrete lifetimes (deleted with `artifacts/`) were rerun from `755ab75` at `configs/v1.yaml`,
+`--model discrete`, worlds 0-2, three detached processes (~25 min). Records in `reports/e1_disc_rebuild_20261026/`
+(configs, fingerprints, summaries, model hashes). Gate R0 PASSED: on all 192 E5.1 tasks the rebuilt libraries reproduce
+the cached oracle route and every cached oracle and OPT_k query NMSE within relative 1e-5, so E5.1's libraries are
+reproduced. SY1 (`SY1_ROUTE_DIAGNOSIS_PLAN.md`, `row.experiments.census_sy1_route_diagnosis`,
+`reports/sy1_route_diagnosis.json`, 20 s): all 40 hard tasks at depths 7-10 are SEARCH failures (the oracle route has
+lower support MSE than every OPT route); a single-position polish from the best OPT route solves 26/40 (65%, bar 75%).
+Across all 96 depth-7-10 tasks polish raises solved from 55 to 82 for ~150-220 extra route evaluations.
+Registration order (disclosed): the plan, module and tests were written at 11:52-11:53 local, before the rebuilt
+libraries finished (11:55) and before the run (11:55:44); they were not committed first, because the lifetimes stamp
+HEAD at completion and no commit is allowed mid-run, and the working-log entry (#236) recorded that they existed but
+not their hash. They are committed unchanged with the result. The rule is a deterministic classification fixed in code.
