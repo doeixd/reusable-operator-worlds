@@ -12117,3 +12117,24 @@ check missed this: it never asked whether the incumbent was the strongest cheap 
 that the straight-line incumbent is a gradient descent followed by a polish, not a polish from a random start). With
 the structure right, the remaining error is the predicate's sample cost (query NMSE ~0.1 at 128 examples), as B0b
 found. Next: CF1 with the fair incumbent.
+
+# CF1 sizing (EXPLORATORY, 2026-10-26): on the rotated family, straight-line search itself binds from ~7 steps
+
+Not registered; sizing only (`reports/cf1_tuning/`). On the rotated teacher library (world 79), relaxed gradient
+descent + one/two-position polish finds 0 of 6 straight 7-step programs under every setting tried, while it finds most
+5-step ones; random-start coordinate descent fails earlier (CF0 control). Exhaustive search with prefix sharing stays
+exact and costs 0.3 / 2.0 / 13.5 s at depths 5 / 6 / 7, growing ~6x per step with 6 operators (~12x with a 12-slot
+learned library, i.e. ~30 min at depth 7).
+
+**Reading (Claude's judgement).**
+- This is the first place in the project where straight-line program search binds for every cheap incumbent: the
+  rotated family, depth >= 7. On the canonical (near-identity) family it did not (SY1: descent + polish 96/96 to
+  depth 10). The difference is plausibly the relaxation: mixtures of near-identity maps behave like their components,
+  mixtures of distinct rotations do not. That is a hypothesis, not tested.
+- Control flow is not what makes it hard: loop and straight programs fail together (CF0 control, CF1 smoke).
+- A library-growth or macro cycle can only change WHAT is solvable here if the task distribution has recurring
+  subprograms: a depth-9 program built from three recurring 3-step motifs is a 3-step search once the motifs are
+  learned. Every generator used so far draws programs uniformly, so recurrence is at chance (B3). The open question is
+  therefore a generator question: a hierarchical (motif) task distribution on the rotated family, where search at
+  depth 8-10 binds for the incumbent and motif macros would make it cheap. That is a generator change and is put to
+  the PI rather than started.

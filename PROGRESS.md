@@ -9682,3 +9682,13 @@ enumeration reference solves 5 positions 24/24 in ~5 s and grows 6x per position
 on the same (A, P, B) as straight programs solves 2/24, 0/24, 0/24 at 5/7/9 positions, i.e. WORSE than with loops.
 Query NMSE with the fitted predicate is ~0.1 at 128 examples and 0.5-0.7 at 16 whenever the structure is right.
 Next: CF1, the fair incumbent (relaxed gradient search + discrete polish) for loop programs, with a straight-line arm.
+
+# CF1 sizing (EXPLORATORY, 2026-10-26, world 79, rotated teacher operators): relaxed search fails at 7 steps on straight programs; CF1 not frozen
+
+`row.experiments.census_cf1_relaxed_structure` (written, smoke-tested; plan NOT frozen), `explore_cf1_tuning`,
+`explore_rotated_enum_cost`; `reports/cf1_tuning/`. The CF1 smoke (one task per world) found relaxed descent + polish
+failing at 7 positions for BOTH the loop and the straight arm. Tuning on world 79 (not a census world; 6 straight
+tasks per size; learning rate 0.01/0.05/0.2, 1/3/7 restarts at 2,100 total steps, logit init 0/0.1/1.0): 5 positions
+solved in 1-5 of 6 depending on setting, 7 positions in 0 of 6 under EVERY setting. Exhaustive search with prefix
+sharing on the 6 teacher operators: depth 5/6/7 in 0.3/2.0/13.5 s, exact; ~6x per step. CF1 was not frozen: its
+loop-versus-straight clause would compare 0 with 0. Next: proposal to the PI (see PREDICTIONS).

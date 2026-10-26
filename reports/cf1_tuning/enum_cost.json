@@ -1,0 +1,23 @@
+[
+ {
+  "depth": 5,
+  "routes": 7776,
+  "seconds": 0.32709389994852245,
+  "exact": true,
+  "score": 0.0
+ },
+ {
+  "depth": 6,
+  "routes": 46656,
+  "seconds": 1.9804787999019027,
+  "exact": true,
+  "score": 0.0
+ },
+ {
+  "depth": 7,
+  "routes": 279936,
+  "seconds": 13.521336000179872,
+  "exact": true,
+  "score": 0.0
+ }
+]
