@@ -114,6 +114,7 @@ FROZEN = {
     "G1R_TANH_REROUTE_PLAN.md": "fcf64a4",
     "G1V_TANH_PROBE_PLAN.md": "4ed1d3a",
     "SY0_SEARCH_BUDGET_CENSUS_PLAN.md": "eb74dbb",
+    "SY1_ROUTE_DIAGNOSIS_PLAN.md": "43c3cfb",
 }
 
 #: STATUS-cited paths acknowledged ABSENT from this disk, each with its reason. The module
