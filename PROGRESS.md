@@ -9670,3 +9670,15 @@ depths 7-10) still unsolved after SY1's single-position polish were polished fur
 All 19 are solved (18 reach exactly the oracle route's support MSE; several beat the oracle route), at 1,760-26,078
 hard-route evaluations (median 9,165), about 6 s per task against OPT2000's 16-26 s. Not preregistered and decides
 nothing by rule; it closes the sizing question SY1 left open. Next: no SY2 on straight-line programs (see PREDICTIONS).
+
+# CF0 loop-structure census (Tier 0, 2026-10-26, worlds 76-78, teacher operators): `SEARCH_BINDS`, which the straight-line control attributes to the searcher
+
+Plan `CF0_LOOP_STRUCTURE_CENSUS_PLAN.md` (frozen `33f25ae`, protected `af74c03`); module
+`row.experiments.census_cf0_loop_structure`; report `reports/cf0_loop_structure_census.json`, log
+`reports/cf0_loop_structure_20261026/run.log`; 9.5 min. Random-start coordinate descent over loop skeletons (3,000
+skeleton scores) recovers the structure at 1/3/5 positions in 24/24/19 of 24 tasks and at 7/9 positions in 1/0; the
+enumeration reference solves 5 positions 24/24 in ~5 s and grows 6x per position. Post-hoc straight-line control
+(`row.experiments.explore_cf0_straight_control`, `reports/cf0_straight_control.json`, exploratory): the same searcher
+on the same (A, P, B) as straight programs solves 2/24, 0/24, 0/24 at 5/7/9 positions, i.e. WORSE than with loops.
+Query NMSE with the fitted predicate is ~0.1 at 128 examples and 0.5-0.7 at 16 whenever the structure is right.
+Next: CF1, the fair incumbent (relaxed gradient search + discrete polish) for loop programs, with a straight-line arm.

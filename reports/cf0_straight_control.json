@@ -1,0 +1,739 @@
+{
+ "status": "EXPLORATORY, post hoc, no verdict",
+ "per_size": {
+  "2_2": {
+   "success_rate": 0.08333333333333333,
+   "median_evaluations": 3000.0
+  },
+  "3_3": {
+   "success_rate": 0.0,
+   "median_evaluations": 3000.0
+  },
+  "4_4": {
+   "success_rate": 0.0,
+   "median_evaluations": 3000.0
+  }
+ },
+ "rows": [
+  {
+   "world": 76,
+   "a": 2,
+   "b": 2,
+   "i": 0,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.46875
+  },
+  {
+   "world": 76,
+   "a": 2,
+   "b": 2,
+   "i": 1,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.46875
+  },
+  {
+   "world": 76,
+   "a": 2,
+   "b": 2,
+   "i": 2,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.484375
+  },
+  {
+   "world": 76,
+   "a": 2,
+   "b": 2,
+   "i": 3,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.46875
+  },
+  {
+   "world": 76,
+   "a": 2,
+   "b": 2,
+   "i": 4,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.484375
+  },
+  {
+   "world": 76,
+   "a": 2,
+   "b": 2,
+   "i": 5,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.484375
+  },
+  {
+   "world": 76,
+   "a": 2,
+   "b": 2,
+   "i": 6,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.46875
+  },
+  {
+   "world": 76,
+   "a": 2,
+   "b": 2,
+   "i": 7,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.484375
+  },
+  {
+   "world": 77,
+   "a": 2,
+   "b": 2,
+   "i": 0,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.5
+  },
+  {
+   "world": 77,
+   "a": 2,
+   "b": 2,
+   "i": 1,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.515625
+  },
+  {
+   "world": 77,
+   "a": 2,
+   "b": 2,
+   "i": 2,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.546875
+  },
+  {
+   "world": 77,
+   "a": 2,
+   "b": 2,
+   "i": 3,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.578125
+  },
+  {
+   "world": 77,
+   "a": 2,
+   "b": 2,
+   "i": 4,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.5625
+  },
+  {
+   "world": 77,
+   "a": 2,
+   "b": 2,
+   "i": 5,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.5625
+  },
+  {
+   "world": 77,
+   "a": 2,
+   "b": 2,
+   "i": 6,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.5625
+  },
+  {
+   "world": 77,
+   "a": 2,
+   "b": 2,
+   "i": 7,
+   "success": true,
+   "exact": true,
+   "evaluations": 2757,
+   "seconds": 0.53125
+  },
+  {
+   "world": 78,
+   "a": 2,
+   "b": 2,
+   "i": 0,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.59375
+  },
+  {
+   "world": 78,
+   "a": 2,
+   "b": 2,
+   "i": 1,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.59375
+  },
+  {
+   "world": 78,
+   "a": 2,
+   "b": 2,
+   "i": 2,
+   "success": true,
+   "exact": true,
+   "evaluations": 392,
+   "seconds": 0.078125
+  },
+  {
+   "world": 78,
+   "a": 2,
+   "b": 2,
+   "i": 3,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.578125
+  },
+  {
+   "world": 78,
+   "a": 2,
+   "b": 2,
+   "i": 4,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.640625
+  },
+  {
+   "world": 78,
+   "a": 2,
+   "b": 2,
+   "i": 5,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.640625
+  },
+  {
+   "world": 78,
+   "a": 2,
+   "b": 2,
+   "i": 6,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.53125
+  },
+  {
+   "world": 78,
+   "a": 2,
+   "b": 2,
+   "i": 7,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.578125
+  },
+  {
+   "world": 76,
+   "a": 3,
+   "b": 3,
+   "i": 0,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.8125
+  },
+  {
+   "world": 76,
+   "a": 3,
+   "b": 3,
+   "i": 1,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.78125
+  },
+  {
+   "world": 76,
+   "a": 3,
+   "b": 3,
+   "i": 2,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.796875
+  },
+  {
+   "world": 76,
+   "a": 3,
+   "b": 3,
+   "i": 3,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.84375
+  },
+  {
+   "world": 76,
+   "a": 3,
+   "b": 3,
+   "i": 4,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.796875
+  },
+  {
+   "world": 76,
+   "a": 3,
+   "b": 3,
+   "i": 5,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.828125
+  },
+  {
+   "world": 76,
+   "a": 3,
+   "b": 3,
+   "i": 6,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.828125
+  },
+  {
+   "world": 76,
+   "a": 3,
+   "b": 3,
+   "i": 7,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.84375
+  },
+  {
+   "world": 77,
+   "a": 3,
+   "b": 3,
+   "i": 0,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.8125
+  },
+  {
+   "world": 77,
+   "a": 3,
+   "b": 3,
+   "i": 1,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.890625
+  },
+  {
+   "world": 77,
+   "a": 3,
+   "b": 3,
+   "i": 2,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.890625
+  },
+  {
+   "world": 77,
+   "a": 3,
+   "b": 3,
+   "i": 3,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.8125
+  },
+  {
+   "world": 77,
+   "a": 3,
+   "b": 3,
+   "i": 4,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.859375
+  },
+  {
+   "world": 77,
+   "a": 3,
+   "b": 3,
+   "i": 5,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.8125
+  },
+  {
+   "world": 77,
+   "a": 3,
+   "b": 3,
+   "i": 6,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.828125
+  },
+  {
+   "world": 77,
+   "a": 3,
+   "b": 3,
+   "i": 7,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.75
+  },
+  {
+   "world": 78,
+   "a": 3,
+   "b": 3,
+   "i": 0,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.75
+  },
+  {
+   "world": 78,
+   "a": 3,
+   "b": 3,
+   "i": 1,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.734375
+  },
+  {
+   "world": 78,
+   "a": 3,
+   "b": 3,
+   "i": 2,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.75
+  },
+  {
+   "world": 78,
+   "a": 3,
+   "b": 3,
+   "i": 3,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.71875
+  },
+  {
+   "world": 78,
+   "a": 3,
+   "b": 3,
+   "i": 4,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.71875
+  },
+  {
+   "world": 78,
+   "a": 3,
+   "b": 3,
+   "i": 5,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.734375
+  },
+  {
+   "world": 78,
+   "a": 3,
+   "b": 3,
+   "i": 6,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.71875
+  },
+  {
+   "world": 78,
+   "a": 3,
+   "b": 3,
+   "i": 7,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.71875
+  },
+  {
+   "world": 76,
+   "a": 4,
+   "b": 4,
+   "i": 0,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.9375
+  },
+  {
+   "world": 76,
+   "a": 4,
+   "b": 4,
+   "i": 1,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.921875
+  },
+  {
+   "world": 76,
+   "a": 4,
+   "b": 4,
+   "i": 2,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.90625
+  },
+  {
+   "world": 76,
+   "a": 4,
+   "b": 4,
+   "i": 3,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.9375
+  },
+  {
+   "world": 76,
+   "a": 4,
+   "b": 4,
+   "i": 4,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.96875
+  },
+  {
+   "world": 76,
+   "a": 4,
+   "b": 4,
+   "i": 5,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.90625
+  },
+  {
+   "world": 76,
+   "a": 4,
+   "b": 4,
+   "i": 6,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.953125
+  },
+  {
+   "world": 76,
+   "a": 4,
+   "b": 4,
+   "i": 7,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 1.015625
+  },
+  {
+   "world": 77,
+   "a": 4,
+   "b": 4,
+   "i": 0,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 1.015625
+  },
+  {
+   "world": 77,
+   "a": 4,
+   "b": 4,
+   "i": 1,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.984375
+  },
+  {
+   "world": 77,
+   "a": 4,
+   "b": 4,
+   "i": 2,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 1.0
+  },
+  {
+   "world": 77,
+   "a": 4,
+   "b": 4,
+   "i": 3,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 1.0
+  },
+  {
+   "world": 77,
+   "a": 4,
+   "b": 4,
+   "i": 4,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 1.0
+  },
+  {
+   "world": 77,
+   "a": 4,
+   "b": 4,
+   "i": 5,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 1.078125
+  },
+  {
+   "world": 77,
+   "a": 4,
+   "b": 4,
+   "i": 6,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 1.0625
+  },
+  {
+   "world": 77,
+   "a": 4,
+   "b": 4,
+   "i": 7,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.890625
+  },
+  {
+   "world": 78,
+   "a": 4,
+   "b": 4,
+   "i": 0,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.9375
+  },
+  {
+   "world": 78,
+   "a": 4,
+   "b": 4,
+   "i": 1,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.9375
+  },
+  {
+   "world": 78,
+   "a": 4,
+   "b": 4,
+   "i": 2,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 1.046875
+  },
+  {
+   "world": 78,
+   "a": 4,
+   "b": 4,
+   "i": 3,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.9375
+  },
+  {
+   "world": 78,
+   "a": 4,
+   "b": 4,
+   "i": 4,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.90625
+  },
+  {
+   "world": 78,
+   "a": 4,
+   "b": 4,
+   "i": 5,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 1.015625
+  },
+  {
+   "world": 78,
+   "a": 4,
+   "b": 4,
+   "i": 6,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 0.953125
+  },
+  {
+   "world": 78,
+   "a": 4,
+   "b": 4,
+   "i": 7,
+   "success": false,
+   "exact": false,
+   "evaluations": 3000,
+   "seconds": 1.0
+  }
+ ]
+}

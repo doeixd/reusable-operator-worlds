@@ -12096,3 +12096,24 @@ programs here) holds, by a different route than the one it gave. SY2 (matched-co
 incumbent would solve everything. Per `SYNTHESIS_CYCLE_PROPOSAL.md`, synthesis moves to spaces where gradient routing
 is not available or not exact (control flow), which is a new design and needs its own Tier 0 necessity census.
 Limits: one library family, 8 programs per (world, depth), depth <= 10.
+
+# CF0 loop-structure census (Tier 0, 2026-10-26): `SEARCH_BINDS` as registered; the binding is the searcher's
+
+Plan `CF0_LOOP_STRUCTURE_CENSUS_PLAN.md`; `reports/cf0_loop_structure_census.json`. Teacher operators, worlds 76-78.
+
+| positions (a + 1 + b) | 1 | 3 | 5 | 7 | 9 |
+|---|---|---|---|---|---|
+| loop: structure found (of 24, support 128) | 24 | 24 | 19 | 1 | 0 |
+| loop: median skeleton evaluations | 6 | 64 | 1,373 | 3,000 (cap) | 3,000 (cap) |
+| straight-line control, same searcher (post hoc) | - | - | 2 | 0 | 0 |
+| enumeration reference | 24 | 24 | 24 (~5 s) | not run | not run |
+
+Rule: the largest size succeeds 0/24 < 0.6 -> **`SEARCH_BINDS`**. The label stands as registered.
+
+**Reading.** The registered incumbent was too weak to answer the question. The post-hoc straight-line control, which
+has no control flow at all, fails at least as badly with the same random-start coordinate search, so CF0 shows that
+random-start local search cannot find 7-9-step compositions, not that loops make structure hard. The plan's write-time
+check missed this: it never asked whether the incumbent was the strongest cheap one (SY1, hours earlier, had shown
+that the straight-line incumbent is a gradient descent followed by a polish, not a polish from a random start). With
+the structure right, the remaining error is the predicate's sample cost (query NMSE ~0.1 at 128 examples), as B0b
+found. Next: CF1 with the fair incumbent.
