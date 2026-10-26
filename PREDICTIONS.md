@@ -12081,3 +12081,18 @@ not their hash. They are committed unchanged with the result. The rule is a dete
 
 **What this does not show.** Same 8 programs per (world, depth) as E5.1; one library family; the oracle route is a
 known route, not the optimum, so "search failure" is a lower bound on missed better routes.
+
+# SY1 residual sizing (EXPLORATORY, post hoc, 2026-10-26) and the status of the synthesis cycle on straight-line programs
+
+`reports/sy1_residual_sizing.json`. Not registered; reported as a sizing. Two-position polish solves all 19 tasks left
+after single-position polish (18 at exactly the oracle route's support fit), ~6 s per task.
+
+**Reading (Claude's judgement, not a rule outcome).** On this testbed, route optimization + single-position polish +
+two-position polish solves 96/96 depth-7-10 tasks within the 0.15 gap at a total cost comparable to OPT2000 alone. So
+SY0's `OPPORTUNITY` was real for the single relaxed descent E5.1 measured, and it disappears against a cheap discrete
+repair: the failures were coupled errors in 1-2 positions (the same shape as O7's stale routes), not a search that
+fails to scale. The proposal's original expectation (no opportunity for a library-growth cycle on straight-line
+programs here) holds, by a different route than the one it gave. SY2 (matched-compute macros) is not run: its
+incumbent would solve everything. Per `SYNTHESIS_CYCLE_PROPOSAL.md`, synthesis moves to spaces where gradient routing
+is not available or not exact (control flow), which is a new design and needs its own Tier 0 necessity census.
+Limits: one library family, 8 programs per (world, depth), depth <= 10.

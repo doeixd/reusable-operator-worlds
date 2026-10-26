@@ -1,0 +1,402 @@
+{
+ "status": "EXPLORATORY, post hoc, no verdict",
+ "summary": {
+  "residual_tasks": 19,
+  "pair_polish_solved": 19,
+  "reaches_oracle_support": 18,
+  "median_evaluations": 9165
+ },
+ "tasks": [
+  {
+   "key": "w0_d4_4",
+   "depth": 4,
+   "support_mse": 0.001977291889488697,
+   "oracle_support_mse": 0.001977291889488697,
+   "reaches_oracle_support": true,
+   "query_gap": 0.0,
+   "solved": true,
+   "evaluations": 1760,
+   "route": [
+    9,
+    11,
+    11,
+    3
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w0_d5_0",
+   "depth": 5,
+   "support_mse": 0.001025129691697657,
+   "oracle_support_mse": 0.001025129691697657,
+   "reaches_oracle_support": true,
+   "query_gap": 0.0,
+   "solved": true,
+   "evaluations": 2915,
+   "route": [
+    11,
+    9,
+    11,
+    4,
+    4
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w0_d6_3",
+   "depth": 6,
+   "support_mse": 0.0007341392920352519,
+   "oracle_support_mse": 0.0007341392920352519,
+   "reaches_oracle_support": true,
+   "query_gap": 0.0,
+   "solved": true,
+   "evaluations": 6571,
+   "route": [
+    11,
+    4,
+    2,
+    2,
+    7,
+    2
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w0_d7_5",
+   "depth": 7,
+   "support_mse": 0.0010376456193625927,
+   "oracle_support_mse": 0.0010376456193625927,
+   "reaches_oracle_support": true,
+   "query_gap": 0.0,
+   "solved": true,
+   "evaluations": 6085,
+   "route": [
+    4,
+    4,
+    9,
+    7,
+    2,
+    4,
+    11
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w0_d8_0",
+   "depth": 8,
+   "support_mse": 0.0006272915052250028,
+   "oracle_support_mse": 0.0013158003566786647,
+   "reaches_oracle_support": true,
+   "query_gap": -0.7241813338845304,
+   "solved": true,
+   "evaluations": 12191,
+   "route": [
+    4,
+    8,
+    11,
+    11,
+    4,
+    7,
+    4,
+    2
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w0_d8_3",
+   "depth": 8,
+   "support_mse": 0.0018423893488943577,
+   "oracle_support_mse": 0.0018731571035459638,
+   "reaches_oracle_support": true,
+   "query_gap": -0.012242008924209458,
+   "solved": true,
+   "evaluations": 12280,
+   "route": [
+    3,
+    2,
+    7,
+    2,
+    11,
+    9,
+    2,
+    2
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w0_d9_0",
+   "depth": 9,
+   "support_mse": 0.001208613975904882,
+   "oracle_support_mse": 0.001208613975904882,
+   "reaches_oracle_support": true,
+   "query_gap": 0.0,
+   "solved": true,
+   "evaluations": 15646,
+   "route": [
+    11,
+    3,
+    2,
+    4,
+    9,
+    4,
+    2,
+    11,
+    2
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w0_d9_5",
+   "depth": 9,
+   "support_mse": 0.0012809960171580315,
+   "oracle_support_mse": 0.001334819826297462,
+   "reaches_oracle_support": true,
+   "query_gap": 0.005035941217288453,
+   "solved": true,
+   "evaluations": 10398,
+   "route": [
+    11,
+    4,
+    2,
+    6,
+    11,
+    2,
+    7,
+    11,
+    2
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w1_d6_6",
+   "depth": 6,
+   "support_mse": 0.0008267381926998496,
+   "oracle_support_mse": 0.0008314070291817188,
+   "reaches_oracle_support": true,
+   "query_gap": 0.01468035945459345,
+   "solved": true,
+   "evaluations": 4358,
+   "route": [
+    7,
+    0,
+    8,
+    11,
+    1,
+    8
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w1_d6_7",
+   "depth": 6,
+   "support_mse": 0.0005194436525925994,
+   "oracle_support_mse": 0.0005194436525925994,
+   "reaches_oracle_support": true,
+   "query_gap": 0.0,
+   "solved": true,
+   "evaluations": 4356,
+   "route": [
+    7,
+    11,
+    8,
+    7,
+    8,
+    5
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w1_d7_3",
+   "depth": 7,
+   "support_mse": 0.00040646715206094086,
+   "oracle_support_mse": 0.00040646715206094086,
+   "reaches_oracle_support": true,
+   "query_gap": 0.0,
+   "solved": true,
+   "evaluations": 9165,
+   "route": [
+    1,
+    1,
+    7,
+    8,
+    1,
+    7,
+    11
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w1_d8_1",
+   "depth": 8,
+   "support_mse": 0.0011465639108791947,
+   "oracle_support_mse": 0.0012081211898475885,
+   "reaches_oracle_support": true,
+   "query_gap": -0.10010699734064143,
+   "solved": true,
+   "evaluations": 8098,
+   "route": [
+    5,
+    11,
+    1,
+    0,
+    8,
+    3,
+    8,
+    5
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w1_d8_2",
+   "depth": 8,
+   "support_mse": 0.0008458861848339438,
+   "oracle_support_mse": 0.0008458861848339438,
+   "reaches_oracle_support": true,
+   "query_gap": 0.0,
+   "solved": true,
+   "evaluations": 8099,
+   "route": [
+    8,
+    7,
+    0,
+    1,
+    5,
+    1,
+    7,
+    8
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w1_d8_3",
+   "depth": 8,
+   "support_mse": 0.000400670018279925,
+   "oracle_support_mse": 0.000400670018279925,
+   "reaches_oracle_support": true,
+   "query_gap": 0.0,
+   "solved": true,
+   "evaluations": 8097,
+   "route": [
+    8,
+    8,
+    1,
+    7,
+    11,
+    5,
+    1,
+    11
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w1_d8_7",
+   "depth": 8,
+   "support_mse": 0.0009990327525883913,
+   "oracle_support_mse": 0.0010212835622951388,
+   "reaches_oracle_support": true,
+   "query_gap": -0.04757210706021375,
+   "solved": true,
+   "evaluations": 12192,
+   "route": [
+    11,
+    7,
+    5,
+    1,
+    5,
+    11,
+    0,
+    7
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w1_d9_1",
+   "depth": 9,
+   "support_mse": 0.0005918169626966119,
+   "oracle_support_mse": 0.0005873420159332454,
+   "reaches_oracle_support": false,
+   "query_gap": 0.004389840005853074,
+   "solved": true,
+   "evaluations": 15647,
+   "route": [
+    1,
+    11,
+    11,
+    8,
+    7,
+    8,
+    11,
+    11,
+    11
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w1_d9_3",
+   "depth": 9,
+   "support_mse": 0.0005564364837482572,
+   "oracle_support_mse": 0.0005564364837482572,
+   "reaches_oracle_support": true,
+   "query_gap": 0.0,
+   "solved": true,
+   "evaluations": 15745,
+   "route": [
+    1,
+    7,
+    8,
+    11,
+    8,
+    7,
+    5,
+    7,
+    11
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w1_d9_4",
+   "depth": 9,
+   "support_mse": 0.0009014409151859581,
+   "oracle_support_mse": 0.0011145311873406172,
+   "reaches_oracle_support": true,
+   "query_gap": -0.10877120252295036,
+   "solved": true,
+   "evaluations": 10397,
+   "route": [
+    5,
+    3,
+    0,
+    8,
+    8,
+    11,
+    5,
+    1,
+    7
+   ],
+   "oracle_route": null
+  },
+  {
+   "key": "w1_d10_3",
+   "depth": 10,
+   "support_mse": 0.0006716330535709858,
+   "oracle_support_mse": 0.0007335390546359122,
+   "reaches_oracle_support": true,
+   "query_gap": -0.15746882213602387,
+   "solved": true,
+   "evaluations": 26078,
+   "route": [
+    7,
+    5,
+    1,
+    2,
+    5,
+    1,
+    11,
+    7,
+    1,
+    8
+   ],
+   "oracle_route": null
+  }
+ ]
+}

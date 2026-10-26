@@ -9662,3 +9662,11 @@ Registration order (disclosed): the plan, module and tests were written at 11:52
 libraries finished (11:55) and before the run (11:55:44); they were not committed first, because the lifetimes stamp
 HEAD at completion and no commit is allowed mid-run, and the working-log entry (#236) recorded that they existed but
 not their hash. They are committed unchanged with the result. The rule is a deterministic classification fixed in code.
+
+# SY1 residual sizing (EXPLORATORY, post hoc, 2026-10-26): two-position polish solves 19/19
+
+`row.experiments.explore_sy1_residual`, `reports/sy1_residual_sizing.json`, 115 s. The 19 tasks (all depths; 14 at
+depths 7-10) still unsolved after SY1's single-position polish were polished further with joint two-position moves.
+All 19 are solved (18 reach exactly the oracle route's support MSE; several beat the oracle route), at 1,760-26,078
+hard-route evaluations (median 9,165), about 6 s per task against OPT2000's 16-26 s. Not preregistered and decides
+nothing by rule; it closes the sizing question SY1 left open. Next: no SY2 on straight-line programs (see PREDICTIONS).

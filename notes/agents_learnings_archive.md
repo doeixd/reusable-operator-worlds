@@ -1885,3 +1885,11 @@ Append new full-length entries here and a condensed rule in `AGENTS.md`.
   while others beat the oracle route by ~2x; the mean averaged a failure mode with a success mode. Before building an
   argument on an aggregate, look at the per-unit distribution it summarizes, especially when the aggregate can go
   below the reference (here, beating the oracle is possible, so a "parity" mean can contain many failures).
+
+- BEFORE CALLING A RELAXED SEARCH A FAILURE, POLISH ITS ANSWER DISCRETELY (SY1, 2026-10-26;
+  `reports/sy1_route_diagnosis.json`, `reports/sy1_residual_sizing.json`). Route optimization (one softmax descent from
+  zero logits) left ~40% of depth-7-10 tasks worse than a known route on its own support objective. A single-position
+  hard-route polish repaired two thirds of them in ~200 evaluations, and a two-position polish repaired the rest in ~6 s
+  per task, cheaper than the descent itself. The errors were coupled mistakes in one or two positions, the same shape
+  as O7's stale routes. A relaxation's argmax is a starting point, not a search result: report the descent plus a
+  cheap discrete repair as the incumbent before building anything to beat it.

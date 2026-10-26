@@ -483,6 +483,9 @@ here. Tags in brackets name the episode to search for.
    reading, not established).
 9. **Check learnability under the lifetime's own optimizer, and size with the
    full confirmed pipeline** [G1T, G1R].
+9a. **A relaxation's argmax is a starting point, not a search result**: a cheap
+    1-2-position discrete polish repaired every route-optimization failure to
+    depth 10; use descent + polish as the incumbent [SY1].
 10. **A nested objective has two non-vacuity requirements**: the inner learner
     learns and the outer gradient depends on it (k=0 vs k=many must differ).
     Nested-learning audit: does the intervention change parameters, inner loss

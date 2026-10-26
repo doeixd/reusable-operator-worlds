@@ -5336,3 +5336,4 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
 
 - 2026-10-17 G1R: sizing the tanh learner without re-routing confounded fit with stale routes; re-routing rescued 54/54 collapsed tasks and reversed the chosen wake budget. Size with the full confirmed pipeline. Full entry: AGENTS.md.
 - SY0 (2026-10-26): world-level geometric means can hide a bimodal per-task outcome; E5.1 parity hid ~40% hard tasks at depth 7-10 (reports/sy0_search_budget_census.json). Inspect per-unit distributions before arguing from aggregates.
+- SY1 (2026-10-26): a relaxed route descent's argmax is a starting point; 1-2-position discrete polish repaired every depth-7-10 failure (~6 s/task). Use descent+polish as the incumbent (reports/sy1_residual_sizing.json).
