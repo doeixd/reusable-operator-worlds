@@ -229,6 +229,8 @@ implementation for the next plan boundary.
   an index only; PREDICTIONS/PROGRESS/reports win on any disagreement.
 - `ONLINE_FORMATION_SYNTHESIS.md` — synthesis of the anchor-supply and online-formation
   line (N1-O2G, 2026-09-22 to 26): what is established, indicated and open.
+- `notes/agents_learnings_archive.md` — full text of every `AGENTS.md` learning
+  (verbatim to 2026-10-26); `AGENTS.md` keeps condensed rules that cite it.
 - `PROGRESS.md` — running lab record; append an entry for every completed,
   verified step and commit it with the work.
 - `PREDICTIONS.md` — append-only hypothesis, verdict, withdrawal, and correction

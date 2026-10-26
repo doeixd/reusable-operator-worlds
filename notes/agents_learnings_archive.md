@@ -1,0 +1,1878 @@
+# AGENTS.md implementation learnings: full archive
+
+Verbatim copy of the "Implementation learnings" and "Standing scientific doubts"
+sections of `AGENTS.md` as of commit a504460 (2026-10-26), moved here when
+`AGENTS.md` was compressed. `AGENTS.md` now carries condensed rules that cite
+this file; the numbers, history and full reasoning behind each rule are here.
+Append new full-length entries here and a condensed rule in `AGENTS.md`.
+
+# Implementation learnings
+
+- Python's built-in `hash()` is process-dependent and must not derive experiment
+  seeds. ROW uses NumPy `SeedSequence` with explicit integer components.
+- Primitive `U` and `V` matrices are independently spectral-normalized so random
+  teachers have comparable operation scale.
+- Training and evaluation examples are generated once per world from independent
+  deterministic random streams; model code must consume those fixed arrays.
+- Opaque task IDs are random tokens and are deliberately decoupled from program
+  order and primitive IDs.
+- Generate opaque IDs from fixed-length random bytes with an explicit uniqueness
+  check. NumPy's `choice(..., replace=False)` cannot index the full `uint64`
+  range on platforms whose sampling path uses signed indices.
+- PyTorch 2.13 provides a native Python 3.14 wheel in this environment and is the
+  autograd/runtime dependency for oracle and learned reusable models. The NumPy
+  teacher remains the deterministic data-generation source of truth.
+- World seed 0 produced tightly matched task output variance (approximately
+  0.213–0.228) and no output saturation. The initial scratch optimizer produced
+  a flat final-error trend but did not reach NMSE 0.05 in 128 examples; tune the
+  scratch optimization control before using that threshold as a validity gate.
+- The tuned NumPy scratch control uses learning rate 0.001 and four minibatch
+  updates per arriving example. Across world seeds 0–2, final-NMSE/task-index
+  correlations were -0.060, 0.002, and -0.039; every task reached NMSE 0.1 at
+  support 64. NMSE 0.05 remained fully censored, so scratch validity currently
+  rests on the flat 0.1 curve and flat continuous final error, not that stricter
+  threshold.
+- The oracle's random initialization is already below NMSE 0.1, so that threshold
+  cannot demonstrate oracle transfer. Use NMSE 0.05, NMSE 0.02, zero-shot NMSE,
+  and prequential cost for the positive-control claim.
+- Oracle seed 0 reduced first-quarter to last-quarter zero-shot NMSE from 0.0345
+  to 0.00192. Mean examples to NMSE 0.05 fell from 18 to 0, and examples to 0.02
+  fell from 74.5 to 0. The unseen-composition zero-shot NMSE was 0.00215.
+- The oracle's learned slots recovered the teacher primitives with a one-to-one
+  mean normalized functional distance of 0.000539. Because the true route fixes
+  slot identity, exact index alignment is expected; functional distance is the
+  substantive operator-quality check.
+- Reverse task order and two additional world seeds reproduced zero-example late
+  performance at NMSE 0.05 and 0.02, so the oracle effect is not specific to the
+  seed-0 curriculum.
+- Dense baselines must mirror the teacher's three state-update/tanh stages. A
+  conventional hidden MLP with only one output tanh begins at a severe geometric
+  disadvantage. The fair dense architecture uses three task-conditioned
+  state-space residual blocks with zero-initialized deltas.
+- For `d=16`, a three-block Dense-P with hidden width 11 has 2,193 shared scalars,
+  closely matching the eight-slot continuous basis's 2,112. Dense-C width 32
+  approximately matches its matrix-multiply count and has 6,288 shared scalars.
+- Continuous task-code LR 0.005 left routes diffuse (mean maximum coefficient
+  0.216) and underperformed Dense-P. Raising only task-code LR to 0.05 increased
+  the mean maximum coefficient to 0.466, improved one-to-one primitive distance
+  from 0.0151 to 0.00349, and reversed the seed-0 comparison. Route inference is
+  therefore an optimization bottleneck, not a cosmetic hyperparameter.
+- In the seed-0 pilot, tuned continuous prequential NLL was -165,119 versus
+  -155,993 for Dense-P, -161,984 for Dense-C, and -163,775 for width-128 dense.
+  Tuned continuous novel-composition NMSE improved from 0.0453 to 0.00803 using
+  32 code-only examples. Treat this as exploratory until paired-world replication.
+- Tuned continuous beat Dense-P on all three exploratory worlds. Paired
+  dense-minus-continuous prequential NLL differences were 9,126, 4,940, and
+  5,746 nats (mean 6,604; three-world bootstrap interval 4,940–9,126). This is a
+  replicated pilot, not a confirmatory estimate.
+- Continuous also improved 32-shot frozen-library novel NMSE over Dense-P by
+  0.0302, 0.0151, and 0.0114 across the three worlds.
+- The simple 8-bit retained-code proxy is 29,184 bits for continuous versus
+  33,928 for Dense-P. Actual symmetric per-tensor quantized evaluation changed
+  mean final NMSE by at most about 2.2e-5 in the pilot artifacts.
+- Parameter matching does not imply compute matching: the continuous basis uses
+  an estimated 6,528 matrix/mixture multiply-adds per prediction versus 2,112 for
+  Dense-P. Dense-C replication is required before making a compute-controlled
+  claim.
+- Dense-C replication is complete. Tuned continuous beat Dense-C on all three
+  worlds by 3,135, 675, and 1,176 prequential nats (mean 1,662) at approximately
+  matched multiply-add counts (6,528 continuous versus 6,144 Dense-C).
+- Dense-C retains 66,688 8-bit proxy bits versus continuous's 29,184 because
+  compute matching requires width 32 and 6,288 shared dense scalars. Continuous
+  also improved 32-shot novel NMSE over Dense-C by 0.0210, 0.00944, and 0.00558.
+- The seed-0 hard discrete library used 11/12 slots without collapse, recovered
+  92.2% of teacher routes exactly (96.4% per position), and matched primitives
+  at mean normalized distance 0.00229. Its weak prequential NLL (-134,784) is
+  therefore a route-inference cost, not a failure to learn the operator library.
+- Hard discrete zero-shot NMSE worsened from 0.103 in the first quarter to 0.160
+  in the last because an unseen task's tie-broken default route becomes less
+  generic as operators specialize. Nevertheless, examples to NMSE 0.02 fell
+  from 128.9 to 25.3 and 32-shot novel hard-route adaptation reached 0.00413.
+- Hardened discrete retention stores exact categorical route indices, not
+  quantized training logits. Quantize only operator weights and reconstruct
+  routes losslessly when validating the 26,112-bit proxy. This yields mean NMSE
+  degradation 1.10e-5; quantizing logits directly is the wrong artifact model.
+- Hardened discrete inference is only about 768 multiply-adds, versus 6,528 for
+  the continuous mixture, exposing a strong storage/inference versus online
+  learning-cost tradeoff.
+- `rho` is implemented through task-specific correlated teacher parameters,
+  followed by spectral renormalization of `U` and `V`. At `rho=0`, measured
+  pairwise residual-function correlation is approximately zero; at `rho=1`, it
+  is exactly one. Novel tasks receive independently derived correlated libraries.
+- On development world 0, the causal endpoint reverses: Continuous beats Dense-C
+  by 3,135 Gaussian-log-loss units at `rho=1`, while Dense-C beats Continuous by
+  6,714 at `rho=0`. This is the first direct evidence that the advantage depends
+  on latent computational recurrence.
+- Checkpoint probes must operate on deep-copied models so code-only novel-task
+  adaptation cannot alter lifetime training. Use four fixed novel programs at
+  8, 16, 32, and 64 tasks.
+- On exact-reuse world 0, Continuous mean 32-shot novel NMSE improved from 0.0298
+  after 8 tasks to 0.00467 after 64; Dense-C improved from 0.0367 to 0.0159.
+  This directly supports progressive learning-to-learn, beyond total loss alone.
+- The current learnable-alpha checkpoint protocol replicates on all development
+  worlds 0–9 using four fixed novel compositions per checkpoint. Mean Continuous
+  versus Dense-C 32-shot NMSE is 0.02282/0.02300 after 8 tasks,
+  0.01401/0.01652 after 16, 0.00687/0.01098 after 32, and 0.00343/0.00645 after
+  64. Continuous wins 4/10, 8/10, 10/10, and 10/10 paired worlds, respectively.
+- Both models improve from task 8 to 64 in every development world, but
+  Continuous's mean per-world gain is 6.70x (range 5.15–9.28) versus Dense-C's
+  3.64x (range 2.97–4.90). The increasing paired advantage supports a stronger
+  learning-to-learn interpretation rather than a static model-quality offset.
+- Call the density-based metric cumulative prequential Gaussian log loss. A
+  fixed target precision of 1/256 adds the common density-to-mass term for a
+  defensible quantized-target coding interpretation without changing model
+  differences.
+- Development worlds are 0–9. Confirmatory worlds 100–129 must remain untouched
+  until symmetric tuning and all analysis rules are frozen in `EXPERIMENT_PLAN.md`.
+- Symmetric stage-one tuning materially improved both models. Dense-C's best
+  development-0–2 setting is global/task LR 0.001/0.05 with mean Gaussian log
+  loss -168,768; its prior 0.001/0.005 setting scored -164,842. Continuous's
+  best is 0.003/0.05 at -171,866; its prior 0.001/0.05 setting scored -166,505.
+- After equal tuning, Continuous leads Dense-C by 3,098 mean Gaussian-log-loss
+  units on worlds 0–2 and has better mean novel 32-shot NMSE (0.00237 versus
+  0.00486). This supersedes both the untuned Dense-C comparison and the temporary
+  observation that tuned Dense-C beat the old Continuous configuration.
+- Stage-two finalists are Continuous 0.003/0.05 and 0.001/0.05, and Dense-C
+  0.001/0.05 and 0.003/0.05, evaluated on development worlds 3–9.
+- Corrected-architecture stage-two revalidation freezes Continuous global/task
+  LR at 0.003/0.05 and Dense-C at 0.001/0.05. On worlds 3–9, Continuous's two
+  candidates average -171,899 and -166,937 Gaussian log loss; Dense-C's average
+  -168,112 and -165,729, respectively. The winners match the stage-one choices.
+- The canonical `configs/v1.yaml` must freeze Dense-C at width 32. Stage-two and
+  earlier compute controls explicitly overrode the former width-128 YAML value,
+  so their artifacts are correct, but leaving 128 in the config would make a
+  nominally frozen clean rerun reproduce the wrong baseline.
+- With those frozen settings at exact reuse, Continuous beats Dense-C on all
+  seven stage-two worlds by 2,554–5,054 cumulative Gaussian-log-loss units
+  (mean 3,787) and improves mean 32-shot novel NMSE from 0.00731 to 0.00368.
+  These remain development results, not confirmation.
+- Learner operators no longer read teacher `alpha`. They initialize an independent
+  learnable scale at 0.2. On world 0, decoupled Continuous scores -170,967 versus
+  tuned Dense-C -166,521, so the earlier win is not caused by leaking alpha 0.35.
+- Teacher-rank mismatch (teacher 16, learner 8) preserves a 3,296 log-loss
+  advantage and better novel adaptation for Continuous. GELU learner mismatch
+  preserves only a 441 advantage, showing that family alignment materially helps
+  but does not wholly explain the seed-0 result.
+- Adding a fixed identity candidate does not help Continuous on seed 0
+  (-170,404 versus -170,967 without identity). The inability to skip a step is
+  therefore not the source of the primary gain in this control.
+- Per-task temperature re-annealing improves hard discrete log loss from -137,321
+  to -146,146 and novel zero-shot NMSE from 0.150 to 0.0436 under the leak-free
+  setup. Global annealing exaggerated route-inference difficulty, but per-task
+  discrete still substantially trails Continuous.
+- The leak-free oracle re-gate passes: early/late zero-shot NMSE is 0.0288/0.00159,
+  early/late examples to NMSE 0.02 is 72.8/0, unseen-composition zero-shot NMSE
+  is 0.00175, and primitive matching distance is 0.000484.
+- Sparse world-0 `rho` controls show the crossover is above 0.75. At rho 0.5
+  (measured residual correlation 0.064), Dense-C beats Continuous by 2,159 total
+  Gaussian-log-loss units; at rho 0.75 (correlation 0.317), it wins by 1,615.
+  Continuous already has slightly better 32-shot novel adaptation at both points.
+- The complete leak-free seed-0 curve reverses between `rho=0.75` and `rho=0.9`.
+  Dense-C-minus-Continuous cumulative-loss differences are -2,390, -2,280,
+  -2,159, -1,615, +2,371, and +4,446 at configured rho 0, 0.25, 0.5,
+  0.75, 0.9, and 1.0. Linear interpolation gives a descriptive crossing near
+  configured rho 0.811, corresponding to measured residual correlation 0.454.
+  This is a one-world development diagnostic, not a population estimate.
+- Measured functional recurrence is strongly nonlinear in configured `rho` after
+  spectral renormalization: the six seed-0 correlations are approximately
+  -0.001, 0.003, 0.064, 0.317, 0.654, and 1.0. Plot and model effects against
+  both the intervention and this measured explanatory variable.
+- The full curve replicates on development worlds 1 and 2. All three worlds
+  favor Dense-C at every `rho<=0.75` and Continuous at both `rho=0.9` and
+  `rho=1`. Interpolated per-world crossings are 0.811, 0.852, and 0.851; the
+  three-world mean curve crosses near configured rho 0.833, corresponding to
+  mean measured residual correlation 0.488. Treat interpolation as descriptive.
+- Expansion through development world 5 preserves the reversal without an
+  exception: Continuous lifetime-loss wins are 0/6 worlds at rho 0, 0.25, 0.5,
+  and 0.75, then 6/6 at rho 0.9 and 1.0. The six-world mean effects are -2,197,
+  -2,308, -2,332, -1,427, +1,389, and +3,357; the mean crossing is rho 0.826
+  (measured correlation 0.479), with per-world crossings spanning 0.811–0.852.
+- The completed development sweep on worlds 0–9 is unanimous at every tested
+  rho. Continuous lifetime-loss wins are 0/10 at rho 0, 0.25, 0.5, and 0.75,
+  then 10/10 at rho 0.9 and 1.0. Mean Dense-minus-Continuous effects are -2,135,
+  -2,165, -2,227, -1,337, +1,288, and +3,698. The descriptive mean crossing is
+  rho 0.8264 at measured recurrence 0.4836; per-world rho crossings span
+  0.8108–0.8590.
+- The seed-0 suggestion that Continuous improves 32-shot novel transfer before
+  it wins lifetime loss does not replicate. At rho 0.25, 0.5, and 0.75,
+  Continuous wins novel transfer on only one of three worlds and has worse mean
+  novel NMSE differences at all three points. Preserve this as a failed secondary
+  hypothesis rather than a three-regime conclusion.
+- Across worlds 0–5, Continuous wins 32-shot novel transfer on only 1–2 of six
+  worlds at rho 0–0.9 and has worse mean transfer even at rho 0.9, despite its
+  6/6 lifetime-loss wins there. It wins novel transfer 6/6 only at exact reuse.
+  The current evidence supports distinct lifetime-cost and transfer behavior,
+  but not the proposed ordering in which transfer improves first.
+- On the full development set, Continuous novel-transfer wins are 2/10, 4/10,
+  5/10, 2/10, 4/10, and 10/10 across the six rho values. Mean transfer is
+  essentially tied at rho 0.5, worse for Continuous at rho 0.75 and 0.9, and
+  reliably better only at rho 1.0. Do not claim a separate earlier transfer
+  boundary from V1 evidence.
+- Report total, per-online-example, and per-target-scalar Gaussian log loss.
+  Compute accounting distinguishes training-forward all-slot evaluation from
+  hardened inference; it excludes backward and optimizer operations.
+- Learned alpha scalars use a no-weight-decay optimizer group. `forward_tasks`
+  groups samples by task ID before forwarding, preserving gradients and enabling
+  useful batching when replay contains repeated tasks.
+- Do not run multiple full-lifetime PyTorch/SciPy experiments concurrently on
+  this Windows host. Four parallel stage-two tuning processes exhausted the
+  paging file and crashed the harness; run one lifetime process at a time and
+  use artifact-level resume to recover completed worlds.
+- Every new experiment artifact writes both the complete resolved `config.yaml`
+  and `fingerprint.json`. The fingerprint hashes the resolved config and exposes
+  seeds, rho, model family/architecture, learning rates, replay, alpha,
+  activation, program depth, and git commit. Resume paths must validate the full
+  resolved config, not merely summary model/rho fields; legacy artifacts may be
+  backfilled only after that validation passes.
+- The generic hypernetwork control uses a 24-scalar task code arranged as three
+  eight-dimensional step codes. A shared two-layer generator produces low-rank
+  operator deltas around one learned base operator, preserving the three-stage
+  residual prior without an explicit reusable slot library. It has 2,705 shared
+  scalars and 7,296 counted forward multiply-adds at `d=16`, close to
+  Continuous's 2,120 scalars and 6,528 multiply-adds.
+- Zero-initialized hypernetwork task codes must generate the shared base exactly
+  while still receiving nonzero gradients. Use a bias-free code projection and
+  small nonzero output weights with a zero output bias; zeroing the output
+  weights would strand every new task code at initialization.
+- The first untuned world-0 hypernetwork smoke run at global/task LR
+  `0.001/0.05` scored -165,031 cumulative Gaussian log loss, median final NMSE
+  0.00472, and novel 32-shot NMSE 0.0051. Treat this only as an implementation
+  check until the control receives symmetric development tuning.
+- Hypernetwork stage-one tuning on development worlds 0–2 selected global/task
+  LR `0.003/0.05` with mean Gaussian log loss -170,246; `0.001/0.05` was second
+  at -167,821. The selected hypernetwork beat Dense-C in all three paired worlds
+  by a mean 1,478 log-loss units but lost to Continuous in all three by a mean
+  2,014. Its mean novel 32-shot NMSE was 0.00589, worse than current Continuous
+  (0.00238) and Dense-C (0.00486) on the same worlds.
+- Dense-C with its task embedding reduced from 32 to 24 dimensions has 5,520
+  shared scalars and the same 1,536 retained task scalars as Continuous and the
+  hypernetwork. On world 0 it scored -166,567 versus -166,521 for Dense-32, a
+  negligible 46-unit difference; replicate before closing this sensitivity.
+- Hypernetwork stage two on worlds 3–9 confirms global/task LR `0.003/0.05`;
+  its mean log loss is -170,038 versus -168,088 for `0.001/0.05`. The selected
+  LR is frozen in `configs/v1.yaml`.
+- Across all ten development worlds, Continuous beats the tuned hypernetwork on
+  both lifetime loss and novel 32-shot NMSE 10/10, by mean advantages 1,907
+  log-loss units and 0.00272 NMSE. The hypernetwork beats Dense-C on lifetime
+  loss 10/10 by mean 1,791, but on novel adaptation only 6/10 by mean 0.000568.
+  A generic continuous operator manifold is useful, but does not explain away
+  the explicit slot basis's exact-reuse advantage.
+- Dense-24 versus Dense-32 is a null sensitivity across worlds 0–9: Dense-24
+  wins lifetime loss 5/10 and is worse by 73 units on average, while winning
+  novel 32-shot NMSE 7/10 by only 0.000119 on average. The primary comparison is
+  not driven by Continuous having fewer retained task scalars.
+- Keep `model.pt` tensor-only. Summaries already live in `summary.json`, and
+  embedding NumPy-valued summaries in a torch checkpoint breaks PyTorch's
+  restricted `weights_only=True` loader. The quantizer has a provenance-checked
+  fallback solely for legacy local artifacts.
+- Current hypernetwork retention is 33,928 proxy bits (21,640 shared plus 12,288
+  task-state bits) at 7,296 inference multiply-adds. The world-0 int8 smoke
+  changed mean final NMSE by only 2.19e-6; replicate across development worlds
+  before treating this as the refreshed retention result.
+- Refreshed int8 retention on all ten development worlds gives 29,248 bits for
+  Continuous, 33,928 for Hypernetwork, 56,448 for Dense-24, and 66,688 for
+  Dense-C. Mean quantized-minus-float final NMSE is 1.15e-6, 3.23e-6, 0.64e-6,
+  and 2.32e-6 respectively; no model's maximum observed task increase exceeds
+  1.38e-4.
+- The current per-task-annealed Discrete world-0 artifact retains 26,208 bits
+  after adding its twelve learnable alpha scalars to the older proxy. It still
+  uses only 768 hardened inference multiply-adds, with mean int8 degradation
+  4.77e-6.
+- Exploratory reverse-order and replay robustness on worlds 0–2 preserves the
+  Continuous lifetime-loss advantage 3/3 in every condition. Mean Dense-minus-
+  Continuous effects are 3,175 reverse, 3,165 with no replay, 3,492 at canonical
+  1:1 replay, and 3,082 at 1:4 replay. Strong replay does not erase the effect;
+  replicate through world 9 before closing the gate item.
+- Ten-world robustness is complete. Continuous wins lifetime loss 10/10 with no
+  replay, canonical replay, 1:4 replay, and reverse order. Mean advantages and
+  bootstrap intervals are 3,129 [2,511, 3,743], 3,698 [3,233, 4,177], 3,350
+  [2,959, 3,766], and 3,456 [3,145, 3,791] respectively.
+- Reverse order has no consistent absolute penalty for either architecture:
+  mean reverse-minus-forward loss is -57 for Continuous and -299 for Dense-C,
+  with both bootstrap intervals spanning zero. The paired model advantage is
+  therefore robust without implying one task order is intrinsically harder.
+- Novel 32-shot transfer is not robust without replay: Continuous wins 6/10 and
+  the mean advantage interval spans zero. It wins 10/10 under canonical replay,
+  strong replay, and reverse order. Distinguish the replay-sensitive retained
+  transfer endpoint from the replay-robust cumulative lifetime-cost result.
+- The second initialization (Continuous seed 4001, Dense-C seed 3001) reproduces
+  exact-reuse lifetime loss and novel transfer 10/10. Its mean advantages are
+  3,081 log-loss units and 0.00269 NMSE, versus 3,698 and 0.00328 for the
+  canonical seeds.
+- Average initialization effects within each world before bootstrapping. The
+  two-initialization world-level mean advantage is 3,390 with interval
+  [2,962, 3,803]; the novel advantage is 0.00299 [0.00200, 0.00426]. Do not
+  count 20 world-initialization pairs as 20 independent worlds.
+- Same-architecture fresh-task baselines establish explicit forward transfer.
+  Mean per-task fresh-minus-lifetime Gaussian log loss is +366.8 for Continuous
+  and +211.6 for Dense-C; both are positive in all ten world means, with 97.5%
+  and 93.75% positive individual tasks.
+- Forward transfer increases with task index in every world for both models.
+  Mean per-task slopes are +4.35 Continuous and +3.77 Dense-C log-loss units per
+  task index. Continuous's extra mean transfer is positive 10/10 worlds at
+  +155.2 [145.5, 165.3].
+- Route similarity is a strong post-hoc explanatory variable: Continuous mean
+  transfer rises from 26 for no matching route positions to 268 at one of three
+  and 402 at two of three; Dense-C rises from -34 to 115 and 242. Teacher routes
+  are used only for analysis, never learner training or prediction.
+- Exact-reuse checkpoint matching shows progressive operator recovery in every
+  development world. From 8 to 64 tasks, mean one-to-one primitive functional
+  distance falls from 0.00786 to 0.00211 for Continuous and from 0.00745 to
+  0.00131 for per-task-annealed Discrete; both improve 10/10 worlds.
+- Matched slots also generalize to programs whose task codes have not yet been
+  trained. Mean future-program teacher-route NMSE falls from 0.0300 to 0.0126
+  for Continuous and from 0.0280 to 0.0106 for Discrete between checkpoints 8
+  and 32.
+- A teacher route through Hungarian-matched individual slots is not an oracle
+  upper bound. Continuous's learned mixture route is better on completed tasks
+  in all ten worlds at every checkpoint; at 64 tasks its mean NMSE is 0.00191
+  versus 0.00937 for the matched-slot teacher route. This indicates distributed
+  or compensatory mixture representations even while individual-slot matching
+  improves.
+- Discrete's learned hard route and matched-slot teacher route converge: at 64
+  tasks their mean NMSEs are 0.00456 and 0.00484, with the learned route better
+  in only 6/10 worlds. Teacher primitive identities and programs are used only
+  in this post-hoc diagnostic and never enter training.
+- Opaque-ID reassignment is an exact invariant for selected Continuous and
+  Dense-C world-0 runs. With disjoint token sets and all task contents fixed,
+  every metric row and summary value is identical after removing the token, and
+  every final tensor is bitwise equal after mapping task-code keys to task index.
+- Scrambled-ID provenance must remain outside `WorldConfig`: adding a default
+  field there would invalidate all existing resolved-config fingerprints. The
+  optional scramble seed is recorded only in explicitly scrambled learned-run
+  configurations.
+- The explicit 1:1 batch ablation uses four current-task examples and four
+  replay examples at target batch 8. Because early current/replay pools are
+  smaller, observed mean sizes are 1.98 for target 2 and 7.89 for target 8.
+  Buffer-construction and replay-sampling RNGs are separated, and the sampling
+  policy is paired across models.
+- On development worlds 0–2, target batch 8 improves lifetime log loss for both
+  Continuous and Dense-C 3/3, by means 1,554 and 2,956 respectively. It helps
+  Dense-C more, narrowing the mean Dense-minus-Continuous advantage from 3,463
+  at batch 2 to 2,061 at batch 8, but Continuous still wins 3/3.
+- Continuous retains better 32-shot novel NMSE 3/3 at both batch sizes. Batch 8
+  improves Continuous novel NMSE 3/3 and Dense-C 2/3. Treat this as a
+  development sensitivity: batch 8 materially increases sample reuse and
+  training compute, so it is not merely a vectorization change.
+- Truncating the existing rho lifetimes gives mean configured-rho crossovers of
+  0.869 after 16 tasks, 0.822 after 32, and 0.826 after 64. The 16-to-64
+  crossover declines in 8/10 worlds, but the mean is not monotone because it
+  edges upward from 32 to 64 tasks. H5a is partially, not fully, supported.
+- Re-coordinating the 64-task mean effect curve by measured residual-function
+  correlation makes it much more nearly linear: linear-fit R-squared rises from
+  0.646 in configured rho to 0.974 in measured recurrence, and residual RMSE
+  falls from 1,329 to 361 log-loss units. Much of the apparent elbow is a
+  coordinate artifact.
+- H5b's tighter-alignment prediction fails even though the mean curve smooths.
+  At 64 tasks, per-world crossover population SD is 0.0173 in configured rho
+  versus 0.0381 in measured recurrence (ranges 0.0482 versus 0.1308). Report
+  the coordinate result as mixed, not as a general collapse onto one frontier.
+
+# Standing scientific doubts
+
+- The generic low-rank hypernetwork closes the largest structural-prior gap and
+  produces an intermediate lifetime-loss result, but it still shares the
+  teacher's three-stage low-rank residual family. Claims should distinguish
+  evidence for explicit reusable slots from the broader benefit of aligned
+  operator-manifold structure.
+- Most development evidence and optimizer selection use the legacy effective
+  batch of one current plus one replay example. The batch-8 sensitivity preserves
+  the main result but benefits Dense-C more; the confirmation protocol and any
+  symmetric retuning must be frozen explicitly before unsealing worlds 100–129.
+- The free rho*(N) result does not establish a monotone economic law: the large
+  16-to-32 shift plateaus by 64 tasks. The measured-recurrence coordinate
+  smooths the mean curve but worsens raw cross-world crossing dispersion.
+- Dense-C matches inference multiply-adds only. Continuous training backpropagates
+  through every basis operator and uses materially more training compute.
+- The initial n=3 bootstrap intervals are not inferentially meaningful. Public
+  reporting should show paired world deltas directly until world count is larger.
+- Identity-slot results are one world only; the negative ablation is not a
+  population claim.
+- Confirmatory worlds 100–129 remain sealed. Do not inspect them until these
+  doubts and the development `rho` curve are resolved.
+- The development crossover is complete and highly consistent, but the 0.8264
+  interpolation lies between coarse grid points and remains descriptive. Do not
+  treat it as a precisely located universal phase boundary.
+- Continuous's slot-to-primitive diagnostic is basis-dependent: its own mixtures
+  systematically outperform forced one-slot teacher routes. Report progressive
+  functional matching as evidence of operator-quality improvement, not as proof
+  that Continuous has uniquely recovered the teacher's discrete representation.
+- The shared-parent residual control must optimize task routes and rank-two task
+  residuals in separate parameter groups. Coupling both at task LR 0.05 produces
+  large residuals and poor lifetime loss; residual LR is a substantive control.
+- Guarded world-0 tuning at configured `rho=0.75` selected residual LR 0.01 and
+  L1 penalty 0.01. Its cumulative log loss is -157,103, novel 32-shot NMSE is
+  0.01748, and mean/maximum functional residual-to-parent ratios are 0.246/0.419.
+  This is a tuning result only; the selected setting must be evaluated across
+  recurrence and additional development worlds before interpretation.
+- The frozen shared-residual control beats the better fixed Continuous/Dense-C
+  model on lifetime loss and novel 32-shot NMSE in all nine world/rho pairs at
+  configured rho 0.5, 0.75, and 0.9. Mean lifetime gains over the fixed envelope
+  are 9,168, 7,458, and 3,745 log-loss units, respectively.
+- At exact reuse, Continuous beats shared residual by 238, 163, and 336 log-loss
+  units. Mean functional residual-to-parent ratio falls monotonically from 0.284
+  at rho 0.5 to 0.026 at rho 1.0, with the endpoint decline present in all three
+  worlds. This supports adaptive share-versus-specialize behavior.
+- Shared residual stores 14,208 task-specific scalars over 64 tasks versus 1,536
+  route scalars for Continuous, and uses 6,720 forward multiply-adds versus
+  6,528. Its lower intermediate-reuse loss is a copy-on-write capacity result,
+  not a storage-matched architecture win.
+- Model 4's “only after Model 2 works” prerequisite is satisfied structurally:
+  hard Discrete recovers operators and routes despite weak online route
+  inference. Presence-gate pruning tests basis compression, so the route-learning
+  cost is a limitation to report rather than a reason to skip the conditional
+  model.
+- Keep MDL presence gates distinct from task route logits. Training uses smooth
+  global sigmoid gates with an expected-active-slot penalty; hardened evaluation
+  masks sub-threshold slots before route argmax so an inactive operator can never
+  be selected.
+- Presence LR 0.01 with library penalty 1e-4 collapses all twelve relaxed gates
+  below threshold on world 0, forcing the one-slot safety fallback and degrading
+  log loss to -86,937. Tune presence LR at 1e-4 and 1e-3 before interpreting
+  pruning; the default gate optimizer was two orders of magnitude too fast.
+- `CLAUDE.md` is a short front-door safety summary and pointer to this file.
+  Keep the detailed, authoritative conventions and implementation learnings
+  here; mirror only the non-negotiable safety rules there.
+- Background shell jobs die silently with the session that launched them.
+  After any interruption, verify expected artifacts exist before assuming
+  a launched run completed; relaunch idempotently (all sweep drivers are
+  resumable by design — keep new ones that way).
+- Notes and review files are living documents. Before any spec revision,
+  diff them against the version last incorporated; staleness is not
+  completeness.
+- The MDL presence gate is bimodal at this scale: penalties either prune
+  nothing or collapse the library, and gate pressure degrades novel-
+  composition transfer even before pruning bites (11 active slots already
+  fail sufficiency). Compress after evidence accumulates instead of
+  penalizing during acquisition.
+- Raw prequential wins can be reversed by description-length accounting:
+  the shared-residual envelope win (+3.7k-9.2k nats) loses in all cells
+  under a literal two-part code because rank-2 per-task residuals retain
+  ~130k bits. Always report both currencies before "chooses its own
+  sharing" style claims.
+- Learner slot indices and teacher primitive indices live in different
+  spaces. Any route-agreement metric must map through functional matching
+  or stay in slot space (compare against the artifact's own hard routes);
+  comparing raw indices silently returns zero.
+- The exact route posterior (1,728 routes, 8,192 examples) takes over ten
+  minutes unbatched on this machine while lifetimes run concurrently;
+  batch the enumeration over examples if it becomes a repeated tool.
+- Sealed-block discipline extended in V2: seeds 200-229 test parameter
+  intervals (slope, crossing, R^2), not just signs; interval misses are
+  reported as failures even when signs pass.
+- Although each lifetime pins itself to one thread, local throughput is bounded
+  by memory, I/O, and safe artifact ownership rather than core count. Earlier
+  advice to launch up to 12 local processes is **superseded**: run one local
+  full lifetime at a time. Keep `--jobs N` in sweep interfaces for isolated
+  remote workers, where every worker owns disjoint output cells.
+- Kaggle is available for throughput beyond local cores (token provided
+  by the PI as an environment variable). Its value is parallel sessions,
+  not per-run speed — the models are too small to benefit from a GPU.
+  Pattern: each kernel clones the public GitHub repo, installs, runs a
+  world-slice, and saves `artifacts/` as kernel output. Reserve it for
+  work exceeding an overnight 16-core budget (V2 sealed block plus
+  Benchmark D together, or Phase III cross-world training).
+- NEVER write the Kaggle token (or any credential) into a tracked file,
+  script, notebook metadata, or kernel source — the repository is
+  public. Pass credentials only as inline environment variables at
+  invocation time.
+- The repository is now public at
+  https://github.com/doeixd/reusable-operator-worlds. Push after each
+  commit; the public history is part of the project's verifiability
+  claim, so never rewrite published history (no force pushes, no
+  amends of pushed commits).
+- H6 analysis note: at rho 0.9 the GELU family-mismatch penalty
+  (tanh-effect minus GELU-effect, paired per world) is roughly constant
+  across worlds — 3,513 / 2,445 / 3,215 nats — suggesting misalignment
+  enters the economics as an approximately ADDITIVE penalty (a shift in
+  the intercept b of Delta(r) = a*r + b) rather than a slope change.
+  When the rho 1.0 GELU runs land, compare their penalty (world 0:
+  4,005) against these; if similar, the H6 status and the paper's
+  Delta = f(r, A, C) discussion can state the quantitative form: family
+  mismatch costs ~3-4k nats roughly uniformly over the high-recurrence
+  range, moving the zero crossing right without bending the line. Fit
+  the GELU points to their own line and report both coefficients rather
+  than only the crossing.
+- pip hangs on this machine for new package installs (stalls in network/
+  index resolution even for `pip download --no-deps`; cause not
+  diagnosed). Do not block work on pip. For Kaggle specifically, the
+  `kaggle` package is unnecessary: the REST API accepts the access token
+  as `Authorization: Bearer <token>` (verified 200 against
+  /api/v1/kernels/list). Kernel workflow via curl: push a kernel with
+  POST /api/v1/kernels/push (JSON metadata plus source), poll
+  /api/v1/kernels/status/{user}/{slug}, fetch results from
+  /api/v1/kernels/output/{user}/{slug}. Token comes from the environment
+  at invocation time only — never from a file.
+- Windows WMI on this machine intermittently stalls, hanging
+  `platform.machine()` and therefore `import torch` (minutes per
+  process) and pip. `src/sitecustomize.py` forces the WMI query to fail
+  fast so `platform` falls back to environment variables; it loads
+  automatically via the editable install. If new processes ever hang
+  before any output, check for this class of stall first
+  (`faulthandler.dump_traceback_later` locates it in seconds).
+- Memory, I/O, and writer ownership—not cores—are the binding constraints for
+  local lifetimes. Historical limits of 4-6 concurrent processes still produced
+  paging failures and overlapping launchers. They are **superseded** by the
+  one-local-lifetime rule. Never co-schedule installs or another experiment batch
+  with a running lifetime.
+- During a heavy batch, a hung shell command is evidence of LOAD, not of
+  batch failure: lifetimes only write summary.json at completion, so an
+  apparently empty output directory plus an unresponsive filesystem most
+  likely means the batch is mid-wave and the disk is churning. Check
+  artifact counts from a prior known state before killing anything, avoid
+  repo-wide find during batches (use targeted ls), and remember TaskStop
+  ends the parent shell while detached children survive as orphans.
+- Variational task codes have three implementation traps, all measured
+  on the V3 wake learner and all fatal if missed. (1) UNITS: KL is a
+  sum of nats over a task's whole code, MSE is a mean over batch and
+  dimensions; charge `beta * 2*sigma^2/(N*d) * KL` so beta = 1 is the
+  literal MDL point (raw KL against MSE is ~1e4 too strong). (2) A
+  GRADIENT-learned shared prior runs away — the KL gradient always says
+  "shrink" when posteriors are concentrated and Adam's normalized step
+  ignores the tiny magnitude, so the prior collapses (1.0 -> 0.0034 in
+  one lifetime) and then annihilates the task state. Use the
+  closed-form empirical-Bayes M step instead. (3) That closed form has
+  a STABLE DEGENERATE FIXED POINT at initialization (mu ~ 0 gives
+  s ~ sigma_init, whose mu/s^2 gradient pins every code at zero
+  forever): estimate the prior from COMPLETED tasks only, after a
+  warmup, with the posterior starting precise and the prior wide.
+- A variational learner cannot be smoke-tested on a reduced-example
+  world. At 16 examples/task the MDL-correct answer is an empty task
+  code (task state buys ~5 nats of fit against ~500 nats of code), so
+  correct refusal-to-encode is indistinguishable from a collapse bug.
+  Smoke-test with `description_beta: 0.0` instead, which must reproduce
+  the frozen non-variational baseline exactly.
+- When auditing online objectives, count relative gradient/objective pressure, not raw regularizer appearances.- A functional tolerance must be normalized against the quantity whose
+  loss it licenses, never against total output scale. V4.1's substitution
+  test divided by total output variance while an abstraction contributes
+  ~0.2% of it, so every abstraction substituted for every other and the
+  oracle "compacted" 4-6 abstractions to 1. Two symptoms identify this
+  class of error immediately: the causal control goes DEGENERATE (random,
+  usage, and functional retirement score identically), and the NULL EDIT
+  passes (deleting an abstraction outright scores a smaller deviation
+  than replacing it). Both are now hard guards in
+  `audit_lifecycle_oracle.py`.
+- On the frozen V4 testbed V3's 4-6 abstractions are mutually DISTINCT,
+  not redundant: contribution-relative substitution costs 0.86-1.60 of
+  what the abstraction buys, and 99-100% of ordered pairs exceed a 10%
+  tolerance. Priced in nats, compacting to one abstraction is net -1,180,
+  -2,393, and -1,377 on worlds 0-2. The representation-fragmentation
+  premise for V4.1-as-compaction is unsupported; the open direction is
+  V4.2 synthetic merge (refit a new abstraction covering several distinct
+  contributions), not retiring copies that do not exist.
+- CONSTITUTIONAL, alongside "structural claims require functional
+  substitutability": every SHARING claim needs a matched-BUDGET
+  non-sharing alternative. "Shared beats unshared at full precision" and
+  "shared beats unshared at equal bits" are different claims and only
+  the second is evidence of reuse. V4.2's factorization gate passed the
+  first and failed the second 9/10 worlds -- coarser private
+  quantization of each atom beat a shared parameterized family at the
+  same bit budget. This orders the edit vocabulary by ambition,
+  KEEP < COMPRESS < SHARE/FACTORIZE < CREATE/FORK, and makes COMPRESS a
+  first-class operator that any sharing proposal must beat first.
+- V4's premise -- successful abstraction birth implies a maintenance
+  problem -- is FALSIFIED at this scale. All three original rungs failed
+  their development gates. V4R then opened seeds 400-429 against a
+  hashed plan and closed 7/7: COMPRESS dominates, FACTORIZE/FORK do not
+  pay at reachable M, and retention obeys the amortization law. This is
+  a positive statement about V3: its library has little exploitable
+  lifecycle slack. `row_v4_experimental_spec.md` is preserved unrevised
+  with a gate-outcome banner; `row_v4r_experimental_spec.md` is the
+  successor that was actually sealed. V5 is now a spec,
+  `row_v5_experimental_spec.md`; `notes/v5-sketch.txt` is superseded
+  and kept only as history.
+- Before building another world in which an operator MUST fire, run an
+  offline opportunity census with the learner frozen: sweep regimes and
+  ask which edits have any oracle advantage at all. Two dormancy designs
+  were built and both failed to instantiate retention value -- a census
+  would have said so before the lifetimes ran.
+- The world caps `tasks` at the number of distinct programs, which is
+  `primitives ** program_depth` = 6**3 = 216 in the canonical config.
+  N=256 is unreachable; the largest admissible scale point is 200.
+  Raising it means adding primitives, which breaks comparability with
+  every existing artifact. V4R §1.1's registered N in {64,128,256} was
+  therefore unsatisfiable as written and is run at {64,128,200}.
+- Retention obeys the SAME amortization law as abstraction birth:
+  `RETAIN iff H_R * s_bar > lambda * D(A)`. Measured on the V5 probe,
+  the predicted crossing (1,098 / 64.1 = 17.1 returning tasks) matched
+  the observed one (17.9) with no fitted threshold. Dormancy LENGTH is
+  the wrong variable and cost three failed world designs: per-task
+  saving is flat across gaps, and only expected remaining reuse matters.
+- A dormancy gap must CLOSE strictly before the lifetime ends, with
+  enough tasks after it to measure. This error produced false readings
+  three separate times (V4.1, the retention sweep, the fine gap sweep).
+  Count returning tasks before reading any dormancy config's numbers.
+- A mid-lifetime deletion is NOT a paired comparison: the arms stop
+  being matched the moment the intervention changes what gets promoted
+  next. Library state is path-dependent (deleting one abstraction at
+  task 32 gave final sizes 5/5, 6/5, 5/2, and once 6/7 -- the deleted
+  arm ending LARGER). Use the return-curve window where the arms are
+  still comparable, never an end-of-lifetime J difference.
+- In an evolving library the marginal carry cost of an abstraction is
+  ENDOGENOUS: when deletion triggers a replacement promotion it saves 0
+  bits, not `lambda * D(A)`. Per-object retention rules are therefore
+  ill-posed; the decision is sequential.
+- Abstractions are ~4-8x overparameterized: `D_min ~ 1-2 bits/scalar`
+  against 8 stored, with ZERO behavioral cost at 6 bits and 127 nats at
+  4. This is why every structural edit loses to local compression, and
+  it means absolute (not paired) two-part figures in V1-V4 are inflated
+  by that factor.
+- Whenever a structural property is manipulated, measure separately what
+  it did to COST and what it did to UTILITY. V5.1's registered
+  proportionality failed only because residual rank moved both: rank 4
+  costs 4x rank 1 and also saves 1.86x per use. The law
+  `H* = lambda D*(A) / s_bar` survived precisely because the two were
+  measured independently at each rank. Any future intervention on a
+  representation's economics must report both halves before its
+  crossing is read.
+- Padding is NOT a valid intervention on description length. Under the
+  rate-distortion currency established in V5.0,
+  `D*(A + dead bits) = D*(A)`; charging for dead bits tests an
+  artificial storage tax, not abstraction economics. Manipulate what an
+  abstraction can compute, or manipulate the code, but do not inflate
+  the serialization.
+- Task-space capacity is not realized library size. Raising composition
+  depth (L=4) did not raise M. The direct knob is F explicit recurring
+  innovation families with m tasks each, N = Fm, holding m fixed while
+  sweeping F -- then PROMOTE yields M ~ F. Use this for any experiment
+  whose independent variable is library scale.
+- A generator knob that is supposed to vary RELATEDNESS must not vary
+  individual value. Frozen balance gates (each within 10% across the
+  sweep): per-abstraction `D*`, `s_bar`, behavioral contribution, and
+  promotion rate. A sweep failing any gate is unscoreable rather than
+  weak -- this is the V5.1 confound restated as a precondition.
+- Never run `git checkout <file>` (or any resetting command) while
+  uncommitted edits exist in that file. During the V5 spec work this
+  discarded eight applied consistency fixes that had to be re-derived
+  and re-applied. Commit first, then reset; the commit is cheap and
+  the reconstruction is not.
+- A specification that changes its generator must be re-read for
+  everything DOWNSTREAM of the generator. V5's Revision 3 replaced the
+  meta-recurrence generator and removed its fixed centre `C`, but
+  `teacher_G1` and H21's entire five-way instrument were still written
+  against `C`. Editing a definition is not the same as editing what
+  depends on it, and an independent audit found this where three
+  self-reviews had not.
+- A historical lifecycle batch found that five concurrent `slots=12` runs
+  exhausted RAM and failed 113/120 cells; even the later `--jobs 3` rule is now
+  **superseded locally**. Lifecycle and prospective lifetimes run serially on
+  this host. The clustering holds `(tasks, centres, features)` tensors, so slot
+  count still predicts peak memory on remote workers.
+- Check a registered threshold against its own BASELINE before freezing
+  it. The S0 arm registered `p_reuse >= 0.5`, and the unmodified world
+  scored 0.25 — a bound the control already violates cannot detect the
+  effect it was written to catch. Compute the baseline first, then
+  register the threshold relative to it.
+- A learner's routing table is not a proxy for an abstraction's value.
+  Deleting one abstraction made 0/32 returning tasks adopt ANY
+  abstraction though a second one stayed live, and the saving was no
+  larger on tasks that routed to the deleted object (52.8) than on those
+  that did not (65.9). `C_reacquire` prices the loss of the reuse
+  pathway, not the direct use of one object.
+- `D_retain - D_delete = D(A)` is an accounting convention in this
+  codebase, not a measured difference: both arms' checkpoints store
+  identical scalar counts, retirement is logical, and referencing a live
+  abstraction does not shrink a task's stored residual. Fine as a
+  convention, but never describe it as measured.
+- `operator_slots` is not a neutral protocol constant. Halving it
+  (12 -> 6) cost 24% of the per-use saving by producing a smaller
+  library that fewer tasks reference. Absolute retention crossings must
+  always be quoted with their slot budget.
+- Look for the coordinate in which a construction is LINEAR before
+  reaching for optimization. V5's meta-recurrence knob had to mix
+  operators in function space; sharing `V` and `b` across the family
+  makes the hidden features common, the residual linear in `U`, and a
+  mixture of `U` matrices exactly a mixture of functions.
+- Make a generator's invariants exact rather than expected. Matching
+  component norms in expectation left a random cross term that failed
+  the balance gate at 31.6%; projecting the private component out of
+  the shared subspace made the norm exactly constant (0.0% spread).
+- Before believing a gate FAILURE, check the instrument can express the
+  tolerance. Integer bit depths made a per-object rate jump by whole
+  bits and failed a 10% balance gate at 16.4%; interpolating in
+  (bits, log error) gave 2.9%. The generator was never at fault.
+- Never fit and score a shared-structure measurement on the same
+  objects. In-sample subspace capture read 0.730 where the truth was no
+  structure at all; leave-one-out on the same data read 0.021.
+- Check that a registered term is ARCHITECTURALLY POSSIBLE before
+  registering it. H29 predicted `D*(P_2) < D*(P_1)` from continued
+  learning, but promoted abstractions carry `requires_grad=False` and
+  join no optimizer group, so `P_2 == P_1` identically and the term is
+  structurally zero.
+- State the DENOMINATOR with any fraction-of-cells threshold. "Within
+  15% in >= 4 of 6 cells" is ambiguous once a cell can be
+  unobservable: sealed C2 read 79%/73% counting only worlds that
+  crossed and 37%/63% counting all of them, so the clause resolved to
+  neither pass nor fail.
+- A crossing experiment must verify its range CONTAINS the predicted
+  crossing before running. At F=12 with M_0=4 only 8 unseen members
+  exist, so a predicted M* ~ 20 is unobservable and half the worlds go
+  silent rather than wrong. This is the horizon-grid bracketing rule
+  from H19, applied one level up.
+- Check which side the TARGET belongs to before reading a comparison. A
+  whole-library economy test defined each task's target as the teacher
+  operator's own effect, so the teacher arm had zero residual by
+  construction and "won" 16x. Any ratio that large is a rigged
+  comparison, not a result. This is the same error class as V4.1's
+  total-variance tolerance and the raw-ablation counterfactual.
+- The residual tensor is not "the task's innovation". A learner solves a
+  task through shared basis + route + private residual, so a family
+  shared by two tasks can be split differently between route and
+  residual and look absent in the residuals alone. Measure the
+  EFFECTIVE task-conditioned operator, F_tau(z) - F_0(z) with
+  task-specific information nulled, before concluding anything about
+  what the learner represents. Same error family as comparing learner
+  slot indices to teacher primitive indices.
+- An audit that writes to a fixed report path must stamp its run or
+  refuse a report older than its inputs. A scorer that dies partway
+  leaves the PREVIOUS answer on disk and nothing in the output says so;
+  H29's first two attempts were read as results that way.
+- Before implementing a proposed search, check whether the objective is
+  INVARIANT to the thing being searched over. Review 49 asked for a
+  global rotation Q maximizing subspace capture; capture is invariant to
+  a global orthogonal map of the point set, so that search is empty by
+  construction. The well-posed version was the span question — are the
+  teacher's atoms mixtures of the learner's — which is what the
+  motivating example (B1 = A1+A2, B2 = A1-A2) actually expresses.
+- A full-span least squares gives an UPPER BOUND on what any linear
+  refactor can achieve. Use it to kill or keep a whole class of remedies
+  in one measurement, rather than sampling the class one adapter at a
+  time.
+- A NESTED objective has TWO non-vacuity requirements, and V6 checked
+  only one. The inner learner must actually learn, AND the outer
+  gradient must actually depend on that learning. The V6 prospective
+  arm verified the second and shipped an inner loop that moved the
+  support loss by 0.000%, so it charged a zero-shot loss and silently
+  ran a different objective than the registered one. Constitutional for
+  any meta-learning rung: inner loss materially decreases; inner state
+  materially changes; query loss is evaluated after that change; the
+  outer gradient changes when the inner adaptation is disabled; and
+  k = 0 versus k = many objectives are measurably different. The last
+  is the cheapest and catches this whole class.
+- Invalidated artifacts get a MACHINE-CHECKABLE manifest, not a
+  paragraph. `artifacts/INVALID_MANIFEST.md` plus
+  `tools/check_invalid.py`, run alongside `check_prereg.py`. And retire
+  the path: rebuilding corrected runs into an invalidated directory
+  makes "invalid" and "rebuilt" indistinguishable to the checker.
+- A guard that parses its own input must fail when it parses nothing.
+  The first `check_invalid.py` omitted `re.MULTILINE`, matched zero
+  paths, and printed a clean pass over a manifest listing six.
+- Two functions can only be compared when evaluated at the SAME inputs.
+  V5's effective-operator and population-span audits built each task's
+  vector on that task's own probe, then compared them coordinate-by-
+  coordinate; coordinate j meant a different state per task. Corrected,
+  R_effective went 0.190 -> 0.762 and span-unexplained 0.707 -> 0.491,
+  reversing a published conclusion. Same error family as slot-index
+  versus primitive-index and parameter-mean versus function: whenever
+  two things are compared, ask what coordinate system each lives in.
+- Reconstructing a learner from an artifact means reconstructing ALL of
+  its state. `load_learner` restored promoted references but not
+  retirement, so retired tasks were rebuilt with both the abstraction
+  and the residual retirement had removed — a model that never existed
+  during training.
+- NESTED-LEARNING AUDIT, run before any meta-learning result is read.
+  V6 produced six failures each of which could have supported a
+  coherent but false story: (1) does the intervention change parameters
+  at all — a frozen basis made every arm secretly identical; (2) does
+  the inner learner actually learn — SGD moved the support loss 0.000%;
+  (3) does the probe have dynamic range — a saturated probe reports the
+  same number for every arm; (4) is the future genuinely unseen — the
+  "held out" sibling was later trained on; (5) does the outer objective
+  depend on the inner adaptation — k=0 versus k=many must differ;
+  (6) does the result replicate across worlds — a positive world 0
+  vanished at n=3.
+- A negative endpoint does not identify its own mechanism. Phi said the
+  intervention hurt; only a direct measurement of discrimination and
+  task-code sensitivity could say whether the representation LOST
+  information or merely became harder to optimize, and those imply
+  different successor designs. Measure the mechanism before designing
+  the fix.
+- CONCURRENCY, corrected. Memory is the binding constraint, not cores;
+  this host has 16 and a lifetime pins one thread, so serial execution
+  wastes ~94% of it. Use a bounded pool: 3-4 concurrent for `slots=12`
+  promoting/lifecycle runs (the promotion clustering step allocates
+  `(tasks, centres, features)` tensors and is what exhausted RAM at 5),
+  up to 6 for lighter models. Two independent failures taught this and
+  they have different fixes: 5 concurrent lifetimes exhausted memory and
+  killed 113 of 120 cells, while two launcher INSTANCES over the same
+  output paths raced and logged completions for cells that had no
+  artifacts. The first is fixed by a cap, the second by one writer per
+  cell — a `ProcessPoolExecutor` over a job list gives both, a shell
+  loop relaunched twice gives neither.
+- Before scaling a batch up, check free memory against one run's
+  resident size rather than guessing. A `slots=12` lifetime sits around
+  340 MB; the ceiling is RAM divided by that, minus headroom, not the
+  core count.
+- Scorer CLI arguments are part of the experimental protocol. Before extending
+  a curve, rerun its anchor cells and require exact reproduction; do not assume
+  today's source defaults equal the arguments used for the prior report. H35's
+  first scorer silently used 60 adaptation steps against a 40-step anchor and
+  changed the absolute acquisition costs. Reports must record the executed
+  steps, supports, learning rate, seeds, and noise scale.
+- Write a completed report atomically before printing its presentation summary.
+  A Windows console-encoding failure after H35 scoring discarded a finished
+  computation because the report write came last; console output is not the
+  scientific artifact.
+- A pool job must carry and validate its own complete intervention record before
+  treating `summary.json` as resumable. The V6 allocation pool accidentally
+  reused H35's 8 inner steps for a 16-step sweep and silently skipped nine
+  mismatched summaries. Encode sweep-specific inner/outer steps per job; require
+  model, summary, provenance, and fingerprint files; refuse a non-empty
+  mismatched target; and exit nonzero if any cell fails.
+- Treat "oracle" adaptation as a finite operational envelope, never proof of a
+  global optimum. Freeze the representation, optimize support only, keep query
+  labels out of selection, include abundant-support and sparse-support cells,
+  and require agreement across materially different optimizers before assigning
+  a capacity, identifiability, or findability mechanism.
+- ZERO IS A STATIONARY POINT OF `u.tanh(vz+b)`. A zero-initialized rank-2
+  residual never moves (d/du = tanh(0), d/dv is proportional to u), and any
+  argument that reaches the output only through that residual
+  (`dL/dalpha = W^T dL/dr`) is pinned with it. This froze training once
+  (exact-null eps) and an adaptation fit once (eps = 0 in the alpha-only
+  protocol); both were caught only because a non-vacuity check required
+  `alpha_norm > 0`. A literal null state in this family needs a gate, never a
+  zero vector. Arguments that enter a basis operator's `U` matrix do not have
+  this problem: `dL/dalpha_k = <dL/dU, U_k>` is nonzero at alpha = 0.
+- The residual vector is not where family computation lives. Zeroing the
+  whole residual channel (schema + eps) of live family tasks moved NMSE by
+  about 2%, and 56/64 family tasks had been retired into promoted references
+  where the channel does not fire. Two residual-side schemas (post-hoc PCA
+  over the learner's own residuals, and one formed jointly online) were both
+  infertile for exactly this reason; an argument inside a routed basis slot
+  moved every endpoint. Parameterize the objects the learner routes through.
+- The affine span of what the ordinary learner stores does not contain nearby
+  novelty. Fitting only a coordinate in the span of all live residuals and
+  abstractions (any rank, up to the full span) leaves an unseen-family member
+  at 2.2-3.1x the free-residual endpoint, and the pre-retirement population
+  is no better (2.75x). Retirement did not erase the directions; ordinary
+  wake never formed them.
+- `novel_family_tasks` are members of two families the lifetime never sees,
+  all family operators sharing one rank-2 functional subspace at `r_meta=1`;
+  held-out members of SEEN families are nearly free for every arm and are
+  deliberately not the future. Re-read the generator before naming a future
+  "sibling"; the per-family schema arm this error produced was ill-posed.
+- Check a learner-statistic threshold against the BASELINE ARTIFACT before
+  freezing it, every time. Ordinary routes are diffuse (mean maximum
+  coefficient 0.29-0.44; any one slot averages ~0.08-0.12 mass), so a "route
+  mass on P >= 0.5" usage criterion was unattainable by construction and its
+  2x-baseline successor still never fired while the functional ablation
+  passed everywhere. Prefer the functional criterion (zero the channel,
+  measure the loss) as the deciding usage test; route statistics are
+  diagnostics.
+- A frozen-argument variant that is BITWISE the baseline is the cheapest
+  strong control: `P(alpha)` at `alpha = 0` reproduces the ordinary artifact
+  tensor-for-tensor, so every later difference is the channel. Build new
+  architectures so that a switch recovers the baseline exactly, and verify it
+  on the real artifact, not only the smoke world.
+- Fertility of an in-basis argument scales with argument dimension and needs
+  LEARNED directions: on worlds 0-2 the alpha-only future ratio fell
+  monotonically from 3.4 (K=2) to 1.56 (K=16) while a matched-budget control
+  with `U_k` frozen at random init stayed at ~3.1 and was essentially unused
+  (alpha-zeroed ratio ~1.05). A single linear-in-U slot then SATURATES at
+  K~16 (K=32/64: 1.59/1.57) even though present-task loss keeps improving;
+  a second parameterized slot at K=32 reached 1.46 and passed 1.5x in two of
+  three worlds while hurting the third. Treat K as a capacity knob, not the
+  generator's rank, and treat the two-slot A verdict as marginal until a
+  sealed block decides it.
+- Heredocs fed to the Bash tool break on an apostrophe inside a quoted
+  Python or Markdown body and leave NOTHING applied (the whole chain aborts).
+  Write multi-file patches as a scratch `.py` with explicit UTF-8 I/O (this
+  file is not cp1252-clean) and run it; check `git status` before assuming
+  any part landed.
+- Lifetimes write artifacts only at completion, so an interrupted or
+  allocation-killed cell leaves no directory; a transient 3.66 MiB Windows
+  allocation failure at a sleep is a commit-limit spike, not sustained
+  pressure (three `slots=12` cells sat at 345 MB each with 9 GB free). Let
+  the survivors run and relaunch the cell; the launcher skips completed
+  cells and refuses mismatched records.
+
+- THE H39 LINE'S CENTRAL LESSON (reviews 62-65; `H39_DEVELOPMENT_CLOSURE.md`,
+  `reports/h39_confirmation.json`, `reports/h39_confirmation_followups.json`):
+  the useful abstraction is not sitting in the finished collection of task
+  solutions waiting to be extracted; the learner has to create and maintain
+  the coordinate system while it learns. Online alpha-only acquisition of an
+  unseen family costs 1.64x ordinary; post-hoc extraction from the ordinary
+  learner's realized population costs 2.59x and from the argument learner's
+  own residual population 6.33x, because an explicit argument channel drains
+  family structure out of the residuals. Removing the arguments and
+  re-optimizing the other task-local channels at matched budget still costs
+  2.0x. Working definition of an abstraction from here on: it compresses
+  what is invariant while exposing useful coordinates for what may vary —
+  `A(alpha) + eps`, not `A`. The V6 prospective LOSS was the wrong
+  mechanism; giving recurrence, variation, and innovation different
+  representational ROLES was the right one. Thesis, reformulated:
+  intelligence learns parameterized computational representations that
+  compress what recurs while preserving cheap coordinates for novelty; the
+  eventual language is made of parameterized primitives P_i(alpha), and
+  adaptation is identify-primitive + infer-argument (+ a small patch).
+  Existence and use are sealed; discovery (whether, which, how many, which
+  dimensions) is the open rung. Do not describe the confirmed result in
+  cluster language: its two slots form one distributed argument channel,
+  and the confirmed world has a single family subspace.
+
+- OPPORTUNITY GATE, constitutional (review 68, after the B2 gate): before
+  any structural-recovery or discovery experiment, measure the
+  counterfactual cost of REFUSING to represent the proposed structure —
+  an oracle that is told the structure versus the learner that ignores it.
+  If the gap is ~0, failure to recover the structure is not a learning
+  failure; there is nothing economically worth recovering. On a world with
+  two ORTHOGONAL family subspaces and teacher-level group classification
+  of 1.000, the two-slot K = 32 learner ignored the groups (entropy ~0.93,
+  ARI ~0), paid +0.27 / +0.10 / -0.03 log units on alpha-only acquisition
+  for it, and was ~500 nats BETTER than the told-membership oracle on
+  present cost: one 64-direction channel absorbs the union of two rank-2
+  subspaces. Truth of a latent decomposition is not utility of
+  representing it; abstraction tracks computational necessity, not
+  ground-truth labels. Schema count and within-schema width trade off
+  directly (2 x 32 versus 1 x 64), so "how many abstractions" is a
+  WIDEN-versus-SPLIT decision under one D*, and the capacity knob (K per
+  slot) is the independent variable that can make discrete identity
+  necessary.
+
+- THREE ECONOMIC QUANTITIES, KEPT SEPARATE (review 69, after H48b): current
+  utility (does representing a structure make seen tasks cheaper), future
+  fertility (does it make an unseen relative cheaper), and representational
+  cost (does it shorten the description). At K = 4 on the two-subspace
+  world the true grouping had future value (+0.1-0.5 log units) and no
+  present value (-26 to -121 nats), so the label-free learner's refusal to
+  separate the groups was RATIONAL under its objective. Before any
+  discovery experiment, verify that a quantity computable from the
+  learner's own past (leave-one-out reacquisition, a two-part description
+  proxy, substitutability) actually prefers the fertile structure; if none
+  does, non-discovery is not a learner failure. Never anneal a learner
+  toward a discrete decision its objective never rewarded and call the
+  result a discovery test. H49 is the census that asks this on the K = 4
+  artifacts; its outcome decides whether a sleep operator has an objective.
+
+- SCORING ECONOMY AND THE SHAM RULE (review 71, H50): when compute forces
+  cuts, drop curve-refinement cells (fewer scored budgets), never the
+  sample of the causal statistic (all LOO tasks); run corroborating
+  instruments only on leading/best-wrong/sham arms. Any propose-
+  reorganize-score loop needs a SHAM arm (same start, optimizer, data,
+  parameter count, steps, no structure) — beating sham proves
+  optimization, beating max(WRONG/RANDOM) proves abstraction, and both
+  are required. Report the recovery fraction against the from-scratch
+  reference so a yes/no separation becomes a mechanism claim (cheap
+  counterfactual evaluation vs disguised retraining). Reused baseline
+  rows inherit the original seeds (H50 Amendment 2).
+
+- REORGANIZABILITY (review 72, after H50): representation formation is
+  PATH-DEPENDENT -- equal present loss and equal D* can leave radically
+  different future abstraction options, which is the single statement
+  behind V4-V5's failed post-hoc edits, H29's missing span, H39's
+  formation-time argument channel, H49's representation-dependent value,
+  and H50's ~0% migration recovery. Treat
+  `Omega(R) = E_h[-C_migrate(R -> R_h)]` as a third property beside
+  present cost and description length (`J = L + lambda D* + mu C_search +
+  gamma C_restructure`), and MEASURE it before trying to optimize it:
+  the endpoint is `C_restructure(R)`, the migration budget at which the
+  true structure becomes distinguishable, with the migration operator and
+  the scorer held fixed so the wake representation is the only independent
+  variable. Any arm claiming better reorganizability must first pass
+  matched present loss, D*, parameter, and migration-variable gates --
+  reorganizability bought with capacity is not reorganizability. Keep
+  retrain-and-select as an oracle CEILING (`C_search ~ N x C_lifetime`),
+  never as the branch. Working target for the substrate: executable +
+  composable + REWRITEABLE -- learning should produce editable
+  computational objects, not only weight changes.
+
+- DOUBLE-CHECK BEFORE ANY LONG RUN, ALWAYS (PI directive, 2026-08-24).
+  Re-read the experiment code end to end against its frozen plan before
+  launching: arms and their controls, budgets and step counts, seeds and
+  which are reused, the denominator of every ratio, what is frozen versus
+  trainable in each phase, what the scorer discards and re-fits, and
+  whether each non-vacuity check can actually fail. Then run the cheap
+  structural dry run (a few steps over a couple of tasks) and verify the
+  equivalence controls on the REAL artifact, not only a smoke world. The
+  cost asymmetry is the whole argument: minutes of reading against hours
+  of compute and, far worse, a plausible number produced by a wrong
+  construct — this project's recurring failure mode (V4.1's tolerance,
+  V6's inner loop that never learned, H50's `[50,...]` seeds, the alpha
+  fit pinned at a stationary point). If a run is already in flight, audit
+  it anyway and disclose what the audit finds alongside the result.
+
+- H51, THE LIMIT OF PRESERVED STATE (2026-08-24;
+  `reports/h51_reorganizability.json`). Three wake representations —
+  provenance-initialized, provenance-recombining, and
+  decomposable-innovation — all returned `C_restructure = None` under the
+  UNCHANGED H50 migration operator and H49 scorer, with recovery of
+  L_4's separation in [-0.12, +0.19] and SHAM ahead everywhere by
+  0.33-0.54. So the H50 negative is not about what ordinary wake
+  discards, nor about the FORM in which it stores innovation. Two
+  transferable rules came out of it. (1) USEFULNESS IS NOT
+  INFORMATIVENESS: a channel that cut absolute reacquisition cost 18-38%
+  was ANTI-informative about grouping (the wrong partition won 3/3), so
+  a benefit that is indifferent to which structure is assumed is not
+  evidence about structure. (2) A LONG SCORER MUST BE RESUMABLE — write
+  each scored cell to disk as it completes, stamped with a PROTOCOL
+  FINGERPRINT (budgets, model records, refit steps/LR, migration rates
+  and seeds), and refuse a cell computed under a different fingerprint;
+  a reboot cost four hours of unscored work before this existed.
+
+- TERMINOLOGY CONTRACT, CONSTITUTIONAL (review 75, `EXPORT_BRANCH_PROGRAM.md`).
+  Synthesis starts when a FROZEN learned object composes in a program that was
+  never jointly optimized with it. Until an object passes an export test it is a
+  SHARED OBJECT, a BASIS ELEMENT, a SLOT, or an ABSTRACTION — never a PRIMITIVE.
+  Unseen-TASK reuse is not COMPOSITION; that word requires unseen PROGRAM
+  COMBINATIONS. Route optimization is not SYNTHESIS until a compact program
+  variable exists or the search space is explicitly program-structured. And keep
+  the five layers apart in every claim, because that is what makes a failure
+  localize: representation reuse != exportable computation != composition !=
+  program writing != program synthesis != primitive invention. Everything ROW
+  has confirmed so far is ECONOMICS (reuse lowers lifetime cost; the amortization
+  law is quantitative; coordinates are made during learning); none of it yet
+  shows a computational LANGUAGE.
+
+- PRIMITIVE-LIKE STATUS IS OPERATIONAL, NOT REFERENTIAL (review 77, after E2).
+  A learned object earns the word by behaviour: it survives FREEZING, it is
+  LOAD-BEARING for the task, it works in UNSEEN COMBINATIONS, it retains meaning
+  across POSITIONS it never occupied, and it needs no OPERATOR REPAIR. It does
+  not earn it by matching a teacher primitive. The evidence for the distinction
+  is quantitative: across E0.1, E1 and E2 the object-to-primitive assignment
+  margin is 0.001-0.019 — several assignments are nearly as good, so identity is
+  barely determined — while support-only route inference BEATS the teacher's own
+  matched route in 7 of 9 composition cells. Stable usability and sharp semantic
+  naming are different properties, and only the first is required for a
+  vocabulary to compose. Expect many equivalent vocabularies for one
+  computational domain, and never let a matching statistic gate a use claim.
+- DO NOT INFER A BINDING GENERALIZATION BARRIER FROM UNSEEN INTERNAL-STATE
+  DISTRIBUTIONS (review 80, after the sealed export block). Twice we predicted
+  that composition would fail at depth 4 because each operator had been fitted
+  on states at most two compositions deep - at E8 and again at the sealed C4 -
+  and both times the effect was real, visible in the per-step trace, and an
+  order of magnitude too small to bind. Predicting the SHAPE of a degradation
+  and predicting whether it BINDS are different skills; only the second decides
+  a verdict. Measure where it binds.
+- REGISTER THE REGION THE DATA SUPPORTS, NOT THE STORY THAT SOUNDS CLEAN
+  (review 80, from the `q` episode). Review 79 proposed preregistering the drift
+  continuation ratio at `q ~ 1` on the theoretically tidy grounds that an unseen
+  call behaves like an ordinary one. Development said 0.681 because the step
+  ratios decelerate, so [0.45, 0.95] was registered instead; the sealed block
+  returned 0.785. A `q ~ 1` registration would have MISSED a clause that is
+  true. Mechanistic intuition can get the direction right and the magnitude
+  wrong, and only the interval decides.
+
+- AN AMORTIZATION CLAIM MUST CHARGE THE COST OF BUILDING THE AMORTIZER, AND
+  NAME ITS DENOMINATOR (E5, 2026-08-27). Counting only `C_find` said E5's
+  recognizer beat search by orders of magnitude; counting `C_amortize`
+  (training seconds per task served) showed that in 6 of 6 cells TRAINING the
+  writer cost more than simply searching -- 7.6-11.6 s/task against exhaustive
+  search at 0.30 s, and 33.7-36.7 s/task against route optimization's entire
+  16-18 s per-task search. Same family as the matched-BUDGET rule for sharing
+  claims: "faster at inference" and "cheaper overall" are different claims and
+  only the second is a reason to build the thing. State how many tasks the
+  amortization is spread over before reading any speedup.
+
+- SEARCH THAT DOES NOT DEGRADE IS THE REAL OPPONENT (E5). We registered that
+  gradient route optimization would degrade in a 2,985,984-program space; it
+  MATCHED OR BEAT THE ORACLE in 3/3 worlds, having sat at parity in a
+  1,728-program space -- and exhaustive enumeration was 26-28x cheaper than
+  gradient search where it was feasible at all. Before building a learned
+  proposer, measure how the dumb baseline scales in the dimension you intend to
+  grow; program-space SIZE is not automatically what makes finding hard, and
+  growing it may buy no difficulty at all.
+
+- REGISTER A FORECAST WITH A GATE ATTACHED (E5 Amendment 1). Predicting the
+  depth-6 oracle error from the sealed drift `b = 0.581` (`e_6 ~ 0.019`,
+  measured 0.01752/0.00962/0.01430) was this project's first successful
+  out-of-sample use of a confirmed estimand to decide whether an untested
+  condition was worth running. It was safe to do only because a registered
+  eligibility gate would have labeled the setting UNINTERPRETABLE had the
+  forecast failed, instead of leaving a degraded executor indistinguishable from
+  a bad arm.
+
+
+- A FIRST-CROSSING ESTIMAND MANUFACTURES A HORIZON FROM NOISE (E5.1,
+  2026-08-27). "The smallest depth whose anchor fails" always has a value if the
+  series wobbles, so the statistic CANNOT return "no horizon" and is guaranteed
+  to name one. E5.1 registered it, depth 7 failed, depths 8-10 passed, and the
+  rule printed `SEARCH BINDS FIRST` off a single cell. Before registering any
+  threshold-crossing rule, ask what it would return on pure noise; pair it with
+  a trend test, or register the trend itself. Report the registered output
+  unrewritten and disclose the refutation beside it.
+
+- REUSING AN ARM IS REUSING A CONSTRUCTION, NOT A NAME (E5 correction, found
+  while building E5.1). E1 and E8 build the scratch arm with
+  `scratch_model(config, "discrete", 7717)`; E5 built it with
+  `copy.deepcopy(model)` -- the TRAINED library -- making its `S` column a
+  fine-tuning arm mislabeled as scratch (measured impact ~0.23-0.44 log units;
+  no E5 verdict flips). Three modules in one branch had an arm called `S` and
+  the label hid the difference at every call site. Diff how a baseline is BUILT
+  before reusing it across modules, the same way scorer CLI arguments and
+  protocol fingerprints are already treated.
+
+- SEARCH COST SCALES WITH PROGRAM LENGTH, NOT PROGRAM-SPACE SIZE (E5.1). Across
+  depths 3-10 the space grew 3.58e7-fold while route-optimization seconds grew
+  3.30-fold at unchanged oracle parity: `C_find` linear in depth, logarithmic in
+  space. Exhaustive search scales with the space and stops being the right tool
+  between depth 4 and 5 (ENUM/OPT seconds 0.04x, 0.42x, 4.66x). When a cost is
+  claimed to grow with a combinatorial quantity, measure it against the
+  STRUCTURAL parameter too -- the two can differ by seven orders of magnitude.
+
+- EXTRAPOLATE A DECELERATING PROCESS WITH ITS DECELERATION TERM (E5.1). The
+  sealed block gave both a per-step drift `b = 0.581` and a continuation ratio
+  `q = 0.785 < 1`. Compounding `b` alone forecast depth 6 within 8% and then
+  overestimated depths 7-10 badly (measured `b_eff ~ 0.248`). Both numbers were
+  always consistent; we extrapolated with the one that was easier to compound. A
+  fit is only trustworthy across the region it covers.
+
+
+- A HORIZON REQUIRES PERSISTENCE OR A FITTED TREND (review 82, after E5.1).
+  `min{D : X_D > tau}` cannot distinguish a threshold crossing from one noisy
+  excursion, and always returns a value, so it manufactures a boundary from
+  noise. Define a horizon as `min{D : failure persists for m subsequent depths}`
+  or fit an isotonic/monotone curve and locate its threshold with uncertainty.
+  A bare first crossing is DESCRIPTIVE and may not be called a horizon.
+
+- AN ARM IS A CONSTRUCTION, NOT A NAME, AND THE HARNESS NOW CHECKS IT
+  (review 82, implemented). `src/row/arm_provenance.py` records arm name, init
+  source (`fresh` / `trained` / `copy:<origin>`), checkpoint hash, seed,
+  trainable and frozen parameter counts, optimizer, lr, steps and data seen;
+  `assert_arm` fails closed when an arm is not the registered construction, and
+  `arms_differ` compares two same-named arms. `tests/test_arm_provenance.py`
+  encodes the E5 bug itself as a regression test. New scorers should describe
+  every arm and assert the fields their plan registered, instead of trusting
+  that two call sites spelling `S` mean the same thing.
+
+- CHECK A REGISTERED THRESHOLD'S ARITHMETIC AT DESIGN TIME, NOT ONLY ITS
+  BASELINE (E6 freeze). The natural macro accounting -- a macro costs its own
+  definition -- gives `H* = L/(L-1)`, i.e. 1.5 uses at `L = 3`: a threshold
+  nearly every pattern clears, which would have made the whole rung vacuous and
+  its refusal controls unable to fire. Charging the ALPHABET TAX that a new
+  symbol imposes on every program in the corpus moves `H*` to 5-14 and makes the
+  decision economic. Compute a registered threshold's value under the null
+  BEFORE freezing it; "the formula is standard" is not the same as "the number
+  it produces can discriminate".
+
+
+- NEVER USE AN OBJECT'S DEFINING INVARIANT AS EVIDENCE THAT THE OBJECT HAS
+  LEARNED THAT INVARIANT (review 83, after two retirements in one plan). Three
+  instances are now on record and they look different until you state the rule:
+  a predicted crossing `H*` recomputed from the same coding scheme the
+  measurement evaluates (E6A, Amendment 1); a DEFINITIONAL macro tested for
+  substitutability against its own expansion, which holds bitwise because that is
+  what "definitional" means (E6C, Amendment 2); and an exact alias compared to
+  its source. Each reads as a positive experimental result and each measures only
+  whether the implementation is correct. The diagnostic question at design time
+  is: could this comparison come out any other way given how the object is
+  CONSTRUCTED? If not, the rung is an implementation check -- keep it, label it
+  as one, and find the estimand that can fail. Both retirements here were caught
+  before compute was spent, one by a dry run and one by re-reading the plan's own
+  definition.
+
+- FUNCTIONAL MATCHING DOES NOT LICENSE PARAMETRIC CORRESPONDENCE (E9, 2026-08-30).
+  A teacher primitive and its matched learner slot were functionally equivalent
+  at ~0.0005 normalized distance with essentially ORTHOGONAL parameterizations
+  (relative difference 1.466, cosine +0.047), because `U` and `V` absorb an
+  invertible transform. A perturbation built "inside the argument channel's span"
+  in TEACHER coordinates therefore lands nowhere near that span in LEARNER
+  coordinates: `alpha` recovered -0.06 of the induced degradation where a free
+  operator at the same slot recovered +0.99. "A perturbation in the basis" is a
+  statement about WHOSE basis. Fourth face of the gauge result, after
+  slot-versus-primitive indices, parameter-mean-versus-function, and
+  common-coordinate comparison.
+
+- REPEATED AMENDMENT IS A SIGNAL, NOT A PROCESS (E9). Four amendments to one plan
+  -- a degenerate ceiling, a diluted manipulation, an overfitting ceiling, an
+  index-space error -- were each individually correct and each a repair to an
+  experiment whose root construct was already unbuildable. The amendment count
+  was itself the evidence and went unread until the fifth problem. Ask at the
+  SECOND amendment whether the construct can work at all, not whether this defect
+  is fixable.
+
+- FREEZE ONE HALF AT ITS ORACLE VALUE AND TEST THE OTHER (SO1R, 2026-09-11).
+  A joint learner that fails can fail because either half is unfindable or
+  because the halves cannot form together, and the fixes differ. SO1's learned
+  routes failed everywhere; freezing the libraries SO1 acquired with oracle
+  routes and inferring only routes (support data only) showed exhaustive search
+  recovering the exact oracle route for 100% of tasks and the learner's own
+  relaxation reaching oracle quality. The wall was co-formation, found in 23
+  minutes on existing artifacts. Do this census before designing any fix for a
+  joint failure.
+- USABLE, FINDABLE AND CO-FORMABLE ARE THREE DIFFERENT PROPERTIES. The rotated
+  substrate is representable, its library is acquirable given routes, and its
+  routes are recoverable given a library, yet library and routes do not form
+  together from scratch. Never read "each part works in isolation" as "the
+  system is learnable"; the same distinction as H39's made-not-mined, seen from
+  the formation side.
+- AN ANCHOR AT AN UNCONVERGED BUDGET TESTS THE SAMPLING STREAM, NOT THE
+  IMPLEMENTATION (SO1 anchor diagnostic). Five minibatch streams at Stage D's
+  low budget spanned up to 0.68 in terminal median while two implementations
+  agreed to 6e-7 on a matched stream. Compare implementations on matched
+  streams; measure resampling spread before choosing any cross-stream
+  tolerance.
+- ONE STREAM PER CELL MEANS READING THE PATTERN, NOT THE CELL. SO1's B = 2
+  dose curve was non-monotone on two worlds (world 2 passed at 32k and failed
+  at 65k), yet all 15 equal-gradient differences had the same sign. Near a
+  threshold, a single-stream cell's pass/fail is fragile; the sign pattern
+  across cells is the evidence.
+- STANDING DOUBT (Track B): world 0 fails every SO1 budget even with oracle
+  routes, and its routes are recovered exactly by search, so its LIBRARIES are
+  the problem; every Track B positive rests on worlds 1-2. Its cause is
+  unexplained and must be checked before any joint-acquisition result is read
+  on world 0.
+- STAGED FORMATION RULES (2026-09-11). When a joint learner fails but each half
+  forms given the other, stage it, but label the staging: teacher-assisted
+  (diagnostic only), task-distribution curriculum (no routes revealed), or
+  search-in-the-loop. Every staged plan registers a survival check that each
+  stage's structure is extended, not undone, by the next, and charges all
+  stages' compute to the final claim against a matched non-staged baseline. A
+  learned search component is not a formation mechanism while enumeration is
+  cheap (E5, E5.1). Working hypotheses CF1-CF7 live in PREDICTIONS.md and are
+  not preregistered.
+- COMMIT THE INDEPENDENT SCORER WITH THE RUNNER, BEFORE LAUNCH (J1,
+  2026-09-11). No code may be committed while a run is in flight, so a scorer
+  written afterwards is written knowing the headline. Treat the independent
+  scorer as part of the pre-launch acceptance set.
+- AN EARLY HARD COMMITMENT ON AN UNINFORMED STATE LOCKS IN (J1). Search in the
+  loop found the true minimum every round, but its first search ran on a
+  random library and the assignment never changed again (0% after round 3-5).
+  Any commitment mechanism must report its per-round change rate and justify
+  the state at the first commitment.
+  SHARPENED 2026-09-22 by a read-only census
+  (`reports/j1_commitment_census_2026-09-22/`): of 64 tasks only 1, 1 and 5
+  changed in round 1 across the three worlds, and 0, 1 and 2 in ALL later rounds
+  combined, frozen by round 2-3, terminal 0.757-0.774. And the axis has no good
+  point on it. SHAM, the opposite extreme, reassigns 60-63 of 64 every round,
+  never freezes, and is WORSE (0.975-0.982). The ordinary online protocol is a
+  THIRD point - `DiscreteLibraryLearner` is "relaxed training and hard
+  evaluation routes", so SO2/SO3/SO4 never hard-commit during training at all -
+  and it also fails. Only J1 pins one-hot (`pinned_one_hot: True`), which is why
+  J1 and the ordinary protocol are different failures. What works is J1c's
+  length curriculum (0.005-0.007), which changes WHAT TASKS ARRIVE WHEN rather
+  than how or when the learner commits. Any proposal to fix formation by tuning
+  commitment timing or firmness must first show it is not interpolating among
+  three known failures - and must check that its "fix" is not simply the
+  baseline described in different words.
+- STAGED FORMATION ACQUIRES WHAT JOINT FORMATION CANNOT (J1c/J1c-R,
+  2026-09-12; verdicts d4e6808, 3bf6a59). Ordering tasks by program length
+  (60 length-1, 64 length-2, then the canonical length-3 world), carrying only
+  the shared library between stages and never revealing a route, takes the
+  rotated substrate from 0.92-0.97 (same learner, length-3 only, same total
+  budget) to 0.005-0.007 in 3/3 development worlds at TWO initializations. A
+  control that runs the same stages and re-initializes the library before the
+  last stage lands at ~1.0, so the gain is transfer, not compute; 5-6 of 6
+  stage-1 operation-to-slot pairings keep their traffic and their functions
+  move 0.06-0.21 while a fresh library differs by ~1.3. The first commitment
+  must be made where it is INFORMED: at length 1 tasks sharing an operation
+  look alike, so routing is clustering; the structure then extends (CF6).
+- AN ORACLE ARM IS NOT AUTOMATICALLY A CEILING (J1c). World 0 fails at 0.624
+  with oracle-pinned routes and passes at 0.0047-0.0062 under the curriculum:
+  the oracle assignment was itself the handicap. When an oracle arm is used as
+  an upper bound, state that it bounds only performance UNDER THAT ASSIGNMENT,
+  and never treat a world that fails it as intrinsically hard.
+- CORRECTION (2026-09-12) to the Track B world-0 standing doubt above: world 0
+  is NOT intrinsically the hard world. It fails every oracle-route SO1 budget
+  and passes the length curriculum in both initializations. Its earlier
+  dissent was a formation-path artifact of the fixed oracle assignment. Keep
+  reporting it by name, but do not carry the doubt as evidence about the
+  world.
+
+- TERMINAL IS NOT END-OF-TASK (SO2, 2026-09-14). A "terminal" estimand is the
+  final model scored on every task. The lifetime summary's per-task
+  `final_nmse` is `curve[max(curve)]`, measured right after that task trained
+  while the library still moves. SO2's runner silently used the latter.
+  Anchor every terminal estimand on the last task (terminal must equal
+  end-of-task there), and diff each registered estimand against its code
+  before launch.
+- RECONSTRUCT PROBE STATE TOO (SO2). The terminal novel-composition probe leaves
+  `task_novel_composition_0` in saved models wherever an unseen program exists;
+  strict reloads must register it.
+- REPLAY COUNT IS STORAGE, AND SHARES THE SAMPLING RNG (SO2-P correction).
+  `replay_examples_per_task` sets examples stored per finished task; each update
+  replays `round(replay_ratio)`. Storage and sampling share one generator, so
+  changing the count also changes the replay stream. Control with a stream-only
+  arm; curriculum stages each start a fresh buffer.
+- NO COMMITS DURING A LIFETIME RUN, EVEN MARKDOWN. `learned_lifetime` stamps
+  `git rev-parse HEAD` into every lifetime folder as it finishes, so a mid-run
+  commit splits a run's provenance even when no code changed.
+- MOVEMENT MAGNITUDE IS NOT INTERFERENCE (SO2-P). Lower stage-3 shared LR cut
+  drift and all post-learning losses, but also all post-learning gains. The
+  best arm drifted more. Count lost and gained tasks separately.
+- RANK STATISTICS MUST HANDLE TIES, AND BE CHECKED ON A CONSTANT INPUT
+  (2026-09-16). `argsort(argsort(x))` gives tied values a strict order, so the
+  old `spearman` helper returned +1.0 for a CONSTANT predictor and 1.0 for a
+  single tie. Use average ranks and return nan on zero variance
+  (`census_world_quality.spearman`). Verified latent for every committed
+  number: the per-task log-ratio series have no ties, and three recomputed
+  cells reproduced their stored values exactly. Test any new rank statistic on
+  a constant and a tied input before reading it.
+
+- L0d preflight (2026-09-17): reduced support does not guarantee a monotone
+  best/second-best mean-MSE gap. Treat the ambiguity manipulation as measured,
+  not as an executor invariant. A teacher-to-slot assignment is diagnostic,
+  not a usability ceiling: a support-only route success must stay visible even
+  if that assignment fails. See L0D_PREFLIGHT_PLAN.md for the design audit.
+
+- PowerShell launchers: Get-Command python -CommandType Application can return
+  multiple executables. Select the first match before reading .Source for
+  Start-Process -FilePath. Test actual process binding with a harmless command;
+  syntax parsing alone missed the L0d launcher failure (2026-09-17).
+
+- A BOUNDED GATE'S TEST SUITE MUST EXERCISE ITS EVALUATOR, NOT ITS ARITHMETIC
+  (L0d depth five, 2026-09-17). The committed tests for the depth-five gate
+  checked only two constants (block count 243 and the 1.90 GiB terminal lower
+  bound), so a per-block advanced-indexing bug shipped and the launch died in
+  `chunked_mse` with a shape mismatch, producing no cell. The fix added the
+  test the plan had already required - the chunked evaluator's complete
+  depth-three route-loss vector against the existing all-route evaluator, with
+  an identical argmin - and that test would have caught it before launch. A gate
+  that is cheap to run is not thereby cheap to get wrong: the equivalence check
+  named in the plan is the test to write first. The same commit also replaced an
+  exact `selected == direct` float equality with the plan's 1e-5 tolerance
+  (block reduction order is not the sequential order) and RETIRED the failed run
+  path to `_v2` instead of rebuilding into it, per the invalid-path rule.
+- RECORD EVERY QUANTITY THE PLAN SAYS TO RECORD, AND CHECK THAT BEFORE LAUNCH.
+  The depth-five runner computed evaluation arrays and never used them, so the
+  plan-required selected-route query NMSE was missing from the stamped report,
+  and peak RSS was never recorded and is unrecoverable. Query NMSE was
+  recoverable post hoc only because the library, program and route are frozen
+  and deterministic; it was recorded as a separate read-only addendum beside the
+  report rather than written into it, since editing a protocol-stamped report
+  breaks its fingerprint chain. Diff the plan's "record" list against the
+  runner's output dict in the same pass that diffs its estimands.
+- A SCORER'S CLI DEFAULTS ARE PART OF THE PROTOCOL, INCLUDING ITS PATHS. When
+  the depth-five run path was retired to `_v2`, `score()`'s defaults moved but
+  the `argparse` defaults did not, so the documented no-argument scoring command
+  pointed at the failed run. Same family as the H35 step-count defect: whenever
+  a run path, budget or argument moves, re-read every entry point that names it.
+
+- DOUBLE-CHECK AFTER WRITING, NOT ONLY BEFORE LAUNCHING (PI directive,
+  2026-09-22). The 2026-08-24 directive covers the moment before compute is
+  committed. This one covers the moment a plan, hypothesis registration,
+  runner, scorer or test is written or revised, and it fires before approval,
+  freezing or commit. Re-read the new text against these learnings item by
+  item and report what the check found. The evidence that this is needed is
+  that nearly every entry above records a rule that was already written down
+  when the document violating it was drafted: V4.1's tolerance, H50's seeds,
+  the sealed C2 denominator, the route-margin comparability failure, the
+  first-crossing statistic, the alpha fit pinned at a stationary point. The
+  first application of this rule (SG0, same day) found five gaps in a plan
+  written two hours earlier, including a missing denominator of exactly the
+  sealed-C2 kind and a violation of a lesson committed that morning. A check
+  that finds nothing is not being run.
+
+- ANCHOR EVERY ARM OF A GRID AGAINST SOMETHING ALREADY COMMITTED, NOT ONLY THE
+  ARM THAT HAPPENS TO HAVE AN ANCHOR (SG0, 2026-09-22). SG0's first full grid
+  drew its programs from `j2a.held_out_tasks`, which returns the canonical
+  DEPTH-THREE held-out programs, at every depth; its depth-four cells therefore
+  searched 12**4 four-step routes against THREE-step targets, for which no exact
+  route exists. Every route is then near-tied in badness, selection is noise, and
+  the cells produced an apparent depth-four "headroom" (k = 4 of 36) that
+  measured nothing. The error was visible with NO new measurement: the selected
+  route's median query NMSE was 1.72 where the committed depth-four execution
+  gate reported 0.00871712 on the same library - a 200x discrepancy. What let it
+  through is that the plan required an anchor at depth THREE only, so the
+  depth-four arm was the unanchored one, and an unanchored arm is exactly where a
+  construct error sits undetected. Retired as
+  `INVALID_SG0_DEPTH4_WRONG_TARGET_LENGTH`. The plan, not only the code, carried
+  the defect: "programs per cell | the 16 held-out programs" is coherent at one
+  depth only.
+- "MARKDOWN EDITS ARE SAFE DURING A RUN" IS FALSE WHEN THE RUN FINGERPRINTS A
+  MARKDOWN FILE (2026-09-22). The no-commits-during-a-run rule was written for
+  runners that stamp `git rev-parse HEAD`, and it exempts documentation. But a
+  protocol whose `input_sha256` covers its own PLAN file is broken by a docs-only
+  commit: a parallel session committed `d5db30b` touching
+  `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` while SG0's full grid was in flight, and
+  the scorer then correctly refused the finished run with "input changed since the
+  run". The numbers were unaffected - the plan is a provenance stamp, not an
+  input to the computation - but the run had to be redone to restore a verifiable
+  chain. Before committing anything during a run, check whether a live protocol
+  hashes the file, not merely whether it is code.
+- THE INVALIDATION MANIFEST WAS NEVER TRACKED, AND ITS CHECKER PASSED WITHOUT IT
+  (2026-09-22). `.gitignore` ignored `artifacts/` wholesale, so
+  `artifacts/INVALID_MANIFEST.md` - which `AGENTS.md` and `CLAUDE.md` both cite as
+  the machine-checkable quarantine record - had never been committed and existed
+  only on the machine that wrote it. `tools/check_invalid.py` returned 0 with
+  "no invalid manifest; nothing to check", so on any fresh clone the guard passed
+  vacuously over an empty record. This is the same failure the file's own comment
+  already documents for the empty-PARSE case (the missing `re.MULTILINE`), left
+  open one level up in the MISSING-FILE case. Fixed by a `.gitignore` exception
+  plus failing closed on a missing manifest. A guard must fail when its input is
+  absent, not only when its input is empty.
+
+- A WELL-FORMED VOCABULARY DISSOLVES THE INFERENCE PROBLEM (SG0, 2026-09-22;
+  `reports/sg0_full_v2.json`, `SG0_SUBTRIAGE_AMENDMENT.md`). On the usable
+  staged libraries, 576 of 576 held-out programs have NO route within 1% of
+  their winner: median identifiability 53.9, meaning the runner-up is ~54x
+  worse on support. Commitment regret is exactly zero in every staged cell and
+  the bootstrap floor is exactly zero - 200 support resamples never changed the
+  selected route. The same code path on control libraries gives 142 of 576
+  tie-carrying programs, regret to 0.663, median identifiability 0.025. So
+  route inference is trivial when the library is good and hard when it is bad,
+  and E5's writer failure, E5.1's logarithmic search scaling and L0d's four
+  negatives are all consistent with ONE cause in the generator rather than four
+  facts about learners. Working reading, NOT established: inference difficulty
+  may be a symptom of immature abstraction rather than an independent problem,
+  which would make "learned program inference" a phenomenon of libraries that
+  have not finished forming. Scope: depths 3-4, 12 slots, one substrate family.
+
+- A BIMODAL INDEPENDENT VARIABLE IS A TWO-POINT COMPARISON WEARING n=12
+  (SG6 opportunity gate, 2026-09-22; `row.experiments.sg6_quality_gate`,
+  `reports/sg6_quality_gate.json`). The obvious successor to the entry above -
+  does inference difficulty TRACK vocabulary quality? - was gated before any
+  plan was written, and failed. Library quality is bimodal with nothing between
+  the clusters (staged 0.00465-0.00725, control 1.26012-1.30157; the gap is
+  30.2x the wider cluster's own spread). Pooled Spearman is a supportive
+  -0.692, but within staged it is +0.086 and within control +0.429 - null, and
+  the WRONG SIGN in both. The pooled number re-detects cluster membership, not
+  a relation. This is the route-margin failure caught prospectively instead of
+  after three withdrawn candidates. Rule: before correlating anything across a
+  set of artifacts, check that the independent variable is GRADED and that the
+  relation survives within cluster with the predicted sign; a gap far larger
+  than the within-cluster spread means the effective n is the number of
+  clusters.
+
+- A PLAN HASHED INTO A COMPLETED RUN IS FROZEN BY THAT RUN (SG0, 2026-09-22).
+  `sg0_headroom_gate.protocol()` puts a digest of
+  `SYNTHESIS_OPPORTUNITY_GATE_PLAN.md` into `input_sha256`, and
+  `score_sg0_headroom_gate.score()` raises `input changed since the run` if it
+  moves. Editing the plan to fix a defect in its own sub-triage would therefore
+  have permanently destroyed the re-scorability of the verdict the fix was
+  written to interpret. Amendments to a plan a completed run has hashed go in a
+  NEW FILE (`SG0_SUBTRIAGE_AMENDMENT.md`), and the digests are verified against
+  the run manifest before anything is written. Same family as the no-commits-
+  during-a-run rule, one level up: a run freezes its inputs, not just its code.
+
+- APPLY THE OPPORTUNITY GATE TO YOUR OWN PROPOSAL, IN THE SAME BREATH AS
+  PROPOSING IT (SG6, 2026-09-22). The vocabulary-quality census was recommended
+  as a cheap positive rung and killed by a single command minutes later,
+  because the artifacts it would use have no graded axis. Ten rungs have now
+  failed for absence of opportunity; this is the first that failed BEFORE a
+  plan existed, and it cost one command instead of a branch. The gate is not a
+  step in a plan - it is what decides whether the plan gets written.
+
+- A TRIAGE WRITTEN WHILE ITS RUN IS IN FLIGHT IS NOT PREREGISTERED (SG0
+  Revision 3 and Amendment 1, 2026-09-22). The NO-HEADROOM sub-triage was
+  drafted after the grid launched, so it is a post-hoc DIAGNOSTIC that decides
+  a research-program question and supports no scientific claim. A post-hoc rule
+  is admissible only if shown INVARIANT to the data it was written after: here
+  576/576 singleton near-tie sets leave nothing for any aggregation rule,
+  tolerance or floor to move, and the one clause that could move a count was
+  calibrated on the control arm alone. State the registration order first, then
+  the invariance argument, then the result - in that order, so the reader
+  cannot mistake which it is.
+
+- OPPORTUNITY AND DISCRIMINATION ARE TWO GATES, NOT ONE (2026-09-22, after SG6;
+  protocol `DESIGN_ADEQUACY.md`, checks `row.design_adequacy`, enforcement
+  `tools/check_adequacy.py`). OPPORTUNITY asks the GENERATOR - could the effect
+  exist? Ten rungs failed it. DISCRIMINATION asks the INSTRUMENT AND THE SAMPLE
+  - could this measurement come out either way? SG6 passed the first and failed
+  the second: the question was sensible and the effect could exist, but the
+  twelve held libraries had no graded quality axis, so nothing computed on them
+  could answer it. Calling both "no opportunity" hides that they have different
+  fixes - a new generator for the first, a new sample or statistic for the
+  second. The central discrimination check runs the REGISTERED DECISION RULE
+  against null and effect samplers and requires false-fire <= 5% and detection
+  >= 80%; reconstructions of E5.1's first crossing (42.5% false-fire on pure
+  noise) and E6's `H* = 1.5` (>50%) both fire, and E6's replacement
+  alphabet-tax threshold passes, which is why it was adopted. Every plan from
+  here carries a `# Discriminating power` section with those numbers. The
+  checks are deliberately narrow and the protocol records what they do NOT
+  catch - S0's unreachable threshold, wrong constructs, coordinate
+  comparability, registration order - because a checker that claims too much is
+  the error it exists to prevent.
+
+- NECESSITY IS A THIRD GATE, AND THE EXPENSIVE ONE (2026-09-22; protocol
+  `DESIGN_ADEQUACY.md`, checks `row.necessity_gate`). The repository had one
+  name, OPPORTUNITY, doing three jobs, and they have different fixes.
+  NECESSITY asks the TASK: does it REQUIRE the behaviour - is the behaviour the
+  cheapest way for the learner to succeed? Fix by changing the TASK.
+  OPPORTUNITY asks the GENERATOR: could the effect exist at all? Fix the
+  GENERATOR. DISCRIMINATION asks the INSTRUMENT AND SAMPLE: could this
+  measurement come out either way? Fix the SAMPLE or the STATISTIC. Most failed
+  rungs - the loop census, the E6 line, E7, V4, H47, H48b, H49, L0d's four
+  gates, SG0 - failed NECESSITY, and it is the hardest to see from inside a
+  plan because a task that does not require a behaviour still looks like a task
+  that studies it. Five checks, each with its historical fixture in
+  `tests/test_necessity_gate.py`: `refusal_cost` (H48b's label-free learner beat
+  the told-membership oracle by ~500 nats, so the cost was NEGATIVE);
+  `no_cheaper_impostor` (a trace-compressing MACRO is the expected impostor for
+  a LOOP); `incumbent_degrades`, which reports the SCALING EXPONENT and not the
+  ratio (E5.1: 3.30x cost against a 3.58e7x axis is exponent 0.068, flat);
+  `difficulty_band`, two-sided and direction-aware (SG0's identifiability 53.9
+  is TOO_EASY, and identifiability is higher-is-EASIER); and
+  `capacity_forces_structure` (one 64-direction channel absorbs two rank-2
+  subspaces, so WIDEN-versus-SPLIT is decided by capacity per slot).
+  "Hard enough" is TWO-SIDED: past the easy end nothing is elicited, past the
+  hard end the result is UNINTERPRETABLE rather than negative, so register a
+  BAND and never a floor. Writing these checks produced two defects of exactly
+  the kind they catch - reading a 3.3x ratio as degradation, and inverting a
+  higher-is-easier statistic - both caught by their own fixtures, which is the
+  argument for the fixtures.
+
+- MATCHING INVARIANTS ARE NOT SIMULTANEOUSLY SATISFIABLE, AND A PLAN MUST PICK
+  ONE (N1 Audit 1, 2026-09-22). N1 required that anchors "REPLACE length-3 tasks"
+  AND that total task count be "matched exactly" AND that `STAGED` be the J1c
+  curriculum verbatim. The committed J1c protocol is 124 anchor tasks plus 64
+  final-stage tasks, so replacing 124 inside a 64-task stream is arithmetically
+  impossible, and the only consistent alternative - matching all arms at 188
+  tasks - turns the floor into a new construction whose published value no longer
+  applies and collapses the SHAM arm toward that floor. Task count, update budget
+  and example-gradients are DIFFERENT invariants; a design that silently assumes
+  all three can hold at once has not been checked against the protocol it reuses.
+  State the one invariant, apply it to every arm, and re-derive any sampler or
+  non-vacuity referent that was borrowed from a differently-constructed arm. Same
+  family as E5's `S` arm: the defect is in how the construction is BUILT, so
+  checking the statistic over it can never find it.
+
+- THE CLUSTERING MECHANISM IS REAL, AND IS NOW MEASURED RATHER THAN ARGUED
+  (N1 Amendment 2, 2026-09-22). Since J1c the project has explained the length
+  curriculum by saying that at length 1 tasks sharing an operation look alike, so
+  routing is clustering rather than search. That was an argument for as long as
+  it stood. Measured on an UNTRAINED library - the uninformed state where J1's
+  first commitment is made - the adjusted Rand index between teacher primitive
+  labels and support-argmin slot labels is +0.7677 / +0.5850 / +0.4595 at depth 1
+  against +0.0055 / +0.0240 / +0.0216 at depth 3, across worlds 0-2. Depth-3
+  routing on a random library is at CHANCE; depth-1 routing is not. Use ARI and
+  not a raw agreement rate whenever two depths are compared: agreement at chance
+  is 1/12 against 1/1728, which would manufacture the result from the route-space
+  sizes alone. This is the general repair for the route-margin comparability
+  failure - when a statistic must span two structures of different size, pick a
+  CHANCE-CORRECTED one rather than trying to normalise a raw one afterwards.
+
+- THE CURRICULUM'S ORDER WAS NEVER ITS ACTIVE INGREDIENT (N1, 2026-09-22;
+  `reports/n1_anchor_supply.json`). J1c confounded a short-to-long ORDERING with
+  the mere PRESENCE of length-1 and length-2 tasks. Separated at a matched
+  65,536-update budget: anchors at RANDOM positions with length never revealed
+  reach 0.0066-0.0101 in 3/3 worlds, against 0.0051-0.0072 for the full
+  curriculum and ~1.05 for a pool-matched sham whose 124 extra tasks are
+  length-3. The sham - same pool size, same examples, identical minibatch draws
+  - is WORSE than the 64-task floor, so the effect is not data volume. What made
+  J1c work is that easy tasks are present, not that they come first. This
+  matters because ordering needs program length, which an online learner does
+  not have, while presence does not. Lesson for any staged or curriculum claim:
+  a curriculum confounds WHAT is presented with WHEN, and the matched-pool
+  interleaved arm is the cheap control that separates them - run it before
+  building an online mechanism around the order.
+
+- ABOVE-CHANCE CLUSTERING IS NOT THE OPERATIVE QUANTITY, AND THE ANCHORS THAT
+  MATTER ARE LENGTH-1 (N1b, 2026-09-23; `reports/n1b_anchor_dose.json`). Of N1's
+  124 anchors, the 64 length-2 tasks do nothing on their own (terminal 1.12-1.16,
+  no better than none), while the 60 length-1 tasks alone reach 0.0067-0.0175,
+  as good as the full supply. The Tier 0 clustering gate had measured depth-2
+  ARI at 0.07-0.12 - 5-10x above chance - and that was read as possibly useful;
+  it was useless. A proxy that clears chance by a wide margin can still be on the
+  wrong side of whatever threshold the mechanism needs, so a gate that measures a
+  proxy licenses the PREMISE, not a dose-response. Post hoc, every passing cell's
+  length-1 anchors covered all 6 operations and every failing cell's covered 5 or
+  fewer, including one at 5 of 6 that failed completely; that is confounded with
+  count and is a hypothesis (NB4), not a result.
+
+- A CLEAN-LOOKING POST-HOC PATTERN DID NOT SURVIVE THE EXPERIMENT BUILT TO TEST IT
+  (N1c, 2026-09-23; `reports/n1c_anchor_coverage.json`). N1b's post-hoc table was
+  as tidy as a table gets: every cell whose length-1 anchors covered all six
+  operations passed (6/6) and every cell covering five or fewer failed (0/6). It
+  was recorded as a hypothesis (NB4), not a result, because coverage and count
+  moved together - and the experiment that held count fixed refuted it. Six
+  anchors fail whether or not they cover everything; eighteen covering only five
+  pass in 2 of 3 worlds, and in those worlds the library learns the uncovered
+  operation from length-3 tasks alone. The pattern was a count effect. Keep
+  post-hoc patterns in the hypothesis ledger until a design separates their
+  confound, however perfect the split looks.
+- A PARTIALLY ANCHORED LIBRARY BOOTSTRAPS THE REST, AND WHEN IT DOES NOT THE
+  DAMAGE IS LOCAL (N1c). Above the count threshold, pinning five operations with
+  length-1 anchors let the sixth form from compositions in 2 of 3 worlds; in the
+  third, tasks that never use the missing operation reached 0.025 while tasks
+  that do stayed at 1.13. Below the threshold, failure is global regardless of
+  coverage. Formation therefore has a threshold regime, not a per-operation one:
+  enough informed commitments make the remaining assignments inferable. What an
+  online stream needs is a quota of single-operation tasks, not one for every
+  operation.
+
+- A REUSED CELL FUNCTION'S "SECONDS" IS NOT ITS WALL TIME (O1, 2026-09-24). O1
+  sized itself at ~55 min from SO2's logged 867 s per STAGED cell, but
+  `audit_so2_online_gate.run_arm` stops its timer before `export_margin` and
+  `export_diagnostic`, which at scale 1 took SO2 ~1.6 h more per STAGED cell and
+  ~2.8 h per PLAIN cell (log timestamps: start 18:12, saved 20:05 / 21:16). O1
+  calls `run_arm` verbatim for STAGED and PLAIN and discards both diagnostics, so
+  most of its runtime bought nothing. No number is affected: the registered
+  terminal median is computed before the margin. The performance pass read a
+  field instead of timing the call. Time a reused function END TO END from log
+  timestamps, and diff what it computes against what the new plan reads, before
+  quoting a cost.
+
+- A HELPER REUSED ACROSS STREAM SHAPES CAN SILENTLY CHANGE ITS POPULATION (O1
+  stream audit, 2026-09-24). `_last_task_end_of_task` returns the median over
+  every task in a lifetime. Over a staged lifetime that is the 64 canonical
+  tasks. Over a mixed stream it includes the anchors, so O1 reported
+  `end_of_task_median` over 188 tasks for one arm and 64 for another, beside a
+  terminal median over the canonical 64. Nothing flagged it, because the numbers
+  were plausible: 0.07 recorded against 0.63 on the canonical set. When a lifetime's
+  task list changes shape, re-derive the population of EVERY reported statistic,
+  not only the registered one, and record per-depth values separately.
+
+- A BASELINE MUST BE COUNTED IN THE DECISION RULE'S OWN UNIT (O2 draft,
+  2026-09-25). The draft sized its null from "STAGED passed 6 of 10 worlds at
+  stream 0". That count is WORLDS after a median over streams, and the stream-0
+  count is really 4 of 10. The draft's rule counts CELLS, where the committed
+  rate is 14/24 = 0.583, not the 0.667 used. The rates survived the correction
+  only because the true baseline was LOWER. Recount every baseline in exactly
+  the unit the registered rule counts (cell, stream, world, median-of-streams),
+  from the reports rather than from a summary sentence.
+
+- A DEAD POOL PARENT LEAVES LIVE WORKERS (O2 restart test, 2026-09-25). When
+  the parent of a `ProcessPoolExecutor` dies (here the deliberate `os._exit` of
+  the restart test; equally a killed launcher), its spawned workers keep
+  computing their current cell as orphans. They cannot write a durable cell,
+  because only the parent writes, but they still write that cell's lifetime
+  work directory. A relaunch reruns the same cell into the same directory while
+  the orphan is still writing there. Before ANY relaunch, kill the workers whose
+  command line carries `parent_pid=<dead parent pid>`, and only then relaunch.
+  `metrics.jsonl` is written once, in overwrite mode, at the end of a lifetime,
+  so a rerun never mixes two attempts' rows once the orphan is gone.
+
+- ONE STREAM PER WORLD CAN MANUFACTURE A "LIVE" RESULT (O1 -> O2, 2026-09-26).
+  O1 found the order-free arm passing 2 of 3 worlds, as often as the curriculum,
+  and in different worlds. O2, with 3 streams on 7 fresh worlds, found both
+  unreliable (9/21 and 12/21). The curriculum reproduced its historical cell
+  rate exactly, so O1 was one draw from a ~0.5-rate regime. A Tier 1 at one
+  stream per world can say an effect is POSSIBLE, never that it is COMMON. Plan
+  the reliability test before reading a Tier 1 pass as progress.
+- SPLIT FAILURES BY MODE BEFORE DESIGNING A FIX (O2C-O2G). O2's pass counts hid
+  two failure modes with different remedies:
+  - near-misses (terminal 0.05-0.2): a library still converging, which a sleep
+    phase repairs;
+  - collapses (>= 1.0): a catastrophic transition, which sleep almost never
+    repairs (1 of 10).
+
+  Averaged together, they would have made sleep look like a modest general
+  improvement. Separated, sleep repairs every near-miss at 64 retained per task
+  and misses nearly every collapse. Before any intervention, tabulate the
+  failures by magnitude and by trajectory. A bimodal failure distribution is
+  two problems.
+- DESIGN THE RULE ON THE CELLS THE EFFECT CAN REACH (O2C). "The arm reaches
+  19/21 after consolidation" was UNDETECTABLE on O2's cells: at best 0.8%
+  detection, even under a four-fold effect, because the collapsed and high cells
+  would need 9-40x reductions. The informative rule counted rescues among the
+  8 near-misses and breakages among the 9 passing cells, with false-fire
+  <= 0.001 and detection 0.94-1.00. The same happened at O2D's threshold, where
+  T = 19 lost detection to two ceiling cells sitting just under 0.05 and T = 18
+  was chosen. Simulate the rule on the ACTUAL starting values, not an
+  idealised population.
+- A CEILING ARM FIRST, THE DEPLOYABLE ARM SECOND (O2C). Consolidating on ALL
+  seen data, which no online learner retains, fixed 20 of 21. That licensed the
+  deployable question: how much must be retained (O2D: 64 per task reaches the
+  ceiling). Without the ceiling, the replay-only result (15/21) could not have
+  been read as "retention-limited" rather than "the wrong mechanism".
+- SAVED TERMINAL MODELS ARE A PAIRED SUBSTRATE FOR CHEAP TIER 1 RUNGS
+  (O2C-O2G). Five exploratory rungs ran in ~8 h on O2's saved models, with no
+  new world and no new stream lifetime, each behind a bitwise reload gate (G0:
+  the reloaded model reproduces the recorded per-task terminal exactly). Save
+  every terminal and stage model of a Tier 2 run. The next questions are often
+  answerable from them, and the gate makes the reuse trustworthy. Guard against
+  the cost: every such rung re-uses the same worlds, so its numbers are sizings
+  and must be confirmed on fresh worlds.
+- A SHARED-RNG REPLAY BUFFER CAN BE RECONSTRUCTED, BUT ONLY BY REPLAYING THE
+  EXACT CALL SEQUENCE, AND ONLY TRUSTED AFTER A SPY CHECK (O2C). The lifetime's
+  `TaskReplayBuffer` draws storage and sampling from one generator. It is
+  rebuilt by replaying one `sample(1)` per arriving example and `add_task` after
+  each task. Gate G1 compared that reconstruction against a spy subclass
+  capturing the real buffer of a scaled lifetime: identical, item for item.
+- REGISTERING WHILE COMMITS ARE BLOCKED (O2F). A plan written during a run that
+  hashes the repo cannot be committed. It was registered by recording its sha256
+  in the timestamped working log at 0/70 cells, and committed after the run.
+  State the hash CONVENTION. The predictor file was written with CRLF, so its
+  raw-byte hash (the registered one) differs from the CRLF-normalised hash a
+  scorer prints and from git's LF blob. All three were reconciled in the record.
+- GATES THAT STAMP `git_commit` FREEZE HEAD FROM GATE TO LAUNCH (O2). O2's gate
+  record carries the protocol fingerprint, which includes the commit, so any
+  commit between the gates and the launch, docs included, would have
+  invalidated them. Uncommitted docs were stashed around the launch, because
+  `require_clean_code` refuses any dirty file, and restored after. Write
+  documents during that window; commit them after the run.
+- POWERSHELL DOUBLE-QUOTED STRINGS EAT MARKDOWN BACKTICKS (2026-09-24). In
+  `"..."` or `-f` format strings, a backtick is an escape: `` `r `` became a
+  carriage return (git then classed `RESEARCH_STATUS.md` as binary), and other
+  backticks vanished. Bash heredocs likewise turned a Python `\r\n` into
+  literal newlines. Write file edits through a scratch Python file (UTF-8, LF),
+  or through PowerShell SINGLE-quoted here-strings, and scan for control bytes
+  afterwards.
+- REGISTER A CONDITIONAL DECISION BEFORE THE DATA THAT RESOLVES IT (decision
+  10). "L1-L8 reopen iff O2 labels SHUFFLED or STAGED RELIABLE" was written and
+  timestamped before any O2 cell ran, and applied mechanically when O2 returned
+  UNRELIABLE. A delegated programme decision that depends on a pending result
+  should be written as a rule, with every branch stated, before the result
+  exists.
+
+- RUN THE ADEQUACY CHECKER BEFORE COMMITTING A FREEZE, NOT AFTER (O3,
+  2026-09-26). O3's first freeze (`0707e95`) was committed, and only then was
+  `check_adequacy` run. It found two omissions: no measured refusal cost with
+  its scale, and no restatement of the decision rule in `# Discriminating
+  power`. The plan was corrected and re-frozen (`5120482`) before any cell ran,
+  and the record says so. Nothing was lost, only because the error surfaced
+  before data. Order at freeze: write, double-check, run `check_adequacy` and
+  `check_prereg` on the working copy, THEN commit the freeze and protect its
+  hash.
+
+- A DRY RUN MUST EXERCISE EVERY ARM THROUGH THE SAME VALIDATION AS THE REAL RUN
+  (O3 v1, 2026-09-26). O3's dry run skipped the new `INTERLEAVED` arm, and
+  `validate` only ran at full scale. So the first `INTERLEAVED` record, after
+  5.7 h, met a check that could never pass for that construction: a last-task
+  anchor on an arm that trains after its last task. Two rules follow. Every
+  invariant copied from an older arm must be re-derived for the new
+  construction (same family as "reuse is construction, not name"). And the
+  dry run includes one cell of EVERY arm, validated exactly as in the real run.
+- THE 8 GiB PRECONDITION IS CHECKED ONCE, BUT THE HOST IS SHARED FOR HOURS (O3
+  v1). Memory was fine at launch (8.5 GiB). Four hours later the PI's
+  development tools held ~7.8 GB, Windows logged low virtual memory, and the
+  run crawled ~14x slower. A restartable run survives this, but its timing does
+  not. Before a multi-hour launch on a shared host, look at what else is
+  running, and read `Resource-Exhaustion-Detector` events when a run is
+  unexpectedly slow.
+
+- A CHECK MUST FAIL THE COMMAND, NOT JUST PRINT (2026-09-27). Twice in one day a
+  plan freeze was committed right after the adequacy checker PRINTED a failure:
+  the check ran inside a `&&` chain but exited 0, so the chain continued (O3's
+  first freeze, then O5's). Both were re-frozen before any data, so nothing was
+  lost. But a gate that cannot stop the pipeline is decoration. Wrap every
+  pre-commit check so that a non-empty problem list exits non-zero
+  (`sys.exit(1 if problems else 0)`), and read its output before committing.
+- A VACUOUS EQUIVALENCE GATE IS STILL VACUOUS WHEN IT PASSES (O5). "Cells with
+  unchanged routes must reproduce the committed reference bitwise" never
+  applied, because route search changed routes in every cell. A conditional
+  gate must be checked for whether its condition EVER held, and the report must
+  count the cells it covered (here 0).
+
+- STALE BOOKKEEPING, NOT A BROKEN LIBRARY (O5 -> O6 SEALED, 2026-09-28;
+  `reports/o6_sealed_reroute.json`). Online formation's residual failure was
+  never what it looked like. Collapsed lifetimes sat at ~1.8, the no-anchor
+  floor, which reads as "the library never formed". But their libraries fit
+  tasks as they arrived. What had gone wrong was each task's RECORDED ROUTE,
+  which drifts out of date as the shared library keeps learning. At the final,
+  sharp routing temperature, gradient refitting cannot move a route to a
+  different slot (J1's lock-in). Re-inferring every route by search on
+  retained examples, then consolidating, passed 45/45 sealed cells against
+  36/45 for consolidation alone, and rescued 6/6 collapses against 0/6. Search
+  changed 8-73 of 188 routes in EVERY learner, so staleness is the normal
+  state of an online learner, not a pathology of the failed ones. Rule: when a
+  learner that composes shared parts fails, re-derive its task-to-part
+  assignments against its current parts before concluding that the parts are
+  bad. That is cheap Tier 0 on saved artifacts: freeze the library, search the
+  routes, and score.
+- A FAILURE SPLIT INTO MODES IS A SEQUENCE OF RUNGS, NOT A DEAD END (O2 -> O6).
+  Order-free online formation went 0.43 -> 0.84 (sleep) -> 1.00 (re-route +
+  sleep) because each rung took the dominant REMAINING failure mode and asked
+  what it was: near-misses (under-convergence; a sleep phase fixes it), then
+  collapses (stale routes; re-inference fixes it). Each answer came from a
+  read-only census on saved models before any new lifetime was run. Save every
+  terminal.
+- A SPAWN-BASED POOL NEEDS A `__main__` GUARD IN EVERY ENTRY SCRIPT, INCLUDING
+  WRAPPERS (O6, 2026-09-27). On Windows, `ProcessPoolExecutor` spawns workers
+  that re-import the launching script. A small launcher that set a module
+  constant and then called `main()` at top level made every worker re-run the
+  whole launcher, and the pool broke ("terminated abruptly"). The runner
+  modules had the guard; the wrapper did not. Caught on the dry run, before any
+  sealed cell.
+- A PI-AUTHORIZED PRECONDITION OVERRIDE BELONGS OUTSIDE THE RUNNER AND IN THE
+  RECORD (O6). The PI said to start with less than the 8 GiB reserve free.
+  Editing the runner would have changed its implementation hash and voided the
+  passed gates. Instead, an external launcher set the reserve constant, which
+  the protocol does not fingerprint, and called the unchanged runner. The
+  launcher was archived, `precondition.json` recorded the reserve actually
+  used, and the override was disclosed with the verdict. The reserve was lowered
+  in steps as free memory fell (8 -> 6.5 -> 5.5 -> 4.5), with a stated floor at
+  which to stop and ask rather than keep lowering it.
+
+- A REPAIR STEP NEED NOT BE EXACT WHEN A CONSOLIDATION STEP FOLLOWS IT (O7,
+  2026-09-28). A gradient re-router that disagreed with exhaustive search on up
+  to 37 of 188 routes reached, after sleep, 1.08x the exhaustive terminal (median;
+  worst 1.77x) and rescued 10/10 hard cells. Judged on routes alone it looked
+  like a lag (0.54 against 0.38 on the hardest collapse). Score a component by
+  the endpoint of the pipeline it feeds, not by agreement with an exact
+  reference. That is also why the cheaper approximate component can be the
+  right one.
+- LOCAL SEARCH FROM A STALE ASSIGNMENT IS THE WRONG REPAIR FOR COUPLED
+  STALENESS (O7 Tier 0). Single-position coordinate descent recovered 17% of
+  stale routes, because 2-3 positions had to change together, and an
+  anchor-derived slot relabelling was worse than no change (the drift is
+  many-to-one and position-specific). A re-heated relaxation, in which every
+  position moves at once, recovered 76%. Before building a local repair,
+  measure how many coordinates a typical fix must change jointly.
+
+- ASK WHEN A COMMITMENT WENT WRONG, NOT ONLY WHETHER IT DID, AND REPAIR IT AT
+  THAT TIME (O8, 2026-10-03). O6 repaired stale routes once, after the stream.
+  A census of WHEN stale routes had been committed showed they were mostly the
+  first third of the stream (33% against 9-10%) - assignments made while the
+  library was immature. Re-deriving earlier tasks' routes during the stream
+  then made a wake-only learner pass 20 of 21 cells with no sleep phase, where
+  it had passed 8. The same census also showed decision 14's premise compared
+  route COUNTS, not seconds: one exhaustive pass binds near depth 6-7, not 4.
+  Measure the cost in the unit the decision is about before building a world
+  to escape it.
+- LONG GATES GO DETACHED TOO (O8). A full-scale gate run in a session
+  background shell was killed by the harness's low-memory reaper, leaving no
+  record. Run gates and launch as ONE detached process that writes its own
+  logs.
+
+- STALE ROUTES ARE COHERENT ERROR, AND THAT IS WHY SLEEP CANNOT FIX THEM (A1,
+  2026-10-05). Given routes with MORE exact entries (65%) than a randomly
+  corrupted set that sleep repairs (50% exact), consolidation still collapsed on
+  the stale set (1.5 against 0.03). Random route error is absorbed because
+  consolidation also trains task codes and the errors pull in different
+  directions; staleness is many tasks agreeing on the same wrong slot, which
+  consolidation reinforces. Measure the STRUCTURE of an error, not only its
+  rate: a Hamming distance or an exact-route fraction cannot tell these apart.
+
+- A NEAR-LINEAR SUBSTRATE CANNOT MAKE "WHERE A DECISION HAPPENS" NECESSARY
+  (B1-mid Tier 0, 2026-10-10). Each rotated-residual operator is a near-identity
+  residual plus a rotation, so any computed state is close to an orthogonal map of
+  the input: a hyperplane on the state after 1-8 steps is 97-98% a hyperplane on
+  the input, and an input gate tied a mid-state gate. Before registering a rung
+  about WHICH state a decision reads, measure how well the decision is predicted
+  from the cheaper state (here the input) with the same predicate family; if it is
+  near-perfect, the rung has no necessity whatever the learner does.
+
+- A GATE THAT READS A SHARED STATE SENDS GRADIENT INTO WHAT PRODUCED THAT STATE
+  (B2-online localization, 2026-10-10; `reports/b2o_localize_census.json`). LoopLearner's
+  halting predicate `sigmoid(h.z + b)` reads the state the shared operators compute, so its
+  gradient pushes the vocabulary to move states across each loop task's hyperplane. In
+  sleep this broke formation (4/9 cells, canonical 0.065 against 0.013-0.016 in controls
+  without state-reading halting); evaluating the predicate on the DETACHED state restored
+  9/9 (0.014) and also improved the loops, while freezing the predicate's parameters did
+  nothing. When adding control (a gate, a halt, a branch decision) that reads a computed
+  state, decide explicitly whether its gradient may reach the producer, and test both.
+
+- AN ITERATION KNOB ON TASKS THAT DO NOT NEED IT INVITES A ROOT IMPOSTOR (B2-hard and its root census, 2026-10-12;
+  `reports/b2_hard.json`, `reports/b2h_root_census.json`). Attaching loop machinery to every depth-1 task let wake fit
+  some primitives as a slot Q iterated 2-3 times (Q^L ~ P) instead of P itself; the anchors were fit, and every
+  depth-3 task that needed P in one step failed. It happened with and without state-reading halting (both candidate
+  arms 6/9, GIVEN 9/9), and enforcing one step after wake repaired only mild single roots (3 of 6), because many
+  tasks agree on the wrong slot (A1's coherent error). Whenever a learner gets a new degree of freedom (iteration,
+  depth, a gate) on tasks that do not require it, ask what cheaper impostor that freedom makes representable, and
+  make the plain form the starting point rather than repairing afterwards.
+
+- IN A NOISELESS WORLD, SCARCE DATA CANNOT MAKE ROUTE CHOICE HARD; ONLY NEAR TIES OR SEARCH COST CAN (G3a, 2026-10-13;
+  `reports/g3a_inference_census.json`). The shared-rotation knob brought the best wrong program to within 2-5% NMSE of
+  a formed vocabulary's winner (identifiability 0.7-3.9 against 79-148), which read like hard inference. It was not:
+  identifiability did not fall from 128 support examples to 2, and 191 of 192 programs had no regret above the bootstrap
+  floor at any support. With exact targets, any input on which a wrong route differs excludes it, so the MARGIN of the
+  runner-up says nothing about how many examples inference needs. Before building a world to make inference
+  data-limited, ask whether its targets carry noise or its route set carries near-functional ties; if neither, the
+  only lever left is search cost (depth), which E5/E5.1 already measured.
+
+- POOL WORKERS APPENDING TO ONE LOG CAN LOSE LINES ON WINDOWS (G0F, 2026-10-13). Three workers finished within one
+  second and one `run.log` line vanished; the durable cell was intact. Treat `run.log` as a convenience and the cell
+  records as the evidence; in new runners, have the PARENT write per-cell log lines as results return.
+- THE IDENTITY SKIP, NOT NONLINEARITY STRENGTH, WAS THE SOURCE OF NEAR-LINEARITY (G0F, 2026-10-13;
+  `reports/g0f_form_census.json`). G0 could not move linear predictability below 0.958 with any rotated-form knob;
+  dropping the skip (`c Q tanh(g R z + b)`) or gating multiplicatively reached 0.80-0.89 at one step, while
+  piecewise-linear folds (linear on each cone) stayed at 0.915-0.959. When a property will not move across a family's
+  knobs, look for the structural term every member shares.
+- CHECK LEARNABILITY UNDER THE OPTIMIZER THE LIFETIME ACTUALLY RUNS (G1T, 2026-10-14; `reports/g1t_tanh_formation.json`).
+  G0F's S6 fitted one `tanh2` operator to <= 0.0074 with Adam at lr 0.01, 2,000 full-batch steps on 128 examples, and
+  that was read as "single-operator learnability holds". Inside the lifetime (lr 0.001, minibatches, twelve slots
+  sharing gradient) the same form left depth-1 tasks at 0.13-0.27 while routing them perfectly, and the error
+  compounded with depth to 0.4-0.7. A learnability check is a statement about a regime; run it with the lifetime's
+  learning rate, batch and budget, or it licenses nothing about formation.
+- `artifacts/` IS UNTRACKED AND CAN VANISH BETWEEN A RUN'S EXIT AND ITS RECORD (G1S, 2026-10-16). The directory was
+  emptied outside any session after G1S finished and before it was scored, taking the durable cells, models and
+  operational logs; only the report in `reports/` survived, and the independent scorer had to run on records embedded
+  in it, with its durable-cell checks reduced to tautologies. Score and archive as soon as a run exits, and have new
+  runners write their operational logs and cell records into `reports/<run>_<date>/` themselves at exit, so the
+  record never depends on an untracked directory surviving.
+- SIZE WITH THE FULL CONFIRMED PIPELINE, NOT A SUBSET OF IT (G1R, 2026-10-17; `reports/g1r_tanh_reroute.json`). G1S
+  and G1S2 sized the `tanh` learner with wake and sleep but no re-routing, to save time. Their failures were then
+  partly staleness: re-routing rescued every one of 54 collapsed depth-3 tasks, reversed G1S2's choice of wake budget
+  (u = 2, "broken" at 1.075, became the better vocabulary at 0.054), and halved the error at G1S's own sleep length.
+  A sizing rung that drops a component of the pipeline it is sizing for measures that component's absence too.
