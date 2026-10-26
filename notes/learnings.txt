@@ -5335,3 +5335,4 @@ requirement: a quota of single-operation tasks, between 6 and ~16-18.
 - 2026-10-17 G1S2: a registered median-based "compounding ratio" hid a bimodal failure (20/64 depth-3 tasks at 0.71-1.06, the rest 0.06-0.11). Look at the per-task distribution before reading a median-based mechanism statistic; this is the O2 split-by-mode lesson again.
 
 - 2026-10-17 G1R: sizing the tanh learner without re-routing confounded fit with stale routes; re-routing rescued 54/54 collapsed tasks and reversed the chosen wake budget. Size with the full confirmed pipeline. Full entry: AGENTS.md.
+- SY0 (2026-10-26): world-level geometric means can hide a bimodal per-task outcome; E5.1 parity hid ~40% hard tasks at depth 7-10 (reports/sy0_search_budget_census.json). Inspect per-unit distributions before arguing from aggregates.

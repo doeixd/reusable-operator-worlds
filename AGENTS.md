@@ -401,6 +401,9 @@ here. Tags in brackets name the episode to search for.
     construct can work at all [E9].
 21. **Keep post-hoc patterns in the hypothesis ledger** until a design separates
     their confound, however clean the split [N1c refuted NB4].
+22. **Look at the per-unit distribution before arguing from an aggregate**: a
+    "parity" geometric mean hid ~40% hard tasks at depths 7-10 because other
+    tasks beat the reference [SY0 correcting E5.1].
 
 ## C. The three design gates (`DESIGN_ADEQUACY.md`)
 

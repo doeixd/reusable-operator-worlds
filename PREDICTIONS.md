@@ -12018,3 +12018,34 @@ the independent scorer reproduces the label (`runner_agrees: true`); `check_prer
 **What this does not show.** One stream per world. Settings chosen on world 70 and not re-tuned. End-of-stream
 re-routing only. Whether a longer sleep or another setting crosses 0.05 is not tested, and by the stop rule it is not
 pursued.
+
+# SY0 search-budget census (Tier 0, 2026-10-26): `OPPORTUNITY`, and a correction to the reading of E5.1
+
+Plan `SY0_SEARCH_BUDGET_CENSUS_PLAN.md` (frozen `eb74dbb`); `reports/sy0_search_budget_census.json`. Registration order:
+the world-level E5.1 report had been seen; the task-level statistic had not been computed.
+
+| depth | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
+|---|---|---|---|---|---|---|---|---|
+| U (hard at every budget, of 24) | 0.00 | 0.08 | 0.21 | 0.21 | 0.46 | 0.42 | 0.42 | 0.38 |
+| solved at 2000 steps | 0.96 | 0.88 | 0.79 | 0.79 | 0.54 | 0.58 | 0.54 | 0.62 |
+| budget for 75% solved | 500 | 1000 | 2000 | 2000 | >2000 | >2000 | >2000 | >2000 |
+
+Rule: `U_deep` 0.403 >= 0.25, rise over two depths 0.123 >= 0.10, z 4.39 >= 1.645 -> **`OPPORTUNITY`**. The budget
+needed for 75% solved grows at exponent >= 1.73 in depth (censored at 2000), not flat.
+
+**Reading.**
+- Correction to how E5.1 has been read since 2026-08-27 ("search does not degrade"; route optimization "matched or
+  beat the oracle"): that was a statement about WORLD-LEVEL GEOMETRIC MEANS. Per task the outcome is bimodal. At depths
+  7-10 about 40% of tasks are never brought within 0.15 log units of the oracle route by any of the four budgets
+  (typical miss 2-2.5x the oracle's NMSE), while others beat the E0.1 oracle route by ~2x; the mean hid both. E5.1's
+  registered outputs stand as registered; what changes is the summary "search does not fail here, it only costs" in
+  `SYNTHESIS_CYCLE_PROPOSAL.md` and the necessity reading built on it. The search horizon of route optimization at
+  <= 2000 steps is real and starts around depth 5-7.
+- The label licenses the NEXT question, not the cycle: a failure of one gradient run at a fixed budget can be a local
+  minimum that random restarts fix at equal compute (B1g: first restarts fail on 10/96 MID tasks). That impostor must
+  be ruled out before macros are credited. The macro proxy (search at depth D-2) is optimistic, and on uniformly random
+  programs subprogram recurrence is at chance (B3: best repeated pattern 6-8 uses against an alphabet-tax H* of 16.8).
+
+**What this does not show.** One library family (E1 discrete, canonical world, d = 16), 8 programs per (world, depth),
+gradient search at one learning rate, budgets up to 2000; nothing was rerun. The oracle reference is the E0.1
+assignment route, which search often beats, so "hard" means worse than a known route, not worse than optimal.

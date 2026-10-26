@@ -1876,3 +1876,12 @@ Append new full-length entries here and a condensed rule in `AGENTS.md`.
   partly staleness: re-routing rescued every one of 54 collapsed depth-3 tasks, reversed G1S2's choice of wake budget
   (u = 2, "broken" at 1.075, became the better vocabulary at 0.054), and halved the error at G1S's own sleep length.
   A sizing rung that drops a component of the pipeline it is sizing for measures that component's absence too.
+
+- A WORLD-LEVEL GEOMETRIC MEAN CAN HIDE A BIMODAL PER-TASK OUTCOME (SY0, 2026-10-26;
+  `reports/sy0_search_budget_census.json`). E5.1 reported route optimization at oracle parity to depth 10 from
+  per-world geometric means over 8 tasks, and two months of reasoning (E6's "macros buy a constant factor", the
+  synthesis-cycle proposal's "search does not fail here, it only costs") rested on that summary. Per task, about 40% of
+  depth-7-10 programs are never brought within 0.15 log units of the oracle route at any budget (typical miss 2-2.5x),
+  while others beat the oracle route by ~2x; the mean averaged a failure mode with a success mode. Before building an
+  argument on an aggregate, look at the per-unit distribution it summarizes, especially when the aggregate can go
+  below the reference (here, beating the oracle is possible, so a "parity" mean can contain many failures).

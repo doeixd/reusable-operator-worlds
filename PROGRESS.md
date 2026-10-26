@@ -9634,3 +9634,16 @@ in `reports/g1v_tanh_probe_20261017/`. 10 cells, pool 3, 22:11Z to 00:33Z. 0 / 5
 0.054-0.067, depth-1 ARI 1.00, no collapsed tasks. The `tanh` line stops per the plan's branch. The watcher shell was
 reaped for low memory mid-run; the detached run was unaffected. Next: the synthesis-cycle Tier 0 census
 (`SYNTHESIS_CYCLE_PROPOSAL.md`).
+
+# SY0 search-budget census (Tier 0, 2026-10-26, re-analysis of E5.1): `OPPORTUNITY`
+
+Plan `SY0_SEARCH_BUDGET_CENSUS_PLAN.md` (frozen `eb74dbb`, protected `42aa27f`); module
+`row.experiments.census_sy0_search_budget`; independent `--verify` path agrees; report
+`reports/sy0_search_budget_census.json`. No model run: the 192 committed E5.1 per-task cache records (protocol
+`f945fe71aec9f1bf`). The first draft rule (per-depth differences) failed its discrimination check (false-fire 0.26-0.57)
+and was replaced by a pooled trend rule before any task-level statistic was computed (false-fire <= 0.0005, detection
+0.83 / 0.96). Result: the fraction of tasks that NO budget brings within 0.15 log units of the oracle rises from 0 at
+depth 3 to 0.38-0.46 at depths 7-10 (slope 0.062 per depth, z 4.39, U_deep 0.40). Post-hoc sizing: hard tasks end at
+median NMSE ~0.03 against an oracle ~0.011 (gaps 0.5-0.9 log units), while other tasks beat the E0.1 oracle route by
+~2x. Next: rebuild the E1 discrete libraries (the artifacts were deleted) with a reproduction gate on the cached oracle
+NMSEs, then a Tier 1 that separates local-minimum failure (restarts at matched compute) from what a macro could buy.
