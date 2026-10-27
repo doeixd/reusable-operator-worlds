@@ -1,0 +1,10998 @@
+{
+ "plan": "M0_MOTIF_OPPORTUNITY_CENSUS_PLAN.md",
+ "git_commit": "8482777df40016007db5d105840749bb3c2de9ad",
+ "label": "MOTIF_OPPORTUNITY",
+ "rates": {
+  "MOTIF_MINED": 1.0,
+  "MOTIF_RANDOM": 0.0,
+  "MOTIF_ORACLE": 1.0,
+  "MOTIF_INCUMBENT": 0.0,
+  "UNIFORM_MINED": 0.0,
+  "UNIFORM_RANDOM": 0.0
+ },
+ "discrimination": {
+  "n_per_rate": 36,
+  "mined_pass_ge_0.9": {
+   "0.99": 0.99942,
+   "0.97": 0.97751,
+   "0.95": 0.89764,
+   "0.85": 0.19093,
+   "0.8": 0.05208,
+   "0.7": 0.00179
+  },
+  "control_fail_gt_0.2": {
+   "0.02": 0.0,
+   "0.05": 0.00025,
+   "0.1": 0.02317,
+   "0.3": 0.88867,
+   "0.4": 0.99244
+  },
+  "incumbent_binds_le_0.5": {
+   "0.2": 0.99998,
+   "0.3": 0.99633,
+   "0.4": 0.91878,
+   "0.6": 0.14717,
+   "0.7": 0.00921
+  },
+  "incumbent_free_gt_0.8": {
+   "0.7": 0.11194,
+   "0.75": 0.28918,
+   "0.9": 0.97701,
+   "0.95": 0.99965
+  }
+ },
+ "cells": [
+  {
+   "world": 80,
+   "generator": "MOTIF",
+   "motifs": [
+    [
+     0,
+     5,
+     1
+    ],
+    [
+     0,
+     0,
+     2
+    ],
+    [
+     3,
+     1,
+     0
+    ],
+    [
+     2,
+     2,
+     4
+    ],
+    [
+     3,
+     1,
+     4
+    ],
+    [
+     1,
+     5,
+     3
+    ]
+   ],
+   "alphabet": [
+    [
+     0,
+     0,
+     2
+    ],
+    [
+     0,
+     5,
+     1
+    ],
+    [
+     3,
+     1,
+     0
+    ],
+    [
+     1,
+     5,
+     3
+    ],
+    [
+     2,
+     2,
+     4
+    ],
+    [
+     3,
+     1,
+     4
+    ],
+    [
+     1,
+     0,
+     3
+    ]
+   ],
+   "random_alphabet": [
+    [
+     0,
+     3,
+     3
+    ],
+    [
+     0,
+     0,
+     2
+    ],
+    [
+     5,
+     0,
+     2
+    ],
+    [
+     4,
+     3,
+     5
+    ],
+    [
+     5,
+     1,
+     0
+    ],
+    [
+     4,
+     5,
+     5
+    ],
+    [
+     2,
+     2,
+     0
+    ]
+   ],
+   "motifs_recovered": 6,
+   "top_grams": {
+    "310": 9,
+    "002": 9,
+    "051": 9,
+    "224": 8,
+    "153": 8,
+    "314": 5,
+    "103": 3,
+    "241": 2,
+    "120": 2,
+    "200": 2,
+    "131": 2,
+    "031": 2,
+    "522": 2,
+    "100": 2,
+    "020": 2,
+    "105": 2,
+    "101": 1,
+    "011": 1,
+    "531": 1,
+    "511": 1
+   },
+   "shallow": [
+    {
+     "truth": [
+      3,
+      1,
+      0,
+      1,
+      1
+     ],
+     "found": [
+      3,
+      1,
+      0,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      2
+     ],
+     "found": [
+      0,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      2,
+      4
+     ],
+     "found": [
+      2,
+      2,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      3,
+      1
+     ],
+     "found": [
+      1,
+      5,
+      3,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      5,
+      1,
+      1,
+      2
+     ],
+     "found": [
+      0,
+      5,
+      1,
+      1,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      0,
+      2
+     ],
+     "found": [
+      0,
+      0,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      3,
+      4
+     ],
+     "found": [
+      1,
+      5,
+      3,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      2,
+      4
+     ],
+     "found": [
+      2,
+      2,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      2,
+      4
+     ],
+     "found": [
+      2,
+      2,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      2,
+      2,
+      4,
+      1
+     ],
+     "found": [
+      2,
+      2,
+      2,
+      4,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      5,
+      1
+     ],
+     "found": [
+      0,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      5,
+      3
+     ],
+     "found": [
+      0,
+      1,
+      5,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      2,
+      0,
+      0,
+      2
+     ],
+     "found": [
+      1,
+      2,
+      0,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      0,
+      3
+     ],
+     "found": [
+      3,
+      1,
+      0,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      3,
+      1,
+      4,
+      1
+     ],
+     "found": [
+      2,
+      3,
+      1,
+      4,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      1,
+      5,
+      3
+     ],
+     "found": [
+      4,
+      1,
+      5,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      5,
+      1
+     ],
+     "found": [
+      0,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      3,
+      1,
+      0
+     ],
+     "found": [
+      1,
+      3,
+      1,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      0,
+      3,
+      1,
+      4
+     ],
+     "found": [
+      4,
+      0,
+      3,
+      1,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      2,
+      3,
+      5
+     ],
+     "found": [
+      0,
+      0,
+      2,
+      3,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      2,
+      0,
+      0,
+      2
+     ],
+     "found": [
+      1,
+      2,
+      0,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      5,
+      1,
+      0
+     ],
+     "found": [
+      0,
+      5,
+      1,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      3
+     ],
+     "found": [
+      1,
+      5,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      2,
+      4,
+      0
+     ],
+     "found": [
+      2,
+      2,
+      4,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      3,
+      3,
+      0
+     ],
+     "found": [
+      1,
+      5,
+      3,
+      3,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      2
+     ],
+     "found": [
+      0,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      2,
+      2,
+      4
+     ],
+     "found": [
+      5,
+      2,
+      2,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      3,
+      1,
+      0,
+      3
+     ],
+     "found": [
+      3,
+      3,
+      1,
+      0,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      2,
+      2,
+      4
+     ],
+     "found": [
+      0,
+      2,
+      2,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      0
+     ],
+     "found": [
+      3,
+      1,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      0,
+      3,
+      5
+     ],
+     "found": [
+      3,
+      1,
+      0,
+      3,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      3
+     ],
+     "found": [
+      1,
+      5,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      0,
+      0,
+      2
+     ],
+     "found": [
+      1,
+      5,
+      0,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      0,
+      0
+     ],
+     "found": [
+      3,
+      1,
+      0,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      2,
+      0
+     ],
+     "found": [
+      0,
+      0,
+      2,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      0,
+      3,
+      1,
+      0
+     ],
+     "found": [
+      3,
+      0,
+      3,
+      1,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      5,
+      1
+     ],
+     "found": [
+      0,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      0,
+      5,
+      1
+     ],
+     "found": [
+      1,
+      0,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      0,
+      0,
+      2,
+      1
+     ],
+     "found": [
+      1,
+      0,
+      0,
+      2,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      0,
+      5,
+      1
+     ],
+     "found": [
+      4,
+      0,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      3,
+      1,
+      4
+     ],
+     "found": [
+      1,
+      3,
+      1,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      2,
+      2,
+      4,
+      1
+     ],
+     "found": [
+      5,
+      2,
+      2,
+      4,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      5,
+      1
+     ],
+     "found": [
+      0,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      3
+     ],
+     "found": [
+      1,
+      5,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      1,
+      0,
+      5,
+      1
+     ],
+     "found": [
+      1,
+      1,
+      0,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      4
+     ],
+     "found": [
+      3,
+      1,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      0,
+      2,
+      0
+     ],
+     "found": [
+      3,
+      1,
+      0,
+      2,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      4
+     ],
+     "found": [
+      3,
+      1,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    }
+   ],
+   "shallow_seconds": 8.5625,
+   "mine_seconds": 0.0,
+   "deep": [
+    {
+     "truth": [
+      2,
+      2,
+      4,
+      0,
+      0,
+      2,
+      0,
+      0,
+      2
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       2,
+       2,
+       4,
+       0,
+       0,
+       2,
+       0,
+       0,
+       2
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       2,
+       0,
+       5,
+       0,
+       2,
+       5,
+       1,
+       0
+      ],
+      "score": 1.6707591687663226,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.5625,
+      "exact": false,
+      "query_nmse": 1.6722462988078253
+     },
+     "ORACLE": {
+      "found": [
+       2,
+       2,
+       4,
+       0,
+       0,
+       2,
+       0,
+       0,
+       2
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       2,
+       5,
+       3,
+       1,
+       3,
+       3,
+       0,
+       3,
+       3
+      ],
+      "descent_score": 1.7640982182642162,
+      "score": 1.7640982182642162,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 32.296875,
+      "exact": false,
+      "query_nmse": 1.6259580608194073
+     }
+    },
+    {
+     "truth": [
+      2,
+      2,
+      4,
+      3,
+      1,
+      0,
+      2,
+      2,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       2,
+       2,
+       4,
+       3,
+       1,
+       0,
+       2,
+       2,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       3,
+       5,
+       0,
+       3,
+       3,
+       4,
+       3,
+       5
+      ],
+      "score": 1.6848083657190216,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.734375,
+      "exact": false,
+      "query_nmse": 1.6083406224845327
+     },
+     "ORACLE": {
+      "found": [
+       2,
+       2,
+       4,
+       3,
+       1,
+       0,
+       2,
+       2,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       1,
+       0,
+       0,
+       2,
+       3,
+       4,
+       0,
+       1,
+       4
+      ],
+      "descent_score": 1.7053943141251486,
+      "score": 1.7053943141251486,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 26.953125,
+      "exact": false,
+      "query_nmse": 1.6691315352029203
+     }
+    },
+    {
+     "truth": [
+      1,
+      5,
+      3,
+      2,
+      2,
+      4,
+      1,
+      5,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       1,
+       5,
+       3,
+       2,
+       2,
+       4,
+       1,
+       5,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.078125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       3,
+       3,
+       4,
+       5,
+       5,
+       0,
+       1,
+       2
+      ],
+      "score": 1.6976908997095295,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.65625,
+      "exact": false,
+      "query_nmse": 1.6728802632916384
+     },
+     "ORACLE": {
+      "found": [
+       1,
+       5,
+       3,
+       2,
+       2,
+       4,
+       1,
+       5,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       4,
+       1,
+       1,
+       1,
+       3,
+       0,
+       1,
+       2,
+       2
+      ],
+      "descent_score": 1.8433650573885498,
+      "score": 1.6614798565307929,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 28.953125,
+      "exact": false,
+      "query_nmse": 1.6122373953315303
+     }
+    },
+    {
+     "truth": [
+      2,
+      2,
+      4,
+      3,
+      1,
+      0,
+      0,
+      0,
+      2
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       2,
+       2,
+       4,
+       3,
+       1,
+       0,
+       0,
+       0,
+       2
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.078125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       0,
+       2,
+       4,
+       1,
+       0,
+       5,
+       2,
+       0
+      ],
+      "score": 1.7601693508476113,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1307,
+      "seconds": 0.59375,
+      "exact": false,
+      "query_nmse": 1.6389321233546674
+     },
+     "ORACLE": {
+      "found": [
+       2,
+       2,
+       4,
+       3,
+       1,
+       0,
+       0,
+       0,
+       2
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       3,
+       4,
+       2,
+       3,
+       3,
+       3,
+       1,
+       0,
+       2
+      ],
+      "descent_score": 1.6719161745759767,
+      "score": 1.6572013023190801,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 28.53125,
+      "exact": false,
+      "query_nmse": 1.6538818109973352
+     }
+    },
+    {
+     "truth": [
+      0,
+      5,
+      1,
+      1,
+      5,
+      3,
+      3,
+      1,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       5,
+       1,
+       1,
+       5,
+       3,
+       3,
+       1,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       3,
+       5,
+       2,
+       2,
+       0,
+       4,
+       5,
+       5
+      ],
+      "score": 1.6978680821480012,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.578125,
+      "exact": false,
+      "query_nmse": 1.666926437687037
+     },
+     "ORACLE": {
+      "found": [
+       0,
+       5,
+       1,
+       1,
+       5,
+       3,
+       3,
+       1,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.015625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       0,
+       5,
+       0,
+       3,
+       1,
+       1,
+       3,
+       0,
+       2
+      ],
+      "descent_score": 1.6951676326378038,
+      "score": 1.6951676326378038,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 30.125,
+      "exact": false,
+      "query_nmse": 1.6226297678797779
+     }
+    },
+    {
+     "truth": [
+      3,
+      1,
+      0,
+      3,
+      1,
+      4,
+      3,
+      1,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       1,
+       0,
+       3,
+       1,
+       4,
+       3,
+       1,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       5,
+       0,
+       2,
+       5,
+       1,
+       0,
+       2,
+       2,
+       3
+      ],
+      "score": 1.7583521688852461,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1350,
+      "seconds": 0.515625,
+      "exact": false,
+      "query_nmse": 1.6703140706824817
+     },
+     "ORACLE": {
+      "found": [
+       3,
+       1,
+       0,
+       3,
+       1,
+       4,
+       3,
+       1,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       5,
+       1,
+       4,
+       0,
+       0,
+       3,
+       2,
+       3,
+       0
+      ],
+      "descent_score": 1.7241720180202451,
+      "score": 1.7241720180202451,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 29.21875,
+      "exact": false,
+      "query_nmse": 1.5534427528626271
+     }
+    },
+    {
+     "truth": [
+      2,
+      2,
+      4,
+      0,
+      0,
+      2,
+      1,
+      5,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       2,
+       2,
+       4,
+       0,
+       0,
+       2,
+       1,
+       5,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.078125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       5,
+       3,
+       3,
+       5,
+       1,
+       0,
+       5,
+       0,
+       2
+      ],
+      "score": 1.7238339841695134,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.71875,
+      "exact": false,
+      "query_nmse": 1.6606768527243665
+     },
+     "ORACLE": {
+      "found": [
+       2,
+       2,
+       4,
+       0,
+       0,
+       2,
+       1,
+       5,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       3,
+       1,
+       1,
+       5,
+       0,
+       2,
+       0,
+       1,
+       1
+      ],
+      "descent_score": 1.8091714945548563,
+      "score": 1.599534764801705,
+      "success": false,
+      "polish_evaluations": 1307,
+      "seconds": 30.609375,
+      "exact": false,
+      "query_nmse": 1.5150247455970647
+     }
+    },
+    {
+     "truth": [
+      3,
+      1,
+      4,
+      0,
+      0,
+      2,
+      2,
+      2,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       1,
+       4,
+       0,
+       0,
+       2,
+       2,
+       2,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       5,
+       1,
+       2,
+       5,
+       2,
+       2,
+       5,
+       1,
+       0
+      ],
+      "score": 1.7134447682832845,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.6449293289784948
+     },
+     "ORACLE": {
+      "found": [
+       3,
+       1,
+       4,
+       0,
+       0,
+       2,
+       2,
+       2,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       4,
+       5,
+       0,
+       3,
+       1,
+       5,
+       1,
+       1,
+       4
+      ],
+      "descent_score": 1.7312190262452676,
+      "score": 1.6816128244542772,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 23.21875,
+      "exact": false,
+      "query_nmse": 1.6178389209674333
+     }
+    },
+    {
+     "truth": [
+      3,
+      1,
+      4,
+      0,
+      0,
+      2,
+      3,
+      1,
+      0
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       1,
+       4,
+       0,
+       0,
+       2,
+       3,
+       1,
+       0
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       2,
+       0,
+       4,
+       3,
+       5,
+       4,
+       5,
+       5
+      ],
+      "score": 1.6067334022256952,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.65625,
+      "exact": false,
+      "query_nmse": 1.5650552062691367
+     },
+     "ORACLE": {
+      "found": [
+       3,
+       1,
+       4,
+       0,
+       0,
+       2,
+       3,
+       1,
+       0
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       2,
+       5,
+       4,
+       0,
+       0,
+       0,
+       2,
+       4,
+       4
+      ],
+      "descent_score": 1.6287729907803778,
+      "score": 1.6287729907803778,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 30.5,
+      "exact": false,
+      "query_nmse": 1.5449080861735738
+     }
+    },
+    {
+     "truth": [
+      1,
+      5,
+      3,
+      0,
+      0,
+      2,
+      2,
+      2,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       1,
+       5,
+       3,
+       0,
+       0,
+       2,
+       2,
+       2,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       0,
+       3,
+       3,
+       0,
+       3,
+       3,
+       2,
+       2,
+       0
+      ],
+      "score": 1.763767144538909,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.640625,
+      "exact": false,
+      "query_nmse": 1.7044991120645299
+     },
+     "ORACLE": {
+      "found": [
+       1,
+       5,
+       3,
+       0,
+       0,
+       2,
+       2,
+       2,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       1,
+       4,
+       5,
+       1,
+       2,
+       5,
+       4,
+       1,
+       4
+      ],
+      "descent_score": 1.8023358466973929,
+      "score": 1.7245801176465352,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 29.984375,
+      "exact": false,
+      "query_nmse": 1.5951016398029516
+     }
+    },
+    {
+     "truth": [
+      3,
+      1,
+      0,
+      0,
+      5,
+      1,
+      0,
+      5,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       1,
+       0,
+       0,
+       5,
+       1,
+       0,
+       5,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       2,
+       0,
+       0,
+       3,
+       3,
+       0,
+       0,
+       2
+      ],
+      "score": 1.831259838905757,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.734375,
+      "exact": false,
+      "query_nmse": 1.6261450843395917
+     },
+     "ORACLE": {
+      "found": [
+       3,
+       1,
+       0,
+       0,
+       5,
+       1,
+       0,
+       5,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       2,
+       4,
+       1,
+       0,
+       1,
+       2,
+       1,
+       5,
+       2
+      ],
+      "descent_score": 1.7323154321510124,
+      "score": 1.7323154321510124,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 29.15625,
+      "exact": false,
+      "query_nmse": 1.5458071252076346
+     }
+    },
+    {
+     "truth": [
+      3,
+      1,
+      4,
+      3,
+      1,
+      0,
+      1,
+      5,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       1,
+       4,
+       3,
+       1,
+       0,
+       1,
+       5,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       2,
+       0,
+       0,
+       0,
+       2,
+       4,
+       3,
+       5
+      ],
+      "score": 1.7157419512234056,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.515625,
+      "exact": false,
+      "query_nmse": 1.6830785069970868
+     },
+     "ORACLE": {
+      "found": [
+       3,
+       1,
+       4,
+       3,
+       1,
+       0,
+       1,
+       5,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.015625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       2,
+       2,
+       0,
+       0,
+       5,
+       5,
+       3,
+       5,
+       2
+      ],
+      "descent_score": 1.7967761577162311,
+      "score": 1.7344217928835175,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 30.546875,
+      "exact": false,
+      "query_nmse": 1.5653990246212832
+     }
+    }
+   ],
+   "complete": true,
+   "git_commit": "8482777df40016007db5d105840749bb3c2de9ad"
+  },
+  {
+   "world": 81,
+   "generator": "MOTIF",
+   "motifs": [
+    [
+     2,
+     3,
+     5
+    ],
+    [
+     2,
+     4,
+     2
+    ],
+    [
+     3,
+     1,
+     1
+    ],
+    [
+     4,
+     5,
+     1
+    ],
+    [
+     5,
+     0,
+     2
+    ],
+    [
+     0,
+     4,
+     3
+    ]
+   ],
+   "alphabet": [
+    [
+     3,
+     1,
+     1
+    ],
+    [
+     4,
+     5,
+     1
+    ],
+    [
+     2,
+     4,
+     2
+    ],
+    [
+     2,
+     3,
+     5
+    ],
+    [
+     5,
+     0,
+     2
+    ],
+    [
+     0,
+     4,
+     3
+    ],
+    [
+     0,
+     2,
+     3
+    ],
+    [
+     3,
+     5,
+     0
+    ]
+   ],
+   "random_alphabet": [
+    [
+     2,
+     1,
+     2
+    ],
+    [
+     5,
+     0,
+     3
+    ],
+    [
+     1,
+     3,
+     2
+    ],
+    [
+     0,
+     0,
+     2
+    ],
+    [
+     4,
+     3,
+     3
+    ],
+    [
+     4,
+     0,
+     3
+    ],
+    [
+     3,
+     2,
+     2
+    ],
+    [
+     5,
+     4,
+     4
+    ]
+   ],
+   "motifs_recovered": 6,
+   "top_grams": {
+    "451": 11,
+    "311": 11,
+    "242": 10,
+    "235": 7,
+    "502": 5,
+    "043": 4,
+    "350": 3,
+    "023": 3,
+    "245": 2,
+    "113": 2,
+    "430": 2,
+    "445": 2,
+    "513": 2,
+    "131": 2,
+    "424": 2,
+    "050": 1,
+    "324": 1,
+    "355": 1,
+    "553": 1,
+    "102": 1
+   },
+   "shallow": [
+    {
+     "truth": [
+      0,
+      5,
+      0,
+      2
+     ],
+     "found": [
+      0,
+      5,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      2,
+      4,
+      5,
+      1
+     ],
+     "found": [
+      3,
+      2,
+      4,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1
+     ],
+     "found": [
+      3,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1
+     ],
+     "found": [
+      3,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      2
+     ],
+     "found": [
+      2,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1
+     ],
+     "found": [
+      3,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1,
+      3
+     ],
+     "found": [
+      3,
+      1,
+      1,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      3,
+      0
+     ],
+     "found": [
+      0,
+      4,
+      3,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      3,
+      5,
+      5,
+      3
+     ],
+     "found": [
+      2,
+      3,
+      5,
+      5,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      5,
+      1
+     ],
+     "found": [
+      4,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      0,
+      2,
+      4,
+      2
+     ],
+     "found": [
+      1,
+      0,
+      2,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1,
+      2
+     ],
+     "found": [
+      3,
+      1,
+      1,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1,
+      3
+     ],
+     "found": [
+      3,
+      1,
+      1,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      3,
+      5
+     ],
+     "found": [
+      2,
+      3,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      3
+     ],
+     "found": [
+      0,
+      4,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      0,
+      2,
+      1
+     ],
+     "found": [
+      5,
+      0,
+      2,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      4,
+      5,
+      1
+     ],
+     "found": [
+      2,
+      4,
+      4,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      3,
+      0,
+      4,
+      3
+     ],
+     "found": [
+      4,
+      3,
+      0,
+      4,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      3
+     ],
+     "found": [
+      0,
+      4,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      2,
+      3,
+      5
+     ],
+     "found": [
+      2,
+      2,
+      3,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      5,
+      4,
+      5,
+      1
+     ],
+     "found": [
+      2,
+      5,
+      4,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      1,
+      3,
+      1,
+      1
+     ],
+     "found": [
+      5,
+      1,
+      3,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      3,
+      5,
+      0
+     ],
+     "found": [
+      2,
+      3,
+      5,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      2
+     ],
+     "found": [
+      2,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      5,
+      1
+     ],
+     "found": [
+      4,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      3,
+      4,
+      5,
+      1
+     ],
+     "found": [
+      1,
+      3,
+      4,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      1,
+      4,
+      5,
+      1
+     ],
+     "found": [
+      2,
+      1,
+      4,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      2,
+      4,
+      2
+     ],
+     "found": [
+      4,
+      2,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      3,
+      1,
+      1
+     ],
+     "found": [
+      1,
+      3,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      3,
+      5,
+      0,
+      2
+     ],
+     "found": [
+      5,
+      3,
+      5,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1
+     ],
+     "found": [
+      3,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      2
+     ],
+     "found": [
+      2,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      2,
+      3,
+      0
+     ],
+     "found": [
+      2,
+      4,
+      2,
+      3,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      2,
+      3,
+      5
+     ],
+     "found": [
+      0,
+      2,
+      3,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      0,
+      2,
+      3
+     ],
+     "found": [
+      5,
+      0,
+      2,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      5,
+      1
+     ],
+     "found": [
+      2,
+      4,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5,
+      1
+     ],
+     "found": [
+      0,
+      4,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      2
+     ],
+     "found": [
+      2,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      2,
+      2
+     ],
+     "found": [
+      2,
+      4,
+      2,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      4,
+      2,
+      4,
+      2
+     ],
+     "found": [
+      4,
+      4,
+      2,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      4,
+      5,
+      1
+     ],
+     "found": [
+      4,
+      4,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1
+     ],
+     "found": [
+      3,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1
+     ],
+     "found": [
+      3,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      5,
+      0,
+      2,
+      0
+     ],
+     "found": [
+      3,
+      5,
+      0,
+      2,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      2,
+      4,
+      2
+     ],
+     "found": [
+      5,
+      2,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      2,
+      3,
+      5
+     ],
+     "found": [
+      0,
+      2,
+      3,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      3,
+      5,
+      1,
+      3
+     ],
+     "found": [
+      2,
+      3,
+      5,
+      1,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      5,
+      1,
+      2
+     ],
+     "found": [
+      4,
+      5,
+      1,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    }
+   ],
+   "shallow_seconds": 6.875,
+   "mine_seconds": 0.0,
+   "deep": [
+    {
+     "truth": [
+      4,
+      5,
+      1,
+      2,
+      3,
+      5,
+      2,
+      3,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       4,
+       5,
+       1,
+       2,
+       3,
+       5,
+       2,
+       3,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       4,
+       4,
+       0,
+       0,
+       2,
+       5,
+       2,
+       4
+      ],
+      "score": 1.6068690953916436,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1306,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.495204938568492
+     },
+     "ORACLE": {
+      "found": [
+       4,
+       5,
+       1,
+       2,
+       3,
+       5,
+       2,
+       3,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       2,
+       5,
+       1,
+       1,
+       1,
+       1,
+       5,
+       1,
+       4
+      ],
+      "descent_score": 1.6630621919738098,
+      "score": 1.6630621919738098,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 29.8125,
+      "exact": false,
+      "query_nmse": 1.6594147654316072
+     }
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1,
+      3,
+      1,
+      1,
+      0,
+      4,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       1,
+       1,
+       3,
+       1,
+       1,
+       0,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.078125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       0,
+       3,
+       5,
+       4,
+       4,
+       5,
+       4,
+       3
+      ],
+      "score": 1.641929242825782,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1306,
+      "seconds": 0.546875,
+      "exact": false,
+      "query_nmse": 1.6840668275436665
+     },
+     "ORACLE": {
+      "found": [
+       3,
+       1,
+       1,
+       3,
+       1,
+       1,
+       0,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       0,
+       2,
+       2,
+       4,
+       1,
+       0,
+       1,
+       2,
+       3
+      ],
+      "descent_score": 1.7216078158011565,
+      "score": 1.7041109178394502,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 29.796875,
+      "exact": false,
+      "query_nmse": 1.6476571140614311
+     }
+    },
+    {
+     "truth": [
+      0,
+      4,
+      3,
+      5,
+      0,
+      2,
+      0,
+      4,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       4,
+       3,
+       5,
+       0,
+       2,
+       0,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.09375,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       5,
+       0,
+       2,
+       5,
+       4,
+       5,
+       3,
+       2,
+       2
+      ],
+      "score": 1.5717913364728513,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1305,
+      "seconds": 0.515625,
+      "exact": false,
+      "query_nmse": 1.5973568870686052
+     },
+     "ORACLE": {
+      "found": [
+       0,
+       4,
+       3,
+       5,
+       0,
+       2,
+       0,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       3,
+       3,
+       4,
+       1,
+       2,
+       4,
+       2,
+       2,
+       2
+      ],
+      "descent_score": 1.7829703985447418,
+      "score": 1.6419227207775162,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 28.484375,
+      "exact": false,
+      "query_nmse": 1.6477852075735382
+     }
+    },
+    {
+     "truth": [
+      0,
+      4,
+      3,
+      5,
+      0,
+      2,
+      0,
+      4,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       4,
+       3,
+       5,
+       0,
+       2,
+       0,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       3,
+       3,
+       3,
+       2,
+       2,
+       5,
+       0,
+       1
+      ],
+      "score": 1.6528569769039037,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1306,
+      "seconds": 0.453125,
+      "exact": false,
+      "query_nmse": 1.5413044446671709
+     },
+     "ORACLE": {
+      "found": [
+       0,
+       4,
+       3,
+       5,
+       0,
+       2,
+       0,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       3,
+       5,
+       1,
+       4,
+       2,
+       4,
+       1,
+       2,
+       5
+      ],
+      "descent_score": 1.8502219501887307,
+      "score": 1.784379523998235,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 29.40625,
+      "exact": false,
+      "query_nmse": 1.7004566553261067
+     }
+    },
+    {
+     "truth": [
+      2,
+      3,
+      5,
+      4,
+      5,
+      1,
+      2,
+      3,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       2,
+       3,
+       5,
+       4,
+       5,
+       1,
+       2,
+       3,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.109375,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       0,
+       3,
+       0,
+       3,
+       3,
+       5,
+       3,
+       3
+      ],
+      "score": 1.647843936133043,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1308,
+      "seconds": 0.765625,
+      "exact": false,
+      "query_nmse": 1.7116679478329595
+     },
+     "ORACLE": {
+      "found": [
+       2,
+       3,
+       5,
+       4,
+       5,
+       1,
+       2,
+       3,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       2,
+       3,
+       5,
+       0,
+       3,
+       0,
+       5,
+       5,
+       4
+      ],
+      "descent_score": 1.5612065598088143,
+      "score": 1.5612065598088143,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 28.65625,
+      "exact": false,
+      "query_nmse": 1.6542343555501762
+     }
+    },
+    {
+     "truth": [
+      5,
+      0,
+      2,
+      2,
+      3,
+      5,
+      2,
+      3,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       0,
+       2,
+       2,
+       3,
+       5,
+       2,
+       3,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.078125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       3,
+       3,
+       4,
+       4,
+       4,
+       4,
+       3,
+       5
+      ],
+      "score": 1.6153364143356175,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1306,
+      "seconds": 0.609375,
+      "exact": false,
+      "query_nmse": 1.6338514693611863
+     },
+     "ORACLE": {
+      "found": [
+       5,
+       0,
+       2,
+       2,
+       3,
+       5,
+       2,
+       3,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       2,
+       1,
+       0,
+       2,
+       1,
+       2,
+       0,
+       0,
+       4
+      ],
+      "descent_score": 1.6567144482866685,
+      "score": 1.6567144482866685,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 27.359375,
+      "exact": false,
+      "query_nmse": 1.6949831362205072
+     }
+    },
+    {
+     "truth": [
+      4,
+      5,
+      1,
+      4,
+      5,
+      1,
+      2,
+      3,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       4,
+       5,
+       1,
+       4,
+       5,
+       1,
+       2,
+       3,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       0,
+       3,
+       3,
+       2,
+       2,
+       1,
+       3,
+       2
+      ],
+      "score": 1.6998358954440338,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1305,
+      "seconds": 0.5,
+      "exact": false,
+      "query_nmse": 1.6249657823497956
+     },
+     "ORACLE": {
+      "found": [
+       4,
+       5,
+       1,
+       4,
+       5,
+       1,
+       2,
+       3,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       3,
+       3,
+       2,
+       3,
+       1,
+       4,
+       5,
+       2,
+       5
+      ],
+      "descent_score": 1.7848958320999857,
+      "score": 1.7751618146795498,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 29.484375,
+      "exact": false,
+      "query_nmse": 1.7499106089701217
+     }
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1,
+      4,
+      5,
+      1,
+      4,
+      5,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       1,
+       1,
+       4,
+       5,
+       1,
+       4,
+       5,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.109375,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       3,
+       2,
+       5,
+       4,
+       4,
+       5,
+       4,
+       4
+      ],
+      "score": 1.7124429194757416,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1305,
+      "seconds": 0.6875,
+      "exact": false,
+      "query_nmse": 1.5240714777509528
+     },
+     "ORACLE": {
+      "found": [
+       3,
+       1,
+       1,
+       4,
+       5,
+       1,
+       4,
+       5,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       3,
+       1,
+       3,
+       1,
+       1,
+       2,
+       4,
+       1,
+       3
+      ],
+      "descent_score": 1.73879144042984,
+      "score": 1.725441083922934,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 24.625,
+      "exact": false,
+      "query_nmse": 1.641311455546045
+     }
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1,
+      2,
+      3,
+      5,
+      0,
+      4,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       1,
+       1,
+       2,
+       3,
+       5,
+       0,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       1,
+       3,
+       5,
+       4,
+       4,
+       2,
+       5,
+       3
+      ],
+      "score": 1.6957753857172535,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1307,
+      "seconds": 0.40625,
+      "exact": false,
+      "query_nmse": 1.6973103157274716
+     },
+     "ORACLE": {
+      "found": [
+       3,
+       1,
+       1,
+       2,
+       3,
+       5,
+       0,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       4,
+       4,
+       0,
+       0,
+       1,
+       1,
+       2,
+       5,
+       2
+      ],
+      "descent_score": 1.6806170491253687,
+      "score": 1.6515124877308265,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 28.765625,
+      "exact": false,
+      "query_nmse": 1.6876596374810073
+     }
+    },
+    {
+     "truth": [
+      3,
+      1,
+      1,
+      2,
+      3,
+      5,
+      3,
+      1,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       1,
+       1,
+       2,
+       3,
+       5,
+       3,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       3,
+       2,
+       3,
+       3,
+       4,
+       4,
+       0,
+       3
+      ],
+      "score": 1.7234547586553604,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1305,
+      "seconds": 0.59375,
+      "exact": false,
+      "query_nmse": 1.685171752129762
+     },
+     "ORACLE": {
+      "found": [
+       3,
+       1,
+       1,
+       2,
+       3,
+       5,
+       3,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       2,
+       4,
+       0,
+       3,
+       4,
+       4,
+       5,
+       4,
+       2
+      ],
+      "descent_score": 1.9127075904205457,
+      "score": 1.7589473267012745,
+      "success": false,
+      "polish_evaluations": 1396,
+      "seconds": 29.796875,
+      "exact": false,
+      "query_nmse": 1.6419973966682724
+     }
+    },
+    {
+     "truth": [
+      2,
+      3,
+      5,
+      0,
+      4,
+      3,
+      3,
+      1,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       2,
+       3,
+       5,
+       0,
+       4,
+       3,
+       3,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.109375,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       0,
+       3,
+       5,
+       0,
+       5,
+       5,
+       3,
+       2
+      ],
+      "score": 1.5775414409996782,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1306,
+      "seconds": 0.75,
+      "exact": false,
+      "query_nmse": 1.6444577735755315
+     },
+     "ORACLE": {
+      "found": [
+       2,
+       3,
+       5,
+       0,
+       4,
+       3,
+       3,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       4,
+       5,
+       0,
+       3,
+       1,
+       4,
+       0,
+       0,
+       1
+      ],
+      "descent_score": 1.6310668831370794,
+      "score": 1.6310668831370794,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 29.5625,
+      "exact": false,
+      "query_nmse": 1.6646191299106772
+     }
+    },
+    {
+     "truth": [
+      4,
+      5,
+      1,
+      4,
+      5,
+      1,
+      3,
+      1,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       4,
+       5,
+       1,
+       4,
+       5,
+       1,
+       3,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 512,
+      "polish_evaluations": 0,
+      "seconds": 0.078125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       3,
+       3,
+       5,
+       5,
+       3,
+       1,
+       3,
+       2
+      ],
+      "score": 1.6394926980379323,
+      "success": false,
+      "enum_evaluations": 512,
+      "polish_evaluations": 1306,
+      "seconds": 0.640625,
+      "exact": false,
+      "query_nmse": 1.6680132908095715
+     },
+     "ORACLE": {
+      "found": [
+       4,
+       5,
+       1,
+       4,
+       5,
+       1,
+       3,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       3,
+       2,
+       1,
+       0,
+       2,
+       5,
+       3,
+       3,
+       1
+      ],
+      "descent_score": 1.7074592989703625,
+      "score": 1.657022929996844,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 29.59375,
+      "exact": false,
+      "query_nmse": 1.647997958872796
+     }
+    }
+   ],
+   "complete": true,
+   "git_commit": "8482777df40016007db5d105840749bb3c2de9ad"
+  },
+  {
+   "world": 82,
+   "generator": "MOTIF",
+   "motifs": [
+    [
+     0,
+     4,
+     5
+    ],
+    [
+     5,
+     1,
+     1
+    ],
+    [
+     5,
+     5,
+     4
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     3,
+     4,
+     3
+    ]
+   ],
+   "alphabet": [
+    [
+     0,
+     4,
+     5
+    ],
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     5,
+     1,
+     1
+    ],
+    [
+     5,
+     5,
+     4
+    ],
+    [
+     3,
+     4,
+     3
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     1,
+     0,
+     1
+    ]
+   ],
+   "random_alphabet": [
+    [
+     3,
+     1,
+     2
+    ],
+    [
+     5,
+     3,
+     2
+    ],
+    [
+     0,
+     5,
+     2
+    ],
+    [
+     1,
+     1,
+     4
+    ],
+    [
+     1,
+     4,
+     0
+    ],
+    [
+     4,
+     4,
+     5
+    ],
+    [
+     2,
+     3,
+     1
+    ]
+   ],
+   "motifs_recovered": 6,
+   "top_grams": {
+    "045": 12,
+    "010": 11,
+    "511": 8,
+    "554": 7,
+    "343": 6,
+    "012": 4,
+    "101": 3,
+    "450": 2,
+    "055": 2,
+    "452": 2,
+    "551": 2,
+    "104": 2,
+    "100": 2,
+    "454": 2,
+    "334": 1,
+    "434": 1,
+    "105": 1,
+    "545": 1,
+    "005": 1,
+    "001": 1
+   },
+   "shallow": [
+    {
+     "truth": [
+      3,
+      3,
+      4,
+      3,
+      4
+     ],
+     "found": [
+      3,
+      3,
+      4,
+      3,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      0,
+      1,
+      2
+     ],
+     "found": [
+      1,
+      0,
+      1,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      1,
+      1
+     ],
+     "found": [
+      5,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      2
+     ],
+     "found": [
+      0,
+      1,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5
+     ],
+     "found": [
+      0,
+      4,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      0,
+      5
+     ],
+     "found": [
+      0,
+      1,
+      0,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      5,
+      4,
+      5,
+      0
+     ],
+     "found": [
+      5,
+      5,
+      4,
+      5,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5
+     ],
+     "found": [
+      0,
+      4,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      5,
+      5,
+      4
+     ],
+     "found": [
+      0,
+      0,
+      5,
+      5,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5,
+      2
+     ],
+     "found": [
+      0,
+      4,
+      5,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      1,
+      0
+     ],
+     "found": [
+      0,
+      0,
+      1,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      1,
+      1
+     ],
+     "found": [
+      5,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      2,
+      5
+     ],
+     "found": [
+      0,
+      1,
+      2,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      0,
+      1,
+      0
+     ],
+     "found": [
+      4,
+      0,
+      1,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      2,
+      0,
+      4,
+      5
+     ],
+     "found": [
+      4,
+      2,
+      0,
+      4,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      4,
+      3
+     ],
+     "found": [
+      3,
+      4,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      5,
+      1,
+      1
+     ],
+     "found": [
+      5,
+      5,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      5,
+      5,
+      1,
+      1
+     ],
+     "found": [
+      0,
+      5,
+      5,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      0,
+      1,
+      0,
+      4
+     ],
+     "found": [
+      2,
+      0,
+      1,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      1,
+      1
+     ],
+     "found": [
+      5,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      0
+     ],
+     "found": [
+      0,
+      1,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      3,
+      4,
+      3,
+      3
+     ],
+     "found": [
+      5,
+      3,
+      4,
+      3,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      0,
+      1,
+      4
+     ],
+     "found": [
+      0,
+      1,
+      0,
+      1,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      0
+     ],
+     "found": [
+      0,
+      1,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      0,
+      0
+     ],
+     "found": [
+      0,
+      1,
+      0,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      0,
+      1
+     ],
+     "found": [
+      0,
+      1,
+      0,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      5,
+      4
+     ],
+     "found": [
+      5,
+      5,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5,
+      4,
+      4
+     ],
+     "found": [
+      0,
+      4,
+      5,
+      4,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5
+     ],
+     "found": [
+      0,
+      4,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      2,
+      0,
+      5
+     ],
+     "found": [
+      0,
+      1,
+      2,
+      0,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      5,
+      5,
+      4
+     ],
+     "found": [
+      2,
+      5,
+      5,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      1,
+      1
+     ],
+     "found": [
+      5,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      4,
+      3
+     ],
+     "found": [
+      3,
+      4,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      4,
+      3
+     ],
+     "found": [
+      3,
+      4,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      4,
+      3,
+      0
+     ],
+     "found": [
+      3,
+      4,
+      3,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5,
+      0,
+      5
+     ],
+     "found": [
+      0,
+      4,
+      5,
+      0,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5,
+      2
+     ],
+     "found": [
+      0,
+      4,
+      5,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      0,
+      4,
+      5
+     ],
+     "found": [
+      4,
+      0,
+      4,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      1,
+      0,
+      4,
+      5
+     ],
+     "found": [
+      2,
+      1,
+      0,
+      4,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      5,
+      4
+     ],
+     "found": [
+      5,
+      5,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      5,
+      5,
+      4
+     ],
+     "found": [
+      5,
+      5,
+      5,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      5,
+      4,
+      0
+     ],
+     "found": [
+      5,
+      5,
+      4,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      0,
+      1,
+      0
+     ],
+     "found": [
+      3,
+      0,
+      1,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      0,
+      0
+     ],
+     "found": [
+      0,
+      1,
+      0,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      1,
+      1
+     ],
+     "found": [
+      5,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      2,
+      5,
+      1,
+      1
+     ],
+     "found": [
+      3,
+      2,
+      5,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5,
+      4,
+      1
+     ],
+     "found": [
+      0,
+      4,
+      5,
+      4,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5
+     ],
+     "found": [
+      0,
+      4,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    }
+   ],
+   "shallow_seconds": 6.75,
+   "mine_seconds": 0.0,
+   "deep": [
+    {
+     "truth": [
+      5,
+      1,
+      1,
+      5,
+      1,
+      1,
+      3,
+      4,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       1,
+       1,
+       5,
+       1,
+       1,
+       3,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       0,
+       3,
+       3,
+       1,
+       1,
+       0,
+       1,
+       1,
+       5
+      ],
+      "score": 1.5506597162054296,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1307,
+      "seconds": 0.703125,
+      "exact": false,
+      "query_nmse": 1.6652497345403905
+     },
+     "ORACLE": {
+      "found": [
+       5,
+       1,
+       1,
+       5,
+       1,
+       1,
+       3,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       3,
+       4,
+       2,
+       0,
+       4,
+       4,
+       5,
+       3,
+       0
+      ],
+      "descent_score": 1.6939925176518056,
+      "score": 1.6591760550629682,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 31.390625,
+      "exact": false,
+      "query_nmse": 1.769826560578292
+     }
+    },
+    {
+     "truth": [
+      3,
+      4,
+      3,
+      3,
+      4,
+      3,
+      5,
+      1,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       4,
+       3,
+       3,
+       4,
+       3,
+       5,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.078125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       1,
+       4,
+       5,
+       3,
+       2,
+       1,
+       1,
+       4
+      ],
+      "score": 1.5361319883516846,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1350,
+      "seconds": 0.484375,
+      "exact": false,
+      "query_nmse": 1.6271637949695275
+     },
+     "ORACLE": {
+      "found": [
+       3,
+       4,
+       3,
+       3,
+       4,
+       3,
+       5,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       4,
+       4,
+       3,
+       4,
+       3,
+       4,
+       2,
+       3,
+       1
+      ],
+      "descent_score": 1.5957075460788224,
+      "score": 1.5957075460788224,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 30.0,
+      "exact": false,
+      "query_nmse": 1.7974618337110837
+     }
+    },
+    {
+     "truth": [
+      5,
+      1,
+      1,
+      5,
+      5,
+      4,
+      0,
+      4,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       1,
+       1,
+       5,
+       5,
+       4,
+       0,
+       4,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       2,
+       2,
+       1,
+       3,
+       0,
+       4,
+       4,
+       5
+      ],
+      "score": 1.6207086782358464,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.671875,
+      "exact": false,
+      "query_nmse": 1.6065951923610537
+     },
+     "ORACLE": {
+      "found": [
+       5,
+       1,
+       1,
+       5,
+       5,
+       4,
+       0,
+       4,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       0,
+       4,
+       4,
+       4,
+       5,
+       3,
+       4,
+       3,
+       0
+      ],
+      "descent_score": 1.6679737403014707,
+      "score": 1.5243499027493503,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 28.265625,
+      "exact": false,
+      "query_nmse": 1.5773371087684807
+     }
+    },
+    {
+     "truth": [
+      0,
+      1,
+      0,
+      0,
+      1,
+      2,
+      0,
+      4,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       1,
+       0,
+       0,
+       1,
+       2,
+       0,
+       4,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       1,
+       4,
+       1,
+       4,
+       0,
+       1,
+       1,
+       4
+      ],
+      "score": 1.5141944322121859,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.59375,
+      "exact": false,
+      "query_nmse": 1.5788319206576698
+     },
+     "ORACLE": {
+      "found": [
+       0,
+       1,
+       0,
+       0,
+       1,
+       2,
+       0,
+       4,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       0,
+       4,
+       2,
+       2,
+       2,
+       2,
+       0,
+       0,
+       0
+      ],
+      "descent_score": 1.7112760033568044,
+      "score": 1.568497073445866,
+      "success": false,
+      "polish_evaluations": 1352,
+      "seconds": 29.6875,
+      "exact": false,
+      "query_nmse": 1.7012933377716193
+     }
+    },
+    {
+     "truth": [
+      5,
+      1,
+      1,
+      5,
+      1,
+      1,
+      0,
+      1,
+      0
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       1,
+       1,
+       5,
+       1,
+       1,
+       0,
+       1,
+       0
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       0,
+       1,
+       3,
+       1,
+       2,
+       4,
+       2,
+       3,
+       1
+      ],
+      "score": 1.4566097048012616,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1352,
+      "seconds": 0.578125,
+      "exact": false,
+      "query_nmse": 1.7683529886634923
+     },
+     "ORACLE": {
+      "found": [
+       5,
+       1,
+       1,
+       5,
+       1,
+       1,
+       0,
+       1,
+       0
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       0,
+       3,
+       3,
+       0,
+       4,
+       5,
+       1,
+       1,
+       3
+      ],
+      "descent_score": 1.5071851654318493,
+      "score": 1.4258188521215585,
+      "success": false,
+      "polish_evaluations": 1351,
+      "seconds": 29.53125,
+      "exact": false,
+      "query_nmse": 1.6166724160662003
+     }
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5,
+      0,
+      1,
+      0,
+      5,
+      5,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       4,
+       5,
+       0,
+       1,
+       0,
+       5,
+       5,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.078125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       4,
+       0,
+       0,
+       5,
+       2,
+       5,
+       3,
+       2
+      ],
+      "score": 1.6318965481313359,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.71875,
+      "exact": false,
+      "query_nmse": 1.564274254331318
+     },
+     "ORACLE": {
+      "found": [
+       0,
+       4,
+       5,
+       0,
+       1,
+       0,
+       5,
+       5,
+       4
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       0,
+       0,
+       0,
+       5,
+       0,
+       4,
+       1,
+       0,
+       3
+      ],
+      "descent_score": 1.6788496439196048,
+      "score": 1.637974242302819,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 29.046875,
+      "exact": false,
+      "query_nmse": 1.6097972542230186
+     }
+    },
+    {
+     "truth": [
+      5,
+      5,
+      4,
+      0,
+      4,
+      5,
+      5,
+      1,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       5,
+       4,
+       0,
+       4,
+       5,
+       5,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       4,
+       0,
+       2,
+       3,
+       1,
+       0,
+       5,
+       2
+      ],
+      "score": 1.563342977464834,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.5843612306809842
+     },
+     "ORACLE": {
+      "found": [
+       5,
+       5,
+       4,
+       0,
+       4,
+       5,
+       5,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       0,
+       2,
+       3,
+       1,
+       3,
+       1,
+       3,
+       0,
+       2
+      ],
+      "descent_score": 1.658473256823748,
+      "score": 1.5612359553707478,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 27.09375,
+      "exact": false,
+      "query_nmse": 1.5851529037082481
+     }
+    },
+    {
+     "truth": [
+      5,
+      1,
+      1,
+      0,
+      1,
+      2,
+      5,
+      1,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       1,
+       1,
+       0,
+       1,
+       2,
+       5,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       3,
+       1,
+       5,
+       1,
+       4,
+       2,
+       1,
+       2
+      ],
+      "score": 1.5307625628287027,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.65625,
+      "exact": false,
+      "query_nmse": 1.6558867269212287
+     },
+     "ORACLE": {
+      "found": [
+       5,
+       1,
+       1,
+       0,
+       1,
+       2,
+       5,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       4,
+       0,
+       5,
+       0,
+       0,
+       0,
+       1,
+       1,
+       0
+      ],
+      "descent_score": 1.5712839548239548,
+      "score": 1.5371793076083526,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 25.046875,
+      "exact": false,
+      "query_nmse": 1.682925464490191
+     }
+    },
+    {
+     "truth": [
+      0,
+      1,
+      2,
+      5,
+      1,
+      1,
+      0,
+      4,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       1,
+       2,
+       5,
+       1,
+       1,
+       0,
+       4,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       1,
+       2,
+       2,
+       3,
+       1,
+       1,
+       4,
+       0
+      ],
+      "score": 1.5172482904544349,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.421875,
+      "exact": false,
+      "query_nmse": 1.6119678744901362
+     },
+     "ORACLE": {
+      "found": [
+       0,
+       1,
+       2,
+       5,
+       1,
+       1,
+       0,
+       4,
+       5
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.03125,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       5,
+       4,
+       2,
+       0,
+       1,
+       0,
+       0,
+       0,
+       5
+      ],
+      "descent_score": 1.7222403428149875,
+      "score": 1.6039154975688448,
+      "success": false,
+      "polish_evaluations": 1352,
+      "seconds": 29.71875,
+      "exact": false,
+      "query_nmse": 1.7192747621199918
+     }
+    },
+    {
+     "truth": [
+      5,
+      5,
+      4,
+      0,
+      1,
+      2,
+      3,
+      4,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       5,
+       4,
+       0,
+       1,
+       2,
+       3,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       0,
+       1,
+       3,
+       1,
+       2,
+       5,
+       5,
+       2
+      ],
+      "score": 1.5343382674368524,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1306,
+      "seconds": 0.546875,
+      "exact": false,
+      "query_nmse": 1.579911934808551
+     },
+     "ORACLE": {
+      "found": [
+       5,
+       5,
+       4,
+       0,
+       1,
+       2,
+       3,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.015625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       2,
+       4,
+       3,
+       1,
+       5,
+       0,
+       0,
+       1,
+       3
+      ],
+      "descent_score": 1.641688867419744,
+      "score": 1.5590021793313036,
+      "success": false,
+      "polish_evaluations": 1307,
+      "seconds": 29.359375,
+      "exact": false,
+      "query_nmse": 1.6811636908104393
+     }
+    },
+    {
+     "truth": [
+      0,
+      4,
+      5,
+      0,
+      4,
+      5,
+      3,
+      4,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       4,
+       5,
+       0,
+       4,
+       5,
+       3,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       4,
+       5,
+       1,
+       1,
+       4,
+       0,
+       4,
+       0
+      ],
+      "score": 1.6684765074088208,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1305,
+      "seconds": 0.59375,
+      "exact": false,
+      "query_nmse": 1.607158396160611
+     },
+     "ORACLE": {
+      "found": [
+       0,
+       4,
+       5,
+       0,
+       4,
+       5,
+       3,
+       4,
+       3
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       0,
+       4,
+       3,
+       5,
+       3,
+       2,
+       1,
+       1,
+       3
+      ],
+      "descent_score": 1.6427542038714966,
+      "score": 1.6111063403263715,
+      "success": false,
+      "polish_evaluations": 1306,
+      "seconds": 30.171875,
+      "exact": false,
+      "query_nmse": 1.6655912992736102
+     }
+    },
+    {
+     "truth": [
+      0,
+      1,
+      0,
+      3,
+      4,
+      3,
+      5,
+      1,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       1,
+       0,
+       3,
+       4,
+       3,
+       5,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 343,
+      "polish_evaluations": 0,
+      "seconds": 0.0625,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       4,
+       0,
+       2,
+       3,
+       1,
+       1,
+       5,
+       4
+      ],
+      "score": 1.5235132178914559,
+      "success": false,
+      "enum_evaluations": 343,
+      "polish_evaluations": 1306,
+      "seconds": 0.671875,
+      "exact": false,
+      "query_nmse": 1.553966633069299
+     },
+     "ORACLE": {
+      "found": [
+       0,
+       1,
+       0,
+       3,
+       4,
+       3,
+       5,
+       1,
+       1
+      ],
+      "score": 0.0,
+      "success": true,
+      "enum_evaluations": 216,
+      "polish_evaluations": 0,
+      "seconds": 0.046875,
+      "exact": true,
+      "query_nmse": 0.0
+     },
+     "INCUMBENT": {
+      "found": [
+       5,
+       4,
+       5,
+       0,
+       2,
+       4,
+       0,
+       5,
+       1
+      ],
+      "descent_score": 1.5815361113007198,
+      "score": 1.5534229906382797,
+      "success": false,
+      "polish_evaluations": 1305,
+      "seconds": 28.71875,
+      "exact": false,
+      "query_nmse": 1.6511512500437382
+     }
+    }
+   ],
+   "complete": true,
+   "git_commit": "8482777df40016007db5d105840749bb3c2de9ad"
+  },
+  {
+   "world": 80,
+   "generator": "UNIFORM",
+   "motifs": [
+    [
+     0,
+     5,
+     1
+    ],
+    [
+     0,
+     0,
+     2
+    ],
+    [
+     3,
+     1,
+     0
+    ],
+    [
+     2,
+     2,
+     4
+    ],
+    [
+     3,
+     1,
+     4
+    ],
+    [
+     1,
+     5,
+     3
+    ]
+   ],
+   "alphabet": [
+    [
+     0,
+     0,
+     5
+    ],
+    [
+     2,
+     2,
+     0
+    ],
+    [
+     4,
+     0,
+     0
+    ]
+   ],
+   "random_alphabet": [
+    [
+     3,
+     0,
+     1
+    ],
+    [
+     2,
+     0,
+     3
+    ],
+    [
+     4,
+     3,
+     0
+    ]
+   ],
+   "motifs_recovered": null,
+   "top_grams": {
+    "005": 3,
+    "220": 3,
+    "400": 3,
+    "105": 2,
+    "151": 2,
+    "222": 2,
+    "204": 2,
+    "040": 2,
+    "011": 2,
+    "140": 2,
+    "440": 2,
+    "010": 2,
+    "004": 2,
+    "205": 2,
+    "411": 2,
+    "541": 1,
+    "410": 1,
+    "503": 1,
+    "213": 1,
+    "132": 1
+   },
+   "shallow": [
+    {
+     "truth": [
+      5,
+      4,
+      1,
+      0,
+      5
+     ],
+     "found": [
+      5,
+      4,
+      1,
+      0,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      0,
+      3
+     ],
+     "found": [
+      5,
+      0,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      5
+     ],
+     "found": [
+      0,
+      0,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      1,
+      3,
+      2
+     ],
+     "found": [
+      2,
+      1,
+      3,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      5,
+      4,
+      5
+     ],
+     "found": [
+      0,
+      0,
+      5,
+      4,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      4,
+      5,
+      3
+     ],
+     "found": [
+      1,
+      4,
+      5,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      5,
+      5
+     ],
+     "found": [
+      0,
+      1,
+      5,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      0,
+      4
+     ],
+     "found": [
+      3,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      4,
+      2
+     ],
+     "found": [
+      3,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      3,
+      1,
+      5,
+      1
+     ],
+     "found": [
+      1,
+      3,
+      1,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      2,
+      1
+     ],
+     "found": [
+      4,
+      2,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      0,
+      2,
+      3
+     ],
+     "found": [
+      4,
+      0,
+      2,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      2,
+      2,
+      0,
+      4
+     ],
+     "found": [
+      2,
+      2,
+      2,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      3,
+      0,
+      5
+     ],
+     "found": [
+      4,
+      3,
+      0,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      0,
+      1,
+      1
+     ],
+     "found": [
+      0,
+      4,
+      0,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      2,
+      4,
+      2
+     ],
+     "found": [
+      5,
+      2,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      3,
+      4
+     ],
+     "found": [
+      5,
+      3,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      3,
+      4,
+      0
+     ],
+     "found": [
+      4,
+      3,
+      4,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      3,
+      2,
+      5
+     ],
+     "found": [
+      2,
+      4,
+      3,
+      2,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      1,
+      1,
+      4,
+      0
+     ],
+     "found": [
+      1,
+      1,
+      1,
+      4,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      4,
+      0,
+      0,
+      3
+     ],
+     "found": [
+      4,
+      4,
+      0,
+      0,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      0,
+      1,
+      0
+     ],
+     "found": [
+      3,
+      0,
+      1,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      0,
+      2
+     ],
+     "found": [
+      5,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      2,
+      0,
+      4
+     ],
+     "found": [
+      3,
+      2,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      0,
+      0,
+      4
+     ],
+     "found": [
+      0,
+      1,
+      0,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      3,
+      4
+     ],
+     "found": [
+      3,
+      3,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      3,
+      1,
+      3
+     ],
+     "found": [
+      0,
+      3,
+      1,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      5,
+      5,
+      0,
+      1
+     ],
+     "found": [
+      4,
+      5,
+      5,
+      0,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      0,
+      0,
+      4
+     ],
+     "found": [
+      4,
+      0,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      0
+     ],
+     "found": [
+      0,
+      4,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      0,
+      4,
+      4
+     ],
+     "found": [
+      1,
+      5,
+      0,
+      4,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      1
+     ],
+     "found": [
+      0,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      0,
+      2,
+      4,
+      5
+     ],
+     "found": [
+      2,
+      0,
+      2,
+      4,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      3,
+      3,
+      3
+     ],
+     "found": [
+      2,
+      3,
+      3,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      1,
+      4
+     ],
+     "found": [
+      1,
+      5,
+      1,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      0,
+      5,
+      3,
+      1
+     ],
+     "found": [
+      2,
+      0,
+      5,
+      3,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      5,
+      5
+     ],
+     "found": [
+      3,
+      5,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      5,
+      2
+     ],
+     "found": [
+      0,
+      0,
+      5,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      1,
+      1,
+      0,
+      5
+     ],
+     "found": [
+      4,
+      1,
+      1,
+      0,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      2,
+      2,
+      0
+     ],
+     "found": [
+      2,
+      2,
+      2,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      4,
+      4,
+      2
+     ],
+     "found": [
+      4,
+      4,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      4,
+      4,
+      0,
+      0
+     ],
+     "found": [
+      1,
+      4,
+      4,
+      0,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      3,
+      0
+     ],
+     "found": [
+      0,
+      3,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      1,
+      3
+     ],
+     "found": [
+      1,
+      1,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      4,
+      0,
+      4
+     ],
+     "found": [
+      0,
+      1,
+      4,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      4,
+      2
+     ],
+     "found": [
+      5,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      2,
+      2,
+      0,
+      5
+     ],
+     "found": [
+      0,
+      2,
+      2,
+      0,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      1,
+      1
+     ],
+     "found": [
+      4,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    }
+   ],
+   "shallow_seconds": 12.0,
+   "mine_seconds": 0.0,
+   "deep": [
+    {
+     "truth": [
+      2,
+      5,
+      0,
+      3,
+      1,
+      2,
+      5,
+      2,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       2,
+       0,
+       1,
+       3,
+       0,
+       0,
+       0,
+       5
+      ],
+      "score": 1.666801463802219,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1306,
+      "seconds": 0.453125,
+      "exact": false,
+      "query_nmse": 1.6594236840124652
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       3,
+       3,
+       4,
+       3,
+       4,
+       4,
+       3,
+       5
+      ],
+      "score": 1.6772039888536314,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1306,
+      "seconds": 0.484375,
+      "exact": false,
+      "query_nmse": 1.6145009147800142
+     }
+    },
+    {
+     "truth": [
+      5,
+      4,
+      2,
+      5,
+      2,
+      4,
+      1,
+      0,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       2,
+       0,
+       3,
+       1,
+       0,
+       4,
+       2,
+       4
+      ],
+      "score": 1.74065791494542,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1399,
+      "seconds": 0.4375,
+      "exact": false,
+      "query_nmse": 1.7115967508576997
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       1,
+       0,
+       3,
+       5,
+       5,
+       3,
+       0,
+       2
+      ],
+      "score": 1.5607794778388997,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1351,
+      "seconds": 0.546875,
+      "exact": false,
+      "query_nmse": 1.5485911651741169
+     }
+    },
+    {
+     "truth": [
+      5,
+      2,
+      1,
+      1,
+      5,
+      0,
+      0,
+      3,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       2,
+       0,
+       2,
+       2,
+       0,
+       4,
+       0,
+       0
+      ],
+      "score": 1.6878704755181282,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1350,
+      "seconds": 0.671875,
+      "exact": false,
+      "query_nmse": 1.6676671680107962
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       1,
+       0,
+       4,
+       0,
+       0,
+       0,
+       4,
+       1
+      ],
+      "score": 1.7369722178972231,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1352,
+      "seconds": 0.609375,
+      "exact": false,
+      "query_nmse": 1.5658061752767685
+     }
+    },
+    {
+     "truth": [
+      0,
+      3,
+      2,
+      2,
+      3,
+      2,
+      3,
+      2,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       3,
+       5,
+       2,
+       3,
+       5,
+       2,
+       2,
+       1
+      ],
+      "score": 1.684317985082904,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1351,
+      "seconds": 0.625,
+      "exact": false,
+      "query_nmse": 1.6795952978143052
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       4,
+       3,
+       4,
+       3,
+       0,
+       4,
+       0,
+       3
+      ],
+      "score": 1.6900497698486754,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1352,
+      "seconds": 0.6875,
+      "exact": false,
+      "query_nmse": 1.7358597440312804
+     }
+    },
+    {
+     "truth": [
+      4,
+      3,
+      2,
+      5,
+      4,
+      1,
+      4,
+      2,
+      0
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       2,
+       0,
+       4,
+       0,
+       0,
+       2,
+       3,
+       0
+      ],
+      "score": 1.7517065532403429,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1351,
+      "seconds": 0.65625,
+      "exact": false,
+      "query_nmse": 1.6751427476251526
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       1,
+       1,
+       3,
+       0,
+       4,
+       3,
+       3,
+       3
+      ],
+      "score": 1.7112765635080658,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1350,
+      "seconds": 0.609375,
+      "exact": false,
+      "query_nmse": 1.5808532864661733
+     }
+    },
+    {
+     "truth": [
+      5,
+      2,
+      5,
+      0,
+      3,
+      3,
+      2,
+      2,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       2,
+       0,
+       5,
+       4,
+       0,
+       0,
+       5,
+       0,
+       0
+      ],
+      "score": 1.7020435126979685,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1306,
+      "seconds": 0.609375,
+      "exact": false,
+      "query_nmse": 1.8123481040571943
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       3,
+       0,
+       3,
+       0,
+       4,
+       3,
+       3,
+       0
+      ],
+      "score": 1.5591031312778865,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1306,
+      "seconds": 0.640625,
+      "exact": false,
+      "query_nmse": 1.5378814039290358
+     }
+    },
+    {
+     "truth": [
+      5,
+      5,
+      2,
+      4,
+      0,
+      5,
+      0,
+      5,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       0,
+       1,
+       2,
+       2,
+       0,
+       2,
+       3,
+       4
+      ],
+      "score": 1.6721796780755742,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1351,
+      "seconds": 0.6875,
+      "exact": false,
+      "query_nmse": 1.6281392510738142
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       0,
+       0,
+       2,
+       3,
+       0,
+       4,
+       3,
+       0
+      ],
+      "score": 1.77545739561109,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1306,
+      "seconds": 0.5,
+      "exact": false,
+      "query_nmse": 1.7792032416390724
+     }
+    },
+    {
+     "truth": [
+      1,
+      0,
+      1,
+      0,
+      2,
+      1,
+      0,
+      1,
+      2
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       2,
+       2,
+       5,
+       1,
+       3,
+       0,
+       5,
+       0,
+       5
+      ],
+      "score": 1.711733192923315,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1395,
+      "seconds": 0.546875,
+      "exact": false,
+      "query_nmse": 1.5818923515110839
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       1,
+       0,
+       3,
+       0,
+       0,
+       3,
+       3,
+       1
+      ],
+      "score": 1.7408669470560885,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1352,
+      "seconds": 0.5625,
+      "exact": false,
+      "query_nmse": 1.6389623118117105
+     }
+    },
+    {
+     "truth": [
+      0,
+      3,
+      5,
+      2,
+      3,
+      3,
+      2,
+      1,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       1,
+       5,
+       0,
+       0,
+       5,
+       2,
+       2,
+       0
+      ],
+      "score": 1.7867701983770867,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1305,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.6801332151388224
+     },
+     "RANDOM": {
+      "found": [
+       0,
+       2,
+       0,
+       4,
+       3,
+       0,
+       3,
+       0,
+       3
+      ],
+      "score": 1.8223532886720961,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1352,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.6970602124008314
+     }
+    },
+    {
+     "truth": [
+      1,
+      5,
+      1,
+      0,
+      1,
+      5,
+      2,
+      4,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       1,
+       1,
+       4,
+       1,
+       0,
+       1,
+       0,
+       0
+      ],
+      "score": 1.7338888868707354,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1308,
+      "seconds": 0.5,
+      "exact": false,
+      "query_nmse": 1.6183151082673062
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       5,
+       1,
+       3,
+       2,
+       5,
+       5,
+       0,
+       3
+      ],
+      "score": 1.8263617580621871,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1396,
+      "seconds": 0.578125,
+      "exact": false,
+      "query_nmse": 1.7219395872570904
+     }
+    },
+    {
+     "truth": [
+      5,
+      1,
+      3,
+      1,
+      4,
+      5,
+      4,
+      2,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       4,
+       2,
+       0,
+       4,
+       0,
+       0,
+       4,
+       0,
+       3
+      ],
+      "score": 1.6453774618001926,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1350,
+      "seconds": 0.625,
+      "exact": false,
+      "query_nmse": 1.593508665635271
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       3,
+       0,
+       4,
+       2,
+       1,
+       3,
+       0,
+       4
+      ],
+      "score": 1.7432670657548295,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1352,
+      "seconds": 0.5625,
+      "exact": false,
+      "query_nmse": 1.6699115761255225
+     }
+    },
+    {
+     "truth": [
+      3,
+      4,
+      2,
+      2,
+      5,
+      4,
+      1,
+      4,
+      2
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       0,
+       0,
+       4,
+       0,
+       0,
+       2,
+       1,
+       1
+      ],
+      "score": 1.5708769796046567,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1307,
+      "seconds": 0.421875,
+      "exact": false,
+      "query_nmse": 1.6733524926453556
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       3,
+       0,
+       4,
+       3,
+       5,
+       2,
+       0,
+       3
+      ],
+      "score": 1.6528986551629634,
+      "success": false,
+      "enum_evaluations": 27,
+      "polish_evaluations": 1350,
+      "seconds": 0.546875,
+      "exact": false,
+      "query_nmse": 1.587226647113643
+     }
+    }
+   ],
+   "complete": true,
+   "git_commit": "8482777df40016007db5d105840749bb3c2de9ad"
+  },
+  {
+   "world": 81,
+   "generator": "UNIFORM",
+   "motifs": [
+    [
+     2,
+     3,
+     5
+    ],
+    [
+     2,
+     4,
+     2
+    ],
+    [
+     3,
+     1,
+     1
+    ],
+    [
+     4,
+     5,
+     1
+    ],
+    [
+     5,
+     0,
+     2
+    ],
+    [
+     0,
+     4,
+     3
+    ]
+   ],
+   "alphabet": [
+    [
+     1,
+     5,
+     0
+    ],
+    [
+     1,
+     5,
+     2
+    ]
+   ],
+   "random_alphabet": [
+    [
+     1,
+     2,
+     2
+    ],
+    [
+     3,
+     2,
+     2
+    ]
+   ],
+   "motifs_recovered": null,
+   "top_grams": {
+    "150": 3,
+    "152": 3,
+    "421": 2,
+    "212": 2,
+    "355": 2,
+    "243": 2,
+    "325": 2,
+    "304": 2,
+    "235": 2,
+    "413": 2,
+    "252": 2,
+    "524": 2,
+    "041": 2,
+    "543": 2,
+    "352": 2,
+    "303": 2,
+    "034": 2,
+    "100": 1,
+    "001": 1,
+    "015": 1
+   },
+   "shallow": [
+    {
+     "truth": [
+      4,
+      2,
+      1,
+      2
+     ],
+     "found": [
+      4,
+      2,
+      1,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      0,
+      0,
+      1,
+      5
+     ],
+     "found": [
+      1,
+      0,
+      0,
+      1,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      3,
+      4
+     ],
+     "found": [
+      1,
+      3,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      5,
+      5
+     ],
+     "found": [
+      3,
+      5,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      2
+     ],
+     "found": [
+      2,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      4
+     ],
+     "found": [
+      0,
+      4,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      1,
+      0,
+      2
+     ],
+     "found": [
+      4,
+      1,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      3,
+      2,
+      3
+     ],
+     "found": [
+      3,
+      3,
+      2,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      0,
+      2,
+      5
+     ],
+     "found": [
+      1,
+      5,
+      0,
+      2,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      5,
+      1
+     ],
+     "found": [
+      5,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      2,
+      2,
+      0
+     ],
+     "found": [
+      1,
+      5,
+      2,
+      2,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      2,
+      4,
+      3
+     ],
+     "found": [
+      1,
+      2,
+      4,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      0,
+      5,
+      3
+     ],
+     "found": [
+      1,
+      0,
+      5,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      2,
+      5
+     ],
+     "found": [
+      3,
+      2,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      0,
+      4
+     ],
+     "found": [
+      3,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      3,
+      3
+     ],
+     "found": [
+      0,
+      1,
+      3,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      1,
+      5,
+      0
+     ],
+     "found": [
+      1,
+      5,
+      1,
+      5,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      5,
+      2,
+      3,
+      5
+     ],
+     "found": [
+      4,
+      5,
+      2,
+      3,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      1,
+      3
+     ],
+     "found": [
+      4,
+      1,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      2,
+      2,
+      3
+     ],
+     "found": [
+      3,
+      2,
+      2,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      5,
+      2,
+      4,
+      4
+     ],
+     "found": [
+      2,
+      5,
+      2,
+      4,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      1,
+      1,
+      5,
+      2
+     ],
+     "found": [
+      0,
+      1,
+      1,
+      5,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      3,
+      1,
+      0
+     ],
+     "found": [
+      3,
+      3,
+      1,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      1,
+      1
+     ],
+     "found": [
+      4,
+      1,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      5,
+      5
+     ],
+     "found": [
+      3,
+      5,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      0,
+      4,
+      1,
+      3
+     ],
+     "found": [
+      2,
+      0,
+      4,
+      1,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      4,
+      3,
+      5,
+      3
+     ],
+     "found": [
+      5,
+      4,
+      3,
+      5,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      3,
+      5,
+      4
+     ],
+     "found": [
+      0,
+      3,
+      5,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      1,
+      3,
+      2
+     ],
+     "found": [
+      3,
+      1,
+      3,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      2,
+      4,
+      3,
+      4
+     ],
+     "found": [
+      3,
+      2,
+      4,
+      3,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      5,
+      2
+     ],
+     "found": [
+      3,
+      5,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      2
+     ],
+     "found": [
+      0,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      2,
+      5,
+      2,
+      0
+     ],
+     "found": [
+      3,
+      2,
+      5,
+      2,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      0,
+      4,
+      1
+     ],
+     "found": [
+      3,
+      0,
+      4,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      3,
+      5,
+      2
+     ],
+     "found": [
+      2,
+      3,
+      5,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      2,
+      4
+     ],
+     "found": [
+      1,
+      5,
+      2,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      0,
+      3,
+      0
+     ],
+     "found": [
+      3,
+      0,
+      3,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      5
+     ],
+     "found": [
+      1,
+      5,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      4,
+      3,
+      0
+     ],
+     "found": [
+      5,
+      4,
+      3,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      1,
+      2,
+      5,
+      5
+     ],
+     "found": [
+      1,
+      1,
+      2,
+      5,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      4,
+      4,
+      5
+     ],
+     "found": [
+      1,
+      4,
+      4,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      4
+     ],
+     "found": [
+      0,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      3,
+      4
+     ],
+     "found": [
+      0,
+      3,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      0,
+      4,
+      2,
+      1
+     ],
+     "found": [
+      1,
+      0,
+      4,
+      2,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      1,
+      2,
+      3
+     ],
+     "found": [
+      2,
+      1,
+      2,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      0,
+      3,
+      1
+     ],
+     "found": [
+      3,
+      0,
+      3,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      2,
+      1,
+      5,
+      0
+     ],
+     "found": [
+      1,
+      2,
+      1,
+      5,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      3,
+      4,
+      2
+     ],
+     "found": [
+      0,
+      3,
+      4,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    }
+   ],
+   "shallow_seconds": 5.609375,
+   "mine_seconds": 0.0,
+   "deep": [
+    {
+     "truth": [
+      1,
+      1,
+      3,
+      5,
+      5,
+      1,
+      0,
+      3,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       1,
+       0,
+       4,
+       2,
+       5,
+       1,
+       5,
+       5,
+       2
+      ],
+      "score": 1.7516619160583464,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1353,
+      "seconds": 0.421875,
+      "exact": false,
+      "query_nmse": 1.7008815416538314
+     },
+     "RANDOM": {
+      "found": [
+       5,
+       5,
+       2,
+       1,
+       2,
+       2,
+       4,
+       5,
+       4
+      ],
+      "score": 1.6759049328335702,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1352,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.6488715781295373
+     }
+    },
+    {
+     "truth": [
+      3,
+      4,
+      0,
+      4,
+      5,
+      1,
+      4,
+      5,
+      0
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       1,
+       2,
+       0,
+       2,
+       5,
+       2,
+       2,
+       5,
+       2
+      ],
+      "score": 1.696943772684187,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1398,
+      "seconds": 0.421875,
+      "exact": false,
+      "query_nmse": 1.6697933454940836
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       4,
+       3,
+       3,
+       4,
+       2,
+       1,
+       2,
+       0
+      ],
+      "score": 1.66979472851021,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1399,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.6444110220676114
+     }
+    },
+    {
+     "truth": [
+      4,
+      0,
+      0,
+      5,
+      4,
+      3,
+      3,
+      2,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       3,
+       0,
+       2,
+       5,
+       1,
+       1,
+       5,
+       4
+      ],
+      "score": 1.7747358121542334,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1351,
+      "seconds": 0.546875,
+      "exact": false,
+      "query_nmse": 1.575351380290483
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       2,
+       0,
+       5,
+       3,
+       5,
+       5,
+       5,
+       4
+      ],
+      "score": 1.745240773298356,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1353,
+      "seconds": 0.515625,
+      "exact": false,
+      "query_nmse": 1.6230530615080334
+     }
+    },
+    {
+     "truth": [
+      5,
+      5,
+      4,
+      1,
+      2,
+      4,
+      2,
+      0,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       5,
+       0,
+       1,
+       5,
+       5,
+       1,
+       5,
+       0
+      ],
+      "score": 1.6342589752245689,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1305,
+      "seconds": 0.46875,
+      "exact": false,
+      "query_nmse": 1.6171875261719981
+     },
+     "RANDOM": {
+      "found": [
+       0,
+       3,
+       5,
+       0,
+       2,
+       4,
+       5,
+       0,
+       3
+      ],
+      "score": 1.6414118828849134,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1400,
+      "seconds": 0.5625,
+      "exact": false,
+      "query_nmse": 1.5810004822185646
+     }
+    },
+    {
+     "truth": [
+      1,
+      1,
+      1,
+      3,
+      2,
+      2,
+      5,
+      4,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       4,
+       2,
+       0,
+       5,
+       0,
+       0,
+       1,
+       5,
+       0
+      ],
+      "score": 1.757796493514618,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1442,
+      "seconds": 0.546875,
+      "exact": false,
+      "query_nmse": 1.6756186867225022
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       1,
+       1,
+       3,
+       2,
+       2,
+       1,
+       2,
+       2
+      ],
+      "score": 1.7263855157130592,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1352,
+      "seconds": 0.390625,
+      "exact": false,
+      "query_nmse": 1.707156433477738
+     }
+    },
+    {
+     "truth": [
+      2,
+      1,
+      3,
+      2,
+      0,
+      5,
+      0,
+      2,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       4,
+       3,
+       0,
+       5,
+       0,
+       4,
+       5,
+       2
+      ],
+      "score": 1.6605334118090223,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1352,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.681648683381335
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       4,
+       4,
+       3,
+       3,
+       3,
+       3,
+       3,
+       5
+      ],
+      "score": 1.5753078186651228,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1397,
+      "seconds": 0.484375,
+      "exact": false,
+      "query_nmse": 1.5281328360708435
+     }
+    },
+    {
+     "truth": [
+      0,
+      3,
+      2,
+      3,
+      3,
+      5,
+      3,
+      0,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       2,
+       0,
+       2,
+       2,
+       5,
+       0,
+       0,
+       5,
+       4
+      ],
+      "score": 1.6182178332194725,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1351,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.5581226503522587
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       0,
+       2,
+       2,
+       0,
+       2,
+       3,
+       2,
+       4
+      ],
+      "score": 1.73125713713118,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1353,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.750600549167077
+     }
+    },
+    {
+     "truth": [
+      0,
+      3,
+      1,
+      5,
+      4,
+      0,
+      4,
+      3,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       1,
+       2,
+       5,
+       4,
+       3,
+       0,
+       4,
+       0,
+       3
+      ],
+      "score": 1.6434834833514813,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1401,
+      "seconds": 0.453125,
+      "exact": false,
+      "query_nmse": 1.6916647932625624
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       3,
+       4,
+       1,
+       4,
+       2,
+       1,
+       0,
+       0
+      ],
+      "score": 1.6242034831393246,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1445,
+      "seconds": 0.515625,
+      "exact": false,
+      "query_nmse": 1.6994626451190158
+     }
+    },
+    {
+     "truth": [
+      1,
+      1,
+      4,
+      0,
+      3,
+      3,
+      3,
+      1,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       5,
+       1,
+       1,
+       5,
+       0,
+       2,
+       5,
+       0
+      ],
+      "score": 1.6963393369546091,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1352,
+      "seconds": 0.484375,
+      "exact": false,
+      "query_nmse": 1.6764385900133714
+     },
+     "RANDOM": {
+      "found": [
+       5,
+       4,
+       2,
+       3,
+       2,
+       4,
+       4,
+       0,
+       2
+      ],
+      "score": 1.6072432523302103,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1352,
+      "seconds": 0.484375,
+      "exact": false,
+      "query_nmse": 1.579202180114277
+     }
+    },
+    {
+     "truth": [
+      2,
+      3,
+      2,
+      3,
+      2,
+      5,
+      4,
+      4,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       2,
+       0,
+       5,
+       3,
+       5,
+       4,
+       1,
+       2,
+       3
+      ],
+      "score": 1.5757574137304942,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1398,
+      "seconds": 0.515625,
+      "exact": false,
+      "query_nmse": 1.6873098191052982
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       2,
+       1,
+       3,
+       2,
+       2,
+       0,
+       2,
+       3
+      ],
+      "score": 1.6253790847083955,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1307,
+      "seconds": 0.515625,
+      "exact": false,
+      "query_nmse": 1.7023045395163388
+     }
+    },
+    {
+     "truth": [
+      2,
+      1,
+      3,
+      2,
+      4,
+      2,
+      0,
+      2,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       5,
+       5,
+       1,
+       5,
+       4,
+       3,
+       3,
+       5
+      ],
+      "score": 1.6734798136133207,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1353,
+      "seconds": 0.5,
+      "exact": false,
+      "query_nmse": 1.632465506944885
+     },
+     "RANDOM": {
+      "found": [
+       3,
+       3,
+       0,
+       5,
+       2,
+       2,
+       1,
+       2,
+       2
+      ],
+      "score": 1.7007095961373975,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1351,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.614436248680864
+     }
+    },
+    {
+     "truth": [
+      1,
+      2,
+      2,
+      5,
+      3,
+      1,
+      3,
+      2,
+      0
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       5,
+       5,
+       1,
+       5,
+       2,
+       1,
+       5,
+       0
+      ],
+      "score": 1.6580318519013848,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1306,
+      "seconds": 0.5,
+      "exact": false,
+      "query_nmse": 1.559200506085178
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       5,
+       5,
+       4,
+       0,
+       2,
+       1,
+       2,
+       5
+      ],
+      "score": 1.615324843439617,
+      "success": false,
+      "enum_evaluations": 8,
+      "polish_evaluations": 1450,
+      "seconds": 0.5625,
+      "exact": false,
+      "query_nmse": 1.6507301040972275
+     }
+    }
+   ],
+   "complete": true,
+   "git_commit": "8482777df40016007db5d105840749bb3c2de9ad"
+  },
+  {
+   "world": 82,
+   "generator": "UNIFORM",
+   "motifs": [
+    [
+     0,
+     4,
+     5
+    ],
+    [
+     5,
+     1,
+     1
+    ],
+    [
+     5,
+     5,
+     4
+    ],
+    [
+     0,
+     1,
+     2
+    ],
+    [
+     0,
+     1,
+     0
+    ],
+    [
+     3,
+     4,
+     3
+    ]
+   ],
+   "alphabet": [
+    [
+     0,
+     5,
+     2
+    ],
+    [
+     3,
+     0,
+     5
+    ],
+    [
+     5,
+     0,
+     0
+    ],
+    [
+     5,
+     1,
+     5
+    ]
+   ],
+   "random_alphabet": [
+    [
+     5,
+     2,
+     2
+    ],
+    [
+     2,
+     5,
+     2
+    ],
+    [
+     4,
+     0,
+     0
+    ],
+    [
+     5,
+     3,
+     0
+    ]
+   ],
+   "motifs_recovered": null,
+   "top_grams": {
+    "052": 4,
+    "500": 3,
+    "305": 3,
+    "515": 3,
+    "304": 2,
+    "001": 2,
+    "453": 2,
+    "150": 2,
+    "422": 2,
+    "551": 2,
+    "154": 2,
+    "543": 2,
+    "351": 2,
+    "225": 2,
+    "522": 2,
+    "040": 1,
+    "404": 1,
+    "014": 1,
+    "031": 1,
+    "540": 1
+   },
+   "shallow": [
+    {
+     "truth": [
+      3,
+      0,
+      4,
+      0,
+      4
+     ],
+     "found": [
+      3,
+      0,
+      4,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      1,
+      4
+     ],
+     "found": [
+      0,
+      0,
+      1,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      3,
+      1
+     ],
+     "found": [
+      0,
+      3,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      4,
+      0
+     ],
+     "found": [
+      5,
+      4,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      2,
+      5
+     ],
+     "found": [
+      0,
+      2,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      5,
+      0,
+      0
+     ],
+     "found": [
+      0,
+      5,
+      0,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      0,
+      0,
+      2,
+      4
+     ],
+     "found": [
+      5,
+      0,
+      0,
+      2,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      5,
+      3
+     ],
+     "found": [
+      4,
+      5,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      4,
+      3,
+      3,
+      4
+     ],
+     "found": [
+      4,
+      4,
+      3,
+      3,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      0,
+      0
+     ],
+     "found": [
+      1,
+      5,
+      0,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      0,
+      5,
+      4
+     ],
+     "found": [
+      3,
+      0,
+      5,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      3,
+      1
+     ],
+     "found": [
+      5,
+      3,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      4,
+      2,
+      2
+     ],
+     "found": [
+      0,
+      4,
+      2,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      5,
+      1,
+      5
+     ],
+     "found": [
+      5,
+      5,
+      1,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      2,
+      1,
+      1,
+      3
+     ],
+     "found": [
+      2,
+      2,
+      1,
+      1,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      1
+     ],
+     "found": [
+      2,
+      4,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      1,
+      2,
+      3
+     ],
+     "found": [
+      4,
+      1,
+      2,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      0,
+      5,
+      2,
+      4
+     ],
+     "found": [
+      2,
+      0,
+      5,
+      2,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      3,
+      0,
+      5,
+      2
+     ],
+     "found": [
+      3,
+      3,
+      0,
+      5,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      0,
+      3
+     ],
+     "found": [
+      2,
+      0,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      0,
+      2
+     ],
+     "found": [
+      5,
+      0,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      3,
+      5,
+      3,
+      2
+     ],
+     "found": [
+      5,
+      3,
+      5,
+      3,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      4,
+      3,
+      2
+     ],
+     "found": [
+      1,
+      5,
+      4,
+      3,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      3,
+      2
+     ],
+     "found": [
+      3,
+      3,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      3,
+      0,
+      4
+     ],
+     "found": [
+      0,
+      3,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      5,
+      3,
+      0
+     ],
+     "found": [
+      4,
+      5,
+      3,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      5,
+      0
+     ],
+     "found": [
+      4,
+      5,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      1,
+      3,
+      5,
+      1
+     ],
+     "found": [
+      5,
+      1,
+      3,
+      5,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      4,
+      3
+     ],
+     "found": [
+      5,
+      4,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      5,
+      1,
+      0,
+      5
+     ],
+     "found": [
+      5,
+      5,
+      1,
+      0,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      3,
+      4,
+      4
+     ],
+     "found": [
+      2,
+      3,
+      4,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      3,
+      5
+     ],
+     "found": [
+      3,
+      3,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      5,
+      4
+     ],
+     "found": [
+      4,
+      5,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      3
+     ],
+     "found": [
+      2,
+      4,
+      3
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      3,
+      4,
+      0
+     ],
+     "found": [
+      0,
+      3,
+      4,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      5,
+      4,
+      5,
+      2
+     ],
+     "found": [
+      2,
+      5,
+      4,
+      5,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      0,
+      0,
+      1
+     ],
+     "found": [
+      1,
+      0,
+      0,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      5,
+      1,
+      5
+     ],
+     "found": [
+      3,
+      5,
+      1,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      3,
+      4,
+      2,
+      1
+     ],
+     "found": [
+      4,
+      3,
+      4,
+      2,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      3,
+      1
+     ],
+     "found": [
+      3,
+      3,
+      1
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      1,
+      5,
+      4,
+      4
+     ],
+     "found": [
+      1,
+      5,
+      4,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      4,
+      2,
+      2,
+      5
+     ],
+     "found": [
+      4,
+      2,
+      2,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      1,
+      5,
+      0
+     ],
+     "found": [
+      5,
+      1,
+      5,
+      0
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      0,
+      5,
+      2
+     ],
+     "found": [
+      5,
+      0,
+      5,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      2,
+      4,
+      4
+     ],
+     "found": [
+      2,
+      4,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      5,
+      2,
+      2,
+      2,
+      5
+     ],
+     "found": [
+      5,
+      2,
+      2,
+      2,
+      5
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      3,
+      0,
+      5,
+      2,
+      2
+     ],
+     "found": [
+      3,
+      0,
+      5,
+      2,
+      2
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    },
+    {
+     "truth": [
+      0,
+      0,
+      4
+     ],
+     "found": [
+      0,
+      0,
+      4
+     ],
+     "score": 0.0,
+     "exact": true,
+     "solved": true
+    }
+   ],
+   "shallow_seconds": 8.9375,
+   "mine_seconds": 0.0,
+   "deep": [
+    {
+     "truth": [
+      5,
+      5,
+      3,
+      3,
+      0,
+      5,
+      2,
+      4,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       2,
+       5,
+       0,
+       4,
+       4,
+       3,
+       2,
+       1,
+       3
+      ],
+      "score": 1.5592299560041245,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1354,
+      "seconds": 0.421875,
+      "exact": false,
+      "query_nmse": 1.5410717232881834
+     },
+     "RANDOM": {
+      "found": [
+       5,
+       2,
+       2,
+       4,
+       0,
+       0,
+       2,
+       5,
+       2
+      ],
+      "score": 1.5953143082872967,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1305,
+      "seconds": 0.421875,
+      "exact": false,
+      "query_nmse": 1.6290724427327474
+     }
+    },
+    {
+     "truth": [
+      3,
+      2,
+      1,
+      3,
+      5,
+      3,
+      0,
+      2,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       4,
+       0,
+       0,
+       3,
+       0,
+       1,
+       1,
+       4,
+       5
+      ],
+      "score": 1.3991304628462715,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1306,
+      "seconds": 0.53125,
+      "exact": false,
+      "query_nmse": 1.4333845736116586
+     },
+     "RANDOM": {
+      "found": [
+       2,
+       5,
+       2,
+       2,
+       5,
+       1,
+       0,
+       0,
+       4
+      ],
+      "score": 1.590046442334046,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1306,
+      "seconds": 0.625,
+      "exact": false,
+      "query_nmse": 1.656695517685431
+     }
+    },
+    {
+     "truth": [
+      0,
+      2,
+      1,
+      4,
+      5,
+      3,
+      2,
+      5,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       0,
+       5,
+       3,
+       1,
+       5,
+       5,
+       1,
+       5
+      ],
+      "score": 1.7382667388662538,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1350,
+      "seconds": 0.546875,
+      "exact": false,
+      "query_nmse": 1.7523659001935912
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       5,
+       2,
+       4,
+       4,
+       0,
+       0,
+       5,
+       2
+      ],
+      "score": 1.7526230828169713,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1306,
+      "seconds": 0.546875,
+      "exact": false,
+      "query_nmse": 1.764641759120519
+     }
+    },
+    {
+     "truth": [
+      0,
+      1,
+      4,
+      5,
+      4,
+      1,
+      4,
+      1,
+      0
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       5,
+       2,
+       1,
+       4,
+       1,
+       0,
+       1,
+       0,
+       5
+      ],
+      "score": 1.555917370582549,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1305,
+      "seconds": 0.640625,
+      "exact": false,
+      "query_nmse": 1.7139896730919983
+     },
+     "RANDOM": {
+      "found": [
+       0,
+       3,
+       2,
+       3,
+       0,
+       0,
+       0,
+       2,
+       1
+      ],
+      "score": 1.6160594636268395,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1307,
+      "seconds": 0.640625,
+      "exact": false,
+      "query_nmse": 1.77876994196183
+     }
+    },
+    {
+     "truth": [
+      3,
+      2,
+      5,
+      2,
+      3,
+      3,
+      5,
+      4,
+      3
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       0,
+       1,
+       0,
+       4,
+       2,
+       0,
+       0,
+       5
+      ],
+      "score": 1.7255403502642621,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1306,
+      "seconds": 0.65625,
+      "exact": false,
+      "query_nmse": 1.599579593978253
+     },
+     "RANDOM": {
+      "found": [
+       5,
+       3,
+       1,
+       5,
+       3,
+       0,
+       2,
+       5,
+       5
+      ],
+      "score": 1.6711637347562929,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1305,
+      "seconds": 0.65625,
+      "exact": false,
+      "query_nmse": 1.544339383180318
+     }
+    },
+    {
+     "truth": [
+      3,
+      0,
+      0,
+      1,
+      4,
+      5,
+      2,
+      5,
+      2
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       4,
+       5,
+       4,
+       5,
+       0,
+       0,
+       3,
+       0,
+       0
+      ],
+      "score": 1.5792628742217008,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1351,
+      "seconds": 0.6875,
+      "exact": false,
+      "query_nmse": 1.6335124235435987
+     },
+     "RANDOM": {
+      "found": [
+       0,
+       0,
+       0,
+       2,
+       2,
+       2,
+       0,
+       3,
+       4
+      ],
+      "score": 1.6247883200317998,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1399,
+      "seconds": 0.703125,
+      "exact": false,
+      "query_nmse": 1.663601302051784
+     }
+    },
+    {
+     "truth": [
+      4,
+      4,
+      2,
+      4,
+      3,
+      2,
+      1,
+      1,
+      0
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       1,
+       5,
+       2,
+       1,
+       4,
+       4,
+       3,
+       0,
+       1
+      ],
+      "score": 1.570447787367887,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1305,
+      "seconds": 0.65625,
+      "exact": false,
+      "query_nmse": 1.6925949770711792
+     },
+     "RANDOM": {
+      "found": [
+       5,
+       0,
+       3,
+       4,
+       0,
+       0,
+       5,
+       2,
+       1
+      ],
+      "score": 1.5620080573669974,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1350,
+      "seconds": 0.5,
+      "exact": false,
+      "query_nmse": 1.5619441051385712
+     }
+    },
+    {
+     "truth": [
+      2,
+      0,
+      3,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       4,
+       2,
+       1,
+       1,
+       0,
+       4,
+       3,
+       5,
+       3
+      ],
+      "score": 1.5313020686285552,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1307,
+      "seconds": 0.4375,
+      "exact": false,
+      "query_nmse": 1.6552699330016187
+     },
+     "RANDOM": {
+      "found": [
+       5,
+       3,
+       3,
+       0,
+       5,
+       2,
+       0,
+       0,
+       2
+      ],
+      "score": 1.5798709039322427,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1307,
+      "seconds": 0.59375,
+      "exact": false,
+      "query_nmse": 1.636584591373844
+     }
+    },
+    {
+     "truth": [
+      4,
+      0,
+      5,
+      5,
+      4,
+      3,
+      5,
+      4,
+      4
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       1,
+       3,
+       4,
+       0,
+       1,
+       1,
+       1,
+       5,
+       1
+      ],
+      "score": 1.5251710585822749,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1354,
+      "seconds": 0.671875,
+      "exact": false,
+      "query_nmse": 1.41477446625447
+     },
+     "RANDOM": {
+      "found": [
+       4,
+       4,
+       0,
+       5,
+       2,
+       2,
+       3,
+       5,
+       2
+      ],
+      "score": 1.5886175601075827,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1396,
+      "seconds": 0.65625,
+      "exact": false,
+      "query_nmse": 1.5099492617395815
+     }
+    },
+    {
+     "truth": [
+      5,
+      0,
+      5,
+      0,
+      0,
+      4,
+      2,
+      1,
+      2
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       3,
+       0,
+       1,
+       4,
+       0,
+       3,
+       3,
+       0,
+       1
+      ],
+      "score": 1.6140635241147168,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1308,
+      "seconds": 0.40625,
+      "exact": false,
+      "query_nmse": 1.6429003790056504
+     },
+     "RANDOM": {
+      "found": [
+       0,
+       1,
+       2,
+       5,
+       3,
+       0,
+       3,
+       3,
+       0
+      ],
+      "score": 1.684859876347009,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1352,
+      "seconds": 0.4375,
+      "exact": false,
+      "query_nmse": 1.6731293482122402
+     }
+    },
+    {
+     "truth": [
+      3,
+      0,
+      1,
+      2,
+      5,
+      5,
+      0,
+      4,
+      5
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       1,
+       0,
+       1,
+       3,
+       0,
+       5,
+       5,
+       1,
+       4
+      ],
+      "score": 1.5392201918075998,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1351,
+      "seconds": 0.421875,
+      "exact": false,
+      "query_nmse": 1.5433906968834452
+     },
+     "RANDOM": {
+      "found": [
+       1,
+       0,
+       3,
+       0,
+       5,
+       4,
+       4,
+       0,
+       0
+      ],
+      "score": 1.4738917279516772,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1352,
+      "seconds": 0.5625,
+      "exact": false,
+      "query_nmse": 1.5129979464302072
+     }
+    },
+    {
+     "truth": [
+      2,
+      1,
+      4,
+      2,
+      3,
+      0,
+      4,
+      3,
+      1
+     ],
+     "aliases_1pos": 0,
+     "MINED": {
+      "found": [
+       0,
+       1,
+       2,
+       2,
+       1,
+       5,
+       0,
+       3,
+       0
+      ],
+      "score": 1.5496673078519738,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1400,
+      "seconds": 0.4375,
+      "exact": false,
+      "query_nmse": 1.6373327596109033
+     },
+     "RANDOM": {
+      "found": [
+       5,
+       2,
+       1,
+       0,
+       0,
+       0,
+       5,
+       3,
+       0
+      ],
+      "score": 1.6097521009559999,
+      "success": false,
+      "enum_evaluations": 64,
+      "polish_evaluations": 1306,
+      "seconds": 0.453125,
+      "exact": false,
+      "query_nmse": 1.6441038037496476
+     }
+    }
+   ],
+   "complete": true,
+   "git_commit": "8482777df40016007db5d105840749bb3c2de9ad"
+  }
+ ]
+}

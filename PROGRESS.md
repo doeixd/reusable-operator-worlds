@@ -9692,3 +9692,18 @@ tasks per size; learning rate 0.01/0.05/0.2, 1/3/7 restarts at 2,100 total steps
 solved in 1-5 of 6 depending on setting, 7 positions in 0 of 6 under EVERY setting. Exhaustive search with prefix
 sharing on the 6 teacher operators: depth 5/6/7 in 0.3/2.0/13.5 s, exact; ~6x per step. CF1 was not frozen: its
 loop-versus-straight clause would compare 0 with 0. Next: proposal to the PI (see PREDICTIONS).
+
+# M0 motif-opportunity census (Tier 0, 2026-10-27, worlds 80-82, rotated teacher operators): `MOTIF_OPPORTUNITY`
+
+Plan `M0_MOTIF_OPPORTUNITY_CENSUS_PLAN.md` (frozen `5308f0f`, re-frozen `2477026` after `check_adequacy` caught an
+incomplete discriminating-power section whose failure a pipe had hidden; nothing ran in between; protected
+`8482777`). Module `row.experiments.census_m0_motif_opportunity`; report `reports/m0_motif_opportunity_census.json`;
+cells, run.log, status.json, stdout in `reports/m0_motif_opportunity_20261027/`; ~7 min at pool 3. Opens decision 23
+(PI "continue research", read as approval of the recommended default). Motif generator: 6 distinct length-3 motifs per
+world; 48 shallow tasks (one motif + 0-2 fillers) solved exactly by enumeration (48/48 per cell); deep tasks are three
+motifs (depth 9). Rates over 36 deep tasks: `MINED` (3-grams with count >= 3 from shallow solutions, 7-8 grams, all 6
+motifs recovered in every world) 36/36 at median 0.06 s; `ORACLE` 36/36; `RANDOM` alphabets of the same size 0/36;
+CF1 incumbent (relaxed descent + polish) 0/36 at median 29 s (query NMSE ~1.6); UNIFORM null `MINED` 0/36 (2-4 noise
+grams). No one-position aliases. Independent recount from the cells agrees; restart check (one cell deleted and
+rerun) reproduced it identically apart from timing fields. The scorer is in the runner module (as CF0), disclosed.
+`MINED` was registered as near-guaranteed on teacher operators. Next: M1 Tier 1 with a learned library.

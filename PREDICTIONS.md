@@ -12138,3 +12138,22 @@ learned library, i.e. ~30 min at depth 7).
   therefore a generator question: a hierarchical (motif) task distribution on the rotated family, where search at
   depth 8-10 binds for the incumbent and motif macros would make it cheap. That is a generator change and is put to
   the PI rather than started.
+
+# M0 motif-opportunity census (Tier 0, 2026-10-27): `MOTIF_OPPORTUNITY` on teacher operators
+
+Registered rule (`M0_MOTIF_OPPORTUNITY_CENSUS_PLAN.md`, frozen `2477026`): `MOTIF_OPPORTUNITY`. MOTIF `MINED` 36/36,
+`ORACLE` 36/36, `RANDOM` 0/36, `INCUMBENT` 0/36; UNIFORM `MINED` 0/36, `RANDOM` 0/36.
+
+**Reading.**
+- On the rotated teacher library, deep (depth-9) programs built from recurring motifs are out of reach of the cheap
+  primitive-level incumbent, exactly as uniform 7-step programs were (CF1): motif structure does not ease relaxed
+  search. Exhaustive search would solve them at ~8 min per task here and is infeasible over a 12-slot learned library
+  (12^9 = 5e9 routes).
+- Macros mined from solved shallow tasks of the same distribution turn each deep task into a 343-512-route search,
+  and the help is specific to recurrence (random macros 0/36; macros mined from a uniform distribution 0/36).
+- What this does NOT show: that a learner can do it. `MINED` was near-guaranteed by construction (exact shallow
+  solutions, each motif ~8 times against ~0.4 for a random gram). The open questions are all learner-side: does the
+  online pipeline form a vocabulary on a motif stream; are motifs visible in learner routes despite slot relabelling,
+  drift and stale assignments; does macro search over learned slots beat the incumbent on deep tasks at matched
+  compute when mining is charged; and does depth-9 execution drift (C0: ~0.03 NMSE at 8 repeats) leave deep tasks
+  solvable at all. That is M1 (Tier 1).
