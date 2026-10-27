@@ -94,8 +94,21 @@ the rate on its wrong side of the bar:
 | `INCUMBENT` <= 0.5 | 0.2: 1.000; 0.3: 0.996; 0.4: 0.919; 0.6: 0.147; 0.7: 0.009 |
 | `INCUMBENT` > 0.8 | 0.7: 0.112; 0.75: 0.289; 0.9: 0.977; 0.95: 1.000 |
 
-False-fire is <= 5% one step beyond each bar (0.8 for `MINED`, 0.1 for controls, 0.7 for `INCUMBENT` <= 0.5); a true
-incumbent rate of 0.6 still reads `MOTIF_OPPORTUNITY` 15% of the time, which is why 0.5-0.8 is `GRADED`, not a pass.
+Each row applies one clause of the registered decision rule above to a null sampler (true rate on the wrong side of
+the bar) and an effect sampler (true rate on the right side). False-fire is <= 5% one step beyond each bar (0.8 for
+`MINED`, 0.1 for controls, 0.7 for `INCUMBENT` <= 0.5); a true incumbent rate of 0.6 still reads `MOTIF_OPPORTUNITY`
+15% of the time, which is why 0.5-0.8 is `GRADED`, not a pass. Detection at the expected effect sizes (pilot and CF1):
+`MINED` at 0.97 passes with probability 0.978, controls at 0.05 stay below the bar with probability 0.9997, and an
+incumbent at 0.2 reads as binding with probability 1.000.
+
+What these checks do not cover: tasks are simulated as independent Bernoulli draws, but the 12 deep tasks of a world
+share one library and one motif set, so a world-level failure (for example a world whose motifs alias each other)
+moves 12 tasks together and is more likely than the binomial rates suggest; per-world rates are recorded so this is
+visible. Systematic errors (an aliasing deep program scored as a success, a polish that repairs random alphabets by
+brute force) are not sampling questions; aliases and polish evaluations are recorded to expose them.
+
+Re-freeze note: the first freeze commit (`5308f0f`) was made before `check_adequacy` passed (its exit code was hidden
+by a pipe); this section was completed in a second freeze commit before anything ran. Only this section changed.
 
 # What it licenses, and limits
 
