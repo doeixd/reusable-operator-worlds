@@ -1,0 +1,715 @@
+{
+ "world": 99,
+ "stream": 0,
+ "scale": 16,
+ "motifs": [
+  [
+   4,
+   4,
+   2
+  ],
+  [
+   3,
+   5,
+   5
+  ],
+  [
+   3,
+   0,
+   3
+  ],
+  [
+   0,
+   4,
+   4
+  ],
+  [
+   2,
+   1,
+   2
+  ],
+  [
+   4,
+   3,
+   2
+  ]
+ ],
+ "wake_seconds": 72.20714739999994,
+ "wake_shallow_median": 2.1017246812160444,
+ "routes_changed": 273,
+ "reroute_seconds": 361.6113551999997,
+ "reroute_shallow_median": 1.6581177939071854,
+ "formed_shallow_median": 1.4638126917150935,
+ "formed_shallow_below_0.05": 0,
+ "formation_seconds": 639.5475255999997,
+ "deep_test": {
+  "slot_of": {
+   "5": 6,
+   "2": 3,
+   "1": 0,
+   "3": 7,
+   "0": 11,
+   "4": 10
+  },
+  "slots_distinct": 6,
+  "anchor_vote_purity": {
+   "5": 1.0,
+   "2": 1.0,
+   "1": 1.0,
+   "3": 1.0,
+   "0": 1.0,
+   "4": 0.5
+  },
+  "shallow_routes_equal_mapped": 9,
+  "motif_images": [
+   [
+    10,
+    10,
+    3
+   ],
+   [
+    7,
+    6,
+    6
+   ],
+   [
+    7,
+    11,
+    7
+   ],
+   [
+    11,
+    10,
+    10
+   ],
+   [
+    3,
+    0,
+    3
+   ],
+   [
+    10,
+    7,
+    3
+   ]
+  ],
+  "alphabet": [
+   [
+    5,
+    4,
+    4
+   ],
+   [
+    7,
+    6,
+    6
+   ],
+   [
+    7,
+    0,
+    2
+   ],
+   [
+    2,
+    3,
+    1
+   ],
+   [
+    2,
+    4,
+    7
+   ],
+   [
+    4,
+    0,
+    11
+   ]
+  ],
+  "motif_images_in_alphabet": 1,
+  "top_grams": {
+   "5,4,4": 8,
+   "7,6,6": 7,
+   "7,0,2": 4,
+   "2,3,1": 3,
+   "4,0,11": 3,
+   "2,4,7": 3,
+   "2,9,0": 2,
+   "10,4,11": 2,
+   "6,1,1": 2,
+   "3,8,2": 2,
+   "10,1,9": 2,
+   "8,4,3": 2,
+   "0,5,9": 2,
+   "0,5,2": 2,
+   "1,4,0": 2,
+   "11,10,9": 2,
+   "1,5,3": 2,
+   "3,1,9": 2,
+   "3,10,6": 2,
+   "8,6,4": 2
+  },
+  "random_alphabet": [
+   [
+    9,
+    0,
+    7
+   ],
+   [
+    5,
+    8,
+    2
+   ],
+   [
+    4,
+    9,
+    5
+   ],
+   [
+    1,
+    4,
+    0
+   ],
+   [
+    0,
+    1,
+    4
+   ],
+   [
+    9,
+    9,
+    3
+   ]
+  ],
+  "deep": [
+   {
+    "program": [
+     4,
+     3,
+     2,
+     4,
+     3,
+     2,
+     4,
+     3,
+     2
+    ],
+    "mapped": [
+     10,
+     7,
+     3,
+     10,
+     7,
+     3,
+     10,
+     7,
+     3
+    ],
+    "MAPPED": {
+     "route": [
+      10,
+      7,
+      3,
+      10,
+      7,
+      3,
+      10,
+      7,
+      3
+     ],
+     "support_mse": 1.586122751235962,
+     "query_nmse": 1.4900347631104034,
+     "equals_mapped": true
+    },
+    "MINED": {
+     "enum_route": [
+      5,
+      4,
+      4,
+      2,
+      4,
+      7,
+      7,
+      0,
+      2
+     ],
+     "enum_support_mse": 1.3062366247177124,
+     "route": [
+      3,
+      10,
+      2,
+      7,
+      4,
+      0,
+      1,
+      10,
+      2
+     ],
+     "support_mse": 1.1215033531188965,
+     "polish_evaluations": 5449,
+     "enum_evaluations": 216,
+     "seconds": 2.8927739000000656,
+     "query_nmse": 1.0486403253602343,
+     "equals_mapped": false
+    },
+    "RANDOM": {
+     "enum_route": [
+      4,
+      9,
+      5,
+      1,
+      4,
+      0,
+      1,
+      4,
+      0
+     ],
+     "enum_support_mse": 1.2316882610321045,
+     "route": [
+      5,
+      9,
+      5,
+      1,
+      4,
+      1,
+      2,
+      0,
+      0
+     ],
+     "support_mse": 1.1523351669311523,
+     "polish_evaluations": 5249,
+     "enum_evaluations": 216,
+     "seconds": 2.697765899999922,
+     "query_nmse": 1.0698926566642175,
+     "equals_mapped": false
+    },
+    "INCUMBENT": {
+     "opt_route": [
+      0,
+      9,
+      10,
+      7,
+      8,
+      10,
+      3,
+      11,
+      11
+     ],
+     "opt_support_mse": 1.363616704940796,
+     "route": [
+      3,
+      1,
+      10,
+      1,
+      9,
+      1,
+      8,
+      1,
+      10
+     ],
+     "support_mse": 1.141511082649231,
+     "polish_evaluations": 5655,
+     "seconds": 18.540397000000212,
+     "query_nmse": 1.0688707986201973,
+     "equals_mapped": false
+    }
+   },
+   {
+    "program": [
+     3,
+     0,
+     3,
+     3,
+     0,
+     3,
+     3,
+     5,
+     5
+    ],
+    "mapped": [
+     7,
+     11,
+     7,
+     7,
+     11,
+     7,
+     7,
+     6,
+     6
+    ],
+    "MAPPED": {
+     "route": [
+      7,
+      11,
+      7,
+      7,
+      11,
+      7,
+      7,
+      6,
+      6
+     ],
+     "support_mse": 0.3056572377681732,
+     "query_nmse": 0.2956795146518558,
+     "equals_mapped": true
+    },
+    "MINED": {
+     "enum_route": [
+      2,
+      3,
+      1,
+      2,
+      3,
+      1,
+      2,
+      3,
+      1
+     ],
+     "enum_support_mse": 1.2613900899887085,
+     "route": [
+      1,
+      3,
+      1,
+      2,
+      3,
+      1,
+      2,
+      1,
+      10
+     ],
+     "support_mse": 1.0974565744400024,
+     "polish_evaluations": 5348,
+     "enum_evaluations": 216,
+     "seconds": 3.367275300000074,
+     "query_nmse": 0.9956972161262478,
+     "equals_mapped": false
+    },
+    "RANDOM": {
+     "enum_route": [
+      5,
+      8,
+      2,
+      1,
+      4,
+      0,
+      5,
+      8,
+      2
+     ],
+     "enum_support_mse": 1.2375552654266357,
+     "route": [
+      9,
+      8,
+      2,
+      1,
+      4,
+      3,
+      5,
+      8,
+      2
+     ],
+     "support_mse": 1.1506553888320923,
+     "polish_evaluations": 5348,
+     "enum_evaluations": 216,
+     "seconds": 3.37167270000009,
+     "query_nmse": 1.0901777451675247,
+     "equals_mapped": false
+    },
+    "INCUMBENT": {
+     "opt_route": [
+      5,
+      5,
+      3,
+      0,
+      5,
+      7,
+      5,
+      8,
+      2
+     ],
+     "opt_support_mse": 1.2467472553253174,
+     "route": [
+      2,
+      4,
+      3,
+      0,
+      1,
+      10,
+      3,
+      9,
+      2
+     ],
+     "support_mse": 1.1775392293930054,
+     "polish_evaluations": 5351,
+     "seconds": 17.972752200000286,
+     "query_nmse": 1.0784108746677814,
+     "equals_mapped": false
+    }
+   },
+   {
+    "program": [
+     3,
+     5,
+     5,
+     3,
+     5,
+     5,
+     0,
+     4,
+     4
+    ],
+    "mapped": [
+     7,
+     6,
+     6,
+     7,
+     6,
+     6,
+     11,
+     10,
+     10
+    ],
+    "MAPPED": {
+     "route": [
+      7,
+      6,
+      6,
+      7,
+      6,
+      6,
+      11,
+      10,
+      10
+     ],
+     "support_mse": 1.7507529258728027,
+     "query_nmse": 1.5658944050337706,
+     "equals_mapped": true
+    },
+    "MINED": {
+     "enum_route": [
+      2,
+      4,
+      7,
+      2,
+      3,
+      1,
+      2,
+      3,
+      1
+     ],
+     "enum_support_mse": 1.2750787734985352,
+     "route": [
+      2,
+      1,
+      5,
+      8,
+      8,
+      1,
+      2,
+      0,
+      2
+     ],
+     "support_mse": 1.1541621685028076,
+     "polish_evaluations": 5450,
+     "enum_evaluations": 216,
+     "seconds": 2.961130499999854,
+     "query_nmse": 1.0204147481480077,
+     "equals_mapped": false
+    },
+    "RANDOM": {
+     "enum_route": [
+      4,
+      9,
+      5,
+      5,
+      8,
+      2,
+      5,
+      8,
+      2
+     ],
+     "enum_support_mse": 1.2653617858886719,
+     "route": [
+      3,
+      5,
+      5,
+      10,
+      8,
+      2,
+      2,
+      2,
+      2
+     ],
+     "support_mse": 1.1425137519836426,
+     "polish_evaluations": 5349,
+     "enum_evaluations": 216,
+     "seconds": 3.4207437999998547,
+     "query_nmse": 1.0585980518751847,
+     "equals_mapped": false
+    },
+    "INCUMBENT": {
+     "opt_route": [
+      7,
+      4,
+      2,
+      5,
+      7,
+      0,
+      4,
+      5,
+      4
+     ],
+     "opt_support_mse": 1.2954912185668945,
+     "route": [
+      5,
+      10,
+      10,
+      2,
+      2,
+      4,
+      4,
+      10,
+      5
+     ],
+     "support_mse": 1.1698901653289795,
+     "polish_evaluations": 5349,
+     "seconds": 17.215252599999985,
+     "query_nmse": 1.1190613001436451,
+     "equals_mapped": false
+    }
+   },
+   {
+    "program": [
+     3,
+     5,
+     5,
+     4,
+     3,
+     2,
+     2,
+     1,
+     2
+    ],
+    "mapped": [
+     7,
+     6,
+     6,
+     10,
+     7,
+     3,
+     3,
+     0,
+     3
+    ],
+    "MAPPED": {
+     "route": [
+      7,
+      6,
+      6,
+      10,
+      7,
+      3,
+      3,
+      0,
+      3
+     ],
+     "support_mse": 1.4050085544586182,
+     "query_nmse": 1.3711972387170275,
+     "equals_mapped": true
+    },
+    "MINED": {
+     "enum_route": [
+      5,
+      4,
+      4,
+      5,
+      4,
+      4,
+      2,
+      3,
+      1
+     ],
+     "enum_support_mse": 1.2560017108917236,
+     "route": [
+      0,
+      10,
+      1,
+      10,
+      2,
+      10,
+      0,
+      3,
+      1
+     ],
+     "support_mse": 1.154759407043457,
+     "polish_evaluations": 5252,
+     "enum_evaluations": 216,
+     "seconds": 2.509857000000011,
+     "query_nmse": 1.0395177216591263,
+     "equals_mapped": false
+    },
+    "RANDOM": {
+     "enum_route": [
+      1,
+      4,
+      0,
+      1,
+      4,
+      0,
+      1,
+      4,
+      0
+     ],
+     "enum_support_mse": 1.3166009187698364,
+     "route": [
+      10,
+      3,
+      10,
+      2,
+      3,
+      10,
+      1,
+      4,
+      0
+     ],
+     "support_mse": 1.1345442533493042,
+     "polish_evaluations": 5448,
+     "enum_evaluations": 216,
+     "seconds": 2.477945799999816,
+     "query_nmse": 1.05205344583281,
+     "equals_mapped": false
+    },
+    "INCUMBENT": {
+     "opt_route": [
+      0,
+      5,
+      3,
+      8,
+      0,
+      5,
+      9,
+      3,
+      8
+     ],
+     "opt_support_mse": 1.4458850622177124,
+     "route": [
+      1,
+      1,
+      3,
+      10,
+      10,
+      2,
+      9,
+      3,
+      1
+     ],
+     "support_mse": 1.1371474266052246,
+     "polish_evaluations": 5350,
+     "seconds": 16.67704709999998,
+     "query_nmse": 1.097305471922128,
+     "equals_mapped": false
+    }
+   }
+  ]
+ },
+ "seconds": 733.6764955000001
+}

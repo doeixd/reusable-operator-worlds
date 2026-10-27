@@ -9707,3 +9707,17 @@ CF1 incumbent (relaxed descent + polish) 0/36 at median 29 s (query NMSE ~1.6); 
 grams). No one-position aliases. Independent recount from the cells agrees; restart check (one cell deleted and
 rerun) reproduced it identically apart from timing fields. The scorer is in the runner module (as CF0), disclosed.
 `MINED` was registered as near-guaranteed on teacher operators. Next: M1 Tier 1 with a learned library.
+
+# M1 sizing (EXPLORATORY, 2026-10-27, world 83 streams 0-1, learned library): motifs mined from learner routes solve held-out depth-9 tasks
+
+`row.experiments.motif_stream`, `row.experiments.explore_m1_motif_sizing` (code `470a8e8`); records
+`reports/m1_sizing/w83_s0.json`, `w83_s1.json`, logs in `reports/m1_sizing/logs/`; ~47 min per stream, two in parallel.
+Scale-16 smoke on world 99 (`w99_s0_scale16.json`) exercised every path (no formation at that scale, as expected).
+Stream: 60 length-1 + 64 length-2 anchors + 192 shallow motif tasks (depth 3-5); D2's end-of-stream protocol (wake,
+exhaustive re-route, O3 sleep). Formed shallow median 0.0188 / 0.0161 (192/192 and 190/192 below 0.05; wake alone
+1.62 / 1.39). Anchor slot maps pure (6 distinct slots). Mined alphabet 12 grams; 6/6 and 5/6 motif images present.
+On the 24 held-out depth-9 tasks per stream (128 support): `MINED` (triple enumeration + polish) reaches the mapped
+teacher route's query NMSE or better on 48/48 (median 0.041 / 0.033; equal to the mapped route 24 and 16 times,
+lower elsewhere) in ~4.4 s; `RANDOM` macros 1.36 / 1.48; SY1's incumbent (OPT 2,000 steps + polish) 1.38 / 1.46 in
+~22 s, never the mapped route. Depth-9 execution through learned slots stays at 0.03-0.05 NMSE. One world, not
+registered. Next: registered M1 on fresh worlds 84-86 x 3 streams.
