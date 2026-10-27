@@ -12157,3 +12157,34 @@ Registered rule (`M0_MOTIF_OPPORTUNITY_CENSUS_PLAN.md`, frozen `2477026`): `MOTI
   drift and stale assignments; does macro search over learned slots beat the incumbent on deep tasks at matched
   compute when mining is charged; and does depth-9 execution drift (C0: ~0.03 NMSE at 8 repeats) leave deep tasks
   solvable at all. That is M1 (Tier 1).
+
+# M2 motif cycle (Tier 1, 2026-10-27, worlds 84-86 x 3 streams): `PARTIAL`
+
+Registered rule (`M2_MOTIF_CYCLE_PLAN.md`, frozen `3c093fe`, protected `71c77f5`; run at `71c77f5`, exit 0, 9/9
+validated cells; independent scorer `score_m2_motif_cycle` agrees; `check_prereg`, `check_invalid` pass):
+`PARTIAL`. Counts over 9 streams: `formed` 7 (bar 7), `incumbent solves` 0, `cycle solves` 6 (bar 8), `paired gain`
+8 (bar 8). Per-stream `CYC` deep solved fraction (query NMSE < 0.20): w84 0.98/1.00/1.00, w85 1.00/1.00/0.77,
+w86 0.52/1.00/0.02. `KEEP` and `INC` 0.00 in all 9 streams. `harm_shallow` 0.
+
+**Reading.**
+- In no stream did the incumbent pipeline (wake routes, or SY1 OPT + polish re-route, then sleep) solve any deep
+  motif task: 0/432 per branch. Wherever `CYC` worked it solved essentially every deep task (6 streams at >= 0.98,
+  medians 0.024-0.048), and paired gain >= 0.5 held in 8/9 streams. The cycle is not the bottleneck where the library
+  forms; the registered bar of 8/9 was missed on 3 streams.
+- Failure modes, split per stream (descriptive, read after the data; learning D7):
+  - w86_s2, formation COLLAPSE: two primitives' length-1 anchors route to the same slot (5 distinct slots for 6
+    primitives); shallow median 0.26 in every branch (pre-sleep 1.05); no motif image in the alphabet; `CYC` 0.02.
+  - w86_s0, PARTIAL formation: anchor slots distinct but shallow routes do not reuse the motif images (1/6 in the
+    alphabet); shallow median 0.078 (> 0.05, not formed); `CYC` 0.52.
+  - w85_s2, formed but ONE MOTIF MISSED: every failed deep task contains motif (5, 1, 2), whose anchor image is not in
+    the alphabet, and the mapped teacher route is also ~1.2 on them, so primitive 1's anchor slot does not stand in for
+    it inside compositions (a one-primitive near-miss, not a mining-rule failure); `CYC` 0.77.
+  The third world-86 stream formed cleanly (w86_s1 `CYC` 1.00): formation here is stream-dependent, as in O2C-O2G.
+- The pattern "the cycle solves wherever the library forms" (6/7 formed streams; the one formed failure is a
+  formation near-miss on one primitive) is POST-HOC and stays in this ledger as a hypothesis (learning B21). It is not
+  the registered claim, and the registered claim (8/9) failed.
+- What it licenses: the open problem is formation reliability on a motif stream with deep tasks in it (2 of 9 streams
+  did not form, a third has one aliased primitive), not the cycle. Candidate next rungs, for the PI: (a) a mid-stream
+  repair or re-anchoring step targeted at merged or aliased anchor slots before mining (O-line repair tools exist);
+  (b) a registered replication of the formed-stream conditional with formation as a gate; (c) an alphabet rule that
+  tolerates one missing motif (e.g. polish over 4-grams). None is started.

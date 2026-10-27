@@ -1,0 +1,54 @@
+{
+ "protocol": {
+  "id": "m2-motif-cycle-v1",
+  "git_commit": "71c77f5",
+  "plan": "M2_MOTIF_CYCLE_PLAN.md",
+  "tier": 1,
+  "root": "artifacts/m2_motif_cycle_dry",
+  "worlds": [
+   99
+  ],
+  "streams": [
+   0,
+   1,
+   2
+  ],
+  "n_deep": 48,
+  "branches": [
+   "WAKE",
+   "KEEP",
+   "INC",
+   "CYC"
+  ],
+  "min_count": 3,
+  "max_alphabet": 12,
+  "opt_steps": 2000,
+  "polish_cap": 30000,
+  "solved": 0.2,
+  "formed": 0.05,
+  "need_streams": [
+   7,
+   7,
+   8
+  ],
+  "memory": 64,
+  "extra_updates": 8192,
+  "scale": 16,
+  "input_sha256": {
+   "M2_MOTIF_CYCLE_PLAN.md": "7469f001247a4e5468c574813e88b9fc71cbcaa2fbf9db2bceefd6878dbd1b1e",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": {
+   "row.experiments.motif_stream": "9b4036f267b95399bee7de65ce920430266e298e7dcb0cb1af2e370d442d018f",
+   "row.experiments.dn_stream": "75a0c7fe3045f2113b0bcaed29aa3037e332ea95db44dbb68210a2c0d1c286ef",
+   "row.experiments.deep_reroute": "6528c8683cb33a5b90d51d6f8e42c6234142a206a4f567c7d307e487e5eea3e6",
+   "row.experiments.o2_online_reliability": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+   "row.experiments.o2c_consolidation": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+   "row.experiments.o2d_sleep_memory": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+   "row.experiments.o3_online_sleep": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+   "row.experiments.learned_lifetime": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+   "m2": "3eb437ead8527ce2962c5a3a654ca1b653bd9e41182b01af5ecc29db4dc68640"
+  }
+ },
+ "protocol_sha256": "fd2ed002c72afa9e9102fc3d367925aa13eef507283b4a696b4a2de0ce70872c"
+}

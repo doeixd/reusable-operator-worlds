@@ -1,0 +1,258 @@
+{
+ "label": "PARTIAL",
+ "denominator_streams": 9,
+ "counts": {
+  "formed": 7,
+  "incumbent_solves": 0,
+  "cyc_solves": 6,
+  "paired_gain": 8
+ },
+ "per_stream": {
+  "w84_s0": {
+   "WAKE": {
+    "solved": 0.0,
+    "shallow_median": 1.5625561650770683,
+    "deep_median": 1.4598125202606154
+   },
+   "KEEP": {
+    "solved": 0.0,
+    "shallow_median": 0.02948899198012503,
+    "deep_median": 1.3236860250408338
+   },
+   "INC": {
+    "solved": 0.0,
+    "shallow_median": 0.03186056512270555,
+    "deep_median": 1.2063732568943424
+   },
+   "CYC": {
+    "solved": 0.9791666666666666,
+    "shallow_median": 0.02188940723073417,
+    "deep_median": 0.044726847294270386
+   },
+   "formed": true,
+   "incumbent_solves": false,
+   "cyc_solves": true,
+   "gain": 0.9791666666666666,
+   "paired_gain": true
+  },
+  "w84_s1": {
+   "WAKE": {
+    "solved": 0.0,
+    "shallow_median": 1.51927361090375,
+    "deep_median": 1.4251863353242267
+   },
+   "KEEP": {
+    "solved": 0.0,
+    "shallow_median": 0.026713343513904204,
+    "deep_median": 1.389463639325846
+   },
+   "INC": {
+    "solved": 0.0,
+    "shallow_median": 0.027073203736174355,
+    "deep_median": 1.2841327970739895
+   },
+   "CYC": {
+    "solved": 1.0,
+    "shallow_median": 0.016034099745547533,
+    "deep_median": 0.03458605298572644
+   },
+   "formed": true,
+   "incumbent_solves": false,
+   "cyc_solves": true,
+   "gain": 1.0,
+   "paired_gain": true
+  },
+  "w84_s2": {
+   "WAKE": {
+    "solved": 0.0,
+    "shallow_median": 1.4767640353458225,
+    "deep_median": 1.5354675866605612
+   },
+   "KEEP": {
+    "solved": 0.0,
+    "shallow_median": 0.016067596729283606,
+    "deep_median": 1.341202241817679
+   },
+   "INC": {
+    "solved": 0.0,
+    "shallow_median": 0.02203068029908402,
+    "deep_median": 1.197511976540301
+   },
+   "CYC": {
+    "solved": 1.0,
+    "shallow_median": 0.011329935895142132,
+    "deep_median": 0.023707411216142053
+   },
+   "formed": true,
+   "incumbent_solves": false,
+   "cyc_solves": true,
+   "gain": 1.0,
+   "paired_gain": true
+  },
+  "w85_s0": {
+   "WAKE": {
+    "solved": 0.0,
+    "shallow_median": 1.4605247914651867,
+    "deep_median": 1.4395172628259623
+   },
+   "KEEP": {
+    "solved": 0.0,
+    "shallow_median": 0.030589237096239952,
+    "deep_median": 1.3616861288266144
+   },
+   "INC": {
+    "solved": 0.0,
+    "shallow_median": 0.028657954411029328,
+    "deep_median": 1.2599725037026768
+   },
+   "CYC": {
+    "solved": 1.0,
+    "shallow_median": 0.015576045151558545,
+    "deep_median": 0.03657853287859139
+   },
+   "formed": true,
+   "incumbent_solves": false,
+   "cyc_solves": true,
+   "gain": 1.0,
+   "paired_gain": true
+  },
+  "w85_s1": {
+   "WAKE": {
+    "solved": 0.0,
+    "shallow_median": 1.4387489919683212,
+    "deep_median": 1.36450778709578
+   },
+   "KEEP": {
+    "solved": 0.0,
+    "shallow_median": 0.03656569740847025,
+    "deep_median": 1.4188576835336582
+   },
+   "INC": {
+    "solved": 0.0,
+    "shallow_median": 0.0362865716682811,
+    "deep_median": 1.3442035472020466
+   },
+   "CYC": {
+    "solved": 1.0,
+    "shallow_median": 0.022564579788775064,
+    "deep_median": 0.04797232734667546
+   },
+   "formed": true,
+   "incumbent_solves": false,
+   "cyc_solves": true,
+   "gain": 1.0,
+   "paired_gain": true
+  },
+  "w85_s2": {
+   "WAKE": {
+    "solved": 0.0,
+    "shallow_median": 1.4653083314156476,
+    "deep_median": 1.3970618826986403
+   },
+   "KEEP": {
+    "solved": 0.0,
+    "shallow_median": 0.03501932150897946,
+    "deep_median": 1.4311412016749963
+   },
+   "INC": {
+    "solved": 0.0,
+    "shallow_median": 0.035061564056911625,
+    "deep_median": 1.2801647209937772
+   },
+   "CYC": {
+    "solved": 0.7708333333333334,
+    "shallow_median": 0.0262290194907345,
+    "deep_median": 0.056965069553421704
+   },
+   "formed": true,
+   "incumbent_solves": false,
+   "cyc_solves": false,
+   "gain": 0.7708333333333334,
+   "paired_gain": true
+  },
+  "w86_s0": {
+   "WAKE": {
+    "solved": 0.0,
+    "shallow_median": 1.5805316128271083,
+    "deep_median": 1.518734116385261
+   },
+   "KEEP": {
+    "solved": 0.0,
+    "shallow_median": 0.08706731701678974,
+    "deep_median": 1.539701142260236
+   },
+   "INC": {
+    "solved": 0.0,
+    "shallow_median": 0.08400330289424504,
+    "deep_median": 1.5933060136155635
+   },
+   "CYC": {
+    "solved": 0.5208333333333334,
+    "shallow_median": 0.07782419208793806,
+    "deep_median": 0.187028025679985
+   },
+   "formed": false,
+   "incumbent_solves": false,
+   "cyc_solves": false,
+   "gain": 0.5208333333333334,
+   "paired_gain": true
+  },
+  "w86_s1": {
+   "WAKE": {
+    "solved": 0.0,
+    "shallow_median": 1.4672778222190381,
+    "deep_median": 1.6125054754453478
+   },
+   "KEEP": {
+    "solved": 0.0,
+    "shallow_median": 0.024612051106037515,
+    "deep_median": 1.4320994454725382
+   },
+   "INC": {
+    "solved": 0.0,
+    "shallow_median": 0.020911292614654207,
+    "deep_median": 1.352036918134098
+   },
+   "CYC": {
+    "solved": 1.0,
+    "shallow_median": 0.011005888027476853,
+    "deep_median": 0.025415065430207606
+   },
+   "formed": true,
+   "incumbent_solves": false,
+   "cyc_solves": true,
+   "gain": 1.0,
+   "paired_gain": true
+  },
+  "w86_s2": {
+   "WAKE": {
+    "solved": 0.0,
+    "shallow_median": 1.4955914840603337,
+    "deep_median": 1.4398923897801743
+   },
+   "KEEP": {
+    "solved": 0.0,
+    "shallow_median": 0.2796056427831437,
+    "deep_median": 1.2843146084350967
+   },
+   "INC": {
+    "solved": 0.0,
+    "shallow_median": 0.2401713015561926,
+    "deep_median": 1.292308249107672
+   },
+   "CYC": {
+    "solved": 0.020833333333333332,
+    "shallow_median": 0.2569016547487115,
+    "deep_median": 1.2324067396688336
+   },
+   "formed": false,
+   "incumbent_solves": false,
+   "cyc_solves": false,
+   "gain": 0.020833333333333332,
+   "paired_gain": false
+  }
+ },
+ "runner_label": "PARTIAL",
+ "agrees_with_runner": true,
+ "report_protocol_sha256": "979f66f6e74207853b967e2e1632742393acefcfd35eb95dae1f7064cbcd04aa"
+}

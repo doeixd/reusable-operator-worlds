@@ -1,0 +1,9 @@
+2026-10-27T19:03:39.625267+00:00 LAUNCH fd2ed002c72afa9e9102fc3d367925aa13eef507283b4a696b4a2de0ce70872c todo=2 reused=0 scale=16 free=9.8GiB
+2026-10-27T19:03:39.902286+00:00 cell submitted w99_s0
+2026-10-27T19:03:40.254964+00:00 cell submitted w99_s1
+2026-10-27T19:44:40.095573+00:00 cell finished w99_s0 2456s WAKE: deep 0.00 shallow 2.1673 KEEP: deep 0.00 shallow 1.4489 INC: deep 0.00 shallow 1.4560 CYC: deep 0.00 shallow 1.4802 alphabet 12 images 0
+2026-10-27T19:44:40.116439+00:00 STOP after 1 cells (restart test)
+2026-10-27T19:44:57.611676+00:00 reused validated cell w99_s0
+2026-10-27T19:44:57.620864+00:00 LAUNCH fd2ed002c72afa9e9102fc3d367925aa13eef507283b4a696b4a2de0ce70872c todo=1 reused=1 scale=16 free=6.4GiB
+2026-10-27T19:44:57.809353+00:00 cell submitted w99_s1
+2026-10-27T20:09:51.982424+00:00 cell finished w99_s1 1491s WAKE: deep 0.00 shallow 2.1408 KEEP: deep 0.00 shallow 1.4297 INC: deep 0.00 shallow 1.4284 CYC: deep 0.00 shallow 1.4259 alphabet 12 images 0

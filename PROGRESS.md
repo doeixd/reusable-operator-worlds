@@ -9737,3 +9737,19 @@ the 7-of-9 count applied to one stream, not a finding. Before freezing, the solv
 null), and the independent scorer `score_m2_motif_cycle` and `tests/test_m2_motif_cycle.py` were added.
 `M2_MOTIF_CYCLE_PLAN.md` frozen with this entry. Next: protect the hash, dry run + restart test at the freeze commit,
 launch worlds 84-86 x 3 streams.
+
+# M2 motif cycle (Tier 1, 2026-10-27): `PARTIAL` (CYC solves 6/9 streams, bar 8; incumbent 0/9)
+
+Plan `M2_MOTIF_CYCLE_PLAN.md` (frozen `3c093fe`, protected `71c77f5`). Dry run at `71c77f5` (world 99, scale 16):
+leg 1 `--stop-after 1` stopped after `w99_s0` (orphan workers 9008, 37260 killed), leg 2 reused it (file hash
+unchanged) and ran `w99_s1`, whose numbers equal the earlier dry run at `842ef60` exactly. Launch 20:10 UTC, pool 3,
+free 5.9 GiB; exit 0 at 23:01 UTC (cells 2,641-3,866 s). Report `reports/m2_motif_cycle.json`, score
+`reports/m2_motif_cycle_score.json` (independent scorer agrees), logs `reports/m2_motif_cycle_20261027/` (incl.
+stdout/stderr and the dry-run log). `check_prereg`, `check_invalid` pass. Counts: formed 7/9, incumbent solves 0/9,
+cycle solves 6/9, paired gain 8/9. `CYC` solved fractions w84 0.98/1.00/1.00, w85 1.00/1.00/0.77, w86 0.52/1.00/0.02;
+`KEEP`/`INC` 0.00 everywhere. Failure split (descriptive): w86_s2 anchor-slot collapse (5 slots for 6 primitives);
+w86_s0 unformed (shallow 0.078, 1/6 motif images mined); w85_s2 one motif missed (primitive 1's anchor slot does not
+work inside compositions). Reading and next-rung options in PREDICTIONS. Performance pass before launch (from the
+sizing log): wake 24 min, common re-route 5, INC 10, CYC 2.5, three sleeps ~10 per cell; no bitwise-safe win worth a
+re-freeze. Note: my session watcher (a grep -c loop) failed to report finished cells; status.json was correct.
+Next: PI decision on the next rung (formation reliability vs registered conditional replication).
