@@ -1,0 +1,4 @@
+2026-10-27T15:43:41.955214+00:00 LAUNCH 60d436702dc28787e813edfadd8b75b987a6a80a7b8d50b04ecb21c7dcca0a63 todo=1 reused=0 scale=1 free=4.4GiB
+2026-10-27T15:43:42.213244+00:00 cell submitted w83_s0
+2026-10-27T16:34:50.731275+00:00 cell finished w83_s0 3065s WAKE: deep 0.00 shallow 1.4508 KEEP: deep 0.00 shallow 0.0354 INC: deep 0.00 shallow 0.0379 CYC: deep 1.00 shallow 0.0203 alphabet 12 images 5
+2026-10-27T16:34:51.706797+00:00 SUMMARY FORMATION_BROKEN

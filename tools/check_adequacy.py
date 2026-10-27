@@ -73,6 +73,7 @@ IN_SCOPE = (
     'G1R_TANH_REROUTE_PLAN.md',
     'G1V_TANH_PROBE_PLAN.md',
     'M0_MOTIF_OPPORTUNITY_CENSUS_PLAN.md',
+    'M2_MOTIF_CYCLE_PLAN.md',
 )
 
 #: Explicit sentinel for a plan with no behaviour to elicit (an observational

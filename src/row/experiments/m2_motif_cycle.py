@@ -62,8 +62,9 @@ BRANCHES = ('WAKE', 'KEEP', 'INC', 'CYC')
 MIN_COUNT, MAX_ALPHABET = 3, 12
 OPT_STEPS = 2000
 POLISH_CAP = 30000
-SOLVED = 0.10
+SOLVED = 0.20
 FORMED = 0.05
+NEED_FORMED, NEED_INC, NEED_CYC = 7, 7, 8   # streams out of 9
 JOBS = 3
 MIN_FREE_GIB = 2.0
 DRY_WORLD = 99
@@ -294,11 +295,11 @@ def summarize(records):
     inc_solves = sum(max(a, b) >= 0.8 for a, b in zip(f['INC'], f['KEEP']))
     cyc_solves = sum(x >= 0.8 for x in f['CYC'])
     paired = sum(c - max(i, k) >= 0.5 for c, i, k in zip(f['CYC'], f['INC'], f['KEEP']))
-    if formed < 7:
+    if formed < NEED_FORMED:
         label = 'FORMATION_BROKEN'
-    elif inc_solves >= 7:
+    elif inc_solves >= NEED_INC:
         label = 'NO_NECESSITY'
-    elif cyc_solves >= 7 and paired >= 7:
+    elif cyc_solves >= NEED_CYC and paired >= NEED_CYC:
         label = 'CYCLE_SOLVES'
     else:
         label = 'PARTIAL'
@@ -307,12 +308,54 @@ def summarize(records):
             'harm_shallow': sum(c > 1.5 * min(i, k) for c, i, k in zip(shallow['CYC'], shallow['INC'], shallow['KEEP']))}
 
 
+def _synthetic(rng, n_streams, p_formed, p_work, q_work, q_fail, q_inc):
+    """Synthetic records for `discrimination`: per stream, formed with p_formed; a 'working' stream (p_work) solves
+    each deep task under CYC with q_work, a failing one with q_fail; INC and KEEP each with q_inc."""
+    recs = {}
+    for i in range(n_streams):
+        work = rng.random() < p_work
+        sh = 0.02 if rng.random() < p_formed else 0.5
+        br = {}
+        for b in BRANCHES:
+            q = (q_work if work else q_fail) if b == 'CYC' else (0.0 if b == 'WAKE' else q_inc)
+            br[b] = {'deep': {j: (0.05 if rng.random() < q else 1.5) for j in range(N_DEEP)},
+                     'shallow': {j: sh for j in range(3)}}
+        recs[i] = {'branches': br}
+    return recs
+
+
+DISCRIMINATION_SCENARIOS = {
+    # name: (p_formed, p_work, q_work, q_fail, q_inc)
+    'null_half_streams': (1.0, 0.5, 0.97, 0.0, 0.0),
+    'null_six_of_nine': (1.0, 2 / 3, 0.97, 0.0, 0.0),
+    'null_weak_tasks': (1.0, 1.0, 0.7, 0.0, 0.0),
+    'null_incumbent_also': (1.0, 1.0, 0.97, 0.0, 0.9),
+    'null_formation_0.6': (0.6, 1.0, 0.97, 0.0, 0.0),
+    'effect_sizing': (1.0, 1.0, 1.0, 0.0, 0.0),
+    'effect_0.95_streams': (1.0, 0.95, 0.97, 0.0, 0.0),
+    'effect_0.9_streams': (1.0, 0.9, 0.97, 0.0, 0.0),
+    'effect_tasks_0.9': (1.0, 1.0, 0.9, 0.0, 0.0),
+}
+
+
+def discrimination(draws=20000, seed=2711):
+    """The registered rule (`summarize`) on null and effect samplers over 9 streams; P(each label)."""
+    rng = np.random.default_rng(seed)
+    out = {}
+    for name, (pf, pw, qw, qf, qi) in DISCRIMINATION_SCENARIOS.items():
+        c = Counter(summarize(_synthetic(rng, len(WORLDS) * len(STREAMS), pf, pw, qw, qf, qi))['label']
+                    for _ in range(draws))
+        out[name] = {k: c[k] / draws for k in ('FORMATION_BROKEN', 'NO_NECESSITY', 'CYCLE_SOLVES', 'PARTIAL')}
+    return out
+
+
 # ---------------------------------------------------------------- orchestration
 def protocol(root, scale, worlds):
     return {'id': 'm2-motif-cycle-v1', 'git_commit': o2.git_commit(), 'plan': PLAN.as_posix(), 'tier': 1,
             'root': Path(root).as_posix(), 'worlds': list(worlds), 'streams': list(STREAMS), 'n_deep': N_DEEP,
             'branches': list(BRANCHES), 'min_count': MIN_COUNT, 'max_alphabet': MAX_ALPHABET, 'opt_steps': OPT_STEPS,
-            'polish_cap': POLISH_CAP, 'solved': SOLVED, 'formed': FORMED, 'memory': o3.MEMORY,
+            'polish_cap': POLISH_CAP, 'solved': SOLVED, 'formed': FORMED,
+            'need_streams': [NEED_FORMED, NEED_INC, NEED_CYC], 'memory': o3.MEMORY,
             'extra_updates': o3.EXTRA_UPDATES, 'scale': scale,
             'input_sha256': {p: (digest(Path(p)) if Path(p).exists() else None)
                              for p in (PLAN.as_posix(), 'configs/v1.yaml')},

@@ -9721,3 +9721,19 @@ teacher route's query NMSE or better on 48/48 (median 0.041 / 0.033; equal to th
 lower elsewhere) in ~4.4 s; `RANDOM` macros 1.36 / 1.48; SY1's incumbent (OPT 2,000 steps + polish) 1.38 / 1.46 in
 ~22 s, never the mapped route. Depth-9 execution through learned slots stays at 0.03-0.05 NMSE. One world, not
 registered. Next: registered M1 on fresh worlds 84-86 x 3 streams.
+
+# M2 sizing (EXPLORATORY, 2026-10-27, world 83 stream 0) and M2 plan frozen
+
+Draft runner `row.experiments.m2_motif_cycle` at `842ef60`, `--sizing-world 83` (one cell, 51 min); report
+`reports/m2_sizing_w83.json`, logs `reports/m2_sizing_w83_20261027/`. The PI's "continue" approved option B (deep tasks
+inside the stream) over a registered M1, so the "registered M1" next step above is superseded by M2. 364-task stream
+with 48 depth-9 motif tasks in it; one wake, common exhaustive re-route of tasks of length <= 5, then paired branches
+before O3 sleep. Terminal deep query NMSE: `CYC` (mined-macro re-route) 48/48 in [0.028, 0.079]; `KEEP` (wake routes)
+min 1.08, `INC` (OPT + polish) min 1.18, `WAKE` min 0.92. Shallow medians `CYC` 0.020, `KEEP` 0.035, `INC` 0.038.
+Alphabet 12, 5/6 motif images; `CYC` equals the mapped route on 23/48 yet all 48 solve after sleep (mapped reference
+0.46 before sleep). Search 150 s (`CYC`) against 593 s (`INC`) per 48 tasks. The run's own label `FORMATION_BROKEN` is
+the 7-of-9 count applied to one stream, not a finding. Before freezing, the solved bar was raised from 0.10 to 0.20
+(sizing max 0.079 sat too close), the `CYCLE_SOLVES` count set to 8 of 9 (7 of 9 false-fires 9% at a half-working
+null), and the independent scorer `score_m2_motif_cycle` and `tests/test_m2_motif_cycle.py` were added.
+`M2_MOTIF_CYCLE_PLAN.md` frozen with this entry. Next: protect the hash, dry run + restart test at the freeze commit,
+launch worlds 84-86 x 3 streams.
