@@ -35,7 +35,7 @@ def motifs_of(w, n_prims):
     return out
 
 
-def programs(w, n_prims):
+def programs(w, n_prims, n_deep=N_DEEP):
     motifs = motifs_of(w, n_prims)
     rng = np.random.default_rng(np.random.SeedSequence([6401, w]))
     shallow = []
@@ -46,7 +46,7 @@ def programs(w, n_prims):
         fill = tuple(int(v) for v in rng.integers(0, n_prims, f))
         shallow.append(fill[:left] + m + fill[left:])
     deep = [sum((motifs[int(k)] for k in rng.integers(0, K_MOTIFS, DEEP_DEPTH // MOTIF_LEN)), ())
-            for _ in range(N_DEEP)]
+            for _ in range(n_deep)]
     return motifs, shallow, deep
 
 
@@ -80,6 +80,32 @@ def build_stream(w, s):
     order = np.random.default_rng(np.random.SeedSequence(entropy)).permutation(len(tasks))
     st = [tasks[int(i)] for i in order]
     if len({t.task_id for t in st + deep_tasks}) != len(st) + len(deep_tasks):
+        raise ValueError('task ids collide')
+    plan = {t.task_id: len(t.program.primitive_ids) for t in st}
+    world = World(config=cfg.world, library=library, tasks=tuple(st))
+    return cfg, world, st, plan, shallow_tasks, deep_tasks, motifs
+
+
+def build_stream_with_deep(w, s, n_deep):
+    """M2: the same stream with the first `n_deep` deep (depth-9) tasks IN it. Shallow tasks, anchors, motifs and
+    the first deep programs are identical to `build_stream`; order [6406, w] at stream 0, else [6406, w, s].
+    Learner `task_steps` = DEEP_DEPTH (`dn.config(DEEP_DEPTH, w)`)."""
+    cfg = dn.config(DEEP_DEPTH, w)
+    library = rotated_library(cfg.world)
+    anchors = []
+    for length, n in ANCHORS.items():
+        wcfg = CurriculumWorldConfig.from_world(cfg.world, program_length=length, tasks=n, stage=f'length-{length}')
+        anchors += list(generate_curriculum_world(wcfg).tasks)
+    motifs, shallow, deep = programs(w, len(library), n_deep)
+    ids = _draw_opaque_task_ids(np.random.default_rng(np.random.SeedSequence([6403, w])), N_SHALLOW + n_deep,
+                                forbidden={t.task_id for t in anchors})
+    shallow_tasks = make_tasks(cfg, library, shallow, 0, ids[:N_SHALLOW])
+    deep_tasks = make_tasks(cfg, library, deep, 1, ids[N_SHALLOW:])
+    tasks = anchors + shallow_tasks + deep_tasks
+    entropy = [6406, w] if s == 0 else [6406, w, s]
+    order = np.random.default_rng(np.random.SeedSequence(entropy)).permutation(len(tasks))
+    st = [tasks[int(i)] for i in order]
+    if len({t.task_id for t in st}) != len(st):
         raise ValueError('task ids collide')
     plan = {t.task_id: len(t.program.primitive_ids) for t in st}
     world = World(config=cfg.world, library=library, tasks=tuple(st))
