@@ -12188,3 +12188,31 @@ w86 0.52/1.00/0.02. `KEEP` and `INC` 0.00 in all 9 streams. `harm_shallow` 0.
   repair or re-anchoring step targeted at merged or aliased anchor slots before mining (O-line repair tools exist);
   (b) a registered replication of the formed-stream conditional with formation as a gate; (c) an alphabet rule that
   tolerates one missing motif (e.g. polish over 4-grams). None is started.
+
+# M3 fork cycle (Tier 1, 2026-10-29, worlds 87-89 x 3 streams): `REPAIRED_CYCLE_SOLVES`, with `rescue` 0
+
+Registered rule (`M3_FORK_CYCLE_PLAN.md`, frozen `665a7bf`, protected `3927797`; run at `3ba6f30` after a dry-run
+fix that left the plan unchanged; exit 0, 9/9 validated cells; independent scorer `score_m3_fork_cycle` agrees;
+`check_prereg`, `check_invalid` pass): `REPAIRED_CYCLE_SOLVES`. Counts over 9 streams: formed 9, incumbent solves 0,
+repaired solves 9, paired gain 9, harm 0, rescue 0; forked streams 2. `FCYC` solved fractions 1.00 in 8 streams and
+0.96 (w88_s0); `CYC` identical in every stream; `INC` 0.00 in 9/9 (0/432 deep tasks).
+
+**Reading.**
+- On three fresh worlds the full pipeline with the fork repair (wake, short-task re-route, fork, mine 3-grams of the
+  learner's own short routes, re-route the depth-9 tasks through them, sleep) solves the in-stream deep motif tasks in
+  9/9 streams, and the incumbent pipeline solves none. Across M2 and M3 the incumbent has now solved 0 of 864 deep tasks
+  in 18 streams.
+- The REPAIR's necessity is NOT shown by this run: the plain cycle also solved 9/9 (no stream failed formation on these
+  worlds, against 3/9 on M2's). The fork fired in 2 streams (w87_s0, 6 misfit anchors, 1 fork; w89_s2, 13 misfit, 2
+  forks), where it raised the mined motif images from 3 to 6 and 4 to 6 and lowered the shallow median from 0.028 to
+  0.011 and 0.028 to 0.012, without changing deep solved fractions (both already 1.00). In the 7 others it was a no-op
+  and the branch equals `CYC` exactly (checked by `validate`). What M3 establishes about the repair is that it does no
+  harm on fresh worlds (harm 0/9) and improves the library where it fires; that it RESCUES failing streams rests only
+  on the exploratory sizing on M2's three failures, on which it was designed.
+- Combined plain-cycle record: 15/18 streams (M2 6/9, M3 9/9). The stream-level formation failure rate on this
+  generator is therefore uncertain (3/18 overall, all in M2's world 86 and one w85 stream).
+- What it licenses: the end-of-stream motif cycle with the fork repair is the candidate pipeline for a sealed test of
+  "in-stream deep motif tasks become solvable through macros mined from the learner's own routes, where primitive-level
+  re-routing fails". A sealed test needs a new band and is a PI decision (decision 25). A test of the repair's rescue
+  value needs streams that fail formation, which fresh worlds supplied at 0/9 here; that would need either many more
+  streams or a stress condition (fewer anchors), registered as such.

@@ -1,0 +1,20 @@
+2026-10-29T02:04:59.071391+00:00 LAUNCH 73cd6be03f081867897a07710b002aa402a5ea85dab4fad47914351442cf7b0f todo=9 reused=0 scale=1 jobs=3 free=9.7GiB
+2026-10-29T02:04:59.103355+00:00 cell submitted w87_s0
+2026-10-29T02:04:59.115984+00:00 cell submitted w87_s1
+2026-10-29T02:04:59.128072+00:00 cell submitted w87_s2
+2026-10-29T02:04:59.136528+00:00 cell submitted w88_s0
+2026-10-29T02:04:59.144954+00:00 cell submitted w88_s1
+2026-10-29T02:04:59.153328+00:00 cell submitted w88_s2
+2026-10-29T02:04:59.161788+00:00 cell submitted w89_s0
+2026-10-29T02:04:59.170299+00:00 cell submitted w89_s1
+2026-10-29T02:04:59.178837+00:00 cell submitted w89_s2
+2026-10-29T03:20:53.744209+00:00 cell finished w87_s1 4551s WAKE: deep 0.00 shallow 1.4805 INC: deep 0.00 shallow 0.0248 CYC: deep 1.00 shallow 0.0150 FCYC: deep 1.00 shallow 0.0150 forks []
+2026-10-29T03:21:01.181264+00:00 cell finished w87_s2 4558s WAKE: deep 0.00 shallow 1.5247 INC: deep 0.00 shallow 0.0239 CYC: deep 1.00 shallow 0.0128 FCYC: deep 1.00 shallow 0.0128 forks []
+2026-10-29T03:29:18.611953+00:00 cell finished w87_s0 5056s WAKE: deep 0.00 shallow 1.4723 INC: deep 0.00 shallow 0.0449 CYC: deep 1.00 shallow 0.0275 FCYC: deep 1.00 shallow 0.0111 forks [0]
+2026-10-29T04:31:40.805499+00:00 cell finished w88_s1 4239s WAKE: deep 0.00 shallow 1.4934 INC: deep 0.00 shallow 0.0348 CYC: deep 1.00 shallow 0.0251 FCYC: deep 1.00 shallow 0.0251 forks []
+2026-10-29T04:31:42.268802+00:00 cell finished w88_s0 4249s WAKE: deep 0.00 shallow 1.4870 INC: deep 0.00 shallow 0.0281 CYC: deep 0.96 shallow 0.0203 FCYC: deep 0.96 shallow 0.0203 forks []
+2026-10-29T04:36:24.738232+00:00 cell finished w88_s2 4026s WAKE: deep 0.00 shallow 1.4605 INC: deep 0.00 shallow 0.0205 CYC: deep 1.00 shallow 0.0143 FCYC: deep 1.00 shallow 0.0143 forks []
+2026-10-29T05:26:03.309939+00:00 cell finished w89_s0 3262s WAKE: deep 0.00 shallow 0.3491 INC: deep 0.00 shallow 0.0228 CYC: deep 1.00 shallow 0.0162 FCYC: deep 1.00 shallow 0.0162 forks []
+2026-10-29T05:26:17.989045+00:00 cell finished w89_s1 3276s WAKE: deep 0.00 shallow 0.3643 INC: deep 0.00 shallow 0.0213 CYC: deep 1.00 shallow 0.0121 FCYC: deep 1.00 shallow 0.0121 forks []
+2026-10-29T05:36:52.851716+00:00 cell finished w89_s2 3628s WAKE: deep 0.00 shallow 1.4762 INC: deep 0.00 shallow 0.0467 CYC: deep 1.00 shallow 0.0279 FCYC: deep 1.00 shallow 0.0120 forks [11, 4]
+2026-10-29T05:36:54.367445+00:00 SUMMARY REPAIRED_CYCLE_SOLVES

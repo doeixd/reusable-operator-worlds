@@ -9776,3 +9776,16 @@ M3 dry run (2026-10-29, at `3927797`) failed in FCYC's fork: the wake terminal a
 learned_lifetime's novel-composition probe (sleep re-enables them), so the fork's slot fit had no gradient; the sizing
 had used reloaded models with gradients on. Fix: `fit_slot` enables gradients on the forked slot (no effect on other
 branches or on later steps, since sleep enables all); test added. The plan is unchanged; the dry run is repeated.
+
+# M3 fork cycle (Tier 1, 2026-10-29): `REPAIRED_CYCLE_SOLVES` (9/9; incumbent 0/9; rescue 0, harm 0)
+
+Plan `M3_FORK_CYCLE_PLAN.md` (frozen `665a7bf`, protected `3927797`). Dry run at `3ba6f30`: leg 1 stopped after
+`w99_s1` (FCYC forked 3 times at scale 16; INC and CYC numbers equal M2's dry run exactly), orphan workers 38448 and
+45644 killed, leg 2 reused the cell (hash unchanged) and ran `w99_s0`; exit 0. Launch 02:04 UTC 2026-10-29, pool 3, free
+9.7 GiB; free memory fell to 2.2 GiB (commit 53.3/54.3 GB, other applications ~12.6 GB) during the run, the PI was
+notified, and the run completed; exit 0 at 05:36 UTC (cells 3,262-5,056 s). Report `reports/m3_fork_cycle.json`, score
+`reports/m3_fork_cycle_score.json` (independent scorer agrees), logs `reports/m3_fork_cycle_20261029/` (stdout/stderr,
+dry-run logs including the failed attempt at `3927797`). `check_prereg`, `check_invalid` pass. FCYC 1.00 x8 and 0.96;
+CYC identical; INC 0.00 x9; forks in w87_s0 (1) and w89_s2 (2), where motif images rose 3->6 and 4->6 and shallow
+medians fell 0.028->0.011 and 0.028->0.012; no-op elsewhere. Reading in PREDICTIONS: the cycle is confirmed at Tier 1
+on fresh worlds; the repair's rescue value is not tested by this sample (plain cycle also 9/9). Next: PI decision 25.

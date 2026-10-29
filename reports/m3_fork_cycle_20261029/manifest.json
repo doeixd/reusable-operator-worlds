@@ -1,0 +1,62 @@
+{
+ "protocol": {
+  "id": "m3-fork-cycle-v1",
+  "git_commit": "3ba6f30",
+  "plan": "M3_FORK_CYCLE_PLAN.md",
+  "tier": 1,
+  "root": "artifacts/m3_fork_cycle",
+  "worlds": [
+   87,
+   88,
+   89
+  ],
+  "streams": [
+   0,
+   1,
+   2
+  ],
+  "n_deep": 48,
+  "branches": [
+   "WAKE",
+   "INC",
+   "CYC",
+   "FCYC"
+  ],
+  "min_count": 3,
+  "max_alphabet": 12,
+  "opt_steps": 2000,
+  "polish_cap": 30000,
+  "tau": 0.5,
+  "max_forks": 3,
+  "fit_steps": 600,
+  "fit_lr": 0.01,
+  "solved": 0.2,
+  "formed": 0.05,
+  "need_streams": [
+   7,
+   7,
+   8,
+   2
+  ],
+  "memory": 64,
+  "extra_updates": 8192,
+  "scale": 1,
+  "input_sha256": {
+   "M3_FORK_CYCLE_PLAN.md": "918899a8816f0b67f4ae1d1a58f4fcc60dd5a0465f238b93cf48fd8068ea2231",
+   "configs/v1.yaml": "5b0a84180c632c190c961505ef562ac9a32576b1e57eab3fee206761139de659"
+  },
+  "implementation_sha256": {
+   "row.experiments.motif_stream": "9b4036f267b95399bee7de65ce920430266e298e7dcb0cb1af2e370d442d018f",
+   "row.experiments.dn_stream": "75a0c7fe3045f2113b0bcaed29aa3037e332ea95db44dbb68210a2c0d1c286ef",
+   "row.experiments.deep_reroute": "6528c8683cb33a5b90d51d6f8e42c6234142a206a4f567c7d307e487e5eea3e6",
+   "row.experiments.o2_online_reliability": "ac2395163a06c8bdf5e5968972748d81a2f38e4471d61fc79945b0aa60f3ae78",
+   "row.experiments.o2c_consolidation": "7445a7221513f7e45fffe41e99d8a45281b72036488c7f8ae7f532e11279ab34",
+   "row.experiments.o2d_sleep_memory": "0cbc5e46bb0e15f970b4f07efda91ac5279e940ff37138ce5f7abd63f06c8ddc",
+   "row.experiments.o3_online_sleep": "6afabe76ab6df01fb88740ab9370e22de68fc56423738ea7c07d17380ab66f9f",
+   "row.experiments.learned_lifetime": "9b499dcf4bf2fcef7205e1fc92051c8273117cdbd2a7ea6a8c6056d8ff90226c",
+   "row.experiments.m2_motif_cycle": "3eb437ead8527ce2962c5a3a654ca1b653bd9e41182b01af5ecc29db4dc68640",
+   "m3": "c8213e91803afe968893fcd02bb6a873d600eb05a668c234763c7fdd088812b7"
+  }
+ },
+ "protocol_sha256": "73cd6be03f081867897a07710b002aa402a5ea85dab4fad47914351442cf7b0f"
+}
