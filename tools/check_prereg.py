@@ -118,6 +118,7 @@ FROZEN = {
     "CF0_LOOP_STRUCTURE_CENSUS_PLAN.md": "33f25ae",
     "M0_MOTIF_OPPORTUNITY_CENSUS_PLAN.md": "2477026",
     "M2_MOTIF_CYCLE_PLAN.md": "3c093fe",
+    "M3_FORK_CYCLE_PLAN.md": "665a7bf",
 }
 
 #: STATUS-cited paths acknowledged ABSENT from this disk, each with its reason. The module
