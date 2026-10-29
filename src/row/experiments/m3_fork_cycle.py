@@ -79,6 +79,7 @@ def op_apply(op, z):
 
 
 def fit_slot(op, xs, ys):
+    op.requires_grad_(True)   # the wake's novel-composition probe leaves shared parameters frozen; sleep re-enables all
     opt = torch.optim.Adam(op.parameters(), lr=FIT_LR)
     with torch.enable_grad():
         for _ in range(FIT_STEPS):

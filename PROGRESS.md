@@ -9772,3 +9772,7 @@ BrokenProcessPool and no traceback while other applications held ~9.5 GB (free 6
 (logs `artifacts/m3_fork_attempt1.*` not kept in reports). `M3_FORK_CYCLE_PLAN.md` frozen with this entry (worlds 87-89
 x 3 streams, branches INC/CYC/FCYC, label `REPAIRED_CYCLE_SOLVES` needs 8/9 with harm < 2). Next: protect hash, dry
 run + restart test, launch.
+M3 dry run (2026-10-29, at `3927797`) failed in FCYC's fork: the wake terminal arrives with shared parameters frozen by
+learned_lifetime's novel-composition probe (sleep re-enables them), so the fork's slot fit had no gradient; the sizing
+had used reloaded models with gradients on. Fix: `fit_slot` enables gradients on the forked slot (no effect on other
+branches or on later steps, since sleep enables all); test added. The plan is unchanged; the dry run is repeated.

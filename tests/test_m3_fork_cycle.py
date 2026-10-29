@@ -55,6 +55,25 @@ class ForkTest(unittest.TestCase):
                                 1e-5)
 
 
+    def test_fit_slot_on_frozen_parameters(self):
+        # the wake terminal arrives with shared parameters frozen by the novel-composition probe (dry run 2026-10-29)
+        from row.models.learned_models import RotatedLearnedOperator  # noqa: F401  (import path check)
+        from row.experiments.explore_m3_slot_census import load_wake
+        try:
+            _, model, *_ = load_wake(84, 1)
+        except FileNotFoundError:
+            self.skipTest('M2 wake artifacts absent')
+        op = model.library[0]
+        op.requires_grad_(False)
+        before = op.V.detach().clone()
+        steps, m.FIT_STEPS = m.FIT_STEPS, 3
+        try:
+            m.fit_slot(op, [torch.randn(8, 16)], [torch.randn(8, 16)])
+        finally:
+            m.FIT_STEPS = steps
+        self.assertFalse(torch.equal(before, op.V.detach()))
+
+
 class ScorerTest(unittest.TestCase):
     def test_agrees_with_runner(self):
         for seed, scen in enumerate(m.DISCRIMINATION_SCENARIOS):
