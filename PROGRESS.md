@@ -9753,3 +9753,22 @@ work inside compositions). Reading and next-rung options in PREDICTIONS. Perform
 sizing log): wake 24 min, common re-route 5, INC 10, CYC 2.5, three sleeps ~10 per cell; no bitwise-safe win worth a
 re-freeze. Note: my session watcher (a grep -c loop) failed to report finished cells; status.json was correct.
 Next: PI decision on the next rung (formation reliability vs registered conditional replication).
+
+# M3 slot census and fork-repair sizing (EXPLORATORY, 2026-10-28) and M3 plan frozen
+
+Decision 24 option (a) approved (PI "use good judgement, continue", 2026-10-28). Census
+`row.experiments.explore_m3_slot_census` (code `58020a0`) on the 9 saved M2 wake terminals, each behind a reload gate
+(library sha256 equals the cell's, WAKE shallow scores reproduce exactly; 9/9 pass); `reports/m3_slot_census.json`.
+Every failed M2 stream has a primitive whose length-1 anchors fit no slot (median best-slot reservoir NMSE 1.00 w85_s2
+p1, 1.67 w86_s0 p2, 1.57 and 1.33 w86_s2 p2 and p4, the merged pair); successful streams at most 0.65 except w85_s1 p1
+(1.41, survived); every stream has 4-6 slots claimed by no anchor. Fork sizing `row.experiments.explore_m3_fork_sizing`
+(same code, `reports/m3_fork_sizing/`): copy the slot misfit anchors choose into a free slot of the same reflection count
+and fit only it on them, then re-route short tasks, then M2's cycle and sleep. No-op stream w84_s1 reproduced M2's CYC
+exactly (per-task scores and library sha). Failed streams 0.77 -> 1.00, 0.52 -> 0.96, 0.02 -> 1.00; forked formed
+streams w84_s0 0.98 -> 1.00, w85_s1 1.00 -> 1.00. The repair was designed on these streams, so this is not evidence.
+Two smoke-test fixes before the run: "free" cannot mean "visited by no route" (some route visits every slot at wake
+end), and slots have 16 or 15 reflections so a copy needs the same class. The first pool-3 attempt died at ~7 min with
+BrokenProcessPool and no traceback while other applications held ~9.5 GB (free 6.6 -> 3.7 GiB); rerun at pool 2
+(logs `artifacts/m3_fork_attempt1.*` not kept in reports). `M3_FORK_CYCLE_PLAN.md` frozen with this entry (worlds 87-89
+x 3 streams, branches INC/CYC/FCYC, label `REPAIRED_CYCLE_SOLVES` needs 8/9 with harm < 2). Next: protect hash, dry
+run + restart test, launch.
