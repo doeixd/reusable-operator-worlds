@@ -553,6 +553,9 @@ here. Tags in brackets name the episode to search for.
 14. **Pool workers appending to one log can lose lines**; durable cells are the
     evidence; the parent writes per-cell log lines.
 15. **Write a report atomically before printing** (console encoding can crash).
+16. **A model returned in-process is not the model reloaded from disk**: the wake terminal arrives with shared
+    parameters frozen by the novel-composition probe, a reloaded `model.pt` does not; sizing a new step on reloaded
+    terminals can pass while the in-process pipeline fails. Size on the in-process path, or dry-run it [M3 fork].
 
 ## F. Tools and environment
 

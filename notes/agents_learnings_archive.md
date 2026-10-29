@@ -1893,3 +1893,9 @@ Append new full-length entries here and a condensed rule in `AGENTS.md`.
   per task, cheaper than the descent itself. The errors were coupled mistakes in one or two positions, the same shape
   as O7's stale routes. A relaxation's argmax is a starting point, not a search result: report the descent plus a
   cheap discrete repair as the incumbent before building anything to beat it.
+- 2026-10-29 M3 fork (E16): the exploratory fork sizing ran on M2 wake terminals reloaded from `model.pt`, whose
+  parameters all have `requires_grad=True`. In the registered runner the same step ran on the wake terminal returned
+  in-process by `learned_lifetime.run`, whose shared parameters the novel-composition probe had frozen
+  (`requires_grad_(False)`; `o2c.consolidate` re-enables them later). The fork's slot fit then had no gradient. The dry
+  run caught it before launch; the fix enables gradients on the forked slot (`3ba6f30`). A step sized on a reloaded
+  substrate must still be dry-run on the in-process path: reconstruction state includes autograd flags.
